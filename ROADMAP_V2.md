@@ -115,6 +115,7 @@ Owner-dispatch cleanup note:
 - The unused compiled-spec rules-by-label mirror is gone too; `CompilerState` remains the only owner for rules-by-label map access instead of `Compiler.pm` carrying a local pass-through.
 - Dependency-regex referenced-rule existence checks now ask `CompilerState` directly, so the pass-through `_compiled_spec_state_has_rule(...)` wrapper is gone too.
 - Dependency-regex referenced-rule metadata lookup now asks `CompilerState` directly, so the pass-through `_compiled_spec_state_rule_info(...)` wrapper is gone too.
+- The unused compiled-rule-order mirror is gone too; `CompilerState` remains the only owner for compiled rule ordering instead of `Compiler.pm` carrying a local pass-through.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.

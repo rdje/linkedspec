@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_compiled_rule_order {
- return _call_compiler_state('compiled_spec_state_compiled_rule_order', @_)
-}
-
 sub _compiled_spec_state_rule_rows {
  return _call_compiler_state('compiled_spec_state_rule_rows', @_)
 }

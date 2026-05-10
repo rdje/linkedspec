@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Removed unused `Compiler::_compiled_spec_state_compiled_rule_order(...)`; compiled-rule order access no longer has a compiler-local mirror of `CompilerState`. Phase0 source-lock coverage rejects reintroducing the compiled-rule-order pass-through wrapper.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_rule_info(...)`; dependency-regex validation now retrieves referenced dependency-rule metadata directly from `CompilerState`. Phase0 source-lock coverage rejects reintroducing the rule-info pass-through wrapper.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_has_rule(...)`; dependency-regex validation now asks `CompilerState` directly whether referenced dependency rules exist. Phase0 source-lock coverage rejects reintroducing the has-rule pass-through wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_spec_state_rules_by_label(...)`; compiled-spec map access now belongs only to `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the rules-by-label wrapper.

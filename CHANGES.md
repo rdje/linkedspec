@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-10 - compiler: remove unused compiled-rule-order wrapper
+
+- removed unused `LinkedSpec::Compiler::_compiled_spec_state_compiled_rule_order(...)`,
+- left compiled-rule order access owned by `LinkedSpec::CompilerState` instead of exposing a compiler-local pass-through,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the compiled-rule-order wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-10 - compiler: inline compiled-spec rule-info lookup
 
 - removed `LinkedSpec::Compiler::_compiled_spec_state_rule_info(...)`,

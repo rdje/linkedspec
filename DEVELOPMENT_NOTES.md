@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed unused `Compiler::_compiled_spec_state_compiled_rule_order(...)`. Compiled-rule order access no longer has a compiler-local mirror of the `CompilerState` owner.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_rule_info(...)`. Dependency-regex validation now retrieves referenced dependency-rule metadata directly from the `CompilerState` owner.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_has_rule(...)`. Dependency-regex validation now asks the `CompilerState` owner directly whether referenced dependency rules exist.
 - 2026-05-10: Removed unused `Compiler::_compiled_spec_state_rules_by_label(...)`. Rules-by-label map access now remains solely in the `CompilerState` owner instead of being mirrored by a compiler-local pass-through.
