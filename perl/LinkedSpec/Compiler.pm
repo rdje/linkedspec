@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_rule_rows {
- return _call_compiler_state('compiled_spec_state_rule_rows', @_)
-}
-
 sub _compiled_spec_state_definition_order {
  return _call_compiler_state('compiled_spec_state_definition_order', @_)
 }
@@ -432,7 +428,7 @@ sub build_dependency_regex_map {
  }
 
 my %dependency_regex_map;
-foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
+foreach my $row (@{_call_compiler_state('compiled_spec_state_rule_rows', $sg)}) {
   my ($label, $rule_info) = @$row;
   $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = $label;
   _die_with_detail("build_dependency_regex_map expects rule '$label' info to be HASH ref; got "
