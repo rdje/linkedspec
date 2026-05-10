@@ -66,6 +66,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler` no longer keeps a one-shot dependency-regex map missing-rule describer wrapper either; missing dependency-rule diagnostics are built directly at the map validation boundary.
 - `Compiler` no longer keeps a one-shot dependency-regex map dependency-rule-info describer wrapper either; invalid referenced dependency-rule info diagnostics are built directly at the map validation boundary.
 - `Compiler` no longer keeps a one-shot dependency-regex map dependency regex-list describer wrapper either; invalid referenced regex-list diagnostics are built directly at the map validation boundary.
+- `Compiler` no longer keeps a compiled-spec state constructor pass-through wrapper either; rule-table build asks `CompilerState` for new state directly through the shared owner seam.
 - `SpecEntry` no longer keeps a one-shot runtime-context top-rule setter wrapper either; discovered top-rule writes ask `RuntimeContext` to update shared top-rule state directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a parser-source emission pass-through wrapper either; generated-handler source emission asks `RuntimeContext` to append captured source text directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a pass-through runtime-handler last-error setter wrapper either; rule-handler compile/eval errors ask `RuntimeContext` to write runtime-handler error state directly through the owner-dispatch seam.

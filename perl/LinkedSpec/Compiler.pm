@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _new_compiled_spec_state {
- return _call_compiler_state('new_compiled_spec_state', @_)
-}
-
 sub _is_compiled_spec_state {
  return _call_compiler_state('is_compiled_spec_state', @_)
 }
@@ -323,7 +319,7 @@ sub build_compiled_rule_table {
   return undef
  }
 
- my $compiled_state = _new_compiled_spec_state();
+ my $compiled_state = _call_compiler_state('new_compiled_spec_state');
  my %redefined_seen;
  for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
   my $entry = $specretv->[$entry_idx];
