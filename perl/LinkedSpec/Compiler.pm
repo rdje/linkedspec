@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_rule_count {
- return _call_compiler_state('compiled_spec_state_rule_count', @_)
-}
-
 sub _compiled_spec_state_rules_by_label {
  return _call_compiler_state('compiled_spec_state_rules_by_label', @_)
 }
@@ -428,7 +424,7 @@ sub build_compiled_rule_table {
   $trace_scope,
   {
    status => 'ok',
-   rule_count => _compiled_spec_state_rule_count($compiled_state),
+   rule_count => _call_compiler_state('compiled_spec_state_rule_count', $compiled_state),
    result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_spec_state' : 'compiled_rule_table_hash',
   },
   DUMP_MEDIUM
@@ -442,7 +438,7 @@ sub build_dependency_regex_map {
  my ($spec_input, $option) = @_;
  my $sg = _normalize_compiled_spec_input($spec_input);
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::build_dependency_regex_map', {
-  rule_count => _compiled_spec_state_rule_count($sg),
+  rule_count => _call_compiler_state('compiled_spec_state_rule_count', $sg),
  }, DUMP_MEDIUM);
 
  if (_trace_should_dump(DUMP_HIGH)) {
@@ -1090,7 +1086,7 @@ if ($validate_dependency_regex_references_error) {
   : (ref($retv) eq 'ARRAY' && @$retv ? _parsed_rule_label($retv->[0]) : undef);
  _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $selected_top_rule) if defined($selected_top_rule) && length($selected_top_rule);
 
- my $rule_count = _compiled_spec_state_rule_count($compiled_spec_state);
+ my $rule_count = _call_compiler_state('compiled_spec_state_rule_count', $compiled_spec_state);
  _trace_log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
  if ($dump_parser_source) {
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, " },\n dependency_regex_map => {\n");

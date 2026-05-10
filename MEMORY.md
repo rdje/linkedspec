@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Removed `Compiler::_compiled_spec_state_rule_count(...)`; trace and parser-generation rule-count reads now ask the `CompilerState` owner directly through `_call_compiler_state(...)`. Phase0 source-lock coverage rejects reintroducing the pass-through rule-count wrapper.
 - 2026-05-10: Removed `Compiler::_is_compiled_spec_state(...)`; the compiler pipeline now asks the `CompilerState` owner to validate compiled-spec state directly through `_call_compiler_state(...)`. Phase0 source-lock coverage rejects reintroducing the pass-through predicate wrapper.
 - 2026-05-10: Removed `Compiler::_new_compiled_spec_state(...)`; rule-table build now asks the `CompilerState` owner for new compiled-spec state directly through `_call_compiler_state(...)`. Phase0 source-lock coverage rejects reintroducing the pass-through constructor wrapper.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_re_result(...)`; the dependency-regex map validation boundary now builds invalid referenced dependency regex-list diagnostics directly while still sharing the contract value-kind formatter. Phase0 source-lock coverage rejects reintroducing the one-shot dependency regex-list describer wrapper.
