@@ -491,7 +491,8 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
     . _describe_contract_value_kind($dep_rule))
     unless ref($dep_rule) eq 'HASH';
    my $dep_re = $dep_rule->{re};
-   _die_with_detail(_describe_build_dependency_regex_map_dependency_re_result($label, $dep_label, $dep_re))
+   _die_with_detail("build_dependency_regex_map expects referenced rule '$dep_label' regex list for rule '$label' to be ARRAY ref; got "
+    . _describe_contract_value_kind($dep_re))
     unless ref($dep_re) eq 'ARRAY';
    if (exists $dep_re->[$dep_idx]) {
     push @dependency_regexes, $dep_re->[$dep_idx]
@@ -619,12 +620,6 @@ sub _describe_contract_scalar_value {
 
  return 'undef' unless defined($value);
  return ref($value) ? ref($value) : "'" . $value . "'";
-}
-
-sub _describe_build_dependency_regex_map_dependency_re_result {
- my ($label, $dep_label, $dep_re) = @_;
-
- return "build_dependency_regex_map expects referenced rule '$dep_label' regex list for rule '$label' to be ARRAY ref; got " . _describe_contract_value_kind($dep_re);
 }
 
 sub _die_with_detail {

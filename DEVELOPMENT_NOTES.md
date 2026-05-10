@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_re_result(...)`. The dependency-regex map validation boundary now builds invalid referenced dependency regex-list diagnostics directly while still sharing the remaining contract value-kind formatter.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_rule_info_result(...)`. The dependency-regex map validation boundary now builds invalid referenced dependency-rule info diagnostics directly while still sharing the remaining contract value-kind formatter.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_rule_missing(...)`. The dependency-regex map validation boundary now builds missing dependency-rule diagnostics directly.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_index_result(...)`. The dependency-regex map validation boundary now builds invalid dependency-index diagnostics directly while still sharing the remaining scalar value-kind formatter.
