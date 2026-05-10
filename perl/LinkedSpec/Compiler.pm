@@ -157,10 +157,6 @@ sub _is_compiled_descriptor_state {
  return _call_compiler_state('is_compiled_descriptor_state', @_)
 }
 
-sub _compiled_descriptor_state_spec_state {
- return _call_compiler_state('compiled_descriptor_state_spec_state', @_)
-}
-
 sub _compiled_descriptor_state_dependency_regex_state {
  return _call_compiler_state('compiled_descriptor_state_dependency_regex_state', @_)
 }

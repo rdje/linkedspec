@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_spec_state(...)`. Compiled descriptor spec-state access now remains solely in `CompilerState`; future compiler descriptor-state reads should route through the explicit owner seam rather than adding local mirrors.
 - 2026-05-10: Removed unused `Compiler::_compiled_dependency_regex_state_to_dependency_regex_map(...)`. Compiled dependency-regex legacy-map projection now remains solely in `CompilerState`; future compiler projection needs should route through the explicit owner seam rather than adding local mirrors.
 - 2026-05-10: Removed unused `Compiler::_compiled_dependency_regex_state_regex_by_label(...)`. Compiled dependency-regex by-label access now remains solely in `CompilerState`; future compiler reads should route through the explicit owner seam rather than adding local mirrors.
 - 2026-05-10: Removed unused `Compiler::_is_compiled_dependency_regex_state(...)`. Compiled dependency-regex state shape checks now remain solely in `CompilerState`; future compiler validation should route through the explicit owner seam rather than adding local predicate mirrors.
