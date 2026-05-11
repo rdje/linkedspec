@@ -137,10 +137,6 @@ sub _compiled_spec_state_to_legacy_spec {
  return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
 }
 
-sub _build_compiled_descriptor_meta {
- return _call_compiler_state('build_compiled_descriptor_meta', @_)
-}
-
 sub _new_compiled_dependency_regex_state {
  return _call_compiler_state('new_compiled_dependency_regex_state', @_)
 }
@@ -480,7 +476,8 @@ sub _build_final_descriptor_state {
   : $dependency_regex_builder_cb->($legacy_spec);
  my $compiled_dependency_regex_state = _normalize_compiled_dependency_regex_output($compiled_dependency_regex_input, $compiled_state);
 
- my $compiled_state_meta = _build_compiled_descriptor_meta(
+ my $compiled_state_meta = _call_compiler_state(
+  'build_compiled_descriptor_meta',
   $compiled_state,
   parse_mode => $args{parse_mode},
   action_rewriter_migration => _build_action_rewriter_migration_summary($compiled_state),

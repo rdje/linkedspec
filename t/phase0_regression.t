@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 290;
+    plan tests => 291;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1340,6 +1340,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _compiled_spec_state_definition_order\b/, 'Compiler.pm no longer carries a compiled-spec definition-order pass-through wrapper');
     unlike($compiler_pm, qr/sub _compiled_spec_state_redefined_rule_labels\b/, 'Compiler.pm no longer carries a compiled-spec redefined-labels pass-through wrapper');
     unlike($compiler_pm, qr/sub _record_compiled_spec_rule\b/, 'Compiler.pm no longer carries a compiled-spec record-rule pass-through wrapper');
+    unlike($compiler_pm, qr/sub _build_compiled_descriptor_meta\b/, 'Compiler.pm no longer carries a compiled-descriptor metadata pass-through wrapper');
     like($compiler_pm, qr/sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\).*Data::Dumper::Dumper/s, 'Compiler.pm now spends OwnerDispatch directly inside _dump_value');
     like($compiler_pm, qr/sub _ored_re\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\).*LinkedRE::oredRE/s, 'Compiler.pm now spends OwnerDispatch directly inside _ored_re');
     like($compiler_pm, qr/sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\).*LinkedSpec::Trace::log_output/s, 'Compiler.pm now spends OwnerDispatch directly inside _trace_log_output');

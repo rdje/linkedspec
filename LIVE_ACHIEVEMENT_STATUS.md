@@ -7,14 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-11: Removed the `Compiler` compiled-spec record-rule pass-through so rule-table mutation routes directly through CompilerState.
+- 2026-05-11: Removed the `Compiler` compiled-descriptor metadata pass-through so final-descriptor metadata assembly routes directly through CompilerState.
 
 ## Recent Completed Slices
+- Phase 1A / Backbone Item 3: Remove `Compiler` compiled-spec record-rule pass-through.
 - Phase 1A / Backbone Item 3: Complete README/SESSION_BOOTSTRAP ramp-up and refresh `ARCHITECTURE_STATE.md` after the current import-tree pass.
 - Phase 1A / Backbone Item 3: Remove unused `Compiler` compiled descriptor rules-by-label wrapper.
 - Phase 5: Remove unused `Compiler` compiled descriptor dependency-regex by-label wrapper.
-- Phase 5: Remove unused `Compiler` compiled descriptor dependency-regex-state wrapper.
-- Phase 5: Remove unused `Compiler` compiled descriptor spec-state wrapper.
 
 ## Next Slice Direction
 - Continue with the smallest roadmap-aligned slice that advances Phase 1A / Backbone Item 3 cleanup, Phase 5 runtime diagnostics, or Phase 6 live documentation upkeep.
