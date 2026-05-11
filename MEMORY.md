@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-11: Removed `Compiler::_record_compiled_spec_rule(...)`; rule-table construction now records compiled rules by calling `CompilerState::record_compiled_spec_rule(...)` through `_call_compiler_state(...)` directly. Phase0 source-lock coverage rejects reintroducing the record-rule pass-through wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_rules_by_label(...)`; compiled descriptor rules-by-label access remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the descriptor rules-by-label wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_dependency_regex_by_label(...)`; compiled descriptor dependency-regex by-label access remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the descriptor dependency-regex by-label wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_dependency_regex_state(...)`; compiled descriptor dependency-regex-state access remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the descriptor dependency-regex-state wrapper.

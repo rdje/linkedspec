@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-11: Removed `Compiler::_record_compiled_spec_rule(...)`. Rule-table construction now records compiled rules by asking `CompilerState` directly through `_call_compiler_state('record_compiled_spec_rule', ...)`, keeping compiled-spec mutation ownership in the state owner without a compiler-local pass-through.
 - 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_rules_by_label(...)`. Compiled descriptor rules-by-label access now remains solely in `CompilerState`; future compiler descriptor-state rule-map reads should route through the explicit owner seam rather than adding local mirrors.
 - 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_dependency_regex_by_label(...)`. Compiled descriptor dependency-regex by-label access now remains solely in `CompilerState`; future compiler descriptor-state dependency-regex reads should route through the explicit owner seam rather than adding local mirrors.
 - 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_dependency_regex_state(...)`. Compiled descriptor dependency-regex-state access now remains solely in `CompilerState`; future compiler descriptor-state dependency-regex reads should route through the explicit owner seam rather than adding local mirrors.

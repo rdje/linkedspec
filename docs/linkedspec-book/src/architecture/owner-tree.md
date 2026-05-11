@@ -316,7 +316,7 @@ The preferred direction for this project is state-first and owner-first:
 
 ```text
 Compiler coordinates.
-CompilerState defines and reads compiler state.
+CompilerState defines, mutates, and reads compiler state.
 Validation validates through owner-provided views.
 ```
 

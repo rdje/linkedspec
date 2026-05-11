@@ -141,10 +141,6 @@ sub _build_compiled_descriptor_meta {
  return _call_compiler_state('build_compiled_descriptor_meta', @_)
 }
 
-sub _record_compiled_spec_rule {
- return _call_compiler_state('record_compiled_spec_rule', @_)
-}
-
 sub _new_compiled_dependency_regex_state {
  return _call_compiler_state('new_compiled_dependency_regex_state', @_)
 }
@@ -329,7 +325,7 @@ sub build_compiled_rule_table {
     _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
    return undef
   }
-  my $is_duplicate = _record_compiled_spec_rule($compiled_state, $label, $info, \%redefined_seen);
+  my $is_duplicate = _call_compiler_state('record_compiled_spec_rule', $compiled_state, $label, $info, \%redefined_seen);
   if ($is_duplicate) {
    _trace_log_output(DUMP_LOW, "Duplicate rule detected", "Rule '$label' is defined multiple times - second definition will overwrite the first");
   }
