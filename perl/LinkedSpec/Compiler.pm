@@ -468,12 +468,6 @@ sub _build_final_descriptor_state {
  );
 }
 
-sub _build_final_descriptor {
- my ($compiled_spec_input, $dependency_regex_builder_cb, %args) = @_;
- my $descriptor_state = _build_final_descriptor_state($compiled_spec_input, $dependency_regex_builder_cb, %args);
- return _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', $descriptor_state);
-}
-
 sub _normalize_parse_mode {
  my ($parse_mode) = @_;
  return 'seek' unless defined($parse_mode) && length($parse_mode);

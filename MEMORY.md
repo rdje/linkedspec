@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-11: Removed unused `Compiler::_build_final_descriptor(...)`; active final descriptor assembly now stays on `_build_final_descriptor_state(...)` and projects compatibility descriptors through `CompilerState` directly where needed. Phase0 source-lock coverage rejects reintroducing the unused legacy descriptor projection helper.
 - 2026-05-11: Finished active final-descriptor naming cleanup in `Compiler.pm`; the live compiler path now uses `$final_descriptor_state` / `$final_descriptor` and `FINAL_DESCRIPTOR` trace banners instead of compressed `final_descr` wording. Phase0 source-lock coverage rejects compressed `final_descr` naming on the active compiler path.
 - 2026-05-11: Added a repo-wide phase0 guard that every discovered target `.spec` compiles as a descriptor with `language_agnostic_ready_ratio == 1.0000`, zero language-agnostic blocked rules, and zero compatibility-surface rules. This locks the current all-target ActionIR-ready state for future DSL migration work.
 - 2026-05-11: Removed `Compiler::_compiled_descriptor_state_to_legacy_descriptor(...)`; final descriptor projection now calls `CompilerState::compiled_descriptor_state_to_legacy_descriptor(...)` through `_call_compiler_state(...)` directly, and the projection-order regression traps the owner seam. Phase0 source-lock coverage rejects reintroducing the compiled descriptor legacy projection pass-through wrapper.

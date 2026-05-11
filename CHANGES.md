@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-11 - compiler: remove unused final descriptor projection helper
+
+- removed unused private `Compiler::_build_final_descriptor(...)`,
+- kept the active pipeline on `_build_final_descriptor_state(...)` plus direct `CompilerState` projection,
+- extended source-lock coverage so the unused legacy descriptor projection helper cannot silently return.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-11 - compiler: finish final descriptor naming cleanup
 
 - renamed active `Compiler.pm` `$final_descr_state` / `$final_descr` lexicals to `$final_descriptor_state` / `$final_descriptor`,

@@ -79,6 +79,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler` no longer keeps a compiled-spec legacy projection pass-through wrapper either; legacy spec-hash projection asks `CompilerState` directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled-spec record-rule pass-through wrapper either; rule-table construction records compiled rules by asking `CompilerState` directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled descriptor legacy projection pass-through wrapper either; final descriptor projection asks `CompilerState` directly through the shared owner seam.
+- `Compiler` no longer keeps the unused `_build_final_descriptor(...)` legacy projection helper either; the active path builds descriptor state with `_build_final_descriptor_state(...)` and projects through `CompilerState` at the boundary that needs the compatibility descriptor.
 - `Compiler` no longer keeps a compiled-descriptor metadata pass-through wrapper either; final-descriptor assembly asks `CompilerState` to build descriptor metadata directly through the shared owner seam.
 - `Compiler` now uses full `final_descriptor` local naming and `FINAL_DESCRIPTOR` trace banners on the active path instead of compressed `final_descr` wording.
 - `Compiler` no longer keeps a compiled dependency-regex state constructor pass-through wrapper either; dependency-regex enrichment asks `CompilerState` to construct the state directly through the shared owner seam.
