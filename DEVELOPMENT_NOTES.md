@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-11: Removed `Compiler::_compiled_spec_state_to_legacy_spec(...)`. Legacy spec-hash projection now asks `CompilerState` directly through `_call_compiler_state('compiled_spec_state_to_legacy_spec', ...)`, keeping compiled-spec projection ownership in the state owner without a compiler-local pass-through.
 - 2026-05-11: Removed unused `Compiler::_compiled_descriptor_state_meta(...)`. Compiled descriptor metadata reads now remain solely in `CompilerState`; future descriptor metadata reads should route through the explicit owner seam rather than adding local mirrors.
 - 2026-05-11: Removed `Compiler::_is_compiled_descriptor_state(...)`. Final-descriptor assembly now asks `CompilerState` to validate compiled descriptor state shape directly through `_call_compiler_state('is_compiled_descriptor_state', ...)`, keeping descriptor-state predicates in the owner without a compiler-local pass-through.
 - 2026-05-11: Removed `Compiler::_new_compiled_descriptor_state(...)`. Final-descriptor assembly now asks `CompilerState` to construct compiled descriptor state directly through `_call_compiler_state('new_compiled_descriptor_state', ...)`, keeping descriptor-state construction in the owner without a compiler-local pass-through.

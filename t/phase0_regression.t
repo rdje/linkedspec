@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 294;
+    plan tests => 295;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1339,6 +1339,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _compiled_spec_state_rule_rows\b/, 'Compiler.pm no longer carries a compiled-spec rule-rows pass-through wrapper');
     unlike($compiler_pm, qr/sub _compiled_spec_state_definition_order\b/, 'Compiler.pm no longer carries a compiled-spec definition-order pass-through wrapper');
     unlike($compiler_pm, qr/sub _compiled_spec_state_redefined_rule_labels\b/, 'Compiler.pm no longer carries a compiled-spec redefined-labels pass-through wrapper');
+    unlike($compiler_pm, qr/sub _compiled_spec_state_to_legacy_spec\b/, 'Compiler.pm no longer carries a compiled-spec legacy projection pass-through wrapper');
     unlike($compiler_pm, qr/sub _record_compiled_spec_rule\b/, 'Compiler.pm no longer carries a compiled-spec record-rule pass-through wrapper');
     unlike($compiler_pm, qr/sub _build_compiled_descriptor_meta\b/, 'Compiler.pm no longer carries a compiled-descriptor metadata pass-through wrapper');
     unlike($compiler_pm, qr/sub _new_compiled_dependency_regex_state\b/, 'Compiler.pm no longer carries a compiled dependency-regex state constructor pass-through wrapper');

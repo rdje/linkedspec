@@ -76,6 +76,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler` no longer keeps a compiled-spec rule-rows pass-through wrapper either; dependency-regex map iteration asks `CompilerState` directly for compiled rule rows.
 - `Compiler` no longer keeps a compiled-spec definition-order pass-through wrapper either; compiled-state trace output asks `CompilerState` directly for definition order.
 - `Compiler` no longer keeps a compiled-spec redefined-labels pass-through wrapper either; compiled-state trace reporting asks `CompilerState` directly for redefined rule labels.
+- `Compiler` no longer keeps a compiled-spec legacy projection pass-through wrapper either; legacy spec-hash projection asks `CompilerState` directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled-spec record-rule pass-through wrapper either; rule-table construction records compiled rules by asking `CompilerState` directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled-descriptor metadata pass-through wrapper either; final-descriptor assembly asks `CompilerState` to build descriptor metadata directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled dependency-regex state constructor pass-through wrapper either; dependency-regex enrichment asks `CompilerState` to construct the state directly through the shared owner seam.

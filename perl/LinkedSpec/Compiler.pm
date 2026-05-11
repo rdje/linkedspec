@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_to_legacy_spec {
- return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
-}
-
 sub _compiled_descriptor_state_to_legacy_descriptor {
  return _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', @_)
 }
@@ -329,7 +325,7 @@ sub build_compiled_rule_table {
 
  my $result = (ref($option) eq 'HASH' && $option->{return_state})
   ? $compiled_state
-  : _compiled_spec_state_to_legacy_spec($compiled_state);
+  : _call_compiler_state('compiled_spec_state_to_legacy_spec', $compiled_state);
 
  if (_trace_should_dump(DUMP_MEDIUM)) {
   _trace_log_dump("=== GENERATED RULE TABLE DUMP ===\n");
@@ -455,7 +451,7 @@ sub _build_final_descriptor_state {
  my $compiled_state = _normalize_compiled_spec_input($compiled_spec_input);
  my $use_default_dependency_regex_builder = !defined($dependency_regex_builder_cb);
  $dependency_regex_builder_cb ||= \&build_dependency_regex_map;
- my $legacy_spec = $use_default_dependency_regex_builder ? undef : _compiled_spec_state_to_legacy_spec($compiled_state);
+ my $legacy_spec = $use_default_dependency_regex_builder ? undef : _call_compiler_state('compiled_spec_state_to_legacy_spec', $compiled_state);
  my $compiled_dependency_regex_input = $use_default_dependency_regex_builder
   ? $dependency_regex_builder_cb->($compiled_state, { return_state => 1 })
   : $dependency_regex_builder_cb->($legacy_spec);
