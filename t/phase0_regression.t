@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 295;
+    plan tests => 296;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1340,6 +1340,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _compiled_spec_state_definition_order\b/, 'Compiler.pm no longer carries a compiled-spec definition-order pass-through wrapper');
     unlike($compiler_pm, qr/sub _compiled_spec_state_redefined_rule_labels\b/, 'Compiler.pm no longer carries a compiled-spec redefined-labels pass-through wrapper');
     unlike($compiler_pm, qr/sub _compiled_spec_state_to_legacy_spec\b/, 'Compiler.pm no longer carries a compiled-spec legacy projection pass-through wrapper');
+    unlike($compiler_pm, qr/sub _compiled_descriptor_state_to_legacy_descriptor\b/, 'Compiler.pm no longer carries a compiled descriptor legacy projection pass-through wrapper');
     unlike($compiler_pm, qr/sub _record_compiled_spec_rule\b/, 'Compiler.pm no longer carries a compiled-spec record-rule pass-through wrapper');
     unlike($compiler_pm, qr/sub _build_compiled_descriptor_meta\b/, 'Compiler.pm no longer carries a compiled-descriptor metadata pass-through wrapper');
     unlike($compiler_pm, qr/sub _new_compiled_dependency_regex_state\b/, 'Compiler.pm no longer carries a compiled dependency-regex state constructor pass-through wrapper');
@@ -11707,7 +11708,7 @@ SPEC
     ok(!exists $descriptor_state->{compiled_dependency_regex_state}{gdata_by_label}, 'dependency-regex state no longer exposes gdata_by_label alias');
     is_deeply($descriptor_state->{compiled_dependency_regex_state}{compiled_label_order}, ['Top'], 'final descriptor state keeps deterministic compiled dependency-regex label order');
 
-    my $legacy_descr = LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descriptor($descriptor_state);
+    my $legacy_descr = LinkedSpec::CompilerState::compiled_descriptor_state_to_legacy_descriptor($descriptor_state);
     ok(ref($legacy_descr->{spec}) eq 'HASH' && ref($legacy_descr->{dependency_regex_map}) eq 'HASH', 'compiled descriptor state still projects to the outward descriptor shape');
     is_deeply($legacy_descr->{meta}{definition_order}, ['Top', 'Child'], 'legacy descriptor projection preserves definition-order metadata');
 };
@@ -14717,7 +14718,7 @@ Child::
 SPEC
 
     my $orig_validate_compiled_descriptor_state = \&LinkedSpec::Validation::validate_compiled_descriptor_state;
-    my $orig_compiled_descriptor_state_to_legacy_descriptor = \&LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descriptor;
+    my $orig_compiled_descriptor_state_to_legacy_descriptor = \&LinkedSpec::CompilerState::compiled_descriptor_state_to_legacy_descriptor;
     my ($ok_run, $descr, $err) = (0, undef, '');
     my $validation_started = 0;
     my $saw_projection_after_validation = 0;
@@ -14727,7 +14728,7 @@ SPEC
             $validation_started = 1;
             return $orig_validate_compiled_descriptor_state->(@_);
         };
-        local *LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descriptor = sub {
+        local *LinkedSpec::CompilerState::compiled_descriptor_state_to_legacy_descriptor = sub {
             die "__UNEXPECTED_EARLY_LEGACY_DESCRIPTOR_PROJECTION__\n" unless $validation_started;
             $saw_projection_after_validation = 1;
             return $orig_compiled_descriptor_state_to_legacy_descriptor->(@_);

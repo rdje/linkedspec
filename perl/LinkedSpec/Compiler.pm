@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_descriptor_state_to_legacy_descriptor {
- return _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', @_)
-}
-
 sub _normalize_compiled_dependency_regex_output {
  my ($value, $compiled_spec_state) = @_;
  return _call_compiler_state(
@@ -475,7 +471,7 @@ sub _build_final_descriptor_state {
 sub _build_final_descriptor {
  my ($compiled_spec_input, $dependency_regex_builder_cb, %args) = @_;
  my $descriptor_state = _build_final_descriptor_state($compiled_spec_input, $dependency_regex_builder_cb, %args);
- return _compiled_descriptor_state_to_legacy_descriptor($descriptor_state);
+ return _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', $descriptor_state);
 }
 
 sub _normalize_parse_mode {
@@ -994,7 +990,7 @@ if ($validate_dependency_regex_references_error) {
  _trace_exit($trace_scope, { status => 'error', stage => 'validate_dependency_regex_references' }, DUMP_LOW);
  return undef;
 }
- my $final_descr = _compiled_descriptor_state_to_legacy_descriptor($final_descr_state);
+ my $final_descr = _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', $final_descr_state);
 
  my $selected_top_rule =
     defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule
