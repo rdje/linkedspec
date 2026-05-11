@@ -629,6 +629,8 @@ The helper family is much richer than it used to be. The bigger future wins are 
 - self-hosting,
 - and eventual backend decoupling.
 
+As of the 2026-05-11 phase0 guard, every discovered target `.spec` must compile to descriptor metadata with `language_agnostic_ready_ratio == 1.0000`, no language-agnostic blocked rules, and no compatibility-surface rules. That makes future DSL migration work a matter of preserving the all-target ActionIR-ready contract while improving semantics and architecture.
+
 ### 5. `build_compiled_rule_table` / `build_dependency_regex_map` should now be read as phases, not as the ideal long-term data model
 The information they represent is still needed. What changed is the ownership model:
 - `build_compiled_rule_table(...)` is now best read as "build compiled-spec state",

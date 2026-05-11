@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-11: Added a repo-wide phase0 guard that every discovered target `.spec` compiles as a descriptor with `language_agnostic_ready_ratio == 1.0000`, zero language-agnostic blocked rules, and zero compatibility-surface rules. This locks the current all-target ActionIR-ready state for future DSL migration work.
 - 2026-05-11: Removed `Compiler::_compiled_descriptor_state_to_legacy_descriptor(...)`; final descriptor projection now calls `CompilerState::compiled_descriptor_state_to_legacy_descriptor(...)` through `_call_compiler_state(...)` directly, and the projection-order regression traps the owner seam. Phase0 source-lock coverage rejects reintroducing the compiled descriptor legacy projection pass-through wrapper.
 - 2026-05-11: Removed `Compiler::_compiled_spec_state_to_legacy_spec(...)`; legacy spec-hash projection now calls `CompilerState::compiled_spec_state_to_legacy_spec(...)` through `_call_compiler_state(...)` directly. Phase0 source-lock coverage rejects reintroducing the compiled-spec legacy projection pass-through wrapper.
 - 2026-05-11: Removed unused `Compiler::_compiled_descriptor_state_meta(...)`; compiled descriptor metadata reads remain owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the descriptor metadata wrapper.

@@ -486,6 +486,8 @@ The current strongest boundaries are:
 - the `CompilerState` compiled-state owner,
 - the `ActionIR::*` lowering subtree.
 
+Phase0 also now treats the shipped target spec corpus as an ActionIR readiness contract: every discovered target `.spec` must report a `1.0000` language-agnostic ready ratio with zero blocked rules and zero compatibility-surface rules.
+
 The current main hotspots are:
 
 - `BootstrapSpec::Core`, because it owns dense bootstrap syntax behavior,

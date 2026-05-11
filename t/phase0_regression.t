@@ -40,6 +40,25 @@ subtest 'compile_all_target_specs' => sub {
     }
 };
 
+subtest 'all_target_specs_are_actionir_ready' => sub {
+    plan tests => scalar(@target_specs) * 3;
+
+    for my $spec (@target_specs) {
+        my $path = File::Spec->catfile($spec_dir, $spec);
+        my $content = slurp($path);
+
+        my $descriptor = eval { LinkedSpec::Get(\$content, return_descriptor => 1) };
+        my $err = $@ // '';
+        my $summary = (ref($descriptor) eq 'HASH')
+            ? ($descriptor->{meta}{action_rewriter_migration} || {})
+            : {};
+        is($summary->{language_agnostic_ready_ratio}, '1.0000', "$spec descriptor is language-agnostic ready")
+            or diag(normalize_error($err || "LinkedSpec::Get returned non-descriptor for $spec"));
+        is($summary->{language_agnostic_blocked_rule_count} || 0, 0, "$spec has no language-agnostic blocker rules");
+        is($summary->{compatibility_surface_rule_count} || 0, 0, "$spec has no compatibility-surface rules");
+    }
+};
+
 subtest 'tclite_literal_bracket_and_canonical_returns_compile' => sub {
     plan tests => 9;
 

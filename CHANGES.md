@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-11 - tests: lock target spec ActionIR readiness
+
+- added repo-wide phase0 coverage that compiles every target `.spec` as a descriptor,
+- asserted each target spec reports `language_agnostic_ready_ratio == 1.0000`,
+- asserted each target spec has zero language-agnostic blocker rules and zero compatibility-surface rules.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-11 - compiler: inline compiled descriptor legacy projection
 
 - removed `LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descriptor(...)`,
