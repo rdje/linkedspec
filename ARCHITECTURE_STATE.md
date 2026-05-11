@@ -79,6 +79,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler` no longer keeps a compiled-spec record-rule pass-through wrapper either; rule-table construction records compiled rules by asking `CompilerState` directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled-descriptor metadata pass-through wrapper either; final-descriptor assembly asks `CompilerState` to build descriptor metadata directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled dependency-regex state constructor pass-through wrapper either; dependency-regex enrichment asks `CompilerState` to construct the state directly through the shared owner seam.
+- `Compiler` no longer keeps a compiled descriptor state constructor pass-through wrapper either; final descriptor assembly asks `CompilerState` to construct the state directly through the shared owner seam.
 - `SpecEntry` no longer keeps a one-shot runtime-context top-rule setter wrapper either; discovered top-rule writes ask `RuntimeContext` to update shared top-rule state directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a parser-source emission pass-through wrapper either; generated-handler source emission asks `RuntimeContext` to append captured source text directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a pass-through runtime-handler last-error setter wrapper either; rule-handler compile/eval errors ask `RuntimeContext` to write runtime-handler error state directly through the owner-dispatch seam.

@@ -137,10 +137,6 @@ sub _compiled_spec_state_to_legacy_spec {
  return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
 }
 
-sub _new_compiled_descriptor_state {
- return _call_compiler_state('new_compiled_descriptor_state', @_)
-}
-
 sub _is_compiled_descriptor_state {
  return _call_compiler_state('is_compiled_descriptor_state', @_)
 }
@@ -480,7 +476,8 @@ sub _build_final_descriptor_state {
   action_rewriter_migration => _build_action_rewriter_migration_summary($compiled_state),
  );
 
- return _new_compiled_descriptor_state(
+ return _call_compiler_state(
+  'new_compiled_descriptor_state',
   compiled_spec_state => $compiled_state,
   compiled_dependency_regex_state => $compiled_dependency_regex_state,
   meta => $compiled_state_meta,
