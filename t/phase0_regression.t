@@ -4380,7 +4380,7 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
 
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
-subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
+subtest 'repo_owned_plugin_lookup_callers_prefer_package_owners' => sub {
     plan tests => 59;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
@@ -4452,16 +4452,16 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     unlike($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin no longer loads LinkedSpec just to resolve its own merge helper');
     like($skew_plugin, qr/use Timing::StanBackend;/, 'skew plugin now loads the Timing::StanBackend owner directly');
     my @direct_pplugin_lookup_hits;
-    my @direct_linkedspec_get_plugin_hits;
+    my @direct_linkedspec_plugin_bridge_hits;
     foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
         my $source = slurp($plugin_file);
         push @direct_pplugin_lookup_hits, basename($plugin_file)
             if $source =~ /\bPPlugin->get\s*\(/;
-        push @direct_linkedspec_get_plugin_hits, basename($plugin_file)
-            if $source =~ /\bLinkedSpec::get_plugin\s*\(/;
+        push @direct_linkedspec_plugin_bridge_hits, basename($plugin_file)
+            if $source =~ /\bLinkedSpec::(?:get_plugin|run_plugin|dispatch_plugin_autoload_name)\s*\(/;
     }
     is_deeply(\@direct_pplugin_lookup_hits, [], 'repo-owned plugin files avoid direct PPlugin->get(...) lookups outside the compatibility bridge');
-    is_deeply(\@direct_linkedspec_get_plugin_hits, [], 'repo-owned plugin files avoid direct LinkedSpec::get_plugin(...) lookups after package-owner migration');
+    is_deeply(\@direct_linkedspec_plugin_bridge_hits, [], 'repo-owned plugin files avoid direct LinkedSpec plugin-bridge dispatch helpers after package-owner migration');
 };
 subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
     plan tests => 13;
