@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-11 - compiler: inline dependency-regex state construction
+
+- removed `LinkedSpec::Compiler::_new_compiled_dependency_regex_state(...)`,
+- routed dependency-regex state construction directly through `_call_compiler_state('new_compiled_dependency_regex_state', ...)`,
+- extended source-lock coverage so `Compiler.pm` cannot silently regain the compiled dependency-regex state constructor pass-through wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-11 - compiler: inline compiled descriptor metadata build
 
 - removed `LinkedSpec::Compiler::_build_compiled_descriptor_meta(...)`,

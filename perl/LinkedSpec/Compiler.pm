@@ -137,10 +137,6 @@ sub _compiled_spec_state_to_legacy_spec {
  return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
 }
 
-sub _new_compiled_dependency_regex_state {
- return _call_compiler_state('new_compiled_dependency_regex_state', @_)
-}
-
 sub _new_compiled_descriptor_state {
  return _call_compiler_state('new_compiled_descriptor_state', @_)
 }
@@ -445,7 +441,8 @@ foreach my $row (@{_call_compiler_state('compiled_spec_state_rule_rows', $sg)}) 
 
  my $dependency_regex_map = \%dependency_regex_map;
  my $result = (ref($option) eq 'HASH' && $option->{return_state})
-  ? _new_compiled_dependency_regex_state(
+  ? _call_compiler_state(
+     'new_compiled_dependency_regex_state',
      compiled_spec_state => $sg,
      compiled_dependency_regex_by_label => $dependency_regex_map,
     )
