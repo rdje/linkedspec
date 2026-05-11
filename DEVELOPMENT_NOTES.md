@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-11: Finished another active final-descriptor naming cleanup in `Compiler.pm`. The live compiler path now uses `$final_descriptor_state` / `$final_descriptor` and `FINAL_DESCRIPTOR` trace banners instead of compressed `final_descr` wording, with source-lock coverage preventing the compressed local name from returning.
 - 2026-05-11: Added a repo-wide phase0 guard for the DSL migration track. Every discovered target `.spec` now compiles as a descriptor and must report `language_agnostic_ready_ratio == 1.0000`, zero language-agnostic blocked rules, and zero compatibility-surface rules, turning the current all-target ActionIR-ready state into a single regression contract.
 - 2026-05-11: Removed `Compiler::_compiled_descriptor_state_to_legacy_descriptor(...)`. Final descriptor projection now asks `CompilerState` directly through `_call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', ...)`, and the projection-order regression now traps the `CompilerState` owner seam directly.
 - 2026-05-11: Removed `Compiler::_compiled_spec_state_to_legacy_spec(...)`. Legacy spec-hash projection now asks `CompilerState` directly through `_call_compiler_state('compiled_spec_state_to_legacy_spec', ...)`, keeping compiled-spec projection ownership in the state owner without a compiler-local pass-through.

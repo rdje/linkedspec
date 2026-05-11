@@ -894,7 +894,7 @@ unless (_call_compiler_state('is_compiled_spec_state', $compiled_spec_state)) {
   return undef;
  }
  $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
- my $final_descr_state = eval { _build_final_descriptor_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
+ my $final_descriptor_state = eval { _build_final_descriptor_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
 my $build_final_descriptor_error = $@;
 my $build_final_descriptor_rule_label = $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
  my $build_final_descriptor_handler_source_label =
@@ -919,7 +919,7 @@ if ($build_final_descriptor_error) {
   _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descriptor' }, DUMP_LOW);
  return undef;
  }
- unless (_call_compiler_state('is_compiled_descriptor_state', $final_descr_state)) {
+ unless (_call_compiler_state('is_compiled_descriptor_state', $final_descriptor_state)) {
  _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
@@ -927,7 +927,7 @@ if ($build_final_descriptor_error) {
    stage => 'build_final_descriptor',
    summary => 'Final descriptor assembly failed',
   detail => 'final descriptor assembly expects a compiled_descriptor_state result; got '
-   . _describe_contract_value_kind($final_descr_state),
+   . _describe_contract_value_kind($final_descriptor_state),
    rule_label => $build_final_descriptor_rule_label,
    handler_source_label => $build_final_descriptor_handler_source_label,
   );
@@ -939,7 +939,7 @@ if ($build_final_descriptor_error) {
  my %validate_dependency_regex_failure;
  my $dependency_regex_refs_valid = eval {
   LinkedSpec::Validation::validate_compiled_descriptor_state(
-   $final_descr_state,
+   $final_descriptor_state,
    {
     on_failure => sub {
      %validate_dependency_regex_failure = @_;
@@ -990,7 +990,7 @@ if ($validate_dependency_regex_references_error) {
  _trace_exit($trace_scope, { status => 'error', stage => 'validate_dependency_regex_references' }, DUMP_LOW);
  return undef;
 }
- my $final_descr = _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', $final_descr_state);
+ my $final_descriptor = _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', $final_descriptor_state);
 
  my $selected_top_rule =
     defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule
@@ -1001,10 +1001,10 @@ if ($validate_dependency_regex_references_error) {
  _trace_log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
  if ($dump_parser_source) {
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, " },\n dependency_regex_map => {\n");
-  my @glabels = sort keys %{$final_descr->{dependency_regex_map} || {}};
+  my @glabels = sort keys %{$final_descriptor->{dependency_regex_map} || {}};
   for (my $i = 0; $i < @glabels; ++$i) {
    my $label = $glabels[$i];
-   my $gregex = $final_descr->{dependency_regex_map}{$label};
+   my $gregex = $final_descriptor->{dependency_regex_map}{$label};
    my $prefix = $i ? ",\n" : '';
    _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
   }
@@ -1015,9 +1015,9 @@ if ($validate_dependency_regex_references_error) {
 
  if (_trace_should_dump(DUMP_LOW)) {
   my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
-  _trace_log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
-  _trace_log_dump(_dump_value($final_descr));
-  _trace_log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
+  _trace_log_dump("=== FINAL_DESCRIPTOR DUMP: top_rule=$top_rule ===\n");
+  _trace_log_dump(_dump_value($final_descriptor));
+  _trace_log_dump("=== END FINAL_DESCRIPTOR DUMP: top_rule=$top_rule ===\n");
  }
 
  if ($generate_only) {
@@ -1029,7 +1029,7 @@ if ($validate_dependency_regex_references_error) {
  if ($return_descriptor) {
   _trace_log_output(DUMP_LOW, "Descriptor-return mode", "Returning generated parser descriptor hash");
   _trace_exit($trace_scope, { status => 'ok', stage => 'return_descriptor', return_descriptor => 1, rule_count => $rule_count }, DUMP_LOW);
-  return $final_descr;
+  return $final_descriptor;
  }
 
  _trace_log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
@@ -1038,8 +1038,8 @@ if ($validate_dependency_regex_references_error) {
  my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
  return sub {
   _call_runtime_ctx('clear_runtime_ctx_last_error', $runtime_ctx);
- my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descr->{spec}{$top_rule}) eq 'HASH')
-   ? $final_descr->{spec}{$top_rule}
+ my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descriptor->{spec}{$top_rule}) eq 'HASH')
+   ? $final_descriptor->{spec}{$top_rule}
    : undef;
   my $top_rule_meta = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{meta} : undef;
   my $top_handler_variant = (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef;
@@ -1134,7 +1134,7 @@ if ($validate_dependency_regex_references_error) {
   die "$detail\n";
  }
  _trace_decision('validate_input_ref', 1, 'Top-level parser received SCALAR reference input', DUMP_DEBUG);
- my $retv = eval { &$handler($final_descr, $input_ref) };
+ my $retv = eval { &$handler($final_descriptor, $input_ref) };
   my $eval_error = $@;
   if ($eval_error) {
    _call_runtime_ctx(
