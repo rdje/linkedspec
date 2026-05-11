@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-11 - compiler: inline compiled descriptor state predicate
+
+- removed `LinkedSpec::Compiler::_is_compiled_descriptor_state(...)`,
+- routed final descriptor state shape checks directly through `_call_compiler_state('is_compiled_descriptor_state', ...)`,
+- extended source-lock coverage so `Compiler.pm` cannot silently regain the compiled descriptor state predicate pass-through wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-11 - compiler: inline compiled descriptor state construction
 
 - removed `LinkedSpec::Compiler::_new_compiled_descriptor_state(...)`,

@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-11: Removed `Compiler::_is_compiled_descriptor_state(...)`. Final-descriptor assembly now asks `CompilerState` to validate compiled descriptor state shape directly through `_call_compiler_state('is_compiled_descriptor_state', ...)`, keeping descriptor-state predicates in the owner without a compiler-local pass-through.
 - 2026-05-11: Removed `Compiler::_new_compiled_descriptor_state(...)`. Final-descriptor assembly now asks `CompilerState` to construct compiled descriptor state directly through `_call_compiler_state('new_compiled_descriptor_state', ...)`, keeping descriptor-state construction in the owner without a compiler-local pass-through.
 - 2026-05-11: Removed `Compiler::_new_compiled_dependency_regex_state(...)`. Dependency-regex map enrichment now asks `CompilerState` to construct compiled dependency-regex state directly through `_call_compiler_state('new_compiled_dependency_regex_state', ...)`, keeping that state construction in the owner without a compiler-local pass-through.
 - 2026-05-11: Removed `Compiler::_build_compiled_descriptor_meta(...)`. Final-descriptor assembly now asks `CompilerState` to build compiled-descriptor metadata directly through `_call_compiler_state('build_compiled_descriptor_meta', ...)`, keeping descriptor metadata ownership in the state owner without a compiler-local pass-through.

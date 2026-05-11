@@ -137,10 +137,6 @@ sub _compiled_spec_state_to_legacy_spec {
  return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
 }
 
-sub _is_compiled_descriptor_state {
- return _call_compiler_state('is_compiled_descriptor_state', @_)
-}
-
 sub _compiled_descriptor_state_meta {
  return _call_compiler_state('compiled_descriptor_state_meta', @_)
 }
@@ -935,7 +931,7 @@ if ($build_final_descriptor_error) {
   _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descriptor' }, DUMP_LOW);
  return undef;
  }
- unless (_is_compiled_descriptor_state($final_descr_state)) {
+ unless (_call_compiler_state('is_compiled_descriptor_state', $final_descr_state)) {
  _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,

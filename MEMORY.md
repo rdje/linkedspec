@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-11: Removed `Compiler::_is_compiled_descriptor_state(...)`; final-descriptor assembly now validates compiled descriptor state shape by calling `CompilerState::is_compiled_descriptor_state(...)` through `_call_compiler_state(...)` directly. Phase0 source-lock coverage rejects reintroducing the descriptor-state predicate pass-through wrapper.
 - 2026-05-11: Removed `Compiler::_new_compiled_descriptor_state(...)`; final-descriptor assembly now constructs compiled descriptor state by calling `CompilerState::new_compiled_descriptor_state(...)` through `_call_compiler_state(...)` directly. Phase0 source-lock coverage rejects reintroducing the descriptor-state constructor pass-through wrapper.
 - 2026-05-11: Removed `Compiler::_new_compiled_dependency_regex_state(...)`; dependency-regex map enrichment now constructs compiled dependency-regex state by calling `CompilerState::new_compiled_dependency_regex_state(...)` through `_call_compiler_state(...)` directly. Phase0 source-lock coverage rejects reintroducing the constructor pass-through wrapper.
 - 2026-05-11: Removed `Compiler::_build_compiled_descriptor_meta(...)`; final-descriptor assembly now builds descriptor metadata by calling `CompilerState::build_compiled_descriptor_meta(...)` through `_call_compiler_state(...)` directly. Phase0 source-lock coverage rejects reintroducing the metadata pass-through wrapper.
