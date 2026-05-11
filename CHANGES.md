@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-11 - plugins: lock .plg files off direct get_plugin lookup
+
+- removed the stale commented `LinkedSpec::get_plugin('setup_hold_tmax_tmin')` lookup from `plugin/stan_omap2430c_backend.plg`,
+- extended plugin-corpus source coverage so shipped `.plg` files cannot reintroduce direct `LinkedSpec::get_plugin(...)` helper lookup calls,
+- refreshed plugin modernization docs to describe package-owner calls as the current repo-owned `.plg` destination.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-11 - compiler: remove unused final descriptor projection helper
 
 - removed unused private `Compiler::_build_final_descriptor(...)`,

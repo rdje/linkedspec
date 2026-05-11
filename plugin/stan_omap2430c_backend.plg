@@ -30,9 +30,6 @@ my ($conf) = @_;
  my $filteredata_hold = HUtils::GenericFilter($conf, $setup_hold->{hold}, "filter_sequence");
  HUtils::WRecurse($filteredata_hold,   [\&Timing::StanOmap2430cBackend::filter_port_timing_paths, $conf]);
  
-# print "($conf->{_program}) -I- Generating DM DATA..\n";
-# LinkedSpec::get_plugin('setup_hold_tmax_tmin')->($conf, $conf->{_filteredata}, $filteredata_hold);
-
 # Timing::StanOmap2430cBackend::write_frequency_summary($conf);
 # Timing::StanOmap2430cBackend::write_potential_fp($conf);
 # Timing::StanOmap2430cBackend::write_questionable_paths($conf);

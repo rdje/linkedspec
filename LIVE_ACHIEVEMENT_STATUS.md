@@ -7,12 +7,12 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-11: Removed unused final descriptor projection helper from `Compiler.pm`.
+- 2026-05-11: Locked shipped `.plg` files off direct `LinkedSpec::get_plugin(...)` lookups.
 
 ## Recent Completed Slices
+- Plugin/resource-resolution modernization: Lock shipped `.plg` files off direct `LinkedSpec::get_plugin(...)` lookups.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 - Phase 1A / Backbone Item 3: Finish active final-descriptor naming cleanup in `Compiler.pm`.
-- Phase 6 / DSL migration hardening: Add repo-wide phase0 coverage that all target `.spec` files remain ActionIR-ready and compatibility-surface clean.
 
 ## Next Slice Direction
 - Continue with the smallest roadmap-aligned slice that advances Phase 1A / Backbone Item 3 cleanup, Phase 5 runtime diagnostics, or Phase 6 live documentation upkeep.
