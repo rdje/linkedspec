@@ -59,11 +59,11 @@ marker is silently accepted or skipped by the parser.
   Commit: `pending`
 
 - ID: `PHASE2-DSL-FRONTEND.4`
-  Status: `pending`
+  Status: `completed`
   Goal: `Hardening: add top-level-only rule-start detection inside open blocks so that rule-like lines inside unclosed { } blocks are rejected instead of accepted as new rules.`
   Acceptance: `validate_dsl_syntax rejects rule-label lines when edge_scan_depth > 0 (inside open blocks). Regression coverage for this case. No false rejections of block-nested rule references or edge targets.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-05-16: Added inside-block rule-label detection in Validation.pm line 611-620. When edge_scan_depth > 0, calls _parse_rule_label_line; if it matches, reports "Rule definition not allowed inside open block." Updated 2 existing tests, added 5 new regression subtests. Verified zero shipped specs contain rule-label-like lines inside blocks. Full suite: Files=1, Tests=1004, PASS.`
+  Commit: `Fix: reject rule-label lines inside open blocks in validate_dsl_syntax`
 
 - ID: `PHASE2-DSL-FRONTEND.5`
   Status: `pending`
@@ -86,7 +86,7 @@ marker is silently accepted or skipped by the parser.
 | 1 | `PHASE2-DSL-FRONTEND.1` | `completed` | Inventory done. |
 | 2 | `PHASE2-DSL-FRONTEND.2` | `completed` | Drift gap closed with 6 new regression subtests. |
 | 3 | `PHASE2-DSL-FRONTEND.6` | `completed` | Fluent-continuation surface verified and regression-locked with 4 new subtests. |
-| 4 | `PHASE2-DSL-FRONTEND.4` | `pending` | Close the inside-block rule-start detection gap. |
+| 4 | `PHASE2-DSL-FRONTEND.4` | `completed` | Inside-block rule-start detection gap closed with explicit rejection and 5 new regression subtests. |
 | 5 | `PHASE2-DSL-FRONTEND.5` | `pending` | Reject malformed extra-colon rule starts. |
 | 6 | `PHASE2-DSL-FRONTEND.3` | `pending` | Promote reference warnings to strict-mode errors (lowest risk, changes behavior). |
 
@@ -244,6 +244,7 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.1` | Read all of `perl/LinkedSpec/Validation.pm` (1333 lines). Catalogued 39 validation checks across 4 public entrypoints + private helpers. Read compiler orchestration in `Compiler.pm` lines 570-790. Reviewed `BootstrapSpec::Core.pm` (851 lines) for bootstrap-level error handling. Checked `ROADMAP_V2.md` line 390 claim against actual code. Identified 5 concrete gaps with owning code references. Defined 5 next executable hardening leaves. | Pass |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.2` | Added 6 regression subtests (20 assertions). Compared `_looks_like_supported_rule_paragraph_member_line` patterns against all 14 bootstrap grammar start-token regexes. Verified all 19 shipped specs pass both validation passes. Full suite: Files=1, Tests=995, PASS. | Pass |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.6` | Added 4 regression subtests (20 assertions). Tested all 7 lifecycle markers (I/LS/LE/E/EX/IT/LX) with fluent chains. Tested deeply nested 5+ call chains, quoted args with nested parens, empty-args method calls. Full suite: Files=1, Tests=999, PASS. | Pass |
+| `2026-05-16` | `PHASE2-DSL-FRONTEND.4` | Added inside-block rule-label rejection (Validation.pm line 611-620). Updated 2 existing tests, added 5 new regression subtests (bare rule label, top-rule label, mode-suffix labels, non-rule-label content accepted, nested blocks). Verified zero shipped specs contain rule-label-like lines inside blocks. Full suite: Files=1, Tests=1004, PASS. | Pass |
 
 ## Commit Log
 
@@ -252,6 +253,7 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | `PHASE2-DSL-FRONTEND.1` | `Docs: inventory Phase 2 DSL frontend validation coverage` | 39 validation checks mapped, 5 gaps identified, 5 next leaves defined |
 | `PHASE2-DSL-FRONTEND.2` | `Tests: regression-lock validate_dsl_syntax / bootstrap_parse construct alignment` | 6 subtests, 20 assertions, full suite 995 tests PASS |
 | `PHASE2-DSL-FRONTEND.6` | `Tests: regression-lock full fluent-continuation surface recognition` | 4 subtests, 20 assertions, full suite 999 tests PASS |
+| `PHASE2-DSL-FRONTEND.4` | `Fix: reject rule-label lines inside open blocks in validate_dsl_syntax` | 5 new subtests, 2 updated, full suite 1004 tests PASS |
 
 ## Changelog
 
@@ -259,3 +261,4 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.1 inventory. Mapped 39 validation checks across 4 functions in `perl/LinkedSpec/Validation.pm`, identified 5 concrete gaps with owning code references, defined 5 next hardening leaves (PHASE2-DSL-FRONTEND.2 through .6). Updated current frontier.
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.2. Added 6 regression subtests (20 assertions) to `t/phase0_regression.t`: zero-arg flow markers with blocks, method-empty blind-code-block fluent chains, lifecycle fluent-chains with attached flow, three-target grouped action-edges, action-edges with index+fluent chain, and all-shipped-specs validation regression. Full suite: Files=1, Tests=995, PASS.
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.6. Added 4 regression subtests (20 assertions) to `t/phase0_regression.t`: all lifecycle markers with fluent chains (I/LS/LE/E/EX/IT/LX each with `.if(scalar(on)) { ... }`), deeply nested fluent chain (5+ calls: `.coalesce().trim().lowercase().length().push()`), fluent chain with quoted args and nested parens (`.if(contains_substr(scalar(tag), \"critical\"))`), and empty-args fluent chain (`.push().return_undef()`). Full suite: Files=1, Tests=999, PASS.
+- `2026-05-16`: Completed PHASE2-DSL-FRONTEND.4. Added inside-block rule-label detection in `Validation.pm` (lines 611-620): when `edge_scan_depth > 0`, calls `_parse_rule_label_line` and if it matches, reports "Rule definition not allowed inside open block" with the owning rule label. Updated 2 existing tests (`validation_only_treats_rule_starts_as_top_level_inside_open_action_blocks` → `validation_rejects_rule_label_lines_inside_open_blocks`, `parser_build_allows_rule_like_lines_inside_open_action_blocks` → `parser_build_rejects_rule_like_lines_inside_open_action_blocks`). Added 5 new regression subtests: bare rule-label inside block, top-rule label inside block, mode-suffix labels inside block (AND+/OR+/OR{2,4}), non-rule-label content acceptance, and deeply nested block rejection. Verified zero shipped specs contain rule-label-like lines inside open blocks. Full suite: Files=1, Tests=1004, PASS.

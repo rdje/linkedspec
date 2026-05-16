@@ -608,6 +608,17 @@ sub validate_dsl_syntax {
    return 0;
   } elsif ($current_rule) {
    my $start_depth = $current_rule->{edge_scan_depth} // 0;
+   if ($start_depth > 0 && _parse_rule_label_line($line)) {
+    my $position = index($$spec_content, $line);
+    _report_dsl_validation_failure($spec_content, $position,
+     "Rule definition not allowed inside open block",
+     "Close the preceding block with '}' before starting the next rule",
+     $option,
+     summary => 'Rule definition inside open block',
+     rule_label => $current_rule->{label},
+    );
+    return 0;
+   }
    if ($start_depth == 0 && _looks_like_split_marker_prefix($line) && !_looks_like_supported_split_marker_start($line)) {
     my $position = index($$spec_content, $line);
     return _report_split_marker_syntax_error($spec_content, $position, $option, $current_rule->{label});

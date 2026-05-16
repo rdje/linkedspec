@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-16 — Fix: reject rule-label lines inside open blocks in validate_dsl_syntax
+
+- Added inside-block rule-label detection in `perl/LinkedSpec/Validation.pm` (after line 610): when `edge_scan_depth > 0`, calls `_parse_rule_label_line` on the line; if it matches, reports "Rule definition not allowed inside open block" with the owning rule label.
+- Updated 2 existing tests to expect rejection instead of acceptance for rule-label lines inside open blocks.
+- Added 5 new regression subtests to `t/phase0_regression.t`: bare rule labels inside blocks, top-rule labels inside blocks, mode-suffix labels (AND+/OR+/OR{2,4}) inside blocks, non-rule-label content acceptance inside blocks, and rule labels inside deeply nested blocks.
+- Verified zero shipped specs contain rule-label-like lines inside open blocks.
+
+- Validation: `prove -Iperl t/phase0_regression.t` → Files=1, Tests=1004, PASS.
+
 ## 2026-05-16 — Tests: regression-lock full fluent-continuation surface recognition
 
 - Added 4 regression subtests (20 assertions) to `t/phase0_regression.t` covering all lifecycle-marker fluent chains, deeply nested 5+ call chains, quoted args with nested function calls in fluent chains, and empty-args fluent chains.

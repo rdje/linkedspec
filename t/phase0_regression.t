@@ -9457,8 +9457,8 @@ PERL
     unlike($out, qr/Malformed action-edge target syntax|Blind-call targets do not support regex-slot indexing/, 'edge-like text inside action code does not trigger top-level edge target diagnostics');
     is($err, '', 'edge-like text inside action code validation subprocess does not emit stderr');
 };
-subtest 'validation_only_treats_rule_starts_as_top_level_inside_open_action_blocks' => sub {
-    plan tests => 4;
+subtest 'validation_rejects_rule_label_lines_inside_open_blocks' => sub {
+    plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
@@ -9476,11 +9476,12 @@ print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
 PERL
 
     is($exit_code, 0, 'nested rule-like line validation subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__VALID_DSL__/, 'validation keeps rule-like lines inside open action blocks as block content rather than new rule starts');
+    like($out, qr/__INVALID_DSL__/, 'validation rejects rule-label-like lines inside open blocks rather than silently consuming them');
+    like($out, qr/Rule definition not allowed inside open block/, 'nested rule-like block line diagnostic identifies the inside-block restriction');
     unlike($out, qr/Malformed rule label syntax|Unsupported top-level rule paragraph content/, 'nested rule-like block lines do not trigger top-level rule-paragraph diagnostics');
     is($err, '', 'nested rule-like line validation subprocess does not emit stderr');
 };
-subtest 'parser_build_allows_rule_like_lines_inside_open_action_blocks' => sub {
+subtest 'parser_build_rejects_rule_like_lines_inside_open_action_blocks' => sub {
     plan tests => 4;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -9499,9 +9500,143 @@ print ref($parser) eq 'CODE' ? "__PARSER_OK__\n" : "__PARSER_BAD__\n";
 PERL
 
     is($exit_code, 0, 'nested rule-like line parser-build subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PARSER_OK__/, 'compile pipeline still accepts label-like lines inside open action blocks');
-    unlike($out, qr/DSL Error at line|Spec file must start with a rule definition|Malformed rule label syntax/, 'compile pipeline no longer misclassifies nested rule-like block lines as top-level rule starts');
+    like($out, qr/__PARSER_BAD__/, 'compile pipeline rejects rule-like lines inside open action blocks at the validation stage');
+    like($out, qr/Rule definition not allowed inside open block/, 'compile pipeline reports the inside-block restriction diagnostic');
     is($err, '', 'nested rule-like line parser-build subprocess does not emit stderr');
+};
+subtest 'validation_rejects_bare_rule_label_line_inside_open_block' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf {
+nested:
+ return_a(Top)
+ }
+Leaf:
+ /b/ { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'nested bare-rule-label validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects bare rule-label line inside open action block');
+    like($out, qr/Rule definition not allowed inside open block/, 'inside-block rule-label diagnostic names the restriction');
+    is($err, '', 'nested bare-rule-label validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_top_rule_label_line_inside_open_block' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf {
+NestedTop::
+ return_a(Top)
+ }
+Leaf:
+ /b/ { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'nested top-rule-label validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects top-rule label line inside open action block');
+    like($out, qr/Rule definition not allowed inside open block/, 'inside-block top-rule-label diagnostic names the restriction');
+    is($err, '', 'nested top-rule-label validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_rule_label_with_mode_inside_open_block' => sub {
+    plan tests => 7;
+
+    my $tpl = <<'PERL_TPL';
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf {
+__MODE_LINE__
+ return_a(Top)
+ }
+Leaf:
+ /b/ { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL_TPL
+
+    my $err = '';
+    for my $mode_line ('NestedAnd:AND+', 'NestedOr:OR+', 'NestedBounded:OR{2,4}') {
+        my $perl_snippet = $tpl;
+        $perl_snippet =~ s/__MODE_LINE__/$mode_line/;
+        my ($exit_code, $out, $loop_err) = run_perl_snippet_in_subprocess($perl_snippet);
+        $err = $loop_err;
+        is($exit_code, 0, "nested mode-label $mode_line validation subprocess exits cleanly") or diag($err || $out);
+        like($out, qr/__INVALID_DSL__/, "validation rejects rule-label with mode suffix inside open block: $mode_line");
+    }
+
+    is($err, '', 'nested mode-label validation subprocess does not emit stderr');
+};
+subtest 'validation_accepts_non_rule_label_content_inside_open_blocks' => sub {
+    plan tests => 10;
+
+    my $tpl = <<'PERL_TPL';
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf {
+__BLOCK_CONTENT__
+ return_a(Top)
+ }
+Leaf:
+ /b/ { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL_TPL
+
+    my @block_contents = (
+        'my $x = 1;',
+        'if (condition) { do_something() }',
+        'push(items)',
+        'return_undef()',
+        'apply(action, scalar(retv), scalar(on))',
+    );
+    for my $block_content (@block_contents) {
+        my $perl_snippet = $tpl;
+        $perl_snippet =~ s/__BLOCK_CONTENT__/$block_content/;
+        my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess($perl_snippet);
+        is($exit_code, 0, "block content '$block_content' validation subprocess exits cleanly") or diag($err || $out);
+        like($out, qr/__VALID_DSL__/, "validation accepts non-rule-label content inside open block: $block_content");
+    }
+};
+subtest 'validation_rejects_rule_label_inside_nested_blocks' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf {
+  if (condition) {
+   nested_rule:
+   return_a(Top)
+  }
+ }
+Leaf:
+ /b/ { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'deeply nested rule-label validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects rule-label line inside deeply nested open blocks');
+    like($out, qr/Rule definition not allowed inside open block/, 'deeply nested rule-label diagnostic names the restriction');
+    is($err, '', 'deeply nested rule-label validation subprocess does not emit stderr');
 };
 subtest 'validation_rejects_unclosed_multiline_rule_blocks_at_eof' => sub {
     plan tests => 4;
