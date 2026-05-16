@@ -73,11 +73,11 @@ marker is silently accepted or skipped by the parser.
   Commit: `pending`
 
 - ID: `PHASE2-DSL-FRONTEND.6`
-  Status: `pending`
+  Status: `completed`
   Goal: `Verify and regression-lock full fluent-continuation surface: ensure _looks_like_supported_rule_paragraph_member_line recognizes all fluent spellings the bootstrap parser accepts (method chains, post-call dot continuations, nested arg blocks).`
   Acceptance: `Every fluent continuation form that bootstrap_parse accepts without error is also recognized as supported by _looks_like_supported_rule_paragraph_member_line. Regression coverage for each form.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-05-16: 4 new subtests (20 assertions) added. All lifecycle markers (I, LS, LE, E, EX, IT, LX) with fluent chains. Deeply nested 5+ call chains. Quoted args with nested function calls. Empty-args method calls. Full suite: Files=1, Tests=999, PASS.`
+  Commit: `Tests: regression-lock full fluent-continuation surface recognition`
 
 ## Current Frontier
 
@@ -85,10 +85,10 @@ marker is silently accepted or skipped by the parser.
 | --- | --- | --- | --- |
 | 1 | `PHASE2-DSL-FRONTEND.1` | `completed` | Inventory done. |
 | 2 | `PHASE2-DSL-FRONTEND.2` | `completed` | Drift gap closed with 6 new regression subtests. |
-| 3 | `PHASE2-DSL-FRONTEND.3` | `pending` | Promote reference warnings to strict-mode errors. |
-| 4 | `PHASE2-DSL-FRONTEND.4` | `pending` | Close the inside-block rule-start gap. |
+| 3 | `PHASE2-DSL-FRONTEND.6` | `completed` | Fluent-continuation surface verified and regression-locked with 4 new subtests. |
+| 4 | `PHASE2-DSL-FRONTEND.4` | `pending` | Close the inside-block rule-start detection gap. |
 | 5 | `PHASE2-DSL-FRONTEND.5` | `pending` | Reject malformed extra-colon rule starts. |
-| 6 | `PHASE2-DSL-FRONTEND.6` | `pending` | Regression-lock full fluent-continuation surface. |
+| 6 | `PHASE2-DSL-FRONTEND.3` | `pending` | Promote reference warnings to strict-mode errors (lowest risk, changes behavior). |
 
 ## Decisions
 
@@ -243,6 +243,7 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | --- | --- | --- | --- |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.1` | Read all of `perl/LinkedSpec/Validation.pm` (1333 lines). Catalogued 39 validation checks across 4 public entrypoints + private helpers. Read compiler orchestration in `Compiler.pm` lines 570-790. Reviewed `BootstrapSpec::Core.pm` (851 lines) for bootstrap-level error handling. Checked `ROADMAP_V2.md` line 390 claim against actual code. Identified 5 concrete gaps with owning code references. Defined 5 next executable hardening leaves. | Pass |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.2` | Added 6 regression subtests (20 assertions). Compared `_looks_like_supported_rule_paragraph_member_line` patterns against all 14 bootstrap grammar start-token regexes. Verified all 19 shipped specs pass both validation passes. Full suite: Files=1, Tests=995, PASS. | Pass |
+| `2026-05-16` | `PHASE2-DSL-FRONTEND.6` | Added 4 regression subtests (20 assertions). Tested all 7 lifecycle markers (I/LS/LE/E/EX/IT/LX) with fluent chains. Tested deeply nested 5+ call chains, quoted args with nested parens, empty-args method calls. Full suite: Files=1, Tests=999, PASS. | Pass |
 
 ## Commit Log
 
@@ -250,9 +251,11 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | --- | --- | --- |
 | `PHASE2-DSL-FRONTEND.1` | `Docs: inventory Phase 2 DSL frontend validation coverage` | 39 validation checks mapped, 5 gaps identified, 5 next leaves defined |
 | `PHASE2-DSL-FRONTEND.2` | `Tests: regression-lock validate_dsl_syntax / bootstrap_parse construct alignment` | 6 subtests, 20 assertions, full suite 995 tests PASS |
+| `PHASE2-DSL-FRONTEND.6` | `Tests: regression-lock full fluent-continuation surface recognition` | 4 subtests, 20 assertions, full suite 999 tests PASS |
 
 ## Changelog
 
 - `2026-05-16`: Created task tree from `docs/tasks/TEMPLATE.md`.
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.1 inventory. Mapped 39 validation checks across 4 functions in `perl/LinkedSpec/Validation.pm`, identified 5 concrete gaps with owning code references, defined 5 next hardening leaves (PHASE2-DSL-FRONTEND.2 through .6). Updated current frontier.
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.2. Added 6 regression subtests (20 assertions) to `t/phase0_regression.t`: zero-arg flow markers with blocks, method-empty blind-code-block fluent chains, lifecycle fluent-chains with attached flow, three-target grouped action-edges, action-edges with index+fluent chain, and all-shipped-specs validation regression. Full suite: Files=1, Tests=995, PASS.
+- `2026-05-16`: Completed PHASE2-DSL-FRONTEND.6. Added 4 regression subtests (20 assertions) to `t/phase0_regression.t`: all lifecycle markers with fluent chains (I/LS/LE/E/EX/IT/LX each with `.if(scalar(on)) { ... }`), deeply nested fluent chain (5+ calls: `.coalesce().trim().lowercase().length().push()`), fluent chain with quoted args and nested parens (`.if(contains_substr(scalar(tag), \"critical\"))`), and empty-args fluent chain (`.push().return_undef()`). Full suite: Files=1, Tests=999, PASS.

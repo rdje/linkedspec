@@ -9682,6 +9682,93 @@ PERL
     is($exit_code, 0, 'all-shipped-specs validation subprocess exits cleanly') or diag($err // $out);
     like($out, qr/__ALL_SPECS_PASS__/, 'every shipped spec passes both validate_spec_content and validate_dsl_syntax');
 };
+subtest 'validation_accepts_all_lifecycle_markers_with_fluent_chains' => sub {
+    plan tests => 14;
+
+    my @lifecycle_markers = qw(I LS LE E EX IT LX);
+    my $tpl = <<'PERL_TPL';
+my $spec_content = <<'SPEC';
+Top::
+ /a/ __MARKER__.if(scalar(on)) {
+  declare(scalar, retv)
+  return(scalar(retv))
+ }
+
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL_TPL
+
+    for my $marker (@lifecycle_markers) {
+        my $perl_snippet = $tpl;
+        $perl_snippet =~ s/__MARKER__/$marker/;
+        my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess($perl_snippet);
+
+        is($exit_code, 0, "'$marker' lifecycle fluent validation subprocess exits cleanly") or diag($err // $out);
+        like($out, qr/__VALID_DSL__/, "validation accepts '$marker' lifecycle marker with fluent chain");
+    }
+};
+subtest 'validation_accepts_deeply_nested_fluent_chain' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf.coalesce(scalar(on), 0).trim().lowercase().length()
+  .push(items)
+
+Leaf:
+ /b/ -> Leaf { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'deeply-nested fluent validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts deeply nested fluent chain with 5+ method calls');
+};
+subtest 'validation_accepts_fluent_chain_with_quoted_args_and_nested_parens' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ I.if(contains_substr(scalar(tag), "critical")) {
+  say("matched: critical")
+ }.elseif(matches(scalar(tag), "/warn|err/")) {
+  say("matched: warn/err")
+ }
+
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'quoted-args fluent validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts fluent chains with quoted string args and nested function calls');
+};
+subtest 'validation_accepts_empty_args_fluent_chain' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf.push().return_undef()
+
+Leaf:
+ /b/ -> Leaf { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'empty-args fluent validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts fluent chain with empty-args method calls');
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {

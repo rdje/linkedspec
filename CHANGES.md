@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-16 — Tests: regression-lock full fluent-continuation surface recognition
+
+- Added 4 regression subtests (20 assertions) to `t/phase0_regression.t` covering all lifecycle-marker fluent chains, deeply nested 5+ call chains, quoted args with nested function calls in fluent chains, and empty-args fluent chains.
+- Verified all 7 lifecycle markers (I, LS, LE, E, EX, IT, LX) with `.if(scalar(on)) { ... }` fluent chains pass both `validate_spec_content` and `validate_dsl_syntax`.
+- Full regression suite: Files=1, Tests=999, PASS.
+
+- Validation: `prove -Iperl t/phase0_regression.t`
+
 ## 2026-05-16 — Docs: add task-tree tracking workflow
 
 - Added `docs/TASK_TREE_README.md` (portable setup guide), `docs/TASK_TREE.md` (local workflow spec and active-tree index), and `docs/tasks/TEMPLATE.md` (copyable tree skeleton).
