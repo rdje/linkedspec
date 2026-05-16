@@ -169,7 +169,7 @@ Per ROADMAP_V2.md Phase 3 acceptance:
 | `PHASE3-EXECUTION-SEMANTICS.1` | `Docs: inventory Phase 3 execution semantics surface` | 8-component audit, 3 gaps found, leaves .2/.3/.4 created |
 | `PHASE3-EXECUTION-SEMANTICS.2` | `Docs: document BACKTRACK/IBACKTRACK local cursor-rewind contract` | 22-line prose addition to source-boundary-helper-reference.md |
 | `PHASE3-EXECUTION-SEMANTICS.3` | `Docs: add forward-moving non-backtracking model statement` | 18-line prose addition to rule-modes-and-parse-modes.md |
-| `PHASE3-EXECUTION-SEMANTICS.4` | `pending` (finalize) | BACKTRACK+parse_mode interaction verified as covered by .2 + .3 |
+| `PHASE3-EXECUTION-SEMANTICS.4` | `Docs: finalize Phase 3 execution semantics tree` | BACKTRACK+parse_mode interaction verified; ROADMAP_V2.md Phase 3 → done |
 
 ## Changelog
 
