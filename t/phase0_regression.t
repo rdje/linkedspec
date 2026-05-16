@@ -9540,6 +9540,148 @@ PERL
     like($out, qr/Unclosed rule block before end of file/, 'unclosed same-line block diagnostic is reported early');
     is($err, '', 'unclosed same-line block validation subprocess does not emit stderr');
 };
+subtest 'validation_accepts_zero_arg_flow_markers_with_block_or_parens' => sub {
+    plan tests => 10;
+
+    my $tpl = <<'PERL_TPL';
+my $spec_content = <<'SPEC';
+__SPEC_CONTENT__
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL_TPL
+
+    my @specs = (
+        ['else-block',    "Top::\n /a/ -> Leaf { return_a(Leaf) }\n else { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
+        ['endif-block',   "Top::\n /a/ -> Leaf { return_a(Leaf) }\n endif { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
+        ['default-block', "Top::\n /a/ -> Leaf { return_a(Leaf) }\n default { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
+        ['endcase-block', "Top::\n /a/ -> Leaf { return_a(Leaf) }\n endcase { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
+        ['endswitch-block',"Top::\n /a/ -> Leaf { return_a(Leaf) }\n endswitch { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
+    );
+
+    for my $case (@specs) {
+        my ($label, $spec_content) = @$case;
+        my $perl_snippet = $tpl;
+        $perl_snippet =~ s/__SPEC_CONTENT__/$spec_content/;
+        my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess($perl_snippet);
+
+        is($exit_code, 0, "'$label' flow-marker validation subprocess exits cleanly") or diag($err // $out);
+        like($out, qr/__VALID_DSL__/, "validation accepts '$label' zero-arg flow marker with block as a supported rule paragraph member");
+    }
+};
+subtest 'validation_accepts_full_method_empty_blind_code_block_patterns' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ => Helper.if(scalar(on)).push(items).return_undef().endif {
+  declare(scalar, retv)
+  return(scalar(retv))
+ }
+
+Helper:
+ /a/ -> Helper { return_a(Helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'full method-empty blind-code-block validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts method-empty blind-code-block with full fluent chain');
+};
+subtest 'validation_accepts_lifecycle_fluent_chain_with_attached_flow' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ I.if(scalar(on)) {
+  declare(scalar, retv)
+ }.elseif(scalar(alt)) {
+  say("alt")
+  return_undef()
+ }.else {
+  return_undef()
+ }
+
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'lifecycle fluent-chain validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts lifecycle fluent-chain with attached if/elseif/else branches');
+};
+subtest 'validation_accepts_grouped_action_edge_with_three_targets' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> LeafA | LeafB | LeafC {
+  return_a(LeafA)
+ }
+
+LeafA: /x/ -> LeafA { return_a(LeafA) }
+LeafB: /y/ -> LeafB { return_a(LeafB) }
+LeafC: /z/ -> LeafC { return_a(LeafC) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'three-target grouped action-edge validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts three-target grouped action-edge with shared block');
+};
+subtest 'validation_accepts_action_edge_with_index_and_fluent_chain' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ /b/ -> Child[1].push(item).return_payload() { return_a(Top) }
+
+Child:
+ /c/ -> Child { return_a(Child) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'indexed action-edge fluent validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts action-edge with regex-slot index and fluent chain');
+};
+subtest 'validation_accepts_all_shipped_specs_through_both_passes' => sub {
+    plan tests => 2;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+use LinkedSpec::Validation;
+my @specs = glob("specs/*.spec");
+my $all_ok = 1;
+for my $spec_file (@specs) {
+  open(my $fh, "<", $spec_file) or die "cannot open $spec_file: $!";
+  local $/;
+  my $content = <$fh>;
+  close $fh;
+  my $ok1 = LinkedSpec::Validation::validate_spec_content(\$content);
+  my $ok2 = LinkedSpec::Validation::validate_dsl_syntax(\$content);
+  unless ($ok1 && $ok2) {
+    print "FAIL: $spec_file (content=$ok1, dsl=$ok2)\n";
+    $all_ok = 0;
+  }
+}
+print $all_ok ? "__ALL_SPECS_PASS__\n" : "__SOME_SPECS_FAIL__\n";
+PERL
+
+    is($exit_code, 0, 'all-shipped-specs validation subprocess exits cleanly') or diag($err // $out);
+    like($out, qr/__ALL_SPECS_PASS__/, 'every shipped spec passes both validate_spec_content and validate_dsl_syntax');
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {
