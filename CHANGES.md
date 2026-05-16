@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: inventory Phase 4 capture/mark API surface
+
+- Audited 163 Contracts.pm entries (~100+ capture/mark/position helpers) across 6 families.
+- Verified zero legacy usage in all 19 shipped `.spec` files (no `$CAPTURE`, no raw `pos()`, no `capture_slice`, no `@mark`).
+- Reviewed 2 book chapters (594 lines): capture-marks-and-source-locations.md, source-boundary-helper-reference.md.
+- Identified 12 compatibility alias pairs; 14 named mark helpers implemented.
+- Two minor documentation gaps found: compat alias table completeness, mark-helper reference completeness.
+- Created follow-on leaves .2, .3, .4.
+
 ## 2026-05-17 — Docs: finalize Phase 3 execution semantics
 
 - Verified BACKTRACK+parse_mode interaction coverage already provided by .2 and cross-referenced in .3.

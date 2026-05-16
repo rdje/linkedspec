@@ -1,1 +1,1 @@
-Docs: update PHASE3 task file commit log for .4
+Docs: inventory Phase 4 capture/mark API surface
