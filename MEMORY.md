@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-16 (PHASE1A-CLOSE-OUT.1): Phase 1A audit complete. All 18 modules use uniform OwnerDispatch. No remaining work except ROADMAP status flip.
 - 2026-05-16 (PHASE2-DSL-FRONTEND.3): Added `strict_syntax` option to promote reference warnings to errors. Default off. PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves). 1007 PASS. Next active tree: check `docs/TASK_TREE.md` active table.
 - 2026-05-16 (PHASE2-DSL-FRONTEND.5): Expanded extra-colon regression from 1 to 14 edge cases. Rejection already functional via `invalid_mode` flag. Full suite 1004 PASS.
 - 2026-05-16 (PHASE2-DSL-FRONTEND.4): Closed inside-block rule-start detection gap. `validate_dsl_syntax` now rejects rule-label lines when inside open blocks. 5 new subtests, 2 existing tests updated. Full suite 1004 PASS. Next frontier: `.5` (extra-colon rejection).

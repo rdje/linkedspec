@@ -20,4 +20,5 @@ Current execution status for interruption-safe batch workflow recovery.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
 ## Next Slice Direction
-- PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves). Pick next active tree from `docs/TASK_TREE.md` active table in order: PHASE1A-CLOSE-OUT, PHASE3-EXECUTION-SEMANTICS, PHASE4-CAPTURE-MARK-API, PHASE5-RUNTIME-DIAGNOSTICS, PHASE6-DOCUMENTATION, BACKBONE-ACTION-IR-LOWERING, PLUGIN-MODERNIZATION.
+- 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain. Active PNT frontier: `PHASE1A-CLOSE-OUT.2` (finalize ROADMAP_V2.md status flip).
+- PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).

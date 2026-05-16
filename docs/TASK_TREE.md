@@ -25,7 +25,6 @@ The current active task trees are:
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `PHASE2-DSL-FRONTEND` | `active` | `Phase 2` | `PHASE2-DSL-FRONTEND.1` | [docs/tasks/PHASE2-DSL-FRONTEND.md](docs/tasks/PHASE2-DSL-FRONTEND.md) |
 | `PHASE1A-CLOSE-OUT` | `active` | `Phase 1A` | `PHASE1A-CLOSE-OUT.1` | [docs/tasks/PHASE1A-CLOSE-OUT.md](docs/tasks/PHASE1A-CLOSE-OUT.md) |
 | `PHASE3-EXECUTION-SEMANTICS` | `active` | `Phase 3` | `PHASE3-EXECUTION-SEMANTICS.1` | [docs/tasks/PHASE3-EXECUTION-SEMANTICS.md](docs/tasks/PHASE3-EXECUTION-SEMANTICS.md) |
 | `PHASE4-CAPTURE-MARK-API` | `active` | `Phase 4` | `PHASE4-CAPTURE-MARK-API.1` | [docs/tasks/PHASE4-CAPTURE-MARK-API.md](docs/tasks/PHASE4-CAPTURE-MARK-API.md) |
@@ -47,7 +46,7 @@ PNT-eligible until explicitly activated or until the roadmap selects that lane.
 
 | Tree | Status | Roadmap lane | Completed frontier | File |
 | --- | --- | --- | --- | --- |
-| — | — | — | — | — |
+| `PHASE2-DSL-FRONTEND` | `completed` | `Phase 2` | All 6 leaves (`.1` inventory, `.2` construct alignment, `.6` fluent-continuation, `.4` inside-block rejection, `.5` extra-colon, `.3` strict_syntax) | [docs/tasks/PHASE2-DSL-FRONTEND.md](docs/tasks/PHASE2-DSL-FRONTEND.md) |
 
 ## Roadmap Task-Tree Ownership
 

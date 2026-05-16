@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-16 — Docs: inventory Phase 1A modularization close-out status
+
+- Audited LinkedSpec.pm (286 lines, 20 subs) and all 18 extracted modules (~6,900 lines total).
+- Verified uniform OwnerDispatch usage across all modules through 5 shared entry points.
+- Confirmed no stale monolith-era `use re 'eval'` in facade, no dead pass-through wrappers, no circular coupling, no debt markers.
+- Phase 1A modularization is complete — only ROADMAP_V2.md status flip remains.
+
+- Validation: `prove -Iperl t/phase0_regression.t` → Files=1, Tests=1007, PASS.
+
 ## 2026-05-16 — Feat: add strict_syntax option to promote reference warnings to errors
 
 - Added `strict_syntax` option to `validate_dsl_syntax` in `perl/LinkedSpec/Validation.pm`. When `strict_syntax => 1`, undefined rule references and unused rules are promoted from `_trace_log_output` warnings to `_report_dsl_validation_failure` hard errors.
