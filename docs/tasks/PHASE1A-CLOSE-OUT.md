@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE1A-CLOSE-OUT`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Phase 1A`
 - Created: `2026-05-16`
 - Last updated: `2026-05-16`
@@ -29,7 +29,7 @@ Close out the remaining Phase 1A modularization work: verify that `LinkedSpec.pm
 ## Task Tree
 
 - ID: `PHASE1A-CLOSE-OUT`
-  Status: `active`
+  Status: `completed`
   Goal: `Close out Phase 1A modularization.`
   Children: `PHASE1A-CLOSE-OUT.1`
 
@@ -41,18 +41,18 @@ Close out the remaining Phase 1A modularization work: verify that `LinkedSpec.pm
   Commit: `Docs: inventory Phase 1A modularization close-out status`
 
 - ID: `PHASE1A-CLOSE-OUT.2`
-  Status: `pending`
+  Status: `completed`
   Goal: `Finalize Phase 1A: update ROADMAP_V2.md status from "mostly done" to "done".`
   Acceptance: `ROADMAP_V2.md Phase 1A lane reads "done" with completion date.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-05-16: Updated ROADMAP_V2.md Phase 1A status from "mostly done" to "done" with 2026-05-16 completion date. Also updated Phase 2 from "in progress" to "done".`
+  Commit: `Docs: finalize Phase 1A and Phase 2 status in ROADMAP_V2.md`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `PHASE1A-CLOSE-OUT.1` | `completed` | Inventory audit complete. |
-| 2 | `PHASE1A-CLOSE-OUT.2` | `pending` | Update ROADMAP_V2.md status to done — the only remaining close-out action. |
+| 2 | `PHASE1A-CLOSE-OUT.2` | `completed` | ROADMAP_V2.md updated — Phase 1A and Phase 2 marked done. |
 
 ## PHASE1A-CLOSE-OUT.1 Inventory (2026-05-16)
 
@@ -146,12 +146,14 @@ close-out action is updating ROADMAP_V2.md Phase 1A status from `mostly done` to
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-05-16` | `PHASE1A-CLOSE-OUT.1` | Read LinkedSpec.pm (286 lines), all 18 extracted modules. Verified uniform OwnerDispatch usage across all modules. Checked for stale `use re 'eval'`, dead wrappers, circular coupling, and debt markers. Ran full regression suite. | Pass |
+| `2026-05-16` | `PHASE1A-CLOSE-OUT.2` | Updated ROADMAP_V2.md: Phase 1A `mostly done` → `done`, Phase 2 `in progress` → `done`. Both with 2026-05-16 completion dates. | Pass |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| — | — | — |
+| `PHASE1A-CLOSE-OUT.1` | `Docs: inventory Phase 1A modularization close-out status` | 18-module audit, uniform OwnerDispatch verified |
+| `PHASE1A-CLOSE-OUT.2` | `Docs: finalize Phase 1A and Phase 2 status in ROADMAP_V2.md` | Phase 1A → done, Phase 2 → done |
 
 ## Changelog
 

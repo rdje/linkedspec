@@ -2,7 +2,7 @@
 Current execution status for interruption-safe batch workflow recovery.
 
 ## Active Batch
-- BWFSC target: PNT cycle started 2026-05-11 after README/SESSION_BOOTSTRAP ramp-up.
+- BWFSC target: PNT cycle started 2026-05-16 after PHASE2-DSL-FRONTEND completion and PHASE1A-CLOSE-OUT close-out.
 - Push policy: do not push until the full batch completes and the final slice commit workflow is complete, unless explicitly instructed otherwise.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
@@ -20,5 +20,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
 ## Next Slice Direction
-- 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain. Active PNT frontier: `PHASE1A-CLOSE-OUT.2` (finalize ROADMAP_V2.md status flip).
+- 2026-05-16: Completed PHASE1A-CLOSE-OUT.2 — finalized ROADMAP_V2.md: Phase 1A and Phase 2 both `done` (2026-05-16). PHASE1A-CLOSE-OUT tree COMPLETE. Next active tree: PHASE3-EXECUTION-SEMANTICS.1.
+- 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).

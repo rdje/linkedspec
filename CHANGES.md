@@ -1,6 +1,11 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-16 — Docs: finalize Phase 1A and Phase 2 status in ROADMAP_V2.md
+
+- Updated ROADMAP_V2.md: Phase 1A `mostly done` → `done`, Phase 2 `in progress` → `done`, both with 2026-05-16 completion dates.
+- Moved PHASE1A-CLOSE-OUT tree from active to completed in TASK_TREE.md.
+
 ## 2026-05-16 — Docs: inventory Phase 1A modularization close-out status
 
 - Audited LinkedSpec.pm (286 lines, 20 subs) and all 18 extracted modules (~6,900 lines total).
