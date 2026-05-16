@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: inventory Phase 3 execution semantics surface
+
+- Audited 8 implementation components (LinkedRE.pm, Compiler.pm, SpecEntry.pm, CompilerState.pm, Runtime.pm, ActionIR/Contracts.pm, ActionIR/Scanner/LegacyRules.pm, ActionIR/CanonicalEvents/Core.pm).
+- Reviewed 5 book chapters covering seek/consume semantics, rule-mode orthogonality, public API shape, and BACKTRACK helpers.
+- Analyzed test coverage: 4 dedicated parse-mode subtests (~30 assertions) plus ~40 consume-mode subtests.
+- Found 3 documentation gaps: BACKTRACK/IBACKTRACK local-rewind contract not explicitly documented, no non-backtracking forward-moving model statement, BACKTRACK+parse_mode interaction undocumented.
+- Created follow-on leaves .2, .3, .4 in the task tree.
+
+- Validation: `prove -Iperl t/phase0_regression.t` → Files=1, Tests=1007, PASS.
+
 ## 2026-05-16 — Docs: finalize Phase 1A and Phase 2 status in ROADMAP_V2.md
 
 - Updated ROADMAP_V2.md: Phase 1A `mostly done` → `done`, Phase 2 `in progress` → `done`, both with 2026-05-16 completion dates.

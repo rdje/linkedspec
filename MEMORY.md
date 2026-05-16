@@ -1,7 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
-- 2026-05-16 (PHASE1A-CLOSE-OUT.2): Finalized ROADMAP_V2.md — Phase 1A and Phase 2 both marked `done` with 2026-05-16 completion dates. PHASE1A-CLOSE-OUT tree complete.
+- 2026-05-17 (PHASE3-EXECUTION-SEMANTICS.1): Phase 3 inventory complete. Implementation solid, docs comprehensive but 3 gaps: BACKTRACK local-rewind contract, non-backtracking model statement, BACKTRACK+parse_mode interaction. Created leaves .2/.3/.4. 1007 PASS. PNT frontier: .2 (document BACKTRACK/IBACKTRACK contract).
 - 2026-05-16 (PHASE1A-CLOSE-OUT.1): Phase 1A audit complete. All 18 modules use uniform OwnerDispatch. No remaining work except ROADMAP status flip.
 - 2026-05-16 (PHASE2-DSL-FRONTEND.3): Added `strict_syntax` option to promote reference warnings to errors. Default off. PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves). 1007 PASS. Next active tree: check `docs/TASK_TREE.md` active table.
 - 2026-05-16 (PHASE2-DSL-FRONTEND.5): Expanded extra-colon regression from 1 to 14 edge cases. Rejection already functional via `invalid_mode` flag. Full suite 1004 PASS.

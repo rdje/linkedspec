@@ -1,1 +1,1 @@
-Docs: finalize Phase 1A and Phase 2 status in ROADMAP_V2.md
+Docs: inventory Phase 3 execution semantics surface
