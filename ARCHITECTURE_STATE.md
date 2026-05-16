@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-05-11`
+- Last refreshed: `2026-05-16`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into

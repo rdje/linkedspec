@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 2`
 - Created: `2026-05-16`
-- Last updated: `2026-05-16`
+- Last updated: `2026-05-16` (PHASE2-DSL-FRONTEND.1 completed)
 - Owner: repo-local workflow
 
 ## Goal
@@ -35,12 +35,47 @@ marker is silently accepted or skipped by the parser.
 - ID: `PHASE2-DSL-FRONTEND`
   Status: `active`
   Goal: `Complete deterministic DSL frontend hardening.`
-  Children: `PHASE2-DSL-FRONTEND.1`
+  Children: `PHASE2-DSL-FRONTEND.1`, `PHASE2-DSL-FRONTEND.2`, `PHASE2-DSL-FRONTEND.3`, `PHASE2-DSL-FRONTEND.4`, `PHASE2-DSL-FRONTEND.5`, `PHASE2-DSL-FRONTEND.6`
 
 - ID: `PHASE2-DSL-FRONTEND.1`
-  Status: `in_progress`
+  Status: `completed`
   Goal: `Inventory current DSL frontend validation coverage: list every validation point, error surface, known gap, and the next hardening priority.`
-  Acceptance: `The task file documents each currently-rejected malformed pattern from ROADMAP.md line 213, maps them to the owning validation code, lists any remaining silent-acceptance gaps, and names the next executable leaf.`
+  Acceptance: `The task file documents each currently-rejected malformed pattern, maps them to the owning validation code, lists remaining silent-acceptance gaps, and names the next executable leaves.`
+  Verification: `2026-05-16: inventory complete (see below)`
+  Commit: `Docs: inventory Phase 2 DSL frontend validation coverage`
+
+- ID: `PHASE2-DSL-FRONTEND.2`
+  Status: `pending`
+  Goal: `Close the validate_dsl_syntax / bootstrap_parse drift gap: add regression coverage for every supported DSL construct that bootstrap parses but validate_dsl_syntax does not explicitly recognize.`
+  Acceptance: `phase0_regression.t grows targeted cases for each construct identified in PHASE2-DSL-FRONTEND.1 gap list (fluent continuations, block-nested rule patterns, grouped-edge variants, mode spellings). No validation rejections of shipped specs/*.spec.`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PHASE2-DSL-FRONTEND.3`
+  Status: `pending`
+  Goal: `Hardening: promote undefined-rule-reference and unused-rule warnings to strict-mode errors behind an explicit strict_syntax option defaulting off for backwards compatibility.`
+  Acceptance: `When strict_syntax => 1 is passed, validate_dsl_syntax rejects undefined rule references and unused rules as errors instead of logging warnings. Shipped specs pass with strict_syntax off (default).`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PHASE2-DSL-FRONTEND.4`
+  Status: `pending`
+  Goal: `Hardening: add top-level-only rule-start detection inside open blocks so that rule-like lines inside unclosed { } blocks are rejected instead of accepted as new rules.`
+  Acceptance: `validate_dsl_syntax rejects rule-label lines when edge_scan_depth > 0 (inside open blocks). Regression coverage for this case. No false rejections of block-nested rule references or edge targets.`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PHASE2-DSL-FRONTEND.5`
+  Status: `pending`
+  Goal: `Hardening: reject malformed extra-colon rule starts ('RuleName:::' and similar) that currently may parse as rule labels with empty tails.`
+  Acceptance: `validate_dsl_syntax rejects rule lines with three or more colons after the label. Regression coverage.`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PHASE2-DSL-FRONTEND.6`
+  Status: `pending`
+  Goal: `Verify and regression-lock full fluent-continuation surface: ensure _looks_like_supported_rule_paragraph_member_line recognizes all fluent spellings the bootstrap parser accepts (method chains, post-call dot continuations, nested arg blocks).`
+  Acceptance: `Every fluent continuation form that bootstrap_parse accepts without error is also recognized as supported by _looks_like_supported_rule_paragraph_member_line. Regression coverage for each form.`
   Verification: `pending`
   Commit: `pending`
 
@@ -48,16 +83,154 @@ marker is silently accepted or skipped by the parser.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE2-DSL-FRONTEND.1` | `in_progress` | Need an accurate validation-coverage inventory before hardening further. |
+| 1 | `PHASE2-DSL-FRONTEND.1` | `completed` | Inventory done. |
+| 2 | `PHASE2-DSL-FRONTEND.2` | `pending` | Close the validate_dsl_syntax / bootstrap_parse drift gap first — the validator must recognize everything the parser accepts before hardening further. |
+| 3 | `PHASE2-DSL-FRONTEND.3` | `pending` | Promote reference warnings to strict-mode errors. |
+| 4 | `PHASE2-DSL-FRONTEND.4` | `pending` | Close the inside-block rule-start gap. |
+| 5 | `PHASE2-DSL-FRONTEND.5` | `pending` | Reject malformed extra-colon rule starts. |
+| 6 | `PHASE2-DSL-FRONTEND.6` | `pending` | Regression-lock full fluent-continuation surface. |
 
 ## Decisions
 
-- `2026-05-16`: Created task tree with one inventory leaf. Phase 2 hardening continues from the existing shipped validation points listed in `ROADMAP.md` line 213.
+- `2026-05-16`: Created task tree with one inventory leaf. Phase 2 hardening continues from the existing shipped validation points.
+- `2026-05-16`: Completed PHASE2-DSL-FRONTEND.1 inventory. Identified 20+ validation points across 4 validation functions in `perl/LinkedSpec/Validation.pm` (lines 1-1333), 5 known gaps, and 5 next executable hardening leaves (PHASE2-DSL-FRONTEND.2 through .6). The active compile path runs `validate_spec_content` → `validate_dsl_syntax` → `bootstrap_parse` → `build_compiled_rule_table` → `build_dependency_regex_map` → `validate_dependency_regex_references`, orchestrated from `Compiler.pm` lines 604-790.
+
+## PHASE2-DSL-FRONTEND.1 Inventory (2026-05-16)
+
+### Validation Surface Map
+
+All frontend validation lives in `perl/LinkedSpec/Validation.pm` (1333 lines). Four public entrypoints plus private helpers.
+
+#### 1. `validate_spec_content($spec_content, $option)` — lines 143-219
+Envelope validation. Called first in the compile pipeline (`Compiler.pm` line 606).
+
+| # | Check | Line(s) | Rejection message |
+| --- | --- | --- | --- |
+| 1 | Non-SCALAR ref input | 147-150 | "Invalid spec content type" |
+| 2 | Empty spec content | 152-155 | "Spec content is empty" |
+| 3 | First non-blank/non-comment line must be a valid rule | 166-189 | "Spec file must start with a rule definition" or "Malformed rule label syntax" |
+| 4 | At least one rule must exist | 199-207 | "Spec file must start with a rule definition" |
+| 5 | At least one top rule (`::` syntax) must exist | 209-217 | "Spec file must define a top rule with '::'" |
+| 6 | Stray preamble before first rule paragraph | 166-188 | "Spec file must start with a rule definition" |
+
+#### 2. `validate_dsl_syntax($spec_content, $option)` — lines 521-709
+Per-line rule-paragraph DSL validation with block-depth tracking. Called second in the compile pipeline (`Compiler.pm` line 685).
+
+| # | Check | Line(s) | Rejection message |
+| --- | --- | --- | --- |
+| 7 | Malformed rule label syntax (bad mode spelling) | 549-558 | "Malformed rule label syntax" |
+| 8 | Duplicate rule definition | 562-572 | "Duplicate rule definition: '<name>'" |
+| 9 | Unsupported same-line rule-header filler (after rule start or leading regex cluster) | 574-576, 799-811 | "Unsupported same-line rule header content" |
+| 10 | Invalid regex on rule header line (trailing unescaped slash) | 786-797 | "Invalid regex pattern: /..." |
+| 11 | Stray unmatched closing delimiter (`}`, `]`, `)`) in rule paragraph | 1137-1148 | "Unexpected closing delimiter '<char>' in rule paragraph" |
+| 12 | Action edge (`->`) missing target rule | 1162-1172 | "Action edge is missing a target rule" |
+| 13 | Blind-call edge (`=>`) missing target rule | 1150-1160 | "Blind-call edge is missing a target rule" |
+| 14 | Grouped action-edge targets (`-> A \| B`) without shared `{ }` block | 1174-1184 | "Grouped action-edge targets require a shared code block" |
+| 15 | Blind-call with indexed target (`=> Rule[idx]`) | 1186-1196 | "Blind-call targets do not support regex-slot indexing" |
+| 16 | Blind-call malformed target suffix (glued non-word chars) | 1198-1208 | "Malformed blind-call target syntax" |
+| 17 | Blind-call malformed fluent suffix (`.` not followed by method name) | 1210-1220 | "Malformed blind-call fluent suffix syntax" |
+| 18 | Action-edge malformed target suffix (glued non-word chars) | 1222-1232 | "Malformed action-edge target syntax" |
+| 19 | Action-edge malformed fluent suffix (`.` not followed by method name) | 1234-1244 | "Malformed action-edge fluent suffix syntax" |
+| 20 | Action-edge malformed regex-slot index (non-digit in `[index]`) | 1246-1255 | "Malformed action-edge target syntax" |
+| 21 | Stray preamble before first rule (non-rule, non-blank, non-comment line before any rule) | 600-608 | "Spec file must start with a rule definition" |
+| 22 | Unsupported top-level garbage inside rule paragraph | 615-625 | "Unsupported top-level rule paragraph content" |
+| 23 | Malformed `@...` split-marker spelling | 611-614, 1257-1268 | "Malformed split marker syntax" |
+| 24 | Mixed action (`->`) and blind-call (`=>`) code blocks in same rule | 540-547, 637-644, 649-656 | "Cannot mix ACTION (->) and BLIND CALL (=>) code blocks" |
+| 25 | Unclosed rule block at EOF (open `{`, `(`, `[`) | 658-660, 1270-1285 | "Unclosed rule block before end of file" |
+| 26 | Invalid regex pattern in rule paragraph body | 662-691 | "Invalid regex pattern: /..." |
+| 27 | Undefined rule references (rules referenced but never defined) | 702-706 | Warning only: "Rules referenced but not defined: ..." |
+| 28 | Unused rules (rules defined but never referenced) | 697-700 | Warning only: "Unused rules detected: ..." |
+
+#### 3. `validate_rule_definition($rule_name, $rule_def)` — lines 222-251
+Compiled rule-record validation. Called during dependency-regex validation.
+
+| # | Check | Line(s) | Rejection message |
+| --- | --- | --- | --- |
+| 29 | Non-HASH rule definition | 225-228 | "Invalid rule definition for '<name>'" |
+| 30 | Missing `handler` field | 230-233 | "Rule '<name>' missing required 'handler' field" |
+| 31 | Non-ARRAY `re` field | 235-239 | "Rule '<name>' 're' field must be an array" |
+| 32 | Invalid regex in `re` array (fails `eval { qr/.../ }`) | 241-247 | "Invalid regex in rule '<name>' at index N" |
+
+#### 4. `validate_dependency_regex_references($dep_map, $spec, $option)` — lines 513-519
+Dependency-reference consistency validation. Called after descriptor assembly.
+
+| # | Check | Line(s) | Rejection message |
+| --- | --- | --- | --- |
+| 33 | Non-HASH dependency-regex map | 315-324 | "Invalid dependency-regex structure" |
+| 34 | Non-HASH spec/rules-by-label | 326-335 | "Invalid spec structure" |
+| 35 | Dependency regex references non-existent rule | 365-376 | "Dependency regex references non-existent rule '<name>'" |
+| 36 | Invalid dependency regex entry (not compiled `Regexp`) | 378-389 | "Invalid dependency regex entry for rule '<name>'" |
+| 37 | Invalid dependency entry format (missing `label` or `idx` keys) | 420-431 | "Invalid dependency entry at index N for rule '<name>'" |
+| 38 | Dependency ref to non-existent rule (via `dependency_refs`) | 433-445 | "Dependency entry references non-existent rule '<ref>'" |
+| 39 | Invalid regex index (out of bounds for target rule's `re` array) | 447-460 | "Invalid regex index N for rule '<ref>'" |
+
+### Compile-Pipeline Orchestration (Compiler.pm lines 585-790)
+
+The compiler runs validation in this sequence:
+1. `validate_spec_content` (line 606) — envelope: content type, non-empty, first line is rule, has top rule
+2. `validate_dsl_syntax` (line 685) — rule-paragraph scan: edges, blocks, modes, regexes, references
+3. `bootstrap_parse` — actual recursive-descent parse via hardcoded grammar in `BootstrapSpec::Core`
+4. `build_compiled_rule_table` — compile parsed rules into compiled-spec state
+5. `build_dependency_regex_map` — derive dependency regexes from compiled-spec state
+6. `validate_dependency_regex_references` — cross-rule dependency consistency
+
+Failure at any stage writes structured `last_error` into `RuntimeContext` with `stage`, `summary`, `detail`, `rule_label`, and `handler_source_label` fields. The `parse_only` + `test_expectation => 'fail'` path allows expected validation failures without aborting.
+
+### Known Gaps
+
+**Gap 1: `validate_dsl_syntax` / `bootstrap_parse` drift.**
+The validator uses a linear depth-tracking scan (`_scan_rule_edges_in_fragment`). The bootstrap parser uses recursive-descent through a hardcoded grammar. If the validator doesn't recognize a construct the parser handles, two failures are possible:
+- **False positive**: validator rejects something the parser would accept → shipped specs break
+- **False negative**: validator accepts something the parser silently ignores → malformed input leaks through
+The `_looks_like_supported_rule_paragraph_member_line` helper (lines 711-727) defines what the validator considers valid paragraph content. If this list drifts from what the bootstrap grammar actually handles, gaps open. Specific unverified constructs include: fluent post-call continuations with nested parens, block-attached method chains, and certain lifecycle marker spellings.
+
+**Gap 2: Silent token loss in bootstrap parser.**
+The bootstrap grammar (`BootstrapSpec::Core`, 851 lines) operates through regex matching. Unmatched tokens between recognized constructs are silently consumed/skipped rather than reported as errors. The `validate_dsl_syntax` pass is the main defense against this, but if it misses a malformed pattern, the bootstrap parser will not catch it either. There is no post-parse verification that every input character was consumed by a grammar rule.
+
+**Gap 3: Undefined/unused rule references are warnings, not errors.**
+`validate_dsl_syntax` lines 697-706 log warnings for undefined rule references and unused rules but return success. A spec referencing a non-existent rule will pass validation and fail later (during bootstrap parse or runtime). There is no `strict` mode to upgrade these to hard errors.
+
+**Gap 4: Rule-like lines inside open blocks may be accepted as new rules.**
+`validate_dsl_syntax` line 536 checks `$current_rule->{edge_scan_depth} == 0` before trying to parse a line as a rule label. But `_looks_like_malformed_rule_label_line` at line 591 is only checked when `$at_rule_top_level` is true. A line that looks like a valid rule label inside an open `{ }` block could be parsed as a new rule definition instead of being rejected.
+
+**Gap 5: No strict-mode option for forward-facing validation policy.**
+All validation is on/off — there are no graduated strictness levels. An opt-in `strict_syntax` option would allow hardening without breaking existing `.spec` files.
+
+### Next Hardening Priorities (ordered)
+
+1. **PHASE2-DSL-FRONTEND.2**: Close the `validate_dsl_syntax` / `bootstrap_parse` drift gap — ensure every bootstrap-accepted construct has explicit validator recognition. Regression-lock with targeted test cases. This is the highest-priority gap because it's the primary defense against silent token loss.
+
+2. **PHASE2-DSL-FRONTEND.6**: Verify `_looks_like_supported_rule_paragraph_member_line` covers all fluent-continuation spellings the bootstrap parser accepts. Add missing patterns. Regression-lock.
+
+3. **PHASE2-DSL-FRONTEND.4**: Close the inside-block rule-start detection gap. A rule-like line inside `{ }` must not be accepted as a new rule definition.
+
+4. **PHASE2-DSL-FRONTEND.5**: Reject malformed extra-colon rule starts (`RuleName:::` and similar).
+
+5. **PHASE2-DSL-FRONTEND.3**: Add `strict_syntax` option to promote undefined/unused rule reference warnings to hard errors.
+
+### Bootstrap Frontend Truth
+
+`BootstrapSpec::Core` (851 lines) defines the hardcoded grammar. Key frontend-relevant areas:
+- `_parse_method_call_chain` (line 48): parses `.method(args)` fluent chains; returns `undef` on parse failure
+- `_render_method_call_chain` (line 101): renders parsed chains into handler code
+- `build_bootstrap_spec`: constructs the full grammar descriptor with all rule regexes and handler coderefs
+- The grammar is self-bootstrapping: it parses `.spec` files that define the parser for `.spec` files
+- Error handling: only 3 explicit `die` calls (lines 796, 811 — missing bootstrap rule id, empty start-token registry). Most parse failures are silent nil returns.
+
+### Regression Coverage Status
+
+The main regression file is `t/phase0_regression.t`. Validation-specific test cases found at lines:
+- 371-380: `validate_spec_content` lazy Trace loading
+- 7101-7104: validation functions are NOT called when the code path bypasses them
+- 8411-8412: validation accepts explicit mode spellings and blind-call surfaces
+- 8695-9033: multiple `validate_dsl_syntax` test blocks covering stray preamble, malformed rule labels, unsupported paragraph content, duplicate rules, mixed modes, and various edge-target errors
+
+19 shipped `.spec` files in `specs/` exercise the validation+compile path.
 
 ## Open Questions
 
-- Which validation points still silently accept malformed input? (Answer pending inventory.)
-- Should strict mode be default for new `.spec` files or opt-in? (Pending decision.)
+- Should strict mode be default for new `.spec` files or opt-in? (Pending decision — deferred to PHASE2-DSL-FRONTEND.3.)
+- Should the bootstrap parser gain explicit post-parse coverage tracking (report which input character ranges were consumed by at least one grammar rule)? This would close Gap 2 but is a significant bootstrap change.
 
 ## Blockers
 
@@ -67,14 +240,15 @@ marker is silently accepted or skipped by the parser.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-05-16` | `PHASE2-DSL-FRONTEND.1` | `pending` | `pending` |
+| `2026-05-16` | `PHASE2-DSL-FRONTEND.1` | Read all of `perl/LinkedSpec/Validation.pm` (1333 lines). Catalogued 39 validation checks across 4 public entrypoints + private helpers. Read compiler orchestration in `Compiler.pm` lines 570-790. Reviewed `BootstrapSpec::Core.pm` (851 lines) for bootstrap-level error handling. Checked `ROADMAP_V2.md` line 390 claim against actual code. Identified 5 concrete gaps with owning code references. Defined 5 next executable hardening leaves. | Pass |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `PHASE2-DSL-FRONTEND.1` | `pending` | `pending` |
+| `PHASE2-DSL-FRONTEND.1` | `Docs: inventory Phase 2 DSL frontend validation coverage` | 39 validation checks mapped, 5 gaps identified, 5 next leaves defined |
 
 ## Changelog
 
 - `2026-05-16`: Created task tree from `docs/tasks/TEMPLATE.md`.
+- `2026-05-16`: Completed PHASE2-DSL-FRONTEND.1 inventory. Mapped 39 validation checks across 4 functions in `perl/LinkedSpec/Validation.pm`, identified 5 concrete gaps with owning code references, defined 5 next hardening leaves (PHASE2-DSL-FRONTEND.2 through .6). Updated current frontier.
