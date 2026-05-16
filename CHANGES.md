@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: add forward-moving non-backtracking model statement
+
+- Added "Forward-moving, non-backtracking model" subsection (18 lines) to rule-modes-and-parse-modes.md.
+- States that the LinkedSpec parser engine is forward-moving: regex matches advance or stay put, no search tree, no partial-match unwind, no systemic backtracking.
+- BACKTRACK/IBACKTRACK are the sole explicit cursor-rewind mechanism and are local pos() manipulations.
+- Includes cross-reference to source-boundary-helper-reference.md for BACKTRACK detail.
+
 ## 2026-05-17 — Docs: document BACKTRACK/IBACKTRACK local cursor-rewind contract
 
 - Added "BACKTRACK and IBACKTRACK: local cursor rewind" subsection (22 lines) to source-boundary-helper-reference.md.

@@ -1,1 +1,1 @@
-Docs: document BACKTRACK/IBACKTRACK local cursor-rewind contract
+Docs: add forward-moving non-backtracking model statement

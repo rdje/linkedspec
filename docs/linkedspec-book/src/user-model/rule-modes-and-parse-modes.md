@@ -391,6 +391,21 @@ BadRule::
 
 Keep one rule body on one execution model. Use `->` when the parent owns regex slots. Use `=>` when the parent is a composition shell around child parsers.
 
+### Forward-moving, non-backtracking model
+
+The LinkedSpec parser engine is forward-moving and non-backtracking. When a regex rule tries to match at the current cursor, one of two things happens:
+
+- The regex succeeds and the cursor advances past the matched characters.
+- The regex fails and the cursor stays where it was.
+
+The engine does not maintain a search tree. It does not remember which alternatives were tried, does not unwind partial rule matches to try a different branch, and does not implement any form of systemic backtracking. A rule match either advances the cursor or leaves it unchanged on failure.
+
+This means the parser will not automatically reorder alternatives to find a successful match, will not retry a different decomposition of the input, and will not explore multiple parse paths. The only way the cursor moves backward is through an explicit `BACKTRACK()` or `IBACKTRACK()` call, and those are one-line `pos()` assignments — not search-tree operations.
+
+This design is intentional. LinkedSpec is built for extraction and recognition, not for exhaustive ambiguity resolution. The rule modes (`AND`, `OR`, `:|`, etc.) control composition within this forward-moving framework; the parse modes (`seek`, `consume`) control cursor discipline within this framework. Neither implies systemic backtracking.
+
+For more detail on `BACKTRACK` and `IBACKTRACK`, including their local cursor-rewind semantics and their interaction with `parse_mode`, see the [Source Boundary Helper Reference](../dsl/source-boundary-helper-reference.md#backtrack-and-ibacktrack-local-cursor-rewind).
+
 ## Parse modes
 
 Parse modes control cursor discipline at runtime. They do not change rule composition.
