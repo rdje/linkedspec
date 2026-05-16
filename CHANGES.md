@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: inventory Phase 5 runtime diagnostics surface
+
+- Audited 5 structured error families (compiler_pipeline, parser_factory, runtime_owner, runtime_handler, runtime_parser) across 30+ call sites.
+- Verified eval surface: 1 handler compile eval (minimum), 1 execution eval trap, zero in BootstrapSpec.
+- Verified trace bridging: parser_invoke → rule_handler scope chain intact.
+- Verified handler caching: eager compile, coderef reuse, no per-invocation eval.
+- Found 1 stderr leak: SpecEntry.pm line 740 (`warn $compile_warning` on successful handler compilation).
+- Created follow-on leaf .2.
+
 ## 2026-05-17 — Docs: finalize Phase 4 capture/mark API
 
 - Verified all 7 compat alias pairs already documented as legacy in source-boundary-helper-reference.md.

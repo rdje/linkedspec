@@ -1,1 +1,1 @@
-Docs: finalize Phase 4 capture/mark API tree
+Docs: inventory Phase 5 runtime diagnostics surface
