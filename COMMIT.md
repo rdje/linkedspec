@@ -56,6 +56,7 @@ This document defines the standard commit workflow for this repository so any ne
 - Run after a task/activity slice is completed and accepted.
 - Preferred granularity: one coherent, validated change slice per commit.
 - Typical trigger: after implementation + tests are green.
+- For task-tree-managed work: run after each completed leaf; one commit per leaf before selecting another leaf.
 
 ## Required pre-commit validation
 - Run relevant syntax/tests for the task.
@@ -82,6 +83,7 @@ This document defines the standard commit workflow for this repository so any ne
      - `DEVELOPMENT_NOTES.md`
      - `MEMORY.md`
      - `LIVE_ACHIEVEMENT_STATUS.md`
+   - If the completed activity belongs to a task-tree leaf, update the owning `docs/tasks/*.md` file (node status, verification log, commit log, blockers, decisions, and changelog).
    - Include validation commands/results.
    - If the slice changes the public understanding of LinkedSpec, update `docs/linkedspec-book/` too.
    - If a slice adds, renames, or materially clarifies DSL methods, treat user-facing documentation as required completion work: update the relevant guides with clear semantics and extensive worked examples, and backfill older methods in that same user-facing family when the documentation is still too thin for confident adoption.
@@ -90,6 +92,7 @@ This document defines the standard commit workflow for this repository so any ne
    - Populate `git_message_brief.txt` with:
      - Short subject line.
      - Focused body (what changed).
+   - For task-tree-managed work: identify the completed leaf ID in the commit subject or first body line.
    - Do **not** add an automatic `Co-Authored-By` line unless it is explicitly requested for the current contribution.
 
 4. **Stage intended files only**

@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-05-16: Installed repo-local task-tree tracking workflow with nine task trees covering all active roadmap phases. Active PNT frontier: `PHASE2-DSL-FRONTEND.1` (inventory Phase 2 DSL validation coverage). PostCompact hook now re-reads live-docs + `docs/TASK_TREE.md` + mdBook entry points.
 - 2026-05-11: Broadened the shipped `.plg` source lock to reject direct `LinkedSpec::get_plugin(...)`, `LinkedSpec::run_plugin(...)`, and `LinkedSpec::dispatch_plugin_autoload_name(...)` plugin-bridge dispatch calls; renamed the plugin-corpus regression to name the package-owner destination.
 
 ## Recent Completed Slices

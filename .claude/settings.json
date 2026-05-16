@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "for f in README.md SESSION_BOOTSTRAP.md MEMORY.md COMMIT.md docs/TASK_TREE.md docs/linkedspec-book/src/SUMMARY.md docs/linkedspec-book/src/index.md; do [ -f \"$f\" ] && echo \"=== $f ===\" && cat \"$f\" && echo; done | jq -Rs '{hookSpecificOutput: {hookEventName: \"PostCompact\", additionalContext: .}}'"
+          }
+        ]
+      }
+    ]
+  }
+}

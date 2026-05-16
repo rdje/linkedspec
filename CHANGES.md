@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-16 — Docs: add task-tree tracking workflow
+
+- Added `docs/TASK_TREE_README.md` (portable setup guide), `docs/TASK_TREE.md` (local workflow spec and active-tree index), and `docs/tasks/TEMPLATE.md` (copyable tree skeleton).
+- Created nine task-tree files covering all active roadmap phases: `PHASE2-DSL-FRONTEND`, `PHASE1A-CLOSE-OUT`, `PHASE3-EXECUTION-SEMANTICS`, `PHASE4-CAPTURE-MARK-API`, `PHASE5-RUNTIME-DIAGNOSTICS`, `PHASE6-DOCUMENTATION`, `PHASE7-SELF-HOSTED-SPEC` (proposed), `BACKBONE-ACTION-IR-LOWERING`, and `PLUGIN-MODERNIZATION`.
+- Wired `README.md` (fast ramp-up order), `SESSION_BOOTSTRAP.md` (startup ritual with PNT instruction), `COMMIT.md` (leaf-ID traceability and one-commit-per-leaf rule), and `ROADMAP_V2.md` (active-lane task-tree links).
+- Added PostCompact hook in `.claude/settings.json` to re-read live-docs, `docs/TASK_TREE.md`, and mdBook entry points after compaction.
+
+- Validation: all edits are documentation-only; no code changes.
+
 ## 2026-05-11 - plugins: broaden .plg bridge-dispatch lock
 
 - renamed the plugin-corpus regression to describe the package-owner destination rather than the older `LinkedSpec::get_plugin(...)` transition step,
