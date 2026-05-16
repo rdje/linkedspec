@@ -8885,22 +8885,46 @@ PERL
     is($err, '', 'unsupported paragraph-content validation subprocess does not emit stderr');
 };
 subtest 'validation_rejects_extra_colon_rule_labels' => sub {
-    plan tests => 4;
+    plan tests => 29;
 
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+    my $tpl = <<'PERL_TPL';
 my $spec_content = <<'SPEC';
-Top:::
+__RULE_LINE__
  /a/ -> Top { return_a(Top) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
 print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
-PERL
+PERL_TPL
 
-    is($exit_code, 0, 'extra-colon rule-label validation subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed extra-colon rule labels');
-    like($out, qr/Malformed rule label syntax/, 'extra-colon rule-label diagnostic is reported before bootstrap parse');
-    is($err, '', 'extra-colon rule-label validation subprocess does not emit stderr');
+    my @extra_colon_labels = (
+        'Top:::',        # triple colon
+        'Top::::',       # quadruple colon
+        'Top: :',        # colon space colon
+        'Top:: :',       # double colon space colon
+        'Top :::',       # space triple colon
+        'Top::: /rx/',   # triple colon with regex on same line
+        'Top::AND+:',    # double colon AND+ extra colon
+        'Top:OR+:',      # colon OR+ extra colon
+        'Top: :AND+',    # colon space colon AND+
+        'Top:AND+ :',    # colon AND+ space colon
+        'Top:OR{2,4}:',  # colon bounded OR extra colon
+        'Top: ::',       # colon space double colon
+        'Top : :',       # space colon space colon
+        'Top:: : /rx/',  # double colon space colon regex
+    );
+
+    my $err = '';
+    for my $label (@extra_colon_labels) {
+        my $perl_snippet = $tpl;
+        $perl_snippet =~ s/__RULE_LINE__/$label/;
+        my ($exit_code, $out, $loop_err) = run_perl_snippet_in_subprocess($perl_snippet);
+        $err = $loop_err;
+        is($exit_code, 0, "extra-colon '$label' validation subprocess exits cleanly") or diag($err || $out);
+        like($out, qr/__INVALID_DSL__/, "validation rejects extra-colon rule label: $label");
+    }
+
+    is($err, '', 'extra-colon validation subprocess does not emit stderr');
 };
 subtest 'validation_accepts_same_line_rule_paragraph_forms' => sub {
     plan tests => 4;

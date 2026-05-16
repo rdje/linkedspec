@@ -66,11 +66,11 @@ marker is silently accepted or skipped by the parser.
   Commit: `Fix: reject rule-label lines inside open blocks in validate_dsl_syntax`
 
 - ID: `PHASE2-DSL-FRONTEND.5`
-  Status: `pending`
+  Status: `completed`
   Goal: `Hardening: reject malformed extra-colon rule starts ('RuleName:::' and similar) that currently may parse as rule labels with empty tails.`
   Acceptance: `validate_dsl_syntax rejects rule lines with three or more colons after the label. Regression coverage.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-05-16: Extra-colon rejection already in place via _parse_rule_label_line invalid_mode flag. Expanded existing regression test from 1 case to 14 edge cases (triple colon, quadruple colon, colon-space-colon, double-colon-space-colon, space variations, mode-suffix+colon, bounded-OR+colon). Verified all 14 patterns rejected. Full suite: Files=1, Tests=1004, PASS.`
+  Commit: `Tests: expand extra-colon rule-label rejection regression coverage`
 
 - ID: `PHASE2-DSL-FRONTEND.6`
   Status: `completed`
@@ -87,7 +87,7 @@ marker is silently accepted or skipped by the parser.
 | 2 | `PHASE2-DSL-FRONTEND.2` | `completed` | Drift gap closed with 6 new regression subtests. |
 | 3 | `PHASE2-DSL-FRONTEND.6` | `completed` | Fluent-continuation surface verified and regression-locked with 4 new subtests. |
 | 4 | `PHASE2-DSL-FRONTEND.4` | `completed` | Inside-block rule-start detection gap closed with explicit rejection and 5 new regression subtests. |
-| 5 | `PHASE2-DSL-FRONTEND.5` | `pending` | Reject malformed extra-colon rule starts. |
+| 5 | `PHASE2-DSL-FRONTEND.5` | `completed` | Extra-colon rejection already in place; expanded regression from 1 to 14 edge cases. |
 | 6 | `PHASE2-DSL-FRONTEND.3` | `pending` | Promote reference warnings to strict-mode errors (lowest risk, changes behavior). |
 
 ## Decisions
@@ -245,6 +245,7 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.2` | Added 6 regression subtests (20 assertions). Compared `_looks_like_supported_rule_paragraph_member_line` patterns against all 14 bootstrap grammar start-token regexes. Verified all 19 shipped specs pass both validation passes. Full suite: Files=1, Tests=995, PASS. | Pass |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.6` | Added 4 regression subtests (20 assertions). Tested all 7 lifecycle markers (I/LS/LE/E/EX/IT/LX) with fluent chains. Tested deeply nested 5+ call chains, quoted args with nested parens, empty-args method calls. Full suite: Files=1, Tests=999, PASS. | Pass |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.4` | Added inside-block rule-label rejection (Validation.pm line 611-620). Updated 2 existing tests, added 5 new regression subtests (bare rule label, top-rule label, mode-suffix labels, non-rule-label content accepted, nested blocks). Verified zero shipped specs contain rule-label-like lines inside blocks. Full suite: Files=1, Tests=1004, PASS. | Pass |
+| `2026-05-16` | `PHASE2-DSL-FRONTEND.5` | Extra-colon rejection already functional via `_parse_rule_label_line` `invalid_mode` flag. Expanded existing regression test from 1 case (`Top:::`) to 14 edge cases (triple colon, quadruple colon, colon-space-colon, double-colon-space-colon, space variations, mode-suffix+colon, bounded-OR+colon, tab separator). All 14 patterns rejected. Full suite: Files=1, Tests=1004, PASS. | Pass |
 
 ## Commit Log
 
@@ -254,6 +255,7 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | `PHASE2-DSL-FRONTEND.2` | `Tests: regression-lock validate_dsl_syntax / bootstrap_parse construct alignment` | 6 subtests, 20 assertions, full suite 995 tests PASS |
 | `PHASE2-DSL-FRONTEND.6` | `Tests: regression-lock full fluent-continuation surface recognition` | 4 subtests, 20 assertions, full suite 999 tests PASS |
 | `PHASE2-DSL-FRONTEND.4` | `Fix: reject rule-label lines inside open blocks in validate_dsl_syntax` | 5 new subtests, 2 updated, full suite 1004 tests PASS |
+| `PHASE2-DSL-FRONTEND.5` | `Tests: expand extra-colon rule-label rejection regression coverage` | Expanded existing test from 1 to 14 edge cases, full suite 1004 PASS |
 
 ## Changelog
 
@@ -262,3 +264,4 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.2. Added 6 regression subtests (20 assertions) to `t/phase0_regression.t`: zero-arg flow markers with blocks, method-empty blind-code-block fluent chains, lifecycle fluent-chains with attached flow, three-target grouped action-edges, action-edges with index+fluent chain, and all-shipped-specs validation regression. Full suite: Files=1, Tests=995, PASS.
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.6. Added 4 regression subtests (20 assertions) to `t/phase0_regression.t`: all lifecycle markers with fluent chains (I/LS/LE/E/EX/IT/LX each with `.if(scalar(on)) { ... }`), deeply nested fluent chain (5+ calls: `.coalesce().trim().lowercase().length().push()`), fluent chain with quoted args and nested parens (`.if(contains_substr(scalar(tag), \"critical\"))`), and empty-args fluent chain (`.push().return_undef()`). Full suite: Files=1, Tests=999, PASS.
 - `2026-05-16`: Completed PHASE2-DSL-FRONTEND.4. Added inside-block rule-label detection in `Validation.pm` (lines 611-620): when `edge_scan_depth > 0`, calls `_parse_rule_label_line` and if it matches, reports "Rule definition not allowed inside open block" with the owning rule label. Updated 2 existing tests (`validation_only_treats_rule_starts_as_top_level_inside_open_action_blocks` → `validation_rejects_rule_label_lines_inside_open_blocks`, `parser_build_allows_rule_like_lines_inside_open_action_blocks` → `parser_build_rejects_rule_like_lines_inside_open_action_blocks`). Added 5 new regression subtests: bare rule-label inside block, top-rule label inside block, mode-suffix labels inside block (AND+/OR+/OR{2,4}), non-rule-label content acceptance, and deeply nested block rejection. Verified zero shipped specs contain rule-label-like lines inside open blocks. Full suite: Files=1, Tests=1004, PASS.
+- `2026-05-16`: Completed PHASE2-DSL-FRONTEND.5. Extra-colon rule-label rejection was already functional via `_parse_rule_label_line`'s `invalid_mode` flag (line 70-71 in Validation.pm). Expanded existing regression test from 1 case (`Top:::`) to 14 edge cases: triple colon, quadruple colon, colon-space-colon, double-colon-space-colon, space-triple-colon, triple-colon with same-line regex, double-colon AND+ extra colon, colon OR+ extra colon, colon-space-colon AND+, colon AND+ space colon, colon bounded-OR colon, colon-space-double-colon, space-colon-space-colon, and double-colon-space-colon regex. All 14 patterns correctly rejected. Full suite: Files=1, Tests=1004, PASS.

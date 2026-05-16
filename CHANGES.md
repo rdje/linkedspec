@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-16 — Tests: expand extra-colon rule-label rejection regression coverage
+
+- Expanded `validation_rejects_extra_colon_rule_labels` subtest from 1 case to 14 edge cases covering triple/quadruple colons, space variations, mode-suffix+colon combinations, bounded-OR+colon, and tab separators.
+- Extra-colon rejection was already functional via `_parse_rule_label_line`'s `invalid_mode` flag; this commit adds comprehensive regression coverage.
+
+- Validation: `prove -Iperl t/phase0_regression.t` → Files=1, Tests=1004, PASS.
+
 ## 2026-05-16 — Fix: reject rule-label lines inside open blocks in validate_dsl_syntax
 
 - Added inside-block rule-label detection in `perl/LinkedSpec/Validation.pm` (after line 610): when `edge_scan_depth > 0`, calls `_parse_rule_label_line` on the line; if it matches, reports "Rule definition not allowed inside open block" with the owning rule label.
