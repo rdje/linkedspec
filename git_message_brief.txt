@@ -1,1 +1,1 @@
-Docs: add forward-moving non-backtracking model statement
+Docs: finalize Phase 3 execution semantics tree

@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: finalize Phase 3 execution semantics
+
+- Verified BACKTRACK+parse_mode interaction coverage already provided by .2 and cross-referenced in .3.
+- Updated ROADMAP_V2.md Phase 3 status from `in progress` to `done`.
+- PHASE3-EXECUTION-SEMANTICS tree complete (4 leaves).
+
 ## 2026-05-17 — Docs: add forward-moving non-backtracking model statement
 
 - Added "Forward-moving, non-backtracking model" subsection (18 lines) to rule-modes-and-parse-modes.md.

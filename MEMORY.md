@@ -1,7 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
-- 2026-05-17 (PHASE3-EXECUTION-SEMANTICS.3): Added "Forward-moving, non-backtracking model" to rule-modes-and-parse-modes.md. Parser is forward-moving, no search tree, no partial-match unwind. BACKTRACK/IBACKTRACK are sole rewind (local pos()). 18 lines. PNT frontier: .4 (BACKTRACK+parse_mode interaction already partially covered in .2; add cross-reference to rule-modes-and-parse-modes.md).
+- 2026-05-17 (PHASE3-EXECUTION-SEMANTICS tree COMPLETE): All 4 leaves done. Phase 3 `done` in ROADMAP_V2.md. Seek/consume docs comprehensive, BACKTRACK contract explicit, non-backtracking model stated. PNT frontier: PHASE4-CAPTURE-MARK-API.1.
 - 2026-05-16 (PHASE1A-CLOSE-OUT.1): Phase 1A audit complete. All 18 modules use uniform OwnerDispatch. No remaining work except ROADMAP status flip.
 - 2026-05-16 (PHASE2-DSL-FRONTEND.3): Added `strict_syntax` option to promote reference warnings to errors. Default off. PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves). 1007 PASS. Next active tree: check `docs/TASK_TREE.md` active table.
 - 2026-05-16 (PHASE2-DSL-FRONTEND.5): Expanded extra-colon regression from 1 to 14 edge cases. Rejection already functional via `invalid_mode` flag. Full suite 1004 PASS.

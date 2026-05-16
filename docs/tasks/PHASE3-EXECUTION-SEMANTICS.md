@@ -29,7 +29,7 @@ Complete formal parse-mode semantics: `seek` and `consume` modes with clear docu
 ## Task Tree
 
 - ID: `PHASE3-EXECUTION-SEMANTICS`
-  Status: `active`
+  Status: `completed`
   Goal: `Complete parse-mode semantics clarification.`
   Children: `PHASE3-EXECUTION-SEMANTICS.1`, `PHASE3-EXECUTION-SEMANTICS.2`, `PHASE3-EXECUTION-SEMANTICS.3`, `PHASE3-EXECUTION-SEMANTICS.4`
 
@@ -55,16 +55,17 @@ Complete formal parse-mode semantics: `seek` and `consume` modes with clear docu
   Commit: `pending`
 
 - ID: `PHASE3-EXECUTION-SEMANTICS.4`
-  Status: `pending`
+  Status: `completed`
   Goal: `Document BACKTRACK/IBACKTRACK interaction with seek/consume parse modes.`
   Acceptance: `The book explains that BACKTRACK/IBACKTRACK reposition the cursor regardless of parse mode; after rewind, the next match proceeds under the active mode discipline at the new cursor position. In consume mode this means the next match must succeed contiguously from the rewound position.`
+  Verification: `2026-05-17: Coverage already provided by PHASE3-EXECUTION-SEMANTICS.2 (source-boundary-helper-reference.md "BACKTRACK and IBACKTRACK" subsection) and cross-referenced from PHASE3-EXECUTION-SEMANTICS.3 (rule-modes-and-parse-modes.md "Forward-moving, non-backtracking model" subsection). No additional text needed.`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 3 | `PHASE3-EXECUTION-SEMANTICS.4` | `pending` | Document BACKTRACK+parse_mode interaction. |
+| — | — | — | All leaves complete. |
 
 ## PHASE3-EXECUTION-SEMANTICS.1 Inventory (2026-05-17)
 
@@ -159,6 +160,7 @@ Per ROADMAP_V2.md Phase 3 acceptance:
 | `2026-05-17` | `PHASE3-EXECUTION-SEMANTICS.1` | Read all 8 implementation components (LinkedRE.pm, Compiler.pm, SpecEntry.pm, CompilerState.pm, Runtime.pm, ActionIR/Contracts.pm, ActionIR/Scanner/LegacyRules.pm, ActionIR/CanonicalEvents/Core.pm). Read all 5 documentation chapters. Analyzed test coverage (4 dedicated subtests + ~40 consume-mode subtests). Ran full regression suite. | Pass — 3 documentation gaps identified, no implementation gaps. Full suite: Files=1, Tests=1007, PASS. |
 | `2026-05-17` | `PHASE3-EXECUTION-SEMANTICS.2` | Verified new "BACKTRACK and IBACKTRACK: local cursor rewind" subsection in source-boundary-helper-reference.md. Confirmed coverage: concrete pos() assignments, parent vs inner match distinction, local rewind vs systemic backtracking distinction, parse_mode interaction, label-argument compatibility note, structural-alternative guidance. | Pass — 22-line prose addition, no implementation changes. |
 | `2026-05-17` | `PHASE3-EXECUTION-SEMANTICS.3` | Verified new "Forward-moving, non-backtracking model" subsection in rule-modes-and-parse-modes.md. Confirmed coverage: cursor advance-or-stay, no search tree, no partial-match unwind, BACKTRACK/IBACKTRACK as sole rewind, design intentionality, cross-reference to source-boundary-helper-reference. | Pass — 18-line prose addition, no implementation changes. |
+| `2026-05-17` | `PHASE3-EXECUTION-SEMANTICS.4` | Verified BACKTRACK+parse_mode interaction coverage already provided by .2 (source-boundary-helper-reference.md) and cross-referenced in .3 (rule-modes-and-parse-modes.md). | Pass — coverage satisfied by prior leaves. |
 
 ## Commit Log
 
@@ -166,10 +168,12 @@ Per ROADMAP_V2.md Phase 3 acceptance:
 | --- | --- | --- | --- |
 | `PHASE3-EXECUTION-SEMANTICS.1` | `Docs: inventory Phase 3 execution semantics surface` | 8-component audit, 3 gaps found, leaves .2/.3/.4 created |
 | `PHASE3-EXECUTION-SEMANTICS.2` | `Docs: document BACKTRACK/IBACKTRACK local cursor-rewind contract` | 22-line prose addition to source-boundary-helper-reference.md |
-| `PHASE3-EXECUTION-SEMANTICS.3` | `pending` | — |
+| `PHASE3-EXECUTION-SEMANTICS.3` | `Docs: add forward-moving non-backtracking model statement` | 18-line prose addition to rule-modes-and-parse-modes.md |
+| `PHASE3-EXECUTION-SEMANTICS.4` | `pending` (finalize) | BACKTRACK+parse_mode interaction verified as covered by .2 + .3 |
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE3-EXECUTION-SEMANTICS.4 — verified BACKTRACK+parse_mode interaction coverage already satisfied by .2 (source-boundary-helper-reference.md "BACKTRACK and IBACKTRACK" subsection) and cross-referenced in .3 (rule-modes-and-parse-modes.md). PHASE3-EXECUTION-SEMANTICS tree now COMPLETE.
 - `2026-05-17`: Completed PHASE3-EXECUTION-SEMANTICS.3 — added "Forward-moving, non-backtracking model" subsection (18 lines) to rule-modes-and-parse-modes.md. States the engine does not maintain a search tree, does not unwind partial matches, and BACKTRACK/IBACKTRACK are the sole rewind (local pos() manipulation).
 - `2026-05-17`: Completed PHASE3-EXECUTION-SEMANTICS.2 — added "BACKTRACK and IBACKTRACK: local cursor rewind" subsection (22 lines) to source-boundary-helper-reference.md. Covers concrete pos() rewinds, parent vs inner match distinction, local rewind vs systemic backtracking (LinkedSpec does not do search-tree rollback), parse_mode interaction, and label-argument compatibility note.
 - `2026-05-17`: Completed PHASE3-EXECUTION-SEMANTICS.1 inventory. Audited 8 implementation components, 5 book chapters, test coverage. Found 3 documentation gaps (BACKTRACK local-rewind contract, non-backtracking model statement, BACKTRACK+parse_mode interaction). Created leaves .2, .3, .4. 1007 PASS.
