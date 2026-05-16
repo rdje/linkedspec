@@ -7,7 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-17: Completed PHASE4-CAPTURE-MARK-API.1 — capture/mark API surface inventory. Audited 163 contracts, 100+ helpers across 6 families (anonymous boundary, named mark, bridge, cursor, whole-input, entry/match). Zero shipped spec legacy usage. Two minor doc gaps: compat alias table (.2) and mark-helper reference (.3). Active PNT frontier: `PHASE4-CAPTURE-MARK-API.2`.
+- 2026-05-17: Completed PHASE4-CAPTURE-MARK-API (all 4 leaves) — capture/mark API formalization complete. All compat aliases verified documented, all 14 mark helpers with clear reference entries. ROADMAP_V2.md Phase 4 → `done` (2026-05-17). Next active tree: PHASE5-RUNTIME-DIAGNOSTICS.1.
 - 2026-05-17: Completed PHASE3-EXECUTION-SEMANTICS.4 — verified BACKTRACK+parse_mode interaction already covered by .2 and cross-referenced in .3. PHASE3-EXECUTION-SEMANTICS tree COMPLETE (4 leaves). ROADMAP_V2.md Phase 3 → `done` (2026-05-17).
 - 2026-05-17: Completed PHASE3-EXECUTION-SEMANTICS.3 — added "Forward-moving, non-backtracking model" subsection to rule-modes-and-parse-modes.md. States parser engine is forward-moving, no search tree, no partial-match unwind, no systemic backtracking. BACKTRACK/IBACKTRACK are sole rewind. 18-line prose addition.
 - 2026-05-17: Completed PHASE3-EXECUTION-SEMANTICS.2 — added "BACKTRACK and IBACKTRACK: local cursor rewind" subsection (22 lines) to source-boundary-helper-reference.md. Covers concrete pos() rewinds, parent vs inner match distinction, local rewind vs systemic backtracking distinction, parse_mode interaction after rewind, and label-argument compatibility.
@@ -25,6 +25,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
 ## Next Slice Direction
-- Active PNT frontier: `PHASE4-CAPTURE-MARK-API.2` (verify all compat aliases documented as legacy in source-boundary-helper-reference.md).
+- Active PNT frontier: `PHASE5-RUNTIME-DIAGNOSTICS.1` (inventory runtime diagnostics surface).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).

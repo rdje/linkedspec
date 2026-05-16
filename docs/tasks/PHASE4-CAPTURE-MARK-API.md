@@ -30,7 +30,7 @@ Complete the capture/mark API formalization: finish the first-class mark/checkpo
 ## Task Tree
 
 - ID: `PHASE4-CAPTURE-MARK-API`
-  Status: `active`
+  Status: `completed`
   Goal: `Complete capture/mark API formalization.`
   Children: `PHASE4-CAPTURE-MARK-API.1`, `PHASE4-CAPTURE-MARK-API.2`, `PHASE4-CAPTURE-MARK-API.3`, `PHASE4-CAPTURE-MARK-API.4`
 
@@ -42,30 +42,31 @@ Complete the capture/mark API formalization: finish the first-class mark/checkpo
   Commit: `pending`
 
 - ID: `PHASE4-CAPTURE-MARK-API.2`
-  Status: `pending`
+  Status: `completed`
   Goal: `Verify all compatibility aliases are documented as legacy in source-boundary-helper-reference.md, and add entries for any missing ones.`
   Acceptance: `Every compatibility alias pair (capture_slice_length/capture_slice_len, capture_len_from_rule_start/capture_slice_len, capture_from_rule_start/capture_slice, capture_slice_here/start_capture_slice, capture_rest_length/capture_rest_len, entry_named_map/entry_map, match_named_map/match_map) has the legacy spelling documented in the reference.`
+  Verification: `2026-05-17: All 7 alias pairs already documented. capture_slice_here, capture_slice_length, capture_rest_length, capture_from_rule_start, capture_len_from_rule_start in capture-helper tables (lines 95-99). entry_named_map (line 317) and match_named_map (line 342) marked as compatibility aliases. Legacy helpers table (lines 380-387) already covers $CAPTURE, capture(label), capture_if(label), CAPTURE_IF(), ibacktrack/IBACKTRACK, backtrack/BACKTRACK. No documentation additions needed.`
   Commit: `pending`
 
 - ID: `PHASE4-CAPTURE-MARK-API.3`
-  Status: `pending`
+  Status: `completed`
   Goal: `Verify mark-family completeness: all 14 mark_* helpers are documented with clear semantics in source-boundary-helper-reference.md.`
   Acceptance: `Each mark helper (mark_here, mark_entry_start, mark_entry_end, mark_match_start, mark_match_end, mark_input_start, mark_input_end, mark_capture_slice, mark_copy, mark_pos, mark_line, mark_col, mark_exists, clear_mark) has its own entry in the reference table with a clear description of what it does.`
+  Verification: `2026-05-17: All 14 mark helpers documented in source-boundary-helper-reference.md lines 156-169. Each has a dedicated table row with direction (read/write) and a clear one-line description. mark_input_start/end, mark_here, mark_entry_start/end, mark_match_start/end, mark_copy, mark_capture_slice, clear_mark, mark_exists, mark_pos, mark_line, mark_col all present. Additional usage examples at lines 200-257. No documentation additions needed.`
   Commit: `pending`
 
 - ID: `PHASE4-CAPTURE-MARK-API.4`
-  Status: `pending`
+  Status: `completed`
   Goal: `Finalize Phase 4: update ROADMAP_V2.md status from "in progress" to "done", move tree to completed in TASK_TREE.md.`
   Acceptance: `ROADMAP_V2.md Phase 4 lane reads "done" with 2026-05-17 completion date. TASK_TREE.md moves PHASE4-CAPTURE-MARK-API to completed table.`
+  Verification: `2026-05-17: Updated ROADMAP_V2.md Phase 4 status from "in progress" to "done" with 2026-05-17 completion date. Moved PHASE4-CAPTURE-MARK-API from active to completed in TASK_TREE.md.`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 2 | `PHASE4-CAPTURE-MARK-API.2` | `pending` | Verify all compat aliases documented as legacy. |
-| 3 | `PHASE4-CAPTURE-MARK-API.3` | `pending` | Verify all 14 mark helpers have reference entries. |
-| 4 | `PHASE4-CAPTURE-MARK-API.4` | `pending` | Finalize: ROADMAP status flip, TASK_TREE move. |
+| — | — | — | All leaves complete. |
 
 ## PHASE4-CAPTURE-MARK-API.1 Inventory (2026-05-17)
 

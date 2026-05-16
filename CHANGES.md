@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: finalize Phase 4 capture/mark API
+
+- Verified all 7 compat alias pairs already documented as legacy in source-boundary-helper-reference.md.
+- Verified all 14 mark helpers have documented entries (lines 156-169).
+- Updated ROADMAP_V2.md Phase 4 status from `in progress` to `done`.
+- PHASE4-CAPTURE-MARK-API tree complete (4 leaves).
+
 ## 2026-05-17 — Docs: inventory Phase 4 capture/mark API surface
 
 - Audited 163 Contracts.pm entries (~100+ capture/mark/position helpers) across 6 families.
