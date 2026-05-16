@@ -41,9 +41,10 @@ Complete formal parse-mode semantics: `seek` and `consume` modes with clear docu
   Commit: `pending`
 
 - ID: `PHASE3-EXECUTION-SEMANTICS.2`
-  Status: `pending`
+  Status: `completed`
   Goal: `Document BACKTRACK/IBACKTRACK as local cursor-rewind helpers, not systemic search-tree rollback, in the mdbook source-boundary-helper-reference chapter.`
   Acceptance: `The book explicitly states BACKTRACK() rewinds to before the parent match (LSPOS - length LMATCH) and IBACKTRACK() rewinds to before the inner match (IPOS - length IMATCH), both are local pos() manipulations without search-tree state, and they exist as compatibility helpers for specs that need explicit cursor repositioning.`
+  Verification: `2026-05-17: Added "BACKTRACK and IBACKTRACK: local cursor rewind" subsection (22 lines) to source-boundary-helper-reference.md. Covers: concrete pos() assignments, parent-match vs inner-match rewind distinction, local cursor rewind vs systemic backtracking distinction (LinkedSpec does not implement search-tree rollback), parse_mode interaction after rewind, label-argument compatibility note, and guidance to prefer structural alternatives when avoidable.`
   Commit: `pending`
 
 - ID: `PHASE3-EXECUTION-SEMANTICS.3`
@@ -62,7 +63,6 @@ Complete formal parse-mode semantics: `seek` and `consume` modes with clear docu
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE3-EXECUTION-SEMANTICS.2` | `pending` | Document BACKTRACK/IBACKTRACK local-rewind contract. |
 | 2 | `PHASE3-EXECUTION-SEMANTICS.3` | `pending` | Add non-backtracking forward-moving model statement. |
 | 3 | `PHASE3-EXECUTION-SEMANTICS.4` | `pending` | Document BACKTRACK+parse_mode interaction. |
 
@@ -157,14 +157,17 @@ Per ROADMAP_V2.md Phase 3 acceptance:
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-05-17` | `PHASE3-EXECUTION-SEMANTICS.1` | Read all 8 implementation components (LinkedRE.pm, Compiler.pm, SpecEntry.pm, CompilerState.pm, Runtime.pm, ActionIR/Contracts.pm, ActionIR/Scanner/LegacyRules.pm, ActionIR/CanonicalEvents/Core.pm). Read all 5 documentation chapters. Analyzed test coverage (4 dedicated subtests + ~40 consume-mode subtests). Ran full regression suite. | Pass — 3 documentation gaps identified, no implementation gaps. Full suite: Files=1, Tests=1007, PASS. |
+| `2026-05-17` | `PHASE3-EXECUTION-SEMANTICS.2` | Verified new "BACKTRACK and IBACKTRACK: local cursor rewind" subsection in source-boundary-helper-reference.md. Confirmed coverage: concrete pos() assignments, parent vs inner match distinction, local rewind vs systemic backtracking distinction, parse_mode interaction, label-argument compatibility note, structural-alternative guidance. | Pass — 22-line prose addition, no implementation changes. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PHASE3-EXECUTION-SEMANTICS.1` | `pending` | — |
+| `PHASE3-EXECUTION-SEMANTICS.1` | `Docs: inventory Phase 3 execution semantics surface` | 8-component audit, 3 gaps found, leaves .2/.3/.4 created |
+| `PHASE3-EXECUTION-SEMANTICS.2` | `pending` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE3-EXECUTION-SEMANTICS.2 — added "BACKTRACK and IBACKTRACK: local cursor rewind" subsection (22 lines) to source-boundary-helper-reference.md. Covers concrete pos() rewinds, parent vs inner match distinction, local rewind vs systemic backtracking (LinkedSpec does not do search-tree rollback), parse_mode interaction, and label-argument compatibility note.
 - `2026-05-17`: Completed PHASE3-EXECUTION-SEMANTICS.1 inventory. Audited 8 implementation components, 5 book chapters, test coverage. Found 3 documentation gaps (BACKTRACK local-rewind contract, non-backtracking model statement, BACKTRACK+parse_mode interaction). Created leaves .2, .3, .4. 1007 PASS.
 - `2026-05-16`: Created task tree from template.

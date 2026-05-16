@@ -1,6 +1,11 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: document BACKTRACK/IBACKTRACK local cursor-rewind contract
+
+- Added "BACKTRACK and IBACKTRACK: local cursor rewind" subsection (22 lines) to source-boundary-helper-reference.md.
+- Covers: concrete pos() assignments (BACKTRACK = `$LSPOS - length $LMATCH`, IBACKTRACK = `$IPOS - length $IMATCH`), parent-match vs inner-match rewind distinction, local cursor rewind vs systemic backtracking (LinkedSpec does not implement search-tree rollback), parse_mode interaction after rewind, label-argument compatibility note, and structural-alternative guidance.
+
 ## 2026-05-17 — Docs: inventory Phase 3 execution semantics surface
 
 - Audited 8 implementation components (LinkedRE.pm, Compiler.pm, SpecEntry.pm, CompilerState.pm, Runtime.pm, ActionIR/Contracts.pm, ActionIR/Scanner/LegacyRules.pm, ActionIR/CanonicalEvents/Core.pm).

@@ -1,1 +1,1 @@
-Docs: inventory Phase 3 execution semantics surface
+Docs: document BACKTRACK/IBACKTRACK local cursor-rewind contract
