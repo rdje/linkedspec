@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-16 — Feat: add strict_syntax option to promote reference warnings to errors
+
+- Added `strict_syntax` option to `validate_dsl_syntax` in `perl/LinkedSpec/Validation.pm`. When `strict_syntax => 1`, undefined rule references and unused rules are promoted from `_trace_log_output` warnings to `_report_dsl_validation_failure` hard errors.
+- Default is off (backwards compatible) — shipped specs pass with default lax mode. All 19 shipped specs fail strict mode as expected (every top rule is unreferenced by convention, being the entry point).
+- Added 3 regression subtests to `t/phase0_regression.t`: strict rejects undefined refs, strict rejects unused rules, strict accepts valid bidirectional spec.
+
+- Validation: `prove -Iperl t/phase0_regression.t` → Files=1, Tests=1007, PASS.
+
 ## 2026-05-16 — Tests: expand extra-colon rule-label rejection regression coverage
 
 - Expanded `validation_rejects_extra_colon_rule_labels` subtest from 1 case to 14 edge cases covering triple/quadruple colons, space variations, mode-suffix+colon combinations, bounded-OR+colon, and tab separators.

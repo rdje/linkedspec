@@ -716,6 +716,30 @@ my $regex_depth = 0;
   _trace_log_output(DUMP_LOW, "Warning: Undefined rules referenced", "Rules referenced but not defined: " . join(", ", @unique_undefined));
  }
 
+	 if ($option->{strict_syntax}) {
+	  if (@undefined_rules) {
+	   my @unique_undefined = do { my %seen; grep { !$seen{$_}++ } @undefined_rules };
+	   _report_dsl_validation_failure($spec_content, length($$spec_content),
+	    "Undefined rule reference(s): " . join(", ", @unique_undefined),
+	    "Define the referenced rules or remove the references to them",
+	    $option,
+	    summary => 'Undefined rule references in strict mode',
+	    rule_label => $current_rule ? $current_rule->{label} : undef,
+	   );
+	   return 0;
+	  }
+	  if (@unused_rules) {
+	   _report_dsl_validation_failure($spec_content, length($$spec_content),
+	    "Unused rule(s): " . join(", ", @unused_rules),
+	    "Reference the unused rules or remove them from the spec",
+	    $option,
+	    summary => 'Unused rules detected in strict mode',
+	    rule_label => $current_rule ? $current_rule->{label} : undef,
+	   );
+	   return 0;
+	  }
+	 }
+
  return 1;
 }
 

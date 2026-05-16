@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE2-DSL-FRONTEND`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Phase 2`
 - Created: `2026-05-16`
 - Last updated: `2026-05-16` (PHASE2-DSL-FRONTEND.1 completed)
@@ -33,7 +33,7 @@ marker is silently accepted or skipped by the parser.
 ## Task Tree
 
 - ID: `PHASE2-DSL-FRONTEND`
-  Status: `active`
+  Status: `completed`
   Goal: `Complete deterministic DSL frontend hardening.`
   Children: `PHASE2-DSL-FRONTEND.1`, `PHASE2-DSL-FRONTEND.2`, `PHASE2-DSL-FRONTEND.3`, `PHASE2-DSL-FRONTEND.4`, `PHASE2-DSL-FRONTEND.5`, `PHASE2-DSL-FRONTEND.6`
 
@@ -52,11 +52,11 @@ marker is silently accepted or skipped by the parser.
   Commit: `Tests: regression-lock full validate_dsl_syntax / bootstrap_parse construct alignment`
 
 - ID: `PHASE2-DSL-FRONTEND.3`
-  Status: `pending`
+  Status: `completed`
   Goal: `Hardening: promote undefined-rule-reference and unused-rule warnings to strict-mode errors behind an explicit strict_syntax option defaulting off for backwards compatibility.`
   Acceptance: `When strict_syntax => 1 is passed, validate_dsl_syntax rejects undefined rule references and unused rules as errors instead of logging warnings. Shipped specs pass with strict_syntax off (default).`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-05-16: Added strict_syntax option check in Validation.pm lines 719-741. When set, reports undefined references or unused rules as errors via _report_dsl_validation_failure. Default off (backwards compatible). Added 3 regression subtests (14 assertions): strict rejects undefined refs, strict rejects unused rules, strict accepts valid bidirectional spec. All 19 shipped specs fail strict mode (expected: every top rule is unreferenced, and several have orphaned helpers). Full suite: Files=1, Tests=1007, PASS.`
+  Commit: `Feat: add strict_syntax option to promote reference warnings to errors`
 
 - ID: `PHASE2-DSL-FRONTEND.4`
   Status: `completed`
@@ -88,7 +88,7 @@ marker is silently accepted or skipped by the parser.
 | 3 | `PHASE2-DSL-FRONTEND.6` | `completed` | Fluent-continuation surface verified and regression-locked with 4 new subtests. |
 | 4 | `PHASE2-DSL-FRONTEND.4` | `completed` | Inside-block rule-start detection gap closed with explicit rejection and 5 new regression subtests. |
 | 5 | `PHASE2-DSL-FRONTEND.5` | `completed` | Extra-colon rejection already in place; expanded regression from 1 to 14 edge cases. |
-| 6 | `PHASE2-DSL-FRONTEND.3` | `pending` | Promote reference warnings to strict-mode errors (lowest risk, changes behavior). |
+| 6 | `PHASE2-DSL-FRONTEND.3` | `completed` | Added strict_syntax option; default off for backwards compatibility. 3 new regression subtests. |
 
 ## Decisions
 
@@ -246,6 +246,7 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.6` | Added 4 regression subtests (20 assertions). Tested all 7 lifecycle markers (I/LS/LE/E/EX/IT/LX) with fluent chains. Tested deeply nested 5+ call chains, quoted args with nested parens, empty-args method calls. Full suite: Files=1, Tests=999, PASS. | Pass |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.4` | Added inside-block rule-label rejection (Validation.pm line 611-620). Updated 2 existing tests, added 5 new regression subtests (bare rule label, top-rule label, mode-suffix labels, non-rule-label content accepted, nested blocks). Verified zero shipped specs contain rule-label-like lines inside blocks. Full suite: Files=1, Tests=1004, PASS. | Pass |
 | `2026-05-16` | `PHASE2-DSL-FRONTEND.5` | Extra-colon rejection already functional via `_parse_rule_label_line` `invalid_mode` flag. Expanded existing regression test from 1 case (`Top:::`) to 14 edge cases (triple colon, quadruple colon, colon-space-colon, double-colon-space-colon, space variations, mode-suffix+colon, bounded-OR+colon, tab separator). All 14 patterns rejected. Full suite: Files=1, Tests=1004, PASS. | Pass |
+| `2026-05-16` | `PHASE2-DSL-FRONTEND.3` | Added `strict_syntax` option to `validate_dsl_syntax`. When set, undefined rule references and unused rules are promoted from warnings to hard errors via `_report_dsl_validation_failure`. Default off for backwards compatibility. Added 3 regression subtests (14 assertions). All 19 shipped specs fail strict mode (expected: every top rule is unreferenced). Full suite: Files=1, Tests=1007, PASS. | Pass |
 
 ## Commit Log
 
@@ -256,6 +257,7 @@ The main regression file is `t/phase0_regression.t`. Validation-specific test ca
 | `PHASE2-DSL-FRONTEND.6` | `Tests: regression-lock full fluent-continuation surface recognition` | 4 subtests, 20 assertions, full suite 999 tests PASS |
 | `PHASE2-DSL-FRONTEND.4` | `Fix: reject rule-label lines inside open blocks in validate_dsl_syntax` | 5 new subtests, 2 updated, full suite 1004 tests PASS |
 | `PHASE2-DSL-FRONTEND.5` | `Tests: expand extra-colon rule-label rejection regression coverage` | Expanded existing test from 1 to 14 edge cases, full suite 1004 PASS |
+| `PHASE2-DSL-FRONTEND.3` | `Feat: add strict_syntax option to promote reference warnings to errors` | 3 new subtests, 14 assertions, full suite 1007 PASS |
 
 ## Changelog
 

@@ -9841,6 +9841,80 @@ PERL
     is($exit_code, 0, 'all-shipped-specs validation subprocess exits cleanly') or diag($err // $out);
     like($out, qr/__ALL_SPECS_PASS__/, 'every shipped spec passes both validate_spec_content and validate_dsl_syntax');
 };
+subtest 'validation_strict_syntax_rejects_undefined_rule_references' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> MissingRule { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok0 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok0 ? "__LAX_OK__\n" : "__LAX_FAIL__\n";
+my $ok1 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content, { strict_syntax => 1 });
+print $ok1 ? "__STRICT_OK__\n" : "__STRICT_FAIL__\n";
+PERL
+
+    is($exit_code, 0, 'strict-syntax undefined-ref subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__LAX_OK__/, 'lax mode accepts spec with undefined rule references');
+    like($out, qr/__STRICT_FAIL__/, 'strict mode rejects undefined rule references');
+    like($out, qr/Undefined rule reference/, 'strict mode reports undefined rule reference diagnostic');
+    is($err, '', 'strict-syntax undefined-ref subprocess does not emit stderr');
+};
+subtest 'validation_strict_syntax_rejects_unused_rules' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf { return_a(Top) }
+
+UnusedRule:
+ /b/ -> UnusedRule { return_a(UnusedRule) }
+
+Leaf:
+ /c/ -> Leaf { return_a(Leaf) }
+
+OrphanedRule:
+ /d/ -> Leaf { return_a(Orphaned) }
+SPEC
+require LinkedSpec::Validation;
+my $ok0 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok0 ? "__LAX_OK__\n" : "__LAX_FAIL__\n";
+my $ok1 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content, { strict_syntax => 1 });
+print $ok1 ? "__STRICT_OK__\n" : "__STRICT_FAIL__\n";
+PERL
+
+    is($exit_code, 0, 'strict-syntax unused-rule subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__LAX_OK__/, 'lax mode accepts spec with unused rules');
+    like($out, qr/__STRICT_FAIL__/, 'strict mode rejects unused rules');
+    like($out, qr/Unused rule/, 'strict mode reports unused rule diagnostic');
+    is($err, '', 'strict-syntax unused-rule subprocess does not emit stderr');
+};
+subtest 'validation_strict_syntax_accepts_valid_spec' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Leaf { return_a(Top) }
+
+Leaf:
+ /b/ -> Top { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok0 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok0 ? "__LAX_OK__\n" : "__LAX_FAIL__\n";
+my $ok1 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content, { strict_syntax => 1 });
+print $ok1 ? "__STRICT_OK__\n" : "__STRICT_FAIL__\n";
+PERL
+
+    is($exit_code, 0, 'strict-syntax valid-spec subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__LAX_OK__/, 'lax mode accepts valid spec');
+    like($out, qr/__STRICT_OK__/, 'strict mode accepts valid spec with no undefined or unused rules');
+    is($err, '', 'strict-syntax valid-spec subprocess does not emit stderr');
+};
 subtest 'validation_accepts_all_lifecycle_markers_with_fluent_chains' => sub {
     plan tests => 14;
 
