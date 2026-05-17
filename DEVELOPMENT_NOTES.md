@@ -6247,3 +6247,67 @@ Before each commit:
   **No concrete DSL feature gaps exist in the shipped .spec corpus.** The method-like DSL surface is functionally complete for all 19 shipped specs and 30+ book chapters. The `in progress` status of the Method-like DSL migration track reflects ongoing compatibility alias support and the deferred cross-nesting parity item, not missing functionality.
   
   The track can proceed to close-out (.5) after documenting the deferred cross-nesting parity item. If future `.spec` authoring reveals a gap (e.g., a needed helper that requires raw Perl), a new leaf should be created under this tree.
+
+- 2026-05-17 (METHOD-LIKE-DSL-MIGRATION.5): Cross-nesting parity formally deferred. METHOD-LIKE-DSL-MIGRATION tree COMPLETE (5/5 leaves). Deferral documented below. Active frontier: none (tree complete).
+
+  ## Deeper cross-nesting parity — formal deferral
+  
+  ### What is deferred
+  
+  Deeper marker `if(...)` / marker `switch(...)` cross-nesting parity expansion. This refers to the ability to nest control-flow constructs (if/else/endif, switch/case/default/endswitch) at arbitrary depth within lifecycle marker blocks, fluent chains, and structured action blocks in all combinations.
+  
+  ### Current state
+  
+  The current control-flow surface supports:
+  - Structured-block if/else/endif with attached branch blocks (`else { ... }`, `default { ... }`)
+  - Inline-switch structured branch-body surfaces (`case(value, { ... })`, `default({ ... })`)
+  - Block-bodied outer switch (`switch(expr) { case(value) { ... } default { ... } }`)
+  - Bare keyword terminators (`else`, `endif`, `default`, `endcase`, `endswitch`)
+  - Mixed per-branch carriers (`case("A") { ... } case("B") ... default { ... }`)
+  - Final-call fluent action-edge and lifecycle chains
+  
+  All 19 shipped .spec files use these constructs without issues. No shipped spec requires deeper nesting than what is currently supported.
+  
+  ### Why deferred
+  
+  Per ROADMAP_V2.md near-term execution priority #2 (lines 240-241):
+  > "priority shift is now active: continue missing user-facing DSL features first, and return to deeper marker if(...)/switch(...) cross-nesting parity expansion only when a concrete feature or bug requires it"
+  
+  The existing cross-nesting surface is sufficient for all current use cases. Expanding it without a concrete driver would be speculative work. The functional-expression style design direction prioritizes helper composition over deep structural nesting.
+  
+  ### Reactivation criteria
+  
+  Deeper cross-nesting parity expansion should be reactivated when:
+  1. A concrete `.spec` feature request requires nesting control-flow constructs beyond the current supported surface, OR
+  2. A bug is discovered where valid nested control flow produces incorrect or surprising behavior, OR
+  3. A new shipped `.spec` file cannot express its logic without deeper nesting.
+  
+  When reactivated, create a new task leaf under this tree (or a follow-on tree if this one is closed) with specific acceptance criteria tied to the concrete driver.
+  
+  ### Relationship to other tracks
+  
+  - Not related to PLUGIN-ACTION-MIGRATION (separate proposed track for .plg action migration).
+  - Not related to Phase 1 parser-core isolation (separate Phase 1 remainder).
+  - Not related to lifecycle-specific semantics (watch item — extend only when a real gap is found).
+  
+  ## METHOD-LIKE-DSL-MIGRATION tree close-out
+  
+  ### Summary
+  
+  The Method-like DSL migration track is functionally complete. All 19 shipped `.spec` files report zero compatibility-surface rules. The helper surface spans 10 families with 100+ helpers, all regression-locked on both fluent-chain and structured-block surfaces on both action-edge and lifecycle contexts.
+  
+  ### Leaves completed
+  
+  | Leaf | Status | Summary |
+  | --- | --- | --- |
+  | .1 Compatibility alias retirement policy | Done | 11 aliases inventoried, 6-step retirement process, 2 retirement tiers |
+  | .2 Legacy return-helper cleanup | Done | 4 categories audited, zero migrations needed |
+  | .3 Convention-based accumulator audit | Done | 4 conventions audited, zero helpers needed |
+  | .4 Missing DSL features inventory | Done | 3 axes audited, no concrete gaps |
+  | .5 Cross-nesting parity deferral | Done | Formally deferred with explicit reactivation criteria |
+  
+  ### Remaining open items (outside this tree)
+  
+  - **Compatibility alias retirement**: Policy defined (.1), actual retirement is deferred until aliases are removed from implementation. Short-term candidates (`tail`, `drop_last`, `flatten`, `array_values`) require simple regex updates. Medium-term candidates (`return_a`, `return_m`, `return_ma`, `return_imatch`) require scanner/contract infrastructure removal.
+  - **PLUGIN-ACTION-MIGRATION**: Separate proposed track for migrating 36 `.plg` files (~1,200+ actions) to package owners. Not part of this tree.
+  - **Phase 1 parser-core isolation**: Separate Phase 1 remainder — "Finish the last parser-core isolation cleanup around remaining compile-path compatibility seams."

@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `METHOD-LIKE-DSL-MIGRATION`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Method-like DSL migration track`
 - Created: `2026-05-17`
 - Last updated: `2026-05-17`
-- Active frontier: `METHOD-LIKE-DSL-MIGRATION.5`
+- Active frontier: `none` (tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -67,10 +67,10 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
   Commit: `pending`
 
 - ID: `METHOD-LIKE-DSL-MIGRATION.5`
-  Status: `pending`
+  Status: `done`
   Goal: `Formally defer deeper cross-nesting parity — document the deferred status of marker if(...)/switch(...) cross-nesting parity expansion with explicit reactivation criteria.`
   Acceptance: `Deferred item documented in DEVELOPMENT_NOTES.md (or task file) with: what is deferred, why, and what conditions would reactivate it (concrete feature request or bug). Track close-out proceeds with this deferred item acknowledged.`
-  Verification: `pending`
+  Verification: `2026-05-17: Cross-nesting parity formally deferred in DEVELOPMENT_NOTES.md. Documented: what is deferred (deeper marker if/switch cross-nesting parity expansion), current state (existing surface sufficient for all 19 shipped specs), why deferred (ROADMAP_V2 priority shift — functional-expression style over structural nesting), 3 reactivation criteria (concrete feature request, bug, new spec requirement). Tree close-out section added with per-leaf summary, remaining open items (compat alias retirement, PLUGIN-ACTION-MIGRATION, Phase 1 parser-core isolation). METHOD-LIKE-DSL-MIGRATION tree COMPLETE (5/5 leaves).`
   Commit: `pending`
 
 ## Current Frontier
@@ -81,7 +81,7 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
 | 2 | `METHOD-LIKE-DSL-MIGRATION.2` | `done` | Legacy return-helper cleanup — 4 categories audited, zero migrations needed, documented in DEVELOPMENT_NOTES.md. |
 | 3 | `METHOD-LIKE-DSL-MIGRATION.3` | `done` | Convention-based accumulator audit — 4 conventions audited, zero helpers needed, findings in DEVELOPMENT_NOTES.md. |
 | 4 | `METHOD-LIKE-DSL-MIGRATION.4` | `done` | Missing DSL features inventory — no concrete gaps, 3 axes audited, all follow-up targets addressed. |
-| 5 | `METHOD-LIKE-DSL-MIGRATION.5` | `pending` | Formalize cross-nesting parity deferral — close-out prerequisite. |
+| 5 | `METHOD-LIKE-DSL-MIGRATION.5` | `done` | Cross-nesting parity formally deferred, tree COMPLETE (5/5 leaves). |
 
 ## Background
 
@@ -133,6 +133,7 @@ These canonical forms are preferred; aliases remain supported for compatibility:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.5` | Cross-nesting parity formally deferred with 3 reactivation criteria. Tree close-out: 5/5 leaves done. All 19 shipped specs at zero compat. Deferral and close-out in DEVELOPMENT_NOTES.md. ROADMAP_V2.md track status updated to `mostly done`. | Pass — tree COMPLETE. |
 | `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.4` | Inventoried DSL features across 3 axes: shipped spec coverage (19/19 zero compat), helper family completeness (10 families, 100+ helpers), ROADMAP_V2 gap analysis (no concrete gaps). All 3 follow-up targets from ROADMAP_V2 line 180 addressed. Track can close out. Inventory in DEVELOPMENT_NOTES.md. | Pass — no gaps, frontier → .5. |
 | `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.3` | Audited 4 conventions: retv (explicitly declared — naming only), capt (explicitly declared — naming only), rule-level accumulator array (implicit framework convention — fundamental design, keep), @IMATCH_LIST (internal — not user-facing). Zero new helpers needed. Audit in DEVELOPMENT_NOTES.md with per-convention patterns and summary table. | Pass — audit complete, frontier → .4. |
 | `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.2` | Audited 4 categories of legacy return-helper references. ~15 incidental in lazy-load tests (preserved), ~11 intentional compat infra tests (preserved), ~6 book refs (already documented), ~15 USER_GUIDE refs (authoritative). Zero migrations needed. Audit in DEVELOPMENT_NOTES.md. | Pass — cleanup complete, frontier → .3. |
@@ -142,6 +143,7 @@ These canonical forms are preferred; aliases remain supported for compatibility:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
+| `METHOD-LIKE-DSL-MIGRATION.5` | `pending` | — |
 | `METHOD-LIKE-DSL-MIGRATION.4` | `pending` | — |
 | `METHOD-LIKE-DSL-MIGRATION.3` | `pending` | — |
 | `METHOD-LIKE-DSL-MIGRATION.2` | `pending` | — |
