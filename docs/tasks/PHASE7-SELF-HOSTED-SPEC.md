@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `PHASE7-SELF-HOSTED-SPEC`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 7`
 - Created: `2026-05-16`
 - Last updated: `2026-05-17`
-- Active frontier: `PHASE7-SELF-HOSTED-SPEC.5`
+- Active frontier: `none` (tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -62,9 +62,11 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
   Commit: `pending`
 
 - ID: `PHASE7-SELF-HOSTED-SPEC.5`
-  Status: `pending`
+  Status: `done`
   Goal: `Define the extension-surface policy: spec.spec becomes the required change surface for .spec language evolution. Touching bootstrap grammar for .spec changes is exception-only and explicitly justified.`
   Acceptance: `Policy documented in spec.spec header comments and in DEVELOPMENT_NOTES.md. Bootstrap grammar changes for .spec evolution require explicit justification.`
+  Verification: `2026-05-17: Expanded spec.spec header from 2-line policy statement to a full extension-surface policy section. Added: 3-step change procedure (author in spec.spec first, pass regression gate at 1.0000, include coverage), exception criteria ((a) bootstrapping gap, (b) coordinated parity update), known bootstrapping gaps inventory (comment skip, AND++LX). Added formal policy section to DEVELOPMENT_NOTES.md with rationale, exception path detail, and gap inventory. PHASE7-SELF-HOSTED-SPEC tree COMPLETE (5 leaves). Full suite: 1010 PASS.`
+  Commit: `pending`
 
 ## Current Frontier
 
@@ -73,7 +75,7 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
 | 1 | `PHASE7-SELF-HOSTED-SPEC.2` | `done` | Author structural rule paragraphs — 3 rules with own regexes, 1.0000 ratio, 1007 PASS. |
 | 2 | `PHASE7-SELF-HOSTED-SPEC.3` | `done` | Author helper-DSL rule paragraphs — extended body_element to 9 regex alternatives, 1.0000 ratio, 1007 PASS. |
 | 3 | `PHASE7-SELF-HOSTED-SPEC.4` | `done` | Add regression coverage — fixed AND++LX hang, 1010 PASS. |
-| 4 | `PHASE7-SELF-HOSTED-SPEC.5` | `pending` | Define extension-surface policy — depends on .4 proving spec.spec works. |
+| 4 | `PHASE7-SELF-HOSTED-SPEC.5` | `done` | Define extension-surface policy — policy documented, tree complete, 1010 PASS. |
 
 ## Language Surface Inventory (PHASE7-SELF-HOSTED-SPEC.1 — 2026-05-17)
 
@@ -219,6 +221,7 @@ The self-hosted grammar must capture:
 | --- | --- | --- | --- |
 | `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.3` | Extended body_element:* from 5 to 9 regex alternatives. Body element recognition now covers: regex anchors, action edges, blind-call edges, split/capture markers, conditional markers, lifecycle markers (7), fluent chains, word-based patterns, plain code blocks. Full suite: Files=1, Tests=1007, PASS. | Pass — DSL rule paragraphs complete, 9 alternatives, 1.0000 ratio, frontier → .4. |
 | `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.2` | spec.spec compiles to descriptor with language_agnostic_ready_ratio 1.0000. 3 rules: spec_file::AND+ (re: undef — top-level, unreferenced), rule_paragraph:AND (re: [1] — header regex), body_element:* (re: [5] — regex/edge/blind-edge/block/marker). Full suite: Files=1, Tests=1007, PASS. | Pass — structural rules complete, 1.0000 ratio, frontier → .3. |
+| `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.5` | Defined extension-surface policy in spec.spec header (policy section, exception criteria, gap inventory) and DEVELOPMENT_NOTES.md (formal policy with rationale). PHASE7-SELF-HOSTED-SPEC tree COMPLETE (5/5 leaves). Full suite: 1010 PASS. | Pass — tree complete. |
 | `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.4` | Fixed AND++LX parser hang (replaced LX with E in spec_file). Added 3 regression subtests (15 assertions): no-hang parse of 6 shipped specs, structural element recognition, language_agnostic lock at 1.0000. Known bootstrapping gap: no comment/blank-line skip rule. Full suite: 1010 PASS. | Pass — regression coverage complete, frontier → .5. |
 | `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.1` | Audited `_parse_rule_label_line`, `_looks_like_supported_rule_paragraph_member_line`, `_looks_like_supported_split_marker_start`, 19 shipped `.spec` files, 30 book chapters, 10 USER_GUIDE files. 37 syntax categories inventoried across 9 sections. Full suite: Files=1, Tests=1007, PASS (audit-only). | Pass — complete language surface inventory. 4 follow-on leaves created. |
 
@@ -226,11 +229,13 @@ The self-hosted grammar must capture:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
+| `PHASE7-SELF-HOSTED-SPEC.5` | `pending` | — |
 | `PHASE7-SELF-HOSTED-SPEC.4` | `pending` | — |
 | `PHASE7-SELF-HOSTED-SPEC.1` | `pending` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.5 — defined extension-surface policy, tree COMPLETE (5/5 leaves), 1010 PASS.
 - `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.4 — fixed AND++LX parser hang, added 3 regression subtests (15 assertions), 1010 PASS. Active frontier: `.5`.
 - `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.3 — extended body_element:* from 5 to 9 regex-anchored alternatives. Added: conditional markers (`-? word`), lifecycle markers (I/LS/LE/LX/E/EX/IT), fluent chains (`.word`), and word-based catch-all (`word(/word{/word.`). 9 regexes cover all 12 body element recognition patterns from .1 inventory. language_agnostic_ready_ratio 1.0000. 1007 PASS. Active frontier: `.4`.
 - `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.2 — authored spec.spec structural/syntactic rule paragraphs. 3 rules: spec_file::AND+ (top-level collector), rule_paragraph:AND (header regex + body delegation), body_element:* (5 regex-anchored alternatives for regex tokens, edges, blind edges, code blocks, split markers + 2 subdefs). Compiles with language_agnostic_ready_ratio 1.0000. 1007 PASS. Active frontier: `.3`.

@@ -5,8 +5,50 @@
 # markers, lifecycle markers, fluent chains, conditional markers, and helper
 # function calls.
 #
-# It is the required change surface for .spec language evolution.
-# Touching the bootstrap grammar for .spec changes is exception-only.
+# ============================================================================
+# EXTENSION-SURFACE POLICY (PHASE7-SELF-HOSTED-SPEC.5)
+# ============================================================================
+#
+# spec.spec is the REQUIRED change surface for .spec language evolution.
+# Any proposal to extend, modify, or deprecate .spec syntax MUST:
+#
+#   1. Be authored in spec.spec first — add or modify rules here to
+#      capture the new syntax before touching any implementation code.
+#
+#   2. Pass the full regression gate with language_agnostic_ready_ratio
+#      at 1.0000 (all rules using only canonical ActionIR constructs).
+#
+#   3. Include regression coverage proving the spec compiles and the
+#      generated parser recognizes the new construct.
+#
+# Touching the bootstrap grammar (BootstrapSpec/Core.pm or related
+# hardcoded parse rules) for .spec language changes is EXCEPTION-ONLY.
+# Exceptions require explicit justification documented in the commit
+# message and in DEVELOPMENT_NOTES.md, and must satisfy at least one of:
+#
+#   (a) The construct cannot be expressed in spec.spec due to a known
+#       bootstrapping gap (e.g., comment/blank-line skipping requires
+#       a parse-level skip loop that the generated parser does not
+#       currently support).
+#
+#   (b) The bootstrap grammar and spec.spec parity requires a
+#       coordinated update where the bootstrap change is the mechanical
+#       enabler for the spec.spec change (e.g., a new regex feature
+#       that spec.spec itself uses).
+#
+# ============================================================================
+# KNOWN BOOTSTRAPPING GAPS
+# ============================================================================
+#
+# 1. Comment/blank-line skipping: spec.spec's body_element has no
+#    top-level skip rule. The generated parser requires input to start
+#    at a rule header. Workaround: strip leading comments before parsing.
+#
+# 2. AND+ + LX infinite loop: The LX (Late Exit) lifecycle marker in
+#    AND+ repetition mode triggers loop re-entry in the compiled parser.
+#    Workaround: use E (End) instead of LX for AND+ exit handling.
+#
+# ============================================================================
 
 spec_file::AND+
  -> rule_paragraph

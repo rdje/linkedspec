@@ -5816,3 +5816,32 @@ Before each commit:
 - 2026-05-16: PHASE2-DSL-FRONTEND.2: The construct-recognition gap between `_looks_like_supported_rule_paragraph_member_line` and the 14 bootstrap start-token regexes proved narrower than feared. The validator's 12 acceptance patterns already mapped to the 14 bootstrap start tokens with adequate coverage for all constructs appearing in shipped `.spec` files. The main residual risks are: (a) bare zero-arg flow markers without blocks or parens are correctly rejected by the validator since the bootstrap also needs block/paren context to dispatch them, (b) the `METHOD_EMPTY_*` bootstrap rules use recursive regex patterns `(?&PAREN)`/`(?&BRACE)` that handle deeply nested structures — the validator only needs to recognize the line type, not parse nesting depth, and (c) the bootstrap's `CURLY_BRACE` brace-scanner rule is only used internally by other rules, not as a direct start token for top-level lines. Six new regression subtests now lock the most complex supported constructs.
 
 - 2026-05-17: PHASE7-SELF-HOSTED-SPEC.4 — AND++LX bootstrapping gap. The generated parser from spec.spec (the self-hosted grammar) hung when run on actual input. Root cause: AND+ repetition mode combined with the `LX` (Late Exit) lifecycle marker causes an infinite loop. In AND+ mode, the rule repeatedly attempts to match children. LX fires "after the rule is fully completed" — but in the compiled handler, LX's execution appears to re-trigger the AND+ match loop, creating infinite re-entry. Replacing LX with `E` (End) fixes the hang because E fires at rule completion without the late-exit semantics that cause re-entry. This is a bootstrapping gap in the compiled parser semantics, not a flaw in the grammar description itself. Additional gap: spec.spec's body_element alternatives have no comment or blank-line handler, so the generated parser cannot skip leading comments/blank lines to reach the first rule header. The grammar describes structure correctly — the gap is between what the grammar describes and what the compiled parser can execute. For practical use, leading comments must be stripped from input.
+
+- 2026-05-17: PHASE7-SELF-HOSTED-SPEC.5 — Extension-surface policy for .spec language evolution.
+
+  ## spec.spec extension-surface policy
+
+  **Rule:** `specs/spec.spec` is the required change surface for `.spec` language evolution.
+
+  ### What this means
+  - Any proposal to extend, modify, or deprecate `.spec` syntax must be authored in `spec.spec` first — add or modify rules there to capture the new syntax before touching any implementation code.
+  - The spec must pass the full regression gate with `language_agnostic_ready_ratio` at 1.0000 (all rules using only canonical ActionIR constructs).
+  - Regression coverage must prove the spec compiles and the generated parser recognizes the new construct (with known bootstrapping-gap workarounds applied as needed).
+
+  ### Exception path for bootstrap grammar changes
+  Touching the bootstrap grammar (`perl/LinkedSpec/BootstrapSpec/Core.pm` or related hardcoded parse rules) for `.spec` language changes is **exception-only**. Exceptions require explicit justification documented in the commit message and in this file, and must satisfy at least one of:
+
+  (a) **Bootstrapping gap**: The construct cannot be expressed in `spec.spec` due to a known bootstrapping gap (e.g., comment/blank-line skipping requires a parse-level skip loop the generated parser does not currently support; AND++LX triggers infinite loop).
+
+  (b) **Coordinated parity update**: The bootstrap grammar and `spec.spec` parity requires a coordinated update where the bootstrap change is the mechanical enabler for the `spec.spec` change (e.g., a new regex feature that `spec.spec` itself uses to express the new construct).
+
+  ### Rationale
+  - `spec.spec` is the self-hosted grammar that describes the `.spec` language in the `.spec` language itself. It is the authoritative reference for what syntax is supported.
+  - The bootstrap grammar (`BootstrapSpec/Core.pm`) is a hardcoded Perl implementation that parses `.spec` files for the compiler. It is the *runtime*, not the *specification*.
+  - Keeping `spec.spec` as the change surface ensures the grammar stays current with the implementation, prevents syntax drift, and makes language evolution visible and reviewable through the self-hosted grammar.
+  - The bootstrapping gap is acknowledged: `spec.spec` describes grammar structure; the compiled parser from `spec.spec` is not a production-ready parser. The bootstrap grammar remains the authoritative *parser* for `.spec` files.
+
+  ### Existing gaps (documented for future resolution)
+  1. **Comment/blank-line skipping**: `spec.spec`'s `body_element` has no top-level skip rule. The generated parser requires input to start at a rule header. Workaround: strip leading comments before feeding input to the generated parser.
+  2. **AND+ + LX infinite loop**: The `LX` (Late Exit) lifecycle marker in AND+ repetition mode triggers loop re-entry in the compiled parser. Workaround: use `E` (End) instead of `LX` for AND+ exit handling (`spec.spec` itself uses this workaround).
+  3. **Structural vs semantic parsing**: The generated parser produces structural ASTs (rule headers, regexes, edges, blocks) but does not produce compiled rule IR equivalent to the bootstrap parser's output. Descriptor comparison is not meaningful — the parsers operate at different semantic levels.
