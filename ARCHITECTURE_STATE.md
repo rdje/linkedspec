@@ -408,10 +408,41 @@ One more boundary is now tighter too:
 - now use explicit `rule_descriptors` and `dispatch_state` naming for bootstrap parser handler plumbing. The old `spec_descr` / `gdata` words should be read as history/compatibility context, not active compiler descriptor/dependency-regex terminology.
 
 ### `LinkedSpec::Validation`
-- owns frontend hardening before bootstrap or runtime failure,
-- checks malformed rule starts, modes, split markers, edges, and top-level paragraph structure,
-- now also uses one shared dependency-regex validation engine across both legacy hash inputs and owner-provided descriptor-state validation views,
-- remains strategically important because it is the earliest trustworthy barrier against bad DSL input.
+- is the front-end DSL validation owner (1,368 lines, 30+ subs),
+- provides three public entry points that gate the compile pipeline:
+
+  **`validate_spec_content($spec_content, $option)`** — envelope validation:
+  - checks the input is a SCALAR ref with non-empty content,
+  - verifies the first non-comment/non-blank line starts with a valid rule label,
+  - requires at least one top rule (`RuleName::`) as the parser entry point,
+  - rejects malformed rule label syntax (extra colons, invalid mode suffixes),
+
+  **`validate_dsl_syntax($spec_content, $option)`** — full paragraph-level validation:
+  - parses rule labels (label, colon vs double-colon, mode suffix, RHS),
+  - detects duplicate rule definitions,
+  - rejects rule definitions inside still-open `{ }` blocks,
+  - scans action edges (`->`) and blind-call edges (`=>`) with block-depth tracking,
+  - rejects mixed action/blind-call code blocks within a single rule,
+  - validates regex literals (`/pattern/`) for Perl compile-ability,
+  - validates rule-header RHS start (regex cluster then valid paragraph member content),
+  - checks split-marker syntax (`@capture_slice`, `@mark(name)`, etc.),
+  - reports unused and undefined rule references,
+  - when `strict_syntax => 1` is set, promotes reference warnings to hard errors,
+
+  **`validate_dependency_regex_references($dependency_regex_map, $spec, $option)`** — cross-reference validation:
+  - checks every dependency-regex entry references an existing rule,
+  - verifies every rule reference targets a valid regex index within the referenced rule's `re` array,
+  - validates each rule definition's `dependency_refs` entries have `label` and `idx` keys,
+
+  plus two shared back-end validation entry points:
+  - `validate_compiled_descriptor_state($descriptor_state, $option)` — validates compiled descriptor state shape and cross-references via the `CompilerState` validation-view seam,
+  - `validate_rule_definition($rule_name, $rule_def)` — validates a single rule's handler field, `re` array, and regex syntax,
+
+- error reporting routes through `_report_dsl_validation_failure` which passes structured `summary`/`detail`/`rule_label` info to the `on_failure` callback and logs via `_trace_log_output`,
+- `get_dsl_context($spec_content, $position)` provides line-number/context extraction for error messages,
+- `_parse_rule_label_line($line)` is the single rule-label parser used across Validation, Compiler, and BootstrapSpec — it recognizes all supported label forms (`:`, `::`, `:AND+`, `:OR{2,4}`, etc.) and flags invalid modes,
+- `_scan_rule_edges_in_fragment($fragment, $start_depth)` is the edge scanner that tracks block depth across `{ }`, `( )`, `[ ]`, string literals, and regex literals while extracting action/blind-call target labels — it powers both same-line validation and cross-line paragraph-member validation,
+- for debugging validation failures: look at `_trace_log_output` messages (logged at `DUMP_NONE` for errors, `DUMP_LOW` for warnings), check the `on_failure` callback for structured payloads, and use `get_dsl_context` to correlate line numbers in error messages with source content.
 
 ### `LinkedSpec::SpecEntry`
 - compiles parsed rule entries into generated runtime handler code,

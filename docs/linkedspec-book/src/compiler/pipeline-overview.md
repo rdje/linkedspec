@@ -50,9 +50,19 @@ The preparation stage also makes diagnostics better. If an invalid option or mal
 
 ## Stage 2: validate the source envelope
 
-Before bootstrap parsing, LinkedSpec validates obvious `.spec` source-shape problems.
+Before bootstrap parsing, LinkedSpec validates obvious `.spec` source-shape problems through `LinkedSpec::Validation` (1,368 lines, the largest single-purpose validation owner).
 
-This stage exists to reject malformed input early and clearly. For example, stray preamble text before the first rule paragraph or malformed top-level structure should be reported as validation failures, not allowed to drift into a confusing bootstrap parse result.
+This stage exists to reject malformed input early and clearly. The validation owner provides three layers of defense:
+
+**Envelope validation** (`validate_spec_content`): checks the input is a non-empty SCALAR ref, verifies the first content line is a valid rule label, and requires at least one top rule (`RuleName::`) as the parser entry point.
+
+**Paragraph-level validation** (`validate_dsl_syntax`): the deepest layer. It detects duplicate rule definitions, rejects rule definitions inside still-open blocks, checks that action edges (`->`) and blind-call edges (`=>`) have valid target labels and block-depth balance, rejects mixed action/blind-call modes within one rule, validates Perl regex literals for compile-ability, verifies rule-header right-hand-side content, checks split-marker syntax, and reports unused/undefined rule references. When `strict_syntax => 1` is set, unused-rule and undefined-reference warnings become hard errors, which is useful for CI regressions.
+
+**Cross-reference validation** (`validate_dependency_regex_references`): checks that every dependency-regex entry references a rule that exists, every rule reference targets a valid regex index, and every rule's `dependency_refs` entries carry the required `label`/`idx` keys.
+
+Errors from any layer carry structured payloads with `summary`, `detail`, and `rule_label` fields routed through the `on_failure` callback. Context-aware helpers like `get_dsl_context` correlate error positions with line numbers and surrounding source lines.
+
+The high-level principle: malformed input should be rejected with targeted, debuggable messages before it reaches the bootstrap parser, the compiler state models, or (worst) the generated handler runtime.
 
 ## Stage 3: bootstrap parse
 

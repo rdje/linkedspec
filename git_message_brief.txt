@@ -1,8 +1,8 @@
-Docs: document LinkedRE.pm regex composition utility
+Docs: document Validation.pm DSL validation surface
 
-PHASE6-DOCUMENTATION.2 — added LinkedRE section to ARCHITECTURE_STATE.md
-covering or/oredRE API, position-tracking, seek vs consume modes, three
-consumers, and OwnerDispatch loading. Added explanatory note to book's
-generated-handlers-and-dispatch.md.
+PHASE6-DOCUMENTATION.3 — expanded ARCHITECTURE_STATE.md Validation
+section from 4 bullets to 30-line entry covering all 5 public entry
+points, error reporting, and debugging. Expanded book pipeline-overview
+Stage 2 from 4 lines to 16-line structured description.
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

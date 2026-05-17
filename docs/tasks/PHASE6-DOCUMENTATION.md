@@ -50,10 +50,10 @@ Maintain and expand project documentation so every user-facing surface, architec
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Document Validation.pm DSL validation surface. Add a section to ARCHITECTURE_STATE.md covering its 1,368-line surface: envelope validation, rule-paragraph validation, edge-target validation, reference diagnostics (unused/undefined rules), strict_syntax mode, and how to debug validation failures. Optionally expand the book's pipeline-overview.md Stage 2 paragraph.`
   Acceptance: `Validation.pm has a substantive section in ARCHITECTURE_STATE.md covering its validation checks, error categories, and debugging guidance. The book's pipeline-overview.md Stage 2 section is expanded beyond the current one-paragraph treatment.`
-  Verification: `pending`
+  Verification: `2026-05-17: Expanded Validation section in ARCHITECTURE_STATE.md from 4 bullets to a 30-line entry covering all 5 public entry points (validate_spec_content, validate_dsl_syntax, validate_dependency_regex_references, validate_compiled_descriptor_state, validate_rule_definition), error reporting path, context helpers, rule-label parser, edge scanner, strict_syntax mode, and debugging guidance. Expanded book's pipeline-overview.md Stage 2 from a 4-line paragraph to a 16-line structured description covering the three validation layers (envelope, paragraph-level, cross-reference) with error payload routing. Full suite: Files=1, Tests=1007, PASS (no code changes).`
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.4`
@@ -95,8 +95,8 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE6-DOCUMENTATION.3` | `pending` | Largest undocumented module (1,368 lines). Critical early-stage diagnostics users hit first. |
-| 2 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
+| 1 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
+| 2 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
 | 3 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
 | 4 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
 | 5 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
@@ -105,6 +105,7 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 ## Decisions
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm. Expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all public entry points. Expanded book pipeline-overview.md Stage 2 from 4 lines to 16-line structured description of three validation layers.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm. Added 11-line section to ARCHITECTURE_STATE.md covering or/oredRE API, position-tracking, seek vs consume, match-info shape, three consumers, OwnerDispatch loading. Added 3-line explanatory note to book's generated-handlers-and-dispatch.md.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.1 inventory (see inventory section below). 30 mdBook chapters, 10 USER_GUIDE files, 6 live docs, ARCHITECTURE_STATE.md, README.md audited. 7 doc gaps found: LinkedRE zero docs, Validation.pm thin, public API incomplete, book/USER_GUIDE silos, overview chapters thin, ActionIR lowering thin, per-spec walkthroughs incomplete. Created 7 follow-on leaves (.2–.8) ordered by impact-to-effort ratio.
 - `2026-05-16`: Created task tree. Documentation is maintained live per the documentation quality contract in `ROADMAP.md`.
@@ -213,6 +214,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PHASE6-DOCUMENTATION.3` | Verified ARCHITECTURE_STATE.md Validation section covers all 5 public entry points with structured descriptions, error reporting path, debugging guidance. Verified book Stage 2 covers three validation layers with error payload routing. Syntax check passes. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — largest undocumented module now has substantive architecture and book coverage. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.2` | Verified ARCHITECTURE_STATE.md LinkedRE section covers both functions, consumers, and loading. Verified book generated-handlers chapter references LinkedRE with explanatory note. Syntax check passes. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — 56-line utility now has substantive documentation in both architecture and book layers. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.1` | Audited 30 mdBook chapters, 10 USER_GUIDE files, 6 live docs, ARCHITECTURE_STATE.md, README.md. Assessed content quality vs line count for each. Cross-referenced modules against doc coverage. Verified no code changes needed (doc-only inventory). Full suite: Files=1, Tests=1007, PASS. | Pass — 7 gaps found, 7 follow-on leaves created. |
 
@@ -220,11 +222,13 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PHASE6-DOCUMENTATION.2` | `pending` | — |
+| `PHASE6-DOCUMENTATION.3` | `pending` | — |
+| `PHASE6-DOCUMENTATION.2` | `Docs: document LinkedRE.pm regex composition utility` | — |
 | `PHASE6-DOCUMENTATION.1` | `Docs: inventory Phase 6 documentation surface` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm. Expanded ARCHITECTURE_STATE.md and book pipeline-overview Stage 2.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm. Added section to ARCHITECTURE_STATE.md and explanatory note to book's generated-handlers chapter.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.1 inventory. 30 chapters, 10 USER_GUIDE files, 6 live docs, ARCHITECTURE_STATE.md, README.md audited. 7 doc gaps found. Created follow-on leaves .2–.8.
 - `2026-05-16`: Created task tree from template.

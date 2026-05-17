@@ -1,6 +1,11 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: document Validation.pm DSL validation surface
+
+- Expanded ARCHITECTURE_STATE.md Validation section from 4 bullets to 30-line entry covering all 5 public entry points (validate_spec_content, validate_dsl_syntax, validate_dependency_regex_references, validate_compiled_descriptor_state, validate_rule_definition), error reporting path, context helpers, rule-label parser, edge scanner, strict_syntax mode, and debugging guidance.
+- Expanded book's pipeline-overview.md Stage 2 from 4-line paragraph to 16-line structured description covering the three validation layers (envelope, paragraph-level, cross-reference) with error payload routing.
+
 ## 2026-05-17 — Docs: document LinkedRE.pm regex composition utility
 
 - Added 11-line LinkedRE section to ARCHITECTURE_STATE.md "What the Main Owners Do" covering or/oredRE API, position-tracking, seek vs consume modes, match-info return shape, three consumers (Compiler, SpecEntry, BootstrapSpec::Core), OwnerDispatch loading, and re 'eval' pragma.

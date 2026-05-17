@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-17 (PHASE6-DOCUMENTATION.3): Validation.pm documented — expanded ARCHITECTURE_STATE.md and book Stage 2. PNT frontier: .4 (public API completeness — 2/4 facade bands documented).
 - 2026-05-17 (PHASE6-DOCUMENTATION.2): LinkedRE.pm documented in ARCHITECTURE_STATE.md and book. PNT frontier: .3 (Validation.pm — 1,368-line module, 1 paragraph of docs).
 - 2026-05-17 (PHASE6-DOCUMENTATION.1): Phase 6 doc inventory complete. 30 book chapters, 10 USER_GUIDE files, 6 live docs. 7 gaps found. PNT frontier: .2 (LinkedRE docs — 56-line module with zero doc coverage).
 - 2026-05-17 (PHASE5-RUNTIME-DIAGNOSTICS.2): Fixed SpecEntry.pm:740 stderr leak. `warn` → `_trace_decision`. PHASE5-RUNTIME-DIAGNOSTICS tree COMPLETE. PNT frontier: PHASE6-DOCUMENTATION.1.
