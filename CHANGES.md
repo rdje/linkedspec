@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Deprecate all 7 legacy plugin facade methods (PLUGIN-MODERNIZATION.4)
+
+- Marked all 7 legacy plugin methods in LinkedSpec.pm as DEPRECATED with retirement timeline tied to PLUGIN-MODERNIZATION.5 (PPlugin/PluginBridge retirement).
+- register_plugin, register_plugins, clear_registered_plugins → PluginRegistry retirement.
+- run_plugin, get_plugin, dispatch_plugin_autoload_name, AUTOLOAD → PluginBridge retirement.
+- None can be removed yet: FSMGen::AUTOLOAD still depends on dispatch_plugin_autoload_name, tests still verify plugin infrastructure.
+- Replaced verbose per-method comment blocks with compact DEPRECATED annotations under a single section header.
+- Full suite: 1007 PASS.
+
 ## 2026-05-17 — De-scope FSMGen from LinkedSpec::get_plugin (PLUGIN-MODERNIZATION.3)
 
 - Replaced `\&LinkedSpec::get_plugin` default with `sub {}` no-op in FSMGen::getop_plugin_list (FSMGen.pm line 68).

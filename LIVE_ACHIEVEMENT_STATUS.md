@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-05-17: Completed PLUGIN-MODERNIZATION.4 — deprecated all 7 legacy plugin facade methods in LinkedSpec.pm (register_plugin, register_plugins, clear_registered_plugins, run_plugin, get_plugin, dispatch_plugin_autoload_name, AUTOLOAD). All marked DEPRECATED with retirement timeline tied to PLUGIN-MODERNIZATION.5. None removable yet: FSMGen::AUTOLOAD still depends on dispatch_plugin_autoload_name, test regression locks still exercise plugin infrastructure. Full suite: 1007 PASS. Active PNT frontier: `PLUGIN-MODERNIZATION.5`.
 - 2026-05-17: Completed PLUGIN-MODERNIZATION.3 — de-scoped FSMGen.pm from LinkedSpec::get_plugin dependency. Replaced `\&LinkedSpec::get_plugin` default with `sub {}` no-op in getop_plugin_list (FSMGen.pm:68). Internal caller at line 3054 passes no explicit get_plugin but no .fsm files exist in repo to trigger +type=plugin syntax. Tests always pass explicit get_plugin. Updated 2 regression assertions. Full suite: 1007 PASS. Active PNT frontier: `PLUGIN-MODERNIZATION.4`.
 - 2026-05-17: Completed PLUGIN-MODERNIZATION.2 — removed 2 dead .plg files: hutils.plg (thin HUtils:: passthroughs, zero references) and quick_sdf_hack.plg (dead qsdf_hack action, zero external callers). 36 .plg files remain. Full suite: 1007 PASS. Active PNT frontier: `PLUGIN-MODERNIZATION.3`.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.5 — bridged book and USER_GUIDE cross-linking.
@@ -33,6 +34,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-05-17: Task-tree-ownership doctrine codified. All code changes must be task-tree tracked or task-tree owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md`. Non-negotiable.
 
 ## Next Slice Direction
-- Active PNT frontier: `PLUGIN-MODERNIZATION.4` (reduce public facade plugin surface — 7 legacy methods).
+- Active PNT frontier: `PLUGIN-MODERNIZATION.5` (evaluate PPlugin/PluginBridge retirement — last leaf).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).

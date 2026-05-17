@@ -203,81 +203,53 @@ sub get_parser {
 }
 
 #------------------------------------------------------------------------------
-# Function: register_plugin
-# Purpose : Register an explicit named plugin handler for AUTOLOAD dispatch.
-# Args    : ($plugin_name, $coderef)
-# Returns : registered coderef
+# Legacy Plugin Methods — DEPRECATED
+#
+# All seven methods below are deprecated transition stubs scheduled for removal
+# once PLUGIN-MODERNIZATION.5 retires PPlugin.pm / PluginBridge.pm.
+#
+# Each delegates to either PluginRegistry or PluginBridge through the standard
+# OwnerDispatch path.  No new callers should be added.
 #------------------------------------------------------------------------------
+
+# DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginRegistry retirement).
 sub register_plugin {
  my @args = @_;
  return _dispatch_owner_call('LinkedSpec::PluginRegistry', 'register_plugin', @args)
 }
 
-#------------------------------------------------------------------------------
-# Function: register_plugins
-# Purpose : Register multiple explicit named plugin handlers at once.
-# Args    : (\%plugin_name_to_coderef) | (%plugin_name_to_coderef)
-# Returns : count of registered plugin handlers
-#------------------------------------------------------------------------------
+# DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginRegistry retirement).
 sub register_plugins {
  my @args = @_;
  return _dispatch_owner_call('LinkedSpec::PluginRegistry', 'register_plugins', @args)
 }
 
-#------------------------------------------------------------------------------
-# Function: clear_registered_plugins
-# Purpose : Clear the explicit named plugin registry.
-# Args    : ()
-# Returns : number of cleared plugin handlers
-#------------------------------------------------------------------------------
+# DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginRegistry retirement).
 sub clear_registered_plugins {
  my @args = @_;
  return _dispatch_owner_call('LinkedSpec::PluginRegistry', 'clear_registered_plugins', @args)
 }
 
-#------------------------------------------------------------------------------
-# Function: run_plugin
-# Purpose : Explicit named plugin dispatch entrypoint for registered or legacy
-#           plugin handlers without relying on AUTOLOAD name extraction.
-# Args    : ($plugin_name, @plugin_args)
-# Returns : whatever plugin call returns
-#------------------------------------------------------------------------------
+# DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginBridge retirement).
 sub run_plugin {
  my ($plugin_name, @args) = @_;
  return _dispatch_owner_call('LinkedSpec::PluginBridge', '_dispatch_plugin_name', $plugin_name, \@args)
 }
 
-#------------------------------------------------------------------------------
-# Function: get_plugin
-# Purpose : Explicit named plugin handler lookup entrypoint for registered or
-#           legacy plugin handlers without relying on PPlugin directly.
-# Args    : ($plugin_name)
-# Returns : coderef | undef
-#------------------------------------------------------------------------------
+# DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginBridge retirement).
 sub get_plugin {
  my ($plugin_name) = @_;
  return _dispatch_owner_call('LinkedSpec::PluginBridge', '_lookup_plugin_name', $plugin_name)
 }
 
-#------------------------------------------------------------------------------
-# Function: dispatch_plugin_autoload_name
-# Purpose : Compatibility helper for legacy module-owned AUTOLOAD shims that
-#           still need bridge normalization but should not call PPlugin
-#           directly anymore.
-# Args    : ($autoload_name, @plugin_args)
-# Returns : whatever plugin call returns
-#------------------------------------------------------------------------------
+# DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginBridge retirement).
+# Last remaining external caller is FSMGen::AUTOLOAD (FSMGen.pm:3547).
 sub dispatch_plugin_autoload_name {
  my ($autoload_name, @args) = @_;
  return _dispatch_owner_call('LinkedSpec::PluginBridge', '_dispatch_autoload', $autoload_name, \@args)
 }
 
-#------------------------------------------------------------------------------
-# Function: AUTOLOAD
-# Purpose : Lazy plugin bridge used by generated parsers for plugin dispatch.
-# Args    : standard Perl AUTOLOAD args
-# Returns : whatever plugin call returns
-#------------------------------------------------------------------------------
+# DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginBridge retirement).
 sub AUTOLOAD {
  my @args = @_;
  return _dispatch_owner_call('LinkedSpec::PluginBridge', '_dispatch_autoload', $AUTOLOAD, \@args)

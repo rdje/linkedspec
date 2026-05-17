@@ -54,9 +54,11 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
   Commit: `pending`
 
 - ID: `PLUGIN-MODERNIZATION.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Reduce public facade plugin surface. The LinkedSpec.pm facade currently exposes 7 legacy plugin methods (run_plugin, get_plugin, dispatch_plugin_autoload_name, AUTOLOAD, register_plugin, register_plugins, clear_registered_plugins). Evaluate which can be removed, which need deprecation warnings, and which must remain as transition stubs.`
   Acceptance: `Each legacy facade method is either removed, marked with a deprecation warning, or documented as an explicit transition stub with a retirement timeline.`
+  Verification: `2026-05-17: Marked all 7 legacy plugin methods as DEPRECATED with retirement timeline tied to PLUGIN-MODERNIZATION.5. None can be removed yet: FSMGen::AUTOLOAD still depends on dispatch_plugin_autoload_name, and test regression locks still exercise the plugin infrastructure. Replaced verbose per-method comment blocks with compact DEPRECATED annotations and a single deprecation-section header. Full suite: Files=1, Tests=1007, PASS.`
+  Commit: `pending`
 
 - ID: `PLUGIN-MODERNIZATION.5`
   Status: `pending`
@@ -67,8 +69,7 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PLUGIN-MODERNIZATION.4` | `pending` | Reduce public facade — shrink or deprecate 7 legacy plugin methods. |
-| 2 | `PLUGIN-MODERNIZATION.5` | `pending` | Evaluate PPlugin/PluginBridge retirement — last step after all consumers are gone. |
+| 1 | `PLUGIN-MODERNIZATION.5` | `pending` | Evaluate PPlugin/PluginBridge retirement — last step after all consumers are gone. |
 
 ## Decisions
 
@@ -89,6 +90,7 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PLUGIN-MODERNIZATION.4` | Marked all 7 legacy plugin methods in LinkedSpec.pm as DEPRECATED with retirement timeline tied to .5. Grouped under single deprecation-section header. Full suite: Files=1, Tests=1007, PASS. | Pass — facade surface reduced from supported to deprecated. |
 | `2026-05-17` | `PLUGIN-MODERNIZATION.3` | Replaced `\&LinkedSpec::get_plugin` default with `sub {}` no-op in FSMGen.pm:68. Internal caller (line 3054) relies on default but no .fsm files exist in repo to trigger. Updated 2 regression assertions (lines 4229, 4415). Full suite: Files=1, Tests=1007, PASS. | Pass — FSMGen de-scoped from LinkedSpec::get_plugin. |
 | `2026-05-17` | `PLUGIN-MODERNIZATION.2` | Removed hutils.plug (thin HUtils:: passthroughs, zero references) and quick_sdf_hack.plg (dead qsdf_hack action, zero external callers). 36 .plg files remain. Full suite: Files=1, Tests=1007, PASS. | Pass — 2 dead .plg files removed. |
 | `2026-05-17` | `PLUGIN-MODERNIZATION.1` | Audited 38 .plg files, PPlugin.pm (288 lines), PluginBridge.pm (199 lines), PluginRegistry.pm (130 lines), LinkedSpec.pm facade (7 legacy methods), FSMGen.pm (only external get_plugin caller), 3 regression subtests. Created follow-on leaves .2–.5. Full suite: Files=1, Tests=1007, PASS (no code changes). | Pass — plugin surface fully inventoried. 4 follow-on leaves defined. |
@@ -97,12 +99,14 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
+| `PLUGIN-MODERNIZATION.4` | Deprecated all 7 legacy plugin facade methods in LinkedSpec.pm. Retirement timeline tied to PLUGIN-MODERNIZATION.5. | — |
 | `PLUGIN-MODERNIZATION.3` | `pending` | — |
 | `PLUGIN-MODERNIZATION.2` | `pending` | — |
 | `PLUGIN-MODERNIZATION.1` | `Audit: inventory remaining plugin surface for modernization` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.4 — deprecated all 7 legacy plugin facade methods in LinkedSpec.pm. Retirement timeline tied to .5.
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.3 — de-scoped FSMGen.pm from LinkedSpec::get_plugin. Default changed to no-op `sub {}`. Only external get_plugin caller now requires explicit opt-in.
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.2 — removed 2 dead .plg files (hutils.plg, quick_sdf_hack.plg). 36 remain.
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.1 inventory. 38 .plg files, 3 plugin modules, 7 facade methods. Follow-on leaves .2–.5 created.
