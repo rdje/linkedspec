@@ -1,8 +1,7 @@
-Docs: document Validation.pm DSL validation surface
+Docs: complete public API documentation in book
 
-PHASE6-DOCUMENTATION.3 — expanded ARCHITECTURE_STATE.md Validation
-section from 4 bullets to 30-line entry covering all 5 public entry
-points, error reporting, and debugging. Expanded book pipeline-overview
-Stage 2 from 4 lines to 16-line structured description.
+PHASE6-DOCUMENTATION.4 — created trace-api.md and plugin-registry.md
+chapters. Book's Public API section now documents all 4 facade bands.
+Updated SUMMARY.md and get-and-get-parser.md.
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

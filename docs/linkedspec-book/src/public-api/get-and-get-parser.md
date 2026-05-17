@@ -134,3 +134,17 @@ my $descr = LinkedSpec::Get(
 ```
 
 The descriptor shape is covered in the next chapter.
+
+## Other compile/runtime methods
+
+Two additional methods on the facade serve specialized compile/runtime needs:
+
+### `build_compiled_rule_table($spec_content, %opts)`
+
+Returns the compiled rule table without building the full descriptor or generating handlers. Useful for introspection tools that need rule-level metadata but not the runtime handler surface.
+
+### `call_spec_handler_subst($spec_content, %opts)`
+
+Calls a spec handler with substitution. Used by plugin-adjacent code that needs to invoke compiled handlers outside the normal parser invocation path.
+
+These are lower-level than `Get` and `get_parser`; most callers will not need them directly.

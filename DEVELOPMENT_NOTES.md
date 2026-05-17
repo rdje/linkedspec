@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-17 (PHASE6-DOCUMENTATION.4): Completed public API docs — created trace-api.md (7 trace methods + verbosity levels) and plugin-registry.md (3 registry + 4 legacy methods). Updated get-and-get-parser.md. All 4 facade bands now documented. PNT frontier: .5 (book/USER_GUIDE cross-linking).
 - 2026-05-17 (PHASE6-DOCUMENTATION.3): Documented Validation.pm — expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all 5 public entry points, error reporting, and debugging. Expanded book pipeline-overview Stage 2 from 4 lines to 16-line structured description of three validation layers. Largest undocumented module now documented. PNT frontier: .4 (public API completeness).
 - 2026-05-17 (PHASE6-DOCUMENTATION.2): Documented LinkedRE.pm — added 11-line section to ARCHITECTURE_STATE.md and 3-line explanatory note to book's generated-handlers-and-dispatch.md. 56-line core utility now has substantive coverage in both architecture and book layers. PNT frontier: .3 (Validation.pm docs).
 - 2026-05-17 (PHASE6-DOCUMENTATION.1): Completed Phase 6 documentation inventory. 30 book chapters all substantive, 10 USER_GUIDE files (14.6K lines), 6 live docs, ARCHITECTURE_STATE.md, README.md. 7 gaps found: LinkedRE zero docs, Validation.pm thin, public API incomplete, book/USER_GUIDE silos, overview chapters thin, ActionIR lowering thin, per-spec walkthroughs incomplete. Created leaves .2–.8. PNT frontier: .2 (LinkedRE docs).

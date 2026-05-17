@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: complete public API documentation
+
+- Created 2 new book chapters: trace-api.md (7 trace entry points, 6 verbosity levels, trace state variables, scope-chain diagram) and plugin-registry.md (3 registry methods, 4 legacy transition methods with status note).
+- Updated get-and-get-parser.md with build_compiled_rule_table and call_spec_handler_subst documentation.
+- Updated SUMMARY.md to add both new chapters. Book's Public API section now documents all 4 facade bands.
+
 ## 2026-05-17 — Docs: document Validation.pm DSL validation surface
 
 - Expanded ARCHITECTURE_STATE.md Validation section from 4 bullets to 30-line entry covering all 5 public entry points (validate_spec_content, validate_dsl_syntax, validate_dependency_regex_references, validate_compiled_descriptor_state, validate_rule_definition), error reporting path, context helpers, rule-label parser, edge scanner, strict_syntax mode, and debugging guidance.

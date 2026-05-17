@@ -21,6 +21,8 @@
 
 - [`Get(...)` and `get_parser(...)`](public-api/get-and-get-parser.md)
 - [Descriptor Introspection](public-api/descriptor-introspection.md)
+- [Trace API](public-api/trace-api.md)
+- [Plugin Registry and Legacy Transition](public-api/plugin-registry.md)
 
 # DSL and Actions
 
