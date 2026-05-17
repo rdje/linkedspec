@@ -101,7 +101,9 @@ Survey findings (2026-05-17):
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `pending` | `pending` | `pending` |
+| `BOOK-DOCUMENTATION-SYNC.1` | `ff732d3` | plugin-registry.md status note updated. |
+| `BOOK-DOCUMENTATION-SYNC.2` | `ff732d3` | owner-tree.md legacy plugin branch updated. |
+| `BOOK-DOCUMENTATION-SYNC.3` | `ff732d3` | pplugin walkthrough verified, full book/USER_GUIDE sweep clean. |
 
 ## Changelog
 
