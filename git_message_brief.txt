@@ -1,7 +1,7 @@
-Fix: route handler compile warnings through trace instead of stderr
+Docs: inventory Phase 6 documentation surface
 
-PHASE5-RUNTIME-DIAGNOSTICS.2 — replaced `warn $compile_warning` in
-SpecEntry.pm line 740 with _trace_decision, removing the last stderr
-leak in the LinkedSpec diagnostics surface.
+PHASE6-DOCUMENTATION.1 — audited 30 mdBook chapters, 10 USER_GUIDE
+files, 6 live docs, ARCHITECTURE_STATE.md, README.md. Found 7 gaps.
+Created leaves .2–.8 ordered by impact-to-effort ratio.
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

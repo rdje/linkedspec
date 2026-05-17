@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-17 (PHASE6-DOCUMENTATION.1): Phase 6 doc inventory complete. 30 book chapters, 10 USER_GUIDE files, 6 live docs. 7 gaps found. PNT frontier: .2 (LinkedRE docs — 56-line module with zero doc coverage).
 - 2026-05-17 (PHASE5-RUNTIME-DIAGNOSTICS.2): Fixed SpecEntry.pm:740 stderr leak. `warn` → `_trace_decision`. PHASE5-RUNTIME-DIAGNOSTICS tree COMPLETE. PNT frontier: PHASE6-DOCUMENTATION.1.
 - 2026-05-17 (PHASE5-RUNTIME-DIAGNOSTICS.1): Phase 5 inventory complete. 5 error families, 1 stderr leak (SpecEntry.pm:740). PNT frontier: .2 (fix leak).
 - 2026-05-16 (PHASE1A-CLOSE-OUT.1): Phase 1A audit complete. All 18 modules use uniform OwnerDispatch. No remaining work except ROADMAP status flip.

@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: inventory Phase 6 documentation surface
+
+- Audited 30 mdBook chapters, 10 USER_GUIDE files (14,611 lines), 6 live docs, ARCHITECTURE_STATE.md, and README.md.
+- All 30 book chapters are substantive (zero stubs); USER_GUIDE files provide 5x deeper ActionIR lowering detail than book DSL chapters.
+- Found 7 doc gaps: LinkedRE.pm zero docs, Validation.pm thin (1 paragraph for 1,368 lines), public API incomplete (2/4 facade bands), book/USER_GUIDE silos (1 cross-link), overview chapters thin (153 lines), ActionIR lowering thin (171 lines), per-spec walkthroughs incomplete (2/14+).
+- Created 7 follow-on leaves (.2–.8) ordered by impact-to-effort ratio.
+
 ## 2026-05-17 — Fix: route handler compile warnings through trace instead of stderr
 
 - Replaced `warn $compile_warning` in SpecEntry.pm line 740 with `_trace_decision("rule_handler_compile:$label", 1, "compiled with warnings: $compile_warning", DUMP_NONE)`.

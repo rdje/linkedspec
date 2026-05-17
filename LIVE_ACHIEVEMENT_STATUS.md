@@ -7,7 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-17: Completed PHASE5-RUNTIME-DIAGNOSTICS.2 — fixed stderr leak in SpecEntry.pm line 740. Replaced `warn $compile_warning` on successful handler compilation with `_trace_decision("rule_handler_compile:$label", 1, "compiled with warnings: $compile_warning", DUMP_NONE)`. Compile warnings now route through trace decision instead of raw stderr. PHASE5-RUNTIME-DIAGNOSTICS tree COMPLETE (2 leaves). Full suite: 1007 PASS.
+- 2026-05-17: Completed PHASE6-DOCUMENTATION.1 — documentation surface inventory. Audited 30 mdBook chapters (all substantive, zero stubs), 10 USER_GUIDE files (14,611 lines of ActionIR lowering detail), 6 live docs, ARCHITECTURE_STATE.md, README.md. Found 7 doc gaps: LinkedRE.pm zero docs, Validation.pm thin (1 paragraph for 1,368 lines), public API incomplete (2/4 bands), book/USER_GUIDE silos, overview chapters thin, ActionIR lowering thin, per-spec walkthroughs incomplete. Created 7 follow-on leaves (.2–.8). Active PNT frontier: `PHASE6-DOCUMENTATION.2`.
 - 2026-05-17: Completed PHASE3-EXECUTION-SEMANTICS.4 — verified BACKTRACK+parse_mode interaction already covered by .2 and cross-referenced in .3. PHASE3-EXECUTION-SEMANTICS tree COMPLETE (4 leaves). ROADMAP_V2.md Phase 3 → `done` (2026-05-17).
 - 2026-05-17: Completed PHASE3-EXECUTION-SEMANTICS.3 — added "Forward-moving, non-backtracking model" subsection to rule-modes-and-parse-modes.md. States parser engine is forward-moving, no search tree, no partial-match unwind, no systemic backtracking. BACKTRACK/IBACKTRACK are sole rewind. 18-line prose addition.
 - 2026-05-17: Completed PHASE3-EXECUTION-SEMANTICS.2 — added "BACKTRACK and IBACKTRACK: local cursor rewind" subsection (22 lines) to source-boundary-helper-reference.md. Covers concrete pos() rewinds, parent vs inner match distinction, local rewind vs systemic backtracking distinction, parse_mode interaction after rewind, and label-argument compatibility.
@@ -25,6 +25,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
 ## Next Slice Direction
-- Active PNT frontier: `PHASE6-DOCUMENTATION.1` (inventory documentation surface).
+- Active PNT frontier: `PHASE6-DOCUMENTATION.2` (document LinkedRE.pm — 56-line core regex utility with zero documentation).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).
