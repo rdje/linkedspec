@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-17 (DOCTRINE): Task-tree-ownership doctrine: all code changes must be task-tree tracked/owned before implementation. Non-negotiable. Recorded in book (`local-ci-and-regression.md`) and all live docs.
 - 2026-05-17 (PLUGIN-MODERNIZATION.2): Removed hutils.plg and quick_sdf_hack.plg (both zero external references). 36 .plg files remain. PNT frontier: .3 (de-scope FSMGen from get_plugin).
 - 2026-05-17 (PHASE6-DOCUMENTATION.6): Overview chapters expanded (153→275 lines). PNT frontier: .7 (ActionIR lowering pipeline docs — 171 lines for 2,000+ lines of code).
 - 2026-05-17 (PHASE6-DOCUMENTATION.5): Book/USER_GUIDE cross-linking done — 6 book chapters now reference USER_GUIDE files. USER_GUIDE.md links to book. PNT frontier: .6 (overview chapter expansion — 153 lines across 4 chapters).

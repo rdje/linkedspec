@@ -92,6 +92,25 @@ It protects behavior across:
 - shipped `.spec` behavior,
 - corpus parsing over legacy and real-project inputs.
 
+## Task-tree ownership requirement
+
+All code changes must be task-tree tracked or task-tree owned before they are made.
+
+This is not a guideline. It is a hard, non-negotiable requirement:
+
+- Every code change belongs to a specific task-tree leaf with a stable `TREE.N.N` identifier.
+- A leaf must exist in the active task tree before implementation begins.
+- Commit messages must carry the leaf identifier for traceability.
+- If a change does not fit an existing leaf, split the leaf or create a new one before writing code.
+
+The task-tree workflow (`docs/TASK_TREE.md`) and per-phase tree files (`docs/tasks/<TREE>.md`) are the authoritative record of what leaf owns what work.
+
+Task-tree ownership improves code quality by ensuring every change traces back to a documented intent with acceptance criteria. It enables interruption-safe recovery from task-tree state, prevents orphan changes that drift from the roadmap, and gives `git log --grep` on leaf IDs a complete ordered history of every leaf.
+
+This requirement applies to all implementation, refactoring, bug-fix, and migration work. Documentation-only changes that do not touch code may reference a documentation-phase leaf but are not required to create a new leaf for small fixes.
+
+When in doubt, create the leaf first.
+
 ## Important test surface
 
 The main regression spine is:

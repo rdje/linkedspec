@@ -28,6 +28,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Plugin/resource-resolution modernization: Lock shipped `.plg` files off direct `LinkedSpec::get_plugin(...)` lookups.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
+## Doctrine
+- 2026-05-17: Task-tree-ownership doctrine codified. All code changes must be task-tree tracked or task-tree owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md`. Non-negotiable.
+
 ## Next Slice Direction
 - Active PNT frontier: `PLUGIN-MODERNIZATION.3` (de-scope FSMGen from get_plugin).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.

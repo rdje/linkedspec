@@ -1,6 +1,11 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: codify task-tree-ownership doctrine in book and live docs
+
+- Added "Task-tree ownership requirement" section to book chapter `development/local-ci-and-regression.md`. All code changes must be task-tree tracked or task-tree owned before implementation. Non-negotiable quality gate.
+- Updated live docs (DEVELOPMENT_NOTES.md, MEMORY.md, LIVE_ACHIEVEMENT_STATUS.md) with new doctrine.
+
 ## 2026-05-17 — Remove dead .plg files (hutils.plg, quick_sdf_hack.plg)
 
 - Removed plugin/hutils.plg (21 lines): all thin passthrough wrappers to HUtils:: methods. Zero external references — all callers use HUtils:: directly.
