@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `PHASE7-SELF-HOSTED-SPEC`
-- Status: `proposed`
+- Status: `active`
 - Roadmap lane: `Phase 7`
 - Created: `2026-05-16`
-- Last updated: `2026-05-16`
+- Last updated: `2026-05-17`
 - Owner: repo-local workflow
 
 ## Goal
@@ -28,7 +28,7 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
 ## Task Tree
 
 - ID: `PHASE7-SELF-HOSTED-SPEC`
-  Status: `proposed`
+  Status: `active`
   Goal: `Define and maintain a self-hosted .spec grammar.`
   Children: `PHASE7-SELF-HOSTED-SPEC.1`
 
@@ -55,7 +55,7 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
 
 ## Blockers
 
-- This tree is proposed, not active. It becomes PNT-eligible when Phase 7 is activated on the roadmap.
+- None.
 
 ## Verification Log
 

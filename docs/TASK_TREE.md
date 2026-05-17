@@ -21,7 +21,9 @@ evidence for one top-level task.
 
 ## Active Task Trees
 
-No active task trees. All trees are complete. PNT will stop until a new tree is activated or proposed.
+| Tree | Status | Roadmap lane | Current frontier | File |
+| --- | --- | --- | --- | --- |
+| `PHASE7-SELF-HOSTED-SPEC` | `active` | `Phase 7` | `PHASE7-SELF-HOSTED-SPEC.1` | [docs/tasks/PHASE7-SELF-HOSTED-SPEC.md](docs/tasks/PHASE7-SELF-HOSTED-SPEC.md) |
 
 ## Proposed Task Trees
 
@@ -30,7 +32,6 @@ PNT-eligible until explicitly activated or until the roadmap selects that lane.
 
 | Tree | Status | Roadmap lane | Proposed first leaf | File |
 | --- | --- | --- | --- | --- |
-| `PHASE7-SELF-HOSTED-SPEC` | `proposed` | `Phase 7` | `PHASE7-SELF-HOSTED-SPEC.1` | [docs/tasks/PHASE7-SELF-HOSTED-SPEC.md](docs/tasks/PHASE7-SELF-HOSTED-SPEC.md) |
 | `PLUGIN-ACTION-MIGRATION` | `proposed` | `Plugin modernization follow-on` | `PLUGIN-ACTION-MIGRATION.1` | (not yet created — migrate ~1,200+ .plg actions to package owners) |
 
 ## Completed Task Trees
