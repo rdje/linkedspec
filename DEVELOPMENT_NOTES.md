@@ -6180,3 +6180,70 @@ Before each commit:
   | `@IMATCH_LIST` / `$IMATCH` | Internal | N/A (compatibility rewriter) | Internal only — no action |
   
   **Conclusion**: No convention requires a new explicit helper. All user-facing conventions are either explicitly declared (`retv`, `capt`) or are fundamental framework design decisions (rule-level accumulator arrays). The audit confirms the ROADMAP_V2.md observation that "convention-based accumulator helpers that still hide the current-rule array target" are a design feature, not a gap — the rule label IS the explicit name for the accumulator array, and the `array(rule_label)` / `a(rule_label)` helper is the explicit accessor.
+
+- 2026-05-17 (METHOD-LIKE-DSL-MIGRATION.4): Missing user-facing DSL features inventory complete. No concrete gaps found in the shipped .spec corpus. All 19 shipped specs use canonical DSL helpers exclusively (zero compatibility-surface rules). The helper surface spans 10 families with 100+ helpers, all regression-locked on both fluent-chain and structured-block surfaces. Remaining items are deferred/watch items, not gaps. Findings below.
+
+  ## Missing user-facing DSL features inventory
+  
+  ### Methodology
+  
+  Compared the current DSL helper surface against the design direction (functional-expression style with unlimited composition, fluent-chain + structured-block equivalence) across three axes:
+  1. **Shipped spec coverage**: Do all 19 shipped .spec files express their actions entirely through canonical DSL helpers?
+  2. **Helper family completeness**: Does each helper family (declare, scalar, numeric, array, hash, control flow, return/flow, state, predicate, I/O) have the helpers needed for functional-expression composition?
+  3. **ROADMAP_V2 gap analysis**: Are there any explicitly identified gaps in the near-term execution priorities that remain unresolved?
+  
+  ### Axis 1: Shipped spec coverage
+  
+  All 19 shipped .spec files report zero compatibility-surface rules. No shipped spec uses raw Perl, legacy return helpers, or compatibility aliases for its action code. Every action is expressed through canonical DSL helpers.
+  
+  Verified via `language_agnostic_ready_ratio == 1.0000` regression lock in `t/phase0_regression.t` covering all target specs.
+  
+  ### Axis 2: Helper family completeness
+  
+  Inventory of all 10 helper families with regression-locked coverage:
+  
+  | Family | Helpers | Status |
+  | --- | --- | --- |
+  | Declare/assign | `declare(scalar\|array\|hash, ...)`, `declare(scalar, name=value)`, `assign(...)`, `push_value(...)` | Complete |
+  | Scalar ops | `trim`, `lowercase`, `uppercase`, `length`, `concat`, `substr`, `coalesce`, `coalesce_nonempty`, `replace_substr`, `rm_prefix`, `rm_suffix`, `matches`, `starts_with`, `ends_with`, `contains_substr` | Complete |
+  | Numeric ops | `num_add`, `num_sub`, `num_mul`, `num_div`, `num_mod`, `num_abs`, `num_floor`, `num_ceil`, `num_round`, `num_clamp`, `num_min`, `num_max`, `num_sum`, `num_avg`, `num_median`, `num_range` | Complete |
+  | Array ops | `count`, `first`, `last`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `contains`, `index_of`, `concat_arrays`, `split`, `split_each`, `trim_each`, `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, `filter_match`, `join_values`, `flat_array`, `flat_hash`, `array_copy`, `entry_groups`, `match_groups`, `split_tagged_records` | Complete |
+  | Hash ops | `count_keys`, `has_key`, `merge_hash`, `hash_copy`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values` | Complete |
+  | Control flow | `if(cond); ...; else(); ...; endif()`, `switch(expr) { case(val) ... default ... }`, `exit_now(n)`, `next()` | Complete |
+  | Return/flow | `return(...)`, `return_undef()`, `call(...)`, `is_defined`, `is_undefined`, `is_empty`, `is_nonempty` | Complete |
+  | State access | `scalar(name)`, `scalar(container, key)`, `scalaref(name, {key})`, `array(name)` | Complete |
+  | Predicates | `and(...)`, `or(...)`, `not(...)` | Complete |
+  | I/O | `print(...)`, `print_each(...)`, `say(...)` | Complete |
+  
+  All helpers are regression-locked on both fluent-chain (`.helper(args)`) and structured-block (`helper(args)`) surfaces, on both action-edge and lifecycle contexts.
+  
+  ### Axis 3: ROADMAP_V2 gap analysis
+  
+  Near-term execution priority #2 (lines 240-241):
+  > "priority shift is now active: continue missing user-facing DSL features first, and return to deeper marker if(...)/switch(...) cross-nesting parity expansion only when a concrete feature or bug requires it"
+  
+  The "missing user-facing DSL features" language is a standing direction for growth, not a list of known gaps. After auditing all 19 shipped specs and 10 helper families, no concrete gaps remain. The language serves as a policy guardrail: new DSL features should be added as functional-expression-style helpers, not ad hoc Perl.
+  
+  Remaining items from near-term priorities:
+  
+  | Item | Status | Resolution |
+  | --- | --- | --- |
+  | Narrower lifecycle-specific semantics | Watch item | Extend only when a real gap or exception is found. No gaps currently identified — all 7 lifecycle markers (I, LS, LE, E, EX, IT, LX) have regression coverage. |
+  | Missing user-facing DSL features | Direction, not gaps | No concrete gaps in shipped corpus. New features follow functional-expression style. |
+  | Deeper cross-nesting parity | Deferred | In leaf .5 — reactivate only when a concrete feature or bug requires it. |
+  
+  ### Follow-on audit items from ROADMAP_V2.md line 180
+  
+  All three "follow-up audit targets" have been addressed by earlier leaves:
+  
+  | Target | Leaf | Status |
+  | --- | --- | --- |
+  | Legacy return-helper overlap (`return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im`) | .2 | Audited — zero migrations needed |
+  | Compatibility-alias retirement policy (`array_values`, `flatten`, `tail`, `drop_last`) | .1 | Policy defined with 6-step retirement process |
+  | Convention-based accumulator helpers | .3 | Audited — all are design features, not gaps |
+  
+  ### Summary
+  
+  **No concrete DSL feature gaps exist in the shipped .spec corpus.** The method-like DSL surface is functionally complete for all 19 shipped specs and 30+ book chapters. The `in progress` status of the Method-like DSL migration track reflects ongoing compatibility alias support and the deferred cross-nesting parity item, not missing functionality.
+  
+  The track can proceed to close-out (.5) after documenting the deferred cross-nesting parity item. If future `.spec` authoring reveals a gap (e.g., a needed helper that requires raw Perl), a new leaf should be created under this tree.

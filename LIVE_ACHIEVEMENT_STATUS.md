@@ -40,7 +40,8 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-05-17: Task-tree-ownership doctrine codified. All code changes must be task-tree tracked or task-tree owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md`. Non-negotiable.
 
 ## Next Slice Direction
-- METHOD-LIKE-DSL-MIGRATION tree active (5 leaves). Frontier: `METHOD-LIKE-DSL-MIGRATION.4` — missing user-facing DSL features inventory.
+- METHOD-LIKE-DSL-MIGRATION tree active (5 leaves). Frontier: `METHOD-LIKE-DSL-MIGRATION.5` — formalize cross-nesting parity deferral (close-out leaf).
+- 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.4 — missing DSL features inventory. No concrete gaps in shipped corpus.
 - 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.3 — convention-based accumulator audit. 4 conventions audited, zero helpers needed.
 - 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.2 — legacy return-helper cleanup. 4 categories audited, zero migrations needed.
 - 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.1 — compatibility alias retirement policy audit. 11 aliases inventoried, policy in DEVELOPMENT_NOTES.md.

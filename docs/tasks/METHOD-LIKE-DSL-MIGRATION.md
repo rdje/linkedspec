@@ -7,7 +7,7 @@
 - Roadmap lane: `Method-like DSL migration track`
 - Created: `2026-05-17`
 - Last updated: `2026-05-17`
-- Active frontier: `METHOD-LIKE-DSL-MIGRATION.4`
+- Active frontier: `METHOD-LIKE-DSL-MIGRATION.5`
 - Owner: repo-local workflow
 
 ## Goal
@@ -60,10 +60,10 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
   Commit: `pending`
 
 - ID: `METHOD-LIKE-DSL-MIGRATION.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Missing user-facing DSL features inventory — compare current helper surface against the design direction (functional-expression style, unlimited composition) and identify concrete gaps.`
   Acceptance: `Inventory lists any DSL features still expressed as raw Perl in shipped specs, or any helper families missing for functional-expression coverage. If gaps are found, follow-on leaves are created. If no gaps remain, track can proceed to close-out.`
-  Verification: `pending`
+  Verification: `2026-05-17: Inventory complete across 3 axes. Axis 1: All 19 shipped specs report zero compatibility-surface rules. Axis 2: All 10 helper families complete with 100+ helpers, all regression-locked on both fluent-chain and structured-block surfaces. Axis 3: ROADMAP_V2 near-term priorities — no concrete gaps identified. All 3 follow-up audit targets from ROADMAP_V2 line 180 addressed by leaves .1/.2/.3. No new DSL features needed for shipped corpus. Track can proceed to close-out (.5). Full inventory documented in DEVELOPMENT_NOTES.md with per-family completeness table and gap-analysis table.`
   Commit: `pending`
 
 - ID: `METHOD-LIKE-DSL-MIGRATION.5`
@@ -80,7 +80,7 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
 | 1 | `METHOD-LIKE-DSL-MIGRATION.1` | `done` | Compatibility alias retirement policy audit — 11 aliases inventoried, policy in DEVELOPMENT_NOTES.md. |
 | 2 | `METHOD-LIKE-DSL-MIGRATION.2` | `done` | Legacy return-helper cleanup — 4 categories audited, zero migrations needed, documented in DEVELOPMENT_NOTES.md. |
 | 3 | `METHOD-LIKE-DSL-MIGRATION.3` | `done` | Convention-based accumulator audit — 4 conventions audited, zero helpers needed, findings in DEVELOPMENT_NOTES.md. |
-| 4 | `METHOD-LIKE-DSL-MIGRATION.4` | `pending` | Missing DSL features inventory — determines whether additional leaves are needed. |
+| 4 | `METHOD-LIKE-DSL-MIGRATION.4` | `done` | Missing DSL features inventory — no concrete gaps, 3 axes audited, all follow-up targets addressed. |
 | 5 | `METHOD-LIKE-DSL-MIGRATION.5` | `pending` | Formalize cross-nesting parity deferral — close-out prerequisite. |
 
 ## Background
@@ -133,6 +133,7 @@ These canonical forms are preferred; aliases remain supported for compatibility:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.4` | Inventoried DSL features across 3 axes: shipped spec coverage (19/19 zero compat), helper family completeness (10 families, 100+ helpers), ROADMAP_V2 gap analysis (no concrete gaps). All 3 follow-up targets from ROADMAP_V2 line 180 addressed. Track can close out. Inventory in DEVELOPMENT_NOTES.md. | Pass — no gaps, frontier → .5. |
 | `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.3` | Audited 4 conventions: retv (explicitly declared — naming only), capt (explicitly declared — naming only), rule-level accumulator array (implicit framework convention — fundamental design, keep), @IMATCH_LIST (internal — not user-facing). Zero new helpers needed. Audit in DEVELOPMENT_NOTES.md with per-convention patterns and summary table. | Pass — audit complete, frontier → .4. |
 | `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.2` | Audited 4 categories of legacy return-helper references. ~15 incidental in lazy-load tests (preserved), ~11 intentional compat infra tests (preserved), ~6 book refs (already documented), ~15 USER_GUIDE refs (authoritative). Zero migrations needed. Audit in DEVELOPMENT_NOTES.md. | Pass — cleanup complete, frontier → .3. |
 | `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.1` | Audited 11 aliases across 7 implementation files. 19/19 shipped specs use zero aliases. Policy in DEVELOPMENT_NOTES.md with 6-step retirement process, alias inventory (11 entries), implementation layer table, two retirement tiers (short-term: 4 aliases, medium-term: 4 legacy return helpers). declare(a/s/h) retained as ergonomic shorthand. | Pass — policy complete, frontier → .2. |
@@ -141,6 +142,7 @@ These canonical forms are preferred; aliases remain supported for compatibility:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
+| `METHOD-LIKE-DSL-MIGRATION.4` | `pending` | — |
 | `METHOD-LIKE-DSL-MIGRATION.3` | `pending` | — |
 | `METHOD-LIKE-DSL-MIGRATION.2` | `pending` | — |
 | `METHOD-LIKE-DSL-MIGRATION.1` | `pending` | — |
