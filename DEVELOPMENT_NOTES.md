@@ -5845,3 +5845,147 @@ Before each commit:
   1. **Comment/blank-line skipping**: `spec.spec`'s `body_element` has no top-level skip rule. The generated parser requires input to start at a rule header. Workaround: strip leading comments before feeding input to the generated parser.
   2. **AND+ + LX infinite loop**: The `LX` (Late Exit) lifecycle marker in AND+ repetition mode triggers loop re-entry in the compiled parser. Workaround: use `E` (End) instead of `LX` for AND+ exit handling (`spec.spec` itself uses this workaround).
   3. **Structural vs semantic parsing**: The generated parser produces structural ASTs (rule headers, regexes, edges, blocks) but does not produce compiled rule IR equivalent to the bootstrap parser's output. Descriptor comparison is not meaningful — the parsers operate at different semantic levels.
+
+- 2026-05-17 (METHOD-LIKE-DSL-MIGRATION.1): Compatibility alias retirement policy audited and documented. 8 alias families inventoried across 4 implementation layers. All shipped .spec files (19/19) use canonical forms exclusively — zero alias usage. Retirement criteria defined: (1) zero .spec usage (achieved), (2) canonical docs, (3) regression coverage migrated or marked intentional, (4) implementation alias handling removed. Policy below.
+
+  ## Compatibility alias retirement policy
+  
+  ### Guiding principle
+  
+  Canonical helpers are the preferred surface for all new `.spec` authoring, all documentation examples, and all regression coverage. Compatibility aliases are supported for backward compatibility during migration windows but carry explicit retirement criteria. Once retired, an alias is removed from the implementation and ceases to be recognized.
+  
+  ### Retirement process
+  
+  To retire an alias:
+  1. Verify zero usage across all shipped `.spec` files.
+  2. Verify zero usage in canonical documentation (book, USER_GUIDE, examples).
+  3. Migrate or intentionally preserve regression coverage — tests that exercise the alias for compatibility regression purposes must be marked with a comment noting the retired alias and kept only as long as the implementation supports it. When the implementation support is removed, these tests must be removed too.
+  4. Remove the alias from each implementation layer:
+     - Bootstrap grammar recognition (`BootstrapSpec/Core.pm` helper-start regex)
+     - Method lowering (`MethodLowering.pm` method dispatch, rewrite regexes)
+     - Flow expression recognition (`FlowExpr.pm` aggregate-helper regex)
+     - Declare-method recognition (`DeclareMethod.pm` array-source regex)
+     - Scanner contracts (if applicable — `LegacyRules.pm`, `Contracts.pm`)
+     - Canonical event mapping (if applicable — `CanonicalEvents/Core.pm`)
+  5. Remove or update regression tests that exercised the alias.
+  6. Run the full regression gate and confirm zero test failures.
+  
+  ### Alias inventory
+  
+  #### 1. `tail(...)` → `drop_front(...)`
+  
+  - **Canonical form**: `drop_front(array_expr)` / `drop_front(array_expr, n)`
+  - **Alias**: `tail(array_expr)` / `tail(array_expr, n)`
+  - **Implementation**: MethodLowering.pm:962 (`tail` || `drop_front` dispatch), MethodLowering.pm:271 (helper-start regex), FlowExpr.pm:81, FlowExpr.pm:270, BootstrapSpec/Core.pm:82, DeclareMethod.pm:136
+  - **Shipped .spec usage**: None as helper call. `specs/Lispish.spec` uses `tail` as a working array variable name (unrelated).
+  - **Doc usage**: Book references canonical form. Alias mentioned as compatibility form in value-container-flow-helper-reference.md.
+  - **Retirement readiness**: Can retire when docs exclusively use `drop_front(...)` and regression coverage is migrated.
+  
+  #### 2. `drop_last(...)` → `drop_back(...)`
+  
+  - **Canonical form**: `drop_back(array_expr)` / `drop_back(array_expr, n)`
+  - **Alias**: `drop_last(array_expr)` / `drop_last(array_expr, n)`
+  - **Implementation**: MethodLowering.pm:1086 (`drop_last` || `drop_back` dispatch), MethodLowering.pm:271, FlowExpr.pm:81, FlowExpr.pm:270, BootstrapSpec/Core.pm:82
+  - **Shipped .spec usage**: None.
+  - **Doc usage**: Book references canonical form.  
+  - **Retirement readiness**: Can retire when docs exclusively use `drop_back(...)`.
+  
+  #### 3. `flatten(...)` → `flat(...)`
+  
+  - **Canonical form**: `flat(expr)` — generic list-context splice
+  - **Alias**: `flatten(expr)` 
+  - **Implementation**: MethodLowering.pm:199 (`flat` || `flatten` dispatch), MethodLowering.pm:1627, MethodLowering.pm:1635, BootstrapSpec/Core.pm:82, Contracts.pm:283
+  - **Shipped .spec usage**: None.
+  - **Test usage**: `t/phase0_regression.t:41893,41908` — compatibility alias regression locks (intentionally preserved).
+  - **Doc usage**: Book value-container-flow-helper-reference.md:178 — "compatibility alias for `flat(expr)`; prefer `flat(...)` in new examples."
+  - **Retirement readiness**: Requires migration of regression locks to canonical form, then removal of alias from registries.
+  
+  #### 4. `array_values(...)` → `array_copy(...)`
+  
+  - **Canonical form**: `array_copy(array_expr)` — pure array snapshot
+  - **Alias**: `array_values(array_expr)`
+  - **Implementation**: MethodLowering.pm:271 (helper-start regex covering both), MethodLowering.pm:1627, MethodLowering.pm:1635, FlowExpr.pm:81, FlowExpr.pm:270, BootstrapSpec/Core.pm:82, DeclareMethod.pm:136
+  - **Shipped .spec usage**: None. All shipped specs use `array_copy(...)` exclusively.
+  - **Doc usage**: Book references canonical form only.
+  - **Retirement readiness**: Requires alias removal from all helper-start regexes and rewrite patterns.
+  
+  #### 5. `declare(a/s/h, ...)` → `declare(array/scalar/hash, ...)`
+  
+  - **Canonical form**: `declare(array, name)`, `declare(scalar, name)`, `declare(hash, name)`
+  - **Alias**: `declare(a, name)`, `declare(s, name)`, `declare(h, name)` — single-character type shorthand
+  - **Implementation**: MethodLowering.pm:72-78 (`_declare_alias_to_type`), DeclareMethod.pm:215-216 (method dispatch regex)
+  - **Shipped .spec usage**: None. All shipped specs use canonical `declare(array/scalar/hash, ...)`.
+  - **Classification**: This is a deliberate ergonomic shorthand, not a legacy rename. All other aliases are legacy names being phased out; `a/s/h` is a compact alternative spelling of the same concept. 
+  - **Retirement readiness**: Deferred — retained indefinitely as DSL ergonomic sugar. The shorthand is not a migration target; it's an intentional brevity feature.
+  
+  #### 6. `return_a(...)` → `return(...)`
+  
+  - **Canonical form**: `return(array("?label:", ...))` or `return(hash("key", ...))`
+  - **Alias**: `return_a(label, optional_arg)` — legacy tagged-array return
+  - **Implementation**: LegacyRules.pm:27,195-223 (scanner contract), Contracts.pm:268-278 (rewrite rule, `unresolved_pattern`), CanonicalEvents/Core.pm:35 (event mapping)
+  - **Shipped .spec usage**: None. All migrated to canonical `return(...)`.
+  - **Test usage**: `t/phase0_regression.t:173,231` — compatibility regression coverage.
+  - **Retirement readiness**: Deep legacy with dedicated scanner contract, rewrite rule, and canonical event. Full retirement requires: remove LegacyRules entry, remove Contracts entry, remove CanonicalEvents mapping, remove regression tests. Should be retired as a batch with the other legacy return helpers.
+  
+  #### 7. `return_ma(...)` → `return(...)`
+  
+  - **Canonical form**: `return(array("?label:", flat_array(...), ...))`
+  - **Alias**: `return_ma(label)` — legacy tagged-array return with IMATCH list splice
+  - **Implementation**: LegacyRules.pm:30,226-232 (scanner), Contracts.pm:303-312 (rewrite), CanonicalEvents/Core.pm:38 (event mapping)
+  - **Shipped .spec usage**: None.
+  - **Retirement readiness**: Same as `return_a` — deep legacy, retire as batch.
+  
+  #### 8. `return_m(...)` → `return(...)`
+  
+  - **Canonical form**: `return(array("?label:", ...))` 
+  - **Alias**: `return_m(label)` — legacy tagged-array return with IMATCH list
+  - **Implementation**: LegacyRules.pm:31,235-242 (scanner), Contracts.pm:315-324 (rewrite), CanonicalEvents/Core.pm:39 (event mapping)
+  - **Shipped .spec usage**: None.
+  - **Retirement readiness**: Same as `return_a` — deep legacy, retire as batch.
+  
+  #### 9. `return_imatch(...)` / `return_im(...)` → `return(...)`
+  
+  - **Canonical form**: `return(flat_array(...))` or `return(array("?tag:", ...))`
+  - **Alias**: `return_imatch(tag)` / `return_im(tag)` — legacy IMATCH-anchored return
+  - **Implementation**: Contracts.pm:338-346 (rewrite rule, `unresolved_pattern`), CanonicalEvents/Core.pm:161 (event mapping as `RETURN`), MethodLowering.pm:1673 (lowering helper comment)
+  - **Shipped .spec usage**: None.
+  - **Retirement readiness**: Same as `return_a` — deep legacy, retire as batch. Note: `return_imatch` does not have its own LegacyRules scanner entry (unlike `return_a`/`return_ma`/`return_m`); it is handled through the Contracts rewrite pipeline only.
+  
+  #### 10. `exit` → `exit_now(...)`
+  
+  - **Canonical form**: `exit_now(status)` — canonical fatal-exit helper
+  - **Alias**: bare `exit` / `exit 1` — raw Perl exit
+  - **Implementation**: Bare `exit` is raw Perl recognized as compatibility syntax. `exit_now(...)` lowers to `exit` via MethodLowering.pm but contributes canonical EXIT metadata.
+  - **Shipped .spec usage**: None. All fatal exits use `exit_now(...)`.
+  - **Retirement readiness**: Bare `exit` in .spec code is already flagged as compatibility surface. No explicit alias mapping exists — it's raw Perl, not an alias. The canonical `exit_now(...)` is the only supported form in documentation.
+  
+  #### 11. `next` → `next()`
+  
+  - **Canonical form**: `next()` — canonical flow-skip helper
+  - **Alias**: bare `next` — raw Perl next
+  - **Implementation**: Same pattern as exit/exit_now. Bare `next` is raw Perl flagged as compatibility surface. `next()` lowers to `next` but contributes canonical NEXT metadata.
+  - **Shipped .spec usage**: None. All flow skips use `next()`.
+  - **Retirement readiness**: Same as exit — bare `next` is raw Perl, not a named alias.
+  
+  ### Implementation layers affected
+  
+  Each alias (except exit/next which are raw Perl) appears in up to 6 implementation layers:
+  
+  | Layer | What it does | Aliases present |
+  | --- | --- | --- |
+  | `BootstrapSpec/Core.pm` (helper-start regex) | Recognizes helper names during bootstrap parse | tail, drop_last, flatten, array_values, return_a/m/ma/imatch |
+  | `MethodLowering.pm` (method dispatch) | Dispatches method calls to lowering handlers | tail, drop_last, flatten, array_values |
+  | `MethodLowering.pm` (rewrite regexes) | Rewrites helper calls in compatibility code paths | tail, drop_last, flatten, array_values, a/s/h |
+  | `FlowExpr.pm` (aggregate helper regex) | Recognizes aggregate-returning helpers in flow | tail, drop_last, flatten, array_values |
+  | `DeclareMethod.pm` (array-source regex) | Recognizes array-source helpers for declare lowering | tail, array_values |
+  | `LegacyRules.pm` (scanner contracts) | Scans for legacy helper patterns | return_a, return_ma, return_m |
+  | `Contracts.pm` (rewrite rules) | Rewrites legacy helper patterns during compilation | return_a, return_ma, return_m, return_imatch |
+  | `CanonicalEvents/Core.pm` (event mapping) | Maps legacy helpers to canonical event types | return_a, return_ma, return_m, return_imatch |
+  
+  ### Current state summary
+  
+  - **19/19 shipped .spec files**: Zero compatibility alias usage. All use canonical forms exclusively.
+  - **Aliases in implementation**: All aliases remain fully supported in the implementation. No alias has been retired.
+  - **Short-term retirement candidates** (implementation-only, zero spec impact): `tail`, `drop_last`, `flatten`, `array_values` — these are simple name aliases in helper-start regexes and method dispatch. Retiring them only requires regex updates.
+  - **Medium-term retirement candidates** (deeper legacy, separate scanner/contract infrastructure): `return_a`, `return_ma`, `return_m`, `return_imatch`/`return_im` — these have dedicated scanner contracts, rewrite rules, and canonical event mappings.
+  - **Not retiring**: `declare(a/s/h)` — intentional ergonomic shorthand, not legacy debt.
