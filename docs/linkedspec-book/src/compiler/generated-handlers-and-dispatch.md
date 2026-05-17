@@ -58,6 +58,8 @@ In `consume` parse mode, the generated dispatch is contiguous:
 LinkedRE::or($STRING, $$descr{dependency_regex_map}{Top}, 'consume', $info)
 ```
 
+`LinkedRE::or` is the core regex composition utility (`perl/LinkedRE.pm`, 56 lines). It executes a compiled alternation of dependency regexes against the input string in either seek mode (matches anywhere) or consume mode (contiguous from the current cursor). The returned match-info hash carries an `index` field identifying which alternative matched, which the handler uses to select the correct child-rule dispatch path.
+
 This is why dependency-regex state is part of the compiled descriptor model rather than a random sidecar.
 
 ## Handler identity

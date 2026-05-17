@@ -1,7 +1,8 @@
-Docs: inventory Phase 6 documentation surface
+Docs: document LinkedRE.pm regex composition utility
 
-PHASE6-DOCUMENTATION.1 — audited 30 mdBook chapters, 10 USER_GUIDE
-files, 6 live docs, ARCHITECTURE_STATE.md, README.md. Found 7 gaps.
-Created leaves .2–.8 ordered by impact-to-effort ratio.
+PHASE6-DOCUMENTATION.2 — added LinkedRE section to ARCHITECTURE_STATE.md
+covering or/oredRE API, position-tracking, seek vs consume modes, three
+consumers, and OwnerDispatch loading. Added explanatory note to book's
+generated-handlers-and-dispatch.md.
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

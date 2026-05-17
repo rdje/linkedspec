@@ -43,10 +43,10 @@ Maintain and expand project documentation so every user-facing surface, architec
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Document LinkedRE.pm: add a section to ARCHITECTURE_STATE.md covering its API (or, oredRE), its consumers (Compiler, SpecEntry, BootstrapSpec::Core), and its role as the regex composition utility. Optionally add a brief mention in the book where regex dispatch is discussed.`
   Acceptance: `LinkedRE.pm has a dedicated section in ARCHITECTURE_STATE.md. Its API contract, purpose, and consumers are clearly stated.`
-  Verification: `pending`
+  Verification: `2026-05-17: Added 11-line LinkedRE section to ARCHITECTURE_STATE.md under "What the Main Owners Do." Covers both functions (or, oredRE), position-tracking mechanism, seek vs consume modes, match-info return shape, three consumers and their local wrapper names, OwnerDispatch loading, and re 'eval' pragma. Added 3-line explanatory note to book's generated-handlers-and-dispatch.md linking code examples to the LinkedRE utility. Full suite: Files=1, Tests=1007, PASS (no code changes).`
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.3`
@@ -95,8 +95,8 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE6-DOCUMENTATION.2` | `pending` | Smallest module (56 lines), zero docs, quick win to establish inventory-to-backfill rhythm. |
-| 2 | `PHASE6-DOCUMENTATION.3` | `pending` | Largest undocumented module (1,368 lines). Critical early-stage diagnostics users hit first. |
+| 1 | `PHASE6-DOCUMENTATION.3` | `pending` | Largest undocumented module (1,368 lines). Critical early-stage diagnostics users hit first. |
+| 2 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
 | 3 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
 | 4 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
 | 5 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
@@ -105,6 +105,7 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 ## Decisions
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm. Added 11-line section to ARCHITECTURE_STATE.md covering or/oredRE API, position-tracking, seek vs consume, match-info shape, three consumers, OwnerDispatch loading. Added 3-line explanatory note to book's generated-handlers-and-dispatch.md.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.1 inventory (see inventory section below). 30 mdBook chapters, 10 USER_GUIDE files, 6 live docs, ARCHITECTURE_STATE.md, README.md audited. 7 doc gaps found: LinkedRE zero docs, Validation.pm thin, public API incomplete, book/USER_GUIDE silos, overview chapters thin, ActionIR lowering thin, per-spec walkthroughs incomplete. Created 7 follow-on leaves (.2–.8) ordered by impact-to-effort ratio.
 - `2026-05-16`: Created task tree. Documentation is maintained live per the documentation quality contract in `ROADMAP.md`.
 
@@ -212,15 +213,18 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PHASE6-DOCUMENTATION.2` | Verified ARCHITECTURE_STATE.md LinkedRE section covers both functions, consumers, and loading. Verified book generated-handlers chapter references LinkedRE with explanatory note. Syntax check passes. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — 56-line utility now has substantive documentation in both architecture and book layers. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.1` | Audited 30 mdBook chapters, 10 USER_GUIDE files, 6 live docs, ARCHITECTURE_STATE.md, README.md. Assessed content quality vs line count for each. Cross-referenced modules against doc coverage. Verified no code changes needed (doc-only inventory). Full suite: Files=1, Tests=1007, PASS. | Pass — 7 gaps found, 7 follow-on leaves created. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PHASE6-DOCUMENTATION.1` | `pending` | — |
+| `PHASE6-DOCUMENTATION.2` | `pending` | — |
+| `PHASE6-DOCUMENTATION.1` | `Docs: inventory Phase 6 documentation surface` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm. Added section to ARCHITECTURE_STATE.md and explanatory note to book's generated-handlers chapter.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.1 inventory. 30 chapters, 10 USER_GUIDE files, 6 live docs, ARCHITECTURE_STATE.md, README.md audited. 7 doc gaps found. Created follow-on leaves .2–.8.
 - `2026-05-16`: Created task tree from template.

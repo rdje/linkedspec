@@ -418,6 +418,19 @@ One more boundary is now tighter too:
 - still assembles Perl source strings and `eval`s them,
 - remains the clearest backend-portability ceiling in the current implementation.
 
+### `LinkedRE`
+- is a small (56-line) regex composition utility living at `perl/LinkedRE.pm`,
+- provides two functions: `or(...)` and `oredRE(...)`,
+- `oredRE(@regexes)` joins an array of regex references into a single compiled regex via `(?{$pos=N})` position-tracking alternation (`qr/$re0(?{$pos=0})|$re1(?{$pos=1})|.../`),
+- `or($stref, $oredRE, $mode_or_parent, $parent_info)` executes the compiled alternation against a scalar ref in seek mode (ungrounded `//gcp`, matches anywhere) or consume mode (`\G`-anchored `//gcp`, contiguously from `pos()`), and returns a match-info hash with `index`, `match`, `match_list`, `match_hash`, and optional `marks`,
+- the position-tracking `(?{$pos=N})` embedded in each alternation branch lets callers identify which regex alternative matched via the returned `index` field,
+- consumers:
+  - `Compiler.pm` (via `_ored_re`): builds compiled regex alternative tables for the dependency-regex map,
+  - `SpecEntry.pm`: generates `LinkedRE::or(...)` calls in handler source strings for rule dispatch at runtime,
+  - `BootstrapSpec::Core.pm` (via `_linkedre_or` and `_linkedre_ored_re`): uses both functions for bootstrap grammar matching without any `eval`,
+- all three consumers load LinkedRE through `OwnerDispatch::require_pkg(...)` rather than direct `use` or local loader wrappers,
+- `use re 'eval'` is required for the `(?{...})` embedded code blocks in the compiled regex alternation.
+
 ### `LinkedSpec::RuleIR`
 - owns rule-level intermediate structure and metadata planning,
 - drives handler-variant selection and rule execution metadata.

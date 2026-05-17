@@ -1,6 +1,11 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: document LinkedRE.pm regex composition utility
+
+- Added 11-line LinkedRE section to ARCHITECTURE_STATE.md "What the Main Owners Do" covering or/oredRE API, position-tracking, seek vs consume modes, match-info return shape, three consumers (Compiler, SpecEntry, BootstrapSpec::Core), OwnerDispatch loading, and re 'eval' pragma.
+- Added 3-line explanatory note to book's generated-handlers-and-dispatch.md clarifying what LinkedRE is and how it works in context.
+
 ## 2026-05-17 — Docs: inventory Phase 6 documentation surface
 
 - Audited 30 mdBook chapters, 10 USER_GUIDE files (14,611 lines), 6 live docs, ARCHITECTURE_STATE.md, and README.md.
