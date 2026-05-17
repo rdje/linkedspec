@@ -71,10 +71,10 @@ Maintain and expand project documentation so every user-facing surface, architec
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.6`
-  Status: `pending`
+  Status: `done`
   Goal: `Expand the four overview chapters (what-is-linkedspec.md, design-rationale.md, documentation-layers.md, project-status.md) from 153 total lines to substantive entry points. what-is-linkedspec should clearly state the project's value proposition. design-rationale should explain the key architectural decisions. project-status should reflect current roadmap state.`
   Acceptance: `Each overview chapter is at least 50 lines of substantive prose. A new reader landing on the book index gets a clear picture of what LinkedSpec is, why it was built this way, and what state it's in.`
-  Verification: `pending`
+  Verification: `2026-05-17: Expanded what-is-linkedspec.md (29→69 lines): added minimal worked example, "where LinkedSpec fits" section, and output description. Expanded design-rationale.md (50→80 lines): added 5th bet (state-first compiler), expanded each bet with more concrete detail. Expanded project-status.md (19→52 lines): added completed phases table (1-5), active work, planned Phase 7, backbone items, and project health assessment. Expanded documentation-layers.md (55→74 lines): added reading-order guidance for new users and contributors, expanded layer descriptions with specific file names and purposes. Total overview section: 153→275 lines. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf).`
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.7`
@@ -95,8 +95,8 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
-| 2 | `PHASE6-DOCUMENTATION.7` | `pending` | ActionIR lowering is the DSL's engine; 171 lines for 2,000+ lines of code is too thin. |
+| 1 | `PHASE6-DOCUMENTATION.7` | `pending` | ActionIR lowering is the DSL's engine; 171 lines for 2,000+ lines of code is too thin. |
+| 2 | `PHASE6-DOCUMENTATION.8` | `pending` | Per-spec walkthroughs are the most user-visible content; only 2 of 14+ mature specs covered. |
 | 3 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
 | 4 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
 | 5 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
@@ -105,6 +105,7 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 ## Decisions
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.6 — expanded all 4 overview chapters. what-is-linkedspec (29→69), design-rationale (50→80), project-status (19→52), documentation-layers (55→74). Total: 153→275 lines.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. Added cross-references to 5 additional book chapters. USER_GUIDE.md now links to the book. 6 book chapters now cross-reference USER_GUIDE files.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.4 — completed public API documentation. Created 2 new book chapters (trace-api.md, plugin-registry.md). Book's Public API section now documents all 4 facade bands: trace (7 methods + verbosity levels + state variables), compile/runtime (Get, get_parser, build_compiled_rule_table, call_spec_handler_subst), registry (3 methods), legacy transition (4 methods with status note). Updated SUMMARY.md.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm. Expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all public entry points. Expanded book pipeline-overview.md Stage 2 from 4 lines to 16-line structured description of three validation layers.
@@ -216,6 +217,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PHASE6-DOCUMENTATION.6` | Verified all 4 overview chapters expanded beyond 50-line threshold. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — overview section 153→275 lines. Entry point now substantive. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.5` | Verified 5 new cross-reference sections added to book chapters. Verified USER_GUIDE.md links to the book. Verified existing action-model-and-helper-surface links preserved. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — 6 book chapters + USER_GUIDE.md now cross-reference each other. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.4` | Verified 2 new book chapters created (trace-api.md 115 lines, plugin-registry.md 72 lines). Verified all 4 facade bands now documented. Verified SUMMARY.md updated. Verified get-and-get-parser.md updated with build_compiled_rule_table/call_spec_handler_subst. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — book Public API section now covers all facade bands. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.3` | Verified ARCHITECTURE_STATE.md Validation section covers all 5 public entry points with structured descriptions, error reporting path, debugging guidance. Verified book Stage 2 covers three validation layers with error payload routing. Syntax check passes. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — largest undocumented module now has substantive architecture and book coverage. |
@@ -226,7 +228,8 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PHASE6-DOCUMENTATION.5` | `pending` | — |
+| `PHASE6-DOCUMENTATION.6` | `pending` | — |
+| `PHASE6-DOCUMENTATION.5` | `Docs: bridge book and USER_GUIDE cross-linking` | — |
 | `PHASE6-DOCUMENTATION.4` | `Docs: complete public API documentation in book` | — |
 | `PHASE6-DOCUMENTATION.3` | `Docs: document Validation.pm DSL validation surface` | — |
 | `PHASE6-DOCUMENTATION.2` | `Docs: document LinkedRE.pm regex composition utility` | — |
@@ -234,6 +237,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.6 — expanded all 4 overview chapters (153→275 lines). Entry point now substantive.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. 6 book chapters now cross-reference USER_GUIDE files. USER_GUIDE.md links to the book.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.4 — completed public API docs. Created 2 new book chapters. All 4 facade bands now documented.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm. Expanded ARCHITECTURE_STATE.md and book pipeline-overview Stage 2.

@@ -1,7 +1,7 @@
-Docs: bridge book and USER_GUIDE cross-linking
+Docs: expand overview chapters from 153 to 275 lines
 
-PHASE6-DOCUMENTATION.5 — added cross-references to 5 additional book
-chapters pointing to relevant USER_GUIDE files. Added book link to
-USER_GUIDE.md. 6 book chapters now cross-reference USER_GUIDE files.
+PHASE6-DOCUMENTATION.6 — expanded what-is-linkedspec (29→69),
+design-rationale (50→80), project-status (19→52), and
+documentation-layers (55→74). Entry point now substantive.
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

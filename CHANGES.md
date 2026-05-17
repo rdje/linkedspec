@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: expand overview chapters
+
+- Expanded what-is-linkedspec.md (29→69 lines): added minimal .spec example, "where LinkedSpec fits" section, and detailed output description.
+- Expanded design-rationale.md (50→80 lines): added 5th bet (state-first compiler), expanded each bet with concrete rationale.
+- Expanded project-status.md (19→52 lines): added completed phases (1-5), active work (Phase 6), planned Phase 7, backbone items status, and project health summary.
+- Expanded documentation-layers.md (55→74 lines): added reading-order guidance for new users and contributors.
+- Total overview section: 153→275 lines.
+
 ## 2026-05-17 — Docs: bridge book and USER_GUIDE cross-linking
 
 - Added "Deeper reference" cross-links to 5 book chapters (action-and-lifecycle-placement, capture-marks, source-boundary-helper-ref, declaration-helper-ref, actionir-lowering-mental-model) pointing to relevant USER_GUIDE files.
