@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-17 (PHASE6-DOCUMENTATION.8): Backfilled 3 per-spec walkthroughs (tablegrep, portmap, pplugin). Each covers how to run, output shape, rule inventory, design points, descriptor readiness, and why interesting. Updated SUMMARY.md and shipped-specs-and-corpora.md reading order. PHASE6-DOCUMENTATION tree COMPLETE (8 leaves). All documentation gaps from .1 inventory now closed. PNT frontier: BACKBONE-ACTION-IR-LOWERING.1 (next active tree).
 - 2026-05-17 (PHASE6-DOCUMENTATION.7): Expanded ActionIR lowering pipeline docs (184→347 combined). actionir-lowering-mental-model (107→164): added full pipeline stages + contracts table. action-model-and-helper-surface (77→183): expanded helper families + pipeline flow. PNT frontier: .8 (per-spec walkthroughs — last leaf).
 - 2026-05-17 (PHASE6-DOCUMENTATION.6): Expanded all 4 overview chapters (153→275 lines). what-is-linkedspec (29→69), design-rationale (50→80), project-status (19→52), documentation-layers (55→74). Entry point now substantive with worked example, roadmap summary, and reading-order guidance. PNT frontier: .7 (ActionIR lowering pipeline docs).
 - 2026-05-17 (PHASE6-DOCUMENTATION.5): Bridged book/USER_GUIDE cross-linking — added cross-references to 5 additional book chapters. USER_GUIDE.md now links to the book. 6 book chapters cross-reference USER_GUIDE files. PNT frontier: .6 (overview chapter expansion).

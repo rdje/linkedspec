@@ -1,7 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
-- 2026-05-17 (PHASE6-DOCUMENTATION.7): ActionIR lowering pipeline documented (184→347 combined). PNT frontier: .8 (per-spec walkthroughs — last leaf, only 2 of 14+ mature specs covered).
+- 2026-05-17 (PHASE6-DOCUMENTATION.8): 3 new per-spec walkthroughs (tablegrep, portmap, pplugin). PHASE6-DOCUMENTATION tree COMPLETE (8 leaves). PNT frontier: BACKBONE-ACTION-IR-LOWERING.1 (next active tree per TASK_TREE.md).
 - 2026-05-17 (PHASE6-DOCUMENTATION.6): Overview chapters expanded (153→275 lines). PNT frontier: .7 (ActionIR lowering pipeline docs — 171 lines for 2,000+ lines of code).
 - 2026-05-17 (PHASE6-DOCUMENTATION.5): Book/USER_GUIDE cross-linking done — 6 book chapters now reference USER_GUIDE files. USER_GUIDE.md links to book. PNT frontier: .6 (overview chapter expansion — 153 lines across 4 chapters).
 - 2026-05-17 (PHASE6-DOCUMENTATION.4): Public API docs complete — 2 new book chapters created. All 4 facade bands documented. PNT frontier: .5 (book/USER_GUIDE cross-linking).

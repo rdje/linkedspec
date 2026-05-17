@@ -1,7 +1,4 @@
-Docs: expand ActionIR lowering pipeline documentation
+Docs: backfill per-spec walkthroughs for tablegrep, portmap, pplugin
 
-PHASE6-DOCUMENTATION.7 — expanded actionir-lowering-mental-model (107→164)
-and action-model-and-helper-surface (77→183). Combined 347 lines.
-Added pipeline stages, contract families table, and lowering flow.
-
-Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+PHASE6-DOCUMENTATION.8 — Created 3 new per-spec walkthrough chapters.
+PHASE6-DOCUMENTATION tree COMPLETE (8 leaves).

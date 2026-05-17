@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE6-DOCUMENTATION`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 6`
 - Created: `2026-05-16`
 - Last updated: `2026-05-17`
@@ -31,7 +31,7 @@ Maintain and expand project documentation so every user-facing surface, architec
 ## Task Tree
 
 - ID: `PHASE6-DOCUMENTATION`
-  Status: `active`
+  Status: `done`
   Goal: `Maintain project documentation at production quality.`
   Children: `PHASE6-DOCUMENTATION.1`, `PHASE6-DOCUMENTATION.2`, `PHASE6-DOCUMENTATION.3`, `PHASE6-DOCUMENTATION.4`, `PHASE6-DOCUMENTATION.5`, `PHASE6-DOCUMENTATION.6`, `PHASE6-DOCUMENTATION.7`, `PHASE6-DOCUMENTATION.8`
 
@@ -85,25 +85,19 @@ Maintain and expand project documentation so every user-facing surface, architec
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.8`
-  Status: `pending`
+  Status: `done`
   Goal: `Backfill per-spec walkthroughs for the highest-value remaining shipped specs. Priority order: vhdl.spec (largest at 3500+ lines), one tablegrep/portmap/simenv spec, one plugin-family spec (pplugin/tkgui). Add walkthrough chapters to the book's specs-and-corpora section.`
   Acceptance: `At least 3 new per-spec walkthrough chapters exist in the book. Each covers: how to run the parser, output shape, rule inventory with role table, and descriptor readiness. The shipped-specs-and-corpora chapter's reading order is updated.`
-  Verification: `pending`
+  Verification: `2026-05-17: Created 3 new per-spec walkthrough chapters: tablegrep-spec-walkthrough.md (grep-like expression parser, 5 rules, descriptor ratio 1.0000), portmap-spec-walkthrough.md (VHDL/Verilog port-map parser, 3 rules, descriptor ratio 1.0000), pplugin-spec-walkthrough.md (.plg plugin file parser, 6 rules, descriptor ratio below 1.0000 due to eval). Each covers how to run, output shape, rule inventory with role table, key design points, descriptor readiness, and why interesting. Updated SUMMARY.md with 3 new chapters. Updated shipped-specs-and-corpora.md reading order to include walkthrough links. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf).`
   Commit: `pending`
 
 ## Current Frontier
 
-| Order | Leaf | Status | Why next |
-| --- | --- | --- | --- |
-| 1 | `PHASE6-DOCUMENTATION.8` | `pending` | Per-spec walkthroughs are the most user-visible content; only 2 of 14+ mature specs covered. |
-| 3 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
-| 4 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
-| 5 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
-| 6 | `PHASE6-DOCUMENTATION.7` | `pending` | ActionIR lowering is the DSL's engine; 171 lines for 2,000+ lines of code is too thin. |
-| 7 | `PHASE6-DOCUMENTATION.8` | `pending` | Per-spec walkthroughs are the most user-visible content; only 2 of 14+ mature specs covered. |
+All leaves complete. The PHASE6-DOCUMENTATION tree is finished.
 
 ## Decisions
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.8 — backfilled per-spec walkthroughs. Created 3 new chapters (tablegrep, portmap, pplugin). Updated SUMMARY.md and shipped-specs-and-corpora.md reading order. PHASE6-DOCUMENTATION tree COMPLETE (8 leaves). All documentation gaps from .1 inventory now closed.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.7 — expanded ActionIR lowering pipeline docs. actionir-lowering-mental-model (107→164), action-model-and-helper-surface (77→183). Combined 347 lines. Added pipeline stages, contract families table, and helper-to-emitted-code flow.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.6 — expanded all 4 overview chapters. what-is-linkedspec (29→69), design-rationale (50→80), project-status (19→52), documentation-layers (55→74). Total: 153→275 lines.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. Added cross-references to 5 additional book chapters. USER_GUIDE.md now links to the book. 6 book chapters now cross-reference USER_GUIDE files.
@@ -217,6 +211,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PHASE6-DOCUMENTATION.8` | Verified 3 new walkthrough chapters created (tablegrep 5 rules, portmap 3 rules, pplugin 6 rules). Each covers how to run, output shape, rule inventory, design points, descriptor readiness, and why interesting. SUMMARY.md updated with 3 new chapters. shipped-specs-and-corpora.md reading order updated with walkthrough links. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — per-spec walkthroughs now cover 5 specs (Lispish, ebnf, tablegrep, portmap, pplugin). PHASE6-DOCUMENTATION tree COMPLETE. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.7` | Verified both ActionIR chapters expanded. actionir-lowering-mental-model now covers full pipeline (Scanner through EmittedPerl) with 8-family contracts table. action-model-and-helper-surface now expands each helper family with pipeline flow section. Combined 347 lines. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — ActionIR lowering pipeline now substantively documented. 184→347 lines. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.6` | Verified all 4 overview chapters expanded beyond 50-line threshold. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — overview section 153→275 lines. Entry point now substantive. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.5` | Verified 5 new cross-reference sections added to book chapters. Verified USER_GUIDE.md links to the book. Verified existing action-model-and-helper-surface links preserved. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — 6 book chapters + USER_GUIDE.md now cross-reference each other. |
@@ -229,7 +224,8 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PHASE6-DOCUMENTATION.7` | `pending` | — |
+| `PHASE6-DOCUMENTATION.8` | `pending` | — |
+| `PHASE6-DOCUMENTATION.7` | `Docs: expand ActionIR lowering pipeline documentation` | — |
 | `PHASE6-DOCUMENTATION.6` | `Docs: expand overview chapters from 153 to 275 lines` | — |
 | `PHASE6-DOCUMENTATION.5` | `Docs: bridge book and USER_GUIDE cross-linking` | — |
 | `PHASE6-DOCUMENTATION.4` | `Docs: complete public API documentation in book` | — |
@@ -239,6 +235,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.8 — backfilled 3 per-spec walkthroughs (tablegrep, portmap, pplugin). PHASE6-DOCUMENTATION tree COMPLETE (8 leaves).
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.7 — expanded ActionIR lowering pipeline docs (184→347 lines combined).
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.6 — expanded all 4 overview chapters (153→275 lines). Entry point now substantive.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. 6 book chapters now cross-reference USER_GUIDE files. USER_GUIDE.md links to the book.

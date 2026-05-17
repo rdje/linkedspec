@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: backfill per-spec walkthroughs for tablegrep, portmap, pplugin
+
+- Created 3 new per-spec walkthrough chapters in the book's specs-and-corpora section:
+  - tablegrep-spec-walkthrough.md: grep-like expression parser (5 rules, descriptor ratio 1.0000). Covers recursive grouping, operator detection in lifecycle hooks, I.return shorthand.
+  - portmap-spec-walkthrough.md: VHDL/Verilog port-map parser (3 rules, descriptor ratio 1.0000). Covers single-regex multi-classification, tags as AST discriminators, flat arrays.
+  - pplugin-spec-walkthrough.md: .plg plugin file parser (6 rules, descriptor ratio below 1.0000 due to eval). Covers recursive bracket-matching with string-literal awareness, named capture, next(), LX accumulator pattern.
+- Updated SUMMARY.md with 3 new chapters under Shipped Material.
+- Updated shipped-specs-and-corpora.md reading order to include walkthrough links for all 3 new chapters.
+- PHASE6-DOCUMENTATION tree COMPLETE (8 leaves). All documentation gaps from .1 inventory now closed.
+
 ## 2026-05-17 — Docs: expand ActionIR lowering pipeline documentation
 
 - Expanded actionir-lowering-mental-model.md (107→164 lines): added "The lowering pipeline" section covering all 6 pipeline stages (Scanner, StatementSplit, CanonicalEvents, RewritePipeline, lowering owners, Contracts catalog) with an 8-family contracts table.
