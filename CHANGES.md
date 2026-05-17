@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Remove dead .plg files (hutils.plg, quick_sdf_hack.plg)
+
+- Removed plugin/hutils.plg (21 lines): all thin passthrough wrappers to HUtils:: methods. Zero external references — all callers use HUtils:: directly.
+- Removed plugin/quick_sdf_hack.plg (31 lines): dead qsdf_hack action with zero external callers.
+- 36 .plg files remain. Full suite: 1007 PASS.
+
 ## 2026-05-17 — Audit: inventory remaining plugin surface for PLUGIN-MODERNIZATION
 
 - Audited all plugin-related surfaces: 38 .plg files, PPlugin.pm (288 lines), PluginBridge.pm (199 lines), PluginRegistry.pm (130 lines), LinkedSpec.pm facade (7 legacy methods), external callers, regression tests.

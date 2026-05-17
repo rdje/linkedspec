@@ -40,9 +40,11 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
   Commit: `pending`
 
 - ID: `PLUGIN-MODERNIZATION.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Identify and remove .plg files whose helpers have already been fully extracted to domain owners. Per ROADMAP_V2.md, string.plg, cgi.plg, genericfilter.plg, msoffice.plg, vhdconst_eval.plg, yesno.plg, http.plg, lighttpd.plg, httpd.plg, tcl4interconn.plg, tssio.plg, table.plg, spec.plg, and plugin.plg are already gone. Audit the remaining 38 .plg files for extraction status.`
   Acceptance: `Each remaining .plg file is classified as: (a) already-extracted — safe to delete, (b) partially-extracted — helpers moved but visible actions remain, (c) not-yet-extracted — still carries plugin subdefs. Deleted files are removed from disk and regression tests updated.`
+  Verification: `2026-05-17: Removed 2 .plg files: hutils.plg (zero references, all thin HUtils:: passthroughs — callers use HUtils:: directly) and quick_sdf_hack.plg (zero external callers, dead qsdf_hack action). 36 .plg files remain (see inventory update below). Full suite: Files=1, Tests=1007, PASS.`
+  Commit: `pending`
 
 - ID: `PLUGIN-MODERNIZATION.3`
   Status: `pending`
@@ -63,13 +65,14 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PLUGIN-MODERNIZATION.2` | `pending` | Remove already-extracted .plg wrappers — highest impact-to-effort, reduces PPlugin dependency surface. |
+| 1 | `PLUGIN-MODERNIZATION.3` | `pending` | De-scope FSMGen from get_plugin — only external caller, removes last non-facade get_plugin usage. |
 | 2 | `PLUGIN-MODERNIZATION.3` | `pending` | De-scope FSMGen from get_plugin — only external caller, removes last non-facade get_plugin usage. |
 | 3 | `PLUGIN-MODERNIZATION.4` | `pending` | Reduce public facade — shrink or deprecate 7 legacy plugin methods. |
 | 4 | `PLUGIN-MODERNIZATION.5` | `pending` | Evaluate PPlugin/PluginBridge retirement — last step after all consumers are gone. |
 
 ## Decisions
 
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.2 — removed hutils.plg and quick_sdf_hack.plg. Both confirmed dead (zero external references). 36 .plg files remain. Full suite 1007 PASS.
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.1 inventory (see inventory section below). 38 .plg files, 3 plugin modules, 7 facade methods, 1 external caller. Created follow-on leaves .2–.5.
 - `2026-05-16`: Created task tree. Extensive plugin-to-owner extraction already landed per `ROADMAP_V2.md` (HTTP::FileAccess, RTLUtils, FSMGen, Timing::*, Table::GenericFilter, QC::*, etc.).
 
@@ -85,16 +88,19 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PLUGIN-MODERNIZATION.2` | Removed hutils.plug (thin HUtils:: passthroughs, zero references) and quick_sdf_hack.plg (dead qsdf_hack action, zero external callers). 36 .plg files remain. Full suite: Files=1, Tests=1007, PASS. | Pass — 2 dead .plg files removed. |
 | `2026-05-17` | `PLUGIN-MODERNIZATION.1` | Audited 38 .plg files, PPlugin.pm (288 lines), PluginBridge.pm (199 lines), PluginRegistry.pm (130 lines), LinkedSpec.pm facade (7 legacy methods), FSMGen.pm (only external get_plugin caller), 3 regression subtests. Created follow-on leaves .2–.5. Full suite: Files=1, Tests=1007, PASS (no code changes). | Pass — plugin surface fully inventoried. 4 follow-on leaves defined. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PLUGIN-MODERNIZATION.1` | `pending` | — |
+| `PLUGIN-MODERNIZATION.2` | `pending` | — |
+| `PLUGIN-MODERNIZATION.1` | `Audit: inventory remaining plugin surface for modernization` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.2 — removed 2 dead .plg files (hutils.plg, quick_sdf_hack.plg). 36 remain.
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.1 inventory. 38 .plg files, 3 plugin modules, 7 facade methods. Follow-on leaves .2–.5 created.
 - `2026-05-16`: Created task tree from template.
 

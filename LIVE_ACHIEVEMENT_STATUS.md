@@ -7,7 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-17: Completed PLUGIN-MODERNIZATION.1 — inventoried plugin surface. 38 .plg files classified (extracted/spec-consumer/legacy-action). PPlugin.pm (288 lines), PluginBridge.pm (199 lines), PluginRegistry.pm (130 lines). LinkedSpec.pm exposes 7 legacy plugin methods. FSMGen.pm is the only external get_plugin caller (optional default). 3 regression subtests lock legacy behavior. Created follow-on leaves .2–.5. Active PNT frontier: `PLUGIN-MODERNIZATION.2`.
+- 2026-05-17: Completed PLUGIN-MODERNIZATION.2 — removed 2 dead .plg files: hutils.plg (thin HUtils:: passthroughs, zero references) and quick_sdf_hack.plg (dead qsdf_hack action, zero external callers). 36 .plg files remain. Full suite: 1007 PASS. Active PNT frontier: `PLUGIN-MODERNIZATION.3`.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.5 — bridged book and USER_GUIDE cross-linking.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm (1,368-line DSL validation module). Expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all 5 public entry points with error reporting path, context helpers, strict_syntax mode, and debugging guidance. Expanded book pipeline-overview.md Stage 2 from 4 lines to 16-line structured description of three validation layers. Active PNT frontier: `PHASE6-DOCUMENTATION.4`.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm (56-line core regex utility). Added 11-line section to ARCHITECTURE_STATE.md covering or/oredRE API, position-tracking, seek vs consume, three consumers, and OwnerDispatch loading. Added 3-line explanatory note to book's generated-handlers-and-dispatch.md. Active PNT frontier: `PHASE6-DOCUMENTATION.3`.
@@ -29,6 +29,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
 ## Next Slice Direction
-- Active PNT frontier: `PLUGIN-MODERNIZATION.2` (remove already-extracted .plg wrappers).
+- Active PNT frontier: `PLUGIN-MODERNIZATION.3` (de-scope FSMGen from get_plugin).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).

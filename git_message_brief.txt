@@ -1,4 +1,4 @@
-Audit: inventory remaining plugin surface for modernization
+Remove dead .plg files: hutils.plg and quick_sdf_hack.plg
 
-PLUGIN-MODERNIZATION.1 — 38 .plg files, 3 plugin modules, 7 facade methods.
-Created follow-on leaves .2–.5.
+PLUGIN-MODERNIZATION.2 — Both confirmed zero external references.
+36 .plg files remain.

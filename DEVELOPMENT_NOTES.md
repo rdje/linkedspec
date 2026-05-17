@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-17 (PLUGIN-MODERNIZATION.2): Removed 2 dead .plg files (hutils.plg, quick_sdf_hack.plg). Both confirmed zero external references. 36 .plg files remain. PNT frontier: .3 (de-scope FSMGen from get_plugin).
 - 2026-05-17 (PLUGIN-MODERNIZATION.1): Inventoried plugin surface. 38 .plg files, 3 plugin modules, 7 facade methods, 1 external caller (FSMGen). Created follow-on leaves .2–.5. PNT frontier: .2 (remove already-extracted .plg wrappers).
 - 2026-05-17 (BACKBONE-ACTION-IR-LOWERING.1): Audited all 12 ActionIR owners. All use OwnerDispatch uniformly. Zero old-style _require_dep wrappers. Backbone Item 3 ActionIR owner-contract cleanup complete. BACKBONE-ACTION-IR-LOWERING tree done (1 leaf). PNT frontier: PLUGIN-MODERNIZATION.1.
 - 2026-05-17 (PHASE6-DOCUMENTATION.8): Backfilled 3 per-spec walkthroughs (tablegrep, portmap, pplugin). Each covers how to run, output shape, rule inventory, design points, descriptor readiness, and why interesting. Updated SUMMARY.md and shipped-specs-and-corpora.md reading order. PHASE6-DOCUMENTATION tree COMPLETE (8 leaves). All documentation gaps from .1 inventory now closed. PNT frontier: BACKBONE-ACTION-IR-LOWERING.1 (next active tree).
