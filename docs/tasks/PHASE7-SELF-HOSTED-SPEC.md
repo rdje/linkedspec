@@ -7,7 +7,7 @@
 - Roadmap lane: `Phase 7`
 - Created: `2026-05-16`
 - Last updated: `2026-05-17`
-- Active frontier: `PHASE7-SELF-HOSTED-SPEC.3`
+- Active frontier: `PHASE7-SELF-HOSTED-SPEC.4`
 - Owner: repo-local workflow
 
 ## Goal
@@ -48,9 +48,11 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
   Commit: `pending`
 
 - ID: `PHASE7-SELF-HOSTED-SPEC.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Author spec.spec rule paragraphs for action/helper DSL surface: lifecycle markers (I/LS/LE/E/EX/IT/LX), split/capture markers (@capture_slice, @capture_from_here, @move_pos, @mark), fluent chains (.method().method()), conditional markers (-? word), helper function calls, blind-code-block fluent chains.`
   Acceptance: `spec.spec captures the full helper-DSL placement rules. Lifecycle markers, split markers, and fluent chains are all representable.`
+  Verification: `2026-05-17: Extended body_element:* from 5 to 9 regex-anchored alternatives. Added conditional marker (-? word), lifecycle marker (I/LS/LE/LX/E/EX/IT), fluent chain (.word), and word-based catch-all (word(/word{/word.) alternatives. body_element re: [9]. language_agnostic_ready_ratio 1.0000. Full suite: 1007 PASS.`
+  Commit: `pending`
 
 - ID: `PHASE7-SELF-HOSTED-SPEC.4`
   Status: `pending`
@@ -67,7 +69,7 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `PHASE7-SELF-HOSTED-SPEC.2` | `done` | Author structural rule paragraphs — 3 rules with own regexes, 1.0000 ratio, 1007 PASS. |
-| 2 | `PHASE7-SELF-HOSTED-SPEC.3` | `pending` | Author helper-DSL rule paragraphs — depends on .2 structural rules. |
+| 2 | `PHASE7-SELF-HOSTED-SPEC.3` | `done` | Author helper-DSL rule paragraphs — extended body_element to 9 regex alternatives, 1.0000 ratio, 1007 PASS. |
 | 3 | `PHASE7-SELF-HOSTED-SPEC.4` | `pending` | Add regression coverage — depends on .2 and .3 grammar existing. |
 | 4 | `PHASE7-SELF-HOSTED-SPEC.5` | `pending` | Define extension-surface policy — depends on .4 proving spec.spec works. |
 
@@ -213,6 +215,7 @@ The self-hosted grammar must capture:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.3` | Extended body_element:* from 5 to 9 regex alternatives. Body element recognition now covers: regex anchors, action edges, blind-call edges, split/capture markers, conditional markers, lifecycle markers (7), fluent chains, word-based patterns, plain code blocks. Full suite: Files=1, Tests=1007, PASS. | Pass — DSL rule paragraphs complete, 9 alternatives, 1.0000 ratio, frontier → .4. |
 | `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.2` | spec.spec compiles to descriptor with language_agnostic_ready_ratio 1.0000. 3 rules: spec_file::AND+ (re: undef — top-level, unreferenced), rule_paragraph:AND (re: [1] — header regex), body_element:* (re: [5] — regex/edge/blind-edge/block/marker). Full suite: Files=1, Tests=1007, PASS. | Pass — structural rules complete, 1.0000 ratio, frontier → .3. |
 | `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.1` | Audited `_parse_rule_label_line`, `_looks_like_supported_rule_paragraph_member_line`, `_looks_like_supported_split_marker_start`, 19 shipped `.spec` files, 30 book chapters, 10 USER_GUIDE files. 37 syntax categories inventoried across 9 sections. Full suite: Files=1, Tests=1007, PASS (audit-only). | Pass — complete language surface inventory. 4 follow-on leaves created. |
 
@@ -224,6 +227,7 @@ The self-hosted grammar must capture:
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.3 — extended body_element:* from 5 to 9 regex-anchored alternatives. Added: conditional markers (`-? word`), lifecycle markers (I/LS/LE/LX/E/EX/IT), fluent chains (`.word`), and word-based catch-all (`word(/word{/word.`). 9 regexes cover all 12 body element recognition patterns from .1 inventory. language_agnostic_ready_ratio 1.0000. 1007 PASS. Active frontier: `.4`.
 - `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.2 — authored spec.spec structural/syntactic rule paragraphs. 3 rules: spec_file::AND+ (top-level collector), rule_paragraph:AND (header regex + body delegation), body_element:* (5 regex-anchored alternatives for regex tokens, edges, blind edges, code blocks, split markers + 2 subdefs). Compiles with language_agnostic_ready_ratio 1.0000. 1007 PASS. Active frontier: `.3`.
 - `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.1 — full language surface inventory. 37 syntax categories across rule forms, modes, body elements, lifecycle markers, helper DSL, block structure. Created leaves .2–.5.
 - `2026-05-17`: Activated tree. Moved from proposed to active. ROADMAP_V2 Phase 7: not started → in progress.

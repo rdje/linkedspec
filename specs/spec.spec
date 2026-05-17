@@ -1,8 +1,9 @@
 # spec.spec — Self-hosted LinkedSpec grammar
 #
 # This grammar parses .spec files into their structural elements: rule labels,
-# modes, regex anchors, action edges, blind-call edges, code blocks, and split
-# markers.
+# modes, regex anchors, action edges, blind-call edges, code blocks, split
+# markers, lifecycle markers, fluent chains, conditional markers, and helper
+# function calls.
 #
 # It is the required change surface for .spec language evolution.
 # Touching the bootstrap grammar for .spec changes is exception-only.
@@ -61,9 +62,13 @@ I {
  -> body_element
 
 
-# body_element uses regex-anchored alternatives so every referenced rule has a
-# regex list. Each alternative matches the start pattern of one element type and
-# returns the element AST directly.
+# body_element uses regex-anchored alternatives ordered from most specific to
+# least specific. Each alternative matches the start pattern of one element type
+# and returns the element AST directly.
+#
+# Ordering matters: lifecycle markers precede the general word-based catch-all
+# so I/LS/LE/LX/E/EX/IT are classified correctly. Fluent chains (.word) precede
+# word-based patterns so fluent-method chains are not misclassified.
 body_element:*
  /(?<!\\)\/(?:\\.|[^\/\\])*?(?<!\\)\//
   I { return(hash("type", "regex", "value", match_text())) }
@@ -71,10 +76,18 @@ body_element:*
   I { return(body_edge_ast(match_text())) }
  /=>[ \t]*\w+/
   I { return(body_blind_edge_ast(match_text())) }
- /(?<!\\)\{/
-  I { return(hash("type", "code_block")) }
  /@[ \t]*(?:capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))/
   I { return(hash("type", "split_marker", "marker", match_text())) }
+ /-\?[ \t]+\w+\b/
+  I { return(hash("type", "conditional_marker", "text", match_text())) }
+ /(?:I|LS|LE|LX|E|EX|IT)\b/
+  I { return(hash("type", "lifecycle_marker", "marker", match_text())) }
+ /\.[ \t]*\w+/
+  I { return(hash("type", "fluent_chain", "text", match_text())) }
+ /\w+[ \t]*[\(\{\.]/
+  I { return(hash("type", "body_code", "text", match_text())) }
+ /(?<!\\)\{/
+  I { return(hash("type", "code_block")) }
 
 # Helper: parse action-edge text into target/index AST.
 body_edge_ast {

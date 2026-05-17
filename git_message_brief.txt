@@ -1,6 +1,6 @@
-Author spec.spec structural/syntactic rule paragraphs (PHASE7-SELF-HOSTED-SPEC.2)
+Extend spec.spec body_element to 9 DSL alternatives (PHASE7-SELF-HOSTED-SPEC.3)
 
-3 rules: spec_file::AND+ (top-level edge delegation), rule_paragraph:AND
-(own header regex + body delegation), body_element:* (5 regex-anchored
-alternatives + 2 subdefs). Compiles with language_agnostic_ready_ratio
-1.0000. Full suite: 1007 PASS.
+Added 4 regex-anchored alternatives: conditional markers (-? word),
+lifecycle markers (I/LS/LE/LX/E/EX/IT), fluent chains (.word), and
+word-based catch-all (word(/word{/word.). 9 alternatives now cover all
+12 body element recognition patterns. 1.0000 ratio, 1007 PASS.
