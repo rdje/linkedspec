@@ -25,7 +25,7 @@ The current active task trees are:
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `PLUGIN-MODERNIZATION` | `active` | `Plugin modernization` | `PLUGIN-MODERNIZATION.1` | [docs/tasks/PLUGIN-MODERNIZATION.md](docs/tasks/PLUGIN-MODERNIZATION.md) |
+| `PLUGIN-MODERNIZATION` | `active` | `Plugin modernization` | `PLUGIN-MODERNIZATION.4` | [docs/tasks/PLUGIN-MODERNIZATION.md](docs/tasks/PLUGIN-MODERNIZATION.md) |
 
 ## Proposed Task Trees
 

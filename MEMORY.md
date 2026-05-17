@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-17 (PLUGIN-MODERNIZATION.3): FSMGen.pm de-scoped from LinkedSpec::get_plugin. Default changed to no-op `sub {}`. PNT frontier: .4 (reduce public facade — 7 legacy plugin methods).
 - 2026-05-17 (DOCTRINE): Task-tree-ownership doctrine: all code changes must be task-tree tracked/owned before implementation. Non-negotiable. Recorded in book (`local-ci-and-regression.md`) and all live docs.
 - 2026-05-17 (PLUGIN-MODERNIZATION.2): Removed hutils.plg and quick_sdf_hack.plg (both zero external references). 36 .plg files remain. PNT frontier: .3 (de-scope FSMGen from get_plugin).
 - 2026-05-17 (PHASE6-DOCUMENTATION.6): Overview chapters expanded (153→275 lines). PNT frontier: .7 (ActionIR lowering pipeline docs — 171 lines for 2,000+ lines of code).

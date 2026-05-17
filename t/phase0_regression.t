@@ -4226,7 +4226,7 @@ subtest 'fsmgen_dynamic_plugin_list_moves_to_fsmgen_package_owner' => sub {
     ok(defined($fsmgen_pm) && length($fsmgen_pm), 'FSMGen package source is available for dynamic plugin-list migration inspection');
     ok(defined($fsmgen_plugin) && length($fsmgen_plugin), 'fsmgen.plg source is available for dynamic plugin-list migration inspection');
     like($fsmgen_pm, qr/sub getop_plugin_list\b/, 'FSMGen package owns the dynamic plugin-list parser');
-    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ \\&LinkedSpec::get_plugin/, 'FSMGen package defaults dynamic plugin-list lookup to LinkedSpec::get_plugin');
+    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ sub \{\}/, 'FSMGen package defaults dynamic plugin-list lookup to a no-op (caller must opt in)');
     like($fsmgen_pm, qr/\$get_plugin->\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'FSMGen package preserves the unresolved plugin no-op fallback');
     unlike($fsmgen_plugin, qr/\bgetop_plugin_list\s*\{/, 'fsmgen.plg no longer exposes getop_plugin_list as a legacy plugin subdef');
     unlike($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\)/, 'fsmgen.plg no longer resolves dynamic plugin-list entries directly');
@@ -4412,7 +4412,7 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_package_owners' => sub {
     like($setup_hold_tmax_tmin_plugin, qr/use Timing::SetupHold;/, 'setup_hold_tmax_tmin plugin now loads the setup/hold timing package owner directly');
     like($setup_hold_tmax_tmin_plugin, qr/Timing::SetupHold::collect_dxcy/, 'setup_hold_tmax_tmin plugin now uses the package-owned DxCy traversal helper');
     like($fsmgen_pm, qr/sub getop_plugin_list\b/, 'FSMGen package now owns the dynamic plugin-list parser');
-    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ \\&LinkedSpec::get_plugin/, 'FSMGen package keeps LinkedSpec::get_plugin as the default dynamic plugin-list resolver');
+    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ sub \{\}/, 'FSMGen package no longer defaults dynamic plugin-list lookup to LinkedSpec::get_plugin');
     like($fsmgen_pm, qr/\$get_plugin->\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'FSMGen package preserves the unresolved dynamic plugin-list no-op fallback');
     unlike($fsmgen_plugin, qr/\bgetop_plugin_list\s*\{/, 'fsmgen plugin no longer exposes getop_plugin_list as a legacy plugin subdef');
     unlike($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\)/, 'fsmgen plugin no longer resolves dynamic plugin-list entries through LinkedSpec::get_plugin directly');

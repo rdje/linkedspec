@@ -65,7 +65,7 @@ sub fsm_file_load  {map {Lispish::multi($_)}  @_};
 sub getop_plugin_list {
  my ($entry_list, %opt) = @_;
  my %plugins;
- my $get_plugin = $opt{get_plugin} // \&LinkedSpec::get_plugin;
+ my $get_plugin = $opt{get_plugin} // sub {};
 
  foreach my $cps (map {s/\+//o; $_} grep {!ref && m/^\+\S/o} @$entry_list) {
   $cps =~ /=/po;

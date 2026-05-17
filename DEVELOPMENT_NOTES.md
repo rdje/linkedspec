@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-17 (PLUGIN-MODERNIZATION.3): De-scoped FSMGen.pm from LinkedSpec::get_plugin. Replaced default `\&LinkedSpec::get_plugin` with `sub {}` no-op in getop_plugin_list. Only external get_plugin caller now requires explicit opt-in. PNT frontier: .4 (reduce public facade plugin surface).
 - 2026-05-17 (DOCTRINE): Codified task-tree-ownership doctrine. All code changes must be task-tree tracked/owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md` and all live docs. Non-negotiable.
 - 2026-05-17 (PLUGIN-MODERNIZATION.2): Removed 2 dead .plg files (hutils.plg, quick_sdf_hack.plg). Both confirmed zero external references. 36 .plg files remain. PNT frontier: .3 (de-scope FSMGen from get_plugin).
 - 2026-05-17 (PLUGIN-MODERNIZATION.1): Inventoried plugin surface. 38 .plg files, 3 plugin modules, 7 facade methods, 1 external caller (FSMGen). Created follow-on leaves .2–.5. PNT frontier: .2 (remove already-extracted .plg wrappers).

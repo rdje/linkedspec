@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — De-scope FSMGen from LinkedSpec::get_plugin (PLUGIN-MODERNIZATION.3)
+
+- Replaced `\&LinkedSpec::get_plugin` default with `sub {}` no-op in FSMGen::getop_plugin_list (FSMGen.pm line 68).
+- Internal caller (line 3054) passes no explicit get_plugin but no .fsm files exist in repo to trigger +type=plugin syntax — dead code path.
+- Tests always pass explicit get_plugin callback. Updated 2 regression assertions to match new no-op default.
+- FSMGen.pm no longer has a hard dependency on LinkedSpec::get_plugin. Full suite: 1007 PASS.
+
 ## 2026-05-17 — Docs: codify task-tree-ownership doctrine in book and live docs
 
 - Added "Task-tree ownership requirement" section to book chapter `development/local-ci-and-regression.md`. All code changes must be task-tree tracked or task-tree owned before implementation. Non-negotiable quality gate.
