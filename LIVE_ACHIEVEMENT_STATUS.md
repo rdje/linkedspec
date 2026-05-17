@@ -40,7 +40,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-05-17: Task-tree-ownership doctrine codified. All code changes must be task-tree tracked or task-tree owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md`. Non-negotiable.
 
 ## Next Slice Direction
-- PHASE7-SELF-HOSTED-SPEC tree COMPLETE (5 leaves). PNT idle — awaiting next tree activation.
+- METHOD-LIKE-DSL-MIGRATION tree active (5 leaves). Frontier: `METHOD-LIKE-DSL-MIGRATION.1` — compatibility alias retirement policy audit.
+- PHASE7-SELF-HOSTED-SPEC tree COMPLETE (5 leaves).
 - 2026-05-17: Completed PHASE7-SELF-HOSTED-SPEC.5 — defined extension-surface policy.
+- 2026-05-17: Activated METHOD-LIKE-DSL-MIGRATION task tree — Method-like DSL migration track was `in progress` without task-tree ownership. Created tree with 5 leaves.
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).
