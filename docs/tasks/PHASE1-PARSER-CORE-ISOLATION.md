@@ -37,10 +37,10 @@ Finish the last parser-core isolation cleanup around remaining compile-path comp
   Children: `PHASE1-PARSER-CORE-ISOLATION.1`, `PHASE1-PARSER-CORE-ISOLATION.2`, `PHASE1-PARSER-CORE-ISOLATION.3`
 
 - ID: `PHASE1-PARSER-CORE-ISOLATION.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Survey and inventory remaining compile-path compatibility seams — confirm the survey findings and identify any additional seams not captured.`
   Acceptance: `Inventory includes: ActionRewriter.pm forwarding shim (118 lines, 59 generated forwarders + call_spec_handler_subst), rewrite_action_code_for_compat in EmitContext.pm (line 485, s/h/a fallback), output format conversions in Compiler.pm/CompilerState.pm (assessed as intentional API adapters, not cleanup targets), dual-path input normalizers in CompilerState.pm (assessed as intentional). Test references to compat paths identified.`
-  Verification: `pending`
+  Verification: `2026-05-17: Full inventory complete. 4 seams identified: (1) ActionRewriter.pm — 118 lines, 59 generated forwarders all delegating to EmitContext via _delegate_emit_context_call, 1 explicit call_spec_handler_subst. Zero non-test external callers. Public facade LinkedSpec.pm line 186 has own call_spec_handler_subst going directly to EmitContext via OwnerDispatch — bypassing ActionRewriter entirely. Tests (phase0_regression.t) verify ActionRewriter is lazily loaded, excluded from compile pipeline, owner callbacks trapped. Verdict: REMOVABLE. (2) rewrite_action_code_for_compat — EmitContext.pm lines 485-504, wraps _rewrite_action_code_with_diagnostics with s/h/a fallback via _lower_method_value_expr. Called from LinkedSpec.pm line 188 and ActionRewriter.pm line 114. Verdict: NEEDS EVALUATION (.3). (3) Output format conversions — compiled_spec_state_to_legacy_spec, compiled_descriptor_state_to_legacy_descriptor, normalize_compiled_spec_input, normalize_compiled_dependency_regex_output. Intentional adapters between internal state objects and public API legacy flat-hash format. Verdict: KEEP. (4) PluginBridge legacy functions — _load_legacy_plugin_runtime, _exec_legacy_plugin, _get_legacy_plugin. Runtime plugin dispatch, not compile path. Verdict: OUT OF SCOPE. No additional seams found beyond original survey.`
   Commit: `pending`
 
 - ID: `PHASE1-PARSER-CORE-ISOLATION.2`
@@ -61,9 +61,9 @@ Finish the last parser-core isolation cleanup around remaining compile-path comp
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE1-PARSER-CORE-ISOLATION.1` | `pending` | Inventory — confirm survey findings and identify test references. |
-| 2 | `PHASE1-PARSER-CORE-ISOLATION.2` | `pending` | ActionRewriter.pm — depende on inventory (.1) for test reference list. |
-| 3 | `PHASE1-PARSER-CORE-ISOLATION.3` | `pending` | rewrite_action_code_for_compat — depends on .2 completion before behavioral removal. |
+| 1 | `PHASE1-PARSER-CORE-ISOLATION.1` | `done` | Inventory complete — 4 seams, ActionRewriter.pm REMOVABLE, rewrite_action_code_for_compat needs evaluation. |
+| 2 | `PHASE1-PARSER-CORE-ISOLATION.2` | `pending` | ActionRewriter.pm — zero non-test callers, pure forwarding shim, no behavioral impact if removed. |
+| 3 | `PHASE1-PARSER-CORE-ISOLATION.3` | `pending` | rewrite_action_code_for_compat — depends on .2 completion. |
 
 ## Background
 
@@ -100,7 +100,7 @@ From the 2026-05-17 survey:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `pending` | `pending` | `pending` | `pending` |
+| `2026-05-17` | `PHASE1-PARSER-CORE-ISOLATION.1` | 4 seams inventoried. ActionRewriter.pm: 118 lines, 59 forwarders, 0 non-test callers → REMOVABLE. rewrite_action_code_for_compat: s/h/a fallback → NEEDS EVALUATION (.3). Output conversions: intentional adapters → KEEP. PluginBridge: runtime, out of scope. No additional seams. | Pass — inventory complete. |
 
 ## Commit Log
 
@@ -110,4 +110,5 @@ From the 2026-05-17 survey:
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE1-PARSER-CORE-ISOLATION.1 — full compile-path compatibility seam inventory. 4 seams identified: ActionRewriter.pm (REMOVABLE), rewrite_action_code_for_compat (NEEDS EVALUATION), output format conversions (KEEP), PluginBridge (OUT OF SCOPE). Frontier → .2.
 - `2026-05-17`: Created task tree for Phase 1 parser-core isolation cleanup (was `mostly done` in ROADMAP_V2.md without task-tree ownership). 3 leaves defined: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation.
