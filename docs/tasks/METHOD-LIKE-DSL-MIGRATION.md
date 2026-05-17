@@ -7,7 +7,7 @@
 - Roadmap lane: `Method-like DSL migration track`
 - Created: `2026-05-17`
 - Last updated: `2026-05-17`
-- Active frontier: `METHOD-LIKE-DSL-MIGRATION.2`
+- Active frontier: `METHOD-LIKE-DSL-MIGRATION.3`
 - Owner: repo-local workflow
 
 ## Goal
@@ -46,10 +46,10 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
   Commit: `pending`
 
 - ID: `METHOD-LIKE-DSL-MIGRATION.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Legacy return-helper cleanup — audit remaining return_a, return_m, return_ma, return_imatch/return_im references in docs/tests/deferred specs. Migrate or document as intentionally preserved compatibility coverage.`
   Acceptance: `All legacy return-helper references are either migrated to canonical return(...) or explicitly documented as preserved compatibility regression coverage with rationale. Tests that exercise legacy helpers for regression coverage are clearly marked.`
-  Verification: `pending`
+  Verification: `2026-05-17: Comprehensive audit complete. 4 categories of references found: (1) ~15 incidental spec-content uses in lazy-load tests — preserved, not testing action syntax; (2) ~11 intentional compatibility infrastructure tests — preserved, regression locks for compat path; (3) 6 book references — already documented as legacy with canonical alternatives; (4) ~15 USER_GUIDE references — authoritative compat contract reference docs. Zero references require migration. Full audit documented in DEVELOPMENT_NOTES.md with per-category breakdown and summary table.`
   Commit: `pending`
 
 - ID: `METHOD-LIKE-DSL-MIGRATION.3`
@@ -78,7 +78,7 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `METHOD-LIKE-DSL-MIGRATION.1` | `done` | Compatibility alias retirement policy audit — 11 aliases inventoried, policy in DEVELOPMENT_NOTES.md. |
-| 2 | `METHOD-LIKE-DSL-MIGRATION.2` | `pending` | Legacy return-helper cleanup — depends on retirement policy direction from .1. |
+| 2 | `METHOD-LIKE-DSL-MIGRATION.2` | `done` | Legacy return-helper cleanup — 4 categories audited, zero migrations needed, documented in DEVELOPMENT_NOTES.md. |
 | 3 | `METHOD-LIKE-DSL-MIGRATION.3` | `pending` | Convention-based accumulator audit — independent of .1/.2, can run in parallel. |
 | 4 | `METHOD-LIKE-DSL-MIGRATION.4` | `pending` | Missing DSL features inventory — determines whether additional leaves are needed. |
 | 5 | `METHOD-LIKE-DSL-MIGRATION.5` | `pending` | Formalize cross-nesting parity deferral — close-out prerequisite. |
@@ -133,15 +133,18 @@ These canonical forms are preferred; aliases remain supported for compatibility:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.2` | Audited 4 categories of legacy return-helper references. ~15 incidental in lazy-load tests (preserved), ~11 intentional compat infra tests (preserved), ~6 book refs (already documented), ~15 USER_GUIDE refs (authoritative). Zero migrations needed. Audit in DEVELOPMENT_NOTES.md. | Pass — cleanup complete, frontier → .3. |
 | `2026-05-17` | `METHOD-LIKE-DSL-MIGRATION.1` | Audited 11 aliases across 7 implementation files. 19/19 shipped specs use zero aliases. Policy in DEVELOPMENT_NOTES.md with 6-step retirement process, alias inventory (11 entries), implementation layer table, two retirement tiers (short-term: 4 aliases, medium-term: 4 legacy return helpers). declare(a/s/h) retained as ergonomic shorthand. | Pass — policy complete, frontier → .2. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
+| `METHOD-LIKE-DSL-MIGRATION.2` | `pending` | — |
 | `METHOD-LIKE-DSL-MIGRATION.1` | `pending` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed METHOD-LIKE-DSL-MIGRATION.2 — legacy return-helper cleanup. 4 categories audited, zero migrations needed. Active frontier: `.3`.
 - `2026-05-17`: Completed METHOD-LIKE-DSL-MIGRATION.1 — compatibility alias retirement policy audit. 11 aliases inventoried, policy in DEVELOPMENT_NOTES.md. Active frontier: `.2`.
 - `2026-05-17`: Created task tree for Method-like DSL migration track (was `in progress` in ROADMAP_V2.md without task-tree ownership). 5 leaves defined covering compatibility aliases, legacy return helpers, accumulator audit, missing features inventory, and cross-nesting parity deferral.

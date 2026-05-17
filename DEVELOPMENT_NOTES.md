@@ -5989,3 +5989,76 @@ Before each commit:
   - **Short-term retirement candidates** (implementation-only, zero spec impact): `tail`, `drop_last`, `flatten`, `array_values` — these are simple name aliases in helper-start regexes and method dispatch. Retiring them only requires regex updates.
   - **Medium-term retirement candidates** (deeper legacy, separate scanner/contract infrastructure): `return_a`, `return_ma`, `return_m`, `return_imatch`/`return_im` — these have dedicated scanner contracts, rewrite rules, and canonical event mappings.
   - **Not retiring**: `declare(a/s/h)` — intentional ergonomic shorthand, not legacy debt.
+
+- 2026-05-17 (METHOD-LIKE-DSL-MIGRATION.2): Legacy return-helper cleanup audited. All references to `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` across tests (t/phase0_regression.t), docs (book), and USER_GUIDE files (USER_GUIDE_ActionIR_Contracts.md) are either intentionally preserved compatibility coverage or already documented as legacy with canonical alternatives. No migration required. Audit findings below.
+
+  ## Legacy return-helper reference audit
+  
+  ### Categories of references
+  
+  #### 1. Incidental spec content in lazy-load tests (t/phase0_regression.t)
+  
+  15 test subtests use `return_a(Top)` as a minimal valid spec content string to exercise the full compile pipeline without testing the helper itself. The tests verify lazy-load behavior (require avoidance), not action syntax. Migrating to canonical `return(array("?Top:", array_copy(array(Top))))` would triple the spec string length without changing what the tests verify.
+  
+  Subtests affected:
+  - `linkedspec_require_avoids_compile_pipeline_load_until_get` (line 173)
+  - `linkedspec_require_avoids_linkedre_load_until_get` (line 231)
+  - `runtime_require_avoids_compiler_load_until_run_get` (line 266)
+  - `compiler_require_avoids_owner_load_until_run_get_pipeline` (line 283)
+  - `compiler_require_avoids_trace_load_until_run_get_pipeline` (line 309)
+  - `compiler_require_avoids_data_dumper_load_until_debug_pipeline_dump` (line 328)
+  - `compiler_require_avoids_linkedre_load_until_run_get_pipeline` (line 349)
+  - `spec_entry_require_avoids_ruleir_load_until_compile_spec_entry` (line 387)
+  - `spec_entry_require_avoids_trace_load_until_compile_spec_entry` (line 414)
+  - `spec_entry_require_avoids_data_dumper_load_until_debug_compile_dump` (line 437)
+  - `bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build` (line 643)
+  - `linkedspec_require_avoids_compiler_load_until_build_compiled_rule_table` (line 925)
+  - `runtime_handler_linkedre_failure_returns_eval_error_without_exit` (line 576)
+  - `bootstrap_registry_curly_brace_recursion_smoke` (line 622)
+  - `get_return_descriptor_rule_meta_single_vs_multi_strategy` (line 1805)
+  
+  **Decision**: Preserve as-is. These are valid `.spec` content exercising the full compile pipeline. Migrating would add noise without improving test quality.
+  
+  #### 2. Intentional compatibility infrastructure tests (t/phase0_regression.t)
+  
+  10+ test assertions explicitly exercise the compatibility infrastructure — scanner contracts, rewrite rules, canonical event mappings, and owner delegation paths. These MUST use legacy syntax to verify the compatibility path works.
+  
+  Key assertions:
+  - `actionir_canonical_events_require_avoids_core_load_until_build` (lines 896-897): Uses `return_a(Top)` as input to `_build_canonical_action_ir_events` — tests the `return_a` → `RETURN` event mapping.
+  - `actionir_canonical_events_statement_split_lazy_loads_core` (line 906): Statement splitter with `return_a(Top)` — tests the lazy-load of StatementSplit.
+  - `emit_context_subst_delegation_through_action_rewriter` (line 950): Handler substitution with `return_a(Top)` — tests `call_spec_handler_subst` delegation.
+  - `get_delegation_through_runtime_owner` (line 1145): `LinkedSpec::Get` with `return_a(Top)` — tests runtime owner delegation.
+  - `call_spec_handler_subst_delegation_through_emit_context_compat_owner` (line 1153): Same.
+  - `return_imatch_lowering_delegation` (line 1998): Override test for `_lower_return_imatch_statement`.
+  - `return_array_lowering_delegation` (line 2018): Override test for `_lower_return_array_statement`.
+  - `action_rewriter_return_imatch_helper_delegation` (line 2227): ActionRewriter delegation.
+  - `action_rewriter_return_array_helper_delegation` (line 2247): ActionRewriter delegation.
+  - `action_rewriter_scanner_wrapper_delegation` (line 2299): Scanner wrapper delegation with `return_a(Top)`.
+  - `action_rewriter_canonical_builder_delegation` (line 2311): Canonical builder delegation.
+  
+  **Decision**: Preserve as-is. These are the regression locks for the compatibility infrastructure. Removing or migrating them would eliminate test coverage for the compatibility path.
+  
+  #### 3. Book documentation (docs/linkedspec-book/src/)
+  
+  - `dsl/value-container-flow-helper-reference.md` (lines 109-233): Comprehensive reference table listing each legacy return helper with its canonical alternative. Already correctly documented as legacy. Includes explicit "prefer X" guidance for each.
+  - `user-model/spec-files-and-rule-paragraphs.md` (line 46): References `return_a` as "older compact" style — accurate.
+  - `specs-and-corpora/ebnf-spec-walkthrough.md`: Uses `return_array` — this is a rule name in `ebnf.spec`, not the legacy `return_array` helper. Unrelated.
+  
+  **Decision**: Preserve as-is. Book correctly documents legacy helpers with canonical alternatives.
+  
+  #### 4. USER_GUIDE reference documentation (USER_GUIDE_ActionIR_Contracts.md)
+  
+  Lines 93-202, 3284: This is the canonical reference for the compatibility contract system. Documents each legacy return helper (`return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im`, `return_array`) with its contract ID, rewrite rule pattern, and examples. This is authoritative reference documentation for the compatibility infrastructure — it documents what exists, not what should be used for new work.
+  
+  **Decision**: Preserve as-is. This is reference documentation for the compatibility contracts. It should remain as long as the contracts exist.
+  
+  ### Summary
+  
+  | Category | Count | Action |
+  | --- | --- | --- |
+  | Incidental spec content in lazy-load tests | ~15 subtests | Preserve — not testing action syntax |
+  | Intentional compatibility infrastructure tests | ~11 assertions | Preserve — regression locks for compat path |
+  | Book legacy documentation | ~6 references | Preserve — already documented as legacy |
+  | USER_GUIDE reference docs | ~15 references | Preserve — authoritative compat contract reference |
+  
+  **Conclusion**: No legacy return-helper references require migration. All references are either incidental (testing other concerns), intentionally preserved (testing the compatibility infrastructure itself), or already documented as legacy with canonical alternatives. The legacy return helpers can be retired as a batch when the compatibility infrastructure is removed (see .1 retirement policy for medium-term candidates), at which point these references will be removed along with the implementation.
