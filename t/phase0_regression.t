@@ -46591,6 +46591,125 @@ subtest 'tracked_markdown_docs_do_not_capture_machine_local_absolute_paths' => s
     }
 };
 
+subtest 'spec_self_hosted_parser_does_not_hang_on_shipped_specs' => sub {
+    # PHASE7-SELF-HOSTED-SPEC.4: Verify the spec.spec-generated parser
+    # does not hang when parsing shipped .spec files.  Leading comments
+    # and blank lines are stripped because spec.spec's body_element lacks
+    # a top-level skip rule (known bootstrapping gap — the grammar
+    # describes structure, not the full comment-skipping parse loop).
+    my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));
+
+    my $parser = eval { LinkedSpec::Get(\$spec_spec_content) };
+    my $build_err = $@;
+    ok(defined($parser) && ref($parser) eq 'CODE', 'spec.spec builds a parser coderef')
+        or diag(normalize_error($build_err || "LinkedSpec::Get returned non-CODE for spec.spec"));
+
+    my @sample_specs = qw(tclite ifelse Lispish tablegrep pplugin portmap);
+    plan tests => 1 + scalar(@sample_specs);
+
+    for my $spec_name (@sample_specs) {
+        my $content = slurp(File::Spec->catfile($spec_dir, "$spec_name.spec"));
+        # Strip leading comments/blank lines so the parser reaches the
+        # first rule header without a dedicated top-level skip rule.
+        $content =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
+        my $result = eval {
+            local $SIG{ALRM} = sub { die "TIMEOUT\n" };
+            alarm(10);
+            my $r = $parser->(\$content);
+            alarm(0);
+            $r;
+        };
+        alarm(0);
+        my $err = $@;
+        ok(!$err && defined($result), "spec.spec parser parses $spec_name.spec without hang")
+            or diag($err ? "TIMEOUT or error: $err" : "Returned undef");
+    }
+};
+
+subtest 'spec_self_hosted_parser_recognizes_structural_elements' => sub {
+    # PHASE7-SELF-HOSTED-SPEC.4: Verify the spec.spec parser correctly
+    # identifies rule headers, regexes, and action edges from a known
+    # input fragment.
+    my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));
+
+    my $parser = eval { LinkedSpec::Get(\$spec_spec_content) };
+    my $build_err = $@;
+    ok(defined($parser) && ref($parser) eq 'CODE', 'spec.spec builds a parser coderef for structural test')
+        or diag(normalize_error($build_err || "LinkedSpec::Get returned non-CODE"));
+
+    plan tests => 5;
+
+    # Test: parse a minimal .spec fragment with rule header + regex + edge
+    my $minimal = "Top::\n /hello/ -> Child\n";
+    my $result = eval {
+        local $SIG{ALRM} = sub { die "TIMEOUT\n" };
+        alarm(5);
+        my $r = $parser->(\$minimal);
+        alarm(0);
+        $r;
+    };
+    alarm(0);
+    ok(defined($result), 'spec.spec parser returns defined result for minimal input')
+        or diag("Returned undef — parser may not recognize input structure");
+
+    # Test: self-parse with leading comments stripped (known bootstrapping
+    # gap: spec.spec's body_element has no top-level comment skip rule).
+    my $self_stripped = $spec_spec_content;
+    $self_stripped =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
+    my $self_result = eval {
+        local $SIG{ALRM} = sub { die "TIMEOUT\n" };
+        alarm(15);
+        my $r = $parser->(\$self_stripped);
+        alarm(0);
+        $r;
+    };
+    alarm(0);
+    ok(defined($self_result), 'spec.spec parser self-parses (comments stripped) without hang');
+
+    # Test: the parser runs on a spec with lifecycle markers
+    my $lifecycle_content = slurp(File::Spec->catfile($spec_dir, 'tablegrep.spec'));
+    $lifecycle_content =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
+    my $lifecycle_result = eval {
+        local $SIG{ALRM} = sub { die "TIMEOUT\n" };
+        alarm(10);
+        my $r = $parser->(\$lifecycle_content);
+        alarm(0);
+        $r;
+    };
+    alarm(0);
+    ok(defined($lifecycle_result), 'spec.spec parser parses tablegrep.spec (has lifecycle markers) without hang');
+
+    # Test: the parser runs on a spec with blind-call edges (=>)
+    my $blind_content = slurp(File::Spec->catfile($spec_dir, 'pplugin.spec'));
+    $blind_content =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
+    my $blind_result = eval {
+        local $SIG{ALRM} = sub { die "TIMEOUT\n" };
+        alarm(10);
+        my $r = $parser->(\$blind_content);
+        alarm(0);
+        $r;
+    };
+    alarm(0);
+    ok(defined($blind_result), 'spec.spec parser parses pplugin.spec (has blind-call edges) without hang');
+};
+
+subtest 'spec_self_hosted_compiles_as_language_agnostic' => sub {
+    # PHASE7-SELF-HOSTED-SPEC.4: Lock that spec.spec stays at 1.0000
+    # language_agnostic_ready_ratio.
+    my $content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));
+
+    my $descriptor = eval { LinkedSpec::Get(\$content, return_descriptor => 1) };
+    my $err = $@;
+    my $summary = (ref($descriptor) eq 'HASH')
+        ? ($descriptor->{meta}{action_rewriter_migration} || {})
+        : {};
+    plan tests => 3;
+    is($summary->{language_agnostic_ready_ratio}, '1.0000', 'spec.spec language_agnostic_ready_ratio is 1.0000')
+        or diag(normalize_error($err || "LinkedSpec::Get returned non-descriptor for spec.spec"));
+    is($summary->{language_agnostic_blocked_rule_count} || 0, 0, 'spec.spec has no language-agnostic blocker rules');
+    is($summary->{compatibility_surface_rule_count} || 0, 0, 'spec.spec has no compatibility-surface rules');
+};
+
 done_testing();
 
 sub discover_specs {

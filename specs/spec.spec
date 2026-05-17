@@ -18,7 +18,7 @@ LE {
   push_value(array(rules), scalar(retv));
  endif()
 }
-LX {return(hash("rules", array(rules)))}
+E {return(hash("rules", array(rules)))}
 
 
 rule_paragraph:AND /(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)/
