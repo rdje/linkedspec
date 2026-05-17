@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Audit: inventory remaining plugin surface for PLUGIN-MODERNIZATION
+
+- Audited all plugin-related surfaces: 38 .plg files, PPlugin.pm (288 lines), PluginBridge.pm (199 lines), PluginRegistry.pm (130 lines), LinkedSpec.pm facade (7 legacy methods), external callers, regression tests.
+- Classified each .plg file: extracted (helpers moved, visible action remains), spec consumer (uses get_parser, not plugin), legacy action file.
+- FSMGen.pm is the only external caller of get_plugin (optional default).
+- Created follow-on leaves .2–.5: remove extracted wrappers, de-scope FSMGen, reduce public facade, evaluate PPlugin/PluginBridge retirement.
+
 ## 2026-05-17 — Audit: verify ActionIR owner surfaces clean (Backbone Item 3 close-out)
 
 - Audited all 12 ActionIR owners + ScannerCore/StatementSplitCore/CanonicalEventsCore + EmitContext for OwnerDispatch hygiene and stale validators.

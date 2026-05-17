@@ -1,5 +1,4 @@
-Audit: verify all 12 ActionIR owners use clean OwnerDispatch
+Audit: inventory remaining plugin surface for modernization
 
-BACKBONE-ACTION-IR-LOWERING.1 — Zero old-style _require_dep wrappers remain.
-Backbone Item 3 ActionIR owner-contract cleanup complete.
-BACKBONE-ACTION-IR-LOWERING tree done (1 leaf).
+PLUGIN-MODERNIZATION.1 — 38 .plg files, 3 plugin modules, 7 facade methods.
+Created follow-on leaves .2–.5.

@@ -30,28 +30,52 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 - ID: `PLUGIN-MODERNIZATION`
   Status: `active`
   Goal: `Retire dynamic plugin execution, preserve spec resolution.`
-  Children: `PLUGIN-MODERNIZATION.1`
+  Children: `PLUGIN-MODERNIZATION.1`, `PLUGIN-MODERNIZATION.2`, `PLUGIN-MODERNIZATION.3`, `PLUGIN-MODERNIZATION.4`, `PLUGIN-MODERNIZATION.5`
 
 - ID: `PLUGIN-MODERNIZATION.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Inventory current plugin surface: list every remaining .plg reference, PPlugin dependency, and dynamic-plugin code path. Map each to its replacement domain owner or retirement plan.`
   Acceptance: `Task file lists each plugin artifact, its current status, its replacement owner (if applicable), and names the next executable retirement leaf.`
-  Verification: `pending`
+  Verification: `2026-05-17: Full inventory complete (see inventory section below). 38 .plg files remain on disk (mostly legacy action files). PPlugin.pm (288 lines) still serves as lazy-loaded .plg adapter. PluginBridge.pm (199 lines) provides registry-first/legacy-fallback. PluginRegistry.pm (130 lines) manages in-memory registrations. LinkedSpec.pm facade exposes 7 legacy methods. FSMGen.pm is the only external get_plugin caller (optional default). 3 regression subtests lock legacy plugin behavior. Created follow-on leaves .2–.5. Full suite: Files=1, Tests=1007, PASS (no code changes — audit-only leaf).`
   Commit: `pending`
+
+- ID: `PLUGIN-MODERNIZATION.2`
+  Status: `pending`
+  Goal: `Identify and remove .plg files whose helpers have already been fully extracted to domain owners. Per ROADMAP_V2.md, string.plg, cgi.plg, genericfilter.plg, msoffice.plg, vhdconst_eval.plg, yesno.plg, http.plg, lighttpd.plg, httpd.plg, tcl4interconn.plg, tssio.plg, table.plg, spec.plg, and plugin.plg are already gone. Audit the remaining 38 .plg files for extraction status.`
+  Acceptance: `Each remaining .plg file is classified as: (a) already-extracted — safe to delete, (b) partially-extracted — helpers moved but visible actions remain, (c) not-yet-extracted — still carries plugin subdefs. Deleted files are removed from disk and regression tests updated.`
+
+- ID: `PLUGIN-MODERNIZATION.3`
+  Status: `pending`
+  Goal: `De-scope FSMGen.pm from LinkedSpec::get_plugin dependency. FSMGen::getop_plugin_list already accepts an optional get_plugin callback (defaulting to \&LinkedSpec::get_plugin). Verify no caller relies on the default and remove the dependency or document the transition path.`
+  Acceptance: `FSMGen.pm no longer has a hard dependency on LinkedSpec::get_plugin, or the dependency is documented as an explicit opt-in with no default.`
+
+- ID: `PLUGIN-MODERNIZATION.4`
+  Status: `pending`
+  Goal: `Reduce public facade plugin surface. The LinkedSpec.pm facade currently exposes 7 legacy plugin methods (run_plugin, get_plugin, dispatch_plugin_autoload_name, AUTOLOAD, register_plugin, register_plugins, clear_registered_plugins). Evaluate which can be removed, which need deprecation warnings, and which must remain as transition stubs.`
+  Acceptance: `Each legacy facade method is either removed, marked with a deprecation warning, or documented as an explicit transition stub with a retirement timeline.`
+
+- ID: `PLUGIN-MODERNIZATION.5`
+  Status: `pending`
+  Goal: `Evaluate PPlugin.pm and PluginBridge.pm retirement feasibility. PPlugin.pm (288 lines) is the legacy .plg adapter loaded lazily by PluginBridge. PluginBridge.pm (199 lines) is the compatibility bridge. If all .plg files are retired or converted, both can be removed.`
+  Acceptance: `If all .plg consumers are gone: PPlugin.pm is deleted, PluginBridge.pm is reduced to a registry-only stub or deleted, and regression tests are updated. If consumers remain: a retirement plan with timeline is documented.`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PLUGIN-MODERNIZATION.1` | `pending` | Need a plugin-surface inventory before targeted removal. |
+| 1 | `PLUGIN-MODERNIZATION.2` | `pending` | Remove already-extracted .plg wrappers — highest impact-to-effort, reduces PPlugin dependency surface. |
+| 2 | `PLUGIN-MODERNIZATION.3` | `pending` | De-scope FSMGen from get_plugin — only external caller, removes last non-facade get_plugin usage. |
+| 3 | `PLUGIN-MODERNIZATION.4` | `pending` | Reduce public facade — shrink or deprecate 7 legacy plugin methods. |
+| 4 | `PLUGIN-MODERNIZATION.5` | `pending` | Evaluate PPlugin/PluginBridge retirement — last step after all consumers are gone. |
 
 ## Decisions
 
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.1 inventory (see inventory section below). 38 .plg files, 3 plugin modules, 7 facade methods, 1 external caller. Created follow-on leaves .2–.5.
 - `2026-05-16`: Created task tree. Extensive plugin-to-owner extraction already landed per `ROADMAP_V2.md` (HTTP::FileAccess, RTLUtils, FSMGen, Timing::*, Table::GenericFilter, QC::*, etc.).
 
 ## Open Questions
 
-- Are there remaining internal `.plg` files that still need extraction? (Answer pending inventory.)
+- Are there remaining internal `.plg` files that still need extraction? Resolved: Yes, 38 .plg files remain. See inventory section for classification. → .2
 
 ## Blockers
 
@@ -61,14 +85,104 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| `2026-05-17` | `PLUGIN-MODERNIZATION.1` | Audited 38 .plg files, PPlugin.pm (288 lines), PluginBridge.pm (199 lines), PluginRegistry.pm (130 lines), LinkedSpec.pm facade (7 legacy methods), FSMGen.pm (only external get_plugin caller), 3 regression subtests. Created follow-on leaves .2–.5. Full suite: Files=1, Tests=1007, PASS (no code changes). | Pass — plugin surface fully inventoried. 4 follow-on leaves defined. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| `PLUGIN-MODERNIZATION.1` | `pending` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.1 inventory. 38 .plg files, 3 plugin modules, 7 facade methods. Follow-on leaves .2–.5 created.
 - `2026-05-16`: Created task tree from template.
+
+## PLUGIN-MODERNIZATION.1 Inventory (2026-05-17)
+
+### Audit Scope
+
+Audited all plugin-related surfaces: .plg files, PPlugin, PluginBridge, PluginRegistry, LinkedSpec.pm facade, external callers, regression tests.
+
+### .plg Files Still on Disk (38 files)
+
+| File | Uses | Status |
+| --- | --- | --- |
+| common.plg | `LinkedSpec::Get` | Legacy action file |
+| ds_vhistory.plg | `LinkedSpec::get_parser` | Spec consumer |
+| duty_cycle_degradation.plg | Visible action | Legacy action file (helpers in Timing::StanBackend) |
+| edalog.plg | Legacy action | Legacy action file |
+| exp.plg | Legacy action | Legacy action file |
+| fixscript.plg | Legacy action | Legacy action file |
+| fsmgen.plg | `LinkedSpec::get_parser` | Spec consumer (helpers in FSMGen) |
+| fxenv_helper.plg | `InteractivePrompt::yes_no` | Extracted (visible action remains) |
+| generic_fake_memory_module.plg | `RTLUtils::ceil_log2` | Extracted (visible action remains) |
+| hutils.plg | `Table::GenericFilter` | Extracted (visible action remains) |
+| lstype_long.plg | Legacy action | Legacy action file |
+| lte_digital_rf.plg | Legacy action | Legacy action file |
+| matrix.plg | Legacy action | Legacy action file |
+| mbist.plg | `VHDL::ConstantEval` | Extracted (visible action remains) |
+| msword.plg | Legacy action | Legacy action file |
+| network.plg | Legacy action | Legacy action file |
+| nlc.plg | Legacy action | Legacy action file |
+| peruser.plg | Legacy action | Legacy action file |
+| qc_summary.plg | `QC::Summary` helpers | Extracted (visible action remains) |
+| qcflow.plg | `QC::Flow`, `QC::TclInterconn` | Extracted (visible action remains) |
+| qclib_compile.plg | Legacy action | Legacy action file |
+| quick_omap2430c_dft.plg | Legacy action | Legacy action file |
+| quick_sdf_hack.plg | Legacy action | Legacy action file |
+| raw.plg | Legacy action | Legacy action file |
+| regtest.plg | `LinkedSpec::get_parser` | Spec consumer |
+| rtl.plg | `RTLUtils` | Extracted (visible action remains) |
+| sdc2top.plg | `LinkedSpec::Get` | Spec consumer |
+| setup_hold_tmax_tmin.plg | `Timing::SetupHold` | Extracted (visible action remains) |
+| seview.plg | Legacy action | Legacy action file |
+| skew.plg | `Timing::StanBackend` | Extracted (visible action remains) |
+| specman.plg | Legacy action | Legacy action file |
+| spyglass.plg | `MSOffice::Excel` | Extracted (visible action remains) |
+| stan_backend.plg | `Timing::StanBackend` | Extracted (visible action remains) |
+| stan_omap2430c_backend.plg | `Timing::StanOmap2430cBackend` | Extracted (visible action remains) |
+| test.plg | Test/debug | Test file |
+| tree.plg | Legacy action | Legacy action file |
+| wrapgen.plg | `RTLUtils` | Extracted (visible action remains) |
+| wrapgen_update.plg | `LinkedSpec::Get`, `LinkedSpec::get_parser` | Spec consumer |
+
+Key: **Extracted** = private helper subdefs already moved to domain owners per ROADMAP_V2.md, but visible actions still live in .plg. **Spec consumer** = uses LinkedSpec as parser (get_parser/Get), not as plugin system. **Legacy action file** = carries actions that haven't been formally extracted/documented.
+
+### Plugin Infrastructure Modules
+
+| Module | Lines | Role | Status |
+| --- | --- | --- | --- |
+| PPlugin.pm | 288 | Legacy .plg adapter — parses .plg files, builds plugin registry, provides get/exec | Lazy-loaded by PluginBridge. Still needed as long as .plg files exist. |
+| PluginBridge.pm | 199 | Compatibility bridge — registry-first/legacy-fallback policy for get_plugin/run_plugin/AUTOLOAD | Uses OwnerDispatch. Bridges modern registry ↔ legacy PPlugin. |
+| PluginRegistry.pm | 130 | In-memory plugin registry — register_plugin, register_plugins, get_plugin, has_plugin, clear_registered_plugins | Supports runtime plugin registration (used by tests). |
+
+### LinkedSpec.pm Facade — Legacy Plugin Methods (7 total)
+
+| Method | Line | Delegates to | Status |
+| --- | --- | --- | --- |
+| register_plugin | 211 | PluginRegistry | Registry maintenance |
+| register_plugins | 222 | PluginRegistry | Registry maintenance |
+| clear_registered_plugins | 233 | PluginRegistry | Registry maintenance |
+| run_plugin | 245 | PluginBridge::_dispatch_plugin_name | Legacy execution |
+| get_plugin | 257 | PluginBridge::_lookup_plugin_name | Legacy lookup |
+| dispatch_plugin_autoload_name | 270 | PluginBridge::_dispatch_autoload | Legacy compatibility |
+| AUTOLOAD | 281 | PluginBridge::_dispatch_autoload | Legacy AUTOLOAD shim |
+
+### External Callers of get_plugin
+
+Only **FSMGen.pm:68** (`getop_plugin_list`) references `LinkedSpec::get_plugin` — and only as an optional default: `my $get_plugin = $opt{get_plugin} // \&LinkedSpec::get_plugin`. The caller can override with any coderef. This is the only non-facade, non-test consumer of the legacy plugin lookup path.
+
+### Regression Test Coverage
+
+3 subtests in `t/phase0_regression.t` lock legacy plugin behavior:
+1. `linkedspec_require_avoids_plugin_bridge_load_until_autoload` — verifies PluginBridge lazy-loading, AUTOLOAD normalization
+2. `linkedspec_require_avoids_plugin_bridge_load_until_run_plugin` — verifies run_plugin, register_plugin, clear_registered_plugins
+3. `linkedspec_require_avoids_plugin_bridge_load_until_get_plugin` — verifies get_plugin
+
+### Gap Summary (Priority Ordered)
+
+1. **Already-extracted .plg wrappers still on disk**: Many .plg files have had private helpers extracted (per ROADMAP_V2.md) but still carry visible actions. Each needs classification: delete, reduce to stub, or keep with documented plan. → `.2`
+2. **FSMGen get_plugin dependency**: Only external caller. The default can be removed or documented as opt-in. → `.3`
+3. **7 legacy facade methods**: run_plugin, get_plugin, dispatch_plugin_autoload_name, AUTOLOAD, register_plugin, register_plugins, clear_registered_plugins. Public surface is large for transition-only functionality. → `.4`
+4. **PPlugin.pm / PluginBridge.pm retirement**: After all .plg consumers are gone, both modules can be removed. PluginRegistry may remain if runtime registration is kept. → `.5`

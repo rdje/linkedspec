@@ -1,7 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
-- 2026-05-17 (BACKBONE-ACTION-IR-LOWERING.1): ActionIR owner-contract audit complete. All 12 owners clean — zero old-style _require_dep wrappers. BACKBONE-ACTION-IR-LOWERING tree COMPLETE (1 leaf). PNT frontier: PLUGIN-MODERNIZATION.1 (next active tree).
+- 2026-05-17 (PLUGIN-MODERNIZATION.1): Plugin surface inventory complete. 38 .plg files (classified: extracted/spec-consumer/legacy-action), 3 plugin modules, 7 facade methods. Follow-on leaves .2–.5 created. PNT frontier: .2 (remove already-extracted .plg wrappers).
 - 2026-05-17 (PHASE6-DOCUMENTATION.6): Overview chapters expanded (153→275 lines). PNT frontier: .7 (ActionIR lowering pipeline docs — 171 lines for 2,000+ lines of code).
 - 2026-05-17 (PHASE6-DOCUMENTATION.5): Book/USER_GUIDE cross-linking done — 6 book chapters now reference USER_GUIDE files. USER_GUIDE.md links to book. PNT frontier: .6 (overview chapter expansion — 153 lines across 4 chapters).
 - 2026-05-17 (PHASE6-DOCUMENTATION.4): Public API docs complete — 2 new book chapters created. All 4 facade bands documented. PNT frontier: .5 (book/USER_GUIDE cross-linking).
