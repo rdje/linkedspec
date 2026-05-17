@@ -78,10 +78,10 @@ Maintain and expand project documentation so every user-facing surface, architec
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.7`
-  Status: `pending`
+  Status: `done`
   Goal: `Expand ActionIR lowering pipeline conceptual documentation. Expand actionir-lowering-mental-model.md (95 lines) and action-model-and-helper-surface.md (76 lines) to cover the full lowering pipeline (Scanner → StatementSplit → CanonicalEvents → RewritePipeline → FlowExpr/ValueExpr/ControlFlow/MethodLowering/DeclareMethod/ArrayPipeline/EmittedPerl).`
   Acceptance: `The two ActionIR book chapters together exceed 300 lines. A reader understands the lowering pipeline stages, contract families, and how ActionIR relates to the DSL surface.`
-  Verification: `pending`
+  Verification: `2026-05-17: Expanded actionir-lowering-mental-model.md (107→164 lines): added "The lowering pipeline" section covering Scanner, StatementSplit, CanonicalEvents, RewritePipeline, 6 lowering owners, and the Contracts catalog with 8-family table. Expanded action-model-and-helper-surface.md (77→183 lines): expanded each helper family with purpose/usage descriptions and representative helpers, added "How helpers reach emitted code" section tracing the full pipeline flow. Combined: 347 lines (above 300 threshold). Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf).`
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.8`
@@ -95,8 +95,7 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE6-DOCUMENTATION.7` | `pending` | ActionIR lowering is the DSL's engine; 171 lines for 2,000+ lines of code is too thin. |
-| 2 | `PHASE6-DOCUMENTATION.8` | `pending` | Per-spec walkthroughs are the most user-visible content; only 2 of 14+ mature specs covered. |
+| 1 | `PHASE6-DOCUMENTATION.8` | `pending` | Per-spec walkthroughs are the most user-visible content; only 2 of 14+ mature specs covered. |
 | 3 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
 | 4 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
 | 5 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
@@ -105,6 +104,7 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 ## Decisions
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.7 — expanded ActionIR lowering pipeline docs. actionir-lowering-mental-model (107→164), action-model-and-helper-surface (77→183). Combined 347 lines. Added pipeline stages, contract families table, and helper-to-emitted-code flow.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.6 — expanded all 4 overview chapters. what-is-linkedspec (29→69), design-rationale (50→80), project-status (19→52), documentation-layers (55→74). Total: 153→275 lines.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. Added cross-references to 5 additional book chapters. USER_GUIDE.md now links to the book. 6 book chapters now cross-reference USER_GUIDE files.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.4 — completed public API documentation. Created 2 new book chapters (trace-api.md, plugin-registry.md). Book's Public API section now documents all 4 facade bands: trace (7 methods + verbosity levels + state variables), compile/runtime (Get, get_parser, build_compiled_rule_table, call_spec_handler_subst), registry (3 methods), legacy transition (4 methods with status note). Updated SUMMARY.md.
@@ -217,6 +217,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PHASE6-DOCUMENTATION.7` | Verified both ActionIR chapters expanded. actionir-lowering-mental-model now covers full pipeline (Scanner through EmittedPerl) with 8-family contracts table. action-model-and-helper-surface now expands each helper family with pipeline flow section. Combined 347 lines. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — ActionIR lowering pipeline now substantively documented. 184→347 lines. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.6` | Verified all 4 overview chapters expanded beyond 50-line threshold. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — overview section 153→275 lines. Entry point now substantive. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.5` | Verified 5 new cross-reference sections added to book chapters. Verified USER_GUIDE.md links to the book. Verified existing action-model-and-helper-surface links preserved. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — 6 book chapters + USER_GUIDE.md now cross-reference each other. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.4` | Verified 2 new book chapters created (trace-api.md 115 lines, plugin-registry.md 72 lines). Verified all 4 facade bands now documented. Verified SUMMARY.md updated. Verified get-and-get-parser.md updated with build_compiled_rule_table/call_spec_handler_subst. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — book Public API section now covers all facade bands. |
@@ -228,7 +229,8 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PHASE6-DOCUMENTATION.6` | `pending` | — |
+| `PHASE6-DOCUMENTATION.7` | `pending` | — |
+| `PHASE6-DOCUMENTATION.6` | `Docs: expand overview chapters from 153 to 275 lines` | — |
 | `PHASE6-DOCUMENTATION.5` | `Docs: bridge book and USER_GUIDE cross-linking` | — |
 | `PHASE6-DOCUMENTATION.4` | `Docs: complete public API documentation in book` | — |
 | `PHASE6-DOCUMENTATION.3` | `Docs: document Validation.pm DSL validation surface` | — |
@@ -237,6 +239,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.7 — expanded ActionIR lowering pipeline docs (184→347 lines combined).
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.6 — expanded all 4 overview chapters (153→275 lines). Entry point now substantive.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. 6 book chapters now cross-reference USER_GUIDE files. USER_GUIDE.md links to the book.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.4 — completed public API docs. Created 2 new book chapters. All 4 facade bands now documented.

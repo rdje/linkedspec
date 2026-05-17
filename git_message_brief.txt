@@ -1,7 +1,7 @@
-Docs: expand overview chapters from 153 to 275 lines
+Docs: expand ActionIR lowering pipeline documentation
 
-PHASE6-DOCUMENTATION.6 — expanded what-is-linkedspec (29→69),
-design-rationale (50→80), project-status (19→52), and
-documentation-layers (55→74). Entry point now substantive.
+PHASE6-DOCUMENTATION.7 — expanded actionir-lowering-mental-model (107→164)
+and action-model-and-helper-surface (77→183). Combined 347 lines.
+Added pipeline stages, contract families table, and lowering flow.
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

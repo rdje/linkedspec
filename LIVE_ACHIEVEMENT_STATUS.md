@@ -7,7 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-17: Completed PHASE6-DOCUMENTATION.6 — expanded all 4 overview chapters (153→275 lines). what-is-linkedspec (29→69): added minimal .spec example and "where LinkedSpec fits" section. design-rationale (50→80): added 5th bet (state-first compiler), expanded each bet. project-status (19→52): added completed phases (1-5), active work (Phase 6), planned Phase 7, backbone items. documentation-layers (55→74): added reading-order guidance. Active PNT frontier: `PHASE6-DOCUMENTATION.7`.
+- 2026-05-17: Completed PHASE6-DOCUMENTATION.7 — expanded ActionIR lowering pipeline docs (184→347 lines combined). actionir-lowering-mental-model (107→164): added full pipeline stages (Scanner→EmittedPerl) + 8-family contracts table. action-model-and-helper-surface (77→183): expanded each helper family with purpose descriptions + "How helpers reach emitted code" pipeline flow section. Active PNT frontier: `PHASE6-DOCUMENTATION.8`.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.5 — bridged book and USER_GUIDE cross-linking.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm (1,368-line DSL validation module). Expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all 5 public entry points with error reporting path, context helpers, strict_syntax mode, and debugging guidance. Expanded book pipeline-overview.md Stage 2 from 4 lines to 16-line structured description of three validation layers. Active PNT frontier: `PHASE6-DOCUMENTATION.4`.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm (56-line core regex utility). Added 11-line section to ARCHITECTURE_STATE.md covering or/oredRE API, position-tracking, seek vs consume, three consumers, and OwnerDispatch loading. Added 3-line explanatory note to book's generated-handlers-and-dispatch.md. Active PNT frontier: `PHASE6-DOCUMENTATION.3`.
@@ -29,6 +29,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
 ## Next Slice Direction
-- Active PNT frontier: `PHASE6-DOCUMENTATION.7` (expand ActionIR lowering pipeline docs — 171 lines for 2,000+ lines of code).
+- Active PNT frontier: `PHASE6-DOCUMENTATION.8` (backfill per-spec walkthroughs — only 2 of 14+ mature specs covered, last doc leaf).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).

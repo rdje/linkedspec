@@ -94,6 +94,64 @@ Start with the core families:
 
 Then move into the more specialized helper families as needed.
 
+## The lowering pipeline
+
+ActionIR lowering is not one monolithic pass. It flows through a pipeline of owners, each responsible for one stage:
+
+```text
+source rule paragraph text
+  -> Scanner (contract discovery)
+  -> StatementSplit (safe statement splitting)
+  -> CanonicalEvents (normalize helpers into canonical ActionIR)
+  -> RewritePipeline (glue scan/classify/lower phases)
+  -> FlowExpr / ValueExpr / ControlFlow / MethodLowering / DeclareMethod / ArrayPipeline
+  -> EmittedPerl (final backend code generation)
+```
+
+### Scanner
+
+`ActionIR::Scanner` discovers which helper contracts are present in a rule's action text. It uses a registry of scanner rule families (`PrimitiveBasicRules`, `PrimitivePipelineRules`, `FlowRules`, `LegacyRules`) to match helper syntax patterns and classify them into contract families. `ScannerCore` is the single source of truth for the scanner dependency contract — the mapping between recognized helper patterns and their lowering handlers.
+
+### StatementSplit
+
+`ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`assign(...)`, `push_value(...)`, `return(...)`) that must be lowered separately.
+
+### CanonicalEvents
+
+`ActionIR::CanonicalEvents` normalizes recognized helper calls into canonical ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Compatibility aliases (older helper names) are normalized to canonical forms here.
+
+### RewritePipeline
+
+`ActionIR::RewritePipeline` glues the scan, classify, and lower phases together. It orchestrates the flow: scan for contracts, split statements, produce canonical events, and dispatch to the appropriate lowering owner for each event.
+
+### Lowering owners
+
+Each contract family has a dedicated lowering owner:
+
+- `FlowExpr` — flow-expression helpers (method chains, fluent continuations)
+- `ValueExpr` — value construction (`scalar(...)`, `array(...)`, `hash(...)`)
+- `ControlFlow` — structured control flow (`if/elseif/else/endif`, `switch/case/default/endswitch`)
+- `MethodLowering` — method-like helper lowering to Perl code
+- `DeclareMethod` — declaration helpers (`declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`)
+- `ArrayPipeline` — array pipeline operations (filter, map, sort, etc.)
+
+### Contracts catalog
+
+`ActionIR::Contracts` (2,176 lines, 163 contracts) is the contract catalog. It defines every supported helper surface — its name, its ActionIR node type, its diagnostic identity, and its unresolved pattern (the template matched before lowering resolves it). The 8 contract families are:
+
+| Family | Contracts | Purpose |
+| --- | --- | --- |
+| capture_and_backtrack | ~70 | Boundary capture, mark, cursor, and BACKTRACK helpers |
+| call_and_dispatch | ~11 | Rule dispatch and call helpers |
+| return | ~9 | Return value construction |
+| passthrough_ir | 12 | Compatibility pass-through surfaces |
+| emit_and_declare | 8 | Declaration and emit helpers |
+| array_pipeline | 9 | Array pipeline operations |
+| flow_control | 9 | Structured control flow |
+| assignment_and_regex | 4 | Assignment and regex-slot helpers |
+
+Understanding the pipeline matters because it explains why a helper call in a `.spec` rule is not just a string substitution — it passes through discovery, normalization, classification, and lowering before becoming emitted backend code.
+
 ## Deeper reference
 
 The repo-root ActionIR guides are the exhaustive working references while this book grows toward absorbing that surface:

@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: expand ActionIR lowering pipeline documentation
+
+- Expanded actionir-lowering-mental-model.md (107→164 lines): added "The lowering pipeline" section covering all 6 pipeline stages (Scanner, StatementSplit, CanonicalEvents, RewritePipeline, lowering owners, Contracts catalog) with an 8-family contracts table.
+- Expanded action-model-and-helper-surface.md (77→183 lines): expanded each helper family with purpose descriptions and representative helpers, added "How helpers reach emitted code" section tracing the full pipeline flow.
+- Combined: 347 lines (above 300 threshold). ActionIR lowering pipeline now substantively documented.
+
 ## 2026-05-17 — Docs: expand overview chapters
 
 - Expanded what-is-linkedspec.md (29→69 lines): added minimal .spec example, "where LinkedSpec fits" section, and detailed output description.
