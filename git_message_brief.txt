@@ -1,4 +1,5 @@
-Docs: backfill per-spec walkthroughs for tablegrep, portmap, pplugin
+Audit: verify all 12 ActionIR owners use clean OwnerDispatch
 
-PHASE6-DOCUMENTATION.8 — Created 3 new per-spec walkthrough chapters.
-PHASE6-DOCUMENTATION tree COMPLETE (8 leaves).
+BACKBONE-ACTION-IR-LOWERING.1 — Zero old-style _require_dep wrappers remain.
+Backbone Item 3 ActionIR owner-contract cleanup complete.
+BACKBONE-ACTION-IR-LOWERING tree done (1 leaf).

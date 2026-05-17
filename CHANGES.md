@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Audit: verify ActionIR owner surfaces clean (Backbone Item 3 close-out)
+
+- Audited all 12 ActionIR owners + ScannerCore/StatementSplitCore/CanonicalEventsCore + EmitContext for OwnerDispatch hygiene and stale validators.
+- All 12 owners use `OwnerDispatch` uniformly via `build_dep_map` in `default_deps_for_package`.
+- Zero old-style top-level `_require_dep(...)` validator wrappers remain — all die messages are inline validation inside the actual work functions (the intended cleaned state).
+- Scanner.pm (54 lines) is the cleanest — `require_pkg_cb` / `call_preserving_err` with zero inline dep checks.
+- Backbone Item 3 ActionIR owner-contract cleanup is complete. BACKBONE-ACTION-IR-LOWERING tree done (1 leaf).
+
 ## 2026-05-17 — Docs: backfill per-spec walkthroughs for tablegrep, portmap, pplugin
 
 - Created 3 new per-spec walkthrough chapters in the book's specs-and-corpora section:

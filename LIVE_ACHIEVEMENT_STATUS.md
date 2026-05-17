@@ -7,7 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-17: Completed PHASE6-DOCUMENTATION.8 — backfilled per-spec walkthroughs. Created 3 new chapters: tablegrep-spec-walkthrough.md (5 rules, grep-like expression parser), portmap-spec-walkthrough.md (3 rules, VHDL/Verilog port-map parser), pplugin-spec-walkthrough.md (6 rules, .plg plugin file parser). Updated SUMMARY.md and shipped-specs-and-corpora.md reading order. PHASE6-DOCUMENTATION tree COMPLETE (8 leaves). All documentation gaps from .1 inventory now closed. Active PNT frontier: `BACKBONE-ACTION-IR-LOWERING.1`.
+- 2026-05-17: Completed BACKBONE-ACTION-IR-LOWERING.1 — audited all 12 ActionIR owners + ScannerCore/StatementSplitCore/CanonicalEventsCore + EmitContext. All use OwnerDispatch uniformly. Zero old-style top-level `_require_dep(...)` validator wrappers remain. Backbone Item 3 ActionIR owner-contract cleanup complete. BACKBONE-ACTION-IR-LOWERING tree COMPLETE (1 leaf). Active PNT frontier: `PLUGIN-MODERNIZATION.1`.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.5 — bridged book and USER_GUIDE cross-linking.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm (1,368-line DSL validation module). Expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all 5 public entry points with error reporting path, context helpers, strict_syntax mode, and debugging guidance. Expanded book pipeline-overview.md Stage 2 from 4 lines to 16-line structured description of three validation layers. Active PNT frontier: `PHASE6-DOCUMENTATION.4`.
 - 2026-05-17: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm (56-line core regex utility). Added 11-line section to ARCHITECTURE_STATE.md covering or/oredRE API, position-tracking, seek vs consume, three consumers, and OwnerDispatch loading. Added 3-line explanatory note to book's generated-handlers-and-dispatch.md. Active PNT frontier: `PHASE6-DOCUMENTATION.3`.
@@ -29,6 +29,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - Phase 1A / Backbone Item 3: Remove unused final descriptor projection helper from `Compiler.pm`.
 
 ## Next Slice Direction
-- Active PNT frontier: `BACKBONE-ACTION-IR-LOWERING.1` (first active tree in TASK_TREE.md after PHASE6-DOCUMENTATION completion).
+- Active PNT frontier: `PLUGIN-MODERNIZATION.1` (next active tree in TASK_TREE.md after BACKBONE-ACTION-IR-LOWERING completion).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).
