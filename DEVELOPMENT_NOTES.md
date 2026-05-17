@@ -6062,3 +6062,121 @@ Before each commit:
   | USER_GUIDE reference docs | ~15 references | Preserve — authoritative compat contract reference |
   
   **Conclusion**: No legacy return-helper references require migration. All references are either incidental (testing other concerns), intentionally preserved (testing the compatibility infrastructure itself), or already documented as legacy with canonical alternatives. The legacy return helpers can be retired as a batch when the compatibility infrastructure is removed (see .1 retirement policy for medium-term candidates), at which point these references will be removed along with the implementation.
+
+- 2026-05-17 (METHOD-LIKE-DSL-MIGRATION.3): Convention-based accumulator audit complete. 3 conventions audited: `retv` scalar (explicitly declared — naming convention only), `capt` array (explicitly declared — naming convention only), rule-level accumulator array (implicit framework convention, deeply embedded, works well — keep as supported). `@IMATCH_LIST` is internal, not user-facing. No new helpers needed. Findings below.
+
+  ## Convention-based accumulator audit
+  
+  ### Audited conventions
+  
+  #### 1. `retv` — scalar return value working variable
+  
+  **Status**: Explicitly declared. Naming convention only.
+  
+  This is a user-declared scalar working variable used to temporarily hold the return value of a child rule call. It is always explicitly declared in lifecycle markers:
+  
+  ```
+  LS {declare(scalar, retv)}
+  ```
+  
+  Or in the initialization marker:
+  ```
+  I {declare(scalar, retv, ...)}
+  ```
+  
+  **Usage pattern** (from tablegrep.spec, Lispish.spec, simenv.spec, pplugin.spec, sdce.spec, hlink_substitution.spec, spec.spec):
+  ```
+  -> Child {assign(s(retv), call(Child))}                            # capture child result
+  LS {declare(scalar, retv)}                                         # declare for loop
+  LE { if(not(scalar(retv))); next(); endif() }                      # check for undef
+  -> Child {push_value(array(rule), scalar(retv))}                   # push into accumulator
+  -> Child {if(matches(scalaref(retv, {type}), /_OP/o)); ...; endif()} # inspect sub-key
+  ```
+  
+  Name `retv` is a convention — the framework does not require this specific name. Any scalar variable name would work. The helper form `scalar(retv)`, `scalaref(retv, {key})`, `assign(s(retv), ...)` uses standard DSL helpers.
+  
+  **Verdict**: Keep as supported naming convention. No helper changes needed. `retv` is fully explicit through `declare(scalar, retv)`.
+  
+  #### 2. `capt` — capture working array
+  
+  **Status**: Explicitly declared. Naming convention only.
+  
+  This is a user-declared array working variable used to collect child rule results before assembling them into a return payload. Always explicitly declared:
+  
+  ```
+  I {declare(array, capt)}
+  ```
+  
+  **Usage pattern** (from ds_vhistory.spec, vhdl.spec):
+  ```
+  -> branch  {push_value(a(capt), call(branch))}                       # collect child result
+  LE { if(is_nonempty(a(capt)));
+        assign(s(first_capt), scalar(a(capt), 0));                     # read first entry
+        push_value(a(object_hier), a(s(entry_tag), array_copy(a(capt))));  # snapshot copy
+        assign(a(capt), a());                                          # reset for next iteration
+      endif() }
+  ```
+  
+  Name `capt` is a convention — the framework does not require this name. The pattern of snapshot-copy (`array_copy`) and reset (`assign(a(capt), a())`) is the important idiom, not the variable name.
+  
+  **Verdict**: Keep as supported naming convention. No helper changes needed. `capt` is fully explicit through `declare(array, capt)`. The snapshot-copy + reset idiom is well-supported by existing helpers.
+  
+  #### 3. Rule-level accumulator array (the "current rule" array)
+  
+  **Status**: Implicit framework convention. Deeply embedded. Works well.
+  
+  Each rule in the LinkedSpec runtime automatically has an array accumulator that collects results from matched child rules. This array is referenced by the rule's own label name:
+  
+  ```
+  RuleName::AND+
+   -> Child {push_value(array(RuleName), scalar(retv))}
+  E {return(array_copy(array(RuleName)))}
+  ```
+  
+  Or in compact form:
+  ```
+  RuleName:AND /regex/
+   -> Child[1] {return(a("?RuleName:", array_copy(a(RuleName))))}
+  ```
+  
+  **What makes it implicit**:
+  - The array `a(RuleName)` / `array(RuleName)` is not declared by the spec author — it is created automatically by the runtime when the rule begins execution.
+  - The array reference uses the rule's own label as the array name, creating a namespace overlap between rule identifiers and data identifiers.
+  - The convention `push_value(array(RuleName), value)` adds to the implicit accumulator; `return(array_copy(array(RuleName)))` snapshots it.
+  
+  **Usage**: Every shipped .spec file uses this convention. It is the fundamental mechanism for collecting child results in AND-mode rules. Examples across 19 specs:
+  - `push_value(array(rules), ...)` in ebnf.spec
+  - `push_value(a(pieces), ...)` in sdce.spec
+  - `push_value(array(internal), ...)` in tablegrep.spec
+  - `push_value(array(blocks), ...)` in simenv.spec
+  - `push_value(a(tail), ...)` in Lispish.spec
+  - `push_value(array(defs), ...)` in pplugin.spec
+  - `push_value(a(word_items), ...)` in hlink_substitution.spec
+  - `push_value(array(rules), ...)` in spec.spec (self-hosted grammar)
+  
+  **Why keep as convention**:
+  - The convention is ergonomic: `array(rule_name)` is naturally readable as "the array for this rule."
+  - Making it explicit (e.g., requiring `declare(array, rule_name)`) would add boilerplate to every rule without clarifying intent — the rule already knows its own accumulator exists.
+  - The convention is consistent across all shipped specs and all book examples — changing it would be a massive documentation and migration burden with no clear benefit.
+  - The rule-label-as-accumulator-name pattern is a core design decision of the LinkedSpec DSL, not an accidental convention.
+  
+  **Verdict**: Keep as fundamental framework convention. No helper changes needed. This is a deliberate design choice — the rule's own label serves as the implicit accumulator array name. Making this explicit would be a framework-level breaking change, not a simple convention cleanup.
+  
+  #### 4. `@IMATCH_LIST` / `$IMATCH`
+  
+  **Status**: Internal implementation detail. Not user-facing in shipped specs.
+  
+  Zero shipped .spec files reference `@IMATCH_LIST` or `$IMATCH` directly. These are internal Perl variables used by the compatibility rewriter (`LegacyRules.pm`, `Contracts.pm`) to implement the legacy `return_m`/`return_ma`/`return_imatch` helpers. They are not a convention that spec authors interact with.
+  
+  **Verdict**: Internal only — not a user-facing convention. No action needed. Will be removed when the legacy return helpers are retired (see .1 medium-term candidates).
+  
+  ### Summary
+  
+  | Convention | Type | Declaration | Recommendation |
+  | --- | --- | --- | --- |
+  | `retv` scalar | Naming convention | Explicit (`declare(scalar, retv)`) | Keep — supported convention, no change |
+  | `capt` array | Naming convention | Explicit (`declare(array, capt)`) | Keep — supported convention, no change |
+  | Rule accumulator array | Framework convention | Implicit (runtime creates) | Keep — fundamental design, no change |
+  | `@IMATCH_LIST` / `$IMATCH` | Internal | N/A (compatibility rewriter) | Internal only — no action |
+  
+  **Conclusion**: No convention requires a new explicit helper. All user-facing conventions are either explicitly declared (`retv`, `capt`) or are fundamental framework design decisions (rule-level accumulator arrays). The audit confirms the ROADMAP_V2.md observation that "convention-based accumulator helpers that still hide the current-rule array target" are a design feature, not a gap — the rule label IS the explicit name for the accumulator array, and the `array(rule_label)` / `a(rule_label)` helper is the explicit accessor.
