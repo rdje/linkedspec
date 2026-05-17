@@ -421,3 +421,7 @@ Use this rule of thumb:
 - Use `match_*` for the current local match.
 
 The goal is not to memorize every helper at once. The goal is to make the boundary and movement semantics visible at the call site.
+
+## Deeper reference
+
+For the full boundary-helper contract catalog including cursor helpers, immediate-match helpers, and whole-input helpers with emitted-Perl lowering, see `USER_GUIDE_ActionIR_Contracts.md` in the repo root. The source-boundary section there is the exhaustive working reference while this chapter remains the high-level map.

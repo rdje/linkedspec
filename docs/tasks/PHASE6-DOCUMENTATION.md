@@ -64,10 +64,10 @@ Maintain and expand project documentation so every user-facing surface, architec
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.5`
-  Status: `pending`
+  Status: `done`
   Goal: `Bridge the book and USER_GUIDE cross-linking gap. Add cross-references from relevant book chapters to USER_GUIDE files and from USER_GUIDE.md to the book. Ensure readers following either path can discover the other.`
   Acceptance: `At least 5 book chapters link to relevant USER_GUIDE files. USER_GUIDE.md links to the book. Readers following either documentation path can discover the other surface.`
-  Verification: `pending`
+  Verification: `2026-05-17: Added "Deeper reference" cross-links to 5 book chapters (action-and-lifecycle-placement → USER_GUIDE_Contracts + EmittedPerl, capture-marks-and-source-locations → USER_GUIDE_Contracts, source-boundary-helper-reference → USER_GUIDE_Contracts, declaration-helper-reference → USER_GUIDE_DeclareMethod, actionir-lowering-mental-model → 4 USER_GUIDE files). Added book link to USER_GUIDE.md with reading-order guidance. Combined with existing action-model-and-helper-surface links, now 6 book chapters cross-reference USER_GUIDE files. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf).`
   Commit: `pending`
 
 - ID: `PHASE6-DOCUMENTATION.6`
@@ -95,8 +95,8 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
-| 2 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
+| 1 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
+| 2 | `PHASE6-DOCUMENTATION.7` | `pending` | ActionIR lowering is the DSL's engine; 171 lines for 2,000+ lines of code is too thin. |
 | 3 | `PHASE6-DOCUMENTATION.4` | `pending` | Public API is the contract with users; incomplete coverage misleads. |
 | 4 | `PHASE6-DOCUMENTATION.5` | `pending` | Book and USER_GUIDE are parallel silos; cross-links fix discoverability. |
 | 5 | `PHASE6-DOCUMENTATION.6` | `pending` | Overview chapters are the entry point; thin entry points lose readers. |
@@ -105,6 +105,7 @@ Maintain and expand project documentation so every user-facing surface, architec
 
 ## Decisions
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. Added cross-references to 5 additional book chapters. USER_GUIDE.md now links to the book. 6 book chapters now cross-reference USER_GUIDE files.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.4 — completed public API documentation. Created 2 new book chapters (trace-api.md, plugin-registry.md). Book's Public API section now documents all 4 facade bands: trace (7 methods + verbosity levels + state variables), compile/runtime (Get, get_parser, build_compiled_rule_table, call_spec_handler_subst), registry (3 methods), legacy transition (4 methods with status note). Updated SUMMARY.md.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm. Expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all public entry points. Expanded book pipeline-overview.md Stage 2 from 4 lines to 16-line structured description of three validation layers.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm. Added 11-line section to ARCHITECTURE_STATE.md covering or/oredRE API, position-tracking, seek vs consume, match-info shape, three consumers, OwnerDispatch loading. Added 3-line explanatory note to book's generated-handlers-and-dispatch.md.
@@ -215,6 +216,7 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PHASE6-DOCUMENTATION.5` | Verified 5 new cross-reference sections added to book chapters. Verified USER_GUIDE.md links to the book. Verified existing action-model-and-helper-surface links preserved. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — 6 book chapters + USER_GUIDE.md now cross-reference each other. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.4` | Verified 2 new book chapters created (trace-api.md 115 lines, plugin-registry.md 72 lines). Verified all 4 facade bands now documented. Verified SUMMARY.md updated. Verified get-and-get-parser.md updated with build_compiled_rule_table/call_spec_handler_subst. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — book Public API section now covers all facade bands. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.3` | Verified ARCHITECTURE_STATE.md Validation section covers all 5 public entry points with structured descriptions, error reporting path, debugging guidance. Verified book Stage 2 covers three validation layers with error payload routing. Syntax check passes. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — largest undocumented module now has substantive architecture and book coverage. |
 | `2026-05-17` | `PHASE6-DOCUMENTATION.2` | Verified ARCHITECTURE_STATE.md LinkedRE section covers both functions, consumers, and loading. Verified book generated-handlers chapter references LinkedRE with explanatory note. Syntax check passes. Full suite: Files=1, Tests=1007, PASS (no code changes — doc-only leaf). | Pass — 56-line utility now has substantive documentation in both architecture and book layers. |
@@ -224,13 +226,15 @@ Workflow docs (COMMIT.md, SESSION_BOOTSTRAP.md, TASK_TREE.md, TASK_TREE_README.m
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `PHASE6-DOCUMENTATION.4` | `pending` | — |
+| `PHASE6-DOCUMENTATION.5` | `pending` | — |
+| `PHASE6-DOCUMENTATION.4` | `Docs: complete public API documentation in book` | — |
 | `PHASE6-DOCUMENTATION.3` | `Docs: document Validation.pm DSL validation surface` | — |
 | `PHASE6-DOCUMENTATION.2` | `Docs: document LinkedRE.pm regex composition utility` | — |
 | `PHASE6-DOCUMENTATION.1` | `Docs: inventory Phase 6 documentation surface` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE6-DOCUMENTATION.5 — bridged book/USER_GUIDE cross-linking. 6 book chapters now cross-reference USER_GUIDE files. USER_GUIDE.md links to the book.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.4 — completed public API docs. Created 2 new book chapters. All 4 facade bands now documented.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.3 — documented Validation.pm. Expanded ARCHITECTURE_STATE.md and book pipeline-overview Stage 2.
 - `2026-05-17`: Completed PHASE6-DOCUMENTATION.2 — documented LinkedRE.pm. Added section to ARCHITECTURE_STATE.md and explanatory note to book's generated-handlers chapter.

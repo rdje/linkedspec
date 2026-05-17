@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-17 (PHASE6-DOCUMENTATION.5): Bridged book/USER_GUIDE cross-linking — added cross-references to 5 additional book chapters. USER_GUIDE.md now links to the book. 6 book chapters cross-reference USER_GUIDE files. PNT frontier: .6 (overview chapter expansion).
 - 2026-05-17 (PHASE6-DOCUMENTATION.4): Completed public API docs — created trace-api.md (7 trace methods + verbosity levels) and plugin-registry.md (3 registry + 4 legacy methods). Updated get-and-get-parser.md. All 4 facade bands now documented. PNT frontier: .5 (book/USER_GUIDE cross-linking).
 - 2026-05-17 (PHASE6-DOCUMENTATION.3): Documented Validation.pm — expanded ARCHITECTURE_STATE.md section from 4 bullets to 30-line entry covering all 5 public entry points, error reporting, and debugging. Expanded book pipeline-overview Stage 2 from 4 lines to 16-line structured description of three validation layers. Largest undocumented module now documented. PNT frontier: .4 (public API completeness).
 - 2026-05-17 (PHASE6-DOCUMENTATION.2): Documented LinkedRE.pm — added 11-line section to ARCHITECTURE_STATE.md and 3-line explanatory note to book's generated-handlers-and-dispatch.md. 56-line core utility now has substantive coverage in both architecture and book layers. PNT frontier: .3 (Validation.pm docs).

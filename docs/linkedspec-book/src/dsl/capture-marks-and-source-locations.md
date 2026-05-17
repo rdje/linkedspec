@@ -169,3 +169,7 @@ Use this quick rule:
 - Need whole-source information? Use `input_*`.
 
 That split avoids most confusion.
+
+## Deeper reference
+
+For the full capture/mark contract catalog with exact helper signatures, emitted-Perl shapes, and compatibility aliases, see `USER_GUIDE_ActionIR_Contracts.md` in the repo root. The capture/mark section there covers every helper in the family with its lowering contract.

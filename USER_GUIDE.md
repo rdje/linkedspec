@@ -42,6 +42,8 @@ Detailed lowering references:
 Read this file first, then jump into the specific module guide that matches the lowering family you are using.
 For exhaustive review of the current lowering contract, including emitted Perl for every supported helper and compatibility construct, read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) alongside the module guides.
 
+**The LinkedSpec Book** (`docs/linkedspec-book/src/index.md`) is the public-facing entry point for new users. It covers the mental model, DSL families, compiler pipeline, public API, and architecture at a higher level than these module-oriented guides. If you are new to LinkedSpec, start with the book. Then come back to this guide and the detailed ActionIR references for deeper implementation detail.
+
 ## What LinkedSpec Is
 LinkedSpec compiles `.spec` files from `specs/` into dynamic parsers.
 Those parsers match recursive, regex-anchored grammars and return AST/data structures defined by rule actions.

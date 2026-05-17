@@ -1,7 +1,7 @@
-Docs: complete public API documentation in book
+Docs: bridge book and USER_GUIDE cross-linking
 
-PHASE6-DOCUMENTATION.4 — created trace-api.md and plugin-registry.md
-chapters. Book's Public API section now documents all 4 facade bands.
-Updated SUMMARY.md and get-and-get-parser.md.
+PHASE6-DOCUMENTATION.5 — added cross-references to 5 additional book
+chapters pointing to relevant USER_GUIDE files. Added book link to
+USER_GUIDE.md. 6 book chapters now cross-reference USER_GUIDE files.
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

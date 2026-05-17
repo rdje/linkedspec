@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-17 (PHASE6-DOCUMENTATION.5): Book/USER_GUIDE cross-linking done — 6 book chapters now reference USER_GUIDE files. USER_GUIDE.md links to book. PNT frontier: .6 (overview chapter expansion — 153 lines across 4 chapters).
 - 2026-05-17 (PHASE6-DOCUMENTATION.4): Public API docs complete — 2 new book chapters created. All 4 facade bands documented. PNT frontier: .5 (book/USER_GUIDE cross-linking).
 - 2026-05-17 (PHASE6-DOCUMENTATION.3): Validation.pm documented — expanded ARCHITECTURE_STATE.md and book Stage 2. PNT frontier: .4 (public API completeness — 2/4 facade bands documented).
 - 2026-05-17 (PHASE6-DOCUMENTATION.2): LinkedRE.pm documented in ARCHITECTURE_STATE.md and book. PNT frontier: .3 (Validation.pm — 1,368-line module, 1 paragraph of docs).

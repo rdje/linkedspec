@@ -519,3 +519,7 @@ declare(scalar, count, stage, message);
 - [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) documents the expression helpers that can feed declaration initializers.
 - [Source Boundary Helper Reference](source-boundary-helper-reference.md) documents source readers such as `entry_text()`, `entry_group(...)`, `capture_slice()`, and `cursor_pos()`.
 - [ActionIR Lowering Mental Model](actionir-lowering-mental-model.md) explains why helper declarations are preferable to raw host-language code.
+
+## Deeper reference
+
+For the full `declare`/`declare_s`/`declare_a`/`declare_h` contract catalog with type-system details and emitted-Perl lowering, see `USER_GUIDE_ActionIR_DeclareMethod.md` in the repo root.

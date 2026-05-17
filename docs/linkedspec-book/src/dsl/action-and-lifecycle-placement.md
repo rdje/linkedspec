@@ -428,3 +428,7 @@ The explicit `retv` assignments make the child-result flow visible. That is usua
 - Treat `LS`, `LE`, `LX`, `IT`, `EX`, and `E` as advanced placement hooks, not as the normal way to write every rule.
 - Use marker forms such as `@mark(name)` only when the grammar slot is the boundary; use helper-call forms inside blocks.
 - Keep lifecycle examples explicit about why the hook is needed, because placement hooks can make parse behavior harder to infer if used casually.
+
+## Deeper reference
+
+For the full lifecycle-block contract catalog with emitted-Perl examples, see `USER_GUIDE_ActionIR_Contracts.md` and `USER_GUIDE_ActionIR_EmittedPerlReference.md` in the repo root. These are the exhaustive working references while the book continues growing.

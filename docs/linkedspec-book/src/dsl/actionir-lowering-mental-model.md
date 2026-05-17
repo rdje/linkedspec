@@ -93,3 +93,14 @@ Start with the core families:
 - `if(...)` and `switch` helpers for structured control flow
 
 Then move into the more specialized helper families as needed.
+
+## Deeper reference
+
+The repo-root ActionIR guides are the exhaustive working references while this book grows toward absorbing that surface:
+
+- `USER_GUIDE_ActionIR_Contracts.md` — full contract catalog (163 contracts across 8 families)
+- `USER_GUIDE_ActionIR_MethodLowering.md` — method lowering pipeline
+- `USER_GUIDE_ActionIR_EmittedPerlReference.md` — emitted Perl for every supported helper
+- `USER_GUIDE_RuleModesAndSplit.md` — rule modes and split-boundary details
+
+These guides go deeper than the book chapters and include exact emitted-Perl shapes for compatibility and migration work.

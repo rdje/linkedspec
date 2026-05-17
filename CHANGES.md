@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Docs: bridge book and USER_GUIDE cross-linking
+
+- Added "Deeper reference" cross-links to 5 book chapters (action-and-lifecycle-placement, capture-marks, source-boundary-helper-ref, declaration-helper-ref, actionir-lowering-mental-model) pointing to relevant USER_GUIDE files.
+- Added book link to USER_GUIDE.md with reading-order guidance (book first for new users, USER_GUIDE files for deeper implementation detail).
+- Combined with existing action-model-and-helper-surface links, 6 book chapters now cross-reference USER_GUIDE files.
+
 ## 2026-05-17 — Docs: complete public API documentation
 
 - Created 2 new book chapters: trace-api.md (7 trace entry points, 6 verbosity levels, trace state variables, scope-chain diagram) and plugin-registry.md (3 registry methods, 4 legacy transition methods with status note).
