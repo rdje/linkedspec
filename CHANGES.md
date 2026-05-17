@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Fix: route handler compile warnings through trace instead of stderr
+
+- Replaced `warn $compile_warning` in SpecEntry.pm line 740 with `_trace_decision("rule_handler_compile:$label", 1, "compiled with warnings: $compile_warning", DUMP_NONE)`.
+- Successful handler compilations with warnings (e.g., "use of uninitialized value" in generated handler code) no longer leak to stderr.
+- Compile warnings are captured in the trace decision output at DUMP_NONE level.
+- Handler compile failures continue through the structured `last_error` channel with warnings in the detail.
+- PHASE5-RUNTIME-DIAGNOSTICS tree complete (2 leaves). Phase 5 `done` in ROADMAP_V2.md.
+
 ## 2026-05-17 — Docs: inventory Phase 5 runtime diagnostics surface
 
 - Audited 5 structured error families (compiler_pipeline, parser_factory, runtime_owner, runtime_handler, runtime_parser) across 30+ call sites.

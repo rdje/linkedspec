@@ -1,1 +1,7 @@
-Docs: inventory Phase 5 runtime diagnostics surface
+Fix: route handler compile warnings through trace instead of stderr
+
+PHASE5-RUNTIME-DIAGNOSTICS.2 — replaced `warn $compile_warning` in
+SpecEntry.pm line 740 with _trace_decision, removing the last stderr
+leak in the LinkedSpec diagnostics surface.
+
+Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

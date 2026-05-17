@@ -737,7 +737,8 @@ sub _build_runtime_handler {
   local $SIG{__WARN__} = sub { $compile_warning .= join('', @_); };
   $compiled_handler = eval $handler_source;
  }
- warn $compile_warning if ref($compiled_handler) eq 'CODE' && length($compile_warning);
+ _trace_decision("rule_handler_compile:$label", 1, "compiled with warnings: $compile_warning", DUMP_NONE)
+  if ref($compiled_handler) eq 'CODE' && length($compile_warning);
  my $compile_error = ref($compiled_handler) eq 'CODE'
   ? undef
   : ((length($compile_warning) ? $compile_warning : '') . ($@ || 'Unknown rule handler compilation failure'));
