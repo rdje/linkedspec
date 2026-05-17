@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-17 (PLUGIN-MODERNIZATION.5): PPlugin/PluginBridge retirement evaluation complete. 36 .plg files (~1,200+ actions) remain — cannot retire yet. Documented 5-step retirement path. PLUGIN-MODERNIZATION tree COMPLETE (5 leaves). Proposed follow-on: PLUGIN-ACTION-MIGRATION. No active trees remain — PNT idle.
 - 2026-05-17 (PLUGIN-MODERNIZATION.4): Deprecated all 7 legacy plugin facade methods in LinkedSpec.pm. Compact DEPRECATED annotations with retirement timeline tied to .5. None removable yet (FSMGen AUTOLOAD, test locks). PNT frontier: .5 (PPlugin/PluginBridge retirement — last leaf).
 - 2026-05-17 (PLUGIN-MODERNIZATION.3): De-scoped FSMGen.pm from LinkedSpec::get_plugin. Replaced default `\&LinkedSpec::get_plugin` with `sub {}` no-op in getop_plugin_list. Only external get_plugin caller now requires explicit opt-in. PNT frontier: .4 (reduce public facade plugin surface).
 - 2026-05-17 (DOCTRINE): Codified task-tree-ownership doctrine. All code changes must be task-tree tracked/owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md` and all live docs. Non-negotiable.

@@ -21,11 +21,7 @@ evidence for one top-level task.
 
 ## Active Task Trees
 
-The current active task trees are:
-
-| Tree | Status | Roadmap lane | Current frontier | File |
-| --- | --- | --- | --- | --- |
-| `PLUGIN-MODERNIZATION` | `active` | `Plugin modernization` | `PLUGIN-MODERNIZATION.5` | [docs/tasks/PLUGIN-MODERNIZATION.md](docs/tasks/PLUGIN-MODERNIZATION.md) |
+No active task trees. All trees are complete. PNT will stop until a new tree is activated or proposed.
 
 ## Proposed Task Trees
 
@@ -35,6 +31,7 @@ PNT-eligible until explicitly activated or until the roadmap selects that lane.
 | Tree | Status | Roadmap lane | Proposed first leaf | File |
 | --- | --- | --- | --- | --- |
 | `PHASE7-SELF-HOSTED-SPEC` | `proposed` | `Phase 7` | `PHASE7-SELF-HOSTED-SPEC.1` | [docs/tasks/PHASE7-SELF-HOSTED-SPEC.md](docs/tasks/PHASE7-SELF-HOSTED-SPEC.md) |
+| `PLUGIN-ACTION-MIGRATION` | `proposed` | `Plugin modernization follow-on` | `PLUGIN-ACTION-MIGRATION.1` | (not yet created — migrate ~1,200+ .plg actions to package owners) |
 
 ## Completed Task Trees
 
@@ -47,6 +44,7 @@ PNT-eligible until explicitly activated or until the roadmap selects that lane.
 | `PHASE2-DSL-FRONTEND` | `completed` | `Phase 2` | All 6 leaves (`.1` inventory, `.2` construct alignment, `.6` fluent-continuation, `.4` inside-block rejection, `.5` extra-colon, `.3` strict_syntax) | [docs/tasks/PHASE2-DSL-FRONTEND.md](docs/tasks/PHASE2-DSL-FRONTEND.md) |
 | `PHASE6-DOCUMENTATION` | `completed` | `Phase 6` | All 8 leaves (`.1` inventory, `.2` LinkedRE, `.3` Validation, `.4` public API, `.5` cross-linking, `.6` overviews, `.7` ActionIR lowering, `.8` per-spec walkthroughs) | [docs/tasks/PHASE6-DOCUMENTATION.md](docs/tasks/PHASE6-DOCUMENTATION.md) |
 | `BACKBONE-ACTION-IR-LOWERING` | `completed` | `Backbone Item 3` | All 1 leaf (`.1` owner-contract audit — all 12 owners clean) | [docs/tasks/BACKBONE-ACTION-IR-LOWERING.md](docs/tasks/BACKBONE-ACTION-IR-LOWERING.md) |
+| `PLUGIN-MODERNIZATION` | `completed` | `Plugin modernization` | All 5 leaves (`.1` inventory, `.2` dead .plg removal, `.3` FSMGen de-scope, `.4` facade deprecation, `.5` retirement evaluation) | [docs/tasks/PLUGIN-MODERNIZATION.md](docs/tasks/PLUGIN-MODERNIZATION.md) |
 
 ## Roadmap Task-Tree Ownership
 

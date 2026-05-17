@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Evaluate PPlugin/PluginBridge retirement feasibility (PLUGIN-MODERNIZATION.5)
+
+- Evaluated PPlugin.pm (288 lines) and PluginBridge.pm (199 lines) retirement feasibility. Cannot retire yet: 36 .plg files with ~1,200+ actions remain.
+- Documented 5-step retirement path: (1) migrate .plg actions to package owners, (2) retire PPlugin, (3) reduce/delete PluginBridge, (4) remove deprecated facade methods, (5) migrate FSMGen::AUTOLOAD.
+- PluginRegistry (130 lines) can survive independently as a general-purpose coderef registry.
+- PLUGIN-MODERNIZATION tree COMPLETE (5 leaves). Proposed follow-on: `PLUGIN-ACTION-MIGRATION` tree.
+- Full suite: 1007 PASS (evaluation-only — no code changes).
+
 ## 2026-05-17 — Deprecate all 7 legacy plugin facade methods (PLUGIN-MODERNIZATION.4)
 
 - Marked all 7 legacy plugin methods in LinkedSpec.pm as DEPRECATED with retirement timeline tied to PLUGIN-MODERNIZATION.5 (PPlugin/PluginBridge retirement).

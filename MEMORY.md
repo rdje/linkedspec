@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-17 (PLUGIN-MODERNIZATION.5): PPlugin/PluginBridge cannot retire yet — 36 .plg files, ~1,200+ actions remain. Documented 5-step path. PLUGIN-MODERNIZATION tree COMPLETE. PNT idle (no active trees).
 - 2026-05-17 (PLUGIN-MODERNIZATION.4): Deprecated all 7 legacy plugin facade methods. Retirement tied to .5. PNT frontier: .5 (evaluate PPlugin/PluginBridge retirement — last leaf).
 - 2026-05-17 (PLUGIN-MODERNIZATION.3): FSMGen.pm de-scoped from LinkedSpec::get_plugin. Default changed to no-op `sub {}`. PNT frontier: .4 (reduce public facade — 7 legacy plugin methods).
 - 2026-05-17 (DOCTRINE): Task-tree-ownership doctrine: all code changes must be task-tree tracked/owned before implementation. Non-negotiable. Recorded in book (`local-ci-and-regression.md`) and all live docs.

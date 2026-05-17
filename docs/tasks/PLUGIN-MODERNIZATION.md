@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `PLUGIN-MODERNIZATION`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Plugin/resource-resolution modernization track`
 - Created: `2026-05-16`
-- Last updated: `2026-05-16`
+- Last updated: `2026-05-17`
 - Owner: repo-local workflow
 
 ## Goal
@@ -61,22 +61,62 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
   Commit: `pending`
 
 - ID: `PLUGIN-MODERNIZATION.5`
-  Status: `pending`
+  Status: `done`
   Goal: `Evaluate PPlugin.pm and PluginBridge.pm retirement feasibility. PPlugin.pm (288 lines) is the legacy .plg adapter loaded lazily by PluginBridge. PluginBridge.pm (199 lines) is the compatibility bridge. If all .plg files are retired or converted, both can be removed.`
   Acceptance: `If all .plg consumers are gone: PPlugin.pm is deleted, PluginBridge.pm is reduced to a registry-only stub or deleted, and regression tests are updated. If consumers remain: a retirement plan with timeline is documented.`
+  Verification: `2026-05-17: Full retirement evaluation complete (see Retirement Evaluation section below). 36 .plg files with ~1,200+ actions remain — PPlugin/PluginBridge cannot be retired yet. Documented retirement path: (1) migrate .plg actions to package owners, (2) retire PPlugin, (3) reduce PluginBridge to registry-only or delete. PluginRegistry can survive independently. Full suite: Files=1, Tests=1007, PASS (no code changes — evaluation-only leaf).`
+  Commit: `pending`
 
 ## Current Frontier
 
-| Order | Leaf | Status | Why next |
-| --- | --- | --- | --- |
-| 1 | `PLUGIN-MODERNIZATION.5` | `pending` | Evaluate PPlugin/PluginBridge retirement — last step after all consumers are gone. |
+All leaves complete. No pending leaves.
+
+## Retirement Evaluation (PLUGIN-MODERNIZATION.5 — 2026-05-17)
+
+### Verdict
+
+PPlugin.pm and PluginBridge.pm **cannot be retired yet**. 36 .plg files with approximately 1,200+ actions remain on disk. These actions are loaded and executed through the PPlugin → PluginBridge → LinkedSpec facade chain. Full retirement requires migrating each .plg file's actions to proper Perl package owners — a Phase 8+ effort beyond the scope of this tree.
+
+### What blocks PPlugin retirement
+
+- 36 .plg files remain (down from 38 after .2 removed 2 dead files).
+- These files define ~1,200+ visible actions loaded via PPlugin's .plg discovery, parsing, and registry.
+- Until all .plg actions are migrated to package owners, PPlugin must remain as the legacy adapter.
+
+### What blocks PluginBridge retirement
+
+- PluginBridge is the registry-first/legacy-fallback dispatch layer. As long as PPlugin is needed, PluginBridge is needed.
+- FSMGen::AUTOLOAD (FSMGen.pm:3547) still calls `LinkedSpec::dispatch_plugin_autoload_name` → PluginBridge.
+- Test regression locks exercise the full plugin dispatch chain.
+
+### What can survive independently
+
+- **PluginRegistry** (130 lines): In-memory handler registry. Used by tests. Does not depend on PPlugin or PluginBridge. Could survive as a general-purpose coderef registry even after plugin retirement.
+
+### Retirement path
+
+1. **Migrate .plg actions to package owners**: Each .plg file's actions need a proper Perl package owner. This is a per-file migration effort (~36 files, ~1,200+ actions). Priority: start with spec consumers (5 files using only get_parser — these don't need PPlugin at all), then extracted files (helpers already moved), then legacy action files.
+2. **Retire PPlugin.pm**: Once all .plg files are gone or converted, delete PPlugin.pm and its discovery/lookup machinery.
+3. **Reduce or delete PluginBridge.pm**: Once PPlugin is gone, PluginBridge can be reduced to a registry-only stub (forwarding to PluginRegistry) or deleted if the registry path is consolidated into LinkedSpec.pm directly.
+4. **Remove deprecated facade methods**: The 7 DEPRECATED methods in LinkedSpec.pm (marked in .4) can be removed once PluginBridge is gone.
+5. **Migrate FSMGen::AUTOLOAD**: The last remaining external caller of dispatch_plugin_autoload_name must be migrated to a non-plugin dispatch pattern.
+
+### Estimated effort
+
+Migrating 1,200+ actions across 36 files is a significant effort — likely a full Phase 8 or multi-phase workstream. Each migration requires: identifying the action's purpose, finding or creating a domain package owner, moving the implementation, updating callers, and regression-testing.
+
+### Recommended next step
+
+Create a proposed task tree (e.g., `PLUGIN-ACTION-MIGRATION`) to track the per-.plg-file migration work. Activate when the roadmap reaches the appropriate phase.
 
 ## Decisions
 
-- `2026-05-17`: Completed PLUGIN-MODERNIZATION.2 — removed hutils.plg and quick_sdf_hack.plg. Both confirmed dead (zero external references). 36 .plg files remain. Full suite 1007 PASS.
-- `2026-05-17`: Completed PLUGIN-MODERNIZATION.1 inventory (see inventory section below). 38 .plg files, 3 plugin modules, 7 facade methods, 1 external caller. Created follow-on leaves .2–.5.
-- `2026-05-17`: Completed PLUGIN-MODERNIZATION.3 — de-scoped FSMGen.pm from LinkedSpec::get_plugin. Default changed to no-op `sub {}`. Only external get_plugin caller now requires explicit opt-in.
-- `2026-05-16`: Created task tree. Extensive plugin-to-owner extraction already landed per `ROADMAP_V2.md` (HTTP::FileAccess, RTLUtils, FSMGen, Timing::*, Table::GenericFilter, QC::*, etc.).
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.5 — retirement evaluation. 36 .plg files (~1,200+ actions) remain. Documented 5-step retirement path. Tree COMPLETE.
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.4 — deprecated all 7 legacy plugin facade methods.
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.3 — de-scoped FSMGen.pm from LinkedSpec::get_plugin.
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.2 — removed 2 dead .plg files (hutils.plg, quick_sdf_hack.plg). 36 remain.
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.1 — inventory complete. 38 .plg files, 3 plugin modules, 7 facade methods, 1 external caller.
+- `2026-05-16`: Created task tree. Extensive plugin-to-owner extraction already landed per `ROADMAP_V2.md`.
 
 ## Open Questions
 
@@ -90,6 +130,7 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-05-17` | `PLUGIN-MODERNIZATION.5` | Evaluated PPlugin/PluginBridge retirement feasibility. 36 .plg files with ~1,200+ actions remain — cannot retire yet. Documented 5-step retirement path and estimated effort. Full suite: Files=1, Tests=1007, PASS (evaluation-only). | Pass — retirement path documented. Tree complete. |
 | `2026-05-17` | `PLUGIN-MODERNIZATION.4` | Marked all 7 legacy plugin methods in LinkedSpec.pm as DEPRECATED with retirement timeline tied to .5. Grouped under single deprecation-section header. Full suite: Files=1, Tests=1007, PASS. | Pass — facade surface reduced from supported to deprecated. |
 | `2026-05-17` | `PLUGIN-MODERNIZATION.3` | Replaced `\&LinkedSpec::get_plugin` default with `sub {}` no-op in FSMGen.pm:68. Internal caller (line 3054) relies on default but no .fsm files exist in repo to trigger. Updated 2 regression assertions (lines 4229, 4415). Full suite: Files=1, Tests=1007, PASS. | Pass — FSMGen de-scoped from LinkedSpec::get_plugin. |
 | `2026-05-17` | `PLUGIN-MODERNIZATION.2` | Removed hutils.plug (thin HUtils:: passthroughs, zero references) and quick_sdf_hack.plg (dead qsdf_hack action, zero external callers). 36 .plg files remain. Full suite: Files=1, Tests=1007, PASS. | Pass — 2 dead .plg files removed. |
@@ -99,6 +140,7 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
+| `PLUGIN-MODERNIZATION.5` | `pending` | — |
 | `PLUGIN-MODERNIZATION.4` | Deprecated all 7 legacy plugin facade methods in LinkedSpec.pm. Retirement timeline tied to PLUGIN-MODERNIZATION.5. | — |
 | `PLUGIN-MODERNIZATION.3` | `pending` | — |
 | `PLUGIN-MODERNIZATION.2` | `pending` | — |
@@ -106,6 +148,7 @@ Complete plugin/resource-resolution modernization: retire dynamic `.plg`/`PPlugi
 
 ## Changelog
 
+- `2026-05-17`: Completed PLUGIN-MODERNIZATION.5 — PPlugin/PluginBridge retirement evaluation. 36 .plg files (~1,200+ actions) remain — cannot retire yet. Documented 5-step retirement path. Tree COMPLETE (5 leaves).
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.4 — deprecated all 7 legacy plugin facade methods in LinkedSpec.pm. Retirement timeline tied to .5.
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.3 — de-scoped FSMGen.pm from LinkedSpec::get_plugin. Default changed to no-op `sub {}`. Only external get_plugin caller now requires explicit opt-in.
 - `2026-05-17`: Completed PLUGIN-MODERNIZATION.2 — removed 2 dead .plg files (hutils.plg, quick_sdf_hack.plg). 36 remain.
