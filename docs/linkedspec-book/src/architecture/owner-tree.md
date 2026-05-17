@@ -397,17 +397,17 @@ That separation keeps diagnostics usable even when tracing is off.
 
 ## Legacy plugin branch
 
-The public facade still exposes plugin-related entrypoints:
+The public facade still exposes plugin-related entrypoints, all **DEPRECATED** as of the PLUGIN-MODERNIZATION tree (completed 2026-05-17):
 
-- `register_plugin(...)`,
-- `register_plugins(...)`,
-- `clear_registered_plugins(...)`,
-- `run_plugin(...)`,
-- `get_plugin(...)`,
-- `dispatch_plugin_autoload_name(...)`,
-- `AUTOLOAD`.
+- `register_plugin(...)` — DEPRECATED,
+- `register_plugins(...)` — DEPRECATED,
+- `clear_registered_plugins(...)` — DEPRECATED,
+- `run_plugin(...)` — DEPRECATED,
+- `get_plugin(...)` — DEPRECATED,
+- `dispatch_plugin_autoload_name(...)` — DEPRECATED,
+- `AUTOLOAD` — DEPRECATED.
 
-Architecturally, this branch should be read as transition machinery.
+Architecturally, this branch should be read as transition machinery. These methods remain on the facade while 36 `.plg` files (~1,200+ actions) still use the plugin infrastructure. The retirement path: migrate `.plg` actions to package owners, retire `PPlugin`, reduce/delete `PluginBridge`, then remove these deprecated facade methods.
 
 `LinkedSpec::PluginRegistry` owns explicit in-memory plugin registration.
 

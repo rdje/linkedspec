@@ -51,7 +51,7 @@ Resolves and dispatches an autoloaded plugin name. Used by the plugin autoloader
 
 Perl `AUTOLOAD` handler that catches unresolved method calls on `LinkedSpec` and attempts to route them through registered plugins. This is legacy compatibility behavior.
 
-**Status note:** These legacy methods are present on the public facade for backward compatibility with existing `.plg` files and plugin-using code. New code should prefer the dedicated registration methods (`register_plugin`, `register_plugins`) and the `PPlugin` API directly. The legacy transition surface may be narrowed or deprecated in a future phase.
+**Status note:** All seven legacy transition-surface methods (`run_plugin`, `get_plugin`, `dispatch_plugin_autoload_name`, `AUTOLOAD`, `register_plugin`, `register_plugins`, `clear_registered_plugins`) are **DEPRECATED** as of the PLUGIN-MODERNIZATION tree (completed 2026-05-17). They remain on the public facade while 36 `.plg` files (~1,200+ actions) still use the plugin infrastructure, but new code must use canonical package owners directly. The retirement path is documented in PLUGIN-MODERNIZATION.5: migrate `.plg` actions to package owners, retire `PPlugin`, reduce/delete `PluginBridge`, remove deprecated facade methods, then migrate `FSMGen::AUTOLOAD`.
 
 ## Relationship to the compile/runtime surface
 
