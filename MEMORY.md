@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-17 (PHASE7-SELF-HOSTED-SPEC.1): .spec language surface inventory complete. 37 syntax categories, 4 follow-on leaves. PNT frontier: .2 (structural grammar).
 - 2026-05-17 (PLUGIN-MODERNIZATION.5): PPlugin/PluginBridge cannot retire yet — 36 .plg files, ~1,200+ actions remain. Documented 5-step path. PLUGIN-MODERNIZATION tree COMPLETE. PNT idle (no active trees).
 - 2026-05-17 (PLUGIN-MODERNIZATION.4): Deprecated all 7 legacy plugin facade methods. Retirement tied to .5. PNT frontier: .5 (evaluate PPlugin/PluginBridge retirement — last leaf).
 - 2026-05-17 (PLUGIN-MODERNIZATION.3): FSMGen.pm de-scoped from LinkedSpec::get_plugin. Default changed to no-op `sub {}`. PNT frontier: .4 (reduce public facade — 7 legacy plugin methods).

@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `PHASE7-SELF-HOSTED-SPEC` | `active` | `Phase 7` | `PHASE7-SELF-HOSTED-SPEC.1` | [docs/tasks/PHASE7-SELF-HOSTED-SPEC.md](docs/tasks/PHASE7-SELF-HOSTED-SPEC.md) |
+| `PHASE7-SELF-HOSTED-SPEC` | `active` | `Phase 7` | `PHASE7-SELF-HOSTED-SPEC.2` | [docs/tasks/PHASE7-SELF-HOSTED-SPEC.md](docs/tasks/PHASE7-SELF-HOSTED-SPEC.md) |
 
 ## Proposed Task Trees
 

@@ -30,20 +30,169 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
 - ID: `PHASE7-SELF-HOSTED-SPEC`
   Status: `active`
   Goal: `Define and maintain a self-hosted .spec grammar.`
-  Children: `PHASE7-SELF-HOSTED-SPEC.1`
+  Children: `PHASE7-SELF-HOSTED-SPEC.1`, `PHASE7-SELF-HOSTED-SPEC.2`, `PHASE7-SELF-HOSTED-SPEC.3`, `PHASE7-SELF-HOSTED-SPEC.4`, `PHASE7-SELF-HOSTED-SPEC.5`
 
 - ID: `PHASE7-SELF-HOSTED-SPEC.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Survey the current .spec language surface: inventory every supported syntax element, rule form, action form, block form, and lifecycle marker that must be representable in spec.spec.`
   Acceptance: `Task file lists all .spec language elements with their current implementation status and names the first grammar-authoring leaf.`
-  Verification: `pending`
+  Verification: `2026-05-17: Full language surface inventory complete (see Language Surface Inventory section below). 37 syntax categories identified across rule forms, modes, body elements, lifecycle markers, helper DSL, block structure, and comments. Created follow-on leaves .2–.5 for grammar authoring, validation parity, regression, and extension-surface policy. Full suite: 1007 PASS (audit-only leaf).`
   Commit: `pending`
+
+- ID: `PHASE7-SELF-HOSTED-SPEC.2`
+  Status: `pending`
+  Goal: `Author spec.spec rule paragraphs for all structural/syntactic elements: rule labels (single/double colon), rule modes (AND/OR with bounded/unbounded/shorthand variants), regex anchors, action edges (-> and =>), block structure (action blocks, lifecycle blocks, blind-code blocks), and paragraph-level layout.`
+  Acceptance: `spec.spec compiles to a descriptor with language_agnostic_ready_ratio == 1.0000. All structural elements from .1 inventory have corresponding rules.`
+
+- ID: `PHASE7-SELF-HOSTED-SPEC.3`
+  Status: `pending`
+  Goal: `Author spec.spec rule paragraphs for action/helper DSL surface: lifecycle markers (I/LS/LE/E/EX/IT/LX), split/capture markers (@capture_slice, @capture_from_here, @move_pos, @mark), fluent chains (.method().method()), conditional markers (-? word), helper function calls, blind-code-block fluent chains.`
+  Acceptance: `spec.spec captures the full helper-DSL placement rules. Lifecycle markers, split markers, and fluent chains are all representable.`
+
+- ID: `PHASE7-SELF-HOSTED-SPEC.4`
+  Status: `pending`
+  Goal: `Add regression coverage: verify spec.spec correctly parses all 19 shipped .spec files (or at minimum a representative sample) and produces descriptor state consistent with the bootstrap grammar.`
+  Acceptance: `Regression test proves spec.spec parses shipped .spec files. Descriptor comparison validates equivalence with bootstrap-parsed descriptors.`
+
+- ID: `PHASE7-SELF-HOSTED-SPEC.5`
+  Status: `pending`
+  Goal: `Define the extension-surface policy: spec.spec becomes the required change surface for .spec language evolution. Touching bootstrap grammar for .spec changes is exception-only and explicitly justified.`
+  Acceptance: `Policy documented in spec.spec header comments and in DEVELOPMENT_NOTES.md. Bootstrap grammar changes for .spec evolution require explicit justification.`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE7-SELF-HOSTED-SPEC.1` | `pending` | Need a language-surface survey before grammar authoring. |
+| 1 | `PHASE7-SELF-HOSTED-SPEC.2` | `pending` | Author structural rule paragraphs — prerequisite for all follow-on leaves. |
+| 2 | `PHASE7-SELF-HOSTED-SPEC.3` | `pending` | Author helper-DSL rule paragraphs — depends on .2 structural rules. |
+| 3 | `PHASE7-SELF-HOSTED-SPEC.4` | `pending` | Add regression coverage — depends on .2 and .3 grammar existing. |
+| 4 | `PHASE7-SELF-HOSTED-SPEC.5` | `pending` | Define extension-surface policy — depends on .4 proving spec.spec works. |
+
+## Language Surface Inventory (PHASE7-SELF-HOSTED-SPEC.1 — 2026-05-17)
+
+### Survey Scope
+
+Audited: `_parse_rule_label_line` (Validation.pm:35-83), `_looks_like_supported_rule_paragraph_member_line` (Validation.pm:746-762), `_looks_like_supported_split_marker_start` (Validation.pm:770-774), 19 shipped `.spec` files, 30 book chapters, 10 USER_GUIDE files.
+
+### 1. Rule Label Forms
+
+| Element | Syntax | Implementation | Notes |
+| --- | --- | --- | --- |
+| Body rule | `Word:` (single colon) | `_parse_rule_label_line`, `is_top=0` | Standard child rule |
+| Top/entry rule | `Word::` (double colon) | `_parse_rule_label_line`, `is_top=1` | Entry-point rule, unreferenced by convention |
+| Label characters | `\w+` (word chars only) | Regex `\w+` at line 38 | No hyphens, dots, or special chars in labels |
+
+### 2. Rule Modes (8 variants + bounded forms)
+
+| Element | Syntax | Implementation | Notes |
+| --- | --- | --- | --- |
+| Bounded AND | `AND{N}` or `AND{N,M}` | Lines 47-63 | `AND{3}` = exactly 3; `AND{0,5}` = 0–5 children |
+| Bounded OR | `OR{N}` or `OR{N,M}` | Lines 47-63 | Same range syntax |
+| Unbounded AND | `AND+` | Line 64-65 | All children must match |
+| Single AND | `AND` | Line 64-65 | One or more children match |
+| Unbounded OR | `OR+` | Line 64-65 | As many children as possible |
+| Single OR | `OR` | Line 64-65 | First matching child wins |
+| Shorthand AND | `&` | Lines 68-69 | Single-char equivalent of `AND` |
+| Shorthand OR | `\|` | Lines 68-69 | Single-char equivalent of `OR` |
+| Shorthand one-or-more | `+` | Lines 68-69 | Single-char equivalent of `AND+` |
+| Shorthand zero-or-more | `*` | Lines 68-69 | Single-char; rarely used |
+| Shorthand zero-or-one | `?` | Lines 68-69 | Single-char; rarely used |
+
+### 3. Rule Body Elements — Recognized Paragraph Members
+
+| # | Element | Recognition Pattern | Implementation |
+| --- | --- | --- | --- |
+| 1 | Blank line | `/^\s*$/` | Line 749 — empty separator |
+| 2 | Comment | `/^\s*#/` | Line 750 — `# ...` to end of line |
+| 3 | Rule label (nested) | `_parse_rule_label_line` | Line 751 — rejected inside blocks (.4 fix) |
+| 4 | Regex anchor | `/^\s*\/(?:\\.\|[^\/])*?(?<!\)\//` | Line 752 — escaped-slash aware |
+| 5 | Action edge | `/^\s*->/` | Line 753 — `-> Target` or `-> Target[idx]` |
+| 6 | Blind-call edge | `/^\s*=>/` | Line 754 — `=> Target` (target is blind-called) |
+| 7 | Split/capture markers | `/^\s*@\s*(?:(?:capture_slice\|capture_from_here\|move_pos)\b\|mark\s*\(\s*\w+\s*\))/` | Line 755 — 4 marker types |
+| 8 | Conditional marker | `/^\s*-\?\s+\w+\b/` | Line 756 — `-? word` guard |
+| 9 | Fluent chain start | `/^\s*\.\s*\w/` | Line 757 — `.method()` or `.method` |
+| 10 | Function call | `/^\s*\w+\s*\(/` | Line 758 — `function(args)` |
+| 11 | Blind code block | `/^\s*\w+\s*\{/` | Line 759 — `method_name { ... }` |
+| 12 | Fluent method | `/^\s*\w+\s*\./` | Line 760 — `word.method()` |
+
+Lines 759–760 (function calls and blind blocks) accept ANY word character prefix — these are intentionally broad catch-all patterns. The actual validation of whether the word is a valid helper/function happens later in ActionIR lowering.
+
+### 4. Lifecycle Markers (7 total)
+
+| Marker | Meaning | When it fires | Seen in shipped specs |
+| --- | --- | --- | --- |
+| `I` | Initialization | Once before first match attempt | `tablegrep.spec`, `pplugin.spec`, `ifelse.spec`, `tclite.spec` |
+| `LS` | Loop Start | Before each match attempt | `tablegrep.spec` |
+| `LE` | Loop End | After each successful match | `tablegrep.spec`, `pplugin.spec` |
+| `E` | End | After rule completion | Used in shipped specs |
+| `EX` | Exit | On rule exit regardless | Used in shipped specs |
+| `IT` | Iteration | On each iteration | Used in shipped specs |
+| `LX` | Late Exit | After rule fully completed | `tablegrep.spec`, `pplugin.spec`, `tclite.spec` |
+
+Lifecycle markers appear as fluent chains: `I { ... }`, `.if(cond) { ... }`, `I.return(...)`, `LX.return(...)`.
+
+### 5. Split/Capture Markers (4 total)
+
+| Marker | Syntax | Purpose |
+| --- | --- | --- |
+| `@capture_slice` | `@ capture_slice` | Capture current match slice |
+| `@capture_from_here` | `@ capture_from_here` | Capture from current position |
+| `@move_pos` | `@ move_pos` | Move parse position |
+| `@mark(name)` | `@ mark(label)` | Named position bookmark |
+
+### 6. Action/Helper DSL Surface
+
+Helper functions recognized and lowered through ActionIR (sampled from 19 shipped specs and USER_GUIDE):
+
+- **Value constructors**: `hash(...)`, `array(...)`, `flat_array(...)`, `array_copy(...)`
+- **Return/control**: `return(...)`, `return_undef()`, `call(...)`, `assign(...)`, `next()`
+- **Match introspection**: `match_text()`, `entry_group(n)`, `entry_named(name)`
+- **State access**: `scalar(name)`, `array(name)`, `scalaref(name, {...})`
+- **State mutation**: `push_value(...)`, `assign(scalar(x), ...)`, `push(...)`
+- **Predicates**: `matches(...)`, `contains_substr(...)`, `is_defined(...)`, `not(...)`, `and(...)`, `or(...)`, `is_empty(...)`
+- **Conditionals**: `if(cond); ...; else(); ...; endif()`
+- **String ops**: `substr(...)`, `coalesce(...)`, `trim(...)`, `lowercase(...)`, `length(...)`
+- **I/O**: `print(...)`, `exit_now(n)`
+- **Declare**: `declare(scalar\|array, name)`, `declare(scalar, name=value)`
+
+### 7. Block Structure
+
+| Element | Syntax | Notes |
+| --- | --- | --- |
+| Action block | `{ stmt; stmt; ... }` | Multi-statement, semicolon-separated; attached to `-> Target[n]` edges |
+| Lifecycle block | `I { ... }` or `I { ... }` (same form) | Recognized as lifecycle via preceding marker |
+| Blind-code block | `method_name { code }` | Code passed as block argument |
+| Inline block | Same-line `{ stmt; stmt; }` | Compact form on same line as edge |
+| Nested blocks | `{ ... { ... } ... }` | Properly tracked via `edge_scan_depth` in Validation.pm |
+
+### 8. Authoring Styles
+
+| Style | Example |
+| --- | --- |
+| Same-line compact | `Word:AND /foo/ -> Child { return(hash("kind", "word")); }` |
+| Multi-line expanded | Rule label + regex + edge on separate lines |
+| Mixed | Rule label on one line, regexes/edges on following lines |
+
+### 9. What spec.spec Must Represent
+
+The self-hosted grammar must capture:
+1. Rule labels with mode parsing (11 mode variants)
+2. Regex anchors with escaped-slash support
+3. Action edges (`->`) and blind-call edges (`=>`) with optional index brackets
+4. Action blocks with full helper DSL surface (~40+ helpers across 10 families)
+5. Lifecycle markers (7) with fluent-chain placement rules
+6. Split/capture markers (4)
+7. Conditional markers (`-?`)
+8. Fluent chains (`.method()`, `.method`)
+9. Comments and blank lines
+10. Block nesting (validated via depth tracking)
+
+### Created Follow-On Leaves
+
+- `.2`: Structural/syntactic rule paragraphs (rule labels, modes, regexes, edges, blocks)
+- `.3`: Action/helper DSL rule paragraphs (lifecycle markers, split markers, fluent chains, helpers)
+- `.4`: Regression coverage (spec.spec parsing 19 shipped .spec files)
+- `.5`: Extension-surface policy (spec.spec as required change surface)
 
 ## Decisions
 
@@ -61,14 +210,16 @@ Define and maintain `spec.spec` — a first-class LinkedSpec grammar that captur
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| `2026-05-17` | `PHASE7-SELF-HOSTED-SPEC.1` | Audited `_parse_rule_label_line`, `_looks_like_supported_rule_paragraph_member_line`, `_looks_like_supported_split_marker_start`, 19 shipped `.spec` files, 30 book chapters, 10 USER_GUIDE files. 37 syntax categories inventoried across 9 sections. Full suite: Files=1, Tests=1007, PASS (audit-only). | Pass — complete language surface inventory. 4 follow-on leaves created. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| `PHASE7-SELF-HOSTED-SPEC.1` | `pending` | — |
 
 ## Changelog
 
+- `2026-05-17`: Completed PHASE7-SELF-HOSTED-SPEC.1 — full language surface inventory. 37 syntax categories across rule forms, modes, body elements, lifecycle markers, helper DSL, block structure. Created leaves .2–.5.
+- `2026-05-17`: Activated tree. Moved from proposed to active. ROADMAP_V2 Phase 7: not started → in progress.
 - `2026-05-16`: Created proposed task tree from template.

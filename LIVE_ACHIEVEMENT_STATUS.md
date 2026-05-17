@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-05-17: Completed PHASE7-SELF-HOSTED-SPEC.1 — surveyed .spec language surface. 37 syntax categories across 9 sections: rule label forms (body/top), 11 rule mode variants (AND/OR/&/\|/+/*/? with bounded/unbounded/shorthand), 12 body element patterns, 7 lifecycle markers, 4 split/capture markers, ~40+ ActionIR helper functions, block structure, and authoring styles. Created leaves .2–.5. Active PNT frontier: `PHASE7-SELF-HOSTED-SPEC.2`.
 - 2026-05-17: Completed PLUGIN-MODERNIZATION.5 — evaluated PPlugin/PluginBridge retirement feasibility. 36 .plg files with ~1,200+ actions remain — cannot retire yet. Documented 5-step retirement path: (1) migrate .plg actions to package owners, (2) retire PPlugin, (3) reduce/delete PluginBridge, (4) remove deprecated facade methods, (5) migrate FSMGen::AUTOLOAD. PluginRegistry can survive independently. PLUGIN-MODERNIZATION tree COMPLETE (5 leaves). Proposed follow-on: `PLUGIN-ACTION-MIGRATION`. No active trees — PNT idle.
 - 2026-05-17: Completed PLUGIN-MODERNIZATION.4 — deprecated all 7 legacy plugin facade methods in LinkedSpec.pm (register_plugin, register_plugins, clear_registered_plugins, run_plugin, get_plugin, dispatch_plugin_autoload_name, AUTOLOAD). All marked DEPRECATED with retirement timeline tied to PLUGIN-MODERNIZATION.5. None removable yet: FSMGen::AUTOLOAD still depends on dispatch_plugin_autoload_name, test regression locks still exercise plugin infrastructure. Full suite: 1007 PASS. Active PNT frontier: `PLUGIN-MODERNIZATION.5`.
 - 2026-05-17: Completed PLUGIN-MODERNIZATION.3 — de-scoped FSMGen.pm from LinkedSpec::get_plugin dependency. Replaced `\&LinkedSpec::get_plugin` default with `sub {}` no-op in getop_plugin_list (FSMGen.pm:68). Internal caller at line 3054 passes no explicit get_plugin but no .fsm files exist in repo to trigger +type=plugin syntax. Tests always pass explicit get_plugin. Updated 2 regression assertions. Full suite: 1007 PASS. Active PNT frontier: `PLUGIN-MODERNIZATION.4`.
@@ -35,6 +36,6 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-05-17: Task-tree-ownership doctrine codified. All code changes must be task-tree tracked or task-tree owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md`. Non-negotiable.
 
 ## Next Slice Direction
-- No active trees. PNT idle. Proposed: `PLUGIN-ACTION-MIGRATION` (migrate ~1,200+ .plg actions to package owners) and `PHASE7-SELF-HOSTED-SPEC`.
+- Active PNT frontier: `PHASE7-SELF-HOSTED-SPEC.2` (author structural/syntactic rule paragraphs for spec.spec).
 - 2026-05-16: Completed PHASE1A-CLOSE-OUT.1 — audited Phase 1A modularization. LinkedSpec.pm is a 286-line thin facade; 18 extracted modules use uniform OwnerDispatch; no monolith-era patterns remain.
 - PHASE2-DSL-FRONTEND tree COMPLETE (all 6 leaves).

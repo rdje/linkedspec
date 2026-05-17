@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-17 — Survey .spec language surface (PHASE7-SELF-HOSTED-SPEC.1)
+
+- Completed comprehensive .spec language surface inventory. 37 syntax categories across 9 sections: rule label forms, rule modes (11 variants), body elements (12 recognized patterns), lifecycle markers (7), split/capture markers (4), action/helper DSL (~40+ helpers), block structure, and authoring styles.
+- Audited: `_parse_rule_label_line`, `_looks_like_supported_rule_paragraph_member_line`, `_looks_like_supported_split_marker_start`, 19 shipped `.spec` files, 30 book chapters, 10 USER_GUIDE files.
+- Created follow-on leaves .2–.5: structural grammar (.2), helper-DSL grammar (.3), regression (.4), extension-surface policy (.5).
+- Full suite: 1007 PASS (audit-only leaf).
+
 ## 2026-05-17 — Evaluate PPlugin/PluginBridge retirement feasibility (PLUGIN-MODERNIZATION.5)
 
 - Evaluated PPlugin.pm (288 lines) and PluginBridge.pm (199 lines) retirement feasibility. Cannot retire yet: 36 .plg files with ~1,200+ actions remain.
