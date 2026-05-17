@@ -1,7 +1,0 @@
-Docs: activate METHOD-LIKE-DSL-MIGRATION task tree
-
-Method-like DSL migration track was `in progress` in ROADMAP_V2.md without
-task-tree ownership — a violation of the task-tree ownership doctrine. Created
-tree with 5 leaves: compatibility alias retirement policy, legacy return-helper
-cleanup, accumulator audit, missing features inventory, and cross-nesting parity
-deferral. Wired into ROADMAP_V2.md and LIVE_ACHIEVEMENT_STATUS.md.
