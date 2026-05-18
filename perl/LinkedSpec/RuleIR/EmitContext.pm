@@ -482,6 +482,10 @@ sub _build_action_rewrite_rules {
  return _call_actionir_owner_with_deps('rewrite_pipeline', '_build_action_rewrite_rules', @args)
 }
 
+# Compatibility rewriter entry point. Runs the canonical rewrite pipeline and falls
+# back to direct value-expr lowering for bare s()/a()/h() calls that no contract
+# recognizes (these are malformed as standalone statements — value accessors belong
+# inside contracts like return(s(...)) — but historically tolerated).
 sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {

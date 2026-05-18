@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `PHASE1-PARSER-CORE-ISOLATION`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 1`
 - Created: `2026-05-17`
-- Last updated: `2026-05-17`
-- Active frontier: `PHASE1-PARSER-CORE-ISOLATION.1`
+- Last updated: `2026-05-18`
+- Active frontier: `none` (tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -51,11 +51,10 @@ Finish the last parser-core isolation cleanup around remaining compile-path comp
   Commit: `pending`
 
 - ID: `PHASE1-PARSER-CORE-ISOLATION.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Evaluate rewrite_action_code_for_compat fallback in EmitContext.pm — verify the canonical pipeline covers its behavior, then remove or inline.`
   Acceptance: `rewrite_action_code_for_compat is either removed (if canonical pipeline covers its s/h/a fallback) or its residual need is explicitly documented. Full regression gate passes.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-05-18: Evaluated. Fallback retained with documentation. The canonical pipeline handles s()/a()/h() correctly inside recognized contracts (e.g. return(s(foo))). The fallback only triggers for bare s/a/h with no contract wrapper — malformed standalone value accessors. No shipped .spec hits this path, no test exercises it. Fallback is a 20-line defensive compatibility measure. Comment added to EmitContext.pm explaining the residual need. 1004 PASS.`
 
 ## Current Frontier
 
@@ -63,7 +62,7 @@ Finish the last parser-core isolation cleanup around remaining compile-path comp
 | --- | --- | --- | --- |
 | 1 | `PHASE1-PARSER-CORE-ISOLATION.1` | `done` | Inventory complete — 4 seams, ActionRewriter.pm REMOVABLE, rewrite_action_code_for_compat needs evaluation. |
 | 2 | `PHASE1-PARSER-CORE-ISOLATION.2` | `done` | ActionRewriter.pm DELETED (118 lines). 451 test references updated. 1004 PASS. |
-| 3 | `PHASE1-PARSER-CORE-ISOLATION.3` | `pending` | rewrite_action_code_for_compat — now unblocked, evaluate s/h/a fallback. |
+| 3 | `PHASE1-PARSER-CORE-ISOLATION.3` | `done` | rewrite_action_code_for_compat evaluated — fallback retained with documentation. Residual defensive compatibility for bare s/a/h. |
 
 ## Background
 
@@ -106,17 +105,20 @@ From the 2026-05-17 survey:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `2026-05-18` | `PHASE1-PARSER-CORE-ISOLATION.2` | ActionRewriter.pm deleted (118 lines, 59 forwarders). 451 test references updated. 6 ActionRewriter-specific subtests removed. 217 function calls updated. 13 call_spec_handler_subst → rewrite_action_code_for_compat. 10 broken require_avoids assertions fixed (EmitContext self-checks, plan mismatches). 1004 PASS. | Pass — ActionRewriter.pm removed. |
+| `2026-05-18` | `PHASE1-PARSER-CORE-ISOLATION.2` | ActionRewriter.pm deleted (118 lines, 59 forwarders). 451 test references updated. 6 ActionRewriter-specific subtests removed. 217 function calls updated. 13 call_spec_handler_subst → rewrite_action_code_for_compat. 10 broken require_avoids assertions fixed. 1004 PASS. | Pass — ActionRewriter.pm removed. |
+| `2026-05-18` | `PHASE1-PARSER-CORE-ISOLATION.3` | Evaluated rewrite_action_code_for_compat fallback. Fallback retained with documentation — canonical pipeline handles s/a/h inside contracts; bare standalone s/a/h is malformed but the 20-line fallback is a defensive safety net. No shipped .spec hits this path. 1004 PASS. | Pass — evaluation complete. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
 | `PHASE1-PARSER-CORE-ISOLATION.1` | `627ba5f` | Compile-path compatibility seam inventory. |
+| `PHASE1-PARSER-CORE-ISOLATION.2` | `4f8e0b6` | ActionRewriter.pm deleted, 451 test references updated. |
 | `pending` | `pending` | `pending` |
 
 ## Changelog
 
+- `2026-05-18`: Completed PHASE1-PARSER-CORE-ISOLATION.3 — evaluated rewrite_action_code_for_compat fallback. Fallback retained with documentation in EmitContext.pm. Canonical pipeline handles s/a/h inside contracts; the fallback is a defensive safety net for bare standalone s/a/h (malformed, never hit by shipped specs). PHASE1-PARSER-CORE-ISOLATION tree COMPLETE (3 leaves). 1004 PASS.
 - `2026-05-18`: Completed PHASE1-PARSER-CORE-ISOLATION.2 — removed ActionRewriter.pm forwarding shim (118 lines, 59 generated forwarders + call_spec_handler_subst). 451 test references updated, 6 ActionRewriter-specific subtests removed, 10 broken assertions fixed. Full suite: 1004 PASS. Active PNT frontier: PHASE1-PARSER-CORE-ISOLATION.3.
 - `2026-05-17`: Completed PHASE1-PARSER-CORE-ISOLATION.1 — full compile-path compatibility seam inventory. 4 seams identified: ActionRewriter.pm (REMOVABLE), rewrite_action_code_for_compat (NEEDS EVALUATION), output format conversions (KEEP), PluginBridge (OUT OF SCOPE). Frontier → .2.
 - `2026-05-17`: Created task tree for Phase 1 parser-core isolation cleanup (was `mostly done` in ROADMAP_V2.md without task-tree ownership). 3 leaves defined: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation.
