@@ -114,7 +114,7 @@ From the 2026-05-17 survey:
 | --- | --- | --- | --- |
 | `PHASE1-PARSER-CORE-ISOLATION.1` | `627ba5f` | Compile-path compatibility seam inventory. |
 | `PHASE1-PARSER-CORE-ISOLATION.2` | `4f8e0b6` | ActionRewriter.pm deleted, 451 test references updated. |
-| `pending` | `pending` | `pending` |
+| `PHASE1-PARSER-CORE-ISOLATION.3` | `c45f597` | rewrite_action_code_for_compat evaluated, fallback documented. |
 
 ## Changelog
 
