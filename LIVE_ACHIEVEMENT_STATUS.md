@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-05-18: Updated ROADMAP_V2.md stale statuses — Phase 1 `mostly done` → `done` (PHASE1-PARSER-CORE-ISOLATION complete, 3/3 leaves). Backbone refactor track `mostly done` → `done` (all 3 items done). Removed stale Phase 1 reference from Method-like DSL migration track remaining-open list.
 - 2026-05-18: Completed PHASE1-PARSER-CORE-ISOLATION.3 — evaluated rewrite_action_code_for_compat fallback in EmitContext.pm. Canonical pipeline handles s()/a()/h() correctly inside recognized contracts. The fallback only triggers for bare standalone s/a/h (malformed action code — no shipped .spec hits this path, no test exercises it). Fallback retained with inline documentation as a 20-line defensive compatibility measure. PHASE1-PARSER-CORE-ISOLATION tree COMPLETE (3 leaves). Full suite: 1004 PASS.
 - 2026-05-18: Completed PHASE1-PARSER-CORE-ISOLATION.2 — removed ActionRewriter.pm forwarding shim. 118-line file deleted (59 generated forwarders + call_spec_handler_subst). 451 test references updated: 217 LinkedSpec::ActionRewriter:: → LinkedSpec::RuleIR::EmitContext::, 13 call_spec_handler_subst → rewrite_action_code_for_compat, 6 ActionRewriter-specific subtests removed. 10 broken require_avoids assertions fixed (EmitContext self-checks, plan mismatches, Deps check). Zero ActionRewriter references remain in codebase. Full suite: 1004 PASS. Active PNT frontier: PHASE1-PARSER-CORE-ISOLATION.3.
 - 2026-05-17: Completed PHASE1-PARSER-CORE-ISOLATION.1 — full compile-path compatibility seam inventory. 4 seams identified: ActionRewriter.pm (118 lines, 59 forwarders, 0 non-test callers → REMOVABLE), rewrite_action_code_for_compat (s/h/a fallback → NEEDS EVALUATION), output format conversions (intentional adapters → KEEP), PluginBridge legacy functions (runtime, not compile path → OUT OF SCOPE). Active PNT frontier: PHASE1-PARSER-CORE-ISOLATION.2.
@@ -44,8 +45,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-05-17: Task-tree-ownership doctrine codified. All code changes must be task-tree tracked or task-tree owned before implementation. Recorded in book chapter `development/local-ci-and-regression.md`. Non-negotiable.
 
 ## Next Slice Direction
-- PHASE1-PARSER-CORE-ISOLATION tree COMPLETE (3 leaves). Phase 1 parser-core isolation done — ActionRewriter.pm removed, rewrite_action_code_for_compat evaluated and documented.
-- PLUGIN-ACTION-MIGRATION (proposed track, no task tree yet) — migrate 36 .plg files (~1,200+ actions) to package owners.
+- ROADMAP_V2.md statuses synchronized with completed task trees. Phase 1, Backbone refactor track now `done`.
+- PHASE1-PARSER-CORE-ISOLATION tree COMPLETE (3 leaves). ActionRewriter.pm removed, rewrite_action_code_for_compat evaluated and documented.
+- PLUGIN-ACTION-MIGRATION (proposed track, no task tree yet) — migrate 36 .plg files (~1,200+ actions) to package owners. Only remaining proposed work with no active task tree.
 - BOOK-DOCUMENTATION-SYNC tree COMPLETE (3 leaves).
 - METHOD-LIKE-DSL-MIGRATION tree COMPLETE (5 leaves). All 19 shipped specs at zero compat. Cross-nesting parity deferred. Open items: compat alias retirement (policy defined), PLUGIN-ACTION-MIGRATION (proposed).
 - 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.5 — cross-nesting parity formally deferred, tree COMPLETE (5/5 leaves).
