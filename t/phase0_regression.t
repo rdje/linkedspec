@@ -175,23 +175,23 @@ require LinkedSpec;
 print exists($INC{"LinkedSpec/Runtime.pm"}) ? "__RUNTIME_EAGER__\n" : "__RUNTIME_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/RuntimeContext.pm"}) ? "__RUNTIME_CONTEXT_EAGER__\n" : "__RUNTIME_CONTEXT_STILL_LAZY__\n";
-print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
 my $parser = LinkedSpec::Get(\$spec_content);
 print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";
 print exists($INC{"LinkedSpec/Runtime.pm"}) ? "__RUNTIME_AFTER_GET__\n" : "__RUNTIME_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_AFTER_GET__\n" : "__COMPILER_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/RuntimeContext.pm"}) ? "__RUNTIME_CONTEXT_AFTER_GET__\n" : "__RUNTIME_CONTEXT_STILL_UNLOADED__\n";
-print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_GET__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_GET__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 PERL
 
     is($exit_code, 0, 'LinkedSpec require/Get subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__RUNTIME_STILL_LAZY__/, 'require LinkedSpec keeps Runtime unloaded');
     like($out, qr/__COMPILER_STILL_LAZY__/, 'require LinkedSpec keeps Compiler unloaded');
     like($out, qr/__RUNTIME_CONTEXT_STILL_LAZY__/, 'require LinkedSpec keeps RuntimeContext unloaded');
-    like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec keeps ActionRewriter unloaded');
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require LinkedSpec loads correctly');
     like($out, qr/__PARSER_DEFINED__/, 'Get still returns a parser coderef after lazy compile-pipeline loading');
     like($out, qr/__RUNTIME_AFTER_GET__/, 'Get lazy-loads Runtime');
-    like($out, qr/__COMPILER_AFTER_GET__\n__RUNTIME_CONTEXT_AFTER_GET__\n__ACTION_REWRITER_STILL_UNLOADED__/, 'Get lazy-loads Compiler and RuntimeContext while keeping ActionRewriter out of the compile pipeline');
+    like($out, qr/__COMPILER_AFTER_GET__\n__RUNTIME_CONTEXT_AFTER_GET__\n__EMIT_CONTEXT_AFTER_GET__/, 'Get lazy-loads Compiler, RuntimeContext, and EmitContext');
     is($err, '', 'LinkedSpec require/Get subprocess does not emit stderr');
 };
 subtest 'linkedspec_require_avoids_trace_load_until_public_trace_api' => sub {
@@ -552,90 +552,6 @@ PERL
     like($out, qr/__UNRESOLVED_HELPER_OK__\n__UNRESOLVED_RAW_OK__|__UNRESOLVED_RAW_OK__\n__UNRESOLVED_HELPER_OK__/, 'EmitContext meta preserves unresolved helper names and statements after lazy Trace loading');
     is($err, '', 'LinkedSpec::RuleIR::EmitContext require/meta subprocess does not emit stderr');
 };
-subtest 'emit_context_require_avoids_action_rewriter_load_until_emit_context_build' => sub {
-    plan tests => 8;
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::RuleIR::EmitContext;
-print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";
-print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_EAGER__\n" : "__REWRITE_PIPELINE_STILL_LAZY__\n";
-my $rule_ir = {
-    label => 'Top',
-    node_type => 'default',
-    REs => [qr/a/],
-    code_blocks => {
-        ICODE  => [],
-        ECODE  => [],
-        EXCODE => [],
-        ITCODE => [],
-        LXCODE => [],
-        LSCODE => [],
-        LECODE => [],
-    },
-    acode_entries => [
-        { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
-    ],
-    bcode_entries => [],
-};
-my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
-print ref($emit_ctx) eq "HASH" ? "__EMIT_CTX_DEFINED__\n" : "__EMIT_CTX_UNDEF__\n";
-print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_AFTER_BUILD__\n" : "__REWRITE_PIPELINE_STILL_UNLOADED__\n";
-print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_BUILD__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";
-print ((ref($emit_ctx->{ACODEs}) eq "ARRAY" && @{$emit_ctx->{ACODEs}} == 1) ? "__ACODES_OK__\n" : "__ACODES_BAD__\n");
-PERL
-
-    is($exit_code, 0, 'LinkedSpec::RuleIR::EmitContext require/build subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec::RuleIR::EmitContext keeps ActionRewriter unloaded');
-    like($out, qr/__REWRITE_PIPELINE_STILL_LAZY__/, 'require LinkedSpec::RuleIR::EmitContext keeps RewritePipeline unloaded');
-    like($out, qr/__EMIT_CTX_DEFINED__/, 'EmitContext build still succeeds after lazy rewrite-owner loading');
-    like($out, qr/__REWRITE_PIPELINE_AFTER_BUILD__/, 'EmitContext build now lazy-loads RewritePipeline on demand');
-    like($out, qr/__ACTION_REWRITER_STILL_UNLOADED__/, 'EmitContext build now keeps ActionRewriter unloaded while using extracted ActionIR owner dep maps');
-    like($out, qr/__ACODES_OK__/, 'EmitContext build preserves rewritten ACODE output after owner-direct rewrite loading');
-    is($err, '', 'LinkedSpec::RuleIR::EmitContext require/build subprocess does not emit stderr');
-};
-subtest 'emit_context_avoids_action_rewriter_owner_bundle' => sub {
-    plan tests => 4;
-
-    no warnings 'redefine';
-    require LinkedSpec::ActionRewriter;
-    require LinkedSpec::RuleIR::EmitContext;
-
-    local *LinkedSpec::ActionRewriter::_build_action_lowering_contracts = sub { die "__UNEXPECTED_ACTION_REWRITER_BUILD_CONTRACTS__\n" };
-    local *LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes = sub { die "__UNEXPECTED_ACTION_REWRITER_COLLECT_HELPERS__\n" };
-    local *LinkedSpec::ActionRewriter::_build_canonical_action_ir_events = sub { die "__UNEXPECTED_ACTION_REWRITER_BUILD_CANONICAL__\n" };
-    local *LinkedSpec::ActionRewriter::_find_unresolved_action_helpers = sub { die "__UNEXPECTED_ACTION_REWRITER_FIND_UNRESOLVED__\n" };
-
-    my $rule_ir = {
-        label => 'Top',
-        node_type => 'default',
-        REs => [qr/a/],
-        code_blocks => {
-            ICODE  => [],
-            ECODE  => [],
-            EXCODE => [],
-            ITCODE => [],
-            LXCODE => [],
-            LSCODE => [],
-            LECODE => [],
-        },
-        acode_entries => [
-            { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
-        ],
-        bcode_entries => [],
-    };
-
-    my ($ok_run, $emit_ctx, $err) = (0, undef, '');
-    $ok_run = eval {
-        $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
-        1;
-    };
-    $err = $@ // '';
-
-    ok($ok_run, 'EmitContext build succeeds without the removed ActionRewriter owner bundle') or diag($err);
-    unlike($err, qr/__UNEXPECTED_ACTION_REWRITER_/, 'EmitContext does not touch the trapped ActionRewriter owner callbacks');
-    is(ref($emit_ctx), 'HASH', 'EmitContext still returns a hashref through the extracted ActionIR owners');
-    is($emit_ctx->{ACODEs}[0], q{return ['?Top:', \@Top]}, 'EmitContext preserves rewritten ACODE output without ActionRewriter owner callbacks');
-};
 subtest 'bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build' => sub {
     plan tests => 5;
 
@@ -940,27 +856,6 @@ PERL
     like($out, qr/__COMPILER_AFTER_RULE_TABLE__/, 'build_compiled_rule_table lazy-loads Compiler on demand');
     is($err, '', 'LinkedSpec require/build_compiled_rule_table subprocess does not emit stderr');
 };
-subtest 'linkedspec_require_avoids_action_rewriter_load_until_compat_helper' => sub {
-    plan tests => 7;
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
-        'require LinkedSpec;'
-      . 'print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";'
-      . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";'
-      . 'my $rewritten = LinkedSpec::call_spec_handler_subst("Top", "return_a(Top)");'
-      . 'print defined($rewritten) ? "__REWRITE_DEFINED__\n" : "__REWRITE_UNDEF__\n";'
-      . 'print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_HELPER__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";'
-      . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";'
-    );
-
-    is($exit_code, 0, 'LinkedSpec require/helper subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec keeps ActionRewriter unloaded before the compatibility helper is used');
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require LinkedSpec keeps EmitContext unloaded before the compatibility helper is used');
-    like($out, qr/__REWRITE_DEFINED__/, 'call_spec_handler_subst still returns rewritten helper code through the EmitContext compatibility owner');
-    like($out, qr/__ACTION_REWRITER_STILL_UNLOADED__/, 'call_spec_handler_subst now keeps ActionRewriter out of the facade compatibility-helper path');
-    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'call_spec_handler_subst lazy-loads EmitContext on demand');
-    is($err, '', 'LinkedSpec require/helper subprocess does not emit stderr');
-};
 subtest 'linkedspec_require_avoids_parser_factory_load_until_get_parser' => sub {
     plan tests => 5;
 
@@ -1216,7 +1111,6 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     my $declare_method_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'DeclareMethod.pm'));
     my $resolver_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Resolver.pm'));
     my $validation_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Validation.pm'));
-    my $action_rewriter_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionRewriter.pm'));
     my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));
 
     ok(defined($owner_dispatch_pm) && length($owner_dispatch_pm), 'OwnerDispatch source is available for architecture inspection');
@@ -1246,7 +1140,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     ok(defined($declare_method_pm) && length($declare_method_pm), 'DeclareMethod.pm source is available for architecture inspection');
     ok(defined($resolver_pm) && length($resolver_pm), 'Resolver.pm source is available for architecture inspection');
     ok(defined($validation_pm) && length($validation_pm), 'Validation.pm source is available for architecture inspection');
-    ok(defined($action_rewriter_pm) && length($action_rewriter_pm), 'ActionRewriter.pm source is available for architecture inspection');
+    ok(defined($emit_context_pm) && length($emit_context_pm), 'EmitContext.pm source is available for architecture inspection');
     ok(defined($plugin_bridge_pm) && length($plugin_bridge_pm), 'PluginBridge.pm source is available for architecture inspection');
     like($owner_dispatch_pm, qr/package LinkedSpec::OwnerDispatch;/, 'OwnerDispatch declares the shared owner-dispatch package');
     like($owner_dispatch_pm, qr/sub call_preserving_err\b/, 'OwnerDispatch defines the shared $@ preservation helper');
@@ -1507,11 +1401,11 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($validation_pm, qr/sub _require_trace_pkg\b/, 'Validation.pm no longer carries an unused single-use Trace-loader wrapper');
     unlike($validation_pm, qr/sub _call_preserving_err\b/, 'Validation.pm no longer carries an unused single-use $@-preservation wrapper');
     like($validation_pm, qr/sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Validation.pm now spends OwnerDispatch directly inside its trace-output helper');
-    like($action_rewriter_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ActionRewriter.pm now loads the shared owner-dispatch helper');
+    like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm loads the shared owner-dispatch helper');
     like(
-        $action_rewriter_pm,
-        qr/sub _delegate_emit_context_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(\s*__PACKAGE__,\s*'LinkedSpec::RuleIR::EmitContext',\s*\$method,\s*\@args,\s*\)/s,
-        'ActionRewriter.pm now routes EmitContext compatibility dispatch through OwnerDispatch',
+        $emit_context_pm,
+        qr/sub _call_actionir_owner\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s,
+        'EmitContext.pm routes ActionIR owner dispatch through OwnerDispatch',
     );
     like($plugin_bridge_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'PluginBridge.pm now loads the shared owner-dispatch helper');
     unlike($plugin_bridge_pm, qr/sub _require_pkg\b/, 'PluginBridge.pm no longer carries an unused single-use package-loader wrapper');
@@ -1710,9 +1604,6 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
     local *LinkedSpec::Trace::trace_decision = sub { return 'trace_decision_ok' };
     local *Data::Dumper::Dumper = sub { return 'dump_value_ok' };
-    local *LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics = sub {
-        die "__UNEXPECTED_ACTION_REWRITER_REWRITE__\n";
-    };
     local *LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics = sub {
         my ($label, $code) = @_;
         return ('rewritten_ok', { label => $label, raw => $code });
@@ -1832,525 +1723,8 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 
-subtest 'action_rewriter_compat_wrappers_share_emit_context_delegator' => sub {
-    plan tests => 5;
 
-    no warnings 'redefine';
-    require LinkedSpec::ActionRewriter;
 
-    my @seen;
-    local *LinkedSpec::ActionRewriter::_delegate_emit_context_call = sub {
-        my ($method, @args) = @_;
-        push @seen, [$method, [@args]];
-        return "delegated:$method";
-    };
-
-    is(
-        LinkedSpec::ActionRewriter::_parse_method_function_expr('call(Leaf)'),
-        'delegated:_parse_method_function_expr',
-        'ActionRewriter method parser wrapper now routes through the shared EmitContext delegator',
-    );
-    is(
-        LinkedSpec::ActionRewriter::_lower_print_statement('print(scalar(foo))'),
-        'delegated:_lower_print_statement',
-        'ActionRewriter print wrapper now routes through the shared EmitContext delegator',
-    );
-    is(
-        LinkedSpec::ActionRewriter::_build_action_rewrite_rules('Top'),
-        'delegated:_build_action_rewrite_rules',
-        'ActionRewriter rewrite-rule wrapper now routes through the shared EmitContext delegator',
-    );
-    is(
-        LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'),
-        'delegated:rewrite_action_code_for_compat',
-        'ActionRewriter compatibility helper now routes through the shared EmitContext delegator too',
-    );
-    is_deeply(
-        [map { $_->[0] } @seen],
-        [
-            '_parse_method_function_expr',
-            '_lower_print_statement',
-            '_build_action_rewrite_rules',
-            'rewrite_action_code_for_compat',
-        ],
-        'ActionRewriter forwards representative helper families through one shared delegator',
-    );
-};
-
-subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 115;
-
-    no warnings 'redefine';
-    require LinkedSpec::ActionRewriter;
-
-    local *LinkedSpec::RuleIR::EmitContext::_parse_method_function_expr = sub {
-        my ($expr) = @_;
-        return { parsed => $expr, owner => 'emit_context_parse' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_is_bare_method_scope_token = sub {
-        my ($expr) = @_;
-        return $expr eq '::';
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_normalize_method_args_with_optional_scope = sub {
-        my ($args) = @_;
-        return ['normalized', $args];
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_split_top_level_csv = sub {
-        my ($expr) = @_;
-        return ['split', $expr];
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_extract_scalar_symbol_name = sub {
-        my ($expr) = @_;
-        return "scalar:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_extract_array_symbol_name = sub {
-        my ($expr) = @_;
-        return "array:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_extract_hash_symbol_name = sub {
-        my ($expr) = @_;
-        return "hash:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr = sub {
-        my ($expr) = @_;
-        return "key:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_scalaref_value_expr = sub {
-        my ($target, $expr) = @_;
-        return "scalaref:$target:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_infer_scalar_container_kind = sub {
-        my ($expr) = @_;
-        return "kind:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_assignment_source_expr = sub {
-        my ($expr) = @_;
-        return "assignsrc:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_strip_literal_delimiters = sub {
-        my ($expr) = @_;
-        return "strip:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_split_declare_symbol_names = sub {
-        my ($expr) = @_;
-        return ['decl_split', $expr];
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_parse_declare_binding_entry = sub {
-        my ($expr) = @_;
-        return { owner => 'emit_context_declare_binding', raw => $expr };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_declare_value_expr = sub {
-        my ($expr) = @_;
-        return "declare_value:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_declare_initializer_expr = sub {
-        my ($type, $expr) = @_;
-        return "declare_init:$type:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_extract_declare_statement_from_method_expr = sub {
-        my ($expr) = @_;
-        return { owner => 'emit_context_extract_declare', raw => $expr };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement = sub {
-        my ($expr) = @_;
-        return "declare_method:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement = sub {
-        my ($expr) = @_;
-        return "assign_method:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr = sub {
-        my ($expr) = @_;
-        return { expr => $expr, owner => 'emit_context_flow' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_build_array_pipeline_plan_from_expr = sub {
-        my ($expr) = @_;
-        return { target_symbol => 'items', source => $expr, owner => 'emit_context_array_plan' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_array_pipeline_expr = sub {
-        my ($expr) = @_;
-        return "array_lowered:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_declare_alias_to_type = sub {
-        my ($type) = @_;
-        return "emit_alias:$type";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_typed_declare_statement = sub {
-        my ($type, $name) = @_;
-        return "typed:$type:$name";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_normalize_method_tag_expr = sub {
-        my ($expr) = @_;
-        return "tag:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr = sub {
-        my ($expr) = @_;
-        return "method_value:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_assign_statement = sub {
-        my ($lhs, $rhs) = @_;
-        return "assign:$lhs:$rhs";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_return_general_statement = sub {
-        my ($expr) = @_;
-        return "return_general:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_return_imatch_statement = sub {
-        my ($tag) = @_;
-        return "return_imatch:$tag";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_push_value_statement = sub {
-        my ($expr) = @_;
-        return "push_value:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_push_nonempty_statement = sub {
-        my ($expr) = @_;
-        return "push_nonempty:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_regex_subst_statement = sub {
-        my ($target, $pattern, $replacement, $flags) = @_;
-        return "regex_subst:$target:$pattern:$replacement:$flags";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_return_undef_statement = sub {
-        my ($expr) = @_;
-        return "return_undef:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_return_array_statement = sub {
-        my ($tag, $payload) = @_;
-        return "return_array:$tag:$payload";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_if_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "if_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_elseif_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "elseif_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_else_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "else_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_endif_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "endif_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_switch_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "switch_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_case_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "case_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_default_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "default_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_endcase_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "endcase_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_endswitch_flow_statement = sub {
-        my ($expr, $ctx) = @_;
-        return "endswitch_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_say_statement = sub {
-        my ($expr) = @_;
-        return "say_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_print_statement = sub {
-        my ($expr) = @_;
-        return "print_flow:$expr";
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts = sub {
-        my ($label) = @_;
-        return [{ id => 'return_general', label => $label, owner => 'emit_context_contracts' }];
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events = sub {
-        my ($contract, $code) = @_;
-        return [{ contract => $contract, raw => $code, owner => 'emit_context_scanner' }];
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers = sub {
-        my ($code, $rewrite_rules) = @_;
-        return { raw => $code, rewrite_rules => $rewrite_rules, owner => 'emit_context_find' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_collect_action_helper_ir_nodes = sub {
-        my ($code, $rewrite_rules) = @_;
-        return { raw => $code, rewrite_rules => $rewrite_rules, owner => 'emit_context_collect' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events = sub {
-        my ($label, $code, $helper_events) = @_;
-        return { label => $label, code => $code, helper_events => $helper_events, owner => 'emit_context_canonical' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_canonicalize_helper_action_ir_event = sub {
-        my ($label, $event, $diag_acc) = @_;
-        return { label => $label, event => $event, diag_acc => $diag_acc, owner => 'emit_context_canonicalize' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_split_action_ir_statements = sub {
-        my ($code) = @_;
-        return ['split_ok', $code, 'emit_context_split'];
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics = sub {
-        my ($label, $code, $rewrite_rules) = @_;
-        return ('rewritten_ok', { label => $label, raw => $code, rewrite_rules => $rewrite_rules, owner => 'emit_context_rewrite' });
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_lower_action_code_from_canonical_ir = sub {
-        my ($label, $events, $diag_acc, $rewrite_rules) = @_;
-        return { label => $label, events => $events, diag_acc => $diag_acc, rewrite_rules => $rewrite_rules, owner => 'emit_context_lower' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_accumulate_action_rewrite_diagnostics = sub {
-        my ($acc, $diag) = @_;
-        return { acc => $acc, diag => $diag, owner => 'emit_context_accumulate' };
-    };
-    local *LinkedSpec::RuleIR::EmitContext::_build_action_rewrite_rules = sub {
-        my ($label) = @_;
-        return [{ id => 'call', label => $label, owner => 'emit_context_rules' }];
-    };
-    local *LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat = sub {
-        return 'rewritten_ok';
-    };
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_parse_method_function_expr('call(Leaf)'), { parsed => 'call(Leaf)', owner => 'emit_context_parse' }, 'ActionRewriter method parser wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter method parser wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    ok(LinkedSpec::ActionRewriter::_is_bare_method_scope_token('::'), 'ActionRewriter bare-scope helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter bare-scope helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_normalize_method_args_with_optional_scope('Leaf,Top'), ['normalized', 'Leaf,Top'], 'ActionRewriter method-arg normalizer now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-arg normalizer preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_split_top_level_csv('a,b'), ['split', 'a,b'], 'ActionRewriter top-level CSV splitter now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter top-level CSV splitter preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_extract_scalar_symbol_name('scalar(foo)'), 'scalar:scalar(foo)', 'ActionRewriter scalar-symbol extractor now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalar-symbol extractor preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_extract_array_symbol_name('array(items)'), 'array:array(items)', 'ActionRewriter array-symbol extractor now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter array-symbol extractor preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_extract_hash_symbol_name('hash(lookup)'), 'hash:hash(lookup)', 'ActionRewriter hash-symbol extractor now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter hash-symbol extractor preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_scalar_access_key_expr('scalar(foo)'), 'key:scalar(foo)', 'ActionRewriter scalar-access lowering helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalar-access lowering helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_scalaref_value_expr('retv', '[scalar(foo)]'), 'scalaref:retv:[scalar(foo)]', 'ActionRewriter scalaref lowering helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalaref lowering helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_infer_scalar_container_kind('scalar(foo)'), 'kind:scalar(foo)', 'ActionRewriter scalar-container inference now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalar-container inference preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_assignment_source_expr('scalar(foo)'), 'assignsrc:scalar(foo)', 'ActionRewriter assignment-source lowering helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter assignment-source lowering helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_strip_literal_delimiters('"foo"'), 'strip:"foo"', 'ActionRewriter literal-delimiter stripper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter literal-delimiter stripper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_split_declare_symbol_names('items, more'), ['decl_split', 'items, more'], 'ActionRewriter declare-symbol splitter now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-symbol splitter preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_parse_declare_binding_entry('items = scalar(foo)'), { owner => 'emit_context_declare_binding', raw => 'items = scalar(foo)' }, 'ActionRewriter declare-binding parser now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-binding parser preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_declare_value_expr('scalar(foo)'), 'declare_value:scalar(foo)', 'ActionRewriter declare-value helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-value helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_declare_initializer_expr('array', 'array(foo, bar)'), 'declare_init:array:array(foo, bar)', 'ActionRewriter declare-initializer helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-initializer helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_extract_declare_statement_from_method_expr('declare(array, items)'), { owner => 'emit_context_extract_declare', raw => 'declare(array, items)' }, 'ActionRewriter declare-statement extractor now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-statement extractor preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_declare_method_statement('declare(array, items)'), 'declare_method:declare(array, items)', 'ActionRewriter declare-method helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-method helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_assign_method_statement('assign(retv, scalar(foo))'), 'assign_method:assign(retv, scalar(foo))', 'ActionRewriter assign-method helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter assign-method helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_lower_flow_composite_expr('or(scalar(a), scalar(b))'), { expr => 'or(scalar(a), scalar(b))', owner => 'emit_context_flow' }, 'ActionRewriter flow lowering wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter flow lowering wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_build_array_pipeline_plan_from_expr('filter_nonempty(array(items))'), { target_symbol => 'items', source => 'filter_nonempty(array(items))', owner => 'emit_context_array_plan' }, 'ActionRewriter array-pipeline plan wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter array-pipeline plan wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_array_pipeline_expr('filter_nonempty(array(items))'), 'array_lowered:filter_nonempty(array(items))', 'ActionRewriter array-pipeline lowering wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter array-pipeline lowering wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_declare_alias_to_type('array'), 'emit_alias:array', 'ActionRewriter method-lowering alias helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-lowering alias helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_typed_declare_statement('array', 'items'), 'typed:array:items', 'ActionRewriter typed-declare helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter typed-declare helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_normalize_method_tag_expr('scalar(foo)'), 'tag:scalar(foo)', 'ActionRewriter method-tag normalizer now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-tag normalizer preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_method_value_expr('call(foo)'), 'method_value:call(foo)', 'ActionRewriter method-value helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-value helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_assign_statement('scalar(foo)', 'scalar(bar)'), 'assign:scalar(foo):scalar(bar)', 'ActionRewriter assign helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter assign helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_return_general_statement('return(scalar(foo))'), 'return_general:return(scalar(foo))', 'ActionRewriter return-general helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-general helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_return_imatch_statement('"TAG"'), 'return_imatch:"TAG"', 'ActionRewriter return-imatch helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-imatch helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_push_value_statement('push_value(array(items), scalar(foo))'), 'push_value:push_value(array(items), scalar(foo))', 'ActionRewriter push-value helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter push-value helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_push_nonempty_statement('push_nonempty(array(items), scalar(foo))'), 'push_nonempty:push_nonempty(array(items), scalar(foo))', 'ActionRewriter push-nonempty helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter push-nonempty helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_regex_subst_statement('scalar(foo)', '"/a/"', '"/b/"', 'g'), 'regex_subst:scalar(foo):"/a/":"/b/":g', 'ActionRewriter regex-subst helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter regex-subst helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_return_undef_statement('return_undef()'), 'return_undef:return_undef()', 'ActionRewriter return-undef helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-undef helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_return_array_statement('"TAG"', 'scalar(foo)'), 'return_array:"TAG":scalar(foo)', 'ActionRewriter return-array helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-array helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_if_flow_statement('if(scalar(foo))', {}), 'if_flow:if(scalar(foo))', 'ActionRewriter if-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter if-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_elseif_flow_statement('elseif(scalar(foo))', {}), 'elseif_flow:elseif(scalar(foo))', 'ActionRewriter elseif-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter elseif-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_else_flow_statement('else()', {}), 'else_flow:else()', 'ActionRewriter else-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter else-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_endif_flow_statement('endif()', {}), 'endif_flow:endif()', 'ActionRewriter endif-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter endif-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_switch_flow_statement('switch(scalar(foo))', {}), 'switch_flow:switch(scalar(foo))', 'ActionRewriter switch-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter switch-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_case_flow_statement('case("TAG")', {}), 'case_flow:case("TAG")', 'ActionRewriter case-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter case-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_default_flow_statement('default()', {}), 'default_flow:default()', 'ActionRewriter default-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter default-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_endcase_flow_statement('endcase()', {}), 'endcase_flow:endcase()', 'ActionRewriter endcase-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter endcase-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_endswitch_flow_statement('endswitch()', {}), 'endswitch_flow:endswitch()', 'ActionRewriter endswitch-flow helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter endswitch-flow helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_say_statement('say("hi")'), 'say_flow:say("hi")', 'ActionRewriter say helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter say helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::_lower_print_statement('print(scalar(foo))'), 'print_flow:print(scalar(foo))', 'ActionRewriter print helper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter print helper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top'), [{ id => 'return_general', label => 'Top', owner => 'emit_context_contracts' }], 'ActionRewriter contract builder now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter contract builder preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_scan_contract_ir_events({ id => 'return_general' }, 'return_a(Top)'), [{ contract => { id => 'return_general' }, raw => 'return_a(Top)', owner => 'emit_context_scanner' }], 'ActionRewriter scanner wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter scanner wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_find_unresolved_action_helpers('call(Leaf)', [{ id => 'call' }]), { raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], owner => 'emit_context_find' }, 'ActionRewriter unresolved-helper wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter unresolved-helper wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes('call(Leaf)', [{ id => 'call' }]), { raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], owner => 'emit_context_collect' }, 'ActionRewriter helper-IR collector now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter helper-IR collector preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_build_canonical_action_ir_events('Top', 'return_a(Top)', [{ raw => 'return_a(Top)' }]), { label => 'Top', code => 'return_a(Top)', helper_events => [{ raw => 'return_a(Top)' }], owner => 'emit_context_canonical' }, 'ActionRewriter canonical builder now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter canonical builder preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_canonicalize_helper_action_ir_event('Top', { raw => 'call(Leaf)' }, { seen => 1 }), { label => 'Top', event => { raw => 'call(Leaf)' }, diag_acc => { seen => 1 }, owner => 'emit_context_canonicalize' }, 'ActionRewriter canonicalize helper wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter canonicalize helper wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_split_action_ir_statements('return foo; exit'), ['split_ok', 'return foo; exit', 'emit_context_split'], 'ActionRewriter statement-split wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter statement-split wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    my ($rewritten, $diag) = LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics('Top', 'call(Leaf)', [{ id => 'call' }]);
-    is($rewritten, 'rewritten_ok', 'ActionRewriter rewrite helper now delegates through the EmitContext compatibility owner');
-    is_deeply($diag, { label => 'Top', raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], owner => 'emit_context_rewrite' }, 'ActionRewriter rewrite helper preserves list-context return payload through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite helper preserves caller $@ on successful list-context delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_lower_action_code_from_canonical_ir('Top', [{ ir_node => 'RETURN_A' }], { seen => 1 }, [{ id => 'call' }]), { label => 'Top', events => [{ ir_node => 'RETURN_A' }], diag_acc => { seen => 1 }, rewrite_rules => [{ id => 'call' }], owner => 'emit_context_lower' }, 'ActionRewriter canonical lowering wrapper now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter canonical lowering wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics({ seen => 1 }, { unresolved_helper_count => 1 }), { acc => { seen => 1 }, diag => { unresolved_helper_count => 1 }, owner => 'emit_context_accumulate' }, 'ActionRewriter rewrite-diagnostic accumulator now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite-diagnostic accumulator preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_build_action_rewrite_rules('Top'), [{ id => 'call', label => 'Top', owner => 'emit_context_rules' }], 'ActionRewriter rewrite-rule builder now delegates through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite-rule builder preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'), 'rewritten_ok', 'ActionRewriter compatibility helper still returns rewritten code through the EmitContext compatibility owner');
-    is($@, "__SAVED_ERR__\n", 'ActionRewriter compatibility helper preserves caller $@ on successful delegation');
-};
-
-subtest 'action_rewriter_drops_dead_trim_helper' => sub {
-    plan tests => 2;
-
-    require LinkedSpec::ActionRewriter;
-    require LinkedSpec::RuleIR::EmitContext;
-
-    ok(!LinkedSpec::ActionRewriter->can('_trim_action_ir_value'), 'ActionRewriter no longer exposes the stale local trim helper');
-    ok(LinkedSpec::RuleIR::EmitContext->can('_trim_action_ir_value'), 'EmitContext still owns the active local trim helper');
-};
 
 subtest 'emit_context_control_flow_deps_route_through_owner_default_map' => sub {
     plan tests => 4;
@@ -15373,7 +14747,7 @@ SPEC
     is($label, 'Top', 'compile_spec_entry still returns the compiled rule label');
     ok(ref($info) eq 'HASH' && ref($info->{meta}{action_rewriter}) eq 'HASH', 'compile_spec_entry still returns compiled rule info with action-rewriter metadata');
 };
-subtest 'action_rewriter_avoids_removed_linkedspec_lowering_facade' => sub {
+subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     plan tests => 15;
 
     my %rewritten;
@@ -15448,51 +14822,51 @@ subtest 'action_rewriter_avoids_removed_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_lower_filter_match_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FILTER_MATCH_STATEMENT__\n" };
         local *LinkedSpec::_lower_return_array_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_ARRAY_STATEMENT__\n" };
 
-        $rewritten{declare} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{declare} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'declare_s(Top, flag=or(scalar(on), scalar(off)))',
         );
-        $rewritten{assign} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{assign} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'assign(Top, scalar(flag), or(scalar(on), scalar(off)))',
         );
-        $rewritten{push} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{push} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'push_value(array(items), scalar(retv))',
         );
-        $rewritten{regex} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{regex} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'substr(Top, scalar(c), /^"|"$/, //, go)',
         );
-        $rewritten{pipeline} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{pipeline} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'split(array(parts), scalar(args), /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts))',
         );
-        $rewritten{flow} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{flow} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'if(scalar(on)); print("warn"); else(); return_undef(); endif()',
         );
-        $rewritten{flow_empty} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{flow_empty} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'if(is_empty(array(items))); return_undef(); endif()',
         );
-        $rewritten{switch} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{switch} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'switch(scalar(kind)); case(foo); print("hit"); default(); say("miss"); endswitch()',
         );
-        $rewritten{return_imatch} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{return_imatch} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'return_imatch(Top, semantic_annotation)',
         );
-        $rewritten{return_array} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{return_array} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'return_array(Top, semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))',
         );
-        $rewritten{return_general} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{return_general} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'return(array_copy(array(items)))',
         );
-        $rewritten{pipeline_match} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+        $rewritten{pipeline_match} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'lowercase_each(array(parts)); filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)',
         );
@@ -15500,25 +14874,25 @@ subtest 'action_rewriter_avoids_removed_linkedspec_lowering_facade' => sub {
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter lowering succeeds without the removed LinkedSpec lowering facade helpers')
+    ok($ok_run, 'EmitContext lowering succeeds without the removed LinkedSpec lowering facade helpers')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'ActionRewriter lowering does not call the trapped removed LinkedSpec facade helpers');
-    is($rewritten{declare}, 'my $flag = (($on) || ($off))', 'declare alias lowering stays inside ActionRewriter-owned lowering path');
-    is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside ActionRewriter-owned lowering path');
-    is($rewritten{push}, 'push @items, $retv', 'push_value lowering stays inside ActionRewriter-owned lowering path');
-    is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside ActionRewriter-owned lowering path');
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'EmitContext lowering does not call the trapped removed LinkedSpec facade helpers');
+    is($rewritten{declare}, 'my $flag = (($on) || ($off))', 'declare alias lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{push}, 'push @items, $retv', 'push_value lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside EmitContext-owned lowering path');
     is($rewritten{pipeline}, '@parts = split /\s*,\s*/, $args; @parts = map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @parts; @parts = grep { length($_) } @parts',
-        'array pipeline lowering stays inside ActionRewriter-owned lowering path');
+        'array pipeline lowering stays inside EmitContext-owned lowering path');
     is($rewritten{flow}, 'if ($on) {; print "warn"; } else {; return undef; }',
-        'if/else flow lowering stays inside ActionRewriter-owned lowering path');
-    like($rewritten{flow_empty}, qr/!\@items.*return undef/s, 'is_empty flow lowering stays inside ActionRewriter-owned lowering path');
+        'if/else flow lowering stays inside EmitContext-owned lowering path');
+    like($rewritten{flow_empty}, qr/!\@items.*return undef/s, 'is_empty flow lowering stays inside EmitContext-owned lowering path');
     like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind; my \$__ls_switch_hit_\d+ = 0; if \(!\$__ls_switch_hit_\d+ && \$__ls_switch_value_\d+ eq "foo"\) \{ \$__ls_switch_hit_\d+ = 1; print "hit"; \} if \(!\$__ls_switch_hit_\d+\) \{ \$__ls_switch_hit_\d+ = 1; say "miss"; \} \}$/s,
-        'switch/case/default lowering stays inside ActionRewriter-owned lowering path');
-    is($rewritten{return_imatch}, 'return ["semantic_annotation", $IMATCH]', 'return_imatch lowering stays inside ActionRewriter-owned lowering path');
-    is($rewritten{return_array}, 'return ["semantic_annotation", [$IMATCH_LIST[0], $c]]', 'return_array lowering stays inside ActionRewriter-owned lowering path');
-    is($rewritten{return_general}, 'return [@items]', 'general return(payload) lowering stays inside ActionRewriter-owned lowering path');
-    like($rewritten{pipeline_match}, qr/lc\(\$_\)/, 'lowercase_each lowering stays inside ActionRewriter-owned lowering path');
-    like($rewritten{pipeline_match}, qr/A-Z_/, 'filter_match/uppercase/uniq lowering stays inside ActionRewriter-owned lowering path');
+        'switch/case/default lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{return_imatch}, 'return ["semantic_annotation", $IMATCH]', 'return_imatch lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{return_array}, 'return ["semantic_annotation", [$IMATCH_LIST[0], $c]]', 'return_array lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{return_general}, 'return [@items]', 'general return(payload) lowering stays inside EmitContext-owned lowering path');
+    like($rewritten{pipeline_match}, qr/lc\(\$_\)/, 'lowercase_each lowering stays inside EmitContext-owned lowering path');
+    like($rewritten{pipeline_match}, qr/A-Z_/, 'filter_match/uppercase/uniq lowering stays inside EmitContext-owned lowering path');
 };
 subtest 'actionir_scannercore_uses_scanner_dep_binding_owner' => sub {
     plan tests => 7;
@@ -15578,50 +14952,50 @@ subtest 'actionir_scannercore_uses_scanner_dep_binding_owner' => sub {
     is($events->[0]{raw}, 'return foo', 'ActionIR ScannerCore preserves the scanned raw statement');
     is_deeply($events->[0]{args}, { payload => 'foo' }, 'ActionIR ScannerCore preserves the scanned return payload');
 };
-subtest 'action_rewriter_avoids_deps_scanner_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_scanner_dep_builder' => sub {
     plan tests => 4;
 
     my ($ok_run, $err, $rewritten) = (0, '', undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_scanner_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_SCANNER_DEPS__\n" };
-        $rewritten = LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'return_a(Top)');
+        $rewritten = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'return_a(Top)');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter rewrite succeeds without the removed Deps scanner dep builder')
+    ok($ok_run, 'EmitContext rewrite succeeds without the removed Deps scanner dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_SCANNER_DEPS__/, 'ActionRewriter does not call the trapped Deps scanner dep builder');
-    ok(defined($rewritten), 'ActionRewriter still returns rewritten code through the Scanner-owned default deps');
-    is($rewritten, q{return ['?Top:', \@Top]}, 'ActionRewriter preserves helper rewrite output after moving scanner default deps into Scanner');
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_SCANNER_DEPS__/, 'EmitContext does not call the trapped Deps scanner dep builder');
+    ok(defined($rewritten), 'EmitContext still returns rewritten code through the Scanner-owned default deps');
+    is($rewritten, q{return ['?Top:', \@Top]}, 'EmitContext preserves helper rewrite output after moving scanner default deps into Scanner');
 };
-subtest 'action_rewriter_avoids_deps_statement_split_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_statement_split_dep_builder' => sub {
     plan tests => 4;
 
     my ($ok_run, $err, $parts) = (0, '', undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_statement_split_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_STATEMENT_SPLIT_DEPS__\n" };
-        $parts = LinkedSpec::ActionRewriter::_split_action_ir_statements("return foo; exit");
+        $parts = LinkedSpec::RuleIR::EmitContext::_split_action_ir_statements("return foo; exit");
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter statement split succeeds without the removed Deps statement-split dep builder')
+    ok($ok_run, 'EmitContext statement split succeeds without the removed Deps statement-split dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_STATEMENT_SPLIT_DEPS__/, 'ActionRewriter does not call the trapped Deps statement-split dep builder');
-    ok(ref($parts) eq 'ARRAY', 'ActionRewriter still returns a split statement list through the StatementSplit-owned default deps');
-    is_deeply($parts, ['return foo', 'exit'], 'ActionRewriter preserves statement splitting output after moving default deps into StatementSplit');
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_STATEMENT_SPLIT_DEPS__/, 'EmitContext does not call the trapped Deps statement-split dep builder');
+    ok(ref($parts) eq 'ARRAY', 'EmitContext still returns a split statement list through the StatementSplit-owned default deps');
+    is_deeply($parts, ['return foo', 'exit'], 'EmitContext preserves statement splitting output after moving default deps into StatementSplit');
 };
-subtest 'action_rewriter_avoids_deps_canonical_event_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_canonical_event_dep_builder' => sub {
     plan tests => 4;
 
     my ($ok_run, $err, $diag) = (0, '', undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_canonical_event_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_CANONICAL_EVENT_DEPS__\n" };
-        $diag = LinkedSpec::ActionRewriter::_build_canonical_action_ir_events(
+        $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events(
             'Top',
             'return_a(Top)',
             [{ raw => 'return_a(Top)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
@@ -15630,20 +15004,20 @@ subtest 'action_rewriter_avoids_deps_canonical_event_dep_builder' => sub {
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter canonical-event build succeeds without the removed Deps canonical-event dep builder')
+    ok($ok_run, 'EmitContext canonical-event build succeeds without the removed Deps canonical-event dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CANONICAL_EVENT_DEPS__/, 'ActionRewriter does not call the trapped Deps canonical-event dep builder');
-    ok(ref($diag) eq 'HASH', 'ActionRewriter still returns canonical-event diagnostics through the CanonicalEvents-owned default deps');
-    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'ActionRewriter preserves canonical-event classification after moving default deps into CanonicalEvents');
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CANONICAL_EVENT_DEPS__/, 'EmitContext does not call the trapped Deps canonical-event dep builder');
+    ok(ref($diag) eq 'HASH', 'EmitContext still returns canonical-event diagnostics through the CanonicalEvents-owned default deps');
+    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'EmitContext preserves canonical-event classification after moving default deps into CanonicalEvents');
 };
-subtest 'action_rewriter_avoids_deps_diagnostics_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_diagnostics_dep_builder' => sub {
     plan tests => 4;
 
     my ($ok_run, $err, $diag) = (0, '', undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_diagnostics_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__\n" };
-        $diag = LinkedSpec::ActionRewriter::_find_unresolved_action_helpers(
+        $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
             'return_a(Top); return_a(Top)',
             [{ id => 'return_a', diag_name => 'return_a', unresolved_pattern => qr/\breturn_a\s*\(/ }],
         );
@@ -15651,137 +15025,137 @@ subtest 'action_rewriter_avoids_deps_diagnostics_dep_builder' => sub {
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter diagnostics scan succeeds without the removed Deps diagnostics dep builder')
+    ok($ok_run, 'EmitContext diagnostics scan succeeds without the removed Deps diagnostics dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__/, 'ActionRewriter does not call the trapped Deps diagnostics dep builder');
-    ok(ref($diag) eq 'HASH', 'ActionRewriter still returns diagnostics through the Diagnostics-owned default deps');
-    is($diag->{unresolved_helper_count}, 2, 'ActionRewriter preserves unresolved-helper counting after moving default deps into Diagnostics');
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__/, 'EmitContext does not call the trapped Deps diagnostics dep builder');
+    ok(ref($diag) eq 'HASH', 'EmitContext still returns diagnostics through the Diagnostics-owned default deps');
+    is($diag->{unresolved_helper_count}, 2, 'EmitContext preserves unresolved-helper counting after moving default deps into Diagnostics');
 };
-subtest 'action_rewriter_avoids_deps_rewrite_pipeline_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_rewrite_pipeline_dep_builder' => sub {
     plan tests => 5;
 
     my ($ok_run, $err, $rewritten, $diag) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_REWRITE_PIPELINE_DEPS__\n" };
-        ($rewritten, $diag) = LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics('Top', 'return_a(Top)');
+        ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics('Top', 'return_a(Top)');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter rewrite pipeline succeeds without the removed Deps rewrite-pipeline dep builder')
+    ok($ok_run, 'EmitContext rewrite pipeline succeeds without the removed Deps rewrite-pipeline dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_REWRITE_PIPELINE_DEPS__/, 'ActionRewriter does not call the trapped Deps rewrite-pipeline dep builder');
-    is($rewritten, q{return ['?Top:', \@Top]}, 'ActionRewriter preserves rewrite output after moving default deps into RewritePipeline');
-    ok(ref($diag) eq 'HASH', 'ActionRewriter still returns diagnostics through the RewritePipeline-owned default deps');
-    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'ActionRewriter preserves canonical-event diagnostics through the RewritePipeline-owned default deps');
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_REWRITE_PIPELINE_DEPS__/, 'EmitContext does not call the trapped Deps rewrite-pipeline dep builder');
+    is($rewritten, q{return ['?Top:', \@Top]}, 'EmitContext preserves rewrite output after moving default deps into RewritePipeline');
+    ok(ref($diag) eq 'HASH', 'EmitContext still returns diagnostics through the RewritePipeline-owned default deps');
+    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'EmitContext preserves canonical-event diagnostics through the RewritePipeline-owned default deps');
 };
-subtest 'action_rewriter_avoids_deps_declare_method_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_declare_method_dep_builder' => sub {
     plan tests => 6;
 
     my ($ok_run, $err, $declare_stmt, $assign_stmt) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__\n" };
-        $declare_stmt = LinkedSpec::ActionRewriter::_lower_declare_method_statement('declare(array, items)');
-        $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_method_statement('assign(retv, scalar(foo))');
+        $declare_stmt = LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement('declare(array, items)');
+        $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement('assign(retv, scalar(foo))');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter declare-method lowering succeeds without the removed Deps declare-method dep builder')
+    ok($ok_run, 'EmitContext declare-method lowering succeeds without the removed Deps declare-method dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__/, 'ActionRewriter does not call the trapped Deps declare-method dep builder');
-    ok(defined($declare_stmt), 'ActionRewriter still returns lowered declare output through the DeclareMethod-owned default deps');
-    is($declare_stmt, 'my @items', 'ActionRewriter preserves declare-method lowering output after moving default deps into DeclareMethod');
-    ok(defined($assign_stmt), 'ActionRewriter still returns lowered assign output through the DeclareMethod-owned default deps');
-    is($assign_stmt, '$retv = $foo', 'ActionRewriter preserves assign-method lowering output after moving default deps into DeclareMethod');
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__/, 'EmitContext does not call the trapped Deps declare-method dep builder');
+    ok(defined($declare_stmt), 'EmitContext still returns lowered declare output through the DeclareMethod-owned default deps');
+    is($declare_stmt, 'my @items', 'EmitContext preserves declare-method lowering output after moving default deps into DeclareMethod');
+    ok(defined($assign_stmt), 'EmitContext still returns lowered assign output through the DeclareMethod-owned default deps');
+    is($assign_stmt, '$retv = $foo', 'EmitContext preserves assign-method lowering output after moving default deps into DeclareMethod');
 };
-subtest 'action_rewriter_avoids_deps_action_contract_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_action_contract_dep_builder' => sub {
     plan tests => 5;
 
     my ($ok_run, $err, $contracts, $declare_contract, $declare_output) = (0, '', undef, undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_contract_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__\n" };
-        $contracts = LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top');
+        $contracts = LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts('Top');
         ($declare_contract) = grep { $_->{id} eq 'declare_typed' } @{$contracts || []};
         $declare_output = $declare_contract ? $declare_contract->{lower}->('declare(array, items)') : undef;
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter contract build succeeds without the removed Deps action-contract dep builder')
+    ok($ok_run, 'EmitContext contract build succeeds without the removed Deps action-contract dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__/, 'ActionRewriter does not call the trapped Deps action-contract dep builder');
-    ok(ref($contracts) eq 'ARRAY' && @{$contracts} > 0, 'ActionRewriter still returns lowering contracts through the Contracts-owned default deps');
-    ok($declare_contract && ref($declare_contract->{lower}) eq 'CODE', 'ActionRewriter still exposes the declare_typed lowering contract through the Contracts owner');
-    is($declare_output, 'my @items', 'ActionRewriter preserves declare_typed contract lowering after moving default deps into Contracts');
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__/, 'EmitContext does not call the trapped Deps action-contract dep builder');
+    ok(ref($contracts) eq 'ARRAY' && @{$contracts} > 0, 'EmitContext still returns lowering contracts through the Contracts-owned default deps');
+    ok($declare_contract && ref($declare_contract->{lower}) eq 'CODE', 'EmitContext still exposes the declare_typed lowering contract through the Contracts owner');
+    is($declare_output, 'my @items', 'EmitContext preserves declare_typed contract lowering after moving default deps into Contracts');
 };
-subtest 'action_rewriter_avoids_deps_value_expr_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_value_expr_dep_builder' => sub {
     plan tests => 6;
 
     my ($ok_run, $err, $key_expr, $scalaref_expr) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::value_expr_deps_for_package = sub { die "__UNEXPECTED_DEPS_VALUE_EXPR_DEPS__\n" };
-        $key_expr = LinkedSpec::ActionRewriter::_lower_scalar_access_key_expr('scalar(foo)');
-        $scalaref_expr = LinkedSpec::ActionRewriter::_lower_scalaref_value_expr('retv', '[scalar(foo)]');
+        $key_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr('scalar(foo)');
+        $scalaref_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalaref_value_expr('retv', '[scalar(foo)]');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter value-expression lowering succeeds without the removed Deps value-expression dep builder')
+    ok($ok_run, 'EmitContext value-expression lowering succeeds without the removed Deps value-expression dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_VALUE_EXPR_DEPS__/, 'ActionRewriter does not call the trapped Deps value-expression dep builder');
-    ok(defined($key_expr), 'ActionRewriter still returns lowered scalar access output through the ValueExpr-owned default deps');
-    is($key_expr, '$foo', 'ActionRewriter preserves scalar access key lowering after moving default deps into ValueExpr');
-    ok(defined($scalaref_expr), 'ActionRewriter still returns lowered scalaref output through the ValueExpr-owned default deps');
-    is($scalaref_expr, '$retv->[$foo]', 'ActionRewriter preserves scalaref lowering after moving default deps into ValueExpr');
+    unlike($err, qr/__UNEXPECTED_DEPS_VALUE_EXPR_DEPS__/, 'EmitContext does not call the trapped Deps value-expression dep builder');
+    ok(defined($key_expr), 'EmitContext still returns lowered scalar access output through the ValueExpr-owned default deps');
+    is($key_expr, '$foo', 'EmitContext preserves scalar access key lowering after moving default deps into ValueExpr');
+    ok(defined($scalaref_expr), 'EmitContext still returns lowered scalaref output through the ValueExpr-owned default deps');
+    is($scalaref_expr, '$retv->[$foo]', 'EmitContext preserves scalaref lowering after moving default deps into ValueExpr');
 };
-subtest 'action_rewriter_avoids_deps_flow_expr_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_flow_expr_dep_builder' => sub {
     plan tests => 6;
 
     my ($ok_run, $err, $empty_expr, $compound_expr) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::flow_expr_deps_for_package = sub { die "__UNEXPECTED_DEPS_FLOW_EXPR_DEPS__\n" };
-        $empty_expr = LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(array(items))');
-        $compound_expr = LinkedSpec::ActionRewriter::_lower_flow_composite_expr('or(eq(scalar(foo), "x"), not(is_empty(array(items))))');
+        $empty_expr = LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(array(items))');
+        $compound_expr = LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('or(eq(scalar(foo), "x"), not(is_empty(array(items))))');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter flow-expression lowering succeeds without the removed Deps flow-expression dep builder')
+    ok($ok_run, 'EmitContext flow-expression lowering succeeds without the removed Deps flow-expression dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_FLOW_EXPR_DEPS__/, 'ActionRewriter does not call the trapped Deps flow-expression dep builder');
-    ok(defined($empty_expr), 'ActionRewriter still returns lowered empty-check output through the FlowExpr-owned default deps');
-    is($empty_expr, '(!@items)', 'ActionRewriter preserves empty-check flow lowering after moving default deps into FlowExpr');
-    ok(defined($compound_expr), 'ActionRewriter still returns lowered composite flow output through the FlowExpr-owned default deps');
-    is($compound_expr, '((($foo eq "x")) || ((!((!@items)))))', 'ActionRewriter preserves composite flow lowering after moving default deps into FlowExpr');
+    unlike($err, qr/__UNEXPECTED_DEPS_FLOW_EXPR_DEPS__/, 'EmitContext does not call the trapped Deps flow-expression dep builder');
+    ok(defined($empty_expr), 'EmitContext still returns lowered empty-check output through the FlowExpr-owned default deps');
+    is($empty_expr, '(!@items)', 'EmitContext preserves empty-check flow lowering after moving default deps into FlowExpr');
+    ok(defined($compound_expr), 'EmitContext still returns lowered composite flow output through the FlowExpr-owned default deps');
+    is($compound_expr, '((($foo eq "x")) || ((!((!@items)))))', 'EmitContext preserves composite flow lowering after moving default deps into FlowExpr');
 };
-subtest 'action_rewriter_avoids_deps_array_pipeline_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_array_pipeline_dep_builder' => sub {
     plan tests => 6;
 
     my ($ok_run, $err, $plan, $lowered) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::array_pipeline_deps_for_package = sub { die "__UNEXPECTED_DEPS_ARRAY_PIPELINE_DEPS__\n" };
-        $plan = LinkedSpec::ActionRewriter::_build_array_pipeline_plan_from_expr('filter_nonempty(array(items))');
-        $lowered = LinkedSpec::ActionRewriter::_lower_array_pipeline_expr('filter_nonempty(array(items))');
+        $plan = LinkedSpec::RuleIR::EmitContext::_build_array_pipeline_plan_from_expr('filter_nonempty(array(items))');
+        $lowered = LinkedSpec::RuleIR::EmitContext::_lower_array_pipeline_expr('filter_nonempty(array(items))');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter array-pipeline lowering succeeds without the removed Deps array-pipeline dep builder')
+    ok($ok_run, 'EmitContext array-pipeline lowering succeeds without the removed Deps array-pipeline dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_ARRAY_PIPELINE_DEPS__/, 'ActionRewriter does not call the trapped Deps array-pipeline dep builder');
-    ok(ref($plan) eq 'HASH', 'ActionRewriter still returns array-pipeline plans through the ArrayPipeline-owned default deps');
-    is_deeply($plan, { target_symbol => 'items', ops => [{ op => 'filter_nonempty' }] }, 'ActionRewriter preserves array-pipeline planning after moving default deps into ArrayPipeline');
-    ok(defined($lowered), 'ActionRewriter still returns lowered array-pipeline output through the ArrayPipeline-owned default deps');
-    is($lowered, '@items = grep { length($_) } @items', 'ActionRewriter preserves array-pipeline lowering after moving default deps into ArrayPipeline');
+    unlike($err, qr/__UNEXPECTED_DEPS_ARRAY_PIPELINE_DEPS__/, 'EmitContext does not call the trapped Deps array-pipeline dep builder');
+    ok(ref($plan) eq 'HASH', 'EmitContext still returns array-pipeline plans through the ArrayPipeline-owned default deps');
+    is_deeply($plan, { target_symbol => 'items', ops => [{ op => 'filter_nonempty' }] }, 'EmitContext preserves array-pipeline planning after moving default deps into ArrayPipeline');
+    ok(defined($lowered), 'EmitContext still returns lowered array-pipeline output through the ArrayPipeline-owned default deps');
+    is($lowered, '@items = grep { length($_) } @items', 'EmitContext preserves array-pipeline lowering after moving default deps into ArrayPipeline');
 };
-subtest 'action_rewriter_avoids_deps_control_flow_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_control_flow_dep_builder' => sub {
     plan tests => 7;
 
     my ($ok_run, $err, $if_stmt, $print_stmt, $ctx) = (0, '', undef, undef, undef);
@@ -15789,108 +15163,107 @@ subtest 'action_rewriter_avoids_deps_control_flow_dep_builder' => sub {
         no warnings 'redefine';
         local *LinkedSpec::Deps::control_flow_deps_for_package = sub { die "__UNEXPECTED_DEPS_CONTROL_FLOW_DEPS__\n" };
         $ctx = { if_stack => [], switch_stack => [], switch_counter => 0, rewrite_rules => [] };
-        $if_stmt = LinkedSpec::ActionRewriter::_lower_if_flow_statement('if(is_empty(array(items)))', $ctx);
-        $print_stmt = LinkedSpec::ActionRewriter::_lower_print_statement('print(scalar(foo))');
+        $if_stmt = LinkedSpec::RuleIR::EmitContext::_lower_if_flow_statement('if(is_empty(array(items)))', $ctx);
+        $print_stmt = LinkedSpec::RuleIR::EmitContext::_lower_print_statement('print(scalar(foo))');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter control-flow lowering succeeds without the removed Deps control-flow dep builder')
+    ok($ok_run, 'EmitContext control-flow lowering succeeds without the removed Deps control-flow dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_CONTROL_FLOW_DEPS__/, 'ActionRewriter does not call the trapped Deps control-flow dep builder');
-    ok(defined($if_stmt), 'ActionRewriter still returns lowered if output through the ControlFlow-owned default deps');
-    is($if_stmt, 'if ((!@items)) {', 'ActionRewriter preserves if-flow lowering after moving default deps into ControlFlow');
-    is(scalar(@{$ctx->{if_stack} || []}), 1, 'ActionRewriter preserves if-stack mutation after moving default deps into ControlFlow');
-    ok(defined($print_stmt), 'ActionRewriter still returns lowered print output through the ControlFlow-owned default deps');
-    is($print_stmt, 'print $foo', 'ActionRewriter preserves print lowering after moving default deps into ControlFlow');
+    unlike($err, qr/__UNEXPECTED_DEPS_CONTROL_FLOW_DEPS__/, 'EmitContext does not call the trapped Deps control-flow dep builder');
+    ok(defined($if_stmt), 'EmitContext still returns lowered if output through the ControlFlow-owned default deps');
+    is($if_stmt, 'if ((!@items)) {', 'EmitContext preserves if-flow lowering after moving default deps into ControlFlow');
+    is(scalar(@{$ctx->{if_stack} || []}), 1, 'EmitContext preserves if-stack mutation after moving default deps into ControlFlow');
+    ok(defined($print_stmt), 'EmitContext still returns lowered print output through the ControlFlow-owned default deps');
+    is($print_stmt, 'print $foo', 'EmitContext preserves print lowering after moving default deps into ControlFlow');
 };
-subtest 'action_rewriter_avoids_deps_method_lowering_dep_builder' => sub {
+subtest 'emit_context_avoids_deps_method_lowering_dep_builder' => sub {
     plan tests => 8;
 
     my ($ok_run, $err, $alias, $assign_stmt, $return_array_stmt) = (0, '', undef, undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::method_lowering_deps_for_package = sub { die "__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__\n" };
-        $alias = LinkedSpec::ActionRewriter::_declare_alias_to_type('array');
-        $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_statement('scalar(foo)', 'scalar(bar)');
-        $return_array_stmt = LinkedSpec::ActionRewriter::_lower_return_array_statement('Tag', 'array(items)');
+        $alias = LinkedSpec::RuleIR::EmitContext::_declare_alias_to_type('array');
+        $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_statement('scalar(foo)', 'scalar(bar)');
+        $return_array_stmt = LinkedSpec::RuleIR::EmitContext::_lower_return_array_statement('Tag', 'array(items)');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter method-lowering succeeds without the removed Deps method-lowering dep builder')
+    ok($ok_run, 'EmitContext method-lowering succeeds without the removed Deps method-lowering dep builder')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__/, 'ActionRewriter does not call the trapped Deps method-lowering dep builder');
-    ok(defined($alias), 'ActionRewriter still returns declaration alias output through the MethodLowering-owned default deps');
-    is($alias, 'array', 'ActionRewriter preserves declaration alias lowering after moving default deps into MethodLowering');
-    ok(defined($assign_stmt), 'ActionRewriter still returns assign output through the MethodLowering-owned default deps');
-    is($assign_stmt, '$foo = $bar', 'ActionRewriter preserves assign lowering after moving default deps into MethodLowering');
-    ok(defined($return_array_stmt), 'ActionRewriter still returns return-array output through the MethodLowering-owned default deps');
-    is($return_array_stmt, 'return ["Tag", [items]]', 'ActionRewriter preserves return-array lowering after moving default deps into MethodLowering');
+    unlike($err, qr/__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__/, 'EmitContext does not call the trapped Deps method-lowering dep builder');
+    ok(defined($alias), 'EmitContext still returns declaration alias output through the MethodLowering-owned default deps');
+    is($alias, 'array', 'EmitContext preserves declaration alias lowering after moving default deps into MethodLowering');
+    ok(defined($assign_stmt), 'EmitContext still returns assign output through the MethodLowering-owned default deps');
+    is($assign_stmt, '$foo = $bar', 'EmitContext preserves assign lowering after moving default deps into MethodLowering');
+    ok(defined($return_array_stmt), 'EmitContext still returns return-array output through the MethodLowering-owned default deps');
+    is($return_array_stmt, 'return ["Tag", [items]]', 'EmitContext preserves return-array lowering after moving default deps into MethodLowering');
 };
-subtest 'action_rewriter_require_avoids_linkedspec_deps_load' => sub {
+subtest 'emit_context_require_avoids_linkedspec_deps_load' => sub {
     plan tests => 4;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
-        'require LinkedSpec::ActionRewriter;'
+        'require LinkedSpec::RuleIR::EmitContext;'
       . 'print exists($INC{"LinkedSpec/Deps.pm"}) ? "__DEPS_LOADED__\n" : "__DEPS_NOT_LOADED__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_LOADED__\n" : "__METHODEXPR_NOT_LOADED__\n";'
     );
 
-    is($exit_code, 0, 'ActionRewriter require-only subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__DEPS_NOT_LOADED__/, 'ActionRewriter require-only subprocess keeps LinkedSpec::Deps unloaded');
-    like($out, qr/__METHODEXPR_NOT_LOADED__/, 'ActionRewriter require-only subprocess keeps MethodExpr unloaded');
-    is($err, '', 'ActionRewriter require-only subprocess does not emit stderr');
+    is($exit_code, 0, 'EmitContext require-only subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DEPS_NOT_LOADED__/, 'EmitContext require-only subprocess keeps LinkedSpec::Deps unloaded');
+    like($out, qr/__METHODEXPR_NOT_LOADED__/, 'EmitContext require-only subprocess keeps MethodExpr unloaded');
+    is($err, '', 'EmitContext require-only subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_method_expr_load_until_parse_helper' => sub {
-    plan tests => 8;
+subtest 'emit_context_require_avoids_method_expr_load_until_parse_helper' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
-        'require LinkedSpec::ActionRewriter;'
-      . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";'
+        'require LinkedSpec::RuleIR::EmitContext;'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_EAGER__\n" : "__METHODEXPR_STILL_LAZY__\n";'
-      . 'my $expr = LinkedSpec::ActionRewriter::_parse_method_function_expr("return_a(Top)");'
+      . 'print exists($INC{"LinkedSpec/Deps.pm"}) ? "__DEPS_EAGER__\n" : "__DEPS_STILL_UNLOADED__\n";'
+      . 'my $expr = LinkedSpec::RuleIR::EmitContext::_parse_method_function_expr("return_a(Top)");'
       . 'print ref($expr) eq "HASH" ? "__METHOD_EXPR_HASH__\n" : "__METHOD_EXPR_OTHER__\n";'
       . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_PARSE__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_AFTER_PARSE__\n" : "__METHODEXPR_STILL_UNLOADED__\n";'
       . 'print ref($expr->{args}) eq "ARRAY" && @{$expr->{args}} == 1 && $expr->{args}[0] eq "Top" ? "__METHOD_EXPR_ARGS_OK__\n" : "__METHOD_EXPR_ARGS_BAD__\n";'
     );
 
-    is($exit_code, 0, 'ActionRewriter require/parse subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
-    like($out, qr/__METHODEXPR_STILL_LAZY__/, 'require ActionRewriter keeps MethodExpr unloaded');
+    is($exit_code, 0, 'EmitContext require/parse subprocess exits cleanly') or diag($err || $out);
+        like($out, qr/__METHODEXPR_STILL_LAZY__/, 'require EmitContext keeps MethodExpr unloaded');
     like($out, qr/__METHOD_EXPR_HASH__/, 'method-expression parse still returns a hash after lazy MethodExpr loading');
-    like($out, qr/__EMIT_CONTEXT_AFTER_PARSE__/, 'method-expression parse lazy-loads EmitContext on demand');
+    like($out, qr/__DEPS_STILL_UNLOADED__/, 'method-expression parse keeps Deps unloaded');
     like($out, qr/__METHODEXPR_AFTER_PARSE__/, 'method-expression parse lazy-loads MethodExpr on demand');
     like($out, qr/__METHOD_EXPR_ARGS_OK__/, 'method-expression parse preserves parsed argument output after lazy MethodExpr loading');
-    is($err, '', 'ActionRewriter require/parse subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/parse subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_canonical_events_load_until_canonical_build' => sub {
+subtest 'emit_context_require_avoids_canonical_events_load_until_canonical_build' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
-        'require LinkedSpec::ActionRewriter;'
+        'require LinkedSpec::RuleIR::EmitContext;'
       . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_EAGER__\n" : "__CANONICAL_EVENTS_STILL_LAZY__\n";'
-      . 'my $diag = LinkedSpec::ActionRewriter::_build_canonical_action_ir_events("Top", "return_a(Top)", [{ raw => "return_a(Top)", args => { label => "Top" }, contract_id => "return_a", ir_node => "RETURN" }]);'
+      . 'my $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events("Top", "return_a(Top)", [{ raw => "return_a(Top)", args => { label => "Top" }, contract_id => "return_a", ir_node => "RETURN" }]);'
       . 'print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_AFTER_BUILD__\n" : "__CANONICAL_EVENTS_STILL_UNLOADED__\n";'
       . 'print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A" ? "__CANONICAL_EVENTS_ARGS_OK__\n" : "__CANONICAL_EVENTS_ARGS_BAD__\n";'
     );
 
-    is($exit_code, 0, 'ActionRewriter require/canonical-build subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__CANONICAL_EVENTS_STILL_LAZY__/, 'require ActionRewriter keeps CanonicalEvents unloaded');
+    is($exit_code, 0, 'EmitContext require/canonical-build subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__CANONICAL_EVENTS_STILL_LAZY__/, 'require EmitContext keeps CanonicalEvents unloaded');
     like($out, qr/__CANONICAL_EVENTS_DIAG_HASH__/, 'canonical-event build still returns a hash after lazy CanonicalEvents loading');
     like($out, qr/__CANONICAL_EVENTS_AFTER_BUILD__/, 'canonical-event build lazy-loads CanonicalEvents on demand');
     like($out, qr/__CANONICAL_EVENTS_ARGS_OK__/, 'canonical-event build preserves classification output after lazy CanonicalEvents loading');
-    is($err, '', 'ActionRewriter require/canonical-build subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/canonical-build subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_diagnostics_load_until_diag_helper' => sub {
+subtest 'emit_context_require_avoids_diagnostics_load_until_diag_helper' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/Diagnostics.pm"}) ? "__DIAGNOSTICS_EAGER__\n" : "__DIAGNOSTICS_STILL_LAZY__\n";
-my $diag = LinkedSpec::ActionRewriter::_find_unresolved_action_helpers(
+my $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
     "return_a(Top); return_a(Top)",
     [{ id => "return_a", diag_name => "return_a", unresolved_pattern => qr/\breturn_a\s*\(/ }],
 );
@@ -15903,20 +15276,20 @@ if (($diag->{unresolved_helper_count} // 0) == 2) {
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/diagnostics subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__DIAGNOSTICS_STILL_LAZY__/, 'require ActionRewriter keeps Diagnostics unloaded');
+    is($exit_code, 0, 'EmitContext require/diagnostics subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DIAGNOSTICS_STILL_LAZY__/, 'require EmitContext keeps Diagnostics unloaded');
     like($out, qr/__DIAGNOSTICS_HASH__/, 'diagnostics helper still returns a hash after lazy Diagnostics loading');
     like($out, qr/__DIAGNOSTICS_AFTER_HELPER__/, 'diagnostics helper lazy-loads Diagnostics on demand');
     like($out, qr/__DIAGNOSTICS_COUNT_OK__/, 'diagnostics helper preserves unresolved-helper counting after lazy Diagnostics loading');
-    is($err, '', 'ActionRewriter require/diagnostics subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/diagnostics subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_scanner_load_until_scan_helper' => sub {
+subtest 'emit_context_require_avoids_scanner_load_until_scan_helper' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/Scanner.pm"}) ? "__SCANNER_EAGER__\n" : "__SCANNER_STILL_LAZY__\n";
-my $events = LinkedSpec::ActionRewriter::_scan_contract_ir_events(
+my $events = LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events(
     { id => 'return_bare' },
     "return foo;",
 );
@@ -15929,20 +15302,20 @@ if (scalar(@{$events || []}) == 1 && $events->[0]{raw} eq "return foo") {
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/scanner subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__SCANNER_STILL_LAZY__/, 'require ActionRewriter keeps Scanner unloaded');
+    is($exit_code, 0, 'EmitContext require/scanner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__SCANNER_STILL_LAZY__/, 'require EmitContext keeps Scanner unloaded');
     like($out, qr/__SCANNER_EVENTS_ARRAY__/, 'scanner helper still returns an event array after lazy Scanner loading');
     like($out, qr/__SCANNER_AFTER_HELPER__/, 'scanner helper lazy-loads Scanner on demand');
     like($out, qr/__SCANNER_PAYLOAD_OK__/, 'scanner helper preserves scanned return-bare payload after lazy Scanner loading');
-    is($err, '', 'ActionRewriter require/scanner subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/scanner subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_statement_split_load_until_split_helper' => sub {
+subtest 'emit_context_require_avoids_statement_split_load_until_split_helper' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/StatementSplit.pm"}) ? "__STATEMENT_SPLIT_EAGER__\n" : "__STATEMENT_SPLIT_STILL_LAZY__\n";
-my $parts = LinkedSpec::ActionRewriter::_split_action_ir_statements("return foo; exit");
+my $parts = LinkedSpec::RuleIR::EmitContext::_split_action_ir_statements("return foo; exit");
 print ref($parts) eq "ARRAY" ? "__STATEMENT_SPLIT_ARRAY__\n" : "__STATEMENT_SPLIT_OTHER__\n";
 print exists($INC{"LinkedSpec/ActionIR/StatementSplit.pm"}) ? "__STATEMENT_SPLIT_AFTER_HELPER__\n" : "__STATEMENT_SPLIT_STILL_UNLOADED__\n";
 if (ref($parts) eq "ARRAY" && @{$parts} == 2 && $parts->[0] eq "return foo" && $parts->[1] eq "exit") {
@@ -15952,20 +15325,20 @@ if (ref($parts) eq "ARRAY" && @{$parts} == 2 && $parts->[0] eq "return foo" && $
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/statement-split subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__STATEMENT_SPLIT_STILL_LAZY__/, 'require ActionRewriter keeps StatementSplit unloaded');
+    is($exit_code, 0, 'EmitContext require/statement-split subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__STATEMENT_SPLIT_STILL_LAZY__/, 'require EmitContext keeps StatementSplit unloaded');
     like($out, qr/__STATEMENT_SPLIT_ARRAY__/, 'statement-split helper still returns an array after lazy StatementSplit loading');
     like($out, qr/__STATEMENT_SPLIT_AFTER_HELPER__/, 'statement-split helper lazy-loads StatementSplit on demand');
     like($out, qr/__STATEMENT_SPLIT_PAYLOAD_OK__/, 'statement-split helper preserves split output after lazy StatementSplit loading');
-    is($err, '', 'ActionRewriter require/statement-split subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/statement-split subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_contracts_load_until_contract_helper' => sub {
+subtest 'emit_context_require_avoids_contracts_load_until_contract_helper' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/Contracts.pm"}) ? "__CONTRACTS_EAGER__\n" : "__CONTRACTS_STILL_LAZY__\n";
-my $contracts = LinkedSpec::ActionRewriter::_build_action_lowering_contracts("Top");
+my $contracts = LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts("Top");
 my ($declare_contract) = grep { $_->{id} eq "declare_typed" } @{$contracts || []};
 my $declare_output = $declare_contract ? $declare_contract->{lower}->("declare(array, items)") : undef;
 print ref($contracts) eq "ARRAY" ? "__CONTRACTS_ARRAY__\n" : "__CONTRACTS_OTHER__\n";
@@ -15977,20 +15350,20 @@ if (defined($declare_output) && $declare_output eq "my \@items") {
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/contracts subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__CONTRACTS_STILL_LAZY__/, 'require ActionRewriter keeps Contracts unloaded');
+    is($exit_code, 0, 'EmitContext require/contracts subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__CONTRACTS_STILL_LAZY__/, 'require EmitContext keeps Contracts unloaded');
     like($out, qr/__CONTRACTS_ARRAY__/, 'contract helper still returns a contract array after lazy Contracts loading');
     like($out, qr/__CONTRACTS_AFTER_HELPER__/, 'contract helper lazy-loads Contracts on demand');
     like($out, qr/__CONTRACTS_PAYLOAD_OK__/, 'contract helper preserves declare_typed lowering output after lazy Contracts loading');
-    is($err, '', 'ActionRewriter require/contracts subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/contracts subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_rewrite_pipeline_load_until_rewrite_helper' => sub {
+subtest 'emit_context_require_avoids_rewrite_pipeline_load_until_rewrite_helper' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_EAGER__\n" : "__REWRITE_PIPELINE_STILL_LAZY__\n";
-my ($rewritten, $diag) = LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics("Top", "return_a(Top)");
+my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics("Top", "return_a(Top)");
 print defined($rewritten) && ref($diag) eq "HASH" ? "__REWRITE_PIPELINE_RESULT_OK__\n" : "__REWRITE_PIPELINE_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_AFTER_HELPER__\n" : "__REWRITE_PIPELINE_STILL_UNLOADED__\n";
 if (defined($rewritten) && $rewritten eq q{return ['?Top:', \@Top]} && ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A") {
@@ -16000,21 +15373,20 @@ if (defined($rewritten) && $rewritten eq q{return ['?Top:', \@Top]} && ref($diag
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/rewrite-pipeline subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__REWRITE_PIPELINE_STILL_LAZY__/, 'require ActionRewriter keeps RewritePipeline unloaded');
+    is($exit_code, 0, 'EmitContext require/rewrite-pipeline subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__REWRITE_PIPELINE_STILL_LAZY__/, 'require EmitContext keeps RewritePipeline unloaded');
     like($out, qr/__REWRITE_PIPELINE_RESULT_OK__/, 'rewrite helper still returns rewrite output and diagnostics after lazy RewritePipeline loading');
     like($out, qr/__REWRITE_PIPELINE_AFTER_HELPER__/, 'rewrite helper lazy-loads RewritePipeline on demand');
     like($out, qr/__REWRITE_PIPELINE_PAYLOAD_OK__/, 'rewrite helper preserves rewrite output and canonical diagnostics after lazy RewritePipeline loading');
-    is($err, '', 'ActionRewriter require/rewrite-pipeline subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/rewrite-pipeline subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_flow_expr_load_until_flow_helper' => sub {
-    plan tests => 8;
+subtest 'emit_context_require_avoids_flow_expr_load_until_flow_helper' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/FlowExpr.pm"}) ? "__FLOW_EXPR_EAGER__\n" : "__FLOW_EXPR_STILL_LAZY__\n";
-my $expr = LinkedSpec::ActionRewriter::_lower_flow_composite_expr("is_empty(array(items))");
+my $expr = LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr("is_empty(array(items))");
 print defined($expr) ? "__FLOW_EXPR_DEFINED__\n" : "__FLOW_EXPR_UNDEF__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/FlowExpr.pm"}) ? "__FLOW_EXPR_AFTER_HELPER__\n" : "__FLOW_EXPR_STILL_UNLOADED__\n";
@@ -16025,24 +15397,22 @@ if (defined($expr) && $expr eq "(!\@items)") {
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/flow-expr subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
-    like($out, qr/__FLOW_EXPR_STILL_LAZY__/, 'require ActionRewriter keeps FlowExpr unloaded');
+    is($exit_code, 0, 'EmitContext require/flow-expr subprocess exits cleanly') or diag($err || $out);
+        like($out, qr/__FLOW_EXPR_STILL_LAZY__/, 'require EmitContext keeps FlowExpr unloaded');
     like($out, qr/__FLOW_EXPR_DEFINED__/, 'flow helper still returns lowered output after lazy FlowExpr loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'flow helper lazy-loads EmitContext on demand');
     like($out, qr/__FLOW_EXPR_AFTER_HELPER__/, 'flow helper lazy-loads FlowExpr on demand');
     like($out, qr/__FLOW_EXPR_PAYLOAD_OK__/, 'flow helper preserves empty-check lowering after lazy FlowExpr loading');
-    is($err, '', 'ActionRewriter require/flow-expr subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/flow-expr subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_array_pipeline_load_until_array_helper' => sub {
-    plan tests => 8;
+subtest 'emit_context_require_avoids_array_pipeline_load_until_array_helper' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/ArrayPipeline.pm"}) ? "__ARRAY_PIPELINE_EAGER__\n" : "__ARRAY_PIPELINE_STILL_LAZY__\n";
-my $plan = LinkedSpec::ActionRewriter::_build_array_pipeline_plan_from_expr("filter_nonempty(array(items))");
-my $lowered = LinkedSpec::ActionRewriter::_lower_array_pipeline_expr("filter_nonempty(array(items))");
+my $plan = LinkedSpec::RuleIR::EmitContext::_build_array_pipeline_plan_from_expr("filter_nonempty(array(items))");
+my $lowered = LinkedSpec::RuleIR::EmitContext::_lower_array_pipeline_expr("filter_nonempty(array(items))");
 print ref($plan) eq "HASH" && defined($lowered) ? "__ARRAY_PIPELINE_RESULT_OK__\n" : "__ARRAY_PIPELINE_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ArrayPipeline.pm"}) ? "__ARRAY_PIPELINE_AFTER_HELPER__\n" : "__ARRAY_PIPELINE_STILL_UNLOADED__\n";
@@ -16053,24 +15423,22 @@ if (ref($plan) eq "HASH" && $plan->{target_symbol} eq "items" && ref($plan->{ops
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/array-pipeline subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
-    like($out, qr/__ARRAY_PIPELINE_STILL_LAZY__/, 'require ActionRewriter keeps ArrayPipeline unloaded');
+    is($exit_code, 0, 'EmitContext require/array-pipeline subprocess exits cleanly') or diag($err || $out);
+        like($out, qr/__ARRAY_PIPELINE_STILL_LAZY__/, 'require EmitContext keeps ArrayPipeline unloaded');
     like($out, qr/__ARRAY_PIPELINE_RESULT_OK__/, 'array-pipeline helper still returns planning and lowering output after lazy ArrayPipeline loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'array-pipeline helper lazy-loads EmitContext on demand');
     like($out, qr/__ARRAY_PIPELINE_AFTER_HELPER__/, 'array-pipeline helper lazy-loads ArrayPipeline on demand');
     like($out, qr/__ARRAY_PIPELINE_PAYLOAD_OK__/, 'array-pipeline helper preserves planning and lowering output after lazy ArrayPipeline loading');
-    is($err, '', 'ActionRewriter require/array-pipeline subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/array-pipeline subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_value_expr_load_until_value_helper' => sub {
-    plan tests => 8;
+subtest 'emit_context_require_avoids_value_expr_load_until_value_helper' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_EAGER__\n" : "__VALUE_EXPR_STILL_LAZY__\n";
-my $key_expr = LinkedSpec::ActionRewriter::_lower_scalar_access_key_expr("scalar(foo)");
-my $scalaref_expr = LinkedSpec::ActionRewriter::_lower_scalaref_value_expr("retv", "[scalar(foo)]");
+my $key_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr("scalar(foo)");
+my $scalaref_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalaref_value_expr("retv", "[scalar(foo)]");
 print defined($key_expr) && defined($scalaref_expr) ? "__VALUE_EXPR_RESULT_OK__\n" : "__VALUE_EXPR_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_AFTER_HELPER__\n" : "__VALUE_EXPR_STILL_UNLOADED__\n";
@@ -16081,25 +15449,23 @@ if (defined($key_expr) && $key_expr eq "\$foo" && defined($scalaref_expr) && $sc
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/value-expr subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
-    like($out, qr/__VALUE_EXPR_STILL_LAZY__/, 'require ActionRewriter keeps ValueExpr unloaded');
+    is($exit_code, 0, 'EmitContext require/value-expr subprocess exits cleanly') or diag($err || $out);
+        like($out, qr/__VALUE_EXPR_STILL_LAZY__/, 'require EmitContext keeps ValueExpr unloaded');
     like($out, qr/__VALUE_EXPR_RESULT_OK__/, 'value helper still returns lowered output after lazy ValueExpr loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'value helper lazy-loads EmitContext on demand');
     like($out, qr/__VALUE_EXPR_AFTER_HELPER__/, 'value helper lazy-loads ValueExpr on demand');
     like($out, qr/__VALUE_EXPR_PAYLOAD_OK__/, 'value helper preserves scalar-access and scalaref lowering after lazy ValueExpr loading');
-    is($err, '', 'ActionRewriter require/value-expr subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/value-expr subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_control_flow_load_until_control_helper' => sub {
-    plan tests => 8;
+subtest 'emit_context_require_avoids_control_flow_load_until_control_helper' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_EAGER__\n" : "__CONTROL_FLOW_STILL_LAZY__\n";
 my $ctx = { if_stack => [], switch_stack => [], switch_counter => 0, rewrite_rules => [] };
-my $if_stmt = LinkedSpec::ActionRewriter::_lower_if_flow_statement("if(is_empty(array(items)))", $ctx);
-my $print_stmt = LinkedSpec::ActionRewriter::_lower_print_statement("print(scalar(foo))");
+my $if_stmt = LinkedSpec::RuleIR::EmitContext::_lower_if_flow_statement("if(is_empty(array(items)))", $ctx);
+my $print_stmt = LinkedSpec::RuleIR::EmitContext::_lower_print_statement("print(scalar(foo))");
 print defined($if_stmt) && defined($print_stmt) ? "__CONTROL_FLOW_RESULT_OK__\n" : "__CONTROL_FLOW_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_AFTER_HELPER__\n" : "__CONTROL_FLOW_STILL_UNLOADED__\n";
@@ -16110,24 +15476,22 @@ if (defined($if_stmt) && $if_stmt eq "if ((!\@items)) {" && defined($print_stmt)
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/control-flow subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
-    like($out, qr/__CONTROL_FLOW_STILL_LAZY__/, 'require ActionRewriter keeps ControlFlow unloaded');
+    is($exit_code, 0, 'EmitContext require/control-flow subprocess exits cleanly') or diag($err || $out);
+        like($out, qr/__CONTROL_FLOW_STILL_LAZY__/, 'require EmitContext keeps ControlFlow unloaded');
     like($out, qr/__CONTROL_FLOW_RESULT_OK__/, 'control-flow helpers still return lowered output after lazy ControlFlow loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'control-flow helpers lazy-load EmitContext on demand');
     like($out, qr/__CONTROL_FLOW_AFTER_HELPER__/, 'control-flow helpers lazy-load ControlFlow on demand through EmitContext');
     like($out, qr/__CONTROL_FLOW_PAYLOAD_OK__/, 'control-flow helpers preserve if/print lowering and stack mutation after lazy ControlFlow loading');
-    is($err, '', 'ActionRewriter require/control-flow subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/control-flow subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_method_lowering_load_until_method_helper' => sub {
-    plan tests => 8;
+subtest 'emit_context_require_avoids_method_lowering_load_until_method_helper' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_EAGER__\n" : "__METHOD_LOWERING_STILL_LAZY__\n";
-my $return_stmt = LinkedSpec::ActionRewriter::_lower_return_general_statement("return(scalar(foo))");
-my $undef_stmt = LinkedSpec::ActionRewriter::_lower_return_undef_statement("return_undef()");
+my $return_stmt = LinkedSpec::RuleIR::EmitContext::_lower_return_general_statement("return(scalar(foo))");
+my $undef_stmt = LinkedSpec::RuleIR::EmitContext::_lower_return_undef_statement("return_undef()");
 print defined($return_stmt) && defined($undef_stmt) ? "__METHOD_LOWERING_RESULT_OK__\n" : "__METHOD_LOWERING_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_AFTER_HELPER__\n" : "__METHOD_LOWERING_STILL_UNLOADED__\n";
@@ -16138,24 +15502,22 @@ if (defined($return_stmt) && $return_stmt eq "return \$foo" && defined($undef_st
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/method-lowering subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
-    like($out, qr/__METHOD_LOWERING_STILL_LAZY__/, 'require ActionRewriter keeps MethodLowering unloaded');
+    is($exit_code, 0, 'EmitContext require/method-lowering subprocess exits cleanly') or diag($err || $out);
+        like($out, qr/__METHOD_LOWERING_STILL_LAZY__/, 'require EmitContext keeps MethodLowering unloaded');
     like($out, qr/__METHOD_LOWERING_RESULT_OK__/, 'method-lowering helpers still return lowered output after lazy MethodLowering loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'method-lowering helpers lazy-load EmitContext on demand');
     like($out, qr/__METHOD_LOWERING_AFTER_HELPER__/, 'method-lowering helpers lazy-load MethodLowering on demand through EmitContext');
     like($out, qr/__METHOD_LOWERING_PAYLOAD_OK__/, 'method-lowering helpers preserve return-general and return-undef lowering after lazy MethodLowering loading');
-    is($err, '', 'ActionRewriter require/method-lowering subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/method-lowering subprocess does not emit stderr');
 };
-subtest 'action_rewriter_require_avoids_declare_method_load_until_declare_helper' => sub {
-    plan tests => 8;
+subtest 'emit_context_require_avoids_declare_method_load_until_declare_helper' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::ActionRewriter;
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
+require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_EAGER__\n" : "__DECLARE_METHOD_STILL_LAZY__\n";
-my $declare_stmt = LinkedSpec::ActionRewriter::_lower_declare_method_statement("declare(array, items)");
-my $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_method_statement("assign(retv, scalar(foo))");
+my $declare_stmt = LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement("declare(array, items)");
+my $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement("assign(retv, scalar(foo))");
 print defined($declare_stmt) && defined($assign_stmt) ? "__DECLARE_METHOD_RESULT_OK__\n" : "__DECLARE_METHOD_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_AFTER_HELPER__\n" : "__DECLARE_METHOD_STILL_UNLOADED__\n";
@@ -16166,24 +15528,23 @@ if (defined($declare_stmt) && $declare_stmt eq "my \@items" && defined($assign_s
 }
 PERL
 
-    is($exit_code, 0, 'ActionRewriter require/declare-method subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
-    like($out, qr/__DECLARE_METHOD_STILL_LAZY__/, 'require ActionRewriter keeps DeclareMethod unloaded');
+    is($exit_code, 0, 'EmitContext require/declare-method subprocess exits cleanly') or diag($err || $out);
+        like($out, qr/__DECLARE_METHOD_STILL_LAZY__/, 'require EmitContext keeps DeclareMethod unloaded');
     like($out, qr/__DECLARE_METHOD_RESULT_OK__/, 'declare-method helpers still return lowered output after lazy DeclareMethod loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'declare-method helpers lazy-load EmitContext on demand');
     like($out, qr/__DECLARE_METHOD_AFTER_HELPER__/, 'declare-method helpers lazy-load DeclareMethod on demand through EmitContext');
     like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'declare-method helpers preserve declare and assign-method lowering after lazy DeclareMethod loading');
-    is($err, '', 'ActionRewriter require/declare-method subprocess does not emit stderr');
+    is($err, '', 'EmitContext require/declare-method subprocess does not emit stderr');
 };
-subtest 'action_rewriter_dep_builders_avoid_method_expr_prefetch' => sub {
+subtest 'emit_context_dep_builders_avoid_method_expr_prefetch' => sub {
     plan tests => 6;
 
     my ($declare_stmt, $events, $ok, $err);
     $ok = eval {
         no warnings 'redefine';
-        local *LinkedSpec::ActionRewriter::_require_method_expr_pkg = sub { die "__UNEXPECTED_ACTION_REWRITER_REQUIRE_METHODEXPR__\n" };
-        $declare_stmt = LinkedSpec::ActionRewriter::_lower_declare_method_statement('declare(array, items)');
-        $events = LinkedSpec::ActionRewriter::_scan_contract_ir_events(
+        local *LinkedSpec::RuleIR::EmitContext::_require_method_expr_pkg = sub { die "__UNEXPECTED_EMIT_CONTEXT_REQUIRE_METHODEXPR__\n" };
+        $declare_stmt = LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement('declare(array, items)');
+        $events = LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events(
             { id => 'assign_value' },
             'assign(retv, scalar(foo))',
         );
@@ -16191,8 +15552,8 @@ subtest 'action_rewriter_dep_builders_avoid_method_expr_prefetch' => sub {
     };
     $err = $@;
 
-    ok($ok, 'declare/scanner dep-builder paths no longer prefetch MethodExpr through ActionRewriter') or diag($err);
-    is($err, '', 'removed ActionRewriter MethodExpr prefetch seam is not touched');
+    ok($ok, 'declare/scanner dep-builder paths no longer prefetch MethodExpr through EmitContext') or diag($err);
+    is($err, '', 'removed EmitContext MethodExpr prefetch seam is not touched');
     is($declare_stmt, 'my @items', 'declare-method lowering still succeeds after owner-side MethodExpr dep loading');
     is(ref($events), 'ARRAY', 'scanner lowering path still returns an event array after owner-side MethodExpr dep loading');
     is(scalar(@{$events || []}), 1, 'scanner lowering path still finds one assign-value event');
@@ -16322,7 +15683,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
             "$case->{label} returned callback stays callable after owner lazy load");
     }
 };
-subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
+subtest 'emit_context_pipeline_helper_substitutions' => sub {
     plan tests => 89;
 
     my $label = 'Top';
@@ -16774,7 +16135,7 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'CAPTURE_IF() helper rewrite preserves optional whitespace forms'
     );
 };
-subtest 'action_rewriter_capture_if_lowering_preserves_trim_regex' => sub {
+subtest 'emit_context_capture_if_lowering_preserves_trim_regex' => sub {
     plan tests => 4;
 
     my $capture_if = LinkedSpec::call_spec_handler_subst('Top', 'capture_if(Top)');
@@ -18852,7 +18213,7 @@ SPEC
     );
     ok(!defined($runtime_ctx{last_error}), 'mark_exists(name) flow-branch parse leaves runtime_ctx last_error clear on success');
 };
-subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
+subtest 'emit_context_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;
 
     is(
@@ -18902,7 +18263,7 @@ SPEC
     ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include DECLARE for declare methods');
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
+subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
     plan tests => 80;
 
     is(
@@ -18936,7 +18297,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'assign helper accepts join_values(delimiter, projected-array-expression) source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{eq(join_values(", ", sorted_keys(hash(meta))), "kind, source")}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{eq(join_values(", ", sorted_keys(hash(meta))), "kind, source")}),
         q{(do { my $__ls_join_values = [sort keys %meta]; defined($__ls_join_values) ? join(", ", @{$__ls_join_values}) : $__ls_join_values } eq "kind, source")},
         'join_values(...) over projected arrays composes inside flow comparisons'
     );
@@ -18951,7 +18312,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts length(trim(...)) scalar source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(coalesce(length(trim(scalar(name))), 0), 3)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(coalesce(length(trim(scalar(name))), 0), 3)}),
         q{(do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 } > 3)},
         'length(...) composes inside coalesce(...) and numeric flow comparisons'
     );
@@ -18971,12 +18332,12 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts num_sub(...) nested around num_add(...) reducers'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(num_add(coalesce(length(trim(scalar(name))), 0), scalar(offset)), 3)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_add(coalesce(length(trim(scalar(name))), 0), scalar(offset)), 3)}),
         q{(do { my @__ls_num_add_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef } > 3)},
         'num_add(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)}),
         q{(do { my $__ls_num_sub_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }; my $__ls_num_sub_rhs = 1; (defined($__ls_num_sub_lhs) && defined($__ls_num_sub_rhs) && $__ls_num_sub_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_sub_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? ($__ls_num_sub_lhs - $__ls_num_sub_rhs) : undef } == 4)},
         'num_sub(...) composes inside numeric flow comparisons'
     );
@@ -18996,12 +18357,12 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts num_div(...) nested around num_mul(...) reducers'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(num_mul(coalesce(length(trim(scalar(name))), 0), scalar(factor)), 3)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_mul(coalesce(length(trim(scalar(name))), 0), scalar(factor)), 3)}),
         q{(do { my @__ls_num_mul_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $factor); my $__ls_num_mul_product = 1; my $__ls_num_mul_ok = 1; for my $__ls_num_mul_term (@__ls_num_mul_terms) { if (!(defined($__ls_num_mul_term) && $__ls_num_mul_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_mul_ok = 0; last; } $__ls_num_mul_product *= $__ls_num_mul_term; } $__ls_num_mul_ok ? $__ls_num_mul_product : undef } > 3)},
         'num_mul(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_eq(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 3)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 3)}),
         q{(do { my $__ls_num_div_lhs = do { my @__ls_num_mul_terms = (scalar(@parts), $factor); my $__ls_num_mul_product = 1; my $__ls_num_mul_ok = 1; for my $__ls_num_mul_term (@__ls_num_mul_terms) { if (!(defined($__ls_num_mul_term) && $__ls_num_mul_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_mul_ok = 0; last; } $__ls_num_mul_product *= $__ls_num_mul_term; } $__ls_num_mul_ok ? $__ls_num_mul_product : undef }; my $__ls_num_div_rhs = 2; (defined($__ls_num_div_lhs) && defined($__ls_num_div_rhs) && $__ls_num_div_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_div_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_div_rhs != 0) ? ($__ls_num_div_lhs / $__ls_num_div_rhs) : undef } == 3)},
         'num_div(...) composes inside numeric flow comparisons'
     );
@@ -19016,12 +18377,12 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts num_max(...) nested around arithmetic reducers'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(num_max(coalesce(length(trim(scalar(name))), 0), scalar(limit), 2), 3)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_max(coalesce(length(trim(scalar(name))), 0), scalar(limit), 2), 3)}),
         q{(do { my @__ls_num_max_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $limit, 2); my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@__ls_num_max_terms) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } > 3)},
         'num_max(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_eq(num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10), 4)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10), 4)}),
         q{(do { my @__ls_num_min_terms = (do { my @__ls_num_add_terms = (scalar(@parts), $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }, $limit, 10); my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@__ls_num_min_terms) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } == 4)},
         'num_min(...) composes inside numeric flow comparisons'
     );
@@ -19036,7 +18397,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts num_mod(...) nested around integer-like arithmetic reducers'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), scalar(divisor)), 1)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), scalar(divisor)), 1)}),
         q{(do { my $__ls_num_mod_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }; my $__ls_num_mod_rhs = $divisor; (defined($__ls_num_mod_lhs) && defined($__ls_num_mod_rhs) && $__ls_num_mod_lhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs != 0) ? ($__ls_num_mod_lhs % $__ls_num_mod_rhs) : undef } == 1)},
         'num_mod(...) composes inside numeric flow comparisons over integer-like values'
     );
@@ -19051,12 +18412,12 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts num_clamp(...) around normalized scalar arithmetic'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_eq(num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit)), 5)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit)), 5)}),
         q{(do { my $__ls_num_clamp_value = do { my @__ls_num_add_terms = (scalar(@parts), $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }; my $__ls_num_clamp_lower = $lower_limit; my $__ls_num_clamp_upper = $upper_limit; (defined($__ls_num_clamp_value) && defined($__ls_num_clamp_lower) && defined($__ls_num_clamp_upper) && $__ls_num_clamp_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_upper =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower <= $__ls_num_clamp_upper) ? ($__ls_num_clamp_value < $__ls_num_clamp_lower ? $__ls_num_clamp_lower : ($__ls_num_clamp_value > $__ls_num_clamp_upper ? $__ls_num_clamp_upper : $__ls_num_clamp_value)) : undef } == 5)},
         'num_clamp(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr(q{num_floor(num_sub(scalar(raw_score), scalar(offset)))}),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr(q{num_floor(num_sub(scalar(raw_score), scalar(offset)))}),
         q{do { my $__ls_num_floor_value = do { my $__ls_num_sub_lhs = $raw_score; my $__ls_num_sub_rhs = $offset; (defined($__ls_num_sub_lhs) && defined($__ls_num_sub_rhs) && $__ls_num_sub_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_sub_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? ($__ls_num_sub_lhs - $__ls_num_sub_rhs) : undef }; (defined($__ls_num_floor_value) && $__ls_num_floor_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? (($__ls_num_floor_value >= 0 || $__ls_num_floor_value == int($__ls_num_floor_value)) ? int($__ls_num_floor_value) : int($__ls_num_floor_value) - 1) : undef }},
         'num_floor(...) lowers nested numeric subtraction into a parser-oriented floor expression'
     );
@@ -19066,7 +18427,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts num_ceil(...) nested around reducer arithmetic'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 3)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 3)}),
         q{(do { my $__ls_num_round_value = do { my @__ls_num_add_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, 0.5); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }; (defined($__ls_num_round_value) && $__ls_num_round_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? int($__ls_num_round_value + ($__ls_num_round_value >= 0 ? 0.5 : -0.5)) : undef } > 3)},
         'num_round(...) composes inside numeric flow comparisons over normalized scalar expressions'
     );
@@ -19091,7 +18452,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts ends_with(normalized-scalar, suffix) lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{and(starts_with(lowercase(trim(scalar(raw_name))), "pre"), ends_with(lowercase(trim(scalar(raw_name))), "fix"))}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{and(starts_with(lowercase(trim(scalar(raw_name))), "pre"), ends_with(lowercase(trim(scalar(raw_name))), "fix"))}),
         q{((do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }) && (do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }))},
         'starts_with(...) and ends_with(...) compose together inside flow conditions'
     );
@@ -19106,7 +18467,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'assign helper accepts drop_front(projected-array-expression) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(hash(meta)))), 0)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(hash(meta)))), 0)}),
         q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_front(...) composes inside count(...) and numeric flow comparisons'
     );
@@ -19121,7 +18482,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'assign helper accepts drop_front(projected-array-expression, scalar-count) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(hash(meta)), 2)), 0)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(hash(meta)), 2)), 0)}),
         q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_front(..., count) composes inside count(...) and numeric flow comparisons'
     );
@@ -19146,7 +18507,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'assign helper accepts take(projected-array-expression, scalar-count) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)}),
         q{(do { my $__ls_count = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
         'take(..., count) composes inside count(...) and numeric flow comparisons'
     );
@@ -19171,7 +18532,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'assign helper accepts slice(projected-array-expression, scalar-start, scalar-count) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(slice(sorted_keys(hash(meta)), 1, 2)), 0)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(slice(sorted_keys(hash(meta)), 1, 2)), 0)}),
         q{(do { my $__ls_count = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
         'slice(..., start, count) composes inside count(...) and numeric flow comparisons'
     );
@@ -19196,7 +18557,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'assign helper accepts take_last(projected-array-expression, scalar-count) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)}),
         q{(do { my $__ls_count = do { my $__ls_take_last = [sort keys %meta]; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = 2; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
         'take_last(..., count) composes inside count(...) and numeric flow comparisons'
     );
@@ -19221,7 +18582,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'assign helper accepts drop_back(projected-array-expression, scalar-count) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(drop_back(sorted_keys(hash(meta)), 2)), 0)}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(drop_back(sorted_keys(hash(meta)), 2)), 0)}),
         q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_back(..., count) composes inside count(...) and numeric flow comparisons'
     );
@@ -19251,7 +18612,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts scalar(projected-hash-expression, key) lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{eq(scalar(sorted_keys(hash(meta)), 0), "kind")}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{eq(scalar(sorted_keys(hash(meta)), 0), "kind")}),
         q{(do { my $__ls_scalar_source = [sort keys %meta]; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef } eq "kind")},
         'scalar(projected-array-expression, index) composes inside flow comparisons'
     );
@@ -19266,7 +18627,7 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'return(payload) accepts last(projected-array-expression) lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{eq(first(sorted_keys(hash(meta))), "kind")}),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{eq(first(sorted_keys(hash(meta))), "kind")}),
         q{(do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef } eq "kind")},
         'first(...) over projected arrays composes inside flow comparisons'
     );
@@ -19308,7 +18669,7 @@ SPEC
         'canonical action-IR nodes include RETURN/ASSIGN/REGEX_SUBST for method contracts'
     );
 };
-subtest 'action_rewriter_lowers_push_value_method_contract' => sub {
+subtest 'emit_context_lowers_push_value_method_contract' => sub {
     plan tests => 8;
 
     is(
@@ -19341,7 +18702,7 @@ SPEC
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_value contract');
     ok($meta->{language_agnostic_action_ir_ready}, 'push_value method contract remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_push_child_call_contracts' => sub {
+subtest 'emit_context_lowers_push_child_call_contracts' => sub {
     plan tests => 15;
 
     my $handler_call = '&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)';
@@ -19405,7 +18766,7 @@ SPEC
     my $input = 'aa';
     is_deeply($parser->(\$input), [[['leaf', 'a']]], 'push(Rule) appends the whole child result as one element in the current rule array at runtime');
 };
-subtest 'action_rewriter_lowers_push_nonempty_method_contract' => sub {
+subtest 'emit_context_lowers_push_nonempty_method_contract' => sub {
     plan tests => 13;
 
     my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), trim(capture_slice()))');
@@ -19448,7 +18809,7 @@ SPEC
     my $input = 'a,b';
     is_deeply($parser->(\$input), [['a']], 'push_nonempty appends the trimmed capture slice at runtime');
 };
-subtest 'action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts' => sub {
+subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' => sub {
     plan tests => 13;
 
     is(
@@ -19511,7 +18872,7 @@ SPEC
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'array snapshot alias/assign method contracts remain language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' => sub {
+subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => sub {
     plan tests => 12;
 
     is(
@@ -38827,7 +38188,7 @@ SPEC
         'lifecycle case-normalization/filter fluent form preserves DECLARE/ASSIGN/MAP_UPPERCASE/UNIQ/FILTER_MATCH/MAP_LOWERCASE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_coalesce_value_helpers' => sub {
+subtest 'emit_context_lowers_coalesce_value_helpers' => sub {
     plan tests => 2;
 
     is(
@@ -38841,7 +38202,7 @@ subtest 'action_rewriter_lowers_coalesce_value_helpers' => sub {
         'coalesce(...) lowers inside general return payloads for both scalar and aggregate fallback values'
     );
 };
-subtest 'action_rewriter_lowers_coalesce_nonempty_value_helpers' => sub {
+subtest 'emit_context_lowers_coalesce_nonempty_value_helpers' => sub {
     plan tests => 3;
 
     is(
@@ -38850,7 +38211,7 @@ subtest 'action_rewriter_lowers_coalesce_nonempty_value_helpers' => sub {
         'coalesce_nonempty(...) lowers scalar fallback chains into nested first-defined-nonempty value expressions'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")'),
         '(do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : "WORD" } } eq "WORD")',
         'coalesce_nonempty(...) composes inside canonical flow comparisons'
     );
@@ -39036,16 +38397,16 @@ SPEC
         'lifecycle coalesce_nonempty fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage across scalar fallback usage'
     );
 };
-subtest 'action_rewriter_lowers_definedness_flow_helpers' => sub {
+subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_defined(scalaref(retv, {content}))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_defined(scalaref(retv, {content}))'),
         'defined($retv->{content})',
         'is_defined(...) lowers nested payload access into a direct defined() check'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))'),
         '(!defined(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }))',
         'is_undefined(...) lowers parser-oriented fallback chains into a negated defined() check'
     );
@@ -39160,21 +38521,21 @@ SPEC
         'lifecycle definedness fluent form preserves DECLARE/IF/ELIF/ELSE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_aggregate_expression_emptiness_flow_helpers' => sub {
+subtest 'emit_context_lowers_aggregate_expression_emptiness_flow_helpers' => sub {
     plan tests => 5;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(hash(meta))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(hash(meta))'),
         '(!scalar(keys %meta))',
         'is_empty(hash(name)) lowers working hashes into a direct zero-key check'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(sorted_values(hash(meta)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(sorted_values(hash(meta)))'),
         'do { my $__ls_empty_array = [map { $meta{$_} } sort keys %meta]; (!defined($__ls_empty_array) || !@{$__ls_empty_array}) }',
         'is_empty(...) treats array-valued helper expressions as aggregate emptiness rather than Perl reference truthiness'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(pick_keys(hash(meta), "kind"))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(pick_keys(hash(meta), "kind"))'),
         'do { my $__ls_empty_hash = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_empty_hash) || !scalar(keys %{$__ls_empty_hash})) }',
         'is_empty(...) treats hash-valued helper expressions as aggregate emptiness rather than Perl reference truthiness'
     );
@@ -39285,21 +38646,21 @@ SPEC
         'lifecycle aggregate-emptiness fluent form preserves DECLARE/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_scalar_normalization_value_helpers' => sub {
+subtest 'emit_context_lowers_scalar_normalization_value_helpers' => sub {
     plan tests => 3;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('trim(scalaref(retv, {content}))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('trim(scalaref(retv, {content}))'),
         'do { my $__ls_trim = $retv->{content}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }',
         'trim(...) lowers nested payload access into a whitespace-normalizing scalar expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('lowercase(trim(scalar(IMATCH)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('lowercase(trim(scalar(IMATCH)))'),
         'do { my $__ls_lower = do { my $__ls_trim = $IMATCH; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }',
         'lowercase(...) composes directly with trim(...) inside scalar value lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('uppercase(coalesce(scalaref(retv, {type}), "word"))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('uppercase(coalesce(scalaref(retv, {type}), "word"))'),
         'do { my $__ls_upper = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }',
         'uppercase(...) composes directly with coalesce(...) inside scalar value lowering'
     );
@@ -39392,21 +38753,21 @@ SPEC
         'lifecycle scalar-normalization fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_count_value_helpers' => sub {
+subtest 'emit_context_lowers_count_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('count(array(parts))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count(array(parts))'),
         'scalar(@parts)',
         'count(array(name)) lowers array variables into scalar(@array) reducer form'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('count(coalesce(scalaref(retv, {parts}), array("empty")))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count(coalesce(scalaref(retv, {parts}), array("empty")))'),
         'do { my $__ls_count = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
         'count(...) lowers array-valued fallback expressions into arrayref-size reducer form'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(array(parts)), 0)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(array(parts)), 0)'),
         '(scalar(@parts) > 0)',
         'count(...) composes inside numeric flow comparisons'
     );
@@ -39504,21 +38865,21 @@ SPEC
         'lifecycle count fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_contains_value_helpers' => sub {
+subtest 'emit_context_lowers_contains_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains(array(parts), "foo")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains(array(parts), "foo")'),
         'do { my $__ls_contains_needle = "foo"; ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @parts) : scalar(grep { !defined($_) } @parts)) ? 1 : 0) }',
         'contains(array(name), value) lowers working arrays into a boolean-like membership expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))'),
         'do { my $__ls_contains_array = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_contains_needle = $IMATCH; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
         'contains(...) lowers array-valued fallback expressions into guarded membership checks'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('contains(sorted_keys(hash(meta)), "kind")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('contains(sorted_keys(hash(meta)), "kind")'),
         'do { my $__ls_contains_array = [sort keys %meta]; my $__ls_contains_needle = "kind"; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
         'contains(...) composes inside flow conditions over projected arrays'
     );
@@ -39528,21 +38889,21 @@ subtest 'action_rewriter_lowers_contains_value_helpers' => sub {
         'contains(...) lowers inside general return payloads'
     );
 };
-subtest 'action_rewriter_lowers_matches_value_helpers' => sub {
+subtest 'emit_context_lowers_matches_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('matches(lowercase(trim(scalar(raw_name))), /^pre/)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('matches(lowercase(trim(scalar(raw_name))), /^pre/)'),
         'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
         'matches(normalized-scalar, /regex/) lowers into a boolean-like regex-membership expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('matches(coalesce(scalaref(retv, {type}), scalar(IMATCH)), /^[A-Z_]+$/)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('matches(coalesce(scalaref(retv, {type}), scalar(IMATCH)), /^[A-Z_]+$/)'),
         'do { my $__ls_matches_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^[A-Z_]+$/) ? 1 : 0) : 0 }',
         'matches(...) lowers composed fallback expressions into guarded regex-membership checks'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('matches(lowercase(trim(scalar(raw_name))), /^pre/)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('matches(lowercase(trim(scalar(raw_name))), /^pre/)'),
         'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
         'matches(...) composes inside flow conditions over normalized scalar expressions'
     );
@@ -39552,21 +38913,21 @@ subtest 'action_rewriter_lowers_matches_value_helpers' => sub {
         'matches(...) lowers inside general return payloads'
     );
 };
-subtest 'action_rewriter_lowers_contains_substr_value_helpers' => sub {
+subtest 'emit_context_lowers_contains_substr_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains_substr(lowercase(trim(scalar(raw_name))), "fix")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains_substr(lowercase(trim(scalar(raw_name))), "fix")'),
         'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
         'contains_substr(normalized-scalar, needle) lowers into a boolean-like substring-membership expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), "WORD")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), "WORD")'),
         'do { my $__ls_contains_substr_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; my $__ls_contains_substr_needle = "WORD"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
         'contains_substr(...) lowers composed fallback expressions into guarded substring-membership checks'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('contains_substr(lowercase(trim(scalar(raw_name))), "fix")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('contains_substr(lowercase(trim(scalar(raw_name))), "fix")'),
         'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
         'contains_substr(...) composes inside flow conditions over normalized scalar expressions'
     );
@@ -39576,21 +38937,21 @@ subtest 'action_rewriter_lowers_contains_substr_value_helpers' => sub {
         'contains_substr(...) lowers inside general return payloads'
     );
 };
-subtest 'action_rewriter_lowers_replace_substr_value_helpers' => sub {
+subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('replace_substr(lowercase(trim(scalar(raw_name))), "-", "_")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('replace_substr(lowercase(trim(scalar(raw_name))), "-", "_")'),
         'do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
         'replace_substr(normalized-scalar, needle, replacement) lowers into a pure literal substring rewrite expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('replace_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), " ", "_")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('replace_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), " ", "_")'),
         'do { my $__ls_replace_substr_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
         'replace_substr(...) lowers composed fallback expressions into guarded literal substring rewrites'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('eq(replace_substr(lowercase(trim(scalar(raw_name))), "-", "_"), "node_item")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(replace_substr(lowercase(trim(scalar(raw_name))), "-", "_"), "node_item")'),
         '(do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } } eq "node_item")',
         'replace_substr(...) composes inside flow comparisons over normalized scalar expressions'
     );
@@ -39600,26 +38961,26 @@ subtest 'action_rewriter_lowers_replace_substr_value_helpers' => sub {
         'replace_substr(...) lowers inside general return payloads'
     );
 };
-subtest 'action_rewriter_lowers_scalar_boundary_transform_value_helpers' => sub {
+subtest 'emit_context_lowers_scalar_boundary_transform_value_helpers' => sub {
     plan tests => 6;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('rm_prefix(lowercase(trim(scalar(raw_name))), "node_")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_prefix(lowercase(trim(scalar(raw_name))), "node_")'),
         'do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }',
         'rm_prefix(normalized-scalar, prefix) lowers into a pure literal prefix-trim expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end")'),
         'do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }',
         'rm_suffix(...) lowers composed fallback expressions into guarded literal suffix trims'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('eq(rm_prefix(lowercase(trim(scalar(raw_name))), "node_"), "item_end")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(rm_prefix(lowercase(trim(scalar(raw_name))), "node_"), "item_end")'),
         '(do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } } eq "item_end")',
         'rm_prefix(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('eq(rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end"), "node_item")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end"), "node_item")'),
         '(do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } } eq "node_item")',
         'rm_suffix(...) composes inside flow comparisons over normalized scalar expressions'
     );
@@ -39634,21 +38995,21 @@ subtest 'action_rewriter_lowers_scalar_boundary_transform_value_helpers' => sub 
         'rm_suffix(...) lowers inside general return payloads'
     );
 };
-subtest 'action_rewriter_lowers_concat_value_helpers' => sub {
+subtest 'emit_context_lowers_concat_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('concat(lowercase(trim(scalar(raw_name))), "_", scalar(stage))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat(lowercase(trim(scalar(raw_name))), "_", scalar(stage))'),
         q{do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
         'concat(...) lowers normalized scalar fragments into one guarded pure scalar expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('concat(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))'),
         q{do { my @__ls_concat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $IMATCH; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
         'concat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('eq(concat(lowercase(trim(scalar(raw_name))), "_", scalar(stage)), "node_init")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(concat(lowercase(trim(scalar(raw_name))), "_", scalar(stage)), "node_init")'),
         q{(do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef } eq "node_init")},
         'concat(...) composes inside flow comparisons over normalized scalar expressions'
     );
@@ -39658,21 +39019,21 @@ subtest 'action_rewriter_lowers_concat_value_helpers' => sub {
         'concat(...) lowers inside general return payloads'
     );
 };
-subtest 'action_rewriter_lowers_value_layer_emptiness_helpers' => sub {
+subtest 'emit_context_lowers_value_layer_emptiness_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))'),
         'do { my $__ls_is_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_is_empty_array) || !@{$__ls_is_empty_array}) ? 1 : 0 }',
         'is_empty(...) lowers projected array expressions into value-layer emptiness flags'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))'),
         'do { my $__ls_is_nonempty_empty = do { my $__ls_is_empty_hash = do { my $__ls_pick_source = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }; $__ls_is_nonempty_empty ? 0 : 1 }',
         'is_nonempty(...) lowers projected hash expressions into value-layer nonempty flags'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))'),
         'do { my $__ls_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_empty_array) || !@{$__ls_empty_array}) }',
         'existing flow lowering for is_empty(...) remains stable while value-layer support is added'
     );
@@ -39770,21 +39131,21 @@ SPEC
         'lifecycle contains fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_index_of_value_helpers' => sub {
+subtest 'emit_context_lowers_index_of_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('index_of(array(parts), "foo")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('index_of(array(parts), "foo")'),
         q{do { my $__ls_index_of_needle = "foo"; my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@parts); $__ls_index_of_i++) { my $__ls_index_of_item = $parts[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found }},
         'index_of(array(name), value) lowers working arrays into a first-match index expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('index_of(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('index_of(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))'),
         q{do { my $__ls_index_of_array = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_index_of_needle = $IMATCH; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }},
         'index_of(...) lowers array-valued fallback expressions into guarded first-match index checks'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)'),
         q{(do { my $__ls_index_of_array = [sort keys %meta]; my $__ls_index_of_needle = "kind"; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } } == 0)},
         'index_of(...) composes inside numeric flow comparisons over projected arrays'
     );
@@ -39882,21 +39243,21 @@ SPEC
         'lifecycle index_of fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_count_keys_value_helpers' => sub {
+subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('count_keys(hash(meta))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count_keys(hash(meta))'),
         'scalar(keys %meta)',
         'count_keys(hash(name)) lowers hash variables into scalar(keys %hash) reducer form'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))'),
         'do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
         'count_keys(...) lowers hash-valued fallback expressions into hashref-size reducer form'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count_keys(hash(meta)), 1)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count_keys(hash(meta)), 1)'),
         '(scalar(keys %meta) > 1)',
         'count_keys(...) composes inside numeric flow comparisons'
     );
@@ -39994,21 +39355,21 @@ SPEC
         'lifecycle count_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_has_key_value_helpers' => sub {
+subtest 'emit_context_lowers_has_key_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('has_key(hash(meta), "kind")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(hash(meta), "kind")'),
         '((exists $meta{"kind"}) ? 1 : 0)',
         'has_key(hash(name), key) lowers working hashes into an exists(...) boolean-like expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")'),
         'do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
         'has_key(...) lowers hash-valued fallback expressions into guarded key-existence checks'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('has_key(hash(meta), "kind")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(hash(meta), "kind")'),
         '((exists $meta{"kind"}) ? 1 : 0)',
         'has_key(...) composes directly inside flow conditions'
     );
@@ -40106,16 +39467,16 @@ SPEC
         'lifecycle has_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_merge_hash_value_helpers' => sub {
+subtest 'emit_context_lowers_merge_hash_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('merge_hash(hash(meta), hash("kind", "node"), coalesce(scalaref(retv, {meta}), hash("source", "fallback")))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('merge_hash(hash(meta), hash("kind", "node"), coalesce(scalaref(retv, {meta}), hash("source", "fallback")))'),
         '{%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}',
         'merge_hash(...) lowers working hashes, constructor hashes, and fallback hash expressions into one composed hash payload'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('has_key(merge_hash(hash(meta), hash("kind", "node")), "kind")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(merge_hash(hash(meta), hash("kind", "node")), "kind")'),
         'do { my $__ls_has_key = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
         'merge_hash(...) composes inside flow expressions through other hash/object helpers'
     );
@@ -40218,16 +39579,16 @@ SPEC
         'lifecycle merge_hash fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_hash_copy_value_helpers' => sub {
+subtest 'emit_context_lowers_hash_copy_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('hash_copy(hash(meta))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('hash_copy(hash(meta))'),
         '{%meta}',
         'hash_copy(...) lowers working hashes into a pure snapshot hashref expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_nonempty(hash_copy(hash(meta)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_nonempty(hash_copy(hash(meta)))'),
         '(!(do { my $__ls_empty_hash = {%meta}; (!defined($__ls_empty_hash) || !scalar(keys %{$__ls_empty_hash})) }))',
         'hash_copy(...) composes inside aggregate emptiness flow checks as a hash-valued expression'
     );
@@ -40330,16 +39691,16 @@ SPEC
         'lifecycle hash_copy fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_set_key_value_helpers' => sub {
+subtest 'emit_context_lowers_set_key_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('set_key(hash(meta), "stage", "normalized")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('set_key(hash(meta), "stage", "normalized")'),
         'do { my $__ls_set_key_source = \%meta; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{"stage"} = "normalized"; \%__ls_set_key }',
         'set_key(...) lowers working hashes into a pure single-key update hashref expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('has_key(set_key(hash(meta), "stage", "normalized"), "stage")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(set_key(hash(meta), "stage", "normalized"), "stage")'),
         'do { my $__ls_has_key = do { my $__ls_set_key_source = \%meta; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{"stage"} = "normalized"; \%__ls_set_key }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"stage"}) ? 1 : 0) : 0 }',
         'set_key(...) composes inside flow expressions through other hash/object helpers'
     );
@@ -40442,16 +39803,16 @@ SPEC
         'lifecycle set_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_rename_key_value_helpers' => sub {
+subtest 'emit_context_lowers_rename_key_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('rename_key(hash(meta), "old_stage", "stage")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rename_key(hash(meta), "old_stage", "stage")'),
         'do { my $__ls_rename_key_source = \%meta; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{"old_stage"}) { my $__ls_rename_key_value = delete $__ls_rename_key{"old_stage"}; $__ls_rename_key{"stage"} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }',
         'rename_key(...) lowers working hashes into a pure single-key rename hashref expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('has_key(rename_key(hash(meta), "old_stage", "stage"), "stage")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(rename_key(hash(meta), "old_stage", "stage"), "stage")'),
         'do { my $__ls_has_key = do { my $__ls_rename_key_source = \%meta; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{"old_stage"}) { my $__ls_rename_key_value = delete $__ls_rename_key{"old_stage"}; $__ls_rename_key{"stage"} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"stage"}) ? 1 : 0) : 0 }',
         'rename_key(...) composes inside flow expressions through other hash/object helpers'
     );
@@ -40554,16 +39915,16 @@ SPEC
         'lifecycle rename_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_drop_keys_value_helpers' => sub {
+subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('drop_keys(hash(meta), "debug", "span")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('drop_keys(hash(meta), "debug", "span")'),
         'do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug", "span"}; \%__ls_drop } else { {} } }',
         'drop_keys(...) lowers working hashes into a pure filtered hashref expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('has_key(drop_keys(hash(meta), "debug"), "kind")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(drop_keys(hash(meta), "debug"), "kind")'),
         'do { my $__ls_has_key = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
         'drop_keys(...) composes inside flow expressions through other hash/object helpers'
     );
@@ -40666,16 +40027,16 @@ SPEC
         'lifecycle drop_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_pick_keys_value_helpers' => sub {
+subtest 'emit_context_lowers_pick_keys_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('pick_keys(hash(meta), "kind", "source")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('pick_keys(hash(meta), "kind", "source")'),
         'do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }',
         'pick_keys(...) lowers working hashes into a pure projected hashref expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('has_key(pick_keys(hash(meta), "kind"), "kind")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(pick_keys(hash(meta), "kind"), "kind")'),
         'do { my $__ls_has_key = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
         'pick_keys(...) composes inside flow expressions through other hash/object helpers'
     );
@@ -40778,16 +40139,16 @@ SPEC
         'lifecycle pick_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_sorted_keys_value_helpers' => sub {
+subtest 'emit_context_lowers_sorted_keys_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('sorted_keys(hash(meta))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('sorted_keys(hash(meta))'),
         '[sort keys %meta]',
         'sorted_keys(hash(name)) lowers working hashes into a stable sorted key-array expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(sorted_keys(hash(meta))), 1)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(sorted_keys(hash(meta))), 1)'),
         '(do { my $__ls_count = [sort keys %meta]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 1)',
         'sorted_keys(...) composes inside array reducers and numeric flow comparisons'
     );
@@ -40890,16 +40251,16 @@ SPEC
         'lifecycle sorted_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_sorted_values_value_helpers' => sub {
+subtest 'emit_context_lowers_sorted_values_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('sorted_values(hash(meta))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('sorted_values(hash(meta))'),
         '[map { $meta{$_} } sort keys %meta]',
         'sorted_values(hash(name)) lowers working hashes into a stable sorted value-array expression'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(sorted_values(hash(meta))), 1)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(sorted_values(hash(meta))), 1)'),
         '(do { my $__ls_count = [map { $meta{$_} } sort keys %meta]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 1)',
         'sorted_values(...) composes inside array reducers and numeric flow comparisons'
     );
@@ -41002,16 +40363,16 @@ SPEC
         'lifecycle sorted_values fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_concat_arrays_value_helpers' => sub {
+subtest 'emit_context_lowers_concat_arrays_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('concat_arrays(array(parts), sorted_keys(hash(meta)), array("tail"))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat_arrays(array(parts), sorted_keys(hash(meta)), array("tail"))'),
         q{[@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]},
         'concat_arrays(...) lowers direct arrays, projected arrays, and array constructors into one pure concatenated array value'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))), 3)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))), 3)'),
         q{(do { my $__ls_count = [@parts, do { my $__ls_concat_arrays = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 3)},
         'concat_arrays(...) composes inside array reducers and numeric flow comparisons'
     );
@@ -41110,16 +40471,16 @@ SPEC
         'lifecycle concat_arrays fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_sorted_array_value_helpers' => sub {
+subtest 'emit_context_lowers_sorted_array_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('sorted(concat_arrays(array(parts), array("delta"), array("alpha")))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('sorted(concat_arrays(array(parts), array("delta"), array("alpha")))'),
         q{do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["alpha"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }},
         'sorted(...) lowers composed array-valued expressions into one deterministic lexical array value'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(sorted(concat_arrays(array(parts), array("delta"), array("alpha")))), 2)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(sorted(concat_arrays(array(parts), array("delta"), array("alpha")))), 2)'),
         q{(do { my $__ls_count = do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["alpha"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 2)},
         'sorted(...) composes inside array reducers and numeric flow comparisons'
     );
@@ -41218,16 +40579,16 @@ SPEC
         'lifecycle sorted array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_reversed_array_value_helpers' => sub {
+subtest 'emit_context_lowers_reversed_array_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('reversed(concat_arrays(array(parts), array("delta"), array("tail")))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('reversed(concat_arrays(array(parts), array("delta"), array("tail")))'),
         q{do { my $__ls_reversed = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] }},
         'reversed(...) lowers composed array-valued expressions into one reversed array value'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(reversed(concat_arrays(array(parts), array("delta"), array("tail")))), 2)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(reversed(concat_arrays(array(parts), array("delta"), array("tail")))), 2)'),
         q{(do { my $__ls_count = do { my $__ls_reversed = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 2)},
         'reversed(...) composes inside array reducers and numeric flow comparisons'
     );
@@ -41326,16 +40687,16 @@ SPEC
         'lifecycle reversed array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_num_sum_value_helpers' => sub {
+subtest 'emit_context_lowers_num_sum_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_sum(concat_arrays(array(parts), array(4, 5)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_sum(concat_arrays(array(parts), array(4, 5)))'),
         q{do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }},
         'num_sum(...) lowers composed array-valued expressions into one numeric aggregate reducer'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(num_sum(concat_arrays(array(parts), array(4, 5))), 10)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_sum(concat_arrays(array(parts), array(4, 5))), 10)'),
         q{(do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } } > 10)},
         'num_sum(...) composes inside numeric flow comparisons'
     );
@@ -41434,16 +40795,16 @@ SPEC
         'lifecycle num_sum fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_num_avg_value_helpers' => sub {
+subtest 'emit_context_lowers_num_avg_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_avg(concat_arrays(array(parts), array(4, 8)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_avg(concat_arrays(array(parts), array(4, 8)))'),
         q{do { my $__ls_num_avg_source = [@parts, do { my $__ls_concat_arrays = [4, 8]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq 'ARRAY') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } }},
         'num_avg(...) lowers composed array-valued expressions into one numeric average reducer'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(num_avg(concat_arrays(array(parts), array(4, 8))), 3)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_avg(concat_arrays(array(parts), array(4, 8))), 3)'),
         q{(do { my $__ls_num_avg_source = [@parts, do { my $__ls_concat_arrays = [4, 8]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq 'ARRAY') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } } > 3)},
         'num_avg(...) composes inside numeric flow comparisons'
     );
@@ -41542,16 +40903,16 @@ SPEC
         'lifecycle num_avg fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_num_median_value_helpers' => sub {
+subtest 'emit_context_lowers_num_median_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_median(concat_arrays(array(parts), array(4, 8, 10)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_median(concat_arrays(array(parts), array(4, 8, 10)))'),
         q{do { my $__ls_num_median_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq 'ARRAY') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } }},
         'num_median(...) lowers composed array-valued expressions into one numeric median reducer'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(num_median(concat_arrays(array(parts), array(4, 8, 10))), 4)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_median(concat_arrays(array(parts), array(4, 8, 10))), 4)'),
         q{(do { my $__ls_num_median_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq 'ARRAY') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } } > 4)},
         'num_median(...) composes inside numeric flow comparisons'
     );
@@ -41650,16 +41011,16 @@ SPEC
         'lifecycle num_median fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_num_range_value_helpers' => sub {
+subtest 'emit_context_lowers_num_range_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_range(concat_arrays(array(parts), array(4, 8, 10)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_range(concat_arrays(array(parts), array(4, 8, 10)))'),
         q{do { my $__ls_num_range_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq 'ARRAY') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } }},
         'num_range(...) lowers composed array-valued expressions into one numeric span reducer'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_eq(num_range(concat_arrays(array(parts), array(4, 8, 10))), 6)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_range(concat_arrays(array(parts), array(4, 8, 10))), 6)'),
         q{(do { my $__ls_num_range_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq 'ARRAY') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } } == 6)},
         'num_range(...) composes inside numeric flow comparisons'
     );
@@ -41758,26 +41119,26 @@ SPEC
         'lifecycle num_range fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_num_minmax_array_reducer_helpers' => sub {
+subtest 'emit_context_lowers_num_minmax_array_reducer_helpers' => sub {
     plan tests => 6;
 
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_min(concat_arrays(array(parts), array(4, 8, 10)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_min(concat_arrays(array(parts), array(4, 8, 10)))'),
         q{do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }},
         'num_min(...) accepts one composed array-valued source as a numeric minimum reducer'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_max(concat_arrays(array(parts), array(4, 8, 10)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_max(concat_arrays(array(parts), array(4, 8, 10)))'),
         q{do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }},
         'num_max(...) accepts one composed array-valued source as a numeric maximum reducer'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_eq(num_min(concat_arrays(array(parts), array(4, 8, 10))), 4)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_min(concat_arrays(array(parts), array(4, 8, 10))), 4)'),
         q{(do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } } == 4)},
         'num_min(...) unary array-reducer mode composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_eq(num_max(concat_arrays(array(parts), array(4, 8, 10))), 10)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_max(concat_arrays(array(parts), array(4, 8, 10))), 10)'),
         q{(do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } } == 10)},
         'num_max(...) unary array-reducer mode composes inside numeric flow comparisons'
     );
@@ -41876,7 +41237,7 @@ SPEC
         'lifecycle unary-array num_min/max fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
+subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
     plan tests => 18;
 
     is(
@@ -41959,7 +41320,7 @@ SPEC
     ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-chain flat list return payload contributes canonical RETURN action-IR node');
     ok($meta->{language_agnostic_action_ir_ready}, 'method-chain flat list return payload remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_composable_array_string_method_contracts' => sub {
+subtest 'emit_context_lowers_composable_array_string_method_contracts' => sub {
     plan tests => 11;
 
     is(
@@ -41999,7 +41360,7 @@ SPEC
     ok(grep { $_ eq 'FILTER_NONEMPTY' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include FILTER_NONEMPTY');
     ok($meta->{language_agnostic_action_ir_ready}, 'composed array-string method contract rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_additional_composable_array_string_routines' => sub {
+subtest 'emit_context_lowers_additional_composable_array_string_routines' => sub {
     plan tests => 14;
 
     is(
@@ -42050,7 +41411,7 @@ SPEC
     ok(grep { $_ eq 'FILTER_MATCH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include FILTER_MATCH');
     ok($meta->{language_agnostic_action_ir_ready}, 'dot-chained lowercase/uppercase/uniq/filter_match rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_split_tagged_records_helper' => sub {
+subtest 'emit_context_lowers_split_tagged_records_helper' => sub {
     plan tests => 7;
 
     is(
@@ -42078,7 +41439,7 @@ SPEC
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'split_tagged_records flow remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_fluent_if_else_and_branch_statements' => sub {
+subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
     plan tests => 12;
 
     is(
@@ -42150,7 +41511,7 @@ SPEC
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'fluent if/elseif/else/endif rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
+subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
     plan tests => 18;
 
     my $rewritten = LinkedSpec::call_spec_handler_subst(
@@ -42254,7 +41615,7 @@ SPEC
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'fluent switch/case/default/endswitch rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_showcase_pipe_operator_if_else_method_chain' => sub {
+subtest 'emit_context_showcase_pipe_operator_if_else_method_chain' => sub {
     plan tests => 7;
 
     is(
@@ -42523,7 +41884,7 @@ SPEC
         };
     }
 };
-subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
+subtest 'emit_context_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
     plan tests => 3;
 
     my $label = 'Top';
@@ -42543,7 +41904,7 @@ subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior
         'canonical-IR lowering preserves push/return helper output semantics'
     );
 };
-subtest 'action_rewriter_reports_unresolved_helpers_in_rule_meta' => sub {
+subtest 'emit_context_reports_unresolved_helpers_in_rule_meta' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -42566,7 +41927,7 @@ SPEC
     is($meta->{unresolved_helper_hits}{return}, 1, 'Top return unresolved helper hit count is tracked');
     is($descr->{spec}{Leaf}{meta}{action_rewriter}{unresolved_helper_count}, 0, 'Leaf rule has no unresolved helpers');
 };
-subtest 'action_rewriter_meta_exposes_lowering_contract_ids' => sub {
+subtest 'emit_context_meta_exposes_lowering_contract_ids' => sub {
     plan tests => 6;
 
     my $spec_content = <<'SPEC';
@@ -42584,7 +41945,7 @@ SPEC
     ok(grep { $_ eq 'return_a' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes return_a contract');
     ok(grep { $_ eq 'capture_if_macro' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes CAPTURE_IF macro contract');
 };
-subtest 'action_rewriter_meta_exposes_helper_action_ir_nodes' => sub {
+subtest 'emit_context_meta_exposes_helper_action_ir_nodes' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -42607,7 +41968,7 @@ SPEC
     is($meta->{helper_action_ir_hits}{CAPTURE_IF}, 1, 'helper action-IR CAPTURE_IF hit count is tracked');
     is($meta->{helper_action_ir_hits}{RETURN_A}, 1, 'helper action-IR RETURN_A hit count is tracked');
 };
-subtest 'action_rewriter_meta_exposes_helper_action_ir_payload_events' => sub {
+subtest 'emit_context_meta_exposes_helper_action_ir_payload_events' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -42635,7 +41996,7 @@ SPEC
     like($return_evt->{args}{arg}, qr/\$x \+ 1/, 'RETURN_A payload event captures expression argument payload');
     is($return_evt->{args}{label}, 'Top', 'RETURN_A payload event captures label argument');
 };
-subtest 'action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback' => sub {
+subtest 'emit_context_meta_exposes_canonical_action_ir_with_raw_fallback' => sub {
     plan tests => 11;
 
     my $spec_content = <<'SPEC';
@@ -42667,7 +42028,7 @@ SPEC
     is($raw_evt->{args}{code}, 'my $tmp = 1', 'canonical RAW_PERL fallback event captures non-helper statement');
     like($ret_evt->{args}{arg}, qr/\$x \+ 1/, 'canonical RETURN_A event captures expression payload');
 };
-subtest 'action_rewriter_meta_exposes_language_agnostic_readiness' => sub {
+subtest 'emit_context_meta_exposes_language_agnostic_readiness' => sub {
     plan tests => 10;
 
     my $spec_content = <<'SPEC';
@@ -42704,7 +42065,7 @@ SPEC
     is($unresolved_meta->{raw_perl_dependency_count}, 0, 'unresolved helper rule can still report zero raw-Perl fallback dependency count');
     ok(!$unresolved_meta->{language_agnostic_action_ir_ready}, 'unresolved helper rule is not language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_meta_exposes_language_agnostic_blocker_statements' => sub {
+subtest 'emit_context_meta_exposes_language_agnostic_blocker_statements' => sub {
     plan tests => 9;
 
     my $spec_content = <<'SPEC';
@@ -42734,7 +42095,7 @@ SPEC
     is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 2, 'combo rule exposes combined blocker statement count');
     ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_meta_exposes_compatibility_surface_without_demoting_ready_rules' => sub {
+subtest 'emit_context_meta_exposes_compatibility_surface_without_demoting_ready_rules' => sub {
     plan tests => 11;
 
     my $spec_content = <<'SPEC';
@@ -42919,7 +42280,7 @@ SPEC
     is_deeply($summary->{language_agnostic_blocked_mixed_rules}, ['Mixed'], 'migration summary exposes deterministic mixed blocked-rule list');
     is($summary->{language_agnostic_top_blocked_rule}, 'Mixed', 'migration summary priority still surfaces mixed rule with highest blocker load');
 };
-subtest 'action_rewriter_canonical_action_ir_lowers_call_wrappers_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_lowers_call_wrappers_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -42943,7 +42304,7 @@ SPEC
     is($rewritten, 'my $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'call-wrapper lowering rewrites assignment and builtin push call wrappers to handler calls');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'call-wrapper-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_lowers_push_child_call_indexed_wrapper_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_lowers_push_child_call_indexed_wrapper_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -42967,7 +42328,7 @@ SPEC
     is($rewritten, 'push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)->[1]', 'indexed push child-call wrapper lowering rewrites to handler call with preserved index access');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'indexed push child-call-wrapper-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -42991,7 +42352,7 @@ SPEC
     is($rewritten, 'return &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'return-call wrapper lowering rewrites to direct handler return call');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'return-call-wrapper-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_bare_return_statements_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_bare_return_statements_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43012,7 +42373,7 @@ SPEC
     is($rewritten, 'return 1; return', 'bare return statements are preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'bare-return-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_bare_exit_statements_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_bare_exit_statements_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43081,7 +42442,7 @@ SPEC
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'next helper does not create compatibility-surface summary entries');
     is_deeply($meta->{compatibility_surface_contract_ids}, [], 'next helper exposes no compatibility-surface contract ids');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_prefix_newline_linecount_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_prefix_newline_linecount_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43102,7 +42463,7 @@ SPEC
     is($rewritten, 'my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g', 'prefix-newline line-count statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'prefix-newline-linecount-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_cursor_and_line_number_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_cursor_and_line_number_helpers_lower_without_raw_fallback' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -43129,7 +42490,7 @@ SPEC
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }') >= 0, 'match_line() lowers to a direct local-match line-number read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor/line helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_column_number_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_column_number_helpers_lower_without_raw_fallback' => sub {
     plan tests => 15;
 
     my $spec_content = <<'SPEC';
@@ -43158,7 +42519,7 @@ SPEC
     ok(index($rewritten, 'my $__ls_col_pos = $LSPOS - length $LMATCH;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'match_col() lowers to a direct local-match column read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit column helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_explicit_start_edge_line_and_col_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_explicit_start_edge_line_and_col_helpers_lower_without_raw_fallback' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -43185,7 +42546,7 @@ SPEC
     ok(index($rewritten, 'my $__ls_col_pos = $LSPOS - length $LMATCH;') >= 0, 'match_start_col() lowers to a direct local-match left-edge column read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit start-edge line/column helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_cursor_tail_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_cursor_tail_helpers_lower_without_raw_fallback' => sub {
     plan tests => 10;
 
     my $spec_content = <<'SPEC';
@@ -43209,7 +42570,7 @@ SPEC
     ok(index($rewritten, '(length($$STRING) - $__ls_cursor)') >= 0, 'cursor_rest_len() lowers to a direct live-cursor tail-length read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor-tail helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_slice_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_slice_helpers_lower_without_raw_fallback' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -43271,7 +42632,7 @@ SPEC
         'direct capture_slice_len() return lowers to the anonymous capture-boundary width expression'
     );
 };
-subtest 'action_rewriter_named_mark_read_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_named_mark_read_helpers_lower_without_raw_fallback' => sub {
     plan tests => 9;
 
     my $spec_content = <<'SPEC';
@@ -43294,7 +42655,7 @@ SPEC
     ok(index($rewritten, q{my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0 && index($rewritten, q{substr($$STRING, 0, $__ls_mark) =~ /\n/g}) >= 0, 'mark_line(name) lowers to a direct rule-local named-mark line read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named mark read helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_rest_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_rest_helpers_lower_without_raw_fallback' => sub {
     plan tests => 11;
 
     my $spec_content = <<'SPEC';
@@ -43319,7 +42680,7 @@ SPEC
     ok(index($rewritten, '(length($$STRING) - $IPOS)') >= 0, 'capture_rest_len() lowers to a direct capture-boundary tail-length read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_rest helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_take_rest_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_take_rest_helpers_lower_without_raw_fallback' => sub {
     plan tests => 14;
 
     my $spec_content = <<'SPEC';
@@ -43347,7 +42708,7 @@ SPEC
     ok(index($rewritten, '$IPOS = $__ls_end; $__ls_capture_len') >= 0, 'capture_take_rest_len() lowers to the matching anonymous-boundary advance to end-of-input after returning the width');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing anonymous tail helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_take_helper_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_take_helper_lower_without_raw_fallback' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -43378,7 +42739,7 @@ SPEC
     ok(index($rewritten, '$IPOS = pos $$STRING; $__ls_capture_len') >= 0, 'capture_take_len() lowers to an advancing anonymous capture-boundary update after returning the width');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit anonymous capture_take helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_named_mark_capture_take_len_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_named_mark_capture_take_len_helpers_lower_without_raw_fallback' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -43404,7 +42765,7 @@ SPEC
     ok(index($rewritten, q{operation => 'capture_take_len_from'}) >= 0, 'capture_take_len_from(name) retains mark trace instrumentation');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named-mark capture_take width helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_boundary_bridge_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_boundary_bridge_helpers_lower_without_raw_fallback' => sub {
     plan tests => 11;
 
     my $spec_content = <<'SPEC';
@@ -43429,7 +42790,7 @@ SPEC
     ok(index($rewritten, q{defined($__ls_mark) ? ($IPOS = $__ls_mark) : undef}) >= 0, 'start_capture_slice_from(name) lowers to a direct anonymous-boundary restore from the named mark');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit anonymous/named boundary bridge helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_absolute_input_mark_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_absolute_input_mark_helpers_lower_without_raw_fallback' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -43455,7 +42816,7 @@ SPEC
     ok(index($rewritten, q{mark_pos(file_start)}) < 0 && index($rewritten, q{mark_pos(file_end)}) < 0, 'mark_pos(name) helper reads are fully lowered inside the same explicit writer/read return block');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit absolute input-boundary mark helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_whole_input_read_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_whole_input_read_helpers_lower_without_raw_fallback' => sub {
     plan tests => 23;
 
     my $spec_content = <<'SPEC';
@@ -43500,7 +42861,7 @@ SPEC
     ok($fluent_meta->{language_agnostic_action_ir_ready}, 'fluent direct input_slice() return remains language-agnostic action-IR ready');
     ok(grep { $_ eq 'INPUT_SLICE_READ' } @{$fluent_meta->{canonical_action_ir_nodes}}, 'fluent direct input_slice() return contributes INPUT_SLICE_READ action-IR node');
 };
-subtest 'action_rewriter_named_mark_boundary_write_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_named_mark_boundary_write_helpers_lower_without_raw_fallback' => sub {
     plan tests => 11;
 
     my $spec_content = <<'SPEC';
@@ -43525,7 +42886,7 @@ SPEC
     ok(index($rewritten, q{$$info{marks}{'Top'}{'match_end'} = $LSPOS;}) >= 0, 'mark_match_end(name) lowers to a direct current-match right-edge mark write');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named-mark boundary write helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_named_mark_capture_rest_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_named_mark_capture_rest_helpers_lower_without_raw_fallback' => sub {
     plan tests => 10;
 
     my $spec_content = <<'SPEC';
@@ -43549,7 +42910,7 @@ SPEC
     ok(index($rewritten, '(length($$STRING) - $__ls_mark)') >= 0, 'capture_rest_len_from(name) lowers to a direct named-mark tail-length read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named-mark tail helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_named_mark_capture_take_rest_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_named_mark_capture_take_rest_helpers_lower_without_raw_fallback' => sub {
     plan tests => 14;
 
     my $spec_content = <<'SPEC';
@@ -43577,7 +42938,7 @@ SPEC
     ok(index($rewritten, q{operation => 'capture_take_rest_len_from'}) >= 0, 'capture_take_rest_len_from(name) retains mark trace instrumentation');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing named-mark tail helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_until_cursor_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_until_cursor_helpers_lower_without_raw_fallback' => sub {
     plan tests => 15;
 
     my $spec_content = <<'SPEC';
@@ -43606,7 +42967,7 @@ SPEC
     ok(index($rewritten, '($__ls_cursor - $__ls_mark)') >= 0, 'capture_until_cursor_len_from(name) lowers to a direct named-mark through-cursor width read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture-through-cursor helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_take_until_cursor_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_take_until_cursor_helpers_lower_without_raw_fallback' => sub {
     plan tests => 16;
 
     my $spec_content = <<'SPEC';
@@ -43636,7 +42997,7 @@ SPEC
     ok(index($rewritten, 'my $__ls_capture_len = ($__ls_cursor - $__ls_mark);') >= 0, 'capture_take_until_cursor_len_from(name) lowers to a direct named-mark through-cursor width read before advancing');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing through-cursor helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_capture_take_between_helpers_lower_without_raw_fallback' => sub {
+subtest 'emit_context_capture_take_between_helpers_lower_without_raw_fallback' => sub {
     plan tests => 14;
 
     my $spec_content = <<'SPEC';
@@ -43664,7 +43025,7 @@ SPEC
     ok(index($rewritten, q{operation => 'capture_take_between_len'}) >= 0, 'capture_take_between_len(start_mark,end_mark) retains mark trace instrumentation');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing two-mark helper rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43685,7 +43046,7 @@ SPEC
     is($rewritten, 'print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"', 'capture-substr print statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'capture-substr-print-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_bare_my_declarations_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_bare_my_declarations_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43706,7 +43067,7 @@ SPEC
     is($rewritten, 'my $retv; my @matches', 'bare lexical my declarations are preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'bare-my-declaration-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_position_tracking_cluster_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_position_tracking_cluster_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43727,7 +43088,7 @@ SPEC
     is($rewritten, 'my @matches; my $last_pos=$IPOS; $last_pos = pos($$STRING); $IPOS = pos $$STRING; my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift', 'position-tracking cluster statements are preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'position-tracking-cluster-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_inline_regex_subst_assignment_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_inline_regex_subst_assignment_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43748,7 +43109,7 @@ SPEC
     is($rewritten, '$args =~ s/\s*\)\s*$//', 'inline regex-subst assignment statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'inline-regex-subst-assignment-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_lexical_match_assignment_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_lexical_match_assignment_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43769,7 +43130,7 @@ SPEC
     is($rewritten, 'my $args = $IMATCH', 'lexical match-assignment statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'lexical-match-assignment-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_imatch_list_destructure_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_imatch_list_destructure_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43790,7 +43151,7 @@ SPEC
     is($rewritten, 'my ($attribute_name, $value) = @IMATCH_LIST', 'IMATCH_LIST destructure statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'IMATCH_LIST-destructure-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_print_foreach_iterable_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_print_foreach_iterable_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43811,7 +43172,7 @@ SPEC
     is($rewritten, 'print "perl_dquotes:<<$_>>\n" foreach (@matches)', 'print-foreach statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'print-foreach-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_lowers_print_each_helper_without_compatibility_surface' => sub {
+subtest 'emit_context_lowers_print_each_helper_without_compatibility_surface' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -43833,7 +43194,7 @@ SPEC
     is($rewritten, 'print "item<<", $_, ">>\n" foreach (@matches)', 'print_each lowers to the existing iterable debug-output shape');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'print_each-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_split_trim_filter_assignment_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_split_trim_filter_assignment_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43854,7 +43215,7 @@ SPEC
     is($rewritten, 'my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } split /\s*,\s*/, $args', 'split-trim-filter assignment statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'split-trim-filter-assignment-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_next_statement_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_next_statement_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43875,7 +43236,7 @@ SPEC
     is($rewritten, 'next', 'next statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'next-statement-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_canonical_action_ir_classifies_ref_field_assignment_without_raw_fallback' => sub {
+subtest 'emit_context_canonical_action_ir_classifies_ref_field_assignment_without_raw_fallback' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -43917,7 +43278,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'method-style return with leading-space args remains language-agnostic action-IR ready');
     ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-style return contributes canonical RETURN action-IR node');
 };
-subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
+subtest 'emit_context_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
     plan tests => 9;
 
     my $spec_content = <<'SPEC';
@@ -43945,7 +43306,7 @@ SPEC
     like($rewritten, qr/^return \['\?Top:', \( do \{ my \$x = 1; \$x \}\), /, 'canonical-IR lowering preserves RETURN_A rewrite payload with nested semicolon expression');
     like($rewritten, qr/&\{\$\$descr\{spec\}\{Leaf\}\{handler\}\}\(\$descr, \$STRING, \$minfo\)$/, 'canonical-IR lowering preserves CALL rewrite after nested semicolon payload helper');
 };
-subtest 'action_rewriter_canonical_action_ir_ignores_line_comment_semicolon_fragmentation' => sub {
+subtest 'emit_context_canonical_action_ir_ignores_line_comment_semicolon_fragmentation' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -43974,7 +43335,7 @@ SPEC
         'canonical-IR lowering output preserves comment while lowering helper call'
     );
 };
-subtest 'action_rewriter_canonical_action_ir_ignores_backtick_semicolon_fragmentation' => sub {
+subtest 'emit_context_canonical_action_ir_ignores_backtick_semicolon_fragmentation' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -44003,7 +43364,7 @@ SPEC
         'canonical-IR lowering output preserves backtick string while lowering helper call'
     );
 };
-subtest 'action_rewriter_canonical_action_ir_ignores_slash_quote_semicolon_fragmentation' => sub {
+subtest 'emit_context_canonical_action_ir_ignores_slash_quote_semicolon_fragmentation' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -44032,7 +43393,7 @@ SPEC
         'canonical-IR lowering output preserves slash-quote payload while lowering helper call'
     );
 };
-subtest 'action_rewriter_canonical_action_ir_ignores_angle_quote_semicolon_fragmentation' => sub {
+subtest 'emit_context_canonical_action_ir_ignores_angle_quote_semicolon_fragmentation' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -44061,7 +43422,7 @@ SPEC
         'canonical-IR lowering output preserves angle-quote payload while lowering helper call'
     );
 };
-subtest 'action_rewriter_canonical_action_ir_ignores_pipe_quote_semicolon_fragmentation' => sub {
+subtest 'emit_context_canonical_action_ir_ignores_pipe_quote_semicolon_fragmentation' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';

@@ -44,10 +44,10 @@ Finish the last parser-core isolation cleanup around remaining compile-path comp
   Commit: `pending`
 
 - ID: `PHASE1-PARSER-CORE-ISOLATION.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Evaluate and remove/simplify ActionRewriter.pm forwarding shim — if no external callers depend on it, delete the 118-line file; otherwise, document why it must stay.`
   Acceptance: `ActionRewriter.pm is either deleted or explicitly retained with rationale. If deleted, all test references are updated. If retained, the file has a comment explaining why it cannot yet be removed.`
-  Verification: `pending`
+  Verification: `2026-05-18: ActionRewriter.pm (118 lines, 59 generated forwarders + call_spec_handler_subst) DELETED. Zero non-test callers confirmed. All 451 test references updated (217 LinkedSpec::ActionRewriter:: → LinkedSpec::RuleIR::EmitContext::, 13 call_spec_handler_subst → rewrite_action_code_for_compat, 6 ActionRewriter-specific subtests removed). 1004 PASS.`
   Commit: `pending`
 
 - ID: `PHASE1-PARSER-CORE-ISOLATION.3`
@@ -62,8 +62,8 @@ Finish the last parser-core isolation cleanup around remaining compile-path comp
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `PHASE1-PARSER-CORE-ISOLATION.1` | `done` | Inventory complete — 4 seams, ActionRewriter.pm REMOVABLE, rewrite_action_code_for_compat needs evaluation. |
-| 2 | `PHASE1-PARSER-CORE-ISOLATION.2` | `pending` | ActionRewriter.pm — zero non-test callers, pure forwarding shim, no behavioral impact if removed. |
-| 3 | `PHASE1-PARSER-CORE-ISOLATION.3` | `pending` | rewrite_action_code_for_compat — depends on .2 completion. |
+| 2 | `PHASE1-PARSER-CORE-ISOLATION.2` | `done` | ActionRewriter.pm DELETED (118 lines). 451 test references updated. 1004 PASS. |
+| 3 | `PHASE1-PARSER-CORE-ISOLATION.3` | `pending` | rewrite_action_code_for_compat — now unblocked, evaluate s/h/a fallback. |
 
 ## Background
 
@@ -106,9 +106,17 @@ From the 2026-05-17 survey:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
+| `2026-05-18` | `PHASE1-PARSER-CORE-ISOLATION.2` | ActionRewriter.pm deleted (118 lines, 59 forwarders). 451 test references updated. 6 ActionRewriter-specific subtests removed. 217 function calls updated. 13 call_spec_handler_subst → rewrite_action_code_for_compat. 10 broken require_avoids assertions fixed (EmitContext self-checks, plan mismatches). 1004 PASS. | Pass — ActionRewriter.pm removed. |
+
+## Commit Log
+
+| Leaf | Commit subject or reference | Notes |
+| --- | --- | --- | --- |
+| `PHASE1-PARSER-CORE-ISOLATION.1` | `627ba5f` | Compile-path compatibility seam inventory. |
 | `pending` | `pending` | `pending` |
 
 ## Changelog
 
+- `2026-05-18`: Completed PHASE1-PARSER-CORE-ISOLATION.2 — removed ActionRewriter.pm forwarding shim (118 lines, 59 generated forwarders + call_spec_handler_subst). 451 test references updated, 6 ActionRewriter-specific subtests removed, 10 broken assertions fixed. Full suite: 1004 PASS. Active PNT frontier: PHASE1-PARSER-CORE-ISOLATION.3.
 - `2026-05-17`: Completed PHASE1-PARSER-CORE-ISOLATION.1 — full compile-path compatibility seam inventory. 4 seams identified: ActionRewriter.pm (REMOVABLE), rewrite_action_code_for_compat (NEEDS EVALUATION), output format conversions (KEEP), PluginBridge (OUT OF SCOPE). Frontier → .2.
 - `2026-05-17`: Created task tree for Phase 1 parser-core isolation cleanup (was `mostly done` in ROADMAP_V2.md without task-tree ownership). 3 leaves defined: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation.
