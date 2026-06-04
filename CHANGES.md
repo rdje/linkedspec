@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Sync ROADMAP.md status tracker with ROADMAP_V2/reality (DOC-CODEBASE-ALIGNMENT.5)
+
+- `ROADMAP.md`'s live-status tracker table was frozen at an early state: Phase 1 and 1A `mostly done`, Phases 2–6 `in progress`, Phase 7 `not started`, Backbone refactor track + Item 3 `mostly done`, Method-like track + Plugin track `in progress` — all contradicting `ROADMAP_V2.md` and reality (every numbered phase `done`).
+- Rewrote 13 stale tracker rows (line-number-keyed Perl splice, single-line→single-line so the 1248-line count stayed stable) to match `ROADMAP_V2.md`: Phases 1/1A/2/3/4/5/6/7 → `done`, Backbone refactor track + Item 3 → `done`, Method-like track → `mostly done`, Plugin track → `done`; Overall stays `in progress` with a refreshed focus note. Each "Remaining focus" cell was trimmed to a concise, task-tree-referenced completion note.
+- Annotated the Phase 1A planning section (`perl/LinkedSpec/ActionRewriter.pm` bullet) that the module was extracted then deleted in Phase 1, covering the historical `RuleIR/ActionRewriter/Compiler` rollout-order mention too. All remaining `ActionRewriter` mentions in `ROADMAP.md` are now historical (deletion record, "Landed follow-up" changelog, or annotated plan).
+- Cross-check: all 15 shared phase/track statuses now match between `ROADMAP.md` and `ROADMAP_V2.md`.
+- **DOC-CODEBASE-ALIGNMENT tree complete (5 leaves).** No active trees remain.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds.
+
 ## 2026-06-04 — Reconcile ROADMAP_V2.md Phase 1A row: ActionRewriter historical (DOC-CODEBASE-ALIGNMENT.4)
 
 - `ROADMAP_V2.md`'s Phase 1A row (line 59) still listed `ActionRewriter.pm` among the modules that "now share" the `LinkedSpec::OwnerDispatch` seam and said `ActionRewriter` "now also routes its `EmitContext` compatibility delegation directly" — presenting a module the same file's Phase 1 row (line 58) already records as deleted.
