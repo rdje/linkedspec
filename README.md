@@ -14,6 +14,7 @@ This `README.md` is the **single entry point** to the project.
 - durable memory architecture
   - `MEMORY_ARCHITECTURE.md` is the harness-agnostic standard for how agent memory survives session loss, crash, machine loss, and a switch of AI model/harness. It defines four layers — A: the bounded `MEMORY.md` resume pointer; B: the task-trees above; C: `docs/decisions/` decision records; D: git history — plus mechanical enforcement (`scripts/check_memory_architecture.sh`, `.githooks/`, and the local CI gate). Any agent, in any harness, starts from the tool-neutral bootstrap pointers (`AGENTS.md` and its mirrors `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md`), which route here.
   - `docs/decisions/` (layer C) holds durable cross-cutting facts/decisions as dated ADR-style records, indexed by `docs/decisions/INDEX.md`.
+  - `KNOWLEDGE_MAP.md` is the composed **retrieval** layer: a machine-derived, question-keyed index over small front-mattered fact cards in `docs/knowledge/`, so a future session finds an already-logged structural/causal fact instead of re-deriving it. The standard + tooling live in the vendored `knowledge-map/` bundle (`knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`); the map is auto-generated and gated — never hand-edited.
 - continuity docs
   - `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `COMMIT.md` are internal execution/continuity docs.
   - `MEMORY.md` is the bounded, overwrite-only **resume pointer** (memory layer A): current state and the single next action only — its history lives in git and the task-trees, not in the file.
@@ -92,6 +93,7 @@ Top-level project docs:
 - `LIVE_ACHIEVEMENT_STATUS.md`
 - `COMMIT.md`
 - `docs/decisions/` (durable decision records, layer C)
+- `KNOWLEDGE_MAP.md` (derived retrieval index) + `docs/knowledge/` (fact cards) + `knowledge-map/` (the bundle/standard + tooling)
 - `AGENTS.md` + mirrors (`CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`) — tool-neutral agent bootstrap pointers
 
 ## Local CI

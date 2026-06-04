@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-05 — Vendor knowledge-map bundle + generate initial map (KNOWLEDGE-MAP-DOC.1)
+
+- Adopting the **Knowledge Map** retrieval layer (composed on top of `MEMORY_ARCHITECTURE.md`) so a future session never re-derives ("archaeology") a structural/causal fact already logged once. New tree `KNOWLEDGE-MAP-DOC`. This reverses the deferral in `MEMORY-ARCHITECTURE-DOC`.
+- Vendored the `knowledge-map/` bundle verbatim at the repo root (10 files; `diff -r` byte-identical to the cross-project source). Ran `knowledge-map/install.sh`, which created `docs/knowledge/` (fact-card dir) and generated `KNOWLEDGE_MAP.md` (derived, deterministic; 0 facts initially); `check_knowledge_map.sh` reports the map in sync.
+- `README.md`: added a Knowledge Map bullet under "durable memory architecture" + path-map entries (`KNOWLEDGE_MAP.md`, `docs/knowledge/`, `knowledge-map/`).
+- `MEMORY_ARCHITECTURE.md` §5: reconciled the earlier "Not adopted in this repository" note to "Adopted" (the KM is now present + gated); added a cross-ref to the completed `MEMORY-ARCHITECTURE-DOC` tree.
+- Bundle knobs unchanged from the default (`KM_SCAN_DIRS=docs/knowledge docs/decisions`, `KM_OUTPUT=KNOWLEDGE_MAP.md`) — they already fit linkedspec; no repo-root override needed.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds. Enforcement wiring lands in `.3`.
+
 ## 2026-06-04 — Verify memory-architecture end-to-end + close tree (MEMORY-ARCHITECTURE-DOC.5)
 
 - Ran the full canonical gate `bash tools/run_ci_local.sh` → **exit 0**, in the intended order: the memory-architecture self-check **first** (all six invariants hold) → syntax checks (`perl/LinkedSpec.pm` + `t/phase0_regression.t` OK) → phase0 regression **`Files=1, Tests=1004, Result: PASS`** → `[ci] local CI gate passed`.

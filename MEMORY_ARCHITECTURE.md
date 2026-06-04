@@ -131,12 +131,13 @@ or runtime, grep it — re-deriving an already-logged fact is *archaeology*. It 
 pre-commit hook + `run_ci.sh` step as this architecture (so it cannot drift). Write a card
 lazily — when a durable fact is established or archaeology is caught.
 
-> **Not adopted in this repository.** LinkedSpec adopts the four memory layers (A–D)
-> and the §9 enforcement, but **not** the optional composed Knowledge Map layer; there
-> is no `KNOWLEDGE_MAP_ARCHITECTURE.md`, `KNOWLEDGE_MAP.md`, `knowledge-map/`, or
-> `docs/knowledge/` here. Treat this paragraph as describing an additive layer available
-> in the sibling reference project, not a layer present in this repo. (Tracked under
-> `docs/tasks/MEMORY-ARCHITECTURE-DOC.md`; may become a follow-on tree.)
+> **Adopted in this repository.** LinkedSpec adopts both the four memory layers (A–D)
+> with §9 enforcement *and* this composed Knowledge Map layer: the vendored
+> `knowledge-map/` bundle (its standard is `knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`),
+> the derived `KNOWLEDGE_MAP.md` at the repo root, and the front-mattered fact cards under
+> `docs/knowledge/`. The KM gate (`knowledge-map/scripts/check_knowledge_map.sh` plus the
+> regenerate-and-stage pre-commit step) runs in `.githooks/pre-commit` and the local CI
+> gate `tools/run_ci_local.sh`. Adopted under `docs/tasks/KNOWLEDGE-MAP-DOC.md`.
 
 ---
 

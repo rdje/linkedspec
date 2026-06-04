@@ -21,10 +21,9 @@ evidence for one top-level task.
 
 ## Active Task Trees
 
-_None. All roadmap phases (0–7), the Backbone refactor track, plugin modernization, the method-like DSL migration track, the doc/codebase alignment tree, and the durable-memory-architecture adoption are complete. PNT is idle until a proposed tree is activated._
-
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `KNOWLEDGE-MAP-DOC` | `active` | `Durable memory architecture (cross-project standard)` | `KNOWLEDGE-MAP-DOC.1` | [docs/tasks/KNOWLEDGE-MAP-DOC.md](docs/tasks/KNOWLEDGE-MAP-DOC.md) |
 
 ## Proposed Task Trees
 

@@ -135,6 +135,7 @@ All leaves complete — tree `done`. No leaves remain in the frontier.
 
 ## Changelog
 
+- `2026-06-05`: Cross-ref — the Knowledge Map layer that this tree's Non-Goals deferred has since been adopted under `docs/tasks/KNOWLEDGE-MAP-DOC.md`; the `MEMORY_ARCHITECTURE.md` §5 "not adopted" note was reconciled to "adopted" there.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.5` — ran the full local CI gate end-to-end (memory-arch self-check first, then phase0 `Tests=1004 PASS`), exit 0; synced live docs. **DOC tree COMPLETE (5 leaves):** the durable agent-memory architecture (4 layers + §9 enforcement) is adopted and enforced. No active trees remain.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.4` — installed the §9 enforcement: `scripts/check_memory_architecture.sh` (E2), `.githooks/pre-commit` + `.githooks/commit-msg` (E3, `core.hooksPath .githooks`, linkedspec-adapted subject regex), the four bootstrap pointers (E1), and wired the self-check as the first gate in `tools/run_ci_local.sh` (E4). Proved all gates bite (fixed a POSIX-ERE `\b` bug in commit-msg). Active frontier: `.5`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.3` — demoted `MEMORY.md` 5204→25 lines (bounded layer-A resume pointer; history preserved in git) and reconciled `COMMIT.md` + the README ramp-up entry from the old "cumulative log" model to the overwrite-only resume-pointer model. Active frontier: `.4`.
