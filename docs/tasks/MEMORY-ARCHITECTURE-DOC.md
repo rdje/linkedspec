@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `MEMORY-ARCHITECTURE-DOC`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Durable memory architecture (cross-project standard)`
 - Created: `2026-06-04`
 - Last updated: `2026-06-04`
-- Active frontier: `MEMORY-ARCHITECTURE-DOC.1`
+- Active frontier: `none` (tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -47,7 +47,7 @@ reference implementation in the sibling `specforge` project.
 ## Task Tree
 
 - ID: `MEMORY-ARCHITECTURE-DOC`
-  Status: `active`
+  Status: `done`
   Goal: `Adopt the durable agent-memory architecture standard in this repo.`
   Children: `MEMORY-ARCHITECTURE-DOC.1`, `MEMORY-ARCHITECTURE-DOC.2`, `MEMORY-ARCHITECTURE-DOC.3`, `MEMORY-ARCHITECTURE-DOC.4`, `MEMORY-ARCHITECTURE-DOC.5`
 
@@ -83,8 +83,8 @@ reference implementation in the sibling `specforge` project.
   Status: `pending`
   Goal: `Verify end-to-end: run the full local CI gate (memory-arch self-check first, then perl -c + phase0 regression), confirm green; sync the live docs (CHANGES.md, DEVELOPMENT_NOTES.md, MEMORY.md resume pointer, LIVE_ACHIEVEMENT_STATUS.md, docs/TASK_TREE.md); close the tree.`
   Acceptance: `tools/run_ci_local.sh exits 0 with the memory-arch check passing and phase0 PASS; live docs synced; tree marked done and moved to Completed in docs/TASK_TREE.md.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-04: bash tools/run_ci_local.sh → exit 0. Order confirmed in the log: the memory-architecture self-check runs FIRST (all six invariants hold), then syntax checks (perl/LinkedSpec.pm + t/phase0_regression.t OK), then the phase0 regression suite → Files=1, Tests=1004, Result: PASS, then "[ci] local CI gate passed". Enforcement is live inside the canonical gate and the regression baseline is green. Live docs synced; docs/TASK_TREE.md updated (tree moved Active→Completed). MEMORY-ARCHITECTURE-DOC tree COMPLETE (5/5 leaves).`
+  Commit: `pending (leaf ID in commit subject)`
 
 ## Current Frontier
 
@@ -94,7 +94,9 @@ reference implementation in the sibling `specforge` project.
 | 2 | `MEMORY-ARCHITECTURE-DOC.2` | `done` | docs/decisions/ + INDEX + 4 seed records created. perl -c OK. |
 | 3 | `MEMORY-ARCHITECTURE-DOC.3` | `done` | MEMORY.md demoted 5204→25 lines (≤cap); COMMIT.md reconciled. perl -c OK. |
 | 4 | `MEMORY-ARCHITECTURE-DOC.4` | `done` | Self-check + hooks + CI wiring + bootstrap pointers installed; all four gates proven to bite. |
-| 5 | `MEMORY-ARCHITECTURE-DOC.5` | `pending` | Final end-to-end verification + live-doc sync + close. |
+| 5 | `MEMORY-ARCHITECTURE-DOC.5` | `done` | Full local gate green (memory-arch first, phase0 1004 PASS); tree complete. |
+
+All leaves complete — tree `done`. No leaves remain in the frontier.
 
 ## Decisions
 
@@ -119,6 +121,7 @@ reference implementation in the sibling `specforge` project.
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.2` | `ls docs/decisions/` + INDEX↔files cross-check (4/4 match); `perl -c perl/LinkedSpec.pm`. | Pass — layer C created with 4 seed ADR records; no code change; phase0 1004 PASS baseline holds. Frontier → `.3`. |
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.3` | `wc -l MEMORY.md` (25 ≤ cap 60); `git show HEAD:MEMORY.md \| wc -l` (5204 preserved); COMMIT.md/README review; `perl -c perl/LinkedSpec.pm`. | Pass — MEMORY.md demoted to bounded resume pointer, COMMIT.md reconciled, history intact in git; no code change; phase0 1004 PASS baseline holds. Frontier → `.4`. |
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.4` | self-check exit 0 (compliant) + exit 1 (cap forced to 10); commit-msg accept/reject matrix (8 cases incl. body-line id); `bash -n` on all 4 shell files; `git config core.hooksPath .githooks`. | Pass — all four gates (E1 pointers, E2 self-check, E3 hooks, E4 CI wiring) installed and proven to bite; fixed a POSIX-ERE `\b` bug in commit-msg. Frontier → `.5`. |
+| `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.5` | `bash tools/run_ci_local.sh` → exit 0 (memory-arch self-check first → perl -c → phase0 Files=1 Tests=1004 PASS → "local CI gate passed"). | Pass — enforcement live in the canonical gate; baseline green. Tree COMPLETE (5 leaves); moved Active→Completed in docs/TASK_TREE.md. |
 
 ## Commit Log
 
@@ -127,10 +130,12 @@ reference implementation in the sibling `specforge` project.
 | `MEMORY-ARCHITECTURE-DOC.1` | `Add MEMORY_ARCHITECTURE.md standard + README/bootstrap pointers (MEMORY-ARCHITECTURE-DOC.1)` | Hash `119665a`. |
 | `MEMORY-ARCHITECTURE-DOC.2` | `Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)` | Hash `39825b6`. |
 | `MEMORY-ARCHITECTURE-DOC.3` | `Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)` | Hash `50eafdf`. |
-| `MEMORY-ARCHITECTURE-DOC.4` | `Install memory-architecture enforcement kit (E1–E4) (MEMORY-ARCHITECTURE-DOC.4)` | First commit through the now-active hooks. Hash backfilled later. |
+| `MEMORY-ARCHITECTURE-DOC.4` | `Install memory-architecture enforcement kit (E1–E4) (MEMORY-ARCHITECTURE-DOC.4)` | First commit through the now-active hooks. Hash `a4ea51e`. |
+| `MEMORY-ARCHITECTURE-DOC.5` | `Verify memory-architecture end-to-end (full local gate green) + close tree (MEMORY-ARCHITECTURE-DOC.5)` | Hash backfilled later if useful. |
 
 ## Changelog
 
+- `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.5` — ran the full local CI gate end-to-end (memory-arch self-check first, then phase0 `Tests=1004 PASS`), exit 0; synced live docs. **DOC tree COMPLETE (5 leaves):** the durable agent-memory architecture (4 layers + §9 enforcement) is adopted and enforced. No active trees remain.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.4` — installed the §9 enforcement: `scripts/check_memory_architecture.sh` (E2), `.githooks/pre-commit` + `.githooks/commit-msg` (E3, `core.hooksPath .githooks`, linkedspec-adapted subject regex), the four bootstrap pointers (E1), and wired the self-check as the first gate in `tools/run_ci_local.sh` (E4). Proved all gates bite (fixed a POSIX-ERE `\b` bug in commit-msg). Active frontier: `.5`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.3` — demoted `MEMORY.md` 5204→25 lines (bounded layer-A resume pointer; history preserved in git) and reconciled `COMMIT.md` + the README ramp-up entry from the old "cumulative log" model to the overwrite-only resume-pointer model. Active frontier: `.4`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.2` — created `docs/decisions/` (layer C) with `INDEX.md` and 4 dated ADR records (0001 doctrine, 0002 ActionIR-ready invariant, 0003 raw-Perl-free policy, 0004 hosted-CI-disabled). Migrated the doctrine out of harness-home-dir memory into the tracked repo. Active frontier: `.3`.

@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `50eafdf` — "Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
-- active_work_unit: `MEMORY-ARCHITECTURE-DOC` → frontier leaf: `MEMORY-ARCHITECTURE-DOC.4` (in progress — this commit installs the §9 enforcement kit: self-check + hooks + CI wiring + bootstrap pointers; git hooks are now active via `core.hooksPath .githooks`, so this and later commits pass through pre-commit + commit-msg)
-- next_action: implement `MEMORY-ARCHITECTURE-DOC.5` — run the full local gate (`bash tools/run_ci_local.sh`: memory-arch self-check first, then perl -c + phase0), confirm green, sync live docs, and close the tree.
-- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`).
+- latest_commit: `a4ea51e` — "Install memory-architecture enforcement kit (E1-E4) (MEMORY-ARCHITECTURE-DOC.4)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
+- active_work_unit: none — `MEMORY-ARCHITECTURE-DOC` complete (5/5 leaves). No active task trees; PNT is idle. (Proposed-only: `PLUGIN-ACTION-MIGRATION`, not yet activated.)
+- next_action: none pending — await direction (e.g. activate `PLUGIN-ACTION-MIGRATION`) or a new task. The durable memory architecture is adopted + enforced; keep committing per `COMMIT.md` so the hooks + local CI gate stay green.
+- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check first).
 - in_flight_uncommitted: none after this commit.
 - blockers: none.

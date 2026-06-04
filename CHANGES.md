@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Verify memory-architecture end-to-end + close tree (MEMORY-ARCHITECTURE-DOC.5)
+
+- Ran the full canonical gate `bash tools/run_ci_local.sh` → **exit 0**, in the intended order: the memory-architecture self-check **first** (all six invariants hold) → syntax checks (`perl/LinkedSpec.pm` + `t/phase0_regression.t` OK) → phase0 regression **`Files=1, Tests=1004, Result: PASS`** → `[ci] local CI gate passed`.
+- Confirms the §9 enforcement is live inside the canonical gate and the regression baseline is green with the memory architecture in place.
+- Synced the owning task tree and live docs; moved `MEMORY-ARCHITECTURE-DOC` from Active to Completed in `docs/TASK_TREE.md` (no active trees remain).
+- **MEMORY-ARCHITECTURE-DOC tree COMPLETE (5 leaves).** LinkedSpec now has durable, harness-agnostic agent memory: layer A (`MEMORY.md` resume pointer) · layer B (`docs/tasks/` task-trees) · layer C (`docs/decisions/`) · layer D (git), reachable from `AGENTS.md`/`README.md`/`MEMORY_ARCHITECTURE.md` and enforced by E1–E4.
+
 ## 2026-06-04 — Install memory-architecture enforcement kit (E1–E4) (MEMORY-ARCHITECTURE-DOC.4)
 
 - Installed the `MEMORY_ARCHITECTURE.md` §9 enforcement so non-compliance fails fast and visibly:
