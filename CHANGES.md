@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Scrub deleted-ActionRewriter live claims from USER_GUIDE.md (DOC-CODEBASE-ALIGNMENT.3)
+
+- `USER_GUIDE.md` (the user-facing working reference) still presented `ActionRewriter.pm` as a live module "retained as compatibility wrapper surface for direct legacy callers," with current `$@`-preservation and lazy-loading behavior. The module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`).
+- Reworked all 7 references across two clusters (load-time-cleanup notes ~260–263 and compile-pipeline owner-path notes ~1209–1219): `ActionRewriter` is now described as a forwarding shim deleted in Phase 1, and the focused helper-rewrite entrypoint is identified as `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)` (façade: `LinkedSpec::call_spec_handler_subst(...)`). Dropped two now-misleading "ActionRewriter-facing default callback map" labels and clarified that `LinkedSpec::Deps` was removed entirely.
+- Verified `docs/linkedspec-book/` was already free of `ActionRewriter` references (no edits needed). Re-grep confirms every remaining `USER_GUIDE.md` mention is framed "deleted in Phase 1."
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds.
+
 ## 2026-06-04 — Refresh ARCHITECTURE_STATE.md: ActionRewriter.pm removed (DOC-CODEBASE-ALIGNMENT.2)
 
 - `ARCHITECTURE_STATE.md` still described the deleted `perl/LinkedSpec/ActionRewriter.pm` module as a live owner-dispatch participant. That module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`, commit `4f8e0b6`); `perl/` has zero references to it.

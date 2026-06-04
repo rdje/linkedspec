@@ -60,11 +60,11 @@ and make `docs/TASK_TREE.md` an accurate index of the real task-file statuses.
   Commit: `pending (leaf ID in commit subject)`
 
 - ID: `DOC-CODEBASE-ALIGNMENT.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Scrub stale live ActionRewriter module references from user-facing docs (USER_GUIDE.md; verify docs/linkedspec-book/). Present ActionRewriter as removed in Phase 1, not as a retained compatibility wrapper surface.`
   Acceptance: `USER_GUIDE.md and the public book no longer tell users ActionRewriter.pm exists as a live/compatibility module; any necessary mention is framed as historical/removed.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-04: docs/linkedspec-book/ already had zero ActionRewriter references (no edit needed). USER_GUIDE.md had 7 references across two clusters (load-time-cleanup notes ~260-263, compile-pipeline owner-path notes ~1209-1219) that presented ActionRewriter.pm as a live module retained "as compatibility wrapper surface for direct legacy callers". Reworked all of them: ActionRewriter is now described as a forwarding shim deleted in Phase 1 (PHASE1-PARSER-CORE-ISOLATION.2), with the focused helper-rewrite entrypoint identified as RuleIR::EmitContext::rewrite_action_code_for_compat(...). Also dropped two now-misleading "ActionRewriter-facing default callback map" labels and corrected the LinkedSpec::Deps note (Deps was removed entirely). Re-grep: all 5 remaining USER_GUIDE.md mentions are framed "deleted in Phase 1"; book clean. perl -c perl/LinkedSpec.pm OK; phase0 1004 PASS baseline holds (no code changed).`
+  Commit: `pending (leaf ID in commit subject)`
 
 - ID: `DOC-CODEBASE-ALIGNMENT.4`
   Status: `pending`
@@ -79,7 +79,7 @@ and make `docs/TASK_TREE.md` an accurate index of the real task-file statuses.
 | --- | --- | --- | --- |
 | 1 | `DOC-CODEBASE-ALIGNMENT.1` | `done` | Index reconciled; PHASE3/4/5 metadata sub-drift also corrected. 1004 PASS baseline. |
 | 2 | `DOC-CODEBASE-ALIGNMENT.2` | `done` | ARCHITECTURE_STATE.md refreshed; ActionRewriter now framed as removed. perl -c clean. |
-| 3 | `DOC-CODEBASE-ALIGNMENT.3` | `pending` | User-facing docs are the project's only window for the user; remove the deleted-module claim. |
+| 3 | `DOC-CODEBASE-ALIGNMENT.3` | `done` | USER_GUIDE.md scrubbed (book already clean); all mentions framed as deleted in Phase 1. |
 | 4 | `DOC-CODEBASE-ALIGNMENT.4` | `pending` | Lock the two roadmap docs together with the codebase and each other. |
 
 ## Decisions
@@ -101,16 +101,19 @@ and make `docs/TASK_TREE.md` an accurate index of the real task-file statuses.
 | --- | --- | --- | --- |
 | `2026-06-04` | `DOC-CODEBASE-ALIGNMENT.1` | Index/file cross-check (13 trees, status match); `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/phase0_regression.t`; `prove -Iperl t/phase0_regression.t`. | Pass — index reconciled, PHASE3/4/5 metadata fixed, phase0 Files=1 Tests=1004 PASS (no code changed). Frontier → `.2`. |
 | `2026-06-04` | `DOC-CODEBASE-ALIGNMENT.2` | `grep ActionRewriter ARCHITECTURE_STATE.md` (all 3 mentions framed as removed/historical); `perl -c perl/LinkedSpec.pm`. | Pass — ARCHITECTURE_STATE.md refreshed; no live-module claim remains; perl -c OK; phase0 1004 PASS baseline holds (no code changed). Frontier → `.3`. |
+| `2026-06-04` | `DOC-CODEBASE-ALIGNMENT.3` | `grep ActionRewriter docs/linkedspec-book/` (clean); `grep ActionRewriter USER_GUIDE.md` (all 5 remaining mentions framed "deleted in Phase 1"); `perl -c perl/LinkedSpec.pm`. | Pass — USER_GUIDE.md scrubbed; book already clean; perl -c OK; phase0 1004 PASS baseline holds (no code changed). Frontier → `.4`. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `DOC-CODEBASE-ALIGNMENT.1` | `Reconcile task-tree index with task-file statuses (DOC-CODEBASE-ALIGNMENT.1)` | Hash `5277df9`. |
-| `DOC-CODEBASE-ALIGNMENT.2` | `Refresh ARCHITECTURE_STATE.md: ActionRewriter.pm removed (DOC-CODEBASE-ALIGNMENT.2)` | Hash backfilled later if useful. |
+| `DOC-CODEBASE-ALIGNMENT.2` | `Refresh ARCHITECTURE_STATE.md: ActionRewriter.pm removed (DOC-CODEBASE-ALIGNMENT.2)` | Hash `14006e3`. |
+| `DOC-CODEBASE-ALIGNMENT.3` | `Scrub deleted-ActionRewriter live claims from USER_GUIDE.md (DOC-CODEBASE-ALIGNMENT.3)` | Hash backfilled later if useful. |
 
 ## Changelog
 
+- `2026-06-04`: Completed `DOC-CODEBASE-ALIGNMENT.3` — scrubbed the deleted-`ActionRewriter.pm` live claims from `USER_GUIDE.md` (two clusters, 7 references) so it reads as removed in Phase 1; verified `docs/linkedspec-book/` was already clean; corrected the `LinkedSpec::Deps`-removed note. Active frontier: `.4`.
 - `2026-06-04`: Completed `DOC-CODEBASE-ALIGNMENT.2` — refreshed `ARCHITECTURE_STATE.md` so the deleted `ActionRewriter.pm` is no longer presented as a live owner-dispatch participant (updated Last-refreshed date + refresh note, rewrote the line-163 bullet, and dropped it from the "shares that seam" list). Active frontier: `.3`.
 - `2026-06-04`: Completed `DOC-CODEBASE-ALIGNMENT.1` — reconciled `docs/TASK_TREE.md` (registered this active tree, moved PHASE7 to Completed, added PHASE1-PARSER-CORE-ISOLATION / METHOD-LIKE-DSL-MIGRATION / BOOK-DOCUMENTATION-SYNC), and corrected the PHASE3/4/5 metadata `Status` sub-drift (`active` → `completed`). 1004 PASS baseline. Active frontier: `.2`.
 - `2026-06-04`: Created task tree from template during session bootstrap after detecting deleted-`ActionRewriter.pm` references in live docs and a stale `docs/TASK_TREE.md` index.
