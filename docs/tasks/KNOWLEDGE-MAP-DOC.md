@@ -63,8 +63,8 @@ reconciles the "not adopted" notes.
   Status: `pending`
   Goal: `Seed durable-fact cards under docs/knowledge/ for high-value, archaeology-prone structural/causal facts (e.g. ActionRewriter.pm was deleted in Phase 1 and the helper-rewrite entrypoint moved; LinkedSpec.pm is a thin facade with the ParserFactory→Runtime→Compiler spine; the phase0 all-target ActionIR-ready invariant; hosted CI disabled / run the local gate; the AND++LX self-hosting hang gotcha; spec.spec is the self-hosted grammar). Each card: required front-matter + a signpost body pointing to the canonical home. Regenerate the map; check passes.`
   Acceptance: `Several valid fact cards exist; check_knowledge_map.sh passes (fields valid, ids unique, map in sync); KNOWLEDGE_MAP.md shows the question keys. Every carded fact verified true against the repo before writing its reverify command.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-05: Authored 6 durable-fact cards under docs/knowledge/: actionrewriter-removed-phase1, linkedspec-pm-is-thin-facade, phase0-all-target-actionir-ready-invariant, hosted-ci-disabled-run-local-gate, spec-spec-self-hosted-grammar, andplusplus-lx-parser-hang. Each fact was verified true against the repo BEFORE writing its reverify: ActionRewriter.pm absent + rewrite_action_code_for_compat present in RuleIR/EmitContext.pm; perl/LinkedSpec.pm = 258 lines + OwnerDispatch.pm present; language_agnostic_ready_ratio present in t/phase0_regression.t (4 hits); ci.yml workflow_dispatch-only; specs/spec.spec present; PHASE7 documents the AND++LX hang (5 hits). Regenerated KNOWLEDGE_MAP.md -> 6 facts, 29 question keys; check_knowledge_map.sh OK (fields valid, ids unique, map in sync). No code change — perl -c perl/LinkedSpec.pm OK; phase0 1004 PASS baseline holds.`
+  Commit: `pending (leaf ID in commit subject)`
 
 - ID: `KNOWLEDGE-MAP-DOC.3`
   Status: `pending`
@@ -85,7 +85,7 @@ reconciles the "not adopted" notes.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `KNOWLEDGE-MAP-DOC.1` | `done` | Bundle vendored, map generated (in sync), README + §5 reconciled. perl -c OK. |
-| 2 | `KNOWLEDGE-MAP-DOC.2` | `pending` | Seed valid cards so the check has real input and the map is useful before the gate is enforced. |
+| 2 | `KNOWLEDGE-MAP-DOC.2` | `done` | 6 verified fact cards seeded; map regenerated (6 facts/29 keys); check OK. |
 | 3 | `KNOWLEDGE-MAP-DOC.3` | `pending` | Wire the gates once the cards/map are valid; reconcile discovery; record the decision. |
 | 4 | `KNOWLEDGE-MAP-DOC.4` | `pending` | Final end-to-end verification + live-doc sync + close. |
 
@@ -115,14 +115,17 @@ reconciles the "not adopted" notes.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-05` | `KNOWLEDGE-MAP-DOC.1` | `diff -r` bundle vs pgen source (identical); `knowledge-map/install.sh` (map generated, check OK); README/§5 review; `perl -c perl/LinkedSpec.pm`. | Pass — bundle vendored, initial map in sync, discovery + §5 reconciled; no code change; phase0 1004 PASS baseline holds. Frontier → `.2`. |
+| `2026-06-05` | `KNOWLEDGE-MAP-DOC.2` | Verified all 6 facts against the repo; `gen_knowledge_map.sh` (6 facts/29 keys); `check_knowledge_map.sh` OK; `perl -c perl/LinkedSpec.pm`. | Pass — 6 valid, evidence-backed fact cards seeded; map in sync; no code change; phase0 1004 PASS baseline holds. Frontier → `.3`. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `KNOWLEDGE-MAP-DOC.1` | `Vendor knowledge-map bundle + generate initial map (KNOWLEDGE-MAP-DOC.1)` | Hash backfilled later if useful. |
+| `KNOWLEDGE-MAP-DOC.1` | `Vendor knowledge-map bundle + generate initial map (KNOWLEDGE-MAP-DOC.1)` | Hash `4401355`. |
+| `KNOWLEDGE-MAP-DOC.2` | `Seed 6 durable-fact cards under docs/knowledge (KNOWLEDGE-MAP-DOC.2)` | Hash backfilled later if useful. |
 
 ## Changelog
 
+- `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.2` — seeded 6 verified durable-fact cards (ActionRewriter-removed, thin-façade, phase0 invariant, hosted-CI-disabled, spec.spec self-hosting, AND++LX hang); regenerated the map (6 facts / 29 question keys); check passes. Active frontier: `.3`.
 - `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.1` — vendored the `knowledge-map/` bundle, generated the initial `KNOWLEDGE_MAP.md`, wired README discovery, and reconciled the `MEMORY_ARCHITECTURE.md` §5 "not adopted" note to "adopted". Active frontier: `.2`.
 - `2026-06-05`: Created task tree to adopt the Knowledge Map retrieval layer (the composed layer deferred during `MEMORY-ARCHITECTURE-DOC`), after the user directed adopting `KNOWLEDGE_MAP_ARCHITECTURE.md` here.

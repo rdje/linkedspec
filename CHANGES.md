@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-05 — Seed 6 durable-fact cards under docs/knowledge (KNOWLEDGE-MAP-DOC.2)
+
+- Authored 6 Knowledge Map fact cards (signposts pointing at canonical homes, not copies), each with query-shaped `answers:` + `evidence`/`reverify`. Every fact was **verified true against the repo before** writing its `reverify`:
+  - `actionrewriter-removed-phase1` — ActionRewriter.pm deleted in Phase 1; entrypoint moved to `RuleIR::EmitContext::rewrite_action_code_for_compat` (the exact fact whose staleness this whole effort began with).
+  - `linkedspec-pm-is-thin-facade` — `LinkedSpec.pm` (258 lines) is a façade; spine is `ParserFactory → Runtime → Compiler`.
+  - `phase0-all-target-actionir-ready-invariant` — every shipped `.spec` compiles at `language_agnostic_ready_ratio == 1.0000`, zero compatibility-surface rules.
+  - `hosted-ci-disabled-run-local-gate` — hosted GH Actions off; run `tools/run_ci_local.sh`.
+  - `spec-spec-self-hosted-grammar` — `specs/spec.spec` is the self-hosted grammar + required change surface.
+  - `andplusplus-lx-parser-hang` — gotcha: `LX` on an `AND+` rule hangs the generated parser (loop re-entry); prefer `E`.
+- Regenerated `KNOWLEDGE_MAP.md` → **6 facts, 29 question keys**; `check_knowledge_map.sh` passes (fields valid, ids unique, map in sync).
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds.
+
 ## 2026-06-05 — Vendor knowledge-map bundle + generate initial map (KNOWLEDGE-MAP-DOC.1)
 
 - Adopting the **Knowledge Map** retrieval layer (composed on top of `MEMORY_ARCHITECTURE.md`) so a future session never re-derives ("archaeology") a structural/causal fact already logged once. New tree `KNOWLEDGE-MAP-DOC`. This reverses the deferral in `MEMORY-ARCHITECTURE-DOC`.
