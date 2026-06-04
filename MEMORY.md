@@ -18,8 +18,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `7355f08` — "Verify memory-architecture end-to-end (full local gate green) + close tree (MEMORY-ARCHITECTURE-DOC.5)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
-- active_work_unit: `KNOWLEDGE-MAP-DOC` → frontier leaf: `KNOWLEDGE-MAP-DOC.3` (.1–.2 done — bundle vendored, 6 fact cards seeded, KNOWLEDGE_MAP.md = 6 facts / 29 keys, check OK)
-- next_action: implement `KNOWLEDGE-MAP-DOC.3` — wire the KM gate into `.githooks/pre-commit` (replace the `exec` so the memory-arch self-check AND the KM regenerate+stage+check both run) and into `tools/run_ci_local.sh`; reconcile the bootstrap pointers (AGENTS/CLAUDE/.cursorrules/copilot) to reference `KNOWLEDGE_MAP.md`; add decision record 0005; prove the KM gate bites.
+- active_work_unit: `KNOWLEDGE-MAP-DOC` → frontier leaf: `KNOWLEDGE-MAP-DOC.4` (.1–.3 done — bundle vendored, 6 cards, KM gate wired into pre-commit + run_ci_local, pointers reconciled, ADR 0005 added, gate proven to bite)
+- next_action: implement `KNOWLEDGE-MAP-DOC.4` — run the full local gate (`bash tools/run_ci_local.sh`: memory-arch self-check → KM check → perl -c → phase0), confirm green, sync live docs, close the tree.
 - regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check first; the KM check joins the gate in `.3`).
 - in_flight_uncommitted: none after this commit.
 - blockers: none.

@@ -15,6 +15,7 @@ changed* lives in git (layer D), not here.
 | [0002](0002-all-target-actionir-ready-invariant.md) | Every shipped `.spec` compiles ActionIR-ready (ratio == 1.0000, zero compatibility-surface rules) | 2026-06-04 | accepted | parser, invariant, phase0 |
 | [0003](0003-raw-perl-free-spec-authoring.md) | `.spec` authoring is permanently raw-Perl-free; raw Perl is migration debt | 2026-06-04 | accepted | dsl, policy |
 | [0004](0004-hosted-ci-disabled-local-gate.md) | Hosted GitHub Actions CI is disabled; `tools/run_ci_local.sh` is the source of truth | 2026-06-04 | accepted | ci, environment |
+| [0005](0005-knowledge-map-retrieval-layer.md) | Adopt the Knowledge Map retrieval layer (archaeology eliminated for structural facts only) | 2026-06-05 | accepted | memory, retrieval, knowledge-map |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

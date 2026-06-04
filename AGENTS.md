@@ -15,6 +15,10 @@ point back here. The system of record is **`README.md`** (the project) +
 4. Read **`SESSION_BOOTSTRAP.md`** and open the active **task-tree** under `docs/tasks/`
    (index: `docs/TASK_TREE.md`); its frontier row is your precise next step.
 5. Pull only the relevant **decision records** under `docs/decisions/` (index: `INDEX.md`).
+6. **Before re-deriving any fact from code or runtime, check `KNOWLEDGE_MAP.md`** — grep your
+   question, follow the one pointer to the canonical home, and trust the dated fact or run its
+   `reverify` command. Re-deriving a fact that was already logged once is *archaeology*
+   (`knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`).
 
 ## Non-negotiable working rules
 
@@ -29,6 +33,12 @@ point back here. The system of record is **`README.md`** (the project) +
 - **Before committing, run `scripts/check_memory_architecture.sh`** — git hooks and the
   local CI gate (`tools/run_ci_local.sh`) run it too; a non-compliant change fails and
   cannot land.
+- **Write a Knowledge Map fact card** (`docs/knowledge/<id>.md`, front-matter with an
+  `answers:` list of the questions an agent would grep) whenever you establish a durable
+  structural/causal fact, or catch yourself re-deriving one — so the next session finds it
+  instead of excavating it. The map (`KNOWLEDGE_MAP.md`) is **derived + gated**; never
+  hand-edit it. (First-time measurement of changing runtime state is legitimate diagnostics,
+  not archaeology — but its durable *conclusion* becomes a card.)
 
 ## Enforcement (why this is hard to ignore)
 
@@ -37,5 +47,7 @@ point back here. The system of record is **`README.md`** (the project) +
 activate once with `git config core.hooksPath .githooks`), and the local CI gate
 `tools/run_ci_local.sh` (E4 backstop, which runs the self-check first). Hosted GitHub
 Actions is disabled (`docs/decisions/0004-hosted-ci-disabled-local-gate.md`), so the
-local gate is the source of truth. The optional composed "Knowledge Map" retrieval layer
-is **not adopted** in this repo (see `MEMORY_ARCHITECTURE.md` §5).
+local gate is the source of truth. The composed **Knowledge Map** retrieval layer **is
+adopted** here (`knowledge-map/` bundle, derived `KNOWLEDGE_MAP.md`, fact cards in
+`docs/knowledge/`); its gate (`knowledge-map/scripts/check_knowledge_map.sh` + the
+regenerate-and-stage pre-commit step) runs in `.githooks/pre-commit` and `tools/run_ci_local.sh`.

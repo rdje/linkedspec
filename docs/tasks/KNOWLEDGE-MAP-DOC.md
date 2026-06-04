@@ -70,8 +70,8 @@ reconciles the "not adopted" notes.
   Status: `pending`
   Goal: `Wire enforcement and reconcile discovery. Replace the exec-based .githooks/pre-commit with a form that runs BOTH the memory-arch self-check AND the KM gate (regenerate + git add the map + check_knowledge_map.sh). Add the KM check to tools/run_ci_local.sh. Update the bootstrap pointers (AGENTS.md + CLAUDE.md/.cursorrules/.github/copilot-instructions.md) to route agents to KNOWLEDGE_MAP.md and to "write a card when you establish a durable fact or catch archaeology". Add a decision record (0005) for the KM adoption + the archaeology boundary. Prove the KM gate bites.`
   Acceptance: `pre-commit runs both gates; run_ci_local.sh runs the KM check; bootstrap pointers reference the KM (no "not adopted" left); 0005 record added + indexed; the KM check fails on an injected invalid card / out-of-sync map and passes on the clean tree; the .3 commit passes through the now-KM-gated hooks.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-05: Replaced the exec-based .githooks/pre-commit with a dual-gate form (memory-arch self-check THEN KM regenerate→git add→check_knowledge_map). Added the KM check to tools/run_ci_local.sh after the memory-arch check, plus require_tracked_file for KNOWLEDGE_MAP.md + both KM scripts. Reconciled the bootstrap pointers: AGENTS.md gained a "check KNOWLEDGE_MAP.md before re-deriving" resume step + a "write a card" working rule, and its Enforcement section now states the KM IS adopted (was "not adopted"); CLAUDE.md / .cursorrules / .github/copilot-instructions.md each gained a KM line. Added docs/decisions/0005 (KM adoption + the archaeology boundary) + INDEX row. PROVED the KM gate bites: invalid card (missing date) → check exit 1; hand-tampered KNOWLEDGE_MAP.md → check exit 1; after gen → exit 0; clean tree → exit 0. bash -n clean on pre-commit + run_ci_local. No code change — perl -c perl/LinkedSpec.pm OK; phase0 1004 PASS baseline holds. The .3 commit passes through the now-KM-gated pre-commit.`
+  Commit: `pending (leaf ID in commit subject)`
 
 - ID: `KNOWLEDGE-MAP-DOC.4`
   Status: `pending`
@@ -86,7 +86,7 @@ reconciles the "not adopted" notes.
 | --- | --- | --- | --- |
 | 1 | `KNOWLEDGE-MAP-DOC.1` | `done` | Bundle vendored, map generated (in sync), README + §5 reconciled. perl -c OK. |
 | 2 | `KNOWLEDGE-MAP-DOC.2` | `done` | 6 verified fact cards seeded; map regenerated (6 facts/29 keys); check OK. |
-| 3 | `KNOWLEDGE-MAP-DOC.3` | `pending` | Wire the gates once the cards/map are valid; reconcile discovery; record the decision. |
+| 3 | `KNOWLEDGE-MAP-DOC.3` | `done` | KM gate wired (pre-commit + run_ci_local); pointers reconciled; 0005 added; gate proven to bite. |
 | 4 | `KNOWLEDGE-MAP-DOC.4` | `pending` | Final end-to-end verification + live-doc sync + close. |
 
 ## Decisions
@@ -116,16 +116,19 @@ reconciles the "not adopted" notes.
 | --- | --- | --- | --- |
 | `2026-06-05` | `KNOWLEDGE-MAP-DOC.1` | `diff -r` bundle vs pgen source (identical); `knowledge-map/install.sh` (map generated, check OK); README/§5 review; `perl -c perl/LinkedSpec.pm`. | Pass — bundle vendored, initial map in sync, discovery + §5 reconciled; no code change; phase0 1004 PASS baseline holds. Frontier → `.2`. |
 | `2026-06-05` | `KNOWLEDGE-MAP-DOC.2` | Verified all 6 facts against the repo; `gen_knowledge_map.sh` (6 facts/29 keys); `check_knowledge_map.sh` OK; `perl -c perl/LinkedSpec.pm`. | Pass — 6 valid, evidence-backed fact cards seeded; map in sync; no code change; phase0 1004 PASS baseline holds. Frontier → `.3`. |
+| `2026-06-05` | `KNOWLEDGE-MAP-DOC.3` | KM bite proofs (invalid card → exit 1; tampered map → exit 1; regen → exit 0; clean → exit 0); `bash -n` pre-commit + run_ci_local; pointer/0005 review; `perl -c`. | Pass — dual-gate pre-commit + run_ci_local KM check wired; pointers reconciled; ADR 0005 added; gate bites; no code change; phase0 1004 PASS baseline holds. Frontier → `.4`. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `KNOWLEDGE-MAP-DOC.1` | `Vendor knowledge-map bundle + generate initial map (KNOWLEDGE-MAP-DOC.1)` | Hash `4401355`. |
-| `KNOWLEDGE-MAP-DOC.2` | `Seed 6 durable-fact cards under docs/knowledge (KNOWLEDGE-MAP-DOC.2)` | Hash backfilled later if useful. |
+| `KNOWLEDGE-MAP-DOC.2` | `Seed 6 durable-fact cards under docs/knowledge (KNOWLEDGE-MAP-DOC.2)` | Hash `4605ec9`. |
+| `KNOWLEDGE-MAP-DOC.3` | `Wire KM gate (pre-commit + CI) + reconcile pointers + ADR 0005 (KNOWLEDGE-MAP-DOC.3)` | First commit through the now-KM-gated pre-commit. Hash backfilled later. |
 
 ## Changelog
 
+- `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.3` — wired the KM gate into `.githooks/pre-commit` (dual gate: memory-arch + KM regenerate/stage/check) and `tools/run_ci_local.sh`; reconciled the bootstrap pointers (AGENTS + 3 mirrors) to route to the KM and reverse the "not adopted" note; added decision record 0005 (KM adoption + archaeology boundary); proved the KM gate bites. Active frontier: `.4`.
 - `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.2` — seeded 6 verified durable-fact cards (ActionRewriter-removed, thin-façade, phase0 invariant, hosted-CI-disabled, spec.spec self-hosting, AND++LX hang); regenerated the map (6 facts / 29 question keys); check passes. Active frontier: `.3`.
 - `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.1` — vendored the `knowledge-map/` bundle, generated the initial `KNOWLEDGE_MAP.md`, wired README discovery, and reconciled the `MEMORY_ARCHITECTURE.md` §5 "not adopted" note to "adopted". Active frontier: `.2`.
 - `2026-06-05`: Created task tree to adopt the Knowledge Map retrieval layer (the composed layer deferred during `MEMORY-ARCHITECTURE-DOC`), after the user directed adopting `KNOWLEDGE_MAP_ARCHITECTURE.md` here.

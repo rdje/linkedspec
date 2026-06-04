@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
-# .githooks/pre-commit — local memory-architecture gate (layer E3 of MEMORY_ARCHITECTURE.md).
+# .githooks/pre-commit — local gates:
+#   - memory-architecture self-check (MEMORY_ARCHITECTURE.md §9 E3)
+#   - Knowledge Map gate            (KNOWLEDGE_MAP_ARCHITECTURE.md §6)
 # Activate once per clone: git config core.hooksPath .githooks
 set -euo pipefail
-exec "$(git rev-parse --show-toplevel)/scripts/check_memory_architecture.sh"
+ROOT="$(git rev-parse --show-toplevel)"
+
+# Memory-architecture gate.
+"$ROOT/scripts/check_memory_architecture.sh"
+
+# Knowledge Map gate: regenerate the derived map, stage it (so it is always in sync at zero
+# agent cost), then validate facts + sync. The regenerate-and-stage step makes drift
+# structurally impossible.
+"$ROOT/knowledge-map/scripts/gen_knowledge_map.sh" >/dev/null
+git add "$("$ROOT/knowledge-map/scripts/gen_knowledge_map.sh" --print-map-path)" 2>/dev/null || true
+"$ROOT/knowledge-map/scripts/check_knowledge_map.sh"

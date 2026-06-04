@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-05 — Wire KM gate (pre-commit + CI) + reconcile pointers + ADR 0005 (KNOWLEDGE-MAP-DOC.3)
+
+- Enforcement (KNOWLEDGE_MAP_ARCHITECTURE §6, mirroring MEMORY_ARCHITECTURE §9):
+  - `.githooks/pre-commit` rewritten from the `exec`-based single gate to a **dual gate** — it runs the memory-architecture self-check, then regenerates `KNOWLEDGE_MAP.md`, `git add`s it, and runs `check_knowledge_map.sh`. (The old `exec` would have prevented any appended gate from ever running.)
+  - `tools/run_ci_local.sh` now runs the KM check right after the memory-arch self-check, with `require_tracked_file` for `KNOWLEDGE_MAP.md` and both KM scripts.
+- Discovery reconciled: `AGENTS.md` gained a "check `KNOWLEDGE_MAP.md` before re-deriving" resume step + a "write a fact card" working rule, and its Enforcement section now states the KM **is adopted** (reversing the earlier "not adopted" line); `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` each gained a KM line.
+- `docs/decisions/0005-knowledge-map-retrieval-layer.md` added (+ INDEX row): records the adoption and the honest boundary — KM eliminates archaeology for durable structural/causal facts, not first-time measurement of changing runtime state (whose conclusion then becomes a card).
+- **Proved the gate bites:** an invalid card (missing `date`) → `check_knowledge_map.sh` exit 1; a hand-tampered `KNOWLEDGE_MAP.md` → exit 1; regenerate → exit 0; clean tree → exit 0. `bash -n` clean on the rewritten hook + `run_ci_local.sh`.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds (full gate run in `.4`).
+
 ## 2026-06-05 — Seed 6 durable-fact cards under docs/knowledge (KNOWLEDGE-MAP-DOC.2)
 
 - Authored 6 Knowledge Map fact cards (signposts pointing at canonical homes, not copies), each with query-shaped `answers:` + `evidence`/`reverify`. Every fact was **verified true against the repo before** writing its `reverify`:

@@ -72,6 +72,9 @@ require_command prove
 log "running memory-architecture self-check (MEMORY_ARCHITECTURE.md §9 — E2/E4 backstop)"
 bash "$REPO_ROOT/scripts/check_memory_architecture.sh"
 
+log "running Knowledge Map check (KNOWLEDGE_MAP_ARCHITECTURE.md §6 — derive-and-diff)"
+bash "$REPO_ROOT/knowledge-map/scripts/check_knowledge_map.sh"
+
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
 require_tracked_file tools/run_ci_local.sh
@@ -79,6 +82,9 @@ require_tracked_file perl/LinkedSpec.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
 require_tracked_file MEMORY_ARCHITECTURE.md
+require_tracked_file KNOWLEDGE_MAP.md
+require_tracked_file knowledge-map/scripts/gen_knowledge_map.sh
+require_tracked_file knowledge-map/scripts/check_knowledge_map.sh
 for path in specs plugin conf tablescript ebnf perl t; do
  require_tracked_tree "$path"
 done
