@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-06-04 (DOC-CODEBASE-ALIGNMENT.2): Refreshed `ARCHITECTURE_STATE.md` — removed the stale claim that deleted `ActionRewriter.pm` is a live owner-dispatch participant (it was deleted in `PHASE1-PARSER-CORE-ISOLATION.2`; compat entrypoint is now `RuleIR::EmitContext::rewrite_action_code_for_compat`). perl -c clean; 1004 PASS baseline holds. PNT frontier: `.3` (USER_GUIDE + book scrub), then `.4` (ROADMAP/ROADMAP_V2 reconcile).
 - 2026-06-04 (DOC-CODEBASE-ALIGNMENT.1): Bootstrap drift audit. New active tree `DOC-CODEBASE-ALIGNMENT` owns re-aligning live docs + index with codebase reality (deleted `ActionRewriter.pm`; stale index). Leaf `.1` done: reconciled `docs/TASK_TREE.md` (PHASE7 → Completed; added PHASE1-PARSER-CORE-ISOLATION / METHOD-LIKE-DSL-MIGRATION / BOOK-DOCUMENTATION-SYNC) and fixed PHASE3/4/5 metadata Status `active`→`completed`. 1004 PASS. PNT frontier: `.2` (refresh `ARCHITECTURE_STATE.md` — remove deleted-`ActionRewriter.pm` live references). Remaining leaves: `.3` USER_GUIDE/book scrub, `.4` ROADMAP/ROADMAP_V2 reconcile.
 - 2026-05-17 (PHASE7-SELF-HOSTED-SPEC.1): .spec language surface inventory complete. 37 syntax categories, 4 follow-on leaves. PNT frontier: .2 (structural grammar).
 - 2026-05-17 (PLUGIN-MODERNIZATION.5): PPlugin/PluginBridge cannot retire yet — 36 .plg files, ~1,200+ actions remain. Documented 5-step path. PLUGIN-MODERNIZATION tree COMPLETE. PNT idle (no active trees).

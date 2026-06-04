@@ -53,11 +53,11 @@ and make `docs/TASK_TREE.md` an accurate index of the real task-file statuses.
   Commit: `pending (leaf ID in commit subject)`
 
 - ID: `DOC-CODEBASE-ALIGNMENT.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Refresh ARCHITECTURE_STATE.md: remove the two stale references that present deleted ActionRewriter.pm as a live owner-dispatch participant (lines ~162 and ~224), note that Phase 1 deleted it, and update the Last refreshed date.`
   Acceptance: `ARCHITECTURE_STATE.md contains no statement implying ActionRewriter.pm currently exists; the snapshot date reflects this refresh; perl -c perl/LinkedSpec.pm still clean.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-04: Last refreshed → 2026-06-04 with an explicit refresh note. The line-163 bullet now states the ActionRewriter module was deleted in Phase 1 and that rewrite_action_code_for_compat lives solely in RuleIR::EmitContext. The owner-dispatch "shares that seam" list (line ~225) no longer names ActionRewriter.pm as a live participant (parenthetical notes it was deleted). All three remaining mentions are framed as removed/historical. perl -c perl/LinkedSpec.pm OK. No code changed → phase0 1004 PASS baseline from .1 holds.`
+  Commit: `pending (leaf ID in commit subject)`
 
 - ID: `DOC-CODEBASE-ALIGNMENT.3`
   Status: `pending`
@@ -78,7 +78,7 @@ and make `docs/TASK_TREE.md` an accurate index of the real task-file statuses.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `DOC-CODEBASE-ALIGNMENT.1` | `done` | Index reconciled; PHASE3/4/5 metadata sub-drift also corrected. 1004 PASS baseline. |
-| 2 | `DOC-CODEBASE-ALIGNMENT.2` | `pending` | ARCHITECTURE_STATE.md refresh is the explicitly bootstrap-authorized fix. |
+| 2 | `DOC-CODEBASE-ALIGNMENT.2` | `done` | ARCHITECTURE_STATE.md refreshed; ActionRewriter now framed as removed. perl -c clean. |
 | 3 | `DOC-CODEBASE-ALIGNMENT.3` | `pending` | User-facing docs are the project's only window for the user; remove the deleted-module claim. |
 | 4 | `DOC-CODEBASE-ALIGNMENT.4` | `pending` | Lock the two roadmap docs together with the codebase and each other. |
 
@@ -100,14 +100,17 @@ and make `docs/TASK_TREE.md` an accurate index of the real task-file statuses.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-04` | `DOC-CODEBASE-ALIGNMENT.1` | Index/file cross-check (13 trees, status match); `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/phase0_regression.t`; `prove -Iperl t/phase0_regression.t`. | Pass — index reconciled, PHASE3/4/5 metadata fixed, phase0 Files=1 Tests=1004 PASS (no code changed). Frontier → `.2`. |
+| `2026-06-04` | `DOC-CODEBASE-ALIGNMENT.2` | `grep ActionRewriter ARCHITECTURE_STATE.md` (all 3 mentions framed as removed/historical); `perl -c perl/LinkedSpec.pm`. | Pass — ARCHITECTURE_STATE.md refreshed; no live-module claim remains; perl -c OK; phase0 1004 PASS baseline holds (no code changed). Frontier → `.3`. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `DOC-CODEBASE-ALIGNMENT.1` | `Reconcile task-tree index with task-file statuses (DOC-CODEBASE-ALIGNMENT.1)` | Hash backfilled later if useful. |
+| `DOC-CODEBASE-ALIGNMENT.1` | `Reconcile task-tree index with task-file statuses (DOC-CODEBASE-ALIGNMENT.1)` | Hash `5277df9`. |
+| `DOC-CODEBASE-ALIGNMENT.2` | `Refresh ARCHITECTURE_STATE.md: ActionRewriter.pm removed (DOC-CODEBASE-ALIGNMENT.2)` | Hash backfilled later if useful. |
 
 ## Changelog
 
+- `2026-06-04`: Completed `DOC-CODEBASE-ALIGNMENT.2` — refreshed `ARCHITECTURE_STATE.md` so the deleted `ActionRewriter.pm` is no longer presented as a live owner-dispatch participant (updated Last-refreshed date + refresh note, rewrote the line-163 bullet, and dropped it from the "shares that seam" list). Active frontier: `.3`.
 - `2026-06-04`: Completed `DOC-CODEBASE-ALIGNMENT.1` — reconciled `docs/TASK_TREE.md` (registered this active tree, moved PHASE7 to Completed, added PHASE1-PARSER-CORE-ISOLATION / METHOD-LIKE-DSL-MIGRATION / BOOK-DOCUMENTATION-SYNC), and corrected the PHASE3/4/5 metadata `Status` sub-drift (`active` → `completed`). 1004 PASS baseline. Active frontier: `.2`.
 - `2026-06-04`: Created task tree from template during session bootstrap after detecting deleted-`ActionRewriter.pm` references in live docs and a stale `docs/TASK_TREE.md` index.

@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Refresh ARCHITECTURE_STATE.md: ActionRewriter.pm removed (DOC-CODEBASE-ALIGNMENT.2)
+
+- `ARCHITECTURE_STATE.md` still described the deleted `perl/LinkedSpec/ActionRewriter.pm` module as a live owner-dispatch participant. That module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`, commit `4f8e0b6`); `perl/` has zero references to it.
+- Updated the Status block (`Last refreshed` → 2026-06-04 plus an explicit refresh note), rewrote the bullet that called the `ActionRewriter` compatibility surface "thinner now" to state it was deleted entirely, and removed `ActionRewriter.pm` from the "modules that now share the OwnerDispatch seam" list. The focused helper-rewrite compatibility entrypoint now lives solely in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`, reachable via `LinkedSpec::call_spec_handler_subst(...)`.
+- All three remaining `ActionRewriter` mentions in the file are now framed as removed/historical.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline from DOC-CODEBASE-ALIGNMENT.1 still holds.
+
 ## 2026-06-04 — Reconcile task-tree index with task-file statuses (DOC-CODEBASE-ALIGNMENT.1)
 
 - Session-bootstrap drift audit found `docs/TASK_TREE.md` out of sync with the actual `docs/tasks/*.md` files. New tree `DOC-CODEBASE-ALIGNMENT` created to own the alignment work.
