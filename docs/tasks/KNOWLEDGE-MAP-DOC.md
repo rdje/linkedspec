@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `KNOWLEDGE-MAP-DOC`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Durable memory architecture (cross-project standard)`
 - Created: `2026-06-05`
 - Last updated: `2026-06-05`
-- Active frontier: `KNOWLEDGE-MAP-DOC.1`
+- Active frontier: `none` (tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -48,7 +48,7 @@ reconciles the "not adopted" notes.
 ## Task Tree
 
 - ID: `KNOWLEDGE-MAP-DOC`
-  Status: `active`
+  Status: `done`
   Goal: `Adopt the Knowledge Map retrieval layer (additive to MEMORY_ARCHITECTURE.md).`
   Children: `KNOWLEDGE-MAP-DOC.1`, `KNOWLEDGE-MAP-DOC.2`, `KNOWLEDGE-MAP-DOC.3`, `KNOWLEDGE-MAP-DOC.4`
 
@@ -77,8 +77,8 @@ reconciles the "not adopted" notes.
   Status: `pending`
   Goal: `Verify end-to-end: run the full local gate (bash tools/run_ci_local.sh — memory-arch self-check, KM check, perl -c, phase0), confirm green; sync the live docs; close the tree.`
   Acceptance: `tools/run_ci_local.sh exits 0 with both the memory-arch and KM checks passing and phase0 PASS; live docs synced; tree marked done and moved to Completed in docs/TASK_TREE.md.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-05: bash tools/run_ci_local.sh → exit 0, in order: memory-architecture self-check (all invariants hold) → Knowledge Map check (facts valid, ids unique, map in sync) → syntax checks (perl -c OK) → phase0 regression Files=1, Tests=1004, Result: PASS → "[ci] local CI gate passed". Both the durable-memory and Knowledge Map layers are now live inside the canonical gate. Live docs synced; docs/TASK_TREE.md updated (tree moved Active→Completed). KNOWLEDGE-MAP-DOC tree COMPLETE (4/4 leaves).`
+  Commit: `pending (leaf ID in commit subject)`
 
 ## Current Frontier
 
@@ -87,7 +87,9 @@ reconciles the "not adopted" notes.
 | 1 | `KNOWLEDGE-MAP-DOC.1` | `done` | Bundle vendored, map generated (in sync), README + §5 reconciled. perl -c OK. |
 | 2 | `KNOWLEDGE-MAP-DOC.2` | `done` | 6 verified fact cards seeded; map regenerated (6 facts/29 keys); check OK. |
 | 3 | `KNOWLEDGE-MAP-DOC.3` | `done` | KM gate wired (pre-commit + run_ci_local); pointers reconciled; 0005 added; gate proven to bite. |
-| 4 | `KNOWLEDGE-MAP-DOC.4` | `pending` | Final end-to-end verification + live-doc sync + close. |
+| 4 | `KNOWLEDGE-MAP-DOC.4` | `done` | Full local gate green (memory-arch + KM + phase0 1004 PASS); tree complete. |
+
+All leaves complete — tree `done`. No leaves remain in the frontier.
 
 ## Decisions
 
@@ -117,6 +119,7 @@ reconciles the "not adopted" notes.
 | `2026-06-05` | `KNOWLEDGE-MAP-DOC.1` | `diff -r` bundle vs pgen source (identical); `knowledge-map/install.sh` (map generated, check OK); README/§5 review; `perl -c perl/LinkedSpec.pm`. | Pass — bundle vendored, initial map in sync, discovery + §5 reconciled; no code change; phase0 1004 PASS baseline holds. Frontier → `.2`. |
 | `2026-06-05` | `KNOWLEDGE-MAP-DOC.2` | Verified all 6 facts against the repo; `gen_knowledge_map.sh` (6 facts/29 keys); `check_knowledge_map.sh` OK; `perl -c perl/LinkedSpec.pm`. | Pass — 6 valid, evidence-backed fact cards seeded; map in sync; no code change; phase0 1004 PASS baseline holds. Frontier → `.3`. |
 | `2026-06-05` | `KNOWLEDGE-MAP-DOC.3` | KM bite proofs (invalid card → exit 1; tampered map → exit 1; regen → exit 0; clean → exit 0); `bash -n` pre-commit + run_ci_local; pointer/0005 review; `perl -c`. | Pass — dual-gate pre-commit + run_ci_local KM check wired; pointers reconciled; ADR 0005 added; gate bites; no code change; phase0 1004 PASS baseline holds. Frontier → `.4`. |
+| `2026-06-05` | `KNOWLEDGE-MAP-DOC.4` | `bash tools/run_ci_local.sh` → exit 0 (memory-arch → KM check → perl -c → phase0 Files=1 Tests=1004 PASS → "local CI gate passed"). | Pass — both memory + KM layers live in the canonical gate; baseline green. Tree COMPLETE (4 leaves); moved Active→Completed in docs/TASK_TREE.md. |
 
 ## Commit Log
 
@@ -124,10 +127,12 @@ reconciles the "not adopted" notes.
 | --- | --- | --- |
 | `KNOWLEDGE-MAP-DOC.1` | `Vendor knowledge-map bundle + generate initial map (KNOWLEDGE-MAP-DOC.1)` | Hash `4401355`. |
 | `KNOWLEDGE-MAP-DOC.2` | `Seed 6 durable-fact cards under docs/knowledge (KNOWLEDGE-MAP-DOC.2)` | Hash `4605ec9`. |
-| `KNOWLEDGE-MAP-DOC.3` | `Wire KM gate (pre-commit + CI) + reconcile pointers + ADR 0005 (KNOWLEDGE-MAP-DOC.3)` | First commit through the now-KM-gated pre-commit. Hash backfilled later. |
+| `KNOWLEDGE-MAP-DOC.3` | `Wire KM gate (pre-commit + CI) + reconcile pointers + ADR 0005 (KNOWLEDGE-MAP-DOC.3)` | First commit through the now-KM-gated pre-commit. Hash `4f4b5d7`. |
+| `KNOWLEDGE-MAP-DOC.4` | `Verify Knowledge Map end-to-end (full local gate green) + close tree (KNOWLEDGE-MAP-DOC.4)` | Hash backfilled later if useful. |
 
 ## Changelog
 
+- `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.4` — full local gate green (memory-arch + KM + phase0 1004 PASS); synced live docs. **KNOWLEDGE-MAP-DOC tree COMPLETE (4 leaves):** the question-keyed Knowledge Map retrieval layer is adopted, seeded (6 cards), and gated. No active trees remain.
 - `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.3` — wired the KM gate into `.githooks/pre-commit` (dual gate: memory-arch + KM regenerate/stage/check) and `tools/run_ci_local.sh`; reconciled the bootstrap pointers (AGENTS + 3 mirrors) to route to the KM and reverse the "not adopted" note; added decision record 0005 (KM adoption + archaeology boundary); proved the KM gate bites. Active frontier: `.4`.
 - `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.2` — seeded 6 verified durable-fact cards (ActionRewriter-removed, thin-façade, phase0 invariant, hosted-CI-disabled, spec.spec self-hosting, AND++LX hang); regenerated the map (6 facts / 29 question keys); check passes. Active frontier: `.3`.
 - `2026-06-05`: Completed `KNOWLEDGE-MAP-DOC.1` — vendored the `knowledge-map/` bundle, generated the initial `KNOWLEDGE_MAP.md`, wired README discovery, and reconciled the `MEMORY_ARCHITECTURE.md` §5 "not adopted" note to "adopted". Active frontier: `.2`.

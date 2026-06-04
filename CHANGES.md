@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-05 — Verify Knowledge Map end-to-end + close tree (KNOWLEDGE-MAP-DOC.4)
+
+- Ran the full canonical gate `bash tools/run_ci_local.sh` → **exit 0**, in order: memory-architecture self-check (all invariants hold) → **Knowledge Map check** (facts valid, ids unique, map in sync) → syntax checks (`perl -c` OK) → phase0 regression **`Files=1, Tests=1004, Result: PASS`** → `[ci] local CI gate passed`.
+- Confirms both the durable-memory layers and the Knowledge Map retrieval layer are live inside the canonical gate, with the regression baseline green.
+- Synced the owning task tree + live docs; moved `KNOWLEDGE-MAP-DOC` from Active to Completed in `docs/TASK_TREE.md` (no active trees remain).
+- **KNOWLEDGE-MAP-DOC tree COMPLETE (4 leaves).** LinkedSpec now has the full memory + retrieval stack: layers A–D (`MEMORY_ARCHITECTURE.md`) plus the question-keyed Knowledge Map (`KNOWLEDGE_MAP.md` over `docs/knowledge/` cards), all enforced by the pre-commit + local CI gates.
+
 ## 2026-06-05 — Wire KM gate (pre-commit + CI) + reconcile pointers + ADR 0005 (KNOWLEDGE-MAP-DOC.3)
 
 - Enforcement (KNOWLEDGE_MAP_ARCHITECTURE §6, mirroring MEMORY_ARCHITECTURE §9):

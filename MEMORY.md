@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `7355f08` — "Verify memory-architecture end-to-end (full local gate green) + close tree (MEMORY-ARCHITECTURE-DOC.5)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
-- active_work_unit: `KNOWLEDGE-MAP-DOC` → frontier leaf: `KNOWLEDGE-MAP-DOC.4` (.1–.3 done — bundle vendored, 6 cards, KM gate wired into pre-commit + run_ci_local, pointers reconciled, ADR 0005 added, gate proven to bite)
-- next_action: implement `KNOWLEDGE-MAP-DOC.4` — run the full local gate (`bash tools/run_ci_local.sh`: memory-arch self-check → KM check → perl -c → phase0), confirm green, sync live docs, close the tree.
-- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check first; the KM check joins the gate in `.3`).
+- latest_commit: `4f4b5d7` — "Wire KM gate (pre-commit + CI) + reconcile pointers + ADR 0005 (KNOWLEDGE-MAP-DOC.3)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
+- active_work_unit: none — `KNOWLEDGE-MAP-DOC` complete (4/4 leaves). No active task trees; PNT is idle. (Proposed-only: `PLUGIN-ACTION-MIGRATION`, not yet activated.)
+- next_action: none pending — await direction (e.g. activate `PLUGIN-ACTION-MIGRATION`) or a new task. Durable memory (layers A–D) + the Knowledge Map retrieval layer are both adopted and gated; keep committing per `COMMIT.md` so the pre-commit + local CI gates stay green, and write a `docs/knowledge/` card whenever you establish a durable fact or catch archaeology.
+- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check + the Knowledge Map check before perl -c + phase0).
 - in_flight_uncommitted: none after this commit.
 - blockers: none.
