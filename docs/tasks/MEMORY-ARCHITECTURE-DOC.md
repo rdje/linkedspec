@@ -66,11 +66,11 @@ reference implementation in the sibling `specforge` project.
   Commit: `pending (leaf ID in commit subject)`
 
 - ID: `MEMORY-ARCHITECTURE-DOC.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Demote MEMORY.md (currently 5202 lines, cumulative) to the bounded overwrite-only resume-pointer template (≤ ~50–60 lines), with history preserved in git. Reconcile COMMIT.md, which currently mandates MEMORY.md as "cumulative and not reset", to the new resume-pointer role.`
   Acceptance: `MEMORY.md matches the §6 resume-pointer template and is ≤ the line cap; COMMIT.md describes MEMORY.md as the overwrite-only bounded resume pointer (history in git + task-trees + decisions). No prior MEMORY.md content lost (it remains in git history).`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-04: MEMORY.md rewritten to the §6 resume-pointer template — now 25 lines (was 5204; cap 60). Contains How-to-resume + an overwrite-only Current-state block (latest_commit, active_work_unit→frontier leaf, next_action, regression baseline, in_flight, blockers). git show HEAD:MEMORY.md confirms the prior 5204-line history is intact in git (layer D) — nothing lost. COMMIT.md reconciled: the "### 4) MEMORY.md" section now defines it as the layer-A resume pointer (overwrite-only, capped, not cumulative), and step 2 of the workflow now says overwrite the MEMORY.md current-state block (vs append) and route durable facts to docs/decisions/. README ramp-up item 9 reframed to match. No code change — perl -c perl/LinkedSpec.pm OK; phase0 1004 PASS baseline holds.`
+  Commit: `pending (leaf ID in commit subject)`
 
 - ID: `MEMORY-ARCHITECTURE-DOC.4`
   Status: `pending`
@@ -92,7 +92,7 @@ reference implementation in the sibling `specforge` project.
 | --- | --- | --- | --- |
 | 1 | `MEMORY-ARCHITECTURE-DOC.1` | `done` | Standard added at root + README/SESSION_BOOTSTRAP routed to it. perl -c OK. |
 | 2 | `MEMORY-ARCHITECTURE-DOC.2` | `done` | docs/decisions/ + INDEX + 4 seed records created. perl -c OK. |
-| 3 | `MEMORY-ARCHITECTURE-DOC.3` | `pending` | MEMORY.md must be ≤ cap before the pre-commit self-check can pass. |
+| 3 | `MEMORY-ARCHITECTURE-DOC.3` | `done` | MEMORY.md demoted 5204→25 lines (≤cap); COMMIT.md reconciled. perl -c OK. |
 | 4 | `MEMORY-ARCHITECTURE-DOC.4` | `pending` | Enforcement is installed only once the layers it checks are all in place. |
 | 5 | `MEMORY-ARCHITECTURE-DOC.5` | `pending` | Final end-to-end verification + live-doc sync + close. |
 
@@ -117,16 +117,19 @@ reference implementation in the sibling `specforge` project.
 | --- | --- | --- | --- |
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.1` | `diff -q` vs source (byte-identical 419 lines); README/SESSION_BOOTSTRAP pointer review; `perl -c perl/LinkedSpec.pm`. | Pass — standard at root + discoverable; no code change; phase0 1004 PASS baseline holds. Frontier → `.2`. |
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.2` | `ls docs/decisions/` + INDEX↔files cross-check (4/4 match); `perl -c perl/LinkedSpec.pm`. | Pass — layer C created with 4 seed ADR records; no code change; phase0 1004 PASS baseline holds. Frontier → `.3`. |
+| `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.3` | `wc -l MEMORY.md` (25 ≤ cap 60); `git show HEAD:MEMORY.md \| wc -l` (5204 preserved); COMMIT.md/README review; `perl -c perl/LinkedSpec.pm`. | Pass — MEMORY.md demoted to bounded resume pointer, COMMIT.md reconciled, history intact in git; no code change; phase0 1004 PASS baseline holds. Frontier → `.4`. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `MEMORY-ARCHITECTURE-DOC.1` | `Add MEMORY_ARCHITECTURE.md standard + README/bootstrap pointers (MEMORY-ARCHITECTURE-DOC.1)` | Hash `119665a`. |
-| `MEMORY-ARCHITECTURE-DOC.2` | `Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)` | Hash backfilled later if useful. |
+| `MEMORY-ARCHITECTURE-DOC.2` | `Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)` | Hash `39825b6`. |
+| `MEMORY-ARCHITECTURE-DOC.3` | `Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)` | Hash backfilled later if useful. |
 
 ## Changelog
 
+- `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.3` — demoted `MEMORY.md` 5204→25 lines (bounded layer-A resume pointer; history preserved in git) and reconciled `COMMIT.md` + the README ramp-up entry from the old "cumulative log" model to the overwrite-only resume-pointer model. Active frontier: `.4`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.2` — created `docs/decisions/` (layer C) with `INDEX.md` and 4 dated ADR records (0001 doctrine, 0002 ActionIR-ready invariant, 0003 raw-Perl-free policy, 0004 hosted-CI-disabled). Migrated the doctrine out of harness-home-dir memory into the tracked repo. Active frontier: `.3`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.1` — added `MEMORY_ARCHITECTURE.md` at the repo root (verbatim project-agnostic standard; Knowledge Map §5 marked not-adopted) and wired the doc-map pointers in `README.md` + `SESSION_BOOTSTRAP.md`. Active frontier: `.2`.
 - `2026-06-04`: Created task tree to adopt the durable agent-memory architecture standard in linkedspec, mirroring the sibling specforge adoption (5 leaves), after the user directed implementing "everything the standard recommends" here.

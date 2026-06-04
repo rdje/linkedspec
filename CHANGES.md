@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)
+
+- `MEMORY.md` was a 5204-line cumulative log (memory anti-pattern #1). Rewrote it to the `MEMORY_ARCHITECTURE.md` §6 resume-pointer template — now **25 lines**: How-to-resume + an overwrite-only Current-state block (latest commit, active task-tree frontier leaf, single next action, regression baseline, in-flight, blockers).
+- The prior 5204 lines are **not deleted** — `git show HEAD:MEMORY.md` confirms they remain in git history (layer D). We simply stop carrying them forward.
+- Reconciled the doctrine conflict in `COMMIT.md`: the old rule "`MEMORY.md` ... cumulative and not reset" is replaced. The `### 4) MEMORY.md` section now defines it as the layer-A resume pointer (overwrite-only, ≤ ~60-line cap enforced by `scripts/check_memory_architecture.sh`), and workflow step 2 now says **overwrite** the MEMORY.md current-state block (not append) and route durable cross-cutting facts to `docs/decisions/`.
+- `README.md` ramp-up item 9 reframed to match (bounded resume pointer, not cumulative state).
+- Validation (no code changed): `wc -l MEMORY.md` = 25 (≤ cap 60); `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds.
+
 ## 2026-06-04 — Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)
 
 - Created `docs/decisions/` (memory layer C) with `INDEX.md` and seeded it with four dated ADR-style records (`Context → Decision → Consequences → Links`), each pointing at the authoritative tracked docs rather than duplicating them:

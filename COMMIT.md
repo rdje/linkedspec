@@ -31,10 +31,10 @@ This document defines the standard commit workflow for this repository so any ne
 - **Important:** this file is cumulative and not reset.
 
 ### 4) `MEMORY.md`
-- **Type:** persistent, git-tracked continuity log.
-- **Purpose:** preserve interruption-safe continuation context after session loss, crash, or handoff.
-- **Lifecycle:** update for each accepted implementation slice so the latest execution state and decisions are recoverable.
-- **Important:** this file is cumulative and not reset.
+- **Type:** git-tracked **resume pointer** (memory layer A of `MEMORY_ARCHITECTURE.md`).
+- **Purpose:** point a resuming agent — in any model or harness — at *now*: latest commit, the active task-tree frontier leaf, the single next action, and any in-flight uncommitted work.
+- **Lifecycle:** **overwrite** the current-state block each accepted slice; do **not** append. Keep the file within its size cap (≤ ~60 lines), which `scripts/check_memory_architecture.sh` enforces.
+- **Important:** this file is the bounded resume pointer, **not** a cumulative log. Its history lives in git (layer D); per-unit detail lives in the task-trees (layer B); durable cross-cutting facts live in `docs/decisions/` (layer C). If a `MEMORY.md` edit would exceed the cap, that content belongs in B or C instead.
 
 ### 5) `LIVE_ACHIEVEMENT_STATUS.md`
 - **Type:** persistent, git-tracked live batch status.
@@ -81,8 +81,8 @@ This document defines the standard commit workflow for this repository so any ne
    - Add concise but precise entries to:
      - `CHANGES.md`
      - `DEVELOPMENT_NOTES.md`
-     - `MEMORY.md`
      - `LIVE_ACHIEVEMENT_STATUS.md`
+   - **Overwrite** the current-state block in `MEMORY.md` (the bounded resume pointer, layer A — do not append; keep within the size cap). If the slice established a durable cross-cutting fact, add or refresh a record under `docs/decisions/` (layer C).
    - If the completed activity belongs to a task-tree leaf, update the owning `docs/tasks/*.md` file (node status, verification log, commit log, blockers, decisions, and changelog).
    - Include validation commands/results.
    - If the slice changes the public understanding of LinkedSpec, update `docs/linkedspec-book/` too.

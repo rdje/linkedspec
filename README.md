@@ -49,7 +49,7 @@ Read these in order for fastest onboarding:
 8. `CHANGES.md`
    - Technical change history, validation records, and migration slices.
 9. `MEMORY.md`
-   - Interruption-safe continuation context and recent execution state.
+   - Bounded, overwrite-only **resume pointer** (memory layer A): current commit, the active task-tree frontier leaf, the single next action, and any in-flight uncommitted work. History lives in git, not here.
 10. `LIVE_ACHIEVEMENT_STATUS.md`
    - Current batch/workflow status and latest completed slice direction.
 11. `COMMIT.md`
