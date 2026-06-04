@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Reconcile task-tree index with task-file statuses (DOC-CODEBASE-ALIGNMENT.1)
+
+- Session-bootstrap drift audit found `docs/TASK_TREE.md` out of sync with the actual `docs/tasks/*.md` files. New tree `DOC-CODEBASE-ALIGNMENT` created to own the alignment work.
+- `docs/TASK_TREE.md`: Active Task Trees now lists only `DOC-CODEBASE-ALIGNMENT` (frontier `.1`); the stale `PHASE7-SELF-HOSTED-SPEC` "active" row (its tree file is `done`) was removed. Completed Task Trees gained four trees that were absent from the index entirely or mislabeled: `PHASE7-SELF-HOSTED-SPEC`, `PHASE1-PARSER-CORE-ISOLATION`, `METHOD-LIKE-DSL-MIGRATION`, `BOOK-DOCUMENTATION-SYNC`.
+- Corrected a sub-drift: `PHASE3-EXECUTION-SEMANTICS`, `PHASE4-CAPTURE-MARK-API`, and `PHASE5-RUNTIME-DIAGNOSTICS` carried `Status: active` in their metadata while their top task-tree nodes already read `completed`; flipped the metadata to `completed` so each file is internally consistent.
+- Cross-check: all 13 task-tree files now appear in the index under a table matching their own `Status` field; the only index entry without a file is the intentionally `proposed` `PLUGIN-ACTION-MIGRATION`.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; `perl -c -Iperl t/phase0_regression.t` OK; `prove -Iperl t/phase0_regression.t` → Files=1, Tests=1004, Result: PASS.
+
 ## 2026-05-17 — Survey .spec language surface (PHASE7-SELF-HOSTED-SPEC.1)
 
 - Completed comprehensive .spec language surface inventory. 37 syntax categories across 9 sections: rule label forms, rule modes (11 variants), body elements (12 recognized patterns), lifecycle markers (7), split/capture markers (4), action/helper DSL (~40+ helpers), block structure, and authoring styles.

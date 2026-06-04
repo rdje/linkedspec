@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE4-CAPTURE-MARK-API`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Phase 4`
 - Created: `2026-05-16`
 - Last updated: `2026-05-17`

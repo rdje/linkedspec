@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE5-RUNTIME-DIAGNOSTICS`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Phase 5`
 - Created: `2026-05-16`
 - Last updated: `2026-05-17`
