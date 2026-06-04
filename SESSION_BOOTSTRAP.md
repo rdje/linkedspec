@@ -2,10 +2,12 @@
 
 Read `README.md`, then read and thoroughly understand:
 
+- `MEMORY_ARCHITECTURE.md` — the durable, harness-agnostic memory system (mandatory; mechanically enforced). It defines the four memory layers and the write/read paths; resume from `MEMORY.md` (the bounded layer-A resume pointer).
 - `COMMIT.md` — commit workflow and hygiene conventions.
 - `ROADMAP_V2.md` — current active lanes and tracker status.
 - `docs/TASK_TREE.md` — active task trees, current frontier, and PNT selection rules.
 - Active task files listed in `docs/TASK_TREE.md` — the detailed task breakdown and current executable leaf.
+- Relevant records under `docs/decisions/` — durable cross-cutting facts/decisions (memory layer C).
 
 After reading the above, thoroughly, meticulously and precisely analyze `LinkedSpec.pm` and its import tree.
 

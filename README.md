@@ -11,8 +11,12 @@ This `README.md` is the **single entry point** to the project.
   - `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, and related files remain valuable repo-native working references.
 - task-tree tracking
   - `docs/TASK_TREE.md`, `docs/TASK_TREE_README.md`, and `docs/tasks/*.md` are the task-tree workflow: recursive decomposition, current frontier, PNT selection, blockers, decisions, and completion evidence for top-level tasks.
+- durable memory architecture
+  - `MEMORY_ARCHITECTURE.md` is the harness-agnostic standard for how agent memory survives session loss, crash, machine loss, and a switch of AI model/harness. It defines four layers — A: the bounded `MEMORY.md` resume pointer; B: the task-trees above; C: `docs/decisions/` decision records; D: git history — plus mechanical enforcement (`scripts/check_memory_architecture.sh`, `.githooks/`, and the local CI gate). Any agent, in any harness, starts from the tool-neutral bootstrap pointers (`AGENTS.md` and its mirrors `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md`), which route here.
+  - `docs/decisions/` (layer C) holds durable cross-cutting facts/decisions as dated ADR-style records, indexed by `docs/decisions/INDEX.md`.
 - continuity docs
-  - `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `COMMIT.md` are internal execution/continuity docs.
+  - `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `COMMIT.md` are internal execution/continuity docs.
+  - `MEMORY.md` is the bounded, overwrite-only **resume pointer** (memory layer A): current state and the single next action only — its history lives in git and the task-trees, not in the file.
   - They exist for crash recovery, session handoff, and implementation continuity, not as the main public narrative.
 
 ## Project Objective
@@ -25,6 +29,7 @@ Read these in order for fastest onboarding:
 
 1. `README.md` (this file)
    - Project objective, navigation, and key paths.
+   - Then read `MEMORY_ARCHITECTURE.md` — the durable memory system (how continuity survives session/model/harness loss; **mandatory and mechanically enforced**) — and resume from `MEMORY.md`.
 2. `docs/linkedspec-book/`
    - Public-facing book for LinkedSpec.
    - Start here when you want the project explained as a coherent system rather than as a working repo.
@@ -76,6 +81,7 @@ Top-level directories and files:
 
 Top-level project docs:
 - `README.md`
+- `MEMORY_ARCHITECTURE.md`
 - `docs/linkedspec-book/`
 - `ROADMAP.md`
 - `USER_GUIDE.md`
@@ -85,6 +91,8 @@ Top-level project docs:
 - `MEMORY.md`
 - `LIVE_ACHIEVEMENT_STATUS.md`
 - `COMMIT.md`
+- `docs/decisions/` (durable decision records, layer C)
+- `AGENTS.md` + mirrors (`CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`) — tool-neutral agent bootstrap pointers
 
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.

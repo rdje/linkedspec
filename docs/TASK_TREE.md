@@ -21,10 +21,9 @@ evidence for one top-level task.
 
 ## Active Task Trees
 
-_None. All roadmap phases (0–7), the Backbone refactor track, plugin modernization, the method-like DSL migration track, and the latest doc/codebase alignment tree are complete. PNT is idle until a proposed tree is activated._
-
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `MEMORY-ARCHITECTURE-DOC` | `active` | `Durable memory architecture (cross-project standard)` | `MEMORY-ARCHITECTURE-DOC.1` | [docs/tasks/MEMORY-ARCHITECTURE-DOC.md](docs/tasks/MEMORY-ARCHITECTURE-DOC.md) |
 
 ## Proposed Task Trees
 

@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Add MEMORY_ARCHITECTURE.md standard + README/bootstrap pointers (MEMORY-ARCHITECTURE-DOC.1)
+
+- Adopting the portable, harness-agnostic durable-memory standard in this repo (new tree `MEMORY-ARCHITECTURE-DOC`, mirroring the sibling specforge adoption). This leaf lands layer-defining doc + discovery.
+- Added `MEMORY_ARCHITECTURE.md` at the repo root — copied byte-identical (419 lines) from the cross-project standard, with one added note marking the optional composed "Knowledge Map" layer (§5) as **not adopted** in this repo (avoids a dangling reference; matches the tree's non-goals).
+- `README.md`: new "durable memory architecture" + `docs/decisions/` bullet under Documentation Layers; `MEMORY.md` reframed as the bounded overwrite-only layer-A resume pointer; ramp-up map item 1 now routes to `MEMORY_ARCHITECTURE.md`; top-level docs path map lists `MEMORY_ARCHITECTURE.md`, `docs/decisions/`, and the `AGENTS.md` bootstrap mirrors.
+- `SESSION_BOOTSTRAP.md`: now reads `MEMORY_ARCHITECTURE.md` first and references `docs/decisions/`.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds.
+
 ## 2026-06-04 — Sync ROADMAP.md status tracker with ROADMAP_V2/reality (DOC-CODEBASE-ALIGNMENT.5)
 
 - `ROADMAP.md`'s live-status tracker table was frozen at an early state: Phase 1 and 1A `mostly done`, Phases 2–6 `in progress`, Phase 7 `not started`, Backbone refactor track + Item 3 `mostly done`, Method-like track + Plugin track `in progress` — all contradicting `ROADMAP_V2.md` and reality (every numbered phase `done`).
