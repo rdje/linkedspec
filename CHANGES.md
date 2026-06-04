@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Reconcile ROADMAP_V2.md Phase 1A row: ActionRewriter historical (DOC-CODEBASE-ALIGNMENT.4)
+
+- `ROADMAP_V2.md`'s Phase 1A row (line 59) still listed `ActionRewriter.pm` among the modules that "now share" the `LinkedSpec::OwnerDispatch` seam and said `ActionRewriter` "now also routes its `EmitContext` compatibility delegation directly" — presenting a module the same file's Phase 1 row (line 58) already records as deleted.
+- Two surgical edits reframe both mentions as historical ("the then-present thin shim `ActionRewriter.pm` was later deleted in Phase 1" / "before being deleted in Phase 1"), keeping the OwnerDispatch-consolidation narrative intact. The Phase 1 deletion record is untouched.
+- While starting this leaf, found that `ROADMAP.md`'s status-tracker table is frozen at an early state (Phases 1, 1A, 2, 3, 4, 5, 6, 7, and Backbone all stale vs `ROADMAP_V2.md`/reality). That broader drift was split into new leaf `DOC-CODEBASE-ALIGNMENT.5`.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds.
+
 ## 2026-06-04 — Scrub deleted-ActionRewriter live claims from USER_GUIDE.md (DOC-CODEBASE-ALIGNMENT.3)
 
 - `USER_GUIDE.md` (the user-facing working reference) still presented `ActionRewriter.pm` as a live module "retained as compatibility wrapper surface for direct legacy callers," with current `$@`-preservation and lazy-loading behavior. The module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`).
