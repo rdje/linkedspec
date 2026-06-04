@@ -59,11 +59,11 @@ reference implementation in the sibling `specforge` project.
   Commit: `pending (leaf ID in commit subject)`
 
 - ID: `MEMORY-ARCHITECTURE-DOC.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Create layer C: docs/decisions/ with INDEX.md and seed it by migrating durable cross-cutting facts out of harness-only/home-dir memory and buried MEMORY.md prose into dated ADR-style records (Context → Decision → Consequences). At minimum: the task-tree-ownership + commit doctrine (currently in ~/.claude harness memory), the all-target language_agnostic_ready_ratio==1.0000 corpus invariant, and the no-drift roadmap/codebase/book rule.`
   Acceptance: `docs/decisions/INDEX.md plus the seed records exist; each record is dated with Context/Decision/Consequences and linked from the relevant task-trees/docs.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-04: Created docs/decisions/ with INDEX.md (layer C) plus 4 dated ADR records: 0001 task-tree-ownership + strict commit workflow + zero-drift doctrine (migrated out of harness ~/.claude memory into the tracked repo), 0002 all-target ActionIR-ready invariant (ratio==1.0000, zero compatibility-surface rules), 0003 raw-Perl-free .spec authoring policy, 0004 hosted-CI-disabled / local-gate-is-source-of-truth. Each is Context→Decision→Consequences→Links and points at the authoritative tracked docs rather than duplicating them. INDEX rows match the 4 record files exactly. No code change — perl -c OK; phase0 1004 PASS baseline holds.`
+  Commit: `pending (leaf ID in commit subject)`
 
 - ID: `MEMORY-ARCHITECTURE-DOC.3`
   Status: `pending`
@@ -91,7 +91,7 @@ reference implementation in the sibling `specforge` project.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `MEMORY-ARCHITECTURE-DOC.1` | `done` | Standard added at root + README/SESSION_BOOTSTRAP routed to it. perl -c OK. |
-| 2 | `MEMORY-ARCHITECTURE-DOC.2` | `pending` | Layer C must exist (and the self-check requires it) before enforcement is wired. |
+| 2 | `MEMORY-ARCHITECTURE-DOC.2` | `done` | docs/decisions/ + INDEX + 4 seed records created. perl -c OK. |
 | 3 | `MEMORY-ARCHITECTURE-DOC.3` | `pending` | MEMORY.md must be ≤ cap before the pre-commit self-check can pass. |
 | 4 | `MEMORY-ARCHITECTURE-DOC.4` | `pending` | Enforcement is installed only once the layers it checks are all in place. |
 | 5 | `MEMORY-ARCHITECTURE-DOC.5` | `pending` | Final end-to-end verification + live-doc sync + close. |
@@ -116,14 +116,17 @@ reference implementation in the sibling `specforge` project.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.1` | `diff -q` vs source (byte-identical 419 lines); README/SESSION_BOOTSTRAP pointer review; `perl -c perl/LinkedSpec.pm`. | Pass — standard at root + discoverable; no code change; phase0 1004 PASS baseline holds. Frontier → `.2`. |
+| `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.2` | `ls docs/decisions/` + INDEX↔files cross-check (4/4 match); `perl -c perl/LinkedSpec.pm`. | Pass — layer C created with 4 seed ADR records; no code change; phase0 1004 PASS baseline holds. Frontier → `.3`. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `MEMORY-ARCHITECTURE-DOC.1` | `Add MEMORY_ARCHITECTURE.md standard + README/bootstrap pointers (MEMORY-ARCHITECTURE-DOC.1)` | Hash backfilled later if useful. |
+| `MEMORY-ARCHITECTURE-DOC.1` | `Add MEMORY_ARCHITECTURE.md standard + README/bootstrap pointers (MEMORY-ARCHITECTURE-DOC.1)` | Hash `119665a`. |
+| `MEMORY-ARCHITECTURE-DOC.2` | `Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)` | Hash backfilled later if useful. |
 
 ## Changelog
 
+- `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.2` — created `docs/decisions/` (layer C) with `INDEX.md` and 4 dated ADR records (0001 doctrine, 0002 ActionIR-ready invariant, 0003 raw-Perl-free policy, 0004 hosted-CI-disabled). Migrated the doctrine out of harness-home-dir memory into the tracked repo. Active frontier: `.3`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.1` — added `MEMORY_ARCHITECTURE.md` at the repo root (verbatim project-agnostic standard; Knowledge Map §5 marked not-adopted) and wired the doc-map pointers in `README.md` + `SESSION_BOOTSTRAP.md`. Active frontier: `.2`.
 - `2026-06-04`: Created task tree to adopt the durable agent-memory architecture standard in linkedspec, mirroring the sibling specforge adoption (5 leaves), after the user directed implementing "everything the standard recommends" here.

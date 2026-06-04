@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)
+
+- Created `docs/decisions/` (memory layer C) with `INDEX.md` and seeded it with four dated ADR-style records (`Context → Decision → Consequences → Links`), each pointing at the authoritative tracked docs rather than duplicating them:
+  - `0001` — task-tree ownership before any change + strict `COMMIT.md` workflow + zero-drift doctrine. Migrated out of harness-home-directory memory (`~/.claude/.../memory/`), which a different tool can't see, into the tracked repo so it survives a harness/model switch.
+  - `0002` — the all-target ActionIR-ready phase-0 invariant: every shipped `.spec` compiles at `language_agnostic_ready_ratio == 1.0000` with zero blocked/compatibility-surface rules.
+  - `0003` — `.spec` authoring is permanently raw-Perl-free; raw Perl is migration debt.
+  - `0004` — hosted GitHub Actions CI is disabled; `tools/run_ci_local.sh` is the source of truth.
+- INDEX rows match the four record files exactly.
+- Validation (no code changed): `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds.
+
 ## 2026-06-04 — Add MEMORY_ARCHITECTURE.md standard + README/bootstrap pointers (MEMORY-ARCHITECTURE-DOC.1)
 
 - Adopting the portable, harness-agnostic durable-memory standard in this repo (new tree `MEMORY-ARCHITECTURE-DOC`, mirroring the sibling specforge adoption). This leaf lands layer-defining doc + discovery.
