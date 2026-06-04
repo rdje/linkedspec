@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `39825b6` — "Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
-- active_work_unit: `MEMORY-ARCHITECTURE-DOC` → frontier leaf: `MEMORY-ARCHITECTURE-DOC.3` (in progress — this commit demotes MEMORY.md to the resume pointer and reconciles COMMIT.md)
-- next_action: implement `MEMORY-ARCHITECTURE-DOC.4` — install the enforcement kit (`scripts/check_memory_architecture.sh`, `.githooks/` pre-commit + commit-msg, `git config core.hooksPath .githooks`, the `AGENTS.md`/`CLAUDE.md`/`.cursorrules`/`.github/copilot-instructions.md` pointers, and wire the self-check into `tools/run_ci_local.sh` + reflect in `ci.yml`); prove the gates bite.
+- latest_commit: `50eafdf` — "Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
+- active_work_unit: `MEMORY-ARCHITECTURE-DOC` → frontier leaf: `MEMORY-ARCHITECTURE-DOC.4` (in progress — this commit installs the §9 enforcement kit: self-check + hooks + CI wiring + bootstrap pointers; git hooks are now active via `core.hooksPath .githooks`, so this and later commits pass through pre-commit + commit-msg)
+- next_action: implement `MEMORY-ARCHITECTURE-DOC.5` — run the full local gate (`bash tools/run_ci_local.sh`: memory-arch self-check first, then perl -c + phase0), confirm green, sync live docs, and close the tree.
 - regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`).
 - in_flight_uncommitted: none after this commit.
 - blockers: none.

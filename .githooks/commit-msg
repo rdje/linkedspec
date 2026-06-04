@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# .githooks/commit-msg — commit-subject convention gate (layer E3 of MEMORY_ARCHITECTURE.md).
+#
+# LinkedSpec scheme (per COMMIT.md): task-tree work carries the leaf id in the subject
+# (or the first body line), e.g. "Refresh ARCHITECTURE_STATE.md ... (DOC-CODEBASE-ALIGNMENT.2)";
+# maintenance commits use a leading type ("Docs:", "chore:", "fix:", ...). The subject
+# must satisfy one of those so git history is greppable by work unit (MEMORY_ARCHITECTURE.md §8).
+set -euo pipefail
+
+msg_file="$1"
+subject="$(sed -n '1p' "${msg_file}")"
+body1="$(sed -n '3p' "${msg_file}")"   # first body line (line 2 is the blank separator)
+
+# A task-tree unit id: UPPERCASE words joined by >=1 hyphen, then a dotted leaf segment
+# (e.g. DOC-CODEBASE-ALIGNMENT.5, PHASE1-PARSER-CORE-ISOLATION.2, MEMORY-ARCHITECTURE-DOC.4).
+unit_id='[A-Z][A-Z0-9]*(-[A-Z0-9]+)+\.[0-9A-Za-z]'
+# A maintenance / conventional-commit-style leading type (linkedspec also uses "Docs:").
+# POSIX ERE (bash =~) has no \b, so require the type be followed by a separator or EOL.
+maint='^(Docs|Doc|docs|chore|fix|feat|refactor|test|build|ci|perf|style|revert|Merge|Revert)([ :(!]|$)'
+
+if [[ "${subject}" =~ ${unit_id} ]] || [[ "${body1}" =~ ${unit_id} ]] || [[ "${subject}" =~ ${maint} ]]; then
+  exit 0
+fi
+
+cat >&2 <<MSG
+[commit-msg] rejected: the subject must carry a task-tree WORK-UNIT-ID (in the subject or
+  first body line), e.g.  "Refresh ARCHITECTURE_STATE.md ... (DOC-CODEBASE-ALIGNMENT.2)",
+  OR start with a maintenance type:  "Docs: ...", "chore: ...", "fix: ...", ...
+    got: ${subject}
+See COMMIT.md and MEMORY_ARCHITECTURE.md §8 (git is the backbone — work-unit id in the subject).
+MSG
+exit 1

@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-04 — Install memory-architecture enforcement kit (E1–E4) (MEMORY-ARCHITECTURE-DOC.4)
+
+- Installed the `MEMORY_ARCHITECTURE.md` §9 enforcement so non-compliance fails fast and visibly:
+  - **E2** — `scripts/check_memory_architecture.sh` (single source of truth for the invariants; knobs: line cap 60, `docs/tasks`, `docs/decisions`, bootstrap `AGENTS.md`+`CLAUDE.md`). Passes on the compliant tree.
+  - **E3** — `.githooks/pre-commit` (execs the self-check) and `.githooks/commit-msg` (subject must carry a task-tree leaf id in the subject or first body line, OR a maintenance prefix like `Docs:`); both `chmod +x`; activated via `git config core.hooksPath .githooks`.
+  - **E1** — bootstrap pointers `AGENTS.md` (canonical) + `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` (one-line mirrors), all routing to `README.md` + `MEMORY_ARCHITECTURE.md` (no Knowledge Map references, since that layer is not adopted here).
+  - **E4** — wired the self-check as the **first** gate in `tools/run_ci_local.sh` (before syntax/regression) and added `require_tracked_file` for it + `MEMORY_ARCHITECTURE.md`; `ci.yml` already delegates to that script.
+- **Proved the gates bite:** self-check exits nonzero under `MEMORY_POINTER_LINE_CAP=10` (MEMORY.md is 25 lines); commit-msg rejects `"wip random stuff"` / `"random lowercase subject with no id"` and accepts unit-id subjects, `"Docs: …"`, `"chore(ci): …"`, `"Merge …"`, and a body-line unit id. Fixed a POSIX-ERE bug (bash `=~` has no `\b`) in the commit-msg pattern.
+- This is the first commit to pass through the now-active pre-commit + commit-msg hooks.
+- Validation (no code changed): all four shell files `bash -n` clean; self-check exit 0 on the tree; `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS baseline holds (full gate run in `.5`).
+
 ## 2026-06-04 — Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)
 
 - `MEMORY.md` was a 5204-line cumulative log (memory anti-pattern #1). Rewrote it to the `MEMORY_ARCHITECTURE.md` §6 resume-pointer template — now **25 lines**: How-to-resume + an overwrite-only Current-state block (latest commit, active task-tree frontier leaf, single next action, regression baseline, in-flight, blockers).

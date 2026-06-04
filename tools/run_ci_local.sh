@@ -69,11 +69,16 @@ require_command git
 require_command perl
 require_command prove
 
+log "running memory-architecture self-check (MEMORY_ARCHITECTURE.md §9 — E2/E4 backstop)"
+bash "$REPO_ROOT/scripts/check_memory_architecture.sh"
+
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
 require_tracked_file tools/run_ci_local.sh
 require_tracked_file perl/LinkedSpec.pm
 require_tracked_file t/phase0_regression.t
+require_tracked_file scripts/check_memory_architecture.sh
+require_tracked_file MEMORY_ARCHITECTURE.md
 for path in specs plugin conf tablescript ebnf perl t; do
  require_tracked_tree "$path"
 done

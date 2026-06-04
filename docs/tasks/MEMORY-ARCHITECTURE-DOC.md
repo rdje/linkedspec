@@ -76,8 +76,8 @@ reference implementation in the sibling `specforge` project.
   Status: `pending`
   Goal: `Install enforcement (§9). Add scripts/check_memory_architecture.sh (E2, knobs adapted: line cap, docs/tasks, docs/decisions, AGENTS.md+CLAUDE.md). Add .githooks/pre-commit (runs the self-check) and .githooks/commit-msg (E3) with a regex adapted to linkedspec's commit scheme (unit-id token anywhere in subject OR first body line, OR a maintenance prefix like "Docs:"). Set core.hooksPath .githooks. Add the four bootstrap pointers (E1). Wire the self-check into tools/run_ci_local.sh and reflect it in ci.yml (E4). Prove the gates bite (reject a bad subject / over-cap MEMORY.md; accept a compliant one).`
   Acceptance: `Hooks active via core.hooksPath; the self-check passes on the compliant tree and fails on an injected violation; commit-msg accepts a real linkedspec subject and rejects a non-compliant one; run_ci_local.sh runs the self-check before the regression gate; the .4 install commit itself passes through the now-active hooks.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `2026-06-04: Installed the kit. scripts/check_memory_architecture.sh (E2; knobs cap=60, docs/tasks, docs/decisions, AGENTS.md+CLAUDE.md) — passes on the compliant tree (exit 0). .githooks/pre-commit (execs the self-check) + .githooks/commit-msg (E3) created, chmod +x, all bash -n clean. core.hooksPath set to .githooks. Bootstrap pointers AGENTS.md/CLAUDE.md/.cursorrules/.github/copilot-instructions.md (E1) created, no Knowledge Map refs; AGENTS.md+CLAUDE.md contain MEMORY_ARCHITECTURE.md (self-check verifies). Wired the self-check as the FIRST gate in tools/run_ci_local.sh + added require_tracked_file for it and MEMORY_ARCHITECTURE.md (E4); ci.yml already delegates to run_ci_local.sh. PROVED the gates bite: (a) self-check exit 1 under MEMORY_POINTER_LINE_CAP=10 (MEMORY.md is 25); (b) commit-msg rejects "wip random stuff" and "random lowercase subject with no id" (exit 1) and accepts unit-id subjects, "Docs: ...", "chore(ci): ...", "Merge ...", and a body-line unit id (exit 0) — after fixing a POSIX-ERE bug (bash =~ has no \b; switched to an explicit separator class). The .4 commit below passes through the now-active pre-commit + commit-msg hooks.`
+  Commit: `pending (leaf ID in commit subject)`
 
 - ID: `MEMORY-ARCHITECTURE-DOC.5`
   Status: `pending`
@@ -93,7 +93,7 @@ reference implementation in the sibling `specforge` project.
 | 1 | `MEMORY-ARCHITECTURE-DOC.1` | `done` | Standard added at root + README/SESSION_BOOTSTRAP routed to it. perl -c OK. |
 | 2 | `MEMORY-ARCHITECTURE-DOC.2` | `done` | docs/decisions/ + INDEX + 4 seed records created. perl -c OK. |
 | 3 | `MEMORY-ARCHITECTURE-DOC.3` | `done` | MEMORY.md demoted 5204→25 lines (≤cap); COMMIT.md reconciled. perl -c OK. |
-| 4 | `MEMORY-ARCHITECTURE-DOC.4` | `pending` | Enforcement is installed only once the layers it checks are all in place. |
+| 4 | `MEMORY-ARCHITECTURE-DOC.4` | `done` | Self-check + hooks + CI wiring + bootstrap pointers installed; all four gates proven to bite. |
 | 5 | `MEMORY-ARCHITECTURE-DOC.5` | `pending` | Final end-to-end verification + live-doc sync + close. |
 
 ## Decisions
@@ -118,6 +118,7 @@ reference implementation in the sibling `specforge` project.
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.1` | `diff -q` vs source (byte-identical 419 lines); README/SESSION_BOOTSTRAP pointer review; `perl -c perl/LinkedSpec.pm`. | Pass — standard at root + discoverable; no code change; phase0 1004 PASS baseline holds. Frontier → `.2`. |
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.2` | `ls docs/decisions/` + INDEX↔files cross-check (4/4 match); `perl -c perl/LinkedSpec.pm`. | Pass — layer C created with 4 seed ADR records; no code change; phase0 1004 PASS baseline holds. Frontier → `.3`. |
 | `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.3` | `wc -l MEMORY.md` (25 ≤ cap 60); `git show HEAD:MEMORY.md \| wc -l` (5204 preserved); COMMIT.md/README review; `perl -c perl/LinkedSpec.pm`. | Pass — MEMORY.md demoted to bounded resume pointer, COMMIT.md reconciled, history intact in git; no code change; phase0 1004 PASS baseline holds. Frontier → `.4`. |
+| `2026-06-04` | `MEMORY-ARCHITECTURE-DOC.4` | self-check exit 0 (compliant) + exit 1 (cap forced to 10); commit-msg accept/reject matrix (8 cases incl. body-line id); `bash -n` on all 4 shell files; `git config core.hooksPath .githooks`. | Pass — all four gates (E1 pointers, E2 self-check, E3 hooks, E4 CI wiring) installed and proven to bite; fixed a POSIX-ERE `\b` bug in commit-msg. Frontier → `.5`. |
 
 ## Commit Log
 
@@ -125,10 +126,12 @@ reference implementation in the sibling `specforge` project.
 | --- | --- | --- |
 | `MEMORY-ARCHITECTURE-DOC.1` | `Add MEMORY_ARCHITECTURE.md standard + README/bootstrap pointers (MEMORY-ARCHITECTURE-DOC.1)` | Hash `119665a`. |
 | `MEMORY-ARCHITECTURE-DOC.2` | `Add docs/decisions/ layer C + 4 seed decision records (MEMORY-ARCHITECTURE-DOC.2)` | Hash `39825b6`. |
-| `MEMORY-ARCHITECTURE-DOC.3` | `Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)` | Hash backfilled later if useful. |
+| `MEMORY-ARCHITECTURE-DOC.3` | `Demote MEMORY.md to bounded resume pointer + reconcile COMMIT.md (MEMORY-ARCHITECTURE-DOC.3)` | Hash `50eafdf`. |
+| `MEMORY-ARCHITECTURE-DOC.4` | `Install memory-architecture enforcement kit (E1–E4) (MEMORY-ARCHITECTURE-DOC.4)` | First commit through the now-active hooks. Hash backfilled later. |
 
 ## Changelog
 
+- `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.4` — installed the §9 enforcement: `scripts/check_memory_architecture.sh` (E2), `.githooks/pre-commit` + `.githooks/commit-msg` (E3, `core.hooksPath .githooks`, linkedspec-adapted subject regex), the four bootstrap pointers (E1), and wired the self-check as the first gate in `tools/run_ci_local.sh` (E4). Proved all gates bite (fixed a POSIX-ERE `\b` bug in commit-msg). Active frontier: `.5`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.3` — demoted `MEMORY.md` 5204→25 lines (bounded layer-A resume pointer; history preserved in git) and reconciled `COMMIT.md` + the README ramp-up entry from the old "cumulative log" model to the overwrite-only resume-pointer model. Active frontier: `.4`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.2` — created `docs/decisions/` (layer C) with `INDEX.md` and 4 dated ADR records (0001 doctrine, 0002 ActionIR-ready invariant, 0003 raw-Perl-free policy, 0004 hosted-CI-disabled). Migrated the doctrine out of harness-home-dir memory into the tracked repo. Active frontier: `.3`.
 - `2026-06-04`: Completed `MEMORY-ARCHITECTURE-DOC.1` — added `MEMORY_ARCHITECTURE.md` at the repo root (verbatim project-agnostic standard; Knowledge Map §5 marked not-adopted) and wired the doc-map pointers in `README.md` + `SESSION_BOOTSTRAP.md`. Active frontier: `.2`.
