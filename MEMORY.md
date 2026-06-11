@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `3065636` — "ACCUMULATOR-CONVENTION-AUDIT.3 — synthesis + recommendations; tree COMPLETE"
-- active_work_unit: none — `ACCUMULATOR-CONVENTION-AUDIT` complete (3/3 leaves). No active task trees; PNT is idle. (Proposed-only: `PLUGIN-ACTION-MIGRATION`.)
-- next_action: execute SESSION_BOOTSTRAP.md — analyze LinkedSpec.pm + import tree, then PNT from proposed/roadmap priorities.
-- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check + the Knowledge Map check before perl -c + phase0).
-- in_flight_uncommitted: none.
+- latest_commit: pending (PLUGIN-ACTION-MIGRATION.1 inventory commit upcoming)
+- active_work_unit: `PLUGIN-ACTION-MIGRATION` → frontier leaf: `PLUGIN-ACTION-MIGRATION.2` (pending)
+- next_action: Delete Category B dead .plg files (10 files, 27 actions, zero references) — PLUGIN-ACTION-MIGRATION.2
+- regression baseline: phase0 unchanged (no code changed during .1 inventory)
+- in_flight_uncommitted: task file updated + TASK_TREE.md index + live docs; about to commit
 - blockers: none.

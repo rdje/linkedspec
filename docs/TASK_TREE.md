@@ -21,10 +21,11 @@ evidence for one top-level task.
 
 ## Active Task Trees
 
-_None. All roadmap phases (0–7), the Backbone refactor track, plugin modernization, the method-like DSL migration track, the doc/codebase alignment tree, the durable-memory-architecture adoption, the Knowledge Map adoption, and the accumulator convention audit are complete. PNT is idle until a proposed tree is activated._
+_Active: PLUGIN-ACTION-MIGRATION. All other roadmap phases (0–7), the Backbone refactor track, plugin modernization, the method-like DSL migration track, the doc/codebase alignment tree, the durable-memory-architecture adoption, the Knowledge Map adoption, and the accumulator convention audit are complete._
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `PLUGIN-ACTION-MIGRATION` | `active` | `Plugin modernization follow-on` | `PLUGIN-ACTION-MIGRATION.1` | [docs/tasks/PLUGIN-ACTION-MIGRATION.md](docs/tasks/PLUGIN-ACTION-MIGRATION.md) |
 
 ## Proposed Task Trees
 
@@ -33,7 +34,6 @@ PNT-eligible until explicitly activated or until the roadmap selects that lane.
 
 | Tree | Status | Roadmap lane | Proposed first leaf | File |
 | --- | --- | --- | --- | --- |
-| `PLUGIN-ACTION-MIGRATION` | `proposed` | `Plugin modernization follow-on` | `PLUGIN-ACTION-MIGRATION.1` | [docs/tasks/PLUGIN-ACTION-MIGRATION.md](docs/tasks/PLUGIN-ACTION-MIGRATION.md) |
 
 ## Completed Task Trees
 

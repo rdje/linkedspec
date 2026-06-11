@@ -6331,5 +6331,5 @@ Before each commit:
   ### Remaining open items (outside this tree)
   
   - **Compatibility alias retirement**: Policy defined (.1), actual retirement is deferred until aliases are removed from implementation. Short-term candidates (`tail`, `drop_last`, `flatten`, `array_values`) require simple regex updates. Medium-term candidates (`return_a`, `return_m`, `return_ma`, `return_imatch`) require scanner/contract infrastructure removal.
-  - **PLUGIN-ACTION-MIGRATION**: Separate proposed track for migrating 36 `.plg` files (~1,200+ actions) to package owners. Not part of this tree.
+  - **PLUGIN-ACTION-MIGRATION**: Now active (activated 2026-06-11). Task tree restructured to 5 leaves after `.1` inventory completed. 178 top-level actions across 36 `.plg` files (not ~1,200 as previously estimated). Six categories identified: A (extracted, 9 files), B (dead/zero-refs, 10 files), C (utility wrappers, 3 files), D (moderate, 6 files), E (complex/deferred, 7 files), F (Expect, 1 file). Zero cross-file plugin dispatch calls confirmed. Category E files (fsmgen, regtest, msword, network, tree, spyglass, mbist, lte_digital_rf) deferred to future tree.
   - **Phase 1 parser-core isolation**: Separate Phase 1 remainder — "Finish the last parser-core isolation cleanup around remaining compile-path compatibility seams."
