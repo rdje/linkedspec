@@ -210,6 +210,8 @@ Files requiring significant migration effort due to size, action count, or platf
 | `PLUGIN-ACTION-MIGRATION.1` | `581db79` — PLUGIN-ACTION-MIGRATION.1 — full .plg corpus inventory; tree activated + restructured | |
 | `PLUGIN-ACTION-MIGRATION.2` | `04969d0` — PLUGIN-ACTION-MIGRATION.2 — delete 10 dead .plg files (Category B, zero references) | |
 | `PLUGIN-ACTION-MIGRATION.3` | `53e8f70` — PLUGIN-ACTION-MIGRATION.3 — verify Category A extraction status; defer action-body migration | |
+| `PLUGIN-ACTION-MIGRATION.4` | `d533bc7` — PLUGIN-ACTION-MIGRATION.4 — create PluginUtils.pm; defer Category C caller migration | |
+| `PLUGIN-ACTION-MIGRATION.5` | `cffac62` — PLUGIN-ACTION-MIGRATION.5 — delete 7 dead Category D .plg files; tree COMPLETE | |
 
 ## Changelog
 
