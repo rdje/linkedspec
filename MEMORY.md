@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `644c1a8` — "PLUGIN-ACTION-MIGRATION.5 — post-commit cleanup: fix MEMORY.md hash drift"
-- active_work_unit: `COMPAT-ALIAS-RETIREMENT` → frontier leaf: `COMPAT-ALIAS-RETIREMENT.1` (`done`)
-- next_action: continue PNT: `COMPAT-ALIAS-RETIREMENT.2` (remove medium-term aliases from implementation)
-- regression baseline: 1004 PASS (phase0). Short-term aliases (tail/drop_last/flatten/array_values) removed from 5 impl files.
-- in_flight_uncommitted: COMPAT-ALIAS-RETIREMENT.1 complete; about to commit
+- latest_commit: `9d5f20f` — "Revert COMPAT-ALIAS-RETIREMENT.2"
+- active_work_unit: `COMPAT-ALIAS-RETIREMENT` → .1 done, .4 done, .2/.3 deferred
+- next_action: await user direction. Short-term aliases retired (tail/drop_last/flatten/array_values). Medium-term (return_a/m/ma/imatch) deferred — ~692 test references need dedicated migration strategy.
+- regression baseline: 1004 PASS (phase0).
+- in_flight_uncommitted: task tree + MEMORY.md update; about to commit
 - blockers: none.
