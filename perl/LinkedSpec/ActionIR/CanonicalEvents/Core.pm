@@ -158,7 +158,7 @@ sub _kind_override_for_contract_id {
  my ($contract_id) = @_;
  return $DIRECT_KIND_BY_CONTRACT_ID{$contract_id} if exists $DIRECT_KIND_BY_CONTRACT_ID{$contract_id};
  return 'CALL'      if $contract_id eq 'return_call';
- return 'RETURN'    if $contract_id eq 'return_imatch' || $contract_id eq 'return_array';
+ return 'RETURN'    if $contract_id eq 'return_array';
  return 'DECLARE'   if $contract_id eq 'declare_typed' || $contract_id eq 'declare_alias';
  return 'PUSH'      if $contract_id eq 'push_single_arg' || $contract_id eq 'push_indexed_arg' || $contract_id eq 'push_target_arg' || $contract_id eq 'push_target_indexed_arg' || $contract_id eq 'push_scope_target_arg';
  return 'CAPTURE_IF' if $contract_id eq 'capture_if' || $contract_id eq 'capture_if_macro';

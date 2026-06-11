@@ -15,7 +15,6 @@ sub try_scan_contract_ir_events {
  my %dispatch = (
   'print_foreach_iterable' => \&_scan_contract_print_foreach_iterable,
   'split_trim_filter_assignment' => \&_scan_contract_split_trim_filter_assignment,
-  'return_imatch' => \&_scan_contract_return_imatch,
   'push_value' => \&_scan_contract_push_value,
   'push_nonempty' => \&_scan_contract_push_nonempty,
   'assign_value' => \&_scan_contract_assign_value,
@@ -63,15 +62,6 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
    scope     => 'my',
   },
  };
-}
- return \@events
-}
-
-sub _scan_contract_return_imatch {
- my ($code) = @_;
- my @events;
-while ($code =~ /\breturn_im(?:atch)?\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|\"[^\"]*\"|\w+))\s*\)/g) {
- push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}}};
 }
  return \@events
 }
