@@ -1667,6 +1667,20 @@ sub _lower_return_general_statement {
  return undef unless defined($payload) && length($payload);
  return "return $payload"
 }
+
+#------------------------------------------------------------------------------
+# Function: _lower_return_imatch_statement
+# Purpose : Lower `return_imatch(...)`/`return_im(...)` method helper calls.
+# Args    : ($tag, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_return_imatch_statement {
+ my ($tag, $deps) = @_;
+ my $tag_expr = _normalize_method_tag_expr($tag, $deps);
+ return undef unless defined $tag_expr;
+ return "return [$tag_expr, \$IMATCH]"
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_assign_statement
 # Purpose : Lower `assign(target, source)` method helper calls.
