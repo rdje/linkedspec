@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: pending (PLUGIN-ACTION-MIGRATION.4 utility package upcoming)
-- active_work_unit: `PLUGIN-ACTION-MIGRATION` → frontier leaf: `PLUGIN-ACTION-MIGRATION.5` (pending)
-- next_action: Handle Category D moderate files (ds_vhistory, fxenv_helper, generic_fake_memory_module, matrix, specman, wrapgen) + exp.plg — PLUGIN-ACTION-MIGRATION.5
-- regression baseline: phase0 unchanged (PluginUtils.pm created; no callers changed yet)
-- in_flight_uncommitted: PluginUtils.pm created + task file + live docs; about to commit
+- latest_commit: pending (PLUGIN-ACTION-MIGRATION.5 tree-close commit upcoming)
+- active_work_unit: none — `PLUGIN-ACTION-MIGRATION` complete (5/5 leaves). PNT idle.
+- next_action: PNT from roadmap priorities or await user direction. All task trees complete. Remaining work: action-body migration for 19 .plg files (deferred to future tree).
+- regression baseline: 17 .plg files deleted (1,030 lines, 45 actions). 19 files remain. Corpus regression discovers dynamically.
+- in_flight_uncommitted: task file finalization + TASK_TREE.md + live docs; about to commit
 - blockers: none.

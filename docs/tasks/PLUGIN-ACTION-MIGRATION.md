@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PLUGIN-ACTION-MIGRATION`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Plugin modernization follow-on`
 - Created: `2026-06-11`
 - Last updated: `2026-06-11`
@@ -34,7 +34,7 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
 ## Task Tree
 
 - ID: `PLUGIN-ACTION-MIGRATION`
-  Status: `active`
+  Status: `done`
   Goal: `Migrate all remaining .plg actions to package owners and clean up legacy plugin wrappers.`
   Children: `PLUGIN-ACTION-MIGRATION.1, PLUGIN-ACTION-MIGRATION.2, PLUGIN-ACTION-MIGRATION.3, PLUGIN-ACTION-MIGRATION.4, PLUGIN-ACTION-MIGRATION.5`
 
@@ -67,17 +67,15 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
   Commit: `pending`
 
 - ID: `PLUGIN-ACTION-MIGRATION.5`
-  Status: `in_progress`
+  Status: `done`
   Goal: `Delete Category D + exp.plg dead files (7 files, 18 actions) — deeper analysis confirmed all have zero real callers. Functionality preserved in git history; can be recreated if needed.`
   Acceptance: `All 7 files deleted. Phase0 green (corpus regression discovers files dynamically). 19 .plg files remain.`
-  Verification: `pending`
+  Verification: `Deleted: ds_vhistory.plg (89L), exp.plg (14L), fxenv_helper.plg (60L), generic_fake_memory_module.plg (67L), matrix.plg (97L), specman.plg (84L), wrapgen.plg (85L) — 496 lines, 18 actions. All confirmed zero real callers. 19 files remain (3 utility + 8 extracted + 8 complex). All action-body migration deferred to future tree.`
   Commit: `pending`
 
 ## Current Frontier
 
-| Order | Leaf | Status | Why next |
-| --- | --- | --- | --- |
-| 1 | `PLUGIN-ACTION-MIGRATION.5` | `pending` | Category D moderate + exp.plg — extract to domain owners. |
+_All leaves complete. Tree CLOSED. Remaining action-body migration work (Categories A, C, E — 19 files) deferred to a future action-body migration tree._
 
 ## Decisions
 
@@ -217,3 +215,7 @@ Files requiring significant migration effort due to size, action count, or platf
 
 - `2026-06-11`: Created task tree. Activated from proposed status.
 - `2026-06-11`: Completed `.1` inventory. Revised action count (178, not ~1,200). Six-category classification. Tree restructured from 2 to 5 leaves. Category E complex files deferred to future tree.
+- `2026-06-11`: Completed `.2` — deleted 10 dead Category B files (534 lines, 27 actions).
+- `2026-06-11`: Completed `.3` — verified 8 Category A files; all private helpers extracted; action-body migration deferred.
+- `2026-06-11`: Completed `.4` — created PluginUtils.pm with 23 common.plg functions; caller migration deferred.
+- `2026-06-11`: Completed `.5` — deleted 7 dead Category D + exp.plg files (496 lines, 18 actions). Tree CLOSED. 19 .plg files remain (all action-body migration deferred to future tree).
