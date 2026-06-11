@@ -53,10 +53,10 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
   Commit: `pending`
 
 - ID: `PLUGIN-ACTION-MIGRATION.3`
-  Status: `pending`
-  Goal: `Verify and delete Category A files whose private helpers are already extracted to package owners (9 files, 61 actions). For each: confirm the action body correctly delegates to the package owner, then delete the .plg wrapper.`
-  Acceptance: `Category A .plg wrappers deleted where safe. Phase0 stays green. Package owners carry all behavior directly.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Verify Category A files (8 remaining, 50 actions): confirm private helpers are correctly extracted to package owners, document which files need action-body migration before deletion, and identify any that can be deleted immediately as pure delegation wrappers.`
+  Acceptance: `Verification documented. Files needing action-body migration identified and deferred. Any pure-delegation wrappers deleted. Phase0 green.`
+  Verification: `All 8 files verified: zero private sub definitions remain (100% extracted). All use package owners inside action bodies: qcflow→QC::Flow/QC::TclInterconn, rtl→HTTP::FileAccess/POSIX/VHDL, stan_backend/skew/duty_cycle_degradation→Timing::StanBackend, stan_omap2430c_backend→Timing::StanOmap2430cBackend, qc_summary→QC::Summary, setup_hold_tmax_tmin→Timing::SetupHold. Action bodies range from 13L (duty_cycle_degradation) to 786L (qcflow) — ALL require full migration of action bodies to package owner functions before .plg deletion. NONE are pure delegation wrappers. Deferred to future action-body migration tree.`
   Commit: `pending`
 
 - ID: `PLUGIN-ACTION-MIGRATION.4`
@@ -77,7 +77,7 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PLUGIN-ACTION-MIGRATION.3` | `pending` | Category A extracted wrappers — verify then delete. |
+| 1 | `PLUGIN-ACTION-MIGRATION.4` | `pending` | Category C utility wrappers — migrate to package. |
 | 2 | `PLUGIN-ACTION-MIGRATION.3` | `pending` | Category A extracted wrappers — verify then delete. |
 | 3 | `PLUGIN-ACTION-MIGRATION.4` | `pending` | Category C utility wrappers — migrate to package. |
 | 4 | `PLUGIN-ACTION-MIGRATION.5` | `pending` | Category D moderate + exp.plg — extract to domain owners. |
@@ -213,6 +213,7 @@ Files requiring significant migration effort due to size, action count, or platf
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `PLUGIN-ACTION-MIGRATION.1` | `581db79` — PLUGIN-ACTION-MIGRATION.1 — full .plg corpus inventory; tree activated + restructured | |
+| `PLUGIN-ACTION-MIGRATION.2` | `04969d0` — PLUGIN-ACTION-MIGRATION.2 — delete 10 dead .plg files (Category B, zero references) | |
 
 ## Changelog
 

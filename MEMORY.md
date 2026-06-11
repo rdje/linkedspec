@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: pending (PLUGIN-ACTION-MIGRATION.2 deletion upcoming)
-- active_work_unit: `PLUGIN-ACTION-MIGRATION` → frontier leaf: `PLUGIN-ACTION-MIGRATION.3` (pending)
-- next_action: Verify and delete Category A extracted .plg wrappers (9 files) — PLUGIN-ACTION-MIGRATION.3
-- regression baseline: phase0 unchanged (deleted 10 dead files with zero references; corpus regression discovers dynamically)
-- in_flight_uncommitted: 10 .plg files staged for deletion + task file + live docs; about to commit
+- latest_commit: pending (PLUGIN-ACTION-MIGRATION.3 verification upcoming)
+- active_work_unit: `PLUGIN-ACTION-MIGRATION` → frontier leaf: `PLUGIN-ACTION-MIGRATION.4` (pending)
+- next_action: Migrate Category C utility wrappers (common.plg, raw.plg, test.plg) — PLUGIN-ACTION-MIGRATION.4
+- regression baseline: phase0 unchanged (no code changed during .3 verification)
+- in_flight_uncommitted: task file updated + live docs; about to commit
 - blockers: none.
