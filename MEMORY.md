@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `743068f` — "PLUGIN-ACTION-MIGRATION.5 — tree retired; plugin migration workstream closed"
-- active_work_unit: none — `PLUGIN-ACTION-MIGRATION` retired (5/5 leaves). All task trees complete. PNT idle.
-- next_action: await user direction. Plugin migration workstream closed. 19 legacy .plg files kept as-is. Future effort: plugin infrastructure itself, not bulk .plg migration.
-- regression baseline: 17 .plg files deleted (1,030 lines, 45 actions). 19 files remain as legacy corpus. PluginUtils.pm available as utility package.
-- in_flight_uncommitted: none
+- latest_commit: `644c1a8` — "PLUGIN-ACTION-MIGRATION.5 — post-commit cleanup: fix MEMORY.md hash drift"
+- active_work_unit: `COMPAT-ALIAS-RETIREMENT` → frontier leaf: `COMPAT-ALIAS-RETIREMENT.1` (`done`)
+- next_action: continue PNT: `COMPAT-ALIAS-RETIREMENT.2` (remove medium-term aliases from implementation)
+- regression baseline: 1004 PASS (phase0). Short-term aliases (tail/drop_last/flatten/array_values) removed from 5 impl files.
+- in_flight_uncommitted: COMPAT-ALIAS-RETIREMENT.1 complete; about to commit
 - blockers: none.

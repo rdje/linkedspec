@@ -18,8 +18,9 @@ flagged and migrated — not an acceptable long-term authoring style.
   capture/mark, etc.) with unlimited nested composition.
 - Remaining raw-Perl occurrences are surfaced loudly (compatibility-surface telemetry)
   and migrated to canonical equivalents. "Ready" must not hide Perl-shaped syntax.
-- Compatibility aliases (e.g. `array_values`, `flatten`, `tail`, `drop_last`) remain
-  supported for now; their retirement is policy-defined but implementation-deferred.
+- Compatibility aliases: short-term tier (`array_values`, `flatten`, `tail`, `drop_last`)
+  retired 2026-06-12 (COMPAT-ALIAS-RETIREMENT.1). Medium-term tier (`return_a`, `return_m`,
+  `return_ma`, `return_imatch`/`return_im`) retirement in progress.
 - Documentation is a product contract: the mdBook + `USER_GUIDE.md` teach the canonical
   surface with worked examples and stay in sync with the code (see `0001` zero-drift).
 

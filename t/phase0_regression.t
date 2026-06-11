@@ -3670,10 +3670,9 @@ PERL
     unlike($err, qr/PPlugin|Can't locate FSMGen\.pm|Can't locate Table2SS\.pm/, 'FSMGen dynamic plugin-list subprocess stays clear of legacy plugin runtime and unstubbed dependency errors');
 };
 subtest 'repo_owned_parser_lookup_callers_avoid_legacy_get_parser_plugin' => sub {
-    plan tests => 7;
+    plan tests => 6;
 
     my $lispish_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Lispish.pm'));
-    my $ds_vhistory_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'ds_vhistory.plg'));
     my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
     my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
     my $spec_plugin_path = File::Spec->catfile($Bin, '..', 'plugin', 'spec.plg');
@@ -3681,8 +3680,7 @@ subtest 'repo_owned_parser_lookup_callers_avoid_legacy_get_parser_plugin' => sub
     ok(defined($lispish_pm) && length($lispish_pm), 'Lispish.pm source is available for parser-lookup compatibility inspection');
     unlike($lispish_pm, qr/PPlugin->_get_parser\('Lispish'\)/, 'Lispish.pm no longer routes parser lookup through the legacy _get_parser plugin');
     like($lispish_pm, qr/LinkedSpec::get_parser\('Lispish'\)/, 'Lispish.pm now uses LinkedSpec::get_parser(...) directly');
-    unlike($ds_vhistory_plugin . $fsmgen_plugin . $regtest_plugin, qr/\b_get_parser\s*\(/, 'repo-owned plugin files no longer use the legacy _get_parser helper plugin');
-    like($ds_vhistory_plugin, qr/LinkedSpec::get_parser\('ds_vhistory'\)/, 'ds_vhistory plugin now uses LinkedSpec::get_parser(...) directly');
+    unlike($fsmgen_plugin . $regtest_plugin, qr/\b_get_parser\s*\(/, 'repo-owned plugin files no longer use the legacy _get_parser helper plugin');
     like($fsmgen_plugin, qr/LinkedSpec::get_parser\('portmap'\)/, 'fsmgen plugin now uses LinkedSpec::get_parser(...) directly');
     ok(!-e $spec_plugin_path, 'legacy spec.plg _get_parser compatibility shim is removed after repo-owned callers moved to LinkedSpec::get_parser(...)');
 };
@@ -5074,12 +5072,11 @@ PERL
     unlike($err, qr/PPlugin|Can't locate Timing\/SetupHold\.pm/, 'Timing::SetupHold package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
-    plan tests => 19;
+    plan tests => 14;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $table_plugin_path = File::Spec->catfile($plugin_dir, 'table.plg');
     my @migrated_plugins = qw(
-        generic_fake_memory_module.plg
         lte_digital_rf.plg
         spyglass.plg
     );
@@ -5113,32 +5110,12 @@ subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
     is_deeply(\@table_2ss_hits, [], 'repo-owned plugin files have no remaining table_2ss compatibility action usage');
 };
 subtest 'rtl_log2_helper_moves_to_rtlutils_owner' => sub {
-    plan tests => 19;
+    plan tests => 6;
 
-    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
-    my $fake_mem_plugin = slurp(File::Spec->catfile($plugin_dir, 'generic_fake_memory_module.plg'));
-    my $wrapgen_plugin = slurp(File::Spec->catfile($plugin_dir, 'wrapgen.plg'));
 
     ok(defined($rtlutils_pm) && length($rtlutils_pm), 'RTLUtils source is available for log2 helper migration inspection');
-    ok(defined($fake_mem_plugin) && length($fake_mem_plugin), 'generic_fake_memory_module.plg source is available for log2 helper migration inspection');
-    ok(defined($wrapgen_plugin) && length($wrapgen_plugin), 'wrapgen.plg source is available for log2 helper migration inspection');
     like($rtlutils_pm, qr/sub ceil_log2\b/, 'RTLUtils owns the address-width ceiling log2 helper');
-    like($fake_mem_plugin, qr/RTLUtils::ceil_log2\(\$height\)/, 'generic_fake_memory_module.plg calls the RTLUtils log2 owner directly');
-    like($wrapgen_plugin, qr/RTLUtils::ceil_log2\(\$height\)/, 'wrapgen.plg calls the RTLUtils log2 owner directly');
-    unlike($fake_mem_plugin, qr/\bget_log2\s*\{/, 'generic_fake_memory_module.plg no longer exposes get_log2 as a legacy plugin subdef');
-    unlike($fake_mem_plugin, qr/(?<!::)\bget_log2\s*\(/, 'generic_fake_memory_module.plg no longer calls the unqualified get_log2 helper');
-    unlike($wrapgen_plugin, qr/(?<!::)\bget_log2\s*\(/, 'wrapgen.plg no longer calls the unqualified get_log2 helper');
-
-    my $parser = LinkedSpec::get_parser('pplugin');
-    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for RTLUtils log2 migrated plugin smoke');
-    my $fake_mem_ast = eval { $parser->(\$fake_mem_plugin) };
-    ok(!$@, 'generic_fake_memory_module.plg still parses without die after log2 migration') or diag(normalize_error($@));
-    ok(defined($fake_mem_ast) && ref($fake_mem_ast) eq 'HASH', 'generic_fake_memory_module.plg still returns a hash AST after log2 migration');
-    ok(!exists $fake_mem_ast->{get_log2}, 'generic_fake_memory_module.plg no longer exposes get_log2 as a coderef');
-    my $wrapgen_ast = eval { $parser->(\$wrapgen_plugin) };
-    ok(!$@, 'wrapgen.plg still parses without die after log2 migration') or diag(normalize_error($@));
-    ok(defined($wrapgen_ast) && ref($wrapgen_ast) eq 'HASH', 'wrapgen.plg still returns a hash AST after log2 migration');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require RTLUtils;
@@ -5250,13 +5227,12 @@ PERL
     }
 };
 subtest 'prompt_yes_no_helper_moves_to_package_owner' => sub {
-    plan tests => 23;
+    plan tests => 16;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $yesno_plugin_path = File::Spec->catfile($plugin_dir, 'yesno.plg');
     my $prompt_plugin_pm_path = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'Prompt.pm');
     my $prompt_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'InteractivePrompt.pm'));
-    my $fxenv_helper_plugin = slurp(File::Spec->catfile($plugin_dir, 'fxenv_helper.plg'));
 
     ok(!-e $yesno_plugin_path, 'yesno.plg wrapper is removed after callers moved to a package owner directly');
     ok(!-e $prompt_plugin_pm_path, 'Plugin::Prompt scaffold is removed after the prompt helper graduated to a non-plugin owner');
@@ -5266,11 +5242,6 @@ subtest 'prompt_yes_no_helper_moves_to_package_owner' => sub {
     like($prompt_pm, qr/sub _invoke_response_callback\b/, 'InteractivePrompt owns callback dispatch instead of preserving inline branch duplication');
     unlike($prompt_pm, qr/package Plugin::Prompt|Plugin::Prompt::yes_no/, 'interactive prompt owner no longer carries plugin-scaffold package naming');
 
-    ok(defined($fxenv_helper_plugin) && length($fxenv_helper_plugin), 'fxenv_helper.plg source is available for prompt migration inspection');
-    like($fxenv_helper_plugin, qr/require InteractivePrompt;/, 'fxenv helper plugin loads the non-plugin prompt owner explicitly');
-    like($fxenv_helper_plugin, qr/InteractivePrompt::yes_no\s*\(/, 'fxenv helper plugin calls InteractivePrompt directly for yes/no prompts');
-    unlike($fxenv_helper_plugin, qr/Plugin::Prompt/, 'fxenv helper plugin no longer depends on the Plugin::Prompt scaffold');
-    unlike($fxenv_helper_plugin, qr/(?<!::)\byes_no\s*\(/, 'fxenv helper plugin no longer depends on the legacy bare yes_no plugin helper');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require InteractivePrompt;
@@ -5307,10 +5278,6 @@ PERL
     like($out, qr/__EOF_UNDEF__/, 'InteractivePrompt package owner returns undef on EOF instead of looping forever');
     unlike($err, qr/PPlugin|Can't locate InteractivePrompt\.pm|Can't locate Plugin\/Prompt\.pm/, 'InteractivePrompt package-owner subprocess stays clear of legacy plugin runtime issues');
 
-    my $parser = LinkedSpec::get_parser('pplugin');
-    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for prompt-owner migrated plugin smoke');
-    my $fxenv_ast = eval { $parser->(\$fxenv_helper_plugin) };
-    ok(!$@ && defined($fxenv_ast) && ref($fxenv_ast) eq 'HASH', 'fxenv helper plugin still parses under pplugin after yesno wrapper removal') or diag(normalize_error($@));
 };
 subtest 'string_substitution_logic_moves_into_text_domain_owner' => sub {
     plan tests => 12;
@@ -18592,14 +18559,14 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'drop_back(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(tail(sorted_keys(hash(meta)), 2))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_front(sorted_keys(hash(meta)), 2))}),
         q{return do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }},
-        'tail(..., count) remains a compatibility alias for drop_front(..., count) lowering'
+        'drop_front(..., count) canonical lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_last(sorted_keys(hash(meta)), 2))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_back(sorted_keys(hash(meta)), 2))}),
         q{return do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
-        'drop_last(..., count) remains a compatibility alias for drop_back(..., count) lowering'
+        'drop_back(..., count) canonical lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(first_key), scalar(sorted_keys(hash(meta)), 0))}),
@@ -18823,9 +18790,9 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
         'assign(array(target), array()) lowers to empty array assignment'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(assigns), array_values(array(keyval_pairs)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(assigns), array_copy(array(keyval_pairs)))'),
         'push @assigns, [@keyval_pairs]',
-        'push_value accepts array_values(array(...)) snapshot payloads'
+        'push_value accepts array_copy(array(...)) snapshot payloads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(assigns), array_copy(array(keyval_pairs)))'),
@@ -18833,9 +18800,9 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
         'push_value accepts array_copy(array(...)) snapshot payloads as the clearer alias'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array_values(array(items)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array_copy(array(items)))'),
         'return [@items]',
-        'return(payload) lowers array_values(array(...)) to a snapshot array payload'
+        'return(payload) lowers array_copy(array(...)) to a snapshot array payload'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array_copy(array(items)))'),
@@ -18843,9 +18810,9 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
         'return(payload) lowers array_copy(array(...)) to the same snapshot array payload'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>scalar(block_namei), content=>array_values(array(assigns))})'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>scalar(block_namei), content=>array_copy(array(assigns))})'),
         'return {name=>$block_namei, content=>[@assigns]}',
-        'return(payload) lowers array_values(array(...)) inside structured hash payloads'
+        'return(payload) lowers array_copy(array(...)) inside structured hash payloads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return({name=>scalar(block_namei), content=>array_copy(array(assigns))})'),
@@ -23444,12 +23411,12 @@ subtest 'method_like_fluent_and_structured_action_array_snapshot_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .return(array_copy(array(items))).return(hash("content", array_values(array(assigns))))
+ /a/ -> Top .return(array_copy(array(items))).return(hash("content", array_copy(array(assigns))))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { return(array_copy(array(items))); return(hash("content", array_values(array(assigns)))) }
+ /a/ -> Top { return(array_copy(array(items))); return(hash("content", array_copy(array(assigns)))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -23475,7 +23442,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge array snapshot helper fluent form preserves canonical RETURN coverage across array_copy/array_values payloads'
+        'action-edge array snapshot helper fluent form preserves canonical RETURN coverage across array_copy payloads'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_array_snapshot_helpers_lower_equivalently' => sub {
@@ -23483,13 +23450,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_array_snapshot_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.return(array_copy(array(items))).return(hash("content", array_values(array(assigns))))
+LX.return(array_copy(array(items))).return(hash("content", array_copy(array(assigns))))
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { return(array_copy(array(items))); return(hash("content", array_values(array(assigns)))) }
+LX { return(array_copy(array(items))); return(hash("content", array_copy(array(assigns)))) }
  /a/ -> Top { return_a(Top) }
 SPEC
 
@@ -23516,7 +23483,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle array snapshot helper fluent form preserves canonical RETURN coverage across array_copy/array_values payloads'
+        'lifecycle array snapshot helper fluent form preserves canonical RETURN coverage across array_copy payloads'
     );
 };
 subtest 'method_like_fluent_and_structured_action_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
@@ -23524,12 +23491,12 @@ subtest 'method_like_fluent_and_structured_action_if_elseif_array_snapshot_branc
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(scalar(on)); return(array_copy(array(items))); elseif(scalar(alt_on)); return(hash("content", array_values(array(assigns)))); else(); return_undef(); endif() }
+ /a/ -> Top { if(scalar(on)); return(array_copy(array(items))); elseif(scalar(alt_on)); return(hash("content", array_copy(array(assigns)))); else(); return_undef(); endif() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -23565,12 +23532,12 @@ subtest 'method_like_fluent_and_structured_action_switch_case_array_snapshot_bra
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_values(array(assigns)))).endswitch()
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(scalar(kind)); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_values(array(assigns)))); endswitch() }
+ /a/ -> Top { switch(scalar(kind)); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_copy(array(assigns)))); endswitch() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -23607,7 +23574,7 @@ subtest 'method_like_structured_action_control_flow_blocks_accept_optional_semic
 
     my $if_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $if_block_spec = <<'SPEC';
@@ -23615,7 +23582,7 @@ Top::&
  /a/ -> Top { if(scalar(on))
  return(array_copy(array(items)))
  elseif(scalar(alt_on))
- return(hash("content", array_values(array(assigns))))
+ return(hash("content", array_copy(array(assigns))))
  else()
  return_undef()
  endif() }
@@ -23623,7 +23590,7 @@ SPEC
 
     my $switch_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_values(array(assigns)))).endswitch()
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
 SPEC
 
     my $switch_block_spec = <<'SPEC';
@@ -23632,7 +23599,7 @@ Top::&
  case("A")
  return(array_copy(array(items)))
  default()
- return(hash("content", array_values(array(assigns))))
+ return(hash("content", array_copy(array(assigns))))
  endswitch() }
 SPEC
 
@@ -23665,7 +23632,7 @@ subtest 'method_like_structured_action_control_flow_blocks_accept_bare_zero_arg_
 
     my $if_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $if_block_spec = <<'SPEC';
@@ -23673,7 +23640,7 @@ Top::&
  /a/ -> Top { if(scalar(on))
  return(array_copy(array(items)))
  elseif(scalar(alt_on))
- return(hash("content", array_values(array(assigns))))
+ return(hash("content", array_copy(array(assigns))))
  else
  return_undef()
  endif }
@@ -23681,7 +23648,7 @@ SPEC
 
     my $switch_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_values(array(assigns)))).endswitch()
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
 SPEC
 
     my $switch_block_spec = <<'SPEC';
@@ -23691,7 +23658,7 @@ Top::&
  return(array_copy(array(items)))
  endcase
  default
- return(hash("content", array_values(array(assigns))))
+ return(hash("content", array_copy(array(assigns))))
  endcase
  endswitch }
 SPEC
@@ -23725,22 +23692,22 @@ subtest 'method_like_fluent_action_control_flow_chains_accept_bare_zero_arg_mark
 
     my $if_explicit_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $if_bare_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else.return_undef().endif
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else.return_undef().endif
 SPEC
 
     my $switch_explicit_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).endcase().default().return(hash("content", array_values(array(assigns)))).endcase().endswitch()
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).endcase().default().return(hash("content", array_copy(array(assigns)))).endcase().endswitch()
 SPEC
 
     my $switch_bare_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).endcase.default.return(hash("content", array_values(array(assigns)))).endcase.endswitch
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).endcase.default.return(hash("content", array_copy(array(assigns)))).endcase.endswitch
 SPEC
 
     my $if_explicit_descr = LinkedSpec::Get(\$if_explicit_spec, return_descriptor => 1);
@@ -23772,7 +23739,7 @@ subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_optional_se
 
     my $if_fluent_spec = <<'SPEC';
 Top::&
-LX.if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+LX.if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
  /a/ -> Top { return_a(Top) }
 SPEC
 
@@ -23781,7 +23748,7 @@ Top::&
 LX { if(scalar(on))
  return(array_copy(array(items)))
  elseif(scalar(alt_on))
- return(hash("content", array_values(array(assigns))))
+ return(hash("content", array_copy(array(assigns))))
  else()
  return_undef()
  endif() }
@@ -23790,7 +23757,7 @@ SPEC
 
     my $switch_fluent_spec = <<'SPEC';
 Top::&
-LX.switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_values(array(assigns)))).endswitch()
+LX.switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
  /a/ -> Top { return_a(Top) }
 SPEC
 
@@ -23800,7 +23767,7 @@ LX { switch(scalar(kind))
  case("A")
  return(array_copy(array(items)))
  default()
- return(hash("content", array_values(array(assigns))))
+ return(hash("content", array_copy(array(assigns))))
  endswitch() }
  /a/ -> Top { return_a(Top) }
 SPEC
@@ -35358,13 +35325,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_br
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+LX.if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { if(scalar(on)); return(array_copy(array(items))); elseif(scalar(alt_on)); return(hash("content", array_values(array(assigns)))); else(); return_undef(); endif() }
+LX { if(scalar(on)); return(array_copy(array(items))); elseif(scalar(alt_on)); return(hash("content", array_copy(array(assigns)))); else(); return_undef(); endif() }
  /a/ -> Top { return_a(Top) }
 SPEC
 
@@ -35401,13 +35368,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_array_snapshot_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_values(array(assigns)))).endswitch()
+LX.switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { switch(scalar(kind)); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_values(array(assigns)))); endswitch() }
+LX { switch(scalar(kind)); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_copy(array(assigns)))); endswitch() }
  /a/ -> Top { return_a(Top) }
 SPEC
 
@@ -41238,7 +41205,7 @@ SPEC
     );
 };
 subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
-    plan tests => 18;
+    plan tests => 16;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))'),
@@ -41251,11 +41218,6 @@ subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
         'flat(array(name)) lowers explicit array wrapper into surrounding array constructor list context'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic", flatten(array(parts)), scalar(name)))'),
-        'return ["semantic", @parts, $name]',
-        'flatten(array(name)) remains a compatibility alias for flat(array(name))'
-    );
-    is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(extra), "kind", "node", "item", scalar(name)))'),
         'return {%extra, "kind" => "node", "item" => $name}',
         'flat_hash(name) lowers hash contents into surrounding hash constructor list context'
@@ -41264,11 +41226,6 @@ subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat(hash(extra)), "kind", "node"))'),
         'return {%extra, "kind" => "node"}',
         'flat(hash(name)) lowers explicit hash wrapper into surrounding hash constructor list context'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flatten(hash(extra)), "kind", "node"))'),
-        'return {%extra, "kind" => "node"}',
-        'flatten(hash(name)) remains a compatibility alias for flat(hash(name))'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(flat_array(items))'),

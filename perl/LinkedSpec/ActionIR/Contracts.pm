@@ -280,7 +280,7 @@ sub _build_return_contracts {
    id                 => 'return_general',
    ir_node            => 'RETURN',
    diag_name          => 'return',
-   unresolved_pattern => qr/\breturn\s*\(\s*(?:\[|\{|\"|'|-?\d+(?:\.\d+)?|(?:scalar|s)\s*\(|(?:array|a)\s*\(|(?:hash|h)\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\(|(?:entry_text|match_text|entry_group|match_group|entry_groups|match_groups|input_text|input_len|input_slice)\s*\()/o,
+   unresolved_pattern => qr/\breturn\s*\(\s*(?:\[|\{|\"|'|-?\d+(?:\.\d+)?|(?:scalar|s)\s*\(|(?:array|a)\s*\(|(?:hash|h)\s*\(|flat_array\s*\(|flat_hash\s*\(|flat\s*\(|(?:entry_text|match_text|entry_group|match_group|entry_groups|match_groups|input_text|input_len|input_slice)\s*\()/o,
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_return_general_statement};

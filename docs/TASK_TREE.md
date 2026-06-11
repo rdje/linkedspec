@@ -21,10 +21,9 @@ evidence for one top-level task.
 
 ## Active Task Trees
 
-_None. All roadmap phases (0–7), the Backbone refactor track, plugin modernization, the method-like DSL migration track, the doc/codebase alignment tree, the durable-memory-architecture adoption, the Knowledge Map adoption, the accumulator convention audit, and the plugin-action-migration tree are complete. PNT is idle._
-
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `COMPAT-ALIAS-RETIREMENT` | `active` | `Method-like DSL migration track` | `COMPAT-ALIAS-RETIREMENT.1` | [docs/tasks/COMPAT-ALIAS-RETIREMENT.md](docs/tasks/COMPAT-ALIAS-RETIREMENT.md) |
 
 ## Proposed Task Trees
 

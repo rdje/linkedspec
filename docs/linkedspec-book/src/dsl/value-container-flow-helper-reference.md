@@ -140,7 +140,6 @@ These helpers are the entry point into local working state and structured values
 | `array(...)` | array value | construct one new array payload from the arguments. |
 | `hash(...)` | hash value | construct one new hash/object payload from key/value pairs or flattened hashes. |
 | `array_copy(array_expr)` | array value | snapshot an array value as one nested payload. |
-| `array_values(array_expr)` | array value | compatibility alias for `array_copy(...)`. Prefer `array_copy(...)` in new examples. |
 | `hash_copy(hash_expr)` | hash value | snapshot a hash value as one nested payload. |
 
 Examples:
@@ -175,7 +174,6 @@ The most important collection distinction is snapshot versus flatten.
 | `flat_array(array(items))` | splice array items into the surrounding constructor. |
 | `flat_hash(hash(meta))` | splice hash key/value pairs into the surrounding constructor. |
 | `flat(expr)` | generic flatten/splice helper for array or hash expressions. |
-| `flatten(expr)` | compatibility alias for `flat(expr)`; prefer `flat(...)` in new examples. |
 
 Snapshot example:
 
@@ -525,7 +523,6 @@ Array helpers return either scalar information about an array or a new array val
 | `contains(array_expr, needle)` | `1` or `0` | test exact array membership. |
 | `drop_front(array_expr)` | array value | drop the first item. |
 | `drop_front(array_expr, count)` | array value | drop the first `count` items. |
-| `tail(array_expr, count?)` | array value | compatibility alias for `drop_front(...)`. |
 | `take(array_expr)` | array value | keep the first item. |
 | `take(array_expr, count)` | array value | keep the first `count` items. |
 | `slice(array_expr, start)` | array value | keep from zero-based `start` through the end. |
@@ -534,7 +531,6 @@ Array helpers return either scalar information about an array or a new array val
 | `take_last(array_expr, count)` | array value | keep the last `count` items. |
 | `drop_back(array_expr)` | array value | drop the last item. |
 | `drop_back(array_expr, count)` | array value | drop the last `count` items. |
-| `drop_last(array_expr, count?)` | array value | compatibility alias for `drop_back(...)`. |
 | `concat_arrays(array_expr, array_expr, ...)` | array value | concatenate multiple array values without mutating them. |
 | `sorted(array_expr)` | array value | return a lexical sorted copy. |
 | `reversed(array_expr)` | array value | return a reversed copy. |
