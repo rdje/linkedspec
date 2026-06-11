@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-11 — Post-commit cleanup: MEMORY.md + task-tree commit-log backfill (ACCUMULATOR-CONVENTION-AUDIT.3)
+
+- Completed the post-commit administrative close-out for `ACCUMULATOR-CONVENTION-AUDIT.3` (commit `3065636`).
+- MEMORY.md: updated `latest_commit` from `0ab3fb1` → `3065636`, cleared stale `in_flight_uncommitted`, updated `next_action`.
+- Task tree `ACCUMULATOR-CONVENTION-AUDIT.md`: backfilled hash `3065636` for leaf `.3` commit log (was `pending`).
+- `git_message_brief.txt` already cleared (post-commit state). Working tree now clean except untracked `git_message_brief.txt`.
+- Regression baseline: phase0 `Files=1, Tests=1004, PASS`. Memory-architecture self-check: all invariants hold.
+
 ## 2026-06-11 — Synthesis + recommendations; tree complete (ACCUMULATOR-CONVENTION-AUDIT.3)
 
 - Completed leaf `.3`: synthesis of the convention-based accumulator audit with 6 concrete recommendations.

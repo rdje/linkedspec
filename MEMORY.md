@@ -17,12 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `0ab3fb1` — "ACCUMULATOR-CONVENTION-AUDIT.2 — hash backfill in MEMORY.md"
+- latest_commit: `3065636` — "ACCUMULATOR-CONVENTION-AUDIT.3 — synthesis + recommendations; tree COMPLETE"
 - active_work_unit: none — `ACCUMULATOR-CONVENTION-AUDIT` complete (3/3 leaves). No active task trees; PNT is idle. (Proposed-only: `PLUGIN-ACTION-MIGRATION`.)
-- next_action: none pending — await direction.
-- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`).
-- in_flight_uncommitted: ACCUMULATOR-CONVENTION-AUDIT.3 complete, tree close-out, about to commit.
-- blockers: none.
+- next_action: execute SESSION_BOOTSTRAP.md — analyze LinkedSpec.pm + import tree, then PNT from proposed/roadmap priorities.
 - regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check + the Knowledge Map check before perl -c + phase0).
-- in_flight_uncommitted: none after this commit.
+- in_flight_uncommitted: none.
 - blockers: none.

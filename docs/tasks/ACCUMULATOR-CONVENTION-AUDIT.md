@@ -325,7 +325,7 @@ specs/ebnf.spec:200:  push_nonempty(a(logging_annotation), trim(capture_slice())
 | --- | --- | --- | --- |
 | `ACCUMULATOR-CONVENTION-AUDIT.1` | `bbd15d5` — ACCUMULATOR-CONVENTION-AUDIT.1 — ActionIR accumulator contract inventory complete | 9 contracts identified (2 convention-based, 3 explicit-target, 2 builtin, 2 fully-explicit). No code changes. |
 | `ACCUMULATOR-CONVENTION-AUDIT.2` | `3335aa7` — ACCUMULATOR-CONVENTION-AUDIT.2 — per-spec accumulator usage categorization complete | 88 total accumulator ops across 19 specs; only 4 convention-based (4.5%). |
-| `ACCUMULATOR-CONVENTION-AUDIT.3` | `pending` | Synthesis + 6 recommendations. Tree COMPLETE (3/3 leaves). |
+| `ACCUMULATOR-CONVENTION-AUDIT.3` | `3065636` — ACCUMULATOR-CONVENTION-AUDIT.3 — synthesis + recommendations; tree COMPLETE | Synthesis + 6 recommendations. Tree COMPLETE (3/3 leaves). |
 
 ## Changelog
 

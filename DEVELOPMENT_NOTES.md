@@ -1,6 +1,8 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-11 (ACCUMULATOR-CONVENTION-AUDIT.3 — post-commit cleanup): Completed the administrative close-out for commit `3065636`. MEMORY.md `latest_commit` and `next_action` updated; task-tree commit log backfilled with hash. Clean working tree confirmed. PNT idle — no active task trees; proposed `PLUGIN-ACTION-MIGRATION` is the only remaining backlog item.
+
 - 2026-06-11 (ACCUMULATOR-CONVENTION-AUDIT.3 — TREE COMPLETE): Completed synthesis and recommendations. Key conclusion: the implicit-target `push(Child)` convention is healthy and serves a clear purpose — it is not harmful, not ambiguous in practice, and should not be deprecated. The ecosystem already self-selected: 95.5% of accumulator ops use explicit targets, and the 4 remaining convention-based uses are idiomatic. 6 recommendations: (1) keep convention as-is, (2–3) document in mdBook, (4) no ActionIR changes, (5) no spec migrations, (6) teach `push_value` as preferred form. Tree moved to Completed; no active trees remain — PNT idle.
 
 - 2026-06-11 (ACCUMULATOR-CONVENTION-AUDIT.2): Completed per-spec accumulator usage categorization. 88 total accumulator ops across 19 specs: only 4 convention-based (4.5%) — `push(reg_def)`, `push(reg_fld)` in regdef.spec, `push(sub_gui)` in tkgui.spec, `push(quoted_string, 1)` in ebnf.spec. The other 84 (95.5%) use explicit targets: 63 `push_value`, 19 fluent `.push()`, 2 `push_nonempty`. 10 specs use zero accumulators. The implicit-target convention is nearly extinct in practice. PNT frontier: `.3` (synthesis and recommendations).
