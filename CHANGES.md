@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-11 — Synthesis + recommendations; tree complete (ACCUMULATOR-CONVENTION-AUDIT.3)
+
+- Completed leaf `.3`: synthesis of the convention-based accumulator audit with 6 concrete recommendations.
+- Key finding: the implicit-target `push(Child)` convention is healthy and serves a clear purpose. The ecosystem has self-selected explicit forms (95.5% of accumulator ops use explicit targets).
+- Recommendations: keep convention as-is (no deprecation), document in mdBook, teach `push_value` as preferred form for new specs, no ActionIR changes needed.
+- **ACCUMULATOR-CONVENTION-AUDIT tree COMPLETE (3/3 leaves).** Moved to Completed in `docs/TASK_TREE.md`. No active trees remain — PNT idle.
+
 ## 2026-06-11 — Per-spec accumulator usage categorization (ACCUMULATOR-CONVENTION-AUDIT.2)
 
 - Completed leaf `.2`: full per-spec categorization of all 88 accumulator operations across 19 shipped specs.

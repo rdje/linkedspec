@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `ACCUMULATOR-CONVENTION-AUDIT`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Method-like DSL migration follow-on`
 - Created: `2026-06-11`
 - Last updated: `2026-06-11`
@@ -32,7 +32,7 @@ Audit all convention-based accumulator helpers — helpers that silently/implici
 ## Task Tree
 
 - ID: `ACCUMULATOR-CONVENTION-AUDIT`
-  Status: `active`
+  Status: `done`
   Goal: `Complete audit of all convention-based accumulator helpers across ActionIR contracts and shipped specs.`
   Children: `ACCUMULATOR-CONVENTION-AUDIT.1, ACCUMULATOR-CONVENTION-AUDIT.2, ACCUMULATOR-CONVENTION-AUDIT.3`
 
@@ -51,17 +51,17 @@ Audit all convention-based accumulator helpers — helpers that silently/implici
   Commit: `ACCUMULATOR-CONVENTION-AUDIT.2 — per-spec accumulator usage categorization complete`
 
 - ID: `ACCUMULATOR-CONVENTION-AUDIT.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Synthesize findings: document the convention clearly, identify any helpers that hide the target in ways that hurt readability, and make explicit-target recommendations where appropriate.`
   Acceptance: `Task file contains a clear summary of the convention, which helpers are healthy, which could benefit from explicit-target alternatives, and concrete recommendations. Phase0 stays green.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `perl -c perl/LinkedSpec.pm OK; phase0 1004 PASS baseline (no code changed). Synthesis complete with 6 recommendations.`
+  Commit: `ACCUMULATOR-CONVENTION-AUDIT.3 — synthesis + recommendations; tree COMPLETE`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `ACCUMULATOR-CONVENTION-AUDIT.3` | `pending` | Contract inventory + usage categorization complete; now synthesize findings and recommendations. |
+| — | — | — | Tree complete (3/3 leaves). |
 
 ## Leaf .1 — ActionIR Contract Inventory (COMPLETE)
 
@@ -126,6 +126,76 @@ There is a structural ambiguity in `push(Child, arg)`: is `arg` an index (conven
 - `2026-06-11`: Created task tree. Audit-only approach — no behavior changes in this tree. The `_builtin` suffix on ActionIR contract IDs (`push_child_call_builtin`, `push_child_call_indexed_builtin`) already signals these are internal/convention-based rather than user-facing `push(...)` helpers.
 - `2026-06-11` (`.1`): The only convention-based accumulators are `push(Child)` and `push(Child, idx)` — 2 out of 9 accumulator-related contracts. The other 7 require explicit target naming. The `push(Child, arg)` integer-vs-word disambiguation is fragile but not currently triggered by any shipped spec.
 - `2026-06-11` (`.2`): Convention-based `push(Child)`/`push(Child, idx)` is nearly extinct in shipped specs — only 4 total uses across 3 of 19 specs. The overwhelming norm (63 `push_value` + 19 fluent `.push` in `ebnf.spec`) is explicit-target. See detailed per-spec table below.
+- `2026-06-11` (`.3`): Synthesis complete. The implicit-target convention is healthy where it is and nearly extinct in practice. No migration needed — the ecosystem self-selected explicit forms. Recommendations: (1) keep `push(Child)` / `push(Child, idx)` as-is, (2) teach `push_value` as the preferred form in new docs, (3) update book to document the convention explicitly, (4) no ActionIR changes needed.
+
+## Leaf .3 — Synthesis and Recommendations (COMPLETE)
+
+### 1. The convention, clearly documented
+
+LinkedSpec has exactly two helpers that implicitly target the current rule's accumulator array:
+
+| Helper | What it does | Target |
+|--------|-------------|--------|
+| `push(Child)` | Call child rule, append full result to accumulator | `@RuleName` (implicit) |
+| `push(Child, N)` | Call child rule, append `result->[N]` to accumulator | `@RuleName` (implicit) |
+
+The target array is always `@` + the name of the rule containing the action code. Inside rule `regdef`, `push(reg_def)` appends to `@regdef`. Inside rule `grammar_file`, `push(quoted_string, 1)` appends `call(quoted_string)->[1]` to `@grammar_file`.
+
+This convention exists because the most common child-dispatch pattern is "call a child and collect its result into this rule's output." The convention makes that pattern one word: `push(Child)`.
+
+### 2. How it works (lowering path)
+
+1. Bootstrap parser reads `push(Child)` in `.spec` source
+2. `Contracts.pm::_build_call_and_dispatch_contracts($label)` builds per-rule contract tables with `$label` = rule name
+3. `push_single_arg` contract matches `push(Child)` and lowers to `push @$label, call(Child)`
+4. On re-scan, `push_child_call_builtin` (compatibility_surface=1) matches the already-emitted `push @target, call(Child)` — this is how the scanner tracks what was already lowered
+
+### 3. Health assessment
+
+**The convention is healthy.** Here's why:
+
+- **It's not ambiguous in practice.** The distinction between `push(Child, 0)` (index) and `push(Child, items)` (target) is theoretically fragile but not triggered by any shipped spec. All 19 specs use naming conventions where child rules and target arrays have distinct word-pattern names (no array is named `0`).
+
+- **It has a clear domain.** `push(Child)` means exactly one thing: call a child rule and accumulate its result. This is the single most common action in parser rules, and the one-word spelling is proportionate to its frequency.
+
+- **The ecosystem already self-selected explicit forms.** 95.5% of accumulator operations use explicit targets. The convention is not competing with explicit forms — it serves the narrow case where the rule's own accumulator is the obvious and only sensible target.
+
+- **It's not a hidden gotcha.** The rule name is visible on the preceding line (`regdef:AND` → `push(reg_def)` obviously targets `@regdef`). The convention is local and predictable.
+
+### 4. What could be improved (and what shouldn't)
+
+**Do NOT migrate the remaining 4 convention-based uses.** They are in small, simple specs (`regdef.spec`, `tkgui.spec`, `ebnf.spec`) where the implicit target is clearer than an explicit one would be:
+```
+# Current — clear and conventional:
+-> reg_def  {push(reg_def)}
+
+# Explicit alternative — more noise, same meaning:
+-> reg_def  {push_value(array(regdef), call(reg_def))}
+```
+The explicit form is longer, repeats the rule name, and adds no clarity in this context.
+
+**Do NOT add deprecation warnings.** The convention is not harmful. It serves a real purpose. Deprecating it would force noisy migrations for zero readability gain.
+
+**DO document the convention in the mdBook.** The current book (`values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`) teaches `push_value` and `push_nonempty` but never explicitly explains the `push(Child)` convention. A reader encountering `push(reg_def)` in `regdef.spec` has to infer the implicit target from context. Add a short section: "The implicit accumulator: `push(Child)`" explaining that when `push()` receives a single child-rule name (or a name + index), the target is the current rule's array.
+
+**DO keep the `push(Child, arg)` disambiguation as-is.** The integer-vs-word distinction works. If future specs introduce an ambiguity (a rule named `0`), the fix would be trivial: use `push_value(array(0), call(0))` instead. No ActionIR change needed.
+
+### 5. Recommendations
+
+| # | Recommendation | Priority | Rationale |
+|---|---------------|----------|-----------|
+| 1 | Keep `push(Child)` / `push(Child, idx)` as supported, non-deprecated helpers | **Keep** | Serves a clear purpose; 4 remaining uses are idiomatic |
+| 2 | Update mdBook `values-containers-and-flow-helpers.md` to document the implicit-target convention | **Doc** | Current book teaches explicit forms only; readers need to understand the convention when they encounter it |
+| 3 | Update mdBook `action-model-and-helper-surface.md` to list `push(Child)` in the assignment/mutation family | **Doc** | Currently lists `push_value` and `push_nonempty` but not `push()` |
+| 4 | No ActionIR changes | **None** | Contracts, Scanner, and lowering are correct and complete |
+| 5 | No spec migrations | **None** | The 4 convention-based uses are idiomatic and should stay |
+| 6 | Teach `push_value` as the preferred form for new specs in documentation | **Doc** | Aligns with the 95.5% explicit-target norm already established |
+
+### 6. Open question resolved
+
+> Does `push(Child)` with the implicit target need an explicit-target alternative for clarity, or is the brevity the point?
+
+**The brevity is the point.** `push(Child)` is not accidental terseness — it is the right abstraction for the most common parser-action pattern. The explicit alternative (`push_value(array(RuleName), call(Child))`) exists and is preferred when the target is not the current rule. The convention and the explicit form serve different use cases and coexist cleanly.
 
 ## Leaf .2 — Per-Spec Usage Categorization (COMPLETE)
 
@@ -247,15 +317,19 @@ specs/ebnf.spec:200:  push_nonempty(a(logging_annotation), trim(capture_slice())
 | --- | --- | --- | --- |
 | `2026-06-11` | `ACCUMULATOR-CONVENTION-AUDIT.1` | `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS (no code changed); ActionIR Contracts + Scanner + MethodLowering fully audited | `passed` |
 | `2026-06-11` | `ACCUMULATOR-CONVENTION-AUDIT.2` | `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS (no code changed); all 19 specs audited line by line | `passed` |
+| `2026-06-11` | `ACCUMULATOR-CONVENTION-AUDIT.3` | `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS (no code changed); synthesis + 6 recommendations complete | `passed` |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
 | `ACCUMULATOR-CONVENTION-AUDIT.1` | `bbd15d5` — ACCUMULATOR-CONVENTION-AUDIT.1 — ActionIR accumulator contract inventory complete | 9 contracts identified (2 convention-based, 3 explicit-target, 2 builtin, 2 fully-explicit). No code changes. |
-| `ACCUMULATOR-CONVENTION-AUDIT.2` | `pending` | 88 total accumulator ops across 19 specs; only 4 convention-based (4.5%). |
+| `ACCUMULATOR-CONVENTION-AUDIT.2` | `3335aa7` — ACCUMULATOR-CONVENTION-AUDIT.2 — per-spec accumulator usage categorization complete | 88 total accumulator ops across 19 specs; only 4 convention-based (4.5%). |
+| `ACCUMULATOR-CONVENTION-AUDIT.3` | `pending` | Synthesis + 6 recommendations. Tree COMPLETE (3/3 leaves). |
 
 ## Changelog
 
 - `2026-06-11`: Created task tree. Activated from backlog item #3.
 - `2026-06-11` (`.1`): Completed ActionIR contract inventory. Audited all 9 accumulator-related contracts across Contracts.pm (call+dispatch + assignment+regex), Scanner/PrimitiveBasicRules.pm (push_child_call* scan rules), and MethodLowering.pm (push_value/push_nonempty lowering). Identified exactly 2 convention-based helpers: `push(Child)` and `push(Child, idx)`. All others require explicit target naming.
+- `2026-06-11` (`.2`): Completed per-spec usage categorization. 88 total accumulator ops, 4 convention-based (4.5%), 84 explicit-target (95.5%).
+- `2026-06-11` (`.3`): Completed synthesis and recommendations. Tree COMPLETE (3/3 leaves). Key finding: the implicit-target convention is healthy and nearly extinct in practice. No migrations needed. 6 recommendations: keep convention as-is, document in mdBook, teach `push_value` as preferred form.
