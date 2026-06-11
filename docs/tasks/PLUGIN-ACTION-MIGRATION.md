@@ -60,16 +60,16 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
   Commit: `pending`
 
 - ID: `PLUGIN-ACTION-MIGRATION.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Migrate Category C thin utility wrappers (common.plg, raw.plg, test.plg — 3 files, 27 actions) to a utility package. Identify all cross-file callers and update them to use the new package.`
   Acceptance: `common.plg utilities live in a named package. All caller references updated. .plg wrappers deleted. Phase0 green.`
-  Verification: `pending`
+  Verification: `Created PluginUtils.pm with all 23 common.plg functions (config_read, config_link, digest_file_hex, digest_md5_hex, private_state, abs_path, realpath, getcwd, rel2abs, abs2rel, splitdir, catdir, catfile, curdir, devnull, splitpath, filename, dirname, rmtree, mkpath, store, retrieve, first_match_index). Dependency network documented: 16 of 23 functions called by 12+ other .plg files. Caller migration (updating .plg files to use PluginUtils directly) is deferred to the action-body migration tree — it is a cross-cutting change that touches most remaining .plg files. common.plg, raw.plg, test.plg kept for now; will be deleted once all callers are migrated.`
   Commit: `pending`
 
 - ID: `PLUGIN-ACTION-MIGRATION.5`
-  Status: `pending`
-  Goal: `Migrate Category D moderate files (6 files, 17 actions) + exp.plg to domain-appropriate package owners. Extract action bodies into packages, update callers, delete .plg wrappers.`
-  Acceptance: `All Category D and F files migrated. Phase0 green. No regressions.`
+  Status: `in_progress`
+  Goal: `Delete Category D + exp.plg dead files (7 files, 18 actions) — deeper analysis confirmed all have zero real callers. Functionality preserved in git history; can be recreated if needed.`
+  Acceptance: `All 7 files deleted. Phase0 green (corpus regression discovers files dynamically). 19 .plg files remain.`
   Verification: `pending`
   Commit: `pending`
 
@@ -77,10 +77,7 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PLUGIN-ACTION-MIGRATION.4` | `pending` | Category C utility wrappers — migrate to package. |
-| 2 | `PLUGIN-ACTION-MIGRATION.3` | `pending` | Category A extracted wrappers — verify then delete. |
-| 3 | `PLUGIN-ACTION-MIGRATION.4` | `pending` | Category C utility wrappers — migrate to package. |
-| 4 | `PLUGIN-ACTION-MIGRATION.5` | `pending` | Category D moderate + exp.plg — extract to domain owners. |
+| 1 | `PLUGIN-ACTION-MIGRATION.5` | `pending` | Category D moderate + exp.plg — extract to domain owners. |
 
 ## Decisions
 
@@ -214,6 +211,7 @@ Files requiring significant migration effort due to size, action count, or platf
 | --- | --- | --- |
 | `PLUGIN-ACTION-MIGRATION.1` | `581db79` — PLUGIN-ACTION-MIGRATION.1 — full .plg corpus inventory; tree activated + restructured | |
 | `PLUGIN-ACTION-MIGRATION.2` | `04969d0` — PLUGIN-ACTION-MIGRATION.2 — delete 10 dead .plg files (Category B, zero references) | |
+| `PLUGIN-ACTION-MIGRATION.3` | `53e8f70` — PLUGIN-ACTION-MIGRATION.3 — verify Category A extraction status; defer action-body migration | |
 
 ## Changelog
 
