@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-11 — Per-spec accumulator usage categorization (ACCUMULATOR-CONVENTION-AUDIT.2)
+
+- Completed leaf `.2`: full per-spec categorization of all 88 accumulator operations across 19 shipped specs.
+- Convention-based (implicit-target) `push(Child)` / `push(Child, idx)`: **only 4 uses** (4.5%) across 3 specs (regdef: 2, tkgui: 1, ebnf: 1).
+- Explicit-target forms (`push_value`, `.push()`, `push_nonempty`): **84 uses** (95.5%) across 9 specs.
+- The overwhelming norm in shipped specs is explicit-target accumulation.
+- No code changes; phase0 1004 PASS baseline holds.
+
 ## 2026-06-11 — ActionIR accumulator contract inventory (ACCUMULATOR-CONVENTION-AUDIT.1)
 
 - Activated `ACCUMULATOR-CONVENTION-AUDIT` task tree (backlog item #3: convention-based accumulator helpers audit).

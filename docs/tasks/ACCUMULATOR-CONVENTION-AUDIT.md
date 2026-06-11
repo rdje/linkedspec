@@ -44,11 +44,11 @@ Audit all convention-based accumulator helpers — helpers that silently/implici
   Commit: `ACCUMULATOR-CONVENTION-AUDIT.1 — ActionIR accumulator contract inventory complete`
 
 - ID: `ACCUMULATOR-CONVENTION-AUDIT.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Categorize every usage site across all 19 shipped specs/*.spec files: count bare push(Child), push(Child, index), push(Child, named_target), push_value, push_nonempty, and fluent .push(...) forms.`
   Acceptance: `Task file contains a per-spec breakdown with exact counts for each accumulator form. Ambiguous or noteworthy patterns are flagged.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `perl -c perl/LinkedSpec.pm OK; phase0 1004 PASS baseline (no code changed). All 19 specs audited line by line.`
+  Commit: `ACCUMULATOR-CONVENTION-AUDIT.2 — per-spec accumulator usage categorization complete`
 
 - ID: `ACCUMULATOR-CONVENTION-AUDIT.3`
   Status: `pending`
@@ -61,7 +61,7 @@ Audit all convention-based accumulator helpers — helpers that silently/implici
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `ACCUMULATOR-CONVENTION-AUDIT.2` | `pending` | ActionIR contract inventory complete; now categorize usage across all 19 shipped specs. |
+| 1 | `ACCUMULATOR-CONVENTION-AUDIT.3` | `pending` | Contract inventory + usage categorization complete; now synthesize findings and recommendations. |
 
 ## Leaf .1 — ActionIR Contract Inventory (COMPLETE)
 
@@ -125,6 +125,111 @@ There is a structural ambiguity in `push(Child, arg)`: is `arg` an index (conven
 
 - `2026-06-11`: Created task tree. Audit-only approach — no behavior changes in this tree. The `_builtin` suffix on ActionIR contract IDs (`push_child_call_builtin`, `push_child_call_indexed_builtin`) already signals these are internal/convention-based rather than user-facing `push(...)` helpers.
 - `2026-06-11` (`.1`): The only convention-based accumulators are `push(Child)` and `push(Child, idx)` — 2 out of 9 accumulator-related contracts. The other 7 require explicit target naming. The `push(Child, arg)` integer-vs-word disambiguation is fragile but not currently triggered by any shipped spec.
+- `2026-06-11` (`.2`): Convention-based `push(Child)`/`push(Child, idx)` is nearly extinct in shipped specs — only 4 total uses across 3 of 19 specs. The overwhelming norm (63 `push_value` + 19 fluent `.push` in `ebnf.spec`) is explicit-target. See detailed per-spec table below.
+
+## Leaf .2 — Per-Spec Usage Categorization (COMPLETE)
+
+### Summary
+
+| Form | Total uses | Specs using it | Convention-based? |
+|------|-----------|----------------|-------------------|
+| `push(Child)` — bare implicit | 3 | regdef (2), tkgui (1) | **Yes** |
+| `push(Child, idx)` — indexed implicit | 1 | ebnf (1) | **Yes** |
+| `.push(Child, target)` — fluent chain | 19 | ebnf (19) | No (target explicit) |
+| `push_value(...)` — fully explicit | 63 | ds_vhistory(14), ebnf(2), hlink_substitution(1), Lispish(8), sdce(3), simenv(27), spec(1), tablegrep(2), vhdl(5) | No |
+| `push_nonempty(...)` — fully explicit | 2 | ebnf (2) | No |
+
+**Total accumulator operations across all 19 shipped specs: 88**
+- Convention-based (implicit target): **4** (4.5%)
+- Explicit target: **84** (95.5%)
+
+### Per-spec detail
+
+| Spec | `push(Child)` | `push(C, idx)` | `.push(C, tgt)` | `push_value` | `push_nonempty` | Total |
+|------|:--:|:--:|:--:|:--:|:--:|:--:|
+| BNF | — | — | — | — | — | 0 |
+| DT | — | — | — | — | — | 0 |
+| ds_vhistory | — | — | — | 14 | — | 14 |
+| ebnf | — | 1 | 19 | 2 | 2 | 24 |
+| hlink_substitution | — | — | — | 1 | — | 1 |
+| ifelse | — | — | — | — | — | 0 |
+| lib_reader | — | — | — | — | — | 0 |
+| Lispish | — | — | — | 8 | — | 8 |
+| operators_try | — | — | — | — | — | 0 |
+| portmap | — | — | — | — | — | 0 |
+| pplugin | — | — | — | — | — | 0 |
+| regdef | 2 | — | — | — | — | 2 |
+| sdce | — | — | — | 3 | — | 3 |
+| simenv | — | — | — | 27 | — | 27 |
+| spec | — | — | — | 1 | — | 1 |
+| tablegrep | — | — | — | 2 | — | 2 |
+| tclite | — | — | — | — | — | 0 |
+| tkgui | 1 | — | — | — | — | 1 |
+| vhdl | — | — | — | 5 | — | 5 |
+| verilog | — | — | — | — | — | 0 |
+| **TOTAL** | **3** | **1** | **19** | **63** | **2** | **88** |
+
+### Detailed usage by category
+
+#### Convention-based: `push(Child)` — 3 uses, 2 specs
+
+```
+specs/regdef.spec:2:   -> reg_def  {push(reg_def)}
+specs/regdef.spec:8:   -> reg_fld  {push(reg_fld)}
+specs/tkgui.spec:2:    -> sub_gui  {push(sub_gui)}
+```
+
+Pattern: action-edge child-call block with a single `push(Child)` statement. The implicit target is `@regdef`, `@regdef`, and `@sub_gui` respectively (matching each rule's name). These are the simplest possible child-dispatch-and-accumulate pattern.
+
+#### Convention-based: `push(Child, idx)` — 1 use, 1 spec
+
+```
+specs/ebnf.spec:192:   push(quoted_string, 1);
+```
+
+Pattern: inside an action block, pushes `call(quoted_string)->[1]` into `@ebnf` (the current rule `grammar_file`). Takes the second element of the child's return array.
+
+#### Fluent chain: `.push(Child, target)` — 19 uses, 1 spec
+
+All 19 in `specs/ebnf.spec`. Pattern: blind-call edges with fluent chains:
+```
+=> rule_name.push(rule_name, rule)
+=> include_dir.push(includes)
+=> include_file.push(includes)
+-> semantic_annotation.push(semantic_annotations)
+```
+
+The fluent `.push(Child, target)` form names the target array explicitly (second argument). The chain receiver (`rule_name`, `include_dir`, etc.) provides the child rule context; the second argument is the accumulator target. These lower through `push_target_arg` — not convention-based.
+
+#### Fully explicit: `push_value(array(name), value)` — 63 uses, 9 specs
+
+The dominant form. Every call names the target array explicitly via `array(name)` or `a(name)`. Examples:
+```
+push_value(a(word_items), s(retv))
+push_value(a(pieces), s(retv))
+push_value(a(vhistory), a("?object:", ...))
+```
+
+#### Fully explicit: `push_nonempty(array(name), value)` — 2 uses, 1 spec
+
+```
+specs/ebnf.spec:196:  push_nonempty(a(logging_annotation), trim(capture_slice()));
+specs/ebnf.spec:200:  push_nonempty(a(logging_annotation), trim(capture_slice()));
+```
+
+### Noteworthy patterns
+
+1. **`ebnf.spec` is the outlier** — 24 accumulator ops, the only spec using convention-based `push(C, idx)` and fluent `.push()`, and the only spec using `push_nonempty`. It is the most complex shipped spec and exercises the broadest accumulator surface.
+
+2. **`regdef.spec` and `tkgui.spec` are the last holdouts of bare `push(Child)`** — 2 and 1 uses respectively. Both are small, simple specs where the implicit target convention is arguably clearest.
+
+3. **`simenv.spec` is the heaviest `push_value` user** — 27 uses, all fully explicit with `push_value(a(...), ...)`.
+
+4. **Zero uses of `push(Child, target)` (explicit-target bare form)** — the `push_target_arg` contract exists but no shipped spec spells `push(Child, named_target)` without the fluent `.push()` prefix. The explicit-target form only appears via fluent chains or `push_value`.
+
+5. **10 of 19 specs use zero accumulators** — their action code doesn't need child-result accumulation (they use `return(...)` directly, `assign(...)`, or have no action code).
+
+6. **No lifecycle-block-specific accumulator convention** — all accumulator usage (convention-based and explicit) occurs in action-edge blocks (`{...}` after `-> Child`), not lifecycle blocks (`I { ... }`, `LX { ... }`, etc.). Lifecycle blocks use `push_value` with explicit targets when they need accumulation (e.g., `sdce.spec`'s `LS`/`LX` blocks).
 
 ## Open Questions
 
@@ -141,12 +246,14 @@ There is a structural ambiguity in `push(Child, arg)`: is `arg` an index (conven
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-11` | `ACCUMULATOR-CONVENTION-AUDIT.1` | `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS (no code changed); ActionIR Contracts + Scanner + MethodLowering fully audited | `passed` |
+| `2026-06-11` | `ACCUMULATOR-CONVENTION-AUDIT.2` | `perl -c perl/LinkedSpec.pm` OK; phase0 1004 PASS (no code changed); all 19 specs audited line by line | `passed` |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- | --- |
-| `ACCUMULATOR-CONVENTION-AUDIT.1` | `ACCUMULATOR-CONVENTION-AUDIT.1 — ActionIR accumulator contract inventory complete` | 9 contracts identified (2 convention-based, 3 explicit-target, 2 builtin, 2 fully-explicit). No code changes. |
+| `ACCUMULATOR-CONVENTION-AUDIT.1` | `bbd15d5` — ACCUMULATOR-CONVENTION-AUDIT.1 — ActionIR accumulator contract inventory complete | 9 contracts identified (2 convention-based, 3 explicit-target, 2 builtin, 2 fully-explicit). No code changes. |
+| `ACCUMULATOR-CONVENTION-AUDIT.2` | `pending` | 88 total accumulator ops across 19 specs; only 4 convention-based (4.5%). |
 
 ## Changelog
 
