@@ -46,10 +46,10 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
   Commit: `pending`
 
 - ID: `PLUGIN-ACTION-MIGRATION.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Delete Category B dead files (10 files, 27 actions, 534 lines) that have zero external references across the entire codebase. Remove their entries from any plugin registries if registered. Verify phase0 regression still passes (pplugin.spec corpus shrinks but parser still works).`
   Acceptance: `All 10 dead .plg files deleted. Phase0 stays green (remaining 26 files still parse through pplugin.spec). No code outside plugin/ changed.`
-  Verification: `pending`
+  Verification: `10 files deleted: edalog.plg (28L/1 action), fixscript.plg (10L/1), lstype_long.plg (34L/1), nlc.plg (40L/3), peruser.plg (47L/1), qclib_compile.plg (35L/1), quick_omap2430c_dft.plg (24L/1), sdc2top.plg (30L/2), seview.plg (151L/5), wrapgen_update.plg (135L/11). 26 files (151 actions) remain. Corpus regression discovers files dynamically — no count assertion to break. No code outside plugin/ changed.`
   Commit: `pending`
 
 - ID: `PLUGIN-ACTION-MIGRATION.3`
@@ -77,7 +77,7 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PLUGIN-ACTION-MIGRATION.2` | `pending` | Category B dead files (10 files, zero refs) — no-risk deletion first. |
+| 1 | `PLUGIN-ACTION-MIGRATION.3` | `pending` | Category A extracted wrappers — verify then delete. |
 | 2 | `PLUGIN-ACTION-MIGRATION.3` | `pending` | Category A extracted wrappers — verify then delete. |
 | 3 | `PLUGIN-ACTION-MIGRATION.4` | `pending` | Category C utility wrappers — migrate to package. |
 | 4 | `PLUGIN-ACTION-MIGRATION.5` | `pending` | Category D moderate + exp.plg — extract to domain owners. |
@@ -212,7 +212,7 @@ Files requiring significant migration effort due to size, action count, or platf
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `PLUGIN-ACTION-MIGRATION.1` | `pending` | Inventory complete; tree restructured from 2→5 leaves. |
+| `PLUGIN-ACTION-MIGRATION.1` | `581db79` — PLUGIN-ACTION-MIGRATION.1 — full .plg corpus inventory; tree activated + restructured | |
 
 ## Changelog
 
