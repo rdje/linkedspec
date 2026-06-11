@@ -17,11 +17,11 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` — ACCUMULATOR-CONVENTION-AUDIT.1 about to be committed
-- active_work_unit: `ACCUMULATOR-CONVENTION-AUDIT` → frontier leaf: `ACCUMULATOR-CONVENTION-AUDIT.2` (pending, after .1 commit)
+- latest_commit: `bbd15d5` — "ACCUMULATOR-CONVENTION-AUDIT.1 — ActionIR accumulator contract inventory complete"
+- active_work_unit: `ACCUMULATOR-CONVENTION-AUDIT` → frontier leaf: `ACCUMULATOR-CONVENTION-AUDIT.2` (pending)
 - next_action: Complete ACCUMULATOR-CONVENTION-AUDIT.2 — categorize every usage site across all 19 shipped specs/*.spec files.
-- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check + the Knowledge Map check before perl -c + phase0).
-- in_flight_uncommitted: ACCUMULATOR-CONVENTION-AUDIT.1 complete (ActionIR contract inventory), live docs updated, about to commit.
+- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`).
+- in_flight_uncommitted: none (MEMORY.md needs commit for the hash update).
 - blockers: none.
 - regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check + the Knowledge Map check before perl -c + phase0).
 - in_flight_uncommitted: none after this commit.
