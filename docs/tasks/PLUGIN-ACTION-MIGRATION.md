@@ -3,8 +3,8 @@
 ## Metadata
 
 - Tree ID: `PLUGIN-ACTION-MIGRATION`
-- Status: `completed`
-- Roadmap lane: `Plugin modernization follow-on`
+- Status: `retired`
+- Roadmap lane: `Plugin modernization follow-on` (workstream closed)
 - Created: `2026-06-11`
 - Last updated: `2026-06-11`
 - Owner: repo-local workflow
@@ -34,9 +34,10 @@ Migrate the remaining 178 actions across 36 `.plg` files (5,132 total lines) to 
 ## Task Tree
 
 - ID: `PLUGIN-ACTION-MIGRATION`
-  Status: `done`
+  Status: `retired`
   Goal: `Migrate all remaining .plg actions to package owners and clean up legacy plugin wrappers.`
   Children: `PLUGIN-ACTION-MIGRATION.1, PLUGIN-ACTION-MIGRATION.2, PLUGIN-ACTION-MIGRATION.3, PLUGIN-ACTION-MIGRATION.4, PLUGIN-ACTION-MIGRATION.5`
+  Resolution: `Retired 2026-06-11. 17 dead files deleted (1,030 lines, 45 actions). 19 files remain as legacy corpus — action-body migration to package owners is permanently deferred. The .plg ecosystem and plugin-bridge infrastructure are kept as-is; no further migration effort planned. PluginUtils.pm exists as a migration target should any future need arise.`
 
 - ID: `PLUGIN-ACTION-MIGRATION.1`
   Status: `done`
@@ -82,6 +83,7 @@ _All leaves complete. Tree CLOSED. Remaining action-body migration work (Categor
 - `2026-06-11`: Created task tree; inventory-first approach so migration complexity is known before any code changes.
 - `2026-06-11`: Completed `.1` inventory. Revised action count from ~1,200 to 178. Identified 10 dead files (zero refs) as immediate deletion candidates. Restructured tree from 2 leaves to 5 leaves with category-based grouping. Deletion of dead files (`.2`) is highest-priority first step — lowest risk, no migration work needed.
 - `2026-06-11`: Category E (complex: fsmgen, regtest, msword, network, tree, spyglass, mbist, lte_digital_rf — 7 files, 45 actions) deferred to a future tree. msword.plg is additionally constrained by Win32::OLE (Windows-only). These files require significant per-action extraction work and are not on the critical path for plugin infrastructure retirement.
+- `2026-06-11`: **Tree retired.** LinkedSpec should have top-notch plugin infrastructure, but bulk-migrating the entire legacy `.plg` corpus does not make sense. The 17 dead files were deleted (cleanup with zero risk). The remaining 19 legacy `.plg` files stay as-is — they are a working corpus, not a migration backlog. Effort should go into the plugin infrastructure itself, not into chasing down every old action body.
 
 ## Open Questions (from creation)
 
@@ -221,3 +223,4 @@ Files requiring significant migration effort due to size, action count, or platf
 - `2026-06-11`: Completed `.3` — verified 8 Category A files; all private helpers extracted; action-body migration deferred.
 - `2026-06-11`: Completed `.4` — created PluginUtils.pm with 23 common.plg functions; caller migration deferred.
 - `2026-06-11`: Completed `.5` — deleted 7 dead Category D + exp.plg files (496 lines, 18 actions). Tree CLOSED. 19 .plg files remain (all action-body migration deferred to future tree).
+- `2026-06-11`: **Tree retired.** User decision: plugin migration workstream is closed. Remaining 19 .plg files kept as legacy corpus. Plugin-bridge infrastructure stays as-is. No further migration effort planned. The 17 deleted dead files (1,030 lines, 45 actions) are the final deliverable of this tree.

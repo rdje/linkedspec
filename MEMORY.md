@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `cffac62` — "PLUGIN-ACTION-MIGRATION.5 — delete 7 dead Category D .plg files; tree COMPLETE"
-- active_work_unit: none — `PLUGIN-ACTION-MIGRATION` complete (5/5 leaves). All task trees complete. PNT idle.
-- next_action: PNT from roadmap priorities or await user direction. Remaining deferred work: action-body migration for 19 .plg files (future tree).
-- regression baseline: 17 .plg files deleted (1,030 lines, 45 actions). 19 files remain. Corpus regression discovers dynamically.
-- in_flight_uncommitted: MEMORY.md hash backfill (cosmetic only)
+- latest_commit: `38b327a` — "PLUGIN-ACTION-MIGRATION.5 — post-commit cleanup: MEMORY.md hash backfill + live docs final update"
+- active_work_unit: none — `PLUGIN-ACTION-MIGRATION` retired (5/5 leaves). All task trees complete. PNT idle.
+- next_action: await user direction. Plugin migration workstream closed. 19 legacy .plg files kept as-is. Future effort: plugin infrastructure itself, not bulk .plg migration.
+- regression baseline: 17 .plg files deleted (1,030 lines, 45 actions). 19 files remain as legacy corpus. PluginUtils.pm available as utility package.
+- in_flight_uncommitted: retirement documentation update; about to commit
 - blockers: none.
