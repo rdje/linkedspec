@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-11 — ActionIR accumulator contract inventory (ACCUMULATOR-CONVENTION-AUDIT.1)
+
+- Activated `ACCUMULATOR-CONVENTION-AUDIT` task tree (backlog item #3: convention-based accumulator helpers audit).
+- Completed leaf `.1`: full ActionIR contract inventory of all 9 accumulator-related helpers across `Contracts.pm`, `Scanner/PrimitiveBasicRules.pm`, and `MethodLowering.pm`.
+- Identified exactly **2 convention-based** (implicit-target) helpers: `push(Child)` and `push(Child, idx)` — both use `$label` (current rule name) as the target array. The other 7 require explicit target naming.
+- Documented the `push(Child, arg)` integer-vs-word disambiguation (fragile but not triggered by any shipped spec).
+- Created `docs/tasks/PLUGIN-ACTION-MIGRATION.md` (proposed, not activated — parked per user request).
+- No code changes; phase0 1004 PASS baseline holds.
+
 ## 2026-06-05 — Verify Knowledge Map end-to-end + close tree (KNOWLEDGE-MAP-DOC.4)
 
 - Ran the full canonical gate `bash tools/run_ci_local.sh` → **exit 0**, in order: memory-architecture self-check (all invariants hold) → **Knowledge Map check** (facts valid, ids unique, map in sync) → syntax checks (`perl -c` OK) → phase0 regression **`Files=1, Tests=1004, Result: PASS`** → `[ci] local CI gate passed`.

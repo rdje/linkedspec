@@ -17,9 +17,12 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `4f4b5d7` — "Wire KM gate (pre-commit + CI) + reconcile pointers + ADR 0005 (KNOWLEDGE-MAP-DOC.3)"  (well ahead of origin/main; push only on explicit ask or after a requested batch)
-- active_work_unit: none — `KNOWLEDGE-MAP-DOC` complete (4/4 leaves). No active task trees; PNT is idle. (Proposed-only: `PLUGIN-ACTION-MIGRATION`, not yet activated.)
-- next_action: none pending — await direction (e.g. activate `PLUGIN-ACTION-MIGRATION`) or a new task. Durable memory (layers A–D) + the Knowledge Map retrieval layer are both adopted and gated; keep committing per `COMMIT.md` so the pre-commit + local CI gates stay green, and write a `docs/knowledge/` card whenever you establish a durable fact or catch archaeology.
+- latest_commit: `pending` — ACCUMULATOR-CONVENTION-AUDIT.1 about to be committed
+- active_work_unit: `ACCUMULATOR-CONVENTION-AUDIT` → frontier leaf: `ACCUMULATOR-CONVENTION-AUDIT.2` (pending, after .1 commit)
+- next_action: Complete ACCUMULATOR-CONVENTION-AUDIT.2 — categorize every usage site across all 19 shipped specs/*.spec files.
+- regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check + the Knowledge Map check before perl -c + phase0).
+- in_flight_uncommitted: ACCUMULATOR-CONVENTION-AUDIT.1 complete (ActionIR contract inventory), live docs updated, about to commit.
+- blockers: none.
 - regression baseline: phase0 `Files=1, Tests=1004, PASS` (`bash tools/run_ci_local.sh`, which runs the memory-arch self-check + the Knowledge Map check before perl -c + phase0).
 - in_flight_uncommitted: none after this commit.
 - blockers: none.
