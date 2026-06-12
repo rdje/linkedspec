@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `LINKEDSPEC-LOW-EFFORT` | `active` | `Overall roadmap` | `LINKEDSPEC-LOW-EFFORT.1` | [docs/tasks/LINKEDSPEC-LOW-EFFORT.md](docs/tasks/LINKEDSPEC-LOW-EFFORT.md) |
 | `COMPAT-ALIAS-RETIREMENT` | `active` | `Method-like DSL migration track` | `.2/.3 deferred, .1/.4 done` | [docs/tasks/COMPAT-ALIAS-RETIREMENT.md](docs/tasks/COMPAT-ALIAS-RETIREMENT.md) |
 
 ## Proposed Task Trees
