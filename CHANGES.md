@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.3.3: Dual-path cross-check (BootstrapSpec oracle vs spec.spec candidate)
+
+- Built cross-check harness at `tools/cross_check_spec_parsers.pl`.
+- All 20 .spec files parsed through both BootstrapSpec (oracle → descriptor) and
+  spec.spec-generated parser (candidate → rule-paragraph AST).
+- Results: **10/20 specs have identical rule counts** (BNF, DT, Lispish,
+  hlink_substitution, lib_reader, operators_try, pplugin, sdce, tkgui,
+  verilog). **10/20 specs have inflated candidate counts** (ds_vhistory 12→24,
+  ebnf 24→40, ifelse 7→23, portmap 3→9, regdef 6→8, simenv 17→36, spec.spec
+  3→4, tablegrep 5→8, tclite 9→12, vhdl 48→70).
+- Root cause: spec.spec `rule_paragraph:AND` handler lacks E-block body
+  collection; `body_element:*` matches individual body lines without
+  aggregating them into the parent rule. Also: AND handler lacks E-block
+  support so matched body elements are never added to the rule's accumulator.
+- Zero hangs, zero crashes — all 20 specs parse successfully through both paths.
+- No changes to spec.spec or infrastructure in this leaf (pure comparison).
+- Gaps documented in task tree for MEDIUM-IMPACT.3.4 (fix gaps).
+
 ## 2026-06-12 — Session bootstrap: task-tree restructure for parity-first cross-check
 
 - **MEMORY.md**: Fixed stale `latest_commit` (`d7294d0` → `4112374`). Updated `next_action` for dual-path cross-check (`.3.3`).

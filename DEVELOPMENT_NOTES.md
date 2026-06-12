@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-12 (MEDIUM-IMPACT.3.3): Dual-path cross-check complete. 10/20 specs have matching rule counts between BootstrapSpec (oracle) and spec.spec parser (candidate). 10/20 have inflated candidate counts due to spec.spec AND handler lacking E-block body collection and body_element:* over-matching individual body lines. The cross-check harness at tools/cross_check_spec_parsers.pl provides a reusable comparison framework. Gaps drive .3.4 fixes.
 - 2026-06-12 (session bootstrap): Restructured MEDIUM-IMPACT.3 from 4→6 leaves — inserted dual-path cross-check before wiring spec.spec as primary. Strategy: BootstrapSpec::Core = oracle, spec.spec = candidate; compare all 20 specs → fix gaps → claim parity → wire primary. This ensures spec.spec earns primary-path status through demonstrated output parity. COMPAT-ALIAS-RETIREMENT tree completed and moved to Completed.
 - 2026-06-12 (MEDIUM-IMPACT.3.2): Closed the comment/blank-line skipping gap. Added a parser wrapper in `Runtime::run_get` that resets `pos()` to 0 and skips past leading comment (`# ...`) and blank lines before the main parse loop. This approach avoids modifying the generated handler code or the spec.spec grammar. The wrapper applies to all parsers built via `LinkedSpec::Get()`, making it universally available. The self-parse of spec.spec now works with raw content (no pre-stripping needed). Inter-paragraph comment skipping is left as future enhancement.
 

@@ -17,12 +17,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `90a1e91` — "Docs: post-commit hash fix — MEMORY.md latest_commit → 594787d"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.3` (dual-path cross-check: compare
-  BootstrapSpec::Core vs spec.spec-generated parser outputs across all 19 shipped specs)
-- next_action: Execute MEDIUM-IMPACT.3.3 — dual-path cross-check. Bootstrap = oracle; spec.spec =
-  candidate; compare parse outputs for all 19 specs → document gaps → fix → claim parity → wire primary.
-- other active trees: COMPAT-ALIAS-RETIREMENT completed/pending-move (all 4 leaves done or deferred).
+- latest_commit: `edc6255` — "Docs: post-commit hash fix — MEMORY.md latest_commit → 90a1e91"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4` (fix cross-check gaps:
+  AND handler E-block support, body_element over-matching)
+- next_action: Execute MEDIUM-IMPACT.3.4 — fix the 10 spec gaps found in .3.3 cross-check.
+  Primary: add E-block body collection to spec.spec rule_paragraph AND handler. Secondary: tighten
+  body_element:* to not over-match body lines as separate rule paragraphs.
 - regression baseline: 1005 PASS (phase0).
-- in_flight_uncommitted: none
+- in_flight_uncommitted: MEDIUM-IMPACT.3.3 completion (cross-check harness built, results documented,
+  pending commit).
 - blockers: none.

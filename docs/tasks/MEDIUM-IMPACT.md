@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12` (restructure: expanded .3 from 4→6 leaves for parity-first cross-check)
+- Last updated: `2026-06-12` (post-.3.3: cross-check complete, 10/20 match, 10/20 gaps → .3.4)
 - Owner: repo-local workflow
 
 ## Goal
@@ -144,10 +144,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `d7294d0`
 
 - ID: `MEDIUM-IMPACT.3.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Dual-path cross-check: compare BootstrapSpec::Core (oracle) against spec.spec-generated parser (candidate) for all 19 shipped specs + spec.spec itself. For each spec, parse raw .spec content through both paths, compare the resulting descriptor structures (rule count, rule labels, compiled rule order, dependency-regex maps). Document every discrepancy with structured comparison output. Bootstrap = oracle; spec.spec = candidate.`
   Acceptance: `Cross-check harness exists (script or test) that parses all 20 .spec files through both paths. Structured comparison report documents: (a) identical results, (b) spec.spec-only gaps (missing rules, wrong labels), (c) bootstrap-only differences. No changes to spec.spec or infrastructure in this leaf — pure comparison.`
-  Verification: `pending`
+  Verification: `2026-06-12: Cross-check harness tools/cross_check_spec_parsers.pl built. All 20 .spec files parsed through both BootstrapSpec (oracle) and spec.spec (candidate). 10/20 specs have identical rule counts (BNF, DT, Lispish, hlink_substitution, lib_reader, operators_try, pplugin, sdce, tkgui, verilog). 10/20 specs have inflated candidate counts (candidate counts body elements as rule paragraphs): ds_vhistory (12→24), ebnf (24→40), ifelse (7→23), portmap (3→9), regdef (6→8), simenv (17→36), spec.spec (3→4), tablegrep (5→8), tclite (9→12), vhdl (48→70). Root cause: spec.spec rule_paragraph AND handler lacks E-block body collection, and body_element:* matches individual body lines without aggregating them into the parent rule. Also: spec.spec parser reports 1 extra paragraph for spec.spec itself (likely the KNOWN BOOTSTRAPPING GAPS comment block counted as a rule). Zero hangs, zero crashes — all 20 specs parse successfully. Gaps documented for .3.4.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.3.4`
@@ -175,8 +175,8 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.3.3` | `pending` | Dual-path cross-check: compare BootstrapSpec vs spec.spec outputs across all 20 specs. |
-| 2 | `MEDIUM-IMPACT.3.4` | `pending` | Fix gaps discovered in cross-check before wiring primary path. |
+| 1 | `MEDIUM-IMPACT.3.4` | `pending` | Fix gaps discovered in cross-check: AND handler body collection, body_element over-matching. |
+| 2 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary parse path (blocks on .3.4). |
 | 3 | `MEDIUM-IMPACT.1.1` | `pending` | SpecEntry inventory — understand all coupling before extracting. |
 | 4 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness can be built in parallel; no code changes to core. |
 
@@ -204,6 +204,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 | --- | --- | --- | --- |
 | `2026-06-12` | `MEDIUM-IMPACT.3.1` | `tools/run_ci_local.sh` (1005 PASS), spec.spec compile ratio 1.0000, body_element returns ARRAY with correct multi-element matches | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.2` | `tools/run_ci_local.sh` (1005 PASS), self-parse on raw spec.spec OK, tablegrep/pplugin/ifelse raw parses OK, syntax checks clean | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.3.3` | `tools/cross_check_spec_parsers.pl`: 20/20 specs parse through both paths, 10/20 identical counts, 10/20 inflated candidate counts, 0 hangs | Pass |
 
 ## Commit Log
 
@@ -218,3 +219,4 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 - `2026-06-12`: Created task tree with 3 containers, 13 leaves across SpecEntry decoupling, Validation fuzzing, and BootstrapSpec handoff (including spec.spec accuracy audit per user direction).
 - `2026-06-12` (restructure): Per user direction, expanded `.3` BootstrapSpec handoff from 4 to 6 leaves. Inserted dual-path cross-check leaves `.3.3` (compare BootstrapSpec oracle vs spec.spec candidate across all 20 specs) and `.3.4` (fix gaps) before wiring spec.spec as primary (now `.3.5`). Former `.3.3`/`.3.4` renumbered → `.3.5`/`.3.6`. Updated frontier, decisions, commit log, verification log. Also corrected `.3.2` frontier status (was stale `pending` → now `done`; commit `d7294d0`).
+- `2026-06-12`: Completed MEDIUM-IMPACT.3.3 — dual-path cross-check. Harness at `tools/cross_check_spec_parsers.pl`. Results: 10/20 specs match (BNF, DT, Lispish, hlink_substitution, lib_reader, operators_try, pplugin, sdce, tkgui, verilog); 10/20 have inflated candidate counts (ds_vhistory, ebnf, ifelse, portmap, regdef, simenv, spec.spec, tablegrep, tclite, vhdl). Root cause: spec.spec rule_paragraph AND handler lacks E-block body collection; body_element:* over-matches individual body lines. Zero hangs/crashes. Gaps documented for .3.4.
