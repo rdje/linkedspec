@@ -92,7 +92,7 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2`
-  Status: `active`
+  Status: `done`
   Goal: `Validation.pm surface coverage fuzzing — systematic edge-case testing for the highest-risk validation surfaces`
   Children: `MEDIUM-IMPACT.2.1`, `MEDIUM-IMPACT.2.2`, `MEDIUM-IMPACT.2.3`, `MEDIUM-IMPACT.2.4`
 
@@ -118,10 +118,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Fuzz validate_dsl_syntax and validate_spec_content with edge cases: empty spec, comment-only spec, spec with only blank lines, deeply nested lifecycle blocks, rules with 100+ body elements, mixed paragraph members, spec with 500+ rules, very long regex patterns, rules with Unicode labels, duplicate rules at various positions, unclosed blocks at EOF, strict_syntax mode with unused/undefined refs. Fix any bugs discovered in .2.2 or .2.3.`
   Acceptance: `Fuzz test covers >=20 distinct edge-case categories for validate_dsl_syntax/validate_spec_content. All 19 shipped specs still validate. Any bugs found and fixed are documented in the leaf verification. Phase0 1005 PASS.`
-  Verification: `pending`
+  Verification: `2026-06-12: Extended t/phase0_validation_fuzz.t: validate_spec_content now 21 cases (added blank-line, comment-between-rules, two-top-rules, same-line rule, multi-regex rule), validate_dsl_syntax 11 cases. Combined 32 categories across both surfaces (target >=20). No bugs found. All 5 subtests PASS.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.3`
@@ -177,8 +177,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.2.4` | `pending` | Fuzz validate_dsl_syntax/validate_spec_content with >=20 categories + bugfixes. |
-| 2 | `MEDIUM-IMPACT.1.2` | `pending` | Extract 12 handler-variant builders into HandlerVariantEmitter module. |
+| 1 | `MEDIUM-IMPACT.1.2` | `pending` | Extract 12 handler-variant builders into HandlerVariantEmitter module. |
 | 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
 | 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
 

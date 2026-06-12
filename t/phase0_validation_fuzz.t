@@ -303,6 +303,14 @@ subtest 'validate_spec_content' => sub {
     push @cases, [[], 0, 'ARRAY ref rejected'];
     push @cases, [{}, 0, 'HASH ref rejected'];
 
+    # --- MEDIUM-IMPACT.2.4: additional envelope cases ---
+    push @cases, [\"Top::\n /x/\nChild:\n /y/\n", 1, 'spec with child rule'];
+    push @cases, [\"Top::\n /x/\n\nChild:\n /y/\n", 1, 'spec with blank line between rules'];
+    push @cases, [\"Top::\n /x/\n# comment\nChild:\n /y/\n", 1, 'spec with comment between rules'];
+    push @cases, [\"Top::\n /x/\n\nChild::\n /y/\n", 1, 'spec with two top rules (both ::)'];
+    push @cases, [\"Top:: /x/\n", 1, 'same-line rule header and regex'];
+    push @cases, [\"Top::\n /x/ -> A\n /y/ -> B\n", 1, 'rule with two regex+edge pairs'];
+
     plan tests => scalar(@cases);
     for my $case (@cases) {
         my ($input, $expected_ok, $desc) = @$case;
