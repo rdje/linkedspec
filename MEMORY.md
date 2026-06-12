@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `d53578a` — "MEDIUM-IMPACT.1.2 — extract handler-variant builders into HandlerVariantEmitter"
+- latest_commit: `407abec` — "Docs: backfill commit hashes, refresh live docs, update ARCHITECTURE_STATE.md (MEDIUM-IMPACT hygiene)"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.3` (define HandlerIR)
 - next_action: PNT — execute MEDIUM-IMPACT.1.3 (HandlerIR definition) or next eligible leaf.
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (E-block missing from AND_SINGLE_ACODE).
