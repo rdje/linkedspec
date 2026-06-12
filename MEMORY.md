@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `148c746` — "MEDIUM-IMPACT.3.4.2 — Route AND ICODE to acode_entries, apply return→assignment in AND_SINGLE_ACODE emitter"
+- latest_commit: `ece03ca` — "Docs: MEDIUM-IMPACT.3.4.3 — cross-check re-run + MIXED_ACTIONS root cause analysis"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.4` (resolve MIXED_ACTIONS conflict)
 - next_action: Implement .3.4.4 — avoid MIXED_ACTIONS by routing AND I-blocks as a separate field (not acode_entries), extend AND_BCODE handler with and_icode support (IMATCH bridge + return→assignment + push to @collect after regex match, then normal bcode dispatch).
 - .3.4.3 completed: Cross-check re-run confirms AND fix correctly makes edges fire, but exposed MIXED_ACTIONS conflict. RuleIR routes AND I-block to acode_entries (acode_count=1), edge -> body_element is bcode (bcode_count=1). RuleIR variant detection returns MIXED_ACTIONS (invalid) → handler falls back to _default → empty @collect. Cross-check: 1/20 match (was 10/20 before fix).
