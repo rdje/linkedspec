@@ -17,12 +17,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `654b9c0` — "MEDIUM-IMPACT.1.1 — SpecEntry Perl coupling inventory"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.2.2` (fuzz _parse_rule_label_line)
-- next_action: PNT — execute MEDIUM-IMPACT.2.2 or next eligible leaf.
-- MEDIUM-IMPACT.2.1 done: fuzzing harness at t/phase0_validation_fuzz.t (5 subtests, 168 combinatorial cases).
-- MEDIUM-IMPACT.1.1 done: SpecEntry coupling inventory.
+- latest_commit: `823d1a7` — "Docs: mdBook sync — reference new validation fuzzing harness"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.2.3` (fuzz _scan_rule_edges_in_fragment)
+- next_action: PNT — execute MEDIUM-IMPACT.2.3 (edge scanning fuzzing with >=25 categories)
+  or continue with next eligible independent leaf.
+- Completed this session: .3.3 cross-check, .1.1 SpecEntry inventory, .2.1 fuzzing harness,
+  .2.2 rule label fuzzing, mdBook sync.
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation.
 - regression baseline: 1005 PASS (phase0). Fuzz harness: 5/5 subtests PASS.
-- in_flight_uncommitted: MEDIUM-IMPACT.2.1 completion (pending commit).
+- in_flight_uncommitted: MEDIUM-IMPACT.2.2 completion (pending commit).
 - blockers: MEDIUM-IMPACT.3.4.

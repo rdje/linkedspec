@@ -104,10 +104,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Fuzz _parse_rule_label_line with edge cases: empty input, undef, Unicode labels, very long labels (10K chars), labels with leading digits, labels with embedded colons/special chars, mode suffixes (all valid + malformed combos), whitespace variations, OR{...}/AND{...} boundary values (0,0 / 0,10**9 / negative / non-numeric).`
   Acceptance: `Fuzz test covers >=30 distinct edge-case categories for _parse_rule_label_line. All currently-valid inputs still parse correctly. Any newly-discovered invalid inputs that should be rejected are documented.`
-  Verification: `pending`
+  Verification: `2026-06-12: Extended t/phase0_validation_fuzz.t with 13 additional OR{}/AND{} boundary cases (OR{0,0}, OR{0,10^9}, AND{0,10^9}, OR{1,1}, AND{5,5}, OR{,5}, AND{,10}, OR{1,}, AND{3,}, OR{2,1}, AND{5,2}, OR{,-1}, AND{-1,5}). Now covers 48+ distinct edge-case categories for _parse_rule_label_line. All 5 subtests PASS.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2.3`
@@ -177,7 +177,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.2.2` | `pending` | Fuzz _parse_rule_label_line with >=30 edge-case categories. |
+| 1 | `MEDIUM-IMPACT.2.3` | `pending` | Fuzz _scan_rule_edges_in_fragment with >=25 edge-case categories. |
 | 2 | `MEDIUM-IMPACT.1.2` | `pending` | Extract 12 handler-variant builders into HandlerVariantEmitter module. |
 | 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
 | 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |

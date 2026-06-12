@@ -76,13 +76,28 @@ subtest '_parse_rule_label_line' => sub {
     push @cases, ['bad:AND::', 0, 'mode suffix then extra colon'];
     push @cases, ['bad::AND:', 0, 'double colon with AND then extra colon'];
 
-    # --- Malformed: invalid mode suffixes ---
+    # --- Boundary: mode suffix edge cases ---
     # Note: $ and # are accepted as raw mode suffixes by \S* capture
     push @cases, ['bad:++', 0, 'double plus mode rejected'];
     push @cases, ['bad:**', 0, 'double star mode rejected'];
     push @cases, ['bad:OR{5,2}', 0, 'OR with inverted bounds'];
     push @cases, ['bad:AND{abc}', 0, 'AND with non-numeric bound'];
     push @cases, ['bad:OR{-1}', 0, 'OR with negative bound'];
+
+    # --- Boundary: OR{}/AND{} numeric edge cases ---
+    push @cases, ['rule:OR{0,0}', 1, 'OR{0,0} accepted (zero-min, zero-max)'];
+    push @cases, ['rule:OR{0,1000000000}', 1, 'OR{0,10^9} accepted (large max)'];
+    push @cases, ['rule:AND{0,1000000000}', 1, 'AND{0,10^9} accepted (large max)'];
+    push @cases, ['rule:OR{1,1}', 1, 'OR{1,1} accepted (exact one)'];
+    push @cases, ['rule:AND{5,5}', 1, 'AND{5,5} accepted (exact five)'];
+    push @cases, ['rule:OR{,5}', 1, 'OR{,5} accepted (max-only)'];
+    push @cases, ['rule:AND{,10}', 1, 'AND{,10} accepted (max-only)'];
+    push @cases, ['rule:OR{1,}', 1, 'OR{1,} accepted (min-only)'];
+    push @cases, ['rule:AND{3,}', 1, 'AND{3,} accepted (min-only)'];
+    push @cases, ['rule:OR{2,1}', 0, 'OR{2,1} rejected (min>max)'];
+    push @cases, ['rule:AND{5,2}', 0, 'AND{5,2} rejected (min>max)'];
+    push @cases, ['rule:OR{,-1}', 0, 'OR{,-1} rejected (negative max)'];
+    push @cases, ['rule:AND{-1,5}', 0, 'AND{-1,5} rejected (negative min)'];
 
     # --- Edge: whitespace variations ---
     push @cases, ["\tTop::", 1, 'leading tab before label'];
