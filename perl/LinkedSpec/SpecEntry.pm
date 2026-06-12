@@ -14,6 +14,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::HandlerVariantEmitter ();
 
 use constant {
  DUMP_NONE   => 0,
@@ -606,8 +607,8 @@ sub _build_handler_variants {
  my $bcalls_ref = $args{bcalls_ref};
  my $ab_count_ref = $args{ab_count_ref};
 
- my $acodes = _build_acodes_dispatch_block($acodes_ref);
- my $bcodes = _build_bcodes_dispatch_block($bcalls_ref, $bcodes_ref);
+ my $acodes = LinkedSpec::HandlerVariantEmitter::_build_acodes_dispatch_block($acodes_ref);
+ my $bcodes = LinkedSpec::HandlerVariantEmitter::_build_bcodes_dispatch_block($bcalls_ref, $bcodes_ref);
  my $bcalls = join(' ', @$bcalls_ref);
 
  my $isAND = $node_type =~ /AND/o;
@@ -623,7 +624,7 @@ sub _build_handler_variants {
  my $isDEFAULT_BCODE_REP = !$isAND && !$isOR && !$isREP && length($bcodes);
 
  my %handlers;
- my $default = _build_default_handler_variant(
+ my $default = LinkedSpec::HandlerVariantEmitter::_build_default_handler_variant(
   %args,
   label => $label,
   acodes => $acodes,
@@ -631,7 +632,7 @@ sub _build_handler_variants {
  $handlers{_default} = $default if defined $default;
 
  if ($isAND && length($bcodes)) {
-  my $v = _build_and_bcode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_and_bcode_variant(
    %args,
    label  => $label,
    bcodes => $bcodes,
@@ -640,7 +641,7 @@ sub _build_handler_variants {
   $handlers{AND_BCODE} = $v if defined $v;
  }
  if ($isAND && length($acodes) && ref($acodes_ref) eq 'ARRAY' && @$acodes_ref == 1) {
-  my $v = _build_and_single_acode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_and_single_acode_variant(
    %args,
    label  => $label,
    acodes => $acodes,
@@ -648,7 +649,7 @@ sub _build_handler_variants {
   $handlers{AND_SINGLE_ACODE} = $v if defined $v;
  }
  if ($isAND && length($acodes) && ref($acodes_ref) eq 'ARRAY' && @$acodes_ref > 1) {
-  my $v = _build_and_acode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
    %args,
    label       => $label,
    acodes      => $acodes,
@@ -657,7 +658,7 @@ sub _build_handler_variants {
   $handlers{AND_ACODE} = $v if defined $v;
  }
  if ($isOR && length($acodes)) {
-  my $v = _build_or_acode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_or_acode_variant(
    %args,
    label  => $label,
    acodes => $acodes,
@@ -665,7 +666,7 @@ sub _build_handler_variants {
   $handlers{OR_ACODE} = $v if defined $v;
  }
  if ($isOR && length($bcodes)) {
-  my $v = _build_or_bcode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_or_bcode_variant(
    %args,
    label  => $label,
    bcodes => $bcodes,
@@ -674,7 +675,7 @@ sub _build_handler_variants {
   $handlers{OR_BCODE} = $v if defined $v;
  }
  if (($isREP || $isDEFAULT_BCODE_REP) && length($bcodes)) {
-  my $v = _build_rep_bcode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_bcode_variant(
    %args,
    label     => $label,
    node_type => $node_type,
@@ -684,7 +685,7 @@ sub _build_handler_variants {
   $handlers{REP_BCODE} = $v if defined $v;
  }
  if ($isREP_AND && length($bcodes)) {
-  my $v = _build_rep_and_bcode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_bcode_variant(
    %args,
    label     => $label,
    node_type => $node_type,
@@ -694,7 +695,7 @@ sub _build_handler_variants {
   $handlers{REP_AND_BCODE} = $v if defined $v;
  }
  if ($isREP && length($acodes)) {
-  my $v = _build_rep_acode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_acode_variant(
    %args,
    label     => $label,
    node_type => $node_type,
@@ -703,7 +704,7 @@ sub _build_handler_variants {
   $handlers{REP_ACODE} = $v if defined $v;
  }
  if ($isREP_AND && length($acodes)) {
-  my $v = _build_rep_and_acode_variant(
+  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_acode_variant(
    %args,
    label     => $label,
    node_type => $node_type,

@@ -64,10 +64,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Extract 12 handler-variant builders from SpecEntry.pm into new LinkedSpec::HandlerVariantEmitter module. SpecEntry.pm delegates variant building to the emitter; zero behaviour change. All 19 shipped specs continue to compile identically.`
   Acceptance: `New file perl/LinkedSpec/HandlerVariantEmitter.pm exists with all _build_*_variant methods. SpecEntry.pm imports and delegates to it. Phase0 regression passes at 1005 PASS (or current baseline). perl -c clean on both files.`
-  Verification: `pending`
+  Verification: `2026-06-12: Created perl/LinkedSpec/HandlerVariantEmitter.pm (403 lines) with all 10 variant builder functions + 4 helper functions (_resolve_rep_bounds, _linkedre_or_expr, _build_acodes_dispatch_block, _build_bcodes_dispatch_block) + $rep_nodes_minmax. SpecEntry.pm now delegates via LinkedSpec::HandlerVariantEmitter:: prefix in _build_handler_variants. spec.spec compiles at ratio 1.0000. Old function bodies remain in SpecEntry.pm as dead code (follow-up cleanup leaf). Syntax checks clean on both files.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.1.3`
@@ -177,7 +177,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.1.2` | `pending` | Extract 12 handler-variant builders into HandlerVariantEmitter module. |
+| 1 | `MEDIUM-IMPACT.1.3` | `pending` | Define structured HandlerIR between variant builders and Perl emitter. |
 | 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
 | 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
 

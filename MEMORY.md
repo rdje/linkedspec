@@ -17,13 +17,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `823d1a7` — "Docs: mdBook sync — reference new validation fuzzing harness"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.2.3` (fuzz _scan_rule_edges_in_fragment)
-- next_action: PNT — execute MEDIUM-IMPACT.2.3 (edge scanning fuzzing with >=25 categories)
-  or continue with next eligible independent leaf.
-- Completed this session: .3.3 cross-check, .1.1 SpecEntry inventory, .2.1 fuzzing harness,
-  .2.2 rule label fuzzing, mdBook sync.
+- latest_commit: `7425c8f` — "MEDIUM-IMPACT.2.4 — validate_dsl_syntax/validate_spec_content fuzzing + .2 container complete"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.3` (define HandlerIR)
+- next_action: PNT — execute MEDIUM-IMPACT.1.3 (HandlerIR definition) or next eligible leaf.
+- Completed this session (10 commits): session bootstrap + restructure, .3.3 cross-check,
+  .3.4 blocked analysis, .1.1 SpecEntry inventory, .2.1→.2.4 validation fuzzing (container complete),
+  .1.2 HandlerVariantEmitter extraction, COMPAT-ALIAS-RETIREMENT completed, mdBook sync.
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation.
-- regression baseline: 1005 PASS (phase0). Fuzz harness: 5/5 subtests PASS.
-- in_flight_uncommitted: MEDIUM-IMPACT.2.2 completion (pending commit).
+- regression baseline: 1005 PASS (phase0). Fuzz harness: 5/5 PASS. HandlerVariantEmitter: OK.
+- in_flight_uncommitted: MEDIUM-IMPACT.1.2 completion (pending commit).
 - blockers: MEDIUM-IMPACT.3.4.
