@@ -17,15 +17,16 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `fa1895d` — "MEDIUM-IMPACT.1.3 — define structured HandlerIR"
+- latest_commit: `bee195c` — "Docs: enrich MEDIUM-IMPACT.3.4 with detailed AND-handler root cause analysis + HandlerIR implications"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.4` (backend emitter interface)
-- next_action: PNT — execute MEDIUM-IMPACT.1.4 or next eligible leaf.
+- next_action: PNT — execute MEDIUM-IMPACT.1.4 (backend emitter interface with dispatch table).
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (E-block missing from AND_SINGLE_ACODE).
-- Completed leaves this batch (9): .1.1 inventory, .2.1→.2.4 fuzzing (.2 container done),
-  .1.2 HandlerVariantEmitter extraction, .1.3 HandlerIR, .3.3 cross-check, .3.4 blocked.
+  Three fix approaches identified; unblock condition: choose approach, split into child leaves.
+- Completed leaves: .1.1, .1.2 (HandlerVariantEmitter extraction), .1.3 (HandlerIR),
+  .2.1→.2.4 (fuzzing container done), .3.1, .3.2, .3.3 (cross-check), .3.4 (blocked analysis).
   Pending: .1.4, .1.5, .3.4 (blocked), .3.5, .3.6.
 - HandlerIR: 10 variant kinds, builders→IR + emitter→Perl, SpecEntry dead code removed (452 lines).
 - regression baseline: 1005 PASS (phase0). All 19 specs compile through HandlerIR pipeline.
 - knowledge: language-agnostic-backend-vision.md captures Rust/Julia/Dart backend direction.
-- in_flight_uncommitted: MEDIUM-IMPACT.1.3 completion (pending commit).
+- in_flight_uncommitted: none
 - blockers: MEDIUM-IMPACT.3.4.

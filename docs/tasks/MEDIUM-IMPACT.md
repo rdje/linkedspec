@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12` (post-.3.3: cross-check complete, 10/20 match, 10/20 gaps → .3.4)
+- Last updated: `2026-06-12` (post-bee195c hygiene: backfill .1.3 commit hash, fix stale MEMORY.md, clear git_message_brief.txt)
 - Owner: repo-local workflow
 
 ## Goal
@@ -75,7 +75,7 @@ skipping gap and wiring spec.spec as the primary parse path.
   Goal: `Define a structured HandlerIR — an intermediate representation (hashref-based AST) that describes handler structure (preamble, match-expr, lifecycle slots, variant kind, dispatch blocks) without raw Perl source strings. The HandlerVariantEmitter produces HandlerIR nodes; a new _emit_handler_perl() function consumes them and generates the current Perl source.`
   Acceptance: `HandlerIR structure documented in HandlerVariantEmitter.pm pod. Each variant builder returns a HandlerIR node. _emit_handler_perl() round-trips to identical Perl output. Phase0 1005 PASS. 19/19 shipped specs compile identically.`
   Verification: `2026-06-12: HandlerIR designed and implemented. 10 variant builders return IR hashrefs with kind/label/parse_mode/lifecycle slots/dispatch refs. _emit_handler_perl() dispatches to 10 template functions producing identical Perl output. SpecEntry.pm _build_handler_variants refactored to two-step flow (build IR → emit Perl). Dead code removed: $rep_nodes_minmax, _resolve_rep_bounds, _linkedre_or_expr, _build_acodes_dispatch_block, _build_bcodes_dispatch_block, 10 old variant builders — 452 lines deleted from SpecEntry.pm. HandlerVariantEmitter.pm comprehensively restructured (builder section + emitter section). All 19 shipped specs compile correctly through new pipeline. perl -c clean on both files.`
-  Commit: `pending`
+  Commit: `fa1895d`
 
 - ID: `MEDIUM-IMPACT.1.4`
   Status: `pending`
@@ -237,6 +237,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 | --- | --- | --- |
 | `MEDIUM-IMPACT.1.1` | `654b9c0` | SpecEntry Perl coupling inventory — 10-section knowledge card documenting all eval sites, variant builders, Perl assumptions. |
 | `MEDIUM-IMPACT.1.2` | `d53578a` | Extract handler-variant builders into HandlerVariantEmitter. SpecEntry.pm delegates variant building. Old dead code remains in SpecEntry.pm. |
+| `MEDIUM-IMPACT.1.3` | `fa1895d` | HandlerIR designed + implemented. 10 variant builders → IR. _emit_handler_perl() dispatches to 10 template fns. SpecEntry dead code removed (452 lines). |
 | `MEDIUM-IMPACT.2.1` | `764c2f3` | Validation.pm fuzzing harness — t/phase0_validation_fuzz.t, 5 subtests, 168 combinatorial cases. |
 | `MEDIUM-IMPACT.2.2` | `69a9340` | _parse_rule_label_line fuzzing boundary cases — 48+ edge categories. |
 | `MEDIUM-IMPACT.2.3` | `4724894` | _scan_rule_edges_in_fragment fuzzing — 36 edge categories. |
@@ -244,10 +245,11 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `MEDIUM-IMPACT.3.1` | `2526f2b` | spec.spec accuracy audit: fix body_element REP handler + self-contained grammar. RuleIR ICODE→ACODE fix. SpecEntry REP return→assignment fix. |
 | `MEDIUM-IMPACT.3.2` | `d7294d0` | Close comment/blank-line skipping gap via Runtime.pm wrapper. Self-parse on raw spec.spec OK. |
 | `MEDIUM-IMPACT.3.3` | `e2ea174` | Dual-path cross-check: BootstrapSpec oracle vs spec.spec candidate across 20 specs. |
-| `MEDIUM-IMPACT.3.4` | `29b4d38` | Blocked analysis: AND handler architecture limitation documented. |
+| `MEDIUM-IMPACT.3.4` | `29b4d38` (blocked analysis), `bee195c` (enriched: AND-handler root cause + HandlerIR implications) | Blocked: AND handler architecture limitation documented. Three fix approaches identified. |
 
 ## Changelog
 
+- `2026-06-12` (hygiene): Post-bee195c close-out: backfilled .1.3 commit hash fa1895d in commit log. Fixed stale MEMORY.md (latest_commit → bee195c, cleared in_flight_uncommitted). Corrected .3.4 commit log to include bee195c enrichment. Cleared stale git_message_brief.txt.
 - `2026-06-12` (hygiene): Backfilled commit hashes for 8 completed leaves (.1.1, .1.2, .2.1–.2.4, .3.3, .3.4). Updated verification log and commit log tables. Updated CHANGES.md with 7 missing entries. Updated MEMORY.md latest_commit → d53578a.
 - `2026-06-12`: Created task tree with 3 containers, 13 leaves across SpecEntry decoupling, Validation fuzzing, and BootstrapSpec handoff (including spec.spec accuracy audit per user direction).
 - `2026-06-12` (restructure): Per user direction, expanded `.3` BootstrapSpec handoff from 4 to 6 leaves. Inserted dual-path cross-check leaves `.3.3` (compare BootstrapSpec oracle vs spec.spec candidate across all 20 specs) and `.3.4` (fix gaps) before wiring spec.spec as primary (now `.3.5`). Former `.3.3`/`.3.4` renumbered → `.3.5`/`.3.6`. Updated frontier, decisions, commit log, verification log. Also corrected `.3.2` frontier status (was stale `pending` → now `done`; commit `d7294d0`).
