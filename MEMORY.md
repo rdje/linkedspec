@@ -17,12 +17,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `e2ea174` — "MEDIUM-IMPACT.3.3 — dual-path cross-check: BootstrapSpec oracle vs spec.spec candidate"
+- latest_commit: `5725f87` — "MEDIUM-IMPACT.3.3 — post-commit hash fix: MEMORY.md latest_commit → e2ea174"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4` (fix cross-check gaps:
   AND handler E-block support, body_element over-matching)
-- next_action: Execute MEDIUM-IMPACT.3.4 — fix the 10 spec gaps found in .3.3 cross-check.
-  Primary: add E-block body collection to spec.spec rule_paragraph AND handler. Secondary: tighten
-  body_element:* to not over-match body lines as separate rule paragraphs.
-- regression baseline: 1005 PASS (phase0).
-- in_flight_uncommitted: none
+- next_action: PNT — execute MEDIUM-IMPACT.3.4 (fix spec.spec gaps from .3.3 cross-check).
+  Primary gap: rule_paragraph AND handler lacks E-block body collection (all 10 mismatched
+  specs over-count body elements). Also: body_element:* too broad (matches individual body
+  lines as separate rule paragraphs).
+- regression baseline: 1005 PASS (phase0). Cross-check: 10/20 match, 10/20 inflated candidate counts.
+- in_flight_uncommitted: MEMORY.md hash update only (5725f87 not yet committed).
 - blockers: none.
