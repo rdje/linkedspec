@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `545fe82` — "LINKEDSPEC-LOW-EFFORT.3 — backfill accumulator convention audit conclusion in book"
-- active_work_unit: none — `LINKEDSPEC-LOW-EFFORT` done (3/3 leaves). All enhancements exhausted. PNT idle.
-- next_action: await user direction. Six enhancements shipped this session across 2 trees. Low-effort items complete: test sweep clean, post-commit hook active, accumulator docs backfilled.
-- regression baseline: 1005 PASS (phase0). Post-commit hook will warn on hash drift.
-- in_flight_uncommitted: tree close-out docs; about to commit
+- latest_commit: `9104257` — "LINKEDSPEC-LOW-EFFORT.4 — tree close-out: update task tree, TASK_TREE.md, MEMORY.md"
+- active_work_unit: none — all task trees complete. PNT idle.
+- next_action: await user direction. Two trees completed this session (3 enhancements + 3 low-effort).
+- regression baseline: 1005 PASS (phase0). Post-commit hook active; Knowledge Map at 21 facts.
+- in_flight_uncommitted: none
 - blockers: none.
