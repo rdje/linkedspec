@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# .githooks/post-commit — verify MEMORY.md resume pointer matches HEAD after every commit.
+# Prevents the stale-hash drift documented in COMPAT-ALIAS-RETIREMENT session notes.
+# This is a verification-only hook; it does not modify the commit.
+# Activate once per clone: git config core.hooksPath .githooks
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+
+MEMORY_MD="$ROOT/MEMORY.md"
+HEAD_HASH="$(git log -1 --format='%h')"
+
+if [ ! -f "$MEMORY_MD" ]; then
+  echo "post-commit: MEMORY.md missing — run the COMMIT.md workflow" >&2
+  exit 1
+fi
+
+STATED_HASH=$(grep -oP 'latest_commit:\s*`\K[0-9a-f]+' "$MEMORY_MD" 2>/dev/null || echo "")
+
+if [ -z "$STATED_HASH" ]; then
+  echo "post-commit: MEMORY.md latest_commit hash not found or unparseable" >&2
+  echo "post-commit: HEAD is $HEAD_HASH — update MEMORY.md current-state block" >&2
+  exit 0  # soft warning — do not block
+fi
+
+if [ "$STATED_HASH" != "$HEAD_HASH" ]; then
+  echo "post-commit: MEMORY.md hash DRIFT detected" >&2
+  echo "post-commit:   MEMORY.md says: $STATED_HASH" >&2
+  echo "post-commit:   HEAD is:        $HEAD_HASH" >&2
+  echo "post-commit:   Run the COMMIT.md workflow to update MEMORY.md" >&2
+  exit 0  # soft warning — do not block (pre-commit + CI are the hard gates)
+fi

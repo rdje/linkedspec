@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `bf94e1d` — "LINKEDSPEC-ENHANCEMENTS.3 — split test infrastructure"
-- active_work_unit: none — `LINKEDSPEC-ENHANCEMENTS` done (3/3 leaves). PNT idle.
-- next_action: await user direction. Three enhancements completed this session: Knowledge Map (21 facts), plugin mechanical gate (1005 PASS), test infrastructure split (TestHelpers.pm extracted).
-- regression baseline: 1005 PASS (phase0). New plugin lock subtest active.
-- in_flight_uncommitted: task tree + MEMORY.md update; about to commit
+- latest_commit: `0497bc4` — "LINKEDSPEC-LOW-EFFORT.1 — sweep confirms zero remaining deleted-.plg slurp() references"
+- active_work_unit: `LINKEDSPEC-LOW-EFFORT` → frontier leaf: `LINKEDSPEC-LOW-EFFORT.2` (`in_progress`)
+- next_action: continue PNT: `LINKEDSPEC-LOW-EFFORT.2` (commit workflow automation — post-commit hook)
+- regression baseline: 1005 PASS (phase0). Plugin lock gate active; test cleanup confirmed clean.
+- in_flight_uncommitted: .githooks/post-commit created; about to commit
 - blockers: none.
