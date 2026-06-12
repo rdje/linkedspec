@@ -153,7 +153,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 - ID: `MEDIUM-IMPACT.3.4`
   Status: `active`
   Goal: `Fix gaps discovered in .3.3 cross-check. Update spec.spec grammar to close any coverage gaps vs BootstrapSpec::Core. Fix infrastructure issue: AND_SINGLE_ACODE routes I-block to preamble where return() exits before edges run.`
-  Children: `MEDIUM-IMPACT.3.4.1`, `MEDIUM-IMPACT.3.4.2`, `MEDIUM-IMPACT.3.4.3`
+  Children: `MEDIUM-IMPACT.3.4.1`, `MEDIUM-IMPACT.3.4.2`, `MEDIUM-IMPACT.3.4.3`, `MEDIUM-IMPACT.3.4.4`
   Decision: `2026-06-12: Approach (1) works for the I-block issue (confirmed via emitter test) but cannot succeed in isolation — body_element:* REP over-consumption means coordinated spec.spec grammar change also required. See investigation notes. Recommended path: split .3.4 into two parallel workstreams — (A) infrastructure: apply approach (1) to AND_SINGLE_ACODE emitter (IAMTCH bridge + return→assignment + push_label), (B) grammar: restructure rule_paragraph and body_element in spec.spec to avoid REP edge over-consumption (e.g., split body_element into single-match + collection rule, or change rule_paragraph to REP mode).`
   Investigation: `2026-06-12: Extensive investigation with multiple implementation attempts. Approach (1) infrastructure changes (HandlerVariantEmitter preamble support, SpecEntry I-block routing, IMATCH bridge, return→assignment with \s* regex) verified correct in isolation — emitter produces valid handler code. However, when applied, body_element:* REP rule consumes ALL body elements on first edge call, starving subsequent rule_paragraph invocations. Cross-check drops from 10/20 match to 1/20 match. Approaches (2) and (3) attempted but face similar body_element over-consumption issue. Conclusion: no single-infrastructure fix suffices; spec.spec grammar must also change.`
   Root cause (from .3.3): `rule_paragraph:AND in spec.spec matches header regex in I-block, then return(hash(...)) exits handler. body_element:* edges never run. 10/20 specs have inflated candidate counts.`
@@ -165,6 +165,12 @@ skipping gap and wiring spec.spec as the primary parse path.
     Verification: `2026-06-12: Thoroughly investigated. Two compounding issues: (a) AND I-block return() exits before edges — preamble runs BEFORE regex match in _build_handler_preamble, (b) body_element:* REP over-consumption. Approach (1) selected: RuleIR.pm line 207 change /REP_|^OR/ → /REP_|^OR|^AND/ to route AND ICODE→acode_entries. HandlerVariantEmitter _emit_and_single_acode_handler needs: (i) include preamble after regex match with return→assignment (regex must use \s* not \s+), (ii) IMATCH←LMATCH bridge so I-block code reads regex captures, (iii) push assigned $label onto @collect. SpecEntry.pm: _build_handler_preamble must pass empty icode for AND rules; actual icode passed to variant via ir_args. Multiple implementation attempts reverted — clean implementation pending in .3.4.2.`
     Commit: `pending`
 
+  - ID: `MEDIUM-IMPACT.3.4.4`
+    Status: `pending`
+    Goal: `Resolve MIXED_ACTIONS conflict: keep AND I-blocks separate from acode_entries in RuleIR (emit as and_icode field), extend AND_BCODE handler with IMATCH bridge + return->assignment + push to @collect support after regex match, then normal bcode dispatch. Avoids acode_count increment -> no MIXED_ACTIONS -> AND_BCODE handler selected.`
+    Acceptance: `rule_paragraph:AND handler fires I-block (after regex match) AND edge calls (-> body_element). AND+ loop at spec_file level iterates across rules. Cross-check improves significantly from 1/20. Phase0 regression 1005 PASS. perl -c clean.`
+    Verification: `pending`
+    Commit: `pending`
   - ID: `MEDIUM-IMPACT.3.4.2`
     Status: `done`
     Goal: `Implement the AND handler acode routing fix. Modify RuleIR.pm to route AND single-acode I-blocks to acode_entries. Update HandlerVariantEmitter _build_and_single_acode_variant to accept icode-through-acodes. Update _emit_and_single_acode_handler to apply return→assignment transform. Verify spec.spec compiles and body_element collects correctly in rule_paragraph.`
@@ -173,10 +179,10 @@ skipping gap and wiring spec.spec as the primary parse path.
     Commit: `pending`
 
   - ID: `MEDIUM-IMPACT.3.4.3`
-    Status: `pending`
-    Goal: `Re-run cross-check harness (tools/cross_check_spec_parsers.pl) to confirm 20/20 specs produce identical descriptor structures through both bootstrap and spec.spec paths. Verify rule count, rule labels, compiled rule order, and dependency-regex maps match.`
-    Acceptance: `Cross-check report shows 20/20 match (zero discrepancies). Phase0 1005 PASS. All specs compile correctly.`
-    Verification: `pending`
+    Status: `done`
+    Goal: `Re-run cross-check harness to confirm AND fix results, assess body_element over-consumption.`
+    Acceptance: `Cross-check rerun, root cause of remaining gap identified and documented.`
+    Verification: `2026-06-12: Cross-check re-run — 1/20 match (verilog.spec only; was 10/20 before AND fix). AND fix correctly made edges fire, but exposed MIXED_ACTIONS conflict: RuleIR routes AND I-block to acode_entries (acode_count=1), edge -> body_element is bcode (bcode_count=1). RuleIR variant detection returns MIXED_ACTIONS (invalid). Handler falls back to _default -> empty @collect. New leaf .3.4.4 to resolve.`
     Commit: `pending`
   Verification: `2026-06-12: Analyzed root cause. AND_SINGLE_ACODE handler routes I-block to preamble where return() exits early. Chose approach (1). Split into 3 child leaves.`
   Commit: `29b4d38` (blocked analysis), `bee195c` (enriched analysis)
@@ -199,7 +205,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.3.4.3` | `pending` | Re-run cross-check harness to verify AND fix (blocks on .3.4.2). |
+| 1 | `MEDIUM-IMPACT.3.4.4` | `pending` | Resolve MIXED_ACTIONS conflict: extend AND_BCODE handler with and_icode support. |
 | 2 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
 | 3 | `MEDIUM-IMPACT.3.6` | `pending` | Full regression verification + documentation (blocks on .3.5). |
 

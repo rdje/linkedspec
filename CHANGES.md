@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.3.4.3: Cross-check re-run + MIXED_ACTIONS root cause analysis
+
+- **Cross-check re-run** (`tools/cross_check_spec_parsers.pl`): 1/20 match (verilog.spec only).
+  Was 10/20 match before AND ICODE routing fix (.3.4.2). The AND fix correctly routes
+  I-blocks through acode_entries (edges now fire), but exposed a deeper conflict.
+- **MIXED_ACTIONS root cause**: RuleIR routes AND I-block to `acode_entries` (acode_count=1),
+  while edge `-> body_element` is a bcode entry (bcode_count=1). RuleIR variant detection
+  (`_select_rule_handler_variant`, line 34) returns `MIXED_ACTIONS` when both counts > 0.
+  Execution shape is `invalid_mixed_actions`. Handler selection falls back to `_default`,
+  which processes neither I-blocks nor edges → empty `@collect` arrays.
+- Minimal test confirms AND+ iteration at spec_file level works (2 entries for 2-rule input),
+  but each entry is empty (I-block hash + edge results lost).
+- **Path forward** (.3.4.4): RuleIR emits AND I-block as `and_icode` field in `rule_ir`
+  (not as an acode_entry). SpecEntry passes to AND_BCODE variant. AND_BCODE emitter
+  extended with IMATCH bridge + return→assignment + push to @collect after regex match,
+  then normal bcode dispatch. No acode_count increment → no MIXED_ACTIONS → AND_BCODE
+  handler properly selected.
+- Task tree: .3.4.3 marked done, new leaf .3.4.4 created. Frontier updated.
+
 ## 2026-06-12 — MEDIUM-IMPACT.3.4.2: AND handler ICODE routing fix
 
 - **RuleIR.pm** `_collect_rule_ir` (line 207): Changed per-regex lifecycle routing condition

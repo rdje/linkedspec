@@ -18,23 +18,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `148c746` — "MEDIUM-IMPACT.3.4.2 — Route AND ICODE to acode_entries, apply return→assignment in AND_SINGLE_ACODE emitter"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.3` (re-run cross-check after AND fix)
-- next_action: Re-run cross-check harness (MEDIUM-IMPACT.3.4.3) to confirm AND fix results,
-  then assess body_element:* over-consumption (issue b).
-- MEDIUM-IMPACT.3.4 investigation: Two compounding issues in spec.spec rule_paragraph:AND:
-  (a) I-block return(hash(...)) runs BEFORE regex match → handler exits, edges never run.
-  (b) body_element:* is REP → if edges did run, one call consumes ALL body elements,
-      starving subsequent rule_paragraph calls. Fix (a) via approach (1); (b) may
-      resolve naturally if body_element:* stops at non-matching rule headers.
-  Three approaches attempted; approach (1) chosen: modify RuleIR.pm line 207 to route
-  AND ICODE→acode_entries (like REP/OR), update _emit_and_single_acode_handler with
-  return→assignment + IMATCH←LMATCH bridge. Approach (3) spec.spec grammar restructure
-  attempted but reverted (body_element over-consumption prevented multi-rule parsing).
-- .3.4 split into: .3.4.1 design (done), .3.4.2 implement (in_progress), .3.4.3 re-cross-check.
-- Completed leaves: .1.1→.1.5 (.1 container done), .2.1→.2.4 (.2 container done),
-  .3.1, .3.2, .3.3, .3.4.1.
-  Pending: .3.4.2, .3.4.3, .3.5, .3.6.
-- HandlerIR: 10 variant kinds; Backend dispatch: %BACKEND_EMITTERS = (perl, json).
-- regression baseline: 1005 PASS (phase0). Cross-check baseline: 10/20 match, 10/20 mismatch.
-- in_flight_uncommitted: none
-- blockers: none (.3.4.2 implementation complete; .3.4.3 ready)
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.4` (resolve MIXED_ACTIONS conflict)
+- next_action: Implement .3.4.4 — avoid MIXED_ACTIONS by routing AND I-blocks as a separate field (not acode_entries), extend AND_BCODE handler with and_icode support (IMATCH bridge + return→assignment + push to @collect after regex match, then normal bcode dispatch).
+- .3.4.3 completed: Cross-check re-run confirms AND fix correctly makes edges fire, but exposed MIXED_ACTIONS conflict. RuleIR routes AND I-block to acode_entries (acode_count=1), edge -> body_element is bcode (bcode_count=1). RuleIR variant detection returns MIXED_ACTIONS (invalid) → handler falls back to _default → empty @collect. Cross-check: 1/20 match (was 10/20 before fix).
+- MIXED_ACTIONS root cause: RuleIR line 34 returns 'MIXED_ACTIONS' when both acode_count && bcode_count. Execution shape is 'invalid_mixed_actions'. Handler selection falls back to _default.
+- Path forward (.3.4.4): RuleIR emits AND I-block as and_icode field (not acode_entry). SpecEntry passes to AND_BCODE variant. AND_BCODE emitter extended: IMATCH bridge + return→assignment + push to @collect after regex match, then normal bcode dispatch. No acode_count increment → no MIXED_ACTIONS → AND_BCODE handler selected.
+- Completed leaves: .1.1→.1.5, .2.1→.2.4, .3.1, .3.2, .3.3, .3.4.1, .3.4.2, .3.4.3.
+  Pending: .3.4.4, .3.5, .3.6.
+- regression baseline: 1005 PASS (phase0). Cross-check baseline: 1/20 match (was 10/20 pre-AND-fix).
+- in_flight_uncommitted: MEDIUM-IMPACT.md updated with .3.4.3 assessment + .3.4.4 leaf
+- blockers: none
