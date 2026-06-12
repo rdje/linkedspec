@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `e36224b` — "MEDIUM-IMPACT.3.1 — spec.spec accuracy audit: fix body_element REP handler + self-contained grammar"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.1` (done), next: `MEDIUM-IMPACT.3.2` (comment skip gap)
-- next_action: PNT to MEDIUM-IMPACT.3.2 (close comment/blank-line skipping gap) or await user direction.
+- latest_commit: `221b6ea` — "MEDIUM-IMPACT.3.1 — post-commit hash fix + KM: MEMORY.md latest_commit → e36224b"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.1` (done, committed `2526f2b`), next: `MEDIUM-IMPACT.3.2` (comment skip gap)
+- next_action: PNT to MEDIUM-IMPACT.3.2 (close comment/blank-line skipping gap). Task-tree frontier updated; bookkeeping committed.
 - regression baseline: 1005 PASS (phase0). RuleIR+SpecEntry infrastructure fixes mechanically gated.
-- in_flight_uncommitted: none
+- in_flight_uncommitted: task-tree bookkeeping for .3.1 (this update + CHANGES/DEVELOPMENT_NOTES/LIVE_ACHIEVEMENT_STATUS)
 - blockers: none.

@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — Post-.3.1 bookkeeping: task-tree frontier + commit-log + live-doc sync (MEDIUM-IMPACT.3.1)
+
+- Completed administrative close-out for `MEDIUM-IMPACT.3.1` (committed `2526f2b` + hash-fix chain through `221b6ea`).
+- Task tree `docs/tasks/MEDIUM-IMPACT.md`: updated `.3.1` commit log (was `pending` → `2526f2b`), updated frontier (removed `.3.1`, promoted `.3.2` to first eligible), filled verification and commit log tables.
+- MEMORY.md: `latest_commit` updated `e36224b` → `221b6ea`, `next_action` confirmed as PNT to `.3.2`.
+- `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md` updated.
+- Removed orphaned untracked `perl/LinkedSpec/RuleIR.pm.bak`.
+- Regression baseline: phase0 `Tests=1005, PASS`. Memory-architecture self-check: all invariants hold.
+
 ## 2026-06-11 — Post-commit cleanup: MEMORY.md + task-tree commit-log backfill (ACCUMULATOR-CONVENTION-AUDIT.3)
 
 - Completed the post-commit administrative close-out for `ACCUMULATOR-CONVENTION-AUDIT.3` (commit `3065636`).

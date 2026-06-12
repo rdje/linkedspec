@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12`
+- Last updated: `2026-06-12` (post-.3.1 bookkeeping)
 - Owner: repo-local workflow
 
 ## Goal
@@ -132,7 +132,7 @@ skipping gap and wiring spec.spec as the primary parse path.
   Goal: `Audit spec.spec accuracy against BootstrapSpec::Core — compare every bootstrap rule descriptor to spec.spec's grammar coverage. Fix spec.spec to cover all gaps found.`
   Acceptance: `spec.spec updated with: (a) self-contained body_element alternatives (inline body_edge_ast/blind_edge_ast logic, no bare helper calls), (b) capture groups added to edge/blind_edge regexes for entry_group access, (c) removed body_edge_ast/blind_edge_ast helper rules. Infrastructure fixes: RuleIR.pm converts per-regex ICODE→ACODE for REP/OR rules (was: all ICODE pushed to general lifecycle code, causing acode_count=0). SpecEntry.pm transforms return→assignment for REP handlers (was: return() exited REP loop on first match). Both fixes mechanically gated — all 1005 regression tests pass. body_element now correctly loops and returns array of matched body ASTs. Remaining gaps documented: body collection in rule_paragraph (AND handler lacks E-block support), comment/blank-line skipping.`
   Verification: `2026-06-12: tools/run_ci_local.sh exits 0 (1005 PASS). spec.spec compiles ratio 1.0000. body_element returns ARRAY with correct multi-element matches.`
-  Commit: `pending`
+  Commit: `2526f2b` (substantive); hash-fix chain `2034320` `36a8e3a` `fb3b960` `e36224b` `221b6ea`
 
 - ID: `MEDIUM-IMPACT.3.2`
   Status: `pending`
@@ -159,7 +159,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.3.1` | `pending` | spec.spec accuracy audit — user-directed priority; prerequisite for handoff. |
+| 1 | `MEDIUM-IMPACT.3.2` | `pending` | Close comment/blank-line skipping gap — prerequisite for spec.spec primary path. |
 | 2 | `MEDIUM-IMPACT.1.1` | `pending` | SpecEntry inventory — understand all coupling before extracting. |
 | 3 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness can be built in parallel; no code changes to core. |
 
@@ -184,13 +184,14 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `pending` | `pending` | `pending` | `pending` |
+| `2026-06-12` | `MEDIUM-IMPACT.3.1` | `tools/run_ci_local.sh` (1005 PASS), spec.spec compile ratio 1.0000, body_element returns ARRAY with correct multi-element matches | Pass |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `pending` | `pending` | `pending` |
+| `MEDIUM-IMPACT.3.1` | `2526f2b` | spec.spec accuracy audit: fix body_element REP handler + self-contained grammar. RuleIR ICODE→ACODE fix. SpecEntry REP return→assignment fix. |
+| `MEDIUM-IMPACT.3.1` | `2034320`, `36a8e3a`, `fb3b960`, `e36224b`, `221b6ea` | Post-commit MEMORY.md hash-fix chain. |
 
 ## Changelog
 
