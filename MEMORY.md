@@ -17,13 +17,15 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `407abec` — "Docs: backfill commit hashes, refresh live docs, update ARCHITECTURE_STATE.md (MEDIUM-IMPACT hygiene)"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.3` (define HandlerIR)
-- next_action: PNT — execute MEDIUM-IMPACT.1.3 (HandlerIR definition) or next eligible leaf.
+- latest_commit: `5c729d8` — "Docs: post-commit hash fix"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.4` (backend emitter interface)
+- next_action: PNT — execute MEDIUM-IMPACT.1.4 or next eligible leaf.
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (E-block missing from AND_SINGLE_ACODE).
-- Completed leaves this batch (8): .1.1 SpecEntry inventory, .2.1→.2.4 validation fuzzing (.2 container done),
-  .1.2 HandlerVariantEmitter extraction, .3.3 cross-check, .3.4 blocked analysis (documented).
-  Pending: .1.3, .1.4, .1.5, .3.4 (blocked), .3.5, .3.6.
-- regression baseline: 1005 PASS (phase0). Fuzz harness: 5/5 PASS.
-- in_flight_uncommitted: none.
+- Completed leaves this batch (9): .1.1 inventory, .2.1→.2.4 fuzzing (.2 container done),
+  .1.2 HandlerVariantEmitter extraction, .1.3 HandlerIR, .3.3 cross-check, .3.4 blocked.
+  Pending: .1.4, .1.5, .3.4 (blocked), .3.5, .3.6.
+- HandlerIR: 10 variant kinds, builders→IR + emitter→Perl, SpecEntry dead code removed (452 lines).
+- regression baseline: 1005 PASS (phase0). All 19 specs compile through HandlerIR pipeline.
+- knowledge: language-agnostic-backend-vision.md captures Rust/Julia/Dart backend direction.
+- in_flight_uncommitted: MEDIUM-IMPACT.1.3 completion (pending commit).
 - blockers: MEDIUM-IMPACT.3.4.

@@ -24,29 +24,6 @@ use constant {
  DUMP_DEBUG  => 500,
 };
 
-my $rep_nodes_minmax = {
- REP_PLUS   => [1, 10**9],
- REP_STAR   => [0, 10**9],
- REP_OPT    => [0, 1],
- REP_OR_PLUS => [1, 10**9],
-};
-
-sub _resolve_rep_bounds {
- my (%args) = @_;
- my $node_type = $args{node_type};
- my $rep_min = $args{rep_min};
- my $rep_max = $args{rep_max};
-
- if (defined($rep_min) || defined($rep_max)) {
-  $rep_min = defined($rep_min) ? $rep_min : 0;
-  $rep_max = defined($rep_max) ? $rep_max : 10**9;
-  return ($rep_min, $rep_max);
- }
-
- return unless defined($node_type) && exists $rep_nodes_minmax->{$node_type};
- return @{$rep_nodes_minmax->{$node_type}};
-}
-
 sub _trace_enter {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -118,17 +95,6 @@ sub _quote_source_label_for_line_directive {
  return $source_label
 }
 
-sub _linkedre_or_expr {
- my (%args) = @_;
- my $label = $args{label};
- my $parse_mode = defined($args{parse_mode}) && length($args{parse_mode})
-  ? $args{parse_mode}
-  : 'seek';
- return $parse_mode eq 'consume'
-  ? "LinkedRE::or(\$STRING, \$\$descr{dependency_regex_map}{$label}, 'consume', \$info)"
-  : "LinkedRE::or(\$STRING, \$\$descr{dependency_regex_map}{$label}, \$info)"
-}
-
 sub _build_handler_preamble {
  my ($label, $actual_icode) = @_;
  return
@@ -145,458 +111,6 @@ my @'.$label.';
 '.$actual_icode;
 }
 
-sub _build_acodes_dispatch_block {
- my ($acodes_ref) = @_;
- return '' unless ref($acodes_ref) eq 'ARRAY' && @$acodes_ref;
- my $once = 0;
- my $idx = 0;
- my $acodes = '';
- $acodes .= ($once++ ? " elsif " : "\n   if").'($$minfo{index} == '.$idx++.") {\n    $_\n   }" foreach (@$acodes_ref);
- return $acodes
-}
-
-sub _build_bcodes_dispatch_block {
- my ($bcalls_ref, $bcodes_ref) = @_;
- return '' unless ref($bcalls_ref) eq 'ARRAY' && @$bcalls_ref;
- return '' unless ref($bcodes_ref) eq 'HASH';
- my $once = 0;
- my $bcodes = '';
- foreach my $call (@$bcalls_ref) {
-  my $call_code = defined($bcodes_ref->{$call}) ? $bcodes_ref->{$call} : '';
-  $bcodes .= ($once++ ? " elsif " : "\n   if")."(\$call eq \"$call\") {\n    $call_code\n   }";
- }
- return $bcodes
-}
-
-sub _build_default_handler_variant {
- my (%args) = @_;
- my $acodes = $args{acodes} // '';
- return undef unless length $acodes;
- my $label = $args{label};
- my $match_expr = _linkedre_or_expr(%args, label => $label);
- my $actual_lxcode = $args{actual_lxcode} // '';
- my $actual_lscode = $args{actual_lscode} // '';
- my $actual_lecode = $args{actual_lecode} // '';
- return '
-
- while (1) {
-  my $minfo = '.$match_expr.';
-
-  unless($minfo) {
-  '.($actual_lxcode || 'return undef').'
-  }
-
-  my $LMATCH      = $$minfo{match};
-  my @LMATCH_LIST = @{$$minfo{match_list} // []};
-  my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
-  my $LINDEX      = $$minfo{index};
-  my $LSPOS       = pos $$STRING;
-
-  '.$actual_lscode.'
-
-  '.   $acodes     .'
-
-  '.$actual_lecode.'
-
- }'
-}
-
-sub _build_and_bcode_sequence_body {
- my (%args) = @_;
- my $bcodes = $args{bcodes} // '';
- return undef unless length $bcodes;
- my $label = $args{label};
- my $actual_lxcode = $args{actual_lxcode} // '';
- my $actual_lecode = $args{actual_lecode} // '';
- my $actual_ecode = $args{actual_ecode} // '';
- my $bcalls = $args{bcalls} // '';
- return '
-
-  my $'.$label.';
-  my @'.$label.'_collect;
-  foreach my $call (qw('.$bcalls.')) {
-   my $current_call = $call;
-
-   '.$bcodes.'
-
-   unless ($'.$label.') {
-    '.($actual_lxcode || 'return undef').'
-   }
-
-   '.($actual_lecode || 'push @'.$label.'_collect, $'.$label).'
-  }
-
-  '.($actual_ecode || 'return \@'.$label.'_collect').'
- '
-}
-
-sub _build_and_bcode_variant {
- my (%args) = @_;
- return _build_and_bcode_sequence_body(%args)
-}
-
-sub _build_and_single_acode_variant {
- my (%args) = @_;
- my $acodes = $args{acodes} // '';
- return undef unless length $acodes;
- my $label = $args{label};
- my $match_expr = _linkedre_or_expr(%args, label => $label);
- my $actual_lxcode = $args{actual_lxcode} // '';
- my $actual_lscode = $args{actual_lscode} // '';
- my $actual_lecode = $args{actual_lecode} // '';
- return '
-
- my @'.$label.'_collect;
- my $minfo = '.$match_expr.';
- unless($minfo) {
-  '.($actual_lxcode || 'return undef').'
- }
-
- unless($$minfo{index} == 0) {
-  '.($actual_lxcode || 'return undef').'
- }
-
- my $LMATCH      = $$minfo{match};
- my @LMATCH_LIST = @{$$minfo{match_list} // []};
- my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
- my $LINDEX      = $$minfo{index};
- my $LSPOS       = pos $$STRING;
-
- '.$actual_lscode.'
-
- '.   $acodes     .'
-
- '.$actual_lecode.'
-
- return \@'.$label.'_collect;
- '
-}
-
-sub _build_and_acode_sequence_body {
- my (%args) = @_;
- my $acodes = $args{acodes} // '';
- return undef unless length $acodes;
- my $label = $args{label};
- my $match_expr = _linkedre_or_expr(%args, label => $label);
- my $actual_lxcode = $args{actual_lxcode} // '';
- my $actual_lscode = $args{actual_lscode} // '';
- my $actual_lecode = $args{actual_lecode} // '';
- my $acode_count = $args{acode_count} // 0;
- return '
-
- my @'.$label.'_collect;
- my $idx = 0;
-
- while ($idx < '.$acode_count.') {
-  my $minfo = '.$match_expr.';
-  unless($minfo) {
-   '.($actual_lxcode || 'return undef').'
-  }
-
-  # Only proceed if we match the expected index in sequence
-  unless($$minfo{index} == $idx) {
-   '.($actual_lxcode || 'return undef').'
-  }
-
-  my $LMATCH      = $$minfo{match};
-  my @LMATCH_LIST = @{$$minfo{match_list} // []};
-  my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
-  my $LINDEX      = $$minfo{index};
-  my $LSPOS       = pos $$STRING;
-
-  '.$actual_lscode.'
-
-  '.   $acodes     .'
-
-  '.$actual_lecode.'
-
-  $idx++;
- }
-
- return \@'.$label.'_collect;
- '
-}
-
-sub _build_and_acode_variant {
- my (%args) = @_;
- return _build_and_acode_sequence_body(%args)
-}
-
-sub _build_or_bcode_choice_body {
- my (%args) = @_;
- my $bcodes = $args{bcodes} // '';
- return undef unless length $bcodes;
- my $label = $args{label};
- my $actual_lxcode = $args{actual_lxcode} // '';
- my $actual_ecode = $args{actual_ecode} // '';
- my $bcalls = $args{bcalls} // '';
- return '
-
-  my $'.$label.';
-  foreach my $call (qw('.$bcalls.')) {
-   my $current_call = $call;
-
-   '.$bcodes.'
-
-   if ($'.$label.') {
-    '.($actual_lxcode || 'return $'.$label).'
-   }
-  }
-
-  '.($actual_ecode || 'return undef').'
- '
-}
-
-sub _build_or_acode_variant {
- my (%args) = @_;
- my $acodes = $args{acodes} // '';
- return undef unless length $acodes;
- my $label = $args{label};
- my $match_expr = _linkedre_or_expr(%args, label => $label);
- my $actual_lxcode = $args{actual_lxcode} // '';
- return '
-
- my $minfo = '.$match_expr.';
- unless($minfo) {
- '.($actual_lxcode || 'return undef').'
- }
-
- my $LMATCH      = $$minfo{match};
- my @LMATCH_LIST = @{$$minfo{match_list} // []};
- my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
- my $LINDEX      = $$minfo{index};
- my $LSPOS       = pos $$STRING;
-
- '.   $acodes .'
- '
-}
-
-sub _build_or_bcode_variant {
- my (%args) = @_;
- return _build_or_bcode_choice_body(%args)
-}
-
-sub _build_rep_bcode_variant {
- my (%args) = @_;
- my ($min, $max) = _resolve_rep_bounds(%args);
- if (!defined($min) || !defined($max)) {
-  my $node_type = $args{node_type} // '';
-  if ($node_type eq 'default') {
-   ($min, $max) = (1, 10**9);
-  }
- }
- return undef unless defined $min && defined $max;
-
- my $label = $args{label};
- my $actual_itcode = $args{actual_itcode} // '';
- my $actual_excode = $args{actual_excode} // '';
- my $actual_ecode = $args{actual_ecode} // '';
- my $or_code = _build_or_bcode_choice_body(
-  %args,
-  actual_ecode => 'return undef',
- );
- return undef unless defined $or_code;
-
- return '
-   my $min='.$min.';
-   my $max='.$max.';
-   my $'.$label.';
-   my @'.$label.'_collect;
-
-   my $ccount = 0;
-   my $or_code = sub {'.$or_code.'
-   };
-
-   while(1) {
-    my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    my $or_ret = $or_code->();
-    unless ($or_ret) {
-     if ($ccount >= $min) {
-      '.($actual_excode || 'return \@'.$label.'_collect').'
-     } else {
-      return undef
-     }
-    }
-
-    my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    if ($loop_end_pos == $loop_start_pos) {
-     if ($ccount >= $min) {
-      '.($actual_excode || 'return \@'.$label.'_collect').'
-     } else {
-      return undef
-     }
-    }
-
-    ++$ccount;
-
-    '.($actual_itcode || 'push @'.$label.'_collect, $or_ret;').'
-
-    last unless $ccount < $max
-   }
-
-   '.($actual_ecode || 'return \@'.$label.'_collect').'
-   '
-}
-
-sub _build_rep_and_bcode_variant {
- my (%args) = @_;
- my ($min, $max) = _resolve_rep_bounds(%args);
- return undef unless defined $min && defined $max;
-
- my $label = $args{label};
- my $actual_itcode = $args{actual_itcode} // '';
- my $actual_excode = $args{actual_excode} // '';
- my $actual_ecode = $args{actual_ecode} // '';
- my $and_code = _build_and_bcode_sequence_body(
-  %args,
-  actual_ecode => 'return \@'.$label.'_collect',
- );
- return undef unless defined $and_code;
-
- return '
-   my $min='.$min.';
-   my $max='.$max.';
-   my $'.$label.';
-   my @'.$label.'_collect;
-
-   my $ccount = 0;
-   my $and_code = sub {'.$and_code.'
-   };
-
-   while(1) {
-    my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    my $and_ret = $and_code->();
-    unless ($and_ret) {
-     if ($ccount >= $min) {
-      '.($actual_excode || 'return \@'.$label.'_collect').'
-     } else {
-      return undef
-     }
-    }
-
-    my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    if ($loop_end_pos == $loop_start_pos) {
-     if ($ccount >= $min) {
-      '.($actual_excode || 'return \@'.$label.'_collect').'
-     } else {
-      return undef
-     }
-    }
-
-    ++$ccount;
-
-    '.($actual_itcode || 'push @'.$label.'_collect, $and_ret;').'
-
-    last unless $ccount < $max
-   }
-
-   '.($actual_ecode || 'return \@'.$label.'_collect').'
-   '
-}
-
-sub _build_rep_and_acode_variant {
- my (%args) = @_;
- my ($min, $max) = _resolve_rep_bounds(%args);
- return undef unless defined $min && defined $max;
-
- my $label = $args{label};
- my $actual_itcode = $args{actual_itcode} // '';
- my $actual_excode = $args{actual_excode} // '';
- my $actual_ecode = $args{actual_ecode} // '';
- my $acode_count = (ref($args{acodes_ref}) eq 'ARRAY') ? scalar(@{$args{acodes_ref}}) : 0;
- return undef unless $acode_count;
-
- my $and_code = _build_and_acode_sequence_body(
-  %args,
-  acode_count  => $acode_count,
-  actual_ecode => 'return \@'.$label.'_collect',
- );
- return undef unless defined $and_code;
-
- return '
-
-   my $min='.$min.';
-   my $max='.$max.';
-   my @'.$label.'_collect;
-   my $ccount = 0;
-   my $and_code = sub {'.$and_code.'
-   };
-
-   while(1) {
-    my $and_ret = $and_code->();
-    unless ($and_ret) {
-     if ($ccount >= $min) {
-      '.($actual_excode || 'return \@'.$label.'_collect').'
-     } else {
-      return undef
-     }
-    }
-
-    ++$ccount;
-
-    '.($actual_itcode || 'push @'.$label.'_collect, $and_ret;').'
-
-    last unless $ccount < $max
-   }
-
-   '.($actual_ecode || 'return \@'.$label.'_collect').'
- '
-}
-
-sub _build_rep_acode_variant {
- my (%args) = @_;
- my $acodes = $args{acodes} // '';
- return undef unless length $acodes;
- my $label = $args{label};
- my $match_expr = _linkedre_or_expr(%args, label => $label);
- my ($min, $max) = _resolve_rep_bounds(%args);
- return undef unless defined $min && defined $max;
-
- my $actual_lscode = $args{actual_lscode} // '';
- my $actual_lecode = $args{actual_lecode} // '';
- my $actual_itcode = $args{actual_itcode} // '';
- my $actual_excode = $args{actual_excode} // '';
- my $actual_ecode = $args{actual_ecode} // '';
-
- return '
-
-   my $min='.$min.';
-   my $max='.$max.';
-   my @'.$label.'_collect;
-   my $ccount = 0;
-
-   while(1) {
-    my $minfo = '.$match_expr.';
-    unless($minfo) {
-     if ($ccount >= $min) {
-      '.($actual_excode || 'return \@'.$label.'_collect').'
-     } else {
-      return undef
-     }
-    }
-
-    my $LMATCH      = $$minfo{match};
-    my @LMATCH_LIST = @{$$minfo{match_list} // []};
-    my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
-    my $LINDEX      = $$minfo{index};
-    my $LSPOS       = pos $$STRING;
-
-    '.$actual_lscode.'
-
-    '.   $acodes     .'
-
-    '.$actual_lecode.'
-
-    ++$ccount;
-
-    '.($actual_itcode || 'push @'.$label.'_collect, $'.$label.';').'
-
-    last unless $ccount < $max
-   }
-
-   '.($actual_ecode || 'return \@'.$label.'_collect').'
- '
-}
 
 sub _build_handler_variants {
  my (%args) = @_;
@@ -605,112 +119,90 @@ sub _build_handler_variants {
  my $acodes_ref = $args{acodes_ref};
  my $bcodes_ref = $args{bcodes_ref};
  my $bcalls_ref = $args{bcalls_ref};
- my $ab_count_ref = $args{ab_count_ref};
-
- my $acodes = LinkedSpec::HandlerVariantEmitter::_build_acodes_dispatch_block($acodes_ref);
- my $bcodes = LinkedSpec::HandlerVariantEmitter::_build_bcodes_dispatch_block($bcalls_ref, $bcodes_ref);
- my $bcalls = join(' ', @$bcalls_ref);
 
  my $isAND = $node_type =~ /AND/o;
  my $isOR  = $node_type =~ /OR/o;
  my $isREP = $node_type =~ /REP_/o;
  my $isREP_AND = $node_type =~ /REP_AND/o;
+ my $has_acodes = ref($acodes_ref) eq 'ARRAY' && @$acodes_ref;
+ my $has_bcodes = ref($bcodes_ref) eq 'HASH' && keys %$bcodes_ref && ref($bcalls_ref) eq 'ARRAY' && @$bcalls_ref;
+ my $isDEFAULT_BCODE_REP = !$isAND && !$isOR && !$isREP && $has_bcodes;
 
- # For REP handlers, replace return with $label = assignment
- # so the REP loop collects instead of returning on first match.
- if ($isREP && length($acodes)) {
-  $acodes =~ s/\breturn\s+/"\$" . $label . " = "/eg;
- }
- my $isDEFAULT_BCODE_REP = !$isAND && !$isOR && !$isREP && length($bcodes);
+ # Map caller arg names (actual_*) to HandlerIR field names
+ my %ir_args = (
+  label      => $label,
+  parse_mode => $args{parse_mode} // 'seek',
+  preamble   => $args{actual_icode} // '',
+  lxcode     => $args{actual_lxcode} // '',
+  lscode     => $args{actual_lscode} // '',
+  lecode     => $args{actual_lecode} // '',
+  ecode      => $args{actual_ecode}  // '',
+  excode     => $args{actual_excode} // '',
+  itcode     => $args{actual_itcode} // '',
+  node_type  => $node_type,
+  rep_min    => $args{rep_min},
+  rep_max    => $args{rep_max},
+ );
 
  my %handlers;
- my $default = LinkedSpec::HandlerVariantEmitter::_build_default_handler_variant(
-  %args,
-  label => $label,
-  acodes => $acodes,
+ my $ir = LinkedSpec::HandlerVariantEmitter::_build_default_handler_variant(
+  %ir_args, acodes_ref => $acodes_ref,
  );
- $handlers{_default} = $default if defined $default;
+ $handlers{_default} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir) if defined $ir;
 
- if ($isAND && length($bcodes)) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_and_bcode_variant(
-   %args,
-   label  => $label,
-   bcodes => $bcodes,
-   bcalls => $bcalls,
+ if ($isAND && $has_bcodes) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_bcode_variant(
+   %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{AND_BCODE} = $v if defined $v;
+  $handlers{AND_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if ($isAND && length($acodes) && ref($acodes_ref) eq 'ARRAY' && @$acodes_ref == 1) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_and_single_acode_variant(
-   %args,
-   label  => $label,
-   acodes => $acodes,
+ if ($isAND && $has_acodes && @$acodes_ref == 1) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_single_acode_variant(
+   %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{AND_SINGLE_ACODE} = $v if defined $v;
+  $handlers{AND_SINGLE_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if ($isAND && length($acodes) && ref($acodes_ref) eq 'ARRAY' && @$acodes_ref > 1) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
-   %args,
-   label       => $label,
-   acodes      => $acodes,
-   acode_count => scalar(@$acodes_ref),
+ if ($isAND && $has_acodes && @$acodes_ref > 1) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
+   %ir_args, acodes_ref => $acodes_ref, acode_count => scalar(@$acodes_ref),
   );
-  $handlers{AND_ACODE} = $v if defined $v;
+  $handlers{AND_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if ($isOR && length($acodes)) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_or_acode_variant(
-   %args,
-   label  => $label,
-   acodes => $acodes,
+ if ($isOR && $has_acodes) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_or_acode_variant(
+   %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{OR_ACODE} = $v if defined $v;
+  $handlers{OR_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if ($isOR && length($bcodes)) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_or_bcode_variant(
-   %args,
-   label  => $label,
-   bcodes => $bcodes,
-   bcalls => $bcalls,
+ if ($isOR && $has_bcodes) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_or_bcode_variant(
+   %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{OR_BCODE} = $v if defined $v;
+  $handlers{OR_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if (($isREP || $isDEFAULT_BCODE_REP) && length($bcodes)) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_bcode_variant(
-   %args,
-   label     => $label,
-   node_type => $node_type,
-   bcodes    => $bcodes,
-   bcalls    => $bcalls,
+ if (($isREP || $isDEFAULT_BCODE_REP) && $has_bcodes) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_bcode_variant(
+   %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{REP_BCODE} = $v if defined $v;
+  $handlers{REP_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if ($isREP_AND && length($bcodes)) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_bcode_variant(
-   %args,
-   label     => $label,
-   node_type => $node_type,
-   bcodes    => $bcodes,
-   bcalls    => $bcalls,
+ if ($isREP_AND && $has_bcodes) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_bcode_variant(
+   %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{REP_AND_BCODE} = $v if defined $v;
+  $handlers{REP_AND_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if ($isREP && length($acodes)) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_acode_variant(
-   %args,
-   label     => $label,
-   node_type => $node_type,
-   acodes    => $acodes,
+ if ($isREP && $has_acodes) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_acode_variant(
+   %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{REP_ACODE} = $v if defined $v;
+  $handlers{REP_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
- if ($isREP_AND && length($acodes)) {
-  my $v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_acode_variant(
-   %args,
-   label     => $label,
-   node_type => $node_type,
-   acodes    => $acodes,
+ if ($isREP_AND && $has_acodes) {
+  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_acode_variant(
+   %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{REP_AND_ACODE} = $v if defined $v;
+  $handlers{REP_AND_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
  }
  return \%handlers
 }

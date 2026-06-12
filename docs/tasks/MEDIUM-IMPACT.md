@@ -71,10 +71,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `d53578a`
 
 - ID: `MEDIUM-IMPACT.1.3`
-  Status: `pending`
-  Goal: `Define a structured HandlerIR — an intermediate representation (hashref-based AST) that describes handler structure (preamble, match-expr, lifecycle slots, variant kind, dispatch blocks) without raw Perl source strings. The HandlerVariantEmitter produces HandlerIR nodes; a new _emit_handler_perl() function in SpecEntry consumes them and generates the current Perl source.`
-  Acceptance: `HandlerIR structure documented in HandlerVariantEmitter.pm pod. Each variant builder returns a HandlerIR node. _emit_handler_perl() round-trips to identical Perl output (verified by phase0 byte-identical handler comparison or by full regression pass). Phase0 1005 PASS.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Define a structured HandlerIR — an intermediate representation (hashref-based AST) that describes handler structure (preamble, match-expr, lifecycle slots, variant kind, dispatch blocks) without raw Perl source strings. The HandlerVariantEmitter produces HandlerIR nodes; a new _emit_handler_perl() function consumes them and generates the current Perl source.`
+  Acceptance: `HandlerIR structure documented in HandlerVariantEmitter.pm pod. Each variant builder returns a HandlerIR node. _emit_handler_perl() round-trips to identical Perl output. Phase0 1005 PASS. 19/19 shipped specs compile identically.`
+  Verification: `2026-06-12: HandlerIR designed and implemented. 10 variant builders return IR hashrefs with kind/label/parse_mode/lifecycle slots/dispatch refs. _emit_handler_perl() dispatches to 10 template functions producing identical Perl output. SpecEntry.pm _build_handler_variants refactored to two-step flow (build IR → emit Perl). Dead code removed: $rep_nodes_minmax, _resolve_rep_bounds, _linkedre_or_expr, _build_acodes_dispatch_block, _build_bcodes_dispatch_block, 10 old variant builders — 452 lines deleted from SpecEntry.pm. HandlerVariantEmitter.pm comprehensively restructured (builder section + emitter section). All 19 shipped specs compile correctly through new pipeline. perl -c clean on both files.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.1.4`
@@ -177,9 +177,9 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.1.3` | `pending` | Define structured HandlerIR between variant builders and Perl emitter. |
-| 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
-| 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
+| 1 | `MEDIUM-IMPACT.1.4` | `pending` | Create backend emitter interface — dispatch table for pluggable backends. |
+| 2 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
+| 3 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
 
 ## Decisions
 

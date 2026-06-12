@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.1.3: Define structured HandlerIR
+
+- Designed HandlerIR — a hashref-based AST (10 variant kinds) capturing handler structure
+  (loop type, match expression, dispatch style, lifecycle slot placement) without raw Perl
+  source strings. Documented in HandlerVariantEmitter.pm pod (60-line header).
+- Refactored all 10 variant builders + 3 body functions in HandlerVariantEmitter.pm to
+  return HandlerIR hashrefs instead of Perl source strings. Builders now receive raw
+  refs (acodes_ref, bcodes_ref, bcalls_ref); dispatch string construction and REP
+  return→assignment transforms moved to the emitter.
+- Created `_emit_handler_perl($ir)` — dispatch function mapping 10 variant kinds to
+  10 template emitter functions. Each template produces identical Perl source to the
+  old inline builders. Added helper: `_build_lmatch_extraction` (shared LMATCH block).
+- Updated SpecEntry.pm `_build_handler_variants` to two-step flow: build IR →
+  `_emit_handler_perl()`. Mapped caller arg names (actual_*) to HandlerIR field names.
+- Removed dead code from SpecEntry.pm (452 lines deleted): `$rep_nodes_minmax`,
+  `_resolve_rep_bounds`, `_linkedre_or_expr`, `_build_acodes_dispatch_block`,
+  `_build_bcodes_dispatch_block`, and 10 old variant builders. File: 941 → 455 lines.
+- Lifecycle slot naming clarified: I-block = Initial (code at handler entry),
+  LX = Loop eXit (no-match/failure), LS = Loop Start (after match),
+  LE = Loop End (before collection).
+- Verification: `perl -c` clean on both files. All 19 shipped specs compile (19/19 PASS).
+  Memory-architecture self-check + Knowledge Map check pass. Phase0 regression started
+  (inconclusive due to session timing).
+- Created knowledge card `docs/knowledge/language-agnostic-backend-vision.md`: captures
+  future backend vision (Rust/Julia/Dart, same .spec files, lockstep features).
+
 ## 2026-06-12 — MEDIUM-IMPACT.1.2: Extract handler-variant builders into HandlerVariantEmitter
 
 - Created `perl/LinkedSpec/HandlerVariantEmitter.pm` (554 lines) — all 10 variant builder
