@@ -17,18 +17,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `a1c1a94` — "MEDIUM-IMPACT.1.4 — backend emitter interface: %BACKEND_EMITTERS dispatch table + _emit_handler fn"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.5` (JSON/AST diagnostic backend)
-- next_action: PNT — execute MEDIUM-IMPACT.1.5 or next eligible leaf.
+- latest_commit: `pending` — "MEDIUM-IMPACT.1.5 — JSON/AST diagnostic backend"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4` (blocked, AND handler)
+- next_action: PNT — frontier has .3.4 (blocked), .3.5 (blocks on .3.4), .3.6 (blocks on .3.5).
+  .1 container complete (5/5 leaves: inventory, extraction, HandlerIR, emitter interface, JSON backend).
+  Need user decision on .3.4 fix approach before PNT can continue.
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (E-block missing from AND_SINGLE_ACODE).
   Three fix approaches identified; unblock condition: choose approach, split into child leaves.
 - Completed leaves: .1.1, .1.2 (HandlerVariantEmitter extraction), .1.3 (HandlerIR),
-  .1.4 (backend emitter interface), .2.1→.2.4 (fuzzing container done),
-  .3.1, .3.2, .3.3 (cross-check), .3.4 (blocked analysis).
-  Pending: .1.5, .3.4 (blocked), .3.5, .3.6.
-- HandlerIR: 10 variant kinds, builders→IR + emitter→Perl, SpecEntry dead code removed (452 lines).
-- Backend dispatch: %BACKEND_EMITTERS table with perl default; _emit_handler($ir, %opts) dispatches.
+  .1.4 (backend emitter interface), .1.5 (JSON/AST diagnostic backend), .1 container done,
+  .2.1→.2.4 (fuzzing container done), .3.1, .3.2, .3.3 (cross-check), .3.4 (blocked analysis).
+  Pending: .3.4 (blocked), .3.5, .3.6.
+- HandlerIR: 10 variant kinds, builders→IR + emitter→Perl/JSON, SpecEntry dead code removed (452 lines).
+- Backend dispatch: %BACKEND_EMITTERS = (perl, json); _emit_handler($ir, %opts) dispatches.
+  JSON backend: _emit_handler_json serializes HandlerIR via JSON::PP (canonical, pretty-printed).
 - regression baseline: 1005 PASS (phase0). All 19 specs compile through HandlerIR pipeline.
 - knowledge: language-agnostic-backend-vision.md captures Rust/Julia/Dart backend direction.
-- in_flight_uncommitted: none
+- in_flight_uncommitted: MEDIUM-IMPACT.1.5 completion (pending commit).
 - blockers: MEDIUM-IMPACT.3.4.

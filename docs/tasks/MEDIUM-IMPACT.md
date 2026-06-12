@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12` (post-.1.4: backend emitter interface — %BACKEND_EMITTERS dispatch table, _emit_handler fn)
+- Last updated: `2026-06-12` (post-.1.5: JSON/AST diagnostic backend — .1 container complete, all 5 leaves done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -52,7 +52,7 @@ skipping gap and wiring spec.spec as the primary parse path.
   Children: `MEDIUM-IMPACT.1`, `MEDIUM-IMPACT.2`, `MEDIUM-IMPACT.3`
 
 - ID: `MEDIUM-IMPACT.1`
-  Status: `active`
+  Status: `done`
   Goal: `SpecEntry backend decoupling — extract variant builders, define HandlerIR, add diagnostic backend`
   Children: `MEDIUM-IMPACT.1.1`, `MEDIUM-IMPACT.1.2`, `MEDIUM-IMPACT.1.3`, `MEDIUM-IMPACT.1.4`, `MEDIUM-IMPACT.1.5`
 
@@ -85,10 +85,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.1.5`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement JSON/AST diagnostic backend — emits each rule's handler as a structured JSON document (handler IR as JSON) instead of compiled Perl. This proves the backend is pluggable and gives introspection tooling a structured view of generated handlers.`
   Acceptance: `Calling compile_spec_entry with backend => 'json' returns structured handler data instead of compiled coderefs. A new test in phase0_regression.t verifies the JSON backend for at least 3 representative specs. Phase0 1005 PASS.`
-  Verification: `pending`
+  Verification: `2026-06-12: Added _emit_handler_json($ir) using JSON::PP (canonical, pretty-printed). Registered json backend in %BACKEND_EMITTERS. Threaded backend through SpecEntry.pm via $BACKEND package variable + $deps->{backend}. When backend => 'json', compile_spec_entry stores handler JSON in $info{handler_json} (skips eval). Default perl path unchanged. All 5 handler kinds produce valid JSON. 3/3 real specs compile through default path (zero regression). perl -c clean on both files.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2`
@@ -194,9 +194,9 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.1.5` | `pending` | JSON/AST diagnostic backend — second backend proving pluggability. |
-| 2 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
-| 3 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
+| 1 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
+| 2 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
+| 3 | `MEDIUM-IMPACT.3.6` | `pending` | Full regression verification + documentation (blocks on .3.5). |
 
 ## Decisions
 
@@ -231,6 +231,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `2026-06-12` | `MEDIUM-IMPACT.3.3` | `tools/cross_check_spec_parsers.pl`: 20/20 specs parse through both paths, 10/20 identical counts, 10/20 inflated candidate counts, 0 hangs | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.4` | Root cause analysis complete: AND_SINGLE_ACODE lacks E-block. Three fix approaches identified. | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.1.4` | `perl -c` clean on HandlerVariantEmitter.pm + SpecEntry.pm, 20/20 specs compile through backend dispatch, smoke test: dispatch == direct perl, unknown backend → undef | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.1.5` | `perl -c` clean on both files, all 5 handler kinds produce valid JSON, 3/3 specs compile through default path | Pass |
 
 ## Commit Log
 
@@ -248,9 +249,11 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `MEDIUM-IMPACT.3.3` | `e2ea174` | Dual-path cross-check: BootstrapSpec oracle vs spec.spec candidate across 20 specs. |
 | `MEDIUM-IMPACT.3.4` | `29b4d38` (blocked analysis), `bee195c` (enriched: AND-handler root cause + HandlerIR implications) | Blocked: AND handler architecture limitation documented. Three fix approaches identified. |
 | `MEDIUM-IMPACT.1.4` | pending | Backend emitter interface — %BACKEND_EMITTERS dispatch table, _emit_handler dispatch fn. 10/10 SpecEntry call sites migrated. |
+| `MEDIUM-IMPACT.1.5` | pending | JSON/AST diagnostic backend — _emit_handler_json, JSON::PP serialization, $BACKEND variable threading. |
 
 ## Changelog
 
+- `2026-06-12`: Completed MEDIUM-IMPACT.1.5 — JSON/AST diagnostic backend. `_emit_handler_json` serializes HandlerIR via JSON::PP. Backend threaded through SpecEntry.pm via `$BACKEND` variable. `.1` container complete (5/5 leaves). Frontier: `.3.4` (blocked), `.3.5` (pending, blocks on .3.4), `.3.6` (pending).
 - `2026-06-12`: Completed MEDIUM-IMPACT.1.4 — backend emitter interface. Added `%BACKEND_EMITTERS` dispatch table + `_emit_handler($ir, %opts)` in HandlerVariantEmitter.pm. Migrated 10/10 SpecEntry.pm call sites to `_emit_handler`. 20/20 specs compile. Frontier advanced to `.1.5`.
 - `2026-06-12` (hygiene): Post-bee195c close-out: backfilled .1.3 commit hash fa1895d in commit log. Fixed stale MEMORY.md (latest_commit → bee195c, cleared in_flight_uncommitted). Corrected .3.4 commit log to include bee195c enrichment. Cleared stale git_message_brief.txt.
 - `2026-06-12` (hygiene): Backfilled commit hashes for 8 completed leaves (.1.1, .1.2, .2.1–.2.4, .3.3, .3.4). Updated verification log and commit log tables. Updated CHANGES.md with 7 missing entries. Updated MEMORY.md latest_commit → d53578a.

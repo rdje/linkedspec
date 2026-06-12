@@ -405,6 +405,7 @@ sub _build_lmatch_extraction {
 #===========================================================================
 my %BACKEND_EMITTERS = (
     perl => \&_emit_handler_perl,
+    json => \&_emit_handler_json,
 );
 
 #------------------------------------------------------------------------------
@@ -867,6 +868,55 @@ sub _emit_rep_acode_handler {
 
    ' . $ecode . '
  ';
+}
+
+#===========================================================================
+# JSON/AST diagnostic backend — serializes HandlerIR to structured JSON.
+# Uses JSON::PP (Perl core since 5.14) for safe, deterministic output.
+#===========================================================================
+
+#------------------------------------------------------------------------------
+# _emit_handler_json — emit HandlerIR as a JSON document.
+# Returns a JSON string with kind, label, parse_mode, lifecycle slots,
+# dispatch refs, and repetition bounds (where applicable).
+#------------------------------------------------------------------------------
+sub _emit_handler_json {
+    my ($ir) = @_;
+    return undef unless ref($ir) eq 'HASH';
+
+    require JSON::PP;
+    my $json = JSON::PP->new->canonical(1)->pretty(1);
+
+    # Build a clean serializable structure — drop undef/empty values
+    my %obj;
+    $obj{kind}       = $ir->{kind};
+    $obj{label}      = $ir->{label};
+    $obj{parse_mode} = $ir->{parse_mode} if defined $ir->{parse_mode} && length($ir->{parse_mode});
+
+    # Lifecycle slots (only include non-empty)
+    foreach my $slot (qw(preamble lxcode lscode lecode ecode excode itcode)) {
+        $obj{$slot} = $ir->{$slot} if defined $ir->{$slot} && length($ir->{$slot});
+    }
+
+    # Dispatch refs (acodes and bcodes)
+    if (ref($ir->{acodes_ref}) eq 'ARRAY' && @{$ir->{acodes_ref}}) {
+        $obj{acodes} = $ir->{acodes_ref};
+    }
+    if (ref($ir->{bcodes_ref}) eq 'HASH' && keys %{$ir->{bcodes_ref}}) {
+        $obj{bcodes} = $ir->{bcodes_ref};
+    }
+    if (ref($ir->{bcalls_ref}) eq 'ARRAY' && @{$ir->{bcalls_ref}}) {
+        $obj{bcalls} = $ir->{bcalls_ref};
+    }
+
+    # Repetition bounds (REP variants only)
+    $obj{rep_min} = $ir->{rep_min} if defined $ir->{rep_min};
+    $obj{rep_max} = $ir->{rep_max} if defined $ir->{rep_max};
+
+    # Sequence count (AND_ACODE_SEQ variants)
+    $obj{acode_count} = $ir->{acode_count} if defined $ir->{acode_count};
+
+    return $json->encode(\%obj);
 }
 
 1;

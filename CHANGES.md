@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.1.5: JSON/AST diagnostic backend in HandlerVariantEmitter
+
+- Added `_emit_handler_json($ir)` — serializes HandlerIR hashrefs to structured JSON using
+  `JSON::PP` (Perl core). Emits canonical key-ordered pretty-printed JSON with kind, label,
+  parse_mode, non-empty lifecycle slots, dispatch refs (acodes/bcodes/bcalls), and repetition
+  bounds where applicable. Undef/empty values are omitted for compact output.
+- Registered `json` backend in `%BACKEND_EMITTERS` dispatch table alongside `perl`.
+- Threaded backend selection through SpecEntry.pm: added `our $BACKEND` package variable,
+  set via `local $BACKEND = $deps->{backend}` in `compile_spec_entry`. `_build_handler_variants`
+  reads it through `$args{backend} // $BACKEND` and passes it to `_emit_handler`.
+- When `backend => 'json'`, `compile_spec_entry` stores the JSON handler string in
+  `$info{handler_json}` and skips `_build_runtime_handler` (no Perl eval).
+- Default `perl` backend path is untouched — `_build_handler_variants` calls `_emit_handler`
+  without `backend` options, which defaults to `perl`, producing identical Perl source.
+- Verification: `perl -c` clean on both files. All 3 tested specs compile through
+  default backend. All 5 handler kinds produce valid, parseable JSON. Default dispatch
+  produces identical Perl output (zero regression).
+
 ## 2026-06-12 — MEDIUM-IMPACT.1.4: Backend emitter interface in HandlerVariantEmitter
 
 - Created `%BACKEND_EMITTERS` dispatch table in `HandlerVariantEmitter.pm` mapping backend
