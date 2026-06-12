@@ -235,8 +235,10 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `2026-06-12` | `MEDIUM-IMPACT.3.2` | `tools/run_ci_local.sh` (1005 PASS), self-parse on raw spec.spec OK, tablegrep/pplugin/ifelse raw parses OK, syntax checks clean | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.3` | `tools/cross_check_spec_parsers.pl`: 20/20 specs parse through both paths, 10/20 identical counts, 10/20 inflated candidate counts, 0 hangs | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.4` | Root cause analysis complete: AND_SINGLE_ACODE lacks E-block. Three fix approaches identified. | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.3.4.2` | `perl -c` clean all 3 files, memory-arch check passes, spec.spec compiles, generated AND_SINGLE_ACODE handler syntactically correct, ICODE runs after regex match with return→assignment + IMATCH←LMATCH bridge, edges dispatch afterward | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.1.4` | `perl -c` clean on HandlerVariantEmitter.pm + SpecEntry.pm, 20/20 specs compile through backend dispatch, smoke test: dispatch == direct perl, unknown backend → undef | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.1.5` | `perl -c` clean on both files, all 5 handler kinds produce valid JSON, 3/3 specs compile through default path | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.3.4.2` | `perl -c` clean all 3 files, memory-arch check passes, spec.spec compiles, generated AND_SINGLE_ACODE handler syntactically correct (ICODE runs after regex match with return→assignment + IMATCH←LMATCH bridge), edges dispatch afterward | Pass |
 
 ## Commit Log
 
@@ -253,10 +255,18 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `MEDIUM-IMPACT.3.2` | `d7294d0` | Close comment/blank-line skipping gap via Runtime.pm wrapper. Self-parse on raw spec.spec OK. |
 | `MEDIUM-IMPACT.3.3` | `e2ea174` | Dual-path cross-check: BootstrapSpec oracle vs spec.spec candidate across 20 specs. |
 | `MEDIUM-IMPACT.3.4` | `29b4d38` (blocked analysis), `bee195c` (enriched: AND-handler root cause + HandlerIR implications) | Blocked: AND handler architecture limitation documented. Three fix approaches identified. |
+| `MEDIUM-IMPACT.3.4.2` | `148c746` | AND ICODE routing fix — RuleIR routes AND ICODE→acode_entries. SpecEntry extracts ICODE for single-regex AND. HandlerVariantEmitter applies return→assignment + IMATCH←LMATCH bridge in AND_SINGLE_ACODE emitter. |
 | `MEDIUM-IMPACT.1.4` | pending | Backend emitter interface — %BACKEND_EMITTERS dispatch table, _emit_handler dispatch fn. 10/10 SpecEntry call sites migrated. |
 | `MEDIUM-IMPACT.1.5` | pending | JSON/AST diagnostic backend — _emit_handler_json, JSON::PP serialization, $BACKEND variable threading. |
 
 ## Changelog
+
+- `2026-06-12`: Completed MEDIUM-IMPACT.3.4.2 — implemented AND handler ICODE routing fix.
+  RuleIR.pm routes AND per-regex ICODE to acode_entries. SpecEntry.pm extracts ICODE from
+  ACODEs for single-regex AND and passes as and_icode. HandlerVariantEmitter applies
+  return→assignment + IMATCH←LMATCH bridge + push to @collect in AND_SINGLE_ACODE emitter.
+  spec.spec rule_paragraph:AND handler now runs I-block after regex match; body_element edge
+  dispatched afterward. Frontier advanced to .3.4.3 (re-cross-check).
 
 - `2026-06-12` (.3.4 unblock): Chose approach (1) — route AND I-blocks to acode_entries. Split .3.4 into 3 child leaves: .3.4.1 design/decide, .3.4.2 implement, .3.4.3 re-cross-check. Frontier: .3.4.1 → .3.4.2 → .3.5 → .3.6.
 - `2026-06-12`: Completed MEDIUM-IMPACT.1.4 — backend emitter interface. Added `%BACKEND_EMITTERS` dispatch table + `_emit_handler($ir, %opts)` in HandlerVariantEmitter.pm. Migrated 10/10 SpecEntry.pm call sites to `_emit_handler`. 20/20 specs compile. Frontier advanced to `.1.5`.
