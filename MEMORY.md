@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `594787d` — "Docs: post-commit hash fix — MEMORY.md latest_commit → f29a117"
+- latest_commit: `90a1e91` — "Docs: post-commit hash fix — MEMORY.md latest_commit → 594787d"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.3` (dual-path cross-check: compare
   BootstrapSpec::Core vs spec.spec-generated parser outputs across all 19 shipped specs)
 - next_action: Execute MEDIUM-IMPACT.3.3 — dual-path cross-check. Bootstrap = oracle; spec.spec =
