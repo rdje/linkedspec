@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `4112374` — "MEDIUM-IMPACT.3.2 — close-out: task-tree commit log + MEMORY.md finalize"
+- latest_commit: `f29a117` — "Session bootstrap — task-tree restructure: MEDIUM-IMPACT.3 cross-check + COMPAT-ALIAS-RETIREMENT complete"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.3` (dual-path cross-check: compare
   BootstrapSpec::Core vs spec.spec-generated parser outputs across all 19 shipped specs)
 - next_action: Execute MEDIUM-IMPACT.3.3 — dual-path cross-check. Bootstrap = oracle; spec.spec =
