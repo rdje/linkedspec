@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` — "MEDIUM-IMPACT.1.4 — backend emitter interface (%BACKEND_EMITTERS, _emit_handler)"
+- latest_commit: `a1c1a94` — "MEDIUM-IMPACT.1.4 — backend emitter interface: %BACKEND_EMITTERS dispatch table + _emit_handler fn"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.5` (JSON/AST diagnostic backend)
 - next_action: PNT — execute MEDIUM-IMPACT.1.5 or next eligible leaf.
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (E-block missing from AND_SINGLE_ACODE).
@@ -30,5 +30,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - Backend dispatch: %BACKEND_EMITTERS table with perl default; _emit_handler($ir, %opts) dispatches.
 - regression baseline: 1005 PASS (phase0). All 19 specs compile through HandlerIR pipeline.
 - knowledge: language-agnostic-backend-vision.md captures Rust/Julia/Dart backend direction.
-- in_flight_uncommitted: MEDIUM-IMPACT.1.4 completion (pending commit).
+- in_flight_uncommitted: none
 - blockers: MEDIUM-IMPACT.3.4.
