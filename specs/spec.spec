@@ -40,8 +40,9 @@
 # KNOWN BOOTSTRAPPING GAPS
 # ============================================================================
 #
-# 1. Comment/blank-line skipping: body_element cannot skip comments/blank lines.
-#    Workaround: strip leading comments before parsing.
+# 1. Comment/blank-line skipping: CLOSED (MEDIUM-IMPACT.3.2).  The Runtime.pm
+#    parser wrapper resets pos() and skips past leading comment/blank lines before
+#    the main parse loop.  Inter-paragraph comments are not yet handled.
 #
 # 2. AND+ + LX infinite loop: The LX lifecycle marker in AND+ repetition
 #    triggers loop re-entry. Workaround: use E instead of LX for exit.

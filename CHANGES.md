@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.3.2: Close comment/blank-line skipping gap
+
+- Added a parser wrapper in `Runtime::run_get` that resets `pos()` to 0 and skips past
+  leading comment (`# ...`) and blank lines before the main parse loop.
+- The wrapper applies to all parsers built via `LinkedSpec::Get()`, making comment
+  skipping universally available.
+- `spec.spec` updated: "KNOWN BOOTSTRAPPING GAPS" → gap #1 (comment/blank-line skip)
+  marked as CLOSED.
+- Test workarounds removed: 4 locations in `phase0_regression.t` that manually stripped
+  leading comments/blank lines are now removed; the parser handles raw .spec files directly.
+- Self-parse test now parses raw `spec.spec` (with its 49-line comment header) directly,
+  without pre-stripping.
+- Regression baseline: phase0 1005 PASS (expected).
+
 ## 2026-06-12 — Post-.3.1 bookkeeping: task-tree frontier + commit-log + live-doc sync (MEDIUM-IMPACT.3.1)
 
 - Completed administrative close-out for `MEDIUM-IMPACT.3.1` (committed `2526f2b` + hash-fix chain through `221b6ea`).

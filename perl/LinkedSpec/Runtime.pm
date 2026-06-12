@@ -113,6 +113,29 @@ sub run_get {
    );
    return undef;
   }
+  # Wrap parser coderef to skip leading comment and blank lines before the
+  # main parse loop.  This closes the self-hosting bootstrapping gap where
+  # spec.spec cannot consume raw .spec files that start with comments.
+  # MEDIUM-IMPACT.3.2
+  if (ref($ret) eq 'CODE') {
+   my $original_parser = $ret;
+   $ret = sub {
+    my ($input_ref) = @_;
+    # Reset position to start of input — the build process may have
+    # advanced pos() during bootstrap parsing.
+    pos($$input_ref) = 0;
+    # Skip leading comment lines (# ...) and blank lines before the
+    # main parse loop.
+    while (1) {
+     if ($$input_ref =~ /\G[ \t]*\n/gc) {
+     } elsif ($$input_ref =~ /\G[ \t]*#[^\n]*(?:\n|\z)/gc) {
+     } else {
+      last;
+     }
+    }
+    return $original_parser->($input_ref);
+   };
+  }
   return $ret
  })
 }

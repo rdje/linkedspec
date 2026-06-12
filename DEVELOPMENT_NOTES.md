@@ -1,6 +1,8 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-12 (MEDIUM-IMPACT.3.2): Closed the comment/blank-line skipping gap. Added a parser wrapper in `Runtime::run_get` that resets `pos()` to 0 and skips past leading comment (`# ...`) and blank lines before the main parse loop. This approach avoids modifying the generated handler code or the spec.spec grammar. The wrapper applies to all parsers built via `LinkedSpec::Get()`, making it universally available. The self-parse of spec.spec now works with raw content (no pre-stripping needed). Inter-paragraph comment skipping is left as future enhancement.
+
 - 2026-06-12 (MEDIUM-IMPACT.3.1 — post-commit bookkeeping): Completed administrative close-out for MEDIUM-IMPACT.3.1 (committed `2526f2b` + hash-fix chain). Task-tree frontier updated (.3.2 now first eligible). The substantive work — spec.spec accuracy audit, RuleIR ICODE→ACODE fix for REP/OR rules, SpecEntry REP handler return→assignment fix — is mechanically gated at 1005 PASS. The comment/blank-line skipping gap (.3.2) is the next prerequisite before wiring spec.spec as primary parse path (.3.3). MEMORY.md hash-fix chain (5 commits) is a known workflow artifact: updating MEMORY.md changes HEAD, requiring another MEMORY.md update. The chain stabilizes when the commit subject correctly reflects the MEMORY.md state it writes.
 
 - 2026-06-11 (ACCUMULATOR-CONVENTION-AUDIT.3 — post-commit cleanup): Completed the administrative close-out for commit `3065636`. MEMORY.md `latest_commit` and `next_action` updated; task-tree commit log backfilled with hash. Clean working tree confirmed. PNT idle — no active task trees; proposed `PLUGIN-ACTION-MIGRATION` is the only remaining backlog item.

@@ -17,9 +17,12 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `6cdd8a9` — "MEDIUM-IMPACT.3.1 — post-commit bookkeeping: task-tree frontier + commit-log + live-doc sync"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.2` (comment skip gap, pending)
-- next_action: PNT to MEDIUM-IMPACT.3.2 (close comment/blank-line skipping gap).
-- regression baseline: 1005 PASS (phase0).
-- in_flight_uncommitted: none
+- latest_commit: `a8f0d70` — "MEDIUM-IMPACT.3.1 — post-commit hash fix: MEMORY.md latest_commit → 6cdd8a9"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.2` (comment skip gap, in_progress)
+- next_action: Commit .3.2 (Runtime.pm wrapper) then PNT to parity verification. Per user direction:
+  reach semantic parity BEFORE wiring spec.spec as primary; dual-path cross-check
+  (bootstrap as oracle, spec.spec as candidate) must produce equivalent output before
+  .3.3 (wire as primary) proceeds.  Task tree needs restructure to reflect parity-first.
+- regression baseline: 1005 PASS (phase0). Quick verify: self-parse raw OK, 4 shipped specs raw OK.
+- in_flight_uncommitted: MEDIUM-IMPACT.3.2 implementation (Runtime.pm, test file, spec.spec, docs)
 - blockers: none.

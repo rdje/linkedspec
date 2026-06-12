@@ -45935,11 +45935,11 @@ subtest 'tracked_markdown_docs_do_not_capture_machine_local_absolute_paths' => s
 };
 
 subtest 'spec_self_hosted_parser_does_not_hang_on_shipped_specs' => sub {
-    # PHASE7-SELF-HOSTED-SPEC.4: Verify the spec.spec-generated parser
-    # does not hang when parsing shipped .spec files.  Leading comments
-    # and blank lines are stripped because spec.spec's body_element lacks
-    # a top-level skip rule (known bootstrapping gap — the grammar
-    # describes structure, not the full comment-skipping parse loop).
+    # PHASE7-SELF-HOSTED-SPEC.4 / MEDIUM-IMPACT.3.2: Verify the spec.spec-generated
+    # parser does not hang when parsing shipped .spec files.  Leading comments
+    # and blank lines are now handled by the Runtime.pm parser wrapper which
+    # resets pos() and skips past leading comment/blank lines before the
+    # main parse loop (MEDIUM-IMPACT.3.2).
     my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));
 
     my $parser = eval { LinkedSpec::Get(\$spec_spec_content) };
@@ -45952,9 +45952,8 @@ subtest 'spec_self_hosted_parser_does_not_hang_on_shipped_specs' => sub {
 
     for my $spec_name (@sample_specs) {
         my $content = slurp(File::Spec->catfile($spec_dir, "$spec_name.spec"));
-        # Strip leading comments/blank lines so the parser reaches the
-        # first rule header without a dedicated top-level skip rule.
-        $content =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
+        # MEDIUM-IMPACT.3.2: the Runtime.pm parser wrapper now skips
+        # leading comments/blank lines automatically.
         my $result = eval {
             local $SIG{ALRM} = sub { die "TIMEOUT\n" };
             alarm(10);
@@ -45995,23 +45994,21 @@ subtest 'spec_self_hosted_parser_recognizes_structural_elements' => sub {
     ok(defined($result), 'spec.spec parser returns defined result for minimal input')
         or diag("Returned undef — parser may not recognize input structure");
 
-    # Test: self-parse with leading comments stripped (known bootstrapping
-    # gap: spec.spec's body_element has no top-level comment skip rule).
-    my $self_stripped = $spec_spec_content;
-    $self_stripped =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
+    # Test: self-parse with leading comments and blank lines — MEDIUM-IMPACT.3.2
+    # closed the comment/blank-line skipping gap via Runtime.pm parser wrapper;
+    # no manual comment-stripping needed.
     my $self_result = eval {
         local $SIG{ALRM} = sub { die "TIMEOUT\n" };
         alarm(15);
-        my $r = $parser->(\$self_stripped);
+        my $r = $parser->(\$spec_spec_content);
         alarm(0);
         $r;
     };
     alarm(0);
-    ok(defined($self_result), 'spec.spec parser self-parses (comments stripped) without hang');
+    ok(defined($self_result), 'spec.spec parser self-parses (raw, with leading comments) without hang');
 
     # Test: the parser runs on a spec with lifecycle markers
     my $lifecycle_content = slurp(File::Spec->catfile($spec_dir, 'tablegrep.spec'));
-    $lifecycle_content =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
     my $lifecycle_result = eval {
         local $SIG{ALRM} = sub { die "TIMEOUT\n" };
         alarm(10);
@@ -46024,7 +46021,6 @@ subtest 'spec_self_hosted_parser_recognizes_structural_elements' => sub {
 
     # Test: the parser runs on a spec with blind-call edges (=>)
     my $blind_content = slurp(File::Spec->catfile($spec_dir, 'pplugin.spec'));
-    $blind_content =~ s/\A(?:[ \t]*#[^\n]*\n|[ \t]*\n)*//;
     my $blind_result = eval {
         local $SIG{ALRM} = sub { die "TIMEOUT\n" };
         alarm(10);
