@@ -181,6 +181,8 @@ sub _collect_rule_ir {
   bcode_entries => [],
  };
 
+ my $last_was_re = 0;
+ my $pending_reidx = 0;
  foreach my $centry (@$einfo) {
   if ($$centry[0] =~ /ELABEL/o) {
    ($rule_ir->{label}, $rule_ir->{node_type}, $rule_ir->{rep_min}, $rule_ir->{rep_max}) = @$centry[1 .. 4];
@@ -190,11 +192,33 @@ sub _collect_rule_ir {
   if ($entry_type =~ /ELABEL_INITIAL/o) {
    $rule_ir->{top_rule} = $$centry[1];
   }
-  elsif (exists $rule_ir->{code_blocks}{$entry_type}) {
-   push @{$rule_ir->{code_blocks}{$entry_type}}, $$centry[1];
-  }
   elsif ($entry_type eq 'RE') {
+   # RE entries checked before code_blocks so per-regex lifecycle code
+   # becomes ACODE entries (with return()→assignment handled downstream).
    push @{$rule_ir->{REs}}, qr/$$centry[1]/;
+   $last_was_re = 1;
+   $pending_reidx = scalar(@{$rule_ir->{REs}}) - 1;
+   next;
+  }
+  elsif ($last_was_re && exists $rule_ir->{code_blocks}{$entry_type}) {
+   # Per-regex lifecycle code: for REP/OR rules, convert to ACODE entry
+   # so the handler dispatches it on regex match. For AND/default rules,
+   # keep as general lifecycle code (they run once at init).
+   if ($rule_ir->{node_type} =~ /REP_|^OR/) {
+    push @{$rule_ir->{acode_entries}}, {
+     relabel => $rule_ir->{label} // 'rule',
+     reidx   => $pending_reidx,
+     code    => $$centry[1],
+    };
+   } else {
+    push @{$rule_ir->{code_blocks}{$entry_type}}, $$centry[1];
+   }
+   $last_was_re = 0;
+   next;
+  }
+  elsif (exists $rule_ir->{code_blocks}{$entry_type}) {
+   # Standalone lifecycle code (no immediately preceding RE)
+   push @{$rule_ir->{code_blocks}{$entry_type}}, $$centry[1];
   }
   elsif ($entry_type eq 'ACODE') {
    push @{$rule_ir->{acode_entries}}, {
@@ -228,6 +252,7 @@ sub _collect_rule_ir {
      mark_pos_expr => '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'}',
     ).'; }';
   }
+  $last_was_re = 0;
  }
 
  return $rule_ir

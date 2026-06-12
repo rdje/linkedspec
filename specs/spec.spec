@@ -40,13 +40,11 @@
 # KNOWN BOOTSTRAPPING GAPS
 # ============================================================================
 #
-# 1. Comment/blank-line skipping: spec.spec's body_element has no
-#    top-level skip rule. The generated parser requires input to start
-#    at a rule header. Workaround: strip leading comments before parsing.
+# 1. Comment/blank-line skipping: body_element cannot skip comments/blank lines.
+#    Workaround: strip leading comments before parsing.
 #
-# 2. AND+ + LX infinite loop: The LX (Late Exit) lifecycle marker in
-#    AND+ repetition mode triggers loop re-entry in the compiled parser.
-#    Workaround: use E (End) instead of LX for AND+ exit handling.
+# 2. AND+ + LX infinite loop: The LX lifecycle marker in AND+ repetition
+#    triggers loop re-entry. Workaround: use E instead of LX for exit.
 #
 # ============================================================================
 
@@ -55,69 +53,25 @@ spec_file::AND+
 
 I {declare(array, rules)}
 LS {declare(scalar, retv)}
-LE {
- if(scalar(retv));
-  push_value(array(rules), scalar(retv));
- endif()
-}
+LE { if(scalar(retv)); push_value(array(rules), scalar(retv)); endif() }
 E {return(hash("rules", array(rules)))}
 
 
 rule_paragraph:AND /(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)/
-I {
- declare(scalar, label=entry_group(1));
- declare(scalar, colon=entry_group(2));
- declare(scalar, is_top=0);
- if(matches(scalar(colon), /^::$/o));
-  declare(scalar, is_top=1);
- endif();
- declare(scalar, mode_raw=entry_group(3));
- declare(scalar, rest=entry_group(4));
- declare(scalar, mode='');
- if(matches(scalar(mode_raw), /^$/o));
-  declare(scalar, mode='');
- else();
-  if(matches(scalar(mode_raw), /^(?:AND|OR)(?:\+|\{\d+(?:,\d+)?\})?$/o));
-   declare(scalar, mode=scalar(mode_raw));
-  else();
-   if(matches(scalar(mode_raw), /^[&|+*?]$/o));
-    declare(scalar, mode=scalar(mode_raw));
-   else();
-    declare(scalar, mode='');
-    if(length(scalar(rest)));
-     declare(scalar, rest=concat(scalar(mode_raw), ' ', scalar(rest)));
-    else();
-     declare(scalar, rest=scalar(mode_raw));
-    endif();
-   endif();
-  endif();
- endif();
- return(hash(
-  "type", "rule_header",
-  "label", scalar(label),
-  "is_top", scalar(is_top),
-  "mode", scalar(mode),
-  "rest", scalar(rest),
-  "body", array()
- ))
-}
+I { declare(scalar, label=entry_group(1)); declare(scalar, colon=entry_group(2)); declare(scalar, is_top=0); if(matches(scalar(colon), /^::$/o)); declare(scalar, is_top=1); endif(); declare(scalar, mode_raw=entry_group(3)); declare(scalar, rest=entry_group(4)); declare(scalar, mode=""); if(matches(scalar(mode_raw), /^$/o)); declare(scalar, mode=""); else(); if(matches(scalar(mode_raw), /^(?:AND|OR)(?:\+|\{\d+(?:,\d+)?\})?$/o)); declare(scalar, mode=scalar(mode_raw)); else(); if(matches(scalar(mode_raw), /^[&|+*?]$/o)); declare(scalar, mode=scalar(mode_raw)); else(); declare(scalar, mode=""); if(length(scalar(rest))); declare(scalar, rest=concat(scalar(mode_raw), " ", scalar(rest))); else(); declare(scalar, rest=scalar(mode_raw)); endif(); endif(); endif(); endif(); return(hash("type", "rule_header", "label", scalar(label), "is_top", scalar(is_top), "mode", scalar(mode), "rest", scalar(rest), "body", array())) }
  -> body_element
 
 
-# body_element uses regex-anchored alternatives ordered from most specific to
-# least specific. Each alternative matches the start pattern of one element type
-# and returns the element AST directly.
-#
-# Ordering matters: lifecycle markers precede the general word-based catch-all
-# so I/LS/LE/LX/E/EX/IT are classified correctly. Fluent chains (.word) precede
-# word-based patterns so fluent-method chains are not misclassified.
+# body_element matches individual body elements: regexes, edges, markers, etc.
+# Each alternative uses per-regex I{} blocks. The REP handler (via return→assignment
+# transformation in SpecEntry.pm) collects all matches into an array.
 body_element:*
  /(?<!\\)\/(?:\\.|[^\/\\])*?(?<!\\)\//
   I { return(hash("type", "regex", "value", match_text())) }
- /->[ \t]*\w+(?:\[\d+\])?/
-  I { return(body_edge_ast(match_text())) }
- /=>[ \t]*\w+/
-  I { return(body_blind_edge_ast(match_text())) }
+ /->[ \t]*(\w+)(?:\[(\d+)\])?/
+  I { declare(scalar, target=entry_group(1)); declare(scalar, idx=0); if(entry_group(2)); declare(scalar, idx=entry_group(2)); endif(); return(hash("type", "edge", "target", scalar(target), "index", scalar(idx))) }
+ /=>[ \t]*(\w+)/
+  I { return(hash("type", "blind_edge", "target", entry_group(1))) }
  /@[ \t]*(?:capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))/
   I { return(hash("type", "split_marker", "marker", match_text())) }
  /-\?[ \t]+\w+\b/
@@ -130,27 +84,3 @@ body_element:*
   I { return(hash("type", "body_code", "text", match_text())) }
  /(?<!\\)\{/
   I { return(hash("type", "code_block")) }
-
-# Helper: parse action-edge text into target/index AST.
-body_edge_ast {
- declare(scalar, text=scalar(edge_text));
- if(matches(scalar(text), /->[ \t]*(\w+)(?:\[(\d+)\])?/o));
-  declare(scalar, target=entry_group(1));
-  declare(scalar, idx=0);
-  if(entry_group(2));
-   declare(scalar, idx=entry_group(2));
-  endif();
-  return(hash("type", "edge", "target", scalar(target), "index", scalar(idx)));
- else();
-  return_undef();
- endif()
-}
-
-body_blind_edge_ast {
- declare(scalar, text=scalar(blind_text));
- if(matches(scalar(text), /=>[ \t]*(\w+)/o));
-  return(hash("type", "blind_edge", "target", entry_group(1)));
- else();
-  return_undef();
- endif()
-}

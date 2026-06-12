@@ -24,6 +24,7 @@ evidence for one top-level task.
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
 | `COMPAT-ALIAS-RETIREMENT` | `active` | `Method-like DSL migration track` | `.2/.3 deferred, .1/.4 done` | [docs/tasks/COMPAT-ALIAS-RETIREMENT.md](docs/tasks/COMPAT-ALIAS-RETIREMENT.md) |
+| `MEDIUM-IMPACT` | `active` | `Overall roadmap — medium-impact follow-on` | `.1.1 inventory, .3.1 spec.spec audit, .2.1 fuzz harness` | [docs/tasks/MEDIUM-IMPACT.md](docs/tasks/MEDIUM-IMPACT.md) |
 
 ## Proposed Task Trees
 

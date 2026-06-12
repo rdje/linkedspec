@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `9104257` — "LINKEDSPEC-LOW-EFFORT.4 — tree close-out: update task tree, TASK_TREE.md, MEMORY.md"
-- active_work_unit: none — all task trees complete. PNT idle.
-- next_action: await user direction. Two trees completed this session (3 enhancements + 3 low-effort).
-- regression baseline: 1005 PASS (phase0). Post-commit hook active; Knowledge Map at 21 facts.
+- latest_commit: `pending` — "MEDIUM-IMPACT.3.1 — spec.spec accuracy audit: fix body_element REP handler"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.1` (done), next: `MEDIUM-IMPACT.3.2` (comment skip gap)
+- next_action: PNT to MEDIUM-IMPACT.3.2 (close comment/blank-line skipping gap) or await user direction.
+- regression baseline: 1005 PASS (phase0). RuleIR+SpecEntry infrastructure fixes mechanically gated.
 - in_flight_uncommitted: none
 - blockers: none.

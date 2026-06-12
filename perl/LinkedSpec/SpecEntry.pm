@@ -614,6 +614,12 @@ sub _build_handler_variants {
  my $isOR  = $node_type =~ /OR/o;
  my $isREP = $node_type =~ /REP_/o;
  my $isREP_AND = $node_type =~ /REP_AND/o;
+
+ # For REP handlers, replace return with $label = assignment
+ # so the REP loop collects instead of returning on first match.
+ if ($isREP && length($acodes)) {
+  $acodes =~ s/\breturn\s+/"\$" . $label . " = "/eg;
+ }
  my $isDEFAULT_BCODE_REP = !$isAND && !$isOR && !$isREP && length($bcodes);
 
  my %handlers;
