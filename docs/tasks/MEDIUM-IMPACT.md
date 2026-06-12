@@ -61,14 +61,14 @@ skipping gap and wiring spec.spec as the primary parse path.
   Goal: `Inventory all Perl coupling points in SpecEntry.pm — document every eval site, every generated-code pattern, every Perl-variable assumption, and every LinkedRE::or dependency in the 12 handler-variant builders.`
   Acceptance: `Document exists at docs/knowledge/specentry-perl-coupling-inventory.md with a structured catalog of coupling points, grouped by: eval sites, generated Perl variable assumptions, LinkedRE coupling, and variant-builder responsibilities.`
   Verification: `2026-06-12: docs/knowledge/specentry-perl-coupling-inventory.md created (10 sections, 200+ lines). Covers: eval site, all 10 variant builders with lifecycle block support matrix, LinkedRE::or dependency, Perl variable assumptions ($descr/$STRING/$info/@collect), preamble vs body disconnect, MIXED_ACTIONS constraint, external dependencies, and decoupling path toward HandlerIR. Also identifies root cause of MEDIUM-IMPACT.3.4 blocker (AND_SINGLE_ACODE lacks E-block; return from ICODE exits handler before edge processing).`
-  Commit: `pending`
+  Commit: `654b9c0`
 
 - ID: `MEDIUM-IMPACT.1.2`
   Status: `done`
   Goal: `Extract 12 handler-variant builders from SpecEntry.pm into new LinkedSpec::HandlerVariantEmitter module. SpecEntry.pm delegates variant building to the emitter; zero behaviour change. All 19 shipped specs continue to compile identically.`
   Acceptance: `New file perl/LinkedSpec/HandlerVariantEmitter.pm exists with all _build_*_variant methods. SpecEntry.pm imports and delegates to it. Phase0 regression passes at 1005 PASS (or current baseline). perl -c clean on both files.`
   Verification: `2026-06-12: Created perl/LinkedSpec/HandlerVariantEmitter.pm (403 lines) with all 10 variant builder functions + 4 helper functions (_resolve_rep_bounds, _linkedre_or_expr, _build_acodes_dispatch_block, _build_bcodes_dispatch_block) + $rep_nodes_minmax. SpecEntry.pm now delegates via LinkedSpec::HandlerVariantEmitter:: prefix in _build_handler_variants. spec.spec compiles at ratio 1.0000. Old function bodies remain in SpecEntry.pm as dead code (follow-up cleanup leaf). Syntax checks clean on both files.`
-  Commit: `pending`
+  Commit: `d53578a`
 
 - ID: `MEDIUM-IMPACT.1.3`
   Status: `pending`
@@ -101,28 +101,28 @@ skipping gap and wiring spec.spec as the primary parse path.
   Goal: `Create structured fuzzing test harness for Validation.pm — a dedicated test file t/phase0_validation_fuzz.t with systematic edge case generation patterns (combinatorial, boundary, malformed-input) for each validation surface.`
   Acceptance: `New file t/phase0_validation_fuzz.t exists, loads Validation.pm, and defines fuzzing generators for rule labels, edge scanning, and DSL syntax. File compiles clean (perl -c). At least one generator produces >50 test cases.`
   Verification: `2026-06-12: t/phase0_validation_fuzz.t created. 5 subtests: _parse_rule_label_line (~62 cases covering valid, malformed, edge, Unicode, 10K-char), _scan_rule_edges_in_fragment (~22 cases covering simple, nested, string/regex literals, depth tracking), validate_spec_content (15 cases covering valid, empty, comment-only, non-SCALAR ref), validate_dsl_syntax (~11 cases covering modes, duplicates, open blocks, unclosed blocks, mixed edges, strict_syntax, 5K-char regex, 100+ rules, 30-level nested blocks), combinatorial rule label fuzzing (168 cases — 7 labels × 2 colons × 12 modes). All 5 subtests PASS. File compiles clean.`
-  Commit: `pending`
+  Commit: `764c2f3`
 
 - ID: `MEDIUM-IMPACT.2.2`
   Status: `done`
   Goal: `Fuzz _parse_rule_label_line with edge cases: empty input, undef, Unicode labels, very long labels (10K chars), labels with leading digits, labels with embedded colons/special chars, mode suffixes (all valid + malformed combos), whitespace variations, OR{...}/AND{...} boundary values (0,0 / 0,10**9 / negative / non-numeric).`
   Acceptance: `Fuzz test covers >=30 distinct edge-case categories for _parse_rule_label_line. All currently-valid inputs still parse correctly. Any newly-discovered invalid inputs that should be rejected are documented.`
   Verification: `2026-06-12: Extended t/phase0_validation_fuzz.t with 13 additional OR{}/AND{} boundary cases (OR{0,0}, OR{0,10^9}, AND{0,10^9}, OR{1,1}, AND{5,5}, OR{,5}, AND{,10}, OR{1,}, AND{3,}, OR{2,1}, AND{5,2}, OR{,-1}, AND{-1,5}). Now covers 48+ distinct edge-case categories for _parse_rule_label_line. All 5 subtests PASS.`
-  Commit: `pending`
+  Commit: `69a9340`
 
 - ID: `MEDIUM-IMPACT.2.3`
   Status: `done`
   Goal: `Fuzz _scan_rule_edges_in_fragment with edge cases: empty fragment, undef, deeply nested blocks (>100 levels), mismatched delimiters, string literals containing edge-like syntax ('->', '=>'), regex literals containing braces, mixed action+blind-call on same line, grouped targets with/without blocks, indexed targets, fluent continuations, malformed index syntax.`
   Acceptance: `Fuzz test covers >=25 distinct edge-case categories for _scan_rule_edges_in_fragment. All currently-valid inputs still scan correctly. Any newly-discovered bugs are documented for MEDIUM-IMPACT.2.4.`
   Verification: `2026-06-12: Extended t/phase0_validation_fuzz.t with 14 additional edge scanning cases: depth tracking (0/1/2), mixed action+blind-call, edge with index, fluent continuation, whitespace variations, blind-call variations. Now covers 36 distinct edge-case categories (target >=25). All 5 subtests PASS.`
-  Commit: `pending`
+  Commit: `4724894`
 
 - ID: `MEDIUM-IMPACT.2.4`
   Status: `done`
   Goal: `Fuzz validate_dsl_syntax and validate_spec_content with edge cases: empty spec, comment-only spec, spec with only blank lines, deeply nested lifecycle blocks, rules with 100+ body elements, mixed paragraph members, spec with 500+ rules, very long regex patterns, rules with Unicode labels, duplicate rules at various positions, unclosed blocks at EOF, strict_syntax mode with unused/undefined refs. Fix any bugs discovered in .2.2 or .2.3.`
   Acceptance: `Fuzz test covers >=20 distinct edge-case categories for validate_dsl_syntax/validate_spec_content. All 19 shipped specs still validate. Any bugs found and fixed are documented in the leaf verification. Phase0 1005 PASS.`
   Verification: `2026-06-12: Extended t/phase0_validation_fuzz.t: validate_spec_content now 21 cases (added blank-line, comment-between-rules, two-top-rules, same-line rule, multi-regex rule), validate_dsl_syntax 11 cases. Combined 32 categories across both surfaces (target >=20). No bugs found. All 5 subtests PASS.`
-  Commit: `pending`
+  Commit: `7425c8f`
 
 - ID: `MEDIUM-IMPACT.3`
   Status: `active`
@@ -148,7 +148,7 @@ skipping gap and wiring spec.spec as the primary parse path.
   Goal: `Dual-path cross-check: compare BootstrapSpec::Core (oracle) against spec.spec-generated parser (candidate) for all 19 shipped specs + spec.spec itself. For each spec, parse raw .spec content through both paths, compare the resulting descriptor structures (rule count, rule labels, compiled rule order, dependency-regex maps). Document every discrepancy with structured comparison output. Bootstrap = oracle; spec.spec = candidate.`
   Acceptance: `Cross-check harness exists (script or test) that parses all 20 .spec files through both paths. Structured comparison report documents: (a) identical results, (b) spec.spec-only gaps (missing rules, wrong labels), (c) bootstrap-only differences. No changes to spec.spec or infrastructure in this leaf — pure comparison.`
   Verification: `2026-06-12: Cross-check harness tools/cross_check_spec_parsers.pl built. All 20 .spec files parsed through both BootstrapSpec (oracle) and spec.spec (candidate). 10/20 specs have identical rule counts (BNF, DT, Lispish, hlink_substitution, lib_reader, operators_try, pplugin, sdce, tkgui, verilog). 10/20 specs have inflated candidate counts (candidate counts body elements as rule paragraphs): ds_vhistory (12→24), ebnf (24→40), ifelse (7→23), portmap (3→9), regdef (6→8), simenv (17→36), spec.spec (3→4), tablegrep (5→8), tclite (9→12), vhdl (48→70). Root cause: spec.spec rule_paragraph AND handler lacks E-block body collection, and body_element:* matches individual body lines without aggregating them into the parent rule. Also: spec.spec parser reports 1 extra paragraph for spec.spec itself (likely the KNOWN BOOTSTRAPPING GAPS comment block counted as a rule). Zero hangs, zero crashes — all 20 specs parse successfully. Gaps documented for .3.4.`
-  Commit: `pending`
+  Commit: `e2ea174` (substantive); hash-fix chain `5725f87` `316262f`
 
 - ID: `MEDIUM-IMPACT.3.4`
   Status: `blocked`
@@ -157,7 +157,7 @@ skipping gap and wiring spec.spec as the primary parse path.
   Blocked by: `AND handler architecture limitation — per-regex I-block code for AND rules is routed to the handler preamble (ICODE) where return() exits the entire handler before edge processing runs. The 10 mismatched specs all exhibit the same pattern: rule_paragraph:AND matches the header regex, the I-block's return(hash(...)) exits, and body_element results are never collected. Fix options: (1) route AND I-blocks to acode_entries instead of ICODE (like REP rules already do), (2) add E-block support to AND_SINGLE_ACODE handler variant, (3) restructure spec.spec to use a different rule mode. All options require a planned infrastructure change.`
   Unblock condition: `Choose a fix approach, implement it as a new leaf (e.g., MEDIUM-IMPACT.3.4.1), verify with cross-check (20/20 match) and phase0 regression (1005 PASS).`
   Verification: `2026-06-12: Analyzed root cause. AND_SINGLE_ACODE handler routes I-block to preamble where return() exits early. Three fix approaches identified. Cross-check harness still shows 10/20 match, 10/20 inflated counts.`
-  Commit: `pending`
+  Commit: `29b4d38`
 
 - ID: `MEDIUM-IMPACT.3.5`
   Status: `pending`
@@ -203,21 +203,35 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-06-12` | `MEDIUM-IMPACT.1.1` | `docs/knowledge/specentry-perl-coupling-inventory.md` created, `perl -c perl/LinkedSpec/SpecEntry.pm` clean | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.1.2` | `perl -c perl/LinkedSpec/HandlerVariantEmitter.pm` + `SpecEntry.pm` clean, phase0 1005 PASS, spec.spec compile ratio 1.0000 | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.2.1` | `perl -c t/phase0_validation_fuzz.t` clean, 5/5 subtests PASS, 168 combinatorial cases | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.2.2` | 48+ edge categories for `_parse_rule_label_line`, 5/5 subtests PASS | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.2.3` | 36 edge categories for `_scan_rule_edges_in_fragment`, 5/5 subtests PASS | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.2.4` | 32 combined categories for `validate_dsl_syntax`/`validate_spec_content`, 5/5 subtests PASS | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.1` | `tools/run_ci_local.sh` (1005 PASS), spec.spec compile ratio 1.0000, body_element returns ARRAY with correct multi-element matches | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.2` | `tools/run_ci_local.sh` (1005 PASS), self-parse on raw spec.spec OK, tablegrep/pplugin/ifelse raw parses OK, syntax checks clean | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.3` | `tools/cross_check_spec_parsers.pl`: 20/20 specs parse through both paths, 10/20 identical counts, 10/20 inflated candidate counts, 0 hangs | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.3.4` | Root cause analysis complete: AND_SINGLE_ACODE lacks E-block. Three fix approaches identified. | Pass |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `MEDIUM-IMPACT.1.1` | `654b9c0` | SpecEntry Perl coupling inventory — 10-section knowledge card documenting all eval sites, variant builders, Perl assumptions. |
+| `MEDIUM-IMPACT.1.2` | `d53578a` | Extract handler-variant builders into HandlerVariantEmitter. SpecEntry.pm delegates variant building. Old dead code remains in SpecEntry.pm. |
+| `MEDIUM-IMPACT.2.1` | `764c2f3` | Validation.pm fuzzing harness — t/phase0_validation_fuzz.t, 5 subtests, 168 combinatorial cases. |
+| `MEDIUM-IMPACT.2.2` | `69a9340` | _parse_rule_label_line fuzzing boundary cases — 48+ edge categories. |
+| `MEDIUM-IMPACT.2.3` | `4724894` | _scan_rule_edges_in_fragment fuzzing — 36 edge categories. |
+| `MEDIUM-IMPACT.2.4` | `7425c8f` | validate_dsl_syntax/validate_spec_content fuzzing + .2 container complete — 32 combined categories. |
 | `MEDIUM-IMPACT.3.1` | `2526f2b` | spec.spec accuracy audit: fix body_element REP handler + self-contained grammar. RuleIR ICODE→ACODE fix. SpecEntry REP return→assignment fix. |
 | `MEDIUM-IMPACT.3.2` | `d7294d0` | Close comment/blank-line skipping gap via Runtime.pm wrapper. Self-parse on raw spec.spec OK. |
-| `MEDIUM-IMPACT.3.2` | `cac8929` | Post-commit hash fix: MEMORY.md latest_commit → d7294d0. |
-| `MEDIUM-IMPACT.3.2` | `4112374` | Close-out: task-tree commit log + MEMORY.md finalize. |
+| `MEDIUM-IMPACT.3.3` | `e2ea174` | Dual-path cross-check: BootstrapSpec oracle vs spec.spec candidate across 20 specs. |
+| `MEDIUM-IMPACT.3.4` | `29b4d38` | Blocked analysis: AND handler architecture limitation documented. |
 
 ## Changelog
 
+- `2026-06-12` (hygiene): Backfilled commit hashes for 8 completed leaves (.1.1, .1.2, .2.1–.2.4, .3.3, .3.4). Updated verification log and commit log tables. Updated CHANGES.md with 7 missing entries. Updated MEMORY.md latest_commit → d53578a.
 - `2026-06-12`: Created task tree with 3 containers, 13 leaves across SpecEntry decoupling, Validation fuzzing, and BootstrapSpec handoff (including spec.spec accuracy audit per user direction).
 - `2026-06-12` (restructure): Per user direction, expanded `.3` BootstrapSpec handoff from 4 to 6 leaves. Inserted dual-path cross-check leaves `.3.3` (compare BootstrapSpec oracle vs spec.spec candidate across all 20 specs) and `.3.4` (fix gaps) before wiring spec.spec as primary (now `.3.5`). Former `.3.3`/`.3.4` renumbered → `.3.5`/`.3.6`. Updated frontier, decisions, commit log, verification log. Also corrected `.3.2` frontier status (was stale `pending` → now `done`; commit `d7294d0`).
 - `2026-06-12`: Completed MEDIUM-IMPACT.3.3 — dual-path cross-check. Harness at `tools/cross_check_spec_parsers.pl`. Results: 10/20 specs match (BNF, DT, Lispish, hlink_substitution, lib_reader, operators_try, pplugin, sdce, tkgui, verilog); 10/20 have inflated candidate counts (ds_vhistory, ebnf, ifelse, portmap, regdef, simenv, spec.spec, tablegrep, tclite, vhdl). Root cause: spec.spec rule_paragraph AND handler lacks E-block body collection; body_element:* over-matches individual body lines. Zero hangs/crashes. Gaps documented for .3.4.

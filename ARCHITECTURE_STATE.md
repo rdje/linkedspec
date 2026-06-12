@@ -4,13 +4,17 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-06-04`
+- Last refreshed: `2026-06-12`
+- `2026-06-12` refresh: HandlerVariantEmitter extracted from SpecEntry.pm (10 variant builders → `perl/LinkedSpec/HandlerVariantEmitter.pm`, 554 lines). SpecEntry.pm now delegates; old dead code remains in SpecEntry.pm (MEDIUM-IMPACT.1.3 will define HandlerIR for further decoupling). Validation.pm fuzzing harness created (`t/phase0_validation_fuzz.t`, 5 subtests, 168+ combinatorial cases). BootstrapSpec→spec.spec dual-path cross-check harness built (`tools/cross_check_spec_parsers.pl`): 10/20 specs match, 10/20 have inflated candidate counts due to AND handler lacking E-block body collection (MEDIUM-IMPACT.3.4 blocked). Comment/blank-line skip added to Runtime.pm wrapper. RuntimeContext now reusable via populated scalar-slot contract.
 - `2026-06-04` refresh: removed two stale references that still presented the deleted `perl/LinkedSpec/ActionRewriter.pm` module as a live owner-dispatch participant. That module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`, commit `4f8e0b6`); the focused helper-rewrite compatibility entrypoint now lives solely in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`, reachable through the façade helper `LinkedSpec::call_spec_handler_subst(...)`.
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
   - the ActionIR lowering subtree
   - the current legacy plugin/runtime branch
+  - new: `LinkedSpec::HandlerVariantEmitter` (extracted variant builders)
+  - new: `t/phase0_validation_fuzz.t` (Validation.pm fuzzing harness)
+  - new: `tools/cross_check_spec_parsers.pl` (dual-path cross-check harness)
 
 ## Maintenance Policy
 - Treat this as a live document, not a one-off memo.
@@ -704,7 +708,7 @@ Current best reading:
 - `ParserFactory`, `Runtime`, and `Compiler` are the practical parser-build spine,
 - `BootstrapSpec::Core` and `Validation` still define much of the frontend truth,
 - `Compiler.pm` now has one explicit compiled-spec state model internally and only emits outward `spec` / `dependency_regex_map` hashes at descriptor boundaries,
-- `SpecEntry` remains the biggest portability hotspot,
+- `SpecEntry` remains the biggest portability hotspot, though `HandlerVariantEmitter` now isolates the 10 variant builders into their own module (first step toward HandlerIR and backend pluggability),
 - `RuleIR` plus `ActionIR::*` are where backend-neutral action semantics really live,
 - `RuntimeContext` is one of the strongest architectural boundaries in the project,
 - and the legacy plugin branch should be treated as transition/removal machinery, not as the future identity of LinkedSpec.

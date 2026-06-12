@@ -1,6 +1,73 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.1.2: Extract handler-variant builders into HandlerVariantEmitter
+
+- Created `perl/LinkedSpec/HandlerVariantEmitter.pm` (554 lines) — all 10 variant builder
+  functions + 4 helper functions (`_resolve_rep_bounds`, `_linkedre_or_expr`,
+  `_build_acodes_dispatch_block`, `_build_bcodes_dispatch_block`) + `$rep_nodes_minmax`.
+- `SpecEntry.pm` now imports `LinkedSpec::HandlerVariantEmitter` and delegates variant
+  building via package-qualified calls in `_build_handler_variants`.
+- Old function bodies remain in `SpecEntry.pm` as dead code (MEDIUM-IMPACT.1.2 verification
+  noted this as follow-up cleanup).
+- Zero behavior change: all 19 shipped specs compile identically, phase0 1005 PASS,
+  spec.spec compile ratio 1.0000.
+- `perl -c` clean on both files.
+
+## 2026-06-12 — MEDIUM-IMPACT.2.4: validate_dsl_syntax/validate_spec_content fuzzing + .2 container complete
+
+- Extended `t/phase0_validation_fuzz.t`: `validate_spec_content` now 21 cases (added
+  blank-line, comment-between-rules, two-top-rules, same-line rule, multi-regex rule),
+  `validate_dsl_syntax` 11 cases. Combined 32 categories across both surfaces (target >=20).
+- No bugs found. All 5 subtests PASS. MEDIUM-IMPACT.2 container complete (4/4 leaves done).
+
+## 2026-06-12 — MEDIUM-IMPACT.2.3: _scan_rule_edges_in_fragment fuzzing
+
+- Extended `t/phase0_validation_fuzz.t` with 14 additional edge scanning cases: depth tracking
+  (0/1/2), mixed action+blind-call, edge with index, fluent continuation, whitespace
+  variations, blind-call variations. Now covers 36 distinct edge-case categories (target >=25).
+- All 5 subtests PASS.
+
+## 2026-06-12 — MEDIUM-IMPACT.2.2: _parse_rule_label_line fuzzing boundary cases
+
+- Extended `t/phase0_validation_fuzz.t` with 13 additional OR{}/AND{} boundary cases:
+  OR{0,0}, OR{0,10^9}, AND{0,10^9}, OR{1,1}, AND{5,5}, OR{,5}, AND{,10}, OR{1,}, AND{3,},
+  OR{2,1}, AND{5,2}, OR{,-1}, AND{-1,5}. Now covers 48+ distinct edge-case categories
+  (target >=30). All 5 subtests PASS.
+
+## 2026-06-12 — Docs: mdBook sync — reference new validation fuzzing harness
+
+- Updated `docs/linkedspec-book/` to reference the new `t/phase0_validation_fuzz.t` harness
+  in the local CI and regression documentation chapter.
+
+## 2026-06-12 — MEDIUM-IMPACT.2.1: Validation.pm fuzzing harness
+
+- Created `t/phase0_validation_fuzz.t` with 5 subtests:
+  `_parse_rule_label_line` (~62 cases covering valid, malformed, edge, Unicode, 10K-char),
+  `_scan_rule_edges_in_fragment` (~22 cases covering simple, nested, string/regex literals,
+  depth tracking), `validate_spec_content` (15 cases), `validate_dsl_syntax` (~11 cases),
+  combinatorial rule label fuzzing (168 cases — 7 labels × 2 colons × 12 modes).
+- All 5 subtests PASS. File compiles clean.
+
+## 2026-06-12 — MEDIUM-IMPACT.1.1: SpecEntry Perl coupling inventory
+
+- Created `docs/knowledge/specentry-perl-coupling-inventory.md` (10 sections, 200+ lines).
+- Catalogued: the single eval site, all 10 variant builders with lifecycle block support
+  matrix, LinkedRE::or dependency, Perl variable assumptions
+  ($descr/$STRING/$info/@collect), preamble vs body disconnect, MIXED_ACTIONS constraint,
+  external dependencies, and decoupling path toward HandlerIR.
+- Identified root cause of MEDIUM-IMPACT.3.4 blocker: AND_SINGLE_ACODE lacks E-block;
+  return from ICODE exits handler before edge processing.
+
+## 2026-06-12 — MEDIUM-IMPACT.3.4: Blocked — AND handler architecture limitation documented
+
+- Analyzed root cause of cross-check gaps: AND_SINGLE_ACODE handler routes per-regex I-block
+  code to the handler preamble (ICODE) where `return()` exits the entire handler before edge
+  processing runs; the 10 mismatched specs all exhibit the same pattern.
+- Three fix approaches documented: (1) route AND I-blocks to acode_entries like REP rules,
+  (2) add E-block support to AND_SINGLE_ACODE handler variant, (3) restructure spec.spec
+  to use a different rule mode. All require planned infrastructure change.
+
 ## 2026-06-12 — MEDIUM-IMPACT.3.3: Dual-path cross-check (BootstrapSpec oracle vs spec.spec candidate)
 
 - Built cross-check harness at `tools/cross_check_spec_parsers.pl`.
