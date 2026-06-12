@@ -46028,6 +46028,39 @@ subtest 'spec_self_hosted_compiles_as_language_agnostic' => sub {
     is($summary->{compatibility_surface_rule_count} || 0, 0, 'spec.spec has no compatibility-surface rules');
 };
 
+subtest 'plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus' => sub {
+    plan tests => 5;
+
+    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
+    my @plg_files = discover_dir_files_by_suffix($plugin_dir, '.plg');
+    ok(@plg_files > 0, 'plugin corpus is non-empty for dispatch gate inspection');
+
+    my @get_plugin_hits;
+    my @run_plugin_hits;
+    my @dispatch_autoload_hits;
+    foreach my $plg_file (@plg_files) {
+        my $source = slurp($plg_file);
+        my $bn = basename($plg_file);
+        push @get_plugin_hits, $bn
+            if $source =~ /LinkedSpec::get_plugin\s*\(/;
+        push @run_plugin_hits, $bn
+            if $source =~ /LinkedSpec::run_plugin\s*\(/;
+        push @dispatch_autoload_hits, $bn
+            if $source =~ /LinkedSpec::dispatch_plugin_autoload_name\s*\(/;
+    }
+
+    is_deeply(\@get_plugin_hits, [], 'no .plg file calls LinkedSpec::get_plugin(...) directly')
+        or diag("Files: @get_plugin_hits");
+    is_deeply(\@run_plugin_hits, [], 'no .plg file calls LinkedSpec::run_plugin(...) directly')
+        or diag("Files: @run_plugin_hits");
+    is_deeply(\@dispatch_autoload_hits, [], 'no .plg file calls LinkedSpec::dispatch_plugin_autoload_name(...) directly')
+        or diag("Files: @dispatch_autoload_hits");
+
+    my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));
+    like($plugin_bridge_pm, qr/Compatibility bridge/i,
+        'PluginBridge.pm documents its compatibility-bridge status');
+};
+
 done_testing();
 
 sub discover_specs {
