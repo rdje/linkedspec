@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` — "Docs: MEDIUM-IMPACT.3.4 — honest assessment, approach (1) works but needs coordinated spec.spec change"
+- latest_commit: `1a16396` — "Docs: MEDIUM-IMPACT.3.4 — honest assessment after deep investigation"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.2` (implement AND handler fix)
 - next_action: Implement approach (1) — route AND I-blocks to acode_entries in RuleIR.pm,
   apply return→assignment in AND_SINGLE_ACODE emitter. Then re-cross-check.
