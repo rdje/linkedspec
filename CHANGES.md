@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-13 — MEDIUM-IMPACT.3.4.4: Resolve MIXED_ACTIONS conflict for AND rules
+
+- **RuleIR.pm**: AND per-regex I-blocks routed to new `and_icode_entries` field
+  (not `acode_entries`). This avoids `acode_count` increment → no MIXED_ACTIONS
+  with bcode edges. `_plan_rule_ir_meta` sees acode_count=0, bcode_count>0 →
+  AND_BCODE handler selected.
+- **EmitContext.pm**: Processes `and_icode_entries` into `and_icode` string via
+  action rewriter. Returns in emit context alongside ACODEs/BCODEs.
+- **SpecEntry.pm**: Simplified — reads `and_icode` directly from emit_ctx
+  (replaces complex ACODE extraction loop). Passes REs + and_icode to
+  AND_BCODE variant builder.
+- **HandlerVariantEmitter.pm**: AND_SINGLE_ACODE emitter transforms edge acodes
+  by prepending `$label = ` to capture lowered handler call results. Edge results
+  now flow into @collect (previously discarded). AND_BCODE extended with
+  optional regex match + IMATCH bridge + return→assignment support.
+- Cross-check: 2/20 exact match (tablegrep, verilog), significant improvement
+  (ds_vhistory 11/12 oracle, simenv 18/17). 20/20 shipped specs compile OK.
+
 ## 2026-06-12 — MEDIUM-IMPACT.3.4.3: Cross-check re-run + MIXED_ACTIONS root cause analysis
 
 - **Cross-check re-run** (`tools/cross_check_spec_parsers.pl`): 1/20 match (verilog.spec only).
