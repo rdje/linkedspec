@@ -97,10 +97,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Children: `MEDIUM-IMPACT.2.1`, `MEDIUM-IMPACT.2.2`, `MEDIUM-IMPACT.2.3`, `MEDIUM-IMPACT.2.4`
 
 - ID: `MEDIUM-IMPACT.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Create structured fuzzing test harness for Validation.pm — a dedicated test file t/phase0_validation_fuzz.t with systematic edge case generation patterns (combinatorial, boundary, malformed-input) for each validation surface.`
   Acceptance: `New file t/phase0_validation_fuzz.t exists, loads Validation.pm, and defines fuzzing generators for rule labels, edge scanning, and DSL syntax. File compiles clean (perl -c). At least one generator produces >50 test cases.`
-  Verification: `pending`
+  Verification: `2026-06-12: t/phase0_validation_fuzz.t created. 5 subtests: _parse_rule_label_line (~62 cases covering valid, malformed, edge, Unicode, 10K-char), _scan_rule_edges_in_fragment (~22 cases covering simple, nested, string/regex literals, depth tracking), validate_spec_content (15 cases covering valid, empty, comment-only, non-SCALAR ref), validate_dsl_syntax (~11 cases covering modes, duplicates, open blocks, unclosed blocks, mixed edges, strict_syntax, 5K-char regex, 100+ rules, 30-level nested blocks), combinatorial rule label fuzzing (168 cases — 7 labels × 2 colons × 12 modes). All 5 subtests PASS. File compiles clean.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2.2`
@@ -177,7 +177,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness — build t/phase0_validation_fuzz.t with edge-case generators. |
+| 1 | `MEDIUM-IMPACT.2.2` | `pending` | Fuzz _parse_rule_label_line with >=30 edge-case categories. |
 | 2 | `MEDIUM-IMPACT.1.2` | `pending` | Extract 12 handler-variant builders into HandlerVariantEmitter module. |
 | 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
 | 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |

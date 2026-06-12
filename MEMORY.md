@@ -17,12 +17,12 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `29b4d38` — "MEDIUM-IMPACT.3.4 — blocked: AND handler architecture limitation documented"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.2.1` (Validation fuzzing harness)
-- next_action: PNT — execute MEDIUM-IMPACT.2.1: create structured fuzzing test harness
-  t/phase0_validation_fuzz.t with systematic edge case generators for Validation.pm surfaces.
-- MEDIUM-IMPACT.1.1 done: SpecEntry coupling inventory at docs/knowledge/specentry-perl-coupling-inventory.md
-- MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (see task tree).
-- regression baseline: 1005 PASS (phase0).
-- in_flight_uncommitted: MEDIUM-IMPACT.1.1 completion (pending commit).
+- latest_commit: `654b9c0` — "MEDIUM-IMPACT.1.1 — SpecEntry Perl coupling inventory"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.2.2` (fuzz _parse_rule_label_line)
+- next_action: PNT — execute MEDIUM-IMPACT.2.2 or next eligible leaf.
+- MEDIUM-IMPACT.2.1 done: fuzzing harness at t/phase0_validation_fuzz.t (5 subtests, 168 combinatorial cases).
+- MEDIUM-IMPACT.1.1 done: SpecEntry coupling inventory.
+- MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation.
+- regression baseline: 1005 PASS (phase0). Fuzz harness: 5/5 subtests PASS.
+- in_flight_uncommitted: MEDIUM-IMPACT.2.1 completion (pending commit).
 - blockers: MEDIUM-IMPACT.3.4.
