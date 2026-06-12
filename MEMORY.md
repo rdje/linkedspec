@@ -19,8 +19,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `1a16396` — "Docs: MEDIUM-IMPACT.3.4 — honest assessment after deep investigation"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.2` (implement AND handler fix)
-- next_action: Implement approach (1) — route AND I-blocks to acode_entries in RuleIR.pm,
-  apply return→assignment in AND_SINGLE_ACODE emitter. Then re-cross-check.
+- next_action: Re-run cross-check harness (MEDIUM-IMPACT.3.4.3) to confirm AND fix results,
+  then assess body_element:* over-consumption (issue b).
 - MEDIUM-IMPACT.3.4 investigation: Two compounding issues in spec.spec rule_paragraph:AND:
   (a) I-block return(hash(...)) runs BEFORE regex match → handler exits, edges never run.
   (b) body_element:* is REP → if edges did run, one call consumes ALL body elements,

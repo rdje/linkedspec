@@ -164,13 +164,20 @@ sub _build_handler_variants {
   );
   $handlers{AND_BCODE} = $emit_handler->($ir_v) if defined $ir_v;
  }
- if ($isAND && $has_acodes && @$acodes_ref == 1) {
-  my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_single_acode_variant(
-   %ir_args, acodes_ref => $acodes_ref,
-  );
-  $handlers{AND_SINGLE_ACODE} = $emit_handler->($ir_v) if defined $ir_v;
- }
- if ($isAND && $has_acodes && @$acodes_ref > 1) {
+	# AND single-regex handler: build when ICODE, edges, or both present.
+	# The and_icode (per-regex I-block, extracted from ACODEs by the caller)
+	# runs after the regex match with return->assignment applied.
+	my $and_icode_arg = $args{and_icode};
+	my $regex_count = $args{regex_count} // 0;
+	if ($isAND && $regex_count == 1 && ($has_acodes || defined($and_icode_arg))) {
+	 my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_single_acode_variant(
+	  %ir_args, acodes_ref => $acodes_ref,
+	  defined($and_icode_arg) ? (and_icode => $and_icode_arg) : (),
+	 );
+	 $handlers{AND_SINGLE_ACODE} = $emit_handler->($ir_v) if defined $ir_v;
+	}
+ # AND multi-regex: sequential matching (only when > 1 regex and > 1 acode)
+ if ($isAND && $has_acodes && @$acodes_ref > 1 && ($args{regex_count} // 0) > 1) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
    %ir_args, acodes_ref => $acodes_ref, acode_count => scalar(@$acodes_ref),
   );
@@ -362,6 +369,27 @@ sub compile_spec_entry {
  my @dependency_refs = @{$emit_ctx->{DEPENDENCY_REFS}};
  my %ab_count = %{$emit_ctx->{ab_count}};
 
+ # For AND rules with a single regex: per-regex ICODE (now routed to
+ # acode_entries by RuleIR) carries the rule's own label in dependency_refs.
+ # Extract it so the preamble stays empty and the variant handler can place
+ # the ICODE after the regex match with return→assignment + IMATCH bridge.
+ my $and_icode;
+ if ($node_type =~ /AND/o && $rule_meta->{regex_count} == 1) {
+  my @acodes_kept;
+  my @deps_kept;
+  for my $i (0 .. $#ACODEs) {
+   my $dep_label = defined($dependency_refs[$i]) ? ($dependency_refs[$i]{label} // '') : '';
+   if ($dep_label eq $label) {
+    $and_icode = $ACODEs[$i] unless defined($and_icode);
+   } else {
+    push @acodes_kept, $ACODEs[$i];
+    push @deps_kept, $dependency_refs[$i];
+   }
+  }
+  @ACODEs = @acodes_kept;
+  @dependency_refs = @deps_kept;
+ }
+
  my $icode = $emit_ctx->{icode};
  my $ecode = $emit_ctx->{ecode};
  my $excode = $emit_ctx->{excode};
@@ -392,6 +420,9 @@ sub compile_spec_entry {
    bcodes_ref     => \%BCODEs,
    bcalls_ref     => \@BCALLs,
    ab_count_ref   => \%ab_count,
+   dependency_refs => \@dependency_refs,
+   regex_count    => $rule_meta->{regex_count},
+   and_icode      => $and_icode,
    actual_lxcode  => $actual_lxcode,
    actual_lscode  => $actual_lscode,
    actual_lecode  => $actual_lecode,

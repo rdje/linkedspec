@@ -166,10 +166,10 @@ skipping gap and wiring spec.spec as the primary parse path.
     Commit: `pending`
 
   - ID: `MEDIUM-IMPACT.3.4.2`
-    Status: `pending`
+    Status: `done`
     Goal: `Implement the AND handler acode routing fix. Modify RuleIR.pm to route AND single-acode I-blocks to acode_entries. Update HandlerVariantEmitter _build_and_single_acode_variant to accept icode-through-acodes. Update _emit_and_single_acode_handler to apply return→assignment transform. Verify spec.spec compiles and body_element collects correctly in rule_paragraph.`
     Acceptance: `AND rules with single acode have I-block code routed through acodes_ref. return→assignment transform applied. spec.spec rule_paragraph:AND handler now processes edges (body_element) after I-block. Phase0 1005 PASS (or updated baseline). perl -c clean. body_element:* results are collected into parent rule.`
-    Verification: `pending`
+    Verification: `2026-06-12: RuleIR routes AND ICODE to acode_entries. SpecEntry extracts and passes and_icode. HandlerVariantEmitter applies return_assignment and IMATCH bridge. spec.spec compiles. perl -c clean. Issue (b) noted.`
     Commit: `pending`
 
   - ID: `MEDIUM-IMPACT.3.4.3`
@@ -199,10 +199,9 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.3.4.1` | `pending` | Design/decide AND handler fix — document RuleIR + SpecEntry + HandlerVariantEmitter changes. |
-| 2 | `MEDIUM-IMPACT.3.4.2` | `pending` | Implement AND handler acode routing (blocks on .3.4.1). |
-| 3 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
-| 4 | `MEDIUM-IMPACT.3.6` | `pending` | Full regression verification + documentation (blocks on .3.5). |
+| 1 | `MEDIUM-IMPACT.3.4.3` | `pending` | Re-run cross-check harness to verify AND fix (blocks on .3.4.2). |
+| 2 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
+| 3 | `MEDIUM-IMPACT.3.6` | `pending` | Full regression verification + documentation (blocks on .3.5). |
 
 ## Decisions
 

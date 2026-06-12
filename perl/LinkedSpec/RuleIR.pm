@@ -201,10 +201,10 @@ sub _collect_rule_ir {
    next;
   }
   elsif ($last_was_re && exists $rule_ir->{code_blocks}{$entry_type}) {
-   # Per-regex lifecycle code: for REP/OR rules, convert to ACODE entry
-   # so the handler dispatches it on regex match. For AND/default rules,
+   # Per-regex lifecycle code: for REP/OR/AND rules, convert to ACODE entry
+   # so the handler dispatches it on regex match. For default rules,
    # keep as general lifecycle code (they run once at init).
-   if ($rule_ir->{node_type} =~ /REP_|^OR/) {
+   if ($rule_ir->{node_type} =~ /REP_|^OR|^AND/) {
     push @{$rule_ir->{acode_entries}}, {
      relabel => $rule_ir->{label} // 'rule',
      reidx   => $pending_reidx,

@@ -141,12 +141,16 @@ sub _build_and_bcode_variant {
 
 #------------------------------------------------------------------------------
 # _build_and_single_acode_variant — single match, index==0 check, acode dispatch.
+# Accepts optional 'and_icode' — per-regex I-block code that runs after regex match
+# with return→assignment applied, before edge acode dispatch.
 #------------------------------------------------------------------------------
 sub _build_and_single_acode_variant {
     my (%args) = @_;
     my $acodes_ref = $args{acodes_ref};
-    return undef unless ref($acodes_ref) eq 'ARRAY' && @$acodes_ref;
-    return {
+    my $and_icode  = $args{and_icode};
+    return undef unless (ref($acodes_ref) eq 'ARRAY' && @$acodes_ref)
+                     || defined($and_icode);
+    my $ir = {
         kind       => 'and_single_acode',
         label      => $args{label},
         parse_mode => $args{parse_mode} // 'seek',
@@ -156,6 +160,8 @@ sub _build_and_single_acode_variant {
         lecode     => $args{lecode}   // '',
         acodes_ref => $acodes_ref,
     };
+    $ir->{and_icode} = $and_icode if defined($and_icode);
+    return $ir;
 }
 
 #------------------------------------------------------------------------------
@@ -521,6 +527,30 @@ sub _emit_and_single_acode_handler {
     my $lecode     = $ir->{lecode} || '';
     my $acodes     = _build_acodes_dispatch_block($ir->{acodes_ref});
     my $lmatch     = _build_lmatch_extraction();
+
+    # Per-regex I-block code (routed through acode_entries by RuleIR for AND rules).
+    # It runs after the regex match with return→assignment so the handler collects
+    # the result instead of exiting early, and with an IMATCH←LMATCH bridge so
+    # entry_group / match_text helpers can read the regex captures.
+    my $and_icode_block = '';
+    my $and_icode = $ir->{and_icode};
+    if (defined($and_icode) && length($and_icode)) {
+        my $transformed = $and_icode;
+        $transformed =~ s/\breturn\s*/"\$" . $label . " = "/eg;
+        $and_icode_block = '
+   # IMATCH←LMATCH bridge — let I-block code read regex captures
+   $IMATCH      = $LMATCH;
+   @IMATCH_LIST = @LMATCH_LIST;
+   %IMATCH_HASH = %LMATCH_HASH;
+   $IINDEX      = $LINDEX;
+   $IPOS        = $LSPOS;
+
+   ' . $transformed . ';
+
+   push @' . $label . '_collect, $' . $label . ';
+';
+    }
+
     return '
 
  my @' . $label . '_collect;
@@ -533,7 +563,7 @@ sub _emit_and_single_acode_handler {
   ' . $lxcode . '
  }
 ' . $lmatch . '
-
+' . $and_icode_block . '
  ' . $lscode . '
 
  ' . $acodes . '

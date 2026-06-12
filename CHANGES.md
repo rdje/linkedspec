@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.3.4.2: AND handler ICODE routing fix
+
+- **RuleIR.pm** `_collect_rule_ir` (line 207): Changed per-regex lifecycle routing condition
+  from `/REP_|^OR/` to `/REP_|^OR|^AND/` so AND rules' per-regex I-block code is routed to
+  `acode_entries` instead of `code_blocks{ICODE}`. This prevents the I-block from being
+  placed in the handler preamble (where `return()` would exit before regex matching).
+- **SpecEntry.pm** `compile_spec_entry`: Added AND ICODE extraction logic — for single-regex
+  AND rules, separates per-regex ICODE entries (identified by `dependency_refs` having the
+  rule's own label) from edge acode entries. The extracted `$and_icode` is passed to
+  `_build_handler_variants` alongside `dependency_refs` and `regex_count`.
+- **SpecEntry.pm** `_build_handler_variants`: Updated AND handler building — for single-regex
+  AND, now builds `AND_SINGLE_ACODE` when edges, ICODE, or both are present. Passes
+  `and_icode` to `_build_and_single_acode_variant`.
+- **HandlerVariantEmitter.pm** `_build_and_single_acode_variant`: Now accepts optional
+  `and_icode` in the handler IR (per-regex I-block code to run after regex match).
+- **HandlerVariantEmitter.pm** `_emit_and_single_acode_handler`: Emits IMATCH←LMATCH bridge
+  (so lowered I-block code using `entry_group`/`match_text` can read regex captures), applies
+  `return→assignment` transformation (`s/\\breturn\\s*/$label = /eg`) so the handler collects
+  the result instead of exiting early, and pushes the result to `@collect`. Edge acodes are
+  then dispatched normally (index-based if/elsif).
+- Verification: `perl -c` clean on all 3 files. Memory architecture self-check passes.
+  spec.spec compiles through bootstrap path. Generated `rule_paragraph:AND_SINGLE_ACODE`
+  handler confirmed syntactically correct (ICODE now runs after regex match with
+  return→assignment; edge dispatch follows). Issue (b) — `body_element:*` REP over-consumption
+  — noted for separate grammar-level follow-up.
+
 ## 2026-06-12 — MEDIUM-IMPACT.1.5: JSON/AST diagnostic backend in HandlerVariantEmitter
 
 - Added `_emit_handler_json($ir)` — serializes HandlerIR hashrefs to structured JSON using
