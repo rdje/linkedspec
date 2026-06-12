@@ -17,13 +17,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `5725f87` — "MEDIUM-IMPACT.3.3 — post-commit hash fix: MEMORY.md latest_commit → e2ea174"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4` (fix cross-check gaps:
-  AND handler E-block support, body_element over-matching)
-- next_action: PNT — execute MEDIUM-IMPACT.3.4 (fix spec.spec gaps from .3.3 cross-check).
-  Primary gap: rule_paragraph AND handler lacks E-block body collection (all 10 mismatched
-  specs over-count body elements). Also: body_element:* too broad (matches individual body
-  lines as separate rule paragraphs).
+- latest_commit: `316262f` — "MEDIUM-IMPACT.3.3 — post-commit hash fix: MEMORY.md latest_commit → 5725f87"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.1` (SpecEntry coupling inventory)
+- next_action: PNT — execute MEDIUM-IMPACT.1.1: inventory all Perl coupling points in SpecEntry.pm.
+  Document eval sites, generated-code patterns, Perl-variable assumptions, LinkedRE::or dependencies
+  across the 12 handler-variant builders. Pure documentation leaf — no code changes.
+- MEDIUM-IMPACT.3.4 blocked: AND handler routes I-block to preamble where return() exits before
+  edge processing. Needs infrastructure plan. Three fix approaches documented in task tree.
 - regression baseline: 1005 PASS (phase0). Cross-check: 10/20 match, 10/20 inflated candidate counts.
-- in_flight_uncommitted: MEMORY.md hash update only (5725f87 not yet committed).
-- blockers: none.
+- in_flight_uncommitted: none
+- blockers: MEDIUM-IMPACT.3.4 (AND handler architecture limitation — see task tree).

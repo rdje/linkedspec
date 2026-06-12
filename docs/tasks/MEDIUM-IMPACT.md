@@ -151,10 +151,12 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.3.4`
-  Status: `pending`
+  Status: `blocked`
   Goal: `Fix gaps discovered in .3.3 cross-check. Update spec.spec grammar to close any coverage gaps vs BootstrapSpec::Core. Fix any infrastructure issues that prevent spec.spec from matching bootstrap output. After fixes, re-run cross-check to confirm parity.`
   Acceptance: `All 20 .spec files produce identical descriptor structures through both paths (rule count, rule labels, compiled rule order, dependency-regex maps). Cross-check report shows zero discrepancies. Phase0 1005 PASS (or updated baseline).`
-  Verification: `pending`
+  Blocked by: `AND handler architecture limitation — per-regex I-block code for AND rules is routed to the handler preamble (ICODE) where return() exits the entire handler before edge processing runs. The 10 mismatched specs all exhibit the same pattern: rule_paragraph:AND matches the header regex, the I-block's return(hash(...)) exits, and body_element results are never collected. Fix options: (1) route AND I-blocks to acode_entries instead of ICODE (like REP rules already do), (2) add E-block support to AND_SINGLE_ACODE handler variant, (3) restructure spec.spec to use a different rule mode. All options require a planned infrastructure change.`
+  Unblock condition: `Choose a fix approach, implement it as a new leaf (e.g., MEDIUM-IMPACT.3.4.1), verify with cross-check (20/20 match) and phase0 regression (1005 PASS).`
+  Verification: `2026-06-12: Analyzed root cause. AND_SINGLE_ACODE handler routes I-block to preamble where return() exits early. Three fix approaches identified. Cross-check harness still shows 10/20 match, 10/20 inflated counts.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.3.5`
@@ -175,10 +177,10 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.3.4` | `pending` | Fix gaps discovered in cross-check: AND handler body collection, body_element over-matching. |
-| 2 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary parse path (blocks on .3.4). |
-| 3 | `MEDIUM-IMPACT.1.1` | `pending` | SpecEntry inventory — understand all coupling before extracting. |
-| 4 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness can be built in parallel; no code changes to core. |
+| 1 | `MEDIUM-IMPACT.1.1` | `pending` | SpecEntry inventory — understand all coupling before extracting. |
+| 2 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness can be built in parallel; no code changes to core. |
+| 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
+| 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
 
 ## Decisions
 
