@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` — "MEDIUM-IMPACT.1.5 — JSON/AST diagnostic backend"
+- latest_commit: `1d99a32` — "MEDIUM-IMPACT.1.5 — JSON/AST diagnostic backend: _emit_handler_json + $BACKEND threading"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4` (blocked, AND handler)
 - next_action: PNT — frontier has .3.4 (blocked), .3.5 (blocks on .3.4), .3.6 (blocks on .3.5).
   .1 container complete (5/5 leaves: inventory, extraction, HandlerIR, emitter interface, JSON backend).
@@ -33,5 +33,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   JSON backend: _emit_handler_json serializes HandlerIR via JSON::PP (canonical, pretty-printed).
 - regression baseline: 1005 PASS (phase0). All 19 specs compile through HandlerIR pipeline.
 - knowledge: language-agnostic-backend-vision.md captures Rust/Julia/Dart backend direction.
-- in_flight_uncommitted: MEDIUM-IMPACT.1.5 completion (pending commit).
+- in_flight_uncommitted: none
 - blockers: MEDIUM-IMPACT.3.4.
