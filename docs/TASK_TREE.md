@@ -23,7 +23,8 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `COMPAT-ALIAS-RETIREMENT` | `active` | `Method-like DSL migration track` | `COMPAT-ALIAS-RETIREMENT.1` | [docs/tasks/COMPAT-ALIAS-RETIREMENT.md](docs/tasks/COMPAT-ALIAS-RETIREMENT.md) |
+| `LINKEDSPEC-ENHANCEMENTS` | `active` | `Overall roadmap` | `LINKEDSPEC-ENHANCEMENTS.1` | [docs/tasks/LINKEDSPEC-ENHANCEMENTS.md](docs/tasks/LINKEDSPEC-ENHANCEMENTS.md) |
+| `COMPAT-ALIAS-RETIREMENT` | `active` | `Method-like DSL migration track` | `.2/.3 deferred, .1/.4 done` | [docs/tasks/COMPAT-ALIAS-RETIREMENT.md](docs/tasks/COMPAT-ALIAS-RETIREMENT.md) |
 
 ## Proposed Task Trees
 
