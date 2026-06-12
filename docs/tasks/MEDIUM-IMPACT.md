@@ -154,9 +154,26 @@ skipping gap and wiring spec.spec as the primary parse path.
   Status: `blocked`
   Goal: `Fix gaps discovered in .3.3 cross-check. Update spec.spec grammar to close any coverage gaps vs BootstrapSpec::Core. Fix any infrastructure issues that prevent spec.spec from matching bootstrap output. After fixes, re-run cross-check to confirm parity.`
   Acceptance: `All 20 .spec files produce identical descriptor structures through both paths (rule count, rule labels, compiled rule order, dependency-regex maps). Cross-check report shows zero discrepancies. Phase0 1005 PASS (or updated baseline).`
-  Blocked by: `AND handler architecture limitation — per-regex I-block code for AND rules is routed to the handler preamble (ICODE) where return() exits the entire handler before edge processing runs. The 10 mismatched specs all exhibit the same pattern: rule_paragraph:AND matches the header regex, the I-block's return(hash(...)) exits, and body_element results are never collected. Fix options: (1) route AND I-blocks to acode_entries instead of ICODE (like REP rules already do), (2) add E-block support to AND_SINGLE_ACODE handler variant, (3) restructure spec.spec to use a different rule mode. All options require a planned infrastructure change.`
-  Unblock condition: `Choose a fix approach, implement it as a new leaf (e.g., MEDIUM-IMPACT.3.4.1), verify with cross-check (20/20 match) and phase0 regression (1005 PASS).`
-  Verification: `2026-06-12: Analyzed root cause. AND_SINGLE_ACODE handler routes I-block to preamble where return() exits early. Three fix approaches identified. Cross-check harness still shows 10/20 match, 10/20 inflated counts.`
+  Blocked by: `AND handler architecture limitation.`
+
+  **Detailed root cause:** `rule_paragraph:AND` in `spec.spec` matches the header regex in its I-block, then `return(hash(...))` exits the entire handler. The edges (`-> body_element`) never run. The 10 mismatched specs all exhibit this pattern:
+  - `AND_SINGLE_ACODE` routes per-regex I-block code to the handler preamble (ICODE)
+  - `return()` in the preamble exits the handler before edge processing
+  - `body_element:*` matches individual body lines but results are never collected into the parent rule
+  - Consequence: candidate counts each body element as a separate rule paragraph instead of aggregating them into one rule descriptor
+
+  **Three fix approaches, all requiring infrastructure change:**
+
+  1. **Route AND I-blocks to `acode_entries` instead of ICODE** (like REP rules already do). The per-regex code becomes an acode entry dispatched by `$$minfo{index}`. `return` → assignment transform (already in the REP emitter) would apply, so `return(hash(...))` becomes `$rule_paragraph = hash(...)` and the handler continues to edge processing. *Impact:* changes `AND_SINGLE_ACODE` HandlerIR kind semantics; the `_emit_and_single_acode_handler` template needs modification.
+
+  2. **Add E-block (End-block) support to `AND_SINGLE_ACODE` handler variant.** The I-block would run the match logic only (no `return`), and a new E-block would collect results after all edges process. `spec.spec` would use `I { hash(...) } E { return(hash(...)) }` or the edges would populate a collect array the E-block returns. *Impact:* new HandlerIR kind or field; affects all `.spec` files using AND rules; changes the DSL surface.
+
+  3. **Restructure `spec.spec`'s `rule_paragraph` to use a different rule mode** (e.g., REP with per-regex acodes, or OR with bcode edges). Avoids changing handler infrastructure entirely but may make `spec.spec` less natural as a self-hosted grammar. *Impact:* localized to `spec.spec`; no handler variant changes needed.
+
+  **HandlerIR relevance (post-.1.3):** With the variant builders and emitter now separated, approach (1) is the most contained — modify `_build_and_single_acode_variant` to route I-block through `acodes_ref`, then let the existing REP-style emitter transform `return` → assignment. Approaches (2) and (3) require larger design work.
+
+  Unblock condition: `Choose a fix approach, split .3.4 into child leaves (.3.4.1 design/decide, .3.4.2 implement, .3.4.3 re-cross-check), implement, verify 20/20 match + phase0 1005 PASS.`
+  Verification: `2026-06-12: Analyzed root cause. AND_SINGLE_ACODE handler routes I-block to preamble where return() exits early. Three fix approaches identified with HandlerIR implications. Cross-check harness still shows 10/20 match, 10/20 inflated counts.`
   Commit: `29b4d38`
 
 - ID: `MEDIUM-IMPACT.3.5`
