@@ -130,6 +130,29 @@ The test file includes several kinds of checks:
 - corpus regression checks over `plugin/`, `conf/`, `tablescript/`, and `ebnf/`,
 - trace and runtime-context checks.
 
+### Validation fuzzing harness
+
+A dedicated validation fuzzing harness exists at:
+
+```text
+t/phase0_validation_fuzz.t
+```
+
+This test uses systematic edge-case generation (combinatorial, boundary, and
+malformed-input patterns) across the main Validation.pm surfaces:
+
+- `_parse_rule_label_line` — rule label parsing (~60+ edge cases)
+- `_scan_rule_edges_in_fragment` — edge scanning with depth tracking (~20+ cases)
+- `validate_spec_content` — envelope validation (15 cases)
+- `validate_dsl_syntax` — full DSL syntax validation (~10+ cases)
+- combinatorial rule label fuzzing (168 generated combinations)
+
+Run it with:
+
+```bash
+prove -v -Iperl t/phase0_validation_fuzz.t
+```
+
 ## Documentation-only changes
 
 For book-only slices, the full phase0 gate is often not necessary.
