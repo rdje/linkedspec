@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `492bf50` — "LINKEDSPEC-LOW-EFFORT.2 — add post-commit hook to detect MEMORY.md hash drift"
-- active_work_unit: `LINKEDSPEC-LOW-EFFORT` → frontier leaf: `LINKEDSPEC-LOW-EFFORT.3` (`in_progress`)
-- next_action: continue PNT: `LINKEDSPEC-LOW-EFFORT.3` (book backfill for accumulator convention)
-- regression baseline: 1005 PASS (phase0). Post-commit hook active; test sweep clean.
-- in_flight_uncommitted: book accumulator audit section; about to commit
+- latest_commit: `545fe82` — "LINKEDSPEC-LOW-EFFORT.3 — backfill accumulator convention audit conclusion in book"
+- active_work_unit: none — `LINKEDSPEC-LOW-EFFORT` done (3/3 leaves). All enhancements exhausted. PNT idle.
+- next_action: await user direction. Six enhancements shipped this session across 2 trees. Low-effort items complete: test sweep clean, post-commit hook active, accumulator docs backfilled.
+- regression baseline: 1005 PASS (phase0). Post-commit hook will warn on hash drift.
+- in_flight_uncommitted: tree close-out docs; about to commit
 - blockers: none.

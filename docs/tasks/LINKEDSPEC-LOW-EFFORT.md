@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LINKEDSPEC-LOW-EFFORT`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap`
 - Created: `2026-06-12`
 - Last updated: `2026-06-12`
