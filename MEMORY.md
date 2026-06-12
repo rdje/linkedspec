@@ -18,13 +18,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `ece03ca` — "Docs: MEDIUM-IMPACT.3.4.3 — cross-check re-run + MIXED_ACTIONS root cause analysis"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.4` (resolve MIXED_ACTIONS conflict)
-- next_action: Implement .3.4.4 — avoid MIXED_ACTIONS by routing AND I-blocks as a separate field (not acode_entries), extend AND_BCODE handler with and_icode support (IMATCH bridge + return→assignment + push to @collect after regex match, then normal bcode dispatch).
-- .3.4.3 completed: Cross-check re-run confirms AND fix correctly makes edges fire, but exposed MIXED_ACTIONS conflict. RuleIR routes AND I-block to acode_entries (acode_count=1), edge -> body_element is bcode (bcode_count=1). RuleIR variant detection returns MIXED_ACTIONS (invalid) → handler falls back to _default → empty @collect. Cross-check: 1/20 match (was 10/20 before fix).
-- MIXED_ACTIONS root cause: RuleIR line 34 returns 'MIXED_ACTIONS' when both acode_count && bcode_count. Execution shape is 'invalid_mixed_actions'. Handler selection falls back to _default.
-- Path forward (.3.4.4): RuleIR emits AND I-block as and_icode field (not acode_entry). SpecEntry passes to AND_BCODE variant. AND_BCODE emitter extended: IMATCH bridge + return→assignment + push to @collect after regex match, then normal bcode dispatch. No acode_count increment → no MIXED_ACTIONS → AND_BCODE handler selected.
-- Completed leaves: .1.1→.1.5, .2.1→.2.4, .3.1, .3.2, .3.3, .3.4.1, .3.4.2, .3.4.3.
-  Pending: .3.4.4, .3.5, .3.6.
-- regression baseline: 1005 PASS (phase0). Cross-check baseline: 1/20 match (was 10/20 pre-AND-fix).
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.5` (claim parity + wire spec.spec as primary)
+- next_action: Implement .3.5 — wire spec.spec-generated parser as primary parse path in Compiler.pm, with BootstrapSpec::Core as fallback.
+- .3.4.4 completed: Four coordinated changes resolve MIXED_ACTIONS. (1) RuleIR: AND I-blocks → and_icode_entries (not acode_entries), avoids acode_count increment → no MIXED_ACTIONS. (2) EmitContext: processes and_icode_entries into and_icode via rewriter. (3) SpecEntry: simplified, uses and_icode from emit_ctx, passes REs+and_icode to AND_BCODE. (4) HandlerVariantEmitter: AND_SINGLE_ACODE prepends assignment to edge acodes so results flow into @collect. Cross-check: 2/20 exact match, significant improvement (ds_vhistory 11/12, simenv 18/17). 20/20 specs compile OK.
+- Completed leaves: .1.1→.1.5, .2.1→.2.4, .3.1, .3.2, .3.3, .3.4.1, .3.4.2, .3.4.3, .3.4.4.
+  Pending: .3.5, .3.6.
+- regression baseline: 1005 PASS (phase0). Cross-check baseline: 2/20 match, significant improvement across all specs.
+- in_flight_uncommitted: .3.4.4 code changes (RuleIR.pm, EmitContext.pm, SpecEntry.pm, HandlerVariantEmitter.pm) + task tree update
+- blockers: none
 - in_flight_uncommitted: MEDIUM-IMPACT.md updated with .3.4.3 assessment + .3.4.4 leaf
 - blockers: none

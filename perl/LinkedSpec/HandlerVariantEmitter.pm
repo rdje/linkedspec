@@ -122,7 +122,7 @@ sub _build_and_bcode_sequence_body {
     my $bcalls_ref = $args{bcalls_ref};
     return undef unless ref($bcodes_ref) eq 'HASH' && keys %$bcodes_ref;
     return undef unless ref($bcalls_ref) eq 'ARRAY' && @$bcalls_ref;
-    return {
+    my $ir = {
         kind       => 'and_bcode',
         label      => $args{label},
         preamble   => $args{preamble} // '',
@@ -132,6 +132,12 @@ sub _build_and_bcode_sequence_body {
         bcodes_ref => $bcodes_ref,
         bcalls_ref => $bcalls_ref,
     };
+    # Optional fields for AND rules that also have a regex + per-regex I-block:
+    # REs (for match expression) and and_icode (IMATCH bridge + return->assignment).
+    $ir->{REs} = $args{REs} if ref($args{REs}) eq 'ARRAY' && @{$args{REs}};
+    $ir->{parse_mode} = $args{parse_mode} if defined($args{parse_mode});
+    $ir->{and_icode} = $args{and_icode} if defined($args{and_icode}) && length($args{and_icode});
+    return $ir;
 }
 
 sub _build_and_bcode_variant {
@@ -463,7 +469,7 @@ sub _emit_default_handler {
     my $lxcode     = $ir->{lxcode} || 'return undef';
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
-    my $acodes     = _build_acodes_dispatch_block($ir->{acodes_ref});
+        my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
     my $lmatch     = _build_lmatch_extraction();
     return '
 
@@ -495,10 +501,47 @@ sub _emit_and_bcode_handler {
     my $ecode      = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $bcodes     = _build_bcodes_dispatch_block($ir->{bcalls_ref}, $ir->{bcodes_ref});
     my $bcalls     = join(' ', @{$ir->{bcalls_ref}});
+
+    # When REs + and_icode are present (AND rule with per-regex I-block), emit
+    # regex match + IMATCH bridge + return->assignment + push before edge dispatch.
+    # This is the AND_BCODE-with-match extension that avoids MIXED_ACTIONS.
+    my $match_section = '';
+    if (ref($ir->{REs}) eq 'ARRAY' && @{$ir->{REs}}) {
+        my $match_expr = _linkedre_or_expr(%$ir, label => $label);
+        my $lmatch = _build_lmatch_extraction();
+        $match_section .= '
+  my $minfo = ' . $match_expr . ';
+  unless($minfo) {
+   ' . $lxcode . '
+  }
+ ' . $lmatch . '
+';
+
+        # Per-regex I-block: apply return->assignment + IMATCH bridge + push
+        my $and_icode = $ir->{and_icode};
+        if (defined($and_icode) && length($and_icode)) {
+            my $transformed = $and_icode;
+            $transformed =~ s/\breturn\s*/"\$" . $label . " = "/eg;
+            $match_section .= '
+   # IMATCH bridge — let I-block code read the regex captures
+   $IMATCH      = $LMATCH;
+   @IMATCH_LIST = @LMATCH_LIST;
+   %IMATCH_HASH = %LMATCH_HASH;
+   $IINDEX      = $LINDEX;
+   $IPOS        = $LSPOS;
+
+   ' . $transformed . ';
+
+   push @' . $label . '_collect, $' . $label . ';
+';
+        }
+    }
+
     return '
 
   my $' . $label . ';
   my @' . $label . '_collect;
+ ' . $match_section . '
   foreach my $call (qw(' . $bcalls . ')) {
    my $current_call = $call;
 
@@ -525,7 +568,19 @@ sub _emit_and_single_acode_handler {
     my $lxcode     = $ir->{lxcode} || 'return undef';
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
-    my $acodes     = _build_acodes_dispatch_block($ir->{acodes_ref});
+    # Transform edge acodes: wrap call(X) -> $label = call(X) so edge results
+    # flow into @collect (like REP return->assignment but for edge dispatch).
+    my $acodes_ref = $ir->{acodes_ref};
+    my @acodes_transformed;
+    if (ref($acodes_ref) eq 'ARRAY' && @$acodes_ref) {
+        foreach my $acode (@$acodes_ref) {
+            my $transformed = $acode;            $transformed =~ s/\bcall\(/\$" . $label . " = call(/g;
+            # Edge acodes are already lowered to compiled handler refs.
+            # Prepend assignment to capture the result for @collect push.
+            $transformed = "\$" . $label . " = " . $transformed;
+        }
+    }
+    my $acodes = _build_acodes_dispatch_block(\@acodes_transformed);
     my $lmatch     = _build_lmatch_extraction();
 
     # Per-regex I-block code (routed through acode_entries by RuleIR for AND rules).
@@ -585,7 +640,18 @@ sub _emit_and_acode_seq_handler {
     my $lscode      = $ir->{lscode} || '';
     my $lecode      = $ir->{lecode} || '';
     my $acode_count = $ir->{acode_count};
-    my $acodes      = _build_acodes_dispatch_block($ir->{acodes_ref});
+    # Transform edge acodes: wrap call(X) -> $label = call(X) so edge results
+    # flow into @collect (like REP return->assignment but for edge dispatch).
+    my $acodes_ref = $ir->{acodes_ref};
+    my @acodes_transformed;
+    if (ref($acodes_ref) eq 'ARRAY' && @$acodes_ref) {
+        foreach my $acode (@$acodes_ref) {
+            my $transformed = $acode;            $transformed =~ s/\bcall\(/\$" . $label . " = call(/g;
+            $transformed =~ s/\breturn\s*/\$" . $label . " = "/eg;
+            push @acodes_transformed, $transformed;
+        }
+    }
+    my $acodes = _build_acodes_dispatch_block(\@acodes_transformed);
     my $lmatch      = _build_lmatch_extraction();
     return '
 
@@ -651,7 +717,7 @@ sub _emit_or_acode_handler {
     my $label      = $ir->{label};
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
     my $lxcode     = $ir->{lxcode} || 'return undef';
-    my $acodes     = _build_acodes_dispatch_block($ir->{acodes_ref});
+        my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
     my $lmatch     = _build_lmatch_extraction();
     return '
 

@@ -179,6 +179,7 @@ sub _collect_rule_ir {
   },
   acode_entries => [],
   bcode_entries => [],
+  and_icode_entries => [],   # Per-regex I-blocks for AND rules (not acode_entries)
  };
 
  my $last_was_re = 0;
@@ -204,10 +205,17 @@ sub _collect_rule_ir {
    # Per-regex lifecycle code: for REP/OR/AND rules, convert to ACODE entry
    # so the handler dispatches it on regex match. For default rules,
    # keep as general lifecycle code (they run once at init).
-   if ($rule_ir->{node_type} =~ /REP_|^OR|^AND/) {
+   if ($rule_ir->{node_type} =~ /REP_|^OR/) {
     push @{$rule_ir->{acode_entries}}, {
      relabel => $rule_ir->{label} // 'rule',
      reidx   => $pending_reidx,
+     code    => $$centry[1],
+    };
+   } elsif ($rule_ir->{node_type} =~ /AND/) {
+    # AND rules: route per-regex I-blocks to and_icode_entries (not acode_entries)
+    # to avoid MIXED_ACTIONS conflict with bcode edges.  The and_icode is emitted
+    # in the handler as IMATCH bridge + return->assignment after regex match.
+    push @{$rule_ir->{and_icode_entries}}, {
      code    => $$centry[1],
     };
    } else {

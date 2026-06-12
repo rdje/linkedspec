@@ -728,6 +728,17 @@ sub build_rule_ir_emit_context {
   $rewrite_rules,
   $rewrite_diag_acc,
  );
+ # AND rules: rewrite per-regex I-block code from and_icode_entries into a single
+ # and_icode string.  The handler places it after regex match (IMATCH bridge +
+ # return->assignment) instead of the preamble.  Avoids MIXED_ACTIONS with bcodes.
+ my $and_icode;
+ if (ref($rule_ir->{and_icode_entries}) eq 'ARRAY' && @{$rule_ir->{and_icode_entries}}) {
+  for my $entry (@{$rule_ir->{and_icode_entries}}) {
+   my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $entry->{code}, $rewrite_rules);
+   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
+   $and_icode = $rewritten unless defined($and_icode);
+  }
+ }
  my $lifecycle_code = _normalize_rule_lifecycle_code(
   $label,
   $rule_ir->{code_blocks},
@@ -735,7 +746,7 @@ sub build_rule_ir_emit_context {
   $rewrite_rules,
  );
 
- my %ab_count = (
+  my %ab_count = (
   ACODE => scalar(@{$rule_ir->{acode_entries}}),
   BCODE => scalar(@{$rule_ir->{bcode_entries}}),
  );
@@ -754,6 +765,7 @@ sub build_rule_ir_emit_context {
   BCALLs    => $bcalls,
   DEPENDENCY_REFS => $dependency_refs,
   ab_count  => \%ab_count,
+  and_icode => $and_icode,
   icode     => $lifecycle_code->{icode},
   ecode     => $lifecycle_code->{ecode},
   excode    => $lifecycle_code->{excode},

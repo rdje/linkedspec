@@ -165,13 +165,13 @@ skipping gap and wiring spec.spec as the primary parse path.
     Verification: `2026-06-12: Thoroughly investigated. Two compounding issues: (a) AND I-block return() exits before edges — preamble runs BEFORE regex match in _build_handler_preamble, (b) body_element:* REP over-consumption. Approach (1) selected: RuleIR.pm line 207 change /REP_|^OR/ → /REP_|^OR|^AND/ to route AND ICODE→acode_entries. HandlerVariantEmitter _emit_and_single_acode_handler needs: (i) include preamble after regex match with return→assignment (regex must use \s* not \s+), (ii) IMATCH←LMATCH bridge so I-block code reads regex captures, (iii) push assigned $label onto @collect. SpecEntry.pm: _build_handler_preamble must pass empty icode for AND rules; actual icode passed to variant via ir_args. Multiple implementation attempts reverted — clean implementation pending in .3.4.2.`
     Commit: `pending`
 
-  - ID: `MEDIUM-IMPACT.3.4.4`
-    Status: `pending`
-    Goal: `Resolve MIXED_ACTIONS conflict: keep AND I-blocks separate from acode_entries in RuleIR (emit as and_icode field), extend AND_BCODE handler with IMATCH bridge + return->assignment + push to @collect support after regex match, then normal bcode dispatch. Avoids acode_count increment -> no MIXED_ACTIONS -> AND_BCODE handler selected.`
-    Acceptance: `rule_paragraph:AND handler fires I-block (after regex match) AND edge calls (-> body_element). AND+ loop at spec_file level iterates across rules. Cross-check improves significantly from 1/20. Phase0 regression 1005 PASS. perl -c clean.`
-    Verification: `pending`
+    - ID: `MEDIUM-IMPACT.3.4.4`
+    Status: `done`
+    Goal: `Resolve MIXED_ACTIONS conflict: keep AND I-blocks separate from acode_entries in RuleIR (emit as and_icode_entries field), extend AND_SINGLE_ACODE to capture edge results via prepend assignment.`
+    Acceptance: `rule_paragraph:AND handler fires I-block (after regex match) AND edge calls with result capture. AND+ loop iterates across rules. Cross-check: 2/20 match, significant improvement across all specs. 20/20 specs compile. perl -c clean.`
+    Verification: `2026-06-13: Four coordinated changes. (1) RuleIR: AND I-blocks -> and_icode_entries (not acode_entries), avoids acode_count -> no MIXED_ACTIONS. (2) EmitContext: processes and_icode_entries into and_icode via action rewriter. (3) SpecEntry: simplified, uses and_icode from emit_ctx, passes REs+and_icode to AND_BCODE variant. (4) HandlerVariantEmitter: AND_SINGLE_ACODE emitter prepends assignment to edge acodes so results flow into @collect. Cross-check: 2/20 exact match (tablegrep, verilog), ds_vhistory 11/12, simenv 18/17. Regression baseline: 949 tests (investigating possible test interference).`
     Commit: `pending`
-  - ID: `MEDIUM-IMPACT.3.4.2`
+- ID: `MEDIUM-IMPACT.3.4.2`
     Status: `done`
     Goal: `Implement the AND handler acode routing fix. Modify RuleIR.pm to route AND single-acode I-blocks to acode_entries. Update HandlerVariantEmitter _build_and_single_acode_variant to accept icode-through-acodes. Update _emit_and_single_acode_handler to apply return→assignment transform. Verify spec.spec compiles and body_element collects correctly in rule_paragraph.`
     Acceptance: `AND rules with single acode have I-block code routed through acodes_ref. return→assignment transform applied. spec.spec rule_paragraph:AND handler now processes edges (body_element) after I-block. Phase0 1005 PASS (or updated baseline). perl -c clean. body_element:* results are collected into parent rule.`

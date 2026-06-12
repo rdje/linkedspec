@@ -161,6 +161,8 @@ sub _build_handler_variants {
  if ($isAND && $has_bcodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_bcode_variant(
    %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
+   REs => \@REs,
+   defined($and_icode) ? (and_icode => $and_icode) : (),
   );
   $handlers{AND_BCODE} = $emit_handler->($ir_v) if defined $ir_v;
  }
@@ -369,26 +371,11 @@ sub compile_spec_entry {
  my @dependency_refs = @{$emit_ctx->{DEPENDENCY_REFS}};
  my %ab_count = %{$emit_ctx->{ab_count}};
 
- # For AND rules with a single regex: per-regex ICODE (now routed to
- # acode_entries by RuleIR) carries the rule's own label in dependency_refs.
- # Extract it so the preamble stays empty and the variant handler can place
- # the ICODE after the regex match with return→assignment + IMATCH bridge.
- my $and_icode;
- if ($node_type =~ /AND/o && $rule_meta->{regex_count} == 1) {
-  my @acodes_kept;
-  my @deps_kept;
-  for my $i (0 .. $#ACODEs) {
-   my $dep_label = defined($dependency_refs[$i]) ? ($dependency_refs[$i]{label} // '') : '';
-   if ($dep_label eq $label) {
-    $and_icode = $ACODEs[$i] unless defined($and_icode);
-   } else {
-    push @acodes_kept, $ACODEs[$i];
-    push @deps_kept, $dependency_refs[$i];
-   }
-  }
-  @ACODEs = @acodes_kept;
-  @dependency_refs = @deps_kept;
- }
+ # For AND rules: per-regex I-blocks are routed to and_icode_entries by RuleIR
+ # (not acode_entries, to avoid MIXED_ACTIONS with bcode edges).  The emit context
+ # rewrites them into a single and_icode string.  The handler places it after regex
+ # match with return->assignment + IMATCH bridge.
+ my $and_icode = $emit_ctx->{and_icode};
 
  my $icode = $emit_ctx->{icode};
  my $ecode = $emit_ctx->{ecode};
