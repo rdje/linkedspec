@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `1a16396` — "Docs: MEDIUM-IMPACT.3.4 — honest assessment after deep investigation"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.2` (implement AND handler fix)
+- latest_commit: `148c746` — "MEDIUM-IMPACT.3.4.2 — Route AND ICODE to acode_entries, apply return→assignment in AND_SINGLE_ACODE emitter"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.3` (re-run cross-check after AND fix)
 - next_action: Re-run cross-check harness (MEDIUM-IMPACT.3.4.3) to confirm AND fix results,
   then assess body_element:* over-consumption (issue b).
 - MEDIUM-IMPACT.3.4 investigation: Two compounding issues in spec.spec rule_paragraph:AND:
@@ -36,5 +36,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   Pending: .3.4.2, .3.4.3, .3.5, .3.6.
 - HandlerIR: 10 variant kinds; Backend dispatch: %BACKEND_EMITTERS = (perl, json).
 - regression baseline: 1005 PASS (phase0). Cross-check baseline: 10/20 match, 10/20 mismatch.
-- in_flight_uncommitted: none (all code reverted to 1d99a32 baseline, only docs changed)
-- blockers: none (approach chosen, implementation in progress)
+- in_flight_uncommitted: none
+- blockers: none (.3.4.2 implementation complete; .3.4.3 ready)
