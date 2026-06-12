@@ -17,13 +17,12 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `316262f` — "MEDIUM-IMPACT.3.3 — post-commit hash fix: MEMORY.md latest_commit → 5725f87"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.1` (SpecEntry coupling inventory)
-- next_action: PNT — execute MEDIUM-IMPACT.1.1: inventory all Perl coupling points in SpecEntry.pm.
-  Document eval sites, generated-code patterns, Perl-variable assumptions, LinkedRE::or dependencies
-  across the 12 handler-variant builders. Pure documentation leaf — no code changes.
-- MEDIUM-IMPACT.3.4 blocked: AND handler routes I-block to preamble where return() exits before
-  edge processing. Needs infrastructure plan. Three fix approaches documented in task tree.
-- regression baseline: 1005 PASS (phase0). Cross-check: 10/20 match, 10/20 inflated candidate counts.
-- in_flight_uncommitted: none
-- blockers: MEDIUM-IMPACT.3.4 (AND handler architecture limitation — see task tree).
+- latest_commit: `29b4d38` — "MEDIUM-IMPACT.3.4 — blocked: AND handler architecture limitation documented"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.2.1` (Validation fuzzing harness)
+- next_action: PNT — execute MEDIUM-IMPACT.2.1: create structured fuzzing test harness
+  t/phase0_validation_fuzz.t with systematic edge case generators for Validation.pm surfaces.
+- MEDIUM-IMPACT.1.1 done: SpecEntry coupling inventory at docs/knowledge/specentry-perl-coupling-inventory.md
+- MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (see task tree).
+- regression baseline: 1005 PASS (phase0).
+- in_flight_uncommitted: MEDIUM-IMPACT.1.1 completion (pending commit).
+- blockers: MEDIUM-IMPACT.3.4.

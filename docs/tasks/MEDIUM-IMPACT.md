@@ -57,10 +57,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Children: `MEDIUM-IMPACT.1.1`, `MEDIUM-IMPACT.1.2`, `MEDIUM-IMPACT.1.3`, `MEDIUM-IMPACT.1.4`, `MEDIUM-IMPACT.1.5`
 
 - ID: `MEDIUM-IMPACT.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Inventory all Perl coupling points in SpecEntry.pm — document every eval site, every generated-code pattern, every Perl-variable assumption, and every LinkedRE::or dependency in the 12 handler-variant builders.`
   Acceptance: `Document exists at docs/knowledge/specentry-perl-coupling-inventory.md with a structured catalog of coupling points, grouped by: eval sites, generated Perl variable assumptions, LinkedRE coupling, and variant-builder responsibilities.`
-  Verification: `pending`
+  Verification: `2026-06-12: docs/knowledge/specentry-perl-coupling-inventory.md created (10 sections, 200+ lines). Covers: eval site, all 10 variant builders with lifecycle block support matrix, LinkedRE::or dependency, Perl variable assumptions ($descr/$STRING/$info/@collect), preamble vs body disconnect, MIXED_ACTIONS constraint, external dependencies, and decoupling path toward HandlerIR. Also identifies root cause of MEDIUM-IMPACT.3.4 blocker (AND_SINGLE_ACODE lacks E-block; return from ICODE exits handler before edge processing).`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.1.2`
@@ -177,8 +177,8 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.1.1` | `pending` | SpecEntry inventory — understand all coupling before extracting. |
-| 2 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness can be built in parallel; no code changes to core. |
+| 1 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness — build t/phase0_validation_fuzz.t with edge-case generators. |
+| 2 | `MEDIUM-IMPACT.1.2` | `pending` | Extract 12 handler-variant builders into HandlerVariantEmitter module. |
 | 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
 | 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
 
