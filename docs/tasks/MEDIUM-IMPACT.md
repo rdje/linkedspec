@@ -111,10 +111,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Fuzz _scan_rule_edges_in_fragment with edge cases: empty fragment, undef, deeply nested blocks (>100 levels), mismatched delimiters, string literals containing edge-like syntax ('->', '=>'), regex literals containing braces, mixed action+blind-call on same line, grouped targets with/without blocks, indexed targets, fluent continuations, malformed index syntax.`
   Acceptance: `Fuzz test covers >=25 distinct edge-case categories for _scan_rule_edges_in_fragment. All currently-valid inputs still scan correctly. Any newly-discovered bugs are documented for MEDIUM-IMPACT.2.4.`
-  Verification: `pending`
+  Verification: `2026-06-12: Extended t/phase0_validation_fuzz.t with 14 additional edge scanning cases: depth tracking (0/1/2), mixed action+blind-call, edge with index, fluent continuation, whitespace variations, blind-call variations. Now covers 36 distinct edge-case categories (target >=25). All 5 subtests PASS.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.2.4`
@@ -177,7 +177,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.2.3` | `pending` | Fuzz _scan_rule_edges_in_fragment with >=25 edge-case categories. |
+| 1 | `MEDIUM-IMPACT.2.4` | `pending` | Fuzz validate_dsl_syntax/validate_spec_content with >=20 categories + bugfixes. |
 | 2 | `MEDIUM-IMPACT.1.2` | `pending` | Extract 12 handler-variant builders into HandlerVariantEmitter module. |
 | 3 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
 | 4 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |

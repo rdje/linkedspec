@@ -207,6 +207,38 @@ subtest '_scan_rule_edges_in_fragment' => sub {
 
     # --- Edge: malformed index syntax (parser may be lenient) ---
 
+    # --- MEDIUM-IMPACT.2.3: Additional edge scanning categories ---
+
+    # Depth tracking — edges at various depths
+    push @cases, ['-> A', 0, 1, 'edge at depth 0'];
+    push @cases, ['{ -> A }', 0, 0, 'edge inside braces at depth 1'];
+    push @cases, ['{ { -> A } }', 0, 0, 'edge at depth 2'];
+    push @cases, ['{ } -> A', 0, 1, 'edge after closed brace at depth 0'];
+    push @cases, ['( -> A )', 0, 0, 'edge inside parens at depth 1'];
+
+    # Mixed action and blind-call on same line
+    push @cases, ['-> A => B', 0, 1, 'action then blind-call (finds first)'];
+
+    # Edge with regex-slot index
+    push @cases, ['-> Rule[0]', 0, 1, 'edge with index 0'];
+    push @cases, ['-> Rule[5]', 0, 1, 'edge with index 5'];
+
+    # Fluent continuation after edge (the edge is still valid)
+    push @cases, ['-> Rule .method()', 0, 1, 'edge with fluent continuation'];
+
+    # Whitespace variations around edge
+    push @cases, ["  \t  -> Child", 0, 1, 'edge with leading tab+space'];
+    push @cases, ["-> Child  \t  ", 0, 1, 'edge with trailing tab+space'];
+
+    # Edge at very end of fragment
+    push @cases, ['-> Child', 0, 1, 'edge at end of fragment'];
+
+    # Blind-call with index (scanner may not support indexed =>)
+    push @cases, ['=> Rule[0]', 0, 0, 'blind-call with index (may not be supported)'];
+
+    # Multiple blind-calls
+    push @cases, ['=> A => B', 0, 1, 'two blind-calls (finds first)'];
+
     plan tests => scalar(@cases);
     for my $case (@cases) {
         my ($input, $start_depth, $expect_edges, $desc) = @$case;
