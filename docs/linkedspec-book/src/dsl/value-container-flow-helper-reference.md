@@ -122,6 +122,21 @@ return(array(
 
 For new specs, prefer `push(...)` for child-call appends. Prefer explicit targets when there is any chance the reader would wonder which collection is being mutated.
 
+### Convention health (2026 audit)
+
+An audit of all 19 shipped `.spec` files (88 total accumulator operations, June 2026) confirmed the convention is healthy and idiomatic:
+
+| Form | Count | Share |
+| --- | --- | --- |
+| `push_value(array(…), …)` | 63 | 71.6% |
+| Fluent `.push(…)` with explicit target | 19 | 21.6% |
+| `push_nonempty(array(…), …)` | 2 | 2.3% |
+| Convention-based `push(Child)` | 4 | 4.5% |
+
+**95.5% of accumulator operations already use explicit targets.** The four remaining convention-based uses (across `regdef`, `tkgui`, and `ebnf`) are idiomatic — the rule name is the clearest name for the collection.
+
+**Bottom line:** the per-rule default accumulator is a deliberate framework design choice, not migration debt. `push_value` is the preferred explicit spelling for new `.spec` code, and the convention-based `push(Child)` remains fully supported when the rule IS the natural accumulator.
+
 ## Containers and accessors
 
 These helpers are the entry point into local working state and structured values.
