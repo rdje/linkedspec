@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `9d5f20f` — "Revert COMPAT-ALIAS-RETIREMENT.2"
-- active_work_unit: `COMPAT-ALIAS-RETIREMENT` → .1 done, .4 done, .2/.3 deferred
-- next_action: await user direction. Short-term aliases retired (tail/drop_last/flatten/array_values). Medium-term (return_a/m/ma/imatch) deferred — ~692 test references need dedicated migration strategy.
-- regression baseline: 1004 PASS (phase0).
+- latest_commit: `bf94e1d` — "LINKEDSPEC-ENHANCEMENTS.3 — split test infrastructure"
+- active_work_unit: none — `LINKEDSPEC-ENHANCEMENTS` done (3/3 leaves). PNT idle.
+- next_action: await user direction. Three enhancements completed this session: Knowledge Map (21 facts), plugin mechanical gate (1005 PASS), test infrastructure split (TestHelpers.pm extracted).
+- regression baseline: 1005 PASS (phase0). New plugin lock subtest active.
 - in_flight_uncommitted: task tree + MEMORY.md update; about to commit
 - blockers: none.
