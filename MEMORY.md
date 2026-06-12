@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `bee195c` — "Docs: enrich MEDIUM-IMPACT.3.4 with detailed AND-handler root cause analysis + HandlerIR implications"
+- latest_commit: `d794ff6` — "Docs: post-commit hygiene — fix stale MEMORY.md, backfill .1.3 hash, clear git_message_brief.txt"
 - active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.1.4` (backend emitter interface)
 - next_action: PNT — execute MEDIUM-IMPACT.1.4 (backend emitter interface with dispatch table).
 - MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (E-block missing from AND_SINGLE_ACODE).
