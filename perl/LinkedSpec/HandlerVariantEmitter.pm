@@ -399,6 +399,30 @@ sub _build_lmatch_extraction {
 }
 
 #===========================================================================
+# Backend dispatch table — maps backend names to emitter functions.
+# The "perl" backend is the default and only backend; additional backends
+# (e.g. JSON/AST diagnostic) register here through MEDIUM-IMPACT.1.5.
+#===========================================================================
+my %BACKEND_EMITTERS = (
+    perl => \&_emit_handler_perl,
+);
+
+#------------------------------------------------------------------------------
+# Function: _emit_handler
+# Purpose : Backend-aware dispatch — select emitter by name (default: "perl").
+# Args    : ($ir, %opts) where %opts may include backend => '<name>'
+# Returns : handler source string for the selected backend, or undef
+#------------------------------------------------------------------------------
+sub _emit_handler {
+    my ($ir, %opts) = @_;
+    return undef unless ref($ir) eq 'HASH';
+    my $backend = $opts{backend} // 'perl';
+    my $emitter = $BACKEND_EMITTERS{$backend};
+    return undef unless defined $emitter;
+    return $emitter->($ir);
+}
+
+#===========================================================================
 # _emit_handler_perl — dispatch handler IR to the matching Perl code template
 #===========================================================================
 sub _emit_handler_perl {

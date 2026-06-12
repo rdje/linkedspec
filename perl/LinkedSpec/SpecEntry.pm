@@ -148,61 +148,61 @@ sub _build_handler_variants {
  my $ir = LinkedSpec::HandlerVariantEmitter::_build_default_handler_variant(
   %ir_args, acodes_ref => $acodes_ref,
  );
- $handlers{_default} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir) if defined $ir;
+ $handlers{_default} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir) if defined $ir;
 
  if ($isAND && $has_bcodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_bcode_variant(
    %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{AND_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{AND_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if ($isAND && $has_acodes && @$acodes_ref == 1) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_single_acode_variant(
    %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{AND_SINGLE_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{AND_SINGLE_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if ($isAND && $has_acodes && @$acodes_ref > 1) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
    %ir_args, acodes_ref => $acodes_ref, acode_count => scalar(@$acodes_ref),
   );
-  $handlers{AND_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{AND_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if ($isOR && $has_acodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_or_acode_variant(
    %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{OR_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{OR_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if ($isOR && $has_bcodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_or_bcode_variant(
    %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{OR_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{OR_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if (($isREP || $isDEFAULT_BCODE_REP) && $has_bcodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_bcode_variant(
    %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{REP_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{REP_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if ($isREP_AND && $has_bcodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_bcode_variant(
    %ir_args, bcodes_ref => $bcodes_ref, bcalls_ref => $bcalls_ref,
   );
-  $handlers{REP_AND_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{REP_AND_BCODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if ($isREP && $has_acodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_acode_variant(
    %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{REP_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{REP_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  if ($isREP_AND && $has_acodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_acode_variant(
    %ir_args, acodes_ref => $acodes_ref,
   );
-  $handlers{REP_AND_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler_perl($ir_v) if defined $ir_v;
+  $handlers{REP_AND_ACODE} = LinkedSpec::HandlerVariantEmitter::_emit_handler($ir_v) if defined $ir_v;
  }
  return \%handlers
 }

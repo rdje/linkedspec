@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — MEDIUM-IMPACT.1.4: Backend emitter interface in HandlerVariantEmitter
+
+- Created `%BACKEND_EMITTERS` dispatch table in `HandlerVariantEmitter.pm` mapping backend
+  names to emitter coderefs. Single entry: `perl => \&_emit_handler_perl`.
+- Added `_emit_handler($ir, %opts)` — backend-aware dispatch function. Accepts optional
+  `backend => '<name>'` (default: `'perl'`). Unknown backends return `undef`.
+- Updated `SpecEntry.pm`: all 10 `_emit_handler_perl` call sites migrated to `_emit_handler`.
+  Zero behavior change — default `perl` backend produces identical handler source.
+- This establishes the pluggable-backend contract: `MEDIUM-IMPACT.1.5` will add a JSON/AST
+  diagnostic backend as the second entry in `%BACKEND_EMITTERS`.
+- Verification: `perl -c` clean on both files. All 20 shipped specs compile through the
+  backend dispatch pipeline (20/20 PASS). Unknown backend returns `undef` correctly.
+  Smoke test confirms dispatch output identical to direct `_emit_handler_perl`.
+
 ## 2026-06-12 — MEDIUM-IMPACT.1.3: Define structured HandlerIR
 
 - Designed HandlerIR — a hashref-based AST (10 variant kinds) capturing handler structure

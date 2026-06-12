@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12` (post-bee195c hygiene: backfill .1.3 commit hash, fix stale MEMORY.md, clear git_message_brief.txt)
+- Last updated: `2026-06-12` (post-.1.4: backend emitter interface — %BACKEND_EMITTERS dispatch table, _emit_handler fn)
 - Owner: repo-local workflow
 
 ## Goal
@@ -78,10 +78,10 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `fa1895d`
 
 - ID: `MEDIUM-IMPACT.1.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Create a backend emitter interface — a dispatch table or role that maps backend names to emitter functions. The current Perl emitter is the default backend. Add a JSON/AST diagnostic backend (MEDIUM-IMPACT.1.5) as the second backend proving pluggability.`
   Acceptance: `Backend dispatch exists in HandlerVariantEmitter or a thin new module. Perl backend is default and produces identical output. JSON backend is separately callable. Phase0 1005 PASS.`
-  Verification: `pending`
+  Verification: `2026-06-12: Added %BACKEND_EMITTERS dispatch table (perl => _emit_handler_perl). Added _emit_handler($ir, %opts) with backend dispatch. Updated all 10 SpecEntry.pm call sites to _emit_handler. Smoke test confirmed: default dispatch == direct perl, explicit backend=>"perl" == identical, unknown backend returns undef. All 20 specs compile through backend dispatch pipeline (20/20 PASS). perl -c clean on both files.`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.1.5`
@@ -194,7 +194,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.1.4` | `pending` | Create backend emitter interface — dispatch table for pluggable backends. |
+| 1 | `MEDIUM-IMPACT.1.5` | `pending` | JSON/AST diagnostic backend — second backend proving pluggability. |
 | 2 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
 | 3 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
 
@@ -230,6 +230,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `2026-06-12` | `MEDIUM-IMPACT.3.2` | `tools/run_ci_local.sh` (1005 PASS), self-parse on raw spec.spec OK, tablegrep/pplugin/ifelse raw parses OK, syntax checks clean | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.3` | `tools/cross_check_spec_parsers.pl`: 20/20 specs parse through both paths, 10/20 identical counts, 10/20 inflated candidate counts, 0 hangs | Pass |
 | `2026-06-12` | `MEDIUM-IMPACT.3.4` | Root cause analysis complete: AND_SINGLE_ACODE lacks E-block. Three fix approaches identified. | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.1.4` | `perl -c` clean on HandlerVariantEmitter.pm + SpecEntry.pm, 20/20 specs compile through backend dispatch, smoke test: dispatch == direct perl, unknown backend → undef | Pass |
 
 ## Commit Log
 
@@ -246,9 +247,11 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `MEDIUM-IMPACT.3.2` | `d7294d0` | Close comment/blank-line skipping gap via Runtime.pm wrapper. Self-parse on raw spec.spec OK. |
 | `MEDIUM-IMPACT.3.3` | `e2ea174` | Dual-path cross-check: BootstrapSpec oracle vs spec.spec candidate across 20 specs. |
 | `MEDIUM-IMPACT.3.4` | `29b4d38` (blocked analysis), `bee195c` (enriched: AND-handler root cause + HandlerIR implications) | Blocked: AND handler architecture limitation documented. Three fix approaches identified. |
+| `MEDIUM-IMPACT.1.4` | pending | Backend emitter interface — %BACKEND_EMITTERS dispatch table, _emit_handler dispatch fn. 10/10 SpecEntry call sites migrated. |
 
 ## Changelog
 
+- `2026-06-12`: Completed MEDIUM-IMPACT.1.4 — backend emitter interface. Added `%BACKEND_EMITTERS` dispatch table + `_emit_handler($ir, %opts)` in HandlerVariantEmitter.pm. Migrated 10/10 SpecEntry.pm call sites to `_emit_handler`. 20/20 specs compile. Frontier advanced to `.1.5`.
 - `2026-06-12` (hygiene): Post-bee195c close-out: backfilled .1.3 commit hash fa1895d in commit log. Fixed stale MEMORY.md (latest_commit → bee195c, cleared in_flight_uncommitted). Corrected .3.4 commit log to include bee195c enrichment. Cleared stale git_message_brief.txt.
 - `2026-06-12` (hygiene): Backfilled commit hashes for 8 completed leaves (.1.1, .1.2, .2.1–.2.4, .3.3, .3.4). Updated verification log and commit log tables. Updated CHANGES.md with 7 missing entries. Updated MEMORY.md latest_commit → d53578a.
 - `2026-06-12`: Created task tree with 3 containers, 13 leaves across SpecEntry decoupling, Validation fuzzing, and BootstrapSpec handoff (including spec.spec accuracy audit per user direction).
