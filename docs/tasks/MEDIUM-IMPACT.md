@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12` (post-.1.5: JSON/AST diagnostic backend — .1 container complete, all 5 leaves done)
+- Last updated: `2026-06-12` (.3.4 investigation complete: two compounding issues identified, approach (1) chosen, .3.4.1 done, .3.4.2 ready for clean implementation)
 - Owner: repo-local workflow
 
 ## Goal
@@ -151,30 +151,35 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `e2ea174` (substantive); hash-fix chain `5725f87` `316262f`
 
 - ID: `MEDIUM-IMPACT.3.4`
-  Status: `blocked`
-  Goal: `Fix gaps discovered in .3.3 cross-check. Update spec.spec grammar to close any coverage gaps vs BootstrapSpec::Core. Fix any infrastructure issues that prevent spec.spec from matching bootstrap output. After fixes, re-run cross-check to confirm parity.`
-  Acceptance: `All 20 .spec files produce identical descriptor structures through both paths (rule count, rule labels, compiled rule order, dependency-regex maps). Cross-check report shows zero discrepancies. Phase0 1005 PASS (or updated baseline).`
-  Blocked by: `AND handler architecture limitation.`
+  Status: `active`
+  Goal: `Fix gaps discovered in .3.3 cross-check. Update spec.spec grammar to close any coverage gaps vs BootstrapSpec::Core. Fix infrastructure issue: AND_SINGLE_ACODE routes I-block to preamble where return() exits before edges run.`
+  Children: `MEDIUM-IMPACT.3.4.1`, `MEDIUM-IMPACT.3.4.2`, `MEDIUM-IMPACT.3.4.3`
+  Decision: `2026-06-12: Chose approach (1) — route AND I-blocks to acode_entries. Most contained: modify _build_and_single_acode_variant to put icode into acodes_ref, apply return→assignment transform in emitter. No DSL surface change. No new HandlerIR kind needed.`
+  Investigation: `2026-06-12: Two compounding issues found. (a) AND I-block return() exits handler before edges run — preamble runs BEFORE regex match in _build_handler_preamble. (b) body_element:* REP over-consumes — even with (a) fixed, calling body_element from rule_paragraph edge consumes ALL body elements for all rules, starving subsequent rule_paragraph calls. Fix (a) via approach (1); (b) may self-resolve if body_element:* naturally stops at non-matching rule headers (rule headers don't match any body_element regex). If not, spec.spec grammar restructure needed. Multiple implementation attempts made and reverted; clean implementation starting from approach (1).`
+  Root cause (from .3.3): `rule_paragraph:AND in spec.spec matches header regex in I-block, then return(hash(...)) exits handler. body_element:* edges never run. 10/20 specs have inflated candidate counts.`
 
-  **Detailed root cause:** `rule_paragraph:AND` in `spec.spec` matches the header regex in its I-block, then `return(hash(...))` exits the entire handler. The edges (`-> body_element`) never run. The 10 mismatched specs all exhibit this pattern:
-  - `AND_SINGLE_ACODE` routes per-regex I-block code to the handler preamble (ICODE)
-  - `return()` in the preamble exits the handler before edge processing
-  - `body_element:*` matches individual body lines but results are never collected into the parent rule
-  - Consequence: candidate counts each body element as a separate rule paragraph instead of aggregating them into one rule descriptor
+  - ID: `MEDIUM-IMPACT.3.4.1`
+    Status: `done`
+    Goal: `Design/decide — document the precise change in RuleIR.pm (ICODE→ACODE routing for AND rules), SpecEntry.pm (variant builder adjustment), and HandlerVariantEmitter.pm (emitter template). Confirm approach (1) is correct.`
+    Acceptance: `Design doc or task notes describing: (a) RuleIR.pm change — which condition gates ICODE→ACODE routing, (b) SpecEntry.pm change — how _build_handler_variants detects this case, (c) HandlerVariantEmitter.pm change — how _emit_and_single_acode_handler transforms return→assignment. Phase0 1005 PASS baseline holds (no code change yet).`
+    Verification: `2026-06-12: Thoroughly investigated. Two compounding issues: (a) AND I-block return() exits before edges — preamble runs BEFORE regex match in _build_handler_preamble, (b) body_element:* REP over-consumption. Approach (1) selected: RuleIR.pm line 207 change /REP_|^OR/ → /REP_|^OR|^AND/ to route AND ICODE→acode_entries. HandlerVariantEmitter _emit_and_single_acode_handler needs: (i) include preamble after regex match with return→assignment (regex must use \s* not \s+), (ii) IMATCH←LMATCH bridge so I-block code reads regex captures, (iii) push assigned $label onto @collect. SpecEntry.pm: _build_handler_preamble must pass empty icode for AND rules; actual icode passed to variant via ir_args. Multiple implementation attempts reverted — clean implementation pending in .3.4.2.`
+    Commit: `pending`
 
-  **Three fix approaches, all requiring infrastructure change:**
+  - ID: `MEDIUM-IMPACT.3.4.2`
+    Status: `pending`
+    Goal: `Implement the AND handler acode routing fix. Modify RuleIR.pm to route AND single-acode I-blocks to acode_entries. Update HandlerVariantEmitter _build_and_single_acode_variant to accept icode-through-acodes. Update _emit_and_single_acode_handler to apply return→assignment transform. Verify spec.spec compiles and body_element collects correctly in rule_paragraph.`
+    Acceptance: `AND rules with single acode have I-block code routed through acodes_ref. return→assignment transform applied. spec.spec rule_paragraph:AND handler now processes edges (body_element) after I-block. Phase0 1005 PASS (or updated baseline). perl -c clean. body_element:* results are collected into parent rule.`
+    Verification: `pending`
+    Commit: `pending`
 
-  1. **Route AND I-blocks to `acode_entries` instead of ICODE** (like REP rules already do). The per-regex code becomes an acode entry dispatched by `$$minfo{index}`. `return` → assignment transform (already in the REP emitter) would apply, so `return(hash(...))` becomes `$rule_paragraph = hash(...)` and the handler continues to edge processing. *Impact:* changes `AND_SINGLE_ACODE` HandlerIR kind semantics; the `_emit_and_single_acode_handler` template needs modification.
-
-  2. **Add E-block (End-block) support to `AND_SINGLE_ACODE` handler variant.** The I-block would run the match logic only (no `return`), and a new E-block would collect results after all edges process. `spec.spec` would use `I { hash(...) } E { return(hash(...)) }` or the edges would populate a collect array the E-block returns. *Impact:* new HandlerIR kind or field; affects all `.spec` files using AND rules; changes the DSL surface.
-
-  3. **Restructure `spec.spec`'s `rule_paragraph` to use a different rule mode** (e.g., REP with per-regex acodes, or OR with bcode edges). Avoids changing handler infrastructure entirely but may make `spec.spec` less natural as a self-hosted grammar. *Impact:* localized to `spec.spec`; no handler variant changes needed.
-
-  **HandlerIR relevance (post-.1.3):** With the variant builders and emitter now separated, approach (1) is the most contained — modify `_build_and_single_acode_variant` to route I-block through `acodes_ref`, then let the existing REP-style emitter transform `return` → assignment. Approaches (2) and (3) require larger design work.
-
-  Unblock condition: `Choose a fix approach, split .3.4 into child leaves (.3.4.1 design/decide, .3.4.2 implement, .3.4.3 re-cross-check), implement, verify 20/20 match + phase0 1005 PASS.`
-  Verification: `2026-06-12: Analyzed root cause. AND_SINGLE_ACODE handler routes I-block to preamble where return() exits early. Three fix approaches identified with HandlerIR implications. Cross-check harness still shows 10/20 match, 10/20 inflated counts.`
-  Commit: `29b4d38`
+  - ID: `MEDIUM-IMPACT.3.4.3`
+    Status: `pending`
+    Goal: `Re-run cross-check harness (tools/cross_check_spec_parsers.pl) to confirm 20/20 specs produce identical descriptor structures through both bootstrap and spec.spec paths. Verify rule count, rule labels, compiled rule order, and dependency-regex maps match.`
+    Acceptance: `Cross-check report shows 20/20 match (zero discrepancies). Phase0 1005 PASS. All specs compile correctly.`
+    Verification: `pending`
+    Commit: `pending`
+  Verification: `2026-06-12: Analyzed root cause. AND_SINGLE_ACODE handler routes I-block to preamble where return() exits early. Chose approach (1). Split into 3 child leaves.`
+  Commit: `29b4d38` (blocked analysis), `bee195c` (enriched analysis)
 
 - ID: `MEDIUM-IMPACT.3.5`
   Status: `pending`
@@ -194,9 +199,10 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.3.4` | `blocked` | Fix cross-check gaps — blocked on AND handler architecture plan. |
-| 2 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
-| 3 | `MEDIUM-IMPACT.3.6` | `pending` | Full regression verification + documentation (blocks on .3.5). |
+| 1 | `MEDIUM-IMPACT.3.4.1` | `pending` | Design/decide AND handler fix — document RuleIR + SpecEntry + HandlerVariantEmitter changes. |
+| 2 | `MEDIUM-IMPACT.3.4.2` | `pending` | Implement AND handler acode routing (blocks on .3.4.1). |
+| 3 | `MEDIUM-IMPACT.3.5` | `pending` | Claim parity + wire spec.spec as primary (blocks on .3.4). |
+| 4 | `MEDIUM-IMPACT.3.6` | `pending` | Full regression verification + documentation (blocks on .3.5). |
 
 ## Decisions
 
@@ -253,7 +259,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 ## Changelog
 
-- `2026-06-12`: Completed MEDIUM-IMPACT.1.5 — JSON/AST diagnostic backend. `_emit_handler_json` serializes HandlerIR via JSON::PP. Backend threaded through SpecEntry.pm via `$BACKEND` variable. `.1` container complete (5/5 leaves). Frontier: `.3.4` (blocked), `.3.5` (pending, blocks on .3.4), `.3.6` (pending).
+- `2026-06-12` (.3.4 unblock): Chose approach (1) — route AND I-blocks to acode_entries. Split .3.4 into 3 child leaves: .3.4.1 design/decide, .3.4.2 implement, .3.4.3 re-cross-check. Frontier: .3.4.1 → .3.4.2 → .3.5 → .3.6.
 - `2026-06-12`: Completed MEDIUM-IMPACT.1.4 — backend emitter interface. Added `%BACKEND_EMITTERS` dispatch table + `_emit_handler($ir, %opts)` in HandlerVariantEmitter.pm. Migrated 10/10 SpecEntry.pm call sites to `_emit_handler`. 20/20 specs compile. Frontier advanced to `.1.5`.
 - `2026-06-12` (hygiene): Post-bee195c close-out: backfilled .1.3 commit hash fa1895d in commit log. Fixed stale MEMORY.md (latest_commit → bee195c, cleared in_flight_uncommitted). Corrected .3.4 commit log to include bee195c enrichment. Cleared stale git_message_brief.txt.
 - `2026-06-12` (hygiene): Backfilled commit hashes for 8 completed leaves (.1.1, .1.2, .2.1–.2.4, .3.3, .3.4). Updated verification log and commit log tables. Updated CHANGES.md with 7 missing entries. Updated MEMORY.md latest_commit → d53578a.

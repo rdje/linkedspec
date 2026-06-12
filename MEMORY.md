@@ -17,21 +17,24 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `1d99a32` — "MEDIUM-IMPACT.1.5 — JSON/AST diagnostic backend: _emit_handler_json + $BACKEND threading"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4` (blocked, AND handler)
-- next_action: PNT — frontier has .3.4 (blocked), .3.5 (blocks on .3.4), .3.6 (blocks on .3.5).
-  .1 container complete (5/5 leaves: inventory, extraction, HandlerIR, emitter interface, JSON backend).
-  Need user decision on .3.4 fix approach before PNT can continue.
-- MEDIUM-IMPACT.3.4 blocked: AND handler architecture limitation (E-block missing from AND_SINGLE_ACODE).
-  Three fix approaches identified; unblock condition: choose approach, split into child leaves.
-- Completed leaves: .1.1, .1.2 (HandlerVariantEmitter extraction), .1.3 (HandlerIR),
-  .1.4 (backend emitter interface), .1.5 (JSON/AST diagnostic backend), .1 container done,
-  .2.1→.2.4 (fuzzing container done), .3.1, .3.2, .3.3 (cross-check), .3.4 (blocked analysis).
-  Pending: .3.4 (blocked), .3.5, .3.6.
-- HandlerIR: 10 variant kinds, builders→IR + emitter→Perl/JSON, SpecEntry dead code removed (452 lines).
-- Backend dispatch: %BACKEND_EMITTERS = (perl, json); _emit_handler($ir, %opts) dispatches.
-  JSON backend: _emit_handler_json serializes HandlerIR via JSON::PP (canonical, pretty-printed).
-- regression baseline: 1005 PASS (phase0). All 19 specs compile through HandlerIR pipeline.
-- knowledge: language-agnostic-backend-vision.md captures Rust/Julia/Dart backend direction.
-- in_flight_uncommitted: none
-- blockers: MEDIUM-IMPACT.3.4.
+- latest_commit: `pending` (task-tree update with .3.4 investigation findings)
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.4.2` (implement AND handler fix)
+- next_action: Implement approach (1) — route AND I-blocks to acode_entries in RuleIR.pm,
+  apply return→assignment in AND_SINGLE_ACODE emitter. Then re-cross-check.
+- MEDIUM-IMPACT.3.4 investigation: Two compounding issues in spec.spec rule_paragraph:AND:
+  (a) I-block return(hash(...)) runs BEFORE regex match → handler exits, edges never run.
+  (b) body_element:* is REP → if edges did run, one call consumes ALL body elements,
+      starving subsequent rule_paragraph calls. Fix (a) via approach (1); (b) may
+      resolve naturally if body_element:* stops at non-matching rule headers.
+  Three approaches attempted; approach (1) chosen: modify RuleIR.pm line 207 to route
+  AND ICODE→acode_entries (like REP/OR), update _emit_and_single_acode_handler with
+  return→assignment + IMATCH←LMATCH bridge. Approach (3) spec.spec grammar restructure
+  attempted but reverted (body_element over-consumption prevented multi-rule parsing).
+- .3.4 split into: .3.4.1 design (done), .3.4.2 implement (in_progress), .3.4.3 re-cross-check.
+- Completed leaves: .1.1→.1.5 (.1 container done), .2.1→.2.4 (.2 container done),
+  .3.1, .3.2, .3.3, .3.4.1.
+  Pending: .3.4.2, .3.4.3, .3.5, .3.6.
+- HandlerIR: 10 variant kinds; Backend dispatch: %BACKEND_EMITTERS = (perl, json).
+- regression baseline: 1005 PASS (phase0). Cross-check baseline: 10/20 match, 10/20 mismatch.
+- in_flight_uncommitted: none (all code reverted to 1d99a32 baseline, only docs changed)
+- blockers: none (approach chosen, implementation in progress)
