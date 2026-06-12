@@ -1,4 +1,29 @@
 #!/usr/bin/env perl
+#==============================================================================
+# phase0_regression.t — LinkedSpec primary regression gate (1005 subtests)
+#
+# Test categories (in file order):
+#   1. Spec compilation + language-agnostic readiness  (lines ~30-100)
+#   2. Owner dispatch / EmitContext dependency routing  (~100-700)
+#   3. Scanner contract rules (all 4 families)         (~700-2900)
+#   4. Plugin bridge dispatch validation               (~2900-3100)
+#   5. Plugin migration (extracted owners, deletions)  (~3100-5400)
+#   6. Parser modes / combinator / repetition          (~5400-11000)
+#   7. DSL validation (validate_dsl_syntax, errors)    (~11000-14000)
+#   8. EmitContext lowering + method contracts         (~14000-21000)
+#   9. Capture / mark / source boundary helpers        (~21000-27000)
+#  10. Lifecycle blocks (I/LS/LE/E/EX/IT/LX)          (~27000-41000)
+#  11. Flat / array / hash lowering contracts          (~41000-42000)
+#  12. Compatibility surface + migration summaries     (~42000-45000)
+#  13. Spec self-hosting (spec.spec regression)        (~45000-46000)
+#  14. Plugin dispatch mechanical gate                 (~46020-46050)
+#
+# Shared helpers extracted to: t/lib/TestHelpers.pm
+#   (slurp, write_text, discover_specs, discover_dir_files_by_suffix,
+#    normalize_error, run_perl_snippet_in_subprocess)
+#
+# Future splits: extract categories into t/<category>.t using TestHelpers.
+#==============================================================================
 
 use 5.010;
 use strict;
