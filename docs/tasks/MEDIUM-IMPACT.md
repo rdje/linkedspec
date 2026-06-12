@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12` (post-.3.1 bookkeeping)
+- Last updated: `2026-06-12` (restructure: expanded .3 from 4→6 leaves for parity-first cross-check)
 - Owner: repo-local workflow
 
 ## Goal
@@ -37,6 +37,8 @@ skipping gap and wiring spec.spec as the primary parse path.
 - Any Validation.pm bugs discovered during fuzzing are fixed.
 - The comment/blank-line skipping gap is closed so spec.spec's generated parser can consume
   raw .spec files without a pre-stripping step.
+- Dual-path cross-check proves spec.spec output parity with BootstrapSpec::Core across all
+  20 shipped specs before spec.spec is promoted to primary path.
 - spec.spec is wired as the primary parse path; BootstrapSpec::Core remains as bootstrap fallback.
 - `tools/run_ci_local.sh` exits 0 with full phase0 baseline.
 - Live docs and roadmap updated.
@@ -124,8 +126,8 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 - ID: `MEDIUM-IMPACT.3`
   Status: `active`
-  Goal: `BootstrapSpec::Core → spec.spec handoff — audit accuracy, close gaps, wire as primary parse path`
-  Children: `MEDIUM-IMPACT.3.1`, `MEDIUM-IMPACT.3.2`, `MEDIUM-IMPACT.3.3`, `MEDIUM-IMPACT.3.4`
+  Goal: `BootstrapSpec::Core → spec.spec handoff — audit accuracy, cross-check parity, close gaps, wire as primary parse path`
+  Children: `MEDIUM-IMPACT.3.1`, `MEDIUM-IMPACT.3.2`, `MEDIUM-IMPACT.3.3`, `MEDIUM-IMPACT.3.4`, `MEDIUM-IMPACT.3.5`, `MEDIUM-IMPACT.3.6`
 
 - ID: `MEDIUM-IMPACT.3.1`
   Status: `done`
@@ -143,12 +145,26 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 - ID: `MEDIUM-IMPACT.3.3`
   Status: `pending`
-  Goal: `Wire spec.spec as the primary parse path. In Compiler.pm or BootstrapSpec.pm, add a code path that: (1) uses the spec.spec-generated parser to parse .spec content, (2) falls back to BootstrapSpec::Core when spec.spec is unavailable or fails (bootstrap path). The bootstrap grammar remains the seed parser for bootstrapping spec.spec itself.`
-  Acceptance: `Compiler can parse .spec files through the spec.spec-generated parser. BootstrapSpec::Core remains as fallback. All 19 shipped specs parse identically through both paths. Phase0 1005 PASS.`
+  Goal: `Dual-path cross-check: compare BootstrapSpec::Core (oracle) against spec.spec-generated parser (candidate) for all 19 shipped specs + spec.spec itself. For each spec, parse raw .spec content through both paths, compare the resulting descriptor structures (rule count, rule labels, compiled rule order, dependency-regex maps). Document every discrepancy with structured comparison output. Bootstrap = oracle; spec.spec = candidate.`
+  Acceptance: `Cross-check harness exists (script or test) that parses all 20 .spec files through both paths. Structured comparison report documents: (a) identical results, (b) spec.spec-only gaps (missing rules, wrong labels), (c) bootstrap-only differences. No changes to spec.spec or infrastructure in this leaf — pure comparison.`
   Verification: `pending`
   Commit: `pending`
 
 - ID: `MEDIUM-IMPACT.3.4`
+  Status: `pending`
+  Goal: `Fix gaps discovered in .3.3 cross-check. Update spec.spec grammar to close any coverage gaps vs BootstrapSpec::Core. Fix any infrastructure issues that prevent spec.spec from matching bootstrap output. After fixes, re-run cross-check to confirm parity.`
+  Acceptance: `All 20 .spec files produce identical descriptor structures through both paths (rule count, rule labels, compiled rule order, dependency-regex maps). Cross-check report shows zero discrepancies. Phase0 1005 PASS (or updated baseline).`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `MEDIUM-IMPACT.3.5`
+  Status: `pending`
+  Goal: `Claim parity + wire spec.spec as the primary parse path. Once .3.4 confirms identical output, add a code path in Compiler.pm or BootstrapSpec.pm that: (1) uses the spec.spec-generated parser to parse .spec content, (2) falls back to BootstrapSpec::Core when spec.spec is unavailable or fails (bootstrap path). The bootstrap grammar remains the seed parser for bootstrapping spec.spec itself.`
+  Acceptance: `Compiler can parse .spec files through the spec.spec-generated parser. BootstrapSpec::Core remains as fallback. All 19 shipped specs parse identically through both paths. Phase0 1005 PASS.`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `MEDIUM-IMPACT.3.6`
   Status: `pending`
   Goal: `Full regression verification + documentation. Run the full CI gate. Update ARCHITECTURE_STATE.md to reflect spec.spec as primary path. Update KNOWLEDGE_MAP.md fact card. Update book if user-facing behavior changes. Verify the dual-path (spec.spec primary, bootstrap fallback) works correctly for all specs including spec.spec itself.`
   Acceptance: `tools/run_ci_local.sh exits 0. ARCHITECTURE_STATE.md updated. Knowledge map fact card refreshed. All 19 specs compile correctly through spec.spec primary path. Bootstrap fallback verified.`
@@ -159,9 +175,10 @@ skipping gap and wiring spec.spec as the primary parse path.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MEDIUM-IMPACT.3.2` | `pending` | Close comment/blank-line skipping gap — prerequisite for spec.spec primary path. |
-| 2 | `MEDIUM-IMPACT.1.1` | `pending` | SpecEntry inventory — understand all coupling before extracting. |
-| 3 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness can be built in parallel; no code changes to core. |
+| 1 | `MEDIUM-IMPACT.3.3` | `pending` | Dual-path cross-check: compare BootstrapSpec vs spec.spec outputs across all 20 specs. |
+| 2 | `MEDIUM-IMPACT.3.4` | `pending` | Fix gaps discovered in cross-check before wiring primary path. |
+| 3 | `MEDIUM-IMPACT.1.1` | `pending` | SpecEntry inventory — understand all coupling before extracting. |
+| 4 | `MEDIUM-IMPACT.2.1` | `pending` | Fuzzing harness can be built in parallel; no code changes to core. |
 
 ## Decisions
 
@@ -169,6 +186,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 - `2026-06-12`: SpecEntry leaves are ordered dependency-first: inventory before extraction, extraction before IR, IR before backend interface, interface before diagnostic backend.
 - `2026-06-12`: Validation fuzzing leaves are ordered by surface complexity: harness first, then simplest surface (rule labels), then medium (edges), then complex (full DSL syntax) with bugfixes integrated into the last leaf.
 - `2026-06-12`: BootstrapSpec handoff leaves are strictly ordered: must close the skip gap before wiring the primary path, must wire before verifying.
+- `2026-06-12` (restructure): Per user direction, expanded `.3` from 4 to 6 leaves — inserted dual-path cross-check leaves (`.3.3` compare, `.3.4` fix gaps) before wiring spec.spec as primary (now `.3.5`). Renumbered former `.3.3`/`.3.4` → `.3.5`/`.3.6`. Strategy: Bootstrap = oracle; spec.spec = candidate; compare all 20 specs → fix gaps → claim parity → wire primary. This ensures spec.spec earns primary-path status through demonstrated output parity rather than assumption.
 
 ## Open Questions
 
@@ -185,14 +203,18 @@ skipping gap and wiring spec.spec as the primary parse path.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-12` | `MEDIUM-IMPACT.3.1` | `tools/run_ci_local.sh` (1005 PASS), spec.spec compile ratio 1.0000, body_element returns ARRAY with correct multi-element matches | Pass |
+| `2026-06-12` | `MEDIUM-IMPACT.3.2` | `tools/run_ci_local.sh` (1005 PASS), self-parse on raw spec.spec OK, tablegrep/pplugin/ifelse raw parses OK, syntax checks clean | Pass |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `MEDIUM-IMPACT.3.1` | `2526f2b` | spec.spec accuracy audit: fix body_element REP handler + self-contained grammar. RuleIR ICODE→ACODE fix. SpecEntry REP return→assignment fix. |
-| `MEDIUM-IMPACT.3.1` | `2034320`, `36a8e3a`, `fb3b960`, `e36224b`, `221b6ea` | Post-commit MEMORY.md hash-fix chain. |
+| `MEDIUM-IMPACT.3.2` | `d7294d0` | Close comment/blank-line skipping gap via Runtime.pm wrapper. Self-parse on raw spec.spec OK. |
+| `MEDIUM-IMPACT.3.2` | `cac8929` | Post-commit hash fix: MEMORY.md latest_commit → d7294d0. |
+| `MEDIUM-IMPACT.3.2` | `4112374` | Close-out: task-tree commit log + MEMORY.md finalize. |
 
 ## Changelog
 
 - `2026-06-12`: Created task tree with 3 containers, 13 leaves across SpecEntry decoupling, Validation fuzzing, and BootstrapSpec handoff (including spec.spec accuracy audit per user direction).
+- `2026-06-12` (restructure): Per user direction, expanded `.3` BootstrapSpec handoff from 4 to 6 leaves. Inserted dual-path cross-check leaves `.3.3` (compare BootstrapSpec oracle vs spec.spec candidate across all 20 specs) and `.3.4` (fix gaps) before wiring spec.spec as primary (now `.3.5`). Former `.3.3`/`.3.4` renumbered → `.3.5`/`.3.6`. Updated frontier, decisions, commit log, verification log. Also corrected `.3.2` frontier status (was stale `pending` → now `done`; commit `d7294d0`).

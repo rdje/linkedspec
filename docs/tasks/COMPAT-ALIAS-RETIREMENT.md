@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `COMPAT-ALIAS-RETIREMENT`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Method-like DSL migration track`
 - Created: `2026-06-11`
-- Last updated: `2026-06-11`
+- Last updated: `2026-06-12` (tree completed — all 4 leaves done or deferred)
 - Owner: repo-local workflow
 
 ## Goal
@@ -45,7 +45,7 @@ until a dedicated test migration strategy is available.
   Goal: `Remove short-term aliases (tail→drop_front, drop_last→drop_back, flatten→flat, array_values→array_copy) from implementation. Remove alias names from regex alternations and if-condition fallthroughs in MethodLowering.pm, FlowExpr.pm, DeclareMethod.pm, BootstrapSpec/Core.pm, and Contracts.pm. Update dedicated alias regression tests in phase0_regression.t. Update book helper-reference tables.`
   Acceptance: `Zero references to tail/drop_last/flatten/array_values as DSL helper names remain in perl/ (except Lispish::flatten which is a standalone Perl utility, and the word "tail" in unrelated contexts). Phase0 passes. Book reference tables no longer list these as aliases.`
   Verification: `2026-06-12: 5 implementation files cleaned (MethodLowering.pm, FlowExpr.pm, DeclareMethod.pm, BootstrapSpec/Core.pm, Contracts.pm). 2 alias regression tests removed (flatten), 2 converted to canonical-form tests (tail→drop_front, drop_last→drop_back). 36 array_values references in tests replaced with array_copy. Book helper-reference table updated (4 alias rows removed). docs/decisions/0003 updated. tools/run_ci_local.sh exit 0, phase0 1004 PASS. Also fixed 3 pre-existing test failures from PLUGIN-ACTION-MIGRATION deletions (tests 113, 131/132, 135).`
-  Commit: `pending`
+  Commit: `802dbe3`
 
 - ID: `COMPAT-ALIAS-RETIREMENT.2`
   Status: `deferred`
@@ -66,7 +66,7 @@ until a dedicated test migration strategy is available.
   Goal: `Update documentation — book helper-reference tables updated for all 8 aliases (4 rows removed for short-term, medium-term retained with deferred-removal annotation). docs/decisions/0003 updated. ROADMAP_V2.md and MEMORY.md updated.`
   Acceptance: `Book reflects short-term aliases as removed; medium-term aliases documented as deprecated/deferred-removal. Decision record 0003 updated.`
   Verification: `2026-06-12: Book value-container-flow-helper-reference.md updated (4 alias rows removed). docs/decisions/0003 updated. ROADMAP_V2.md Method-like track status refined.`
-  Commit: `pending`
+  Commit: `545515f`
 
 ## Current Frontier
 
@@ -104,7 +104,7 @@ until a dedicated test migration strategy is available.
 | --- | --- | --- |
 | `COMPAT-ALIAS-RETIREMENT.1` | `802dbe3` | Short-term aliases removed (tail/drop_last/flatten/array_values). |
 | `COMPAT-ALIAS-RETIREMENT.2` | `390a87e` (committed), `9d5f20f` (reverted) | Medium-term infra correct but deferred. |
-| `COMPAT-ALIAS-RETIREMENT.4` | `pending` | Documentation update for completed + deferred leaves. |
+| `COMPAT-ALIAS-RETIREMENT.4` | `545515f` | Documentation update for completed + deferred leaves. |
 
 ## Changelog
 
@@ -112,3 +112,4 @@ until a dedicated test migration strategy is available.
 - `2026-06-12`: Completed .1 (short-term aliases removed, 1004 PASS).
 - `2026-06-12`: Attempted .2 — infrastructure removal committed (`390a87e`), verified correct, but reverted (`9d5f20f`) because .3 test migration proved infeasible with current tooling.
 - `2026-06-12`: Completed .4 — documentation updated; .2/.3 deferred with detailed rationale.
+- `2026-06-12`: Tree marked `completed` — all 4 leaves done or deferred. Moved to Completed in `docs/TASK_TREE.md`. Commit logs backfilled.

@@ -17,11 +17,12 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `d7294d0` — "MEDIUM-IMPACT.3.2 — close comment/blank-line skipping gap via Runtime.pm wrapper"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.2` (done, committed d7294d0)
-- next_action: Fresh session — restructure task tree for parity-first dual-path cross-check before
-  wiring spec.spec as primary (currently .3.3/.3.4 need reorder per user direction).
-  Bootstrap = oracle; spec.spec = candidate; compare outputs → fix gaps → claim parity → wire primary.
+- latest_commit: `4112374` — "MEDIUM-IMPACT.3.2 — close-out: task-tree commit log + MEMORY.md finalize"
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.3` (dual-path cross-check: compare
+  BootstrapSpec::Core vs spec.spec-generated parser outputs across all 19 shipped specs)
+- next_action: Execute MEDIUM-IMPACT.3.3 — dual-path cross-check. Bootstrap = oracle; spec.spec =
+  candidate; compare parse outputs for all 19 specs → document gaps → fix → claim parity → wire primary.
+- other active trees: COMPAT-ALIAS-RETIREMENT completed/pending-move (all 4 leaves done or deferred).
 - regression baseline: 1005 PASS (phase0).
 - in_flight_uncommitted: none
 - blockers: none.

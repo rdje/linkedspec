@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-12 — Session bootstrap: task-tree restructure for parity-first cross-check
+
+- **MEMORY.md**: Fixed stale `latest_commit` (`d7294d0` → `4112374`). Updated `next_action` for dual-path cross-check (`.3.3`).
+- **MEDIUM-IMPACT.md**: Restructured `.3` BootstrapSpec handoff from 4 to 6 leaves — inserted dual-path cross-check leaves (`.3.3` compare Bootstrap vs spec.spec, `.3.4` fix gaps) before wiring spec.spec as primary (now `.3.5`). Renumbered former `.3.3`/`.3.4` → `.3.5`/`.3.6`. Fixed stale `.3.2` frontier status (`pending` → `done`). Backfilled commit logs. Updated decisions and acceptance criteria.
+- **COMPAT-ALIAS-RETIREMENT.md**: Tree marked `completed` (all 4 leaves done or deferred). Commit hashes backfilled for `.1` (`802dbe3`) and `.4` (`545515f`).
+- **TASK_TREE.md**: COMPAT-ALIAS-RETIREMENT moved from Active to Completed. MEDIUM-IMPACT frontier updated (`.3.3` dual-path cross-check now first eligible).
+- No code changes. `perl -c` clean. Memory-architecture self-check: all invariants hold.
+
 ## 2026-06-12 — MEDIUM-IMPACT.3.2: Close comment/blank-line skipping gap
 
 - Added a parser wrapper in `Runtime::run_get` that resets `pos()` to 0 and skips past
