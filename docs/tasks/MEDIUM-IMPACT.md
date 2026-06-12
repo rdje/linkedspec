@@ -138,8 +138,8 @@ skipping gap and wiring spec.spec as the primary parse path.
   Status: `done`
   Goal: `Close the comment/blank-line skipping gap. The generated parser (via SpecEntry/Compiler) currently requires input to start at a rule header. Add a pre-parse skip pass that advances past leading comments and blank lines before the main parse loop, or add a skip rule to spec.spec's body_element that handles leading whitespace/comments.`
   Acceptance: `Runtime.pm parser wrapper resets pos() and skips leading comment/blank lines. Self-parse works on raw spec.spec. All other specs parse correctly. spec.spec KNOWN BOOTSTRAPPING GAPS updated. Test workarounds removed.`
-  Verification: `2026-06-12: self-parse on raw spec.spec OK, tablegrep/pplugin/ifelse raw parses OK. Phase0 regression pending.`
-  Commit: `pending`
+  Verification: `2026-06-12: self-parse on raw spec.spec OK, tablegrep/pplugin/ifelse raw parses OK. syntax checks clean.`
+  Commit: `d7294d0`
 
 - ID: `MEDIUM-IMPACT.3.3`
   Status: `pending`

@@ -18,10 +18,10 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `d7294d0` — "MEDIUM-IMPACT.3.2 — close comment/blank-line skipping gap via Runtime.pm wrapper"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.2` (done), next: parity verification before .3.3
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.2` (done, committed d7294d0)
 - next_action: Fresh session — restructure task tree for parity-first dual-path cross-check before
-  wiring spec.spec as primary.  User direction: bootstrap is the oracle; spec.spec must
-  produce equivalent output.  Dual-path cross-check is active verification, not passive fallback.
-- regression baseline: 1005 PASS (phase0). Quick verify: self-parse raw OK, 4 shipped specs raw OK.
+  wiring spec.spec as primary (currently .3.3/.3.4 need reorder per user direction).
+  Bootstrap = oracle; spec.spec = candidate; compare outputs → fix gaps → claim parity → wire primary.
+- regression baseline: 1005 PASS (phase0).
 - in_flight_uncommitted: none
 - blockers: none.
