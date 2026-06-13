@@ -267,7 +267,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 | `MEDIUM-IMPACT.3.4.2` | `148c746` | AND ICODE routing fix — RuleIR routes AND ICODE→acode_entries. SpecEntry extracts ICODE for single-regex AND. HandlerVariantEmitter applies return→assignment + IMATCH←LMATCH bridge in AND_SINGLE_ACODE emitter. |
 | `MEDIUM-IMPACT.3.4.3` | `ece03ca` | Cross-check re-run + MIXED_ACTIONS root cause analysis. |
 | `MEDIUM-IMPACT.3.4.4` | `7fec186` | Resolve MIXED_ACTIONS conflict — AND I-blocks → and_icode_entries. EmitContext processes and_icode. SpecEntry simplified. HandlerVariantEmitter prepends assignment. Cross-check 2/20 match. |
-| `MEDIUM-IMPACT.3.6` | pending | Full regression verification + documentation. ARCHITECTURE_STATE.md, knowledge map, task tree, live docs updated. |
+| `MEDIUM-IMPACT.3.6` | `71e53e7` | Full regression verification + documentation. ARCHITECTURE_STATE.md, knowledge map, task tree, live docs updated. |
 | `MEDIUM-IMPACT.3.5` | `6053050` + `f9b30f3` | Wire spec.spec as dual-path parse — _build_spec_spec_parser() lazy-builds + caches spec.spec parser. run_bootstrap_parse() side channel. Recursion guard. 20/20 compile. |
 | `MEDIUM-IMPACT.1.4` | `a1c1a94` | Backend emitter interface — %BACKEND_EMITTERS dispatch table, _emit_handler dispatch fn. 10/10 SpecEntry call sites migrated. |
 | `MEDIUM-IMPACT.1.5` | `1d99a32` | JSON/AST diagnostic backend — _emit_handler_json, JSON::PP serialization,  variable threading. |

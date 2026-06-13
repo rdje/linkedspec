@@ -17,12 +17,12 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `6053050` — "MEDIUM-IMPACT.3.5 — Wire spec.spec as dual-path parse in BootstrapSpec.pm"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.6` (full regression verification + documentation — committed below)
-- next_action: Run full CI gate (tools/run_ci_local.sh) and verify phase0 regression baseline.
-- .3.6 completed: ARCHITECTURE_STATE.md refreshed (2026-06-13), knowledge map card updated, task tree closed out (.3.4.4+.3.5→done, frontier→.3.6, commit hashes backfilled), CHANGES/DEVELOPMENT_NOTES/LIVE_ACHIEVEMENT_STATUS updated. 20/20 specs compile OK. Cross-check at 2/20 match.
+- latest_commit: `71e53e7` — "MEDIUM-IMPACT.3.6 — Full regression verification + documentation"
+- active_work_unit: none — MEDIUM-IMPACT tree completed and moved to Completed.
+- next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
+- .3.6 completed: ARCHITECTURE_STATE.md refreshed (2026-06-13), knowledge map card updated, task tree closed out, live docs updated. MEDIUM-IMPACT tree moved to Completed in TASK_TREE.md. 20/20 specs compile OK. Cross-check at 2/20 match.
 - Completed leaves: .1.1→.1.5, .2.1→.2.4, .3.1, .3.2, .3.3, .3.4.1→.3.4.4, .3.5, .3.6.
-  Pending: none — MEDIUM-IMPACT tree exhausted. PNT idle.
+  All MEDIUM-IMPACT leaves done — tree exhausted. No active task trees remain.
 - regression baseline: 20/20 specs compile (quick smoke). Full CI pending.
-- in_flight_uncommitted: .3.6 commit being prepared.
+- in_flight_uncommitted: none
 - blockers: none
