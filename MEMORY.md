@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `f5892fc` — "Docs: create FLUENT-BLOCK-EQUIVALENCE task tree"
-- active_work_unit: FLUENT-BLOCK-EQUIVALENCE  →  frontier leaf: FLUENT-BLOCK-EQUIVALENCE.1 (pending)
-- next_action: Inventory/audit current fluent vs block equivalence across all supported control-flow constructs and lifecycle families.
-- New tree FLUENT-BLOCK-EQUIVALENCE created 2026-06-14 from ROADMAP_V2.md near-term priority 2 ("broaden fluent/block equivalence on supported surfaces").
-- in_flight_uncommitted: none
+- latest_commit: `568754d` — "Docs: post-commit hash fix — MEMORY.md latest_commit → 4043394"
+- active_work_unit: FLUENT-BLOCK-EQUIVALENCE  →  frontier leaf: FLUENT-BLOCK-EQUIVALENCE.2 (pending)
+- next_action: Document and regression-lock the existing fluent/block equivalence surfaces — book update + regression tests.
+- .1 completed: inventory/audit confirms all three expression forms exist for both if and switch families. No missing implementation gaps found. .2 rescoped to documentation + regression hardening.
+- in_flight_uncommitted: .1 inventory complete — live docs + task tree updated, needs commit.
 - blockers: none

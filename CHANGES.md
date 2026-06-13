@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — FLUENT-BLOCK-EQUIVALENCE.1: Inventory/audit of fluent vs block equivalence
+
+- **Code audit**: `ControlFlow.pm` (1095 lines, 22 lowering functions covering if/elseif/else
+  and switch/case/default families in three expression forms: marker-style, inline-composite,
+  attached-block). `FlowRules.pm` (364 lines, 23 scan contracts). All three forms exist for
+  both if and switch families — no missing implementation gaps.
+- **Test coverage**: `phase0_regression.t` has 53+ control-flow subtests including fluent vs
+  block blind-call equivalence, semicolonless if/else/switch/case blocks, zero-arg bare
+  marker forms, attached if/else boundaries with nested inline-composite switch, multiline
+  fluent continuations.
+- **Book review**: `declaration-helper-reference.md`, `blind-calls-and-parser-orchestration.md`,
+  `value-container-flow-helper-reference.md`. Fluent/block equivalence is introduced but
+  scattered across chapters.
+- **Conclusion**: Equivalence already exists at the implementation level. `.2` rescoped to
+  documentation and regression hardening.
+- **Baseline**: 20/20 specs compile OK.
+
 ## 2026-06-14 — FLUENT-BLOCK-EQUIVALENCE: New task tree created
 
 - **Task tree**: Created `docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md` from ROADMAP_V2.md near-term
