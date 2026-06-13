@@ -366,6 +366,8 @@ declare_a(items)
 
 Those forms are equivalent for lowering. Prefer the simplest form unless the surrounding method-chain style benefits from the scope token.
 
+For the full story on fluent vs block equivalence across all constructs — including if/switch control flow in marker-style, inline-composite, and attached-block forms — see the [Fluent and Block Forms](fluent-and-block-forms.md) guide.
+
 ## Worked example: accumulator state
 
 This rule declares shared state in `I { ... }`, fills it from child results, and returns one structured payload.

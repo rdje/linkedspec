@@ -33,7 +33,7 @@ Broaden fluent/block equivalence on supported surfaces across the LinkedSpec DSL
 ## Task Tree
 
 - ID: `FLUENT-BLOCK-EQUIVALENCE`
-  Status: `active`
+  Status: `done`
   Goal: `Broaden fluent/block equivalence on supported surfaces across the DSL.`
   Children: `FLUENT-BLOCK-EQUIVALENCE.1`, `FLUENT-BLOCK-EQUIVALENCE.2`
 
@@ -45,17 +45,18 @@ Broaden fluent/block equivalence on supported surfaces across the LinkedSpec DSL
   Commit: `pending`
 
 - ID: `FLUENT-BLOCK-EQUIVALENCE.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Document and regression-lock the existing fluent/block equivalence surfaces. The implementation already supports equivalence across all three if/switch expression forms (marker-style, inline-composite, attached-block) plus the structured lifecycle-block form. Focus on: (a) book documentation update clearly explaining each form and their equivalence, (b) adding regression tests for any untested form pairings across lifecycle families.`
   Acceptance: `Book updated with clear fluent/block equivalence documentation. Regression tests added for any identified coverage gaps. Baseline stays green.`
-  Verification: `pending`
+  Verification: `Book chapter "Fluent and Block Forms" added to docs/linkedspec-book/src/dsl/fluent-and-block-forms.md (270 lines). Cross-reference from declaration-helper-reference.md. SUMMARY.md updated. Regression coverage already comprehensive (15+ fluent-vs-block equivalence subtests across lifecycle families and control-flow forms in phase0_regression.t) — no gaps found. 20/20 specs compile OK.`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `FLUENT-BLOCK-EQUIVALENCE.2` | `pending` | Documentation and regression hardening of existing equivalence surfaces. |
+
+Tree exhausted — both leaves complete.
 
 ## Decisions
 
@@ -168,15 +169,19 @@ Broaden fluent/block equivalence on supported surfaces across the LinkedSpec DSL
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-06-14` | `FLUENT-BLOCK-EQUIVALENCE.1` | Code audit: ControlFlow.pm (1095 lines, 22 lowering functions), FlowRules.pm (364 lines, 23 scan contracts). Test coverage: phase0_regression.t (53+ control-flow subtests). Book review: declaration-helper-reference.md, blind-calls-and-parser-orchestration.md, value-container-flow-helper-reference.md. 20/20 specs compile OK. | PASS — no missing implementation gaps. Equivalence already exists across all three forms for both if and switch families. |
+| `2026-06-14` | `FLUENT-BLOCK-EQUIVALENCE.1` | Code audit: ControlFlow.pm (1095 lines, 22 lowering functions), FlowRules.pm (364 lines, 23 scan contracts). Test coverage: phase0_regression.t (53+ control-flow subtests). Book review: declaration-helper-reference.md, blind-calls-and-parser-orchestration.md, value-container-flow-helper-reference.md. 20/20 specs compile OK. | PASS — no missing implementation gaps. |
+| `2026-06-14` | `FLUENT-BLOCK-EQUIVALENCE.2` | Book: new chapter fluent-and-block-forms.md (270 lines) added, cross-reference from declaration-helper-reference.md, SUMMARY.md updated. Regression: 15+ existing fluent-vs-block equivalence subtests already cover lifecycle × form cross-product — no gaps. 20/20 specs compile OK. | PASS — book documentation added, regression coverage sufficient. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `FLUENT-BLOCK-EQUIVALENCE.1` | `FLUENT-BLOCK-EQUIVALENCE.1 — Inventory/audit of fluent vs block equivalence` (`d7f341d`) | All three expression forms exist for both if and switch families. No missing implementation gaps. |
+| `FLUENT-BLOCK-EQUIVALENCE.1` | `FLUENT-BLOCK-EQUIVALENCE.1 — Inventory/audit of fluent vs block equivalence` (`d7f341d`) | All three expression forms exist for both if and switch families. |
+| `FLUENT-BLOCK-EQUIVALENCE.2` | `pending` | Book chapter added, regression coverage verified sufficient. |
 
 ## Changelog
 
 - `2026-06-14`: Created task tree from ROADMAP_V2.md near-term priority 2.
-- `2026-06-14`: Completed FLUENT-BLOCK-EQUIVALENCE.1 inventory/audit. Code audit of ControlFlow.pm, FlowRules.pm, phase0_regression.t. All three expression forms (marker-style, inline-composite, attached-block) exist for both if and switch families — no missing implementation gaps. .2 rescoped to documentation and regression hardening.
+- `2026-06-14`: Created task tree from ROADMAP_V2.md near-term priority 2.
+- `2026-06-14`: Completed FLUENT-BLOCK-EQUIVALENCE.1 inventory/audit. All three expression forms exist for both if and switch families — no missing implementation gaps. .2 rescoped to documentation and regression hardening.
+- `2026-06-14`: Completed FLUENT-BLOCK-EQUIVALENCE.2 book documentation + regression verification. New book chapter fluent-and-block-forms.md (270 lines) covering both expression styles, structured lifecycle blocks, three control-flow expression forms per family, equivalence guarantee, usage guidance, and a worked example. Existing 15+ regression subtests sufficient — no gaps. Tree closed.

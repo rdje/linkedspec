@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — FLUENT-BLOCK-EQUIVALENCE.2: Book documentation + regression verification
+
+- **Book**: New chapter `fluent-and-block-forms.md` (270 lines) in `docs/linkedspec-book/src/dsl/`
+  covering: two expression styles (fluent chain vs structured block), seven lifecycle markers
+  with phase descriptions, three control-flow expression forms per family (marker-style,
+  inline-composite, attached-block) with worked examples for if/elseif/else and
+  switch/case/default families, equivalence guarantee, usage guidance table, comprehensive
+  worked example combining all forms. Cross-reference from declaration-helper-reference.md.
+  SUMMARY.md updated.
+- **Regression**: Existing coverage verified sufficient — 15+ fluent-vs-block equivalence
+  subtests in phase0_regression.t already cover lifecycle-family × control-flow-form
+  cross-product. No new gaps found.
+- **Task tree**: FLUENT-BLOCK-EQUIVALENCE tree closed (2/2 leaves). Moved to Completed
+  in TASK_TREE.md.
+- **Baseline**: 20/20 specs compile OK.
+
 ## 2026-06-14 — FLUENT-BLOCK-EQUIVALENCE.1: Inventory/audit of fluent vs block equivalence
 
 - **Code audit**: `ControlFlow.pm` (1095 lines, 22 lowering functions covering if/elseif/else

@@ -29,6 +29,7 @@
 - [Action Model and Helper Surface](dsl/action-model-and-helper-surface.md)
 - [ActionIR Lowering Mental Model](dsl/actionir-lowering-mental-model.md)
 - [Declaration Helper Reference](dsl/declaration-helper-reference.md)
+- [Fluent and Block Forms](dsl/fluent-and-block-forms.md)
 - [Action and Lifecycle Placement](dsl/action-and-lifecycle-placement.md)
 - [Capture, Marks, and Source Locations](dsl/capture-marks-and-source-locations.md)
 - [Source Boundary Helper Reference](dsl/source-boundary-helper-reference.md)
