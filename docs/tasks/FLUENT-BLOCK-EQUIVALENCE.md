@@ -174,7 +174,7 @@ Broaden fluent/block equivalence on supported surfaces across the LinkedSpec DSL
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `FLUENT-BLOCK-EQUIVALENCE.1` | `pending` | Inventory complete — in-flight, not yet committed. |
+| `FLUENT-BLOCK-EQUIVALENCE.1` | `FLUENT-BLOCK-EQUIVALENCE.1 — Inventory/audit of fluent vs block equivalence` (`d7f341d`) | All three expression forms exist for both if and switch families. No missing implementation gaps. |
 
 ## Changelog
 
