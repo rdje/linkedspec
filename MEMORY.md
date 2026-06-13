@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `2302298` — "MEDIUM-IMPACT.3.6 — Full regression verification + documentation"
+- latest_commit: `f5892fc` — "Docs: create FLUENT-BLOCK-EQUIVALENCE task tree"
 - active_work_unit: FLUENT-BLOCK-EQUIVALENCE  →  frontier leaf: FLUENT-BLOCK-EQUIVALENCE.1 (pending)
 - next_action: Inventory/audit current fluent vs block equivalence across all supported control-flow constructs and lifecycle families.
 - New tree FLUENT-BLOCK-EQUIVALENCE created 2026-06-14 from ROADMAP_V2.md near-term priority 2 ("broaden fluent/block equivalence on supported surfaces").
-- in_flight_uncommitted: FLUENT-BLOCK-EQUIVALENCE task tree created, TASK_TREE.md updated — needs commit.
+- in_flight_uncommitted: none
 - blockers: none
