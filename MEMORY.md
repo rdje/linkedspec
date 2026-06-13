@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `71e53e7` — "MEDIUM-IMPACT.3.6 — Full regression verification + documentation"
+- latest_commit: `ce84cf3` — "MEDIUM-IMPACT.3.6 — Full regression verification + documentation"
 - active_work_unit: none — MEDIUM-IMPACT tree completed and moved to Completed.
 - next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
 - .3.6 completed: ARCHITECTURE_STATE.md refreshed (2026-06-13), knowledge map card updated, task tree closed out, live docs updated. MEDIUM-IMPACT tree moved to Completed in TASK_TREE.md. 20/20 specs compile OK. Cross-check at 2/20 match.
