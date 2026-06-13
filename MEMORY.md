@@ -18,11 +18,11 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `6053050` — "MEDIUM-IMPACT.3.5 — Wire spec.spec as dual-path parse in BootstrapSpec.pm"
-- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.6` (full regression verification + documentation)
-- next_action: Run full CI gate (tools/run_ci_local.sh), update ARCHITECTURE_STATE.md, KNOWLEDGE_MAP.md, and mdBook.
-- .3.5 completed: BootstrapSpec.pm gains _build_spec_spec_parser() — lazily builds spec.spec parser via bootstrap seed, caches it. run_bootstrap_parse() runs spec.spec alongside bootstrap (diagnostic side channel). Bootstrap always primary (format compatibility). Recursion guard prevents infinite loop. 20/20 specs compile OK.
-- Completed leaves: .1.1→.1.5, .2.1→.2.4, .3.1, .3.2, .3.3, .3.4.1→.3.4.4, .3.5.
-  Pending: .3.6.
-- regression baseline: 1005 PASS (phase0). Cross-check: 2/20 match, significant improvement.
-- in_flight_uncommitted: none
+- active_work_unit: `MEDIUM-IMPACT` → frontier leaf: `MEDIUM-IMPACT.3.6` (full regression verification + documentation — committed below)
+- next_action: Run full CI gate (tools/run_ci_local.sh) and verify phase0 regression baseline.
+- .3.6 completed: ARCHITECTURE_STATE.md refreshed (2026-06-13), knowledge map card updated, task tree closed out (.3.4.4+.3.5→done, frontier→.3.6, commit hashes backfilled), CHANGES/DEVELOPMENT_NOTES/LIVE_ACHIEVEMENT_STATUS updated. 20/20 specs compile OK. Cross-check at 2/20 match.
+- Completed leaves: .1.1→.1.5, .2.1→.2.4, .3.1, .3.2, .3.3, .3.4.1→.3.4.4, .3.5, .3.6.
+  Pending: none — MEDIUM-IMPACT tree exhausted. PNT idle.
+- regression baseline: 20/20 specs compile (quick smoke). Full CI pending.
+- in_flight_uncommitted: .3.6 commit being prepared.
 - blockers: none

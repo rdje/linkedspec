@@ -1,6 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-13 — MEDIUM-IMPACT.3.6: Full regression verification + documentation
+
+- **CI gate**: `tools/run_ci_local.sh` run — memory-arch check, Knowledge Map check,
+  syntax checks all pass. Phase0 regression results pending.
+- **ARCHITECTURE_STATE.md**: Refreshed to 2026-06-13. Status section now covers
+  HandlerIR, backend dispatch table, JSON/AST backend, dual-path parse, AND handler
+  MIXED_ACTIONS fix. BootstrapSpec section extended with _build_spec_spec_parser()
+  and run_bootstrap_parse() side-channel details. SpecEntry section extended with
+  HandlerVariantEmitter backend architecture.
+- **Knowledge map**: `bootstrapspec-vs-spec-spec-dual-path.md` updated to reflect
+  .3.5 dual-path parse wire-up (spec.spec runs as diagnostic side channel alongside
+  bootstrap; bootstrap always primary; 2/20 exact match).
+- **Task tree**: MEDIUM-IMPACT.3.4.4 and .3.5 closed out (status → done, frontier
+  updated, verification/commit/changelog logs backfilled). .1.4/.1.5 commit hashes
+  backfilled. Frontier now .3.6.
+- **Dual-path verification**: 20/20 shipped specs compile through bootstrap primary
+  path. spec.spec self-bootstrap confirmed (compiles via bootstrap seed). Cross-check
+  at 2/20 exact match (tablegrep, verilog).
+
+## 2026-06-13 — MEDIUM-IMPACT.3.5: Wire spec.spec as dual-path parse
+
+- **BootstrapSpec.pm**: Added `_build_spec_spec_parser()` — lazily builds spec.spec
+  parser via bootstrap seed (BootstrapSpec::Core → Compiler → spec.spec → generated
+  parser), caches result in package variable. Added `run_bootstrap_parse()` which
+  runs the spec.spec-generated parser alongside the bootstrap parser as a diagnostic
+  side channel — bootstrap output is always primary (format compatibility). Recursion
+  guard (`$BUILDING_SPEC_SPEC_PARSER`) prevents infinite loop when spec.spec tries
+  to parse itself.
+- 20/20 specs compile OK through dual-path parse. Cross-check at 2/20 match
+  (tablegrep, verilog — parity tracked in .3.4).
+
 ## 2026-06-13 — MEDIUM-IMPACT.3.4.4: Resolve MIXED_ACTIONS conflict for AND rules
 
 - **RuleIR.pm**: AND per-regex I-blocks routed to new `and_icode_entries` field

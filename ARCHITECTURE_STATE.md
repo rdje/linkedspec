@@ -4,17 +4,17 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-06-12`
-- `2026-06-12` refresh: HandlerVariantEmitter extracted from SpecEntry.pm (10 variant builders → `perl/LinkedSpec/HandlerVariantEmitter.pm`, 554 lines). SpecEntry.pm now delegates; old dead code remains in SpecEntry.pm (MEDIUM-IMPACT.1.3 will define HandlerIR for further decoupling). Validation.pm fuzzing harness created (`t/phase0_validation_fuzz.t`, 5 subtests, 168+ combinatorial cases). BootstrapSpec→spec.spec dual-path cross-check harness built (`tools/cross_check_spec_parsers.pl`): 10/20 specs match, 10/20 have inflated candidate counts due to AND handler lacking E-block body collection (MEDIUM-IMPACT.3.4 blocked). Comment/blank-line skip added to Runtime.pm wrapper. RuntimeContext now reusable via populated scalar-slot contract.
+- Last refreshed: `2026-06-13`
+- `2026-06-13` refresh: MEDIUM-IMPACT task tree substantially advanced. HandlerVariantEmitter now has structured HandlerIR (10 variant builders → IR hashrefs → dispatched emitter templates), a backend dispatch table (`%BACKEND_EMITTERS` with `perl` default), and a JSON/AST diagnostic backend (`_emit_handler_json` via `JSON::PP`). Validation.pm fuzzing harness (`t/phase0_validation_fuzz.t`) covers 5 surfaces with 168+ combinatorial cases across rule labels, edge scanning, and DSL syntax. BootstrapSpec.pm now has dual-path parse: `_build_spec_spec_parser()` lazily builds spec.spec parser via bootstrap seed and caches it; `run_bootstrap_parse()` runs spec.spec alongside bootstrap as a diagnostic side channel (bootstrap always primary; recursion guard active). Cross-check at 2/20 exact match (tablegrep, verilog); remaining 18 specs tracked in .3.4 parity gap. AND handler MIXED_ACTIONS conflict resolved (.3.4.4): RuleIR routes AND I-blocks to `and_icode_entries`, EmitContext processes them, HandlerVariantEmitter prepends assignment for result capture. Comment/blank-line skip in Runtime.pm wrapper. RuntimeContext reusable via populated scalar-slot contract.
 - `2026-06-04` refresh: removed two stale references that still presented the deleted `perl/LinkedSpec/ActionRewriter.pm` module as a live owner-dispatch participant. That module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`, commit `4f8e0b6`); the focused helper-rewrite compatibility entrypoint now lives solely in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`, reachable through the façade helper `LinkedSpec::call_spec_handler_subst(...)`.
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
   - the ActionIR lowering subtree
   - the current legacy plugin/runtime branch
-  - new: `LinkedSpec::HandlerVariantEmitter` (extracted variant builders)
-  - new: `t/phase0_validation_fuzz.t` (Validation.pm fuzzing harness)
-  - new: `tools/cross_check_spec_parsers.pl` (dual-path cross-check harness)
+  - new: `LinkedSpec::HandlerVariantEmitter` (HandlerIR + backend dispatch + JSON/AST backend)
+  - new: `t/phase0_validation_fuzz.t` (Validation.pm systematic fuzzing harness, 5 surfaces)
+  - new: `tools/cross_check_spec_parsers.pl` (oracle vs candidate cross-check harness)
 
 ## Maintenance Policy
 - Treat this as a live document, not a one-off memo.
@@ -410,7 +410,8 @@ One more boundary is now tighter too:
 - parse `.spec` syntax before self-hosting is fully realized,
 - also carry bootstrap-side parsing/rendering intelligence for method-chain and attached control-flow syntax normalization,
 - remain a major syntax and safety hotspot,
-- now use explicit `rule_descriptors` and `dispatch_state` naming for bootstrap parser handler plumbing. The old `spec_descr` / `gdata` words should be read as history/compatibility context, not active compiler descriptor/dependency-regex terminology.
+- now use explicit `rule_descriptors` and `dispatch_state` naming for bootstrap parser handler plumbing. The old `spec_descr` / `gdata` words should be read as history/compatibility context, not active compiler descriptor/dependency-regex terminology,
+- **new in MEDIUM-IMPACT.3.5**: `BootstrapSpec.pm` now has `_build_spec_spec_parser()` which lazily builds the spec.spec-generated parser via the bootstrap seed path (BootstrapSpec::Core → Compiler → spec.spec → parser) and caches the result. `run_bootstrap_parse()` runs the spec.spec parser alongside the bootstrap parser as a **diagnostic side channel** — bootstrap output is always primary for format compatibility. A recursion guard (`$BUILDING_SPEC_SPEC_PARSER` package variable) prevents infinite loop when spec.spec tries to parse itself. The cross-check harness (`tools/cross_check_spec_parsers.pl`) compares oracle (bootstrap) vs candidate (spec.spec) output: currently 2/20 exact match (tablegrep, verilog); remaining 18 specs have inflated candidate counts due to spec.spec `rule_paragraph:AND` handler lacking E-block body collection (MEDIUM-IMPACT.3.4 parity gap).
 
 ### `LinkedSpec::Validation`
 - is the front-end DSL validation owner (1,368 lines, 30+ subs),
@@ -452,7 +453,12 @@ One more boundary is now tighter too:
 ### `LinkedSpec::SpecEntry`
 - compiles parsed rule entries into generated runtime handler code,
 - still assembles Perl source strings and `eval`s them,
-- remains the clearest backend-portability ceiling in the current implementation.
+- remains the clearest backend-portability ceiling in the current implementation,
+- **new in MEDIUM-IMPACT.1**: handler-variant building is now delegated to `LinkedSpec::HandlerVariantEmitter` which provides:
+  - a structured **HandlerIR** (hashref-based AST with `kind`/`label`/`parse_mode`/lifecycle slots / dispatch refs) — each of the 10 variant builders returns an IR node instead of raw Perl source,
+  - `_emit_handler($ir, %opts)` dispatches through a `%BACKEND_EMITTERS` table (default: `perl` backend → `_emit_handler_perl`),
+  - a JSON/AST diagnostic backend (`_emit_handler_json`) that serializes HandlerIR as canonical pretty-printed JSON via `JSON::PP`, proving backend pluggability,
+  - `$BACKEND` package variable + `$deps->{backend}` threading so callers can request alternative backends per compilation.
 
 ### `LinkedRE`
 - is a small (56-line) regex composition utility living at `perl/LinkedRE.pm`,
