@@ -177,7 +177,7 @@ Tree exhausted — both leaves complete.
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `FLUENT-BLOCK-EQUIVALENCE.1` | `FLUENT-BLOCK-EQUIVALENCE.1 — Inventory/audit of fluent vs block equivalence` (`d7f341d`) | All three expression forms exist for both if and switch families. |
-| `FLUENT-BLOCK-EQUIVALENCE.2` | `pending` | Book chapter added, regression coverage verified sufficient. |
+| `FLUENT-BLOCK-EQUIVALENCE.2` | `FLUENT-BLOCK-EQUIVALENCE.2 — Book documentation + regression verification` (`70220f8`) | Book chapter added, regression coverage verified sufficient. |
 
 ## Changelog
 

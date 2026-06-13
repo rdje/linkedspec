@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `637b0c0` — "Docs: post-commit hash fix — MEMORY.md + task tree backfill d7f341d"
+- latest_commit: `70220f8` — "FLUENT-BLOCK-EQUIVALENCE.2 — Book documentation + regression verification"
 - active_work_unit: none — FLUENT-BLOCK-EQUIVALENCE tree completed and moved to Completed.
 - next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
-- FLUENT-BLOCK-EQUIVALENCE tree completed: .1 inventory/audit (no gaps), .2 book documentation + regression verification. Both leaves done. Tree moved to Completed in TASK_TREE.md.
-- in_flight_uncommitted: .2 complete — live docs + task tree updated, needs commit.
+- FLUENT-BLOCK-EQUIVALENCE tree completed: .1 inventory/audit, .2 book documentation + regression verification.
+- in_flight_uncommitted: none
 - blockers: none
