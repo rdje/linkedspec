@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `FLUENT-BLOCK-EQUIVALENCE` | `active` | `Overall roadmap — method-like DSL migration track (near-term priority 2)` | `FLUENT-BLOCK-EQUIVALENCE.1` | [docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md](docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md) |
 
 ## Proposed Task Trees
 

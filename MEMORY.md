@@ -17,12 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `ce84cf3` — "MEDIUM-IMPACT.3.6 — Full regression verification + documentation"
-- active_work_unit: none — MEDIUM-IMPACT tree completed and moved to Completed.
-- next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
-- .3.6 completed: ARCHITECTURE_STATE.md refreshed (2026-06-13), knowledge map card updated, task tree closed out, live docs updated. MEDIUM-IMPACT tree moved to Completed in TASK_TREE.md. 20/20 specs compile OK. Cross-check at 2/20 match.
-- Completed leaves: .1.1→.1.5, .2.1→.2.4, .3.1, .3.2, .3.3, .3.4.1→.3.4.4, .3.5, .3.6.
-  All MEDIUM-IMPACT leaves done — tree exhausted. No active task trees remain.
-- regression baseline: 20/20 specs compile (quick smoke). Full CI pending.
-- in_flight_uncommitted: none
+- latest_commit: `2302298` — "MEDIUM-IMPACT.3.6 — Full regression verification + documentation"
+- active_work_unit: FLUENT-BLOCK-EQUIVALENCE  →  frontier leaf: FLUENT-BLOCK-EQUIVALENCE.1 (pending)
+- next_action: Inventory/audit current fluent vs block equivalence across all supported control-flow constructs and lifecycle families.
+- New tree FLUENT-BLOCK-EQUIVALENCE created 2026-06-14 from ROADMAP_V2.md near-term priority 2 ("broaden fluent/block equivalence on supported surfaces").
+- in_flight_uncommitted: FLUENT-BLOCK-EQUIVALENCE task tree created, TASK_TREE.md updated — needs commit.
 - blockers: none

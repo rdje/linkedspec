@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — FLUENT-BLOCK-EQUIVALENCE: New task tree created
+
+- **Task tree**: Created `docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md` from ROADMAP_V2.md near-term
+  priority 2 ("broaden fluent/block equivalence on supported surfaces"). Two leaves: .1
+  (inventory/audit of current fluent vs block equivalence gaps) and .2 (close identified gaps).
+  Registered in TASK_TREE.md Active Task Trees table.
+- **MEMORY.md**: Updated to new active task tree. Frontier leaf: FLUENT-BLOCK-EQUIVALENCE.1.
+- **Baseline**: 20/20 specs compile OK (quick smoke).
+
 ## 2026-06-13 — MEDIUM-IMPACT.3.6: Full regression verification + documentation
 
 - **CI gate**: `tools/run_ci_local.sh` run — memory-arch check, Knowledge Map check,
