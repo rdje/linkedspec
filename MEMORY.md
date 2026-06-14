@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `6a8cb80` — "Docs: post-commit hash fix — MEMORY.md latest_commit → 662b642"
+- latest_commit: `662b642` — "Feat: RUST-FUNCTIONAL-PARITY.1 + .2 — Rust-native core, parser, validator, compiler, runtime (20/20 specs pass)"
 - active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.3.1` (expr parser hardening), `.4.1` (compiler), `.5.1` (regex engine), `.5.2` (lifecycle), `.6.1` (expr interpreter), `.7.1–.7.3` (helpers)
 - next_action: PNT from .3.1 → continue expanding helpers (.7.1–.7.3)
 - in_flight_uncommitted: RUST-FUNCTIONAL-PARITY.1 + .2 — 51 tests pass, 20/20 specs parse+validate+compile
