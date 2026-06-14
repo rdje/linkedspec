@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `9f2efce` — "Docs: LIFECYCLE-FAMILY-AUDIT.4 — Finalization: close tree"
-- active_work_unit: `DOC-BOOK-SYNC`  →  frontier leaf: `DOC-BOOK-SYNC.0` (in_progress)
-- next_action: Complete DOC-BOOK-SYNC.0 — commit tree creation, TASK_TREE.md registration, and MEMORY.md update; then PNT to DOC-BOOK-SYNC.1.
+- latest_commit: `1d72202` — "Docs: DOC-BOOK-SYNC.0 — create task tree for documentation/book sync"
+- active_work_unit: `DOC-BOOK-SYNC`  →  frontier leaf: `DOC-BOOK-SYNC.1` (pending)
+- next_action: Execute DOC-BOOK-SYNC.1 — audit mdBook and live docs against current codebase for gaps, stale references, and drift.
 - in_flight_uncommitted: none
 - blockers: none

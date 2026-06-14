@@ -36,11 +36,11 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
   Children: `DOC-BOOK-SYNC.0`, `DOC-BOOK-SYNC.1`, `DOC-BOOK-SYNC.2`, `DOC-BOOK-SYNC.3`
 
 - ID: `DOC-BOOK-SYNC.0`
-  Status: `in_progress`
+  Status: `done`
   Goal: `Create the DOC-BOOK-SYNC task tree, register it in docs/TASK_TREE.md active table, and update MEMORY.md resume pointer.`
   Acceptance: `Tree file exists at docs/tasks/DOC-BOOK-SYNC.md with 4 leaves. Active Task Trees table updated. MEMORY.md current-state block reflects DOC-BOOK-SYNC as active_work_unit.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `scripts/check_memory_architecture.sh` PASS (exit 0). Git hooks PASS (pre-commit: memory-arch + KM check OK). 6 files changed.
+  Commit: `1d72202` — "Docs: DOC-BOOK-SYNC.0 — create task tree for documentation/book sync"
 
 - ID: `DOC-BOOK-SYNC.1`
   Status: `pending`
@@ -67,8 +67,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DOC-BOOK-SYNC.0` | `in_progress` | Bootstrap: tree creation, TASK_TREE.md registration, MEMORY.md update. |
-| 2 | `DOC-BOOK-SYNC.1` | `pending` | Need an accurate gap inventory before any remediation can begin. |
+| 1 | `DOC-BOOK-SYNC.1` | `pending` | Need an accurate gap inventory before any remediation can begin. |
 
 ## Decisions
 
@@ -86,7 +85,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `pending` | `DOC-BOOK-SYNC.0` | `pending` | `pending` |
+| `2026-06-14` | `DOC-BOOK-SYNC.0` | `scripts/check_memory_architecture.sh`, `.githooks/pre-commit` (memory-arch + KM) | PASS — all invariants hold |
 | `pending` | `DOC-BOOK-SYNC.1` | `pending` | `pending` |
 | `pending` | `DOC-BOOK-SYNC.2` | `pending` | `pending` |
 | `pending` | `DOC-BOOK-SYNC.3` | `pending` | `pending` |
@@ -95,7 +94,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `DOC-BOOK-SYNC.0` | `pending` | `pending` |
+| `DOC-BOOK-SYNC.0` | `Docs: DOC-BOOK-SYNC.0 — create task tree for documentation/book sync` | `1d72202` — 6 files, 118 insertions |
 | `DOC-BOOK-SYNC.1` | `pending` | `pending` |
 | `DOC-BOOK-SYNC.2` | `pending` | `pending` |
 | `DOC-BOOK-SYNC.3` | `pending` | `pending` |
