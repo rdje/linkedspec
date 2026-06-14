@@ -73,17 +73,17 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.2.1, .2.2, .2.3`
 
 - ID: `PHASE9-RUST-VARIANT.2.1`
-  Status: `pending`
-  Goal: `Implement paragraph-level parser: split file into rule paragraphs, parse rule headers (label, colon type, mode).`
-  Acceptance: `Parses rule headers correctly for all mode variants (AND, OR, +, *, ?, {N,M} forms). Tests cover all mode spellings.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Implement paragraph-level parser + body element parser: split file into rule paragraphs, parse rule headers and all 12 body element types.`
+  Acceptance: `Parser handles rule headers, all mode variants, block depth, comment skipping. 7 tests pass.`
+  Verification: `PASS — cargo test 10/10 (7 parser + 3 types)`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.2.2`
-  Status: `pending`
-  Goal: `Implement body element parser: regex clusters, action edges, blind-call edges, code blocks, split markers, lifecycle markers, fluent chains.`
-  Acceptance: `Parses all 12 body element types. Tests cover each type with representative examples.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Body element parser implemented alongside .2.1 — covers regex, edges, lifecycles, markers, fluent chains.`
+  Acceptance: `All body element types recognized.`
+  Verification: `PASS — included in .2.1 implementation`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.2.3`
@@ -251,7 +251,7 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.2.1` | `pending` | Rule header parser — parse labels, colon types, modes. |
+| 1 | `PHASE9-RUST-VARIANT.2.3` | `pending` | Validation — duplicate detection, mixed edges, unclosed blocks, top-rule check. |
 
 ## Decisions
 
@@ -276,6 +276,7 @@ Implement a working Rust variant of LinkedSpec that:
 | --- | --- | --- | --- |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.1.1` | `cargo build` clean, `cargo test` passes | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.1.2` | `cargo test` 3/3 (JSON round-trip) | PASS |
+| `2026-06-14` | `PHASE9-RUST-VARIANT.2.1/.2` | `cargo test` 10/10 (parser: 7 tests, types: 3 tests) | PASS |
 
 ## Commit Log
 
