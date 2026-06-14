@@ -233,10 +233,11 @@ Runtime/diagnostic continuity note:
 - the remaining `runtime_parser:resolve_top_rule_handler` missing-descriptor-entry seam now follows that same rule too, so callers still get `LinkedSpec::generated_handler:<top_rule>` even when the selected top-rule label is known but no compiled descriptor entry exists yet.
 
 ## Near-Term Execution Priorities
-1. Finish the lifecycle-family follow-through for semicolon-light structured authoring:
-   - generic helper-only regression coverage now spans `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
-   - marker-style semicolon-light control-flow coverage now spans that same full lifecycle family too,
-   - keep extending any remaining narrower lifecycle-specific semantics only when a real gap or exception is found.
+1. Lifecycle-family follow-through for semicolon-light structured authoring: **verified complete** (LIFECYCLE-FAMILY-AUDIT, 2026-06-14).
+   - generic helper-only regression coverage spans all 7 markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`),
+   - marker-style semicolon-light control-flow coverage spans the full lifecycle family,
+   - 73+ fluent_and_structured helper-family subtests use LX as primary proof point; full_lifecycle data-driven subtests cover all 7 markers for control-flow,
+   - no lifecycle-specific semantic gaps found; all markers treated as equivalent.
 2. Continue the method-like DSL migration track:
    - priority shift is now active: continue missing user-facing DSL features first, and return to deeper marker `if(...)` / marker `switch(...)` cross-nesting parity expansion only when a concrete feature or bug requires it,
    - design direction is now explicit: scalar and aggregate helper growth should follow a disciplined functional-expression style with unlimited composition, clear helper signatures, and parser-oriented semantics, while explicitly avoiding scope creep into lambdas, closures, currying, or a general-purpose FP sublanguage,

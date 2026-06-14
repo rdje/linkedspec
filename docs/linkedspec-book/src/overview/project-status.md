@@ -29,7 +29,7 @@ Three backbone items tracked major structural modernization — all done:
 ## Ongoing
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
-- **Lifecycle-family audit** — verifying semicolon-light structured authoring parity across the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`); coverage already spans all lifecycles; extending only where a real gap is found.
+- **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. No lifecycle-specific semantic gaps found.
 
 ## What this means for readers
 

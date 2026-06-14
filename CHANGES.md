@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — LIFECYCLE-FAMILY-AUDIT.1–.2: Lifecycle coverage inventory and gap analysis
+### Inventory (.1)
+- Full audit of lifecycle marker coverage in t/phase0_regression.t
+- All 7 markers (I, LS, LE, E, EX, IT, LX) verified with structured and fluent coverage
+- I: 71 literal block occurrences + interpolation; LX: 89 literal blocks + interpolation, primary helper-family proof point (73+ subtests)
+- LS/LE/E/EX/IT: interpolation-only via 47 full_lifecycle + 12 remaining_lifecycle data-driven subtests
+- Control-flow (if/switch) and semicolon-light coverage spans all 7 markers
+### Gap analysis (.2)
+- No real gaps found. ROADMAP_V2.md claim validated.
+- 3 intentional design patterns documented (LX as primary proof point, I/LX deeper standalone coverage, all markers interchangeable)
+- Zero implementation work needed
+
 ## 2026-06-14 — ROADMAP-V2-TRACKER-SYNC.1–.2: Tracker synchronization
 ### Audit (.1)
 - Verified all 20 shipped specs compile at zero compatibility-surface rules
