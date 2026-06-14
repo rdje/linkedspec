@@ -49,10 +49,10 @@ canonical test corpus every backend runs against.
   Children: `PHASE8-MULTI-BACKEND-HANDOFF.1, PHASE8-MULTI-BACKEND-HANDOFF.2, PHASE8-MULTI-BACKEND-HANDOFF.3, PHASE8-MULTI-BACKEND-HANDOFF.4, PHASE8-MULTI-BACKEND-HANDOFF.5, PHASE8-MULTI-BACKEND-HANDOFF.6, PHASE8-MULTI-BACKEND-HANDOFF.7, PHASE8-MULTI-BACKEND-HANDOFF.8`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Multi-backend ADR 0006 — formalize the Rust/Julia/Dart backend vision as a durable decision record (layer C), with explicit lockstep contracts, the universal .spec surface, and HandlerIR as the decoupling seam.`
   Acceptance: `ADR 0006 recorded in docs/decisions/; INDEX.md updated; linked from ROADMAP_V2.md; linked from the owning task-tree.`
-  Verification: `pending`
+  Verification: `PASS — ADR 0006 created, INDEX.md updated, memory-arch check PASS`
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.2`
@@ -108,8 +108,7 @@ canonical test corpus every backend runs against.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.1` | `pending` | ADR gates everything — makes the vision official before specification work begins. |
-| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.2` | `pending` | Formal grammar is the foundation — all other specs reference it. |
+| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.2` | `pending` | Formal grammar is the foundation — all other specs reference it. |
 | 3 | `PHASE8-MULTI-BACKEND-HANDOFF.3` | `pending` | HandlerIR spec — fills the known missing card; can proceed in parallel with .2. |
 | 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
@@ -138,7 +137,7 @@ canonical test corpus every backend runs against.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `pending` | `pending` | `pending` | `pending` |
+| `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.1` | `scripts/check_memory_architecture.sh` PASS; ADR 0006 created + INDEX.md updated | PASS |
 
 ## Commit Log
 

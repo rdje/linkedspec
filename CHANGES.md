@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — PHASE8-MULTI-BACKEND-HANDOFF.1: Multi-backend ADR 0006
+### ADR 0006 (.1)
+- Created `docs/decisions/0006-multi-backend-vision.md` — formal decision record for Rust/Julia/Dart backends alongside Perl.
+- INDEX.md updated with ADR 0006 row.
+- Key decisions: Perl stays reference; .spec files are universal contract; backends in lockstep; HandlerIR as decoupling seam; specification-first (Phase 8 deliverables); JS/Wasm via Rust or Dart; no bytecode VM.
+- Backend reach matrix documented: Perl (CLI), Rust (CLI + Wasm), Julia (CLI), Dart (CLI + JS + Wasm + Mobile).
+- `scripts/check_memory_architecture.sh` PASS.
+
 ## 2026-06-14 — PHASE8-MULTI-BACKEND-HANDOFF.0: Phase 8 task tree creation
 ### Tree creation (.0)
 - Created `docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md` with 8 leaves covering: ADR 0006, formal .spec grammar, HandlerIR spec, helper contract catalog, runtime semantics, language-neutral test corpus, mdBook handoff chapter, and finalization.
