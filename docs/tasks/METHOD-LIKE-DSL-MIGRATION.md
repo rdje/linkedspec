@@ -18,7 +18,7 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
 
 - Adding lambdas, closures, currying, or a general-purpose FP sublanguage (explicitly avoided per ROADMAP_V2 design direction).
 - Deeper marker `if(...)` / marker `switch(...)` cross-nesting parity expansion (deferred unless a concrete feature or bug requires it).
-- PLUGIN-ACTION-MIGRATION — that is a separate proposed follow-on track for migrating 36 `.plg` files (~1,200+ actions) to package owners.
+- PLUGIN-ACTION-MIGRATION — that is a retired follow-on track (all 5 leaves done; 17 dead files deleted; 19 kept as legacy corpus).
 - Phase 1 parser-core isolation cleanup — that is a separate Phase 1 remainder tracked in ROADMAP_V2.
 
 ## Acceptance Criteria
@@ -70,7 +70,7 @@ Complete the method-like DSL surface — backend-neutral method-style `.spec` ac
   Status: `done`
   Goal: `Formally defer deeper cross-nesting parity — document the deferred status of marker if(...)/switch(...) cross-nesting parity expansion with explicit reactivation criteria.`
   Acceptance: `Deferred item documented in DEVELOPMENT_NOTES.md (or task file) with: what is deferred, why, and what conditions would reactivate it (concrete feature request or bug). Track close-out proceeds with this deferred item acknowledged.`
-  Verification: `2026-05-17: Cross-nesting parity formally deferred in DEVELOPMENT_NOTES.md. Documented: what is deferred (deeper marker if/switch cross-nesting parity expansion), current state (existing surface sufficient for all 19 shipped specs), why deferred (ROADMAP_V2 priority shift — functional-expression style over structural nesting), 3 reactivation criteria (concrete feature request, bug, new spec requirement). Tree close-out section added with per-leaf summary, remaining open items (compat alias retirement, PLUGIN-ACTION-MIGRATION, Phase 1 parser-core isolation). METHOD-LIKE-DSL-MIGRATION tree COMPLETE (5/5 leaves).`
+  Verification: `2026-05-17: Cross-nesting parity formally deferred in DEVELOPMENT_NOTES.md. Documented: what is deferred (deeper marker if/switch cross-nesting parity expansion), current state (existing surface sufficient for all 19 shipped specs), why deferred (ROADMAP_V2 priority shift — functional-expression style over structural nesting), 3 reactivation criteria (concrete feature request, bug, new spec requirement). Tree close-out section added with per-leaf summary, remaining open items (compat alias retirement — now resolved via COMPAT-ALIAS-RETIREMENT-V2; PLUGIN-ACTION-MIGRATION — retired; Phase 1 parser-core isolation — done). METHOD-LIKE-DSL-MIGRATION tree COMPLETE (5/5 leaves).`
   Commit: `pending`
 
 ## Current Frontier

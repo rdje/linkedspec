@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1: Fix stale "proposed" → "retired" references
+### Stale reference cleanup (.1)
+- Fixed 10 stale references across 6 files that still described PLUGIN-ACTION-MIGRATION as "proposed" when the tree is actually `retired` (all 5 leaves done; 17 dead files deleted; 19 kept as legacy corpus).
+- Files fixed: ROADMAP_V2.md, DEVELOPMENT_NOTES.md (2), LIVE_ACHIEVEMENT_STATUS.md (2), docs/tasks/DOC-CODEBASE-ALIGNMENT.md (2), docs/tasks/METHOD-LIKE-DSL-MIGRATION.md (2), docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md.
+- `scripts/check_memory_architecture.sh` PASS — all invariants hold.
+- Grep verify: zero remaining stale "proposed" references outside historical log entries.
+
 ## 2026-06-14 — DOC-BOOK-SYNC.3: Finalization — tree complete
 ### Finalization (.3)
 - `scripts/check_memory_architecture.sh` PASS — all invariants hold

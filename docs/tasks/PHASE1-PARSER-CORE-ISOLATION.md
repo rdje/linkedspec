@@ -19,7 +19,7 @@ Finish the last parser-core isolation cleanup around remaining compile-path comp
 - Changing the public API output format (legacy descriptor hash projection is an intentional adapter between internal state and public API, not a cleanup relic).
 - Removing the `compatibility_surface` diagnostic infrastructure — that remains as an observation tool for migration metrics.
 - Retiring compatibility aliases from the DSL helper surface (that's under METHOD-LIKE-DSL-MIGRATION).
-- PLUGIN-ACTION-MIGRATION (separate proposed track).
+- PLUGIN-ACTION-MIGRATION (retired track).
 
 ## Acceptance Criteria
 

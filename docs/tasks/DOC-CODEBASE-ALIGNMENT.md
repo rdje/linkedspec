@@ -25,7 +25,7 @@ and make `docs/TASK_TREE.md` an accurate index of the real task-file statuses.
 - Do not rewrite legitimate historical change records (the commit/changelog
   entries that correctly state `ActionRewriter.pm` was removed must remain as
   history).
-- Do not activate the proposed `PLUGIN-ACTION-MIGRATION` tree.
+- Do not activate the retired `PLUGIN-ACTION-MIGRATION` tree.
 
 ## Acceptance Criteria
 
@@ -101,7 +101,7 @@ All leaves complete — tree `done`. No leaves remain in the frontier.
 
 ## Open Questions
 
-- None blocking. The proposed `PLUGIN-ACTION-MIGRATION` tree remains out of scope and stays `proposed`.
+- None blocking. The `PLUGIN-ACTION-MIGRATION` tree is now `retired` (all 5 leaves done; 17 dead files deleted; 19 kept as legacy corpus).
 
 ## Blockers
 

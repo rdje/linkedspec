@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-14: PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1 — Fixed 10 stale "proposed" → "retired" references across 6 files. Tree COMPLETE (1 leaf). No active task trees remain — PNT idle.
 - 2026-06-14: DOC-BOOK-SYNC.3 — Finalization: tree COMPLETE (4 leaves). 19 gaps remediated across 17 files. ROADMAP_V2.md overall → done. No active task trees remain — PNT idle.
 - 2026-06-14: DOC-BOOK-SYNC.2 — All 19 gaps remediated across 17 files.
 - 2026-06-14: DOC-BOOK-SYNC.1 — Full mdBook + live docs audit complete. 19 gaps found (6 critical, 8 medium, 5 low) across 13 files.
@@ -89,9 +90,9 @@ Current execution status for interruption-safe batch workflow recovery.
 ## Next Slice Direction
 - ROADMAP_V2.md statuses synchronized with completed task trees. Phase 1, Backbone refactor track now `done`.
 - PHASE1-PARSER-CORE-ISOLATION tree COMPLETE (3 leaves). ActionRewriter.pm removed, rewrite_action_code_for_compat evaluated and documented.
-- PLUGIN-ACTION-MIGRATION (proposed track, no task tree yet) — migrate 36 .plg files (~1,200+ actions) to package owners. Only remaining proposed work with no active task tree.
+- PLUGIN-ACTION-MIGRATION tree **retired** — all 5 leaves done; 17 dead files deleted; 19 kept as legacy corpus. Plugin migration workstream closed.
 - BOOK-DOCUMENTATION-SYNC tree COMPLETE (3 leaves).
-- METHOD-LIKE-DSL-MIGRATION tree COMPLETE (5 leaves). All 19 shipped specs at zero compat. Cross-nesting parity deferred. Open items: compat alias retirement (policy defined), PLUGIN-ACTION-MIGRATION (proposed).
+- METHOD-LIKE-DSL-MIGRATION tree COMPLETE (5 leaves). All 19 shipped specs at zero compat. Cross-nesting parity deferred. Open items: compat alias retirement (policy defined). PLUGIN-ACTION-MIGRATION retired.
 - 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.5 — cross-nesting parity formally deferred, tree COMPLETE (5/5 leaves).
 - 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.4 — missing DSL features inventory. No concrete gaps in shipped corpus.
 - 2026-05-17: Completed METHOD-LIKE-DSL-MIGRATION.3 — convention-based accumulator audit. 4 conventions audited, zero helpers needed.
