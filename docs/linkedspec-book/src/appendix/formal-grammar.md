@@ -1,0 +1,614 @@
+# Formal `.spec` Grammar
+
+This appendix defines the `.spec` file syntax with enough precision for an independent
+implementation in any language (Rust, Julia, Dart, etc.). It does **not** describe how
+the Perl backend parses — it describes **what** constitutes valid `.spec` syntax and
+**what** each construct means.
+
+Every shipped LinkedSpec backend must accept exactly the language defined here.
+
+## 1. Paragraph Model
+
+A `.spec` file is a sequence of **rule paragraphs**, not a line-oriented grammar.
+A rule paragraph starts with a **rule header** and continues until the next rule
+header or end of file. Everything between two rule headers belongs to the first
+rule's paragraph.
+
+Rule headers are recognized **only at top level**: a line matching a rule-label
+pattern inside an open `{ }` block is block content, not a new rule.
+
+```text
+Top::
+ /a/ -> Next {
+ return(array("?Top:", array_copy(array(Top))))
+ }
+
+Next::
+ /b/ { return(array("?Next:", array_copy(array(Next)))) }
+```
+
+Here `return(...)` is block content inside `Top`, and `Next::` starts a new paragraph.
+
+### 1.1 Leading Whitespace, Comments, and Blank Lines
+
+Before the first rule paragraph, a `.spec` file may contain:
+- Blank lines (zero or more)
+- Comment lines starting with `#` (zero or more)
+
+After the first rule paragraph, blank lines and comment lines between paragraphs
+are **not** part of any rule.
+
+## 2. Rule Header
+
+A rule header is a single token at the start of a line (after optional leading
+whitespace on that line):
+
+```
+rule_label  :  [mode]  [rest-of-line]
+rule_label  :: [mode]  [rest-of-line]
+```
+
+### 2.1 Rule Labels
+
+A rule label is one or more word characters: `[A-Za-z0-9_]+`.
+
+- **Single colon** (`rule_name:`): a **body rule** — may appear anywhere in the file.
+- **Double colon** (`rule_name::`): a **top rule** — the parser entry point. At least
+  one top rule must exist. A `.spec` file may define multiple top rules.
+
+### 2.2 Rule Modes
+
+The mode suffix, if present, immediately follows the colon(s) with no space:
+
+| Mode | Meaning | Label forms |
+|---|---|---|
+| *(no suffix)* | Repeated choice (default). Equivalent to `:OR+`. Handled by `:*`. | `rule:` |
+| `:AND` | Ordered sequence. Each child regex matched in order. | Body rule only |
+| `:OR` | Repeated choice across alternatives. | Body rule only |
+| `:&` | single-match choice (`:OR{1}`). | Body rule only |
+| `:\|` | Ordered sequence (equivalent to `:AND`). | Body rule only |
+| `:+` | One-or-more repeated choice (`:OR{1,}`). Equivalent to `:*` bounded. | Body rule only |
+| `:*` | Zero-or-more repeated choice (`:OR{0,}`). | Body rule only |
+| `:?` | Zero-or-one choice (`:OR{0,1}`). | Body rule only |
+| `:OR+` | Unbounded repeated choice (one or more). | Body rule only |
+| `:AND+` | Unbounded repeated ordered sequence (one or more). | Body rule only |
+| `:AND{N}` | Ordered sequence repeated exactly N times. | Body rule only |
+| `:AND{N,M}` | Ordered sequence repeated N to M times. | Body rule only |
+| `:AND{N,}` | Ordered sequence repeated N or more times. | Body rule only |
+| `:AND{,M}` | Ordered sequence repeated up to M times. | Body rule only |
+| `:OR{N}` | Repeated choice exactly N times. | Body rule only |
+| `:OR{N,M}` | Repeated choice N to M times. | Body rule only |
+| `:OR{N,}` | Repeated choice N or more times. | Body rule only |
+| `:OR{,M}` | Repeated choice up to M times. | Body rule only |
+
+Where `N` and `M` are non-negative integers.
+
+**Semantics**:
+- **AND modes** match child regexes sequentially, in order, exactly once per repetition.
+- **OR modes** try each alternative independently on each repetition; the first match
+  wins. On the next repetition, all alternatives are retried from the new position.
+- **Bounded repetition** loops the specified number of times. The loop terminates when
+  the bound is reached or when a child fails to match (for `{N,}` and `{N,M}` forms).
+- **Zero-progress guard**: repeated modes refuse to loop infinitely when a child
+  succeeds but consumes zero input. The parser detects zero-progress and terminates
+  the loop to prevent a hang.
+
+### 2.3 Rest-of-Line After Header
+
+Any text on the same line after the rule label + colon(s) + optional mode is the
+**header rest**. The header rest may carry:
+- A regex cluster (the rule's first regex anchor)
+- Body elements on the same line (compact style)
+
+Same-line body elements are semantically equivalent to body elements on subsequent
+lines — the paragraph model is unchanged.
+
+## 3. Rule Body Elements
+
+After the rule header, the rule paragraph contains zero or more **body elements**.
+Body elements may span multiple lines. The following body element types exist:
+
+### 3.1 Regex Clusters
+
+```
+/pattern/flags
+```
+
+A regex literal delimited by `/`. The pattern body may contain escaped forward
+slashes (`\/`). No flags are currently recognized beyond those supported by the
+host regex engine.
+
+**Semantics**: A regex cluster anchors the parser at a specific input position.
+In `consume` mode (`\G`-anchored), the regex must match contiguously from the
+current position. In `seek` mode (ungrounded `//gcp`), the regex may match
+anywhere. The mode is determined by the rule mode and runtime parse mode.
+
+Multiple regex clusters in a row form an ordered sequence for AND-mode rules
+or a set of alternatives for OR-mode rules.
+
+### 3.2 Action Edges
+
+```
+-> TargetRule       (shorthand for -> TargetRule[0])
+-> TargetRule[N]    (selects regex slot N of TargetRule)
+```
+
+An action edge binds the current rule to a child rule via an **action code block**.
+After the regex cluster(s) match, the parser transfers to `TargetRule` and executes
+its associated action code.
+
+- **Target indexing**: `-> rule` means entry slot `[0]`. `-> rule[N]` selects a
+  later regex slot of the same rule (used for same-rule recursive entry).
+- **Grouped targets**: `-> RuleA | RuleB { ... }` binds one shared action code
+  block to multiple target rules.
+
+### 3.3 Blind-Call Edges
+
+```
+=> ChildRule
+```
+
+A blind-call edge delegates to `ChildRule` **without** an action code block. The
+child rule's own action code runs. This is used for parser orchestration where the
+parent rule controls dispatch but does not transform the child's result.
+
+Blind-call behavior follows the **rule label mode**, not the edge alone. Explicit
+`:AND` on the child rule is required for sequential blind-call dispatch. A bare
+`rule:` label with blind-call edges still behaves as repeated choice.
+
+### 3.4 Code Blocks (Action / Lifecycle)
+
+```
+{ code }
+```
+
+A `{ }` block contains **action code** or **lifecycle code**. The block's context
+determines how the code is interpreted:
+
+- **After an action edge** (`-> rule { ... }`): the block is the **action code** for
+  that edge. It runs after the child rule completes. The block can declare variables,
+  read captures, transform results, and return values.
+
+- **After a blind-call edge** (`=> rule { ... }`): deprecated but accepted as
+  compatibility syntax. Prefer lifecycle blocks for blind-call rules.
+
+- **As a standalone block**: the block is **lifecycle code** for the rule itself (or
+  for a blind-call rule body). Lifecycle blocks use lifecycle markers to control
+  execution order (see §4).
+
+Blocks nest: `{ ... { ... } ... }`. Opening brackets `{`, `(`, `[` inside a block
+must be balanced by their closing counterparts. A rule paragraph with an unclosed
+block at end of file is invalid.
+
+### 3.5 Split Markers
+
+```
+@capture_slice
+@capture_from_here       (compatibility alias for @capture_slice)
+@move_pos                (compatibility alias for @capture_slice)
+@mark(name)
+```
+
+Split markers control anonymous and named capture boundaries during parsing:
+- `@capture_slice`: moves the anonymous capture-start cursor to the current position.
+- `@mark(name)`: stores the current absolute position under a named mark for later
+  retrieval via `capture_from(name)`, `capture_between(...)`, etc.
+
+### 3.6 Lifecycle Markers
+
+```
+I
+LS
+LE
+E
+EX
+IT
+LX
+```
+
+Lifecycle markers define **when** code blocks execute relative to the rule's
+children:
+
+| Marker | Meaning |
+|---|---|
+| `I` | Initialization — runs before any child is attempted. |
+| `LS` | Loop start — runs before each repetition of a repeated rule. |
+| `LE` | Loop end — runs after each child match in a repeated rule. |
+| `E` | Exit — runs after all children complete successfully. |
+| `EX` | Exit (extended) — runs after E, can observe the final result. |
+| `IT` | Iteration — per-child iteration context. |
+| `LX` | Loop exit — runs after a repeated rule's loop terminates. |
+
+Lifecycle markers are **semicolon-light structured authoring**: a marker followed by
+`{ code }` is a lifecycle block. Markers may also appear as attached-block control
+flow (`if(...) { ... } endif()`, `switch(...) { case(...) ... } endswitch()`).
+
+### 3.7 Fluent Chains
+
+```
+.method1(arg).method2(arg2).method3()
+```
+
+A fluent chain on an action edge or inside a lifecycle block uses dot-method syntax.
+Each method is a helper from the ActionIR helper families (§7). Fluent chains and
+structured block forms are semantically equivalent — they lower to the same ActionIR
+and produce identical parser behavior.
+
+Zero-arg fluent control-flow markers accept bare-keyword form:
+```
+.else   .endif   .default   .endcase   .endswitch
+```
+
+These are equivalent to their parenthesized forms `.else()`, `.endif()`, etc.
+
+### 3.8 Conditional Markers
+
+```
+-? word
+```
+
+A conditional marker is a hyphen-question prefix followed by a word. It carries
+metadata about optional or conditional dispatch — recognized structurally but its
+semantics are determined by the consuming rule.
+
+### 3.9 Word-Based Body Code
+
+```
+word(args...) { ... }
+method(args...)
+```
+
+A word followed by parenthesized arguments and optionally a code block. This
+covers helper calls, declarations, control flow, and raw compatibility code.
+See §7 for the canonical helper families.
+
+## 4. Lifecycle Execution Model
+
+For a rule with children (edges), execution follows a fixed lifecycle order:
+
+1. **I** — initialization block runs once.
+2. For each repetition (repeated rules only):
+   a. **LS** — loop-start block runs.
+   b. Child regexes are matched.
+   c. Action or blind-call code runs for matched children.
+   d. **LE** — loop-end block runs (receives child result).
+3. **IT** — per-child iteration context runs.
+4. **E** — exit block runs.
+5. **EX** — extended exit block runs.
+6. **LX** — loop-exit block runs (repeated rules only, after loop termination).
+
+For non-repeated rules, LS, LE, and LX are skipped.
+
+## 5. Parse Modes
+
+### 5.1 Seek Mode
+
+The default parse mode for OR-type rules. The regex is matched ungrounded (`//gcp` —
+match anywhere in the remaining input). Each repetition finds the next match position.
+Use `seek` when children may appear in any order or at variable positions.
+
+### 5.2 Consume Mode
+
+Used for AND-type rules and explicit `consume` directives. The regex is `\G`-anchored —
+it must match contiguously from the current position. Use `consume` for ordered
+sequences where input must be consumed in exact order.
+
+### 5.3 BACKTRACK and IBACKTRACK
+
+`BACKTRACK` performs a **local cursor rewind**: if a child match fails or a condition
+is unmet, the parser rewinds the input position (`pos()`) to where it was before the
+attempt. This is a local rewind — not systemic backtracking. LinkedSpec does not
+maintain a search tree, unwind partial rule matches, or restore alternative-choice
+state.
+
+`IBACKTRACK` is the case-insensitive variant.
+
+## 6. Comments
+
+```
+# comment text
+```
+
+A `#` at the beginning of a line (after optional whitespace) starts a comment.
+Comments are not part of any rule paragraph. Comments inside rule paragraphs
+(after the header line) are not supported.
+
+## 7. Helper DSL Families
+
+Inside `{ }` code blocks and on fluent chains, `.spec` authoring uses a
+backend-neutral method-like helper DSL. This section catalogs the canonical
+families. For the full behavioral contract per helper, see the
+[Helper Contract Catalog](helper-contract-catalog.md).
+
+### 7.1 Declaration Helpers
+```
+declare(scalar, name)      — declare a scalar working variable
+declare(array, name)       — declare an array working variable
+declare(hash, name)        — declare a hash working variable
+declare(scalar, name=value) — declare with initializer
+assign(name, value)         — reassign a working variable
+```
+
+### 7.2 Scalar Helpers
+```
+scalar(container, key)          — read a scalar entry from an array or hash
+concat(args...)                 — concatenate strings
+coalesce(a, b, ...)             — first defined non-null value
+coalesce_nonempty(a, b, ...)    — first defined non-empty value
+is_defined(expr)                — true if expr is not undef
+is_undefined(expr)              — true if expr is undef
+trim(s)                         — remove leading/trailing whitespace
+lowercase(s)                    — lowercase
+uppercase(s)                    — uppercase
+length(s)                       — string/array length
+matches(s, /pattern/)           — regex match predicate
+starts_with(s, prefix)          — prefix check
+ends_with(s, suffix)            — suffix check
+contains_substr(s, needle)      — substring check
+replace_substr(s, old, new)     — literal string replacement
+rm_prefix(s, prefix)            — remove prefix
+rm_suffix(s, suffix)            — remove suffix
+```
+
+### 7.3 Array Helpers
+```
+array(e1, e2, ...)     — construct an array
+array_copy(arr)        — shallow copy
+array_values(arr)      — compatibility alias for array_copy
+flat_array(arr)        — flatten into list context for insertion
+concat_arrays(a1, a2)  — concatenate arrays
+push(arr, child)        — append child to accumulator
+push(arr, child, index) — append child at index
+push_value(arr, value)  — append value to accumulator
+push_nonempty(arr, val) — append if non-empty
+count(arr)              — number of elements
+first(arr)              — first element
+last(arr)               — last element
+take(arr, n)            — first n elements (default 1)
+take_last(arr, n)       — last n elements (default 1)
+drop_front(arr, n)      — all but first n (default 1; alias: tail)
+drop_back(arr, n)       — all but last n (default 1; alias: drop_last)
+slice(arr, start, n)    — subarray from start, n elements
+sorted(arr)             — sorted ascending
+reversed(arr)           — reversed order
+sorted_keys(hash)       — keys sorted by name, as array
+sorted_values(hash)     — values sorted by key name, as array
+contains(arr, needle)   — array membership test
+index_of(arr, needle)   — first index of needle
+is_empty(arr)           — true if array/hash is empty
+is_nonempty(arr)        — true if array/hash has elements
+join_values(delim, arr) — join array elements with delimiter
+split(s, delim)         — split string into array
+split_each(arr, delim)  — split each element
+trim_each(arr)          — trim each element
+filter_nonempty(arr)    — remove empty elements
+filter_match(arr, /re/) — keep elements matching regex
+uniq(arr)               — remove duplicates
+lowercase_each(arr)     — lowercase each element
+uppercase_each(arr)     — uppercase each element
+print_each(arr)         — debug output each element
+```
+
+### 7.4 Hash Helpers
+```
+hash(k1, v1, k2, v2)    — construct a hash from flat key/value pairs
+flat_hash(h)             — flatten hash into list context
+hash_copy(h)             — shallow copy
+merge_hash(h1, h2)       — merge h2 into h1 (returns new hash)
+set_key(h, key, val)     — set key to value (returns new hash)
+rename_key(h, old, new)  — rename key (returns new hash)
+drop_keys(h, k1, k2...)  — remove keys (returns new hash)
+pick_keys(h, k1, k2...)  — keep only named keys (returns new hash)
+has_key(h, key)          — key presence test
+count_keys(h)            — number of keys
+```
+
+### 7.5 Numeric Helpers
+```
+num_add(a, b)            — addition
+num_sub(a, b)            — subtraction
+num_mul(a, b)            — multiplication
+num_div(a, b)            — division (undef on divide-by-zero)
+num_mod(a, b)            — modulo (undef on divide-by-zero or non-integer)
+num_abs(x)               — absolute value
+num_floor(x)             — floor
+num_ceil(x)              — ceiling
+num_round(x)             — round to nearest integer
+num_min(a, b)            — minimum (also reducer: num_min(arr))
+num_max(a, b)            — maximum (also reducer: num_max(arr))
+num_clamp(x, lo, hi)     — clamp to [lo, hi] range
+num_sum(arr)             — sum of array elements
+num_avg(arr)             — average of array elements
+num_median(arr)          — median of array elements
+num_range(arr)           — max - min of array elements
+```
+
+### 7.6 Control Flow Helpers
+```
+if(cond, then, elseif(cond2, then2), else(default))
+if(cond) { ... } elseif(cond2) { ... } else { ... } endif()
+switch(expr) { case(val) { ... } default { ... } } endswitch()
+case(val) { ... }
+default { ... }
+exit_now(status)         — exit parser immediately
+next()                   — skip to next repetition (consume/recognize without append)
+return(value)            — return value (canonical form)
+return_undef()           — return undef
+return(array(...))       — return array
+```
+
+### 7.7 Capture/Mark Helpers
+```
+capture_slice()                    — text from anonymous start cursor to current position
+capture_slice_len()                — length of capture_slice
+capture_until_cursor_from(name)    — text from named mark to current cursor
+capture_rest_from(name)            — text from named mark to end of input
+capture_between(start, end)        — text between two named marks
+capture_from(name)                 — text from named mark to current position
+capture_take_len_from(name)        — take length from named mark
+start_capture_slice()              — move anonymous capture-start cursor to current pos
+mark_input_start(name)             — mark absolute input-start boundary
+mark_input_end(name)               — mark absolute input-end boundary
+mark_copy(name)                    — copy a named mark
+```
+
+### 7.8 Entry/Match Helpers
+```
+entry_text()          — full text of the current match entry
+entry_group(index)     — capture group by index
+entry_groups()         — all capture groups as flat array
+entry_named(name)      — named capture group
+entry_has(name)        — does named group exist
+entry_map()            — named groups as hash (alias: entry_named_map)
+entry_len()            — length of matched text
+entry_start_pos()      — absolute start position
+entry_end_pos()        — absolute end position
+entry_end_line()       — line number of end position
+entry_end_col()        — column of end position
+match_text()           — full text of local match
+match_group(index)      — local match capture group
+match_groups()          — all local match groups
+match_named(name)       — local named capture
+match_has(name)         — does local named group exist
+match_map()             — local named groups as hash
+match_len()             — length of local match
+match_start_pos()       — local match start position
+match_end_pos()         — local match end position
+```
+
+### 7.9 Input Helpers
+```
+input_text()            — entire current input
+input_slice(start, len) — substring of current input
+input_len()             — length of current input
+input_end_line()        — line number of input end
+input_end_col()         — column of input end
+```
+
+### 7.10 Call Expression
+```
+call(child_rule)         — call a child rule directly from action code
+```
+
+## 8. Authoring Styles
+
+`.spec` files support two equivalent authoring styles:
+
+### 8.1 Structured Block Form
+```
+Top::
+ /pattern/ -> Child {
+ I { declare(array, results) }
+ LE { push_value(array(results), scalar(retv)) }
+ E { return(array_copy(array(results))) }
+ }
+```
+
+### 8.2 Fluent Chain Form
+```
+Top::
+ /pattern/ -> Child .declare(array, results) .push_value(array(results), scalar(retv)) .return(array_copy(array(results)))
+```
+
+Both forms lower to identical ActionIR and produce identical parser behavior.
+The choice is stylistic.
+
+## 9. Attached-Block Control Flow
+
+Within lifecycle blocks, structured control flow uses attached-block syntax:
+
+```
+I {
+ if(matches(scalar(value), /^yes$/)) {
+   assign(scalar(result), "confirmed")
+ } elseif(matches(scalar(value), /^no$/)) {
+   assign(scalar(result), "rejected")
+ } else {
+   assign(scalar(result), "unknown")
+ } endif()
+}
+
+LE {
+ switch(scalar(type)) {
+   case("regex") {
+     push_value(array(re_list), scalar(retv))
+   }
+   case("edge") {
+     push_value(array(edges), scalar(retv))
+   }
+   default {
+     push_value(array(other), scalar(retv))
+   }
+ } endswitch()
+}
+```
+
+Attached-block and inline-composite forms are equivalent for both `if` and `switch`
+families. Zero-arg terminators accept bare-keyword form (`endif`, `endswitch`,
+`else`, `default`, `endcase`) in addition to parenthesized forms.
+
+## 10. Constraints and Validation
+
+A valid `.spec` file must satisfy:
+
+1. At least one top rule (`::`) exists.
+2. Every rule label is unique. Duplicate labels are rejected.
+3. Rule definitions must not appear inside open `{ }` blocks.
+4. Every `{ }` block opened inside a rule paragraph must be closed before end of file.
+5. Every `->` edge target must reference an existing rule.
+6. Every regex cluster must be a compilable regex literal.
+7. Rule mode suffixes must use exact supported spellings (§2.2).
+8. Stray preamble text before the first rule paragraph (after blank/comment lines) is
+   rejected.
+9. Action edges and blind-call edges must not be mixed in a single rule (mixed-edge
+   detection). A rule with both `->` and `=>` edges is invalid.
+
+## 11. Compatibility Surface
+
+The following are **legacy compatibility constructs** recognized for migration
+tracking but not recommended for new `.spec` authoring:
+
+- Raw Perl expressions (bare variable references, ad hoc operators)
+- `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` (retired)
+- `array_values(...)` — use `array_copy(...)`
+- `flatten(...)` — use `flat(...)`
+- `tail(...)` — use `drop_front(...)`
+- `drop_last(...)` — use `drop_back(...)`
+- `capture_slice_here()` — use `start_capture_slice()`
+- `capture_from_rule_start()` — use `capture_slice()`
+- `capture_slice_length()` — use `capture_slice_len()`
+- Bare `return`, bare `next`, bare `exit` — use `return_undef()`, `next()`, `exit_now(1)`
+
+All 20 shipped `.spec` files compile with zero compatibility-surface rules.
+New `.spec` files must maintain this invariant.
+
+## 12. Complete Example
+
+```text
+# A complete .spec file showing all major constructs
+DemoParser::
+ /pattern1/ -> Child {
+ I { declare(array, results) }
+ LE { if(is_defined(scalar(retv))); push_value(array(results), scalar(retv)); endif() }
+ E { return(array("?result:", array_copy(array(results)))) }
+ }
+
+Child::
+ /hello[ \t]+(\w+)/
+ I { declare(scalar, name=entry_group(1)) }
+ E { return(scalar(name)) }
+
+SecondChild:OR+
+ /(?:\w+)/
+ E { return(array("?words:", array_copy(array(SecondChild)))) }
+
+ThirdChild:AND
+ /first/ -> A
+ /second/ -> B
+```
+
+This grammar:
+- `DemoParser::` is a top rule with one action edge to `Child` plus lifecycle blocks.
+- `Child:` is a body rule with a single regex + lifecycle blocks.
+- `SecondChild:OR+` is a repeated-choice rule.
+- `ThirdChild:AND` is an ordered-sequence rule with two edges.

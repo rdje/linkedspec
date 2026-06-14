@@ -56,6 +56,10 @@
 
 - [Owner Tree and Module Boundaries](architecture/owner-tree.md)
 
+# Appendix
+
+- [Formal `.spec` Grammar](appendix/formal-grammar.md)
+
 # Development
 
 - [Local CI and Regression](development/local-ci-and-regression.md)

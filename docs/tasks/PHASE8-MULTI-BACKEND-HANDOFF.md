@@ -56,10 +56,10 @@ canonical test corpus every backend runs against.
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Formal .spec grammar specification — produce a standalone, unambiguous grammar reference that defines valid .spec syntax without depending on the Perl bootstrap parser. Covers rule labels, modes, regexes, lifecycles, edges, code blocks, split markers, fluent chains, and paragraph structure.`
   Acceptance: `Specification exists as a tracked document (mdBook chapter or standalone reference); covers all 37 syntax categories from PHASE7-SELF-HOSTED-SPEC.1 inventory; readable by a non-Perl implementer.`
-  Verification: `pending`
+  Verification: `PASS — docs/linkedspec-book/src/appendix/formal-grammar.md created (12 sections, covers all syntax categories); SUMMARY.md updated`
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.3`
@@ -108,8 +108,8 @@ canonical test corpus every backend runs against.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.2` | `pending` | Formal grammar is the foundation — all other specs reference it. |
-| 3 | `PHASE8-MULTI-BACKEND-HANDOFF.3` | `pending` | HandlerIR spec — fills the known missing card; can proceed in parallel with .2. |
+| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.3` | `pending` | HandlerIR spec — fills the known missing card. |
+| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
 | 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
@@ -138,6 +138,7 @@ canonical test corpus every backend runs against.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.1` | `scripts/check_memory_architecture.sh` PASS; ADR 0006 created + INDEX.md updated | PASS |
+| `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.2` | `scripts/check_memory_architecture.sh` PASS; formal-grammar.md created (12 sections), SUMMARY.md updated | PASS |
 
 ## Commit Log
 
