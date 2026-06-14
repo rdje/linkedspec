@@ -97,6 +97,28 @@ log "running syntax checks"
 perl -c perl/LinkedSpec.pm
 perl -c -Iperl t/phase0_regression.t
 
+# Memory guard — bail if system RAM is critically low before running the heavy suite
+_ram_used_pct() {
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    local page_size free_pages inactive_pages speculative_pages total_ram avail_pages
+    page_size=$(pagesize 2>/dev/null || echo 16384)
+    free_pages=$(vm_stat 2>/dev/null | awk '/Pages free/               {print $NF}' | tr -d '.')
+    inactive_pages=$(vm_stat 2>/dev/null | awk '/Pages inactive/         {print $NF}' | tr -d '.')
+    speculative_pages=$(vm_stat 2>/dev/null | awk '/Pages speculative/    {print $NF}' | tr -d '.')
+    avail_pages=$(( ${free_pages:-0} + ${inactive_pages:-0} + ${speculative_pages:-0} ))
+    total_ram=$(sysctl -n hw.memsize 2>/dev/null || echo 17179869184)
+    echo $(( 100 - (avail_pages * page_size * 100 / total_ram) ))
+  else
+    awk '/MemTotal/{t=$2} /MemAvailable/{a=$2} END{printf "%d", 100-(a*100/t)}' /proc/meminfo 2>/dev/null || echo 0
+  fi
+}
+GUARD_PCT=$(_ram_used_pct)
+DANGER_PCT="${LINKEDSPEC_TEST_DANGER_PCT:-88}"
+if [[ "${GUARD_PCT}" -ge "${DANGER_PCT}" ]]; then
+  fail "RAM ${GUARD_PCT}% used (danger threshold ${DANGER_PCT}%) — refusing to run heavy suite. Free RAM and retry, or set LINKEDSPEC_TEST_DANGER_PCT higher."
+fi
+log "RAM ${GUARD_PCT}% used — within threshold (${DANGER_PCT}%)"
+
 log "running phase0 regression suite"
 prove -v -Iperl t/phase0_regression.t
 
