@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `497ec56` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.7 — mdBook backend handoff chapter"
-- active_work_unit: PHASE8-MULTI-BACKEND-HANDOFF  →  frontier leaf: PHASE8-MULTI-BACKEND-HANDOFF.8 (Finalization)
-- next_action: PNT — implement PHASE8-MULTI-BACKEND-HANDOFF.8 (Finalization — close tree).
+- latest_commit: `pending` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.8 — Finalization: close tree"
+- active_work_unit: none — PHASE8-MULTI-BACKEND-HANDOFF tree completed and moved to Completed.
+- next_action: PNT idle — all roadmap priorities addressed. Overall roadmap done. No active task trees.
 - in_flight_uncommitted: none
 - blockers: none

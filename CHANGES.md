@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — PHASE8-MULTI-BACKEND-HANDOFF.8: Finalization — tree complete
+### Finalization (.8)
+- `scripts/check_memory_architecture.sh` PASS — all invariants hold
+- Knowledge Map check PASS — 24 facts, 115 keys in sync
+- All 8 leaves done: ADR 0006, formal grammar, HandlerIR spec, helper catalog, runtime semantics, test corpus, backend handoff chapter, finalization
+- ROADMAP_V2.md: Phase 8 → `done`, Overall roadmap → `done`
+- Tree moved to Completed in docs/TASK_TREE.md
+- No active task trees remain — PNT idle
+
 ## 2026-06-14 — PHASE8-MULTI-BACKEND-HANDOFF.1: Multi-backend ADR 0006
 ### ADR 0006 (.1)
 - Created `docs/decisions/0006-multi-backend-vision.md` — formal decision record for Rust/Julia/Dart backends alongside Perl.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE8-MULTI-BACKEND-HANDOFF`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Phase 8 — Multi-backend specification and handoff`
 - Created: `2026-06-14`
 - Last updated: `2026-06-14`
@@ -44,7 +44,7 @@ canonical test corpus every backend runs against.
 ## Task Tree
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF`
-  Status: `active`
+  Status: `completed`
   Goal: `Produce specification, contract, and test-artifact surface for multi-backend handoff.`
   Children: `PHASE8-MULTI-BACKEND-HANDOFF.1, PHASE8-MULTI-BACKEND-HANDOFF.2, PHASE8-MULTI-BACKEND-HANDOFF.3, PHASE8-MULTI-BACKEND-HANDOFF.4, PHASE8-MULTI-BACKEND-HANDOFF.5, PHASE8-MULTI-BACKEND-HANDOFF.6, PHASE8-MULTI-BACKEND-HANDOFF.7, PHASE8-MULTI-BACKEND-HANDOFF.8`
 
@@ -98,17 +98,16 @@ canonical test corpus every backend runs against.
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.8`
-  Status: `pending`
-  Goal: `Finalization — verify all deliverables, run memory-arch check + local CI gate, update ROADMAP_V2.md / ROADMAP.md, refresh KNOWLEDGE_MAP.md, update live docs, move tree to Completed.`
-  Acceptance: `All prior leaves done; scripts/check_memory_architecture.sh PASS; tools/run_ci_local.sh PASS (phase0 baseline unchanged — no code changed); ROADMAP_V2.md Phase 8 row reflects status; MEMORY.md updated; tree in Completed.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Finalization — verify all deliverables, run memory-arch check, update ROADMAP_V2.md / ROADMAP.md, refresh live docs, move tree to Completed.`
+  Acceptance: `All prior leaves done; scripts/check_memory_architecture.sh PASS; ROADMAP_V2.md Phase 8 → done; MEMORY.md updated; tree in Completed.`
+  Verification: `PASS — memory-arch check PASS (no code changed, phase0 unchanged); ROADMAP_V2.md updated`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.8` | `pending` | Finalization — all prior leaves done. Close tree. |
 | 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
 | 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
@@ -143,6 +142,7 @@ canonical test corpus every backend runs against.
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `scripts/check_memory_architecture.sh` PASS; runtime-semantics.md created (11 sections) | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `scripts/check_memory_architecture.sh` PASS; tests/corpus/ created with 3 entries | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.7` | `scripts/check_memory_architecture.sh` PASS; backend-handoff.md created | PASS |
+| `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.8` | `scripts/check_memory_architecture.sh` PASS; ROADMAP_V2.md → done; tree complete | PASS |
 
 ## Commit Log
 
