@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — PHASE8-MULTI-BACKEND-HANDOFF.0: Phase 8 task tree creation
+### Tree creation (.0)
+- Created `docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md` with 8 leaves covering: ADR 0006, formal .spec grammar, HandlerIR spec, helper contract catalog, runtime semantics, language-neutral test corpus, mdBook handoff chapter, and finalization.
+- Registered in `docs/TASK_TREE.md` Active Task Trees table.
+- Added Phase 8 row to `ROADMAP_V2.md` tracker (`in_progress`); Overall roadmap → `in_progress`.
+- Updated `MEMORY.md` resume pointer to PHASE8-MULTI-BACKEND-HANDOFF as active_work_unit.
+- Specification-only tree — zero code changes. Every deliverable is a document or test artifact.
+
 ## 2026-06-14 — PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1: Fix stale "proposed" → "retired" references
 ### Stale reference cleanup (.1)
 - Fixed 10 stale references across 6 files that still described PLUGIN-ACTION-MIGRATION as "proposed" when the tree is actually `retired` (all 5 leaves done; 17 dead files deleted; 19 kept as legacy corpus).

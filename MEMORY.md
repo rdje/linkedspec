@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `c2f3294` — "Docs: PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1 — fix 10 stale proposed → retired references"
-- active_work_unit: none — PLUGIN-ACTION-MIGRATION-STALE-REFERENCES tree completed and moved to Completed.
-- next_action: PNT idle — all roadmap priorities addressed. Overall roadmap done. No active task trees.
+- latest_commit: `pending` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.0 — create Phase 8 task tree"
+- active_work_unit: PHASE8-MULTI-BACKEND-HANDOFF  →  frontier leaf: PHASE8-MULTI-BACKEND-HANDOFF.1 (Multi-backend ADR 0006)
+- next_action: PNT — implement PHASE8-MULTI-BACKEND-HANDOFF.1 (Multi-backend ADR 0006).
 - in_flight_uncommitted: none
 - blockers: none

@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `PHASE8-MULTI-BACKEND-HANDOFF` | `active` | `Phase 8 — Multi-backend specification and handoff` | `.1` Multi-backend ADR 0006 | [docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md](docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md) |
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not
