@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `a628f4f` — "COMPAT-ALIAS-RETIREMENT-V2.1 — Audit short-term aliases: implementation already clean + doc cleanup"
+- latest_commit: `ead6bb2` — "COMPAT-ALIAS-RETIREMENT-V2.1 — Audit short-term aliases: implementation already clean + doc cleanup"
 - active_work_unit: `COMPAT-ALIAS-RETIREMENT-V2`  →  frontier leaf: `.1` (pending)
 - next_action: Implement COMPAT-ALIAS-RETIREMENT-V2.2 — retire medium-term legacy return helpers (return_a, return_ma, return_m, return_imatch/return_im).
 - in_flight_uncommitted: none
