@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — PHASE9-RUST-VARIANT.10: Finalization — tree complete
+### Finalization (.10)
+- Cargo workspace at rust/: linkedspec-core + linkedspec-runtime
+- 28 unit tests passing, full pipeline wired (parse → validate → compile → execute)
+- All 17 leaves done: bootstrap, parser, compiler, runtime, helpers, integration, docs, finalization
+- ROADMAP_V2.md: Phase 9 → `done`, Overall roadmap → `done`
+- Memory arch check PASS. Tree moved to Completed. PNT idle.
+
 ## 2026-06-14 — PHASE8-MULTI-BACKEND-HANDOFF.8: Finalization — tree complete
 ### Finalization (.8)
 - `scripts/check_memory_architecture.sh` PASS — all invariants hold

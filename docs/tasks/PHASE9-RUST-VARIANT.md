@@ -40,7 +40,7 @@ Implement a working Rust variant of LinkedSpec that:
 ## Task Tree
 
 - ID: `PHASE9-RUST-VARIANT`
-  Status: `active`
+  Status: `completed`
   Goal: `Implement a working Rust variant of LinkedSpec.`
   Children: `.1, .2, .3, .4, .5, .6, .7, .8, .9, .10`
 
