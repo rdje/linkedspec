@@ -12,8 +12,16 @@ Detailed technical history of changes prepared for commit.
 - ROADMAP_V2.md: Method-like track `mostly_done` → `done`; removed stale remaining-open items; added references to COMPAT-ALIAS-RETIREMENT-V2, COMPAT-ALIAS-TEST-CLEANUP, FLUENT-BLOCK-EQUIVALENCE
 - ROADMAP_V2.md: Overall roadmap `in_progress` → `mostly_done`; updated remaining focus text
 - ROADMAP.md: Matching updates applied to tracker rows and line-964 status text
+### mdBook audit (.4)
+- 7 stale claims identified and fixed across 5 chapters:
+  - project-status.md: Phase 0 added, Phases 6+7 moved to completed, backbone items all done
+  - value-container-flow-helper-reference.md: 19→20 shipped specs
+  - shipped-specs-and-corpora.md: spec.spec added to table
+  - plugin-registry.md + owner-tree.md: 36→19 .plg files (accurate post-modernization count)
+### Finalization (.5)
+- Tree complete; moved from Active to Completed in TASK_TREE.md
 ### Task tree
-- ROADMAP-V2-TRACKER-SYNC created (5 leaves); .1 and .2 completed
+- ROADMAP-V2-TRACKER-SYNC created (5 leaves); all 5 completed, tree closed
 
 ## 2026-06-14 — COMPAT-ALIAS-RETIREMENT-V2.3: Finalization — tree close-out
 ### Test cleanup

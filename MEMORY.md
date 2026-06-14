@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `60c3b9c` — "Docs: ROADMAP-V2-TRACKER-SYNC.2 — update ROADMAP_V2.md and ROADMAP.md trackers"
-- active_work_unit: `ROADMAP-V2-TRACKER-SYNC`  →  frontier leaf: `ROADMAP-V2-TRACKER-SYNC.3` (in_progress)
-- next_action: PNT on ROADMAP-V2-TRACKER-SYNC.3 — update live docs (CHANGES, DEVELOPMENT_NOTES, LIVE_ACHIEVEMENT_STATUS done; MEMORY.md in progress)
+- latest_commit: `b564ca0` — "Docs: ROADMAP-V2-TRACKER-SYNC.4 — audit and fix mdBook for codebase drift"
+- active_work_unit: none — ROADMAP-V2-TRACKER-SYNC tree completed and moved to Completed.
+- next_action: PNT idle — roadmap, codebase, and mdBook now synchronized. Assess next roadmap priority.
 - in_flight_uncommitted: none
 - blockers: none

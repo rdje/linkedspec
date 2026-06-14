@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `ROADMAP-V2-TRACKER-SYNC`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Overall roadmap — documentation and tracker maintenance`
 - Created: `2026-06-14`
 - Last updated: `2026-06-14`
@@ -35,7 +35,7 @@ so the next session resumes from an accurate state.
 ## Task Tree
 
 - ID: `ROADMAP-V2-TRACKER-SYNC`
-  Status: `active`
+  Status: `completed`
   Goal: `Synchronize ROADMAP_V2.md tracker with completed task trees, audit mdBook, update live docs.`
   Children: `ROADMAP-V2-TRACKER-SYNC.1`, `ROADMAP-V2-TRACKER-SYNC.2`, `ROADMAP-V2-TRACKER-SYNC.3`, `ROADMAP-V2-TRACKER-SYNC.4`, `ROADMAP-V2-TRACKER-SYNC.5`
 
@@ -95,8 +95,11 @@ so the next session resumes from an accurate state.
   Commit: `pending`
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.5`
-  Status: `pending`
+  Status: `done`
   Goal: `Finalization: run full CI gate, verify all docs are consistent, close out the tree.`
+  Acceptance: `Local CI gate passes. Tree moved to Completed in TASK_TREE.md. MEMORY.md updated.`
+  Verification: `Memory-arch: PASS. KM check: PASS. Syntax checks: PASS. Smoke test: 3/3 specs compile at zero compat. All 20 specs verified zero compat earlier. 4 live docs updated. 5 mdBook chapters fixed (7 claims). ROADMAP_V2.md + ROADMAP.md trackers synced. Tree moved to Completed.`
+  Commit: `pending`
   Acceptance: `Local CI gate passes. Tree moved to Completed in TASK_TREE.md. MEMORY.md updated.`
   Verification: `pending`
   Commit: `pending`
@@ -105,7 +108,7 @@ so the next session resumes from an accurate state.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `ROADMAP-V2-TRACKER-SYNC.5` | `pending` | Finalization: full CI gate, verify consistency, close tree. |
+| — | — | — | Tree complete: all 5 leaves done. |
 
 ## Decisions
 
@@ -123,13 +126,22 @@ so the next session resumes from an accurate state.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-06-14` | `ROADMAP-V2-TRACKER-SYNC.1` | `pending` | `pending` |
+| `2026-06-14` | `ROADMAP-V2-TRACKER-SYNC.1` | 20 specs compile, compat=0 verified, ROADMAP_V2.md staleness audit | 2 stale rows identified; 3 matching in ROADMAP.md |
+| `2026-06-14` | `ROADMAP-V2-TRACKER-SYNC.2` | ROADMAP_V2.md + ROADMAP.md tracker updates applied | Method-like track done, overall mostly_done, stale refs removed |
+| `2026-06-14` | `ROADMAP-V2-TRACKER-SYNC.3` | 4 live docs updated | All docs synced, MEMORY.md at 24 lines |
+| `2026-06-14` | `ROADMAP-V2-TRACKER-SYNC.4` | mdBook 33-chapter audit | 7 stale claims fixed across 5 chapters |
+| `2026-06-14` | `ROADMAP-V2-TRACKER-SYNC.5` | Memory-arch, KM, syntax, smoke test | All pass; tree closed |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `ROADMAP-V2-TRACKER-SYNC.1` | `pending` | `pending` |
+| `ROADMAP-V2-TRACKER-SYNC.0` | `977b5f8` — create task tree | Tree created + registered in Active table |
+| `ROADMAP-V2-TRACKER-SYNC.1` | `23791cb` — audit current empirical state vs tracker | 20 specs verified, staleness documented |
+| `ROADMAP-V2-TRACKER-SYNC.2` | `60c3b9c` — update ROADMAP_V2.md and ROADMAP.md trackers | 2 trackers synced |
+| `ROADMAP-V2-TRACKER-SYNC.3` | `132a721` — update live docs | 4 live docs updated |
+| `ROADMAP-V2-TRACKER-SYNC.4` | `b564ca0` — audit and fix mdBook | 7 claims fixed across 5 chapters |
+| `ROADMAP-V2-TRACKER-SYNC.5` | `pending` — finalization | Tree close-out |
 
 ## Changelog
 
