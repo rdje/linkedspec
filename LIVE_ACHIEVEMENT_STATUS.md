@@ -7,7 +7,8 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-06-14: DOC-BOOK-SYNC.2 — All 19 gaps remediated across 17 files. Active PNT frontier: DOC-BOOK-SYNC.3 (finalization).
+- 2026-06-14: DOC-BOOK-SYNC.3 — Finalization: tree COMPLETE (4 leaves). 19 gaps remediated across 17 files. ROADMAP_V2.md overall → done. No active task trees remain — PNT idle.
+- 2026-06-14: DOC-BOOK-SYNC.2 — All 19 gaps remediated across 17 files.
 - 2026-06-14: DOC-BOOK-SYNC.1 — Full mdBook + live docs audit complete. 19 gaps found (6 critical, 8 medium, 5 low) across 13 files.
 - 2026-06-14: DOC-BOOK-SYNC.0 — Task tree creation for documentation/book sync. New active tree with 4 leaves.
 - 2026-06-14: Completed LIFECYCLE-FAMILY-AUDIT.4 — Finalization: tree COMPLETE (4 leaves). All 7 lifecycle markers verified. No gaps found.

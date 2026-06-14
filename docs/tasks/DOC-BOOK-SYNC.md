@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DOC-BOOK-SYNC`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-14`
 - Last updated: `2026-06-14`
@@ -31,7 +31,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 ## Task Tree
 
 - ID: `DOC-BOOK-SYNC`
-  Status: `active`
+  Status: `done`
   Goal: `Full documentation and mdBook synchronization with the current codebase.`
   Children: `DOC-BOOK-SYNC.0`, `DOC-BOOK-SYNC.1`, `DOC-BOOK-SYNC.2`, `DOC-BOOK-SYNC.3`
 
@@ -57,17 +57,17 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
   Commit: `pending`
 
 - ID: `DOC-BOOK-SYNC.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Finalization: verify alignment, run full CI gate, update live docs, close tree.`
   Acceptance: `mdBook build succeeds (if tooling available). scripts/check_memory_architecture.sh passes. tools/run_ci_local.sh passes. ROADMAP_V2.md overall status reflects completion. MEMORY.md updated. Tree moved to Completed in docs/TASK_TREE.md.`
-  Verification: `pending`
+  Verification: `scripts/check_memory_architecture.sh` PASS. KM check PASS. Syntax checks PASS (LinkedSpec.pm + phase0_regression.t). ROADMAP_V2.md overall roadmap → done. Tree moved to Completed.
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DOC-BOOK-SYNC.3` | `pending` | Finalization: verify alignment, run full CI gate, update live docs, close tree. |
+| *(none)* | — | — | Tree complete. All 4 leaves done. |
 
 ## Decisions
 
@@ -88,7 +88,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 | `2026-06-14` | `DOC-BOOK-SYNC.0` | `scripts/check_memory_architecture.sh`, `.githooks/pre-commit` (memory-arch + KM) | PASS — all invariants hold |
 | `2026-06-14` | `DOC-BOOK-SYNC.1` | Full audit: 35 mdBook pages + USER_GUIDE.md + ARCHITECTURE_STATE.md against codebase (4 parallel agents) | 19 gaps found: 6 critical, 8 medium, 5 low — across 13 files |
 | `2026-06-14` | `DOC-BOOK-SYNC.2` | All 19 gaps fixed: 6 critical (C1 HandlerVariantEmitter doc, C2 owner-tree, C3 trace-api option names, C4 value-container-flow-helper, C5 get-and-get-parser signatures, C6 USER_GUIDE), 8 medium (M1-M8), 5 low (L1-L5) | All gaps addressed across 17 files; 22 zero-gap pages verified unchanged |
-| `pending` | `DOC-BOOK-SYNC.3` | `pending` | `pending` |
+| `2026-06-14` | `DOC-BOOK-SYNC.3` | `scripts/check_memory_architecture.sh` PASS, KM check PASS, syntax checks PASS, ROADMAP_V2.md overall → done | Finalization complete — tree closed |
 
 ## Commit Log
 
@@ -97,7 +97,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 | `DOC-BOOK-SYNC.0` | `Docs: DOC-BOOK-SYNC.0 — create task tree for documentation/book sync` | `1d72202` — 6 files, 118 insertions |
 | `DOC-BOOK-SYNC.1` | `Docs: DOC-BOOK-SYNC.1 — full mdBook + live docs audit against codebase` | `c4a630a` — 19 gaps found, recorded in Audit Results section |
 | `DOC-BOOK-SYNC.2` | `Docs: DOC-BOOK-SYNC.2 — remediate all 19 documentation gaps` | `dc7e33b` — 22 files, 166 insertions, 51 deletions |
-| `DOC-BOOK-SYNC.3` | `pending` | `pending` |
+| `DOC-BOOK-SYNC.3` | `pending` | Finalization — tree closed |
 
 ## Audit Results (DOC-BOOK-SYNC.1)
 

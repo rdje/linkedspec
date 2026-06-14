@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — DOC-BOOK-SYNC.3: Finalization — tree complete
+### Finalization (.3)
+- `scripts/check_memory_architecture.sh` PASS — all invariants hold
+- Knowledge Map check PASS — 23 facts, 108 keys in sync
+- Syntax checks PASS — LinkedSpec.pm + phase0_regression.t
+- ROADMAP_V2.md overall roadmap: `mostly_done` → `done` (lifecycle-family audit + book sync both complete)
+- Tree moved to Completed in docs/TASK_TREE.md
+- No active task trees remain — PNT idle
+
 ## 2026-06-14 — DOC-BOOK-SYNC.2: Remediation of 19 documentation gaps
 ### Remediation (.2)
 - Fixed all 19 gaps across 17 files (6 critical, 8 medium, 5 low)
