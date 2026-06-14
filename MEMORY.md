@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.5 — Runtime semantics specification"
+- latest_commit: `f47919f` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.5 — Runtime semantics specification"
 - active_work_unit: PHASE8-MULTI-BACKEND-HANDOFF  →  frontier leaf: PHASE8-MULTI-BACKEND-HANDOFF.6 (Language-neutral test corpus)
 - next_action: PNT — implement PHASE8-MULTI-BACKEND-HANDOFF.6 (Language-neutral test corpus).
 - in_flight_uncommitted: none
