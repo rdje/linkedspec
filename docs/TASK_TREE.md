@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `ROADMAP-V2-TRACKER-SYNC` | `active` | `Overall roadmap — documentation and tracker maintenance` | `.1` audit current empirical state | [docs/tasks/ROADMAP-V2-TRACKER-SYNC.md](docs/tasks/ROADMAP-V2-TRACKER-SYNC.md) |
 
 ## Proposed Task Trees
 
