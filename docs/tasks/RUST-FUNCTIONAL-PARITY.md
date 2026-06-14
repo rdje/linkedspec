@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant implementation (functional parity)`
 - Created: `2026-06-15`
-- Last updated: `2026-06-15` (.2.3 evaluation complete — rgx deferred; frontier → .3.1)
+- Last updated: `2026-06-15` (.2.4 added — rgx build bug report; blocked pending upstream)
 - Owner: repo-local workflow
 
 ## Goal
@@ -84,7 +84,7 @@ by a small interpreter. No Rust source generation, no eval.
 - ID: `RUST-FUNCTIONAL-PARITY.2`
   Status: `active`
   Goal: `Full .spec validation matching Perl's validation surface.`
-  Children: `.2.1, .2.2, .2.3`
+  Children: `.2.1, .2.2, .2.3, .2.4`
 
 - ID: `RUST-FUNCTIONAL-PARITY.2.1`
   Status: `done`
@@ -106,6 +106,13 @@ by a small interpreter. No Rust source generation, no eval.
   Acceptance: `rgx compiles in workspace. find_first_at + start/end API verified. At minimum, simple_grammar test passes with rgx backend. Decision recorded: adopt, defer, or reject.`
   Verification: `PASS (evaluation) — rgx API audit confirms all required primitives: Regex::compile(), find_first_at(text, start), find_first(text), MatchResult.start/.end fields, .groups: Vec<Option<(usize, usize)>>, capture_names(). API mapping from regex→rgx is mechanical and well-defined. Submodule added at b771c7b. PCRE2-level features supported (look-around, backreferences, subroutine calls). Cold-clone bootstrap requires make -C subs/pgen/rust regex_parser_bootstrap (per rgx README). Decision: DEFER adoption until rgx is published to crates.io OR the submodule bootstrap has been run and workspace integration confirmed. Migration path documented.`
   Commit: `pending (this update)`
+
+- ID: `RUST-FUNCTIONAL-PARITY.2.4`
+  Status: `blocked`
+  Goal: `File precise rgx build bug report upstream. rgx-core (submodule at b771c7b) fails to compile in two paths: (A) default build — pgen crate error "couldn't read subs/pgen/rust/src/../../generated/return_annotation_parser.rs" (cold-clone: generated files missing; bootstrap needed). (B) --no-default-features build — 35 errors: feature-gate bug (CharRange imported behind cfg(pgen-parser) but used unconditionally in parsing.rs:7293), non-exhaustive match on ast::Regex with 12 missing variants (parser.rs:92 — RelativeBackreference, ReturnedCaptureSubroutine, Callout, +9), Rust edition _ expression issues (parser.rs:53,137,158,182,460,556; c2/simd_scan.rs:83,104; vm.rs:4114). Rustc 1.95.0, edition = 2021 (workspace). Blocked: waiting for upstream rgx guidance.`
+  Acceptance: `Bug report filed. Upstream response received. Path forward for evaluation (.2.3) unblocked.`
+  Verification: `pending`
+  Commit: `pending`
 
 ### Container: Expression Parser (.3)
 
@@ -266,7 +273,7 @@ by a small interpreter. No Rust source generation, no eval.
 
 ## Blockers
 
-- None.
+- **`.2.4`** — rgx build failure: cold-clone `pgen` generated files missing (default build); 35 errors on `--no-default-features` path (feature-gate bug + stale parser match). **Unblock condition:** upstream rgx guidance received on build/bootstrap procedure, OR rgx published to crates.io with `cargo build` working out of the box. **Next task:** `.3.1` (expression parser) while waiting.
 
 ## Verification Log
 
@@ -277,6 +284,7 @@ by a small interpreter. No Rust source generation, no eval.
 | `2026-06-15` | `.2.1` | 6 validation checks (top rule, duplicates, mixed edges, balanced braces, edge targets, regex syntax), 19/20 specs pass, 5 negative tests pass | PASS |
 | `2026-06-15` | `.2.2` | All 20 shipped specs parse + validate + compile, cargo test 51/51 PASS | PASS |
 | `2026-06-15` | `.2.3` | rgx API audit: all required primitives confirmed (compile, find_first_at, find_first, MatchResult fields, groups, capture_names). API migration mapping documented. Decision: DEFER adoption. | PASS (evaluation) |
+| `2026-06-15` | `.2.4` | Bug report filed — rgx-core build fails on cold clone (2 paths documented: default + no-default-features). 35 errors on no-default-features path traced to 3 root causes. | pending upstream |
 
 ## Commit Log
 
@@ -291,3 +299,4 @@ by a small interpreter. No Rust source generation, no eval.
 - `2026-06-15`: Created task tree. 10 containers, 15 leaves. Rust-native architecture, no Perl mimicry.
 - `2026-06-15`: Frontier sync — .1.1, .1.2, .2.1, .2.2 verified done (commit `662b642`). Frontier updated to start at .2.3. Commit log and verification log backfilled.
 - `2026-06-15`: `.2.3` evaluation complete — rgx API audit PASS (all required primitives confirmed via book + source). Decision: DEFER adoption. rgx not on crates.io; cold-clone bootstrap required. Migration path documented. Leaf `.2.3` → done.
+- `2026-06-15`: `.2.4` added — rgx build bug report. Two build paths fail: (A) default — pgen generated files missing (cold-clone bootstrap needed), (B) `--no-default-features` — 35 errors (CharRange feature-gate bug, stale non-PGEN parser match). Leaf blocked pending upstream guidance.

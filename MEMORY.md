@@ -20,5 +20,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - latest_commit: `556105a` — "Eval: RUST-FUNCTIONAL-PARITY.2.3 — rgx evaluation: API audit PASS, decision DEFER"
 - active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.3.1` (expr parser), `.4.1` (compiler), `.5.1` (regex engine), `.5.2` (lifecycle), `.6.1` (interpreter), `.7.1–.7.3` (helpers), `.8.1–.8.2` (integration), `.9` (docs), `.10` (final)
 - next_action: PNT from `.3.1` — implement recursive-descent expression parser for the helper DSL
-- in_flight_uncommitted: none
-- blockers: none
+- in_flight_uncommitted: `.2.4` bug report task-tree-owned (rgx build failures documented); pending commit
+- blockers: `.2.4` blocked — waiting for upstream rgx guidance on cold-clone build/bootstrap
