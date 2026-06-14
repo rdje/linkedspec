@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `b564ca0` — "Docs: ROADMAP-V2-TRACKER-SYNC.4 — audit and fix mdBook for codebase drift"
+- latest_commit: `4212131` — "Docs: ROADMAP-V2-TRACKER-SYNC.5 — Finalization: close tree"
 - active_work_unit: none — ROADMAP-V2-TRACKER-SYNC tree completed and moved to Completed.
-- next_action: PNT idle — roadmap, codebase, and mdBook now synchronized. Assess next roadmap priority.
+- next_action: PNT idle — roadmap, codebase, and mdBook now synchronized. Assess next roadmap priority (lifecycle-family audit).
 - in_flight_uncommitted: none
 - blockers: none
