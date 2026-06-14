@@ -835,7 +835,7 @@ print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents/Core.pm"}) ? "__CANONICAL
 my $diag = LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(
     'Top',
     'return(1)',
-    [{ raw => 'return(1)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
+    [{ raw => 'return(1)', args => { label => 'Top' }, contract_id => 'return_general', ir_node => 'RETURN' }],
     {
         trim_action_ir_value => sub {
             my ($value) = @_;
@@ -849,7 +849,7 @@ my $diag = LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_eve
 );
 print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";
 print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents/Core.pm"}) ? "__CANONICAL_EVENTS_CORE_AFTER_BUILD__\n" : "__CANONICAL_EVENTS_CORE_STILL_UNLOADED__\n";
-print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A" ? "__CANONICAL_EVENTS_NODES_OK__\n" : "__CANONICAL_EVENTS_NODES_BAD__\n";
+print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN" ? "__CANONICAL_EVENTS_NODES_OK__\n" : "__CANONICAL_EVENTS_NODES_BAD__\n";
 PERL
 
     is($exit_code, 0, 'ActionIR::CanonicalEvents require/build subprocess exits cleanly') or diag($err || $out);
@@ -2090,7 +2090,6 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
         $captured_pkg = $pkg;
         return {
             lower_return_general_statement => sub { return "contract_for_$pkg" },
-            lower_return_imatch_statement  => sub { return 'return_imatch_ok' },
             lower_assign_method_statement  => sub { return 'assign_method_ok' },
             lower_push_value_statement     => sub { return 'push_value_ok' },
             lower_push_nonempty_statement  => sub { return 'push_nonempty_ok' },
@@ -2108,7 +2107,6 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
             lower_say_statement            => sub { return 'say_ok' },
             lower_print_statement          => sub { return 'print_ok' },
             lower_return_undef_statement   => sub { return 'return_undef_ok' },
-            lower_return_array_statement   => sub { return 'return_array_ok' },
             lower_declare_method_statement => sub { return 'declare_method_ok' },
         };
     };
@@ -2530,7 +2528,6 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_split_action_ir_statements = sub { return ['split_ok'] };
     local *Synthetic::ActionIROwner::_scan_contract_ir_events = sub { return [{ kind => 'CALL' }] };
     local *Synthetic::ActionIROwner::_lower_return_general_statement = sub { return 'return_general_ok' };
-    local *Synthetic::ActionIROwner::_lower_return_imatch_statement = sub { return 'return_imatch_ok' };
     local *Synthetic::ActionIROwner::_lower_assign_method_statement = sub { return 'assign_method_ok' };
     local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
     local *Synthetic::ActionIROwner::_lower_push_nonempty_statement = sub { return 'push_nonempty_ok' };
@@ -2549,7 +2546,6 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_print_statement = sub { return 'print_ok' };
     local *Synthetic::ActionIROwner::_lower_print_each_statement = sub { return 'print_each_ok' };
     local *Synthetic::ActionIROwner::_lower_return_undef_statement = sub { return 'return_undef_ok' };
-    local *Synthetic::ActionIROwner::_lower_return_array_statement = sub { return 'return_array_ok' };
     local *Synthetic::ActionIROwner::_lower_declare_method_statement = sub { return 'declare_method_ok' };
     local *Synthetic::ActionIROwner::_trim_action_ir_value = sub { return 'trim_ok' };
     local *Synthetic::ActionIROwner::_lower_flow_composite_expr = sub { return 'flow_expr_ok' };
@@ -10849,7 +10845,7 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, 'Malformed rule label syntax', 'malformed first-rule label preserves the specific validator summary');
     like($runtime_ctx->{last_error}{detail}, qr/DSL Error at line 1:/, 'malformed first-rule label preserves the formatted validator detail header');
     like($runtime_ctx->{last_error}{detail}, qr/Malformed rule label syntax/, 'malformed first-rule label preserves the specific validator detail');
-    like($runtime_ctx->{last_error}{detail}, qr/Line: Broken:ORX \/a\/ -> Broken \{ return_a\(Broken\) \}/, 'malformed first-rule label preserves the offending line text');
+    like($runtime_ctx->{last_error}{detail}, qr/Line: Broken:ORX \/a\/ -> Broken \{ return\(1\) \}/, 'malformed first-rule label preserves the offending line text');
     is($runtime_ctx->{last_error}{rule_label}, 'Broken', 'malformed first-rule label preserves the parsed rule label when known');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Broken', 'malformed first-rule label preserves the label-only generated-handler source identity');
     like($runtime_ctx->{last_error}{detail}, qr/Suggestion: Use a supported rule label like 'RuleName:'/, 'malformed first-rule label preserves targeted validator guidance');
@@ -14990,7 +14986,7 @@ subtest 'emit_context_avoids_deps_canonical_event_dep_builder' => sub {
         $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events(
             'Top',
             'return(1)',
-            [{ raw => 'return(1)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
+            [{ raw => 'return(1)', args => { label => 'Top' }, contract_id => 'return_general', ir_node => 'RETURN' }],
         );
         1;
     };
@@ -15239,7 +15235,7 @@ subtest 'emit_context_require_avoids_canonical_events_load_until_canonical_build
       . 'my $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events("Top", "return(1)", [{ raw => "return(1)", args => { label => "Top" }, contract_id => "return_a", ir_node => "RETURN" }]);'
       . 'print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_AFTER_BUILD__\n" : "__CANONICAL_EVENTS_STILL_UNLOADED__\n";'
-      . 'print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A" ? "__CANONICAL_EVENTS_ARGS_OK__\n" : "__CANONICAL_EVENTS_ARGS_BAD__\n";'
+      . 'print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN" ? "__CANONICAL_EVENTS_ARGS_OK__\n" : "__CANONICAL_EVENTS_ARGS_BAD__\n";'
     );
 
     is($exit_code, 0, 'EmitContext require/canonical-build subprocess exits cleanly') or diag($err || $out);
@@ -15358,7 +15354,7 @@ print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELI
 my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics("Top", "return(1)");
 print defined($rewritten) && ref($diag) eq "HASH" ? "__REWRITE_PIPELINE_RESULT_OK__\n" : "__REWRITE_PIPELINE_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_AFTER_HELPER__\n" : "__REWRITE_PIPELINE_STILL_UNLOADED__\n";
-if (defined($rewritten) && $rewritten eq q{return ['?Top:', \@Top]} && ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A") {
+if (defined($rewritten) && $rewritten eq q{return ['?Top:', \@Top]} && ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN") {
     print "__REWRITE_PIPELINE_PAYLOAD_OK__\n";
 } else {
     print "__REWRITE_PIPELINE_PAYLOAD_BAD__\n";
@@ -15594,7 +15590,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -16108,13 +16104,8 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
 
     is(
         LinkedSpec::call_spec_handler_subst($label, 'return(1)'),
-        q{return ['?Top:', ( $x), \@Top]},
-        'return_a(label,arg) helper rewrite preserved'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst($label, 'return_ma(Top)'),
-        q{return ['?Top:', @IMATCH_LIST, \@Top]},
-        'return_ma(label) helper rewrite preserved'
+        'return 1',
+        'return(payload) helper rewrite preserved'
     );
     like(
         LinkedSpec::call_spec_handler_subst($label, 'capture_if(Top)'),
@@ -18259,14 +18250,9 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
     plan tests => 80;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
-        'return ["group_open", $IMATCH]',
-        'return_imatch helper lowers to tagged IMATCH return payload'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return_im(group_open)'),
-        'return ["group_open", $IMATCH]',
-        'return_im alias lowers to tagged IMATCH return payload'
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("group_open", a(IMATCH)))'),
+        'return ["group_open", @IMATCH]',
+        'return(array(...)) canonical helper preserves tagged return payload'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'assign(Top, scalar(c), CAPTURE)'),
@@ -18639,13 +18625,13 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'substr helper lowers slash-pattern regex substitution'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return_array(Top, semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", array(scalar(IMATCH_LIST, 0), scalar(c))))'),
         'return ["semantic_annotation", [$IMATCH_LIST[0], $c]]',
-        'return_array helper lowers scalar()/array() constructor payloads'
+        'return(array(...)) canonical helper lowers scalar()/array() constructor payloads'
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.assign(scalar(c), CAPTURE).substr(scalar(c), "\\s*$", "", o).return_array(semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))
+Top:: I.assign(scalar(c), CAPTURE).substr(scalar(c), "\\s*$", "", o).return(array("semantic_annotation", array(scalar(IMATCH_LIST, 0), scalar(c))))
  /a/ -> Top { return(1) }
 SPEC
 

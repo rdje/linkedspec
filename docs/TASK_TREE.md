@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `COMPAT-ALIAS-TEST-CLEANUP` | `active` | `Overall roadmap — method-like DSL migration track (near-term priority 2)` | `.1` stale scanner contract test cleanup | [docs/tasks/COMPAT-ALIAS-TEST-CLEANUP.md](docs/tasks/COMPAT-ALIAS-TEST-CLEANUP.md) |
 
 ## Proposed Task Trees
 

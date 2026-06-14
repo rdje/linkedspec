@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `21c2a8d` — "COMPAT-ALIAS-RETIREMENT-V2.3 — Finalization: test cleanup, docs, close tree"
-- active_work_unit: none — COMPAT-ALIAS-RETIREMENT-V2 tree completed and moved to Completed.
-- next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
+- active_work_unit: `COMPAT-ALIAS-TEST-CLEANUP`  →  frontier leaf: `.3` (pending)
+- next_action: Finalize COMPAT-ALIAS-TEST-CLEANUP.3 — update live docs, verify 20/20 specs, close tree.
 - in_flight_uncommitted: none
 - blockers: none
