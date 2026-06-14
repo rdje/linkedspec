@@ -74,10 +74,10 @@ so the next session resumes from an accurate state.
 - Line 964: "Method-like DSL migration track: `in progress`" — should be `done`.
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Update ROADMAP_V2.md tracker to reflect reality: fix method-like DSL migration track status, remove stale "remaining open" items, update overall roadmap status if warranted. Sync ROADMAP.md tracker if needed.`
   Acceptance: `ROADMAP_V2.md tracker rows are accurate. All "remaining open" items are resolved or accurately reflect current state. ROADMAP.md tracker is aligned.`
-  Verification: `pending`
+  Verification: `ROADMAP_V2.md: Method-like track mostly_done→done, Overall roadmap in_progress→mostly_done. ROADMAP.md: matching updates applied (rows 803, 817, 818, 964). Stale compat-alias and PLUGIN-ACTION-MIGRATION references resolved.`
   Commit: `pending`
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.3`
@@ -105,7 +105,7 @@ so the next session resumes from an accurate state.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `ROADMAP-V2-TRACKER-SYNC.2` | `pending` | Update ROADMAP_V2.md tracker now that staleness is inventoried. |
+| 1 | `ROADMAP-V2-TRACKER-SYNC.3` | `pending` | Update live docs after tracker sync. |
 
 ## Decisions
 
