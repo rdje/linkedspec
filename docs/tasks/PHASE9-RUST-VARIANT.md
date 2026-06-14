@@ -52,17 +52,17 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.1.1, .1.2`
 
 - ID: `PHASE9-RUST-VARIANT.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Create Cargo workspace with linkedspec-core and linkedspec-runtime crates. Configure dependencies (regex, serde, thiserror).`
   Acceptance: `cargo build passes; workspace compiles clean.`
-  Verification: `pending`
+  Verification: `PASS — cargo build clean (no warnings), cargo test 3/3`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.1.2`
-  Status: `pending`
-  Goal: `Define core types: SpecFile, Rule, RuleHeader, RuleMode, BodyElement, Lifecycle, Edge, RegexCluster, HandlerIR, ParseMode. Use serde for JSON serialization.`
+  Status: `done`
+  Goal: `Define core types: HandlerIR, HandlerKind, ParseMode, AST types (SpecFile, Rule, RuleHeader, RuleMode, BodyElement). Use serde for JSON serialization.`
   Acceptance: `Core types compile; serde Serialize/Deserialize derived; JSON round-trip test passes.`
-  Verification: `pending`
+  Verification: `PASS — 3 tests passing, JSON round-trip for Default and Rep variants`
   Commit: `pending`
 
 ### Container: .spec Parser (.2)
@@ -251,8 +251,7 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.1.1` | `pending` | Project bootstrap — create workspace before any code. |
-| 2 | `PHASE9-RUST-VARIANT.1.2` | `pending` | Core types — foundation for all subsequent work. |
+| 1 | `PHASE9-RUST-VARIANT.2.1` | `pending` | Rule header parser — parse labels, colon types, modes. |
 
 ## Decisions
 
@@ -275,7 +274,8 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `pending` | `pending` | `pending` | `pending` |
+| `2026-06-14` | `PHASE9-RUST-VARIANT.1.1` | `cargo build` clean, `cargo test` passes | PASS |
+| `2026-06-14` | `PHASE9-RUST-VARIANT.1.2` | `cargo test` 3/3 (JSON round-trip) | PASS |
 
 ## Commit Log
 
