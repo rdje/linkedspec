@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `60b8a48` — "Docs: LIFECYCLE-FAMILY-AUDIT.1–.3 — inventory, gap analysis, documentation"
+- latest_commit: `9f2efce` — "Docs: LIFECYCLE-FAMILY-AUDIT.4 — Finalization: close tree"
 - active_work_unit: none — LIFECYCLE-FAMILY-AUDIT tree completed and moved to Completed.
 - next_action: PNT idle — all near-term roadmap priorities addressed. Overall roadmap effectively done.
 - in_flight_uncommitted: none
