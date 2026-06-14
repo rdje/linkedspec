@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `96fed0f` — "Docs: post-commit hash fix — MEMORY.md latest_commit → 050b11d"
-- active_work_unit: `ROADMAP-V2-TRACKER-SYNC`  →  frontier leaf: `ROADMAP-V2-TRACKER-SYNC.1` (pending)
-- next_action: PNT on ROADMAP-V2-TRACKER-SYNC.1 — audit current empirical state vs ROADMAP_V2.md tracker
+- latest_commit: `60c3b9c` — "Docs: ROADMAP-V2-TRACKER-SYNC.2 — update ROADMAP_V2.md and ROADMAP.md trackers"
+- active_work_unit: `ROADMAP-V2-TRACKER-SYNC`  →  frontier leaf: `ROADMAP-V2-TRACKER-SYNC.3` (in_progress)
+- next_action: PNT on ROADMAP-V2-TRACKER-SYNC.3 — update live docs (CHANGES, DEVELOPMENT_NOTES, LIVE_ACHIEVEMENT_STATUS done; MEMORY.md in progress)
 - in_flight_uncommitted: none
 - blockers: none

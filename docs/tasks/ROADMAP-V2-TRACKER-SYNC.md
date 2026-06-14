@@ -81,10 +81,10 @@ so the next session resumes from an accurate state.
   Commit: `pending`
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Update live docs: LIVE_ACHIEVEMENT_STATUS.md (latest completed slice), MEMORY.md (resume pointer), CHANGES.md (technical history), DEVELOPMENT_NOTES.md (rationale).`
   Acceptance: `All four live docs reflect the current state. MEMORY.md within size cap.`
-  Verification: `pending`
+  Verification: `LIVE_ACHIEVEMENT_STATUS.md: .1 and .2 entries prepended. CHANGES.md: ROADMAP-V2-TRACKER-SYNC section added. DEVELOPMENT_NOTES.md: tracker-sync rationale added. MEMORY.md: hash, frontier, next_action updated; 25 lines (≤ cap).`
   Commit: `pending`
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.4`
@@ -105,7 +105,7 @@ so the next session resumes from an accurate state.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `ROADMAP-V2-TRACKER-SYNC.3` | `pending` | Update live docs after tracker sync. |
+| 1 | `ROADMAP-V2-TRACKER-SYNC.4` | `pending` | Audit mdBook for drift against current codebase state. |
 
 ## Decisions
 

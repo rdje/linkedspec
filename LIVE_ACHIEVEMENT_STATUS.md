@@ -7,6 +7,8 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-14: Completed ROADMAP-V2-TRACKER-SYNC.2 — updated ROADMAP_V2.md and ROADMAP.md trackers. Method-like DSL migration track: mostly_done→done (COMPAT-ALIAS-RETIREMENT-V2, COMPAT-ALIAS-TEST-CLEANUP, FLUENT-BLOCK-EQUIVALENCE all completed). Overall roadmap: in_progress→mostly_done. Removed stale compat-alias and PLUGIN-ACTION-MIGRATION "remaining open" references. Active PNT frontier: ROADMAP-V2-TRACKER-SYNC.3.
+- 2026-06-14: Completed ROADMAP-V2-TRACKER-SYNC.1 — audited current empirical state. All 20 specs compile at zero compatibility-surface rules. Identified 2 stale ROADMAP_V2.md tracker rows (Overall roadmap, Method-like DSL migration track). Active PNT frontier: ROADMAP-V2-TRACKER-SYNC.2.
 - 2026-06-14: Completed COMPAT-ALIAS-RETIREMENT-V2.3 — tree COMPLETE (3 leaves). All 8 retirement-candidate aliases now removed from implementation. Short-term aliases already clean; medium-term legacy return helpers removed from all 7 files (~220 lines). No active task trees remain — PNT idle.
 - 2026-06-14: Completed COMPAT-ALIAS-RETIREMENT-V2.1 — audit short-term aliases: implementation already clean across all 7 layers; USER_GUIDE.md updated (7 stale compatibility claims removed). Active PNT frontier: COMPAT-ALIAS-RETIREMENT-V2.2 (retire medium-term legacy return helpers).
 - 2026-06-14: Completed FLUENT-BLOCK-EQUIVALENCE.2 — book documentation + regression verification. FLUENT-BLOCK-EQUIVALENCE tree COMPLETE (2 leaves). No active task trees remain — PNT idle.

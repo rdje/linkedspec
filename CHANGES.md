@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — ROADMAP-V2-TRACKER-SYNC.1–.2: Tracker synchronization
+### Audit (.1)
+- Verified all 20 shipped specs compile at zero compatibility-surface rules
+- Identified 2 stale ROADMAP_V2.md tracker rows:
+  - Method-like DSL migration track: `mostly_done` with stale "remaining open" items (compat alias retirement, PLUGIN-ACTION-MIGRATION) — both resolved by completed/retired task trees
+  - Overall roadmap: `in_progress` with all sub-tracks now done
+- Matching staleness found in ROADMAP.md lines 803, 817, 818, 964
+### Tracker update (.2)
+- ROADMAP_V2.md: Method-like track `mostly_done` → `done`; removed stale remaining-open items; added references to COMPAT-ALIAS-RETIREMENT-V2, COMPAT-ALIAS-TEST-CLEANUP, FLUENT-BLOCK-EQUIVALENCE
+- ROADMAP_V2.md: Overall roadmap `in_progress` → `mostly_done`; updated remaining focus text
+- ROADMAP.md: Matching updates applied to tracker rows and line-964 status text
+### Task tree
+- ROADMAP-V2-TRACKER-SYNC created (5 leaves); .1 and .2 completed
+
 ## 2026-06-14 — COMPAT-ALIAS-RETIREMENT-V2.3: Finalization — tree close-out
 ### Test cleanup
 - phase0_regression.t: ~130 return_a(X) → return(1) replacements across spec content strings
