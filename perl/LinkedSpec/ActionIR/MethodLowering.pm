@@ -1669,19 +1669,6 @@ sub _lower_return_general_statement {
 }
 
 #------------------------------------------------------------------------------
-# Function: _lower_return_imatch_statement
-# Purpose : Lower `return_imatch(...)`/`return_im(...)` method helper calls.
-# Args    : ($tag, $deps)
-# Returns : Perl statement string or undef
-#------------------------------------------------------------------------------
-sub _lower_return_imatch_statement {
- my ($tag, $deps) = @_;
- my $tag_expr = _normalize_method_tag_expr($tag, $deps);
- return undef unless defined $tag_expr;
- return "return [$tag_expr, \$IMATCH]"
-}
-
-#------------------------------------------------------------------------------
 # Function: _lower_assign_statement
 # Purpose : Lower `assign(target, source)` method helper calls.
 # Args    : ($target, $source, $deps)
@@ -1864,21 +1851,6 @@ sub _lower_return_undef_statement {
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 0, 0);
  return undef unless $effective_args;
  return 'return undef'
-}
-
-#------------------------------------------------------------------------------
-# Function: _lower_return_array_statement
-# Purpose : Lower `return_array(tag, payload)` method helper calls.
-# Args    : ($tag, $payload, $deps)
-# Returns : Perl statement string or undef
-#------------------------------------------------------------------------------
-sub _lower_return_array_statement {
- my ($tag, $payload, $deps) = @_;
- my $tag_expr = _normalize_method_tag_expr($tag, $deps);
- return undef unless defined $tag_expr;
- my $payload_expr = _lower_method_value_expr($payload, $deps);
- return undef unless defined $payload_expr;
- return "return [$tag_expr, $payload_expr]"
 }
 
 1;

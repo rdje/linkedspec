@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-14: Completed COMPAT-ALIAS-RETIREMENT-V2.2 — retired medium-term legacy return helpers (return_a, return_ma, return_m, return_imatch, return_array) from all 7 implementation files (~220 lines removed). Active PNT frontier: COMPAT-ALIAS-RETIREMENT-V2.3 (finalize: test cleanup, docs, verification, close tree).
 - 2026-06-14: Completed COMPAT-ALIAS-RETIREMENT-V2.1 — audit short-term aliases: implementation already clean across all 7 layers; USER_GUIDE.md updated (7 stale compatibility claims removed). Active PNT frontier: COMPAT-ALIAS-RETIREMENT-V2.2 (retire medium-term legacy return helpers).
 - 2026-06-14: Completed FLUENT-BLOCK-EQUIVALENCE.2 — book documentation + regression verification. FLUENT-BLOCK-EQUIVALENCE tree COMPLETE (2 leaves). No active task trees remain — PNT idle.
 - 2026-06-13: Completed MEDIUM-IMPACT.3.6 — MEDIUM-IMPACT tree closed out. Full regression verification.

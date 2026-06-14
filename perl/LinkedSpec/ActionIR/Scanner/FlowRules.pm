@@ -28,7 +28,6 @@ sub try_scan_contract_ir_events {
   'exit_now' => \&_scan_contract_exit_now,
   'next_stmt' => \&_scan_contract_next_stmt,
   'return_undef' => \&_scan_contract_return_undef,
-  'return_array' => \&_scan_contract_return_array,
   'declare_typed' => \&_scan_contract_declare_typed,
   'declare_alias' => \&_scan_contract_declare_alias,
  );
@@ -308,14 +307,7 @@ while ($code =~ /\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[
  return \@events
 }
 
-sub _scan_contract_return_array {
- my ($code) = @_;
- my @events;
-while ($code =~ /\breturn_array\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|\"[^\"]*\"|\w+))\s*,\s*(?<payload>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\s*\)/g) {
- push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}, payload => _trim_action_ir_value($+{payload})}};
-}
- return \@events
-}
+1;
 
 sub _scan_contract_declare_typed {
  my ($code) = @_;

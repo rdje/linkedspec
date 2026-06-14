@@ -30,7 +30,6 @@ sub default_deps_for_package {
   $pkg,
   [
    'lower_return_general_statement',
-   'lower_return_imatch_statement',
    'lower_assign_method_statement',
    'lower_push_value_statement',
    'lower_push_nonempty_statement',
@@ -49,7 +48,6 @@ sub default_deps_for_package {
    'lower_print_statement',
    'lower_print_each_statement',
    'lower_return_undef_statement',
-   'lower_return_array_statement',
    'lower_declare_method_statement',
    'lower_method_value_expr',
   ],
@@ -67,7 +65,6 @@ sub _require_lowering_deps {
  };
  return {
   lower_return_general_statement => $require_dep->('lower_return_general_statement'),
-  lower_return_imatch_statement  => $require_dep->('lower_return_imatch_statement'),
   lower_assign_method_statement  => $require_dep->('lower_assign_method_statement'),
   lower_push_value_statement     => $require_dep->('lower_push_value_statement'),
   lower_push_nonempty_statement  => $require_dep->('lower_push_nonempty_statement'),
@@ -86,7 +83,6 @@ sub _require_lowering_deps {
   lower_print_statement          => $require_dep->('lower_print_statement'),
   lower_print_each_statement     => $require_dep->('lower_print_each_statement'),
   lower_return_undef_statement   => $require_dep->('lower_return_undef_statement'),
-  lower_return_array_statement   => $require_dep->('lower_return_array_statement'),
   lower_declare_method_statement => $require_dep->('lower_declare_method_statement'),
   lower_method_value_expr        => $require_dep->('lower_method_value_expr'),
  }
@@ -265,18 +261,6 @@ sub _build_return_contracts {
  my ($label, $d) = @_;
  return [
   {
-   id                 => 'return_a',
-   ir_node            => 'RETURN_A',
-   diag_name          => 'return_a',
-   compatibility_surface => 1,
-   unresolved_pattern => qr/\breturn_a\s*\(/o,
-   lower              => sub {
-    my ($code) = @_;
-    $code =~ s/\breturn_a\s*\(\s*$label(?:\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\s*\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
-    return $code
-   },
-  },
-  {
    id                 => 'return_general',
    ir_node            => 'RETURN',
    diag_name          => 'return',
@@ -300,30 +284,6 @@ sub _build_return_contracts {
    },
   },
   {
-   id                 => 'return_ma',
-   ir_node            => 'RETURN_MA',
-   diag_name          => 'return_ma',
-   compatibility_surface => 1,
-   unresolved_pattern => qr/\breturn_ma\s*\(\s*\w+\s*\)/o,
-   lower              => sub {
-    my ($code) = @_;
-    $code =~ s/\breturn_ma\s*\(\s*$label\s*\)/return ['?$label:', \@IMATCH_LIST, \\\@$label]/g;
-    return $code
-   },
-  },
-  {
-   id                 => 'return_m',
-   ir_node            => 'RETURN_M',
-   diag_name          => 'return_m',
-   compatibility_surface => 1,
-   unresolved_pattern => qr/\breturn_m\s*\(\s*\w+\s*\)/o,
-   lower              => sub {
-    my ($code) = @_;
-    $code =~ s/\breturn_m\s*\(\s*$label\s*\)/return ['?$label:', \@IMATCH_LIST]/g;
-    return $code
-   },
-  },
-  {
    id                 => 'return_bare',
    ir_node            => 'RETURN',
    diag_name          => 'return',
@@ -331,19 +291,6 @@ sub _build_return_contracts {
    unresolved_pattern => undef,
    lower              => sub {
     my ($code) = @_;
-    return $code
-   },
-  },
-  {
-   id                 => 'return_imatch',
-   ir_node            => 'RETURN',
-   diag_name          => 'return_imatch',
-   compatibility_surface => 1,
-   unresolved_pattern => qr/\breturn_im(?:atch)?\s*\(/o,
-   lower              => sub {
-    my ($code) = @_;
-    my $lower = $d->{lower_return_imatch_statement};
-    $code =~ s/\breturn_im(?:atch)?\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|\"[^\"]*\"|\w+))\s*\)/$lower->($+{tag}) || $&/ge;
     return $code
    },
   },
@@ -356,19 +303,6 @@ sub _build_return_contracts {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_return_undef_statement};
     $code =~ s/\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
-    return $code
-   },
-  },
-  {
-   id                 => 'return_array',
-   ir_node            => 'RETURN',
-   diag_name          => 'return_array',
-   compatibility_surface => 1,
-   unresolved_pattern => qr/\breturn_array\s*\(/o,
-   lower              => sub {
-    my ($code) = @_;
-    my $lower = $d->{lower_return_array_statement};
-    $code =~ s/\breturn_array\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|\"[^\"]*\"|\w+))\s*,\s*(?<payload>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\s*\)/$lower->($+{tag}, $+{payload}) || $&/ge;
     return $code
    },
   },

@@ -312,11 +312,6 @@ sub _lower_return_general_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_return_general_statement', @args)
 }
 
-sub _lower_return_imatch_statement {
- my @args = @_;
- return _call_actionir_owner_with_deps('method_lowering', '_lower_return_imatch_statement', @args)
-}
-
 sub _lower_push_value_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_push_value_statement', @args)
@@ -337,10 +332,7 @@ sub _lower_return_undef_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_return_undef_statement', @args)
 }
 
-sub _lower_return_array_statement {
- my @args = @_;
- return _call_actionir_owner_with_deps('method_lowering', '_lower_return_array_statement', @args)
-}
+1;
 
 sub _extract_declare_statement_from_method_expr {
  my @args = @_;

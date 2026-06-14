@@ -24,11 +24,8 @@ sub try_scan_contract_ir_events {
   'push_target_arg' => \&_scan_contract_push_target_arg,
   'push_target_indexed_arg' => \&_scan_contract_push_target_indexed_arg,
   'push_scope_target_arg' => \&_scan_contract_push_scope_target_arg,
-  'return_a' => \&_scan_contract_return_a,
   'return_general' => \&_scan_contract_return_general,
   'return' => \&_scan_contract_return,
-  'return_ma' => \&_scan_contract_return_ma,
-  'return_m' => \&_scan_contract_return_m,
   'capture_macro' => \&_scan_contract_capture_macro,
   'capture' => \&_scan_contract_capture,
   'capture_if' => \&_scan_contract_capture_if,
@@ -192,15 +189,6 @@ while ($code =~ /\bpush\s*\(\s*(?<scope>\w+)\s*,\s*(?<source>\w+)\s*,\s*(?<targe
  return \@events
 }
 
-sub _scan_contract_return_a {
- my ($code) = @_;
- my @events;
-while ($code =~ /\breturn_a\s*\(\s*(?<label>\w+)(?:\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\s*\)/g) {
- push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
-}
- return \@events
-}
-
 sub _scan_contract_return_general {
  my ($code) = @_;
  my @events;
@@ -219,24 +207,6 @@ sub _scan_contract_return {
  my @events;
 while ($code =~ /\breturn\s*\(\s*(?<label>\w+)\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\s*\)/g) {
  push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
-}
- return \@events
-}
-
-sub _scan_contract_return_ma {
- my ($code) = @_;
- my @events;
-while ($code =~ /\breturn_ma\s*\(\s*(?<label>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {label => $+{label}}};
-}
- return \@events
-}
-
-sub _scan_contract_return_m {
- my ($code) = @_;
- my @events;
-while ($code =~ /\breturn_m\s*\(\s*(?<label>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {label => $+{label}}};
 }
  return \@events
 }

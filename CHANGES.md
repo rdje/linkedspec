@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — COMPAT-ALIAS-RETIREMENT-V2.2: Retire medium-term legacy return helpers
+### Implementation (7 files, ~220 lines removed)
+- LegacyRules.pm: Removed return_a, return_ma, return_m scanner contracts (3 dispatch entries + 3 scan functions)
+- Contracts.pm: Removed return_a, return_ma, return_m, return_imatch, return_array rewrite contracts (5 entries + 4 dep refs)
+- CanonicalEvents/Core.pm: Removed RETURN_A, RETURN_MA, RETURN_M event mappings; removed return_imatch kind override
+- PrimitivePipelineRules.pm: Removed return_imatch scanner contract
+- FlowRules.pm: Removed return_array scanner contract
+- EmitContext.pm: Removed _lower_return_imatch_statement, _lower_return_array_statement forwarders
+- MethodLowering.pm: Removed _lower_return_imatch_statement, _lower_return_array_statement lowering functions
+### Validation
+- 20/20 shipped specs compile OK
+- All 7 modified files syntax OK
+- Runtime: return_a(Top) in I-block now correctly produces "Undefined subroutine" error
+### Test
+- phase0_regression.t: ~120 return_a(X) → return(1) replacements in spec content strings
+- Remaining compat infrastructure tests need cleanup in .3 finalization
+
 ## 2026-06-14 — COMPAT-ALIAS-RETIREMENT-V2.1: Audit short-term aliases — implementation clean + doc cleanup
 ### Implementation audit
 - Audited all 7 implementation layers for short-term alias recognition (tail, drop_last, flatten, array_values):

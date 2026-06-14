@@ -195,7 +195,7 @@ subtest 'linkedspec_require_avoids_compile_pipeline_load_until_get' => sub {
     plan tests => 9;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec;
 print exists($INC{"LinkedSpec/Runtime.pm"}) ? "__RUNTIME_EAGER__\n" : "__RUNTIME_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
@@ -253,7 +253,7 @@ subtest 'linkedspec_require_avoids_linkedre_load_until_get' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec;
 print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_EAGER__\n" : "__LINKEDRE_STILL_LAZY__\n";
 my $parser = LinkedSpec::Get(\$spec_content);
@@ -288,7 +288,7 @@ subtest 'runtime_require_avoids_compiler_load_until_run_get' => sub {
     plan tests => 4;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::Runtime;
 print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
 my $parser = LinkedSpec::Runtime::run_get(\$spec_content, {});
@@ -305,7 +305,7 @@ subtest 'compiler_require_avoids_owner_load_until_run_get_pipeline' => sub {
     plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::Compiler;
 print exists($INC{"LinkedSpec/BootstrapSpec.pm"}) ? "__BOOTSTRAP_EAGER__\n" : "__BOOTSTRAP_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/SpecEntry.pm"}) ? "__SPEC_ENTRY_EAGER__\n" : "__SPEC_ENTRY_STILL_LAZY__\n";
@@ -331,7 +331,7 @@ subtest 'compiler_require_avoids_trace_load_until_run_get_pipeline' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::Compiler;
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
 my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
@@ -350,7 +350,7 @@ subtest 'compiler_require_avoids_data_dumper_load_until_debug_pipeline_dump' => 
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::Compiler;
 print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_EAGER__\n" : "__DUMPER_STILL_LAZY__\n";
 require LinkedSpec::Trace;
@@ -371,7 +371,7 @@ subtest 'compiler_require_avoids_linkedre_load_until_run_get_pipeline' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::Compiler;
 print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_EAGER__\n" : "__LINKEDRE_STILL_LAZY__\n";
 my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
@@ -409,7 +409,7 @@ subtest 'spec_entry_require_avoids_ruleir_load_until_compile_spec_entry' => sub 
     plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::SpecEntry;
 print exists($INC{"LinkedSpec/RuleIR.pm"}) ? "__RULEIR_EAGER__\n" : "__RULEIR_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
@@ -436,7 +436,7 @@ subtest 'spec_entry_require_avoids_trace_load_until_compile_spec_entry' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::BootstrapSpec;
 require LinkedSpec::SpecEntry;
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
@@ -459,7 +459,7 @@ subtest 'spec_entry_require_avoids_data_dumper_load_until_debug_compile_dump' =>
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::BootstrapSpec;
 require LinkedSpec::Trace;
 require LinkedSpec::SpecEntry;
@@ -581,7 +581,7 @@ subtest 'bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build' =>
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec::BootstrapSpec;
 print exists($INC{"LinkedSpec/BootstrapSpec/Core.pm"}) ? "__BOOTSTRAP_CORE_EAGER__\n" : "__BOOTSTRAP_CORE_STILL_LAZY__\n";
 my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -834,8 +834,8 @@ require LinkedSpec::ActionIR::CanonicalEvents;
 print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents/Core.pm"}) ? "__CANONICAL_EVENTS_CORE_EAGER__\n" : "__CANONICAL_EVENTS_CORE_STILL_LAZY__\n";
 my $diag = LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(
     'Top',
-    'return_a(Top)',
-    [{ raw => 'return_a(Top)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
+    'return(1)',
+    [{ raw => 'return(1)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
     {
         trim_action_ir_value => sub {
             my ($value) = @_;
@@ -844,7 +844,7 @@ my $diag = LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_eve
             $value =~ s/\s+$//;
             return $value;
         },
-        split_action_ir_statements => sub { return ['return_a(Top)'] },
+        split_action_ir_statements => sub { return ['return(1)'] },
     },
 );
 print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";
@@ -863,7 +863,7 @@ subtest 'linkedspec_require_avoids_compiler_load_until_build_compiled_rule_table
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+my $spec_content = "Top::\n /a/ -> Top { return(1) }\n";
 require LinkedSpec;
 require LinkedSpec::BootstrapSpec;
 print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
@@ -1062,7 +1062,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     };
 
     $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::Get(\"Top::\n /a/ -> Top { return_a(Top) }\n"), 'parser_ok', 'Get still delegates through the runtime owner');
+    is(LinkedSpec::Get(\"Top::\n /a/ -> Top { return(1) }\n"), 'parser_ok', 'Get still delegates through the runtime owner');
     is($@, "__SAVED_ERR__\n", 'Get preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
@@ -1070,7 +1070,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'build_compiled_rule_table preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::call_spec_handler_subst('Top', 'return_a(Top)'), 'rewritten_ok', 'call_spec_handler_subst still delegates through the EmitContext compatibility owner');
+    is(LinkedSpec::call_spec_handler_subst('Top', 'return(1)'), 'rewritten_ok', 'call_spec_handler_subst still delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'call_spec_handler_subst preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
@@ -1718,9 +1718,9 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'BootstrapSpec build wrapper preserves caller $@ on successful list-context delegation');
 
     $@ = "__SAVED_ERR__\n";
-    my $runtime_ret = LinkedSpec::Runtime::run_get(\"Top::\n /a/ -> Top { return_a(Top) }\n", { return_descriptor => 1 });
+    my $runtime_ret = LinkedSpec::Runtime::run_get(\"Top::\n /a/ -> Top { return(1) }\n", { return_descriptor => 1 });
     is_deeply($runtime_ret, {
-        spec => "Top::\n /a/ -> Top { return_a(Top) }\n",
+        spec => "Top::\n /a/ -> Top { return(1) }\n",
         option => { return_descriptor => 1 },
         deps => { runtime_ctx => $runtime_ret->{deps}{runtime_ctx} },
     }, 'Runtime run_get wrapper still delegates through Compiler');
@@ -2501,7 +2501,7 @@ subtest 'parser_factory_owner_dispatch_helpers_preserve_eval_error_state' => sub
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return 'specs/Lispish.spec' },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub { return $parser },
             dump_low => 100,
             dump_medium => 200,
@@ -6489,7 +6489,7 @@ subtest 'get_parser_malformed_handler_runtime_error' => sub {
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase1_malformed_handler_runtime_error.spec');
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { my $broken = ; return_a(Top) }
+ /a/ -> Top { my $broken = ; return(1) }
 SPEC
 
     open(my $fh, '>', $tmp_spec) or die "Cannot create malformed-handler spec '$tmp_spec': $!";
@@ -6517,7 +6517,7 @@ subtest 'runtime_handler_linkedre_failure_returns_eval_error_without_exit' => su
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $parser = LinkedSpec::Get(\$spec_content);
@@ -6549,12 +6549,12 @@ subtest 'get_parser_mixed_action_blind_call_returns_undef_without_exit' => sub {
     my $spec_content = <<'SPEC';
 Top::
  /a/
- -> Top { return_a(Top) }
+ -> Top { return(1) }
  => helper
 
 helper:
  /a/
- -> helper { return_a(helper) }
+ -> helper { return(1) }
 SPEC
 
     open(my $fh, '>', $tmp_spec) or die "Cannot create mixed-action/blind-call spec '$tmp_spec': $!";
@@ -6592,7 +6592,7 @@ subtest 'bootstrap_registry_curly_brace_recursion_smoke' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { my $tmp = "{literal}"; if ($tmp) { return_a(Top) } }
+ /a/ -> Top { my $tmp = "{literal}"; if ($tmp) { return(1) } }
 SPEC
 
     my $parser = LinkedSpec::Get(\$spec_content);
@@ -6608,14 +6608,14 @@ subtest 'get_return_descriptor_rule_meta_single_vs_multi_strategy' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 
 AndMulti:&
- /b/ -> AndMulti { return_a(AndMulti) }
- /c/ -> AndMulti { return_a(AndMulti) }
+ /b/ -> AndMulti { return(1) }
+ /c/ -> AndMulti { return(1) }
 
 Choice:|
- /d/ -> Choice { return_a(Choice) }
+ /d/ -> Choice { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -6646,13 +6646,13 @@ Top::
  -> Opt
 
 Plus:+
- /a/ -> Plus { return_a(Plus) }
+ /a/ -> Plus { return(1) }
 
 Star:*
- /b/ -> Star { return_a(Star) }
+ /b/ -> Star { return(1) }
 
 Opt:?
- /c/ -> Opt { return_a(Opt) }
+ /c/ -> Opt { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -6678,7 +6678,7 @@ subtest 'get_return_descriptor_rule_meta_explicit_or_repetition_strategy' => sub
 
     my $spec_content = <<'SPEC';
 Top::OR
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -6695,7 +6695,7 @@ subtest 'get_return_descriptor_rule_meta_or_plus_repetition_strategy' => sub {
 
     my $spec_content = <<'SPEC';
 Top::OR+
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -6757,10 +6757,10 @@ Choice::OR+
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $bounded_or = <<'SPEC';
@@ -6769,10 +6769,10 @@ Choice::OR{1,}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $or_plus_parser = LinkedSpec::Get(\$or_plus);
@@ -6814,16 +6814,16 @@ Top::
  -> UpToTwo
 
 ExactTwo:OR{2}
- /a/ -> ExactTwo { return_a(ExactTwo) }
+ /a/ -> ExactTwo { return(1) }
 
 BetweenTwoAndThree:OR{2, 3}
- /b/ -> BetweenTwoAndThree { return_a(BetweenTwoAndThree) }
+ /b/ -> BetweenTwoAndThree { return(1) }
 
 TwoOrMore:OR{2,}
- /c/ -> TwoOrMore { return_a(TwoOrMore) }
+ /c/ -> TwoOrMore { return(1) }
 
 UpToTwo:OR{,2}
- /d/ -> UpToTwo { return_a(UpToTwo) }
+ /d/ -> UpToTwo { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -6924,8 +6924,8 @@ Top::
  -> Pair
 
 Pair:AND
- /a/ -> Pair { return_a(Pair) }
- /b/ -> Pair { return_a(Pair) }
+ /a/ -> Pair { return(1) }
+ /b/ -> Pair { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -6946,10 +6946,10 @@ Sequence::AND
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $sigil_and = <<'SPEC';
@@ -6958,10 +6958,10 @@ Sequence::&
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $explicit_parser = LinkedSpec::Get(\$explicit_and);
@@ -7001,10 +7001,10 @@ Sequence::&
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $choice_spec = <<'SPEC';
@@ -7013,10 +7013,10 @@ Choice::|
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $sequence_descr = LinkedSpec::Get(\$sequence_spec, return_descriptor => 1);
@@ -7056,10 +7056,10 @@ RepeatChoice::OR
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -7086,10 +7086,10 @@ Choice::|
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $parser = LinkedSpec::Get(\$spec_content);
@@ -7119,10 +7119,10 @@ Choice::OR
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $default_spec = <<'SPEC';
@@ -7131,10 +7131,10 @@ Choice::
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $explicit_parser = LinkedSpec::Get(\$explicit_spec);
@@ -7188,10 +7188,10 @@ Explicit:OR
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -7230,10 +7230,10 @@ Optional:OR{,2}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -7264,10 +7264,10 @@ Choice::+
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $bounded_spec = <<'SPEC';
@@ -7276,10 +7276,10 @@ Choice::OR{2,3}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $optional_spec = <<'SPEC';
@@ -7288,10 +7288,10 @@ Choice::OR{,2}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $wrapped_optional_spec = <<'SPEC';
@@ -7303,10 +7303,10 @@ Choice:OR{,2}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $plus_parser = LinkedSpec::Get(\$plus_spec);
@@ -7349,14 +7349,14 @@ subtest 'bootstrap_action_edge_default_index_matches_explicit_zero_index' => sub
 
     my $implicit_spec = <<'SPEC';
 A:
- /a/ -> A { return_a(A) }
- /b/ -> A[1] { return_a(A) }
+ /a/ -> A { return(1) }
+ /b/ -> A[1] { return(1) }
 SPEC
 
     my $explicit_spec = <<'SPEC';
 A:
- /a/ -> A[0] { return_a(A) }
- /b/ -> A[1] { return_a(A) }
+ /a/ -> A[0] { return(1) }
+ /b/ -> A[1] { return(1) }
 SPEC
 
     my ($implicit_ok, $implicit_parse, $implicit_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$implicit_spec);
@@ -7376,9 +7376,9 @@ subtest 'bootstrap_action_edge_indexed_slots_target_later_regexes' => sub {
 
     my $spec_content = <<'SPEC';
 A:
- /a/ -> A { return_a(A) }
- /b/ -> A[1] { return_a(A) }
- /c/ -> A[2] { return_a(A) }
+ /a/ -> A { return(1) }
+ /b/ -> A[1] { return(1) }
+ /c/ -> A[2] { return(1) }
 SPEC
 
     my ($ok, $parse, $err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -7396,10 +7396,10 @@ subtest 'bootstrap_action_edge_indexed_slots_stay_open_ended_beyond_three_regexe
 
     my $spec_content = <<'SPEC';
 A:
- /a/ -> A { return_a(A) }
- /b/ -> A[1] { return_a(A) }
- /c/ -> A[2] { return_a(A) }
- /d/ -> A[3] { return_a(A) }
+ /a/ -> A { return(1) }
+ /b/ -> A[1] { return(1) }
+ /c/ -> A[2] { return(1) }
+ /d/ -> A[3] { return(1) }
 SPEC
 
     my ($ok, $parse, $err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -7419,14 +7419,14 @@ subtest 'action_edge_default_index_matches_explicit_zero_index_at_runtime' => su
 
     my $implicit_spec = <<'SPEC';
 A::
- /a/ -> A { return_a(A) }
- /b/ -> A[1] { return_a(A) }
+ /a/ -> A { return(1) }
+ /b/ -> A[1] { return(1) }
 SPEC
 
     my $explicit_spec = <<'SPEC';
 A::
- /a/ -> A[0] { return_a(A) }
- /b/ -> A[1] { return_a(A) }
+ /a/ -> A[0] { return(1) }
+ /b/ -> A[1] { return(1) }
 SPEC
 
     my $implicit_parser = LinkedSpec::Get(\$implicit_spec);
@@ -7457,13 +7457,13 @@ subtest 'bootstrap_grouped_action_edge_targets_share_one_code_block' => sub {
     my $spec_content = <<'SPEC';
 Top::
  /(?:left|right)/
- -> semantic_annotation | grammar_rule {return_a(Top)}
+ -> semantic_annotation | grammar_rule {return(1)}
 
 semantic_annotation:
- /left/ -> semantic_annotation { return_a(semantic_annotation) }
+ /left/ -> semantic_annotation { return(1) }
 
 grammar_rule:
- /right/ -> grammar_rule { return_a(grammar_rule) }
+ /right/ -> grammar_rule { return(1) }
 SPEC
 
     my ($ok, $parse, $err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -7475,8 +7475,8 @@ SPEC
     is_deeply(
         [ map { +{ relabel => $_->[1]{relabel}, reidx => $_->[1]{reidx}, code => $_->[1]{code} } } @acodes ],
         [
-            { relabel => 'semantic_annotation', reidx => 0, code => 'return_a(Top)' },
-            { relabel => 'grammar_rule',        reidx => 0, code => 'return_a(Top)' },
+            { relabel => 'semantic_annotation', reidx => 0, code => 'return(1)' },
+            { relabel => 'grammar_rule',        reidx => 0, code => 'return(1)' },
         ],
         'grouped action-edge block duplicates the same code across each target label'
     );
@@ -7489,8 +7489,8 @@ subtest 'get_return_descriptor_rule_meta_and_plus_repetition_strategy' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND+
- /a/ -> Top { return_a(Top) }
- /b/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
+ /b/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -7511,10 +7511,10 @@ Sequence::AND+
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $bounded_and = <<'SPEC';
@@ -7523,10 +7523,10 @@ Sequence::AND{1,}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $and_plus_parser = LinkedSpec::Get(\$and_plus);
@@ -7575,20 +7575,20 @@ Top::
  -> UpToTwo
 
 ExactTwo:AND{2}
- /a/ -> ExactTwo { return_a(ExactTwo) }
- /b/ -> ExactTwo { return_a(ExactTwo) }
+ /a/ -> ExactTwo { return(1) }
+ /b/ -> ExactTwo { return(1) }
 
 BetweenTwoAndThree:AND{2, 3}
- /c/ -> BetweenTwoAndThree { return_a(BetweenTwoAndThree) }
- /d/ -> BetweenTwoAndThree { return_a(BetweenTwoAndThree) }
+ /c/ -> BetweenTwoAndThree { return(1) }
+ /d/ -> BetweenTwoAndThree { return(1) }
 
 TwoOrMore:AND{2,}
- /e/ -> TwoOrMore { return_a(TwoOrMore) }
- /f/ -> TwoOrMore { return_a(TwoOrMore) }
+ /e/ -> TwoOrMore { return(1) }
+ /f/ -> TwoOrMore { return(1) }
 
 UpToTwo:AND{,2}
- /g/ -> UpToTwo { return_a(UpToTwo) }
- /h/ -> UpToTwo { return_a(UpToTwo) }
+ /g/ -> UpToTwo { return(1) }
+ /h/ -> UpToTwo { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -7627,10 +7627,10 @@ Sequence::AND{2}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -7651,10 +7651,10 @@ Sequence::AND{2}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $between_two_and_three = <<'SPEC';
@@ -7663,10 +7663,10 @@ Sequence::AND{2,3}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $up_to_two = <<'SPEC';
@@ -7675,10 +7675,10 @@ Sequence::AND{,2}
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $exact_parser = LinkedSpec::Get(\$exact_two);
@@ -7759,19 +7759,19 @@ Sequence::AND+
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 
 Anchor:OR{2,4}
- /x/ -> Anchor { return_a(Anchor) }
+ /x/ -> Anchor { return(1) }
 
 Stream:OR+
- /y/ -> Stream { return_a(Stream) }
+ /y/ -> Stream { return(1) }
 
 Chunk: /@foo\s*\(/ /\s*\)/ @capture_slice
- -> Chunk[1] { return_a(Chunk) }
+ -> Chunk[1] { return(1) }
 SPEC
 
     ok(LinkedSpec::Validation::validate_spec_content(\$spec_content), 'validation accepts current top-rule envelope with explicit AND+ label');
@@ -7782,23 +7782,23 @@ subtest 'action_rule_paragraph_members_can_be_interleaved_after_rule_label' => s
 
     my $conventional_spec = <<'SPEC';
 Top::
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
  I { declare(scalar, retv) }
  LX { return(scalar(retv)) }
 
 Leaf:
- /b/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return(1) }
 SPEC
 
     my $free_order_spec = <<'SPEC';
 Top::
  LX { return(scalar(retv)) }
- -> Leaf { return_a(Leaf) }
+ -> Leaf { return(1) }
  /a/
  I { declare(scalar, retv) }
 
 Leaf:
- /b/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return(1) }
 SPEC
 
     my ($conv_ok, $conv_bootstrap, $conv_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$conventional_spec);
@@ -7857,10 +7857,10 @@ Top::AND
  LX { return(scalar(retv)) }
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $free_order_spec = <<'SPEC';
@@ -7871,10 +7871,10 @@ Top::AND
  => Second
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my ($conv_ok, $conv_bootstrap, $conv_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$conventional_spec);
@@ -7923,18 +7923,18 @@ subtest 'same_line_action_rule_paragraph_members_match_multiline_form' => sub {
 
     my $multiline_spec = <<'SPEC';
 Top::
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
  I { declare(scalar, retv) }
  LX { return(scalar(retv)) }
 
 Leaf:
- /b/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return(1) }
 SPEC
 
     my $same_line_spec = <<'SPEC';
-Top:: /a/ -> Leaf { return_a(Leaf) } I { declare(scalar, retv) } LX { return(scalar(retv)) }
+Top:: /a/ -> Leaf { return(1) } I { declare(scalar, retv) } LX { return(scalar(retv)) }
 
-Leaf: /b/ -> Leaf { return_a(Leaf) }
+Leaf: /b/ -> Leaf { return(1) }
 SPEC
 
     my ($multi_ok, $multi_bootstrap, $multi_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$multiline_spec);
@@ -7990,17 +7990,17 @@ Top::AND
  LX { return(scalar(retv)) }
 
 First:
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 
 Second:
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my $same_line_spec = <<'SPEC';
 Top::AND I { declare(scalar, retv) } => First => Second LX { return(scalar(retv)) }
 
-First: /a/ -> First { return_a(First) }
-Second: /b/ -> Second { return_a(Second) }
+First: /a/ -> First { return(1) }
+Second: /b/ -> Second { return(1) }
 SPEC
 
     my ($multi_ok, $multi_bootstrap, $multi_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$multiline_spec);
@@ -8051,11 +8051,11 @@ Top::
  -> Pair
 
 Pair:AND
- /a/ -> Pair { return_a(Pair) }
- /b/ -> Pair { return_a(Pair) }
+ /a/ -> Pair { return(1) }
+ /b/ -> Pair { return(1) }
 
 Pair:OR{2}
- /c/ -> Pair { return_a(Pair) }
+ /c/ -> Pair { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8076,8 +8076,8 @@ Top::
  -> Broken
 
 Broken:AND{,}
- /a/ -> Broken { return_a(Broken) }
- /b/ -> Broken { return_a(Broken) }
+ /a/ -> Broken { return(1) }
+ /b/ -> Broken { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8096,11 +8096,11 @@ subtest 'validation_rejects_glued_word_rule_mode_suffixes' => sub {
 my @specs = (
     <<'SPEC1',
 Top:ORX
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC1
     <<'SPEC2',
 Top::ANDX
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC2
 );
 require LinkedSpec::Validation;
@@ -8125,7 +8125,7 @@ my $spec_content = <<'SPEC';
 
 junk preamble
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $spec_ok = LinkedSpec::Validation::validate_spec_content(\$spec_content);
@@ -8149,7 +8149,7 @@ subtest 'validation_accepts_split_markers_as_supported_rule_paragraph_members' =
 my $spec_content = <<'SPEC';
 Top::
  @capture_slice
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8168,7 +8168,7 @@ subtest 'validation_rejects_malformed_top_level_split_markers' => sub {
 my $spec_content = <<'SPEC';
 Top::
  @capture_here
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8192,7 +8192,7 @@ Top::
    .endif()
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8237,7 +8237,7 @@ subtest 'validation_rejects_unsupported_top_level_rule_paragraph_content' => sub
 my $spec_content = <<'SPEC';
 Top::
  random garbage
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8256,7 +8256,7 @@ subtest 'validation_rejects_extra_colon_rule_labels' => sub {
     my $tpl = <<'PERL_TPL';
 my $spec_content = <<'SPEC';
 __RULE_LINE__
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8297,12 +8297,12 @@ subtest 'validation_accepts_same_line_rule_paragraph_forms' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /a/ -> Leaf { return_a(Leaf) } I { declare(scalar, retv) } LX { return(scalar(retv)) }
-Leaf: /b/ -> Leaf { return_a(Leaf) }
+Top:: /a/ -> Leaf { return(1) } I { declare(scalar, retv) } LX { return(scalar(retv)) }
+Leaf: /b/ -> Leaf { return(1) }
 
 Wrapper:AND I { declare(scalar, retv) } => First => Second LX { return(scalar(retv)) }
-First: /x/ -> First { return_a(First) }
-Second: /y/ -> Second { return_a(Second) }
+First: /x/ -> First { return(1) }
+Second: /y/ -> Second { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8337,7 +8337,7 @@ subtest 'validation_rejects_unsupported_same_line_rule_header_content' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top:: random garbage
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8373,10 +8373,10 @@ subtest 'validation_rejects_unexpected_multiline_rule_closers' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top::
- -> Leaf { return_a(Leaf) } }
+ -> Leaf { return(1) } }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8394,8 +8394,8 @@ subtest 'validation_rejects_unexpected_same_line_rule_header_closers' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /a/ -> Leaf { return_a(Leaf) } ]
-Leaf: /b/ -> Leaf { return_a(Leaf) }
+Top:: /a/ -> Leaf { return(1) } ]
+Leaf: /b/ -> Leaf { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8417,7 +8417,7 @@ Top::
  -> Broken
 
 Broken:
- /(foo/ -> Broken { return_a(Broken) }
+ /(foo/ -> Broken { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8434,8 +8434,8 @@ subtest 'validation_rejects_invalid_same_line_rule_regex_tokens' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /(foo/ -> Broken { return_a(Broken) }
-Broken: /bar/ -> Broken { return_a(Broken) }
+Top:: /(foo/ -> Broken { return(1) }
+Broken: /bar/ -> Broken { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8452,8 +8452,8 @@ subtest 'validation_rejects_invalid_followup_same_line_rule_regex_tokens' => sub
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /a/ /(foo/ -> Broken { return_a(Broken) }
-Broken: /bar/ -> Broken { return_a(Broken) }
+Top:: /a/ /(foo/ -> Broken { return(1) }
+Broken: /bar/ -> Broken { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8472,12 +8472,12 @@ subtest 'validation_rejects_mixed_action_and_blind_call_rule_paragraphs' => sub 
 my $spec_content = <<'SPEC';
 Top::
  /a/
- -> Top { return_a(Top) }
+ -> Top { return(1) }
  => helper
 
 helper:
  /a/
- -> helper { return_a(helper) }
+ -> helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8495,8 +8495,8 @@ subtest 'validation_rejects_same_line_mixed_action_and_blind_call_rule_paragraph
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /a/ -> Top { return_a(Top) } => helper
-helper: /a/ -> helper { return_a(helper) }
+Top:: /a/ -> Top { return(1) } => helper
+helper: /a/ -> helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8534,7 +8534,7 @@ subtest 'validation_rejects_malformed_action_edge_regex_slot_indexes' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/
- -> Top[] { return_a(Top) }
+ -> Top[] { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8551,7 +8551,7 @@ subtest 'validation_rejects_same_line_non_numeric_action_edge_indexes' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /a/ -> Top[abc] { return_a(Top) }
+Top:: /a/ -> Top[abc] { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8572,7 +8572,7 @@ Top::AND
  => Helper[0]
 
 Helper:
- /a/ -> Helper { return_a(Helper) }
+ /a/ -> Helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8591,7 +8591,7 @@ subtest 'validation_rejects_glued_action_edge_target_suffixes' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/
- -> Helper-extra { return_a(Top) }
+ -> Helper-extra { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8610,10 +8610,10 @@ subtest 'validation_rejects_empty_action_edge_fluent_suffixes' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/
- -> Helper. { return_a(Top) }
+ -> Helper. { return(1) }
 
 Helper:
- /b/ -> Helper { return_a(Helper) }
+ /b/ -> Helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8630,10 +8630,10 @@ subtest 'validation_rejects_double_dot_action_edge_fluent_starts' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /a/ -> Helper..push(items) { return_a(Top) }
+Top:: /a/ -> Helper..push(items) { return(1) }
 
 Helper:
- /b/ -> Helper { return_a(Helper) }
+ /b/ -> Helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8651,10 +8651,10 @@ subtest 'validation_accepts_spaced_action_edge_fluent_suffixes' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top::
- /a/ -> Helper .push(items) { return_a(Top) }
+ /a/ -> Helper .push(items) { return(1) }
 
 Helper:
- /b/ -> Helper { return_a(Helper) }
+ /b/ -> Helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8673,13 +8673,13 @@ subtest 'validation_accepts_grouped_action_edge_targets_with_shared_code_block' 
 my $spec_content = <<'SPEC';
 Top::
  /a/
- -> semantic_annotation | grammar_rule { return_a(Top) }
+ -> semantic_annotation | grammar_rule { return(1) }
 
 semantic_annotation:
- /left/ -> semantic_annotation { return_a(semantic_annotation) }
+ /left/ -> semantic_annotation { return(1) }
 
 grammar_rule:
- /right/ -> grammar_rule { return_a(grammar_rule) }
+ /right/ -> grammar_rule { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8737,7 +8737,7 @@ Top::AND
  => Helper .push(items)
 
 Helper:
- /a/ -> Helper { return_a(Helper) }
+ /a/ -> Helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8757,15 +8757,15 @@ Top::AND
  => Helper .return_a()
 
 Helper:
- /a/ -> Helper { return_a(Helper) }
+ /a/ -> Helper { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::AND
- => Helper { return_a(Top) }
+ => Helper { return(1) }
 
 Helper:
- /a/ -> Helper { return_a(Helper) }
+ /a/ -> Helper { return(1) }
 SPEC
 
     my ($fluent_ok, $fluent_bootstrap, $fluent_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$fluent_spec);
@@ -8799,7 +8799,7 @@ subtest 'validation_rejects_action_edges_with_missing_targets' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/
- -> { return_a(Top) }
+ -> { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8855,7 +8855,7 @@ my $spec_content = <<'SPEC';
 Top::
  /a/ -> Next {
 label:
- return_a(Top)
+ return(1)
  }
 Next::
  /b/ { return_a(Next) }
@@ -8879,7 +8879,7 @@ my $spec_content = <<'SPEC';
 Top::
  /a/ -> Next {
 label:
- return_a(Top)
+ return(1)
  }
 Next::
  /b/ { return_a(Next) }
@@ -8902,10 +8902,10 @@ my $spec_content = <<'SPEC';
 Top::
  /a/ -> Leaf {
 nested:
- return_a(Top)
+ return(1)
  }
 Leaf:
- /b/ { return_a(Leaf) }
+ /b/ { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8925,10 +8925,10 @@ my $spec_content = <<'SPEC';
 Top::
  /a/ -> Leaf {
 NestedTop::
- return_a(Top)
+ return(1)
  }
 Leaf:
- /b/ { return_a(Leaf) }
+ /b/ { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8948,10 +8948,10 @@ my $spec_content = <<'SPEC';
 Top::
  /a/ -> Leaf {
 __MODE_LINE__
- return_a(Top)
+ return(1)
  }
 Leaf:
- /b/ { return_a(Leaf) }
+ /b/ { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8978,10 +8978,10 @@ my $spec_content = <<'SPEC';
 Top::
  /a/ -> Leaf {
 __BLOCK_CONTENT__
- return_a(Top)
+ return(1)
  }
 Leaf:
- /b/ { return_a(Leaf) }
+ /b/ { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9012,11 +9012,11 @@ Top::
  /a/ -> Leaf {
   if (condition) {
    nested_rule:
-   return_a(Top)
+   return(1)
   }
  }
 Leaf:
- /b/ { return_a(Leaf) }
+ /b/ { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9035,7 +9035,7 @@ subtest 'validation_rejects_unclosed_multiline_rule_blocks_at_eof' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/ -> Next {
- return_a(Top)
+ return(1)
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9053,7 +9053,7 @@ subtest 'validation_rejects_unclosed_same_line_rule_blocks_at_eof' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top:: /a/ -> Next {
- return_a(Top)
+ return(1)
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9078,11 +9078,11 @@ print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
 PERL_TPL
 
     my @specs = (
-        ['else-block',    "Top::\n /a/ -> Leaf { return_a(Leaf) }\n else { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
-        ['endif-block',   "Top::\n /a/ -> Leaf { return_a(Leaf) }\n endif { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
-        ['default-block', "Top::\n /a/ -> Leaf { return_a(Leaf) }\n default { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
-        ['endcase-block', "Top::\n /a/ -> Leaf { return_a(Leaf) }\n endcase { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
-        ['endswitch-block',"Top::\n /a/ -> Leaf { return_a(Leaf) }\n endswitch { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return_a(Leaf) }\n"],
+        ['else-block',    "Top::\n /a/ -> Leaf { return(1) }\n else { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return(1) }\n"],
+        ['endif-block',   "Top::\n /a/ -> Leaf { return(1) }\n endif { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return(1) }\n"],
+        ['default-block', "Top::\n /a/ -> Leaf { return(1) }\n default { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return(1) }\n"],
+        ['endcase-block', "Top::\n /a/ -> Leaf { return(1) }\n endcase { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return(1) }\n"],
+        ['endswitch-block',"Top::\n /a/ -> Leaf { return(1) }\n endswitch { return_undef() }\n\nLeaf:\n /b/ -> Leaf { return(1) }\n"],
     );
 
     for my $case (@specs) {
@@ -9107,7 +9107,7 @@ Top::
  }
 
 Helper:
- /a/ -> Helper { return_a(Helper) }
+ /a/ -> Helper { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9169,10 +9169,10 @@ subtest 'validation_accepts_action_edge_with_index_and_fluent_chain' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top::
- /a/ /b/ -> Child[1].push(item).return_payload() { return_a(Top) }
+ /a/ /b/ -> Child[1].push(item).return_payload() { return(1) }
 
 Child:
- /c/ -> Child { return_a(Child) }
+ /c/ -> Child { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9213,7 +9213,7 @@ subtest 'validation_strict_syntax_rejects_undefined_rule_references' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top::
- /a/ -> MissingRule { return_a(Top) }
+ /a/ -> MissingRule { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok0 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9234,13 +9234,13 @@ subtest 'validation_strict_syntax_rejects_unused_rules' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top::
- /a/ -> Leaf { return_a(Top) }
+ /a/ -> Leaf { return(1) }
 
 UnusedRule:
  /b/ -> UnusedRule { return_a(UnusedRule) }
 
 Leaf:
- /c/ -> Leaf { return_a(Leaf) }
+ /c/ -> Leaf { return(1) }
 
 OrphanedRule:
  /d/ -> Leaf { return_a(Orphaned) }
@@ -9264,10 +9264,10 @@ subtest 'validation_strict_syntax_accepts_valid_spec' => sub {
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
 Top::
- /a/ -> Leaf { return_a(Top) }
+ /a/ -> Leaf { return(1) }
 
 Leaf:
- /b/ -> Top { return_a(Leaf) }
+ /b/ -> Top { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok0 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9318,7 +9318,7 @@ Top::
   .push(items)
 
 Leaf:
- /b/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9358,7 +9358,7 @@ Top::
  /a/ -> Leaf.push().return_undef()
 
 Leaf:
- /b/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9467,14 +9467,14 @@ subtest 'ruleir_pipeline_preserves_acode_dependency_refs_mapping_order' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Alpha[0] { return_a(Top) }
- /b/ -> Beta[0] { return_a(Top) }
+ /a/ -> Alpha[0] { return(1) }
+ /b/ -> Beta[0] { return(1) }
 
 Alpha:
- /a/ -> Alpha { return_a(Alpha) }
+ /a/ -> Alpha { return(1) }
 
 Beta:
- /b/ -> Beta { return_a(Beta) }
+ /b/ -> Beta { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -9491,7 +9491,7 @@ subtest 'compiler_build_compiled_rule_table_uses_injected_compile_spec_entry_cal
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -9516,7 +9516,7 @@ subtest 'compiler_build_compiled_rule_table_can_return_explicit_compiled_spec_st
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -9539,7 +9539,7 @@ subtest 'build_compiled_rule_table_defers_default_compile_callback_to_compiler_o
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -9572,7 +9572,7 @@ subtest 'compiler_build_compiled_rule_table_records_structured_error_when_compil
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -9608,7 +9608,7 @@ subtest 'compiler_build_compiled_rule_table_prepares_runtime_ctx_through_shared_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -9664,7 +9664,7 @@ subtest 'linkedspec_build_compiled_rule_table_records_structured_invalid_tuple_w
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -9700,7 +9700,7 @@ subtest 'compiler_build_compiled_rule_table_records_structured_invalid_callback_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -9809,7 +9809,7 @@ subtest 'get_avoids_runtime_run_get_from_args_wrapper' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
@@ -9833,7 +9833,7 @@ subtest 'get_normalizes_option_pairs_before_runtime_owner' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($ok_run, $even_ret, $odd_ret, $err) = (0, undef, undef, '');
@@ -9874,7 +9874,7 @@ subtest 'runtime_run_get_avoids_legacy_raw_arg_wrapper' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($ok_run, $descr, $err) = (0, undef, '');
@@ -9896,7 +9896,7 @@ subtest 'spec_entry_compile_spec_entry_uses_injected_runtime_context' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -10518,7 +10518,7 @@ subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -10550,7 +10550,7 @@ subtest 'build_compiled_rule_table_paths_avoid_linkedspec_spec_entry_facade' => 
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -10582,7 +10582,7 @@ subtest 'build_compiled_rule_table_and_get_avoid_removed_linkedspec_ruleir_inter
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -10624,7 +10624,7 @@ subtest 'get_return_descriptor_avoids_removed_linkedspec_validation_facade' => s
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($descr, $ok_run, $err) = (undef, 0, '');
@@ -10657,7 +10657,7 @@ subtest 'compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_con
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my @parser_source_chunks;
@@ -10704,7 +10704,7 @@ subtest 'compiler_run_get_pipeline_emits_nested_repeat_helpers_without_eval_wrap
 
     my $spec_content = <<'SPEC';
 Top::
- /x/ -> Top { return_a(Top) }
+ /x/ -> Top { return(1) }
 RepeatChoice:OR+
  => First
  => Second
@@ -10715,9 +10715,9 @@ RepeatBlindSeq:AND+
  => First
  => Second
 First::
- /a/ -> First { return_a(First) }
+ /a/ -> First { return(1) }
 Second::
- /b/ -> Second { return_a(Second) }
+ /b/ -> Second { return(1) }
 SPEC
 
     my @parser_source_chunks;
@@ -10761,7 +10761,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_pipeline_setup_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -10827,7 +10827,7 @@ subtest 'compiler_run_get_pipeline_preserves_rule_label_when_validate_spec_conte
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
-Broken:ORX /a/ -> Broken { return_a(Broken) }
+Broken:ORX /a/ -> Broken { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -10859,7 +10859,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_spec_c
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -10898,7 +10898,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_dsl_sy
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -10937,7 +10937,7 @@ subtest 'compiler_run_get_pipeline_preserves_top_rule_handler_label_when_validat
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11024,7 +11024,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_bootstrap_parse
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11063,7 +11063,7 @@ subtest 'compiler_run_get_pipeline_preserves_specific_detail_for_invalid_bootstr
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11102,7 +11102,7 @@ subtest 'compiler_run_get_pipeline_records_structured_rule_label_for_generated_d
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11159,7 +11159,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_compiled_descri
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11198,7 +11198,7 @@ subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_validate_d
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11237,7 +11237,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_en
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11277,7 +11277,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_en
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11317,7 +11317,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_when_final_descripto
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11596,7 +11596,7 @@ subtest 'compiler_build_final_descriptor_state_rejects_invalid_compiled_dependen
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
@@ -11692,7 +11692,7 @@ subtest 'compiler_run_get_pipeline_records_specific_build_final_descriptor_detai
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11741,7 +11741,7 @@ subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_default_bu
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -11789,7 +11789,7 @@ subtest 'compiler_run_get_pipeline_clears_stale_runtime_ctx_error_on_success' =>
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -12113,7 +12113,7 @@ subtest 'parser_factory_run_get_parser_preserves_specific_error_when_load_spec_c
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_unreadable_load_false_return.spec');
     open(my $fh, '>', $tmp_spec) or die "Cannot create unreadable parser-factory spec '$tmp_spec': $!";
-    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    print {$fh} "Top::\n /a/ -> Top { return(1) }\n";
     close($fh);
     my $perm_ok = chmod 0000, $tmp_spec;
     ok($perm_ok, 'temporary parser-factory spec permissions changed to unreadable') or diag("chmod 0000 failed for '$tmp_spec': $!");
@@ -12167,7 +12167,7 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub { die "__FORCED_COMPILE_SPEC_DIE__\n" },
             dump_low => 100,
             dump_medium => 200,
@@ -12202,7 +12202,7 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub { return undef },
             dump_low => 100,
             dump_medium => 200,
@@ -12237,7 +12237,7 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub { return { malformed => 1 } },
             dump_low => 100,
             dump_medium => 200,
@@ -12272,7 +12272,7 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub { return ['not_a_hash']; },
             dump_low => 100,
             dump_medium => 200,
@@ -12307,7 +12307,7 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub { return { malformed => 1 } },
             dump_low => 100,
             dump_medium => 200,
@@ -12342,7 +12342,7 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub { return ['not_undef']; },
             dump_low => 100,
             dump_medium => 200,
@@ -12377,7 +12377,7 @@ subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_com
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub {
                 $runtime_ctx->{last_error} = {
                     type => 'compiler_pipeline',
@@ -12420,7 +12420,7 @@ subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_com
             trace_decision => sub { return 1 },
             validate_spec_name => sub { return 1 },
             resolve_spec_path => sub { return $spec_path },
-            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return(1) }\n" },
             compile_spec => sub {
                 $runtime_ctx->{last_error} = {
                     type => 'runtime_owner',
@@ -12455,7 +12455,7 @@ subtest 'get_parser_preserves_runtime_owner_error_when_runtime_returns_undef_wit
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_owner_undef.spec');
     open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
-    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    print {$fh} "Top::\n /a/ -> Top { return(1) }\n";
     close($fh);
 
     my $runtime_ctx;
@@ -12491,7 +12491,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_coderef_wi
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_hash.spec');
     open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
-    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    print {$fh} "Top::\n /a/ -> Top { return(1) }\n";
     close($fh);
 
     my $runtime_ctx;
@@ -12527,7 +12527,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_re
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_array.spec');
     open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
-    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    print {$fh} "Top::\n /a/ -> Top { return(1) }\n";
     close($fh);
 
     my $runtime_ctx;
@@ -12564,7 +12564,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_parse_only_hash.spec');
     open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
-    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    print {$fh} "Top::\n /a/ -> Top { return(1) }\n";
     close($fh);
 
     my $runtime_ctx;
@@ -12601,7 +12601,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_generate_only_array.spec');
     open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
-    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    print {$fh} "Top::\n /a/ -> Top { return(1) }\n";
     close($fh);
 
     my $runtime_ctx;
@@ -12636,7 +12636,7 @@ subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' =>
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $orig_run_get_pipeline = \&LinkedSpec::Compiler::run_get_pipeline;
@@ -12669,7 +12669,7 @@ subtest 'runtime_run_get_exposes_runtime_ctx_ref_on_success' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -12696,7 +12696,7 @@ subtest 'runtime_run_get_accepts_direct_hashref_runtime_ctx_ref_on_success' => s
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my %runtime_ctx = (seed => 'kept');
@@ -12721,7 +12721,7 @@ subtest 'runtime_run_get_reuses_populated_scalar_runtime_ctx_ref_slot' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -12759,7 +12759,7 @@ subtest 'linkedspec_get_reuses_populated_scalar_runtime_ctx_ref_slot' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -12795,7 +12795,7 @@ subtest 'runtime_run_get_reused_context_replaces_parser_source_capture' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my %runtime_ctx;
@@ -12863,7 +12863,7 @@ subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_dies_wit
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -12900,7 +12900,7 @@ subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -12937,7 +12937,7 @@ subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -12973,7 +12973,7 @@ subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13008,7 +13008,7 @@ subtest 'runtime_run_get_parse_only_success_leaves_failure_channel_clear' => sub
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13031,7 +13031,7 @@ subtest 'runtime_run_get_generate_only_success_leaves_failure_channel_clear' => 
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13054,7 +13054,7 @@ subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13089,7 +13089,7 @@ subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13124,7 +13124,7 @@ subtest 'runtime_run_get_preserves_existing_runtime_error_when_run_get_pipeline_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13312,7 +13312,7 @@ subtest 'get_parser_runtime_ctx_preserves_specific_load_spec_content_failure' =>
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_unreadable_get_parser_load.spec');
     open(my $fh, '>', $tmp_spec) or die "Cannot create unreadable get_parser spec '$tmp_spec': $!";
-    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    print {$fh} "Top::\n /a/ -> Top { return(1) }\n";
     close($fh);
     ok(-f $tmp_spec, 'temporary unreadable get_parser spec created');
 
@@ -13387,7 +13387,7 @@ subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catch
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13421,7 +13421,7 @@ subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catch
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13454,7 +13454,7 @@ subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catch
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13486,7 +13486,7 @@ subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catch
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13518,7 +13518,7 @@ subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catch
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13550,7 +13550,7 @@ subtest 'linkedspec_get_preserves_compiler_setup_failure_context_when_compiler_t
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13584,7 +13584,7 @@ subtest 'linkedspec_get_preserves_specific_invalid_bootstrap_result_detail' => s
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13619,7 +13619,7 @@ subtest 'linkedspec_get_preserves_specific_invalid_compile_spec_entry_tuple_deta
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13652,7 +13652,7 @@ subtest 'linkedspec_get_preserves_top_rule_handler_label_for_generic_late_build_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13743,7 +13743,7 @@ subtest 'get_parser_preserves_top_rule_handler_label_for_late_generic_compile_fa
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_late_build_failure.spec');
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     open(my $fh, '>', $tmp_spec) or die "Cannot create late-build-failure spec '$tmp_spec': $!";
@@ -13802,7 +13802,7 @@ subtest 'linkedspec_get_runtime_ctx_ref_records_runtime_handler_failure_and_clea
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;
@@ -13851,7 +13851,7 @@ subtest 'get_parser_runtime_ctx_ref_records_runtime_handler_failure_with_spec_id
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_handler_ctx.spec');
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     open(my $fh, '>', $tmp_spec) or die "Cannot create runtime handler spec '$tmp_spec': $!";
@@ -13895,7 +13895,7 @@ subtest 'get_parser_runtime_ctx_ref_records_runtime_parser_failure_with_spec_ide
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_parser_ctx.spec');
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     open(my $fh, '>', $tmp_spec) or die "Cannot create runtime parser spec '$tmp_spec': $!";
@@ -13957,7 +13957,7 @@ subtest 'get_parser_runtime_ctx_ref_records_invalid_input_ref_with_spec_identity
     my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_invalid_input_ref_ctx.spec');
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     open(my $fh, '>', $tmp_spec) or die "Cannot create invalid input-ref spec '$tmp_spec': $!";
@@ -14089,7 +14089,7 @@ subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_outer_d
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -14147,7 +14147,7 @@ subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_invalid
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -14204,7 +14204,7 @@ subtest 'compiler_pipeline_clears_stale_runtime_handler_error_after_successful_p
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -14264,7 +14264,7 @@ subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -14323,7 +14323,7 @@ subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -14384,7 +14384,7 @@ subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -14440,7 +14440,7 @@ subtest 'compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($ok_run, $descr, $err) = (0, undef, '');
@@ -14462,7 +14462,7 @@ subtest 'run_get_pipeline_defers_default_build_dependency_regex_map_callback_to_
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx = {
@@ -14603,10 +14603,10 @@ subtest 'run_get_pipeline_builds_action_rewriter_migration_summary_from_compiled
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); return_a(Top) }
+ /a/ -> Top { call(Leaf); return(1) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $orig_build_action_rewriter_migration_summary = \&LinkedSpec::Compiler::_build_action_rewriter_migration_summary;
@@ -14641,7 +14641,7 @@ subtest 'compiler_pipeline_avoids_linkedspec_build_dependency_regex_map_facade' 
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my ($ok_run, $descr, $err) = (0, undef, '');
@@ -14675,7 +14675,7 @@ subtest 'ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade' =
             LECODE => [],
         },
         acode_entries => [
-            { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
+            { relabel => 'Top', reidx => 0, code => 'return(1)' },
         ],
         bcode_entries => [],
     };
@@ -14714,7 +14714,7 @@ subtest 'spec_entry_avoids_removed_ruleir_emit_context_delegates' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     require LinkedSpec::BootstrapSpec;
@@ -14951,7 +14951,7 @@ subtest 'emit_context_avoids_deps_scanner_dep_builder' => sub {
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_scanner_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_SCANNER_DEPS__\n" };
-        $rewritten = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'return_a(Top)');
+        $rewritten = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'return(1)');
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -14989,8 +14989,8 @@ subtest 'emit_context_avoids_deps_canonical_event_dep_builder' => sub {
         local *LinkedSpec::Deps::action_rewriter_canonical_event_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_CANONICAL_EVENT_DEPS__\n" };
         $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events(
             'Top',
-            'return_a(Top)',
-            [{ raw => 'return_a(Top)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
+            'return(1)',
+            [{ raw => 'return(1)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
         );
         1;
     };
@@ -15010,7 +15010,7 @@ subtest 'emit_context_avoids_deps_diagnostics_dep_builder' => sub {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_diagnostics_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__\n" };
         $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
-            'return_a(Top); return_a(Top)',
+            'return(1); return(1)',
             [{ id => 'return_a', diag_name => 'return_a', unresolved_pattern => qr/\breturn_a\s*\(/ }],
         );
         1;
@@ -15030,7 +15030,7 @@ subtest 'emit_context_avoids_deps_rewrite_pipeline_dep_builder' => sub {
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_REWRITE_PIPELINE_DEPS__\n" };
-        ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics('Top', 'return_a(Top)');
+        ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics('Top', 'return(1)');
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -15215,7 +15215,7 @@ subtest 'emit_context_require_avoids_method_expr_load_until_parse_helper' => sub
         'require LinkedSpec::RuleIR::EmitContext;'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_EAGER__\n" : "__METHODEXPR_STILL_LAZY__\n";'
       . 'print exists($INC{"LinkedSpec/Deps.pm"}) ? "__DEPS_EAGER__\n" : "__DEPS_STILL_UNLOADED__\n";'
-      . 'my $expr = LinkedSpec::RuleIR::EmitContext::_parse_method_function_expr("return_a(Top)");'
+      . 'my $expr = LinkedSpec::RuleIR::EmitContext::_parse_method_function_expr("return(1)");'
       . 'print ref($expr) eq "HASH" ? "__METHOD_EXPR_HASH__\n" : "__METHOD_EXPR_OTHER__\n";'
       . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_PARSE__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_AFTER_PARSE__\n" : "__METHODEXPR_STILL_UNLOADED__\n";'
@@ -15236,7 +15236,7 @@ subtest 'emit_context_require_avoids_canonical_events_load_until_canonical_build
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
         'require LinkedSpec::RuleIR::EmitContext;'
       . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_EAGER__\n" : "__CANONICAL_EVENTS_STILL_LAZY__\n";'
-      . 'my $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events("Top", "return_a(Top)", [{ raw => "return_a(Top)", args => { label => "Top" }, contract_id => "return_a", ir_node => "RETURN" }]);'
+      . 'my $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events("Top", "return(1)", [{ raw => "return(1)", args => { label => "Top" }, contract_id => "return_a", ir_node => "RETURN" }]);'
       . 'print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_AFTER_BUILD__\n" : "__CANONICAL_EVENTS_STILL_UNLOADED__\n";'
       . 'print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A" ? "__CANONICAL_EVENTS_ARGS_OK__\n" : "__CANONICAL_EVENTS_ARGS_BAD__\n";'
@@ -15256,7 +15256,7 @@ subtest 'emit_context_require_avoids_diagnostics_load_until_diag_helper' => sub 
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/Diagnostics.pm"}) ? "__DIAGNOSTICS_EAGER__\n" : "__DIAGNOSTICS_STILL_LAZY__\n";
 my $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
-    "return_a(Top); return_a(Top)",
+    "return(1); return(1)",
     [{ id => "return_a", diag_name => "return_a", unresolved_pattern => qr/\breturn_a\s*\(/ }],
 );
 print ref($diag) eq "HASH" ? "__DIAGNOSTICS_HASH__\n" : "__DIAGNOSTICS_OTHER__\n";
@@ -15355,7 +15355,7 @@ subtest 'emit_context_require_avoids_rewrite_pipeline_load_until_rewrite_helper'
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_EAGER__\n" : "__REWRITE_PIPELINE_STILL_LAZY__\n";
-my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics("Top", "return_a(Top)");
+my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics("Top", "return(1)");
 print defined($rewritten) && ref($diag) eq "HASH" ? "__REWRITE_PIPELINE_RESULT_OK__\n" : "__REWRITE_PIPELINE_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_AFTER_HELPER__\n" : "__REWRITE_PIPELINE_STILL_UNLOADED__\n";
 if (defined($rewritten) && $rewritten eq q{return ['?Top:', \@Top]} && ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A") {
@@ -16107,7 +16107,7 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
 
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'return_a(Top, $x)'),
+        LinkedSpec::call_spec_handler_subst($label, 'return(1)'),
         q{return ['?Top:', ( $x), \@Top]},
         'return_a(label,arg) helper rewrite preserved'
     );
@@ -18241,7 +18241,7 @@ subtest 'emit_context_lowers_typed_declare_methods_and_aliases' => sub {
 
     my $spec_content = <<'SPEC';
 Top:: I.declare(array, items, captures=array(scalar(seed))).declare(scalar, flag=or(scalar(on), scalar(off))).declare(hash, by_name=hash("k", scalar(v)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -18646,7 +18646,7 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
 
     my $spec_content = <<'SPEC';
 Top:: I.assign(scalar(c), CAPTURE).substr(scalar(c), "\\s*$", "", o).return_array(semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -18682,7 +18682,7 @@ subtest 'emit_context_lowers_push_value_method_contract' => sub {
 
     my $spec_content = <<'SPEC';
 Top:: I.declare(array, items).declare(scalar, retv).assign(scalar(retv), CAPTURE).push_value(array(items), scalar(retv))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -18847,7 +18847,7 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
 
     my $spec_content = <<'SPEC';
 Top:: I.declare(array, items).declare(scalar, retv).assign(array(items), array(scalar(retv))).return(array_copy(array(items)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -18979,13 +18979,13 @@ subtest 'method_like_collection_value_pipeline_forms_lower_equivalently' => sub 
     my $fluent_spec = <<'SPEC';
 Top::&
 I.declare(array, items=filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).assign(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 I { declare(array, items=filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); assign(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/)) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -19031,13 +19031,13 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
     my $fluent_spec = <<'SPEC';
 Top::&
 I.declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 I { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -19178,13 +19178,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_blocks_lower_equi
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.if(scalar(on)).return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).elseif(scalar(alt_on)).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); elseif(scalar(alt_on)); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); else(); return_undef(); endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -19222,13 +19222,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_blocks_lower_eq
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.switch(scalar(kind)).case("A").return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).default().return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); default(); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -19348,13 +19348,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_multi_step_blocks
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.if(scalar(on)).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))).elseif(scalar(alt_on)).say("alt").return_undef().else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on)); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); elseif(scalar(alt_on)); say("alt"); return_undef(); else(); return_undef(); endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -19391,13 +19391,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_multi_step_bloc
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.switch(scalar(kind)).case("A").declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))).default().say("miss").return_undef().endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { switch(scalar(kind)); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); default(); say("miss"); return_undef(); endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -19477,13 +19477,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_inline_composite_switch_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.switch(scalar(op), case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef()))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { switch(scalar(op), case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -19578,7 +19578,7 @@ subtest 'method_like_lifecycle_inline_composite_switch_branch_blocks_lower_equiv
     my $list_spec = <<'SPEC';
 Top::&
 LX { switch(scalar(op), case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
@@ -19597,7 +19597,7 @@ LX {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -19730,7 +19730,7 @@ LX {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $attached_spec = <<'SPEC';
@@ -19749,7 +19749,7 @@ LX {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -19847,13 +19847,13 @@ subtest 'method_like_lifecycle_inline_composite_if_lower_equivalently' => sub {
     my $inline_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $marker_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return_array(semantic_annotation, hash("items", array(events))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -19955,7 +19955,7 @@ subtest 'method_like_lifecycle_inline_composite_if_branch_blocks_lower_equivalen
     my $list_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
@@ -19977,7 +19977,7 @@ LX {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -20106,7 +20106,7 @@ LX {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $attached_spec = <<'SPEC';
@@ -20125,7 +20125,7 @@ LX {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -20180,13 +20180,13 @@ subtest 'method_like_remaining_lifecycle_inline_composite_if_lower_equivalently'
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.if(scalar(on), declare(array, events), return_undef(), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef()))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
 Top::&
 $tag { if(scalar(on), declare(array, events), return_undef(), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -20252,7 +20252,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -20270,7 +20270,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -20389,7 +20389,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_spec = <<"SPEC";
@@ -20403,7 +20403,7 @@ $tag.if(scalar(on)) {
  } else {
   return_undef()
  }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
@@ -20520,7 +20520,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_spec = <<"SPEC";
@@ -20534,7 +20534,7 @@ $tag.if(scalar(on)) {
  else {
   return_undef()
  }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
@@ -20678,7 +20678,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -20698,7 +20698,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -20877,7 +20877,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -20907,7 +20907,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -21092,7 +21092,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -21124,7 +21124,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -21274,7 +21274,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -21295,7 +21295,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -21486,7 +21486,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -21521,7 +21521,7 @@ $tag {
     )
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -21707,7 +21707,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -21740,7 +21740,7 @@ $tag {
     endswitch()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -21975,7 +21975,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -22024,7 +22024,7 @@ $tag {
     )
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -22251,7 +22251,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -22297,7 +22297,7 @@ $tag {
     endswitch()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -22353,13 +22353,13 @@ subtest 'method_like_remaining_lifecycle_inline_composite_switch_lower_equivalen
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.switch(scalar(op), case("|", declare(array, events), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef()))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
 Top::&
 $tag { switch(scalar(op), case("|", declare(array, events), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -22409,7 +22409,7 @@ subtest 'method_like_remaining_lifecycle_inline_composite_if_branch_blocks_lower
             my $list_spec = <<"SPEC";
 Top::&
 $tag { if(scalar(on), declare(array, events), return_undef(), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
@@ -22430,7 +22430,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -22481,7 +22481,7 @@ subtest 'method_like_remaining_lifecycle_inline_composite_switch_branch_blocks_l
             my $list_spec = <<"SPEC";
 Top::&
 $tag { switch(scalar(op), case("|", declare(array, events), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
@@ -22498,7 +22498,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -22560,7 +22560,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -22577,7 +22577,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -22716,7 +22716,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -22851,7 +22851,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -22999,7 +22999,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -23151,7 +23151,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -23311,7 +23311,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -23395,13 +23395,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_flat_list_helpers_lower_equ
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "source", "rule")).return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")).return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail"))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail")) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -23476,13 +23476,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_array_snapshot_helpers_lowe
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.return(array_copy(array(items))).return(hash("content", array_copy(array(assigns))))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { return(array_copy(array(items))); return(hash("content", array_copy(array(assigns)))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -23765,7 +23765,7 @@ subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_optional_se
     my $if_fluent_spec = <<'SPEC';
 Top::&
 LX.if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $if_block_spec = <<'SPEC';
@@ -23777,13 +23777,13 @@ LX { if(scalar(on))
  else()
  return_undef()
  endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $switch_fluent_spec = <<'SPEC';
 Top::&
 LX.switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $switch_block_spec = <<'SPEC';
@@ -23794,7 +23794,7 @@ LX { switch(scalar(kind))
  default()
  return(hash("content", array_copy(array(assigns))))
  endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descriptor => 1);
@@ -23861,7 +23861,7 @@ subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_bare_zero_a
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.if(scalar(on)).return(hash("item", scalar(retv))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
@@ -23871,7 +23871,7 @@ $tag { if(scalar(on))
  else
  return_undef()
  endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -23901,7 +23901,7 @@ SPEC
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).endcase().default().return_undef().endcase().endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
@@ -23914,7 +23914,7 @@ $tag { switch(scalar(kind))
  return_undef()
  endcase
  endswitch }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -23961,13 +23961,13 @@ subtest 'method_like_fluent_lifecycle_control_flow_chains_accept_bare_zero_arg_m
             my $explicit_spec = <<"SPEC";
 Top::&
 $tag.if(scalar(on)).return(hash("item", scalar(retv))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $bare_spec = <<"SPEC";
 Top::&
 $tag.if(scalar(on)).return(hash("item", scalar(retv))).else.return_undef().endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descriptor => 1);
@@ -24002,13 +24002,13 @@ SPEC
             my $explicit_spec = <<"SPEC";
 Top::&
 $tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).endcase().default().return_undef().endcase().endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $bare_spec = <<"SPEC";
 Top::&
 $tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).endcase.default.return_undef().endcase.endswitch
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descriptor => 1);
@@ -24075,7 +24075,7 @@ subtest 'method_like_structured_remaining_lifecycle_control_flow_blocks_accept_o
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.if(scalar(on)).return(hash("item", scalar(retv))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
@@ -24085,7 +24085,7 @@ $tag { if(scalar(on))
  else()
  return_undef()
  endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -24115,7 +24115,7 @@ SPEC
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).default().return_undef().endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
@@ -24126,7 +24126,7 @@ $tag { switch(scalar(kind))
  default()
  return_undef()
  endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -24245,7 +24245,7 @@ $tag {
   return_undef()
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -24261,7 +24261,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
@@ -24391,7 +24391,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -24407,7 +24407,7 @@ $tag {
     }
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -24533,7 +24533,7 @@ $tag {
     }
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $plain_marker_spec = <<"SPEC";
@@ -24547,7 +24547,7 @@ $tag {
       return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descriptor => 1);
@@ -24658,7 +24658,7 @@ $tag {
       return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_spec = <<"SPEC";
@@ -24670,7 +24670,7 @@ $tag.switch(scalar(op)) {
   default
     return_undef()
  }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
@@ -24806,7 +24806,7 @@ $tag {
     }
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $mixed_carrier_spec = <<"SPEC";
@@ -24824,7 +24824,7 @@ $tag {
     }
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descriptor => 1);
@@ -24952,7 +24952,7 @@ $tag {
     }
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_spec = <<"SPEC";
@@ -24968,7 +24968,7 @@ $tag.switch(scalar(op)) {
     return_undef()
   }
  }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
@@ -25097,7 +25097,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -25232,7 +25232,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -25380,7 +25380,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -25534,7 +25534,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -25696,7 +25696,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -25989,7 +25989,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -26053,7 +26053,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -26341,7 +26341,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -26404,7 +26404,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -26660,7 +26660,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -26712,7 +26712,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -26965,7 +26965,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -27016,7 +27016,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -27296,7 +27296,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -27356,7 +27356,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -27633,7 +27633,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -27692,7 +27692,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -28019,7 +28019,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -28095,7 +28095,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -28419,7 +28419,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_if_spec = <<"SPEC";
@@ -28494,7 +28494,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
@@ -28660,7 +28660,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -28820,7 +28820,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -28980,7 +28980,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -29138,7 +29138,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -29327,7 +29327,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -29363,7 +29363,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -29552,7 +29552,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -29587,7 +29587,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -29890,7 +29890,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -29962,7 +29962,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -30179,7 +30179,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -30222,7 +30222,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -30408,7 +30408,7 @@ $tag {
     }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -30442,7 +30442,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
@@ -30739,7 +30739,7 @@ $tag {
     }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -30810,7 +30810,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
@@ -31087,7 +31087,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -31150,7 +31150,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -31420,7 +31420,7 @@ $tag {
     }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -31482,7 +31482,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
@@ -31692,7 +31692,7 @@ $tag {
     return_undef()
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -31734,7 +31734,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
@@ -31949,7 +31949,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_spec = <<"SPEC";
@@ -31991,7 +31991,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -32181,7 +32181,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_spec = <<"SPEC";
@@ -32216,7 +32216,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -32407,7 +32407,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_spec = <<"SPEC";
@@ -32444,7 +32444,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -32627,7 +32627,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_spec = <<"SPEC";
@@ -32661,7 +32661,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -32959,7 +32959,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_spec = <<"SPEC";
@@ -33030,7 +33030,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -33302,7 +33302,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_spec = <<"SPEC";
@@ -33364,7 +33364,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -33683,7 +33683,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_spec = <<"SPEC";
@@ -33761,7 +33761,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -33944,7 +33944,7 @@ $tag {
     endswitch()
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -33979,7 +33979,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
@@ -34300,7 +34300,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -34379,7 +34379,7 @@ $tag {
     }
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
@@ -34696,7 +34696,7 @@ $tag {
     }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -34774,7 +34774,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
@@ -34927,7 +34927,7 @@ $tag {
     return_undef()
   endif()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -35076,7 +35076,7 @@ $tag {
   }
   endswitch()
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -35271,7 +35271,7 @@ $tag {
     })
   )
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $attached_spec = <<"SPEC";
@@ -35307,7 +35307,7 @@ $tag {
     return_undef()
   }
 }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -35351,13 +35351,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_br
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on)); return(array_copy(array(items))); elseif(scalar(alt_on)); return(hash("content", array_copy(array(assigns)))); else(); return_undef(); endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35394,13 +35394,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_array_snapshot_
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { switch(scalar(kind)); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_copy(array(assigns)))); endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35477,13 +35477,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_join_values_helpers_lower_e
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.return(hash("joined", join_values(", ", array(parts)))).return(array("word", join_values("", array(word))))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { return(hash("joined", join_values(", ", array(parts)))); return(array("word", join_values("", array(word)))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35559,13 +35559,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_join_values_projected_array
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, joined_keys).assign(scalar(joined_keys), join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, joined_keys); assign(scalar(joined_keys), join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35643,13 +35643,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_first_last_value_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, first_key).declare(scalar, last_value).assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))).return(hash("first_key", scalar(first_key), "last_value", scalar(last_value)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, first_key); declare(scalar, last_value); assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", scalar(first_key), "last_value", scalar(last_value))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35727,13 +35727,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_length_value_helpers_lower_
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, clean_name).declare(scalar, clean_length).assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))).assign(scalar(clean_length), length(scalar(clean_name))).return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH))))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35811,13 +35811,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_composed_scalar_container_r
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, first_key).declare(scalar, chosen_kind).assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 0)).assign(scalar(chosen_kind), scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind")).return(hash("first_key", scalar(first_key), "chosen_kind", scalar(chosen_kind)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, first_key); declare(scalar, chosen_kind); assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 0)); assign(scalar(chosen_kind), scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind")); return(hash("first_key", scalar(first_key), "chosen_kind", scalar(chosen_kind))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35895,13 +35895,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_front_array_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35979,13 +35979,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_take_array_helpers_lower_eq
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, first_keys).declare(scalar, take_count=2, first_count).assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_count))).assign(scalar(first_count), count(array(first_keys))).return(hash("first_keys", array_copy(array(first_keys)), "first_count", scalar(first_count)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, first_keys); declare(scalar, take_count=2, first_count); assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_count))); assign(scalar(first_count), count(array(first_keys))); return(hash("first_keys", array_copy(array(first_keys)), "first_count", scalar(first_count))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36063,13 +36063,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_slice_array_helpers_lower_e
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, middle_keys).declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle).assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))).assign(scalar(middle_count), count(array(middle_keys))).assign(scalar(first_middle), scalar(array(middle_keys), 0)).return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", scalar(middle_count), "first_middle", scalar(first_middle)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, middle_keys); declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle); assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))); assign(scalar(middle_count), count(array(middle_keys))); assign(scalar(first_middle), scalar(array(middle_keys), 0)); return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", scalar(middle_count), "first_middle", scalar(first_middle))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36147,13 +36147,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_take_last_array_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, last_keys).declare(scalar, take_last_count=2, last_count).assign(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_last_count))).assign(scalar(last_count), count(array(last_keys))).return(hash("last_keys", array_copy(array(last_keys)), "last_count", scalar(last_count)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, last_keys); declare(scalar, take_last_count=2, last_count); assign(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_last_count))); assign(scalar(last_count), count(array(last_keys))); return(hash("last_keys", array_copy(array(last_keys)), "last_count", scalar(last_count))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36231,13 +36231,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_boundary_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix).assign(scalar(has_prefix), starts_with(lowercase(trim(scalar(raw_name))), "prefix")).assign(scalar(has_suffix), ends_with(lowercase(trim(scalar(raw_name))), "suffix")).return(hash("has_prefix", scalar(has_prefix), "has_suffix", scalar(has_suffix)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix); assign(scalar(has_prefix), starts_with(lowercase(trim(scalar(raw_name))), "prefix")); assign(scalar(has_suffix), ends_with(lowercase(trim(scalar(raw_name))), "suffix")); return(hash("has_prefix", scalar(has_prefix), "has_suffix", scalar(has_suffix))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36315,13 +36315,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_contains_substr_help
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node).assign(scalar(has_fix), contains_substr(lowercase(trim(scalar(raw_name))), "fix")).assign(scalar(has_node), contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")).return(hash("has_fix", scalar(has_fix), "has_node", scalar(has_node)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node); assign(scalar(has_fix), contains_substr(lowercase(trim(scalar(raw_name))), "fix")); assign(scalar(has_node), contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")); return(hash("has_fix", scalar(has_fix), "has_node", scalar(has_node))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36401,13 +36401,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_replace_substr_helpe
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized).assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")).if(eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")).return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))).else.return(hash("normalized", scalar(normalized), "normalized_kind", "other")).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")); if(eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")); return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))); else; return(hash("normalized", scalar(normalized), "normalized_kind", "other")); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36487,13 +36487,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_boundary_transform_h
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed).assign(scalar(prefix_trimmed), rm_prefix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "node_")).assign(scalar(suffix_trimmed), rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end")).return(hash("prefix_trimmed", scalar(prefix_trimmed), "suffix_trimmed", scalar(suffix_trimmed)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed); assign(scalar(prefix_trimmed), rm_prefix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "node_")); assign(scalar(suffix_trimmed), rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end")); return(hash("prefix_trimmed", scalar(prefix_trimmed), "suffix_trimmed", scalar(suffix_trimmed))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36571,13 +36571,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_concat_helpers_lower
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", full_name).assign(scalar(full_name), concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_"))).return(hash("full_name", scalar(full_name), "stage_key", concat(scalar(full_name), "::", scalar(stage))))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", full_name); assign(scalar(full_name), concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_"))); return(hash("full_name", scalar(full_name), "stage_key", concat(scalar(full_name), "::", scalar(stage)))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36655,13 +36655,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_regex_helpers_lower_
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha).assign(scalar(is_prefixed), matches(lowercase(trim(scalar(raw_name))), /^prefix/)).assign(scalar(is_alpha), matches(uppercase(trim(scalar(raw_name))), /^[A-Z]+$/)).return(hash("is_prefixed", scalar(is_prefixed), "is_alpha", scalar(is_alpha)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha); assign(scalar(is_prefixed), matches(lowercase(trim(scalar(raw_name))), /^prefix/)); assign(scalar(is_alpha), matches(uppercase(trim(scalar(raw_name))), /^[A-Z]+$/)); return(hash("is_prefixed", scalar(is_prefixed), "is_alpha", scalar(is_alpha))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36739,13 +36739,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_arithmetic_helpers_
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("A", "B", "C")).declare(scalar, depth=1.25, offset=0.75, next_depth, remaining).assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset))).assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1)).return(hash("next_depth", scalar(next_depth), "remaining", scalar(remaining)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("A", "B", "C")); declare(scalar, depth=1.25, offset=0.75, next_depth, remaining); assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset))); assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1)); return(hash("next_depth", scalar(next_depth), "remaining", scalar(remaining))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36823,13 +36823,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_product_division_he
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, factor=1.5, divisor=2, scaled_count, average_count).assign(scalar(scaled_count), num_mul(count(array(parts)), scalar(factor))).assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))).return(hash("scaled_count", scalar(scaled_count), "average_count", scalar(average_count)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, factor=1.5, divisor=2, scaled_count, average_count); assign(scalar(scaled_count), num_mul(count(array(parts)), scalar(factor))); assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))); return(hash("scaled_count", scalar(scaled_count), "average_count", scalar(average_count))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36907,13 +36907,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_min_max_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, offset=1, lower_limit=3, upper_limit=6, floor_value, ceiling_value).assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)).assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))).return(hash("floor_value", scalar(floor_value), "ceiling_value", scalar(ceiling_value)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=1, lower_limit=3, upper_limit=6, floor_value, ceiling_value); assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)); assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))); return(hash("floor_value", scalar(floor_value), "ceiling_value", scalar(ceiling_value))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36991,13 +36991,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_mod_helper_lower_eq
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("A", "B", "C", "D", "E")).declare(scalar, offset=1, divisor=3, bucket, wrapped).assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), scalar(divisor))).assign(scalar(wrapped), num_mod(num_add(scalar(bucket), 5), 4)).return(hash("bucket", scalar(bucket), "wrapped", scalar(wrapped)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("A", "B", "C", "D", "E")); declare(scalar, offset=1, divisor=3, bucket, wrapped); assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), scalar(divisor))); assign(scalar(wrapped), num_mod(num_add(scalar(bucket), 5), 4)); return(hash("bucket", scalar(bucket), "wrapped", scalar(wrapped))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37075,13 +37075,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_clamp_helper_lower_
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, offset=2, lower_limit=3, upper_limit=5, bounded, delta).assign(scalar(bounded), num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit))).assign(scalar(delta), num_clamp(num_sub(scalar(offset), 5), -4, 0)).return(hash("bounded", scalar(bounded), "delta", scalar(delta)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=2, lower_limit=3, upper_limit=5, bounded, delta); assign(scalar(bounded), num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit))); assign(scalar(delta), num_clamp(num_sub(scalar(offset), 5), -4, 0)); return(hash("bounded", scalar(bounded), "delta", scalar(delta))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37159,13 +37159,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_back_array_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, leading_keys).declare(scalar, drop_count=1, kept_count).assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))).assign(scalar(kept_count), count(array(leading_keys))).return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37243,13 +37243,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_alias_array_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, rest_keys).declare(array, leading_keys).declare(scalar, skip_count=2, drop_count=1, kept_count).assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))).assign(scalar(kept_count), count(array(leading_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, rest_keys); declare(array, leading_keys); declare(scalar, skip_count=2, drop_count=1, kept_count); assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37369,13 +37369,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_join_values_branc
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.if(scalar(on)).return(hash("joined", join_values(", ", array(parts)))).elseif(scalar(alt_on)).return(array("word", join_values("", array(word)))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on)); return(hash("joined", join_values(", ", array(parts)))); elseif(scalar(alt_on)); return(array("word", join_values("", array(word)))); else(); return_undef(); endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37412,13 +37412,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_join_values_bra
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.switch(scalar(kind)).case("A").return(hash("joined", join_values(", ", array(parts)))).default().return(array("word", join_values("", array(word)))).endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { switch(scalar(kind)); case("A"); return(hash("joined", join_values(", ", array(parts)))); default(); return(array("word", join_values("", array(word)))); endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37539,13 +37539,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_flat_list_branche
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.if(scalar(on)).return(hash(flat_hash(extra_pairs), "kind", "node")).elseif(scalar(alt_on)).return(array("?node:", flat_array(IMATCH_LIST))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { if(scalar(on)); return(hash(flat_hash(extra_pairs), "kind", "node")); elseif(scalar(alt_on)); return(array("?node:", flat_array(IMATCH_LIST))); else(); return_undef(); endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37582,13 +37582,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_flat_list_branc
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.switch(scalar(kind)).case("A").return(hash(flat_hash(extra_pairs), "kind", "node")).default().return(array("?node:", flat_array(IMATCH_LIST))).endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { switch(scalar(kind)); case("A"); return(hash(flat_hash(extra_pairs), "kind", "node")); default(); return(array("?node:", flat_array(IMATCH_LIST))); endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37672,7 +37672,7 @@ subtest 'method_like_fluent_and_structured_lifecycle_call_value_helpers_lower_eq
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, retv).assign(scalar(retv), call(Leaf)).return(hash("item", scalar(retv)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -37680,7 +37680,7 @@ SPEC
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, retv); assign(scalar(retv), call(Leaf)); return(hash("item", scalar(retv))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -37817,7 +37817,7 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_call_value_branch
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, retv).if(scalar(on)).assign(scalar(retv), call(Leaf)).return(hash("item", scalar(retv))).elseif(scalar(alt_on)).assign(scalar(retv), call(Leaf)).return(array("alt", scalar(retv))).else().return_undef().endif()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -37825,7 +37825,7 @@ SPEC
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, retv); if(scalar(on)); assign(scalar(retv), call(Leaf)); return(hash("item", scalar(retv))); elseif(scalar(alt_on)); assign(scalar(retv), call(Leaf)); return(array("alt", scalar(retv))); else(); return_undef(); endif() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -37867,7 +37867,7 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_call_value_bran
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, retv).switch(scalar(kind)).case("A").assign(scalar(retv), call(Leaf)).return(hash("item", scalar(retv))).default().assign(scalar(retv), call(Leaf)).return(array("alt", scalar(retv))).endswitch()
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -37875,7 +37875,7 @@ SPEC
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, retv); switch(scalar(kind)); case("A"); assign(scalar(retv), call(Leaf)); return(hash("item", scalar(retv))); default(); assign(scalar(retv), call(Leaf)); return(array("alt", scalar(retv))); endswitch() }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -37959,13 +37959,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_nested_accessor_payloads_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, content).assign(scalar(content), scalaref(retv, {content})).return(hash("content", scalar(content), "head", scalar(items, 0))).return(array(scalaref(tree, [0]{kind}), scalar(hash(by_name), key)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, content); assign(scalar(content), scalaref(retv, {content})); return(hash("content", scalar(content), "head", scalar(items, 0))); return(array(scalaref(tree, [0]{kind}), scalar(hash(by_name), key))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38047,13 +38047,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_array_normalization_pipelin
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts).declare(scalar, args).assign(scalar(args), "left:1, right:2").split(array(parts), scalar(args), /,\s*/).split_each(array(parts), /:/).trim_each(array(parts)).filter_nonempty(array(parts)).return(array_copy(array(parts)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts); declare(scalar, args); assign(scalar(args), "left:1, right:2"); split(array(parts), scalar(args), /,\s*/); split_each(array(parts), /:/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array_copy(array(parts))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38139,13 +38139,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_case_normalization_filter_p
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts).assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).lowercase_each(array(parts)).return(array_copy(array(parts)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts); assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); lowercase_each(array(parts)); return(array_copy(array(parts))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38305,13 +38305,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_value_helpers_lowe
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, chosen).assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")).if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), array("empty")))).else.return(hash("chosen", scalar(chosen), "parts", array("fallback"))).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), array("empty")))); else; return(hash("chosen", scalar(chosen), "parts", array("fallback"))); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38350,13 +38350,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_nonempty_value_hel
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")).if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38473,13 +38473,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_definedness_flow_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, chosen).if(is_defined(scalaref(retv, {content}))).assign(scalar(chosen), scalaref(retv, {content})).elseif(is_undefined(scalaref(retv, {type}))).assign(scalar(chosen), "MISSING_TYPE").else.assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")).endif.return(hash("chosen", scalar(chosen)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, chosen); if(is_defined(scalaref(retv, {content}))); assign(scalar(chosen), scalaref(retv, {content})); elseif(is_undefined(scalaref(retv, {type}))); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38600,13 +38600,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_aggregate_emptiness_flow_he
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))).return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))).else.return(hash("state", "other")).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38706,13 +38706,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_normalization_helper
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))).if(eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38818,13 +38818,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_count_value_helpers_lower_e
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, part_count).assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty")))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", scalar(part_count), "seen", count(array(parts)))).else.return(hash("part_count", scalar(part_count), "seen", 0)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, part_count); assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty")))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", scalar(part_count), "seen", count(array(parts)))); else; return(hash("part_count", scalar(part_count), "seen", 0)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39084,13 +39084,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_contains_value_helpers_lowe
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))).declare(scalar, has_kind).assign(scalar(has_kind), contains(array(projected_keys), "kind")).if(and(scalar(has_kind), contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))).return(hash("has_kind", scalar(has_kind), "keys", array_copy(array(projected_keys)))).else.return(hash("has_kind", scalar(has_kind), "keys", array())).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); declare(scalar, has_kind); assign(scalar(has_kind), contains(array(projected_keys), "kind")); if(and(scalar(has_kind), contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", scalar(has_kind), "keys", array_copy(array(projected_keys)))); else; return(hash("has_kind", scalar(has_kind), "keys", array())); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39196,13 +39196,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_index_of_value_helpers_lowe
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))).declare(scalar, kind_index).assign(scalar(kind_index), index_of(array(projected_keys), "kind")).if(is_defined(scalar(kind_index))).return(index_of(array(projected_keys), "kind")).else.return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); declare(scalar, kind_index); assign(scalar(kind_index), index_of(array(projected_keys), "kind")); if(is_defined(scalar(kind_index))); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39308,13 +39308,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_count_keys_value_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, meta_key_count).assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(scalar, meta_key_count); assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39420,13 +39420,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_has_key_value_helpers_lower
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "existing", "source", "rule")).declare(scalar, has_kind).assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39532,13 +39532,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_merge_hash_value_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta_base=hash("kind", "existing", "source", "rule")).declare(hash, merged_meta).declare(scalar, has_kind).assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized"))).assign(scalar(has_kind), has_key(hash(merged_meta), "kind")).if(scalar(has_kind)).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized"))); assign(scalar(has_kind), has_key(hash(merged_meta), "kind")); if(scalar(has_kind)); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39644,13 +39644,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_hash_copy_value_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39756,13 +39756,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_set_key_value_helpers_lower
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))).assign(scalar(has_stage), has_key(hash(normalized), "stage")).assign(scalar(chosen_stage), scalar(hash(normalized), "stage")).if(scalar(has_stage)).return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39868,13 +39868,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_rename_key_value_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).assign(hash(normalized), rename_key(set_key(hash(meta), "owner", scalar(rule_name)), "old_stage", "stage")).assign(scalar(has_stage), has_key(hash(normalized), "stage")).assign(scalar(chosen_stage), scalar(hash(normalized), "stage")).if(scalar(has_stage)).return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), rename_key(set_key(hash(meta), "owner", scalar(rule_name)), "old_stage", "stage")); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -39980,13 +39980,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_keys_value_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")).assign(scalar(has_kind), has_key(hash(cleaned), "kind")).if(scalar(has_kind)).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40092,13 +40092,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_pick_keys_value_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(hash, projected).declare(scalar, has_kind).assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage")).assign(scalar(has_kind), has_key(hash(projected), "kind")).if(scalar(has_kind)).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage")); assign(scalar(has_kind), has_key(hash(projected), "kind")); if(scalar(has_kind)); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40204,13 +40204,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_keys_value_helpers_l
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(key_count), count(array(projected_keys))).if(num_gt(scalar(key_count), 0)).return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40316,13 +40316,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_values_value_helpers
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_values).declare(scalar, value_count).assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(value_count), count(array(projected_values))).if(num_gt(scalar(value_count), 0)).return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(value_count), count(array(projected_values))); if(num_gt(scalar(value_count), 0)); return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40426,13 +40426,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_concat_arrays_value_helpers
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("left", "right"), combined=concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("tail"))).declare(scalar, combined_count, first_item).assign(scalar(combined_count), count(array(combined))).assign(scalar(first_item), scalar(array(combined), 0)).return(hash("combined", array_copy(array(combined)), "combined_count", scalar(combined_count), "first_item", scalar(first_item)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("left", "right"), combined=concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("tail"))); declare(scalar, combined_count, first_item); assign(scalar(combined_count), count(array(combined))); assign(scalar(first_item), scalar(array(combined), 0)); return(hash("combined", array_copy(array(combined)), "combined_count", scalar(combined_count), "first_item", scalar(first_item))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40534,13 +40534,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_array_value_helpers_
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("beta", "alpha", "gamma"), ordered).declare(scalar, first_item, ordered_count, joined).assign(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("delta")))).assign(scalar(first_item), scalar(array(ordered), 0)).assign(scalar(ordered_count), count(array(ordered))).assign(scalar(joined), join_values("|", array(ordered))).return(hash("ordered", array_copy(array(ordered)), "first_item", scalar(first_item), "ordered_count", scalar(ordered_count), "joined", scalar(joined)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("beta", "alpha", "gamma"), ordered); declare(scalar, first_item, ordered_count, joined); assign(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("delta")))); assign(scalar(first_item), scalar(array(ordered), 0)); assign(scalar(ordered_count), count(array(ordered))); assign(scalar(joined), join_values("|", array(ordered))); return(hash("ordered", array_copy(array(ordered)), "first_item", scalar(first_item), "ordered_count", scalar(ordered_count), "joined", scalar(joined))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40642,13 +40642,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_reversed_array_value_helper
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts).declare(scalar, first_item, reversed_count, joined).assign(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("tail")))).assign(scalar(first_item), scalar(array(reversed_parts), 0)).assign(scalar(reversed_count), count(array(reversed_parts))).assign(scalar(joined), join_values("|", array(reversed_parts))).return(hash("reversed_parts", array_copy(array(reversed_parts)), "first_item", scalar(first_item), "reversed_count", scalar(reversed_count), "joined", scalar(joined)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts); declare(scalar, first_item, reversed_count, joined); assign(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("tail")))); assign(scalar(first_item), scalar(array(reversed_parts), 0)); assign(scalar(reversed_count), count(array(reversed_parts))); assign(scalar(joined), join_values("|", array(reversed_parts))); return(hash("reversed_parts", array_copy(array(reversed_parts)), "first_item", scalar(first_item), "reversed_count", scalar(reversed_count), "joined", scalar(joined))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40750,13 +40750,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_sum_value_helpers_lower
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)).declare(scalar, total, bounded_total).assign(scalar(total), num_sum(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(bounded_total), num_clamp(scalar(total), 0, 20)).return(hash("total", scalar(total), "bounded_total", scalar(bounded_total)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)); declare(scalar, total, bounded_total); assign(scalar(total), num_sum(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(bounded_total), num_clamp(scalar(total), 0, 20)); return(hash("total", scalar(total), "bounded_total", scalar(bounded_total))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40858,13 +40858,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_avg_value_helpers_lower
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, scores=array(2, 4, 6), extras=array(8, 10)).declare(scalar, avg, rounded_avg).assign(scalar(avg), num_avg(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(rounded_avg), num_round(scalar(avg))).return(hash("avg", scalar(avg), "rounded_avg", scalar(rounded_avg)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, avg, rounded_avg); assign(scalar(avg), num_avg(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(rounded_avg), num_round(scalar(avg))); return(hash("avg", scalar(avg), "rounded_avg", scalar(rounded_avg))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -40966,13 +40966,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_median_value_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, scores=array(2, 4, 6), extras=array(8, 10)).declare(scalar, median, rounded_median).assign(scalar(median), num_median(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(rounded_median), num_round(scalar(median))).return(hash("median", scalar(median), "rounded_median", scalar(rounded_median)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, median, rounded_median); assign(scalar(median), num_median(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(rounded_median), num_round(scalar(median))); return(hash("median", scalar(median), "rounded_median", scalar(rounded_median))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -41074,13 +41074,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_range_value_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, span).assign(scalar(span), num_range(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("span", scalar(span)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, span); assign(scalar(span), num_range(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("span", scalar(span))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -41192,13 +41192,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_minmax_array_reducer_he
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, lowest, highest).assign(scalar(lowest), num_min(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(highest), num_max(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("lowest", scalar(lowest), "highest", scalar(highest)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, lowest, highest); assign(scalar(lowest), num_min(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(highest), num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", scalar(lowest), "highest", scalar(highest))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -41328,7 +41328,7 @@ subtest 'emit_context_lowers_composable_array_string_method_contracts' => sub {
 
     my $spec_content = <<'SPEC';
 Top:: I.declare(array, parts).declare(scalar, args).assign(scalar(args), CAPTURE).split(array(parts), scalar(args), /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -41378,7 +41378,7 @@ subtest 'emit_context_lowers_additional_composable_array_string_routines' => sub
 
     my $spec_content = <<'SPEC';
 Top:: I.declare(array, parts).lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -41663,19 +41663,19 @@ SPEC
 
     my $block_action_spec = <<'SPEC';
 Top::&
- /a/ -> Top { return_a(Top); return_m(Top) }
+ /a/ -> Top { return(1); return_m(Top) }
 SPEC
 
     my $fluent_lifecycle_spec = <<'SPEC';
 Top::&
 I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/)
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_lifecycle_spec = <<'SPEC';
 Top::&
 I { lowercase_each(array(parts)); filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descriptor => 1);
@@ -41726,21 +41726,21 @@ SPEC
 
     my $block_action_spec = <<'SPEC';
 Top::&
- /a/ -> Top { return_a(Top)
+ /a/ -> Top { return(1)
  return_m(Top) }
 SPEC
 
     my $fluent_lifecycle_spec = <<'SPEC';
 Top::&
 I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/)
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_lifecycle_spec = <<'SPEC';
 Top::&
 I { lowercase_each(array(parts))
  filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descriptor => 1);
@@ -41773,7 +41773,7 @@ subtest 'method_like_structured_lx_blocks_accept_optional_semicolons' => sub {
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(scalar, retv).assign(scalar(retv), call(Leaf)).return(hash("item", scalar(retv)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -41783,7 +41783,7 @@ Top::&
 LX { declare(scalar, retv)
  assign(scalar(retv), call(Leaf))
  return(hash("item", scalar(retv))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -41833,7 +41833,7 @@ subtest 'method_like_structured_remaining_lifecycle_blocks_accept_optional_semic
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.declare(scalar, retv).assign(scalar(retv), CAPTURE).return(hash("item", scalar(retv)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
@@ -41841,7 +41841,7 @@ Top::&
 $tag { declare(scalar, retv)
  assign(scalar(retv), CAPTURE)
  return(hash("item", scalar(retv))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
             my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -41881,7 +41881,7 @@ subtest 'emit_context_canonical_ir_lowering_preserves_helper_and_raw_behavior' =
         'canonical-IR lowering accepts optional helper whitespace and preserves RAW_PERL statement'
     );
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'push(Leaf,Top); return_a(Top, $x)'),
+        LinkedSpec::call_spec_handler_subst($label, 'push(Leaf,Top); return(1)'),
         q{push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); return ['?Top:', ( $x), \@Top]},
         'canonical-IR lowering preserves push/return helper output semantics'
     );
@@ -41891,10 +41891,10 @@ subtest 'emit_context_reports_unresolved_helpers_in_rule_meta' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call (Leaf); CAPTURE_IF (); return_a(Leaf); return(Leaf, $x) }
+ /a/ -> Top { call (Leaf); CAPTURE_IF (); return(1); return(Leaf, $x) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -41914,7 +41914,7 @@ subtest 'emit_context_meta_exposes_lowering_contract_ids' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -41932,10 +41932,10 @@ subtest 'emit_context_meta_exposes_helper_action_ir_nodes' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); capture_if(Top); return_a(Top) }
+ /a/ -> Top { call(Leaf); capture_if(Top); return(1) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -41955,10 +41955,10 @@ subtest 'emit_context_meta_exposes_helper_action_ir_payload_events' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); push(Leaf,Top); return_a(Top, $x + 1) }
+ /a/ -> Top { call(Leaf); push(Leaf,Top); return(1) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -41983,10 +41983,10 @@ subtest 'emit_context_meta_exposes_canonical_action_ir_with_raw_fallback' => sub
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); my $tmp = 1; push(Leaf,Top); return_a(Top, $x + 1) }
+ /a/ -> Top { call(Leaf); my $tmp = 1; push(Leaf,Top); return(1) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42015,18 +42015,18 @@ subtest 'emit_context_meta_exposes_language_agnostic_readiness' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); return_a(Top) }
+ /a/ -> Top { call(Leaf); return(1) }
 
 Mixed::&
  /b/ -> Mixed { call(Leaf); my $tmp = 1 }
 
 Unresolved::&
- /c/ -> Unresolved { return_a(Leaf) }
+ /c/ -> Unresolved { return(1) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
- /b/ -> Leaf { return_a(Leaf) }
- /c/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
+ /b/ -> Leaf { return(1) }
+ /c/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42052,14 +42052,14 @@ subtest 'emit_context_meta_exposes_language_agnostic_blocker_statements' => sub 
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); return_a(Top) }
+ /a/ -> Top { call(Leaf); return(1) }
 
 Combo::&
- /b/ -> Combo { return_a(Leaf); my $tmp = 1 }
+ /b/ -> Combo { return(1); my $tmp = 1 }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
- /b/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
+ /b/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42071,9 +42071,9 @@ SPEC
 
     my $combo_meta = $descr->{spec}{Combo}{meta}{action_rewriter};
     is($combo_meta->{unresolved_helper_count}, 1, 'combo rule tracks unresolved helper count');
-    is_deeply($combo_meta->{unresolved_helper_statements}, ['return_a(Leaf)'], 'combo rule exposes unresolved helper statement payloads');
+    is_deeply($combo_meta->{unresolved_helper_statements}, ['return(1)'], 'combo rule exposes unresolved helper statement payloads');
     is_deeply($combo_meta->{raw_perl_dependency_statements}, ['my $tmp = 1'], 'combo rule exposes raw-Perl fallback dependency statements');
-    is_deeply($combo_meta->{language_agnostic_action_ir_blocker_statements}, ['my $tmp = 1', 'return_a(Leaf)'], 'combo rule exposes combined language-agnostic blocker statements');
+    is_deeply($combo_meta->{language_agnostic_action_ir_blocker_statements}, ['my $tmp = 1', 'return(1)'], 'combo rule exposes combined language-agnostic blocker statements');
     is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 2, 'combo rule exposes combined blocker statement count');
     ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
 };
@@ -42113,18 +42113,18 @@ subtest 'return_descriptor_exposes_action_rewriter_migration_summary' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); return_a(Top) }
+ /a/ -> Top { call(Leaf); return(1) }
 
 Mixed::&
  /b/ -> Mixed { call(Leaf); my $tmp = 1 }
 
 Unresolved::&
- /c/ -> Unresolved { return_a(Leaf) }
+ /c/ -> Unresolved { return(1) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
- /b/ -> Leaf { return_a(Leaf) }
- /c/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
+ /b/ -> Leaf { return(1) }
+ /c/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42143,7 +42143,7 @@ SPEC
     my ($mixed_row) = grep { $_->{rule} eq 'Mixed' } @{$summary->{language_agnostic_blocked_rules}};
     my ($unresolved_row) = grep { $_->{rule} eq 'Unresolved' } @{$summary->{language_agnostic_blocked_rules}};
     is_deeply($mixed_row->{blocker_statements}, ['my $tmp = 1'], 'migration summary blocked entry preserves RAW_PERL blocker payload');
-    is_deeply($unresolved_row->{blocker_statements}, ['return_a(Leaf)'], 'migration summary blocked entry preserves unresolved-helper blocker payload');
+    is_deeply($unresolved_row->{blocker_statements}, ['return(1)'], 'migration summary blocked entry preserves unresolved-helper blocker payload');
     is(scalar(@{$summary->{language_agnostic_blocked_rules_by_priority}}), 2, 'migration summary exposes prioritized blocked-rule list');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['Unresolved', 'Mixed'], 'migration summary sorts blocked rules by deterministic blocker priority');
     is($summary->{language_agnostic_top_blocked_rule}, 'Unresolved', 'migration summary exposes top blocked rule');
@@ -42191,7 +42191,7 @@ Top::&
  /(\w+)/ -> Top { my $retv = call(Leaf); capture_if(Top); return_m(Top) }
 
 Leaf:
- /(\w+)/ -> Leaf { return_a(Leaf) }
+ /(\w+)/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42227,22 +42227,22 @@ subtest 'return_descriptor_exposes_action_rewriter_migration_blocker_type_breakd
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); return_a(Top) }
+ /a/ -> Top { call(Leaf); return(1) }
 
 RawOnly::&
  /b/ -> RawOnly { call(Leaf); my $tmp = 1 }
 
 UnresolvedOnly::&
- /c/ -> UnresolvedOnly { return_a(Leaf) }
+ /c/ -> UnresolvedOnly { return(1) }
 
 Mixed::&
- /d/ -> Mixed { return_a(Leaf); my $tmp = 2 }
+ /d/ -> Mixed { return(1); my $tmp = 2 }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
- /b/ -> Leaf { return_a(Leaf) }
- /c/ -> Leaf { return_a(Leaf) }
- /d/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
+ /b/ -> Leaf { return(1) }
+ /c/ -> Leaf { return(1) }
+ /d/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42270,7 +42270,7 @@ Top::&
  /a/ -> Top { my $retv = call(Leaf); $retv = call(Leaf); push @Top, call(Leaf) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42294,7 +42294,7 @@ Top::&
  /a/ -> Top { push @Top, call(Leaf)->[1] }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42318,7 +42318,7 @@ Top::&
  /a/ -> Top { return call(Leaf) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -43247,7 +43247,7 @@ Top::&
  /a/ -> Top .return ((map {lc} @IMATCH_LIST), \@Top, call(Leaf))
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -43265,10 +43265,10 @@ subtest 'emit_context_canonical_action_ir_handles_nested_semicolon_payloads' => 
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return_a(Top, do { my $x = 1; $x }); call(Leaf) }
+ /a/ -> Top { return(1); call(Leaf) }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -43284,7 +43284,7 @@ SPEC
     my ($ret_evt) = grep { $_->{kind} eq 'RETURN_A' } @{$meta->{canonical_action_ir_events}};
     like($ret_evt->{args}{arg}, qr/do \{ my \$x = 1; \$x \}/, 'canonical RETURN_A payload keeps nested semicolon expression intact');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return_a(Top, do { my $x = 1; $x }); call(Leaf)');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(1); call(Leaf)');
     like($rewritten, qr/^return \['\?Top:', \( do \{ my \$x = 1; \$x \}\), /, 'canonical-IR lowering preserves RETURN_A rewrite payload with nested semicolon expression');
     like($rewritten, qr/&\{\$\$descr\{spec\}\{Leaf\}\{handler\}\}\(\$descr, \$STRING, \$minfo\)$/, 'canonical-IR lowering preserves CALL rewrite after nested semicolon payload helper');
 };
@@ -43296,7 +43296,7 @@ Top::&
  /a/ -> Top { call(Leaf); # keep; comment }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -43325,7 +43325,7 @@ Top::&
  /a/ -> Top { call(Leaf); my $cmd = `echo a;b`; }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -43354,7 +43354,7 @@ Top::&
  /a/ -> Top { call(Leaf); my $re = qr/a;b/; }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -43383,7 +43383,7 @@ Top::&
  /a/ -> Top { call(Leaf); my $re = qr<a;b>; }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -43412,7 +43412,7 @@ Top::&
  /a/ -> Top { call(Leaf); my $re = qr|a;b|; }
 
 Leaf:
- /a/ -> Leaf { return_a(Leaf) }
+ /a/ -> Leaf { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -45570,13 +45570,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_abs_helper_lower_eq
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("A", "B", "C")).declare(scalar, offset=1, limit=6, distance).assign(scalar(distance), num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit)))).return(hash("distance", scalar(distance)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("A", "B", "C")); declare(scalar, offset=1, limit=6, distance); assign(scalar(distance), num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit)))); return(hash("distance", scalar(distance))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -45656,13 +45656,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_rounding_helpers_lo
     my $fluent_spec = <<'SPEC';
 Top::&
 LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, raw_name="  score  ", raw_score=3.75, offset=0.5, factor=1.5, floored, ceiled, rounded).assign(scalar(floored), num_floor(num_sub(scalar(raw_score), scalar(offset)))).assign(scalar(ceiled), num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2))).assign(scalar(rounded), num_round(num_add(coalesce(length(trim(scalar(raw_name))), 0), scalar(offset)))).return(hash("floored", scalar(floored), "ceiled", scalar(ceiled), "rounded", scalar(rounded)))
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
 LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, raw_name="  score  ", raw_score=3.75, offset=0.5, factor=1.5, floored, ceiled, rounded); assign(scalar(floored), num_floor(num_sub(scalar(raw_score), scalar(offset)))); assign(scalar(ceiled), num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2))); assign(scalar(rounded), num_round(num_add(coalesce(length(trim(scalar(raw_name))), 0), scalar(offset)))); return(hash("floored", scalar(floored), "ceiled", scalar(ceiled), "rounded", scalar(rounded))) }
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -45789,7 +45789,7 @@ use LinkedSpec;
 my ($mode, $input) = @ARGV;
 my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 my @opt = defined($mode) && length($mode) ? (parse_mode => $mode) : ();
 my $parser = LinkedSpec::Get(\$spec_content, @opt);
@@ -45818,7 +45818,7 @@ use LinkedSpec;
 my ($input) = @ARGV;
 my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume');
 print(ref($parser) || "<undef>", "\n");
@@ -45842,7 +45842,7 @@ subtest 'return_descriptor_exposes_parse_mode_metadata_and_consume_parser_source
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $default_descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -45865,7 +45865,7 @@ SPEC
 use LinkedSpec;
 my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 my $parser_source = '';
 my $descr = LinkedSpec::Get(
@@ -45892,7 +45892,7 @@ subtest 'invalid_parse_mode_records_structured_prepare_pipeline_error' => sub {
 
     my $spec_content = <<'SPEC';
 Top::
- /a/ -> Top { return_a(Top) }
+ /a/ -> Top { return(1) }
 SPEC
 
     my $runtime_ctx;

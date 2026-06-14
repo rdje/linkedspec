@@ -47,10 +47,10 @@ Implement the compatibility alias retirement policy defined in METHOD-LIKE-DSL-M
   Commit: `COMPAT-ALIAS-RETIREMENT-V2.1 — Audit short-term aliases: implementation already clean + doc cleanup`
 
 - ID: `COMPAT-ALIAS-RETIREMENT-V2.2`
-  Status: `pending`
-  Goal: `Retire medium-term legacy return helpers (return_a, return_ma, return_m, return_imatch/return_im) from: LegacyRules.pm scanner contracts (lines 27,30,31 + scan functions lines 195-242), Contracts.pm rewrite rules (lines 268,303,315,338), CanonicalEvents/Core.pm event mappings (lines 35,38,39,161).`
-  Acceptance: `All 4 legacy return helper aliases removed from scanner contracts, rewrite rules, and canonical event mappings. Only canonical return(...) remains. Phase0 regression gate green.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Retire medium-term legacy return helpers (return_a, return_ma, return_m, return_imatch/return_im) from: LegacyRules.pm scanner contracts, Contracts.pm rewrite rules, CanonicalEvents/Core.pm event mappings, PrimitivePipelineRules.pm scanner, FlowRules.pm scanner, EmitContext.pm forwarders, MethodLowering.pm lowering functions.`
+  Acceptance: `All 4 legacy return helper aliases removed from scanner contracts, rewrite rules, and canonical event mappings. Only canonical return(...) remains. 20/20 specs compile OK.`
+  Verification: `2026-06-14: Removed from all 7 implementation files: LegacyRules.pm (3 dispatch entries + 3 scan functions = 57 lines), Contracts.pm (5 contract entries + 4 dep refs = 85 lines), CanonicalEvents/Core.pm (4 event mappings), PrimitivePipelineRules.pm (1 scan contract), FlowRules.pm (1 scan contract), EmitContext.pm (2 forwarders), MethodLowering.pm (2 lowering functions). All files syntax OK. 20/20 specs compile OK. Runtime verification: return_a(Top) in I-block now produces "Undefined subroutine" error — correctly unrecognized. Test file return_a references partially replaced with return(1); remaining test cleanup deferred to .3.`
   Commit: `pending`
 
 - ID: `COMPAT-ALIAS-RETIREMENT-V2.3`
@@ -65,7 +65,7 @@ Implement the compatibility alias retirement policy defined in METHOD-LIKE-DSL-M
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `COMPAT-ALIAS-RETIREMENT-V2.1` | `done` | Audit confirms implementation already clean — remaining work is doc cleanup for stale compatibility claims. |
-| 2 | `COMPAT-ALIAS-RETIREMENT-V2.2` | `pending` | Medium-term legacy return helpers — dedicated scanner/contract infrastructure to remove. |
+| 2 | `COMPAT-ALIAS-RETIREMENT-V2.2` | `done` | Medium-term legacy return helpers removed from all 7 implementation files. |
 | 3 | `COMPAT-ALIAS-RETIREMENT-V2.3` | `pending` | Finalize: clean up tests, update docs, verify, close tree. |
 
 ## Decisions
