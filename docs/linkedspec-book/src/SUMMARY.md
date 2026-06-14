@@ -61,6 +61,7 @@
 - [Formal `.spec` Grammar](appendix/formal-grammar.md)
 - [Helper Contract Catalog](appendix/helper-contract-catalog.md)
 - [Runtime Semantics](appendix/runtime-semantics.md)
+- [Backend Handoff](appendix/backend-handoff.md)
 
 # Development
 

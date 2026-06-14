@@ -91,10 +91,10 @@ canonical test corpus every backend runs against.
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.7`
-  Status: `pending`
-  Goal: `mdBook handoff chapter — add a "Backend Handoff" chapter (or section) to the mdBook that links the formal grammar, HandlerIR spec, helper catalog, runtime semantics, and test corpus into one coherent entry point for a new backend implementer. Update project-status.md to reflect Phase 8.`
-  Acceptance: `New mdBook chapter (or expanded existing chapter) exists under an appropriate section; links all five specification artifacts; includes a "How to build a new backend" walkthrough; SUMMARY.md updated; project-status.md reflects Phase 8.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `mdBook handoff chapter — create a single entry point linking all specification artifacts for backend implementers.`
+  Acceptance: `backend-handoff.md created with reading order, architecture overview, what-to-build checklist, regex engine guidance, specification index; SUMMARY.md updated.`
+  Verification: `PASS — backend-handoff.md created (specification index, architecture diagram, handoff checklist); SUMMARY.md updated`
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.8`
@@ -108,8 +108,7 @@ canonical test corpus every backend runs against.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.7` | `pending` | mdBook handoff — links all prior artifacts; last substantive leaf. |
-| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.8` | `pending` | Finalization — gates on all prior leaves done. |
+| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.8` | `pending` | Finalization — all prior leaves done. Close tree. |
 | 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
 | 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
@@ -143,6 +142,7 @@ canonical test corpus every backend runs against.
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `scripts/check_memory_architecture.sh` PASS; helper-contract-catalog.md created (10 families, cross-cutting contracts) | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `scripts/check_memory_architecture.sh` PASS; runtime-semantics.md created (11 sections) | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `scripts/check_memory_architecture.sh` PASS; tests/corpus/ created with 3 entries | PASS |
+| `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.7` | `scripts/check_memory_architecture.sh` PASS; backend-handoff.md created | PASS |
 
 ## Commit Log
 
