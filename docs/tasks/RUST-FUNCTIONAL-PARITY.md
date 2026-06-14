@@ -84,7 +84,7 @@ by a small interpreter. No Rust source generation, no eval.
 - ID: `RUST-FUNCTIONAL-PARITY.2`
   Status: `active`
   Goal: `Full .spec validation matching Perl's validation surface.`
-  Children: `.2.1, .2.2`
+  Children: `.2.1, .2.2, .2.3`
 
 - ID: `RUST-FUNCTIONAL-PARITY.2.1`
   Status: `done`
@@ -98,6 +98,13 @@ by a small interpreter. No Rust source generation, no eval.
   Goal: `Work around Rust regex crate limitation: spec.spec uses look-behind ((?<!\\…)) which Rust's regex crate does not support. Detect look-around patterns in check_regex_syntax and accept them as "valid but unverifiable" rather than rejecting. This allows spec.spec to validate while documenting the platform limitation.`
   Acceptance: `All 20 shipped specs pass validation. spec.spec's look-behind regex patterns accepted with clear log message.`
   Verification: `PASS — All 20 shipped specs parse + validate + compile. spec.spec look-behind regex accepted with eprintln note. cargo test 51/51 PASS.`
+  Commit: `pending`
+
+- ID: `RUST-FUNCTIONAL-PARITY.2.3`
+  Status: `pending`
+  Goal: `Evaluate rgx (https://github.com/rdje/rgx) as replacement for the regex crate. rgx supports PCRE2-level features including look-around, backreferences, subroutine calls. Verify: find_first_at works for consume mode, Match start/end positions accessible, named capture groups work, compilation succeeds in LinkedSpec workspace. Prototype: swap regex→rgx in the regex engine and run the 20-spec test suite.`
+  Acceptance: `rgx compiles in workspace. find_first_at + start/end API verified. At minimum, simple_grammar test passes with rgx backend. Decision recorded: adopt, defer, or reject.`
+  Verification: `pending`
   Commit: `pending`
 
 ### Container: Expression Parser (.3)

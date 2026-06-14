@@ -1,1 +1,6 @@
-Docs: post-commit hash fix — MEMORY.md latest_commit → 662b642
+Feat: RUST-FUNCTIONAL-PARITY.2.3 — add rgx submodule for PCRE2-level regex
+
+rgx (https://github.com/rdje/rgx) supports look-around, backreferences,
+subroutine calls — ~98% PCRE2 10.47 coverage, 8,822 conformance tests.
+Key API: find_first_at (position-anchored), Match.start/end, named captures.
+Candidate to replace regex crate for full .spec regex compatibility.
