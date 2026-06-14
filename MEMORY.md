@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `4e92503` — "COMPAT-ALIAS-RETIREMENT-V2.2 — Retire medium-term legacy return helpers"
+- latest_commit: `21c2a8d` — "COMPAT-ALIAS-RETIREMENT-V2.3 — Finalization: test cleanup, docs, close tree"
 - active_work_unit: none — COMPAT-ALIAS-RETIREMENT-V2 tree completed and moved to Completed.
 - next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
 - in_flight_uncommitted: none
