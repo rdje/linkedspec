@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `30ea369` — "chore: add RAM guard to run_ci_local.sh + lightweight ram_guard.sh wrapper"
-- active_work_unit: none — COMPAT-ALIAS-TEST-CLEANUP tree completed and moved to Completed.
-- next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
+- latest_commit: `977b5f8` — "Docs: ROADMAP-V2-TRACKER-SYNC.0 — create task tree for roadmap tracker synchronization"
+- active_work_unit: `ROADMAP-V2-TRACKER-SYNC`  →  frontier leaf: `ROADMAP-V2-TRACKER-SYNC.1` (pending)
+- next_action: PNT on ROADMAP-V2-TRACKER-SYNC.1 — audit current empirical state vs ROADMAP_V2.md tracker
 - in_flight_uncommitted: none
 - blockers: none
