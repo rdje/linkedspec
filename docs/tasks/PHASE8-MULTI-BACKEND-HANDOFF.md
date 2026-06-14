@@ -77,10 +77,10 @@ canonical test corpus every backend runs against.
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.5`
-  Status: `pending`
-  Goal: `Runtime semantics specification — define precisely: (a) seek vs consume parse modes, (b) BACKTRACK/IBACKTRACK local-rewind contract, (c) lifecycle execution order and interaction with rule modes, (d) accumulator conventions and implicit-target rules, (e) edge dispatch (action vs blind-call, regex-slot indexing), (f) handler variant selection logic.`
-  Acceptance: `Specification exists as a tracked document; each subsection is precise enough that two independent implementers would produce identical behavior; cross-referenced with the formal grammar (.2) and HandlerIR spec (.3).`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Runtime semantics specification — define precisely seek/consume, BACKTRACK, lifecycle execution order, accumulator conventions, edge dispatch, handler variant selection, zero-progress guard, error handling, determinism guarantees.`
+  Acceptance: `Specification exists as a tracked document; each subsection is precise enough for independent reimplementation; cross-referenced with formal grammar and HandlerIR spec.`
+  Verification: `PASS — runtime-semantics.md created (11 sections: parse modes, execution model, lifecycles, BACKTRACK, accumulators, edge dispatch, variant selection, regex dispatch, zero-progress, errors, determinism)`
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.6`
@@ -108,8 +108,8 @@ canonical test corpus every backend runs against.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
-| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
+| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
+| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.7` | `pending` | mdBook handoff — links all prior artifacts; depends on .1–.6 being substantially complete. |
 | 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
 | 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
@@ -141,6 +141,7 @@ canonical test corpus every backend runs against.
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.2` | `scripts/check_memory_architecture.sh` PASS; formal-grammar.md created (12 sections), SUMMARY.md updated | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.3` | `scripts/check_memory_architecture.sh` PASS; handler-ir-design.md created, old card placeholder fixed | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `scripts/check_memory_architecture.sh` PASS; helper-contract-catalog.md created (10 families, cross-cutting contracts) | PASS |
+| `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `scripts/check_memory_architecture.sh` PASS; runtime-semantics.md created (11 sections) | PASS |
 
 ## Commit Log
 
