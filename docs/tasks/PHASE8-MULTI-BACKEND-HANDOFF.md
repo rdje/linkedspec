@@ -63,10 +63,10 @@ canonical test corpus every backend runs against.
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.3`
-  Status: `pending`
+  Status: `done`
   Goal: `HandlerIR specification — create the missing docs/knowledge/handler-ir-design.md card. Define every HandlerIR node type, every field, its semantics, and the contract between variant builders and backend emitters. Reference the existing JSON diagnostic backend as a concrete output example.`
   Acceptance: `docs/knowledge/handler-ir-design.md exists; all 10 variant builders' IR shapes documented; field semantics defined without Perl references; linked from language-agnostic-backend-vision.md (replaces the "(to be created)" placeholder).`
-  Verification: `pending`
+  Verification: `PASS — handler-ir-design.md created (all 10 variant kinds, field tables, emitter contract, lifecycle semantics, current limitations); language-agnostic-backend-vision.md placeholder fixed`
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.4`
@@ -108,8 +108,8 @@ canonical test corpus every backend runs against.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.3` | `pending` | HandlerIR spec — fills the known missing card. |
-| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
+| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
+| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
 | 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
 | 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
@@ -139,6 +139,7 @@ canonical test corpus every backend runs against.
 | --- | --- | --- | --- |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.1` | `scripts/check_memory_architecture.sh` PASS; ADR 0006 created + INDEX.md updated | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.2` | `scripts/check_memory_architecture.sh` PASS; formal-grammar.md created (12 sections), SUMMARY.md updated | PASS |
+| `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.3` | `scripts/check_memory_architecture.sh` PASS; handler-ir-design.md created, old card placeholder fixed | PASS |
 
 ## Commit Log
 

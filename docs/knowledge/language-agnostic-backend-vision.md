@@ -68,6 +68,6 @@ a VM would need; the decision of emit-vs-interpret is per-backend.
 
 ## Links
 
-- [[handler-ir-design]] (to be created — formal HandlerIR contract)
+- [[handler-ir-design]] — formal HandlerIR specification (created 2026-06-14, PHASE8-MULTI-BACKEND-HANDOFF.3)
 - [[specentry-backend-portability-ceiling]]
 - [[actionir-lowering-stack]]
