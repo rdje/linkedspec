@@ -10,8 +10,13 @@ Detailed technical history of changes prepared for commit.
 - Control-flow (if/switch) and semicolon-light coverage spans all 7 markers
 ### Gap analysis (.2)
 - No real gaps found. ROADMAP_V2.md claim validated.
-- 3 intentional design patterns documented (LX as primary proof point, I/LX deeper standalone coverage, all markers interchangeable)
+- 3 intentional design patterns documented
 - Zero implementation work needed
+### Documentation (.3) and finalization (.4)
+- ROADMAP_V2.md near-term priority #1 marked verified complete
+- project-status.md Ongoing section updated
+- LIVE_ACHIEVEMENT_STATUS.md, CHANGES.md, MEMORY.md updated
+- Tree moved to Completed; no active task trees remain
 
 ## 2026-06-14 — ROADMAP-V2-TRACKER-SYNC.1–.2: Tracker synchronization
 ### Audit (.1)

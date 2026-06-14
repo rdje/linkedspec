@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LIFECYCLE-FAMILY-AUDIT`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Overall roadmap — near-term priority 1: lifecycle-family follow-through`
 - Created: `2026-06-14`
 - Last updated: `2026-06-14`
@@ -35,7 +35,7 @@ semantics only when a real gap or exception is found."
 ## Task Tree
 
 - ID: `LIFECYCLE-FAMILY-AUDIT`
-  Status: `active`
+  Status: `completed`
   Goal: `Audit lifecycle-family structured authoring parity, fix real gaps, document exceptions.`
   Children: `LIFECYCLE-FAMILY-AUDIT.1`, `LIFECYCLE-FAMILY-AUDIT.2`, `LIFECYCLE-FAMILY-AUDIT.3`, `LIFECYCLE-FAMILY-AUDIT.4`
 
@@ -54,15 +54,18 @@ semantics only when a real gap or exception is found."
   Commit: `pending`
 
 - ID: `LIFECYCLE-FAMILY-AUDIT.3`
-  Status: `in_progress`
+  Status: `done`
   Goal: `Document: update mdBook and live docs with lifecycle-family coverage status.`
   Acceptance: `mdBook and live docs reflect current lifecycle coverage status. ROADMAP_V2.md near-term priority #1 updated if status changed.`
   Verification: `pending`
   Commit: `pending`
 
 - ID: `LIFECYCLE-FAMILY-AUDIT.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Finalization: run full CI gate, verify all docs consistent, close out the tree.`
+  Acceptance: `Local CI gate passes. Tree moved to Completed in TASK_TREE.md. MEMORY.md updated.`
+  Verification: `Memory-arch: PASS. KM: PASS. Syntax: PASS. No code changes — all doc-only. Tree moved to Completed. ROADMAP_V2.md near-term priority #1 verified complete.`
+  Commit: `pending`
   Acceptance: `Local CI gate passes. Tree moved to Completed in TASK_TREE.md. MEMORY.md updated.`
   Verification: `pending`
   Commit: `pending`
