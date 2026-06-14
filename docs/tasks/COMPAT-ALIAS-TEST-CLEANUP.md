@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `COMPAT-ALIAS-TEST-CLEANUP`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap — method-like DSL migration track (near-term priority 2)`
 - Created: `2026-06-14`
 - Last updated: `2026-06-14`
