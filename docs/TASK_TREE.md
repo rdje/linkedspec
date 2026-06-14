@@ -25,6 +25,7 @@ evidence for one top-level task.
 | --- | --- | --- | --- | --- |
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `PHASE9-RUST-VARIANT` | `active` | `Phase 9 — Rust variant implementation` | `.1.1` Cargo workspace bootstrap | [docs/tasks/PHASE9-RUST-VARIANT.md](docs/tasks/PHASE9-RUST-VARIANT.md) |
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not

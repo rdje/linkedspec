@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `267ee24` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.8 — Finalization: close tree"
-- active_work_unit: none — PHASE8-MULTI-BACKEND-HANDOFF tree completed and moved to Completed.
-- next_action: PNT idle — all roadmap priorities addressed. Overall roadmap done. No active task trees.
+- latest_commit: `pending` — "Feat: PHASE9-RUST-VARIANT.0 — create Phase 9 task tree"
+- active_work_unit: PHASE9-RUST-VARIANT  →  frontier leaf: PHASE9-RUST-VARIANT.1.1 (Cargo workspace bootstrap)
+- next_action: PNT — implement PHASE9-RUST-VARIANT.1.1 (create Cargo workspace + crates).
 - in_flight_uncommitted: none
 - blockers: none

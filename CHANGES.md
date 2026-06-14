@@ -10,6 +10,13 @@ Detailed technical history of changes prepared for commit.
 - Tree moved to Completed in docs/TASK_TREE.md
 - No active task trees remain — PNT idle
 
+## 2026-06-14 — PHASE9-RUST-VARIANT.0: Phase 9 task tree creation
+### Tree creation (.0)
+- Created `docs/tasks/PHASE9-RUST-VARIANT.md` with 17 leaves across 10 containers: workspace bootstrap, core types, .spec parser, compiler, runtime engine, core helpers, integration, test corpus, code-gen, docs, finalization.
+- Registered in `docs/TASK_TREE.md` Active Task Trees table.
+- Added Phase 9 row to `ROADMAP_V2.md` tracker (`in_progress`); Overall roadmap → `in_progress`.
+- Decision: interpret HandlerIR at runtime (not code-gen). Rust workspace at `rust/`.
+
 ## 2026-06-14 — PHASE8-MULTI-BACKEND-HANDOFF.1: Multi-backend ADR 0006
 ### ADR 0006 (.1)
 - Created `docs/decisions/0006-multi-backend-vision.md` — formal decision record for Rust/Julia/Dart backends alongside Perl.
