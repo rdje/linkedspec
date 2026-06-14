@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — DOC-BOOK-SYNC.1: Full mdBook and live docs audit against codebase
+### Audit (.1)
+- Audited all 35 mdBook pages + USER_GUIDE.md + ARCHITECTURE_STATE.md against current codebase
+- 4 parallel agents covering: overview/user-model, public-api/DSL, compiler/specs/architecture/dev, live docs
+- 19 gaps found: 6 critical, 8 medium, 5 low — across 13 files
+- Critical: HandlerVariantEmitter/HandlerIR undocumented (2 pages), configure_trace wrong option names, 5 removed return helpers still documented (2 files), wrong API signatures (get-and-get-parser.md)
+- Medium: stale line counts, incomplete lifecycle marker list, wrong contract counts, missing pipeline features
+- Low: off-by-one line counts, minor omissions
+- 22 pages verified with zero gaps
+
 ## 2026-06-14 — DOC-BOOK-SYNC.0: Task tree creation for documentation/book sync
 ### Tree creation (.0)
 - Created `docs/tasks/DOC-BOOK-SYNC.md` with 4 leaves (`.0` bootstrap, `.1` audit, `.2` remediation, `.3` finalization)
