@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` — "Feat: PHASE9-RUST-VARIANT.10 — Finalization: close tree"
+- latest_commit: `e0f93ec` — "Feat: PHASE9-RUST-VARIANT.10 — Finalization: close tree"
 - active_work_unit: none — PHASE9-RUST-VARIANT tree completed and moved to Completed.
 - next_action: PNT idle — all roadmap priorities addressed. Overall roadmap done. No active task trees.
 - in_flight_uncommitted: none
