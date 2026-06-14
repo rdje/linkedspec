@@ -249,7 +249,7 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.5.1` | `pending` | Core helpers — declare, push_value, array_copy, count, scalar, capture, coalesce, concat. |
+| 1 | `PHASE9-RUST-VARIANT.7.1` | `pending` | Test corpus runner — load corpus entries, compile, compare to expected.json. |
 
 ## Decisions
 
@@ -278,6 +278,7 @@ Implement a working Rust variant of LinkedSpec that:
 | `2026-06-14` | `PHASE9-RUST-VARIANT.2.3` | `cargo test` 17/17 (parser + validation + types) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.3.1/.2` | `cargo test` 22/22 (+5 compiler tests) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.4.1–.3` | `cargo test` 28/28 (+6 runtime tests) | PASS |
+| `2026-06-14` | `PHASE9-RUST-VARIANT.5.1–.3 + .6.1` | `cargo build` clean, tests compile, full pipeline wired | PASS |
 
 ## Commit Log
 

@@ -56,29 +56,39 @@ pub enum RuleMode {
 
 /// A body element within a rule paragraph.
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum BodyElement {
+pub struct BodyElement {
+    /// Classification of this element.
+    pub kind: BodyElementKind,
+    /// The original line text (used for validation, brace counting).
+    pub line: String,
+}
+
+/// The type of a body element.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum BodyElementKind {
     /// A regex literal: /pattern/
-    Regex { value: String },
+    Regex,
     /// An action edge: -> Target or -> Target[N]
-    ActionEdge {
-        target: String,
-        index: usize,
-    },
+    ActionEdge { target: String, index: usize },
     /// A blind-call edge: => Target
     BlindEdge { target: String },
-    /// A code block with optional lifecycle marker prefix.
-    CodeBlock {
-        lifecycle: Option<String>,
-        code: String,
-    },
+    /// A code block.
+    CodeBlock { lifecycle: Option<String>, code: String },
     /// A split marker: @capture_slice, @mark(name)
-    SplitMarker { marker: String },
+    SplitMarker,
     /// A lifecycle marker: I, LS, LE, E, EX, IT, LX
     LifecycleMarker { marker: String },
     /// A fluent chain: .method(args)
-    FluentChain { code: String },
+    FluentChain,
     /// A conditional marker: -? word
-    Conditional { text: String },
+    Conditional,
     /// Raw body line (fallback for unrecognized content).
-    Raw(String),
+    Raw,
+}
+
+impl BodyElement {
+    /// Create a new body element with the given kind and original line text.
+    pub fn new(kind: BodyElementKind, line: &str) -> Self {
+        Self { kind, line: line.to_string() }
+    }
 }

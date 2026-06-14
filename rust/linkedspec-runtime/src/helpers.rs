@@ -9,7 +9,6 @@ use crate::runtime::{RuntimeContext, RuntimeValue};
 
 /// Regex engine for position-tracked matching.
 pub mod regex_engine {
-    use super::*;
     use regex::Regex;
 
     /// A compiled regex alternative — one pattern with its index.
