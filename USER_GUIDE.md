@@ -233,7 +233,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `print_each(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `hash_copy(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `index_of(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `print_each(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, `hash_copy(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `index_of(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -622,9 +622,9 @@ List-context insertion helpers are locked too: fluent and structured authoring n
 
 That same supported flat-list equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `flat_array(...)` and `flat_hash(...)` return payloads on both action-edge and lifecycle surfaces.
 
-Snapshot payload helpers are locked too: fluent and structured authoring now agree on supported `array_copy(...)` and compatibility `array_values(...)` payload forms on both action-edge and lifecycle surfaces, so snapshot-array payload construction stays inside the same method-like DSL equivalence contract as the preferred and compatibility spellings evolve.
+Snapshot payload helpers are locked too: fluent and structured authoring now agree on supported `array_copy(...)` payload forms on both action-edge and lifecycle surfaces, so snapshot-array payload construction stays inside the same method-like DSL equivalence contract.
 
-That same supported snapshot-helper equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `array_copy(...)` and `array_values(...)` return payloads on both action-edge and lifecycle surfaces.
+That same supported snapshot-helper equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `array_copy(...)` return payloads on both action-edge and lifecycle surfaces.
 
 String-join payload helpers are locked too: fluent and structured authoring now agree on supported `join_values(delimiter, array_expr)` payload forms on both action-edge and lifecycle surfaces, so joined-string payload construction stays inside the same method-like DSL equivalence contract rather than acting like a one-off scalar shortcut.
 
@@ -857,10 +857,6 @@ Typical patterns:
 - `drop_front(..., n)`
 - `drop_back(...)`
 - `drop_back(..., n)`
-- compatibility `tail(...)`
-- compatibility `tail(..., n)`
-- compatibility `drop_last(...)`
-- compatibility `drop_last(..., n)`
 - `concat_arrays(...)`
 - `array_copy(...)`
 - `hash_copy(...)`
@@ -890,8 +886,6 @@ Typical patterns:
 - suffix arrays from `take_last(array_expr)` and counted suffix arrays from `take_last(array_expr, scalar(take_last_count))`
 - front-drop arrays from `drop_front(array_expr)` and counted front-drop arrays from `drop_front(array_expr, scalar(skip_count))`
 - back-drop arrays from `drop_back(array_expr)` and counted back-drop arrays from `drop_back(array_expr, scalar(drop_count))`
-- compatibility tail arrays from `tail(array_expr)` and counted compatibility tail arrays from `tail(array_expr, scalar(skip_count))`
-- compatibility trailing-drop arrays from `drop_last(array_expr)` and counted compatibility trailing-drop arrays from `drop_last(array_expr, scalar(drop_count))`
 - pure array layering via `concat_arrays(array_expr, array_expr, ...)`
 - deterministic array sorting via `sorted(array_expr)` over direct or composed array-valued expressions
 - pure array order inversion via `reversed(array_expr)` over direct or composed array-valued expressions
@@ -1006,7 +1000,7 @@ I {declare(array, parts)}
 ```
 
 Prefer `array_copy(array(parts))` when you want a **snapshot array payload**.
-`array_values(array(parts))` remains supported as the older compatibility spelling.
+(The older `array_values(...)` spelling was retired — use `array_copy(...)` instead.)
 
 ### Pattern 4: flatten an existing array into a constructor
 
@@ -1520,9 +1514,9 @@ If backend neutrality matters, these are the defaults you should follow.
 2. Prefer `assign(...)` over raw assignment wrappers.
 3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
 4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
-5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, `flat_*` helpers, `split_tagged_records(...)`, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
+5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, `hash_copy(...)`, `flat_*` helpers, `split_tagged_records(...)`, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
-7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
+7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
 8. Use snippet inspection and `return_descriptor` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances

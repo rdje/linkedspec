@@ -18,8 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `70220f8` — "FLUENT-BLOCK-EQUIVALENCE.2 — Book documentation + regression verification"
-- active_work_unit: none — FLUENT-BLOCK-EQUIVALENCE tree completed and moved to Completed.
-- next_action: PNT idle — no active task trees. Roadmap V2 near-term priorities available.
-- FLUENT-BLOCK-EQUIVALENCE tree completed: .1 inventory/audit, .2 book documentation + regression verification.
+- active_work_unit: `COMPAT-ALIAS-RETIREMENT-V2`  →  frontier leaf: `.1` (pending)
+- next_action: Implement COMPAT-ALIAS-RETIREMENT-V2.2 — retire medium-term legacy return helpers (return_a, return_ma, return_m, return_imatch/return_im).
 - in_flight_uncommitted: none
 - blockers: none

@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-14: Completed COMPAT-ALIAS-RETIREMENT-V2.1 — audit short-term aliases: implementation already clean across all 7 layers; USER_GUIDE.md updated (7 stale compatibility claims removed). Active PNT frontier: COMPAT-ALIAS-RETIREMENT-V2.2 (retire medium-term legacy return helpers).
 - 2026-06-14: Completed FLUENT-BLOCK-EQUIVALENCE.2 — book documentation + regression verification. FLUENT-BLOCK-EQUIVALENCE tree COMPLETE (2 leaves). No active task trees remain — PNT idle.
 - 2026-06-13: Completed MEDIUM-IMPACT.3.6 — MEDIUM-IMPACT tree closed out. Full regression verification.
 - 2026-06-12: Completed MEDIUM-IMPACT.3.4.3 — cross-check re-run after AND ICODE routing fix. Cross-check: 1/20 match (was 10/20 before fix). AND fix correctly makes edges fire, but exposed MIXED_ACTIONS conflict: RuleIR routes AND I-block to acode_entries (acode_count=1) alongside bcode edge (bcode_count=1) → RuleIR returns MIXED_ACTIONS (invalid) → handler falls back to _default → empty @collect. New leaf .3.4.4 created to resolve MIXED_ACTIONS by keeping AND I-block separate from acode_entries and extending AND_BCODE handler. Frontier: MEDIUM-IMPACT.3.4.4.

@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — COMPAT-ALIAS-RETIREMENT-V2.1: Audit short-term aliases — implementation clean + doc cleanup
+### Implementation audit
+- Audited all 7 implementation layers for short-term alias recognition (tail, drop_last, flatten, array_values):
+  - BootstrapSpec/Core.pm line 82: helper-start regex — canonical only (drop_front, drop_back, flat, array)
+  - MethodLowering.pm line 271: aggregate-helper regex — canonical only (array_copy, drop_front, drop_back, sorted, etc.)
+  - MethodLowering.pm line 962: dispatch — `eq 'drop_front'` (no tail alias)
+  - MethodLowering.pm line 1086: dispatch — `eq 'drop_back'` (no drop_last alias)
+  - MethodLowering.pm line 199: dispatch — `eq 'flat'` (no flatten alias)
+  - MethodLowering.pm lines 1627/1635: rewrite regexes — canonical only
+  - FlowExpr.pm lines 81/270: aggregate helper regexes — canonical only
+  - DeclareMethod.pm line 136: array-source regex — canonical only (array_copy, sorted, etc.)
+  - All Scanner files (PrimitiveBasicRules, PrimitivePipelineRules, FlowRules, LegacyRules, ScannerCore): zero alias references
+  - Contracts.pm: zero short-term alias references
+- Conclusion: Short-term aliases were incrementally retired during prior task trees (post METHOD-LIKE-DSL-MIGRATION.1 policy). Aliases pass through lowering unchanged → produce undefined function calls at Perl runtime.
+### Documentation
+- USER_GUIDE.md: 7 edits removing stale "compatibility" claims for tail, drop_last, flatten, array_values
+- Book source (docs/linkedspec-book/src/): already clean — zero stale alias claims
+### Validation
+- 20/20 shipped specs compile OK
+- scripts/check_memory_architecture.sh passes
+- test file syntax OK (phase0_regression.t)
+
 ## 2026-06-14 — FLUENT-BLOCK-EQUIVALENCE.2: Book documentation + regression verification
 
 - **Book**: New chapter `fluent-and-block-forms.md` (270 lines) in `docs/linkedspec-book/src/dsl/`

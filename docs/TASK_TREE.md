@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `COMPAT-ALIAS-RETIREMENT-V2` | `active` | `Overall roadmap — method-like DSL migration track (near-term priority 2)` | `.1` short-term alias retirement | [docs/tasks/COMPAT-ALIAS-RETIREMENT-V2.md](docs/tasks/COMPAT-ALIAS-RETIREMENT-V2.md) |
 
 ## Proposed Task Trees
 
