@@ -97,7 +97,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 | `DOC-BOOK-SYNC.0` | `Docs: DOC-BOOK-SYNC.0 — create task tree for documentation/book sync` | `1d72202` — 6 files, 118 insertions |
 | `DOC-BOOK-SYNC.1` | `Docs: DOC-BOOK-SYNC.1 — full mdBook + live docs audit against codebase` | `c4a630a` — 19 gaps found, recorded in Audit Results section |
 | `DOC-BOOK-SYNC.2` | `Docs: DOC-BOOK-SYNC.2 — remediate all 19 documentation gaps` | `dc7e33b` — 22 files, 166 insertions, 51 deletions |
-| `DOC-BOOK-SYNC.3` | `pending` | Finalization — tree closed |
+| `DOC-BOOK-SYNC.3` | `Docs: DOC-BOOK-SYNC.3 — Finalization: close tree` | `ba7f992` — 6 files, 24 insertions, 14 deletions |
 
 ## Audit Results (DOC-BOOK-SYNC.1)
 
