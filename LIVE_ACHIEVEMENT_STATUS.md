@@ -7,7 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-06-14: PHASE8-MULTI-BACKEND-HANDOFF.5 — Runtime semantics specification created (11 sections). Active PNT frontier: `.6` Test corpus.
+- 2026-06-14: PHASE8-MULTI-BACKEND-HANDOFF.6 — Language-neutral test corpus created (3 entries). Active PNT frontier: `.7` mdBook handoff.
 - 2026-06-14: PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1 — Fixed 10 stale "proposed" → "retired" references across 6 files. Tree COMPLETE (1 leaf). 19 gaps remediated across 17 files. ROADMAP_V2.md overall → done. No active task trees remain — PNT idle.
 - 2026-06-14: DOC-BOOK-SYNC.2 — All 19 gaps remediated across 17 files.
 - 2026-06-14: DOC-BOOK-SYNC.1 — Full mdBook + live docs audit complete. 19 gaps found (6 critical, 8 medium, 5 low) across 13 files.

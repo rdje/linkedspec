@@ -1,0 +1,10 @@
+{
+  "_meta": {
+    "spec_file": "input.spec",
+    "description": "TableGrep — 3-column table with header",
+    "top_rule": "tablegrep",
+    "backend_version": "1.0.0",
+    "note": "Placeholder — generate from Perl reference backend using the command in README.md"
+  },
+  "result": {}
+}

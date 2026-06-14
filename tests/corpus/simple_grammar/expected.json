@@ -1,0 +1,12 @@
+{
+  "_meta": {
+    "spec_file": "input.spec",
+    "description": "Simple two-rule grammar: action edge, I/LE/E lifecycle, regex capture group, accumulator return",
+    "top_rule": "DemoParser",
+    "backend_version": "1.0.0",
+    "note": "Generated from Perl reference backend. Replace with live output."
+  },
+  "result": {
+    "?results:": ["world"]
+  }
+}

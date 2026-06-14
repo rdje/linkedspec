@@ -1,0 +1,4 @@
+col_name type width
+signal_a  wire  8
+signal_b  reg   16
+signal_c  wire  1
