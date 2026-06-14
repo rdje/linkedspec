@@ -87,10 +87,10 @@ Implement a working Rust variant of LinkedSpec that:
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.2.3`
-  Status: `pending`
-  Goal: `Implement validation: duplicate rule detection, mixed-edge rejection, unclosed block detection, top-rule requirement.`
-  Acceptance: `Validation errors correctly reported for each violation type. Valid specs pass.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Implement validation: duplicate rule detection, mixed-edge rejection, unclosed block detection, top-rule requirement, edge target existence.`
+  Acceptance: `All 5 validation checks pass testing. 7 validation tests.`
+  Verification: `PASS — cargo test 17/17 (7 parser + 7 validation + 3 types)`
   Commit: `pending`
 
 ### Container: Compiler (.3)
@@ -251,7 +251,7 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.2.3` | `pending` | Validation — duplicate detection, mixed edges, unclosed blocks, top-rule check. |
+| 1 | `PHASE9-RUST-VARIANT.3.1` | `pending` | Rule-level compilation — resolve dependencies, determine variant kind. |
 
 ## Decisions
 
@@ -277,6 +277,7 @@ Implement a working Rust variant of LinkedSpec that:
 | `2026-06-14` | `PHASE9-RUST-VARIANT.1.1` | `cargo build` clean, `cargo test` passes | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.1.2` | `cargo test` 3/3 (JSON round-trip) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.2.1/.2` | `cargo test` 10/10 (parser: 7 tests, types: 3 tests) | PASS |
+| `2026-06-14` | `PHASE9-RUST-VARIANT.2.3` | `cargo test` 17/17 (parser + validation + types) | PASS |
 
 ## Commit Log
 
