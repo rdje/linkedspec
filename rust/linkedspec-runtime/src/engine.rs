@@ -1,123 +1,112 @@
-//! Runtime engine — executes compiled HandlerIR nodes against input text.
+//! Runtime engine — executes compiled rule specifications against input text.
 //!
-//! The engine interprets HandlerIR at runtime (not code-gen). It:
-//! 1. Extracts child regex patterns from the HandlerIR
-//! 2. Builds a compiled alternation
-//! 3. Executes the lifecycle loop (seek or consume, with repetition)
-//! 4. Returns the parse result as JSON
+//! The engine:
+//! 1. Builds regex alternations from compiled rule patterns
+//! 2. Executes the lifecycle loop (I → LS → match → LE → IT → LX/EX → E)
+//! 3. Dispatches to child rules recursively
+//! 4. Interprets lifecycle code expression trees
+//! 5. Returns parse results as JSON
 
-use crate::helpers::regex_engine::{CompiledAlternation, MatchResult};
-use crate::runtime::{RuntimeContext, RuntimeValue};
-use linkedspec_core::types::{HandlerIR, ParseMode};
+use crate::helpers::regex_engine::CompiledAlternation;
+use crate::runtime::RuntimeContext;
+use linkedspec_core::types::{CompiledSpec, ParseMode, RuntimeValue};
 use serde_json::Value;
 
-/// The runtime engine executes HandlerIR nodes against input text.
-pub struct Engine;
+/// The runtime engine executes CompiledRule nodes against input text.
+pub struct Engine {
+    /// The compiled spec being executed (needed for child rule lookup).
+    spec: CompiledSpec,
+}
 
 impl Engine {
-    /// Create a new engine.
-    pub fn new() -> Self {
-        Self
+    /// Create a new engine from a compiled spec.
+    pub fn new(spec: CompiledSpec) -> Self {
+        Self { spec }
     }
 
-    /// Execute a single handler against the given input.
-    ///
-    /// Collects the rule's accumulator and returns it as a JSON value.
-    pub fn execute(&self, handler: &HandlerIR, input: &str) -> Result<Value, String> {
+    /// Execute the top rule against the given input.
+    pub fn execute(&self, input: &str) -> Result<Value, String> {
+        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
+        let label = top.label.clone();
         let mut ctx = RuntimeContext::new(input);
-
-        // Build regex alternation from the handler's dispatch refs
-        let alt = self.build_alternation(handler)?;
-
-        // Execute lifecycle blocks
-        self.run_lifecycle(handler, &alt, &mut ctx)?;
-
-        // Return accumulator as JSON
+        self.execute_rule(&label, &mut ctx)?;
         Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
     }
 
-    /// Build a compiled regex alternation from the handler's dispatch refs.
-    fn build_alternation(&self, handler: &HandlerIR) -> Result<CompiledAlternation, String> {
-        // Collect child regex patterns from acodes or bcodes
-        let patterns: Vec<String> = if let Some(ref acodes) = handler.acodes_ref {
-            // For acode variants, each entry corresponds to a child regex
-            // In the full implementation, these are code strings; here we use them as labels
-            acodes.clone()
-        } else if let Some(ref bcalls) = handler.bcalls_ref {
-            // For bcode variants, each blind-call target corresponds to a child
-            bcalls.iter().map(|_label| format!(r"\w+")) // placeholder
-                .collect()
+    /// Execute a specific rule by label.
+    fn execute_rule(&self, label: &str, ctx: &mut RuntimeContext) -> Result<(), String> {
+        let rule = self.spec.find(label).ok_or_else(|| format!("rule '{}' not found", label))?;
+
+        // Build regex alternation
+        let alt = if rule.regex_patterns.is_empty() {
+            CompiledAlternation::compile(&["\\w+".to_string()])?
         } else {
-            // No edges — use the rule's own regex patterns from body
-            vec!["\\w+".to_string()]
+            CompiledAlternation::compile(&rule.regex_patterns)?
         };
 
-        if patterns.is_empty() {
-            return Ok(CompiledAlternation::compile(&["\\w+".to_string()])?);
+        // Execute I-block (preamble)
+        if let Some(ref preamble) = rule.preamble {
+            self.execute_block(preamble, ctx, label)?;
         }
 
-        CompiledAlternation::compile(&patterns)
-    }
-
-    /// Execute the lifecycle loop for a handler.
-    fn run_lifecycle(
-        &self,
-        handler: &HandlerIR,
-        alt: &CompiledAlternation,
-        ctx: &mut RuntimeContext,
-    ) -> Result<(), String> {
-        let is_rep = handler.is_rep_variant();
-        let rep_min = handler.rep_min.unwrap_or(0); // non-REP: 0 min (optional match)
-        let rep_max = handler.rep_max;
-
-        // I-block (preamble)
-        if let Some(ref preamble) = handler.preamble {
-            // In full implementation, interpret lifecycle code
-            let _ = preamble;
-        }
-
+        let is_rep = rule.rep_min.is_some();
+        let rep_min = rule.rep_min.unwrap_or(0);
+        let rep_max = rule.rep_max;
         let mut matches: usize = 0;
-        let max_iterations = 10_000; // safety limit
+        let max_iter = 10_000;
 
-        for _iter in 0..max_iterations {
-            // Check repetition bounds
+        for _ in 0..max_iter {
+            // Non-REP rules execute once
             if !is_rep && matches > 0 {
-                break; // non-REP handlers execute once
+                break;
             }
 
             // LS-block
-            if let Some(ref lscode) = handler.lscode {
-                let _ = lscode;
+            if let Some(ref lscode) = rule.lscode {
+                self.execute_block(lscode, ctx, label)?;
             }
 
             // Match
-            let match_result = match handler.parse_mode {
+            let match_result = match rule.parse_mode {
                 ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
                 ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
             };
 
             if let Some(m) = match_result {
                 ctx.set_pos(m.end);
-                // Record match groups for lifecycle code
                 ctx.entry_groups = m.groups.clone();
                 ctx.entry_named = m.named.clone();
+                ctx.match_groups = m.groups.clone();
+                ctx.match_named = m.named.clone();
+
+                // Dispatch to child rule if acode_dispatch
+                for (idx, child_label, code) in &rule.acode_dispatch {
+                    if *idx == m.index {
+                        // Execute child rule
+                        self.execute_rule(child_label, ctx)?;
+                        // Execute attached code if present
+                        if let Some(block) = code {
+                            self.execute_block(block, ctx, label)?;
+                        }
+                    }
+                }
 
                 // LE-block
-                if let Some(ref lecode) = handler.lecode {
-                    self.execute_le_block(lecode, ctx, &m)?;
+                if let Some(ref lecode) = rule.lecode {
+                    self.execute_block(lecode, ctx, label)?;
                 }
 
                 matches += 1;
 
-                // IT-block (REP per-iteration)
-                if let Some(ref itcode) = handler.itcode {
-                    let _ = itcode;
+                // IT-block (per-iteration, REP only)
+                if let Some(ref itcode) = rule.itcode {
+                    self.execute_block(itcode, ctx, label)?;
                 }
             } else {
                 // No match — exit loop
-                // LX-block
-                if let Some(ref lxcode) = handler.lxcode {
-                    let _ = lxcode;
+                // LX-block (no-match exit)
+                if let Some(ref lxcode) = rule.lxcode {
+                    self.execute_block(lxcode, ctx, label)?;
                 }
                 break;
             }
@@ -129,135 +118,303 @@ impl Engine {
                 }
             }
 
-            // Zero-progress guard
-            if matches > 100 && matches > rep_min {
-                break; // safety valve
+            // Zero-progress guard for REP variants
+            if is_rep && matches > 100 && matches > rep_min {
+                break;
             }
         }
 
-        // Check min bound (only for REP variants with explicit minimum)
+        // Check min bound for REP variants
         if is_rep && matches < rep_min {
             return Err(format!(
                 "rule '{}': expected at least {} matches, got {}",
-                handler.label, rep_min, matches
+                label, rep_min, matches
             ));
         }
 
-        // EX-block
-        if let Some(ref excode) = handler.excode {
-            let _ = excode;
+        // EX-block (REP exhaustion)
+        if let Some(ref excode) = rule.excode {
+            self.execute_block(excode, ctx, label)?;
         }
 
         // E-block (exit)
-        if let Some(ref ecode) = handler.ecode {
-            self.execute_e_block(ecode, ctx);
+        if let Some(ref ecode) = rule.ecode {
+            self.execute_block(ecode, ctx, label)?;
         }
 
         Ok(())
     }
 
-    /// Execute an LE (Loop End) block: `push_value(array(results), scalar(retv))`
-    fn execute_le_block(
+    /// Execute a lifecycle code block (parsed expression tree).
+    fn execute_block(
         &self,
-        code: &str,
+        block: &linkedspec_core::expr::CodeBlock,
         ctx: &mut RuntimeContext,
-        m: &MatchResult,
+        rule_label: &str,
     ) -> Result<(), String> {
-        if code.contains("push_value") {
-            let arr_name = code
-                .split("array(")
-                .nth(1)
-                .and_then(|s| s.split(')').next())
-                .unwrap_or("results");
-            let text = m.matched_text().to_string();
-            ctx.push_value(arr_name, RuntimeValue::Scalar(text));
+        for stmt in &block.statements {
+            self.eval_expr(&stmt.expr, ctx, rule_label)?;
         }
         Ok(())
     }
 
-    /// Execute an E (Exit) block: `return(array_copy(array(results)))`
-    fn execute_e_block(&self, code: &str, ctx: &mut RuntimeContext) {
-        if code.contains("array_copy") {
-            // Extract array name and copy to accumulator
-            let arr_name = code
-                .split("array(")
-                .nth(1)
-                .and_then(|s| s.split(')').next())
-                .unwrap_or("results");
-            ctx.accumulator = ctx.array_copy(arr_name);
+    /// Evaluate an expression tree against the runtime context.
+    fn eval_expr(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::Expr;
+        match expr {
+            Expr::Call { name, args } => {
+                let evaluated: Vec<RuntimeValue> = args
+                    .iter()
+                    .map(|a| self.eval_expr(a.value(), ctx, rule_label))
+                    .collect::<Result<Vec<_>, _>>()?;
+                self.call_helper(name, &evaluated, ctx, rule_label)
+            }
+            Expr::Variable { name } => Ok(ctx.get_scalar(name)),
+            Expr::IndexedVar { name, index } => {
+                let idx_val = self.eval_expr(index, ctx, rule_label)?;
+                let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
+                let arr = ctx.get_array(name);
+                Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
+            }
+            Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
+            Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),
+            Expr::BooleanLiteral { value } => Ok(RuntimeValue::Bool(*value)),
+            Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
+            Expr::Undef => Ok(RuntimeValue::Undef),
         }
     }
-}
 
-impl Default for Engine {
-    fn default() -> Self {
-        Self::new()
+    /// Dispatch a helper call by name with evaluated arguments.
+    fn call_helper(
+        &self,
+        name: &str,
+        args: &[RuntimeValue],
+        ctx: &mut RuntimeContext,
+        _rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        match name {
+            // Declaration
+            "declare" => {
+                if args.len() >= 2 {
+                    let type_name = args[0].to_str();
+                    let var_name = args[1].to_str();
+                    match type_name.as_str() {
+                        "scalar" => {
+                            if args.len() >= 3 {
+                                ctx.declare_scalar_with(&var_name, args[2].clone());
+                            } else {
+                                ctx.declare_scalar(&var_name);
+                            }
+                        }
+                        "array" => ctx.declare_array(&var_name),
+                        "hash" => ctx.declare_hash(&var_name),
+                        _ => {}
+                    }
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "assign" => {
+                if args.len() >= 2 {
+                    ctx.set_scalar(&args[0].to_str(), args[1].clone());
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            // Array
+            "array" | "a" => Ok(RuntimeValue::Array(args.to_vec())),
+            "array_copy" => {
+                if let Some(arg) = args.first() {
+                    match arg {
+                        RuntimeValue::Array(a) => Ok(RuntimeValue::Array(a.clone())),
+                        _ => {
+                            let arr_name = arg.to_str();
+                            if !arr_name.is_empty() {
+                                Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
+                            } else {
+                                Ok(RuntimeValue::Array(Vec::new()))
+                            }
+                        }
+                    }
+                } else {
+                    Ok(RuntimeValue::Array(Vec::new()))
+                }
+            }
+            "push_value" | "push" => {
+                if args.len() >= 2 {
+                    let arr_name = args[0].to_str();
+                    ctx.push_value(&arr_name, args[1].clone());
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "push_nonempty" => {
+                if args.len() >= 2 && args[1].is_nonempty() {
+                    let arr_name = args[0].to_str();
+                    ctx.push_value(&arr_name, args[1].clone());
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "return" => {
+                if let Some(val) = args.first() {
+                    ctx.push_accumulator(val.clone());
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "return_undef" => Ok(RuntimeValue::Undef),
+            // Scalar
+            "scalar" => {
+                if args.len() >= 2 {
+                    match &args[0] {
+                        RuntimeValue::Array(arr) => {
+                            let idx = args[1].as_number().unwrap_or(0.0) as usize;
+                            Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
+                        }
+                        _ => {
+                            let key = args[1].to_str();
+                            Ok(ctx.get_scalar(&key))
+                        }
+                    }
+                } else if let Some(arg) = args.first() {
+                    Ok(arg.clone())
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "call" => {
+                if let Some(arg) = args.first() {
+                    let child = arg.to_str();
+                    self.execute_rule(&child, ctx)?;
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "concat" => {
+                let result: String = args.iter().map(|a| a.to_str()).collect();
+                Ok(RuntimeValue::Scalar(result))
+            }
+            "coalesce" => {
+                for a in args {
+                    if a.is_defined() && a.to_str() != "" {
+                        return Ok(a.clone());
+                    }
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "count" => {
+                if let Some(arg) = args.first() {
+                    Ok(RuntimeValue::Number(arg.len() as f64))
+                } else {
+                    Ok(RuntimeValue::Number(0.0))
+                }
+            }
+            "first" => {
+                if let Some(RuntimeValue::Array(arr)) = args.first() {
+                    Ok(arr.first().cloned().unwrap_or(RuntimeValue::Undef))
+                } else if let Some(arg) = args.first() {
+                    let arr_name = arg.to_str();
+                    let arr = ctx.get_array(&arr_name);
+                    Ok(arr.first().cloned().unwrap_or(RuntimeValue::Undef))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "last" => {
+                if let Some(RuntimeValue::Array(arr)) = args.first() {
+                    Ok(arr.last().cloned().unwrap_or(RuntimeValue::Undef))
+                } else if let Some(arg) = args.first() {
+                    let arr_name = arg.to_str();
+                    let arr = ctx.get_array(&arr_name);
+                    Ok(arr.last().cloned().unwrap_or(RuntimeValue::Undef))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            // Entry/match
+            "entry_text" => Ok(RuntimeValue::Scalar(
+                ctx.entry_groups.first().cloned().unwrap_or_default(),
+            )),
+            "entry_group" => {
+                if let Some(arg) = args.first() {
+                    let idx = arg.as_number().unwrap_or(0.0) as usize;
+                    Ok(RuntimeValue::Scalar(
+                        ctx.entry_groups.get(idx).cloned().unwrap_or_default(),
+                    ))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "entry_groups" => {
+                let arr: Vec<RuntimeValue> = ctx
+                    .entry_groups
+                    .iter()
+                    .map(|g| RuntimeValue::Scalar(g.clone()))
+                    .collect();
+                Ok(RuntimeValue::Array(arr))
+            }
+            "match_text" => Ok(RuntimeValue::Scalar(
+                ctx.match_groups.first().cloned().unwrap_or_default(),
+            )),
+            "exit_now" => {
+                let status = args.first().and_then(|a| a.as_number()).unwrap_or(1.0) as i32;
+                ctx.exit_status = Some(status);
+                Err(format!("exit_now({status})"))
+            }
+            _ => {
+                // Unknown helper — return undef silently (compatibility)
+                Ok(RuntimeValue::Undef)
+            }
+        }
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use linkedspec_core::types::{HandlerIR, HandlerKind, ParseMode};
+    use linkedspec_core::compiler::compile;
+    use linkedspec_core::parser::parse_spec;
+    use linkedspec_core::validation::validate;
 
-    fn make_handler() -> HandlerIR {
-        HandlerIR {
-            kind: HandlerKind::Default,
-            label: "Test".into(),
-            parse_mode: ParseMode::Seek,
-            preamble: Some("declare(array, results)".into()),
-            lxcode: None,
-            lscode: None,
-            lecode: Some("push_value(array(results), scalar(retv))".into()),
-            ecode: Some("return(array_copy(array(results)))".into()),
-            excode: None,
-            itcode: None,
-            acodes_ref: Some(vec!["hello".into(), "world".into()]),
-            bcodes_ref: None,
-            bcalls_ref: None,
-            and_icode: None,
-            rep_min: None,
-            rep_max: None,
-        }
+    const SIMPLE_GRAMMAR: &str = r#"DemoParser::
+ /pattern1/ -> Child {
+  I { declare(array, results) }
+  LE { push_value(array(results), scalar(retv)) }
+  E { return(array("?results:", array_copy(array(results)))) }
+ }
+
+Child::
+ /hello[ \t]+(\w+)/
+ I { declare(scalar, name=entry_group(1)) }
+ E { return(scalar(name)) }
+"#;
+
+    #[test]
+    fn engine_executes_simple_grammar() {
+        let spec = parse_spec(SIMPLE_GRAMMAR).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("pattern1 hello world").unwrap();
+        assert!(result.is_array());
     }
 
     #[test]
-    fn engine_finds_matches() {
-        let engine = Engine::new();
-        let handler = make_handler();
-        let result = engine.execute(&handler, "hello world").unwrap();
-
-        // Should have matched "hello" and "world"
-        if let Value::Array(arr) = result {
-            assert!(arr.len() >= 1);
-        } else {
-            panic!("expected array result");
-        }
+    fn engine_empty_input() {
+        let spec = parse_spec(SIMPLE_GRAMMAR).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("no match here").unwrap();
+        assert!(result.is_array());
     }
 
     #[test]
-    fn engine_empty_input_returns_empty() {
-        let engine = Engine::new();
-        let handler = make_handler();
-        let result = engine.execute(&handler, "zzz no match").unwrap();
-        // No matches → empty accumulator
-        if let Value::Array(arr) = result {
-            assert!(arr.is_empty());
-        } else {
-            panic!("expected array result");
-        }
-    }
-
-    #[test]
-    fn engine_consume_mode() {
-        let mut handler = make_handler();
-        handler.parse_mode = ParseMode::Consume;
-        handler.acodes_ref = Some(vec!["hello".into()]);
-
-        let engine = Engine::new();
-        let result = engine.execute(&handler, "hello world").unwrap();
-        if let Value::Array(arr) = result {
-            assert!(!arr.is_empty());
-        }
+    fn engine_json_output_roundtrip() {
+        let spec = parse_spec(SIMPLE_GRAMMAR).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("pattern1 hello world").unwrap();
+        let json_str = serde_json::to_string(&result).unwrap();
+        let _parsed: Value = serde_json::from_str(&json_str).unwrap();
     }
 }

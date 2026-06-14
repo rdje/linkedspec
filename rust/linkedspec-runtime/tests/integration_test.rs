@@ -1,6 +1,4 @@
-//! End-to-end integration test: parse → validate → compile → execute.
-//!
-//! Tests the full pipeline against the simple_grammar test corpus entry.
+//! End-to-end integration tests: parse → validate → compile → execute.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
@@ -8,12 +6,11 @@ use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
 use serde_json::Value;
 
-/// The simple_grammar spec from tests/corpus/simple_grammar/input.spec
-const SIMPLE_GRAMMAR_SPEC: &str = r#"DemoParser::
+const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child {
- I { declare(array, results) }
- LE { push_value(array(results), scalar(retv)) }
- E { return(array("?results:", array_copy(array(results)))) }
+  I { declare(array, results) }
+  LE { push_value(array(results), scalar(retv)) }
+  E { return(array("?results:", array_copy(array(results)))) }
  }
 
 Child::
@@ -24,88 +21,93 @@ Child::
 
 #[test]
 fn full_pipeline_simple_grammar() {
-    // 1. Parse
-    let spec = parse_spec(SIMPLE_GRAMMAR_SPEC).expect("parse should succeed");
+    let spec = parse_spec(SIMPLE_GRAMMAR).expect("parse");
     assert_eq!(spec.rules.len(), 2);
 
-    // 2. Validate
-    validate(&spec).expect("validation should pass");
+    validate(&spec).expect("validate");
 
-    // 3. Compile
-    let handlers = compile(&spec).expect("compilation should succeed");
-    assert_eq!(handlers.len(), 2);
-    assert_eq!(handlers[0].label, "DemoParser");
-    assert_eq!(handlers[1].label, "Child");
+    let compiled = compile(&spec).expect("compile");
+    assert_eq!(compiled.rules.len(), 2);
+    assert_eq!(compiled.rules[0].label, "DemoParser");
+    assert_eq!(compiled.rules[1].label, "Child");
 
-    // 4. Execute top rule (DemoParser)
-    let engine = Engine::new();
-    let result = engine
-        .execute(&handlers[0], "pattern1 hello world")
-        .expect("execution should succeed");
+    let engine = Engine::new(compiled);
+    let result = engine.execute("pattern1 hello world").expect("execute");
 
-    // 5. Verify result structure
-    // The DemoParser should return an array with "hello" matched by Child
-    assert!(result.is_array(), "result should be an array");
-
-    // Print result for inspection
-    println!("Result: {}", serde_json::to_string_pretty(&result).unwrap());
-}
-
-#[test]
-fn parse_validate_compile_all_shipped_specs() {
-    // Test that the parser and compiler handle representative specs
-    // This is a smoke test — full corpus compliance is in .7
-
-    let specs = vec![
-        ("simple_grammar", SIMPLE_GRAMMAR_SPEC),
-    ];
-
-    for (name, source) in specs {
-        let spec = parse_spec(source)
-            .unwrap_or_else(|e| panic!("parse failed for {}: {}", name, e));
-        validate(&spec)
-            .unwrap_or_else(|e| panic!("validation failed for {}: {}", name, e));
-        let handlers = compile(&spec)
-            .unwrap_or_else(|e| panic!("compile failed for {}: {}", name, e));
-        assert!(!handlers.is_empty(), "{} should produce handlers", name);
-    }
-}
-
-#[test]
-fn engine_executes_on_simple_input() {
-    let spec = parse_spec(SIMPLE_GRAMMAR_SPEC).unwrap();
-    validate(&spec).unwrap();
-    let handlers = compile(&spec).unwrap();
-
-    let engine = Engine::new();
-
-    // Input that matches
-    let result = engine
-        .execute(&handlers[0], "pattern1 hello world")
-        .unwrap();
     assert!(result.is_array());
+    println!(
+        "Result: {}",
+        serde_json::to_string_pretty(&result).unwrap()
+    );
+}
 
-    // Input that doesn't match the regex
-    let result = engine
-        .execute(&handlers[0], "no match here at all")
-        .unwrap();
-    // Should return empty accumulator (no matches)
+#[test]
+fn full_pipeline_empty_input() {
+    let spec = parse_spec(SIMPLE_GRAMMAR).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("no match here").unwrap();
     assert!(result.is_array());
 }
 
 #[test]
-fn engine_json_output_roundtrip() {
-    let spec = parse_spec(SIMPLE_GRAMMAR_SPEC).unwrap();
+fn json_output_roundtrip() {
+    let spec = parse_spec(SIMPLE_GRAMMAR).unwrap();
     validate(&spec).unwrap();
-    let handlers = compile(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("pattern1 hello world").unwrap();
 
-    let engine = Engine::new();
-    let result = engine
-        .execute(&handlers[0], "pattern1 hello world")
-        .unwrap();
-
-    // Serialize to JSON and back
     let json_str = serde_json::to_string(&result).unwrap();
     let parsed: Value = serde_json::from_str(&json_str).unwrap();
     assert_eq!(result, parsed);
+}
+
+#[test]
+fn parse_all_shipped_specs() {
+    // Test that all shipped specs parse and validate correctly.
+    // Reads from the specs/ directory.
+    use std::fs;
+    use std::path::Path;
+
+    let specs_dir = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../specs");
+    if !specs_dir.exists() {
+        eprintln!("specs/ directory not found, skipping shipped-spec test");
+        return;
+    }
+
+    let mut parsed = 0;
+    let mut failed = Vec::new();
+
+    for entry in fs::read_dir(&specs_dir).unwrap() {
+        let entry = entry.unwrap();
+        let path = entry.path();
+        if path.extension().is_some_and(|e| e == "spec") {
+            let source = fs::read_to_string(&path).unwrap();
+            match parse_spec(&source) {
+                Ok(spec) => {
+                    if let Err(e) = validate(&spec) {
+                        failed.push(format!("{}: validation failed: {e}", path.display()));
+                    } else if let Err(e) = compile(&spec) {
+                        failed.push(format!("{}: compile failed: {e}", path.display()));
+                    } else {
+                        parsed += 1;
+                    }
+                }
+                Err(e) => {
+                    failed.push(format!("{}: parse failed: {e}", path.display()));
+                }
+            }
+        }
+    }
+
+    println!("Parsed {} specs successfully", parsed);
+    if !failed.is_empty() {
+        for f in &failed {
+            eprintln!("  FAIL: {f}");
+        }
+        panic!("{} specs failed", failed.len());
+    }
+    assert!(parsed > 0, "no .spec files found");
 }

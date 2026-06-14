@@ -1,14 +1,13 @@
 //! LinkedSpec runtime — handler execution engine, helpers, and lifecycle interpreter.
 //!
 //! This crate provides:
-//! - A runtime engine that executes compiled HandlerIR nodes
-//! - Helper function implementations (100+ helpers across 10 families)
-//! - Lifecycle execution (I/LS/LE/E/EX/IT/LX)
+//! - An interpreted runtime engine that executes compiled rule specifications
+//! - A regex dispatch engine with seek/consume modes
+//! - Helper function dispatch for lifecycle code execution
 //! - Variable store (declare/assign with scoping)
-//! - Regex engine integration
 //!
 //! The Perl reference implementation lives at `perl/LinkedSpec.pm`.
-//! Specification documents live under `docs/linkedspec-book/src/appendix/`.
+//! The Rust implementation is idiomatic Rust — no code generation, no eval.
 
 pub mod engine;
 pub mod helpers;

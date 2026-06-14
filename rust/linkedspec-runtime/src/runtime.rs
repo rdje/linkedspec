@@ -1,59 +1,39 @@
-//! Runtime context — variable store, accumulator, and lifecycle state.
+//! Runtime context — variable store, accumulator, and match state.
 //!
 //! Provides the execution environment for a single rule invocation.
 //! Declared variables are scoped to the rule. Accumulators hold child results.
 
-use serde_json::Value;
-
-/// A runtime value — scalar, array, or hash.
-#[derive(Debug, Clone)]
-pub enum RuntimeValue {
-    /// Undefined / missing.
-    Undef,
-    /// A scalar string value.
-    Scalar(String),
-    /// An array of values.
-    Array(Vec<RuntimeValue>),
-    /// A hash / object of key-value pairs.
-    Hash(Vec<(String, RuntimeValue)>),
-}
-
-impl RuntimeValue {
-    /// Convert a RuntimeValue to a serde_json::Value for output.
-    pub fn to_json(&self) -> Value {
-        match self {
-            Self::Undef => Value::Null,
-            Self::Scalar(s) => Value::String(s.clone()),
-            Self::Array(arr) => Value::Array(arr.iter().map(|v| v.to_json()).collect()),
-            Self::Hash(entries) => {
-                let mut map = serde_json::Map::new();
-                for (k, v) in entries {
-                    map.insert(k.clone(), v.to_json());
-                }
-                Value::Object(map)
-            }
-        }
-    }
-}
+use linkedspec_core::types::RuntimeValue;
 
 /// Runtime context for a single rule invocation.
+#[derive(Debug, Clone)]
 pub struct RuntimeContext {
-    /// The full input text.
+    /// The full input text being parsed.
     pub input: String,
-    /// Current match position.
+    /// Current match position in the input.
     pub pos: usize,
     /// Declared scalar variables.
-    scalars: std::collections::HashMap<String, String>,
-    /// Declared array variables.
+    scalars: std::collections::HashMap<String, RuntimeValue>,
+    /// Declared array variables (accumulators).
     arrays: std::collections::HashMap<String, Vec<RuntimeValue>>,
     /// Declared hash variables.
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
-    /// The rule's accumulator (return value).
+    /// The rule's main accumulator (return value).
     pub accumulator: Vec<RuntimeValue>,
-    /// Entry match groups from the last regex match.
+    /// Entry match groups from the last regex match (group 0 = full match).
     pub entry_groups: Vec<String>,
     /// Named entry match groups.
     pub entry_named: std::collections::HashMap<String, String>,
+    /// Local match groups (nested/child match).
+    pub match_groups: Vec<String>,
+    /// Named local match groups.
+    pub match_named: std::collections::HashMap<String, String>,
+    /// Marks — named positions in the input.
+    pub marks: std::collections::HashMap<String, usize>,
+    /// Anonymous capture-slice start position.
+    pub capture_start: Option<usize>,
+    /// Exit flag — set by exit_now(status).
+    pub exit_status: Option<i32>,
 }
 
 impl RuntimeContext {
@@ -68,83 +48,85 @@ impl RuntimeContext {
             accumulator: Vec::new(),
             entry_groups: Vec::new(),
             entry_named: std::collections::HashMap::new(),
+            match_groups: Vec::new(),
+            match_named: std::collections::HashMap::new(),
+            marks: std::collections::HashMap::new(),
+            capture_start: None,
+            exit_status: None,
         }
     }
 
-    /// Get the current match position.
-    pub fn pos(&self) -> usize {
-        self.pos
-    }
+    // ── Position ──
 
-    /// Set the current match position.
-    pub fn set_pos(&mut self, pos: usize) {
-        self.pos = pos;
-    }
+    pub fn pos(&self) -> usize { self.pos }
+    pub fn set_pos(&mut self, pos: usize) { self.pos = pos; }
+    pub fn remaining(&self) -> &str { &self.input[self.pos..] }
 
-    /// Get the remaining input from the current position.
-    pub fn remaining(&self) -> &str {
-        &self.input[self.pos..]
-    }
+    // ── Scalars ──
 
-    // ── Variable store ──
-
-    /// Declare a scalar variable.
     pub fn declare_scalar(&mut self, name: &str) {
-        self.scalars.insert(name.to_string(), String::new());
+        self.scalars.insert(name.to_string(), RuntimeValue::Undef);
     }
 
-    /// Declare a scalar with an initial value.
-    pub fn declare_scalar_with(&mut self, name: &str, value: &str) {
-        self.scalars.insert(name.to_string(), value.to_string());
+    pub fn declare_scalar_with(&mut self, name: &str, value: RuntimeValue) {
+        self.scalars.insert(name.to_string(), value);
     }
 
-    /// Declare an array variable.
+    pub fn get_scalar(&self, name: &str) -> RuntimeValue {
+        self.scalars.get(name).cloned().unwrap_or(RuntimeValue::Undef)
+    }
+
+    pub fn set_scalar(&mut self, name: &str, value: RuntimeValue) {
+        self.scalars.insert(name.to_string(), value);
+    }
+
+    // ── Arrays ──
+
     pub fn declare_array(&mut self, name: &str) {
         self.arrays.insert(name.to_string(), Vec::new());
     }
 
-    /// Declare a hash variable.
+    pub fn push_value(&mut self, arr_name: &str, value: RuntimeValue) {
+        self.arrays.entry(arr_name.to_string()).or_default().push(value);
+    }
+
+    pub fn get_array(&self, name: &str) -> Vec<RuntimeValue> {
+        self.arrays.get(name).cloned().unwrap_or_default()
+    }
+
+    pub fn array_copy(&self, name: &str) -> Vec<RuntimeValue> {
+        self.get_array(name)
+    }
+
+    // ── Hashes ──
+
     pub fn declare_hash(&mut self, name: &str) {
         self.hashes.insert(name.to_string(), Vec::new());
     }
 
-    /// Get a scalar value (returns empty string for undeclared).
-    pub fn get_scalar(&self, name: &str) -> &str {
-        self.scalars.get(name).map(|s| s.as_str()).unwrap_or("")
+    pub fn get_hash(&self, name: &str) -> Vec<(String, RuntimeValue)> {
+        self.hashes.get(name).cloned().unwrap_or_default()
     }
 
-    /// Set a scalar value.
-    pub fn set_scalar(&mut self, name: &str, value: &str) {
-        self.scalars.insert(name.to_string(), value.to_string());
+    pub fn set_hash_entry(&mut self, hash_name: &str, key: &str, value: RuntimeValue) {
+        let entries = self.hashes.entry(hash_name.to_string()).or_default();
+        if let Some(existing) = entries.iter_mut().find(|(k, _)| k == key) {
+            existing.1 = value;
+        } else {
+            entries.push((key.to_string(), value));
+        }
     }
 
-    /// Push a value onto an accumulator array.
-    pub fn push_value(&mut self, arr_name: &str, value: RuntimeValue) {
-        self.arrays
-            .entry(arr_name.to_string())
-            .or_default()
-            .push(value);
+    pub fn hash_copy(&self, name: &str) -> Vec<(String, RuntimeValue)> {
+        self.get_hash(name)
     }
 
-    /// Get an array by name (empty if undeclared).
-    pub fn get_array(&self, name: &str) -> &[RuntimeValue] {
-        self.arrays
-            .get(name)
-            .map(|a| a.as_slice())
-            .unwrap_or(&[])
-    }
+    // ── Accumulator ──
 
-    /// Copy an array (shallow clone).
-    pub fn array_copy(&self, name: &str) -> Vec<RuntimeValue> {
-        self.get_array(name).to_vec()
-    }
-
-    /// Push a value onto the main accumulator.
     pub fn push_accumulator(&mut self, value: RuntimeValue) {
         self.accumulator.push(value);
     }
 
-    /// Get the main accumulator contents.
     pub fn get_accumulator(&self) -> &[RuntimeValue] {
         &self.accumulator
     }

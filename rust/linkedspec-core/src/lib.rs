@@ -1,17 +1,19 @@
-//! LinkedSpec core — .spec parser, compiler, and HandlerIR types.
+//! LinkedSpec core — `.spec` parser, compiler, and expression types.
 //!
 //! This crate provides:
-//! - Core types and AST definitions for `.spec` files
+//! - AST types for `.spec` files
 //! - A `.spec` parser that reads grammar files into structured AST
-//! - A compiler that transforms parsed AST into HandlerIR
-//! - HandlerIR node definitions (shared with the runtime crate)
+//! - A compiler that transforms AST into executable rule specifications
+//! - Expression AST types and parser for lifecycle code
+//! - Validation of parsed specifications
 //!
 //! The Perl reference implementation lives at `perl/LinkedSpec.pm`.
-//! Specification documents live under `docs/linkedspec-book/src/appendix/`.
+//! The Rust implementation is idiomatic Rust — it does NOT mimic Perl internals.
 
 pub mod ast;
 pub mod compiler;
 pub mod error;
+pub mod expr;
 pub mod parser;
 pub mod types;
 pub mod validation;

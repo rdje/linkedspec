@@ -1,0 +1,15 @@
+Feat: RUST-FUNCTIONAL-PARITY.1 + .2 — Rust-native core, parser, validator, compiler, runtime
+
+Rewrite Rust variant around idiomatic Rust-native architecture (no Perl mimicry):
+- expr.rs: expression AST + recursive-descent parser for lifecycle code (9 tests)
+- ast.rs: proper CodeBlock, ActionEdge, BlindEdge, lifecycle marker types
+- types.rs: CompiledRule/CompiledSpec replacing HandlerIR; RuntimeValue with JSON
+- parser.rs: multi-element-per-line parsing, block-depth tracking, nested braces
+- validation.rs: 7 checks (top-rule, duplicates, mixed edges, braces, targets, regex)
+- compiler.rs: AST to CompiledSpec with expression tree parsing and dispatch tables
+- engine.rs: seek/consume regex matching, lifecycle loop, child dispatch, 20 helpers
+- helpers.rs: regex engine with position-tracked alternation (seek/consume)
+- runtime.rs: variable store, accumulators, marks
+
+51 tests pass. 20/20 shipped specs parse + validate + compile.
+spec.spec look-behind regex (Rust crate limitation) accepted with epmote.

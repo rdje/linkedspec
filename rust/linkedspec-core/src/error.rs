@@ -17,9 +17,13 @@ pub enum LinkedSpecError {
     #[error("validation error: {0}")]
     Validation(String),
 
-    /// Compilation error — cannot produce HandlerIR.
+    /// Compilation error — internal compiler failure.
     #[error("compilation error: {0}")]
     Compile(String),
+
+    /// Runtime execution error.
+    #[error("runtime error: {0}")]
+    Runtime(String),
 
     /// JSON serialization error.
     #[error("JSON error: {0}")]

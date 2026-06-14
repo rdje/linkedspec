@@ -23,8 +23,8 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| Tree | Status | Roadmap lane | Current frontier | File |
-| --- | --- | --- | --- | --- |
+| `RUST-FUNCTIONAL-PARITY` | `active` | `Phase 9 — Rust variant (functional parity)` | `.1.1` core types, `.1.2` parser rewrite | [docs/tasks/RUST-FUNCTIONAL-PARITY.md](docs/tasks/RUST-FUNCTIONAL-PARITY.md) |
+
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not
