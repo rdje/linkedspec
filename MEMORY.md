@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `c2f3294` — "Docs: PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1 — fix 10 stale proposed → retired references"
+- latest_commit: `b386115` — "Docs: post-commit hash fix — MEMORY.md latest_commit → c2f3294"
 - active_work_unit: none — PLUGIN-ACTION-MIGRATION-STALE-REFERENCES tree completed and moved to Completed.
 - next_action: PNT idle — all roadmap priorities addressed. Overall roadmap done. No active task trees.
 - in_flight_uncommitted: none
