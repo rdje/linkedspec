@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `DOC-BOOK-SYNC` | `active` | `Overall roadmap — documentation and book sync` | `DOC-BOOK-SYNC.2` (pending) | [docs/tasks/DOC-BOOK-SYNC.md](docs/tasks/DOC-BOOK-SYNC.md) |
+| `DOC-BOOK-SYNC` | `active` | `Overall roadmap — documentation and book sync` | `DOC-BOOK-SYNC.3` (pending) | [docs/tasks/DOC-BOOK-SYNC.md](docs/tasks/DOC-BOOK-SYNC.md) |
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not

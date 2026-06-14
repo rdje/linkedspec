@@ -87,7 +87,7 @@ A rule paragraph can include supported paragraph members such as:
 - action edges such as `-> Child`
 - blind-call edges such as `=> Child`
 - action blocks such as `{ ... }`
-- lifecycle blocks such as `I { ... }`, `LS { ... }`, `LE { ... }`, and `LX { ... }`
+- lifecycle blocks such as `I { ... }`, `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, and `LX { ... }`
 - split/capture markers such as `@capture_slice` and `@mark(name)`
 - method-like helper forms that lower through ActionIR
 

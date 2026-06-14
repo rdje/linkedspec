@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `c4a630a` — "Docs: DOC-BOOK-SYNC.1 — full mdBook + live docs audit against codebase"
-- active_work_unit: `DOC-BOOK-SYNC`  →  frontier leaf: `DOC-BOOK-SYNC.2` (pending)
-- next_action: Execute DOC-BOOK-SYNC.2 — remediate 19 gaps found in .1 audit across 13 files (6 critical, 8 medium, 5 low).
-- in_flight_uncommitted: none
+- latest_commit: `2764c9e` — "Docs: post-commit hash fix — MEMORY.md latest_commit → c4a630a"
+- active_work_unit: `DOC-BOOK-SYNC`  →  frontier leaf: `DOC-BOOK-SYNC.3` (pending)
+- next_action: Execute DOC-BOOK-SYNC.3 — finalization: verify alignment, run CI gate, update live docs, close tree.
+- in_flight_uncommitted: DOC-BOOK-SYNC.2 remediation complete (17 files changed, uncommitted)
 - blockers: none

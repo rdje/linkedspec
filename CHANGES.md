@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — DOC-BOOK-SYNC.2: Remediation of 19 documentation gaps
+### Remediation (.2)
+- Fixed all 19 gaps across 17 files (6 critical, 8 medium, 5 low)
+- Critical fixes: HandlerVariantEmitter/HandlerIR documented in generated-handlers-and-dispatch.md (73-line section), HandlerVariantEmitter added to owner-tree.md, configure_trace option names corrected in trace-api.md, 5 removed legacy return helpers purged from value-container-flow-helper-reference.md and USER_GUIDE.md, API signatures fixed in get-and-get-parser.md
+- Medium fixes: stale line counts corrected (design-rationale 286→258, project-status 259→258), module count fixed (18→27), lifecycle markers expanded to all 7, contract counts corrected (6 numeric fixes), plugin-registry param type fixed, pipeline-overview expanded with dual-path parse/comment-skip/modes, local-ci doc expanded with memory-arch/KM/RAM guard, ARCHITECTURE_STATE.md refreshed to 2026-06-14
+- Low fixes: MethodExpr/Diagnostics added to action-model, trace state vars documented, parse_only/generate_only documented, portmap/tablegrep line counts corrected
+- 22 pages with zero gaps verified unchanged
+
 ## 2026-06-14 — DOC-BOOK-SYNC.1: Full mdBook and live docs audit against codebase
 ### Audit (.1)
 - Audited all 35 mdBook pages + USER_GUIDE.md + ARCHITECTURE_STATE.md against current codebase

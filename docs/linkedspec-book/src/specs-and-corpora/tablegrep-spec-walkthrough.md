@@ -78,4 +78,4 @@ The `tablegrep.spec` compiles with `language_agnostic_ready_ratio == 1.0000` —
 
 ## Why this spec is interesting
 
-Tablegrep shows LinkedSpec used as a query-language frontend rather than a file-format parser. The expression grammar is small (5 rules, 85 lines) but demonstrates recursive grouping, operator detection, error handling with exit codes, and per-rule state accumulation — all patterns that scale to larger grammars.
+Tablegrep shows LinkedSpec used as a query-language frontend rather than a file-format parser. The expression grammar is small (5 rules, 84 lines) but demonstrates recursive grouping, operator detection, error handling with exit codes, and per-rule state accumulation — all patterns that scale to larger grammars.

@@ -114,3 +114,76 @@ The modernization goal is not to pretend generation does not exist. The goal is 
 - attributed in diagnostics
 - backed by regression tests
 - and less dependent on opaque runtime eval behavior
+
+## HandlerVariantEmitter and HandlerIR
+
+The `HandlerVariantEmitter` module (`perl/LinkedSpec/HandlerVariantEmitter.pm`, ~1018 lines) is the handler code generator. It was extracted from `SpecEntry.pm` to keep variant construction and emission in one focused module. It operates in two phases: first, a variant builder produces a `HandlerIR` hashref AST describing the handler structure; second, a backend-specific emitter consumes the IR and produces the final output (Perl source, or JSON for diagnostics).
+
+### HandlerIR: the intermediate representation
+
+HandlerIR is a hashref-based AST that captures everything the emitter needs without raw Perl source strings. Its keys:
+
+- `kind` — the variant kind (one of ten: `default`, `and_bcode`, `and_single_acode`, `and_acode_seq`, `or_bcode`, `or_acode`, `rep_bcode`, `rep_and_bcode`, `rep_and_acode`, `rep_acode`)
+- `label` — the rule label
+- `parse_mode` — `'seek'` or `'consume'`, controlling how `LinkedRE::or` matches
+- Lifecycle blocks: `preamble` (icode), `lxcode` (loop exit / no-match), `lscode` (loop start / after match), `lecode` (loop end / before collection), `ecode` (end / exhaustion), `excode` (REP exhaustion fallback), `itcode` (REP per-iteration collection)
+- Dispatch refs: `acodes_ref` (array of action-code strings), `bcodes_ref` (hash of call-name to bcode string), `bcalls_ref` (ordered list of bcode call names)
+- Repetition bounds (REP variants only): `rep_min`, `rep_max`
+- Sequence count (AND_ACODE_SEQ only): `acode_count`
+- Optional: `and_icode` (per-regex I-block, for AND rules with a regex match), `REs` (regex array, for AND_BCODE with match)
+
+### Ten variant builders
+
+Each `_build_*_variant` function takes a normalized argument hash (label, parse mode, lifecycle code strings, dispatch refs, node type, and optional repetition bounds) and returns either a HandlerIR hashref or `undef` if preconditions are not met (e.g., no acodes present for an acode variant).
+
+| Builder | Returns | When used |
+|---|---|---|
+| `_build_default_handler_variant` | `default` | Base case: acodes present |
+| `_build_and_bcode_variant` / `_build_and_bcode_sequence_body` | `and_bcode` | AND rules with bcodes |
+| `_build_and_single_acode_variant` | `and_single_acode` | AND rules with single regex + acodes or I-block |
+| `_build_and_acode_variant` / `_build_and_acode_sequence_body` | `and_acode_seq` | AND rules with >1 regex and >1 acode |
+| `_build_or_bcode_variant` / `_build_or_bcode_choice_body` | `or_bcode` | OR rules with bcodes |
+| `_build_or_acode_variant` | `or_acode` | OR rules with acodes |
+| `_build_rep_bcode_variant` | `rep_bcode` | REP rules (or default with bcodes), inner OR_BCODE |
+| `_build_rep_and_bcode_variant` | `rep_and_bcode` | REP_AND rules with bcodes, inner AND_BCODE |
+| `_build_rep_and_acode_variant` | `rep_and_acode` | REP_AND rules with acodes, inner AND_ACODE |
+| `_build_rep_acode_variant` | `rep_acode` | REP rules with acodes, LinkedRE::or + acode dispatch |
+
+Repetition bounds are resolved by `_resolve_rep_bounds`, which maps node types (`REP_PLUS` → `[1, 10^9]`, `REP_STAR` → `[0, 10^9]`, `REP_OPT` → `[0, 1]`, `REP_OR_PLUS` → `[1, 10^9]`) or accepts explicit `rep_min` / `rep_max` overrides.
+
+### Backend dispatch
+
+`_emit_handler($ir, %opts)` dispatches by backend name through the `%BACKEND_EMITTERS` hash. The default backend is `perl`.
+
+**Perl backend** (`_emit_handler_perl`). Dispatches on `kind` to one of ten template functions (`_emit_default_handler`, `_emit_and_bcode_handler`, etc.). Each template assembles a Perl source string from HandlerIR fields using helper functions:
+
+- `_linkedre_or_expr` — builds the `LinkedRE::or(...)` call expression from label and parse mode
+- `_build_acodes_dispatch_block` — builds the `if/elsif` chain over `$$minfo{index}` values
+- `_build_bcodes_dispatch_block` — builds the `if/elsif` chain over `$call` values
+- `_build_lmatch_extraction` — emits the common `$LMATCH`, `@LMATCH_LIST`, `%LMATCH_HASH`, `$LINDEX`, `$LSPOS` extraction block
+
+REP variants (rep_bcode, rep_and_bcode, rep_and_acode) compose inner handlers as anonymous coderefs (`$or_code`, `$and_code`) with progress-detection guards that check whether `pos($$STRING)` advanced between iterations.
+
+**JSON diagnostic backend** (`_emit_handler_json`). Uses `JSON::PP` (Perl core since 5.14) with canonical key ordering and pretty printing. It strips `undef` and empty values, producing a clean serialized HandlerIR document. The backend is selected by setting the `$BACKEND` package variable in `SpecEntry.pm` (line 19) to `'json'`, or by passing `backend => 'json'` to `_build_handler_variants`.
+
+### The and_icode mechanism
+
+For AND rules that combine a regex match with per-regex I-block code, `HandlerVariantEmitter` supports an `and_icode` field on the HandlerIR. When present:
+
+1. The emitter injects an `IMATCH ← LMATCH` bridge so I-block code can read regex captures through `$IMATCH`, `@IMATCH_LIST`, `%IMATCH_HASH`, `$IINDEX`, and `$IPOS`.
+2. `return` statements in the I-block code are rewritten to `$label =` assignments, so the handler collects the result in `@collect` instead of exiting early.
+3. The collected value is pushed onto `@collect` after the I-block code runs.
+
+This mechanism avoids `MIXED_ACTIONS` and is supported in `and_bcode`, `and_single_acode`, and `and_acode_seq` variant kinds.
+
+### Full compilation flow
+
+```
+RuleIR
+  → EmitContext (normalized lifecycle/action material)
+  → SpecEntry::_build_handler_variants
+  → HandlerVariantEmitter::_build_*_variant  (produces HandlerIR)
+  → HandlerVariantEmitter::_emit_handler      (backend dispatch)
+  → _emit_handler_perl                        (Perl source string)
+    or _emit_handler_json                     (JSON diagnostic output)
+```

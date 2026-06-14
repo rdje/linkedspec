@@ -41,7 +41,10 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - rejects untracked files inside CI input areas,
 - audits selected core paths for machine-specific absolute paths,
 - runs Perl syntax checks,
-- runs the main phase0 regression suite.
+- runs the main phase0 regression suite,
+- runs `scripts/check_memory_architecture.sh` to verify memory architecture invariants (layer integrity, pointer freshness, bounded-layer consistency),
+- runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),
+- enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results.
 
 The command sequence includes:
 

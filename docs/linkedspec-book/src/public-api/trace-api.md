@@ -12,16 +12,16 @@ Configures trace verbosity, output routing, and formatting. Returns a hashref of
 
 ```perl
 LinkedSpec::configure_trace(
-  verbosity => 300,       # DUMP_HIGH
-  log_file  => 'debug.log',
-  log_mode  => '>>',      # append or overwrite
+  trace_level => 'high',          # or numeric: dump_verbosity => 300
+  trace_log_file  => 'debug.log',
+  trace_log_mode  => 'route',     # 'stdout', 'route', or 'mirror'
 );
 ```
 
 Key options:
-- `verbosity` — numeric verbosity threshold (see levels below)
-- `log_file` — file path for trace output (when not set, output goes to the console)
-- `log_mode` — file-open mode (`>` for overwrite, `>>` for append)
+- `trace_level` or `dump_verbosity` — verbosity name (`none`/`low`/`medium`/`high`/`full`/`debug`) or numeric threshold (see levels below)
+- `trace_log_file` — file path for trace output (when not set, output goes to the console)
+- `trace_log_mode` — output routing: `stdout` (console only), `route` (file only), or `mirror` (both)
 
 ### `trace_enter($topic, $details, $level)`
 
@@ -69,6 +69,14 @@ if (LinkedSpec::should_dump(300)) {
 }
 ```
 
+### `trace_mark_event($mark_name, $position, $level)`
+
+Emits a trace event for parser boundary marks. `$mark_name` is the mark identifier, `$position` is the input cursor position where the mark was placed. Used by runtime handlers to trace capture/mark boundaries during parsing.
+
+```perl
+LinkedSpec::trace_mark_event('segment_start', pos($$input_ref), 300);
+```
+
 ## Verbosity levels
 
 LinkedSpec uses UVM-style verbosity constants:
@@ -91,6 +99,14 @@ LinkedSpec exports public package variables that alias into `LinkedSpec::Trace` 
 - `$LinkedSpec::DUMP_VERBOSITY` — current verbosity threshold (see `configure_trace`)
 - `$LinkedSpec::TRACE_LOG_FILE` — output file path
 - `$LinkedSpec::TRACE_LOG_MODE` — file-open mode
+
+Additional trace state variables are exported from LinkedSpec.pm via typeglob aliasing into `LinkedSpec::Trace`:
+
+- `$TRACE_EMOJI` — emoji prefix toggle for trace banners
+- `$TRACE_INDENT_LEVEL` — current indentation depth for nested trace scopes
+- `$TRACE_INDENT_WIDTH` — spaces per indentation level
+- `$TRACE_TOPIC_SPACING` — vertical spacing between trace topics
+- `$TRACE_INITIALIZED` — flag set after first `configure_trace` call
 
 These variables provide direct read/write access to trace state without calling `configure_trace`. Setting `$DUMP_VERBOSITY` to `300` has the same effect as `configure_trace(verbosity => 300)`.
 

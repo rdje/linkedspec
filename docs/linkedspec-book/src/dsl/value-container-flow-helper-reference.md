@@ -106,11 +106,9 @@ Older capture and return helpers also use this convention:
 | `capture(label)` | appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_value(array(CurrentRule), capture_slice())` or an explicit domain array |
 | `capture_if(label)` | trims and conditionally appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` or an explicit domain array |
 | `CAPTURE_IF()` | trims and conditionally appends the anonymous capture slice into `@CurrentRule` | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` |
-| `return_a(CurrentRule)` | returns the historical tagged payload including `@CurrentRule` | prefer `return(array("?CurrentRule:", array_copy(array(CurrentRule))))` when writing new structured payloads |
-| `return_m(CurrentRule)` | returns the historical tagged payload including the immediate match-group list | prefer `return(array("?CurrentRule:", flat_array(entry_groups())))` |
-| `return_ma(CurrentRule)` | returns the historical match-list-plus-accumulator payload including `@CurrentRule` | prefer `return(array("?CurrentRule:", flat_array(entry_groups()), array_copy(array(CurrentRule))))` |
+| *(removed 2026-06-14)* | `return_a`, `return_m`, `return_ma` were legacy tagged return shortcuts | Retired. Use `return(array(...))` with `array_copy(array(CurrentRule))` and/or `flat_array(entry_groups())` so payload shape is visible. |
 
-For example, a historical VHDL-style `return_ma(generate_statement)` says “return the tag, splice the entry capture groups, then carry the current rule accumulator.” The modern spelling makes each part explicit:
+Historically, a VHDL-style rule might have used the now-removed `return_ma(generate_statement)` shorthand. The modern spelling makes each part explicit:
 
 ```text
 return(array(
@@ -241,9 +239,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
 | `next()` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
 | `exit_now(status)` | exit immediately with an optional status | a fatal parse-time diagnostic should stop execution after emitting its message. |
-| `return_a(label)` / `return_m(label)` / `return_ma(label)` | legacy tagged return shortcuts | reading or migrating older specs. Prefer `return(array(...))` with `array_copy(array(label))` and/or `flat_array(entry_groups())` so payload shape is visible. |
-| `return_imatch(...)` / `return_im(...)` | legacy tagged current-match return | reading or migrating older specs. Prefer `return(...)` for new structured payloads. |
-| `return_array(tag, payload)` | legacy tagged array return | reading or migrating older specs. Prefer `return(array(...))` or `return(hash(...))` for new payloads. |
+| *(removed 2026-06-14)* | `return_a(label)`, `return_m(label)`, `return_ma(label)`, `return_imatch(...)`, `return_im(...)`, `return_array(tag, payload)` were legacy tagged return shortcuts | Retired. Use `return(...)` with `array_copy(...)` and/or `flat_array(entry_groups())` for structured payloads. |
 
 Canonical child-result pattern:
 

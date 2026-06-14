@@ -6,7 +6,7 @@ LinkedSpec exposes plugin registration and lookup methods on the public facade. 
 
 ### `register_plugin($name, $plugin_ref)`
 
-Registers a single plugin by name. `$plugin_ref` is a `PPlugin` instance.
+Registers a single plugin by name. `$plugin_ref` is a coderef handler.
 
 ```perl
 LinkedSpec::register_plugin('my_plugin', $plugin_instance);
@@ -14,7 +14,7 @@ LinkedSpec::register_plugin('my_plugin', $plugin_instance);
 
 ### `register_plugins(%plugins)`
 
-Registers multiple plugins at once. Keys are plugin names, values are `PPlugin` instances.
+Registers multiple plugins at once. Keys are plugin names, values are coderef handlers.
 
 ```perl
 LinkedSpec::register_plugins(
@@ -41,7 +41,7 @@ Runs a registered plugin by name with the given arguments. Returns the plugin's 
 
 ### `get_plugin($name)`
 
-Returns the registered `PPlugin` instance for the given name, or `undef` if not found.
+Returns the registered coderef handler for the given name, or `undef` if not found.
 
 ### `dispatch_plugin_autoload_name($name)`
 

@@ -165,7 +165,7 @@ Every helper call passes through the ActionIR lowering pipeline (see [ActionIR L
 1. `Scanner` discovers which contracts are present
 2. `StatementSplit` splits compound action text into individual statements
 3. `CanonicalEvents` normalizes each helper call into a canonical ActionIR event
-4. The appropriate lowering owner (`FlowExpr`, `ValueExpr`, `ControlFlow`, `MethodLowering`, `DeclareMethod`, `ArrayPipeline`) lowers the event to emitted code
+4. The appropriate lowering owner (`MethodExpr`, `FlowExpr`, `ValueExpr`, `ControlFlow`, `MethodLowering`, `DeclareMethod`, `ArrayPipeline`, `Diagnostics`) lowers the event to emitted code
 5. The final emitted Perl is generated — but the lowering pipeline is designed so that other backends can substitute their own final stage
 
 This is why writing `assign(scalar(name), entry_group(0))` is fundamentally different from writing raw Perl: the helper form is inspectable, validatable, and retargetable. Raw Perl is opaque to the lowering pipeline.

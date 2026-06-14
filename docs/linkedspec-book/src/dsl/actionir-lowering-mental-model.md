@@ -137,16 +137,16 @@ Each contract family has a dedicated lowering owner:
 
 ### Contracts catalog
 
-`ActionIR::Contracts` (2,176 lines, 163 contracts) is the contract catalog. It defines every supported helper surface — its name, its ActionIR node type, its diagnostic identity, and its unresolved pattern (the template matched before lowering resolves it). The 8 contract families are:
+`ActionIR::Contracts` (2,110 lines, 158 contracts) is the contract catalog. It defines every supported helper surface — its name, its ActionIR node type, its diagnostic identity, and its unresolved pattern (the template matched before lowering resolves it). The 8 contract families are:
 
 | Family | Contracts | Purpose |
 | --- | --- | --- |
-| capture_and_backtrack | ~70 | Boundary capture, mark, cursor, and BACKTRACK helpers |
+| capture_and_backtrack | 103 | Boundary capture, mark, cursor, and BACKTRACK helpers |
 | call_and_dispatch | ~11 | Rule dispatch and call helpers |
-| return | ~9 | Return value construction |
+| return | 4 | Return value construction |
 | passthrough_ir | 12 | Compatibility pass-through surfaces |
-| emit_and_declare | 8 | Declaration and emit helpers |
-| array_pipeline | 9 | Array pipeline operations |
+| emit_and_declare | 7 | Declaration and emit helpers |
+| array_pipeline | 8 | Array pipeline operations |
 | flow_control | 9 | Structured control flow |
 | assignment_and_regex | 4 | Assignment and regex-slot helpers |
 
@@ -156,7 +156,7 @@ Understanding the pipeline matters because it explains why a helper call in a `.
 
 The repo-root ActionIR guides are the exhaustive working references while this book grows toward absorbing that surface:
 
-- `USER_GUIDE_ActionIR_Contracts.md` — full contract catalog (163 contracts across 8 families)
+- `USER_GUIDE_ActionIR_Contracts.md` — full contract catalog (158 contracts across 8 families)
 - `USER_GUIDE_ActionIR_MethodLowering.md` — method lowering pipeline
 - `USER_GUIDE_ActionIR_EmittedPerlReference.md` — emitted Perl for every supported helper
 - `USER_GUIDE_RuleModesAndSplit.md` — rule modes and split-boundary details

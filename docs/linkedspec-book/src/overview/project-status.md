@@ -7,7 +7,7 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 Phases 0–7 of the modernization roadmap are done:
 
 - **Phase 0**: Regression safety net — `t/phase0_regression.t` covers all 20 shipped specs with a green baseline; every `.spec` compiles at `language_agnostic_ready_ratio == 1.0000` (zero compatibility-surface rules).
-- **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a 259-line lazy facade; 18 modules use uniform `OwnerDispatch`; the former `ActionRewriter.pm` forwarding shim was deleted (118 lines).
+- **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a 258-line lazy facade; 27 modules use uniform `OwnerDispatch`; the former `ActionRewriter.pm` forwarding shim was deleted (118 lines).
 - **Phase 1A**: Thin-façade modularization — `LinkedSpec.pm` delegated into focused owner modules (`Trace`, `Validation`, `Resolver`, `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `RuleIR`, `EmitContext`); the shared `OwnerDispatch` seam replaced per-owner lazy-loading wrappers.
 - **Phase 2**: DSL frontend hardening — rule-label parsing, inside-block rejection, extra-colon rejection, fluent-continuation recognition, `strict_syntax` mode, construct-recognition alignment with bootstrap grammar.
 - **Phase 3**: Execution semantics — seek/consume parse modes documented; BACKTRACK/IBACKTRACK defined as local cursor-rewind, not systemic backtracking; forward-moving non-backtracking model stated.

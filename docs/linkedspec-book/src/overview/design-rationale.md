@@ -55,6 +55,6 @@ This project should be explainable — not only what it does, but why:
 - why compiled state models exist (separate concerns, enable structured validation, project only at the boundary)
 - why runtime context exists (carry structured last_error payloads, not raw Perl error strings)
 - why diagnostics are structured (owner/stage attribution, rule labels, handler source labels)
-- why the facade is thin (LinkedSpec.pm is 286 lines; real work lives in owner modules dispatched through `OwnerDispatch`)
+- why the facade is thin (LinkedSpec.pm is 258 lines; real work lives in owner modules dispatched through `OwnerDispatch`)
 
 Understanding the "why" makes the "what" easier to trust and easier to change later.

@@ -77,6 +77,11 @@ Important options include:
 - `return_descriptor`
 - `runtime_ctx_ref`
 
+Two specialty compilation modes are also available:
+
+- `parse_only` — parse the `.spec` source and build the compiled rule table, but skip handler generation and parser-code emission. Returns the compiled internal state instead of a parser coderef. Useful for introspection tools that need rule-level metadata without the full runtime surface.
+- `generate_only` — regenerate handlers from an already-compiled rule table without re-parsing the source. Requires a previously built compiled state. Useful for tooling workflows that cache parse results and only need to re-emit handlers.
+
 ## `top_rule`
 
 `top_rule` selects the parser entrypoint rule.
@@ -139,12 +144,12 @@ The descriptor shape is covered in the next chapter.
 
 Two additional methods on the facade serve specialized compile/runtime needs:
 
-### `build_compiled_rule_table($spec_content, %opts)`
+### `build_compiled_rule_table($parsed_spec_entries, [$compile_spec_entry_cb], [$option_hashref])`
 
-Returns the compiled rule table without building the full descriptor or generating handlers. Useful for introspection tools that need rule-level metadata but not the runtime handler surface.
+Returns the compiled rule table from already-parsed spec entries without building the full descriptor or generating handlers. An optional compile callback and option hashref control advanced behavior (e.g., `{ return_state => 1 }` returns the full compiled-spec state instead of the rule-table projection). Useful for introspection tools that need rule-level metadata.
 
-### `call_spec_handler_subst($spec_content, %opts)`
+### `call_spec_handler_subst($label, $code)`
 
-Calls a spec handler with substitution. Used by plugin-adjacent code that needs to invoke compiled handlers outside the normal parser invocation path.
+Rewrites a single helper-action code string for the named rule label through the ActionIR lowering pipeline. Returns the rewritten code. Used primarily by regression tests and compatibility checks — runtime rule compilation calls the ActionIR rewrite path directly.
 
 These are lower-level than `Get` and `get_parser`; most callers will not need them directly.

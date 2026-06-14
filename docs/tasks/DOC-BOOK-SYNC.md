@@ -50,10 +50,10 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
   Commit: `pending`
 
 - ID: `DOC-BOOK-SYNC.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Remediate all gaps identified in DOC-BOOK-SYNC.1 — update book pages, live docs, and cross-references to eliminate drift.`
   Acceptance: `Every gap from the .1 audit is addressed: book pages updated, live docs refreshed, stale references removed, missing content added. Each remediation is traceable to a specific gap from the audit list.`
-  Verification: `pending`
+  Verification: `All 19 gaps fixed across 17 files. 3 parallel agents + 4 direct edits. 22 pages with zero gaps confirmed unchanged.`
   Commit: `pending`
 
 - ID: `DOC-BOOK-SYNC.3`
@@ -67,7 +67,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DOC-BOOK-SYNC.2` | `pending` | Remediate all 19 gaps identified in .1 audit across 13 files. |
+| 1 | `DOC-BOOK-SYNC.3` | `pending` | Finalization: verify alignment, run full CI gate, update live docs, close tree. |
 
 ## Decisions
 
@@ -87,7 +87,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 | --- | --- | --- | --- |
 | `2026-06-14` | `DOC-BOOK-SYNC.0` | `scripts/check_memory_architecture.sh`, `.githooks/pre-commit` (memory-arch + KM) | PASS — all invariants hold |
 | `2026-06-14` | `DOC-BOOK-SYNC.1` | Full audit: 35 mdBook pages + USER_GUIDE.md + ARCHITECTURE_STATE.md against codebase (4 parallel agents) | 19 gaps found: 6 critical, 8 medium, 5 low — across 13 files |
-| `pending` | `DOC-BOOK-SYNC.2` | `pending` | `pending` |
+| `2026-06-14` | `DOC-BOOK-SYNC.2` | All 19 gaps fixed: 6 critical (C1 HandlerVariantEmitter doc, C2 owner-tree, C3 trace-api option names, C4 value-container-flow-helper, C5 get-and-get-parser signatures, C6 USER_GUIDE), 8 medium (M1-M8), 5 low (L1-L5) | All gaps addressed across 17 files; 22 zero-gap pages verified unchanged |
 | `pending` | `DOC-BOOK-SYNC.3` | `pending` | `pending` |
 
 ## Commit Log
@@ -96,7 +96,7 @@ Ensure the mdBook (`docs/linkedspec-book/`) and live docs (`USER_GUIDE.md`, `ARC
 | --- | --- | --- |
 | `DOC-BOOK-SYNC.0` | `Docs: DOC-BOOK-SYNC.0 — create task tree for documentation/book sync` | `1d72202` — 6 files, 118 insertions |
 | `DOC-BOOK-SYNC.1` | `Docs: DOC-BOOK-SYNC.1 — full mdBook + live docs audit against codebase` | `c4a630a` — 19 gaps found, recorded in Audit Results section |
-| `DOC-BOOK-SYNC.2` | `pending` | `pending` |
+| `DOC-BOOK-SYNC.2` | `pending` | Remediation complete — 19 gaps fixed, see Audit Results for traceability |
 | `DOC-BOOK-SYNC.3` | `pending` | `pending` |
 
 ## Audit Results (DOC-BOOK-SYNC.1)

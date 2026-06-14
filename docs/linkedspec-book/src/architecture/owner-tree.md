@@ -82,6 +82,10 @@ LinkedSpec
             ActionIR::*
               backend-neutral helper DSL scanning, canonicalization, contracts, and lowering
 
+        HandlerVariantEmitter
+          structured HandlerIR AST, 10 variant builders, backend dispatch (Perl + JSON)
+              backend-neutral helper DSL scanning, canonicalization, contracts, and lowering
+
   PluginRegistry / PluginBridge / PPlugin
     legacy plugin transition branch, not the future architectural center
 ```

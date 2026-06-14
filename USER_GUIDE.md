@@ -450,7 +450,7 @@ Lowered constructs are not limited to one place.
 ### 2. Chained action edges
 
 ```text
--> child .declare(scalar, name).assign(scalar(name), CAPTURE).return_array(node, array(scalar(name)))
+-> child .declare(scalar, name).assign(scalar(name), CAPTURE).return(node, array(scalar(name)))
 ```
 
 ### 3. Lifecycle blocks
@@ -520,7 +520,7 @@ One more supported slice is now locked too: nested array-pipeline composition in
 
 Collection-valued nested array-pipeline composition is now locked on a broader supported surface too: `declare(array, ...)`, `assign(array(...), ...)`, and nested hash/array payload values all accept the same helper-only pipeline composition, and the fluent versus structured lifecycle forms agree on that metadata as well.
 
-That supported collection-valued surface now extends to broader hash/object-oriented shapes too: `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return_array(..., hash(...))` all accept the same nested helper-only collection composition, and the fluent versus structured lifecycle forms agree on that metadata there as well.
+That supported collection-valued surface now extends to broader hash/object-oriented shapes too: `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return(..., hash(...))` all accept the same nested helper-only collection composition, and the fluent versus structured lifecycle forms agree on that metadata there as well.
 
 That supported collection-hash shape is now locked on action-edge surfaces too: fluent `-> rule .m1(...).m2(...)` and structured `-> rule { m1(...); m2(...); }` forms now agree on compiled action output and migration metadata for that supported chain.
 
@@ -947,9 +947,9 @@ Start with [`USER_GUIDE_ActionIR_Contracts.md`](USER_GUIDE_ActionIR_Contracts.md
 Typical patterns:
 - `call(rule)` as a standalone dispatch helper
 - `push(rule)` / `push(rule, target)`
-- `return_a`, `return_m`, `return_ma`
-- `return_imatch`, `return_array`
 - `$CAPTURE`, `capture_if(...)`, `BACKTRACK()`, `IBACKTRACK()`
+
+> **Removed 2026-06-14:** Legacy return wrappers `return_a`, `return_m`, `return_ma`, `return_imatch`, and `return_array` have been retired. Use the canonical `return(expr)` form instead.
 
 Important boundary:
 - `BACKTRACK()` and `IBACKTRACK()` are local cursor-rewind helpers.
@@ -961,7 +961,7 @@ Start with [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_E
 
 This is the exhaustive review document. It covers:
 - preferred canonical helper forms,
-- older compatibility helpers such as `return_a`, `return_m`, `return_ma`, `capture_if`, and raw call wrappers,
+- older compatibility helpers such as `capture_if` and raw call wrappers (legacy return wrappers `return_a`, `return_m`, `return_ma`, `return_imatch`, `return_array` were removed 2026-06-14; use the canonical `return(expr)` form),
 - classified pass-through idioms that are preserved verbatim but still count as canonical ActionIR rather than `RAW_PERL` fallback.
 
 ## Most Common Canonical Patterns
@@ -1097,7 +1097,7 @@ That distinction is intentional:
 
 That compatibility lane now covers both:
 - Perl-shaped pass-through syntax such as bare `return` / `exit` and other classified compatibility idioms,
-- and older helper wrappers such as `return_a`, `return_m`, `return_ma`, `return_imatch`, `return_array`, `capture_if`, and raw call-wrapper forms.
+- and older helper wrappers such as `capture_if` and raw call-wrapper forms (legacy return wrappers `return_a`, `return_m`, `return_ma`, `return_imatch`, `return_array` were removed 2026-06-14; use the canonical `return(expr)` form).
 
 There is one important internal-model change behind that outer descriptor shape now:
 

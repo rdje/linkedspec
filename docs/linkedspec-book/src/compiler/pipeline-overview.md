@@ -46,6 +46,8 @@ This is where the compiler knows about requested options such as:
 - `return_descriptor`
 - runtime context plumbing
 
+Two specialty compilation modes are also set here: `parse_only` (build compiled rule-table state without generating handlers or emitting parser code) and `generate_only` (regenerate handlers from an already-compiled rule table without re-parsing). These modes support introspection and tooling workflows that need intermediate compiler artifacts.
+
 The preparation stage also makes diagnostics better. If an invalid option or malformed callback surface is detected before parsing starts, the error can still be attributed to `compiler_pipeline:prepare_pipeline` instead of escaping as an arbitrary low-level failure.
 
 ## Stage 2: validate the source envelope
@@ -69,6 +71,8 @@ The high-level principle: malformed input should be rejected with targeted, debu
 The bootstrap parser reads the `.spec` source and produces parsed rule entries.
 
 This stage is still special because LinkedSpec uses a bootstrap grammar to parse the language that defines LinkedSpec parsers. That bootstrap layer is owned separately from the main compiler state model.
+
+**Dual-path parse**: LinkedSpec also runs a second parse through the self-hosted `spec.spec` grammar as a diagnostic side channel. `BootstrapSpec::run_bootstrap_parse()` executes both the hardcoded bootstrap parser (always the primary output for format compatibility) and the `spec.spec`-generated parser, enabling cross-check comparisons via `tools/cross_check_spec_parsers.pl`. A recursion guard prevents infinite loops when `spec.spec` tries to parse itself.
 
 ## Stage 4: build compiled rule-table state
 
@@ -148,3 +152,7 @@ my $descr = LinkedSpec::Get(
 ```
 
 The outward descriptor is not the compiler’s only internal truth. It is a public/tooling projection of the state-first model.
+
+## Runtime wrapper
+
+`Runtime::run_get` wraps parser invocation with a comment and blank-line skip loop. Before each match attempt the wrapper advances `pos($$input_ref)` past any leading whitespace-only lines or `#`-to-end-of-line comment lines, so grammar rules do not need to handle these themselves. This skip wrapper is applied at runtime on every generated handler invocation, keeping the grammar surface clean.

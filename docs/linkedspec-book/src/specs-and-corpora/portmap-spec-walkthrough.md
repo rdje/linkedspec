@@ -85,4 +85,4 @@ The `portmap.spec` compiles with `language_agnostic_ready_ratio == 1.0000` — z
 
 ## Why this spec is interesting
 
-Portmap shows LinkedSpec handling a real hardware-description task: parsing VHDL/Verilog port connections. The spec is only 34 lines but handles nested concatenations, multiple signal forms, and produces structured output. It's a good example of how a single well-crafted regex with classification logic can replace what would otherwise require multiple grammar rules in a traditional parser-generator.
+Portmap shows LinkedSpec handling a real hardware-description task: parsing VHDL/Verilog port connections. The spec is only 33 lines but handles nested concatenations, multiple signal forms, and produces structured output. It's a good example of how a single well-crafted regex with classification logic can replace what would otherwise require multiple grammar rules in a traditional parser-generator.
