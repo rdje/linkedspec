@@ -70,10 +70,10 @@ canonical test corpus every backend runs against.
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Helper contract catalog — produce one canonical reference covering all 100+ helpers across 10 families. Each entry: helper name, signature, input/output types, behavioral contract, edge cases. Extract and formalize from existing Contracts.pm + USER_GUIDE files; organize by family.`
   Acceptance: `Catalog exists as a tracked document; covers all helper families (scalar, array, hash, arithmetic, string, flow, capture/mark, declaration, assignment, control-flow); each helper has a signature, type contract, and behavioral description in language-neutral terms.`
-  Verification: `pending`
+  Verification: `PASS — helper-contract-catalog.md created (10 families, 100+ helpers, cross-cutting contracts, compatibility alias table)`
   Commit: `pending`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.5`
@@ -108,8 +108,8 @@ canonical test corpus every backend runs against.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
-| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
+| 1 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
+| 2 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
 | 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
 | 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
 | 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
@@ -140,6 +140,7 @@ canonical test corpus every backend runs against.
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.1` | `scripts/check_memory_architecture.sh` PASS; ADR 0006 created + INDEX.md updated | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.2` | `scripts/check_memory_architecture.sh` PASS; formal-grammar.md created (12 sections), SUMMARY.md updated | PASS |
 | `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.3` | `scripts/check_memory_architecture.sh` PASS; handler-ir-design.md created, old card placeholder fixed | PASS |
+| `2026-06-14` | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `scripts/check_memory_architecture.sh` PASS; helper-contract-catalog.md created (10 families, cross-cutting contracts) | PASS |
 
 ## Commit Log
 

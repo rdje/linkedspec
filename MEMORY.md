@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `a626aa2` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.3 — HandlerIR specification"
-- active_work_unit: PHASE8-MULTI-BACKEND-HANDOFF  →  frontier leaf: PHASE8-MULTI-BACKEND-HANDOFF.4 (Helper contract catalog)
-- next_action: PNT — implement PHASE8-MULTI-BACKEND-HANDOFF.4 (Helper contract catalog).
+- latest_commit: `pending` — "Docs: PHASE8-MULTI-BACKEND-HANDOFF.4 — Helper contract catalog"
+- active_work_unit: PHASE8-MULTI-BACKEND-HANDOFF  →  frontier leaf: PHASE8-MULTI-BACKEND-HANDOFF.5 (Runtime semantics specification)
+- next_action: PNT — implement PHASE8-MULTI-BACKEND-HANDOFF.5 (Runtime semantics specification).
 - in_flight_uncommitted: none
 - blockers: none
