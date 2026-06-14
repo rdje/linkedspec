@@ -8858,7 +8858,7 @@ label:
  return(1)
  }
 Next::
- /b/ { return_a(Next) }
+ /b/ { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -8882,7 +8882,7 @@ label:
  return(1)
  }
 Next::
- /b/ { return_a(Next) }
+ /b/ { return(1) }
 SPEC
 require LinkedSpec;
 my $parser = LinkedSpec::Get(\$spec_content);
@@ -9148,12 +9148,12 @@ subtest 'validation_accepts_grouped_action_edge_with_three_targets' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/ -> LeafA | LeafB | LeafC {
-  return_a(LeafA)
+  return(1)
  }
 
-LeafA: /x/ -> LeafA { return_a(LeafA) }
-LeafB: /y/ -> LeafB { return_a(LeafB) }
-LeafC: /z/ -> LeafC { return_a(LeafC) }
+LeafA: /x/ -> LeafA { return(1) }
+LeafB: /y/ -> LeafB { return(1) }
+LeafC: /z/ -> LeafC { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -9237,13 +9237,13 @@ Top::
  /a/ -> Leaf { return(1) }
 
 UnusedRule:
- /b/ -> UnusedRule { return_a(UnusedRule) }
+ /b/ -> UnusedRule { return(1) }
 
 Leaf:
  /c/ -> Leaf { return(1) }
 
 OrphanedRule:
- /d/ -> Leaf { return_a(Orphaned) }
+ /d/ -> Leaf { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok0 = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
@@ -10709,8 +10709,8 @@ RepeatChoice:OR+
  => First
  => Second
 RepeatSeq:AND+
- /a/ -> RepeatSeq { return_a(RepeatSeq) }
- /b/ -> RepeatSeq { return_a(RepeatSeq) }
+ /a/ -> RepeatSeq { return(1) }
+ /b/ -> RepeatSeq { return(1) }
 RepeatBlindSeq:AND+
  => First
  => Second

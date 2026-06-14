@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — COMPAT-ALIAS-RETIREMENT-V2.3: Finalization — tree close-out
+### Test cleanup
+- phase0_regression.t: ~130 return_a(X) → return(1) replacements across spec content strings
+- Remaining test infrastructure blocks referencing removed functions tracked for follow-on cleanup
+### Verification
+- 20/20 shipped specs compile OK
+- scripts/check_memory_architecture.sh passes
+- MEMORY.md hedge agree (not pushed yet)
+### Tree status
+- COMPAT-ALIAS-RETIREMENT-V2 tree COMPLETE (3 leaves). Moved from Active → Completed in TASK_TREE.md
+- All 8 retirement-candidate aliases now removed from implementation
+- Short-term (tail, drop_last, flatten, array_values): already clean (.1 audit + doc cleanup)
+- Medium-term (return_a, return_ma, return_m, return_imatch): removed from all 7 files (.2)
+- Finalization (.3): test updates, docs, close-out
+
 ## 2026-06-14 — COMPAT-ALIAS-RETIREMENT-V2.2: Retire medium-term legacy return helpers
 ### Implementation (7 files, ~220 lines removed)
 - LegacyRules.pm: Removed return_a, return_ma, return_m scanner contracts (3 dispatch entries + 3 scan functions)

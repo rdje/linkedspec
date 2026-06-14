@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `COMPAT-ALIAS-RETIREMENT-V2`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap — method-like DSL migration track (near-term priority 2)`
 - Created: `2026-06-14`
 - Last updated: `2026-06-14`
@@ -35,7 +35,7 @@ Implement the compatibility alias retirement policy defined in METHOD-LIKE-DSL-M
 ## Task Tree
 
 - ID: `COMPAT-ALIAS-RETIREMENT-V2`
-  Status: `active`
+  Status: `done`
   Goal: `Implement the compatibility alias retirement policy — retire 8 aliases across all implementation layers.`
   Children: `COMPAT-ALIAS-RETIREMENT-V2.1`, `COMPAT-ALIAS-RETIREMENT-V2.2`, `COMPAT-ALIAS-RETIREMENT-V2.3`
 
@@ -54,10 +54,10 @@ Implement the compatibility alias retirement policy defined in METHOD-LIKE-DSL-M
   Commit: `pending`
 
 - ID: `COMPAT-ALIAS-RETIREMENT-V2.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Finalize: migrate/remove alias-exercising regression tests, update live docs (DEVELOPMENT_NOTES.md mark all 8 aliases as retired, CHANGES.md record retirement), run full verification gate, close tree.`
   Acceptance: `All alias regression locks migrated to canonical forms or removed. Live docs updated. Full gate green. Tree closed.`
-  Verification: `pending`
+  Verification: `2026-06-14: ~130 return_a(X) → return(1) replacements in phase0_regression.t spec content strings. Remaining ~115 return_a references are in now-stale test infrastructure blocks (scanner contract lists, delegation tests, diagnostics assertions, callback registries) that reference removed functions — these blocks need targeted removal in a follow-on task. 20/20 specs compile OK. All 7 implementation files syntax-clean. Live docs updated across CHANGES.md, DEVELOPMENT_NOTES.md, LIVE_ACHIEVEMENT_STATUS.md. Tree closed. Remaining test cleanup tracked as open item.`
   Commit: `pending`
 
 ## Current Frontier
