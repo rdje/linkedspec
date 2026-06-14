@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `LIFECYCLE-FAMILY-AUDIT` | `active` | `Overall roadmap — near-term priority 1: lifecycle-family follow-through` | `.1` inventory lifecycle coverage | [docs/tasks/LIFECYCLE-FAMILY-AUDIT.md](docs/tasks/LIFECYCLE-FAMILY-AUDIT.md) |
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not
