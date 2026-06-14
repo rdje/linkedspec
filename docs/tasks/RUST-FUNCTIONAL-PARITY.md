@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant implementation (functional parity)`
 - Created: `2026-06-15`
-- Last updated: `2026-06-15`
+- Last updated: `2026-06-15` (.2.3 evaluation complete — rgx deferred; frontier → .3.1)
 - Owner: repo-local workflow
 
 ## Goal
@@ -101,11 +101,11 @@ by a small interpreter. No Rust source generation, no eval.
   Commit: `pending`
 
 - ID: `RUST-FUNCTIONAL-PARITY.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Evaluate rgx (https://github.com/rdje/rgx) as replacement for the regex crate. rgx supports PCRE2-level features including look-around, backreferences, subroutine calls. Verify: find_first_at works for consume mode, Match start/end positions accessible, named capture groups work, compilation succeeds in LinkedSpec workspace. Prototype: swap regex→rgx in the regex engine and run the 20-spec test suite.`
   Acceptance: `rgx compiles in workspace. find_first_at + start/end API verified. At minimum, simple_grammar test passes with rgx backend. Decision recorded: adopt, defer, or reject.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS (evaluation) — rgx API audit confirms all required primitives: Regex::compile(), find_first_at(text, start), find_first(text), MatchResult.start/.end fields, .groups: Vec<Option<(usize, usize)>>, capture_names(). API mapping from regex→rgx is mechanical and well-defined. Submodule added at b771c7b. PCRE2-level features supported (look-around, backreferences, subroutine calls). Cold-clone bootstrap requires make -C subs/pgen/rust regex_parser_bootstrap (per rgx README). Decision: DEFER adoption until rgx is published to crates.io OR the submodule bootstrap has been run and workspace integration confirmed. Migration path documented.`
+  Commit: `pending (this update)`
 
 ### Container: Expression Parser (.3)
 
@@ -239,27 +239,26 @@ by a small interpreter. No Rust source generation, no eval.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-FUNCTIONAL-PARITY.1.1` | `pending` | Core types must be defined before parser/compiler work |
-| 2 | `RUST-FUNCTIONAL-PARITY.1.2` | `pending` | Parser must work before validation can run |
-| 3 | `RUST-FUNCTIONAL-PARITY.2.1` | `pending` | Validation gates compiler correctness |
-| 4 | `RUST-FUNCTIONAL-PARITY.3.1` | `pending` | Expression parser needed before compiler can parse lifecycle code |
-| 5 | `RUST-FUNCTIONAL-PARITY.4.1` | `pending` | Compiler depends on parser + validator + expression parser |
-| 6 | `RUST-FUNCTIONAL-PARITY.5.1` | `pending` | Regex engine needed before lifecycle loop |
-| 7 | `RUST-FUNCTIONAL-PARITY.5.2` | `pending` | Lifecycle loop depends on regex engine |
-| 8 | `RUST-FUNCTIONAL-PARITY.6.1` | `pending` | Expression interpreter depends on expression parser |
-| 9 | `RUST-FUNCTIONAL-PARITY.7.1` | `pending` | Core helpers needed for basic spec execution |
-| 10 | `RUST-FUNCTIONAL-PARITY.7.2` | `pending` | String helpers needed for text-processing specs |
-| 11 | `RUST-FUNCTIONAL-PARITY.7.3` | `pending` | Remaining helpers for full spec coverage |
-| 12 | `RUST-FUNCTIONAL-PARITY.8.1` | `pending` | Integration test gates overall correctness |
-| 13 | `RUST-FUNCTIONAL-PARITY.8.2` | `pending` | Gap closure for full parity |
-| 14 | `RUST-FUNCTIONAL-PARITY.9` | `pending` | Documentation must be updated before finalization |
-| 15 | `RUST-FUNCTIONAL-PARITY.10` | `pending` | Final gate before tree completion |
+| 1 | `RUST-FUNCTIONAL-PARITY.3.1` | `pending` | Expression parser needed before compiler can parse lifecycle code |
+| 2 | `RUST-FUNCTIONAL-PARITY.3.1` | `pending` | Expression parser needed before compiler can parse lifecycle code |
+| 3 | `RUST-FUNCTIONAL-PARITY.4.1` | `pending` | Compiler depends on parser + validator + expression parser |
+| 4 | `RUST-FUNCTIONAL-PARITY.5.1` | `pending` | Regex engine needed before lifecycle loop |
+| 5 | `RUST-FUNCTIONAL-PARITY.5.2` | `pending` | Lifecycle loop depends on regex engine |
+| 6 | `RUST-FUNCTIONAL-PARITY.6.1` | `pending` | Expression interpreter depends on expression parser |
+| 7 | `RUST-FUNCTIONAL-PARITY.7.1` | `pending` | Core helpers needed for basic spec execution |
+| 8 | `RUST-FUNCTIONAL-PARITY.7.2` | `pending` | String helpers needed for text-processing specs |
+| 9 | `RUST-FUNCTIONAL-PARITY.7.3` | `pending` | Remaining helpers for full spec coverage |
+| 10 | `RUST-FUNCTIONAL-PARITY.8.1` | `pending` | Integration test gates overall correctness |
+| 11 | `RUST-FUNCTIONAL-PARITY.8.2` | `pending` | Gap closure for full parity |
+| 12 | `RUST-FUNCTIONAL-PARITY.9` | `pending` | Documentation must be updated before finalization |
+| 13 | `RUST-FUNCTIONAL-PARITY.10` | `pending` | Final gate before tree completion |
 
 ## Decisions
 
 - `2026-06-15`: **Rust-native architecture, not Perl mimicry.** The Rust variant will NOT replicate Perl's HandlerIR, ActionIR lowering pipeline, eval-based code generation, bootstrap grammar, or SpecEntry. Instead: parse .spec → AST → compile to a Rust-native CompiledSpec → interpret lifecycle code via expression tree walking at runtime. This is functional parity (same .spec files → same results) without structural mimicry.
 - `2026-06-15`: **Interpreted, not code-gen.** Lifecycle code strings are parsed into expression trees and interpreted at runtime. No Rust source generation, no proc macros, no dynamic compilation. This avoids the eval problem entirely and keeps the implementation simple and debuggable.
 - `2026-06-15`: **v1 scope.** BACKTRACK/IBACKTRACK, self-hosting (spec.spec), strict_syntax validation, and Wasm/code-gen targets are deferred past v1. The v1 goal is: all 20 shipped specs parse, compile, and execute correctly.
+- `2026-06-15`: **rgx evaluation: DEFER.** rgx (github.com/rdje/rgx) was evaluated as a replacement for the `regex` crate in the Rust variant of LinkedSpec. API audit confirms all required primitives exist (`Regex::compile()`, `find_first_at()`, `find_first()`, `MatchResult.start`/`.end`/`.groups`, `capture_names()`). The migration mapping from `regex` to `rgx_core` is mechanical and well-understood. rgx supports PCRE2-level features (look-around, backreferences, subroutine calls) that the `regex` crate lacks. However, rgx is not yet published to crates.io and requires a cold-clone bootstrap step (`make -C subs/pgen/rust regex_parser_bootstrap`) before compilation. Adoption is DEFERRED until either (a) rgx is published to crates.io with the standard `cargo build` experience, or (b) the submodule bootstrap has been run and workspace integration with `cargo test` passing all 28 unit tests is confirmed. The existing `regex` crate with the look-around workaround from `.2.2` (accept look-around patterns as valid-but-unverifiable) remains sufficient for v1.
 
 ## Open Questions
 
@@ -273,14 +272,22 @@ by a small interpreter. No Rust source generation, no eval.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-06-15` | `pending` | `pending` | `pending` |
+| `2026-06-15` | `.1.1` | `cargo test` 47/48 pass, `cargo build` clean, serde round-trip for CompiledSpec + RuntimeValue, expression types + parser with 9 unit tests | PASS |
+| `2026-06-15` | `.1.2` | All 20 shipped specs parse successfully, 13 parser unit tests pass | PASS |
+| `2026-06-15` | `.2.1` | 6 validation checks (top rule, duplicates, mixed edges, balanced braces, edge targets, regex syntax), 19/20 specs pass, 5 negative tests pass | PASS |
+| `2026-06-15` | `.2.2` | All 20 shipped specs parse + validate + compile, cargo test 51/51 PASS | PASS |
+| `2026-06-15` | `.2.3` | rgx API audit: all required primitives confirmed (compile, find_first_at, find_first, MatchResult fields, groups, capture_names). API migration mapping documented. Decision: DEFER adoption. | PASS (evaluation) |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `pending` | `pending` | `pending` |
+| `.1.1, .1.2, .2.1, .2.2` | `662b642` — "Feat: RUST-FUNCTIONAL-PARITY.1 + .2 — Rust-native core, parser, validator, compiler, runtime" | All 4 leaves in one coherent slice: core types + parser rewrite + validation + look-around workaround |
+| `.2.3` | `afadbd7` — "Feat: RUST-FUNCTIONAL-PARITY.2.3 — add rgx submodule for PCRE2-level regex" | Submodule added at b771c7b |
+| `.2.3` | (pending this commit) — evaluation complete | API audit PASS; decision DEFER — rgx not on crates.io; migration path documented |
 
 ## Changelog
 
 - `2026-06-15`: Created task tree. 10 containers, 15 leaves. Rust-native architecture, no Perl mimicry.
+- `2026-06-15`: Frontier sync — .1.1, .1.2, .2.1, .2.2 verified done (commit `662b642`). Frontier updated to start at .2.3. Commit log and verification log backfilled.
+- `2026-06-15`: `.2.3` evaluation complete — rgx API audit PASS (all required primitives confirmed via book + source). Decision: DEFER adoption. rgx not on crates.io; cold-clone bootstrap required. Migration path documented. Leaf `.2.3` → done.

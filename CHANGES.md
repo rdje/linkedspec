@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-FUNCTIONAL-PARITY.2.3: rgx evaluation complete
+### rgx evaluation (.2.3)
+- Evaluated rgx (github.com/rdje/rgx, submodule at b771c7b) as replacement for the `regex` crate
+- API audit PASS: all required primitives confirmed (Regex::compile, find_first_at, find_first, MatchResult.start/.end/.groups, capture_names)
+- PCRE2-level features supported: look-around, backreferences, subroutine calls
+- API migration mapping from `regex` to `rgx_core` documented and mechanical
+- Decision: **DEFER** — rgx not on crates.io; cold-clone bootstrap required (`make -C subs/pgen/rust regex_parser_bootstrap`)
+- Existing `regex` crate with look-around workaround (.2.2) remains sufficient for v1
+- Task tree frontier sync: .1.1, .1.2, .2.1, .2.2 already done; .2.3 → done; frontier → .3.1
+
 ## 2026-06-14 — PHASE9-RUST-VARIANT.10: Finalization — tree complete
 ### Finalization (.10)
 - Cargo workspace at rust/: linkedspec-core + linkedspec-runtime

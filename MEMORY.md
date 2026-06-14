@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `afadbd7` — "Feat: RUST-FUNCTIONAL-PARITY.2.3 — add rgx submodule for PCRE2-level regex"
-- active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.2.3` (evaluate rgx), `.3.1` (expr parser), `.4.1` (compiler), `.5.1` (regex engine), `.5.2` (lifecycle), `.6.1` (interpreter), `.7.1–.7.3` (helpers)
-- next_action: PNT from `.2.3` — evaluate rgx as regex crate replacement for PCRE2 feature parity
-- in_flight_uncommitted: none
+- active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.3.1` (expr parser), `.4.1` (compiler), `.5.1` (regex engine), `.5.2` (lifecycle), `.6.1` (interpreter), `.7.1–.7.3` (helpers), `.8.1–.8.2` (integration), `.9` (docs), `.10` (final)
+- next_action: PNT from `.3.1` — implement recursive-descent expression parser for the helper DSL
+- in_flight_uncommitted: RUST-FUNCTIONAL-PARITY.2.3 evaluation complete (decision: DEFER rgx); task-tree + live docs updated, pending commit
 - blockers: none

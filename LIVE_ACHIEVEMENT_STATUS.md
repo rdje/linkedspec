@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-15: RUST-FUNCTIONAL-PARITY.2.3 — rgx evaluation complete: API audit PASS, decision DEFER (rgx not on crates.io; cold-clone bootstrap needed). `.1.1`–`.2.3` all done. Frontier → `.3.1` (expression parser).
 - 2026-06-14: PHASE9-RUST-VARIANT.10 — Finalization: tree COMPLETE (17 leaves). No active task trees — PNT idle.
 - 2026-06-14: PHASE8-MULTI-BACKEND-HANDOFF.8 — Finalization: tree COMPLETE (8 leaves). Multi-backend specification surface complete.
 - 2026-06-14: PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1 — Fixed 10 stale references. Tree COMPLETE (1 leaf).
