@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `9f2efce` — "Docs: LIFECYCLE-FAMILY-AUDIT.4 — Finalization: close tree"
-- active_work_unit: none — LIFECYCLE-FAMILY-AUDIT tree completed and moved to Completed.
-- next_action: PNT idle — all near-term roadmap priorities addressed. Overall roadmap effectively done.
+- active_work_unit: `DOC-BOOK-SYNC`  →  frontier leaf: `DOC-BOOK-SYNC.0` (in_progress)
+- next_action: Complete DOC-BOOK-SYNC.0 — commit tree creation, TASK_TREE.md registration, and MEMORY.md update; then PNT to DOC-BOOK-SYNC.1.
 - in_flight_uncommitted: none
 - blockers: none

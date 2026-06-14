@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-14 — DOC-BOOK-SYNC.0: Task tree creation for documentation/book sync
+### Tree creation (.0)
+- Created `docs/tasks/DOC-BOOK-SYNC.md` with 4 leaves (`.0` bootstrap, `.1` audit, `.2` remediation, `.3` finalization)
+- Registered in `docs/TASK_TREE.md` Active Task Trees table
+- Updated `MEMORY.md` resume pointer to DOC-BOOK-SYNC as active_work_unit
+- Roadmap lane: Overall roadmap — documentation and book sync (ROADMAP_V2.md remaining focus)
+
 ## 2026-06-14 — LIFECYCLE-FAMILY-AUDIT.1–.2: Lifecycle coverage inventory and gap analysis
 ### Inventory (.1)
 - Full audit of lifecycle marker coverage in t/phase0_regression.t
