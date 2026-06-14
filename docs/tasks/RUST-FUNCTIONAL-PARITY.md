@@ -284,7 +284,7 @@ by a small interpreter. No Rust source generation, no eval.
 | --- | --- | --- |
 | `.1.1, .1.2, .2.1, .2.2` | `662b642` — "Feat: RUST-FUNCTIONAL-PARITY.1 + .2 — Rust-native core, parser, validator, compiler, runtime" | All 4 leaves in one coherent slice: core types + parser rewrite + validation + look-around workaround |
 | `.2.3` | `afadbd7` — "Feat: RUST-FUNCTIONAL-PARITY.2.3 — add rgx submodule for PCRE2-level regex" | Submodule added at b771c7b |
-| `.2.3` | (pending this commit) — evaluation complete | API audit PASS; decision DEFER — rgx not on crates.io; migration path documented |
+| `.2.3` | `556105a` — "Eval: RUST-FUNCTIONAL-PARITY.2.3 — rgx evaluation: API audit PASS, decision DEFER" | Evaluation complete; decision DEFER; live docs + task-tree updated |
 
 ## Changelog
 
