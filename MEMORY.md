@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `a427935` — "Feat: PHASE9-RUST-VARIANT.1 — project bootstrap + core types"
-- active_work_unit: PHASE9-RUST-VARIANT  →  frontier leaf: PHASE9-RUST-VARIANT.3.1 (Rule-level compilation)
-- next_action: PNT — implement PHASE9-RUST-VARIANT.3.1 (compiler: dependency resolution, variant selection).
+- active_work_unit: PHASE9-RUST-VARIANT  →  frontier leaf: PHASE9-RUST-VARIANT.4.1 (Regex engine)
+- next_action: PNT — implement PHASE9-RUST-VARIANT.4.1 (runtime: regex engine, seek/consume, alternative matching).
 - in_flight_uncommitted: none
 - blockers: none

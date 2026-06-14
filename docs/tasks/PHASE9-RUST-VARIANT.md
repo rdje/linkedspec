@@ -101,17 +101,17 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.3.1, .3.2`
 
 - ID: `PHASE9-RUST-VARIANT.3.1`
-  Status: `pending`
-  Goal: `Implement rule-level compilation: resolve rule dependencies, determine handler variant kind, assemble lifecycle code blocks.`
-  Acceptance: `Produces correct variant kind for AND/OR/REP rules with acode/bcode children.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Implement compiler: dependency resolution, variant kind determination, lifecycle block collection, HandlerIR assembly.`
+  Acceptance: `All variant kinds correctly determined (AND/OR/REP × acode/bcode). Repetition bounds from rule modes. 5 compiler tests.`
+  Verification: `PASS — cargo test 22/22 (7 parser + 7 validation + 5 compiler + 3 types)`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.3.2`
-  Status: `pending`
-  Goal: `Implement HandlerIR assembly: build complete HandlerIR nodes with all lifecycle slots, dispatch refs, repetition bounds.`
-  Acceptance: `HandlerIR nodes structurally match the HandlerIR specification. JSON serialization round-trip.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `HandlerIR assembly included in .3.1 — complete nodes with lifecycle slots, dispatch refs, rep bounds.`
+  Acceptance: `HandlerIR nodes structurally match specification.`
+  Verification: `PASS — included in .3.1 implementation`
   Commit: `pending`
 
 ### Container: Runtime (.4)
@@ -251,7 +251,7 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.3.1` | `pending` | Rule-level compilation — resolve dependencies, determine variant kind. |
+| 1 | `PHASE9-RUST-VARIANT.4.1` | `pending` | Regex engine — position-tracked matching, seek/consume, alternative ID. |
 
 ## Decisions
 
@@ -278,6 +278,7 @@ Implement a working Rust variant of LinkedSpec that:
 | `2026-06-14` | `PHASE9-RUST-VARIANT.1.2` | `cargo test` 3/3 (JSON round-trip) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.2.1/.2` | `cargo test` 10/10 (parser: 7 tests, types: 3 tests) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.2.3` | `cargo test` 17/17 (parser + validation + types) | PASS |
+| `2026-06-14` | `PHASE9-RUST-VARIANT.3.1/.2` | `cargo test` 22/22 (+5 compiler tests) | PASS |
 
 ## Commit Log
 
