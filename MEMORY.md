@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `1d72202` — "Docs: DOC-BOOK-SYNC.0 — create task tree for documentation/book sync"
+- latest_commit: `0dd8d36` — "Docs: DOC-BOOK-SYNC.0 — post-commit hash fix + task-tree close-out"
 - active_work_unit: `DOC-BOOK-SYNC`  →  frontier leaf: `DOC-BOOK-SYNC.1` (pending)
 - next_action: Execute DOC-BOOK-SYNC.1 — audit mdBook and live docs against current codebase for gaps, stale references, and drift.
 - in_flight_uncommitted: none
