@@ -68,7 +68,7 @@ Fix all stale references that still describe `PLUGIN-ACTION-MIGRATION` as "propo
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1` | `pending` | `pending` |
+| `PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1` | `c2f3294` — Docs: PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1 — fix 10 stale proposed → retired references | |
 
 ## Changelog
 

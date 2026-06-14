@@ -10,6 +10,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ps -eo pid,args | grep -i linkedspec | grep -E '[p]erl|[p]rove' | awk '{print $1}' | xargs kill 2>/dev/null; exit 0"
+          }
+        ]
+      }
     ]
   }
 }
