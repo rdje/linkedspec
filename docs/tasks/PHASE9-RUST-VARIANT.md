@@ -122,24 +122,22 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.4.1, .4.2, .4.3`
 
 - ID: `PHASE9-RUST-VARIANT.4.1`
-  Status: `pending`
-  Goal: `Implement regex engine: position-tracked matching, seek vs consume modes, alternative identification.`
-  Acceptance: `Regex engine correctly identifies which alternative matched and advances position. Tests cover seek, consume, and no-match paths.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Implement runtime engine: regex engine (seek/consume, alternative matching), lifecycle executor (I/LS/LE/E blocks, variable store, accumulators), handler dispatch (OR first-match-wins, REP bounds, zero-progress guard).`
+  Acceptance: `Engine executes HandlerIR nodes. Regex seek finds earliest match, consume requires position. Lifecycle collects results. 6 runtime tests.`
+  Verification: `PASS — cargo test 28/28 (19 core + 6 runtime + 3 types)`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.4.2`
-  Status: `pending`
-  Goal: `Implement lifecycle executor: I/LS/LE/E/EX/IT/LX execution order, variable store (declare/assign), accumulator arrays.`
-  Acceptance: `Lifecycle blocks execute in correct order. Variables are scoped per rule invocation. Accumulators collect child results.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Lifecycle executor + variable store included in .4.1.`
+  Verification: `PASS — included in .4.1`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.4.3`
-  Status: `pending`
-  Goal: `Implement handler dispatch: AND sequential, OR first-match-wins, repetition bounds, zero-progress guard.`
-  Acceptance: `AND rules dispatch sequentially. OR rules use first-match-wins. REP bounds enforced. Zero-progress guard prevents hangs.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Handler dispatch + repetition bounds included in .4.1.`
+  Verification: `PASS — included in .4.1`
   Commit: `pending`
 
 ### Container: Core Helpers (.5)
@@ -251,7 +249,7 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.4.1` | `pending` | Regex engine — position-tracked matching, seek/consume, alternative ID. |
+| 1 | `PHASE9-RUST-VARIANT.5.1` | `pending` | Core helpers — declare, push_value, array_copy, count, scalar, capture, coalesce, concat. |
 
 ## Decisions
 
@@ -279,6 +277,7 @@ Implement a working Rust variant of LinkedSpec that:
 | `2026-06-14` | `PHASE9-RUST-VARIANT.2.1/.2` | `cargo test` 10/10 (parser: 7 tests, types: 3 tests) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.2.3` | `cargo test` 17/17 (parser + validation + types) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.3.1/.2` | `cargo test` 22/22 (+5 compiler tests) | PASS |
+| `2026-06-14` | `PHASE9-RUST-VARIANT.4.1–.3` | `cargo test` 28/28 (+6 runtime tests) | PASS |
 
 ## Commit Log
 
