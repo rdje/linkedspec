@@ -64,6 +64,7 @@ At the time of this book slice, it contains these public examples and regression
 | `tkgui.spec` | `sub_gui_list` | Small GUI-subdefinition parser with captured inner bodies. |
 | `verilog.spec` | `verilog_file` | Minimal placeholder surface, not a mature shipped parser today. |
 | `vhdl.spec` | `vhdl_file` | The largest shipped `.spec`: VHDL-oriented library/use/entity/architecture/package/configuration/declaration parsing. |
+| `spec.spec` | `spec_file` | Self-hosted grammar: LinkedSpec parsing its own `.spec` language through the DSL itself. Compiles at `language_agnostic_ready_ratio == 1.0000`. |
 
 The important point is not that every file has equal maturity. It does not.
 

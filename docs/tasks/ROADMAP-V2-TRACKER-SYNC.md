@@ -88,10 +88,10 @@ so the next session resumes from an accurate state.
   Commit: `pending`
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Audit mdBook chapters for drift against current codebase state. Update any stale references, deprecation notes, or out-of-date status claims.`
   Acceptance: `All mdBook chapters reviewed; stale references identified and fixed. Book SUMMARY.md and chapter content aligned with codebase reality.`
-  Verification: `pending`
+  Verification: `7 stale claims found and fixed: (1) 19→20 shipped specs in value-container-flow-helper-reference.md, (2) spec.spec added to shipped-specs table, (3) Phase 6 moved Active→Completed in project-status.md, (4) Phase 7 moved Planned→Completed, (5) Phase 0 added to completed list, (6) Backbone item 3 active→done, (7) 36→19 .plg files in plugin-registry.md and owner-tree.md.`
   Commit: `pending`
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.5`
@@ -105,7 +105,7 @@ so the next session resumes from an accurate state.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `ROADMAP-V2-TRACKER-SYNC.4` | `pending` | Audit mdBook for drift against current codebase state. |
+| 1 | `ROADMAP-V2-TRACKER-SYNC.5` | `pending` | Finalization: full CI gate, verify consistency, close tree. |
 
 ## Decisions
 

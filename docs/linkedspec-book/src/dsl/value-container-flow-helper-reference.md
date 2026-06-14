@@ -124,7 +124,7 @@ For new specs, prefer `push(...)` for child-call appends. Prefer explicit target
 
 ### Convention health (2026 audit)
 
-An audit of all 19 shipped `.spec` files (88 total accumulator operations, June 2026) confirmed the convention is healthy and idiomatic:
+An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 2026) confirmed the convention is healthy and idiomatic:
 
 | Form | Count | Share |
 | --- | --- | --- |

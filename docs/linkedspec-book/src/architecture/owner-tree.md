@@ -407,7 +407,7 @@ The public facade still exposes plugin-related entrypoints, all **DEPRECATED** a
 - `dispatch_plugin_autoload_name(...)` — DEPRECATED,
 - `AUTOLOAD` — DEPRECATED.
 
-Architecturally, this branch should be read as transition machinery. These methods remain on the facade while 36 `.plg` files (~1,200+ actions) still use the plugin infrastructure. The retirement path: migrate `.plg` actions to package owners, retire `PPlugin`, reduce/delete `PluginBridge`, then remove these deprecated facade methods.
+Architecturally, this branch should be read as transition machinery. These methods remain on the facade while the remaining `.plg` files (down from ~36 to 19 after modernization) still use the plugin infrastructure. The retirement path: migrate `.plg` actions to package owners, retire `PPlugin`, reduce/delete `PluginBridge`, then remove these deprecated facade methods.
 
 `LinkedSpec::PluginRegistry` owns explicit in-memory plugin registration.
 

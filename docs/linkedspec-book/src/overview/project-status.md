@@ -4,29 +4,32 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 ## Completed phases
 
-Phases 1–5 of the modernization roadmap are done:
+Phases 0–7 of the modernization roadmap are done:
 
-- **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a 286-line lazy facade; 18 modules use uniform `OwnerDispatch`.
+- **Phase 0**: Regression safety net — `t/phase0_regression.t` covers all 20 shipped specs with a green baseline; every `.spec` compiles at `language_agnostic_ready_ratio == 1.0000` (zero compatibility-surface rules).
+- **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a 259-line lazy facade; 18 modules use uniform `OwnerDispatch`; the former `ActionRewriter.pm` forwarding shim was deleted (118 lines).
+- **Phase 1A**: Thin-façade modularization — `LinkedSpec.pm` delegated into focused owner modules (`Trace`, `Validation`, `Resolver`, `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `RuleIR`, `EmitContext`); the shared `OwnerDispatch` seam replaced per-owner lazy-loading wrappers.
 - **Phase 2**: DSL frontend hardening — rule-label parsing, inside-block rejection, extra-colon rejection, fluent-continuation recognition, `strict_syntax` mode, construct-recognition alignment with bootstrap grammar.
 - **Phase 3**: Execution semantics — seek/consume parse modes documented; BACKTRACK/IBACKTRACK defined as local cursor-rewind, not systemic backtracking; forward-moving non-backtracking model stated.
 - **Phase 4**: Capture/mark API — 163 contracts across 6 families verified, compat aliases documented, mark-helper reference complete.
 - **Phase 5**: Runtime diagnostics — structured last_error is the single diagnostics channel; handler compile warnings routed through trace instead of stderr; eval minimized to one handler compilation; trace bridging from compile scopes into runtime handler scopes.
+- **Phase 6**: Documentation and adoption — the book you are reading. All identified documentation gaps closed (LinkedRE, Validation, public API, cross-linking, overviews, ActionIR lowering, per-spec walkthroughs).
+- **Phase 7**: Self-hosted `spec.spec` grammar — LinkedSpec parses its own `.spec` language through the DSL itself. `spec.spec` compiles at `language_agnostic_ready_ratio == 1.0000` with regression coverage; it is the required change surface for `.spec` language evolution.
 
-## Active work
-
-- **Phase 6**: Documentation and adoption — the book you are reading. This phase is expanding project documentation so every user-facing surface, architecture decision, and workflow is clearly explained.
-
-## Planned
-
-- **Phase 7**: Self-hosted `spec.spec` grammar — LinkedSpec parsing its own `.spec` language through the DSL itself, closing the self-hosting loop.
+The Method-like DSL migration track is also complete: all 20 shipped specs at zero compatibility-surface rules, 100+ helpers across 10 families regression-locked, compat alias retirement finished (8 aliases removed), and fluent/block equivalence verified.
 
 ## Backbone items
 
-Three backbone items track major structural modernization:
+Three backbone items tracked major structural modernization — all done:
 
-1. Final descriptor naming and projection cleanup (done)
-2. Blind-call / repeated-sequence eval elimination (done)
-3. ActionIR `call` / `group` / `call_emitter` lowering modernization (active)
+1. Declarative bootstrap grammar registry replacing positional bootstrap coupling (done)
+2. Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases (done)
+3. Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting (done)
+
+## Ongoing
+
+- **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
+- **Lifecycle-family audit** — verifying semicolon-light structured authoring parity across the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`); coverage already spans all lifecycles; extending only where a real gap is found.
 
 ## What this means for readers
 
