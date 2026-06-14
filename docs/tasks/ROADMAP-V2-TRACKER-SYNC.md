@@ -40,11 +40,38 @@ so the next session resumes from an accurate state.
   Children: `ROADMAP-V2-TRACKER-SYNC.1`, `ROADMAP-V2-TRACKER-SYNC.2`, `ROADMAP-V2-TRACKER-SYNC.3`, `ROADMAP-V2-TRACKER-SYNC.4`, `ROADMAP-V2-TRACKER-SYNC.5`
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Audit current empirical state: verify all 20 specs compile, check compatibility-surface counts, enumerate all ROADMAP_V2.md tracker staleness items.`
   Acceptance: `A documented inventory of every stale/incorrect row in the ROADMAP_V2.md tracker, with each item mapped to the completed task tree that resolved it.`
-  Verification: `pending`
+  Verification: `20/20 specs compile; all at compat=0. ROADMAP_V2.md has 2 stale rows (Overall roadmap, Method-like DSL migration track). ROADMAP.md has matching staleness. See audit findings below.`
   Commit: `pending`
+
+### Audit Findings (2026-06-14)
+
+**Empirical verification:**
+- All 20 shipped specs compile OK via `LinkedSpec::Get(..., return_descriptor => 1)`.
+- Every spec reports `compatibility_surface_rule_count: 0` and `language_agnostic_ready_rules` matches `total_rules`.
+- Full local CI gate passes (pending re-run at finalization).
+
+**ROADMAP_V2.md tracker staleness:**
+
+1. **Method-like DSL migration track** (line 70): Status `mostly done`
+   - Stale claim: "Remaining open: compat alias retirement (policy defined, implementation removal deferred)"
+     - RESOLVED by `COMPAT-ALIAS-RETIREMENT-V2` (completed 2026-06-14, 3 leaves: audit, retirement, finalization)
+     - RESOLVED by `COMPAT-ALIAS-TEST-CLEANUP` (completed 2026-06-14, 3 leaves: scanner tests, delegation/override tests, finalization)
+   - Stale claim: "PLUGIN-ACTION-MIGRATION (separate proposed track)"
+     - RESOLVED: `PLUGIN-ACTION-MIGRATION` tree is `retired` (all 5 leaves done, 17 dead files deleted, 19 kept as legacy corpus)
+   - Status should be: `done` — all 4 sub-trees (METHOD-LIKE-DSL-MIGRATION, COMPAT-ALIAS-RETIREMENT, COMPAT-ALIAS-RETIREMENT-V2, COMPAT-ALIAS-TEST-CLEANUP) plus FLUENT-BLOCK-EQUIVALENCE are completed.
+
+2. **Overall roadmap** (line 56): Status `in progress`
+   - All sub-tracks are now `done` (Phases 0-7, Backbone items 1-3, Plugin modernization, Method-like DSL migration).
+   - "Remaining focus" text mentions Backbone Item 3, Plugin modernization, Phase 7 — all done.
+   - Could move to `mostly done` or `done`; remaining near-term priorities are documentation maintenance and audit work, not feature gaps.
+
+**ROADMAP.md tracker staleness (matching):**
+- Line 803 (Overall roadmap): says "remaining open items are the proposed PLUGIN-ACTION-MIGRATION follow-on and deferred compat-alias retirement" — both resolved.
+- Line 817 (Method-like DSL migration track): same stale "remaining open" as ROADMAP_V2.md.
+- Line 964: "Method-like DSL migration track: `in progress`" — should be `done`.
 
 - ID: `ROADMAP-V2-TRACKER-SYNC.2`
   Status: `pending`
@@ -78,7 +105,7 @@ so the next session resumes from an accurate state.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `ROADMAP-V2-TRACKER-SYNC.1` | `pending` | Must inventory staleness before making any tracker changes. |
+| 1 | `ROADMAP-V2-TRACKER-SYNC.2` | `pending` | Update ROADMAP_V2.md tracker now that staleness is inventoried. |
 
 ## Decisions
 
