@@ -195,13 +195,17 @@ impl std::fmt::Display for RuntimeValue {
 /// An action edge entry in the compiled dispatch table.
 ///
 /// Action edges fire when a regex alternative matches. Each entry records:
-/// - which regex of *this* rule triggers the edge (`regex_idx`)
+/// - which regex of *this* rule's alternation triggers the edge (`regex_idx`)
 /// - which child rule to invoke (`child_label`)
 /// - which regex slot of the *child* rule to enter (`child_regex_idx`, from `-> child[N]`)
+/// - whether this edge was anchored to a parent `/regex/` or is edge-only
 /// - optional lifecycle code to execute after the child returns
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AcodeEntry {
-    /// Index of the regex pattern in this rule that triggers this edge.
+    /// Index of the regex pattern in this rule's alternation that triggers this edge.
+    /// For parent-anchored edges: points to the parent regex position.
+    /// For edge-only entries: set during post-processing to the position of the
+    /// resolved child regex in the expanded alternation.
     pub regex_idx: usize,
     /// Label of the child rule to invoke.
     pub child_label: String,
@@ -209,6 +213,15 @@ pub struct AcodeEntry {
     pub child_regex_idx: usize,
     /// Optional code block to execute after child dispatch.
     pub code: Option<crate::expr::CodeBlock>,
+    /// True if this edge immediately follows a `/regex/` element in the rule body
+    /// (i.e. it is "anchored" to a parent regex). False for edge-only entries that
+    /// need child-regex resolution during post-processing.
+    #[serde(default = "default_has_parent_regex")]
+    pub has_parent_regex: bool,
+}
+
+fn default_has_parent_regex() -> bool {
+    true
 }
 
 /// A blind-call edge entry in the compiled dispatch table.

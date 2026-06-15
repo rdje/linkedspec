@@ -9,13 +9,23 @@
 //!
 //! ## Action edge → regex association
 //!
-//! In Perl LinkedSpec, an action edge fires when the regex that *immediately precedes*
-//! it in the rule body matches. The compiler tracks `current_regex_idx` which
-//! increments only for regex patterns, not action edges. When an action edge is
-//! encountered, it is associated with `current_regex_idx - 1` (the last regex).
+//! The compiler uses a two-phase model mirroring Perl's `build_dependency_regex_map`:
+//!
+//! **Phase 1 (per-rule)**: Tracks whether each action edge immediately follows a
+//! `/regex/` element. Edges that do ("anchored") keep their parent regex index.
+//! Edges that don't ("edge-only") get a placeholder `regex_idx = 0`.
+//!
+//! **Phase 2 (post-processing)**: `build_dependency_regex_map` runs after all
+//! rules are compiled. For each edge-only entry, it looks up the child rule,
+//! extracts the child's regex at `child_regex_idx`, appends it to the parent's
+//! `regex_patterns`, and updates `regex_idx` to the new alternation position.
+//!
+//! Parent regexes always come first in the alternation; child-resolved regexes
+//! are appended after. This matches Perl's semantics where `dependency_refs`
+//! contribute child rule entrypoint regexes to the parent's LinkedRE alternation.
 //!
 //! The `[N]` in `-> rule[N]` is the *child* rule's regex entry slot, preserved
-//! in `AcodeEntry.child_regex_idx` for future multi-entrypoint support.
+//! in `AcodeEntry.child_regex_idx` and used during Phase 2 resolution.
 
 use crate::ast::{BodyElementKind, Rule, SpecFile};
 use crate::error::Result;
@@ -28,7 +38,9 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
     for rule in &spec.rules {
         rules.push(compile_rule(rule)?);
     }
-    Ok(CompiledSpec { rules })
+    let mut compiled = CompiledSpec { rules };
+    build_dependency_regex_map(&mut compiled)?;
+    Ok(compiled)
 }
 
 fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
@@ -43,25 +55,30 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
     let mut excode: Option<CodeBlock> = None;
     let mut itcode: Option<CodeBlock> = None;
 
-    // Tracks the number of regex patterns seen so far. Each action edge is
-    // associated with the last regex that preceded it (current_regex_idx - 1).
+    // Track the source line of the last `/regex/` element seen.
+    // An action edge is "anchored" (has_parent_regex = true) only when it
+    // appears on the SAME source line as the regex (e.g. `/pat/ -> Child`).
+    // Edges on their own line (different line number) are "edge-only" and
+    // will be resolved in Phase 2 post-processing.
     let mut current_regex_idx: usize = 0;
+    let mut last_regex_line: Option<usize> = None;
 
     for element in &rule.body {
         match &element.kind {
             BodyElementKind::Regex { pattern } => {
                 regex_patterns.push(pattern.clone());
                 current_regex_idx += 1;
+                last_regex_line = Some(element.line);
             }
 
             BodyElementKind::ActionEdge { targets, code } => {
-                // Action edges fire after the most recent regex matches.
-                // If there are no regexes yet (e.g. blind-call only rules),
-                // associate with index 0.
-                let triggering_regex_idx = if current_regex_idx > 0 {
+                // An edge is anchored iff it shares the same source line as
+                // the immediately preceding regex (same-line adjacency).
+                let has_parent = last_regex_line == Some(element.line);
+                let triggering_regex_idx = if has_parent && current_regex_idx > 0 {
                     current_regex_idx - 1
                 } else {
-                    0
+                    0 // placeholder; post-processing fixes edge-only entries
                 };
 
                 let parsed_code = code
@@ -86,8 +103,11 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                         child_label: target.label.clone(),
                         child_regex_idx,
                         code: parsed_code.clone(),
+                        has_parent_regex: has_parent,
                     });
                 }
+
+                last_regex_line = None;
             }
 
             BodyElementKind::BlindEdge {
@@ -95,6 +115,7 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                 code,
                 fluent_chain,
             } => {
+                last_regex_line = None;
                 let parsed_code = code.as_ref().and_then(|c| {
                     CodeBlock::parse(c)
                         .map_err(|e| {
@@ -120,6 +141,7 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
             }
 
             BodyElementKind::CodeBlock { lifecycle, code } => {
+                last_regex_line = None;
                 let parsed = CodeBlock::parse(code)
                     .map_err(|e| {
                         eprintln!(
@@ -142,18 +164,18 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                 }
             }
 
-            // Lifecycle markers without code blocks are no-ops at compile time.
-            BodyElementKind::LifecycleMarker { .. } => {}
+            // Lifecycle markers without code blocks — reset adjacency tracking.
+            BodyElementKind::LifecycleMarker { .. } => { last_regex_line = None; }
             // Fluent chains on action edges are handled by attaching code to the
             // action edge itself — they're already in the ActionEdge.code field.
-            BodyElementKind::FluentChain { .. } => {}
+            BodyElementKind::FluentChain { .. } => { last_regex_line = None; }
             // Conditional markers (`-? word`) are consumed by the runtime.
-            BodyElementKind::Conditional { .. } => {}
+            BodyElementKind::Conditional { .. } => { last_regex_line = None; }
             // Split markers (@capture_slice, @mark) are consumed by the runtime
             // during regex matching — no compile-time action needed.
-            BodyElementKind::SplitMarker { .. } => {}
+            BodyElementKind::SplitMarker { .. } => { last_regex_line = None; }
             // Plain code blocks and raw text are unexpected at compile time.
-            BodyElementKind::PlainBlock { .. } | BodyElementKind::Raw { .. } => {}
+            BodyElementKind::PlainBlock { .. } | BodyElementKind::Raw { .. } => { last_regex_line = None; }
         }
     }
 
@@ -185,6 +207,90 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
         rep_min,
         rep_max,
     })
+}
+
+/// Resolve edge-only action entries by looking up child rules' regex patterns.
+///
+/// This is the Rust equivalent of Perl's `LinkedSpec::Compiler::build_dependency_regex_map`.
+///
+/// For each rule, entries with `has_parent_regex == false` ("edge-only") have no
+/// parent regex to trigger on. Instead, the child rule's regex at `child_regex_idx`
+/// is appended to this rule's alternation, and `regex_idx` is updated to point to
+/// the new alternation position.
+///
+/// Parent regexes always come first (positions 0..P-1). Child-resolved regexes
+/// are appended at positions P..P+C-1. Anchored entries (`has_parent_regex == true`)
+/// are untouched — they keep their parent regex positions.
+///
+/// Self-recursive entries (`-> SameRule[N]`) resolve against the rule's own
+/// already-populated parent regexes, duplicating them at new alternation positions.
+pub fn build_dependency_regex_map(spec: &mut CompiledSpec) -> Result<()> {
+    // Collect all edge-only resolutions first (to avoid simultaneous
+    // mutable borrow of rules + immutable borrow of spec for find()).
+    struct EdgeResolution {
+        rule_idx: usize,
+        entry_idx: usize,
+        child_label: String,
+        child_regex_idx: usize,
+    }
+
+    let mut resolutions: Vec<EdgeResolution> = Vec::new();
+    for (rule_idx, rule) in spec.rules.iter().enumerate() {
+        for (entry_idx, entry) in rule.acode_dispatch.iter().enumerate() {
+            if !entry.has_parent_regex {
+                resolutions.push(EdgeResolution {
+                    rule_idx,
+                    entry_idx,
+                    child_label: entry.child_label.clone(),
+                    child_regex_idx: entry.child_regex_idx,
+                });
+            }
+        }
+    }
+
+    // Resolve each edge-only entry against child rules.
+    // Following Perl's Compiler.pm:393-410, missing/out-of-bounds regex
+    // indices are warned and skipped, not treated as compilation errors.
+    for res in &resolutions {
+        let child = match spec.find(&res.child_label) {
+            Some(c) => c,
+            None => {
+                eprintln!(
+                    "warning: rule '{}': edge-only entry '-> {}[{}]' \
+                     references unknown rule '{}' — entry will never fire",
+                    spec.rules[res.rule_idx].label,
+                    res.child_label,
+                    res.child_regex_idx,
+                    res.child_label
+                );
+                continue;
+            }
+        };
+
+        if res.child_regex_idx >= child.regex_patterns.len() {
+            eprintln!(
+                "warning: rule '{}': edge-only entry '-> {}[{}]' \
+                 references out-of-bounds regex index {} in child rule \
+                 '{}' (has {} regexes) — entry will never fire",
+                spec.rules[res.rule_idx].label,
+                res.child_label,
+                res.child_regex_idx,
+                res.child_regex_idx,
+                res.child_label,
+                child.regex_patterns.len()
+            );
+            continue;
+        }
+
+        let resolved_pattern =
+            child.regex_patterns[res.child_regex_idx].clone();
+        let rule = &mut spec.rules[res.rule_idx];
+        let new_regex_idx = rule.regex_patterns.len();
+        rule.regex_patterns.push(resolved_pattern);
+        rule.acode_dispatch[res.entry_idx].regex_idx = new_regex_idx;
+    }
+
+    Ok(())
 }
 
 #[cfg(test)]
@@ -272,13 +378,19 @@ mod tests {
 
     #[test]
     fn compile_action_edge_no_regex() {
-        // Edge-only rules (blind-call style via action edges) associate with index 0
-        let src = "Wrapper::\n -> Child { return(1) }";
+        // Edge-only rules get child regexes resolved during post-processing.
+        // -> Child { return(1) } is edge-only (no preceding /regex/), so Child's
+        // regex is added to Wrapper's alternation at position 0.
+        let src = "Wrapper::\n -> Child { return(1) }\n\nChild:\n /child_pattern/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let rule = &compiled.rules[0];
         assert_eq!(rule.acode_dispatch.len(), 1);
+        // Child's regex was resolved and added at position 0
         assert_eq!(rule.acode_dispatch[0].regex_idx, 0);
+        assert_eq!(rule.regex_patterns.len(), 1);
+        assert_eq!(rule.regex_patterns[0], "child_pattern");
+        assert!(!rule.acode_dispatch[0].has_parent_regex);
     }
 
     #[test]
@@ -304,6 +416,122 @@ mod tests {
         assert_eq!(rule.bcode_dispatch[0].fluent_chain.len(), 1);
         assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].0, "declare");
         assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].1, "scalar, name");
+    }
+
+    // ── build_dependency_regex_map tests ──
+
+    #[test]
+    fn build_dependency_regex_map_resolves_edge_only_entries() {
+        // grep::-style: all entries are edge-only, each gets a unique alternation position
+        let src = "grep::\n -> re_term { assign(s(retv), call(re_term)) }\n -> or_op { assign(s(retv), call(or_op)) }\n\nre_term:\n /re_term_pattern/\nor_op:\n /or_op_pattern/\n";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let grep = compiled.find("grep").unwrap();
+        // grep has no parent regexes, all come from children
+        assert_eq!(grep.regex_patterns.len(), 2);
+        assert_eq!(grep.regex_patterns[0], "re_term_pattern");
+        assert_eq!(grep.regex_patterns[1], "or_op_pattern");
+        // Each edge-only entry gets its own alternation position
+        assert_eq!(grep.acode_dispatch[0].regex_idx, 0);
+        assert_eq!(grep.acode_dispatch[1].regex_idx, 1);
+        assert!(!grep.acode_dispatch[0].has_parent_regex);
+        assert!(!grep.acode_dispatch[1].has_parent_regex);
+    }
+
+    #[test]
+    fn build_dependency_regex_map_parent_regexes_come_first() {
+        // Parent regexes at 0..P-1, child-resolved regexes at P..P+C-1
+        let src = "Top::\n /parent_a/ -> Child_A\n /parent_b/ -> Child_B\n -> EdgeOnly\n\nChild_A:\n /child_a/\nChild_B:\n /child_b/\nEdgeOnly:\n /edge_only_regex/\n";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let top = compiled.find("Top").unwrap();
+        // regex_patterns order: parent_a, parent_b, edge_only_regex
+        assert_eq!(top.regex_patterns.len(), 3);
+        assert_eq!(top.regex_patterns[0], "parent_a");
+        assert_eq!(top.regex_patterns[1], "parent_b");
+        assert_eq!(top.regex_patterns[2], "edge_only_regex");
+        // Anchored entries keep their parent regex positions
+        assert_eq!(top.acode_dispatch[0].regex_idx, 0); // -> Child_A (anchored to parent_a)
+        assert_eq!(top.acode_dispatch[1].regex_idx, 1); // -> Child_B (anchored to parent_b)
+        assert!(top.acode_dispatch[0].has_parent_regex);
+        assert!(top.acode_dispatch[1].has_parent_regex);
+        // Edge-only entry gets the resolved child regex at position 2
+        assert_eq!(top.acode_dispatch[2].regex_idx, 2); // -> EdgeOnly
+        assert!(!top.acode_dispatch[2].has_parent_regex);
+    }
+
+    #[test]
+    fn build_dependency_regex_map_self_recursive_rule() {
+        let src = "Expr::\n /[A-Za-z_]/\n /\\d+/\n -> Expr\n -> Expr[1]\n";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let expr = compiled.find("Expr").unwrap();
+        // Parent regexes + self-resolved child regexes
+        assert_eq!(expr.regex_patterns.len(), 4);
+        assert_eq!(expr.regex_patterns[0], "[A-Za-z_]");
+        assert_eq!(expr.regex_patterns[1], r"\d+");
+        // Self-refs duplicate parent regexes at new positions
+        assert_eq!(expr.regex_patterns[2], "[A-Za-z_]"); // self-ref to Expr[0]
+        assert_eq!(expr.regex_patterns[3], r"\d+");       // self-ref to Expr[1]
+        assert_eq!(expr.acode_dispatch[0].regex_idx, 2);
+        assert_eq!(expr.acode_dispatch[1].regex_idx, 3);
+        assert_eq!(expr.acode_dispatch[0].child_regex_idx, 0);
+        assert_eq!(expr.acode_dispatch[1].child_regex_idx, 1);
+    }
+
+    #[test]
+    fn build_dependency_regex_map_missing_child_rule_warns_and_continues() {
+        // Missing child rules emit a warning but don't fail compilation.
+        // The edge-only entry keeps regex_idx = 0 (placeholder, will never match).
+        let src = "Top::\n -> DoesNotExist\n";
+        let spec = parse_spec(src).unwrap();
+        let result = compile(&spec);
+        assert!(result.is_ok()); // compiles despite missing child
+        let compiled = result.unwrap();
+        let top = compiled.find("Top").unwrap();
+        assert_eq!(top.regex_patterns.len(), 0); // nothing resolved
+        assert_eq!(top.acode_dispatch[0].regex_idx, 0); // placeholder kept
+        assert!(!top.acode_dispatch[0].has_parent_regex);
+    }
+
+    #[test]
+    fn build_dependency_regex_map_child_regex_out_of_bounds_warns_and_continues() {
+        let src = "Top::\n -> Child[5]\n\nChild:\n /only_one/\n";
+        let spec = parse_spec(src).unwrap();
+        let result = compile(&spec);
+        assert!(result.is_ok()); // compiles despite OOB index
+        let compiled = result.unwrap();
+        let top = compiled.find("Top").unwrap();
+        assert_eq!(top.regex_patterns.len(), 0); // nothing resolved (index 5 >= 1)
+        assert_eq!(top.acode_dispatch[0].regex_idx, 0); // placeholder kept
+    }
+
+    #[test]
+    fn build_dependency_regex_map_no_edge_only_entries_is_noop() {
+        // Rule with only anchored edges — regex_patterns and regex_idx unchanged
+        let src = "Top::\n /a/ -> Child_A\n /b/ -> Child_B\n\nChild_A:\n /ca/\nChild_B:\n /cb/\n";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let top = compiled.find("Top").unwrap();
+        assert_eq!(top.regex_patterns.len(), 2); // only parent regexes
+        assert_eq!(top.regex_patterns[0], "a");
+        assert_eq!(top.regex_patterns[1], "b");
+        assert_eq!(top.acode_dispatch[0].regex_idx, 0);
+        assert_eq!(top.acode_dispatch[1].regex_idx, 1);
+    }
+
+    #[test]
+    fn build_dependency_regex_map_has_parent_regex_flag() {
+        // Verify has_parent_regex is correctly set for anchored vs edge-only
+        let src = "DemoParser::\n /a/ -> Child_A | Child_B\n -> Child_C\n\nChild_A:\n /ca/\nChild_B:\n /cb/\nChild_C:\n /cc/\n";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let rule = compiled.find("DemoParser").unwrap();
+        // /a/ -> Child_A | Child_B: both anchored (same line as /a/)
+        assert!(rule.acode_dispatch[0].has_parent_regex);
+        assert!(rule.acode_dispatch[1].has_parent_regex);
+        // -> Child_C: edge-only (no preceding regex)
+        assert!(!rule.acode_dispatch[2].has_parent_regex);
     }
 
     #[test]

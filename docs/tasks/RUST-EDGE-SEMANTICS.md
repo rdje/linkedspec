@@ -51,10 +51,10 @@ edges (no explicit `/pattern/` regexes) have empty alternations and never fire.
   Commit: `pending`
 
 - ID: `RUST-EDGE-SEMANTICS.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Rewrite compiler.rs to build regex patterns from child rule dependency refs. For each ACODE entry, add the child rule's entrypoint regex (at reidx) to the parent's regex_patterns. Recompute acode dispatch indices to align with the alternation order.`
   Acceptance: `Compiler output for grep:: includes regexes from re_term, or_op, and_op, group. AcodeEntry.regex_idx maps to alternation position. Existing tests still pass.`
-  Verification: `pending`
+  Verification: `2026-06-15: cargo test — 159/159 PASS (86 core + 8 types + 56 engine + 9 integration). cargo clippy clean for compiler.rs. All 20 shipped specs compile successfully. New tests: 8 build_dependency_regex_map tests covering edge-only resolution, parent-first ordering, self-recursive, anchored flag, missing/OOB child warnings.`
   Commit: `pending`
 
 - ID: `RUST-EDGE-SEMANTICS.3`
@@ -75,7 +75,7 @@ edges (no explicit `/pattern/` regexes) have empty alternations and never fire.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-EDGE-SEMANTICS.2` | `pending` | Audit complete; implement the compiler rewrite to build regex_patterns from child rule dependency refs. |
+| 1 | `RUST-EDGE-SEMANTICS.3` | `pending` | Compiler rewrite complete; add regression tests for edge-only, mixed, self-recursive, and grouped-target dispatch. |
 
 ## Decisions
 
@@ -271,14 +271,17 @@ The `if/elsif` chain maps alternation indices to child rule names.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | 2026-06-15 | `RUST-EDGE-SEMANTICS.1` | Full code-path inventory: Rust compiler.rs (regex_patterns build + AcodeEntry construction), engine.rs (alternation + dispatch), Perl pipeline (BootstrapSpec/Core.pm → RuleIR.pm → EmitContext.pm → Compiler.pm → HandlerVariantEmitter.pm) traced end-to-end with exact line numbers. Delta table with 5 rows covering regex source, alternation index semantics, `-> Child[N]` semantics, edge-only rules, and mixed rules. Knowledge card `docs/knowledge/rust-edge-semantics-bug.md` verified aligned. | PASS — all 4 inventories (a–d) documented; gap fully characterized. |
+| 2026-06-15 | `RUST-EDGE-SEMANTICS.2` | `cargo test` 159/159 PASS (86 core + 8 types + 56 engine + 9 integration). 8 new `build_dependency_regex_map` tests. `cargo clippy` clean for compiler.rs. All 20 shipped specs compile. Two-phase implementation: Phase 1 tracks same-line regex→edge adjacency via `element.line`; Phase 2 resolves edge-only entries via `build_dependency_regex_map` post-processing. `has_parent_regex` field on `AcodeEntry` with serde backward compat. | PASS — compiler rewrite complete; edge-only dispatch now mirrors Perl's `dependency_regex_map` model. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `RUST-EDGE-SEMANTICS.1` | `cb58cd1` — "RUST-EDGE-SEMANTICS.1 — audit: document Rust -> edge dispatch gap vs Perl dependency_regex_map" | Audit complete; 5-row delta table + 6-step Perl pipeline trace + Rust line-level inventory. |
+| `RUST-EDGE-SEMANTICS.1` | `cb58cd1` — "RUST-EDGE-SEMANTICS.1 — audit: document Rust -> edge dispatch gap vs Perl dependency_regex_map" (+ hash-sync `f058d6b`, `ab64dc2`) | Audit complete; 5-row delta table + 6-step Perl pipeline trace + Rust line-level inventory. |
+| `RUST-EDGE-SEMANTICS.2` | `pending` — will commit after live-doc updates | Compiler rewrite: `has_parent_regex` tracking + `build_dependency_regex_map` post-processing. 8 new tests. 159/159 PASS. |
 
 ## Changelog
 
 - `2026-06-15`: Created task tree — 4 leaves covering audit, compiler rewrite, regression tests, finalization.
 - `2026-06-15`: **RUST-EDGE-SEMANTICS.1 completed.** Full audit documented: Rust compiler.rs (lines 52-55 regex_patterns, lines 57-91 AcodeEntry), engine.rs (lines 77-81 alternation, lines 169-190 dispatch), Perl pipeline (BootstrapSpec/Core.pm:129-157 → RuleIR.pm:231-236 → EmitContext.pm:517-529 → Compiler.pm:345-443 → HandlerVariantEmitter.pm:355-380). Gap confirmed: Rust uses "preceding parent regex" model; Perl builds alternation from child rule regexes via `dependency_regex_map`. Frontier advanced to `.2`.
+- `2026-06-15`: **RUST-EDGE-SEMANTICS.2 completed.** Two-phase compiler rewrite: Phase 1 tracks same-line regex→edge adjacency via `element.line` (not paragraph-level). Phase 2 `build_dependency_regex_map` resolves edge-only entries by looking up child rules' regex patterns and appending them to the parent's alternation, updating `regex_idx`. `has_parent_regex` field on `AcodeEntry` with `#[serde(default)]`. 8 new tests. Missing/OOB child regexes produce warnings (matching Perl's commented-out `exit 1`). 159/159 PASS, clippy clean. Frontier advanced to `.3`.

@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-EDGE-SEMANTICS.2: Compiler rewrite — build regex_patterns from child rule dependency refs
+### Implementation
+- Added `has_parent_regex: bool` to `AcodeEntry` (types.rs) with `#[serde(default)]` backward compat
+- Phase 1: track same-line regex→edge adjacency via `element.line` comparison (not paragraph-level `last_was_regex`)
+- Phase 2: `build_dependency_regex_map()` post-processing resolves edge-only entries by looking up child rules, extracting regex at `child_regex_idx`, appending to parent's `regex_patterns`, and updating `regex_idx`
+- Parent regexes come first in the alternation; child-resolved regexes appended after
+- Missing/OOB child regex indices produce `eprintln!` warnings and skip (matching Perl's commented-out `exit 1`)
+- 8 new compiler tests: edge-only resolution, parent-first ordering, self-recursive, anchored flag, missing child warns, OOB warns, no-op
+- 159/159 PASS (86 core + 8 types + 56 engine + 9 integration); cargo clippy clean; all 20 shipped specs compile
+
 ## 2026-06-15 — RUST-EDGE-SEMANTICS.1: Audit — Rust edge dispatch gap vs Perl dependency_regex_map
 ### Audit findings
 - **Rust compiler.rs:52-55**: `regex_patterns` populated only from `BodyElementKind::Regex` — edge-only rules have empty alternation
