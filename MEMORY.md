@@ -17,8 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `204b1e8` — "Docs: post-commit hash sync — MEMORY.md → acbd56b"
-- active_work_unit: `PHASE9-RUST-VARIANT`  →  frontier leaf: `.5.2` (pending)
+- latest_commit: `dfe2217` — "Docs: post-commit hash sync — MEMORY.md → 204b1e8"
+- active_work_unit: `PHASE9-RUST-VARIANT`  →  frontier leaf: `.5.2` (in_progress)
 - next_action: PNT `.5.2` — scalar and capture helpers + focused tests
-- in_flight_uncommitted: `.5.1` done (7 new helper tests, 133/133 pass), ready to commit
+- in_flight_uncommitted: `.5.2` in progress (tests being added to engine.rs)
+- blockers: none
 - blockers: none

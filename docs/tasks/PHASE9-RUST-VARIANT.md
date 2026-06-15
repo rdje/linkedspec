@@ -155,10 +155,10 @@ Implement a working Rust variant of LinkedSpec that:
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement scalar and capture helpers: entry_group, entry_text, scalar, coalesce, concat, capture helpers.`
   Acceptance: `Capture groups extracted correctly. Scalar read from array/hash works. Coalesce short-circuits.`
-  Verification: `pending`
+  Verification: `PASS — cargo test 143/143 (79+8+52+4). 10 new focused helper tests covering entry_text, entry_group, entry_groups, scalar, coalesce, concat, capture_slice, capture_slice_len, mark_here, mark_pos, capture_from.`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.5.3`
@@ -249,8 +249,7 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.5.2` | `pending` | Scalar and capture helpers — entry_group/scalar/coalesce/concat/capture. Core helpers are implemented; need focused tests + leaf close-out. |
-| 3 | `PHASE9-RUST-VARIANT.5.3` | `pending` | Control flow — return_undef/next/exit_now implemented. if/elseif/else/switch/case/default needed for v0.1 corpus. |
+| 1 | `PHASE9-RUST-VARIANT.5.3` | `pending` | Control flow — return_undef/next/exit_now implemented. if/elseif/else/switch/case/default needed for v0.1 corpus. |
 | 4 | `PHASE9-RUST-VARIANT.6.1` | `pending` | Full pipeline verification — parse→compile→execute round-trip test. |
 | 5 | `PHASE9-RUST-VARIANT.7.1` | `pending` | Test corpus runner — load corpus entries, compile specs, compare to expected.json. |
 | 6 | `PHASE9-RUST-VARIANT.8.1` | `pending` | Code-gen emitter — per ADR, interpreted mode is current strategy; code-gen deferred. Leaf to be scoped as deferred or minimal proof-of-concept. |

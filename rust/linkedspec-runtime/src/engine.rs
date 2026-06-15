@@ -1742,4 +1742,168 @@ ChildB:
         // Returns the matched key
         assert_eq!(arr[0].as_str().unwrap(), "key");
     }
+
+    // ── .5.2 Scalar and capture helper tests ──
+
+    #[test]
+    fn helpers_5_2_entry_text_and_entry_group() {
+        let grammar = r#"Top::
+ /hello[ \t]+(\w+)/
+ E { return(concat(scalar(entry_text()), scalar(" "), scalar(entry_group(1)))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello world").unwrap();
+        let arr = result.as_array().unwrap();
+        assert!(arr[0].as_str().unwrap().contains("hello"), "got {:?}", arr[0]);
+    }
+
+    #[test]
+    fn helpers_5_2_entry_groups_array() {
+        let grammar = r#"Top::
+ /(\w+)=(\d+)/
+ E { return(entry_groups()) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("key=42").unwrap();
+        let outer: &Vec<Value> = result.as_array().unwrap();
+        let groups: &Vec<Value> = outer[0].as_array().unwrap();
+        assert!(groups.len() >= 2, "expected >=2 groups, got {:?}", groups);
+    }
+
+    #[test]
+    fn helpers_5_2_scalar_accessor() {
+        // scalar(varname) returns the declared variable's value
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, word) }
+ LE { assign(scalar(word), entry_group(1)) }
+ E { return(scalar(word)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn helpers_5_2_coalesce_first_defined() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, first); declare(scalar, second) }
+ E { return(coalesce(scalar(first), scalar(second), scalar("default"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        // Both first and second are undef, so coalesce falls back to "default"
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "default");
+    }
+
+    #[test]
+    fn helpers_5_2_coalesce_short_circuits() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(coalesce(scalar(val), scalar("fallback"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn helpers_5_2_concat_strings() {
+        let grammar = r#"Top::
+ /(\w+) (\w+)/
+ E { return(concat(entry_group(1), scalar("+"), entry_group(2))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello world").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello+world");
+    }
+
+    #[test]
+    fn helpers_5_2_capture_slice_basic() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ LE { return(capture_slice()) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn helpers_5_2_capture_slice_len() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ LE { return(capture_slice_len()) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert!(arr[0].as_f64().unwrap() > 0.0, "expected positive length, got {:?}", arr[0]);
+    }
+
+    #[test]
+    fn helpers_5_2_mark_and_capture_from() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { mark_here(scalar("start")) }
+ LE { return(capture_from(scalar("start"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn helpers_5_2_mark_pos() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { mark_here(scalar("pos")) }
+ LE { return(mark_pos(scalar("pos"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_f64().unwrap(), 0.0); // mark at start of input (pos 0 in I-block)
+    }
 }
