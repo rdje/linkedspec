@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant implementation (functional parity)`
 - Created: `2026-06-15`
-- Last updated: `2026-06-15` (.4.1 done — compiler: AcodeEntry/BcodeEntry, fixed regex_idx, 99 tests)
+- Last updated: `2026-06-15` (.6.1 done — lifecycle loop + interpreter: blind-call, keyword args, 126 tests)
 - Owner: repo-local workflow
 
 ## Goal
@@ -145,7 +145,7 @@ by a small interpreter. No Rust source generation, no eval.
 ### Container: Runtime Engine (.5)
 
 - ID: `RUST-FUNCTIONAL-PARITY.5`
-  Status: `active`
+  Status: `done`
   Goal: `Runtime engine: regex dispatch, lifecycle execution, child rule invocation.`
   Children: `.5.1, .5.2`
 
@@ -153,29 +153,29 @@ by a small interpreter. No Rust source generation, no eval.
   Status: `done`
   Goal: `Implement regex dispatch: compile multiple regex patterns into a combined alternation with position tracking. Seek mode (find anywhere from pos) and consume mode (\G-anchored from pos). Return match index + capture groups + named groups.`
   Acceptance: `Seek finds earliest match among alternatives. Consume requires position-anchored match. Capture groups extracted correctly.`
-  Verification: `PASS — 117/117 tests (79 core + 8 types + 26 runtime + 4 integration). Named capture extraction via Regex::capture_names(). 21 new regex engine tests: 6 seek, 4 consume, 3 positional capture, 7 named capture, 3 API. Zero warnings.`
-  Commit: `pending`
+  Verification: `PASS — 117/117 tests. Named capture extraction via Regex::capture_names(). 21 new regex engine tests. Zero warnings.`
+  Commit: `0b7f3c5`
 
 - ID: `RUST-FUNCTIONAL-PARITY.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement lifecycle execution loop: I (init) → loop { LS → match → LE → IT } → LX/EX → E. Handle all 7 lifecycle markers. Implement child rule dispatch: when an action edge fires, recursively invoke the child rule's handler and collect its result. Implement accumulator: push to named arrays, copy, return.`
   Acceptance: `Simple grammar executes correctly end-to-end. Lifecycle blocks fire in correct order. Child rules dispatch recursively. Accumulator collects results.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS — 126/126 tests. Blind-call dispatch, multi-entrypoint child dispatch, keyword arg support, container reference resolution. 9 new engine tests: lifecycle order (7 markers), LX-on-no-match, REP bounds, blind-call, self-recursive, accumulator, keyword args. Zero warnings.`
+  Commit: `85679cc`
 
 ### Container: Expression Interpreter (.6)
 
 - ID: `RUST-FUNCTIONAL-PARITY.6`
-  Status: `active`
+  Status: `done`
   Goal: `Interpret parsed expression trees against runtime context.`
   Children: `.6.1`
 
 - ID: `RUST-FUNCTIONAL-PARITY.6.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement tree-walking interpreter for expression AST. Walk Expr nodes, dispatch function calls to registered helper implementations, resolve variables from runtime context, evaluate nested expressions recursively. Handle undef propagation (missing arg → undef, non-numeric → undef for arithmetic).`
   Acceptance: `All shipped-spec lifecycle code expressions evaluate correctly. Nested helper calls work. Undef propagation matches Perl semantics.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS — 126/126 tests. eval_expr handles all 9 Expr variants (Call, Variable, IndexedVar, StringLiteral, NumberLiteral, BooleanLiteral, RegexLiteral, Undef, FluentChain). call_helper dispatches ~25 helpers with keyword arg awareness. Container reference resolution. Zero warnings.`
+  Commit: `85679cc`
 
 ### Container: Helper Implementations (.7)
 
@@ -246,13 +246,11 @@ by a small interpreter. No Rust source generation, no eval.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-FUNCTIONAL-PARITY.5.2` | `pending` | Lifecycle loop depends on regex engine |
-| 6 | `RUST-FUNCTIONAL-PARITY.6.1` | `pending` | Expression interpreter depends on expression parser |
-| 7 | `RUST-FUNCTIONAL-PARITY.7.1` | `pending` | Core helpers needed for basic spec execution |
-| 8 | `RUST-FUNCTIONAL-PARITY.7.2` | `pending` | String helpers needed for text-processing specs |
-| 9 | `RUST-FUNCTIONAL-PARITY.7.3` | `pending` | Remaining helpers for full spec coverage |
-| 10 | `RUST-FUNCTIONAL-PARITY.8.1` | `pending` | Integration test gates overall correctness |
-| 11 | `RUST-FUNCTIONAL-PARITY.8.2` | `pending` | Gap closure for full parity |
+| 1 | `RUST-FUNCTIONAL-PARITY.7.1` | `pending` | Core helpers needed for basic spec execution |
+| 2 | `RUST-FUNCTIONAL-PARITY.7.2` | `pending` | String helpers needed for text-processing specs |
+| 3 | `RUST-FUNCTIONAL-PARITY.7.3` | `pending` | Remaining helpers for full spec coverage |
+| 4 | `RUST-FUNCTIONAL-PARITY.8.1` | `pending` | Integration test gates overall correctness |
+| 5 | `RUST-FUNCTIONAL-PARITY.8.2` | `pending` | Gap closure for full parity |
 | 12 | `RUST-FUNCTIONAL-PARITY.9` | `pending` | Documentation must be updated before finalization |
 | 13 | `RUST-FUNCTIONAL-PARITY.10` | `pending` | Final gate before tree completion |
 
@@ -283,7 +281,9 @@ by a small interpreter. No Rust source generation, no eval.
 | `2026-06-15` | `.2.4` | Bug report filed — rgx-core build fails on cold clone (2 paths documented: default + no-default-features). 35 errors on no-default-features path traced to 3 root causes. | pending upstream |
 | `2026-06-15` | `.3.1` | `cargo test` 93/93 PASS (73 core + 8 types + 8 runtime + 4 integration). Expression parser: 51 tests (18 roundtrip, 5 error, 4 fluent chain, boolean/undef prefix-match guards, 5-level nesting). FluentChain variant + interpreter support. Zero warnings. | PASS |
 | `2026-06-15` | `.4.1` | `cargo test` 99/99 PASS (79 core + 8 types + 8 runtime + 4 integration). Added AcodeEntry/BcodeEntry structs. Fixed regex_idx tracking. Separated child_regex_idx. Fluent chains on blind edges as structured data. Serde roundtrip for all 20 specs. 6 new compiler tests. Zero warnings. | PASS |
-| `2026-06-15` | `.5.1` | `cargo test` 117/117 PASS (79 core + 8 types + 26 runtime + 4 integration). Named capture extraction via Regex::capture_names(). 21 new regex tests. Zero warnings. | PASS |
+| `2026-06-15` | `.5.1` | `cargo test` 117/117 PASS. Named capture extraction via Regex::capture_names(). 21 new regex tests. Zero warnings. | PASS |
+| `2026-06-15` | `.5.2` | `cargo test` 126/126 PASS. Blind-call dispatch, multi-entrypoint, keyword args, container references. 9 new engine tests. | PASS |
+| `2026-06-15` | `.6.1` | `cargo test` 126/126 PASS. eval_expr handles all 9 Expr variants. call_helper dispatches ~25 helpers with keyword arg awareness. | PASS |
 
 ## Commit Log
 
