@@ -108,11 +108,11 @@ by a small interpreter. No Rust source generation, no eval.
   Commit: `pending (this update)`
 
 - ID: `RUST-FUNCTIONAL-PARITY.2.4`
-  Status: `blocked`
+  Status: `done`
   Goal: `File precise rgx build bug report upstream. → OWNING TASK-TREE: docs/tasks/RGX-BUILD-REPRO.md (full reproduction details). rgx-core (submodule at b771c7b) fails to compile in two paths: (A) default build — pgen crate error "couldn't read subs/pgen/rust/src/../../generated/return_annotation_parser.rs" (cold-clone: generated files missing; bootstrap needed). (B) --no-default-features build — 35 errors across 3 root causes. Full reproduction in RGX-BUILD-REPRO. Blocked: waiting for upstream rgx guidance.`
   Acceptance: `Bug report filed. Upstream response received. Path forward for evaluation (.2.3) unblocked.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `RGX-BUILD-REPRO complete (upstream BUILD-FLOW.1–.4 fixes verified). RGX-ADOPTION complete — rgx-core now the active regex engine in Rust variant, 126/126 PASS.`
+  Commit: `ca40805` (RGX-ADOPTION.1/.2)
 
 ### Container: Expression Parser (.3)
 

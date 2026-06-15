@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RGX-ADOPTION.1/.2: rgx-core adopted as Rust regex engine
+### Dependency swap (.1)
+- Replaced `regex = "1"` with `rgx-core = { path = "../rgx/rgx-core" }` in workspace `Cargo.toml`
+- Updated `linkedspec-core/Cargo.toml` and `linkedspec-runtime/Cargo.toml` to use `rgx-core.workspace = true`
+- Migrated all `regex::Regex` imports to `rgx_core::Regex` across 4 source files
+- API migration: `Regex::new` → `Regex::compile`, `.find` → `.find_first`, `.find_at` → `.find_first_at`, `.start()`/`.end()` → `.start`/`.end` (fields)
+- Zero `regex::` crate references remain in the linkedspec source tree
+- `rgx-core` v0.1.0 pulls in `pgen` (PCRE2-class parser), `serde`, `serde_json`, `serde_stacker`, and optionally Cranelift JIT via `jit` feature
+### Test verification (.2)
+- `cargo test --workspace`: 126/126 PASS, zero failures, zero regressions
+- All regex engine tests (25) pass with rgx backend: seek/consume modes, positional/named captures, tie-breaking, edge cases
+- All 20 shipped specs compile and parse identically
+- Files changed: `rust/Cargo.toml`, `rust/Cargo.lock`, `rust/linkedspec-core/Cargo.toml`, `rust/linkedspec-runtime/Cargo.toml`, `rust/linkedspec-core/src/parser.rs`, `rust/linkedspec-core/src/validation.rs`, `rust/linkedspec-runtime/src/helpers.rs`, `rust/linkedspec-runtime/src/engine.rs`
+
 ## 2026-06-15 — RGX-BUILD-REPRO.1: rgx submodule pin bumped, build fix verified
 ### rgx submodule update (.1)
 - Updated rgx submodule pin from `b771c7b` to `8763a0e` (upstream `main`)

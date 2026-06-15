@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `RGX-ADOPTION`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 9 — Rust variant (rgx adoption)`
 - Created: `2026-06-15`
 - Last updated: `2026-06-15`
@@ -53,17 +53,17 @@ All 39 existing tests must pass with the rgx backend.
   Commit: `pending`
 
 - ID: `RGX-ADOPTION.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Finalization: update live docs (CHANGES.md, DEVELOPMENT_NOTES.md, MEMORY.md, LIVE_ACHIEVEMENT_STATUS.md), update RUST-FUNCTIONAL-PARITY task tree (.2.4 status → done), close tree.`
   Acceptance: `Live docs reflect rgx adoption. Task tree moved to Completed.`
-  Verification: `pending`
+  Verification: `CHANGES.md, DEVELOPMENT_NOTES.md, LIVE_ACHIEVEMENT_STATUS.md, MEMORY.md updated. RUST-FUNCTIONAL-PARITY.2.4 → done. Tree closed.`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RGX-ADOPTION.3` | `pending` | Finalization: live docs, RUST-FUNCTIONAL-PARITY update, close tree |
+| — | — | — | Tree complete |
 
 ## Decisions
 
@@ -83,14 +83,17 @@ All 39 existing tests must pass with the rgx backend.
 | --- | --- | --- | --- |
 | `2026-06-15` | `.1` | `cargo build --workspace` with rgx-core; zero `regex::` crate refs remain | PASS |
 | `2026-06-15` | `.2` | `cargo test --workspace` — 126/126 PASS, zero failures | PASS |
+| `2026-06-15` | `.3` | Live docs updated, RUST-FUNCTIONAL-PARITY.2.4 → done, tree closed | PASS |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
-| --- | --- | --- | --- |
-| `.1` | `pending` | Dependency swap + API migration |
-| `.2` | `pending` | Test verification |
+| --- | --- | --- |
+| `.1` | `ca40805` — "Feat: RGX-ADOPTION.1/.2 — swap regex→rgx-core, migrate API, 126/126 tests PASS" | Code + test verification |
+| `.2` | (bundled with .1) | Test verification — all 126 pass |
+| `.3` | `pending` | Live docs + finalization |
 
 ## Changelog
 
 - `2026-06-15`: Created task tree. Follows RUST-FUNCTIONAL-PARITY.2.3 evaluation (DEFER → now unblocked) and RGX-BUILD-REPRO build fix verification.
+- `2026-06-15`: **Closed.** All 3 leaves done. rgx-core is the active regex engine in the Rust variant. 126/126 tests PASS. Tree complete.

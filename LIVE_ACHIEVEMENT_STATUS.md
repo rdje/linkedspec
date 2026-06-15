@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-15: RGX-ADOPTION.1/.2 — rgx-core adopted as Rust regex engine. `regex` crate fully replaced. All 126 tests PASS with rgx backend. PCRE2-level regex features now available (look-around, backreferences, subroutine calls). Active PNT frontier: RGX-ADOPTION.3 (finalization).
 - 2026-06-15: RGX-BUILD-REPRO.1 — rgx submodule pin bumped b771c7b→8763a0e. Upstream build fixes (BUILD-FLOW.1–.4) verified — cold-clone `make` succeeds. Tree COMPLETE and moved to Completed. No active task trees — PNT idle.
 - 2026-06-15: RUST-FUNCTIONAL-PARITY.7–.10 — Tree COMPLETE (15 leaves). 80+ helpers. 126/126 PASS. Tree moved to Completed.
 - 2026-06-15: Created RGX-BUILD-REPRO task tree — self-contained rgx build reproduction report for upstream. Active but blocked (`.1` pending upstream response). [RESOLVED — see above]
