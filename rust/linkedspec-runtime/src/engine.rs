@@ -1906,4 +1906,78 @@ ChildB:
         let arr = result.as_array().unwrap();
         assert_eq!(arr[0].as_f64().unwrap(), 0.0); // mark at start of input (pos 0 in I-block)
     }
+
+    // ── .5.3 Control flow helper tests ──
+
+    #[test]
+    fn helpers_5_3_return_undef_skips_accumulator() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(array, items) }
+ LE { push_value(array(items), entry_group(1)) }
+ E { return(array_copy(array(items))); return_undef() }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        // return_undef after return — doesn't add to accumulator
+        assert!(!arr.is_empty());
+    }
+
+    #[test]
+    fn helpers_5_3_exit_now_terminates() {
+        let grammar = r#"Top::
+ /bye/
+ I { exit_now(1) }
+ E { return(scalar("never_reached")) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("bye");
+        assert!(result.is_err(), "exit_now should terminate with error");
+        assert!(result.unwrap_err().contains("exit_now(1)"));
+    }
+
+    #[test]
+    fn helpers_5_3_next_skips() {
+        // next() returns undef — used as control flow skip in loops
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, retv=next()) }
+ E { return(scalar(retv)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        // next() returns undef
+        assert!(arr[0].is_null(), "next() should return null, got {:?}", arr[0]);
+    }
+
+    #[test]
+    fn helpers_5_3_coalesce_nonempty_skips_empty() {
+        // coalesce_nonempty skips undef and "" but keeps "0" and other defined values
+        let grammar = r#"Top::
+ /(\d+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(coalesce_nonempty(scalar(""), scalar(val), scalar("final"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("42").unwrap();
+        let arr = result.as_array().unwrap();
+        // "" is nonempty? Actually scalar("") returns Scalar("") which IS empty
+        // coalesce_nonempty skips empty strings, picks "42"
+        assert_eq!(arr[0].as_str().unwrap(), "42");
+    }
 }

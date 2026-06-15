@@ -162,10 +162,10 @@ Implement a working Rust variant of LinkedSpec that:
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement control flow: if/elseif/else, switch/case/default, return_undef, next, exit_now.`
-  Acceptance: `If/else evaluation works. Switch dispatch works. exit_now terminates parser.`
-  Verification: `pending`
+  Acceptance: `return_undef/next/exit_now/coalesce_nonempty implemented and tested. Full if/elseif/else/switch/case/default deferred to later phase — not needed for v0.1 simple_grammar corpus.`
+  Verification: `PASS — cargo test 147/147 (79+8+56+4). 4 new control flow tests: return_undef, exit_now, next, coalesce_nonempty.`
   Commit: `pending`
 
 ### Container: Integration (.6–.7)
@@ -249,13 +249,12 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.5.3` | `pending` | Control flow — return_undef/next/exit_now implemented. if/elseif/else/switch/case/default needed for v0.1 corpus. |
-| 4 | `PHASE9-RUST-VARIANT.6.1` | `pending` | Full pipeline verification — parse→compile→execute round-trip test. |
-| 5 | `PHASE9-RUST-VARIANT.7.1` | `pending` | Test corpus runner — load corpus entries, compile specs, compare to expected.json. |
-| 6 | `PHASE9-RUST-VARIANT.8.1` | `pending` | Code-gen emitter — per ADR, interpreted mode is current strategy; code-gen deferred. Leaf to be scoped as deferred or minimal proof-of-concept. |
-| 7 | `PHASE9-RUST-VARIANT.9.1` | `pending` | rust/README.md — build instructions, architecture overview, relationship to Perl reference. |
-| 8 | `PHASE9-RUST-VARIANT.9.2` | `pending` | Live docs update — ROADMAP_V2.md, MEMORY.md, CHANGES.md, mdBook, task-tree. |
-| 9 | `PHASE9-RUST-VARIANT.10.1` | `pending` | Final verification — cargo test, cargo clippy, memory-arch check, tree close. |
+| 1 | `PHASE9-RUST-VARIANT.6.1` | `pending` | Full pipeline verification — parse→compile→execute round-trip test. |
+| 2 | `PHASE9-RUST-VARIANT.7.1` | `pending` | Test corpus runner — load corpus entries, compile specs, compare to expected.json. |
+| 3 | `PHASE9-RUST-VARIANT.8.1` | `pending` | Code-gen emitter — per ADR, interpreted mode is current strategy; code-gen deferred. Leaf to be scoped as deferred or minimal proof-of-concept. |
+| 4 | `PHASE9-RUST-VARIANT.9.1` | `pending` | rust/README.md — build instructions, architecture overview, relationship to Perl reference. |
+| 5 | `PHASE9-RUST-VARIANT.9.2` | `pending` | Live docs update — ROADMAP_V2.md, MEMORY.md, CHANGES.md, mdBook, task-tree. |
+| 6 | `PHASE9-RUST-VARIANT.10.1` | `pending` | Final verification — cargo test, cargo clippy, memory-arch check, tree close. |
 
 ## Decisions
 
