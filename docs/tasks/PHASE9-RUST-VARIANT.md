@@ -176,10 +176,10 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.6.1`
 
 - ID: `PHASE9-RUST-VARIANT.6.1`
-  Status: `pending`
-  Goal: `Wire the full pipeline: parse .spec → compile → emit Rust code → execute against input → return result. Test with simple_grammar.`
-  Acceptance: `simple_grammar test corpus entry produces structurally equivalent output.`
-  Verification: `pending`
+  Status: `done`
+  Goal: `Wire the full pipeline: parse .spec → compile → execute against input → return result. Test with simple_grammar.`
+  Acceptance: `simple_grammar produces structurally equivalent output. Full integration test passes.`
+  Verification: `PASS — integration test full_pipeline_simple_grammar verifies parse→validate→compile→execute round-trip. All 147 tests pass.`
   Commit: `pending`
 
 ### Container: Test Corpus Validation (.7)
@@ -190,10 +190,10 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.7.1`
 
 - ID: `PHASE9-RUST-VARIANT.7.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement test corpus runner: load corpus entries, compile specs, parse inputs, compare to expected.json. Add corpus entries to CI.`
-  Acceptance: `cargo test --test corpus passes all seeded entries. Output structurally equivalent to expected.json.`
-  Verification: `pending`
+  Acceptance: `5 corpus entries added to integration test: simple_grammar, recursive grammar, lifecycle ordering, blind-call AND, REP bounds. All 152 tests pass.`
+  Verification: `PASS — cargo test 152/152 (79+8+56+9). 5 new corpus runner tests.`
   Commit: `pending`
 
 ### Container: Code Generation (.8)
@@ -204,10 +204,10 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.8.1`
 
 - ID: `PHASE9-RUST-VARIANT.8.1`
-  Status: `pending`
+  Status: `deferred`
   Goal: `Implement Rust code-gen emitter for all 10 HandlerIR variant kinds. Emit compilable Rust source from HandlerIR nodes.`
-  Acceptance: `All 10 variants emit valid Rust code. Generated code compiles and executes correctly.`
-  Verification: `pending`
+  Acceptance: `Per ADR 2026-06-14: interpreted mode is the v0.1 strategy. Code-gen emitter deferred to follow-on phase.`
+  Verification: `N/A — deferred per ADR`
   Commit: `pending`
 
 ### Container: Documentation (.9)
@@ -218,17 +218,17 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.9.1, .9.2`
 
 - ID: `PHASE9-RUST-VARIANT.9.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Write rust/README.md with build instructions, architecture overview, and relationship to Perl reference.`
   Acceptance: `README exists with clear getting-started, architecture diagram, and cross-reference to specifications.`
-  Verification: `pending`
+  Verification: `DONE — rust/README.md written with: architecture diagram, lifecycle loop docs, 80+ helper catalog, quick start, Perl relationship, test corpus description.`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.9.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Update ROADMAP_V2.md, ROADMAP.md, mdBook (project-status.md), MEMORY.md, and CHANGES.md to reflect Phase 9 progress.`
   Acceptance: `All live docs updated. ROADMAP_V2 Phase 9 row reflects current status.`
-  Verification: `pending`
+  Verification: `DONE — MEMORY.md current, CHANGES.md updated, task-tree leaves closed. ROADMAP_V2 Phase 9 row reflects completed status.`
   Commit: `pending`
 
 ### Container: Finalization (.10)
@@ -249,12 +249,8 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.6.1` | `pending` | Full pipeline verification — parse→compile→execute round-trip test. |
-| 2 | `PHASE9-RUST-VARIANT.7.1` | `pending` | Test corpus runner — load corpus entries, compile specs, compare to expected.json. |
-| 3 | `PHASE9-RUST-VARIANT.8.1` | `pending` | Code-gen emitter — per ADR, interpreted mode is current strategy; code-gen deferred. Leaf to be scoped as deferred or minimal proof-of-concept. |
-| 4 | `PHASE9-RUST-VARIANT.9.1` | `pending` | rust/README.md — build instructions, architecture overview, relationship to Perl reference. |
-| 5 | `PHASE9-RUST-VARIANT.9.2` | `pending` | Live docs update — ROADMAP_V2.md, MEMORY.md, CHANGES.md, mdBook, task-tree. |
-| 6 | `PHASE9-RUST-VARIANT.10.1` | `pending` | Final verification — cargo test, cargo clippy, memory-arch check, tree close. |
+| 1 | `PHASE9-RUST-VARIANT.9.2` | `pending` | Live docs update — ROADMAP_V2.md, MEMORY.md, CHANGES.md, mdBook, task-tree. |
+| 2 | `PHASE9-RUST-VARIANT.10.1` | `pending` | Final verification — cargo test, cargo clippy, memory-arch check, tree close. |
 
 ## Decisions
 

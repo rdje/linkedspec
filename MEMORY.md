@@ -17,9 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `81b9eb9` — "Feat: PHASE9-RUST-VARIANT.5.2 — scalar and capture helpers + focused tests"
-- active_work_unit: `PHASE9-RUST-VARIANT`  →  frontier leaf: `.5.3` (in_progress)
-- next_action: PNT `.5.3` — control flow helpers (return_undef/next/exit_now exist; add tests)
-- in_flight_uncommitted: `.5.3` in progress
+- latest_commit: `bdb2db4` — "Feat: PHASE9-RUST-VARIANT.5.3 — control flow helpers + focused tests"
+- active_work_unit: `PHASE9-RUST-VARIANT`  →  frontier leaf: `.10.1` (finalization)
+- next_action: Final verification — cargo clippy, memory-arch check, tree close
+- in_flight_uncommitted: `.6.1`, `.7.1`, `.8.1`, `.9.1`, `.9.2` done; ready to commit batch
 - blockers: none
 - blockers: none

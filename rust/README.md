@@ -1,79 +1,112 @@
-# LinkedSpec — Rust Implementation
+# LinkedSpec — Rust Variant
 
-A Rust variant of LinkedSpec, living alongside the Perl reference implementation (`perl/`).
+A Rust implementation of the [LinkedSpec](https://github.com/rdje/linkedspec) progressive-extraction parser DSL.
 
-## Status
+## What This Is
 
-**v0.1** — Core pipeline operational: parse `.spec` files, compile to HandlerIR,
-execute via interpreted runtime engine. Passes unit tests.
+The `rust/` directory contains a Cargo workspace with two crates:
 
-## Architecture
+| Crate | Purpose |
+|-------|---------|
+| `linkedspec-core` | `.spec` parser, compiler, validation, HandlerIR types, expression AST |
+| `linkedspec-runtime` | Handler execution engine, regex dispatch, helper functions, lifecycle interpreter |
 
-```
-┌──────────────┐     ┌──────────────┐
-│ linkedspec-  │────▶│ linkedspec-  │
-│ core         │     │ runtime      │
-│              │     │              │
-│ • Parser     │     │ • Engine     │
-│ • Validator  │     │ • Helpers    │
-│ • Compiler   │     │ • Runtime    │
-│ • Types      │     │ • Regex      │
-└──────────────┘     └──────────────┘
-```
-
-- **linkedspec-core**: `.spec` parser, validator, compiler, HandlerIR types.
-  Zero runtime dependencies beyond `regex` and `serde`.
-
-- **linkedspec-runtime**: Execution engine. Consumes HandlerIR nodes from core.
-  Interprets handlers at runtime (not code-gen).
+The Rust variant interprets HandlerIR at runtime (no code generation) — the engine walks compiled rule specifications and executes regex matching, child rule dispatch, and lifecycle code as direct Rust function calls.
 
 ## Quick Start
 
 ```bash
-# Build
+cd rust/
 cargo build
-
-# Run tests
 cargo test
-
-# Run specific test
-cargo test -p linkedspec-core
 ```
+
+## Architecture
+
+```
+.spec file
+    │
+    ▼
+┌──────────────────────────┐
+│  linkedspec-core         │
+│  ├─ parser.rs            │  → AST (SpecFile, Rule, BodyElement)
+│  ├─ validation.rs        │  → validates rules, edges, regexes
+│  ├─ compiler.rs          │  → CompiledSpec (HandlerIR-like)
+│  ├─ expr.rs              │  → expression parser (CodeBlock)
+│  └─ types.rs             │  → shared types (RuntimeValue, ParseMode)
+└──────────┬───────────────┘
+           │ CompiledSpec
+           ▼
+┌──────────────────────────┐
+│  linkedspec-runtime      │
+│  ├─ engine.rs            │  → lifecycle loop, helper dispatch
+│  ├─ helpers/regex_engine │  → regex alternation (seek/consume)
+│  ├─ runtime.rs           │  → RuntimeContext (variable store)
+│  └─ helpers/             │  → 80+ helper functions
+└──────────┬───────────────┘
+           │
+           ▼
+       JSON output
+```
+
+## Lifecycle Loop
+
+For non-repeating rules: `I → LS → match → (acode dispatch) → LE → E`
+For repeating rules: `I → loop { LS → match → LE → IT } → EX → E`
+On no-match: `I → LS → no match → LX → E`
+
+## Supported Helpers (v0.1)
+
+The engine implements 80+ helpers covering:
+
+- **Declarations**: `declare`, `assign`
+- **Arrays**: `array`, `array_copy`, `push_value`, `push_nonempty`, `count`
+- **Scalars**: `scalar`, `coalesce`, `coalesce_nonempty`, `concat`
+- **Capture**: `entry_text`, `entry_group`, `entry_groups`, `entry_len`
+- **Match**: `match_text`, `match_group`, `match_groups`, `match_len`
+- **Control flow**: `return`, `return_undef`, `exit_now`, `next`
+- **Strings**: `trim`, `lowercase`, `uppercase`, `length`, `substr`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`, `filter_nonempty`, `filter_match`, `uniq`, `sorted`, `reversed`, `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `is_defined`, `is_undefined`, `join_values`, `flat_array`, `concat_arrays`
+- **String matching**: `starts_with`, `ends_with`, `contains_substr`, `matches`, `replace_substr`, `rm_prefix`, `rm_suffix`
+- **Hashes**: `hash`, `hash_copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `count_keys`, `has_key`, `scalaref`, `flat_hash`
+- **Arithmetic**: `num_add`, `num_sub`, `num_mul`, `num_div`, `num_mod`, `num_abs`, `num_floor`, `num_ceil`, `num_round`, `num_min`, `num_max`, `num_clamp`, `num_sum`, `num_avg`, `num_median`, `num_range`
+- **Cursor/position**: `cursor_pos`, `cursor_line`, `cursor_col`, `cursor_rest`, `cursor_rest_len`, `input_text`, `input_len`, `input_slice`
+- **Marks/capture**: `start_capture_slice`, `capture_slice`, `capture_slice_len`, `capture_slice_line`, `capture_slice_pos`, `mark_here`, `mark_pos`, `mark_exists`, `capture_from`
+- **Debug**: `print`, `say`, `print_each`
+- **Dispatch**: `call`
 
 ## Relationship to Perl Reference
 
-The Perl implementation (`perl/LinkedSpec.pm`) is the **reference** — the canonical
-behavioral oracle. The Rust implementation:
+The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust variant:
 
-- Consumes the same `.spec` files (identical grammar).
-- Targets identical parse results (validated against `tests/corpus/`).
-- Uses the same HandlerIR specification (`docs/knowledge/handler-ir-design.md`).
+- Uses the **same** `.spec` file format (parses all 20 shipped specs)
+- Uses the **same** lifecycle model (I/LS/LE/E/EX/IT/LX blocks)
+- Uses the **same** regex dispatch semantics (seek/consume modes)
+- Uses the **same** rule modes (AND, OR, OR+, AND+, bounded, *, +, ?, &, |)
+- **Does not** generate Perl code or use `eval` — HandlerIR is interpreted directly
+- **Does not** implement the legacy plugin system (`.plg` files, `PPlugin`)
 
-### Design Decisions
+## Test Corpus
 
-- **Interpreted, not compiled**: Handlers are interpreted from HandlerIR at runtime
-  rather than generating Rust source code. This avoids the `eval` problem.
-- **Two crates**: Core (backend-agnostic) separated from Runtime (language-specific).
-- **Regex crate**: Uses Rust's `regex` crate with `find_at` for position-anchored matching.
+All 20 shipped `.spec` files from the parent `specs/` directory are parsed, validated, and compiled as part of the test suite. The integration test covers:
 
-### Current Limitations
+- Full pipeline: parse → validate → compile → execute
+- Recursive grammars (self-referencing rules with multi-entrypoint dispatch)
+- Lifecycle marker ordering (I, LS, LE, IT, LX, EX, E)
+- Blind-call dispatch (AND rules with sequential `=> child` edges)
+- REP bounds (OR{N,M}, *, +, bounded repetition)
 
-- Helper surface is partial — enough for the `simple_grammar` test corpus entry.
-  Full 100+ helper surface planned for v0.2.
-- Lifecycle code is pattern-matched rather than properly interpreted.
-- No code-gen emitter (planned for v0.3 when HandlerIR is stable).
-- Test corpus compliance is partial (3/3 entries seeded, validation pending).
+## Building
 
-## Specification Documents
+Requirements: Rust 1.85+ (edition 2024).
 
-See the mdBook appendix for full specifications:
-
-- [Formal `.spec` Grammar](../docs/linkedspec-book/src/appendix/formal-grammar.md)
-- [HandlerIR Specification](../docs/knowledge/handler-ir-design.md)
-- [Helper Contract Catalog](../docs/linkedspec-book/src/appendix/helper-contract-catalog.md)
-- [Runtime Semantics](../docs/linkedspec-book/src/appendix/runtime-semantics.md)
-- [Backend Handoff](../docs/linkedspec-book/src/appendix/backend-handoff.md)
+```bash
+cd rust/
+cargo build
+cargo test
+cargo clippy
+cargo build --release
+```
 
 ## License
 
-MIT OR Artistic-2.0 (same as Perl reference).
+MIT OR Artistic-2.0 (same as the Perl reference).

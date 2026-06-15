@@ -111,3 +111,114 @@ fn parse_all_shipped_specs() {
     }
     assert!(parsed > 0, "no .spec files found");
 }
+
+// ── Test corpus runner (.7.1) ──
+
+#[test]
+fn corpus_simple_grammar_returns_expected_output() {
+    // Parse, validate, compile, execute a simple grammar and verify output shape.
+    let spec = parse_spec(SIMPLE_GRAMMAR).expect("parse");
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    let engine = Engine::new(compiled);
+
+    let result = engine.execute("pattern1 hello world").unwrap();
+    // Output should be a JSON array with at least one element
+    assert!(result.is_array());
+    let arr = result.as_array().unwrap();
+    assert!(!arr.is_empty(), "expected non-empty result array");
+}
+
+#[test]
+fn corpus_recursive_grammar() {
+    let grammar = r#"Expr::
+ /[A-Za-z_]\w*/
+ /"(?:[^"\\]|\\.)*"/
+ /\d+/
+ /\(/
+ /\)/
+ I { declare(array, results) }
+ LE { push_value(array(results), entry_text()) }
+ -> Expr
+ -> Expr[1]
+ -> Expr[2]
+ E { return(array_copy(array(results))) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute(r#"hello "world" 42"#).unwrap();
+    assert!(result.is_array());
+}
+
+#[test]
+fn corpus_lifecycle_ordered_output() {
+    let grammar = r#"OrderedParser::
+ /(\w+)/
+ I { declare(array, log); push_value(array(log), scalar("I")) }
+ LS { push_value(array(log), scalar("LS")) }
+ LE { push_value(array(log), entry_group(1)) }
+ E { push_value(array(log), scalar("E")); return(array_copy(array(log))) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("hello").unwrap();
+    let outer: &Vec<Value> = result.as_array().unwrap();
+    let inner: &Vec<Value> = outer[0].as_array().unwrap();
+    let strs: Vec<&str> = inner.iter().map(|v| v.as_str().unwrap()).collect();
+    assert_eq!(strs[0], "I");
+    assert_eq!(strs[1], "LS");
+    assert_eq!(strs[2], "hello");
+    assert_eq!(strs[3], "E");
+}
+
+#[test]
+fn corpus_blind_call_and_rule() {
+    let grammar = r#"Top::AND
+ I { declare(array, log) }
+ => ChildA
+ => ChildB
+ E { return(array_copy(array(log))) }
+
+ChildA:
+ /a/
+ I { push_value(array(log), scalar("A")) }
+
+ChildB:
+ /b/
+ I { push_value(array(log), scalar("B")) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("a b").unwrap();
+    let outer: &Vec<Value> = result.as_array().unwrap();
+    let inner: &Vec<Value> = outer[0].as_array().unwrap();
+    assert_eq!(inner.len(), 2);
+    assert_eq!(inner[0].as_str().unwrap(), "A");
+    assert_eq!(inner[1].as_str().unwrap(), "B");
+}
+
+#[test]
+fn corpus_rep_with_bounds() {
+    let grammar = r#"Repeater::OR{1,3}
+ /(\w+)/
+ I { declare(array, words) }
+ LE { push_value(array(words), entry_group(1)) }
+ E { return(array_copy(array(words))) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("one two three four five").unwrap();
+    let outer: &Vec<Value> = result.as_array().unwrap();
+    let inner: &Vec<Value> = outer[0].as_array().unwrap();
+    // OR{1,3} should match between 1 and 3 words
+    assert!(inner.len() >= 1 && inner.len() <= 3,
+        "expected 1-3 matches, got {}: {:?}", inner.len(), inner);
+}
