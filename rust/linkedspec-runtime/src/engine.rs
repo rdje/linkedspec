@@ -653,6 +653,689 @@ impl Engine {
                     Ok(RuntimeValue::Hash(Vec::new()))
                 }
             }
+            // ── String/array index ──
+            "substr" => {
+                if args.len() >= 3 {
+                    let s = args[0].to_str();
+                    let start = args[1].as_number().unwrap_or(0.0) as usize;
+                    let len = args[2].as_number().unwrap_or(0.0) as usize;
+                    let end = (start + len).min(s.len());
+                    Ok(RuntimeValue::Scalar(s[start..end].to_string()))
+                } else if args.len() == 2 {
+                    let s = args[0].to_str();
+                    let start = args[1].as_number().unwrap_or(0.0) as usize;
+                    if start < s.len() {
+                        Ok(RuntimeValue::Scalar(s[start..].to_string()))
+                    } else {
+                        Ok(RuntimeValue::Scalar(String::new()))
+                    }
+                } else {
+                    Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str()).unwrap_or_default()))
+                }
+            }
+            "join_values" => {
+                if args.len() >= 2 {
+                    let delim = args[0].to_str();
+                    let arr = &args[1];
+                    let parts: Vec<String> = match arr {
+                        RuntimeValue::Array(items) => items.iter().map(|v| v.to_str()).collect(),
+                        _ => vec![arr.to_str()],
+                    };
+                    Ok(RuntimeValue::Scalar(parts.join(&delim)))
+                } else {
+                    Ok(RuntimeValue::Scalar(String::new()))
+                }
+            }
+            "split" => {
+                if args.len() >= 2 {
+                    let s = args[0].to_str();
+                    let delim = args[1].to_str();
+                    Ok(RuntimeValue::Array(
+                        s.split(&delim).map(|p| RuntimeValue::Scalar(p.to_string())).collect(),
+                    ))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "split_each" => {
+                if let Some(arr) = args.first() {
+                    match arr {
+                        RuntimeValue::Array(items) => {
+                            let result: Vec<RuntimeValue> = items.iter().map(|v| {
+                                RuntimeValue::Array(
+                                    v.to_str().split_whitespace().map(|p| RuntimeValue::Scalar(p.to_string())).collect()
+                                )
+                            }).collect();
+                            Ok(RuntimeValue::Array(result))
+                        }
+                        _ => Ok(RuntimeValue::Array(vec![])),
+                    }
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "trim_each" | "lowercase_each" | "uppercase_each" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let transformed: Vec<RuntimeValue> = items.iter().map(|v| {
+                        let s = v.to_str();
+                        let s = match name {
+                            "trim_each" => s.trim().to_string(),
+                            "lowercase_each" => s.to_lowercase(),
+                            "uppercase_each" => s.to_uppercase(),
+                            _ => s,
+                        };
+                        RuntimeValue::Scalar(s)
+                    }).collect();
+                    Ok(RuntimeValue::Array(transformed))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "filter_nonempty" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    Ok(RuntimeValue::Array(
+                        items.iter().filter(|v| v.is_nonempty()).cloned().collect(),
+                    ))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "filter_match" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let pattern = args.get(1).map(|a| a.to_str()).unwrap_or_default();
+                    let re = regex::Regex::new(&pattern);
+                    match re {
+                        Ok(re) => Ok(RuntimeValue::Array(
+                            items.iter().filter(|v| re.is_match(&v.to_str())).cloned().collect(),
+                        )),
+                        Err(_) => Ok(RuntimeValue::Array(vec![])),
+                    }
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "uniq" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let mut seen = std::collections::HashSet::new();
+                    let uniq: Vec<RuntimeValue> = items.iter().filter(|v| {
+                        seen.insert(v.to_str())
+                    }).cloned().collect();
+                    Ok(RuntimeValue::Array(uniq))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "say" | "print" | "print_each" => {
+                if name == "print_each" {
+                    if let Some(RuntimeValue::Array(items)) = args.first() {
+                        for item in items {
+                            eprintln!("{}", item.to_str());
+                        }
+                    }
+                } else {
+                    for a in args {
+                        eprintln!("{}", a.to_str());
+                    }
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            // ── Position/cursor ──
+            "cursor_pos" => Ok(RuntimeValue::Number(ctx.pos as f64)),
+            "cursor_line" => {
+                let line = ctx.input[..ctx.pos].chars().filter(|&c| c == '\n').count() + 1;
+                Ok(RuntimeValue::Number(line as f64))
+            }
+            "cursor_col" => {
+                let last_nl = ctx.input[..ctx.pos].rfind('\n').map(|i| i + 1).unwrap_or(0);
+                Ok(RuntimeValue::Number((ctx.pos - last_nl + 1) as f64))
+            }
+            "cursor_rest" => Ok(RuntimeValue::Scalar(ctx.remaining().to_string())),
+            "cursor_rest_len" => Ok(RuntimeValue::Number(ctx.remaining().len() as f64)),
+            "input_text" => Ok(RuntimeValue::Scalar(ctx.input.clone())),
+            "input_len" => Ok(RuntimeValue::Number(ctx.input.len() as f64)),
+            "input_slice" => {
+                if args.len() >= 2 {
+                    let start = args[0].as_number().unwrap_or(0.0) as usize;
+                    let width = args[1].as_number().unwrap_or(0.0) as usize;
+                    let end = (start + width).min(ctx.input.len());
+                    Ok(RuntimeValue::Scalar(ctx.input[start..end].to_string()))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "input_end_pos" => Ok(RuntimeValue::Number(ctx.input.len() as f64)),
+            "start_capture_slice" => {
+                ctx.capture_start = Some(ctx.pos);
+                Ok(RuntimeValue::Undef)
+            }
+            "capture_slice" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(RuntimeValue::Scalar(ctx.input[start..ctx.pos].to_string()))
+            }
+            "capture_slice_len" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(RuntimeValue::Number((ctx.pos - start) as f64))
+            }
+            "capture_slice_line" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                let line = ctx.input[..start].chars().filter(|&c| c == '\n').count() + 1;
+                Ok(RuntimeValue::Number(line as f64))
+            }
+            "capture_slice_pos" => Ok(RuntimeValue::Number(ctx.capture_start.unwrap_or(0) as f64)),
+            "mark_here" => {
+                if !args.is_empty() {
+                    let name = args[0].to_str();
+                    ctx.marks.insert(name, ctx.pos);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_pos" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                Ok(RuntimeValue::Number(ctx.marks.get(&name).copied().unwrap_or(0) as f64))
+            }
+            "mark_exists" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                Ok(RuntimeValue::Bool(ctx.marks.contains_key(&name)))
+            }
+            "capture_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let start = ctx.marks.get(&name).copied().unwrap_or(0);
+                Ok(RuntimeValue::Scalar(ctx.input[start..ctx.pos].to_string()))
+            }
+            // ── Entry/match detail ──
+            "entry_line" | "entry_start_line" => {
+                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
+                let line = ctx.input[..pos].chars().filter(|&c| c == '\n').count() + 1;
+                Ok(RuntimeValue::Number(line as f64))
+            }
+            "entry_col" => {
+                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
+                let last_nl = ctx.input[..pos].rfind('\n').map(|i| i + 1).unwrap_or(0);
+                Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
+            }
+            "entry_len" => Ok(RuntimeValue::Number(
+                ctx.entry_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+            )),
+            "entry_start_pos" => Ok(RuntimeValue::Number(0.0)), // simplified
+            "entry_end_pos" => Ok(RuntimeValue::Number(
+                ctx.entry_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+            )),
+            "match_line" => {
+                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
+                let line = ctx.input[..pos].chars().filter(|&c| c == '\n').count() + 1;
+                Ok(RuntimeValue::Number(line as f64))
+            }
+            "match_col" => {
+                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
+                let last_nl = ctx.input[..pos].rfind('\n').map(|i| i + 1).unwrap_or(0);
+                Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
+            }
+            "match_len" => Ok(RuntimeValue::Number(
+                ctx.match_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+            )),
+            "match_start_pos" => Ok(RuntimeValue::Number(0.0)),
+            "match_end_pos" => Ok(RuntimeValue::Number(
+                ctx.match_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+            )),
+            "match_group" => {
+                if let Some(arg) = args.first() {
+                    let idx = arg.as_number().unwrap_or(0.0) as usize;
+                    Ok(RuntimeValue::Scalar(ctx.match_groups.get(idx).cloned().unwrap_or_default()))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "match_groups" => {
+                Ok(RuntimeValue::Array(
+                    ctx.match_groups.iter().map(|g| RuntimeValue::Scalar(g.clone())).collect(),
+                ))
+            }
+            // ── Scalar transforms ──
+            "length" => {
+                if let Some(arg) = args.first() {
+                    Ok(RuntimeValue::Number(arg.to_str().len() as f64))
+                } else {
+                    Ok(RuntimeValue::Number(0.0))
+                }
+            }
+            "trim" => Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str().trim().to_string()).unwrap_or_default())),
+            "lowercase" => Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str().to_lowercase()).unwrap_or_default())),
+            "uppercase" => Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str().to_uppercase()).unwrap_or_default())),
+            "replace_substr" => {
+                if args.len() >= 3 {
+                    let s = args[0].to_str();
+                    let from = args[1].to_str();
+                    let to = args[2].to_str();
+                    Ok(RuntimeValue::Scalar(s.replace(&from, &to)))
+                } else {
+                    Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
+                }
+            }
+            "rm_prefix" => {
+                if args.len() >= 2 {
+                    let s = args[0].to_str();
+                    let prefix = args[1].to_str();
+                    Ok(RuntimeValue::Scalar(s.strip_prefix(&prefix).unwrap_or(&s).to_string()))
+                } else {
+                    Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
+                }
+            }
+            "rm_suffix" => {
+                if args.len() >= 2 {
+                    let s = args[0].to_str();
+                    let suffix = args[1].to_str();
+                    Ok(RuntimeValue::Scalar(s.strip_suffix(&suffix).unwrap_or(&s).to_string()))
+                } else {
+                    Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
+                }
+            }
+            "starts_with" => {
+                if args.len() >= 2 {
+                    let s = args[0].to_str();
+                    let prefix = args[1].to_str();
+                    Ok(RuntimeValue::Bool(s.starts_with(&prefix)))
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
+            "ends_with" => {
+                if args.len() >= 2 {
+                    let s = args[0].to_str();
+                    let suffix = args[1].to_str();
+                    Ok(RuntimeValue::Bool(s.ends_with(&suffix)))
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
+            "contains_substr" => {
+                if args.len() >= 2 {
+                    let s = args[0].to_str();
+                    let sub = args[1].to_str();
+                    Ok(RuntimeValue::Bool(s.contains(&sub)))
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
+            "matches" => {
+                if args.len() >= 2 {
+                    let s = args[0].to_str();
+                    let pat = args[1].to_str();
+                    match regex::Regex::new(&pat) {
+                        Ok(re) => Ok(RuntimeValue::Bool(re.is_match(&s))),
+                        Err(_) => Ok(RuntimeValue::Bool(false)),
+                    }
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
+            // ── Coalesce ──
+            "coalesce_nonempty" => {
+                for a in args {
+                    if a.is_defined() && !a.to_str().is_empty() {
+                        return Ok(a.clone());
+                    }
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            // ── Scalar arithmetic ──
+            "num_add" | "num_sub" | "num_mul" | "num_div" | "num_mod" => {
+                if args.len() >= 2 {
+                    let a = args[0].as_number();
+                    let b = args[1].as_number();
+                    match (a, b) {
+                        (Some(a), Some(b)) => {
+                            let result = match name {
+                                "num_add" => a + b,
+                                "num_sub" => a - b,
+                                "num_mul" => a * b,
+                                "num_div" if b != 0.0 => a / b,
+                                "num_mod" if b != 0.0 && a.fract() == 0.0 && b.fract() == 0.0 => (a as i64 % b as i64) as f64,
+                                _ => return Ok(RuntimeValue::Undef),
+                            };
+                            Ok(RuntimeValue::Number(result))
+                        }
+                        _ => Ok(RuntimeValue::Undef),
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "num_abs" => Ok(RuntimeValue::Number(
+                args.first().and_then(|a| a.as_number()).map(|n| n.abs()).unwrap_or(0.0),
+            )),
+            "num_floor" => Ok(RuntimeValue::Number(
+                args.first().and_then(|a| a.as_number()).map(|n| n.floor()).unwrap_or(0.0),
+            )),
+            "num_ceil" => Ok(RuntimeValue::Number(
+                args.first().and_then(|a| a.as_number()).map(|n| n.ceil()).unwrap_or(0.0),
+            )),
+            "num_round" => Ok(RuntimeValue::Number(
+                args.first().and_then(|a| a.as_number()).map(|n| n.round()).unwrap_or(0.0),
+            )),
+            "num_min" => {
+                let min = args.iter().filter_map(|a| a.as_number()).fold(f64::INFINITY, |a, b| a.min(b));
+                if min.is_finite() { Ok(RuntimeValue::Number(min)) } else { Ok(RuntimeValue::Undef) }
+            }
+            "num_max" => {
+                let max = args.iter().filter_map(|a| a.as_number()).fold(f64::NEG_INFINITY, |a, b| a.max(b));
+                if max.is_finite() { Ok(RuntimeValue::Number(max)) } else { Ok(RuntimeValue::Undef) }
+            }
+            "num_clamp" => {
+                if args.len() >= 3 {
+                    let v = args[0].as_number();
+                    let lo = args[1].as_number();
+                    let hi = args[2].as_number();
+                    match (v, lo, hi) {
+                        (Some(v), Some(lo), Some(hi)) if lo <= hi => {
+                            Ok(RuntimeValue::Number(v.clamp(lo, hi)))
+                        }
+                        _ => Ok(RuntimeValue::Undef),
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "num_sum" | "num_avg" | "num_median" | "num_range" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let nums: Vec<f64> = items.iter().filter_map(|v| v.as_number()).collect();
+                    if nums.is_empty() { return Ok(RuntimeValue::Undef); }
+                    match name {
+                        "num_sum" => Ok(RuntimeValue::Number(nums.iter().sum())),
+                        "num_avg" => Ok(RuntimeValue::Number(nums.iter().sum::<f64>() / nums.len() as f64)),
+                        "num_median" => {
+                            let mut sorted = nums.clone();
+                            sorted.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+                            let mid = sorted.len() / 2;
+                            if sorted.len() % 2 == 0 {
+                                Ok(RuntimeValue::Number((sorted[mid - 1] + sorted[mid]) / 2.0))
+                            } else {
+                                Ok(RuntimeValue::Number(sorted[mid]))
+                            }
+                        }
+                        "num_range" => {
+                            let min = nums.iter().fold(f64::INFINITY, |a, &b| a.min(b));
+                            let max = nums.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b));
+                            Ok(RuntimeValue::Number(max - min))
+                        }
+                        _ => Ok(RuntimeValue::Undef),
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            // ── Array helpers ──
+            "sorted" => {
+                if let Some(RuntimeValue::Array(mut items)) = args.first().cloned() {
+                    items.sort_by(|a, b| a.to_str().cmp(&b.to_str()));
+                    Ok(RuntimeValue::Array(items))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "reversed" => {
+                if let Some(RuntimeValue::Array(mut items)) = args.first().cloned() {
+                    items.reverse();
+                    Ok(RuntimeValue::Array(items))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "take" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
+                    Ok(RuntimeValue::Array(items.iter().take(n).cloned().collect()))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "take_last" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
+                    let start = if n > items.len() { 0 } else { items.len() - n };
+                    Ok(RuntimeValue::Array(items[start..].to_vec()))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "drop_front" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
+                    Ok(RuntimeValue::Array(items.iter().skip(n).cloned().collect()))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "drop_back" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
+                    let end = if n > items.len() { 0 } else { items.len() - n };
+                    Ok(RuntimeValue::Array(items[..end].to_vec()))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "slice" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let start = args.get(1).and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
+                    let n = args.get(2).and_then(|a| a.as_number()).unwrap_or(items.len() as f64) as usize;
+                    let end = (start + n).min(items.len());
+                    Ok(RuntimeValue::Array(items[start..end].to_vec()))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "contains" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
+                    Ok(RuntimeValue::Bool(items.iter().any(|v| v.to_str() == needle)))
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
+            "index_of" => {
+                if let Some(RuntimeValue::Array(items)) = args.first() {
+                    let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
+                    match items.iter().position(|v| v.to_str() == needle) {
+                        Some(i) => Ok(RuntimeValue::Number(i as f64)),
+                        None => Ok(RuntimeValue::Undef),
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "is_empty" => {
+                let val = args.first().cloned().unwrap_or(RuntimeValue::Undef);
+                Ok(RuntimeValue::Bool(!val.is_nonempty()))
+            }
+            "is_nonempty" => {
+                let val = args.first().cloned().unwrap_or(RuntimeValue::Undef);
+                Ok(RuntimeValue::Bool(val.is_nonempty()))
+            }
+            "is_defined" => Ok(RuntimeValue::Bool(args.first().is_some_and(|a| a.is_defined()))),
+            "is_undefined" => Ok(RuntimeValue::Bool(args.first().is_none_or(|a| !a.is_defined()))),
+            "flat_array" => Ok(RuntimeValue::Array(
+                args.iter().flat_map(|a| match a {
+                    RuntimeValue::Array(items) => items.clone(),
+                    other => vec![other.clone()],
+                }).collect(),
+            )),
+            "concat_arrays" => Ok(RuntimeValue::Array(
+                args.iter().flat_map(|a| match a {
+                    RuntimeValue::Array(items) => items.clone(),
+                    other => vec![other.clone()],
+                }).collect(),
+            )),
+            // ── Hash helpers ──
+            "hash" | "h" => {
+                let mut entries = Vec::new();
+                let mut i = 0;
+                while i + 1 < args.len() {
+                    let key = args[i].to_str();
+                    let val = args[i + 1].clone();
+                    entries.push((key, val));
+                    i += 2;
+                }
+                // Also merge in any Hash args
+                for arg in args {
+                    if let RuntimeValue::Hash(h_entries) = arg {
+                        for (k, v) in h_entries {
+                            entries.push((k.clone(), v.clone()));
+                        }
+                    }
+                }
+                Ok(RuntimeValue::Hash(entries))
+            }
+            "hash_copy" => {
+                if let Some(arg) = args.first() {
+                    match arg {
+                        RuntimeValue::Hash(h) => Ok(RuntimeValue::Hash(h.clone())),
+                        _ => {
+                            let hash_name = self.resolve_array_target(raw_args, arg);
+                            if !hash_name.is_empty() {
+                                Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
+                            } else {
+                                Ok(RuntimeValue::Hash(Vec::new()))
+                            }
+                        }
+                    }
+                } else {
+                    Ok(RuntimeValue::Hash(Vec::new()))
+                }
+            }
+            "merge_hash" => {
+                let mut merged = Vec::new();
+                let mut seen = std::collections::HashSet::new();
+                for arg in args {
+                    if let RuntimeValue::Hash(entries) = arg {
+                        for (k, v) in entries {
+                            if !seen.contains(k) {
+                                seen.insert(k.clone());
+                                merged.push((k.clone(), v.clone()));
+                            }
+                        }
+                    }
+                }
+                Ok(RuntimeValue::Hash(merged))
+            }
+            "set_key" => {
+                if args.len() >= 3 {
+                    if let RuntimeValue::Hash(mut entries) = args[0].clone() {
+                        let key = args[1].to_str();
+                        let val = args[2].clone();
+                        if let Some(existing) = entries.iter_mut().find(|(k, _)| k == &key) {
+                            existing.1 = val;
+                        } else {
+                            entries.push((key, val));
+                        }
+                        Ok(RuntimeValue::Hash(entries))
+                    } else {
+                        Ok(args[0].clone())
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "rename_key" => {
+                if args.len() >= 3 {
+                    if let RuntimeValue::Hash(entries) = args[0].clone() {
+                        let old_key = args[1].to_str();
+                        let new_key = args[2].to_str();
+                        let renamed: Vec<_> = entries.into_iter().map(|(k, v)| {
+                            if k == old_key { (new_key.clone(), v) } else { (k, v) }
+                        }).collect();
+                        Ok(RuntimeValue::Hash(renamed))
+                    } else {
+                        Ok(args[0].clone())
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "drop_keys" => {
+                if let Some(RuntimeValue::Hash(entries)) = args.first().cloned() {
+                    let keys_to_drop: std::collections::HashSet<String> = args[1..].iter().map(|a| a.to_str()).collect();
+                    Ok(RuntimeValue::Hash(
+                        entries.into_iter().filter(|(k, _)| !keys_to_drop.contains(k)).collect(),
+                    ))
+                } else {
+                    Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
+                }
+            }
+            "pick_keys" => {
+                if let Some(RuntimeValue::Hash(entries)) = args.first().cloned() {
+                    let keys_to_keep: std::collections::HashSet<String> = args[1..].iter().map(|a| a.to_str()).collect();
+                    Ok(RuntimeValue::Hash(
+                        entries.into_iter().filter(|(k, _)| keys_to_keep.contains(k)).collect(),
+                    ))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "sorted_keys" => {
+                if let Some(RuntimeValue::Hash(entries)) = args.first() {
+                    let mut keys: Vec<RuntimeValue> = entries.iter().map(|(k, _)| RuntimeValue::Scalar(k.clone())).collect();
+                    keys.sort_by(|a, b| a.to_str().cmp(&b.to_str()));
+                    Ok(RuntimeValue::Array(keys))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "sorted_values" => {
+                if let Some(RuntimeValue::Hash(entries)) = args.first() {
+                    let mut items: Vec<(String, RuntimeValue)> = entries.clone();
+                    items.sort_by(|(ak, _), (bk, _)| ak.cmp(bk));
+                    Ok(RuntimeValue::Array(items.into_iter().map(|(_, v)| v).collect()))
+                } else {
+                    Ok(RuntimeValue::Array(vec![]))
+                }
+            }
+            "count_keys" => {
+                if let Some(RuntimeValue::Hash(entries)) = args.first() {
+                    Ok(RuntimeValue::Number(entries.len() as f64))
+                } else {
+                    Ok(RuntimeValue::Number(0.0))
+                }
+            }
+            "has_key" => {
+                if let Some(RuntimeValue::Hash(entries)) = args.first() {
+                    let key = args.get(1).map(|a| a.to_str()).unwrap_or_default();
+                    Ok(RuntimeValue::Bool(entries.iter().any(|(k, _)| k == &key)))
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
+            "scalaref" => {
+                if args.len() >= 2 {
+                    let path = args[1].to_str();
+                    // Walk: container{path} → scalar
+                    match &args[0] {
+                        RuntimeValue::Hash(entries) => {
+                            Ok(entries.iter().find(|(k, _)| k == &path).map(|(_, v)| v.clone()).unwrap_or(RuntimeValue::Undef))
+                        }
+                        _ => Ok(RuntimeValue::Undef),
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "flat_hash" => {
+                let mut entries = Vec::new();
+                for arg in args {
+                    match arg {
+                        RuntimeValue::Hash(h_entries) => {
+                            for (k, v) in h_entries {
+                                entries.push((k.clone(), v.clone()));
+                            }
+                        }
+                        _ => {}
+                    }
+                }
+                Ok(RuntimeValue::Hash(entries))
+            }
+            "next" => {
+                // flow skip — equivalent to "continue matching"
+                Ok(RuntimeValue::Undef)
+            }
             _ => {
                 // Unknown helper — return undef silently (compatibility)
                 Ok(RuntimeValue::Undef)
