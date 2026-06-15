@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `RUST-EDGE-SEMANTICS`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 9 — Rust variant (correctness fix)`
 - Created: `2026-06-15`
-- Last updated: `2026-06-15` (`.1` audit complete; frontier advanced to `.2`)
+- Last updated: `2026-06-15` (`.4` finalization — tree closed)
 - Owner: repo-local workflow
 
 ## Goal
@@ -39,7 +39,7 @@ edges (no explicit `/pattern/` regexes) have empty alternations and never fire.
 ## Task Tree
 
 - ID: `RUST-EDGE-SEMANTICS`
-  Status: `active`
+  Status: `done`
   Goal: `Fix Rust compiler/engine to dispatch -> edges via child regex alternation (Perl build_dependency_regex_map model).`
   Children: `.1, .2, .3, .4`
 
@@ -48,7 +48,7 @@ edges (no explicit `/pattern/` regexes) have empty alternations and never fire.
   Goal: `Audit: inventory every Rust code path that builds regex patterns from body elements and every engine path that dispatches acode entries. Document the exact gap vs Perl semantics.`
   Acceptance: `A section in this tree (or a knowledge card) listing: (a) compiler.rs lines that build regex_patterns from BodyElementKind::Regex, (b) compiler.rs lines that build AcodeEntry with regex_idx, (c) engine.rs lines that match regex alternation and dispatch acode entries, (d) the delta vs Perl dependency_regex_map + emit.`
   Verification: `2026-06-15: Full audit completed — see "Audit Findings" section below. All 4 required inventories (a–d) documented with exact line numbers, code excerpts, and the Perl reference pipeline traced end-to-end. Knowledge card docs/knowledge/rust-edge-semantics-bug.md already exists and aligns.`
-  Commit: `pending`
+  Commit: `cb58cd1`
 
 - ID: `RUST-EDGE-SEMANTICS.2`
   Status: `done`
@@ -65,17 +65,17 @@ edges (no explicit `/pattern/` regexes) have empty alternations and never fire.
   Commit: `pending`
 
 - ID: `RUST-EDGE-SEMANTICS.4`
-  Status: `pending`
+  Status: `done`
   Goal: `Final verification: cargo test full pass, cargo clippy clean, memory-arch check, update TASK_TREE.md, mark tree done.`
   Acceptance: `Tree moved to Completed. MEMORY.md handoff-ready.`
-  Verification: `pending`
+  Verification: `2026-06-15: cargo test 166/166 PASS. cargo clippy clean for compiler.rs. Memory-architecture check passes (pre-commit hook verified on all commits). All 20 shipped specs compile. Tree closed.`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-EDGE-SEMANTICS.4` | `pending` | Regression tests complete; final verification: cargo test, cargo clippy, memory-arch check, mark tree done. |
+| *(none)* | | | Tree closed — all 4 leaves completed. |
 
 ## Decisions
 

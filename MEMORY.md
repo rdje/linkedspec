@@ -17,8 +17,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `df13fcf` — "RUST-EDGE-SEMANTICS.3 — regression tests for edge dispatch"
-- active_work_unit: `RUST-EDGE-SEMANTICS`  →  frontier leaf: `.4` (pending — final verification and tree close)
-- next_action: PNT `.4` — cargo test full pass, cargo clippy clean, memory-arch check, mark tree done
-- in_flight_uncommitted: RUST-EDGE-SEMANTICS.3 complete (7 new integration tests, 166/166 PASS); live docs being updated for commit
+- latest_commit: `4f3a9fe` — "RUST-EDGE-SEMANTICS.3 — hash-fix: MEMORY.md + commit-log update"
+- active_work_unit: *(none)* — RUST-EDGE-SEMANTICS tree completed (all 4 leaves done)
+- next_action: PNT idle — no active task trees. Review ROADMAP_V2.md for next direction.
+- in_flight_uncommitted: RUST-EDGE-SEMANTICS.4 finalization (tree closed; TASK_TREE.md updated; ready to commit)
+- blockers: none
 - blockers: none
