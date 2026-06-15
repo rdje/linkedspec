@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `pending` (hash backfill) — "Feat: RUST-FUNCTIONAL-PARITY.7–.10 — 80+ helpers, tree COMPLETE, 126 tests"
-- active_work_unit: none (RUST-FUNCTIONAL-PARITY tree COMPLETE — all 15 leaves done)
-- next_action: none (PNT idle — no active task trees)
+- active_work_unit: `RGX-BUILD-REPRO` → frontier: `.1` (blocked pending upstream)
+- next_action: none (PNT idle — active tree is blocked)
 - in_flight_uncommitted: none
 - blockers: `.2.4` blocked — waiting for upstream rgx guidance on cold-clone build/bootstrap

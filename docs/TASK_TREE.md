@@ -23,6 +23,12 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+## Active Task Trees
+
+| Tree | Status | Roadmap lane | Current frontier | File |
+| --- | --- | --- | --- | --- |
+| `RGX-BUILD-REPRO` | `active` | `Phase 9 — Rust variant (rgx evaluation unblock)` | `.1` rgx build reproduction report (blocked pending upstream) | [docs/tasks/RGX-BUILD-REPRO.md](docs/tasks/RGX-BUILD-REPRO.md) |
+
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not

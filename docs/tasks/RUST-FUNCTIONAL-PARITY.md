@@ -109,7 +109,7 @@ by a small interpreter. No Rust source generation, no eval.
 
 - ID: `RUST-FUNCTIONAL-PARITY.2.4`
   Status: `blocked`
-  Goal: `File precise rgx build bug report upstream. rgx-core (submodule at b771c7b) fails to compile in two paths: (A) default build — pgen crate error "couldn't read subs/pgen/rust/src/../../generated/return_annotation_parser.rs" (cold-clone: generated files missing; bootstrap needed). (B) --no-default-features build — 35 errors: feature-gate bug (CharRange imported behind cfg(pgen-parser) but used unconditionally in parsing.rs:7293), non-exhaustive match on ast::Regex with 12 missing variants (parser.rs:92 — RelativeBackreference, ReturnedCaptureSubroutine, Callout, +9), Rust edition _ expression issues (parser.rs:53,137,158,182,460,556; c2/simd_scan.rs:83,104; vm.rs:4114). Rustc 1.95.0, edition = 2021 (workspace). Blocked: waiting for upstream rgx guidance.`
+  Goal: `File precise rgx build bug report upstream. → OWNING TASK-TREE: docs/tasks/RGX-BUILD-REPRO.md (full reproduction details). rgx-core (submodule at b771c7b) fails to compile in two paths: (A) default build — pgen crate error "couldn't read subs/pgen/rust/src/../../generated/return_annotation_parser.rs" (cold-clone: generated files missing; bootstrap needed). (B) --no-default-features build — 35 errors across 3 root causes. Full reproduction in RGX-BUILD-REPRO. Blocked: waiting for upstream rgx guidance.`
   Acceptance: `Bug report filed. Upstream response received. Path forward for evaluation (.2.3) unblocked.`
   Verification: `pending`
   Commit: `pending`
