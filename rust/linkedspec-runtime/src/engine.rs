@@ -389,7 +389,7 @@ impl Engine {
         args: &[RuntimeValue],
         kw: &std::collections::HashMap<String, RuntimeValue>,
         ctx: &mut RuntimeContext,
-        _rule_label: &str,
+        rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         match name {
             // ── Declarations ──
@@ -748,7 +748,10 @@ impl Engine {
                         Ok(re) => Ok(RuntimeValue::Array(
                             items.iter().filter(|v| re.is_match(&v.to_str())).cloned().collect(),
                         )),
-                        Err(_) => Ok(RuntimeValue::Array(vec![])),
+                        Err(e) => {
+                            eprintln!("warning: filter_match: invalid regex '/{}/': {} — returning empty", pattern, e);
+                            Ok(RuntimeValue::Array(vec![]))
+                        }
                     }
                 } else {
                     Ok(RuntimeValue::Array(vec![]))
@@ -962,7 +965,10 @@ impl Engine {
                     let pat = args[1].to_str();
                     match rgx_core::Regex::compile(&pat) {
                         Ok(re) => Ok(RuntimeValue::Bool(re.is_match(&s))),
-                        Err(_) => Ok(RuntimeValue::Bool(false)),
+                        Err(e) => {
+                            eprintln!("warning: matches: invalid regex '/{}/': {} — returning false", pat, e);
+                            Ok(RuntimeValue::Bool(false))
+                        }
                     }
                 } else {
                     Ok(RuntimeValue::Bool(false))
@@ -1337,7 +1343,10 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             _ => {
-                // Unknown helper — return undef silently (compatibility)
+                eprintln!(
+                    "warning: unknown helper '{}' in rule '{}' — returning undef",
+                    name, rule_label
+                );
                 Ok(RuntimeValue::Undef)
             }
         }

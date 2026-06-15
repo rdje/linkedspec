@@ -27,6 +27,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `RUST-DIAGNOSTICS` | `active` | `Phase 9 — Rust variant (engine quality)` | `.1` Add unknown helper runtime warning | [docs/tasks/RUST-DIAGNOSTICS.md](docs/tasks/RUST-DIAGNOSTICS.md) |
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not
