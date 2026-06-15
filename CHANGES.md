@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-FUNCTIONAL-PARITY.3.1: Expression parser signoff-quality
+### Expression parser (.3.1)
+- Added `Expr::FluentChain` variant with `receiver` and `calls: Vec<FluentCall>` for fluent method chains
+- Added `FluentCall` struct with `method` and `args` fields
+- Replaced broken fluent chain placeholder code (lines 326-339, old parse_var_or_call) with `parse_fluent_chain()` recursive parser
+- Added boolean literal parsing: `true` → `BooleanLiteral { value: true }`, `false` → `BooleanLiteral { value: false }`
+- Added prefix-match guards for `undef`/`true`/`false` so longer names like `undefine`/`trueword` are not false-matched
+- Extended `parse_fluent_chain` to handle fluent chains on variable and indexed-var expressions too
+- Updated grammar docs: added `fluent_chain`, `method_call`, `boolean`, `undef` rules
+- Added `Expr::FluentChain` interpreter support in `engine.rs::eval_expr`: evaluates receiver then each fluent call sequentially
+- Fixed `Display` for `FluentChain`: roundtrip-able output format
+- Expanded test suite from 9 to 51 tests:
+  - 18 roundtrip tests (Display → Parse → verify AST equivalence)
+  - 5 error case tests (unterminated string/regex, missing paren, unexpected char, fluent chain missing paren)
+  - 4 fluent chain tests (single dot, multi dot, on variable, on indexed var)
+  - Boolean literal tests with prefix-match guard
+  - String literal tests (double + single quotes)
+  - 5-level deep nesting verification
+  - Empty call test, negative number test, float test
+  - Dollar-variable test, indexed-variable test
+  - Regex literal test, semicolon handling tests
+  - serde roundtrip tests for CodeBlock and FluentChain
+- Files changed: `rust/linkedspec-core/src/expr.rs` (+~500 lines), `rust/linkedspec-runtime/src/engine.rs` (+13 lines)
+- Full suite: 93/93 PASS (73 core + 8 types + 8 runtime + 4 integration), zero warnings
+
 ## 2026-06-15 — RUST-FUNCTIONAL-PARITY.2.3: rgx evaluation complete
 ### rgx evaluation (.2.3)
 - Evaluated rgx (github.com/rdje/rgx, submodule at b771c7b) as replacement for the `regex` crate

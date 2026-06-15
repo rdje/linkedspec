@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant implementation (functional parity)`
 - Created: `2026-06-15`
-- Last updated: `2026-06-15` (.2.4 added — rgx build bug report; blocked pending upstream)
+- Last updated: `2026-06-15` (.3.1 done — expression parser: FluentChain variant, boolean literals, 51 tests)
 - Owner: repo-local workflow
 
 ## Goal
@@ -117,15 +117,15 @@ by a small interpreter. No Rust source generation, no eval.
 ### Container: Expression Parser (.3)
 
 - ID: `RUST-FUNCTIONAL-PARITY.3`
-  Status: `active`
+  Status: `done`
   Goal: `Parse lifecycle code strings into executable expression trees.`
   Children: `.3.1`
 
 - ID: `RUST-FUNCTIONAL-PARITY.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement recursive-descent expression parser for the helper DSL. Handle: function calls with nested args, string/numeric literals, bare variable references, key=value keyword arguments. Grammar: expr → call | literal | variable; call → name '(' args? ')'; args → arg (',' arg)*; arg → expr | key '=' expr.`
   Acceptance: `Round-trip: parse lifecycle code → Expr tree → debug-print → matches original. Handles 5+ levels of nesting. Rejects malformed expressions.`
-  Verification: `pending`
+  Verification: `PASS — 93/93 tests pass (73 core + 8 types + 8 runtime + 4 integration). Expression parser expanded from 9 to 51 tests: 18 roundtrip, 5 error, 4 fluent chain, boolean/undef/string/number parsing with prefix-match guards, 5-level deep nesting. Added Expr::FluentChain variant + FluentCall struct. Fixed broken fluent chain parsing (replaced placeholder with recursive parse_fluent_chain). Added BooleanLiteral parsing (true/false). Added FluentChain interpreter support in engine.rs. cargo test clean, zero warnings.`
   Commit: `pending`
 
 ### Container: Compiler (.4)
@@ -246,9 +246,7 @@ by a small interpreter. No Rust source generation, no eval.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-FUNCTIONAL-PARITY.3.1` | `pending` | Expression parser needed before compiler can parse lifecycle code |
-| 2 | `RUST-FUNCTIONAL-PARITY.3.1` | `pending` | Expression parser needed before compiler can parse lifecycle code |
-| 3 | `RUST-FUNCTIONAL-PARITY.4.1` | `pending` | Compiler depends on parser + validator + expression parser |
+| 1 | `RUST-FUNCTIONAL-PARITY.4.1` | `pending` | Compiler depends on parser + validator + expression parser |
 | 4 | `RUST-FUNCTIONAL-PARITY.5.1` | `pending` | Regex engine needed before lifecycle loop |
 | 5 | `RUST-FUNCTIONAL-PARITY.5.2` | `pending` | Lifecycle loop depends on regex engine |
 | 6 | `RUST-FUNCTIONAL-PARITY.6.1` | `pending` | Expression interpreter depends on expression parser |
@@ -285,6 +283,7 @@ by a small interpreter. No Rust source generation, no eval.
 | `2026-06-15` | `.2.2` | All 20 shipped specs parse + validate + compile, cargo test 51/51 PASS | PASS |
 | `2026-06-15` | `.2.3` | rgx API audit: all required primitives confirmed (compile, find_first_at, find_first, MatchResult fields, groups, capture_names). API migration mapping documented. Decision: DEFER adoption. | PASS (evaluation) |
 | `2026-06-15` | `.2.4` | Bug report filed — rgx-core build fails on cold clone (2 paths documented: default + no-default-features). 35 errors on no-default-features path traced to 3 root causes. | pending upstream |
+| `2026-06-15` | `.3.1` | `cargo test` 93/93 PASS (73 core + 8 types + 8 runtime + 4 integration). Expression parser: 51 tests (18 roundtrip, 5 error, 4 fluent chain, boolean/undef prefix-match guards, 5-level nesting). FluentChain variant + interpreter support. Zero warnings. | PASS |
 
 ## Commit Log
 
@@ -293,6 +292,7 @@ by a small interpreter. No Rust source generation, no eval.
 | `.1.1, .1.2, .2.1, .2.2` | `662b642` — "Feat: RUST-FUNCTIONAL-PARITY.1 + .2 — Rust-native core, parser, validator, compiler, runtime" | All 4 leaves in one coherent slice: core types + parser rewrite + validation + look-around workaround |
 | `.2.3` | `afadbd7` — "Feat: RUST-FUNCTIONAL-PARITY.2.3 — add rgx submodule for PCRE2-level regex" | Submodule added at b771c7b |
 | `.2.3` | `556105a` — "Eval: RUST-FUNCTIONAL-PARITY.2.3 — rgx evaluation: API audit PASS, decision DEFER" | Evaluation complete; decision DEFER; live docs + task-tree updated |
+| `.3.1` | `pending` (hash backfill) — "Feat: RUST-FUNCTIONAL-PARITY.3.1 — expression parser: FluentChain, boolean literals, 51 tests" | Expression parser: FluentChain variant + interpreter, boolean literals, 51 tests, zero warnings |
 
 ## Changelog
 
@@ -300,3 +300,4 @@ by a small interpreter. No Rust source generation, no eval.
 - `2026-06-15`: Frontier sync — .1.1, .1.2, .2.1, .2.2 verified done (commit `662b642`). Frontier updated to start at .2.3. Commit log and verification log backfilled.
 - `2026-06-15`: `.2.3` evaluation complete — rgx API audit PASS (all required primitives confirmed via book + source). Decision: DEFER adoption. rgx not on crates.io; cold-clone bootstrap required. Migration path documented. Leaf `.2.3` → done.
 - `2026-06-15`: `.2.4` added — rgx build bug report. Two build paths fail: (A) default — pgen generated files missing (cold-clone bootstrap needed), (B) `--no-default-features` — 35 errors (CharRange feature-gate bug, stale non-PGEN parser match). Leaf blocked pending upstream guidance.
+- `2026-06-15`: `.3.1` complete — Expression parser signoff-quality. Added `Expr::FluentChain` variant + `FluentCall` struct. Replaced broken fluent chain placeholder with recursive `parse_fluent_chain`. Added boolean literal parsing (true/false with prefix-match guards). Added FluentChain interpreter support in engine.rs. Extended test suite from 9 to 51 tests (18 roundtrip, 5 error, 4 fluent chain, boolean/undef prefix-match guards, 5-level deep nesting). Full suite: 93/93 PASS, zero warnings.

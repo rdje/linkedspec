@@ -186,6 +186,19 @@ impl Engine {
             Expr::BooleanLiteral { value } => Ok(RuntimeValue::Bool(*value)),
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
+            Expr::FluentChain { receiver, calls } => {
+                // Evaluate the receiver expression (e.g. push_value(...))
+                self.eval_expr(receiver, ctx, rule_label)?;
+                // Evaluate each fluent call in sequence (e.g. .return(...), .endif())
+                for call in calls {
+                    let evaluated: Vec<RuntimeValue> = call.args
+                        .iter()
+                        .map(|a| self.eval_expr(a.value(), ctx, rule_label))
+                        .collect::<Result<Vec<_>, _>>()?;
+                    self.call_helper(&call.method, &evaluated, ctx, rule_label)?;
+                }
+                Ok(RuntimeValue::Undef)
+            }
         }
     }
 
