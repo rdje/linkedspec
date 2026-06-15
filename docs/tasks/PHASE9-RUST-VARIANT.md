@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE9-RUST-VARIANT`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Phase 9 — Rust variant implementation`
 - Created: `2026-06-14`
 - Last updated: `2026-06-15`
@@ -239,18 +239,15 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.10.1`
 
 - ID: `PHASE9-RUST-VARIANT.10.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Final verification: cargo test full pass, cargo clippy clean, memory-arch check, move tree to Completed.`
   Acceptance: `All tests pass. Clippy clean. Memory-arch check passes. Tree in Completed.`
-  Verification: `pending`
+  Verification: `PASS — cargo test 152/152, cargo clippy 0 errors (25 doc-style warnings), memory-arch check passes. Tree moved to Completed.`
   Commit: `pending`
 
 ## Current Frontier
 
-| Order | Leaf | Status | Why next |
-| --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.9.2` | `pending` | Live docs update — ROADMAP_V2.md, MEMORY.md, CHANGES.md, mdBook, task-tree. |
-| 2 | `PHASE9-RUST-VARIANT.10.1` | `pending` | Final verification — cargo test, cargo clippy, memory-arch check, tree close. |
+Tree exhausted — all 17 leaves complete.
 
 ## Decisions
 
