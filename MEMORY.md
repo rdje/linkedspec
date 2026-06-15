@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `faf79f3` — "Docs: RGX-BUILD-REPRO.1 — rgx submodule pin bumped b771c7b→8763a0e, build fix verified"
+- latest_commit: `62f1893` — "Docs: RGX-BUILD-REPRO.1 — rgx submodule pin bumped b771c7b→8763a0e, build fix verified"
 - active_work_unit: none (PNT idle — all trees complete, no active frontier)
 - next_action: none (PNT idle)
 - in_flight_uncommitted: none
