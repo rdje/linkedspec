@@ -7,8 +7,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-15: RGX-BUILD-REPRO.1 — rgx submodule pin bumped b771c7b→8763a0e. Upstream build fixes (BUILD-FLOW.1–.4) verified — cold-clone `make` succeeds. Tree COMPLETE and moved to Completed. No active task trees — PNT idle.
 - 2026-06-15: RUST-FUNCTIONAL-PARITY.7–.10 — Tree COMPLETE (15 leaves). 80+ helpers. 126/126 PASS. Tree moved to Completed.
-- 2026-06-15: Created RGX-BUILD-REPRO task tree — self-contained rgx build reproduction report for upstream. Active but blocked (`.1` pending upstream response).
+- 2026-06-15: Created RGX-BUILD-REPRO task tree — self-contained rgx build reproduction report for upstream. Active but blocked (`.1` pending upstream response). [RESOLVED — see above]
 - 2026-06-15: RUST-FUNCTIONAL-PARITY.5.1 — Regex engine signoff-quality. Named capture extraction via Regex::capture_names(). 21 new tests. 117/117 PASS, zero warnings. Frontier → `.5.2` (lifecycle loop).
 - 2026-06-15: RUST-FUNCTIONAL-PARITY.4.1 — Compiler signoff-quality. Added AcodeEntry/BcodeEntry structs (replaced opaque tuples). Fixed regex_idx tracking bug (was incorrectly incremented for action edges). Separated child_regex_idx from current-rule regex association. Fluent chains on blind edges stored as structured data. 6 new compiler tests. All 20 specs compile + serde roundtrip. 99/99 PASS, zero warnings. Frontier → `.5.1` (regex engine).
 - 2026-06-15: RUST-FUNCTIONAL-PARITY.3.1 — Expression parser signoff-quality. Added Expr::FluentChain variant + FluentCall struct. Replaced broken fluent chain placeholder with recursive parse_fluent_chain(). Added boolean literal parsing (true/false with prefix-match guards). Added FluentChain interpreter support in engine.rs. Extended tests 9→51 (18 roundtrip, 5 error, 4 fluent chain, 5-level nesting). 93/93 PASS, zero warnings. Frontier → `.4.1` (compiler).

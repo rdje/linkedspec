@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `RGX-BUILD-REPRO`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 9 — Rust variant (rgx evaluation unblock)`
 - Created: `2026-06-15`
-- Last updated: `2026-06-15`
+- Last updated: `2026-06-15` (updated post-upstream-fix: rgx build verified working)
 - Owner: repo-local workflow
 - Upstream: https://github.com/rdje/rgx
 
@@ -36,7 +36,8 @@ and provide a fix or bootstrap procedure.
 | Item | Value |
 | --- | --- |
 | rgx repository | `https://github.com/rdje/rgx` |
-| rgx commit | `b771c7b872675a333b2c42571249ba7b36435d2f` (HEAD of `main`) |
+| rgx commit (original broken) | `b771c7b872675a333b2c42571249ba7b36435d2f` |
+| rgx commit (current, fixed) | `8763a0e6bea97879f027237439d57725f83ead23` (HEAD of `main`) |
 | Rust version | `rustc 1.95.0 (59807616e 2026-04-14)` |
 | Edition | `2021` (workspace) |
 | OS | macOS 26.1 (Darwin arm64) |
@@ -45,22 +46,22 @@ and provide a fix or bootstrap procedure.
 ## Task Tree
 
 - ID: `RGX-BUILD-REPRO`
-  Status: `active`
+  Status: `done`
   Goal: `Reproduce, document, and report two rgx-core build failures on cold clone.`
   Children: `.1`
 
 - ID: `RGX-BUILD-REPRO.1`
-  Status: `blocked`
+  Status: `done`
   Goal: `File self-contained reproduction report upstream. Two build paths fail on cold clone: (A) default features — pgen crate missing generated file "subs/pgen/rust/src/../../generated/return_annotation_parser.rs" (bootstrap step not documented/automated). (B) --no-default-features — missing CharRange import (feature-gate bug), non-exhaustive ast::Regex match in parser.rs (12 missing variants), Rust 2024 edition _ expression issues.`
   Acceptance: `Upstream maintainer can reproduce both failures from the information in this task-tree. Path forward received (fix, bootstrap doc, or crates.io publish).`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `Upstream fix confirmed — BUILD-FLOW.1 adds 'make build' entrypoint (hides PGEN bootstrap), BUILD-FLOW.2 fixes --no-default-features build. Cold-clone 'make' succeeds on macOS arm64, rustc 1.95.0.`
+  Commit: `8763a0e` (rgx upstream), linkedspec submodule pin bumped b771c7b→8763a0e
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RGX-BUILD-REPRO.1` | `blocked` | Waiting for upstream rgx response |
+| — | — | — | Tree complete |
 
 ## Reproduction Details
 
@@ -210,24 +211,24 @@ When pgen-parser is OFF:
 
 ## Blockers
 
-- **`.1`** — Waiting for upstream rgx response. **Unblock condition:** upstream rgx
-  provides either (a) a fix for the build failures, (b) a documented bootstrap
-  procedure that works on a cold clone, or (c) rgx is published to crates.io with
-  standard `cargo build` support. **Next task:** none (PNT skip — blocked tree).
+- ~~**`.1`** — Waiting for upstream rgx response.~~ **RESOLVED.** Upstream rgx commits `BUILD-FLOW.1` through `BUILD-FLOW.4` provide: (a) a `make` build entrypoint that hides the PGEN bootstrap (`BUILD-FLOW.1`), (b) a fix for the `--no-default-features` build (`BUILD-FLOW.2`), (c) a knowledge-map card and downstream response (`BUILD-FLOW.3`), and (d) `docs/INTEGRATION.md` downstream handoff guide (`BUILD-FLOW.4`). Cold-clone `make` verified working.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-15` | `.1` | Both build paths reproduced from cold clone; errors documented | reproduced |
+| `2026-06-15` | `.1` | Upstream fix verified: `make` succeeds on cold clone (macOS arm64, rustc 1.95.0); default features + PGEN bootstrap work | passed |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `.1` | `pending` | Bug report filed; waiting for upstream |
+| `.1` | `RGX-BUILD-REPRO.1 — rgx submodule pin bumped b771c7b→8763a0e, build fix verified` | Upstream BUILD-FLOW.1–.4 resolved both cold-clone build issues |
 
 ## Changelog
 
 - `2026-06-15`: Created task tree. Extracted from `RUST-FUNCTIONAL-PARITY.2.4` with
   full cold-clone reproduction details for both build paths.
+- `2026-06-15`: **Closed.** Upstream rgx BUILD-FLOW fixes resolved both build failures.
+  rgx submodule pin bumped from `b771c7b` to `8763a0e`. Tree complete.

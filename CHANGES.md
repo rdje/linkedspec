@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RGX-BUILD-REPRO.1: rgx submodule pin bumped, build fix verified
+### rgx submodule update (.1)
+- Updated rgx submodule pin from `b771c7b` to `8763a0e` (upstream `main`)
+- Upstream fixes: `BUILD-FLOW.1` adds `make build` entrypoint that hides PGEN bootstrap (fixes cold-clone "missing generated/return_annotation_parser.rs" error). `BUILD-FLOW.2` fixes `--no-default-features` build (CharRange feature-gate, non-exhaustive ast::Regex match, Rust 2024 edition `_` issues). `BUILD-FLOW.3` adds KM card + downstream response. `BUILD-FLOW.4` adds `docs/INTEGRATION.md` downstream handoff guide.
+- Verified: `PGEN_VERBOSITY=0 make` succeeds on macOS arm64, rustc 1.95.0 — full engine (default features + PGEN bootstrap) builds cleanly
+- Task tree RGX-BUILD-REPRO moved to Completed (all leaves done)
+- Files changed: `rgx` submodule pin reference (gitlink), `docs/tasks/RGX-BUILD-REPRO.md`, `docs/TASK_TREE.md`, live docs
+
 ## 2026-06-15 — RUST-FUNCTIONAL-PARITY.5.1: Regex engine signoff-quality
 ### Regex engine (.5.1)
 - Fixed named capture extraction: `CompiledAlt` now pre-computes `capture_names` from `Regex::capture_names()`, and `extract_named()` maps named groups to captured values (was always empty HashMap)
