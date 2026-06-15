@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-FUNCTIONAL-PARITY.5.1: Regex engine signoff-quality
+### Regex engine (.5.1)
+- Fixed named capture extraction: `CompiledAlt` now pre-computes `capture_names` from `Regex::capture_names()`, and `extract_named()` maps named groups to captured values (was always empty HashMap)
+- Added `MatchResult::named_capture(&self, name) -> Option<&str>` convenience accessor
+- Added `CompiledAlternation::is_empty()` for defensive programming
+- Expanded tests from 5 to 26:
+  - Seek mode: earliest match, start position, tie-breaking (lowest index), empty input, no match, empty alternatives
+  - Consume mode: position-anchored, first-alternative-wins, second-alternative-fallback, empty alternatives
+  - Positional captures: single group, multiple groups, optional-not-matched
+  - Named captures: single, multiple, mixed with positional, in consume mode, optional not matched, no named groups in pattern, absent lookup → None
+  - API: matched_text(), named_capture() for existing/nonexistent names
+  - Multi-pattern: 3 patterns with different capture layouts
+- Files changed: `rust/linkedspec-runtime/src/helpers.rs` (+150 lines)
+- Full suite: 117/117 PASS, zero warnings
+
 ## 2026-06-15 — RUST-FUNCTIONAL-PARITY.4.1: Compiler signoff-quality
 ### Compiler (.4.1)
 - Added `AcodeEntry` struct with `regex_idx`, `child_label`, `child_regex_idx`, `code` fields (replaced opaque `(usize, String, Option<CodeBlock>)` tuple)

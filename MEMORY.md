@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` (hash backfill) — "Feat: RUST-FUNCTIONAL-PARITY.4.1 — compiler: AcodeEntry/BcodeEntry, fixed regex_idx, 99 tests"
-- active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.5.1` (regex engine), `.5.2` (lifecycle), `.6.1` (interpreter), `.7.1–.7.3` (helpers), `.8.1–.8.2` (integration), `.9` (docs), `.10` (final)
-- next_action: PNT from `.5.1` — implement regex dispatch: compile patterns into combined alternation with position tracking, seek vs consume modes
+- latest_commit: `pending` (hash backfill) — "Feat: RUST-FUNCTIONAL-PARITY.5.1 — regex engine: named captures, 26 tests"
+- active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.5.2` (lifecycle), `.6.1` (interpreter), `.7.1–.7.3` (helpers), `.8.1–.8.2` (integration), `.9` (docs), `.10` (final)
+- next_action: PNT from `.5.2` — implement lifecycle execution loop: I → LS → match → LE → IT → LX/EX → E. Handle all 7 lifecycle markers, child rule dispatch, accumulator
 - in_flight_uncommitted: none
 - blockers: `.2.4` blocked — waiting for upstream rgx guidance on cold-clone build/bootstrap
