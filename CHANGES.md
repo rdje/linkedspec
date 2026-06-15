@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RGX-BRANCH-TRACKING.1/.2: Combined regex + matched_branch_number
+### Regex engine (.1/.2)
+- Replaced manual alternative iteration with rgx's native branch tracking
+- Patterns combined into single `(pat1)|(pat2)|(pat3)` regex — rgx's `MatchResult.matched_branch_number` identifies winning branch
+- `CompiledAlternation` now holds one `Option<Regex>` + `Vec<AltInfo>` (group offsets + capture names per branch)
+- `seek_match`: 1 `find_first` call instead of N; `consume_match`: 1 `find_first_at` call instead of N
+- Capture extraction uses per-branch `group_offset` to isolate winning branch's groups
+- Mirrors Perl's `LinkedRE::oredRE` single-regex approach, portable across all rgx backends
+- 25 regex_engine tests pass; 2 test expectations adjusted for rgx ordered-alternation semantics
+
 ## 2026-06-15 — RUST-DIAGNOSTICS.1/.2: Runtime warnings for silent failures
 ### Diagnostics (.1/.2)
 - Unknown helper calls now emit `eprintln!` warning with helper name and rule label (was silently returning `undef`)

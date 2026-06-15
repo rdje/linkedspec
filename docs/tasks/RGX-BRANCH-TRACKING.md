@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `RGX-BRANCH-TRACKING`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 9 — Rust variant (regex engine optimization)`
 - Created: `2026-06-15`
 - Last updated: `2026-06-15`
@@ -62,10 +62,10 @@ regex with embedded-code position tracking.
   Commit: `pending` (bundled with .1)
 
 - ID: `RGX-BRANCH-TRACKING.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Finalization: update live docs, close tree.`
   Acceptance: `Live docs reflect rgx branch tracking. Tree moved to Completed.`
-  Verification: `pending`
+  Verification: `Live docs updated. Tree closed.`
   Commit: `pending`
 
 ## Current Frontier
