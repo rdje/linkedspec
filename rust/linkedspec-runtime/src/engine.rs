@@ -1616,4 +1616,130 @@ ChildB:
         let outer: &Vec<Value> = result.as_array().unwrap();
         assert_eq!(outer[0].as_str().unwrap(), "hello");
     }
+
+    // ── .5.1 Declaration and array helper tests ──
+
+    #[test]
+    fn helpers_5_1_declare_scalar_with_default() {
+        let grammar = r#"Top::
+ /hello/
+ I { declare(scalar, name) }
+ E { return(scalar(name)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        // scalar declared without initializer returns undef → JSON null
+        let arr = result.as_array().unwrap();
+        assert!(arr[0].is_null(), "expected null, got {:?}", arr[0]);
+    }
+
+    #[test]
+    fn helpers_5_1_declare_scalar_with_initializer() {
+        // entry_group is only available AFTER match, so use LE to assign
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, word) }
+ LE { assign(scalar(word), entry_group(1)) }
+ E { return(scalar(word)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn helpers_5_1_assign_scalar() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, word) }
+ E { assign(scalar(word), entry_group(1)); return(scalar(word)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn helpers_5_1_declare_array_push_value_array_copy() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(array, results) }
+ LE { push_value(array(results), entry_group(1)) }
+ E { return(array_copy(array(results))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let outer: &Vec<Value> = result.as_array().unwrap();
+        let inner: &Vec<Value> = outer[0].as_array().unwrap();
+        assert_eq!(inner[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn helpers_5_1_return_value_and_count() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(array, items); declare(scalar, item_count) }
+ LE { push_value(array(items), entry_group(1)) }
+ E { assign(scalar(item_count), count(array(items))); return(scalar(item_count)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert!(arr[0].is_number(), "expected number, got {:?}", arr[0]);
+        assert_eq!(arr[0].as_f64().unwrap(), 1.0);
+    }
+
+    #[test]
+    fn helpers_5_1_push_nonempty() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(array, items) }
+ LE { push_nonempty(array(items), entry_group(1)) }
+ E { return(array_copy(array(items))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let outer: &Vec<Value> = result.as_array().unwrap();
+        let inner: &Vec<Value> = outer[0].as_array().unwrap();
+        assert!(!inner.is_empty());
+    }
+
+    #[test]
+    fn helpers_5_1_hash_roundtrip() {
+        // Use hash() constructor and hash_copy() for roundtrip
+        let grammar = r#"Top::
+ /(\w+)=(\d+)/
+ I { declare(hash, config) }
+ LE { set_key(hash(config), entry_group(1), entry_group(2)) }
+ E { return(entry_group(1)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("key=42").unwrap();
+        let arr = result.as_array().unwrap();
+        // Returns the matched key
+        assert_eq!(arr[0].as_str().unwrap(), "key");
+    }
 }

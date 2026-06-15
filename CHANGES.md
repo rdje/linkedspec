@@ -21192,3 +21192,9 @@ Accepted punctuation-light attached branch aliases on the method-like control-fl
 - 2026-06-11: PLUGIN-ACTION-MIGRATION.4: Created `perl/PluginUtils.pm` with 23 common.plg utility functions. Caller migration deferred.
 - 2026-06-11: PLUGIN-ACTION-MIGRATION.5: Deleted 7 dead Category D + exp.plg files (496 lines, 18 actions). Tree closed; 19 files remain.
 - 2026-06-11: PLUGIN-ACTION-MIGRATION tree **retired**. Plugin migration workstream closed. Rationale: LinkedSpec should have top-notch plugin infrastructure, but bulk-migrating the legacy `.plg` corpus does not make sense. 17 dead files deleted (1,030 lines, 45 actions). 19 legacy `.plg` files kept as working corpus. PluginUtils.pm available as utility package target.
+
+## 2026-06-15 — PHASE9-RUST-VARIANT.5.1: Declaration and array helpers + focused tests
+- Added 7 focused engine tests covering declare/assign/array/array_copy/push_value/count/return/push_nonempty/hash helpers
+- Updated PHASE9-RUST-VARIANT task-tree: frontier expanded, .5.1 marked done
+- Updated MEMORY.md current state
+- cargo test: 133/133 pass (79 core + 8 types + 42 runtime + 4 integration)

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant implementation`
 - Created: `2026-06-14`
-- Last updated: `2026-06-14`
+- Last updated: `2026-06-15`
 - Owner: repo-local workflow
 
 ## Goal
@@ -148,10 +148,10 @@ Implement a working Rust variant of LinkedSpec that:
   Children: `.5.1, .5.2, .5.3`
 
 - ID: `PHASE9-RUST-VARIANT.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Implement declaration and array helpers: declare, assign, array, array_copy, push_value, count, return.`
   Acceptance: `Declare/assign work with type tracking. Array push/read works. Tests pass.`
-  Verification: `pending`
+  Verification: `PASS — cargo test 133/133 (79 core + 8 types + 42 runtime + 4 integration). 7 new focused helper tests.`
   Commit: `pending`
 
 - ID: `PHASE9-RUST-VARIANT.5.2`
@@ -249,7 +249,14 @@ Implement a working Rust variant of LinkedSpec that:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PHASE9-RUST-VARIANT.7.1` | `pending` | Test corpus runner — load corpus entries, compile, compare to expected.json. |
+| 1 | `PHASE9-RUST-VARIANT.5.2` | `pending` | Scalar and capture helpers — entry_group/scalar/coalesce/concat/capture. Core helpers are implemented; need focused tests + leaf close-out. |
+| 3 | `PHASE9-RUST-VARIANT.5.3` | `pending` | Control flow — return_undef/next/exit_now implemented. if/elseif/else/switch/case/default needed for v0.1 corpus. |
+| 4 | `PHASE9-RUST-VARIANT.6.1` | `pending` | Full pipeline verification — parse→compile→execute round-trip test. |
+| 5 | `PHASE9-RUST-VARIANT.7.1` | `pending` | Test corpus runner — load corpus entries, compile specs, compare to expected.json. |
+| 6 | `PHASE9-RUST-VARIANT.8.1` | `pending` | Code-gen emitter — per ADR, interpreted mode is current strategy; code-gen deferred. Leaf to be scoped as deferred or minimal proof-of-concept. |
+| 7 | `PHASE9-RUST-VARIANT.9.1` | `pending` | rust/README.md — build instructions, architecture overview, relationship to Perl reference. |
+| 8 | `PHASE9-RUST-VARIANT.9.2` | `pending` | Live docs update — ROADMAP_V2.md, MEMORY.md, CHANGES.md, mdBook, task-tree. |
+| 9 | `PHASE9-RUST-VARIANT.10.1` | `pending` | Final verification — cargo test, cargo clippy, memory-arch check, tree close. |
 
 ## Decisions
 
@@ -278,7 +285,7 @@ Implement a working Rust variant of LinkedSpec that:
 | `2026-06-14` | `PHASE9-RUST-VARIANT.2.3` | `cargo test` 17/17 (parser + validation + types) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.3.1/.2` | `cargo test` 22/22 (+5 compiler tests) | PASS |
 | `2026-06-14` | `PHASE9-RUST-VARIANT.4.1–.3` | `cargo test` 28/28 (+6 runtime tests) | PASS |
-| `2026-06-14` | `PHASE9-RUST-VARIANT.5.1–.3 + .6.1` | `cargo build` clean, tests compile, full pipeline wired | PASS |
+| `2026-06-15` | `PHASE9-RUST-VARIANT.5.1` | `cargo test` 133/133 (79+8+42+4), 7 new focused helper tests | PASS |
 
 ## Commit Log
 
@@ -289,3 +296,4 @@ Implement a working Rust variant of LinkedSpec that:
 ## Changelog
 
 - `2026-06-14`: Created task tree — 10 containers, 17 leaves covering bootstrap, parser, compiler, runtime, helpers, integration, test corpus, code-gen, docs, and finalization.
+- `2026-06-15`: Frontier expanded to all 9 pending leaves (.5.1–.10.1). PNT batch starting.

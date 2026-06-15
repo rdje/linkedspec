@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `71dc8ca` — "Docs: RGX-BRANCH-TRACKING.3 — finalization: tree closed"
-- active_work_unit: none (PNT idle — all trees complete)
-- next_action: none (PNT idle)
-- in_flight_uncommitted: none
+- active_work_unit: `PHASE9-RUST-VARIANT`  →  frontier leaf: `.5.2` (pending)
+- next_action: PNT `.5.2` — scalar and capture helpers + focused tests
+- in_flight_uncommitted: `.5.1` done (7 new helper tests, 133/133 pass), ready to commit
 - blockers: none
