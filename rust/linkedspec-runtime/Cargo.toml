@@ -11,7 +11,7 @@ description = "LinkedSpec runtime — handler execution engine, helpers, and lif
 linkedspec-core = { path = "../linkedspec-core" }
 serde.workspace = true
 serde_json.workspace = true
-regex.workspace = true
+rgx-core.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]

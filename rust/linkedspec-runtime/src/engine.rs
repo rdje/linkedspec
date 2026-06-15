@@ -743,7 +743,7 @@ impl Engine {
             "filter_match" => {
                 if let Some(RuntimeValue::Array(items)) = args.first() {
                     let pattern = args.get(1).map(|a| a.to_str()).unwrap_or_default();
-                    let re = regex::Regex::new(&pattern);
+                    let re = rgx_core::Regex::compile(&pattern);
                     match re {
                         Ok(re) => Ok(RuntimeValue::Array(
                             items.iter().filter(|v| re.is_match(&v.to_str())).cloned().collect(),
@@ -960,7 +960,7 @@ impl Engine {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let pat = args[1].to_str();
-                    match regex::Regex::new(&pat) {
+                    match rgx_core::Regex::compile(&pat) {
                         Ok(re) => Ok(RuntimeValue::Bool(re.is_match(&s))),
                         Err(_) => Ok(RuntimeValue::Bool(false)),
                     }

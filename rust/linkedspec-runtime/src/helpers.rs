@@ -19,7 +19,7 @@
 //! the named map. Named capture indices align with the positional group list.
 
 pub mod regex_engine {
-    use regex::Regex;
+    use rgx_core::Regex;
     use std::collections::HashMap;
 
     /// A compiled regex alternative — one pattern with its index.
@@ -50,7 +50,7 @@ pub mod regex_engine {
                 .iter()
                 .enumerate()
                 .map(|(i, pat)| {
-                    Regex::new(pat)
+                    Regex::compile(pat)
                         .map(|re| {
                             // Collect named capture group names.
                             // capture_names() returns one entry per capture slot
@@ -65,7 +65,7 @@ pub mod regex_engine {
                                 capture_names,
                             }
                         })
-                        .map_err(|e| format!("regex compile error for '/{}/': {}", pat, e))
+                        .map_err(|e| format!("rgx compile error for '/{}/': {}", pat, e))
                 })
                 .collect();
             Ok(Self {
@@ -90,9 +90,9 @@ pub mod regex_engine {
             let mut best: Option<MatchResult> = None;
 
             for alt in &self.alternatives {
-                if let Some(m) = alt.regex.find(remaining) {
-                    let abs_start = pos + m.start();
-                    let abs_end = pos + m.end();
+                if let Some(m) = alt.regex.find_first(remaining) {
+                    let abs_start = pos + m.start;
+                    let abs_end = pos + m.end;
 
                     // Keep the earliest match; on ties, lowest index (iteration order) wins.
                     let is_better = match &best {
@@ -125,17 +125,17 @@ pub mod regex_engine {
         pub fn consume_match(&self, input: &str, pos: usize) -> Option<MatchResult> {
             let remaining = &input[pos..];
             for alt in &self.alternatives {
-                if let Some(m) = alt.regex.find_at(remaining, 0) {
-                    // find_at with offset 0 may return matches starting at
+                if let Some(m) = alt.regex.find_first_at(remaining, 0) {
+                    // find_first_at with offset 0 may return matches starting at
                     // position >0 if the regex uses optional prefixes. Verify
                     // the match truly starts at the beginning.
-                    if m.start() == 0 {
+                    if m.start == 0 {
                         let groups = extract_groups(&alt.regex, remaining);
                         let named = extract_named(&alt.regex, &alt.capture_names, remaining);
                         return Some(MatchResult {
                             index: alt.index,
                             start: pos,
-                            end: pos + m.end(),
+                            end: pos + m.end,
                             groups,
                             named,
                         });

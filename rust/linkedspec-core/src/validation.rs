@@ -10,7 +10,7 @@
 
 use crate::ast::{BodyElementKind, SpecFile};
 use crate::error::{LinkedSpecError, Result};
-use regex::Regex;
+use rgx_core::Regex;
 use std::collections::HashSet;
 
 /// Run all validation passes on a parsed spec.
@@ -175,7 +175,7 @@ fn check_regex_syntax(spec: &SpecFile) -> Result<()> {
                     continue;
                 }
 
-                Regex::new(pattern).map_err(|e| {
+                Regex::compile(pattern).map_err(|e| {
                     LinkedSpecError::Validation(format!(
                         "rule '{}': invalid regex pattern '/{}/': {}",
                         rule.header.label, pattern, e

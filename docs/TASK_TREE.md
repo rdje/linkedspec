@@ -27,6 +27,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `RGX-ADOPTION` | `active` | `Phase 9 — Rust variant (rgx adoption)` | `.1` Swap regex→rgx-core dependency + API migration | [docs/tasks/RGX-ADOPTION.md](docs/tasks/RGX-ADOPTION.md) |
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not

@@ -10,5 +10,5 @@ description = "LinkedSpec core — .spec parser, compiler, and HandlerIR types"
 [dependencies]
 serde.workspace = true
 serde_json.workspace = true
-regex.workspace = true
+rgx-core.workspace = true
 thiserror.workspace = true

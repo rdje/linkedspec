@@ -11,7 +11,7 @@ use crate::ast::{
     BodyElement, BodyElementKind, EdgeTarget, FluentCall, Rule, RuleHeader, RuleMode, SpecFile,
 };
 use crate::error::{LinkedSpecError, Result};
-use regex::Regex;
+use rgx_core::Regex;
 
 /// Parse a `.spec` source string into a `SpecFile` AST.
 pub fn parse_spec(source: &str) -> Result<SpecFile> {
@@ -73,7 +73,7 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
     let line = lines[i];
     let trimmed = line.trim();
 
-    let header_re = Regex::new(r"^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)")
+    let header_re = Regex::compile(r"^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)")
         .map_err(|e| LinkedSpecError::Compile(format!("header regex: {e}")))?;
 
     if let Some(caps) = header_re.captures(trimmed) {
@@ -117,7 +117,7 @@ fn parse_mode_suffix(raw: &str) -> RuleMode {
 }
 
 fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
-    let re = Regex::new(r"^(AND|OR)\{(\d*)(?:,(\d*))?\}$").ok()?;
+    let re = Regex::compile(r"^(AND|OR)\{(\d*)(?:,(\d*))?\}$").ok()?;
     let caps = re.captures(raw)?;
     let base = caps.get(1)?.as_str();
     let min_str = caps.get(2)?.as_str();
@@ -143,7 +143,7 @@ fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
     let len = lines.len();
 
     // Header regex for detecting next rule start
-    let header_re = Regex::new(r"^\w+[ \t]*(::|:)[ \t]*\S*").unwrap();
+    let header_re = Regex::compile(r"^\w+[ \t]*(::|:)[ \t]*\S*").unwrap();
 
     while i < len {
         let trimmed = lines[i].trim();
@@ -237,13 +237,13 @@ fn parse_single_element(
     line_num: usize,
 ) -> Option<(BodyElement, String, bool)> {
     // Regex patterns for classification (order matters!)
-    let re_regex = Regex::new(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
-    let re_action = Regex::new(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
-    let re_blind = Regex::new(r"^=>[ \t]+(\w+)").unwrap();
-    let re_lifecycle = Regex::new(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
-    let re_split = Regex::new(r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))").unwrap();
-    let re_conditional = Regex::new(r"^-\?[ \t]+\w+").unwrap();
-    let re_fluent = Regex::new(r"^\.[ \t]*\w+").unwrap();
+    let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
+    let re_action = Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
+    let re_blind = Regex::compile(r"^=>[ \t]+(\w+)").unwrap();
+    let re_lifecycle = Regex::compile(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
+    let re_split = Regex::compile(r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))").unwrap();
+    let re_conditional = Regex::compile(r"^-\?[ \t]+\w+").unwrap();
+    let re_fluent = Regex::compile(r"^\.[ \t]*\w+").unwrap();
 
     // 1. Regex literal: `/pattern/`
     if let Some(caps) = re_regex.captures(trimmed) {
