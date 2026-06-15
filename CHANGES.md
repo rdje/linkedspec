@@ -1,6 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-DIAGNOSTICS.1/.2: Runtime warnings for silent failures
+### Diagnostics (.1/.2)
+- Unknown helper calls now emit `eprintln!` warning with helper name and rule label (was silently returning `undef`)
+- `filter_match` regex compile errors now emit `eprintln!` warning with pattern and error (was silently returning empty array)
+- `matches` regex compile errors now emit `eprintln!` warning with pattern and error (was silently returning `false`)
+- `_rule_label` parameter in `call_helper` renamed to `rule_label` (now used in warning message)
+- 3 silent-failure paths closed; 126/126 PASS
+
 ## 2026-06-15 — RGX-ADOPTION.1/.2: rgx-core adopted as Rust regex engine
 ### Dependency swap (.1)
 - Replaced `regex = "1"` with `rgx-core = { path = "../rgx/rgx-core" }` in workspace `Cargo.toml`

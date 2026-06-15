@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `57d0e24` — "Docs: RGX-ADOPTION.3 — finalization: live docs, RUST-FUNCTIONAL-PARITY.2.4→done, tree closed"
-- active_work_unit: none (PNT idle — all trees complete, no active frontier)
-- next_action: none (PNT idle)
-- in_flight_uncommitted: none
+- latest_commit: `6298d59` — "Feat: RUST-DIAGNOSTICS.1/.2 — runtime warnings for silent failure paths"
+- active_work_unit: `RUST-DIAGNOSTICS` → frontier: `.3` (finalization: live docs, close tree)
+- next_action: Complete RUST-DIAGNOSTICS.3 — update live docs, close tree
+- in_flight_uncommitted: RUST-DIAGNOSTICS.3 finalization in progress
 - blockers: none

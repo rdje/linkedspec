@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `RUST-DIAGNOSTICS`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 9 — Rust variant (engine quality)`
 - Created: `2026-06-15`
 - Last updated: `2026-06-15`
@@ -35,31 +35,31 @@ actionable feedback when something goes wrong, instead of silent failure.
   Children: `.1, .2, .3`
 
 - ID: `RUST-DIAGNOSTICS.1`
-  Status: `pending`
-  Goal: `Add runtime warning for unknown helper calls. Currently the _ => fallback in call_helper silently returns Undef. Emit eprintln!("warning: unknown helper '{}' — returning undef", name) so spec authors can detect typos.`
-  Acceptance: `Unknown helper emits warning to stderr. Existing tests pass (no test expects warnings from valid helpers).`
-  Verification: `pending`
-  Commit: `pending`
+  Status: `done`
+  Goal: `Add runtime warning for unknown helper calls.`
+  Acceptance: `Unknown helper emits warning to stderr. Existing tests pass.`
+  Verification: `Unknown helper → eprintln warning with name + rule label. 126/126 PASS.`
+  Commit: `6298d59`
 
 - ID: `RUST-DIAGNOSTICS.2`
-  Status: `pending`
-  Goal: `Add runtime warning for regex compile failures in filter_match and matches helpers. Currently they silently return empty array / false on regex compile error.`
+  Status: `done`
+  Goal: `Add runtime warning for regex compile failures in filter_match and matches.`
   Acceptance: `Regex errors emit warning to stderr. Existing tests pass.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `filter_match/matches regex errors → eprintln warning with pattern + error. 126/126 PASS.`
+  Commit: `6298d59` (bundled with .1)
 
 - ID: `RUST-DIAGNOSTICS.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Finalization: update live docs, close tree.`
   Acceptance: `Live docs reflect runtime diagnostics. Tree moved to Completed.`
-  Verification: `pending`
+  Verification: `Live docs updated. Tree closed.`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-DIAGNOSTICS.1` | `pending` | Unknown helper warning — the biggest silent-failure gap |
+| — | — | — | Tree complete |
 
 ## Decisions
 
@@ -73,12 +73,20 @@ actionable feedback when something goes wrong, instead of silent failure.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-06-15` | `.1` | Unknown helper emits eprintln warning; 126/126 PASS | PASS |
+| `2026-06-15` | `.2` | Regex errors in filter_match/matches emit warnings; 126/126 PASS | PASS |
+| `2026-06-15` | `.3` | Live docs updated; tree closed | PASS |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `.1` | `6298d59` — "Feat: RUST-DIAGNOSTICS.1/.2 — runtime warnings for silent failure paths" | Unknown helper + regex warnings |
+| `.2` | (bundled with .1) | Regex error warnings |
+| `.3` | `pending` | Live docs + finalization |
 
 ## Changelog
 
-- `2026-06-15`: Created task tree. Unknown helpers silently returning undef is a concrete quality gap found during engine audit.
+- `2026-06-15`: Created task tree.
+- `2026-06-15`: **Closed.** All 3 leaves done. Three silent-failure paths now emit runtime warnings.
+
