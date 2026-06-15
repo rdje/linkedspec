@@ -267,6 +267,17 @@ impl Engine {
         use linkedspec_core::expr::Expr;
         match expr {
             Expr::Call { name, args } => {
+                // Lazy-evaluation calls: if/switch/elseif/else/case/default
+                // Branch bodies must NOT be evaluated eagerly — they are
+                // evaluated only when their condition matches.
+                let is_lazy = matches!(
+                    name.as_str(),
+                    "if" | "switch" | "elseif" | "else" | "case" | "default"
+                );
+                if is_lazy {
+                    return self.call_helper_lazy(name, args, ctx, rule_label);
+                }
+                // Normal eager evaluation for all other helpers
                 let evaluated: Vec<RuntimeValue> = args
                     .iter()
                     .map(|a| self.eval_expr(a.value(), ctx, rule_label))
@@ -355,6 +366,22 @@ impl Engine {
             }
         }
         val.to_str()
+    }
+
+    /// Dispatch a lazy-evaluation call (if/switch/elseif/else/case/default).
+    ///
+    /// These calls receive unevaluated arg AST nodes; the handler evaluates
+    /// conditions and branch bodies lazily via `self.eval_expr()`.
+    fn call_helper_lazy(
+        &self,
+        name: &str,
+        args: &[linkedspec_core::expr::Arg],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let empty_kw = std::collections::HashMap::new();
+        let empty_vals: Vec<RuntimeValue> = Vec::new();
+        self.call_helper(name, args, &empty_vals, &empty_kw, ctx, rule_label)
     }
 
     /// Dispatch a helper call with keyword argument awareness.
@@ -1342,6 +1369,112 @@ impl Engine {
                 // flow skip — equivalent to "continue matching"
                 Ok(RuntimeValue::Undef)
             }
+            // ── Conditional flow: if/elseif/else/endif ──
+            "if" => {
+                // Inline composite: if(cond, then, elseif(cond2, then2), else(else_body))
+                // Lazy evaluation — branch bodies NOT evaluated unless their condition
+                // matches. raw_args provides AST nodes; eval_expr evaluates conditionally.
+                if raw_args.is_empty() {
+                    return Ok(RuntimeValue::Undef);
+                }
+                let cond = self.eval_expr(raw_args[0].value(), ctx, rule_label)?;
+                if cond.as_bool() {
+                    if raw_args.len() >= 2 {
+                        return self.eval_expr(raw_args[1].value(), ctx, rule_label);
+                    }
+                    return Ok(RuntimeValue::Undef);
+                }
+                let mut i = 2;
+                while i < raw_args.len() {
+                    if let linkedspec_core::expr::Arg::Positional(
+                        linkedspec_core::expr::Expr::Call { name: branch_name, args: branch_args }
+                    ) = &raw_args[i] {
+                        if branch_name == "elseif" && !branch_args.is_empty() {
+                            let elseif_cond = self.eval_expr(branch_args[0].value(), ctx, rule_label)?;
+                            if elseif_cond.as_bool() {
+                                if branch_args.len() >= 2 {
+                                    return self.eval_expr(branch_args[1].value(), ctx, rule_label);
+                                }
+                                return Ok(RuntimeValue::Undef);
+                            }
+                            i += 1;
+                            continue;
+                        }
+                        if branch_name == "else" && !branch_args.is_empty() {
+                            return self.eval_expr(branch_args[0].value(), ctx, rule_label);
+                        }
+                    }
+                    return self.eval_expr(raw_args[i].value(), ctx, rule_label);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "elseif" => {
+                if raw_args.len() >= 2 {
+                    let cond = self.eval_expr(raw_args[0].value(), ctx, rule_label)?;
+                    if cond.as_bool() {
+                        return self.eval_expr(raw_args[1].value(), ctx, rule_label);
+                    }
+                } else if !raw_args.is_empty() {
+                    let _ = self.eval_expr(raw_args[0].value(), ctx, rule_label)?;
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "else" => {
+                if let Some(raw) = raw_args.first() {
+                    return self.eval_expr(raw.value(), ctx, rule_label);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "endif" => {
+                Ok(RuntimeValue::Undef)
+            }
+            // ── Conditional flow: switch/case/default/endswitch ──
+            "switch" => {
+                if raw_args.is_empty() {
+                    return Ok(RuntimeValue::Undef);
+                }
+                let switch_val = self.eval_expr(raw_args[0].value(), ctx, rule_label)?;
+                let switch_str = switch_val.to_str();
+                let mut i = 1;
+                while i < raw_args.len() {
+                    if let linkedspec_core::expr::Arg::Positional(
+                        linkedspec_core::expr::Expr::Call { name: branch_name, args: branch_args }
+                    ) = &raw_args[i] {
+                        if branch_name == "case" && !branch_args.is_empty() {
+                            let case_val = self.eval_expr(branch_args[0].value(), ctx, rule_label)?;
+                            if case_val.to_str() == switch_str {
+                                if branch_args.len() >= 2 {
+                                    return self.eval_expr(branch_args[1].value(), ctx, rule_label);
+                                }
+                                return Ok(RuntimeValue::Undef);
+                            }
+                            i += 1;
+                            continue;
+                        }
+                        if branch_name == "default" && !branch_args.is_empty() {
+                            return self.eval_expr(branch_args[0].value(), ctx, rule_label);
+                        }
+                    }
+                    return self.eval_expr(raw_args[i].value(), ctx, rule_label);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "case" => {
+                if raw_args.len() >= 2 {
+                    let _ = self.eval_expr(raw_args[0].value(), ctx, rule_label)?;
+                    return self.eval_expr(raw_args[1].value(), ctx, rule_label);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "default" => {
+                if let Some(raw) = raw_args.first() {
+                    return self.eval_expr(raw.value(), ctx, rule_label);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "endswitch" | "endcase" => {
+                Ok(RuntimeValue::Undef)
+            }
             _ => {
                 eprintln!(
                     "warning: unknown helper '{}' in rule '{}' — returning undef",
@@ -1979,5 +2112,218 @@ ChildB:
         // "" is nonempty? Actually scalar("") returns Scalar("") which IS empty
         // coalesce_nonempty skips empty strings, picks "42"
         assert_eq!(arr[0].as_str().unwrap(), "42");
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // Conditional flow tests — if/elseif/else/switch/case/default
+    // ═══════════════════════════════════════════════════════════
+
+    #[test]
+    fn cond_if_basic_then_branch() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(if(is_nonempty(val), scalar("found"), scalar("empty"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "found");
+    }
+
+    #[test]
+    fn cond_if_falsy_falls_through_to_else() {
+        // Undef variable → condition falsy → else branch
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ E { return(if(is_defined(val), scalar("defined"), scalar("undefined"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        // val declared but never assigned → undef → is_defined false → "undefined"
+        assert_eq!(arr[0].as_str().unwrap(), "undefined");
+    }
+
+    #[test]
+    fn cond_if_three_arg_else_fallback() {
+        // if(cond, then, else) — 3 positional args
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(if(is_defined(val), entry_text(), scalar("fallback"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        // val IS defined (we assigned it in LE), so then-branch returns entry_text
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn cond_if_with_elseif_chain() {
+        // 0 is falsy, 1 is truthy — tests if/elseif chain with literal conditions
+        let grammar = r#"Top::
+ /(\w+)/
+ E { return(if(0, scalar("then"),
+               elseif(1, scalar("elseif_ok")),
+               scalar("none"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        // 0 is falsy → skip then. 1 is truthy → "elseif_ok"
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "elseif_ok");
+    }
+
+    #[test]
+    fn cond_if_all_falsy_falls_to_else() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, a); declare(scalar, b); declare(scalar, c) }
+ E { return(if(is_nonempty(a), scalar("a"),
+               elseif(is_nonempty(b), scalar("b")),
+               else(scalar("none")))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        // None of a, b assigned → all empty/undef → "none"
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "none");
+    }
+
+    #[test]
+    fn cond_switch_basic_case_match() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(switch(scalar(val),
+               case(scalar("hello"), scalar("greeting")),
+               case(scalar("world"), scalar("planet")),
+               default(scalar("unknown")))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "greeting");
+    }
+
+    #[test]
+    fn cond_switch_no_match_falls_to_default() {
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(switch(scalar(val),
+               case(scalar("red"), scalar("color")),
+               default(scalar("not_a_color")))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "not_a_color");
+    }
+
+    #[test]
+    fn cond_switch_multiple_cases() {
+        let grammar = r#"Top::
+ /(\d+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(switch(scalar(val),
+               case(scalar("1"), scalar("one")),
+               case(scalar("2"), scalar("two")),
+               case(scalar("3"), scalar("three")),
+               default(scalar("many")))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("3").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "three");
+    }
+
+    #[test]
+    fn cond_endif_and_endswitch_are_noops() {
+        let grammar = r#"Top::
+ /(\w+)/
+ E { endif(); endswitch(); endcase(); return(scalar("ok")) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "ok");
+    }
+
+    #[test]
+    fn cond_if_with_lazy_evaluation_side_effects() {
+        // The else branch contains exit_now(1) — if lazy evaluation works,
+        // it should NOT be called when condition is truthy.
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(if(is_defined(val), entry_text(), exit_now(1))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        // val IS defined, so else branch (exit_now) should NOT execute
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn cond_if_lazy_evaluation_elseif() {
+        // elseif branch contains exit_now(1) — if lazy evaluation works,
+        // it should NOT be called when the if-condition is truthy.
+        let grammar = r#"Top::
+ /(\w+)/
+ I { declare(scalar, val) }
+ LE { assign(scalar(val), entry_group(1)) }
+ E { return(if(is_defined(val), scalar("ok"),
+               elseif(is_empty(val), exit_now(1)),
+               scalar("fallback"))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        // val IS defined, so elseif branch should NOT execute
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "ok");
     }
 }

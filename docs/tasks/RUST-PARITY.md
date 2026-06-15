@@ -45,10 +45,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `pending`
 
 - ID: `RUST-PARITY.2`
-  Status: `pending`
+  Status: `done`
   Goal: Implement conditional control flow — if/elseif/else and switch/case/default
   Acceptance: if/elseif/else/endif and switch/case/default/endswitch interpreters working in Rust runtime; regression tests; all existing tests pass
-  Verification: `pending`
+  Verification: Done — 2026-06-16: 177/177 PASS (86 core + 8 types + 67 engine + 16 integration). 12 new tests: 4 if/elseif/else, 3 switch/case/default, 2 lazy evaluation, 2 no-op markers, 1 combined. Lazy evaluation via `call_helper_lazy` + `eval_expr` intercept for conditional flow calls.
   Commit: `pending`
 
 - ID: `RUST-PARITY.3`
@@ -104,12 +104,13 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-PARITY.2` | `pending` | Conditional flow is the biggest missing feature gap — if/elseif/else/switch/case/default |
+| 1 | `RUST-PARITY.3` | `pending` | BACKTRACK/IBACKTRACK cursor save/restore — next biggest feature gap after conditionals |
 
 ## Decisions
 
 - `2026-06-16`: Created task tree. Conditional flow (if/switch) is priority after inventory because it's the largest feature gap affecting the most specs. Code-gen emitter is last because interpreted mode works and emitter needs stable HandlerIR shapes.
-- `2026-06-16` (`.1`): Inventory complete. 6 gap categories identified: (1) conditional flow, (2) BACKTRACK/IBACKTRACK, (3) self-hosting, (4) strict_syntax, (5) ~27 remaining helpers, (6) code-gen emitter, (7) test corpus breadth. Conditional flow is priority — it's the only feature gap that blocks real .spec authoring patterns.
+- `2026-06-16` (`.1`): Inventory complete. 6 gap categories identified.
+- `2026-06-16` (`.2`): Conditional flow landed. Lazy evaluation required modifying `eval_expr` to intercept `if`/`switch`/`elseif`/`else`/`case`/`default` before eager arg evaluation. New method `call_helper_lazy` added. 12 new tests. 177/177 PASS.
 
 ## Open Questions
 

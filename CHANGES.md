@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.2: Conditional flow — if/elseif/else/switch/case/default in Rust
+
+### Implementation
+- Added `if(cond, then)`, `if(cond, then, else)`, `if(cond, then, elseif(cond2, then2), else(fallback))` to Rust runtime
+- Added `switch(expr, case(v1, b1), case(v2, b2), default(body))` to Rust runtime
+- Added `elseif`, `else`, `endif`, `case`, `default`, `endswitch`, `endcase` standalone handlers
+- **Lazy evaluation**: `eval_expr` intercepts conditional flow calls before eager arg evaluation; new `call_helper_lazy` method passes raw AST nodes to handlers
+- Branch bodies evaluated only when their condition matches — prevents side effects from firing in non-taken branches
+- 12 new integration tests: 4 if/elseif/else, 3 switch/case/default, 2 lazy evaluation, 2 no-op markers, 1 combined
+- 177/177 PASS (86 core + 8 types + 67 engine + 16 integration), cargo clippy clean
+
 ## 2026-06-16 — RUST-PARITY.1: Gap inventory — Rust variant vs Perl reference
 ### Analysis
 - Full audit of Rust variant (`engine.rs:1984`, `helpers.rs:470`, `compiler.rs`, `parser.rs`, `validation.rs`) against Perl reference lowering owners
