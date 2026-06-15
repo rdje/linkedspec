@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `d07ee79` — "REPO-HYGIENE.1 — .gitignore: untrack tool artifacts + MEMORY.md update"
+- latest_commit: `40a115a` — "REPO-HYGIENE.1 — hash-sync: MEMORY.md post-commit refresh"
 - active_work_unit: *(none)* — RUST-EDGE-SEMANTICS tree completed and closed
 - next_action: PNT idle — no active task trees. Review ROADMAP_V2.md for next direction.
 - in_flight_uncommitted: *(none)* — working tree clean, handoff-ready
