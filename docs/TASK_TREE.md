@@ -27,7 +27,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `RUST-EDGE-SEMANTICS` | `active` | `Phase 9 — Rust variant (correctness fix)` | `.1` (audit gap vs Perl) | [docs/tasks/RUST-EDGE-SEMANTICS.md](docs/tasks/RUST-EDGE-SEMANTICS.md) |
+| `RUST-EDGE-SEMANTICS` | `active` | `Phase 9 — Rust variant (correctness fix)` | `.2` (rewrite compiler.rs — build regex_patterns from child rule dependency refs) | [docs/tasks/RUST-EDGE-SEMANTICS.md](docs/tasks/RUST-EDGE-SEMANTICS.md) |
 
 ## Proposed Task Trees
 

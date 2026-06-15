@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-EDGE-SEMANTICS.1: Audit — Rust edge dispatch gap vs Perl dependency_regex_map
+### Audit findings
+- **Rust compiler.rs:52-55**: `regex_patterns` populated only from `BodyElementKind::Regex` — edge-only rules have empty alternation
+- **Rust compiler.rs:57-91**: `AcodeEntry.regex_idx` set to `current_regex_idx - 1` (preceding parent regex) instead of child-regex alternation position
+- **Rust engine.rs:77-81**: Empty alternation built for edge-only rules → never matches → no dispatch
+- **Rust engine.rs:169-190**: ACODE dispatch compares `entry.regex_idx == m.index` — parent-regex index against alternation position (fundamentally wrong model)
+- **Perl pipeline** traced end-to-end (6 steps): BootstrapSpec/Core.pm:129-157 → RuleIR.pm:231-236 → EmitContext.pm:517-529 → Compiler.pm:345-443 → HandlerVariantEmitter.pm:355-380
+- **Root cause**: Perl builds `dependency_regex_map` from child rule regexes via `dependency_refs[{label, idx}]`; Rust uses only explicit parent `/regex/` entries with "preceding regex" association
+- **Delta table**: 5 rows documented (regex source, alternation index semantics, `-> Child[N]` semantics, edge-only rules, mixed rules)
+- Knowledge card `docs/knowledge/rust-edge-semantics-bug.md` pre-existing and aligned
+- No code changes — audit/documentation only
+
 ## 2026-06-15 — RGX-BRANCH-TRACKING.1/.2: Combined regex + matched_branch_number
 ### Regex engine (.1/.2)
 - Replaced manual alternative iteration with rgx's native branch tracking
