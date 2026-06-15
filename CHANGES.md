@@ -21198,3 +21198,10 @@ Accepted punctuation-light attached branch aliases on the method-like control-fl
 - Updated PHASE9-RUST-VARIANT task-tree: frontier expanded, .5.1 marked done
 - Updated MEMORY.md current state
 - cargo test: 133/133 pass (79 core + 8 types + 42 runtime + 4 integration)
+
+## 2026-06-15 — RUST-EDGE-SEMANTICS tree created; brainstorm rounds 1-3 captured
+- Created RUST-EDGE-SEMANTICS task tree (4 leaves) to fix broken -> edge dispatch in Rust variant
+- Captured .spec format brainstorm rounds 1-3 in docs/knowledge/spec-format-brainstorm-rounds-1-3.md
+- Captured Rust edge semantics bug analysis in docs/knowledge/rust-edge-semantics-bug.md
+- Added RUST-EDGE-SEMANTICS to Active Task Trees in TASK_TREE.md
+- Handoff-ready: MEMORY.md updated, knowledge cards written

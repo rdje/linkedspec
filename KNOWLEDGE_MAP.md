@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **24** facts · **115** question keys.
+> **26** facts · **125** question keys.
 
 ## Questions → fact
 
@@ -24,6 +24,7 @@
 - "how do I run CI / the regression gate" -> [hosted-ci-disabled-run-local-gate](docs/knowledge/hosted-ci-disabled-run-local-gate.md) · 2026-06-05 · reverify: `grep -n 'workflow_dispatch' .github/workflows/ci.yml`
 - "how do backends stay in lockstep" -> [language-agnostic-backend-vision](docs/knowledge/language-agnostic-backend-vision.md) · 2026-06-12 · reverify: `grep -n 'backend\|portability' ROADMAP_V2.md ARCHITECTURE_STATE.md | head -10`
 - "how do variant builders work" -> [handler-ir-design](docs/knowledge/handler-ir-design.md) · 2026-06-14 · reverify: `grep -n 'kind =>' perl/LinkedSpec/HandlerVariantEmitter.pm | head -15`
+- "how does -> edge dispatch work in Perl" -> [rust-edge-semantics-bug](docs/knowledge/rust-edge-semantics-bug.md) · 2026-06-15 · reverify: `cd rust && cargo test; grep -n dependency_regex_map perl/LinkedSpec/Compiler.pm`
 - "how does ActionIR lowering work" -> [actionir-lowering-stack](docs/knowledge/actionir-lowering-stack.md) · 2026-06-12 · reverify: `ls perl/LinkedSpec/ActionIR/*.pm | wc -l`
 - "how does EmitContext dispatch into ActionIR owners" -> [emitcontext-owner-registry](docs/knowledge/emitcontext-owner-registry.md) · 2026-06-12 · reverify: `grep -c '_actionir_owner_package\|owner_pkgs' perl/LinkedSpec/RuleIR/EmitContext.pm`
 - "how does HandlerIR enable multi-backend portability" -> [handler-ir-design](docs/knowledge/handler-ir-design.md) · 2026-06-14 · reverify: `grep -n 'kind =>' perl/LinkedSpec/HandlerVariantEmitter.pm | head -15`
@@ -47,6 +48,7 @@
 - "how many handler variant builders are in SpecEntry" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `|`
 - "how many specs use convention-based accumulators" -> [accumulator-convention-healthy](docs/knowledge/accumulator-convention-healthy.md) · 2026-06-12 · reverify: `grep -c 'push(Child)' specs/*.spec; grep -c 'push_value' specs/*.spec`
 - "how should .spec language changes land" -> [spec-spec-self-hosted-grammar](docs/knowledge/spec-spec-self-hosted-grammar.md) · 2026-06-05 · reverify: `ls specs/spec.spec`
+- "how should the Rust compiler build regex alternations" -> [rust-edge-semantics-bug](docs/knowledge/rust-edge-semantics-bug.md) · 2026-06-15 · reverify: `cd rust && cargo test; grep -n dependency_regex_map perl/LinkedSpec/Compiler.pm`
 - "is ActionRewriter a live module in linkedspec" -> [actionrewriter-removed-phase1](docs/knowledge/actionrewriter-removed-phase1.md) · 2026-06-05 · reverify: `! test -f perl/LinkedSpec/ActionRewriter.pm && grep -q rewrite_action_code_for_compat perl/LinkedSpec/RuleIR/EmitContext.pm`
 - "is GitHub Actions CI running for linkedspec" -> [hosted-ci-disabled-run-local-gate](docs/knowledge/hosted-ci-disabled-run-local-gate.md) · 2026-06-05 · reverify: `grep -n 'workflow_dispatch' .github/workflows/ci.yml`
 - "is LinkedSpec still a plugin-hosting framework" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
@@ -64,12 +66,15 @@
 - "what are the HandlerIR node kinds" -> [handler-ir-design](docs/knowledge/handler-ir-design.md) · 2026-06-14 · reverify: `grep -n 'kind =>' perl/LinkedSpec/HandlerVariantEmitter.pm | head -15`
 - "what are the fields of a HandlerIR node" -> [handler-ir-design](docs/knowledge/handler-ir-design.md) · 2026-06-14 · reverify: `grep -n 'kind =>' perl/LinkedSpec/HandlerVariantEmitter.pm | head -15`
 - "what are the verbosity levels" -> [trace-verbosity-and-formatting](docs/knowledge/trace-verbosity-and-formatting.md) · 2026-06-12 · reverify: `grep -n 'DUMP_NONE\|DUMP_DEBUG\|configure_trace' perl/LinkedSpec.pm`
+- "what arithmetic function forms were settled" -> [spec-format-brainstorm-rounds-1-3](docs/knowledge/spec-format-brainstorm-rounds-1-3.md) · 2026-06-15 · reverify: `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
 - "what backends will LinkedSpec support" -> [language-agnostic-backend-vision](docs/knowledge/language-agnostic-backend-vision.md) · 2026-06-12 · reverify: `grep -n 'backend\|portability' ROADMAP_V2.md ARCHITECTURE_STATE.md | head -10`
+- "what control flow syntax was agreed" -> [spec-format-brainstorm-rounds-1-3](docs/knowledge/spec-format-brainstorm-rounds-1-3.md) · 2026-06-15 · reverify: `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
 - "what did the accumulator audit find" -> [accumulator-convention-healthy](docs/knowledge/accumulator-convention-healthy.md) · 2026-06-12 · reverify: `grep -c 'push(Child)' specs/*.spec; grep -c 'push_value' specs/*.spec`
 - "what does SpecEntry eval" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `|`
 - "what does green CI mean here" -> [hosted-ci-disabled-run-local-gate](docs/knowledge/hosted-ci-disabled-run-local-gate.md) · 2026-06-05 · reverify: `grep -n 'workflow_dispatch' .github/workflows/ci.yml`
 - "what does phase0_regression.t cover" -> [phase0-regression-structure](docs/knowledge/phase0-regression-structure.md) · 2026-06-12 · reverify: `wc -l t/phase0_regression.t`
 - "what does the phase0 regression gate enforce about specs" -> [phase0-all-target-actionir-ready-invariant](docs/knowledge/phase0-all-target-actionir-ready-invariant.md) · 2026-06-05 · reverify: `grep -n language_agnostic_ready_ratio t/phase0_regression.t`
+- "what format changes were brainstormed for .spec files" -> [spec-format-brainstorm-rounds-1-3](docs/knowledge/spec-format-brainstorm-rounds-1-3.md) · 2026-06-15 · reverify: `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
 - "what happened with the medium-term alias retirement" -> [medium-term-alias-retirement-deferred](docs/knowledge/medium-term-alias-retirement-deferred.md) · 2026-06-12 · reverify: `grep -c 'return_a(' t/phase0_regression.t`
 - "what helpers are available in the DSL" -> [method-like-dsl-migration-status](docs/knowledge/method-like-dsl-migration-status.md) · 2026-06-12 · reverify: `grep -c 'compatibility_surface.*0' docs/tasks/METHOD-LIKE-DSL-MIGRATION.md`
 - "what is BootstrapSpec::Core vs spec.spec" -> [bootstrapspec-vs-spec-spec-dual-path](docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md) · 2026-06-13 · reverify: `grep -n '_build_spec_spec_parser\|run_bootstrap_parse' perl/LinkedSpec/BootstrapSpec.pm`
@@ -78,6 +83,7 @@
 - "what is OwnerDispatch and why do all owners use it" -> [ownerdispatch-shared-seam](docs/knowledge/ownerdispatch-shared-seam.md) · 2026-06-12 · reverify: `grep -l 'OwnerDispatch' perl/LinkedSpec/*.pm perl/LinkedSpec/ActionIR/*.pm | wc -l`
 - "what is RuntimeContext and why is it important" -> [runtimecontext-boundary](docs/knowledge/runtimecontext-boundary.md) · 2026-06-12 · reverify: `grep -l 'RuntimeContext' perl/LinkedSpec/*.pm perl/LinkedSpec/RuleIR/*.pm | wc -l`
 - "what is deferred in the DSL migration" -> [method-like-dsl-migration-status](docs/knowledge/method-like-dsl-migration-status.md) · 2026-06-12 · reverify: `grep -c 'compatibility_surface.*0' docs/tasks/METHOD-LIKE-DSL-MIGRATION.md`
+- "what is dependency_regex_map" -> [rust-edge-semantics-bug](docs/knowledge/rust-edge-semantics-bug.md) · 2026-06-15 · reverify: `cd rust && cargo test; grep -n dependency_regex_map perl/LinkedSpec/Compiler.pm`
 - "what is language_agnostic_ready_ratio and what value is required" -> [phase0-all-target-actionir-ready-invariant](docs/knowledge/phase0-all-target-actionir-ready-invariant.md) · 2026-06-05 · reverify: `grep -n language_agnostic_ready_ratio t/phase0_regression.t`
 - "what is specs/spec.spec" -> [spec-spec-self-hosted-grammar](docs/knowledge/spec-spec-self-hosted-grammar.md) · 2026-06-05 · reverify: `ls specs/spec.spec`
 - "what is the AND++LX hang" -> [andplusplus-lx-parser-hang](docs/knowledge/andplusplus-lx-parser-hang.md) · 2026-06-05 · reverify: `grep -n 'AND++LX' docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`
@@ -88,17 +94,21 @@
 - "what is the biggest portability blocker" -> [specentry-backend-portability-ceiling](docs/knowledge/specentry-backend-portability-ceiling.md) · 2026-06-12 · reverify: `grep -n 'backend-portability ceiling\|eval' ARCHITECTURE_STATE.md | head -3`
 - "what is the difference between => child and -> child" -> [blind-call-rule-label-contract](docs/knowledge/blind-call-rule-label-contract.md) · 2026-06-12 · reverify: `grep -n 'blind.call.*mode.driven' ROADMAP_V2.md`
 - "what is the difference between PrimitiveBasicRules and LegacyRules" -> [scanner-rule-family-architecture](docs/knowledge/scanner-rule-family-architecture.md) · 2026-06-12 · reverify: `ls perl/LinkedSpec/ActionIR/Scanner/*.pm`
+- "what is the future direction for declare assign push set_key" -> [spec-format-brainstorm-rounds-1-3](docs/knowledge/spec-format-brainstorm-rounds-1-3.md) · 2026-06-15 · reverify: `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
 - "what is the language-agnostic architecture vision" -> [language-agnostic-backend-vision](docs/knowledge/language-agnostic-backend-vision.md) · 2026-06-12 · reverify: `grep -n 'backend\|portability' ROADMAP_V2.md ARCHITECTURE_STATE.md | head -10`
 - "what is the method-like DSL migration status" -> [method-like-dsl-migration-status](docs/knowledge/method-like-dsl-migration-status.md) · 2026-06-12 · reverify: `grep -c 'compatibility_surface.*0' docs/tasks/METHOD-LIKE-DSL-MIGRATION.md`
 - "what is the plugin modernization status" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
 - "what is the practical compile/runtime spine" -> [linkedspec-pm-is-thin-facade](docs/knowledge/linkedspec-pm-is-thin-facade.md) · 2026-06-05 · reverify: `wc -l perl/LinkedSpec.pm; test -f perl/LinkedSpec/OwnerDispatch.pm`
 - "what is the role of .spec files across backends" -> [language-agnostic-backend-vision](docs/knowledge/language-agnostic-backend-vision.md) · 2026-06-12 · reverify: `grep -n 'backend\|portability' ROADMAP_V2.md ARCHITECTURE_STATE.md | head -10`
 - "what is the scanner rule family split" -> [scanner-rule-family-architecture](docs/knowledge/scanner-rule-family-architecture.md) · 2026-06-12 · reverify: `ls perl/LinkedSpec/ActionIR/Scanner/*.pm`
+- "what is the status of -> edge semantics" -> [spec-format-brainstorm-rounds-1-3](docs/knowledge/spec-format-brainstorm-rounds-1-3.md) · 2026-06-15 · reverify: `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
 - "what is the test migration problem" -> [medium-term-alias-retirement-deferred](docs/knowledge/medium-term-alias-retirement-deferred.md) · 2026-06-12 · reverify: `grep -c 'return_a(' t/phase0_regression.t`
+- "what is wrong with the Rust -> edge implementation" -> [rust-edge-semantics-bug](docs/knowledge/rust-edge-semantics-bug.md) · 2026-06-15 · reverify: `cd rust && cargo test; grep -n dependency_regex_map perl/LinkedSpec/Compiler.pm`
 - "what must every shipped .spec satisfy" -> [phase0-all-target-actionir-ready-invariant](docs/knowledge/phase0-all-target-actionir-ready-invariant.md) · 2026-06-05 · reverify: `grep -n language_agnostic_ready_ratio t/phase0_regression.t`
 - "what owns compiled_rule_order and redefined_rule_labels" -> [compilerstate-internal-model](docs/knowledge/compilerstate-internal-model.md) · 2026-06-12 · reverify: `test -f perl/LinkedSpec/CompilerState.pm && grep -l CompilerState perl/LinkedSpec/Compiler.pm perl/LinkedSpec/Validation.pm`
 - "what owns parser-source chunk capture" -> [runtimecontext-boundary](docs/knowledge/runtimecontext-boundary.md) · 2026-06-12 · reverify: `grep -l 'RuntimeContext' perl/LinkedSpec/*.pm perl/LinkedSpec/RuleIR/*.pm | wc -l`
 - "what rule label should I use for blind-call" -> [blind-call-rule-label-contract](docs/knowledge/blind-call-rule-label-contract.md) · 2026-06-12 · reverify: `grep -n 'blind.call.*mode.driven' ROADMAP_V2.md`
+- "what was decided about function composability" -> [spec-format-brainstorm-rounds-1-3](docs/knowledge/spec-format-brainstorm-rounds-1-3.md) · 2026-06-15 · reverify: `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
 - "what would it take to port LinkedSpec to another language" -> [specentry-backend-portability-ceiling](docs/knowledge/specentry-backend-portability-ceiling.md) · 2026-06-12 · reverify: `grep -n 'backend-portability ceiling\|eval' ARCHITECTURE_STATE.md | head -3`
 - "where are ActionIR owner packages registered" -> [emitcontext-owner-registry](docs/knowledge/emitcontext-owner-registry.md) · 2026-06-12 · reverify: `grep -c '_actionir_owner_package\|owner_pkgs' perl/LinkedSpec/RuleIR/EmitContext.pm`
 - "where did LinkedSpec::ActionRewriter go" -> [actionrewriter-removed-phase1](docs/knowledge/actionrewriter-removed-phase1.md) · 2026-06-05 · reverify: `! test -f perl/LinkedSpec/ActionRewriter.pm && grep -q rewrite_action_code_for_compat perl/LinkedSpec/RuleIR/EmitContext.pm`
@@ -296,6 +306,15 @@ _RuntimeContext is one of the cleanest architectural boundaries; owns shared run
 - **reverify:** `grep -l 'RuntimeContext' perl/LinkedSpec/*.pm perl/LinkedSpec/RuleIR/*.pm | wc -l`
 - **source:** [`docs/knowledge/runtimecontext-boundary.md`](docs/knowledge/runtimecontext-boundary.md)
 
+### rust-edge-semantics-bug
+_Rust -> edge dispatch is broken — associates edges with parent regexes instead of building dependency_regex_map from child rule regexes like Perl_
+
+- **answers:** how does -> edge dispatch work in Perl | what is wrong with the Rust -> edge implementation | how should the Rust compiler build regex alternations | what is dependency_regex_map
+- **date:** 2026-06-15 · **status:** confirmed
+- **evidence:** `Full Perl pipeline analysis 2026-06-15: BootstrapSpec::Core.pm, Compiler.pm build_dependency_regex_map, HandlerVariantEmitter.pm _linkedre_or_expr and _emit_default_handler. Rust compiler.rs associates edges with current_regex_idx-1 (parent regexes) instead of building alternation from child regexes.`
+- **reverify:** `cd rust && cargo test; grep -n dependency_regex_map perl/LinkedSpec/Compiler.pm`
+- **source:** [`docs/knowledge/rust-edge-semantics-bug.md`](docs/knowledge/rust-edge-semantics-bug.md)
+
 ### scanner-rule-family-architecture
 _Scanner rule families are deliberately split into PrimitiveBasicRules, PrimitivePipelineRules, FlowRules, and LegacyRules by complexity and lifecycle_
 
@@ -304,6 +323,15 @@ _Scanner rule families are deliberately split into PrimitiveBasicRules, Primitiv
 - **evidence:** `perl/LinkedSpec/ActionIR/Scanner/ contains 6 files; ScannerCore dispatches to all 4 rule families via a central registry`
 - **reverify:** `ls perl/LinkedSpec/ActionIR/Scanner/*.pm`
 - **source:** [`docs/knowledge/scanner-rule-family-architecture.md`](docs/knowledge/scanner-rule-family-architecture.md)
+
+### spec-format-brainstorm-rounds-1-3
+_Brainstorm outcomes Rounds 1–3 for .spec format evolution — variables, types, control flow, edge syntax, arithmetic (no decisions finalized)_
+
+- **answers:** what format changes were brainstormed for .spec files | what is the future direction for declare assign push set_key | what was decided about function composability | what control flow syntax was agreed | what arithmetic function forms were settled | what is the status of -> edge semantics
+- **date:** 2026-06-15 · **status:** brainstorming
+- **evidence:** `Conversation transcript 2026-06-15. Three rounds of brainstorming completed. No code changes made. No decisions finalized.`
+- **reverify:** `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
+- **source:** [`docs/knowledge/spec-format-brainstorm-rounds-1-3.md`](docs/knowledge/spec-format-brainstorm-rounds-1-3.md)
 
 ### spec-spec-self-hosted-grammar
 _specs/spec.spec is the self-hosted .spec grammar and the preferred surface for .spec evolution_

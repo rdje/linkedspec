@@ -17,10 +17,10 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `396e334` — "Feat: PHASE9-RUST-VARIANT.6/.7/.8/.9 — integration, corpus, code-gen deferral, docs"
-- active_work_unit: none (PNT idle — all trees complete)
-- next_action: none (PNT idle)
-- in_flight_uncommitted: `.10.1` finalization ready to commit
+- latest_commit: `7898c40` — "feat: PHASE9-RUST-VARIANT.10 — finalization: tree closed"
+- active_work_unit: `RUST-EDGE-SEMANTICS`  →  frontier leaf: `.1` (pending — audit gap vs Perl)
+- next_action: PNT `.1` — inventory every Rust code path that builds regex patterns and dispatches acode entries; document delta vs Perl
+- in_flight_uncommitted: task-tree created, knowledge cards written, TASK_TREE.md updated
 - blockers: none
 - blockers: none
 - blockers: none
