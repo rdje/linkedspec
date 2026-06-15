@@ -23,11 +23,8 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-## Active Task Trees
-
-| Tree | Status | Roadmap lane | Current frontier | File |
-| --- | --- | --- | --- | --- |
-| *(none)* | | | | |
+| `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.1` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
+| `MDBOOK-VARIANT-AGNOSTIC` | `active` | `Overall roadmap — documentation and book sync` | `MDBOOK-VARIANT-AGNOSTIC.1` | [docs/tasks/MDBOOK-VARIANT-AGNOSTIC.md](docs/tasks/MDBOOK-VARIANT-AGNOSTIC.md) |
 
 ## Proposed Task Trees
 

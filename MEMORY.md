@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `f1ca674` — "REPO-HYGIENE.1 — hash-sync: MEMORY.md post-commit refresh"
-- active_work_unit: *(none)* — REPO-HYGIENE tree completed and closed
-- next_action: PNT idle — no active task trees. Review ROADMAP_V2.md for next direction.
-- in_flight_uncommitted: *(none)* — working tree clean, handoff-ready
+- latest_commit: `94f40af` — "REPO-HYGIENE.1 — hash-sync: MEMORY.md post-commit refresh"
+- active_work_unit: `RUST-PARITY.2` (pending) — implement conditional control flow: if/elseif/else/switch/case/default
+- next_action: Implement conditional flow interpreter in Rust engine.rs — if/elseif/else/endif, switch/case/default/endswitch
+- in_flight_uncommitted: RUST-PARITY.1 inventory complete — ready to commit
 - blockers: none

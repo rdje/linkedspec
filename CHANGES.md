@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.1: Gap inventory — Rust variant vs Perl reference
+### Analysis
+- Full audit of Rust variant (`engine.rs:1984`, `helpers.rs:470`, `compiler.rs`, `parser.rs`, `validation.rs`) against Perl reference lowering owners
+- 6 gap categories identified:
+  1. Conditional control flow (if/elseif/else/switch/case/default) — largest feature gap
+  2. BACKTRACK/IBACKTRACK cursor save/restore
+  3. Self-hosting (spec.spec) — Rust cannot parse itself
+  4. strict_syntax validation mode
+  5. ~27 remaining helpers (capture/mark extensions, entry/match named, input boundaries, compat aliases)
+  6. Code-gen emitter (interpreter-only, no HandlerIR→Rust source)
+- 84/100+ helpers already implemented in Rust
+- New task trees RUST-PARITY (9 leaves) and MDBOOK-VARIANT-AGNOSTIC (7 leaves) created
+- TASK_TREE.md duplicate header fixed
+
 ## 2026-06-16 — REPO-HYGIENE.1: .gitignore and untrack tool artifacts
 ### Repository maintenance
 - Added `.gitignore` entries for `*.swp`, `.DS_Store`, `git_message_brief.txt`
