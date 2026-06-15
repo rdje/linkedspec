@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `b60d209` — "Feat: RGX-BRANCH-TRACKING.1/.2 — combined regex + matched_branch_number"
+- latest_commit: `71dc8ca` — "Docs: RGX-BRANCH-TRACKING.3 — finalization: tree closed"
 - active_work_unit: none (PNT idle — all trees complete)
 - next_action: none (PNT idle)
 - in_flight_uncommitted: none
