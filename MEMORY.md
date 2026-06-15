@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` — "Docs: RGX-ADOPTION.3 — finalization: live docs, RUST-FUNCTIONAL-PARITY.2.4→done, tree closed"
+- latest_commit: `57d0e24` — "Docs: RGX-ADOPTION.3 — finalization: live docs, RUST-FUNCTIONAL-PARITY.2.4→done, tree closed"
 - active_work_unit: none (PNT idle — all trees complete, no active frontier)
 - next_action: none (PNT idle)
 - in_flight_uncommitted: none
