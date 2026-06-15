@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `db92536` — "Feat: PHASE9-RUST-VARIANT.5.1 — declaration and array helpers + focused tests"
+- latest_commit: `acbd56b` — "Docs: post-commit hash fix — MEMORY.md latest_commit → db92536"
 - active_work_unit: `PHASE9-RUST-VARIANT`  →  frontier leaf: `.5.2` (pending)
 - next_action: PNT `.5.2` — scalar and capture helpers + focused tests
 - in_flight_uncommitted: `.5.1` done (7 new helper tests, 133/133 pass), ready to commit
