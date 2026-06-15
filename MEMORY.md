@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `94f40af` — "REPO-HYGIENE.1 — hash-sync: MEMORY.md post-commit refresh"
+- latest_commit: `c2f1710` — "RUST-PARITY.1 — gap inventory: Rust variant vs Perl reference (6 categories)"
 - active_work_unit: `RUST-PARITY.2` (pending) — implement conditional control flow: if/elseif/else/switch/case/default
 - next_action: Implement conditional flow interpreter in Rust engine.rs — if/elseif/else/endif, switch/case/default/endswitch
 - in_flight_uncommitted: RUST-PARITY.1 inventory complete — ready to commit
