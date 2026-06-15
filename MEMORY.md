@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `ba166f4` — "REPO-HYGIENE.1 — hash-sync: MEMORY.md post-commit refresh"
+- latest_commit: `29b91bc` — "RUST-PARITY.2 — conditional flow: if/elseif/else/switch/case/default in Rust runtime"
 - active_work_unit: `RUST-PARITY.3` (pending) — implement BACKTRACK/IBACKTRACK cursor save/restore
 - next_action: Implement BACKTRACK cursor save and IBACKTRACK cursor restore in Rust runtime
 - in_flight_uncommitted: RUST-PARITY.2 conditional flow complete — ready to commit
