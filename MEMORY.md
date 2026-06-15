@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `9ede558` — "REPO-HYGIENE.1 — hash-sync: MEMORY.md post-commit refresh"
-- active_work_unit: *(none)* — RUST-EDGE-SEMANTICS tree completed and closed
+- latest_commit: `f1ca674` — "REPO-HYGIENE.1 — hash-sync: MEMORY.md post-commit refresh"
+- active_work_unit: *(none)* — REPO-HYGIENE tree completed and closed
 - next_action: PNT idle — no active task trees. Review ROADMAP_V2.md for next direction.
 - in_flight_uncommitted: *(none)* — working tree clean, handoff-ready
 - blockers: none
