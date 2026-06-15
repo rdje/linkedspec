@@ -1,1 +1,6 @@
 .claude/settings.local.json
+
+# Tool artifacts — never track
+*.swp
+.DS_Store
+git_message_brief.txt

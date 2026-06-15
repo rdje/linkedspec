@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — REPO-HYGIENE.1: .gitignore and untrack tool artifacts
+### Repository maintenance
+- Added `.gitignore` entries for `*.swp`, `.DS_Store`, `git_message_brief.txt`
+- Untracked `perl/.PPlugin.pm.swp` (accidentally committed Vim swap file) and `git_message_brief.txt` (commit workflow scratch file) from git index
+- MEMORY.md latest_commit updated to `1c72af4`
+
 ## 2026-06-15 — RUST-EDGE-SEMANTICS.3: Regression tests for edge dispatch
 ### Tests added
 - 7 new integration tests: edge-only dispatch, mixed regex+edge, self-recursive compiler output, grouped targets, Child[N] entrypoint, lifecycle with edge-only, self-recursive edge-only

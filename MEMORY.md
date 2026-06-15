@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `01ee271` — "RUST-EDGE-SEMANTICS — close-out: compiler + MEMORY.md refresh"
+- latest_commit: `1c72af4` — "RUST-EDGE-SEMANTICS.4 — hash-sync: MEMORY.md post-close-out refresh"
 - active_work_unit: *(none)* — RUST-EDGE-SEMANTICS tree completed and closed
 - next_action: PNT idle — no active task trees. Review ROADMAP_V2.md for next direction.
 - in_flight_uncommitted: *(none)* — working tree clean, handoff-ready
