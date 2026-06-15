@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-EDGE-SEMANTICS.3: Regression tests for edge dispatch
+### Tests added
+- 7 new integration tests: edge-only dispatch, mixed regex+edge, self-recursive compiler output, grouped targets, Child[N] entrypoint, lifecycle with edge-only, self-recursive edge-only
+- Edge-only dispatch verified end-to-end: top rule with zero own regexes dispatches to Greeting/Farewell children correctly
+- Self-recursive fix: `-> same_rule[N]` entries point to parent regex positions directly (no duplication)
+- 166/166 PASS (86 core + 8 types + 56 engine + 16 integration)
+
 ## 2026-06-15 — RUST-EDGE-SEMANTICS.2: Compiler rewrite — build regex_patterns from child rule dependency refs
 ### Implementation
 - Added `has_parent_regex: bool` to `AcodeEntry` (types.rs) with `#[serde(default)]` backward compat

@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `e7416b3` — "RUST-EDGE-SEMANTICS.2 — compiler: build regex_patterns from child rule dependency refs"
-- active_work_unit: `RUST-EDGE-SEMANTICS`  →  frontier leaf: `.3` (pending — add regression tests for edge dispatch)
-- next_action: PNT `.3` — add regression tests: (a) rule with only `->` edges dispatches correctly, (b) rule with mixed `/regex/` and `->` edges, (c) self-recursive rule with `-> same_rule[N]`, (d) `-> A | B { code }` grouped targets
-- in_flight_uncommitted: RUST-EDGE-SEMANTICS.2 complete (two-phase compiler rewrite, 159/159 PASS, 8 new tests); live docs being updated for commit
+- latest_commit: `e02c0e2` — "RUST-EDGE-SEMANTICS.2 — hash-fix: MEMORY.md + commit-log update"
+- active_work_unit: `RUST-EDGE-SEMANTICS`  →  frontier leaf: `.4` (pending — final verification and tree close)
+- next_action: PNT `.4` — cargo test full pass, cargo clippy clean, memory-arch check, mark tree done
+- in_flight_uncommitted: RUST-EDGE-SEMANTICS.3 complete (7 new integration tests, 166/166 PASS); live docs being updated for commit
 - blockers: none

@@ -58,10 +58,10 @@ edges (no explicit `/pattern/` regexes) have empty alternations and never fire.
   Commit: `pending`
 
 - ID: `RUST-EDGE-SEMANTICS.3`
-  Status: `pending`
+  Status: `done`
   Goal: `Add regression tests: (a) rule with only -> edges dispatches correctly, (b) rule with mixed /regex/ and -> edges, (c) self-recursive rule with -> same_rule[N], (d) -> A | B { code } grouped targets. Test against representative inputs with expected output.`
   Acceptance: `New tests pass. All 20 shipped specs compile and produce output.`
-  Verification: `pending`
+  Verification: `2026-06-15: 7 new integration tests (166 total: 86 core + 8 types + 56 engine + 16 integration). Edge-only dispatch verified end-to-end (DispatchParser dispatches to Greeting/Farewell children). Mixed regex+edge verified (anchored + edge-only entries coexist). Self-recursive compiler output verified (regex_idx points to parent positions). Grouped targets verified (shared regex_idx + code block). Child[1] entrypoint resolution verified. Lifecycle blocks with edge-only dispatch verified. cargo test 166/166 PASS; cargo clippy clean.`
   Commit: `pending`
 
 - ID: `RUST-EDGE-SEMANTICS.4`
@@ -75,7 +75,7 @@ edges (no explicit `/pattern/` regexes) have empty alternations and never fire.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-EDGE-SEMANTICS.3` | `pending` | Compiler rewrite complete; add regression tests for edge-only, mixed, self-recursive, and grouped-target dispatch. |
+| 1 | `RUST-EDGE-SEMANTICS.4` | `pending` | Regression tests complete; final verification: cargo test, cargo clippy, memory-arch check, mark tree done. |
 
 ## Decisions
 
