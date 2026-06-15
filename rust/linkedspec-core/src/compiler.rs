@@ -251,14 +251,44 @@ pub fn build_dependency_regex_map(spec: &mut CompiledSpec) -> Result<()> {
     // Resolve each edge-only entry against child rules.
     // Following Perl's Compiler.pm:393-410, missing/out-of-bounds regex
     // indices are warned and skipped, not treated as compilation errors.
+    //
+    // Self-recursive entries (-> SameRule[N]) are a special case: the child
+    // regex is already in this rule's alternation at its parent position.
+    // Instead of duplicating it, point regex_idx directly at the parent slot.
     for res in &resolutions {
+        let rule_label = spec.rules[res.rule_idx].label.clone();
+
+        // Self-recursive: the child is the same rule.  The parent regex at
+        // child_regex_idx is already in this rule's alternation (positions
+        // 0..parent_count-1), so just point regex_idx at it directly.
+        if res.child_label == rule_label {
+            let parent_count = spec.rules[res.rule_idx].regex_patterns.len();
+            if res.child_regex_idx < parent_count {
+                spec.rules[res.rule_idx]
+                    .acode_dispatch[res.entry_idx]
+                    .regex_idx = res.child_regex_idx;
+            } else {
+                eprintln!(
+                    "warning: rule '{}': self-recursive entry '-> {}[{}]' \
+                     references out-of-bounds regex index {} (has {} parent \
+                     regexes) — entry will never fire",
+                    rule_label,
+                    res.child_label,
+                    res.child_regex_idx,
+                    res.child_regex_idx,
+                    parent_count
+                );
+            }
+            continue;
+        }
+
         let child = match spec.find(&res.child_label) {
             Some(c) => c,
             None => {
                 eprintln!(
                     "warning: rule '{}': edge-only entry '-> {}[{}]' \
                      references unknown rule '{}' — entry will never fire",
-                    spec.rules[res.rule_idx].label,
+                    rule_label,
                     res.child_label,
                     res.child_regex_idx,
                     res.child_label
@@ -272,7 +302,7 @@ pub fn build_dependency_regex_map(spec: &mut CompiledSpec) -> Result<()> {
                 "warning: rule '{}': edge-only entry '-> {}[{}]' \
                  references out-of-bounds regex index {} in child rule \
                  '{}' (has {} regexes) — entry will never fire",
-                spec.rules[res.rule_idx].label,
+                rule_label,
                 res.child_label,
                 res.child_regex_idx,
                 res.child_regex_idx,
@@ -462,21 +492,23 @@ mod tests {
 
     #[test]
     fn build_dependency_regex_map_self_recursive_rule() {
+        // Self-recursive entries point to parent regex positions directly —
+        // no duplication needed since the regex is already in the alternation.
         let src = "Expr::\n /[A-Za-z_]/\n /\\d+/\n -> Expr\n -> Expr[1]\n";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let expr = compiled.find("Expr").unwrap();
-        // Parent regexes + self-resolved child regexes
-        assert_eq!(expr.regex_patterns.len(), 4);
+        // Only parent regexes (self-refs use existing positions)
+        assert_eq!(expr.regex_patterns.len(), 2);
         assert_eq!(expr.regex_patterns[0], "[A-Za-z_]");
         assert_eq!(expr.regex_patterns[1], r"\d+");
-        // Self-refs duplicate parent regexes at new positions
-        assert_eq!(expr.regex_patterns[2], "[A-Za-z_]"); // self-ref to Expr[0]
-        assert_eq!(expr.regex_patterns[3], r"\d+");       // self-ref to Expr[1]
-        assert_eq!(expr.acode_dispatch[0].regex_idx, 2);
-        assert_eq!(expr.acode_dispatch[1].regex_idx, 3);
+        // Self-refs point to parent positions: Expr[0]→0, Expr[1]→1
+        assert_eq!(expr.acode_dispatch[0].regex_idx, 0);
+        assert_eq!(expr.acode_dispatch[1].regex_idx, 1);
         assert_eq!(expr.acode_dispatch[0].child_regex_idx, 0);
         assert_eq!(expr.acode_dispatch[1].child_regex_idx, 1);
+        assert!(!expr.acode_dispatch[0].has_parent_regex);
+        assert!(!expr.acode_dispatch[1].has_parent_regex);
     }
 
     #[test]
