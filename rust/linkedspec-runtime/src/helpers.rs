@@ -65,7 +65,7 @@ pub mod regex_engine {
                                 capture_names,
                             }
                         })
-                        .map_err(|e| format!("rgx compile error for '/{}/': {}", pat, e))
+                        .map_err(|e| format!("regex compile error for '/{}/': {}", pat, e))
                 })
                 .collect();
             Ok(Self {

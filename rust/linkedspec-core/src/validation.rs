@@ -157,24 +157,12 @@ fn check_edge_targets(spec: &SpecFile) -> Result<()> {
 }
 
 /// Every regex literal must compile as a valid regex.
-/// Regex patterns using look-around ((?=, (?!, (?<=, (?<!) are accepted but
-/// flagged since Rust's `regex` crate does not support them.
+/// rgx (via PGEN) supports the full PCRE2 syntax surface including look-around,
+/// backreferences, and subroutine calls — no patterns need to be skipped.
 fn check_regex_syntax(spec: &SpecFile) -> Result<()> {
     for rule in &spec.rules {
         for element in &rule.body {
             if let BodyElementKind::Regex { pattern } = &element.kind {
-                // Check for look-around — Rust's regex crate doesn't support this
-                let uses_lookaround = pattern.contains("(?<") || pattern.contains("(?=") || pattern.contains("(?!");
-
-                if uses_lookaround {
-                    // Accept as valid Perl regex syntax; cannot compile in Rust
-                    eprintln!(
-                        "note: rule '{}': regex pattern '/{}/' uses look-around — accepted (valid Perl regex, unverifiable in Rust regex crate)",
-                        rule.header.label, pattern
-                    );
-                    continue;
-                }
-
                 Regex::compile(pattern).map_err(|e| {
                     LinkedSpecError::Validation(format!(
                         "rule '{}': invalid regex pattern '/{}/': {}",
