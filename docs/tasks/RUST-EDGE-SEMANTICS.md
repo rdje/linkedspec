@@ -276,7 +276,7 @@ The `if/elsif` chain maps alternation indices to child rule names.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `RUST-EDGE-SEMANTICS.1` | `pending` — will commit after all live-doc updates | Audit complete; 5-row delta table + 6-step Perl pipeline trace + Rust line-level inventory. |
+| `RUST-EDGE-SEMANTICS.1` | `cb58cd1` — "RUST-EDGE-SEMANTICS.1 — audit: document Rust -> edge dispatch gap vs Perl dependency_regex_map" | Audit complete; 5-row delta table + 6-step Perl pipeline trace + Rust line-level inventory. |
 
 ## Changelog
 

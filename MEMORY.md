@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `7898c40` — "feat: PHASE9-RUST-VARIANT.10 — finalization: tree closed"
+- latest_commit: `cb58cd1` — "RUST-EDGE-SEMANTICS.1 — audit: document Rust -> edge dispatch gap vs Perl dependency_regex_map"
 - active_work_unit: `RUST-EDGE-SEMANTICS`  →  frontier leaf: `.2` (pending — rewrite compiler.rs to build regex patterns from child rule dependency refs)
 - next_action: PNT `.2` — rewrite compiler.rs: build regex_patterns from child rule dependency refs (mirroring Perl's build_dependency_regex_map), recompute AcodeEntry.regex_idx to align with alternation order
 - in_flight_uncommitted: RUST-EDGE-SEMANTICS.1 audit complete (full code-path inventory + Perl pipeline trace + 5-row delta table documented in task tree); live docs being updated for commit
