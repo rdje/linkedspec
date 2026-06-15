@@ -279,6 +279,7 @@ The `if/elsif` chain maps alternation indices to child rule names.
 | --- | --- | --- |
 | `RUST-EDGE-SEMANTICS.1` | `cb58cd1` — "RUST-EDGE-SEMANTICS.1 — audit: document Rust -> edge dispatch gap vs Perl dependency_regex_map" (+ hash-sync `f058d6b`, `ab64dc2`) | Audit complete; 5-row delta table + 6-step Perl pipeline trace + Rust line-level inventory. |
 | `RUST-EDGE-SEMANTICS.2` | `e7416b3` — "RUST-EDGE-SEMANTICS.2 — compiler: build regex_patterns from child rule dependency refs" | Two-phase compiler: same-line adjacency + build_dependency_regex_map. 8 new tests. 159/159 PASS. |
+| `RUST-EDGE-SEMANTICS.3` | `df13fcf` — "RUST-EDGE-SEMANTICS.3 — regression tests for edge dispatch" | 7 new integration tests covering edge-only, mixed, self-recursive, grouped targets. 166/166 PASS. |
 
 ## Changelog
 
