@@ -34,6 +34,8 @@ pub struct RuntimeContext {
     pub capture_start: Option<usize>,
     /// Exit flag — set by exit_now(status).
     pub exit_status: Option<i32>,
+    /// BACKTRACK cursor save stack — BACKTRACK pushes, IBACKTRACK pops and restores.
+    backtrack_stack: Vec<usize>,
 }
 
 impl RuntimeContext {
@@ -53,6 +55,7 @@ impl RuntimeContext {
             marks: std::collections::HashMap::new(),
             capture_start: None,
             exit_status: None,
+            backtrack_stack: Vec::new(),
         }
     }
 
@@ -119,6 +122,24 @@ impl RuntimeContext {
 
     pub fn hash_copy(&self, name: &str) -> Vec<(String, RuntimeValue)> {
         self.get_hash(name)
+    }
+
+    // ── BACKTRACK cursor stack ──
+
+    /// Save current position onto the backtrack stack (BACKTRACK marker).
+    pub fn push_backtrack(&mut self) {
+        self.backtrack_stack.push(self.pos);
+    }
+
+    /// Restore position from the backtrack stack (IBACKTRACK marker).
+    /// Returns false if the stack was empty (no saved position).
+    pub fn pop_backtrack(&mut self) -> bool {
+        if let Some(saved) = self.backtrack_stack.pop() {
+            self.pos = saved;
+            true
+        } else {
+            false
+        }
     }
 
     // ── Accumulator ──

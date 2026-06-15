@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.3: BACKTRACK/IBACKTRACK cursor save/restore in Rust
+
+### Implementation
+- Added `backtrack_stack: Vec<usize>` to `RuntimeContext` with `push_backtrack()` and `pop_backtrack()` methods
+- `BACKTRACK()` pushes current position onto stack; `IBACKTRACK()` pops and restores cursor
+- Empty-stack `IBACKTRACK()` is a no-op (no crash)
+- 4 new tests: save/restore, retry restore via LX, empty stack no-op, multiple push/pop
+- 181/181 PASS (86 core + 8 types + 71 engine + 16 integration)
+
 ## 2026-06-16 — RUST-PARITY.2: Conditional flow — if/elseif/else/switch/case/default in Rust
 
 ### Implementation

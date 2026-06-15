@@ -52,10 +52,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `pending`
 
 - ID: `RUST-PARITY.3`
-  Status: `pending`
+  Status: `done`
   Goal: Implement BACKTRACK/IBACKTRACK cursor save/restore
   Acceptance: BACKTRACK saves cursor, IBACKTRACK restores it; regression tests covering both markers; all existing tests pass
-  Verification: `pending`
+  Verification: Done — 2026-06-16: 181/181 PASS. `backtrack_stack: Vec<usize>` added to RuntimeContext with `push_backtrack()`/`pop_backtrack()`. 4 new tests: save/restore, retry restore, empty stack no-op, multiple push/pop.
   Commit: `pending`
 
 - ID: `RUST-PARITY.4`
@@ -104,7 +104,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-PARITY.3` | `pending` | BACKTRACK/IBACKTRACK cursor save/restore — next biggest feature gap after conditionals |
+| 1 | `RUST-PARITY.4` | `pending` | Self-hosting — Rust compiles and runs spec.spec against itself |
 
 ## Decisions
 

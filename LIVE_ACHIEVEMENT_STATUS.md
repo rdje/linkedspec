@@ -7,7 +7,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-06-16: **RUST-PARITY.2** — Conditional flow implemented in Rust runtime. if/elseif/else/endif, switch/case/default/endswitch all working with lazy evaluation (branch bodies not executed unless condition matches). 12 new tests. 177/177 PASS. Active frontier: RUST-PARITY.3 (BACKTRACK/IBACKTRACK).
+- 2026-06-16: **RUST-PARITY.3** — BACKTRACK/IBACKTRACK cursor save/restore in Rust runtime. `backtrack_stack` in RuntimeContext with push/pop. 4 new tests. 181/181 PASS. Active frontier: RUST-PARITY.4 (self-hosting).
+
+- 2026-06-16: **RUST-PARITY.2** — Conditional flow in Rust runtime. if/elseif/else/endif, switch/case/default/endswitch with lazy evaluation. 12 new tests. 177/177 PASS.
 
 - 2026-06-16: **RUST-PARITY.1** — Gap inventory complete. Rust vs Perl audit across `engine.rs` (1984 lines), `helpers.rs` (470 lines), compiler, parser, validation. 6 gap categories: (1) conditional flow, (2) BACKTRACK/IBACKTRACK, (3) self-hosting, (4) strict_syntax, (5) ~27 remaining helpers, (6) code-gen emitter. RUST-PARITY tree created (9 leaves). MDBOOK-VARIANT-AGNOSTIC tree created (7 leaves).
 - 2026-06-15: **RUST-EDGE-SEMANTICS.4** — Tree COMPLETE (4 leaves). All 20 shipped specs compile. 166/166 PASS. RUST-EDGE-SEMANTICS tree closed and moved to Completed. **No active task trees — PNT idle.**

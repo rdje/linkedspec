@@ -1369,6 +1369,15 @@ impl Engine {
                 // flow skip — equivalent to "continue matching"
                 Ok(RuntimeValue::Undef)
             }
+            // ── BACKTRACK / IBACKTRACK cursor save/restore ──
+            "BACKTRACK" => {
+                ctx.push_backtrack();
+                Ok(RuntimeValue::Undef)
+            }
+            "IBACKTRACK" => {
+                ctx.pop_backtrack();
+                Ok(RuntimeValue::Undef)
+            }
             // ── Conditional flow: if/elseif/else/endif ──
             "if" => {
                 // Inline composite: if(cond, then, elseif(cond2, then2), else(else_body))
@@ -2325,5 +2334,80 @@ ChildB:
         let result = engine.execute("hello").unwrap();
         let arr = result.as_array().unwrap();
         assert_eq!(arr[0].as_str().unwrap(), "ok");
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // BACKTRACK/IBACKTRACK tests
+    // ═══════════════════════════════════════════════════════════
+
+    #[test]
+    fn backtrack_save_and_restore_cursor() {
+        let grammar = r#"Top::
+ /hello/
+ I { BACKTRACK() }
+ E { return(IBACKTRACK()) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        // IBACKTRACK returns undef, BACKTRACK saves position
+        let result = engine.execute("hello");
+        assert!(result.is_ok(), "expected ok, got {:?}", result);
+        let val = result.unwrap();
+        let arr = val.as_array().unwrap();
+        assert!(arr[0].is_null());
+    }
+
+    #[test]
+    fn backtrack_restores_position_for_retry() {
+        // Save position before match, restore on no-match via LX
+        let grammar = r#"Top::OR{1}
+ /hello/
+ I { BACKTRACK() }
+ E { return() }
+ LX { IBACKTRACK() }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello");
+        assert!(result.is_ok(), "backtrack restore should succeed, got {:?}", result);
+    }
+
+    #[test]
+    fn backtrack_empty_stack_no_op() {
+        // IBACKTRACK with empty stack should not crash
+        let grammar = r#"Top::
+ /(\w+)/
+ E { IBACKTRACK(); return(entry_group(1)) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello").unwrap();
+        let arr = result.as_array().unwrap();
+        assert_eq!(arr[0].as_str().unwrap(), "hello");
+    }
+
+    #[test]
+    fn backtrack_multiple_push_pop() {
+        // BACKTRACK saves position; IBACKTRACK restores it
+        let grammar = r#"Top::
+ /(hello) (world)/
+ I { declare(array, log); BACKTRACK() }
+ LE { push_value(array(log), cursor_pos()) }
+ E { push_value(array(log), cursor_pos());
+      IBACKTRACK(); push_value(array(log), cursor_pos());
+      return(array_copy(array(log))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        let result = engine.execute("hello world");
+        assert!(result.is_ok(), "backtrack should work, got {:?}", result);
     }
 }

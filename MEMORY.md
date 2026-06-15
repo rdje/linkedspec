@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_commit: `29b91bc` — "RUST-PARITY.2 — conditional flow: if/elseif/else/switch/case/default in Rust runtime"
-- active_work_unit: `RUST-PARITY.3` (pending) — implement BACKTRACK/IBACKTRACK cursor save/restore
-- next_action: Implement BACKTRACK cursor save and IBACKTRACK cursor restore in Rust runtime
-- in_flight_uncommitted: RUST-PARITY.2 conditional flow complete — ready to commit
+- active_work_unit: `RUST-PARITY.4` (pending) — implement self-hosting: Rust compiles and runs spec.spec
+- next_action: Implement spec.spec self-hosting in Rust — compile and run spec.spec through the Rust engine
+- in_flight_uncommitted: RUST-PARITY.3 BACKTRACK complete — ready to commit
 - blockers: none
