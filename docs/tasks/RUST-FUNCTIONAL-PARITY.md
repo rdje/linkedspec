@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant implementation (functional parity)`
 - Created: `2026-06-15`
-- Last updated: `2026-06-15` (.3.1 done — expression parser: FluentChain variant, boolean literals, 51 tests)
+- Last updated: `2026-06-15` (.4.1 done — compiler: AcodeEntry/BcodeEntry, fixed regex_idx, 99 tests)
 - Owner: repo-local workflow
 
 ## Goal
@@ -131,15 +131,15 @@ by a small interpreter. No Rust source generation, no eval.
 ### Container: Compiler (.4)
 
 - ID: `RUST-FUNCTIONAL-PARITY.4`
-  Status: `active`
+  Status: `done`
   Goal: `Compile AST into executable CompiledSpec with regex tables and parsed lifecycle expressions.`
   Children: `.4.1`
 
 - ID: `RUST-FUNCTIONAL-PARITY.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: `Build CompiledSpec: extract regex patterns per rule, build dispatch tables (acode → child rule mapping, bcode → blind-call mapping), parse all lifecycle code into expression trees, determine parse_mode per rule (seek for OR-type, consume for AND-type), extract repetition bounds.`
   Acceptance: `All 20 shipped specs compile. CompiledSpec serializes/deserializes via serde.`
-  Verification: `pending`
+  Verification: `PASS — 99/99 tests pass (79 core + 8 types + 8 runtime + 4 integration). Added AcodeEntry { regex_idx, child_label, child_regex_idx, code } and BcodeEntry { child_label, code, fluent_chain } structs. Fixed regex_idx tracking (was incremented for action edges; now only regex patterns). Separated child_regex_idx (from -> rule[N]) from current-rule regex association. Fluent chains on blind edges stored as structured data. Serde roundtrip for all 20 shipped specs (compile_all_shipped_specs_to_json test). 6 new compiler tests for edge→regex association, multi-target edges, child_regex_idx preservation, blind-call fluent chains. Zero warnings.`
   Commit: `pending`
 
 ### Container: Runtime Engine (.5)
@@ -246,8 +246,7 @@ by a small interpreter. No Rust source generation, no eval.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-FUNCTIONAL-PARITY.4.1` | `pending` | Compiler depends on parser + validator + expression parser |
-| 4 | `RUST-FUNCTIONAL-PARITY.5.1` | `pending` | Regex engine needed before lifecycle loop |
+| 1 | `RUST-FUNCTIONAL-PARITY.5.1` | `pending` | Regex engine needed before lifecycle loop |
 | 5 | `RUST-FUNCTIONAL-PARITY.5.2` | `pending` | Lifecycle loop depends on regex engine |
 | 6 | `RUST-FUNCTIONAL-PARITY.6.1` | `pending` | Expression interpreter depends on expression parser |
 | 7 | `RUST-FUNCTIONAL-PARITY.7.1` | `pending` | Core helpers needed for basic spec execution |
@@ -284,6 +283,7 @@ by a small interpreter. No Rust source generation, no eval.
 | `2026-06-15` | `.2.3` | rgx API audit: all required primitives confirmed (compile, find_first_at, find_first, MatchResult fields, groups, capture_names). API migration mapping documented. Decision: DEFER adoption. | PASS (evaluation) |
 | `2026-06-15` | `.2.4` | Bug report filed — rgx-core build fails on cold clone (2 paths documented: default + no-default-features). 35 errors on no-default-features path traced to 3 root causes. | pending upstream |
 | `2026-06-15` | `.3.1` | `cargo test` 93/93 PASS (73 core + 8 types + 8 runtime + 4 integration). Expression parser: 51 tests (18 roundtrip, 5 error, 4 fluent chain, boolean/undef prefix-match guards, 5-level nesting). FluentChain variant + interpreter support. Zero warnings. | PASS |
+| `2026-06-15` | `.4.1` | `cargo test` 99/99 PASS (79 core + 8 types + 8 runtime + 4 integration). Added AcodeEntry/BcodeEntry structs. Fixed regex_idx tracking. Separated child_regex_idx. Fluent chains on blind edges as structured data. Serde roundtrip for all 20 specs. 6 new compiler tests. Zero warnings. | PASS |
 
 ## Commit Log
 
@@ -292,7 +292,8 @@ by a small interpreter. No Rust source generation, no eval.
 | `.1.1, .1.2, .2.1, .2.2` | `662b642` — "Feat: RUST-FUNCTIONAL-PARITY.1 + .2 — Rust-native core, parser, validator, compiler, runtime" | All 4 leaves in one coherent slice: core types + parser rewrite + validation + look-around workaround |
 | `.2.3` | `afadbd7` — "Feat: RUST-FUNCTIONAL-PARITY.2.3 — add rgx submodule for PCRE2-level regex" | Submodule added at b771c7b |
 | `.2.3` | `556105a` — "Eval: RUST-FUNCTIONAL-PARITY.2.3 — rgx evaluation: API audit PASS, decision DEFER" | Evaluation complete; decision DEFER; live docs + task-tree updated |
-| `.3.1` | `pending` (hash backfill) — "Feat: RUST-FUNCTIONAL-PARITY.3.1 — expression parser: FluentChain, boolean literals, 51 tests" | Expression parser: FluentChain variant + interpreter, boolean literals, 51 tests, zero warnings |
+| `.3.1` | `f844a06` — "Feat: RUST-FUNCTIONAL-PARITY.3.1 — expression parser: FluentChain, boolean literals, 51 tests" | Expression parser: FluentChain variant + interpreter, boolean literals, 51 tests, zero warnings |
+| `.4.1` | `pending` | Compiler: AcodeEntry/BcodeEntry structs, fixed regex_idx tracking, fluent chains as structured data, 99 tests, all 20 specs serde roundtrip |
 
 ## Changelog
 
@@ -301,3 +302,4 @@ by a small interpreter. No Rust source generation, no eval.
 - `2026-06-15`: `.2.3` evaluation complete — rgx API audit PASS (all required primitives confirmed via book + source). Decision: DEFER adoption. rgx not on crates.io; cold-clone bootstrap required. Migration path documented. Leaf `.2.3` → done.
 - `2026-06-15`: `.2.4` added — rgx build bug report. Two build paths fail: (A) default — pgen generated files missing (cold-clone bootstrap needed), (B) `--no-default-features` — 35 errors (CharRange feature-gate bug, stale non-PGEN parser match). Leaf blocked pending upstream guidance.
 - `2026-06-15`: `.3.1` complete — Expression parser signoff-quality. Added `Expr::FluentChain` variant + `FluentCall` struct. Replaced broken fluent chain placeholder with recursive `parse_fluent_chain`. Added boolean literal parsing (true/false with prefix-match guards). Added FluentChain interpreter support in engine.rs. Extended test suite from 9 to 51 tests (18 roundtrip, 5 error, 4 fluent chain, boolean/undef prefix-match guards, 5-level deep nesting). Full suite: 93/93 PASS, zero warnings.
+- `2026-06-15`: `.4.1` complete — Compiler signoff-quality. Added `AcodeEntry { regex_idx, child_label, child_regex_idx, code }` struct (was opaque tuple). Added `BcodeEntry { child_label, code, fluent_chain }` struct (was opaque tuple). Fixed regex_idx tracking: was incorrectly incremented after action edges (spurious slots); now only regex patterns increment. Separated child_regex_idx (from `-> rule[N]` in source) from current-rule regex association. Fluent chains on blind edges stored as structured `Vec<(String, String)>` instead of broken synthetic code strings. 6 new compiler tests for edge→regex association, multi-target-per-regex, no-regex edge rules, child_regex_idx preservation, blind-call fluent chains, all-20-specs serde roundtrip. Full suite: 99/99 PASS, zero warnings.

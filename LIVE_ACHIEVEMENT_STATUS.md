@@ -7,6 +7,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-15: RUST-FUNCTIONAL-PARITY.4.1 — Compiler signoff-quality. Added AcodeEntry/BcodeEntry structs (replaced opaque tuples). Fixed regex_idx tracking bug (was incorrectly incremented for action edges). Separated child_regex_idx from current-rule regex association. Fluent chains on blind edges stored as structured data. 6 new compiler tests. All 20 specs compile + serde roundtrip. 99/99 PASS, zero warnings. Frontier → `.5.1` (regex engine).
 - 2026-06-15: RUST-FUNCTIONAL-PARITY.3.1 — Expression parser signoff-quality. Added Expr::FluentChain variant + FluentCall struct. Replaced broken fluent chain placeholder with recursive parse_fluent_chain(). Added boolean literal parsing (true/false with prefix-match guards). Added FluentChain interpreter support in engine.rs. Extended tests 9→51 (18 roundtrip, 5 error, 4 fluent chain, 5-level nesting). 93/93 PASS, zero warnings. Frontier → `.4.1` (compiler).
 - 2026-06-15: RUST-FUNCTIONAL-PARITY.2.3 — rgx evaluation complete: API audit PASS, decision DEFER (rgx not on crates.io; cold-clone bootstrap needed). `.1.1`–`.2.3` all done. Frontier → `.3.1` (expression parser).
 - 2026-06-14: PHASE9-RUST-VARIANT.10 — Finalization: tree COMPLETE (17 leaves). No active task trees — PNT idle.

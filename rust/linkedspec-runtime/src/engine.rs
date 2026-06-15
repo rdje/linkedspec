@@ -80,12 +80,12 @@ impl Engine {
                 ctx.match_named = m.named.clone();
 
                 // Dispatch to child rule if acode_dispatch
-                for (idx, child_label, code) in &rule.acode_dispatch {
-                    if *idx == m.index {
+                for entry in &rule.acode_dispatch {
+                    if entry.regex_idx == m.index {
                         // Execute child rule
-                        self.execute_rule(child_label, ctx)?;
+                        self.execute_rule(&entry.child_label, ctx)?;
                         // Execute attached code if present
-                        if let Some(block) = code {
+                        if let Some(ref block) = entry.code {
                             self.execute_block(block, ctx, label)?;
                         }
                     }

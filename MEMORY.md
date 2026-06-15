@@ -17,8 +17,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `pending` (hash backfill — run post-commit hash fix) — "Feat: RUST-FUNCTIONAL-PARITY.3.1 — expression parser: FluentChain, boolean literals, 51 tests"
-- active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.4.1` (compiler), `.5.1` (regex engine), `.5.2` (lifecycle), `.6.1` (interpreter), `.7.1–.7.3` (helpers), `.8.1–.8.2` (integration), `.9` (docs), `.10` (final)
-- next_action: PNT from `.4.1` — build CompiledSpec: extract regex patterns, build dispatch tables, parse lifecycle code, determine parse_mode, extract repetition bounds
+- latest_commit: `pending` (hash backfill) — "Feat: RUST-FUNCTIONAL-PARITY.4.1 — compiler: AcodeEntry/BcodeEntry, fixed regex_idx, 99 tests"
+- active_work_unit: `RUST-FUNCTIONAL-PARITY` → frontier: `.5.1` (regex engine), `.5.2` (lifecycle), `.6.1` (interpreter), `.7.1–.7.3` (helpers), `.8.1–.8.2` (integration), `.9` (docs), `.10` (final)
+- next_action: PNT from `.5.1` — implement regex dispatch: compile patterns into combined alternation with position tracking, seek vs consume modes
 - in_flight_uncommitted: none
 - blockers: `.2.4` blocked — waiting for upstream rgx guidance on cold-clone build/bootstrap

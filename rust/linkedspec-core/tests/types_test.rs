@@ -1,6 +1,6 @@
 //! Tests for core type serialization/deserialization and RuntimeValue semantics.
 
-use linkedspec_core::types::{CompiledRule, CompiledSpec, ParseMode, RuntimeValue};
+use linkedspec_core::types::{AcodeEntry, CompiledRule, CompiledSpec, ParseMode, RuntimeValue};
 
 #[test]
 fn parse_mode_serde() {
@@ -29,8 +29,8 @@ fn compiled_rule_json_roundtrip() {
         is_top: true,
         parse_mode: ParseMode::Seek,
         regex_patterns: vec!["hello".into(), "world".into()],
-        acode_dispatch: vec![(0, "Child".into(), None)],
-        bcode_dispatch: vec![],
+        acode_dispatch: vec![AcodeEntry { regex_idx: 0, child_label: "Child".into(), child_regex_idx: 0, code: None }],
+        bcode_dispatch: Vec::new(),
         preamble: None,
         lxcode: None,
         lscode: None,
@@ -60,8 +60,8 @@ fn compiled_spec_json_roundtrip() {
                 is_top: true,
                 parse_mode: ParseMode::Seek,
                 regex_patterns: vec!["/a/".into()],
-                acode_dispatch: vec![(0, "Child".into(), None)],
-                bcode_dispatch: vec![],
+                acode_dispatch: vec![AcodeEntry { regex_idx: 0, child_label: "Child".into(), child_regex_idx: 0, code: None }],
+                bcode_dispatch: Vec::new(),
                 preamble: None,
                 lxcode: None,
                 lscode: None,
@@ -78,7 +78,7 @@ fn compiled_spec_json_roundtrip() {
                 parse_mode: ParseMode::Consume,
                 regex_patterns: vec!["/b/".into()],
                 acode_dispatch: vec![],
-                bcode_dispatch: vec![],
+                bcode_dispatch: Vec::new(),
                 preamble: None,
                 lxcode: None,
                 lscode: None,

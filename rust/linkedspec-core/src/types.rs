@@ -192,6 +192,40 @@ impl std::fmt::Display for RuntimeValue {
     }
 }
 
+/// An action edge entry in the compiled dispatch table.
+///
+/// Action edges fire when a regex alternative matches. Each entry records:
+/// - which regex of *this* rule triggers the edge (`regex_idx`)
+/// - which child rule to invoke (`child_label`)
+/// - which regex slot of the *child* rule to enter (`child_regex_idx`, from `-> child[N]`)
+/// - optional lifecycle code to execute after the child returns
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AcodeEntry {
+    /// Index of the regex pattern in this rule that triggers this edge.
+    pub regex_idx: usize,
+    /// Label of the child rule to invoke.
+    pub child_label: String,
+    /// Which regex slot of the child rule to enter (from `-> child[N]`; 0 = default first).
+    pub child_regex_idx: usize,
+    /// Optional code block to execute after child dispatch.
+    pub code: Option<crate::expr::CodeBlock>,
+}
+
+/// A blind-call edge entry in the compiled dispatch table.
+///
+/// Blind-call edges (`=> rule`) are dispatched sequentially in AND-type rules.
+/// They can carry an optional code block and/or a fluent chain of method calls.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BcodeEntry {
+    /// Label of the child rule to invoke.
+    pub child_label: String,
+    /// Optional code block attached to the edge.
+    pub code: Option<crate::expr::CodeBlock>,
+    /// Optional fluent chain on the edge (`=> rule .method(args).method2(args2)`).
+    /// Each entry is (method_name, args_string).
+    pub fluent_chain: Vec<(String, String)>,
+}
+
 /// A compiled rule specification — the output of the compiler, input to the runtime.
 ///
 /// This is the Rust-native equivalent of what the Perl variant achieves through
@@ -207,10 +241,10 @@ pub struct CompiledRule {
     pub parse_mode: ParseMode,
     /// Regex patterns for this rule (compiled from `/pattern/` body elements).
     pub regex_patterns: Vec<String>,
-    /// Action edge dispatch: maps regex index → (child_label, code expression tree).
-    pub acode_dispatch: Vec<(usize, String, Option<crate::expr::CodeBlock>)>,
-    /// Blind-call dispatch: ordered list of (child_label, code expression tree).
-    pub bcode_dispatch: Vec<(String, Option<crate::expr::CodeBlock>)>,
+    /// Action edge dispatch: fires when the matching regex alternative matches.
+    pub acode_dispatch: Vec<AcodeEntry>,
+    /// Blind-call dispatch: ordered list of entries for `=> child` edges.
+    pub bcode_dispatch: Vec<BcodeEntry>,
     /// Lifecycle blocks with parsed expression trees.
     pub preamble: Option<crate::expr::CodeBlock>,    // I-block
     pub lxcode: Option<crate::expr::CodeBlock>,      // LX-block (no-match exit)

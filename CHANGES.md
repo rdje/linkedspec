@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-15 — RUST-FUNCTIONAL-PARITY.4.1: Compiler signoff-quality
+### Compiler (.4.1)
+- Added `AcodeEntry` struct with `regex_idx`, `child_label`, `child_regex_idx`, `code` fields (replaced opaque `(usize, String, Option<CodeBlock>)` tuple)
+- Added `BcodeEntry` struct with `child_label`, `code`, `fluent_chain` fields (replaced opaque `(String, Option<CodeBlock>)` tuple)
+- Fixed regex_idx tracking bug: was incorrectly incremented after action edges (creating spurious regex slots); now only regex patterns increment `current_regex_idx`
+- Separated child_regex_idx (from `-> rule[N]` in source) from current-rule regex association — action edges now correctly fire after their preceding regex
+- Fluent chains on blind edges (`=> rule .method(args)`) stored as structured `Vec<(String, String)>` instead of broken synthetic code strings
+- Improved error handling: parse failures emit warnings instead of silent `.ok()`
+- 6 new compiler tests: edge→regex association, multi-target-per-regex, no-regex edge rules, child_regex_idx preservation, blind-call fluent chains, all-20-specs serde roundtrip
+- Files changed: `rust/linkedspec-core/src/types.rs` (+20 lines, AcodeEntry + BcodeEntry), `rust/linkedspec-core/src/compiler.rs` (rewrite), `rust/linkedspec-runtime/src/engine.rs` (adopt AcodeEntry), `rust/linkedspec-core/tests/types_test.rs` (adopt structs)
+- Full suite: 99/99 PASS (79 core + 8 types + 8 runtime + 4 integration), zero warnings
+
 ## 2026-06-15 — RUST-FUNCTIONAL-PARITY.3.1: Expression parser signoff-quality
 ### Expression parser (.3.1)
 - Added `Expr::FluentChain` variant with `receiver` and `calls: Vec<FluentCall>` for fluent method chains
