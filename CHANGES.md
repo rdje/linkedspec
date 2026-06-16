@@ -1,6 +1,53 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — RUST-PARITY.7.1: Perl↔Rust output-oracle mechanism + green first proof
+
+Built the cross-variant output oracle (ADR 0006 §Phase 8.6) and proved it end-to-end.
+
+New files:
+- `tools/gen_oracle_corpus.pl` — a timeout-guarded (`alarm`, default 15s — RTLUtils-hang
+  safe) Perl generator. For each `(spec, input)` case it runs the reference parser and
+  writes one corpus directory per case: `rust/linkedspec-runtime/tests/corpus/<case>/`
+  containing `input.spec` (the grammar, verbatim), `input.txt` (exact input bytes), and
+  `expected.json` (the reference top-rule value, `JSON::PP->canonical(1)` so regeneration
+  is byte-stable). A case is a shipped spec (`spec => 'tclite'`) or an authored inline
+  grammar (`source => "..."`). This is exactly the per-entry corpus format the book's
+  `appendix/backend-handoff.md` already documents — adopting it adds zero drift.
+- `rust/linkedspec-runtime/tests/corpus_oracle.rs` — the fixture-runner. Enumerates the
+  corpus, runs `parse_spec → validate → compile → Engine::new → execute(input.txt)`, and
+  asserts `engine.execute(input) == json!([expected])`. Reports every entry (PASS/FAIL)
+  and fails once at the end, so a single run surfaces all divergences.
+- `rust/linkedspec-runtime/tests/corpus/README.md` — documents the format + the wrap rule.
+- `docs/knowledge/rust-perl-output-oracle.md` — knowledge card (mechanism + findings).
+
+Output-shape rule (reconciled + documented): the Perl reference returns the top rule's
+value directly; the Rust engine wraps the accumulator one level (`engine.rs` `execute`
+returns `Array(accumulator)`). So `expected.json` stores the backend-neutral reference
+value and the runner wraps it: `execute(input) == [expected]`.
+
+The oracle's first run disproved the `.7`-split assumption that the Perl↔Rust gap on the
+named proof specs is only the wrap. Both shipped proof specs diverge in Rust:
+- tclite on `[]` → `[]` (Perl: `["?tcl_script:",[["?command_subst:",[]]]]`).
+- Lispish on `(x y)` → `exit_now(1)` (Perl: `["x",["y"]]`).
+Shared root cause: a single-regex rule written `name : /re/` (single colon; incl. the
+inline `name : /re/  I.return(...)` form) compiles in Rust as **0-regex**, so every
+`-> child[0]` dispatch edge "never fires" (`::` single-regex rules are unaffected).
+Lispish additionally needs the `scalaref(retv, {content})` hashref-field accessor parsed.
+These are engine/parser surgery, not oracle-mechanism work, so they are deferred to the
+new leaf `RUST-PARITY.7.5` (now first in the frontier, blocking `.7.2`/`.7.3`).
+
+The mechanism is proven green on two controlled authored grammars (parent→child dispatch,
+literal edge return, action-less child) that avoid every divergence source — scalar
+`"scalar-ok"` → `["scalar-ok"]` and nested array `["?proof:","ok"]` → `[["?proof:","ok"]]`.
+
+Validation: `perl -c tools/gen_oracle_corpus.pl` OK; `cargo test --manifest-path
+rust/Cargo.toml` = **238 passed / 0 failed** (237 baseline + 1 `corpus_oracle`); `cargo
+clippy -p linkedspec-core -p linkedspec-runtime --tests` = core 10 / runtime 13 /
+validation.rs 4 = baseline (zero-new; `corpus_oracle.rs` clean);
+`scripts/check_memory_architecture.sh` exit 0. No book change (corpus format already
+matched; the wrap-rule book note is deferred to `.7.4`/`.9`).
+
 ## 2026-06-16 — RUST-PARITY.7: split into Perl↔Rust output-oracle sub-leaves (.7.1–.7.4)
 
 Tree structuring only (no code). PNT reached the broad `.7` leaf ("all 20 shipped specs
