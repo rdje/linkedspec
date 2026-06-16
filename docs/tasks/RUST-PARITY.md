@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.5.4` done)
+- Last updated: `2026-06-16` (`.5.5` split into `.5.5.1`–`.5.5.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -68,7 +68,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - ID: `RUST-PARITY.5`
   Status: `active`
   Goal: Close the real Rust↔Perl parity gaps found by the audit (retv blocker, match/entry split, char-indexing, dead arms, missing helpers)
-  Children: `.5.1` (done), `.5.2` (done), `.5.3` (done), `.5.4` (done), `.5.5` (pending)
+  Children: `.5.1` (done), `.5.2` (done), `.5.3` (done), `.5.4` (done), `.5.5` (active — split into `.5.5.1`–`.5.5.4`)
   Note: Split from a single broad leaf (PNT rule 5 — too broad for one signoff slice). The 3-agent audit in Decisions is the implementation spec. Sequenced retv-first because it gates correct output for nearly every grammar. The "0/20 runtime-tested corpus" gap stays in `.7` (test-corpus breadth).
 
 - ID: `RUST-PARITY.5.1`
@@ -100,9 +100,36 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.5.4` (see Commit Log)
 
 - ID: `RUST-PARITY.5.5`
+  Status: `active`
+  Goal: Implement the ~28 missing capture/mark/entry/match/input helpers (+ real aliases `tail`/`drop_last`/`flatten`)
+  Children: `.5.5.1`, `.5.5.2`, `.5.5.3`, `.5.5.4`
+  Note: Split 2026-06-16 (PNT rule 5 — too broad for one signoff slice; ~28 helpers across ~7 families, plus an alias-policy question). The `.1` Inventory (Gap 5) + `docs/linkedspec-book/src/appendix/helper-contract-catalog.md` are the implementation spec. Confirmed against engine.rs: only `drop_front`/`drop_back`/`array_copy`/`flat_array` of this family exist; all 28 below are genuinely missing. (`array_values`/`return_imatch`/`return_im` are explicitly NOT added — not real Perl helpers.)
+
+- ID: `RUST-PARITY.5.5.1`
   Status: `pending`
-  Goal: Implement the ~30 missing capture/mark/entry/match/input helpers (+ real aliases `tail`/`drop_last`/`flatten`)
-  Acceptance: the missing helpers from the `.1` inventory (`capture_*_from`, `capture_between`, `mark_*`, `entry_named/has/map`, `match_named/has/map`, `input_end_line/col`, anonymous capture variants) are implemented to Perl-contract parity, plus the `tail`/`drop_last`/`flatten` aliases; per-family regression tests; baseline green; clippy clean. (`array_values`/`return_imatch`/`return_im` are explicitly NOT added — not real Perl helpers.)
+  Goal: Named-group helpers — `entry_named`/`entry_has`/`entry_map`/`entry_named_map` + `match_named`/`match_has`/`match_map`/`match_named_map`
+  Acceptance: the 8 named-group readers read the existing `entry_named`/`match_named` maps (`entry_named(name)`→string, `entry_has(name)`→bool, `entry_map()`/`entry_named_map()`→hash; same for `match_*`) to helper-contract-catalog parity; per-family tests; baseline green; clippy clean.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.5.5.2`
+  Status: `pending`
+  Goal: Input-boundary helpers (`input_end_line`, `input_end_col`) + real compat aliases (`tail`, `drop_last`, `flatten`, and `flat` if missing)
+  Acceptance: `input_end_line`/`input_end_col` return the char line/col at end-of-input; the aliases map per the catalog (`tail`→`drop_front`, `drop_last`→`drop_back`, `flatten`→`flat`) with `flat` added if absent; resolve the alias-retirement question (book §catalog says "retired alias", `ROADMAP_V2` says "remain compatibility syntax") against the Perl reference before landing; tests; baseline green; clippy clean.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.5.5.3`
+  Status: `pending`
+  Goal: Mark-based capture family — `capture_*_from` (`capture_len_from`, `capture_until_cursor_from`, `capture_take_until_cursor_from`, `capture_take_len_from`, `capture_rest_from`, `capture_take_rest_from`), `capture_between`/`capture_len_between`, and `mark_copy`/`mark_input_start`/`mark_input_end`
+  Acceptance: each reads the named mark(s) (byte offsets) and returns char-correct text/length per the catalog; `mark_*` set marks; tests with multibyte input; baseline green; clippy clean.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.5.5.4`
+  Status: `pending`
+  Goal: Anonymous capture-slice variants — `capture_slice_until_cursor`, `capture_take_until_cursor`, `capture_take_len`, `capture_take_rest` (and any `_len` variants from the inventory)
+  Acceptance: each operates on the anonymous `capture_start`/cursor per the catalog, char-correct; tests; baseline green; clippy clean.
   Verification: `pending`
   Commit: `pending`
 
@@ -143,9 +170,13 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
 | — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
-| 1 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
+| — | `RUST-PARITY.5.5` | `active` | split into `.5.5.1`–`.5.5.4` (2026-06-16, PNT rule 5 — ~28 helpers across families) |
+| 1 | `RUST-PARITY.5.5.1` | `pending` | named-group helpers (entry/match `_named`/`_has`/`_map`) |
+| 2 | `RUST-PARITY.5.5.2` | `pending` | input-boundary helpers + real compat aliases |
+| 3 | `RUST-PARITY.5.5.3` | `pending` | mark-based capture family (`capture_*_from`/`_between`, `mark_*`) |
+| 4 | `RUST-PARITY.5.5.4` | `pending` | anonymous capture-slice variants |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.6`–`.9` unchanged below it.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; `.6`–`.9` unchanged below it.)
 
 ## Decisions
 
@@ -171,6 +202,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 ## Open Questions
 
+- (`.5.5.2`) Alias-retirement status of `tail`/`drop_last`/`flatten`/`entry_named_map`: the book helper-contract-catalog labels them "retired alias", but `ROADMAP_V2` says they "remain compatibility syntax with explicit alias coverage". Resolve against the Perl reference (does the Perl runtime still recognize them?) before adding them to Rust — add only the aliases the Perl reference still accepts. (`.5.5` acceptance lists `tail`/`drop_last`/`flatten` as real; reconcile in `.5.5.2`.)
 - None yet — inventory leaf will identify any.
 - (`.5.2`) Group indexing differs between Perl (`match_group(0)` = first capture) and Rust (`entry_group(0)`/`match_group(0)` read index 0 = full match). Not a `.5.2` concern (that leaf is about *which* match, not indexing); flag for a later parity leaf if it proves user-visible.
 - (`.5.3`) `entry_line`/`entry_col`/`match_line`/`match_col` take a position **argument** rather than deriving from the stored entry/match span (an existing quirk). `.5.3` fixed only `cursor` line/col (its named scope); revisit these in a later parity leaf alongside the group-indexing item.
@@ -248,3 +280,4 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-06-16`: `.5.2` done — separated `entry_*` from `match_*` in the Rust engine. `execute_rule` now emulates Perl's per-handler `IMATCH`/`LMATCH` lexicals via a `SavedMatchState` save/restore on the shared `RuntimeContext`: entry match = the dispatcher's local match (`$info = $minfo`), local match = the rule's own regex match, entry seeded from the first own match only for the dispatcher-less top rule, both restored on exit. 3 new integration tests (child entry/local divergence, parent match survives child dispatch, top-rule entry==local); `cargo test` 189/189; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-entry-match-separation.md`. Frontier → `.5.3` (char-based indexing + cursor line/col).
 - `2026-06-16`: `.5.3` done — char-based offsets/slicing in the Rust engine. Internal positions stay byte-based (the regex engine is byte-based); the DSL boundary is now char-based for Perl parity. `byte_to_char_offset`/`char_substr` helpers added; `substr`/`input_slice` char-slice (no multibyte panic); cursor/input/capture/mark/entry/match positions+lengths and `length` convert byte→char; `cursor_col` is char-distance. `entry_start_pos`/`match_start_pos` no longer hardcoded `0.0` — `RuntimeContext` stores `entry/match_*_byte` spans (part of `SavedMatchState`). 7 new multibyte tests (`chars_5_3_*`); `cargo test` 196/196; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-char-based-offsets.md`. Frontier → `.5.4` (dedupe match arms + REP zero-progress guard).
 - `2026-06-16`: `.5.4` done — dedup shadowed `call_helper` arms + fix the REP zero-progress guard. Removed the first `print`/`hash`/`hash_copy` arms so the better later arms win (Hash-arg merge for `hash`, raw-AST target resolution for `hash_copy`, consolidated `say|print|print_each`); cleared 3 `unreachable_patterns` warnings. REP loop now captures `pos_before` per iteration and breaks when `ctx.pos == pos_before` (no cursor progress) instead of an iteration cap. 2 new tests; `cargo test` 198/198; clippy touched-file warnings 15 → 12. No knowledge card (localized fix). Frontier → `.5.5` (~30 missing helpers + real aliases).
+- `2026-06-16`: `.5.5` split (PNT rule 5 — too broad for one signoff slice). An engine.rs audit confirmed ~28 helpers across ~7 families are genuinely missing (only `drop_front`/`drop_back`/`array_copy`/`flat_array` of the family exist). Split into `.5.5.1` named-group readers (entry/match `_named`/`_has`/`_map`), `.5.5.2` input-boundary helpers + real compat aliases, `.5.5.3` mark-based capture family (`capture_*_from`/`_between`, `mark_*`), `.5.5.4` anonymous capture-slice variants. The `.1` Inventory (Gap 5) + the book helper-contract-catalog are the implementation spec. Surfaced an alias-policy Open Question (book §catalog says `tail`/`drop_last`/`entry_named_map` are "retired aliases"; `ROADMAP_V2` says they "remain compatibility syntax") to resolve against the Perl reference in `.5.5.2`. No code change (tree structuring only). Frontier → `.5.5.1`.
