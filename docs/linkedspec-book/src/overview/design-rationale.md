@@ -30,12 +30,12 @@ But concision must not hide what is happening. The project direction is toward:
 
 Historically, LinkedSpec tolerated raw Perl-shaped behavior inside `.spec` action blocks. The long-term direction is cleaner:
 
-- less raw embedded Perl in `.spec` files
+- less raw embedded host-language code in `.spec` files
 - more explicit helper DSL (`assign(...)`, `return(hash(...))`, `push_value(...)`)
 - canonical ActionIR lowering (helpers lower to a structured intermediate representation)
-- better portability to future non-Perl backends (Rust, etc.)
+- portability across backends — the same helper DSL must execute identically in the Perl reference backend, the Rust backend, and any future backend
 
-The goal is not "Perl, but cleaner." The goal is a backend-neutral `.spec` language.
+The goal is not "Perl, but cleaner." The goal is a backend-neutral `.spec` language: one contract, many execution platforms.
 
 ## 4. The compiler is state-first, not hash-first
 
@@ -55,6 +55,6 @@ This project should be explainable — not only what it does, but why:
 - why compiled state models exist (separate concerns, enable structured validation, project only at the boundary)
 - why runtime context exists (carry structured last_error payloads, not raw Perl error strings)
 - why diagnostics are structured (owner/stage attribution, rule labels, handler source labels)
-- why the facade is thin (LinkedSpec.pm is 258 lines; real work lives in owner modules dispatched through `OwnerDispatch`)
+- why a backend keeps a thin public facade over focused owner modules (a small public surface; the real work is isolated and replaceable, which keeps each backend's internals from leaking into the `.spec` contract)
 
 Understanding the "why" makes the "what" easier to trust and easier to change later.

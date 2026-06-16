@@ -2,6 +2,8 @@
 
 This book is the public-facing, living explanation of LinkedSpec.
 
+LinkedSpec is a multi-backend system. The `.spec` language is the one universal contract; each backend is simply an execution platform that runs the same `.spec` files with the same semantics — no per-backend dialects. The Perl implementation is the **reference backend** (the canonical behavioral oracle); further backends (such as Rust) execute the same contracts identically. This book therefore describes `.spec` syntax, semantics, and helper contracts in backend-neutral terms; where a concrete API call is shown, it is the Perl reference backend's surface unless stated otherwise.
+
 It exists to answer four questions clearly:
 
 - What is LinkedSpec?

@@ -2,9 +2,11 @@
 
 LinkedSpec is an actively evolving system. The current direction is not “freeze everything exactly as it once was.” The direction is to preserve the strengths that make LinkedSpec useful while modernizing the runtime, compiler, diagnostics, and documentation.
 
+LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform; the language is specified so further backends can be built in other languages. Status below is therefore stated at the `.spec`-contract level, with backend-specific notes called out where they apply.
+
 ## Completed phases
 
-Phases 0–7 of the modernization roadmap are done:
+Phases 0–9 of the modernization roadmap are done:
 
 - **Phase 0**: Regression safety net — `t/phase0_regression.t` covers all 20 shipped specs with a green baseline; every `.spec` compiles at `language_agnostic_ready_ratio == 1.0000` (zero compatibility-surface rules).
 - **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a 258-line lazy facade; 27 modules use uniform `OwnerDispatch`; the former `ActionRewriter.pm` forwarding shim was deleted (118 lines).
@@ -15,6 +17,8 @@ Phases 0–7 of the modernization roadmap are done:
 - **Phase 5**: Runtime diagnostics — structured last_error is the single diagnostics channel; handler compile warnings routed through trace instead of stderr; eval minimized to one handler compilation; trace bridging from compile scopes into runtime handler scopes.
 - **Phase 6**: Documentation and adoption — the book you are reading. All identified documentation gaps closed (LinkedRE, Validation, public API, cross-linking, overviews, ActionIR lowering, per-spec walkthroughs).
 - **Phase 7**: Self-hosted `spec.spec` grammar — LinkedSpec parses its own `.spec` language through the DSL itself. `spec.spec` compiles at `language_agnostic_ready_ratio == 1.0000` with regression coverage; it is the required change surface for `.spec` language evolution.
+- **Phase 8**: Multi-backend specification and handoff — the `.spec` language, runtime semantics, helper contracts, and HandlerIR are specified backend-neutrally, so a backend can be built in any language without reading the reference source. The multi-backend vision — the same `.spec` files, the same semantics, and the same test corpus across all backends — is recorded in ADR 0006. This phase was specification-only (no behavioral code change).
+- **Phase 9**: Rust variant — a second execution backend. The Rust workspace (`rust/`: `linkedspec-core` + `linkedspec-runtime`) carries its own `.spec` parser, compiler, runtime engine, and helper surface, and runs `.spec` files compiled from the same universal contract. It is operational (interpreted mode, v0.1); full cross-variant output parity with the Perl reference is an ongoing follow-on.
 
 The Method-like DSL migration track is also complete: all 20 shipped specs at zero compatibility-surface rules, 100+ helpers across 10 families regression-locked, compat alias retirement finished (8 aliases removed), and fluent/block equivalence verified.
 
@@ -29,6 +33,8 @@ Three backbone items tracked major structural modernization — all done:
 ## Ongoing
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
+- **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
+- **Rust backend parity** — bringing the Rust backend to full cross-variant output parity with the Perl reference: identical match/no-match results and identical JSON output for any given `.spec` file.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. No lifecycle-specific semantic gaps found.
 
 ## What this means for readers

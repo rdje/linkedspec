@@ -1,8 +1,8 @@
 # What LinkedSpec Is
 
-LinkedSpec is a progressive extraction parser DSL and compiler for Perl.
+LinkedSpec is a progressive extraction parser DSL. The `.spec` language is its universal contract; a LinkedSpec *backend* compiles those `.spec` files into ready-to-call parsers. The Perl implementation is the reference backend (the canonical behavioral oracle), and additional backends (such as Rust) run the same `.spec` files with identical semantics.
 
-It takes `.spec` files — a compact, rule-paragraph language — and compiles them into ready-to-call parser coderefs. Those parsers match structured input, extract meaningful regions, and return AST payloads defined by the spec author.
+A `.spec` file is a compact, rule-paragraph language. A backend compiles it into a runnable parser (a coderef in the Perl reference backend). Those parsers match structured input, extract meaningful regions, and return AST payloads defined by the spec author.
 
 ## What LinkedSpec is good at
 
@@ -24,7 +24,7 @@ A `.spec` file is organized as rule paragraphs. Each rule has:
 - action edges (`-> ChildRule { ... }`) or blind-call edges (`=> helper { ... }`)
 - lifecycle blocks (`I`, `E`, `EX`, `IT`, `LS`, `LE`, `LX`) for setup, teardown, and state management
 
-The compiler (via `LinkedSpec::Get(\$spec)`) parses the `.spec`, builds compiled rule state, derives dependency-regex dispatch data, optionally builds a compiled descriptor for introspection, and returns a parser coderef. Callers invoke that coderef with input text and get back AST data structures.
+A backend's compiler parses the `.spec`, builds compiled rule state, derives dependency-regex dispatch data, optionally builds a compiled descriptor for introspection, and returns a runnable parser. Callers invoke that parser with input text and get back AST data structures. (In the Perl reference backend the entry point is `LinkedSpec::Get(\$spec)`; other backends expose an equivalent entry point.)
 
 ## Example: a minimal key/value parser
 
@@ -49,7 +49,7 @@ LinkedSpec is especially useful when:
 
 ## What comes out of it
 
-The normal outcome of `LinkedSpec::Get(...)` or `LinkedSpec::get_parser(...)` is a parser coderef. Call it with input text to get AST output.
+The normal outcome of compiling a `.spec` is a runnable parser. Call it with input text to get AST output. (In the Perl reference backend that parser is a coderef returned by `LinkedSpec::Get(...)` or `LinkedSpec::get_parser(...)`; other backends return the equivalent runnable parser for their language.)
 
 The compiler can also expose a compiled descriptor — a structured data payload containing rule tables, dependency-regex maps, and metadata — for tooling, diagnostics, and introspection.
 

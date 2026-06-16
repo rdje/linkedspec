@@ -19,7 +19,7 @@ The book changes more slowly than the repo-native docs. It should be stable enou
 
 The repository root also contains working documents that go deeper or move faster than the book:
 
-- `USER_GUIDE.md` and `USER_GUIDE_*.md` — exhaustive ActionIR lowering references with emitted-Perl contracts
+- `USER_GUIDE.md` and `USER_GUIDE_*.md` — exhaustive ActionIR lowering references, including the Perl reference backend's emitted-code contracts
 - `ARCHITECTURE_STATE.md` — the live architecture snapshot, updated when structural understanding changes
 - `ROADMAP.md` and `ROADMAP_V2.md` — the project roadmap with phase tracking and exit criteria
 

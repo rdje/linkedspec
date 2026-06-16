@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.2: reframe overview chapters as variant-agnostic
+
+Book documentation only (no code). Remediated all 5 mdBook overview pages so the `.spec` file is
+presented as the **one universal contract** and Perl as the **reference backend** (Rust = second
+backend), matching the vocabulary already established in `appendix/backend-handoff.md` and ADR 0006.
+Changes: (1) `index.md` — added a multi-backend framing paragraph on the landing page (`.spec` =
+universal contract; Perl = reference backend; concrete API calls are the Perl reference surface
+unless noted). (2) `overview/what-is-linkedspec.md` — reframed the three audit-flagged passages:
+the opening "DSL and compiler for Perl" → "DSL … the `.spec` language is its universal contract …
+Perl is the reference backend"; the "How it works" compiler line now reads "a backend's compiler …
+returns a runnable parser" with `LinkedSpec::Get(\$spec)` demoted to a parenthetical Perl-reference
+example; the "What comes out of it" outcome now says "a runnable parser (a coderef in the Perl
+reference backend)". (3) `overview/design-rationale.md` — dropped the Perl-specific "`LinkedSpec.pm`
+is 258 lines … `OwnerDispatch`" detail for the backend-neutral thin-facade *principle*, and updated
+the backend-neutral-semantics section so Rust reads as a real second backend, not a "future" one.
+(4) `overview/documentation-layers.md` — labelled the `USER_GUIDE.md` reference as the *Perl
+reference backend's* emitted-code contracts. (5) `overview/project-status.md` — added a multi-backend
+framing note, **fixed a phase drift** (page said "Phases 0–7 done"; the roadmap has 0–9 done — added
+Phase 8 multi-backend handoff + Phase 9 Rust variant), and added "Variant-agnostic documentation"
+and "Rust backend parity" rows under Ongoing. Verification: `mdbook build` exit 0 (no warnings);
+`scripts/check_memory_architecture.sh` exit 0. Frontier advanced `.2`→`.3` (user-model chapters).
+
 ## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.1: complete variant-agnostic audit of the mdBook
 
 Documentation/audit only (no code, no book edits yet — remediation is `.2`–`.6`). Ran a

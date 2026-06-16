@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16`
+- Last updated: `2026-06-16` (`.2` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -53,11 +53,11 @@ minimized in user-facing chapters and clearly labeled when present.
   Commit: `MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.2`
-  Status: `pending`
+  Status: `done`
   Goal: Remediate overview chapters — index.md, what-is-linkedspec.md, design-rationale.md, documentation-layers.md, project-status.md
   Acceptance: Overview chapters rewritten to be variant-agnostic; Perl framed as reference implementation
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — all 5 overview pages reframed: `.spec` = the one universal contract, Perl = reference backend, Rust = second backend (vocabulary aligned with `appendix/backend-handoff.md` + ADR 0006). `index.md` gained a multi-backend frame; `what-is-linkedspec.md` reframed (3 audit passages: L3 "compiler for Perl", L27 `Get`, L52 "coderef" now backend-labelled); `design-rationale.md` dropped the `LinkedSpec.pm`-258-line/`OwnerDispatch` specifics for the thin-facade principle and updated the backend-neutral section (Rust now a real backend); `documentation-layers.md` labelled USER_GUIDE as the Perl reference emission contract; `project-status.md` fixed phase drift (0–7 → 0–9, added Phase 8 multi-backend handoff + Phase 9 Rust variant) and added a multi-backend framing note + Ongoing rows. `mdbook build` exit 0.
+  Commit: `MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic (.spec = universal contract; Perl = reference backend)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.3`
   Status: `pending`
@@ -98,14 +98,13 @@ minimized in user-facing chapters and clearly labeled when present.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-VARIANT-AGNOSTIC.2` | `pending` | Overview is the reader's first impression; smallest REMEDIATE set (2 files) |
-| 2 | `MDBOOK-VARIANT-AGNOSTIC.3` | `pending` | User-model is where most readers learn LinkedSpec; 2 heavy pages (walkthrough, runtime-context) |
-| 3 | `MDBOOK-VARIANT-AGNOSTIC.4` | `pending` | Public API chapters present the Perl surface as THE API — need backend framing |
-| 4 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
-| 5 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
-| 6 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
+| 1 | `MDBOOK-VARIANT-AGNOSTIC.3` | `pending` | User-model is where most readers learn LinkedSpec; 2 heavy pages (walkthrough, runtime-context) |
+| 2 | `MDBOOK-VARIANT-AGNOSTIC.4` | `pending` | Public API chapters present the Perl surface as THE API — need backend framing |
+| 3 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
+| 4 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
+| 5 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
 
-(`.1` complete — removed from frontier.)
+(`.1`, `.2` complete — removed from frontier.)
 
 ## Audit Findings (.1)
 
@@ -203,15 +202,22 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.1` | deterministic leakage scan over all 41 `src/**.md` files + targeted reads; per-file catalog produced; `scripts/check_memory_architecture.sh` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.2` | remediated 5 overview pages; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `MDBOOK-VARIANT-AGNOSTIC.1` | `MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook` | Audit recorded in "## Audit Findings (.1)" |
+| `MDBOOK-VARIANT-AGNOSTIC.2` | `MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic (.spec = universal contract; Perl = reference backend)` | 5 overview pages remediated; frontier advanced to `.3` |
 
 ## Changelog
 
 - `2026-06-16`: Created task tree.
 - `2026-06-16`: Completed `.1` — full per-file variant-agnostic audit (41 files), 3-way classification,
   per-leaf remediation map; frontier advanced to `.2`.
+- `2026-06-16`: Completed `.2` — reframed all 5 overview pages (`index`, `what-is-linkedspec`,
+  `design-rationale`, `documentation-layers`, `project-status`) so the `.spec` file is the one
+  universal contract and Perl is the reference backend (Rust = second backend). Fixed a phase
+  drift in `project-status` (0–7 → 0–9; added Phase 8 multi-backend handoff + Phase 9 Rust
+  variant). `mdbook build` exit 0. Frontier advanced to `.3`.
