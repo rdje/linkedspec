@@ -94,6 +94,30 @@ fn char_substr_from(s: &str, start: usize) -> String {
     s.chars().skip(start).collect()
 }
 
+/// Owned text of the byte span `input[start..end]`, used by the mark-based
+/// capture family (`capture_*_from`, `capture_between`). `start`/`end` are
+/// **byte** offsets at char boundaries (marks, match spans, the cursor). A
+/// reversed or out-of-range span yields `None` (→ DSL `undef`) instead of
+/// panicking — the Perl reference guards these readers with a `defined`/`>=`
+/// check (RUST-PARITY.5.5.3, parity with `Contracts.pm` ~690–928).
+fn span_text(input: &str, start: usize, end: usize) -> Option<String> {
+    if start <= end && end <= input.len() {
+        Some(input[start..end].to_string())
+    } else {
+        None
+    }
+}
+
+/// Char-length of the byte span `input[start..end]` — DSL lengths are
+/// char-based (RUST-PARITY.5.3), guarded exactly like [`span_text`].
+fn span_char_len(input: &str, start: usize, end: usize) -> Option<usize> {
+    if start <= end && end <= input.len() {
+        Some(input[start..end].chars().count())
+    } else {
+        None
+    }
+}
+
 /// Materialize a named-capture map (`entry_named`/`match_named`) into a
 /// `RuntimeValue::Hash` for the `entry_map`/`match_map` helpers (Helper Contract
 /// Catalog §8). Keys are sorted so the projection is deterministic — independent
@@ -1041,10 +1065,207 @@ impl Engine {
                 let name = args.first().map(|a| a.to_str()).unwrap_or_default();
                 Ok(RuntimeValue::Bool(ctx.marks.contains_key(&name)))
             }
+            // ── RUST-PARITY.5.5.3: mark-based capture family ──
+            // Authoritative contract: `perl/LinkedSpec/ActionIR/Contracts.pm`
+            // ~690–1047. Endpoints (byte offsets): the start of the current local
+            // match (`$LSPOS - length $LMATCH` = `ctx.match_start_byte`) for the
+            // non-cursor `*_from`/`*_len_from` readers; the cursor (`pos` =
+            // `ctx.pos`) for `_until_cursor_`; end-of-input for `_rest_`. `_take_`
+            // variants advance the named mark to the read's end (the cursor, or
+            // end-of-input for `_rest_`). Marks are stored byte offsets; text is the
+            // raw slice (correct chars); `_len_` results are char counts (DSL
+            // lengths are char-based, .5.3). A missing mark, or a degenerate
+            // (reversed / out-of-range) span, yields `undef` — matching the Perl
+            // readers' `defined`/`>=` guards; `_take_` mutates only when the span
+            // is valid.
+            "mark_input_start" => {
+                // Store the absolute start-of-input position (0) under the mark.
+                if let Some(a) = args.first() {
+                    ctx.marks.insert(a.to_str(), 0);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_input_end" => {
+                // Store the absolute end-of-input position (byte length) under the mark.
+                if let Some(a) = args.first() {
+                    let end = ctx.input.len();
+                    ctx.marks.insert(a.to_str(), end);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_copy" => {
+                // 2-arg `mark_copy(target, source)`: copy source's position to
+                // target when source is present, else delete target (Contracts.pm
+                // MARK_COPY). The book catalog's 1-arg form was an imprecision,
+                // corrected in .5.5.3.
+                let target = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let source = args.get(1).map(|a| a.to_str()).unwrap_or_default();
+                match ctx.marks.get(&source).copied() {
+                    Some(pos) => {
+                        ctx.marks.insert(target, pos);
+                    }
+                    None => {
+                        ctx.marks.remove(&target);
+                    }
+                }
+                Ok(RuntimeValue::Undef)
+            }
             "capture_from" => {
+                // mark → match-START (was match-END before .5.5.3; fixed for Perl
+                // parity — `capture_from` is a non-cursor reader).
                 let name = args.first().map(|a| a.to_str()).unwrap_or_default();
-                let start = ctx.marks.get(&name).copied().unwrap_or(0);
-                Ok(RuntimeValue::Scalar(ctx.input[start..ctx.pos].to_string()))
+                Ok(match ctx.marks.get(&name).copied() {
+                    Some(mark) => span_text(&ctx.input, mark, ctx.match_start_byte)
+                        .map(RuntimeValue::Scalar)
+                        .unwrap_or(RuntimeValue::Undef),
+                    None => RuntimeValue::Undef,
+                })
+            }
+            "capture_len_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                Ok(match ctx.marks.get(&name).copied() {
+                    Some(mark) => span_char_len(&ctx.input, mark, ctx.match_start_byte)
+                        .map(|n| RuntimeValue::Number(n as f64))
+                        .unwrap_or(RuntimeValue::Undef),
+                    None => RuntimeValue::Undef,
+                })
+            }
+            "capture_until_cursor_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let cursor = ctx.pos;
+                Ok(match ctx.marks.get(&name).copied() {
+                    Some(mark) => span_text(&ctx.input, mark, cursor)
+                        .map(RuntimeValue::Scalar)
+                        .unwrap_or(RuntimeValue::Undef),
+                    None => RuntimeValue::Undef,
+                })
+            }
+            "capture_until_cursor_len_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let cursor = ctx.pos;
+                Ok(match ctx.marks.get(&name).copied() {
+                    Some(mark) => span_char_len(&ctx.input, mark, cursor)
+                        .map(|n| RuntimeValue::Number(n as f64))
+                        .unwrap_or(RuntimeValue::Undef),
+                    None => RuntimeValue::Undef,
+                })
+            }
+            "capture_take_until_cursor_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let cursor = ctx.pos;
+                match ctx.marks.get(&name).copied() {
+                    Some(mark) => match span_text(&ctx.input, mark, cursor) {
+                        Some(text) => {
+                            ctx.marks.insert(name, cursor);
+                            Ok(RuntimeValue::Scalar(text))
+                        }
+                        None => Ok(RuntimeValue::Undef),
+                    },
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take_until_cursor_len_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let cursor = ctx.pos;
+                match ctx.marks.get(&name).copied() {
+                    Some(mark) => match span_char_len(&ctx.input, mark, cursor) {
+                        Some(n) => {
+                            ctx.marks.insert(name, cursor);
+                            Ok(RuntimeValue::Number(n as f64))
+                        }
+                        None => Ok(RuntimeValue::Undef),
+                    },
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take_len_from" => {
+                // length mark→match-START; advances the mark to the cursor
+                // (Contracts.pm CAPTURE_TAKE_LEN_FROM_MARK).
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let cursor = ctx.pos;
+                let end = ctx.match_start_byte;
+                match ctx.marks.get(&name).copied() {
+                    Some(mark) => match span_char_len(&ctx.input, mark, end) {
+                        Some(n) => {
+                            ctx.marks.insert(name, cursor);
+                            Ok(RuntimeValue::Number(n as f64))
+                        }
+                        None => Ok(RuntimeValue::Undef),
+                    },
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_rest_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let end = ctx.input.len();
+                Ok(match ctx.marks.get(&name).copied() {
+                    Some(mark) => span_text(&ctx.input, mark, end)
+                        .map(RuntimeValue::Scalar)
+                        .unwrap_or(RuntimeValue::Undef),
+                    None => RuntimeValue::Undef,
+                })
+            }
+            "capture_rest_len_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let end = ctx.input.len();
+                Ok(match ctx.marks.get(&name).copied() {
+                    Some(mark) => span_char_len(&ctx.input, mark, end)
+                        .map(|n| RuntimeValue::Number(n as f64))
+                        .unwrap_or(RuntimeValue::Undef),
+                    None => RuntimeValue::Undef,
+                })
+            }
+            "capture_take_rest_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let end = ctx.input.len();
+                match ctx.marks.get(&name).copied() {
+                    Some(mark) => match span_text(&ctx.input, mark, end) {
+                        Some(text) => {
+                            ctx.marks.insert(name, end);
+                            Ok(RuntimeValue::Scalar(text))
+                        }
+                        None => Ok(RuntimeValue::Undef),
+                    },
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take_rest_len_from" => {
+                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let end = ctx.input.len();
+                match ctx.marks.get(&name).copied() {
+                    Some(mark) => match span_char_len(&ctx.input, mark, end) {
+                        Some(n) => {
+                            ctx.marks.insert(name, end);
+                            Ok(RuntimeValue::Number(n as f64))
+                        }
+                        None => Ok(RuntimeValue::Undef),
+                    },
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_between" => {
+                let a = args.first().map(|v| v.to_str()).unwrap_or_default();
+                let b = args.get(1).map(|v| v.to_str()).unwrap_or_default();
+                let start = ctx.marks.get(&a).copied();
+                let end = ctx.marks.get(&b).copied();
+                Ok(match (start, end) {
+                    (Some(s), Some(e)) => span_text(&ctx.input, s, e)
+                        .map(RuntimeValue::Scalar)
+                        .unwrap_or(RuntimeValue::Undef),
+                    _ => RuntimeValue::Undef,
+                })
+            }
+            "capture_len_between" => {
+                let a = args.first().map(|v| v.to_str()).unwrap_or_default();
+                let b = args.get(1).map(|v| v.to_str()).unwrap_or_default();
+                let start = ctx.marks.get(&a).copied();
+                let end = ctx.marks.get(&b).copied();
+                Ok(match (start, end) {
+                    (Some(s), Some(e)) => span_char_len(&ctx.input, s, e)
+                        .map(|n| RuntimeValue::Number(n as f64))
+                        .unwrap_or(RuntimeValue::Undef),
+                    _ => RuntimeValue::Undef,
+                })
             }
             // ── Entry/match detail ──
             "entry_line" | "entry_start_line" => {
@@ -2234,6 +2455,11 @@ ChildB:
 
     #[test]
     fn helpers_5_2_mark_and_capture_from() {
+        // RUST-PARITY.5.5.3: `capture_from(mark)` now ends at the **start** of the
+        // current local match (Perl parity: `$LSPOS - length $LMATCH`), not the
+        // cursor / match-end. The mark is set at pos 0 (I-block) and the match
+        // "hello" also starts at byte 0, so the span mark→match-start is empty.
+        // (Before .5.5.3 this wrongly read to match-end and returned "hello".)
         let grammar = r#"Top::
  /(\w+)/
  I { mark_here(scalar("start")) }
@@ -2245,7 +2471,7 @@ ChildB:
         let engine = Engine::new(compiled);
         let result = engine.execute("hello").unwrap();
         let arr = result.as_array().unwrap();
-        assert_eq!(arr[0].as_str().unwrap(), "hello");
+        assert_eq!(arr[0].as_str().unwrap(), "");
     }
 
     #[test]
@@ -2968,5 +3194,201 @@ ChildB:
         assert_eq!(obj.get("a").and_then(|v| v.as_str()), Some("1"));
         assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("2"));
         assert_eq!(obj.len(), 2);
+    }
+
+    // ── RUST-PARITY.5.5.3: mark-based capture family ──
+    // A bare `Top::` rule is Seek mode (matches once); over `"  hi"` the
+    // `/(\w+)/` match starts at byte 2, over `"ab cd"` it matches "ab" (cursor
+    // ends at byte 2). `mark_input_start` pins a mark at 0, `mark_input_end` at
+    // the byte length — giving deterministic spans independent of the match.
+    fn run_5_5_3(grammar: &str, input: &str) -> Vec<Value> {
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        Engine::new(compiled)
+            .execute(input)
+            .unwrap()
+            .as_array()
+            .unwrap()
+            .clone()
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_from_reads_to_match_start() {
+        // mark at 0, match "hi" starts at byte 2 → the pre-match text "  ".
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "  hi");
+        assert_eq!(acc[0].as_str().unwrap(), "  ");
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_from_undef_on_missing_mark() {
+        let g = r#"Top::
+ /(\w+)/
+ E { return(capture_from(scalar("nope"))) }
+"#;
+        let acc = run_5_5_3(g, "hi");
+        assert!(acc[0].is_null(), "missing mark → undef, got {:?}", acc[0]);
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_len_from_is_char_count() {
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_len_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "  hi");
+        assert_eq!(acc[0].as_f64().unwrap(), 2.0); // "  " before the match
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_until_cursor_from() {
+        // mark 0 → cursor (match-end of "ab" = byte 2).
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_until_cursor_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "ab");
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_until_cursor_len_from() {
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_until_cursor_len_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_f64().unwrap(), 2.0);
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_rest_from_reads_to_end() {
+        // mark 0 → end-of-input (past the cursor at byte 2).
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_rest_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "ab cd");
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_rest_len_from() {
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_rest_len_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_f64().unwrap(), 5.0);
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_between_and_len_multibyte() {
+        // mark_input_start(a)=0, mark_input_end(b)=byte len; the span is the whole
+        // multibyte input. capture_between returns the text; capture_len_between
+        // returns the CHAR count (5), not the byte count (6) — char-based parity.
+        let g = r#"Top::
+ /\w/
+ E { mark_input_start(scalar("a")); mark_input_end(scalar("b")); return(capture_between(scalar("a"), scalar("b"))); return(capture_len_between(scalar("a"), scalar("b"))) }
+"#;
+        let acc = run_5_5_3(g, "héllo");
+        assert_eq!(acc[0].as_str().unwrap(), "héllo");
+        assert_eq!(acc[1].as_f64().unwrap(), 5.0);
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_between_undef_when_reversed() {
+        // a = end-of-input, b = start-of-input → reversed span → undef.
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_end(scalar("a")); mark_input_start(scalar("b")); return(capture_between(scalar("a"), scalar("b"))) }
+"#;
+        let acc = run_5_5_3(g, "hi");
+        assert!(acc[0].is_null(), "reversed span → undef, got {:?}", acc[0]);
+    }
+
+    #[test]
+    fn helpers_5_5_3_mark_copy_copies_position() {
+        // copy a (=0) into b, then read until cursor from b → "ab".
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); mark_copy(scalar("b"), scalar("a")); return(capture_until_cursor_from(scalar("b"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "ab");
+    }
+
+    #[test]
+    fn helpers_5_5_3_mark_copy_deletes_target_when_source_missing() {
+        // b is set, then mark_copy(b, <missing>) deletes b → capture_from(b) undef.
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("b")); mark_copy(scalar("b"), scalar("nope")); return(capture_from(scalar("b"))) }
+"#;
+        let acc = run_5_5_3(g, "hi");
+        assert!(acc[0].is_null(), "deleted target → undef, got {:?}", acc[0]);
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_take_until_cursor_from_advances_mark() {
+        // First take reads mark→cursor ("ab") and advances the mark to the cursor;
+        // the second read (mark now == cursor) is therefore empty.
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_take_until_cursor_from(scalar("a"))); return(capture_until_cursor_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "ab");
+        assert_eq!(acc[1].as_str().unwrap(), "");
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_take_until_cursor_len_from_advances_mark() {
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_take_until_cursor_len_from(scalar("a"))); return(capture_until_cursor_len_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_f64().unwrap(), 2.0);
+        assert_eq!(acc[1].as_f64().unwrap(), 0.0);
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_take_len_from_advances_mark_to_cursor() {
+        // len is mark→match-START ("  " = 2); the mark then advances to the CURSOR
+        // (match-end, byte 4), so capture_rest_from is empty afterwards.
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_take_len_from(scalar("a"))); return(capture_rest_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "  hi");
+        assert_eq!(acc[0].as_f64().unwrap(), 2.0);
+        assert_eq!(acc[1].as_str().unwrap(), "");
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_take_rest_from_advances_mark_to_end() {
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_take_rest_from(scalar("a"))); return(capture_rest_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "ab cd");
+        assert_eq!(acc[1].as_str().unwrap(), "");
+    }
+
+    #[test]
+    fn helpers_5_5_3_capture_take_rest_len_from_advances_mark_to_end() {
+        let g = r#"Top::
+ /(\w+)/
+ E { mark_input_start(scalar("a")); return(capture_take_rest_len_from(scalar("a"))); return(capture_rest_len_from(scalar("a"))) }
+"#;
+        let acc = run_5_5_3(g, "ab cd");
+        assert_eq!(acc[0].as_f64().unwrap(), 5.0);
+        assert_eq!(acc[1].as_f64().unwrap(), 0.0);
     }
 }

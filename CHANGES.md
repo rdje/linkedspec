@@ -1,6 +1,55 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.5.3: mark-based capture family in the Rust engine (+ catalog §7 fix)
+
+Third child of the `.5.5` helper-gap split. Implemented the mark-based capture family the
+audit's Gap 5 listed missing, and fixed the pre-existing `capture_from` endpoint to match the
+Perl reference. Authoritative contract: `perl/LinkedSpec/ActionIR/Contracts.pm` ~690–1047.
+
+**Open Question RESOLVED as option (a)** (user-confirmed): the non-cursor mark readers end at
+the **start of the current local match** (`$LSPOS - length $LMATCH` = `ctx.match_start_byte`),
+not the cursor. The landed `capture_from` arm read to `ctx.pos` (match-end); it now reads to
+`ctx.match_start_byte`. The landed test `helpers_5_2_mark_and_capture_from` was updated from
+asserting `"hello"` to `""` (mark 0, whole-input match → empty pre-match span).
+
+New `call_helper` arms in `rust/linkedspec-runtime/src/engine.rs` (+ free helpers
+`span_text`/`span_char_len`, guarded so a missing mark / reversed span yields `undef` instead
+of panicking):
+- readers to **match-start**: `capture_from` (fixed), `capture_len_from`, `capture_take_len_from`;
+- readers to the **cursor**: `capture_until_cursor_from`, `capture_until_cursor_len_from`,
+  `capture_take_until_cursor_from`, `capture_take_until_cursor_len_from`;
+- readers to **end-of-input**: `capture_rest_from`, `capture_rest_len_from`,
+  `capture_take_rest_from`, `capture_take_rest_len_from`;
+- two-mark readers: `capture_between`, `capture_len_between`;
+- setters: `mark_input_start` (→0), `mark_input_end` (→byte length), `mark_copy(target, source)`
+  (**2-arg** — copy, or delete target when source unset).
+
+`_take_` variants advance the named mark to the read's endpoint (cursor, or end-of-input for
+`_rest_`). Text readers return the raw slice; `_len_` readers return the **char** count
+(DSL lengths are char-based, `.5.3`).
+
+**Book (catalog §7) corrected to the authoritative contract** (user-requested): `capture_from`
+now documented as ending at the start of the current match (was "current position"); `mark_copy`
+fixed to its 2-arg copy/delete form (was 1-arg); the `_until_cursor_`/`_take_` readers and the
+anonymous `capture_slice`/`capture_slice_len` endpoint wording corrected; the missing
+`capture_len_from`/`capture_len_between`/`_len_from` companions added. The catalog stays
+variant-agnostic (describes the `.spec` contract).
+
+**Discovered (recorded, out of scope):** the anonymous Rust `capture_slice`/`capture_slice_len`
+arms still read to the cursor (a `.5.5.4` fix); `mark_match_start/end`, `mark_entry_start/end`,
+`capture_take(mark)`, `capture_take_between(_len)` exist in `Contracts.pm` but are absent from
+both Rust and the `RUST-PARITY.1` inventory (inventory gap, flagged for a follow-up leaf).
+
+**Validation:** `cargo test --manifest-path rust/Cargo.toml` = **223 passed / 0 failed**
+(207 baseline + 16 new `helpers_5_5_3_*` covering each helper + missing-mark/reversed-span undef,
+`_take_` mutation, multibyte char-length, and the match-start vs cursor vs end-of-input endpoints).
+`cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` = `linkedspec-runtime`
+source warnings **13 = baseline 13** (11 engine.rs + 2 helpers.rs, all at pre-existing locations;
+vendored pgen/rgx-core ignored). `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0.
+New knowledge card `docs/knowledge/rust-mark-based-capture-family.md`. **Active frontier →
+`RUST-PARITY.5.5.4`** (anonymous capture-slice variants).
+
 ## 2026-06-16 — ALIAS-RETIREMENT-DOC-SYNC.1: retire array-edge alias claims across book + roadmaps
 
 Documentation-only zero-drift correction (new tree `ALIAS-RETIREMENT-DOC-SYNC`, 1 leaf, completed).

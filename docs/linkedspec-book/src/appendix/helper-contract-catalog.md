@@ -505,73 +505,120 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 
 ## 7. Capture and Mark Helpers
 
+LinkedSpec tracks two kinds of capture origin: a single **anonymous capture
+cursor** (set by `start_capture_slice()`) and any number of **named marks** (set
+by `mark_here(name)`, `mark_input_start(name)`, and the other `mark_*` helpers).
+The capture readers below extract text — or its character length — between such
+an origin and one of three endpoints:
+
+- the **start of the current match** — the non-cursor readers (`capture_slice`,
+  `capture_from`, `capture_len_from`, `capture_take_len_from`);
+- the **current scan position** (the cursor) — the `*_until_cursor*` readers;
+- the **end of input** — the `*_rest*` readers.
+
+Text readers return the captured substring; `*_len*` readers return its length in
+**characters** (not bytes). A reader whose mark is unset, or whose span is
+reversed (end before start), returns `undef`. The `capture_take_*` variants are
+destructive: after reading they advance the named mark to the read's endpoint
+(the cursor, or end-of-input for `_rest_`), so the next capture continues there.
+
 ### `start_capture_slice()`
 - **Signature**: `start_capture_slice()`
 - **Returns**: void
-- **Behavior**: Moves the anonymous capture-start cursor to the current input position.
+- **Behavior**: Moves the anonymous capture cursor to the current scan position.
 - **Compatibility**: `capture_slice_here()` is a retired alias.
 
 ### `capture_slice()`
 - **Signature**: `capture_slice()`
 - **Returns**: scalar
-- **Behavior**: Returns the text from the anonymous capture-start cursor to the current position.
+- **Behavior**: Returns the text from the anonymous capture cursor to the start of the current match.
 - **Compatibility**: `capture_from_rule_start()` is a retired alias.
 
 ### `capture_slice_len()`
 - **Signature**: `capture_slice_len()`
 - **Returns**: int
-- **Behavior**: Length of `capture_slice()`. Preferred over raw position arithmetic.
+- **Behavior**: Character length of `capture_slice()`. Preferred over raw position arithmetic.
 - **Compatibility**: `capture_slice_length()` is a retired alias.
-
-### `capture_rest_from(name)`
-- **Signature**: `capture_rest_from(mark_name: string)`
-- **Returns**: scalar
-- **Behavior**: Returns text from the named mark to the end of input.
-
-### `capture_from(name)`
-- **Signature**: `capture_from(mark_name: string)`
-- **Returns**: scalar
-- **Behavior**: Returns text from the named mark to the current position.
-
-### `capture_between(start, end)`
-- **Signature**: `capture_between(start_mark: string, end_mark: string)`
-- **Returns**: scalar
-- **Behavior**: Returns text between two named marks.
-
-### `capture_until_cursor_from(name)`
-- **Signature**: `capture_until_cursor_from(mark_name: string)`
-- **Returns**: scalar
-- **Behavior**: Returns text from the named mark to the current anonymous capture cursor.
-
-### `capture_take_len_from(name, len)`
-- **Signature**: `capture_take_len_from(mark_name: string, length: int)`
-- **Returns**: scalar
-- **Behavior**: Returns `length` characters starting from the named mark.
-
-### `capture_take_rest_from(name)`
-- **Signature**: `capture_take_rest_from(mark_name: string)`
-- **Returns**: scalar
-- **Behavior**: Returns all text from the named mark to end of input (same as `capture_rest_from`).
-
-### `capture_take_until_cursor_from(name)`
-- **Signature**: `capture_take_until_cursor_from(mark_name: string)`
-- **Returns**: scalar
-- **Behavior**: Same as `capture_until_cursor_from(name)`.
 
 ### `mark_input_start(name)`
 - **Signature**: `mark_input_start(mark_name: string)`
 - **Returns**: void
-- **Behavior**: Stores the absolute start-of-input position under the named mark. Used for whole-input capture.
+- **Behavior**: Stores the absolute start-of-input position (0) under the named mark. Used for whole-input capture.
 
 ### `mark_input_end(name)`
 - **Signature**: `mark_input_end(mark_name: string)`
 - **Returns**: void
 - **Behavior**: Stores the absolute end-of-input position under the named mark.
 
-### `mark_copy(name)`
-- **Signature**: `mark_copy(mark_name: string)`
+### `mark_copy(target, source)`
+- **Signature**: `mark_copy(target_mark: string, source_mark: string)`
 - **Returns**: void
-- **Behavior**: Copies a named mark (exact semantics backend-dependent).
+- **Behavior**: Copies the `source` mark's position onto the `target` mark. If `source` is unset, the `target` mark is removed instead.
+
+### `capture_from(name)`
+- **Signature**: `capture_from(mark_name: string)`
+- **Returns**: scalar or undef
+- **Behavior**: Returns text from the named mark to the **start of the current match**.
+
+### `capture_len_from(name)`
+- **Signature**: `capture_len_from(mark_name: string)`
+- **Returns**: int or undef
+- **Behavior**: Character length of `capture_from(name)`.
+
+### `capture_until_cursor_from(name)`
+- **Signature**: `capture_until_cursor_from(mark_name: string)`
+- **Returns**: scalar or undef
+- **Behavior**: Returns text from the named mark to the **current scan position** (cursor).
+
+### `capture_until_cursor_len_from(name)`
+- **Signature**: `capture_until_cursor_len_from(mark_name: string)`
+- **Returns**: int or undef
+- **Behavior**: Character length of `capture_until_cursor_from(name)`.
+
+### `capture_take_until_cursor_from(name)`
+- **Signature**: `capture_take_until_cursor_from(mark_name: string)`
+- **Returns**: scalar or undef
+- **Behavior**: Like `capture_until_cursor_from(name)`, then advances the mark to the cursor.
+
+### `capture_take_until_cursor_len_from(name)`
+- **Signature**: `capture_take_until_cursor_len_from(mark_name: string)`
+- **Returns**: int or undef
+- **Behavior**: Like `capture_until_cursor_len_from(name)`, then advances the mark to the cursor.
+
+### `capture_take_len_from(name)`
+- **Signature**: `capture_take_len_from(mark_name: string)`
+- **Returns**: int or undef
+- **Behavior**: Character length from the mark to the start of the current match, then advances the mark to the cursor.
+
+### `capture_rest_from(name)`
+- **Signature**: `capture_rest_from(mark_name: string)`
+- **Returns**: scalar or undef
+- **Behavior**: Returns text from the named mark to the **end of input**.
+
+### `capture_rest_len_from(name)`
+- **Signature**: `capture_rest_len_from(mark_name: string)`
+- **Returns**: int or undef
+- **Behavior**: Character length of `capture_rest_from(name)`.
+
+### `capture_take_rest_from(name)`
+- **Signature**: `capture_take_rest_from(mark_name: string)`
+- **Returns**: scalar or undef
+- **Behavior**: Like `capture_rest_from(name)`, then advances the mark to end of input.
+
+### `capture_take_rest_len_from(name)`
+- **Signature**: `capture_take_rest_len_from(mark_name: string)`
+- **Returns**: int or undef
+- **Behavior**: Like `capture_rest_len_from(name)`, then advances the mark to end of input.
+
+### `capture_between(start, end)`
+- **Signature**: `capture_between(start_mark: string, end_mark: string)`
+- **Returns**: scalar or undef
+- **Behavior**: Returns text between two named marks (requires `start` ≤ `end`).
+
+### `capture_len_between(start, end)`
+- **Signature**: `capture_len_between(start_mark: string, end_mark: string)`
+- **Returns**: int or undef
+- **Behavior**: Character length of `capture_between(start, end)`.
 
 ## 8. Entry and Match Helpers
 
