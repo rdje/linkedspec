@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `d0fd425` — "MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic"   (ahead of origin: ~111; push at 300; .3 hash pending REPO-HYGIENE sync)
+- latest_commit: `013f212` — "MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic"   (ahead of origin: ~112; push at 300)
 - active_work_unit: `MDBOOK-VARIANT-AGNOSTIC` → frontier leaf: `MDBOOK-VARIANT-AGNOSTIC.4` (pending — remediate public-api chapters)
 - next_action: do `MDBOOK-VARIANT-AGNOSTIC.4` — reframe the 4 public-api chapters (`get-and-get-parser`, `descriptor-introspection`, `trace-api`, `plugin-registry`), which present the Perl API as THE API. Resolve the `.4` Open Question first (inline "reference backend" callout vs a dedicated "Reference backend (Perl)" subsection). Re-grep each page for genuine Perl-API (`LinkedSpec::`/`use LinkedSpec`/`$@`/`my [%$@]`) rather than trusting `.1`'s CLEAN tags. Other live frontiers: `SPEC-SPEC-SELFHOST.4` (docs sync+finalize), `RUST-PARITY.5` (retv BLOCKER + match/entry split + missing helpers).
 - done: `MDBOOK-VARIANT-AGNOSTIC.3` — reframed user-model chapters (lead with `.spec` contract; runnable blocks labelled Perl reference backend); replaced lone raw-host payload with helper DSL; caught a `.1` audit miss (`rule-modes-and-parse-modes` Perl-API block). `mdbook build` exit 0. (Prior: `.2` overview reframe.)
