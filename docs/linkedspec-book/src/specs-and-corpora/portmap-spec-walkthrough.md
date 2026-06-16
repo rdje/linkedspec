@@ -14,6 +14,9 @@ Read this after the [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md).
 
 ## How to run it
 
+`portmap.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The
+reference (Perl) backend loads it by spec name:
+
 ```perl
 use LinkedSpec;
 
@@ -23,6 +26,9 @@ my $ast = $parser->(\$input);
 ```
 
 ## Output shape
+
+The AST is shown below in the Perl reference backend's value rendering (arrays);
+another backend produces the equivalent structure in its own value types.
 
 For a bare signal `clk`:
 

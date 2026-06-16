@@ -74,7 +74,7 @@ structurally equivalent output for every entry.
 ┌─────────────────────────┐
 │  HandlerIR               │  ← The decoupling seam
 │  (10 variant kinds,      │
-│   hashref AST)           │
+│   structured AST)        │
 └──────────┬──────────────┘
            │
            ▼

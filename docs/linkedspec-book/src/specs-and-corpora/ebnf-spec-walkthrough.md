@@ -4,7 +4,7 @@
 
 It is the best second shipped-spec walkthrough after [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md) because it is still small enough to study end to end, but it exercises a different class of parser:
 
-- file-oriented parser loading through `LinkedSpec::get_parser('ebnf')`,
+- file-oriented parser loading by spec name (the `get_parser` entry point),
 - a stateful top-level rule named `grammar_file`,
 - include directive extraction,
 - semantic annotations,
@@ -21,7 +21,8 @@ That design is useful for a shipped example because it shows a realistic middle 
 
 ## How to run it
 
-Use the named parser path:
+`ebnf.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The
+reference (Perl) backend loads it by spec name:
 
 ```perl
 use LinkedSpec;
@@ -579,7 +580,7 @@ The rule is:
 
 ```text
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); my $c = $CAPTURE; $c =~ s/\s*$//o; $c =~ s/^"|"$//go; return ['semantic_annotation', [$IMATCH_LIST[0], $c]]}
+-> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(s(c), "\s*$", "", o); substr(s(c), "^\"|\"$", "", go); return(a("semantic_annotation", a(entry_group(0), s(c))))}
 ```
 
 The key ideas are:
@@ -587,7 +588,8 @@ The key ideas are:
 - the first regex reads the annotation name and colon,
 - the following action captures the payload until the next semantic annotation or grammar rule,
 - `BACKTRACK()` positions the parser so the next structural token can be processed by its own rule,
-- the payload is trimmed before returning.
+- the payload is trimmed before returning,
+- the action is written entirely in canonical helper DSL (`capture_slice()`, `substr(...)`, `entry_group(0)`, `return(a(...))`) — no raw host-language code, which is why the descriptor below reports this rule as ActionIR-ready.
 
 This rule is a good example of why capture-boundary helpers matter. It is parsing an open-ended payload where the right edge is not a fixed delimiter; it is the beginning of the next structural thing.
 

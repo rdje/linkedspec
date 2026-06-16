@@ -4,20 +4,26 @@ This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
 same `.spec` input. No Perl implementation knowledge is required.
 
+> **Cursor terminology.** Throughout this appendix, *the cursor* (or *input
+> position*) is the backend-neutral name for the current parse position. The Perl
+> reference backend spells it `pos($input)`; a different backend uses its own
+> position primitive. The behavioral contracts below are what every backend must
+> reproduce, independent of that spelling.
+
 ## 1. Parse Modes
 
 ### 1.1 Seek Mode
 
 **Default for OR-type rules** (repeated choice: `:*`, `:+`, `OR+`, bare `rule:`).
 
-The regex is matched **ungrounded** — equivalent to Perl's `//gcp` (match anywhere
-in the remaining input, with `pos()` tracking position). Each repetition finds the
-next match from the current position.
+The regex is matched **ungrounded** — match anywhere in the remaining input, with the
+cursor tracking position (the Perl reference backend uses `//gcp`). Each repetition
+finds the next match from the current position.
 
 **Behavioral contract:**
-1. Set the match start position to `pos($input)`.
-2. Execute the regex with ungrounded semantics (match anywhere from current `pos()`).
-3. On match: advance `pos($input)` to the match end, return the match info.
+1. Set the match start position to the current cursor.
+2. Execute the regex with ungrounded semantics (match anywhere from the current cursor).
+3. On match: advance the cursor to the match end, return the match info.
 4. On no match: the rule terminates (loop exits).
 
 **Key property**: Children can match in any order. Gaps between matches are
@@ -29,12 +35,12 @@ it can, where it can.
 **Used for AND-type rules** (ordered sequence: `AND` mode, `:&`, `:|`).
 
 The regex is **`\G`-anchored** — it must match contiguously from the current
-position. The match must start exactly at `pos($input)`.
+position. The match must start exactly at the current cursor.
 
 **Behavioral contract:**
-1. Anchor the regex at the current `pos($input)`.
-2. Execute the regex with `\G` anchoring (match ONLY at current position).
-3. On match: advance `pos($input)` to the match end.
+1. Anchor the regex at the current cursor.
+2. Execute the regex with `\G` anchoring (match ONLY at the current position).
+3. On match: advance the cursor to the match end.
 4. On no match: the rule terminates (loop exits, or error).
 
 **Key property**: Children must match in order, contiguously. No gaps allowed.
@@ -149,10 +155,10 @@ I  →  [LS → match → LE → IT] × N  →  EX → LX → E
 `BACKTRACK` (case-sensitive) and `IBACKTRACK` (case-insensitive) perform a
 **local cursor rewind**, not systemic backtracking:
 
-1. Save the current input position `pos($input)`.
+1. Save the current cursor (input position).
 2. Execute the child or code block.
 3. If the child fails (no match) or a condition is unmet:
-   - Restore `pos($input)` to the saved position.
+   - Restore the cursor to the saved position.
    - Continue as if the attempt never happened (the input cursor is unchanged).
 4. If the child succeeds:
    - The position advance from the successful match is kept.
@@ -265,10 +271,10 @@ The compiler selects a handler variant based on:
 Repetition variants embed a nested handler (inner loop) for per-iteration dispatch,
 wrapped in a bounds-checking outer loop.
 
-## 8. Regex Dispatch (LinkedRE::or)
+## 8. Regex Dispatch
 
-The current implementation uses position-tracking regex alternation to identify
-which child matched. Each child regex is compiled into a combined alternation:
+The Perl reference backend (`LinkedRE::or`) uses position-tracking regex alternation
+to identify which child matched. Each child regex is compiled into a combined alternation:
 
 ```
 /(?{$pos=0}) child0_re | (?{$pos=1}) child1_re | ... /gcp
@@ -302,7 +308,7 @@ This guard applies to all repetition modes (`:*`, `:+`, `OR+`, `AND+`, bounded f
 All errors produce structured payloads with:
 - `summary`: human-readable error description
 - `detail`: structured detail (what, where, why)
-- `handler_source_label`: which handler generated the error (`LinkedSpec::generated_handler:<rule_label>`)
+- `handler_source_label`: which handler generated the error (the Perl reference backend spells this `LinkedSpec::generated_handler:<rule_label>`)
 - `spec_name` / `spec_path`: which `.spec` file
 - `top_rule`: the top-level entry point
 

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.5` done)
+- Last updated: `2026-06-16` (`.6` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -81,11 +81,11 @@ minimized in user-facing chapters and clearly labeled when present.
   Commit: `MDBOOK-VARIANT-AGNOSTIC.5 — reframe DSL + compiler/architecture chapters as variant-agnostic`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.6`
-  Status: `pending`
+  Status: `done`
   Goal: Remediate appendix, specs-and-corpora, and development chapters
   Acceptance: Appendix and walkthrough chapters framed for multi-backend readers; development chapters explain Perl is reference
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — re-grepped all 12 in-scope pages (did NOT trust `.1` CLEAN tags). Appendix (3): `formal-grammar` (`pos()`→cursor), `runtime-semantics` (added a cursor-terminology note; demoted 9× `pos($input)`→cursor across the §1/§4 behavioral contracts; relabeled §8 `LinkedRE::or` + the §10.1 `generated_handler` spelling as Perl-reference), `backend-handoff` (diagram `hashref AST`→`structured AST`, box alignment preserved). Corpus walkthroughs (6): one shared backend-neutral driver-block frame ("`X.spec` is the contract; the reference (Perl) backend loads it by spec name"), `lispish` (demoted `get_parser` bullet + `Lispish.pm` reference-backend label), `tablegrep`/`portmap` (value-rendering note on output), `pplugin` (`.plg`/`PPlugin` Perl-reference banner; kept the well-framed `eval` compat-surface explanation), `shipped-specs-and-corpora` (Perl-reference banner over the `plugin/` migration narrative + runnable-examples frame). **Drift caught & fixed:** the `ebnf` walkthrough showed a stale **raw-Perl** `semantic_annotation` action (`my $c = $CAPTURE; $c =~ s/...; return [...]`) that no longer matches the migrated shipped `specs/ebnf.spec:187` — replaced with the actual canonical helper-DSL rule (`capture_slice()`, `substr(s(c), ...)`, `return(a(entry_group(0), s(c)))`), reconciling the page with its own `ready=1`/`compatibility_surface_rules=0` descriptor section. Confirmed CLEAN: `helper-contract-catalog` (gold), `documentation-workflow` (0 Perl signals). `git diff --check` clean; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0.
+  Commit: `MDBOOK-VARIANT-AGNOSTIC.6 — reframe appendix + corpus walkthroughs + development chapters as variant-agnostic (and fix ebnf walkthrough raw-Perl drift)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.7`
   Status: `pending`
@@ -98,10 +98,9 @@ minimized in user-facing chapters and clearly labeled when present.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
-| 2 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
+| 1 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
 
-(`.1`, `.2`, `.3`, `.4`, `.5` complete — removed from frontier.)
+(`.1`, `.2`, `.3`, `.4`, `.5`, `.6` complete — removed from frontier.)
 
 ## Audit Findings (.1)
 
@@ -205,6 +204,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.3` | remediated 4 user-model pages (1 confirmed CLEAN); caught a `.1` audit miss (`rule-modes-and-parse-modes.md` had a real Perl-API block); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.4` | remediated all 4 public-api pages (Option A frames); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.5` | re-grepped all 14 in-scope pages (caught 3 leaks `.1` tagged CLEAN); remediated 4 compiler + 4 DSL pages + 1 architecture banner (5 confirmed CLEAN); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.6` | re-grepped all 12 in-scope pages; reframed 10 (3 appendix + 6 corpus + 1 development), 2 confirmed CLEAN; caught + fixed `ebnf` walkthrough raw-Perl drift vs shipped `specs/ebnf.spec:187`; `git diff --check` clean; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
@@ -215,6 +215,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `MDBOOK-VARIANT-AGNOSTIC.3` | `MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic (.spec contract first; Perl = reference backend)` | 4 user-model pages remediated (+1 confirmed CLEAN); audit miss corrected; frontier advanced to `.4` |
 | `MDBOOK-VARIANT-AGNOSTIC.4` | `MDBOOK-VARIANT-AGNOSTIC.4 — reframe public-api chapters as variant-agnostic (entry points/options/trace/descriptor = contract; Perl = reference surface)` | 4 public-api pages remediated (Option A); Open Question resolved; frontier advanced to `.5` |
 | `MDBOOK-VARIANT-AGNOSTIC.5` | `MDBOOK-VARIANT-AGNOSTIC.5 — reframe DSL + compiler/architecture chapters as variant-agnostic` | 4 compiler + 4 DSL pages reframed + `owner-tree` banner; 3 `.1`-CLEAN misses caught; frontier advanced to `.6` |
+| `MDBOOK-VARIANT-AGNOSTIC.6` | `MDBOOK-VARIANT-AGNOSTIC.6 — reframe appendix + corpus walkthroughs + development chapters as variant-agnostic (and fix ebnf walkthrough raw-Perl drift)` | 10 pages reframed (+2 confirmed CLEAN); `ebnf` walkthrough raw-Perl drift fixed against shipped spec; frontier advanced to `.7` |
 
 ## Changelog
 
@@ -250,3 +251,14 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
   got backend-neutral frames demoting concrete Perl behind a "Perl reference backend" label;
   `architecture/owner-tree` got a "Perl reference implementation" banner (content kept per
   Non-Goals). 5 pages confirmed genuinely CLEAN. `mdbook build` exit 0. Frontier advanced to `.6`.
+- `2026-06-16`: Completed `.6` — reframed the appendix (3), the 6 corpus walkthroughs, and the
+  development CI chapter; 2 pages confirmed CLEAN. Appendix: `formal-grammar`/`runtime-semantics`
+  cursor terminology (demoted `pos($input)`; relabeled `LinkedRE::or` + `generated_handler`),
+  `backend-handoff` diagram `hashref AST`→`structured AST` (alignment preserved). Corpus: one
+  shared "the `.spec` is the contract; the reference (Perl) backend runs it by spec name" driver
+  frame across all 6; Perl-reference banners on the hub's `plugin/` migration narrative and on
+  `pplugin`'s `.plg`/`PPlugin` subject (kept the `eval` compat-surface explanation). **Caught and
+  fixed a drift** beyond framing: the `ebnf` walkthrough showed a stale raw-Perl
+  `semantic_annotation` action that no longer matched the migrated shipped helper-DSL rule
+  (`specs/ebnf.spec:187`) — corrected, which also reconciled the page with its own `ready=1`
+  descriptor section. `git diff --check` clean; `mdbook build` exit 0. Frontier advanced to `.7`.

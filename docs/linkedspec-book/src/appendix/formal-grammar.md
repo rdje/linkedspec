@@ -296,7 +296,7 @@ sequences where input must be consumed in exact order.
 ### 5.3 BACKTRACK and IBACKTRACK
 
 `BACKTRACK` performs a **local cursor rewind**: if a child match fails or a condition
-is unmet, the parser rewinds the input position (`pos()`) to where it was before the
+is unmet, the parser rewinds the input position (the cursor) to where it was before the
 attempt. This is a local rewind — not systemic backtracking. LinkedSpec does not
 maintain a search tree, unwind partial rule matches, or restore alternative-choice
 state.

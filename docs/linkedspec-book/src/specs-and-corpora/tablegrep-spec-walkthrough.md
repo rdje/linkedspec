@@ -15,6 +15,9 @@ Read this after [Worked `.spec` Walkthrough](../user-model/worked-spec-walkthrou
 
 ## How to run it
 
+`tablegrep.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The
+reference (Perl) backend loads it by spec name:
+
 ```perl
 use LinkedSpec;
 
@@ -26,6 +29,9 @@ my $ast = $parser->(\$input);
 The parser returns an array of AST nodes, one per matched expression component, or `undef` if the expression is empty.
 
 ## Output shape
+
+The AST is shown below in the Perl reference backend's value rendering (hashes and
+arrays); another backend produces the equivalent structure in its own value types.
 
 For `field1 =~ /foo/`:
 

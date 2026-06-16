@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.6: reframe appendix + corpus walkthroughs + development chapters as variant-agnostic
+
+Book documentation only (no code). Remediated the remaining `.6` scope — the 4 appendix pages, the
+6 corpus walkthroughs, and the 2 development pages — with the `.2`–`.5` "demote, don't delete"
+convention, re-grepping all 12 in-scope pages for genuine Perl-API signals rather than trusting the
+`.1` tags. **Appendix (3 edited, 1 CLEAN):** `appendix/formal-grammar.md` (`pos()` → "the cursor" so
+the grammar appendix needs no Perl knowledge), `appendix/runtime-semantics.md` (added a
+cursor-terminology note; demoted 9× `pos($input)` → "the cursor" across the §1 parse-mode and §4
+BACKTRACK behavioral contracts; relabeled §8 `LinkedRE::or` and the §10.1
+`LinkedSpec::generated_handler:<rule_label>` spelling as the Perl reference), `appendix/backend-handoff.md`
+(HandlerIR diagram box `hashref AST` → `structured AST`, box alignment preserved);
+`appendix/helper-contract-catalog.md` confirmed CLEAN (gold standard, 0 Perl signals). **Corpus
+walkthroughs (6):** one shared backend-neutral driver-block frame across all six — "`X.spec` is the
+backend-neutral contract; any LinkedSpec backend can run it. The reference (Perl) backend loads it by
+spec name:" before the runnable `use LinkedSpec; … $parser->(\$input)` block. `lispish` also demoted
+the `get_parser` bullet and labelled `perl/Lispish.pm` as a Perl reference-backend convenience module;
+`tablegrep`/`portmap` got a value-rendering note ("shown in the Perl reference backend's value
+rendering; another backend produces the equivalent structure"); `pplugin` got a `.plg`/`PPlugin`
+"Perl reference implementation" banner while keeping its already well-framed `eval` compat-surface
+explanation; `shipped-specs-and-corpora` got a Perl-reference banner over the long `plugin/`
+package-owner migration narrative (kept per Non-Goals) plus a runnable-examples frame.
+**Drift caught & fixed (beyond framing):** the `ebnf` walkthrough showed a stale **raw-Perl**
+`semantic_annotation` action edge (`{BACKTRACK(); my $c = $CAPTURE; $c =~ s/…; return ['…', […]]}`)
+that no longer matched the migrated shipped rule at `specs/ebnf.spec:187` — replaced with the actual
+canonical helper-DSL rule (`declare(scalar, c=capture_slice()); substr(s(c), …); return(a("semantic_annotation", a(entry_group(0), s(c))))`),
+which also reconciles the page with its own `semantic_annotation … ready=1` /
+`compatibility_surface_rules=0` descriptor-readiness section. **Development (1 edited, 1 CLEAN):**
+`development/local-ci-and-regression.md` got a "Perl reference implementation" frame (its
+`perl -c` / `t/phase0_regression.t` / `run_ci_local.sh` references are legit per Non-Goals; a new
+backend has its own gate but must pass the shared language-neutral corpus);
+`development/documentation-workflow.md` confirmed CLEAN. Verification: `git diff --check` clean;
+`mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0. Frontier advanced
+`.6`→`.7` (final build + cross-chapter consistency + docs sync).
+
 ## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.5: reframe DSL + compiler/architecture chapters as variant-agnostic
 
 Book documentation only (no code). Remediated the DSL + compiler/architecture mdBook chapters with

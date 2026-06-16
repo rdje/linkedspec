@@ -75,7 +75,7 @@ The important point is that these files collectively exercise the system:
 - recursive delimiter rules,
 - lifecycle blocks,
 - action helper DSL,
-- raw-Perl compatibility seams,
+- raw-host-language compatibility seams (a Perl reference-backend concern),
 - generated descriptor metadata,
 - dependency-regex dispatch,
 - runtime parser invocation,
@@ -115,6 +115,10 @@ That does not mean they are useless. It means a reader should not infer the same
 The long-term direction is to keep promoting shipped specs from historical/experimental material into well-documented, helper-DSL-first examples.
 
 ## Examples of using shipped specs
+
+These `.spec` files are the backend-neutral contract; any LinkedSpec backend can run
+them. The runnable examples below show the **Perl reference backend's** surface
+(`use LinkedSpec; LinkedSpec::get_parser(...)`).
 
 Load the Lispish parser:
 
@@ -162,6 +166,13 @@ For the detailed rule-by-rule explanation of the shipped grammar-file parser, re
 `plugin/` contains legacy `.plg` files.
 
 Architecturally, this is transition material, not the future identity of LinkedSpec.
+
+> **Perl reference implementation.** The `.plg` plugin system, the `PPlugin` runtime,
+> and the package-owner migration narrative in this section are part of the **Perl
+> reference backend's** legacy transition. They are **not** part of the backend-neutral
+> `.spec` contract — a new backend (Rust, Julia, Dart, …) does not implement any of it.
+> The detail is kept here as a faithful record of the reference implementation's ongoing
+> plugin retirement.
 
 It is still important because:
 

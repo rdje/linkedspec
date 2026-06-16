@@ -2,6 +2,8 @@
 
 `specs/pplugin.spec` parses LinkedSpec plugin files (`.plg`). Plugin files define Perl subroutines in a lightweight DSL that the `PPlugin` runtime loads and executes. This spec is the parser that `PPlugin` itself uses to read plugin source files.
 
+> **Perl reference implementation.** `.plg` files and the `PPlugin` runtime belong to the **Perl reference backend's** legacy plugin system — not the backend-neutral `.spec` contract. This walkthrough is included because `pplugin.spec` is a real corpus example of parsing a host-language format; the `eval`-based compatibility surface it relies on is discussed below.
+
 It demonstrates:
 
 - the plugin-family DSL (subroutine definitions with `subname { ... }` syntax),
@@ -14,6 +16,9 @@ It demonstrates:
 Read this after the [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md).
 
 ## How to run it
+
+`pplugin.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The
+reference (Perl) backend loads it by spec name:
 
 ```perl
 use LinkedSpec;

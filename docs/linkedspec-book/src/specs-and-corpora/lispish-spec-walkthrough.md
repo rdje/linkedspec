@@ -4,7 +4,7 @@
 
 It is compact, but it is not a toy. It demonstrates:
 
-- file-oriented parser loading through `LinkedSpec::get_parser('Lispish')`,
+- file-oriented parser loading by spec name (the `get_parser` entry point),
 - a real top-level rule named `Lispish`,
 - recursive parenthesized parsing,
 - child-rule calls from action edges,
@@ -17,7 +17,8 @@ Read this chapter after [Worked `.spec` Walkthrough](../user-model/worked-spec-w
 
 ## How to run it
 
-Use the named parser path:
+`Lispish.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The
+reference (Perl) backend loads it by spec name:
 
 ```perl
 use LinkedSpec;
@@ -387,7 +388,9 @@ This does not mean the spec is stylistically perfect or finished forever. It mea
 
 ## The convenience module
 
-The repository also ships `perl/Lispish.pm`.
+The repository also ships `perl/Lispish.pm`. This is a **Perl reference-backend**
+convenience module, not part of the backend-neutral `.spec` contract — a different
+backend would provide its own equivalent (or none).
 
 That module is a thin convenience layer around the named parser plus array-tree helpers:
 

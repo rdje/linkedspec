@@ -4,6 +4,12 @@ LinkedSpec relies heavily on a strong regression gate.
 
 This is not incidental. LinkedSpec is being refactored while it remains a working dynamic parser system. The local gate is what lets the project change internal architecture without quietly breaking shipped specs, diagnostics contracts, or helper-DSL lowering semantics.
 
+> **Perl reference implementation.** This chapter describes the **Perl reference
+> backend's** CI and regression gate (`perl -c`, `t/phase0_regression.t`,
+> `tools/run_ci_local.sh`). A backend in another language has its own build/test gate,
+> but every backend must pass the shared, language-neutral test corpus that defines
+> `.spec` compliance (see [Backend Handoff](../appendix/backend-handoff.md)).
+
 ## Main local gate
 
 Run:
