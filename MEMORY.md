@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `316fdc7` — "RUST-PARITY.4 — WIP checkpoint: preserve in-flight Rust self-hosting exploration (superseded)"
+- latest_commit: `0b35495` — "Docs: SPEC-FORMAT-TERSE — formalize the .spec terse-format brainstorm into a proposed task tree"
 - active_work_unit: `SPEC-SPEC-SELFHOST` → frontier leaf: `SPEC-SPEC-SELFHOST.4` (pending — docs sync + finalize)
 - next_action: fix the PRE-EXISTING RTLUtils phase0 hang (new tree, see blockers) so the gate runs; THEN activate `SPEC-FORMAT-TERSE` (proposed) — the formalized 2026-06-15 terse-format brainstorm (Rounds 1–3 + resume 4+), goal = terse/dynamic/readable, ALL variants at feature parity, variant-neutral book; start at `.0` ratify+ADR. Also SPEC-SPEC-SELFHOST.4.
 - done: `.2`+`.3` committed (`4c667b7`) — `specs/spec.spec` rewritten as a faithful self-hosting grammar (spec_file -> 12 part rules, group-at-rule_header, mirrors BootstrapSpec::Core SPEC_ROOT). ratio 1.0000; 19/19 paragraph-count fidelity; cross-check 20/20; self-parses (13==13); possessive-quantifier perf hardening.
