@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.2: separate entry_* from match_* in the Rust engine
+
+Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). Closed the audit's match/entry-unification
+MAJOR: the single match-set site assigned the rule's own regex match to BOTH the entry registers
+(`entry_groups`/`entry_named`) and the local registers (`match_groups`/`match_named`), so `entry_*` and
+`match_*` could never diverge and a dispatched child clobbered the parent's match. Root cause: the engine
+shares one `RuntimeContext`, but the Perl reference keeps two *per-handler* `my` lexicals — `IMATCH` (the
+entry match, set in the handler preamble from the match the dispatcher passed in: `IMATCH = $$info{match}`,
+and a parent invokes a child with its own `$minfo`, `ActionIR/MethodLowering.pm:332`) and `LMATCH` (the
+local match, the rule's own regex match: `_build_lmatch_extraction`). Fix: `execute_rule` now emulates
+that lexical scoping with a `SavedMatchState` save/restore: (1) on entry it saves the caller's
+`entry_*`/`match_*` and sets THIS invocation's entry match = the caller's local match (`$info = $minfo`),
+starting the local match empty; (2) each own regex match updates only `match_*`, and seeds `entry_*` from
+the first own match **only when entry is still empty** (the top-rule / dispatcher-less case — the framework
+passes the top rule's own match as `$info`); (3) both the blind-call early return and the normal return
+restore the caller's registers, so a child's matching is transparent to the parent. Net effect: a
+dispatched child's `entry_*` reads the parent's match while its `match_*` reads its own (they diverge in
+nested contexts), and the parent's `match_*` survives a child dispatch.
+
+The runtime Perl oracle was inconclusive for minimal hand-authored inline specs (`.spec` top-rule/lifecycle
+authoring friction returned empty/0), so the contract was taken directly from the authoritative Perl source
+(the three sites above) and pinned by Rust tests — the leaf's parity gate is `cargo test` + `cargo clippy`.
+Group **indexing** is unchanged and out of scope (`entry_group(0)` = full match in Rust vs Perl
+`match_group(0)` = first capture — flagged as a later parity item).
+
+**Validation:** `cargo test --manifest-path rust/Cargo.toml` = 189 passed / 0 failed (186 baseline + 3 new
+`match_5_2_*`: child entry/local divergence, parent match survives child dispatch, top-rule entry==local).
+`cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests`: touched-file warning set
+identical to baseline (14 `engine.rs` + 1 pre-existing `len_zero` at `integration_test.rs:199`), only
+line-shifted — zero new warnings. New knowledge card `docs/knowledge/rust-entry-match-separation.md`. No
+book change (the `.spec` `entry_*`/`match_*` contract is already documented; Rust now conforms — Rust-parity
+book sync stays `RUST-PARITY.9`).
+
 ## 2026-06-16 — RUST-PARITY.5.1: fix child-return (retv) propagation in the Rust engine
 
 Rust engine code (`rust/linkedspec-runtime/`). Closed the retv-propagation BLOCKER (the audit's

@@ -41,6 +41,31 @@ pub struct Engine {
     spec: CompiledSpec,
 }
 
+/// Saved per-invocation entry/local match state.
+///
+/// In the Perl reference, the entry match (`IMATCH`) and the local match
+/// (`LMATCH`) are per-handler `my` lexicals, so a child rule's matching can
+/// never mutate the parent's match state. The Rust engine shares one
+/// `RuntimeContext` across the whole parse, so `execute_rule` emulates that
+/// lexical scoping: on entry it saves the caller's match state here, and on exit
+/// it restores it — making nested dispatch transparent to the parent.
+struct SavedMatchState {
+    entry_groups: Vec<String>,
+    entry_named: std::collections::HashMap<String, String>,
+    match_groups: Vec<String>,
+    match_named: std::collections::HashMap<String, String>,
+}
+
+impl SavedMatchState {
+    /// Restore the saved caller match state onto the context (invocation exit).
+    fn restore(self, ctx: &mut RuntimeContext) {
+        ctx.entry_groups = self.entry_groups;
+        ctx.entry_named = self.entry_named;
+        ctx.match_groups = self.match_groups;
+        ctx.match_named = self.match_named;
+    }
+}
+
 impl Engine {
     /// Create a new engine from a compiled spec.
     pub fn new(spec: CompiledSpec) -> Self {
@@ -78,6 +103,30 @@ impl Engine {
         // caller's pending return, then start this invocation with a clean
         // channel so a dispatched child cannot leak its return into ours.
         let caller_return = ctx.take_return_value();
+
+        // ── Emulate the Perl per-handler IMATCH/LMATCH lexicals ──
+        // The dispatcher passes its own local match as the child's `$info`
+        // (`MethodLowering.pm:332` calls the child handler with `$minfo`), and
+        // the child's preamble sets `IMATCH = $$info{match}`
+        // (`SpecEntry::_build_handler_preamble`). The rule's own regex match
+        // sets `LMATCH` (`HandlerVariantEmitter::_build_lmatch_extraction`). So
+        // this invocation's ENTRY match is the dispatcher's current LOCAL match,
+        // and the rule's own matches only update the LOCAL match. Save the
+        // caller's lexicals and restore them on exit so a child's matching never
+        // mutates the parent's entry/local match.
+        let saved_match = SavedMatchState {
+            entry_groups: std::mem::take(&mut ctx.entry_groups),
+            entry_named: std::mem::take(&mut ctx.entry_named),
+            match_groups: std::mem::take(&mut ctx.match_groups),
+            match_named: std::mem::take(&mut ctx.match_named),
+        };
+        // ENTRY match (`IMATCH`) = the dispatcher's local match (`$$info{match}`).
+        // For the top rule the caller has no local match, so this starts empty
+        // and is seeded from the rule's own first match below (mirroring the
+        // framework passing the top rule's own match as `$info`).
+        ctx.entry_groups = saved_match.match_groups.clone();
+        ctx.entry_named = saved_match.match_named.clone();
+        // LOCAL match (`LMATCH`) starts empty until this rule matches its regex.
 
         // Build regex alternation (or fallback for edge-only rules)
         let alt = if rule.regex_patterns.is_empty() {
@@ -121,6 +170,7 @@ impl Engine {
             }
             let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
             ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
             return Ok(my_return);
         }
 
@@ -179,10 +229,22 @@ impl Engine {
 
             if let Some(m) = match_result {
                 ctx.set_pos(m.end);
-                ctx.entry_groups = m.groups.clone();
-                ctx.entry_named = m.named.clone();
+                // LOCAL match (`LMATCH`) — the rule's own regex match. This is
+                // what `match_*` helpers read; it must NOT touch the entry match
+                // (Perl keeps `IMATCH` and `LMATCH` separate — only an explicit
+                // I-block bridge copies one to the other).
                 ctx.match_groups = m.groups.clone();
                 ctx.match_named = m.named.clone();
+                // Top-rule / dispatcher-less entry: the rule's own first match
+                // is also its entry match (the framework passes the top rule's
+                // own match as `$info`). A dispatched child already carries a
+                // non-empty entry match (the dispatcher's local match) and is
+                // left untouched, so `entry_*` and `match_*` diverge correctly
+                // in nested contexts.
+                if ctx.entry_groups.is_empty() {
+                    ctx.entry_groups = m.groups.clone();
+                    ctx.entry_named = m.named.clone();
+                }
 
                 // ── Action-edge dispatch ──
                 for entry in &rule.acode_dispatch {
@@ -257,9 +319,11 @@ impl Engine {
         }
 
         // This invocation's return value is whatever its blocks last returned;
-        // restore the caller's pending return so nested dispatch is transparent.
+        // restore the caller's pending return and match lexicals so nested
+        // dispatch is transparent to the parent.
         let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
         ctx.restore_return_value(caller_return);
+        saved_match.restore(ctx);
         Ok(my_return)
     }
 

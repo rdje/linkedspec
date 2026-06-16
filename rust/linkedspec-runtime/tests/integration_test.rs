@@ -543,3 +543,96 @@ Sub:
         "call(child) must evaluate to the child's return value"
     );
 }
+
+// ── RUST-PARITY.5.2 regression tests — entry_* vs match_* separation ──
+//
+// The Perl reference keeps two distinct match registers per handler invocation:
+// the ENTRY match (`IMATCH`), initialised in the handler preamble from the
+// match the dispatcher passed in (`IMATCH = $$info{match}`, and a parent calls
+// a child with its own `$minfo` — `MethodLowering.pm:332`), and the LOCAL match
+// (`LMATCH = $$minfo{match}`), the rule's own regex match
+// (`HandlerVariantEmitter::_build_lmatch_extraction`). They are per-handler
+// `my` lexicals, so a child's matching never mutates the parent's. The Rust
+// engine previously unified them on the shared context (both set to the same
+// groups on every match), so `entry_*` and `match_*` could never diverge and a
+// child clobbered the parent's match. These tests pin the corrected semantics.
+
+// (a) A dispatched child reads the PARENT's (dispatcher's) match via `entry_*`
+// and its OWN match via `match_*` — the two diverge.
+#[test]
+fn match_5_2_child_entry_is_dispatcher_match_local_is_own() {
+    let grammar = r#"Parent::
+ /(open)/ -> Child
+ I { declare(array, results) }
+ LE { push_value(array(results), scalar(retv)) }
+ E { return(array_copy(array(results))) }
+
+Child:
+ /(close)/
+ E { return(concat(scalar(entry_text()), scalar("|"), scalar(match_text()))) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("openclose").unwrap();
+    let acc: &Vec<Value> = result.as_array().unwrap();
+    let results: &Vec<Value> = acc.last().unwrap().as_array().unwrap();
+    assert_eq!(
+        results.last().unwrap().as_str().unwrap(),
+        "open|close",
+        "child entry_text must be the parent's match ('open'), match_text its \
+         own ('close') — they must diverge (regression: were unified)"
+    );
+}
+
+// (b) The parent's LOCAL match survives a child dispatch: after dispatching a
+// child that matches a different pattern, the parent's `match_*` still reads its
+// own match (per-handler lexical restore), not the child's.
+#[test]
+fn match_5_2_parent_local_match_survives_child_dispatch() {
+    let grammar = r#"Parent::
+ /(open)/ -> Child
+ I { declare(array, results) }
+ LE { push_value(array(results), scalar(match_text())) }
+ E { return(array_copy(array(results))) }
+
+Child:
+ /(close)/
+ E { return(scalar("child")) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("openclose").unwrap();
+    let acc: &Vec<Value> = result.as_array().unwrap();
+    let results: &Vec<Value> = acc.last().unwrap().as_array().unwrap();
+    assert_eq!(
+        results.last().unwrap().as_str().unwrap(),
+        "open",
+        "parent's match_text after child dispatch must be its own match \
+         ('open'), not the child's ('close')"
+    );
+}
+
+// (c) The top rule with no dispatcher seeds its entry match from its own first
+// match, so `entry_*` and `match_*` agree there (no spurious divergence).
+#[test]
+fn match_5_2_top_rule_entry_equals_local_match() {
+    let grammar = r#"Top::
+ /(\w+)/
+ E { return(concat(scalar(entry_text()), scalar("|"), scalar(match_text()))) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("hello").unwrap();
+    let acc: &Vec<Value> = result.as_array().unwrap();
+    assert_eq!(
+        acc.last().unwrap().as_str().unwrap(),
+        "hello|hello",
+        "top rule (no dispatcher) seeds entry from its own first match"
+    );
+}

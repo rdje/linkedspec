@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16`
+- Last updated: `2026-06-16` (`.5.2` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -79,11 +79,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.5.1` (see Commit Log)
 
 - ID: `RUST-PARITY.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Separate `match_*` from `entry_*` (stop unifying them at engine.rs:171-174)
   Acceptance: `match_*` reads the current local match while `entry_*` reads the entry match; nested-match reads diverge correctly; regression test; baseline green; clippy clean.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-16. The match-set site previously assigned the rule's own match to BOTH `entry_*` and `match_*`. Now `execute_rule` emulates Perl's per-handler `IMATCH`/`LMATCH` lexicals via a `SavedMatchState` save/restore on the shared `RuntimeContext`: the invocation's ENTRY match = the dispatcher's local match (`$info = $minfo`, `MethodLowering.pm:332` + `SpecEntry::_build_handler_preamble` `IMATCH=$$info{match}`); the rule's own match updates only the LOCAL match (`LMATCH`, `_build_lmatch_extraction`); the entry match is seeded from the rule's own first match only when empty (top-rule / dispatcher-less case); both registers are restored on exit (blind-call + normal returns) so a child's matching is transparent to the parent. 3 new integration tests (`match_5_2_child_entry_is_dispatcher_match_local_is_own`, `match_5_2_parent_local_match_survives_child_dispatch`, `match_5_2_top_rule_entry_equals_local_match`). `cargo test` = 189 passed (186 baseline + 3), 0 failed; `cargo clippy -p linkedspec-runtime --tests` adds zero new warnings (touched-file warning set identical to baseline, only line-shifted). No book change (the `.spec` contract already documents `entry_*`/`match_*`; Rust now conforms — book sync is `.9`).
+  Commit: `RUST-PARITY.5.2` (see Commit Log)
 
 - ID: `RUST-PARITY.5.3`
   Status: `pending`
@@ -140,10 +140,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | --- | --- | --- | --- |
 | — | `RUST-PARITY.4` | `superseded` | Rust-self-hosting on spec.spec dropped; parity = reproducing BootstrapSpec::Core output (see Decisions audit) |
 | — | `RUST-PARITY.5.1` | `done` | retv-propagation BLOCKER fixed (2026-06-16); child return now readable as `scalar(retv)` after `->`/`=>`/REP dispatch |
-| 1 | `RUST-PARITY.5.2` | `pending` | match_*/entry_* split (now the retv channel is in place) |
-| 2 | `RUST-PARITY.5.3` | `pending` | char-based indexing + cursor line/col |
-| 3 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
-| 4 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
+| — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
+| 1 | `RUST-PARITY.5.3` | `pending` | char-based indexing + cursor line/col |
+| 2 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
+| 3 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.6`–`.9` unchanged below it.)
 
@@ -163,9 +163,12 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-06-16` (`.5` split): `.5` was a single broad leaf bundling six independently-reviewable audit findings; split into `.5.1`–`.5.5` (the runtime-corpus oracle gap stays in `.7`). The 3-agent audit above is the implementation spec for each child. retv-first because it gates correct output for nearly every grammar. Rust baseline confirmed green (182 tests, 0 failed) before the split.
 - `2026-06-16` (`.5.1` implementation): retv BLOCKER fixed. **Design:** the Rust engine shares one `RuntimeContext` and `execute_rule` previously returned `Result<(), String>` — no value channel — so a child's `return(expr)` went only to the single shared accumulator and `set_retv` was dead. Fix: (1) added a per-invocation `return_value: Option<RuntimeValue>` to `RuntimeContext` with `set_return_value`/`take_return_value`/`restore_return_value`; (2) `execute_rule` now returns `Result<RuntimeValue, String>` — it `take`s the channel on entry (saving the caller's pending return) and reads+restores it on exit, so each invocation reports exactly its own last `return(...)` (Runtime Semantics §5.4) and nested dispatch is transparent; (3) after both `->` (acode) and `=>` (bcode) dispatch the engine calls `ctx.set_retv(child_retv)`, so the parent's attached code / `LE` / `E` read the child result as `scalar(retv)` (§3.3/§6.1); (4) `return(expr)` records the channel **in addition to** pushing the accumulator — the accumulator stays `execute()`'s return contract, so the 182-test baseline is untouched. **Wired the dead `set_retv` in** (completed, not removed). **Latent bug found + fixed while here:** `call(child)` resolved the rule name from the *evaluated* arg, but a bare `call(RuleName)` evaluates to undef (a label is not a scalar) — so `call` never resolved a bare rule. Added `resolve_rule_name` (mirrors `resolve_array_target`) so `call(child)` returns the child's value, enabling the Perl reference pattern `assign(s(retv), call(child))` (`specs/tablegrep.spec`). Zero runtime-crate `call(` uses existed, so zero baseline risk. **Book:** no change — the documented `.spec` contract already specifies retv (`appendix/runtime-semantics.md` §3.3/§6.1); the Rust backend now conforms. Rust-parity book sync remains `.9`.
 
+- `2026-06-16` (`.5.2` implementation): match/entry separation landed. **Design:** the single match-set site (`engine.rs`) assigned the rule's own regex match to BOTH `entry_*` and `match_*`, so they could never diverge and a dispatched child clobbered the parent's match. The Perl reference keeps two per-handler `my` lexicals — `IMATCH` (entry, `= $$info{match}`, where a parent passes its own `$minfo` to the child at `ActionIR/MethodLowering.pm:332`, and the preamble sets `IMATCH=$$info{match}` at `SpecEntry::_build_handler_preamble`) and `LMATCH` (local, `= $$minfo{match}` at `HandlerVariantEmitter::_build_lmatch_extraction`). Fix: `execute_rule` now (1) saves the caller's `entry_*`/`match_*` into a `SavedMatchState`; (2) sets THIS invocation's entry match = the caller's local match (`$info = $minfo`) and starts the local match empty; (3) on each own match updates only `match_*`, and seeds `entry_*` from the first own match only when entry is still empty (the top-rule / dispatcher-less case — the framework passes the top rule's own match as `$info`); (4) restores the caller's registers on both the blind-call early return and the normal return, so a child's matching is transparent to the parent. **Oracle note:** the runtime Perl oracle was inconclusive for minimal hand-authored inline specs (`.spec` top-rule/lifecycle authoring friction returned empty/0), so the contract was taken directly from the authoritative Perl source (the three sites above) and pinned by Rust tests — the leaf's parity gate is `cargo test` + `cargo clippy`, not a Perl oracle. **Book:** no change (the `.spec` contract already documents `entry_*`/`match_*` in `dsl/capture-marks-and-source-locations.md`; Rust now conforms — Rust-parity book sync remains `.9`). Group-indexing parity (`match_group(0)` = first capture in Perl vs full match in Rust) is explicitly out of `.5.2` scope.
+
 ## Open Questions
 
 - None yet — inventory leaf will identify any.
+- (`.5.2`) Group indexing differs between Perl (`match_group(0)` = first capture) and Rust (`entry_group(0)`/`match_group(0)` read index 0 = full match). Not a `.5.2` concern (that leaf is about *which* match, not indexing); flag for a later parity leaf if it proves user-visible.
 
 ## Blockers
 
@@ -177,6 +180,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | --- | --- | --- | --- |
 | `2026-06-16` | `RUST-PARITY.1` | Full audit: Rust sources (`engine.rs:1984`, `helpers.rs:470`, `compiler.rs`, `parser.rs`, `validation.rs`) vs Perl lowering owners (`ControlFlow.pm`, `MethodLowering.pm`, `ValueExpr.pm`, `FlowExpr.pm`, `Contracts.pm`) | Done — 6 gap categories, 84/100+ helpers implemented |
 | `2026-06-16` | `RUST-PARITY.5.1` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml` (linkedspec-runtime delta) | 186 passed / 0 failed (182 baseline + 4 new retv tests: acode/OR, blind-call/AND, REP, `call`); clippy adds zero new linkedspec-runtime warnings (lib stays at 16 pre-existing `doc_lazy_continuation`) |
+| `2026-06-16` | `RUST-PARITY.5.2` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff) | 189 passed / 0 failed (186 baseline + 3 new `match_5_2_*`: child entry/local divergence, parent-match survives child dispatch, top-rule entry==local); clippy touched-file warning set identical to baseline (14 engine.rs + 1 pre-existing `len_zero` at integration_test.rs:199), only line-shifted — zero new warnings |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -224,6 +228,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `RUST-PARITY.5.1` | `RUST-PARITY.5.1 — fix child-return (retv) propagation in the Rust engine` | engine.rs + runtime.rs + 4 integration tests; 186/186 green |
+| `RUST-PARITY.5.2` | `RUST-PARITY.5.2 — separate entry_* from match_* in the Rust engine` | engine.rs SavedMatchState save/restore + 3 integration tests; 189/189 green |
 
 ## Changelog
 
@@ -231,3 +236,4 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-06-16`: `.4` (Rust self-hosting on spec.spec) marked `superseded` — wrong target; spec.spec rewritten on the Perl side under `SPEC-SPEC-SELFHOST`. Recorded the 3-agent parity audit (real follow-on). Committed in-flight Rust exploration (expr/parser/runtime/helpers) as a WIP checkpoint.
 - `2026-06-16`: Split `.5` (PNT rule 5 — too broad for one signoff slice) into `.5.1` retv-propagation BLOCKER fix, `.5.2` match/entry split, `.5.3` char-based indexing + cursor line/col, `.5.4` dedupe match arms + REP zero-progress guard, `.5.5` ~30 missing helpers + real aliases. Sequenced retv-first. Confirmed the Rust baseline green (182 tests, 0 failed) before splitting. Frontier → `.5.1`. No code change (tree structuring only).
 - `2026-06-16`: `.5.1` done — fixed the child-return (retv) propagation BLOCKER. `execute_rule` now returns the rule's value via a per-invocation channel; `->`/`=>` dispatch set `retv` to the child return; `return(...)` feeds the channel without disturbing the accumulator contract; `call(child)` now resolves a bare rule name and returns the child value. 4 new integration tests (acode/OR, blind-call/AND, REP, `call`); `cargo test` 186/186; clippy adds no new warnings. Frontier → `.5.2` (match_*/entry_* split).
+- `2026-06-16`: `.5.2` done — separated `entry_*` from `match_*` in the Rust engine. `execute_rule` now emulates Perl's per-handler `IMATCH`/`LMATCH` lexicals via a `SavedMatchState` save/restore on the shared `RuntimeContext`: entry match = the dispatcher's local match (`$info = $minfo`), local match = the rule's own regex match, entry seeded from the first own match only for the dispatcher-less top rule, both restored on exit. 3 new integration tests (child entry/local divergence, parent match survives child dispatch, top-rule entry==local); `cargo test` 189/189; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-entry-match-separation.md`. Frontier → `.5.3` (char-based indexing + cursor line/col).
