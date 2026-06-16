@@ -9,9 +9,11 @@ This chapter explains two related but separate tools:
 
 They are not the same thing. Runtime context is the machine-readable continuity surface. Tracing is the human-readable observability surface.
 
+Both are described here at the contract level. The runtime context is an abstract per-run object that a backend populates with run identity and structured failure payloads; the `last_error` schema, the owner/stage attribution, the handler source labels, the trace levels, and the trace output modes below are **backend-neutral contracts**. The concrete mechanics shown — how the context object is passed, how `last_error` is read, the trace API calls, and the `LINKEDSPEC_*` environment variables — are the **Perl reference backend's** surface; another backend exposes an equivalent in its own language.
+
 ## Runtime context
 
-The runtime context is a caller-provided hash that LinkedSpec can use while compiling and invoking parsers.
+The runtime context is a caller-provided object (a hash in the Perl reference backend) that the backend can use while compiling and invoking parsers.
 
 Pass it with:
 
@@ -138,7 +140,7 @@ That combined value is useful for logs, dashboards, and test assertions because 
 
 ## Example: reporting compile failure
 
-A caller can inspect the structured failure instead of scraping `$@`:
+A caller can inspect the structured failure instead of scraping the host language's raw error string (`$@` in the Perl reference backend):
 
 ```perl
 my %ctx;
@@ -157,7 +159,7 @@ if (!$parser) {
 }
 ```
 
-This is the preferred error path for tools built around LinkedSpec. `$@` can still matter at parser invocation boundaries, but `last_error` is the richer machine-readable channel.
+This is the preferred error path for tools built around LinkedSpec. The host language's raw error string can still matter at parser-invocation boundaries (`$@` in the Perl reference backend), but `last_error` is the richer, backend-neutral machine-readable channel.
 
 ## Example: preserving file identity
 
@@ -246,7 +248,7 @@ When the selected handler variant is known, the label can become:
 handler_source_label => 'LinkedSpec::generated_handler:Top:<variant>'
 ```
 
-This matters because generated Perl source and `eval` are still part of the current backend. A structured handler label gives users and tests a stable way to identify the logical rule that owns a failure.
+This matters because, in the Perl reference backend, generated source and `eval` are still part of how handlers run. A structured handler label gives users and tests a stable, backend-neutral way to identify the logical rule that owns a failure, regardless of how a given backend emits or executes its handlers.
 
 Top-rule diagnostics derive that label from the shared runtime context, so runtime, parser-factory, and compiler failures use the same selected-rule attribution. Compiler diagnostics that know a concrete failing rule label prefer that rule label and fall back to the selected `top_rule` through the same shared runtime-context helper. Generated rule handlers also build labels from their compiled rule metadata through the runtime-context owner, including the selected handler variant when one is known. When the parser-invocation boundary knows the selected handler variant, that variant is included through the same shared helper.
 

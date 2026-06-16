@@ -64,7 +64,7 @@ Rule starts are top-level constructs. A label-like line inside an open block is 
 Top::AND
  /a/ -> Top[0] {
 label:
- return { kind => "top" };
+ return(hash("kind", "top"));
  }
 
 Next:AND
@@ -75,7 +75,7 @@ Next:AND
 
 Here `label:` belongs to the action block attached to `Top`. It does not start a new `label` rule because the parser is still inside the `{ ... }` block.
 
-This example uses a raw Perl label only to show the block-boundary rule-start distinction. New payload-shaping code should prefer helper DSL forms like the `Next` rule's `return(hash(...))` action.
+The `label:` line is here only to show the block-boundary rule-start distinction: a label-like line inside an open `{ ... }` block is block content, not a new top-level rule. Both rules use the same helper-DSL payload form (`return(hash(...))`), so nothing in this example is backend-specific.
 
 This matters because LinkedSpec allows rule bodies to carry real action and lifecycle blocks. If the frontend treated every `word:` token as a rule start, it would misread valid block content.
 

@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.3: reframe user-model chapters as variant-agnostic
+
+Book documentation only (no code). Applied the `.2` "demote, don't delete" convention to the
+mdBook user-model chapters: each chapter now leads with the backend-neutral `.spec` concept and
+labels its runnable blocks as the **Perl reference backend's** surface. Changes: (1)
+`worked-spec-walkthrough.md` — added a global frame after the intro ("the `.spec` file … is
+backend-neutral; the runnable snippets use the Perl reference backend"), retitled "Running it
+inline with `Get(...)`" → "Running it inline" (concept first; `LinkedSpec::Get` demoted to the
+reference example), reframed the `Data::Dumper` hash-order note, and changed "raw Perl payload" →
+"raw host-language payload" (two bullets). (2) `runtime-context-and-tracing.md` — added a top frame
+declaring the runtime-context object, `last_error` schema, owner/stage attribution, handler source
+labels, trace levels, and trace modes to be **backend-neutral contracts**, while the passing
+mechanics, the raw-error-string (`$@`), the trace API, and the `LINKEDSPEC_*` env vars are the Perl
+reference surface; demoted "caller-provided hash" → "caller-provided object (a hash in the Perl
+reference backend)", both `$@` mentions, and the "generated Perl source and `eval`" handler-label
+line. (3) `spec-files-and-rule-paragraphs.md` — replaced the raw `return { kind => "top" }` payload
+with helper-DSL `return(hash("kind", "top"))` and rewrote the note (dropped the "raw Perl label"
+framing). (4) `rule-modes-and-parse-modes.md` — **audit refinement**: `.1` classified this page
+CLEAN, but it carried a genuine Perl-API block ("## Public option shape", L468–494); reframed
+`parse_mode` as a backend-neutral compile option with the Perl block labelled. Confirmed
+`blind-calls-and-parser-orchestration.md` genuinely CLEAN (0 Perl-API signals). Verification:
+`mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0. Frontier
+advanced `.3`→`.4` (public-api chapters).
+
 ## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.2: reframe overview chapters as variant-agnostic
 
 Book documentation only (no code). Remediated all 5 mdBook overview pages so the `.spec` file is

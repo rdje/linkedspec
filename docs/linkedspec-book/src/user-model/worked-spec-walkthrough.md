@@ -23,10 +23,11 @@ The point is not that this grammar is impressive. The point is that it shows the
 - write a rule paragraph,
 - choose a rule mode,
 - attach an action,
-- use helper DSL instead of raw Perl-shaped payload code,
-- compile the spec with `LinkedSpec::Get(...)`,
-- call the returned parser,
+- use helper DSL instead of raw host-language payload code,
+- compile the spec with a backend and call the returned parser,
 - understand how `seek` and `consume` change matching behavior.
+
+The `.spec` file and everything it expresses are backend-neutral: the same source compiles and runs identically on any LinkedSpec backend. The runnable snippets below use the **Perl reference backend** (`LinkedSpec::Get(...)`, `$parser->(\$input)`); another backend would expose an equivalent compile-and-run surface in its own language.
 
 ## The full spec
 
@@ -99,9 +100,9 @@ Pair::AND
 
 For this first walkthrough, the single-regex form keeps the action attached to one current local match, which makes `match_group(...)` behavior easy to see.
 
-## Running it inline with `Get(...)`
+## Running it inline
 
-`LinkedSpec::Get(...)` compiles in-memory spec text and returns a parser coderef.
+A backend compiles in-memory `.spec` text and returns a runnable parser. In the Perl reference backend, `LinkedSpec::Get(...)` does this and returns a parser coderef:
 
 ```perl
 use LinkedSpec;
@@ -132,7 +133,7 @@ The returned `$ast` is a hash-like payload equivalent to:
 }
 ```
 
-Do not depend on Perl hash key order when printing this with `Data::Dumper`; the semantic payload is the key/value content.
+Do not depend on hash key order when printing this payload (for example with a debug dumper such as Perl's `Data::Dumper`); the semantic payload is the key/value content, not its serialization order.
 
 ## `consume` versus `seek`
 
@@ -277,7 +278,7 @@ This small example demonstrates the default authoring loop:
 - Use a rule label that names the composition model.
 - Use regex capture groups when the payload is already local to one match.
 - Use `match_group(...)` for current local-match captures.
-- Use helper expressions such as `trim(...)`, `hash(...)`, and `return(...)` rather than raw Perl payload construction.
+- Use helper expressions such as `trim(...)`, `hash(...)`, and `return(...)` rather than raw host-language payload construction.
 - Choose `consume` for strict parser behavior.
 - Choose `seek` for extraction behavior.
 - Use `return_descriptor => 1` when tooling needs compiler output instead of a parser coderef.

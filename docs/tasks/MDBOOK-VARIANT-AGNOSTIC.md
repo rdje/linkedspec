@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.2` done)
+- Last updated: `2026-06-16` (`.3` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -60,11 +60,11 @@ minimized in user-facing chapters and clearly labeled when present.
   Commit: `MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic (.spec = universal contract; Perl = reference backend)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.3`
-  Status: `pending`
+  Status: `done`
   Goal: Remediate user-model chapters — spec-files-and-rule-paragraphs.md, worked-spec-walkthrough.md, rule-modes-and-parse-modes.md, blind-calls-and-parser-orchestration.md, runtime-context-and-tracing.md
   Acceptance: User-model chapters use .spec DSL syntax, not Perl API calls, as primary examples
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — applied the `.2` demote-don't-delete convention: each REMEDIATE page leads with the backend-neutral concept and labels its runnable blocks as the Perl reference backend's surface. `worked-spec-walkthrough.md`: added a global backend-neutral frame after the intro, retitled "Running it inline with `Get(...)`" → "Running it inline" (concept-first, `Get` demoted to the Perl-reference example), reframed the `Data::Dumper` note, and changed "raw Perl payload" → "raw host-language payload". `runtime-context-and-tracing.md`: added a top frame stating the context object + `last_error` schema + owner/stage + handler labels + trace levels/modes are backend-neutral contracts while the passing mechanics / `$@` / trace API / `LINKEDSPEC_*` env vars are the Perl reference surface; demoted "caller-provided hash" → "caller-provided object (a hash in the Perl reference backend)", the two `$@` mentions, and the "generated Perl source and `eval`" line. `spec-files-and-rule-paragraphs.md`: replaced the raw `return { kind => "top" }` payload with helper-DSL `return(hash("kind", "top"))` and rewrote the accompanying note (no longer "raw Perl label"). **Audit refinement:** `rule-modes-and-parse-modes.md` was classified CLEAN in `.1` but actually carried a genuine Perl-API block ("## Public option shape", L468–494) — reframed `parse_mode` as a backend-neutral compile option with the Perl block labelled. `blind-calls-and-parser-orchestration.md` confirmed genuinely CLEAN (0 Perl-API signals). `mdbook build` exit 0.
+  Commit: `MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic (.spec contract first; Perl = reference backend)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.4`
   Status: `pending`
@@ -98,13 +98,12 @@ minimized in user-facing chapters and clearly labeled when present.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-VARIANT-AGNOSTIC.3` | `pending` | User-model is where most readers learn LinkedSpec; 2 heavy pages (walkthrough, runtime-context) |
-| 2 | `MDBOOK-VARIANT-AGNOSTIC.4` | `pending` | Public API chapters present the Perl surface as THE API — need backend framing |
-| 3 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
-| 4 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
-| 5 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
+| 1 | `MDBOOK-VARIANT-AGNOSTIC.4` | `pending` | Public API chapters present the Perl surface as THE API — need backend framing |
+| 2 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
+| 3 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
+| 4 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
 
-(`.1`, `.2` complete — removed from frontier.)
+(`.1`, `.2`, `.3` complete — removed from frontier.)
 
 ## Audit Findings (.1)
 
@@ -203,6 +202,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | --- | --- | --- | --- |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.1` | deterministic leakage scan over all 41 `src/**.md` files + targeted reads; per-file catalog produced; `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.2` | remediated 5 overview pages; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.3` | remediated 4 user-model pages (1 confirmed CLEAN); caught a `.1` audit miss (`rule-modes-and-parse-modes.md` had a real Perl-API block); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
@@ -210,6 +210,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | --- | --- | --- |
 | `MDBOOK-VARIANT-AGNOSTIC.1` | `MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook` | Audit recorded in "## Audit Findings (.1)" |
 | `MDBOOK-VARIANT-AGNOSTIC.2` | `MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic (.spec = universal contract; Perl = reference backend)` | 5 overview pages remediated; frontier advanced to `.3` |
+| `MDBOOK-VARIANT-AGNOSTIC.3` | `MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic (.spec contract first; Perl = reference backend)` | 4 user-model pages remediated (+1 confirmed CLEAN); audit miss corrected; frontier advanced to `.4` |
 
 ## Changelog
 
@@ -221,3 +222,10 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
   universal contract and Perl is the reference backend (Rust = second backend). Fixed a phase
   drift in `project-status` (0–7 → 0–9; added Phase 8 multi-backend handoff + Phase 9 Rust
   variant). `mdbook build` exit 0. Frontier advanced to `.3`.
+- `2026-06-16`: Completed `.3` — reframed the user-model chapters (`worked-spec-walkthrough`,
+  `runtime-context-and-tracing`, `spec-files-and-rule-paragraphs`, `rule-modes-and-parse-modes`)
+  to lead with the `.spec` contract and label runnable blocks as the Perl reference backend's
+  surface; replaced the lone raw-host-language payload with helper DSL. Refined the `.1` audit:
+  `rule-modes-and-parse-modes` was not fully CLEAN (had a real Perl-API "Public option shape"
+  block) — remediated; `blind-calls-and-parser-orchestration` confirmed CLEAN. `mdbook build`
+  exit 0. Frontier advanced to `.4`.

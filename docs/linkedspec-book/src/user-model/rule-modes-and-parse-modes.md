@@ -467,7 +467,7 @@ Use `consume` when the spec should behave more like a conventional parser step a
 
 ## Public option shape
 
-Inline parser construction and file-oriented parser construction use the same public parse-mode option:
+`parse_mode` is a backend-neutral compile option: both inline parser construction and file-oriented parser construction accept the same value. In the Perl reference backend:
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -481,7 +481,7 @@ my $parser = LinkedSpec::get_parser(
 );
 ```
 
-Descriptor introspection reports the selected mode in descriptor metadata:
+Descriptor introspection reports the selected mode in descriptor metadata (Perl reference backend shown):
 
 ```perl
 my $descriptor = LinkedSpec::Get(
