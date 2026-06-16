@@ -46,11 +46,11 @@ minimized in user-facing chapters and clearly labeled when present.
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.1`
-  Status: `pending`
-  Goal: Complete audit — catalog every Perl-centric sentence, paragraph, and section across all 27 source files
+  Status: `done`
+  Goal: Complete audit — catalog every Perl-centric sentence, paragraph, and section across all source files
   Acceptance: Audit document listing each file, the Perl-specific passages, and a recommended remediation for each
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — deterministic per-file leakage scan over all 41 `src/**.md` files + targeted reads; full per-file catalog recorded in "## Audit Findings (.1)" below
+  Commit: `MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.2`
   Status: `pending`
@@ -98,21 +98,101 @@ minimized in user-facing chapters and clearly labeled when present.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-VARIANT-AGNOSTIC.1` | `pending` | Audit first — must know exact scope before editing |
-| 2 | `MDBOOK-VARIANT-AGNOSTIC.2` | `pending` | Overview is the reader's first impression |
-| 3 | `MDBOOK-VARIANT-AGNOSTIC.3` | `pending` | User-model is where most readers learn LinkedSpec |
-| 4 | `MDBOOK-VARIANT-AGNOSTIC.4` | `pending` | API chapters need backend labeling |
-| 5 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL/compiler chapters are the deepest content |
-| 6 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix and walkthroughs |
-| 7 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final verification and docs sync |
+| 1 | `MDBOOK-VARIANT-AGNOSTIC.2` | `pending` | Overview is the reader's first impression; smallest REMEDIATE set (2 files) |
+| 2 | `MDBOOK-VARIANT-AGNOSTIC.3` | `pending` | User-model is where most readers learn LinkedSpec; 2 heavy pages (walkthrough, runtime-context) |
+| 3 | `MDBOOK-VARIANT-AGNOSTIC.4` | `pending` | Public API chapters present the Perl surface as THE API — need backend framing |
+| 4 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
+| 5 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
+| 6 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
+
+(`.1` complete — removed from frontier.)
+
+## Audit Findings (.1)
+
+`.1` deliverable. Method: deterministic leakage scan over **all 41** `docs/linkedspec-book/src/**.md`
+files for Perl-syntax/module/API signals (`::`, `Data::Dumper`, `coderef`, `hashref`, `qr/`,
+`=~`, `$@`, `my $/@/%`, `use LinkedSpec`, `sub {`, `.pm`, `.plg`, `PPlugin`, `eval`, …), then
+targeted reads to characterise each hit. **Important caveat:** in the DSL/grammar chapters the
+`::` and `:AND` matches are overwhelmingly **`.spec` rule-labels and rule-mode suffixes**
+(`Token::AND`, `Top::`, `Next::`) — these are DSL syntax, NOT Perl package names, so those
+chapters are effectively CLEAN despite high raw counts.
+
+Classification key:
+- **CLEAN** — already variant-agnostic (high raw counts are DSL labels / legit "reference impl" mentions).
+- **REMEDIATE** — user-facing chapter presents the Perl API/syntax/modules as the primary surface; must reframe (Perl = one clearly-labelled backend example).
+- **LABEL** — architecture/development/appendix chapter that legitimately references Perl (per Non-Goals); keep content, add a clear "Perl reference implementation" frame.
+
+| File | Class | Nature of Perl leakage (line refs) | Remediation | Leaf |
+| --- | --- | --- | --- | --- |
+| `index.md` | CLEAN | none (0 hits) | — | — |
+| `SUMMARY.md` | CLEAN | none (0 hits) | — | — |
+| `overview/what-is-linkedspec.md` | REMEDIATE | L3 "compiler for Perl"; L27 `LinkedSpec::Get(\$spec)`; L52 "coderef" | Reframe Perl as reference impl; describe Get/get_parser abstractly | `.2` |
+| `overview/design-rationale.md` | REMEDIATE(light) | L58 `LinkedSpec.pm is 258 lines … OwnerDispatch` | Drop module name/line count; keep thin-facade principle | `.2` |
+| `overview/documentation-layers.md` | CLEAN/LABEL | 1 architecture mention | Acceptable; verify framing | `.2` |
+| `overview/project-status.md` | CLEAN/LABEL | Phase/Perl-reference mentions | Acceptable; confirm "Perl = reference" framing | `.2` |
+| `user-model/spec-files-and-rule-paragraphs.md` | REMEDIATE(light) | one raw-Perl label example (`return { kind => "top" }`) | Replace with helper-DSL form | `.3` |
+| `user-model/worked-spec-walkthrough.md` | REMEDIATE(heavy) | entire walkthrough via Perl API (`use LinkedSpec`, `my $spec`, `LinkedSpec::Get(\$spec)`, `$parser->(\$input)`, `Data::Dumper`, Perl descriptor introspection, `%ctx`) | Rewrite to teach `.spec`+execution model; Perl as one labelled backend block | `.3` |
+| `user-model/rule-modes-and-parse-modes.md` | CLEAN | 35 hits = DSL rule-modes (`:AND`, `Token::AND`) | none (false positives) | `.3` |
+| `user-model/blind-calls-and-parser-orchestration.md` | CLEAN | 25 hits mostly DSL labels | spot-confirm; minor if any | `.3` |
+| `user-model/runtime-context-and-tracing.md` | REMEDIATE(heavy) | Perl hash/ref examples (`my %ctx`, `\%ctx`, `ref($ctx) eq 'HASH'`), `Data::Dumper`, `parser_source_ref => \$…` | Describe context as an abstract object; move Perl specifics to a labelled backend note | `.3` |
+| `public-api/get-and-get-parser.md` | REMEDIATE(heavy) | whole chapter is the Perl API (`use LinkedSpec`, `LinkedSpec::Get/get_parser`, `$parser->(\$input)`) | Reframe as "public entry points"; Perl shown as reference backend's surface | `.4` |
+| `public-api/descriptor-introspection.md` | REMEDIATE | `LinkedSpec::Get(…, return_descriptor=>1)`, `qr/.../`, `sub {…}` shape | Describe descriptor shape abstractly; Perl as one encoding | `.4` |
+| `public-api/trace-api.md` | REMEDIATE(heavy) | Perl API + package vars `$LinkedSpec::DUMP_VERBOSITY`, "typeglob aliasing", `eval` | Abstract the trace API; labelled backend note for Perl state vars | `.4` |
+| `public-api/plugin-registry.md` | LABEL | Perl-centric but explicitly DEPRECATED transition surface | Lowest priority; add backend label, keep deprecation note | `.4` |
+| `dsl/action-model-and-helper-surface.md` | CLEAN(light) | conceptual "raw Perl" mentions | fine | `.5` |
+| `dsl/actionir-lowering-mental-model.md` | REMEDIATE/LABEL | Perl owner names `ActionIR::Scanner/ScannerCore/Contracts (2,110 lines, 158 contracts)` | Frame as reference-impl lowering model or label clearly | `.5` |
+| `dsl/declaration-helper-reference.md` | CLEAN | 10 hits = DSL labels | none | `.5` |
+| `dsl/fluent-and-block-forms.md` | CLEAN | backend-neutral (excellent) | none | `.5` |
+| `dsl/action-and-lifecycle-placement.md` | CLEAN | hits = `Token::AND` DSL labels | none | `.5` |
+| `dsl/capture-marks-and-source-locations.md` | CLEAN | `Top::AND` DSL label | none | `.5` |
+| `dsl/source-boundary-helper-reference.md` | CLEAN | DSL labels | none | `.5` |
+| `dsl/value-container-flow-helper-reference.md` | CLEAN | 12 hits mostly DSL/labels | spot-confirm | `.5` |
+| `dsl/values-containers-and-flow-helpers.md` | CLEAN | `Token::` DSL label | none | `.5` |
+| `compiler/pipeline-overview.md` | REMEDIATE/LABEL | Perl module names + line counts (`Validation 1,368 lines`, `build_compiled_rule_table(...)`) | Generic stage names; label Perl specifics | `.5` |
+| `compiler/compiled-state-model.md` | REMEDIATE(light) | Perl data-structure depiction (`sub {}`, `qr/.../`) | Describe state model abstractly | `.5` |
+| `compiler/generated-handlers-and-dispatch.md` | REMEDIATE/LABEL | heavy Perl (`LinkedRE::or($STRING, $$descr{…})`, `HandlerVariantEmitter.pm`, `JSON::PP`, `pos($$STRING)`, `$BACKEND`) | Abstract dispatch concept; label reference-impl handler emitter | `.5` |
+| `compiler/diagnostics.md` | REMEDIATE | `my %ctx; LinkedSpec::Get(...)` examples; `handler_source_label => 'LinkedSpec::generated_handler:Top'` | Abstract the API; KEEP structured last_error/label as contract | `.5` |
+| `architecture/owner-tree.md` | LABEL | ~500 lines of Perl owner-tree narrative (90 hits, highest volume) | Retitle/banner as "Perl reference-implementation architecture"; keep content (Non-Goal permits) | `.5` |
+| `appendix/formal-grammar.md` | CLEAN | hits = DSL labels (`Top::`, `Next::`) | none | `.6` |
+| `appendix/helper-contract-catalog.md` | CLEAN | 2 hits; backend-neutral — ready for Rust/Julia/Dart | none (gold standard) | `.6` |
+| `appendix/runtime-semantics.md` | LABEL(light) | `LinkedRE::or`, `generated_handler:<label>`; mostly DSL labels | add backend label | `.6` |
+| `appendix/backend-handoff.md` | LABEL | "hashref AST" in diagram; chapter is intentionally about backend handoff | natural home for "Perl = reference" framing | `.6` |
+| `specs-and-corpora/shipped-specs-and-corpora.md` | REMEDIATE | Perl driver blocks + large `.plg`/package-owner Perl-impl narrative (`HTTP::FileAccess`, `QC::Flow`, `PPlugin->get`) | Keep corpus listing; label/relocate the plugin-owner Perl detail; reframe invocation | `.6` |
+| `specs-and-corpora/lispish-spec-walkthrough.md` | REMEDIATE | Perl driver + `perl/Lispish.pm` helper API | Frame as reference backend; abstract invocation | `.6` |
+| `specs-and-corpora/ebnf-spec-walkthrough.md` | REMEDIATE | Perl driver; L582 shows a raw-Perl action edge intrinsic to that spec | Reframe driver; explain raw-Perl edge as legacy/compat-surface | `.6` |
+| `specs-and-corpora/tablegrep-spec-walkthrough.md` | REMEDIATE | Perl driver + Perl-ish AST dumps (`{type => 'TERM', …}`) | Abstract invocation/output rendering | `.6` |
+| `specs-and-corpora/pplugin-spec-walkthrough.md` | REMEDIATE/LABEL | intrinsically about parsing Perl `.plg` files (`eval`, `coderef`, `PPlugin`) | Some Perl inherent to the subject; frame clearly, keep `eval`/compat-surface explanation | `.6` |
+| `specs-and-corpora/portmap-spec-walkthrough.md` | REMEDIATE | Perl driver block | Reframe invocation; output abstractly | `.6` |
+| `development/local-ci-and-regression.md` | LABEL | legit Perl-repo CI (`perl -c`, `Validation.pm`, `t/phase0_regression.t`) | Acceptable per Non-Goals; minor "Perl reference" framing note | `.6` |
+| `development/documentation-workflow.md` | CLEAN | 1 hit | none | `.6` |
+
+Summary: ~18 CLEAN · ~19 REMEDIATE · ~5 LABEL (some files counted in two buckets where a
+light remediation plus labelling both apply). Two structural notes for downstream leaves:
+1. **The DSL reference section is in better shape than raw counts suggest** — `helper-contract-catalog.md`
+   is already the backend-neutral gold standard; most `dsl/*` pages are CLEAN. Leaf `.5`'s real work
+   is the **compiler chapters** + the **owner-tree LABEL**, not the helper references.
+2. **The 6 corpus walkthroughs all share one pattern**: a `use LinkedSpec; my $parser = …; $parser->(\$input)`
+   Perl driver block. Leaf `.6` should reframe these uniformly (one shared "how to run a `.spec` in the
+   reference backend" convention) rather than per-file ad hoc.
+
+Corrected scope note: leaf `.1` originally estimated "27 source files"; the book actually has **41**
+`src/**.md` files (39 content pages + `SUMMARY.md` + `index.md`). All 41 were audited.
 
 ## Decisions
 
 - `2026-06-16`: Created task tree. Audit-first approach to avoid piecemeal edits that create inconsistency. Overview chapters prioritized because they set the reader's mental frame.
+- `2026-06-16` (`.1`): Audit complete. Key finding — `::`/`:AND` in DSL/grammar chapters are `.spec`
+  rule-labels/modes, not Perl, so those chapters are CLEAN; genuine leakage concentrates in the
+  Perl-API user-facing chapters (overview, public-api, two user-model pages, compiler chapters) and
+  the 6 corpus walkthroughs. Adopted a 3-way classification (CLEAN / REMEDIATE / LABEL) so that
+  architecture/dev/appendix chapters keep their legitimate Perl references behind a clear
+  reference-implementation label (per Non-Goals) rather than being stripped.
 
 ## Open Questions
 
-- None yet — audit leaf will identify any.
+- `.4` framing choice (resolve at start of `.4`): does each Perl-API public-api chapter get an
+  inline "reference backend" callout, OR do we relocate the Perl API surface into a dedicated
+  "Reference backend (Perl)" subsection? Does not block `.2`/`.3`.
 
 ## Blockers
 
@@ -122,14 +202,16 @@ minimized in user-facing chapters and clearly labeled when present.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `pending` | `MDBOOK-VARIANT-AGNOSTIC.1` | `pending` | `pending` |
+| `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.1` | deterministic leakage scan over all 41 `src/**.md` files + targeted reads; per-file catalog produced; `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
-| --- | --- | --- | --- |
-| `pending` | `pending` | `pending` |
+| --- | --- | --- |
+| `MDBOOK-VARIANT-AGNOSTIC.1` | `MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook` | Audit recorded in "## Audit Findings (.1)" |
 
 ## Changelog
 
 - `2026-06-16`: Created task tree.
+- `2026-06-16`: Completed `.1` — full per-file variant-agnostic audit (41 files), 3-way classification,
+  per-leaf remediation map; frontier advanced to `.2`.

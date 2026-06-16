@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.1: complete variant-agnostic audit of the mdBook
+
+Documentation/audit only (no code, no book edits yet — remediation is `.2`–`.6`). Ran a
+deterministic Perl-leakage scan over **all 41** `docs/linkedspec-book/src/**.md` pages, then
+targeted reads to characterise each hit, and recorded a full per-file catalog in the
+`MDBOOK-VARIANT-AGNOSTIC` task file under "## Audit Findings (.1)". Key finding: the high `::`/`:AND`
+raw counts in the DSL/grammar chapters are `.spec` **rule-labels and rule-mode suffixes**
+(`Token::AND`, `Top::`, `Next::`) — DSL syntax, not Perl — so those chapters are effectively CLEAN.
+Genuine leakage (Perl API/syntax/modules presented as the primary surface) concentrates in the
+overview (2 pages), two user-model pages (worked-spec-walkthrough, runtime-context-and-tracing),
+all four public-api chapters, the compiler chapters, and the six corpus walkthroughs (which all
+share one `use LinkedSpec; … $parser->(\$input)` driver block). Architecture/dev/appendix chapters
+legitimately reference Perl (per the tree's Non-Goals) and are classified LABEL (keep, frame as
+"Perl reference implementation"). Adopted a 3-way classification — CLEAN / REMEDIATE / LABEL —
+and mapped every REMEDIATE/LABEL file to its remediation leaf (`.2`–`.6`). Corrected the leaf's
+original "27 files" estimate to the actual 41. Frontier advanced `.1`→`.2`. Verification:
+`scripts/check_memory_architecture.sh` exit 0.
+
 ## 2026-06-16 — TASK-TREE-INDEX-SYNC.1: reconcile stale frontier column in docs/TASK_TREE.md
 
 Documentation/tracker only (no code). A fresh session-bootstrap pass found the `Active Task Trees`
