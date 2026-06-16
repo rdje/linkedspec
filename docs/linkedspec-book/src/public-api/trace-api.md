@@ -2,7 +2,9 @@
 
 LinkedSpec exposes a structured trace system for debugging compiler internals, following parser invocation, and controlling diagnostic output.
 
-The trace API is a first-class public surface on the `LinkedSpec` facade. It delegates to `LinkedSpec::Trace`, the trace state and formatting owner.
+The trace *model* is backend-neutral: verbosity levels, structured enter/exit scopes, decision events, and output routing (console / file / mirror) are concepts any backend can offer. This chapter, however, documents the concrete trace API of the **Perl reference backend** — its function names and signatures, the constants exported by `use LinkedSpec`, and the package-variable state surface (including the typeglob-aliased state below) are Perl-reference specifics. Another backend exposes an equivalent trace facility in its own idiom.
+
+In the Perl reference backend, the trace API is a first-class public surface on the `LinkedSpec` facade. It delegates to `LinkedSpec::Trace`, the trace state and formatting owner.
 
 ## Trace entry points
 
@@ -57,7 +59,7 @@ LinkedSpec::log_output(100, 'compilation failed', 'SpecEntry::compile_spec_entry
 
 ### `log_dump($message, $opts)`
 
-Writes a preformatted payload through the trace routing system. Useful for Data::Dumper-style debug output. Returns `undef`.
+Writes a preformatted payload through the trace routing system. Useful for dumper-style debug output (e.g. Perl's `Data::Dumper`). Returns `undef`.
 
 ### `should_dump($level)`
 

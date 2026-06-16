@@ -1,6 +1,8 @@
 # Descriptor Introspection
 
-LinkedSpec can expose descriptor information in addition to normal parser coderefs.
+LinkedSpec can expose descriptor information in addition to a normal runnable parser.
+
+The descriptor is a backend-neutral concept: it is the compiler's output described as data (rule table, dependency-regex map, metadata) instead of as a runnable parser. The field names and structure below (`spec`, `dependency_regex_map`, `meta`, `dependency_refs`, …) are part of that contract. The concrete *encoding* shown — a parser coderef, a `sub { ... }` handler value, a `qr/.../` compiled regex — is the **Perl reference backend's** representation; another backend encodes the same descriptor in its own language's types.
 
 The active public option is:
 
@@ -71,6 +73,8 @@ In rough form:
   },
 }
 ```
+
+In the Perl reference backend, `handler` is a coderef (`sub { ... }`) and each `dependency_regex_map` value is a compiled regex (`qr/.../`). Those are encoding details: another backend represents the same `handler` and dependency-regex fields with its own callable and regex types. The field names and their meaning are the backend-neutral part.
 
 ## `spec`
 

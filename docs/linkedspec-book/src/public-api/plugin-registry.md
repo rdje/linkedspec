@@ -1,5 +1,7 @@
 # Plugin Registry and Legacy Transition
 
+> **Perl reference backend, deprecated.** This entire surface is specific to the Perl reference backend and is on a documented retirement path. The plugin registry, the shipped `.plg` files, and the `PPlugin` runtime are legacy machinery that predates the backend-neutral `.spec` contract; they are **not** part of that contract, and a new backend does not need to implement any of it. This chapter is kept for users of existing Perl `.plg`-based code.
+
 LinkedSpec exposes plugin registration and lookup methods on the public facade. These methods support the plugin system used by shipped `.plg` plugin files and the legacy `PPlugin` runtime.
 
 ## Registry maintenance

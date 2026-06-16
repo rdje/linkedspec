@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.3` done)
+- Last updated: `2026-06-16` (`.4` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -67,11 +67,11 @@ minimized in user-facing chapters and clearly labeled when present.
   Commit: `MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic (.spec contract first; Perl = reference backend)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.4`
-  Status: `pending`
+  Status: `done`
   Goal: Remediate public API chapters — get-and-get-parser.md, descriptor-introspection.md, trace-api.md, plugin-registry.md
   Acceptance: API chapters clearly label Perl as one backend; mention Rust API entry points where applicable
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — resolved the Open Question in favour of Option A (per-chapter backend frame, not relocation). `get-and-get-parser.md`: added a chapter frame (two entry points + all options are backend-neutral roles; `LinkedSpec::Get`/`get_parser` + coderef are the Perl reference surface); "raw Perl error strings" → "raw host-language error strings". `descriptor-introspection.md`: framed the descriptor shape/fields as a backend-neutral contract while labelling the encoding (`sub { ... }` handler, `qr/.../` regex, coderef) as the Perl reference representation, with a follow-up note under the example. `trace-api.md`: framed the trace *model* (levels, enter/exit scopes, decisions, routing) as backend-neutral while labelling the concrete API + `use LinkedSpec` constants + package-variable/typeglob state surface as Perl-reference; `Data::Dumper` → "dumper-style … (e.g. Perl's `Data::Dumper`)". `plugin-registry.md` (LABEL): added a "Perl reference backend, deprecated" banner clarifying the registry/`.plg`/`PPlugin` machinery is not part of the `.spec` contract and a new backend need not implement it. `mdbook build` exit 0.
+  Commit: `MDBOOK-VARIANT-AGNOSTIC.4 — reframe public-api chapters as variant-agnostic (entry points/options/trace/descriptor = contract; Perl = reference surface)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.5`
   Status: `pending`
@@ -98,12 +98,11 @@ minimized in user-facing chapters and clearly labeled when present.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-VARIANT-AGNOSTIC.4` | `pending` | Public API chapters present the Perl surface as THE API — need backend framing |
-| 2 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
-| 3 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
-| 4 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
+| 1 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
+| 2 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
+| 3 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
 
-(`.1`, `.2`, `.3` complete — removed from frontier.)
+(`.1`, `.2`, `.3`, `.4` complete — removed from frontier.)
 
 ## Audit Findings (.1)
 
@@ -188,9 +187,11 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 
 ## Open Questions
 
-- `.4` framing choice (resolve at start of `.4`): does each Perl-API public-api chapter get an
-  inline "reference backend" callout, OR do we relocate the Perl API surface into a dedicated
-  "Reference backend (Perl)" subsection? Does not block `.2`/`.3`.
+- ~~`.4` framing choice: inline "reference backend" callout vs. relocate the Perl API into a
+  dedicated subsection?~~ **Resolved (`.4`, 2026-06-16): Option A — per-chapter backend frame.**
+  Rationale: consistent with the `.2`/`.3` demote-don't-delete convention; a single chapter-top
+  frame labels every Perl block at once; preserves each chapter's value as the Perl reference API
+  documentation; avoids the heading/anchor churn and lost pedagogical flow of relocation.
 
 ## Blockers
 
@@ -203,6 +204,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.1` | deterministic leakage scan over all 41 `src/**.md` files + targeted reads; per-file catalog produced; `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.2` | remediated 5 overview pages; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.3` | remediated 4 user-model pages (1 confirmed CLEAN); caught a `.1` audit miss (`rule-modes-and-parse-modes.md` had a real Perl-API block); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.4` | remediated all 4 public-api pages (Option A frames); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
@@ -211,6 +213,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `MDBOOK-VARIANT-AGNOSTIC.1` | `MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook` | Audit recorded in "## Audit Findings (.1)" |
 | `MDBOOK-VARIANT-AGNOSTIC.2` | `MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic (.spec = universal contract; Perl = reference backend)` | 5 overview pages remediated; frontier advanced to `.3` |
 | `MDBOOK-VARIANT-AGNOSTIC.3` | `MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic (.spec contract first; Perl = reference backend)` | 4 user-model pages remediated (+1 confirmed CLEAN); audit miss corrected; frontier advanced to `.4` |
+| `MDBOOK-VARIANT-AGNOSTIC.4` | `MDBOOK-VARIANT-AGNOSTIC.4 — reframe public-api chapters as variant-agnostic (entry points/options/trace/descriptor = contract; Perl = reference surface)` | 4 public-api pages remediated (Option A); Open Question resolved; frontier advanced to `.5` |
 
 ## Changelog
 
@@ -229,3 +232,10 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
   `rule-modes-and-parse-modes` was not fully CLEAN (had a real Perl-API "Public option shape"
   block) — remediated; `blind-calls-and-parser-orchestration` confirmed CLEAN. `mdbook build`
   exit 0. Frontier advanced to `.4`.
+- `2026-06-16`: Completed `.4` — reframed the 4 public-api chapters (`get-and-get-parser`,
+  `descriptor-introspection`, `trace-api`, `plugin-registry`) with per-chapter backend frames
+  (Option A, resolving the Open Question): the two entry points + their options, the descriptor
+  shape/fields, and the trace model are backend-neutral contracts, while the concrete
+  signatures/encodings/constants/state vars are the Perl reference surface; `plugin-registry`
+  got a "Perl reference backend, deprecated — not part of the `.spec` contract" banner.
+  `mdbook build` exit 0. Frontier advanced to `.5`.

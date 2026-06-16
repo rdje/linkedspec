@@ -2,6 +2,8 @@
 
 These are the two public entry points most readers should know first.
 
+LinkedSpec's public API has two entry points serving two backend-neutral roles: an **inline compile path** (compile in-memory `.spec` text into a runnable parser) and a **file-oriented path** (resolve a named spec, then compile it). Those roles — and all the options below (`top_rule`, `parse_mode`, `return_descriptor`, `runtime_ctx_ref`, `parse_only`, `generate_only`) — are backend-neutral. The concrete names and signatures on this page (`LinkedSpec::Get(...)`, `LinkedSpec::get_parser(...)`, and the returned parser coderef) are the **Perl reference backend's** surface; another backend exposes the same two entry points and the same options in its own language.
+
 ## `LinkedSpec::Get(...)`
 
 `Get(...)` is the inline compile path. It works from in-memory spec content and is convenient for direct parser construction, experiments, and tooling flows.
@@ -125,7 +127,7 @@ Callers may also pass a scalar slot with `runtime_ctx_ref => \$ctx`. LinkedSpec 
 
 On failures, the context can carry structured `last_error` data such as owner/stage, rule label, selected top rule, and file identity when known.
 
-This is a major part of the current diagnostics story: callers should not have to scrape raw Perl error strings to understand which owner/stage failed.
+This is a major part of the current diagnostics story: callers should not have to scrape raw host-language error strings to understand which owner/stage failed.
 
 ## Descriptor mode
 

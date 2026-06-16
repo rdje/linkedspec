@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.4: reframe public-api chapters as variant-agnostic
+
+Book documentation only (no code). Remediated the 4 mdBook public-api chapters with per-chapter
+backend frames, resolving the tree's Open Question in favour of **Option A** (per-chapter
+"reference backend" frame, not relocating the Perl API into a dedicated subsection — consistent
+with `.2`/`.3`, one frame labels every Perl block, preserves each chapter's value as the Perl
+reference API doc, avoids heading/anchor churn). Changes: (1) `get-and-get-parser.md` — added a
+frame stating the two entry points (inline compile path / file-oriented path) and all options
+(`top_rule`, `parse_mode`, `return_descriptor`, `runtime_ctx_ref`, `parse_only`, `generate_only`)
+are backend-neutral roles while `LinkedSpec::Get`/`get_parser` + the coderef are the Perl reference
+surface; "raw Perl error strings" → "raw host-language error strings". (2) `descriptor-introspection.md`
+— framed the descriptor shape and field names (`spec`, `dependency_regex_map`, `meta`,
+`dependency_refs`, …) as a backend-neutral contract while labelling the encoding (`sub { ... }`
+handler, `qr/.../` compiled regex, coderef) as the Perl reference representation, with a follow-up
+note under the example. (3) `trace-api.md` — framed the trace *model* (verbosity levels, enter/exit
+scopes, decision events, console/file/mirror routing) as backend-neutral while labelling the
+concrete function API, the `use LinkedSpec` constants, and the package-variable/typeglob state
+surface as Perl-reference; `Data::Dumper` → "dumper-style debug output (e.g. Perl's `Data::Dumper`)".
+(4) `plugin-registry.md` (LABEL) — added a "Perl reference backend, deprecated" banner clarifying
+the registry / `.plg` / `PPlugin` machinery is not part of the `.spec` contract and a new backend
+need not implement it. Verification: `mdbook build` exit 0 (no warnings);
+`scripts/check_memory_architecture.sh` exit 0. Frontier advanced `.4`→`.5` (DSL + compiler/architecture chapters).
+
 ## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.3: reframe user-model chapters as variant-agnostic
 
 Book documentation only (no code). Applied the `.2` "demote, don't delete" convention to the
