@@ -66,9 +66,43 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: WIP checkpoint (this session)
 
 - ID: `RUST-PARITY.5`
+  Status: `active`
+  Goal: Close the real Rust↔Perl parity gaps found by the audit (retv blocker, match/entry split, char-indexing, dead arms, missing helpers)
+  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`
+  Note: Split from a single broad leaf (PNT rule 5 — too broad for one signoff slice). The 3-agent audit in Decisions is the implementation spec. Sequenced retv-first because it gates correct output for nearly every grammar. The "0/20 runtime-tested corpus" gap stays in `.7` (test-corpus breadth).
+
+- ID: `RUST-PARITY.5.1`
   Status: `pending`
-  Goal: Implement remaining helpers not yet in Rust (capture/mark extensions, entry/match detail, flow refinements)
-  Acceptance: All helpers from Perl's 100+ surface present in Rust; regression tests per helper family; all existing tests pass
+  Goal: Fix the child-return (retv) propagation BLOCKER
+  Acceptance: After `->`/`=>` dispatch, the child rule's `return(expr)` value is propagated to the parent and readable as `retv` (so `scalar(retv)` in an `LE` block resolves to the child result, not undef); the half-built dead `set_retv` is completed or removed; new regression tests cover retv-in-LE across AND/OR/REP dispatch; `cargo test` + `cargo clippy` clean; the 182-test baseline stays green.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.5.2`
+  Status: `pending`
+  Goal: Separate `match_*` from `entry_*` (stop unifying them at engine.rs:171-174)
+  Acceptance: `match_*` reads the current local match while `entry_*` reads the entry match; nested-match reads diverge correctly; regression test; baseline green; clippy clean.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.5.3`
+  Status: `pending`
+  Goal: Char-based (not byte) indexing for slicing + cursor line/col; fix hardcoded start positions
+  Acceptance: `substr`/`input_slice`/`capture_slice`/`capture_from` and cursor line-col use char offsets (no panic on multibyte UTF-8; parity with Perl's char-based offsets); `entry/match_start_pos` no longer hardcoded to 0; multibyte regression tests; baseline green; clippy clean.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.5.4`
+  Status: `pending`
+  Goal: Remove duplicate/unreachable match arms; make the REP zero-progress guard check `pos`
+  Acceptance: the shadowed arms (`hash`/`h`, `hash_copy`, `print`) are de-duplicated so the correct behavior wins; the REP loop's zero-progress guard actually compares `pos` before/after and breaks on no advance; regression tests; baseline green; clippy clean.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.5.5`
+  Status: `pending`
+  Goal: Implement the ~30 missing capture/mark/entry/match/input helpers (+ real aliases `tail`/`drop_last`/`flatten`)
+  Acceptance: the missing helpers from the `.1` inventory (`capture_*_from`, `capture_between`, `mark_*`, `entry_named/has/map`, `match_named/has/map`, `input_end_line/col`, anonymous capture variants) are implemented to Perl-contract parity, plus the `tail`/`drop_last`/`flatten` aliases; per-family regression tests; baseline green; clippy clean. (`array_values`/`return_imatch`/`return_im` are explicitly NOT added — not real Perl helpers.)
   Verification: `pending`
   Commit: `pending`
 
@@ -105,7 +139,13 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `RUST-PARITY.4` | `superseded` | Rust-self-hosting on spec.spec dropped; parity = reproducing BootstrapSpec::Core output (see Decisions audit) |
-| 1 | `RUST-PARITY.5` | `pending` | Real parity follow-on: child-return (retv) propagation BLOCKER + match/entry split, missing helpers (per audit) |
+| 1 | `RUST-PARITY.5.1` | `pending` | The retv-propagation BLOCKER — gates correct output for nearly every grammar; do first |
+| 2 | `RUST-PARITY.5.2` | `pending` | match_*/entry_* split |
+| 3 | `RUST-PARITY.5.3` | `pending` | char-based indexing + cursor line/col |
+| 4 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
+| 5 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
+
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.6`–`.9` unchanged below it.)
 
 ## Decisions
 
@@ -120,6 +160,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   - MAJOR: ~30 capture/mark/named-entry/match helpers missing (`capture_*_from`, `capture_between`, `mark_*`, `entry_named/has/map`, `match_named/has/map`, `input_end_line/col`, …); `tail`/`drop_last`/`flatten` real Perl helpers also missing (drop `array_values`/`return_imatch`/`return_im` from the inventory — not in Perl).
   - MAJOR: 0/20 shipped specs are runtime-tested in Rust (compile-only) — need a Perl↔Rust output oracle corpus.
 - `2026-06-16` (`.4` superseded): in-flight exploration toward `.4` committed as a WIP checkpoint (handoff decision) to preserve it durably; it is NOT signoff (`parse_inline_body` conditional-capture bug, dead `set_retv`, leftover debug `eprintln!`). Fold/clean into the real follow-on above.
+- `2026-06-16` (`.5` split): `.5` was a single broad leaf bundling six independently-reviewable audit findings; split into `.5.1`–`.5.5` (the runtime-corpus oracle gap stays in `.7`). The 3-agent audit above is the implementation spec for each child. retv-first because it gates correct output for nearly every grammar. Rust baseline confirmed green (182 tests, 0 failed) before the split.
 
 ## Open Questions
 
@@ -186,3 +227,4 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 - `2026-06-16`: Created task tree.
 - `2026-06-16`: `.4` (Rust self-hosting on spec.spec) marked `superseded` — wrong target; spec.spec rewritten on the Perl side under `SPEC-SPEC-SELFHOST`. Recorded the 3-agent parity audit (real follow-on). Committed in-flight Rust exploration (expr/parser/runtime/helpers) as a WIP checkpoint.
+- `2026-06-16`: Split `.5` (PNT rule 5 — too broad for one signoff slice) into `.5.1` retv-propagation BLOCKER fix, `.5.2` match/entry split, `.5.3` char-based indexing + cursor line/col, `.5.4` dedupe match arms + REP zero-progress guard, `.5.5` ~30 missing helpers + real aliases. Sequenced retv-first. Confirmed the Rust baseline green (182 tests, 0 failed) before splitting. Frontier → `.5.1`. No code change (tree structuring only).

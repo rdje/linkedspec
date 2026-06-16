@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5: split into .5.1–.5.5 (too broad; retv-first)
+
+Task-tree structuring only (no code). PNT reached `RUST-PARITY.5` and found it too broad for one
+signoff slice — it bundled six independently-reviewable audit findings. Per PNT rule 5, split it
+before implementation into: `.5.1` child-return (`retv`) propagation BLOCKER fix, `.5.2` separate
+`match_*` from `entry_*`, `.5.3` char-based (not byte) indexing + cursor line/col, `.5.4` de-duplicate
+shadowed match arms + REP zero-progress guard, `.5.5` the ~30 missing capture/mark/entry/match/input
+helpers (+ real `tail`/`drop_last`/`flatten` aliases). Sequenced retv-first because the audit shows it
+gates correct output for nearly every grammar. The "0/20 runtime-tested corpus" gap stays in `.7`.
+Corrected an earlier note that called `.5` "blocked": its formal Blockers section is "None" — `retv`
+is the defect `.5` fixes, not a precondition. Rust baseline confirmed green before the split:
+`cargo test --manifest-path rust/Cargo.toml` = **182 tests, 0 failed** (86 core + 8 types + 72 runtime
++ 16 integration). Frontier → `.5.1`. No source change in this slice.
+
 ## 2026-06-16 — SPEC-SPEC-SELFHOST.4: docs sync + finalize (close the self-hosting rewrite tree)
 
 Documentation only (no code). Final leaf of the SPEC-SPEC-SELFHOST tree, syncing the live docs to the
