@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `MDBOOK-FORMAT-CORRECTNESS`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16`
+- Last updated: `2026-06-16` (`.3` done — tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -42,9 +42,9 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
 ## Task Tree
 
 - ID: `MDBOOK-FORMAT-CORRECTNESS`
-  Status: `active`
+  Status: `done`
   Goal: Find and fix `.spec` format errors in the mdBook
-  Children: `.1`, `.2`, `.3`
+  Children: `.1`, `.2`, `.3` (all done)
 
 - ID: `MDBOOK-FORMAT-CORRECTNESS.1`
   Status: `done`
@@ -61,19 +61,19 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
   Commit: `MDBOOK-FORMAT-CORRECTNESS.2 — fix lifecycle-nesting in formal-grammar §8.1/§12; full-book format sweep`
 
 - ID: `MDBOOK-FORMAT-CORRECTNESS.3`
-  Status: `pending`
+  Status: `done`
   Goal: Finalize — build, live docs, close tree
   Acceptance: `mdbook build` exit 0; CHANGES/DEVELOPMENT_NOTES/MEMORY updated; tree moved to Completed
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — `mdbook build` exit 0 (confirmed in `.2`; no book changes in `.3`). Added a DEVELOPMENT_NOTES entry capturing the format rule (lifecycle markers are top-level paragraph members, siblings of the edges, never nested in an edge `{ }`) + two reusable lessons (format-validity is a distinct audit from variant-agnostic framing; verify embedded `.spec` snippets against the shipped specs, not the surrounding prose). CHANGES finalize entry added; tree moved to Completed in `docs/TASK_TREE.md`. `scripts/check_memory_architecture.sh` exit 0.
+  Commit: `MDBOOK-FORMAT-CORRECTNESS.3 — finalize; close the format-correctness tree`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-FORMAT-CORRECTNESS.3` | `pending` | Finalize + close |
+| — | — | — | Tree complete — all 3 leaves done; no frontier. |
 
-(`.1`, `.2` complete — runtime-semantics §5.2/§5.3 + formal-grammar §8.1/§12 fixed; whole-book re-scan clean.)
+(`.1`, `.2`, `.3` all complete. Tree moved to Completed in `docs/TASK_TREE.md`. 3 malformed examples fixed: `runtime-semantics` §5.2/§5.3 + `formal-grammar` §8.1/§12.)
 
 ## Decisions
 
@@ -110,6 +110,7 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
 | --- | --- | --- | --- |
 | `2026-06-16` | `MDBOOK-FORMAT-CORRECTNESS.1` | rewrote runtime-semantics §5.2/§5.3 to top-level lifecycle layout (grounded in tablegrep/value-container); `git diff --check` clean; `mdbook build` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-FORMAT-CORRECTNESS.2` | Explore audit over all 41 pages (4 violation classes); found + fixed 2 more lifecycle-nesting instances (formal-grammar §8.1/§12); zero other classes; whole-book re-scan clean; `mdbook build` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-FORMAT-CORRECTNESS.3` | finalize: DEVELOPMENT_NOTES + CHANGES entries; tree moved to Completed; `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
@@ -117,6 +118,7 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
 | --- | --- | --- |
 | `MDBOOK-FORMAT-CORRECTNESS.1` | `MDBOOK-FORMAT-CORRECTNESS.1 — fix lifecycle-nesting bug in runtime-semantics §5.2/§5.3` | §5.2/§5.3 lifecycle blocks now top-level siblings of the edge |
 | `MDBOOK-FORMAT-CORRECTNESS.2` | `MDBOOK-FORMAT-CORRECTNESS.2 — fix lifecycle-nesting in formal-grammar §8.1/§12; full-book format sweep` | 2 more lifecycle-nesting instances fixed; zero other violation classes; re-scan clean |
+| `MDBOOK-FORMAT-CORRECTNESS.3` | `MDBOOK-FORMAT-CORRECTNESS.3 — finalize; close the format-correctness tree` | DEVELOPMENT_NOTES + CHANGES; tree moved to Completed |
 
 ## Changelog
 
@@ -128,3 +130,7 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
   classes). Found 2 MORE lifecycle-nesting instances (`formal-grammar.md` §8.1 + §12) and nothing
   else; fixed both (+ §8.2 fluent realignment + an §8 sibling note). Whole-book re-scan clean.
   Frontier → `.3`.
+- `2026-06-16`: `.3` done — **tree complete**. Added a DEVELOPMENT_NOTES entry (the format rule +
+  two reusable lessons: format-validity ≠ variant-agnostic framing; verify embedded `.spec` against
+  the shipped specs) + a CHANGES finalize entry. 3 malformed examples fixed in total. Tree moved to
+  Completed in `docs/TASK_TREE.md`.

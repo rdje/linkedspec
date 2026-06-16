@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-FORMAT-CORRECTNESS.3: finalize; close the format-correctness tree
+
+Documentation only (no code). Closed the MDBOOK-FORMAT-CORRECTNESS tree. Added a DEVELOPMENT_NOTES
+entry capturing the format rule (lifecycle markers are top-level paragraph members, siblings of the
+edges — never nested in an edge `{ }`) and two reusable lessons (format-validity is a distinct audit
+from variant-agnostic framing; verify embedded `.spec` snippets against the shipped specs). Net result
+across the tree: all 3 malformed examples fixed (`runtime-semantics` §5.2/§5.3 + `formal-grammar`
+§8.1/§12), whole-book re-scan clean, `mdbook build` exit 0. Tree moved to Completed in
+`docs/TASK_TREE.md`. Active trees remaining: `RUST-PARITY` (`.5.1`, the retv-propagation fix — Rust
+engine code).
+
 ## 2026-06-16 — MDBOOK-FORMAT-CORRECTNESS.2: full-book format sweep; fix formal-grammar §8.1/§12 lifecycle nesting
 
 Book documentation only (no code). Full format-validity sweep of every `.spec` code fence across all 41
