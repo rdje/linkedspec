@@ -354,7 +354,7 @@ rm_suffix(s, suffix)            — remove suffix
 ```
 array(e1, e2, ...)     — construct an array
 array_copy(arr)        — shallow copy
-array_values(arr)      — compatibility alias for array_copy
+array_values(arr)      — retired alias of array_copy (do not use; see Helper Contract Catalog §Compatibility-Aliases)
 flat_array(arr)        — flatten into list context for insertion
 concat_arrays(a1, a2)  — concatenate arrays
 push(arr, child)        — append child to accumulator

@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — ALIAS-RETIREMENT-DOC-SYNC.1: retire array-edge alias claims across book + roadmaps
+
+Documentation-only zero-drift correction (new tree `ALIAS-RETIREMENT-DOC-SYNC`, 1 leaf, completed).
+Driven by `RUST-PARITY.5.5.2`'s resolution that the array-edge aliases `tail` / `drop_last` /
+`flatten` / `array_values` are **retired** (Perl reference no longer recognizes them; 0 shipped-spec
+uses; 0 `t/` locks; "Retired" in the book Helper Contract Catalog), and by user direction that the
+book/docs are the variant-agnostic universal-contract surface and must stay zero-drift — so this is
+contract truth, not a "Perl-side" detail to defer.
+
+Corrected 16 stale "remains/preserving … compatibility alias/syntax" claims to state retirement
+(`COMPAT-ALIAS-RETIREMENT.1`), preserving each historical "Landed …" record:
+- **book** `docs/linkedspec-book/src/appendix/formal-grammar.md:357` — `array_values(arr)` → "retired
+  alias of array_copy"; the book is now internally consistent (its Helper Contract Catalog already
+  marked these "Retired").
+- **`ROADMAP_V2.md`** — line 182 (×3 claims + the follow-up-targets mention), 256, 257, 260, 262.
+- **`ROADMAP.md`** — 735, 736, 993, 994, 997, 999, 1189, 1190, 1191, 1242.
+
+Out of scope (Non-Goals): the capture aliases (`capture_slice_here`, `capture_from_rule_start`, …) and
+the `entry_named_map`/`match_named_map` named-map aliases caught by the same grep — a different,
+unverified alias category, left to a separate audit.
+
+**Validation:** grep for remaining `tail`/`drop_last`/`flatten`/`array_values` retention claims = none;
+`mdbook build` exit 0; `scripts/check_memory_architecture.sh` + `knowledge-map/scripts/check_knowledge_map.sh`
+exit 0. No code change. Active Rust frontier unchanged → `RUST-PARITY.5.5.3`.
+
 ## 2026-06-16 — RUST-PARITY.5.5.2: input-boundary helpers + flat splice in the Rust engine
 
 Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). Second child of the `.5.5` helper-gap
