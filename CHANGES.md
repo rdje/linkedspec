@@ -1,6 +1,56 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.5.4: anonymous capture-slice family in the Rust engine (+ catalog §7 entries)
+
+Fourth and final child of the `.5.5` helper-gap split — this closes `.5.5` and `.5` (every
+real Rust↔Perl parity-gap child from the audit is now done). Implemented the **anonymous**
+capture-slice family (the counterpart of the `.5.5.3` named-mark family) and fixed the
+pre-existing `capture_slice` / `capture_slice_len` endpoint. Authoritative contract:
+`perl/LinkedSpec/ActionIR/Contracts.pm` ~366–656.
+
+These readers operate on the single anonymous capture cursor `ctx.capture_start` (Perl
+`$IPOS`, set by `start_capture_slice()` — normally from an `I`-block, which runs before the
+rule's seek, so it records a position at/before the match start).
+
+**Endpoint fix:** `capture_slice` / `capture_slice_len` read to `ctx.pos` (the cursor /
+match-end); they now read to `ctx.match_start_byte` (match-start, Perl `$LSPOS - length
+$LMATCH`) — the anonymous analog of the `.5.5.3` `capture_from` fix. The two landed tests
+`helpers_5_2_capture_slice_basic` / `helpers_5_2_capture_slice_len` were updated to the
+parity-correct values (`"hello"` → `""`, `>0` → `0`): capture started at the match start, so
+nothing precedes the match.
+
+New `call_helper` arms in `rust/linkedspec-runtime/src/engine.rs` (reusing the `.5.5.3`
+guarded `span_text` / `span_char_len`):
+- readers to **match-start**: `capture_take`, `capture_take_len` (read to match-start, then
+  advance `capture_start` to the cursor);
+- readers to the **cursor**: `capture_slice_until_cursor`, `capture_slice_until_cursor_len`,
+  `capture_take_until_cursor`, `capture_take_until_cursor_len`;
+- readers to **end-of-input**: `capture_rest`, `capture_rest_len`, `capture_take_rest`,
+  `capture_take_rest_len`.
+
+`_take_*` advance `capture_start` to the cursor (or end-of-input for the `_rest` forms),
+mutating only on a valid span. Text readers return the raw slice; `_len` readers return the
+**char** count (DSL lengths are char-based, `.5.3`); a reversed/out-of-range span → `undef`.
+
+**Scope:** the leaf named 7 inventoried anonymous variants, but `Contracts.pm` showed the
+`RUST-PARITY.1` inventory itself omitted the same-family `capture_rest` / `capture_rest_len` /
+`capture_take`; all 10 missing anonymous helpers landed together so the family is complete.
+The separately-discovered mark/match/entry-anchored helpers (`mark_match_*`, `mark_entry_*`,
+`capture_take(mark)`, `capture_take_between`) stay a deferred follow-up.
+
+**Book:** `docs/linkedspec-book/src/appendix/helper-contract-catalog.md` §7 — added the 10
+anonymous-variant entries, extended the §7 intro endpoint list, and refined the destructive
+`_take_*` note (the take readers advance to the cursor, not the read endpoint). The
+`capture_slice` match-start contract was already documented (the `.5.5.3` gap, now closed by
+the engine fix). Variant-agnostic, no-drift.
+
+**Validation:** `cargo test --manifest-path rust/Cargo.toml` = 233 passed / 0 failed (223
+baseline + 10 new `helpers_5_5_4_*`). `cargo clippy --manifest-path rust/Cargo.toml -p
+linkedspec-runtime --tests` source warnings 13 = baseline 13 (11 engine.rs + 2 helpers.rs,
+all pre-existing; vendored pgen/rgx-core ignored). `mdbook build` exit 0. New knowledge card
+`docs/knowledge/rust-anonymous-capture-slice-family.md`.
+
 ## 2026-06-16 — RUST-PARITY.5.5.3: mark-based capture family in the Rust engine (+ catalog §7 fix)
 
 Third child of the `.5.5` helper-gap split. Implemented the mark-based capture family the

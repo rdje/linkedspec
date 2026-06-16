@@ -1034,12 +1034,21 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             "capture_slice" => {
+                // RUST-PARITY.5.5.4: ends at the START of the current local match
+                // (`ctx.match_start_byte`, Perl `$LSPOS - length $LMATCH`), not the
+                // cursor as before this leaf — `capture_slice` is the anonymous
+                // counterpart of the mark-based `capture_from` (.5.5.3), so the
+                // captured text is everything between `capture_start` and the match.
                 let start = ctx.capture_start.unwrap_or(0);
-                Ok(RuntimeValue::Scalar(ctx.input[start..ctx.pos].to_string()))
+                Ok(span_text(&ctx.input, start, ctx.match_start_byte)
+                    .map(RuntimeValue::Scalar)
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "capture_slice_len" => {
-                let start = ctx.capture_start.unwrap_or(0).min(ctx.pos);
-                Ok(RuntimeValue::Number(ctx.input[start..ctx.pos].chars().count() as f64))
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(span_char_len(&ctx.input, start, ctx.match_start_byte)
+                    .map(|n| RuntimeValue::Number(n as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "capture_slice_line" => {
                 let start = ctx.capture_start.unwrap_or(0);
@@ -1049,6 +1058,115 @@ impl Engine {
             "capture_slice_pos" => Ok(RuntimeValue::Number(
                 byte_to_char_offset(&ctx.input, ctx.capture_start.unwrap_or(0)) as f64,
             )),
+            // ── RUST-PARITY.5.5.4: anonymous capture-slice family ──
+            // These read the anonymous capture start `ctx.capture_start` (Perl
+            // `$IPOS`, set by `start_capture_slice()`), not a named mark — the
+            // anonymous counterparts of the mark-based `.5.5.3` family.
+            // Authoritative contract: `perl/LinkedSpec/ActionIR/Contracts.pm`
+            // ~366–656. Endpoints (byte offsets): the START of the current local
+            // match (`$LSPOS - length $LMATCH` = `ctx.match_start_byte`) for
+            // `capture_take`(+`_len`); the cursor (`pos` = `ctx.pos`) for
+            // `_until_cursor`; end-of-input for `_rest`. `_take_*` advance
+            // `capture_start` to the cursor (Perl `$IPOS = pos $$STRING`), or to
+            // end-of-input for `_take_rest` (`$IPOS = length $$STRING`). Text is
+            // the raw byte slice (correct chars); `_len` results are char counts
+            // (.5.3). A degenerate (reversed / out-of-range) span yields `undef`
+            // via span_text/span_char_len — panic-safe; the `_until_cursor`/`_rest`
+            // Perl readers carry the same `defined`/`>=` guard, and `_take_*`
+            // mutate only on a valid span (identical to Perl on every realistic
+            // `capture_start ≤ match-start ≤ cursor ≤ end` input).
+            "capture_slice_until_cursor" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(span_text(&ctx.input, start, ctx.pos)
+                    .map(RuntimeValue::Scalar)
+                    .unwrap_or(RuntimeValue::Undef))
+            }
+            "capture_slice_until_cursor_len" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(span_char_len(&ctx.input, start, ctx.pos)
+                    .map(|n| RuntimeValue::Number(n as f64))
+                    .unwrap_or(RuntimeValue::Undef))
+            }
+            "capture_take_until_cursor" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                let cursor = ctx.pos;
+                match span_text(&ctx.input, start, cursor) {
+                    Some(text) => {
+                        ctx.capture_start = Some(cursor);
+                        Ok(RuntimeValue::Scalar(text))
+                    }
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take_until_cursor_len" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                let cursor = ctx.pos;
+                match span_char_len(&ctx.input, start, cursor) {
+                    Some(n) => {
+                        ctx.capture_start = Some(cursor);
+                        Ok(RuntimeValue::Number(n as f64))
+                    }
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take" => {
+                // text capture_start→match-START; advance capture_start to the
+                // cursor (Contracts.pm CAPTURE_SLICE_TAKE, `$IPOS = pos $$STRING`).
+                let start = ctx.capture_start.unwrap_or(0);
+                match span_text(&ctx.input, start, ctx.match_start_byte) {
+                    Some(text) => {
+                        ctx.capture_start = Some(ctx.pos);
+                        Ok(RuntimeValue::Scalar(text))
+                    }
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take_len" => {
+                // length capture_start→match-START; advance capture_start to the
+                // cursor (Contracts.pm CAPTURE_SLICE_TAKE_LEN).
+                let start = ctx.capture_start.unwrap_or(0);
+                match span_char_len(&ctx.input, start, ctx.match_start_byte) {
+                    Some(n) => {
+                        ctx.capture_start = Some(ctx.pos);
+                        Ok(RuntimeValue::Number(n as f64))
+                    }
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_rest" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(span_text(&ctx.input, start, ctx.input.len())
+                    .map(RuntimeValue::Scalar)
+                    .unwrap_or(RuntimeValue::Undef))
+            }
+            "capture_rest_len" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(span_char_len(&ctx.input, start, ctx.input.len())
+                    .map(|n| RuntimeValue::Number(n as f64))
+                    .unwrap_or(RuntimeValue::Undef))
+            }
+            "capture_take_rest" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                let end = ctx.input.len();
+                match span_text(&ctx.input, start, end) {
+                    Some(text) => {
+                        ctx.capture_start = Some(end);
+                        Ok(RuntimeValue::Scalar(text))
+                    }
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take_rest_len" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                let end = ctx.input.len();
+                match span_char_len(&ctx.input, start, end) {
+                    Some(n) => {
+                        ctx.capture_start = Some(end);
+                        Ok(RuntimeValue::Number(n as f64))
+                    }
+                    None => Ok(RuntimeValue::Undef),
+                }
+            }
             "mark_here" => {
                 if !args.is_empty() {
                     let name = args[0].to_str();
@@ -2423,6 +2541,11 @@ ChildB:
 
     #[test]
     fn helpers_5_2_capture_slice_basic() {
+        // RUST-PARITY.5.5.4: `capture_slice()` now ends at the START of the current
+        // local match (Perl `$LSPOS - $IPOS - length $LMATCH`), not the cursor. The
+        // I-block starts the capture at pos 0; over "hello" the match also starts at
+        // 0, so nothing precedes the match → "" (parity-correct; see
+        // helpers_5_5_4_capture_slice_reads_pre_match_text for the non-empty case).
         let grammar = r#"Top::
  /(\w+)/
  I { start_capture_slice() }
@@ -2434,11 +2557,12 @@ ChildB:
         let engine = Engine::new(compiled);
         let result = engine.execute("hello").unwrap();
         let arr = result.as_array().unwrap();
-        assert_eq!(arr[0].as_str().unwrap(), "hello");
+        assert_eq!(arr[0].as_str().unwrap(), "");
     }
 
     #[test]
     fn helpers_5_2_capture_slice_len() {
+        // RUST-PARITY.5.5.4: capture started at the match start (pos 0) → length 0.
         let grammar = r#"Top::
  /(\w+)/
  I { start_capture_slice() }
@@ -2450,7 +2574,7 @@ ChildB:
         let engine = Engine::new(compiled);
         let result = engine.execute("hello").unwrap();
         let arr = result.as_array().unwrap();
-        assert!(arr[0].as_f64().unwrap() > 0.0, "expected positive length, got {:?}", arr[0]);
+        assert_eq!(arr[0].as_f64().unwrap(), 0.0);
     }
 
     #[test]
@@ -3390,5 +3514,147 @@ ChildB:
         let acc = run_5_5_3(g, "ab cd");
         assert_eq!(acc[0].as_f64().unwrap(), 5.0);
         assert_eq!(acc[1].as_f64().unwrap(), 0.0);
+    }
+
+    // ── RUST-PARITY.5.5.4: anonymous capture-slice family ──
+    // `I { start_capture_slice() }` records the anonymous capture start at the
+    // pre-seek cursor (pos 0 for the top rule); a bare `Top::` rule is Seek mode,
+    // so over "  ab cd" the `/(\w+)/` match is "ab" at bytes 2..4 (match-start 2,
+    // cursor 4), end-of-input 7. That fixes the three endpoints the family reads:
+    // match-start (2), cursor (4), end (7). Reuses the run_5_5_3 pipeline harness.
+
+    #[test]
+    fn helpers_5_5_4_capture_slice_reads_pre_match_text() {
+        // capture_slice ends at match-START → the "  " skipped before the match.
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_slice()); return(capture_slice_len()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "  ");
+        assert_eq!(acc[1].as_f64().unwrap(), 2.0);
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_slice_until_cursor() {
+        // ends at the CURSOR (match-end, byte 4) → "  ab".
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_slice_until_cursor()); return(capture_slice_until_cursor_len()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "  ab");
+        assert_eq!(acc[1].as_f64().unwrap(), 4.0);
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_rest_reads_to_end() {
+        // ends at END-of-input (byte 7), past the cursor → the whole input.
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_rest()); return(capture_rest_len()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "  ab cd");
+        assert_eq!(acc[1].as_f64().unwrap(), 7.0);
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_take_advances_to_cursor() {
+        // capture_take reads to match-START ("  ") and advances capture_start to
+        // the CURSOR (byte 4); the following capture_rest is then 4→end = " cd".
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_take()); return(capture_rest()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "  ");
+        assert_eq!(acc[1].as_str().unwrap(), " cd");
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_take_len_advances_to_cursor() {
+        // len is capture_start→match-START (2); capture_start then advances to the
+        // CURSOR (byte 4), so capture_rest_len afterward is 3 (" cd").
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_take_len()); return(capture_rest_len()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_f64().unwrap(), 2.0);
+        assert_eq!(acc[1].as_f64().unwrap(), 3.0);
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_take_until_cursor_advances() {
+        // reads capture_start→cursor ("  ab") and advances capture_start to the
+        // cursor, so the second until-cursor read (start == cursor) is empty.
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_take_until_cursor()); return(capture_slice_until_cursor()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "  ab");
+        assert_eq!(acc[1].as_str().unwrap(), "");
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_take_until_cursor_len_advances() {
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_take_until_cursor_len()); return(capture_slice_until_cursor_len()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_f64().unwrap(), 4.0);
+        assert_eq!(acc[1].as_f64().unwrap(), 0.0);
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_take_rest_advances_to_end() {
+        // reads capture_start→end ("  ab cd") and advances capture_start to end, so
+        // the second capture_rest read is empty.
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_take_rest()); return(capture_rest()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_str().unwrap(), "  ab cd");
+        assert_eq!(acc[1].as_str().unwrap(), "");
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_take_rest_len_advances_to_end() {
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_take_rest_len()); return(capture_rest_len()) }
+"#;
+        let acc = run_5_5_3(g, "  ab cd");
+        assert_eq!(acc[0].as_f64().unwrap(), 7.0);
+        assert_eq!(acc[1].as_f64().unwrap(), 0.0);
+    }
+
+    #[test]
+    fn helpers_5_5_4_capture_rest_len_is_char_count() {
+        // Multibyte parity: over "ab,héllo" the match is "ab" (bytes 0..2), so
+        // capture_rest spans capture_start 0 → end-of-input. The text is the raw
+        // slice; capture_rest_len is the CHAR count (8: a b , h é l l o), not the
+        // byte count (9) — DSL lengths are char-based (.5.3).
+        let g = r#"Top::
+ /(\w+)/
+ I { start_capture_slice() }
+ E { return(capture_rest()); return(capture_rest_len()) }
+"#;
+        let acc = run_5_5_3(g, "ab,héllo");
+        assert_eq!(acc[0].as_str().unwrap(), "ab,héllo");
+        assert_eq!(acc[1].as_f64().unwrap(), 8.0);
     }
 }

@@ -512,15 +512,19 @@ The capture readers below extract text — or its character length — between s
 an origin and one of three endpoints:
 
 - the **start of the current match** — the non-cursor readers (`capture_slice`,
-  `capture_from`, `capture_len_from`, `capture_take_len_from`);
+  `capture_slice_len`, `capture_take`, `capture_take_len`, `capture_from`,
+  `capture_len_from`, `capture_take_len_from`);
 - the **current scan position** (the cursor) — the `*_until_cursor*` readers;
 - the **end of input** — the `*_rest*` readers.
 
 Text readers return the captured substring; `*_len*` readers return its length in
 **characters** (not bytes). A reader whose mark is unset, or whose span is
-reversed (end before start), returns `undef`. The `capture_take_*` variants are
-destructive: after reading they advance the named mark to the read's endpoint
-(the cursor, or end-of-input for `_rest_`), so the next capture continues there.
+reversed (end before start), returns `undef`. The `capture_take*` variants are
+destructive: after reading they advance the capture origin — the anonymous cursor
+or the named mark — to the **current scan position** (or to **end of input** for
+the `_rest` readers), so the next capture continues from there. Note that the
+match-start readers (`capture_take`, `capture_take_len`, `capture_take_len_from`)
+read up to the match start but still advance the origin to the scan position.
 
 ### `start_capture_slice()`
 - **Signature**: `start_capture_slice()`
@@ -539,6 +543,57 @@ destructive: after reading they advance the named mark to the read's endpoint
 - **Returns**: int
 - **Behavior**: Character length of `capture_slice()`. Preferred over raw position arithmetic.
 - **Compatibility**: `capture_slice_length()` is a retired alias.
+
+### `capture_slice_until_cursor()`
+- **Signature**: `capture_slice_until_cursor()`
+- **Returns**: scalar or undef
+- **Behavior**: Returns the text from the anonymous capture cursor to the **current scan position** (cursor).
+
+### `capture_slice_until_cursor_len()`
+- **Signature**: `capture_slice_until_cursor_len()`
+- **Returns**: int or undef
+- **Behavior**: Character length of `capture_slice_until_cursor()`.
+
+### `capture_take()`
+- **Signature**: `capture_take()`
+- **Returns**: scalar or undef
+- **Behavior**: Like `capture_slice()` (anonymous cursor to the start of the current match), then advances the anonymous cursor to the **current scan position**.
+
+### `capture_take_len()`
+- **Signature**: `capture_take_len()`
+- **Returns**: int or undef
+- **Behavior**: Character length from the anonymous cursor to the start of the current match, then advances the anonymous cursor to the **current scan position**.
+
+### `capture_take_until_cursor()`
+- **Signature**: `capture_take_until_cursor()`
+- **Returns**: scalar or undef
+- **Behavior**: Like `capture_slice_until_cursor()`, then advances the anonymous cursor to the cursor.
+
+### `capture_take_until_cursor_len()`
+- **Signature**: `capture_take_until_cursor_len()`
+- **Returns**: int or undef
+- **Behavior**: Like `capture_slice_until_cursor_len()`, then advances the anonymous cursor to the cursor.
+
+### `capture_rest()`
+- **Signature**: `capture_rest()`
+- **Returns**: scalar or undef
+- **Behavior**: Returns the text from the anonymous capture cursor to the **end of input**.
+
+### `capture_rest_len()`
+- **Signature**: `capture_rest_len()`
+- **Returns**: int or undef
+- **Behavior**: Character length of `capture_rest()`.
+- **Compatibility**: `capture_rest_length()` is a retired alias.
+
+### `capture_take_rest()`
+- **Signature**: `capture_take_rest()`
+- **Returns**: scalar or undef
+- **Behavior**: Like `capture_rest()`, then advances the anonymous cursor to end of input.
+
+### `capture_take_rest_len()`
+- **Signature**: `capture_take_rest_len()`
+- **Returns**: int or undef
+- **Behavior**: Like `capture_rest_len()`, then advances the anonymous cursor to end of input.
 
 ### `mark_input_start(name)`
 - **Signature**: `mark_input_start(mark_name: string)`
