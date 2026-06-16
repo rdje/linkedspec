@@ -3,7 +3,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 ## Active Batch
 - BWFSC target: PNT cycle started 2026-05-16 after PHASE2-DSL-FRONTEND completion and PHASE1A-CLOSE-OUT close-out.
-- Push policy: do not push until the full batch completes and the final slice commit workflow is complete, unless explicitly instructed otherwise.
+- Push policy: **push every 300 commits** (per 2026-06-16 user directive; raised from 200). Otherwise do not push mid-batch. Currently tracking via `git status -sb` ahead-count.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
