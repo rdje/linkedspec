@@ -54,11 +54,11 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
   Commit: `MDBOOK-FORMAT-CORRECTNESS.1 — fix lifecycle-nesting bug in runtime-semantics §5.2/§5.3`
 
 - ID: `MDBOOK-FORMAT-CORRECTNESS.2`
-  Status: `pending`
+  Status: `done`
   Goal: Full format-validity sweep of all remaining book `.spec` snippets; fix any other errors
   Acceptance: every `.spec` code fence audited against the bootstrap grammar + shipped specs; all structural errors fixed (or page confirmed clean); findings recorded
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — read-only Explore audit over all 41 `src/**.md` pages against the format contract (rule headers, edges, lifecycle placement, split markers, helpers), checking four violation classes: lifecycle-in-edge-block, mixed `->`/`=>`, header-in-block, malformed syntax. Found 2 MORE instances of the SAME lifecycle-nesting class — both in `appendix/formal-grammar.md` (§8.1 "Structured Block Form" + §12 "Complete Example") — and ZERO of the other classes. Verified each against the source (not trusted blindly), then fixed: §8.1 → `I {…}` sibling + `-> Child {push_value(array(results), call(Child))}` + `LX {…}` sibling, with §8.2 realigned as the matched fluent form (`-> Child .push_value(…)`) and an §8 intro note stating lifecycle blocks are siblings of the edges; §12 `DemoParser::` → full tablegrep-style sibling layout (`I`/`LS` + `/pattern1/ -> Child {assign(scalar(retv), call(Child))}` + `LE`/`E`). Whole-book re-scan after the fixes: zero genuine lifecycle-nesting remains (only correct sibling false positives). `git diff --check` clean; `mdbook build` exit 0.
+  Commit: `MDBOOK-FORMAT-CORRECTNESS.2 — fix lifecycle-nesting in formal-grammar §8.1/§12; full-book format sweep`
 
 - ID: `MDBOOK-FORMAT-CORRECTNESS.3`
   Status: `pending`
@@ -71,10 +71,9 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-FORMAT-CORRECTNESS.2` | `pending` | Sweep the rest of the book for other format errors |
-| 2 | `MDBOOK-FORMAT-CORRECTNESS.3` | `pending` | Finalize + close |
+| 1 | `MDBOOK-FORMAT-CORRECTNESS.3` | `pending` | Finalize + close |
 
-(`.1` complete — §5.2/§5.3 fixed.)
+(`.1`, `.2` complete — runtime-semantics §5.2/§5.3 + formal-grammar §8.1/§12 fixed; whole-book re-scan clean.)
 
 ## Decisions
 
@@ -88,6 +87,14 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
   `appendix/runtime-semantics.md` §5.2/§5.3; the three `LX {` hits in
   `dsl/value-container-flow-helper-reference.md` are CORRECT (edge block closes first; `LX` is a
   sibling) — false positives. `.2` widens this to all snippet-structure checks, not just nesting.
+- `2026-06-16` (`.2`): The full-book Explore sweep (all 41 pages, 4 violation classes) found the
+  lifecycle-nesting bug in 2 MORE places — both in `appendix/formal-grammar.md` (§8.1 + §12) — and
+  NOTHING else (no mixed `->`/`=>`, no header-in-block, no malformed syntax). The bug class was thus
+  confined to appendix teaching examples that pre-dated the shipped-spec-grounded discipline. The page's
+  `{ }`-block-context section (~L165–176, "a standalone block is lifecycle code for the rule itself")
+  already implied the standalone/top-level nature, but the sibling rule was not stated explicitly at the
+  examples that contradicted it — the new §8 intro note now makes it explicit. (Verified there is no
+  §10.3 stating it — an earlier draft of this entry was wrong and was corrected.)
 
 ## Open Questions
 
@@ -102,12 +109,14 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-16` | `MDBOOK-FORMAT-CORRECTNESS.1` | rewrote runtime-semantics §5.2/§5.3 to top-level lifecycle layout (grounded in tablegrep/value-container); `git diff --check` clean; `mdbook build` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-FORMAT-CORRECTNESS.2` | Explore audit over all 41 pages (4 violation classes); found + fixed 2 more lifecycle-nesting instances (formal-grammar §8.1/§12); zero other classes; whole-book re-scan clean; `mdbook build` exit 0 | PASS |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `MDBOOK-FORMAT-CORRECTNESS.1` | `MDBOOK-FORMAT-CORRECTNESS.1 — fix lifecycle-nesting bug in runtime-semantics §5.2/§5.3` | §5.2/§5.3 lifecycle blocks now top-level siblings of the edge |
+| `MDBOOK-FORMAT-CORRECTNESS.2` | `MDBOOK-FORMAT-CORRECTNESS.2 — fix lifecycle-nesting in formal-grammar §8.1/§12; full-book format sweep` | 2 more lifecycle-nesting instances fixed; zero other violation classes; re-scan clean |
 
 ## Changelog
 
@@ -115,3 +124,7 @@ rule-paragraph members — siblings of the `->`/`=>` edges**, never nested insid
   `appendix/runtime-semantics.md`). Pre-audit isolated the nesting bug to §5.2/§5.3.
 - `2026-06-16`: `.1` done — fixed runtime-semantics §5.2/§5.3 (lifecycle blocks now top-level
   siblings of the `->` edge, not nested inside it), grounded in the shipped specs. Frontier → `.2`.
+- `2026-06-16`: `.2` done — full-book format-validity sweep (Explore audit, all 41 pages, 4 violation
+  classes). Found 2 MORE lifecycle-nesting instances (`formal-grammar.md` §8.1 + §12) and nothing
+  else; fixed both (+ §8.2 fluent realignment + an §8 sibling note). Whole-book re-scan clean.
+  Frontier → `.3`.

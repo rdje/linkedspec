@@ -494,20 +494,26 @@ call(child_rule)         — call a child rule directly from action code
 
 `.spec` files support two equivalent authoring styles:
 
+The lifecycle blocks (`I`/`LS`/`LE`/`E`/`EX`/`IT`/`LX`) are top-level rule-paragraph
+members — siblings of the `->`/`=>` edges, never nested inside an edge's `{ … }`. The
+two styles below differ only in how the **edge's own action code** is written.
+
 ### 8.1 Structured Block Form
 ```
 Top::
- /pattern/ -> Child {
  I { declare(array, results) }
- LE { push_value(array(results), scalar(retv)) }
- E { return(array_copy(array(results))) }
+ -> Child {
+   push_value(array(results), call(Child))
  }
+ LX { return(array_copy(array(results))) }
 ```
 
 ### 8.2 Fluent Chain Form
 ```
 Top::
- /pattern/ -> Child .declare(array, results) .push_value(array(results), scalar(retv)) .return(array_copy(array(results)))
+ I { declare(array, results) }
+ -> Child .push_value(array(results), call(Child))
+ LX { return(array_copy(array(results))) }
 ```
 
 Both forms lower to identical ActionIR and produce identical parser behavior.
@@ -587,11 +593,11 @@ New `.spec` files must maintain this invariant.
 ```text
 # A complete .spec file showing all major constructs
 DemoParser::
- /pattern1/ -> Child {
- I { declare(array, results) }
+ I  { declare(array, results) }
+ LS { declare(scalar, retv) }
+ /pattern1/ -> Child { assign(scalar(retv), call(Child)) }
  LE { if(is_defined(scalar(retv))); push_value(array(results), scalar(retv)); endif() }
- E { return(array("?result:", array_copy(array(results)))) }
- }
+ E  { return(array("?result:", array_copy(array(results)))) }
 
 Child::
  /hello[ \t]+(\w+)/

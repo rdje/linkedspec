@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-FORMAT-CORRECTNESS.2: full-book format sweep; fix formal-grammar §8.1/§12 lifecycle nesting
+
+Book documentation only (no code). Full format-validity sweep of every `.spec` code fence across all 41
+`docs/linkedspec-book/src/**.md` pages (read-only Explore audit) against the bootstrap grammar + shipped
+specs, checking four violation classes: lifecycle-block-nested-in-edge-block, mixed `->`/`=>` in one rule,
+rule-header-inside-open-block, and malformed edge/marker/header syntax. Result: the lifecycle-nesting bug
+appeared in 2 MORE places — both in `appendix/formal-grammar.md` (§8.1 "Structured Block Form" and §12
+"Complete Example") — and NONE of the other classes appeared anywhere. Each finding was verified against
+the source before fixing (not trusted blindly). Fixes: §8.1 → `I {…}` sibling + `-> Child {push_value(array(results),
+call(Child))}` + `LX {…}` sibling, with §8.2 realigned as the matched fluent form (`-> Child .push_value(…)`)
+and an §8 intro note stating lifecycle blocks are siblings of the edges; §12 `DemoParser::` → full
+tablegrep-style sibling layout (`I`/`LS` + `/pattern1/ -> Child {assign(scalar(retv), call(Child))}` +
+`LE`/`E`). Whole-book re-scan after the fixes: zero genuine lifecycle-nesting remains (only correct sibling
+false positives). `git diff --check` clean; `mdbook build` exit 0. Frontier → `.3` (finalize).
+
 ## 2026-06-16 — MDBOOK-FORMAT-CORRECTNESS.1: fix lifecycle-nesting bug in runtime-semantics §5.2/§5.3
 
 Book documentation only (no code). A user caught a malformed `.spec` example: `appendix/runtime-semantics.md`
