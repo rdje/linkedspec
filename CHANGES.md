@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-FORMAT-CORRECTNESS.1: fix lifecycle-nesting bug in runtime-semantics §5.2/§5.3
+
+Book documentation only (no code). A user caught a malformed `.spec` example: `appendix/runtime-semantics.md`
+§5.2 and §5.3 showed lifecycle blocks (`I`/`LE`/`E`) nested **inside** an action-edge `-> Bar { … }`
+block. That is structurally invalid — lifecycle markers (`I`/`LS`/`LE`/`E`/`EX`/`IT`/`LX`) are
+**top-level rule-paragraph members, siblings of the `->`/`=>` edges** (they are `NON_ACTION_CODE_BLOCK`
+tokens in `BootstrapSpec/Core.pm`, peers of the edge tokens; the recursive brace scanner would consume
+a nested marker as edge-code text, not recognize it as a hook). Fixed both, grounded in the shipped
+specs: §5.2 → `-> Bar {push(Bar)}` with a top-level `LX {return(array_copy(array(Foo)))}` (mirrors
+`value-container-flow-helper-reference.md`'s implicit-accumulator form + `tablegrep.spec`'s LX return);
+§5.3 → top-level `I {declare(array, results)}` + `-> Bar {push_value(array(results), call(Bar))}` +
+top-level `E {return(...)}`. Added a clarifying note that lifecycle blocks are top-level siblings of
+the edges. New owning tree `MDBOOK-FORMAT-CORRECTNESS` (3 leaves: fix / full-book format sweep /
+finalize); a pre-audit grep isolated this nesting bug to §5.2/§5.3 (the `value-container` `LX` hits
+were correct — false positives). This is a format-validity gap the earlier `MDBOOK-VARIANT-AGNOSTIC`
+sweep did not cover (it audited variant-agnostic framing, not snippet syntax). Also reconciled a stale
+`docs/TASK_TREE.md` index frontier (`RUST-PARITY.5`→`.5.1` after the split). `git diff --check` clean;
+`mdbook build` exit 0. Frontier → `.2` (full-book format-validity sweep).
+
 ## 2026-06-16 — RUST-PARITY.5: split into .5.1–.5.5 (too broad; retv-first)
 
 Task-tree structuring only (no code). PNT reached `RUST-PARITY.5` and found it too broad for one

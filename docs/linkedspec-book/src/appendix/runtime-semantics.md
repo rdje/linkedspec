@@ -192,11 +192,13 @@ the rule's own accumulator array.
 
 ```text
 Foo::
- -> Bar {
- I { declare(array, Foo) }
- LE { push(Foo, scalar(retv)) }    # implicit target: @Foo
- }
+ -> Bar {push(Bar)}    # push(Child) appends Bar's result to the implicit accumulator @Foo
+LX {return(array_copy(array(Foo)))}
 ```
+
+The `I`/`LS`/`LE`/`E`/`EX`/`IT`/`LX` lifecycle blocks are **top-level rule-paragraph
+members — siblings of the `->`/`=>` edges**, not nested inside an edge's `{ … }` (an edge
+block holds only that edge's action code).
 
 ### 5.3 Explicit Accumulation
 
@@ -205,11 +207,9 @@ preferred form — clearer, more portable:
 
 ```text
 Foo::
- -> Bar {
- I { declare(array, results) }
- LE { push_value(array(results), scalar(retv)) }
- E { return(array_copy(array(results))) }
- }
+ I {declare(array, results)}
+ -> Bar {push_value(array(results), call(Bar))}
+E {return(array_copy(array(results)))}
 ```
 
 ### 5.4 Return Value
