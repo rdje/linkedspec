@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `92d43ff` — "MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook"   (ahead of origin: ~109; push at 300; .2 hash pending REPO-HYGIENE sync)
+- latest_commit: `d0fd425` — "MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic"   (ahead of origin: ~110; push at 300)
 - active_work_unit: `MDBOOK-VARIANT-AGNOSTIC` → frontier leaf: `MDBOOK-VARIANT-AGNOSTIC.3` (pending — remediate user-model chapters)
 - next_action: do `MDBOOK-VARIANT-AGNOSTIC.3` — reframe the 2 heavy user-model pages (`worked-spec-walkthrough.md`, `runtime-context-and-tracing.md`) plus a light touch on `spec-files-and-rule-paragraphs.md`; teach the `.spec` + execution model with Perl shown as one labelled reference-backend block (use the parenthetical "in the Perl reference backend …" demotion convention from `.2`). Per-file map in the task file's "## Audit Findings (.1)". Other live frontiers: `SPEC-SPEC-SELFHOST.4` (docs sync+finalize), `RUST-PARITY.5` (retv BLOCKER + match/entry split + missing helpers).
 - done: `MDBOOK-VARIANT-AGNOSTIC.2` — reframed all 5 overview pages (`.spec` = universal contract, Perl = reference backend, Rust = second backend) + fixed `project-status` phase drift (0–7→0–9; added Phase 8/9); `mdbook build` exit 0. (Prior: `MDBOOK-VARIANT-AGNOSTIC.1` 41-page audit.)
