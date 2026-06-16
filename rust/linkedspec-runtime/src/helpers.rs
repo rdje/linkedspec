@@ -465,5 +465,22 @@ pub mod regex_engine {
             assert_eq!(result.named.get("num"), None);
             assert_eq!(result.named.get("both"), None);
         }
+
+        #[test]
+        fn two_patterns_first_has_four_positional_groups() {
+            // Simulates rule_paragraph scenario: pat1 has 4 groups, pat2 has 0
+            let alt = CompiledAlternation::compile(&[
+                r"(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)".into(),
+                r"(?<!\\)/(?:\\.|[^/\\])*?(?<!\\)/".into(),
+            ]).unwrap();
+            // "DemoParser::" should match pat1 (branch 0) with 4 groups
+            let result = alt.seek_match("DemoParser::\n /pattern/ -> Child", 0).unwrap();
+            eprintln!("TEST groups={:?} index={}", result.groups, result.index);
+            assert_eq!(result.index, 0, "should match first pattern");
+            assert_eq!(result.groups.len(), 5, "full match + 4 groups");
+            assert_eq!(result.groups[0], "DemoParser::");
+            assert_eq!(result.groups[1], "DemoParser");
+            assert_eq!(result.groups[2], "::");
+        }
     }
 }

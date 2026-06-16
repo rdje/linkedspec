@@ -124,6 +124,15 @@ impl RuntimeContext {
         self.get_hash(name)
     }
 
+    // ── Child return value (retv) ──
+
+    /// Set the `retv` variable — the last child rule's return value.
+    /// In Perl LinkedSpec, `return(expr)` in a child rule populates the
+    /// parent's `retv` scalar automatically.
+    pub fn set_retv(&mut self, value: RuntimeValue) {
+        self.scalars.insert("retv".to_string(), value);
+    }
+
     // ── BACKTRACK cursor stack ──
 
     /// Save current position onto the backtrack stack (BACKTRACK marker).

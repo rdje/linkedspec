@@ -59,11 +59,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `pending`
 
 - ID: `RUST-PARITY.4`
-  Status: `pending`
+  Status: `superseded`
   Goal: Implement self-hosting — Rust compiles and runs spec.spec against itself
   Acceptance: spec.spec compiles in Rust; Rust can parse .spec files using the spec.spec grammar (not just bootstrap); regression test; all existing tests pass
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Superseded 2026-06-16 — Rust-self-hosting on spec.spec is the wrong target. spec.spec is a Perl-side artifact (rewritten under `SPEC-SPEC-SELFHOST`); the real Rust-parity contract is reproducing `BootstrapSpec::Core` output, not self-hosting spec.spec. Real follow-on = the parity audit findings in Decisions (retv BLOCKER, etc.). In-flight exploration committed as a WIP checkpoint.
+  Commit: WIP checkpoint (this session)
 
 - ID: `RUST-PARITY.5`
   Status: `pending`
@@ -104,13 +104,22 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-PARITY.4` | `pending` | Self-hosting — Rust compiles and runs spec.spec against itself |
+| — | `RUST-PARITY.4` | `superseded` | Rust-self-hosting on spec.spec dropped; parity = reproducing BootstrapSpec::Core output (see Decisions audit) |
+| 1 | `RUST-PARITY.5` | `pending` | Real parity follow-on: child-return (retv) propagation BLOCKER + match/entry split, missing helpers (per audit) |
 
 ## Decisions
 
 - `2026-06-16`: Created task tree. Conditional flow (if/switch) is priority after inventory because it's the largest feature gap affecting the most specs. Code-gen emitter is last because interpreted mode works and emitter needs stable HandlerIR shapes.
 - `2026-06-16` (`.1`): Inventory complete. 6 gap categories identified.
 - `2026-06-16` (`.2`): Conditional flow landed. Lazy evaluation required modifying `eval_expr` to intercept `if`/`switch`/`elseif`/`else`/`case`/`default` before eager arg evaluation. New method `call_helper_lazy` added. 12 new tests. 177/177 PASS.
+- `2026-06-16` (audit): 3-agent Rust↔Perl parity audit found the REAL gaps (the actual follow-on, replacing the superseded self-hosting `.4`):
+  - **BLOCKER**: child-return value (`retv`) is never propagated to the parent after `->`/`=>` dispatch — `return(expr)` only pushes to the top accumulator and `execute_rule` never sets a `retv` scalar, so `scalar(retv)` in `LE` resolves to undef → virtually every real grammar yields wrong/null output. (`engine.rs` execute_rule + runtime.rs; the in-flight `set_retv` is the half-built, dead fix.)
+  - MAJOR: `match_*` is wrongly unified with `entry_*` (`engine.rs:171-174` sets both to the same groups) — nested-match reads via `match_*` get the entry match.
+  - MAJOR: byte-indexed slicing in `substr`/`input_slice`/`capture_slice`/`capture_from`/cursor line-col → panic on multibyte UTF-8 and offset divergence from Perl (char-based). Also `entry/match_start_pos` hardcoded to 0.
+  - MAJOR: duplicate/unreachable match arms in `engine.rs` — `hash`/`h` (650 vs 1202), `hash_copy` (662 vs 1221, the worse arm wins), `print` (643 vs 798); REP "zero-progress guard" never checks `pos`.
+  - MAJOR: ~30 capture/mark/named-entry/match helpers missing (`capture_*_from`, `capture_between`, `mark_*`, `entry_named/has/map`, `match_named/has/map`, `input_end_line/col`, …); `tail`/`drop_last`/`flatten` real Perl helpers also missing (drop `array_values`/`return_imatch`/`return_im` from the inventory — not in Perl).
+  - MAJOR: 0/20 shipped specs are runtime-tested in Rust (compile-only) — need a Perl↔Rust output oracle corpus.
+- `2026-06-16` (`.4` superseded): in-flight exploration toward `.4` committed as a WIP checkpoint (handoff decision) to preserve it durably; it is NOT signoff (`parse_inline_body` conditional-capture bug, dead `set_retv`, leftover debug `eprintln!`). Fold/clean into the real follow-on above.
 
 ## Open Questions
 
@@ -176,3 +185,4 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 ## Changelog
 
 - `2026-06-16`: Created task tree.
+- `2026-06-16`: `.4` (Rust self-hosting on spec.spec) marked `superseded` — wrong target; spec.spec rewritten on the Perl side under `SPEC-SPEC-SELFHOST`. Recorded the 3-agent parity audit (real follow-on). Committed in-flight Rust exploration (expr/parser/runtime/helpers) as a WIP checkpoint.

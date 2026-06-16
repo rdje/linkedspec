@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.4 (superseded): WIP checkpoint of in-flight Rust exploration
+
+Preserves the 4 in-flight Rust files from the prior session as a durable WIP checkpoint
+(handoff decision) — NOT signoff work. They targeted Rust self-hosting on spec.spec, now
+superseded (spec.spec is a Perl-side artifact; Rust parity = reproducing BootstrapSpec::Core
+output). Files: `expr.rs` (skip trailing regex flags after a code-block `/.../`), `parser.rs`
+(`parse_inline_body` for same-line rule bodies — audit: conditional capture-group bug),
+`runtime.rs` (`set_retv` — audit: dead, no caller), `helpers.rs` (regex-engine test — audit:
+leftover debug `eprintln!`). No behavior change (cargo test was 182/182). The real Rust
+follow-on is the 3-agent parity audit recorded in `docs/tasks/RUST-PARITY.md` Decisions:
+child-return (`retv`) propagation BLOCKER, `match_*`/`entry_*` split, byte-slice UTF-8 panics,
+duplicate match arms, ~30 missing helpers, and 0/20 specs runtime-tested (need an output oracle).
+
 ## 2026-06-16 — SPEC-SPEC-SELFHOST.2+.3: rewrite spec.spec as a faithful self-hosting grammar
 
 ### Context

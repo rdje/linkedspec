@@ -23,7 +23,17 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
     while i < len {
         // Try to parse a rule header at the current line
         if let Some((header, next_i)) = parse_rule_header(&lines, i)? {
-            let (body, next_i) = collect_body(&lines, next_i);
+            let (mut body, next_i) = collect_body(&lines, next_i);
+            // Parse same-line content (rest) as inline body elements
+            let rest = header.rest.trim().to_string();
+            if !rest.is_empty() {
+                if let Some(inline_elements) = parse_inline_body(&rest, header.line) {
+                    // Prepend inline elements before the multi-line body
+                    let mut combined = inline_elements;
+                    combined.extend(body);
+                    body = combined;
+                }
+            }
             rules.push(Rule { header, body });
             i = next_i;
         } else if rules.is_empty() {
@@ -137,6 +147,120 @@ fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
 // ── Body collection ──
 
 /// Collect body elements from `start` until the next rule header at depth 0.
+/// Parse same-line content after the rule header (the `rest` field).
+///
+/// Only handles elements that can appear on the same line:
+/// regex literals, action edges, blind-call edges, split markers,
+/// conditional markers, and fluent chains.
+fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
+    let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
+    let re_action = Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
+    let re_blind = Regex::compile(r"^=>[ \t]+(\w+)").unwrap();
+    let re_split = Regex::compile(r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))").unwrap();
+    let re_conditional = Regex::compile(r"^-\?[ \t]+\w+").unwrap();
+    let re_fluent = Regex::compile(r"^\.[ \t]*\w+").unwrap();
+
+    let mut elements = Vec::new();
+    let mut remaining = rest.trim().to_string();
+
+    while !remaining.is_empty() {
+        let trimmed = remaining.trim_start().to_string();
+        if trimmed.is_empty() {
+            break;
+        }
+
+        // Try each element type
+        if let Some(caps) = re_regex.captures(&trimmed) {
+            let full_match = caps.get(0).unwrap();
+            let pattern = caps.get(1).unwrap().as_str().to_string();
+            elements.push(BodyElement::new(
+                BodyElementKind::Regex { pattern },
+                full_match.as_str(),
+                line_num,
+            ));
+            remaining = trimmed[full_match.end()..].to_string();
+            continue;
+        }
+
+        if let Some(caps) = re_action.captures(&trimmed) {
+            let full_match = caps.get(0).unwrap();
+            let targets_str = caps.get(1).unwrap().as_str();
+            let index: usize = caps.get(3)
+                .map(|m| m.as_str().parse().unwrap_or(0))
+                .unwrap_or(0);
+            let targets: Vec<EdgeTarget> = targets_str
+                .split('|')
+                .map(|t| t.trim())
+                .filter(|t| !t.is_empty())
+                .map(|label| EdgeTarget { label: label.to_string(), index })
+                .collect();
+            elements.push(BodyElement::new(
+                BodyElementKind::ActionEdge { targets, code: None },
+                full_match.as_str(),
+                line_num,
+            ));
+            remaining = trimmed[full_match.end()..].to_string();
+            continue;
+        }
+
+        if let Some(caps) = re_blind.captures(&trimmed) {
+            let full_match = caps.get(0).unwrap();
+            let target = caps.get(1).unwrap().as_str().to_string();
+            elements.push(BodyElement::new(
+                BodyElementKind::BlindEdge { target, code: None, fluent_chain: Vec::new() },
+                full_match.as_str(),
+                line_num,
+            ));
+            remaining = trimmed[full_match.end()..].to_string();
+            continue;
+        }
+
+        if let Some(caps) = re_split.captures(&trimmed) {
+            let full_match = caps.get(0).unwrap();
+            let marker = caps.get(1).unwrap().as_str().to_string();
+            elements.push(BodyElement::new(
+                BodyElementKind::SplitMarker { marker },
+                full_match.as_str(),
+                line_num,
+            ));
+            remaining = trimmed[full_match.end()..].to_string();
+            continue;
+        }
+
+        if let Some(caps) = re_conditional.captures(&trimmed) {
+            let full_match = caps.get(0).unwrap();
+            let word = caps.get(1).unwrap_or_else(|| caps.get(0).unwrap()).as_str().to_string();
+            elements.push(BodyElement::new(
+                BodyElementKind::Conditional { word },
+                full_match.as_str(),
+                line_num,
+            ));
+            remaining = trimmed[full_match.end()..].to_string();
+            continue;
+        }
+
+        if let Some(caps) = re_fluent.captures(&trimmed) {
+            let full_match = caps.get(0).unwrap();
+            elements.push(BodyElement::new(
+                BodyElementKind::FluentChain { calls: Vec::new() },
+                full_match.as_str(),
+                line_num,
+            ));
+            remaining = trimmed[full_match.end()..].to_string();
+            continue;
+        }
+
+        // Unknown content — stop parsing inline elements
+        break;
+    }
+
+    if elements.is_empty() {
+        None
+    } else {
+        Some(elements)
+    }
+}
+
 fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
     let mut body = Vec::new();
     let mut i = start;
