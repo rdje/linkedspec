@@ -227,6 +227,11 @@ impl Engine {
                 break;
             }
 
+            // Cursor position at the start of this iteration — the zero-progress
+            // guard below compares it against the position after the iteration
+            // (Perl: `loop_start_pos`).
+            let pos_before = ctx.pos;
+
             // ── LS-block (loop start, fires before each match attempt) ──
             if let Some(ref lscode) = rule.lscode {
                 self.execute_block(lscode, ctx, label)?;
@@ -335,9 +340,12 @@ impl Engine {
                 }
             }
 
-            // Zero-progress guard: if we're past min and position hasn't changed,
-            // we're stuck in an infinite loop. Force break.
-            if is_rep && matches > rep_min && matches > 100 {
+            // Zero-progress guard: a REP iteration that left the cursor
+            // unchanged (e.g. a zero-width match with no consuming child
+            // dispatch) would loop forever. Break when the iteration made no
+            // progress (Perl: `loop_end_pos == loop_start_pos`); the min-bound
+            // check below then fails the rule if we are still under `rep_min`.
+            if is_rep && ctx.pos == pos_before {
                 break;
             }
         }
@@ -792,46 +800,11 @@ impl Engine {
                 ctx.exit_status = Some(status);
                 Err(format!("exit_now({status})"))
             }
-            "print" => {
-                for a in args {
-                    eprintln!("{}", a.to_str());
-                }
-                Ok(RuntimeValue::Undef)
-            }
-            // ── Hash ──
-            "hash" | "h" => {
-                // args are flat key,value,key,value pairs
-                let mut entries = Vec::new();
-                let mut i = 0;
-                while i + 1 < args.len() {
-                    let key = args[i].to_str();
-                    let val = args[i + 1].clone();
-                    entries.push((key, val));
-                    i += 2;
-                }
-                Ok(RuntimeValue::Hash(entries))
-            }
-            "hash_copy" => {
-                if let Some(arg) = args.first() {
-                    match arg {
-                        RuntimeValue::Hash(h) => {
-                            Ok(RuntimeValue::Hash(h.clone()))
-                        }
-                        _ => {
-                            let hash_name = arg.to_str();
-                            if !hash_name.is_empty() {
-                                Ok(RuntimeValue::Hash(
-                                    ctx.hash_copy(&hash_name),
-                                ))
-                            } else {
-                                Ok(RuntimeValue::Hash(Vec::new()))
-                            }
-                        }
-                    }
-                } else {
-                    Ok(RuntimeValue::Hash(Vec::new()))
-                }
-            }
+            // `print` is handled by the consolidated `say | print | print_each`
+            // arm below; `hash`/`h` and `hash_copy` by the `Hash helpers` arms
+            // below. (RUST-PARITY.5.4: removed the earlier shadowing duplicates
+            // so the more complete behavior — Hash-arg merge for `hash`, raw-AST
+            // target resolution for `hash_copy` — wins.)
             // ── String/array index ──
             "substr" => {
                 // Char-based (Perl `substr`): start/len are character offsets, so
@@ -2672,5 +2645,47 @@ ChildB:
 "#;
         let acc = run_5_3(grammar, "café");
         assert_eq!(acc.last().unwrap().as_f64().unwrap(), 4.0);
+    }
+
+    // ── RUST-PARITY.5.4 — dedup shadowed arms + REP zero-progress guard ──
+
+    #[test]
+    fn rep_5_4_zero_progress_guard_terminates() {
+        // A REP rule whose regex matches zero-width (`/x*/` on input with no
+        // 'x' matches the empty string at the cursor) makes no progress. The
+        // guard must break after one no-progress iteration; the old guard only
+        // broke after 100 iterations, so it would have collected 100+ entries.
+        let grammar = r#"Top::OR+
+ /x*/
+ I { declare(array, iters) }
+ LE { push_value(array(iters), scalar("i")) }
+ E { return(array_copy(array(iters))) }
+"#;
+        let acc = run_5_3(grammar, "abc");
+        let iters = acc.last().unwrap().as_array().unwrap();
+        assert_eq!(
+            iters.len(),
+            1,
+            "zero-width REP must stop after one no-progress iteration, got {iters:?}"
+        );
+    }
+
+    #[test]
+    fn hash_5_4_better_hash_arm_merges_hash_args() {
+        // Distinguishing behavior of the surviving `hash` arm: it merges
+        // Hash-valued args, which the removed shadowing duplicate dropped.
+        // hash("b","2", hash("a","1")) must yield BOTH keys.
+        let grammar = r#"Top:: /(\w+)/
+ E { return(hash(scalar("b"), scalar("2"), hash(scalar("a"), scalar("1")))) }
+"#;
+        let acc = run_5_3(grammar, "x");
+        let obj = acc.last().unwrap().as_object().cloned().unwrap_or_default();
+        assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("2"));
+        assert_eq!(
+            obj.get("a").and_then(|v| v.as_str()),
+            Some("1"),
+            "the merged Hash arg must survive — proves the better hash arm won, got {:?}",
+            acc.last()
+        );
     }
 }

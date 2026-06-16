@@ -1,6 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.4: dedup shadowed match arms + fix REP zero-progress guard
+
+Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). Two audit MAJORs in one slice.
+
+**Duplicate/unreachable match arms.** `call_helper` is a big `match` on the helper name, and it
+contained three pairs of arms with the same pattern. Rust matches top-to-bottom, so the FIRST
+(worse) arm won and the second (better) was dead code — 3 `unreachable_patterns` warnings, and the
+audit's "the worse arm wins". Removed the first `print`, `hash`/`h`, and `hash_copy` arms so the
+later, more complete ones are live: `hash`/`h` now merges Hash-valued args (the removed arm dropped
+them), `hash_copy` resolves its target via `resolve_array_target` (raw-AST) instead of a bare
+`to_str()`, and `print` is served by the consolidated `say | print | print_each` arm (identical
+behavior for `print`). Discovered while here (flagged for a later leaf, not fixed in `.5.4`): there
+is no clean DSL idiom to copy a *declared* hash by reference — `hash(name)` eagerly builds an empty
+new hash and `resolve_array_target` only matches the `array(...)`/`a(...)` raw form — so
+`hash_copy(hash(config))` returns `{}`.
+
+**REP zero-progress guard.** The REP matching loop's guard read `matches > rep_min && matches > 100`
+— an iteration cap that never inspected the cursor, so a zero-width REP match (e.g. `/x*/` matching
+the empty string) ran ~100 iterations before the cap fired. Replaced with a real progress check: the
+loop captures `pos_before` at the top of each iteration and breaks when `ctx.pos == pos_before`
+(Perl `loop_end_pos == loop_start_pos`). A no-progress REP iteration now terminates immediately, and
+the post-loop min-bound check fails the rule if it is still under `rep_min`.
+
+**Validation:** `cargo test --manifest-path rust/Cargo.toml` = 198 passed / 0 failed (196 baseline +
+2 new: `rep_5_4_zero_progress_guard_terminates`, `hash_5_4_better_hash_arm_merges_hash_args` — the
+latter pins the better `hash` arm via its distinguishing Hash-arg-merge behavior). `cargo clippy
+--manifest-path rust/Cargo.toml -p linkedspec-runtime --tests`: touched-file warnings 15 → 12
+(removed 3 unreachable-pattern duplicates; zero new). No book change (internal dedup + REP
+termination correctness, which already matches the documented Perl model — Rust-parity book sync stays
+`RUST-PARITY.9`).
+
 ## 2026-06-16 — RUST-PARITY.5.3: char-based offsets/slicing in the Rust engine
 
 Rust engine code (`rust/linkedspec-runtime/src/engine.rs`, `runtime.rs`). Closed the audit's

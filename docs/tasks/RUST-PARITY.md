@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.5.3` done)
+- Last updated: `2026-06-16` (`.5.4` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -68,7 +68,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - ID: `RUST-PARITY.5`
   Status: `active`
   Goal: Close the real Rust↔Perl parity gaps found by the audit (retv blocker, match/entry split, char-indexing, dead arms, missing helpers)
-  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`
+  Children: `.5.1` (done), `.5.2` (done), `.5.3` (done), `.5.4` (done), `.5.5` (pending)
   Note: Split from a single broad leaf (PNT rule 5 — too broad for one signoff slice). The 3-agent audit in Decisions is the implementation spec. Sequenced retv-first because it gates correct output for nearly every grammar. The "0/20 runtime-tested corpus" gap stays in `.7` (test-corpus breadth).
 
 - ID: `RUST-PARITY.5.1`
@@ -93,11 +93,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.5.3` (see Commit Log)
 
 - ID: `RUST-PARITY.5.4`
-  Status: `pending`
+  Status: `done`
   Goal: Remove duplicate/unreachable match arms; make the REP zero-progress guard check `pos`
   Acceptance: the shadowed arms (`hash`/`h`, `hash_copy`, `print`) are de-duplicated so the correct behavior wins; the REP loop's zero-progress guard actually compares `pos` before/after and breaks on no advance; regression tests; baseline green; clippy clean.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-16. Removed the three earlier shadowing arms in `call_helper` (`print`, `hash`/`h`, `hash_copy`) so the later, more complete arms win: `hash`/`h` now merges Hash-valued args, `hash_copy` resolves its target via `resolve_array_target` (raw-AST), and `print` is served by the consolidated `say | print | print_each` arm. This also cleared 3 `unreachable_patterns` warnings. The REP loop's zero-progress guard previously checked `matches > rep_min && matches > 100` (an iteration cap, never `pos`); it now captures `pos_before` at the top of each iteration and breaks when `ctx.pos == pos_before` (Perl `loop_end_pos == loop_start_pos`), so a zero-width REP match terminates after one no-progress iteration and the post-loop min-bound check fails it if still under `rep_min`. 2 new tests (`rep_5_4_zero_progress_guard_terminates`, `hash_5_4_better_hash_arm_merges_hash_args`). `cargo test` = 198 passed (196 baseline + 2), 0 failed; `cargo clippy -p linkedspec-runtime --tests` touched-file warnings 15 → 12 (removed 3 unreachable-pattern duplicates; zero new). No book change (internal dedup + REP termination correctness, which already matches the documented Perl model — book sync is `.9`).
+  Commit: `RUST-PARITY.5.4` (see Commit Log)
 
 - ID: `RUST-PARITY.5.5`
   Status: `pending`
@@ -142,8 +142,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.5.1` | `done` | retv-propagation BLOCKER fixed (2026-06-16); child return now readable as `scalar(retv)` after `->`/`=>`/REP dispatch |
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
-| 1 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
-| 2 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
+| — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
+| 1 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.6`–`.9` unchanged below it.)
 
@@ -167,6 +167,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 - `2026-06-16` (`.5.3` implementation): char-based offset/slicing parity. **Design:** the regex engine works in **byte** offsets, so internal positions (`ctx.pos`, `capture_start`, `marks`, `MatchResult.start`/`.end`, the new `entry/match_*_byte` spans) stay byte-based and input slicing between two of them is panic-safe; but the Perl reference exposes **char** offsets (`pos()`/`length`/`substr` are char-based), so every position/length surfaced to the DSL converts byte→char (`byte_to_char_offset`) and every helper taking DSL char-offset args char-slices (`char_substr`/`char_substr_from`). Concretely: `substr`/`input_slice` no longer byte-slice (they panicked on a multibyte boundary); `cursor_pos`/`cursor_col`/`cursor_rest_len`/`input_len`/`input_end_pos`/`capture_slice_len`/`capture_slice_pos`/`mark_pos`/`entry_*_pos`/`entry_len`/`match_*_pos`/`match_len`/`length` return char counts; line numbers (newline counts) were already byte/char-identical, only columns needed char counting. `entry_start_pos`/`match_start_pos` were hardcoded `0.0`; `RuntimeContext` now stores `entry/match_start_byte`+`_end_byte` spans (recorded from `m.start`/`m.end`, part of `SavedMatchState` so they save/restore per invocation like the `.5.2` groups, entry seeded by the same dispatcher-vs-own-first-match rule). **ASCII no-op:** byte==char for ASCII, so the 189 baseline is untouched; 7 multibyte `chars_5_3_*` tests pin the UTF-8 behavior. **Out of scope:** the `.5.2` group-indexing item, and the `entry_line`/`entry_col`/`match_line`/`match_col` arg-taking quirk (only `cursor` line/col was in this leaf's named scope). New knowledge card `docs/knowledge/rust-char-based-offsets.md`.
 
+- `2026-06-16` (`.5.4` implementation): dedup + REP guard. **Dedup:** `call_helper` had three pairs of arms with the same pattern, where Rust matches top-to-bottom so the FIRST (worse) won and the later (better) was unreachable (3 `unreachable_patterns` warnings). Removed the first `print`, `hash`/`h`, and `hash_copy` arms so the later ones win: `hash`/`h` merges Hash-valued args (the dropped one ignored them), `hash_copy` resolves its target through `resolve_array_target` (raw-AST, not bare `to_str()`), and `print` is served by the consolidated `say | print | print_each` arm (identical behavior). **Note discovered while here:** there is no clean DSL idiom to *copy a declared hash by reference* — `hash(name)` eagerly builds an empty new hash (constructor, not a reference) and `resolve_array_target` only recognizes the `array(...)`/`a(...)` raw form, so `hash_copy(hash(config))` returns `{}`; the `hash`-as-reference gap is deeper than `.5.4` (flag for `.5.5`/a later leaf). The `.5.4` regression instead pins the better arm via its *distinguishing* behavior (Hash-arg merge). **REP guard:** the old guard `matches > rep_min && matches > 100` was an iteration cap that never inspected `pos`; replaced with a real progress check — capture `pos_before` at the top of each iteration, break when `ctx.pos == pos_before` (Perl `loop_end_pos == loop_start_pos`); a zero-width REP match now terminates after one no-progress iteration and the post-loop min-bound check fails it if still under `rep_min`. No knowledge card (localized fix, captured by tests + this tree).
+
 ## Open Questions
 
 - None yet — inventory leaf will identify any.
@@ -185,6 +187,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-06-16` | `RUST-PARITY.5.1` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml` (linkedspec-runtime delta) | 186 passed / 0 failed (182 baseline + 4 new retv tests: acode/OR, blind-call/AND, REP, `call`); clippy adds zero new linkedspec-runtime warnings (lib stays at 16 pre-existing `doc_lazy_continuation`) |
 | `2026-06-16` | `RUST-PARITY.5.2` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff) | 189 passed / 0 failed (186 baseline + 3 new `match_5_2_*`: child entry/local divergence, parent-match survives child dispatch, top-rule entry==local); clippy touched-file warning set identical to baseline (14 engine.rs + 1 pre-existing `len_zero` at integration_test.rs:199), only line-shifted — zero new warnings |
 | `2026-06-16` | `RUST-PARITY.5.3` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff vs `.5.2` HEAD) | 196 passed / 0 failed (189 baseline + 7 new `chars_5_3_*`: substr no-panic, input_slice, cursor_pos, cursor_col, match_start_pos, entry_start_pos, length — all multibyte UTF-8); clippy touched-file warning count identical to baseline (15) — zero new warnings |
+| `2026-06-16` | `RUST-PARITY.5.4` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff vs `.5.3` HEAD) | 198 passed / 0 failed (196 baseline + 2 new: `rep_5_4_zero_progress_guard_terminates`, `hash_5_4_better_hash_arm_merges_hash_args`); clippy touched-file warnings 15 → 12 (removed 3 unreachable-pattern duplicates; zero new) |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -234,6 +237,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.5.1` | `RUST-PARITY.5.1 — fix child-return (retv) propagation in the Rust engine` | engine.rs + runtime.rs + 4 integration tests; 186/186 green |
 | `RUST-PARITY.5.2` | `RUST-PARITY.5.2 — separate entry_* from match_* in the Rust engine` | engine.rs SavedMatchState save/restore + 3 integration tests; 189/189 green |
 | `RUST-PARITY.5.3` | `RUST-PARITY.5.3 — char-based offsets/slicing in the Rust engine` | engine.rs byte→char conversions + runtime.rs match-span fields + 7 multibyte unit tests; 196/196 green |
+| `RUST-PARITY.5.4` | `RUST-PARITY.5.4 — dedup shadowed arms + fix REP zero-progress guard in the Rust engine` | engine.rs removed 3 duplicate arms + pos-based REP guard + 2 unit tests; 198/198 green |
 
 ## Changelog
 
@@ -243,3 +247,4 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-06-16`: `.5.1` done — fixed the child-return (retv) propagation BLOCKER. `execute_rule` now returns the rule's value via a per-invocation channel; `->`/`=>` dispatch set `retv` to the child return; `return(...)` feeds the channel without disturbing the accumulator contract; `call(child)` now resolves a bare rule name and returns the child value. 4 new integration tests (acode/OR, blind-call/AND, REP, `call`); `cargo test` 186/186; clippy adds no new warnings. Frontier → `.5.2` (match_*/entry_* split).
 - `2026-06-16`: `.5.2` done — separated `entry_*` from `match_*` in the Rust engine. `execute_rule` now emulates Perl's per-handler `IMATCH`/`LMATCH` lexicals via a `SavedMatchState` save/restore on the shared `RuntimeContext`: entry match = the dispatcher's local match (`$info = $minfo`), local match = the rule's own regex match, entry seeded from the first own match only for the dispatcher-less top rule, both restored on exit. 3 new integration tests (child entry/local divergence, parent match survives child dispatch, top-rule entry==local); `cargo test` 189/189; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-entry-match-separation.md`. Frontier → `.5.3` (char-based indexing + cursor line/col).
 - `2026-06-16`: `.5.3` done — char-based offsets/slicing in the Rust engine. Internal positions stay byte-based (the regex engine is byte-based); the DSL boundary is now char-based for Perl parity. `byte_to_char_offset`/`char_substr` helpers added; `substr`/`input_slice` char-slice (no multibyte panic); cursor/input/capture/mark/entry/match positions+lengths and `length` convert byte→char; `cursor_col` is char-distance. `entry_start_pos`/`match_start_pos` no longer hardcoded `0.0` — `RuntimeContext` stores `entry/match_*_byte` spans (part of `SavedMatchState`). 7 new multibyte tests (`chars_5_3_*`); `cargo test` 196/196; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-char-based-offsets.md`. Frontier → `.5.4` (dedupe match arms + REP zero-progress guard).
+- `2026-06-16`: `.5.4` done — dedup shadowed `call_helper` arms + fix the REP zero-progress guard. Removed the first `print`/`hash`/`hash_copy` arms so the better later arms win (Hash-arg merge for `hash`, raw-AST target resolution for `hash_copy`, consolidated `say|print|print_each`); cleared 3 `unreachable_patterns` warnings. REP loop now captures `pos_before` per iteration and breaks when `ctx.pos == pos_before` (no cursor progress) instead of an iteration cap. 2 new tests; `cargo test` 198/198; clippy touched-file warnings 15 → 12. No knowledge card (localized fix). Frontier → `.5.5` (~30 missing helpers + real aliases).
