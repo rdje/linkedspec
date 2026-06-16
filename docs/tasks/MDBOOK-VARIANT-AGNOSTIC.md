@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `MDBOOK-VARIANT-AGNOSTIC`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.6` done)
+- Last updated: `2026-06-16` (`.7` done — tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -41,9 +41,9 @@ minimized in user-facing chapters and clearly labeled when present.
 ## Task Tree
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC`
-  Status: `active`
+  Status: `done`
   Goal: Audit and remediate mdBook for variant-agnostic language
-  Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
+  Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7` (all done)
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.1`
   Status: `done`
@@ -88,19 +88,19 @@ minimized in user-facing chapters and clearly labeled when present.
   Commit: `MDBOOK-VARIANT-AGNOSTIC.6 — reframe appendix + corpus walkthroughs + development chapters as variant-agnostic (and fix ebnf walkthrough raw-Perl drift)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.7`
-  Status: `pending`
+  Status: `done`
   Goal: Final verification — build book, cross-check all chapters, update live docs
   Acceptance: mdBook build succeeds; cross-chapter consistency verified; ROADMAP_V2.md, CHANGES.md, MEMORY.md updated
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — whole-book cross-chapter consistency sweep over all 41 `src/**.md` pages: every page carrying Perl-API blocks also carries a backend frame (`get-and-get-parser` legitimately uses a single chapter-top frame per the `.4` Option-A convention); the "Perl as the only backend" scan (`compiler for Perl` / `Perl parser generator`) returns none. One light consistency touch applied: ebnf descriptor lead → "ask the reference (Perl) backend …" (its block sits ~660 lines below the page frame). Confirmed `spec-files-and-rule-paragraphs.md` carries no Perl-API invocation block (the sweep's `api=1` was a project-name prose artifact, not a code block). `git diff --check` clean; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0. Tree complete — all 7 leaves done.
+  Commit: `MDBOOK-VARIANT-AGNOSTIC.7 — final variant-agnostic consistency sweep; close the tree`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
+| — | — | — | Tree complete — all 7 leaves done; no frontier. |
 
-(`.1`, `.2`, `.3`, `.4`, `.5`, `.6` complete — removed from frontier.)
+(`.1`–`.7` all complete. Tree moved to Completed in `docs/TASK_TREE.md`.)
 
 ## Audit Findings (.1)
 
@@ -205,6 +205,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.4` | remediated all 4 public-api pages (Option A frames); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.5` | re-grepped all 14 in-scope pages (caught 3 leaks `.1` tagged CLEAN); remediated 4 compiler + 4 DSL pages + 1 architecture banner (5 confirmed CLEAN); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.6` | re-grepped all 12 in-scope pages; reframed 10 (3 appendix + 6 corpus + 1 development), 2 confirmed CLEAN; caught + fixed `ebnf` walkthrough raw-Perl drift vs shipped `specs/ebnf.spec:187`; `git diff --check` clean; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.7` | whole-book consistency sweep (all 41 pages: each Perl-API page has a backend frame; zero "Perl-only backend" statements); ebnf descriptor-lead touch; `git diff --check` clean; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
@@ -216,6 +217,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `MDBOOK-VARIANT-AGNOSTIC.4` | `MDBOOK-VARIANT-AGNOSTIC.4 — reframe public-api chapters as variant-agnostic (entry points/options/trace/descriptor = contract; Perl = reference surface)` | 4 public-api pages remediated (Option A); Open Question resolved; frontier advanced to `.5` |
 | `MDBOOK-VARIANT-AGNOSTIC.5` | `MDBOOK-VARIANT-AGNOSTIC.5 — reframe DSL + compiler/architecture chapters as variant-agnostic` | 4 compiler + 4 DSL pages reframed + `owner-tree` banner; 3 `.1`-CLEAN misses caught; frontier advanced to `.6` |
 | `MDBOOK-VARIANT-AGNOSTIC.6` | `MDBOOK-VARIANT-AGNOSTIC.6 — reframe appendix + corpus walkthroughs + development chapters as variant-agnostic (and fix ebnf walkthrough raw-Perl drift)` | 10 pages reframed (+2 confirmed CLEAN); `ebnf` walkthrough raw-Perl drift fixed against shipped spec; frontier advanced to `.7` |
+| `MDBOOK-VARIANT-AGNOSTIC.7` | `MDBOOK-VARIANT-AGNOSTIC.7 — final variant-agnostic consistency sweep; close the tree` | Whole-book consistency verified; ebnf descriptor-lead touch; tree complete (all 7 leaves) and moved to Completed |
 
 ## Changelog
 
@@ -262,3 +264,11 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
   `semantic_annotation` action that no longer matched the migrated shipped helper-DSL rule
   (`specs/ebnf.spec:187`) — corrected, which also reconciled the page with its own `ready=1`
   descriptor section. `git diff --check` clean; `mdbook build` exit 0. Frontier advanced to `.7`.
+- `2026-06-16`: Completed `.7` and **closed the tree** — whole-book cross-chapter consistency
+  sweep over all 41 `src/**.md` pages confirmed every page with Perl-API blocks carries a backend
+  frame and that no chapter presents Perl as the only backend. Applied one light consistency touch
+  (ebnf descriptor lead → "ask the reference (Perl) backend"). `mdbook build` exit 0;
+  `scripts/check_memory_architecture.sh` exit 0. All 7 leaves done; tree moved to Completed in
+  `docs/TASK_TREE.md`. Result: the mdBook now documents the `.spec` file as the one universal
+  contract with Perl framed as the reference backend across overview, user-model, public-api, DSL,
+  compiler, corpus, architecture, appendix, and development chapters.

@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.7: final variant-agnostic consistency sweep; close the tree
+
+Book documentation only (no code). Final leaf of the MDBOOK-VARIANT-AGNOSTIC tree. Ran a whole-book
+cross-chapter consistency sweep over all 41 `src/**.md` pages: confirmed every page that carries
+Perl-API blocks (`use LinkedSpec` / `LinkedSpec::Get` / `get_parser` / `$parser->(`) also carries a
+backend frame, that `public-api/get-and-get-parser.md` correctly uses a single chapter-top frame per
+the `.4` Option-A convention, and that no chapter presents Perl as the only backend (`compiler for
+Perl` / `Perl parser generator` scan returns none). Applied one light consistency touch — the `ebnf`
+walkthrough's descriptor block sits ~660 lines below its page frame, so its lead now reads "ask the
+reference (Perl) backend for the descriptor instead of a parser". Confirmed
+`user-model/spec-files-and-rule-paragraphs.md` carries no Perl-API invocation block (the sweep's
+`api=1` was a project-name prose match, not a code block). Verification: `git diff --check` clean;
+`mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0.
+
+**Tree complete (all 7 leaves).** The mdBook now documents the `.spec` file as the one universal
+contract with Perl framed as the reference backend across every section — overview, user-model,
+public-api, DSL, compiler, corpus walkthroughs, architecture, appendix, and development. Tree moved
+to Completed in `docs/TASK_TREE.md`; `ROADMAP_V2.md` Overall-roadmap row notes the milestone. Active
+trees remaining: `SPEC-SPEC-SELFHOST` (`.4`), `RUST-PARITY` (`.5`, has a retv blocker).
+
 ## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.6: reframe appendix + corpus walkthroughs + development chapters as variant-agnostic
 
 Book documentation only (no code). Remediated the remaining `.6` scope — the 4 appendix pages, the

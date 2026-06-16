@@ -686,7 +686,7 @@ It means `ebnf.spec` is not only an isolated demonstration file. It is part of a
 
 ## Descriptor readiness
 
-You can ask for the descriptor instead of a parser:
+You can ask the reference (Perl) backend for the descriptor instead of a parser:
 
 ```perl
 use LinkedSpec;
