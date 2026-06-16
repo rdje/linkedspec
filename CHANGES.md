@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.6: strict_syntax validation mode in the Rust variant
+
+Closes the audit's Gap 4 — the Rust validator had 6 hard checks but no strict mode. Brings
+`rust/linkedspec-core/src/validation.rs` to parity with the Perl reference
+`Validation.pm validate_dsl_syntax(..., strict_syntax => 1)` (~705–741).
+
+API:
+- `validate(spec)` is now a thin non-strict wrapper (`= validate_with_options(spec, false)`),
+  so all ~70 existing call sites are untouched.
+- New `validate_with_options(spec, strict_syntax: bool)` runs the same 6 checks, plus
+  `check_unused_rules` when strict.
+
+Semantics (the Perl reference emits two reference *warnings*; strict promotes both to hard
+errors, undefined first):
+- **Unused** (`defined − used`, a rule referenced by no edge) → strict error via
+  `check_unused_rules`. The **top rule is not exempt** — an unreferenced top rule is
+  flagged. Verified empirically against the reference (`Top:: -> Child` strict → "Unused
+  rule(s): Top").
+- **Undefined** (`used − defined`) is already a hard error here in every mode
+  (`check_edge_targets`), stricter than the reference's default (a warning). Left as-is (a
+  pre-existing, recorded divergence; relaxing it would break a landed test). Because
+  `check_edge_targets` runs before the strict check, the reference's undefined-before-unused
+  order is preserved, so strict mode's only new observable behavior is the unused-rule
+  rejection.
+
+Validation: `cargo test --manifest-path rust/Cargo.toml` = 237 passed / 0 failed (233
+baseline + 4 new `validation::tests::validate_strict_*`/`_nonstrict_*`). `cargo clippy
+--manifest-path rust/Cargo.toml -p linkedspec-core --tests` validation.rs warnings 4 =
+baseline 4 (pre-existing `collapsible_match`; zero new); `-p linkedspec-runtime --tests` 13
+= baseline 13 (unchanged — the change is in `linkedspec-core`). No book change (the strict
+contract is already documented in `compiler/pipeline-overview.md`; Rust now conforms — book
+sync is `.9`). New knowledge card `docs/knowledge/rust-strict-syntax-validation.md`.
+
 ## 2026-06-16 — RUST-PARITY.5.5.4: anonymous capture-slice family in the Rust engine (+ catalog §7 entries)
 
 Fourth and final child of the `.5.5` helper-gap split — this closes `.5.5` and `.5` (every

@@ -1,26 +1,53 @@
 //! Validation passes for parsed `.spec` AST.
 //!
-//! Checks performed:
+//! Checks performed (every mode):
 //! 1. At least one top rule (`::`) exists
 //! 2. No duplicate rule labels
 //! 3. No rule mixes action (`->`) and blind-call (`=>`) edges
 //! 4. All `{` blocks are balanced (no unclosed blocks)
 //! 5. All edge targets reference existing rules
 //! 6. Rule headers are not inside open blocks (handled by parser)
+//!
+//! Strict mode (`validate_with_options(spec, strict_syntax = true)`) promotes the
+//! Perl reference's *reference warnings* to hard errors:
+//! 7. No unused rules — every defined rule must be referenced by some edge (the
+//!    top rule is NOT exempt, matching `Validation.pm`'s strict_syntax check).
+//!
+//! Note: undefined references are a hard error here in *every* mode (check 5),
+//! which is stricter than the Perl reference's default (it warns, and only
+//! `strict_syntax` makes them fatal). Strict mode keeps them fatal too, so the
+//! observable addition of strict mode in this backend is the unused-rule check;
+//! the Perl ordering (undefined reported before unused) is preserved because
+//! check 5 runs before the strict check.
 
 use crate::ast::{BodyElementKind, SpecFile};
 use crate::error::{LinkedSpecError, Result};
 use rgx_core::Regex;
 use std::collections::HashSet;
 
-/// Run all validation passes on a parsed spec.
+/// Run all (non-strict) validation passes on a parsed spec.
 pub fn validate(spec: &SpecFile) -> Result<()> {
+    validate_with_options(spec, false)
+}
+
+/// Run validation passes, optionally in strict mode.
+///
+/// `strict_syntax` mirrors the Perl reference's `validate_dsl_syntax(...,
+/// strict_syntax => 1)`: the reference warnings (undefined references, unused
+/// rules) become hard errors. Undefined references are already fatal here in
+/// every mode (`check_edge_targets`, which runs first — matching the reference's
+/// "undefined before unused" order), so strict mode's observable addition is the
+/// unused-rule rejection.
+pub fn validate_with_options(spec: &SpecFile, strict_syntax: bool) -> Result<()> {
     check_top_rule_exists(spec)?;
     check_duplicate_labels(spec)?;
     check_mixed_edges(spec)?;
     check_balanced_braces(spec)?;
     check_edge_targets(spec)?;
     check_regex_syntax(spec)?;
+    if strict_syntax {
+        check_unused_rules(spec)?;
+    }
     Ok(())
 }
 
@@ -175,6 +202,44 @@ fn check_regex_syntax(spec: &SpecFile) -> Result<()> {
     Ok(())
 }
 
+/// Strict-mode reference check: every defined rule must be referenced by some
+/// edge (`->` / `=>`). Mirrors the Perl reference `Validation.pm` strict_syntax
+/// unused-rule warning promoted to an error (`@unused = defined − used`). The top
+/// rule is **not** exempt — an unreferenced top rule is reported (parity confirmed
+/// against the reference). Rule labels are unique by this point
+/// (`check_duplicate_labels`), and definition order is preserved in the message.
+fn check_unused_rules(spec: &SpecFile) -> Result<()> {
+    let mut used: HashSet<&str> = HashSet::new();
+    for rule in &spec.rules {
+        for element in &rule.body {
+            match &element.kind {
+                BodyElementKind::ActionEdge { targets, .. } => {
+                    for t in targets {
+                        used.insert(t.label.as_str());
+                    }
+                }
+                BodyElementKind::BlindEdge { target, .. } => {
+                    used.insert(target.as_str());
+                }
+                _ => {}
+            }
+        }
+    }
+    let unused: Vec<&str> = spec
+        .rules
+        .iter()
+        .map(|r| r.header.label.as_str())
+        .filter(|label| !used.contains(label))
+        .collect();
+    if !unused.is_empty() {
+        return Err(LinkedSpecError::Validation(format!(
+            "unused rule(s) in strict mode: {}",
+            unused.join(", ")
+        )));
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -227,5 +292,50 @@ mod tests {
         let src = "Top::\n /a/ -> Child\n\nChild:\n /b/ E { return(42) }";
         let spec = parse_spec(src).unwrap();
         validate(&spec).unwrap();
+    }
+
+    // ── RUST-PARITY.6: strict_syntax validation mode ──
+    // Parity with the Perl reference `Validation.pm validate_dsl_syntax(...,
+    // strict_syntax => 1)`: reference warnings (undefined, then unused) become
+    // hard errors. Verified empirically against the reference (an unreferenced
+    // top rule IS flagged as unused; undefined is reported first).
+
+    #[test]
+    fn validate_strict_rejects_unreferenced_top_rule() {
+        // Top references Child, but Top itself is referenced by nothing → "unused"
+        // under strict mode (the top rule is not exempt — matches the reference).
+        let src = "Top::\n /a/ -> Child\n\nChild:\n /b/";
+        let spec = parse_spec(src).unwrap();
+        let err = validate_with_options(&spec, true).unwrap_err().to_string();
+        assert!(err.contains("unused"), "expected unused-rule error, got: {err}");
+        assert!(err.contains("Top"), "expected 'Top' in the error, got: {err}");
+    }
+
+    #[test]
+    fn validate_nonstrict_allows_unreferenced_rules() {
+        // The same spec passes in the default (non-strict) mode — unused rules are
+        // only a warning in the reference, and this backend has no warning channel.
+        let src = "Top::\n /a/ -> Child\n\nChild:\n /b/";
+        let spec = parse_spec(src).unwrap();
+        validate(&spec).unwrap();
+        validate_with_options(&spec, false).unwrap();
+    }
+
+    #[test]
+    fn validate_strict_still_rejects_undefined_reference() {
+        // Undefined references stay fatal in strict mode (reported before unused).
+        let src = "Top::\n /a/ -> Ghost";
+        let spec = parse_spec(src).unwrap();
+        let err = validate_with_options(&spec, true).unwrap_err().to_string();
+        assert!(err.contains("undefined rule"), "expected undefined-rule error, got: {err}");
+    }
+
+    #[test]
+    fn validate_strict_accepts_fully_referenced_spec() {
+        // Every defined rule is referenced (the top references itself) → no unused
+        // rule, so strict mode passes.
+        let src = "Top::\n /a/ -> Top";
+        let spec = parse_spec(src).unwrap();
+        validate_with_options(&spec, true).unwrap();
     }
 }

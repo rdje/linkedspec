@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.6` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
+| `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
 ## Proposed Task Trees
 
