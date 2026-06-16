@@ -48,20 +48,29 @@ the Rust runner compares `engine.execute(input) == json!([expected])`. Proven on
 (`"scalar-ok"` → `["scalar-ok"]`) and a nested array (`["?proof:","ok"]` →
 `[["?proof:","ok"]]`).
 
-## What the oracle caught on its first run (deferred to RUST-PARITY.7.5)
+## What the oracle caught on its first run (root causes located → RUST-PARITY.7.5.1/.7.5.2)
 
 The `.7`-split note assumed the Perl↔Rust gap was *only* the wrap. The oracle disproved
 that: the Rust engine does **not** yet reproduce the shipped recursive specs.
 
-- **Single-regex rule → 0-regex compiler gap (root cause for tclite AND Lispish).** A rule
-  written `name : /re/` (single colon, single regex) — incl. the inline
-  `name : /re/  I.return(...)` form — compiles in Rust as **0 regexes**, so every
-  `-> child[0]` dispatch edge "never fires". tclite on `[]` returns `[]` instead of
-  `["?tcl_script:",[["?command_subst:",[]]]]`; Lispish falls through to its
-  `parenthesis[1]` syntax-error branch and `exit_now(1)`. (`::` single-regex rules are
-  fine — the integration tests prove that; the gap is the single-colon `:` form.)
-- **Lispish also needs** the `scalaref(retv, {content})` hashref-field accessor parsed
-  (Rust action-code parser: `unexpected character '{'`).
+- **Header-line-regex → 0-regex parser bug (→ `.7.5.1`; root cause for tclite AND
+  Lispish).** `rust/linkedspec-core/src/parser.rs:86` — the rule-header regex
+  `^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)` uses `(\S*)` for the mode-suffix group, which
+  greedily swallows a `/…/` regex placed on the header line; `parse_mode_suffix("/;/")`
+  returns `RuleMode::Default` and the regex is silently dropped (never reaches `rest`/the
+  body), so the rule registers 0 regexes and every `-> child[0]` dispatch edge "never
+  fires". tclite on `[]` returns `[]` (vs `["?tcl_script:",[["?command_subst:",[]]]]`);
+  Lispish hits its `parenthesis[1]` branch → `exit_now(1)`. **It bites `:` and `::`
+  alike** — it is "regex on the header line", not "single colon"; the integration tests /
+  `::` top-rules escape it only by putting the regex on a separate body line. Fix sketch
+  `(\S*)`→`([^\s/]*)`. **Foundational** — every header hits this, and an open/close pair
+  (`command_subst`/`parenthesis`/`curlyb`) registers "1 regex" today *because* group 3
+  eats the first delimiter; the fix must preserve bracket-pair semantics (verify the full
+  suite + re-enable the tclite oracle cases).
+- **`scalaref({content})` hash-literal parser gap (→ `.7.5.2`; second, independent).**
+  `rust/linkedspec-core/src/expr.rs:299` — `parse_expr` has no `{` case, so Lispish's
+  `scalaref(retv, {content})` raises `unexpected character '{'`; needs a new `Expr`
+  variant + parser production + engine field-access semantics. Depends on `.7.5.1`.
 - **Child `return` leaks into the parent accumulator.** Rust's `return(expr)` pushes to the
   shared accumulator (RUST-PARITY.5.1 contract), so a child rule's `return(0)` adds a
   stray `0` to the parent's output; Perl routes a child return to `retv` instead.

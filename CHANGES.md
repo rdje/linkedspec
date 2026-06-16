@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — RUST-PARITY.7.5: split into parser-header-regex (.7.5.1) + scalaref-hash-literal (.7.5.2)
+
+Tree structuring only (no code). A read-only investigation + a direct read of
+`rust/linkedspec-core/src/parser.rs:86` located the two independent root causes of the
+`.7.1` oracle's shipped-spec divergence and confirmed they are separable (PNT rule 5):
+
+- `.7.5.1` — header-line-regex → 0-regex parser bug. `parser.rs:86`'s header regex
+  `^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)` uses `(\S*)` for the mode suffix, which
+  greedily swallows a `/…/` regex placed on the header line; `parse_mode_suffix("/;/")`
+  falls to `RuleMode::Default` and the regex is discarded, so `-> child[0]` edges "never
+  fire". It bites `:` and `::` rules alike — the passing tests/`::` top-rules dodge it
+  only by putting the regex on a separate body line. Fix sketch `(\S*)`→`([^\s/]*)`.
+  Foundational (every header) — the open/close-pair (`command_subst`/`parenthesis`/
+  `curlyb`) semantics, the full suite, and the oracle (re-enable tclite) must be verified.
+- `.7.5.2` — `expr.rs:299` has no `{` case, so `scalaref(retv, {content})` (Lispish)
+  raises `unexpected character '{'`; needs a new `Expr` variant + parser + engine
+  semantics. Larger; depends on `.7.5.1`.
+
+`scripts/check_memory_architecture.sh` exit 0; no code touched. Frontier → `.7.5.1`.
+A fresh session is recommended for the foundational parser fix.
+
 ## 2026-06-17 — RUST-PARITY.7.1: Perl↔Rust output-oracle mechanism + green first proof
 
 Built the cross-variant output oracle (ADR 0006 §Phase 8.6) and proved it end-to-end.
