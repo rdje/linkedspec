@@ -991,6 +991,20 @@ impl Engine {
                 }
             }
             "input_end_pos" => Ok(RuntimeValue::Number(ctx.input.chars().count() as f64)),
+            // RUST-PARITY.5.5.2 — whole-input right-edge location, char-based, no stored mark.
+            // Perl reference: `input_end_line()` lowers to `1 + (newline count over the whole
+            // input)` (Contracts.pm INPUT_END_LINE_READ); `input_end_col()` lowers to the column
+            // at `length($$STRING)` via `_build_column_read_expr` — char distance past the last
+            // newline, or `length + 1` when the input has none. Newline counts are byte/char
+            // identical, so line uses a plain `'\n'` count; the column is char-based.
+            "input_end_line" => Ok(RuntimeValue::Number(
+                (ctx.input.chars().filter(|&c| c == '\n').count() + 1) as f64,
+            )),
+            "input_end_col" => {
+                let last_nl = ctx.input.rfind('\n').map(|i| i + 1).unwrap_or(0);
+                let col = ctx.input[last_nl..].chars().count() + 1;
+                Ok(RuntimeValue::Number(col as f64))
+            }
             "start_capture_slice" => {
                 ctx.capture_start = Some(ctx.pos);
                 Ok(RuntimeValue::Undef)
@@ -1376,6 +1390,23 @@ impl Engine {
                     other => vec![other.clone()],
                 }).collect(),
             )),
+            // RUST-PARITY.5.5.2 — generic list-context splice (Perl `flat(container)`,
+            // MethodLowering.pm:199): an array container splices its elements, a hash
+            // container splices its key/value entries, any other value becomes a
+            // single-element list. Consistent with `flat_array` (Array→Array) and
+            // `flat_hash` (Hash→Hash) so a parent `array(...)`/`hash(...)` consumes it the
+            // same way. The retired Perl aliases `flatten`/`tail`/`drop_last` are
+            // intentionally NOT added — the Perl reference no longer recognizes them
+            // (COMPAT-ALIAS-RETIREMENT.1), so adding them in Rust would diverge from the
+            // reference's recognized surface rather than match it.
+            "flat" => {
+                let arg = args.first().cloned().unwrap_or(RuntimeValue::Undef);
+                match arg {
+                    RuntimeValue::Hash(entries) => Ok(RuntimeValue::Hash(entries)),
+                    RuntimeValue::Array(items) => Ok(RuntimeValue::Array(items)),
+                    other => Ok(RuntimeValue::Array(vec![other])),
+                }
+            }
             "concat_arrays" => Ok(RuntimeValue::Array(
                 args.iter().flat_map(|a| match a {
                     RuntimeValue::Array(items) => items.clone(),
@@ -2871,5 +2902,71 @@ ChildB:
         let obj = acc.last().unwrap().as_object().unwrap();
         assert_eq!(obj.get("a").and_then(|v| v.as_str()), Some("foo"));
         assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("bar"));
+    }
+
+    // ── RUST-PARITY.5.5.2 — input-boundary helpers + the `flat` splice ──
+
+    /// Parse → validate → compile → execute, returning the accumulator array.
+    fn run_5_5_2(grammar: &str, input: &str) -> Vec<Value> {
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        Engine::new(compiled)
+            .execute(input)
+            .unwrap()
+            .as_array()
+            .unwrap()
+            .clone()
+    }
+
+    #[test]
+    fn helpers_5_5_2_input_end_line_counts_newlines() {
+        // input_end_line() = 1 + newline count over the WHOLE input (not the cursor).
+        let g = r#"Top::
+ /\w/
+ E { return(scalar(input_end_line())) }
+"#;
+        assert_eq!(run_5_5_2(g, "abc").last().unwrap().as_f64().unwrap(), 1.0); // no newline
+        assert_eq!(run_5_5_2(g, "a\nb\nc").last().unwrap().as_f64().unwrap(), 3.0); // 2 newlines
+        assert_eq!(run_5_5_2(g, "a\nb\n").last().unwrap().as_f64().unwrap(), 3.0); // trailing newline
+    }
+
+    #[test]
+    fn helpers_5_5_2_input_end_col_is_char_based() {
+        // input_end_col(): char distance past the last newline, +1 when none.
+        let g = r#"Top::
+ /\w/
+ E { return(scalar(input_end_col())) }
+"#;
+        assert_eq!(run_5_5_2(g, "abc").last().unwrap().as_f64().unwrap(), 4.0); // len 3, no nl → 4
+        assert_eq!(run_5_5_2(g, "ab\ncde").last().unwrap().as_f64().unwrap(), 4.0); // "cde" past nl → 4
+        assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
+        // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
+        assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);
+    }
+
+    #[test]
+    fn helpers_5_5_2_flat_array_and_hash() {
+        // flat(array) yields the array's elements as a list value.
+        let g_arr = r#"Top::
+ /\w/
+ E { return(flat(array(scalar("a"), scalar("b")))) }
+"#;
+        let acc = run_5_5_2(g_arr, "x");
+        let arr = acc.last().unwrap().as_array().unwrap();
+        assert_eq!(arr.len(), 2);
+        assert_eq!(arr[0].as_str().unwrap(), "a");
+        assert_eq!(arr[1].as_str().unwrap(), "b");
+
+        // flat(hash) splices key/value entries into a parent hash(...).
+        let g_hash = r#"Top::
+ /\w/
+ E { return(hash(scalar("a"), scalar("1"), flat(hash(scalar("b"), scalar("2"))))) }
+"#;
+        let acc = run_5_5_2(g_hash, "x");
+        let obj = acc.last().unwrap().as_object().unwrap();
+        assert_eq!(obj.get("a").and_then(|v| v.as_str()), Some("1"));
+        assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("2"));
+        assert_eq!(obj.len(), 2);
     }
 }

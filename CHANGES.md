@@ -1,6 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.5.2: input-boundary helpers + flat splice in the Rust engine
+
+Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). Second child of the `.5.5` helper-gap
+split. Added 3 new `call_helper` arms and **resolved the leaf's parked alias-retirement Open
+Question** against the Perl reference.
+
+Helpers added (all to Helper Contract Catalog parity, §9 + §7):
+
+- `input_end_line()` → `1 + (newline count over the whole input)` — parity with the Perl reference's
+  `INPUT_END_LINE_READ` lowering (`Contracts.pm:1255`). Newline counts are byte/char identical, so a
+  plain `'\n'` filter suffices.
+- `input_end_col()` → char distance past the last newline, `+1` when the input has none — parity with
+  `_build_column_read_expr(pos_expr => 'length($$STRING)')` (`Contracts.pm:111,1266`), modeled on the
+  existing char-based `cursor_col` (`.5.3`) but at end-of-input; multibyte-correct.
+- `flat(container)` → generic list-context splice (Perl `MethodLowering.pm:199`): an Array splices its
+  elements, a Hash splices its key/value entries, any other value becomes a single-element list —
+  consistent with the established `flat_array` (Array→Array) and `flat_hash` (Hash→Hash) representation,
+  so a parent `array(...)`/`hash(...)` consumes it the same way.
+
+**Open Question resolved (alias retirement, against the Perl reference):** the Perl reference does NOT
+recognize `tail`/`drop_last`/`flatten`/`array_values` — they are absent from every helper-recognition
+regex (`BootstrapSpec/Core.pm:82`, `FlowExpr.pm:81,270`, `MethodLowering.pm:1627,1635`), unused in all
+20 shipped specs, and not regression-locked in `t/phase0_regression.t` (grep count 0). They were retired
+in `COMPAT-ALIAS-RETIREMENT.1`; the book catalog §Compatibility-Aliases lists them "Retired". For
+cross-variant **parity** the Rust variant must match the reference's recognized surface, so the three
+retired aliases are deliberately NOT added (an explicit `engine.rs` comment records this) — only the
+canonical `flat` was missing and is added. (`ROADMAP_V2.md` lines 256–262 still call `tail`/`drop_last`
+"compatibility alias" — stale pre-retirement text flagged for a separate Perl-side doc-sync slice.)
+
+**Validation:** `cargo test --manifest-path rust/Cargo.toml` = 207 passed / 0 failed (204 baseline + 3
+new `helpers_5_5_2_*`: `input_end_line` newline-count, `input_end_col` char-based incl. multibyte +
+trailing-newline, `flat` array + hash-into-parent splice). `cargo clippy --manifest-path rust/Cargo.toml
+-p linkedspec-runtime --tests`: `linkedspec-runtime` lib = 13 warnings = stashed baseline 13 (zero new;
+integration_test's lone `len_zero` at :199 pre-existing per MEMORY; vendored pgen/rgx-core ignored).
+No book change (catalog §9 documents `input_end_line`/`input_end_col`, §Compatibility-Aliases marks the
+three retired — Rust now conforms; book sync is `.9`). New knowledge card
+`docs/knowledge/rust-retired-array-aliases-not-added.md`. **Active frontier → `RUST-PARITY.5.5.3`**
+(mark-based capture family `capture_*_from`/`_between`, `mark_*`).
+
 ## 2026-06-16 — RUST-PARITY.5.5.1: named-group reader helpers in the Rust engine
 
 Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). First child of the `.5.5` helper-gap

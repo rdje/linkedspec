@@ -3,19 +3,21 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **29** facts · **143** question keys.
+> **30** facts · **149** question keys.
 
 ## Questions → fact
 
 - "are PPlugin and PluginBridge part of the target architecture" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
 - "are cursor_pos / match_start_pos / length char-based or byte-based in Rust" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "are return_a return_m return_ma return_imatch deprecated" -> [medium-term-alias-retirement-deferred](docs/knowledge/medium-term-alias-retirement-deferred.md) · 2026-06-12 · reverify: `grep -c 'return_a(' t/phase0_regression.t`
+- "are tail drop_last flatten array_values recognized helpers" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "are there compatibility-surface rules left" -> [method-like-dsl-migration-status](docs/knowledge/method-like-dsl-migration-status.md) · 2026-06-12 · reverify: `grep -c 'compatibility_surface.*0' docs/tasks/METHOD-LIKE-DSL-MIGRATION.md`
 - "can a spec introduce a compatibility-surface rule" -> [phase0-all-target-actionir-ready-invariant](docs/knowledge/phase0-all-target-actionir-ready-invariant.md) · 2026-06-05 · reverify: `grep -n language_agnostic_ready_ratio t/phase0_regression.t`
 - "does a child rule's match clobber the parent's match in Rust" -> [rust-entry-match-separation](docs/knowledge/rust-entry-match-separation.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'SavedMatchState\\|entry_groups\\|match_groups' linkedspec-runtime/src/engine.rs | head`
 - "does bare rule: with => child mean ordered sequence" -> [blind-call-rule-label-contract](docs/knowledge/blind-call-rule-label-contract.md) · 2026-06-12 · reverify: `grep -n 'blind.call.*mode.driven' ROADMAP_V2.md`
 - "does perl/LinkedSpec/ActionRewriter.pm still exist" -> [actionrewriter-removed-phase1](docs/knowledge/actionrewriter-removed-phase1.md) · 2026-06-05 · reverify: `! test -f perl/LinkedSpec/ActionRewriter.pm && grep -q rewrite_action_code_for_compat perl/LinkedSpec/RuleIR/EmitContext.pm`
 - "does spec.spec run alongside bootstrap" -> [bootstrapspec-vs-spec-spec-dual-path](docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md) · 2026-06-13 · reverify: `grep -n '_build_spec_spec_parser\|run_bootstrap_parse' perl/LinkedSpec/BootstrapSpec.pm`
+- "does the Perl reference recognize tail drop_last flatten array_values" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "does the Perl version go away" -> [language-agnostic-backend-vision](docs/knowledge/language-agnostic-backend-vision.md) · 2026-06-12 · reverify: `grep -n 'backend\|portability' ROADMAP_V2.md ARCHITECTURE_STATE.md | head -10`
 - "does the Rust engine use byte or char offsets" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "dual-path parse" -> [bootstrapspec-vs-spec-spec-dual-path](docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md) · 2026-06-13 · reverify: `grep -n '_build_spec_spec_parser\|run_bootstrap_parse' perl/LinkedSpec/BootstrapSpec.pm`
@@ -71,7 +73,9 @@
 - "is there a self-hosted .spec grammar" -> [spec-spec-self-hosted-grammar](docs/knowledge/spec-spec-self-hosted-grammar.md) · 2026-06-05 · reverify: `ls specs/spec.spec`
 - "parser infinite loop with Late Exit lifecycle marker" -> [andplusplus-lx-parser-hang](docs/knowledge/andplusplus-lx-parser-hang.md) · 2026-06-05 · reverify: `grep -n 'AND++LX' docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`
 - "should I use push_value or push(Child)" -> [accumulator-convention-healthy](docs/knowledge/accumulator-convention-healthy.md) · 2026-06-12 · reverify: `grep -c 'push(Child)' specs/*.spec; grep -c 'push_value' specs/*.spec`
+- "should a new backend implement the retired compatibility aliases" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "should new code use plugin dispatch" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
+- "should the Rust backend implement tail drop_last flatten array_values" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "what Perl coupling points exist in SpecEntry.pm" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `|`
 - "what Perl variables are assumed by generated handlers" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `|`
 - "what are the ActionIR sub-owners" -> [actionir-lowering-stack](docs/knowledge/actionir-lowering-stack.md) · 2026-06-12 · reverify: `ls perl/LinkedSpec/ActionIR/*.pm | wc -l`
@@ -85,6 +89,7 @@
 - "what does SpecEntry eval" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `|`
 - "what does execute_rule return in the Rust engine" -> [rust-retv-propagation](docs/knowledge/rust-retv-propagation.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'set_retv\\|return_value\\|fn execute_rule' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs`
 - "what does green CI mean here" -> [hosted-ci-disabled-run-local-gate](docs/knowledge/hosted-ci-disabled-run-local-gate.md) · 2026-06-05 · reverify: `grep -n 'workflow_dispatch' .github/workflows/ci.yml`
+- "what does input_end_line and input_end_col compute in the Rust engine" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "what does phase0_regression.t cover" -> [phase0-regression-structure](docs/knowledge/phase0-regression-structure.md) · 2026-06-12 · reverify: `wc -l t/phase0_regression.t`
 - "what does the phase0 regression gate enforce about specs" -> [phase0-all-target-actionir-ready-invariant](docs/knowledge/phase0-all-target-actionir-ready-invariant.md) · 2026-06-05 · reverify: `grep -n language_agnostic_ready_ratio t/phase0_regression.t`
 - "what format changes were brainstormed for .spec files" -> [spec-format-brainstorm-rounds-1-3](docs/knowledge/spec-format-brainstorm-rounds-1-3.md) · 2026-06-15 · reverify: `cat docs/knowledge/spec-format-brainstorm-rounds-1-3.md`
@@ -149,6 +154,7 @@
 - "why does the generated parser hang on an AND+ rule with LX" -> [andplusplus-lx-parser-hang](docs/knowledge/andplusplus-lx-parser-hang.md) · 2026-06-05 · reverify: `grep -n 'AND++LX' docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`
 - "why is .github/workflows/ci.yml guarded off (workflow_dispatch / if false)" -> [hosted-ci-disabled-run-local-gate](docs/knowledge/hosted-ci-disabled-run-local-gate.md) · 2026-06-05 · reverify: `grep -n 'workflow_dispatch' .github/workflows/ci.yml`
 - "why is LinkedSpec.pm so small" -> [linkedspec-pm-is-thin-facade](docs/knowledge/linkedspec-pm-is-thin-facade.md) · 2026-06-05 · reverify: `wc -l perl/LinkedSpec.pm; test -f perl/LinkedSpec/OwnerDispatch.pm`
+- "why is flat added to the Rust engine but not flatten" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "why is the test file so large" -> [phase0-regression-structure](docs/knowledge/phase0-regression-structure.md) · 2026-06-12 · reverify: `wc -l t/phase0_regression.t`
 
 ## Facts (by id)
@@ -350,6 +356,15 @@ _Rust engine separates entry_* (the dispatcher's match) from match_* (the rule's
 - **evidence:** `RUST-PARITY.5.2 (2026-06-16): rust/linkedspec-runtime/src/engine.rs execute_rule SavedMatchState save/restore + match-set seed. Matches Perl source: SpecEntry::_build_handler_preamble (IMATCH=$$info{match}), HandlerVariantEmitter::_build_lmatch_extraction (LMATCH=$$minfo{match}), MethodLowering.pm:332 (child invoked with parent $minfo as $info). 189/189 tests green (186 baseline + 3 match_5_2_*).`
 - **reverify:** `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'SavedMatchState\\|entry_groups\\|match_groups' linkedspec-runtime/src/engine.rs | head`
 - **source:** [`docs/knowledge/rust-entry-match-separation.md`](docs/knowledge/rust-entry-match-separation.md)
+
+### rust-retired-array-aliases-not-added
+_The retired aliases tail/drop_last/flatten/array_values are NOT added to the Rust backend — parity means matching the Perl reference's recognized helper surface, and the reference no longer recognizes them_
+
+- **answers:** should the Rust backend implement tail drop_last flatten array_values | does the Perl reference recognize tail drop_last flatten array_values | are tail drop_last flatten array_values recognized helpers | why is flat added to the Rust engine but not flatten | should a new backend implement the retired compatibility aliases | what does input_end_line and input_end_col compute in the Rust engine
+- **date:** 2026-06-16 · **status:** current
+- **evidence:** `RUST-PARITY.5.5.2 (2026-06-16): tail/drop_last/flatten/array_values absent from Perl helper-recognition regexes (BootstrapSpec/Core.pm:82, FlowExpr.pm:81,270, MethodLowering.pm:1627,1635), unused in 20 shipped specs, 0 phase0 locks; retired in COMPAT-ALIAS-RETIREMENT.1. Rust engine.rs adds only canonical flat + input_end_line/input_end_col.`
+- **reverify:** `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
+- **source:** [`docs/knowledge/rust-retired-array-aliases-not-added.md`](docs/knowledge/rust-retired-array-aliases-not-added.md)
 
 ### rust-retv-propagation
 _Rust engine propagates child-return (retv) via a per-invocation return channel on RuntimeContext; execute_rule returns the rule's value and set_retv is called after -> / => dispatch_
