@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — SPEC-SPEC-SELFHOST.2+.3: rewrite spec.spec as a faithful self-hosting grammar
+
+### Context
+The shipped `specs/spec.spec` was unusable — it returned `[[]]` on real `.spec` input and did
+not divide files into rule paragraphs. Rewritten from scratch, grounded in the authoritative
+hardcoded grammar `perl/LinkedSpec/BootstrapSpec/Core.pm` (the primary `.spec` parser).
+
+### Implementation
+- New hierarchical grammar mirroring the bootstrap `SPEC_ROOT` driver: a top rule `spec_file::`
+  owns two accumulators (`paragraphs`, `current`), dispatches via `->` action edges to 12
+  per-token part rules (`rule_header`, `regex_anchor`, `action_block/_fluent/_bare`,
+  `blind_block/_fluent/_bare`, `lifecycle_block/_fluent`, `split_marker`, `comment`), and starts
+  a new paragraph at every `rule_header` (the SPEC_ROOT group-at-header rule). `LX` returns the
+  array of paragraphs. 13 rules total.
+- Each part rule is its own rule connected to `spec_file` by an edge; part rules read their match
+  through `entry_*` helpers (they are entered by dispatch), `I.return(hash(...))` typed nodes.
+- Block-bearing slots capture the full balanced, string-aware `{ ... }` with recursive named
+  groups so the cursor advances past blocks and their interiors are not re-scanned.
+- Fluent-chain joins use `\s*` (not `[ \t]*`) so multiline method chains are fully consumed,
+  matching the bootstrap — this fixed an ebnf over-count (40→24) caused by spurious `Error:`
+  headers leaking from `say("Error: ...")` inside multiline guard chains.
+- Performance hardening: leading word and block/string/chain quantifiers are possessive
+  (`\w++`, `*+`, `++`) so a failed match (e.g. an unclosed `{` block) fails in O(1) instead of
+  backtracking to EOF. On an 8 KB unclosed-block input this dropped parse time 2.26s → 0.026s
+  (~87x). Valid (balanced) specs were already fast; this guards the malformed/large-input path.
+
+### Validation
+- `LinkedSpec::Get(spec.spec, return_descriptor)`: `language_agnostic_ready_ratio == 1.0000`,
+  blocked 0, compatibility-surface 0 (phase0 compile gate stays green).
+- Paragraph-count fidelity vs the bootstrap oracle: 19/19 shipped specs match exactly.
+- `tools/cross_check_spec_parsers.pl`: "ALL 20 specs match. spec.spec has proven output parity
+  with BootstrapSpec" (was 2/20).
+- Self-hosting: spec.spec divides itself into 13 paragraphs == its own 13 rules.
+
 ## 2026-06-16 — RUST-PARITY.3: BACKTRACK/IBACKTRACK cursor save/restore in Rust
 
 ### Implementation

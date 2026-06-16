@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `SPEC-SPEC-SELFHOST` | `active` | `Phase 7 follow-on — self-hosted .spec grammar (rewrite)` | `SPEC-SPEC-SELFHOST.2` | [docs/tasks/SPEC-SPEC-SELFHOST.md](docs/tasks/SPEC-SPEC-SELFHOST.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.1` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 | `MDBOOK-VARIANT-AGNOSTIC` | `active` | `Overall roadmap — documentation and book sync` | `MDBOOK-VARIANT-AGNOSTIC.1` | [docs/tasks/MDBOOK-VARIANT-AGNOSTIC.md](docs/tasks/MDBOOK-VARIANT-AGNOSTIC.md) |
 

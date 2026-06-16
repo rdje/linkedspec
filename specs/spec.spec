@@ -1,87 +1,144 @@
-# spec.spec — Self-hosted LinkedSpec grammar
+# =============================================================================
+# spec.spec — self-hosted description of the LinkedSpec `.spec` file format
+# =============================================================================
 #
-# This grammar parses .spec files into their structural elements: rule labels,
-# modes, regex anchors, action edges, blind-call edges, code blocks, split
-# markers, lifecycle markers, fluent chains, conditional markers, and helper
-# function calls.
+# This grammar is written in the `.spec` DSL itself and describes the `.spec`
+# language exactly as recognized by the hardcoded reference parser
+# `perl/LinkedSpec/BootstrapSpec/Core.pm`. It is the self-hosting surface: a
+# `.spec` grammar that parses `.spec` files.
 #
-# ============================================================================
-# EXTENSION-SURFACE POLICY (PHASE7-SELF-HOSTED-SPEC.5)
-# ============================================================================
+# STRUCTURE (mirrors BootstrapSpec::Core)
+# ---------------------------------------
+# A `.spec` file is a sequence of rule PARAGRAPHS. A paragraph starts at a rule
+# header (`Name:` / `Name::`) and runs until the next rule header. The hardcoded
+# bootstrap driver (`SPEC_ROOT`) scans tokens and starts a new paragraph each
+# time it sees a rule header, appending every other token to the current
+# paragraph. This grammar reproduces that exactly:
 #
-# spec.spec is the REQUIRED change surface for .spec language evolution.
-# Any proposal to extend, modify, or deprecate .spec syntax MUST:
+#   spec_file        the top rule: owns the paragraph accumulators, dispatches to
+#                    one rule per paragraph part, and starts a new paragraph at
+#                    every rule_header (the SPEC_ROOT group-at-header rule).
+#     rule_header      `Name:` / `Name::` + optional mode   -> { type: rule, ... }
+#     regex_anchor     `/pattern/`                          -> { type: regex }
+#     action_block     `-> A|B[i] { code }`                 -> { type: action_edge }
+#     action_fluent    `-> Name[i].method(args) { blk }`    -> { type: action_edge }
+#     action_bare      `-> Name[i]`                         -> { type: action_edge }
+#     blind_block      `=> Child { code }`                  -> { type: blind_edge }
+#     blind_fluent     `=> Child.method(args) { blk }`      -> { type: blind_edge }
+#     blind_bare       `=> Child`                           -> { type: blind_edge }
+#     lifecycle_block  `Marker { code }`  (I LS LE E EX IT LX) -> { type: lifecycle }
+#     lifecycle_fluent `Marker.method(args) { blk }`        -> { type: lifecycle }
+#     split_marker     `@capture_slice` / `@mark(name)`     -> { type: split_marker }
+#     comment          `# ...`                              (skipped, like SPEC_ROOT)
 #
-#   1. Be authored in spec.spec first — add or modify rules here to
-#      capture the new syntax before touching any implementation code.
+# Each part rule is its own rule, connected to spec_file by an action edge; the
+# part rules read their match through `entry_*` helpers (they are entered by
+# dispatch). The output of `spec_file` is an array of paragraphs, each an array
+# of typed part nodes — the same paragraph grouping the bootstrap produces.
 #
-#   2. Pass the full regression gate with language_agnostic_ready_ratio
-#      at 1.0000 (all rules using only canonical ActionIR constructs).
+# RULE-HEADER MODE -> node_type (documented; emitted raw in the `mode` field):
+#   (none)  default        |  &      AND          |  AND      AND_EXPLICIT
+#   |       OR (single)    |  +      REP_PLUS      |  AND+     REP_AND_PLUS
+#   *       REP_STAR       |  ?      REP_OPT       |  AND{n,m} REP_AND_BOUNDED
+#   OR      REP_OR_EXPLICIT|  OR+    REP_OR_PLUS   |  OR{n,m}  REP_OR_BOUNDED
 #
-#   3. Include regression coverage proving the spec compiles and the
-#      generated parser recognizes the new construct.
+# AUTHORING NOTES
+#   - Slot order is significant: block and fluent edge forms precede the bare
+#     form so the longest valid token wins, matching the bootstrap's start-token
+#     ordering. The same applies to lifecycle block-vs-fluent.
+#   - Block-bearing slots capture the full balanced, string-aware `{ ... }` with
+#     a recursive named group so the cursor advances past the block and its
+#     interior is never re-scanned as top-level tokens.
+#   - Fluent-chain joins use `\s*` (not `[ \t]*`) so multiline method chains are
+#     fully consumed, matching the bootstrap.
 #
-# Touching the bootstrap grammar (BootstrapSpec/Core.pm or related
-# hardcoded parse rules) for .spec language changes is EXCEPTION-ONLY.
-# Exceptions require explicit justification documented in the commit
-# message and in DEVELOPMENT_NOTES.md, and must satisfy at least one of:
-#
-#   (a) The construct cannot be expressed in spec.spec due to a known
-#       bootstrapping gap (e.g., comment/blank-line skipping requires
-#       a parse-level skip loop that the generated parser does not
-#       currently support).
-#
-#   (b) The bootstrap grammar and spec.spec parity requires a
-#       coordinated update where the bootstrap change is the mechanical
-#       enabler for the spec.spec change (e.g., a new regex feature
-#       that spec.spec itself uses).
-#
-# ============================================================================
-# KNOWN BOOTSTRAPPING GAPS
-# ============================================================================
-#
-# 1. Comment/blank-line skipping: CLOSED (MEDIUM-IMPACT.3.2).  The Runtime.pm
-#    parser wrapper resets pos() and skips past leading comment/blank lines before
-#    the main parse loop.  Inter-paragraph comments are not yet handled.
-#
-# 2. AND+ + LX infinite loop: The LX lifecycle marker in AND+ repetition
-#    triggers loop re-entry. Workaround: use E instead of LX for exit.
-#
-# ============================================================================
+# EXTENSION-SURFACE POLICY
+#   spec.spec is the intended change surface for `.spec` language evolution: new
+#   syntax should be described here first. Changing the hardcoded bootstrap
+#   grammar (`BootstrapSpec/Core.pm`) for language changes is exception-only and
+#   must be justified in the commit message and DEVELOPMENT_NOTES.md.
+# =============================================================================
 
-spec_file::AND+
- -> rule_paragraph
+spec_file::
+ I {
+  declare(array, paragraphs);
+  declare(array, current);
+  declare(scalar, started=0)
+ }
+ -> rule_header {
+  if(scalar(started)) {
+   push_value(array(paragraphs), array_copy(array(current)));
+   assign(array(current), array())
+  }
+  assign(scalar(started), 1);
+  push(rule_header, current)
+ }
+ -> regex_anchor     { push(regex_anchor, current) }
+ -> action_block     { push(action_block, current) }
+ -> action_fluent    { push(action_fluent, current) }
+ -> action_bare      { push(action_bare, current) }
+ -> blind_block      { push(blind_block, current) }
+ -> blind_fluent     { push(blind_fluent, current) }
+ -> blind_bare       { push(blind_bare, current) }
+ -> lifecycle_block  { push(lifecycle_block, current) }
+ -> lifecycle_fluent { push(lifecycle_fluent, current) }
+ -> split_marker     { push(split_marker, current) }
+ -> comment          { next() }
+ LX {
+  if(scalar(started)) {
+   push_value(array(paragraphs), array_copy(array(current)))
+  }
+  return(array_copy(array(paragraphs)))
+ }
 
-I {declare(array, rules)}
-LS {declare(scalar, retv)}
-LE { if(scalar(retv)); push_value(array(rules), scalar(retv)); endif() }
-E {return(hash("rules", array(rules)))}
+# ---- rule header: `Name:` (body rule) or `Name::` (top rule) + optional mode --
+rule_header: /(\w++)[ \t]*(::|:)[ \t]*((?:&|\||\+|\*|\?|OR\+|OR\{[^}]++\}|OR|AND\+|AND\{[^}]++\}|AND)?)/
+ I {
+  declare(scalar, top=0);
+  if(eq(entry_group(1), "::")) { assign(scalar(top), 1) }
+  return(hash("type", "rule", "label", entry_group(0), "top", scalar(top), "mode", entry_group(2)))
+ }
 
+# ---- regex literal: `/pattern/` (outer slashes stripped, inner pattern kept) --
+regex_anchor: /(?<!\\)\/((?:\\.|[^\/\\])*?)(?<!\\)\//
+ I.return(hash("type", "regex", "pattern", entry_group(0)))
 
-rule_paragraph:AND /(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)/
-I { declare(scalar, label=entry_group(1)); declare(scalar, colon=entry_group(2)); declare(scalar, is_top=0); if(matches(scalar(colon), /^::$/o)); declare(scalar, is_top=1); endif(); declare(scalar, mode_raw=entry_group(3)); declare(scalar, rest=entry_group(4)); declare(scalar, mode=""); if(matches(scalar(mode_raw), /^$/o)); declare(scalar, mode=""); else(); if(matches(scalar(mode_raw), /^(?:AND|OR)(?:\+|\{\d+(?:,\d+)?\})?$/o)); declare(scalar, mode=scalar(mode_raw)); else(); if(matches(scalar(mode_raw), /^[&|+*?]$/o)); declare(scalar, mode=scalar(mode_raw)); else(); declare(scalar, mode=""); if(length(scalar(rest))); declare(scalar, rest=concat(scalar(mode_raw), " ", scalar(rest))); else(); declare(scalar, rest=scalar(mode_raw)); endif(); endif(); endif(); endif(); return(hash("type", "rule_header", "label", scalar(label), "is_top", scalar(is_top), "mode", scalar(mode), "rest", scalar(rest), "body", array())) }
- -> body_element
+# ---- action edge with a code block: `-> A | B[i] { code }` --------------------
+action_block: /->[ \t]*((?:\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)(?:[ \t]*\|[ \t]*\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)*)[ \t]*(?<blkAB>\{(?:[^{}"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkAB))*\})/
+ I.return(hash("type", "action_edge", "targets", trim(entry_group(0)), "code", entry_group(1)))
 
+# ---- action edge with a fluent chain: `-> Name[i].method(args) { block }` -----
+action_fluent: /->[ \t]*(\w+)[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?(?<chAF>(?:\s*\.\s*\w+(?<prnAF>\s*\((?:[^()"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&prnAF))*\))?)+)(?:\s*(?<blkAF>\{(?:[^{}"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkAF))*\}))?/
+ I.return(hash("type", "action_edge", "target", entry_group(0), "fluent", "1", "raw", entry_text()))
 
-# body_element matches individual body elements: regexes, edges, markers, etc.
-# Each alternative uses per-regex I{} blocks. The REP handler (via return→assignment
-# transformation in SpecEntry.pm) collects all matches into an array.
-body_element:*
- /(?<!\\)\/(?:\\.|[^\/\\])*?(?<!\\)\//
-  I { return(hash("type", "regex", "value", match_text())) }
- /->[ \t]*(\w+)(?:\[(\d+)\])?/
-  I { declare(scalar, target=entry_group(1)); declare(scalar, idx=0); if(entry_group(2)); declare(scalar, idx=entry_group(2)); endif(); return(hash("type", "edge", "target", scalar(target), "index", scalar(idx))) }
- /=>[ \t]*(\w+)/
-  I { return(hash("type", "blind_edge", "target", entry_group(1))) }
- /@[ \t]*(?:capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))/
-  I { return(hash("type", "split_marker", "marker", match_text())) }
- /-\?[ \t]+\w+\b/
-  I { return(hash("type", "conditional_marker", "text", match_text())) }
- /(?:I|LS|LE|LX|E|EX|IT)\b/
-  I { return(hash("type", "lifecycle_marker", "marker", match_text())) }
- /\.[ \t]*\w+/
-  I { return(hash("type", "fluent_chain", "text", match_text())) }
- /\w+[ \t]*[\(\{\.]/
-  I { return(hash("type", "body_code", "text", match_text())) }
- /(?<!\\)\{/
-  I { return(hash("type", "code_block")) }
+# ---- bare action edge: `-> Name` or `-> Name[i]` -----------------------------
+action_bare: /->[ \t]*(\w+)(?:\[[ \t]*(\d+)[ \t]*\])?/
+ I.return(hash("type", "action_edge", "target", entry_group(0), "index", entry_group(1)))
+
+# ---- blind-call edge with a code block: `=> Child { code }` -------------------
+blind_block: /=>[ \t]*(\w+)[ \t]*(?<blkBB>\{(?:[^{}"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkBB))*\})/
+ I.return(hash("type", "blind_edge", "target", entry_group(0), "code", entry_group(1)))
+
+# ---- blind-call edge with a fluent chain: `=> Child.method(args) { block }` ---
+blind_fluent: /=>[ \t]*(\w+)(?<chBF>(?:\s*\.\s*\w+(?<prnBF>\s*\((?:[^()"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&prnBF))*\))?)+)(?:\s*(?<blkBF>\{(?:[^{}"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkBF))*\}))?/
+ I.return(hash("type", "blind_edge", "target", entry_group(0), "fluent", "1", "raw", entry_text()))
+
+# ---- bare blind-call edge: `=> Child` ----------------------------------------
+blind_bare: /=>[ \t]*(\w+)/
+ I.return(hash("type", "blind_edge", "target", entry_group(0)))
+
+# ---- lifecycle / code block: `Marker { code }` (I LS LE E EX IT LX, or any word)
+lifecycle_block: /(\w++)[ \t]*(?<blkLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLB))*+\})/
+ I.return(hash("type", "lifecycle", "marker", entry_group(0), "code", entry_group(1)))
+
+# ---- lifecycle / code with a fluent chain: `Marker.method(args) { block }` ----
+lifecycle_fluent: /(\w++)(?<chLF>(?:\s*\.\s*\w++(?<prnLF>\s*\((?:[^()"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&prnLF))*+\))?+)++)(?:\s*(?<blkLF>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLF))*+\}))?+/
+ I.return(hash("type", "lifecycle", "marker", entry_group(0), "fluent", "1", "raw", entry_text()))
+
+# ---- split / mark marker: `@capture_slice`, `@capture_from_here`, `@move_pos`, `@mark(name)`
+split_marker: /@[ \t]*(?:capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*(\w+)[ \t]*\))/
+ I.return(hash("type", "split_marker", "marker", entry_text(), "name", entry_group(0)))
+
+# ---- comment: `# ...` to end of line (skipped, like the bootstrap SPEC_ROOT) --
+comment: /#.*/
+ I.return(hash("type", "comment", "text", entry_text()))
