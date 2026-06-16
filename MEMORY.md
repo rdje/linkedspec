@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `4c667b7` — "SPEC-SPEC-SELFHOST.2 — rewrite spec.spec as a faithful self-hosting grammar"
+- latest_commit: `316fdc7` — "RUST-PARITY.4 — WIP checkpoint: preserve in-flight Rust self-hosting exploration (superseded)"
 - active_work_unit: `SPEC-SPEC-SELFHOST` → frontier leaf: `SPEC-SPEC-SELFHOST.4` (pending — docs sync + finalize)
 - next_action: fix the PRE-EXISTING RTLUtils phase0 hang (new tree, see blockers) so the gate runs; then SPEC-SPEC-SELFHOST.4 mdBook/DEVELOPMENT_NOTES self-hosting note.
 - done: `.2`+`.3` committed (`4c667b7`) — `specs/spec.spec` rewritten as a faithful self-hosting grammar (spec_file -> 12 part rules, group-at-rule_header, mirrors BootstrapSpec::Core SPEC_ROOT). ratio 1.0000; 19/19 paragraph-count fidelity; cross-check 20/20; self-parses (13==13); possessive-quantifier perf hardening.
