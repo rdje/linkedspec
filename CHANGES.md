@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — SPEC-SPEC-SELFHOST.4: docs sync + finalize (close the self-hosting rewrite tree)
+
+Documentation only (no code). Final leaf of the SPEC-SPEC-SELFHOST tree, syncing the live docs to the
+`.2`/`.3` rewrite of `specs/spec.spec` (commit `4c667b7`) and closing the tree.
+
+- DEVELOPMENT_NOTES.md: added a self-hosting status note superseding the MEDIUM-IMPACT.3.x dual-path
+  entries — the rewritten spec.spec is a faithful, complete description of the format
+  `BootstrapSpec/Core.pm` recognizes (13 rules; group-at-`rule_header`), compiles at ratio 1.0000
+  (zero blocked / zero compatibility-surface), and the cross-check harness now reports full
+  paragraph-count parity with the bootstrap oracle across all 20 shipped specs (was 2/20). The
+  hardcoded bootstrap stays the oracle/primary; spec.spec remains the diagnostic side channel (Non-Goals).
+- mdBook: `compiler/pipeline-overview.md`'s dual-path note now states that the self-hosted spec.spec
+  reproduces the bootstrap's paragraph grouping across all shipped specs (bootstrap still primary).
+- Extension-surface policy preserved: the PHASE7-SELF-HOSTED-SPEC.5 policy is carried verbatim in the
+  new spec.spec header (EXTENSION-SURFACE POLICY block) and in DEVELOPMENT_NOTES.md.
+- Task-tree bookkeeping: recorded the `.2` commit `4c667b7` in the SPEC-SPEC-SELFHOST commit log (was
+  'pending'); `.4` marked done; tree closed and moved to Completed in `docs/TASK_TREE.md`.
+
+Verification: `git diff --check` clean; `mdbook build` exit 0 (no warnings);
+`scripts/check_memory_architecture.sh` exit 0. No phase0 run needed (docs-only; the spec.spec rewrite
+itself was gated under `.3`). Active trees remaining: `RUST-PARITY` (`.5`, has a retv blocker).
+
 ## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.7: final variant-agnostic consistency sweep; close the tree
 
 Book documentation only (no code). Final leaf of the MDBOOK-VARIANT-AGNOSTIC tree. Ran a whole-book

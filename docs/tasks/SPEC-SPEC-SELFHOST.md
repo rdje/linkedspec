@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `SPEC-SPEC-SELFHOST`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 7 follow-on — self-hosted .spec grammar (rewrite)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16`
+- Last updated: `2026-06-16` (`.4` done — tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -47,9 +47,9 @@ same token forms the bootstrap recognizes and emitting equivalent structural nod
 ## Task Tree
 
 - ID: `SPEC-SPEC-SELFHOST`
-  Status: `active`
+  Status: `done`
   Goal: Rewrite spec.spec to faithfully self-host the BootstrapSpec::Core format
-  Children: `.1`, `.2`, `.3`, `.4`
+  Children: `.1`, `.2`, `.3`, `.4` (all done)
 
 - ID: `SPEC-SPEC-SELFHOST.1`
   Status: `done`
@@ -86,17 +86,17 @@ same token forms the bootstrap recognizes and emitting equivalent structural nod
   Commit: `pending`
 
 - ID: `SPEC-SPEC-SELFHOST.4`
-  Status: `pending`
+  Status: `done`
   Goal: Docs sync + finalize — DEVELOPMENT_NOTES, mdBook self-hosting note, extension policy, CHANGES, MEMORY
   Acceptance: Live docs reflect the rewrite; extension-surface policy preserved; tree closed
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — 2026-06-16. Docs synced to the `.2`/`.3` rewrite (commit `4c667b7`): DEVELOPMENT_NOTES.md gained a self-hosting status note superseding the MEDIUM-IMPACT.3.x "2/20" dual-path entries (rewrite = faithful 13-rule description of BootstrapSpec::Core; ratio 1.0000; cross-check harness now full 20/20 paragraph-count parity; self-hosts 13==13); mdBook `compiler/pipeline-overview.md` dual-path note now states the paragraph-grouping parity (bootstrap still primary). Extension-surface policy confirmed PRESERVED verbatim in the new spec.spec header (EXTENSION-SURFACE POLICY block) — acceptance met without further edits. Non-Goals preserved (bootstrap = oracle/primary; spec.spec = diagnostic side channel). `git diff --check` clean; `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0. Docs-only (no phase0 needed; the rewrite was gated under `.3`).
+  Commit: `SPEC-SPEC-SELFHOST.4 — docs sync + finalize; close the self-hosting rewrite tree`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SPEC-SPEC-SELFHOST.4` | `pending` | Docs sync + finalize; `.2` authored + `.3` verified (19/19 + 20/20 cross-check) |
+| — | — | — | Tree complete — all 4 leaves done; no frontier. |
 
 ## Decisions
 
@@ -147,7 +147,8 @@ same token forms the bootstrap recognizes and emitting equivalent structural nod
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `pending` | `pending` | `pending` |
+| `SPEC-SPEC-SELFHOST.2` | `SPEC-SPEC-SELFHOST.2 — rewrite spec.spec as a faithful self-hosting grammar` (`4c667b7`) | `.1` inventory + `.3` verification folded into this work commit; spec.spec rewritten, ratio 1.0000, 20/20 cross-check |
+| `SPEC-SPEC-SELFHOST.4` | `SPEC-SPEC-SELFHOST.4 — docs sync + finalize; close the self-hosting rewrite tree` | Docs synced; extension-surface policy confirmed preserved; tree closed and moved to Completed |
 
 ## Changelog
 
@@ -155,3 +156,9 @@ same token forms the bootstrap recognizes and emitting equivalent structural nod
 - `2026-06-16`: `.2` + `.3` done — rewrote `specs/spec.spec` as a faithful hierarchical
   self-hosting grammar (spec_file -> 12 part rules, group-at-rule_header). Compiles ratio
   1.0000; 19/19 paragraph-count fidelity vs bootstrap; cross-check harness 20/20; self-hosting.
+- `2026-06-16`: `.4` done — **tree complete**. Synced live docs to the rewrite: DEVELOPMENT_NOTES
+  self-hosting status note (supersedes the "2/20"-era dual-path notes; now full 20/20 cross-check
+  parity), mdBook `pipeline-overview` dual-path parity note, and confirmed the extension-surface
+  policy is preserved verbatim in the new spec.spec header. Bootstrap remains oracle/primary;
+  spec.spec stays the diagnostic side channel (Non-Goals). Recorded the `.2` commit `4c667b7`.
+  Tree moved to Completed in `docs/TASK_TREE.md`.
