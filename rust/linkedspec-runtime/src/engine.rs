@@ -94,6 +94,19 @@ fn char_substr_from(s: &str, start: usize) -> String {
     s.chars().skip(start).collect()
 }
 
+/// Materialize a named-capture map (`entry_named`/`match_named`) into a
+/// `RuntimeValue::Hash` for the `entry_map`/`match_map` helpers (Helper Contract
+/// Catalog §8). Keys are sorted so the projection is deterministic — independent
+/// of host `HashMap` iteration order — matching `sorted_keys`/`sorted_values`.
+fn named_map_to_hash(named: &std::collections::HashMap<String, String>) -> RuntimeValue {
+    let mut entries: Vec<(String, RuntimeValue)> = named
+        .iter()
+        .map(|(k, v)| (k.clone(), RuntimeValue::Scalar(v.clone())))
+        .collect();
+    entries.sort_by(|(a, _), (b, _)| a.cmp(b));
+    RuntimeValue::Hash(entries)
+}
+
 impl Engine {
     /// Create a new engine from a compiled spec.
     pub fn new(spec: CompiledSpec) -> Self {
@@ -789,6 +802,24 @@ impl Engine {
                     .collect();
                 Ok(RuntimeValue::Array(arr))
             }
+            // Named-capture readers for the ENTRY match — the regex capture that
+            // triggered this rule's code (Helper Contract Catalog §8). They read
+            // the populated `ctx.entry_named` map. `entry_named_map` is a retired
+            // alias of `entry_map`: identical behavior, accepted for legacy specs.
+            "entry_named" => Ok(match args.first().map(|a| a.to_str()) {
+                Some(name) => ctx
+                    .entry_named
+                    .get(&name)
+                    .map(|v| RuntimeValue::Scalar(v.clone()))
+                    .unwrap_or(RuntimeValue::Undef),
+                None => RuntimeValue::Undef,
+            }),
+            "entry_has" => Ok(RuntimeValue::Bool(
+                args.first()
+                    .map(|a| ctx.entry_named.contains_key(&a.to_str()))
+                    .unwrap_or(false),
+            )),
+            "entry_map" | "entry_named_map" => Ok(named_map_to_hash(&ctx.entry_named)),
             "match_text" => Ok(RuntimeValue::Scalar(
                 ctx.match_groups.first().cloned().unwrap_or_default(),
             )),
@@ -1053,6 +1084,25 @@ impl Engine {
                     ctx.match_groups.iter().map(|g| RuntimeValue::Scalar(g.clone())).collect(),
                 ))
             }
+            // Named-capture readers for the LOCAL match — the immediate regex
+            // match inside this code block, which can diverge from the entry match
+            // in nested/dispatched contexts (Helper Contract Catalog §8). They read
+            // the populated `ctx.match_named` map. `match_named_map` is a retired
+            // alias of `match_map`.
+            "match_named" => Ok(match args.first().map(|a| a.to_str()) {
+                Some(name) => ctx
+                    .match_named
+                    .get(&name)
+                    .map(|v| RuntimeValue::Scalar(v.clone()))
+                    .unwrap_or(RuntimeValue::Undef),
+                None => RuntimeValue::Undef,
+            }),
+            "match_has" => Ok(RuntimeValue::Bool(
+                args.first()
+                    .map(|a| ctx.match_named.contains_key(&a.to_str()))
+                    .unwrap_or(false),
+            )),
+            "match_map" | "match_named_map" => Ok(named_map_to_hash(&ctx.match_named)),
             // ── Scalar transforms ──
             "length" => {
                 // Char count (Perl `length`), not byte length.
@@ -2687,5 +2737,139 @@ ChildB:
             "the merged Hash arg must survive — proves the better hash arm won, got {:?}",
             acc.last()
         );
+    }
+
+    // ── RUST-PARITY.5.5.1 — named-group readers (entry/match _named/_has/_map) ──
+
+    /// Parse → validate → compile → execute, returning the accumulator array.
+    fn run_5_5_1(grammar: &str, input: &str) -> Vec<Value> {
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        Engine::new(compiled)
+            .execute(input)
+            .unwrap()
+            .as_array()
+            .unwrap()
+            .clone()
+    }
+
+    #[test]
+    fn helpers_5_5_1_entry_named_reads_named_group() {
+        // entry_named(name) returns the named capture's value as a string.
+        let present = r#"Top::
+ /(?P<year>\d+)-(?P<month>\d+)/
+ E { return(entry_named(scalar("year"))) }
+"#;
+        let acc = run_5_5_1(present, "2024-03");
+        assert_eq!(acc.last().unwrap().as_str().unwrap(), "2024");
+
+        // An absent name returns undef (JSON null), per the catalog.
+        let absent = r#"Top::
+ /(?P<year>\d+)/
+ E { return(entry_named(scalar("nope"))) }
+"#;
+        let acc = run_5_5_1(absent, "2024");
+        assert!(
+            acc.last().unwrap().is_null(),
+            "absent named group must be undef, got {:?}",
+            acc.last()
+        );
+    }
+
+    #[test]
+    fn helpers_5_5_1_entry_has_presence() {
+        // entry_has(name) is true for a present named group, false otherwise.
+        let g_present = r#"Top::
+ /(?P<word>\w+)/
+ E { return(entry_has(scalar("word"))) }
+"#;
+        assert!(run_5_5_1(g_present, "hi").last().unwrap().as_bool().unwrap());
+
+        let g_absent = r#"Top::
+ /(?P<word>\w+)/
+ E { return(entry_has(scalar("missing"))) }
+"#;
+        assert!(!run_5_5_1(g_absent, "hi").last().unwrap().as_bool().unwrap());
+    }
+
+    #[test]
+    fn helpers_5_5_1_entry_map_and_alias() {
+        // entry_map() returns all named groups as a hash; entry_named_map() is a
+        // retired alias that must behave identically.
+        let g_map = r#"Top::
+ /(?P<a>\w+)-(?P<b>\w+)/
+ E { return(entry_map()) }
+"#;
+        let acc = run_5_5_1(g_map, "hello-world");
+        let obj = acc.last().unwrap().as_object().unwrap();
+        assert_eq!(obj.get("a").and_then(|v| v.as_str()), Some("hello"));
+        assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("world"));
+        assert_eq!(obj.len(), 2);
+
+        let g_alias = r#"Top::
+ /(?P<a>\w+)-(?P<b>\w+)/
+ E { return(entry_named_map()) }
+"#;
+        let acc = run_5_5_1(g_alias, "hello-world");
+        let obj = acc.last().unwrap().as_object().unwrap();
+        assert_eq!(obj.get("a").and_then(|v| v.as_str()), Some("hello"));
+        assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("world"));
+    }
+
+    #[test]
+    fn helpers_5_5_1_match_named_reads_named_group() {
+        // match_named reads the LOCAL match's named groups. On a top rule the
+        // entry and local match coincide, so the value is readable here.
+        let present = r#"Top::
+ /(?P<year>\d+)-(?P<month>\d+)/
+ E { return(match_named(scalar("month"))) }
+"#;
+        let acc = run_5_5_1(present, "2024-03");
+        assert_eq!(acc.last().unwrap().as_str().unwrap(), "03");
+
+        let absent = r#"Top::
+ /(?P<year>\d+)/
+ E { return(match_named(scalar("nope"))) }
+"#;
+        assert!(run_5_5_1(absent, "2024").last().unwrap().is_null());
+    }
+
+    #[test]
+    fn helpers_5_5_1_match_has_presence() {
+        let g_present = r#"Top::
+ /(?P<word>\w+)/
+ E { return(match_has(scalar("word"))) }
+"#;
+        assert!(run_5_5_1(g_present, "hi").last().unwrap().as_bool().unwrap());
+
+        let g_absent = r#"Top::
+ /(?P<word>\w+)/
+ E { return(match_has(scalar("missing"))) }
+"#;
+        assert!(!run_5_5_1(g_absent, "hi").last().unwrap().as_bool().unwrap());
+    }
+
+    #[test]
+    fn helpers_5_5_1_match_map_and_alias() {
+        // match_map() and its retired alias match_named_map() both return the
+        // local match's named groups as a hash.
+        let g_map = r#"Top::
+ /(?P<a>\w+)-(?P<b>\w+)/
+ E { return(match_map()) }
+"#;
+        let acc = run_5_5_1(g_map, "foo-bar");
+        let obj = acc.last().unwrap().as_object().unwrap();
+        assert_eq!(obj.get("a").and_then(|v| v.as_str()), Some("foo"));
+        assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("bar"));
+
+        let g_alias = r#"Top::
+ /(?P<a>\w+)-(?P<b>\w+)/
+ E { return(match_named_map()) }
+"#;
+        let acc = run_5_5_1(g_alias, "foo-bar");
+        let obj = acc.last().unwrap().as_object().unwrap();
+        assert_eq!(obj.get("a").and_then(|v| v.as_str()), Some("foo"));
+        assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("bar"));
     }
 }

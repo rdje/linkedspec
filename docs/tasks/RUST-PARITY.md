@@ -102,15 +102,15 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - ID: `RUST-PARITY.5.5`
   Status: `active`
   Goal: Implement the ~28 missing capture/mark/entry/match/input helpers (+ real aliases `tail`/`drop_last`/`flatten`)
-  Children: `.5.5.1`, `.5.5.2`, `.5.5.3`, `.5.5.4`
+  Children: `.5.5.1` (done), `.5.5.2`, `.5.5.3`, `.5.5.4`
   Note: Split 2026-06-16 (PNT rule 5 — too broad for one signoff slice; ~28 helpers across ~7 families, plus an alias-policy question). The `.1` Inventory (Gap 5) + `docs/linkedspec-book/src/appendix/helper-contract-catalog.md` are the implementation spec. Confirmed against engine.rs: only `drop_front`/`drop_back`/`array_copy`/`flat_array` of this family exist; all 28 below are genuinely missing. (`array_values`/`return_imatch`/`return_im` are explicitly NOT added — not real Perl helpers.)
 
 - ID: `RUST-PARITY.5.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Named-group helpers — `entry_named`/`entry_has`/`entry_map`/`entry_named_map` + `match_named`/`match_has`/`match_map`/`match_named_map`
   Acceptance: the 8 named-group readers read the existing `entry_named`/`match_named` maps (`entry_named(name)`→string, `entry_has(name)`→bool, `entry_map()`/`entry_named_map()`→hash; same for `match_*`) to helper-contract-catalog parity; per-family tests; baseline green; clippy clean.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-16. Added 8 arms to `call_helper` (`rust/linkedspec-runtime/src/engine.rs`): the 4 `entry_*` after `entry_groups` read `ctx.entry_named`; the 4 `match_*` after `match_groups` read `ctx.match_named`. `entry_named(name)`/`match_named(name)` → `Scalar` or `Undef` (absent); `entry_has`/`match_has` → `Bool(contains_key)`; `entry_map`/`entry_named_map` and `match_map`/`match_named_map` are combined arms (the `_named_map` forms are the catalog's retired aliases) returning a `RuntimeValue::Hash` via a new free helper `named_map_to_hash` that sorts keys for deterministic projection (matching `sorted_keys`/`sorted_values`). Both maps already exist on `RuntimeContext`, populate from `MatchResult.named` (engine.rs:280 local / :291 entry-when-empty), and save/restore in `SavedMatchState` — purely additive, no struct/population changes. 6 new tests (`helpers_5_5_1_*`, end-to-end via `(?P<name>…)` regexes: entry_named present/absent, entry_has present/absent, entry_map + alias, match_named present/absent, match_has present/absent, match_map + alias). `cargo test --manifest-path rust/Cargo.toml` = 204 passed / 0 failed (198 baseline + 6). `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` lint multiset byte-identical to the stashed HEAD baseline (13 = 13; zero new). No book change (catalog §8 already documents these — Rust now conforms; book sync is `.9`). No knowledge card (localized additive change reading existing infra).
+  Commit: `RUST-PARITY.5.5.1` (see Commit Log)
 
 - ID: `RUST-PARITY.5.5.2`
   Status: `pending`
@@ -171,10 +171,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
 | — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
 | — | `RUST-PARITY.5.5` | `active` | split into `.5.5.1`–`.5.5.4` (2026-06-16, PNT rule 5 — ~28 helpers across families) |
-| 1 | `RUST-PARITY.5.5.1` | `pending` | named-group helpers (entry/match `_named`/`_has`/`_map`) |
-| 2 | `RUST-PARITY.5.5.2` | `pending` | input-boundary helpers + real compat aliases |
-| 3 | `RUST-PARITY.5.5.3` | `pending` | mark-based capture family (`capture_*_from`/`_between`, `mark_*`) |
-| 4 | `RUST-PARITY.5.5.4` | `pending` | anonymous capture-slice variants |
+| — | `RUST-PARITY.5.5.1` | `done` | named-group helpers landed (2026-06-16); entry/match `_named`/`_has`/`_map`(+`_named_map` alias) read the existing maps, deterministic hash projection |
+| 1 | `RUST-PARITY.5.5.2` | `pending` | input-boundary helpers + real compat aliases (resolve the alias-retirement Open Question first) |
+| 2 | `RUST-PARITY.5.5.3` | `pending` | mark-based capture family (`capture_*_from`/`_between`, `mark_*`) |
+| 3 | `RUST-PARITY.5.5.4` | `pending` | anonymous capture-slice variants |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; `.6`–`.9` unchanged below it.)
 
@@ -220,6 +220,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-06-16` | `RUST-PARITY.5.2` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff) | 189 passed / 0 failed (186 baseline + 3 new `match_5_2_*`: child entry/local divergence, parent-match survives child dispatch, top-rule entry==local); clippy touched-file warning set identical to baseline (14 engine.rs + 1 pre-existing `len_zero` at integration_test.rs:199), only line-shifted — zero new warnings |
 | `2026-06-16` | `RUST-PARITY.5.3` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff vs `.5.2` HEAD) | 196 passed / 0 failed (189 baseline + 7 new `chars_5_3_*`: substr no-panic, input_slice, cursor_pos, cursor_col, match_start_pos, entry_start_pos, length — all multibyte UTF-8); clippy touched-file warning count identical to baseline (15) — zero new warnings |
 | `2026-06-16` | `RUST-PARITY.5.4` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff vs `.5.3` HEAD) | 198 passed / 0 failed (196 baseline + 2 new: `rep_5_4_zero_progress_guard_terminates`, `hash_5_4_better_hash_arm_merges_hash_args`); clippy touched-file warnings 15 → 12 (removed 3 unreachable-pattern duplicates; zero new) |
+| `2026-06-16` | `RUST-PARITY.5.5.1` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff vs `.5.4` HEAD, stashed) | 204 passed / 0 failed (198 baseline + 6 new `helpers_5_5_1_*`: entry/match × named/has/map, present + absent edges + retired `_named_map` aliases); clippy lint multiset byte-identical to the stashed baseline (13 = 13) — zero new warnings |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -270,6 +271,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.5.2` | `RUST-PARITY.5.2 — separate entry_* from match_* in the Rust engine` | engine.rs SavedMatchState save/restore + 3 integration tests; 189/189 green |
 | `RUST-PARITY.5.3` | `RUST-PARITY.5.3 — char-based offsets/slicing in the Rust engine` | engine.rs byte→char conversions + runtime.rs match-span fields + 7 multibyte unit tests; 196/196 green |
 | `RUST-PARITY.5.4` | `RUST-PARITY.5.4 — dedup shadowed arms + fix REP zero-progress guard in the Rust engine` | engine.rs removed 3 duplicate arms + pos-based REP guard + 2 unit tests; 198/198 green |
+| `RUST-PARITY.5.5.1` | `RUST-PARITY.5.5.1 — named-group reader helpers in the Rust engine` | engine.rs +8 `call_helper` arms (entry/match `_named`/`_has`/`_map`+`_named_map`) + `named_map_to_hash` + 6 tests; 204/204 green |
 
 ## Changelog
 
@@ -281,3 +283,4 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-06-16`: `.5.3` done — char-based offsets/slicing in the Rust engine. Internal positions stay byte-based (the regex engine is byte-based); the DSL boundary is now char-based for Perl parity. `byte_to_char_offset`/`char_substr` helpers added; `substr`/`input_slice` char-slice (no multibyte panic); cursor/input/capture/mark/entry/match positions+lengths and `length` convert byte→char; `cursor_col` is char-distance. `entry_start_pos`/`match_start_pos` no longer hardcoded `0.0` — `RuntimeContext` stores `entry/match_*_byte` spans (part of `SavedMatchState`). 7 new multibyte tests (`chars_5_3_*`); `cargo test` 196/196; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-char-based-offsets.md`. Frontier → `.5.4` (dedupe match arms + REP zero-progress guard).
 - `2026-06-16`: `.5.4` done — dedup shadowed `call_helper` arms + fix the REP zero-progress guard. Removed the first `print`/`hash`/`hash_copy` arms so the better later arms win (Hash-arg merge for `hash`, raw-AST target resolution for `hash_copy`, consolidated `say|print|print_each`); cleared 3 `unreachable_patterns` warnings. REP loop now captures `pos_before` per iteration and breaks when `ctx.pos == pos_before` (no cursor progress) instead of an iteration cap. 2 new tests; `cargo test` 198/198; clippy touched-file warnings 15 → 12. No knowledge card (localized fix). Frontier → `.5.5` (~30 missing helpers + real aliases).
 - `2026-06-16`: `.5.5` split (PNT rule 5 — too broad for one signoff slice). An engine.rs audit confirmed ~28 helpers across ~7 families are genuinely missing (only `drop_front`/`drop_back`/`array_copy`/`flat_array` of the family exist). Split into `.5.5.1` named-group readers (entry/match `_named`/`_has`/`_map`), `.5.5.2` input-boundary helpers + real compat aliases, `.5.5.3` mark-based capture family (`capture_*_from`/`_between`, `mark_*`), `.5.5.4` anonymous capture-slice variants. The `.1` Inventory (Gap 5) + the book helper-contract-catalog are the implementation spec. Surfaced an alias-policy Open Question (book §catalog says `tail`/`drop_last`/`entry_named_map` are "retired aliases"; `ROADMAP_V2` says they "remain compatibility syntax") to resolve against the Perl reference in `.5.5.2`. No code change (tree structuring only). Frontier → `.5.5.1`.
+- `2026-06-16`: `.5.5.1` done — added the 8 named-group reader helpers (`entry_named`/`entry_has`/`entry_map`/`entry_named_map` + the four `match_*`) as `call_helper` arms reading the existing `ctx.entry_named`/`ctx.match_named` maps (populate at engine.rs:280/291, save/restore in `SavedMatchState`). `entry_named_map`/`match_named_map` are combined-arm aliases of `entry_map`/`match_map` (the catalog's retired aliases); a new free `named_map_to_hash` sorts keys for a deterministic hash projection (matching `sorted_keys`/`sorted_values`). Purely additive — no struct/population changes. 6 new tests (`helpers_5_5_1_*`, end-to-end via `(?P<name>…)` regexes). `cargo test` 204/204; clippy lint multiset byte-identical to the stashed baseline (13 = 13; zero new). No book change (catalog §8 conforms; book sync `.9`); no knowledge card (localized additive). Frontier → `.5.5.2`.

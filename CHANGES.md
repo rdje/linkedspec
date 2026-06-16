@@ -1,6 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.5.1: named-group reader helpers in the Rust engine
+
+Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). First child of the `.5.5` helper-gap
+split. Added the 8 named-capture reader helpers from the audit's Gap 5, to Helper Contract Catalog
+§8 parity, as new arms in `call_helper`:
+
+- `entry_named(name)` → the named entry-capture's value as a string, or undef if absent;
+- `entry_has(name)` → boolean presence of the named entry-capture;
+- `entry_map()` / `entry_named_map()` → all named entry-captures as a hash (`entry_named_map` is the
+  retired alias of `entry_map`, accepted for legacy specs — identical behavior);
+- `match_named(name)` / `match_has(name)` / `match_map()` / `match_named_map()` → the same four for
+  the LOCAL match.
+
+The entry readers read `ctx.entry_named`, the match readers read `ctx.match_named` — both already
+exist on `RuntimeContext`, populate from the regex `MatchResult.named` (engine.rs:280/291), and
+save/restore per invocation in `SavedMatchState`, so this is a purely additive 8-arm change with no
+struct or population changes. The `entry_*` arms cluster after `entry_groups`; the `match_*` arms
+after `match_groups`, mirroring the existing entry/match organization. A small free helper
+`named_map_to_hash` materializes a named-capture map into a `RuntimeValue::Hash` with **keys sorted**
+so the projection is deterministic (matching `sorted_keys`/`sorted_values`), independent of host
+`HashMap` iteration order.
+
+**Validation:** `cargo test --manifest-path rust/Cargo.toml` = 204 passed / 0 failed (198 baseline +
+6 new `helpers_5_5_1_*`: entry_named present/absent, entry_has present/absent, entry_map + alias,
+match_named present/absent, match_has present/absent, match_map + alias — exercised end-to-end with
+`(?P<name>…)` named-group regexes). `cargo clippy --manifest-path rust/Cargo.toml -p
+linkedspec-runtime --tests`: lint multiset byte-identical to the stashed HEAD baseline (13 = 13;
+zero new warnings). No book change (the catalog §8 already documents these helpers; the Rust backend
+now conforms — Rust-parity book sync stays `RUST-PARITY.9`). Frontier → `RUST-PARITY.5.5.2`.
+
 ## 2026-06-16 — RUST-PARITY.5.4: dedup shadowed match arms + fix REP zero-progress guard
 
 Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). Two audit MAJORs in one slice.
