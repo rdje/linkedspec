@@ -28,7 +28,15 @@ pub struct RuntimeContext {
     pub match_groups: Vec<String>,
     /// Named local match groups.
     pub match_named: std::collections::HashMap<String, String>,
-    /// Marks — named positions in the input.
+    /// Entry match span as **byte** offsets into `input` (`[start, end)`).
+    /// Exposed to the DSL as char offsets by `entry_start_pos`/`entry_end_pos`.
+    pub entry_start_byte: usize,
+    pub entry_end_byte: usize,
+    /// Local match span as **byte** offsets into `input` (`[start, end)`).
+    /// Exposed to the DSL as char offsets by `match_start_pos`/`match_end_pos`.
+    pub match_start_byte: usize,
+    pub match_end_byte: usize,
+    /// Marks — named positions in the input (**byte** offsets).
     pub marks: std::collections::HashMap<String, usize>,
     /// Anonymous capture-slice start position.
     pub capture_start: Option<usize>,
@@ -58,6 +66,10 @@ impl RuntimeContext {
             entry_named: std::collections::HashMap::new(),
             match_groups: Vec::new(),
             match_named: std::collections::HashMap::new(),
+            entry_start_byte: 0,
+            entry_end_byte: 0,
+            match_start_byte: 0,
+            match_end_byte: 0,
             marks: std::collections::HashMap::new(),
             capture_start: None,
             exit_status: None,

@@ -54,6 +54,10 @@ struct SavedMatchState {
     entry_named: std::collections::HashMap<String, String>,
     match_groups: Vec<String>,
     match_named: std::collections::HashMap<String, String>,
+    entry_start_byte: usize,
+    entry_end_byte: usize,
+    match_start_byte: usize,
+    match_end_byte: usize,
 }
 
 impl SavedMatchState {
@@ -63,7 +67,31 @@ impl SavedMatchState {
         ctx.entry_named = self.entry_named;
         ctx.match_groups = self.match_groups;
         ctx.match_named = self.match_named;
+        ctx.entry_start_byte = self.entry_start_byte;
+        ctx.entry_end_byte = self.entry_end_byte;
+        ctx.match_start_byte = self.match_start_byte;
+        ctx.match_end_byte = self.match_end_byte;
     }
+}
+
+/// Convert a **byte** offset into `input` to a **character** offset. Internal
+/// positions (`ctx.pos`, marks, match spans, regex byte offsets) are byte-based,
+/// but the Perl reference exposes char offsets (`pos()` is char-based), so every
+/// position/length surfaced to the DSL goes through this.
+fn byte_to_char_offset(input: &str, byte_off: usize) -> usize {
+    let clamped = byte_off.min(input.len());
+    input[..clamped].chars().count()
+}
+
+/// `len` characters of `s` starting at character index `start` (Perl `substr`
+/// semantics — char-based, never panics on a multibyte boundary).
+fn char_substr(s: &str, start: usize, len: usize) -> String {
+    s.chars().skip(start).take(len).collect()
+}
+
+/// The suffix of `s` from character index `start` (`substr($s, $start)`).
+fn char_substr_from(s: &str, start: usize) -> String {
+    s.chars().skip(start).collect()
 }
 
 impl Engine {
@@ -119,6 +147,10 @@ impl Engine {
             entry_named: std::mem::take(&mut ctx.entry_named),
             match_groups: std::mem::take(&mut ctx.match_groups),
             match_named: std::mem::take(&mut ctx.match_named),
+            entry_start_byte: ctx.entry_start_byte,
+            entry_end_byte: ctx.entry_end_byte,
+            match_start_byte: ctx.match_start_byte,
+            match_end_byte: ctx.match_end_byte,
         };
         // ENTRY match (`IMATCH`) = the dispatcher's local match (`$$info{match}`).
         // For the top rule the caller has no local match, so this starts empty
@@ -126,7 +158,11 @@ impl Engine {
         // framework passing the top rule's own match as `$info`).
         ctx.entry_groups = saved_match.match_groups.clone();
         ctx.entry_named = saved_match.match_named.clone();
+        ctx.entry_start_byte = saved_match.match_start_byte;
+        ctx.entry_end_byte = saved_match.match_end_byte;
         // LOCAL match (`LMATCH`) starts empty until this rule matches its regex.
+        ctx.match_start_byte = 0;
+        ctx.match_end_byte = 0;
 
         // Build regex alternation (or fallback for edge-only rules)
         let alt = if rule.regex_patterns.is_empty() {
@@ -228,22 +264,28 @@ impl Engine {
             };
 
             if let Some(m) = match_result {
+                let entry_was_empty = ctx.entry_groups.is_empty();
                 ctx.set_pos(m.end);
                 // LOCAL match (`LMATCH`) — the rule's own regex match. This is
                 // what `match_*` helpers read; it must NOT touch the entry match
                 // (Perl keeps `IMATCH` and `LMATCH` separate — only an explicit
-                // I-block bridge copies one to the other).
+                // I-block bridge copies one to the other). `m.start`/`m.end` are
+                // byte offsets (exposed as char offsets by `match_*_pos`).
                 ctx.match_groups = m.groups.clone();
                 ctx.match_named = m.named.clone();
+                ctx.match_start_byte = m.start;
+                ctx.match_end_byte = m.end;
                 // Top-rule / dispatcher-less entry: the rule's own first match
                 // is also its entry match (the framework passes the top rule's
                 // own match as `$info`). A dispatched child already carries a
                 // non-empty entry match (the dispatcher's local match) and is
                 // left untouched, so `entry_*` and `match_*` diverge correctly
                 // in nested contexts.
-                if ctx.entry_groups.is_empty() {
+                if entry_was_empty {
                     ctx.entry_groups = m.groups.clone();
                     ctx.entry_named = m.named.clone();
+                    ctx.entry_start_byte = m.start;
+                    ctx.entry_end_byte = m.end;
                 }
 
                 // ── Action-edge dispatch ──
@@ -792,20 +834,17 @@ impl Engine {
             }
             // ── String/array index ──
             "substr" => {
+                // Char-based (Perl `substr`): start/len are character offsets, so
+                // byte-slicing would panic on a multibyte boundary and diverge.
                 if args.len() >= 3 {
                     let s = args[0].to_str();
                     let start = args[1].as_number().unwrap_or(0.0) as usize;
                     let len = args[2].as_number().unwrap_or(0.0) as usize;
-                    let end = (start + len).min(s.len());
-                    Ok(RuntimeValue::Scalar(s[start..end].to_string()))
+                    Ok(RuntimeValue::Scalar(char_substr(&s, start, len)))
                 } else if args.len() == 2 {
                     let s = args[0].to_str();
                     let start = args[1].as_number().unwrap_or(0.0) as usize;
-                    if start < s.len() {
-                        Ok(RuntimeValue::Scalar(s[start..].to_string()))
-                    } else {
-                        Ok(RuntimeValue::Scalar(String::new()))
-                    }
+                    Ok(RuntimeValue::Scalar(char_substr_from(&s, start)))
                 } else {
                     Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str()).unwrap_or_default()))
                 }
@@ -919,31 +958,35 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            // ── Position/cursor ──
-            "cursor_pos" => Ok(RuntimeValue::Number(ctx.pos as f64)),
+            // ── Position/cursor ── (DSL-facing positions/lengths are char-based)
+            "cursor_pos" => Ok(RuntimeValue::Number(
+                byte_to_char_offset(&ctx.input, ctx.pos) as f64,
+            )),
             "cursor_line" => {
                 let line = ctx.input[..ctx.pos].chars().filter(|&c| c == '\n').count() + 1;
                 Ok(RuntimeValue::Number(line as f64))
             }
             "cursor_col" => {
+                // Char distance from the last newline (Perl columns are char-based).
                 let last_nl = ctx.input[..ctx.pos].rfind('\n').map(|i| i + 1).unwrap_or(0);
-                Ok(RuntimeValue::Number((ctx.pos - last_nl + 1) as f64))
+                let col = ctx.input[last_nl..ctx.pos].chars().count() + 1;
+                Ok(RuntimeValue::Number(col as f64))
             }
             "cursor_rest" => Ok(RuntimeValue::Scalar(ctx.remaining().to_string())),
-            "cursor_rest_len" => Ok(RuntimeValue::Number(ctx.remaining().len() as f64)),
+            "cursor_rest_len" => Ok(RuntimeValue::Number(ctx.remaining().chars().count() as f64)),
             "input_text" => Ok(RuntimeValue::Scalar(ctx.input.clone())),
-            "input_len" => Ok(RuntimeValue::Number(ctx.input.len() as f64)),
+            "input_len" => Ok(RuntimeValue::Number(ctx.input.chars().count() as f64)),
             "input_slice" => {
+                // start/width are char offsets (Perl parity); char-slice, no panic.
                 if args.len() >= 2 {
                     let start = args[0].as_number().unwrap_or(0.0) as usize;
                     let width = args[1].as_number().unwrap_or(0.0) as usize;
-                    let end = (start + width).min(ctx.input.len());
-                    Ok(RuntimeValue::Scalar(ctx.input[start..end].to_string()))
+                    Ok(RuntimeValue::Scalar(char_substr(&ctx.input, start, width)))
                 } else {
                     Ok(RuntimeValue::Undef)
                 }
             }
-            "input_end_pos" => Ok(RuntimeValue::Number(ctx.input.len() as f64)),
+            "input_end_pos" => Ok(RuntimeValue::Number(ctx.input.chars().count() as f64)),
             "start_capture_slice" => {
                 ctx.capture_start = Some(ctx.pos);
                 Ok(RuntimeValue::Undef)
@@ -953,15 +996,17 @@ impl Engine {
                 Ok(RuntimeValue::Scalar(ctx.input[start..ctx.pos].to_string()))
             }
             "capture_slice_len" => {
-                let start = ctx.capture_start.unwrap_or(0);
-                Ok(RuntimeValue::Number((ctx.pos - start) as f64))
+                let start = ctx.capture_start.unwrap_or(0).min(ctx.pos);
+                Ok(RuntimeValue::Number(ctx.input[start..ctx.pos].chars().count() as f64))
             }
             "capture_slice_line" => {
                 let start = ctx.capture_start.unwrap_or(0);
                 let line = ctx.input[..start].chars().filter(|&c| c == '\n').count() + 1;
                 Ok(RuntimeValue::Number(line as f64))
             }
-            "capture_slice_pos" => Ok(RuntimeValue::Number(ctx.capture_start.unwrap_or(0) as f64)),
+            "capture_slice_pos" => Ok(RuntimeValue::Number(
+                byte_to_char_offset(&ctx.input, ctx.capture_start.unwrap_or(0)) as f64,
+            )),
             "mark_here" => {
                 if !args.is_empty() {
                     let name = args[0].to_str();
@@ -971,7 +1016,8 @@ impl Engine {
             }
             "mark_pos" => {
                 let name = args.first().map(|a| a.to_str()).unwrap_or_default();
-                Ok(RuntimeValue::Number(ctx.marks.get(&name).copied().unwrap_or(0) as f64))
+                let byte = ctx.marks.get(&name).copied().unwrap_or(0);
+                Ok(RuntimeValue::Number(byte_to_char_offset(&ctx.input, byte) as f64))
             }
             "mark_exists" => {
                 let name = args.first().map(|a| a.to_str()).unwrap_or_default();
@@ -994,11 +1040,13 @@ impl Engine {
                 Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
             }
             "entry_len" => Ok(RuntimeValue::Number(
-                ctx.entry_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+                ctx.entry_groups.first().map(|s| s.chars().count()).unwrap_or(0) as f64,
             )),
-            "entry_start_pos" => Ok(RuntimeValue::Number(0.0)), // simplified
+            "entry_start_pos" => Ok(RuntimeValue::Number(
+                byte_to_char_offset(&ctx.input, ctx.entry_start_byte) as f64,
+            )),
             "entry_end_pos" => Ok(RuntimeValue::Number(
-                ctx.entry_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+                byte_to_char_offset(&ctx.input, ctx.entry_end_byte) as f64,
             )),
             "match_line" => {
                 let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
@@ -1011,11 +1059,13 @@ impl Engine {
                 Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
             }
             "match_len" => Ok(RuntimeValue::Number(
-                ctx.match_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+                ctx.match_groups.first().map(|s| s.chars().count()).unwrap_or(0) as f64,
             )),
-            "match_start_pos" => Ok(RuntimeValue::Number(0.0)),
+            "match_start_pos" => Ok(RuntimeValue::Number(
+                byte_to_char_offset(&ctx.input, ctx.match_start_byte) as f64,
+            )),
             "match_end_pos" => Ok(RuntimeValue::Number(
-                ctx.match_groups.first().map(|s| s.len()).unwrap_or(0) as f64,
+                byte_to_char_offset(&ctx.input, ctx.match_end_byte) as f64,
             )),
             "match_group" => {
                 if let Some(arg) = args.first() {
@@ -1032,8 +1082,9 @@ impl Engine {
             }
             // ── Scalar transforms ──
             "length" => {
+                // Char count (Perl `length`), not byte length.
                 if let Some(arg) = args.first() {
-                    Ok(RuntimeValue::Number(arg.to_str().len() as f64))
+                    Ok(RuntimeValue::Number(arg.to_str().chars().count() as f64))
                 } else {
                     Ok(RuntimeValue::Number(0.0))
                 }
@@ -2519,5 +2570,107 @@ ChildB:
         let engine = Engine::new(compiled);
         let result = engine.execute("hello world");
         assert!(result.is_ok(), "backtrack should work, got {:?}", result);
+    }
+
+    // ── RUST-PARITY.5.3 — char-based (not byte) offsets/slicing ──
+    //
+    // Internal positions (`ctx.pos`, marks, match spans, regex offsets) are byte
+    // offsets, but the Perl reference exposes char offsets (`pos()`/`length`/
+    // `substr` are char-based). These tests use multibyte UTF-8 input ('é' is two
+    // bytes), where byte-based slicing would panic on a char boundary and every
+    // position/length would diverge from Perl by the number of multibyte chars.
+
+    // Helper: parse → validate → compile → execute, return the accumulator JSON.
+    fn run_5_3(grammar: &str, input: &str) -> Vec<serde_json::Value> {
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+        engine
+            .execute(input)
+            .unwrap()
+            .as_array()
+            .unwrap()
+            .clone()
+    }
+
+    #[test]
+    fn chars_5_3_substr_is_char_based_no_panic() {
+        // substr(café, 3, 1) = "é" (char index 3). Byte-slicing s[3..4] would
+        // panic — byte 3 is the first of the two bytes of 'é'.
+        let grammar = r#"Top::
+ /café/
+ E { return(substr(scalar(entry_text()), scalar(3), scalar(1))) }
+"#;
+        let acc = run_5_3(grammar, "café");
+        assert_eq!(acc.last().unwrap().as_str().unwrap(), "é");
+    }
+
+    #[test]
+    fn chars_5_3_input_slice_is_char_based() {
+        // input_slice(start=3, width=1) over "café" = "é" (char offsets).
+        let grammar = r#"Top::
+ /café/
+ E { return(input_slice(scalar(3), scalar(1))) }
+"#;
+        let acc = run_5_3(grammar, "café");
+        assert_eq!(acc.last().unwrap().as_str().unwrap(), "é");
+    }
+
+    #[test]
+    fn chars_5_3_cursor_pos_is_char_offset() {
+        // After matching "café" the cursor is at byte 5 but char offset 4.
+        let grammar = r#"Top::
+ /café/
+ E { return(scalar(cursor_pos())) }
+"#;
+        let acc = run_5_3(grammar, "café x");
+        assert_eq!(acc.last().unwrap().as_f64().unwrap(), 4.0);
+    }
+
+    #[test]
+    fn chars_5_3_cursor_col_is_char_based() {
+        // "héllo" is 6 bytes / 5 chars; column after it = 5 + 1 = 6 (char-based).
+        let grammar = r#"Top::
+ /héllo/
+ E { return(scalar(cursor_col())) }
+"#;
+        let acc = run_5_3(grammar, "héllo");
+        assert_eq!(acc.last().unwrap().as_f64().unwrap(), 6.0);
+    }
+
+    #[test]
+    fn chars_5_3_match_start_pos_not_hardcoded_zero() {
+        // "world" seek-matches after "héllo " (6 chars / 7 bytes): char start 6.
+        // Previously match_start_pos was hardcoded to 0.0.
+        let grammar = r#"Top::
+ /world/
+ E { return(scalar(match_start_pos())) }
+"#;
+        let acc = run_5_3(grammar, "héllo world");
+        assert_eq!(acc.last().unwrap().as_f64().unwrap(), 6.0);
+    }
+
+    #[test]
+    fn chars_5_3_entry_start_pos_not_hardcoded_zero() {
+        // Top rule's entry match = its own match; "world" starts at char 3 after
+        // "hi " — entry_start_pos must be 3, not the old hardcoded 0.0.
+        let grammar = r#"Top::
+ /world/
+ E { return(scalar(entry_start_pos())) }
+"#;
+        let acc = run_5_3(grammar, "hi world");
+        assert_eq!(acc.last().unwrap().as_f64().unwrap(), 3.0);
+    }
+
+    #[test]
+    fn chars_5_3_length_is_char_count() {
+        // length("café") = 4 chars (not 5 bytes).
+        let grammar = r#"Top::
+ /café/
+ E { return(scalar(length(scalar(entry_text())))) }
+"#;
+        let acc = run_5_3(grammar, "café");
+        assert_eq!(acc.last().unwrap().as_f64().unwrap(), 4.0);
     }
 }

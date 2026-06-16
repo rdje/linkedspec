@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.5.2` done)
+- Last updated: `2026-06-16` (`.5.3` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -86,11 +86,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.5.2` (see Commit Log)
 
 - ID: `RUST-PARITY.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Char-based (not byte) indexing for slicing + cursor line/col; fix hardcoded start positions
   Acceptance: `substr`/`input_slice`/`capture_slice`/`capture_from` and cursor line-col use char offsets (no panic on multibyte UTF-8; parity with Perl's char-based offsets); `entry/match_start_pos` no longer hardcoded to 0; multibyte regression tests; baseline green; clippy clean.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-16. Internal positions stay byte-based (regex engine works in bytes); the DSL boundary is now char-based (Perl parity). New `byte_to_char_offset` + `char_substr`/`char_substr_from` helpers in `engine.rs`. `substr`/`input_slice` char-slice their DSL char-offset args (no more panic on a multibyte boundary). `cursor_pos`/`cursor_col`/`cursor_rest_len`/`input_len`/`input_end_pos`/`capture_slice_len`/`capture_slice_pos`/`mark_pos`/`entry_*_pos`/`entry_len`/`match_*_pos`/`match_len`/`length` convert byte→char. `entry_start_pos`/`match_start_pos` no longer hardcoded `0.0`: `RuntimeContext` gains `entry_start_byte`/`entry_end_byte`/`match_start_byte`/`match_end_byte` span fields (part of `SavedMatchState`, recorded from `m.start`/`m.end`, entry seeded by the same dispatcher-vs-own-first-match rule as `.5.2`). 7 new multibyte unit tests (`chars_5_3_*`). `cargo test` = 196 passed (189 baseline + 7), 0 failed; `cargo clippy -p linkedspec-runtime --tests` touched-file warning set identical to baseline (15), zero new. No book change (positions/lengths/`substr` are char-based in the documented `.spec` contract; Rust now conforms — book sync is `.9`). Out of scope: group indexing (`.5.2` note) and the `entry_line`/`entry_col`/`match_line`/`match_col` arg-taking quirk (left as-is; `cursor` line/col fixed as specified).
+  Commit: `RUST-PARITY.5.3` (see Commit Log)
 
 - ID: `RUST-PARITY.5.4`
   Status: `pending`
@@ -141,9 +141,9 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.4` | `superseded` | Rust-self-hosting on spec.spec dropped; parity = reproducing BootstrapSpec::Core output (see Decisions audit) |
 | — | `RUST-PARITY.5.1` | `done` | retv-propagation BLOCKER fixed (2026-06-16); child return now readable as `scalar(retv)` after `->`/`=>`/REP dispatch |
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
-| 1 | `RUST-PARITY.5.3` | `pending` | char-based indexing + cursor line/col |
-| 2 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
-| 3 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
+| — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
+| 1 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
+| 2 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.6`–`.9` unchanged below it.)
 
@@ -165,10 +165,13 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 - `2026-06-16` (`.5.2` implementation): match/entry separation landed. **Design:** the single match-set site (`engine.rs`) assigned the rule's own regex match to BOTH `entry_*` and `match_*`, so they could never diverge and a dispatched child clobbered the parent's match. The Perl reference keeps two per-handler `my` lexicals — `IMATCH` (entry, `= $$info{match}`, where a parent passes its own `$minfo` to the child at `ActionIR/MethodLowering.pm:332`, and the preamble sets `IMATCH=$$info{match}` at `SpecEntry::_build_handler_preamble`) and `LMATCH` (local, `= $$minfo{match}` at `HandlerVariantEmitter::_build_lmatch_extraction`). Fix: `execute_rule` now (1) saves the caller's `entry_*`/`match_*` into a `SavedMatchState`; (2) sets THIS invocation's entry match = the caller's local match (`$info = $minfo`) and starts the local match empty; (3) on each own match updates only `match_*`, and seeds `entry_*` from the first own match only when entry is still empty (the top-rule / dispatcher-less case — the framework passes the top rule's own match as `$info`); (4) restores the caller's registers on both the blind-call early return and the normal return, so a child's matching is transparent to the parent. **Oracle note:** the runtime Perl oracle was inconclusive for minimal hand-authored inline specs (`.spec` top-rule/lifecycle authoring friction returned empty/0), so the contract was taken directly from the authoritative Perl source (the three sites above) and pinned by Rust tests — the leaf's parity gate is `cargo test` + `cargo clippy`, not a Perl oracle. **Book:** no change (the `.spec` contract already documents `entry_*`/`match_*` in `dsl/capture-marks-and-source-locations.md`; Rust now conforms — Rust-parity book sync remains `.9`). Group-indexing parity (`match_group(0)` = first capture in Perl vs full match in Rust) is explicitly out of `.5.2` scope.
 
+- `2026-06-16` (`.5.3` implementation): char-based offset/slicing parity. **Design:** the regex engine works in **byte** offsets, so internal positions (`ctx.pos`, `capture_start`, `marks`, `MatchResult.start`/`.end`, the new `entry/match_*_byte` spans) stay byte-based and input slicing between two of them is panic-safe; but the Perl reference exposes **char** offsets (`pos()`/`length`/`substr` are char-based), so every position/length surfaced to the DSL converts byte→char (`byte_to_char_offset`) and every helper taking DSL char-offset args char-slices (`char_substr`/`char_substr_from`). Concretely: `substr`/`input_slice` no longer byte-slice (they panicked on a multibyte boundary); `cursor_pos`/`cursor_col`/`cursor_rest_len`/`input_len`/`input_end_pos`/`capture_slice_len`/`capture_slice_pos`/`mark_pos`/`entry_*_pos`/`entry_len`/`match_*_pos`/`match_len`/`length` return char counts; line numbers (newline counts) were already byte/char-identical, only columns needed char counting. `entry_start_pos`/`match_start_pos` were hardcoded `0.0`; `RuntimeContext` now stores `entry/match_start_byte`+`_end_byte` spans (recorded from `m.start`/`m.end`, part of `SavedMatchState` so they save/restore per invocation like the `.5.2` groups, entry seeded by the same dispatcher-vs-own-first-match rule). **ASCII no-op:** byte==char for ASCII, so the 189 baseline is untouched; 7 multibyte `chars_5_3_*` tests pin the UTF-8 behavior. **Out of scope:** the `.5.2` group-indexing item, and the `entry_line`/`entry_col`/`match_line`/`match_col` arg-taking quirk (only `cursor` line/col was in this leaf's named scope). New knowledge card `docs/knowledge/rust-char-based-offsets.md`.
+
 ## Open Questions
 
 - None yet — inventory leaf will identify any.
 - (`.5.2`) Group indexing differs between Perl (`match_group(0)` = first capture) and Rust (`entry_group(0)`/`match_group(0)` read index 0 = full match). Not a `.5.2` concern (that leaf is about *which* match, not indexing); flag for a later parity leaf if it proves user-visible.
+- (`.5.3`) `entry_line`/`entry_col`/`match_line`/`match_col` take a position **argument** rather than deriving from the stored entry/match span (an existing quirk). `.5.3` fixed only `cursor` line/col (its named scope); revisit these in a later parity leaf alongside the group-indexing item.
 
 ## Blockers
 
@@ -181,6 +184,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-06-16` | `RUST-PARITY.1` | Full audit: Rust sources (`engine.rs:1984`, `helpers.rs:470`, `compiler.rs`, `parser.rs`, `validation.rs`) vs Perl lowering owners (`ControlFlow.pm`, `MethodLowering.pm`, `ValueExpr.pm`, `FlowExpr.pm`, `Contracts.pm`) | Done — 6 gap categories, 84/100+ helpers implemented |
 | `2026-06-16` | `RUST-PARITY.5.1` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml` (linkedspec-runtime delta) | 186 passed / 0 failed (182 baseline + 4 new retv tests: acode/OR, blind-call/AND, REP, `call`); clippy adds zero new linkedspec-runtime warnings (lib stays at 16 pre-existing `doc_lazy_continuation`) |
 | `2026-06-16` | `RUST-PARITY.5.2` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff) | 189 passed / 0 failed (186 baseline + 3 new `match_5_2_*`: child entry/local divergence, parent-match survives child dispatch, top-rule entry==local); clippy touched-file warning set identical to baseline (14 engine.rs + 1 pre-existing `len_zero` at integration_test.rs:199), only line-shifted — zero new warnings |
+| `2026-06-16` | `RUST-PARITY.5.3` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` (baseline-diff vs `.5.2` HEAD) | 196 passed / 0 failed (189 baseline + 7 new `chars_5_3_*`: substr no-panic, input_slice, cursor_pos, cursor_col, match_start_pos, entry_start_pos, length — all multibyte UTF-8); clippy touched-file warning count identical to baseline (15) — zero new warnings |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -229,6 +233,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | --- | --- | --- |
 | `RUST-PARITY.5.1` | `RUST-PARITY.5.1 — fix child-return (retv) propagation in the Rust engine` | engine.rs + runtime.rs + 4 integration tests; 186/186 green |
 | `RUST-PARITY.5.2` | `RUST-PARITY.5.2 — separate entry_* from match_* in the Rust engine` | engine.rs SavedMatchState save/restore + 3 integration tests; 189/189 green |
+| `RUST-PARITY.5.3` | `RUST-PARITY.5.3 — char-based offsets/slicing in the Rust engine` | engine.rs byte→char conversions + runtime.rs match-span fields + 7 multibyte unit tests; 196/196 green |
 
 ## Changelog
 
@@ -237,3 +242,4 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-06-16`: Split `.5` (PNT rule 5 — too broad for one signoff slice) into `.5.1` retv-propagation BLOCKER fix, `.5.2` match/entry split, `.5.3` char-based indexing + cursor line/col, `.5.4` dedupe match arms + REP zero-progress guard, `.5.5` ~30 missing helpers + real aliases. Sequenced retv-first. Confirmed the Rust baseline green (182 tests, 0 failed) before splitting. Frontier → `.5.1`. No code change (tree structuring only).
 - `2026-06-16`: `.5.1` done — fixed the child-return (retv) propagation BLOCKER. `execute_rule` now returns the rule's value via a per-invocation channel; `->`/`=>` dispatch set `retv` to the child return; `return(...)` feeds the channel without disturbing the accumulator contract; `call(child)` now resolves a bare rule name and returns the child value. 4 new integration tests (acode/OR, blind-call/AND, REP, `call`); `cargo test` 186/186; clippy adds no new warnings. Frontier → `.5.2` (match_*/entry_* split).
 - `2026-06-16`: `.5.2` done — separated `entry_*` from `match_*` in the Rust engine. `execute_rule` now emulates Perl's per-handler `IMATCH`/`LMATCH` lexicals via a `SavedMatchState` save/restore on the shared `RuntimeContext`: entry match = the dispatcher's local match (`$info = $minfo`), local match = the rule's own regex match, entry seeded from the first own match only for the dispatcher-less top rule, both restored on exit. 3 new integration tests (child entry/local divergence, parent match survives child dispatch, top-rule entry==local); `cargo test` 189/189; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-entry-match-separation.md`. Frontier → `.5.3` (char-based indexing + cursor line/col).
+- `2026-06-16`: `.5.3` done — char-based offsets/slicing in the Rust engine. Internal positions stay byte-based (the regex engine is byte-based); the DSL boundary is now char-based for Perl parity. `byte_to_char_offset`/`char_substr` helpers added; `substr`/`input_slice` char-slice (no multibyte panic); cursor/input/capture/mark/entry/match positions+lengths and `length` convert byte→char; `cursor_col` is char-distance. `entry_start_pos`/`match_start_pos` no longer hardcoded `0.0` — `RuntimeContext` stores `entry/match_*_byte` spans (part of `SavedMatchState`). 7 new multibyte tests (`chars_5_3_*`); `cargo test` 196/196; clippy adds no new warnings. New knowledge card `docs/knowledge/rust-char-based-offsets.md`. Frontier → `.5.4` (dedupe match arms + REP zero-progress guard).

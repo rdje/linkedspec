@@ -3,11 +3,12 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **28** facts · **137** question keys.
+> **29** facts · **143** question keys.
 
 ## Questions → fact
 
 - "are PPlugin and PluginBridge part of the target architecture" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
+- "are cursor_pos / match_start_pos / length char-based or byte-based in Rust" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "are return_a return_m return_ma return_imatch deprecated" -> [medium-term-alias-retirement-deferred](docs/knowledge/medium-term-alias-retirement-deferred.md) · 2026-06-12 · reverify: `grep -c 'return_a(' t/phase0_regression.t`
 - "are there compatibility-surface rules left" -> [method-like-dsl-migration-status](docs/knowledge/method-like-dsl-migration-status.md) · 2026-06-12 · reverify: `grep -c 'compatibility_surface.*0' docs/tasks/METHOD-LIKE-DSL-MIGRATION.md`
 - "can a spec introduce a compatibility-surface rule" -> [phase0-all-target-actionir-ready-invariant](docs/knowledge/phase0-all-target-actionir-ready-invariant.md) · 2026-06-05 · reverify: `grep -n language_agnostic_ready_ratio t/phase0_regression.t`
@@ -16,6 +17,7 @@
 - "does perl/LinkedSpec/ActionRewriter.pm still exist" -> [actionrewriter-removed-phase1](docs/knowledge/actionrewriter-removed-phase1.md) · 2026-06-05 · reverify: `! test -f perl/LinkedSpec/ActionRewriter.pm && grep -q rewrite_action_code_for_compat perl/LinkedSpec/RuleIR/EmitContext.pm`
 - "does spec.spec run alongside bootstrap" -> [bootstrapspec-vs-spec-spec-dual-path](docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md) · 2026-06-13 · reverify: `grep -n '_build_spec_spec_parser\|run_bootstrap_parse' perl/LinkedSpec/BootstrapSpec.pm`
 - "does the Perl version go away" -> [language-agnostic-backend-vision](docs/knowledge/language-agnostic-backend-vision.md) · 2026-06-12 · reverify: `grep -n 'backend\|portability' ROADMAP_V2.md ARCHITECTURE_STATE.md | head -10`
+- "does the Rust engine use byte or char offsets" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "dual-path parse" -> [bootstrapspec-vs-spec-spec-dual-path](docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md) · 2026-06-13 · reverify: `grep -n '_build_spec_spec_parser\|run_bootstrap_parse' perl/LinkedSpec/BootstrapSpec.pm`
 - "how are handler variants built in SpecEntry" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `|`
 - "how are scanner rules organized in linkedspec" -> [scanner-rule-family-architecture](docs/knowledge/scanner-rule-family-architecture.md) · 2026-06-12 · reverify: `ls perl/LinkedSpec/ActionIR/Scanner/*.pm`
@@ -32,6 +34,7 @@
 - "how does HandlerIR help portability" -> [language-agnostic-backend-vision](docs/knowledge/language-agnostic-backend-vision.md) · 2026-06-12 · reverify: `grep -n 'backend\|portability' ROADMAP_V2.md ARCHITECTURE_STATE.md | head -10`
 - "how does LinkedSpec.pm dispatch into owner modules" -> [linkedspec-pm-is-thin-facade](docs/knowledge/linkedspec-pm-is-thin-facade.md) · 2026-06-05 · reverify: `wc -l perl/LinkedSpec.pm; test -f perl/LinkedSpec/OwnerDispatch.pm`
 - "how does RuntimeContext anchor chdir-safety for runtime state" -> [runtimecontext-boundary](docs/knowledge/runtimecontext-boundary.md) · 2026-06-12 · reverify: `grep -l 'RuntimeContext' perl/LinkedSpec/*.pm perl/LinkedSpec/RuleIR/*.pm | wc -l`
+- "how does Rust match Perl's char-based positions" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "how does SpecEntry depend on LinkedRE::or" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `|`
 - "how does SpecEntry generate runtime handlers" -> [specentry-backend-portability-ceiling](docs/knowledge/specentry-backend-portability-ceiling.md) · 2026-06-12 · reverify: `grep -n 'backend-portability ceiling\|eval' ARCHITECTURE_STATE.md | head -3`
 - "how does _actionir_owner_package work" -> [emitcontext-owner-registry](docs/knowledge/emitcontext-owner-registry.md) · 2026-06-12 · reverify: `grep -c '_actionir_owner_package\|owner_pkgs' perl/LinkedSpec/RuleIR/EmitContext.pm`
@@ -44,6 +47,7 @@
 - "how does return(expr) work in the Rust runtime vs the accumulator" -> [rust-retv-propagation](docs/knowledge/rust-retv-propagation.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'set_retv\\|return_value\\|fn execute_rule' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs`
 - "how does spec.spec relate to the bootstrap grammar" -> [bootstrapspec-vs-spec-spec-dual-path](docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md) · 2026-06-13 · reverify: `grep -n '_build_spec_spec_parser\|run_bootstrap_parse' perl/LinkedSpec/BootstrapSpec.pm`
 - "how does the JSON backend prove pluggability" -> [handler-ir-design](docs/knowledge/handler-ir-design.md) · 2026-06-14 · reverify: `grep -n 'kind =>' perl/LinkedSpec/HandlerVariantEmitter.pm | head -15`
+- "how does the Rust engine convert between byte and char offsets" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "how does the Rust engine emulate Perl IMATCH and LMATCH" -> [rust-entry-match-separation](docs/knowledge/rust-entry-match-separation.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'SavedMatchState\\|entry_groups\\|match_groups' linkedspec-runtime/src/engine.rs | head`
 - "how does the Rust engine propagate retv" -> [rust-retv-propagation](docs/knowledge/rust-retv-propagation.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'set_retv\\|return_value\\|fn execute_rule' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs`
 - "how does the Rust engine separate entry_* from match_*" -> [rust-entry-match-separation](docs/knowledge/rust-entry-match-separation.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'SavedMatchState\\|entry_groups\\|match_groups' linkedspec-runtime/src/engine.rs | head`
@@ -61,6 +65,7 @@
 - "is LinkedSpec still a plugin-hosting framework" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
 - "is LinkedSpec.pm the implementation center" -> [linkedspec-pm-is-thin-facade](docs/knowledge/linkedspec-pm-is-thin-facade.md) · 2026-06-05 · reverify: `wc -l perl/LinkedSpec.pm; test -f perl/LinkedSpec/OwnerDispatch.pm`
 - "is it safe to use LX on a repeated (AND+) rule" -> [andplusplus-lx-parser-hang](docs/knowledge/andplusplus-lx-parser-hang.md) · 2026-06-05 · reverify: `grep -n 'AND++LX' docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`
+- "is match_start_pos / entry_start_pos implemented in the Rust runtime" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "is push(Child) without an explicit target deprecated" -> [accumulator-convention-healthy](docs/knowledge/accumulator-convention-healthy.md) · 2026-06-12 · reverify: `grep -c 'push(Child)' specs/*.spec; grep -c 'push_value' specs/*.spec`
 - "is spec.spec the active frontend" -> [bootstrapspec-vs-spec-spec-dual-path](docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md) · 2026-06-13 · reverify: `grep -n '_build_spec_spec_parser\|run_bootstrap_parse' perl/LinkedSpec/BootstrapSpec.pm`
 - "is there a self-hosted .spec grammar" -> [spec-spec-self-hosted-grammar](docs/knowledge/spec-spec-self-hosted-grammar.md) · 2026-06-05 · reverify: `ls specs/spec.spec`
@@ -139,6 +144,7 @@
 - "why did phase0 fail on my new spec" -> [phase0-all-target-actionir-ready-invariant](docs/knowledge/phase0-all-target-actionir-ready-invariant.md) · 2026-06-05 · reverify: `grep -n language_agnostic_ready_ratio t/phase0_regression.t`
 - "why did scalar(retv) resolve to undef in the Rust runtime" -> [rust-retv-propagation](docs/knowledge/rust-retv-propagation.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'set_retv\\|return_value\\|fn execute_rule' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs`
 - "why did spec.spec hang while parsing" -> [andplusplus-lx-parser-hang](docs/knowledge/andplusplus-lx-parser-hang.md) · 2026-06-05 · reverify: `grep -n 'AND++LX' docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`
+- "why did substr panic on multibyte UTF-8 input in the Rust runtime" -> [rust-char-based-offsets](docs/knowledge/rust-char-based-offsets.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
 - "why do return_a return_m return_ma return_imatch still exist" -> [medium-term-alias-retirement-deferred](docs/knowledge/medium-term-alias-retirement-deferred.md) · 2026-06-12 · reverify: `grep -c 'return_a(' t/phase0_regression.t`
 - "why does the generated parser hang on an AND+ rule with LX" -> [andplusplus-lx-parser-hang](docs/knowledge/andplusplus-lx-parser-hang.md) · 2026-06-05 · reverify: `grep -n 'AND++LX' docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`
 - "why is .github/workflows/ci.yml guarded off (workflow_dispatch / if false)" -> [hosted-ci-disabled-run-local-gate](docs/knowledge/hosted-ci-disabled-run-local-gate.md) · 2026-06-05 · reverify: `grep -n 'workflow_dispatch' .github/workflows/ci.yml`
@@ -317,6 +323,15 @@ _RuntimeContext is one of the cleanest architectural boundaries; owns shared run
 - **evidence:** `perl/LinkedSpec/RuntimeContext.pm; spent by Runtime, ParserFactory, Compiler, SpecEntry; ARCHITECTURE_STATE.md calls it 'one of the cleanest and highest-value seams in the project'`
 - **reverify:** `grep -l 'RuntimeContext' perl/LinkedSpec/*.pm perl/LinkedSpec/RuleIR/*.pm | wc -l`
 - **source:** [`docs/knowledge/runtimecontext-boundary.md`](docs/knowledge/runtimecontext-boundary.md)
+
+### rust-char-based-offsets
+_Rust engine keeps internal positions as byte offsets but exposes char offsets to the DSL (Perl parity); substr/input_slice char-slice, cursor/match/entry positions and lengths convert via byte_to_char_offset_
+
+- **answers:** does the Rust engine use byte or char offsets | why did substr panic on multibyte UTF-8 input in the Rust runtime | are cursor_pos / match_start_pos / length char-based or byte-based in Rust | how does the Rust engine convert between byte and char offsets | is match_start_pos / entry_start_pos implemented in the Rust runtime | how does Rust match Perl's char-based positions
+- **date:** 2026-06-16 · **status:** confirmed
+- **evidence:** `RUST-PARITY.5.3 (2026-06-16): rust/linkedspec-runtime/src/engine.rs byte_to_char_offset/char_substr + substr/input_slice/cursor_*/capture_*/mark_pos/entry_*/match_*/length helpers; rust/linkedspec-runtime/src/runtime.rs entry_*/match_*_byte span fields. 196/196 tests green (189 baseline + 7 chars_5_3_*).`
+- **reverify:** `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'byte_to_char_offset\\|char_substr\\|match_start_byte' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs | head`
+- **source:** [`docs/knowledge/rust-char-based-offsets.md`](docs/knowledge/rust-char-based-offsets.md)
 
 ### rust-edge-semantics-bug
 _Rust -> edge dispatch is broken — associates edges with parent regexes instead of building dependency_regex_map from child rule regexes like Perl_

@@ -1,6 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.3: char-based offsets/slicing in the Rust engine
+
+Rust engine code (`rust/linkedspec-runtime/src/engine.rs`, `runtime.rs`). Closed the audit's
+byte-indexing MAJOR: `substr`/`input_slice` byte-sliced their DSL char-offset arguments (panicking
+on a multibyte UTF-8 boundary and diverging from Perl), cursor/capture lengths and columns were
+byte counts, and `entry_start_pos`/`match_start_pos` were hardcoded `0.0`. The regex engine works
+in byte offsets, but the Perl reference exposes char offsets (`pos()`/`length`/`substr` are
+char-based). Fix — keep internal positions byte-based, char-convert at the DSL boundary:
+- New `byte_to_char_offset(input, byte)` and `char_substr`/`char_substr_from` helpers.
+- `substr`/`input_slice` now char-slice (never panic on a multibyte boundary).
+- `cursor_pos`, `cursor_col` (char distance from last newline), `cursor_rest_len`, `input_len`,
+  `input_end_pos`, `capture_slice_len`/`_pos`, `mark_pos`, `entry_*_pos`/`entry_len`,
+  `match_*_pos`/`match_len`, and `length` now return char counts. Line numbers (newline counts)
+  were already byte/char-identical; only columns needed char counting.
+- `entry_start_pos`/`match_start_pos` are no longer hardcoded: `RuntimeContext` gains
+  `entry_start_byte`/`entry_end_byte`/`match_start_byte`/`match_end_byte` span fields (recorded
+  from the regex `m.start`/`m.end`), which join `SavedMatchState` so they save/restore per
+  invocation exactly like the `.5.2` match groups, with the entry span seeded by the same
+  dispatcher-vs-own-first-match rule.
+
+Because byte == char for ASCII, the 189-test baseline is untouched. Out of scope: the `.5.2`
+group-indexing item and the `entry_line`/`entry_col`/`match_line`/`match_col` arg-taking quirk
+(only `cursor` line/col was named in this leaf).
+
+**Validation:** `cargo test --manifest-path rust/Cargo.toml` = 196 passed / 0 failed (189 baseline
++ 7 new `chars_5_3_*` multibyte tests: substr no-panic, input_slice, cursor_pos, cursor_col,
+match_start_pos, entry_start_pos, length). `cargo clippy --manifest-path rust/Cargo.toml -p
+linkedspec-runtime --tests`: touched-file warning count identical to baseline (15) — zero new. New
+knowledge card `docs/knowledge/rust-char-based-offsets.md`. No book change (positions/lengths/`substr`
+are char-based in the documented `.spec` contract; Rust now conforms — Rust-parity book sync stays
+`RUST-PARITY.9`).
+
 ## 2026-06-16 — RUST-PARITY.5.2: separate entry_* from match_* in the Rust engine
 
 Rust engine code (`rust/linkedspec-runtime/src/engine.rs`). Closed the audit's match/entry-unification
