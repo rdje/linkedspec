@@ -34,6 +34,7 @@ PNT-eligible until explicitly activated or until the roadmap selects that lane.
 
 | Tree | Status | Roadmap lane | Proposed first leaf | File |
 | --- | --- | --- | --- | --- |
+| `SPEC-FORMAT-TERSE` | `proposed` | `Overall roadmap — .spec language evolution (terse format)` | `SPEC-FORMAT-TERSE.0` (ratify + ADR) | [docs/tasks/SPEC-FORMAT-TERSE.md](docs/tasks/SPEC-FORMAT-TERSE.md) |
 
 ## Completed Task Trees
 

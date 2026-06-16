@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — SPEC-FORMAT-TERSE: formalize the .spec terse-format brainstorm into a proposed task tree
+
+Documentation/task-tree only (no code). The 2026-06-15 `.spec` format-evolution brainstorm lived
+only in the KM card `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` (status `brainstorming`)
+— not task-tree owned, not a decision record, not pivotable. Created `docs/tasks/SPEC-FORMAT-TERSE.md`
+(status `proposed`, registered in `docs/TASK_TREE.md` Proposed table) that transcribes every Round 1–3
+decision faithfully into pickable leaves (`.0` ratify+ADR, `.1.1`–`.1.6` vars/types/mutation/renames/
+literals/array-methods, `.2.1`–`.2.3` control flow, `.3.1`–`.3.2` edges+arithmetic, `.4` resume Round 4+).
+Goals recorded: terse + dynamic-feeling **but still readable**; **all variants at full feature parity**
+(`.spec` is the universal contract — Perl reference first, then Rust/Julia/Dart in lockstep); the mdBook
+stays **variant-neutral/agnostic** (cross-links `MDBOOK-VARIANT-AGNOSTIC` + the multi-backend vision ADR).
+Parked: implementation deferred until the pre-existing `RTLUTILS-REGEX-HANG` is fixed (user directive).
+
 ## 2026-06-16 — RUST-PARITY.4 (superseded): WIP checkpoint of in-flight Rust exploration
 
 Preserves the 4 in-flight Rust files from the prior session as a durable WIP checkpoint
