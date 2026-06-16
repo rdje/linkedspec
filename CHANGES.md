@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — TASK-TREE-INDEX-SYNC.1: reconcile stale frontier column in docs/TASK_TREE.md
+
+Documentation/tracker only (no code). A fresh session-bootstrap pass found the `Active Task Trees`
+table in `docs/TASK_TREE.md` had drifted from the authoritative per-tree `## Current Frontier`
+sections: it listed `SPEC-SPEC-SELFHOST` frontier as `.2` (actually `.4` — `.2`+`.3` done) and
+`RUST-PARITY` as `.1` (actually `.5` — `.1/.2/.3` done, `.4` superseded). Root cause: prior leaf
+completions did not refresh the index row. Created a one-leaf owning tree
+`docs/tasks/TASK-TREE-INDEX-SYNC.md` (modelled on the completed `PLUGIN-ACTION-MIGRATION-STALE-REFERENCES`
+tree), fixed both frontier cells, and registered the tree in the `Completed Task Trees` table. The
+`MDBOOK-VARIANT-AGNOSTIC` row (`.1`) was already correct and left unchanged. Verification: index rows
+now match each tree's `## Current Frontier`; `scripts/check_memory_architecture.sh` exit 0.
+
 ## 2026-06-16 — SPEC-FORMAT-TERSE: formalize the .spec terse-format brainstorm into a proposed task tree
 
 Documentation/task-tree only (no code). The 2026-06-15 `.spec` format-evolution brainstorm lived
