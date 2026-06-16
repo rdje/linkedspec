@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `4ea4c89` — "Docs: push policy raised to every 300 commits (was 200)"   (ahead of origin: ~105; push at 300)
+- latest_commit: `5e025eb` — "TASK-TREE-INDEX-SYNC.1 — reconcile stale frontier index in docs/TASK_TREE.md"   (ahead of origin: ~106; push at 300)
 - active_work_unit: `MDBOOK-VARIANT-AGNOSTIC` → frontier leaf: `MDBOOK-VARIANT-AGNOSTIC.1` (pending — variant-agnostic audit)
 - next_action: complete `MDBOOK-VARIANT-AGNOSTIC.1` — full per-page audit of `docs/linkedspec-book/src/` for Perl-specific leakage vs the variant-agnostic mandate (Perl = reference; Rust/Julia/Dart variants), with a per-file remediation list; then `.2` overview chapters. Other live frontiers: `SPEC-SPEC-SELFHOST.4` (docs sync+finalize), `RUST-PARITY.5` (retv-propagation BLOCKER + match/entry split + missing helpers).
 - done: `TASK-TREE-INDEX-SYNC.1` — reconciled the stale `docs/TASK_TREE.md` frontier index (`SPEC-SPEC-SELFHOST` `.2`→`.4`, `RUST-PARITY` `.1`→`.5`); one-leaf owning tree created+completed, registered in the Completed table.
