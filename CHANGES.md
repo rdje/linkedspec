@@ -1,6 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.7: split into Perl↔Rust output-oracle sub-leaves (.7.1–.7.4)
+
+Tree structuring only (no code). PNT reached the broad `.7` leaf ("all 20 shipped specs
+exercised in Rust + corpus files + regression guard") and a two-agent read-only
+investigation (Rust test/corpus infra + Perl reference output path) confirmed it must be
+split (PNT splitting rules — bundles independently-reviewable work and discovers a
+lower-level dependency to solve first).
+
+Findings driving the split:
+- No oracle mechanism and no canonical cross-variant output form exist yet (the Rust
+  corpus is 4 inline tests; the Perl side has input fixtures for only ~3 specs).
+- Output-shape reconciliation is required: the Perl reference returns the top rule's value
+  **directly** (`tclite` `[]` → `["?tcl_script:",[["?command_subst:",[]]]]`; `Lispish`
+  `(x y)` → `["x",["y"]]`), whereas the Rust engine returns the accumulator **wrapped one
+  level** (`[<value>]`).
+- ~16 of the 20 specs have no input fixtures (authored inputs required).
+- The `RTLUtils` catastrophic-backtrack hang needs a hard-timeout guard in any
+  Perl-over-corpus run.
+
+Architecture (recorded as the split decision): the oracle is a **fixture generator**, not
+a live cross-process comparison — a timeout-guarded Perl tool emits canonical-JSON
+fixtures (`JSON::PP->canonical(1)`) into `rust/linkedspec-runtime/tests/corpus/`, and a
+Rust fixture-runner integration test compares `engine.execute(input)` against the
+checked-in fixtures. This keeps `cargo test` Perl-free and realizes ADR 0006 §Phase 8.6's
+language-neutral corpus. Sub-leaves: `.7.1` mechanism + canonical form + first proof
+(tclite/Lispish); `.7.2`/`.7.3` corpus batches; `.7.4` drift guard + finalize.
+
+Validation: documentation/task-tree only — `scripts/check_memory_architecture.sh` gates;
+no `cargo`/`prove` run warranted (no code touched). Frontier → `.7.1`.
+
 ## 2026-06-16 — RUST-PARITY.6: strict_syntax validation mode in the Rust variant
 
 Closes the audit's Gap 4 — the Rust validator had 6 hard checks but no strict mode. Brings
