@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `013f212` — "MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic"   (ahead of origin: ~113; push at 300; .4 hash pending REPO-HYGIENE sync)
+- latest_commit: `b898492` — "MDBOOK-VARIANT-AGNOSTIC.4 — reframe public-api chapters as variant-agnostic"   (ahead of origin: ~114; push at 300)
 - active_work_unit: `MDBOOK-VARIANT-AGNOSTIC` → frontier leaf: `MDBOOK-VARIANT-AGNOSTIC.5` (pending — remediate DSL + compiler/architecture chapters)
 - next_action: do `MDBOOK-VARIANT-AGNOSTIC.5` — per `.1` audit, the `dsl/*` pages are mostly CLEAN (helper-contract-catalog is the gold standard); the real work is the **compiler chapters** (`pipeline-overview`, `compiled-state-model`, `generated-handlers-and-dispatch`, `diagnostics` — Perl module names/line counts, `LinkedRE::or`, `JSON::PP`, `pos($$STRING)`, `$BACKEND`) and the **`architecture/owner-tree.md` LABEL** (~500 lines Perl owner narrative → reference-impl banner). Re-grep each page for genuine Perl-API, don't trust `.1` CLEAN tags blindly. Other live frontiers: `SPEC-SPEC-SELFHOST.4`, `RUST-PARITY.5` (retv BLOCKER).
 - done: `MDBOOK-VARIANT-AGNOSTIC.4` — reframed 4 public-api chapters (Option A per-chapter frames; resolved the Open Question): entry points/options/descriptor-shape/trace-model = backend-neutral contracts, concrete signatures/encodings/constants = Perl reference; `plugin-registry` deprecated/Perl-reference banner. `mdbook build` exit 0. (Prior: `.3` user-model reframe.)
