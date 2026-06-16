@@ -17,7 +17,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `5e025eb` — "TASK-TREE-INDEX-SYNC.1 — reconcile stale frontier index in docs/TASK_TREE.md"   (ahead of origin: ~106; push at 300)
+- latest_commit: `92d43ff` — "MDBOOK-VARIANT-AGNOSTIC.1 — complete variant-agnostic audit of the mdBook"   (ahead of origin: ~108; push at 300)
 - active_work_unit: `MDBOOK-VARIANT-AGNOSTIC` → frontier leaf: `MDBOOK-VARIANT-AGNOSTIC.2` (pending — remediate overview chapters)
 - next_action: do `MDBOOK-VARIANT-AGNOSTIC.2` — reframe overview chapters (what-is-linkedspec, design-rationale; verify documentation-layers/project-status) so the book treats the `.spec` file as the ONE universal contract and variants (Perl reference, Rust/Julia/Dart) as mere execution platforms. Per-file remediation map is in the task file's "## Audit Findings (.1)". Other live frontiers: `SPEC-SPEC-SELFHOST.4` (docs sync+finalize), `RUST-PARITY.5` (retv BLOCKER + match/entry split + missing helpers).
 - done: `MDBOOK-VARIANT-AGNOSTIC.1` — variant-agnostic audit of all 41 book pages; 3-way classification (CLEAN/REMEDIATE/LABEL) + per-leaf remediation map recorded in the task file. (Prior: `TASK-TREE-INDEX-SYNC.1` frontier-index reconcile.)
