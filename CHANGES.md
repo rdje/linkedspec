@@ -1,6 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.5: reframe DSL + compiler/architecture chapters as variant-agnostic
+
+Book documentation only (no code). Remediated the DSL + compiler/architecture mdBook chapters with
+the `.2`/`.3`/`.4` "demote, don't delete" convention: lead with the backend-neutral concept, label
+concrete Perl as the **Perl reference backend's** surface. Per the `MEMORY.md` directive, re-grepped
+all 14 in-scope pages for genuine Perl-API signals instead of trusting the `.1` CLEAN tags — which
+caught **3 leaks the `.1` audit mis-tagged CLEAN**: `dsl/fluent-and-block-forms.md` (`ControlFlow.pm`
++ generated-Perl `do { my $switch_var; my $hit_var; if … }`), `dsl/source-boundary-helper-reference.md`
+BACKTRACK section (`pos($$STRING) = $LSPOS - length $LMATCH` mechanics), and a backend-specific
+"current byte offset" in `dsl/action-model-and-helper-surface.md`. Changes: **Compiler (4)** —
+`pipeline-overview.md` (frame: the 7 pipeline stages are backend-neutral; `LinkedSpec::Validation`,
+`LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)` are the Perl reference realization),
+`compiled-state-model.md` (frame: the state records + field names are neutral; `sub { ... }` /
+`qr/.../` are the Perl encoding), `generated-handlers-and-dispatch.md` (frame: the dispatch model +
+the variant-builder→HandlerIR→backend-emitter seam are neutral — that seam is the multi-backend
+decoupling point — while `LinkedRE::or`, `HandlerVariantEmitter.pm`, `JSON::PP`, `pos`, `$BACKEND`
+are the Perl reference impl), `diagnostics.md` (frame: the structured `last_error` payload contract +
+owner/stage families are neutral; the `Get(..., runtime_ctx_ref => \%ctx)` capture + the
+`LinkedSpec::generated_handler:Top` label spelling are the Perl reference surface). **DSL (4)** —
+`actionir-lowering-mental-model.md` (frame: scan→split→canonicalize→lower→emit is neutral;
+`ActionIR::*` owner names/counts are the Perl reference; diagram `EmittedPerl`→`Emit`),
+`fluent-and-block-forms.md`, `source-boundary-helper-reference.md`,
+`action-model-and-helper-surface.md`. **Architecture (1)** — `owner-tree.md` got a "Perl reference
+implementation" banner (LABEL; content kept per Non-Goals). 5 pages confirmed genuinely CLEAN
+(`declaration-helper-reference` already frames raw Perl as the legacy form;
+`capture-marks-and-source-locations`, `value-container-flow-helper-reference`,
+`values-containers-and-flow-helpers`, `action-and-lifecycle-placement`). Also reconciled the stale
+`docs/TASK_TREE.md` index row for this tree (`.2`→`.6`). Verification: `mdbook build` exit 0 (no
+warnings); `scripts/check_memory_architecture.sh` exit 0. Frontier advanced `.5`→`.6` (appendix +
+corpus walkthroughs).
+
 ## 2026-06-16 — MDBOOK-VARIANT-AGNOSTIC.4: reframe public-api chapters as variant-agnostic
 
 Book documentation only (no code). Remediated the 4 mdBook public-api chapters with per-chapter

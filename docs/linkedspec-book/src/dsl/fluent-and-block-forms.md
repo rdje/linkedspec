@@ -286,8 +286,9 @@ LX {
 
 ## Equivalence guarantee
 
-Every form in this chapter lowers through the same `ControlFlow.pm` lowering pipeline and
-produces equivalent generated code. Specifically:
+Every form in this chapter lowers through the same control-flow lowering pipeline and
+produces equivalent generated code (in the Perl reference backend, that pipeline is the
+`ControlFlow` lowering owner). Specifically:
 
 - **Marker-style `if/endif`** and **attached-block `if { }`** produce identical branch
   structure — the attached block is syntactic sugar that emits the closing `}` at the next
@@ -296,8 +297,9 @@ produces equivalent generated code. Specifically:
 - **Inline composite `if(cond, body, elseif(cond2, body2))`** produces a `do { if ... }`
   block identical in effect to the marker-style chain.
 
-- **Marker-style `switch/endswitch`** produces `do { my $switch_var; my $hit_var; if ... }`
-  identical to the inline composite form.
+- **Marker-style `switch/endswitch`** produces the same lowered branch structure as the
+  inline composite form (in the Perl reference backend, a `do { my $switch_var; my $hit_var;
+  if ... }` block).
 
 - **Fluent chains** (`.if(...)`, `.declare(...)`, `.return(...)`) produce the same
   statements as the equivalent structured-block content — the dot-separated chain is

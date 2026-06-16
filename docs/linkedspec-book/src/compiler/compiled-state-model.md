@@ -2,6 +2,8 @@
 
 The compiler is moving toward explicit state models rather than loose historical parallel hashes.
 
+The state records and field names in this chapter — `compiled_spec_state`, `compiled_dependency_regex_state`, `compiled_descriptor_state`, and fields like `definition_order`, `compiled_rule_order`, `rules_by_label`, `redefined_rule_labels`, and `dependency_refs` — are a **backend-neutral** description of the compiler's internal model. The example shapes below use Perl encodings (`sub { ... }` for a compiled handler value, `qr/.../` for a compiled regex); those encodings are the **Perl reference backend's** representation, and another backend holds the same model in its own language's types.
+
 ## Current active internal models
 
 The active architecture now talks in terms of:

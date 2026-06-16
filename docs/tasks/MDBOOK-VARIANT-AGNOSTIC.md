@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16` (`.4` done)
+- Last updated: `2026-06-16` (`.5` done)
 - Owner: repo-local workflow
 
 ## Goal
@@ -74,11 +74,11 @@ minimized in user-facing chapters and clearly labeled when present.
   Commit: `MDBOOK-VARIANT-AGNOSTIC.4 — reframe public-api chapters as variant-agnostic (entry points/options/trace/descriptor = contract; Perl = reference surface)`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.5`
-  Status: `pending`
+  Status: `done`
   Goal: Remediate DSL and compiler/architecture chapters — action-model, lowering, helpers, pipeline, state-model, handlers, diagnostics, owner-tree
   Acceptance: DSL chapters use backend-neutral contract language; architecture chapters distinguish concept from Perl implementation
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `done` — re-grepped all 14 in-scope pages for genuine Perl-API signals (did NOT trust `.1` CLEAN tags blindly); caught 3 leaks the `.1` audit had tagged CLEAN: `fluent-and-block-forms.md` (`ControlFlow.pm` + generated-Perl `do { my $switch_var; my $hit_var; if … }`), `source-boundary-helper-reference.md` BACKTRACK section (`pos($$STRING) = $LSPOS - length $LMATCH` mechanics), and a backend-specific "current byte offset" in `action-model-and-helper-surface.md`. Applied the `.2`/`.3`/`.4` demote-don't-delete convention. **Compiler (4):** `pipeline-overview.md` (frame: 7 stages backend-neutral; `LinkedSpec::Validation`/`Get`/`Runtime::run_get`/`pos($$input_ref)` = Perl reference), `compiled-state-model.md` (frame: state records + fields neutral; `sub {…}`/`qr/.../` = Perl encoding), `generated-handlers-and-dispatch.md` (frame: dispatch model + variant-builder→HandlerIR→backend-emitter seam neutral and = the multi-backend decoupling point; `LinkedRE::or`/`HandlerVariantEmitter.pm`/`JSON::PP`/`pos`/`$BACKEND` = Perl reference), `diagnostics.md` (frame: structured `last_error` contract + owner/stage families neutral; `Get(..., runtime_ctx_ref)` + `LinkedSpec::generated_handler:Top` spelling = Perl reference). **DSL (3):** `actionir-lowering-mental-model.md` (frame: scan→split→canonicalize→lower→emit neutral; `ActionIR::*` owner names/counts = Perl reference; diagram `EmittedPerl`→`Emit`), `fluent-and-block-forms.md`, `source-boundary-helper-reference.md`, `action-model-and-helper-surface.md` ("byte offset"→"cursor position"). **Architecture (1):** `owner-tree.md` — added a "Perl reference implementation" banner (LABEL; content kept per Non-Goals). Confirmed genuinely CLEAN: `declaration-helper-reference` (raw Perl already framed as the legacy form), `capture-marks-and-source-locations`, `value-container-flow-helper-reference`, `values-containers-and-flow-helpers`, `action-and-lifecycle-placement`. `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0.
+  Commit: `MDBOOK-VARIANT-AGNOSTIC.5 — reframe DSL + compiler/architecture chapters as variant-agnostic`
 
 - ID: `MDBOOK-VARIANT-AGNOSTIC.6`
   Status: `pending`
@@ -98,11 +98,10 @@ minimized in user-facing chapters and clearly labeled when present.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `MDBOOK-VARIANT-AGNOSTIC.5` | `pending` | DSL chapters mostly CLEAN; real work = compiler chapters + owner-tree LABEL |
-| 2 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
-| 3 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
+| 1 | `MDBOOK-VARIANT-AGNOSTIC.6` | `pending` | Appendix (mostly LABEL) + the 6 corpus walkthroughs (Perl driver blocks) |
+| 2 | `MDBOOK-VARIANT-AGNOSTIC.7` | `pending` | Final build + cross-chapter consistency + docs sync |
 
-(`.1`, `.2`, `.3`, `.4` complete — removed from frontier.)
+(`.1`, `.2`, `.3`, `.4`, `.5` complete — removed from frontier.)
 
 ## Audit Findings (.1)
 
@@ -205,6 +204,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.2` | remediated 5 overview pages; `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.3` | remediated 4 user-model pages (1 confirmed CLEAN); caught a `.1` audit miss (`rule-modes-and-parse-modes.md` had a real Perl-API block); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 | `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.4` | remediated all 4 public-api pages (Option A frames); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
+| `2026-06-16` | `MDBOOK-VARIANT-AGNOSTIC.5` | re-grepped all 14 in-scope pages (caught 3 leaks `.1` tagged CLEAN); remediated 4 compiler + 4 DSL pages + 1 architecture banner (5 confirmed CLEAN); `mdbook build` exit 0 (no warnings); `scripts/check_memory_architecture.sh` exit 0 | PASS |
 
 ## Commit Log
 
@@ -214,6 +214,7 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
 | `MDBOOK-VARIANT-AGNOSTIC.2` | `MDBOOK-VARIANT-AGNOSTIC.2 — reframe overview chapters as variant-agnostic (.spec = universal contract; Perl = reference backend)` | 5 overview pages remediated; frontier advanced to `.3` |
 | `MDBOOK-VARIANT-AGNOSTIC.3` | `MDBOOK-VARIANT-AGNOSTIC.3 — reframe user-model chapters as variant-agnostic (.spec contract first; Perl = reference backend)` | 4 user-model pages remediated (+1 confirmed CLEAN); audit miss corrected; frontier advanced to `.4` |
 | `MDBOOK-VARIANT-AGNOSTIC.4` | `MDBOOK-VARIANT-AGNOSTIC.4 — reframe public-api chapters as variant-agnostic (entry points/options/trace/descriptor = contract; Perl = reference surface)` | 4 public-api pages remediated (Option A); Open Question resolved; frontier advanced to `.5` |
+| `MDBOOK-VARIANT-AGNOSTIC.5` | `MDBOOK-VARIANT-AGNOSTIC.5 — reframe DSL + compiler/architecture chapters as variant-agnostic` | 4 compiler + 4 DSL pages reframed + `owner-tree` banner; 3 `.1`-CLEAN misses caught; frontier advanced to `.6` |
 
 ## Changelog
 
@@ -239,3 +240,13 @@ Corrected scope note: leaf `.1` originally estimated "27 source files"; the book
   signatures/encodings/constants/state vars are the Perl reference surface; `plugin-registry`
   got a "Perl reference backend, deprecated — not part of the `.spec` contract" banner.
   `mdbook build` exit 0. Frontier advanced to `.5`.
+- `2026-06-16`: Completed `.5` — reframed the DSL + compiler/architecture chapters. Re-grepped
+  all 14 in-scope pages rather than trusting the `.1` CLEAN tags, and caught 3 genuine Perl-API
+  leaks the audit had mis-tagged CLEAN (`fluent-and-block-forms` `ControlFlow.pm`/`do { … }`,
+  `source-boundary-helper-reference` BACKTRACK `pos($$STRING) = …` mechanics, `action-model-and-helper-surface`
+  "byte offset"). Compiler 4 (`pipeline-overview`, `compiled-state-model`,
+  `generated-handlers-and-dispatch`, `diagnostics`) + DSL 4 (`actionir-lowering-mental-model`,
+  `fluent-and-block-forms`, `source-boundary-helper-reference`, `action-model-and-helper-surface`)
+  got backend-neutral frames demoting concrete Perl behind a "Perl reference backend" label;
+  `architecture/owner-tree` got a "Perl reference implementation" banner (content kept per
+  Non-Goals). 5 pages confirmed genuinely CLEAN. `mdbook build` exit 0. Frontier advanced to `.6`.

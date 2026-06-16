@@ -24,6 +24,8 @@ source .spec text
   -> outward descriptor or parser coderef
 ```
 
+The seven stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
+
 ## Why the pipeline matters
 
 Understanding the pipeline helps explain:
@@ -33,7 +35,7 @@ Understanding the pipeline helps explain:
 - how runtime/context metadata is preserved
 - why internal state models exist
 
-It also makes clear that LinkedSpec is no longer best understood as one giant monolithic `LinkedSpec.pm` script.
+It also makes clear that the reference implementation is no longer best understood as one giant monolithic script (historically the Perl backend's `LinkedSpec.pm`).
 
 ## Stage 1: prepare the compile pipeline
 
@@ -52,7 +54,7 @@ The preparation stage also makes diagnostics better. If an invalid option or mal
 
 ## Stage 2: validate the source envelope
 
-Before bootstrap parsing, LinkedSpec validates obvious `.spec` source-shape problems through `LinkedSpec::Validation` (1,368 lines, the largest single-purpose validation owner).
+Before bootstrap parsing, LinkedSpec validates obvious `.spec` source-shape problems through a dedicated validation owner (in the Perl reference backend, `LinkedSpec::Validation` — 1,368 lines, its largest single-purpose validation owner).
 
 This stage exists to reject malformed input early and clearly. The validation owner provides three layers of defense:
 
@@ -134,7 +136,7 @@ When validation fails, the compiler can preserve structured attribution such as:
 
 ## Stage 8: project descriptor or return parser
 
-The final public result depends on options.
+The final public result depends on options. The entry point shown below (`LinkedSpec::Get(...)`) is the Perl reference backend's surface — see [`Get(...)` and `get_parser(...)`](../public-api/get-and-get-parser.md) for the backend-neutral roles and options.
 
 Default behavior returns a parser coderef:
 
@@ -155,4 +157,4 @@ The outward descriptor is not the compiler’s only internal truth. It is a publ
 
 ## Runtime wrapper
 
-`Runtime::run_get` wraps parser invocation with a comment and blank-line skip loop. Before each match attempt the wrapper advances `pos($$input_ref)` past any leading whitespace-only lines or `#`-to-end-of-line comment lines, so grammar rules do not need to handle these themselves. This skip wrapper is applied at runtime on every generated handler invocation, keeping the grammar surface clean.
+Parser invocation is wrapped with a comment and blank-line skip loop. Before each match attempt the wrapper advances the cursor past any leading whitespace-only lines or `#`-to-end-of-line comment lines, so grammar rules do not need to handle these themselves. This skip wrapper is applied at runtime on every generated handler invocation, keeping the grammar surface clean. (In the Perl reference backend this is `Runtime::run_get` advancing `pos($$input_ref)`.)

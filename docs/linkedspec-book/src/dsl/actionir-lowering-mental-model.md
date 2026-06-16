@@ -96,6 +96,8 @@ Then move into the more specialized helper families as needed.
 
 ## The lowering pipeline
 
+The lowering *pipeline* — discover which helper contracts are present, split statements, canonicalize helpers into ActionIR events, then dispatch each to a lowering owner before emitting backend code — is a **backend-neutral** sequence. The specific owner module names and counts in this section (`ActionIR::Scanner`, `ScannerCore`, `StatementSplit`, `CanonicalEvents`, `RewritePipeline`, the per-family lowering owners, and `ActionIR::Contracts` with its 2,110 lines / 158 contracts) are the **Perl reference backend's** realization of those stages; another backend organizes the same scan → split → canonicalize → lower → emit flow in its own modules.
+
 ActionIR lowering is not one monolithic pass. It flows through a pipeline of owners, each responsible for one stage:
 
 ```text
@@ -105,7 +107,7 @@ source rule paragraph text
   -> CanonicalEvents (normalize helpers into canonical ActionIR)
   -> RewritePipeline (glue scan/classify/lower phases)
   -> FlowExpr / ValueExpr / ControlFlow / MethodLowering / DeclareMethod / ArrayPipeline
-  -> EmittedPerl (final backend code generation)
+  -> Emit (final backend code generation — Perl in the reference backend)
 ```
 
 ### Scanner

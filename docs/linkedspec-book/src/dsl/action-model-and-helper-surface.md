@@ -110,7 +110,7 @@ Read the parser's current position in the input:
 
 - `cursor_line()` — current line number
 - `cursor_col()` — current column
-- `cursor_pos()` — current byte offset
+- `cursor_pos()` — current cursor position (an offset into the input)
 - `entry_start_pos()` — start position of the entry match
 - `match_end_col()` — end column of the current match
 

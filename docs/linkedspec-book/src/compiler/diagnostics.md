@@ -2,6 +2,8 @@
 
 Diagnostics are a first-class part of LinkedSpec’s architecture, not just an afterthought.
 
+The diagnostics **contract** described in this chapter is backend-neutral: the structured `last_error` payload and its fields (`type`, `stage`, `owner_stage`, `summary`, `detail`, `top_rule`, `rule_label`, `handler_source_label`, `spec_name`, `spec_path`), the owner/stage families, and rule-plus-handler attribution are part of the `.spec` execution contract every backend should preserve. The concrete capture mechanism shown (`LinkedSpec::Get(..., runtime_ctx_ref => \%ctx)`) and the `LinkedSpec::generated_handler:Top` label spelling are the **Perl reference backend's** surface; another backend exposes the same structured failure information in its own language.
+
 ## What the project is aiming for
 
 - deterministic validation failures

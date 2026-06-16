@@ -1,5 +1,13 @@
 # Owner Tree and Module Boundaries
 
+> **Perl reference implementation.** This chapter documents the concrete module/owner
+> architecture of the **Perl reference backend** — the package boundaries, the lazy owner
+> tree, and the dispatch seams that realize LinkedSpec in Perl. It is the reference
+> implementation's internal structure, **not** part of the backend-neutral `.spec` contract:
+> another backend (for example the Rust variant) organizes its own internals differently
+> while honoring the same `.spec` semantics. The owner names, file paths, and line counts
+> below describe that Perl implementation.
+
 LinkedSpec is no longer best understood as one large `LinkedSpec.pm` file.
 
 The active architecture is deliberately owner-oriented: each important package is expected to own one part of the system, and cross-owner calls should make that ownership visible.
