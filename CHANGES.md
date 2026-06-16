@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-16 — RUST-PARITY.5.1: fix child-return (retv) propagation in the Rust engine
+
+Rust engine code (`rust/linkedspec-runtime/`). Closed the retv-propagation BLOCKER (the audit's
+top-priority finding): after `->`/`=>` dispatch a parent could not read the child's `return(expr)`
+value as `scalar(retv)` — it resolved to undef — so virtually every real grammar yielded null/wrong
+output. Root cause: the engine shares one `RuntimeContext`, `execute_rule` returned `Result<(), String>`
+(no value channel), `return(expr)` only pushed the single shared accumulator, and `set_retv` was dead
+code. Fix: (1) `RuntimeContext` gains a per-invocation `return_value: Option<RuntimeValue>` channel
+(`set_return_value`/`take_return_value`/`restore_return_value`); (2) `execute_rule` now returns
+`Result<RuntimeValue, String>` — it clears the channel on entry (saving the caller's pending return) and
+reads+restores it on exit, so each invocation reports its own last `return(...)` (Runtime Semantics §5.4)
+and nested dispatch is transparent; (3) both acode (`->`) and bcode (`=>`) dispatch sites now call
+`ctx.set_retv(child_retv)` after dispatching, so the parent's attached code / `LE` / `E` read the child
+result as `scalar(retv)` (§3.3/§6.1); (4) `return(expr)` records the channel **and** still pushes the
+accumulator, so `execute()`'s accumulator-return contract — and the 182-test baseline — is untouched. The
+dead `set_retv` is now wired in (completed, not removed). Also fixed a latent `call(child)` bug: it
+resolved the rule name from the *evaluated* arg, but a bare `call(RuleName)` evaluates to undef, so it
+never resolved a bare rule — added `resolve_rule_name` (mirrors `resolve_array_target`) so `call(child)`
+returns the child value, enabling the reference pattern `assign(s(retv), call(child))`
+(`specs/tablegrep.spec`). 4 new integration tests cover retv across action edges (OR/default), blind-call
+edges (AND), repetition (REP), and the `call` helper. Validation: `cargo test --manifest-path
+rust/Cargo.toml` = 186 passed / 0 failed (182 baseline + 4 new); `cargo clippy` adds zero new
+`linkedspec-runtime` warnings (lib stays at 16 pre-existing `doc_lazy_continuation` lints). No book change:
+the documented `.spec` contract already specifies retv; the Rust backend now conforms (Rust-parity book
+sync is `RUST-PARITY.9`). Active frontier → `RUST-PARITY.5.2` (separate `match_*` from `entry_*`).
+
 ## 2026-06-16 — MDBOOK-FORMAT-CORRECTNESS.3: finalize; close the format-correctness tree
 
 Documentation only (no code). Closed the MDBOOK-FORMAT-CORRECTNESS tree. Added a DEVELOPMENT_NOTES

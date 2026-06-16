@@ -72,11 +72,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Note: Split from a single broad leaf (PNT rule 5 — too broad for one signoff slice). The 3-agent audit in Decisions is the implementation spec. Sequenced retv-first because it gates correct output for nearly every grammar. The "0/20 runtime-tested corpus" gap stays in `.7` (test-corpus breadth).
 
 - ID: `RUST-PARITY.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Fix the child-return (retv) propagation BLOCKER
   Acceptance: After `->`/`=>` dispatch, the child rule's `return(expr)` value is propagated to the parent and readable as `retv` (so `scalar(retv)` in an `LE` block resolves to the child result, not undef); the half-built dead `set_retv` is completed or removed; new regression tests cover retv-in-LE across AND/OR/REP dispatch; `cargo test` + `cargo clippy` clean; the 182-test baseline stays green.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-16. `execute_rule` now returns `Result<RuntimeValue, String>` (the rule's own return value, via a per-invocation save/restore channel in `RuntimeContext`); both `->` (acode) and `=>` (bcode) dispatch sites call `ctx.set_retv(child_retv)` after dispatching, so the parent's attached code / `LE` / `E` read the child result as `scalar(retv)`. `return(expr)` records the channel (still pushes the accumulator — `execute()`'s contract). The dead `set_retv` is now wired in (completed, not removed). `call(child)` returns the child's value and resolves a bare rule-name arg (latent bug fixed — enables the `assign(s(retv), call(child))` reference pattern). 4 new integration tests (acode/OR, blind-call/AND, REP, `call`). `cargo test` = 186 passed (182 baseline + 4), 0 failed; `cargo clippy` adds zero new warnings to `linkedspec-runtime` (lib stays at 16 pre-existing `doc_lazy_continuation` lints).
+  Commit: `RUST-PARITY.5.1` (see Commit Log)
 
 - ID: `RUST-PARITY.5.2`
   Status: `pending`
@@ -139,11 +139,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `RUST-PARITY.4` | `superseded` | Rust-self-hosting on spec.spec dropped; parity = reproducing BootstrapSpec::Core output (see Decisions audit) |
-| 1 | `RUST-PARITY.5.1` | `pending` | The retv-propagation BLOCKER — gates correct output for nearly every grammar; do first |
-| 2 | `RUST-PARITY.5.2` | `pending` | match_*/entry_* split |
-| 3 | `RUST-PARITY.5.3` | `pending` | char-based indexing + cursor line/col |
-| 4 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
-| 5 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
+| — | `RUST-PARITY.5.1` | `done` | retv-propagation BLOCKER fixed (2026-06-16); child return now readable as `scalar(retv)` after `->`/`=>`/REP dispatch |
+| 1 | `RUST-PARITY.5.2` | `pending` | match_*/entry_* split (now the retv channel is in place) |
+| 2 | `RUST-PARITY.5.3` | `pending` | char-based indexing + cursor line/col |
+| 3 | `RUST-PARITY.5.4` | `pending` | dedupe match arms + REP zero-progress guard |
+| 4 | `RUST-PARITY.5.5` | `pending` | ~30 missing helpers + real aliases |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.6`–`.9` unchanged below it.)
 
@@ -161,6 +161,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   - MAJOR: 0/20 shipped specs are runtime-tested in Rust (compile-only) — need a Perl↔Rust output oracle corpus.
 - `2026-06-16` (`.4` superseded): in-flight exploration toward `.4` committed as a WIP checkpoint (handoff decision) to preserve it durably; it is NOT signoff (`parse_inline_body` conditional-capture bug, dead `set_retv`, leftover debug `eprintln!`). Fold/clean into the real follow-on above.
 - `2026-06-16` (`.5` split): `.5` was a single broad leaf bundling six independently-reviewable audit findings; split into `.5.1`–`.5.5` (the runtime-corpus oracle gap stays in `.7`). The 3-agent audit above is the implementation spec for each child. retv-first because it gates correct output for nearly every grammar. Rust baseline confirmed green (182 tests, 0 failed) before the split.
+- `2026-06-16` (`.5.1` implementation): retv BLOCKER fixed. **Design:** the Rust engine shares one `RuntimeContext` and `execute_rule` previously returned `Result<(), String>` — no value channel — so a child's `return(expr)` went only to the single shared accumulator and `set_retv` was dead. Fix: (1) added a per-invocation `return_value: Option<RuntimeValue>` to `RuntimeContext` with `set_return_value`/`take_return_value`/`restore_return_value`; (2) `execute_rule` now returns `Result<RuntimeValue, String>` — it `take`s the channel on entry (saving the caller's pending return) and reads+restores it on exit, so each invocation reports exactly its own last `return(...)` (Runtime Semantics §5.4) and nested dispatch is transparent; (3) after both `->` (acode) and `=>` (bcode) dispatch the engine calls `ctx.set_retv(child_retv)`, so the parent's attached code / `LE` / `E` read the child result as `scalar(retv)` (§3.3/§6.1); (4) `return(expr)` records the channel **in addition to** pushing the accumulator — the accumulator stays `execute()`'s return contract, so the 182-test baseline is untouched. **Wired the dead `set_retv` in** (completed, not removed). **Latent bug found + fixed while here:** `call(child)` resolved the rule name from the *evaluated* arg, but a bare `call(RuleName)` evaluates to undef (a label is not a scalar) — so `call` never resolved a bare rule. Added `resolve_rule_name` (mirrors `resolve_array_target`) so `call(child)` returns the child's value, enabling the Perl reference pattern `assign(s(retv), call(child))` (`specs/tablegrep.spec`). Zero runtime-crate `call(` uses existed, so zero baseline risk. **Book:** no change — the documented `.spec` contract already specifies retv (`appendix/runtime-semantics.md` §3.3/§6.1); the Rust backend now conforms. Rust-parity book sync remains `.9`.
 
 ## Open Questions
 
@@ -175,6 +176,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-16` | `RUST-PARITY.1` | Full audit: Rust sources (`engine.rs:1984`, `helpers.rs:470`, `compiler.rs`, `parser.rs`, `validation.rs`) vs Perl lowering owners (`ControlFlow.pm`, `MethodLowering.pm`, `ValueExpr.pm`, `FlowExpr.pm`, `Contracts.pm`) | Done — 6 gap categories, 84/100+ helpers implemented |
+| `2026-06-16` | `RUST-PARITY.5.1` | `cargo test --manifest-path rust/Cargo.toml` (all binaries); `cargo clippy --manifest-path rust/Cargo.toml` (linkedspec-runtime delta) | 186 passed / 0 failed (182 baseline + 4 new retv tests: acode/OR, blind-call/AND, REP, `call`); clippy adds zero new linkedspec-runtime warnings (lib stays at 16 pre-existing `doc_lazy_continuation`) |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -221,10 +223,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `pending` | `pending` | `pending` |
+| `RUST-PARITY.5.1` | `RUST-PARITY.5.1 — fix child-return (retv) propagation in the Rust engine` | engine.rs + runtime.rs + 4 integration tests; 186/186 green |
 
 ## Changelog
 
 - `2026-06-16`: Created task tree.
 - `2026-06-16`: `.4` (Rust self-hosting on spec.spec) marked `superseded` — wrong target; spec.spec rewritten on the Perl side under `SPEC-SPEC-SELFHOST`. Recorded the 3-agent parity audit (real follow-on). Committed in-flight Rust exploration (expr/parser/runtime/helpers) as a WIP checkpoint.
 - `2026-06-16`: Split `.5` (PNT rule 5 — too broad for one signoff slice) into `.5.1` retv-propagation BLOCKER fix, `.5.2` match/entry split, `.5.3` char-based indexing + cursor line/col, `.5.4` dedupe match arms + REP zero-progress guard, `.5.5` ~30 missing helpers + real aliases. Sequenced retv-first. Confirmed the Rust baseline green (182 tests, 0 failed) before splitting. Frontier → `.5.1`. No code change (tree structuring only).
+- `2026-06-16`: `.5.1` done — fixed the child-return (retv) propagation BLOCKER. `execute_rule` now returns the rule's value via a per-invocation channel; `->`/`=>` dispatch set `retv` to the child return; `return(...)` feeds the channel without disturbing the accumulator contract; `call(child)` now resolves a bare rule name and returns the child value. 4 new integration tests (acode/OR, blind-call/AND, REP, `call`); `cargo test` 186/186; clippy adds no new warnings. Frontier → `.5.2` (match_*/entry_* split).

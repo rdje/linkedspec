@@ -67,11 +67,17 @@ impl Engine {
         label: &str,
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
-    ) -> Result<(), String> {
+    ) -> Result<RuntimeValue, String> {
         let rule = self
             .spec
             .find(label)
             .ok_or_else(|| format!("rule '{}' (entry idx {}) not found in compiled spec", label, entry_regex_idx))?;
+
+        // Each rule invocation reports its own return value (the value of the
+        // last `return(...)` in its blocks — Runtime Semantics §5.4). Save the
+        // caller's pending return, then start this invocation with a clean
+        // channel so a dispatched child cannot leak its return into ours.
+        let caller_return = ctx.take_return_value();
 
         // Build regex alternation (or fallback for edge-only rules)
         let alt = if rule.regex_patterns.is_empty() {
@@ -88,8 +94,11 @@ impl Engine {
         // ── Blind-call dispatch (AND rules) ──
         if !rule.bcode_dispatch.is_empty() {
             for entry in &rule.bcode_dispatch {
-                // Execute child rule
-                self.execute_rule(&entry.child_label, 0, ctx)?;
+                // Execute child rule; its return value becomes the parent's
+                // `retv` (Runtime Semantics §6.2), readable by the attached
+                // code, fluent chain, and the E-block below.
+                let child_retv = self.execute_rule(&entry.child_label, 0, ctx)?;
+                ctx.set_retv(child_retv);
                 // Execute attached code if present
                 if let Some(ref block) = entry.code {
                     self.execute_block(block, ctx, label)?;
@@ -110,7 +119,9 @@ impl Engine {
             if let Some(ref ecode) = rule.ecode {
                 self.execute_block(ecode, ctx, label)?;
             }
-            return Ok(());
+            let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+            ctx.restore_return_value(caller_return);
+            return Ok(my_return);
         }
 
         // ── Regex-based matching loop ──
@@ -176,12 +187,16 @@ impl Engine {
                 // ── Action-edge dispatch ──
                 for entry in &rule.acode_dispatch {
                     if entry.regex_idx == m.index {
-                        // Use child_regex_idx for multi-entrypoint support
-                        self.execute_rule(
+                        // Use child_regex_idx for multi-entrypoint support.
+                        // The child's return value becomes the parent's `retv`
+                        // (Runtime Semantics §3.3 / §6.1), readable by the
+                        // attached code below and the LE-block after the loop.
+                        let child_retv = self.execute_rule(
                             &entry.child_label,
                             entry.child_regex_idx,
                             ctx,
                         )?;
+                        ctx.set_retv(child_retv);
                         // Execute attached code if present
                         if let Some(ref block) = entry.code {
                             self.execute_block(block, ctx, label)?;
@@ -241,7 +256,11 @@ impl Engine {
             self.execute_block(ecode, ctx, label)?;
         }
 
-        Ok(())
+        // This invocation's return value is whatever its blocks last returned;
+        // restore the caller's pending return so nested dispatch is transparent.
+        let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+        ctx.restore_return_value(caller_return);
+        Ok(my_return)
     }
 
     /// Execute a lifecycle code block (parsed expression tree).
@@ -366,6 +385,24 @@ impl Engine {
             }
         }
         val.to_str()
+    }
+
+    /// Resolve a child rule name from the first arg of a `call(...)` helper.
+    ///
+    /// A bare `call(RuleName)` names the target rule directly — its evaluated
+    /// value would be undef (a rule label is not a scalar variable), so the name
+    /// must come from the raw AST. Falls back to the evaluated value's
+    /// `to_str()` for the quoted form `call(scalar("RuleName"))`.
+    fn resolve_rule_name(
+        &self,
+        raw_args: &[linkedspec_core::expr::Arg],
+        val: Option<&RuntimeValue>,
+    ) -> String {
+        use linkedspec_core::expr::{Arg, Expr};
+        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.first() {
+            return name.clone();
+        }
+        val.map(|v| v.to_str()).unwrap_or_default()
     }
 
     /// Dispatch a lazy-evaluation call (if/switch/elseif/else/case/default).
@@ -524,7 +561,11 @@ impl Engine {
             }
             "return" => {
                 if let Some(val) = args.first() {
+                    // Preserve the accumulator contract (execute() returns it)…
                     ctx.push_accumulator(val.clone());
+                    // …and record this rule's return value so a parent can read
+                    // it as `retv` after dispatch (Runtime Semantics §5.4).
+                    ctx.set_return_value(val.clone());
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -555,9 +596,14 @@ impl Engine {
                 }
             }
             "call" => {
-                if let Some(arg) = args.first() {
-                    let child = arg.to_str();
-                    self.execute_rule(&child, 0, ctx)?;
+                // `call(child)` evaluates to the child's return value, so
+                // `assign(s(retv), call(child))` captures it — the Perl
+                // reference pattern (see specs/tablegrep.spec). The child rule
+                // name comes from the raw arg (a bare label is not a scalar).
+                let child = self.resolve_rule_name(raw_args, args.first());
+                if !child.is_empty() {
+                    let child_retv = self.execute_rule(&child, 0, ctx)?;
+                    return Ok(child_retv);
                 }
                 Ok(RuntimeValue::Undef)
             }

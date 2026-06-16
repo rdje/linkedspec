@@ -425,3 +425,121 @@ fn regression_self_recursive_edge_only_compiler_output() {
     assert!(!rule.acode_dispatch[1].has_parent_regex);
     assert_eq!(rule.acode_dispatch[1].regex_idx, 1);
 }
+
+// ── RUST-PARITY.5.1 regression tests — child-return (retv) propagation ──
+//
+// Before the fix, a child rule's `return(expr)` only pushed onto the shared
+// accumulator and `execute_rule` never set a `retv` scalar, so `scalar(retv)`
+// in a parent block resolved to undef. These tests pin retv propagation across
+// action edges (`->`, OR/default), blind-call edges (`=>`, AND), repetition
+// (REP), and the `call(child)` helper. `execute()` returns the accumulator, so
+// each parent pushes its collected array last — we read `acc.last()`.
+
+// (a) Action edge: `-> Child` must set the parent's retv to the child's return,
+// readable in the parent's LE-block.
+#[test]
+fn retv_5_1_action_edge_propagates_child_return_into_le() {
+    let grammar = r#"Parent::
+ /open/ -> Child
+ I { declare(array, results) }
+ LE { push_value(array(results), scalar(retv)) }
+ E { return(array_copy(array(results))) }
+
+Child:
+ /close/
+ E { return(scalar("child_value")) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("open").unwrap();
+    let acc: &Vec<Value> = result.as_array().unwrap();
+    let results: &Vec<Value> = acc.last().unwrap().as_array().unwrap();
+    assert_eq!(
+        results.last().unwrap().as_str().unwrap(),
+        "child_value",
+        "parent LE must read the child's return via retv (regression: was null)"
+    );
+}
+
+// (b) Blind-call edge: `=> Child` (AND) must set the parent's retv to the
+// child's return, readable in the parent's E-block.
+#[test]
+fn retv_5_1_blind_call_edge_propagates_child_return() {
+    let grammar = r#"Top::AND
+ I { declare(array, collected) }
+ => Child
+ E { push_value(array(collected), scalar(retv)); return(array_copy(array(collected))) }
+
+Child:
+ /go/
+ E { return(scalar("blind_ret")) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("go").unwrap();
+    let acc: &Vec<Value> = result.as_array().unwrap();
+    let collected: &Vec<Value> = acc.last().unwrap().as_array().unwrap();
+    assert_eq!(
+        collected.last().unwrap().as_str().unwrap(),
+        "blind_ret",
+        "parent E must read the blind-call child's return via retv"
+    );
+}
+
+// (c) Repetition: a REP rule dispatching a child each iteration must expose the
+// per-iteration child return as retv so the LE-block collects every result.
+#[test]
+fn retv_5_1_rep_dispatch_collects_each_child_return_via_retv() {
+    let grammar = r#"List::OR+
+ /(\w+)/ -> Item
+ I { declare(array, out) }
+ LE { push_value(array(out), scalar(retv)) }
+ E { return(array_copy(array(out))) }
+
+Item:
+ /unused/
+ E { return(scalar("ITEM")) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("a b c").unwrap();
+    let acc: &Vec<Value> = result.as_array().unwrap();
+    let out: &Vec<Value> = acc.last().unwrap().as_array().unwrap();
+    assert_eq!(out.len(), 3, "one child return collected per REP iteration: {out:?}");
+    assert!(
+        out.iter().all(|v| v.as_str() == Some("ITEM")),
+        "every REP iteration's retv must be the child's return, got {out:?}"
+    );
+}
+
+// (d) `call(child)` evaluates to the child's return value, so
+// `assign(s(retv), call(child))` captures it (the Perl reference pattern).
+#[test]
+fn retv_5_1_call_helper_returns_child_return_value() {
+    let grammar = r#"Driver::
+ /seed/
+ I { declare(scalar, captured) }
+ E { assign(scalar(captured), call(Sub)); return(scalar(captured)) }
+
+Sub:
+ /x/
+ E { return(scalar("sub_ret")) }
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let engine = Engine::new(compiled);
+    let result = engine.execute("seed").unwrap();
+    let acc: &Vec<Value> = result.as_array().unwrap();
+    assert_eq!(
+        acc.last().unwrap().as_str().unwrap(),
+        "sub_ret",
+        "call(child) must evaluate to the child's return value"
+    );
+}

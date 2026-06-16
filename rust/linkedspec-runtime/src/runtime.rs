@@ -36,6 +36,12 @@ pub struct RuntimeContext {
     pub exit_status: Option<i32>,
     /// BACKTRACK cursor save stack — BACKTRACK pushes, IBACKTRACK pops and restores.
     backtrack_stack: Vec<usize>,
+    /// The current rule invocation's pending return value, set by `return(...)`.
+    /// `execute_rule` clears it on entry and reads it on exit, so each rule
+    /// invocation reports its own return value. This is the source of the
+    /// child-return (`retv`) channel: a parent stores the child's return value
+    /// into the `retv` scalar after dispatch (see `set_retv`).
+    return_value: Option<RuntimeValue>,
 }
 
 impl RuntimeContext {
@@ -56,6 +62,7 @@ impl RuntimeContext {
             capture_start: None,
             exit_status: None,
             backtrack_stack: Vec::new(),
+            return_value: None,
         }
     }
 
@@ -126,11 +133,37 @@ impl RuntimeContext {
 
     // ── Child return value (retv) ──
 
-    /// Set the `retv` variable — the last child rule's return value.
-    /// In Perl LinkedSpec, `return(expr)` in a child rule populates the
-    /// parent's `retv` scalar automatically.
+    /// Set the `retv` scalar — the most recent child rule's return value.
+    ///
+    /// After a parent dispatches a child via an action edge (`-> Child`) or a
+    /// blind-call edge (`=> Child`), the engine stores the child's return value
+    /// here so the parent's attached code and its `LE`/`E` blocks can read it as
+    /// `scalar(retv)` (Runtime Semantics §3.3 / §6.1). Before this was wired in,
+    /// `scalar(retv)` resolved to undef for virtually every grammar.
     pub fn set_retv(&mut self, value: RuntimeValue) {
         self.scalars.insert("retv".to_string(), value);
+    }
+
+    // ── Per-invocation return value ──
+
+    /// Record the current rule invocation's return value (set by `return(...)`).
+    /// Later calls overwrite earlier ones, so the last lifecycle block to call
+    /// `return(...)` wins (Runtime Semantics §5.4).
+    pub fn set_return_value(&mut self, value: RuntimeValue) {
+        self.return_value = Some(value);
+    }
+
+    /// Take (and clear) the current rule invocation's pending return value.
+    /// `execute_rule` calls this on entry (to start each invocation with a clean
+    /// channel) and on exit (to read this rule's own return value).
+    pub fn take_return_value(&mut self) -> Option<RuntimeValue> {
+        self.return_value.take()
+    }
+
+    /// Restore a previously-taken pending return value, keeping the return
+    /// channel scoped per rule invocation across nested child dispatch.
+    pub fn restore_return_value(&mut self, saved: Option<RuntimeValue>) {
+        self.return_value = saved;
     }
 
     // ── BACKTRACK cursor stack ──
