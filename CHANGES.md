@@ -1,6 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10.1: root-cause investigation — single-slot AND edge-return drop is a Perl-reference regression (not intended)
+
+The user chose "investigate root cause first, then recommend before any change" for the `.9`-discovered
+systemic drift (single-slot `::AND … -> Rule[0] { return(...) }` returns `[]`, not the value), and to
+HOLD the PNT loop. This slice is that read-only investigation (no code/book change).
+
+**Verdict: accidental regression in the Perl reference engine, NOT intended design.** A delegated
+read-only codegen agent located the cause and I independently verified its three load-bearing claims
+against source:
+
+- **Root cause** — `_emit_and_single_acode_handler` (`perl/LinkedSpec/HandlerVariantEmitter.pm:564-630`):
+  the loop at lines 575-582 builds `$transformed` for each edge acode but **never `push`es it** into
+  `@acodes_transformed`, so `_build_acodes_dispatch_block(\@acodes_transformed)` (583) receives an empty
+  list, the edge if/elsif dispatch is omitted, and the handler ends `return \@${label}_collect;` (628)
+  over a never-written accumulator → `[]`. (Verified by reading the source.)
+- **Provenance** — introduced by the MEDIUM-IMPACT.3.4.x emitter rework (`148c746` "apply
+  return→assignment in AND_SINGLE_ACODE emitter" → `7fec186`); the sibling `_emit_and_acode_seq_handler`
+  received the same edit **with** its `push` (so the omission is an oversight, not a degenerate-AND design).
+  The sibling also has its own `\$"` list-separator bug in its return→assignment `s///e`.
+- **Pre-documented gap** — `docs/knowledge/specentry-perl-coupling-inventory.md:234` already states
+  "AND_SINGLE_ACODE and AND_ACODE lack E-block support … Adding E-block to AND_SINGLE_ACODE would fix
+  MEDIUM-IMPACT.3.4." No `t/phase0_regression.t` assertion pins the `[]` runtime value as intended
+  (single-regex-AND sites assert only metadata/descriptor/compilation).
+
+**Behavioral matrix (verified via `LinkedSpec::Get`)** — single-slot AND `-> T[0] return`, terminal
+`LX {return}`, terminal `E {return}`, and push+`LX` snapshot all → `[]`; whereas OR self-ref `-> T`,
+multi-slot AND single-closing-slot return, and REP accumulate all surface their value.
+
+A durable Knowledge Map card `docs/knowledge/and-single-acode-edge-return-dropped.md` was written (root
+cause, provenance, verified idiomatic value-surfacing forms, reverify command) so the trap is not
+re-derived.
+
+`.10` was split into `.10.1` (this investigation — done) and `.10.2` (apply the fix — **blocked on a
+user DIRECTION decision**): given it's a bug, (A) fix the engine (restore the edge-return path in
+`AND_SINGLE_ACODE` + fix the sibling `\$"` bug + full `t/phase0_regression.t` gate + mirror in Rust for
+parity; the intuitive book examples then become correct), (B) doc-rewrite only (to verified idioms), or
+(C) both, sequenced. Recommended (A) or (C); if engine-fix, it belongs in a dedicated engine tree (not
+this documentation tree). No code/book change in this slice; PNT loop remains held per the user.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.9: fix drifted §5.5 Pair example output (+ surface a systemic variant)
 
 `.9` corrects the confirmed defect `.5.2` discovered: the `runtime-semantics.md` §5.5 third
