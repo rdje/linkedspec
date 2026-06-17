@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.4` done — added a grouped-target example (edges chapter) + an entry-vs-match divergence example (capture chapter), both compile-verified; divergence documented at the verified reader-wiring level since a clean top-level I/O is entangled with hard accumulator axes; `mdbook build` exit 0; frontier → `.5`)
+- Last updated: `2026-06-17` (`.5` split + `.5.1` done — helper-catalog audit: 0 public-API completeness gaps, 2 variant-neutrality sigil leaks fixed; example-density gap (0 examples / ~140 helpers) decomposed into per-family sub-leaves `.5.2`–`.5.5`; `mdbook build` exit 0; frontier → `.5.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,7 +58,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 - ID: `SPEC-LANG-REFERENCE`
   Status: `active`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
-  Children: `.1` (done), `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
+  Children: `.1`–`.4` (done), `.5` (active: `.5.1` done, `.5.2`–`.5.5` pending), `.6`, `.7`, `.8`
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -171,13 +171,67 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.4` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.5`
-  Status: `pending`
-  Goal: Helper-contract catalog **completeness + variant-neutrality** sweep
+  Status: `active`
+  Goal: Helper-contract catalog **completeness + variant-neutrality + examples** sweep
   Acceptance: confirm every helper family in `perl/LinkedSpec/ActionIR/Contracts.pm` is
   represented in `appendix/helper-contract-catalog.md` with a backend-neutral behavioral
   contract (signature + semantics + edge cases) and at least one example; separate any
   Perl-implementation note from the contract; add examples where the catalog is example-poor.
-  May split further during implementation if the surface is large. `mdbook build` exit 0.
+  **Split during implementation (the surface is large)** — see Audit Findings (`.5`) below.
+  Children: `.5.1` (done), `.5.2`, `.5.3`, `.5.4`, `.5.5`
+
+- ID: `SPEC-LANG-REFERENCE.5.1`
+  Status: `done`
+  Goal: Completeness confirmation + variant-neutrality fixes + decomposition
+  Acceptance: a read-only completeness audit (every `Contracts.pm` helper id vs the catalog),
+  the variant-neutrality fixes the audit flags, and the per-family example decomposition recorded
+  as `.5.2`–`.5.x`. `mdbook build` exit 0.
+  Verification: Done — 2026-06-17. A read-only audit (delegated) reconciled the `Contracts.pm`
+  helper-id set against the catalog and found: **(completeness) ZERO public-API gaps** — all ~130
+  public helpers are documented; the 158 (loose `\bid\b => '`) vs 146 (anchored) vs 140 (`###`
+  headings) spread is **17 internal IR variants** (all map to documented DSL names, e.g.
+  `capture_from_mark`→`capture_from(name)`) + **~11 deprecated `compatibility_surface => 1`
+  contracts** (`my_declare_bare`/`exit_bare`/…, intentionally not public). **(variant-neutrality)
+  2 Perl-sigil leaks** — `declare(scalar, name)` said "variable `$name`" (→ "named `name`") and
+  `push(arr, child)` said "implicit accumulator `$rule_label`" (→ "named after the rule label");
+  both fixed, and a whole-catalog re-sweep (`$`/`@`/`%` sigils + `lowers to`/`do {`/`Data::Dumper`/
+  `JSON::PP`/`//gcp`) confirmed **no others**. **(examples) 0 `.spec` examples across all 10
+  families / ~140 helpers** — the large remaining surface, decomposed into per-family example
+  sub-leaves `.5.2`–`.5.5` (≥1 worked, compile-verified example per family; the original `.5`
+  acceptance's "at least one example" is per-family). `mdbook build` exit 0.
+  Commit: `SPEC-LANG-REFERENCE.5.1` (see Commit Log)
+
+- ID: `SPEC-LANG-REFERENCE.5.2`
+  Status: `pending`
+  Goal: Worked examples — Scalar + Numeric helper families
+  Acceptance: ≥1 compile-verified `.spec` example per family added to the Scalar and Numeric
+  sections of `helper-contract-catalog.md`, with several more for high-frequency helpers; every
+  example built through `LinkedSpec::Get` before asserting behavior. `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.5.3`
+  Status: `pending`
+  Goal: Worked examples — Array helper family (largest, ~33 helpers)
+  Acceptance: ≥1 compile-verified example for the Array family plus several for high-frequency
+  array helpers (`split`, `map`-likes, reducers, edge drops); built through `LinkedSpec::Get`.
+  `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.5.4`
+  Status: `pending`
+  Goal: Worked examples — Hash + Control Flow helper families
+  Acceptance: ≥1 compile-verified example per family (Hash + Control Flow), built through
+  `LinkedSpec::Get`. `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.5.5`
+  Status: `pending`
+  Goal: Worked examples — Declaration, Capture/Mark, Entry/Match, Input, Call families
+  Acceptance: ≥1 compile-verified example per remaining family, built through `LinkedSpec::Get`;
+  closes `.5`. `mdbook build` exit 0.
   Verification: `pending`
   Commit: `pending`
 
@@ -265,10 +319,14 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.2` | `done` | regex-first-class chapter landed (2026-06-17), verified against `LinkedRE.pm`/`Contracts.pm`/rgx; fixed a capture-indexing contradiction across 3 book files |
 | — | `SPEC-LANG-REFERENCE.3` | `done` | output/return-shape contract landed in `runtime-semantics.md §5` (2026-06-17), verified vs oracle corpus + live Perl run; tagged shape framed as an OPTIONAL convention per user feedback |
 | — | `SPEC-LANG-REFERENCE.4` | `done` | grouped-target example (edges chapter) + entry-vs-match divergence example (capture chapter), both compile-verified (2026-06-17) |
-| 1 | `SPEC-LANG-REFERENCE.5` | `pending` | **next** — helper-catalog completeness + variant-neutrality sweep (indexing contract already corrected in `.2`) |
-| 3 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 4 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 5 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| — | `SPEC-LANG-REFERENCE.5.1` | `done` | helper-catalog audit (2026-06-17): 0 public-API completeness gaps; 2 variant-neutrality sigil leaks fixed; example-density gap decomposed into `.5.2`–`.5.5` |
+| 1 | `SPEC-LANG-REFERENCE.5.2` | `pending` | **next** — worked examples: Scalar + Numeric families (compile-verified) |
+| 2 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) |
+| 3 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
+| 4 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
+| 5 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 6 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 7 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
 
@@ -296,6 +354,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.2` | engine facts verified read-only against `perl/LinkedRE.pm`, `perl/LinkedSpec/ActionIR/Contracts.pm` (`entry_group`/`match_group`/`entry_named` lowering), `perl/LinkedSpec/BootstrapSpec/Core.pm` (`/pattern/` recognizer), `rust/linkedspec-runtime/src/helpers.rs` (rgx `CompiledAlternation`), and cross-checked vs shipped specs (`lib_reader`/`tablegrep`/`spec.spec`); `mdbook build` (pre + post); whole-book grep for capture-indexing drift | `mdbook build` exit 0 both times; new `regex-in-spec.md` chapter + `formal-grammar.md §3.1` expansion; **3 drift sites corrected** (wrong "index 0 = full match" claim + two examples using the 1-based convention); convention verified 0-based/captures-only/compacted |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.3` | output shapes verified vs frozen oracle-corpus fixtures (`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal`), a **live Perl-reference run** (`LinkedSpec::Get` on a `/(\w+)=(\w+)/` spec → `["?pair:","key","val"]`), and shipped-spec grep for the tagged convention; grounded the wrap + return-vs-accumulator in `docs/knowledge/rust-perl-output-oracle.md`; `mdbook build` | `mdbook build` exit 0; `runtime-semantics.md §5` expanded (§5.5–§5.8). A hand-built accumulator example (`[undef,undef,undef]`) was discarded — only verified material documented. Tagged shape reframed as OPTIONAL per user feedback (engine imposes no output schema) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.4` | both new examples **compiled** through `LinkedSpec::Get` (grouped target + `Call`→`Inner` divergence); ran ~9 minimal accumulator/dispatch shapes to attempt a top-level divergence I/O (all → `[]`/`undef`/`0`, the documented hard accumulator axes); divergence semantics grounded in `.2`'s verified source wiring + the existing source-boundary example; `mdbook build` | `mdbook build` exit 0; grouped-target section (`action-and-lifecycle-placement.md`) + entry-vs-match divergence section (`capture-marks-and-source-locations.md`). Divergence documented at the reader-wiring level (not a fabricated I/O) — honest scope note recorded |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.5.1` | delegated read-only catalog audit (`Contracts.pm` id set vs catalog); self-verified the 2 flagged sigil leaks at `helper-contract-catalog.md:13,159` + whole-catalog re-sweep for `$`/`@`/`%` sigils and `lowers to`/`do {`/`Data::Dumper`/`JSON::PP`/`//gcp`; `mdbook build` | `mdbook build` exit 0; **0 public-API completeness gaps** (158 ids = ~130 public + 17 internal IR variants + ~11 deprecated `compatibility_surface`); **2 sigil leaks fixed**, no others; example-density gap (0/~140) decomposed into `.5.2`–`.5.5` |
 
 ## Commit Log
 
@@ -305,6 +364,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.2` | `SPEC-LANG-REFERENCE.2 — book: regex as a first-class concept (new user-model chapter) + fix capture-indexing drift` | New `user-model/regex-in-spec.md` + `SUMMARY.md`; `formal-grammar.md §3.1` capture-group/flags expansion; corrected the `entry_group`/`match_group` indexing contradiction in `helper-contract-catalog.md`, `overview/what-is-linkedspec.md`, `formal-grammar.md`, `source-boundary-helper-reference.md`. All facts verified vs `LinkedRE.pm`/`Contracts.pm`/rgx/shipped specs |
 | `SPEC-LANG-REFERENCE.3` | `SPEC-LANG-REFERENCE.3 — book: output/return-value shape contract in runtime-semantics §5 (output is author's choice; optional tagged shape)` | Expanded `appendix/runtime-semantics.md §5` (§5.5–§5.8): top-rule value, output is author's choice (optional tagged convention per user feedback), return-vs-accumulator, one-level wrap. Verified vs oracle corpus + live Perl run + shipped specs |
 | `SPEC-LANG-REFERENCE.4` | `SPEC-LANG-REFERENCE.4 — book: grouped action-edge targets (edges chapter) + entry-vs-match divergence (capture chapter)` | Grouped-target section in `action-and-lifecycle-placement.md` (ebnf-grounded) + divergence section in `capture-marks-and-source-locations.md`; both examples compile-verified. Divergence documented at reader-wiring level (top-level I/O entangled with hard accumulator axes — not fabricated) |
+| `SPEC-LANG-REFERENCE.5.1` | `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5` | Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0 |
 
 ## Changelog
 
@@ -360,3 +420,14 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   documented at the verified reader-wiring level (which span each family reads), consistent with the
   book's existing style. `mdbook build` exit 0. Frontier → `.5` (helper-catalog completeness +
   variant-neutrality sweep).
+- `2026-06-17`: `.5` **split** + `.5.1` done. A delegated read-only audit reconciled the
+  `Contracts.pm` helper-id set against `appendix/helper-contract-catalog.md`: **0 public-API
+  completeness gaps** (the 158/146/140 spread is 17 internal IR variants that map to documented DSL
+  names + ~11 deprecated `compatibility_surface` contracts); **2 variant-neutrality Perl-sigil leaks**
+  (`declare`'s "`$name`" → "named `name`"; `push`'s "`$rule_label`" → "named after the rule label"),
+  both fixed and a whole-catalog re-sweep confirmed no others; and **0 `.spec` examples across all 10
+  families / ~140 helpers** — the large remaining surface. Per the splitting discipline (and the leaf's
+  own "may split" note), decomposed the example work into per-family sub-leaves `.5.2` (Scalar+Numeric),
+  `.5.3` (Array), `.5.4` (Hash+Control Flow), `.5.5` (Declaration/Capture-Mark/Entry-Match/Input/Call),
+  each adding ≥1 compile-verified example per family. `.5.1` shipped the audit + variant-neutrality fixes
+  + decomposition (the ownership-first slice). `mdbook build` exit 0. Frontier → `.5.2`.

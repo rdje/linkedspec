@@ -10,7 +10,7 @@ identically. No Perl implementation knowledge is required.
 ### `declare(scalar, name)`
 - **Signature**: `declare("scalar", name: string)`
 - **Returns**: void
-- **Behavior**: Declares a new scalar working variable `$name` in the current rule scope. Uninitialized (`undef`).
+- **Behavior**: Declares a new scalar working variable named `name` in the current rule scope. Uninitialized (`undef`).
 - **Errors**: Redeclaring an existing variable in the same scope.
 
 ### `declare(scalar, name = value)`
@@ -156,7 +156,7 @@ identically. No Perl implementation knowledge is required.
 ### `push(arr, child)`
 - **Signature**: `push(target: array, child: expr)`
 - **Returns**: void
-- **Behavior**: Appends `child` to the named accumulator array. The target must be a declared array variable (typically the rule's implicit accumulator `$rule_label`).
+- **Behavior**: Appends `child` to the named accumulator array. The target must be a declared array variable (typically the rule's implicit accumulator, named after the rule label).
 - **Convention**: `push(Child)` without explicit target appends to the current rule's implicit accumulator — this is the `push_child_call_builtin` convention. Use `push_value(target, value)` for explicit targeting.
 
 ### `push(arr, child, index)`

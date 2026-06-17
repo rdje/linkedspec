@@ -1,6 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.5.1: helper-catalog audit (0 completeness gaps) + variant-neutrality fixes + decomposition
+
+`.5` (helper-contract catalog completeness + variant-neutrality + examples sweep) was **split**:
+the surface is large, so this slice does the audit, the variant-neutrality fixes, and the
+decomposition (ownership-first), and the example work becomes per-family sub-leaves.
+
+A delegated read-only audit reconciled the `perl/LinkedSpec/ActionIR/Contracts.pm` helper-id set
+against `docs/linkedspec-book/src/appendix/helper-contract-catalog.md`:
+
+- **Completeness — 0 public-API gaps.** All ~130 public helpers are documented. The 158 (loose
+  `\bid\b => '`) vs 146 (anchored) vs 140 (`###` headings) spread is **17 internal IR variants**
+  (each maps to a documented DSL name, e.g. `capture_from_mark` → `capture_from(name)`) plus **~11
+  deprecated `compatibility_surface => 1` contracts** (`my_declare_bare`, `exit_bare`, …) that are
+  intentionally not public. Recorded so future sessions don't re-audit.
+- **Variant-neutrality — 2 Perl-sigil leaks fixed.** `declare(scalar, name)` described "variable
+  `$name`" → "named `name`" (line 13); `push(arr, child)` described "implicit accumulator
+  `$rule_label`" → "named after the rule label" (line 159). Self-verified both at the cited lines,
+  then re-swept the whole catalog for `$`/`@`/`%` sigils and `lowers to`/`do {`/`Data::Dumper`/
+  `JSON::PP`/`//gcp` — **no others**.
+- **Examples — 0 `.spec` examples across all 10 families / ~140 helpers.** The large remaining
+  surface. Decomposed into per-family example sub-leaves: `.5.2` Scalar+Numeric, `.5.3` Array,
+  `.5.4` Hash+Control Flow, `.5.5` Declaration/Capture-Mark/Entry-Match/Input/Call — each adding ≥1
+  **compile-verified** (`LinkedSpec::Get`) example per family.
+
+**Validation:** `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0; KM gate OK.
+Documentation-only — no code/spec change. Frontier → `SPEC-LANG-REFERENCE.5.2`.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.4: worked examples for grouped targets + entry-vs-match divergence (book)
 
 Closes audit gaps **C** (grouped shared-code targets had no worked example) and **D**
