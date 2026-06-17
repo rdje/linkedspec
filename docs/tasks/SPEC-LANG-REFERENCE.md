@@ -395,13 +395,23 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 
 - ID: `SPEC-LANG-REFERENCE.10.5`
   Status: `pending`
-  Goal: Audit + fix the other book chapters that use a regex-on-top-rule example
-  Acceptance: re-check the sites flagged by `grep -rnE '::AND|-> \w+\[0\]'` (e.g.
-  `worked-spec-walkthrough.md`, `regex-in-spec.md`, `spec-files-and-rule-paragraphs.md`,
-  `get-and-get-parser.md`, `overview/what-is-linkedspec.md`, `rule-modes-and-parse-modes.md`); for
-  each example that asserts a concrete output, ensure it uses valid ≥2-rule structure and its
-  documented output matches a `LinkedSpec::Get` run. `mdbook build` exit 0.
-  Verification: `pending`
+  Goal: **SCORCH THE WHOLE BOOK** (user directive 2026-06-17 — "the book shall not mislead; only
+  truthful, valid code snippets") — exhaustively audit **EVERY** `.spec` code snippet across all of
+  `docs/linkedspec-book/src/**` for (i) doctrine-validity (NO regex on a top `::` rule; ≥2 rules)
+  and (ii) output-correctness (any claimed input→output matches a `LinkedSpec::Get` run), then
+  remediate every misleading/invalid snippet. Audit-as-decomposition: the read-only hunt produces
+  per-chapter / per-category fix sub-leaves `.10.5.1…` and **subsumes** the `.10.4` §5.5 Pair fix.
+  Acceptance: an exhaustive findings table recorded here (every `.spec` block classified — A:
+  regex-on-top / single-rule doctrine violation, B: output drift, C: `::AND -> Rule[N]` broken
+  shape, D: other — with file:line + claimed-vs-actual output); fix sub-leaves added to the
+  frontier; then every flagged snippet reshaped to the verified 2-rule idiom (or corrected output /
+  confirmed as a faithful shipped-spec quote), each fix re-verified through `LinkedSpec::Get`;
+  `mdbook build` exit 0 at each step.
+  Verification: `pending`. Hunt method: fan out read-only verifying agents over chapter groups
+  (enumerate every `.spec` block → classify A/B/C/D → RUN every claimed-output snippet through
+  `LinkedSpec::Get`, alarm-guarded), synthesized into the findings table here. (5 such agents were
+  launched 2026-06-17 but their session was exited before they reported — re-run the hunt fresh.)
+  Children: `.10.5.1…` (added when the audit completes)
   Commit: `pending`
 
 - ID: `SPEC-LANG-REFERENCE.10.6`
@@ -496,8 +506,8 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.10.2` | `superseded` | engine-fix-vs-doc fork is moot (no engine bug; reference untouched) |
 | — | `SPEC-LANG-REFERENCE.10.3` | `done` | `.5.2` Scalar+Numeric examples + both catalog preambles redone with the verified 2-rule idiom (2026-06-17); all 33 re-verified through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot; `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.6` | `done` | corrected the durable record (2026-06-17): retracted the inaccurate "regex-on-top → `[]`" sub-claim (ground truth: those forms run and return values; only `::AND … -> Rule[N]` returns `[]`); KM card rewritten doctrine-first; rationale for `.10` = the 2-rule authoring doctrine, not an `[]` bug |
-| 1 | `SPEC-LANG-REFERENCE.10.4` | `pending` | **next** — redo `.9` §5.5 `runtime-semantics.md` Pair example with valid 2-rule structure |
-| 2 | `SPEC-LANG-REFERENCE.10.5` | `pending` | audit + fix other chapters using a regex-on-top-rule example |
+| 1 | `SPEC-LANG-REFERENCE.10.5` | `pending` | **next — WHOLE-BOOK SCORCH (user directive 2026-06-17)** — exhaustively audit EVERY `.spec` snippet for doctrine-validity (no regex on a top `::` rule) + output-correctness (claimed I/O matches `LinkedSpec::Get`), then remediate. Audit-as-decomposition → fix sub-leaves `.10.5.1…`; subsumes `.10.4` |
+| 2 | `SPEC-LANG-REFERENCE.10.4` | `pending` | §5.5 `runtime-semantics.md` Pair fix — folded into the `.10.5` remediation |
 | 3 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the remediation |
 | 4 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
 | 5 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
@@ -747,3 +757,25 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   examples violated the 2-rule doctrine, not that they returned `[]`. There is no rationale for
   putting a regex on a top rule. KM gate regenerates `KNOWLEDGE_MAP.md`; self-check passes. No Perl,
   no book-example change. Frontier still → `.10.4`.
+- `2026-06-17`: **`.10.5` scope broadened** (user directive — "scorch the book to hunt down book
+  examples; the book shall not mislead, only truthful + valid code snippets"). `.10.5` is now a
+  **whole-book** exhaustive audit of every `.spec` snippet (doctrine-validity + output-correctness)
+  → remediation — an audit-as-decomposition producing fix sub-leaves `.10.5.1…` and subsuming the
+  `.10.4` §5.5 Pair fix. Frontier repointed → `.10.5`. **Preliminary fan-out hunt** (4 of 5 read-only
+  verifying agents reported before the session exited — NOT authoritative; re-run fresh next session)
+  **confirms the scorch is warranted: regex-on-top / single-rule violations are WIDESPREAD** — many
+  across `user-model/rule-modes-and-parse-modes.md`, `user-model/regex-in-spec.md`, the
+  `dsl/*-helper-reference.md` pages, `dsl/capture-marks-*`, `dsl/source-boundary-*`; plus specific
+  high-value confirmed items: `user-model/worked-spec-walkthrough.md` claims `{kind=>"pair",…}` for
+  `answer = 42` but actually returns `[]` (Class B); `public-api/get-and-get-parser.md` "minimal
+  example" is a single-rule regex-on-top `Top::AND` → `[]` (Class A/B); `appendix/runtime-semantics.md`
+  §5.5 puts a regex on a `::` rule in all three examples (incl. the two "frozen oracle fixtures"
+  `Top:: /x/ -> Done`). **Confirmed CLEAN:** the `.10.3` helper-catalog §2/§5 worked examples
+  (re-verified) and the lispish/pplugin/shipped-specs walkthroughs (faithful shipped-spec quotes).
+  specs-and-corpora drift to fix: `portmap-spec-walkthrough.md` (5 output-shape examples — flat-with-
+  `undef` claimed vs actual nested arrays like `["?bare:",["clk"]]`), `tablegrep-spec-walkthrough.md`
+  (`sens` field claims `=~` but the regex captures only `=`), `ebnf-spec-walkthrough.md` (the
+  `@generate:`-led "richer example" does not compile — Class D). EVERY flagged item must be RE-VERIFIED
+  during remediation (agent findings are hypotheses — cf. this session's `.10.6` lesson; one agent even
+  reported the §5.5 Pair as `null` where a direct run gave `["?pair:","key","val"]`, a transcription
+  sensitivity to resolve per-fix). Read-only record/plan update only — no book/Perl change.

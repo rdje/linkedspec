@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10.5 (scope): broaden to a whole-book example scorch (user directive)
+
+User directive: *"scorch the book to hunt down book examples — the book shall not mislead, only
+truthful + valid code snippets."* Broadened `.10.5` from "a few named chapters" into a **whole-book
+exhaustive audit** of every `.spec` snippet in `docs/linkedspec-book/src/**` for (i) doctrine-validity
+(no regex on a top `::` rule; ≥2 rules) and (ii) output-correctness (any claimed input→output matches
+a `LinkedSpec::Get` run), followed by remediation. It is an audit-as-decomposition that produces fix
+sub-leaves `.10.5.1…` and subsumes the `.10.4` §5.5 Pair fix; the frontier is repointed → `.10.5`.
+
+A preliminary read-only fan-out hunt (4 of 5 verifying agents reported before this session exited;
+NOT authoritative — re-run fresh) confirms the scorch is warranted: regex-on-top / single-rule
+violations are **widespread** (rule-modes, regex-in-spec, the dsl helper-reference pages,
+capture-marks, source-boundary), plus confirmed Class B drift in `worked-spec-walkthrough.md`
+(`{kind=>"pair",…}` claimed; actually `[]`) and a single-rule regex-on-top "minimal example" in
+`public-api/get-and-get-parser.md`. The `.10.3` helper-catalog examples re-verified CLEAN. Read-only
+record/plan update only — no book/Perl change.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10.6: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine
 
 Ground-truthing the `.10` correction's premise via `LinkedSpec::Get` showed it was partly wrong: a

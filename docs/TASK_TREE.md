@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.10.4` (`.10.3` done — `.5.2` Scalar/Numeric examples + both catalog preambles redone with the verified 2-rule idiom, all 33 re-verified through `LinkedSpec::Get`; next: redo `.9` §5.5 Pair example with valid 2-rule structure; NO engine bug, Perl untouched) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
+| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.10.5` (WHOLE-BOOK SCORCH — user directive 2026-06-17: exhaustively audit EVERY `.spec` book snippet for doctrine-validity [no regex on a top `::` rule] + output-correctness, then remediate; `.10.3`/`.10.6` done; preliminary hunt confirms violations are widespread; subsumes `.10.4`) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7.5.3` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
 ## Proposed Task Trees
