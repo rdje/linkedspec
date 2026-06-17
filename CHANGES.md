@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10.6: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine
+
+Ground-truthing the `.10` correction's premise via `LinkedSpec::Get` showed it was partly wrong: a
+regex on a `::` rule with an OR self-ref / cross-rule **action edge runs and returns its value** —
+the old `.5.2`/`.9` examples returned the documented values, and the §5.5 frozen oracle fixtures
+(`Top:: /x/ -> Done {…}`) work. The only shape that silently returns `[]` is the explicit
+`::AND … -> Rule[N] { return(...) }` form (the `.10.1` AND_SINGLE_ACODE finding).
+
+Rewrote the Knowledge-Map card `docs/knowledge/spec-top-rule-no-regex-two-rule-minimum.md`
+**doctrine-first**: a `.spec` is written as a top `::` entry rule (no regex — the dispatch loop) +
+≥1 normal `:` rule carrying the regex(es); never put a regex on the top rule (all 20 shipped specs
+follow this). The earlier "regex-on-top silently returns `[]`" mechanism claim is **retracted**. The
+**doctrine and `.10.3` are unchanged** — only the remediation *rationale* is corrected: the examples
+violated the 2-rule authoring doctrine, they were not returning `[]`. There is no rationale for ever
+putting a regex on a top rule. KM gate regenerates `KNOWLEDGE_MAP.md`; self-check passes. No Perl, no
+book-example change.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10.3: redo the Scalar+Numeric helper examples with the valid 2-rule idiom
 
 Remediation of the structurally-invalid worked examples flagged by the `.10` correction. Rewrote, in

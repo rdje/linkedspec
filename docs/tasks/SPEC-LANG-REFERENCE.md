@@ -328,7 +328,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   ([[feedback_do-not-fix-reference-engine]]).
   Children: `.10.1` (done — investigation; its verdict is now **superseded** — see note), `.10.2`
   (**superseded** — the engine-fix-vs-doc fork is moot), `.10.3` (done — redid `.5.2` examples + both
-  preambles with the verified 2-rule idiom), `.10.4`/`.10.5` (remediation pending)
+  preambles with the verified 2-rule idiom), `.10.6` (done — retracted the inaccurate `[]` premise;
+  rationale = the 2-rule authoring doctrine), `.10.4`/`.10.5` (remediation pending)
 
 - ID: `SPEC-LANG-REFERENCE.10.1`
   Status: `done`
@@ -403,6 +404,28 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SPEC-LANG-REFERENCE.10.6`
+  Status: `done`
+  Goal: Correct the durable record — retract the inaccurate "a regex-on-top / single-rule spec
+  silently returns `[]`" sub-claim of the `.10` CORRECTION, and reframe the remediation rationale as
+  the **authoring doctrine** (top `::` entry rule with no regex + ≥1 normal `:` rule), not an `[]` bug
+  Acceptance: rewrite the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first (verified
+  2-rule idiom; brief retraction; the only broken shape to avoid in examples is `::AND … -> Rule[N]`);
+  add a superseding Decision here; correct the framing in CHANGES/DEVELOPMENT_NOTES/LIVE/MEMORY. No
+  book-example change (the `.10.3` catalog already follows the doctrine). KM gate regenerates.
+  Verification: Done — 2026-06-17. Ground-truth via `LinkedSpec::Get` established that the OR
+  self-ref / cross-rule action-edge forms (the old `.5.2`/`.9` shape AND the §5.5 frozen oracle
+  fixtures) **run and return their value** (`Greeting:: /…/ -> Greeting {return(concat(...))}` →
+  `"hello-world"`; `Sum:: …` → `5`; `Pair:: …` → `["?pair:","key","val"]`), so the prior
+  "regex-on-top → `[]`" premise was factually wrong; the ONLY shape returning `[]` is the explicit
+  `::AND … -> Rule[N] { return(...) }` form (AND mode + slot index — the `.10.1` AND_SINGLE_ACODE
+  finding, real but narrow). Rewrote the KM card doctrine-first with that retraction. **The 2-rule
+  doctrine and `.10.3` stand** — they match all 20 shipped specs and [[feedback_spec-structure-top-plus-normal]];
+  only the *rationale wording* changed (the examples violated the 2-rule authoring doctrine, they
+  were not returning `[]`). self-check + KM gate pass (KM regenerates `KNOWLEDGE_MAP.md`). No Perl,
+  no book-example change.
+  Commit: `SPEC-LANG-REFERENCE.10.6` (see Commit Log)
+
 - ID: `SPEC-LANG-REFERENCE.8`
   Status: `pending`
   Goal: Finalize — whole-book consistency + close
@@ -472,6 +495,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.10.1` | `done` | investigation (2026-06-17); **verdict SUPERSEDED** — no engine bug; the `[]` was invalid spec structure (regex on top rule). Bad KM card deleted + replaced |
 | — | `SPEC-LANG-REFERENCE.10.2` | `superseded` | engine-fix-vs-doc fork is moot (no engine bug; reference untouched) |
 | — | `SPEC-LANG-REFERENCE.10.3` | `done` | `.5.2` Scalar+Numeric examples + both catalog preambles redone with the verified 2-rule idiom (2026-06-17); all 33 re-verified through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot; `mdbook build` exit 0 |
+| — | `SPEC-LANG-REFERENCE.10.6` | `done` | corrected the durable record (2026-06-17): retracted the inaccurate "regex-on-top → `[]`" sub-claim (ground truth: those forms run and return values; only `::AND … -> Rule[N]` returns `[]`); KM card rewritten doctrine-first; rationale for `.10` = the 2-rule authoring doctrine, not an `[]` bug |
 | 1 | `SPEC-LANG-REFERENCE.10.4` | `pending` | **next** — redo `.9` §5.5 `runtime-semantics.md` Pair example with valid 2-rule structure |
 | 2 | `SPEC-LANG-REFERENCE.10.5` | `pending` | audit + fix other chapters using a regex-on-top-rule example |
 | 3 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the remediation |
@@ -509,6 +533,19 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   entering match), NOT `match_group(N)` (local match, unset in the child's `I` block — the cause of
   an earlier `[null]`). The output is the top rule's accumulator snapshot (so one match → a
   one-element array); the per-match helper value here is `"hello-world"`.
+
+- **`2026-06-17` — `.10.6` retraction (an engine-reality sub-claim of the CORRECTION above was
+  inaccurate; the authoring doctrine stands).** Ground-truthing the CORRECTION's premise via
+  `LinkedSpec::Get` showed that a regex on a `::` rule with an OR self-ref / cross-rule **action edge
+  does run and return its value** — the old `.5.2`/`.9` examples returned the documented values, and
+  the §5.5 frozen oracle fixtures (`Top:: /x/ -> Done {…}`) work. So the sub-claim "a regex-on-top /
+  single-rule spec silently returns `[]`" was **wrong** and is retracted; the only shape returning
+  `[]` is the explicit `::AND … -> Rule[N] { return(...) }` form (the `.10.1` finding). **This does
+  NOT change the doctrine or `.10.3`:** a `.spec` is written as a top `::` entry rule (no regex) + ≥1
+  normal `:` rule (per [[feedback_spec-structure-top-plus-normal]] and all 20 shipped specs), and
+  `.10.4`/`.10.5` still reshape regex-on-top book examples to that form — but the **rationale is the
+  authoring doctrine, not an `[]` bug**. There is no rationale for ever putting a regex on a top
+  rule. KM card `spec-top-rule-no-regex-two-rule-minimum.md` rewritten doctrine-first.
 
 - `2026-06-17`: Created tree to own the user request (comprehensive variant-agnostic `.spec`
   documentation + KM cards). Per the splitting discipline, the first leaf is an audit that
@@ -548,6 +585,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.1` | delegated read-only codegen investigation (general-purpose agent, 42 tool-uses) + **self-verified the 3 load-bearing claims against source**: read `HandlerVariantEmitter.pm:564-630` (confirmed the missing `push` at 575-582), `git log -- HandlerVariantEmitter.pm` (confirmed MEDIUM-IMPACT.3.4.x provenance: `148c746`/`7fec186`), and `specentry-perl-coupling-inventory.md:234` (confirmed the pre-documented "lack E-block support" gap); behavioral matrix via `LinkedSpec::Get` (single-slot AND `LX`/`E`/edge `return` all → `[]`; OR self-ref + multi-slot-closing-slot + REP all surface values) | ~~VERDICT: accidental regression~~ — **SUPERSEDED** (see next row). The verdict was wrong because the premise was wrong (the examples are structurally invalid). |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10` (correction) | user established the `.spec` structural invariant (top `::` rule has no regex; valid spec ≥2 rules); verified vs `BootstrapSpec/Core.pm:414,417` (`::`→`_INITIAL`, label line anchored — no regex) + `RuleIR.pm:193-195` (`_INITIAL`→`top_rule`) + audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`); **proven the correct 2-rule worked-example idiom** via `LinkedSpec::Get` (`demo_top:: -> word_pair .push; LX{return(array_copy(a(demo_top)))}` + `word_pair : /(\w+) (\w+)/ I.return(concat(entry_group(0),"-",entry_group(1)))` → `["hello-world"]`; the child reads `entry_group` not `match_group`) | **NO engine bug** — the `[]` was invalid spec structure (regex on top rule / single-rule). Perl reference untouched. Deleted the bad KM card; wrote `spec-top-rule-no-regex-two-rule-minimum.md`. `.10.1` verdict + `.10.2` fork superseded; remediation `.10.3`/`.10.4`/`.10.5`. FRESH SESSION recommended |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.3` | scratch harness builds each example from the exact book 2-rule scaffold + `LinkedSpec::Get` run + `JSON::PP->canonical` encode (sanity-checked vs the frozen `["hello-world"]` idiom); all 33 Scalar+Numeric examples re-derived; `mdbook build`; rendered-HTML check that the full blocks stay single code blocks; whole-catalog `match_group` grep | `mdbook build` exit 0; 33/33 produce the documented one-element-array outputs; `is_defined` regex fixed `/(\w*)(\S*)/`→`/(\w+)/` (empty-matchable double-match → `["present","present"]`); only remaining `match_group` is the §8 reference (correct). self-check + KM gate pass |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.10.6` | ground-truth matrix via `LinkedSpec::Get` (OR self-ref / cross-rule action-edge regex-on-`::`-rule forms + the §5.5 frozen fixtures all run and return values; only `::AND … -> Rule[N]` → `[]`); KM-card rewrite; KM gate regenerates `KNOWLEDGE_MAP.md`; self-check | prior "regex-on-top → `[]`" premise disproven and retracted; KM card rewritten doctrine-first; doctrine + `.10.3` unchanged; KM gate + self-check pass; no Perl/book-example change |
 
 ## Commit Log
 
@@ -563,6 +601,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
 | `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
 | `SPEC-LANG-REFERENCE.10.3` | `SPEC-LANG-REFERENCE.10.3 — book: redo Scalar+Numeric helper examples + preambles with the valid 2-rule idiom (entry_group; re-verified outputs)` | Rewrote both `helper-contract-catalog.md` worked-examples preambles + all 33 examples to the top-entry-rule + normal-rule form reading `entry_group(N)`; every output re-derived through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot. `mdbook build` exit 0 |
+| `SPEC-LANG-REFERENCE.10.6` | `SPEC-LANG-REFERENCE.10.6 — record: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine` | Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first + superseding Decision + record-framing fixes; doctrine and `.10.3` unchanged. No Perl/book-example change |
 
 ## Changelog
 
@@ -697,3 +736,14 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   Caught + fixed an empty-matchable-regex double-match (`is_defined` `/(\w*)(\S*)/` → `/(\w+)/`).
   `mdbook build` exit 0 (rendered HTML verified). No Perl change. Frontier → `.10.4` (redo `.9` §5.5
   Pair example with valid 2-rule structure).
+- `2026-06-17`: `.10.6` done — corrected the durable record. Ground-truthing the `.10` CORRECTION's
+  premise via `LinkedSpec::Get` showed the OR self-ref / cross-rule action-edge regex-on-`::`-rule
+  forms (the old `.5.2`/`.9` shape and the §5.5 frozen oracle fixtures) **run and return their value**
+  (`"hello-world"`, `5`, `["?pair:","key","val"]`), so the "regex-on-top → `[]`" sub-claim was wrong
+  and is retracted; the only shape returning `[]` is `::AND … -> Rule[N] { return }` (the `.10.1`
+  finding). Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first with the
+  retraction. **The 2-rule authoring doctrine and `.10.3` stand** (matching all 20 shipped specs +
+  [[feedback_spec-structure-top-plus-normal]]); only the remediation *rationale* is corrected — the
+  examples violated the 2-rule doctrine, not that they returned `[]`. There is no rationale for
+  putting a regex on a top rule. KM gate regenerates `KNOWLEDGE_MAP.md`; self-check passes. No Perl,
+  no book-example change. Frontier still → `.10.4`.
