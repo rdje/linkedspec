@@ -1,6 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-18 — SPEC-FORMAT-TERSE.0: activate + ratify the terse `.spec` format direction (ADR 0007)
+
+The user activated the previously-`proposed` `SPEC-FORMAT-TERSE` tree (the terse, fully-composable
+`.spec` format brainstormed 2026-06-15) and reinforced the key semantics across several messages:
+`assign(x,v)` → `x = v` (op) / `set`; **no sigils** — bare typed identifiers (no `scalar()/array()/
+hash()` wrappers); types inferred at initialization or by argument position; `copy()` unifies
+`array_copy`/`hash_copy` (arrays + hashes); arrays/hashes/numbers/strings have **methods** (chain by
+return type); **everything is an expression** → typed values, with control-flow constructs and `{}`
+blocks as expressions. All consistent with the brainstorm card and the tree's Round 1–3 transcription.
+
+Ratified the direction as ADR
+[`0007-spec-format-terse-direction.md`](docs/decisions/0007-spec-format-terse-direction.md) (indexed):
+
+- **Adopt Rounds 1–3** as transcribed (Round 4+ deferred to a discovery leaf).
+- **Migration policy: canonical-new-form + deprecated-old-alias (gradual), then explicit
+  retirement** — keeps the 20 shipped specs + the book compiling and the ActionIR-ready invariant
+  (ADR 0002) intact at every step. (Open to a user override toward one-shot hard rename.)
+- **`.spec` stays the single universal contract; all variants move in lockstep** (ADR 0006); the
+  mdBook is updated only after the engine implements a form.
+- Touching the Perl reference for this evolution is a **user-sanctioned exception** to the standing
+  "do not fix the reference engine" default (this is intentional language evolution, not a
+  docs-vs-reference fix).
+- **Implementation leaves (`.1.x`+) are gated** by a usable `t/phase0_regression.t`, currently hung
+  by the pre-existing `RTLUTILS-REGEX-HANG`. `.0` is design-only and not gated.
+
+Tree state: `SPEC-FORMAT-TERSE` `proposed`→`active` (now the current focus); `.0` done;
+`SPEC-LANG-REFERENCE` book scorch paused. Two execution decisions surfaced to the user (migration
+policy confirmation; `RTLUTILS-REGEX-HANG`-first sequencing) before any implementation leaf.
+
+Validation: `scripts/check_memory_architecture.sh` exit 0; KM gate in sync. No engine/book change.
+
 ## 2026-06-18 — SPEC-LANG-REFERENCE.10.5.4: fix `worked-spec-walkthrough.md` → verified 2-rule idiom (+ terse-format pivot)
 
 Third fix slice of the whole-book scorch — and the slice on which the user **activated

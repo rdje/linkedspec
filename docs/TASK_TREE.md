@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `SPEC-FORMAT-TERSE` | `active` (**current focus**) | `Overall roadmap — .spec language evolution (terse format)` | `.0` done 2026-06-18 (ratified — ADR `0007`). Implementation leaves `.1.x`+ **gated/blocked**: need a usable `t/phase0_regression.t` (hung by `RTLUTILS-REGEX-HANG`) + user confirmation of the migration policy (gradual-alias vs hard rename). Both surfaced to the user. | [docs/tasks/SPEC-FORMAT-TERSE.md](docs/tasks/SPEC-FORMAT-TERSE.md) |
 | `SPEC-LANG-REFERENCE` | `active` (scorch ⏸ PAUSED) | `Overall roadmap — documentation and book sync` | **SCORCH PAUSED 2026-06-18** — `.10.5.2`/`.10.5.3`/`.10.5.4` done (2-rule idiom, verified outputs); remaining fix leaves `.10.5.5`–`.10.5.19` paused because the user **activated `SPEC-FORMAT-TERSE`** (terse `.spec` format), whose migration will re-sweep every book example in lockstep with the engine. Resume the scorch only if directed, or fold the remaining files into the terse book-sweep. | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7.5.3` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
@@ -33,7 +34,7 @@ PNT-eligible until explicitly activated or until the roadmap selects that lane.
 
 | Tree | Status | Roadmap lane | Proposed first leaf | File |
 | --- | --- | --- | --- | --- |
-| `SPEC-FORMAT-TERSE` | `proposed` | `Overall roadmap — .spec language evolution (terse format)` | `SPEC-FORMAT-TERSE.0` (ratify + ADR) | [docs/tasks/SPEC-FORMAT-TERSE.md](docs/tasks/SPEC-FORMAT-TERSE.md) |
+| _(none — `SPEC-FORMAT-TERSE` was activated 2026-06-18; see Active Task Trees)_ | — | — | — | — |
 
 ## Completed Task Trees
 

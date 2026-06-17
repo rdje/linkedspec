@@ -3,10 +3,12 @@
 ## Metadata
 
 - Tree ID: `SPEC-FORMAT-TERSE`
-- Status: `proposed`
+- Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-16`
+- Last updated: `2026-06-18` (ACTIVATED — user ratified the terse direction; `.0` done via ADR
+  `0007`; `SPEC-LANG-REFERENCE` book scorch paused for this pivot. Implementation leaves `.1.x`+ are
+  gated by `RTLUTILS-REGEX-HANG` + a usable `t/phase0_regression.t` — execution-order decision pending.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -43,12 +45,16 @@ survive even if the card is lost, and turns each into a pickable leaf.
 
 ## Sequencing
 
-- **Proposed / parked.** Not PNT-eligible until explicitly activated.
-- Per the user (2026-06-16): implementing these is a **next action AFTER** the pre-existing
-  `RTLUTILS-REGEX-HANG` (the `RTLUtils::add_header_n_context_clause` catastrophic-regex phase0
-  hang) is fixed and the regression gate is usable again.
-- On activation, start with `.0` (ratify direction + ADR), since the brainstorm is tentative
-  ("no decisions finalized"); then pick any round/leaf.
+- **ACTIVATED 2026-06-18 (user).** `.0` (ratify + ADR `0007`) is **done**. The tree is now the
+  active work unit.
+- **Implementation leaves (`.1.x`+) remain gated.** Per the user (2026-06-16) and ADR `0007`,
+  per-leaf acceptance needs the full `t/phase0_regression.t` gate, which is **hung by
+  `RTLUTILS-REGEX-HANG`** (the `RTLUtils::add_header_n_context_clause` catastrophic-regex phase0
+  hang). `.0` was design-only and not gated; `.1.x`+ need the gate restored first. The
+  execution-order choice — fix `RTLUTILS-REGEX-HANG` first vs a scoped check — is pending the user
+  (surfaced 2026-06-18).
+- Migration policy ratified in ADR `0007`: **canonical-new-form + deprecated-old-alias (gradual)**,
+  then explicit retirement (open to a user override toward one-shot hard rename).
 
 ## Non-Goals
 
@@ -71,18 +77,32 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 ## Task Tree
 
 - ID: `SPEC-FORMAT-TERSE`
-  Status: `proposed`
+  Status: `active`
   Goal: Evolve the `.spec` DSL toward a terser, fully-composable format (brainstorm Rounds 1–3 + resume 4+)
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`
+  Children: `.0` (done), `.1`, `.2`, `.3`, `.4`
 
 - ID: `SPEC-FORMAT-TERSE.0`
-  Status: `pending`
+  Status: `done`
   Goal: Ratify the adopted direction and record it as an ADR (the brainstorm is tentative)
   Acceptance: A `docs/decisions/000N-spec-format-terse-direction.md` ADR captures which rounds/changes
     are adopted, the migration policy (canonical-new + aliased-old vs hard rename), and the
     backward-compatibility stance for the 20 shipped specs. First leaf on activation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-18. Wrote ADR
+    [`0007-spec-format-terse-direction.md`](../decisions/0007-spec-format-terse-direction.md)
+    (indexed in `docs/decisions/INDEX.md`) ratifying the terse direction Rounds 1–3 as transcribed
+    here + in [[spec-format-brainstorm-rounds-1-3]]; cross-checked against the user's 2026-06-18
+    clarifications (`assign`→`=`/`set`; no-sigil typed bare identifiers; type inference at init / by
+    arg position; `copy()` unifies array+hash; arrays/hashes/numbers/strings have methods,
+    chain-by-return-type; everything-is-an-expression / typed-value blocks) — all consistent. ADR
+    decisions: (1) adopt Rounds 1–3, Round 4+ deferred; (2) **migration policy = canonical-new +
+    deprecated-old-alias (gradual), then explicit retirement** — keeps the 20 shipped specs + book
+    compiling and the ActionIR-ready invariant (ADR 0002) at every step; (3) `.spec` stays the single
+    universal contract, all variants in lockstep (ADR 0006), book updated only after the engine
+    implements a form; (4) a **user-sanctioned exception** to [[feedback_do-not-fix-reference-engine]]
+    (intentional evolution, not a docs-vs-reference fix); (5) implementation leaves gated by a usable
+    `t/phase0_regression.t` (hung by `RTLUTILS-REGEX-HANG`). Design-only leaf — no engine/book change,
+    so the regression gate does not apply to `.0`. self-check + KM gate pass.
+  Commit: `SPEC-FORMAT-TERSE.0` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1`
   Status: `proposed`
@@ -213,13 +233,33 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| — | *(tree is `proposed` — not PNT-eligible)* | `proposed` | Activate AFTER `RTLUTILS-REGEX-HANG`. On activation: `.0` (ratify + ADR) first, then any round. |
+| — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
+| 🚧 | **EXECUTION DECISION PENDING (user)** | `blocked` | Implementation leaves `.1.x`+ need a usable `t/phase0_regression.t`, **hung by `RTLUTILS-REGEX-HANG`**. Two questions surfaced to the user: (i) confirm gradual-alias migration vs one-shot hard rename; (ii) fix `RTLUTILS-REGEX-HANG` first (own a tree) vs proceed with a scoped check. Resolve before picking `.1.1`. |
+| 1 | `SPEC-FORMAT-TERSE.1.1` | `pending` (gated) | Round 1 — auto-existing variables; `declare(...)` becomes an unnecessary deprecated alias. First implementation leaf once the gate is restored + policy confirmed. |
+| 2 | `SPEC-FORMAT-TERSE.1.2` | `pending` (gated) | Remove `scalar()/array()/hash()` wrappers + add type inference (RHS shape + arg position). |
+| 3 | `SPEC-FORMAT-TERSE.1.4` | `pending` (gated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
+| … | `.1.3`,`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` (gated) | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
 
+- `2026-06-18`: **ACTIVATED + RATIFIED (user).** The user activated the tree (AskUserQuestion choice
+  "Activate SPEC-FORMAT-TERSE now", during `SPEC-LANG-REFERENCE.10.5.4`) and reinforced the key
+  semantics in their own words across several messages — all consistent with the brainstorm card +
+  the Round 1–3 transcription below: `assign(x,v)`→`x = v` (op) / `set`; **no sigils** (bare typed
+  identifiers, no `scalar()/array()/hash()` wrappers); type inference at init or by argument position;
+  `copy()` unifies `array_copy`/`hash_copy` (arrays + hashes); arrays/hashes/numbers/strings have
+  **methods** (chain by return type); **everything is an expression** → typed values, control flow +
+  `{}` blocks are expressions. Recorded as ADR
+  [`0007`](../decisions/0007-spec-format-terse-direction.md). `.0` done. **Migration policy ratified:
+  canonical-new + deprecated-old-alias (gradual), then explicit retirement** (open to a user override
+  toward one-shot hard rename). Touching the Perl reference for this evolution is a **user-sanctioned
+  exception** to [[feedback_do-not-fix-reference-engine]]. Consequence: `SPEC-LANG-REFERENCE` book
+  scorch paused; implementation leaves `.1.x`+ gated by a usable `t/phase0_regression.t`
+  (`RTLUTILS-REGEX-HANG`) — execution-order decision surfaced to the user.
 - `2026-06-16`: Created tree to formalize the 2026-06-15 brainstorm so the direction is owned and
   pivotable, not just a KM memo. Status `proposed`; implementation deferred until after the RTLUtils
-  hang fix (user directive 2026-06-16).
+  hang fix (user directive 2026-06-16). *(Superseded 2026-06-18: user activated the tree; `.0` ratified
+  the direction. The RTLUtils gate now constrains only the implementation leaves, not `.0`.)*
 - `2026-06-16`: The brainstorm is the converged-but-tentative direction (per the card, "no decisions
   finalized"); therefore `.0` ratification + an ADR precede any implementation when the tree is activated.
 - Faithful transcription of the brainstorm (so it survives independent of the KM card):
@@ -251,21 +291,37 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 ## Blockers
 
-- Not started by design (proposed). Implementation blocked behind `RTLUTILS-REGEX-HANG` per user directive.
+- `.0` (ratify + ADR) is **done** (design-only — not gated). The **implementation leaves (`.1.x`+) are
+  blocked** on: (1) a usable `t/phase0_regression.t` gate — currently hung by `RTLUTILS-REGEX-HANG`
+  (`RTLUtils::add_header_n_context_clause` catastrophic regex); unblock = fix that hang (own a tree) or
+  agree a scoped check; and (2) user confirmation of the migration policy (gradual-alias vs hard
+  rename). Both surfaced to the user 2026-06-18. Next task that should run instead, if the user wants
+  to proceed: fix `RTLUTILS-REGEX-HANG` first.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-16` | `SPEC-FORMAT-TERSE` | Transcription faithful to `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` | Done — all Rounds 1–3 captured as leaves; Round 4+ as a discovery leaf |
+| `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `SPEC-FORMAT-TERSE` (creation) | `pending` | `pending` |
+| `SPEC-FORMAT-TERSE` (creation) | (in the `SPEC-FORMAT-TERSE.0` activation commit) | Tree was created `proposed` in an earlier session; first commit lands with `.0`. |
+| `SPEC-FORMAT-TERSE.0` | `SPEC-FORMAT-TERSE.0 — activate + ratify the terse .spec format direction (ADR 0007)` | Tree `proposed`→`active`; ADR `0007` + INDEX row; migration policy = gradual alias; reference-touching exception; implementation gated by `RTLUTILS-REGEX-HANG`. No engine/book change. |
 
 ## Changelog
 
+- `2026-06-18`: **Activated + ratified (`.0` done).** The user activated the tree during
+  `SPEC-LANG-REFERENCE.10.5.4` (AskUserQuestion: "Activate SPEC-FORMAT-TERSE now") and reinforced the
+  terse semantics over several messages (`assign`→`=`/`set`; no-sigil typed bare identifiers; type
+  inference at init / by arg position; `copy()` unifies array+hash; arrays/hashes/numbers/strings have
+  methods; everything-is-an-expression). Wrote ADR `0007` ratifying Rounds 1–3 + the gradual-alias
+  migration policy + lockstep-all-variants + the user-sanctioned reference-touching exception + the
+  regression-gate requirement; indexed it. Status `proposed`→`active`. The `SPEC-LANG-REFERENCE` book
+  scorch is paused for this pivot. Implementation leaves `.1.x`+ remain gated by `RTLUTILS-REGEX-HANG`
+  + a user confirmation of the migration policy — both surfaced to the user. No engine/book change.
 - `2026-06-16`: Created tree; transcribed the 2026-06-15 brainstorm (Rounds 1–3) into pickable leaves;
   parked as `proposed` pending the RTLUtils hang fix.
