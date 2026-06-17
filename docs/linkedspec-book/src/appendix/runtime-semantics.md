@@ -247,14 +247,16 @@ Done::
 Input `xhello` → output `["?proof:", "ok"]` — an array.
 
 ```text
-Pair::AND
- /(\w+)=(\w+)/ -> Pair[0] {
+Pair::
+ /(\w+)=(\w+)/ -> Pair {
    return(array("?pair:", match_group(0), match_group(1)));
  }
 ```
 Input `key=val` → output `["?pair:", "key", "val"]` — here the author chose an array
 holding an (optional, §5.6) leading tag plus the two captures (`match_group(0)` is the
 first capture group; see [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups)).
+The rule returns the value through a self-referencing action edge (`-> Pair`), which is
+what surfaces the `return(...)` value as the top-level output (§5.7).
 
 ### 5.6 The Output Shape Is the Author's Choice
 

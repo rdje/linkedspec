@@ -6,11 +6,11 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.5.2` done — verified worked examples added to all 17 Scalar +
-  18 Numeric helpers in `helper-contract-catalog.md`, each compile-AND-run verified through
-  `LinkedSpec::Get` against the oracle; caught 2 do-not-guess traps (`is_defined`/`is_undefined`
-  condition-only; `split→num_sum` non-composition); discovered a §5.5 drift defect → new leaf `.9`;
-  `mdbook build` exit 0; frontier → `.9` then `.5.3`)
+- Last updated: `2026-06-17` (`.9` done — fixed the §5.5 `runtime-semantics.md` Pair example
+  (`Pair::AND … -> Pair[0]` returned `[]`; corrected to the verified OR self-ref `-> Pair` form →
+  `["?pair:","key","val"]`); the fix surfaced a SYSTEMIC variant of the drift across several chapters
+  (notably `worked-spec-walkthrough.md`) → new leaf `.10`, **blocked on a user decision**
+  (engine-bug-fix vs doc-rewrite); `mdbook build` exit 0; frontier → `.10` (blocked) then `.5.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -63,7 +63,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Status: `active`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
   Children: `.1`–`.4` (done), `.5` (active: `.5.1`–`.5.2` done, `.5.3`–`.5.5` pending), `.6`, `.7`,
-  `.8`, `.9` (drift fix discovered during `.5.2`)
+  `.8`, `.9` (done — §5.5 drift fix), `.10` (systemic AND-`[0]`-self-edge output-drift audit;
+  blocked on a user decision)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -284,7 +285,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `pending`
 
 - ID: `SPEC-LANG-REFERENCE.9`
-  Status: `pending`
+  Status: `done`
   Goal: Correct the drifted "verified" output in `runtime-semantics.md` §5.5 (Pair example)
   Acceptance: change the §5.5 third example so its documented output matches a **re-verified**
   live run — the `["?pair:","key","val"]` output requires the OR self-ref form
@@ -293,6 +294,42 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   through `LinkedSpec::Get` before asserting; check no other §5.5/§5.6 snippet has the same
   AND-`[N]`-self-edge drift; `mdbook build` exit 0. (Discovered during `.5.2`; high priority —
   a known-wrong "verified" example violates the no-drift doctrine.)
+  Verification: Done — 2026-06-17. Re-verified with the scratch oracle driver: the **current**
+  `Pair::AND … -> Pair[0] { return(array(…)) }` form outputs `[]` (reconfirmed under default,
+  `consume`, AND `seek` — parse mode is NOT the variable); the **corrected** OR self-ref form
+  `Pair:: … -> Pair { return(array("?pair:", match_group(0), match_group(1))) }` outputs
+  `["?pair:","key","val"]` (verified default + consume). Fixed the §5.5 third example to that form
+  and added a one-line note that the self-ref action edge (`-> Pair`) is what surfaces the return
+  value (§5.7 cross-ref). §5.5/§5.6 sweep: the first two §5.5 examples are frozen Top→Done OR
+  fixtures (correct); the §5.6 `object`/`manifest` snippets are `I.return` fluent on `:` body rules
+  (a different construct, grounded in shipped specs — NOT the AND-`[N]`-self-edge class, left
+  untouched; a faithful standalone reconstruction is entangled with entry-group seeding per the
+  `.4` lesson, so not rewritten here). `mdbook build` exit 0. **Discovered a SYSTEMIC variant of
+  this drift** (owned by new leaf `.10`, not bundled): the same single-slot `::AND … -> Rule[0]
+  { return(...) }` form is used in **several other chapters that assert a concrete top-level output**
+  — most importantly `user-model/worked-spec-walkthrough.md` (claims `{kind=>"pair",…}` for
+  `answer = 42`; actually returns `[]`). Shipped specs DO use `-> Rule[N] { return(...) }` self-edges,
+  but on **multi-slot** rules returning at the closing slot (often an accumulator snapshot), so the
+  construct is real — the drift is specifically single-slot `::AND` self-edge examples claiming the
+  `return` value as output.
+  Commit: `SPEC-LANG-REFERENCE.9` (see Commit Log)
+
+- ID: `SPEC-LANG-REFERENCE.10`
+  Status: `pending`
+  Goal: Book-wide audit + fix of examples whose **asserted top-level output** is not what the spec
+  actually returns (the single-slot `::AND … -> Rule[0] { return(...) }` self-edge → `[]` drift)
+  Acceptance: enumerate every book example that (a) uses a single-slot `::AND`/AND-mode rule with a
+  self-referencing `-> Rule[0]` action edge that `return(...)`s a value AND (b) asserts a concrete
+  top-level output; for each, **re-verify through `LinkedSpec::Get`** and reconcile the example with
+  reality. Known sites to start from (`grep -rnE '::AND' + '-> \w+\[0\]'`): `worked-spec-walkthrough.md`
+  (lines ~37/85/95/111 — asserts `{kind=>"pair",…}`), and audit `regex-in-spec.md`,
+  `spec-files-and-rule-paragraphs.md`, `get-and-get-parser.md`, `overview/what-is-linkedspec.md`,
+  `rule-modes-and-parse-modes.md`. `mdbook build` exit 0; add a KM card so the trap is not re-derived.
+  **Blocked-on decision (see Open Questions):** whether the single-slot-AND-self-edge-`return`→`[]`
+  behavior is an **engine bug to fix** (so the examples become correct as written) or **intended
+  reference behavior the docs must reflect** (so examples are rewritten to a verified-producing form
+  / accumulator-snapshot idiom). This fork changes the work materially (Perl reference + Rust parity
+  + oracle vs. multi-chapter doc rewrite) and needs the user's direction.
   Verification: `pending`
   Commit: `pending`
 
@@ -361,8 +398,9 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.4` | `done` | grouped-target example (edges chapter) + entry-vs-match divergence example (capture chapter), both compile-verified (2026-06-17) |
 | — | `SPEC-LANG-REFERENCE.5.1` | `done` | helper-catalog audit (2026-06-17): 0 public-API completeness gaps; 2 variant-neutrality sigil leaks fixed; example-density gap decomposed into `.5.2`–`.5.5` |
 | — | `SPEC-LANG-REFERENCE.5.2` | `done` | worked examples for all 17 Scalar + 18 Numeric helpers (2026-06-17), each compile-AND-run verified through `LinkedSpec::Get`; 2 do-not-guess traps caught; §5.5 drift defect found → `.9` |
-| 1 | `SPEC-LANG-REFERENCE.9` | `pending` | **next** — correct the drifted §5.5 "verified" Pair output (`[]` vs documented tagged array); no-drift priority |
-| 2 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) |
+| — | `SPEC-LANG-REFERENCE.9` | `done` | §5.5 Pair example corrected to the verified OR self-ref form (2026-06-17); surfaced a SYSTEMIC AND-`[0]`-self-edge output-drift across several chapters → `.10` |
+| — | `SPEC-LANG-REFERENCE.10` | `blocked` | systemic AND-`[0]`-self-edge output-drift audit/fix — **blocked on a user decision** (engine-bug-fix vs doc-rewrite); see Open Questions/Blockers |
+| 1 | `SPEC-LANG-REFERENCE.5.3` | `pending` | **next (unblocked)** — worked examples: Array family (largest) |
 | 3 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
 | 4 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
 | 5 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
@@ -382,10 +420,23 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 - (audit) Granularity of the gap-filling leaves — decided when `.1` completes (likely grouped
   by construct family: file/paragraph model, rule modes, parse modes, edges, lifecycle markers,
   capture/mark, helper families, control flow, runtime semantics, + a KM-cards leaf + finalize).
+- (`.10`, DECISION NEEDED — surfaced to user 2026-06-17) A single-slot `::AND`/AND-mode rule with a
+  self-referencing `-> Rule[0]` action edge whose block `return(...)`s a value returns the **empty
+  accumulator `[]`**, not the returned value (verified under default/`consume`/`seek`). Several book
+  examples that assert a concrete top-level output are written this way (notably the canonical
+  `worked-spec-walkthrough.md`, which claims `{kind=>"pair",…}`). **Is this an engine bug** (the
+  AND-self-edge `return` *should* surface, so the Perl reference — and Rust — should be fixed and the
+  examples become correct as written) **or intended reference behavior** (so the examples must be
+  rewritten to a verified-producing form: the OR self-ref `-> Rule` edge, or the multi-slot
+  closing-slot accumulator-snapshot idiom the shipped specs use)? The answer decides `.10`'s shape
+  (engine + parity + oracle work vs. multi-chapter doc rewrite).
 
 ## Blockers
 
-- None.
+- `.10` is **blocked** on the Open-Question decision above (engine-bug-fix vs doc-rewrite for the
+  single-slot AND-self-edge output drift). Unblock condition: user picks the direction. Next task
+  meanwhile: `.5.3` (Array-family worked examples) — independent, uses the already-verified OR
+  self-ref scaffold, not blocked.
 
 ## Verification Log
 
@@ -397,6 +448,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.4` | both new examples **compiled** through `LinkedSpec::Get` (grouped target + `Call`→`Inner` divergence); ran ~9 minimal accumulator/dispatch shapes to attempt a top-level divergence I/O (all → `[]`/`undef`/`0`, the documented hard accumulator axes); divergence semantics grounded in `.2`'s verified source wiring + the existing source-boundary example; `mdbook build` | `mdbook build` exit 0; grouped-target section (`action-and-lifecycle-placement.md`) + entry-vs-match divergence section (`capture-marks-and-source-locations.md`). Divergence documented at the reader-wiring level (not a fabricated I/O) — honest scope note recorded |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.1` | delegated read-only catalog audit (`Contracts.pm` id set vs catalog); self-verified the 2 flagged sigil leaks at `helper-contract-catalog.md:13,159` + whole-catalog re-sweep for `$`/`@`/`%` sigils and `lowers to`/`do {`/`Data::Dumper`/`JSON::PP`/`//gcp`; `mdbook build` | `mdbook build` exit 0; **0 public-API completeness gaps** (158 ids = ~130 public + 17 internal IR variants + ~11 deprecated `compatibility_surface`); **2 sigil leaks fixed**, no others; example-density gap (0/~140) decomposed into `.5.2`–`.5.5` |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.2` | scratch oracle-style driver (`LinkedSpec::Get` → run parser on input → `JSON::PP->canonical` encode) over all 35 Scalar+Numeric examples; sanity-checked vs frozen fixtures `proof_edge_{scalar,array}_literal` (reproduced exactly); probed the value-vs-condition lowering split in `ActionIR/FlowExpr.pm`; `mdbook build` | `mdbook build` exit 0; 35/35 examples produce the documented outputs; `is_defined`/`is_undefined` documented condition-only (die as values); `split→num_sum` non-composition avoided (array-form reducers use explicit `array(...)`); **discovered** §5.5 Pair example outputs `[]` not the tagged array → owned by new leaf `.9` (not bundled) |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.9` | scratch oracle driver: reconfirmed `Pair::AND … -> Pair[0]` → `[]` under default/`consume`/`seek`; confirmed corrected OR self-ref `-> Pair` → `["?pair:","key","val"]`; §5.5/§5.6 sweep; whole-book `grep -E '-> \w+\[0\]'` + `::AND` cross-scan; checked `worked-spec-walkthrough.md` claimed output + ground-truthed self-edge idiom vs shipped specs (`portmap`/`hlink_substitution`/`DT`); `mdbook build` | `mdbook build` exit 0; §5.5 Pair example fixed (+ §5.7 cross-ref note); §5.6 left untouched (different construct). **Found SYSTEMIC variant** — single-slot `::AND -> Rule[0] { return }` output drift in several chapters (notably `worked-spec-walkthrough.md` claims `{kind=>"pair",…}`, actually `[]`) → new leaf `.10`, **blocked on a user decision** (engine-bug vs doc-rewrite) |
 
 ## Commit Log
 
@@ -408,6 +460,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.4` | `SPEC-LANG-REFERENCE.4 — book: grouped action-edge targets (edges chapter) + entry-vs-match divergence (capture chapter)` | Grouped-target section in `action-and-lifecycle-placement.md` (ebnf-grounded) + divergence section in `capture-marks-and-source-locations.md`; both examples compile-verified. Divergence documented at reader-wiring level (top-level I/O entangled with hard accumulator axes — not fabricated) |
 | `SPEC-LANG-REFERENCE.5.1` | `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5` | Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.5.2` | `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)` | 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0 |
+| `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
 
 ## Changelog
 
@@ -488,3 +541,17 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   `array(...)` (split deferred to the Array family `.5.3`). **Discovered defect** (owned separately, not
   bundled): the §5.5 `runtime-semantics.md` Pair example outputs `[]`, not the documented tagged array
   → new leaf `.9`. `mdbook build` exit 0. Frontier → `.9` (no-drift priority) then `.5.3`.
+- `2026-06-17`: `.9` done — corrected the §5.5 `runtime-semantics.md` Pair example. Reconfirmed the
+  `Pair::AND … -> Pair[0] { return(array(…)) }` form returns `[]` under default/`consume`/`seek`, and
+  the OR self-ref `Pair:: … -> Pair { return(array("?pair:", match_group(0), match_group(1))) }` form
+  returns the documented `["?pair:","key","val"]`; swapped the example to that form + added a §5.7
+  cross-ref note that the self-ref edge surfaces the return value. §5.5/§5.6 swept (frozen Top→Done
+  fixtures correct; §5.6 `I.return`-on-`:`-rule snippets are a different, shipped-spec-grounded
+  construct, left untouched). **The fix surfaced a SYSTEMIC variant of the drift**: the same single-slot
+  `::AND -> Rule[0] { return(...) }` form is used in several other chapters that ALSO assert a concrete
+  top-level output (notably the canonical `worked-spec-walkthrough.md`, claiming `{kind=>"pair",…}` for
+  `answer = 42`; actually `[]`). Ground-truthed against shipped specs: `-> Rule[N] { return(...) }`
+  self-edges are real, but on **multi-slot** rules returning at the closing slot (often an accumulator
+  snapshot), so the construct is valid — the drift is single-slot `::AND` self-edge examples claiming
+  the `return` value as output. Owned by new leaf `.10`, **blocked on a user decision** (engine-bug-fix
+  vs doc-rewrite; surfaced to the user). `mdbook build` exit 0. Frontier → `.10` (blocked) then `.5.3`.

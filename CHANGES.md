@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.9: fix drifted §5.5 Pair example output (+ surface a systemic variant)
+
+`.9` corrects the confirmed defect `.5.2` discovered: the `runtime-semantics.md` §5.5 third
+("Pair") example documented the output `["?pair:", "key", "val"]`, but its spec
+(`Pair::AND … -> Pair[0] { return(array("?pair:", …)) }`) actually returns the empty accumulator
+`[]`. Re-verified through `LinkedSpec::Get`: the `[]` result holds under default, `consume`, AND
+`seek` parse modes (parse mode is not the variable), while the OR self-ref form
+`Pair:: /(\w+)=(\w+)/ -> Pair { return(array("?pair:", match_group(0), match_group(1))) }` returns
+`["?pair:", "key", "val"]`. Swapped §5.5 to that verified form and added a one-line note that the
+self-referencing action edge (`-> Pair`) is what surfaces the `return(...)` value (§5.7 cross-ref).
+
+§5.5/§5.6 sweep: the first two §5.5 examples are frozen Top→Done OR fixtures (correct); the §5.6
+`object`/`manifest` snippets are `I.return` fluent forms on `:` body rules — a different construct
+grounded in the shipped corpus, not the AND-`[N]`-self-edge class — and are left untouched (a faithful
+standalone reconstruction is entangled with entry-group seeding per the `.4` lesson).
+
+**Systemic finding (owned by new leaf `.10`, NOT fixed here — blocked on a user decision):** a
+whole-book sweep (`grep -E '-> \w+\[0\]'` + `::AND`) shows the same single-slot
+`::AND … -> Rule[0] { return(...) }` form is used in several other chapters that ALSO assert a
+concrete top-level output — most importantly the canonical `user-model/worked-spec-walkthrough.md`,
+which claims the output `{kind=>"pair", name=>"answer", value=>"42"}` for input `answer = 42` but
+actually returns `[]` (verified). Ground-truthing against shipped specs (`portmap.spec`,
+`hlink_substitution.spec`, `DT.spec`) confirms `-> Rule[N] { return(...) }` self-edges are a real
+idiom — but on **multi-slot** rules returning at the closing slot (often an accumulator snapshot),
+so the construct is valid; the drift is specifically single-slot `::AND` self-edge examples claiming
+the `return` value as the output. The fix direction is a genuine fork — **engine-bug-fix** (make the
+AND-self-edge `return` surface, fixing the Perl reference + Rust + oracle so the examples become
+correct) vs **doc-rewrite** (rewrite the examples to a verified-producing form) — recorded as an
+Open Question and surfaced to the user; `.10` is blocked until the direction is chosen.
+
+Validation: `mdbook build` exit 0; corrected snippet re-confirmed through `LinkedSpec::Get`;
+`scripts/check_memory_architecture.sh` exit 0. Frontier → `.5.3` (next unblocked leaf); `.10` blocked.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.5.2: compile-verified worked examples for all Scalar + Numeric helpers
 
 `.5.2` fills the example-density gap for the **Scalar (§2)** and **Numeric (§5)** families of

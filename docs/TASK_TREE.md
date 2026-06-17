@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.9` | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
+| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.5.3` (`.10` blocked on a user decision) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7.5.3` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
 ## Proposed Task Trees
