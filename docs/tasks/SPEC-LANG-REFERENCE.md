@@ -6,11 +6,14 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.10.1` done — root-cause investigation of the systemic AND-`[0]`
-  output drift: **VERDICT = accidental regression in the Perl reference** (`AND_SINGLE_ACODE`
-  emitter drops the edge return — missing `push` at `HandlerVariantEmitter.pm:575-582`), triple-verified
-  + KM card written; `.10.2` (the fix) stays **blocked on a user decision** (engine-fix vs doc-rewrite)
-  now informed by the verdict; PNT loop still held per user; next selectable `.5.3` once unblocked)
+- Last updated: `2026-06-17` (**MAJOR CORRECTION** — user established that a `.spec` top (`::`)
+  rule has NO regex; a valid spec needs ≥2 rules (top entry + ≥1 normal `:` rule carrying the
+  regex). This means `.5.2`'s 35 examples + catalog preamble AND `.9`'s §5.5 example are
+  **structurally invalid** (regex on the top rule), and `.10.1`'s "engine bug" verdict was **WRONG**
+  — the `[]` was just invalid structure, NOT an `AND_SINGLE_ACODE` regression. NO engine change; Perl
+  reference untouched. Replaced the bad KM card with `spec-top-rule-no-regex-two-rule-minimum.md`
+  (proven 2-rule idiom). Remediation owned by `.10.3`/`.10.4`/`.10.5`. **FRESH SESSION recommended**
+  to execute the remediation; repo handoff-ready.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -63,8 +66,9 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Status: `active`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
   Children: `.1`–`.4` (done), `.5` (active: `.5.1`–`.5.2` done, `.5.3`–`.5.5` pending), `.6`, `.7`,
-  `.8`, `.9` (done — §5.5 drift fix), `.10` (systemic AND-`[0]`-self-edge output-drift: `.10.1`
-  investigation done — VERDICT regression/bug; `.10.2` fix blocked on a user decision)
+  `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
+  (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
+  verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.4`/`.10.5`)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -316,46 +320,69 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 
 - ID: `SPEC-LANG-REFERENCE.10`
   Status: `active`
-  Goal: Resolve the systemic single-slot `::AND … -> Rule[0] { return(...) }` output drift
-  (examples assert a concrete top-level output that the spec does not produce — returns `[]`)
-  Children: `.10.1` (done — root-cause investigation), `.10.2` (the fix — blocked on a user decision)
+  Goal: **CORRECTED (2026-06-17, user)** — Remediate the structurally-INVALID `.spec` examples
+  (regex on the top rule / single-rule grammars) introduced in `.5.2`/`.9`, and retract the
+  mis-diagnosed `.10.1` "engine bug" record. **There is NO engine bug.** The `[]` outputs were the
+  result of invalid spec structure, not an `AND_SINGLE_ACODE` regression. See "CORRECTION" in
+  Decisions below. The Perl reference is authoritative and is NOT to be touched
+  ([[feedback_do-not-fix-reference-engine]]).
+  Children: `.10.1` (done — investigation; its verdict is now **superseded** — see note), `.10.2`
+  (**superseded** — the engine-fix-vs-doc fork is moot), `.10.3`/`.10.4`/`.10.5` (remediation)
 
 - ID: `SPEC-LANG-REFERENCE.10.1`
   Status: `done`
   Goal: Read-only root-cause investigation — is the single-slot-AND-self-edge-`return`→`[]`
   behavior an engine bug or intended reference behavior?
-  Acceptance: a verdict grounded in the Perl reference codegen (cite file:line), corroborated by
-  git provenance + any design notes/cards/tests, plus the verified idiomatic value-surfacing forms;
-  a KM card so the trap is not re-derived; no code/book change (investigation only).
-  Verification: Done — 2026-06-17. **VERDICT: accidental regression, NOT intended design** (the
-  user-authorized "investigate first" step). Root cause triple-verified: `_emit_and_single_acode_handler`
-  (`perl/LinkedSpec/HandlerVariantEmitter.pm:564-630`) builds `$transformed` for each edge acode in
-  the loop at 575-582 but **never `push`es it** into `@acodes_transformed`, so
-  `_build_acodes_dispatch_block(\@acodes_transformed)` (583) gets an empty list, the edge dispatch is
-  omitted, and the handler ends `return \@${label}_collect;` (628) over a never-written accumulator →
-  `[]`. (Verified by reading the source directly.) Provenance: the MEDIUM-IMPACT.3.4.x emitter rework
-  (`148c746` "apply return→assignment in AND_SINGLE_ACODE emitter" → `7fec186`); the sibling
-  `_emit_and_acode_seq_handler` got the same edit **with** its `push` (oversight, not design). Already
-  flagged as a known gap in `docs/knowledge/specentry-perl-coupling-inventory.md:234` ("AND_SINGLE_ACODE
-  and AND_ACODE lack E-block support … Adding E-block to AND_SINGLE_ACODE would fix MEDIUM-IMPACT.3.4");
-  no `t/phase0_regression.t` assertion pins the `[]` value as intended. Verified idiomatic value-surfacing
-  forms: OR self-ref `-> Rule` (`OR_ACODE`), multi-slot AND single-closing-slot return (routes via
-  `_default`), REP accumulate. KM card `docs/knowledge/and-single-acode-edge-return-dropped.md` written.
-  Delegated read-only agent + self-verified the 3 load-bearing claims against source. No code/book change.
-  Commit: `SPEC-LANG-REFERENCE.10.1` (see Commit Log)
+  Verification: Done — 2026-06-17. **NOTE — VERDICT SUPERSEDED 2026-06-17 by user correction.**
+  The investigation traced the `[]` to a missing `push` in `_emit_and_single_acode_handler` and
+  concluded "engine regression." **That conclusion was WRONG**, because the *premise* was wrong:
+  the examples that returned `[]` are **structurally invalid** — they put a regex on the **top
+  (`::`) rule** and/or use a single rule. A valid `.spec` has ≥2 rules (a top `::` entry rule with
+  NO regex — the dispatch loop — plus ≥1 normal `:` rule carrying the regex); the top rule is
+  entered without matching any regex (`BootstrapSpec/Core.pm:414,417` tag `::`→`_INITIAL`;
+  `RuleIR.pm:193-195`; all 20 shipped specs have `regex_on_top=no`). So `[]` is the correct output
+  for an invalid grammar, not an engine defect. The mis-diagnosis KM card
+  (`and-single-acode-edge-return-dropped.md`) is **DELETED** and replaced by the correct card
+  `spec-top-rule-no-regex-two-rule-minimum.md`. Lesson recorded in DEVELOPMENT_NOTES.
+  Commit: `SPEC-LANG-REFERENCE.10.1` (investigation), corrected by the `.10` remediation commit.
 
 - ID: `SPEC-LANG-REFERENCE.10.2`
-  Status: `blocked`
-  Goal: Apply the chosen resolution for the single-slot AND output drift
-  Acceptance: per the user's direction (see Open Questions / Blockers) — EITHER (engine-fix) restore
-  the dropped `push` + wire the edge result into the collect/return tail of `AND_SINGLE_ACODE`
-  (coupling-inventory recommends adding E-block support), fix the sibling `_emit_and_acode_seq_handler`
-  `\$"` bug, run the full `t/phase0_regression.t` gate (confirm no shipped-spec/test output regresses),
-  and mirror in the Rust variant for cross-variant parity; OR (doc-rewrite) rewrite every affected book
-  example (`worked-spec-walkthrough.md` + the audited chapters) to a verified-producing idiom. Either
-  path ends with `mdbook build` exit 0 and the KM card updated. **If engine-fix is chosen, the fix is
-  engine + parity work — spin a dedicated engine task-tree (it is not documentation work and does not
-  belong under this doc tree); this leaf then becomes the doc-side reconciliation.**
+  Status: `superseded`
+  Goal: ~~Apply the engine-fix-vs-doc-rewrite resolution~~ — **SUPERSEDED** (2026-06-17). There is
+  no engine bug and the Perl reference must not be touched, so the fork is moot. Replaced by the
+  doc-remediation leaves `.10.3`–`.10.5`.
+  Verification: n/a (superseded)
+  Commit: n/a
+
+- ID: `SPEC-LANG-REFERENCE.10.3`
+  Status: `pending`
+  Goal: Redo the `.5.2` Scalar + Numeric helper examples **and the catalog "Worked examples"
+  preamble** with VALID `.spec` structure
+  Acceptance: replace the invalid `Demo:: /regex/ -> Demo { return(<expr>) }` scaffold (regex on the
+  top rule) with the **verified** two-rule idiom — a top `::` entry rule (no regex) dispatching to a
+  normal `:` rule that carries the regex and returns the helper value reading `entry_group(N)` (see
+  the proven idiom in Decisions / KM card `spec-top-rule-no-regex-two-rule-minimum.md`). Re-verify
+  EVERY example through `LinkedSpec::Get` (and re-derive its real output); update the preamble to
+  teach the correct structure. `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.4`
+  Status: `pending`
+  Goal: Redo the `.9` §5.5 `runtime-semantics.md` Pair example with valid structure
+  Acceptance: replace the single-rule `Pair:: /…/ -> Pair { … }` form (still a regex on the top
+  rule) with the two-rule idiom; re-verify through `LinkedSpec::Get`; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5`
+  Status: `pending`
+  Goal: Audit + fix the other book chapters that use a regex-on-top-rule example
+  Acceptance: re-check the sites flagged by `grep -rnE '::AND|-> \w+\[0\]'` (e.g.
+  `worked-spec-walkthrough.md`, `regex-in-spec.md`, `spec-files-and-rule-paragraphs.md`,
+  `get-and-get-parser.md`, `overview/what-is-linkedspec.md`, `rule-modes-and-parse-modes.md`); for
+  each example that asserts a concrete output, ensure it uses valid ≥2-rule structure and its
+  documented output matches a `LinkedSpec::Get` run. `mdbook build` exit 0.
   Verification: `pending`
   Commit: `pending`
 
@@ -425,16 +452,46 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.5.1` | `done` | helper-catalog audit (2026-06-17): 0 public-API completeness gaps; 2 variant-neutrality sigil leaks fixed; example-density gap decomposed into `.5.2`–`.5.5` |
 | — | `SPEC-LANG-REFERENCE.5.2` | `done` | worked examples for all 17 Scalar + 18 Numeric helpers (2026-06-17), each compile-AND-run verified through `LinkedSpec::Get`; 2 do-not-guess traps caught; §5.5 drift defect found → `.9` |
 | — | `SPEC-LANG-REFERENCE.9` | `done` | §5.5 Pair example corrected to the verified OR self-ref form (2026-06-17); surfaced a SYSTEMIC AND-`[0]`-self-edge output-drift across several chapters → `.10` |
-| — | `SPEC-LANG-REFERENCE.10.1` | `done` | root-cause investigation (2026-06-17): VERDICT = accidental regression in the Perl reference (`AND_SINGLE_ACODE` emitter drops the edge return); KM card written |
-| — | `SPEC-LANG-REFERENCE.10.2` | `blocked` | apply the fix — **blocked on a user DIRECTION decision** (engine-fix vs doc-rewrite vs both); see Open Questions/Blockers |
-| 1 | `SPEC-LANG-REFERENCE.5.3` | `pending` | next unblocked leaf — worked examples: Array family (largest); **PNT loop held by user until `.10` decided** |
-| 3 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
-| 4 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
-| 5 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 6 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 7 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| — | `SPEC-LANG-REFERENCE.10.1` | `done` | investigation (2026-06-17); **verdict SUPERSEDED** — no engine bug; the `[]` was invalid spec structure (regex on top rule). Bad KM card deleted + replaced |
+| — | `SPEC-LANG-REFERENCE.10.2` | `superseded` | engine-fix-vs-doc fork is moot (no engine bug; reference untouched) |
+| 1 | `SPEC-LANG-REFERENCE.10.3` | `pending` | **next (fresh session)** — redo `.5.2` Scalar+Numeric examples + catalog preamble with the valid 2-rule idiom (re-verified) |
+| 2 | `SPEC-LANG-REFERENCE.10.4` | `pending` | redo `.9` §5.5 example with valid 2-rule structure |
+| 3 | `SPEC-LANG-REFERENCE.10.5` | `pending` | audit + fix other chapters using a regex-on-top-rule example |
+| 4 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the remediation |
+| 5 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
+| 6 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
+| 7 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 8 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 9 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-06-17` — CORRECTION (user-established `.spec` structural invariant; supersedes the `.10.1`
+  engine-bug verdict).** A `.spec` **top-level rule** (written with `::`) is the **entry point**:
+  it is entered at startup and runs a `while(1)` loop that matches the regexes of the **non-top
+  (`:`) rules** and dispatches to them. **The top rule has NO regex of its own.** Therefore a valid
+  `.spec` has **at least two rules**: the `::` entry rule **plus** ≥1 normal `:` rule that carries
+  the regex(es). Authoritative basis: `BootstrapSpec/Core.pm:414` (label line is anchored
+  `\A LABEL (::|:) MODE \z` — no regex on the label) + `:417` (`::`→`_INITIAL`), `RuleIR.pm:193-195`
+  (`_INITIAL`→`top_rule`), and an audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`).
+  A regex-on-top-rule or single-rule spec is **malformed**; the engine is permissive and returns the
+  empty top accumulator `[]` (NOT a bug). The Perl reference is authoritative and **must not be
+  touched** ([[feedback_do-not-fix-reference-engine]]). Consequence: `.5.2` (35 examples + the
+  catalog preamble) and `.9` (§5.5) used the invalid `Demo:: /regex/ -> Demo {…}` form and must be
+  redone (`.10.3`/`.10.4`); other chapters audited in `.10.5`. KM card:
+  `spec-top-rule-no-regex-two-rule-minimum.md`.
+  **Proven minimal worked-example idiom** (verified via `LinkedSpec::Get`, modeled on
+  `specs/lib_reader.spec` / `specs/tclite.spec`):
+  ```text
+  demo_top::  -> word_pair  .push
+  LX {return(array_copy(a(demo_top)))}
+
+  word_pair : /(\w+) (\w+)/  I.return(concat(entry_group(0), "-", entry_group(1)))
+  ```
+  Input `hello world` → `["hello-world"]`. KEY: the normal rule reads **`entry_group(N)`** (the
+  entering match), NOT `match_group(N)` (local match, unset in the child's `I` block — the cause of
+  an earlier `[null]`). The output is the top rule's accumulator snapshot (so one match → a
+  one-element array); the per-match helper value here is `"hello-world"`.
 
 - `2026-06-17`: Created tree to own the user request (comprehensive variant-agnostic `.spec`
   documentation + KM cards). Per the splitting discipline, the first leaf is an audit that
@@ -447,29 +504,18 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 - (audit) Granularity of the gap-filling leaves — decided when `.1` completes (likely grouped
   by construct family: file/paragraph model, rule modes, parse modes, edges, lifecycle markers,
   capture/mark, helper families, control flow, runtime semantics, + a KM-cards leaf + finalize).
-- (`.10`, DECISION NEEDED — surfaced to user 2026-06-17; **investigation `.10.1` now ANSWERS the
-  bug-vs-intended sub-question**) A single-slot `::AND`/AND-mode rule with a self-referencing
-  `-> Rule[0]` action edge whose block `return(...)`s a value returns the **empty accumulator `[]`**,
-  not the returned value (verified under default/`consume`/`seek`). Several book examples assert a
-  concrete top-level output this way (notably the canonical `worked-spec-walkthrough.md`, claims
-  `{kind=>"pair",…}`). **`.10.1` verdict: this is an accidental REGRESSION/bug in the Perl reference**
-  (`AND_SINGLE_ACODE` emitter drops the edge acode — missing `push`, `HandlerVariantEmitter.pm:575-582`;
-  introduced by MEDIUM-IMPACT.3.4.x; pre-documented gap; no test pins `[]` as intended). **Remaining
-  decision (DIRECTION for `.10.2`):** given it's a bug — (A) **fix the engine** (restore the edge-return
-  path in `AND_SINGLE_ACODE` + fix the sibling `AND_ACODE` `\$"` bug + full regression + mirror in Rust
-  for parity; the intuitive book examples then become correct) vs (B) **doc-rewrite only** (leave the
-  engine gap, rewrite the affected examples to verified idioms — OR self-ref / multi-slot closing-slot)
-  vs (C) **both, sequenced** (doc-safety now to stop the false claims, engine-fix tree to follow).
-  Recommendation: (A) or (C) — it's a real reference regression, and doc-rewriting around it enshrines
-  a broken authoring form. Engine-fix belongs in a dedicated engine tree (not this doc tree).
+- ~~(`.10`, DECISION NEEDED — engine-fix vs doc-rewrite for the single-slot AND output drift)~~
+  **RESOLVED / WITHDRAWN 2026-06-17.** The premise (an `AND_SINGLE_ACODE` engine bug) was wrong: the
+  affected examples are **structurally invalid** (regex on the top rule / single-rule). There is no
+  engine bug, the Perl reference is **not** to be touched, and the fix is purely documentation
+  (rewrite the examples to the valid 2-rule idiom). See the CORRECTION in Decisions. The fork no
+  longer exists.
 
 ## Blockers
 
-- `.10.2` is **blocked** on the Open-Question DIRECTION decision above (engine-fix vs doc-rewrite vs
-  both, now that `.10.1` has confirmed it is a reference bug). Unblock condition: user picks the
-  direction. (`.10.1` investigation is done.) Next task meanwhile: `.5.3` (Array-family worked
-  examples) — independent, uses the already-verified OR self-ref scaffold, not blocked — **but the
-  user has asked to HOLD the PNT loop until `.10` is decided.**
+- None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
+  user's structural correction. The remediation leaves `.10.3`/`.10.4`/`.10.5` are pending and
+  unblocked; a FRESH SESSION is recommended to execute them with the corrected model.)
 
 ## Verification Log
 
@@ -482,7 +528,8 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.1` | delegated read-only catalog audit (`Contracts.pm` id set vs catalog); self-verified the 2 flagged sigil leaks at `helper-contract-catalog.md:13,159` + whole-catalog re-sweep for `$`/`@`/`%` sigils and `lowers to`/`do {`/`Data::Dumper`/`JSON::PP`/`//gcp`; `mdbook build` | `mdbook build` exit 0; **0 public-API completeness gaps** (158 ids = ~130 public + 17 internal IR variants + ~11 deprecated `compatibility_surface`); **2 sigil leaks fixed**, no others; example-density gap (0/~140) decomposed into `.5.2`–`.5.5` |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.2` | scratch oracle-style driver (`LinkedSpec::Get` → run parser on input → `JSON::PP->canonical` encode) over all 35 Scalar+Numeric examples; sanity-checked vs frozen fixtures `proof_edge_{scalar,array}_literal` (reproduced exactly); probed the value-vs-condition lowering split in `ActionIR/FlowExpr.pm`; `mdbook build` | `mdbook build` exit 0; 35/35 examples produce the documented outputs; `is_defined`/`is_undefined` documented condition-only (die as values); `split→num_sum` non-composition avoided (array-form reducers use explicit `array(...)`); **discovered** §5.5 Pair example outputs `[]` not the tagged array → owned by new leaf `.9` (not bundled) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.9` | scratch oracle driver: reconfirmed `Pair::AND … -> Pair[0]` → `[]` under default/`consume`/`seek`; confirmed corrected OR self-ref `-> Pair` → `["?pair:","key","val"]`; §5.5/§5.6 sweep; whole-book `grep -E '-> \w+\[0\]'` + `::AND` cross-scan; checked `worked-spec-walkthrough.md` claimed output + ground-truthed self-edge idiom vs shipped specs (`portmap`/`hlink_substitution`/`DT`); `mdbook build` | `mdbook build` exit 0; §5.5 Pair example fixed (+ §5.7 cross-ref note); §5.6 left untouched (different construct). **Found SYSTEMIC variant** — single-slot `::AND -> Rule[0] { return }` output drift in several chapters (notably `worked-spec-walkthrough.md` claims `{kind=>"pair",…}`, actually `[]`) → new leaf `.10`, **blocked on a user decision** (engine-bug vs doc-rewrite) |
-| `2026-06-17` | `SPEC-LANG-REFERENCE.10.1` | delegated read-only codegen investigation (general-purpose agent, 42 tool-uses) + **self-verified the 3 load-bearing claims against source**: read `HandlerVariantEmitter.pm:564-630` (confirmed the missing `push` at 575-582), `git log -- HandlerVariantEmitter.pm` (confirmed MEDIUM-IMPACT.3.4.x provenance: `148c746`/`7fec186`), and `specentry-perl-coupling-inventory.md:234` (confirmed the pre-documented "lack E-block support" gap); behavioral matrix via `LinkedSpec::Get` (single-slot AND `LX`/`E`/edge `return` all → `[]`; OR self-ref + multi-slot-closing-slot + REP all surface values) | **VERDICT: accidental regression, NOT intended.** Root cause = `AND_SINGLE_ACODE` emitter never pushes the transformed edge acode → empty dispatch → `return \@collect` ([]). KM card `and-single-acode-edge-return-dropped.md` written. No code/book change (investigation only). `.10.2` (fix) blocked on a user DIRECTION decision (engine-fix vs doc-rewrite vs both) |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.10.1` | delegated read-only codegen investigation (general-purpose agent, 42 tool-uses) + **self-verified the 3 load-bearing claims against source**: read `HandlerVariantEmitter.pm:564-630` (confirmed the missing `push` at 575-582), `git log -- HandlerVariantEmitter.pm` (confirmed MEDIUM-IMPACT.3.4.x provenance: `148c746`/`7fec186`), and `specentry-perl-coupling-inventory.md:234` (confirmed the pre-documented "lack E-block support" gap); behavioral matrix via `LinkedSpec::Get` (single-slot AND `LX`/`E`/edge `return` all → `[]`; OR self-ref + multi-slot-closing-slot + REP all surface values) | ~~VERDICT: accidental regression~~ — **SUPERSEDED** (see next row). The verdict was wrong because the premise was wrong (the examples are structurally invalid). |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.10` (correction) | user established the `.spec` structural invariant (top `::` rule has no regex; valid spec ≥2 rules); verified vs `BootstrapSpec/Core.pm:414,417` (`::`→`_INITIAL`, label line anchored — no regex) + `RuleIR.pm:193-195` (`_INITIAL`→`top_rule`) + audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`); **proven the correct 2-rule worked-example idiom** via `LinkedSpec::Get` (`demo_top:: -> word_pair .push; LX{return(array_copy(a(demo_top)))}` + `word_pair : /(\w+) (\w+)/ I.return(concat(entry_group(0),"-",entry_group(1)))` → `["hello-world"]`; the child reads `entry_group` not `match_group`) | **NO engine bug** — the `[]` was invalid spec structure (regex on top rule / single-rule). Perl reference untouched. Deleted the bad KM card; wrote `spec-top-rule-no-regex-two-rule-minimum.md`. `.10.1` verdict + `.10.2` fork superseded; remediation `.10.3`/`.10.4`/`.10.5`. FRESH SESSION recommended |
 
 ## Commit Log
 
@@ -495,7 +542,8 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.5.1` | `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5` | Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.5.2` | `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)` | 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
-| `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change |
+| `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
+| `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
 
 ## Changelog
 
@@ -605,3 +653,17 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   `.10.2` (the fix, **blocked on a user DIRECTION decision**: engine-fix vs doc-rewrite vs both — if
   engine-fix, it's a dedicated engine tree, not doc work). No code/book change. PNT loop remains held
   by the user; next selectable `.5.3` once `.10` direction is set.
+- `2026-06-17`: **MAJOR CORRECTION (user).** The user established the `.spec` structural invariant: a
+  **top (`::`) rule has NO regex** — it is the `_INITIAL` entry/dispatch loop that matches the regexes
+  of the **non-top (`:`) rules**; a valid `.spec` needs **≥2 rules** (top entry + ≥1 normal rule
+  carrying the regex). Verified vs `BootstrapSpec/Core.pm:414,417`, `RuleIR.pm:193-195`, and an audit
+  of all 20 `specs/*.spec` (every top rule has no regex). **This invalidates the premise of `.10.1`:**
+  the single-rule `::AND -> Rule[0] { return }` examples returned `[]` because they are **structurally
+  invalid** (regex on the top rule), NOT an `AND_SINGLE_ACODE` engine bug. There is **no engine bug**;
+  the **Perl reference must not be touched** ([[feedback_do-not-fix-reference-engine]]). Consequence:
+  `.5.2`'s 35 examples + catalog preamble and `.9`'s §5.5 example are structurally invalid and must be
+  redone with the **verified 2-rule idiom** (top entry rule + normal rule reading `entry_group(N)` —
+  see Decisions / KM card `spec-top-rule-no-regex-two-rule-minimum.md`; proven `["hello-world"]`).
+  Deleted the mis-diagnosis KM card `and-single-acode-edge-return-dropped.md`; superseded `.10.1`
+  verdict + `.10.2` fork; added remediation leaves `.10.3`/`.10.4`/`.10.5`. No Perl or book-example
+  change in THIS slice (records + correction only). **FRESH SESSION recommended**; repo handoff-ready.

@@ -1,6 +1,48 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10 (correction): top rule has no regex; `.5.2`/`.9` examples are structurally invalid (NOT an engine bug)
+
+**Major correction, from the user.** A `.spec` **top-level rule** (`::`) has **no regex of its own**:
+it is the `_INITIAL` entry point, entered at startup, that runs a `while(1)` loop matching the regexes
+of the **non-top (`:`) rules** and dispatching to them. A valid `.spec` therefore needs **at least two
+rules** — the `::` entry rule plus ≥1 normal `:` rule carrying the regex(es).
+
+Verified against the reference: `BootstrapSpec/Core.pm:414` (the rule-label line is the anchored
+`\A LABEL (::|:) MODE \z` — a regex can't be part of it) and `:417` (`::`→target `_INITIAL`);
+`RuleIR.pm:193-195` (`_INITIAL`→`top_rule`); and an audit of all 20 `specs/*.spec` (every top rule
+`regex_on_top=no`).
+
+**What this invalidates:**
+- The `.10.1` "engine bug" verdict was **WRONG**. The single-rule `::AND … -> Rule[0] { return(...) }`
+  examples returned `[]` because they are **structurally invalid** (a regex on the top rule, and only
+  one rule), not because of an `AND_SINGLE_ACODE` regression. There is **no engine bug**, and the Perl
+  reference is authoritative and **must not be touched**.
+- `.5.2`'s 35 Scalar/Numeric examples **and the catalog "Worked examples" preamble** (which taught the
+  `Demo:: /regex/ -> Demo { return(<expr>) }` scaffold), and `.9`'s §5.5 Pair example, all put a regex
+  on the top rule — structurally invalid — and must be redone.
+
+**This slice (records/correction only — no Perl, no book-example rewrite yet):**
+- Deleted the mis-diagnosis KM card `docs/knowledge/and-single-acode-edge-return-dropped.md`; wrote
+  `docs/knowledge/spec-top-rule-no-regex-two-rule-minimum.md` with the **verified 2-rule idiom**
+  (modeled on `lib_reader.spec`/`tclite.spec`):
+  ```text
+  demo_top::  -> word_pair  .push
+  LX {return(array_copy(a(demo_top)))}
+
+  word_pair : /(\w+) (\w+)/  I.return(concat(entry_group(0), "-", entry_group(1)))
+  ```
+  Input `hello world` → `["hello-world"]`. The normal rule reads **`entry_group(N)`** (entry match),
+  NOT `match_group(N)` (local match, unset in the child `I` block — the cause of an earlier `[null]`).
+- Reframed `.10`: superseded `.10.1`'s verdict and the `.10.2` engine-fix-vs-doc fork; added
+  remediation leaves `.10.3` (redo `.5.2` examples + preamble), `.10.4` (redo `.9` §5.5), `.10.5`
+  (audit the other chapters flagged by `grep '::AND'`/`'-> \w+\[0\]'`).
+- Saved durable guidance: `feedback_do-not-fix-reference-engine`, `feedback_spec-structure-top-plus-normal`.
+
+Validation: `scripts/check_memory_architecture.sh` exit 0; KM gate regenerates `KNOWLEDGE_MAP.md`.
+No Perl change; no `specs/*.spec` is affected (the shipped corpus already uses valid structure).
+**FRESH SESSION recommended** to execute the remediation (`.10.3`+); repo left handoff-ready.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10.1: root-cause investigation — single-slot AND edge-return drop is a Perl-reference regression (not intended)
 
 The user chose "investigate root cause first, then recommend before any change" for the `.9`-discovered

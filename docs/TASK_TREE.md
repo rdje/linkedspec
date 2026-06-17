@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.5.3` (PNT held; `.10.1` done — verdict: reference regression; `.10.2` fix blocked on a user direction decision) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
+| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.10.3` (CORRECTED: top rule has no regex → `.5.2`/`.9` examples structurally invalid, redo with the verified 2-rule idiom; NO engine bug, Perl untouched; fresh session recommended) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7.5.3` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
 ## Proposed Task Trees
