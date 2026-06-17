@@ -1,6 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.1: audit + decomposition for complete variant-agnostic `.spec` book coverage
+
+Owns the user request: make the mdBook fully + variant-agnostically document the **entire `.spec`
+language surface** with abundant examples, so the next backend (Julia/Dart/…) needs no archaeology;
+add KM cards. New tree `docs/tasks/SPEC-LANG-REFERENCE.md` (created + registered in this commit,
+ownership-first). This leaf is the **audit** (audit-only, no book change) — per the splitting
+discipline, the audit is the decomposition.
+
+Two read-only agents ran in parallel: (1) an authoritative `.spec` surface inventory from the code
+(`BootstrapSpec/Core.pm`, `Validation.pm`, `ActionIR/Contracts.pm` (158 contracts), `specs/spec.spec`,
+shipped specs); (2) a book coverage map over all `user-model`/`dsl`/`compiler`/`appendix` chapters,
+scoring each surface area. Synthesis (recorded in the tree's "Audit Findings"):
+- **8 of 10 surface areas already WELL-COVERED**: rule labels, rule modes, parse modes (seek/consume),
+  edges, lifecycle markers, capture/marks, helper catalog, control flow.
+- **2 binding gaps**: (A→`.2`, CRITICAL) regex is defined only at the syntax level
+  (`appendix/formal-grammar.md:111-127`) with no mental model, no examples, and no statement of the
+  regex feature set a backend must support; (B→`.3`, CRITICAL) the output/return-shape contract is
+  undocumented — backends reverse-engineer the AST shape from `tests/corpus/`.
+- Minor gaps: grouped shared-code targets `-> A | B { ... }` example (`.4`), entry-vs-local-match
+  divergence example (`.4`), helper-catalog example density + Perl-note separation (`.5`), a
+  capture/mark cross-example (`.6`); KM cards (`.7`); finalize (`.8`).
+
+Decomposed into leaves `.2`–`.8` (see the tree). One inventory claim was **rejected on verification**:
+the surface agent called lifecycle markers `E`/`IT` "deprecated", which contradicts the completed
+`LIFECYCLE-FAMILY-AUDIT` (all 7 markers equivalent/supported) — not propagated. `scripts/check_memory_architecture.sh`
+exit 0; KM gate green. No book content changed (audit only). Frontier → `.2`.
+
 ## 2026-06-17 — DOC-DRIFT-SYNC.2: fix transposed :& / :| rule-mode cells in formal-grammar.md (TREE COMPLETE)
 
 Surgical correctness fix in `docs/linkedspec-book/src/appendix/formal-grammar.md` §2.2 (Rule
