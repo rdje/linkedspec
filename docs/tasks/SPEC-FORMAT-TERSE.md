@@ -242,6 +242,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 ## Decisions
 
+- `2026-06-18` (design refinement — user inputs, pending ratification in the named leaves): (a)
+  **call syntax** for operator/comparison functions — user proposed a Lisp callee-inside-paren form
+  `(op a, b)` alongside `op(a, b)`; my recommendation (uniform `callee(args)`, word canonical +
+  symbol alias, no `(op …)` form) recorded in Open Questions → ratify in `.3.2`. (b) **everything is
+  an expression → typed values**, so operator-functions return a typed value carrying the methods of
+  that type, **chainable, and the type may change along the chain** (sharpens `.2.3`'s "method
+  chaining by return type"). (c) **semicolons are mandatory between statements on the same line**
+  (reconfirms `.1.5` / the card — no change). (d) Guiding principle the user stated for the wider
+  codebase (not terse-format-specific, captured in [[feedback_keep-only-portable-cross-variant]]):
+  **keep only what can be ported / have a Rust/Julia/Dart variant** — Perl-only non-portable legacy
+  is retirement debt (drives the RTLUtils/FSMGen/VHDL retirement, see Blockers).
 - `2026-06-18`: **ACTIVATED + RATIFIED (user).** The user activated the tree (AskUserQuestion choice
   "Activate SPEC-FORMAT-TERSE now", during `SPEC-LANG-REFERENCE.10.5.4`) and reinforced the key
   semantics in their own words across several messages — all consistent with the brainstorm card +
@@ -282,21 +293,40 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 ## Open Questions
 
-- Migration policy per change: canonical-new-form + deprecated-old-alias (gradual) vs hard rename
-  (one-shot). Resolve in `.0` ADR. Affects whether the 20 shipped specs must be migrated in lockstep.
+- **CALL SYNTAX for operator/comparison functions — design input (user, 2026-06-18; for `.3.2`).**
+  The user proposes a Lisp-style *callee-inside-paren* prefix form alongside the card's
+  callee-before-paren form, and asked for a recommendation. Four candidate spellings of "a ≥ b":
+  `>=(a, b)` (symbol callee + `()`), `(>= a, b)` (Lisp prefix, symbol), `ge(a, b)` (word callee +
+  `()`), `(ge a, b)` (Lisp prefix, word). **Recommendation (to ratify in `.3.2`):** keep **one**
+  uniform `callee(args)` call grammar with **both word and symbol callee spellings** — `ge(a, b)`
+  canonical (most readable), `>=(a, b)` an accepted alias — and do **not** add the `(op a, b)`
+  callee-inside-paren form. Rationale: (i) the card already standardized on `callee(args)` ("calls
+  always with `()`"); (ii) full Lisp *composability* (any call nests at any depth) is already
+  achieved by `add(mul(a,b), c)` — it doesn't require the `(op …)` *surface syntax*; (iii) a second
+  call grammar costs readability (the stated guiding principle) and risks ambiguity with plain
+  `(expr)` grouping. Operator-functions return a **typed value** with methods, chainable, and the
+  type may change along the chain (consistent with `.2.3`). **User's call — it's their language.**
+- ~~Migration policy~~ **RESOLVED (`.0`/ADR 0007, user 2026-06-18):** canonical-new + deprecated-old
+  alias (gradual), then explicit retirement.
 - Operator forms (`=`, `+=`, `name[k]=v`, `+`/`-`/`>` as function names) interact with the current
-  raw-Perl-free / ActionIR-ready invariant — confirm the lowering keeps ratio 1.0000.
-- Backward compatibility: do the existing helper names (`assign`, `concat`, `array_copy`, `declare`,
-  `scalar()/array()/hash()`) remain as permanent aliases or get retired (and when)?
+  raw-Perl-free / ActionIR-ready invariant — confirm the lowering keeps ratio 1.0000 (verify per leaf).
+- ~~Backward compatibility (old helper names)~~ **RESOLVED (ADR 0007):** kept as deprecated aliases
+  during migration, retired in a later explicit leaf.
 
 ## Blockers
 
-- `.0` (ratify + ADR) is **done** (design-only — not gated). The **implementation leaves (`.1.x`+) are
-  blocked** on: (1) a usable `t/phase0_regression.t` gate — currently hung by `RTLUTILS-REGEX-HANG`
-  (`RTLUtils::add_header_n_context_clause` catastrophic regex); unblock = fix that hang (own a tree) or
-  agree a scoped check; and (2) user confirmation of the migration policy (gradual-alias vs hard
-  rename). Both surfaced to the user 2026-06-18. Next task that should run instead, if the user wants
-  to proceed: fix `RTLUTILS-REGEX-HANG` first.
+- `.0` (ratify + ADR) is **done** (design-only — not gated). Migration policy is **resolved**
+  (gradual-alias, ADR 0007). The remaining gate on the **implementation leaves (`.1.x`+)** is a usable
+  `t/phase0_regression.t`, currently hung by the RTLUtils catastrophic regex.
+- **UNBLOCK DIRECTION shifted fix → RETIRE (user, 2026-06-18).** Read-only assessment established that
+  RTLUtils + FSMGen + `VHDL/ConstantEval` are a **self-contained Perl-only legacy VHDL-generation
+  subsystem**: no functional hook from the `.spec` parser/compiler/runtime core (the lone
+  `LinkedSpec.pm`/`gen_oracle_corpus.pl` references are **comments**), no shipped-`.spec` dependency,
+  no Rust/Julia/Dart counterpart. Per [[feedback_keep-only-portable-cross-variant]] the user leans to
+  **retire the subsystem** rather than fix its regex — which *also* unblocks the gate (and sheds
+  ~4,400 Perl-only lines). Next step: own a **retirement tree** with a **read-only feasibility/inventory
+  leaf first** (map the full subsystem + every reference + the phase0 migration-smoke tests to remove),
+  then remove, then confirm the gate runs. **Removal scope to confirm with the user** before deleting.
 
 ## Verification Log
 
