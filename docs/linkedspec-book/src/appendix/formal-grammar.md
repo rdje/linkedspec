@@ -65,8 +65,8 @@ The mode suffix, if present, immediately follows the colon(s) with no space:
 | *(no suffix)* | Repeated choice (default). Equivalent to `:OR+`. Handled by `:*`. | `rule:` |
 | `:AND` | Ordered sequence. Each child regex matched in order. | Body rule only |
 | `:OR` | Repeated choice across alternatives. | Body rule only |
-| `:&` | single-match choice (`:OR{1}`). | Body rule only |
-| `:\|` | Ordered sequence (equivalent to `:AND`). | Body rule only |
+| `:&` | Ordered sequence (equivalent to `:AND`). | Body rule only |
+| `:\|` | Single choice — one successful alternative wins (`:OR{1}`). | Body rule only |
 | `:+` | One-or-more repeated choice (`:OR{1,}`). Equivalent to `:*` bounded. | Body rule only |
 | `:*` | Zero-or-more repeated choice (`:OR{0,}`). | Body rule only |
 | `:?` | Zero-or-one choice (`:OR{0,1}`). | Body rule only |

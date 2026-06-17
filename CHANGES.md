@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — DOC-DRIFT-SYNC.2: fix transposed :& / :| rule-mode cells in formal-grammar.md (TREE COMPLETE)
+
+Surgical correctness fix in `docs/linkedspec-book/src/appendix/formal-grammar.md` §2.2 (Rule
+Modes). The `:&` and `:|` description cells were transposed, inverting their AND/OR sense
+relative to the authoritative bootstrap mode map `perl/LinkedSpec/BootstrapSpec/Core.pm:347-348`
+(`'&' => 'AND'`, `'|' => 'OR'`) and the dedicated chapter `user-model/rule-modes-and-parse-modes.md`:
+- `:&` was "single-match choice (`:OR{1}`)" → now **"Ordered sequence (equivalent to `:AND`)."**
+  (`:&` ≡ `:AND`; chapter §"Ordered sequence: `:&` and `:AND`", lines 35/97-99).
+- `:|` was "Ordered sequence (equivalent to `:AND`)" → now **"Single choice — one successful
+  alternative wins (`:OR{1}`)."** (`:|` is single-choice dispatch, explicitly NOT the
+  repeated-choice family; chapter §"Single choice: `:|`", lines 42/137-139/159).
+
+A grep confirmed no other `:&`/`:|`/"single-match" reference in `formal-grammar.md`; the §2.2
+"Semantics" note (AND vs OR modes in general) was already correct. `mdbook build` exit 0;
+`scripts/check_memory_architecture.sh` exit 0; KM gate green. No code change.
+
+This closes the `DOC-DRIFT-SYNC` tree (both leaves done); it moves to Completed in
+`docs/TASK_TREE.md`, leaving `RUST-PARITY` (frontier `.7.5.3`) the sole active tree.
+
 ## 2026-06-17 — DOC-DRIFT-SYNC.1: sync ROADMAP.md to ROADMAP_V2.md (Phase 8/9 + Overall done)
 
 Zero-drift correction (doctrine: `docs/decisions/0001` §4; `ROADMAP_V2.md:425`). A bootstrap-

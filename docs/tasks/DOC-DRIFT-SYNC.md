@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `DOC-DRIFT-SYNC`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.1` done — ROADMAP.md synced to ROADMAP_V2.md: Phase 8/9 long-form sections + Status rows added, Overall flipped to `done`; frontier → `.2`)
+- Last updated: `2026-06-17` (`.2` done — formal-grammar.md `:&`/`:|` description cells fixed; both leaves done, **TREE COMPLETE**, moved to Completed; `RUST-PARITY` again sole active tree)
 - Owner: repo-local workflow
 
 ## Goal
@@ -49,9 +49,9 @@ the source, restoring the non-negotiable zero-drift invariant between `ROADMAP.m
 ## Task Tree
 
 - ID: `DOC-DRIFT-SYNC`
-  Status: `active`
+  Status: `completed`
   Goal: Reconcile the two verified roadmap/book drifts against the codebase
-  Children: `.1`, `.2`
+  Children: `.1` (done), `.2` (done)
 
 - ID: `DOC-DRIFT-SYNC.1`
   Status: `done`
@@ -82,15 +82,26 @@ the source, restoring the non-negotiable zero-drift invariant between `ROADMAP.m
   Acceptance: row `:&` reads "Ordered sequence (equivalent to `:AND`)." and row `:|`
   reads a single-choice description (`:OR{1}`), matching `Core.pm:347-348` and
   `user-model/rule-modes-and-parse-modes.md`; `mdbook build` exit 0; self-check passes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. The two description cells in
+  `docs/linkedspec-book/src/appendix/formal-grammar.md:68-69` were transposed; swapped them
+  back: row `:&` now reads "Ordered sequence (equivalent to `:AND`)." (matching `Core.pm:347`
+  `'&' => 'AND'` and `rule-modes-and-parse-modes.md:35,97-99` "`:&` is ordered sequence"), and
+  row `:|` now reads "Single choice — one successful alternative wins (`:OR{1}`)." (matching
+  `Core.pm:348` `'|' => 'OR'` and `rule-modes-and-parse-modes.md:42,137-139,159` "`:|` is
+  single-choice dispatch / one successful choice among the configured alternatives", explicitly
+  not the repeated-choice family). A grep confirmed no other `:&`/`:|`/"single-match" reference
+  in `formal-grammar.md`; the §2.2 "Semantics" note (AND vs OR modes) was already correct.
+  `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0; KM gate green.
+  Commit: `DOC-DRIFT-SYNC.2` (see Commit Log)
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `DOC-DRIFT-SYNC.1` | `done` | ROADMAP.md synced to ROADMAP_V2.md (2026-06-17): Phase 8/9 long-form sections + Status rows added, Overall flipped `mostly done`→`done` |
-| 1 | `DOC-DRIFT-SYNC.2` | `pending` | **next** — surgical two-cell book fix: swap the transposed `:&`/`:|` rows in formal-grammar.md:68-69 to match Core.pm + rule-modes-and-parse-modes.md |
+| — | `DOC-DRIFT-SYNC.2` | `done` | formal-grammar.md:68-69 `:&`/`:|` description cells swapped to match Core.pm + rule-modes-and-parse-modes.md (2026-06-17) |
+
+Frontier empty — **tree complete** (both leaves done). `RUST-PARITY` is again the sole active tree (frontier `RUST-PARITY.7.5.3`).
 
 ## Decisions
 
@@ -117,14 +128,14 @@ the source, restoring the non-negotiable zero-drift invariant between `ROADMAP.m
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-17` | `DOC-DRIFT-SYNC.1` | `scripts/check_memory_architecture.sh`; KM gate (pre-commit regenerate-and-stage); diff review of ROADMAP.md vs ROADMAP_V2.md | self-check exit 0; KM in sync (34 facts / 186 keys, no fact-card change); ROADMAP.md Overall=`done` + Phase 8/9 rows + long-form sections now agree with ROADMAP_V2.md; no other status changed |
-| `2026-06-17` | `DOC-DRIFT-SYNC.2` | `pending` | `pending` |
+| `2026-06-17` | `DOC-DRIFT-SYNC.2` | `scripts/check_memory_architecture.sh`; KM gate; `mdbook build`; grep for other `:&`/`:|` refs | self-check exit 0; KM in sync; `mdbook build` exit 0; no other stale `:&`/`:|` reference in formal-grammar.md; rows now match `Core.pm:347-348` + `rule-modes-and-parse-modes.md` |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `DOC-DRIFT-SYNC.1` | `DOC-DRIFT-SYNC.1 — sync ROADMAP.md to ROADMAP_V2.md (Phase 8/9 + Overall done)` | Also creates the owning tree + registers it in docs/TASK_TREE.md (ownership-first, atomic with the first leaf per repo convention) |
-| `DOC-DRIFT-SYNC.2` | `pending` | `pending` |
+| `DOC-DRIFT-SYNC.2` | `DOC-DRIFT-SYNC.2 — fix transposed :& / :| rule-mode cells in formal-grammar.md` | Two-cell swap; verified vs Core.pm + rule-modes-and-parse-modes.md; mdbook build exit 0. Closes the tree |
 
 ## Changelog
 
@@ -140,4 +151,11 @@ the source, restoring the non-negotiable zero-drift invariant between `ROADMAP.m
   Committed together with the owning tree creation + `docs/TASK_TREE.md` registration
   (the commit-msg gate requires a dotted leaf id, so the repo convention is one commit
   per leaf with the tree folded into its first leaf). self-check exit 0; KM green.
-  Frontier → `.2`.
+  Frontier → `.2`. Commit `7463bc8`.
+- `2026-06-17`: `.2` done — fixed the transposed `:&`/`:|` rule-mode description cells in
+  `docs/linkedspec-book/src/appendix/formal-grammar.md:68-69`. Row `:&` now reads "Ordered
+  sequence (equivalent to `:AND`)." and row `:|` "Single choice — one successful alternative
+  wins (`:OR{1}`).", matching the authoritative `Core.pm:347-348` (`&`→AND, `|`→OR) and the
+  dedicated chapter `user-model/rule-modes-and-parse-modes.md`. `mdbook build` exit 0;
+  self-check exit 0; KM green. Both leaves done — **tree complete**, moved to Completed in
+  `docs/TASK_TREE.md`; `RUST-PARITY` is again the sole active tree (frontier `.7.5.3`).
