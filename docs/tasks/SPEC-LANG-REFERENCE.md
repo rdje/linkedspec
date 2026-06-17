@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.1` audit done — 8/10 surface areas well-covered; 2 critical gaps (regex-first-class `.2`, output-shape `.3`) + minor gaps; decomposed into `.2`–`.8`; frontier → `.2`)
+- Last updated: `2026-06-17` (`.2` done — new `user-model/regex-in-spec.md` chapter (regex as a first-class concept, verified against `LinkedRE.pm`/rgx); fixed a real capture-indexing contradiction across 3 book files; `mdbook build` exit 0; frontier → `.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -83,7 +83,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.1` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.2`
-  Status: `pending`
+  Status: `done`
   Goal: Document **regex in `.spec` as a first-class concept** (CRITICAL gap) — a backend must
   know exactly what its regex engine has to support
   Acceptance: a user-facing treatment (new `user-model` chapter and/or expanded
@@ -94,8 +94,25 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   per `LinkedRE`; numbered + named capture groups; which flags are/aren't part of the contract).
   Verify engine capabilities against `perl/LinkedRE.pm` + the rgx engine before asserting them
   (do NOT guess). Several worked examples; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. New chapter `docs/linkedspec-book/src/user-model/regex-in-spec.md`
+  (registered in `SUMMARY.md`) covering: `/pattern/` literal + `\/` escaping + inline `(?flags)`;
+  regex slots/clusters → ordered-sequence (AND) vs alternatives (OR) + which-alternative branch
+  tracking; `seek`/`consume` anchoring; numbered groups (**0-based, captures-only, compacted**),
+  named groups, the compaction gotcha + named-group remedy, entry-vs-match; and a verified
+  "regex feature set a backend must support" section. `appendix/formal-grammar.md §3.1` expanded
+  with the capture-group contract + inline-flags clarification. **All engine facts verified
+  against `perl/LinkedRE.pm` (`oredRE`/`_build_match_info`: `match_list = [grep defined $1..$N]`),
+  the ActionIR lowering (`Contracts.pm` `entry_group`→`$IMATCH_LIST[N]`, `match_group`→`$LMATCH_LIST[N]`),
+  the Rust `rgx` runtime (`CompiledAlternation` + `matched_branch_number` + per-branch `group_offset`),
+  and cross-checked against shipped specs (`lib_reader.spec`/`tablegrep.spec`/`spec.spec` all use
+  `entry_group(0)`=first capture).** Found + corrected a real capture-indexing **contradiction**:
+  `helper-contract-catalog.md` claimed "index 0 is the full match" (wrong) while the walkthrough
+  said 0 = first capture (right); fixed the catalog, fixed two buggy examples that used the wrong
+  1-based convention (`overview/what-is-linkedspec.md`, `appendix/formal-grammar.md` Child rule),
+  and added a captures-only/compacted clarifier to `source-boundary-helper-reference.md`. This
+  closes the capture-group-mapping accuracy concern, so `.5` (helper-catalog sweep) need not
+  re-litigate the indexing contract. `mdbook build` exit 0.
+  Commit: `SPEC-LANG-REFERENCE.2` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.3`
   Status: `pending`
@@ -212,13 +229,13 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `SPEC-LANG-REFERENCE.1` | `done` | Audit complete (2026-06-17) — surface inventory + book coverage map synthesized above; decomposed into `.2`–`.8` |
-| 1 | `SPEC-LANG-REFERENCE.2` | `pending` | **next** — regex as a first-class concept (CRITICAL); verify the engine's required regex feature set against `LinkedRE.pm`/rgx before asserting it |
-| 2 | `SPEC-LANG-REFERENCE.3` | `pending` | output/return-shape contract (CRITICAL); ground in `docs/knowledge/rust-perl-output-oracle.md` + shipped specs |
-| 3 | `SPEC-LANG-REFERENCE.4` | `pending` | worked examples: grouped shared-code targets + entry-vs-local-match divergence |
-| 4 | `SPEC-LANG-REFERENCE.5` | `pending` | helper-catalog completeness + variant-neutrality sweep |
-| 5 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 6 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 7 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| — | `SPEC-LANG-REFERENCE.2` | `done` | regex-first-class chapter landed (2026-06-17), verified against `LinkedRE.pm`/`Contracts.pm`/rgx; fixed a capture-indexing contradiction across 3 book files |
+| 1 | `SPEC-LANG-REFERENCE.3` | `pending` | **next** — output/return-shape contract (CRITICAL); ground in `docs/knowledge/rust-perl-output-oracle.md` + shipped specs |
+| 2 | `SPEC-LANG-REFERENCE.4` | `pending` | worked examples: grouped shared-code targets + entry-vs-local-match divergence |
+| 3 | `SPEC-LANG-REFERENCE.5` | `pending` | helper-catalog completeness + variant-neutrality sweep (indexing contract already corrected in `.2`) |
+| 4 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 5 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 6 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
 
@@ -243,12 +260,14 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.1` | two read-only audits (surface inventory ∥ book coverage map) synthesized; cross-checked the "E/IT deprecated" claim vs `LIFECYCLE-FAMILY-AUDIT`; `scripts/check_memory_architecture.sh` | self-check exit 0; 8/10 surface areas WELL-COVERED; binding gaps = regex-first-class (`.2`) + output-shape (`.3`); minor gaps `.4`–`.6`; KM cards `.7`; finalize `.8`. Rejected the unverified E/IT-deprecated claim. No book change (audit only) |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.2` | engine facts verified read-only against `perl/LinkedRE.pm`, `perl/LinkedSpec/ActionIR/Contracts.pm` (`entry_group`/`match_group`/`entry_named` lowering), `perl/LinkedSpec/BootstrapSpec/Core.pm` (`/pattern/` recognizer), `rust/linkedspec-runtime/src/helpers.rs` (rgx `CompiledAlternation`), and cross-checked vs shipped specs (`lib_reader`/`tablegrep`/`spec.spec`); `mdbook build` (pre + post); whole-book grep for capture-indexing drift | `mdbook build` exit 0 both times; new `regex-in-spec.md` chapter + `formal-grammar.md §3.1` expansion; **3 drift sites corrected** (wrong "index 0 = full match" claim + two examples using the 1-based convention); convention verified 0-based/captures-only/compacted |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `SPEC-LANG-REFERENCE.1` | `SPEC-LANG-REFERENCE.1 — audit: full .spec surface inventory + book coverage map; decompose into .2-.8` | Also creates the owning tree + registers it in docs/TASK_TREE.md (ownership-first, folded into the first leaf per repo convention). Audit only — no book change |
+| `SPEC-LANG-REFERENCE.2` | `SPEC-LANG-REFERENCE.2 — book: regex as a first-class concept (new user-model chapter) + fix capture-indexing drift` | New `user-model/regex-in-spec.md` + `SUMMARY.md`; `formal-grammar.md §3.1` capture-group/flags expansion; corrected the `entry_group`/`match_group` indexing contradiction in `helper-contract-catalog.md`, `overview/what-is-linkedspec.md`, `formal-grammar.md`, `source-boundary-helper-reference.md`. All facts verified vs `LinkedRE.pm`/`Contracts.pm`/rgx/shipped specs |
 
 ## Changelog
 
@@ -261,3 +280,19 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   completeness + variant-neutrality (`.5`), capture/mark cross-example (`.6`), KM cards (`.7`),
   finalize (`.8`). Rejected an unverified "E/IT deprecated" inventory claim (contradicts
   `LIFECYCLE-FAMILY-AUDIT`). Owning tree created + registered in this commit. Frontier → `.2`.
+- `2026-06-17`: `.2` done — regex as a first-class concept. Added new chapter
+  `docs/linkedspec-book/src/user-model/regex-in-spec.md` (registered in `SUMMARY.md`):
+  `/pattern/` literal + `\/` escaping + inline `(?flags)`; regex slots/clusters → ordered
+  sequence (AND) vs alternatives (OR) + branch tracking; `seek`/`consume` anchoring; numbered
+  groups (0-based, captures-only, **compacted**) + the compaction gotcha + named-group remedy;
+  entry-vs-match; and a verified "regex feature set a backend must support" section. Expanded
+  `appendix/formal-grammar.md §3.1` with the capture-group contract + inline-flags clarification.
+  Every engine fact was verified read-only against `perl/LinkedRE.pm`, the ActionIR lowering in
+  `perl/LinkedSpec/ActionIR/Contracts.pm`, the `/pattern/` recognizer in `BootstrapSpec/Core.pm`,
+  the Rust `rgx`-based runtime (`rust/linkedspec-runtime/src/helpers.rs`), and cross-checked
+  against shipped specs — never guessed. Discovered and fixed a real **capture-indexing
+  contradiction**: `helper-contract-catalog.md` said "index 0 is the full match" while the
+  walkthrough (correctly) said index 0 is the first capture group; corrected the catalog and two
+  buggy examples (`overview/what-is-linkedspec.md`, the `formal-grammar.md` Child rule) that used
+  the wrong 1-based convention, and clarified `source-boundary-helper-reference.md`. `mdbook build`
+  exit 0. Frontier → `.3` (output/return-shape contract).

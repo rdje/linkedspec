@@ -115,8 +115,9 @@ Body elements may span multiple lines. The following body element types exist:
 ```
 
 A regex literal delimited by `/`. The pattern body may contain escaped forward
-slashes (`\/`). No flags are currently recognized beyond those supported by the
-host regex engine.
+slashes (`\/`). Flags are expressed **inline**, inside the pattern, using modifier
+groups such as `(?i)`, `(?m)`, `(?s)`, or scoped forms like `(?s:…)` — the `.spec`
+layer adds no flag system of its own beyond what the host regex engine supports.
 
 **Semantics**: A regex cluster anchors the parser at a specific input position.
 In `consume` mode (`\G`-anchored), the regex must match contiguously from the
@@ -124,7 +125,20 @@ current position. In `seek` mode (ungrounded `//gcp`), the regex may match
 anywhere. The mode is determined by the rule mode and runtime parse mode.
 
 Multiple regex clusters in a row form an ordered sequence for AND-mode rules
-or a set of alternatives for OR-mode rules.
+or a set of alternatives for OR-mode rules. When clusters are combined as
+alternatives, the engine records **which** alternative matched (0-based) and uses
+that to drive dispatch.
+
+**Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
+group is a **named** capture. Action code reads them with `entry_group(N)` /
+`match_group(N)` (numbered) and `entry_named(name)` / `match_named(name)` (named).
+Numbered groups are **0-based over the captured groups** — index `0` is the *first*
+capture group, not the whole match (the whole match is `entry_text()` /
+`match_text()`) — and the numbered list is **compacted**, so a group that did not
+participate in the match is dropped and shifts the indices after it. Named groups
+are keyed by name and are not affected by compaction. The
+[Regex in `.spec`](../user-model/regex-in-spec.md) chapter gives the full mental
+model with worked examples, and states the regex feature set a backend must support.
 
 ### 3.2 Action Edges
 
@@ -601,7 +615,7 @@ DemoParser::
 
 Child::
  /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(1)) }
+ I { declare(scalar, name=entry_group(0)) }
  E { return(scalar(name)) }
 
 SecondChild:OR+

@@ -14,6 +14,7 @@
 - [.spec Files and Rule Paragraphs](user-model/spec-files-and-rule-paragraphs.md)
 - [Worked `.spec` Walkthrough](user-model/worked-spec-walkthrough.md)
 - [Rule Modes and Parse Modes](user-model/rule-modes-and-parse-modes.md)
+- [Regex in `.spec`](user-model/regex-in-spec.md)
 - [Blind Calls and Parser Orchestration](user-model/blind-calls-and-parser-orchestration.md)
 - [Runtime Context and Tracing](user-model/runtime-context-and-tracing.md)
 

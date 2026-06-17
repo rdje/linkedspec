@@ -687,11 +687,15 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `entry_group(index)`
 - **Signature**: `entry_group(index: int)`
 - **Returns**: scalar or undef
-- **Behavior**: Capture group by 0-based index. Index 0 is the full match.
+- **Behavior**: Numbered capture group by 0-based index over the **captured groups**.
+  Index `0` is the **first** capture group (not the whole match — read the whole match
+  with `entry_text()`). The list is **compacted**: capture groups that did not participate
+  in the match are omitted, which shifts the indices of the groups that follow. Returns
+  `undef` for an out-of-range index. See [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups).
 
 ### `entry_groups()`
 - **Signature**: `entry_groups()`
-- **Returns**: array (flat list of all capture groups)
+- **Returns**: array (flat list of all captured groups, compacted — see `entry_group(index)`)
 
 ### `entry_named(name)`
 - **Signature**: `entry_named(name: string)`

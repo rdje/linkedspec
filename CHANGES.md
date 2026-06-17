@@ -1,6 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.2: regex as a first-class `.spec` concept (book) + capture-indexing drift fix
+
+Closes the CRITICAL **GAP A** from the `.1` audit: regex was documented only at the syntax level
+(`appendix/formal-grammar.md §3.1`) with no mental model, no worked examples, and no statement of
+the regex feature set a backend must support.
+
+**New chapter** `docs/linkedspec-book/src/user-model/regex-in-spec.md` (registered in `SUMMARY.md`
+after *Rule Modes and Parse Modes*), variant-neutral, covering:
+- the `/pattern/` literal — `/` delimiter, `\/` escaping, and **inline** flags via `(?i)`/`(?m)`/`(?s)`/`(?s:…)` modifier groups (no `.spec`-level flag layer);
+- **regex slots / clusters** — multiple `/.../` per paragraph as ordered sequence (AND) vs alternatives (OR), `-> Rule[N]` slot targeting, and which-alternative branch tracking that drives dispatch;
+- `seek` vs `consume` anchoring (cross-linked to the parse-modes chapter);
+- **capture groups** — numbered `(...)` → `entry_group(N)`/`match_group(N)` (**0-based, captures-only — group 0 is the first capture, not the whole match — and the list is compacted so non-participating groups shift the indices after them**); named `(?<name>...)` → `entry_named(name)`/`match_named(name)`/`entry_has`/`entry_map`; the **compaction gotcha** with a worked `(\d+)?([a-z]+)` example + the named-group remedy; and the `entry_*` (entering match) vs `match_*` (local match) distinction;
+- **"What a backend's regex engine must support"** — the verified, backend-neutral feature-set contract (position-tracked matching; `seek`/`consume` anchoring; N-way alternation + branch identification; numbered groups 0-based/captures-only/compacted; named groups), cross-linked to `appendix/backend-handoff.md`.
+
+**`appendix/formal-grammar.md §3.1`** expanded with the capture-group contract (numbered + named, the
+group-0/compaction clarification) and an inline-flags clarification.
+
+**Verification (no guessing — the leaf required it).** Every engine fact was checked read-only against:
+`perl/LinkedRE.pm` (`oredRE` joins slots with `|` + `(?{$pos=N})` branch tracking; `_build_match_info`
+builds `match` = `${^MATCH}`, `match_list = [grep {defined} $1..$N]` (compacted), `match_hash = {%+}`);
+the ActionIR lowering in `perl/LinkedSpec/ActionIR/Contracts.pm` (`entry_group(N)`→`$IMATCH_LIST[N]`,
+`match_group(N)`→`$LMATCH_LIST[N]`, `entry_named`/`match_named`→`%IMATCH_HASH`/`%LMATCH_HASH`); the
+`/pattern/` recognizer in `perl/LinkedSpec/BootstrapSpec/Core.pm` (`(?<!\\)\/.+?(?<!\\)\//`); and the
+Rust runtime `rust/linkedspec-runtime/src/helpers.rs` (`CompiledAlternation` + rgx `matched_branch_number`
++ per-branch `group_offset` + named HashMap) — confirming backend parity. Cross-checked against shipped
+specs (`lib_reader.spec`, `tablegrep.spec`, `spec.spec`) which all use `entry_group(0)` = first capture.
+
+**Drift correction (correctness bug found during verification).** The book contradicted itself on
+capture indexing: `appendix/helper-contract-catalog.md` stated `entry_group` index "0 is the full match",
+while `user-model/worked-spec-walkthrough.md` (correctly) said index 0 is the first capture group. The
+verified behavior is the latter. Corrected:
+- `appendix/helper-contract-catalog.md` — rewrote the `entry_group(index)`/`entry_groups()` contract (0-based, captures-only, compacted; whole match via `entry_text()`);
+- `overview/what-is-linkedspec.md` — `/(\w+)=(\w+)/` example used `entry_group(1)`/`entry_group(2)` (wrong 1-based) → `entry_group(0)`/`entry_group(1)`;
+- `appendix/formal-grammar.md` — the `Child` demo rule `/hello[ \t]+(\w+)/` read `entry_group(1)` → `entry_group(0)`;
+- `dsl/source-boundary-helper-reference.md` — added a captures-only/compacted clarifier next to the group-reader tables.
+
+This closes the capture-group-mapping accuracy concern, so `.5` (helper-catalog completeness/neutrality
+sweep) need not re-litigate the indexing contract.
+
+**Validation:** `mdbook build` exit 0 (pre + post); whole-book grep confirms no remaining "index 0 = full
+match" claims; `scripts/check_memory_architecture.sh` exit 0. Documentation-only — no code/spec change.
+Frontier → `SPEC-LANG-REFERENCE.3`.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.1: audit + decomposition for complete variant-agnostic `.spec` book coverage
 
 Owns the user request: make the mdBook fully + variant-agnostically document the **entire `.spec`

@@ -318,6 +318,8 @@ Entry helpers read the immediate match that brought the action or called rule in
 
 Prefer the explicit `entry_start_*` names when the surrounding code also talks about `entry_end_*`. The shorter `entry_line()` and `entry_col()` names are still valid and mean the left edge.
 
+`entry_group(index)` (and the `match_group(index)` counterpart below) index the **captured groups** 0-based: index `0` is the *first* capture group, not the whole match — read the whole match with `entry_text()` / `match_text()`. The numbered list is **compacted**, so a group that did not participate in the match is dropped and shifts the indices after it; prefer named groups (`entry_named(name)` / `match_named(name)`) when a pattern has optional captures. See [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups).
+
 ## Match helpers
 
 Match helpers read the current local match being processed. Use them when the action wants the local slot's match, not the broader entry match.

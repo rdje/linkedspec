@@ -31,7 +31,7 @@ A backend's compiler parses the `.spec`, builds compiled rule state, derives dep
 ```text
 Top::AND+
  /(\w+)=(\w+)/ -> Top[0] {
-   return(hash("key", entry_group(1), "val", entry_group(2)));
+   return(hash("key", entry_group(0), "val", entry_group(1)));
  }
 ```
 
