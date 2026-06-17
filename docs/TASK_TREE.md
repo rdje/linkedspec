@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.10.5` (WHOLE-BOOK SCORCH — user directive 2026-06-17: exhaustively audit EVERY `.spec` book snippet for doctrine-validity [no regex on a top `::` rule] + output-correctness, then remediate; `.10.3`/`.10.6` done; preliminary hunt confirms violations are widespread; subsumes `.10.4`) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
+| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.10.5.2` (WHOLE-BOOK SCORCH — audit `.10.5.1` done 2026-06-17: ~105 `::`-mode rule headers across ~20 files; user chose FULL book-wide scorch to the 2-rule idiom; fix leaves `.10.5.2`–`.10.5.19`, next = `what-is-linkedspec.md` minimal example; `.10.4` superseded by `.10.5.16`) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7.5.3` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
 ## Proposed Task Trees

@@ -386,32 +386,207 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.3` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.4`
-  Status: `pending`
-  Goal: Redo the `.9` §5.5 `runtime-semantics.md` Pair example with valid structure
-  Acceptance: replace the single-rule `Pair:: /…/ -> Pair { … }` form (still a regex on the top
-  rule) with the two-rule idiom; re-verify through `LinkedSpec::Get`; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Status: `superseded`
+  Goal: ~~Redo the `.9` §5.5 `runtime-semantics.md` Pair example with valid structure~~ —
+  **SUPERSEDED by `.10.5.16`** (2026-06-17). The whole-book scorch (`.10.5`) folds the §5.5 Pair fix
+  into the per-file `runtime-semantics.md` leaf `.10.5.16`, which fixes all three §5.5 forms + the
+  §5.6 fragments together. No separate work here.
+  Verification: n/a (superseded)
+  Commit: n/a
 
 - ID: `SPEC-LANG-REFERENCE.10.5`
-  Status: `pending`
+  Status: `active`
   Goal: **SCORCH THE WHOLE BOOK** (user directive 2026-06-17 — "the book shall not mislead; only
   truthful, valid code snippets") — exhaustively audit **EVERY** `.spec` code snippet across all of
   `docs/linkedspec-book/src/**` for (i) doctrine-validity (NO regex on a top `::` rule; ≥2 rules)
   and (ii) output-correctness (any claimed input→output matches a `LinkedSpec::Get` run), then
-  remediate every misleading/invalid snippet. Audit-as-decomposition: the read-only hunt produces
-  per-chapter / per-category fix sub-leaves `.10.5.1…` and **subsumes** the `.10.4` §5.5 Pair fix.
-  Acceptance: an exhaustive findings table recorded here (every `.spec` block classified — A:
-  regex-on-top / single-rule doctrine violation, B: output drift, C: `::AND -> Rule[N]` broken
-  shape, D: other — with file:line + claimed-vs-actual output); fix sub-leaves added to the
-  frontier; then every flagged snippet reshaped to the verified 2-rule idiom (or corrected output /
-  confirmed as a faithful shipped-spec quote), each fix re-verified through `LinkedSpec::Get`;
-  `mdbook build` exit 0 at each step.
-  Verification: `pending`. Hunt method: fan out read-only verifying agents over chapter groups
-  (enumerate every `.spec` block → classify A/B/C/D → RUN every claimed-output snippet through
-  `LinkedSpec::Get`, alarm-guarded), synthesized into the findings table here. (5 such agents were
-  launched 2026-06-17 but their session was exited before they reported — re-run the hunt fresh.)
-  Children: `.10.5.1…` (added when the audit completes)
+  remediate every misleading/invalid snippet. Audit-as-decomposition: the read-only hunt (`.10.5.1`)
+  produced per-file fix sub-leaves `.10.5.2…` and **subsumes** the `.10.4` §5.5 Pair fix.
+  **SCOPE DECISION (user, 2026-06-17): FULL BOOK-WIDE SCORCH** — rewrite *every* worked example
+  (including the isolated DSL helper-illustration fragments) to the verified 2-rule idiom, and correct
+  all wrong outputs. See the scope Decision below.
+  Children: `.10.5.1` (done — audit + decomposition), `.10.5.2`–`.10.5.19` (per-file fixes + finalize)
+
+- ID: `SPEC-LANG-REFERENCE.10.5.1`
+  Status: `done`
+  Goal: Exhaustive read-only audit of every `.spec` snippet in `docs/linkedspec-book/src/**` +
+  decomposition into per-file fix sub-leaves
+  Acceptance: every `.spec` block classified (A: regex-on-`::` / single-rule doctrine violation; B:
+  output drift; C: `::AND -> Rule[N]` broken shape; D: other; CLEAN) with file:line + claimed-vs-actual;
+  fix sub-leaves `.10.5.2…` added to the frontier; no book change (audit only).
+  Verification: Done — 2026-06-17. Fanned out **8 read-only `Explore` agents** over chapter groups
+  (enumerate every `.spec` block → classify → run claimed-output snippets), then **personally
+  ground-truthed every load-bearing finding** through a private `LinkedSpec::Get` driver (an audit
+  agent had clobbered the shared scratch driver mid-run, so all agent ACTUAL_OUTPUT values were
+  treated as hypotheses — cf. the `.10.6` transcription lesson). Established engine facts: `::` and
+  `:` are **interchangeable on a non-first rule** (T1==T2==`[0]`); only the **first** rule is the
+  top/entry (multiple `::` rules don't collide, T4); the `::`-no-regex rule is therefore an
+  **authoring doctrine**, not a hard engine constraint (matches `.10.6`). Findings synthesized into
+  "Audit Findings (`.10.5.1`)" below. Headline: the `Rule::AND /regex/ -> Rule[N] {return}` idiom is
+  **pervasive (~105 `::`-mode rule headers across ~20 files)** and is doctrine-divergent twice over
+  (regex on a `::` rule; the `::AND -> Rule[N]` shape returns `[]`). Two preliminary-hunt hypotheses
+  were **overturned on re-verification**: the `ebnf-spec-walkthrough.md` "richer example" **does
+  compile/parse** (matches its claimed output — CLEAN), and the §5.5 forms **run and return values**.
+  User chose **full book-wide scorch** (AskUserQuestion, 2026-06-17). No book/Perl change. `mdbook`
+  not rebuilt (no content change).
+  Commit: `SPEC-LANG-REFERENCE.10.5.1` (see Commit Log)
+
+- ID: `SPEC-LANG-REFERENCE.10.5.2`
+  Status: `pending`
+  Goal: Fix `overview/what-is-linkedspec.md` minimal key/value example (`Top::AND+ /…/ -> Top[0]`,
+  single-rule regex-on-top → compile-fail/`null`) → verified 2-rule idiom
+  Acceptance: replaced with a top `::` entry rule (no regex) + normal `:` rule carrying the regex;
+  re-verified through `LinkedSpec::Get` (e.g. `[{"key":"foo","val":"bar"},…]`); `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.3`
+  Status: `pending`
+  Goal: Fix `public-api/get-and-get-parser.md` "minimal example" (`Top::AND /foo/ -> Top[0]` → `[]`)
+  → verified 2-rule idiom
+  Acceptance: 2-rule form, re-verified output; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.4`
+  Status: `pending`
+  Goal: Fix `user-model/worked-spec-walkthrough.md` — convert the chapter's central single-rule
+  `Pair::AND /…/ -> Pair[0]` example (→ `[]`, claims a `{kind:pair,…}` hash) to the 2-rule idiom and
+  **re-derive every claimed input→output across the whole chapter**
+  Acceptance: central example + all downstream claimed outputs re-verified through `LinkedSpec::Get`;
+  `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.5`
+  Status: `pending`
+  Goal: Fix `user-model/spec-files-and-rule-paragraphs.md` — the malformed label-in-block example
+  (`Top::AND … label:` → DSL compile error) + the `Top::AND` regex-on-top sketches
+  Acceptance: valid forms, re-verified; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.6`
+  Status: `pending`
+  Goal: Fix `user-model/rule-modes-and-parse-modes.md` — convert all ~20 mode fragments off
+  regex-on-`::` (use single-colon `:` normal rules for regex-carrying rules), reframe the "the same
+  mode suffixes can appear after either colon form / both valid shapes" teaching to the doctrine
+  (`::` = the single no-regex entry rule; `:` carries the regex), and fix the `Top:: /foo/` seek/
+  consume examples
+  Acceptance: no example puts a regex on a `::` rule; framing corrected; representative examples
+  re-verified; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.7`
+  Status: `pending`
+  Goal: Fix `user-model/regex-in-spec.md` — convert the `::`-with-regex fragments (`Top::`, `Pair::AND`,
+  `Subdef::AND`, `Unit::AND`) to valid form while preserving the capture-group / compaction teaching
+  Acceptance: doctrine-valid examples, re-verified; capture-indexing facts intact; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.8`
+  Status: `pending`
+  Goal: Audit + fix `user-model/blind-calls-and-parser-orchestration.md` (blind-call `::` rules carry
+  no regex — likely mostly clean; fix any regex-on-`::` and the `BadRule::` negative example framing)
+  Acceptance: any regex-on-`::` removed; negative examples clearly marked; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.9`
+  Status: `pending`
+  Goal: Fix `dsl/action-and-lifecycle-placement.md` worked examples (`Token::AND`, `List::AND`,
+  `Name::AND`, `Delimited::AND`, `Block::AND`, `Tuple::AND`, `Pair::AND`, `MaybeName::OR`, `Items:*`,
+  …) → 2-rule idiom (regex on `:` rules), preserving the grouped-target + lifecycle-placement teaching
+  Acceptance: no regex on `::`; representative examples re-verified; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.10`
+  Status: `pending`
+  Goal: Fix `dsl/capture-marks-and-source-locations.md` worked examples (`Top::AND`, `Call::AND`/
+  `Inner::AND` divergence) → 2-rule idiom, preserving the entry-vs-match teaching
+  Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.11`
+  Status: `pending`
+  Goal: Fix `dsl/declaration-helper-reference.md` worked examples (`Token::AND`, `List::AND`) → 2-rule idiom
+  Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.12`
+  Status: `pending`
+  Goal: Fix `dsl/source-boundary-helper-reference.md` worked examples (`Tuple::AND`, `Block::AND`,
+  `Paren::AND`, `Pair::AND`, `Body::AND`, `AtEnd::AND`, `Top::AND`/`Child::AND`) → 2-rule idiom
+  Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.13`
+  Status: `pending`
+  Goal: Fix `dsl/value-container-flow-helper-reference.md` worked examples (`Token::AND`, `Node::AND`,
+  `Sequence::AND`, `Kind::AND`, `FieldList::AND`, `logging_annotation:` already `:`) → 2-rule idiom
+  Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.14`
+  Status: `pending`
+  Goal: Fix the remaining DSL pages — `dsl/values-containers-and-flow-helpers.md` (`Token::`),
+  `dsl/action-model-and-helper-surface.md` (`Top::`), `dsl/fluent-and-block-forms.md` (`Items::AND+`,
+  `Toplevel:AND+`), and audit `dsl/actionir-lowering-mental-model.md` (helper-statement fragments)
+  Acceptance: no regex on `::`; complete worked examples re-verified; isolated helper-statement
+  fragments confirmed valid or wrapped; `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.15`
+  Status: `pending`
+  Goal: Fix `appendix/formal-grammar.md` — §1 paragraph-model example (`Top:: /a/ -> Next` + `Next:: /b/`)
+  and §12 "complete example" (`DemoParser:: … /pattern1/ …` + undefined targets `A`/`B`) → valid forms
+  Acceptance: doctrine-valid + compile/run-verified (or clearly-marked grammar meta-notation);
+  `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.16`
+  Status: `pending`
+  Goal: Fix `appendix/runtime-semantics.md` §5.5/§5.6 examples (the three `Top::`/`Pair::` regex-on-top
+  forms incl. the **`.10.4` §5.5 Pair target**, and the §5.6 single `object:`/`manifest:` fragments)
+  → 2-rule idiom; re-derive outputs. **Closes/subsumes `.10.4`.**
+  Acceptance: doctrine-valid + re-verified outputs; `.10.4` marked superseded-by-`.10.5.16`;
+  `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.17`
+  Status: `pending`
+  Goal: Fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts — `sens` is `=` not `=~`
+  (regex captures only `([!=])`); the GROUP example output (`{"group":["internal"]}`) is misquoted
+  Acceptance: claimed outputs corrected to verified `LinkedSpec::Get` runs of `specs/tablegrep.spec`;
+  `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.18`
+  Status: `pending`
+  Goal: Fix `specs-and-corpora/portmap-spec-walkthrough.md` — the 5 output-shape examples claim flat
+  `['?bare:','clk',undef,undef,undef]` etc.; actual is nested `["?bare:",["clk"]]` / `["?slice:",["addr","7","0"]]`
+  Acceptance: every claimed output corrected to verified `specs/portmap.spec` runs (and any wrong
+  input like `4'b1011` corrected); `mdbook build` exit 0.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.19`
+  Status: `pending`
+  Goal: Finalize the scorch — whole-book re-grep confirming **zero** regex-on-`::` example rules
+  remain, every claimed I/O re-verified, `mdbook build` exit 0; close `.10.5` and the `.10` container
+  Acceptance: clean whole-book sweep; `.10.5` + `.10` closed when all children `done`/`superseded`.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `SPEC-LANG-REFERENCE.10.6`
@@ -491,6 +666,63 @@ and the book's coverage verdict, so a future session does not re-run the audit.
 regex feature-set a backend must support; rule-mode→semantics map; lifecycle execution order +
 `retv`; action-vs-blind edge/dispatch model; capture/mark family taxonomy.
 
+## Audit Findings (`.10.5.1`, 2026-06-17) — whole-book `.spec`-snippet scorch
+
+Method: 8 read-only `Explore` agents over chapter groups (enumerate → classify A/B/C/D/CLEAN → run
+claimed-output snippets), then **every load-bearing finding personally re-verified** through a private
+`LinkedSpec::Get` driver (the shared scratch driver was clobbered by an audit agent mid-run, so all
+agent ACTUAL_OUTPUT values were treated as hypotheses; cf. the `.10.6` transcription lesson). All
+"actual" values below are from my own ground-truth runs unless marked "(agent, re-verify at fix)".
+
+**Engine facts established (so the fix leaves don't re-derive them):**
+- `::` and `:` are **interchangeable on a non-first rule** — `child::AND /re/` and `child:AND /re/`
+  compile + run identically (both `[0]` in the probe). Only the **first** rule is the top/entry; a
+  second `::` rule does not collide. So **`::`-no-regex is an authoring doctrine, not a hard engine
+  constraint** (consistent with `.10.6`'s retraction; the engine is permissive).
+- The `Rule::AND /regex/ -> Rule[N] { return(...) }` shape (AND mode + slot self-edge) **drops its
+  edge return → `[]`** (the `.10.1` `_emit_and_single_acode_handler` finding). This shape is used in
+  **dozens** of book worked examples → those examples don't surface their `return(...)` value.
+
+**Scale:** `grep` finds **~105 `Name::<mode>` rule headers** in book code blocks across ~20 files; the
+`Rule::AND /regex/ -> Rule[N]` idiom is the book's pervasive worked-example shape.
+
+**Classification key:** A = regex on a `::` rule / single-rule "complete" spec · B = claimed
+input→output ≠ actual · C = `::AND -> Rule[N]` `[]` shape · D = other (won't compile / undefined
+target) · CLEAN.
+
+| File | Block(s) | Class | Claimed → Actual (verified) | Fix leaf |
+| --- | --- | --- | --- | --- |
+| `overview/what-is-linkedspec.md` | §"minimal kv parser" `Top::AND+ /…/ -> Top[0]` (single rule) | A+C+D | "returns a hash per match" → **compile error → `null`** | `.10.5.2` |
+| `public-api/get-and-get-parser.md` | "minimal example" `Top::AND /foo/ -> Top[0]` | A+B+C | "runnable parser" → **`[]`** | `.10.5.3` |
+| `user-model/worked-spec-walkthrough.md` | central `Pair::AND /…/ -> Pair[0]` (single rule, whole chapter) | A+B+C | `{kind:pair,name:answer,value:42}` → **`[]`** | `.10.5.4` |
+| `user-model/spec-files-and-rule-paragraphs.md` | label-in-block `Top::AND … label:`; `Top::AND` sketches | A+D | "label belongs to the block" → **DSL compile error** (agent, re-verify at fix) | `.10.5.5` |
+| `user-model/rule-modes-and-parse-modes.md` | ~20 mode fragments `Pair::&`/`::AND`/`::OR`/`Top:: /foo/`…; line 24 "both valid shapes" framing | A | regex on `::` throughout; `Top:: /foo/ -> Top` → **`null`** | `.10.5.6` |
+| `user-model/regex-in-spec.md` | `Top::` (l.38), `Pair::AND` (l.101), `Subdef::AND`, `Unit::AND` fragments | A | regex on `::` (capture-indexing teaching is correct) | `.10.5.7` |
+| `user-model/blind-calls-and-parser-orchestration.md` | `Document::AND`/`Atom::|`… (blind-call, no regex); `BadRule::` negative | mostly CLEAN | blind-call `::` rules carry no regex — audit + fix any stray regex-on-`::` | `.10.5.8` |
+| `dsl/action-and-lifecycle-placement.md` | `Token::AND`,`List::AND`,`Name::AND`,`Delimited::AND`,`Block::AND`,`Tuple::AND`,`Pair::AND`,`MaybeName::OR`,`Items:*` | A | regex on `::` (helper-illustration); `ebnf.spec` quote at l.184 is CLEAN | `.10.5.9` |
+| `dsl/capture-marks-and-source-locations.md` | `Top::AND`; `Call::AND`/`Inner::AND` divergence | A | regex on `::` (entry-vs-match teaching correct) | `.10.5.10` |
+| `dsl/declaration-helper-reference.md` | `Token::AND`,`List::AND` worked examples | A | regex on `::` | `.10.5.11` |
+| `dsl/source-boundary-helper-reference.md` | `Tuple::AND`,`Block::AND`,`Paren::AND`,`Pair::AND`,`Body::AND`,`AtEnd::AND`,`Top::AND`/`Child::AND` | A | regex on `::` | `.10.5.12` |
+| `dsl/value-container-flow-helper-reference.md` | `Token::AND`,`Node::AND`,`Sequence::AND`,`Kind::AND`,`FieldList::AND` (`logging_annotation:` is `:` → CLEAN) | A | regex on `::` | `.10.5.13` |
+| `dsl/values-containers-and-flow-helpers.md` `+ action-model-and-helper-surface.md` `+ fluent-and-block-forms.md` `+ actionir-lowering-mental-model.md` | `Token::` (l.160); `Top::` (l.35); `Items::AND+`,`Toplevel:AND+`; helper-statement fragments | A | regex on `::`; isolated helper fragments are CLEAN | `.10.5.14` |
+| `appendix/formal-grammar.md` | §1 `Top:: /a/ -> Next`; §12 `DemoParser:: … /pattern1/` (+ undefined `A`/`B`) | A+D | regex on `::`; §1 → `["?Top:",[]]` (agent) | `.10.5.15` |
+| `appendix/runtime-semantics.md` | §5.5 three `Top::`/`Pair::` regex-on-top; §5.6 `object:`/`manifest:` single fragments | A | regex on `::` (forms run; doctrine-divergent); **folds `.10.4`** | `.10.5.16` |
+| `specs-and-corpora/tablegrep-spec-walkthrough.md` | `field1 =~ /foo/` `sens`; GROUP example | B | `sens '=~'` → **`'='`**; group → **`{"group":["internal"]}`** | `.10.5.17` |
+| `specs-and-corpora/portmap-spec-walkthrough.md` | 5 output-shape examples | B | flat `['?bare:','clk',undef,…]` → **nested `["?bare:",["clk"]]` / `["?slice:",["addr","7","0"]]`** | `.10.5.18` |
+
+**Confirmed CLEAN (no fix needed):** all `compiler/*`, `architecture/owner-tree.md`, `development/*`
+(zero `.spec` grammar blocks — Perl/JSON/bash only); `public-api/{trace-api,plugin-registry,descriptor-introspection}.md`;
+`appendix/helper-contract-catalog.md` §2/§5 worked examples (the `.10.3` 2-rule idiom, re-spot-checked);
+`appendix/backend-handoff.md`; `specs-and-corpora/shipped-specs-and-corpora.md`;
+`specs-and-corpora/lispish-spec-walkthrough.md` (faithful shipped-spec quotes + verified outputs);
+`specs-and-corpora/pplugin-spec-walkthrough.md` (faithful + verified);
+**`specs-and-corpora/ebnf-spec-walkthrough.md`** (the "richer example" **compiles + parses to its
+claimed structure** — the preliminary-hunt "does not compile" hypothesis was **wrong**; faithful
+shipped-spec quotes elsewhere). Isolated helper-statement / lifecycle / method-chain DSL fragments
+(no rule label, no regex-on-`::`, no claimed output) are CLEAN teaching fragments — agent A4's
+"Class D: missing rule wrapper" over-flagging is **rejected**; they will be confirmed valid (and
+wrapped only where a complete worked example is intended) during the per-file fixes.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -506,16 +738,59 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.10.2` | `superseded` | engine-fix-vs-doc fork is moot (no engine bug; reference untouched) |
 | — | `SPEC-LANG-REFERENCE.10.3` | `done` | `.5.2` Scalar+Numeric examples + both catalog preambles redone with the verified 2-rule idiom (2026-06-17); all 33 re-verified through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot; `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.6` | `done` | corrected the durable record (2026-06-17): retracted the inaccurate "regex-on-top → `[]`" sub-claim (ground truth: those forms run and return values; only `::AND … -> Rule[N]` returns `[]`); KM card rewritten doctrine-first; rationale for `.10` = the 2-rule authoring doctrine, not an `[]` bug |
-| 1 | `SPEC-LANG-REFERENCE.10.5` | `pending` | **next — WHOLE-BOOK SCORCH (user directive 2026-06-17)** — exhaustively audit EVERY `.spec` snippet for doctrine-validity (no regex on a top `::` rule) + output-correctness (claimed I/O matches `LinkedSpec::Get`), then remediate. Audit-as-decomposition → fix sub-leaves `.10.5.1…`; subsumes `.10.4` |
-| 2 | `SPEC-LANG-REFERENCE.10.4` | `pending` | §5.5 `runtime-semantics.md` Pair fix — folded into the `.10.5` remediation |
-| 3 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the remediation |
-| 4 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
-| 5 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
-| 6 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 7 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 8 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| — | `SPEC-LANG-REFERENCE.10.5.1` | `done` | **whole-book scorch AUDIT (2026-06-17)** — 8 read-only agents + personal ground-truth re-verification; findings table above; engine facts (`::`≡`:` on non-first rules; `::AND -> Rule[N]` → `[]`); ~105 `::`-mode headers across ~20 files; user chose FULL book-wide scorch; ebnf "richer example" cleared (compiles). Decomposed into `.10.5.2`–`.10.5.19` |
+| 1 | `SPEC-LANG-REFERENCE.10.5.2` | `pending` | **next** — fix `overview/what-is-linkedspec.md` minimal kv example → 2-rule idiom (verified) |
+| 2 | `SPEC-LANG-REFERENCE.10.5.3` | `pending` | fix `public-api/get-and-get-parser.md` minimal example (→ `[]`) → 2-rule idiom |
+| 3 | `SPEC-LANG-REFERENCE.10.5.4` | `pending` | fix `user-model/worked-spec-walkthrough.md` central `Pair::AND` (→ `[]`, claims a hash) + re-derive whole-chapter outputs |
+| 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` | fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
+| 5 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
+| 6 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
+| 7 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
+| 8 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
+| 9 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
+| 10 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
+| 11 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
+| 12 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
+| 13 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
+| 14 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
+| 15 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
+| 16 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
+| 17 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
+| 18 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
+| — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
+| 19 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
+| 20 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
+| 21 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
+| 22 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 23 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 24 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-06-17` — SCOPE: FULL BOOK-WIDE SCORCH (user decision, `.10.5.1`).** Faced with the audit
+  finding that the `Rule::AND /regex/ -> Rule[N] {return}` idiom is **pervasive** (~105 `::`-mode rule
+  headers across ~20 files) and that the audit agents disagreed on whether isolated helper-illustration
+  fragments count as violations, the user was asked (AskUserQuestion) to choose the remediation breadth
+  and selected **"Full book-wide scorch"**: rewrite **every** worked example — *including* the isolated
+  DSL helper-illustration fragments — to the verified 2-rule idiom (top `::` entry rule with **no
+  regex** + normal `:` rule(s) carrying the regex, reading `entry_group(N)`, surfacing values via the
+  accumulator snapshot), and correct **all** wrong claimed outputs. Consequence: `.10.5.2`–`.10.5.18`
+  each remediate one file (or coherent group); `.10.5.19` finalizes. The doctrine governs even though
+  the engine is permissive (`::`≡`:` on non-first rules) — the book teaches the **authoring
+  discipline**, not the engine's tolerance ([[feedback_spec-structure-top-plus-normal]], KM card
+  `spec-top-rule-no-regex-two-rule-minimum.md`). Fragments that carry **no** regex and make **no**
+  output claim (isolated helper-statement / lifecycle / method-chain sketches) stay as fragments;
+  faithful shipped-spec quotes stay verbatim; only their claimed I/O is corrected.
+
+- **`2026-06-17` — ENGINE FACTS for the scorch (`.10.5.1`, verified via `LinkedSpec::Get`).** (1) `::`
+  and `:` are interchangeable on a **non-first** rule (`child::AND /re/` ≡ `child:AND /re/`); only the
+  **first** rule is the top/`_INITIAL` entry; multiple `::` rules do not collide. So a regex on a `::`
+  rule is a **doctrine** problem, not an engine error (the engine is permissive — matches `.10.6`).
+  (2) The `Rule::AND /regex/ -> Rule[N] { return(...) }` shape (AND mode + slot self-edge) drops its
+  edge return → `[]` (the `.10.1` `_emit_and_single_acode_handler` finding) — so the book's pervasive
+  worked-example idiom both violates the doctrine **and** fails to surface its `return` value. The fix
+  idiom is the verified `demo:: -> child .push` / `LX{return(array_copy(a(demo)))}` + `child : /re/
+  I.return(<expr reading entry_group(N)>)` form.
 
 - **`2026-06-17` — CORRECTION (user-established `.spec` structural invariant; supersedes the `.10.1`
   engine-bug verdict).** A `.spec` **top-level rule** (written with `::`) is the **entry point**:
@@ -596,6 +871,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10` (correction) | user established the `.spec` structural invariant (top `::` rule has no regex; valid spec ≥2 rules); verified vs `BootstrapSpec/Core.pm:414,417` (`::`→`_INITIAL`, label line anchored — no regex) + `RuleIR.pm:193-195` (`_INITIAL`→`top_rule`) + audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`); **proven the correct 2-rule worked-example idiom** via `LinkedSpec::Get` (`demo_top:: -> word_pair .push; LX{return(array_copy(a(demo_top)))}` + `word_pair : /(\w+) (\w+)/ I.return(concat(entry_group(0),"-",entry_group(1)))` → `["hello-world"]`; the child reads `entry_group` not `match_group`) | **NO engine bug** — the `[]` was invalid spec structure (regex on top rule / single-rule). Perl reference untouched. Deleted the bad KM card; wrote `spec-top-rule-no-regex-two-rule-minimum.md`. `.10.1` verdict + `.10.2` fork superseded; remediation `.10.3`/`.10.4`/`.10.5`. FRESH SESSION recommended |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.3` | scratch harness builds each example from the exact book 2-rule scaffold + `LinkedSpec::Get` run + `JSON::PP->canonical` encode (sanity-checked vs the frozen `["hello-world"]` idiom); all 33 Scalar+Numeric examples re-derived; `mdbook build`; rendered-HTML check that the full blocks stay single code blocks; whole-catalog `match_group` grep | `mdbook build` exit 0; 33/33 produce the documented one-element-array outputs; `is_defined` regex fixed `/(\w*)(\S*)/`→`/(\w+)/` (empty-matchable double-match → `["present","present"]`); only remaining `match_group` is the §8 reference (correct). self-check + KM gate pass |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.6` | ground-truth matrix via `LinkedSpec::Get` (OR self-ref / cross-rule action-edge regex-on-`::`-rule forms + the §5.5 frozen fixtures all run and return values; only `::AND … -> Rule[N]` → `[]`); KM-card rewrite; KM gate regenerates `KNOWLEDGE_MAP.md`; self-check | prior "regex-on-top → `[]`" premise disproven and retracted; KM card rewritten doctrine-first; doctrine + `.10.3` unchanged; KM gate + self-check pass; no Perl/book-example change |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.1` | 8 read-only `Explore` agents over chapter groups (enumerate→classify→run); **personal re-verification of every load-bearing finding** via a private `LinkedSpec::Get` driver (shared driver clobbered by an agent mid-run → all agent ACTUAL_OUTPUT treated as hypotheses); engine probes (T1 `child::AND`≡T2 `child:AND`=`[0]`; T3 `Top:: /foo/ -> Top`=`null`; T4 two `::` rules OK); re-ran tablegrep/portmap/worked-walkthrough/ebnf; whole-book `::`-header grep; `scripts/check_memory_architecture.sh` | self-check exit 0. ~105 `::`-mode headers / ~20 files; idiom is doctrine-divergent + `[]`-shaped. Findings table recorded; 18 fix leaves `.10.5.2`–`.10.5.19` created. **2 preliminary-hunt hypotheses overturned:** ebnf "richer example" compiles+parses (CLEAN); §5.5 forms run+return. User chose full book-wide scorch. No book/Perl change |
 
 ## Commit Log
 
@@ -612,6 +888,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
 | `SPEC-LANG-REFERENCE.10.3` | `SPEC-LANG-REFERENCE.10.3 — book: redo Scalar+Numeric helper examples + preambles with the valid 2-rule idiom (entry_group; re-verified outputs)` | Rewrote both `helper-contract-catalog.md` worked-examples preambles + all 33 examples to the top-entry-rule + normal-rule form reading `entry_group(N)`; every output re-derived through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot. `mdbook build` exit 0 |
 | `SPEC-LANG-REFERENCE.10.6` | `SPEC-LANG-REFERENCE.10.6 — record: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine` | Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first + superseding Decision + record-framing fixes; doctrine and `.10.3` unchanged. No Perl/book-example change |
+| `SPEC-LANG-REFERENCE.10.5.1` | `SPEC-LANG-REFERENCE.10.5.1 — audit: whole-book .spec-snippet scorch (findings table + engine facts) → decompose into per-file fix leaves .10.5.2-.19` | Read-only audit (8 agents + personal ground-truth re-verify). ~105 `::`-mode headers across ~20 files; pervasive `Rule::AND /regex/ -> Rule[N]` idiom is doctrine-divergent + `[]`-shaped. User chose FULL book-wide scorch. ebnf "richer example" cleared. `.10.4` superseded by `.10.5.16`. No book/Perl change |
 
 ## Changelog
 
@@ -779,3 +1056,21 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   during remediation (agent findings are hypotheses — cf. this session's `.10.6` lesson; one agent even
   reported the §5.5 Pair as `null` where a direct run gave `["?pair:","key","val"]`, a transcription
   sensitivity to resolve per-fix). Read-only record/plan update only — no book/Perl change.
+- `2026-06-17`: **`.10.5` split + `.10.5.1` done — whole-book scorch AUDIT.** Ran the fresh exhaustive
+  hunt: **8 read-only `Explore` agents** over chapter groups, then **personally ground-truthed every
+  load-bearing finding** through a private `LinkedSpec::Get` driver (an audit agent had overwritten the
+  shared scratch driver mid-run, so all agent ACTUAL_OUTPUT values were treated as hypotheses — the
+  `.10.6` lesson held). Established **engine facts** (probed, not guessed): `::` and `:` are
+  interchangeable on a non-first rule (`child::AND /re/` ≡ `child:AND /re/` = `[0]`); only the first
+  rule is the top/entry (multiple `::` rules don't collide); `Top:: /foo/ -> Top` → `null`; so
+  `::`-no-regex is an **authoring doctrine**, not a hard engine constraint. **Headline:** the
+  `Rule::AND /regex/ -> Rule[N] {return}` idiom is **pervasive — ~105 `::`-mode rule headers across
+  ~20 files** — and is doctrine-divergent (regex on `::`) **and** the shape that returns `[]`.
+  Findings synthesized into "Audit Findings (`.10.5.1`)". **Two preliminary-hunt hypotheses overturned
+  on re-verification:** `ebnf-spec-walkthrough.md`'s "richer example" **does** compile + parse to its
+  claimed structure (CLEAN — the "does not compile" claim was wrong), and the §5.5 forms run + return
+  values. Verified drifts: `tablegrep` `sens` = `=` (not `=~`); `portmap` outputs are nested
+  (`["?bare:",["clk"]]`) not flat. **User decision (AskUserQuestion): FULL BOOK-WIDE SCORCH** — rewrite
+  every worked example (incl. isolated DSL helper fragments) to the 2-rule idiom + correct all outputs.
+  Decomposed into per-file fix leaves `.10.5.2`–`.10.5.19`; `.10.4` superseded by `.10.5.16`. No
+  book/Perl change (audit only). Frontier → `.10.5.2` (`what-is-linkedspec.md` minimal example).

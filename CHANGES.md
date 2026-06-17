@@ -1,6 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10.5.1: whole-book `.spec`-snippet scorch AUDIT (findings + decomposition)
+
+Ran the fresh exhaustive hunt for the whole-book scorch (`.10.5`). Method: **8 read-only `Explore`
+agents** over chapter groups (enumerate every `.spec` block → classify A/B/C/D/CLEAN → run claimed
+outputs), then **personally ground-truthed every load-bearing finding** through a private
+`LinkedSpec::Get` driver. (Mid-run, an audit agent overwrote the shared scratch driver at
+`/tmp/lsq/run.pl`; this was caught immediately and a private driver `/tmp/lsq_me/run.pl` was used for
+all verification — so every agent ACTUAL_OUTPUT was treated as a hypothesis, per the `.10.6` lesson.)
+
+**Engine facts established (probed via `LinkedSpec::Get`, not guessed):**
+- `::` and `:` are **interchangeable on a non-first rule** (`child::AND /re/` ≡ `child:AND /re/` → both
+  `[0]`); only the **first** rule is the top/`_INITIAL` entry; multiple `::` rules do not collide.
+  Therefore "no regex on a `::` rule" is an **authoring doctrine**, not a hard engine constraint
+  (consistent with the `.10.6` retraction — the engine is permissive).
+- The `Rule::AND /regex/ -> Rule[N] { return(...) }` shape (AND mode + slot self-edge) **drops its edge
+  return → `[]`** (the `.10.1` `_emit_and_single_acode_handler` finding).
+
+**Headline finding:** the `Rule::AND /regex/ -> Rule[N] {return}` idiom is the book's **pervasive**
+worked-example shape — `grep` finds **~105 `Name::<mode>` rule headers across ~20 files** — and it is
+doctrine-divergent (regex on a `::` rule) **and** the `[]`-shaped form. The audit agents disagreed on
+whether the isolated DSL helper-illustration fragments count as violations; the user was asked
+(AskUserQuestion) and chose **FULL BOOK-WIDE SCORCH** — rewrite every worked example (incl. those
+fragments) to the verified 2-rule idiom and correct all wrong outputs.
+
+**Verified drifts (ground-truthed):** `tablegrep` `field1 =~ /foo/` → `sens` is `"="` not the claimed
+`"=~"` (the regex captures only `([!=])`); `portmap` `clk` → `["?bare:",["clk"]]` and `addr[7:0]` →
+`["?slice:",["addr","7","0"]]`, not the claimed flat `['?bare:','clk',undef,…]`. **Two preliminary-hunt
+hypotheses overturned on re-verification:** `ebnf-spec-walkthrough.md`'s "richer example" **compiles +
+parses to its claimed structure** (CLEAN — the earlier "does not compile" claim was wrong), and the
+§5.5 regex-on-`::` forms run + return values. **Confirmed CLEAN:** all `compiler/*`/`architecture/*`/
+`development/*` (no `.spec` blocks), `public-api/{trace,plugin,descriptor}`, helper-catalog §2/§5 (the
+`.10.3` idiom), lispish/pplugin walkthroughs (faithful shipped-spec quotes).
+
+Recorded the full findings table + engine facts + the scope Decision in
+`docs/tasks/SPEC-LANG-REFERENCE.md` ("Audit Findings (`.10.5.1`)"), and decomposed the remediation into
+per-file fix leaves `.10.5.2`–`.10.5.19` (one file/coherent group per leaf; `.10.5.16` folds the
+`.10.4` §5.5 Pair fix; `.10.4` marked `superseded`). `scripts/check_memory_architecture.sh` exit 0.
+**No book or Perl change in this slice (audit only).**
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10.5 (scope): broaden to a whole-book example scorch (user directive)
 
 User directive: *"scorch the book to hunt down book examples — the book shall not mislead, only
