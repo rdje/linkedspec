@@ -176,7 +176,7 @@ After a BACKTRACK rewind, the next match attempt uses the **rule's declared pars
 mode** (seek or consume) from the restored position. BACKTRACK does not change
 the parse mode.
 
-## 5. Accumulator Convention
+## 5. Accumulator and Output Shape
 
 ### 5.1 Rule Accumulator
 
@@ -217,6 +217,114 @@ E {return(array_copy(array(results)))}
 The rule's return value is whatever the **E-block** returns (or the last lifecycle
 block to execute). A rule must return a value identifiable by the parent. The
 canonical form is `return(array_copy(array(accumulator)))`.
+
+### 5.5 What a Parser Returns (Top-Level Output)
+
+A compiled `.spec` parser, invoked on input, returns **the value the top rule
+produces** — exactly what the top rule's terminating lifecycle block (`E` / `LX`) or
+`return(...)` yields. There is no extra envelope around it: the output type is whatever
+the rule returns (a scalar, an array, or a hash), structurally unchanged. A backend that
+implements this contract must hand back that same value.
+
+The following are **verified** input→output pairs (the Perl reference is the behavioral
+oracle; the first two are frozen oracle-corpus fixtures, the third was produced by
+running the reference parser):
+
+```text
+Top::
+ /x/ -> Done { return("scalar-ok") }
+Done::
+ /[a-z]+/
+```
+Input `xhello` → output `"scalar-ok"` — a bare scalar.
+
+```text
+Top::
+ /x/ -> Done { return(array("?proof:", "ok")) }
+Done::
+ /[a-z]+/
+```
+Input `xhello` → output `["?proof:", "ok"]` — an array.
+
+```text
+Pair::AND
+ /(\w+)=(\w+)/ -> Pair[0] {
+   return(array("?pair:", match_group(0), match_group(1)));
+ }
+```
+Input `key=val` → output `["?pair:", "key", "val"]` — here the author chose an array
+holding an (optional, §5.6) leading tag plus the two captures (`match_group(0)` is the
+first capture group; see [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups)).
+
+### 5.6 The Output Shape Is the Author's Choice
+
+A rule may return **any structure the grammar author finds convenient** — a bare scalar,
+a flat array, a nested array, a hash, or any composition of these. LinkedSpec imposes
+**no output schema**: the parser hands back whatever the rule builds (§5.5 already shows
+scalar and array results). How you shape your AST is entirely up to you.
+
+**One optional convention** appears in parts of the shipped corpus — the **tagged array**:
+the first element is a string tag of the form `"?<rule>:"` naming the producing rule, with
+the payload after it.
+
+```text
+object: /(?i)\nobject:\s+(\S+)/  I.return(a("?object:", flat_array(entry_groups())))
+```
+A match of `object: foo` produces `["?object:", "foo"]`; a tag-only form is used when a
+node carries no payload:
+
+```text
+manifest: /(?is)\nmanifest:\s+.+?\n\n/  I.return(a("?manifest:"))
+```
+→ `["?manifest:"]`.
+
+This convention is **purely optional** — an older self-describing-AST style some specs
+adopt so a consumer can identify each node by its leading tag. **Nothing in the engine
+requires, privileges, or even recognizes it**: the `"?...:"` tag is just an ordinary
+string, the convention lives only in the *spelling*, and a backend needs no tag-specific
+machinery — it simply builds whatever array, hash, or scalar the spec asks for. You are
+free to use a different convention, or none at all. (Specs that happen to use the tagged
+style include `ds_vhistory.spec`, `portmap.spec`, `vhdl.spec`, and `regdef.spec`;
+`a(...)` is the array constructor, an alias of `array(...)`, and `flat_array(...)` splices
+an array-valued expression such as `entry_groups()` into the array.)
+
+### 5.7 `return(...)` versus the accumulator
+
+Two distinct mechanisms produce a rule's data; do not conflate them:
+
+- The **implicit accumulator** (§5.1–§5.3) is the rule's working array; `push(Child)` /
+  `push_value(target, value)` append to it across repetitions.
+- **`return(expr)`** sets the rule's **return value** — the value the parent sees for
+  that rule. It is the rule's value channel, separate from the accumulator.
+
+A child rule's `return(...)` becomes that child's value for the parent to consume
+**explicitly** (for example `push_value(array(results), call(Child))`); it is **not**
+auto-appended to the parent's accumulator. A common top-level pattern uses both — collect
+children into the accumulator, then return a snapshot of it:
+
+```text
+... return(array("?ds_vhistory:", array_copy(array(vhistory)))) ...
+```
+
+(from `ds_vhistory.spec`), where `array_copy(array(vhistory))` snapshots the rule's
+`vhistory` accumulator; the `"?ds_vhistory:"` tag here is just the optional convention
+from §5.6 — the author could return the snapshot in any shape.
+
+### 5.8 Backend Output Reconciliation (the one-level wrap)
+
+The **canonical, backend-neutral output is the reference value** — what the Perl
+reference returns (the §5.5 examples). A backend whose run loop returns the top rule's
+*accumulator array* rather than its bare return value will produce that reference value
+**wrapped one level**. For instance the Rust runtime's `execute(...)` returns the
+accumulator as an array, so the scalar case `"scalar-ok"` comes back as `["scalar-ok"]`
+and the array case `["?proof:", "ok"]` as `[["?proof:", "ok"]]`.
+
+The cross-variant oracle stores the **reference value** as the fixture and compares a
+wrapping backend against `[reference]`, so the one-level wrap is a known, reconciled
+relationship — not a divergence. A new backend should either return the reference value
+directly or document its wrap so the oracle comparison stays exact. See
+`docs/knowledge/rust-perl-output-oracle.md` and the [Backend Handoff](backend-handoff.md)
+chapter.
 
 ## 6. Edge Dispatch
 

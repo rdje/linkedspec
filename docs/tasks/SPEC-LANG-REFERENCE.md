@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.2` done — new `user-model/regex-in-spec.md` chapter (regex as a first-class concept, verified against `LinkedRE.pm`/rgx); fixed a real capture-indexing contradiction across 3 book files; `mdbook build` exit 0; frontier → `.3`)
+- Last updated: `2026-06-17` (`.3` done — expanded `runtime-semantics.md §5` into the output/return-value shape contract (top-rule value, tagged shape as an OPTIONAL convention per user feedback, return-vs-accumulator, one-level wrap); verified vs oracle corpus + a live Perl-reference run; `mdbook build` exit 0; frontier → `.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -115,7 +115,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.2` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.3`
-  Status: `pending`
+  Status: `done`
   Goal: Document the **output / return-value shape contract** (CRITICAL gap) in
   `appendix/runtime-semantics.md`
   Acceptance: a new section defining what a `.spec` parser returns — the top rule's value, the
@@ -123,8 +123,24 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   (`["?rule:", [...]]`), and how `return(...)` interacts with the accumulator — grounded in the
   `docs/knowledge/rust-perl-output-oracle.md` card + shipped specs, with worked input→output
   examples so a backend does not reverse-engineer it from the corpus. `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. Expanded `appendix/runtime-semantics.md §5` (renamed
+  "Accumulator Convention" → "Accumulator and Output Shape") with four new subsections: §5.5
+  *What a Parser Returns* (top rule's value, returned directly, no envelope) with three **verified**
+  input→output pairs; §5.6 *The Output Shape Is the Author's Choice* (engine imposes **no output schema**; `["?<rule>:", …]`, tag-only form, `a(...)`
+  / `flat_array(...)`, tag is a plain string with **no engine meaning** — presented as an **optional, older convention** (authors may use any output shape, or none), per user feedback 2026-06-17 that the tagged shape must not be shown as mandatory); §5.7 *`return(...)` versus the
+  accumulator* (return = value channel; a child return is consumed explicitly, not auto-appended to
+  the parent accumulator; canonical `return(a("?rule:", array_copy(a(acc))))`); §5.8 *Backend Output
+  Reconciliation* (the one-level wrap — reference value is canonical; an accumulator-returning runtime
+  wraps one level; oracle stores the reference value and compares against `[reference]`). **Grounded
+  + verified, not guessed**: the two literal examples are frozen oracle-corpus fixtures
+  (`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal/expected.json`); the tagged
+  `["?pair:","key","val"]` example was produced by **running the Perl reference** (`LinkedSpec::Get`);
+  the tagged convention was confirmed by grepping shipped specs (`ds_vhistory`/`portmap`/`vhdl`/`regdef`);
+  the wrap + return-vs-accumulator contract is grounded in `docs/knowledge/rust-perl-output-oracle.md`.
+  A hand-built accumulator example that returned `[undef,undef,undef]` was **discarded** rather than
+  documented — repeated-rule accumulator mechanics are subtle, so only verified material was used.
+  `mdbook build` exit 0.
+  Commit: `SPEC-LANG-REFERENCE.3` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.4`
   Status: `pending`
@@ -230,12 +246,12 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | --- | --- | --- | --- |
 | — | `SPEC-LANG-REFERENCE.1` | `done` | Audit complete (2026-06-17) — surface inventory + book coverage map synthesized above; decomposed into `.2`–`.8` |
 | — | `SPEC-LANG-REFERENCE.2` | `done` | regex-first-class chapter landed (2026-06-17), verified against `LinkedRE.pm`/`Contracts.pm`/rgx; fixed a capture-indexing contradiction across 3 book files |
-| 1 | `SPEC-LANG-REFERENCE.3` | `pending` | **next** — output/return-shape contract (CRITICAL); ground in `docs/knowledge/rust-perl-output-oracle.md` + shipped specs |
-| 2 | `SPEC-LANG-REFERENCE.4` | `pending` | worked examples: grouped shared-code targets + entry-vs-local-match divergence |
-| 3 | `SPEC-LANG-REFERENCE.5` | `pending` | helper-catalog completeness + variant-neutrality sweep (indexing contract already corrected in `.2`) |
-| 4 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 5 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 6 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| — | `SPEC-LANG-REFERENCE.3` | `done` | output/return-shape contract landed in `runtime-semantics.md §5` (2026-06-17), verified vs oracle corpus + live Perl run; tagged shape framed as an OPTIONAL convention per user feedback |
+| 1 | `SPEC-LANG-REFERENCE.4` | `pending` | **next** — worked examples: grouped shared-code targets + entry-vs-local-match divergence |
+| 2 | `SPEC-LANG-REFERENCE.5` | `pending` | helper-catalog completeness + variant-neutrality sweep (indexing contract already corrected in `.2`) |
+| 3 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 4 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 5 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
 
@@ -261,6 +277,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | --- | --- | --- | --- |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.1` | two read-only audits (surface inventory ∥ book coverage map) synthesized; cross-checked the "E/IT deprecated" claim vs `LIFECYCLE-FAMILY-AUDIT`; `scripts/check_memory_architecture.sh` | self-check exit 0; 8/10 surface areas WELL-COVERED; binding gaps = regex-first-class (`.2`) + output-shape (`.3`); minor gaps `.4`–`.6`; KM cards `.7`; finalize `.8`. Rejected the unverified E/IT-deprecated claim. No book change (audit only) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.2` | engine facts verified read-only against `perl/LinkedRE.pm`, `perl/LinkedSpec/ActionIR/Contracts.pm` (`entry_group`/`match_group`/`entry_named` lowering), `perl/LinkedSpec/BootstrapSpec/Core.pm` (`/pattern/` recognizer), `rust/linkedspec-runtime/src/helpers.rs` (rgx `CompiledAlternation`), and cross-checked vs shipped specs (`lib_reader`/`tablegrep`/`spec.spec`); `mdbook build` (pre + post); whole-book grep for capture-indexing drift | `mdbook build` exit 0 both times; new `regex-in-spec.md` chapter + `formal-grammar.md §3.1` expansion; **3 drift sites corrected** (wrong "index 0 = full match" claim + two examples using the 1-based convention); convention verified 0-based/captures-only/compacted |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.3` | output shapes verified vs frozen oracle-corpus fixtures (`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal`), a **live Perl-reference run** (`LinkedSpec::Get` on a `/(\w+)=(\w+)/` spec → `["?pair:","key","val"]`), and shipped-spec grep for the tagged convention; grounded the wrap + return-vs-accumulator in `docs/knowledge/rust-perl-output-oracle.md`; `mdbook build` | `mdbook build` exit 0; `runtime-semantics.md §5` expanded (§5.5–§5.8). A hand-built accumulator example (`[undef,undef,undef]`) was discarded — only verified material documented. Tagged shape reframed as OPTIONAL per user feedback (engine imposes no output schema) |
 
 ## Commit Log
 
@@ -268,6 +285,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | --- | --- | --- |
 | `SPEC-LANG-REFERENCE.1` | `SPEC-LANG-REFERENCE.1 — audit: full .spec surface inventory + book coverage map; decompose into .2-.8` | Also creates the owning tree + registers it in docs/TASK_TREE.md (ownership-first, folded into the first leaf per repo convention). Audit only — no book change |
 | `SPEC-LANG-REFERENCE.2` | `SPEC-LANG-REFERENCE.2 — book: regex as a first-class concept (new user-model chapter) + fix capture-indexing drift` | New `user-model/regex-in-spec.md` + `SUMMARY.md`; `formal-grammar.md §3.1` capture-group/flags expansion; corrected the `entry_group`/`match_group` indexing contradiction in `helper-contract-catalog.md`, `overview/what-is-linkedspec.md`, `formal-grammar.md`, `source-boundary-helper-reference.md`. All facts verified vs `LinkedRE.pm`/`Contracts.pm`/rgx/shipped specs |
+| `SPEC-LANG-REFERENCE.3` | `SPEC-LANG-REFERENCE.3 — book: output/return-value shape contract in runtime-semantics §5 (output is author's choice; optional tagged shape)` | Expanded `appendix/runtime-semantics.md §5` (§5.5–§5.8): top-rule value, output is author's choice (optional tagged convention per user feedback), return-vs-accumulator, one-level wrap. Verified vs oracle corpus + live Perl run + shipped specs |
 
 ## Changelog
 
@@ -296,3 +314,17 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   buggy examples (`overview/what-is-linkedspec.md`, the `formal-grammar.md` Child rule) that used
   the wrong 1-based convention, and clarified `source-boundary-helper-reference.md`. `mdbook build`
   exit 0. Frontier → `.3` (output/return-shape contract).
+- `2026-06-17`: `.3` done — output/return-value shape contract. Expanded
+  `appendix/runtime-semantics.md §5` (renamed to "Accumulator and Output Shape") with §5.5
+  *What a Parser Returns* (the top rule's value, returned directly with no envelope; three verified
+  input→output pairs), §5.6 *The Output Shape Is the Author's Choice* (the engine imposes no output
+  schema — any scalar/array/hash composition is valid; the `["?<rule>:", …]` tagged array is just an
+  **optional, older convention** with no engine meaning), §5.7 *`return(...)` versus the accumulator*,
+  and §5.8 *Backend Output Reconciliation* (the one-level wrap; reference value is canonical). Grounded
+  + verified, not guessed: literal examples are frozen oracle-corpus fixtures, the tagged example was
+  produced by running the Perl reference, the convention was confirmed by grepping shipped specs, and
+  the wrap/return contract is from `docs/knowledge/rust-perl-output-oracle.md`. A hand-built accumulator
+  example returning `[undef,undef,undef]` was discarded rather than guessed. **User feedback mid-leaf**:
+  the tagged shape is an old, non-mandatory convention — reframed §5.6/§5.7 so the book states output
+  shape is entirely the author's choice (saved as a durable feedback memory). `mdbook build` exit 0.
+  Frontier → `.4` (grouped-target + entry-vs-local-match worked examples).

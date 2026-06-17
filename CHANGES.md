@@ -1,6 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.3: the output / return-value shape contract (book)
+
+Closes the CRITICAL **GAP B** from the `.1` audit: the output/return-shape contract was
+undocumented, so a new backend had to reverse-engineer the AST shape from `tests/corpus/`.
+
+Expanded `docs/linkedspec-book/src/appendix/runtime-semantics.md §5` (renamed *Accumulator
+Convention* → *Accumulator and Output Shape*) with four new subsections:
+- **§5.5 What a Parser Returns** — a parser returns the top rule's value directly, with no
+  envelope; the output type is whatever the rule builds (scalar/array/hash). Three verified
+  input→output pairs.
+- **§5.6 The Output Shape Is the Author's Choice** — the engine imposes **no output schema**.
+  The `["?<rule>:", …]` tagged array is presented as an **optional, older convention** some
+  specs use; the `"?...:"` tag is a plain string with no engine meaning, and authors are free
+  to use any convention or none. (Reframed mid-leaf per user feedback that the tagged shape
+  must not be shown as mandatory.)
+- **§5.7 `return(...)` versus the accumulator** — the return value channel vs the implicit
+  accumulator; a child's `return(...)` is consumed explicitly by the parent
+  (`push_value(array(results), call(Child))`), not auto-appended to the parent accumulator.
+- **§5.8 Backend Output Reconciliation** — the one-level wrap: the reference value is canonical;
+  an accumulator-returning runtime (e.g. the Rust `execute`) wraps one level, and the oracle
+  stores the reference value and compares a wrapping backend against `[reference]`.
+
+**Verification (grounded, not guessed — the leaf required it).** The two literal examples are
+frozen oracle-corpus fixtures
+(`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal/expected.json`); the
+tagged `["?pair:","key","val"]` example was produced by **running the Perl reference**
+(`LinkedSpec::Get` on a `/(\w+)=(\w+)/` spec over input `key=val` — which also re-confirmed
+`.2`'s `match_group(0)`=first-capture finding end-to-end); the tagged convention was confirmed by
+grepping shipped specs (`ds_vhistory`/`portmap`/`vhdl`/`regdef`); and the wrap +
+return-vs-accumulator contract is grounded in `docs/knowledge/rust-perl-output-oracle.md`. A
+hand-built accumulator example that returned `[undef,undef,undef]` was **discarded** rather than
+documented — repeated-rule accumulator mechanics are subtle, so only verified material was used.
+
+**Validation:** `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0; KM gate OK.
+Documentation-only — no code/spec change. Frontier → `SPEC-LANG-REFERENCE.4`.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.2: regex as a first-class `.spec` concept (book) + capture-indexing drift fix
 
 Closes the CRITICAL **GAP A** from the `.1` audit: regex was documented only at the syntax level
