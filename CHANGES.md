@@ -1,6 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10.5.3: fix `get-and-get-parser.md` minimal `Get` example → verified 2-rule idiom
+
+Second fix slice of the whole-book scorch. The `LinkedSpec::Get(...)` minimal example embedded an
+inline `.spec` heredoc that was regex-on-top + a `::AND -> Top[0]` self-edge —
+`Top::AND /foo/ -> Top[0] { return(hash("kind","top","text",match_text())) }` — which returns `[]`,
+not a usable AST. Replaced the heredoc with the verified 2-rule idiom:
+
+```
+top::
+ -> word .push
+
+LX { return(array_copy(a(top))) }
+
+word:
+ /foo/ I {
+   return(hash("kind", "top", "text", entry_text()));
+ }
+```
+
+added a `# $ast is [ { kind => "top", text => "foo" } ]` comment and a sentence teaching the two-rule
+shape. **Verified by extracting the heredoc from the book file** and running `LinkedSpec::Get`: `foo`
+→ `[{"kind":"top","text":"foo"}]`. Caught the `match_text()`→`entry_text()` trap (same family as the
+`.10.3` `entry_group`/`match_group` lesson): in the freshly-dispatched child rule the local match is
+unset, so `match_text()` gives `null` (`[{"kind":"top","text":null}]`) — `entry_text()` (the entering
+match) gives `"foo"`. Only one inline `.spec` heredoc exists on the page; the `get_parser` example
+uses a named spec. `mdbook build` exit 0. Frontier → `.10.5.4` (`worked-spec-walkthrough.md`).
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10.5.2: fix `what-is-linkedspec.md` minimal kv example → verified 2-rule idiom
 
 First fix slice of the whole-book scorch. The overview chapter's "minimal key/value parser" example

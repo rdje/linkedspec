@@ -451,12 +451,20 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.2` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `public-api/get-and-get-parser.md` "minimal example" (`Top::AND /foo/ -> Top[0]` → `[]`)
   → verified 2-rule idiom
   Acceptance: 2-rule form, re-verified output; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. Replaced the inline `Get(...)` heredoc spec (`Top::AND /foo/ ->
+  Top[0] { return(hash("kind","top","text",match_text())) }` → `[]`) with `top:: -> word .push` /
+  `LX { return(array_copy(a(top))) }` + `word: /foo/ I { return(hash("kind","top","text",
+  entry_text())) }`, added a `# $ast is [ { kind => "top", text => "foo" } ]` comment + a sentence
+  teaching the two-rule shape. **Extracted from the book file + ran `LinkedSpec::Get`**: `foo` →
+  `[{"kind":"top","text":"foo"}]`. **Caught a `match_text()`→`entry_text()` trap** (same family as
+  `.10.3`): `match_text()` in the freshly-dispatched child returns `null` (`[{"kind":"top","text":
+  null}]`); `entry_text()` (the entering match) returns `"foo"`. Only the one inline `.spec` heredoc
+  on the page (the `get_parser` example uses a named spec, not inline `.spec`). `mdbook build` exit 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.3` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.4`
   Status: `pending`
@@ -750,8 +758,8 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.6` | `done` | corrected the durable record (2026-06-17): retracted the inaccurate "regex-on-top → `[]`" sub-claim (ground truth: those forms run and return values; only `::AND … -> Rule[N]` returns `[]`); KM card rewritten doctrine-first; rationale for `.10` = the 2-rule authoring doctrine, not an `[]` bug |
 | — | `SPEC-LANG-REFERENCE.10.5.1` | `done` | **whole-book scorch AUDIT (2026-06-17)** — 8 read-only agents + personal ground-truth re-verification; findings table above; engine facts (`::`≡`:` on non-first rules; `::AND -> Rule[N]` → `[]`); ~105 `::`-mode headers across ~20 files; user chose FULL book-wide scorch; ebnf "richer example" cleared (compiles). Decomposed into `.10.5.2`–`.10.5.19` |
 | — | `SPEC-LANG-REFERENCE.10.5.2` | `done` | `overview/what-is-linkedspec.md` minimal kv example → verified 2-rule idiom (2026-06-17); extracted-from-book run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
-| 2 | `SPEC-LANG-REFERENCE.10.5.3` | `pending` | **next** — fix `public-api/get-and-get-parser.md` minimal example (→ `[]`) → 2-rule idiom |
-| 3 | `SPEC-LANG-REFERENCE.10.5.4` | `pending` | fix `user-model/worked-spec-walkthrough.md` central `Pair::AND` (→ `[]`, claims a hash) + re-derive whole-chapter outputs |
+| — | `SPEC-LANG-REFERENCE.10.5.3` | `done` | `public-api/get-and-get-parser.md` minimal `Get` example → verified 2-rule idiom (2026-06-17); book-extracted run → `[{"kind":"top","text":"foo"}]`; caught `match_text()`→`entry_text()` (else `null`); `mdbook build` exit 0 |
+| 3 | `SPEC-LANG-REFERENCE.10.5.4` | `pending` | **next** — fix `user-model/worked-spec-walkthrough.md` central `Pair::AND` (→ `[]`, claims a hash) + re-derive whole-chapter outputs |
 | 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` | fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
 | 5 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
 | 6 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
@@ -883,6 +891,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.6` | ground-truth matrix via `LinkedSpec::Get` (OR self-ref / cross-rule action-edge regex-on-`::`-rule forms + the §5.5 frozen fixtures all run and return values; only `::AND … -> Rule[N]` → `[]`); KM-card rewrite; KM gate regenerates `KNOWLEDGE_MAP.md`; self-check | prior "regex-on-top → `[]`" premise disproven and retracted; KM card rewritten doctrine-first; doctrine + `.10.3` unchanged; KM gate + self-check pass; no Perl/book-example change |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.1` | 8 read-only `Explore` agents over chapter groups (enumerate→classify→run); **personal re-verification of every load-bearing finding** via a private `LinkedSpec::Get` driver (shared driver clobbered by an agent mid-run → all agent ACTUAL_OUTPUT treated as hypotheses); engine probes (T1 `child::AND`≡T2 `child:AND`=`[0]`; T3 `Top:: /foo/ -> Top`=`null`; T4 two `::` rules OK); re-ran tablegrep/portmap/worked-walkthrough/ebnf; whole-book `::`-header grep; `scripts/check_memory_architecture.sh` | self-check exit 0. ~105 `::`-mode headers / ~20 files; idiom is doctrine-divergent + `[]`-shaped. Findings table recorded; 18 fix leaves `.10.5.2`–`.10.5.19` created. **2 preliminary-hunt hypotheses overturned:** ebnf "richer example" compiles+parses (CLEAN); §5.5 forms run+return. User chose full book-wide scorch. No book/Perl change |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.2` | extracted the new block **from the book file** and ran it through `LinkedSpec::Get` (`foo=bar baz=qux`→`[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `answer=42`→`[{"key":"answer","val":"42"}]`); compared idiom forms (`I {return}` works, bare `{return}`→`[0,0]`); `mdbook build` | `mdbook build` exit 0; single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → `null`) replaced with the verified 2-rule idiom + accurate prose/output + cross-links |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.3` | extracted the new `Get` heredoc spec **from the book file** + ran `LinkedSpec::Get` (`foo`→`[{"kind":"top","text":"foo"}]`); compared `match_text()`(→`null`) vs `entry_text()`(→`"foo"`); confirmed only one inline `.spec` heredoc on the page; `mdbook build` | `mdbook build` exit 0; `Top::AND /foo/ -> Top[0]` (→ `[]`) replaced with the verified 2-rule idiom using `entry_text()` + an output comment + a structure-teaching sentence |
 
 ## Commit Log
 
@@ -901,6 +910,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.6` | `SPEC-LANG-REFERENCE.10.6 — record: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine` | Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first + superseding Decision + record-framing fixes; doctrine and `.10.3` unchanged. No Perl/book-example change |
 | `SPEC-LANG-REFERENCE.10.5.1` | `SPEC-LANG-REFERENCE.10.5.1 — audit: whole-book .spec-snippet scorch (findings table + engine facts) → decompose into per-file fix leaves .10.5.2-.19` | Read-only audit (8 agents + personal ground-truth re-verify). ~105 `::`-mode headers across ~20 files; pervasive `Rule::AND /regex/ -> Rule[N]` idiom is doctrine-divergent + `[]`-shaped. User chose FULL book-wide scorch. ebnf "richer example" cleared. `.10.4` superseded by `.10.5.16`. No book/Perl change |
 | `SPEC-LANG-REFERENCE.10.5.2` | `SPEC-LANG-REFERENCE.10.5.2 — book: fix what-is-linkedspec.md minimal kv example → verified 2-rule idiom` | Replaced the single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → compile-fail/`null`) with `top:: -> pair .push` / `LX{return(array_copy(a(top)))}` + `pair: /(\w+)=(\w+)/ I{return(hash(…entry_group(0/1)…))}`; book-extracted run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
+| `SPEC-LANG-REFERENCE.10.5.3` | `SPEC-LANG-REFERENCE.10.5.3 — book: fix get-and-get-parser.md minimal Get example → verified 2-rule idiom` | Replaced inline `Top::AND /foo/ -> Top[0] {…match_text()…}` (→ `[]`) with `top:: -> word .push` / `LX{return(array_copy(a(top)))}` + `word: /foo/ I{return(hash("kind","top","text",entry_text()))}`; book-extracted run → `[{"kind":"top","text":"foo"}]`; `match_text()`→`null` trap caught; `mdbook build` exit 0 |
 
 ## Changelog
 
@@ -1097,3 +1107,13 @@ wrapped only where a complete worked example is intended) during the per-file fi
   through `LinkedSpec::Get`: `foo=bar baz=qux` → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`.
   Idiom note: the bare action-block form `pair: /re/ { return }` (no `I`) returns `[0,0]` — the `I{…}`
   block is required. `mdbook build` exit 0. Frontier → `.10.5.3` (`public-api/get-and-get-parser.md`).
+- `2026-06-17`: `.10.5.3` done — fixed `public-api/get-and-get-parser.md`'s inline `Get(...)` minimal
+  example. The heredoc spec `Top::AND /foo/ -> Top[0] { return(hash("kind","top","text",match_text())) }`
+  is regex-on-top + `::AND -> Top[0]` → `[]` (presented as a working minimal example). Replaced with
+  the 2-rule idiom (`top:: -> word .push` / `LX { return(array_copy(a(top))) }` + `word: /foo/ I {
+  return(hash("kind","top","text",entry_text())) }`), added a `# $ast is [ { kind => "top", text =>
+  "foo" } ]` comment + a structure-teaching sentence. **Verified by extracting the heredoc from the
+  book file** and running `LinkedSpec::Get`: `foo` → `[{"kind":"top","text":"foo"}]`. Caught the
+  `match_text()`→`entry_text()` trap (the dispatched child's local match is unset → `match_text()`
+  gives `null`; `entry_text()` reads the entering match → `"foo"`). `mdbook build` exit 0. Frontier →
+  `.10.5.4` (`user-model/worked-spec-walkthrough.md`).
