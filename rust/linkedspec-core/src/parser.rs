@@ -83,7 +83,16 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
     let line = lines[i];
     let trimmed = line.trim();
 
-    let header_re = Regex::compile(r"^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)")
+    // Group 3 (the mode suffix) is `[^\s/]*`, NOT `\S*`: a greedy `\S*` swallows a
+    // `/…/` regex written on the rule's header line (e.g. `name : /re/` or a
+    // `/open/ /close/` bracket pair), `parse_mode_suffix` then falls to
+    // `RuleMode::Default`, and the regex is silently dropped — the rule registers
+    // 0 (or, for a pair, 1) regexes, so every `-> child[N]` dispatch edge never
+    // fires (RUST-PARITY.7.5.1). Stopping the class at `/` lets a `/`-led regex
+    // fall through to group 4 (`rest`), where `parse_inline_body` registers it.
+    // Every real mode suffix (AND, OR+, &, *, ?, AND{2,4}, …) is slash-free, so
+    // this is identical to `\S*` for all non-regex header content.
+    let header_re = Regex::compile(r"^(\w+)[ \t]*(::|:)[ \t]*([^\s/]*)[ \t]*(.*)")
         .map_err(|e| LinkedSpecError::Compile(format!("header regex: {e}")))?;
 
     if let Some(caps) = header_re.captures(trimmed) {
@@ -777,5 +786,58 @@ mod tests {
         assert!(spec.rules[0].body.iter().any(|e| {
             matches!(&e.kind, BodyElementKind::SplitMarker { marker } if marker == "@capture_slice")
         }));
+    }
+
+    // ── RUST-PARITY.7.5.1 — header-line regex is no longer swallowed ──
+
+    /// Helper: collect the regex patterns a rule registered, in body order.
+    fn regex_patterns_of(rule: &Rule) -> Vec<String> {
+        rule.body
+            .iter()
+            .filter_map(|e| match &e.kind {
+                BodyElementKind::Regex { pattern } => Some(pattern.clone()),
+                _ => None,
+            })
+            .collect()
+    }
+
+    #[test]
+    fn header_line_single_regex_is_registered() {
+        // `name : /re/` on the header line must register the regex (not drop it).
+        // Before .7.5.1 the mode-suffix group `\S*` swallowed `/;/`, leaving the
+        // rule with 0 regexes so every dispatch edge to it never fired.
+        let spec = parse_spec("Top::\n -> semi\n\nsemi : /;/").unwrap();
+        let semi = spec.rules.iter().find(|r| r.header.label == "semi").unwrap();
+        assert_eq!(
+            regex_patterns_of(semi),
+            vec![";".to_string()],
+            "header-line single regex must be registered"
+        );
+    }
+
+    #[test]
+    fn header_line_bracket_pair_registers_open_then_close() {
+        // `name : /open/ /close/` must register BOTH regexes in order (open=0,
+        // close=1) so the recursive `-> name[1]` close edge resolves. Before
+        // .7.5.1 group 3 ate the open delimiter, leaving only the close.
+        let spec = parse_spec("Top::\n -> bracket\n\nbracket : /\\(/ /\\)/").unwrap();
+        let bracket = spec
+            .rules
+            .iter()
+            .find(|r| r.header.label == "bracket")
+            .unwrap();
+        assert_eq!(
+            regex_patterns_of(bracket),
+            vec!["\\(".to_string(), "\\)".to_string()],
+            "bracket-pair header must register open then close"
+        );
+    }
+
+    #[test]
+    fn header_line_mode_suffix_still_parsed_without_regex() {
+        // The narrowed group 3 is slash-free, so a real mode suffix on the header
+        // line is unchanged (regression guard for the fix's scope).
+        let spec = parse_spec("Top:AND\n /x/").unwrap();
+        assert_eq!(spec.rules[0].header.mode, RuleMode::And);
     }
 }

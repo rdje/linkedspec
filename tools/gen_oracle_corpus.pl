@@ -62,18 +62,30 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 # prove the full oracle loop end-to-end: Perl runs the grammar → canonical-JSON
 # fixture → the Rust engine reproduces it under the one-level wrap rule.
 #
-# DEFERRED shipped specs (RUST-PARITY.7.5) — the oracle's first findings. The
-# Perl oracle generates these correctly, but the Rust engine does NOT yet
-# reproduce them, so they are kept OUT of the committed corpus to keep
-# `cargo test` green. Both diverge on a shared compiler gap: a single-regex rule
-# written `name : /re/` (incl. the inline `name : /re/  I.return(...)` form)
-# compiles as 0-regex, so every `-> child[0]` dispatch edge "never fires"
-# (tclite `[]` → `[]` instead of the command_subst AST). Lispish additionally
-# needs the `scalaref(retv, {content})` hashref-field accessor parsed. Re-enable
-# once .7.5 lands. See docs/knowledge/rust-perl-output-oracle.md.
-#   { case => 'tclite_command_subst', spec => 'tclite',  input => '[]'    },
-#   { case => 'tclite_double_quote',  spec => 'tclite',  input => '""'    },
-#   { case => 'lispish_x_y',          spec => 'Lispish', input => '(x y)' },
+# DEFERRED shipped specs (RUST-PARITY.7.5) — the oracle's findings. Kept OUT of
+# the committed corpus until their engine gaps close, so `cargo test` stays green.
+#
+# RUST-PARITY.7.5.1 (header-line-regex fix, DONE) was a NECESSARY prerequisite —
+# a regex on a rule's header line (`name : /re/`, or a `/open/ /close/` pair) was
+# swallowed by the mode-suffix group and dropped, so the rule compiled as 0
+# (pair: 1) regexes; now they register correctly. But it is NOT SUFFICIENT for
+# tclite: the oracle proved a SECOND, independent blocker.
+#
+#   tclite (→ RUST-PARITY.7.5.3): accumulates via fluent continuations on ACTION
+#   edges — `-> command_subst .push`, `-> command_subst[1] .return(...)`. The Rust
+#   parser only attaches a `.method` fluent chain to a BLIND edge (`=>`); after a
+#   `->` edge the `.push`/`.return(...)` becomes a standalone FluentChain element
+#   the compiler discards, so the edges dispatch but never accumulate/return and
+#   tclite still yields `[]`. Re-enable once .7.5.3 (action-edge fluent lowering)
+#   lands.
+#     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
+#     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
+#
+#   Lispish (→ RUST-PARITY.7.5.2): uses `{ code }` blocks on its edges (not the
+#   fluent form), so it only needs the `scalaref(retv, {content})` hashref-field
+#   accessor parsed (expr.rs has no `{` case).
+#     { case => 'lispish_x_y',          spec => 'Lispish', input => '(x y)' },
+# See docs/knowledge/rust-perl-output-oracle.md.
 # The proof grammars use the parent→child dispatch form (`Parent:: /re/ -> Child
 # { ... }`) — a lone rule with top-level blocks returns 0 in the Perl reference
 # (inline-spec lifecycle friction, noted in RUST-PARITY.5.2). The edge action

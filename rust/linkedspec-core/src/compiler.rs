@@ -597,4 +597,35 @@ mod tests {
             }
         }
     }
+
+    #[test]
+    fn header_line_bracket_pair_self_recursive_close_edge_resolves() {
+        // RUST-PARITY.7.5.1: a `/open/ /close/` bracket pair written on the rule's
+        // HEADER line must register both regexes (open=0, close=1), so the
+        // self-recursive `-> bracket[1]` close edge resolves to index 1 — exactly
+        // the recursive-descent bracket matcher in tclite/Lispish. Before the fix
+        // group 3 ate the open delimiter, leaving only `close` at index 0 and
+        // making `bracket[1]` out-of-bounds ("never fires"). This mirrors the
+        // existing `build_dependency_regex_map_self_recursive_rule` test but with
+        // the pair on the header line rather than separate body lines.
+        let src = "Top::\n -> bracket\n\nbracket : /\\(/ /\\)/\n -> bracket\n -> bracket[1]\n";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let bracket = compiled.find("bracket").unwrap();
+        // Both header-line regexes registered, open first then close.
+        assert_eq!(bracket.regex_patterns.len(), 2);
+        assert_eq!(bracket.regex_patterns[0], "\\(");
+        assert_eq!(bracket.regex_patterns[1], "\\)");
+        // Self-recursive edges point at the existing parent positions:
+        // `-> bracket` (index 0 = open), `-> bracket[1]` (index 1 = close).
+        assert_eq!(bracket.acode_dispatch[0].regex_idx, 0);
+        assert_eq!(bracket.acode_dispatch[0].child_regex_idx, 0);
+        assert_eq!(bracket.acode_dispatch[1].regex_idx, 1);
+        assert_eq!(bracket.acode_dispatch[1].child_regex_idx, 1);
+        // The parent's `-> bracket` edge-only entry resolves against bracket's
+        // entry (open) regex, appended to Top's alternation.
+        let top = compiled.find("Top").unwrap();
+        assert_eq!(top.regex_patterns.len(), 1);
+        assert_eq!(top.regex_patterns[0], "\\(");
+    }
 }

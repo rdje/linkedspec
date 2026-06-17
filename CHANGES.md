@@ -1,6 +1,52 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — RUST-PARITY.7.5.1: fix the header-line-regex → 0-regex parser bug (Rust)
+
+Fixed `rust/linkedspec-core/src/parser.rs:86`: the rule-header regex
+`^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)` used `(\S*)` for the mode-suffix group, which
+greedily swallowed a `/…/` regex written on a rule's header line; `parse_mode_suffix("/;/")`
+then returned `RuleMode::Default` and the regex was silently dropped (never reaching `rest`/the
+body). So a single-regex header rule (`semi_colon : /;/`) registered 0 regexes — and a
+`/open/ /close/` bracket pair registered only 1 (group 3 ate the open) — making every
+`-> child[N]` dispatch edge "never fire". It bit `:` and `::` rules alike; the passing tests
+and `::` top-rules only escaped it by putting the regex on a separate body line.
+
+**Fix:** narrow group 3 to `([^\s/]*)` so a `/`-led regex falls through to group 4 (`rest`),
+where `parse_inline_body` registers it. One char class; every real mode suffix
+(`AND`/`OR+`/`&`/`*`/`?`/`AND{2,4}`) is slash-free, so behavior is identical for all non-regex
+header content. The second header regex (`parser.rs:270`, in `collect_body`) is detection-only
+with a trailing `*` group and was correctly left unchanged.
+
+**Bracket pairs repaired (not just preserved):** `command_subst : /open/ /close/` now registers
+`[open, close]` (entry idx 0 = open; the self-recursive `-> command_subst[1]` resolves to idx 1
+= close via the self-recursive branch of `build_dependency_regex_map`) — the recursive bracket
+matcher tclite/Lispish intend (before the fix `[1]` was out-of-bounds and entry matched the
+*close*).
+
+**Tests:** 4 new unit tests — `parser.rs`: `header_line_single_regex_is_registered`,
+`header_line_bracket_pair_registers_open_then_close`,
+`header_line_mode_suffix_still_parsed_without_regex`; `compiler.rs`:
+`header_line_bracket_pair_self_recursive_close_edge_resolves`. `cargo test --manifest-path
+rust/Cargo.toml` = **242 passed / 0 failed** (238 baseline + 4; `linkedspec_core` 90→94;
+corpus_oracle stays 1 green proof). `cargo clippy -p linkedspec-core -p linkedspec-runtime
+--tests` warning multiset = baseline (linkedspec-core 10 / linkedspec-runtime 13 /
+validation.rs 4 — zero-new). (Pre-existing, unrelated: clippy `--tests` exits 101 on
+`approx_constant` deny-errors in untouched test floats `expr.rs:687` / `types_test.rs:143`.)
+
+**PNT split — the fix is necessary but NOT sufficient for tclite.** With the regexes now
+registering, the oracle still showed tclite `[]` → `[]`: tclite accumulates via fluent
+continuations on ACTION edges (`-> command_subst .push`, `-> command_subst[1] .return(...)`),
+but the Rust parser attaches a `.method` fluent chain only to a BLIND edge (`=>`,
+`parser.rs:443`); after a `->` edge the `.push`/`.return(...)` parses as a standalone
+`FluentChain` element the compiler discards (`compiler.rs:171`). That independent gap is the
+new leaf **`RUST-PARITY.7.5.3`** (action-edge fluent lowering — greens tclite); the tclite
+oracle cases were re-deferred in `tools/gen_oracle_corpus.pl` (corpus back to 2 green proofs)
+so `cargo test` stays green. Lispish is unaffected by `.7.5.3` (it uses `{ code }` blocks) —
+its remaining blocker is `.7.5.2` (scalaref). Knowledge card
+`docs/knowledge/rust-perl-output-oracle.md` corrected. `scripts/check_memory_architecture.sh`
+exit 0. Frontier → `.7.5.3`.
+
 ## 2026-06-17 — RUST-PARITY.7.5: split into parser-header-regex (.7.5.1) + scalaref-hash-literal (.7.5.2)
 
 Tree structuring only (no code). A read-only investigation + a direct read of

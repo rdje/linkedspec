@@ -12,10 +12,14 @@ answers:
   - "what is the single-regex rule 0-regex compiler gap in the Rust variant"
   - "do single-colon name : /re/ rules work in the Rust compiler"
   - "why do retv-based inline grammars diverge between Perl and Rust"
+  - "why does tclite still return [] after the header-line-regex fix"
+  - "how does the Rust parser handle .push / .return on action edges"
+  - "are action-edge fluent continuations lowered in the Rust variant"
+  - "does a regex on a rule header line register in the Rust parser"
 date: 2026-06-17
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
-evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). cargo test 238 passed (237 baseline + 1). Oracle caught: tclite [] -> Rust [] (vs Perl ['?tcl_script:',[['?command_subst:',[]]]]) and Lispish exit_now(1) — both blocked by the single-regex-rule 0-regex compiler gap (deferred to RUST-PARITY.7.5)."
+evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). But the oracle proved this NECESSARY-NOT-SUFFICIENT for tclite: it still returns [] because action-edge fluent continuations (-> command_subst .push / .return(...)) are dropped — the parser attaches .method chains only to blind (=>) edges, so the compiler discards them after a -> edge (compiler.rs:171). That second blocker is RUST-PARITY.7.5.3. Lispish (uses { } blocks) needs only .7.5.1 + .7.5.2 (scalaref)."
 reverify: "cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
@@ -48,26 +52,40 @@ the Rust runner compares `engine.execute(input) == json!([expected])`. Proven on
 (`"scalar-ok"` → `["scalar-ok"]`) and a nested array (`["?proof:","ok"]` →
 `[["?proof:","ok"]]`).
 
-## What the oracle caught on its first run (root causes located → RUST-PARITY.7.5.1/.7.5.2)
+## What the oracle caught (root causes located → RUST-PARITY.7.5.1 done, .7.5.2, .7.5.3)
 
 The `.7`-split note assumed the Perl↔Rust gap was *only* the wrap. The oracle disproved
 that: the Rust engine does **not** yet reproduce the shipped recursive specs.
 
-- **Header-line-regex → 0-regex parser bug (→ `.7.5.1`; root cause for tclite AND
-  Lispish).** `rust/linkedspec-core/src/parser.rs:86` — the rule-header regex
-  `^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)` uses `(\S*)` for the mode-suffix group, which
-  greedily swallows a `/…/` regex placed on the header line; `parse_mode_suffix("/;/")`
-  returns `RuleMode::Default` and the regex is silently dropped (never reaches `rest`/the
-  body), so the rule registers 0 regexes and every `-> child[0]` dispatch edge "never
-  fires". tclite on `[]` returns `[]` (vs `["?tcl_script:",[["?command_subst:",[]]]]`);
-  Lispish hits its `parenthesis[1]` branch → `exit_now(1)`. **It bites `:` and `::`
-  alike** — it is "regex on the header line", not "single colon"; the integration tests /
-  `::` top-rules escape it only by putting the regex on a separate body line. Fix sketch
-  `(\S*)`→`([^\s/]*)`. **Foundational** — every header hits this, and an open/close pair
-  (`command_subst`/`parenthesis`/`curlyb`) registers "1 regex" today *because* group 3
-  eats the first delimiter; the fix must preserve bracket-pair semantics (verify the full
-  suite + re-enable the tclite oracle cases).
-- **`scalaref({content})` hash-literal parser gap (→ `.7.5.2`; second, independent).**
+- **Header-line-regex → 0-regex parser bug (`.7.5.1`, FIXED 2026-06-17; necessary, NOT
+  sufficient for tclite).** `rust/linkedspec-core/src/parser.rs:86` — the rule-header regex
+  `^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)` used `(\S*)` for the mode-suffix group, which
+  greedily swallowed a `/…/` regex placed on the header line; `parse_mode_suffix("/;/")`
+  returned `RuleMode::Default` and the regex was silently dropped (never reached `rest`/the
+  body), so the rule registered 0 regexes (an open/close pair registered 1 — group 3 ate the
+  first delimiter) and every `-> child[N]` dispatch edge "never fired". **It bit `:` and `::`
+  alike** — "regex on the header line", not "single colon"; the integration tests / `::`
+  top-rules escaped it only by putting the regex on a separate body line. **Fixed** by
+  narrowing group 3 to `([^\s/]*)` so a `/`-led regex falls through to group 4 (`rest`),
+  where `parse_inline_body` registers it; real mode suffixes (`AND`/`OR+`/`&`/`*`/`?`/
+  `AND{2,4}`) are slash-free so behavior is unchanged for them. Bracket pairs are **repaired**:
+  `command_subst : /open/ /close/` now registers `[open, close]` (entry idx 0 = open, the
+  self-recursive `-> command_subst[1]` resolves to idx 1 = close). **BUT this alone did NOT
+  green tclite** — with the regexes registering, the oracle still showed tclite `[]` → `[]`.
+  See the next bullet.
+- **Action-edge fluent continuations dropped (→ `.7.5.3`; the SECOND tclite blocker, found
+  by `.7.5.1`).** tclite accumulates via fluent continuations on ACTION edges
+  (`-> command_subst .push`, `-> command_subst[1] .return(...)`). The Rust parser attaches a
+  `.method` fluent chain only to a BLIND edge (`=>`, `parser.rs:443` calls
+  `parse_fluent_chain`); after a `->` edge it captures only a following `{ }` block
+  (`parser.rs:411-429`), so a trailing `.push`/`.return(...)` parses as a STANDALONE
+  `FluentChain` body element that the compiler discards (`compiler.rs:171`,
+  `BodyElementKind::FluentChain { .. } => { last_regex_line = None; }` — no codegen). So the
+  edges dispatch their children but never push/return, and tclite still yields `[]`. Lowering
+  action-edge fluent chains (attach to `ActionEdge`, execute after dispatch in the
+  acode-dispatch loop) is `.7.5.3`. Lispish is unaffected — it uses `{ code }` blocks, not
+  the fluent form.
+- **`scalaref({content})` hash-literal parser gap (→ `.7.5.2`; independent; Lispish).**
   `rust/linkedspec-core/src/expr.rs:299` — `parse_expr` has no `{` case, so Lispish's
   `scalaref(retv, {content})` raises `unexpected character '{'`; needs a new `Expr`
   variant + parser production + engine field-access semantics. Depends on `.7.5.1`.
@@ -91,7 +109,7 @@ ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
 
 ## Links
 
-- Task tree: [[RUST-PARITY]] (leaf `.7.1`; divergences deferred to `.7.5`)
+- Task tree: [[RUST-PARITY]] (leaves `.7.1` oracle, `.7.5.1` header-regex fix done; tclite blocked on `.7.5.3` action-edge fluent lowering; Lispish on `.7.5.2` scalaref)
 - ADR: `docs/decisions/0006-multi-backend-vision.md` (§Phase 8.6 language-neutral corpus)
 - Related: [[rust-retv-propagation]], [[rust-edge-semantics-bug]], [[rust-entry-match-separation]]
 - Files: `tools/gen_oracle_corpus.pl`, `rust/linkedspec-runtime/tests/corpus_oracle.rs`,
