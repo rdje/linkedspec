@@ -327,7 +327,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Decisions below. The Perl reference is authoritative and is NOT to be touched
   ([[feedback_do-not-fix-reference-engine]]).
   Children: `.10.1` (done — investigation; its verdict is now **superseded** — see note), `.10.2`
-  (**superseded** — the engine-fix-vs-doc fork is moot), `.10.3`/`.10.4`/`.10.5` (remediation)
+  (**superseded** — the engine-fix-vs-doc fork is moot), `.10.3` (done — redid `.5.2` examples + both
+  preambles with the verified 2-rule idiom), `.10.4`/`.10.5` (remediation pending)
 
 - ID: `SPEC-LANG-REFERENCE.10.1`
   Status: `done`
@@ -355,7 +356,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: n/a
 
 - ID: `SPEC-LANG-REFERENCE.10.3`
-  Status: `pending`
+  Status: `done`
   Goal: Redo the `.5.2` Scalar + Numeric helper examples **and the catalog "Worked examples"
   preamble** with VALID `.spec` structure
   Acceptance: replace the invalid `Demo:: /regex/ -> Demo { return(<expr>) }` scaffold (regex on the
@@ -364,8 +365,24 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   the proven idiom in Decisions / KM card `spec-top-rule-no-regex-two-rule-minimum.md`). Re-verify
   EVERY example through `LinkedSpec::Get` (and re-derive its real output); update the preamble to
   teach the correct structure. `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. Rewrote the §2 (Scalar) + §5 (Numeric) "Worked examples" preambles
+  and **all 33 helper examples** (17 Scalar + 16 Numeric) in `appendix/helper-contract-catalog.md` to
+  the **verified two-rule idiom**: a top `demo::` entry rule (NO regex) `-> value .push` + terminal
+  `LX { return(array_copy(a(demo))) }`, and a normal `value : /<re>/  I.return(<expr>)` rule reading
+  **`entry_group(N)`** (not `match_group(N)`). Full `.spec` blocks (`concat`/`is_defined`/`trim`/
+  `num_add`/`num_sum`) show the 2-rule form; `is_defined`/`is_undefined` keep the required
+  `I { if (...) … }` block. **Every example was build-AND-run re-verified through `LinkedSpec::Get`**
+  with a scratch harness that builds each spec from the exact book scaffold and JSON-encodes the
+  output (`JSON::PP->canonical`), sanity-checked against the frozen `["hello-world"]` idiom. All 33
+  produce the documented outputs, now the **top rule's one-element accumulator snapshot** (e.g.
+  `["hello-world"]`, `[5]`, `[3.5]`, `[null]`, `[1]`/`[0]`) — the honest consequence of valid
+  structure (the old invalid `Demo:: /re/ -> Demo {…}` form returned `[]`). **One do-not-guess fix:**
+  `is_defined`'s `/(\w*)(\S*)/` matched twice (empty-matchable → two dispatch-loop hits →
+  `["present","present"]`), corrected to `/(\w+)/` → `["present"]`. The only remaining `match_group`
+  in the catalog is the §8 Entry/Match helper *reference* (correct, untouched). `mdbook build` exit 0
+  (rendered HTML confirms the full blocks stay single code blocks with the required inter-rule blank
+  line). self-check + KM gate pass. No Perl change.
+  Commit: `SPEC-LANG-REFERENCE.10.3` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.4`
   Status: `pending`
@@ -454,15 +471,15 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.9` | `done` | §5.5 Pair example corrected to the verified OR self-ref form (2026-06-17); surfaced a SYSTEMIC AND-`[0]`-self-edge output-drift across several chapters → `.10` |
 | — | `SPEC-LANG-REFERENCE.10.1` | `done` | investigation (2026-06-17); **verdict SUPERSEDED** — no engine bug; the `[]` was invalid spec structure (regex on top rule). Bad KM card deleted + replaced |
 | — | `SPEC-LANG-REFERENCE.10.2` | `superseded` | engine-fix-vs-doc fork is moot (no engine bug; reference untouched) |
-| 1 | `SPEC-LANG-REFERENCE.10.3` | `pending` | **next (fresh session)** — redo `.5.2` Scalar+Numeric examples + catalog preamble with the valid 2-rule idiom (re-verified) |
-| 2 | `SPEC-LANG-REFERENCE.10.4` | `pending` | redo `.9` §5.5 example with valid 2-rule structure |
-| 3 | `SPEC-LANG-REFERENCE.10.5` | `pending` | audit + fix other chapters using a regex-on-top-rule example |
-| 4 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the remediation |
-| 5 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
-| 6 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
-| 7 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 8 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 9 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| — | `SPEC-LANG-REFERENCE.10.3` | `done` | `.5.2` Scalar+Numeric examples + both catalog preambles redone with the verified 2-rule idiom (2026-06-17); all 33 re-verified through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot; `mdbook build` exit 0 |
+| 1 | `SPEC-LANG-REFERENCE.10.4` | `pending` | **next** — redo `.9` §5.5 `runtime-semantics.md` Pair example with valid 2-rule structure |
+| 2 | `SPEC-LANG-REFERENCE.10.5` | `pending` | audit + fix other chapters using a regex-on-top-rule example |
+| 3 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the remediation |
+| 4 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
+| 5 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
+| 6 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 7 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 8 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
 
@@ -530,6 +547,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.9` | scratch oracle driver: reconfirmed `Pair::AND … -> Pair[0]` → `[]` under default/`consume`/`seek`; confirmed corrected OR self-ref `-> Pair` → `["?pair:","key","val"]`; §5.5/§5.6 sweep; whole-book `grep -E '-> \w+\[0\]'` + `::AND` cross-scan; checked `worked-spec-walkthrough.md` claimed output + ground-truthed self-edge idiom vs shipped specs (`portmap`/`hlink_substitution`/`DT`); `mdbook build` | `mdbook build` exit 0; §5.5 Pair example fixed (+ §5.7 cross-ref note); §5.6 left untouched (different construct). **Found SYSTEMIC variant** — single-slot `::AND -> Rule[0] { return }` output drift in several chapters (notably `worked-spec-walkthrough.md` claims `{kind=>"pair",…}`, actually `[]`) → new leaf `.10`, **blocked on a user decision** (engine-bug vs doc-rewrite) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.1` | delegated read-only codegen investigation (general-purpose agent, 42 tool-uses) + **self-verified the 3 load-bearing claims against source**: read `HandlerVariantEmitter.pm:564-630` (confirmed the missing `push` at 575-582), `git log -- HandlerVariantEmitter.pm` (confirmed MEDIUM-IMPACT.3.4.x provenance: `148c746`/`7fec186`), and `specentry-perl-coupling-inventory.md:234` (confirmed the pre-documented "lack E-block support" gap); behavioral matrix via `LinkedSpec::Get` (single-slot AND `LX`/`E`/edge `return` all → `[]`; OR self-ref + multi-slot-closing-slot + REP all surface values) | ~~VERDICT: accidental regression~~ — **SUPERSEDED** (see next row). The verdict was wrong because the premise was wrong (the examples are structurally invalid). |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10` (correction) | user established the `.spec` structural invariant (top `::` rule has no regex; valid spec ≥2 rules); verified vs `BootstrapSpec/Core.pm:414,417` (`::`→`_INITIAL`, label line anchored — no regex) + `RuleIR.pm:193-195` (`_INITIAL`→`top_rule`) + audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`); **proven the correct 2-rule worked-example idiom** via `LinkedSpec::Get` (`demo_top:: -> word_pair .push; LX{return(array_copy(a(demo_top)))}` + `word_pair : /(\w+) (\w+)/ I.return(concat(entry_group(0),"-",entry_group(1)))` → `["hello-world"]`; the child reads `entry_group` not `match_group`) | **NO engine bug** — the `[]` was invalid spec structure (regex on top rule / single-rule). Perl reference untouched. Deleted the bad KM card; wrote `spec-top-rule-no-regex-two-rule-minimum.md`. `.10.1` verdict + `.10.2` fork superseded; remediation `.10.3`/`.10.4`/`.10.5`. FRESH SESSION recommended |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.10.3` | scratch harness builds each example from the exact book 2-rule scaffold + `LinkedSpec::Get` run + `JSON::PP->canonical` encode (sanity-checked vs the frozen `["hello-world"]` idiom); all 33 Scalar+Numeric examples re-derived; `mdbook build`; rendered-HTML check that the full blocks stay single code blocks; whole-catalog `match_group` grep | `mdbook build` exit 0; 33/33 produce the documented one-element-array outputs; `is_defined` regex fixed `/(\w*)(\S*)/`→`/(\w+)/` (empty-matchable double-match → `["present","present"]`); only remaining `match_group` is the §8 reference (correct). self-check + KM gate pass |
 
 ## Commit Log
 
@@ -544,6 +562,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
 | `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
+| `SPEC-LANG-REFERENCE.10.3` | `SPEC-LANG-REFERENCE.10.3 — book: redo Scalar+Numeric helper examples + preambles with the valid 2-rule idiom (entry_group; re-verified outputs)` | Rewrote both `helper-contract-catalog.md` worked-examples preambles + all 33 examples to the top-entry-rule + normal-rule form reading `entry_group(N)`; every output re-derived through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot. `mdbook build` exit 0 |
 
 ## Changelog
 
@@ -667,3 +686,14 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   Deleted the mis-diagnosis KM card `and-single-acode-edge-return-dropped.md`; superseded `.10.1`
   verdict + `.10.2` fork; added remediation leaves `.10.3`/`.10.4`/`.10.5`. No Perl or book-example
   change in THIS slice (records + correction only). **FRESH SESSION recommended**; repo handoff-ready.
+- `2026-06-17`: `.10.3` done — redid the `.5.2` Scalar (§2) + Numeric (§5) worked-examples preambles
+  and all 33 helper examples in `helper-contract-catalog.md` with the **verified 2-rule idiom** (top
+  `demo::` entry rule with NO regex `-> value .push` + `LX { return(array_copy(a(demo))) }`; normal
+  `value : /<re>/  I.return(<expr>)` reading `entry_group(N)`), replacing the structurally-invalid
+  `Demo:: /re/ -> Demo { return(<expr>) }` scaffold (regex on the top rule). Every example was
+  build-AND-run re-verified through `LinkedSpec::Get` (scratch harness builds each spec from the exact
+  book scaffold; sanity-checked vs the frozen `["hello-world"]` idiom); outputs are now the top rule's
+  one-element accumulator snapshot (e.g. `["hello-world"]`, `[5]`, `[3.5]`, `[null]`, `[1]`/`[0]`).
+  Caught + fixed an empty-matchable-regex double-match (`is_defined` `/(\w*)(\S*)/` → `/(\w+)/`).
+  `mdbook build` exit 0 (rendered HTML verified). No Perl change. Frontier → `.10.4` (redo `.9` §5.5
+  Pair example with valid 2-rule structure).

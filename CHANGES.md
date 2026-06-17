@@ -1,6 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10.3: redo the Scalar+Numeric helper examples with the valid 2-rule idiom
+
+Remediation of the structurally-invalid worked examples flagged by the `.10` correction. Rewrote, in
+`docs/linkedspec-book/src/appendix/helper-contract-catalog.md`, the §2 (Scalar) and §5 (Numeric)
+"Worked examples" preambles and **all 33 helper examples** (17 Scalar + 16 Numeric) from the invalid
+`Demo:: /regex/ -> Demo { return(<expr>) }` form (a regex on the top rule → `[]`) to the **verified
+two-rule idiom**:
+
+```text
+demo::  -> value  .push
+LX { return(array_copy(a(demo))) }
+
+value : /<regex>/  I.return( <helper-expression> )
+```
+
+- The normal rule reads its captures with **`entry_group(N)`** (the entering match), not
+  `match_group(N)` (the local match, unset in the child's `I` block).
+- Output is the top rule's accumulator snapshot — a **one-element array** holding the helper's value
+  (e.g. `concat` → `["hello-world"]`, `num_add` → `[5]`, `num_div` `5/0` → `[null]`, booleans → `[1]`/`[0]`).
+- `is_defined`/`is_undefined` keep the condition-only `I { if (...) … }` block form.
+
+**Verification:** every example was build-AND-run re-derived through `LinkedSpec::Get` with a scratch
+harness that builds each spec from the exact book scaffold and JSON-encodes the output
+(`JSON::PP->canonical`), sanity-checked against the frozen `["hello-world"]` idiom. All 33 match the
+documented outputs. One do-not-guess fix: `is_defined`'s `/(\w*)(\S*)/` matched twice (empty-matchable
+→ two dispatch-loop hits → `["present","present"]`), corrected to `/(\w+)/` → `["present"]`. The only
+remaining `match_group` in the catalog is the §8 Entry/Match helper *reference* (correct). `mdbook
+build` exit 0 (rendered HTML confirms the full blocks stay single code blocks with the inter-rule
+blank line). self-check + KM gate pass. No Perl change. Frontier → `.10.4`.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10 (correction): top rule has no regex; `.5.2`/`.9` examples are structurally invalid (NOT an engine bug)
 
 **Major correction, from the user.** A `.spec` **top-level rule** (`::`) has **no regex of its own**:
