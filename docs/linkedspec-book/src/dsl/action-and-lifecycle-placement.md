@@ -169,6 +169,39 @@ When the parent needs to inspect or reshape the child result, use the explicit h
 
 The explicit form is better for public examples because it shows where the child result goes and how the return payload is shaped.
 
+## Grouped action-edge targets
+
+One action block can be **shared across several target rules** by joining the targets with `|`:
+
+```text
+-> RuleA | RuleB { ... }
+```
+
+The shared block is bound to every listed target, so the same action runs for whichever target the dispatch resolves to. Use this when two (or more) alternative child rules should be handled identically and duplicating the block would be the only other option.
+
+A shipped example is `ebnf.spec`, whose `semantic_annotation` rule shares one action across two targets:
+
+```text
+semantic_annotation: /@(\w+)\s*:\s*/
+-> semantic_annotation | grammar_rule {
+  BACKTRACK();
+  declare(scalar, c=capture_slice());
+  substr(s(c), "\s*$", "", o);
+  substr(s(c), "^\"|\"$", "", go);
+  return(a("semantic_annotation", a(entry_group(0), s(c))));
+}
+```
+
+Here the identical cleanup-and-return code applies whether the dispatch lands on
+`semantic_annotation` or `grammar_rule` — the targets are alternatives, and the block sees
+whichever one matched. Use grouped targets when:
+
+- two or more alternative child rules need the **identical** action, and
+- duplicating the block would otherwise be the only way to express it.
+
+The grouped-target form is defined in the
+[Formal `.spec` Grammar §3.2](../appendix/formal-grammar.md).
+
 ## Blind-call edges
 
 Blind-call edges use `=>`:

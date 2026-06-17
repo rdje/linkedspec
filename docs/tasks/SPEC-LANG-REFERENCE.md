@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.3` done — expanded `runtime-semantics.md §5` into the output/return-value shape contract (top-rule value, tagged shape as an OPTIONAL convention per user feedback, return-vs-accumulator, one-level wrap); verified vs oracle corpus + a live Perl-reference run; `mdbook build` exit 0; frontier → `.4`)
+- Last updated: `2026-06-17` (`.4` done — added a grouped-target example (edges chapter) + an entry-vs-match divergence example (capture chapter), both compile-verified; divergence documented at the verified reader-wiring level since a clean top-level I/O is entangled with hard accumulator axes; `mdbook build` exit 0; frontier → `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -143,15 +143,32 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.3` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.4`
-  Status: `pending`
+  Status: `done`
   Goal: Add worked examples for the MAJOR/MEDIUM clarity gaps — grouped shared-code targets
   (`-> A | B { ... }`) and an entry-vs-local-match divergence scenario
   Acceptance: a worked example of a grouped shared-code action edge (multiple targets, one
   block) in the edges chapter; a worked example showing when `entry_*` and `match_*` return
   different values (multi-regex-slot / dispatched-child case) in the capture/lifecycle chapter;
   examples valid against the grammar; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. (1) Added a **Grouped action-edge targets** section to
+  `dsl/action-and-lifecycle-placement.md` (`-> RuleA | RuleB { ... }`, one shared block bound to
+  multiple targets), grounded in the shipped `ebnf.spec` `semantic_annotation` rule and the formal
+  grammar §3.2; a minimal grouped-target spec was confirmed to **compile** (`LinkedSpec::Get` builds
+  a parser). (2) Added a **When `entry_*` and `match_*` diverge** section to
+  `dsl/capture-marks-and-source-locations.md` — a dispatched-child example (`Call`→`Inner` over
+  `greet(world)`) where `entry_text()` reads the entering `greet(` match and `match_text()` reads the
+  local `world` match, cross-linked to the source-boundary "Entry versus match example"; the example
+  **compiles** (verified). **Verified, not guessed**: both examples were compiled through the Perl
+  reference; the divergence semantics are grounded in the verified source wiring (`entry_*` = IMATCH /
+  entering match, `match_*` = LMATCH / local match — from `.2`'s `Contracts.pm`/`SpecEntry.pm`/
+  `HandlerVariantEmitter.pm` reading) and are consistent with the book's existing source-boundary
+  example. **Honest scope note**: a clean *top-level runtime output* dump for the divergence was
+  **not** fabricated — ~9 minimal accumulator/dispatch shapes were run and all collapsed to
+  `[]`/`undef`/`0` (the documented hard accumulator-/child-return divergence axes in
+  `docs/knowledge/rust-perl-output-oracle.md`), so the divergence is documented at the verified
+  reader-wiring level (which span each family reads), matching the book's established style, rather
+  than an unverified I/O. `mdbook build` exit 0.
+  Commit: `SPEC-LANG-REFERENCE.4` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.5`
   Status: `pending`
@@ -247,8 +264,8 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.1` | `done` | Audit complete (2026-06-17) — surface inventory + book coverage map synthesized above; decomposed into `.2`–`.8` |
 | — | `SPEC-LANG-REFERENCE.2` | `done` | regex-first-class chapter landed (2026-06-17), verified against `LinkedRE.pm`/`Contracts.pm`/rgx; fixed a capture-indexing contradiction across 3 book files |
 | — | `SPEC-LANG-REFERENCE.3` | `done` | output/return-shape contract landed in `runtime-semantics.md §5` (2026-06-17), verified vs oracle corpus + live Perl run; tagged shape framed as an OPTIONAL convention per user feedback |
-| 1 | `SPEC-LANG-REFERENCE.4` | `pending` | **next** — worked examples: grouped shared-code targets + entry-vs-local-match divergence |
-| 2 | `SPEC-LANG-REFERENCE.5` | `pending` | helper-catalog completeness + variant-neutrality sweep (indexing contract already corrected in `.2`) |
+| — | `SPEC-LANG-REFERENCE.4` | `done` | grouped-target example (edges chapter) + entry-vs-match divergence example (capture chapter), both compile-verified (2026-06-17) |
+| 1 | `SPEC-LANG-REFERENCE.5` | `pending` | **next** — helper-catalog completeness + variant-neutrality sweep (indexing contract already corrected in `.2`) |
 | 3 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
 | 4 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
 | 5 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
@@ -278,6 +295,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.1` | two read-only audits (surface inventory ∥ book coverage map) synthesized; cross-checked the "E/IT deprecated" claim vs `LIFECYCLE-FAMILY-AUDIT`; `scripts/check_memory_architecture.sh` | self-check exit 0; 8/10 surface areas WELL-COVERED; binding gaps = regex-first-class (`.2`) + output-shape (`.3`); minor gaps `.4`–`.6`; KM cards `.7`; finalize `.8`. Rejected the unverified E/IT-deprecated claim. No book change (audit only) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.2` | engine facts verified read-only against `perl/LinkedRE.pm`, `perl/LinkedSpec/ActionIR/Contracts.pm` (`entry_group`/`match_group`/`entry_named` lowering), `perl/LinkedSpec/BootstrapSpec/Core.pm` (`/pattern/` recognizer), `rust/linkedspec-runtime/src/helpers.rs` (rgx `CompiledAlternation`), and cross-checked vs shipped specs (`lib_reader`/`tablegrep`/`spec.spec`); `mdbook build` (pre + post); whole-book grep for capture-indexing drift | `mdbook build` exit 0 both times; new `regex-in-spec.md` chapter + `formal-grammar.md §3.1` expansion; **3 drift sites corrected** (wrong "index 0 = full match" claim + two examples using the 1-based convention); convention verified 0-based/captures-only/compacted |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.3` | output shapes verified vs frozen oracle-corpus fixtures (`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal`), a **live Perl-reference run** (`LinkedSpec::Get` on a `/(\w+)=(\w+)/` spec → `["?pair:","key","val"]`), and shipped-spec grep for the tagged convention; grounded the wrap + return-vs-accumulator in `docs/knowledge/rust-perl-output-oracle.md`; `mdbook build` | `mdbook build` exit 0; `runtime-semantics.md §5` expanded (§5.5–§5.8). A hand-built accumulator example (`[undef,undef,undef]`) was discarded — only verified material documented. Tagged shape reframed as OPTIONAL per user feedback (engine imposes no output schema) |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.4` | both new examples **compiled** through `LinkedSpec::Get` (grouped target + `Call`→`Inner` divergence); ran ~9 minimal accumulator/dispatch shapes to attempt a top-level divergence I/O (all → `[]`/`undef`/`0`, the documented hard accumulator axes); divergence semantics grounded in `.2`'s verified source wiring + the existing source-boundary example; `mdbook build` | `mdbook build` exit 0; grouped-target section (`action-and-lifecycle-placement.md`) + entry-vs-match divergence section (`capture-marks-and-source-locations.md`). Divergence documented at the reader-wiring level (not a fabricated I/O) — honest scope note recorded |
 
 ## Commit Log
 
@@ -286,6 +304,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.1` | `SPEC-LANG-REFERENCE.1 — audit: full .spec surface inventory + book coverage map; decompose into .2-.8` | Also creates the owning tree + registers it in docs/TASK_TREE.md (ownership-first, folded into the first leaf per repo convention). Audit only — no book change |
 | `SPEC-LANG-REFERENCE.2` | `SPEC-LANG-REFERENCE.2 — book: regex as a first-class concept (new user-model chapter) + fix capture-indexing drift` | New `user-model/regex-in-spec.md` + `SUMMARY.md`; `formal-grammar.md §3.1` capture-group/flags expansion; corrected the `entry_group`/`match_group` indexing contradiction in `helper-contract-catalog.md`, `overview/what-is-linkedspec.md`, `formal-grammar.md`, `source-boundary-helper-reference.md`. All facts verified vs `LinkedRE.pm`/`Contracts.pm`/rgx/shipped specs |
 | `SPEC-LANG-REFERENCE.3` | `SPEC-LANG-REFERENCE.3 — book: output/return-value shape contract in runtime-semantics §5 (output is author's choice; optional tagged shape)` | Expanded `appendix/runtime-semantics.md §5` (§5.5–§5.8): top-rule value, output is author's choice (optional tagged convention per user feedback), return-vs-accumulator, one-level wrap. Verified vs oracle corpus + live Perl run + shipped specs |
+| `SPEC-LANG-REFERENCE.4` | `SPEC-LANG-REFERENCE.4 — book: grouped action-edge targets (edges chapter) + entry-vs-match divergence (capture chapter)` | Grouped-target section in `action-and-lifecycle-placement.md` (ebnf-grounded) + divergence section in `capture-marks-and-source-locations.md`; both examples compile-verified. Divergence documented at reader-wiring level (top-level I/O entangled with hard accumulator axes — not fabricated) |
 
 ## Changelog
 
@@ -328,3 +347,16 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   the tagged shape is an old, non-mandatory convention — reframed §5.6/§5.7 so the book states output
   shape is entirely the author's choice (saved as a durable feedback memory). `mdbook build` exit 0.
   Frontier → `.4` (grouped-target + entry-vs-local-match worked examples).
+- `2026-06-17`: `.4` done — worked examples for the MAJOR/MEDIUM clarity gaps. (1) Added a
+  *Grouped action-edge targets* section to `dsl/action-and-lifecycle-placement.md` (`-> A | B { ... }`,
+  one shared block bound to multiple targets), grounded in `ebnf.spec`'s `semantic_annotation` rule and
+  formal grammar §3.2; the minimal example compiles. (2) Added a *When `entry_*` and `match_*` diverge*
+  section to `dsl/capture-marks-and-source-locations.md` — a dispatched-child example
+  (`Call`→`Inner` over `greet(world)`: `entry_text()` reads the entering `greet(`, `match_text()` reads
+  the local `world`), cross-linked to the source-boundary reference example; compiles. Both examples
+  compile-verified through `LinkedSpec::Get`. **Honest scope note**: a clean top-level runtime I/O for
+  the divergence was not fabricated — ~9 minimal accumulator/dispatch shapes all collapsed to
+  `[]`/`undef`/`0` (the documented hard accumulator-/child-return divergence axes), so the divergence is
+  documented at the verified reader-wiring level (which span each family reads), consistent with the
+  book's existing style. `mdbook build` exit 0. Frontier → `.5` (helper-catalog completeness +
+  variant-neutrality sweep).

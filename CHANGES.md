@@ -1,6 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.4: worked examples for grouped targets + entry-vs-match divergence (book)
+
+Closes audit gaps **C** (grouped shared-code targets had no worked example) and **D**
+(entry-vs-local-match lacked a divergence example).
+
+- **Grouped action-edge targets** — new section in
+  `docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md`: `-> RuleA | RuleB { ... }`
+  binds one shared action block to multiple target rules (the block runs for whichever target
+  matched). Grounded in the shipped `ebnf.spec` `semantic_annotation` rule and formal grammar §3.2;
+  cross-linked. A minimal grouped-target spec was confirmed to **compile** via `LinkedSpec::Get`.
+- **When `entry_*` and `match_*` diverge** — new section in
+  `docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md`: a dispatched-child example
+  (`Call` → `Inner` over `greet(world)`) where `entry_text()` reads the entering `greet(` match and
+  `match_text()` reads the local `world` match (and likewise for the group/named readers). Cross-linked
+  to the source-boundary "Entry versus match example". The example **compiles**.
+
+**Verification (grounded, not guessed).** Both examples were compiled through the Perl reference.
+The divergence semantics are grounded in `.2`'s verified source-wiring reading (`entry_*` = IMATCH /
+the entering match; `match_*` = LMATCH / the local regex match) and are consistent with the book's
+existing source-boundary example. **Honest scope note**: a clean *top-level runtime output* dump for
+the divergence was deliberately **not** fabricated — ~9 minimal accumulator/dispatch shapes were run
+and all collapsed to `[]`/`undef`/`0` (the hard accumulator-/child-return divergence axes documented in
+`docs/knowledge/rust-perl-output-oracle.md`), so the divergence is documented at the verified
+reader-wiring level (which span each family reads), matching the book's established style.
+
+**Validation:** `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0; KM gate OK.
+Documentation-only — no code/spec change. Frontier → `SPEC-LANG-REFERENCE.5`.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.3: the output / return-value shape contract (book)
 
 Closes the CRITICAL **GAP B** from the `.1` audit: the output/return-shape contract was

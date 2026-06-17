@@ -131,6 +131,31 @@ assign(scalar(end_col), match_end_col());
 
 Use `match_*` when the action wants the local match currently being processed, not the broader entry match.
 
+## When `entry_*` and `match_*` diverge
+
+For a simple single-regex rule, the match that *entered* the rule and the rule's *local* match are the same span, so `entry_*` and `match_*` agree — use whichever reads best.
+
+They **diverge** when a rule's action runs against a local match that is not the match that dispatched into it — the classic case is a **dispatched child**. Consider a parent that recognizes a `name(` opener and dispatches into a child that reads the word inside:
+
+```text
+Call::AND
+ /(\w+)\(/ -> Inner
+
+Inner::AND
+ /(\w+)/ -> Inner[0] {
+   return(hash("outer", entry_text(), "inner", match_text()));
+ }
+```
+
+Over the input `greet(world)`, the two families read **different** spans:
+
+- `entry_text()` reads the match that **entered** `Inner` — the parent's `greet(` opener.
+- `match_text()` reads `Inner`'s **own** local match — the inner word `world`.
+
+The split applies to every reader in both families: `entry_group(0)` / `entry_named(...)` read the entering match's captures (here `greet`), while `match_group(0)` / `match_named(...)` read the local match's captures (here `world`). The same example in reference form, reading captures by index and by name, is in [Source Boundary Helper Reference](source-boundary-helper-reference.md#entry-versus-match-example).
+
+Choose by what you need: `entry_*` for the context that brought the action here, `match_*` for the token the action is processing right now.
+
 ## Whole-input helpers
 
 Whole-input helpers are absolute. They do not mean cursor, entry, or local match.
