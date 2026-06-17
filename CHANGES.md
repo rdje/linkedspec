@@ -1,6 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.10.5.2: fix `what-is-linkedspec.md` minimal kv example → verified 2-rule idiom
+
+First fix slice of the whole-book scorch. The overview chapter's "minimal key/value parser" example
+was a single rule with a regex on the top rule **and** a `::AND -> Top[0]` self-edge:
+`Top::AND+ /(\w+)=(\w+)/ -> Top[0] { return(hash(…)) }` — the generated handler **fails to compile**
+and the parser returns `null`, while the prose claimed it "returns a hash per match." Replaced it with
+the verified 2-rule idiom:
+
+```
+top::
+ -> pair .push
+
+LX { return(array_copy(a(top))) }
+
+pair:
+ /(\w+)=(\w+)/ I {
+   return(hash("key", entry_group(0), "val", entry_group(1)));
+ }
+```
+
+and rewrote the prose to teach the entry-rule-(no-regex) / normal-rule-(regex) structure with the real
+output and cross-links to `regex-in-spec.md` + `spec-files-and-rule-paragraphs.md`. **Verified by
+extracting the exact block from the book file** and running it through `LinkedSpec::Get`: `foo=bar
+baz=qux` → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]` (single `answer=42` →
+`[{"key":"answer","val":"42"}]`). Idiom note: the bare action-block form `pair: /re/ { return }` (no
+`I`) returns `[0,0]`; the `I { … }` lifecycle block is required. `mdbook build` exit 0. Frontier →
+`.10.5.3` (`public-api/get-and-get-parser.md`).
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10.5.1: whole-book `.spec`-snippet scorch AUDIT (findings + decomposition)
 
 Ran the fresh exhaustive hunt for the whole-book scorch (`.10.5`). Method: **8 read-only `Explore`

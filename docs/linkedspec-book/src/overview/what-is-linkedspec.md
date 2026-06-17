@@ -29,13 +29,23 @@ A backend's compiler parses the `.spec`, builds compiled rule state, derives dep
 ## Example: a minimal key/value parser
 
 ```text
-Top::AND+
- /(\w+)=(\w+)/ -> Top[0] {
+top::
+ -> pair .push
+
+LX { return(array_copy(a(top))) }
+
+pair:
+ /(\w+)=(\w+)/ I {
    return(hash("key", entry_group(0), "val", entry_group(1)));
  }
 ```
 
-This one-rule spec matches one or more `key=value` pairs, extracts both groups per match, and returns a hash per match.
+This is a two-rule spec, which is the normal shape of every `.spec`:
+
+- The **entry rule** `top::` carries **no regex of its own**. It is the dispatch loop: it repeatedly hands off to `pair` and `.push`es each result onto its accumulator, then `LX` returns a snapshot of that accumulator when the input is exhausted.
+- The **`pair` rule** carries the regex. On each match it returns a hash built from the two capture groups — `entry_group(0)` is the first group, `entry_group(1)` the second (group numbering is 0-based and captures-only; see [Regex in `.spec`](../user-model/regex-in-spec.md)).
+
+For input `foo=bar baz=qux` the parser returns `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]` — one hash per matched pair, collected by the entry rule. (The regex always lives on a normal `:` rule, never on the `::` entry rule; see [.spec Files and Rule Paragraphs](../user-model/spec-files-and-rule-paragraphs.md).)
 
 ## Where LinkedSpec fits
 

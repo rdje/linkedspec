@@ -432,13 +432,23 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.1` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `overview/what-is-linkedspec.md` minimal key/value example (`Top::AND+ /…/ -> Top[0]`,
   single-rule regex-on-top → compile-fail/`null`) → verified 2-rule idiom
   Acceptance: replaced with a top `::` entry rule (no regex) + normal `:` rule carrying the regex;
   re-verified through `LinkedSpec::Get` (e.g. `[{"key":"foo","val":"bar"},…]`); `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. Replaced the single-rule `Top::AND+ /(\w+)=(\w+)/ -> Top[0] {…}`
+  block (regex on the top rule + `::AND -> Top[0]` self-edge → handler compile failure → `null`) with
+  the verified 2-rule idiom: `top:: -> pair .push` / `LX { return(array_copy(a(top))) }` + a normal
+  `pair:` rule carrying `/(\w+)=(\w+)/` in an `I { return(hash("key", entry_group(0), "val",
+  entry_group(1))) }` block. **Extracted the exact block from the book file and ran it through
+  `LinkedSpec::Get`**: input `foo=bar baz=qux` → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`
+  (single `answer=42` → `[{"key":"answer","val":"42"}]`). Prose rewritten to teach the entry-rule
+  (no regex) + normal-rule (regex) structure + the actual output, with cross-links to `regex-in-spec.md`
+  and `spec-files-and-rule-paragraphs.md`. **Idiom note (verified):** the bare action-block form
+  `pair: /re/ { return(...) }` (no `I`) returns `[0,0]` — the `I { … }` lifecycle block is required.
+  `mdbook build` exit 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.2` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.3`
   Status: `pending`
@@ -739,8 +749,8 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.3` | `done` | `.5.2` Scalar+Numeric examples + both catalog preambles redone with the verified 2-rule idiom (2026-06-17); all 33 re-verified through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot; `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.6` | `done` | corrected the durable record (2026-06-17): retracted the inaccurate "regex-on-top → `[]`" sub-claim (ground truth: those forms run and return values; only `::AND … -> Rule[N]` returns `[]`); KM card rewritten doctrine-first; rationale for `.10` = the 2-rule authoring doctrine, not an `[]` bug |
 | — | `SPEC-LANG-REFERENCE.10.5.1` | `done` | **whole-book scorch AUDIT (2026-06-17)** — 8 read-only agents + personal ground-truth re-verification; findings table above; engine facts (`::`≡`:` on non-first rules; `::AND -> Rule[N]` → `[]`); ~105 `::`-mode headers across ~20 files; user chose FULL book-wide scorch; ebnf "richer example" cleared (compiles). Decomposed into `.10.5.2`–`.10.5.19` |
-| 1 | `SPEC-LANG-REFERENCE.10.5.2` | `pending` | **next** — fix `overview/what-is-linkedspec.md` minimal kv example → 2-rule idiom (verified) |
-| 2 | `SPEC-LANG-REFERENCE.10.5.3` | `pending` | fix `public-api/get-and-get-parser.md` minimal example (→ `[]`) → 2-rule idiom |
+| — | `SPEC-LANG-REFERENCE.10.5.2` | `done` | `overview/what-is-linkedspec.md` minimal kv example → verified 2-rule idiom (2026-06-17); extracted-from-book run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
+| 2 | `SPEC-LANG-REFERENCE.10.5.3` | `pending` | **next** — fix `public-api/get-and-get-parser.md` minimal example (→ `[]`) → 2-rule idiom |
 | 3 | `SPEC-LANG-REFERENCE.10.5.4` | `pending` | fix `user-model/worked-spec-walkthrough.md` central `Pair::AND` (→ `[]`, claims a hash) + re-derive whole-chapter outputs |
 | 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` | fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
 | 5 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
@@ -872,6 +882,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.3` | scratch harness builds each example from the exact book 2-rule scaffold + `LinkedSpec::Get` run + `JSON::PP->canonical` encode (sanity-checked vs the frozen `["hello-world"]` idiom); all 33 Scalar+Numeric examples re-derived; `mdbook build`; rendered-HTML check that the full blocks stay single code blocks; whole-catalog `match_group` grep | `mdbook build` exit 0; 33/33 produce the documented one-element-array outputs; `is_defined` regex fixed `/(\w*)(\S*)/`→`/(\w+)/` (empty-matchable double-match → `["present","present"]`); only remaining `match_group` is the §8 reference (correct). self-check + KM gate pass |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.6` | ground-truth matrix via `LinkedSpec::Get` (OR self-ref / cross-rule action-edge regex-on-`::`-rule forms + the §5.5 frozen fixtures all run and return values; only `::AND … -> Rule[N]` → `[]`); KM-card rewrite; KM gate regenerates `KNOWLEDGE_MAP.md`; self-check | prior "regex-on-top → `[]`" premise disproven and retracted; KM card rewritten doctrine-first; doctrine + `.10.3` unchanged; KM gate + self-check pass; no Perl/book-example change |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.1` | 8 read-only `Explore` agents over chapter groups (enumerate→classify→run); **personal re-verification of every load-bearing finding** via a private `LinkedSpec::Get` driver (shared driver clobbered by an agent mid-run → all agent ACTUAL_OUTPUT treated as hypotheses); engine probes (T1 `child::AND`≡T2 `child:AND`=`[0]`; T3 `Top:: /foo/ -> Top`=`null`; T4 two `::` rules OK); re-ran tablegrep/portmap/worked-walkthrough/ebnf; whole-book `::`-header grep; `scripts/check_memory_architecture.sh` | self-check exit 0. ~105 `::`-mode headers / ~20 files; idiom is doctrine-divergent + `[]`-shaped. Findings table recorded; 18 fix leaves `.10.5.2`–`.10.5.19` created. **2 preliminary-hunt hypotheses overturned:** ebnf "richer example" compiles+parses (CLEAN); §5.5 forms run+return. User chose full book-wide scorch. No book/Perl change |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.2` | extracted the new block **from the book file** and ran it through `LinkedSpec::Get` (`foo=bar baz=qux`→`[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `answer=42`→`[{"key":"answer","val":"42"}]`); compared idiom forms (`I {return}` works, bare `{return}`→`[0,0]`); `mdbook build` | `mdbook build` exit 0; single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → `null`) replaced with the verified 2-rule idiom + accurate prose/output + cross-links |
 
 ## Commit Log
 
@@ -889,6 +900,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.3` | `SPEC-LANG-REFERENCE.10.3 — book: redo Scalar+Numeric helper examples + preambles with the valid 2-rule idiom (entry_group; re-verified outputs)` | Rewrote both `helper-contract-catalog.md` worked-examples preambles + all 33 examples to the top-entry-rule + normal-rule form reading `entry_group(N)`; every output re-derived through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot. `mdbook build` exit 0 |
 | `SPEC-LANG-REFERENCE.10.6` | `SPEC-LANG-REFERENCE.10.6 — record: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine` | Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first + superseding Decision + record-framing fixes; doctrine and `.10.3` unchanged. No Perl/book-example change |
 | `SPEC-LANG-REFERENCE.10.5.1` | `SPEC-LANG-REFERENCE.10.5.1 — audit: whole-book .spec-snippet scorch (findings table + engine facts) → decompose into per-file fix leaves .10.5.2-.19` | Read-only audit (8 agents + personal ground-truth re-verify). ~105 `::`-mode headers across ~20 files; pervasive `Rule::AND /regex/ -> Rule[N]` idiom is doctrine-divergent + `[]`-shaped. User chose FULL book-wide scorch. ebnf "richer example" cleared. `.10.4` superseded by `.10.5.16`. No book/Perl change |
+| `SPEC-LANG-REFERENCE.10.5.2` | `SPEC-LANG-REFERENCE.10.5.2 — book: fix what-is-linkedspec.md minimal kv example → verified 2-rule idiom` | Replaced the single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → compile-fail/`null`) with `top:: -> pair .push` / `LX{return(array_copy(a(top)))}` + `pair: /(\w+)=(\w+)/ I{return(hash(…entry_group(0/1)…))}`; book-extracted run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
 
 ## Changelog
 
@@ -1074,3 +1086,14 @@ wrapped only where a complete worked example is intended) during the per-file fi
   every worked example (incl. isolated DSL helper fragments) to the 2-rule idiom + correct all outputs.
   Decomposed into per-file fix leaves `.10.5.2`–`.10.5.19`; `.10.4` superseded by `.10.5.16`. No
   book/Perl change (audit only). Frontier → `.10.5.2` (`what-is-linkedspec.md` minimal example).
+- `2026-06-17`: `.10.5.2` done — fixed `overview/what-is-linkedspec.md`'s "minimal key/value parser"
+  example. The old `Top::AND+ /(\w+)=(\w+)/ -> Top[0] { return(hash(…)) }` was a single rule with a
+  regex on the top rule **and** the `::AND -> Top[0]` self-edge → the handler **failed to compile** and
+  the parser returned `null` (the prose claimed "returns a hash per match"). Replaced with the verified
+  2-rule idiom (`top:: -> pair .push` / `LX { return(array_copy(a(top))) }` + a normal `pair:` rule
+  carrying the regex in an `I { return(hash("key", entry_group(0), "val", entry_group(1))) }` block) and
+  rewrote the prose to teach the entry-rule-(no-regex)/normal-rule-(regex) structure with the real
+  output + cross-links. **Verified by extracting the exact block from the book file** and running it
+  through `LinkedSpec::Get`: `foo=bar baz=qux` → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`.
+  Idiom note: the bare action-block form `pair: /re/ { return }` (no `I`) returns `[0,0]` — the `I{…}`
+  block is required. `mdbook build` exit 0. Frontier → `.10.5.3` (`public-api/get-and-get-parser.md`).
