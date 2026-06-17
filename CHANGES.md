@@ -1,6 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-18 — LEGACY-VHDL-RETIRE.1: own retirement tree + read-only inventory of the Perl-only legacy VHDL/RTL/FSM subsystem
+
+Owned a new task tree `LEGACY-VHDL-RETIRE` (`docs/tasks/LEGACY-VHDL-RETIRE.md`) and completed its
+read-only feasibility/inventory leaf `.1` — the recorded next action in `MEMORY.md`. This is the
+prerequisite that unblocks the `SPEC-FORMAT-TERSE` implementation gate (a usable
+`t/phase0_regression.t`, currently hung by `RTLUTILS-REGEX-HANG`): per
+[[feedback_keep-only-portable-cross-variant]] the direction is to **retire** the Perl-only legacy
+subsystem (which also clears the hang), not patch a regex in soon-deleted code.
+
+Verified inventory (`git grep` reference sweep + module inspection; no deletion):
+
+- **Subsystem (3 Perl-only modules, no Rust/Julia/Dart counterpart):** `perl/RTLUtils.pm` (877),
+  `perl/FSMGen.pm` (3,549; `use RTLUtils`; `AUTOLOAD`→PluginBridge), `perl/VHDL/ConstantEval.pm`
+  (90; `require RTLUtils`) = **4,516 lines**.
+- **Zero functional dependency from the active `.spec` parser/compiler/runtime core** — the only
+  `perl/` reference is a comment (`perl/LinkedSpec.pm:246`); `tools/gen_oracle_corpus.pl:31` is also
+  a comment. No shipped `specs/*.spec`, nothing in `bin/`.
+- **6 exclusively-dependent `plugin/*.plg`:** `fsmgen`(464), `lte_digital_rf`(43), `mbist`(75),
+  `msword`(326), `regtest`(345), `rtl`(726) = **1,979 lines**.
+- **`t/phase0_regression.t`:** ≈206 lines of plugin→package-owner **migration-smoke** blocks
+  (obsolete once the code is gone).
+- **`RTLUTILS-REGEX-HANG`:** catastrophic-backtracking regex at `perl/RTLUtils.pm:746`
+  (`/(\w+)(?=(?:\[.*?\])?\s*<=((?s).+?);)/go`), reached via `drive_entity_component`→`_drive_instances`.
+  (Prior attribution named `add_header_n_context_clause`; actual pattern is at line 746.)
+- **Removal footprint (recommended full closure):** ≈**6,701 lines**.
+- **Doc drift found (defer fix to `.5`):** `ROADMAP_V2.md:157` / `ARCHITECTURE_STATE.md:588` describe
+  `plugin/generic_fake_memory_module.plg` and `plugin/wrapgen.plg` as live `ceil_log2` callers, but
+  **both files no longer exist** and no `.plg` references `ceil_log2`.
+
+Wrote KM fact card `docs/knowledge/rtlutils-regex-hang.md`; registered the tree in
+`docs/TASK_TREE.md`; updated the `SPEC-FORMAT-TERSE` blocker to point at the owned tree. Removal
+leaves `.2`–`.5` are **blocked pending user removal-scope confirmation** (deletions; the doctrine +
+`MEMORY.md` require confirming scope first).
+
+Validation: `git grep` sweeps + `wc -l` counts (recorded in the tree); `scripts/check_memory_architecture.sh`
+exit 0; KM gate regenerates `KNOWLEDGE_MAP.md`. No engine/spec/test code changed (docs + task-tree +
+KM only); `t/phase0_regression.t` still hangs until `.2`–`.4` land.
+
 ## 2026-06-18 — SPEC-FORMAT-TERSE.0: activate + ratify the terse `.spec` format direction (ADR 0007)
 
 The user activated the previously-`proposed` `SPEC-FORMAT-TERSE` tree (the terse, fully-composable

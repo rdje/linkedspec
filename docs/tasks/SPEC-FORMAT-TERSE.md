@@ -318,15 +318,18 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - `.0` (ratify + ADR) is **done** (design-only — not gated). Migration policy is **resolved**
   (gradual-alias, ADR 0007). The remaining gate on the **implementation leaves (`.1.x`+)** is a usable
   `t/phase0_regression.t`, currently hung by the RTLUtils catastrophic regex.
-- **UNBLOCK DIRECTION shifted fix → RETIRE (user, 2026-06-18).** Read-only assessment established that
-  RTLUtils + FSMGen + `VHDL/ConstantEval` are a **self-contained Perl-only legacy VHDL-generation
-  subsystem**: no functional hook from the `.spec` parser/compiler/runtime core (the lone
-  `LinkedSpec.pm`/`gen_oracle_corpus.pl` references are **comments**), no shipped-`.spec` dependency,
-  no Rust/Julia/Dart counterpart. Per [[feedback_keep-only-portable-cross-variant]] the user leans to
-  **retire the subsystem** rather than fix its regex — which *also* unblocks the gate (and sheds
-  ~4,400 Perl-only lines). Next step: own a **retirement tree** with a **read-only feasibility/inventory
-  leaf first** (map the full subsystem + every reference + the phase0 migration-smoke tests to remove),
-  then remove, then confirm the gate runs. **Removal scope to confirm with the user** before deleting.
+- **UNBLOCK DIRECTION shifted fix → RETIRE (user, 2026-06-18); retirement tree now OWNED.** The
+  retirement is owned by [`LEGACY-VHDL-RETIRE`](LEGACY-VHDL-RETIRE.md). Its read-only
+  feasibility/inventory leaf (`.1`) is **done** (2026-06-18) and confirmed: RTLUtils + FSMGen +
+  `VHDL::ConstantEval` are a **self-contained Perl-only legacy VHDL/RTL/FSM-generation subsystem** with
+  **zero functional dependency** from the `.spec` parser/compiler/runtime core (the lone `LinkedSpec.pm`
+  / `gen_oracle_corpus.pl` references are **comments**), no shipped-`.spec` dependency, no Rust/Julia/Dart
+  counterpart. Catastrophic regex confirmed at `perl/RTLUtils.pm:746`. Removal footprint ≈ **6,701 Perl
+  lines** (3 modules 4,516 + 6 dependent `.plg` 1,979 + ≈206 phase0 smoke lines). Per
+  [[feedback_keep-only-portable-cross-variant]] the direction is **retire** (which also clears the
+  hang), not fix the regex. `LEGACY-VHDL-RETIRE.2`–`.5` (the deletions) are **blocked pending user
+  removal-scope confirmation**; once removed + the gate confirmed green, this `SPEC-FORMAT-TERSE` gate
+  clears and `.1.1` becomes pickable. See KM card [[rtlutils-regex-hang]].
 
 ## Verification Log
 
