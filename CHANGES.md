@@ -1,6 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — DOC-DRIFT-SYNC.1: sync ROADMAP.md to ROADMAP_V2.md (Phase 8/9 + Overall done)
+
+Zero-drift correction (doctrine: `docs/decisions/0001` §4; `ROADMAP_V2.md:425`). A bootstrap-
+session audit found `ROADMAP.md` lagging its execution companion `ROADMAP_V2.md`: the Status
+table marked Overall `mostly done` (scope "phases 0-7"), carried **no Phase 8 / Phase 9 rows**,
+and never narrated Phases 8–9 in the long-form Work Phases section, while `ROADMAP_V2.md:56,66-67`
+marks Overall `done` with Phase 8 (multi-backend handoff) and Phase 9 (Rust variant, v0.1
+operational) both `done`. Verified directly against source before fixing.
+
+Changes to `ROADMAP.md` (only):
+- Added `## Phase 8: Multi-Backend Specification and Handoff Surface` and `## Phase 9: Rust
+  Variant Implementation` long-form sections after Phase 7 / before the Backbone Refactor Track,
+  mirroring the completed `PHASE8-MULTI-BACKEND-HANDOFF` / `PHASE9-RUST-VARIANT` trees. The Phase 9
+  section points at the active `RUST-PARITY` follow-on (full Perl-reference parity), so the
+  long-form roadmap does not over-claim Rust completeness.
+- Inserted Phase 8 + Phase 9 rows in the Status table after the Phase 7 row.
+- Flipped the Overall row `mostly done` → `done`, covers/remaining aligned to `ROADMAP_V2.md:56`
+  (phases 0–9, mdBook variant-agnostic, full Rust parity tracked under `RUST-PARITY`).
+
+`ROADMAP_V2.md` is the canonical high-level status tracker (per `docs/TASK_TREE.md` "Relationship
+To Live Docs"), so the sync flows `ROADMAP_V2.md` → `ROADMAP.md`; V2 itself was already correct
+and is unchanged. No code or book change. Dismissed non-drift from the same audit (recorded as a
+Non-Goal in `docs/tasks/DOC-DRIFT-SYNC.md`): the "158 vs 146 helper contracts" flag — the book's
+158 is reproducible (`grep -cE "\bid\b => '" ActionIR/Contracts.pm`); the 146 used a narrower grep.
+Validation: `scripts/check_memory_architecture.sh` exit 0; KM gate green. Owning tree
+`docs/tasks/DOC-DRIFT-SYNC.md` created in this same commit (ownership-first). Frontier → `.2`.
+
 ## 2026-06-17 — RUST-PARITY.7.5.1: fix the header-line-regex → 0-regex parser bug (Rust)
 
 Fixed `rust/linkedspec-core/src/parser.rs:86`: the rule-header regex

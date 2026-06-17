@@ -23,6 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
+| `DOC-DRIFT-SYNC` | `active` | `Overall roadmap — documentation and book sync` | `DOC-DRIFT-SYNC.1` | [docs/tasks/DOC-DRIFT-SYNC.md](docs/tasks/DOC-DRIFT-SYNC.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7.5.3` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
 ## Proposed Task Trees
