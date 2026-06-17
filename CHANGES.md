@@ -1,6 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-17 — SPEC-LANG-REFERENCE.5.2: compile-verified worked examples for all Scalar + Numeric helpers
+
+`.5.2` fills the example-density gap for the **Scalar (§2)** and **Numeric (§5)** families of
+`docs/linkedspec-book/src/appendix/helper-contract-catalog.md` (which had 0 `.spec` examples). A
+shared **Worked examples** preamble was added to §2 (with a §5 back-reference) defining the runnable
+scaffold `Demo:: /<regex>/ -> Demo { return(<expr>) }` — a bare-`::` (OR/seek) top rule whose
+self-referencing action edge returns the helper result, so the parser's top-level output *is* that
+value (per `runtime-semantics.md §5.5`). An `Example` was then added to **all 35 helpers** (17 Scalar
++ 18 Numeric), with full `.spec` blocks for the high-frequency ones (`concat`, `trim`, `num_add`,
+`num_sum`).
+
+**Verification — nothing guessed (the `.4` discipline).** Every example was build-AND-run verified
+through `LinkedSpec::Get` with a scratch oracle-style driver (build parser → run on the documented
+input → JSON-encode the top-level value with the same `JSON::PP->canonical` encoder as
+`tools/gen_oracle_corpus.pl`). The driver was sanity-checked against the two frozen oracle fixtures
+(`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal`) and reproduced them
+exactly, so its outputs are the reference behavior. All 35 examples produce the documented outputs.
+
+**Two do-not-guess traps caught and avoided:**
+- `is_defined` / `is_undefined` lower **only** via the control-flow path
+  (`perl/LinkedSpec/ActionIR/FlowExpr.pm` `_lower_flow_composite_expr`, not the value-expression
+  helper set at `FlowExpr.pm:270`), so `return(is_defined(x))` dies with "Undefined subroutine".
+  They are documented in the verified `if (is_defined(x)) { … }` **condition-only** form with a usage
+  note. The value-returning predicates (`matches`, `starts_with`, `ends_with`, `contains_substr`)
+  ARE returnable and surface as `1`/`0`.
+- `num_sum(split(...))` returns `null` (the `split → num_sum` composition does not flatten in this
+  context). The array-form reducers (`num_sum`/`num_avg`/`num_median`/`num_range`, array
+  `num_min`/`num_max`) are therefore documented with an explicit `array(...)` of capture groups or
+  literals (verified: `num_sum(array(1,2,3,4))` → `10`); `split` is left to the Array family (`.5.3`).
+
+**Discovered defect (owned separately by new leaf `.9`, not bundled here):** the §5.5
+`runtime-semantics.md` "verified" Pair example (`Pair::AND … -> Pair[0] { return(array("?pair:", …)) }`)
+actually outputs `[]`, not the documented `["?pair:","key","val"]`; the tagged array requires the OR
+self-ref form `Pair:: … -> Pair { return(array(…)) }` (verified). `.3`'s live run used a self-ref-OR
+shape that was mis-transcribed into the `AND`/`[0]` form. Recorded as a high-priority no-drift fix.
+
+Validation: `mdbook build` exit 0; all documented snippets re-confirmed runnable through
+`LinkedSpec::Get`; `scripts/check_memory_architecture.sh` exit 0. Frontier → `.9` then `.5.3`.
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.5.1: helper-catalog audit (0 completeness gaps) + variant-neutrality fixes + decomposition
 
 `.5` (helper-contract catalog completeness + variant-neutrality + examples sweep) was **split**:

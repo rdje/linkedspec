@@ -37,98 +37,154 @@ identically. No Perl implementation knowledge is required.
 
 ## 2. Scalar Helpers
 
+> **Worked examples.** Each example below is a complete, runnable `.spec`. A single
+> top rule matches the input and its action edge returns the helper's result, so the
+> parser's output *is* that value (see [Runtime Semantics §5.5](runtime-semantics.md)).
+> The shared shape is:
+>
+> ```text
+> Demo::
+>  /<regex>/ -> Demo { return( <helper-expression> ) }
+> ```
+>
+> `match_group(0)` is the **first capture group** of `<regex>` (0-based — see
+> [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups)). The compact
+> `<expr>` on `<input>` → `<output>` lines below each helper plug into this shape.
+> Boolean results surface as `1` (true) / `0` (false); an undefined result surfaces
+> as an absent (`null`) value. The value-returning predicates (`matches`,
+> `starts_with`, `ends_with`, `contains_substr`) may be returned directly; the
+> definedness predicates (`is_defined`, `is_undefined`) are **condition-only** — use
+> them inside an `if (...)` test (shown below), not inside `return(...)`.
+
 ### `scalar(container, key)`
 - **Signature**: `scalar(container: array|hash, key: int|string)`
 - **Returns**: scalar or undef
 - **Behavior**: Reads a single value from an array (by 0-based index) or hash (by string key).
 - **Edge cases**: Returns `undef` if the key does not exist or container is not array/hash.
+- **Example**: over `/(\w+),(\w+),(\w+)/`, `scalar(array(match_group(0), match_group(1), match_group(2)), 1)` on `a,b,c` → `"b"`.
 
 ### `concat(args...)`
 - **Signature**: `concat(a: scalar, b: scalar, ...)`
 - **Returns**: scalar
 - **Behavior**: Concatenates all arguments as strings. Undef arguments are treated as empty strings.
 - **Edge cases**: Non-scalar arguments (arrays, hashes) return `undef` for the whole expression.
+- **Example**:
+  ```text
+  Greeting::
+   /(\w+) (\w+)/ -> Greeting { return(concat(match_group(0), "-", match_group(1))) }
+  ```
+  Input `hello world` → `"hello-world"`.
 
 ### `coalesce(a, b, ...)`
 - **Signature**: `coalesce(values: scalar...)`
 - **Returns**: scalar
 - **Behavior**: Returns the first argument that is defined (not undef). Evaluates left-to-right, short-circuiting.
 - **Edge cases**: Returns `undef` if all arguments are undef.
+- **Example**: over `/(\w+)/`, `coalesce(scalar(array(match_group(0)), 5), "fallback")` on `hi` → `"fallback"` (the index-5 read is out of range, so the literal default is used).
 
 ### `coalesce_nonempty(a, b, ...)`
 - **Signature**: `coalesce_nonempty(values: scalar...)`
 - **Returns**: scalar
 - **Behavior**: Returns the first argument that is defined and not the empty string `""`. Preserves `0` and other defined values.
 - **Edge cases**: Returns `undef` only if all arguments are undef or `""`.
+- **Example**: over `/(\w+)/`, `coalesce_nonempty("", match_group(0))` on `value` → `"value"` (the empty string is skipped).
 
 ### `is_defined(expr)`
 - **Signature**: `is_defined(value: expr)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value is not undef. Accepts any expression type.
 - **Edge cases**: Empty string, `0`, and empty arrays are defined.
+- **Usage**: condition-only — `is_defined(...)` is a flow predicate, used inside an
+  `if (...)` / `elseif (...)` test, not as a `return(...)` value.
+- **Example**:
+  ```text
+  Presence::
+   /(\w*)(\S*)/ -> Presence {
+     if (is_defined(match_group(0))) { return("present") } else { return("absent") }
+   }
+  ```
+  Input `hi` → `"present"`.
 
 ### `is_undefined(expr)`
 - **Signature**: `is_undefined(value: expr)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value is undef. Logical inverse of `is_defined`.
+- **Usage**: condition-only, like `is_defined` (use inside `if (...)`).
+- **Example**: over `/(\w+)/`, `if (is_undefined(scalar(array(match_group(0)), 9))) { return("missing") } else { return("present") }` on `hi` → `"missing"` (index 9 is out of range, so the read is undef).
 
 ### `trim(s)`
 - **Signature**: `trim(value: scalar)`
 - **Returns**: scalar
 - **Behavior**: Removes leading and trailing whitespace. Returns undef if input is undef.
 - **Edge cases**: A string of only whitespace becomes `""`.
+- **Example**:
+  ```text
+  Trimmed::
+   /\[([^\]]*)\]/ -> Trimmed { return(trim(match_group(0))) }
+  ```
+  Input `[  hello  ]` → `"hello"` (capture group `0` is the bracketed, padded text).
 
 ### `lowercase(s)`
 - **Signature**: `lowercase(value: scalar)`
 - **Returns**: scalar
 - **Behavior**: Converts to lowercase. Returns undef if input is undef.
+- **Example**: over `/(\w+)/`, `lowercase(match_group(0))` on `HeLLo` → `"hello"`.
 
 ### `uppercase(s)`
 - **Signature**: `uppercase(value: scalar)`
 - **Returns**: scalar
 - **Behavior**: Converts to uppercase. Returns undef if input is undef.
+- **Example**: over `/(\w+)/`, `uppercase(match_group(0))` on `hello` → `"HELLO"`.
 
 ### `length(s)`
 - **Signature**: `length(value: scalar|array)`
 - **Returns**: int
 - **Behavior**: Returns the character length of a string or the element count of an array. Returns undef for undef input.
+- **Example**: over `/(\w+)/`, `length(match_group(0))` on `hello` → `5`.
 
 ### `matches(s, /pattern/)`
 - **Signature**: `matches(value: scalar, pattern: regex)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value matches the regex pattern. The pattern is a literal `/regex/` — no variable interpolation.
 - **Edge cases**: Returns false for undef input.
+- **Example**: over `/(\w+)/`, `matches(match_group(0), /^\d+$/)` returns `1` on `123` and `0` on `abc`.
 
 ### `starts_with(s, prefix)`
 - **Signature**: `starts_with(value: scalar, prefix: scalar)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value starts with the exact prefix string.
+- **Example**: over `/(\S+)/`, `starts_with(match_group(0), "foo")` on `foobar` → `1`.
 
 ### `ends_with(s, suffix)`
 - **Signature**: `ends_with(value: scalar, suffix: scalar)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value ends with the exact suffix string.
+- **Example**: over `/(\S+)/`, `ends_with(match_group(0), "bar")` on `foobar` → `1`.
 
 ### `contains_substr(s, needle)`
 - **Signature**: `contains_substr(value: scalar, needle: scalar)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value contains the needle as a substring.
+- **Example**: over `/(\S+)/`, `contains_substr(match_group(0), "oob")` on `foobar` → `1`.
 
 ### `replace_substr(s, old, new)`
 - **Signature**: `replace_substr(value: scalar, old: scalar, new: scalar)`
 - **Returns**: scalar
 - **Behavior**: Replaces all literal occurrences of `old` with `new`. Returns undef if value is undef. This is a **literal** replacement, not a regex substitution.
 - **Edge cases**: If `old` is empty, returns the value unchanged.
+- **Example**: over `/(\S+)/`, `replace_substr(match_group(0), "-", "_")` on `a-b-c` → `"a_b_c"`.
 
 ### `rm_prefix(s, prefix)`
 - **Signature**: `rm_prefix(value: scalar, prefix: scalar)`
 - **Returns**: scalar
 - **Behavior**: Removes the prefix from the value if present. Returns the value unchanged if the prefix does not match. Returns undef if value is undef.
+- **Example**: over `/(\S+)/`, `rm_prefix(match_group(0), "lib")` on `libparser` → `"parser"`.
 
 ### `rm_suffix(s, suffix)`
 - **Signature**: `rm_suffix(value: scalar, suffix: scalar)`
 - **Returns**: scalar
 - **Behavior**: Removes the suffix from the value if present. Returns the value unchanged if the suffix does not match. Returns undef if value is undef.
+- **Example**: over `/(\S+)/`, `rm_suffix(match_group(0), ".spec")` on `parser.spec` → `"parser"`.
 
 ## 3. Array Helpers
 
@@ -371,85 +427,120 @@ identically. No Perl implementation knowledge is required.
 
 All numeric helpers return `undef` if any input is missing, non-numeric, or (for division/modulo) zero-divisor, unless wrapped in `coalesce(...)`.
 
+> **Worked examples** use the same runnable-spec shape as §2 (`Demo:: /<regex>/ ->
+> Demo { return(<expr>) }`, output = the parser's top-level value). The array-form
+> reducers (`num_sum`, `num_avg`, `num_median`, `num_range`, and the array form of
+> `num_min`/`num_max`) take an explicit `array(...)` of numeric values — build it from
+> capture groups (`array(match_group(0), match_group(1), …)`) or numeric literals. An
+> `undef` result (e.g. divide-by-zero) surfaces as a `null` output.
+
 ### `num_add(a, b)`
 - **Signature**: `num_add(a: numeric, b: numeric)`
 - **Returns**: numeric
 - **Behavior**: Adds two numbers. Returns `undef` if either operand is non-numeric.
+- **Example**:
+  ```text
+  Sum::
+   /(\d+)\+(\d+)/ -> Sum { return(num_add(match_group(0), match_group(1))) }
+  ```
+  Input `2+3` → `5`.
 
 ### `num_sub(a, b)`
 - **Signature**: `num_sub(a: numeric, b: numeric)`
 - **Returns**: numeric
 - **Behavior**: Subtracts `b` from `a`.
+- **Example**: over `/(\d+)-(\d+)/`, `num_sub(match_group(0), match_group(1))` on `10-4` → `6`.
 
 ### `num_mul(a, b)`
 - **Signature**: `num_mul(a: numeric, b: numeric)`
 - **Returns**: numeric
 - **Behavior**: Multiplies two numbers.
+- **Example**: over `/(\d+)x(\d+)/`, `num_mul(match_group(0), match_group(1))` on `6x7` → `42`.
 
 ### `num_div(a, b)`
 - **Signature**: `num_div(a: numeric, b: numeric)`
 - **Returns**: numeric
 - **Behavior**: Divides `a` by `b`. Returns `undef` on divide-by-zero.
+- **Example**: over `/(\d+)\/(\d+)/`, `num_div(match_group(0), match_group(1))` gives `5` on `20/4`, `3.5` on `7/2`, and `null` on `5/0`.
 
 ### `num_mod(a, b)`
 - **Signature**: `num_mod(a: numeric, b: numeric)`
 - **Returns**: int
 - **Behavior**: Modulo operation. Returns `undef` for divide-by-zero or non-integer operands.
+- **Example**: over `/(\d+)%(\d+)/`, `num_mod(match_group(0), match_group(1))` on `17%5` → `2`.
 
 ### `num_abs(x)`
 - **Signature**: `num_abs(x: numeric)`
 - **Returns**: numeric
 - **Behavior**: Absolute value.
+- **Example**: over `/(-?\d+)/`, `num_abs(match_group(0))` on `-7` → `7`.
 
 ### `num_floor(x)`
 - **Signature**: `num_floor(x: numeric)`
 - **Returns**: int
 - **Behavior**: Floor — largest integer ≤ x.
+- **Example**: over `/([\d.]+)/`, `num_floor(match_group(0))` on `3.7` → `3`.
 
 ### `num_ceil(x)`
 - **Signature**: `num_ceil(x: numeric)`
 - **Returns**: int
 - **Behavior**: Ceiling — smallest integer ≥ x.
+- **Example**: over `/([\d.]+)/`, `num_ceil(match_group(0))` on `3.2` → `4`.
 
 ### `num_round(x)`
 - **Signature**: `num_round(x: numeric)`
 - **Returns**: int
 - **Behavior**: Rounds to nearest integer (half-up).
+- **Example**: over `/([\d.]+)/`, `num_round(match_group(0))` on `3.5` → `4`.
 
 ### `num_min(a, b)` / `num_min(arr)`
 - **Signature**: `num_min(a: numeric, b: numeric)` or `num_min(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the smaller of two numbers. Array form: returns the minimum element. Returns `undef` for empty array, non-array, or non-numeric elements.
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(match_group(0), match_group(1))` on `8,3` → `3`. Array — `num_min(array(8,3,5,1))` → `1`.
 
 ### `num_max(a, b)` / `num_max(arr)`
 - **Signature**: `num_max(a: numeric, b: numeric)` or `num_max(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the larger. Array form: returns the maximum element.
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(match_group(0), match_group(1))` on `8,3` → `8`. Array — `num_max(array(8,3,5,1))` → `8`.
 
 ### `num_clamp(x, lo, hi)`
 - **Signature**: `num_clamp(x: numeric, lo: numeric, hi: numeric)`
 - **Returns**: numeric
 - **Behavior**: Clamps `x` to the `[lo, hi]` range. Returns `undef` if bounds are inverted (`lo > hi`).
+- **Example**: over `/(\d+)/`, `num_clamp(match_group(0), 0, 10)` gives `10` on `42` and `7` on `7`.
 
 ### `num_sum(arr)`
 - **Signature**: `num_sum(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Sum of array elements. Returns `0` for empty array. Returns `undef` for non-array or non-numeric element sources.
+- **Example**:
+  ```text
+  Total::
+   /(\d+),(\d+),(\d+),(\d+)/ -> Total {
+     return(num_sum(array(match_group(0), match_group(1), match_group(2), match_group(3))))
+   }
+  ```
+  Input `1,2,3,4` → `10`.
 
 ### `num_avg(arr)`
 - **Signature**: `num_avg(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Arithmetic mean of array elements. Returns `undef` for empty array, non-array, or non-numeric elements.
+- **Example**: over `/(\d+),(\d+),(\d+)/`, `num_avg(array(match_group(0), match_group(1), match_group(2)))` on `2,4,6` → `4`.
 
 ### `num_median(arr)`
 - **Signature**: `num_median(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Median of array elements after numeric sort. For even-length arrays, returns the average of the two middle elements. Returns `undef` for empty array, non-array, or non-numeric elements.
+- **Example**: `num_median(array(5,1,3,2,4))` → `3` (sorted `1,2,3,4,5`; middle element).
 
 ### `num_range(arr)`
 - **Signature**: `num_range(arr: array)`
 - **Returns**: numeric
 - **Behavior**: `max - min` of array elements. Returns `undef` for empty array, non-array, or non-numeric elements.
+- **Example**: `num_range(array(3,9,1,7))` → `8` (`9 - 1`).
 
 ## 6. Control Flow Helpers
 

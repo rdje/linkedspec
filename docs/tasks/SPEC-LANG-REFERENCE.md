@@ -6,7 +6,11 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (`.5` split + `.5.1` done — helper-catalog audit: 0 public-API completeness gaps, 2 variant-neutrality sigil leaks fixed; example-density gap (0 examples / ~140 helpers) decomposed into per-family sub-leaves `.5.2`–`.5.5`; `mdbook build` exit 0; frontier → `.5.2`)
+- Last updated: `2026-06-17` (`.5.2` done — verified worked examples added to all 17 Scalar +
+  18 Numeric helpers in `helper-contract-catalog.md`, each compile-AND-run verified through
+  `LinkedSpec::Get` against the oracle; caught 2 do-not-guess traps (`is_defined`/`is_undefined`
+  condition-only; `split→num_sum` non-composition); discovered a §5.5 drift defect → new leaf `.9`;
+  `mdbook build` exit 0; frontier → `.9` then `.5.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,7 +62,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 - ID: `SPEC-LANG-REFERENCE`
   Status: `active`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
-  Children: `.1`–`.4` (done), `.5` (active: `.5.1` done, `.5.2`–`.5.5` pending), `.6`, `.7`, `.8`
+  Children: `.1`–`.4` (done), `.5` (active: `.5.1`–`.5.2` done, `.5.3`–`.5.5` pending), `.6`, `.7`,
+  `.8`, `.9` (drift fix discovered during `.5.2`)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -178,7 +183,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   contract (signature + semantics + edge cases) and at least one example; separate any
   Perl-implementation note from the contract; add examples where the catalog is example-poor.
   **Split during implementation (the surface is large)** — see Audit Findings (`.5`) below.
-  Children: `.5.1` (done), `.5.2`, `.5.3`, `.5.4`, `.5.5`
+  Children: `.5.1` (done), `.5.2` (done), `.5.3`, `.5.4`, `.5.5`
 
 - ID: `SPEC-LANG-REFERENCE.5.1`
   Status: `done`
@@ -202,13 +207,35 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.5.1` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Worked examples — Scalar + Numeric helper families
   Acceptance: ≥1 compile-verified `.spec` example per family added to the Scalar and Numeric
   sections of `helper-contract-catalog.md`, with several more for high-frequency helpers; every
   example built through `LinkedSpec::Get` before asserting behavior. `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-17. Added a shared **Worked examples** preamble to §2 (Scalar)
+  and a back-reference in §5 (Numeric), then a **verified** `Example` to **every** helper in both
+  families (17 Scalar + 18 Numeric = 35 helpers covered). **Every example was compile-AND-run
+  verified through `LinkedSpec::Get`** with a scratch oracle-style driver (build parser → run on
+  the documented input → JSON-encode the top-level value with the same `JSON::PP->canonical`
+  encoder as `tools/gen_oracle_corpus.pl`); the driver was sanity-checked against the two frozen
+  oracle fixtures (`proof_edge_{scalar,array}_literal`) and reproduced them exactly, so its outputs
+  are the reference behavior — nothing guessed. **Two do-not-guess traps caught and avoided**:
+  (1) the value-returning vs condition-only split — `is_defined`/`is_undefined` lower **only** via
+  the control-flow path (`ActionIR/FlowExpr.pm` `_lower_flow_composite_expr`, NOT the value-expr
+  regex set at `FlowExpr.pm:270`), so `return(is_defined(x))` dies with "Undefined subroutine"; they
+  are documented in the verified `if (is_defined(x)) { … }` condition form with a "condition-only"
+  usage note (`matches`/`starts_with`/`ends_with`/`contains_substr` ARE value-expressible and
+  surface as `1`/`0`); (2) `num_sum(split(...))` returns `null` (the `split→num_sum` composition does
+  not flatten here) — so the array-form reducers are documented with an explicit `array(...)` of
+  capture groups / literals (verified: `num_sum(array(1,2,3,4))`→`10`), and `split` is left to the
+  Array family (`.5.3`). The reliable doc scaffold is `Demo:: /<re>/ -> Demo { return(<expr>) }`
+  (bare-`::` OR self-ref edge), confirmed by reproducing the frozen fixtures. `mdbook build` exit 0.
+  **Discovered defect (NOT fixed here — owned by new leaf `.9`, no bundling):** the §5.5
+  `runtime-semantics.md` "verified" Pair example (`Pair::AND … -> Pair[0] { return(array("?pair:",
+  …)) }`) actually outputs `[]`, not the documented `["?pair:","key","val"]`; the tagged array is
+  produced by the OR self-ref form `Pair:: … -> Pair { return(array(…)) }` (verified) — `.3`'s live
+  run used a self-ref-OR shape that was mis-transcribed into the `AND`/`[0]` form.
+  Commit: `SPEC-LANG-REFERENCE.5.2` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.5.3`
   Status: `pending`
@@ -253,6 +280,19 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   order + `retv`, the action-vs-blind edge/dispatch model, and the capture/mark family
   taxonomy; KM gate regenerates `KNOWLEDGE_MAP.md` and passes. (Cards may be written alongside
   their originating leaf; this leaf ensures full coverage.)
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.9`
+  Status: `pending`
+  Goal: Correct the drifted "verified" output in `runtime-semantics.md` §5.5 (Pair example)
+  Acceptance: change the §5.5 third example so its documented output matches a **re-verified**
+  live run — the `["?pair:","key","val"]` output requires the OR self-ref form
+  `Pair:: /(\w+)=(\w+)/ -> Pair { return(array("?pair:", match_group(0), match_group(1))) }`
+  (the current `Pair::AND … -> Pair[0]` form actually returns `[]`). Re-run the corrected snippet
+  through `LinkedSpec::Get` before asserting; check no other §5.5/§5.6 snippet has the same
+  AND-`[N]`-self-edge drift; `mdbook build` exit 0. (Discovered during `.5.2`; high priority —
+  a known-wrong "verified" example violates the no-drift doctrine.)
   Verification: `pending`
   Commit: `pending`
 
@@ -320,7 +360,8 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | — | `SPEC-LANG-REFERENCE.3` | `done` | output/return-shape contract landed in `runtime-semantics.md §5` (2026-06-17), verified vs oracle corpus + live Perl run; tagged shape framed as an OPTIONAL convention per user feedback |
 | — | `SPEC-LANG-REFERENCE.4` | `done` | grouped-target example (edges chapter) + entry-vs-match divergence example (capture chapter), both compile-verified (2026-06-17) |
 | — | `SPEC-LANG-REFERENCE.5.1` | `done` | helper-catalog audit (2026-06-17): 0 public-API completeness gaps; 2 variant-neutrality sigil leaks fixed; example-density gap decomposed into `.5.2`–`.5.5` |
-| 1 | `SPEC-LANG-REFERENCE.5.2` | `pending` | **next** — worked examples: Scalar + Numeric families (compile-verified) |
+| — | `SPEC-LANG-REFERENCE.5.2` | `done` | worked examples for all 17 Scalar + 18 Numeric helpers (2026-06-17), each compile-AND-run verified through `LinkedSpec::Get`; 2 do-not-guess traps caught; §5.5 drift defect found → `.9` |
+| 1 | `SPEC-LANG-REFERENCE.9` | `pending` | **next** — correct the drifted §5.5 "verified" Pair output (`[]` vs documented tagged array); no-drift priority |
 | 2 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) |
 | 3 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
 | 4 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
@@ -355,6 +396,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `2026-06-17` | `SPEC-LANG-REFERENCE.3` | output shapes verified vs frozen oracle-corpus fixtures (`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal`), a **live Perl-reference run** (`LinkedSpec::Get` on a `/(\w+)=(\w+)/` spec → `["?pair:","key","val"]`), and shipped-spec grep for the tagged convention; grounded the wrap + return-vs-accumulator in `docs/knowledge/rust-perl-output-oracle.md`; `mdbook build` | `mdbook build` exit 0; `runtime-semantics.md §5` expanded (§5.5–§5.8). A hand-built accumulator example (`[undef,undef,undef]`) was discarded — only verified material documented. Tagged shape reframed as OPTIONAL per user feedback (engine imposes no output schema) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.4` | both new examples **compiled** through `LinkedSpec::Get` (grouped target + `Call`→`Inner` divergence); ran ~9 minimal accumulator/dispatch shapes to attempt a top-level divergence I/O (all → `[]`/`undef`/`0`, the documented hard accumulator axes); divergence semantics grounded in `.2`'s verified source wiring + the existing source-boundary example; `mdbook build` | `mdbook build` exit 0; grouped-target section (`action-and-lifecycle-placement.md`) + entry-vs-match divergence section (`capture-marks-and-source-locations.md`). Divergence documented at the reader-wiring level (not a fabricated I/O) — honest scope note recorded |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.1` | delegated read-only catalog audit (`Contracts.pm` id set vs catalog); self-verified the 2 flagged sigil leaks at `helper-contract-catalog.md:13,159` + whole-catalog re-sweep for `$`/`@`/`%` sigils and `lowers to`/`do {`/`Data::Dumper`/`JSON::PP`/`//gcp`; `mdbook build` | `mdbook build` exit 0; **0 public-API completeness gaps** (158 ids = ~130 public + 17 internal IR variants + ~11 deprecated `compatibility_surface`); **2 sigil leaks fixed**, no others; example-density gap (0/~140) decomposed into `.5.2`–`.5.5` |
+| `2026-06-17` | `SPEC-LANG-REFERENCE.5.2` | scratch oracle-style driver (`LinkedSpec::Get` → run parser on input → `JSON::PP->canonical` encode) over all 35 Scalar+Numeric examples; sanity-checked vs frozen fixtures `proof_edge_{scalar,array}_literal` (reproduced exactly); probed the value-vs-condition lowering split in `ActionIR/FlowExpr.pm`; `mdbook build` | `mdbook build` exit 0; 35/35 examples produce the documented outputs; `is_defined`/`is_undefined` documented condition-only (die as values); `split→num_sum` non-composition avoided (array-form reducers use explicit `array(...)`); **discovered** §5.5 Pair example outputs `[]` not the tagged array → owned by new leaf `.9` (not bundled) |
 
 ## Commit Log
 
@@ -365,6 +407,7 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
 | `SPEC-LANG-REFERENCE.3` | `SPEC-LANG-REFERENCE.3 — book: output/return-value shape contract in runtime-semantics §5 (output is author's choice; optional tagged shape)` | Expanded `appendix/runtime-semantics.md §5` (§5.5–§5.8): top-rule value, output is author's choice (optional tagged convention per user feedback), return-vs-accumulator, one-level wrap. Verified vs oracle corpus + live Perl run + shipped specs |
 | `SPEC-LANG-REFERENCE.4` | `SPEC-LANG-REFERENCE.4 — book: grouped action-edge targets (edges chapter) + entry-vs-match divergence (capture chapter)` | Grouped-target section in `action-and-lifecycle-placement.md` (ebnf-grounded) + divergence section in `capture-marks-and-source-locations.md`; both examples compile-verified. Divergence documented at reader-wiring level (top-level I/O entangled with hard accumulator axes — not fabricated) |
 | `SPEC-LANG-REFERENCE.5.1` | `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5` | Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0 |
+| `SPEC-LANG-REFERENCE.5.2` | `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)` | 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0 |
 
 ## Changelog
 
@@ -431,3 +474,17 @@ regex feature-set a backend must support; rule-mode→semantics map; lifecycle e
   `.5.3` (Array), `.5.4` (Hash+Control Flow), `.5.5` (Declaration/Capture-Mark/Entry-Match/Input/Call),
   each adding ≥1 compile-verified example per family. `.5.1` shipped the audit + variant-neutrality fixes
   + decomposition (the ownership-first slice). `mdbook build` exit 0. Frontier → `.5.2`.
+- `2026-06-17`: `.5.2` done — verified worked examples for the **Scalar (§2)** and **Numeric (§5)**
+  helper families in `helper-contract-catalog.md`. Added a shared **Worked examples** preamble (the
+  runnable `Demo:: /<re>/ -> Demo { return(<expr>) }` scaffold; output = the parser's top-level value;
+  booleans → `1`/`0`, undef → `null`) and an `Example` to **all 35 helpers** (17 Scalar + 18 Numeric),
+  with full `.spec` blocks for the high-frequency ones (`concat`, `trim`, `num_add`, `num_sum`) and the
+  required `if (...)` block for the condition-only predicates. **Every example was build-AND-run verified
+  through `LinkedSpec::Get`** (scratch oracle-style driver, sanity-checked against the frozen
+  `proof_edge_{scalar,array}_literal` fixtures — reproduced exactly, so outputs are reference behavior,
+  not guesses). **Two do-not-guess traps caught:** (1) `is_defined`/`is_undefined` lower only on the
+  control-flow path (`ActionIR/FlowExpr.pm`), so they are documented condition-only — `return(is_defined(x))`
+  dies; (2) `num_sum(split(...))` returns `null`, so array-form reducers are documented with explicit
+  `array(...)` (split deferred to the Array family `.5.3`). **Discovered defect** (owned separately, not
+  bundled): the §5.5 `runtime-semantics.md` Pair example outputs `[]`, not the documented tagged array
+  → new leaf `.9`. `mdbook build` exit 0. Frontier → `.9` (no-drift priority) then `.5.3`.
