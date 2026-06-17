@@ -6,7 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-17` (**MAJOR CORRECTION** — user established that a `.spec` top (`::`)
+- Last updated: `2026-06-18` (`.10.5.4` done; user activated `SPEC-FORMAT-TERSE` — whole-book scorch
+  PAUSED after `.10.5.4`, pivot to the terse-format tree. Earlier **MAJOR CORRECTION** — user established that a `.spec` top (`::`)
   rule has NO regex; a valid spec needs ≥2 rules (top entry + ≥1 normal `:` rule carrying the
   regex). This means `.5.2`'s 35 examples + catalog preamble AND `.9`'s §5.5 example are
   **structurally invalid** (regex on the top rule), and `.10.1`'s "engine bug" verdict was **WRONG**
@@ -467,14 +468,32 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.3` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.4`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `user-model/worked-spec-walkthrough.md` — convert the chapter's central single-rule
   `Pair::AND /…/ -> Pair[0]` example (→ `[]`, claims a `{kind:pair,…}` hash) to the 2-rule idiom and
   **re-derive every claimed input→output across the whole chapter**
   Acceptance: central example + all downstream claimed outputs re-verified through `LinkedSpec::Get`;
   `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-18. Rewrote the chapter to the verified 2-rule idiom: a `Top::` entry
+  rule (no regex; `-> Pair .push` dispatch loop + `LX { return(array_copy(a(Top))) }`) plus a `Pair:`
+  matcher rule carrying the regex in an `I { return(hash("kind","pair","name",entry_group(0),"value",
+  trim(entry_group(1)))) }` block. **Every claimed output re-derived through `LinkedSpec::Get`** via a
+  mode-aware driver (`/tmp/lsq_me/runpm.pl`, scalar-ref input, `JSON::PP->canonical`, sanity-checked vs
+  the frozen `["hello-world"]` idiom): `answer = 42` (default/consume) → `[{"kind":"pair","name":
+  "answer","value":"42"}]`; `junk answer = 42` consume → `[]`; same input seek → the pair; multi
+  `a = 1, b = 2` → two-element list. The chapter's old single-hash output claim is corrected to a
+  one-element **list** (the entry rule's accumulator snapshot). **Descriptor/ctx re-derived:**
+  `ref eq HASH`, `meta.parse_mode eq 'consume'`, `exists spec{Pair}` all still hold; **`ctx{top_rule}`
+  corrected `Pair`→`Top`** (the top rule is now the entry rule). `match_group`→`entry_group` throughout
+  (the dispatched matcher's local match is unset; documented + cross-linked to the entry-vs-match
+  divergence). Three traps caught: `:AND` mode on the matcher with a separated `I` block collapses the
+  push to `[0]` (use a bare `:` matcher with regex+`I {` on one line); OR-with-`I`-block over alternative
+  capture groups is fragile (`[null]`/`[]`) → the OR growth sketch is shown structurally, no output claim.
+  **declare()/assign() removed** from the advanced "Evolving the spec" sketch per user direction
+  (2026-06-18) — the `call(...)` dataflow teaching is preserved without them; they remain live in the
+  reference engine and elsewhere in the book until `SPEC-FORMAT-TERSE` lands the terse forms.
+  `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0. No Perl change.
+  Commit: `SPEC-LANG-REFERENCE.10.5.4` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.5`
   Status: `pending`
@@ -759,8 +778,9 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.1` | `done` | **whole-book scorch AUDIT (2026-06-17)** — 8 read-only agents + personal ground-truth re-verification; findings table above; engine facts (`::`≡`:` on non-first rules; `::AND -> Rule[N]` → `[]`); ~105 `::`-mode headers across ~20 files; user chose FULL book-wide scorch; ebnf "richer example" cleared (compiles). Decomposed into `.10.5.2`–`.10.5.19` |
 | — | `SPEC-LANG-REFERENCE.10.5.2` | `done` | `overview/what-is-linkedspec.md` minimal kv example → verified 2-rule idiom (2026-06-17); extracted-from-book run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.5.3` | `done` | `public-api/get-and-get-parser.md` minimal `Get` example → verified 2-rule idiom (2026-06-17); book-extracted run → `[{"kind":"top","text":"foo"}]`; caught `match_text()`→`entry_text()` (else `null`); `mdbook build` exit 0 |
-| 3 | `SPEC-LANG-REFERENCE.10.5.4` | `pending` | **next** — fix `user-model/worked-spec-walkthrough.md` central `Pair::AND` (→ `[]`, claims a hash) + re-derive whole-chapter outputs |
-| 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` | fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
+| — | `SPEC-LANG-REFERENCE.10.5.4` | `done` | `worked-spec-walkthrough.md` rewritten to the verified 2-rule idiom (2026-06-18); every claimed output re-derived through `LinkedSpec::Get` (`answer = 42` → `[{"kind":"pair",…}]`; output corrected single-hash → one-element list; `ctx{top_rule}` `Pair`→`Top`); `match_group`→`entry_group`; declare/assign dropped per user pivot; `mdbook build` exit 0 |
+| ⏸ | **SCORCH PAUSED (2026-06-18)** | `paused` | **User activated `SPEC-FORMAT-TERSE` (terse `.spec` format) — see that tree.** The remaining scorch leaves `.10.5.5`–`.10.5.19` are paused: the terse migration will re-sweep every book example in lockstep with the engine, so finishing the 2-rule scorch first would duplicate work. Resume the scorch only if directed, or fold the remaining files into the terse book-sweep. |
+| 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` (paused) | fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
 | 5 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
 | 6 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
 | 7 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
@@ -892,6 +912,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.1` | 8 read-only `Explore` agents over chapter groups (enumerate→classify→run); **personal re-verification of every load-bearing finding** via a private `LinkedSpec::Get` driver (shared driver clobbered by an agent mid-run → all agent ACTUAL_OUTPUT treated as hypotheses); engine probes (T1 `child::AND`≡T2 `child:AND`=`[0]`; T3 `Top:: /foo/ -> Top`=`null`; T4 two `::` rules OK); re-ran tablegrep/portmap/worked-walkthrough/ebnf; whole-book `::`-header grep; `scripts/check_memory_architecture.sh` | self-check exit 0. ~105 `::`-mode headers / ~20 files; idiom is doctrine-divergent + `[]`-shaped. Findings table recorded; 18 fix leaves `.10.5.2`–`.10.5.19` created. **2 preliminary-hunt hypotheses overturned:** ebnf "richer example" compiles+parses (CLEAN); §5.5 forms run+return. User chose full book-wide scorch. No book/Perl change |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.2` | extracted the new block **from the book file** and ran it through `LinkedSpec::Get` (`foo=bar baz=qux`→`[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `answer=42`→`[{"key":"answer","val":"42"}]`); compared idiom forms (`I {return}` works, bare `{return}`→`[0,0]`); `mdbook build` | `mdbook build` exit 0; single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → `null`) replaced with the verified 2-rule idiom + accurate prose/output + cross-links |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.3` | extracted the new `Get` heredoc spec **from the book file** + ran `LinkedSpec::Get` (`foo`→`[{"kind":"top","text":"foo"}]`); compared `match_text()`(→`null`) vs `entry_text()`(→`"foo"`); confirmed only one inline `.spec` heredoc on the page; `mdbook build` | `mdbook build` exit 0; `Top::AND /foo/ -> Top[0]` (→ `[]`) replaced with the verified 2-rule idiom using `entry_text()` + an output comment + a structure-teaching sentence |
+| `2026-06-18` | `SPEC-LANG-REFERENCE.10.5.4` | rewrote the whole chapter to the 2-rule idiom (`Top::` entry + `Pair:` matcher); mode-aware `LinkedSpec::Get` driver re-derived every claimed I/O (default/consume `answer = 42`→`[{"kind":"pair","name":"answer","value":"42"}]`; consume `junk answer = 42`→`[]`; seek→the pair; multi `a = 1, b = 2`→2-element list); descriptor/ctx probe (`ref HASH`✓, `meta.parse_mode consume`✓, `spec{Pair}`✓, **`ctx{top_rule}` Pair→Top**); isolated the `:AND`+separated-`I`→`[0]` and OR-`I`-block→`[null]` traps; `mdbook build`; `scripts/check_memory_architecture.sh` | `mdbook build` exit 0; self-check exit 0. Single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed a hash) replaced; output reframed single-hash→one-element list; `match_group`→`entry_group` (+ trap doc); **declare()/assign() removed** from the advanced sketch per user pivot (call(...) teaching kept). Surfaced the terse-format pivot → user activated `SPEC-FORMAT-TERSE`; scorch paused after this leaf. No Perl change |
 
 ## Commit Log
 
@@ -911,6 +932,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.1` | `SPEC-LANG-REFERENCE.10.5.1 — audit: whole-book .spec-snippet scorch (findings table + engine facts) → decompose into per-file fix leaves .10.5.2-.19` | Read-only audit (8 agents + personal ground-truth re-verify). ~105 `::`-mode headers across ~20 files; pervasive `Rule::AND /regex/ -> Rule[N]` idiom is doctrine-divergent + `[]`-shaped. User chose FULL book-wide scorch. ebnf "richer example" cleared. `.10.4` superseded by `.10.5.16`. No book/Perl change |
 | `SPEC-LANG-REFERENCE.10.5.2` | `SPEC-LANG-REFERENCE.10.5.2 — book: fix what-is-linkedspec.md minimal kv example → verified 2-rule idiom` | Replaced the single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → compile-fail/`null`) with `top:: -> pair .push` / `LX{return(array_copy(a(top)))}` + `pair: /(\w+)=(\w+)/ I{return(hash(…entry_group(0/1)…))}`; book-extracted run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
 | `SPEC-LANG-REFERENCE.10.5.3` | `SPEC-LANG-REFERENCE.10.5.3 — book: fix get-and-get-parser.md minimal Get example → verified 2-rule idiom` | Replaced inline `Top::AND /foo/ -> Top[0] {…match_text()…}` (→ `[]`) with `top:: -> word .push` / `LX{return(array_copy(a(top)))}` + `word: /foo/ I{return(hash("kind","top","text",entry_text()))}`; book-extracted run → `[{"kind":"top","text":"foo"}]`; `match_text()`→`null` trap caught; `mdbook build` exit 0 |
+| `SPEC-LANG-REFERENCE.10.5.4` | `SPEC-LANG-REFERENCE.10.5.4 — book: fix worked-spec-walkthrough.md → verified 2-rule idiom; re-derive whole-chapter outputs; drop declare/assign` | Central single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed `{kind:pair,…}`) → `Top::` entry + `Pair:` matcher; every claimed I/O re-derived via `LinkedSpec::Get`; output corrected single-hash→one-element list; `match_group`→`entry_group`; `ctx{top_rule}` Pair→Top; declare()/assign() removed from the advanced sketch per the user terse-format pivot. `mdbook build` exit 0. **Whole-book scorch PAUSED here — user activated `SPEC-FORMAT-TERSE`.** |
 
 ## Changelog
 
@@ -1117,3 +1139,20 @@ wrapped only where a complete worked example is intended) during the per-file fi
   `match_text()`→`entry_text()` trap (the dispatched child's local match is unset → `match_text()`
   gives `null`; `entry_text()` reads the entering match → `"foo"`). `mdbook build` exit 0. Frontier →
   `.10.5.4` (`user-model/worked-spec-walkthrough.md`).
+- `2026-06-18`: `.10.5.4` done — rewrote `user-model/worked-spec-walkthrough.md` to the verified
+  2-rule idiom. The chapter's central single-rule `Pair::AND /…/ -> Pair[0] { return(hash(…)) }`
+  returns `[]` while the prose claimed a `{kind:pair,name:answer,value:"42"}` hash; replaced it with a
+  `Top::` entry rule (no regex; `-> Pair .push` + `LX { return(array_copy(a(Top))) }`) plus a `Pair:`
+  matcher rule (`I { return(hash("kind","pair","name",entry_group(0),"value",trim(entry_group(1)))) }`).
+  **Re-derived every claimed I/O** with a mode-aware `LinkedSpec::Get` driver: `answer = 42`
+  (default/consume) → `[{"kind":"pair","name":"answer","value":"42"}]`; `junk answer = 42` consume →
+  `[]`, seek → the pair; `a = 1, b = 2` → a 2-element list. Corrected the chapter's single-hash output
+  claim to a one-element **list** (the entry rule's accumulator snapshot); `match_group`→`entry_group`
+  throughout (+ the dispatched-child trap); descriptor checks still hold but **`ctx{top_rule}` Pair→Top**.
+  **User mid-leaf pivot (2026-06-18):** flagged `declare()`/`assign()` (slated for removal in
+  `SPEC-FORMAT-TERSE`) — removed them from the advanced "Evolving the spec" sketch (kept the `call(...)`
+  teaching). Verified they are still **live** in the reference engine + shipped specs, and the removal
+  tree `SPEC-FORMAT-TERSE` was `proposed`, not done. The user then chose (AskUserQuestion) to **activate
+  `SPEC-FORMAT-TERSE` now**, so the whole-book scorch is **PAUSED after this leaf** (the terse migration
+  will re-sweep every book example in lockstep with the engine). `mdbook build` exit 0; self-check exit
+  0. No Perl change. Frontier → SCORCH PAUSED; pivot to `SPEC-FORMAT-TERSE.0` (ratify + ADR).

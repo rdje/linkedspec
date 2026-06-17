@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `SPEC-LANG-REFERENCE` | `active` | `Overall roadmap — documentation and book sync` | `SPEC-LANG-REFERENCE.10.5.4` (WHOLE-BOOK SCORCH — audit `.10.5.1` + fixes `.10.5.2`/`.10.5.3` done 2026-06-17; FULL book-wide scorch to the 2-rule idiom; fix leaves `.10.5.4`–`.10.5.19`, next = `user-model/worked-spec-walkthrough.md`; `.10.4` superseded by `.10.5.16`) | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
+| `SPEC-LANG-REFERENCE` | `active` (scorch ⏸ PAUSED) | `Overall roadmap — documentation and book sync` | **SCORCH PAUSED 2026-06-18** — `.10.5.2`/`.10.5.3`/`.10.5.4` done (2-rule idiom, verified outputs); remaining fix leaves `.10.5.5`–`.10.5.19` paused because the user **activated `SPEC-FORMAT-TERSE`** (terse `.spec` format), whose migration will re-sweep every book example in lockstep with the engine. Resume the scorch only if directed, or fold the remaining files into the terse book-sweep. | [docs/tasks/SPEC-LANG-REFERENCE.md](docs/tasks/SPEC-LANG-REFERENCE.md) |
 | `RUST-PARITY` | `active` | `Phase 9 — Rust variant (parity follow-on)` | `RUST-PARITY.7.5.3` | [docs/tasks/RUST-PARITY.md](docs/tasks/RUST-PARITY.md) |
 
 ## Proposed Task Trees

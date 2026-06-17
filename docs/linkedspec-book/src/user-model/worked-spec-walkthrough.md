@@ -8,21 +8,20 @@ The goal is deliberately modest: parse one key/value pair such as:
 answer = 42
 ```
 
-and return a structured payload:
+and return a structured payload for it. A LinkedSpec parser collects the payloads it
+produces into a list, so for the single pair above the result is a one-element list:
 
 ```text
-{
-  kind  => "pair",
-  name  => "answer",
-  value => "42",
-}
+[
+  { kind => "pair", name => "answer", value => "42" },
+]
 ```
 
 The point is not that this grammar is impressive. The point is that it shows the basic LinkedSpec loop in one place:
 
-- write a rule paragraph,
+- write the two rule paragraphs every `.spec` needs (an entry rule and a matcher rule),
 - choose a rule mode,
-- attach an action,
+- attach an action with a lifecycle block,
 - use helper DSL instead of raw host-language payload code,
 - compile the spec with a backend and call the returned parser,
 - understand how `seek` and `consume` change matching behavior.
@@ -31,16 +30,49 @@ The `.spec` file and everything it expresses are backend-neutral: the same sourc
 
 ## The full spec
 
-Here is the complete inline `.spec`:
+Here is the complete inline `.spec`. Every `.spec` is built from at least two rules — a top
+**entry rule** that carries no regex, plus one or more normal **matcher rules** that do:
 
 ```text
-Pair::AND
- /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ -> Pair[0] {
-   return(hash("kind", "pair", "name", match_group(0), "value", trim(match_group(1))));
+Top::
+ -> Pair .push
+
+LX { return(array_copy(a(Top))) }
+
+Pair:
+ /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ I {
+   return(hash("kind", "pair", "name", entry_group(0), "value", trim(entry_group(1))));
  }
 ```
 
-This rule has one regex slot and one action edge.
+### The entry rule
+
+```text
+Top::
+ -> Pair .push
+
+LX { return(array_copy(a(Top))) }
+```
+
+`Top::` is the entry rule. The double-colon `::` label marks the single top rule of the spec —
+the rule a backend starts from. It carries **no regex of its own**. Instead it runs a dispatch
+loop: it repeatedly hands off to the `Pair` matcher (`-> Pair`) and `.push`es each result onto
+its own accumulator. When the input is exhausted, the `LX { ... }` lifecycle block returns a
+snapshot of that accumulator with `array_copy(a(Top))` — that snapshot (a list) is the parser's
+result. (The accumulator and output-shape model is covered in
+[Runtime Semantics](../appendix/runtime-semantics.md).)
+
+### The matcher rule
+
+```text
+Pair:
+ /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ I {
+   return(hash("kind", "pair", "name", entry_group(0), "value", trim(entry_group(1))));
+ }
+```
+
+`Pair:` is a normal rule (single colon). It carries the regex, and its action builds one payload
+per match. It has one regex slot and one lifecycle action block.
 
 The regex slot is:
 
@@ -53,52 +85,57 @@ It captures two groups:
 - `([A-Za-z_]\w*)` captures the left-hand name.
 - `([^,\n]+)` captures the right-hand value text.
 
-The action edge is:
+The action block is:
 
 ```text
--> Pair[0] { ... }
+I {
+  return(hash("kind", "pair", "name", entry_group(0), "value", trim(entry_group(1))));
+}
 ```
 
-`Pair[0]` says that the action is attached to regex slot `0`, the first and only local regex slot in this rule.
+`I { ... }` is a lifecycle action block; here it runs the payload-building helper code for the
+match. Read the body as:
 
-The action body is:
-
-```text
-return(hash("kind", "pair", "name", match_group(0), "value", trim(match_group(1))));
-```
-
-Read it as:
-
-- `match_group(0)` returns the first capture group of the current local match, here `answer`.
-- `match_group(1)` returns the second capture group of the current local match, here the right-hand value text.
+- `entry_group(0)` returns the first capture group of the match that **entered** this rule, here `answer`.
+- `entry_group(1)` returns the second capture group of that entering match, here the right-hand value text.
 - `trim(...)` normalizes incidental leading/trailing whitespace from that captured value text.
 - `hash(...)` builds one structured hash payload.
-- `return(...)` returns that payload from the rule.
+- `return(...)` returns that payload from the rule, where `.push` collects it onto the entry rule's accumulator.
 
-The helper group indexes are zero-based. The first regex capture group is `match_group(0)`, the second is `match_group(1)`, and so on.
+The helper group indexes are zero-based and captures-only. The first regex capture group is
+`entry_group(0)`, the second is `entry_group(1)`, and so on (see
+[Regex in `.spec`](regex-in-spec.md) for the indexing contract).
 
-## Why `Pair::AND`
+A matcher rule reached by dispatch reads the **entering** match with the `entry_*` family. The
+`match_*` family reads the rule's *own local* match, which is not set in this single-slot
+matcher — so `match_group(0)` here would be empty. See
+[Capture, Marks, and Source Locations](../dsl/capture-marks-and-source-locations.md) for when
+`entry_*` and `match_*` diverge.
 
-The rule starts with:
+## Why two rules
+
+The top `::` entry rule and the normal `:` matcher rule play different roles:
+
+- The **entry rule** (`Top::`) names the whole parser and owns the result. It carries no regex —
+  it loops, dispatches to matchers, collects their payloads, and returns the collection. There is
+  exactly one entry rule per spec.
+- The **matcher rule** (`Pair:`) carries the regex and turns one match into one payload.
+
+The regex always lives on a normal `:` rule, never on the `::` entry rule. See
+[.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md) for the paragraph model.
+
+`Pair:` uses the default rule mode: one regex slot, one match. If the matcher later grows into
+several ordered slots, give it the `AND` mode so the label still reads correctly:
 
 ```text
-Pair::AND
-```
-
-`Pair` is the rule name. The double-colon form is the entry-style rule spelling used here because this tiny spec has only one public entry rule.
-
-`AND` says this is an ordered-sequence rule. This example has only one regex slot, so `AND` is not doing much yet, but it is still a good public-doc spelling because it says the rule is not a repeated choice stream.
-
-If the rule later grows into several ordered slots, the label still reads correctly:
-
-```text
-Pair::AND
+Pair:AND
  /[A-Za-z_]\w*/
  /\s*=\s*/
  /[^,\n]+/
 ```
 
-For this first walkthrough, the single-regex form keeps the action attached to one current local match, which makes `match_group(...)` behavior easy to see.
+The full rule-label and cursor-discipline matrix is in
+[Rule Modes and Parse Modes](rule-modes-and-parse-modes.md).
 
 ## Running it inline
 
@@ -108,9 +145,14 @@ A backend compiles in-memory `.spec` text and returns a runnable parser. In the 
 use LinkedSpec;
 
 my $spec = <<'SPEC';
-Pair::AND
- /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ -> Pair[0] {
-   return(hash("kind", "pair", "name", match_group(0), "value", trim(match_group(1))));
+Top::
+ -> Pair .push
+
+LX { return(array_copy(a(Top))) }
+
+Pair:
+ /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ I {
+   return(hash("kind", "pair", "name", entry_group(0), "value", trim(entry_group(1))));
  }
 SPEC
 
@@ -123,17 +165,25 @@ my $input = 'answer = 42';
 my $ast = $parser->(\$input);
 ```
 
-The returned `$ast` is a hash-like payload equivalent to:
+The returned `$ast` is a list with one pair payload, equivalent to:
 
 ```text
-{
-  kind  => "pair",
-  name  => "answer",
-  value => "42",
-}
+[
+  { kind => "pair", name => "answer", value => "42" },
+]
 ```
 
-Do not depend on hash key order when printing this payload (for example with a debug dumper such as Perl's `Data::Dumper`); the semantic payload is the key/value content, not its serialization order.
+The entry rule collects one payload per matched pair, so a longer input produces a longer list.
+For `'a = 1, b = 2'` the result is:
+
+```text
+[
+  { kind => "pair", name => "a", value => "1" },
+  { kind => "pair", name => "b", value => "2" },
+]
+```
+
+Do not depend on hash key order when printing these payloads (for example with a debug dumper such as Perl's `Data::Dumper`); the semantic payload is the key/value content of each hash, not its serialization order.
 
 ## `consume` versus `seek`
 
@@ -145,19 +195,20 @@ parse_mode => 'consume'
 
 That means the regex must match at the current cursor position.
 
-This input succeeds:
+This input matches the pair and returns the one-element list:
 
 ```text
 answer = 42
 ```
 
-This input fails under `consume`:
+This input extracts nothing under `consume`:
 
 ```text
 junk answer = 42
 ```
 
-because the current cursor starts at `j`, not at the `answer = 42` pair.
+The current cursor starts at `j`, not at the `answer = 42` pair, so no match occurs at the
+cursor and the parser returns an empty list `[]`.
 
 If you compile the same spec with `seek`, LinkedSpec can skip forward to the later anchor:
 
@@ -168,20 +219,18 @@ my $parser = LinkedSpec::Get(
 );
 ```
 
-Under `seek`, this input can match:
+Under `seek`, this input matches:
 
 ```text
 junk answer = 42
 ```
 
-The returned payload is still the pair:
+The returned payload is still the one-element list of the pair:
 
 ```text
-{
-  kind  => "pair",
-  name  => "answer",
-  value => "42",
-}
+[
+  { kind => "pair", name => "answer", value => "42" },
+]
 ```
 
 Use `consume` when the spec is acting as a strict parser. Use `seek` when the spec is acting as an extractor over a larger text body.
@@ -207,10 +256,12 @@ For this walkthrough, the useful checks are:
 ```perl
 ref($descriptor) eq 'HASH';
 $descriptor->{meta}{parse_mode} eq 'consume';
-exists $descriptor->{spec}{Pair};
+exists $descriptor->{spec}{Top};   # the entry rule
+exists $descriptor->{spec}{Pair};  # the matcher rule
 ```
 
-The descriptor is covered in more detail in [Descriptor Introspection](../public-api/descriptor-introspection.md). The key point here is that the same inline spec can either produce a runnable parser or a structured descriptor, depending on the option you pass.
+The descriptor lists every rule in the spec — both the `Top` entry rule and the `Pair` matcher.
+It is covered in more detail in [Descriptor Introspection](../public-api/descriptor-introspection.md). The key point here is that the same inline spec can either produce a runnable parser or a structured descriptor, depending on the option you pass.
 
 ## Capturing runtime context
 
@@ -229,18 +280,18 @@ my $parser = LinkedSpec::Get(
 On a successful compile, the context can record useful run identity such as the selected top rule:
 
 ```perl
-$ctx{top_rule}; # Pair
+$ctx{top_rule}; # Top
 ```
 
-On failure, the same context can carry structured `last_error` data with owner/stage attribution. That is preferable to scraping raw error strings.
+The top rule is the spec's entry rule (`Top`), not the matcher. On failure, the same context can carry structured `last_error` data with owner/stage attribution. That is preferable to scraping raw error strings.
 
 Use this option when embedding LinkedSpec in a larger application or test harness where failures need to be explained to a user.
 
 ## Evolving the spec
 
-The one-rule version is intentionally compact. As the grammar grows, split responsibilities rather than making one action too clever.
+The two-rule version is intentionally compact. As the grammar grows, split responsibilities across more rules rather than making one action too clever.
 
-For example, if you want a parent rule to parse several child concepts in order, use blind calls:
+For example, if you want a parent rule to parse several child concepts in order, use blind calls (a parent rule carries no regex — it only dispatches):
 
 ```text
 Assignment::AND
@@ -249,24 +300,21 @@ Assignment::AND
  => Value
 ```
 
-If the parent owns local regex slots and needs to reshape child data itself, use explicit `call(...)` dataflow inside an action edge:
+If a matcher owns a local regex slot and needs to reshape child data itself, use explicit `call(...)` dataflow inside its action block — call a sibling rule and use its result directly (sketch — it needs a sibling `Name` rule to run):
 
 ```text
-Assignment::AND
- I { declare(scalar, retv); }
- /assignment\s+/ -> Assignment[0] {
-   assign(scalar(retv), call(Name));
-   return(hash("kind", "assignment", "name", scalar(retv)));
+Assignment:
+ /assignment\s+/ I {
+   return(hash("kind", "assignment", "name", call(Name)));
  }
 ```
 
-If the rule needs repeated alternatives, switch to the `OR` family:
+If a single pair can be written several ways, give the matcher the `OR` mode with one regex slot per alternative, and attach the action the same way as before:
 
 ```text
-PairStream::OR
- /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ -> PairStream[0] {
-   return(hash("kind", "pair", "name", match_group(0), "value", trim(match_group(1))));
- }
+Pair:OR
+ /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/
+ /([A-Za-z_]\w*)\s*:\s*([^,\n]+)/
 ```
 
 The important habit is to change the rule label when the composition model changes. Do not leave a reader guessing whether the rule is a sequence, a choice, or a repeated extraction stream.
@@ -275,10 +323,12 @@ The important habit is to change the rule label when the composition model chang
 
 This small example demonstrates the default authoring loop:
 
+- Write a top `::` entry rule (no regex) plus one or more normal `:` matcher rules that carry the regex.
 - Use a rule label that names the composition model.
 - Use regex capture groups when the payload is already local to one match.
-- Use `match_group(...)` for current local-match captures.
+- Use `entry_group(...)` to read the capture groups of the match that entered a dispatched rule.
 - Use helper expressions such as `trim(...)`, `hash(...)`, and `return(...)` rather than raw host-language payload construction.
+- Let the entry rule collect each returned payload (`-> Pair .push`) and return the snapshot (`LX { return(array_copy(a(Top))) }`).
 - Choose `consume` for strict parser behavior.
 - Choose `seek` for extraction behavior.
 - Use `return_descriptor => 1` when tooling needs compiler output instead of a parser coderef.

@@ -1,6 +1,59 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-18 — SPEC-LANG-REFERENCE.10.5.4: fix `worked-spec-walkthrough.md` → verified 2-rule idiom (+ terse-format pivot)
+
+Third fix slice of the whole-book scorch — and the slice on which the user **activated
+`SPEC-FORMAT-TERSE`** (terse `.spec` format), pausing the scorch.
+
+The chapter's central worked example was a single rule with a regex on the top rule and a broken
+self-edge — `Pair::AND /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ -> Pair[0] { return(hash("kind","pair",
+"name",match_group(0),"value",trim(match_group(1)))) }` — which actually returns `[]`, while the
+whole chapter claimed it returns a single hash `{kind=>"pair",name=>"answer",value=>"42"}`.
+
+Rewrote it to the verified 2-rule idiom:
+
+```
+Top::
+ -> Pair .push
+
+LX { return(array_copy(a(Top))) }
+
+Pair:
+ /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ I {
+   return(hash("kind", "pair", "name", entry_group(0), "value", trim(entry_group(1))));
+ }
+```
+
+**Every claimed input→output re-derived** through `LinkedSpec::Get` with a mode-aware driver
+(`/tmp/lsq_me/runpm.pl`; scalar-ref input; `JSON::PP->canonical`; sanity-checked against the frozen
+`["hello-world"]` idiom):
+
+- `answer = 42` (default / `consume`) → `[{"kind":"pair","name":"answer","value":"42"}]`
+- `junk answer = 42` under `consume` → `[]`; under `seek` → the pair
+- `a = 1, b = 2` → a two-element list (the entry loop collects each match)
+
+Corrections made to the prose: the output is a one-element **list** (the entry rule's accumulator
+snapshot), not a bare hash; `match_group(...)` → `entry_group(...)` throughout (the dispatched
+matcher's *local* match is unset, so `match_group` would be empty — documented + cross-linked to the
+entry-vs-match divergence); the descriptor checks still hold (`ref eq HASH`, `meta.parse_mode eq
+'consume'`, `exists spec{Pair}`) but **`ctx{top_rule}` is now `Top`**, not `Pair`. Three engine traps
+were isolated and avoided: `:AND` on the matcher with a separated `I` block collapses the push to
+`[0]`; an OR matcher with an `I` block over alternative capture groups is fragile (`[null]`/`[]`), so
+the OR growth path is shown as a structural sketch with no output claim.
+
+**Terse-format pivot.** The user flagged `declare()`/`assign()` in the chapter's advanced
+"Evolving the spec" sketch. Investigation: `declare`/`assign` are **live** in the Perl reference
+engine (active `Contracts.pm` contracts) and used across shipped specs (`tablegrep.spec`,
+`ds_vhistory.spec`, `BNF.spec`) and the book; the removal/rename is owned by `SPEC-FORMAT-TERSE`,
+which was `proposed` (not implemented). Removed `declare`/`assign` from the sketch (the `call(...)`
+dataflow teaching is preserved without them). The user then chose to **activate `SPEC-FORMAT-TERSE`
+now**, so the whole-book scorch is **paused after this leaf** (the terse migration will re-sweep every
+book example in lockstep with the engine).
+
+Validation: `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0. No Perl change.
+**Frontier → whole-book scorch PAUSED; pivot to `SPEC-FORMAT-TERSE.0` (ratify + ADR).**
+
 ## 2026-06-17 — SPEC-LANG-REFERENCE.10.5.3: fix `get-and-get-parser.md` minimal `Get` example → verified 2-rule idiom
 
 Second fix slice of the whole-book scorch. The `LinkedSpec::Get(...)` minimal example embedded an
