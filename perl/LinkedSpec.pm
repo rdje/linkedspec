@@ -243,7 +243,8 @@ sub get_plugin {
 }
 
 # DEPRECATED: removal pending PLUGIN-MODERNIZATION.5 (PluginBridge retirement).
-# Last remaining external caller is FSMGen::AUTOLOAD (FSMGen.pm:3547).
+# Its last external caller (FSMGen::AUTOLOAD) was retired with the legacy VHDL/RTL/FSM
+# subsystem (LEGACY-VHDL-RETIRE); no external callers remain.
 sub dispatch_plugin_autoload_name {
  my ($autoload_name, @args) = @_;
  return _dispatch_owner_call('LinkedSpec::PluginBridge', '_dispatch_autoload', $autoload_name, \@args)

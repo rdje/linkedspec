@@ -6,8 +6,8 @@
 - Status: `active` (created 2026-06-18)
 - Roadmap lane: `Overall roadmap — keep only portable/cross-variant code (retirement)`
 - Created: `2026-06-18`
-- Last updated: `2026-06-18` (`.1` read-only inventory done; removal leaves `.2`–`.5` blocked on
-  user removal-scope confirmation)
+- Last updated: `2026-06-18` (`.1`/`.2`/`.3` done — subsystem retired, RTLUtils hang cleared; `.4`/`.5`
+  reblocked on a back-half fix track after a SECOND pre-existing hang was unmasked — see Back-Half Discovery)
 - Owner: repo-local workflow
 
 ## Goal
@@ -64,30 +64,41 @@ better than patching a regex in a module that is being deleted anyway.
   Commit: `LEGACY-VHDL-RETIRE.1` (see Commit Log)
 
 - ID: `LEGACY-VHDL-RETIRE.2`
-  Status: `blocked`
+  Status: `done`
   Goal: Remove the exclusively-dependent `plugin/*.plg` files and their phase0 migration-smoke
     test blocks, so nothing calls the three modules anymore.
   Acceptance: `plugin/{fsmgen,lte_digital_rf,mbist,msword,regtest,rtl}.plg` deleted; the
     RTLUtils/FSMGen/VHDL::ConstantEval migration-smoke blocks in `t/phase0_regression.t` removed;
     `git grep` shows no remaining functional caller of the three modules.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-18. 6 `.plg` removed via `git rm`; 8 module-smoke subtests deleted +
+    7 mixed subtests surgically cleaned (plan counts adjusted); `git grep` = 0 module/`.plg`
+    references in phase0; `perl -c` OK; the edited subtests all PASS in a live run (e.g.
+    `http_file_access_logic_moves_into_domain_owner` ran `1..19` green). Landed with `.3`.
+  Commit: `LEGACY-VHDL-RETIRE.2` (see Commit Log)
 
 - ID: `LEGACY-VHDL-RETIRE.3`
-  Status: `blocked`
+  Status: `done`
   Goal: Remove the three core modules and the dangling comment references.
   Acceptance: `perl/RTLUtils.pm`, `perl/FSMGen.pm`, `perl/VHDL/ConstantEval.pm` deleted; the
     stale comments at `perl/LinkedSpec.pm:246` and `tools/gen_oracle_corpus.pl:31` removed/updated.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-06-18. 3 modules removed via `git rm` (the now-empty `perl/VHDL/` is
+    gone); the `LinkedSpec.pm:246` + `gen_oracle_corpus.pl:31` comments updated (no functional
+    reference remains — only a deliberate historical comment); `perl -c perl/LinkedSpec.pm` OK;
+    `perl -c t/phase0_regression.t` OK. Landed with `.2`.
+  Commit: `LEGACY-VHDL-RETIRE.2` (landed with `.2`; see Commit Log)
 
 - ID: `LEGACY-VHDL-RETIRE.4`
   Status: `blocked`
-  Goal: Confirm the gate is unblocked — `t/phase0_regression.t` runs to completion (no hang),
-    full local gate green.
-  Acceptance: `perl -c perl/LinkedSpec.pm`; `prove -Iperl t/phase0_regression.t` completes within
-    normal time; `bash tools/run_ci_local.sh` green.
-  Verification: `pending`
+  Goal: Confirm the RTLUtils hang is cleared. (Originally "full phase0 green" — **REVISED**: the
+    retirement clears the RTLUtils hang but does NOT make phase0 green; see Back-Half Discovery.)
+  Acceptance: RTLUtils hang gone — **PROVEN 2026-06-18**: pristine HEAD `t/phase0_regression.t`
+    hangs at subtest 110 (`rtlutils_header_context_clause_package_owner_preserves_payload`); the
+    post-retirement suite runs **past** it to subtest 130+. "Full local gate green" is NOT
+    achievable here — blocked by a SEPARATE pre-existing back-half hang
+    (`HTML::PathLinks::link_path_tokens`, subtest 131) + back-half failures, which need their own
+    fix track (surfaced to the user).
+  Verification: RTLUtils hang cleared (pristine-worktree comparison). Full-suite green deferred to a
+    back-half fix track.
   Commit: `pending`
 
 - ID: `LEGACY-VHDL-RETIRE.5`
@@ -105,11 +116,11 @@ better than patching a regex in a module that is being deleted anyway.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `LEGACY-VHDL-RETIRE.1` | `done` | Read-only inventory complete (2026-06-18). |
-| 🚧 | **REMOVAL-SCOPE CONFIRMATION PENDING (user)** | `blocked` | `.2`–`.5` are deletions. Per [[feedback_keep-only-portable-cross-variant]] + `MEMORY.md`, removal scope must be confirmed by the user before any file is deleted. Recommended scope = the full self-contained closure (3 modules + 6 dependent `.plg` + their phase0 smoke blocks ≈ 6,701 lines). |
-| 1 | `LEGACY-VHDL-RETIRE.2` | `blocked` | Remove dependent `.plg` + their smoke tests. Unblock = user confirms scope. |
-| 2 | `LEGACY-VHDL-RETIRE.3` | `blocked` | Remove the 3 core modules. Must follow `.2` (no dangling callers). |
-| 3 | `LEGACY-VHDL-RETIRE.4` | `blocked` | Verify the phase0 hang is gone + full gate green. |
-| 4 | `LEGACY-VHDL-RETIRE.5` | `blocked` | Doc/book/KM sync + flip `SPEC-FORMAT-TERSE` blocker. |
+| — | `LEGACY-VHDL-RETIRE.2` | `done` | User confirmed scope (AskUserQuestion: "Full subsystem closure", 2026-06-18). 6 `.plg` + phase0 smoke removed. |
+| — | `LEGACY-VHDL-RETIRE.3` | `done` | 3 modules + dangling comments removed (landed with `.2`). RTLUtils hang cleared (proven). |
+| 🚧 | **BACK-HALF DECISION PENDING (user)** | `blocked` | The retirement cleared the RTLUtils hang but UNMASKED a second pre-existing hang (`HTML::PathLinks::link_path_tokens`, subtest 131) + back-half failures — so phase0 is still not green and the `SPEC-FORMAT-TERSE` gate stays blocked. Needs a user decision on a back-half fix track (own a new tree? scope?). |
+| — | `LEGACY-VHDL-RETIRE.4` | `blocked` | RTLUtils hang cleared (proven). "Full gate green" blocked by the back-half hang(s) — see Back-Half Discovery. |
+| — | `LEGACY-VHDL-RETIRE.5` | `blocked` | Doc/book/KM sync. Cannot flip `SPEC-FORMAT-TERSE` blocker to "cleared" — phase0 still blocked by the back-half. Also fix the `generic_fake_memory_module.plg`/`wrapgen.plg` doc drift. |
 
 ## Inventory (LEGACY-VHDL-RETIRE.1 deliverable — verified 2026-06-18)
 
@@ -123,17 +134,35 @@ better than patching a regex in a module that is being deleted anyway.
 
 Internal coupling: `FSMGen` `use RTLUtils` (≈30 RTLUtils calls); `VHDL::ConstantEval` `require RTLUtils`.
 
-### `RTLUTILS-REGEX-HANG` (the gate blocker)
+### `RTLUTILS-REGEX-HANG` (corrected 2026-06-18 via pristine-HEAD worktree run)
 
-- Catastrophic-backtracking regex: `perl/RTLUtils.pm:746`
-  - `/(\w+)(?=(?:\[.*?\])?\s*<=((?s).+?);)/go` — variable-width lookahead with dotall non-greedy
-    `(?s).+?` → exponential backtracking on inputs lacking a matching `<= … ;`.
-- Reached via `RTLUtils::drive_entity_component(...)` → `_drive_instances(...)`.
-- Phase0 exercises `RTLUtils` in subprocess smoke blocks, incl. `drive_entity_component` at
-  `t/phase0_regression.t:3540`. (Exact phase0 hang trigger not re-run here — the suite hangs;
-  full subsystem removal eliminates the regex regardless of which call path triggers it.)
-- Prior attribution named `add_header_n_context_clause`; the actual offending pattern is at
-  line 746 (`_drive_instances`). Recorded for accuracy.
+- The hang is in **`RTLUtils::add_header_n_context_clause`**, not `_drive_instances`/line 746.
+  Proven by running the pristine HEAD suite in a detached worktree: it completes subtest 109
+  `rtlutils_drive_entity_component_uses_header_package_owner` (ok) and **hangs at subtest 110
+  `rtlutils_header_context_clause_package_owner_preserves_payload`**.
+- Root cause: that smoke test passes a **recursive** `add_package_re`
+  (`([[:alpha:]]\w+)(?:\.((?1)))?$`), applied at **`perl/RTLUtils.pm:104`**
+  (`map { m/$add_package_re/o } …`) — the `(?1)` recursion + `$` anchor backtracks catastrophically.
+- **The `.1` "correction" to line 746 / `drive_entity_component` was WRONG**; the original MEMORY/ADR
+  attribution (`add_header_n_context_clause`) was right. Recorded honestly. (Moot for the fix — the
+  whole module is deleted — but recorded for accuracy.)
+
+### Back-Half Discovery (2026-06-18 — a SECOND, pre-existing hang unmasked by the retirement)
+
+Removing the RTLUtils hang (subtest 110) revealed that the **entire back half of phase0 (subtests
+111+) had never executed** while the hang stood. That back half has its own pre-existing problems,
+**unrelated to this subsystem**:
+
+- **`HTML::PathLinks::link_path_tokens(...)` HANGS** (subtest 131
+  `html_path_link_owner_avoids_pplugin_and_preserves_link_wrapping_contract`) — a separate
+  catastrophic regex. `require HTML::PathLinks` / `require HTTP::FileAccess` load fine + fast; the
+  **call** to `link_path_tokens` hangs (subprocess alarm-killed → that subtest fails 3/7).
+  HTML::PathLinks depends only on **kept** modules (Global, HTTP::FileAccess,
+  Text::VariableSubstitution) — so this is **not** caused by the retirement (proven: pristine HEAD
+  never reaches subtest 111+).
+- Consequence: **the retirement clears the RTLUtils hang but does NOT make phase0 green / usable.**
+  The `SPEC-FORMAT-TERSE` gate stays blocked — now by the back-half hang(s)+failures, not RTLUtils.
+  This needs its own fix track (Open Question → user decision).
 
 ### Every reference (verified `git grep`, 2026-06-18)
 
@@ -179,30 +208,49 @@ Internal coupling: `FSMGen` `use RTLUtils` (≈30 RTLUtils calls); `VHDL::Consta
 
 ## Open Questions
 
-- **Removal scope (user, blocks `.2`+):** confirm the full self-contained closure (recommended)
-  vs. a broader sweep of the rest of the RTL/VHDL-flavored legacy `.plg` corpus vs. a narrower cut.
+- ~~Removal scope~~ **RESOLVED (user, 2026-06-18, AskUserQuestion):** "Full subsystem closure" —
+  the 3 modules + 6 dependent `.plg` + their phase0 smoke blocks. Done in `.2`+`.3`.
+- **Back-half fix track (user, blocks a green phase0 / the `SPEC-FORMAT-TERSE` gate):** clearing the
+  RTLUtils hang unmasked a SECOND pre-existing hang (`HTML::PathLinks::link_path_tokens`, subtest
+  131) + back-half failures (everything after subtest 110 was previously dark). How to proceed —
+  own a new tree to investigate/fix the whole back half (likely several hangs/failures)? scope it?
+  defer? This is the immediate decision surfaced to the user.
 
 ## Blockers
 
-- `.2`–`.5` are `blocked`. Blocker: **removal scope not yet confirmed by the user**; deletions are
-  destructive and the doctrine + `MEMORY.md` require confirming scope first. Unblock condition:
-  user confirms the removal scope. Next task if not unblocked: none in this tree — return to the
-  `SPEC-FORMAT-TERSE` design conversation / other active trees.
+- `.1`/`.2`/`.3` are `done`. The **RTLUtils hang is cleared** (proven). `.4` (full gate green) and
+  `.5` (flip the `SPEC-FORMAT-TERSE` blocker to "cleared") are `blocked` by a **NEW, pre-existing,
+  unrelated blocker**: the back-half hang(s)+failures (`HTML::PathLinks::link_path_tokens` and
+  possibly more) that the retirement unmasked. Unblock condition: a back-half fix track lands a
+  green (or at least non-hanging) `t/phase0_regression.t`. Next task: surface the back-half decision
+  to the user; the `.5` doc-drift fixes (`generic_fake_memory_module.plg`/`wrapgen.plg`) can proceed
+  independently.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-06-18` | `LEGACY-VHDL-RETIRE.1` | `git grep` reference sweep (modules + public symbols) across `perl/ plugin/ t/ tools/ bin/ specs/`; `wc -l` line counts; `RTLUtils.pm:746` regex inspection; existence check of doc-named `.plg` files; `scripts/check_memory_architecture.sh`; KM gate | Done — zero core functional dependency confirmed; 6 dependent `.plg` + ≈206 phase0 smoke lines catalogued; ≈6,701-line footprint; regex at line 746 confirmed; `generic_fake_memory_module.plg`/`wrapgen.plg` confirmed nonexistent (doc drift). Self-check + KM gate pass. |
+| `2026-06-18` | `LEGACY-VHDL-RETIRE.1` | `git grep` reference sweep (modules + public symbols); `wc -l` counts; existence check of doc-named `.plg`; `scripts/check_memory_architecture.sh`; KM gate | Done — zero core functional dependency; 6 dependent `.plg` + ≈206 phase0 smoke lines; ≈6,701-line footprint; `generic_fake_memory_module.plg`/`wrapgen.plg` confirmed nonexistent (doc drift). NOTE: `.1`'s "regex at line 746" claim was later **corrected** in `.2`/`.3` (the hang is in `add_header_n_context_clause`, RTLUtils.pm:104). Self-check + KM gate pass. |
+| `2026-06-18` | `LEGACY-VHDL-RETIRE.2`+`.3` | `git rm` 6 `.plg` + 3 modules; surgical phase0 edits; `git grep`=0 refs; `perl -c` core + phase0 OK; **pristine-HEAD worktree run** (proves original hangs at subtest 110; post-retirement runs past to 130+); direct `link_path_tokens` timing | Done — RTLUtils hang cleared. **Discovered** a second pre-existing back-half hang (`HTML::PathLinks::link_path_tokens`, subtest 131) + back-half failures — unrelated to the retirement (proven). Hang attribution corrected. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `LEGACY-VHDL-RETIRE.1` | `LEGACY-VHDL-RETIRE.1 — own retirement tree + read-only inventory of the Perl-only legacy VHDL/RTL/FSM subsystem` | Tree created `active`; KM card [[rtlutils-regex-hang]]; no engine/spec/test code changed; removal scope surfaced to user. |
+| `LEGACY-VHDL-RETIRE.2`+`.3` | `LEGACY-VHDL-RETIRE.2+.3 — retire the Perl-only legacy VHDL/RTL/FSM subsystem (3 modules + 6 .plg + phase0 smoke)` | User-confirmed "Full subsystem closure". RTLUtils hang cleared; back-half pre-existing hang/failures discovered + surfaced. |
 
 ## Changelog
 
+- `2026-06-18` (`.2`+`.3` landed): User confirmed "Full subsystem closure" (AskUserQuestion).
+  Retired the subsystem — `git rm` 3 modules (`RTLUtils.pm`/`FSMGen.pm`/`VHDL/ConstantEval.pm`) + 6
+  dependent `.plg`; surgically cleaned the phase0 migration-smoke (8 whole-subtest deletes + 7 mixed
+  subtests cleaned). **Proved via a pristine-HEAD worktree** that the original hang is at subtest
+  110 (`add_header_n_context_clause`, recursive `add_package_re` at `RTLUtils.pm:104`) — **correcting
+  `.1`'s wrong "line 746/`drive_entity_component`" claim**. **Discovered** a SECOND pre-existing,
+  unrelated hang unmasked by removing the first: `HTML::PathLinks::link_path_tokens` (subtest 131) +
+  back-half failures (the back half had been dark behind the RTLUtils hang). RTLUtils hang cleared;
+  phase0 still not green → `.4`/`.5` reblocked on a back-half fix track; surfaced to the user.
 - `2026-06-18`: Created tree; completed read-only feasibility/inventory leaf `.1`; removal leaves
   `.2`–`.5` blocked pending user removal-scope confirmation. Supersedes the earlier "fix
   `RTLUTILS-REGEX-HANG`" direction (now: retire the subsystem, which also clears the hang).

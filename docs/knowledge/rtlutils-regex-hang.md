@@ -13,8 +13,8 @@ answers:
 date: 2026-06-18
 status: accepted
 tags: [legacy-retirement, phase0, regex-hang, vhdl, portability, spec-format-terse]
-evidence: "git grep reference sweep + module inspection 2026-06-18 (LEGACY-VHDL-RETIRE.1). Catastrophic regex located; zero core functional dependency confirmed; dependent set catalogued."
-reverify: "sed -n '746p' perl/RTLUtils.pm; git grep -lE 'RTLUtils|FSMGen|VHDL::ConstantEval' -- 'perl/LinkedSpec.pm' 'perl/LinkedSpec/'   # core ref = LinkedSpec.pm comment only (line 246); 0 functional"
+evidence: "git grep sweep + module inspection + pristine-HEAD worktree run 2026-06-18 (LEGACY-VHDL-RETIRE.1/.2/.3). Hang confirmed at the add_header smoke (subtest 110); subsystem retired; a second pre-existing back-half hang (HTML::PathLinks::link_path_tokens, subtest 131) found."
+reverify: "! test -e perl/RTLUtils.pm && ! test -e perl/FSMGen.pm && echo 'subsystem retired (LEGACY-VHDL-RETIRE)'   # back-half hang persists: HTML::PathLinks::link_path_tokens (subtest 131) until its own fix track"
 ---
 
 # `RTLUTILS-REGEX-HANG` and the legacy VHDL/RTL/FSM subsystem
@@ -23,16 +23,34 @@ reverify: "sed -n '746p' perl/RTLUtils.pm; git grep -lE 'RTLUtils|FSMGen|VHDL::C
 **Perl-only legacy VHDL/RTL/FSM-generation subsystem**, not anywhere in the active `.spec`
 engine.
 
-## The hang
+## The hang (corrected 2026-06-18 via a pristine-HEAD worktree run)
 
-- Offending regex: **`perl/RTLUtils.pm:746`** —
-  `/(\w+)(?=(?:\[.*?\])?\s*<=((?s).+?);)/go`. The variable-width lookahead wrapping a dotall
-  non-greedy `(?s).+?` backtracks exponentially on input lacking a matching `<= … ;`.
-- Reached via `RTLUtils::drive_entity_component(...)` → `_drive_instances(...)`. Phase0 exercises
-  `RTLUtils` in subprocess migration-smoke blocks (e.g. `drive_entity_component` at
-  `t/phase0_regression.t:3540`).
-- (Earlier notes attributed it to `add_header_n_context_clause`; the actual pattern is at line 746
-  in `_drive_instances`.)
+- The hang is in **`RTLUtils::add_header_n_context_clause`** — confirmed by running the pristine
+  HEAD `t/phase0_regression.t` in a detached worktree with a timeout: subtest 109
+  `rtlutils_drive_entity_component_uses_header_package_owner` completes (ok), and it **hangs at
+  subtest 110 `rtlutils_header_context_clause_package_owner_preserves_payload`**.
+- Root cause: that smoke test passes a **recursive** `add_package_re`
+  (`([[:alpha:]]\w+)(?:\.((?1)))?$`), which `add_header_n_context_clause` applies at
+  **`perl/RTLUtils.pm:104`** (`map { m/$add_package_re/o } …`); the `(?1)` recursion + `$` anchor
+  backtracks catastrophically.
+- **The original attribution (`add_header_n_context_clause`) was correct.** A `LEGACY-VHDL-RETIRE.1`
+  note that "corrected" it to `RTLUtils.pm:746` / `drive_entity_component` was itself **wrong** —
+  subtest 109 (`drive_entity_component`) completes; line 746's regex does not hang on the test input.
+
+## A SECOND, pre-existing back-half hang (unmasked by removing the first)
+
+Removing the RTLUtils hang (subtest 110) revealed that the **entire back half of phase0 (subtests
+111+) had never executed** while the hang stood — and it has its own pre-existing problems,
+unrelated to this subsystem:
+
+- **`HTML::PathLinks::link_path_tokens(...)` hangs** (subtest 131
+  `html_path_link_owner_avoids_pplugin_and_preserves_link_wrapping_contract`) — a separate
+  catastrophic regex. `require HTML::PathLinks` / `require HTTP::FileAccess` load fine and fast; the
+  **call** to `link_path_tokens` hangs (the subprocess is alarm-killed → that subtest fails 3/7).
+  HTML::PathLinks depends only on **kept** modules (Global, HTTP::FileAccess,
+  Text::VariableSubstitution), so this is **not** caused by the VHDL retirement.
+- So clearing the RTLUtils hang is **necessary but not sufficient** for a green phase0; the back
+  half needs its own fix track.
 
 ## The subsystem (Perl-only, no Rust/Julia/Dart counterpart)
 

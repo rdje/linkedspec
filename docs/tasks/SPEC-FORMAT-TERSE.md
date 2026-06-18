@@ -317,19 +317,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 - `.0` (ratify + ADR) is **done** (design-only — not gated). Migration policy is **resolved**
   (gradual-alias, ADR 0007). The remaining gate on the **implementation leaves (`.1.x`+)** is a usable
-  `t/phase0_regression.t`, currently hung by the RTLUtils catastrophic regex.
-- **UNBLOCK DIRECTION shifted fix → RETIRE (user, 2026-06-18); retirement tree now OWNED.** The
-  retirement is owned by [`LEGACY-VHDL-RETIRE`](LEGACY-VHDL-RETIRE.md). Its read-only
-  feasibility/inventory leaf (`.1`) is **done** (2026-06-18) and confirmed: RTLUtils + FSMGen +
-  `VHDL::ConstantEval` are a **self-contained Perl-only legacy VHDL/RTL/FSM-generation subsystem** with
-  **zero functional dependency** from the `.spec` parser/compiler/runtime core (the lone `LinkedSpec.pm`
-  / `gen_oracle_corpus.pl` references are **comments**), no shipped-`.spec` dependency, no Rust/Julia/Dart
-  counterpart. Catastrophic regex confirmed at `perl/RTLUtils.pm:746`. Removal footprint ≈ **6,701 Perl
-  lines** (3 modules 4,516 + 6 dependent `.plg` 1,979 + ≈206 phase0 smoke lines). Per
-  [[feedback_keep-only-portable-cross-variant]] the direction is **retire** (which also clears the
-  hang), not fix the regex. `LEGACY-VHDL-RETIRE.2`–`.5` (the deletions) are **blocked pending user
-  removal-scope confirmation**; once removed + the gate confirmed green, this `SPEC-FORMAT-TERSE` gate
-  clears and `.1.1` becomes pickable. See KM card [[rtlutils-regex-hang]].
+  `t/phase0_regression.t`.
+- **RETIREMENT DONE, BUT GATE NOT YET CLEARED (2026-06-18).** The [`LEGACY-VHDL-RETIRE`](LEGACY-VHDL-RETIRE.md)
+  tree retired the self-contained Perl-only legacy VHDL/RTL/FSM subsystem (3 modules + 6 dependent
+  `.plg` + phase0 smoke ≈ 6,701 lines; user-confirmed "full closure"). That **cleared the RTLUtils
+  hang** — proven: the pristine HEAD suite hangs at subtest 110 (`add_header_n_context_clause`,
+  recursive `add_package_re` at `RTLUtils.pm:104`); the post-retirement suite runs **past** it to
+  subtest 130+. (The earlier `RTLUtils.pm:746` attribution was corrected.) **HOWEVER** removing that
+  hang **unmasked a SECOND, pre-existing, unrelated hang** — `HTML::PathLinks::link_path_tokens`
+  (subtest 131) — plus other back-half failures (everything after subtest 110 had been dark). So
+  `t/phase0_regression.t` is **still not green/usable**, and this `SPEC-FORMAT-TERSE` gate **remains
+  blocked** — now by the back-half, not RTLUtils. Unblock = a back-half fix track lands a
+  non-hanging/green phase0 (decision surfaced to the user). See KM card [[rtlutils-regex-hang]] and
+  `LEGACY-VHDL-RETIRE` Open Questions.
 
 ## Verification Log
 

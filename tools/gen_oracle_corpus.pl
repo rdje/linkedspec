@@ -27,8 +27,8 @@
 #
 # Safety
 #   Every oracle parse runs under a hard `alarm(...)` timeout (default 15s,
-#   override with ORACLE_TIMEOUT) so a pathological grammar — e.g. the known
-#   RTLUtils catastrophic-backtrack hang — cannot wedge corpus generation.
+#   override with ORACLE_TIMEOUT) so a pathological grammar with catastrophic
+#   regex backtracking cannot wedge corpus generation.
 #
 # Usage
 #   perl tools/gen_oracle_corpus.pl            # regenerate all cases

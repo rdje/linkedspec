@@ -3479,230 +3479,15 @@ PERL
     like($out, qr/__MAPTABLE__=default_map/, 'TableSort GenericFilter forwards the selected maptable into Table::GenericFilter');
     like($out, qr/__LEAF__=filtered_payload/, 'TableSort GenericFilter preserves the package-owner callback payload');
 };
-subtest 'rtlutils_add_header_paths_use_package_owner' => sub {
-    plan tests => 12;
-
-    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
-    my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
-    my $fsmgen_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'FSMGen.pm'));
-    my $fsmgen_plugin = slurp(File::Spec->catfile($plugin_dir, 'fsmgen.plg'));
-
-    like($rtlutils_pm, qr/sub add_header_n_context_clause\b/, 'RTLUtils owns the VHDL header/context-clause helper');
-    is(scalar(() = $rtlutils_pm =~ /RTLUtils::add_header_n_context_clause\(/g), 2, 'RTLUtils header-generation paths call the package-owned header/context helper directly');
-    unlike($rtlutils_pm, qr/LinkedSpec::run_plugin\('add_header_n_context_clause'/, 'RTLUtils no longer routes add_header_n_context_clause through LinkedSpec plugin dispatch');
-    unlike($rtlutils_pm, qr/PPlugin->exec_plugin_name\('add_header_n_context_clause'/, 'RTLUtils no longer routes add_header_n_context_clause through PPlugin explicit-name dispatch');
-    is(scalar(() = $fsmgen_pm =~ /RTLUtils::add_header_n_context_clause\s*\(/g), 4, 'FSMGen package code calls the RTLUtils header/context helper directly');
-    unlike($fsmgen_pm, qr/(?<!::)\badd_header_n_context_clause\s*\(/, 'FSMGen package code no longer relies on AUTOLOAD for add_header_n_context_clause');
-    unlike($fsmgen_plugin, qr/\badd_header_n_context_clause\s*\{/, 'fsmgen.plg no longer exposes add_header_n_context_clause as a legacy plugin subdef');
-
-    my $parser = LinkedSpec::get_parser('pplugin');
-    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for RTLUtils add_header migration smoke');
-    my $fsmgen_ast = eval { $parser->(\$fsmgen_plugin) };
-    ok(!$@, 'fsmgen.plg still parses without die after add_header compatibility wrapper removal') or diag(normalize_error($@));
-    ok(defined($fsmgen_ast) && ref($fsmgen_ast) eq 'HASH', 'fsmgen.plg still returns a hash AST after add_header compatibility wrapper removal');
-    ok(!exists $fsmgen_ast->{add_header_n_context_clause}, 'fsmgen.plg no longer exposes add_header_n_context_clause as a coderef');
-
-    my @legacy_add_header_hits;
-    foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
-        my $source = slurp($plugin_file);
-        push @legacy_add_header_hits, basename($plugin_file)
-            if $source =~ /(?<!::)\badd_header_n_context_clause\s*\(/;
-    }
-    is_deeply(\@legacy_add_header_hits, [], 'repo-owned plugin files no longer depend on the legacy add_header_n_context_clause action wrapper');
-};
-subtest 'rtlutils_drive_entity_component_uses_header_package_owner' => sub {
-    plan tests => 7;
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require RTLUtils;
-no warnings 'redefine';
-local *HUtils::Recurse = sub {
-    my ($data, $cb) = @_;
-    return $cb->(['default'], [['clk', 'IN', 'STD_LOGIC']]);
-};
-local *LinkedSpec::run_plugin = sub { die "__UNEXPECTED_LINKEDSPEC_RUN_PLUGIN__\n" };
-local *RTLUtils::add_header_n_context_clause = sub {
-    my ($conf, @opt_pairs) = @_;
-    my %opt = @opt_pairs;
-    print "__PACKAGE_OWNER__=RTLUtils::add_header_n_context_clause\n";
-    print "__COMPONENT__=" . (defined($opt{component}) ? $opt{component} : '<undef>') . "\n";
-    return "-- HEADER --\n";
-};
-my $modules = {
-    Top => {
-        port => {
-            list => {
-                default => [['clk', 'IN', 'STD_LOGIC']],
-            },
-        },
-    },
-};
-RTLUtils::drive_entity_component({}, $modules, 'Top');
-print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-print "__DONE__\n";
-PERL
-
-    is($exit_code, 0, 'RTLUtils drive_entity_component subprocess exits cleanly') or diag($err || $out);
-    unlike($err, qr/__UNEXPECTED_(?:PPLUGIN|LINKEDSPEC)/, 'RTLUtils drive_entity_component avoids the legacy plugin dispatch paths');
-    like($out, qr/__PACKAGE_OWNER__=RTLUtils::add_header_n_context_clause/, 'RTLUtils drive_entity_component dispatches add_header_n_context_clause through the package owner');
-    like($out, qr/__COMPONENT__=<undef>/, 'RTLUtils drive_entity_component preserves the existing non-component option shape when calling the package owner');
-    like($out, qr/-- HEADER --/, 'RTLUtils drive_entity_component prints the package-owner header payload');
-    like($out, qr/ENTITY\s+Top\s+IS/, 'RTLUtils drive_entity_component preserves the surrounding entity output after the package-owner header');
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'RTLUtils drive_entity_component package-owner path keeps PPlugin unloaded');
-};
-subtest 'rtlutils_header_context_clause_package_owner_preserves_payload' => sub {
-    plan tests => 7;
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require RTLUtils;
-my $conf = {
-    context_clause        => "-- CONTEXT --\n",
-    corporate_file_header => \ "Header <file_name> <file_type> <author_signame> <author_name> <description> <revision> <language>\n",
-    user_defined_clause   => 1,
-    add_package_re        => '([[:alpha:]]\w+)(?:\.((?1)))?$',
-    add_package_list      => ['work.pkg,local.extra'],
-};
-my $text = RTLUtils::add_header_n_context_clause(
-    $conf,
-    file_name       => 'unit.vhd',
-    author_signame  => 'RDJE',
-    author_name     => 'Richard',
-    description     => 'Description',
-    last_minute_pkg => ['ieee.std_logic_1164'],
-);
-print "__TEXT_START__\n", $text, "__TEXT_END__\n";
-print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-PERL
-
-    is($exit_code, 0, 'RTLUtils add_header_n_context_clause subprocess exits cleanly') or diag($err || $out);
-    unlike($err, qr/PPlugin|Can't locate RTLUtils\.pm/, 'RTLUtils add_header_n_context_clause stays clear of legacy plugin runtime issues');
-    like($out, qr/Header unit\.vhd VHDL RDJE Richard Description Initial Version VHDL'93/, 'RTLUtils add_header_n_context_clause preserves corporate-header substitution');
-    like($out, qr/-- CONTEXT --/, 'RTLUtils add_header_n_context_clause preserves explicit context clause text');
-    like($out, qr/LIBRARY work;\nUSE\s+work\.pkg\.ALL;/, 'RTLUtils add_header_n_context_clause preserves configured user package clauses');
-    like($out, qr/LIBRARY ieee;\nUSE\s+ieee\.std_logic_1164\.ALL;/, 'RTLUtils add_header_n_context_clause preserves last-minute package clauses');
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'RTLUtils add_header_n_context_clause keeps PPlugin unloaded');
-};
-subtest 'fsmgen_autoload_uses_linkedspec_dispatch_plugin_autoload_name' => sub {
-    plan tests => 5;
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-BEGIN {
-    package Table2SS;
-    1;
-    $INC{'Table2SS.pm'} = 1;
-}
-require PPlugin;
-require FSMGen;
-no warnings 'redefine';
-local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
-local *LinkedSpec::dispatch_plugin_autoload_name = sub {
-    my ($autoload_name, @args) = @_;
-    print "__AUTOLOAD_NAME__=$autoload_name\n";
-    print "__ARGS__=" . join(',', @args) . "\n";
-    return 'plugin_ok';
-};
-my $ret = FSMGen::synthetic_plugin('alpha', 'beta');
-print "__RET__=$ret\n";
-PERL
-
-    is($exit_code, 0, 'FSMGen AUTOLOAD subprocess exits cleanly') or diag($err || $out);
-    unlike($err, qr/__UNEXPECTED_PPLUGIN_EXEC__/, 'FSMGen AUTOLOAD avoids the legacy PPlugin mixed-name exec wrapper');
-    like($out, qr/__AUTOLOAD_NAME__=FSMGen::synthetic_plugin/, 'FSMGen AUTOLOAD now forwards its fully-qualified autoload name into LinkedSpec dispatch_plugin_autoload_name');
-    like($out, qr/__ARGS__=alpha,beta/, 'FSMGen AUTOLOAD preserves plugin arguments through LinkedSpec dispatch_plugin_autoload_name');
-    like($out, qr/__RET__=plugin_ok/, 'FSMGen AUTOLOAD preserves the LinkedSpec dispatch_plugin_autoload_name return payload');
-};
-subtest 'fsmgen_dynamic_plugin_list_moves_to_fsmgen_package_owner' => sub {
-    plan tests => 23;
-
-    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
-    my $fsmgen_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'FSMGen.pm'));
-    my $fsmgen_plugin = slurp(File::Spec->catfile($plugin_dir, 'fsmgen.plg'));
-
-    ok(defined($fsmgen_pm) && length($fsmgen_pm), 'FSMGen package source is available for dynamic plugin-list migration inspection');
-    ok(defined($fsmgen_plugin) && length($fsmgen_plugin), 'fsmgen.plg source is available for dynamic plugin-list migration inspection');
-    like($fsmgen_pm, qr/sub getop_plugin_list\b/, 'FSMGen package owns the dynamic plugin-list parser');
-    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ sub \{\}/, 'FSMGen package defaults dynamic plugin-list lookup to a no-op (caller must opt in)');
-    like($fsmgen_pm, qr/\$get_plugin->\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'FSMGen package preserves the unresolved plugin no-op fallback');
-    unlike($fsmgen_plugin, qr/\bgetop_plugin_list\s*\{/, 'fsmgen.plg no longer exposes getop_plugin_list as a legacy plugin subdef');
-    unlike($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\)/, 'fsmgen.plg no longer resolves dynamic plugin-list entries directly');
-
-    my $parser = LinkedSpec::get_parser('pplugin');
-    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for FSMGen plugin-list migration smoke');
-    my $fsmgen_ast = eval { $parser->(\$fsmgen_plugin) };
-    ok(!$@, 'fsmgen plugin still parses without die after dynamic plugin-list migration') or diag(normalize_error($@));
-    ok(defined($fsmgen_ast) && ref($fsmgen_ast) eq 'HASH', 'fsmgen plugin still returns a hash AST after dynamic plugin-list migration');
-    ok(!exists $fsmgen_ast->{getop_plugin_list}, 'fsmgen plugin no longer exposes getop_plugin_list as a coderef');
-
-    my @legacy_getop_plugin_list_hits;
-    foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
-        my $source = slurp($plugin_file);
-        push @legacy_getop_plugin_list_hits, basename($plugin_file)
-            if $source =~ /(?<!::)\bgetop_plugin_list\s*\(/;
-    }
-    is_deeply(\@legacy_getop_plugin_list_hits, [], 'repo-owned plugin files no longer depend on the legacy getop_plugin_list action wrapper');
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-BEGIN {
-    $INC{"Table2SS.pm"} = __FILE__;
-    package Table2SS;
-}
-require FSMGen;
-print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-my @lookups;
-my %handlers = (
-    plugin_a => sub { return join(':', 'plugin_a', @_) },
-    plugin_b => sub { return join(':', 'plugin_b', @_) },
-);
-my $plugins = FSMGen::getop_plugin_list(
-    [
-        '+top=plugin_a#ARG1#ARG2',
-        '+top=missing_plugin#IGNORED',
-        '+signal=plugin_b',
-        'plain_entry',
-        [ 'ignored_ref' ],
-    ],
-    get_plugin => sub {
-        push @lookups, $_[0];
-        return $handlers{$_[0]};
-    },
-);
-print "__KEYS__=", join(',', sort keys %$plugins), "\n";
-print "__TOP_COUNT__=", scalar(@{$plugins->{top}}), "\n";
-print "__SIGNAL_COUNT__=", scalar(@{$plugins->{signal}}), "\n";
-print "__LOOKUPS__=", join(',', @lookups), "\n";
-print "__ARGS__=", join(',', @{$plugins->{top}[0]{args}}), "\n";
-print "__KNOWN_RET__=", $plugins->{top}[0]{plugin}->('CALL'), "\n";
-my $missing_ret = $plugins->{top}[1]{plugin}->('CALL');
-print "__MISSING_RET__=", defined($missing_ret) ? $missing_ret : 'undef', "\n";
-my $none = FSMGen::getop_plugin_list(['plain_entry'], get_plugin => sub { die "unexpected lookup" });
-print "__NONE__=", defined($none) ? 'defined' : 'undef', "\n";
-PERL
-
-    is($exit_code, 0, 'FSMGen dynamic plugin-list subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring FSMGen for plugin-list parsing keeps PPlugin unloaded');
-    like($out, qr/__KEYS__=signal,top/, 'FSMGen dynamic plugin-list parser preserves plugin type buckets');
-    like($out, qr/__TOP_COUNT__=2/, 'FSMGen dynamic plugin-list parser preserves multiple callbacks for one type');
-    like($out, qr/__SIGNAL_COUNT__=1/, 'FSMGen dynamic plugin-list parser preserves single callback buckets');
-    like($out, qr/__LOOKUPS__=plugin_a,missing_plugin,plugin_b/, 'FSMGen dynamic plugin-list parser resolves plugin names in entry order');
-    like($out, qr/__ARGS__=ARG1,ARG2/, 'FSMGen dynamic plugin-list parser preserves plugin arguments');
-    like($out, qr/__KNOWN_RET__=plugin_a:CALL/, 'FSMGen dynamic plugin-list parser preserves resolved plugin coderef behavior');
-    like($out, qr/__MISSING_RET__=undef/, 'FSMGen dynamic plugin-list parser preserves unresolved plugin no-op fallback');
-    like($out, qr/__NONE__=undef/, 'FSMGen dynamic plugin-list parser returns undef when no plugin entries are present');
-    unlike($err, qr/PPlugin|Can't locate FSMGen\.pm|Can't locate Table2SS\.pm/, 'FSMGen dynamic plugin-list subprocess stays clear of legacy plugin runtime and unstubbed dependency errors');
-};
 subtest 'repo_owned_parser_lookup_callers_avoid_legacy_get_parser_plugin' => sub {
-    plan tests => 6;
+    plan tests => 4;
 
     my $lispish_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Lispish.pm'));
-    my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
-    my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
     my $spec_plugin_path = File::Spec->catfile($Bin, '..', 'plugin', 'spec.plg');
 
     ok(defined($lispish_pm) && length($lispish_pm), 'Lispish.pm source is available for parser-lookup compatibility inspection');
     unlike($lispish_pm, qr/PPlugin->_get_parser\('Lispish'\)/, 'Lispish.pm no longer routes parser lookup through the legacy _get_parser plugin');
     like($lispish_pm, qr/LinkedSpec::get_parser\('Lispish'\)/, 'Lispish.pm now uses LinkedSpec::get_parser(...) directly');
-    unlike($fsmgen_plugin . $regtest_plugin, qr/\b_get_parser\s*\(/, 'repo-owned plugin files no longer use the legacy _get_parser helper plugin');
-    like($fsmgen_plugin, qr/LinkedSpec::get_parser\('portmap'\)/, 'fsmgen plugin now uses LinkedSpec::get_parser(...) directly');
     ok(!-e $spec_plugin_path, 'legacy spec.plg _get_parser compatibility shim is removed after repo-owned callers moved to LinkedSpec::get_parser(...)');
 };
 subtest 'lispish_single_uses_linkedspec_parser_lookup_without_pplugin' => sub {
@@ -3727,72 +3512,41 @@ PERL
     unlike($err, qr/PPlugin|_get_parser/, 'Lispish single subprocess does not emit legacy plugin-lookup stderr');
 };
 subtest 'repo_owned_perl_modules_no_longer_advertise_legacy_pplugin_inheritance' => sub {
-    plan tests => 8;
+    plan tests => 4;
 
-    my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
     my $lispml_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LispML.pm'));
 
-    ok(defined($rtlutils_pm) && length($rtlutils_pm), 'RTLUtils.pm source is available for inheritance inspection');
     ok(defined($lispml_pm) && length($lispml_pm), 'LispML.pm source is available for inheritance inspection');
-    unlike($rtlutils_pm, qr/\bour \@ISA = 'PPlugin';/, 'RTLUtils.pm no longer advertises legacy PPlugin inheritance');
     unlike($lispml_pm, qr/\bour \@ISA = PPlugin;/, 'LispML.pm no longer advertises legacy PPlugin inheritance');
-
-    my ($rtl_exit, $rtl_out, $rtl_err) = run_perl_snippet_in_subprocess('require RTLUtils; print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";');
-    is($rtl_exit, 0, 'RTLUtils require-only subprocess exits cleanly') or diag($rtl_err || $rtl_out);
-    like($rtl_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring RTLUtils no longer loads the legacy PPlugin runtime');
 
     my ($lispml_exit, $lispml_out, $lispml_err) = run_perl_snippet_in_subprocess('require LispML; print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";');
     is($lispml_exit, 0, 'LispML require-only subprocess exits cleanly') or diag($lispml_err || $lispml_out);
     like($lispml_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring LispML no longer loads the legacy PPlugin runtime');
 };
-subtest 'regtest_hvalue_substitute_uses_vhdl_constant_eval_owner' => sub {
-    plan tests => 8;
-
-    my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
-
-    ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for VHDL::ConstantEval owner inspection');
-    unlike($regtest_plugin, qr/\bnew PPlugin\b/, 'regtest plugin no longer instantiates the legacy PPlugin runtime directly');
-    unlike($regtest_plugin, qr/\$pl->exec\('hvalue_substitute'/, 'regtest plugin no longer routes hvalue_substitute through legacy PPlugin exec');
-    unlike($regtest_plugin, qr/LinkedSpec::run_plugin\('hvalue_substitute'/, 'regtest plugin no longer routes hvalue_substitute through LinkedSpec::run_plugin');
-    like($regtest_plugin, qr/require VHDL::ConstantEval;/, 'regtest plugin loads the VHDL constant-evaluation owner explicitly');
-    like($regtest_plugin, qr/VHDL::ConstantEval::substitute_hash_values\(\\%subh\)/, 'regtest plugin calls VHDL::ConstantEval directly for hvalue substitution');
-    unlike($regtest_plugin, qr/PPlugin->exec_plugin_name\('/, 'regtest plugin no longer routes known plugin names through PPlugin explicit-name exec');
-    unlike($regtest_plugin, qr/PPlugin->exec\('/, 'regtest plugin no longer routes known plugin names through legacy mixed-name PPlugin exec');
-};
 subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 5;
+    plan tests => 2;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for migrated plugin-file smoke');
 
-    my $regtest_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
-    my $regtest_ast = eval { $parser->(\$regtest_input) };
-    ok(!$@, 'regtest plugin still parses without die under pplugin') or diag(normalize_error($@));
-    ok(defined($regtest_ast) && ref($regtest_ast) eq 'HASH', 'regtest plugin still returns a hash AST under pplugin');
-    is(ref($regtest_ast->{register_test}), 'CODE', 'regtest plugin still exposes register_test as a coderef');
-
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_package_owners' => sub {
-    plan tests => 59;
+    plan tests => 51;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
-    my $fsmgen_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'FSMGen.pm'));
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
     my $skew_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'skew.plg'));
     my $tssio_plugin_path = File::Spec->catfile($plugin_dir, 'tssio.plg');
     my $setup_hold_tmax_tmin_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'setup_hold_tmax_tmin.plg'));
-    my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
     my $stan_omap2430c_backend_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_omap2430c_backend.plg'));
     my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
     my $plugin_plugin_path = File::Spec->catfile($Bin, '..', 'plugin', 'plugin.plg');
 
-    ok(defined($fsmgen_pm) && length($fsmgen_pm), 'FSMGen.pm source is available for dynamic plugin-list owner inspection');
     ok(defined($qc_summary_plugin) && length($qc_summary_plugin), 'qc_summary.plg source is available for explicit lookup inspection');
     ok(defined($skew_plugin) && length($skew_plugin), 'skew.plg source is available for explicit lookup inspection');
     ok(!-e $tssio_plugin_path, 'tssio.plg wrapper is removed after Timing::SetupHold owns the visible action body');
     ok(defined($setup_hold_tmax_tmin_plugin) && length($setup_hold_tmax_tmin_plugin), 'setup_hold_tmax_tmin.plg source is available for explicit lookup inspection');
-    ok(defined($fsmgen_plugin) && length($fsmgen_plugin), 'fsmgen.plg source is available for explicit lookup inspection');
     ok(defined($stan_omap2430c_backend_plugin) && length($stan_omap2430c_backend_plugin), 'stan_omap2430c_backend.plg source is available for explicit lookup inspection');
     ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for explicit lookup inspection');
     unlike($qc_summary_plugin, qr/PPlugin->get \('qc_summary_merge'\)/, 'qc_summary plugin no longer routes qc_summary_merge through legacy PPlugin lookup');
@@ -3804,12 +3558,6 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_package_owners' => sub {
     unlike($setup_hold_tmax_tmin_plugin, qr/LinkedSpec::get_plugin\('DxCy'\)/, 'setup_hold_tmax_tmin plugin no longer resolves DxCy through plugin lookup');
     like($setup_hold_tmax_tmin_plugin, qr/use Timing::SetupHold;/, 'setup_hold_tmax_tmin plugin now loads the setup/hold timing package owner directly');
     like($setup_hold_tmax_tmin_plugin, qr/Timing::SetupHold::collect_dxcy/, 'setup_hold_tmax_tmin plugin now uses the package-owned DxCy traversal helper');
-    like($fsmgen_pm, qr/sub getop_plugin_list\b/, 'FSMGen package now owns the dynamic plugin-list parser');
-    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ sub \{\}/, 'FSMGen package no longer defaults dynamic plugin-list lookup to LinkedSpec::get_plugin');
-    like($fsmgen_pm, qr/\$get_plugin->\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'FSMGen package preserves the unresolved dynamic plugin-list no-op fallback');
-    unlike($fsmgen_plugin, qr/\bgetop_plugin_list\s*\{/, 'fsmgen plugin no longer exposes getop_plugin_list as a legacy plugin subdef');
-    unlike($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\)/, 'fsmgen plugin no longer resolves dynamic plugin-list entries through LinkedSpec::get_plugin directly');
-    unlike($fsmgen_plugin, qr/\bplugin\s*\(/, 'fsmgen plugin no longer routes dynamic plugin-list entries through the legacy plugin lookup shim');
     ok(!-e $plugin_plugin_path, 'plugin.plg lookup shim is removed after repo-owned callers moved to LinkedSpec::get_plugin(...)');
     like($stan_omap2430c_backend_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend plugin now loads the STAN OMAP timing package owner directly');
     like($stan_omap2430c_backend_plugin, qr/Timing::StanOmap2430cBackend::collect_sta_frequency/, 'stan_omap2430c_backend plugin now calls the package-owned STA frequency callback');
@@ -3857,7 +3605,7 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_package_owners' => sub {
     is_deeply(\@direct_linkedspec_plugin_bridge_hits, [], 'repo-owned plugin files avoid direct LinkedSpec plugin-bridge dispatch helpers after package-owner migration');
 };
 subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 13;
+    plan tests => 10;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for migrated get_plugin plugin-file smoke');
@@ -3876,11 +3624,6 @@ subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => su
     is_deeply([sort keys %$skew_ast], [qw(skew)], 'skew plugin still exposes the expected subdef name');
     is(ref($skew_ast->{skew}), 'CODE', 'skew plugin still exposes skew as a coderef');
 
-    my $fsmgen_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
-    my $fsmgen_ast = eval { $parser->(\$fsmgen_input) };
-    ok(!$@, 'fsmgen plugin still parses without die under pplugin after plugin shim removal') or diag(normalize_error($@));
-    ok(defined($fsmgen_ast) && ref($fsmgen_ast) eq 'HASH', 'fsmgen plugin still returns a hash AST under pplugin');
-    ok(!exists $fsmgen_ast->{getop_plugin_list}, 'fsmgen plugin no longer exposes getop_plugin_list as a coderef');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'plugin.plg'), 'plugin.plg is no longer part of the legacy pplugin corpus after dynamic lookup migration');
 };
 subtest 'qcflow_pushonce_moves_to_qc_flow_package_owner' => sub {
@@ -5093,12 +4836,11 @@ PERL
     unlike($err, qr/PPlugin|Can't locate Timing\/SetupHold\.pm/, 'Timing::SetupHold package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
-    plan tests => 14;
+    plan tests => 9;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $table_plugin_path = File::Spec->catfile($plugin_dir, 'table.plg');
     my @migrated_plugins = qw(
-        lte_digital_rf.plg
         spyglass.plg
     );
 
@@ -5129,25 +4871,6 @@ subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
     }
     is_deeply(\@unqualified_list_2table_hits, [], 'repo-owned plugin files no longer depend on the legacy list_2table action wrapper');
     is_deeply(\@table_2ss_hits, [], 'repo-owned plugin files have no remaining table_2ss compatibility action usage');
-};
-subtest 'rtl_log2_helper_moves_to_rtlutils_owner' => sub {
-    plan tests => 6;
-
-    my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
-
-    ok(defined($rtlutils_pm) && length($rtlutils_pm), 'RTLUtils source is available for log2 helper migration inspection');
-    like($rtlutils_pm, qr/sub ceil_log2\b/, 'RTLUtils owns the address-width ceiling log2 helper');
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require RTLUtils;
-print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-print "__LOG2__=", join(',', map { RTLUtils::ceil_log2($_) } qw(1 2 3 4 8 9)), "\n";
-PERL
-
-    is($exit_code, 0, 'RTLUtils ceil_log2 subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring RTLUtils for ceil_log2 keeps PPlugin unloaded');
-    like($out, qr/__LOG2__=0,1,2,2,3,4/, 'RTLUtils ceil_log2 preserves address-width ceiling log2 results');
-    unlike($err, qr/PPlugin|Can't locate RTLUtils\.pm/, 'RTLUtils ceil_log2 subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'msoffice_excel_helper_lives_under_domain_owner' => sub {
     plan tests => 17;
@@ -5186,66 +4909,6 @@ subtest 'msoffice_excel_helper_lives_under_domain_owner' => sub {
             if $source =~ /(?<!::)\bexcel_start\s*\(/;
     }
     is_deeply(\@unqualified_excel_start_hits, [], 'repo-owned plugin files no longer depend on the legacy excel_start action wrapper');
-};
-subtest 'vhdl_constant_helpers_live_under_domain_owner' => sub {
-    plan tests => 25;
-
-    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
-    my $vhdconst_plugin_path = File::Spec->catfile($plugin_dir, 'vhdconst_eval.plg');
-    my $legacy_vhdlconst_pm_path = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'VHDLConst.pm');
-    my $vhdl_constant_eval_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'VHDL', 'ConstantEval.pm'));
-    my $mbist_plugin = slurp(File::Spec->catfile($plugin_dir, 'mbist.plg'));
-    my $regtest_plugin = slurp(File::Spec->catfile($plugin_dir, 'regtest.plg'));
-
-    ok(!-e $vhdconst_plugin_path, 'vhdconst_eval.plg wrapper remains removed after callers moved to a direct owner');
-    ok(!-e $legacy_vhdlconst_pm_path, 'Plugin::VHDLConst scaffold is removed after VHDL constants graduated to a domain owner');
-    ok(defined($vhdl_constant_eval_pm) && length($vhdl_constant_eval_pm), 'VHDL::ConstantEval package owner source is available');
-    like($vhdl_constant_eval_pm, qr/package VHDL::ConstantEval;/, 'VHDL::ConstantEval declares the expected domain-owner package');
-    unlike($vhdl_constant_eval_pm, qr/package Plugin::VHDLConst|Plugin::VHDLConst::/, 'VHDL constant owner no longer carries plugin-scaffold package naming');
-    like($vhdl_constant_eval_pm, qr/sub evaluate_constant_values\b/, 'VHDL::ConstantEval owns VHDL constant value extraction');
-    like($vhdl_constant_eval_pm, qr/sub substitute_hash_values\b/, 'VHDL::ConstantEval owns hvalue substitution');
-    like($vhdl_constant_eval_pm, qr/sub print_constant_values_for_conf\b/, 'VHDL::ConstantEval preserves the old print action as an explicit package function');
-    like($vhdl_constant_eval_pm, qr/sub _slurp_file\b/, 'VHDL::ConstantEval owns file reading instead of depending on plugin-provided slurp');
-
-    ok(defined($mbist_plugin) && length($mbist_plugin), 'mbist.plg source is available for VHDL::ConstantEval migration inspection');
-    like($mbist_plugin, qr/require VHDL::ConstantEval;/, 'mbist plugin loads the VHDL::ConstantEval owner explicitly');
-    like($mbist_plugin, qr/VHDL::ConstantEval::evaluate_constant_values\(\$_\[0\]\)/, 'mbist plugin calls VHDL::ConstantEval directly for constant evaluation');
-    unlike($mbist_plugin, qr/(?<!::)\bvhdl_constant_value_eval\s*\(/, 'mbist plugin no longer calls the legacy bare vhdl_constant_value_eval wrapper');
-
-    ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for VHDL::ConstantEval substitution migration inspection');
-    like($regtest_plugin, qr/VHDL::ConstantEval::substitute_hash_values\(\\%subh\)/, 'regtest plugin calls VHDL::ConstantEval directly for hvalue substitution');
-    unlike($regtest_plugin, qr/LinkedSpec::run_plugin\('hvalue_substitute'/, 'regtest plugin no longer dispatches hvalue_substitute through the plugin bridge');
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require File::Temp;
-require VHDL::ConstantEval;
-print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-my %values = (BASE => 4, SUM => 'BASE+3');
-VHDL::ConstantEval::substitute_hash_values(\%values);
-print "__SUB_VALUE__=$values{SUM}\n";
-my ($fh, $file) = File::Temp::tempfile(UNLINK => 1);
-print {$fh} "constant base_c : integer := 2;\n";
-print {$fh} "constant total_c : integer := base_c+5;\n";
-print {$fh} "constant ignored_init_c : integer := 99;\n";
-close $fh;
-my $constants = VHDL::ConstantEval::evaluate_constant_values($file);
-print "__TOTAL__=$constants->{total_c}\n";
-print exists($constants->{ignored_init_c}) ? "__INIT_PRESENT__\n" : "__INIT_FILTERED__\n";
-PERL
-
-    is($exit_code, 0, 'VHDL::ConstantEval package-owner subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the VHDL::ConstantEval package owner keeps PPlugin unloaded');
-    like($out, qr/__SUB_VALUE__=7/, 'VHDL::ConstantEval package owner preserves hash-value substitution behavior');
-    like($out, qr/__TOTAL__=7/, 'VHDL::ConstantEval package owner evaluates dependent VHDL constants');
-    like($out, qr/__INIT_FILTERED__/, 'VHDL::ConstantEval package owner preserves init_c filtering');
-    unlike($err, qr/PPlugin|Can't locate VHDL\/ConstantEval\.pm/, 'VHDL::ConstantEval package-owner subprocess stays clear of legacy plugin runtime issues');
-
-    my $parser = LinkedSpec::get_parser('pplugin');
-    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for VHDL::ConstantEval-owner migrated plugin smoke');
-    for my $plugin_source ($mbist_plugin, $regtest_plugin) {
-        my $ast = eval { $parser->(\$plugin_source) };
-        ok(!$@ && defined($ast) && ref($ast) eq 'HASH', 'VHDL::ConstantEval caller plugin still parses under pplugin after wrapper removal') or diag(normalize_error($@));
-    }
 };
 subtest 'prompt_yes_no_helper_moves_to_package_owner' => sub {
     plan tests => 16;
@@ -5382,26 +5045,23 @@ PERL
     unlike($err, qr/Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'HTML path-link owner subprocess resolves the HTTP file-access owner');
 };
 subtest 'http_file_access_logic_moves_into_domain_owner' => sub {
-    plan tests => 24;
+    plan tests => 19;
 
     my $http_plugin_pm = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm');
     my $http_file_access_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'HTTP', 'FileAccess.pm'));
     my $http_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'http.plg');
     my $lighttpd_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg');
     my $httpd_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'httpd.plg');
-    my $rtl_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'rtl.plg'));
     my $stan_backend_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
     my $tree_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tree.plg'));
     my $unqualified_set_hostport = qr/(?:^|[^\w:])set_hostport\s*\(/;
     my $unqualified_set_localhost = qr/(?:^|[^\w:])set_localhost\s*\(/;
-    my $unqualified_url_for_path = qr/(?:^|[^\w:])url_for_path\s*\(/;
 
     ok(defined($http_file_access_pm) && length($http_file_access_pm), 'HTTP file-access owner source is available');
     ok(!-e $http_plugin_pm, 'short-lived Plugin::HTTP scaffold is removed now that a clearer HTTP-domain owner exists');
     ok(!-e $http_plugin_plg, 'http.plg is removed now that HTTP::FileAccess owns the legacy file-link action directly');
     ok(!-e $lighttpd_plugin_plg, 'lighttpd.plg is removed now that HTTP::FileAccess owns the legacy lighttpd action directly');
     ok(!-e $httpd_plugin_plg, 'httpd.plg is removed now that HTTP::FileAccess owns the legacy httpd action directly');
-    ok(defined($rtl_plugin_plg) && length($rtl_plugin_plg), 'rtl.plg source is available for HTTP helper migration inspection');
     ok(defined($stan_backend_plugin_plg) && length($stan_backend_plugin_plg), 'stan_backend.plg source is available for HTTP helper migration inspection');
     ok(defined($tree_plugin_plg) && length($tree_plugin_plg), 'tree.plg source is available for HTTP helper migration inspection');
     like($http_file_access_pm, qr/package HTTP::FileAccess;/, 'HTTP file-access owner declares the expected package');
@@ -5412,10 +5072,6 @@ subtest 'http_file_access_logic_moves_into_domain_owner' => sub {
     like($http_file_access_pm, qr/sub run_lighttpd_for_conf\b/, 'HTTP file-access owner defines the former lighttpd action as run_lighttpd_for_conf');
     like($http_file_access_pm, qr/sub run_httpd_for_conf\b/, 'HTTP file-access owner defines the former httpd action as run_httpd_for_conf');
     unlike($http_file_access_pm, qr/package Plugin::HTTP|Plugin::HTTP::|sub httplink\b|sub set_http_hostport\b|sub set_http_localhost\b/, 'HTTP file-access owner does not preserve the obsolete Plugin::HTTP namespace or helper names');
-    like($rtl_plugin_plg, qr/HTTP::FileAccess::set_hostport \(/, 'rtl.plg now sets hostport through the HTTP file-access owner');
-    like($rtl_plugin_plg, qr/HTTP::FileAccess::url_for_path\(/, 'rtl.plg now builds links through the HTTP file-access owner');
-    unlike($rtl_plugin_plg, $unqualified_set_hostport, 'rtl.plg no longer calls set_hostport through an unqualified helper');
-    unlike($rtl_plugin_plg, $unqualified_url_for_path, 'rtl.plg no longer calls url_for_path through an unqualified helper');
     like($stan_backend_plugin_plg, qr/Timing::StanBackend::start\(\$conf\)/, 'stan_backend.plg now delegates backend setup through the Timing::StanBackend owner');
     unlike($stan_backend_plugin_plg, qr/HTTP::FileAccess::set_hostport|$unqualified_set_hostport/, 'stan_backend.plg no longer owns hostport setup directly');
     like($tree_plugin_plg, qr/HTTP::FileAccess::set_localhost \(\$_\[0\]\{_port\}\)/, 'tree.plg now sets localhost through the HTTP file-access owner');

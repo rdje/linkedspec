@@ -1,6 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-18 — LEGACY-VHDL-RETIRE.2+.3: retire the Perl-only legacy VHDL/RTL/FSM subsystem (RTLUtils hang cleared; a SECOND pre-existing back-half hang discovered)
+
+User confirmed "Full subsystem closure" (AskUserQuestion). Retired the self-contained Perl-only
+legacy VHDL/RTL/FSM subsystem:
+
+- **`git rm`** `perl/RTLUtils.pm` (877), `perl/FSMGen.pm` (3,549), `perl/VHDL/ConstantEval.pm` (90)
+  (the now-empty `perl/VHDL/` is gone), and 6 dependent `plugin/*.plg` (fsmgen, lte_digital_rf,
+  mbist, msword, regtest, rtl) = ≈6,495 lines.
+- Surgically cleaned `t/phase0_regression.t`: **8 whole module-smoke subtests deleted** + **7 mixed
+  subtests cleaned** (those that used the deleted modules/`.plg` as corpus for *kept*-module
+  assertions; per-subtest `plan` counts adjusted exactly). ≈206 lines. Updated the now-stale
+  comments in `perl/LinkedSpec.pm` and `tools/gen_oracle_corpus.pl`.
+- `git grep` = 0 functional references to the modules; `perl -c perl/LinkedSpec.pm` + `perl -c
+  t/phase0_regression.t` OK; the edited subtests PASS in a live run.
+
+**RTLUtils hang CLEARED — proven** via a pristine-HEAD worktree: the original suite hangs at
+subtest **110** `rtlutils_header_context_clause_package_owner_preserves_payload` (the
+`add_header_n_context_clause` smoke; recursive `add_package_re` `([[:alpha:]]\w+)(?:\.((?1)))?$`
+applied at `RTLUtils.pm:104`), while subtest 109 `drive_entity_component` completes. **This corrects
+`LEGACY-VHDL-RETIRE.1`'s wrong "line 746 / `drive_entity_component`" claim** — the original
+MEMORY/ADR attribution (`add_header_n_context_clause`) was right. The post-retirement suite runs
+**past** subtest 110 to subtest 130+.
+
+**DISCOVERY — a SECOND, pre-existing, unrelated hang unmasked by removing the first.** The original
+hang at subtest 110 had kept the **entire back half of phase0 (subtests 111+) dark**. With it gone,
+the suite now reaches `HTML::PathLinks::link_path_tokens` (subtest 131
+`html_path_link_owner_avoids_pplugin_and_preserves_link_wrapping_contract`), which **hangs** (a
+separate catastrophic regex; the subprocess is alarm-killed → that subtest fails 3/7), plus other
+back-half failures. `require HTML::PathLinks`/`HTTP::FileAccess` load fine; only the `link_path_tokens`
+call hangs. HTML::PathLinks depends only on **kept** modules — so this is **not** caused by the
+retirement (proven: pristine HEAD never reaches subtest 111+). Consequence: **the retirement clears
+the RTLUtils hang but does NOT make phase0 green/usable**; the `SPEC-FORMAT-TERSE` gate stays blocked
+— now by the back-half. This needs its own fix track — **surfaced to the user**.
+
+Validation: `git grep` sweeps; `perl -c`; pristine-HEAD worktree comparison; direct
+`link_path_tokens` timing (hangs under a timeout guard); `scripts/check_memory_architecture.sh`;
+KM gate. The full `t/phase0_regression.t` is **not green** (back-half hang) and was not run to
+completion. KM card [[rtlutils-regex-hang]] updated; `SPEC-FORMAT-TERSE` blocker updated (gate still
+blocked).
+
 ## 2026-06-18 — LEGACY-VHDL-RETIRE.1: own retirement tree + read-only inventory of the Perl-only legacy VHDL/RTL/FSM subsystem
 
 Owned a new task tree `LEGACY-VHDL-RETIRE` (`docs/tasks/LEGACY-VHDL-RETIRE.md`) and completed its
