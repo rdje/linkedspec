@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-19 — NONCORE-QUARANTINE.1+.2: dependency-tree inventory + relocate 12 zero-ref modules to `noncore/`
+
+User reframed twice: (1) the real task is to extract `LinkedSpec.pm`'s full dependency tree and act
+on what's unused; (2) **relocate (`git mv`) the non-core modules to a holding area, NOT delete them**
+— so we keep the option to refactor / port (Rust/Julia/Dart) / publish / `git rm` each on its own
+merits later, while making the "provably not in the LinkedSpec tree" boundary explicit. New tree
+`NONCORE-QUARANTINE` (repurposed from the delete-framed `DEADCODE-PRUNE`).
+
+`.1` Dependency-tree extraction (read-only): roots = `LinkedSpec.pm` (transitive `use`/`require` +
+lazy `OwnerDispatch` string-name owner loads + dynamic `get_parser`/`get_plugin`/AUTOLOAD/`.plg`→`.pm`
+edges) ∪ shipped `specs/*.spec` ∪ `conf/`+`ebnf/`+`tablescript/`. The decisive edges are dynamic —
+`Lispish.pm`→`get_parser('Lispish')`→`PathSearch`→`Lispish.spec` — invisible to a `use` scan; and
+reachability is **directional + rooted** (`Lispish.pm` depends on `Lispish.spec` but nothing depends
+on `Lispish.pm` → dead consumer). Result (agent map + `git grep` cross-checks): **41 KEEP `.pm` /
+36 non-core `.pm`; all 13 `.plg` non-core.** Shipped specs reference **zero** plugins/cross-specs →
+the entire legacy domain island + `.plg` corpus is unreachable from the product. **Critical check:
+zero core→domain edges** (only the `PluginBridge`→`PPlugin` machinery load + a comment). `tools/`/`bin/`
+don't reference the island; the 12 zero-ref modules confirmed 0 refs repo-wide. The phase0 back-half
+hangs (e.g. `HTML::PathLinks::link_path_tokens`) live entirely in the non-core island → removing its
+subtests greens the suite.
+
+`.2` Created `noncore/` + `noncore/README.md` (the parked fate ledger, with non-binding hints:
+revive-candidate / replaceable / likely-rm). **`git mv`** the 12 zero-reference modules
+(`AmbiTiming`, `EasyTk`, `EncounTiming`, `HDisplay`, `LibReader`, `MagmaTiming`, `PTiming`,
+`Reportiming`, `rvp`, `TkGui`, `XLSreader`, `PluginUtils`) → `noncore/` (layout preserved; loadable
+via `-Inoncore` if ever revived). 100% safe: these have **zero references** anywhere, so no code,
+spec, or test was touched. perl/ top-level `.pm`: 28→16. `perl -c perl/LinkedSpec.pm` OK.
+
+Plugin machinery (`PPlugin`/`PluginBridge`/`PluginRegistry` + the deprecated `LinkedSpec.pm` stubs)
+stays in core for now (reachable via the stubs) — `.N`, POSTPONED. The 24 domain `.pm` + 13 `.plg`
+relocate in following batches (`.3`/`.4`) together with their phase0 subtest removal (clears the
+back-half hangs). `scripts/check_memory_architecture.sh` + KM gate pass.
+
 ## 2026-06-18 — LEGACY-VHDL-RETIRE.2+.3: retire the Perl-only legacy VHDL/RTL/FSM subsystem (RTLUtils hang cleared; a SECOND pre-existing back-half hang discovered)
 
 User confirmed "Full subsystem closure" (AskUserQuestion). Retired the self-contained Perl-only
