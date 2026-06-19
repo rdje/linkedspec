@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-19 — PHASE0-BACKHALF-TRIAGE.1 — read-only triage complete (173 → 108 STALE / 65 REAL, 2 engine defects)
+
+Completed the read-only stale-vs-real triage of the 173 pre-existing back-half core failures. No
+engine/spec/test code changed — this slice is the triage report + the `.2`–`.5` fix decomposition +
+two Knowledge Map cards.
+
+- **Method:** authoritative `perl -Iperl t/phase0_regression.t` run (173 fail / 707 pass; reached
+  880/959 before the background run was terminated, exit 144 mid-subtest-881; TAP → `/tmp/phase0_triage.tap`).
+  Bucketed all 173 by name into 6 clusters; pulled got/expected per cluster; reproduced representatives;
+  ran two parallel read-only deep-dives (method_like; emit_context+descriptor+singles) against the engine
+  + book contract.
+- **Verdict — 108 STALE (re-bless) / 65 REAL (engine-fix):**
+  - STALE: A parser-collection-shape (8 — engine returns `[1,1]` per child `return(1)`; test wants the
+    retired `['?Rule:',[]]` auto-tag); B `method_like` (75 — retired `return_a/return_m/return_ma/
+    return_imatch/return_im/return_array` helpers + `RETURN_A/RETURN_M` nodes, COMPAT-ALIAS-RETIREMENT-V2;
+    branch-block canonical lowering itself is intended/working/book-documented); C `emit_context` (20 —
+    white-box seams monkeypatching the removed `LinkedSpec::Deps::*`, a stale `plan 89`/88, retired-helper
+    passthrough, one mis-authored re-bless); F migration-summary (3 — `return(1)` is a resolved plain
+    return, not a `return_a` blocker); G singles (2 — `return(1)` AST shape is scalar `1`, not ARRAY).
+  - REAL **Defect #1 — AND-rule action-codegen** (63): a multi-indexed-edge AND rule (`-> Rule[0..N]`)
+    with a `return(...)` edge emits `SCALAR(0x…)Rule` in `AND_ACODE` (lowered payload replaced by a
+    stringified scalar-ref + rule label) ⇒ compile-fail `near ")Top"` (top rule, parser→undef) or dropped
+    payload `[]` (child rule). Bisected: single-edge AND OK, multi-edge all-`assign` OK, multi-edge +
+    `return` BROKEN; per-edge helper lowering is valid Perl. Likely `HandlerVariantEmitter.pm`/`SpecEntry.pm`.
+  - REAL **Defect #2 — input-boundary regression** (2): `Runtime.pm:~126` comment-skip wrapper (commit
+    `d7294d0`, MEDIUM-IMPACT.3.2) runs `pos($$input_ref)=0` before the SCALAR-ref guard ⇒ raw die +
+    unpopulated `runtime_ctx->{last_error}` for invalid input.
+- **Decomposition:** `.2` re-bless/retire the 108 stale (`.2.1`–`.2.4`); `.3` engine fix Defect #1
+  (blocked — needs user OK to touch the reference engine); `.4` engine fix Defect #2 (blocked); `.5`
+  verify green phase0 (incl. the unobserved 881–959 tail). Knowledge cards
+  `docs/knowledge/and-return-edge-codegen-defect.md` + `…/runtime-input-boundary-validation-regression.md`.
+- **Validation:** `perl -c perl/LinkedSpec.pm` OK; self-check + KM gate run pre-commit. The read-only
+  triage is vindicated — re-blessing cluster D (60) would have masked the AND-codegen defect.
+
 ## 2026-06-19 — Triage WIP + trace directive owned (PHASE0-BACKHALF-TRIAGE.1 in progress; TRACE-OBSERVABILITY created)
 
 Read-only/ownership checkpoint (no engine/spec/test code changed). Owned the two follow-on efforts the
