@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-19 — Triage WIP + trace directive owned (PHASE0-BACKHALF-TRIAGE.1 in progress; TRACE-OBSERVABILITY created)
+
+Read-only/ownership checkpoint (no engine/spec/test code changed). Owned the two follow-on efforts the
+NONCORE-QUARANTINE discovery + the user's trace directives created:
+
+- **`PHASE0-BACKHALF-TRIAGE` (new tree, `.1` in progress):** triage the ~173 pre-existing back-half
+  core failures with LinkedSpec's trace. Established the trace driver: `LINKEDSPEC_TRACE_LEVEL=debug
+  perl -Iperl <driver>` (existing env control; ~22k lines of ENTER/DECISION/dump to stdout).
+  **Root-caused Cluster A (parser collection-shape, ~10+ subtests) = STALE tests:** reproduced
+  `or_plus_blind_call` (`Choice::OR+ => First => Second`, children `return(1)`, input `"ab"`) → engine
+  returns `[1, 1]` (each child's literal `return(1)`); the test asserts the retired tagged-accumulator
+  shape `[['?First:',[]],['?Second:',[]]]`. Engine is correct per documented helper-DSL return
+  semantics → re-bless. Clusters B–E (`method_like`×75, `emit_context`×21, capture/mark/entry families)
+  pending root-cause.
+- **`TRACE-OBSERVABILITY` (new tree):** owns the user's directives — a discoverable CLI trace control
+  ("introduce a CLI control to this API") + a comprehensive "see everything" trace (function
+  enter/exit, if/switch/case branches). Finding: the framework already exists (`Trace.pm`:
+  `trace_enter`/`trace_exit`/`trace_decision`, levels none..debug, sinks; env control
+  `LINKEDSPEC_TRACE_LEVEL`/`_FILE`/`_MIRROR_STDOUT`/etc.) and works — the gaps are **discoverability**
+  (no `--trace` flag / `bin/` entrypoint / mdBook docs) and **coverage** (instrumentation isn't
+  exhaustive; the generated runtime parser especially needs branch tracing). Plan: `.2` CLI+docs
+  (quick win) → `.1` coverage audit → `.3` extend coverage.
+
+Validation: `scripts/check_memory_architecture.sh`; KM gate; `perl -c perl/LinkedSpec.pm` (unchanged).
+Session is very long → fresh session advisable; repo handoff-ready (relocation committed at `2baddbd`).
+
 ## 2026-06-19 — NONCORE-QUARANTINE.3+.4: relocate all remaining non-core `.pm`/`.plg` to `noncore/` + excise their phase0 subtests (reveals ~173 pre-existing back-half core failures)
 
 Completed the quarantine (user: "straight through"). **`git mv`** the 23 remaining domain `.pm`
