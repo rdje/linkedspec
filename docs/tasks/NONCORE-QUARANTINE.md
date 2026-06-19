@@ -65,23 +65,23 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
     test references). perl/ top-level `.pm` 28→16.
   Commit: `NONCORE-QUARANTINE.1` (with `.1`)
 
-- ID: `NONCORE-QUARANTINE.3` · Status: `pending`
-  Goal: Relocate the 24 domain-island `.pm` to `noncore/` (layout preserved) + remove their
-    `t/phase0_regression.t` subtests, **one coherent cluster per slice**: Timing (`Timing::*`),
-    QC (`QC::*`), Table (`Table*`/`HUtils`/`TableGrep`/`TcFlow`), Web/Text (`HTML::PathLinks`/
-    `HTTP::FileAccess`/`Text::VariableSubstitution`/`HLinkSubst`), MSOffice (`MSOffice::Excel`),
-    Lisp (`Lispish`/`LispML`), misc (`Global`/`InteractivePrompt`).
-  Acceptance per cluster: cluster `.pm` `git mv`'d; their subtests removed; `perl -c` OK; specs
-    compile; phase0's stall point advances. Clears the back-half hangs cluster by cluster.
-  Verification: `pending`
-  Commit: `pending`
+- ID: `NONCORE-QUARANTINE.3` · Status: `done`
+  Goal: Relocate the 23 domain-island `.pm` to `noncore/` (layout preserved) + remove their
+    `t/phase0_regression.t` subtests. (Done as ONE batch + one block-excision rather than per-cluster:
+    the migration-smoke subtests cross-reference clusters, so a single move + contiguous-block excise
+    is cleaner and the user chose "straight through".)
+  Acceptance: 23 domain `.pm` `git mv`'d to `noncore/`; their subtests removed; `perl -c` OK.
+  Verification: Done 2026-06-19 — `git mv` 23 domain `.pm`; the 37-subtest legacy-migration block
+    (phase0 source lines 3312–5378, subtests `tablescript_http_exec…`→ just before `get_parser_normalizes…`)
+    excised via guarded anchor-splice; `perl -c t/phase0_regression.t` OK; subtest count 996→959;
+    `git grep`=0 island refs in tests; `perl -c perl/LinkedSpec.pm` OK; emptied `perl/` subdirs rmdir'd.
+  Commit: `NONCORE-QUARANTINE.3+.4` (see Commit Log)
 
-- ID: `NONCORE-QUARANTINE.4` · Status: `pending`
-  Goal: Relocate the 13 `.plg` to `noncore/plugin/` + remove the `.plg`-discovery/parse phase0
-    subtests (`pplugin_*` corpus/readdir, `*_still_parse_under_pplugin`, etc.) that depend on `.plg`
-    living in `plugin/`. (Keep the machinery subtests that don't depend on a relocated `.plg`.)
-  Verification: `pending`
-  Commit: `pending`
+- ID: `NONCORE-QUARANTINE.4` · Status: `done`
+  Goal: Relocate the 13 `.plg` to `noncore/plugin/` + remove their `.plg`-dependent phase0 subtests.
+  Verification: Done 2026-06-19 — 13 `.plg` `git mv`'d to `noncore/plugin/`; the `.plg`-dependent
+    subtests were within the same excised block; `plugin/` emptied + rmdir'd. (Landed with `.3`.)
+  Commit: `NONCORE-QUARANTINE.3+.4` (with `.3`)
 
 - ID: `NONCORE-QUARANTINE.N` · Status: `blocked` (POSTPONE — core-facade change)
   Goal: Decide the plugin machinery's fate — `PPlugin`/`PluginBridge`/`PluginRegistry` + the
@@ -89,20 +89,37 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
     relocate/retire from the core.)
   Verification: `pending`
 
-- ID: `NONCORE-QUARANTINE.V` · Status: `pending`
+- ID: `NONCORE-QUARANTINE.V` · Status: `blocked`
   Goal: Verify `t/phase0_regression.t` runs to completion green + full local gate; doc/book/KM sync;
     clear the `SPEC-FORMAT-TERSE` + `LEGACY-VHDL-RETIRE.4/.5` blockers.
+  Blocker: phase0 now runs the back half (no hangs) but reveals **~173 PRE-EXISTING core-engine test
+    failures** (see Back-Half Core Failures, below) — unrelated to this relocation; must be resolved
+    (own a separate tree) before phase0 can be green.
   Verification: `pending`
+
+## Back-Half Core Failures (discovered 2026-06-19 — NOT caused by this work)
+
+Relocating the island + excising its subtests cleared the hangs, so phase0 now runs the long-dark
+back half (subtests ~111+) for the first time — revealing **~173 real, deterministic core-engine
+test failures**: structural/shape assertion mismatches (0 timeouts, 0 missing-module errors), e.g.
+`or_plus_blind_call`: parser returns scalar `'1'` where the test expects an array-of-arrays.
+Clustered: `method_like`×75, `named_mark`×25, `emit_context`×21, capture/mark/entry families.
+**This work changed ZERO engine bytes** (only `git mv` of non-engine files + test-subtest removal +
+docs), so the engine behaves identically to before — these failures are PRE-EXISTING, masked by the
+original hang (which sat at subtest 110, so subtests 111+ never ran). Most likely **stale tests**
+(written for evolved ActionIR/HandlerIR behavior, never re-run because of the hang) rather than 173
+real regressions (the shipped specs + the front 100 subtests pass). **Decision needed** — own a new
+tree to triage stale-vs-real and bring phase0 green. (Separately: external `bin/fsmgen` CPU
+contention slows runs but is not the cause.)
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| — | `.1`, `.2` | `done` | Inventory + `noncore/` + 12 zero-ref modules relocated (risk-free). |
-| 1 | `.3` (per cluster) | `pending` | Relocate domain clusters + drop their phase0 subtests; clears the hangs incrementally. |
-| 2 | `.4` | `pending` | Relocate the 13 `.plg` + drop their `.plg`-dependent subtests. |
-| 3 | `.N` | `blocked` | POSTPONE — plugin machinery + deprecated core stubs (facade change). |
-| 4 | `.V` | `pending` | Verify green phase0 + gate; clear blockers. |
+| — | `.1`, `.2`, `.3`, `.4` | `done` | Inventory + ALL non-core `.pm`/`.plg` relocated to `noncore/` + island subtests excised; `perl/` is core-only. |
+| 🚧 | **BACK-HALF CORE FAILURES DECISION (user)** | `blocked` | ~173 pre-existing core-engine test failures revealed (NOT from this work). Triage stale-vs-real in a new tree before phase0 can be green. |
+| 1 | `.N` | `blocked` | POSTPONE — plugin machinery + deprecated core stubs (facade change). |
+| 2 | `.V` | `blocked` | Green phase0 + gate; blocked by the 173. |
 
 ## Decisions
 
@@ -119,15 +136,18 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
 
 ## Open Questions
 
-- `.3` pace — straight through the clusters, or check in per cluster? (default: straight through,
-  verifying phase0 advances each time.)
+- ~~`.3` pace~~ RESOLVED (user: "straight through"). Done as one batch + block-excision.
+- **Back-half core failures (user decision — the immediate blocker):** ~173 pre-existing core-engine
+  test failures (see the section above) now block green phase0. Triage stale-vs-real in a new tree?
+  Scope? This is unrelated to the quarantine and is the next decision.
 - Eventually drop `conf/`/`ebnf/`/`tablescript/` data once their consuming `.plg`/`.pm` are gone?
   (user: keep for now.)
 
 ## Blockers
 
-- `.N` POSTPONED (core-facade). `.V` blocked until `.3`+`.4` land (phase0 can't be green until the
-  non-core subtests are gone).
+- `.N` POSTPONED (core-facade). `.V` blocked by the **~173 pre-existing back-half core-engine test
+  failures** (NOT from this relocation — engine bytes unchanged; masked by the original hang). Needs
+  its own triage/fix tree before phase0 can be green.
 
 ## Verification Log
 
@@ -135,15 +155,23 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
 | --- | --- | --- | --- |
 | `2026-06-19` | `.1` | agent dep map + `git grep` cross-checks; self-check; KM gate | 41 KEEP / 36 non-core `.pm`; 13 `.plg`; zero core→domain edges |
 | `2026-06-19` | `.2` | 12 `git mv`; `perl -c perl/LinkedSpec.pm` OK; `git grep` 0 refs to the 12 | Done — `noncore/` seeded; perl/ top-level `.pm` 28→16; no test impact |
+| `2026-06-19` | `.3`+`.4` | 23 domain `.pm` + 13 `.plg` `git mv`'d; 37-subtest block excised (anchor-splice, guarded); `perl -c` core+test OK; `git grep`=0 island refs; emptied dirs rmdir'd; phase0 re-run | Done — `perl/` is core-only. **Discovered ~173 PRE-EXISTING back-half core failures** (structural mismatches; 0 timeouts/missing-module; engine bytes unchanged → not from this work). External `bin/fsmgen` CPU contention noted. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.1`+`.2` | `NONCORE-QUARANTINE.1 — dependency inventory + create noncore/ + relocate 12 zero-ref modules (.1+.2)` | Read-only inventory + safe relocation; `noncore/README.md` ledger. |
+| `.3`+`.4` | `NONCORE-QUARANTINE.3+.4 — relocate 23 domain .pm + 13 .plg to noncore/ + excise their 37 phase0 subtests` | `perl/` now core-only. Revealed ~173 pre-existing back-half core failures (separate tree to triage). |
 
 ## Changelog
 
+- `2026-06-19` (`.3`+`.4`): Relocated ALL 23 remaining domain `.pm` + 13 `.plg` to `noncore/`
+  (`git mv`, layout preserved) and excised the 37-subtest legacy-migration block from
+  `t/phase0_regression.t` (source lines 3312–5378, anchor-splice). `perl/` is now core-only;
+  `perl -c` core+test OK; emptied dirs rmdir'd. **Discovered ~173 pre-existing real core-engine test
+  failures** in the now-runnable back half (`method_like`×75/`named_mark`×25/`emit_context`×21/…) —
+  unrelated to this work (engine bytes unchanged), masked by the original hang. `.V`/green-phase0
+  blocked on triaging them (new tree). External `bin/fsmgen` CPU contention also observed.
 - `2026-06-19`: Created (repurposed from `DEADCODE-PRUNE` per the user's relocate-not-delete
-  direction). `.1` inventory + `.2` 12 zero-ref modules → `noncore/` done. Clusters (`.3`) + `.plg`
-  (`.4`) next; machinery (`.N`) postponed.
+  direction). `.1` inventory + `.2` 12 zero-ref modules → `noncore/` done.

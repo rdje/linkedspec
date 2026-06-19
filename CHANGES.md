@@ -1,6 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-19 — NONCORE-QUARANTINE.3+.4: relocate all remaining non-core `.pm`/`.plg` to `noncore/` + excise their phase0 subtests (reveals ~173 pre-existing back-half core failures)
+
+Completed the quarantine (user: "straight through"). **`git mv`** the 23 remaining domain `.pm`
+(`Global`, `HLinkSubst`, `HUtils`, `InteractivePrompt`, `Lispish`, `LispML`, `Table`, `Table2SS`,
+`TableGrep`, `TableScript`, `TableSort`, `TcFlow`, `HTML/PathLinks`, `HTTP/FileAccess`, `MSOffice/Excel`,
+`QC/{Flow,Summary,TclInterconn}`, `Table/GenericFilter`, `Text/VariableSubstitution`,
+`Timing/{SetupHold,StanBackend,StanOmap2430cBackend}`) and all 13 `.plg` → `noncore/` (layout
+preserved). **`perl/` is now core-only** (`LinkedSpec.pm` + `LinkedSpec/**` + `LinkedRE`/`PathSearch`/
+`PPlugin`); the emptied `perl/{HTML,HTTP,MSOffice,QC,Text,Timing,Table,Plugin}/` + `plugin/` were rmdir'd.
+
+Excised the **37-subtest legacy-migration block** from `t/phase0_regression.t` (source lines
+3312–5378, from `subtest 'tablescript_http_exec…'` up to `subtest 'get_parser_normalizes…'`) via a
+guarded anchor-splice — these tested the now-quarantined modules/`.plg`. Verified: `perl -c
+perl/LinkedSpec.pm` OK; `perl -c t/phase0_regression.t` OK; subtest count 996→959; `git grep` = 0
+references to any relocated module/`.plg` in the test. Method (key lesson): after the move, phase0
+*fast-fails* on island subtests (instead of hanging), so phase0 itself pinpointed the contiguous
+island block; checked there was no shared file-scope code in the block before excising.
+
+**DISCOVERY — ~173 pre-existing back-half core-engine test failures (NOT caused by this work).** With
+the island hangs gone, phase0 now runs the long-dark back half (subtests ~111+) for the first time
+and reveals ~173 real, deterministic assertion failures — structural/shape mismatches (0 timeouts, 0
+missing-module errors), e.g. `or_plus_blind_call`: parser returns scalar `'1'` where an array-of-arrays
+is expected. Clustered `method_like`×75, `named_mark`×25, `emit_context`×21, capture/mark/entry
+families. **This work changed zero engine bytes** (only `git mv` of non-engine files + test-subtest
+removal + docs), so the engine behaves identically to before — these were masked by the original hang
+(subtest 110) and never ran. Most likely **stale tests** (written for evolved ActionIR/HandlerIR
+behavior, never re-run) rather than 173 real regressions (shipped specs + front 100 subtests pass).
+Green phase0 (and the `SPEC-FORMAT-TERSE` / `LEGACY-VHDL-RETIRE.4-.5` / `NONCORE-QUARANTINE.V`
+blockers) now depends on triaging these — a separate tree; **surfaced to the user**. Also observed:
+external `bin/fsmgen --emit-semantic-json` (100% CPU, another session — not killed) slows runs but is
+not the cause of the 173 (those are structural).
+
+Validation: `perl -c` (core + test); `git grep` island-ref sweep = 0; `scripts/check_memory_architecture.sh`;
+KM gate. phase0 is NOT green (173 pre-existing failures) and was not run to completion (external
+contention). The relocation itself is correct + complete.
+
 ## 2026-06-19 — NONCORE-QUARANTINE.1+.2: dependency-tree inventory + relocate 12 zero-ref modules to `noncore/`
 
 User reframed twice: (1) the real task is to extract `LinkedSpec.pm`'s full dependency tree and act
