@@ -30,6 +30,20 @@ contract).
 
 ## Triage result (`.1`, read-only — DONE 2026-06-19)
 
+> **CORRECTION (2026-06-19 — user directives: "if not broke don't fix" + "do not break the reference Perl
+> engine").** The "REAL → engine-fix" framing below is **SUPERSEDED / overclaimed**. The 65 non-stale
+> failures are **NOT confirmed reference defects** — there is only an OBSERVED bad-codegen *symptom* for
+> an explicit `:AND`/`::AND` multi-slot rule with a `return`-bearing indexed edge (parser builds, then
+> emits invalid Perl `SCALAR(0x…)Rule` ⇒ returns `undef`/`[]`). Whether that is a genuine defect vs.
+> tests exercising a **non-conformant / undocumented construct is UNRESOLVED**: `:AND` is documented, but
+> (a) NO shipped spec uses explicit `:AND` (all default mode), (b) the failing specs put regex on a `::`
+> top rule which `formal-grammar.md` marks "Body rule only", and (c) the book's only `:AND` example
+> (`ThirdChild:AND`, formal-grammar.md:625) uses call edges `-> A/-> B`, **not** a `return` edge. **The
+> reference engine is FROZEN.** `.3`/`.4` must NOT touch `perl/` unless a fully BOOK-CONFORMANT `:AND`
+> spec is OBJECTIVELY shown to break AND the user authorizes. Default remedy for the 65 = re-bless/retire
+> the tests (TEST-ONLY). "Defect #2 (input-boundary)" was sub-agent-claimed and NOT verified. **The 108
+> STALE verdicts stand and are test-only.** Read this banner over the section below.
+
 Authoritative run: `perl -Iperl t/phase0_regression.t` → **173 failing subtests / 707 passing**
 (reached subtest 880/959 before the background run was terminated, exit 144 mid-subtest-881; the 173
 matches the known deterministic count). Full TAP captured to `/tmp/phase0_triage.tap` (transient).
