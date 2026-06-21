@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into `.2.2.1` (B2 token re-bless) + `.2.2.2` (B1 helper rewrites) — decomposition slice, no test change
+
+Decomposed the largest remaining re-bless leaf (cluster B, 76 subtests) before implementation, because
+read-only recon + empirical probing showed it is too broad and partly judgment-heavy for one
+signoff-quality slice. **No test/engine/spec code changed** — this slice is task-tree decomposition plus a
+durable Knowledge Map fact card.
+
+- **Recon (read-only):** classified all 76 cluster-B failing subtests with a per-subtest line map —
+  **B1 = 18** (a retired `return_*` helper appears in the spec heredoc inside the subtest), **B2 = 55**
+  (a retired `RETURN_A`/`RETURN_M` IR-node token is hard-coded in an assertion, with no retired helper in
+  the body), **BOTH = 3** (`method_like_action_chain_parses_into_multiple_helper_events` @39213,
+  `method_like_full_lifecycle_inline_composite_switch_attached_branch_blocks_lower_equivalently` @20105,
+  `method_like_lifecycle_inline_composite_switch_attached_branch_blocks_lower_equivalently` @17289).
+- **Empirical probe:** dumped the actual engine behaviour. (1) A lifecycle/action spec with
+  `return(1)`/`return_undef()` produces canonical action-IR node **`RETURN`** (hits `RETURN => 4`), never
+  `RETURN_A` — so the retired `RETURN_A`/`RETURN_M` nodes are simply renamed to `RETURN`. (2) A
+  `.return_a().return_m()` chain lowers to `canonical_action_ir_nodes = ['RAW_PERL']`
+  (`fallback_count = 2`, `ACODE` undef), and `call_spec_handler_subst('Top', 'return_array(...)'|'return_a()')`
+  returns the input unchanged — i.e. the retired helpers are genuinely unrecognized and must be rewritten
+  to canonical `return(...)`/`return(array(...))`, not token-swapped.
+- **Scope hazard found:** `RETURN_A` appears **90×** in `t/phase0_regression.t`, spanning cluster B,
+  cluster-C `emit_context` white-box tests (12400/12588/12628 → `.2.3`), and apparently-passing
+  helper-event tests (39526/39553/39581, where `RETURN_A` is a `helper_action_ir_events` kind). The
+  re-bless is therefore **not** a global search-replace — every edit must be scoped to a specific failing
+  cluster-B subtest.
+- **Decomposition:** `.2.2` → `.2.2.1` (B2: re-bless `RETURN_A` → `RETURN`, scoped; merge hit-count
+  hashes that carry both `RETURN` and `RETURN_A`) + `.2.2.2` (B1: rewrite retired-helper spec bodies to
+  canonical helpers, re-dump, re-bless dependent assertions; judgment-heavy; includes the 3 BOTH subtests).
+- **Durable capture:** new KM card `docs/knowledge/actionir-return-node-retired-to-return.md` records the
+  `RETURN_A`→`RETURN` node rename and the retired-helper→`RAW_PERL` facts so the implementation is never
+  re-derived. Owning task tree updated with the full per-leaf work-list and scoping warnings.
+- **Validation:** no code change → phase0 unchanged at 102 failing; `perl -c -Iperl t/phase0_regression.t`
+  OK; memory-architecture self-check + Knowledge-Map gate pass.
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape subtests, TEST-ONLY) — 7 phase0 failures cleared
 
 Re-blessed the cluster-A "parser-collection-shape" stale subtests in `t/phase0_regression.t`. **No engine,

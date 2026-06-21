@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-21` (`.2.1` cluster-A re-bless **DONE** — 7 not 8; phase0 109 → 102; `.3`/`.4` engine fixes already DONE)
+- Last updated: `2026-06-21` (`.2.2` **SPLIT** → `.2.2.1` B2 + `.2.2.2` B1 after recon + empirical probe; `.2.1`/`.3`/`.4` DONE; phase0 102)
 - Owner: repo-local workflow
 
 ## Goal
@@ -129,9 +129,38 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     `return_a` helper failure, so it re-buckets to cluster B (`.2.2`), not the auto-tag family.
     TEST-ONLY (13 `is_deeply` expecteds in `t/phase0_regression.t`; engine untouched). Got-values
     captured empirically (`Choice::OR+`/`::AND`/`::|`/`AND+`/`AND{N,M}` repros) before re-blessing.
-  - ID: `.2.2` · Status: `pending` — Cluster B (75): re-bless the `method_like` family — rewrite 20
-    retired-helper spec bodies to `return(array(...))`/`return(...)`, and drop the `RETURN_A`/`RETURN_M`
-    terms from 55 node-membership/hit-count fixtures. (May split a1 vs a2.)
+  - ID: `.2.2` · Status: `active` · Children: `.2.2.1`, `.2.2.2` — Cluster B (76): re-bless the
+    `method_like` family + the re-bucketed `blind_call_fluent_post_call_chain_matches_block_form`.
+    **Split 2026-06-21** after read-only recon + empirical probing (too broad + partly judgment-heavy for
+    one signoff slice). Recon classified the 76: **B1 = 18** (retired helper in the spec body),
+    **B2 = 55** (retired `RETURN_A`/`RETURN_M` node token in an assertion, no helper in body), **BOTH = 3**
+    (`method_like_action_chain_parses_into_multiple_helper_events` @39213,
+    `method_like_full_lifecycle_inline_composite_switch_attached_branch_blocks_lower_equivalently` @20105,
+    `method_like_lifecycle_inline_composite_switch_attached_branch_blocks_lower_equivalently` @17289).
+    Empirical engine facts (see KM [[actionir-return-node-retired-to-return]]): the canonical return node
+    is now **`RETURN`** (not `RETURN_A`/`RETURN_M`); the retired helpers `return_a/return_m/return_ma/
+    return_imatch/return_im/return_array` fall to **`RAW_PERL` fallback** (`call_spec_handler_subst`
+    returns them unchanged). **Scope hazard:** `RETURN_A` appears 90× across cluster B, cluster C
+    (`emit_context`, 12400/12588/12628 → `.2.3`), and apparently-passing helper-event tests
+    (39526/39553/39581) — **NOT a global search-replace**; scope every edit to a specific failing subtest.
+  - ID: `.2.2.1` · Status: `pending` — Cluster B2 (55 pure-B2 token re-bless, TEST-ONLY). For each
+    failing pure-B2 `method_like*` subtest, re-bless `RETURN_A` → `RETURN` in `canonical_action_ir_nodes`
+    membership greps (`grep { $_ eq 'RETURN_A' }`) and `canonical_action_ir_hits` keys (`RETURN_A => N`).
+    **Merge** counts where a hits hash carries BOTH `RETURN` and `RETURN_A` (e.g. the
+    `DECLARE/ASSIGN/RETURN/RETURN_A mix` fixture @39434/39435 in `method_like_structured_remaining_
+    lifecycle_blocks_accept_optional_semicolons` @39384). **Exclude** the 3 BOTH subtests (they go in
+    `.2.2.2`) and all non-cluster-B `RETURN_A` sites. Regenerate the exact occurrence list with
+    `grep -n "RETURN_A" t/phase0_regression.t` cross-referenced to the failing-subtest names; verify with
+    a full-suite `comm` set-diff (cleared = the targeted subtests, new = none).
+  - ID: `.2.2.2` · Status: `pending` — Cluster B1 (18 helper-rewrite + 3 BOTH = 21, judgment-heavy).
+    Rewrite each retired-helper spec body to the canonical equivalent (`return_array(X,...)` →
+    `return(array(...))`; `.return_a()`/`.return_m()` → the canonical fluent return — **determine the exact
+    semantics of `return_a`/`return_m`/`return_ma`/`return_imatch`/`return_im` from COMPAT-ALIAS-
+    RETIREMENT-V2** (commit history / `method-like-dsl-migration-status` card) before rewriting), then
+    re-dump and re-bless the dependent `is_deeply`/node/hit assertions (incl. the BOTH subtests'
+    `RETURN_A` tokens). Some of these tests assert a retired *feature* (e.g. `RETURN_A`/`RETURN_M` node
+    coverage from a chained return) — decide per subtest whether to re-bless to the canonical node or to
+    retire/rewrite the test. Higher risk than `.2.2.1`; do after it.
   - ID: `.2.3` · Status: `pending` — Cluster C (20): re-bless/retire the `emit_context` white-box tests
     — fix the stale `plan` (88), re-bless `return_imatch`/`return_array` passthrough + the `a(IMATCH)`
     case, and **delete or rewrite** the seams that monkeypatch the removed `LinkedSpec::Deps::*` (they
@@ -205,9 +234,13 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.3` | `done` 2026-06-21 | AND-codegen fix landed — 62 phase0 failures cleared, zero regressions. |
 | — | `.4` | `done` 2026-06-21 | input-boundary guard landed — 2 cleared, zero regressions. Both engine defects now fixed. |
 | — | `.2.1` | `done` 2026-06-21 | Cluster A re-bless (7, not 8) — 109 → 102 failing, `comm` set-diff = exactly the 7, zero regressions. TEST-ONLY. |
-| 1 | `.2.2`–`.2.4` | `pending` | Re-bless / retire the remaining 101 stale subtests (B=76 incl. the re-bucketed `blind_call_fluent_post_call_chain`, C=20, F=3, G=2). |
-| 2 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 3 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.2` | `active` (split 2026-06-21) | Cluster B (76) decomposed → `.2.2.1` + `.2.2.2` after recon + empirical node-mapping (KM [[actionir-return-node-retired-to-return]]). |
+| 1 | `.2.2.1` | `pending` | Cluster B2: re-bless `RETURN_A` → `RETURN` in 55 pure-B2 `method_like*` subtests (scoped; merge RETURN+RETURN_A hit hashes). Mechanical, well-grounded. |
+| 2 | `.2.2.2` | `pending` | Cluster B1 (21, judgment-heavy): rewrite retired-helper spec bodies to canonical `return(...)`/`return(array(...))` + re-bless dependent assertions; incl. the 3 BOTH subtests. |
+| 3 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
+| 4 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
+| 5 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 6 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -245,6 +278,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.3` | `perl -c` (emitter+facade); generated-source dump; book `Pair::AND` + named-mark reproducers; 21-test AND contract catalog; full `perl -Iperl t/phase0_regression.t` | `done` — 173 → 111 failing (62 cleared, 0 regressions) |
 | `2026-06-21` | `.4` | `perl -c` (`Runtime.pm`); invalid-ARRAY-input + valid-scalar-ref reproducers; full `perl -Iperl t/phase0_regression.t` + `comm -23` set-diff vs post-`.3` | `done` — 111 → 109 failing (exactly the 2 Defect #2 cleared, 0 regressions) |
 | `2026-06-21` | `.2.1` | empirical got-value repros (`Choice::OR+`/`::AND`/`::\|`/`AND+`/`AND{N,M}`); `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` full set-diff vs baseline | `done` — 109 → 102 failing (cleared = exactly the 7 cluster-A; new failures = none) |
+| `2026-06-21` | `.2.2` | read-only recon (76 → B1=18 / B2=55 / BOTH=3, per-subtest line map) + empirical probe (`canonical_action_ir_nodes` = `RETURN`, not `RETURN_A`; retired `return_*` helpers → `RAW_PERL` passthrough) | `done` (split) — decomposed into `.2.2.1` (B2) + `.2.2.2` (B1); no test change this slice |
 
 ## Commit Log
 
@@ -253,7 +287,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.1` | `PHASE0-BACKHALF-TRIAGE.1 — read-only triage complete` | prior commit `3a6d25b`/`f3c8a9b` |
 | `.3` | `PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1)` | commit `a410d93` |
 | `.4` | `PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2)` | commit `b26a5c4` |
-| `.2.1` | `PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape, TEST-ONLY)` | this commit |
+| `.2.1` | `PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape, TEST-ONLY)` | commit `07c4eb7` |
+| `.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into .2.2.1 (B2 token re-bless) + .2.2.2 (B1 helper rewrites)` | this commit |
 
 ## Changelog
 
@@ -281,3 +316,12 @@ can also proceed in parallel if the engine touch is deferred).
   against empirically-dumped engine output. Full phase0 **109 → 102 failing**; `comm` full set-diff =
   exactly the 7 cleared, **zero regressions** (corpus tail still pending `.5`). Frontier → `.2.2`
   (cluster B `method_like` ×76, retired `return_*`/`RETURN_A`).
+- `2026-06-21`: `.2.2` **SPLIT** (decomposition slice — no test change). Read-only recon classified the 76
+  cluster-B subtests (B1=18 retired-helper-in-body / B2=55 retired-`RETURN_A`-token-in-assertion / BOTH=3,
+  per-subtest line map); an empirical probe pinned the engine facts — the canonical return node is now
+  `RETURN` (not `RETURN_A`/`RETURN_M`), and the `return_a/return_m/return_ma/return_imatch/return_im/
+  return_array` helpers are retired → `RAW_PERL` passthrough. **Scope hazard:** `RETURN_A` appears 90×
+  across cluster B, cluster C (`emit_context` → `.2.3`), and apparently-passing helper-event tests — so
+  the re-bless is **not** a global search-replace. Split into `.2.2.1` (B2 token re-bless
+  `RETURN_A`→`RETURN`, mechanical/scoped) and `.2.2.2` (B1 helper rewrites, judgment-heavy). New KM card
+  [[actionir-return-node-retired-to-return]] records the durable facts. Frontier → `.2.2.1`.
