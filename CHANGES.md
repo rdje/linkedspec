@@ -1,6 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into `.2.2.2.1` (return_array) + `.2.2.2.2` (return_a/return_m) — decomposition slice, no test change
+
+Decomposed the judgment-heavy cluster-B1 leaf (21 retired-helper subtests) before implementation, after a
+read-only recon and an archaeology pass. **No test/engine/spec code changed** — this slice is task-tree
+decomposition plus a durable Knowledge Map fact card.
+
+- **Recon (read-only):** mapped all 21 failing B1 subtests by the retired helper in their spec body —
+  **17 use `return_array`** (incl. 2 of the 3 BOTH: `@17289`, `@20105`) and **4 use `return_a`/`return_m`**
+  (incl. the 3rd BOTH `method_like_action_chain_parses_into_multiple_helper_events` + the re-bucketed
+  `blind_call_fluent_post_call_chain_matches_block_form`).
+- **Archaeology (verified):** recovered the original pre-retirement lowering of all six retired helpers
+  (`return_a`/`return_m`/`return_ma`/`return_imatch`/`return_im`/`return_array`) from the
+  COMPAT-ALIAS-RETIREMENT-V2.2 diff (commit `4e92503`) and **empirically confirmed** each canonical rewrite
+  via `call_spec_handler_subst` probes. Key finding distinguishing the two families' blast radius:
+  - `return_array(L, e1, e2, …)` is a **pure alias** — the first arg `L` is the rule label and is *dropped*,
+    barewords are auto-quoted, and the output equals canonical `return(array(e1, e2, …))`. So the array
+    family is mostly an **input-string rewrite** with the expected often already canonical.
+  - `return_a`/`return_m`/`return_ma` add a `"?L:"` tag plus `array_copy(array(L))` (accumulator snapshot)
+    / `entry_groups()` (`@IMATCH_LIST`) / `entry_text()` (`$IMATCH`) — these **change the dumped shape**, so
+    their dependent `is_deeply` / node-coverage assertions must be re-dumped and re-blessed. `imatch()` /
+    `imatch_list()` are NOT valid canonical helpers (they too pass through to `RAW_PERL`).
+- **Decomposition:** `.2.2.2` → `.2.2.2.1` (17 `return_array` subtests — input-rewrite, mechanical-ish) +
+  `.2.2.2.2` (4 `return_a`/`return_m` subtests incl. the 3rd BOTH — re-dump + re-bless + per-test
+  retire-vs-rebless judgment).
+- **Durable capture:** new KM card `docs/knowledge/retired-return-helpers-canonical-rewrite.md` records the
+  verified per-helper mappings + pitfalls so the rewrite is never re-derived.
+- **Validation:** no code change → phase0 unchanged at 47 failing; `perl -c -Iperl t/phase0_regression.t`
+  OK; memory-architecture self-check + Knowledge-Map gate pass.
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 `method_like` `RETURN_A`→`RETURN`, TEST-ONLY) — 55 phase0 failures cleared
 
 Re-blessed the cluster-B2 `method_like*` stale subtests in `t/phase0_regression.t`. **No engine, spec, or

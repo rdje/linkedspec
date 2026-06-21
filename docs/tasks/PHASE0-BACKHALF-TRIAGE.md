@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-21` (`.2.2.1` **DONE** — 55 pure-B2 `method_like` re-blessed, phase0 102 → 47; `.2.2`/`.2.1`/`.3`/`.4` DONE)
+- Last updated: `2026-06-21` (`.2.2.2` **SPLIT** → `.2.2.2.1` array + `.2.2.2.2` accumulator, after recon + verified helper-mapping archaeology; `.2.2.1`/`.2.2`/`.2.1`/`.3`/`.4` DONE; phase0 47)
 - Owner: repo-local workflow
 
 ## Goal
@@ -155,15 +155,39 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     the 14 cluster-C `emit_context` sites (incl. the passing `helper_action_ir_events`/`helper_action_ir_nodes`
     kind sites → `.2.3`) + the 3 BOTH subtests (17354 @17289, 20177 @20105, 39209 @39213 → `.2.2.2`).
     **Actual cleared = 55** (matches the triaged B2 estimate). Engine/spec untouched.
-  - ID: `.2.2.2` · Status: `pending` — Cluster B1 (18 helper-rewrite + 3 BOTH = 21, judgment-heavy).
-    Rewrite each retired-helper spec body to the canonical equivalent (`return_array(X,...)` →
-    `return(array(...))`; `.return_a()`/`.return_m()` → the canonical fluent return — **determine the exact
-    semantics of `return_a`/`return_m`/`return_ma`/`return_imatch`/`return_im` from COMPAT-ALIAS-
-    RETIREMENT-V2** (commit history / `method-like-dsl-migration-status` card) before rewriting), then
-    re-dump and re-bless the dependent `is_deeply`/node/hit assertions (incl. the BOTH subtests'
-    `RETURN_A` tokens). Some of these tests assert a retired *feature* (e.g. `RETURN_A`/`RETURN_M` node
-    coverage from a chained return) — decide per subtest whether to re-bless to the canonical node or to
-    retire/rewrite the test. Higher risk than `.2.2.1`; do after it.
+  - ID: `.2.2.2` · Status: `active` · Children: `.2.2.2.1`, `.2.2.2.2` — Cluster B1 (21 = 18 helper-rewrite
+    + 3 BOTH, judgment-heavy). **Split 2026-06-21** after a read-only recon (per-subtest helper map) + an
+    archaeology agent that recovered & empirically verified the canonical rewrite of each retired helper
+    (KM [[retired-return-helpers-canonical-rewrite]]). Recon mapped the 21 failing B1 subtests by retired
+    helper: **17 use `return_array`** (incl. 2 BOTH @17289 + @20105) and **4 use `return_a`/`return_m`**
+    (incl. the 3rd BOTH `method_like_action_chain_parses_into_multiple_helper_events` + `blind_call_fluent_
+    post_call_chain_matches_block_form`). The two helper families have different blast radius: `return_array`
+    is a **pure alias** (old output == canonical `return(array(...))` output, first label arg dropped,
+    barewords auto-quoted → mostly an input-string rewrite, expected often already canonical), whereas
+    `return_a`/`return_m` add a `"?L:"` tag + `array_copy(array(L))`/`entry_groups()` (the dumped shape
+    changes → re-dump + re-bless required). Split accordingly.
+  - ID: `.2.2.2.1` · Status: `pending` — Cluster B1-array (17 `return_array` subtests). For each failing
+    direct-lowering assertion `is(call_spec_handler_subst('Top','return_array(L, e1, e2, …)'), 'return […]')`,
+    rewrite the input to `return(array(<e1>, <e2>, …))` — **drop the first label arg `L`**, keep the rest,
+    and **explicitly quote any bareword** `return_array` would have auto-quoted (e.g. `semantic_annotation`
+    → `"semantic_annotation"`). The expected string is usually already canonical (return_array was a pure
+    alias) — **verify each against the engine** (`call_spec_handler_subst`) and re-bless only where the
+    dumped output differs. Then any dependent `fallback_count==0` / `language_agnostic…_ready` /
+    `canonical_action_ir_nodes` assertions clear automatically (canonical → no `RAW_PERL`). Verify with a
+    full-suite `comm` set-diff. Subtests at (post-`.2.2.1`) L16582/16636/16668/16709/16750/16794/16838/
+    16879/16920/16963/17208/17289/17373/17419/20105/21720/21784. Mechanical-ish; do first.
+  - ID: `.2.2.2.2` · Status: `pending` — Cluster B1-accumulator (4 subtests: `method_like_action_chain_
+    parses_into_multiple_helper_events` @~39195 [BOTH], `method_like_fluent_and_structured_blocks_lower_
+    equivalently` @~39213, `method_like_structured_blocks_accept_optional_semicolons` @~39276,
+    `blind_call_fluent_post_call_chain_matches_block_form` @~6337). Rewrite `.return_a()`/`.return_m()` /
+    `return_m(Top)` to the canonical tagged forms per KM [[retired-return-helpers-canonical-rewrite]]
+    (`return_a(L)`→`return(array("?L:", array_copy(array(L))))`; `return_m(L)`→`return(array("?L:",
+    entry_groups()))`), re-dump, and re-bless the dependent `is_deeply`/node-coverage assertions. **Per-test
+    judgment:** some assert retired-*feature* coverage (`RETURN_A`/`RETURN_M` nodes from a chained return) —
+    decide whether to re-bless to the canonical `RETURN` node (now a single node, so `.return_a().return_m()`
+    yields `RETURN`×? — confirm the count) or retire the now-meaningless distinct-node assertion. The
+    fluent-vs-block `ACODE`/`ICODE` equality assertions must also be re-checked. Highest risk; do after
+    `.2.2.2.1`.
   - ID: `.2.3` · Status: `pending` — Cluster C (20): re-bless/retire the `emit_context` white-box tests
     — fix the stale `plan` (88), re-bless `return_imatch`/`return_array` passthrough + the `a(IMATCH)`
     case, and **delete or rewrite** the seams that monkeypatch the removed `LinkedSpec::Deps::*` (they
@@ -237,13 +261,15 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.3` | `done` 2026-06-21 | AND-codegen fix landed — 62 phase0 failures cleared, zero regressions. |
 | — | `.4` | `done` 2026-06-21 | input-boundary guard landed — 2 cleared, zero regressions. Both engine defects now fixed. |
 | — | `.2.1` | `done` 2026-06-21 | Cluster A re-bless (7, not 8) — 109 → 102 failing, `comm` set-diff = exactly the 7, zero regressions. TEST-ONLY. |
-| — | `.2.2` | `active` (split 2026-06-21) | Cluster B (76) decomposed → `.2.2.1` (done) + `.2.2.2`. |
+| — | `.2.2` | `active` (split 2026-06-21) | Cluster B (76) decomposed → `.2.2.1` (done) + `.2.2.2` (split). |
 | — | `.2.2.1` | `done` 2026-06-21 | Cluster B2 re-bless — 55 pure-B2 `method_like*` cleared (102 → 47 failing), `comm` set-diff = exactly 55, zero real regressions (lone `parser_invalid_input` flake disproven by a clean re-run). TEST-ONLY. |
-| 1 | `.2.2.2` | `pending` | Cluster B1 (20 `method_like*` incl. 3 BOTH + `blind_call_fluent…`, judgment-heavy): rewrite retired-helper spec bodies to canonical `return(...)`/`return(array(...))` + re-bless dependent assertions. |
-| 2 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
-| 3 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
-| 4 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 5 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.2.2` | `active` (split 2026-06-21) | Cluster B1 (21) decomposed → `.2.2.2.1` (17 `return_array`) + `.2.2.2.2` (4 `return_a`/`return_m` incl. 3 BOTH), after recon + verified helper-mapping archaeology (KM [[retired-return-helpers-canonical-rewrite]]). |
+| 1 | `.2.2.2.1` | `pending` | Cluster B1-array: rewrite the 17 `return_array(L, …)` direct-lowering assertions to `return(array(…))` (drop label, quote barewords); expected usually already canonical — verify per-assertion. Mechanical-ish. |
+| 2 | `.2.2.2.2` | `pending` | Cluster B1-accumulator: rewrite the 4 `return_a`/`return_m` subtests (incl. 3rd BOTH) to `return(array("?L:", array_copy/entry_groups…))`, re-dump + re-bless node/hit assertions; per-test retire-vs-rebless judgment. Highest risk. |
+| 3 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
+| 4 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
+| 5 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 6 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -283,6 +309,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.2.1` | empirical got-value repros (`Choice::OR+`/`::AND`/`::\|`/`AND+`/`AND{N,M}`); `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` full set-diff vs baseline | `done` — 109 → 102 failing (cleared = exactly the 7 cluster-A; new failures = none) |
 | `2026-06-21` | `.2.2` | read-only recon (76 → B1=18 / B2=55 / BOTH=3, per-subtest line map) + empirical probe (`canonical_action_ir_nodes` = `RETURN`, not `RETURN_A`; retired `return_*` helpers → `RAW_PERL` passthrough) | `done` (split) — decomposed into `.2.2.1` (B2) + `.2.2.2` (B1); no test change this slice |
 | `2026-06-21` | `.2.2.1` | guarded one-pass transform (52 Form-A grep flips + 19 Form-B hit-hash merges + 2 desc fixes; asserts shape or aborts); `perl -c` OK; full `perl -Iperl t/phase0_regression.t` + `comm` set-diff vs baseline ×2 runs | `done` — 102 → 47 failing; cleared = exactly 55 pure-B2; new-failure set empty. One after-only name (`parser_invalid_input…`, a Lispish `open3` subprocess test at line 4163, *before* all edits) was a CPU-contention flake — disproven by a clean re-run (ok 137). |
+| `2026-06-21` | `.2.2.2` | read-only recon (21 B1 subtests → per-helper map: 17 `return_array` / 4 `return_a`/`return_m`) + archaeology agent recovering & empirically verifying the canonical rewrite of all 6 retired helpers (git `4e92503` diff + `call_spec_handler_subst` probes) | `done` (split) — decomposed into `.2.2.2.1` (array) + `.2.2.2.2` (accumulator); KM card [[retired-return-helpers-canonical-rewrite]]; no test change this slice |
 
 ## Commit Log
 
@@ -293,7 +320,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.4` | `PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2)` | commit `b26a5c4` |
 | `.2.1` | `PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape, TEST-ONLY)` | commit `07c4eb7` |
 | `.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into .2.2.1 (B2 token re-bless) + .2.2.2 (B1 helper rewrites)` | commit `d5c2acf` |
-| `.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 method_like RETURN_A→RETURN, TEST-ONLY)` | this commit |
+| `.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 method_like RETURN_A→RETURN, TEST-ONLY)` | commit `b691c02` |
+| `.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into .2.2.2.1 (return_array) + .2.2.2.2 (return_a/return_m)` | this commit |
 
 ## Changelog
 
@@ -344,3 +372,13 @@ can also proceed in parallel if the engine touch is deferred).
   engine byte-identical) was a CPU-contention flake, disproven by a clean re-run (`ok 137`). Remaining 47 =
   20 `method_like` (B1+BOTH → `.2.2.2`) + 20 `emit_context` (`.2.3`) + 7 other (`.2.4`/`.5`). Frontier →
   `.2.2.2`.
+- `2026-06-21`: `.2.2.2` **SPLIT** (decomposition slice — no test change). Read-only recon mapped the 21
+  failing B1 subtests by retired helper (**17 `return_array`** incl. 2 BOTH @17289/@20105; **4 `return_a`/
+  `return_m`** incl. the 3rd BOTH `method_like_action_chain…` + `blind_call_fluent…`). An archaeology agent
+  recovered the original lowering of all six retired helpers from the COMPAT-ALIAS-RETIREMENT-V2.2 diff
+  (`4e92503`) and **empirically verified** each canonical rewrite via `call_spec_handler_subst` probes — key
+  finding: `return_array(L, e1, e2)` is a pure alias (`L` dropped, barewords auto-quoted, output ==
+  `return(array(e1,e2))`), so the array family is mostly an input-rewrite, whereas `return_a`/`return_m`
+  add a `"?L:"` tag + `array_copy(array(L))`/`entry_groups()` and need re-dump + re-bless. New KM card
+  [[retired-return-helpers-canonical-rewrite]]. Split into `.2.2.2.1` (17 array, mechanical-ish) and
+  `.2.2.2.2` (4 accumulator, judgment-heavy). Frontier → `.2.2.2.1`.
