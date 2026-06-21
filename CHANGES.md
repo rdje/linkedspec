@@ -1,6 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 `return_array`→`return(array(...))`, TEST-ONLY); 17 phase0 failures cleared, zero regressions
+
+Executed the recorded `.2.2.2.1` plan. **No engine/spec/production code touched** — only `t/phase0_regression.t`.
+The 17 failing B1-array `method_like*` subtests carried the *retired* `return_array(...)` helper in their spec
+bodies (→ `RAW_PERL` fallback ⇒ `fallback_count>0`/stale `RETURN_A`), so their `fallback==0`/`ready`/hit-hash
+assertions failed.
+
+- **Rewrite (verified, matching-paren-aware):** `return_array(<Top,> semantic_annotation, X)` →
+  `return(array("semantic_annotation", X))` — drops the `Top` label only on the L16601 `call_spec_handler_subst`
+  arg, quotes the leading bareword, inserts exactly one matching close paren (`return(array(` opens 2 vs
+  `return_array(`'s 1). Applied **identically to fluent + block** specs across 4 syntactic forms
+  (`.return_array` tail / `; return_array }` / bare line / inline `if(...)`-arg) + the subst-arg.
+- **Guarded line-scoped transform:** scoped to the 17 failing-subtest line-ranges only — **`return_array` is
+  74× file-wide and byte-identical across failing + 40 passing switch-case subtests, so a global replace would
+  have corrupted the passing ones.** The transform asserts `rewrites == in-range occurrence count` (**33**, not
+  the recon's "34" — off by one) **and** file-wide `return_array(` delta == rewrites, dies-before-write on any
+  drift; the full dry-run diff was inspected before applying.
+- **Recon correction (caught by reading the test bodies):** the 2 BOTH subtests
+  (`…lifecycle_inline_composite_switch_attached_branch_blocks` @17289,
+  `…full_lifecycle_inline_composite_switch_attached_branch_blocks` @20105) do **not** "pin no literal output" —
+  each pins a literal `canonical_action_ir_hits` hash carrying the now-stale `RETURN_A => 1`. That was the
+  deferred `.2.2.1` Form-B merge, done here: `RETURN 2→3`, `RETURN_A` removed — **empirically dumped**
+  (`{…RETURN=>3…}`, `fallback=0`, `ready=1`, tag-independent I==LX) before writing, not assumed. L16601's pinned
+  `is(...)` expected confirmed unchanged-and-canonical via `call_spec_handler_subst`.
+- **Verification:** `perl -c -Iperl t/phase0_regression.t` OK; `perl -c perl/LinkedSpec.pm` OK; full
+  `perl -Iperl t/phase0_regression.t` **47 → 30 failing**; `comm` name set-diff vs baseline = **exactly the 17
+  B1-array subtests cleared (incl. both BOTH), new-failure set empty**. Remaining 30 = `.2.2.2.2` (4
+  `return_a`/`return_m` + blind_call) + `.2.3` (`emit_context`) + `.2.4` (F/G) + `.5` (`corpus_regression` tail).
+  self-check + KM gate pass. **Book unaffected** (internal IR-node names, not a user surface). **Next: `.2.2.2.2`.**
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2.1 (recon) — scope + verified rewrite rule for the B1-array leaf; no test change
 
 Read-only pre-implementation recon of the `.2.2.2.1` leaf (17 `return_array` subtests), recorded so the

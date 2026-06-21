@@ -16598,7 +16598,7 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
         'push_value accepts hash payloads with nested collection-valued array-pipeline composition'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return_array(Top, semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))))'),
         'return ["semantic_annotation", {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}]',
         'return_array accepts hash payloads with nested collection-valued array-pipeline composition'
     );
@@ -16638,12 +16638,12 @@ subtest 'method_like_collection_hash_action_forms_lower_equivalently' => sub {
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/))))
+ /a/ -> Top .declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/)))))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/)))) }
+ /a/ -> Top { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/))))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -16670,12 +16670,12 @@ subtest 'method_like_fluent_and_structured_if_elseif_branch_blocks_lower_equival
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(scalar(on)).return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).elseif(scalar(alt_on)).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).else().return_undef().endif()
+ /a/ -> Top .if(scalar(on)).return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).elseif(scalar(alt_on)).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))).else().return_undef().endif()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); elseif(scalar(alt_on)); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); else(); return_undef(); endif() }
+ /a/ -> Top { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); elseif(scalar(alt_on)); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))); else(); return_undef(); endif() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -16711,12 +16711,12 @@ subtest 'method_like_fluent_and_structured_switch_case_branch_blocks_lower_equiv
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(scalar(kind)).case("A").return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).default().return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).endswitch()
+ /a/ -> Top .switch(scalar(kind)).case("A").return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).default().return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))).endswitch()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); default(); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); endswitch() }
+ /a/ -> Top { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); default(); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))); endswitch() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -16752,13 +16752,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_blocks_lower_equi
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.if(scalar(on)).return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).elseif(scalar(alt_on)).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).else().return_undef().endif()
+LX.if(scalar(on)).return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).elseif(scalar(alt_on)).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))).else().return_undef().endif()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); elseif(scalar(alt_on)); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); else(); return_undef(); endif() }
+LX { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); elseif(scalar(alt_on)); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))); else(); return_undef(); endif() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -16796,13 +16796,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_blocks_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.switch(scalar(kind)).case("A").return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).default().return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).endswitch()
+LX.switch(scalar(kind)).case("A").return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).default().return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))).endswitch()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); default(); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); endswitch() }
+LX { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); default(); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))); endswitch() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -16840,12 +16840,12 @@ subtest 'method_like_fluent_and_structured_action_if_elseif_multi_step_blocks_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(scalar(on)).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))).elseif(scalar(alt_on)).say("alt").return_undef().else().return_undef().endif()
+ /a/ -> Top .if(scalar(on)).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).elseif(scalar(alt_on)).say("alt").return_undef().else().return_undef().endif()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(scalar(on)); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); elseif(scalar(alt_on)); say("alt"); return_undef(); else(); return_undef(); endif() }
+ /a/ -> Top { if(scalar(on)); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); elseif(scalar(alt_on)); say("alt"); return_undef(); else(); return_undef(); endif() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -16881,12 +16881,12 @@ subtest 'method_like_fluent_and_structured_action_switch_case_multi_step_blocks_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(scalar(kind)).case("A").declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))).default().say("miss").return_undef().endswitch()
+ /a/ -> Top .switch(scalar(kind)).case("A").declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).default().say("miss").return_undef().endswitch()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(scalar(kind)); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); default(); say("miss"); return_undef(); endswitch() }
+ /a/ -> Top { switch(scalar(kind)); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); default(); say("miss"); return_undef(); endswitch() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -16922,13 +16922,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_multi_step_blocks
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.if(scalar(on)).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))).elseif(scalar(alt_on)).say("alt").return_undef().else().return_undef().endif()
+LX.if(scalar(on)).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).elseif(scalar(alt_on)).say("alt").return_undef().else().return_undef().endif()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { if(scalar(on)); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); elseif(scalar(alt_on)); say("alt"); return_undef(); else(); return_undef(); endif() }
+LX { if(scalar(on)); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); elseif(scalar(alt_on)); say("alt"); return_undef(); else(); return_undef(); endif() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -16965,13 +16965,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_multi_step_bloc
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.switch(scalar(kind)).case("A").declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))).default().say("miss").return_undef().endswitch()
+LX.switch(scalar(kind)).case("A").declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).default().say("miss").return_undef().endswitch()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { switch(scalar(kind)); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); default(); say("miss"); return_undef(); endswitch() }
+LX { switch(scalar(kind)); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); default(); say("miss"); return_undef(); endswitch() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17216,7 +17216,7 @@ Top::&
     case("|", {
       declare(array, events)
       push_value(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
       say("miss")
@@ -17234,7 +17234,7 @@ Top::&
     case("|") {
       declare(array, events)
       push_value(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     default {
       say("miss")
@@ -17297,7 +17297,7 @@ LX {
     case("|", {
       declare(array, events)
       push_value(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
       say("miss")
@@ -17316,7 +17316,7 @@ LX {
     case("|") {
       declare(array, events)
       push_value(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     default {
       say("miss")
@@ -17350,8 +17350,7 @@ SPEC
             DECLARE => 1,
             DEFAULT => 1,
             PUSH    => 1,
-            RETURN  => 2,
-            RETURN_A => 1,
+            RETURN  => 3,
             SAY     => 1,
             SWITCH  => 1,
         },
@@ -17375,12 +17374,12 @@ subtest 'method_like_action_inline_composite_if_lower_equivalently' => sub {
 
     my $inline_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
+ /a/ -> Top { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
 SPEC
 
     my $marker_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return_array(semantic_annotation, hash("items", array(events))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
+ /a/ -> Top { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return(array("semantic_annotation", hash("items", array(events)))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
 SPEC
 
     my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -17421,13 +17420,13 @@ subtest 'method_like_lifecycle_inline_composite_if_lower_equivalently' => sub {
 
     my $inline_spec = <<'SPEC';
 Top::&
-LX { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
+LX { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
     my $marker_spec = <<'SPEC';
 Top::&
-LX { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return_array(semantic_annotation, hash("items", array(events))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
+LX { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return(array("semantic_annotation", hash("items", array(events)))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -20128,7 +20127,7 @@ $tag {
     scalar(op),
     case("|", {
       declare(array, events)
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
       return_undef()
@@ -20145,7 +20144,7 @@ $tag {
     scalar(op),
     case("|") {
       declare(array, events)
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     default() {
       return_undef()
@@ -20173,8 +20172,7 @@ SPEC
                     CASE    => 1,
                     DECLARE => 1,
                     DEFAULT => 1,
-                    RETURN  => 2,
-                    RETURN_A => 1,
+                    RETURN  => 3,
                     SWITCH  => 1,
                 },
                 "$tag lifecycle inline composite switch attached-branch-block sugar preserves the expected SWITCH/CASE/DEFAULT helper mix",
@@ -21726,7 +21724,7 @@ Top::&
   switch(scalar(op))
   case("|")
   declare(array, events)
-  return_array(semantic_annotation, hash("items", array(events)))
+  return(array("semantic_annotation", hash("items", array(events))))
   default()
   say("miss")
   return_undef()
@@ -21740,7 +21738,7 @@ Top::&
   switch(scalar(op))
   case("|") {
     declare(array, events)
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   }
   default() {
     say("miss")
@@ -21806,7 +21804,7 @@ $tag {
   switch(scalar(op))
   case("|")
   declare(array, events)
-  return_array(semantic_annotation, hash("items", array(events)))
+  return(array("semantic_annotation", hash("items", array(events))))
   default()
   return_undef()
   endswitch()
@@ -21820,7 +21818,7 @@ $tag {
   switch(scalar(op))
   case("|") {
     declare(array, events)
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   }
   default {
     return_undef()

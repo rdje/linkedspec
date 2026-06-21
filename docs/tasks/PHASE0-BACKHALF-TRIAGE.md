@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-21` (`.2.2.2` **SPLIT** → `.2.2.2.1` array + `.2.2.2.2` accumulator, after recon + verified helper-mapping archaeology; `.2.2.1`/`.2.2`/`.2.1`/`.3`/`.4` DONE; phase0 47)
+- Last updated: `2026-06-21` (`.2.2.2.1` **DONE** — 33 `return_array`→`return(array("semantic_annotation",…))` rewrites + 2 BOTH literal hit-hash re-blesses, TEST-ONLY; phase0 47→30, `comm` set-diff = exactly the 17 cleared, 0 regressions; `.2.2.2`/`.2.2.1`/`.2.1`/`.3`/`.4` DONE)
 - Owner: repo-local workflow
 
 ## Goal
@@ -166,7 +166,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     barewords auto-quoted → mostly an input-string rewrite, expected often already canonical), whereas
     `return_a`/`return_m` add a `"?L:"` tag + `array_copy(array(L))`/`entry_groups()` (the dumped shape
     changes → re-dump + re-bless required). Split accordingly.
-  - ID: `.2.2.2.1` · Status: `pending` — Cluster B1-array (17 `return_array` subtests). **Pre-implementation
+  - ID: `.2.2.2.1` · Status: `done` (2026-06-21) — Cluster B1-array (17 `return_array` subtests). **Pre-implementation
     recon DONE 2026-06-21 (read-only) — execute mechanically from here.** Subtests at (post-`.2.2.1`)
     L16582/16636/16668/16709/16750/16794/16838/16879/16920/16963/17208/17289/17373/17419/20105/21720/21784.
     **CRITICAL SCOPE WARNING:** `return_array` appears **74× in the file = 34 in failing subtests / 40 in
@@ -190,6 +190,21 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     return_array call's end (naive paren-count is safe: no parens inside the `"items"`/`/^[A-C]/` literals).
     Verify with `perl -c` + full-suite `comm` set-diff (cleared = exactly the 17; new = none). Mechanical
     but multi-form — a guarded line-scoped transform that asserts the occurrence count, like `.2.2.1`.
+    **DONE 2026-06-21 (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched).** A guarded line-scoped
+    transform (matching-paren-aware) rewrote **33 in-range occurrences** (the recon's "34" was off by one;
+    real split = **74× file-wide → 32 spec-body + 1 subst-arg in-range, 41 left in passing/EmitContext sites**)
+    of `return_array(<Top,> semantic_annotation, X)` → `return(array("semantic_annotation", X))` — drops the
+    `Top` label only on the L16601 subst-arg, quotes the leading bareword, inserts exactly one matching close
+    paren — scoped to the 17 subtest line-ranges, asserting `rewrites == in-range count` + file-wide
+    `return_array(` delta == rewrites, die-before-write on drift; dry-run diff inspected in full before apply.
+    **Recon correction:** the 2 BOTH subtests (`…lifecycle_inline_composite_switch_attached_branch_blocks`
+    @17289, `…full_lifecycle_inline_composite_switch_attached_branch_blocks` @20105) do **not** "pin no literal
+    output" — each pins a literal `canonical_action_ir_hits` hash carrying the now-stale `RETURN_A => 1`. That
+    was the deferred `.2.2.1` Form-B merge: re-blessed `RETURN 2→3`, dropped `RETURN_A`, **empirically dumped**
+    (`{…RETURN=>3…}`, fallback=0, ready=1, tag-independent I==LX) before writing — not assumed. L16601's pinned
+    `is(...)` expected confirmed unchanged-and-canonical via `call_spec_handler_subst`. `perl -c` OK; full
+    `perl -Iperl t/phase0_regression.t` **47 → 30 failing**; `comm` name set-diff = **exactly the 17 cleared,
+    new-failure set empty**.
   - ID: `.2.2.2.2` · Status: `pending` — Cluster B1-accumulator (4 subtests: `method_like_action_chain_
     parses_into_multiple_helper_events` @~39195 [BOTH], `method_like_fluent_and_structured_blocks_lower_
     equivalently` @~39213, `method_like_structured_blocks_accept_optional_semicolons` @~39276,
@@ -278,12 +293,12 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.2.2` | `active` (split 2026-06-21) | Cluster B (76) decomposed → `.2.2.1` (done) + `.2.2.2` (split). |
 | — | `.2.2.1` | `done` 2026-06-21 | Cluster B2 re-bless — 55 pure-B2 `method_like*` cleared (102 → 47 failing), `comm` set-diff = exactly 55, zero real regressions (lone `parser_invalid_input` flake disproven by a clean re-run). TEST-ONLY. |
 | — | `.2.2.2` | `active` (split 2026-06-21) | Cluster B1 (21) decomposed → `.2.2.2.1` (17 `return_array`) + `.2.2.2.2` (4 `return_a`/`return_m` incl. 3 BOTH), after recon + verified helper-mapping archaeology (KM [[retired-return-helpers-canonical-rewrite]]). |
-| 1 | `.2.2.2.1` | `pending` | Cluster B1-array: rewrite the 17 `return_array(L, …)` direct-lowering assertions to `return(array(…))` (drop label, quote barewords); expected usually already canonical — verify per-assertion. Mechanical-ish. |
-| 2 | `.2.2.2.2` | `pending` | Cluster B1-accumulator: rewrite the 4 `return_a`/`return_m` subtests (incl. 3rd BOTH) to `return(array("?L:", array_copy/entry_groups…))`, re-dump + re-bless node/hit assertions; per-test retire-vs-rebless judgment. Highest risk. |
-| 3 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
-| 4 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
-| 5 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 6 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.2.2.1` | `done` 2026-06-21 | Cluster B1-array re-bless — 33 `return_array`→`return(array("semantic_annotation",…))` rewrites + 2 BOTH literal hit-hash re-blesses (`RETURN_A`→`RETURN`), TEST-ONLY; phase0 47→30, `comm` set-diff = exactly the 17 cleared, 0 regressions. |
+| 1 | `.2.2.2.2` | `pending` | Cluster B1-accumulator: rewrite the 4 `return_a`/`return_m` subtests (incl. 3rd BOTH) to `return(array("?L:", array_copy/entry_groups…))`, re-dump + re-bless node/hit assertions; per-test retire-vs-rebless judgment. Highest risk. |
+| 2 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
+| 3 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
+| 4 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 5 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -324,6 +339,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.2.2` | read-only recon (76 → B1=18 / B2=55 / BOTH=3, per-subtest line map) + empirical probe (`canonical_action_ir_nodes` = `RETURN`, not `RETURN_A`; retired `return_*` helpers → `RAW_PERL` passthrough) | `done` (split) — decomposed into `.2.2.1` (B2) + `.2.2.2` (B1); no test change this slice |
 | `2026-06-21` | `.2.2.1` | guarded one-pass transform (52 Form-A grep flips + 19 Form-B hit-hash merges + 2 desc fixes; asserts shape or aborts); `perl -c` OK; full `perl -Iperl t/phase0_regression.t` + `comm` set-diff vs baseline ×2 runs | `done` — 102 → 47 failing; cleared = exactly 55 pure-B2; new-failure set empty. One after-only name (`parser_invalid_input…`, a Lispish `open3` subprocess test at line 4163, *before* all edits) was a CPU-contention flake — disproven by a clean re-run (ok 137). |
 | `2026-06-21` | `.2.2.2` | read-only recon (21 B1 subtests → per-helper map: 17 `return_array` / 4 `return_a`/`return_m`) + archaeology agent recovering & empirically verifying the canonical rewrite of all 6 retired helpers (git `4e92503` diff + `call_spec_handler_subst` probes) | `done` (split) — decomposed into `.2.2.2.1` (array) + `.2.2.2.2` (accumulator); KM card [[retired-return-helpers-canonical-rewrite]]; no test change this slice |
+| `2026-06-21` | `.2.2.2.1` | guarded matching-paren line-scoped transform (33 rewrites, asserts count/delta, die-on-drift) + dry-run full-diff inspection; empirical post-rewrite hit-hash dump for the 2 BOTH subtests; `call_spec_handler_subst` check of the L16601 pinned expected; `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs baseline | `done` — 47 → 30 failing; cleared = exactly the 17 B1-array (incl. both BOTH); new-failure set empty. TEST-ONLY. |
 
 ## Commit Log
 
@@ -335,7 +351,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.2.1` | `PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape, TEST-ONLY)` | commit `07c4eb7` |
 | `.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into .2.2.1 (B2 token re-bless) + .2.2.2 (B1 helper rewrites)` | commit `d5c2acf` |
 | `.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 method_like RETURN_A→RETURN, TEST-ONLY)` | commit `b691c02` |
-| `.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into .2.2.2.1 (return_array) + .2.2.2.2 (return_a/return_m)` | this commit |
+| `.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into .2.2.2.1 (return_array) + .2.2.2.2 (return_a/return_m)` | commit `fc52288`; recon `91b5113` |
+| `.2.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 return_array→return(array), TEST-ONLY); 17 phase0 failures cleared` | this commit |
 
 ## Changelog
 
@@ -407,3 +424,15 @@ can also proceed in parallel if the engine touch is deferred).
   pin no literal output (only fluent==block + fallback==0 + ready), so the rewrite is shape-agnostic.
   Full execution plan recorded in the `.2.2.2.1` node. Recommended a **fresh session** for the multi-form
   paren-level surgery (signoff focus). Frontier stays → `.2.2.2.1`.
+- `2026-06-21`: `.2.2.2.1` **DONE** (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched). A guarded
+  matching-paren line-scoped transform rewrote **33 in-range** `return_array(<Top,> semantic_annotation, X)`
+  → `return(array("semantic_annotation", X))` (recon's "34" was off-by-one; real split = 74× file-wide →
+  33 in the 17 failing ranges / 41 in passing + EmitContext sites), asserting `rewrites == in-range count`
+  and file-wide delta, die-before-write on drift; the full dry-run diff was inspected before apply.
+  **Recon correction:** the 2 BOTH subtests (@17289, @20105) do NOT "pin no literal output" — each pins a
+  literal `canonical_action_ir_hits` carrying stale `RETURN_A => 1`; that deferred `.2.2.1` Form-B merge was
+  done here (`RETURN 2→3`, drop `RETURN_A`), **empirically dumped** before re-blessing. L16601's pinned
+  `is(...)` expected confirmed unchanged-and-canonical. `perl -c` OK; full phase0 **47 → 30 failing**;
+  `comm` name set-diff = exactly the 17 B1-array cleared (incl. both BOTH), **zero regressions**. Frontier
+  → `.2.2.2.2` (4 `return_a`/`return_m` accumulator, re-dump + re-bless, highest risk). Book unaffected
+  (internal IR-node names, not a user surface).
