@@ -121,16 +121,27 @@ sub run_get {
    my $original_parser = $ret;
    $ret = sub {
     my ($input_ref) = @_;
-    # Reset position to start of input — the build process may have
-    # advanced pos() during bootstrap parsing.
-    pos($$input_ref) = 0;
-    # Skip leading comment lines (# ...) and blank lines before the
-    # main parse loop.
-    while (1) {
-     if ($$input_ref =~ /\G[ \t]*\n/gc) {
-     } elsif ($$input_ref =~ /\G[ \t]*#[^\n]*(?:\n|\z)/gc) {
-     } else {
-      last;
+    # Only the SCALAR-ref fast path resets pos() and skips leading comment/blank
+    # lines. For any other input shape, delegate straight to the inner parser, which
+    # owns the documented input-boundary guard (Compiler.pm validate_input_ref:
+    # "Top-level parser expects a SCALAR reference input; got <type>") and populates
+    # runtime_ctx->{last_error}. Dereferencing a non-SCALAR ref here — as this wrapper
+    # did unconditionally — died with a raw "Not a SCALAR reference" before that guard
+    # could run, with last_error left empty. The guard mirrors Compiler.pm's exact
+    # acceptance (ref ne 'SCALAR'). (MEDIUM-IMPACT.3.2 added the wrapper;
+    # PHASE0-BACKHALF-TRIAGE.4 added this guard.)
+    if (ref($input_ref) eq 'SCALAR') {
+     # Reset position to start of input — the build process may have
+     # advanced pos() during bootstrap parsing.
+     pos($$input_ref) = 0;
+     # Skip leading comment lines (# ...) and blank lines before the
+     # main parse loop.
+     while (1) {
+      if ($$input_ref =~ /\G[ \t]*\n/gc) {
+      } elsif ($$input_ref =~ /\G[ \t]*#[^\n]*(?:\n|\z)/gc) {
+      } else {
+       last;
+      }
      }
     }
     return $original_parser->($input_ref);

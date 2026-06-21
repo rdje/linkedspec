@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2) — 2 phase0 failures cleared
+
+Fixed reference-engine Defect #2 (input-boundary-validation regression), **authorized by ADR `0008`**.
+Touched one file: `perl/LinkedSpec/Runtime.pm` (the comment-skip parser wrapper added by
+`MEDIUM-IMPACT.3.2`, commit `d7294d0`).
+
+- **Root cause:** the wrapper ran `pos($$input_ref) = 0;` (an unguarded deref) before delegating to the
+  inner parser that holds the documented input-boundary guard (`Compiler.pm` `validate_input_ref`,
+  ~line 1109, `ref($input_ref) ne 'SCALAR'`). For non-SCALAR-ref input the wrapper died first with a raw
+  `Not a SCALAR reference at … Runtime.pm line 126`, and because the die happened in the wrapper,
+  `runtime_ctx->{last_error}` was never populated.
+- **Fix:** gate the `pos()` reset + leading-comment/blank-line skip behind `if (ref($input_ref) eq
+  'SCALAR')` (mirroring the inner guard's exact acceptance), and always `return
+  $original_parser->($input_ref)`. Non-SCALAR-ref input now reaches the documented guard → the friendly
+  `Top-level parser expects a SCALAR reference input; got ARRAY` error with a populated structured
+  `last_error` (`type => 'runtime_parser'`). Valid scalar-ref input keeps the comment-skip behavior
+  (the wrapper's original `MEDIUM-IMPACT.3.2` purpose).
+- **Verification:** `perl -c` clean. Reproducer: invalid ARRAY input → friendly error + populated
+  `last_error`; valid `\$input` still parses. Full `perl -Iperl t/phase0_regression.t`: **111 → 109
+  failing** — the diff vs the post-`.3` failing set is exactly the 2 Defect #2 subtests cleared
+  (`parser_invalid_input_fails_at_runtime_parser_boundary`,
+  `get_parser_runtime_ctx_ref_records_invalid_input_ref_with_spec_identity`), zero other changes. The
+  remaining 109 = 108 known-STALE (`.2.x`) + 1 `corpus_regression` tail (`.5`). Both reference-engine
+  defects (#1, #2) are now fixed; only the test-only re-bless + the corpus tail remain before green phase0.
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1) — 62 phase0 failures cleared
 
 Fixed reference-engine Defect #1 (AND-rule action-codegen), **authorized by the user as a sanctioned,

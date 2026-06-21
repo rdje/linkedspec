@@ -111,7 +111,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 
 ## Task Tree
 
-- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `active` · Children: `.1` (done), `.2`, `.3`, `.4`, `.5`
+- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `active` · Children: `.1` (done), `.2`, `.3` (done), `.4` (done), `.5`, `.6`
 - ID: `PHASE0-BACKHALF-TRIAGE.1` · Status: `done` (2026-06-19)
   Goal: Read-only cluster-by-cluster stale-vs-real triage of the 173 failures, with evidence + scope.
   Acceptance: per-cluster verdict + scope/effort + recommended fix plan, decomposed into `.2+`. **Met.**
@@ -156,19 +156,39 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     cleared)** — all 60 cluster-D + named-G AND tests + C-t13 `push_nonempty` pass; remaining 111 =
     108 STALE (`.2.x`) + 2 Defect #2 (`.4`) + 1 `corpus_regression` tail (`.5`); zero regressions.
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.4` · Status: `pending` (**authorized 2026-06-21 — ADR `0008`**)
+- ID: `PHASE0-BACKHALF-TRIAGE.4` · Status: `done` (2026-06-21 — **authorized by ADR `0008`**)
   Goal: **Engine fix** — input-boundary-validation regression (#2). Make the `Runtime.pm` comment-skip
     wrapper guard its deref (or run the documented SCALAR-ref validation ahead of it) so invalid input
     yields the friendly boundary error + populated `runtime_ctx->{last_error}`. Unblocks 2 subtests.
     Defect #2 **re-confirmed objectively 2026-06-21**: `Not a SCALAR reference at … Runtime.pm line 126`
-    with empty `last_error` (was unverified in the prior session).
-  Blocker: **cleared 2026-06-21** (user authorized both engine fixes — ADR `0008`).
-  Verification: `pending`  ·  Commit: `pending`
+    with empty `last_error` (was unverified in the prior session). **MET.**
+  Fix: `perl/LinkedSpec/Runtime.pm` — gate the `pos($$input_ref)=0` reset + leading-comment/blank-skip
+    behind `if (ref($input_ref) eq 'SCALAR')` (mirrors `Compiler.pm:1109` `ref ne 'SCALAR'`) and always
+    delegate to `$original_parser->($input_ref)`, so the documented inner guard fires for invalid input.
+  Verification (2026-06-21): `perl -c` clean; reproducer → friendly error + populated `last_error`
+    (`type=runtime_parser`), valid scalar-ref input still parses; full `perl -Iperl t/phase0_regression.t`
+    = **111 → 109 failing**, set-diff vs post-`.3` = exactly the 2 Defect #2 subtests cleared, zero
+    regressions. Blocker: **cleared 2026-06-21** (ADR `0008`).
+  Commit: (this commit)
 - ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `pending`
   Goal: Verify a fully green `t/phase0_regression.t` end-to-end (all 959 subtests), including the
     881–959 tail not observed in the `.1` run (the run was terminated at subtest 881; confirm no fresh
     hang at `vhdl_small_blocker_helper_flow_eliminates_raw_fallback`/`corpus_regression`). Then flip the
     downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`, `NONCORE-QUARANTINE.V`).
+  Verification: `pending`  ·  Commit: `pending`
+- ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `pending` (added 2026-06-21)
+  Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex slots +
+    indexed edges with a `return(...)` edge now compiles and returns the raw author payload (the engine
+    contract the cluster-D/G tests encode). But `appendix/formal-grammar.md:66-78` marks every `:AND`
+    mode "Body rule only" and `worked-spec-walkthrough.md:119-124` + `what-is-linkedspec.md:45` say a
+    top `::` rule "carries no regex" — both now contradicted by the engine+tests. Reconcile the book so
+    it neither misleads (the broken `Pair::AND` example) nor contradicts the engine, while preserving the
+    recommended 2-rule idiom ([[spec-top-rule-no-regex-two-rule-minimum]]) as *style guidance* distinct
+    from *engine capability*. Likely needs a short user policy check: document `::AND`+regex as a
+    supported form vs. keep steering authors to the 2-rule idiom (or both — "supported but not idiomatic").
+  Acceptance: no book `.spec` example is broken or doctrine-contradictory; the "Body rule only" /
+    "no regex on top" claims are corrected or reframed as idiom; `mdbook build` exit 0; outputs verified
+    via `LinkedSpec::Get`.
   Verification: `pending`  ·  Commit: `pending`
 
 ## Current Frontier
@@ -176,10 +196,11 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `.3` | `done` 2026-06-21 | AND-codegen fix landed — 62 phase0 failures cleared, zero regressions. |
-| 1 | `.4` | `pending` | input-boundary fix (2). **Authorized 2026-06-21 (ADR `0008`).** Small, isolated `Runtime.pm` guard. |
-| 2 | `.2.1` | `pending` | Lowest-risk re-bless (8, cluster A); independent of the engine fixes (these expectations are stale regardless). |
-| 3 | `.2.2`–`.2.4` | `pending` | Re-bless / retire the remaining 100 stale subtests. |
-| 4 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` tail) + downstream gate flips. |
+| — | `.4` | `done` 2026-06-21 | input-boundary guard landed — 2 cleared, zero regressions. Both engine defects now fixed. |
+| 1 | `.2.1` | `pending` | Lowest-risk re-bless (8, cluster A); independent of the engine fixes (these expectations are stale regardless). |
+| 2 | `.2.2`–`.2.4` | `pending` | Re-bless / retire the remaining 100 stale subtests (B=75, C=20, F+G). |
+| 3 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 4 | `.6` | `pending` (new) | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -215,13 +236,15 @@ can also proceed in parallel if the engine touch is deferred).
 | --- | --- | --- | --- |
 | `2026-06-19` | `.1` | full phase0 TAP (173 fail/707 pass); cluster-D V1–V4 bisection; capture_from/return-array lowering isolation; entry_and child `[]` repro; 2 parallel read-only deep-dives (B; C+F+G) | `done` — 108 STALE / 65 REAL (2 defects) |
 | `2026-06-21` | `.3` | `perl -c` (emitter+facade); generated-source dump; book `Pair::AND` + named-mark reproducers; 21-test AND contract catalog; full `perl -Iperl t/phase0_regression.t` | `done` — 173 → 111 failing (62 cleared, 0 regressions) |
+| `2026-06-21` | `.4` | `perl -c` (`Runtime.pm`); invalid-ARRAY-input + valid-scalar-ref reproducers; full `perl -Iperl t/phase0_regression.t` + `comm -23` set-diff vs post-`.3` | `done` — 111 → 109 failing (exactly the 2 Defect #2 cleared, 0 regressions) |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.1` | `PHASE0-BACKHALF-TRIAGE.1 — read-only triage complete` | prior commit `3a6d25b`/`f3c8a9b` |
-| `.3` | `PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1)` | this commit |
+| `.3` | `PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1)` | commit `a410d93` |
+| `.4` | `PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2)` | this commit |
 
 ## Changelog
 
@@ -236,3 +259,8 @@ can also proceed in parallel if the engine touch is deferred).
   (incl. the book's OWN `Pair::AND` example breaking). `.3` **DONE** — fixed the AND-acode emitter
   (`\$"`→verbatim) in `HandlerVariantEmitter.pm`; full phase0 173 → 111 failing (62 cleared, 0
   regressions). KM card [[and-return-edge-codegen-defect]] → `resolved`. Frontier → `.4`.
+- `2026-06-21`: `.4` **DONE** — fixed Defect #2 (input-boundary) in `Runtime.pm` (gate the `pos()`/skip
+  block behind `ref eq 'SCALAR'`, always delegate to the inner guard); full phase0 111 → 109 failing
+  (set-diff = exactly the 2 Defect #2 subtests, 0 regressions). Both reference-engine defects now fixed.
+  KM card [[runtime-input-boundary-validation-regression]] → `resolved`. Added `.6` (book `:AND`
+  reconciliation). Frontier → `.2.1` (re-bless the 108 STALE, TEST-ONLY).

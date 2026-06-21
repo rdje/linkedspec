@@ -7,11 +7,21 @@ answers:
   - "where is the top-level parser input-boundary validation regression"
   - "why does get_parser runtime_ctx_ref not record invalid input ref"
 date: 2026-06-19
-status: current
+status: resolved
 tags: [runtime, input-validation, diagnostics, regression, phase0]
-evidence: "PHASE0-BACKHALF-TRIAGE.1 (2026-06-19): 2 of 173 back-half failures; agent-identified Runtime.pm:~126 + commit d7294d0"
-reverify: "perl -Iperl -e 'require LinkedSpec; my $s=\"Top:: /foo/ -> Top { return(1) }\\n\"; my %c; my $p=LinkedSpec::Get(\\$s,top_rule=>q{Top},runtime_ctx_ref=>\\%c); my @bad=(1,2); my $r=eval { $p->(\\@bad) }; print qq{err=$@\\n}; print q{last_error=}, ($c{last_error}{detail}//q{<none>}), qq{\\n}'"
+evidence: "PHASE0-BACKHALF-TRIAGE.1 (2026-06-19): 2 of 173 back-half failures; agent-identified Runtime.pm:~126 + commit d7294d0. FIXED by PHASE0-BACKHALF-TRIAGE.4 (2026-06-21): wrapper now gates its pos()/skip block behind `ref($input_ref) eq 'SCALAR'` and always delegates to the inner parser; invalid input now yields the friendly boundary error + populated last_error."
+reverify: "perl -Iperl -e 'require LinkedSpec; my $s=\"Top:: /foo/ -> Top { return(1) }\\n\"; my %c; my $p=LinkedSpec::Get(\\$s,top_rule=>q{Top},runtime_ctx_ref=>\\%c); my @bad=(1,2); my $r=eval { $p->(\\@bad) }; print qq{err=$@\\n}; print q{last_error=}, ($c{last_error}{detail}//q{<none>}), qq{\\n}'  # now: err + last_error = 'Top-level parser expects a SCALAR reference input; got ARRAY'"
 ---
+
+> **RESOLVED 2026-06-21 (`PHASE0-BACKHALF-TRIAGE.4`, authorized by ADR `0008`).** The
+> `perl/LinkedSpec/Runtime.pm` comment-skip wrapper now runs `pos($$input_ref) = 0;` and the
+> leading-comment/blank-line skip **only** when `ref($input_ref) eq 'SCALAR'` (mirroring the inner
+> guard's exact acceptance at `Compiler.pm:1109`, `ref ne 'SCALAR'`), and always delegates to
+> `$original_parser->($input_ref)`. For non-SCALAR-ref input the wrapper no longer derefs, so the
+> documented inner guard fires: invalid input returns `Top-level parser expects a SCALAR reference
+> input; got ARRAY` with a populated `runtime_ctx->{last_error}` (`type => 'runtime_parser'`). Valid
+> scalar-ref input keeps the comment-skip behavior. The card below is the original (regression-present)
+> reading, kept for history.
 
 Established by `PHASE0-BACKHALF-TRIAGE.1` (read-only triage, 2026-06-19). A pre-existing
 **reference-engine validation regression** surfaced when the phase0 back half stopped being masked.
