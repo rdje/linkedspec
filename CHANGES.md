@@ -1,6 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape subtests, TEST-ONLY) — 7 phase0 failures cleared
+
+Re-blessed the cluster-A "parser-collection-shape" stale subtests in `t/phase0_regression.t`. **No engine,
+spec, or production code changed** — only stale `is_deeply` expected values in the regression test.
+
+- **Root cause (already triaged in `.1`):** these subtests assert the *retired* auto-tag accumulator shape
+  `['?Rule:', []]` (`[['?First:',[]],['?Second:',[]]]`, …) for blind-call `:AND` / `:OR` / `:+` / `AND+` /
+  `AND{N,M}` rules whose child rules each carry `… { return(1) }`. The current engine surfaces each child's
+  own `return(1)` instead of an auto-tag, so a blind-call collection is `[1, 1]` (and a single dispatch is
+  scalar `1`, a repeated AND group is `[[1,1], …]`). The engine is correct; the expectations are stale.
+- **Method:** dumped the *actual* engine output for every cluster-A spec+input with a focused repro
+  (`Choice::OR+`, `Sequence::AND`, `Choice::|`, `Sequence::AND+`, `Sequence::AND{2}/{2,3}/{,2}`) before
+  editing, so each re-bless matches real output rather than a guess. Mapping: `['?First:', []]` → `1`;
+  `[['?First:',[]],['?Second:',[]]]` → `[1, 1]`; nested AND groups collapse `['?X:',[]]` → `1` in place.
+- **Edits:** 13 `is_deeply` expected values across 7 subtests — `or_plus_blind_call_…` (144),
+  `explicit_and_…` (149), `blind_call_choice_…` (152), `blind_call_repeated_choice_…` (153),
+  `blind_call_bounded_and_shorthand_repeated_choice_runtime` (156), `and_plus_…` (163),
+  `bounded_and_rule_labels_repeat_current_sequence_model` (166). Engine-to-engine `is_deeply` comparisons
+  (e.g. `is_deeply($bounded_full, $or_plus_full, …)`) and the already-correct `[]`/`undef` assertions were
+  left untouched.
+- **Triage correction:** cluster A is **7 subtests, not the triaged "8"**. The 8th
+  (`blind_call_fluent_post_call_chain_matches_block_form`, subtest 206) fails on the retired `.return_a()`
+  helper, so it belongs to cluster B (`.2.2`), not the auto-tag family. Total STALE count is unchanged (108).
+- **Validation:** `perl -c -Iperl t/phase0_regression.t` OK; full `perl -Iperl t/phase0_regression.t`
+  **109 → 102 failing**; a `comm` set-diff of the failing-subtest names (baseline vs after) shows the
+  cleared set is **exactly** the 7 cluster-A subtests and the new-failure set is **empty** (zero
+  regressions). Remaining 102 = 101 STALE (`.2.2`–`.2.4`) + 1 `corpus_regression` tail (`.5`). (The gate
+  run was SIGALRM-killed at the corpus tail under external `bin/fsmgen` CPU contention from another
+  session — same place the baseline's EXIT=255 stops; not a regression.)
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2) — 2 phase0 failures cleared
 
 Fixed reference-engine Defect #2 (input-boundary-validation regression), **authorized by ADR `0008`**.

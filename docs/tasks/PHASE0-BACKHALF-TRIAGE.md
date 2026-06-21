@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-19` (`.1` read-only triage **DONE** — full per-cluster verdict below; `.2`–`.5` fix leaves added)
+- Last updated: `2026-06-21` (`.2.1` cluster-A re-bless **DONE** — 7 not 8; phase0 109 → 102; `.3`/`.4` engine fixes already DONE)
 - Owner: repo-local workflow
 
 ## Goal
@@ -120,8 +120,15 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
   Commit: (this commit)
 - ID: `PHASE0-BACKHALF-TRIAGE.2` · Status: `active` · Children: `.2.1`–`.2.4`
   Goal: Re-bless / retire the 108 STALE subtests against the current documented engine behavior.
-  - ID: `.2.1` · Status: `pending` — Cluster A (8): re-bless parser-collection-shape to the current
-    `[1,1]`-style child-return output (drop the retired auto-tag `['?Rule:',[]]` expectation).
+  - ID: `.2.1` · Status: `done` (2026-06-21) — Cluster A: re-blessed parser-collection-shape to the
+    current `[1,1]`-style child-return output (dropped the retired auto-tag `['?Rule:',[]]` expectation).
+    **Actual count = 7, not the triaged "8"** — subtests 144/149/152/153/156/163/166
+    (`or_plus_blind_call`/`explicit_and`/`blind_call_choice`/`blind_call_repeated_choice`/
+    `blind_call_bounded_and_shorthand_repeated_choice_runtime`/`and_plus`/`bounded_and`). The triage's
+    8th (`blind_call_fluent_post_call_chain_matches_block_form`, subtest 206) is actually a retired-
+    `return_a` helper failure, so it re-buckets to cluster B (`.2.2`), not the auto-tag family.
+    TEST-ONLY (13 `is_deeply` expecteds in `t/phase0_regression.t`; engine untouched). Got-values
+    captured empirically (`Choice::OR+`/`::AND`/`::|`/`AND+`/`AND{N,M}` repros) before re-blessing.
   - ID: `.2.2` · Status: `pending` — Cluster B (75): re-bless the `method_like` family — rewrite 20
     retired-helper spec bodies to `return(array(...))`/`return(...)`, and drop the `RETURN_A`/`RETURN_M`
     terms from 55 node-membership/hit-count fixtures. (May split a1 vs a2.)
@@ -197,10 +204,10 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | --- | --- | --- | --- |
 | — | `.3` | `done` 2026-06-21 | AND-codegen fix landed — 62 phase0 failures cleared, zero regressions. |
 | — | `.4` | `done` 2026-06-21 | input-boundary guard landed — 2 cleared, zero regressions. Both engine defects now fixed. |
-| 1 | `.2.1` | `pending` | Lowest-risk re-bless (8, cluster A); independent of the engine fixes (these expectations are stale regardless). |
-| 2 | `.2.2`–`.2.4` | `pending` | Re-bless / retire the remaining 100 stale subtests (B=75, C=20, F+G). |
-| 3 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 4 | `.6` | `pending` (new) | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.1` | `done` 2026-06-21 | Cluster A re-bless (7, not 8) — 109 → 102 failing, `comm` set-diff = exactly the 7, zero regressions. TEST-ONLY. |
+| 1 | `.2.2`–`.2.4` | `pending` | Re-bless / retire the remaining 101 stale subtests (B=76 incl. the re-bucketed `blind_call_fluent_post_call_chain`, C=20, F=3, G=2). |
+| 2 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 3 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -237,6 +244,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-19` | `.1` | full phase0 TAP (173 fail/707 pass); cluster-D V1–V4 bisection; capture_from/return-array lowering isolation; entry_and child `[]` repro; 2 parallel read-only deep-dives (B; C+F+G) | `done` — 108 STALE / 65 REAL (2 defects) |
 | `2026-06-21` | `.3` | `perl -c` (emitter+facade); generated-source dump; book `Pair::AND` + named-mark reproducers; 21-test AND contract catalog; full `perl -Iperl t/phase0_regression.t` | `done` — 173 → 111 failing (62 cleared, 0 regressions) |
 | `2026-06-21` | `.4` | `perl -c` (`Runtime.pm`); invalid-ARRAY-input + valid-scalar-ref reproducers; full `perl -Iperl t/phase0_regression.t` + `comm -23` set-diff vs post-`.3` | `done` — 111 → 109 failing (exactly the 2 Defect #2 cleared, 0 regressions) |
+| `2026-06-21` | `.2.1` | empirical got-value repros (`Choice::OR+`/`::AND`/`::\|`/`AND+`/`AND{N,M}`); `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` full set-diff vs baseline | `done` — 109 → 102 failing (cleared = exactly the 7 cluster-A; new failures = none) |
 
 ## Commit Log
 
@@ -244,7 +252,8 @@ can also proceed in parallel if the engine touch is deferred).
 | --- | --- | --- |
 | `.1` | `PHASE0-BACKHALF-TRIAGE.1 — read-only triage complete` | prior commit `3a6d25b`/`f3c8a9b` |
 | `.3` | `PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1)` | commit `a410d93` |
-| `.4` | `PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2)` | this commit |
+| `.4` | `PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2)` | commit `b26a5c4` |
+| `.2.1` | `PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape, TEST-ONLY)` | this commit |
 
 ## Changelog
 
@@ -264,3 +273,11 @@ can also proceed in parallel if the engine touch is deferred).
   (set-diff = exactly the 2 Defect #2 subtests, 0 regressions). Both reference-engine defects now fixed.
   KM card [[runtime-input-boundary-validation-regression]] → `resolved`. Added `.6` (book `:AND`
   reconciliation). Frontier → `.2.1` (re-bless the 108 STALE, TEST-ONLY).
+- `2026-06-21`: `.2.1` **DONE** — re-blessed the cluster-A parser-collection-shape subtests (retired
+  auto-tag `['?Rule:',[]]` → current child-return shape `[1,1]` / `1`) in `t/phase0_regression.t` only;
+  engine untouched. **Cluster A = 7, not the triaged 8**: subtests 144/149/152/153/156/163/166; the
+  triage's 8th (`blind_call_fluent_post_call_chain_matches_block_form`, subtest 206) is a retired-
+  `return_a` helper failure → re-bucketed to cluster B (`.2.2`). 13 `is_deeply` expecteds re-blessed
+  against empirically-dumped engine output. Full phase0 **109 → 102 failing**; `comm` full set-diff =
+  exactly the 7 cleared, **zero regressions** (corpus tail still pending `.5`). Frontier → `.2.2`
+  (cluster B `method_like` ×76, retired `return_*`/`RETURN_A`).

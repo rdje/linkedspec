@@ -4374,7 +4374,7 @@ SPEC
     my $bounded_full = eval { $bounded_parser->(\$bounded_full_input) };
     ok(!$@, 'open-ended bounded OR blind-call parser full-input execution does not die') or diag(normalize_error($@));
 
-    is_deeply($or_plus_full, [['?First:', []], ['?Second:', []]], 'OR+ blind-call parser collects repeated choice child hits');
+    is_deeply($or_plus_full, [1, 1], 'OR+ blind-call parser collects repeated choice child hits');
     is_deeply($bounded_full, $or_plus_full, 'OR+ blind-call parser matches the open-ended bounded OR blind-call behavior');
 
     my $or_plus_empty_input = "";
@@ -4563,7 +4563,7 @@ SPEC
     my $sigil_full = eval { $sigil_parser->(\$sigil_full_input) };
     ok(!$@, 'ampersand AND parser full-input execution does not die') or diag(normalize_error($@));
 
-    is_deeply($explicit_full, [['?First:', []], ['?Second:', []]], 'explicit AND parser preserves ordered sequence collection shape');
+    is_deeply($explicit_full, [1, 1], 'explicit AND parser preserves ordered sequence collection shape');
     is_deeply($sigil_full, $explicit_full, 'explicit AND parser matches the ampersand ordered-sequence behavior');
 
     my $explicit_short_input = "a";
@@ -4683,12 +4683,12 @@ SPEC
     my $first_input = "a";
     my $first_ast = eval { $parser->(\$first_input) };
     ok(!$@, 'blind-call choice parser first-branch execution does not die') or diag(normalize_error($@));
-    is_deeply($first_ast, ['?First:', []], 'blind-call choice parser returns the first child-rule result when the first child succeeds');
+    is_deeply($first_ast, 1, 'blind-call choice parser returns the first child-rule result when the first child succeeds');
 
     my $second_input = "b";
     my $second_ast = eval { $parser->(\$second_input) };
     ok(!$@, 'blind-call choice parser second-branch execution does not die') or diag(normalize_error($@));
-    is_deeply($second_ast, ['?Second:', []], 'blind-call choice parser returns the later child-rule result when the earlier child fails and the later child succeeds');
+    is_deeply($second_ast, 1, 'blind-call choice parser returns the later child-rule result when the earlier child fails and the later child succeeds');
 
     my $miss_input = "c";
     my $miss_ast = eval { $parser->(\$miss_input) };
@@ -4733,8 +4733,8 @@ SPEC
     is_deeply(
         $explicit_ab,
         [
-            ['?First:', []],
-            ['?Second:', []],
+            1,
+            1,
         ],
         'explicit OR blind-call repeated-choice parser collects first-success child results across repeated iterations',
     );
@@ -4745,7 +4745,7 @@ SPEC
     is_deeply(
         $default_b,
         [
-            ['?Second:', []],
+            1,
         ],
         'default bare blind-call repeated-choice parser still dispatches to later child parsers within the repeated-choice family',
     );
@@ -4753,7 +4753,7 @@ SPEC
     my $single_input = "a";
     my $default_single = eval { $default_parser->(\$single_input) };
     ok(!$@, 'default blind-call repeated-choice parser handles single child hit without die') or diag(normalize_error($@));
-    is_deeply($default_single, [['?First:', []]], 'default blind-call repeated-choice parser returns one collected child result for one successful iteration');
+    is_deeply($default_single, [1], 'default blind-call repeated-choice parser returns one collected child result for one successful iteration');
 
     my $miss_input = "c";
     my $explicit_miss = eval { $explicit_parser->(\$miss_input) };
@@ -4907,12 +4907,12 @@ SPEC
     my $plus_input = "ab";
     my $plus_ast = eval { $plus_parser->(\$plus_input) };
     ok(!$@, 'blind-call plus parser handles repeated-choice input without die') or diag(normalize_error($@));
-    is_deeply($plus_ast, [['?First:', []], ['?Second:', []]], 'blind-call plus parser collects one-or-more repeated child-choice hits');
+    is_deeply($plus_ast, [1, 1], 'blind-call plus parser collects one-or-more repeated child-choice hits');
 
     my $bounded_ok_input = "ab";
     my $bounded_ok_ast = eval { $bounded_parser->(\$bounded_ok_input) };
     ok(!$@, 'bounded blind-call repeated-choice parser handles lower-bound input without die') or diag(normalize_error($@));
-    is_deeply($bounded_ok_ast, [['?First:', []], ['?Second:', []]], 'bounded blind-call repeated-choice parser accepts the lower-bound number of successful iterations');
+    is_deeply($bounded_ok_ast, [1, 1], 'bounded blind-call repeated-choice parser accepts the lower-bound number of successful iterations');
 
     my $bounded_short_input = "a";
     my $bounded_short_ast = eval { $bounded_parser->(\$bounded_short_input) };
@@ -5131,8 +5131,8 @@ SPEC
     is_deeply(
         $and_plus_full,
         [
-            [['?First:', []], ['?Second:', []]],
-            [['?First:', []], ['?Second:', []]],
+            [1, 1],
+            [1, 1],
         ],
         'AND+ parser collects repeated ordered sequence groups',
     );
@@ -5280,8 +5280,8 @@ SPEC
     is_deeply(
         $exact_full,
         [
-            [['?First:', []], ['?Second:', []]],
-            [['?First:', []], ['?Second:', []]],
+            [1, 1],
+            [1, 1],
         ],
         'exact bounded AND parser collects the required number of ordered sequence groups',
     );
@@ -5295,9 +5295,9 @@ SPEC
     is_deeply(
         $between_full,
         [
-            [['?First:', []], ['?Second:', []]],
-            [['?First:', []], ['?Second:', []]],
-            [['?First:', []], ['?Second:', []]],
+            [1, 1],
+            [1, 1],
+            [1, 1],
         ],
         'range bounded AND parser repeats the full ordered sequence within the configured bounds',
     );
@@ -5311,8 +5311,8 @@ SPEC
     is_deeply(
         $upto_limited,
         [
-            [['?First:', []], ['?Second:', []]],
-            [['?First:', []], ['?Second:', []]],
+            [1, 1],
+            [1, 1],
         ],
         'upper-bounded AND parser stops after the configured maximum number of ordered sequence groups',
     );
