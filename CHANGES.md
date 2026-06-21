@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 `method_like` `RETURN_A`→`RETURN`, TEST-ONLY) — 55 phase0 failures cleared
+
+Re-blessed the cluster-B2 `method_like*` stale subtests in `t/phase0_regression.t`. **No engine, spec, or
+production code touched** — only `t/phase0_regression.t`. These subtests hard-coded the *retired*
+canonical action-IR node `RETURN_A` (return-accumulator) in their assertions; the current engine renames
+that node to **`RETURN`** (COMPAT-ALIAS-RETIREMENT-V2; see KM `actionir-return-node-retired-to-return`),
+so the assertions were stale, not the engine.
+
+- **Two edit forms (one guarded one-pass transform):**
+  - **Form A — 52 membership-grep flips:** `scalar(grep { $_ eq 'RETURN_A' } @{$X->{canonical_action_ir_nodes}})`
+    (X ∈ `attached_meta`/`marker_meta`/`meta`) → `'RETURN'`. The node is still produced, just renamed.
+  - **Form B — 19 hit-count-hash merges:** each failing `canonical_action_ir_hits` literal carried both
+    `RETURN => M` and an adjacent `RETURN_A => 1`; since `RETURN_A` retired *into* `RETURN`, the counts
+    **merge** to `RETURN => M+1` and the `RETURN_A` key is deleted — never two colliding `RETURN` keys (a
+    naive `s/RETURN_A/RETURN/` would have produced `{RETURN=>M, RETURN=>1}` → wrong count).
+  - **2 stale description strings** (`…DECLARE/ASSIGN/RETURN/RETURN_A helper mix` → `…RETURN helper mix`).
+- **Guarded transform:** the one-pass script asserts every target's exact shape before writing (Form-A
+  occurrence count must equal exactly 52; each Form-B `RETURN_A => 1` must sit directly below a
+  `RETURN => N` line) and aborts without writing on any drift — so a 71-site bulk edit is signoff-safe.
+- **Scope excluded (17 `RETURN_A` deliberately untouched):** the 14 cluster-C `emit_context` white-box
+  sites — including the **passing** `helper_action_ir_nodes` / `helper_action_ir_events {kind}` sites where
+  `RETURN_A` is a legitimate helper-event kind (→ `.2.3`) — and the 3 BOTH subtests `@17289`/`@20105`/
+  `@39213` (retired helper in the spec body → `.2.2.2`).
+- **Validation:** `perl -c -Iperl t/phase0_regression.t` OK; full `perl -Iperl t/phase0_regression.t` run
+  **twice** with a `comm` set-diff vs the baseline → **102 → 47 failing; cleared = exactly the 55 pure-B2
+  subtests; new-failure set empty (zero regressions).** One after-only name on the first run
+  (`parser_invalid_input_fails_at_runtime_parser_boundary`, a `Lispish` `open3` subprocess test at source
+  line 4163 — textually *before* every edit, engine byte-identical) was a CPU-contention flake, disproven
+  by the clean re-run (`ok 137`). Remaining 47 = 20 `method_like` (B1+BOTH → `.2.2.2`) + 20 `emit_context`
+  (`.2.3`) + 7 other (`.2.4`/`.5`, incl. the `corpus_regression` missing-`plugin/` tail). memory-architecture
+  self-check + Knowledge-Map gate pass. **Book unaffected** — `RETURN_A`/`RETURN` are internal canonical-IR
+  node names, not a user-facing DSL surface.
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into `.2.2.1` (B2 token re-bless) + `.2.2.2` (B1 helper rewrites) — decomposition slice, no test change
 
 Decomposed the largest remaining re-bless leaf (cluster B, 76 subtests) before implementation, because

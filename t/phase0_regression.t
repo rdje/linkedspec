@@ -18301,7 +18301,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if branch-block forms with nested marker switch flow preserve IF/ELSE plus nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
         };
@@ -18511,7 +18511,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if/elseif branch-block forms with nested marker switch flow preserve IF/ELIF/ELSE plus nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
         };
@@ -18727,7 +18727,7 @@ SPEC
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if/elseif branch-block forms with nested inline-composite switch flow preserve IF/ELIF/ELSE plus nested SWITCH/CASE/DEFAULT canonical nodes",
             );
         };
@@ -18897,7 +18897,7 @@ SPEC
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if branch-block forms with nested inline-composite switch flow preserve IF/ELSE plus nested SWITCH/CASE/DEFAULT canonical nodes",
             );
         };
@@ -19123,7 +19123,7 @@ SPEC
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if branch-block forms with nested multi-case inline-composite switch flow preserve IF/ELSE plus nested SWITCH/CASE/DEFAULT canonical nodes",
             );
         };
@@ -19343,7 +19343,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if branch-block forms with nested multi-case marker-style switch flow preserve IF/ELSE plus nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
         };
@@ -19627,7 +19627,7 @@ SPEC
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if/elseif branch-block forms with nested multi-case inline-composite switch flow preserve IF/ELIF/ELSE plus nested SWITCH/CASE/DEFAULT canonical nodes",
             );
         };
@@ -19901,7 +19901,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if/elseif branch-block forms with nested multi-case marker-style switch flow preserve IF/ELIF/ELSE plus nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
         };
@@ -20309,8 +20309,7 @@ SPEC
                     ELSE     => 1,
                     ENDIF    => 1,
                     IF       => 1,
-                    RETURN   => 3,
-                    RETURN_A => 1,
+                    RETURN   => 4,
                     SWITCH   => 1,
                 },
                 "$tag lifecycle inline composite switch attached branch block with nested marker flow preserves the expected control-flow helper mix",
@@ -20321,7 +20320,7 @@ SPEC
                 scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch block with nested marker flow preserves CASE/DEFAULT plus nested IF/ELSE/ENDIF canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block keeps the current descriptor $code_key slot shape");
@@ -20442,8 +20441,7 @@ SPEC
                     CASE      => 2,
                     DEFAULT   => 2,
                     ENDSWITCH => 1,
-                    RETURN    => 3,
-                    RETURN_A  => 1,
+                    RETURN    => 4,
                     SWITCH    => 1,
                 },
                 "$tag lifecycle inline composite switch attached branch block with nested marker switch flow preserves the expected nested switch helper mix",
@@ -20453,7 +20451,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch block with nested marker switch flow preserves nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested marker switch flow keeps the current descriptor $code_key slot shape");
@@ -20591,8 +20589,7 @@ SPEC
                     DEFAULT  => 1,
                     ELSE     => 2,
                     IF       => 2,
-                    RETURN   => 4,
-                    RETURN_A => 1,
+                    RETURN   => 5,
                     SWITCH   => 1,
                 },
                 "$tag lifecycle inline composite switch attached branch block with nested composite if flow preserves the expected nested composite-if helper mix",
@@ -20603,7 +20600,7 @@ SPEC
                 scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch block with nested composite if flow preserves CASE/DEFAULT plus nested IF/ELSE/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested composite if flow keeps the current descriptor $code_key slot shape");
@@ -20741,8 +20738,7 @@ SPEC
                 {
                     CASE     => 3,
                     DEFAULT  => 3,
-                    RETURN   => 4,
-                    RETURN_A => 1,
+                    RETURN   => 5,
                     SWITCH   => 1,
                 },
                 "$tag lifecycle inline composite switch attached branch block with nested inline-composite switch flow preserves the expected nested inline-switch helper mix",
@@ -20751,7 +20747,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch block with nested inline-composite switch flow preserves CASE/DEFAULT/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested inline-composite switch flow keeps the current descriptor $code_key slot shape");
@@ -20904,8 +20900,7 @@ SPEC
                     ELIF     => 2,
                     ELSE     => 2,
                     IF       => 2,
-                    RETURN   => 6,
-                    RETURN_A => 1,
+                    RETURN   => 7,
                     SWITCH   => 1,
                 },
                 "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow preserves the expected helper mix",
@@ -20917,7 +20912,7 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow preserves CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow keeps the current descriptor $code_key slot shape");
@@ -21413,8 +21408,7 @@ subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_bare_zero_a
         ELSE     => 1,
         ENDIF    => 1,
         IF       => 1,
-        RETURN   => 2,
-        RETURN_A => 1,
+        RETURN   => 3,
     };
 
     my $expected_switch_hits = {
@@ -21422,8 +21416,7 @@ subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_bare_zero_a
         DEFAULT   => 1,
         ENDCASE   => 2,
         ENDSWITCH => 1,
-        RETURN    => 2,
-        RETURN_A  => 1,
+        RETURN    => 3,
         SWITCH    => 1,
     };
 
@@ -21628,16 +21621,14 @@ subtest 'method_like_structured_remaining_lifecycle_control_flow_blocks_accept_o
         ELSE     => 1,
         ENDIF    => 1,
         IF       => 1,
-        RETURN   => 2,
-        RETURN_A => 1,
+        RETURN   => 3,
     };
 
     my $expected_switch_hits = {
         CASE      => 1,
         DEFAULT   => 1,
         ENDSWITCH => 1,
-        RETURN    => 2,
-        RETURN_A  => 1,
+        RETURN    => 3,
         SWITCH    => 1,
     };
 
@@ -22691,8 +22682,7 @@ SPEC
                     ENDIF     => 1,
                     ENDSWITCH => 1,
                     IF        => 1,
-                    RETURN    => 3,
-                    RETURN_A  => 1,
+                    RETURN    => 4,
                     SWITCH    => 1,
                 },
                 "$tag lifecycle marker-style switch attached branch block with nested marker flow preserves the expected control-flow helper mix",
@@ -22704,7 +22694,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with nested marker flow preserves CASE/DEFAULT/ENDSWITCH plus nested IF/ELSE/ENDIF canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block keeps the current descriptor $code_key slot shape");
@@ -22823,8 +22813,7 @@ SPEC
                     CASE      => 2,
                     DEFAULT   => 2,
                     ENDSWITCH => 2,
-                    RETURN    => 3,
-                    RETURN_A  => 1,
+                    RETURN    => 4,
                     SWITCH    => 2,
                 },
                 "$tag lifecycle marker-style switch attached branch block with nested marker switch flow preserves the expected nested switch helper mix",
@@ -22834,7 +22823,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with nested marker switch flow preserves nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested marker switch flow keeps the current descriptor $code_key slot shape");
@@ -22973,8 +22962,7 @@ SPEC
                     ELSE      => 2,
                     ENDSWITCH => 1,
                     IF        => 2,
-                    RETURN    => 4,
-                    RETURN_A  => 1,
+                    RETURN    => 5,
                     SWITCH    => 1,
                 },
                 "$tag lifecycle marker-style switch attached branch block with nested composite if flow preserves the expected nested composite-if helper mix",
@@ -22986,7 +22974,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with nested composite if flow preserves CASE/DEFAULT/ENDSWITCH plus nested IF/ELSE/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested composite if flow keeps the current descriptor $code_key slot shape");
@@ -23125,8 +23113,7 @@ SPEC
                     CASE      => 3,
                     DEFAULT   => 3,
                     ENDSWITCH => 1,
-                    RETURN    => 4,
-                    RETURN_A  => 1,
+                    RETURN    => 5,
                     SWITCH    => 3,
                 },
                 "$tag lifecycle marker-style switch attached branch block with nested inline-composite switch flow preserves the expected nested inline-switch helper mix",
@@ -23136,7 +23123,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with nested inline-composite switch flow preserves CASE/DEFAULT/ENDSWITCH/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested inline-composite switch flow keeps the current descriptor $code_key slot shape");
@@ -23290,8 +23277,7 @@ SPEC
                     ELSE      => 2,
                     ENDSWITCH => 1,
                     IF        => 2,
-                    RETURN    => 6,
-                    RETURN_A  => 1,
+                    RETURN    => 7,
                     SWITCH    => 1,
                 },
                 "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow preserves the expected helper mix",
@@ -23304,7 +23290,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow preserves CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow keeps the current descriptor $code_key slot shape");
@@ -23659,7 +23645,7 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch blocks preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across composite if surfaces",
             );
         };
@@ -24011,7 +23997,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch blocks preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across composite if surfaces",
             );
         };
@@ -24319,7 +24305,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch blocks preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH/ENDSWITCH canonical nodes across composite if surfaces",
             );
         };
@@ -24623,7 +24609,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch blocks preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across composite if surfaces",
             );
         };
@@ -24963,7 +24949,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch blocks preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH/ENDSWITCH canonical nodes across multi-case composite if surfaces",
             );
         };
@@ -25299,7 +25285,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch blocks preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across multi-case composite if surfaces",
             );
         };
@@ -25701,7 +25687,7 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch blocks preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across multi-case composite if surfaces",
             );
         };
@@ -26101,7 +26087,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch blocks preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across multi-case composite if surfaces",
             );
         };
@@ -26250,8 +26236,7 @@ SPEC
                 {
                     CASE     => 5,
                     DEFAULT  => 3,
-                    RETURN   => 6,
-                    RETURN_A => 1,
+                    RETURN   => 7,
                     SWITCH   => 1,
                 },
                 "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow preserves the expected nested helper mix",
@@ -26260,7 +26245,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow preserves CASE/DEFAULT/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow keeps the current descriptor $code_key slot shape");
@@ -26411,8 +26396,7 @@ SPEC
                     CASE      => 5,
                     DEFAULT   => 3,
                     ENDSWITCH => 1,
-                    RETURN    => 6,
-                    RETURN_A  => 1,
+                    RETURN    => 7,
                     SWITCH    => 3,
                 },
                 "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow preserves the expected nested helper mix",
@@ -26422,7 +26406,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow preserves CASE/DEFAULT/ENDSWITCH/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow keeps the current descriptor $code_key slot shape");
@@ -26571,8 +26555,7 @@ SPEC
                     CASE      => 5,
                     DEFAULT   => 3,
                     ENDSWITCH => 2,
-                    RETURN    => 6,
-                    RETURN_A  => 1,
+                    RETURN    => 7,
                     SWITCH    => 1,
                 },
                 "$tag lifecycle inline composite switch attached branch block with nested multi-case marker switch flow preserves the expected nested switch helper mix",
@@ -26582,7 +26565,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch attached branch block with nested multi-case marker switch flow preserves nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested multi-case marker switch flow keeps the current descriptor $code_key slot shape");
@@ -26729,8 +26712,7 @@ SPEC
                     CASE      => 5,
                     DEFAULT   => 3,
                     ENDSWITCH => 3,
-                    RETURN    => 6,
-                    RETURN_A  => 1,
+                    RETURN    => 7,
                     SWITCH    => 3,
                 },
                 "$tag lifecycle marker-style switch attached branch block with nested multi-case marker switch flow preserves the expected nested switch helper mix",
@@ -26740,7 +26722,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with nested multi-case marker switch flow preserves nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested multi-case marker switch flow keeps the current descriptor $code_key slot shape");
@@ -26967,7 +26949,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch structured branch-body surfaces preserve nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across the broader multi-case marker switch shape",
             );
         };
@@ -27193,7 +27175,7 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch structured branch-body surfaces preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across nested composite if/elseif flow",
             );
         };
@@ -27569,7 +27551,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch structured branch-body surfaces preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH/ENDSWITCH canonical nodes across nested composite if/elseif deeper alternating marker flow",
             );
         };
@@ -27829,7 +27811,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch structured branch-body surfaces preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across deeper alternating marker nesting",
             );
         };
@@ -28049,7 +28031,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch structured branch-body surfaces preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across nested composite if/elseif flow",
             );
         };
@@ -28417,7 +28399,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch structured branch-body surfaces preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across nested composite if/elseif deeper alternating marker flow",
             );
         };
@@ -28757,7 +28739,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch structured branch-body surfaces preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH/ENDSWITCH canonical nodes across multi-case marker-switch composite-if flow",
             );
         };
@@ -29089,7 +29071,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch structured branch-body surfaces preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across multi-case marker-switch composite-if flow",
             );
         };
@@ -29341,7 +29323,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch structured branch-body surfaces preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across deeper alternating marker nesting",
             );
         };
@@ -29597,7 +29579,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$marker_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle outer switch families preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across attached branch blocks with deeper alternating marker nesting",
             );
         };
@@ -29819,7 +29801,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$marker_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle outer switch families preserve SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across attached branch blocks with nested multi-case marker switch flow",
             );
         };
@@ -30045,7 +30027,7 @@ SPEC
                 scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'CASE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$marker_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle outer switch families preserve SWITCH/CASE/DEFAULT canonical nodes across attached branch blocks with nested multi-case inline-composite switch flow",
             );
         };
@@ -30265,7 +30247,7 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$marker_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle outer switch families preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across attached branch blocks with nested composite if/elseif flow",
             );
         };
@@ -30635,7 +30617,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$marker_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle outer switch families preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across attached branch blocks with nested composite if/elseif deeper alternating marker flow",
             );
         };
@@ -30969,7 +30951,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$marker_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle outer switch families preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across attached branch blocks with nested composite if/elseif multi-case marker-switch flow",
             );
         };
@@ -31365,7 +31347,7 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$marker_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle outer switch families preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across attached branch blocks with nested composite if/elseif multi-case inline-switch flow",
             );
         };
@@ -31583,7 +31565,7 @@ SPEC
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch structured branch-body surfaces preserve nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across the broader multi-case marker switch shape",
             );
         };
@@ -31985,7 +31967,7 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch structured branch-body surfaces preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across multi-case inline-switch composite-if flow",
             );
         };
@@ -32381,7 +32363,7 @@ SPEC
                 scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch structured branch-body surfaces preserve CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes across multi-case inline-switch composite-if flow",
             );
         };
@@ -32527,7 +32509,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle deeper alternating marker if/switch nesting preserves IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
         };
@@ -32676,7 +32658,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle marker-style switch attached branch block with deeper alternating marker if/switch nesting preserves IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with deeper alternating marker if/switch nesting keeps the current descriptor $code_key slot shape");
@@ -32914,7 +32896,7 @@ SPEC
                 scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle composite if branch-body surfaces preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across deeper alternating marker nesting",
             );
         };
@@ -39395,8 +39377,7 @@ subtest 'method_like_structured_remaining_lifecycle_blocks_accept_optional_semic
     my $expected_hits = {
         ASSIGN   => 1,
         DECLARE  => 1,
-        RETURN   => 1,
-        RETURN_A => 1,
+        RETURN   => 2,
     };
 
     for my $case (@cases) {
@@ -39431,8 +39412,8 @@ SPEC
             is($block_meta->{canonical_action_ir_fallback_count}, 0, "semicolonless structured $tag lifecycle helper block avoids RAW_PERL fallback");
             is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, "semicolonless structured $tag lifecycle helper block preserves canonical action-IR node coverage from the fluent baseline");
             is_deeply($fluent_meta->{canonical_action_ir_hits}, $block_meta->{canonical_action_ir_hits}, "semicolonless structured $tag lifecycle helper block preserves canonical action-IR hit counts from the fluent baseline");
-            is_deeply($fluent_meta->{canonical_action_ir_hits}, $expected_hits, "fluent $tag lifecycle helper chain exposes the expected DECLARE/ASSIGN/RETURN/RETURN_A helper mix");
-            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_hits, "semicolonless structured $tag lifecycle helper block exposes the expected DECLARE/ASSIGN/RETURN/RETURN_A helper mix");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $expected_hits, "fluent $tag lifecycle helper chain exposes the expected DECLARE/ASSIGN/RETURN helper mix");
+            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_hits, "semicolonless structured $tag lifecycle helper block exposes the expected DECLARE/ASSIGN/RETURN helper mix");
             ok(
                 $block_meta->{unresolved_helper_count} == 0 &&
                 $block_meta->{language_agnostic_action_ir_ready},

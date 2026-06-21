@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-21` (`.2.2` **SPLIT** → `.2.2.1` B2 + `.2.2.2` B1 after recon + empirical probe; `.2.1`/`.3`/`.4` DONE; phase0 102)
+- Last updated: `2026-06-21` (`.2.2.1` **DONE** — 55 pure-B2 `method_like` re-blessed, phase0 102 → 47; `.2.2`/`.2.1`/`.3`/`.4` DONE)
 - Owner: repo-local workflow
 
 ## Goal
@@ -143,15 +143,18 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     returns them unchanged). **Scope hazard:** `RETURN_A` appears 90× across cluster B, cluster C
     (`emit_context`, 12400/12588/12628 → `.2.3`), and apparently-passing helper-event tests
     (39526/39553/39581) — **NOT a global search-replace**; scope every edit to a specific failing subtest.
-  - ID: `.2.2.1` · Status: `pending` — Cluster B2 (55 pure-B2 token re-bless, TEST-ONLY). For each
-    failing pure-B2 `method_like*` subtest, re-bless `RETURN_A` → `RETURN` in `canonical_action_ir_nodes`
-    membership greps (`grep { $_ eq 'RETURN_A' }`) and `canonical_action_ir_hits` keys (`RETURN_A => N`).
-    **Merge** counts where a hits hash carries BOTH `RETURN` and `RETURN_A` (e.g. the
-    `DECLARE/ASSIGN/RETURN/RETURN_A mix` fixture @39434/39435 in `method_like_structured_remaining_
-    lifecycle_blocks_accept_optional_semicolons` @39384). **Exclude** the 3 BOTH subtests (they go in
-    `.2.2.2`) and all non-cluster-B `RETURN_A` sites. Regenerate the exact occurrence list with
-    `grep -n "RETURN_A" t/phase0_regression.t` cross-referenced to the failing-subtest names; verify with
-    a full-suite `comm` set-diff (cleared = the targeted subtests, new = none).
+  - ID: `.2.2.1` · Status: `done` (2026-06-21) — Cluster B2 (TEST-ONLY token re-bless). Re-blessed
+    `RETURN_A` → `RETURN` across the failing pure-B2 `method_like*` subtests via a guarded one-pass
+    transform of `t/phase0_regression.t`: **52 Form-A flips** (`scalar(grep { $_ eq 'RETURN_A' }
+    @{$X->{canonical_action_ir_nodes}})`, X ∈ attached_meta/marker_meta/meta) + **19 Form-B hit-hash
+    merges** (`RETURN += 1`, the adjacent `RETURN_A => 1` key deleted — RETURN_A retired→RETURN so the
+    counts collapse into one `RETURN` key, never two colliding keys) + **2 stale description strings**
+    (`…DECLARE/ASSIGN/RETURN/RETURN_A helper mix` → `…DECLARE/ASSIGN/RETURN helper mix` at @39384). The
+    transform **asserted** every target's exact shape (Form-A count == 52; each Form-B `RETURN_A` adjacent
+    to a `RETURN => N`) and refuses to write on any drift. **Excluded** (untouched, 17 `RETURN_A` remain):
+    the 14 cluster-C `emit_context` sites (incl. the passing `helper_action_ir_events`/`helper_action_ir_nodes`
+    kind sites → `.2.3`) + the 3 BOTH subtests (17354 @17289, 20177 @20105, 39209 @39213 → `.2.2.2`).
+    **Actual cleared = 55** (matches the triaged B2 estimate). Engine/spec untouched.
   - ID: `.2.2.2` · Status: `pending` — Cluster B1 (18 helper-rewrite + 3 BOTH = 21, judgment-heavy).
     Rewrite each retired-helper spec body to the canonical equivalent (`return_array(X,...)` →
     `return(array(...))`; `.return_a()`/`.return_m()` → the canonical fluent return — **determine the exact
@@ -234,13 +237,13 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.3` | `done` 2026-06-21 | AND-codegen fix landed — 62 phase0 failures cleared, zero regressions. |
 | — | `.4` | `done` 2026-06-21 | input-boundary guard landed — 2 cleared, zero regressions. Both engine defects now fixed. |
 | — | `.2.1` | `done` 2026-06-21 | Cluster A re-bless (7, not 8) — 109 → 102 failing, `comm` set-diff = exactly the 7, zero regressions. TEST-ONLY. |
-| — | `.2.2` | `active` (split 2026-06-21) | Cluster B (76) decomposed → `.2.2.1` + `.2.2.2` after recon + empirical node-mapping (KM [[actionir-return-node-retired-to-return]]). |
-| 1 | `.2.2.1` | `pending` | Cluster B2: re-bless `RETURN_A` → `RETURN` in 55 pure-B2 `method_like*` subtests (scoped; merge RETURN+RETURN_A hit hashes). Mechanical, well-grounded. |
-| 2 | `.2.2.2` | `pending` | Cluster B1 (21, judgment-heavy): rewrite retired-helper spec bodies to canonical `return(...)`/`return(array(...))` + re-bless dependent assertions; incl. the 3 BOTH subtests. |
-| 3 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
-| 4 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
-| 5 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 6 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.2` | `active` (split 2026-06-21) | Cluster B (76) decomposed → `.2.2.1` (done) + `.2.2.2`. |
+| — | `.2.2.1` | `done` 2026-06-21 | Cluster B2 re-bless — 55 pure-B2 `method_like*` cleared (102 → 47 failing), `comm` set-diff = exactly 55, zero real regressions (lone `parser_invalid_input` flake disproven by a clean re-run). TEST-ONLY. |
+| 1 | `.2.2.2` | `pending` | Cluster B1 (20 `method_like*` incl. 3 BOTH + `blind_call_fluent…`, judgment-heavy): rewrite retired-helper spec bodies to canonical `return(...)`/`return(array(...))` + re-bless dependent assertions. |
+| 2 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
+| 3 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
+| 4 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 5 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -279,6 +282,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.4` | `perl -c` (`Runtime.pm`); invalid-ARRAY-input + valid-scalar-ref reproducers; full `perl -Iperl t/phase0_regression.t` + `comm -23` set-diff vs post-`.3` | `done` — 111 → 109 failing (exactly the 2 Defect #2 cleared, 0 regressions) |
 | `2026-06-21` | `.2.1` | empirical got-value repros (`Choice::OR+`/`::AND`/`::\|`/`AND+`/`AND{N,M}`); `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` full set-diff vs baseline | `done` — 109 → 102 failing (cleared = exactly the 7 cluster-A; new failures = none) |
 | `2026-06-21` | `.2.2` | read-only recon (76 → B1=18 / B2=55 / BOTH=3, per-subtest line map) + empirical probe (`canonical_action_ir_nodes` = `RETURN`, not `RETURN_A`; retired `return_*` helpers → `RAW_PERL` passthrough) | `done` (split) — decomposed into `.2.2.1` (B2) + `.2.2.2` (B1); no test change this slice |
+| `2026-06-21` | `.2.2.1` | guarded one-pass transform (52 Form-A grep flips + 19 Form-B hit-hash merges + 2 desc fixes; asserts shape or aborts); `perl -c` OK; full `perl -Iperl t/phase0_regression.t` + `comm` set-diff vs baseline ×2 runs | `done` — 102 → 47 failing; cleared = exactly 55 pure-B2; new-failure set empty. One after-only name (`parser_invalid_input…`, a Lispish `open3` subprocess test at line 4163, *before* all edits) was a CPU-contention flake — disproven by a clean re-run (ok 137). |
 
 ## Commit Log
 
@@ -288,7 +292,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.3` | `PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1)` | commit `a410d93` |
 | `.4` | `PHASE0-BACKHALF-TRIAGE.4 — engine fix: input-boundary-validation regression (#2)` | commit `b26a5c4` |
 | `.2.1` | `PHASE0-BACKHALF-TRIAGE.2.1 — re-bless cluster A (7 parser-collection-shape, TEST-ONLY)` | commit `07c4eb7` |
-| `.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into .2.2.1 (B2 token re-bless) + .2.2.2 (B1 helper rewrites)` | this commit |
+| `.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into .2.2.1 (B2 token re-bless) + .2.2.2 (B1 helper rewrites)` | commit `d5c2acf` |
+| `.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 method_like RETURN_A→RETURN, TEST-ONLY)` | this commit |
 
 ## Changelog
 
@@ -325,3 +330,17 @@ can also proceed in parallel if the engine touch is deferred).
   the re-bless is **not** a global search-replace. Split into `.2.2.1` (B2 token re-bless
   `RETURN_A`→`RETURN`, mechanical/scoped) and `.2.2.2` (B1 helper rewrites, judgment-heavy). New KM card
   [[actionir-return-node-retired-to-return]] records the durable facts. Frontier → `.2.2.1`.
+- `2026-06-21`: `.2.2.1` **DONE** — re-blessed the 55 pure-B2 `method_like*` subtests (TEST-ONLY,
+  `t/phase0_regression.t`; engine/spec untouched). A guarded one-pass transform applied **52 Form-A grep
+  flips** (`scalar(grep { $_ eq 'RETURN_A' } @{$X->{canonical_action_ir_nodes}})` → `'RETURN'`) + **19
+  Form-B hit-hash merges** (`RETURN += 1`, adjacent `RETURN_A => 1` deleted — the retired node renames to
+  `RETURN`, so the two counts collapse into one key rather than colliding) + **2 stale description fixes**;
+  it asserts each target's exact shape (Form-A == 52; each Form-B `RETURN_A` adjacent to a `RETURN => N`)
+  and aborts before writing on any drift. **Excluded** (17 `RETURN_A` remain, untouched): the 14 cluster-C
+  `emit_context` sites incl. the passing `helper_action_ir_events`/`helper_action_ir_nodes` kind sites
+  (`.2.3`), and the 3 BOTH subtests (`.2.2.2`). **Full phase0 102 → 47 failing; `comm` set-diff (×2 runs)
+  = exactly 55 cleared, new-failure set empty.** The lone after-only name (`parser_invalid_input_fails_at_
+  runtime_parser_boundary`, a `Lispish` `open3` subprocess test at source line 4163 — *before* every edit,
+  engine byte-identical) was a CPU-contention flake, disproven by a clean re-run (`ok 137`). Remaining 47 =
+  20 `method_like` (B1+BOTH → `.2.2.2`) + 20 `emit_context` (`.2.3`) + 7 other (`.2.4`/`.5`). Frontier →
+  `.2.2.2`.
