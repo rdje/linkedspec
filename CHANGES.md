@@ -1,6 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2.2 — re-bless cluster B1-accumulator (4 `return_a`/`return_m`, TEST-ONLY); 4 phase0 failures cleared, zero regressions
+
+Closed cluster B1 (`.2.2.2`). **No engine/spec/production code touched** — only `t/phase0_regression.t`.
+The 4 failing subtests used the *retired* `return_a`/`return_m` helpers (→ `RAW_PERL` fallback). This was
+the recon's *highest-risk* leaf (per-test judgment), so it was driven ground-truth-first: a pre-flight
+probe replicated **every assertion of all 4 subtests** via `LinkedSpec::Get` before any edit.
+
+- **Empirical findings:** (a) chained `.return_a().return_m()` and block `{ return(1); return_m(Top) }` both
+  fall to `RAW_PERL` — the failure cause; (b) `RETURN_A`/`RETURN_M` are retired into a single canonical
+  `RETURN` node, so subtest-1's distinct-node asserts test a dead feature; (c) the canonical chain
+  `.return(1).return(array("?Top:", entry_groups()))` lowers **identically** to block
+  `{ return(1); return(array("?Top:", entry_groups())) }` (`fallback=0`, `ready=1`,
+  `nodes=[IMATCH_GROUPS_READ, RETURN]`, `hits={IMATCH_GROUPS_READ=>1, RETURN=>2}`); (d) blind-call fluent
+  `.return(1)` produces byte-identical BCODE to block `{ return(1) }`.
+- **Rewrites (8 lines, 4 subtests):** `.return_a().return_m()` → `.return(1).return(array("?Top:", entry_groups()))`
+  (×3, replace_all — exactly 3 file-wide, all targets); block `return_m(Top)` → `return(array("?Top:", entry_groups()))`
+  (×2, **line-scoped** — `return_m(Top)` is 3× file-wide but @39745 is a *passing* non-target, excluded);
+  blind-call `.return_a()` → `.return(1)` (@6342); subtest-1's two `grep RETURN_A`/`grep RETURN_M` node
+  asserts re-blessed to `grep RETURN` + `is(hits{RETURN}, 2)` (the distinct-variant feature is retired).
+- **Scope:** the 4 *passing* `return_a(pipe_operator)` sites, `return_imatch`@12436 (→`.2.3`), and the
+  negative source-assert @41730 all untouched.
+- **Verification:** `perl -c -Iperl t/phase0_regression.t` OK; pre-flight assertion-replication → all PASS
+  (plan counts unchanged); full `perl -Iperl t/phase0_regression.t` (complete TAP to the corpus tail)
+  **30 → 26 failing**; `comm` name set-diff = **exactly the 4 cleared, new-failure set empty**. The gate was
+  briefly unrunnable due to **external** CPU contention (an unrelated `cargo`/`rustc` build pushed system load
+  to 32, exceeding the 10-min runner cap → SIGALRM-kill mid-run); a fresh low-load run gave the clean diff.
+  Remaining 26 = 20 `emit_context` (`.2.3`) + 5 F/G (`.2.4`) + 1 `corpus_regression` tail (`.5`). self-check
+  + KM gate pass. **Book unaffected** (internal IR-node names). **Next: `.2.3`.**
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 `return_array`→`return(array(...))`, TEST-ONLY); 17 phase0 failures cleared, zero regressions
 
 Executed the recorded `.2.2.2.1` plan. **No engine/spec/production code touched** — only `t/phase0_regression.t`.

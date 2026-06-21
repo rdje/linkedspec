@@ -6339,7 +6339,7 @@ subtest 'blind_call_fluent_post_call_chain_matches_block_form' => sub {
 
     my $fluent_spec = <<'SPEC';
 Top::AND
- => Helper .return_a()
+ => Helper .return(1)
 
 Helper:
  /a/ -> Helper { return(1) }
@@ -39195,7 +39195,7 @@ subtest 'method_like_action_chain_parses_into_multiple_helper_events' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top .return_a().return_m()
+ /a/ -> Top .return(1).return(array("?Top:", entry_groups()))
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -39204,8 +39204,8 @@ SPEC
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
     is($meta->{canonical_action_ir_fallback_count}, 0, 'chained method-like action block avoids RAW_PERL fallback');
     is($meta->{unresolved_helper_count}, 0, 'chained method-like action block avoids unresolved-helper hits');
-    ok(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_A from chained action methods');
-    ok(grep { $_ eq 'RETURN_M' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_M from chained action methods');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN from chained action methods (RETURN_A retired into RETURN)');
+    is($meta->{canonical_action_ir_hits}{RETURN}, 2, 'the two chained return methods each contribute a canonical RETURN event (RETURN_M retired into RETURN)');
     ok($meta->{language_agnostic_action_ir_ready}, 'chained method-like action block remains language-agnostic action-IR ready');
 };
 subtest 'method_like_fluent_and_structured_blocks_lower_equivalently' => sub {
@@ -39213,12 +39213,12 @@ subtest 'method_like_fluent_and_structured_blocks_lower_equivalently' => sub {
 
     my $fluent_action_spec = <<'SPEC';
 Top::&
- /a/ -> Top .return_a().return_m()
+ /a/ -> Top .return(1).return(array("?Top:", entry_groups()))
 SPEC
 
     my $block_action_spec = <<'SPEC';
 Top::&
- /a/ -> Top { return(1); return_m(Top) }
+ /a/ -> Top { return(1); return(array("?Top:", entry_groups())) }
 SPEC
 
     my $fluent_lifecycle_spec = <<'SPEC';
@@ -39276,13 +39276,13 @@ subtest 'method_like_structured_blocks_accept_optional_semicolons' => sub {
 
     my $fluent_action_spec = <<'SPEC';
 Top::&
- /a/ -> Top .return_a().return_m()
+ /a/ -> Top .return(1).return(array("?Top:", entry_groups()))
 SPEC
 
     my $block_action_spec = <<'SPEC';
 Top::&
  /a/ -> Top { return(1)
- return_m(Top) }
+ return(array("?Top:", entry_groups())) }
 SPEC
 
     my $fluent_lifecycle_spec = <<'SPEC';

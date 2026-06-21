@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-21` (`.2.2.2.1` **DONE** — 33 `return_array`→`return(array("semantic_annotation",…))` rewrites + 2 BOTH literal hit-hash re-blesses, TEST-ONLY; phase0 47→30, `comm` set-diff = exactly the 17 cleared, 0 regressions; `.2.2.2`/`.2.2.1`/`.2.1`/`.3`/`.4` DONE)
+- Last updated: `2026-06-21` (`.2.2.2.2` **DONE** — 4 `return_a`/`return_m` subtests re-blessed to canonical `.return(1).return(array("?Top:", entry_groups()))` + subtest-1 `RETURN_A`/`RETURN_M`→`RETURN` node re-bless, TEST-ONLY; phase0 30→26, `comm` set-diff = exactly the 4 cleared, 0 regressions. Cluster B1 (`.2.2.2`) fully done. Frontier → `.2.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -155,7 +155,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     the 14 cluster-C `emit_context` sites (incl. the passing `helper_action_ir_events`/`helper_action_ir_nodes`
     kind sites → `.2.3`) + the 3 BOTH subtests (17354 @17289, 20177 @20105, 39209 @39213 → `.2.2.2`).
     **Actual cleared = 55** (matches the triaged B2 estimate). Engine/spec untouched.
-  - ID: `.2.2.2` · Status: `active` · Children: `.2.2.2.1`, `.2.2.2.2` — Cluster B1 (21 = 18 helper-rewrite
+  - ID: `.2.2.2` · Status: `done` (2026-06-21 — both children done; cluster B1 fully re-blessed, 21 phase0 failures cleared across `.2.2.2.1`+`.2.2.2.2`) · Children: `.2.2.2.1`, `.2.2.2.2` — Cluster B1 (21 = 18 helper-rewrite
     + 3 BOTH, judgment-heavy). **Split 2026-06-21** after a read-only recon (per-subtest helper map) + an
     archaeology agent that recovered & empirically verified the canonical rewrite of each retired helper
     (KM [[retired-return-helpers-canonical-rewrite]]). Recon mapped the 21 failing B1 subtests by retired
@@ -205,7 +205,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     `is(...)` expected confirmed unchanged-and-canonical via `call_spec_handler_subst`. `perl -c` OK; full
     `perl -Iperl t/phase0_regression.t` **47 → 30 failing**; `comm` name set-diff = **exactly the 17 cleared,
     new-failure set empty**.
-  - ID: `.2.2.2.2` · Status: `pending` — Cluster B1-accumulator (4 subtests: `method_like_action_chain_
+  - ID: `.2.2.2.2` · Status: `done` (2026-06-21) — Cluster B1-accumulator (4 subtests: `method_like_action_chain_
     parses_into_multiple_helper_events` @~39195 [BOTH], `method_like_fluent_and_structured_blocks_lower_
     equivalently` @~39213, `method_like_structured_blocks_accept_optional_semicolons` @~39276,
     `blind_call_fluent_post_call_chain_matches_block_form` @~6337). Rewrite `.return_a()`/`.return_m()` /
@@ -217,6 +217,26 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     yields `RETURN`×? — confirm the count) or retire the now-meaningless distinct-node assertion. The
     fluent-vs-block `ACODE`/`ICODE` equality assertions must also be re-checked. Highest risk; do after
     `.2.2.2.1`.
+    **DONE 2026-06-21 (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched).** Ground-truth-first:
+    a pre-flight probe (`LinkedSpec::Get`) settled every uncertainty before any edit. **Empirical findings:**
+    (a) the no-arg chained `.return_a().return_m()` and the block `{ return(1); return_m(Top) }` both fall to
+    `RAW_PERL` (fallback>0) — the failure cause; (b) `RETURN_A`/`RETURN_M` are retired into a single `RETURN`
+    node, so subtest-1's distinct-node asserts test a dead feature; (c) the canonical chain
+    `.return(1).return(array("?Top:", entry_groups()))` lowers identically to the block
+    `{ return(1); return(array("?Top:", entry_groups())) }` (`fallback=0`, `ready=1`,
+    `nodes=[IMATCH_GROUPS_READ, RETURN]`, `hits={IMATCH_GROUPS_READ=>1, RETURN=>2}`); (d) blind-call fluent
+    `.return(1)` produces byte-identical BCODE to block `{ return(1) }`. **Rewrites (8 lines, 4 subtests):**
+    `.return_a().return_m()` → `.return(1).return(array("?Top:", entry_groups()))` (×3, replace_all — exactly
+    3 file-wide, all targets); block `return_m(Top)` → `return(array("?Top:", entry_groups()))` (×2, line-scoped
+    — `return_m(Top)` is 3× file-wide but @39745 is a *passing* non-target, excluded); blind-call `.return_a()`
+    → `.return(1)` (@6342); subtest-1's two `grep RETURN_A`/`grep RETURN_M` node asserts re-blessed to
+    `grep RETURN` + `is(hits{RETURN}, 2)` (the distinct-variant feature is retired). **Scope:** the 4 passing
+    `return_a(pipe_operator)` sites + `return_m(Top)`@39745 + `return_imatch`@12436 (→`.2.3`) + the negative
+    source-assert @41730 all untouched. A pre-flight probe replicated **every assertion of all 4 subtests** →
+    all PASS (plan counts unchanged). `perl -c` OK; full `perl -Iperl t/phase0_regression.t` **30 → 26
+    failing**; `comm` name set-diff = **exactly the 4 cleared, new-failure set empty** (verified on a complete
+    TAP reaching the corpus tail; an earlier run was SIGALRM-killed by transient external load-32 CPU
+    contention — a fresh low-load run gave the clean diff).
   - ID: `.2.3` · Status: `pending` — Cluster C (20): re-bless/retire the `emit_context` white-box tests
     — fix the stale `plan` (88), re-bless `return_imatch`/`return_array` passthrough + the `a(IMATCH)`
     case, and **delete or rewrite** the seams that monkeypatch the removed `LinkedSpec::Deps::*` (they
@@ -294,11 +314,11 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.2.2.1` | `done` 2026-06-21 | Cluster B2 re-bless — 55 pure-B2 `method_like*` cleared (102 → 47 failing), `comm` set-diff = exactly 55, zero real regressions (lone `parser_invalid_input` flake disproven by a clean re-run). TEST-ONLY. |
 | — | `.2.2.2` | `active` (split 2026-06-21) | Cluster B1 (21) decomposed → `.2.2.2.1` (17 `return_array`) + `.2.2.2.2` (4 `return_a`/`return_m` incl. 3 BOTH), after recon + verified helper-mapping archaeology (KM [[retired-return-helpers-canonical-rewrite]]). |
 | — | `.2.2.2.1` | `done` 2026-06-21 | Cluster B1-array re-bless — 33 `return_array`→`return(array("semantic_annotation",…))` rewrites + 2 BOTH literal hit-hash re-blesses (`RETURN_A`→`RETURN`), TEST-ONLY; phase0 47→30, `comm` set-diff = exactly the 17 cleared, 0 regressions. |
-| 1 | `.2.2.2.2` | `pending` | Cluster B1-accumulator: rewrite the 4 `return_a`/`return_m` subtests (incl. 3rd BOTH) to `return(array("?L:", array_copy/entry_groups…))`, re-dump + re-bless node/hit assertions; per-test retire-vs-rebless judgment. Highest risk. |
-| 2 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
-| 3 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
-| 4 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 5 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.2.2.2` | `done` 2026-06-21 | Cluster B1-accumulator re-bless — 4 `return_a`/`return_m` subtests rewritten to canonical `.return(1).return(array("?Top:", entry_groups()))` + subtest-1 `RETURN_A`/`RETURN_M`→`RETURN` node re-bless, TEST-ONLY; phase0 30→26, `comm` set-diff = exactly the 4 cleared, 0 regressions. |
+| 1 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
+| 2 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
+| 3 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 4 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -340,6 +360,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.2.2.1` | guarded one-pass transform (52 Form-A grep flips + 19 Form-B hit-hash merges + 2 desc fixes; asserts shape or aborts); `perl -c` OK; full `perl -Iperl t/phase0_regression.t` + `comm` set-diff vs baseline ×2 runs | `done` — 102 → 47 failing; cleared = exactly 55 pure-B2; new-failure set empty. One after-only name (`parser_invalid_input…`, a Lispish `open3` subprocess test at line 4163, *before* all edits) was a CPU-contention flake — disproven by a clean re-run (ok 137). |
 | `2026-06-21` | `.2.2.2` | read-only recon (21 B1 subtests → per-helper map: 17 `return_array` / 4 `return_a`/`return_m`) + archaeology agent recovering & empirically verifying the canonical rewrite of all 6 retired helpers (git `4e92503` diff + `call_spec_handler_subst` probes) | `done` (split) — decomposed into `.2.2.2.1` (array) + `.2.2.2.2` (accumulator); KM card [[retired-return-helpers-canonical-rewrite]]; no test change this slice |
 | `2026-06-21` | `.2.2.2.1` | guarded matching-paren line-scoped transform (33 rewrites, asserts count/delta, die-on-drift) + dry-run full-diff inspection; empirical post-rewrite hit-hash dump for the 2 BOTH subtests; `call_spec_handler_subst` check of the L16601 pinned expected; `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs baseline | `done` — 47 → 30 failing; cleared = exactly the 17 B1-array (incl. both BOTH); new-failure set empty. TEST-ONLY. |
+| `2026-06-21` | `.2.2.2.2` | pre-flight probe replicating every assertion of all 4 subtests (`LinkedSpec::Get`: ACODE/ICODE/BCODE equality, fallback, node coverage, hit counts) → all PASS; scope grep (passing `return_a(pipe_operator)`/`return_m(Top)`@39745 untouched); `perl -c`; full `perl -Iperl t/phase0_regression.t` (complete TAP to corpus tail) + `comm` name set-diff vs post-`.2.2.2.1` baseline | `done` — 30 → 26 failing; cleared = exactly the 4 (`blind_call_fluent…`, `action_chain…`, `fluent_and_structured_blocks…`, `structured_blocks…`); new-failure set empty. TEST-ONLY. (One earlier run SIGALRM-killed by transient external load-32 CPU contention; clean low-load re-run gave the diff.) |
 
 ## Commit Log
 
@@ -352,7 +373,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2 — split cluster B into .2.2.1 (B2 token re-bless) + .2.2.2 (B1 helper rewrites)` | commit `d5c2acf` |
 | `.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 method_like RETURN_A→RETURN, TEST-ONLY)` | commit `b691c02` |
 | `.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into .2.2.2.1 (return_array) + .2.2.2.2 (return_a/return_m)` | commit `fc52288`; recon `91b5113` |
-| `.2.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 return_array→return(array), TEST-ONLY); 17 phase0 failures cleared` | this commit |
+| `.2.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 return_array→return(array), TEST-ONLY); 17 phase0 failures cleared` | commit `6b9288c` |
+| `.2.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2.2 — re-bless cluster B1-accumulator (4 return_a/return_m, TEST-ONLY); 4 phase0 failures cleared` | this commit |
 
 ## Changelog
 
@@ -436,3 +458,19 @@ can also proceed in parallel if the engine touch is deferred).
   `comm` name set-diff = exactly the 17 B1-array cleared (incl. both BOTH), **zero regressions**. Frontier
   → `.2.2.2.2` (4 `return_a`/`return_m` accumulator, re-dump + re-bless, highest risk). Book unaffected
   (internal IR-node names, not a user surface).
+- `2026-06-21`: `.2.2.2.2` **DONE** (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched) — closes
+  cluster B1 (`.2.2.2`). Ground-truth-first: a pre-flight probe replicated **every** assertion of all 4
+  subtests via `LinkedSpec::Get` (ACODE/ICODE/BCODE equality, fallback, node coverage, hit counts) → all
+  PASS, settling the judgment forks before editing. Rewrote `.return_a().return_m()` →
+  `.return(1).return(array("?Top:", entry_groups()))` (×3, replace_all — exactly 3, all targets), block
+  `return_m(Top)` → `return(array("?Top:", entry_groups()))` (×2, line-scoped — @39745 is a *passing*
+  non-target, excluded), blind-call `.return_a()` → `.return(1)` (@6342); and re-blessed subtest-1's two
+  retired `RETURN_A`/`RETURN_M` node greps to `grep RETURN` + `is(hits{RETURN}, 2)` (the distinct-variant
+  feature is retired — `RETURN_A`/`RETURN_M` fold into a single `RETURN`, KM [[actionir-return-node-retired-to-return]]).
+  The 4 passing `return_a(pipe_operator)` sites + `return_imatch`@12436 (→`.2.3`) + the negative
+  source-assert @41730 untouched. `perl -c` OK; full phase0 **30 → 26 failing**; `comm` name set-diff =
+  exactly the 4 cleared, **zero regressions** (complete TAP to the corpus tail). Verification was briefly
+  blocked by transient external CPU contention (an unrelated `cargo`/`rustc` build pushed load to 32,
+  exceeding the 10-min runner cap → SIGALRM); a fresh low-load run produced the clean diff. Remaining 26 =
+  20 `emit_context` (`.2.3`) + 5 F/G (`.2.4`) + 1 `corpus_regression` tail (`.5`). Frontier → `.2.3`.
+  Book unaffected.
