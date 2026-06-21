@@ -1,6 +1,53 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.2.3 — re-bless/rewrite cluster C `emit_context` (20, TEST-ONLY); 20 phase0 failures cleared, zero regressions
+
+Cluster C. **No engine/spec/production code touched** — only `t/phase0_regression.t`. All 20 failing
+`emit_context` white-box subtests traced to the retired `return_a`/`return_imatch`/`return_array` helpers
+plus the `return(1)`-as-accumulator model that the engine now lowers to a plain resolved `return 1`
+(canonical node `RETURN`, contract `return_general`, language-agnostic-ready). Driven ground-truth-first:
+one comprehensive probe (`LinkedSpec::Get` / `call_spec_handler_subst` / `EmitContext::*`) dumped the
+current value of **every** changed assertion before editing.
+
+- **`return(1)` → `return 1`** (resolved): re-blessed the deps-builder accumulator expecteds
+  `return ['?Top:', \@Top]`→`return 1` and `['RETURN_A']`→`['RETURN']` (scanner / canonical_event /
+  rewrite_pipeline), the require-subprocess rewrite-pipeline payload, and the `canonical_ir_lowering`
+  push/return output.
+- **retired-helper passthrough:** `return_imatch(...)`/`return_array(...)` return unchanged (facade-lowering
+  subtest 12468/12469 re-blessed to passthrough + accurate descriptions).
+- **`a(IMATCH)` ⇒ `[IMATCH]`** (15843, the mis-authored `@IMATCH`).
+- **two stale plan off-by-ones** (`pipeline_helper_substitutions` 89→88; `lowers_method_contracts`
+  80→79) — confirmed exactly that many real assertions run (no masked failure).
+- **removed seam:** `_lower_return_array_statement` no longer exists in `EmitContext`, so the
+  `method_lowering` deps-builder probe + its 2 asserts were dropped (plan 8→6).
+- **diagnostics counting:** `_find_unresolved_action_helpers` inputs `return(1)`→`return_a(1)` (deps +
+  require versions) so the counter still meaningfully finds 2; `_parse_method_function_expr('return(1)')`
+  args re-blessed `'Top'`→`'1'`.
+- **descriptor-meta semantic re-bless:** `RETURN_A`→`RETURN` node/event/hit + `return_a` contract →
+  `return_general`/`return` across `helper_action_ir_nodes` / `canonical_action_ir_with_raw_fallback` /
+  `payload_events` / `nested_semicolon`; `reports_unresolved` now reflects only the genuine label-mismatch
+  `return` helper. **Three subtests whose assertions referenced an expression payload/label/nested-semicolon
+  that the degenerate `return(1)` spec could not produce had their spec return forms restored** to
+  `return(Top, $x + 1)` (payload_events, canonical_with_raw) and `return(do { my $x = 1; $x })`
+  (nested_semicolon), and the `Unresolved`/`Combo` rules to `return(Leaf, $x)` (readiness, blocker) —
+  preserving each test's original coverage intent rather than degrading it.
+
+**Decision:** kept the harmless dead `LinkedSpec::Deps::*` traps in the deps-builder subtests (the
+package was removed; the "Deps stays unloaded" guarantee is independently covered by
+`emit_context_require_avoids_linkedspec_deps_load`, and removing the traps only from failing siblings
+would split the family). A consistent dead-trap sweep across all 13 deps-builder siblings is deferred as
+optional test hygiene (task-tree Open Questions).
+
+**Verification:** `perl -c` OK; the after-run cleared the 11 cluster-C subtests at subtest ≤803 with zero
+regressions in subtests 1–803; a load-independent focused Test::More harness re-ran the 9 late meta/nested
+subtests (804–857) = 9/9 pass; the authoritative low-load full `perl -Iperl t/phase0_regression.t` +
+`comm` name set-diff = exactly the 20 cluster-C cleared (phase0 **26 → 6**), new-failure set empty. The
+first two full runs were SIGALRM-killed at the corpus tail by a transient external `rustc`/`nexsim_core`
+build (system-load ~29) — the documented truncated-TAP false-cleared hazard; a clean low-load re-run gave
+the authoritative diff. Remaining 6 = 5 cluster F/G (`.2.4`) + 1 `corpus_regression` tail (`.5`). Book
+unaffected (internal IR-node test names, not a user surface).
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2.2 — re-bless cluster B1-accumulator (4 `return_a`/`return_m`, TEST-ONLY); 4 phase0 failures cleared, zero regressions
 
 Closed cluster B1 (`.2.2.2`). **No engine/spec/production code touched** — only `t/phase0_regression.t`.

@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-21` (`.2.2.2.2` **DONE** — 4 `return_a`/`return_m` subtests re-blessed to canonical `.return(1).return(array("?Top:", entry_groups()))` + subtest-1 `RETURN_A`/`RETURN_M`→`RETURN` node re-bless, TEST-ONLY; phase0 30→26, `comm` set-diff = exactly the 4 cleared, 0 regressions. Cluster B1 (`.2.2.2`) fully done. Frontier → `.2.3`)
+- Last updated: `2026-06-22` (`.2.3` **DONE** — cluster C `emit_context` ×20 re-blessed/rewritten, TEST-ONLY; phase0 26→6, all 20 cluster-C cleared, 0 regressions. Frontier → `.2.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -237,10 +237,41 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     failing**; `comm` name set-diff = **exactly the 4 cleared, new-failure set empty** (verified on a complete
     TAP reaching the corpus tail; an earlier run was SIGALRM-killed by transient external load-32 CPU
     contention — a fresh low-load run gave the clean diff).
-  - ID: `.2.3` · Status: `pending` — Cluster C (20): re-bless/retire the `emit_context` white-box tests
-    — fix the stale `plan` (88), re-bless `return_imatch`/`return_array` passthrough + the `a(IMATCH)`
-    case, and **delete or rewrite** the seams that monkeypatch the removed `LinkedSpec::Deps::*` (they
-    exercise a non-existent seam — prefer delete/rewrite over re-bless).
+  - ID: `.2.3` · Status: `done` (2026-06-22) — Cluster C `emit_context` ×20 re-blessed/rewritten
+    (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched). **Ground-truth-first:** a comprehensive
+    probe (`LinkedSpec::Get` / `call_spec_handler_subst` / `EmitContext::*`) dumped the current value of
+    every changed assertion before editing — all 20 traced to the retired `return_a`/`return_imatch`/
+    `return_array` helpers + the `return(1)`-as-accumulator model:
+    • **return(1) → plain `return 1`** (resolved; canonical node `RETURN`, contract `return_general`,
+      language-agnostic-ready) — re-blessed the deps-builder `return ['?Top:', \@Top]`/`RETURN_A`
+      expecteds (scanner, canonical_event, rewrite_pipeline) + the require-subprocess rewrite-pipeline
+      payload + the `canonical_ir_lowering` push/return output.
+    • **retired-helper passthrough** — `return_imatch(...)`/`return_array(...)` return unchanged
+      (facade-lowering subtest 12468/12469 re-blessed to passthrough + descriptions).
+    • **`a(IMATCH)` ⇒ `[IMATCH]`** (15843, the mis-authored `@IMATCH`).
+    • **two stale plan off-by-ones** (`pipeline_helper_substitutions` 89→88; `lowers_method_contracts`
+      80→79) — confirmed exactly that many real assertions run; no masked failure.
+    • **removed seam** — `_lower_return_array_statement` no longer exists in EmitContext, so the
+      `method_lowering` deps-builder probe + its 2 asserts were dropped (plan 8→6).
+    • **diagnostics counting** — `_find_unresolved_action_helpers` inputs changed `return(1);return(1)`
+      → `return_a(1);return_a(1)` (deps-builder + require versions) so the counter still meaningfully
+      finds 2; `_parse_method_function_expr('return(1)')` args re-blessed `'Top'`→`'1'`.
+    • **descriptor-meta semantic re-bless** — `RETURN_A`→`RETURN` node/event/hit re-bless across
+      `helper_action_ir_nodes`/`canonical_action_ir_with_raw_fallback`/`nested_semicolon`; `return_a`
+      contract → `return_general`/`return`; `reports_unresolved` now reflects only the genuine
+      label-mismatch `return` helper (return_a retired); three subtests whose assertions referenced an
+      expression payload/label/nested-semicolon that the degenerate `return(1)` spec could not produce
+      had their **spec return forms restored** to `return(Top, $x + 1)` (payload_events,
+      canonical_with_raw) and `return(do { my $x = 1; $x })` (nested_semicolon), and `Unresolved`/`Combo`
+      rules to `return(Leaf, $x)` (readiness, blocker) — preserving each test's original coverage intent
+      rather than degrading it. **Decision:** kept the harmless dead `LinkedSpec::Deps::*` traps (the
+      "Deps stays unloaded" guarantee is independently covered by
+      `emit_context_require_avoids_linkedspec_deps_load`, and removing them only from failing siblings
+      would split the family) — deferred a consistent dead-trap sweep across all 13 deps-builder siblings
+      as optional hygiene (see Open Questions). Verification: full after-run cleared the 11 cluster-C
+      subtests ≤ subtest-803 (0 regressions in 1–803) + a load-independent focused Test::More harness
+      ran the 9 late meta/nested subtests (804–857) = 9/9 pass; `perl -c` OK; authoritative low-load full
+      `comm` set-diff = exactly the 20 cleared (phase0 26→6), 0 regressions.
   - ID: `.2.4` · Status: `pending` — Cluster F (3) + Cluster G STALE (2): re-bless the `return(1)`
     migration-summary metadata (resolved, not blocked) + the `return(1)` AST-shape (scalar `1`).
 - ID: `PHASE0-BACKHALF-TRIAGE.3` · Status: `done` (2026-06-21 — **authorized by ADR `0008`**)
@@ -315,10 +346,10 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.2.2.2` | `active` (split 2026-06-21) | Cluster B1 (21) decomposed → `.2.2.2.1` (17 `return_array`) + `.2.2.2.2` (4 `return_a`/`return_m` incl. 3 BOTH), after recon + verified helper-mapping archaeology (KM [[retired-return-helpers-canonical-rewrite]]). |
 | — | `.2.2.2.1` | `done` 2026-06-21 | Cluster B1-array re-bless — 33 `return_array`→`return(array("semantic_annotation",…))` rewrites + 2 BOTH literal hit-hash re-blesses (`RETURN_A`→`RETURN`), TEST-ONLY; phase0 47→30, `comm` set-diff = exactly the 17 cleared, 0 regressions. |
 | — | `.2.2.2.2` | `done` 2026-06-21 | Cluster B1-accumulator re-bless — 4 `return_a`/`return_m` subtests rewritten to canonical `.return(1).return(array("?Top:", entry_groups()))` + subtest-1 `RETURN_A`/`RETURN_M`→`RETURN` node re-bless, TEST-ONLY; phase0 30→26, `comm` set-diff = exactly the 4 cleared, 0 regressions. |
-| 1 | `.2.3` | `pending` | Cluster C `emit_context` ×20 (white-box; delete/rewrite removed-`Deps::*` monkeypatch seams + stale `plan` + passthrough re-bless). |
-| 2 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
-| 3 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 4 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.3` | `done` 2026-06-22 | Cluster C `emit_context` ×20 re-blessed/rewritten (return(1)→`return 1` resolved, RETURN_A→RETURN, retired-helper passthrough, removed `_lower_return_array_statement`, 2 plan off-by-ones, restored expr-bearing return specs), TEST-ONLY; phase0 26→6, exactly the 20 cleared, 0 regressions. |
+| 1 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
+| 2 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 3 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -340,6 +371,11 @@ can also proceed in parallel if the engine touch is deferred).
   engine fixes (ADR `0008`); the engine-frozen doctrine otherwise stands (this is the named exception).
 - Did subtests 881–959 run clean? The `.1` run stopped at 881; `MEMORY` claims a ~940–959 reach with 173
   total, implying 881+ are clean — confirm in `.5` with a longer-budget run.
+- (`.2.3`, deferred hygiene) The 13 `emit_context_avoids_deps_*_dep_builder` subtests still carry dead
+  `local *LinkedSpec::Deps::*` traps (the package was removed; the traps can't fire and the "Deps stays
+  unloaded" guarantee is covered by `emit_context_require_avoids_linkedspec_deps_load`). `.2.3` kept them
+  (re-bless only) to avoid splitting the family piecemeal. Optional: a consistent sweep removing all 13
+  dead traps + their `unlike` assertions in one slice — out of green-phase0 scope; pure test hygiene.
 
 ## Blockers
 
@@ -361,6 +397,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.2.2.2` | read-only recon (21 B1 subtests → per-helper map: 17 `return_array` / 4 `return_a`/`return_m`) + archaeology agent recovering & empirically verifying the canonical rewrite of all 6 retired helpers (git `4e92503` diff + `call_spec_handler_subst` probes) | `done` (split) — decomposed into `.2.2.2.1` (array) + `.2.2.2.2` (accumulator); KM card [[retired-return-helpers-canonical-rewrite]]; no test change this slice |
 | `2026-06-21` | `.2.2.2.1` | guarded matching-paren line-scoped transform (33 rewrites, asserts count/delta, die-on-drift) + dry-run full-diff inspection; empirical post-rewrite hit-hash dump for the 2 BOTH subtests; `call_spec_handler_subst` check of the L16601 pinned expected; `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs baseline | `done` — 47 → 30 failing; cleared = exactly the 17 B1-array (incl. both BOTH); new-failure set empty. TEST-ONLY. |
 | `2026-06-21` | `.2.2.2.2` | pre-flight probe replicating every assertion of all 4 subtests (`LinkedSpec::Get`: ACODE/ICODE/BCODE equality, fallback, node coverage, hit counts) → all PASS; scope grep (passing `return_a(pipe_operator)`/`return_m(Top)`@39745 untouched); `perl -c`; full `perl -Iperl t/phase0_regression.t` (complete TAP to corpus tail) + `comm` name set-diff vs post-`.2.2.2.1` baseline | `done` — 30 → 26 failing; cleared = exactly the 4 (`blind_call_fluent…`, `action_chain…`, `fluent_and_structured_blocks…`, `structured_blocks…`); new-failure set empty. TEST-ONLY. (One earlier run SIGALRM-killed by transient external load-32 CPU contention; clean low-load re-run gave the diff.) |
+| `2026-06-22` | `.2.3` | comprehensive ground-truth probe of every changed assertion before editing; targeted unique-match edits (20 subtests); `perl -c`; after-run cleared the 11 cluster-C subtests ≤803 (0 regressions in 1–803) + a load-independent focused Test::More harness re-ran the 9 late meta/nested subtests (804–857) = 9/9 pass; authoritative low-load full `perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs baseline | `done` — 26 → 6 failing; cleared = exactly the 20 cluster-C `emit_context`; new-failure set empty. TEST-ONLY. (Two earlier runs SIGALRM-killed at the corpus tail by a transient external load-29 `rustc` build; clean low-load re-run gave the diff.) |
 
 ## Commit Log
 
@@ -374,7 +411,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.1 — re-bless cluster B2 (55 method_like RETURN_A→RETURN, TEST-ONLY)` | commit `b691c02` |
 | `.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into .2.2.2.1 (return_array) + .2.2.2.2 (return_a/return_m)` | commit `fc52288`; recon `91b5113` |
 | `.2.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 return_array→return(array), TEST-ONLY); 17 phase0 failures cleared` | commit `6b9288c` |
-| `.2.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2.2 — re-bless cluster B1-accumulator (4 return_a/return_m, TEST-ONLY); 4 phase0 failures cleared` | this commit |
+| `.2.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2.2 — re-bless cluster B1-accumulator (4 return_a/return_m, TEST-ONLY); 4 phase0 failures cleared` | commit `50d0308` |
+| `.2.3` | `PHASE0-BACKHALF-TRIAGE.2.3 — re-bless/rewrite cluster C emit_context (20, TEST-ONLY); 20 phase0 failures cleared, zero regressions` | this commit |
 
 ## Changelog
 
@@ -474,3 +512,23 @@ can also proceed in parallel if the engine touch is deferred).
   exceeding the 10-min runner cap → SIGALRM); a fresh low-load run produced the clean diff. Remaining 26 =
   20 `emit_context` (`.2.3`) + 5 F/G (`.2.4`) + 1 `corpus_regression` tail (`.5`). Frontier → `.2.3`.
   Book unaffected.
+- `2026-06-22`: `.2.3` **DONE** (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched) — re-blessed/
+  rewrote all 20 cluster-C `emit_context` white-box subtests. Ground-truth-first: a comprehensive probe
+  dumped the current value of every changed assertion before editing; all 20 traced to the retired
+  `return_a`/`return_imatch`/`return_array` helpers + the `return(1)`-as-accumulator model now lowering to
+  plain `return 1` (resolved; canonical node `RETURN`/contract `return_general`/language-agnostic-ready).
+  Changes: deps-builder `return ['?Top:', \@Top]`/`RETURN_A` expecteds → `return 1`/`RETURN`;
+  facade-lowering `return_imatch`/`return_array` → passthrough; `a(IMATCH)` → `[IMATCH]`; two stale plan
+  off-by-ones (89→88, 80→79); dropped the genuinely-removed `_lower_return_array_statement` probe (plan
+  8→6); `_find_unresolved_action_helpers` inputs `return(1)`→`return_a(1)` so the counter still finds 2;
+  `_parse_method_function_expr('return(1)')` args `'Top'`→`'1'`; and the descriptor-meta subtests
+  (`reports_unresolved`, `meta_exposes_*`, `nested_semicolon`) re-blessed `RETURN_A`→`RETURN` with three
+  specs' return forms **restored** (`return(Top, $x + 1)`, `return(do { my $x = 1; $x })`,
+  `return(Leaf, $x)`) so each test keeps its original label/expression/nested-semicolon coverage rather
+  than degrading it. Decision: kept the harmless dead `LinkedSpec::Deps::*` traps (Deps-unloaded covered
+  by `emit_context_require_avoids_linkedspec_deps_load`); deferred a consistent dead-trap sweep across all
+  13 deps-builder siblings as optional hygiene. Verification: after-run cleared the 11 cluster-C subtests
+  ≤803 (0 regressions in 1–803) + a load-independent focused Test::More harness ran the 9 late meta/nested
+  subtests (804–857) = 9/9 pass; authoritative low-load full `comm` set-diff = exactly the 20 cleared
+  (phase0 26→6), 0 regressions. Remaining 6 = 5 F/G (`.2.4`) + 1 `corpus_regression` tail (`.5`).
+  Frontier → `.2.4`. Book unaffected (internal IR-node test names, not a user surface).

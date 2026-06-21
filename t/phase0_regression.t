@@ -12465,8 +12465,8 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     like($rewritten{flow_empty}, qr/!\@items.*return undef/s, 'is_empty flow lowering stays inside EmitContext-owned lowering path');
     like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind; my \$__ls_switch_hit_\d+ = 0; if \(!\$__ls_switch_hit_\d+ && \$__ls_switch_value_\d+ eq "foo"\) \{ \$__ls_switch_hit_\d+ = 1; print "hit"; \} if \(!\$__ls_switch_hit_\d+\) \{ \$__ls_switch_hit_\d+ = 1; say "miss"; \} \}$/s,
         'switch/case/default lowering stays inside EmitContext-owned lowering path');
-    is($rewritten{return_imatch}, 'return ["semantic_annotation", $IMATCH]', 'return_imatch lowering stays inside EmitContext-owned lowering path');
-    is($rewritten{return_array}, 'return ["semantic_annotation", [$IMATCH_LIST[0], $c]]', 'return_array lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{return_imatch}, 'return_imatch(Top, semantic_annotation)', 'retired return_imatch helper passes through unchanged (no EmitContext lowering)');
+    is($rewritten{return_array}, 'return_array(Top, semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))', 'retired return_array helper passes through unchanged (no EmitContext lowering)');
     is($rewritten{return_general}, 'return [@items]', 'general return(payload) lowering stays inside EmitContext-owned lowering path');
     like($rewritten{pipeline_match}, qr/lc\(\$_\)/, 'lowercase_each lowering stays inside EmitContext-owned lowering path');
     like($rewritten{pipeline_match}, qr/A-Z_/, 'filter_match/uppercase/uniq lowering stays inside EmitContext-owned lowering path');
@@ -12545,7 +12545,7 @@ subtest 'emit_context_avoids_deps_scanner_dep_builder' => sub {
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_SCANNER_DEPS__/, 'EmitContext does not call the trapped Deps scanner dep builder');
     ok(defined($rewritten), 'EmitContext still returns rewritten code through the Scanner-owned default deps');
-    is($rewritten, q{return ['?Top:', \@Top]}, 'EmitContext preserves helper rewrite output after moving scanner default deps into Scanner');
+    is($rewritten, q{return 1}, 'EmitContext preserves helper rewrite output after moving scanner default deps into Scanner');
 };
 subtest 'emit_context_avoids_deps_statement_split_dep_builder' => sub {
     plan tests => 4;
@@ -12585,7 +12585,7 @@ subtest 'emit_context_avoids_deps_canonical_event_dep_builder' => sub {
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CANONICAL_EVENT_DEPS__/, 'EmitContext does not call the trapped Deps canonical-event dep builder');
     ok(ref($diag) eq 'HASH', 'EmitContext still returns canonical-event diagnostics through the CanonicalEvents-owned default deps');
-    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'EmitContext preserves canonical-event classification after moving default deps into CanonicalEvents');
+    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN'], 'EmitContext preserves canonical-event classification after moving default deps into CanonicalEvents');
 };
 subtest 'emit_context_avoids_deps_diagnostics_dep_builder' => sub {
     plan tests => 4;
@@ -12595,7 +12595,7 @@ subtest 'emit_context_avoids_deps_diagnostics_dep_builder' => sub {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_diagnostics_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__\n" };
         $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
-            'return(1); return(1)',
+            'return_a(1); return_a(1)',
             [{ id => 'return_a', diag_name => 'return_a', unresolved_pattern => qr/\breturn_a\s*\(/ }],
         );
         1;
@@ -12623,9 +12623,9 @@ subtest 'emit_context_avoids_deps_rewrite_pipeline_dep_builder' => sub {
     ok($ok_run, 'EmitContext rewrite pipeline succeeds without the removed Deps rewrite-pipeline dep builder')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_REWRITE_PIPELINE_DEPS__/, 'EmitContext does not call the trapped Deps rewrite-pipeline dep builder');
-    is($rewritten, q{return ['?Top:', \@Top]}, 'EmitContext preserves rewrite output after moving default deps into RewritePipeline');
+    is($rewritten, q{return 1}, 'EmitContext preserves rewrite output after moving default deps into RewritePipeline');
     ok(ref($diag) eq 'HASH', 'EmitContext still returns diagnostics through the RewritePipeline-owned default deps');
-    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'EmitContext preserves canonical-event diagnostics through the RewritePipeline-owned default deps');
+    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN'], 'EmitContext preserves canonical-event diagnostics through the RewritePipeline-owned default deps');
 };
 subtest 'emit_context_avoids_deps_declare_method_dep_builder' => sub {
     plan tests => 6;
@@ -12756,15 +12756,14 @@ subtest 'emit_context_avoids_deps_control_flow_dep_builder' => sub {
     is($print_stmt, 'print $foo', 'EmitContext preserves print lowering after moving default deps into ControlFlow');
 };
 subtest 'emit_context_avoids_deps_method_lowering_dep_builder' => sub {
-    plan tests => 8;
+    plan tests => 6;
 
-    my ($ok_run, $err, $alias, $assign_stmt, $return_array_stmt) = (0, '', undef, undef, undef);
+    my ($ok_run, $err, $alias, $assign_stmt) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::method_lowering_deps_for_package = sub { die "__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__\n" };
         $alias = LinkedSpec::RuleIR::EmitContext::_declare_alias_to_type('array');
         $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_statement('scalar(foo)', 'scalar(bar)');
-        $return_array_stmt = LinkedSpec::RuleIR::EmitContext::_lower_return_array_statement('Tag', 'array(items)');
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12776,8 +12775,6 @@ subtest 'emit_context_avoids_deps_method_lowering_dep_builder' => sub {
     is($alias, 'array', 'EmitContext preserves declaration alias lowering after moving default deps into MethodLowering');
     ok(defined($assign_stmt), 'EmitContext still returns assign output through the MethodLowering-owned default deps');
     is($assign_stmt, '$foo = $bar', 'EmitContext preserves assign lowering after moving default deps into MethodLowering');
-    ok(defined($return_array_stmt), 'EmitContext still returns return-array output through the MethodLowering-owned default deps');
-    is($return_array_stmt, 'return ["Tag", [items]]', 'EmitContext preserves return-array lowering after moving default deps into MethodLowering');
 };
 subtest 'emit_context_require_avoids_linkedspec_deps_load' => sub {
     plan tests => 4;
@@ -12804,7 +12801,7 @@ subtest 'emit_context_require_avoids_method_expr_load_until_parse_helper' => sub
       . 'print ref($expr) eq "HASH" ? "__METHOD_EXPR_HASH__\n" : "__METHOD_EXPR_OTHER__\n";'
       . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_PARSE__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_AFTER_PARSE__\n" : "__METHODEXPR_STILL_UNLOADED__\n";'
-      . 'print ref($expr->{args}) eq "ARRAY" && @{$expr->{args}} == 1 && $expr->{args}[0] eq "Top" ? "__METHOD_EXPR_ARGS_OK__\n" : "__METHOD_EXPR_ARGS_BAD__\n";'
+      . 'print ref($expr->{args}) eq "ARRAY" && @{$expr->{args}} == 1 && $expr->{args}[0] eq "1" ? "__METHOD_EXPR_ARGS_OK__\n" : "__METHOD_EXPR_ARGS_BAD__\n";'
     );
 
     is($exit_code, 0, 'EmitContext require/parse subprocess exits cleanly') or diag($err || $out);
@@ -12841,7 +12838,7 @@ subtest 'emit_context_require_avoids_diagnostics_load_until_diag_helper' => sub 
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/Diagnostics.pm"}) ? "__DIAGNOSTICS_EAGER__\n" : "__DIAGNOSTICS_STILL_LAZY__\n";
 my $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
-    "return(1); return(1)",
+    "return_a(1); return_a(1)",
     [{ id => "return_a", diag_name => "return_a", unresolved_pattern => qr/\breturn_a\s*\(/ }],
 );
 print ref($diag) eq "HASH" ? "__DIAGNOSTICS_HASH__\n" : "__DIAGNOSTICS_OTHER__\n";
@@ -12943,7 +12940,7 @@ print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELI
 my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics("Top", "return(1)");
 print defined($rewritten) && ref($diag) eq "HASH" ? "__REWRITE_PIPELINE_RESULT_OK__\n" : "__REWRITE_PIPELINE_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_AFTER_HELPER__\n" : "__REWRITE_PIPELINE_STILL_UNLOADED__\n";
-if (defined($rewritten) && $rewritten eq q{return ['?Top:', \@Top]} && ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN") {
+if (defined($rewritten) && $rewritten eq q{return 1} && ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN") {
     print "__REWRITE_PIPELINE_PAYLOAD_OK__\n";
 } else {
     print "__REWRITE_PIPELINE_PAYLOAD_BAD__\n";
@@ -13261,7 +13258,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'emit_context_pipeline_helper_substitutions' => sub {
-    plan tests => 89;
+    plan tests => 88;
 
     my $label = 'Top';
 
@@ -15836,11 +15833,11 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 80;
+    plan tests => 79;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("group_open", a(IMATCH)))'),
-        'return ["group_open", @IMATCH]',
+        'return ["group_open", [IMATCH]]',
         'return(array(...)) canonical helper preserves tagged return payload'
     );
     is(
@@ -39436,7 +39433,7 @@ subtest 'emit_context_canonical_ir_lowering_preserves_helper_and_raw_behavior' =
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'push(Leaf,Top); return(1)'),
-        q{push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); return ['?Top:', ( $x), \@Top]},
+        q{push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); return 1},
         'canonical-IR lowering preserves push/return helper output semantics'
     );
 };
@@ -39456,10 +39453,10 @@ SPEC
     ok(exists $descr->{spec}{Top}{meta}{action_rewriter}, 'Top rule exposes action_rewriter metadata');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
-    is($meta->{unresolved_helper_count}, 2, 'Top unresolved helper count captures unrewritten helper forms');
-    ok(grep { $_ eq 'return_a' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include return_a label-mismatch form');
+    is($meta->{unresolved_helper_count}, 1, 'Top unresolved helper count captures unrewritten helper forms');
+    ok(!(grep { $_ eq 'return_a' } @{$meta->{unresolved_helpers}}), 'Top unresolved helpers no longer include the retired return_a form');
     ok(grep { $_ eq 'return' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include return label-mismatch form');
-    is($meta->{unresolved_helper_hits}{return_a}, 1, 'Top return_a unresolved helper hit count is tracked');
+    is($meta->{unresolved_helper_hits}{return_a}, undef, 'retired return_a is no longer tracked as an unresolved helper hit');
     is($meta->{unresolved_helper_hits}{return}, 1, 'Top return unresolved helper hit count is tracked');
     is($descr->{spec}{Leaf}{meta}{action_rewriter}{unresolved_helper_count}, 0, 'Leaf rule has no unresolved helpers');
 };
@@ -39478,7 +39475,7 @@ SPEC
     ok(ref($meta->{rewrite_contract_ids}) eq 'ARRAY', 'action rewriter metadata exposes rewrite_contract_ids array');
     ok(@{$meta->{rewrite_contract_ids}} > 0, 'rewrite_contract_ids is non-empty');
     is($meta->{rewrite_contract_ids}[0], 'call', 'rewrite_contract_ids preserves stable ordering (first: call)');
-    ok(grep { $_ eq 'return_a' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes return_a contract');
+    ok(grep { $_ eq 'return_general' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes the canonical return_general contract');
     ok(grep { $_ eq 'capture_if_macro' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes CAPTURE_IF macro contract');
 };
 subtest 'emit_context_meta_exposes_helper_action_ir_nodes' => sub {
@@ -39499,17 +39496,17 @@ SPEC
     is($meta->{helper_action_ir_count}, 3, 'helper action-IR count captures helper invocations before lowering');
     ok(grep { $_ eq 'CALL' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include CALL');
     ok(grep { $_ eq 'CAPTURE_IF' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include CAPTURE_IF');
-    ok(grep { $_ eq 'RETURN_A' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include RETURN_A');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include RETURN');
     is($meta->{helper_action_ir_hits}{CALL}, 1, 'helper action-IR CALL hit count is tracked');
     is($meta->{helper_action_ir_hits}{CAPTURE_IF}, 1, 'helper action-IR CAPTURE_IF hit count is tracked');
-    is($meta->{helper_action_ir_hits}{RETURN_A}, 1, 'helper action-IR RETURN_A hit count is tracked');
+    is($meta->{helper_action_ir_hits}{RETURN}, 1, 'helper action-IR RETURN hit count is tracked');
 };
 subtest 'emit_context_meta_exposes_helper_action_ir_payload_events' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); push(Leaf,Top); return(1) }
+ /a/ -> Top { call(Leaf); push(Leaf,Top); return(Top, $x + 1) }
 
 Leaf:
  /a/ -> Leaf { return(1) }
@@ -39524,20 +39521,20 @@ SPEC
 
     my ($call_evt)   = grep { $_->{contract_id} eq 'call' } @{$meta->{helper_action_ir_events}};
     my ($push_evt)   = grep { $_->{contract_id} eq 'push_target_arg' } @{$meta->{helper_action_ir_events}};
-    my ($return_evt) = grep { $_->{contract_id} eq 'return_a' } @{$meta->{helper_action_ir_events}};
+    my ($return_evt) = grep { $_->{contract_id} eq 'return' } @{$meta->{helper_action_ir_events}};
 
     is($call_evt->{args}{callee}, 'Leaf', 'CALL payload event captures callee argument');
     is($push_evt->{args}{source}, 'Leaf', 'PUSH payload event captures source rule argument');
     is($push_evt->{args}{target}, 'Top', 'PUSH payload event captures target list argument');
-    like($return_evt->{args}{arg}, qr/\$x \+ 1/, 'RETURN_A payload event captures expression argument payload');
-    is($return_evt->{args}{label}, 'Top', 'RETURN_A payload event captures label argument');
+    like($return_evt->{args}{arg}, qr/\$x \+ 1/, 'RETURN payload event captures expression argument payload');
+    is($return_evt->{args}{label}, 'Top', 'RETURN payload event captures label argument');
 };
 subtest 'emit_context_meta_exposes_canonical_action_ir_with_raw_fallback' => sub {
     plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(Leaf); my $tmp = 1; push(Leaf,Top); return(1) }
+ /a/ -> Top { call(Leaf); my $tmp = 1; push(Leaf,Top); return(Top, $x + 1) }
 
 Leaf:
  /a/ -> Leaf { return(1) }
@@ -39551,18 +39548,18 @@ SPEC
     is($meta->{canonical_action_ir_fallback_count}, 1, 'canonical action-IR fallback count captures non-helper statement');
     ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL');
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH');
-    ok(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_A');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN');
     ok(grep { $_ eq 'RAW_PERL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RAW_PERL fallback marker');
 
     my ($call_evt) = grep { $_->{kind} eq 'CALL' } @{$meta->{canonical_action_ir_events}};
     my ($push_evt) = grep { $_->{kind} eq 'PUSH' } @{$meta->{canonical_action_ir_events}};
     my ($raw_evt)  = grep { $_->{kind} eq 'RAW_PERL' } @{$meta->{canonical_action_ir_events}};
-    my ($ret_evt)  = grep { $_->{kind} eq 'RETURN_A' } @{$meta->{canonical_action_ir_events}};
+    my ($ret_evt)  = grep { $_->{kind} eq 'RETURN' } @{$meta->{canonical_action_ir_events}};
 
     is($call_evt->{args}{callee}, 'Leaf', 'canonical CALL event captures callee');
     is($push_evt->{args}{target}, 'Top', 'canonical PUSH event captures explicit target');
     is($raw_evt->{args}{code}, 'my $tmp = 1', 'canonical RAW_PERL fallback event captures non-helper statement');
-    like($ret_evt->{args}{arg}, qr/\$x \+ 1/, 'canonical RETURN_A event captures expression payload');
+    like($ret_evt->{args}{arg}, qr/\$x \+ 1/, 'canonical RETURN event captures expression payload');
 };
 subtest 'emit_context_meta_exposes_language_agnostic_readiness' => sub {
     plan tests => 10;
@@ -39575,7 +39572,7 @@ Mixed::&
  /b/ -> Mixed { call(Leaf); my $tmp = 1 }
 
 Unresolved::&
- /c/ -> Unresolved { return(1) }
+ /c/ -> Unresolved { return(Leaf, $x) }
 
 Leaf:
  /a/ -> Leaf { return(1) }
@@ -39609,7 +39606,7 @@ Top::&
  /a/ -> Top { call(Leaf); return(1) }
 
 Combo::&
- /b/ -> Combo { return(1); my $tmp = 1 }
+ /b/ -> Combo { return(Leaf, $x); my $tmp = 1 }
 
 Leaf:
  /a/ -> Leaf { return(1) }
@@ -39625,9 +39622,9 @@ SPEC
 
     my $combo_meta = $descr->{spec}{Combo}{meta}{action_rewriter};
     is($combo_meta->{unresolved_helper_count}, 1, 'combo rule tracks unresolved helper count');
-    is_deeply($combo_meta->{unresolved_helper_statements}, ['return(1)'], 'combo rule exposes unresolved helper statement payloads');
+    is_deeply($combo_meta->{unresolved_helper_statements}, ['return(Leaf, $x)'], 'combo rule exposes unresolved helper statement payloads');
     is_deeply($combo_meta->{raw_perl_dependency_statements}, ['my $tmp = 1'], 'combo rule exposes raw-Perl fallback dependency statements');
-    is_deeply($combo_meta->{language_agnostic_action_ir_blocker_statements}, ['my $tmp = 1', 'return(1)'], 'combo rule exposes combined language-agnostic blocker statements');
+    is_deeply($combo_meta->{language_agnostic_action_ir_blocker_statements}, ['my $tmp = 1', 'return(Leaf, $x)'], 'combo rule exposes combined language-agnostic blocker statements');
     is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 2, 'combo rule exposes combined blocker statement count');
     ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
 };
@@ -40819,7 +40816,7 @@ subtest 'emit_context_canonical_action_ir_handles_nested_semicolon_payloads' => 
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return(1); call(Leaf) }
+ /a/ -> Top { return(do { my $x = 1; $x }); call(Leaf) }
 
 Leaf:
  /a/ -> Leaf { return(1) }
@@ -40831,15 +40828,15 @@ SPEC
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
     is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes semicolons inside helper payloads');
     is($meta->{canonical_action_ir_count}, 2, 'canonical action-IR count remains aligned to helper statement count');
-    ok(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_A for nested payload helper');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN for nested payload helper');
     ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL for trailing helper');
     is(scalar(grep { $_ eq 'RAW_PERL' } @{$meta->{canonical_action_ir_nodes}}), 0, 'canonical action-IR nodes do not inject RAW_PERL for nested helper payload semicolons');
 
-    my ($ret_evt) = grep { $_->{kind} eq 'RETURN_A' } @{$meta->{canonical_action_ir_events}};
-    like($ret_evt->{args}{arg}, qr/do \{ my \$x = 1; \$x \}/, 'canonical RETURN_A payload keeps nested semicolon expression intact');
+    my ($ret_evt) = grep { $_->{kind} eq 'RETURN' } @{$meta->{canonical_action_ir_events}};
+    like($ret_evt->{args}{payload}, qr/do \{ my \$x = 1; \$x \}/, 'canonical RETURN payload keeps nested semicolon expression intact');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(1); call(Leaf)');
-    like($rewritten, qr/^return \['\?Top:', \( do \{ my \$x = 1; \$x \}\), /, 'canonical-IR lowering preserves RETURN_A rewrite payload with nested semicolon expression');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(do { my $x = 1; $x }); call(Leaf)');
+    like($rewritten, qr/^return do \{ my \$x = 1; \$x \}; /, 'canonical-IR lowering preserves RETURN rewrite payload with nested semicolon expression');
     like($rewritten, qr/&\{\$\$descr\{spec\}\{Leaf\}\{handler\}\}\(\$descr, \$STRING, \$minfo\)$/, 'canonical-IR lowering preserves CALL rewrite after nested semicolon payload helper');
 };
 subtest 'emit_context_canonical_action_ir_ignores_line_comment_semicolon_fragmentation' => sub {
