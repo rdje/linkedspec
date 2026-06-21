@@ -43,6 +43,16 @@ contract).
 > spec is OBJECTIVELY shown to break AND the user authorizes. Default remedy for the 65 = re-bless/retire
 > the tests (TEST-ONLY). "Defect #2 (input-boundary)" was sub-agent-claimed and NOT verified. **The 108
 > STALE verdicts stand and are test-only.** Read this banner over the section below.
+>
+> **UPDATE (2026-06-21 — authorization given; see ADR `0008`).** A fresh session re-verified BOTH
+> defects objectively, read-only: (1) the book's OWN `:AND` worked example
+> (`user-model/rule-modes-and-parse-modes.md:124-133`) breaks with the `SCALAR(0x…)Pair`/`near ")Pair"`
+> codegen error — so a documented-but-self-inconsistent `:AND` example does break; (2) Defect #2 is now
+> CONFIRMED (`Not a SCALAR reference at … Runtime.pm line 126`, empty `last_error`). The user then
+> **authorized BOTH engine fixes** (ADR `0008`). Root cause of #1 is now pinned to a `\$"`-vs-`"\$"`
+> substitution typo in `HandlerVariantEmitter.pm` (`_emit_and_acode_seq_handler` /
+> `_emit_and_single_acode_handler`). The book's non-conformant `:AND` example is ALSO corrected (docs
+> lane) so the surface and the fixed engine agree. The engine-frozen doctrine otherwise stands.
 
 Authoritative run: `perl -Iperl t/phase0_regression.t` → **173 failing subtests / 707 passing**
 (reached subtest 880/959 before the background run was terminated, exit 144 mid-subtest-881; the 173
@@ -121,20 +131,38 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     exercise a non-existent seam — prefer delete/rewrite over re-bless).
   - ID: `.2.4` · Status: `pending` — Cluster F (3) + Cluster G STALE (2): re-bless the `return(1)`
     migration-summary metadata (resolved, not blocked) + the `return(1)` AST-shape (scalar `1`).
-- ID: `PHASE0-BACKHALF-TRIAGE.3` · Status: `blocked`
+- ID: `PHASE0-BACKHALF-TRIAGE.3` · Status: `done` (2026-06-21 — **authorized by ADR `0008`**)
   Goal: **Engine fix** — AND-rule action-codegen defect (#1). Fix the AND multi-branch handler
     assembly so a `return(...)` edge emits a valid collector assignment (not `SCALAR(0x…)<Rule>`).
     Unblocks 63 subtests + makes capture/mark/cursor/entry helpers usable in multi-edge AND rules.
-  Acceptance: V1/V2 reproducers compile + return the author payload; the 63 subtests pass; no NORMAL-rule
-    regression; full phase0 re-run shows the 63 cleared.
-  Blocker: touches the reference Perl engine (`perl/LinkedSpec/HandlerVariantEmitter.pm` /
-    `SpecEntry.pm`) — needs user authorization per [[feedback_do-not-fix-reference-engine]].
-  Verification: `pending`  ·  Commit: `pending`
-- ID: `PHASE0-BACKHALF-TRIAGE.4` · Status: `blocked`
+  Root cause (confirmed 2026-06-21, fresh-session re-verify + generated-source dump):
+    `HandlerVariantEmitter.pm` `_emit_and_acode_seq_handler` (multi-regex AND) and
+    `_emit_and_single_acode_handler` (single-regex AND) use the mis-written substitution
+    `s/\breturn\s*/\$" . $label . " = "/eg` — the bare `\$"` evaluates as a *reference to* the
+    list-separator var `$"` (stringifies `SCALAR(0x…)`), where the correct form (already used at
+    lines 524 & 594) is `"\$" . $label . " = "` (literal `$`). Generated-source dump for
+    `named_mark_capture_from_reads_rule_local_checkpoint` shows `SCALAR(0x…)Top = [...]` and a
+    `return \@Top_collect` that is never pushed to. The test contract expects the **raw edge payload**
+    (`['?Top:','bar']`), i.e. an AND edge `return(X)` should make the handler **return X directly** —
+    the transform-to-assignment+collect model (borrowed from REP) is wrong for a single-pass AND.
+  Acceptance: book `Pair::AND` + the named-mark reproducer compile and return the author payload; the
+    63 subtests pass; no NORMAL/`assign`-only-AND/bcode-AND/REP/OR regression; full phase0 re-run shows
+    the 63 cleared. **MET.**
+  Fix: `perl/LinkedSpec/HandlerVariantEmitter.pm` — `_emit_and_acode_seq_handler` +
+    `_emit_and_single_acode_handler` now emit edge acodes verbatim (removed the broken
+    `s/\breturn.../\$" . $label . " = "/eg` ref-stringification + the single-acode never-`push` drop).
+  Verification (2026-06-21): `perl -c` clean (emitter + facade); reproducers return the raw author
+    payload (`['?Top:','bar']`); full `perl -Iperl t/phase0_regression.t` = **173 → 111 failing (62
+    cleared)** — all 60 cluster-D + named-G AND tests + C-t13 `push_nonempty` pass; remaining 111 =
+    108 STALE (`.2.x`) + 2 Defect #2 (`.4`) + 1 `corpus_regression` tail (`.5`); zero regressions.
+  Commit: (this commit)
+- ID: `PHASE0-BACKHALF-TRIAGE.4` · Status: `pending` (**authorized 2026-06-21 — ADR `0008`**)
   Goal: **Engine fix** — input-boundary-validation regression (#2). Make the `Runtime.pm` comment-skip
     wrapper guard its deref (or run the documented SCALAR-ref validation ahead of it) so invalid input
     yields the friendly boundary error + populated `runtime_ctx->{last_error}`. Unblocks 2 subtests.
-  Blocker: touches the reference Perl engine (`perl/LinkedSpec/Runtime.pm`) — needs user authorization.
+    Defect #2 **re-confirmed objectively 2026-06-21**: `Not a SCALAR reference at … Runtime.pm line 126`
+    with empty `last_error` (was unverified in the prior session).
+  Blocker: **cleared 2026-06-21** (user authorized both engine fixes — ADR `0008`).
   Verification: `pending`  ·  Commit: `pending`
 - ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `pending`
   Goal: Verify a fully green `t/phase0_regression.t` end-to-end (all 959 subtests), including the
@@ -147,11 +175,11 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.3` | `blocked` | AND-codegen fix — biggest unblock (63). **Needs user OK to touch the reference engine.** |
-| 2 | `.4` | `blocked` | input-boundary fix (2). **Needs user OK to touch the reference engine.** |
-| 3 | `.2.1` | `pending` | Lowest-risk re-bless (8, cluster A); independent of the engine fixes (these expectations are stale regardless). |
-| 4 | `.2.2`–`.2.4` | `pending` | Re-bless / retire the remaining 100 stale subtests. |
-| 5 | `.5` | `pending` | Green-phase0 verification + downstream gate flips. |
+| — | `.3` | `done` 2026-06-21 | AND-codegen fix landed — 62 phase0 failures cleared, zero regressions. |
+| 1 | `.4` | `pending` | input-boundary fix (2). **Authorized 2026-06-21 (ADR `0008`).** Small, isolated `Runtime.pm` guard. |
+| 2 | `.2.1` | `pending` | Lowest-risk re-bless (8, cluster A); independent of the engine fixes (these expectations are stale regardless). |
+| 3 | `.2.2`–`.2.4` | `pending` | Re-bless / retire the remaining 100 stale subtests. |
+| 4 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` tail) + downstream gate flips. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -169,29 +197,31 @@ can also proceed in parallel if the engine touch is deferred).
 
 ## Open Questions
 
-- Authorize the reference-engine fixes (`.3`/`.4`)? They are real defects, but touch `perl/` — your
-  standing guidance is to keep the reference frozen. Alternative: quarantine the 65 real tests instead
-  (keeps the reference untouched but leaves the capture/mark/multi-edge-AND feature broken + undocumented).
+- ~~Authorize the reference-engine fixes (`.3`/`.4`)?~~ **RESOLVED 2026-06-21** — user authorized BOTH
+  engine fixes (ADR `0008`); the engine-frozen doctrine otherwise stands (this is the named exception).
 - Did subtests 881–959 run clean? The `.1` run stopped at 881; `MEMORY` claims a ~940–959 reach with 173
   total, implying 881+ are clean — confirm in `.5` with a longer-budget run.
 
 ## Blockers
 
-- `.3`/`.4` blocked pending user authorization to touch the reference Perl engine. `.2.x` (test re-bless)
-  is not blocked by that. Green phase0 (and `SPEC-FORMAT-TERSE` / `LEGACY-VHDL-RETIRE.4-.5` /
-  `NONCORE-QUARANTINE.V`) stays blocked until both engine defects are fixed and the 108 stale are re-blessed.
+- ~~`.3`/`.4` blocked pending user authorization to touch the reference Perl engine.~~ **CLEARED
+  2026-06-21 (ADR `0008`).** Green phase0 (and `SPEC-FORMAT-TERSE` / `LEGACY-VHDL-RETIRE.4-.5` /
+  `NONCORE-QUARANTINE.V`) stays blocked until both engine defects are fixed AND the 108 stale are
+  re-blessed AND `.5` verifies the full 959-subtest run.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-19` | `.1` | full phase0 TAP (173 fail/707 pass); cluster-D V1–V4 bisection; capture_from/return-array lowering isolation; entry_and child `[]` repro; 2 parallel read-only deep-dives (B; C+F+G) | `done` — 108 STALE / 65 REAL (2 defects) |
+| `2026-06-21` | `.3` | `perl -c` (emitter+facade); generated-source dump; book `Pair::AND` + named-mark reproducers; 21-test AND contract catalog; full `perl -Iperl t/phase0_regression.t` | `done` — 173 → 111 failing (62 cleared, 0 regressions) |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `.1` | `PHASE0-BACKHALF-TRIAGE.1 — read-only triage complete` | this commit |
+| `.1` | `PHASE0-BACKHALF-TRIAGE.1 — read-only triage complete` | prior commit `3a6d25b`/`f3c8a9b` |
+| `.3` | `PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1)` | this commit |
 
 ## Changelog
 
@@ -201,3 +231,8 @@ can also proceed in parallel if the engine touch is deferred).
   4 sub-leaves), `.3` (AND-codegen fix, blocked on engine-touch OK), `.4` (input-boundary fix, blocked),
   `.5` (green-phase0 verification). Knowledge cards [[and-return-edge-codegen-defect]] +
   [[runtime-input-boundary-validation-regression]].
+- `2026-06-21`: User **authorized BOTH engine fixes** (ADR `0008` — sanctioned scoped exception to the
+  engine-frozen doctrine); `.3`/`.4` blockers cleared. Fresh session re-verified both defects objectively
+  (incl. the book's OWN `Pair::AND` example breaking). `.3` **DONE** — fixed the AND-acode emitter
+  (`\$"`→verbatim) in `HandlerVariantEmitter.pm`; full phase0 173 → 111 failing (62 cleared, 0
+  regressions). KM card [[and-return-edge-codegen-defect]] → `resolved`. Frontier → `.4`.

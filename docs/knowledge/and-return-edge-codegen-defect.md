@@ -9,11 +9,24 @@ answers:
   - "are the phase0 capture/mark back-half failures stale or real"
   - "Bareword found where operator expected at LinkedSpec::generated_handler AND_ACODE"
 date: 2026-06-19
-status: current
+status: resolved
 tags: [codegen, and-rule, handler-emitter, regression-gate, phase0]
-evidence: "PHASE0-BACKHALF-TRIAGE.1 (2026-06-19): 63 of 173 back-half failures; bisection V1–V4 + dumped generated source"
-reverify: "perl -Iperl -e 'require LinkedSpec; my $s=\"Top::AND\\n /a/\\n /b/\\n -> Top[0] { assign(scalar(x), 1) }\\n -> Top[1] { return(1) }\\n\"; my %c; my $p=LinkedSpec::Get(\\$s,top_rule=>q{Top},parse_mode=>q{consume},runtime_ctx_ref=>\\%c); my $in=q{ab}; my $a=$p->(\\$in); print defined($a)?qq{ast def\\n}:qq{ast UNDEF\\n}; print $c{last_error}{detail}//q{},qq{\\n}'"
+evidence: "PHASE0-BACKHALF-TRIAGE.1 (2026-06-19): 63 of 173 back-half failures; bisection V1–V4 + dumped generated source. FIXED by PHASE0-BACKHALF-TRIAGE.3 (2026-06-21): full phase0 dropped 173→111 failing (62 cleared, all cluster-D + named-G AND-codegen tests now pass; zero regressions)."
+reverify: "perl -Iperl -e 'require LinkedSpec; my $s=\"Top::AND\\n /a/\\n /b/\\n -> Top[0] { assign(scalar(x), 1) }\\n -> Top[1] { return(1) }\\n\"; my %c; my $p=LinkedSpec::Get(\\$s,top_rule=>q{Top},parse_mode=>q{consume},runtime_ctx_ref=>\\%c); my $in=q{ab}; my $a=$p->(\\$in); print defined($a)?qq{ast def (FIXED)\\n}:qq{ast UNDEF (defect present)\\n}'  # now prints 'ast def (FIXED)'"
 ---
+
+> **RESOLVED 2026-06-21 (`PHASE0-BACKHALF-TRIAGE.3`, authorized by ADR `0008`).** Root cause was a
+> `\$"`-vs-`"\$"` substitution typo in `perl/LinkedSpec/HandlerVariantEmitter.pm`: both
+> `_emit_and_acode_seq_handler` (multi-regex AND) and `_emit_and_single_acode_handler` (single-regex
+> AND) rewrote an edge `return(...)` into a `$<label> =` assignment using `s/\breturn.../\$" . $label
+> . " = "/eg`, where the bare `\$"` evaluates as a *reference to* the list-separator variable `$"`
+> (stringifying `SCALAR(0x…)`) — the correct literal form `"\$"` is used at lines 524/594/928. The fix
+> emits edge acodes **verbatim** (they are already lowered to `return [...]`), so a `return` edge
+> surfaces the author payload directly — from the whole handler in a direct AND, or from the
+> per-iteration coderef in a REP-AND (`_emit_rep_and_acode_handler` wraps the body in `sub { ... }`).
+> This also fixed the single-acode handler's separate never-`push`ed-acode bug (edge action silently
+> dropped → `[]`). All 21 cataloged AND-rule tests return the raw author payload as expected. The card
+> below is the original (defect-present) reading, kept for history.
 
 Established by `PHASE0-BACKHALF-TRIAGE.1` (read-only triage, 2026-06-19). A latent **reference-engine
 codegen defect** surfaced (not caused) when the phase0 back half stopped being masked by the

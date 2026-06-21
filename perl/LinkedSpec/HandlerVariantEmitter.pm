@@ -568,19 +568,14 @@ sub _emit_and_single_acode_handler {
     my $lxcode     = $ir->{lxcode} || 'return undef';
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
-    # Transform edge acodes: wrap call(X) -> $label = call(X) so edge results
-    # flow into @collect (like REP return->assignment but for edge dispatch).
-    my $acodes_ref = $ir->{acodes_ref};
-    my @acodes_transformed;
-    if (ref($acodes_ref) eq 'ARRAY' && @$acodes_ref) {
-        foreach my $acode (@$acodes_ref) {
-            my $transformed = $acode;            $transformed =~ s/\bcall\(/\$" . $label . " = call(/g;
-            # Edge acodes are already lowered to compiled handler refs.
-            # Prepend assignment to capture the result for @collect push.
-            $transformed = "\$" . $label . " = " . $transformed;
-        }
-    }
-    my $acodes = _build_acodes_dispatch_block(\@acodes_transformed);
+    # Edge acodes are emitted verbatim (already lowered): a `return(...)` edge lowers
+    # to `return [...]` and surfaces the author payload directly (a single-regex AND
+    # has one slot, index 0, so the edge return is the rule's result). Earlier code
+    # looped over the acodes but never collected the rewritten string — the
+    # `push @acodes_transformed` was missing — so the edge action was dropped and the
+    # handler fell through to an empty `[]`; it also used the same broken `\$"`
+    # substitution (a reference to the list-separator $") as the multi-regex handler.
+    my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
     my $lmatch     = _build_lmatch_extraction();
 
     # Per-regex I-block code (routed through acode_entries by RuleIR for AND rules).
@@ -640,18 +635,17 @@ sub _emit_and_acode_seq_handler {
     my $lscode      = $ir->{lscode} || '';
     my $lecode      = $ir->{lecode} || '';
     my $acode_count = $ir->{acode_count};
-    # Transform edge acodes: wrap call(X) -> $label = call(X) so edge results
-    # flow into @collect (like REP return->assignment but for edge dispatch).
-    my $acodes_ref = $ir->{acodes_ref};
-    my @acodes_transformed;
-    if (ref($acodes_ref) eq 'ARRAY' && @$acodes_ref) {
-        foreach my $acode (@$acodes_ref) {
-            my $transformed = $acode;            $transformed =~ s/\bcall\(/\$" . $label . " = call(/g;
-            $transformed =~ s/\breturn\s*/\$" . $label . " = "/eg;
-            push @acodes_transformed, $transformed;
-        }
-    }
-    my $acodes = _build_acodes_dispatch_block(\@acodes_transformed);
+    # Edge acodes are emitted verbatim: they are already lowered (e.g.
+    # return(array(...)) -> `return [...]`, assign(...) -> an in-place mutation). A
+    # `return` edge then surfaces the author payload directly — from the whole
+    # handler in a direct AND, or from the per-iteration coderef in a REP-AND
+    # (`:AND+`, where _emit_rep_and_acode_handler wraps this body in `sub { ... }`),
+    # which is the correct collection point in both cases. Earlier code rewrote
+    # `return` into a `$<label> =` assignment with a mis-written `\$"` substitution —
+    # `\$"` parses as a reference to the list-separator variable $", so the emitter
+    # produced invalid `SCALAR(0x..)<label> = ...` Perl (compile-fail for a top rule,
+    # dropped payload for a child) AND the wrong (collect-wrapped) result shape.
+    my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
     my $lmatch      = _build_lmatch_extraction();
     return '
 

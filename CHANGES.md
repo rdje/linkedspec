@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.3 — engine fix: AND-rule action-codegen defect (#1) — 62 phase0 failures cleared
+
+Fixed reference-engine Defect #1 (AND-rule action-codegen), **authorized by the user as a sanctioned,
+scoped exception to the engine-frozen doctrine — ADR `0008`**. Touched one file:
+`perl/LinkedSpec/HandlerVariantEmitter.pm` (the AND-acode handler emitters only).
+
+- **Root cause:** both `_emit_and_acode_seq_handler` (multi-regex AND) and
+  `_emit_and_single_acode_handler` (single-regex AND) rewrote an edge `return(...)` into a `$<label> =`
+  assignment via `s/\breturn\s*/\$" . $label . " = "/eg`. The bare `\$"` parses as a *reference to* the
+  list-separator variable `$"` (it stringifies to `SCALAR(0x…)`), so the emitter produced invalid Perl
+  `SCALAR(0x…)<label> = …` — a compile error (`Bareword … near ")<Rule>"`) for a top rule (parser →
+  `undef`) and a dropped payload for a child rule (→ `[]`). The correct literal form `"\$"` is already
+  used at lines 524/594 (I-block return→assignment) and 928 (`_emit_rep_acode_handler`). The
+  single-acode handler additionally never `push`ed its transformed acode onto `@acodes_transformed`, so
+  the edge action was dropped entirely even when it would have compiled.
+- **Fix:** emit edge acodes **verbatim**. They are already lowered (`return(array(...))` →
+  `return [...]`, `assign(...)` → an in-place mutation), so a `return` edge surfaces the author payload
+  directly — from the whole handler in a direct AND, or from the per-iteration coderef in a REP-AND
+  (`:AND+`), because `_emit_rep_and_acode_handler` wraps the seq body in `sub { ... }` (a `return` there
+  exits one iteration, the correct collection point). This also matches the test contract exactly: an
+  `::AND` rule whose terminal indexed edge does `return(array("?Top:", X))` yields the **raw** payload
+  `['?Top:', X]` (verified against all 21 cataloged AND-rule tests, incl. `call(Child)` edges always
+  wrapped as `return(call(Child))`).
+- **Verification:** `perl -c` clean (HandlerVariantEmitter.pm, LinkedSpec.pm). Book `Pair::AND` example
+  and the `named_mark_capture_from_reads_rule_local_checkpoint` reproducer now compile and return the
+  author payload (`['?Top:','bar']`). Full `perl -Iperl t/phase0_regression.t`: **173 → 111 failing
+  (62 cleared)** — all 60 cluster-D capture/mark/cursor/entry/whole-input/current-match tests + the named
+  cluster-G AND tests (`anonymous_and_named_capture_boundaries_can_bridge_explicitly`,
+  `multi_rule_parsers_…`) + cluster-C `emit_context_lowers_push_nonempty_method_contract` now pass.
+  **Zero regressions**: the remaining 111 are exactly the 108 known-STALE (re-bless in `.2.x`) + 2
+  Defect #2 input-boundary (`.4`) + 1 newly-reached `corpus_regression` tail (`.5`). Only `:AND` emitters
+  were touched; NORMAL/OR/REP/bcode rules are unaffected.
+
 ## 2026-06-19 — PHASE0-BACKHALF-TRIAGE.1 — read-only triage complete (173 → 108 STALE / 65 REAL, 2 engine defects)
 
 Completed the read-only stale-vs-real triage of the 173 pre-existing back-half core failures. No
