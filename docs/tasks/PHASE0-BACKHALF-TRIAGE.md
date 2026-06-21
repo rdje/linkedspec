@@ -166,16 +166,30 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     barewords auto-quoted → mostly an input-string rewrite, expected often already canonical), whereas
     `return_a`/`return_m` add a `"?L:"` tag + `array_copy(array(L))`/`entry_groups()` (the dumped shape
     changes → re-dump + re-bless required). Split accordingly.
-  - ID: `.2.2.2.1` · Status: `pending` — Cluster B1-array (17 `return_array` subtests). For each failing
-    direct-lowering assertion `is(call_spec_handler_subst('Top','return_array(L, e1, e2, …)'), 'return […]')`,
-    rewrite the input to `return(array(<e1>, <e2>, …))` — **drop the first label arg `L`**, keep the rest,
-    and **explicitly quote any bareword** `return_array` would have auto-quoted (e.g. `semantic_annotation`
-    → `"semantic_annotation"`). The expected string is usually already canonical (return_array was a pure
-    alias) — **verify each against the engine** (`call_spec_handler_subst`) and re-bless only where the
-    dumped output differs. Then any dependent `fallback_count==0` / `language_agnostic…_ready` /
-    `canonical_action_ir_nodes` assertions clear automatically (canonical → no `RAW_PERL`). Verify with a
-    full-suite `comm` set-diff. Subtests at (post-`.2.2.1`) L16582/16636/16668/16709/16750/16794/16838/
-    16879/16920/16963/17208/17289/17373/17419/20105/21720/21784. Mechanical-ish; do first.
+  - ID: `.2.2.2.1` · Status: `pending` — Cluster B1-array (17 `return_array` subtests). **Pre-implementation
+    recon DONE 2026-06-21 (read-only) — execute mechanically from here.** Subtests at (post-`.2.2.1`)
+    L16582/16636/16668/16709/16750/16794/16838/16879/16920/16963/17208/17289/17373/17419/20105/21720/21784.
+    **CRITICAL SCOPE WARNING:** `return_array` appears **74× in the file = 34 in failing subtests / 40 in
+    PASSING subtests**; the spec-body strings are **byte-identical** across failing+passing (the switch-case
+    families), so this is **NOT a global replace — line-scope to the 17 ranges above**. Also **EXCLUDE** the
+    cluster-C `emit_context_avoids_removed_linkedspec_lowering_facade` `return_array` site (~L12440, a
+    `rewrite_action_code_for_compat` arg → belongs to `.2.3`) — it is inside a *failing* subtest but is NOT
+    B1-array. Net targets: **33 spec-body occurrences + 1 subst-arg (L16601)**.
+    **Forms (verified):** 9× `.return_array(…)` (fluent-chain tail), 9× `; return_array(…) }` (block tail),
+    10× bare line `return_array(semantic_annotation, hash("items", array(events)))`, 5× `if(…)`-mixed inline,
+    1× subst-arg (L16601: `call_spec_handler_subst('Top','return_array(Top, semantic_annotation, hash(…))')`).
+    **Verified rewrite rule (empirically confirmed via `LinkedSpec::Get`):** spec-body
+    `return_array(semantic_annotation, X)` → `return(array("semantic_annotation", X))` yields
+    `fallback_count=0`/`raw_perl_dependency_count=0`/`ready=1` with fluent `ACODE`==block `ACODE` and equal
+    node coverage. **These spec-body subtests pin NO literal output** (only fluent==block + `fallback==0` +
+    `ready` + node-equality), so the rewrite passes regardless of label semantics — just apply it
+    **identically to both the fluent and block specs**. The subst-arg L16601 rewrites the input to
+    `return(array("semantic_annotation", hash(…)))` (drop the `Top` label); its `is(...)` expected
+    (`return ["semantic_annotation", {…}]`) is **already canonical**. **Paren note:** `return(array(` opens
+    two parens where `return_array(` opened one → add exactly **one** matching close paren at the
+    return_array call's end (naive paren-count is safe: no parens inside the `"items"`/`/^[A-C]/` literals).
+    Verify with `perl -c` + full-suite `comm` set-diff (cleared = exactly the 17; new = none). Mechanical
+    but multi-form — a guarded line-scoped transform that asserts the occurrence count, like `.2.2.1`.
   - ID: `.2.2.2.2` · Status: `pending` — Cluster B1-accumulator (4 subtests: `method_like_action_chain_
     parses_into_multiple_helper_events` @~39195 [BOTH], `method_like_fluent_and_structured_blocks_lower_
     equivalently` @~39213, `method_like_structured_blocks_accept_optional_semicolons` @~39276,
@@ -382,3 +396,14 @@ can also proceed in parallel if the engine touch is deferred).
   add a `"?L:"` tag + `array_copy(array(L))`/`entry_groups()` and need re-dump + re-bless. New KM card
   [[retired-return-helpers-canonical-rewrite]]. Split into `.2.2.2.1` (17 array, mechanical-ish) and
   `.2.2.2.2` (4 accumulator, judgment-heavy). Frontier → `.2.2.2.1`.
+- `2026-06-21`: `.2.2.2.1` **pre-implementation recon** (read-only; no test change). Discovered a critical
+  scoping hazard before editing: `return_array` appears **74× = 34 in failing / 40 in PASSING subtests**,
+  with byte-identical spec-body strings across both (the switch-case families), so the rewrite **must be
+  line-scoped to the 17 B1-array subtests — not a global replace**; and one "failing" `return_array` is
+  actually a cluster-C `emit_context` site (~L12440 → `.2.3`), to be excluded. Classified the 33 spec-body
+  occurrences into 4 forms (9 `.return_array` / 9 `; return_array }` / 10 bare / 5 `if`-mixed) + 1 subst-arg
+  (L16601). **Empirically verified** the rewrite `return_array(semantic_annotation, X)` →
+  `return(array("semantic_annotation", X))` gives `fallback=0`/`ready` with fluent==block; these subtests
+  pin no literal output (only fluent==block + fallback==0 + ready), so the rewrite is shape-agnostic.
+  Full execution plan recorded in the `.2.2.2.1` node. Recommended a **fresh session** for the multi-form
+  paren-level surgery (signoff focus). Frontier stays → `.2.2.2.1`.

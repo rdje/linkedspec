@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2.1 (recon) — scope + verified rewrite rule for the B1-array leaf; no test change
+
+Read-only pre-implementation recon of the `.2.2.2.1` leaf (17 `return_array` subtests), recorded so the
+implementation runs mechanically. **No code change** — task-tree/MEMORY only.
+
+- **Critical scope hazard found:** `return_array` appears **74× in `t/phase0_regression.t` = 34 in failing
+  subtests / 40 in PASSING subtests**, and the spec-body strings (`return_array(semantic_annotation,
+  hash("items", array(events)))`) are **byte-identical across failing and passing** switch-case families. So
+  the rewrite **must be line-scoped to the 17 B1-array subtest ranges — a global replace would corrupt 40
+  passing subtests.** One "failing" occurrence (~L12440) is actually a cluster-C `emit_context` site →
+  belongs to `.2.3`, excluded. Net targets: 33 spec-body + 1 subst-arg (L16601).
+- **Forms (verified):** 9× `.return_array(…)` fluent-tail, 9× `; return_array(…) }` block-tail, 10× bare
+  line, 5× `if(…)`-mixed, 1× `call_spec_handler_subst` arg.
+- **Verified rewrite (empirical `LinkedSpec::Get`):** `return_array(semantic_annotation, X)` →
+  `return(array("semantic_annotation", X))` yields `fallback_count=0` / `raw_perl_dependency_count=0` /
+  `ready=1` with fluent `ACODE`==block `ACODE` and equal node coverage. These spec-body subtests pin **no
+  literal output** (only fluent==block + fallback==0 + ready), so the rewrite is shape-agnostic — apply it
+  identically to fluent+block; `return(array(` needs one extra closing paren vs `return_array(`.
+- Full execution plan written into the `.2.2.2.1` task node. `perl -c` OK (no test change); phase0
+  unchanged at 47. A **fresh session** is recommended for the multi-form paren-level surgery.
+
 ## 2026-06-21 — PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into `.2.2.2.1` (return_array) + `.2.2.2.2` (return_a/return_m) — decomposition slice, no test change
 
 Decomposed the judgment-heavy cluster-B1 leaf (21 retired-helper subtests) before implementation, after a
