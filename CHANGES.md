@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.2.4 — re-bless cluster F+G (5, TEST-ONLY); 5 phase0 failures cleared, zero regressions (cluster .2 complete)
+
+Closes cluster `.2` (the 108 STALE re-blesses). **No engine/spec/production code touched** — only
+`t/phase0_regression.t`. Driven ground-truth-first: a probe dumped every changed assertion's current value
+before editing.
+
+- **G ×2** (`bootstrap_registry_curly_brace_recursion_smoke`, `get_avoids_runtime_run_get_from_args_wrapper`):
+  `return(1)` now lowers to a plain resolved `return 1`, so a single-top-rule parser returns scalar `1`
+  rather than an array — re-blessed `ok(defined($ast) && ref($ast) eq 'ARRAY')` → `is($ast, 1, …)`.
+- **F ×3** are migration-summary corpus aggregates. Two of them
+  (`return_descriptor_exposes_action_rewriter_migration_summary`,
+  `…migration_blocker_type_breakdown`) used `return(1)` to stand in for *unresolved-helper-blocked* rules
+  under the retired-`return_a` model; since `return(1)` is now resolved/ready, those rules flipped ready
+  and cascaded the ready/blocked counts, ratios, ready/blocked lists, and the raw-only/unresolved-only/mixed
+  breakdown. **Restored** the corpus rules to genuinely-unresolved forms (`return(Leaf, $x)`; mixed =
+  `return(Leaf, $x); my $tmp = 2`) so the original category coverage — and the original assertions — hold
+  (migration_summary: 1 spec edit + 1 blocker-payload re-bless; blocker_type_breakdown: 2 spec edits, 0
+  assertion changes).
+- The third F test (`compatibility_surface_metadata_includes_legacy_helper_wrappers`) had an **obsolete
+  premise**: it asserted the retired method-helpers `return_m`/`return_a` stay "ready compatibility
+  surface", but those are now `RAW_PERL` (blocking, not ready compat). **Adapted** it to the still-live
+  compat helpers (consistent with the test's intent): `Top` `return_m(Top)` → `return(a("?Top:"))`
+  (canonical-ready, keeping `assign_call_my` + `capture_if` as the tracked compat surface); `Leaf`
+  `return(1)` → bare `return 1` (`return_bare` compat); re-blessed the contract-id lists
+  (`['assign_call_my','capture_if','return_m']`→`['assign_call_my','capture_if']`; Leaf `['return_a']`→
+  `['return_bare']`), the per-rule statement count (3→2), and the "tagged-return"→"bare-return"
+  descriptions.
+
+**Verification:** `perl -c` OK; a load-independent focused Test::More harness ran all 5 = 5/5 pass; full
+`perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs the post-`.2.3` baseline = exactly the 5 F/G
+cleared (phase0 **6 → 1**), new-failure set empty — the only remaining failing subtest is the
+`corpus_regression` natural-stop tail (the suite's exit-255 boundary, owned by `.5`). Cluster `.2` is now
+complete; the front 940 subtests are green. Book unaffected (internal IR-node / metadata test surfaces).
+
 ## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.2.3 — re-bless/rewrite cluster C `emit_context` (20, TEST-ONLY); 20 phase0 failures cleared, zero regressions
 
 Cluster C. **No engine/spec/production code touched** — only `t/phase0_regression.t`. All 20 failing

@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (`.2.3` **DONE** — cluster C `emit_context` ×20 re-blessed/rewritten, TEST-ONLY; phase0 26→6, all 20 cluster-C cleared, 0 regressions. Frontier → `.2.4`)
+- Last updated: `2026-06-22` (`.2.4` **DONE** — cluster F ×3 + G STALE ×2 re-blessed/restored, TEST-ONLY; phase0 6→1 (only the `corpus_regression` natural-stop tail remains), all 5 cleared, 0 regressions. Frontier → `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -272,8 +272,30 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
       subtests ≤ subtest-803 (0 regressions in 1–803) + a load-independent focused Test::More harness
       ran the 9 late meta/nested subtests (804–857) = 9/9 pass; `perl -c` OK; authoritative low-load full
       `comm` set-diff = exactly the 20 cleared (phase0 26→6), 0 regressions.
-  - ID: `.2.4` · Status: `pending` — Cluster F (3) + Cluster G STALE (2): re-bless the `return(1)`
-    migration-summary metadata (resolved, not blocked) + the `return(1)` AST-shape (scalar `1`).
+  - ID: `.2.4` · Status: `done` (2026-06-22) — Cluster F (3) + Cluster G STALE (2), TEST-ONLY
+    (`t/phase0_regression.t`; engine/spec untouched). Ground-truth-first probe of all 5 before editing.
+    **G ×2** (`bootstrap_registry_curly_brace_recursion_smoke`, `get_avoids_runtime_run_get_from_args_wrapper`):
+    `return(1)` now lowers to a plain resolved `return 1`, so the single-top-rule parser returns scalar
+    `1`, not an array — re-blessed `ok(ref($ast) eq 'ARRAY')` → `is($ast, 1, …)`. **F ×3** are
+    migration-summary corpus aggregates that used `return(1)` to stand in for *unresolved-helper-blocked*
+    rules (the retired-`return_a` model); since `return(1)` is now resolved, those rules turned ready and
+    cascaded the counts/ratios/lists. **Restored** the corpus rules to genuinely-unresolved forms so the
+    original category coverage (and the original assertions) hold:
+    `return_descriptor_exposes_action_rewriter_migration_summary` — `Unresolved` rule
+    `return(1)`→`return(Leaf, $x)` (+ the one blocker-payload `['return(1)']`→`['return(Leaf, $x)']`);
+    `return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown` — `UnresolvedOnly`
+    `return(1)`→`return(Leaf, $x)` and `Mixed` `return(1); my $tmp = 2`→`return(Leaf, $x); my $tmp = 2`
+    (0 assertion changes — all counts/ratios revert to the originals). The third F test,
+    `compatibility_surface_metadata_includes_legacy_helper_wrappers`, had an **obsolete premise**: it
+    asserted the retired method-helpers `return_m`/`return_a` stay "ready compatibility surface", but those
+    are now `RAW_PERL` (blocking). **Adapted to the still-live compat helpers** (consistent with the
+    test's intent): `Top` `return_m(Top)`→`return(a("?Top:"))` (canonical-ready; keeps `assign_call_my` +
+    `capture_if` as the tracked compat surface), `Leaf` `return(1)`→bare `return 1` (`return_bare` compat),
+    re-blessing contract-ids `['assign_call_my','capture_if','return_m']`→`['assign_call_my','capture_if']`,
+    Leaf `['return_a']`→`['return_bare']`, top-row statement_count 3→2, and the "tagged-return"→"bare-return"
+    descriptions. Verification: `perl -c` OK; a load-independent focused Test::More harness ran all 5 = 5/5
+    pass; full `perl -Iperl t/phase0_regression.t` reached the corpus stop with `comm` set-diff = exactly
+    the 5 F/G cleared (phase0 **6→1**, only `corpus_regression` natural-stop remains), new-failure set empty.
 - ID: `PHASE0-BACKHALF-TRIAGE.3` · Status: `done` (2026-06-21 — **authorized by ADR `0008`**)
   Goal: **Engine fix** — AND-rule action-codegen defect (#1). Fix the AND multi-branch handler
     assembly so a `return(...)` edge emits a valid collector assignment (not `SCALAR(0x…)<Rule>`).
@@ -347,9 +369,9 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.2.2.2.1` | `done` 2026-06-21 | Cluster B1-array re-bless — 33 `return_array`→`return(array("semantic_annotation",…))` rewrites + 2 BOTH literal hit-hash re-blesses (`RETURN_A`→`RETURN`), TEST-ONLY; phase0 47→30, `comm` set-diff = exactly the 17 cleared, 0 regressions. |
 | — | `.2.2.2.2` | `done` 2026-06-21 | Cluster B1-accumulator re-bless — 4 `return_a`/`return_m` subtests rewritten to canonical `.return(1).return(array("?Top:", entry_groups()))` + subtest-1 `RETURN_A`/`RETURN_M`→`RETURN` node re-bless, TEST-ONLY; phase0 30→26, `comm` set-diff = exactly the 4 cleared, 0 regressions. |
 | — | `.2.3` | `done` 2026-06-22 | Cluster C `emit_context` ×20 re-blessed/rewritten (return(1)→`return 1` resolved, RETURN_A→RETURN, retired-helper passthrough, removed `_lower_return_array_statement`, 2 plan off-by-ones, restored expr-bearing return specs), TEST-ONLY; phase0 26→6, exactly the 20 cleared, 0 regressions. |
-| 1 | `.2.4` | `pending` | Cluster F (3) + G STALE (2): `return(1)` migration-summary + AST-shape re-bless. |
-| 2 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 3 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.2.4` | `done` 2026-06-22 | Cluster F ×3 (migration-summary corpus restored to genuinely-unresolved forms) + G STALE ×2 (`return(1)` AST = scalar `1`) + F2 obsolete-compat-premise adapted to live helpers, TEST-ONLY; phase0 6→1, exactly the 5 cleared, 0 regressions. |
+| 1 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
+| 2 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -398,6 +420,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.2.2.2.1` | guarded matching-paren line-scoped transform (33 rewrites, asserts count/delta, die-on-drift) + dry-run full-diff inspection; empirical post-rewrite hit-hash dump for the 2 BOTH subtests; `call_spec_handler_subst` check of the L16601 pinned expected; `perl -c`; full `perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs baseline | `done` — 47 → 30 failing; cleared = exactly the 17 B1-array (incl. both BOTH); new-failure set empty. TEST-ONLY. |
 | `2026-06-21` | `.2.2.2.2` | pre-flight probe replicating every assertion of all 4 subtests (`LinkedSpec::Get`: ACODE/ICODE/BCODE equality, fallback, node coverage, hit counts) → all PASS; scope grep (passing `return_a(pipe_operator)`/`return_m(Top)`@39745 untouched); `perl -c`; full `perl -Iperl t/phase0_regression.t` (complete TAP to corpus tail) + `comm` name set-diff vs post-`.2.2.2.1` baseline | `done` — 30 → 26 failing; cleared = exactly the 4 (`blind_call_fluent…`, `action_chain…`, `fluent_and_structured_blocks…`, `structured_blocks…`); new-failure set empty. TEST-ONLY. (One earlier run SIGALRM-killed by transient external load-32 CPU contention; clean low-load re-run gave the diff.) |
 | `2026-06-22` | `.2.3` | comprehensive ground-truth probe of every changed assertion before editing; targeted unique-match edits (20 subtests); `perl -c`; after-run cleared the 11 cluster-C subtests ≤803 (0 regressions in 1–803) + a load-independent focused Test::More harness re-ran the 9 late meta/nested subtests (804–857) = 9/9 pass; authoritative low-load full `perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs baseline | `done` — 26 → 6 failing; cleared = exactly the 20 cluster-C `emit_context`; new-failure set empty. TEST-ONLY. (Two earlier runs SIGALRM-killed at the corpus tail by a transient external load-29 `rustc` build; clean low-load re-run gave the diff.) |
+| `2026-06-22` | `.2.4` | ground-truth probe of all 5 F/G (G return values; F1/F3 restored-corpus aggregates; F2 as-is + option-A); targeted unique-match edits; `perl -c`; load-independent focused Test::More harness (5/5 pass); full `perl -Iperl t/phase0_regression.t` reaching subtest 879+ with 0 failures through the run + `comm` name set-diff vs post-`.2.3` baseline | `done` — 6 → 1 failing; cleared = exactly the 5 F/G; new-failure set empty (only `corpus_regression` natural-stop remains). TEST-ONLY. |
 
 ## Commit Log
 
@@ -412,7 +435,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2 — split cluster B1 into .2.2.2.1 (return_array) + .2.2.2.2 (return_a/return_m)` | commit `fc52288`; recon `91b5113` |
 | `.2.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 return_array→return(array), TEST-ONLY); 17 phase0 failures cleared` | commit `6b9288c` |
 | `.2.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2.2 — re-bless cluster B1-accumulator (4 return_a/return_m, TEST-ONLY); 4 phase0 failures cleared` | commit `50d0308` |
-| `.2.3` | `PHASE0-BACKHALF-TRIAGE.2.3 — re-bless/rewrite cluster C emit_context (20, TEST-ONLY); 20 phase0 failures cleared, zero regressions` | this commit |
+| `.2.3` | `PHASE0-BACKHALF-TRIAGE.2.3 — re-bless/rewrite cluster C emit_context (20, TEST-ONLY); 20 phase0 failures cleared, zero regressions` | commit `9ab8c56` |
+| `.2.4` | `PHASE0-BACKHALF-TRIAGE.2.4 — re-bless cluster F+G (5, TEST-ONLY); 5 phase0 failures cleared, zero regressions` | this commit |
 
 ## Changelog
 
@@ -532,3 +556,20 @@ can also proceed in parallel if the engine touch is deferred).
   subtests (804–857) = 9/9 pass; authoritative low-load full `comm` set-diff = exactly the 20 cleared
   (phase0 26→6), 0 regressions. Remaining 6 = 5 F/G (`.2.4`) + 1 `corpus_regression` tail (`.5`).
   Frontier → `.2.4`. Book unaffected (internal IR-node test names, not a user surface).
+- `2026-06-22`: `.2.4` **DONE** (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched) — re-blessed
+  the 5 cluster F/G subtests, closing cluster `.2`. Ground-truth-first probe of all 5 first. **G ×2:**
+  `return(1)`→plain resolved `return 1`, so a single-top-rule parser returns scalar `1` — re-blessed
+  `ok(ref($ast) eq 'ARRAY')` → `is($ast, 1, …)` (bootstrap_registry + get_avoids). **F ×3** are
+  migration-summary corpus aggregates: their `return(1)` rules used to be unresolved-helper-*blocked* and
+  are now resolved/ready, cascading the ready/blocked counts, ratios, lists, and blocker-type breakdown.
+  **Restored** the corpus rules to genuinely-unresolved forms (`return(Leaf, $x)`; mixed =
+  `return(Leaf, $x); my $tmp = 2`) so the original category coverage and assertions hold (migration_summary:
+  1 spec + 1 blocker-payload edit; blocker_type_breakdown: 2 spec edits, 0 assertion changes). The third F
+  test (`compatibility_surface_metadata_includes_legacy_helper_wrappers`) had an **obsolete premise** — it
+  asserted the retired method-helpers `return_m`/`return_a` stay "ready compatibility surface", but those
+  are now RAW_PERL (blocking); **adapted** it to the still-live compat helpers (`Top` →
+  `return(a("?Top:"))` keeping `assign_call_my`+`capture_if`; `Leaf` → bare `return 1` = `return_bare`),
+  re-blessing the contract-id lists/statement-count/descriptions. `perl -c` OK; focused Test::More harness
+  5/5; full run cleared exactly the 5 F/G (phase0 **6→1**, only the `corpus_regression` natural-stop tail
+  remains), 0 regressions. Cluster `.2` (re-bless the 108 STALE) is now COMPLETE. Frontier → `.5`
+  (green-phase0 verification incl. the corpus tail + downstream gate flips). Book unaffected.
