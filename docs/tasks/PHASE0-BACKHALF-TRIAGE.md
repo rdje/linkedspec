@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (`.5.2` **DONE** — user chose "investigate + fix". Root cause **corrected**: NOT a catastrophic regex — the Lispish parser never returns `undef`, so `parse_with_lispish_multi`'s `while(1)` loop spins. Added a forward-progress guard (TEST-ONLY); 76/76 corpus files ok; `ok 941 - corpus_regression`; suite now reaches subtest 960. Running past corpus revealed **3 TEST-ONLY dark-tail failures** (952/953/960 → `.5.4`). Frontier → `.5.4` (re-bless → green))
+- Last updated: `2026-06-22` (`.5.4` **DONE** — re-blessed the 3 dark-tail failures (TEST-ONLY): 952/953 `parse_mode_*` `qr/\?Top:/` → `qr/\$VAR1 = 1;/` (`return(1)`→scalar `1`, got-value dumped via `LinkedSpec::Get`); 960 `plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus` dropped the `noncore/`-moved `.plg`-corpus inspection (stale `opendir '../plugin'`), kept the core `PluginBridge.pm` check (plan 5→1). **`t/phase0_regression.t` is now fully GREEN end-to-end: 960/960, EXIT 0, `1..960`.** `comm` set-diff = exactly the 3 cleared, 0 new. Frontier → `.5.3` (gate flips, now unblocked) + `.6` (book `:AND`).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -335,11 +335,12 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     = **111 → 109 failing**, set-diff vs post-`.3` = exactly the 2 Defect #2 subtests cleared, zero
     regressions. Blocker: **cleared 2026-06-21** (ADR `0008`).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `active` · Children: `.5.1` (done), `.5.2` (blocked), `.5.3` (blocked)
+- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `active` · Children: `.5.1` (done), `.5.2` (done), `.5.4` (done), `.5.3` (pending — gate flips)
   Goal: Achieve + verify a fully green `t/phase0_regression.t` end-to-end (the whole run, incl. the
     long-dark tail after `corpus_regression`), then flip the downstream gates. **Split 2026-06-22**
     after `.5.1` resolved the surface stale-reference and exposed a real catastrophic-backtracking
-    blocker in `corpus_regression` (`.5.2`).
+    blocker in `corpus_regression` (`.5.2`). **Green-phase0 ACHIEVED 2026-06-22 (960/960) via `.5.1`+`.5.2`+`.5.4`;**
+    the remaining child `.5.3` (flip the downstream gates) is now PNT-eligible.
 - ID: `PHASE0-BACKHALF-TRIAGE.5.1` · Status: `done` (2026-06-22)
   Goal: Resolve the stale `corpus_regression` plugin dataset (the subtest-941 "No tests run"/exit-255
     tail) and decide natural-stop-vs-real-gap. TEST-ONLY (`t/phase0_regression.t`).
@@ -371,7 +372,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     **`ok 941 - corpus_regression`**. Deeper parser-contract (never-undef) + grammar (no top-level
     whitespace skip ⇒ multi-form files parse only the first form) are documented follow-ons (engine/spec,
     cross-variant — not needed for the corpus smoke). Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5.4` · Status: `pending` (created 2026-06-22)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.4` · Status: `done` (2026-06-22) — closes the green-phase0 goal of `.5`.
   Goal: Re-bless the **3 dark-tail failures** that running past `corpus_regression` for the first time
     revealed (subtests 942-960), so phase0 reaches green. All TEST-ONLY:
     • **960** `plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus` — another `opendir '../plugin'`
@@ -382,13 +383,30 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
       `Top:: /a/ -> Top { return(1) }` and expect the retired tagged `['?Top:',…]` shape; `return(1)` now
       resolves to scalar `1` (the cluster-A/G class). Re-bless the `like(…, qr/\?Top:/)` asserts to the
       dumped got-value (`$VAR1 = 1;`).
-  Acceptance: full phase0 green (0 failing); `comm` set-diff = exactly these 3 cleared, 0 regressions.
-  Verification: `pending`  ·  Commit: `pending`
-- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `blocked` (created 2026-06-22)
+  Acceptance: full phase0 green (0 failing); `comm` set-diff = exactly these 3 cleared, 0 regressions. **MET.**
+  Result (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched): ground-truth-first per TOOLBOX
+    Protocol A — dumped each got-value via `LinkedSpec::Get` before re-blessing (NOT transcribed): 952
+    default+seek on `xxa` → `CODE\n$VAR1 = 1;\n`; 953 consume on `a` → `CODE\n$VAR1 = 1;\n`, consume on `xxa`
+    → `CODE\n__AST_UNDEF__\n` (reject unchanged). **952** line 43355 `like($default_out, qr/\?Top:/, …)` →
+    `qr/\$VAR1 = 1;/` (msg clarified "…(returns the matched value)" — the seek-forward proof is now the
+    defined matched value vs consume's undef). **953** line 43383 `like($accept_out, qr/\?Top:/, …)` →
+    `qr/\$VAR1 = 1;/`. **960** rewrote the subtest: dropped the 4 `noncore/`-dependent `.plg`-corpus asserts
+    (the stale `opendir '../plugin'` census + the get_plugin/run_plugin/dispatch_plugin_autoload_name source
+    scans — the 13 `.plg` moved to `noncore/`; the core gate stays core-only per the `.5.1` precedent), kept
+    the core `PluginBridge.pm` `qr/Compatibility bridge/i` check (plan 5→1, rationale comment). Confirmed
+    `PluginBridge.pm:3` still carries "Compatibility bridge".
+  Verification: `perl -c -Iperl t/phase0_regression.t` OK; before-run = 957 ok / 3 not-ok (failing set =
+    exactly {952,953,960}, reach `not ok 960` exit-255); after-run = **960 ok / 0 not-ok, EXIT 0, reach
+    `ok 960`, plan `1..960` reached** (done_testing now seen — 960's opendir die is gone); `comm` set-diff
+    = **exactly the 3 cleared, new-failure set empty**. No book impact (parse_mode behavior unchanged — only
+    the non-idiomatic regression-test's expected AST shape; the 960 inspection is internal test infra).
+  Commit: (this commit)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `pending` (created 2026-06-22; **unblocked 2026-06-22** — phase0 green via `.5.4`)
   Goal: After green phase0, flip the downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`,
     `NONCORE-QUARANTINE.V`). Note: `NONCORE-QUARANTINE.V` itself owns clearing the `SPEC-FORMAT-TERSE` +
     `LEGACY-VHDL-RETIRE.4/.5` blockers + doc/book/KM sync, so `.5.3` may largely hand off to `.V`.
-  Blocker: green phase0 (blocked by `.5.2`).
+  Blocker: ~~green phase0 (blocked by `.5.2`)~~ **CLEARED 2026-06-22** — `t/phase0_regression.t` is fully
+    green (960/960) after `.5.4`. Now PNT-eligible (first frontier leaf).
   Verification: `pending`  ·  Commit: `pending`
 - ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `pending` (added 2026-06-21)
   Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex slots +
@@ -421,9 +439,9 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.2.4` | `done` 2026-06-22 | Cluster F ×3 (migration-summary corpus restored to genuinely-unresolved forms) + G STALE ×2 (`return(1)` AST = scalar `1`) + F2 obsolete-compat-premise adapted to live helpers, TEST-ONLY; phase0 6→1, exactly the 5 cleared, 0 regressions. |
 | — | `.5.1` | `done` 2026-06-22 | Resolved the stale `corpus_regression` plugin dataset (subtest-941 "No tests run"/exit-255 = a `NONCORE-QUARANTINE` leftover, NOT a natural stop). Removed the non-core `.plg` dataset (TEST-ONLY); exposed `.5.2`. |
 | — | `.5.2` | `done` 2026-06-22 | Lispish `corpus_regression` hang FIXED (root cause corrected: **not a regex** — the parser never returns `undef`, so the `while(1)` multi-parse loop spins; added a forward-progress guard, TEST-ONLY). 76/76 corpus files ok; `ok 941 - corpus_regression`; suite now reaches subtest 960. [[lispish-corpus-catastrophic-backtracking]] |
-| 1 | `.5.4` | `pending` | Re-bless the **3 dark-tail failures** running-past-corpus revealed (TEST-ONLY): **960** stale plugin-dir `opendir` (same as `.5.1`); **952/953** `parse_mode` assert retired `?Top:` shape (`return(1)`→scalar `1`, cluster-A/G class). → green phase0. |
-| 2 | `.5.3` | `blocked` | Flip downstream gates after green phase0 (blocked by `.5.4`); may hand off to `NONCORE-QUARANTINE.V`. |
-| 3 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.5.4` | `done` 2026-06-22 | Re-blessed the **3 dark-tail failures** (TEST-ONLY): 952/953 `parse_mode` `qr/\?Top:/`→`qr/\$VAR1 = 1;/` (`return(1)`→scalar `1`, dumped via `LinkedSpec::Get`); 960 dropped the `noncore/`-moved `.plg`-corpus inspection, kept the core `PluginBridge.pm` check (plan 5→1). **phase0 fully GREEN 960/960**; `comm` = exactly the 3 cleared, 0 new. |
+| 1 | `.5.3` | `pending` | **Unblocked** (phase0 green). Flip downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`, `NONCORE-QUARANTINE.V`); may hand off to `NONCORE-QUARANTINE.V`. |
+| 2 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -443,11 +461,9 @@ can also proceed in parallel if the engine touch is deferred).
 
 - ~~Authorize the reference-engine fixes (`.3`/`.4`)?~~ **RESOLVED 2026-06-21** — user authorized BOTH
   engine fixes (ADR `0008`); the engine-frozen doctrine otherwise stands (this is the named exception).
-- ~~Did subtests 881–959 run clean?~~ **PARTIALLY ANSWERED 2026-06-22 (`.5.1`):** subtests **1-940 are
-  green** (a full baseline reached them). Subtest **941 (`corpus_regression`) is the catastrophic
-  blocker** (`.5.2`). Subtests **942-959 remain UNVERIFIED** — no run has ever passed `corpus_regression`
-  to reach them (it died at the plugin `opendir`, now hangs in the Lispish corpus parse). They become
-  verifiable only once `.5.2` is resolved.
+- ~~Did subtests 881–959 run clean?~~ **FULLY ANSWERED 2026-06-22 (`.5.2`+`.5.4`):** `.5.2` cleared the
+  `corpus_regression` (941) blocker so the run reached the tail; `.5.4` re-blessed the 3 dark-tail failures
+  it revealed (952/953/960). **The entire suite now runs to completion green: 960/960 ok, EXIT 0, `1..960`.**
 - (`.2.3`, deferred hygiene) The 13 `emit_context_avoids_deps_*_dep_builder` subtests still carry dead
   `local *LinkedSpec::Deps::*` traps (the package was removed; the traps can't fire and the "Deps stays
   unloaded" guarantee is covered by `emit_context_require_avoids_linkedspec_deps_load`). `.2.3` kept them
@@ -458,14 +474,13 @@ can also proceed in parallel if the engine touch is deferred).
 
 - ~~`.3`/`.4` blocked pending user authorization to touch the reference Perl engine.~~ **CLEARED
   2026-06-21 (ADR `0008`).** Both engine defects fixed; all 108 STALE re-blessed (cluster `.2` complete).
-- **`.5.2` — green-phase0 blocker (OPEN 2026-06-22).** `corpus_regression`'s `conf/`+`tablescript/`
-  datasets parse via the **Lispish** spec, which **catastrophically backtracks** (≈100% of conf files;
-  374 CPU-min on a 392-byte file; `alarm()` can't interrupt a C-level regex). Long-masked behind the
-  subtest-110 RTLUtils hang, then the plugin `opendir` die; `.5.1` removed the last mask and exposed it.
-  Green phase0 — and the downstream `SPEC-FORMAT-TERSE` / `LEGACY-VHDL-RETIRE.4-.5` /
-  `NONCORE-QUARANTINE.V` gates — stays blocked until `.5.2` is resolved. **Unblock condition:** a user
-  direction decision (quarantine the Lispish corpus datasets vs fix the regex vs add a hard-timeout
-  guard). See [[lispish-corpus-catastrophic-backtracking]].
+- ~~**`.5.2` — green-phase0 blocker.**~~ **CLEARED 2026-06-22 (`.5.2`+`.5.4`).** `.5.2` corrected the root
+  cause (NOT a catastrophic regex — the Lispish parser never returns `undef`, so the `while(1)` multi-parse
+  loop spun; fixed with a forward-progress guard) so `corpus_regression` (941) passes and the run reaches the
+  tail; `.5.4` re-blessed the 3 dark-tail failures it revealed. **`t/phase0_regression.t` is now fully green
+  end-to-end (960/960).** The downstream `SPEC-FORMAT-TERSE` / `LEGACY-VHDL-RETIRE.4-.5` /
+  `NONCORE-QUARANTINE.V` gates are now unblocked on the green-phase0 condition (flip owned by `.5.3`). See
+  [[lispish-corpus-catastrophic-backtracking]].
 
 ## Verification Log
 
@@ -484,6 +499,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-22` | `.2.4` | ground-truth probe of all 5 F/G (G return values; F1/F3 restored-corpus aggregates; F2 as-is + option-A); targeted unique-match edits; `perl -c`; load-independent focused Test::More harness (5/5 pass); full `perl -Iperl t/phase0_regression.t` reaching subtest 879+ with 0 failures through the run + `comm` name set-diff vs post-`.2.3` baseline | `done` — 6 → 1 failing; cleared = exactly the 5 F/G; new-failure set empty (only `corpus_regression` natural-stop remains). TEST-ONLY. |
 | `2026-06-22` | `.5.1` | `perl -c -Iperl t/phase0_regression.t`; full baseline run (1-940 green, `opendir '.../plugin'` die at 941, exit-255); post-fix re-run (advanced into corpus_regression then hung); fork+SIGKILL corpus census (`alarm()`-immune); ebnf-dataset hard-timeout check; module-path confirmation (stale `PERL5LIB` hazard) | `done` — removed the stale plugin dataset; **determined subtest-941 = a real stale reference, NOT a natural stop**; EXPOSED `.5.2` (Lispish conf/tablescript catastrophic backtracking — ~21/22 conf files, 374 CPU-min; ebnf healthy). phase0 NOT green. TEST-ONLY. |
 | `2026-06-22` | `.5.2` | input bisection (single 392B parse = 0.03s ⇒ NOT a regex); loop instrumentation (pos+defined/iter ⇒ iter2.. pos +0, defined ⇒ never-undef); generalized (single-form EOF; `(R rise)\n\n`); guarded multi-parse over all 76 conf+tablescript files; full foreground `perl -Iperl t/phase0_regression.t` (10-min budget) | `done` — root cause = parser never returns `undef` + the `while(1)` loop lacks a progress guard (NOT regex backtracking). Added the guard (TEST-ONLY). **76/76 corpus files ok; `ok 941 - corpus_regression`; suite reaches subtest 960** (vs old death at 941). Revealed 3 TEST-ONLY dark-tail failures (952/953/960 → `.5.4`). |
+| `2026-06-22` | `.5.4` | `LinkedSpec::Get` got-value dumps for 952/953 (Protocol A); `PluginBridge.pm` "Compatibility bridge" grep + `noncore/plugin/` `.plg` census; `perl -c -Iperl t/phase0_regression.t`; full foreground before/after `perl -Iperl t/phase0_regression.t` + `comm` name set-diff | `done` — before 957 ok / 3 not-ok (reach `not ok 960`, exit-255); after **960 ok / 0 not-ok, EXIT 0, reach `ok 960`, `1..960` reached**; `comm` = **exactly {952,953,960} cleared, new-failure set empty**. `t/phase0_regression.t` fully GREEN end-to-end. TEST-ONLY. |
 
 ## Commit Log
 
@@ -501,7 +517,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.2.3` | `PHASE0-BACKHALF-TRIAGE.2.3 — re-bless/rewrite cluster C emit_context (20, TEST-ONLY); 20 phase0 failures cleared, zero regressions` | commit `9ab8c56` |
 | `.2.4` | `PHASE0-BACKHALF-TRIAGE.2.4 — re-bless cluster F+G (5, TEST-ONLY); 5 phase0 failures cleared, zero regressions` | commit `75289f7` |
 | `.5.1` | `PHASE0-BACKHALF-TRIAGE.5.1 — remove stale corpus_regression plugin dataset (TEST-ONLY); exposes .5.2 (Lispish corpus catastrophic backtracking)` | commit `ef103fe` |
-| `.5.2` | `PHASE0-BACKHALF-TRIAGE.5.2 — fix Lispish corpus_regression hang (never-undef parser + unguarded multi-parse loop; forward-progress guard, TEST-ONLY); corpus_regression green, reveals 3 dark-tail re-blesses (.5.4)` | this commit |
+| `.5.2` | `PHASE0-BACKHALF-TRIAGE.5.2 — fix Lispish corpus_regression hang (never-undef parser + unguarded multi-parse loop; forward-progress guard, TEST-ONLY); corpus_regression green, reveals 3 dark-tail re-blesses (.5.4)` | commit `e74149d` |
+| `.5.4` | `PHASE0-BACKHALF-TRIAGE.5.4 — re-bless 3 dark-tail failures (TEST-ONLY); phase0 fully GREEN 960/960` | this commit |
 
 ## Changelog
 
@@ -671,3 +688,19 @@ can also proceed in parallel if the engine touch is deferred).
   first time revealed 3 TEST-ONLY dark-tail failures** (952/953 `parse_mode` assert the retired `?Top:`
   shape since `return(1)`→scalar `1`; 960 a stale plugin-dir `opendir`, same class as `.5.1`) → new leaf
   `.5.4`. Frontier → `.5.4` (re-bless the 3 → green phase0).
+- `2026-06-22`: `.5.4` **DONE** (TEST-ONLY, `t/phase0_regression.t`; engine/spec untouched) — **`t/phase0_regression.t`
+  is now fully GREEN end-to-end (960/960) for the first time.** Ground-truth-first per TOOLBOX Protocol A:
+  dumped each got-value via `LinkedSpec::Get` before re-blessing. **952** (43355) + **953** (43383):
+  `like(…, qr/\?Top:/)` → `qr/\$VAR1 = 1;/` — `Top:: /a/ -> Top { return(1) }` now returns scalar `1`
+  (`$VAR1 = 1;`), the cluster-A/G class; 952's message clarified (the seek-forward proof is now the defined
+  matched value vs consume's `__AST_UNDEF__`). **960** (`plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus`):
+  rewrote the subtest — dropped the 4 `noncore/`-dependent `.plg`-corpus asserts (the stale
+  `opendir '../plugin'` census + the `get_plugin`/`run_plugin`/`dispatch_plugin_autoload_name` source scans;
+  the 13 `.plg` moved to `noncore/`, core gate stays core-only per the `.5.1` precedent), kept the core
+  `PluginBridge.pm` `qr/Compatibility bridge/i` check (plan 5→1, rationale comment). `perl -c` OK; before-run
+  957 ok / 3 not-ok (failing = exactly {952,953,960}, reach `not ok 960` exit-255); after-run **960 ok / 0
+  not-ok, EXIT 0, `1..960` reached** (done_testing now seen — 960's die gone); `comm` set-diff = **exactly the
+  3 cleared, new-failure set empty**. self-check + KM gate via the doctrine driver. Book unaffected (parse_mode
+  behavior unchanged — only the non-idiomatic regression-test's expected AST shape; 960 is internal test infra).
+  **`.5` green-phase0 goal MET; the gate-flip child `.5.3` is now UNBLOCKED + PNT-eligible (frontier order 1),
+  then `.6` (book `:AND`).**

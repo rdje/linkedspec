@@ -1,6 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.4 — re-bless the 3 dark-tail failures (TEST-ONLY); `t/phase0_regression.t` is now fully GREEN end-to-end (960/960)
+
+User directive: bootstrap thoroughly (roadmap + codebase + mdBook) then continue the active frontier. **No
+engine/spec/production code touched** — only `t/phase0_regression.t` (the 3 re-blesses) + the task-tree/live docs.
+
+This closes the green-phase0 goal of `.5`: the back half of `t/phase0_regression.t` — dark for a long time
+behind the `RTLUTILS-REGEX-HANG`, the legacy-island hangs, the plugin `opendir` die (`.5.1`), and the Lispish
+multi-parse spin (`.5.2`) — now runs to completion **green: 960/960 ok, EXIT 0, plan `1..960` reached** for the
+first time ever.
+
+Driven **ground-truth-first per `TOOLBOX.md` Protocol A** — every got-value was *dumped* via `LinkedSpec::Get`,
+never transcribed from the triage note:
+- **952** `parse_mode_default_and_explicit_seek_preserve_progressive_matching` (line 43355) and **953**
+  `parse_mode_consume_requires_contiguous_match` (line 43383): both use the non-idiomatic
+  `Top:: /a/ -> Top { return(1) }`. Dumps: 952 default+seek on `xxa` → `CODE\n$VAR1 = 1;\n`; 953 consume on
+  `a` → `CODE\n$VAR1 = 1;\n`, consume on `xxa` → `CODE\n__AST_UNDEF__\n` (reject unchanged). `return(1)` now
+  resolves to a plain scalar `1` (the cluster-A/G class — KM `phase0`/`return(1)→scalar 1`), so the retired
+  tagged `?Top:` shape never appears. Re-blessed `like(…, qr/\?Top:/)` → `like(…, qr/\$VAR1 = 1;/)`; 952's
+  message clarified ("…(returns the matched value)") since the seek-forward proof is now the *defined* matched
+  value vs consume's `__AST_UNDEF__`.
+- **960** `plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus`: another stale
+  `discover_dir_files_by_suffix($Bin/../plugin, '.plg')` → `opendir '../plugin' or die` (the 13 `.plg` were
+  `git mv`'d to `noncore/plugin/` by `NONCORE-QUARANTINE.3`) — the **same class as `.5.1`**. Following the
+  `.5.1` precedent (the core regression gate stays core-only and does not reach into `noncore/`), rewrote the
+  subtest to drop the 4 `.plg`-corpus assertions (the `opendir` census + the
+  `get_plugin`/`run_plugin`/`dispatch_plugin_autoload_name` source scans) and keep the core-relevant
+  `like($PluginBridge.pm, qr/Compatibility bridge/i)` guarantee (plan `5`→`1`, with a rationale comment).
+  Confirmed `PluginBridge.pm:3` still carries "Compatibility bridge".
+
+**Verification:** `perl -c -Iperl t/phase0_regression.t` OK; **before**-run = 957 ok / 3 not-ok (failing set =
+exactly {952,953,960}, reach `not ok 960`, exit-255 — 960's `opendir` die aborted before `done_testing`);
+**after**-run = **960 ok / 0 not-ok, EXIT 0, reach `ok 960`, plan `1..960` reached** (`done_testing` now seen);
+`comm` name set-diff = **exactly the 3 cleared, new-failure set empty**. self-check + KM gate via the doctrine
+driver. **Book unaffected** — parse_mode seek/consume behavior is unchanged (only the non-idiomatic
+regression-test's expected AST shape changed), and the book teaches parse modes via the 2-rule idiom, not this
+form; the 960 inspection is internal test infra.
+
+**Unblocks the downstream chain:** the green-phase0 condition gating `SPEC-FORMAT-TERSE`,
+`LEGACY-VHDL-RETIRE.4/.5`, and `NONCORE-QUARANTINE.V` is now satisfied. The gate-flip work is owned by `.5.3`
+(now PNT-eligible), then `.6` (book `:AND` reconciliation).
+
 ## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.2 — fix the Lispish corpus_regression hang (never-undef parser + unguarded multi-parse loop; forward-progress guard, TEST-ONLY)
 
 User chose "investigate + fix". **No engine/spec/production code touched** — only `t/phase0_regression.t`

@@ -43352,7 +43352,7 @@ PERL
     is($seek_exit, 0, 'explicit seek parse mode subprocess exits cleanly') or diag($seek_err || $seek_out);
     like($default_out, qr/^CODE\n/s, 'default parse mode still builds parser coderef');
     like($seek_out, qr/^CODE\n/s, 'explicit seek parse mode still builds parser coderef');
-    like($default_out, qr/\?Top:/, 'default parse mode still seeks forward to a later anchor');
+    like($default_out, qr/\$VAR1 = 1;/, 'default parse mode still seeks forward to a later anchor (returns the matched value)');
     is($seek_out, $default_out, 'explicit seek parse mode matches the default parser result end to end');
 };
 
@@ -43380,7 +43380,7 @@ PERL
     is($accept_exit, 0, 'consume parse mode contiguous-input subprocess exits cleanly') or diag($accept_err || $accept_out);
     like($reject_out, qr/^CODE\n__AST_UNDEF__\n\z/s, 'consume parse mode rejects leading junk before the first anchor');
     like($accept_out, qr/^CODE\n/s, 'consume parse mode still builds parser coderef');
-    like($accept_out, qr/\?Top:/, 'consume parse mode still accepts contiguous matching input');
+    like($accept_out, qr/\$VAR1 = 1;/, 'consume parse mode still accepts contiguous matching input');
 };
 
 subtest 'return_descriptor_exposes_parse_mode_metadata_and_consume_parser_source' => sub {
@@ -43596,33 +43596,15 @@ subtest 'spec_self_hosted_compiles_as_language_agnostic' => sub {
 };
 
 subtest 'plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus' => sub {
-    plan tests => 5;
+    plan tests => 1;
 
-    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
-    my @plg_files = discover_dir_files_by_suffix($plugin_dir, '.plg');
-    ok(@plg_files > 0, 'plugin corpus is non-empty for dispatch gate inspection');
-
-    my @get_plugin_hits;
-    my @run_plugin_hits;
-    my @dispatch_autoload_hits;
-    foreach my $plg_file (@plg_files) {
-        my $source = slurp($plg_file);
-        my $bn = basename($plg_file);
-        push @get_plugin_hits, $bn
-            if $source =~ /LinkedSpec::get_plugin\s*\(/;
-        push @run_plugin_hits, $bn
-            if $source =~ /LinkedSpec::run_plugin\s*\(/;
-        push @dispatch_autoload_hits, $bn
-            if $source =~ /LinkedSpec::dispatch_plugin_autoload_name\s*\(/;
-    }
-
-    is_deeply(\@get_plugin_hits, [], 'no .plg file calls LinkedSpec::get_plugin(...) directly')
-        or diag("Files: @get_plugin_hits");
-    is_deeply(\@run_plugin_hits, [], 'no .plg file calls LinkedSpec::run_plugin(...) directly')
-        or diag("Files: @run_plugin_hits");
-    is_deeply(\@dispatch_autoload_hits, [], 'no .plg file calls LinkedSpec::dispatch_plugin_autoload_name(...) directly')
-        or diag("Files: @dispatch_autoload_hits");
-
+    # NONCORE-QUARANTINE.3 git mv'd the 13 .plg files to noncore/plugin/ and removed the
+    # top-level plugin/ directory. The core regression gate stays core-only and does NOT
+    # reach into noncore/, so the legacy .plg-corpus dispatch-gate inspection (the
+    # opendir '../plugin' census plus the get_plugin/run_plugin/dispatch_plugin_autoload_name
+    # source scans) is dropped here; the core-relevant guarantee — that PluginBridge.pm still
+    # documents its compatibility-bridge status — is retained. (PHASE0-BACKHALF-TRIAGE.5.4,
+    # same class as .5.1's stale plugin-dataset removal.)
     my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));
     like($plugin_bridge_pm, qr/Compatibility bridge/i,
         'PluginBridge.pm documents its compatibility-bridge status');
