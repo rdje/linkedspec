@@ -43745,9 +43745,18 @@ sub parse_with_lispish_multi {
     my $iteration_count = 0;
 
     while (1) {
+        my $pos_before = pos($data) // 0;
         my ($ok, $ast, $err) = run_with_exit_trapped(sub { $lispish_parser->(\$data) });
         return (0, normalize_error($err)) unless $ok;
         last unless defined $ast;
+
+        # Forward-progress guard: the Lispish parser does not signal end-of-stream by
+        # returning undef — at EOF (or stuck on inter-form whitespace it cannot consume) it
+        # re-returns the last form's AST with pos() unchanged. A `while(1)` loop keyed only on
+        # `defined($ast)` therefore never terminates (it spins to the iteration cap, ~3 min/file).
+        # Stop the stream the moment a call consumes no further input. (PHASE0-BACKHALF-TRIAGE.5.2)
+        my $pos_after = pos($data) // 0;
+        last if $pos_after <= $pos_before;
 
         push @ast_list, $ast;
         ++$iteration_count;

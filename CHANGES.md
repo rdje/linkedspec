@@ -1,6 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.2 — fix the Lispish corpus_regression hang (never-undef parser + unguarded multi-parse loop; forward-progress guard, TEST-ONLY)
+
+User chose "investigate + fix". **No engine/spec/production code touched** — only `t/phase0_regression.t`
+(one guard line) + the corrected KM card.
+
+**Root cause CORRECTED by measurement — it is NOT a regex** (the earlier "catastrophic backtracking"
+hypothesis is disproved). Dogfooding `TOOLBOX.md`: (1) input bisection — a *single* parse of the full
+392-byte `ambitiming.conf` = **0.03s**, no backtracking; (2) loop instrumentation — `iter1 pos 0→350
+(def)`, then `iter2.. pos 350→350 (+0, def)` forever, the stuck call re-returning form 1's exact AST;
+(3) generalized — single-form `(rise_o_fall…)` at EOF and `(R rise)\n\n` both return defined + zero
+advance. So **the Lispish parser never returns `undef`**: on any no-progress/EOF call it re-returns the
+previous form's AST with `pos()` unchanged. `parse_with_lispish_multi`'s `while(1){ … last unless
+defined $ast }` therefore spun to its 100000-iteration cap (~0.002s × 100000 ≈ 3 min/file × 76
+conf/tablescript files = the multi-CPU-hour "hang"). `ebnf` was healthy only because it uses the
+single-call probe, not the loop.
+
+**Fix (TEST-ONLY):** added the missing streaming-loop invariant — a **forward-progress guard** to
+`parse_with_lispish_multi` (`last if pos_after <= pos_before`): stop the stream the moment a call
+consumes no input. **Measured: all 76 conf+tablescript files parse ok, 0 hang.** A full foreground
+`perl -Iperl t/phase0_regression.t` (10-min budget — note `run_in_background` is killed at ~120s, never
+reaching the corpus tail) now reaches **subtest 960** with **`ok 941 - corpus_regression`** (vs the old
+exit-255 death at 941). The KM card `lispish-corpus-catastrophic-backtracking.md` was corrected (title +
+body + reverify) from the wrong "catastrophic regex" framing to the real never-undef/unguarded-loop cause.
+
+The deeper **parser-contract** defect (the parser should return `undef` at EOF) and the **grammar gap**
+(the `Lispish::` top rule doesn't skip top-level inter-form whitespace, so a multi-form file parses only
+its first form — ambitiming's 2nd form `rise_o_fall` is dropped) are engine/spec follow-ons with
+cross-variant implications — not needed for the corpus smoke test, documented in the KM card.
+
+**Running past corpus_regression for the first time revealed 3 TEST-ONLY dark-tail failures** (subtests
+942–960), now owned by `.5.4`: **960** `plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus`
+is another stale `opendir '../plugin'` die (the `.plg` corpus moved to `noncore/` — same class as `.5.1`);
+**952/953** `parse_mode_*` assert the retired `?Top:` tagged shape but `Top:: /a/ -> Top { return(1) }`
+now returns scalar `1` (the cluster-A/G class). All re-bless-only; green phase0 is one slice away.
+
 ## 2026-06-22 — DOCTRINE-ENFORCEMENT-ADOPT.1+.2 — adopt the portable Doctrine-Enforcement architecture (driver+registry+gates) + a LinkedSpec TOOLBOX.md
 
 User directive: adopt `DOCTRINE_ENFORCEMENT.md` (the 4th portable architecture, sibling of
