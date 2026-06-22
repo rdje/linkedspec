@@ -1,6 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-23 — TOP-RULE-AS-NORMAL.1 — own the lane + read-only investigation; ADR 0010 (authorize touching the Perl engine to treat the top rule as an ordinary rule entered first); supersede PHASE0-BACKHALF-TRIAGE.6 + close that tree (DOC-ONLY)
+
+**No engine/spec/test/book code touched** — only `docs/decisions/0010-*.md` + `INDEX.md`, the new
+`docs/tasks/TOP-RULE-AS-NORMAL.md` + the `docs/TASK_TREE.md` index, `docs/tasks/PHASE0-BACKHALF-TRIAGE.md`,
+two KM fact cards (`docs/knowledge/`), and the live continuity docs.
+
+A design conversation (off the `PHASE0-BACKHALF-TRIAGE.6` book `:AND` reconciliation) escalated: the user
+reframed the top rule as **an ordinary rule that is merely entered first** (`::` = entry marker), with the
+no-regex dispatch loop an **idiom, not a law**, and recursion into the top allowed under a
+**consume-before-recurse** termination rule — then **authorized touching the Perl variant** to implement it.
+Recorded in **ADR 0010** (a sanctioned, scoped exception to the engine-frozen doctrine, like 0008; cross-
+variant parity required because the `.spec` file is the one universal contract).
+
+Read-only investigation (`TOP-RULE-AS-NORMAL.1`, TOOLBOX probes — `LinkedSpec::Get`, `generate_only` +
+`dump_parser_source`, codegen grep) corrected the model and narrowed the scope:
+- The entry point is just `sub Get { &{$descr->{spec}{$top_rule}}($descr,$_[0]) }` (`Compiler.pm:1006`) —
+  the top rule is **not** specially wrapped.
+- `while(1)` is **mode-driven** (default/OR/REP repeat; `:AND` single-pass) in `HandlerVariantEmitter.pm`,
+  **not** top-driven. The "top = dispatch loop" behavior is an emergent idiom (default-mode top + dispatch
+  edges + `LX` accumulator).
+- A regex on a top rule **already** compiles as a normal rule: `Pair::AND`+regex emits a standard AND
+  handler — the earlier breakage was the AND-codegen defect already fixed (ADR 0008 / `.3`).
+- Idiomatic recursion is body-rule + consume-before-recurse (`specs/Lispish.spec`), green; naive grammars
+  recursing **back into the top rule** hang — the genuinely open dimension (top re-entry + termination).
+
+So the authorized engine work is **narrower than it first looked**: confirm the {mode}×{regex}×{recursion}
+matrix, enable/verify top re-entry recursion, add a forward-progress guard, lock with phase0 — then cross-
+variant parity (`.3`) and the book reconciliation (`.4`, absorbing the superseded `.6`). The engine
+implementation (`.2`) is signoff-critical codegen and is recommended for a fresh, sharp session.
+
+Bookkeeping: `PHASE0-BACKHALF-TRIAGE.6` `superseded` by `TOP-RULE-AS-NORMAL`; `PHASE0-BACKHALF-TRIAGE` tree
+flipped to `done` (`.1`–`.5` done, `.6` superseded) and moved to the Completed index; `TOP-RULE-AS-NORMAL`
+added active (current focus). Two KM cards: new [[top-rule-is-ordinary-rule-entered-first]] (engine
+mechanics) + corrected [[spec-top-rule-no-regex-two-rule-minimum]] (the stale `[]` claim was fixed by `.3`;
+the doctrine is now recorded as idiom-not-law). Verification: doc-only — `scripts/check_memory_architecture.sh`
++ `scripts/check_doctrines.sh` green; KM map regenerates clean via the pre-commit hook; phase0 unaffected
+(960/960). No engine/spec/test/book-behavior change.
+
 ## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.3.2.2 — narrative-doc + book drift sync: ROADMAP_V2 + ARCHITECTURE_STATE + 2 mdBook files synced to the deleted/relocated module reality; close LEGACY-VHDL-RETIRE + NONCORE-QUARANTINE (DOC-ONLY)
 
 **No engine/spec/test code touched** — only `ROADMAP_V2.md`, `ARCHITECTURE_STATE.md`, the two named mdBook files

@@ -51,12 +51,24 @@ Input `hello world` → output `["hello-world"]` (verified via `LinkedSpec::Get`
 - Output is the top rule's accumulator, so one match surfaces as a **one-element array**
   (`["hello-world"]`); the per-match value is `"hello-world"`.
 
-## One shape to avoid in examples
+## Idiom, not law (ADR 0010, 2026-06-23)
 
-The explicit **`::AND … -> Rule[N] { return(...) }`** form (AND mode **+** a slot index) drops its
-edge return and yields `[]` (`_emit_and_single_acode_handler`, `HandlerVariantEmitter.pm` — the
-`.10.1` finding). Don't use it in worked examples. The Perl reference is authoritative and **not to
-be touched** ([[feedback_do-not-fix-reference-engine]]); it is noted here only so examples avoid it.
+> **Update (2026-06-23, ADR [0010](../decisions/0010-top-rule-is-ordinary-rule-entered-first.md)):**
+> this doctrine is now recorded as the recommended **idiom/style**, **not an engine law**. The engine
+> treats the top rule as an **ordinary rule that is merely entered first** (`::` = entry marker); the
+> `while(1)` loop is mode-driven, and a regex on the top rule already compiles as a normal rule — see
+> [[top-rule-is-ordinary-rule-entered-first]]. Keep writing 2-rule, no-regex-on-top for clarity and for
+> stream-of-records parsing; just don't read "Body rule only" / "no regex on top" as constraints the
+> engine enforces.
+
+## One shape to avoid in examples (now FIXED — kept as history)
+
+The explicit **`::AND … -> Rule[N] { return(...) }`** form (AND mode **+** a slot index) used to drop
+its edge return and yield `[]` (`_emit_and_single_acode_handler`, `HandlerVariantEmitter.pm` — the
+`.10.1` finding). **That defect was fixed** under ADR `0008` / `PHASE0-BACKHALF-TRIAGE.3` (the `\$"`
+ref-stringification bug) — the form now compiles and returns the author payload. It remains
+**non-idiomatic** (a regex-bearing top rule does a single pass, not the streaming accumulation loop),
+so prefer the 2-rule idiom in worked examples; but the "yields `[]`" claim is **superseded**.
 
 > **Retraction (2026-06-17, `.10.6`):** a prior version of this card claimed a regex-on-top / single-
 > rule spec "silently returns `[]`." That mechanism claim was **inaccurate** and is withdrawn — it is

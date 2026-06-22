@@ -6,12 +6,12 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (**`.5.3.2.2` DONE** — narrative-doc + book drift sync (DOC-ONLY): synced
-  `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + 2 mdBook files to the deleted
-  (RTLUtils/FSMGen/VHDL::ConstantEval) vs relocated-to-`noncore/` reality; `generic_fake_memory_module.plg`/
-  `wrapgen.plg`/`ceil_log2` drift gone; `mdbook build` EXIT 0; flipped `LEGACY-VHDL-RETIRE.5` + `NONCORE-QUARANTINE.V`
-  → `done`. Containers `.5.3.2`/`.5.3`/`.5` now `done`. **Only open leaf: `.6`** (book `:AND` — likely a short user
-  policy check). Prior: `.5.3.2.1` DONE (status reconciliation); `.5.3.1` DONE (full local gate green).)
+- Last updated: `2026-06-23` (**TREE COMPLETE** — `.6` `superseded` by `TOP-RULE-AS-NORMAL`: the user escalated
+  the book `:AND` reconciliation into an engine change and **authorized touching the Perl variant** (ADR `0010`);
+  the read-only investigation + decision landed in `TOP-RULE-AS-NORMAL.1`, the book reconciliation moved to
+  `TOP-RULE-AS-NORMAL.4`. `.1`–`.5` done + `.6` superseded ⇒ `PHASE0-BACKHALF-TRIAGE` is `done` (phase0 960/960
+  green, full gate EXIT 0). Prior `2026-06-22`: `.5.3.2.2` DONE (narrative-doc + book drift sync; closed
+  `LEGACY-VHDL-RETIRE` + `NONCORE-QUARANTINE`).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -116,7 +116,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 
 ## Task Tree
 
-- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `active` · Children: `.1` (done), `.2` (done), `.3` (done), `.4` (done), `.5` (done), `.6` (pending — the only open leaf)
+- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `done` (2026-06-23 — phase0 960/960 green; `.1`–`.5` done, `.6` superseded by `TOP-RULE-AS-NORMAL`) · Children: `.1` (done), `.2` (done), `.3` (done), `.4` (done), `.5` (done), `.6` (superseded)
 - ID: `PHASE0-BACKHALF-TRIAGE.1` · Status: `done` (2026-06-19)
   Goal: Read-only cluster-by-cluster stale-vs-real triage of the 173 failures, with evidence + scope.
   Acceptance: per-cluster verdict + scope/effort + recommended fix plan, decomposed into `.2+`. **Met.**
@@ -501,20 +501,18 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     "stale prose is gone" explanatory sentences, or the dated historical tracker cell); book stays
     variant-agnostic. `scripts/check_memory_architecture.sh` + `scripts/check_doctrines.sh` green.
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `pending` (added 2026-06-21)
-  Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex slots +
-    indexed edges with a `return(...)` edge now compiles and returns the raw author payload (the engine
-    contract the cluster-D/G tests encode). But `appendix/formal-grammar.md:66-78` marks every `:AND`
-    mode "Body rule only" and `worked-spec-walkthrough.md:119-124` + `what-is-linkedspec.md:45` say a
-    top `::` rule "carries no regex" — both now contradicted by the engine+tests. Reconcile the book so
-    it neither misleads (the broken `Pair::AND` example) nor contradicts the engine, while preserving the
-    recommended 2-rule idiom ([[spec-top-rule-no-regex-two-rule-minimum]]) as *style guidance* distinct
-    from *engine capability*. Likely needs a short user policy check: document `::AND`+regex as a
-    supported form vs. keep steering authors to the 2-rule idiom (or both — "supported but not idiomatic").
-  Acceptance: no book `.spec` example is broken or doctrine-contradictory; the "Body rule only" /
-    "no regex on top" claims are corrected or reframed as idiom; `mdbook build` exit 0; outputs verified
-    via `LinkedSpec::Get`.
-  Verification: `pending`  ·  Commit: `pending`
+- ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `superseded` (2026-06-23 — by `TOP-RULE-AS-NORMAL`)
+  Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex + a `return`
+    edge now compiles and returns the author payload, contradicting the book's "Body rule only" / "no regex
+    on top" claims.
+  Superseded: the user escalated this from a book-only reconciliation into an **engine change** — treat the
+    top rule as an ordinary rule (merely entered first) w.r.t. regex + recursion, and **authorized touching
+    the Perl variant** (ADR [0010](../decisions/0010-top-rule-is-ordinary-rule-entered-first.md)). The
+    read-only investigation + design decision landed in `TOP-RULE-AS-NORMAL.1` + ADR `0010`; the book
+    reconciliation (this leaf's original intent) is now owned by `TOP-RULE-AS-NORMAL.4` so it documents the
+    *new* engine behavior rather than a contradiction. (An interim `.6.1`/`.6.2` split proposed earlier this
+    session under the now-obsolete "engine-frozen" framing was never committed/published and is withdrawn.)
+  Verification: n/a (superseded)  ·  Commit: n/a
 
 ## Current Frontier
 
@@ -538,7 +536,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.5.3.2` | `active` (split 2026-06-22) | Decomposed → `.5.3.2.1` (status & continuity reconciliation) + `.5.3.2.2` (narrative-doc + book drift). |
 | — | `.5.3.2.1` | `done` 2026-06-22 | **Status & continuity reconciliation** (DOC-ONLY): flipped `NONCORE-QUARANTINE.V` (blocker cleared→`pending`), `LEGACY-VHDL-RETIRE.4`→`done` + `.5` (cleared→`pending`), `SPEC-FORMAT-TERSE` impl-gate→cleared (`.1.x` PNT-eligible); synced `docs/TASK_TREE.md` index + the `rtlutils-regex-hang` KM card + live docs; no "blocked by phase0" text remains in the ledgers. |
 | — | `.5.3.2.2` | `done` 2026-06-22 | **Narrative-doc + book drift sync** (deferred `LEGACY-VHDL-RETIRE.5` body, DOC-ONLY): `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + 2 mdBook files synced to the deleted (RTLUtils/FSMGen/VHDL::ConstantEval) vs relocated-to-`noncore/` reality; `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift gone; `mdbook build` EXIT 0. Flipped `LEGACY-VHDL-RETIRE.5` → done + `NONCORE-QUARANTINE.V` → done. |
-| 1 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. **Likely needs a short user policy check** (document `::AND`+regex as supported vs. keep steering to the 2-rule idiom). |
+| — | `.6` | `superseded` 2026-06-23 | Escalated by the user from book-only into an **engine change** + authorization (ADR `0010`): treat the top rule as an ordinary rule (entered first) w.r.t. regex + recursion. Investigation + decision landed in `TOP-RULE-AS-NORMAL.1`; the book reconciliation is owned by `TOP-RULE-AS-NORMAL.4`. **PHASE0-BACKHALF-TRIAGE is COMPLETE** (`.1`–`.5` done, `.6` superseded); frontier empty — see the `TOP-RULE-AS-NORMAL` tree. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
