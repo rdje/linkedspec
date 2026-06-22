@@ -14,3 +14,10 @@ Before re-deriving any fact from code/runtime, check **`KNOWLEDGE_MAP.md`** (gre
 question → follow the one pointer → trust the dated fact or run its `reverify`). Write a
 `docs/knowledge/<id>.md` card when you establish a durable fact or catch archaeology
 (`knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`); the map is derived + gated — never hand-edit it.
+
+When debugging (a parse rejection, wrong AST shape, codegen defect, hang, or failing test), reach for
+LinkedSpec's **own** tools FIRST — see **`TOOLBOX.md`** (the `LinkedSpec::Get`/`return_descriptor`/
+`call_spec_handler_subst`/`dump_parser_source` probes, the `LINKEDSPEC_TRACE_LEVEL` trace framework,
+the `tools/` scripts, the gates) — never eyeball a `.spec` or guess a root cause. Doctrines are
+mechanically enforced (**`DOCTRINE_ENFORCEMENT.md`**): every rule pairs with a `scripts/check_*.sh` run
+by the registry driver `scripts/check_doctrines.sh` via `.githooks/pre-commit` + `tools/run_ci_local.sh`.

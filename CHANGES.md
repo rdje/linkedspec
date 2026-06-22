@@ -1,6 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — DOCTRINE-ENFORCEMENT-ADOPT.1+.2 — adopt the portable Doctrine-Enforcement architecture (driver+registry+gates) + a LinkedSpec TOOLBOX.md
+
+User directive: adopt `DOCTRINE_ENFORCEMENT.md` (the 4th portable architecture, sibling of
+`MEMORY_ARCHITECTURE.md` + the Knowledge Map) and add a `TOOLBOX.md` of LinkedSpec's **own** debug tools
+(reinforced: "TOOLBOX.md should contain LinkedSpec own debug tools"). Landed `.1`+`.2` atomically (they
+are mutually referential). No engine/spec/production code touched — tooling + docs only.
+
+- **`TOOLBOX.md`** — LinkedSpec's own diagnostic/debug catalog, foregrounding the project's own tools:
+  §1 facade probes (`LinkedSpec::Get`, `get_parser`, `call_spec_handler_subst`, `build_compiled_rule_table`);
+  §2 introspection options (`return_descriptor`, `dump_parser_source`/`parser_source_ref`, `parse_only`/
+  `generate_only`, `return_state`, `runtime_ctx_ref`, `parse_mode`/`top_rule`); §3 the
+  `LINKEDSPEC_TRACE_LEVEL` trace framework (+ env knobs + the `configure_trace`/`trace_*` API); §4 the
+  `tools/*` scripts (`inspect_spec_codegen.pl`, `cross_check_spec_parsers.pl`, `gen_oracle_corpus.pl`,
+  `run_ci_local.sh`, `ram_guard.sh`); §5 the gates + Knowledge-Map grep. General supporting techniques
+  (`comm` set-diff, focused-`Test::More` harness, fork+SIGKILL census, `perl -c`, the `PERL5LIB`/`-Iperl`
+  hazard) are demoted to §6. Every tool/option name was verified against `perl/` (not guessed). Also
+  carries the task-acceptance checklist template, a symptom→tool chooser, and three diagnosis protocols.
+- **`scripts/check_doctrines.sh`** — the registry+driver: runs every registered `check_*.sh`, reports
+  per-doctrine PASS/FAIL, exits nonzero on any breach, and meta-checks that each registered enforcer
+  exists + is executable. Registry = `MEMORY-ARCH` (`scripts/check_memory_architecture.sh`) +
+  `KNOWLEDGE-MAP` (`knowledge-map/scripts/check_knowledge_map.sh`) — the two existing structural checks,
+  so the driver is honest and green from day one (2/2 PASS).
+- **`.githooks/pre-commit`** rewritten to regenerate+stage the derived Knowledge Map, then call the
+  driver (replacing the direct two-check stack). **`tools/run_ci_local.sh`** (E4) now calls the driver too
+  and audits the new files as tracked CI inputs. `commit-msg` (work-unit-id) unchanged.
+- **`DOCTRINE_ENFORCEMENT.md`** at the repo root — the standard, with §10 = the LinkedSpec instance and an
+  honest E4 note (hosted CI disabled per ADR `0004`; the local gate is the source of truth).
+- **Discovery (E1):** `README.md`, `AGENTS.md`, `CLAUDE.md` now name `DOCTRINE_ENFORCEMENT.md` + `TOOLBOX.md`
+  (toolbox-first when debugging). **ADR `0009`** records the adoption (+ INDEX row).
+- **Deferred (`.3`):** a `check_diagnosis_evidence.sh`-style EVIDENCE/task-acceptance hard-gate — its
+  change-scope globs + tool-output signature regexes need careful project-specific design.
+
+**Verification:** `bash scripts/check_doctrines.sh` → exit 0 (2/2 PASS); `bash -n` clean on
+`.githooks/pre-commit` + `tools/run_ci_local.sh`; Knowledge Map in sync; the commit itself exercised the
+rewired pre-commit hook (regenerate-and-stage KM + driver) green. (The full `tools/run_ci_local.sh` is
+separately blocked by the pre-existing `PHASE0-BACKHALF-TRIAGE.5.2` corpus hang — not introduced here.)
+
 ## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.1 — remove stale corpus_regression plugin dataset (TEST-ONLY); exposes .5.2 (Lispish corpus catastrophic backtracking)
 
 `.5` ("green-phase0 verification + gate flips") **split**; `.5.1` done. **No engine/spec/production code

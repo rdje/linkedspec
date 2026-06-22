@@ -69,11 +69,8 @@ require_command git
 require_command perl
 require_command prove
 
-log "running memory-architecture self-check (MEMORY_ARCHITECTURE.md §9 — E2/E4 backstop)"
-bash "$REPO_ROOT/scripts/check_memory_architecture.sh"
-
-log "running Knowledge Map check (KNOWLEDGE_MAP_ARCHITECTURE.md §6 — derive-and-diff)"
-bash "$REPO_ROOT/knowledge-map/scripts/check_knowledge_map.sh"
+log "running the general doctrine enforcer (DOCTRINE_ENFORCEMENT.md §5/§7 — E4 backstop): the registry driver runs every registered check (memory-architecture, Knowledge Map, ...)"
+bash "$REPO_ROOT/scripts/check_doctrines.sh"
 
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
@@ -81,6 +78,9 @@ require_tracked_file tools/run_ci_local.sh
 require_tracked_file perl/LinkedSpec.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
+require_tracked_file scripts/check_doctrines.sh
+require_tracked_file DOCTRINE_ENFORCEMENT.md
+require_tracked_file TOOLBOX.md
 require_tracked_file MEMORY_ARCHITECTURE.md
 require_tracked_file KNOWLEDGE_MAP.md
 require_tracked_file knowledge-map/scripts/gen_knowledge_map.sh

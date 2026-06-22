@@ -19,6 +19,14 @@ point back here. The system of record is **`README.md`** (the project) +
    question, follow the one pointer to the canonical home, and trust the dated fact or run its
    `reverify` command. Re-deriving a fact that was already logged once is *archaeology*
    (`knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`).
+7. **When debugging, reach for LinkedSpec's own tools FIRST** — read `TOOLBOX.md` (the
+   `LinkedSpec::Get`/`return_descriptor`/`call_spec_handler_subst`/`dump_parser_source` probes, the
+   `LINKEDSPEC_TRACE_LEVEL` trace framework, the `tools/` scripts, the gates). Never eyeball a `.spec`
+   or guess a root cause before the toolbox has shown the exact mechanism + source location.
+8. **Doctrines are mechanically enforced** (`DOCTRINE_ENFORCEMENT.md`, the 4th portable architecture):
+   every rule pairs with a `scripts/check_*.sh` run by the registry driver `scripts/check_doctrines.sh`
+   via `.githooks/pre-commit` (E3) + `tools/run_ci_local.sh` (E4). Add a doctrine = a check + one
+   registry line.
 
 ## Non-negotiable working rules
 

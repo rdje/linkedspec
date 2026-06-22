@@ -19,6 +19,7 @@ changed* lives in git (layer D), not here.
 | [0006](0006-multi-backend-vision.md) | Multi-backend vision: Rust, Julia, Dart alongside Perl; same .spec files, lockstep semantics; HandlerIR as decoupling seam | 2026-06-14 | accepted | architecture, portability, backends, roadmap |
 | [0007](0007-spec-format-terse-direction.md) | Ratify the terse `.spec` format direction (SPEC-FORMAT-TERSE activated): no-sigil typed vars, `=`/`set`, `copy`/`cat`, methods, everything-an-expression; gradual-alias migration; lockstep all variants | 2026-06-18 | accepted | dsl, language-evolution, spec-format, roadmap |
 | [0008](0008-authorize-reference-engine-defect-fixes.md) | Authorize two reference-engine defect fixes (AND-rule action-codegen #1 + input-boundary regression #2) as a sanctioned, scoped exception to the engine-frozen doctrine | 2026-06-21 | accepted | engine, codegen, runtime, regression-gate, phase0, doctrine-exception |
+| [0009](0009-doctrine-enforcement-architecture.md) | Adopt the portable Doctrine-Enforcement architecture (registry driver `scripts/check_doctrines.sh` + E1→E4 gates) and a LinkedSpec `TOOLBOX.md` of its own debug tools | 2026-06-22 | accepted | doctrine, enforcement, process, ci, debug-toolbox, portable-architecture |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

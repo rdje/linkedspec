@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
-# .githooks/pre-commit — local gates:
-#   - memory-architecture self-check (MEMORY_ARCHITECTURE.md §9 E3)
-#   - Knowledge Map gate            (KNOWLEDGE_MAP_ARCHITECTURE.md §6)
+# .githooks/pre-commit — local gate (E3 of DOCTRINE_ENFORCEMENT.md §7 / MEMORY_ARCHITECTURE.md §9).
+# Regenerate + stage the derived Knowledge Map (so map drift is structurally impossible), then run
+# the single general doctrine enforcer (scripts/check_doctrines.sh) — the registry/driver that runs
+# every registered check_*.sh (memory-architecture, Knowledge Map, ...) and blocks the commit on any
+# breach. Adding a doctrine = write scripts/check_<id>.sh + one registry line in the driver.
 # Activate once per clone: git config core.hooksPath .githooks
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
 
-# Memory-architecture gate.
-"$ROOT/scripts/check_memory_architecture.sh"
-
-# Knowledge Map gate: regenerate the derived map, stage it (so it is always in sync at zero
-# agent cost), then validate facts + sync. The regenerate-and-stage step makes drift
+# Knowledge Map is DERIVED — regenerate + stage (so it is always in sync at zero agent cost) BEFORE
+# the driver's check_knowledge_map verifies sync. The regenerate-and-stage step makes drift
 # structurally impossible.
 "$ROOT/knowledge-map/scripts/gen_knowledge_map.sh" >/dev/null
 git add "$("$ROOT/knowledge-map/scripts/gen_knowledge_map.sh" --print-map-path)" 2>/dev/null || true
-"$ROOT/knowledge-map/scripts/check_knowledge_map.sh"
+
+# The single general doctrine enforcer (registry + driver) — runs ALL registered check_*.sh and reports.
+"$ROOT/scripts/check_doctrines.sh"

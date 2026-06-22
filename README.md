@@ -94,6 +94,8 @@ Top-level project docs:
 - `COMMIT.md`
 - `docs/decisions/` (durable decision records, layer C)
 - `KNOWLEDGE_MAP.md` (derived retrieval index) + `docs/knowledge/` (fact cards) + `knowledge-map/` (the bundle/standard + tooling)
+- `DOCTRINE_ENFORCEMENT.md` (the doctrine-enforcement standard — 4th portable architecture) + `scripts/check_doctrines.sh` (the registry driver that runs every `scripts/check_*.sh`)
+- `TOOLBOX.md` — LinkedSpec's own diagnostic/debug toolbox (the probes, the `LINKEDSPEC_TRACE_LEVEL` trace framework, the `tools/` scripts, the gates); reach for it FIRST when diagnosing
 - `AGENTS.md` + mirrors (`CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`) — tool-neutral agent bootstrap pointers
 
 ## Local CI
