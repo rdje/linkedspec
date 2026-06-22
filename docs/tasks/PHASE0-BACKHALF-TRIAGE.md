@@ -6,11 +6,12 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (`.5.3.1` **DONE** — cleared the stale `plugin/` reference in `tools/run_ci_local.sh`
-  (NONCORE-QUARANTINE leftover, same class as `.5.1`/`.5.4`); **`bash tools/run_ci_local.sh` now passes green
-  end-to-end (EXIT 0)** — doctrine 2/2 + tracked-input audits + `perl -c` + phase0 960/960 `Result: PASS`. `.5.3`
-  split → `.5.3.1` (done) + `.5.3.2` (status/doc/KM gate-flips). Prior: `.5.4` **DONE** (phase0 fully GREEN 960/960
-  via 3 dark-tail re-blesses). Frontier → `.5.3.2` then `.6` (book `:AND`).)
+- Last updated: `2026-06-22` (`.5.3.2` **split** → `.5.3.2.1` (done) + `.5.3.2.2` (pending); **`.5.3.2.1` DONE** —
+  status & continuity reconciliation (DOC-ONLY): flipped the downstream gates now both phase0 (960/960) and the
+  full local gate (`tools/run_ci_local.sh` EXIT 0) are green — `NONCORE-QUARANTINE.V` blocker cleared→`pending`,
+  `LEGACY-VHDL-RETIRE.4`→`done` + `.5` cleared→`pending`, `SPEC-FORMAT-TERSE` impl-gate cleared (`.1.x`
+  PNT-eligible); synced `docs/TASK_TREE.md` index + the `rtlutils-regex-hang` KM card + live docs. Prior:
+  `.5.3.1` DONE (full local gate green). Frontier → `.5.3.2.2` (narrative-doc + book drift) → `.6` (book `:AND`).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -405,7 +406,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     = **exactly the 3 cleared, new-failure set empty**. No book impact (parse_mode behavior unchanged — only
     the non-idiomatic regression-test's expected AST shape; the 960 inspection is internal test infra).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `active` · Children: `.5.3.1` (done), `.5.3.2` (pending) — **split 2026-06-22** (too broad for one signoff slice; unblocked by green phase0 via `.5.4`)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `active` · Children: `.5.3.1` (done), `.5.3.2` (active/split — `.5.3.2.1` done, `.5.3.2.2` pending) — **split 2026-06-22** (too broad for one signoff slice; unblocked by green phase0 via `.5.4`)
   Goal: After green phase0, flip the downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`,
     `NONCORE-QUARANTINE.V`). Note: `NONCORE-QUARANTINE.V` itself owns clearing the `SPEC-FORMAT-TERSE` +
     `LEGACY-VHDL-RETIRE.4/.5` blockers + doc/book/KM sync, so `.5.3` may largely hand off to `.V`. **Split**
@@ -432,16 +433,49 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     gate passed"** (doctrine 2/2 PASS; audits pass; `perl -c` clean; `prove -v -Iperl t/phase0_regression.t`
     fully green 960/960). Book unaffected (CI tooling, not a user surface).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2` · Status: `pending` (created 2026-06-22)
-  Goal: Flip the downstream blocked statuses + doc/KM sync now that BOTH phase0 and the full local gate are
-    green: `NONCORE-QUARANTINE.V` (verify + clear its blocker), `LEGACY-VHDL-RETIRE.4` (RTLUtils hang cleared
-    + full gate green) + `.5` (doc/book/KM sync + flip the `SPEC-FORMAT-TERSE` blocker to "cleared" + fix the
-    `generic_fake_memory_module.plg`/`wrapgen.plg` doc drift), and `SPEC-FORMAT-TERSE`'s implementation-gate
-    blocker (the `RTLUTILS-REGEX-HANG` + "usable phase0" condition is now satisfied). This is a status/doc
-    reconciliation across trees — it does NOT itself start the `SPEC-FORMAT-TERSE` implementation leaves
-    (`.1.x`+), which become PNT-eligible once the gate is flipped.
-  Acceptance: the 3 downstream trees' green-phase0/full-gate blockers reflect "cleared" with evidence; KM +
-    live docs synced; no contradictory "blocked by phase0" text remains.
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2` · Status: `active` · Children: `.5.3.2.1` (done), `.5.3.2.2` (pending) — **split 2026-06-22**
+  Goal: Flip the downstream blocked statuses + doc/KM/book sync now that BOTH phase0 (960/960) and the full
+    local gate (`tools/run_ci_local.sh` EXIT 0) are green: `NONCORE-QUARANTINE.V`, `LEGACY-VHDL-RETIRE.4`/`.5`,
+    `SPEC-FORMAT-TERSE` impl-gate. **Split** after scoping showed it spans 3 downstream trees + the
+    `docs/TASK_TREE.md` index + a KM card + ~4 narrative/product docs (`ROADMAP_V2.md`, `ARCHITECTURE_STATE.md`
+    owner-tree, 2 mdBook files) + the live docs — too broad for one signoff slice, and the book/architecture
+    drift (the deferred `LEGACY-VHDL-RETIRE.5` body: deleted RTLUtils/FSMGen/VHDL::ConstantEval +
+    `noncore/`-relocated owners + `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2`) is a distinct,
+    pre-existing concern separable from the status-ledger flips (COMMIT.md: don't bundle unrelated changes).
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2.1` · Status: `done` (2026-06-22)
+  Goal: **Status & continuity reconciliation.** Flip the green-phase0/full-gate-green blocked statuses across
+    the task-tree ledgers + index + the KM hang card + live docs — and the `SPEC-FORMAT-TERSE` impl-gate.
+  Acceptance: the 3 downstream trees' green-phase0/full-gate blockers read "cleared/done" with evidence
+    (phase0 960/960; `tools/run_ci_local.sh` EXIT 0); index synced; KM card status current; no contradictory
+    "blocked by phase0 / blocked by the 173 / not green" text remains in the task-tree ledgers. **MET.**
+  Result (DOC-ONLY — task-tree ledgers + index + KM card + live docs; no engine/spec/test/book change):
+    • **`NONCORE-QUARANTINE.V`** blocker CLEARED (the 173 resolved) → `pending` (verification + downstream
+      blocker clears recorded; remaining doc/book/KM sync → `.5.3.2.2`, then `.V` is `done`).
+    • **`LEGACY-VHDL-RETIRE.4`** `blocked`→`done` (RTLUtils hang cleared + full gate green; the subtest-131
+      `HTML::PathLinks` hang is moot — `NONCORE-QUARANTINE.3` excised its smoke). **`.5`** blocker cleared →
+      `pending` (its narrative-doc + book drift body is `.5.3.2.2`).
+    • **`SPEC-FORMAT-TERSE`** implementation-gate blocker → CLEARED (usable-phase0 satisfied); `.1.x`+ now
+      PNT-eligible (NOT started here; migration policy already resolved = gradual-alias, ADR `0007`).
+    • **`docs/TASK_TREE.md`** index rows synced for all 4 trees.
+    • **KM card** [[rtlutils-regex-hang]] given a "Resolution" section + refreshed evidence/reverify (the
+      back-half hang track = `PHASE0-BACKHALF-TRIAGE`; subtest-131 smoke excised by `NONCORE-QUARANTINE.3`).
+    • **Live docs** (`MEMORY.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`) synced.
+  Verification: doc-only — `scripts/check_memory_architecture.sh` + the doctrine driver `scripts/check_doctrines.sh`
+    (MEMORY-ARCH + KNOWLEDGE-MAP) green; KM map regenerated/staged by the pre-commit hook; `grep` confirms no
+    stale "blocked by phase0 / by the 173 / not green" text remains in the task-tree ledgers.
+  Commit: (this commit)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2.2` · Status: `pending` (created 2026-06-22)
+  Goal: **Narrative-doc + book drift sync** (the deferred `LEGACY-VHDL-RETIRE.5` body). Remove the
+    deleted-module / relocated-owner drift from the product/architecture surfaces: `ROADMAP_V2.md:157` +
+    `ARCHITECTURE_STATE.md` (the "Project/domain utility owners" owner-tree block + the "Legacy Plugin Branch
+    Reading" domain-owner prose + the `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` lines 157/588)
+    + the mdBook (`specs-and-corpora/shipped-specs-and-corpora.md` package-owner list +
+    `architecture/owner-tree.md`) — reflecting that RTLUtils/FSMGen/VHDL::ConstantEval are DELETED
+    (LEGACY-VHDL-RETIRE) and the rest are relocated to `noncore/` (NONCORE-QUARANTINE). Then flip
+    `LEGACY-VHDL-RETIRE.5` → done and `NONCORE-QUARANTINE.V` → done.
+  Acceptance: no product/architecture doc presents a deleted/relocated module as a live `perl/` owner; the
+    `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift is gone; `mdbook build docs/linkedspec-book`
+    exit 0; the book stays variant-agnostic ([[mdbook-variant-agnostic]]).
   Verification: `pending`  ·  Commit: `pending`
 - ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `pending` (added 2026-06-21)
   Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex slots +
@@ -477,7 +511,9 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.5.4` | `done` 2026-06-22 | Re-blessed the **3 dark-tail failures** (TEST-ONLY): 952/953 `parse_mode` `qr/\?Top:/`→`qr/\$VAR1 = 1;/` (`return(1)`→scalar `1`, dumped via `LinkedSpec::Get`); 960 dropped the `noncore/`-moved `.plg`-corpus inspection, kept the core `PluginBridge.pm` check (plan 5→1). **phase0 fully GREEN 960/960**; `comm` = exactly the 3 cleared, 0 new. |
 | — | `.5.3` | `active` (split 2026-06-22) | Downstream gate-flips, decomposed → `.5.3.1` (done: full local gate green) + `.5.3.2` (status/doc/KM reconciliation). |
 | — | `.5.3.1` | `done` 2026-06-22 | Cleared the stale `plugin/` reference in `tools/run_ci_local.sh` (NONCORE-QUARANTINE leftover, same class as `.5.1`/`.5.4`); **`bash tools/run_ci_local.sh` now EXIT 0 green end-to-end** (doctrine 2/2 + audits + `perl -c` + phase0 960/960). Advances `NONCORE-QUARANTINE.V`. |
-| 1 | `.5.3.2` | `pending` | Flip the downstream blocked statuses + doc/KM sync (phase0 + full gate now green): `NONCORE-QUARANTINE.V`, `LEGACY-VHDL-RETIRE.4/.5`, `SPEC-FORMAT-TERSE` impl-gate; fix the `generic_fake_memory_module.plg`/`wrapgen.plg` doc drift. |
+| — | `.5.3.2` | `active` (split 2026-06-22) | Decomposed → `.5.3.2.1` (status & continuity reconciliation) + `.5.3.2.2` (narrative-doc + book drift). |
+| — | `.5.3.2.1` | `done` 2026-06-22 | **Status & continuity reconciliation** (DOC-ONLY): flipped `NONCORE-QUARANTINE.V` (blocker cleared→`pending`), `LEGACY-VHDL-RETIRE.4`→`done` + `.5` (cleared→`pending`), `SPEC-FORMAT-TERSE` impl-gate→cleared (`.1.x` PNT-eligible); synced `docs/TASK_TREE.md` index + the `rtlutils-regex-hang` KM card + live docs; no "blocked by phase0" text remains in the ledgers. |
+| 1 | `.5.3.2.2` | `pending` | **Narrative-doc + book drift sync** (deferred `LEGACY-VHDL-RETIRE.5` body): `ROADMAP_V2.md:157` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` + 2 mdBook files (`shipped-specs-and-corpora.md`, `architecture/owner-tree.md`). Then flip `LEGACY-VHDL-RETIRE.5` → done + `NONCORE-QUARANTINE.V` → done. |
 | 2 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
@@ -538,6 +574,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-22` | `.5.2` | input bisection (single 392B parse = 0.03s ⇒ NOT a regex); loop instrumentation (pos+defined/iter ⇒ iter2.. pos +0, defined ⇒ never-undef); generalized (single-form EOF; `(R rise)\n\n`); guarded multi-parse over all 76 conf+tablescript files; full foreground `perl -Iperl t/phase0_regression.t` (10-min budget) | `done` — root cause = parser never returns `undef` + the `while(1)` loop lacks a progress guard (NOT regex backtracking). Added the guard (TEST-ONLY). **76/76 corpus files ok; `ok 941 - corpus_regression`; suite reaches subtest 960** (vs old death at 941). Revealed 3 TEST-ONLY dark-tail failures (952/953/960 → `.5.4`). |
 | `2026-06-22` | `.5.4` | `LinkedSpec::Get` got-value dumps for 952/953 (Protocol A); `PluginBridge.pm` "Compatibility bridge" grep + `noncore/plugin/` `.plg` census; `perl -c -Iperl t/phase0_regression.t`; full foreground before/after `perl -Iperl t/phase0_regression.t` + `comm` name set-diff | `done` — before 957 ok / 3 not-ok (reach `not ok 960`, exit-255); after **960 ok / 0 not-ok, EXIT 0, reach `ok 960`, `1..960` reached**; `comm` = **exactly {952,953,960} cleared, new-failure set empty**. `t/phase0_regression.t` fully GREEN end-to-end. TEST-ONLY. |
 | `2026-06-22` | `.5.3.1` | ran `bash tools/run_ci_local.sh` (confirmed RED at `require_tracked_tree plugin`, EXIT 1); `bash -n tools/run_ci_local.sh`; re-ran the full gate after the fix | `done` — full local gate now **EXIT 0 end-to-end** ("[ci] local CI gate passed"): doctrine 2/2 PASS, tracked-input audits pass, `perl -c` clean, `prove -v -Iperl t/phase0_regression.t` = `1..960` / `Result: PASS` / `Files=1, Tests=960` (~198s). Stale `plugin/` ref dropped from both pathspec lists. |
+| `2026-06-22` | `.5.3.2.1` | DOC-ONLY status reconciliation; `scripts/check_memory_architecture.sh` + `scripts/check_doctrines.sh` (MEMORY-ARCH + KNOWLEDGE-MAP) green; KM map regenerated/staged by pre-commit hook; `grep` sweep for residual "blocked by phase0 / by the 173 / not green" in the task-tree ledgers | `done` — flipped `NONCORE-QUARANTINE.V` (cleared→`pending`), `LEGACY-VHDL-RETIRE.4`→`done`/`.5`(cleared→`pending`), `SPEC-FORMAT-TERSE` impl-gate→cleared; synced `docs/TASK_TREE.md` + `rtlutils-regex-hang` KM card + live docs. No engine/spec/test/book change. Frontier → `.5.3.2.2`. |
 
 ## Commit Log
 
@@ -557,7 +594,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.5.1` | `PHASE0-BACKHALF-TRIAGE.5.1 — remove stale corpus_regression plugin dataset (TEST-ONLY); exposes .5.2 (Lispish corpus catastrophic backtracking)` | commit `ef103fe` |
 | `.5.2` | `PHASE0-BACKHALF-TRIAGE.5.2 — fix Lispish corpus_regression hang (never-undef parser + unguarded multi-parse loop; forward-progress guard, TEST-ONLY); corpus_regression green, reveals 3 dark-tail re-blesses (.5.4)` | commit `e74149d` |
 | `.5.4` | `PHASE0-BACKHALF-TRIAGE.5.4 — re-bless 3 dark-tail failures (TEST-ONLY); phase0 fully GREEN 960/960` | commit `89e9526` |
-| `.5.3.1` | `PHASE0-BACKHALF-TRIAGE.5.3.1 — drop stale plugin/ ref in tools/run_ci_local.sh; full local gate green end-to-end` | this commit |
+| `.5.3.1` | `PHASE0-BACKHALF-TRIAGE.5.3.1 — drop stale plugin/ ref in tools/run_ci_local.sh; full local gate green end-to-end` | commit `b4e2265` |
+| `.5.3.2.1` | `PHASE0-BACKHALF-TRIAGE.5.3.2.1 — status & continuity reconciliation (flip downstream gates; DOC-ONLY)` | this commit |
 
 ## Changelog
 
@@ -758,3 +796,19 @@ can also proceed in parallel if the engine touch is deferred).
   "[ci] local CI gate passed". Advances `NONCORE-QUARANTINE.V`'s "full local gate green" acceptance. Book
   unaffected. **Next: `.5.3.2`** (flip the downstream blocked statuses + doc/KM sync across `NONCORE-QUARANTINE.V`,
   `LEGACY-VHDL-RETIRE.4/.5`, `SPEC-FORMAT-TERSE` impl-gate), then `.6` (book `:AND`).
+- `2026-06-22`: `.5.3.2` **SPLIT** + `.5.3.2.1` **DONE** (DOC-ONLY — task-tree ledgers + `docs/TASK_TREE.md`
+  index + the `rtlutils-regex-hang` KM card + live docs; no engine/spec/test/book change). Scoping `.5.3.2`
+  showed it spans 3 downstream trees + the index + a KM card + ~4 narrative/product docs (incl. 2 mdBook files)
+  + the live docs, and the book/architecture drift is a distinct pre-existing concern (the deferred
+  `LEGACY-VHDL-RETIRE.5` body) separable from the status flips — too broad for one signoff slice (COMMIT.md:
+  don't bundle unrelated changes). Split → `.5.3.2.1` (status & continuity reconciliation, done here) +
+  `.5.3.2.2` (narrative-doc + book drift sync, pending). **`.5.3.2.1`:** now both phase0 (960/960) and the full
+  local gate (`tools/run_ci_local.sh` EXIT 0) are green, flipped the downstream gates — `NONCORE-QUARANTINE.V`
+  blocker cleared (the 173 resolved) → `pending`; `LEGACY-VHDL-RETIRE.4` `blocked`→`done` (RTLUtils hang cleared
+  + full gate green; the subtest-131 `HTML::PathLinks` hang moot — its smoke was excised by
+  `NONCORE-QUARANTINE.3`) + `.5` blocker cleared → `pending`; `SPEC-FORMAT-TERSE` implementation-gate blocker →
+  CLEARED (`.1.x`+ now PNT-eligible, NOT started — migration policy already gradual-alias, ADR `0007`). Synced
+  the `docs/TASK_TREE.md` index rows (4 trees), gave the `rtlutils-regex-hang` KM card a "Resolution" section
+  + refreshed evidence/reverify, and updated the live docs. `grep` confirms no residual "blocked by phase0 / by
+  the 173 / not green" text in the ledgers. Self-check + doctrine driver green. Frontier → `.5.3.2.2` (the
+  narrative-doc + book drift sync), then `.6` (book `:AND`).

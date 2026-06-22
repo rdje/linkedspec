@@ -6,8 +6,9 @@
 - Status: `active` (created 2026-06-18)
 - Roadmap lane: `Overall roadmap — keep only portable/cross-variant code (retirement)`
 - Created: `2026-06-18`
-- Last updated: `2026-06-18` (`.1`/`.2`/`.3` done — subsystem retired, RTLUtils hang cleared; `.4`/`.5`
-  reblocked on a back-half fix track after a SECOND pre-existing hang was unmasked — see Back-Half Discovery)
+- Last updated: `2026-06-22` (`.4` **DONE** — RTLUtils hang cleared + full local gate green via
+  `PHASE0-BACKHALF-TRIAGE`; `.5` blocker **cleared** (`pending`, executed cross-tree by
+  `PHASE0-BACKHALF-TRIAGE.5.3.2.2`). Prior: `.1`/`.2`/`.3` done — subsystem retired, RTLUtils hang cleared.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -88,28 +89,31 @@ better than patching a regex in a module that is being deleted anyway.
   Commit: `LEGACY-VHDL-RETIRE.2` (landed with `.2`; see Commit Log)
 
 - ID: `LEGACY-VHDL-RETIRE.4`
-  Status: `blocked`
+  Status: `done` (2026-06-22)
   Goal: Confirm the RTLUtils hang is cleared. (Originally "full phase0 green" — **REVISED**: the
     retirement clears the RTLUtils hang but does NOT make phase0 green; see Back-Half Discovery.)
-  Acceptance: RTLUtils hang gone — **PROVEN 2026-06-18**: pristine HEAD `t/phase0_regression.t`
-    hangs at subtest 110 (`rtlutils_header_context_clause_package_owner_preserves_payload`); the
-    post-retirement suite runs **past** it to subtest 130+. "Full local gate green" is NOT
-    achievable here — blocked by a SEPARATE pre-existing back-half hang
-    (`HTML::PathLinks::link_path_tokens`, subtest 131) + back-half failures, which need their own
-    fix track (surfaced to the user).
-  Verification: RTLUtils hang cleared (pristine-worktree comparison). Full-suite green deferred to a
-    back-half fix track.
-  Commit: `pending`
+  Acceptance: RTLUtils hang gone — **PROVEN 2026-06-18** (pristine HEAD hangs at subtest 110; the
+    post-retirement suite runs past it). "Full local gate green" — the back-half hang/failures it
+    unmasked were owned + resolved by `PHASE0-BACKHALF-TRIAGE`, so this is now also **MET**:
+    `t/phase0_regression.t` is **960/960 GREEN** end-to-end and `bash tools/run_ci_local.sh` exits **0**.
+    (The second hang `HTML::PathLinks::link_path_tokens` at subtest 131 became moot — its smoke subtest
+    was excised when `NONCORE-QUARANTINE.3` relocated HTML::PathLinks to `noncore/`, so phase0 reaches
+    green without an HTML::PathLinks fix.) **MET.**
+  Verification: RTLUtils hang cleared (pristine-worktree comparison, 2026-06-18); full gate green via
+    `PHASE0-BACKHALF-TRIAGE` (phase0 960/960; `tools/run_ci_local.sh` EXIT 0, recorded in `.5.4`/`.5.3.1`).
+  Commit: `PHASE0-BACKHALF-TRIAGE.5.3.2.1` (cross-tree status reconciliation; this commit)
 
 - ID: `LEGACY-VHDL-RETIRE.5`
-  Status: `blocked`
+  Status: `pending` (blocker CLEARED 2026-06-22; executed cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
   Goal: Doc + book + KM sync — remove subsystem references and fix the pre-existing stale drift.
   Acceptance: `ROADMAP_V2.md`, `ARCHITECTURE_STATE.md` (owner tree + the stale
     `generic_fake_memory_module.plg` / `wrapgen.plg` `ceil_log2` prose), the mdBook
-    (`specs-and-corpora/shipped-specs-and-corpora.md` package-owner list), and the KM card are
-    re-synced; `SPEC-FORMAT-TERSE` blocker updated to "cleared".
-  Verification: `pending`
-  Commit: `pending`
+    (`specs-and-corpora/shipped-specs-and-corpora.md` package-owner list + `architecture/owner-tree.md`),
+    and the KM card are re-synced; `SPEC-FORMAT-TERSE` blocker updated to "cleared". (The
+    `SPEC-FORMAT-TERSE` blocker flip + the KM-card status update landed in
+    `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the remaining narrative-doc + book drift is `.5.3.2.2`.)
+  Verification: `pending` (→ `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
+  Commit: `pending` (→ `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
 
 ## Current Frontier
 
@@ -118,9 +122,9 @@ better than patching a regex in a module that is being deleted anyway.
 | — | `LEGACY-VHDL-RETIRE.1` | `done` | Read-only inventory complete (2026-06-18). |
 | — | `LEGACY-VHDL-RETIRE.2` | `done` | User confirmed scope (AskUserQuestion: "Full subsystem closure", 2026-06-18). 6 `.plg` + phase0 smoke removed. |
 | — | `LEGACY-VHDL-RETIRE.3` | `done` | 3 modules + dangling comments removed (landed with `.2`). RTLUtils hang cleared (proven). |
-| 🚧 | **BACK-HALF DECISION PENDING (user)** | `blocked` | The retirement cleared the RTLUtils hang but UNMASKED a second pre-existing hang (`HTML::PathLinks::link_path_tokens`, subtest 131) + back-half failures — so phase0 is still not green and the `SPEC-FORMAT-TERSE` gate stays blocked. Needs a user decision on a back-half fix track (own a new tree? scope?). |
-| — | `LEGACY-VHDL-RETIRE.4` | `blocked` | RTLUtils hang cleared (proven). "Full gate green" blocked by the back-half hang(s) — see Back-Half Discovery. |
-| — | `LEGACY-VHDL-RETIRE.5` | `blocked` | Doc/book/KM sync. Cannot flip `SPEC-FORMAT-TERSE` blocker to "cleared" — phase0 still blocked by the back-half. Also fix the `generic_fake_memory_module.plg`/`wrapgen.plg` doc drift. |
+| — | ~~BACK-HALF DECISION~~ | `resolved` 2026-06-22 | The back-half hang/failures the retirement unmasked were owned + resolved by `PHASE0-BACKHALF-TRIAGE` (phase0 **960/960 green** + full gate EXIT 0). The subtest-131 `HTML::PathLinks` hang became moot — its smoke was excised when `NONCORE-QUARANTINE.3` relocated the module to `noncore/`. |
+| — | `LEGACY-VHDL-RETIRE.4` | `done` 2026-06-22 | RTLUtils hang cleared (proven 2026-06-18) **and** full local gate now green via `PHASE0-BACKHALF-TRIAGE` — flipped in `.5.3.2.1`. |
+| 1 | `LEGACY-VHDL-RETIRE.5` | `pending` (blocker cleared) | Doc/book/KM sync. The `SPEC-FORMAT-TERSE` blocker flip + KM-card status landed in `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the remaining narrative-doc + book drift (`ROADMAP_V2`/`ARCHITECTURE_STATE` owner-tree + 2 mdBook files + `generic_fake_memory_module.plg`/`wrapgen.plg`) is executed in `.5.3.2.2`. |
 
 ## Inventory (LEGACY-VHDL-RETIRE.1 deliverable — verified 2026-06-18)
 
@@ -218,13 +222,13 @@ Removing the RTLUtils hang (subtest 110) revealed that the **entire back half of
 
 ## Blockers
 
-- `.1`/`.2`/`.3` are `done`. The **RTLUtils hang is cleared** (proven). `.4` (full gate green) and
-  `.5` (flip the `SPEC-FORMAT-TERSE` blocker to "cleared") are `blocked` by a **NEW, pre-existing,
-  unrelated blocker**: the back-half hang(s)+failures (`HTML::PathLinks::link_path_tokens` and
-  possibly more) that the retirement unmasked. Unblock condition: a back-half fix track lands a
-  green (or at least non-hanging) `t/phase0_regression.t`. Next task: surface the back-half decision
-  to the user; the `.5` doc-drift fixes (`generic_fake_memory_module.plg`/`wrapgen.plg`) can proceed
-  independently.
+- `.1`/`.2`/`.3`/`.4` are `done`. The **RTLUtils hang is cleared** (proven). ~~`.4`/`.5` blocked by the
+  back-half hang(s)+failures the retirement unmasked.~~ **CLEARED 2026-06-22.** The `PHASE0-BACKHALF-TRIAGE`
+  tree owned + resolved the whole back half (the 173 + the corpus/dark-tail tail), and the subtest-131
+  `HTML::PathLinks::link_path_tokens` hang became moot when `NONCORE-QUARANTINE.3` relocated the module to
+  `noncore/` and excised its smoke subtest — so `t/phase0_regression.t` is now **960/960 GREEN** end-to-end
+  and `bash tools/run_ci_local.sh` exits **0**. `.4` is now `done`; `.5` is `pending` and executed
+  cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2` (the narrative-doc + book drift sync).
 
 ## Verification Log
 
@@ -232,6 +236,7 @@ Removing the RTLUtils hang (subtest 110) revealed that the **entire back half of
 | --- | --- | --- | --- |
 | `2026-06-18` | `LEGACY-VHDL-RETIRE.1` | `git grep` reference sweep (modules + public symbols); `wc -l` counts; existence check of doc-named `.plg`; `scripts/check_memory_architecture.sh`; KM gate | Done — zero core functional dependency; 6 dependent `.plg` + ≈206 phase0 smoke lines; ≈6,701-line footprint; `generic_fake_memory_module.plg`/`wrapgen.plg` confirmed nonexistent (doc drift). NOTE: `.1`'s "regex at line 746" claim was later **corrected** in `.2`/`.3` (the hang is in `add_header_n_context_clause`, RTLUtils.pm:104). Self-check + KM gate pass. |
 | `2026-06-18` | `LEGACY-VHDL-RETIRE.2`+`.3` | `git rm` 6 `.plg` + 3 modules; surgical phase0 edits; `git grep`=0 refs; `perl -c` core + phase0 OK; **pristine-HEAD worktree run** (proves original hangs at subtest 110; post-retirement runs past to 130+); direct `link_path_tokens` timing | Done — RTLUtils hang cleared. **Discovered** a second pre-existing back-half hang (`HTML::PathLinks::link_path_tokens`, subtest 131) + back-half failures — unrelated to the retirement (proven). Hang attribution corrected. |
+| `2026-06-22` | `LEGACY-VHDL-RETIRE.4` | RTLUtils hang cleared (2026-06-18 pristine-worktree proof) + full local gate green via `PHASE0-BACKHALF-TRIAGE` (phase0 960/960; `bash tools/run_ci_local.sh` EXIT 0). subtest-131 `HTML::PathLinks` hang moot (smoke excised by `NONCORE-QUARANTINE.3`) | Done — `.4` flipped to `done`; `.5` blocker cleared (`pending`, → `PHASE0-BACKHALF-TRIAGE.5.3.2.2`). Doc-only status reconciliation (`PHASE0-BACKHALF-TRIAGE.5.3.2.1`). |
 
 ## Commit Log
 
@@ -239,9 +244,19 @@ Removing the RTLUtils hang (subtest 110) revealed that the **entire back half of
 | --- | --- | --- |
 | `LEGACY-VHDL-RETIRE.1` | `LEGACY-VHDL-RETIRE.1 — own retirement tree + read-only inventory of the Perl-only legacy VHDL/RTL/FSM subsystem` | Tree created `active`; KM card [[rtlutils-regex-hang]]; no engine/spec/test code changed; removal scope surfaced to user. |
 | `LEGACY-VHDL-RETIRE.2`+`.3` | `LEGACY-VHDL-RETIRE.2+.3 — retire the Perl-only legacy VHDL/RTL/FSM subsystem (3 modules + 6 .plg + phase0 smoke)` | User-confirmed "Full subsystem closure". RTLUtils hang cleared; back-half pre-existing hang/failures discovered + surfaced. |
+| `LEGACY-VHDL-RETIRE.4` | `PHASE0-BACKHALF-TRIAGE.5.3.2.1 — status & continuity reconciliation` (cross-tree) | RTLUtils hang cleared + full gate green (phase0 960/960; `tools/run_ci_local.sh` EXIT 0). `.4`→`done`; `.5` blocker cleared. |
 
 ## Changelog
 
+- `2026-06-22` (`.4` done; `.5` blocker cleared): The back-half hang/failures that reblocked `.4`/`.5` were
+  owned + resolved by `PHASE0-BACKHALF-TRIAGE` — `t/phase0_regression.t` is **960/960 green** end-to-end and
+  `bash tools/run_ci_local.sh` exits **0**. The subtest-131 `HTML::PathLinks::link_path_tokens` hang became
+  moot when `NONCORE-QUARANTINE.3` relocated the module to `noncore/` and excised its smoke. `.4` flipped
+  `blocked`→`done` (RTLUtils hang cleared + full gate green); `.5` flipped `blocked`→`pending` (its doc/book/KM
+  drift sync — `ROADMAP_V2`/`ARCHITECTURE_STATE` owner-tree + 2 mdBook files + the
+  `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift — is executed cross-tree in
+  `PHASE0-BACKHALF-TRIAGE.5.3.2.2`). Doc-only status reconciliation in `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; no
+  code/spec/test change.
 - `2026-06-18` (`.2`+`.3` landed): User confirmed "Full subsystem closure" (AskUserQuestion).
   Retired the subsystem — `git rm` 3 modules (`RTLUtils.pm`/`FSMGen.pm`/`VHDL/ConstantEval.pm`) + 6
   dependent `.plg`; surgically cleaned the phase0 migration-smoke (8 whole-subtest deletes + 7 mixed

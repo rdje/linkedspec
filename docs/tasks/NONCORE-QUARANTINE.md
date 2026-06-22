@@ -6,7 +6,9 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — keep only portable/cross-variant code (non-core quarantine)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-19` (`.1` inventory done; `.2` relocated the 12 zero-ref modules to `noncore/`)
+- Last updated: `2026-06-22` (`.V` blocker CLEARED — the 173 back-half failures resolved by
+  `PHASE0-BACKHALF-TRIAGE`; phase0 960/960 green + full gate EXIT 0. `.V` `blocked`→`pending`; doc/book/KM
+  sync → `PHASE0-BACKHALF-TRIAGE.5.3.2.2`. Prior: `.1` inventory; `.2` relocated 12 zero-ref modules.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -89,13 +91,20 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
     relocate/retire from the core.)
   Verification: `pending`
 
-- ID: `NONCORE-QUARANTINE.V` · Status: `blocked`
+- ID: `NONCORE-QUARANTINE.V` · Status: `pending` (blocker CLEARED 2026-06-22 — the 173 are resolved + both
+    gates green; remaining doc/book/KM sync executed cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`, after
+    which `.V` is `done`)
   Goal: Verify `t/phase0_regression.t` runs to completion green + full local gate; doc/book/KM sync;
     clear the `SPEC-FORMAT-TERSE` + `LEGACY-VHDL-RETIRE.4/.5` blockers.
-  Blocker: phase0 now runs the back half (no hangs) but reveals **~173 PRE-EXISTING core-engine test
-    failures** (see Back-Half Core Failures, below) — unrelated to this relocation; must be resolved
-    (own a separate tree) before phase0 can be green.
-  Verification: `pending`
+  Blocker: ~~phase0 now runs the back half (no hangs) but reveals **~173 PRE-EXISTING core-engine test
+    failures** — must be resolved before phase0 can be green.~~ **CLEARED 2026-06-22.** The
+    `PHASE0-BACKHALF-TRIAGE` tree triaged + resolved all 173 (108 STALE re-blessed TEST-ONLY + 2 authorized
+    engine defects fixed) and the corpus/dark-tail tail: `t/phase0_regression.t` is now **960/960 GREEN**
+    end-to-end and the full local gate `bash tools/run_ci_local.sh` exits **0** ("[ci] local CI gate passed").
+    The verification + the `LEGACY-VHDL-RETIRE.4`/`SPEC-FORMAT-TERSE` blocker clears landed in
+    `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the `LEGACY-VHDL-RETIRE.5` doc/book drift sync lands in `.5.3.2.2`.
+  Verification: phase0 960/960 green + `tools/run_ci_local.sh` EXIT 0 (owned/recorded by
+    `PHASE0-BACKHALF-TRIAGE.5.4` + `.5.3.1`). Remaining `.V` doc/book/KM sync → `PHASE0-BACKHALF-TRIAGE.5.3.2.2`.
 
 ## Back-Half Core Failures (discovered 2026-06-19 — NOT caused by this work)
 
@@ -117,9 +126,9 @@ contention slows runs but is not the cause.)
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `.1`, `.2`, `.3`, `.4` | `done` | Inventory + ALL non-core `.pm`/`.plg` relocated to `noncore/` + island subtests excised; `perl/` is core-only. |
-| 🚧 | **BACK-HALF CORE FAILURES DECISION (user)** | `blocked` | ~173 pre-existing core-engine test failures revealed (NOT from this work). Triage stale-vs-real in a new tree before phase0 can be green. |
-| 1 | `.N` | `blocked` | POSTPONE — plugin machinery + deprecated core stubs (facade change). |
-| 2 | `.V` | `blocked` | Green phase0 + gate; blocked by the 173. |
+| — | ~~BACK-HALF CORE FAILURES DECISION~~ | `resolved` 2026-06-22 | The 173 were owned + resolved by `PHASE0-BACKHALF-TRIAGE` (phase0 now **960/960 green** + full gate EXIT 0). |
+| 1 | `.V` | `pending` (blocker cleared) | Green phase0 + full gate **achieved**. Verification + `.4`/`SPEC-FORMAT-TERSE` blocker clears done in `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; remaining doc/book/KM sync → `.5.3.2.2`, then `.V` is `done`. |
+| 2 | `.N` | `blocked` | POSTPONE — plugin machinery + deprecated core stubs (facade change). |
 
 ## Decisions
 
@@ -145,9 +154,12 @@ contention slows runs but is not the cause.)
 
 ## Blockers
 
-- `.N` POSTPONED (core-facade). `.V` blocked by the **~173 pre-existing back-half core-engine test
-  failures** (NOT from this relocation — engine bytes unchanged; masked by the original hang). Needs
-  its own triage/fix tree before phase0 can be green.
+- `.N` POSTPONED (core-facade). ~~`.V` blocked by the **~173 pre-existing back-half core-engine test
+  failures**.~~ **`.V` blocker CLEARED 2026-06-22** — the `PHASE0-BACKHALF-TRIAGE` tree triaged + resolved
+  all 173 (and the corpus/dark-tail tail); `t/phase0_regression.t` is **960/960 green** and
+  `tools/run_ci_local.sh` exits 0. `.V` now `pending`: its verification + the `LEGACY-VHDL-RETIRE.4`/
+  `SPEC-FORMAT-TERSE` blocker clears landed in `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the remaining
+  `LEGACY-VHDL-RETIRE.5` doc/book/KM drift sync lands in `.5.3.2.2`, after which `.V` is `done`.
 
 ## Verification Log
 
@@ -166,6 +178,12 @@ contention slows runs but is not the cause.)
 
 ## Changelog
 
+- `2026-06-22` (`.V` blocker cleared): The 173 back-half failures that blocked `.V` are **resolved** by the
+  `PHASE0-BACKHALF-TRIAGE` tree — `t/phase0_regression.t` is **960/960 GREEN** end-to-end and the full local
+  gate `bash tools/run_ci_local.sh` exits **0**. `.V` `blocked`→`pending`; its verification + the
+  `LEGACY-VHDL-RETIRE.4`/`SPEC-FORMAT-TERSE` blocker clears were performed cross-tree in
+  `PHASE0-BACKHALF-TRIAGE.5.3.2.1` (this commit), and the remaining `LEGACY-VHDL-RETIRE.5` doc/book/KM drift
+  sync is owned by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`. No code/spec/test change in this tree.
 - `2026-06-19` (`.3`+`.4`): Relocated ALL 23 remaining domain `.pm` + 13 `.plg` to `noncore/`
   (`git mv`, layout preserved) and excised the 37-subtest legacy-migration block from
   `t/phase0_regression.t` (source lines 3312–5378, anchor-splice). `perl/` is now core-only;

@@ -6,9 +6,10 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-18` (ACTIVATED — user ratified the terse direction; `.0` done via ADR
-  `0007`; `SPEC-LANG-REFERENCE` book scorch paused for this pivot. Implementation leaves `.1.x`+ are
-  gated by `RTLUTILS-REGEX-HANG` + a usable `t/phase0_regression.t` — execution-order decision pending.)
+- Last updated: `2026-06-22` (**implementation gate CLEARED** — `t/phase0_regression.t` 960/960 green +
+  `tools/run_ci_local.sh` EXIT 0 via `PHASE0-BACKHALF-TRIAGE`; `.1.x`+ are now PNT-eligible (policy already
+  resolved = gradual-alias, ADR `0007`). Status flip recorded cross-tree in
+  `PHASE0-BACKHALF-TRIAGE.5.3.2.1`. Prior: ACTIVATED 2026-06-18; `.0` done via ADR `0007`.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -47,12 +48,14 @@ survive even if the card is lost, and turns each into a pickable leaf.
 
 - **ACTIVATED 2026-06-18 (user).** `.0` (ratify + ADR `0007`) is **done**. The tree is now the
   active work unit.
-- **Implementation leaves (`.1.x`+) remain gated.** Per the user (2026-06-16) and ADR `0007`,
-  per-leaf acceptance needs the full `t/phase0_regression.t` gate, which is **hung by
-  `RTLUTILS-REGEX-HANG`** (the `RTLUtils::add_header_n_context_clause` catastrophic-regex phase0
-  hang). `.0` was design-only and not gated; `.1.x`+ need the gate restored first. The
-  execution-order choice — fix `RTLUTILS-REGEX-HANG` first vs a scoped check — is pending the user
-  (surfaced 2026-06-18).
+- **Implementation leaves (`.1.x`+) are now UNGATED (2026-06-22).** Per the user (2026-06-16) and ADR
+  `0007`, per-leaf acceptance needs the full `t/phase0_regression.t` gate, which was hung by
+  `RTLUTILS-REGEX-HANG`. That gate is now **restored + green**: `LEGACY-VHDL-RETIRE` retired the hanging
+  subsystem, `NONCORE-QUARANTINE` relocated the rest of the domain island (excising the second back-half
+  hang's smoke), and `PHASE0-BACKHALF-TRIAGE` resolved the 173 back-half failures + the corpus/dark-tail
+  tail — so `t/phase0_regression.t` is **960/960 green** and `tools/run_ci_local.sh` exits **0**. `.1.x`+ are
+  PNT-eligible; the execution-order question is closed (no scoped-check workaround needed — the real gate is
+  back).
 - Migration policy ratified in ADR `0007`: **canonical-new-form + deprecated-old-alias (gradual)**,
   then explicit retirement (open to a user override toward one-shot hard rename).
 
@@ -234,11 +237,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
-| 🚧 | **EXECUTION DECISION PENDING (user)** | `blocked` | Implementation leaves `.1.x`+ need a usable `t/phase0_regression.t`, **hung by `RTLUTILS-REGEX-HANG`**. Two questions surfaced to the user: (i) confirm gradual-alias migration vs one-shot hard rename; (ii) fix `RTLUTILS-REGEX-HANG` first (own a tree) vs proceed with a scoped check. Resolve before picking `.1.1`. |
-| 1 | `SPEC-FORMAT-TERSE.1.1` | `pending` (gated) | Round 1 — auto-existing variables; `declare(...)` becomes an unnecessary deprecated alias. First implementation leaf once the gate is restored + policy confirmed. |
-| 2 | `SPEC-FORMAT-TERSE.1.2` | `pending` (gated) | Remove `scalar()/array()/hash()` wrappers + add type inference (RHS shape + arg position). |
-| 3 | `SPEC-FORMAT-TERSE.1.4` | `pending` (gated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
-| … | `.1.3`,`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` (gated) | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
+| — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
+| 1 | `SPEC-FORMAT-TERSE.1.1` | `pending` (**ungated**) | Round 1 — auto-existing variables; `declare(...)` becomes an unnecessary deprecated alias. First implementation leaf — now PNT-eligible (gate cleared, policy = gradual-alias). |
+| 2 | `SPEC-FORMAT-TERSE.1.2` | `pending` (ungated) | Remove `scalar()/array()/hash()` wrappers + add type inference (RHS shape + arg position). |
+| 3 | `SPEC-FORMAT-TERSE.1.4` | `pending` (ungated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
+| … | `.1.3`,`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` (ungated) | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
 
@@ -316,20 +319,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 ## Blockers
 
 - `.0` (ratify + ADR) is **done** (design-only — not gated). Migration policy is **resolved**
-  (gradual-alias, ADR 0007). The remaining gate on the **implementation leaves (`.1.x`+)** is a usable
+  (gradual-alias, ADR 0007). The remaining gate on the **implementation leaves (`.1.x`+)** was a usable
   `t/phase0_regression.t`.
-- **RETIREMENT DONE, BUT GATE NOT YET CLEARED (2026-06-18).** The [`LEGACY-VHDL-RETIRE`](LEGACY-VHDL-RETIRE.md)
-  tree retired the self-contained Perl-only legacy VHDL/RTL/FSM subsystem (3 modules + 6 dependent
-  `.plg` + phase0 smoke ≈ 6,701 lines; user-confirmed "full closure"). That **cleared the RTLUtils
-  hang** — proven: the pristine HEAD suite hangs at subtest 110 (`add_header_n_context_clause`,
-  recursive `add_package_re` at `RTLUtils.pm:104`); the post-retirement suite runs **past** it to
-  subtest 130+. (The earlier `RTLUtils.pm:746` attribution was corrected.) **HOWEVER** removing that
-  hang **unmasked a SECOND, pre-existing, unrelated hang** — `HTML::PathLinks::link_path_tokens`
-  (subtest 131) — plus other back-half failures (everything after subtest 110 had been dark). So
-  `t/phase0_regression.t` is **still not green/usable**, and this `SPEC-FORMAT-TERSE` gate **remains
-  blocked** — now by the back-half, not RTLUtils. Unblock = a back-half fix track lands a
-  non-hanging/green phase0 (decision surfaced to the user). See KM card [[rtlutils-regex-hang]] and
-  `LEGACY-VHDL-RETIRE` Open Questions.
+- **GATE CLEARED 2026-06-22 — implementation leaves `.1.x`+ are now PNT-eligible.** The
+  [`LEGACY-VHDL-RETIRE`](LEGACY-VHDL-RETIRE.md) tree retired the Perl-only legacy VHDL/RTL/FSM subsystem
+  (clearing `RTLUTILS-REGEX-HANG` — the subtest-110 `add_header_n_context_clause` recursive-regex hang at
+  `RTLUtils.pm:104`), and [`NONCORE-QUARANTINE`](NONCORE-QUARANTINE.md) relocated the remaining domain
+  island to `noncore/` (which also excised the subtest-131 `HTML::PathLinks::link_path_tokens` smoke that
+  had been the SECOND, unrelated back-half hang). The [`PHASE0-BACKHALF-TRIAGE`](PHASE0-BACKHALF-TRIAGE.md)
+  tree then triaged + resolved the 173 back-half failures (108 STALE re-blessed TEST-ONLY + 2 user-authorized
+  engine defects fixed, ADR `0008`) and the corpus/dark-tail tail. **Result: `t/phase0_regression.t` is
+  960/960 GREEN end-to-end and `bash tools/run_ci_local.sh` exits 0** ("[ci] local CI gate passed"). The
+  "usable phase0" gate on `.1.x`+ is therefore **satisfied**; those leaves are now PNT-eligible. (This
+  reconciliation does NOT start them — that is a separate PNT selection. The migration policy is already
+  resolved (gradual-alias, ADR 0007).) See KM card [[rtlutils-regex-hang]] and `PHASE0-BACKHALF-TRIAGE.5`.
 
 ## Verification Log
 
@@ -347,6 +350,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 ## Changelog
 
+- `2026-06-22`: **Implementation gate CLEARED — `.1.x`+ now PNT-eligible.** The usable-`t/phase0_regression.t`
+  gate on the implementation leaves is satisfied: `LEGACY-VHDL-RETIRE` cleared `RTLUTILS-REGEX-HANG`,
+  `NONCORE-QUARANTINE` relocated the rest of the domain island (excising the second back-half hang's smoke),
+  and `PHASE0-BACKHALF-TRIAGE` resolved the 173 back-half failures + the corpus/dark-tail tail → phase0 is
+  **960/960 green** and `bash tools/run_ci_local.sh` exits **0**. Migration policy was already resolved
+  (gradual-alias, ADR `0007`), so no remaining decision blocks `.1.1`. Status reconciliation recorded
+  cross-tree in `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; this tree's design + leaves are unchanged (no engine/book
+  change here — the implementation leaves are a future PNT selection).
 - `2026-06-18`: **Activated + ratified (`.0` done).** The user activated the tree during
   `SPEC-LANG-REFERENCE.10.5.4` (AskUserQuestion: "Activate SPEC-FORMAT-TERSE now") and reinforced the
   terse semantics over several messages (`assign`→`=`/`set`; no-sigil typed bare identifiers; type
