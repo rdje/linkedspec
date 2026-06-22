@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (`.2.4` **DONE** — cluster F ×3 + G STALE ×2 re-blessed/restored, TEST-ONLY; phase0 6→1 (only the `corpus_regression` natural-stop tail remains), all 5 cleared, 0 regressions. Frontier → `.5`)
+- Last updated: `2026-06-22` (`.5` **SPLIT**; `.5.1` **DONE** — removed the stale `corpus_regression` plugin dataset (a `NONCORE-QUARANTINE` leftover; TEST-ONLY). This **exposed a real catastrophic-backtracking blocker** in the conf/tablescript Lispish corpus parse (`.5.2`; [[lispish-corpus-catastrophic-backtracking]]) — so the subtest-941 "tail" was never a natural stop. phase0 NOT green; `.5.2` blocked on a user direction decision. Frontier → `.5.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -111,7 +111,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 
 ## Task Tree
 
-- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `active` · Children: `.1` (done), `.2`, `.3` (done), `.4` (done), `.5`, `.6`
+- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `active` · Children: `.1` (done), `.2` (done), `.3` (done), `.4` (done), `.5` (active), `.6`
 - ID: `PHASE0-BACKHALF-TRIAGE.1` · Status: `done` (2026-06-19)
   Goal: Read-only cluster-by-cluster stale-vs-real triage of the 173 failures, with evidence + scope.
   Acceptance: per-cluster verdict + scope/effort + recommended fix plan, decomposed into `.2+`. **Met.**
@@ -335,11 +335,44 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     = **111 → 109 failing**, set-diff vs post-`.3` = exactly the 2 Defect #2 subtests cleared, zero
     regressions. Blocker: **cleared 2026-06-21** (ADR `0008`).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `pending`
-  Goal: Verify a fully green `t/phase0_regression.t` end-to-end (all 959 subtests), including the
-    881–959 tail not observed in the `.1` run (the run was terminated at subtest 881; confirm no fresh
-    hang at `vhdl_small_blocker_helper_flow_eliminates_raw_fallback`/`corpus_regression`). Then flip the
-    downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`, `NONCORE-QUARANTINE.V`).
+- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `active` · Children: `.5.1` (done), `.5.2` (blocked), `.5.3` (blocked)
+  Goal: Achieve + verify a fully green `t/phase0_regression.t` end-to-end (the whole run, incl. the
+    long-dark tail after `corpus_regression`), then flip the downstream gates. **Split 2026-06-22**
+    after `.5.1` resolved the surface stale-reference and exposed a real catastrophic-backtracking
+    blocker in `corpus_regression` (`.5.2`).
+- ID: `PHASE0-BACKHALF-TRIAGE.5.1` · Status: `done` (2026-06-22)
+  Goal: Resolve the stale `corpus_regression` plugin dataset (the subtest-941 "No tests run"/exit-255
+    tail) and decide natural-stop-vs-real-gap. TEST-ONLY (`t/phase0_regression.t`).
+  Result: **Determined = real stale reference, NOT a natural stop.** `NONCORE-QUARANTINE.3` `git mv`'d
+    the 13 `.plg` to `noncore/plugin/` and rmdir'd `plugin/`, but left the `plugin_plg_via_pplugin_spec`
+    dataset inside the surviving `corpus_regression` subtest, whose `discover_dir_files_by_suffix`
+    `opendir`s the now-deleted `../plugin` and dies (→ "No tests run", exit-255; the run aborts at 941
+    so subtests 942-959 never ran). Removed that one non-core `.plg` dataset (the core gate stays
+    core-only, not reaching into `noncore/`); `plan tests` auto-adjusts 8→6, with a rationale comment so
+    it isn't re-added. **Exposed `.5.2`** — the conf/tablescript Lispish parse (previously masked by the
+    plugin die) catastrophically backtracks.
+  Verification: `perl -c -Iperl t/phase0_regression.t` OK; baseline confirmed subtests 1-940 green + the
+    `Cannot open directory '.../plugin'` die at 941; post-fix re-run advanced *into* corpus_regression
+    and hung (→ `.5.2`). No book impact (corpus_regression is internal test infra; grep confirms no book
+    reference). Self-check + KM gate pass.  ·  Commit: (this commit)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.2` · Status: `blocked` (created 2026-06-22)
+  Goal: Resolve the catastrophic-backtracking Lispish parse of the `conf/`+`tablescript/` corpus in
+    `corpus_regression` so phase0 reaches green end-to-end. See [[lispish-corpus-catastrophic-backtracking]].
+  Evidence: a full `perl -Iperl t/phase0_regression.t` ran **374 CPU-min** stuck on the first conf file;
+    a fork+SIGKILL census hard-killed **~21/22 conf files (≈100%)** at 6s each (`alarm()` cannot interrupt
+    a C-level regex); the `ebnf` dataset is healthy (7 files, 0.1-0.6s); `ambitiming.conf` is **392 bytes**
+    ⇒ a ReDoS-style regex in the Lispish spec/generated parser, not an input-size problem. Long-masked
+    (behind the subtest-110 RTLUtils hang, then the plugin `opendir` die).
+  Blocker: needs a user direction decision — (A) quarantine the Lispish corpus datasets (conf+tablescript)
+    from the core gate, keep ebnf (doctrine-aligned, mirrors `.5.1`); (B) fix the Lispish catastrophic
+    regex (engine/spec work, needs authorization per [[feedback_do-not-fix-reference-engine]]); (C) add a
+    hard per-file timeout guard (fails-fast instead of hanging).
+  Verification: `pending`  ·  Commit: `pending`
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `blocked` (created 2026-06-22)
+  Goal: After green phase0, flip the downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`,
+    `NONCORE-QUARANTINE.V`). Note: `NONCORE-QUARANTINE.V` itself owns clearing the `SPEC-FORMAT-TERSE` +
+    `LEGACY-VHDL-RETIRE.4/.5` blockers + doc/book/KM sync, so `.5.3` may largely hand off to `.V`.
+  Blocker: green phase0 (blocked by `.5.2`).
   Verification: `pending`  ·  Commit: `pending`
 - ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `pending` (added 2026-06-21)
   Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex slots +
@@ -370,8 +403,10 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.2.2.2.2` | `done` 2026-06-21 | Cluster B1-accumulator re-bless — 4 `return_a`/`return_m` subtests rewritten to canonical `.return(1).return(array("?Top:", entry_groups()))` + subtest-1 `RETURN_A`/`RETURN_M`→`RETURN` node re-bless, TEST-ONLY; phase0 30→26, `comm` set-diff = exactly the 4 cleared, 0 regressions. |
 | — | `.2.3` | `done` 2026-06-22 | Cluster C `emit_context` ×20 re-blessed/rewritten (return(1)→`return 1` resolved, RETURN_A→RETURN, retired-helper passthrough, removed `_lower_return_array_statement`, 2 plan off-by-ones, restored expr-bearing return specs), TEST-ONLY; phase0 26→6, exactly the 20 cleared, 0 regressions. |
 | — | `.2.4` | `done` 2026-06-22 | Cluster F ×3 (migration-summary corpus restored to genuinely-unresolved forms) + G STALE ×2 (`return(1)` AST = scalar `1`) + F2 obsolete-compat-premise adapted to live helpers, TEST-ONLY; phase0 6→1, exactly the 5 cleared, 0 regressions. |
-| 1 | `.5` | `pending` | Green-phase0 verification (incl. the `corpus_regression` subtest-941 tail) + downstream gate flips. |
-| 2 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.5.1` | `done` 2026-06-22 | Resolved the stale `corpus_regression` plugin dataset (subtest-941 "No tests run"/exit-255 = a `NONCORE-QUARANTINE` leftover, NOT a natural stop). Removed the non-core `.plg` dataset (TEST-ONLY); exposed `.5.2`. |
+| 1 | `.5.2` | `blocked` | **Real blocker:** the conf/tablescript Lispish corpus parse catastrophically backtracks (≈100% of conf files; 374 CPU-min on one 392B file). Needs a user direction decision (quarantine vs fix vs guard). [[lispish-corpus-catastrophic-backtracking]] |
+| 2 | `.5.3` | `blocked` | Flip downstream gates after green phase0 (blocked by `.5.2`); may hand off to `NONCORE-QUARANTINE.V`. |
+| 3 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -391,8 +426,11 @@ can also proceed in parallel if the engine touch is deferred).
 
 - ~~Authorize the reference-engine fixes (`.3`/`.4`)?~~ **RESOLVED 2026-06-21** — user authorized BOTH
   engine fixes (ADR `0008`); the engine-frozen doctrine otherwise stands (this is the named exception).
-- Did subtests 881–959 run clean? The `.1` run stopped at 881; `MEMORY` claims a ~940–959 reach with 173
-  total, implying 881+ are clean — confirm in `.5` with a longer-budget run.
+- ~~Did subtests 881–959 run clean?~~ **PARTIALLY ANSWERED 2026-06-22 (`.5.1`):** subtests **1-940 are
+  green** (a full baseline reached them). Subtest **941 (`corpus_regression`) is the catastrophic
+  blocker** (`.5.2`). Subtests **942-959 remain UNVERIFIED** — no run has ever passed `corpus_regression`
+  to reach them (it died at the plugin `opendir`, now hangs in the Lispish corpus parse). They become
+  verifiable only once `.5.2` is resolved.
 - (`.2.3`, deferred hygiene) The 13 `emit_context_avoids_deps_*_dep_builder` subtests still carry dead
   `local *LinkedSpec::Deps::*` traps (the package was removed; the traps can't fire and the "Deps stays
   unloaded" guarantee is covered by `emit_context_require_avoids_linkedspec_deps_load`). `.2.3` kept them
@@ -402,9 +440,15 @@ can also proceed in parallel if the engine touch is deferred).
 ## Blockers
 
 - ~~`.3`/`.4` blocked pending user authorization to touch the reference Perl engine.~~ **CLEARED
-  2026-06-21 (ADR `0008`).** Green phase0 (and `SPEC-FORMAT-TERSE` / `LEGACY-VHDL-RETIRE.4-.5` /
-  `NONCORE-QUARANTINE.V`) stays blocked until both engine defects are fixed AND the 108 stale are
-  re-blessed AND `.5` verifies the full 959-subtest run.
+  2026-06-21 (ADR `0008`).** Both engine defects fixed; all 108 STALE re-blessed (cluster `.2` complete).
+- **`.5.2` — green-phase0 blocker (OPEN 2026-06-22).** `corpus_regression`'s `conf/`+`tablescript/`
+  datasets parse via the **Lispish** spec, which **catastrophically backtracks** (≈100% of conf files;
+  374 CPU-min on a 392-byte file; `alarm()` can't interrupt a C-level regex). Long-masked behind the
+  subtest-110 RTLUtils hang, then the plugin `opendir` die; `.5.1` removed the last mask and exposed it.
+  Green phase0 — and the downstream `SPEC-FORMAT-TERSE` / `LEGACY-VHDL-RETIRE.4-.5` /
+  `NONCORE-QUARANTINE.V` gates — stays blocked until `.5.2` is resolved. **Unblock condition:** a user
+  direction decision (quarantine the Lispish corpus datasets vs fix the regex vs add a hard-timeout
+  guard). See [[lispish-corpus-catastrophic-backtracking]].
 
 ## Verification Log
 
@@ -421,6 +465,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-21` | `.2.2.2.2` | pre-flight probe replicating every assertion of all 4 subtests (`LinkedSpec::Get`: ACODE/ICODE/BCODE equality, fallback, node coverage, hit counts) → all PASS; scope grep (passing `return_a(pipe_operator)`/`return_m(Top)`@39745 untouched); `perl -c`; full `perl -Iperl t/phase0_regression.t` (complete TAP to corpus tail) + `comm` name set-diff vs post-`.2.2.2.1` baseline | `done` — 30 → 26 failing; cleared = exactly the 4 (`blind_call_fluent…`, `action_chain…`, `fluent_and_structured_blocks…`, `structured_blocks…`); new-failure set empty. TEST-ONLY. (One earlier run SIGALRM-killed by transient external load-32 CPU contention; clean low-load re-run gave the diff.) |
 | `2026-06-22` | `.2.3` | comprehensive ground-truth probe of every changed assertion before editing; targeted unique-match edits (20 subtests); `perl -c`; after-run cleared the 11 cluster-C subtests ≤803 (0 regressions in 1–803) + a load-independent focused Test::More harness re-ran the 9 late meta/nested subtests (804–857) = 9/9 pass; authoritative low-load full `perl -Iperl t/phase0_regression.t` + `comm` name set-diff vs baseline | `done` — 26 → 6 failing; cleared = exactly the 20 cluster-C `emit_context`; new-failure set empty. TEST-ONLY. (Two earlier runs SIGALRM-killed at the corpus tail by a transient external load-29 `rustc` build; clean low-load re-run gave the diff.) |
 | `2026-06-22` | `.2.4` | ground-truth probe of all 5 F/G (G return values; F1/F3 restored-corpus aggregates; F2 as-is + option-A); targeted unique-match edits; `perl -c`; load-independent focused Test::More harness (5/5 pass); full `perl -Iperl t/phase0_regression.t` reaching subtest 879+ with 0 failures through the run + `comm` name set-diff vs post-`.2.3` baseline | `done` — 6 → 1 failing; cleared = exactly the 5 F/G; new-failure set empty (only `corpus_regression` natural-stop remains). TEST-ONLY. |
+| `2026-06-22` | `.5.1` | `perl -c -Iperl t/phase0_regression.t`; full baseline run (1-940 green, `opendir '.../plugin'` die at 941, exit-255); post-fix re-run (advanced into corpus_regression then hung); fork+SIGKILL corpus census (`alarm()`-immune); ebnf-dataset hard-timeout check; module-path confirmation (stale `PERL5LIB` hazard) | `done` — removed the stale plugin dataset; **determined subtest-941 = a real stale reference, NOT a natural stop**; EXPOSED `.5.2` (Lispish conf/tablescript catastrophic backtracking — ~21/22 conf files, 374 CPU-min; ebnf healthy). phase0 NOT green. TEST-ONLY. |
 
 ## Commit Log
 
@@ -436,7 +481,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.2.2.2.1` | `PHASE0-BACKHALF-TRIAGE.2.2.2.1 — re-bless cluster B1-array (33 return_array→return(array), TEST-ONLY); 17 phase0 failures cleared` | commit `6b9288c` |
 | `.2.2.2.2` | `PHASE0-BACKHALF-TRIAGE.2.2.2.2 — re-bless cluster B1-accumulator (4 return_a/return_m, TEST-ONLY); 4 phase0 failures cleared` | commit `50d0308` |
 | `.2.3` | `PHASE0-BACKHALF-TRIAGE.2.3 — re-bless/rewrite cluster C emit_context (20, TEST-ONLY); 20 phase0 failures cleared, zero regressions` | commit `9ab8c56` |
-| `.2.4` | `PHASE0-BACKHALF-TRIAGE.2.4 — re-bless cluster F+G (5, TEST-ONLY); 5 phase0 failures cleared, zero regressions` | this commit |
+| `.2.4` | `PHASE0-BACKHALF-TRIAGE.2.4 — re-bless cluster F+G (5, TEST-ONLY); 5 phase0 failures cleared, zero regressions` | commit `75289f7` |
+| `.5.1` | `PHASE0-BACKHALF-TRIAGE.5.1 — remove stale corpus_regression plugin dataset (TEST-ONLY); exposes .5.2 (Lispish corpus catastrophic backtracking)` | this commit |
 
 ## Changelog
 
@@ -573,3 +619,19 @@ can also proceed in parallel if the engine touch is deferred).
   5/5; full run cleared exactly the 5 F/G (phase0 **6→1**, only the `corpus_regression` natural-stop tail
   remains), 0 regressions. Cluster `.2` (re-bless the 108 STALE) is now COMPLETE. Frontier → `.5`
   (green-phase0 verification incl. the corpus tail + downstream gate flips). Book unaffected.
+- `2026-06-22`: `.5` **SPLIT**; `.5.1` **DONE** (TEST-ONLY, `t/phase0_regression.t`; engine/spec
+  untouched). Investigating the `.5` "corpus tail" determined subtest-941 was a **real stale reference,
+  not a natural stop**: `NONCORE-QUARANTINE.3` `git mv`'d the 13 `.plg` to `noncore/plugin/` and rmdir'd
+  `plugin/`, but left the `plugin_plg_via_pplugin_spec` dataset in `corpus_regression`, whose
+  `discover_dir_files_by_suffix` `opendir`s the deleted `../plugin` and dies (→ "No tests run", exit-255;
+  the run aborts at 941 so 942-959 never ran). Removed that one non-core `.plg` dataset (core gate stays
+  core-only; `plan` auto-adjusts 8→6) with a rationale comment. **This EXPOSED `.5.2`** — re-running
+  advanced *into* `corpus_regression` and hung: a full run burned **374 CPU-min** stuck on the first conf
+  file, and a fork+SIGKILL census (alarm-immune) hard-killed **~21/22 conf files (≈100%)** — the Lispish
+  parse of the conf/tablescript corpus **catastrophically backtracks** (`ambitiming.conf` is 392 bytes ⇒
+  ReDoS-style regex, not input size); the `ebnf` dataset is healthy (7 files, 0.1-0.6s). Long-masked
+  behind the subtest-110 RTLUtils hang then the plugin die. Also caught a stale-`PERL5LIB` env hazard
+  (points at `pgen/fx`; ad-hoc probes must use `-Iperl`). Split `.5` into `.5.1` (done), `.5.2`
+  (blocked — the catastrophic Lispish parse; needs a user direction decision) and `.5.3` (blocked — gate
+  flips, after green). KM card [[lispish-corpus-catastrophic-backtracking]]. phase0 NOT green. Book
+  unaffected (corpus_regression is internal test infra). **Next: surface the `.5.2` decision to the user.**

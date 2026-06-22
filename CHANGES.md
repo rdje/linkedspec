@@ -1,6 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.1 — remove stale corpus_regression plugin dataset (TEST-ONLY); exposes .5.2 (Lispish corpus catastrophic backtracking)
+
+`.5` ("green-phase0 verification + gate flips") **split**; `.5.1` done. **No engine/spec/production code
+touched** — only `t/phase0_regression.t` (one dataset removed from `corpus_regression`) + docs/KM.
+
+**The determination `.5` asked for:** subtest-941 `corpus_regression` ("No tests run", exit-255) is a
+**real stale reference, NOT a natural-stop boundary.** `corpus_regression` runs 4 datasets in order;
+dataset #1 (`plugin_plg_via_pplugin_spec`) `opendir`s `../plugin`, which `NONCORE-QUARANTINE.3` removed
+(it `git mv`'d the 13 `.plg` to `noncore/plugin/` and rmdir'd `plugin/`) but left the dataset behind.
+`discover_dir_files_by_suffix` does `opendir … or die`, so the subtest dies before any assertion → "No
+tests run" + exit-255, **aborting the whole run at 941** (so the trace subtests 942-959 never ran). Every
+prior session's "clean exit-255 corpus stop" was this death masking the rest of the subtest.
+
+**Fix (TEST-ONLY):** removed the non-core `.plg` dataset from `corpus_regression`'s `@datasets` (the core
+regression gate stays core-only and does not reach into `noncore/`; `plan tests` auto-adjusts 8→6), with a
+rationale comment so it isn't re-added. The surviving datasets are conf/tablescript (via Lispish) + ebnf.
+
+**This EXPOSED a real blocker (`.5.2`, green-phase0).** Re-running advanced *into* `corpus_regression`
+and hung: a full `perl -Iperl t/phase0_regression.t` burned **374 CPU-min** (~100% CPU) stuck on the
+first conf file. A fork+SIGKILL census (note: `alarm()` cannot interrupt a single C-level regex match)
+hard-killed **~21/22 conf files (≈100%)** at 6s each — the **Lispish** parse of the conf/tablescript
+corpus **catastrophically backtracks**. `ambitiming.conf` is **392 bytes**, so it's a ReDoS-style regex
+in the Lispish spec/generated parser, not an input-size issue. The **`ebnf` dataset is healthy** (7 files,
+0.1-0.6s). Long-masked behind the subtest-110 RTLUtils hang, then the plugin `opendir` death. Captured in
+KM card `lispish-corpus-catastrophic-backtracking.md`. `.5.2` is **blocked on a user direction decision**
+(quarantine the Lispish corpus datasets vs fix the regex vs add a hard-timeout guard).
+
+**Also found:** a stale `PERL5LIB=…/pgen/fx/perl` in the shell points at a different, older checkout, so a
+bare `use LinkedSpec` loads the wrong module — ad-hoc probes must use `perl -Iperl` (the tests already do).
+
+**Verification:** `perl -c -Iperl t/phase0_regression.t` OK; baseline full run confirmed subtests 1-940
+green + the `Cannot open directory '.../plugin'` die at 941; post-fix re-run + the corpus census established
+`.5.2`; ebnf hard-timeout check (7/7 ok). phase0 **NOT green** (blocked by `.5.2`). Self-check + KM gate
+pass. Book unaffected (`corpus_regression` is internal test infra; grep confirms no book reference).
+
 ## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.2.4 — re-bless cluster F+G (5, TEST-ONLY); 5 phase0 failures cleared, zero regressions (cluster .2 complete)
 
 Closes cluster `.2` (the 108 STALE re-blesses). **No engine/spec/production code touched** — only

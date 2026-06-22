@@ -42884,16 +42884,11 @@ EBNF
 };
 
 subtest 'corpus_regression' => sub {
+    # The former `plugin/*.plg` corpus dataset was retired here: NONCORE-QUARANTINE.3
+    # relocated the 13 `.plg` files to `noncore/plugin/` and removed the `plugin/`
+    # directory, so the `.plg` corpus is non-core. The core regression gate stays
+    # core-only and does not reach into `noncore/`. (PHASE0-BACKHALF-TRIAGE.5.1)
     my @datasets = (
-        {
-            name   => 'plugin_plg_via_pplugin_spec',
-            dir    => File::Spec->catdir($Bin, '..', 'plugin'),
-            suffix => '.plg',
-            probe  => sub {
-                my ($file) = @_;
-                return parse_with_linkedspec('pplugin', $file, 'HASH');
-            },
-        },
         {
             name   => 'conf_via_lispish_spec',
             dir    => File::Spec->catdir($Bin, '..', 'conf'),
