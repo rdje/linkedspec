@@ -3,12 +3,13 @@
 ## Metadata
 
 - Tree ID: `LEGACY-VHDL-RETIRE`
-- Status: `active` (created 2026-06-18)
+- Status: `done` (created 2026-06-18; **completed 2026-06-22** — all 5 leaves done)
 - Roadmap lane: `Overall roadmap — keep only portable/cross-variant code (retirement)`
 - Created: `2026-06-18`
-- Last updated: `2026-06-22` (`.4` **DONE** — RTLUtils hang cleared + full local gate green via
-  `PHASE0-BACKHALF-TRIAGE`; `.5` blocker **cleared** (`pending`, executed cross-tree by
-  `PHASE0-BACKHALF-TRIAGE.5.3.2.2`). Prior: `.1`/`.2`/`.3` done — subsystem retired, RTLUtils hang cleared.)
+- Last updated: `2026-06-22` (**`.5` DONE** — doc/book/KM sync executed cross-tree by
+  `PHASE0-BACKHALF-TRIAGE.5.3.2.2`; **tree COMPLETE** (all 5 leaves done). The Perl-only VHDL/RTL/FSM-generation
+  subsystem is retired (3 modules + 6 `.plg` deleted), the RTLUtils hang is cleared, the full local gate is green,
+  and every product/architecture surface now reflects the deletion. Prior: `.4` DONE (full gate green).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -47,7 +48,7 @@ better than patching a regex in a module that is being deleted anyway.
 ## Task Tree
 
 - ID: `LEGACY-VHDL-RETIRE`
-  Status: `active`
+  Status: `done` (2026-06-22 — all 5 leaves done)
   Goal: Retire the Perl-only legacy VHDL/RTL/FSM-generation subsystem; clear `RTLUTILS-REGEX-HANG`
   Children: `.1`, `.2`, `.3`, `.4`, `.5`
 
@@ -104,16 +105,21 @@ better than patching a regex in a module that is being deleted anyway.
   Commit: `PHASE0-BACKHALF-TRIAGE.5.3.2.1` (cross-tree status reconciliation; this commit)
 
 - ID: `LEGACY-VHDL-RETIRE.5`
-  Status: `pending` (blocker CLEARED 2026-06-22; executed cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
+  Status: `done` (2026-06-22 — executed cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
   Goal: Doc + book + KM sync — remove subsystem references and fix the pre-existing stale drift.
   Acceptance: `ROADMAP_V2.md`, `ARCHITECTURE_STATE.md` (owner tree + the stale
     `generic_fake_memory_module.plg` / `wrapgen.plg` `ceil_log2` prose), the mdBook
     (`specs-and-corpora/shipped-specs-and-corpora.md` package-owner list + `architecture/owner-tree.md`),
-    and the KM card are re-synced; `SPEC-FORMAT-TERSE` blocker updated to "cleared". (The
+    and the KM card are re-synced; `SPEC-FORMAT-TERSE` blocker updated to "cleared". **MET.** (The
     `SPEC-FORMAT-TERSE` blocker flip + the KM-card status update landed in
-    `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the remaining narrative-doc + book drift is `.5.3.2.2`.)
-  Verification: `pending` (→ `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
-  Commit: `pending` (→ `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
+    `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the narrative-doc + book drift landed in `.5.3.2.2`.)
+  Verification: Done 2026-06-22 (`PHASE0-BACKHALF-TRIAGE.5.3.2.2`) — `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md`
+    owner-tree/legacy-branch + the two mdBook files re-synced to reflect RTLUtils/FSMGen/VHDL::ConstantEval
+    DELETED + the rest relocated to `noncore/`; the stale `generic_fake_memory_module.plg`/`wrapgen.plg`/
+    `ceil_log2` prose removed; `mdbook build docs/linkedspec-book` EXIT 0; book stays variant-agnostic;
+    `git grep` confirms no deleted/relocated module is presented as a live `perl/` owner. KM `rtlutils-regex-hang`
+    card already given its Resolution section in `.5.3.2.1`.
+  Commit: `PHASE0-BACKHALF-TRIAGE.5.3.2.2` (cross-tree)
 
 ## Current Frontier
 
@@ -124,7 +130,7 @@ better than patching a regex in a module that is being deleted anyway.
 | — | `LEGACY-VHDL-RETIRE.3` | `done` | 3 modules + dangling comments removed (landed with `.2`). RTLUtils hang cleared (proven). |
 | — | ~~BACK-HALF DECISION~~ | `resolved` 2026-06-22 | The back-half hang/failures the retirement unmasked were owned + resolved by `PHASE0-BACKHALF-TRIAGE` (phase0 **960/960 green** + full gate EXIT 0). The subtest-131 `HTML::PathLinks` hang became moot — its smoke was excised when `NONCORE-QUARANTINE.3` relocated the module to `noncore/`. |
 | — | `LEGACY-VHDL-RETIRE.4` | `done` 2026-06-22 | RTLUtils hang cleared (proven 2026-06-18) **and** full local gate now green via `PHASE0-BACKHALF-TRIAGE` — flipped in `.5.3.2.1`. |
-| 1 | `LEGACY-VHDL-RETIRE.5` | `pending` (blocker cleared) | Doc/book/KM sync. The `SPEC-FORMAT-TERSE` blocker flip + KM-card status landed in `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the remaining narrative-doc + book drift (`ROADMAP_V2`/`ARCHITECTURE_STATE` owner-tree + 2 mdBook files + `generic_fake_memory_module.plg`/`wrapgen.plg`) is executed in `.5.3.2.2`. |
+| — | `LEGACY-VHDL-RETIRE.5` | `done` 2026-06-22 | Doc/book/KM sync complete (executed cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`): `ROADMAP_V2`/`ARCHITECTURE_STATE` owner-tree/legacy-branch + 2 mdBook files synced to the deleted/relocated reality; `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift gone; `mdbook build` EXIT 0. **Tree COMPLETE.** |
 
 ## Inventory (LEGACY-VHDL-RETIRE.1 deliverable — verified 2026-06-18)
 
@@ -245,9 +251,18 @@ Removing the RTLUtils hang (subtest 110) revealed that the **entire back half of
 | `LEGACY-VHDL-RETIRE.1` | `LEGACY-VHDL-RETIRE.1 — own retirement tree + read-only inventory of the Perl-only legacy VHDL/RTL/FSM subsystem` | Tree created `active`; KM card [[rtlutils-regex-hang]]; no engine/spec/test code changed; removal scope surfaced to user. |
 | `LEGACY-VHDL-RETIRE.2`+`.3` | `LEGACY-VHDL-RETIRE.2+.3 — retire the Perl-only legacy VHDL/RTL/FSM subsystem (3 modules + 6 .plg + phase0 smoke)` | User-confirmed "Full subsystem closure". RTLUtils hang cleared; back-half pre-existing hang/failures discovered + surfaced. |
 | `LEGACY-VHDL-RETIRE.4` | `PHASE0-BACKHALF-TRIAGE.5.3.2.1 — status & continuity reconciliation` (cross-tree) | RTLUtils hang cleared + full gate green (phase0 960/960; `tools/run_ci_local.sh` EXIT 0). `.4`→`done`; `.5` blocker cleared. |
+| `LEGACY-VHDL-RETIRE.5` | `PHASE0-BACKHALF-TRIAGE.5.3.2.2 — narrative-doc + book drift sync` (cross-tree) | Doc/book/KM sync complete; **tree COMPLETE** (all 5 leaves done). |
 
 ## Changelog
 
+- `2026-06-22` (`.5` done — **tree COMPLETE**): The doc/book/KM drift sync (the last open leaf) landed cross-tree
+  in `PHASE0-BACKHALF-TRIAGE.5.3.2.2`: `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + the
+  two mdBook files (`shipped-specs-and-corpora.md`, `architecture/owner-tree.md`) were re-synced to reflect the
+  three deleted modules (`RTLUtils`/`FSMGen`/`VHDL::ConstantEval`) + the rest of the domain island relocated to
+  `noncore/`; the stale `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` prose is gone; `mdbook build`
+  EXIT 0; book stays variant-agnostic. `.5` flipped `pending`→`done`; the tree is now `done` (all 5 leaves). The
+  Perl-only legacy VHDL/RTL/FSM-generation subsystem is fully retired and every product/architecture surface
+  reflects it. DOC-ONLY; no engine/spec/test change.
 - `2026-06-22` (`.4` done; `.5` blocker cleared): The back-half hang/failures that reblocked `.4`/`.5` were
   owned + resolved by `PHASE0-BACKHALF-TRIAGE` — `t/phase0_regression.t` is **960/960 green** end-to-end and
   `bash tools/run_ci_local.sh` exits **0**. The subtest-131 `HTML::PathLinks::link_path_tokens` hang became

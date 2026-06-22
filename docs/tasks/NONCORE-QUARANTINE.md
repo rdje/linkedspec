@@ -3,12 +3,13 @@
 ## Metadata
 
 - Tree ID: `NONCORE-QUARANTINE`
-- Status: `active` (created 2026-06-19)
+- Status: `done` (created 2026-06-19; **primary acceptance met 2026-06-22** — `.N` deferred as an explicit Non-Goal)
 - Roadmap lane: `Overall roadmap — keep only portable/cross-variant code (non-core quarantine)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (`.V` blocker CLEARED — the 173 back-half failures resolved by
-  `PHASE0-BACKHALF-TRIAGE`; phase0 960/960 green + full gate EXIT 0. `.V` `blocked`→`pending`; doc/book/KM
-  sync → `PHASE0-BACKHALF-TRIAGE.5.3.2.2`. Prior: `.1` inventory; `.2` relocated 12 zero-ref modules.)
+- Last updated: `2026-06-22` (**`.V` DONE** — its doc/book/KM sync landed cross-tree in
+  `PHASE0-BACKHALF-TRIAGE.5.3.2.2`; phase0 960/960 green + full gate EXIT 0; every product/architecture surface
+  now reflects the relocation/deletion. Tree primary acceptance MET; `.N` (plugin-machinery fate) `deferred` as an
+  explicit Non-Goal. Prior: `.1`–`.4` relocated all non-core `.pm`/`.plg` to `noncore/`.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -49,7 +50,9 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
 
 ## Task Tree
 
-- ID: `NONCORE-QUARANTINE`  · Status: `active` · Children: `.1`(done) `.2`(done) `.3` `.4` `.N`(postpone) `.V`
+- ID: `NONCORE-QUARANTINE`  · Status: `done` (2026-06-22 — primary acceptance met: all non-core relocated to
+    `noncore/`, phase0 green, docs/book/KM synced; `.N` deferred as an explicit Non-Goal) · Children: `.1`(done)
+    `.2`(done) `.3`(done) `.4`(done) `.N`(deferred) `.V`(done)
 
 - ID: `NONCORE-QUARANTINE.1` · Status: `done`
   Goal: Extract the full dependency tree; classify KEEP vs non-core. (Was `DEADCODE-PRUNE.1`.)
@@ -85,15 +88,17 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
     subtests were within the same excised block; `plugin/` emptied + rmdir'd. (Landed with `.3`.)
   Commit: `NONCORE-QUARANTINE.3+.4` (with `.3`)
 
-- ID: `NONCORE-QUARANTINE.N` · Status: `blocked` (POSTPONE — core-facade change)
+- ID: `NONCORE-QUARANTINE.N` · Status: `deferred` (POSTPONE — core-facade change; explicit Non-Goal of this tree)
   Goal: Decide the plugin machinery's fate — `PPlugin`/`PluginBridge`/`PluginRegistry` + the
     deprecated `LinkedSpec.pm` stubs + their subtests. ("AUTOLOAD feels too magical" — eventual
     relocate/retire from the core.)
-  Verification: `pending`
+  Consequence of deferral: the plugin machinery stays in the core facade for now (reachable only through the
+    deprecated stubs); it does not block the quarantine's primary acceptance. Revisit as its own tree when the
+    facade change is scoped.
+  Verification: `deferred`
 
-- ID: `NONCORE-QUARANTINE.V` · Status: `pending` (blocker CLEARED 2026-06-22 — the 173 are resolved + both
-    gates green; remaining doc/book/KM sync executed cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`, after
-    which `.V` is `done`)
+- ID: `NONCORE-QUARANTINE.V` · Status: `done` (2026-06-22 — the 173 resolved + both gates green; doc/book/KM
+    sync executed cross-tree by `PHASE0-BACKHALF-TRIAGE.5.3.2.2`)
   Goal: Verify `t/phase0_regression.t` runs to completion green + full local gate; doc/book/KM sync;
     clear the `SPEC-FORMAT-TERSE` + `LEGACY-VHDL-RETIRE.4/.5` blockers.
   Blocker: ~~phase0 now runs the back half (no hangs) but reveals **~173 PRE-EXISTING core-engine test
@@ -103,8 +108,11 @@ edges** (verified). Method captured the dynamic edges (`get_parser`→spec via `
     end-to-end and the full local gate `bash tools/run_ci_local.sh` exits **0** ("[ci] local CI gate passed").
     The verification + the `LEGACY-VHDL-RETIRE.4`/`SPEC-FORMAT-TERSE` blocker clears landed in
     `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; the `LEGACY-VHDL-RETIRE.5` doc/book drift sync lands in `.5.3.2.2`.
-  Verification: phase0 960/960 green + `tools/run_ci_local.sh` EXIT 0 (owned/recorded by
-    `PHASE0-BACKHALF-TRIAGE.5.4` + `.5.3.1`). Remaining `.V` doc/book/KM sync → `PHASE0-BACKHALF-TRIAGE.5.3.2.2`.
+  Verification: Done 2026-06-22 — phase0 960/960 green + `tools/run_ci_local.sh` EXIT 0 (owned/recorded by
+    `PHASE0-BACKHALF-TRIAGE.5.4` + `.5.3.1`); `SPEC-FORMAT-TERSE` + `LEGACY-VHDL-RETIRE.4` blockers cleared in
+    `.5.3.2.1`; the `.V` doc/book/KM sync (incl. `LEGACY-VHDL-RETIRE.5`) landed in `PHASE0-BACKHALF-TRIAGE.5.3.2.2`
+    — every product/architecture surface now reflects the relocation/deletion; `mdbook build` EXIT 0. **`.V` done.**
+  Commit: `PHASE0-BACKHALF-TRIAGE.5.3.2.2` (cross-tree)
 
 ## Back-Half Core Failures (discovered 2026-06-19 — NOT caused by this work)
 
@@ -127,8 +135,8 @@ contention slows runs but is not the cause.)
 | --- | --- | --- | --- |
 | — | `.1`, `.2`, `.3`, `.4` | `done` | Inventory + ALL non-core `.pm`/`.plg` relocated to `noncore/` + island subtests excised; `perl/` is core-only. |
 | — | ~~BACK-HALF CORE FAILURES DECISION~~ | `resolved` 2026-06-22 | The 173 were owned + resolved by `PHASE0-BACKHALF-TRIAGE` (phase0 now **960/960 green** + full gate EXIT 0). |
-| 1 | `.V` | `pending` (blocker cleared) | Green phase0 + full gate **achieved**. Verification + `.4`/`SPEC-FORMAT-TERSE` blocker clears done in `PHASE0-BACKHALF-TRIAGE.5.3.2.1`; remaining doc/book/KM sync → `.5.3.2.2`, then `.V` is `done`. |
-| 2 | `.N` | `blocked` | POSTPONE — plugin machinery + deprecated core stubs (facade change). |
+| — | `.V` | `done` 2026-06-22 | Green phase0 + full gate achieved; verification + blocker clears in `.5.3.2.1`; doc/book/KM sync in `.5.3.2.2`. **Tree primary acceptance MET.** |
+| — | `.N` | `deferred` | POSTPONE — plugin machinery + deprecated core stubs (facade change); an explicit Non-Goal of this tree. Revisit as its own tree. |
 
 ## Decisions
 
@@ -178,6 +186,13 @@ contention slows runs but is not the cause.)
 
 ## Changelog
 
+- `2026-06-22` (`.V` done — **tree primary acceptance MET**): The `.V` doc/book/KM sync landed cross-tree in
+  `PHASE0-BACKHALF-TRIAGE.5.3.2.2` — `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + the two
+  mdBook files now reflect that the non-core domain island is relocated to `noncore/` (this tree) and the Perl-only
+  VHDL/RTL/FSM subsystem is deleted (`LEGACY-VHDL-RETIRE`); `perl/` is core-only; `mdbook build` EXIT 0. With phase0
+  960/960 green + `tools/run_ci_local.sh` EXIT 0 (recorded in `.5.4`/`.5.3.1`) and the `SPEC-FORMAT-TERSE` +
+  `LEGACY-VHDL-RETIRE.4` blockers cleared (`.5.3.2.1`), every acceptance criterion of this tree is met. `.V`
+  `pending`→`done`; the tree is `done` with `.N` (plugin-machinery fate) `deferred` as an explicit Non-Goal. DOC-ONLY.
 - `2026-06-22` (`.V` blocker cleared): The 173 back-half failures that blocked `.V` are **resolved** by the
   `PHASE0-BACKHALF-TRIAGE` tree — `t/phase0_regression.t` is **960/960 GREEN** end-to-end and the full local
   gate `bash tools/run_ci_local.sh` exits **0**. `.V` `blocked`→`pending`; its verification + the

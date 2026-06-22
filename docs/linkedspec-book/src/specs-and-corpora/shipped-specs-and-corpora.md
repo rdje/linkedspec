@@ -10,7 +10,7 @@ This matters for two reasons:
 The current repository does not have one single `corpus/` directory. Instead, the shipped material is spread across:
 
 - `specs/`
-- `plugin/`
+- `noncore/plugin/` (relocated legacy `.plg` corpus)
 - `conf/`
 - `tablescript/`
 - `ebnf/`
@@ -32,7 +32,7 @@ It also prevents a common parser-project failure mode: a parser can look clean a
 
 - `specs/`
 - `t/phase0_regression.t`
-- `plugin/`
+- `noncore/plugin/` (relocated legacy `.plg` corpus)
 - `conf/`
 - `tablescript/`
 - `ebnf/`
@@ -161,43 +161,28 @@ That descriptor mode is heavily used by regression tests because it exposes rule
 
 For the detailed rule-by-rule explanation of the shipped grammar-file parser, read [`ebnf.spec` Walkthrough](ebnf-spec-walkthrough.md).
 
-## `plugin/`
+## `noncore/plugin/` (relocated legacy `.plg` corpus)
 
-`plugin/` contains legacy `.plg` files.
-
-Architecturally, this is transition material, not the future identity of LinkedSpec.
+The repository used to ship a top-level `plugin/` directory of legacy `.plg` files. As of the `NONCORE-QUARANTINE` and `LEGACY-VHDL-RETIRE` work it is **no longer part of the active product tree**: the root `plugin/` directory is gone, and `t/phase0_regression.t` is green (960/960) without it.
 
 > **Perl reference implementation.** The `.plg` plugin system, the `PPlugin` runtime,
-> and the package-owner migration narrative in this section are part of the **Perl
-> reference backend's** legacy transition. They are **not** part of the backend-neutral
-> `.spec` contract — a new backend (Rust, Julia, Dart, …) does not implement any of it.
-> The detail is kept here as a faithful record of the reference implementation's ongoing
-> plugin retirement.
+> and the package-owner migration it once drove are part of the **Perl reference
+> backend's** legacy transition. They are **not** part of the backend-neutral `.spec`
+> contract — a new backend (Rust, Julia, Dart, ...) implements none of it. The detail
+> is kept only as a faithful record of the reference implementation's plugin retirement.
 
-It is still important because:
+Two passes resolved the legacy island:
 
-- `pplugin.spec` parses `.plg` files,
-- plugin compatibility remains publicly visible in the current facade,
-- regression checks still prove legacy plugin discovery and parsing behavior where needed,
-- shipped `.plg` files now avoid direct `PPlugin->get(...)` and direct `LinkedSpec` plugin-bridge dispatch helper calls; migrated helper reuse goes through explicit package owners, while package-level code can still inject or default dynamic resolution when it is truly needed,
-- clearer non-plugin/domain owners such as `HTTP::FileAccess`, `InteractivePrompt`, `HTML::PathLinks`, `Text::VariableSubstitution`, `VHDL::ConstantEval`, `MSOffice::Excel`, `QC::Flow`, `QC::Summary`, `QC::TclInterconn`, `FSMGen`, `Timing::SetupHold`, `Timing::StanBackend`, `Timing::StanOmap2430cBackend`, and `Table::GenericFilter` now carry real behavior that used to live in `.plg` files,
-- extracted wrappers are not permanent by default; `plugin/string.plg`, `plugin/cgi.plg`, `plugin/genericfilter.plg`, `plugin/msoffice.plg`, `plugin/vhdconst_eval.plg`, and `plugin/yesno.plg` have been removed now that their package owners handle all repo-owned usage directly,
-- package-backed helper subdefs are removable even when their containing legacy action file remains, and real actions can move once a package owner can carry the behavior; `HTTP::FileAccess::print_file_links_for_conf(...)`, `HTTP::FileAccess::run_lighttpd_for_conf(...)`, and `HTTP::FileAccess::run_httpd_for_conf(...)` now own the former `http` / `lighttpd` / `httpd` actions, so `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` are gone,
-- private helper subdefs inside still-shipped legacy action files can move too; `plugin/qc_summary.plg` still exposes `qc_summary`, but the former `qc_summary_merge` helper is now `QC::Summary::append_merged_rows(...)` rather than a dynamic plugin registration,
-- larger mixed legacy action files can move one private helper cluster at a time; `plugin/qcflow.plg` still exposes `glc_xcel2hm`, but the former `qc_pushonce`, `qc_budget_check`, `qc_budget_check_01match_code`, `qcflow_filter_handler`, `qcflow_clock_ctsinfo`, `qcflow_links_n_qclog`, and `qcflow_qclogdata` helpers are now `QC::Flow::push_once(...)`, `QC::Flow::budget_check(...)`, `QC::Flow::budget_check_single_or_zero_match(...)`, `QC::Flow::filter_handler(...)`, `QC::Flow::clock_cts_info(...)`, `QC::Flow::write_qclog_links(...)`, and `QC::Flow::prepare_qclog_data(...)`, while the former `tcl4interconn`, `tcl4fanx`, and `get_fanxinfo` helper bodies are now `QC::TclInterconn::append_interconnect_tcl(...)`, `load_fanx(...)`, and `fanx_info(...)` for repo-owned QC flow calls rather than dynamic plugin lookups, and the old standalone `plugin/tcl4interconn.plg` wrapper is gone,
-- helper families shared across legacy action files can move too; `plugin/setup_hold_tmax_tmin.plg` still exposes its visible action, the obsolete `plugin/tssio.plg` wrapper is gone, and their former timing helper subdefs plus the visible `tssio` report body now live in `Timing::SetupHold` rather than the dynamic plugin registry,
-- setup and formatting helpers reused inside legacy action files can move too; `plugin/stan_backend.plg`, `plugin/skew.plg`, and `plugin/duty_cycle_degradation.plg` still expose visible actions, but the former `stan_backend_start` setup helper now lives in `Timing::StanBackend::start(...)`, and the former `minmax_clockmx_cellcode` clock-matrix formatter now lives in `Timing::StanBackend::clock_matrix_cell_code(...)` rather than the dynamic plugin registry,
-- private helper families can also rename the callable package API while preserving historical file strings; `plugin/stan_omap2430c_backend.plg` still exposes its visible actions, but its former `stafrequency` callback, `freqency_detailed` helper family, `potential_fp` / `questionable_paths` / `freqency_summary` report writers, `drive_tckdelays` writer, `drive_nopath_check` / `nopath_check` pair, and `portiming` traversal callback now live in `Timing::StanOmap2430cBackend` under corrected names such as `collect_sta_frequency(...)`, `write_potential_fp(...)`, `write_questionable_paths(...)`, `write_frequency_summary(...)`, `write_tck_delays(...)`, `write_no_path_check(...)`, `record_no_path_check(...)`, and `filter_port_timing_paths(...)`,
-- parser lookup is no longer treated as a plugin action inside the shipped project; repo-owned callers use `LinkedSpec::get_parser(...)` directly, and the old `plugin/spec.plg` `_get_parser` shim is gone,
-- generic dynamic callback lookup is no longer hidden behind the old `plugin/plugin.plg` action either; `FSMGen::getop_plugin_list(...)` now owns that parser directly, the obsolete `plugin/fsmgen.plg::getop_plugin_list` helper wrapper is gone, and that owner preserves the default `LinkedSpec::get_plugin(...)` resolver plus no-op fallback,
-- small utility wrappers are removed when a normal package owner is clearer; the old `plugin/table.plg` wrapper is gone, remaining callers use `Table::list2table(...)` directly, and the unused `table_2ss` action is not preserved as a legacy registration,
-- small RTL utility helpers can move the same way; the old `get_log2` helper is gone from the `.plg` registry, and fake-memory / wrapper-generation callers use `RTLUtils::ceil_log2(...)` directly for address-width sizing. VHDL header/context-clause generation now follows that package-owner path too through `RTLUtils::add_header_n_context_clause(...)`, and the obsolete `add_header_n_context_clause` helper wrapper is gone from `fsmgen.plg` too,
-- Office automation helpers follow the same rule; the old `plugin/msoffice.plg` wrapper is gone, and `spyglass_waive` calls `MSOffice::Excel::start()` directly,
-- VHDL constant helpers follow the same rule; the old `plugin/vhdconst_eval.plg` wrapper is gone, and MBIST/register-test callers use `VHDL::ConstantEval` directly,
-- interactive prompt helpers follow the same rule and have already graduated out of the temporary `Plugin::*` scaffold; the old `plugin/yesno.plg` wrapper is gone, and FX environment comparison code uses `InteractivePrompt::yes_no(...)` directly,
-- the migration plan needs real legacy inputs so compatibility-removal decisions are grounded.
+- **Deleted** (`LEGACY-VHDL-RETIRE`): the Perl-only, non-portable VHDL/RTL/FSM-generation subsystem — `RTLUtils`, `FSMGen`, `VHDL::ConstantEval`, and the six `.plg` files that depended exclusively on them — had no cross-variant counterpart, so it was removed rather than ported.
+- **Relocated to `noncore/`** (`NONCORE-QUARANTINE`): everything proven unreachable from the `.spec` engine — the remaining domain-utility owners (`HTTP::FileAccess`, `HTML::PathLinks`, `InteractivePrompt`, `Text::VariableSubstitution`, `MSOffice::Excel`, `QC::Flow`, `QC::Summary`, `QC::TclInterconn`, `Table::GenericFilter`, `Timing::SetupHold`, `Timing::StanBackend`, `Timing::StanOmap2430cBackend`, plus the flat domain `.pm`) and the 13 surviving `.plg` — was `git mv`'d into `noncore/`, layout preserved. `noncore/README.md` is the parked-fate ledger (refactor / port / publish / delete each later).
 
-Do not read `plugin/` as a recommendation to build new LinkedSpec functionality around dynamic `.plg` loading. The current architectural direction is to keep LinkedSpec focused on `.spec` parsing, runtime execution, ActionIR helper semantics, and diagnostics.
+What remains relevant to LinkedSpec proper:
+
+- `specs/pplugin.spec` still parses `.plg` *syntax* — it is a shipped `.spec` example of recursive bracket-matching, independent of whether any `.plg` files ship,
+- the public facade still exposes the **deprecated** plugin entrypoints (`run_plugin`, `get_plugin`, `register_plugin`, ...) as transition machinery,
+- the `.spec` parser, runtime, ActionIR helper semantics, and diagnostics — the actual product — have **zero** functional dependency on any of the relocated or deleted code.
+
+Do not read the former `plugin/` corpus as a recommendation to build new LinkedSpec functionality around dynamic `.plg` loading. The architectural direction is to keep LinkedSpec focused on `.spec` parsing, runtime execution, ActionIR helper semantics, and diagnostics.
 
 ## `conf/`
 
@@ -247,7 +232,7 @@ It is large because it locks many different project promises:
 - descriptor metadata,
 - shipped spec helper migration,
 - smoke tests for selected parsers,
-- corpus parsing over `plugin/`, `conf/`, `tablescript/`, and `ebnf/`,
+- corpus parsing over `conf/`, `tablescript/`, and `ebnf/` (the legacy `.plg` corpus was relocated to `noncore/` and no longer participates in the core gate),
 - trace behavior and runtime-context behavior.
 
 Examples of shipped-material checks include:
@@ -258,7 +243,7 @@ Examples of shipped-material checks include:
 - portmap classification checks,
 - pplugin and tkgui parser smoke checks,
 - helper-flow migration checks across many shipped specs,
-- corpus regression over `.plg`, `.conf`, `.ts`, and `.ebnf` files.
+- corpus regression over `.conf`, `.ts`, and `.ebnf` files (the `.plg` corpus moved to `noncore/`).
 
 ## Local CI relationship
 
@@ -273,7 +258,6 @@ It treats the following directories as tracked CI inputs:
 - `.github/workflows`
 - `tools`
 - `specs`
-- `plugin`
 - `conf`
 - `tablescript`
 - `ebnf`

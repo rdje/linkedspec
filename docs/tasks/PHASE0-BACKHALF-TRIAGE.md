@@ -6,12 +6,12 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (`.5.3.2` **split** → `.5.3.2.1` (done) + `.5.3.2.2` (pending); **`.5.3.2.1` DONE** —
-  status & continuity reconciliation (DOC-ONLY): flipped the downstream gates now both phase0 (960/960) and the
-  full local gate (`tools/run_ci_local.sh` EXIT 0) are green — `NONCORE-QUARANTINE.V` blocker cleared→`pending`,
-  `LEGACY-VHDL-RETIRE.4`→`done` + `.5` cleared→`pending`, `SPEC-FORMAT-TERSE` impl-gate cleared (`.1.x`
-  PNT-eligible); synced `docs/TASK_TREE.md` index + the `rtlutils-regex-hang` KM card + live docs. Prior:
-  `.5.3.1` DONE (full local gate green). Frontier → `.5.3.2.2` (narrative-doc + book drift) → `.6` (book `:AND`).)
+- Last updated: `2026-06-22` (**`.5.3.2.2` DONE** — narrative-doc + book drift sync (DOC-ONLY): synced
+  `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + 2 mdBook files to the deleted
+  (RTLUtils/FSMGen/VHDL::ConstantEval) vs relocated-to-`noncore/` reality; `generic_fake_memory_module.plg`/
+  `wrapgen.plg`/`ceil_log2` drift gone; `mdbook build` EXIT 0; flipped `LEGACY-VHDL-RETIRE.5` + `NONCORE-QUARANTINE.V`
+  → `done`. Containers `.5.3.2`/`.5.3`/`.5` now `done`. **Only open leaf: `.6`** (book `:AND` — likely a short user
+  policy check). Prior: `.5.3.2.1` DONE (status reconciliation); `.5.3.1` DONE (full local gate green).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -116,7 +116,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 
 ## Task Tree
 
-- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `active` · Children: `.1` (done), `.2` (done), `.3` (done), `.4` (done), `.5` (active), `.6`
+- ID: `PHASE0-BACKHALF-TRIAGE` · Status: `active` · Children: `.1` (done), `.2` (done), `.3` (done), `.4` (done), `.5` (done), `.6` (pending — the only open leaf)
 - ID: `PHASE0-BACKHALF-TRIAGE.1` · Status: `done` (2026-06-19)
   Goal: Read-only cluster-by-cluster stale-vs-real triage of the 173 failures, with evidence + scope.
   Acceptance: per-cluster verdict + scope/effort + recommended fix plan, decomposed into `.2+`. **Met.**
@@ -340,7 +340,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     = **111 → 109 failing**, set-diff vs post-`.3` = exactly the 2 Defect #2 subtests cleared, zero
     regressions. Blocker: **cleared 2026-06-21** (ADR `0008`).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `active` · Children: `.5.1` (done), `.5.2` (done), `.5.4` (done), `.5.3` (active/split — gate flips: `.5.3.1` done, `.5.3.2` pending)
+- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `done` (2026-06-22) · Children: `.5.1` (done), `.5.2` (done), `.5.4` (done), `.5.3` (done — gate flips + doc/book/KM sync complete)
   Goal: Achieve + verify a fully green `t/phase0_regression.t` end-to-end (the whole run, incl. the
     long-dark tail after `corpus_regression`), then flip the downstream gates. **Split 2026-06-22**
     after `.5.1` resolved the surface stale-reference and exposed a real catastrophic-backtracking
@@ -406,7 +406,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     = **exactly the 3 cleared, new-failure set empty**. No book impact (parse_mode behavior unchanged — only
     the non-idiomatic regression-test's expected AST shape; the 960 inspection is internal test infra).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `active` · Children: `.5.3.1` (done), `.5.3.2` (active/split — `.5.3.2.1` done, `.5.3.2.2` pending) — **split 2026-06-22** (too broad for one signoff slice; unblocked by green phase0 via `.5.4`)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `done` (2026-06-22) · Children: `.5.3.1` (done), `.5.3.2` (done — `.5.3.2.1` done, `.5.3.2.2` done) — **split 2026-06-22** (too broad for one signoff slice; unblocked by green phase0 via `.5.4`)
   Goal: After green phase0, flip the downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`,
     `NONCORE-QUARANTINE.V`). Note: `NONCORE-QUARANTINE.V` itself owns clearing the `SPEC-FORMAT-TERSE` +
     `LEGACY-VHDL-RETIRE.4/.5` blockers + doc/book/KM sync, so `.5.3` may largely hand off to `.V`. **Split**
@@ -433,7 +433,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     gate passed"** (doctrine 2/2 PASS; audits pass; `perl -c` clean; `prove -v -Iperl t/phase0_regression.t`
     fully green 960/960). Book unaffected (CI tooling, not a user surface).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2` · Status: `active` · Children: `.5.3.2.1` (done), `.5.3.2.2` (pending) — **split 2026-06-22**
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2` · Status: `done` (2026-06-22) · Children: `.5.3.2.1` (done), `.5.3.2.2` (done) — **split 2026-06-22**
   Goal: Flip the downstream blocked statuses + doc/KM/book sync now that BOTH phase0 (960/960) and the full
     local gate (`tools/run_ci_local.sh` EXIT 0) are green: `NONCORE-QUARANTINE.V`, `LEGACY-VHDL-RETIRE.4`/`.5`,
     `SPEC-FORMAT-TERSE` impl-gate. **Split** after scoping showed it spans 3 downstream trees + the
@@ -464,7 +464,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     (MEMORY-ARCH + KNOWLEDGE-MAP) green; KM map regenerated/staged by the pre-commit hook; `grep` confirms no
     stale "blocked by phase0 / by the 173 / not green" text remains in the task-tree ledgers.
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2.2` · Status: `pending` (created 2026-06-22)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2.2` · Status: `done` (2026-06-22)
   Goal: **Narrative-doc + book drift sync** (the deferred `LEGACY-VHDL-RETIRE.5` body). Remove the
     deleted-module / relocated-owner drift from the product/architecture surfaces: `ROADMAP_V2.md:157` +
     `ARCHITECTURE_STATE.md` (the "Project/domain utility owners" owner-tree block + the "Legacy Plugin Branch
@@ -475,8 +475,32 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     `LEGACY-VHDL-RETIRE.5` → done and `NONCORE-QUARANTINE.V` → done.
   Acceptance: no product/architecture doc presents a deleted/relocated module as a live `perl/` owner; the
     `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift is gone; `mdbook build docs/linkedspec-book`
-    exit 0; the book stays variant-agnostic ([[mdbook-variant-agnostic]]).
-  Verification: `pending`  ·  Commit: `pending`
+    exit 0; the book stays variant-agnostic ([[mdbook-variant-agnostic]]). **MET.**
+  Result (DOC-ONLY — `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` + 2 mdBook files; no engine/spec/test change).
+    Ground-truth-first: confirmed by direct filesystem + `git` inspection (corroborated by an Explore import-tree
+    agent) that `perl/RTLUtils.pm` / `perl/FSMGen.pm` / `perl/VHDL/ConstantEval.pm` + 6 `.plg` were **deleted**
+    (`06496b4`), and the remaining 12 domain owners + 13 `.plg` were **relocated to `noncore/`** (`336bded` +
+    `2baddbd`); the root `plugin/` dir is gone; the `generic_fake_memory_module.plg`/`wrapgen.plg` files were
+    already deleted long ago (`cffac62`), so the `ceil_log2`-caller prose was doubly stale. Edits (guarded,
+    content-anchored, match-count-asserted):
+    • **`ARCHITECTURE_STATE.md`** — replaced the owner-migration bullet cluster, the "Project/domain utility
+      owners" owner-tree block, the stale `PPlugin` FSMGen clause, and the `### Table::GenericFilter` +
+      domain-owner migration prose with one accurate "deleted vs relocated-to-`noncore/`" account.
+    • **`ROADMAP_V2.md`** — replaced the 16 stale "Plugin modernization note" domain-owner bullets with one
+      accurate bullet; appended a dated **Update** to the historical `done` plugin-modernization tracker cell
+      (supersede-don't-mutate).
+    • **mdBook `specs-and-corpora/shipped-specs-and-corpora.md`** — rewrote the `## plugin/` section to
+      `## noncore/plugin/` (relocated), fixed the two file-tree mentions + the two corpus-list bullets, and
+      dropped the now-removed `plugin` CI-input (matching `.5.3.1`'s `tools/run_ci_local.sh` change).
+    • **mdBook `architecture/owner-tree.md`** — replaced the package-extraction migration narrative with a
+      concise deleted/relocated current-state block; kept the facade/registry/bridge/PPlugin descriptions +
+      the "healthier core story".
+    Then flipped `LEGACY-VHDL-RETIRE.5` → `done` and `NONCORE-QUARANTINE.V` → `done` (+ index rows).
+  Verification: `mdbook build docs/linkedspec-book` EXIT 0; `git grep` confirms no deleted/relocated module is
+    presented as a live `perl/` owner (residual mentions are the new "Relocated to noncore/ / Deleted" lists, the
+    "stale prose is gone" explanatory sentences, or the dated historical tracker cell); book stays
+    variant-agnostic. `scripts/check_memory_architecture.sh` + `scripts/check_doctrines.sh` green.
+  Commit: (this commit)
 - ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `pending` (added 2026-06-21)
   Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex slots +
     indexed edges with a `return(...)` edge now compiles and returns the raw author payload (the engine
@@ -513,8 +537,8 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.5.3.1` | `done` 2026-06-22 | Cleared the stale `plugin/` reference in `tools/run_ci_local.sh` (NONCORE-QUARANTINE leftover, same class as `.5.1`/`.5.4`); **`bash tools/run_ci_local.sh` now EXIT 0 green end-to-end** (doctrine 2/2 + audits + `perl -c` + phase0 960/960). Advances `NONCORE-QUARANTINE.V`. |
 | — | `.5.3.2` | `active` (split 2026-06-22) | Decomposed → `.5.3.2.1` (status & continuity reconciliation) + `.5.3.2.2` (narrative-doc + book drift). |
 | — | `.5.3.2.1` | `done` 2026-06-22 | **Status & continuity reconciliation** (DOC-ONLY): flipped `NONCORE-QUARANTINE.V` (blocker cleared→`pending`), `LEGACY-VHDL-RETIRE.4`→`done` + `.5` (cleared→`pending`), `SPEC-FORMAT-TERSE` impl-gate→cleared (`.1.x` PNT-eligible); synced `docs/TASK_TREE.md` index + the `rtlutils-regex-hang` KM card + live docs; no "blocked by phase0" text remains in the ledgers. |
-| 1 | `.5.3.2.2` | `pending` | **Narrative-doc + book drift sync** (deferred `LEGACY-VHDL-RETIRE.5` body): `ROADMAP_V2.md:157` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` + 2 mdBook files (`shipped-specs-and-corpora.md`, `architecture/owner-tree.md`). Then flip `LEGACY-VHDL-RETIRE.5` → done + `NONCORE-QUARANTINE.V` → done. |
-| 2 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
+| — | `.5.3.2.2` | `done` 2026-06-22 | **Narrative-doc + book drift sync** (deferred `LEGACY-VHDL-RETIRE.5` body, DOC-ONLY): `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + 2 mdBook files synced to the deleted (RTLUtils/FSMGen/VHDL::ConstantEval) vs relocated-to-`noncore/` reality; `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift gone; `mdbook build` EXIT 0. Flipped `LEGACY-VHDL-RETIRE.5` → done + `NONCORE-QUARANTINE.V` → done. |
+| 1 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. **Likely needs a short user policy check** (document `::AND`+regex as supported vs. keep steering to the 2-rule idiom). |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
 never freezes buggy output; the 108 stale expectations are independent of the engine fixes, so `.2.x`
@@ -575,6 +599,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-22` | `.5.4` | `LinkedSpec::Get` got-value dumps for 952/953 (Protocol A); `PluginBridge.pm` "Compatibility bridge" grep + `noncore/plugin/` `.plg` census; `perl -c -Iperl t/phase0_regression.t`; full foreground before/after `perl -Iperl t/phase0_regression.t` + `comm` name set-diff | `done` — before 957 ok / 3 not-ok (reach `not ok 960`, exit-255); after **960 ok / 0 not-ok, EXIT 0, reach `ok 960`, `1..960` reached**; `comm` = **exactly {952,953,960} cleared, new-failure set empty**. `t/phase0_regression.t` fully GREEN end-to-end. TEST-ONLY. |
 | `2026-06-22` | `.5.3.1` | ran `bash tools/run_ci_local.sh` (confirmed RED at `require_tracked_tree plugin`, EXIT 1); `bash -n tools/run_ci_local.sh`; re-ran the full gate after the fix | `done` — full local gate now **EXIT 0 end-to-end** ("[ci] local CI gate passed"): doctrine 2/2 PASS, tracked-input audits pass, `perl -c` clean, `prove -v -Iperl t/phase0_regression.t` = `1..960` / `Result: PASS` / `Files=1, Tests=960` (~198s). Stale `plugin/` ref dropped from both pathspec lists. |
 | `2026-06-22` | `.5.3.2.1` | DOC-ONLY status reconciliation; `scripts/check_memory_architecture.sh` + `scripts/check_doctrines.sh` (MEMORY-ARCH + KNOWLEDGE-MAP) green; KM map regenerated/staged by pre-commit hook; `grep` sweep for residual "blocked by phase0 / by the 173 / not green" in the task-tree ledgers | `done` — flipped `NONCORE-QUARANTINE.V` (cleared→`pending`), `LEGACY-VHDL-RETIRE.4`→`done`/`.5`(cleared→`pending`), `SPEC-FORMAT-TERSE` impl-gate→cleared; synced `docs/TASK_TREE.md` + `rtlutils-regex-hang` KM card + live docs. No engine/spec/test/book change. Frontier → `.5.3.2.2`. |
+| `2026-06-22` | `.5.3.2.2` | DOC-ONLY drift sync; ground-truth via `git`/filesystem + Explore import-tree agent (RTLUtils/FSMGen/VHDL::ConstantEval deleted `06496b4`; 12 owners + 13 `.plg` relocated `336bded`/`2baddbd`; `generic_fake_memory_module.plg`/`wrapgen.plg` deleted `cffac62`); guarded content-anchored edits to `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` + 2 mdBook files; `mdbook build docs/linkedspec-book`; `git grep` no-live-owner sweep; `scripts/check_memory_architecture.sh` + `scripts/check_doctrines.sh` | `done` — `mdbook build` EXIT 0; no deleted/relocated module presented as a live `perl/` owner; `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift gone; book variant-agnostic. Flipped `LEGACY-VHDL-RETIRE.5` + `NONCORE-QUARANTINE.V` → `done`. Containers `.5.3.2`/`.5.3`/`.5` → `done`. |
 
 ## Commit Log
 
@@ -595,7 +620,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.5.2` | `PHASE0-BACKHALF-TRIAGE.5.2 — fix Lispish corpus_regression hang (never-undef parser + unguarded multi-parse loop; forward-progress guard, TEST-ONLY); corpus_regression green, reveals 3 dark-tail re-blesses (.5.4)` | commit `e74149d` |
 | `.5.4` | `PHASE0-BACKHALF-TRIAGE.5.4 — re-bless 3 dark-tail failures (TEST-ONLY); phase0 fully GREEN 960/960` | commit `89e9526` |
 | `.5.3.1` | `PHASE0-BACKHALF-TRIAGE.5.3.1 — drop stale plugin/ ref in tools/run_ci_local.sh; full local gate green end-to-end` | commit `b4e2265` |
-| `.5.3.2.1` | `PHASE0-BACKHALF-TRIAGE.5.3.2.1 — status & continuity reconciliation (flip downstream gates; DOC-ONLY)` | this commit |
+| `.5.3.2.1` | `PHASE0-BACKHALF-TRIAGE.5.3.2.1 — status & continuity reconciliation (flip downstream gates; DOC-ONLY)` | commit `04ab4d7` |
+| `.5.3.2.2` | `PHASE0-BACKHALF-TRIAGE.5.3.2.2 — narrative-doc + book drift sync (deleted/relocated owners; DOC-ONLY); close LEGACY-VHDL-RETIRE + NONCORE-QUARANTINE` | this commit |
 
 ## Changelog
 
@@ -796,6 +822,24 @@ can also proceed in parallel if the engine touch is deferred).
   "[ci] local CI gate passed". Advances `NONCORE-QUARANTINE.V`'s "full local gate green" acceptance. Book
   unaffected. **Next: `.5.3.2`** (flip the downstream blocked statuses + doc/KM sync across `NONCORE-QUARANTINE.V`,
   `LEGACY-VHDL-RETIRE.4/.5`, `SPEC-FORMAT-TERSE` impl-gate), then `.6` (book `:AND`).
+- `2026-06-22`: `.5.3.2.2` **DONE** (DOC-ONLY — `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` + 2 mdBook files; no
+  engine/spec/test change) — closes container `.5.3.2`, `.5.3`, and `.5`, and the downstream `LEGACY-VHDL-RETIRE`
+  + `NONCORE-QUARANTINE` trees. Ground-truth-first: `git`/filesystem inspection (corroborated by an Explore
+  import-tree agent) pinned the reality — `perl/RTLUtils.pm` / `perl/FSMGen.pm` / `perl/VHDL/ConstantEval.pm` + 6
+  `.plg` **deleted** (`06496b4`, `LEGACY-VHDL-RETIRE.2`), the remaining 12 domain owners + 13 `.plg` **relocated
+  to `noncore/`** (`336bded` + `2baddbd`, `NONCORE-QUARANTINE`), the root `plugin/` dir gone, and
+  `generic_fake_memory_module.plg`/`wrapgen.plg` deleted even earlier (`cffac62`) so the `ceil_log2`-caller prose
+  was doubly stale. Applied guarded, content-anchored, match-count-asserted edits: `ARCHITECTURE_STATE.md`
+  (owner-migration bullets + "Project/domain utility owners" owner-tree block + `PPlugin` FSMGen clause +
+  `### Table::GenericFilter`/domain-owner prose → one "deleted vs relocated-to-`noncore/`" account); `ROADMAP_V2.md`
+  (16 stale "Plugin modernization note" bullets → one accurate bullet; dated **Update** appended to the historical
+  `done` plugin-modernization tracker cell — supersede-don't-mutate); mdBook `shipped-specs-and-corpora.md`
+  (`## plugin/` → `## noncore/plugin/`, file-tree + corpus-list + dropped the `plugin` CI-input matching `.5.3.1`);
+  mdBook `architecture/owner-tree.md` (migration narrative → concise current-state, kept facade/registry/bridge +
+  "healthier core story"). `mdbook build docs/linkedspec-book` EXIT 0; `git grep` confirms no deleted/relocated
+  module is presented as a live `perl/` owner; book variant-agnostic. Flipped `LEGACY-VHDL-RETIRE.5` →`done` and
+  `NONCORE-QUARANTINE.V` →`done` (+ `docs/TASK_TREE.md` index rows). **Frontier → `.6`** (book `:AND` — likely a
+  short user policy check). Self-check + doctrine driver green.
 - `2026-06-22`: `.5.3.2` **SPLIT** + `.5.3.2.1` **DONE** (DOC-ONLY — task-tree ledgers + `docs/TASK_TREE.md`
   index + the `rtlutils-regex-hang` KM card + live docs; no engine/spec/test/book change). Scoping `.5.3.2`
   showed it spans 3 downstream trees + the index + a KM card + ~4 narrative/product docs (incl. 2 mdBook files)

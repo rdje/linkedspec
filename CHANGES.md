@@ -1,6 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.3.2.2 — narrative-doc + book drift sync: ROADMAP_V2 + ARCHITECTURE_STATE + 2 mdBook files synced to the deleted/relocated module reality; close LEGACY-VHDL-RETIRE + NONCORE-QUARANTINE (DOC-ONLY)
+
+**No engine/spec/test code touched** — only `ROADMAP_V2.md`, `ARCHITECTURE_STATE.md`, the two named mdBook files
+(`docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md`,
+`docs/linkedspec-book/src/architecture/owner-tree.md`), the three downstream task trees, the task-tree index
+(`docs/TASK_TREE.md`), and the live continuity docs.
+
+The deferred `LEGACY-VHDL-RETIRE.5` body. Ground-truth-first: `git`/filesystem inspection (corroborated by an
+Explore import-tree agent) pinned the real module state — `perl/RTLUtils.pm` / `perl/FSMGen.pm` /
+`perl/VHDL/ConstantEval.pm` + 6 exclusively-dependent `.plg` were **deleted** (`06496b4`, `LEGACY-VHDL-RETIRE.2`);
+the 12 remaining domain owners (`HTTP::FileAccess`, `HTML::PathLinks`, `InteractivePrompt`,
+`Text::VariableSubstitution`, `MSOffice::Excel`, `QC::{Flow,Summary,TclInterconn}`, `Table::GenericFilter`,
+`Timing::{SetupHold,StanBackend,StanOmap2430cBackend}`) + 13 `.plg` were **relocated to `noncore/`** (`336bded`
++ `2baddbd`, `NONCORE-QUARANTINE`); the root `plugin/` dir is gone and `perl/` is core-only; and
+`generic_fake_memory_module.plg`/`wrapgen.plg` had already been deleted long ago (`cffac62`), so the
+`ceil_log2`-caller prose was doubly stale.
+
+Edits (guarded, content-anchored, match-count-asserted Perl transforms; full diffs reviewed):
+- **`ARCHITECTURE_STATE.md`** — replaced the owner-migration bullet cluster, the "Project/domain utility owners"
+  owner-tree block, the stale `PPlugin` FSMGen clause, and the `### Table::GenericFilter` + domain-owner migration
+  prose with one accurate "deleted vs relocated-to-`noncore/`" account.
+- **`ROADMAP_V2.md`** — replaced the 16 stale "Plugin modernization note" domain-owner bullets with one accurate
+  bullet; appended a dated **Update** to the historical `done` plugin-modernization tracker cell (supersede,
+  don't mutate — the milestone record stays, the current state is stated plainly).
+- **mdBook `shipped-specs-and-corpora.md`** — `## plugin/` → `## noncore/plugin/`; fixed the two file-tree
+  mentions + the two corpus-list bullets; dropped the now-removed `plugin` CI-input (matching `.5.3.1`'s
+  `tools/run_ci_local.sh` change).
+- **mdBook `architecture/owner-tree.md`** — replaced the package-extraction migration narrative with a concise
+  current-state block; kept the facade/registry/bridge/PPlugin descriptions + the "healthier core story".
+
+Verification: `mdbook build docs/linkedspec-book` EXIT 0; `git grep` confirms no deleted/relocated module is
+presented as a live `perl/` owner (residual mentions are the new "Relocated to noncore/ / Deleted" lists, the
+"stale prose is gone" explanatory sentences, or the dated historical tracker cell); book stays variant-agnostic;
+phase0 still 960/960 (unaffected — doc-only). Flipped `LEGACY-VHDL-RETIRE.5` + `NONCORE-QUARANTINE.V` → `done`
+(BOTH trees CLOSED; `NONCORE-QUARANTINE.N` deferred as an explicit Non-Goal); containers `.5.3.2`/`.5.3`/`.5`
+→ `done`. **Frontier → `.6`** (book `:AND` — likely a short user policy check). `scripts/check_memory_architecture.sh`
++ `scripts/check_doctrines.sh` green.
+
 ## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.3.2.1 — status & continuity reconciliation: flip the downstream gates now both phase0 and the full local gate are green (DOC-ONLY)
 
 **No engine/spec/test/book code touched** — only task-tree ledgers (`docs/tasks/*.md`), the task-tree index
