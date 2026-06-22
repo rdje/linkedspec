@@ -6,7 +6,11 @@
 - Status: `active` (created 2026-06-19)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
-- Last updated: `2026-06-22` (`.5.4` **DONE** — re-blessed the 3 dark-tail failures (TEST-ONLY): 952/953 `parse_mode_*` `qr/\?Top:/` → `qr/\$VAR1 = 1;/` (`return(1)`→scalar `1`, got-value dumped via `LinkedSpec::Get`); 960 `plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus` dropped the `noncore/`-moved `.plg`-corpus inspection (stale `opendir '../plugin'`), kept the core `PluginBridge.pm` check (plan 5→1). **`t/phase0_regression.t` is now fully GREEN end-to-end: 960/960, EXIT 0, `1..960`.** `comm` set-diff = exactly the 3 cleared, 0 new. Frontier → `.5.3` (gate flips, now unblocked) + `.6` (book `:AND`).)
+- Last updated: `2026-06-22` (`.5.3.1` **DONE** — cleared the stale `plugin/` reference in `tools/run_ci_local.sh`
+  (NONCORE-QUARANTINE leftover, same class as `.5.1`/`.5.4`); **`bash tools/run_ci_local.sh` now passes green
+  end-to-end (EXIT 0)** — doctrine 2/2 + tracked-input audits + `perl -c` + phase0 960/960 `Result: PASS`. `.5.3`
+  split → `.5.3.1` (done) + `.5.3.2` (status/doc/KM gate-flips). Prior: `.5.4` **DONE** (phase0 fully GREEN 960/960
+  via 3 dark-tail re-blesses). Frontier → `.5.3.2` then `.6` (book `:AND`).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -335,7 +339,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     = **111 → 109 failing**, set-diff vs post-`.3` = exactly the 2 Defect #2 subtests cleared, zero
     regressions. Blocker: **cleared 2026-06-21** (ADR `0008`).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `active` · Children: `.5.1` (done), `.5.2` (done), `.5.4` (done), `.5.3` (pending — gate flips)
+- ID: `PHASE0-BACKHALF-TRIAGE.5` · Status: `active` · Children: `.5.1` (done), `.5.2` (done), `.5.4` (done), `.5.3` (active/split — gate flips: `.5.3.1` done, `.5.3.2` pending)
   Goal: Achieve + verify a fully green `t/phase0_regression.t` end-to-end (the whole run, incl. the
     long-dark tail after `corpus_regression`), then flip the downstream gates. **Split 2026-06-22**
     after `.5.1` resolved the surface stale-reference and exposed a real catastrophic-backtracking
@@ -401,12 +405,43 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     = **exactly the 3 cleared, new-failure set empty**. No book impact (parse_mode behavior unchanged — only
     the non-idiomatic regression-test's expected AST shape; the 960 inspection is internal test infra).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `pending` (created 2026-06-22; **unblocked 2026-06-22** — phase0 green via `.5.4`)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3` · Status: `active` · Children: `.5.3.1` (done), `.5.3.2` (pending) — **split 2026-06-22** (too broad for one signoff slice; unblocked by green phase0 via `.5.4`)
   Goal: After green phase0, flip the downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`,
     `NONCORE-QUARANTINE.V`). Note: `NONCORE-QUARANTINE.V` itself owns clearing the `SPEC-FORMAT-TERSE` +
-    `LEGACY-VHDL-RETIRE.4/.5` blockers + doc/book/KM sync, so `.5.3` may largely hand off to `.V`.
-  Blocker: ~~green phase0 (blocked by `.5.2`)~~ **CLEARED 2026-06-22** — `t/phase0_regression.t` is fully
-    green (960/960) after `.5.4`. Now PNT-eligible (first frontier leaf).
+    `LEGACY-VHDL-RETIRE.4/.5` blockers + doc/book/KM sync, so `.5.3` may largely hand off to `.V`. **Split**
+    after scoping revealed (a) the "full local gate green" acceptance was itself RED on a stale `plugin`
+    reference (a NONCORE-QUARANTINE leftover, same class as `.5.1`/`.5.4`), and (b) the remaining gate-flips
+    span 3 trees + a doc/book/KM sync — too broad for one slice.
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3.1` · Status: `done` (2026-06-22)
+  Goal: Make the canonical **full local gate** (`tools/run_ci_local.sh`, the E4 source-of-truth since hosted
+    CI is disabled — ADR `0004`) run green end-to-end, by clearing the stale `plugin/` reference that
+    `NONCORE-QUARANTINE.3` left behind when it `git mv`'d the 13 `.plg` to `noncore/plugin/` and rmdir'd
+    `plugin/`. Advances `NONCORE-QUARANTINE.V`'s "full local gate green" acceptance.
+  Root cause (confirmed by running the gate): `tools/run_ci_local.sh` lists `plugin` in two pathspec sets —
+    the `require_tracked_tree` loop (`for path in specs plugin conf tablescript ebnf perl t`) and the
+    `check_no_untracked_ci_inputs` git-status pathspec — so the gate dies at `require_tracked_tree plugin`
+    → "required directory missing: plugin", EXIT 1, *before* phase0 even runs. The doctrine driver + syntax
+    checks pass; only the stale `plugin` requirement is broken.
+  Acceptance: `bash tools/run_ci_local.sh` exits 0 end-to-end (doctrine driver + tracked-input audits +
+    `perl -c` + green phase0 via `prove`); no `noncore/`-reach (core gate stays core-only per the `.5.1`
+    precedent — drop `plugin`, do NOT retarget to `noncore/plugin`). **MET.**
+  Result: removed `plugin` from both pathspec lists in `tools/run_ci_local.sh` (the `require_tracked_tree`
+    loop + the `check_no_untracked_ci_inputs` git-status pathspec). The remaining required trees
+    (`specs conf tablescript ebnf perl t`) are all core/corpus inputs that still exist.
+  Verification: `bash -n tools/run_ci_local.sh` OK; `bash tools/run_ci_local.sh` → **EXIT 0, "[ci] local CI
+    gate passed"** (doctrine 2/2 PASS; audits pass; `perl -c` clean; `prove -v -Iperl t/phase0_regression.t`
+    fully green 960/960). Book unaffected (CI tooling, not a user surface).
+  Commit: (this commit)
+- ID: `PHASE0-BACKHALF-TRIAGE.5.3.2` · Status: `pending` (created 2026-06-22)
+  Goal: Flip the downstream blocked statuses + doc/KM sync now that BOTH phase0 and the full local gate are
+    green: `NONCORE-QUARANTINE.V` (verify + clear its blocker), `LEGACY-VHDL-RETIRE.4` (RTLUtils hang cleared
+    + full gate green) + `.5` (doc/book/KM sync + flip the `SPEC-FORMAT-TERSE` blocker to "cleared" + fix the
+    `generic_fake_memory_module.plg`/`wrapgen.plg` doc drift), and `SPEC-FORMAT-TERSE`'s implementation-gate
+    blocker (the `RTLUTILS-REGEX-HANG` + "usable phase0" condition is now satisfied). This is a status/doc
+    reconciliation across trees — it does NOT itself start the `SPEC-FORMAT-TERSE` implementation leaves
+    (`.1.x`+), which become PNT-eligible once the gate is flipped.
+  Acceptance: the 3 downstream trees' green-phase0/full-gate blockers reflect "cleared" with evidence; KM +
+    live docs synced; no contradictory "blocked by phase0" text remains.
   Verification: `pending`  ·  Commit: `pending`
 - ID: `PHASE0-BACKHALF-TRIAGE.6` · Status: `pending` (added 2026-06-21)
   Goal: Book `:AND` reconciliation. With Defect #1 fixed, an `::AND` top rule carrying regex slots +
@@ -440,7 +475,9 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.5.1` | `done` 2026-06-22 | Resolved the stale `corpus_regression` plugin dataset (subtest-941 "No tests run"/exit-255 = a `NONCORE-QUARANTINE` leftover, NOT a natural stop). Removed the non-core `.plg` dataset (TEST-ONLY); exposed `.5.2`. |
 | — | `.5.2` | `done` 2026-06-22 | Lispish `corpus_regression` hang FIXED (root cause corrected: **not a regex** — the parser never returns `undef`, so the `while(1)` multi-parse loop spins; added a forward-progress guard, TEST-ONLY). 76/76 corpus files ok; `ok 941 - corpus_regression`; suite now reaches subtest 960. [[lispish-corpus-catastrophic-backtracking]] |
 | — | `.5.4` | `done` 2026-06-22 | Re-blessed the **3 dark-tail failures** (TEST-ONLY): 952/953 `parse_mode` `qr/\?Top:/`→`qr/\$VAR1 = 1;/` (`return(1)`→scalar `1`, dumped via `LinkedSpec::Get`); 960 dropped the `noncore/`-moved `.plg`-corpus inspection, kept the core `PluginBridge.pm` check (plan 5→1). **phase0 fully GREEN 960/960**; `comm` = exactly the 3 cleared, 0 new. |
-| 1 | `.5.3` | `pending` | **Unblocked** (phase0 green). Flip downstream gates (`SPEC-FORMAT-TERSE`, `LEGACY-VHDL-RETIRE.4/.5`, `NONCORE-QUARANTINE.V`); may hand off to `NONCORE-QUARANTINE.V`. |
+| — | `.5.3` | `active` (split 2026-06-22) | Downstream gate-flips, decomposed → `.5.3.1` (done: full local gate green) + `.5.3.2` (status/doc/KM reconciliation). |
+| — | `.5.3.1` | `done` 2026-06-22 | Cleared the stale `plugin/` reference in `tools/run_ci_local.sh` (NONCORE-QUARANTINE leftover, same class as `.5.1`/`.5.4`); **`bash tools/run_ci_local.sh` now EXIT 0 green end-to-end** (doctrine 2/2 + audits + `perl -c` + phase0 960/960). Advances `NONCORE-QUARANTINE.V`. |
+| 1 | `.5.3.2` | `pending` | Flip the downstream blocked statuses + doc/KM sync (phase0 + full gate now green): `NONCORE-QUARANTINE.V`, `LEGACY-VHDL-RETIRE.4/.5`, `SPEC-FORMAT-TERSE` impl-gate; fix the `generic_fake_memory_module.plg`/`wrapgen.plg` doc drift. |
 | 2 | `.6` | `pending` | Book `:AND` reconciliation: the now-fixed `::AND`+regex+return form vs the book's "Body rule only" / "no regex on top" idiom statements. |
 
 Recommended order once authorized: `.3` → `.4` → `.2.1`–`.2.4` → `.5` (fix the engine first so re-bless
@@ -500,6 +537,7 @@ can also proceed in parallel if the engine touch is deferred).
 | `2026-06-22` | `.5.1` | `perl -c -Iperl t/phase0_regression.t`; full baseline run (1-940 green, `opendir '.../plugin'` die at 941, exit-255); post-fix re-run (advanced into corpus_regression then hung); fork+SIGKILL corpus census (`alarm()`-immune); ebnf-dataset hard-timeout check; module-path confirmation (stale `PERL5LIB` hazard) | `done` — removed the stale plugin dataset; **determined subtest-941 = a real stale reference, NOT a natural stop**; EXPOSED `.5.2` (Lispish conf/tablescript catastrophic backtracking — ~21/22 conf files, 374 CPU-min; ebnf healthy). phase0 NOT green. TEST-ONLY. |
 | `2026-06-22` | `.5.2` | input bisection (single 392B parse = 0.03s ⇒ NOT a regex); loop instrumentation (pos+defined/iter ⇒ iter2.. pos +0, defined ⇒ never-undef); generalized (single-form EOF; `(R rise)\n\n`); guarded multi-parse over all 76 conf+tablescript files; full foreground `perl -Iperl t/phase0_regression.t` (10-min budget) | `done` — root cause = parser never returns `undef` + the `while(1)` loop lacks a progress guard (NOT regex backtracking). Added the guard (TEST-ONLY). **76/76 corpus files ok; `ok 941 - corpus_regression`; suite reaches subtest 960** (vs old death at 941). Revealed 3 TEST-ONLY dark-tail failures (952/953/960 → `.5.4`). |
 | `2026-06-22` | `.5.4` | `LinkedSpec::Get` got-value dumps for 952/953 (Protocol A); `PluginBridge.pm` "Compatibility bridge" grep + `noncore/plugin/` `.plg` census; `perl -c -Iperl t/phase0_regression.t`; full foreground before/after `perl -Iperl t/phase0_regression.t` + `comm` name set-diff | `done` — before 957 ok / 3 not-ok (reach `not ok 960`, exit-255); after **960 ok / 0 not-ok, EXIT 0, reach `ok 960`, `1..960` reached**; `comm` = **exactly {952,953,960} cleared, new-failure set empty**. `t/phase0_regression.t` fully GREEN end-to-end. TEST-ONLY. |
+| `2026-06-22` | `.5.3.1` | ran `bash tools/run_ci_local.sh` (confirmed RED at `require_tracked_tree plugin`, EXIT 1); `bash -n tools/run_ci_local.sh`; re-ran the full gate after the fix | `done` — full local gate now **EXIT 0 end-to-end** ("[ci] local CI gate passed"): doctrine 2/2 PASS, tracked-input audits pass, `perl -c` clean, `prove -v -Iperl t/phase0_regression.t` = `1..960` / `Result: PASS` / `Files=1, Tests=960` (~198s). Stale `plugin/` ref dropped from both pathspec lists. |
 
 ## Commit Log
 
@@ -518,7 +556,8 @@ can also proceed in parallel if the engine touch is deferred).
 | `.2.4` | `PHASE0-BACKHALF-TRIAGE.2.4 — re-bless cluster F+G (5, TEST-ONLY); 5 phase0 failures cleared, zero regressions` | commit `75289f7` |
 | `.5.1` | `PHASE0-BACKHALF-TRIAGE.5.1 — remove stale corpus_regression plugin dataset (TEST-ONLY); exposes .5.2 (Lispish corpus catastrophic backtracking)` | commit `ef103fe` |
 | `.5.2` | `PHASE0-BACKHALF-TRIAGE.5.2 — fix Lispish corpus_regression hang (never-undef parser + unguarded multi-parse loop; forward-progress guard, TEST-ONLY); corpus_regression green, reveals 3 dark-tail re-blesses (.5.4)` | commit `e74149d` |
-| `.5.4` | `PHASE0-BACKHALF-TRIAGE.5.4 — re-bless 3 dark-tail failures (TEST-ONLY); phase0 fully GREEN 960/960` | this commit |
+| `.5.4` | `PHASE0-BACKHALF-TRIAGE.5.4 — re-bless 3 dark-tail failures (TEST-ONLY); phase0 fully GREEN 960/960` | commit `89e9526` |
+| `.5.3.1` | `PHASE0-BACKHALF-TRIAGE.5.3.1 — drop stale plugin/ ref in tools/run_ci_local.sh; full local gate green end-to-end` | this commit |
 
 ## Changelog
 
@@ -704,3 +743,18 @@ can also proceed in parallel if the engine touch is deferred).
   behavior unchanged — only the non-idiomatic regression-test's expected AST shape; 960 is internal test infra).
   **`.5` green-phase0 goal MET; the gate-flip child `.5.3` is now UNBLOCKED + PNT-eligible (frontier order 1),
   then `.6` (book `:AND`).**
+- `2026-06-22`: `.5.3` **SPLIT** + `.5.3.1` **DONE** (`tools/run_ci_local.sh` only — CI tooling, not engine/spec).
+  Scoping `.5.3` (flip the downstream gates) revealed the "full local gate green" acceptance was itself RED: the
+  canonical gate `tools/run_ci_local.sh` (the E4 source-of-truth since hosted CI is disabled, ADR `0004`) died at
+  `require_tracked_tree plugin` → "required directory missing: plugin", EXIT 1, *before* phase0 — because
+  `NONCORE-QUARANTINE.3` `git mv`'d the 13 `.plg` to `noncore/plugin/` and rmdir'd `plugin/` but left `plugin` in
+  two of the gate's pathspec lists (the same NONCORE-QUARANTINE leftover class as `.5.1`/`.5.4`). Since the
+  remaining gate-flips span 3 trees + a doc/book/KM sync (too broad for one slice), split `.5.3` → `.5.3.1`
+  (full-gate-green, done here) + `.5.3.2` (status/doc/KM reconciliation, pending). **`.5.3.1`:** dropped `plugin`
+  from both pathspec lists (the `require_tracked_tree` loop + the `check_no_untracked_ci_inputs` git-status
+  pathspec; core gate stays core-only — NOT retargeted to `noncore/`, per the `.5.1` precedent) with a rationale
+  comment. `bash -n` OK; **`bash tools/run_ci_local.sh` now EXIT 0 end-to-end** — doctrine 2/2 PASS, tracked-input
+  audits pass, `perl -c` clean, `prove -v -Iperl t/phase0_regression.t` = `1..960` / `Result: PASS` (~198s),
+  "[ci] local CI gate passed". Advances `NONCORE-QUARANTINE.V`'s "full local gate green" acceptance. Book
+  unaffected. **Next: `.5.3.2`** (flip the downstream blocked statuses + doc/KM sync across `NONCORE-QUARANTINE.V`,
+  `LEGACY-VHDL-RETIRE.4/.5`, `SPEC-FORMAT-TERSE` impl-gate), then `.6` (book `:AND`).

@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows tools/run_ci_local.sh specs plugin conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows tools/run_ci_local.sh specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -85,7 +85,10 @@ require_tracked_file MEMORY_ARCHITECTURE.md
 require_tracked_file KNOWLEDGE_MAP.md
 require_tracked_file knowledge-map/scripts/gen_knowledge_map.sh
 require_tracked_file knowledge-map/scripts/check_knowledge_map.sh
-for path in specs plugin conf tablescript ebnf perl t; do
+# NOTE: 'plugin' is intentionally NOT required here — NONCORE-QUARANTINE.3 git mv'd the 13 .plg to
+# noncore/plugin/ and removed the top-level plugin/ dir. The core gate stays core-only and does not reach
+# into noncore/ (same core-only precedent as PHASE0-BACKHALF-TRIAGE.5.1/.5.4). (PHASE0-BACKHALF-TRIAGE.5.3.1)
+for path in specs conf tablescript ebnf perl t; do
  require_tracked_tree "$path"
 done
 check_no_untracked_ci_inputs

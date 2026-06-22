@@ -1,6 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.3.1 — drop the stale `plugin/` reference in `tools/run_ci_local.sh`; the full local gate now passes green end-to-end
+
+CI tooling only — **no engine/spec/production code touched** (only `tools/run_ci_local.sh` + task-tree/live docs).
+
+Scoping `.5.3` (flip the downstream gates now that phase0 is green) surfaced that the "full local gate green"
+acceptance was itself **RED**. `tools/run_ci_local.sh` is the **E4 source-of-truth gate** (hosted GitHub Actions
+is disabled — ADR `0004` — so the local gate is authoritative). Running it confirmed it died at
+`require_tracked_tree plugin` → `[ci] ERROR: required directory missing: plugin`, **EXIT 1, before phase0 even
+ran**: `NONCORE-QUARANTINE.3` `git mv`'d the 13 `.plg` to `noncore/plugin/` and rmdir'd the top-level `plugin/`,
+but left `plugin` in two of the gate's pathspec lists — the `require_tracked_tree` loop and the
+`check_no_untracked_ci_inputs` git-status pathspec. This is the **same NONCORE-QUARANTINE leftover class** as the
+test's stale plugin refs that `.5.1`/`.5.4` cleaned.
+
+Because the remaining gate-flips span 3 trees + a doc/book/KM sync (too broad for one signoff slice), `.5.3` was
+split → `.5.3.1` (this slice: make the full gate green) + `.5.3.2` (the status/doc/KM reconciliation, pending).
+
+**Fix (`.5.3.1`):** removed `plugin` from both pathspec lists (left a rationale comment). The core gate stays
+**core-only** — `plugin` is dropped, NOT retargeted to `noncore/plugin` (the `noncore/` tree is quarantined/parked,
+not a core CI input), consistent with the `.5.1`/`.5.4` core-only precedent. The remaining required trees
+(`specs conf tablescript ebnf perl t`) are all extant core/corpus inputs.
+
+**Verification:** `bash -n tools/run_ci_local.sh` OK; **`bash tools/run_ci_local.sh` → EXIT 0 end-to-end** —
+doctrine driver 2/2 PASS, tracked-input + machine-path audits pass, `perl -c perl/LinkedSpec.pm` +
+`perl -c -Iperl t/phase0_regression.t` clean, RAM guard within threshold, and
+`prove -v -Iperl t/phase0_regression.t` = `1..960` / `All tests successful` / `Files=1, Tests=960` (~198s) /
+`Result: PASS`, ending `[ci] local CI gate passed`. Book unaffected (CI tooling, not a user surface).
+
+This advances `NONCORE-QUARANTINE.V`'s "full local gate green" acceptance. Both the phase0 regression suite and
+the full local gate are now green together for the first time. **Next: `.5.3.2`** — flip the downstream blocked
+statuses + doc/KM sync across `NONCORE-QUARANTINE.V`, `LEGACY-VHDL-RETIRE.4/.5`, and the `SPEC-FORMAT-TERSE`
+implementation gate — then `.6` (book `:AND`).
+
 ## 2026-06-22 — PHASE0-BACKHALF-TRIAGE.5.4 — re-bless the 3 dark-tail failures (TEST-ONLY); `t/phase0_regression.t` is now fully GREEN end-to-end (960/960)
 
 User directive: bootstrap thoroughly (roadmap + codebase + mdBook) then continue the active frontier. **No
