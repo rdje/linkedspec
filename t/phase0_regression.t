@@ -43775,6 +43775,81 @@ subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => s
         'entry_text() on a top rule (no entering match) yields null -- the footgun the book steers away from');
 };
 
+subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_declare' => sub {
+    # SPEC-FORMAT-TERSE.1.1.1 (ADR 0007): a working variable referenced through a typed
+    # wrapper -- scalar(NAME)/array(NAME)/hash(NAME) or the s()/a()/h() aliases -- needs no
+    # declare(...). The engine auto-supplies one `my $NAME`/`@NAME`/`%NAME` in the handler
+    # preamble, so the variable is a PER-INVOCATION lexical, not a leaky package global
+    # (generated handlers are non-strict -- KM card working-vars-no-strict-need-my-lexical).
+    # Decisive proof: run the SAME parser twice IN-PROCESS -- a leaky global would accumulate
+    # across parses (3 then 6 words; 3 then 6 array items); a proper `my` gives the same
+    # result each time.
+    plan tests => 6;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
+    };
+
+    # (a) scalar working variable used WITHOUT declare: a per-match counter.
+    my $scalar_spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(s(count), num_add(coalesce(s(count), 0), 1)) }\n"
+                    . "LX {return(s(count))}\n";
+    my $sp = eval { LinkedSpec::Get(\$scalar_spec) };
+    ok(ref($sp) eq 'CODE', 'no-declare scalar working var: spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($sp, 'a b c'), '3', 'no-declare scalar counter returns 3 for 3 words');
+    is($run->($sp, 'a b c'), '3', 're-running the SAME parser still returns 3 (per-invocation my, not a leaky global)');
+
+    # (b) array working variable used WITHOUT declare: a per-match accumulator.
+    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(a(items), match_group(0)) }\n"
+                   . "LX {return(array_copy(a(items)))}\n";
+    my $ap = eval { LinkedSpec::Get(\$array_spec) };
+    ok(ref($ap) eq 'CODE', 'no-declare array working var: spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($ap, 'a b c'), '["a","b","c"]', 'no-declare array accumulator collects all 3 words');
+    is($run->($ap, 'a b c'), '["a","b","c"]', 're-running the SAME parser still returns 3 items (per-invocation my, not a leaky global)');
+};
+
+subtest 'spec_format_terse_1_1_1_declare_path_stays_single_my_no_double' => sub {
+    # The auto-collector dedups against any same-sigil `my` already in the lowered handler
+    # (declare(...) or raw my), so a spec that DOES declare its working vars emits exactly
+    # one `my $NAME` -- byte-identical generated source, no double declaration -- while the
+    # no-declare spec gets the auto-injected `my`.
+    plan tests => 2;
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+    my $declared = "top:: /(\\w+)\\s*/ -> top[0] { assign(s(count), num_add(coalesce(s(count), 0), 1)) }\n"
+                 . "I.declare(scalar, count)\n"
+                 . "LX {return(s(count))}\n";
+    (my $no_declare = $declared) =~ s/^I\.declare\(scalar, count\)\n//m;
+    my $declared_src = $gen->($declared);
+    my $n = () = ($declared_src =~ /my \$count\b/g);
+    is($n, 1, 'declared scalar var emits exactly one `my $count` (dedup against the declare; no double my)');
+    like($gen->($no_declare), qr/my \$count\b/, 'no-declare scalar var auto-supplies `my $count` in the generated preamble');
+};
+
+subtest 'spec_format_terse_1_1_1_reserved_literals_are_not_auto_declared' => sub {
+    # a(undef)/array(undef) is the array constructor wrapping the undef LITERAL, not a
+    # reference to a variable named "undef" -- so it must NOT auto-declare `my @undef`
+    # (this guards the Lispish-style `return(a(undef))` form). A genuine adjacent working
+    # variable in the same spec is still auto-declared.
+    plan tests => 2;
+    my $src = '';
+    my $spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(s(x), match_group(0)) }\n"
+             . "LX {return(a(undef))}\n";
+    eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+        or diag("gen failed: $@");
+    unlike($src, qr/my \@undef\b/, 'the undef literal in a(undef) is NOT auto-declared as a working variable');
+    like($src, qr/my \$x\b/, 'a genuine adjacent working variable (s(x)) is still auto-declared');
+};
+
 done_testing();
 
 sub discover_specs {

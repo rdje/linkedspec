@@ -414,7 +414,18 @@ sub compile_spec_entry {
  my $lscode = $emit_ctx->{lscode};
  my $lecode = $emit_ctx->{lecode};
 
- my $actual_icode = $icode && "$icode;" || "";
+ # SPEC-FORMAT-TERSE.1.1.1 — auto-existing working variables: the emit context supplies
+ # one `my $NAME`/`@NAME`/`%NAME` per wrapper-referenced working variable that is not
+ # already declared (deduped against the lowered code + the @<label> accumulator). Inject
+ # it into the preamble (after `my @<label>;`, before the I-code) so the variable is a
+ # per-invocation lexical visible to every edge and lifecycle block — NOT inline per edge,
+ # which would re-run each dispatch iteration and reset an accumulator. Empty for any spec
+ # that already declares its working vars (declare path stays byte-identical).
+ my $auto_var_decls = $emit_ctx->{auto_var_decls};
+ my $auto_var_decl_code = (ref($auto_var_decls) eq 'ARRAY' && @$auto_var_decls)
+  ? join("\n", @$auto_var_decls) . "\n"
+  : '';
+ my $actual_icode = $auto_var_decl_code . ($icode && "$icode;" || "");
  my $actual_ecode = $ecode && "$ecode;" || "";
  my $actual_excode = $excode && "$excode;" || "";
  my $actual_itcode = $itcode && "$itcode;" || "";

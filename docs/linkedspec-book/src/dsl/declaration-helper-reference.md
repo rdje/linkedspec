@@ -28,6 +28,31 @@ That looks small, but it is an important architectural boundary. `declare(...)` 
 
 Use declaration helpers when the state is part of the parser action. Avoid raw declaration code in new examples.
 
+## Declarations are optional: working variables auto-exist
+
+You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed wrapper — `scalar(NAME)` / `array(NAME)` / `hash(NAME)`, or the `s()` / `a()` / `h()` aliases — **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper (`scalar` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
+
+```text
+# explicit declaration (still fully supported)
+I { declare(scalar, count) }
+-> Item[0] { assign(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
+
+# auto-existing — no declare needed
+-> Item[0] { assign(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
+```
+
+An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
+
+`declare(...)` stays supported and is still the right choice when you want to:
+
+- give the variable an **initializer** — `declare(scalar, count=0)`;
+- state the **kind and intent** explicitly for readers; or
+- gather a rule's working state in one visible `I { ... }` preamble.
+
+The shipped specs and the examples in this chapter still use `declare(...)` for clarity. Note that the kind is taken from the wrapper only — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash. Inferring the kind from a right-hand side or an argument position is a separate, later evolution step.
+
+> **Reserved names.** `undef`, `true`, and `false` are literals, so `a(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
+
 ## Canonical typed form
 
 The preferred declaration shape is:

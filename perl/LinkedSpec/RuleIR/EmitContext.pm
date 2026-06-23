@@ -695,6 +695,143 @@ sub _build_action_rewriter_meta {
  return $action_rewriter_meta
 }
 
+# Wrapper-helper -> Perl sigil for auto-existing working variables (SPEC-FORMAT-TERSE.1.1.1).
+# scalar/s -> $, array/a -> @, hash/h -> %. The sigil is taken from the wrapper only;
+# RHS / arg-position type inference is a later leaf (.1.2), not this one.
+my %AUTO_WORKING_VAR_WRAPPER_SIGIL = (
+ scalar => '$', s => '$',
+ array  => '@', a => '@',
+ hash   => '%', h => '%',
+);
+
+# Names that must NEVER be auto-declared as working variables. Two groups:
+#  (1) DSL literals — `a(undef)`/`array(undef)` is the array constructor wrapping the
+#      undef literal, NOT a reference to a variable named "undef" (likewise true/false).
+#  (2) Engine-reserved handler locals declared by the preamble template
+#      (_build_handler_preamble) and the variant scaffolding ($descr/$STRING/$info, the
+#      $IMATCH*/$IPOS/$IINDEX set, the per-iteration $minfo/$LMATCH*/$LSPOS/$LINDEX set,
+#      and the CAPTURE source token). These are declared outside the action code this
+#      collector scans, so injecting a `my` for them would double-declare. Case-sensitive.
+my %AUTO_WORKING_VAR_RESERVED = map { $_ => 1 } qw(
+ undef true false
+ descr STRING info minfo
+ IMATCH IMATCH_LIST IMATCH_HASH IINDEX IPOS
+ LMATCH LMATCH_LIST LMATCH_HASH LINDEX LSPOS
+ CAPTURE
+);
+
+#------------------------------------------------------------------------------
+# Function: _mask_action_code_literals
+# Purpose : Blank the *contents* of single-quoted, double-quoted, and /regex/
+#           literals (keeping the delimiters, length, and newlines) so a literal
+#           that happens to contain wrapper-call-looking text (e.g. a string
+#           "... s(x) ...") cannot produce a spurious working-variable collection.
+#           An unmatched delimiter is treated as an ordinary character (no runaway
+#           masking). The rule's regex `re` slots are never scanned, so this only
+#           guards literals embedded inside action code.
+# Args    : ($code)
+# Returns : masked code string
+#------------------------------------------------------------------------------
+sub _mask_action_code_literals {
+ my ($code) = @_;
+ return '' unless defined $code;
+ my $len = length $code;
+ my $out = '';
+ my $i = 0;
+ while ($i < $len) {
+  my $ch = substr($code, $i, 1);
+  if ($ch eq '"' || $ch eq "'" || $ch eq '/') {
+   # Look ahead for the matching close, honoring backslash escapes.
+   my $j = $i + 1;
+   my $found = -1;
+   while ($j < $len) {
+    my $c = substr($code, $j, 1);
+    if ($c eq '\\') { $j += 2; next; }
+    if ($c eq $ch) { $found = $j; last; }
+    ++$j;
+   }
+   if ($found >= 0) {
+    my $inner = substr($code, $i + 1, $found - $i - 1);
+    $inner =~ s/[^\n]/ /g;   # blank content, preserve newlines (and length)
+    $out .= $ch . $inner . $ch;
+    $i = $found + 1;
+    next;
+   }
+   # No closing delimiter: treat the opener as an ordinary character.
+   $out .= $ch;
+   ++$i;
+   next;
+  }
+  $out .= $ch;
+  ++$i;
+ }
+ return $out
+}
+
+#------------------------------------------------------------------------------
+# Function: _collect_auto_working_var_decls
+# Purpose : SPEC-FORMAT-TERSE.1.1.1 — auto-existing working variables. Scan every
+#           RAW (pre-lowering) action-code block of a rule for typed-wrapper
+#           variable references — scalar(NAME)/array(NAME)/hash(NAME) and the
+#           s()/a()/h() aliases with a single bare-identifier argument (NOT the
+#           2-arg scalar(container,key) read, which has a comma) — and return the
+#           preamble `my $NAME`/`@NAME`/`%NAME` declarations the engine must supply
+#           so the variable is a per-invocation lexical rather than a leaky package
+#           global (generated handlers are non-strict — see KM card
+#           working-vars-no-strict-need-my-lexical). The sigil is taken from the
+#           wrapper. Deduped against (a) the per-rule accumulator @<label> and
+#           (b) any name already declared with the same sigil in the LOWERED handler
+#           code (declare(...) or raw `my`), so a spec that already declares its
+#           working vars emits byte-identical generated source (no double `my`).
+# Args    : ($rule_ir, $lowered_text)  # $lowered_text = concatenated lowered code
+# Returns : arrayref of "my <sigil><name>;" declaration strings (possibly empty)
+#------------------------------------------------------------------------------
+sub _collect_auto_working_var_decls {
+ my ($rule_ir, $lowered_text) = @_;
+ return [] unless ref($rule_ir) eq 'HASH';
+ my $label = defined($rule_ir->{label}) ? $rule_ir->{label} : '';
+
+ # Gather every RAW action-code block of the rule (NOT the regex `re` slots).
+ my @raw_blocks;
+ my $code_blocks = (ref($rule_ir->{code_blocks}) eq 'HASH') ? $rule_ir->{code_blocks} : {};
+ for my $key (qw(ICODE ECODE EXCODE ITCODE LXCODE LSCODE LECODE)) {
+  push @raw_blocks, @{$code_blocks->{$key} || []};
+ }
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{acode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{bcode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{and_icode_entries} || []};
+
+ # Collect ordered-unique (sigil, name) wrapper references from the literal-masked code.
+ my @collected;
+ my %seen;
+ for my $block (@raw_blocks) {
+  next unless defined($block) && length($block);
+  my $masked = _mask_action_code_literals($block);
+  while ($masked =~ /\b(scalar|array|hash|s|a|h)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
+   my ($wrapper, $name) = ($1, $2);
+   my $sigil = $AUTO_WORKING_VAR_WRAPPER_SIGIL{$wrapper};
+   next unless defined $sigil;
+   next if $AUTO_WORKING_VAR_RESERVED{$name};   # DSL literal or engine-reserved local
+   my $dedup_key = $sigil . $name;
+   next if $seen{$dedup_key}++;
+   push @collected, { sigil => $sigil, name => $name };
+  }
+ }
+ return [] unless @collected;
+
+ # Dedup against the accumulator @<label> and anything already declared (same sigil)
+ # in the lowered handler code, then emit one `my` per surviving working variable.
+ my @decls;
+ for my $var (@collected) {
+  my ($sigil, $name) = ($var->{sigil}, $var->{name});
+  next if $sigil eq '@' && $name eq $label;   # the auto `my @<label>` accumulator
+  next if defined($lowered_text) && length($lowered_text)
+       && $lowered_text =~ /\bmy\s+\Q$sigil$name\E\b/;
+  push @decls, "my $sigil$name;";
+ }
+ return \@decls
+}
+
 #------------------------------------------------------------------------------
 # Function: build_rule_ir_emit_context
 # Purpose : Build fully-rewritten emit context (ACODE/BCODE/dependency_refs/lifecycle
@@ -748,6 +885,21 @@ sub build_rule_ir_emit_context {
   $rewrite_diag_acc,
  );
 
+ # SPEC-FORMAT-TERSE.1.1.1 — auto-existing working variables. Collect typed-wrapper
+ # references across the rule's RAW blocks and emit one preamble `my` per working
+ # variable that is not already declared (deduped against the LOWERED handler code so
+ # specs that use declare(...) stay byte-identical). See _collect_auto_working_var_decls.
+ my $lowered_text = join("\n",
+  grep { defined && length }
+  (
+   $lifecycle_code->{icode}, $lifecycle_code->{ecode}, $lifecycle_code->{excode},
+   $lifecycle_code->{itcode}, $lifecycle_code->{lxcode}, $lifecycle_code->{lscode},
+   $lifecycle_code->{lecode}, $and_icode,
+   @{$acodes || []}, values %{$bcodes || {}},
+  )
+ );
+ my $auto_var_decls = _collect_auto_working_var_decls($rule_ir, $lowered_text);
+
  return {
   label     => $label,
   node_type => $rule_ir->{node_type},
@@ -758,6 +910,7 @@ sub build_rule_ir_emit_context {
   DEPENDENCY_REFS => $dependency_refs,
   ab_count  => \%ab_count,
   and_icode => $and_icode,
+  auto_var_decls => $auto_var_decls,
   icode     => $lifecycle_code->{icode},
   ecode     => $lifecycle_code->{ecode},
   excode    => $lifecycle_code->{excode},

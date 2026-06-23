@@ -11,6 +11,9 @@ answers:
   - "why would a bare working variable leak across parser invocations or recursion"
   - "how does scalar(x)/array(x)/hash(x) map to a perl sigil in generated handler code"
   - "why can an inline my not be used for a .spec accumulator variable"
+  - "where is auto-existing variables (SPEC-FORMAT-TERSE.1.1.1) implemented in the engine"
+  - "how does the engine auto-supply the my declaration for wrapper-referenced working variables"
+  - "how are declare-using specs kept byte-identical when auto-existence is added"
 date: 2026-06-23
 status: confirmed
 tags: [engine, codegen, SpecEntry, dsl, variables, declare, spec-format-terse, strict, SPEC-FORMAT-TERSE]
@@ -78,6 +81,26 @@ source runs **non-strict**. Remove the `declare` and the handler still compiles 
   [0002](../decisions/0002-all-target-actionir-ready-invariant.md)).
 - **Lockstep:** the Rust variant owes the same auto-existence (ADR
   [0006](../decisions/0006-multi-backend-vision.md)); tracked as a separate parity leaf.
+
+## Implemented (SPEC-FORMAT-TERSE.1.1.1, 2026-06-24)
+
+Done for the **Perl reference**. The rule-level collector
+`LinkedSpec::RuleIR::EmitContext::_collect_auto_working_var_decls` (+ literal-masker
+`_mask_action_code_literals`) scans the RAW pre-lowering blocks (`rule_ir->{code_blocks}` plus the
+`acode_entries`/`bcode_entries`/`and_icode_entries` — **never** the regex `re` slots) for
+single-bare-identifier typed-wrapper refs (`scalar(NAME)`/`s(NAME)`, `array(NAME)`/`a(NAME)`,
+`hash(NAME)`/`h(NAME)`), takes the sigil from the wrapper, and dedups against (a) the `@<label>`
+accumulator and (b) any same-sigil `my <sigil>NAME` already in the **lowered** handler code (so a
+`declare(...)` or raw `my` ⇒ no double `my`). It excludes the DSL literals `undef`/`true`/`false` and
+the engine-reserved handler locals (`$IMATCH`/`@IMATCH_LIST`/`$IPOS`/`$IINDEX`,
+`$LMATCH`/`@LMATCH_LIST`/`$LSPOS`/`$LINDEX`, `$descr`/`$STRING`/`$info`/`$minfo`, `CAPTURE`).
+`build_rule_ir_emit_context` returns it as `auto_var_decls`; `SpecEntry::compile_spec_entry` prepends
+it to the preamble icode (empty ⇒ unchanged ⇒ byte-identical). **Verified:** 19/20 shipped specs
+byte-identical generated source; only `tkgui` gains one legit `my $subgui_name;` (parse output
+identical before/after, incl. a 2nd same-process parse — proving per-invocation `my`, not a leaky
+global). A Lispish `a(undef)`→`my @undef` false positive was caught by the all-specs diff and fixed by
+the reserved-literal exclusion. +3 phase0 locks → 965→968 green; gate EXIT 0; ratio 1.0000. The Rust
+lockstep parity is `SPEC-FORMAT-TERSE.1.1.2`.
 
 ## Links
 

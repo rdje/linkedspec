@@ -7,6 +7,16 @@ identically. No Perl implementation knowledge is required.
 
 ## 1. Declaration Helpers
 
+> **Declaration is optional — working variables auto-exist.** Referencing a variable through a
+> typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`, or the `s()`/`a()`/`h()` aliases)
+> auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
+> required first. A backend MUST supply the same auto-existence: a wrapper-referenced variable
+> with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
+> carried across parses or recursive re-entries. `declare(...)` is the explicit form: use it for an
+> initializer, an explicit kind, or a grouped rule-state preamble. The DSL literals
+> `undef`/`true`/`false` and the engine's own handler locals are never treated as working-variable
+> names (so `a(undef)` builds an array holding the `undef` literal, not a variable `undef`).
+
 ### `declare(scalar, name)`
 - **Signature**: `declare("scalar", name: string)`
 - **Returns**: void
@@ -32,8 +42,8 @@ identically. No Perl implementation knowledge is required.
 ### `assign(name, value)`
 - **Signature**: `assign(name: string, value: expr)`
 - **Returns**: void
-- **Behavior**: Reassigns a previously declared working variable. The variable must exist.
-- **Errors**: Assigning to an undeclared variable.
+- **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the typed-wrapper reference auto-creates it as a per-invocation working variable of the wrapper's kind (see the note at the top of this section); otherwise it reassigns the existing variable.
+- **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper.
 
 ## 2. Scalar Helpers
 

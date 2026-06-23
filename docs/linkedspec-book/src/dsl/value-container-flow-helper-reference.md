@@ -139,6 +139,8 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `scalar(name)` | scalar value | read the working scalar `name`. |

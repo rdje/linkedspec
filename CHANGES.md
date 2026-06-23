@@ -1,6 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-24 — SPEC-FORMAT-TERSE.1.1.1 — Perl auto-existing working variables (ENGINE + BOOK + 3 phase0 locks)
+
+**Scope:** Perl reference engine (`perl/LinkedSpec/RuleIR/EmitContext.pm`,
+`perl/LinkedSpec/SpecEntry.pm`) + 3 new `t/phase0_regression.t` locks + 3 mdBook pages + task tree +
+KM card + live docs. First terse-format (ADR `0007`) **implementation** leaf. Rust lockstep parity is
+the follow-on `.1.1.2`.
+
+**What changed (the feature).** A `.spec` working variable referenced through a typed wrapper —
+`scalar(NAME)`/`array(NAME)`/`hash(NAME)` or the `s()`/`a()`/`h()` aliases — no longer needs a prior
+`declare(...)`. The engine now auto-supplies one `my $NAME`/`@NAME`/`%NAME` in the handler preamble, so
+the variable is a **per-invocation lexical** instead of a **leaky package global** (generated handlers
+run non-strict — KM `working-vars-no-strict-need-my-lexical`). `declare(...)` keeps working unchanged
+(optional/explicit form; gradual-alias migration).
+
+**How.** A rule-level collector `RuleIR::EmitContext::_collect_auto_working_var_decls` (+ a literal-masker
+`_mask_action_code_literals`) scans the RAW pre-lowering blocks (`code_blocks` + `acode`/`bcode`/
+`and_icode` entries — **never** the regex `re` slots) for single-bare-identifier wrapper refs, takes the
+sigil from the wrapper, and dedups against the `@<label>` accumulator + any same-sigil `my` already in
+the LOWERED code (declare/raw-my). It excludes the DSL literals `undef`/`true`/`false` and the
+engine-reserved handler locals. `build_rule_ir_emit_context` returns it as `auto_var_decls`;
+`SpecEntry::compile_spec_entry` prepends it to the preamble icode — an **empty** prefix when nothing is
+collected, so declared specs stay **byte-identical**.
+
+**Verification (TOOLBOX-first, dump-don't-guess).** `dump_parser_source` confirmed the no-declare hazard
+(bare leaky-global `$count`/`@items`) and the injected `my`. Generated source for **all 20 shipped specs**
+diffed mine-vs-git-stashed = **19/20 byte-identical**; only `tkgui` differs (one legit `my $subgui_name;`
+for its genuinely-undeclared working scalar) with **identical parse output before/after, incl. a 2nd
+same-process parse** (no leak). A Lispish `a(undef)`→`my @undef` false positive was caught by the diff and
+fixed via the reserved-literal exclusion. **+3 phase0 locks** (no-declare scalar+array work + no
+cross-parse leak; declare-path single-`my`; reserved-literal not auto-declared) → **phase0 965→968 green**;
+`bash tools/run_ci_local.sh` **EXIT 0** ("Result: PASS", 968); ratio 1.0000 preserved (phase0 all-target
+guard); `mdbook build` EXIT 0.
+
+**Book (variant-agnostic contract).** Taught auto-existence (declare optional) in
+`dsl/declaration-helper-reference.md` (new section), `appendix/helper-contract-catalog.md` §1 (note +
+corrected the `assign` "must exist"/undeclared-error contract), and
+`dsl/value-container-flow-helper-reference.md`. Examples NOT re-authored (a later gradual leaf).
+
+**Next:** `SPEC-FORMAT-TERSE.1.1.2` (Rust lockstep parity — now PNT-eligible to assess; ADR `0006`/`0007`).
+
 ## 2026-06-23 — ROADMAP-DRIFT-RECONCILE.0 — own the deferred ROADMAP.md / ARCHITECTURE_STATE.md drift (TRACKING-ONLY)
 
 **Scope:** one new task-tree file (`docs/tasks/ROADMAP-DRIFT-RECONCILE.md`) + its index row in
