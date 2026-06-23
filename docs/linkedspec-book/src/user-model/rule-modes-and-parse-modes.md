@@ -28,6 +28,15 @@ Top::AND
 Item:AND
 ```
 
+This is because `::` is only an **entry marker** — it designates the rule entered first.
+A top rule is otherwise an ordinary rule: it can carry any mode, carry a regex, and
+recurse, exactly like a body rule (see
+[.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#the-top--rule-is-an-ordinary-rule-entered-first)).
+The common "no mode and no regex on the top rule" two-rule shape is recommended idiom for
+stream-of-records parsing, not a restriction. Recursion through any rule — including the
+top rule — must consume input before it recurses; a non-progressing (no-consume) cycle is
+cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
+
 The current public suffix surface is intentionally small and exact:
 
 - `Rule:` is the historical baseline repeated-alternative rule shape.
@@ -118,21 +127,28 @@ Pair::AND
 
 Use `:AND` when readability matters more than compactness. It is especially useful in public examples, wrapper rules, and specs where a reader should not have to remember that `&` means ordered sequence.
 
-A helper-style action can still shape the final result in the usual way:
+A helper-style action can still shape the final result in the usual way. Note that this
+`Pair` is a top (`::`) rule matching its **own** regex slots, so nothing *entered* it:
+read each slot's match with the `match_*` family from a **post-match edge action**, not
+the `entry_*` family (which is for a match that entered a dispatched rule, and is empty
+here):
 
 ```text
 Pair::AND
  I { declare(hash, pair) }
- /[A-Za-z_]\w*/ -> Pair[0] {
-   assign(hash(pair), set_key(hash(pair), "name", entry_text()));
+ /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
+   assign(hash(pair), set_key(hash(pair), "name", match_group(0)));
  }
- /\s*=\s*/
- /[^,\n]+/ -> Pair[2] {
-   return(set_key(hash(pair), "value", entry_text()));
+ /([^,\n]+)/ -> Pair[1] {
+   return(set_key(hash(pair), "value", match_group(0)));
  }
 ```
 
-The rule mode controls the ordered matching. The action code controls what value the rule returns.
+On input `name = value` (parse mode `consume`) this returns
+`{ "name": "name", "value": "value" }`. The rule mode controls the ordered matching; the
+action code controls what value the rule returns. (The `\s*=\s*` separator is folded into
+the name slot: a bare edge-less regex slot in an `AND` rule is a positional anchor that is
+not separately captured, so attach the separator to a slot that owns an edge.)
 
 ## Single choice: `:|`
 

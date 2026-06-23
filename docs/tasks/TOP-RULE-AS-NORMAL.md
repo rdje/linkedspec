@@ -6,13 +6,18 @@
 - Status: `active` (created 2026-06-23)
 - Roadmap lane: `Overall roadmap — .spec language model / engine evolution`
 - Created: `2026-06-23`
-- Last updated: `2026-06-23` (`.3` SPLIT → `.3.1` + `.3.2` after Rust diagnosis. **`.3.1` DONE** — Rust
-  forward-progress / consume-before-recurse termination guard (mirror of `.2.1`) in
-  `rust/linkedspec-runtime/src/{runtime,engine}.rs`: a no-consume recursive cycle now terminates cleanly
-  (was: native stack overflow → SIGABRT) and returns `[null]` = Perl's `undef` wrapped one level; +2 Rust
-  locks; Rust suite 242→244 green; phase0 964/964 + full local gate EXIT 0 (Perl untouched). **`.3.2` BLOCKED**
-  on the GENERAL recursive-grammar parse gap (Rust returns nulls even for the standard body idiom) owned by
-  `RUST-PARITY`. Frontier → `.4` (book reconciliation).)
+- Last updated: `2026-06-23` (**`.4` DONE** — book reconciliation to the new model. Demoted "Body rule
+  only" / "no regex on top" / "needs at least two rules" from law to **idiom** across 6 book files
+  (`appendix/formal-grammar.md`, `user-model/{rule-modes-and-parse-modes,spec-files-and-rule-paragraphs,worked-spec-walkthrough}.md`,
+  `overview/what-is-linkedspec.md`, `appendix/helper-contract-catalog.md`); documented `::` = entry marker /
+  ordinary-rule-entered-first, the consume-before-recurse forward-progress **termination** rule (formal-grammar
+  §5.4), and the recursive-top-rule-needs-`LX` model; **de-footgunned** the `Pair::AND` regex-on-top example
+  (`entry_text()`→`match_group(0)` from a post-match edge; folded the bare separator slot) and **fixed** the
+  worked-walkthrough multi-pair output bug (two pairs is a `seek` result, not `consume`). All examples verified
+  via `LinkedSpec::Get` (dump-don't-transcribe); `mdbook build` EXIT 0; book variant-agnostic. +1 phase0 lock
+  (`top_rule_as_normal_regex_on_top_reads_own_match_with_match_family`, 3 assertions): **phase0 964→965 green**;
+  new KM card [[top-rule-reads-own-match-with-match-family]]. **All `.4` children done; tree acceptance met.**
+  Earlier this day: `.3` SPLIT → `.3.1` (DONE) + `.3.2` (BLOCKED on `RUST-PARITY`).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -45,7 +50,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 
 ## Task Tree
 
-- ID: `TOP-RULE-AS-NORMAL` · Status: `active` · Children: `.1` (done), `.2`, `.3`, `.4`
+- ID: `TOP-RULE-AS-NORMAL` · Status: `active` (acceptance MET; tree stays open only because `.3.2` is
+    `blocked` on `RUST-PARITY` — frontier is otherwise empty) · Children: `.1` (done), `.2` (done),
+    `.3` (active: `.3.1` done, `.3.2` blocked), `.4` (done)
 - ID: `TOP-RULE-AS-NORMAL.1` · Status: `done` (2026-06-23)
   Goal: Read-only investigation — what does the engine actually special-case about `::` w.r.t. regex and
     recursion? Establish the real model + the precise gap, before any engine edit.
@@ -200,16 +207,46 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
   Next task instead: `.4` (book reconciliation) is PNT-eligible now; `.3.2` re-enters the frontier when the
     blocker clears.
   Verification: `pending`  ·  Commit: `pending`
-- ID: `TOP-RULE-AS-NORMAL.4` · Status: `pending` (absorbs the superseded `PHASE0-BACKHALF-TRIAGE.6` book work)
+- ID: `TOP-RULE-AS-NORMAL.4` · Status: `done` (2026-06-23) (absorbs the superseded `PHASE0-BACKHALF-TRIAGE.6` book work)
   Goal: Book reconciliation to the new model — demote "Body rule only" / "no regex on top" from law to
     **idiom**; document `::` as "the rule entered first, otherwise ordinary"; document the
     consume-before-recurse termination rule; de-footgun the book's own `Pair::AND` regex-on-top teaching
     examples. Files: `appendix/formal-grammar.md`, `user-model/rule-modes-and-parse-modes.md`,
     `overview/what-is-linkedspec.md`, `worked-spec-walkthrough.md`,
-    `user-model/spec-files-and-rule-paragraphs.md`.
+    `user-model/spec-files-and-rule-paragraphs.md` (+ `appendix/helper-contract-catalog.md`, discovered
+    during the whole-book consistency sweep — it carried the same "needs at least two rules" law claim).
+  What landed (all examples verified via `LinkedSpec::Get`, dump-don't-transcribe):
+    • **Canonical model** in `spec-files-and-rule-paragraphs.md`: a new "The top (`::`) rule is an ordinary
+      rule, entered first" section (`::` = entry marker; modes/regex/recursion all legal on a top rule;
+      two-rule no-regex shape = idiom), plus the `entry_*` vs `match_*` distinction, the
+      consume-before-recurse termination rule, and the recursive-top-rule-needs-`LX` model with a verified
+      `sexpr::`+`LX` example (`(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]`; no-`LX`→`null`).
+    • **formal-grammar.md**: §2.1 `::` = entry marker / ordinary-rule note; §2.2 table column "Body rule only"
+      → "Typical placement" with every mode cell "Body rule (idiom)" + an idiom-not-law note (modes legal on
+      a top rule: `Top::AND`, `Stream::OR+`, `Pair::&`); new **§5.4 Recursion and Forward-Progress
+      Termination** (recursion may re-enter the top rule; consume-before-recurse; a non-progressing cycle is
+      cut to `undef`; backends MUST guarantee this — confirmed cross-variant by the `.3.1` Rust mirror).
+    • **what-is-linkedspec.md** / **worked-spec-walkthrough.md** / **helper-contract-catalog.md**: reframed
+      "normal shape of every `.spec`" / "every `.spec` ... at least two rules" / "regex ... never on the `::`
+      entry rule" / "a valid `.spec` needs at least two rules" from law to recommended idiom.
+    • **De-footgun (`rule-modes-and-parse-modes.md`)**: the `Pair::AND` action example used `entry_text()`
+      (→ `{name:null,value:null}` — a top rule has no entering match); fixed to a post-match edge action +
+      `match_group(0)` and folded the bare `\s*=\s*` separator into the name slot (→ `{name:"name",
+      value:"value"}`). Added a model-tie note up top.
+    • **Correctness fix (`worked-spec-walkthrough.md`)**: the multi-pair `'a = 1, b = 2'` two-pair output was
+      a `seek` result presented in the `consume` context (under `consume` only the first pair matches —
+      cursor stops at the comma); reframed accurately as the consume-vs-seek distinction in miniature.
+    • **Lock + KM**: +1 phase0 lock `top_rule_as_normal_regex_on_top_reads_own_match_with_match_family`
+      (3 assertions: builds; `match_group(0)`→populated; `entry_text()`→null); new KM card
+      [[top-rule-reads-own-match-with-match-family]].
   Acceptance: no book `.spec` example broken/doctrine-contradictory; law-vs-idiom explicit; termination
     rule documented; `mdbook build` EXIT 0; outputs verified via `LinkedSpec::Get`; book variant-agnostic.
-  Verification: `pending`  ·  Commit: `pending`
+    **MET.**
+  Discovered (out of `.4` scope — tracked as an open question): in `AND` mode a bare edge-less middle regex
+    slot is a positional anchor that is not separately consumed (the value slot's `match_*` started before
+    the un-consumed separator). Affects only illustrative no-output structural sketches; not a broken example.
+  Verification: see Verification Log (`.4`).
+  Commit: (this commit)
 
 ## Current Frontier
 
@@ -220,7 +257,8 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | — | `.2.2` | `done` 2026-06-23 | Top re-entry recursion VALUE correctness — CONFIRMED no engine defect: the top-recursive grammar parses with the `LX` accumulator idiom (`null` was the missing-`LX` authoring case); TOP vs BODY are different grammars (different arity). Doc+lock, engine frozen. +1 phase0 lock; 963→964. |
 | — | `.3.1` | `done` 2026-06-23 | Termination parity — Rust forward-progress / consume-before-recurse guard (mirror of `.2.1`): a no-consume recursive cycle now terminates cleanly (no native stack overflow / SIGABRT) instead of crashing; +1 Rust lock; Rust 242→243 green, zero regression. |
 | — | `.3.2` | `blocked` | Value parity on recursive top-rule grammars — blocked on the GENERAL recursive-grammar parse gap (Rust returns nulls even for the standard body-recursion idiom), owned by `RUST-PARITY` (Lispish `.7.5.2`+). Out of frontier until that capability lands. |
-| 1 | `.4` | `pending` | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`); document the termination guarantee + that a recursive rule CAN be the top rule and (like any accumulating top rule) needs an `LX` accumulator-return. |
+| — | `.4` | `done` 2026-06-23 | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`): demoted law→idiom across 6 book files; documented `::`=entry-marker, the consume-before-recurse termination rule (formal-grammar §5.4), and recursive-top-rule-needs-`LX`; de-footgunned the `Pair::AND` example (`entry_text()`→`match_group(0)`) + fixed the multi-pair consume/seek output bug; +1 phase0 lock (964→965); KM card [[top-rule-reads-own-match-with-match-family]]; `mdbook build` EXIT 0. |
+| — | _(empty)_ | — | **No PNT-eligible leaf remains.** Tree acceptance is MET; only `.3.2` (value parity) remains, `blocked` on `RUST-PARITY` recursive-grammar parse parity — out of frontier until that capability lands. PNT should select the next active tree (`SPEC-FORMAT-TERSE.1.x`). |
 
 ## Decisions
 
@@ -265,6 +303,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | `2026-06-23` | `.2.1` | TOOLBOX probes (`call_spec_handler_subst` re-entry seam, `dump_parser_source`, fork+SIGKILL hang census across zero-width/recursive grammars); `perl -c` SpecEntry.pm+LinkedSpec.pm+test; full `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh` | `done` — engine guard added to `SpecEntry.pm`; E4 no-consume hang→`null`; consume-recursion unchanged; **phase0 960→963** (3 new locks, 0 regression); full local gate **EXIT 0** ("Result: PASS"). Discovered the `.2.2` top-recursion value gap. |
 | `2026-06-23` | `.2.2` | `probe9.pl` (TOP+`LX` vs BODY on `(a)`/`(a(b)c)`/`(a) (b)`, dump-don't-transcribe); `perl -c`; full `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh` | `done` — CONFIRMED no engine defect: `sexpr::`+`LX` parses (`(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]` = sequence vs BODY's single `["a"]`); the `null` was the missing-`LX` authoring case. +1 phase0 lock; **phase0 963→964**; full local gate **EXIT 0** ("Result: PASS", 964). No engine/spec change. |
 | `2026-06-23` | `.3.1` | Rust reproduce-first diagnostic (scratchpad test via `parse_spec`→`validate`→`compile`→`Engine::execute`, dump-don't-transcribe): baseline `cargo build` clean + 242 tests green; no-consume `top:: /a/ I{return(call(top))}` on `"aaa"` → **stack overflow → SIGABRT** (GAP). After guard: `cargo build` clean; the 2 new locks pass (`top_rule_as_normal_3_1_no_consume_recursion_terminates` ⇒ `[null]`; `..._consume_before_recurse_is_not_cut` ⇒ array); **full Rust suite 242→244 green** (integration 23→25; corpus/core/unit unchanged); clippy on the changed lib clean (no findings in `runtime.rs`/the added `engine.rs` wrapper; pre-existing `clippy --tests` debt untouched); **phase0 964/964** + `bash tools/run_ci_local.sh` **EXIT 0** (Perl untouched). | `done` — Rust mirror of the `.2.1` `(rule,pos)` forward-progress cutoff; a no-consume recursive cycle terminates cleanly instead of crashing; legitimate consume-before-recurse recursion left intact; zero regression. |
+| `2026-06-23` | `.4` | `LinkedSpec::Get` example verification (scratchpad `verify4*.pl`, dump-don't-transcribe): de-footgunned `Pair::AND`→`{"name":"name","value":"value"}`; `entry_text()` footgun→`{"name":null,"value":null}`; `sexpr::`+`LX` `(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]`, no-`LX`→`null`; worked-spec consume `answer = 42`→1 pair, seek `a = 1, b = 2`→2 pairs, consume `a = 1, b = 2`→1 pair; what-is kv→`[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; no-consume cycle→`null`. `mdbook build` EXIT 0 (anchor verified from generated HTML). `perl -c` clean; **phase0 964→965** (new lock + its 3 assertions pass); doctrine driver 2/2 PASS (KM regenerated); `bash tools/run_ci_local.sh` EXIT 0. | `done` — 6 book files reconciled law→idiom; `::`=entry-marker + §5.4 termination + recursive-top-rule-needs-`LX` documented; `Pair::AND` de-footgunned; multi-pair consume/seek bug fixed; +1 phase0 lock; KM card added; book variant-agnostic; zero regression. |
 
 ## Commit Log
 
@@ -273,10 +312,35 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | `.1` | `TOP-RULE-AS-NORMAL.1 — own the lane + read-only investigation; ADR 0010 (authorize engine change)` | this commit (DOC-ONLY; engine untouched) |
 | `.2.1` | `TOP-RULE-AS-NORMAL.2.1 — forward-progress/consume-before-recurse termination guard (SpecEntry runtime-handler closure) + 3 phase0 locks; split .2; discover .2.2 top-recursion value gap` | `c2814da` (engine: 1 file, `perl/LinkedSpec/SpecEntry.pm`; +3 phase0 locks; ADR 0010) |
 | `.2.2` | `TOP-RULE-AS-NORMAL.2.2 — confirm top re-entry recursion works with the LX accumulator idiom (NO engine defect; engine frozen); +1 phase0 lock; close .2` | this commit (TEST+DOC only; +1 phase0 lock; no engine/spec change) |
-| `.3.1` | `TOP-RULE-AS-NORMAL.3.1 — Rust forward-progress/consume-before-recurse termination guard (mirror of .2.1); split .3; +2 Rust locks` | this commit (Rust: `rust/linkedspec-runtime/src/{runtime,engine}.rs` + 2 integration locks; Perl untouched) |
+| `.3.1` | `TOP-RULE-AS-NORMAL.3.1 — Rust forward-progress/consume-before-recurse termination guard (mirror of .2.1); split .3; +2 Rust locks` | `808ce0d` (Rust: `rust/linkedspec-runtime/src/{runtime,engine}.rs` + 2 integration locks; Perl untouched) |
+| `.4` | `TOP-RULE-AS-NORMAL.4 — book reconciliation (law→idiom across 6 book files; ::=entry-marker + §5.4 termination + recursive-top-rule-needs-LX; de-footgun Pair::AND; fix multi-pair consume/seek bug); +1 phase0 lock; KM card` | this commit (BOOK+TEST+DOC; 6 book files + `t/phase0_regression.t` + KM card; no engine/spec change) |
 
 ## Changelog
 
+- `2026-06-23` (`.4`): **Book reconciliation DONE; tree acceptance MET.** Reconciled the mdBook to the
+  ADR-`0010` model across **6 files**. Demoted the law claims to **idiom**: `formal-grammar.md` §2.2 table
+  column "Body rule only" → "Typical placement" / "Body rule (idiom)" + a "modes are legal on a top rule"
+  note; the "needs at least two rules" / "regex ... never on the `::` entry rule" / "normal shape of every
+  `.spec`" lines in `what-is-linkedspec.md`, `worked-spec-walkthrough.md`, `helper-contract-catalog.md`.
+  Documented the new model: `spec-files-and-rule-paragraphs.md` gained the canonical "the top (`::`) rule is
+  an ordinary rule, entered first" section (entry marker; modes/regex/recursion legal; idiom vs law; the
+  `entry_*` vs `match_*` rule; the consume-before-recurse termination rule; the recursive-top-rule-needs-`LX`
+  model with a verified `sexpr::`+`LX` example); `formal-grammar.md` §2.1 (entry-marker note) + new **§5.4
+  Recursion and Forward-Progress Termination** (a backend MUST cut a non-progressing recursive re-entry to
+  `undef` — confirmed cross-variant by the `.3.1` Rust mirror). **De-footgunned** the `Pair::AND`
+  regex-on-top example in `rule-modes-and-parse-modes.md`: it read `entry_text()` (null on a top rule, which
+  has no entering match) → fixed to a post-match edge action + `match_group(0)`, folding the bare `\s*=\s*`
+  separator into the name slot (`{name:"name",value:"value"}`). **Fixed a correctness bug** in
+  `worked-spec-walkthrough.md`: the multi-pair `'a = 1, b = 2'` two-pair output is a **`seek`** result that
+  was presented in the `consume` context (under `consume` only the first pair matches) — reframed as the
+  consume-vs-seek distinction. Every runnable example **verified via `LinkedSpec::Get`** (dump-don't-transcribe,
+  scratchpad `verify4*.pl`); `mdbook build` EXIT 0 (cross-ref anchor verified from generated HTML); book stays
+  variant-agnostic. Locked the de-footgun with phase0 `top_rule_as_normal_regex_on_top_reads_own_match_with_match_family`
+  (**964→965 green**); wrote KM card [[top-rule-reads-own-match-with-match-family]] (regenerated the derived
+  map). Discovered (tracked, out of scope): a bare edge-less `AND` middle slot is a positional anchor that is
+  not separately consumed — affects only illustrative no-output sketches. `bash tools/run_ci_local.sh` EXIT 0;
+  doctrine driver 2/2 PASS. Marked `.4` `done`; tree stays `active` only because `.3.2` is `blocked` on
+  `RUST-PARITY` (frontier otherwise empty).
 - `2026-06-23` (`.3.1`): **SPLIT `.3` → `.3.1` + `.3.2`; landed `.3.1` (Rust termination parity).** A
   reproduce-first Rust diagnosis (the four Perl phase0 top-rule grammars driven through
   `parse_spec`→`validate`→`compile`→`Engine::execute`) showed the cross-variant gap has **two independent

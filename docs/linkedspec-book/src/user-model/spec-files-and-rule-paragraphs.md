@@ -15,6 +15,80 @@ Once that rule start is seen at top level, the rest of the paragraph belongs to 
 
 This is a better mental model than thinking of `.spec` files as rigid line-by-line mini-programs.
 
+## The top (`::`) rule is an ordinary rule, entered first
+
+The double colon is an **entry marker**, not a special construct. `top_rule::` says
+"this is the rule a backend enters first." In every other respect a top rule is an
+**ordinary rule**: it can carry a regex, take any rule mode, dispatch with `->`/`=>`
+edges, and be recursive — exactly like a single-colon rule. The minimal example below
+even writes its top rule as `Top::AND` (a mode on a top rule), and other chapters show
+`Top::AND /a/ -> Top[0]` (a regex on a top rule); both are legal.
+
+Two long-standing recommendations are therefore **idiom, not engine law**:
+
+- *"Write a no-regex top rule plus one or more normal rules that carry the regex"* — the
+  two-rule shape (a `::` dispatch loop that `.push`es and an `LX` that returns the
+  accumulator). It is the clean shape for a **stream of records**, and most chapters use
+  it, but it is a style choice, not a requirement.
+- *"Rule modes are body-rule-only"* — a top rule may carry a mode (`Top::AND`,
+  `Stream::OR+`, …) just like a body rule.
+
+A **single recursive document** can be expressed with a recursive top rule directly,
+instead of being forced through a stream-of-records dispatcher.
+
+### Reading the match: `entry_*` versus `match_*` on a top rule
+
+A rule reached **by dispatch** reads the *entering* match with the `entry_*` family
+(the parent's dispatch is what matched). A **top rule has nothing that entered it**, so
+on a top rule the `entry_*` family is empty and an `I` (init) block runs *before* the
+rule matches its own regex. To read a top rule's **own** regex match, use a **post-match
+edge action** and the `match_*` family:
+
+```text
+Pair::AND
+ I { declare(hash, pair) }
+ /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
+   assign(hash(pair), set_key(hash(pair), "name", match_group(0)));
+ }
+ /([^,\n]+)/ -> Pair[1] {
+   return(set_key(hash(pair), "value", match_group(0)));
+ }
+```
+
+On input `name = value` (parse mode `consume`) this returns
+`{ "name": "name", "value": "value" }`. (A bare edge-less regex slot in an `AND` rule is
+an anchor that is not separately consumed, so fold a separator like `\s*=\s*` into an
+adjacent slot that owns an edge, as the name slot does here.)
+
+### Recursion and termination (consume before you recurse)
+
+Recursion is just an edge or a `call(...)` that re-enters a rule — including the top
+rule. The one requirement is **forward progress**: every recursive cycle must consume
+input before it recurses. A rule that re-enters itself at the **same input position**
+without consuming anything is a non-progressing cycle; the engine **cuts** such a
+re-entry (it yields `undef`) so the parser terminates instead of hanging. Idiomatic
+recursion consumes first — for example a parenthesis rule matches `(`, recurses, then
+matches `)` — and is never affected by the cut.
+
+A recursive rule used **as the top rule** is still an ordinary accumulating rule, so —
+like any accumulating top rule — it needs an `LX` block to surface its accumulator when
+the input is exhausted:
+
+```text
+sexpr:: /\(/ /\)/  I { declare(array, items) }
+ -> sexpr     { push_value(a(items), call(sexpr)) }
+ -> atom      { push_value(a(items), call(atom)) }
+ -> sexpr[1]  { return(array_copy(a(items))) }
+LX { return(array_copy(a(items))) }
+
+atom: /[A-Za-z0-9]+/   I.return(entry_text())
+```
+
+With the `LX`, input `(a(b)c)` returns `[["a",["b"],"c"]]` and `(a) (b)` returns
+`[["a"],["b"]]` — the top rule accumulates the **sequence** of top-level forms. Without
+the `LX`, the same top rule returns `null` (a bare accumulating top rule returns `undef`
+at end of input); the `null` is the missing-`LX` authoring case, not an engine fault.
+
 ## Minimal example
 
 ```text

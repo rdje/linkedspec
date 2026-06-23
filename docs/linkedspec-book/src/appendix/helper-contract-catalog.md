@@ -37,10 +37,13 @@ identically. No Perl implementation knowledge is required.
 
 ## 2. Scalar Helpers
 
-> **Worked examples.** Each example below is a complete, runnable `.spec`. A valid
-> `.spec` needs **at least two rules**: a **top (`::`) entry rule** — which carries
-> **no regex** of its own (it is the dispatch loop) — plus a **normal (`:`) rule** that
-> carries the regex and computes the value. The shared shape is:
+> **Worked examples.** Each example below is a complete, runnable `.spec` written in the
+> recommended **two-rule idiom**: a **top (`::`) entry rule** — which carries **no regex**
+> of its own (it is the dispatch loop) — plus a **normal (`:`) rule** that carries the
+> regex and computes the value. (This is the clean idiom for these helper demos, not a
+> hard minimum — `::` is just an entry marker, and a top rule may itself carry a regex or
+> recurse; see [.spec Files and Rule Paragraphs](../user-model/spec-files-and-rule-paragraphs.md).)
+> The shared shape is:
 >
 > ```text
 > demo::  -> value  .push

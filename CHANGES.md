@@ -1,6 +1,48 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-23 — TOP-RULE-AS-NORMAL.4 — book reconciliation to the top-rule-as-ordinary model (BOOK + TEST + DOC)
+
+**Scope:** mdBook + one phase0 lock + a KM card. **No engine/spec change** (`perl/` untouched). Closes the
+final executable leaf of `TOP-RULE-AS-NORMAL`; tree acceptance MET (tree stays `active` only because `.3.2`
+is `blocked` on `RUST-PARITY`). Absorbs the superseded `PHASE0-BACKHALF-TRIAGE.6` book work. Per ADR `0010`.
+
+**What changed (6 book files, all examples verified via `LinkedSpec::Get` — dump-don't-transcribe):**
+- `user-model/spec-files-and-rule-paragraphs.md` — new canonical section **"The top (`::`) rule is an ordinary
+  rule, entered first"**: `::` = entry marker; modes/regex/recursion all legal on a top rule; the two-rule
+  no-regex shape is idiom not law; the `entry_*` (entering match, dispatched child) vs `match_*` (own match,
+  post-match edge) distinction; the consume-before-recurse termination rule; and the recursive-top-rule-needs-`LX`
+  model with a verified `sexpr::`+`LX` example (`(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]`; no-`LX`→`null`).
+- `appendix/formal-grammar.md` — §2.1 entry-marker/ordinary-rule note; §2.2 mode table column "Body rule only"
+  → "Typical placement" with every mode cell "Body rule (idiom)" + an idiom-not-law note (`Top::AND`, `Stream::OR+`,
+  `Pair::&` all valid); new **§5.4 Recursion and Forward-Progress Termination** (recursion may re-enter the top
+  rule; consume-before-recurse; a non-progressing re-entry is cut to `undef`; backends MUST guarantee this —
+  confirmed cross-variant by the `.3.1` Rust mirror; recursive top rule needs `LX`).
+- `overview/what-is-linkedspec.md`, `user-model/worked-spec-walkthrough.md`, `appendix/helper-contract-catalog.md`
+  — reframed "normal shape of every `.spec`" / "every `.spec` ... at least two rules" / "regex ... never on the
+  `::` entry rule" / "a valid `.spec` needs at least two rules" from **law → recommended idiom**.
+- `user-model/rule-modes-and-parse-modes.md` — **de-footgunned** the `Pair::AND` action example: it read
+  `entry_text()` → `{name:null,value:null}` (a top rule has no entering match); fixed to a post-match edge +
+  `match_group(0)` and folded the bare `\s*=\s*` separator into the name slot → `{name:"name",value:"value"}`.
+  Added a model-tie note (`::`=entry-marker; termination) near the top.
+
+**Correctness fix (book example bug found during verification):** `worked-spec-walkthrough.md` claimed
+`'a = 1, b = 2'`→two pairs in the **`consume`** context, but under `consume` only the first pair matches (the
+cursor stops at the comma); the two-pair result is a **`seek`** behavior. Reframed accurately as the
+consume-vs-seek distinction in miniature.
+
+**Discovered (out of `.4` scope; tracked as a tree open question):** in `AND` mode a bare edge-less middle
+regex slot is a positional anchor that is **not separately consumed** (the value slot's `match_*` began before
+the un-consumed `\s*=\s*`). Affects only illustrative no-output structural sketches — not a broken example.
+
+**Lock + KM:** added `t/phase0_regression.t` subtest `top_rule_as_normal_regex_on_top_reads_own_match_with_match_family`
+(3 assertions: parser builds; `match_group(0)`→populated values; `entry_text()` on a top rule→null). Wrote KM card
+`docs/knowledge/top-rule-reads-own-match-with-match-family.md` (regenerated the derived `KNOWLEDGE_MAP.md`).
+
+**Validation:** `mdbook build` EXIT 0 (cross-ref anchor verified from generated HTML); `perl -c perl/LinkedSpec.pm`
++ `perl -c -Iperl t/phase0_regression.t` clean; **phase0 964→965 green** (`1..965`, 0 `not ok`); doctrine driver
+2/2 PASS (MEMORY-ARCH + KNOWLEDGE-MAP after regen); `bash tools/run_ci_local.sh` EXIT 0. Book variant-agnostic.
+
 ## 2026-06-23 — TOP-RULE-AS-NORMAL.3.1 — Rust forward-progress / consume-before-recurse termination guard (mirror of .2.1); split .3 (RUST)
 
 **Scope:** Rust variant only — `rust/linkedspec-runtime/src/runtime.rs` + `rust/linkedspec-runtime/src/engine.rs`

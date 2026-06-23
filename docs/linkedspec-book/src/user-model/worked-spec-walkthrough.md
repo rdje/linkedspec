@@ -19,7 +19,7 @@ produces into a list, so for the single pair above the result is a one-element l
 
 The point is not that this grammar is impressive. The point is that it shows the basic LinkedSpec loop in one place:
 
-- write the two rule paragraphs every `.spec` needs (an entry rule and a matcher rule),
+- write the two rule paragraphs this idiomatic shape uses (an entry rule and a matcher rule),
 - choose a rule mode,
 - attach an action with a lifecycle block,
 - use helper DSL instead of raw host-language payload code,
@@ -30,8 +30,11 @@ The `.spec` file and everything it expresses are backend-neutral: the same sourc
 
 ## The full spec
 
-Here is the complete inline `.spec`. Every `.spec` is built from at least two rules — a top
-**entry rule** that carries no regex, plus one or more normal **matcher rules** that do:
+Here is the complete inline `.spec`. It uses the recommended two-rule idiom — a top
+**entry rule** that carries no regex, plus a normal **matcher rule** that does. (This is
+the clean shape for stream-of-records parsing, not a hard minimum: `::` is just an entry
+marker, and a top rule is an ordinary rule that *may* carry a regex or recurse — see
+[.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md).)
 
 ```text
 Top::
@@ -121,8 +124,11 @@ The top `::` entry rule and the normal `:` matcher rule play different roles:
   exactly one entry rule per spec.
 - The **matcher rule** (`Pair:`) carries the regex and turns one match into one payload.
 
-The regex always lives on a normal `:` rule, never on the `::` entry rule. See
-[.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md) for the paragraph model.
+In this idiom the regex lives on the normal `:` matcher rule and the `::` entry rule
+just dispatches and collects. That is a style choice for clarity, not a constraint — a
+`::` rule is an ordinary rule that *can* carry a regex, take a mode, or recurse. See
+[.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md) for the paragraph
+model and the entry-rule-is-ordinary explanation.
 
 `Pair:` uses the default rule mode: one regex slot, one match. If the matcher later grows into
 several ordered slots, give it the `AND` mode so the label still reads correctly:
@@ -173,8 +179,9 @@ The returned `$ast` is a list with one pair payload, equivalent to:
 ]
 ```
 
-The entry rule collects one payload per matched pair, so a longer input produces a longer list.
-For `'a = 1, b = 2'` the result is:
+The entry rule collects one payload per matched pair, so an input that exposes several
+pairs to the cursor produces a longer list. For `'a = 1, b = 2'` the two-element result
+is:
 
 ```text
 [
@@ -182,6 +189,13 @@ For `'a = 1, b = 2'` the result is:
   { kind => "pair", name => "b", value => "2" },
 ]
 ```
+
+That two-pair result is what the `seek` parser (built below) returns: after the first
+pair the cursor sits on the `, ` separator, and `seek` skips forward to the next `b = 2`
+anchor. The **strict `consume` parser built above** instead returns only the first pair
+`[{ kind => "pair", name => "a", value => "1" }]`, because `consume` will not skip the
+separator — the cursor stops at `,` and no further pair matches contiguously. This is the
+`consume` versus `seek` distinction in miniature; the next section makes it explicit.
 
 Do not depend on hash key order when printing these payloads (for example with a debug dumper such as Perl's `Data::Dumper`); the semantic payload is the key/value content of each hash, not its serialization order.
 

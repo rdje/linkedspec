@@ -43740,6 +43740,41 @@ subtest 'top_rule_as_normal_recursion_with_lx_parses_sequence' => sub {
         'top-recursive (with LX) accumulates the SEQUENCE of top-level forms (different arity vs the wrapper idiom)');
 };
 
+subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => sub {
+    # TOP-RULE-AS-NORMAL.4 / ADR 0010: a top (::) rule is an ordinary rule entered first,
+    # so it may carry a regex + a mode. When a top rule matches its OWN regex slots,
+    # nothing "entered" it, so its match is read with the match_* family from a post-match
+    # edge action -- NOT entry_* / an I-block (which read the entering match and are empty
+    # on a top rule). This locks the book's de-footgunned Pair::AND regex-on-top example
+    # (user-model/rule-modes-and-parse-modes.md, user-model/spec-files-and-rule-paragraphs.md):
+    # the correct match_group(0) form returns populated values; the entry_text() footgun
+    # the book now warns against returns nulls. (A bare edge-less AND slot is a positional
+    # anchor that is not separately captured, so the separator is folded into the name slot.)
+    plan tests => 3;
+    my $ok_spec = "Pair::AND\n I { declare(hash, pair) }\n"
+                . " /([A-Za-z_]\\w*)\\s*=\\s*/ -> Pair[0] {\n"
+                . "   assign(hash(pair), set_key(hash(pair), \"name\", match_group(0)));\n }\n"
+                . " /([^,\\n]+)/ -> Pair[1] {\n"
+                . "   return(set_key(hash(pair), \"value\", match_group(0)));\n }\n";
+    my $p = eval { LinkedSpec::Get(\$ok_spec, top_rule => 'Pair', parse_mode => 'consume') };
+    ok(ref($p) eq 'CODE', 'regex-on-top AND rule builds a parser')
+        or diag(normalize_error($@));
+    my ($s1, $o1) = _ls_run_bounded($p, 'name = value', 6);
+    is($o1, '{"name":"name","value":"value"}',
+        'top rule reading its OWN match with match_group(0) returns populated values');
+
+    # the footgun the book now documents: entry_* on a top rule is empty (nothing entered it)
+    my $foot_spec = "Pair::AND\n I { declare(hash, pair) }\n"
+                  . " /([A-Za-z_]\\w*)\\s*=\\s*/ -> Pair[0] {\n"
+                  . "   assign(hash(pair), set_key(hash(pair), \"name\", entry_text()));\n }\n"
+                  . " /([^,\\n]+)/ -> Pair[1] {\n"
+                  . "   return(set_key(hash(pair), \"value\", entry_text()));\n }\n";
+    my $pf = eval { LinkedSpec::Get(\$foot_spec, top_rule => 'Pair', parse_mode => 'consume') };
+    my ($s2, $o2) = _ls_run_bounded($pf, 'name = value', 6);
+    is($o2, '{"name":null,"value":null}',
+        'entry_text() on a top rule (no entering match) yields null -- the footgun the book steers away from');
+};
+
 done_testing();
 
 sub discover_specs {

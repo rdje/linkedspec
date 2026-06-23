@@ -56,32 +56,44 @@ A rule label is one or more word characters: `[A-Za-z0-9_]+`.
 - **Double colon** (`rule_name::`): a **top rule** — the parser entry point. At least
   one top rule must exist. A `.spec` file may define multiple top rules.
 
+The double colon is purely an **entry marker**: it designates the rule a backend enters
+first. A top rule is otherwise an **ordinary rule** — it may carry a regex, take any rule
+mode (§2.2), and be recursive (§5.4), exactly like a body rule. The common "no regex on
+the top rule, dispatch to body rules that carry the regex" two-rule shape is recommended
+**idiom**, not a constraint a backend enforces.
+
 ### 2.2 Rule Modes
 
 The mode suffix, if present, immediately follows the colon(s) with no space:
 
-| Mode | Meaning | Label forms |
+| Mode | Meaning | Typical placement |
 |---|---|---|
-| *(no suffix)* | Repeated choice (default). Equivalent to `:OR+`. Handled by `:*`. | `rule:` |
-| `:AND` | Ordered sequence. Each child regex matched in order. | Body rule only |
-| `:OR` | Repeated choice across alternatives. | Body rule only |
-| `:&` | Ordered sequence (equivalent to `:AND`). | Body rule only |
-| `:\|` | Single choice — one successful alternative wins (`:OR{1}`). | Body rule only |
-| `:+` | One-or-more repeated choice (`:OR{1,}`). Equivalent to `:*` bounded. | Body rule only |
-| `:*` | Zero-or-more repeated choice (`:OR{0,}`). | Body rule only |
-| `:?` | Zero-or-one choice (`:OR{0,1}`). | Body rule only |
-| `:OR+` | Unbounded repeated choice (one or more). | Body rule only |
-| `:AND+` | Unbounded repeated ordered sequence (one or more). | Body rule only |
-| `:AND{N}` | Ordered sequence repeated exactly N times. | Body rule only |
-| `:AND{N,M}` | Ordered sequence repeated N to M times. | Body rule only |
-| `:AND{N,}` | Ordered sequence repeated N or more times. | Body rule only |
-| `:AND{,M}` | Ordered sequence repeated up to M times. | Body rule only |
-| `:OR{N}` | Repeated choice exactly N times. | Body rule only |
-| `:OR{N,M}` | Repeated choice N to M times. | Body rule only |
-| `:OR{N,}` | Repeated choice N or more times. | Body rule only |
-| `:OR{,M}` | Repeated choice up to M times. | Body rule only |
+| *(no suffix)* | Repeated choice (default). Equivalent to `:OR+`. Handled by `:*`. | Any rule (top or body) |
+| `:AND` | Ordered sequence. Each child regex matched in order. | Body rule (idiom) |
+| `:OR` | Repeated choice across alternatives. | Body rule (idiom) |
+| `:&` | Ordered sequence (equivalent to `:AND`). | Body rule (idiom) |
+| `:\|` | Single choice — one successful alternative wins (`:OR{1}`). | Body rule (idiom) |
+| `:+` | One-or-more repeated choice (`:OR{1,}`). Equivalent to `:*` bounded. | Body rule (idiom) |
+| `:*` | Zero-or-more repeated choice (`:OR{0,}`). | Body rule (idiom) |
+| `:?` | Zero-or-one choice (`:OR{0,1}`). | Body rule (idiom) |
+| `:OR+` | Unbounded repeated choice (one or more). | Body rule (idiom) |
+| `:AND+` | Unbounded repeated ordered sequence (one or more). | Body rule (idiom) |
+| `:AND{N}` | Ordered sequence repeated exactly N times. | Body rule (idiom) |
+| `:AND{N,M}` | Ordered sequence repeated N to M times. | Body rule (idiom) |
+| `:AND{N,}` | Ordered sequence repeated N or more times. | Body rule (idiom) |
+| `:AND{,M}` | Ordered sequence repeated up to M times. | Body rule (idiom) |
+| `:OR{N}` | Repeated choice exactly N times. | Body rule (idiom) |
+| `:OR{N,M}` | Repeated choice N to M times. | Body rule (idiom) |
+| `:OR{N,}` | Repeated choice N or more times. | Body rule (idiom) |
+| `:OR{,M}` | Repeated choice up to M times. | Body rule (idiom) |
 
 Where `N` and `M` are non-negative integers.
+
+The **Typical placement** column records the recommended **idiom**, not a backend
+restriction. Because a top (`::`) rule is an ordinary rule that is merely entered first
+(§2.1), a mode suffix may appear after either colon form — `Top::AND`, `Stream::OR+`,
+and `Pair::&` are all valid. Body-rule placement is the convention; the engine does not
+reject a mode on a top rule.
 
 **Semantics**:
 - **AND modes** match child regexes sequentially, in order, exactly once per repetition.
@@ -316,6 +328,32 @@ maintain a search tree, unwind partial rule matches, or restore alternative-choi
 state.
 
 `IBACKTRACK` is the case-insensitive variant.
+
+### 5.4 Recursion and Forward-Progress Termination
+
+A rule may recurse: an action edge (`-> rule` / `-> rule[N]`) or a `call(rule)`
+expression (§7.10) may re-enter the same rule, directly or through a cycle of rules.
+Recursion may re-enter the **top rule** as well — the top rule is an ordinary rule
+(§2.1), so a single recursive document can be parsed by a recursive top rule directly.
+
+The one requirement is **forward progress (consume before you recurse)**: every
+recursive cycle must consume input before it recurses. Idiomatic recursion does this
+naturally — a parenthesis rule matches `(`, recurses, then matches `)`, so each level
+advances the cursor.
+
+A backend **must** guarantee termination of a non-progressing cycle: if a rule is
+re-entered at an input position already active on its own recursion stack (no input was
+consumed since that entry), the re-entry is **cut** — it yields `undef` — so the parser
+terminates instead of recursing without bound. This is a hard requirement, not an
+optimization: a backend that recurses natively without this guard can exhaust its call
+stack on a no-consume cycle. The cut fires **only** on genuine non-progress, so
+legitimate consume-before-recurse recursion (which advances the position before each
+re-entry) is never affected.
+
+A recursive rule used **as the top rule** is still an ordinary accumulating rule, so it
+needs a loop-exit (`LX`) block to surface its accumulator at end of input, exactly like
+any accumulating top rule. Without the `LX` it returns `undef` at end of input (the
+missing-`LX` authoring case), not a partial result.
 
 ## 6. Comments
 
