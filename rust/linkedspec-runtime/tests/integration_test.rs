@@ -701,3 +701,116 @@ fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
         "legitimate recursion returns a well-formed array (guard left it intact)"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.1.1.2 (ADR 0007 + ADR 0006) — auto-existing working ──
+// ── variables: Rust lockstep parity with the Perl reference (.1.1.1).        ──
+//
+// The Perl reference now lets a working variable referenced through a typed
+// wrapper -- scalar(NAME)/array(NAME) (or the s()/a()/h() aliases) -- be used
+// WITHOUT a prior declare(...). In Perl that needed an engine change: generated
+// handlers run non-strict, so an undeclared bare var would silently become a
+// leaky package global (KM working-vars-no-strict-need-my-lexical), and the fix
+// auto-injects a per-invocation `my` in the handler preamble.
+//
+// The Rust runtime needs NO such change: it is an interpreter, not a codegen+eval
+// backend. Working variables live in HashMaps on `RuntimeContext` that auto-vivify
+// on write (`set_scalar`/`push_value`) and read as Undef/empty when absent
+// (`get_scalar`/`get_array`) -- so they already "auto-exist" with no declare. And
+// `Engine::execute` builds a FRESH `RuntimeContext` per call, so a value can never
+// leak across parses (the Rust analogue of Perl's per-invocation `my` lexical).
+// declare(...) still seeds an initializer (`declare(scalar, x=expr)`), so it stays
+// meaningful and unchanged.
+//
+// These locks use the divergence-free edge-action form (the corpus_oracle.rs
+// proof class: non-recursive `Parent:: /re/ -> Child { ... }`, value set by the
+// edge's own `return(...)`, action-less child), so the asserted values are the
+// Perl reference values wrapped one level by the documented Perl<->Rust output
+// shape rule -- i.e. genuine cross-variant parity (the same grammars are frozen
+// as oracle fixtures `autoexist_*`). The recursive/REP auto-exist idiom the Perl
+// phase0 locks use does NOT yet reproduce on Rust: that is the separately-owned
+// RUST-PARITY recursive-grammar gap, not auto-existence.
+
+/// parse -> validate -> compile -> execute one inline grammar, panicking with a
+/// useful message on any stage failure (the auto-exist locks below are all
+/// expected to compile and run cleanly).
+fn build_and_run(grammar: &str, input: &str) -> Value {
+    let spec = parse_spec(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    Engine::new(compiled).execute(input).expect("execute")
+}
+
+#[test]
+fn terse_1_1_2_auto_existing_scalar_var_works_without_declare() {
+    // scalar(v) is assigned and read back with NO declare(scalar, v) -- it
+    // auto-exists. Perl returns "ok"; Rust wraps the accumulator one level.
+    let grammar = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["ok"]),
+        "undeclared scalar working var auto-exists (= Perl reference \"ok\" wrapped one level)"
+    );
+}
+
+#[test]
+fn terse_1_1_2_auto_existing_array_var_works_without_declare() {
+    // array(items) is pushed to and copied with NO declare(array, items) -- it
+    // auto-exists. Perl returns ["a","b"]; Rust wraps one level.
+    let grammar = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); push_value(array(items), \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a", "b"]]),
+        "undeclared array working var auto-exists and accumulates (= Perl [\"a\",\"b\"] wrapped one level)"
+    );
+}
+
+#[test]
+fn terse_1_1_2_declare_form_unchanged_vs_no_declare() {
+    // The declare(...) form and the no-declare form lower to identical output --
+    // the Rust analogue of the Perl "declare path stays single `my`, no double"
+    // lock: adding/removing the declare must not change behavior.
+    let scalar_no = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let scalar_decl = "Top::\n /x/ -> Done { declare(scalar, v); assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(scalar_no, "xhello"),
+        build_and_run(scalar_decl, "xhello"),
+        "scalar: declare-form and no-declare-form produce identical output"
+    );
+
+    let array_no = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array_decl = "Top::\n /x/ -> Done { declare(array, items); push_value(array(items), \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(array_no, "xhello"),
+        build_and_run(array_decl, "xhello"),
+        "array: declare-form and no-declare-form produce identical output"
+    );
+}
+
+#[test]
+fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
+    // The decisive per-invocation proof (mirrors the Perl lock's "re-run returns
+    // 3, not 6"): re-running the SAME engine must yield the identical value, never
+    // an accumulation. A shared/leaky variable store would grow across parses; a
+    // fresh-per-execute context does not. We assert BOTH runs equal AND the exact
+    // value, so a regression to a leaky store fails loudly.
+    let scalar = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(scalar).expect("parse");
+    validate(&spec).expect("validate");
+    let engine = Engine::new(compile(&spec).expect("compile"));
+    let r1 = engine.execute("xhello").expect("run1");
+    let r2 = engine.execute("xhello").expect("run2");
+    assert_eq!(r1, serde_json::json!(["ok"]), "scalar first run");
+    assert_eq!(r1, r2, "scalar var is per-parse, not leaked across executes");
+
+    let array = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); push_value(array(items), \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(array).expect("parse");
+    validate(&spec).expect("validate");
+    let engine = Engine::new(compile(&spec).expect("compile"));
+    let r1 = engine.execute("xhello").expect("run1");
+    let r2 = engine.execute("xhello").expect("run2");
+    assert_eq!(r1, serde_json::json!([["a", "b"]]), "array first run");
+    assert_eq!(
+        r1, r2,
+        "array accumulator is per-parse, not leaked across executes (would be 4 items if leaky)"
+    );
+}

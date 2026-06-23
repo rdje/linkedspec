@@ -1,6 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-24 — SPEC-FORMAT-TERSE.1.1.2 — Rust lockstep parity for auto-existing working variables (oracle + integration locks; NO engine change)
+
+**Scope:** Rust variant test/oracle surface (`tools/gen_oracle_corpus.pl` + 5 generated `autoexist_*`
+corpus fixtures, `rust/linkedspec-runtime/tests/integration_test.rs`) + task tree + KM card + live docs.
+The lockstep-parity follow-on to `.1.1.1` (ADR `0006`: a Perl-reference change is landed against the
+universal contract only once every backend reproduces it). **No engine code changed** in either variant.
+
+**Assessment (blocked-vs-doable, per the leaf): DOABLE — no engine change needed.** TOOLBOX-first ground
+truth (throwaway Rust integration probe + `perl -Iperl` `LinkedSpec::Get` probe on the same minimal
+grammars; read `rust/linkedspec-runtime/src/{runtime,engine}.rs`, dump-don't-guess): the Rust variant is
+an **interpreter** (no codegen/`eval`), so working variables live in per-parse `RuntimeContext` HashMaps
+(`scalars`/`arrays`/`hashes`) that **auto-vivify** on write (`set_scalar` = `insert`, `push_value` =
+`entry().or_default().push`, `set_hash_entry` = `entry().or_default`) and read as `Undef`/empty when
+absent. So a `.spec` working variable referenced via `scalar(NAME)`/`array(NAME)`/`hash(NAME)`
+**already auto-exists** with no `declare(...)`, and `Engine::execute` builds a **fresh `RuntimeContext`
+per call** so a value never leaks across parses (the Rust analogue of Perl's per-invocation `my`). The
+Perl `.1.1.1` change was a *codegen* fix (non-strict generated handlers would turn an undeclared bare var
+into a leaky package global) — a hazard the Rust interpreter does not have. So parity holds by
+architecture; the leaf lands as lockstep regression tests + docs. `declare(...)` stays meaningful for its
+`=init` seed form (`declare_scalar_with`).
+
+**Cross-variant proof** (divergence-free edge-action form = the `.7.1` oracle proof class; recursive/REP
+forms are blocked by the separate `RUST-PARITY` recursive-grammar/REP-lifecycle gap, verified returning
+`[null]`/`[[]]`): scalar no-declare Perl `"ok"`/Rust `["ok"]`; array no-declare Perl `["a","b"]`/Rust
+`[["a","b"]]`; declare twins identical; `array(undef)` Perl `[null]`/Rust `[[null]]` — Rust == Perl
+reference wrapped one level (the documented Perl↔Rust output-shape rule).
+
+**Locked:**
+- 5 oracle corpus fixtures `autoexist_{scalar,array}_{no_declare,declare}` + `autoexist_undef_literal`
+  added to `tools/gen_oracle_corpus.pl` and regenerated (existing 2 fixtures byte-identical); the
+  `corpus_oracle.rs` runner checks each against the Perl reference value — all **7 fixtures PASS**.
+- 4 `terse_1_1_2_*` integration tests in `rust/linkedspec-runtime/tests/integration_test.rs`: scalar +
+  array value anchors, declare/no-declare convergence, and per-parse no-leak (same engine re-run yields
+  the identical value, not an accumulation).
+
+**Verification:** `cargo test` **244→248 green** (integration 25→29; oracle still 1 test, now guarding 7
+fixtures); `cargo clippy -p linkedspec-core -p linkedspec-runtime --tests` zero-new source/test warnings
+(engine.rs 11 = baseline; the new test files add 0); `perl -c tools/gen_oracle_corpus.pl` OK; `mdbook
+build` EXIT 0 (no book change — variant-agnostic, `.1.1.1` already taught the contract; Rust now
+conforms); `bash tools/run_ci_local.sh` **EXIT 0** (phase0 **968 green**, Perl untouched). KM card
+`docs/knowledge/rust-working-vars-auto-vivify.md` (map regenerated, 47 facts). `.1.1` container done;
+frontier → `.1.2`.
+
 ## 2026-06-24 — SPEC-FORMAT-TERSE.1.1.1 — Perl auto-existing working variables (ENGINE + BOOK + 3 phase0 locks)
 
 **Scope:** Perl reference engine (`perl/LinkedSpec/RuleIR/EmitContext.pm`,

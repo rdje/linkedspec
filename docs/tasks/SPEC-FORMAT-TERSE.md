@@ -6,7 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-24` (**`.1.1.1` DONE** — Perl auto-existing working variables landed:
+- Last updated: `2026-06-24` (**`.1.1.2` DONE** — Rust lockstep parity for auto-existing
+  variables: assessed DOABLE with **no engine change** (the Rust interpreter stores working vars in
+  per-parse `RuntimeContext` HashMaps that auto-vivify, so auto-existence is inherent — there is no
+  Perl-style leaky-global hazard to fix); locked with 5 oracle corpus fixtures (`autoexist_*`,
+  Rust==Perl reference) + 4 integration tests (value anchors, declare/no-declare convergence,
+  per-parse no-leak) → **cargo 244→248 green**, all 7 oracle fixtures PASS, clippy zero-new, phase0
+  **968 green** (Perl untouched), gate EXIT 0. The recursive/REP auto-exist idiom the Perl phase0
+  locks use does NOT reproduce on Rust — the separately-owned `RUST-PARITY` recursive-grammar gap,
+  NOT auto-existence. **`.1.1` container DONE** (both children done). Frontier → `.1.2`. KM card
+  [[rust-working-vars-auto-vivify]]. Prior **`.1.1.1` DONE** — Perl auto-existing working variables landed:
   collector in `RuleIR/EmitContext.pm`, injection in `SpecEntry.pm`; 19/20 specs byte-identical,
   +3 phase0 locks → 968 green, gate EXIT 0, book taught. Frontier → `.1.1.2` (Rust lockstep parity).
   Prior `2026-06-23`: **`.1.1` SPLIT** into `.1.1.1` (Perl reference) + `.1.1.2` (Rust lockstep
@@ -119,9 +128,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Children: `.1.1`, `.1.2`, `.1.3`, `.1.4`, `.1.5`, `.1.6`
 
 - ID: `SPEC-FORMAT-TERSE.1.1`
-  Status: `active` (`.1.1.1` Perl reference **done** 2026-06-24; `.1.1.2` Rust lockstep parity
-    `pending` — container stays active until the parity child closes. Split 2026-06-23 — too broad
-    for one signoff slice: Perl reference engine change + lockstep Rust parity are separable.)
+  Status: `done` (2026-06-24 — both children done: `.1.1.1` Perl reference + `.1.1.2` Rust lockstep
+    parity. Split 2026-06-23 — too broad for one signoff slice: Perl reference engine change +
+    lockstep Rust parity are separable.)
   Goal: Auto-existing variables — remove the need for `declare(...)`; a working variable exists on
     first use within a rule scope (declare stays as a deprecated, still-working alias)
   Children: `.1.1.1` (Perl reference), `.1.1.2` (Rust lockstep parity)
@@ -168,7 +177,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.1.1` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.1.2`
-  Status: `pending`
+  Status: `done` (2026-06-24)
   Goal: Rust lockstep parity — the Rust runtime auto-supplies the same per-invocation working-variable
     binding so a `.spec` using auto-existing variables compiles/runs identically on the Rust backend
     (cross-variant-output-parity; ADR 0006 lockstep obligation for the `.1.1.1` reference change).
@@ -177,8 +186,34 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     auto-exist spec. (If the Rust runtime's working-variable model blocks this independently of the known
     recursive-grammar `RUST-PARITY` gap, record the blocker; otherwise implement.) Assess blocked-vs-doable
     when reached — the `.1.1.1` change is "landed against the universal contract" only once this closes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-06-24 — assessed DOABLE; NO engine change needed.** TOOLBOX-first
+    ground truth (throwaway Rust + Perl `LinkedSpec::Get` probes, dump-don't-guess): the Rust runtime is
+    an interpreter (not codegen+`eval`), so working variables live in per-parse `RuntimeContext` HashMaps
+    (`scalars`/`arrays`/`hashes` in `rust/linkedspec-runtime/src/runtime.rs`) that **auto-vivify** on write
+    (`set_scalar`/`push_value` insert / `or_default`) and read as `Undef`/empty when absent — i.e. working
+    variables **already auto-exist with no `declare`**, and `Engine::execute` builds a **fresh
+    `RuntimeContext` per call** so a value can never leak across parses (the Rust analogue of Perl's
+    per-invocation `my`). Perl's `.1.1.1` change was needed only because non-strict generated handlers
+    would otherwise make an undeclared var a leaky package global — a codegen hazard Rust does not have, so
+    there is nothing to fix. `declare(...)` stays meaningful for its `=init` seed form (unchanged).
+    **Proof (cross-variant, divergence-free edge-action form = the `.7.1` oracle proof class):** ran the
+    same minimal grammars on BOTH backends — scalar no-declare → Perl `"ok"` / Rust `["ok"]`; array
+    no-declare → Perl `["a","b"]` / Rust `[["a","b"]]`; declare twins identical; `array(undef)` → Perl
+    `[null]` / Rust `[[null]]` — i.e. Rust == Perl reference wrapped one level (the documented Perl↔Rust
+    output-shape rule). **Locked:** 5 oracle corpus fixtures `autoexist_{scalar,array}_{no_declare,declare}`
+    + `autoexist_undef_literal` via `tools/gen_oracle_corpus.pl` (all 7 oracle fixtures PASS) + 4
+    integration locks in `rust/linkedspec-runtime/tests/integration_test.rs`
+    (`terse_1_1_2_*`: scalar/array value anchors, declare/no-declare convergence, per-parse no-leak via
+    same-engine re-run). **cargo test 244→248 green**; `cargo clippy` zero-new source/test warnings
+    (engine.rs 11 = baseline, my test files add 0); `perl -c tools/gen_oracle_corpus.pl` OK; `mdbook build`
+    EXIT 0; `bash tools/run_ci_local.sh` **EXIT 0** (phase0 968 green, Perl untouched). **Deferred (NOT a
+    blocker for this leaf):** the recursive/REP auto-exist idiom the Perl phase0 locks use (`top:: ... ->
+    top[0]`, `Top::*`) does NOT reproduce on Rust — that is the separately-owned `RUST-PARITY`
+    recursive-grammar / REP-lifecycle gap, independent of auto-existence (proven: those exact specs return
+    `[null]`/`[[]]` on Rust while the non-recursive equivalents are at full parity). No book change
+    (variant-agnostic; `.1.1.1` already taught the contract; Rust now conforms). KM card
+    [[rust-working-vars-auto-vivify]].
+  Commit: `SPEC-FORMAT-TERSE.1.1.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2`
   Status: `pending`
@@ -299,13 +334,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
-| 1 | `SPEC-FORMAT-TERSE.1.1.2` | `pending` (**now PNT-eligible to ASSESS**) | Rust lockstep parity for auto-existing variables — `.1.1.1` has landed, so this is now the next pick (ADR 0007: a reference change is not "landed against the universal contract" until the lockstep parity closes; ADR 0006). Assess blocked-vs-doable: the non-recursive auto-exist specs (the `.1.1.1` locks) should be reproducible on Rust independent of the known recursive-grammar `RUST-PARITY` gap. |
-| 2 | `SPEC-FORMAT-TERSE.1.2` | `pending` (ungated) | Remove `scalar()/array()/hash()` wrappers + add type inference (RHS shape + arg position). |
-| 3 | `SPEC-FORMAT-TERSE.1.4` | `pending` (ungated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
+| — | `SPEC-FORMAT-TERSE.1.1.2` | `done` 2026-06-24 | Rust lockstep parity for auto-existing variables — assessed **DOABLE, no engine change**: the Rust interpreter's per-parse `RuntimeContext` HashMaps already auto-vivify working vars (no `declare` needed) and are fresh per `execute` (no leak), so auto-existence is inherent (no Perl-style leaky-global hazard to fix). Locked with 5 oracle fixtures (`autoexist_*`, Rust==Perl reference) + 4 integration tests (value anchors, declare/no-declare convergence, per-parse no-leak); cargo 244→248 green; phase0 968 green (Perl untouched). Recursive/REP idiom deferred to `RUST-PARITY` (separate gap, not auto-existence). `.1.1` container now done; `.1.1.1` change is now landed against the universal contract. |
+| 1 | `SPEC-FORMAT-TERSE.1.2` | `pending` (**now next**) | Remove `scalar()/array()/hash()` wrappers + add type inference (RHS shape + arg position). |
+| 2 | `SPEC-FORMAT-TERSE.1.4` | `pending` (ungated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
 | … | `.1.3`,`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` (ungated) | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
 
+- `2026-06-24` (**`.1.1.2` assessment — DOABLE, no engine change**, grounded by throwaway Rust + Perl
+  `LinkedSpec::Get` probes — dump-don't-guess). The Perl `.1.1.1` change was a **codegen** fix: generated
+  handlers run non-strict, so an undeclared wrapper-referenced working var would silently become a leaky
+  package global, and the engine now auto-injects a per-invocation `my` in the preamble. The Rust variant
+  is an **interpreter**, not codegen+`eval` — working variables live in per-parse `RuntimeContext` HashMaps
+  (`scalars`/`arrays`/`hashes`) that **auto-vivify** on write and read as `Undef`/empty when absent, and
+  `Engine::execute` builds a **fresh `RuntimeContext` per call**. So in Rust working variables already
+  auto-exist with no `declare`, and a value cannot leak across parses — the leaky-global hazard the Perl
+  change fixed simply does not exist here. **Conclusion:** parity holds at the runtime level by
+  architecture; the leaf lands as **lockstep regression tests + documentation**, not an engine change
+  (adding a dead "collector" to mirror a fix for a non-existent hazard would be ceremony, not parity). The
+  proof grammars use the **divergence-free edge-action form** (the `.7.1` oracle proof class), because the
+  recursive/REP auto-exist idiom the Perl phase0 locks use is blocked by the separate `RUST-PARITY`
+  recursive-grammar / REP-lifecycle gap (verified: those exact specs return `[null]`/`[[]]` on Rust). KM
+  card [[rust-working-vars-auto-vivify]]. `declare(...)` stays meaningful for its `=init` seed form.
 - `2026-06-23` (**`.1.1` design + split**, grounded by `dump_parser_source` probes — dump-don't-guess;
   KM [[working-vars-no-strict-need-my-lexical]]). Verified engine facts: (i) a rule's `I`-block + all
   edges + `LX` compile into **one** `sub` / **one** lexical scope (`SpecEntry::_build_runtime_handler` /
@@ -422,6 +472,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 | `2026-06-23` | `SPEC-FORMAT-TERSE.1.1` (split) | `dump_parser_source` ground-truth probes (scratchpad `probe_autovar*.pl`, dump-don't-transcribe) establishing the one-scope / non-strict / preamble-`my` model; `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm` = 0; baseline `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh` (2/2), KM gate all EXIT 0 | Split `.1.1` → `.1.1.1`+`.1.1.2`; design recorded; KM card [[working-vars-no-strict-need-my-lexical]] added (map regenerated). Docs/tree/KM-only — no engine/book change, so phase0 N/A to the split slice |
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.1.1` | `dump_parser_source` ground truth (no-declare leaky-global → injected `my`); all-20-specs generated-source diff (mine vs git-stashed code files); `tkgui` parse-output before/after incl. a 2nd same-process parse; `perl -c`; +3 phase0 locks; `bash tools/run_ci_local.sh`; `mdbook build` | **19/20 specs byte-identical**; only `tkgui` differs (+1 legit `my $subgui_name;`, parse output identical before/after); Lispish `a(undef)`→`my @undef` false-positive caught by the diff + fixed (reserved-literal exclusion); **phase0 965→968 green**; gate **EXIT 0** ("Result: PASS", 968); `mdbook build` EXIT 0; ratio 1.0000 preserved (phase0 all-target guard green) |
+| `2026-06-24` | `SPEC-FORMAT-TERSE.1.1.2` | Throwaway Rust + Perl `LinkedSpec::Get` probes (dump-don't-guess) on the same minimal grammars; read `runtime.rs`/`engine.rs` variable model; `tools/gen_oracle_corpus.pl` (5 new `autoexist_*` fixtures, existing 2 byte-identical); `cargo test`; `cargo clippy`; `perl -c` generator; `bash tools/run_ci_local.sh`; `mdbook build` | **Assessed DOABLE, no engine change** — Rust HashMaps auto-vivify + fresh ctx per parse ⇒ auto-existence inherent, no leaky-global hazard. Cross-variant proof: scalar no-declare Perl `"ok"`/Rust `["ok"]`; array no-declare Perl `["a","b"]`/Rust `[["a","b"]]`; declare twins identical; `array(undef)` Perl `[null]`/Rust `[[null]]` (= Perl reference wrapped one level). **cargo 244→248 green**; all **7 oracle fixtures PASS**; clippy zero-new (engine.rs 11 = baseline; test files add 0); `perl -c` OK; **phase0 968 green** (Perl untouched), gate **EXIT 0**; `mdbook build` EXIT 0. Recursive/REP idiom deferred to `RUST-PARITY` (separate gap). |
 
 ## Commit Log
 
@@ -431,9 +482,33 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.0` | `SPEC-FORMAT-TERSE.0 — activate + ratify the terse .spec format direction (ADR 0007)` | Tree `proposed`→`active`; ADR `0007` + INDEX row; migration policy = gradual alias; reference-touching exception; implementation gated by `RTLUTILS-REGEX-HANG`. No engine/book change. |
 | `SPEC-FORMAT-TERSE.1.1` (split) | `SPEC-FORMAT-TERSE.1.1 — split into .1.1.1 (Perl) + .1.1.2 (Rust parity); record auto-existing-variable design + KM card` | `.1.1` → container; first frontier child `.1.1.1`. Design grounded by `dump_parser_source` probes; KM [[working-vars-no-strict-need-my-lexical]]. Docs/tree/KM-only — no engine/book change. |
 | `SPEC-FORMAT-TERSE.1.1.1` | `SPEC-FORMAT-TERSE.1.1.1 — Perl auto-existing working variables (engine + book + 3 phase0 locks)` | Collector `_collect_auto_working_var_decls` in `RuleIR/EmitContext.pm` (+ `_mask_action_code_literals`) → `auto_var_decls`; preamble injection in `SpecEntry::compile_spec_entry`. 19/20 specs byte-identical (tkgui +1 legit `my`, behavior-preserved); +3 phase0 locks → 968; gate EXIT 0; book taught (declare optional). |
+| `SPEC-FORMAT-TERSE.1.1.2` | `SPEC-FORMAT-TERSE.1.1.2 — Rust lockstep parity for auto-existing variables (oracle + integration locks; no engine change)` | Assessed DOABLE: Rust interpreter's per-parse `RuntimeContext` HashMaps already auto-vivify working vars (no `declare` needed) and are fresh per `execute` (no leak) — no Perl-style leaky-global hazard, so no engine code change. Locked with 5 `autoexist_*` oracle fixtures (`tools/gen_oracle_corpus.pl`) + 4 `terse_1_1_2_*` integration tests; cargo 244→248 green, 7/7 oracle fixtures PASS, clippy zero-new, phase0 968 green (Perl untouched), gate EXIT 0. `.1.1` container done. Recursive/REP idiom deferred to `RUST-PARITY`. KM card [[rust-working-vars-auto-vivify]]. |
 
 ## Changelog
 
+- `2026-06-24`: **`.1.1.2` DONE — Rust lockstep parity for auto-existing variables (no engine change).**
+  PNT (user-directed loop, fresh session) assessed the Rust parity for `.1.1.1` per the leaf's
+  blocked-vs-doable instruction. **TOOLBOX-first ground truth** (throwaway Rust integration probe +
+  `perl -Iperl` `LinkedSpec::Get` probe on the same minimal grammars; read `rust/linkedspec-runtime/src/
+  {runtime,engine}.rs`): the Rust variant is an **interpreter** (no codegen/`eval`), so working variables
+  live in per-parse `RuntimeContext` HashMaps (`scalars`/`arrays`/`hashes`) that **auto-vivify** on write
+  and read as `Undef`/empty when absent, and `Engine::execute` builds a **fresh `RuntimeContext` per
+  call**. So working variables **already auto-exist** with no `declare`, and a value cannot leak across
+  parses — the leaky-package-global hazard the Perl `.1.1.1` change fixed (non-strict generated handlers)
+  simply does not exist in Rust. **Outcome: DOABLE, no engine change** — parity holds by architecture; the
+  leaf lands as lockstep regression tests + docs. **Cross-variant proof** (divergence-free edge-action
+  form = the `.7.1` oracle proof class; recursive/REP forms are blocked by the separate `RUST-PARITY` gap,
+  verified returning `[null]`/`[[]]`): scalar no-declare Perl `"ok"`/Rust `["ok"]`; array no-declare Perl
+  `["a","b"]`/Rust `[["a","b"]]`; declare twins identical; `array(undef)` Perl `[null]`/Rust `[[null]]` —
+  Rust == Perl reference wrapped one level. **Locked:** 5 oracle fixtures `autoexist_{scalar,array}_
+  {no_declare,declare}` + `autoexist_undef_literal` (added to `tools/gen_oracle_corpus.pl`, regenerated;
+  existing 2 byte-identical) + 4 `terse_1_1_2_*` integration tests (value anchors, declare/no-declare
+  convergence, per-parse no-leak via same-engine re-run). **cargo test 244→248 green**; all **7 oracle
+  fixtures PASS**; `cargo clippy` zero-new source/test warnings; `perl -c tools/gen_oracle_corpus.pl` OK;
+  **phase0 968 green** (Perl untouched), `bash tools/run_ci_local.sh` **EXIT 0**; `mdbook build` EXIT 0
+  (no book change — variant-agnostic, `.1.1.1` already taught the contract; Rust now conforms). KM card
+  [[rust-working-vars-auto-vivify]] (map regenerated). **`.1.1` container done; `.1.1.1` is now landed
+  against the universal contract (ADR 0006/0007). Next: `.1.2`** (remove wrappers + type inference).
 - `2026-06-24`: **`.1.1.1` DONE — Perl auto-existing working variables.** PNT (user-directed loop start)
   implemented the first terse-format engine leaf. TOOLBOX-first `dump_parser_source` ground truth confirmed
   the no-declare hazard (bare leaky-global `$count`/`@items`) and the fix shape. Added a rule-level

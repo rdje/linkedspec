@@ -99,8 +99,17 @@ it to the preamble icode (empty ⇒ unchanged ⇒ byte-identical). **Verified:**
 byte-identical generated source; only `tkgui` gains one legit `my $subgui_name;` (parse output
 identical before/after, incl. a 2nd same-process parse — proving per-invocation `my`, not a leaky
 global). A Lispish `a(undef)`→`my @undef` false positive was caught by the all-specs diff and fixed by
-the reserved-literal exclusion. +3 phase0 locks → 965→968 green; gate EXIT 0; ratio 1.0000. The Rust
-lockstep parity is `SPEC-FORMAT-TERSE.1.1.2`.
+the reserved-literal exclusion. +3 phase0 locks → 965→968 green; gate EXIT 0; ratio 1.0000.
+
+**Rust lockstep parity (SPEC-FORMAT-TERSE.1.1.2, 2026-06-24) — landed with NO engine change.** The
+Rust variant is an interpreter (no codegen/`eval`), so working variables live in per-parse
+`RuntimeContext` HashMaps that auto-vivify on write and read as `Undef`/empty when absent, and
+`Engine::execute` builds a fresh context per call — so working variables **already auto-exist** with no
+`declare` and cannot leak across parses. The non-strict leaky-package-global hazard this card describes
+is a Perl-codegen concern that does not exist in the Rust interpreter, so parity holds by architecture;
+`.1.1.2` is locked with oracle fixtures + integration tests, not an engine change. See
+[[rust-working-vars-auto-vivify]]. The recursive/REP idiom these Perl phase0 locks use is blocked on
+Rust by the separate `RUST-PARITY` recursive-grammar gap, not auto-existence.
 
 ## Links
 

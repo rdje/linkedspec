@@ -117,6 +117,72 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.1.2 — auto-existing working variables (cross-variant) ──
+    #
+    # The Perl reference (.1.1.1, ADR 0007) lets a working variable referenced
+    # through a typed wrapper -- scalar(NAME)/array(NAME) -- be used WITHOUT a
+    # prior declare(...). These cases prove the Rust backend reproduces that
+    # behavior under the universal-contract obligation (ADR 0006): each grammar
+    # uses a working variable with NO declare in the divergence-free edge-action
+    # form (the .7.1 proof class -- non-recursive `Parent:: /re/ -> Child { ... }`,
+    # value set by the edge's own `return(...)`, action-less child), so Perl and
+    # Rust agree exactly (modulo the one-level accumulator wrap). The `*_declare`
+    # twins show declare-form output is unchanged; `undef_literal` guards that the
+    # `undef` LITERAL inside array(undef) is not mistaken for a variable.
+    # The recursive/REP auto-exist idiom the Perl phase0 locks use does NOT yet
+    # reproduce on Rust -- that is the separately-owned RUST-PARITY recursive-grammar
+    # gap, NOT auto-existence (see docs/knowledge/working-vars-no-strict-need-my-lexical.md).
+    {   case   => 'autoexist_scalar_no_declare',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { assign(scalar(v), "ok"); return(scalar(v)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'autoexist_scalar_declare',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { declare(scalar, v); assign(scalar(v), "ok"); return(scalar(v)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'autoexist_array_no_declare',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { push_value(array(items), "a"); push_value(array(items), "b"); return(array_copy(array(items))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'autoexist_array_declare',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { declare(array, items); push_value(array(items), "a"); push_value(array(items), "b"); return(array_copy(array(items))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'autoexist_undef_literal',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { return(array(undef)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);
