@@ -18,6 +18,15 @@ use LinkedSpec::HandlerVariantEmitter ();
 
 our $BACKEND;
 
+# --- forward-progress / consume-before-recurse recursion guard state (ADR 0010,
+# TOP-RULE-AS-NORMAL.2). Active (descriptor, rule-label, input-position) frames on the
+# current recursion stack. A re-entry whose key is already active means the rule was
+# re-entered without consuming any input since its enclosing entry — a non-progressing
+# recursive cycle that would otherwise hang — so the guarded handler returns undef to
+# terminate that branch. Keys are pushed on entry and popped on exit (balanced; the
+# handler invocation is eval-wrapped), so the table is empty between top-level parses.
+my %__ls_recursion_active;
+
 use constant {
  DUMP_NONE   => 0,
  DUMP_LOW    => 100,
@@ -294,8 +303,28 @@ sub _build_runtime_handler {
    );
    return undef
   }
+  # --- forward-progress / consume-before-recurse termination guard (ADR 0010,
+  # TOP-RULE-AS-NORMAL.2). Cut a non-progressing recursive cycle so recursion
+  # into/through the top rule (or any rule) terminates instead of hanging. A rule
+  # re-entered at an input position already active on its own recursion stack has
+  # consumed no input since that enclosing entry; legitimate consume-before-recurse
+  # recursion always advances pos() first, so this never fires for a terminating
+  # grammar (proven: phase0 stays 960/960).
+  my $progress_pos = (ref($STRING) eq 'SCALAR' || ref($STRING) eq 'REF') ? pos($$STRING) : undef;
+  my $progress_key = (ref($descr) eq 'HASH')
+   ? ("$descr\0$label\0" . (defined($progress_pos) ? $progress_pos : -1))
+   : undef;
+  if (defined($progress_key) && $__ls_recursion_active{$progress_key}) {
+   _trace_decision("rule_handler_forward_progress:$label", 0,
+    "non-progressing recursive re-entry at pos " . (defined($progress_pos) ? $progress_pos : -1) . "; cut to terminate", DUMP_NONE);
+   _trace_exit($runtime_scope, { returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
+   return undef
+  }
+  $__ls_recursion_active{$progress_key} = 1 if defined($progress_key);
+
   my $retv = eval { $compiled_handler->($descr, $STRING, $info) };
   my $eval_error = $@;
+  delete $__ls_recursion_active{$progress_key} if defined($progress_key);
   if ($eval_error) {
    _call_runtime_ctx(
     'set_runtime_ctx_last_error_for_owner',

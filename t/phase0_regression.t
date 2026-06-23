@@ -43610,6 +43610,107 @@ subtest 'plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus' => sub {
         'PluginBridge.pm documents its compatibility-bridge status');
 };
 
+# TOP-RULE-AS-NORMAL.2.1 / ADR 0010: run a built parser under a hard fork+SIGKILL
+# wall-clock bound. alarm() cannot reliably interrupt a runaway recursion/regex
+# (TOOLBOX 6.3), so a termination regression must FAIL this test instead of hanging
+# the whole suite. The child writes the JSON-encoded result to a pipe and POSIX::_exit's
+# WITHOUT touching Test::More (no duplicate TAP). Returns:
+#   ('ok', $canonical_json) | ('hang', undef) | ('err', $msg)
+sub _ls_run_bounded {
+    my ($parser, $input, $secs) = @_;
+    $secs ||= 6;
+    require POSIX;
+    require Time::HiRes;
+    pipe(my $rd, my $wr) or return ('err', "pipe: $!");
+    my $pid = fork;
+    return ('err', "fork: $!") unless defined $pid;
+    if (!$pid) {
+        close $rd;
+        my $out = eval {
+            require JSON::PP;
+            my $r = $parser->(\$input);
+            JSON::PP->new->canonical(1)->allow_nonref(1)->encode($r);
+        };
+        $out = 'ERR:' . ($@ // 'unknown') unless defined $out;
+        print {$wr} $out;
+        close $wr;
+        POSIX::_exit(0);
+    }
+    close $wr;
+    my $t = Time::HiRes::time();
+    my $reaped = 0;
+    while (Time::HiRes::time() - $t < $secs) {
+        if (waitpid($pid, POSIX::WNOHANG()) == $pid) { $reaped = 1; last }
+        Time::HiRes::sleep(0.02);
+    }
+    if (!$reaped && kill(0, $pid)) {
+        kill('KILL', $pid);
+        waitpid($pid, 0);
+        return ('hang', undef);
+    }
+    local $/;
+    my $out = <$rd>;
+    close $rd;
+    return (defined($out) && $out =~ /^ERR:/) ? ('err', $out) : ('ok', $out);
+}
+
+subtest 'top_rule_as_normal_no_consume_recursion_terminates_not_hang' => sub {
+    # TOP-RULE-AS-NORMAL.2.1 / ADR 0010: a rule that recurses into itself without
+    # consuming input is a non-progressing cycle that used to hang/OOM the engine
+    # (the SpecEntry runtime handler tail-called itself unconditionally). The
+    # forward-progress / consume-before-recurse guard in LinkedSpec::SpecEntry now
+    # cuts such a cycle so it TERMINATES (returns undef) instead of hanging. Bounded
+    # so a guard regression fails here rather than hanging the suite.
+    plan tests => 3;
+    my $spec = "top:: /a/\n I { return(call(top)) }\n";
+    my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'top') };
+    ok(ref($parser) eq 'CODE', 'no-consume recursive grammar builds a parser')
+        or diag(normalize_error($@));
+    my ($status, $out) = _ls_run_bounded($parser, 'aaa', 6);
+    is($status, 'ok', 'no-consume recursive cycle terminates (forward-progress guard cut it; no hang)')
+        or diag("status=$status");
+    is($out, 'null', 'cut non-progressing recursion yields undef (the guard, not an accidental path)');
+};
+
+subtest 'consume_before_recurse_body_recursion_parses_and_terminates' => sub {
+    # TOP-RULE-AS-NORMAL.2.1 / ADR 0010: the forward-progress guard must NOT affect
+    # legitimate consume-before-recurse recursion (which advances pos() before each
+    # re-entry). Lock a recursive S-expression body grammar: it parses a nested input
+    # to the expected AST and terminates under the hard bound.
+    plan tests => 3;
+    my $spec = "top::\n -> sexpr { return(call(sexpr)) }\n\n"
+             . "sexpr: /\\(/ /\\)/  I { declare(array, items) }\n"
+             . " -> sexpr     { push_value(a(items), call(sexpr)) }\n"
+             . " -> atom      { push_value(a(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(array_copy(a(items))) }\n\n"
+             . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
+    my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'top') };
+    ok(ref($parser) eq 'CODE', 'recursive S-expression grammar builds a parser')
+        or diag(normalize_error($@));
+    my ($s1, $o1) = _ls_run_bounded($parser, '(a(b)c)', 6);
+    is($s1, 'ok', 'recursive parse terminates under the bound (guard leaves legitimate recursion intact)');
+    is($o1, '["a",["b"],"c"]', 'recursive S-expression parses to the expected nested AST');
+};
+
+subtest 'top_rule_as_normal_top_recursion_terminates' => sub {
+    # TOP-RULE-AS-NORMAL.2.1 / ADR 0010: a recursive rule used directly as the entry
+    # (top) rule must TERMINATE (the guard guarantees no hang). The VALUE-correctness
+    # of top re-entry recursion (it currently diverges from the equivalent body form)
+    # is the gap owned by TOP-RULE-AS-NORMAL.2.2 and is intentionally NOT asserted here.
+    plan tests => 2;
+    my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
+             . " -> sexpr     { push_value(a(items), call(sexpr)) }\n"
+             . " -> atom      { push_value(a(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(array_copy(a(items))) }\n\n"
+             . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
+    my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'sexpr') };
+    ok(ref($parser) eq 'CODE', 'top-recursive grammar builds a parser')
+        or diag(normalize_error($@));
+    my ($s, $o) = _ls_run_bounded($parser, '(a(b)c)', 6);
+    is($s, 'ok', 'top re-entry recursion terminates under the bound (no hang)')
+        or diag("status=$s");
+};
+
 done_testing();
 
 sub discover_specs {

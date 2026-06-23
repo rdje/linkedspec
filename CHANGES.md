@@ -1,6 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-23 — TOP-RULE-AS-NORMAL.2.1 — forward-progress / consume-before-recurse termination guard (SpecEntry runtime-handler closure) + 3 phase0 locks; split .2; discover the .2.2 top-recursion value gap (ENGINE, ADR 0010)
+
+**Scope:** one engine file (`perl/LinkedSpec/SpecEntry.pm`) + three new `t/phase0_regression.t` locks +
+task-tree/KM/live-docs. ADR `0010` authorizes the engine touch. **No spec/book change** (book reconciliation
+is `.4`).
+
+**TOOLBOX ground-truth first (scratchpad probes 1–7, no transcription):**
+- `call_spec_handler_subst` showed `call(rule)` / `-> rule` lower to
+  `&{$$descr{spec}{$rule}{handler}}($descr,$STRING,$minfo)` (`ActionIR/Contracts.pm:134`,
+  `MethodLowering.pm:332`); `{handler}` is the `SpecEntry::_build_runtime_handler` closure
+  (`SpecEntry.pm:438`). So **every cross-rule call + every recursion** flows through that ONE real-Perl
+  closure — the ideal guard site. (`dump_parser_source` is a simplified standalone artifact
+  `&{…{$rule}}` that does NOT match the runtime `…{$rule}{handler}` shape.)
+- `LinkedRE::or`: seek `/(?{…})$re/gcp` scans forward to EOF→`undef`; consume `/\G(?{…})$re/gcp` is
+  protected by Perl's repeated-zero-width-match prohibition + `/gc`. A fork+SIGKILL battery of
+  zero-width/lookahead grammars (seek + consume) **never hangs** — the per-handler `while(1)` is already
+  forward-progress-safe.
+- The ONE reproduced engine hang: `top:: /a/ I { return(call(top)) }` — an unconditional no-consume
+  self-tail-call (no match, no loop, empty dep-regex map) → OOM.
+
+**Fix (`perl/LinkedSpec/SpecEntry.pm`):** a **(rule, pos) active-stack non-progress cutoff** in the
+runtime-handler closure. A file-lexical `%__ls_recursion_active` keyed by `"$descr\0$label\0pos"`; if a
+rule is re-entered at an input position already active on its own recursion stack, no input was consumed
+since the enclosing entry — a non-progressing cycle — so the handler returns `undef`. Pushed on entry /
+popped after the eval-wrapped invocation (balanced; empty between top-level parses, so no descriptor-shape
+pollution). Legitimate consume-before-recurse recursion always advances `pos()` first, so the cutoff never
+fires for a terminating grammar.
+
+**Verification:** `perl -c` clean (SpecEntry.pm, LinkedSpec.pm, test); the E4 no-consume hang now returns
+`null` (guard trace fires); consume-recursion grammars (probes 2/4/7) unchanged. **phase0 960 → 963** with
+3 new locks (no-consume cycle terminates+undef; body S-expression recursion parses `(a(b)c)`→`["a",["b"],"c"]`;
+top-recursion terminates). `bash tools/run_ci_local.sh` → **EXIT 0** ("Result: PASS", 963 tests). Zero
+regression. New KM card `docs/knowledge/top-rule-recursion-forward-progress-guard.md`.
+
+**Discovered (split `.2` → `.2.1` done + `.2.2` pending):** a recursive rule used directly AS the top/entry
+rule returns `null`, while the IDENTICAL rule as a body rule (reached via a no-consume
+`top:: -> sexpr {return(call(sexpr))}` wrapper) parses correctly — an **entry-alignment** divergence (who
+consumes the leading token). The `.2.1` top-recursion lock pins TERMINATION only; the VALUE-correctness is
+owned by `TOP-RULE-AS-NORMAL.2.2`.
+
 ## 2026-06-23 — TOP-RULE-AS-NORMAL.1 — own the lane + read-only investigation; ADR 0010 (authorize touching the Perl engine to treat the top rule as an ordinary rule entered first); supersede PHASE0-BACKHALF-TRIAGE.6 + close that tree (DOC-ONLY)
 
 **No engine/spec/test/book code touched** — only `docs/decisions/0010-*.md` + `INDEX.md`, the new
