@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-23 — TOP-RULE-AS-NORMAL.2.2 — confirm top re-entry recursion works with the LX accumulator idiom (NO engine defect; engine frozen) + 1 phase0 lock; close .2 (TEST+DOC)
+
+**Scope:** one new `t/phase0_regression.t` lock + task-tree/KM/live-docs. **No engine/spec change** — the
+engine was already correct; ADR `0010`'s authorized engine change is NOT needed for the recursion value (only
+`.2.1`'s termination guard was). Book documentation of the recursive-top-rule model is deferred to `.4`.
+
+**TOOLBOX confirmation (`probe9.pl`, dump-don't-transcribe):** the reasoned fix-direction from the `.2.1`
+discovery holds exactly. A recursive rule used directly AS the top rule parses with an `LX` accumulator-return:
+
+| input | `sexpr::` + `LX { return(array_copy(a(items))) }` | BODY (`top:: -> sexpr {return(call(sexpr))}`) |
+|---|---|---|
+| `(a)` | `[["a"]]` | `["a"]` |
+| `(a(b)c)` | `[["a",["b"],"c"]]` | `["a",["b"],"c"]` |
+| `(a) (b)` | `[["a"],["b"]]` | `["a"]` |
+
+**Root cause (why the bare `sexpr::` returned `null`):** the default-handler `while(1)` ends each no-match
+iteration with `unless($minfo){ <lxcode> }`, and the default `lxcode` is `return undef`. When the recursive
+rule is the entry rule, its OUTERMOST frame loops once more at EOF after the recursion consumes all input, hits
+`return undef`, and discards its accumulator → `null`. Adding `LX` (the same accumulator-return any accumulating
+top rule needs) returns the accumulator instead. The BODY wrapper `return`s on the first dispatch and never
+loops to EOF.
+
+**Conclusion:** top re-entry recursion already works as an ordinary recursive rule (ADR `0010`'s goal met by the
+engine). TOP and BODY are intentionally different grammars — the `(a) (b)` case is decisive: TOP accumulates the
+**sequence** of top-level forms (`[["a"],["b"]]`), BODY parses **one** form (`["a"]`) — so "make top re-entry
+identical to a body rule" was a mis-framing, not a defect. The original `null` was the missing-`LX` authoring
+case.
+
+**Lock + verification:** added `top_rule_as_normal_recursion_with_lx_parses_sequence` (asserts
+`(a(b)c)`→`[["a",["b"],"c"]]` and `(a) (b)`→`[["a"],["b"]]`). `perl -c` clean; **phase0 963→964 green**;
+`bash tools/run_ci_local.sh` **EXIT 0** ("Result: PASS", 964 tests); zero regression. Marked `.2` + `.2.2`
+`done`; updated KM card `top-rule-recursion-forward-progress-guard` with the resolution.
+
 ## 2026-06-23 — TOP-RULE-AS-NORMAL.2.1 — forward-progress / consume-before-recurse termination guard (SpecEntry runtime-handler closure) + 3 phase0 locks; split .2; discover the .2.2 top-recursion value gap (ENGINE, ADR 0010)
 
 **Scope:** one engine file (`perl/LinkedSpec/SpecEntry.pm`) + three new `t/phase0_regression.t` locks +

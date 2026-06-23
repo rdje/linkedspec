@@ -1,6 +1,6 @@
 ---
 id: top-rule-recursion-forward-progress-guard
-title: "Engine mechanics (TOP-RULE-AS-NORMAL.2.1): recursion re-enters through the SpecEntry runtime-handler closure (`&{$descr->{spec}{$rule}{handler}}(...)`), NOT the dump_parser_source artifact. The per-handler while(1)+LinkedRE::or /gc matching is already forward-progress-safe; the only engine-level hang is an unconditional NO-CONSUME self-recursion. A precise (rule,pos) non-progress cutoff in SpecEntry.pm terminates such cycles with zero phase0 regression. SEPARATE open gap: a recursive rule used AS the top/entry rule returns the wrong value (null) vs the same rule as a body rule (parses) — owned by .2.2."
+title: "Engine mechanics (TOP-RULE-AS-NORMAL.2.1): recursion re-enters through the SpecEntry runtime-handler closure (`&{$descr->{spec}{$rule}{handler}}(...)`), NOT the dump_parser_source artifact. The per-handler while(1)+LinkedRE::or /gc matching is already forward-progress-safe; the only engine-level hang is an unconditional NO-CONSUME self-recursion. A precise (rule,pos) non-progress cutoff in SpecEntry.pm terminates such cycles with zero phase0 regression. RESOLVED (.2.2): a recursive rule used AS the top/entry rule parses correctly with an LX accumulator-return (the apparent null was the missing-LX authoring case, since a bare accumulating top rule returns undef at EOF); TOP vs BODY differ by arity (TOP accumulates the sequence of top-level forms, BODY returns one), not an engine defect — engine stays frozen."
 answers:
   - "where does cross-rule call / recursion actually re-enter at runtime"
   - "is dump_parser_source the real runtime handler code"
@@ -57,15 +57,25 @@ consume-before-recurse recursion always advances `pos()` first, so the cutoff ne
 terminating grammar — **phase0 960 → 963** (3 new locks), `tools/run_ci_local.sh` **EXIT 0**, zero
 regression.
 
-## SEPARATE open gap (owned by `.2.2`): top re-entry returns the wrong value
+## Top re-entry recursion VALUE: RESOLVED (`.2.2`) — no engine defect, missing-`LX` authoring case
 
-A recursive S-expression grammar with `sexpr::` **as the top rule** returns `null` on `(a(b)c)`, while
-the **identical** `sexpr` rule reached via a no-consume `top:: -> sexpr { return(call(sexpr)) }` wrapper
-returns `["a",["b"],"c"]`. The handler source is the same; the divergence is the **entry alignment** —
-who consumes the leading token (the body form's wrapper eats the outermost `(` before delegating; the
-top form must match its own `(`, which makes the `-> sexpr` recurse edge fire on the open paren). This
-is the genuine "make top re-entry behave identically to a body rule" work, **not** the termination
-guard — it is owned by `TOP-RULE-AS-NORMAL.2.2`.
+A recursive S-expression grammar with `sexpr::` **as the top rule** at first appeared to return `null` on
+`(a(b)c)` while the **identical** `sexpr` reached via a no-consume `top:: -> sexpr { return(call(sexpr)) }`
+wrapper returned `["a",["b"],"c"]`. `.2.2` root-caused this and confirmed it is **not** an engine defect:
+
+- **Root cause:** the default-handler `while(1)` ends each no-match iteration with `unless($minfo){ <lxcode> }`
+  and the **default `lxcode` is `return undef`**. When the recursive rule is the entry rule, its OUTERMOST
+  frame loops once more at EOF after the recursion consumes all input, hits `return undef`, and **discards its
+  accumulator** => `null`. The BODY wrapper `return`s on the first dispatch and never loops to EOF.
+- **Fix = the documented idiom, not engine code.** Adding `LX { return(array_copy(a(items))) }` (the same
+  accumulator-return any accumulating top rule needs) makes it parse: `(a)`->`[["a"]]`,
+  `(a(b)c)`->`[["a",["b"],"c"]]`, `(a) (b)`->`[["a"],["b"]]` (`probe9.pl`, dump-don't-transcribe).
+- **TOP vs BODY are different grammars (different arity), by design.** `(a) (b)`: the TOP form accumulates the
+  **sequence** of top-level forms (`[["a"],["b"]]`); the BODY wrapper parses **one** form (`["a"]`). "Make top
+  re-entry behave identically to a body rule" was therefore a mis-framing — the engine already treats the top
+  rule as an ordinary recursive rule; ADR `0010`'s authorized engine change was **not needed** for the value
+  (only `.2.1`'s termination guard was). The recursive-top-rule-needs-`LX` model is documented in the book by
+  `TOP-RULE-AS-NORMAL.4`. Locked by phase0 `top_rule_as_normal_recursion_with_lx_parses_sequence`.
 
 ## Links
 

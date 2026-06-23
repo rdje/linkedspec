@@ -6,10 +6,10 @@
 - Status: `active` (created 2026-06-23)
 - Roadmap lane: `Overall roadmap — .spec language model / engine evolution`
 - Created: `2026-06-23`
-- Last updated: `2026-06-23` (`.2.1` DONE — forward-progress/consume-before-recurse termination guard landed
-  in `perl/LinkedSpec/SpecEntry.pm` (one-site (rule,pos) cutoff) + 3 phase0 locks; 960→963 green, full local
-  gate EXIT 0. `.2` split into `.2.1` (done) + `.2.2` (top re-entry VALUE correctness, discovered during
-  `.2.1`). Frontier → `.2.2` → `.3` → `.4`.)
+- Last updated: `2026-06-23` (`.2` DONE — `.2.1` termination guard in `perl/LinkedSpec/SpecEntry.pm` + `.2.2`
+  CONFIRMED no engine defect (top re-entry recursion already works with the `LX` accumulator idiom; the `null`
+  was the missing-`LX` authoring case; engine stays frozen). phase0 960→964 green, full local gate EXIT 0.
+  Frontier → `.3` (cross-variant parity, Rust) → `.4` (book reconciliation incl. recursive-top-rule-needs-`LX`).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -63,7 +63,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
   Verification: probe scripts under the session scratchpad; emitted-source dump for `Pair::AND`; Lispish
     recursion inspection; codegen grep. No code changed.
   Commit: (this commit)
-- ID: `TOP-RULE-AS-NORMAL.2` · Status: `active` (split 2026-06-23 into `.2.1` done + `.2.2` pending)
+- ID: `TOP-RULE-AS-NORMAL.2` · Status: `done` (2026-06-23 — `.2.1` termination guard landed + `.2.2` confirmed no engine defect; engine work for this tree complete)
   Goal: Perl reference engine — confirm the full {top}×{mode}×{regex}×{recursion} matrix; enable/verify
     **recursion back into the top rule** behaves identically to a body rule; add a **forward-progress /
     consume-before-recurse** guard so a no-consume recursive cycle cannot hang. Lock every confirmed/new
@@ -96,7 +96,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     terminates+undef, body-recursion parses `(a(b)c)`→`["a",["b"],"c"]`, top-recursion terminates);
     `bash tools/run_ci_local.sh` **EXIT 0** ("Result: PASS", 963 tests). Zero regression.
   Commit: (this commit)
-- ID: `TOP-RULE-AS-NORMAL.2.2` · Status: `pending` (discovered during `.2.1`; engine — ADR `0010` authorized)
+- ID: `TOP-RULE-AS-NORMAL.2.2` · Status: `done` (2026-06-23 — CONFIRMED no engine defect; doc + lock outcome, engine untouched)
   Goal: Top re-entry recursion **VALUE correctness** — make a recursive rule used directly AS the top/entry
     rule parse identically to the same rule used as a body rule. Root-cause the entry-alignment divergence
     first (TOOLBOX trace + `dump_parser_source` of the runtime handler), then a minimal, regression-locked
@@ -108,9 +108,46 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     form must match its own `(`, firing the `-> sexpr` recurse edge on the open paren). `.2.1`'s phase0 lock
     `top_rule_as_normal_top_recursion_terminates` already pins TERMINATION (no hang) but deliberately does NOT
     assert the (currently-wrong) value — `.2.2` will assert the correct value and tighten that lock.
-  Acceptance: top-recursive grammar parses identically to its body-recursive equivalent; phase0 green + the
-    tightened lock; `perl -c` clean; `bash tools/run_ci_local.sh` EXIT 0; verified via TOOLBOX.
-  Verification: `pending`  ·  Commit: `pending`
+  ROOT CAUSE (confirmed 2026-06-23 by reading the dispatch + `call` lowering; the empirical fix-direction probe
+    is PENDING — blocked momentarily by a sandbox-classifier/Bash outage, dump-don't-transcribe still owed):
+    • The default-handler `while(1)` loop (`HandlerVariantEmitter::_emit_default_handler`) ends each no-match
+      iteration with `unless($minfo){ <lxcode> }`, and the **default `lxcode` is `return undef`**
+      (`_emit_default_handler`: `$ir->{lxcode} || 'return undef'`).
+    • A single-regex I-block rule (`atom: /…/ I.return(entry_text())`) consumes via the **caller's** dispatch
+      match and processes the **incoming** `$info` (it does not re-match), so the parent rule's dispatch
+      (`LinkedRE::or` over `dependency_regex_map{$label}`) is what advances `pos()` and the child just reads it.
+    • Therefore, for `sexpr::` as the entry rule: the OUTERMOST frame matches the first `(` (branch 0 → the
+      `-> sexpr` recurse edge), recurses, and the recursion consumes the entire balanced input incl. the
+      matching `)`. Control returns to the outermost frame, whose `while(1)` iterates once more at EOF, matches
+      nothing, and hits `lxcode = return undef` — **discarding its accumulated `items`** → `null`. The BODY
+      form never loops to EOF: its `top:: -> sexpr {return(call(sexpr))}` wrapper `return`s on the first
+      dispatch, and the inner `sexpr` closes via the `-> sexpr[1]` (`)`) edge while parens are balanced inside.
+  REASONED fix-direction (to CONFIRM empirically before any edit): adding `LX { return(array_copy(a(items))) }`
+    to the `sexpr::` top rule should make the EOF branch return the accumulator instead of `undef` (no more
+    `null`), but the result is expected to be one wrapping level deeper than BODY (`[["a"]]` vs `["a"]`) because
+    the top-level accumulating loop wraps the sequence — i.e. the TOP and BODY forms are arguably **different
+    grammars** (different arity), and a recursive top rule needs an `LX` accumulator-return exactly like any
+    accumulating top rule (the documented `top:: -> x .push` + `LX{…}` idiom). If confirmed, `.2.2` is likely a
+    DOC + LOCK outcome (NO engine change — engine-frozen doctrine), NOT an engine defect; the alternative (make
+    a bare recursive top rule auto-return its non-empty accumulator at EOF) is a broader default-`lxcode` change
+    and must clear phase0. DECIDE from the probe (`probe9.pl`: TOP+LX vs BODY on `(a)`/`(a(b)c)`/`(a) (b)`).
+  CONFIRMED (2026-06-23, `probe9.pl`, dump-don't-transcribe): the reasoned fix-direction holds exactly —
+    `sexpr::` + `LX { return(array_copy(a(items))) }` parses (NO null): `(a)`->`[["a"]]`,
+    `(a(b)c)`->`[["a",["b"],"c"]]`, `(a) (b)`->`[["a"],["b"]]`. The `(a) (b)` case is decisive: the TOP form
+    accumulates the **sequence** of top-level forms (`[["a"],["b"]]`), while the BODY wrapper parses **one**
+    form and returns it (`["a"]`) — the two are **intentionally different grammars (different arity)**, NOT an
+    engine defect. **Conclusion: top re-entry recursion already works as an ordinary recursive rule** (ADR
+    `0010`'s goal is met by the engine; the authorized engine change is NOT needed for the VALUE — only `.2.1`'s
+    termination guard was). The original `null` was the **missing-`LX` authoring case**: a bare accumulating top
+    rule returns `undef` at EOF (the documented `top:: -> x .push` + `LX{...}` idiom applies to recursive top
+    rules too). So `.2.2` is a DOC + LOCK outcome; the engine stays frozen.
+  Acceptance: top re-entry recursion parses + terminates with the `LX` idiom; confirmed no engine defect; locked
+    by a phase0 subtest; phase0 green; `perl -c` clean; `bash tools/run_ci_local.sh` EXIT 0; verified via TOOLBOX.
+    **MET** (no engine change). Book documentation of the recursive-top-rule-needs-`LX` model deferred to `.4`.
+  Verification: `probe9.pl` (TOP+LX vs BODY); new phase0 lock `top_rule_as_normal_recursion_with_lx_parses_sequence`
+    (`(a(b)c)`->`[["a",["b"],"c"]]`, `(a) (b)`->`[["a"],["b"]]`); `perl -c` clean; **phase0 963->964 green**;
+    `bash tools/run_ci_local.sh` **EXIT 0** ("Result: PASS", 964 tests); zero regression.
+  Commit: (this commit)
 - ID: `TOP-RULE-AS-NORMAL.3` · Status: `pending`
   Goal: Cross-variant parity — mirror the behavior in the Rust variant (and track for Julia/Dart); the new
     phase0 locks (or their cross-variant equivalents) produce identical output. Perl is the reference.
@@ -133,9 +170,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | --- | --- | --- | --- |
 | — | `.1` | `done` 2026-06-23 | Read-only investigation complete: regex/codegen already uniform; open gap = top re-entry recursion + termination. ADR `0010`. |
 | — | `.2.1` | `done` 2026-06-23 | Forward-progress / consume-before-recurse termination guard (one-site (rule,pos) cutoff in `SpecEntry.pm`) + 3 phase0 locks; 960→963 green, full gate EXIT 0. |
-| 1 | `.2.2` | `pending` | Top re-entry recursion **VALUE correctness** (top-recursive returns `null` vs body-recursive parses — entry-alignment divergence discovered during `.2.1`). Root-cause then minimal engine change. |
-| 2 | `.3` | `pending` | Cross-variant parity (Rust; track Julia/Dart). After `.2.2`. |
-| 3 | `.4` | `pending` | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`); document the termination guarantee + the recursive-document idiom. After `.2.2` lands the value behavior. |
+| — | `.2.2` | `done` 2026-06-23 | Top re-entry recursion VALUE correctness — CONFIRMED no engine defect: the top-recursive grammar parses with the `LX` accumulator idiom (`null` was the missing-`LX` authoring case); TOP vs BODY are different grammars (different arity). Doc+lock, engine frozen. +1 phase0 lock; 963→964. |
+| 1 | `.3` | `pending` | Cross-variant parity (Rust; track Julia/Dart) for `.2.1`'s termination guard + the top-recursion-with-`LX` behavior. After `.2`. |
+| 2 | `.4` | `pending` | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`); document the termination guarantee + that a recursive rule CAN be the top rule and (like any accumulating top rule) needs an `LX` accumulator-return. |
 
 ## Decisions
 
@@ -159,8 +196,13 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
   precise** — one cutoff in the shared `SpecEntry` runtime-handler closure (every cross-rule call/recursion
   flows through it), firing ONLY on a genuine (rule,pos) non-progress cycle, so it protects all recursion
   yet never touches a terminating grammar (proven: phase0 963/963).
-- `.2.2`: what is the minimal engine change that makes a top-recursive entry rule consume/align its leading
-  token like the body form, without regressing the shipped specs?
+- ~~`.2.2`: what is the minimal engine change that makes a top-recursive entry rule align like the body form?~~
+  **Answered (`.2.2`): none — no engine change.** `probe9.pl` confirmed a recursive rule used AS the top rule
+  parses correctly with an `LX` accumulator-return; the `null` was the missing-`LX` authoring case (a bare
+  accumulating top rule returns `undef` at EOF). The TOP and BODY forms are intentionally different grammars
+  (different arity: TOP accumulates the sequence of top-level forms, BODY returns a single form), so "align them"
+  was a mis-framing. The engine already treats the top rule as an ordinary recursive rule. Doc + lock; engine
+  frozen (ADR `0010`'s authorized change unused for the value — only `.2.1`'s termination guard was needed).
 
 ## Blockers
 
@@ -173,16 +215,30 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | --- | --- | --- | --- |
 | `2026-06-23` | `.1` | TOOLBOX read-only probes (`LinkedSpec::Get`, `generate_only`+`dump_parser_source`, codegen grep of `Compiler.pm`/`HandlerVariantEmitter.pm`/`SpecEntry.pm`); `Pair::AND` emitted-source dump; `specs/Lispish.spec` recursion inspection | `done` — top rule is just a handler call; `while(1)` is mode-driven; regex-on-top already compiles normally; open gap = top re-entry recursion + termination. No code changed. |
 | `2026-06-23` | `.2.1` | TOOLBOX probes (`call_spec_handler_subst` re-entry seam, `dump_parser_source`, fork+SIGKILL hang census across zero-width/recursive grammars); `perl -c` SpecEntry.pm+LinkedSpec.pm+test; full `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh` | `done` — engine guard added to `SpecEntry.pm`; E4 no-consume hang→`null`; consume-recursion unchanged; **phase0 960→963** (3 new locks, 0 regression); full local gate **EXIT 0** ("Result: PASS"). Discovered the `.2.2` top-recursion value gap. |
+| `2026-06-23` | `.2.2` | `probe9.pl` (TOP+`LX` vs BODY on `(a)`/`(a(b)c)`/`(a) (b)`, dump-don't-transcribe); `perl -c`; full `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh` | `done` — CONFIRMED no engine defect: `sexpr::`+`LX` parses (`(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]` = sequence vs BODY's single `["a"]`); the `null` was the missing-`LX` authoring case. +1 phase0 lock; **phase0 963→964**; full local gate **EXIT 0** ("Result: PASS", 964). No engine/spec change. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.1` | `TOP-RULE-AS-NORMAL.1 — own the lane + read-only investigation; ADR 0010 (authorize engine change)` | this commit (DOC-ONLY; engine untouched) |
-| `.2.1` | `TOP-RULE-AS-NORMAL.2.1 — forward-progress/consume-before-recurse termination guard (SpecEntry runtime-handler closure) + 3 phase0 locks; split .2; discover .2.2 top-recursion value gap` | this commit (engine: 1 file, `perl/LinkedSpec/SpecEntry.pm`; +3 phase0 locks; ADR 0010) |
+| `.2.1` | `TOP-RULE-AS-NORMAL.2.1 — forward-progress/consume-before-recurse termination guard (SpecEntry runtime-handler closure) + 3 phase0 locks; split .2; discover .2.2 top-recursion value gap` | `c2814da` (engine: 1 file, `perl/LinkedSpec/SpecEntry.pm`; +3 phase0 locks; ADR 0010) |
+| `.2.2` | `TOP-RULE-AS-NORMAL.2.2 — confirm top re-entry recursion works with the LX accumulator idiom (NO engine defect; engine frozen); +1 phase0 lock; close .2` | this commit (TEST+DOC only; +1 phase0 lock; no engine/spec change) |
 
 ## Changelog
 
+- `2026-06-23` (`.2.2`): **CONFIRMED no engine defect — `.2` complete; engine stays frozen.** `probe9.pl`
+  (dump-don't-transcribe) showed a recursive rule used AS the top rule parses correctly with an `LX`
+  accumulator-return: `(a)`→`[["a"]]`, `(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]`. The `(a) (b)`
+  case is decisive — the TOP form accumulates the **sequence** of top-level forms while the BODY wrapper returns
+  a **single** form (`["a"]`); they are intentionally different grammars (different arity), not an engine bug.
+  The original `null` was the **missing-`LX` authoring case** (a bare accumulating top rule returns `undef` at
+  EOF — the documented `top:: -> x .push` + `LX{...}` idiom applies to recursive top rules too). So ADR `0010`'s
+  goal (top rule = ordinary rule, incl. recursion) is **met by the engine**; the authorized engine change was
+  NOT needed for the value (only `.2.1`'s termination guard was). Outcome: a DOC + LOCK slice — added the phase0
+  lock `top_rule_as_normal_recursion_with_lx_parses_sequence` (963→964 green; full gate EXIT 0); the
+  recursive-top-rule-needs-`LX` book documentation is deferred to `.4`. Marked `.2` and `.2.2` `done`. No
+  engine/spec change. Updated KM card [[top-rule-recursion-forward-progress-guard]] with the resolution.
 - `2026-06-23` (`.2.1`): Split `.2` → `.2.1` (done) + `.2.2` (pending). Implemented the forward-progress /
   consume-before-recurse termination guard as a precise **(rule, pos) active-stack non-progress cutoff** in
   the single `SpecEntry::_build_runtime_handler` runtime-handler closure (the seam every cross-rule call +

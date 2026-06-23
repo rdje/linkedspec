@@ -43711,6 +43711,35 @@ subtest 'top_rule_as_normal_top_recursion_terminates' => sub {
         or diag("status=$s");
 };
 
+subtest 'top_rule_as_normal_recursion_with_lx_parses_sequence' => sub {
+    # TOP-RULE-AS-NORMAL.2.2 / ADR 0010: a recursive rule used DIRECTLY AS the top/entry
+    # rule parses correctly and terminates when it carries an LX accumulator-return --
+    # exactly as any accumulating top rule does. Confirms (via TOOLBOX probe9) there is NO
+    # engine defect in top re-entry recursion: the top rule is an ordinary recursive rule.
+    # The earlier `null` was the missing-LX authoring case (a bare accumulating top rule
+    # returns undef at EOF -- pinned termination-only by
+    # top_rule_as_normal_top_recursion_terminates). WITH LX, the top rule accumulates the
+    # SEQUENCE of top-level forms, so its result is one wrapping level deeper than the
+    # `top:: -> sexpr {return(call(sexpr))}` wrapper form (which returns a single form) --
+    # the two are intentionally different grammars (different arity), not an engine bug.
+    plan tests => 3;
+    my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
+             . " -> sexpr     { push_value(a(items), call(sexpr)) }\n"
+             . " -> atom      { push_value(a(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(array_copy(a(items))) }\n"
+             . "LX { return(array_copy(a(items))) }\n\n"
+             . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
+    my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'sexpr') };
+    ok(ref($parser) eq 'CODE', 'top-recursive grammar with LX builds a parser')
+        or diag(normalize_error($@));
+    my ($s1, $o1) = _ls_run_bounded($parser, '(a(b)c)', 6);
+    is($o1, '[["a",["b"],"c"]]',
+        'top-recursive (with LX) parses a nested form to the expected one-level-wrapped AST');
+    my ($s2, $o2) = _ls_run_bounded($parser, '(a) (b)', 6);
+    is($o2, '[["a"],["b"]]',
+        'top-recursive (with LX) accumulates the SEQUENCE of top-level forms (different arity vs the wrapper idiom)');
+};
+
 done_testing();
 
 sub discover_specs {
