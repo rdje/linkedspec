@@ -6,10 +6,13 @@
 - Status: `active` (created 2026-06-23)
 - Roadmap lane: `Overall roadmap — .spec language model / engine evolution`
 - Created: `2026-06-23`
-- Last updated: `2026-06-23` (`.2` DONE — `.2.1` termination guard in `perl/LinkedSpec/SpecEntry.pm` + `.2.2`
-  CONFIRMED no engine defect (top re-entry recursion already works with the `LX` accumulator idiom; the `null`
-  was the missing-`LX` authoring case; engine stays frozen). phase0 960→964 green, full local gate EXIT 0.
-  Frontier → `.3` (cross-variant parity, Rust) → `.4` (book reconciliation incl. recursive-top-rule-needs-`LX`).)
+- Last updated: `2026-06-23` (`.3` SPLIT → `.3.1` + `.3.2` after Rust diagnosis. **`.3.1` DONE** — Rust
+  forward-progress / consume-before-recurse termination guard (mirror of `.2.1`) in
+  `rust/linkedspec-runtime/src/{runtime,engine}.rs`: a no-consume recursive cycle now terminates cleanly
+  (was: native stack overflow → SIGABRT) and returns `[null]` = Perl's `undef` wrapped one level; +2 Rust
+  locks; Rust suite 242→244 green; phase0 964/964 + full local gate EXIT 0 (Perl untouched). **`.3.2` BLOCKED**
+  on the GENERAL recursive-grammar parse gap (Rust returns nulls even for the standard body idiom) owned by
+  `RUST-PARITY`. Frontier → `.4` (book reconciliation).)
 - Owner: repo-local workflow
 
 ## Goal
@@ -148,10 +151,54 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     (`(a(b)c)`->`[["a",["b"],"c"]]`, `(a) (b)`->`[["a"],["b"]]`); `perl -c` clean; **phase0 963->964 green**;
     `bash tools/run_ci_local.sh` **EXIT 0** ("Result: PASS", 964 tests); zero regression.
   Commit: (this commit)
-- ID: `TOP-RULE-AS-NORMAL.3` · Status: `pending`
+- ID: `TOP-RULE-AS-NORMAL.3` · Status: `active` (split 2026-06-23 into `.3.1` + `.3.2` after a Rust-side
+    diagnosis showed the cross-variant gap has two independent layers — see Decisions/Changelog)
   Goal: Cross-variant parity — mirror the behavior in the Rust variant (and track for Julia/Dart); the new
     phase0 locks (or their cross-variant equivalents) produce identical output. Perl is the reference.
-  Acceptance: Rust variant matches Perl on the new top-rule locks; parity evidence recorded.
+  Children: `.3.1` (termination parity — forward-progress guard, the genuinely top-rule-as-ordinary-specific
+    obligation), `.3.2` (value parity on recursive top-rule grammars — the GENERAL recursive-grammar parse
+    gap, owned/blocked by `RUST-PARITY`).
+- ID: `TOP-RULE-AS-NORMAL.3.1` · Status: `done` (2026-06-23)
+  Goal: **Termination parity** — mirror the Perl `.2.1` forward-progress / consume-before-recurse guard in
+    the Rust variant so a no-consume recursive cycle TERMINATES cleanly (no native stack overflow / process
+    abort) instead of crashing, exactly as the Perl reference returns `undef`. Lock with a Rust test.
+  Diagnosis (TOOLBOX "reproduce-first", scratchpad diagnostic test driven through `parse_spec`→`validate`→
+    `compile`→`Engine::execute`, dump-don't-transcribe; Rust baseline 242 tests green / `cargo build` clean):
+    • **GAP CONFIRMED:** the no-consume grammar `top:: /a/  I { return(call(top)) }` on `"aaa"` makes the Rust
+      engine recurse natively through `Engine::execute_rule` (`call(child)` → `execute_rule(&child,…)` at
+      `engine.rs:756`, NO depth/forward-progress guard) → **stack overflow → SIGABRT (process abort)**, while
+      the Perl reference returns `undef` cleanly (phase0 `top_rule_as_normal_no_consume_recursion_terminates_not_hang`).
+    • Real re-entry seam = `Engine::execute_rule(label, entry_regex_idx, ctx)` (every blind-call edge,
+      action-edge, and `call(rule)` helper flows through it: `engine.rs:222/340/756`) — the Rust analogue of
+      Perl's single `SpecEntry::_build_runtime_handler` closure ([[top-rule-recursion-forward-progress-guard]]).
+  Fix: a **(rule-label, input-pos) active-set non-progress cutoff** in `RuntimeContext` + a thin
+    `Engine::execute_rule` wrapper around the renamed `execute_rule_inner` — re-entry at a `(label, pos)`
+    already on the active recursion set ⇒ return `Undef` (cut). Inserted on entry / removed on exit (balanced
+    across the Ok and Err paths). Mirrors the Perl `%__ls_recursion_active` keyed by `"$descr\0$label\0$pos"`.
+    Legitimate consume-before-recurse recursion always advances `ctx.pos` first, so the cutoff never fires for
+    a terminating grammar.
+  Acceptance: a no-consume recursive cycle terminates cleanly in Rust (no overflow/abort) instead of crashing;
+    existing Rust tests stay green; new Rust regression lock; Perl phase0 + full local gate unaffected. **MET.**
+  Verification: see Verification Log (`.3.1`).
+  Commit: (this commit)
+- ID: `TOP-RULE-AS-NORMAL.3.2` · Status: `blocked`
+  Goal: **Value parity** — the Rust variant produces the same parse OUTPUT as Perl for recursive top-rule
+    grammars: body-recursion `(a(b)c)`→`["a",["b"],"c"]`, top-recursion-with-`LX` `(a(b)c)`→`[["a",["b"],"c"]]`
+    and `(a) (b)`→`[["a"],["b"]]` (subject to the documented Perl↔Rust accumulator output-shape rule).
+  Diagnosis (same probe): the Rust engine returns **nulls** for ALL of these — body-recursion (the standard
+    `top:: -> sexpr` wrapper idiom) `(a(b)c)`→`[[null],[null]]`, top-`LX` `(a(b)c)`→`[[null],[null]]` and
+    `(a) (b)`→`[[null],[null]]`, top-no-`LX` `(a(b)c)`→`[[null]]`. Because **the standard body-recursion idiom
+    is ALSO wrong**, this is NOT a top-rule-as-ordinary issue — it is the **general recursive-grammar parse
+    gap** (atoms/`entry_text()` in nested dispatch + multi-slot `-> rule[1]` self-entry + accumulator return),
+    which the Rust corpus harness already documents as deferred and landing incrementally under `RUST-PARITY`
+    (`tests/corpus_oracle.rs`: Lispish needs `RUST-PARITY.7.5.2`; recursive specs deferred from the corpus).
+  Blocker: the Rust engine cannot yet correctly parse recursive S-expression-class grammars (returns nulls);
+    that capability is owned by `RUST-PARITY` (recursive-spec parity, e.g. Lispish `.7.5.2`+).
+  Unblock condition: `RUST-PARITY` lands recursive-grammar parse parity (a recursive body grammar like
+    `specs/Lispish.spec` produces the Perl-matching nested AST in Rust). Then `.3.2` adds the top-rule
+    recursion oracle corpus entries / Rust locks on top of that capability.
+  Next task instead: `.4` (book reconciliation) is PNT-eligible now; `.3.2` re-enters the frontier when the
+    blocker clears.
   Verification: `pending`  ·  Commit: `pending`
 - ID: `TOP-RULE-AS-NORMAL.4` · Status: `pending` (absorbs the superseded `PHASE0-BACKHALF-TRIAGE.6` book work)
   Goal: Book reconciliation to the new model — demote "Body rule only" / "no regex on top" from law to
@@ -171,8 +218,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | — | `.1` | `done` 2026-06-23 | Read-only investigation complete: regex/codegen already uniform; open gap = top re-entry recursion + termination. ADR `0010`. |
 | — | `.2.1` | `done` 2026-06-23 | Forward-progress / consume-before-recurse termination guard (one-site (rule,pos) cutoff in `SpecEntry.pm`) + 3 phase0 locks; 960→963 green, full gate EXIT 0. |
 | — | `.2.2` | `done` 2026-06-23 | Top re-entry recursion VALUE correctness — CONFIRMED no engine defect: the top-recursive grammar parses with the `LX` accumulator idiom (`null` was the missing-`LX` authoring case); TOP vs BODY are different grammars (different arity). Doc+lock, engine frozen. +1 phase0 lock; 963→964. |
-| 1 | `.3` | `pending` | Cross-variant parity (Rust; track Julia/Dart) for `.2.1`'s termination guard + the top-recursion-with-`LX` behavior. After `.2`. |
-| 2 | `.4` | `pending` | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`); document the termination guarantee + that a recursive rule CAN be the top rule and (like any accumulating top rule) needs an `LX` accumulator-return. |
+| — | `.3.1` | `done` 2026-06-23 | Termination parity — Rust forward-progress / consume-before-recurse guard (mirror of `.2.1`): a no-consume recursive cycle now terminates cleanly (no native stack overflow / SIGABRT) instead of crashing; +1 Rust lock; Rust 242→243 green, zero regression. |
+| — | `.3.2` | `blocked` | Value parity on recursive top-rule grammars — blocked on the GENERAL recursive-grammar parse gap (Rust returns nulls even for the standard body-recursion idiom), owned by `RUST-PARITY` (Lispish `.7.5.2`+). Out of frontier until that capability lands. |
+| 1 | `.4` | `pending` | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`); document the termination guarantee + that a recursive rule CAN be the top rule and (like any accumulating top rule) needs an `LX` accumulator-return. |
 
 ## Decisions
 
@@ -216,6 +264,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | `2026-06-23` | `.1` | TOOLBOX read-only probes (`LinkedSpec::Get`, `generate_only`+`dump_parser_source`, codegen grep of `Compiler.pm`/`HandlerVariantEmitter.pm`/`SpecEntry.pm`); `Pair::AND` emitted-source dump; `specs/Lispish.spec` recursion inspection | `done` — top rule is just a handler call; `while(1)` is mode-driven; regex-on-top already compiles normally; open gap = top re-entry recursion + termination. No code changed. |
 | `2026-06-23` | `.2.1` | TOOLBOX probes (`call_spec_handler_subst` re-entry seam, `dump_parser_source`, fork+SIGKILL hang census across zero-width/recursive grammars); `perl -c` SpecEntry.pm+LinkedSpec.pm+test; full `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh` | `done` — engine guard added to `SpecEntry.pm`; E4 no-consume hang→`null`; consume-recursion unchanged; **phase0 960→963** (3 new locks, 0 regression); full local gate **EXIT 0** ("Result: PASS"). Discovered the `.2.2` top-recursion value gap. |
 | `2026-06-23` | `.2.2` | `probe9.pl` (TOP+`LX` vs BODY on `(a)`/`(a(b)c)`/`(a) (b)`, dump-don't-transcribe); `perl -c`; full `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh` | `done` — CONFIRMED no engine defect: `sexpr::`+`LX` parses (`(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]` = sequence vs BODY's single `["a"]`); the `null` was the missing-`LX` authoring case. +1 phase0 lock; **phase0 963→964**; full local gate **EXIT 0** ("Result: PASS", 964). No engine/spec change. |
+| `2026-06-23` | `.3.1` | Rust reproduce-first diagnostic (scratchpad test via `parse_spec`→`validate`→`compile`→`Engine::execute`, dump-don't-transcribe): baseline `cargo build` clean + 242 tests green; no-consume `top:: /a/ I{return(call(top))}` on `"aaa"` → **stack overflow → SIGABRT** (GAP). After guard: `cargo build` clean; the 2 new locks pass (`top_rule_as_normal_3_1_no_consume_recursion_terminates` ⇒ `[null]`; `..._consume_before_recurse_is_not_cut` ⇒ array); **full Rust suite 242→244 green** (integration 23→25; corpus/core/unit unchanged); clippy on the changed lib clean (no findings in `runtime.rs`/the added `engine.rs` wrapper; pre-existing `clippy --tests` debt untouched); **phase0 964/964** + `bash tools/run_ci_local.sh` **EXIT 0** (Perl untouched). | `done` — Rust mirror of the `.2.1` `(rule,pos)` forward-progress cutoff; a no-consume recursive cycle terminates cleanly instead of crashing; legitimate consume-before-recurse recursion left intact; zero regression. |
 
 ## Commit Log
 
@@ -224,9 +273,32 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | `.1` | `TOP-RULE-AS-NORMAL.1 — own the lane + read-only investigation; ADR 0010 (authorize engine change)` | this commit (DOC-ONLY; engine untouched) |
 | `.2.1` | `TOP-RULE-AS-NORMAL.2.1 — forward-progress/consume-before-recurse termination guard (SpecEntry runtime-handler closure) + 3 phase0 locks; split .2; discover .2.2 top-recursion value gap` | `c2814da` (engine: 1 file, `perl/LinkedSpec/SpecEntry.pm`; +3 phase0 locks; ADR 0010) |
 | `.2.2` | `TOP-RULE-AS-NORMAL.2.2 — confirm top re-entry recursion works with the LX accumulator idiom (NO engine defect; engine frozen); +1 phase0 lock; close .2` | this commit (TEST+DOC only; +1 phase0 lock; no engine/spec change) |
+| `.3.1` | `TOP-RULE-AS-NORMAL.3.1 — Rust forward-progress/consume-before-recurse termination guard (mirror of .2.1); split .3; +2 Rust locks` | this commit (Rust: `rust/linkedspec-runtime/src/{runtime,engine}.rs` + 2 integration locks; Perl untouched) |
 
 ## Changelog
 
+- `2026-06-23` (`.3.1`): **SPLIT `.3` → `.3.1` + `.3.2`; landed `.3.1` (Rust termination parity).** A
+  reproduce-first Rust diagnosis (the four Perl phase0 top-rule grammars driven through
+  `parse_spec`→`validate`→`compile`→`Engine::execute`) showed the cross-variant gap has **two independent
+  layers**: (a) **termination** — the no-consume grammar `top:: /a/ I{return(call(top))}` makes the Rust
+  engine recurse natively through `Engine::execute_rule` (the `call(rule)` helper) with NO forward-progress
+  guard → **stack overflow → SIGABRT**, while Perl returns `undef`; and (b) **value** — the Rust engine
+  returns nulls for ALL the recursive S-expression cases, *including the standard body-recursion idiom*
+  (`top:: -> sexpr` wrapper) → `[[null],[null]]`, so the value gap is the **general recursive-grammar parse
+  gap** (atoms/`entry_text()` in nested dispatch, multi-slot `-> rule[1]` self-entry, accumulator), NOT a
+  top-rule-as-ordinary issue — the Rust corpus harness already documents recursive specs (Lispish) as
+  deferred under `RUST-PARITY` (`tests/corpus_oracle.rs`). Layer (a) is the genuinely top-rule-specific
+  obligation and is cleanly ownable; layer (b) is `RUST-PARITY` territory. **`.3.1`** added the Rust mirror of
+  the `.2.1` `(rule,pos)` cutoff: a `recursion_active: HashSet<(String,usize)>` on `RuntimeContext`
+  (`enter_recursion`/`exit_recursion`) + a thin `Engine::execute_rule` guard wrapper around the renamed
+  `execute_rule_inner` (re-entry at a `(label,pos)` already active ⇒ return `undef`; inserted on entry /
+  removed on both the Ok and Err exit paths). A no-consume cycle now terminates cleanly and returns `[null]`
+  (= Perl's `undef` wrapped one level by the documented Perl↔Rust accumulator output-shape rule); legitimate
+  consume-before-recurse recursion (which advances `ctx.pos` first) is untouched. +2 integration locks; Rust
+  suite **242→244 green**; **phase0 964/964** + `bash tools/run_ci_local.sh` **EXIT 0** (Perl unchanged).
+  KM card [[top-rule-recursion-forward-progress-guard]] updated with the Rust parity. **`.3.2`** records the
+  diagnosed value gap and is `blocked` on `RUST-PARITY` recursive-grammar parity. Book reconciliation stays
+  owned by `.4`. Marked `.3` `active` (container), `.3.1` `done`, `.3.2` `blocked`.
 - `2026-06-23` (`.2.2`): **CONFIRMED no engine defect — `.2` complete; engine stays frozen.** `probe9.pl`
   (dump-don't-transcribe) showed a recursive rule used AS the top rule parses correctly with an `LX`
   accumulator-return: `(a)`→`[["a"]]`, `(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]`. The `(a) (b)`

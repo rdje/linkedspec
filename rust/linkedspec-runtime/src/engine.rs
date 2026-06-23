@@ -152,7 +152,41 @@ impl Engine {
 
     /// Execute a specific rule by label, entering at the given regex index
     /// (0 = first regex, N = Nth regex for `-> rule[N]` multi-entrypoint).
+    ///
+    /// This is the single re-entry seam for every cross-rule call, action edge,
+    /// blind-call edge, and `call(rule)` helper — the Rust analogue of the Perl
+    /// reference's `SpecEntry::_build_runtime_handler` closure. It wraps the rule
+    /// body with the **forward-progress / consume-before-recurse termination
+    /// guard** (TOP-RULE-AS-NORMAL.3.1, ADR 0010; mirror of the Perl `.2.1`
+    /// `(rule,pos)` cutoff): a rule re-entered at an input position already active
+    /// on its own recursion stack consumed no input since that enclosing entry —
+    /// a non-progressing cycle that would otherwise overflow the native stack — so
+    /// the branch is cut by returning `undef`. Legitimate consume-before-recurse
+    /// recursion advances `ctx.pos` first, so the cutoff never fires for a
+    /// terminating grammar.
     fn execute_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let entry_pos = ctx.pos;
+        if !ctx.enter_recursion(label, entry_pos) {
+            // Non-progressing recursive re-entry at this exact position: cut the
+            // cycle so it terminates instead of recursing forever.
+            return Ok(RuntimeValue::Undef);
+        }
+        // Run the body, then leave the frame on BOTH the Ok and Err paths so the
+        // active set stays balanced (empty between top-level parses).
+        let result = self.execute_rule_inner(label, entry_regex_idx, ctx);
+        ctx.exit_recursion(label, entry_pos);
+        result
+    }
+
+    /// The rule body, wrapped by [`execute_rule`] (which adds the recursion
+    /// termination guard). All recursive dispatch goes through `execute_rule`,
+    /// never directly through this method.
+    fn execute_rule_inner(
         &self,
         label: &str,
         entry_regex_idx: usize,

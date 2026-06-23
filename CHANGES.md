@@ -1,6 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-23 — TOP-RULE-AS-NORMAL.3.1 — Rust forward-progress / consume-before-recurse termination guard (mirror of .2.1); split .3 (RUST)
+
+**Scope:** Rust variant only — `rust/linkedspec-runtime/src/runtime.rs` + `rust/linkedspec-runtime/src/engine.rs`
++ 2 new integration-test locks. **No Perl/spec change** (phase0 stays 964/964). Splits `.3` into `.3.1` (this
+slice) + `.3.2` (blocked). Book reconciliation stays owned by `.4`.
+
+**Reproduce-first diagnosis (TOOLBOX, dump-don't-transcribe).** Drove the four Perl phase0 top-rule grammars
+through the Rust pipeline (`parse_spec`→`validate`→`compile`→`Engine::execute`). Rust baseline: `cargo build`
+clean, 242 tests green. Findings split the cross-variant gap into **two independent layers**:
+
+| Grammar / input | Perl reference | Rust (before `.3.1`) | Layer |
+|---|---|---|---|
+| `top:: /a/ I{return(call(top))}` on `aaa` | `undef` (terminates) | **stack overflow → SIGABRT** | (a) termination |
+| `top:: -> sexpr {…}` wrapper, `(a(b)c)` | `["a",["b"],"c"]` | `[[null],[null]]` | (b) value |
+| `sexpr::`+`LX`, `(a(b)c)` / `(a) (b)` | `[["a",["b"],"c"]]` / `[["a"],["b"]]` | `[[null],[null]]` | (b) value |
+
+Layer (b) is wrong **even for the standard body-recursion idiom**, so it is the **general recursive-grammar
+parse gap** (atoms/`entry_text()` in nested dispatch, multi-slot `-> rule[1]` self-entry, accumulator), owned by
+`RUST-PARITY` (recursive specs like Lispish are already deferred per `tests/corpus_oracle.rs`) — NOT a
+top-rule-as-ordinary issue. Layer (a) is the genuinely top-rule-specific cross-variant obligation.
+
+**Fix (layer a — `.3.1`).** Mirror the Perl `.2.1` `(rule,pos)` active-stack cutoff. Added
+`recursion_active: HashSet<(String,usize)>` to `RuntimeContext` with `enter_recursion`/`exit_recursion`, and a
+thin `Engine::execute_rule` guard wrapper around the renamed `execute_rule_inner`: re-entry at a `(label,pos)`
+already active ⇒ return `undef` (cut); the frame is inserted on entry and removed on **both** the Ok and Err exit
+paths (balanced; empty between parses). The seam is the Rust analogue of Perl's single
+`SpecEntry::_build_runtime_handler` closure — every blind-call edge, action edge, and `call(rule)` helper passes
+through it. Legitimate consume-before-recurse recursion advances `ctx.pos` before re-entry, so the cutoff never
+fires for a terminating grammar.
+
+**Validation.** A no-consume cycle now terminates cleanly and returns `[null]` — exactly Perl's `undef` wrapped
+one level by the documented Perl↔Rust accumulator output-shape rule (`tests/corpus_oracle.rs`). Two new locks in
+`tests/integration_test.rs`: `top_rule_as_normal_3_1_no_consume_recursion_terminates` (⇒ `[null]`, self-protecting
+— a guard regression aborts the test process) and `top_rule_as_normal_3_1_consume_before_recurse_is_not_cut` (⇒
+array; guard left legitimate recursion intact). **Full Rust suite 242→244 green** (integration 23→25; core/unit/
+corpus unchanged); changed-lib clippy clean (no findings in `runtime.rs` / the added `engine.rs` wrapper;
+pre-existing `clippy --tests` debt untouched). **phase0 964/964** + `bash tools/run_ci_local.sh` **EXIT 0** (Perl
+untouched). KM card `top-rule-recursion-forward-progress-guard` updated with the Rust parity. `.3.2` records the
+value gap and is `blocked` on `RUST-PARITY` recursive-grammar parity.
+
 ## 2026-06-23 — TOP-RULE-AS-NORMAL.2.2 — confirm top re-entry recursion works with the LX accumulator idiom (NO engine defect; engine frozen) + 1 phase0 lock; close .2 (TEST+DOC)
 
 **Scope:** one new `t/phase0_regression.t` lock + task-tree/KM/live-docs. **No engine/spec change** — the

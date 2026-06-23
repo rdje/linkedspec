@@ -12,6 +12,9 @@ answers:
   - "does the recursion guard affect legitimate consume-before-recurse recursion"
   - "does a top-recursive grammar parse the same as the equivalent body-recursive grammar"
   - "why does a recursive rule as the top rule return null"
+  - "does the rust variant terminate a no-consume recursive cycle or stack overflow"
+  - "where is the rust forward-progress recursion guard (execute_rule / recursion_active)"
+  - "why does the rust engine return nulls for recursive s-expression grammars"
 date: 2026-06-23
 status: confirmed
 tags: [engine, parser, top-rule, recursion, termination, forward-progress, SpecEntry, TOP-RULE-AS-NORMAL, ADR-0010]
@@ -77,11 +80,38 @@ wrapper returned `["a",["b"],"c"]`. `.2.2` root-caused this and confirmed it is 
   (only `.2.1`'s termination guard was). The recursive-top-rule-needs-`LX` model is documented in the book by
   `TOP-RULE-AS-NORMAL.4`. Locked by phase0 `top_rule_as_normal_recursion_with_lx_parses_sequence`.
 
+## Cross-variant parity (Rust) — termination guard mirrored (`.3.1`); value parity is the separate general gap (`.3.2`)
+
+**Confirmed 2026-06-23** (`TOP-RULE-AS-NORMAL.3.1`). The Rust re-entry seam is
+`Engine::execute_rule(label, entry_regex_idx, ctx)` — every blind-call edge, action edge, and the
+`call(rule)` helper (`rust/linkedspec-runtime/src/engine.rs`) flows through it, the analogue of Perl's single
+`SpecEntry::_build_runtime_handler` closure. A reproduce-first diagnosis (the four Perl phase0 grammars driven
+through `parse_spec`→`validate`→`compile`→`Engine::execute`, dump-don't-transcribe) split the cross-variant
+gap into two independent layers:
+
+- **Termination (`.3.1`, DONE):** the no-consume grammar `top:: /a/ I { return(call(top)) }` made the Rust
+  engine recurse **natively** (no forward-progress guard) → **stack overflow → SIGABRT (process abort)**,
+  whereas Perl's `.2.1` guard returns `undef`. Fixed by the Rust mirror of the `(rule,pos)` cutoff: a
+  `recursion_active: HashSet<(String,usize)>` on `RuntimeContext` (`enter_recursion`/`exit_recursion`) + a thin
+  `Engine::execute_rule` wrapper around the renamed `execute_rule_inner` — re-entry at a `(label,pos)` already
+  active ⇒ return `undef`; inserted on entry, removed on both the Ok and Err exit paths. A no-consume cycle now
+  returns `[null]` (= Perl's `undef` wrapped one level by the Perl↔Rust accumulator output-shape rule);
+  legitimate consume-before-recurse recursion (advances `ctx.pos` first) is untouched. Rust suite 242→244 green
+  (2 new integration locks). phase0 + full local gate unaffected (no Perl change).
+- **Value (`.3.2`, BLOCKED):** the Rust engine returns **nulls** for *all* recursive S-expression cases,
+  **including the standard body-recursion idiom** (`top:: -> sexpr` wrapper) → `[[null],[null]]`. So the value
+  divergence is the **general recursive-grammar parse gap** (atoms/`entry_text()` in nested dispatch, multi-slot
+  `-> rule[1]` self-entry, accumulator), NOT a top-rule-as-ordinary issue — it is owned by `RUST-PARITY`
+  (recursive specs like Lispish are already documented as deferred in `rust/linkedspec-runtime/tests/corpus_oracle.rs`).
+
 ## Links
 
 - Decision: [0010](../decisions/0010-top-rule-is-ordinary-rule-entered-first.md)
 - Tree: [[TOP-RULE-AS-NORMAL]] (`.2.1` guard done; `.2.2` top re-entry value correctness)
 - Files: `perl/LinkedSpec/SpecEntry.pm` (`_build_runtime_handler` closure + `%__ls_recursion_active`),
-  `perl/LinkedRE.pm` (`or`), `perl/LinkedSpec/ActionIR/Contracts.pm:134`, `t/phase0_regression.t` (3 locks)
+  `perl/LinkedRE.pm` (`or`), `perl/LinkedSpec/ActionIR/Contracts.pm:134`, `t/phase0_regression.t` (4 locks);
+  Rust mirror (`.3.1`): `rust/linkedspec-runtime/src/runtime.rs` (`recursion_active` +
+  `enter_recursion`/`exit_recursion`), `rust/linkedspec-runtime/src/engine.rs` (`execute_rule` guard wrapper
+  around `execute_rule_inner`), `rust/linkedspec-runtime/tests/integration_test.rs` (2 locks)
 - Related: [[top-rule-is-ordinary-rule-entered-first]], [[spec-top-rule-no-regex-two-rule-minimum]],
   [[lispish-corpus-catastrophic-backtracking]], [[cross-variant-output-parity]]

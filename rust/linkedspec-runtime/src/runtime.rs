@@ -50,6 +50,17 @@ pub struct RuntimeContext {
     /// child-return (`retv`) channel: a parent stores the child's return value
     /// into the `retv` scalar after dispatch (see `set_retv`).
     return_value: Option<RuntimeValue>,
+    /// Active `(rule-label, input-position)` frames on the current recursion
+    /// stack — the forward-progress / consume-before-recurse termination guard
+    /// (TOP-RULE-AS-NORMAL.3.1; the Rust mirror of the Perl reference's
+    /// `%__ls_recursion_active` cutoff in `SpecEntry::_build_runtime_handler`).
+    /// A re-entry whose `(label, pos)` key is already active means the rule was
+    /// re-entered without consuming any input since its enclosing entry — a
+    /// non-progressing recursive cycle that would otherwise overflow the native
+    /// stack — so `Engine::execute_rule` cuts that branch (returns `undef`).
+    /// Inserted on entry and removed on exit (balanced), so the set is empty
+    /// between top-level parses.
+    recursion_active: std::collections::HashSet<(String, usize)>,
 }
 
 impl RuntimeContext {
@@ -75,6 +86,7 @@ impl RuntimeContext {
             exit_status: None,
             backtrack_stack: Vec::new(),
             return_value: None,
+            recursion_active: std::collections::HashSet::new(),
         }
     }
 
@@ -176,6 +188,26 @@ impl RuntimeContext {
     /// channel scoped per rule invocation across nested child dispatch.
     pub fn restore_return_value(&mut self, saved: Option<RuntimeValue>) {
         self.return_value = saved;
+    }
+
+    // ── Forward-progress recursion guard (TOP-RULE-AS-NORMAL.3.1) ──
+
+    /// Enter the `(label, pos)` recursion frame for the forward-progress /
+    /// consume-before-recurse termination guard. Returns `true` if the frame was
+    /// newly added — the caller proceeds and must later call [`exit_recursion`]
+    /// with the same `(label, pos)`. Returns `false` if `label` is already active
+    /// at this exact input position — a non-progressing recursive re-entry the
+    /// caller must cut (return `undef`) to terminate the cycle. Mirrors the Perl
+    /// reference's `%__ls_recursion_active` keyed by `"$descr\0$label\0$pos"`.
+    pub fn enter_recursion(&mut self, label: &str, pos: usize) -> bool {
+        self.recursion_active.insert((label.to_string(), pos))
+    }
+
+    /// Leave the `(label, pos)` recursion frame entered by [`enter_recursion`].
+    /// `pos` is the position captured at entry (the rule body mutates `self.pos`,
+    /// so the caller records the entry position and passes it back here).
+    pub fn exit_recursion(&mut self, label: &str, pos: usize) {
+        self.recursion_active.remove(&(label.to_string(), pos));
     }
 
     // ── BACKTRACK cursor stack ──

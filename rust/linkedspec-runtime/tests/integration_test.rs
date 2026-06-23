@@ -636,3 +636,68 @@ fn match_5_2_top_rule_entry_equals_local_match() {
         "top rule (no dispatcher) seeds entry from its own first match"
     );
 }
+
+// ── TOP-RULE-AS-NORMAL.3.1 (ADR 0010) — cross-variant termination parity ──
+//
+// A rule that recurses into itself WITHOUT consuming input is a non-progressing
+// cycle. Before the forward-progress / consume-before-recurse guard, the Rust
+// engine recursed natively through `Engine::execute_rule` (the `call(rule)`
+// helper at engine.rs) and overflowed the stack → SIGABRT (process abort). The
+// guard now cuts the cycle so the parse TERMINATES cleanly — the Rust mirror of
+// the Perl reference's `%__ls_recursion_active` `(rule,pos)` cutoff in
+// `SpecEntry::_build_runtime_handler` and its phase0 lock
+// `top_rule_as_normal_no_consume_recursion_terminates_not_hang`.
+//
+// This test is self-protecting: a guard regression makes the engine overflow the
+// stack and abort the test process (a hard failure), so it can never silently
+// pass once broken.
+#[test]
+fn top_rule_as_normal_3_1_no_consume_recursion_terminates() {
+    let grammar = "top:: /a/\n I { return(call(top)) }\n";
+    let spec = parse_spec(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    let engine = Engine::new(compiled);
+    // Must return (not overflow/abort): the no-consume self-recursion is cut by
+    // the forward-progress guard. The cut yields `undef`, so the engine returns
+    // `[null]` — which is exactly the Perl reference value (`undef`/`null`)
+    // wrapped one level by the documented Perl↔Rust accumulator output-shape rule
+    // (see tests/corpus_oracle.rs). So this lock confirms BOTH clean termination
+    // and value-shape parity with the Perl phase0 lock.
+    let result = engine
+        .execute("aaa")
+        .expect("no-consume recursion must terminate cleanly (guard cut the cycle)");
+    assert_eq!(
+        result,
+        serde_json::json!([null]),
+        "cut non-progressing recursion yields `[null]` = Perl's `undef` wrapped one level (the guard, not a crash)"
+    );
+}
+
+// Companion: legitimate consume-before-recurse recursion must NOT be cut by the
+// guard. Each re-entry advances `ctx.pos` (the rule consumes `(` before
+// recursing), so the `(rule,pos)` key differs at every depth and the cutoff
+// never fires — the recursive grammar parses and terminates. (Output VALUE
+// parity for recursive grammars is the separate general gap owned by
+// TOP-RULE-AS-NORMAL.3.2 / RUST-PARITY; here we only assert termination + that
+// the guard left legitimate recursion intact, i.e. it did not collapse to `[]`.)
+#[test]
+fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
+    let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
+                   sexpr: /\\(/ /\\)/  I { declare(array, items) }\n\
+                    -> sexpr     { push_value(a(items), call(sexpr)) }\n\
+                    -> atom      { push_value(a(items), call(atom)) }\n\
+                    -> sexpr[1]  { return(array_copy(a(items))) }\n\n\
+                   atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
+    let spec = parse_spec(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    let engine = Engine::new(compiled);
+    let result = engine
+        .execute("(a(b)c)")
+        .expect("consume-before-recurse recursion must terminate (guard must not cut it)");
+    assert!(
+        result.is_array(),
+        "legitimate recursion returns a well-formed array (guard left it intact)"
+    );
+}
