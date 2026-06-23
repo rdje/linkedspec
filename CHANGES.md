@@ -1,6 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-23 — ROADMAP-DRIFT-RECONCILE.0 — own the deferred ROADMAP.md / ARCHITECTURE_STATE.md drift (TRACKING-ONLY)
+
+**Scope:** one new task-tree file (`docs/tasks/ROADMAP-DRIFT-RECONCILE.md`) + its index row in
+`docs/TASK_TREE.md` + live continuity docs. **No code, book, roadmap-content, or KM change** — this
+slice only *tracks* a drift finding so it survives; it does not fix it.
+
+**Why.** On a fresh-session bootstrap (full README→MEMORY_ARCHITECTURE→SESSION_BOOTSTRAP→MEMORY→
+COMMIT→TASK_TREE→ROADMAP_V2 read, plus delegated analyses of the `LinkedSpec.pm` import tree, the
+mdBook, and a full read of `ROADMAP.md`), a drift audit found the long-form `ROADMAP.md` has diverged
+from `ROADMAP_V2.md` + the tree ledger: it never names the active `SPEC-FORMAT-TERSE` tree / terse
+direction, still presents `declare(...)` as the permanent required form, still lists `RTLUtils` + the
+36-`.plg` corpus as live (misses `LEGACY-VHDL-RETIRE` deletion + `NONCORE-QUARANTINE` relocation to
+`noncore/` + `perl/` core-only + the phase0 count), and frames multi-backend as Rust-only.
+`ARCHITECTURE_STATE.md` is mildly stale (dated 2026-06-14; its architectural *model* is still broadly
+accurate). The user chose **"Defer — track as a new leaf"** (AskUserQuestion, 2026-06-23): track now,
+fix later, do **not** interrupt the signoff-critical `SPEC-FORMAT-TERSE.1.1.1` engine change.
+
+**What landed.** Created the `ROADMAP-DRIFT-RECONCILE` tree (`active`) with leaves `.1` (ROADMAP.md
+reconcile) + `.2` (ARCHITECTURE_STATE.md refresh), both `pending` but **deferred behind the active
+terse track** — not in the immediate PNT frontier. Registered it in the `docs/TASK_TREE.md` Active
+Task Trees table with a clear deferral note.
+
+**Verification:** tracking-only — `scripts/check_memory_architecture.sh` + the doctrine driver
+`scripts/check_doctrines.sh` + the KM gate run green via the pre-commit hook; phase0 unaffected (965;
+no engine/test/book/spec touched). Doctrine rationale: ADR `0001` §1 (own before touching) + §4
+(zero-drift) + the user's defer decision.
+
+**Next:** PNT proceeds to implement `SPEC-FORMAT-TERSE.1.1.1` (Perl auto-existing variables).
+
 ## 2026-06-23 — SPEC-FORMAT-TERSE.1.1 — split into `.1.1.1` (Perl) + `.1.1.2` (Rust parity); record the auto-existing-variable design (DOCS/TREE/KM)
 
 **Scope:** task-tree (`docs/tasks/SPEC-FORMAT-TERSE.md`) + index (`docs/TASK_TREE.md`) + one new KM fact card
