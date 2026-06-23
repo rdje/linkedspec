@@ -1,6 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-23 — SPEC-FORMAT-TERSE.1.1 — split into `.1.1.1` (Perl) + `.1.1.2` (Rust parity); record the auto-existing-variable design (DOCS/TREE/KM)
+
+**Scope:** task-tree (`docs/tasks/SPEC-FORMAT-TERSE.md`) + index (`docs/TASK_TREE.md`) + one new KM fact card
+(+ regenerated `KNOWLEDGE_MAP.md`) + live continuity docs. **No engine or book change** (`perl/`, `rust/`,
+and `docs/linkedspec-book/` untouched). First step into the terse-`.spec`-format implementation track
+(ADR `0007`), entered by PNT after `TOP-RULE-AS-NORMAL` reached acceptance.
+
+**Why a split, not an implementation.** PNT picked the first terse-format leaf `.1.1` (auto-existing
+variables). A TOOLBOX-first `dump_parser_source` ground-truth pass (scratchpad `probe_autovar*.pl`,
+dump-don't-transcribe) showed it is too broad for one signoff slice — a multi-module Perl reference-engine
+change **plus** a lockstep Rust parity obligation (ADR `0006`). Per the PNT splitting rule, split it.
+
+**Verified engine facts (now in KM card `working-vars-no-strict-need-my-lexical.md`):**
+- A rule's `I`-block + every edge + `LX` compile into **one** `sub` / **one** lexical scope. A `declare`
+  emits its `my` **once** in the preamble (after the auto `my @<label>;` accumulator), before the
+  `while(1)` dispatch loop; edges and `LX` reference it. So `declare(scalar,x)`→`my $x`,
+  `declare(array,x)`→`my @x`, `declare(hash,x)`→`my %x`; `scalar(x)`/`array(x)`/`hash(x)` carry the
+  `$`/`@`/`%` sigil.
+- Generated handlers run with **NO `use strict`** (`SpecEntry.pm` has neither `use strict` nor
+  `no strict`). So a working variable used **without** `declare` does **not** fail loudly — it silently
+  becomes a **leaky package global** (state-leaks across parser invocations and recursion). The purpose
+  of auto-existence is to make first-used working vars **per-invocation `my` lexicals**.
+
+**Resulting design for `.1.1.1` (Perl reference):** a **rule-level** pass collects every typed-wrapper
+variable reference (`scalar(NAME)`/`array(NAME)`/`hash(NAME)` + `s/a/h` aliases, single bare-identifier
+arg) across all of a rule's blocks, takes the sigil **from the wrapper** (no inference — that is `.1.2`),
+and injects one `my $NAME`/`@NAME`/`%NAME` into the **preamble** (not inline-at-first-use, which would
+reset an accumulator each dispatch iteration). Dedupe against the `@<label>` accumulator and any explicit
+`declare`d name (so no double `my`). Preserve ratio 1.0000 (ADR `0002`). `declare(...)` keeps working
+unchanged (deprecated alias, gradual migration per ADR `0007`).
+
+**Tree changes:** `.1.1` → container with children `.1.1.1` (Perl) + `.1.1.2` (Rust lockstep parity, a
+follow-on that depends on `.1.1.1`); frontier → `.1.1.1`. Mirrors how `TOP-RULE-AS-NORMAL` split its Perl
+`.2` from its Rust `.3`.
+
+**Verification (docs/tree/KM-only slice):** `scripts/check_memory_architecture.sh`,
+`scripts/check_doctrines.sh` (2/2 PASS), and `knowledge-map/scripts/check_knowledge_map.sh` all green; KM
+map regenerated and in sync. phase0 baseline unchanged (965); no engine/book/test code touched, so the
+regression gate is N/A to the split itself. **Next:** implement `.1.1.1`.
+
 ## 2026-06-23 — TOP-RULE-AS-NORMAL.4 — book reconciliation to the top-rule-as-ordinary model (BOOK + TEST + DOC)
 
 **Scope:** mdBook + one phase0 lock + a KM card. **No engine/spec change** (`perl/` untouched). Closes the
