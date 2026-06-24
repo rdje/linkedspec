@@ -1746,11 +1746,15 @@ sub _build_assignment_and_regex_contracts {
    id                 => 'assign_value',
    ir_node            => 'ASSIGN',
    diag_name          => 'assign',
-   unresolved_pattern => qr/\bassign\s*\(/o,
+   # SPEC-FORMAT-TERSE.1.4.1 — `set(...)` is the terse rename of `assign(...)` (ADR 0007).
+   # The statement-level recognition is a raw-text scan (it runs before parse-time
+   # name normalization), so it must accept both spellings; the lowered call
+   # (_lower_assign_method_statement) then normalizes `set`->`assign` and emits identical code.
+   unresolved_pattern => qr/\b(?:assign|set)\s*\(/o,
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_assign_method_statement};
-    $code =~ s/\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },

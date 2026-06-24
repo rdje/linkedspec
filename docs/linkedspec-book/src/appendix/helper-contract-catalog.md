@@ -47,6 +47,7 @@ identically. No Perl implementation knowledge is required.
 - **Returns**: void
 - **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
 - **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper; a **bare** target — `assign(name, …)` — auto-exists as a scalar (the assign target position is scalar).
+- **Terse spelling**: `set(name, value)` is the canonical terse rename of `assign` (terse-format direction). Both spellings lower identically and a bare `set` target auto-exists exactly like `assign`; `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
 
@@ -92,6 +93,7 @@ identically. No Perl implementation knowledge is required.
 - **Returns**: scalar
 - **Behavior**: Concatenates all arguments as strings. Undef arguments are treated as empty strings.
 - **Edge cases**: Non-scalar arguments (arrays, hashes) return `undef` for the whole expression.
+- **Terse spelling**: `cat(args...)` is the canonical terse rename of `concat`; both spellings lower identically (`concat` is a deprecated alias). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -226,6 +228,7 @@ identically. No Perl implementation knowledge is required.
 - **Returns**: array
 - **Behavior**: Returns a shallow copy of the array. The new array contains the same elements but is a distinct container.
 - **Compatibility**: `array_values(...)` is a retired alias — use `array_copy`.
+- **Terse spelling**: `copy(arr)` is the canonical terse rename — one unified `copy(...)` subsumes both `array_copy` and `hash_copy`, resolving array-vs-hash by the wrapped symbol kind (array first). `copy(array(x))` lowers identically to `array_copy(array(x))`. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ### `flat_array(arr)`
 - **Signature**: `flat_array(arr: array)`
@@ -416,6 +419,7 @@ identically. No Perl implementation knowledge is required.
 - **Signature**: `hash_copy(h: hash)`
 - **Returns**: hash
 - **Behavior**: Shallow copy. The new hash has the same keys and values but is a distinct container.
+- **Terse spelling**: `copy(h)` is the unified canonical terse rename (the same `copy(...)` that subsumes `array_copy`); `copy(hash(x))` lowers identically to `hash_copy(hash(x))`. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`
@@ -901,6 +905,22 @@ Most helpers propagate `undef` from their inputs to their outputs. Explicit `coa
 
 ### No Mutation Guarantee
 Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers.
+
+### Terse Helper Renames (canonical going forward)
+The `.spec` format is migrating to terser helper names (terse-format direction). For these three
+helpers the **terse spelling is now canonical**; the original name is a **deprecated alias that
+lowers identically and still works** — it is *not* retired (retirement is a later, explicit step,
+unlike the Retired table below):
+
+| Canonical (terse) | Deprecated alias | Notes |
+|---|---|---|
+| `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`. |
+| `cat(args...)` | `concat(args...)` | string concatenation. |
+| `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
+
+Both spellings produce byte-identical generated code in every position — value expression,
+assignment / declaration source, return payload, and the array-vs-hash type inference used by
+numeric reducers and `coalesce(...)`. New `.spec` authoring should prefer the terse names.
 
 ### Compatibility Aliases (Retired)
 The following are retired and must not be used in new `.spec` authoring. Backends may implement them for compatibility with legacy specs but should treat them as deprecated:

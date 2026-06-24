@@ -338,6 +338,13 @@ Do not redeclare to reset. Redeclaration is a lifetime decision, not a mutation 
 
 Declaration initializers reuse the same expression language as `assign(...)`, `push_value(...)`, `return(...)`, and flow helpers.
 
+> **Terse spellings.** The same terse helper renames apply here: `set(...)` for `assign(...)`,
+> `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
+> (it resolves array-vs-hash by the wrapped symbol kind). They lower identically to the original
+> names in initializer and assignment sources, so `declare(array, saved=copy(array(items)))` is
+> equivalent to `declare(array, saved=array_copy(array(items)))`. See the
+> [Helper Contract Catalog](../appendix/helper-contract-catalog.md#terse-helper-renames-canonical-going-forward).
+
 Common initializer sources include:
 
 | Source | Examples |

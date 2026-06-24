@@ -133,7 +133,10 @@ sub _lower_declare_initializer_expr {
   if ($trimmed =~ /^\[(?<payload>.*)\]$/s) {
    return '('.$+{payload}.')';
   }
-  if ($array_ctor && ($array_ctor->{method} eq 'array_copy' || $array_ctor->{method} eq 'sorted' || $array_ctor->{method} eq 'reversed' || $array_ctor->{method} eq 'sorted_keys' || $array_ctor->{method} eq 'sorted_values' || $array_ctor->{method} eq 'concat_arrays' || $array_ctor->{method} eq 'split_tagged_records' || $array_ctor->{method} eq 'entry_groups' || $array_ctor->{method} eq 'match_groups')) {
+  # SPEC-FORMAT-TERSE.1.4.1 — `copy` (the unified terse rename of array_copy/hash_copy) is
+  # accepted as an array-initializer source here too; the target type ('array') disambiguates,
+  # and _lower_declare_value_expr resolves copy(...) to the same [@sym] the array_copy arm emits.
+  if ($array_ctor && ($array_ctor->{method} eq 'array_copy' || $array_ctor->{method} eq 'copy' || $array_ctor->{method} eq 'sorted' || $array_ctor->{method} eq 'reversed' || $array_ctor->{method} eq 'sorted_keys' || $array_ctor->{method} eq 'sorted_values' || $array_ctor->{method} eq 'concat_arrays' || $array_ctor->{method} eq 'split_tagged_records' || $array_ctor->{method} eq 'entry_groups' || $array_ctor->{method} eq 'match_groups')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
    return undef unless defined($derived_expr) && length($derived_expr);
    return '('.$+{payload}.')' if $derived_expr =~ /^\[(?<payload>.*)\]$/s;
@@ -160,7 +163,10 @@ sub _lower_declare_initializer_expr {
   if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
    return '('.$+{payload}.')';
   }
-  if ($hash_ctor && ($hash_ctor->{method} eq 'hash_copy' || $hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys' || $hash_ctor->{method} eq 'entry_map' || $hash_ctor->{method} eq 'entry_named_map' || $hash_ctor->{method} eq 'match_map' || $hash_ctor->{method} eq 'match_named_map')) {
+  # SPEC-FORMAT-TERSE.1.4.1 — `copy` is accepted as a hash-initializer source too; the target
+  # type ('hash') disambiguates, and _lower_declare_value_expr resolves copy(...) to the same
+  # {%sym} the hash_copy arm emits (then unwrapped to the (%sym) list initializer form).
+  if ($hash_ctor && ($hash_ctor->{method} eq 'hash_copy' || $hash_ctor->{method} eq 'copy' || $hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys' || $hash_ctor->{method} eq 'entry_map' || $hash_ctor->{method} eq 'entry_named_map' || $hash_ctor->{method} eq 'match_map' || $hash_ctor->{method} eq 'match_named_map')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
    return undef unless defined($derived_expr) && length($derived_expr);
    return '('.$+{payload}.')' if $derived_expr =~ /^\{(?<payload>.*)\}$/s;

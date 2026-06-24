@@ -1,6 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-24 — SPEC-FORMAT-TERSE.1.4.1 — Perl recognize terse renames set/cat/copy lowering identically to assign/concat/array_copy+hash_copy (engine + book + 4 phase0 locks)
+
+**Scope:** Perl reference engine (8 modules under `perl/LinkedSpec/`), `t/phase0_regression.t` (+4 subtests),
+3 mdBook pages, task tree, KM card. The terse helper renames ratified in ADR 0007 become recognized on the
+Perl reference: `set`≡`assign`, `cat`≡`concat`, and a unified `copy`≡`array_copy`/`hash_copy`. New names are
+canonical; old names stay deprecated (not-yet-retired) aliases that lower **byte-identically**.
+
+**What changed (recognized the aliases at EVERY site each canonical name is recognized, not just the headline
+seam — driven by `call_spec_handler_subst` probes that exposed composed-position divergences):**
+- `ActionIR/MethodExpr.pm` — `_normalize_method_name` now maps `cat`→`concat` and `set`→`assign` (parse-time
+  alias seam, alongside `s`/`a`/`h`).
+- `ActionIR/Contracts.pm` — the `assign_value` statement contract's recognition extended
+  `\bassign\s*\(`→`\b(?:assign|set)\s*\(` (raw text runs before name normalization).
+- `ActionIR/Scanner/PrimitivePipelineRules.pm` — `_scan_contract_assign_value` IR-event scanner extended the
+  same way, so `set` produces the same `ASSIGN` canonical ActionIR node as `assign`.
+- `RuleIR/EmitContext.pm` — the `.1.2.1` bare-arg auto-`my` collector now also scans `set`, so a bare
+  `set(name, …)` target auto-exists as a per-invocation `my $name` exactly like `assign`.
+- `ActionIR/MethodLowering.pm` — a dedicated `copy` dispatch in `_lower_method_value_expr` resolves
+  array-vs-hash by the wrapped symbol kind (array first → `[@x]`, else hash → `{%x}`); `copy`/`cat` added to
+  the return-payload guard + rewriter helper lists; the four `looks_like_{array,hash}_value_expr` recognizers
+  resolve `copy(X)`'s kind (array-first) so `copy` stays first-class in numeric-reducer / `coalesce` type
+  inference.
+- `ActionIR/DeclareMethod.pm` — `copy` accepted in the array (136) and hash (163) declare/assign-initializer
+  recognizers (target type disambiguates; lowers to the same `(@x)` / `(%x)` list-init forms).
+- `ActionIR/FlowExpr.pm` — `cat`/`copy` added to the value-expr prefix list (assignment-source path) and the
+  two flow `looks_like` recognizers resolve `copy`'s kind.
+- `BootstrapSpec/Core.pm` — `cat` added to the general-return-payload gate.
+
+**Validation:** `call_spec_handler_subst` byte-equal for the 4 headline forms AND 11 composed forms
+(scalar/array/hash assignment source, push value, nested return payload, `num_sum`/`num_avg`/`coalesce` over
+`copy`); `return_descriptor` shows `set`==`assign` ASSIGN node; a real terse spec (`set`+`cat`+`copy`) runs
+end-to-end **byte-identical** to its canonical twin (`["a!","b!","c!"]`, stable on re-run); generated source for
+**all 20 shipped specs byte-identical (0 diff)** baseline-vs-mine (every alias add is guarded by the new
+spelling, which no shipped spec uses); `perl -c` clean on all 8 modules; **+4 phase0 subtests / 31 assertions**
+(`spec_format_terse_1_4_1_*`) → **phase0 971→975 green**; `bash tools/run_ci_local.sh` **EXIT 0** ("Result:
+PASS", 975); ratio 1.0000; `mdbook build` EXIT 0; doctrine driver (MEMORY-ARCH + KNOWLEDGE-MAP) EXIT 0.
+
+**Book:** `appendix/helper-contract-catalog.md` (per-helper Terse-spelling lines + a new "Terse Helper Renames"
+subsection), `dsl/value-container-flow-helper-reference.md`, `dsl/declaration-helper-reference.md`.
+
+**Frontier → `.1.4.2`** (Rust lockstep parity, ADR 0006). KM card `terse-helper-rename-lowering-sites` updated
+(`.1.4.1` landed; full site list; reverify now proves parity).
+
 ## 2026-06-24 — SPEC-FORMAT-TERSE.1.4 — split into .1.4.1 (Perl reference) + .1.4.2 (Rust parity); record helper-rename lowering-site ground truth + KM card
 
 **Scope:** task tree (`docs/tasks/SPEC-FORMAT-TERSE.md`), task-tree index (`docs/TASK_TREE.md`), KM fact card

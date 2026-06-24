@@ -115,7 +115,10 @@ while ($code =~ /\b(?<expr>push_nonempty\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.
 sub _scan_contract_assign_value {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+# SPEC-FORMAT-TERSE.1.4.1 — also scan the terse `set(...)` rename of `assign(...)` (ADR 0007)
+# so it produces the same ASSIGN canonical-IR event and lowers identically; the parse-time
+# name normalization (set->assign) makes the `$call->{method} eq 'assign'` guard below pass.
+while ($code =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && $call->{method} eq 'assign';
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);

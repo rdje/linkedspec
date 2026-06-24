@@ -16,7 +16,7 @@ date: 2026-06-24
 status: confirmed
 tags: [engine, dsl, helpers, aliases, rename, actionir, spec-format-terse, SPEC-FORMAT-TERSE, MethodLowering, rust, parity]
 evidence: "TOOLBOX `call_spec_handler_subst` probes 2026-06-24 (`perl -Iperl -MLinkedSpec`, dump-don't-guess; `perl -Iperl` confirmed `perl/LinkedSpec.pm` loads over the stale `PERL5LIB` — TOOLBOX §6.5). BEFORE (the gap): `assign(scalar(x),1)`→`$x = 1` but `set(scalar(x),1)`→`set(scalar(x), 1)` (passthrough); `concat(\"a\",\"b\")`→`do { my @__ls_concat_parts = (\"a\", \"b\"); ... join('', @__ls_concat_parts) : undef }` but `cat(\"a\",\"b\")`→`cat(\"a\",\"b\")` (passthrough); `array_copy(a(items))`→`[@items]` but `copy(a(items))`→`copy([items])` (partial — inner `a(items)` lowers but `copy` is unknown); `hash_copy(h(m))`→`{%m}` but `copy(h(m))`→`copy(h(m))` (passthrough). Perl recognition+lowering sites (code-read): assign STATEMENT-level = `ActionIR/Contracts.pm:1749/1753` (`\\bassign\\s*\\(`) + `ActionIR/DeclareMethod._lower_assign_method_statement` (244-263) -> `ActionIR/MethodLowering._lower_assign_statement` (1677-1714) => `$sym = src`; concat VALUE-expr = `ActionIR/MethodLowering._lower_method_value_expr` :538; array_copy = MethodLowering :1553 => `[@sym]`; hash_copy = MethodLowering :1533 => `{%sym}`. Alias seam = `ActionIR/MethodExpr._normalize_method_name` (:19-26, `s`->`scalar`/`a`->`array`/`h`->`hash`), applied at MethodExpr.pm:162 pre-lowering; the retired `tail`/`flatten`/`array_values` aliases were the inline-conditional pattern, removed in COMPAT-ALIAS-RETIREMENT.1 (commit 802dbe3). Rust: one `Engine::call_helper()` match in `rust/linkedspec-runtime/src/engine.rs` — `assign`@711, `array_copy`@735, `concat`@820, `hash_copy`@1833; aliases are pipe arms (`\"array\" | \"a\"`, `\"scalar\" | \"s\"`, `\"push_value\" | \"push\"`); NO recognition in the parser/compiler crates."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $p (q{set(scalar(x), 1)}, q{return(cat(\"a\",\"b\"))}, q{return(copy(a(items)))}, q{return(copy(h(m)))}) { print $p, \"  ->  \", LinkedSpec::call_spec_handler_subst(\"Top\", $p), \"\\n\" }'  # all four still pass through UNCHANGED until .1.4.1 lands (set/cat/copy unrecognized); compare with assign->`$x = 1`, concat->do-block, array_copy->`[@items]`, hash_copy->`{%m}`"
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $p ([q{set(scalar(x), 1)},q{assign(scalar(x), 1)}],[q{return(cat(\"a\",\"b\"))},q{return(concat(\"a\",\"b\"))}],[q{return(copy(a(items)))},q{return(array_copy(a(items)))}],[q{return(copy(h(m)))},q{return(hash_copy(h(m)))}]) { my $t=LinkedSpec::call_spec_handler_subst(\"Top\",$p->[0]); my $c=LinkedSpec::call_spec_handler_subst(\"Top\",$p->[1]); print $p->[0],($t eq $c?\"  ==  \":\"  !=  \"),$p->[1],\"\\n\" }'  # .1.4.1 LANDED (Perl): all four terse spellings now lower BYTE-IDENTICAL to their canonical helper (set->assign $x=1, cat->concat do-block, copy(a)->[@items], copy(h)->{%m}). .1.4.2 (Rust) still pending."
 ---
 
 # `.1.4` ground truth: where the helper renames land, on both variants
@@ -29,16 +29,37 @@ Rust parity `.1.4.2`). Direction per ADR 0007: the **new terse names become cano
 stay deprecated aliases that lower identically** (retirement is a later explicit leaf); both spellings must
 lower byte-identically and the 20 shipped specs (old names) must stay byte-identical.
 
-## Current state (the gap — dump-don't-guess)
+## Status — `.1.4.1` (Perl reference) LANDED 2026-06-24
 
-The three terse spellings are all currently **UNRECOGNIZED** — they pass through unchanged:
+The Perl-reference half is **done**: `set`/`cat`/`copy` now lower **byte-identically** to
+`assign`/`concat`/`array_copy`+`hash_copy` in every position (proven by `call_spec_handler_subst` parity
+across 15+ composed forms + a real-spec end-to-end run + the all-20-spec byte-identical proof; +4 phase0
+locks → 975 green; full gate EXIT 0). `.1.4.2` (Rust `Engine::call_helper()` parity) is still **pending**.
+The site map below is the implementation ground truth (now extended to recognize the aliases at each site).
 
-| terse spelling | current lowering | canonical lowering (target) |
-| --- | --- | --- |
-| `set(scalar(x), 1)` | `set(scalar(x), 1)` (passthrough) | `assign(scalar(x), 1)` → `$x = 1` |
-| `cat("a","b")` | `cat("a","b")` (passthrough) | `concat("a","b")` → `do { my @__ls_concat_parts = (...); ... join('', @__ls_concat_parts) : undef }` |
-| `copy(a(items))` | `copy([items])` (partial — `a(items)` lowers, `copy` is unknown) | `array_copy(a(items))` → `[@items]` |
-| `copy(h(m))` | `copy(h(m))` (passthrough) | `hash_copy(h(m))` → `{%m}` |
+### The original gap (pre-`.1.4.1`, for the record)
+
+Before the leaf, all three terse spellings passed through unrecognized — `set(scalar(x),1)`→passthrough
+(vs `assign`→`$x = 1`), `cat("a","b")`→passthrough (vs `concat`→the concat do-block),
+`copy(a(items))`→`copy([items])` partial / `copy(h(m))`→passthrough (vs `array_copy`→`[@items]` /
+`hash_copy`→`{%m}`).
+
+### What `.1.4.1` changed (the full recognition-site set the aliases now cover)
+
+- **`cat`→`concat`** + **`set`→`assign`**: added to the parse-time alias seam `_normalize_method_name`
+  (`ActionIR/MethodExpr.pm`), so every parse-based dispatch treats them as the canonical name.
+- **`set` (statement-level, raw-text scans)**: extended `\bassign\s*\(`→`\b(?:assign|set)\s*\(` at the
+  three raw-text recognizers — the `assign_value` contract (`ActionIR/Contracts.pm`), its IR-event scanner
+  `_scan_contract_assign_value` (`ActionIR/Scanner/PrimitivePipelineRules.pm`), and the bare-arg auto-`my`
+  collector (`RuleIR/EmitContext.pm` — `.1.2.1` parity, so a bare `set(name,…)` auto-exists like `assign`).
+- **`copy` (unified array-vs-hash)**: a dedicated `copy` dispatch in `_lower_method_value_expr`
+  (`ActionIR/MethodLowering.pm`, array symbol first then hash, guarded by the `*_symbol_expr_re`), plus
+  `copy` added to the array/hash declare-initializer recognizers (`ActionIR/DeclareMethod.pm` 136/163), the
+  return-payload guard+rewriter helper lists (`MethodLowering` 1650/1658), and — to keep `copy` first-class
+  in array-vs-hash type inference (reducers/coalesce) — the four `looks_like_{array,hash}_value_expr`
+  recognizers (`MethodLowering` + `FlowExpr`), which resolve `copy(X)`'s kind array-first.
+- **`cat`/`copy` (composite/source positions)**: added to the FlowExpr value-expr prefix list (`FlowExpr.pm`
+  :270, the assignment-source path) and `cat` to the bootstrap general-payload gate (`BootstrapSpec/Core.pm`).
 
 ## Three distinct implementation shapes (why one alias does not cover the leaf)
 

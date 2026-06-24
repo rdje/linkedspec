@@ -842,8 +842,10 @@ sub _collect_auto_working_var_decls {
   #     push_value/push_nonempty -> @NAME) but otherwise gets no preamble `my`. The
   #     `\s*,` after the name means a WRAPPED target (scalar(x)/array(x), whose name is
   #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
-  while ($masked =~ /\bassign\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
-   $record->('$', $1);   # assign target lowers to a scalar
+  # `set` (SPEC-FORMAT-TERSE.1.4.1) is the terse rename of `assign`; a bare `set(NAME, …)`
+  # target lowers to the same scalar `$NAME`, so it auto-exists identically.
+  while ($masked =~ /\b(?:assign|set)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
+   $record->('$', $1);   # assign/set target lowers to a scalar
   }
   while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('@', $1);   # push_value / push_nonempty target lowers to an array

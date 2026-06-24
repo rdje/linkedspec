@@ -43969,6 +43969,119 @@ subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
     is($run->($ap, 'a b c'), '["a","b","c"]', 're-running the SAME parser still returns 3 items (per-invocation my, not a leaky global)');
 };
 
+subtest 'spec_format_terse_1_4_1_new_spellings_lower_identically_to_canonical' => sub {
+    # SPEC-FORMAT-TERSE.1.4.1 (ADR 0007): the terse helper renames become canonical, the old
+    # names stay deprecated aliases that lower identically -- assign<->set, concat<->cat,
+    # array_copy/hash_copy<->copy. The decisive proof is byte-equal lowering through the
+    # EmitContext compatibility rewriter (call_spec_handler_subst), in isolation AND in the
+    # composed positions (assignment source, push value, return payload, numeric reducer).
+    # The old-name lowerings are also pinned to their concrete shape so this leaf cannot
+    # silently change them (the all-20-spec byte-identical proof lives in the task tree).
+    plan tests => 14;
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my @pairs = (
+        ['set(scalar(x), 1)',                    'assign(scalar(x), 1)',                    'set == assign (scalar statement)'],
+        ['return(cat("a","b"))',                 'return(concat("a","b"))',                 'cat == concat (return payload)'],
+        ['return(copy(a(items)))',               'return(array_copy(a(items)))',            'copy(array) == array_copy'],
+        ['return(copy(h(m)))',                   'return(hash_copy(h(m)))',                 'copy(hash) == hash_copy'],
+        ['set(scalar(x), cat(a,b))',             'assign(scalar(x), concat(a,b))',          'set+cat == assign+concat (scalar source)'],
+        ['assign(scalar(x), copy(a(y)))',        'assign(scalar(x), array_copy(a(y)))',     'copy as scalar assignment source == array_copy'],
+        ['assign(array(a2), copy(a(y)))',        'assign(array(a2), array_copy(a(y)))',     'copy as array assignment source == array_copy'],
+        ['assign(hash(h2), copy(h(m)))',         'assign(hash(h2), hash_copy(h(m)))',       'copy as hash assignment source == hash_copy'],
+        ['push_value(array(items), cat(a,b))',   'push_value(array(items), concat(a,b))',   'cat as a push value == concat'],
+        ['return(num_sum(copy(a(x))))',          'return(num_sum(array_copy(a(x))))',       'copy as a numeric-reducer arg == array_copy'],
+    );
+    for my $p (@pairs) {
+        is($L->($p->[0]), $L->($p->[1]), $p->[2]);
+    }
+    # Old-name (deprecated alias) lowerings stay byte-unchanged.
+    is($L->('assign(scalar(x), 1)'), '$x = 1', 'old name assign(scalar(x),1) still lowers to `$x = 1`');
+    is($L->('return(array_copy(a(items)))'), 'return [@items]', 'old name array_copy still lowers to `[@items]`');
+    is($L->('return(hash_copy(h(m)))'), 'return {%m}', 'old name hash_copy still lowers to `{%m}`');
+    like($L->('return(cat("a","b"))'), qr/\@__ls_concat_parts/, 'cat is routed through the concat do-block lowering');
+};
+
+subtest 'spec_format_terse_1_4_1_set_is_full_assign_alias' => sub {
+    # `set` is the statement-level rename of `assign`: it must lower identically, produce the
+    # same canonical ASSIGN ActionIR node, and auto-exist a bare target exactly like assign
+    # (the .1.2.1 Channel-1 collector now also scans `set`).
+    plan tests => 5;
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $nodes = sub {
+        my ($stmt) = @_;
+        my $s = "Top::&\n I { $stmt }\n /a/ -> Top { return(1) }\n";
+        my $d = LinkedSpec::Get(\$s, return_descriptor => 1);
+        my $n = $d->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_nodes};
+        return ref($n) eq 'ARRAY' ? join(',', sort @$n) : '(none)';
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('set(scalar(x), 1)'), '$x = 1', 'set lowers to the same scalar assignment as assign');
+    is($nodes->('set(scalar(x), 1)'), $nodes->('assign(scalar(x), 1)'),
+        'set produces the same canonical ActionIR node set as assign (ASSIGN)');
+
+    my $set_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { set(count, match_group(0)) }\n");
+    my $n_set = () = ($set_src =~ /my \$count\b/g);
+    is($n_set, 1, 'bare set(count, ...) auto-supplies exactly one `my $count` (== bare assign)');
+    ok(index($set_src, 'my $count;') >= 0
+        && index($set_src, 'my $count;') < index($set_src, 'while (1)'),
+        'the auto `my $count` for bare set sits in the preamble before while(1) (per-invocation, not leaky)');
+    unlike($set_src, qr/my \@count\b/,
+        'bare set target is a SCALAR -- no `my @count`');
+};
+
+subtest 'spec_format_terse_1_4_1_copy_resolves_array_then_hash' => sub {
+    # The unified terse `copy(X)` subsumes array_copy + hash_copy: it resolves the wrapped
+    # symbol kind at lowering time (array first, then hash), so it lowers identically to the
+    # specific old helper in every position -- value expr, assignment/declare source, and the
+    # array-vs-hash type-inference used by reducers/coalesce.
+    plan tests => 7;
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    is($L->('return(copy(a(x)))'), 'return [@x]', 'copy of a wrapped array symbol -> [@x]');
+    is($L->('return(copy(h(m)))'), 'return {%m}', 'copy of a wrapped hash symbol -> {%m}');
+    is($L->('return(copy(items))'), $L->('return(array_copy(items))'),
+        'bare copy(items) resolves array-first (== array_copy)');
+    is($L->('assign(array(a2), copy(a(y)))'), $L->('assign(array(a2), array_copy(a(y)))'),
+        'copy as an array assignment source == array_copy (list init)');
+    is($L->('assign(hash(h2), copy(h(m)))'), $L->('assign(hash(h2), hash_copy(h(m)))'),
+        'copy as a hash assignment source == hash_copy (list init)');
+    is($L->('return(num_sum(copy(a(x))))'), $L->('return(num_sum(array_copy(a(x))))'),
+        'copy stays array-like in numeric-reducer type inference (== array_copy)');
+    is($L->('return(coalesce(copy(h(m)), h(n)))'), $L->('return(coalesce(hash_copy(h(m)), h(n)))'),
+        'copy stays hash-like in coalesce type inference (== hash_copy)');
+};
+
+subtest 'spec_format_terse_1_4_1_terse_spec_runs_identically_to_canonical' => sub {
+    # End-to-end: a real .spec written with the terse renames (set + cat + copy) compiles and
+    # produces byte-identical output to its canonical-named twin (assign + concat + array_copy),
+    # and re-running the same parser is stable (per-invocation lexicals, no leak).
+    plan tests => 5;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
+    };
+    my $terse = "top:: /(\\w+)\\s*/ -> top[0] { set(scalar(label), cat(match_group(0), \"!\")); push_value(words, s(label)) }\n"
+              . "LX { return(copy(array(words))) }\n";
+    my $canon = "top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(label), concat(match_group(0), \"!\")); push_value(words, s(label)) }\n"
+              . "LX { return(array_copy(array(words))) }\n";
+    my $tp = eval { LinkedSpec::Get(\$terse) };
+    my $cp = eval { LinkedSpec::Get(\$canon) };
+    ok(ref($tp) eq 'CODE', 'terse set/cat/copy spec compiles to a parser') or diag(normalize_error($@));
+    ok(ref($cp) eq 'CODE', 'canonical assign/concat/array_copy twin compiles to a parser') or diag(normalize_error($@));
+    is($run->($tp, 'a b c'), '["a!","b!","c!"]', 'terse spec returns the concatenated word list');
+    is($run->($tp, 'a b c'), $run->($cp, 'a b c'), 'terse spec output == canonical twin (helper renames lower identically)');
+    is($run->($tp, 'a b c'), '["a!","b!","c!"]', 're-running the same terse parser is stable (per-invocation lexicals)');
+};
+
 done_testing();
 
 sub discover_specs {

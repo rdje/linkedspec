@@ -157,6 +157,14 @@ These helpers are the entry point into local working state and structured values
 | `array_copy(array_expr)` | array value | snapshot an array value as one nested payload. |
 | `hash_copy(hash_expr)` | hash value | snapshot a hash value as one nested payload. |
 
+> **Terse spellings (canonical going forward).** The `.spec` format is migrating to terser helper
+> names: `set(target, source)` is the canonical rename of `assign(...)`, `cat(...)` of `concat(...)`,
+> and a single unified `copy(container)` subsumes both `array_copy(...)` and `hash_copy(...)`
+> (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
+> array). Each terse spelling lowers **identically** to its original in every position, so both work
+> during migration — the original names are deprecated aliases, not yet retired. See the
+> [Helper Contract Catalog](../appendix/helper-contract-catalog.md#terse-helper-renames-canonical-going-forward).
+
 Examples:
 
 ```text

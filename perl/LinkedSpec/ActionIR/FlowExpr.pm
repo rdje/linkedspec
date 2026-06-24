@@ -80,6 +80,18 @@ sub _looks_like_array_value_expr {
  my $method = $call->{method} // '';
  return 1 if $method =~ /^(?:array|array_copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
 
+ # SPEC-FORMAT-TERSE.1.4.1 — the unified terse `copy(X)` is array-like iff X names an array
+ # symbol (array-first resolution, mirroring the lowering dispatch); a bare `copy(x)` is array-like.
+ if ($method eq 'copy') {
+  my $copy_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
+  return 0 unless $copy_args;
+  my $inner = $trim_action_ir_value->($copy_args->[0]);
+  return 0 unless defined($inner) && length($inner);
+  my $sym = $extract_array_symbol_name->($inner);
+  return 1 if defined($sym) && length($sym) && $inner =~ /^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/o;
+  return 0;
+ }
+
  if ($method eq 'coalesce') {
   my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
   return 0 unless $effective_args && @$effective_args;
@@ -116,6 +128,7 @@ sub _looks_like_hash_value_expr {
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
 
  return 0 unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -135,6 +148,20 @@ sub _looks_like_hash_value_expr {
 
  my $method = $call->{method} // '';
  return 1 if $method =~ /^(?:hash|hash_copy|merge_hash|set_key|rename_key|drop_keys|pick_keys)$/o;
+
+ # SPEC-FORMAT-TERSE.1.4.1 — `copy(X)` is hash-like iff X names a hash symbol AND does not
+ # resolve as an array (array-first precedence), so a bare `copy(x)` / `copy(a(x))` stays array-only.
+ if ($method eq 'copy') {
+  my $copy_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
+  return 0 unless $copy_args;
+  my $inner = $trim_action_ir_value->($copy_args->[0]);
+  return 0 unless defined($inner) && length($inner);
+  my $array_sym = $extract_array_symbol_name->($inner);
+  return 0 if defined($array_sym) && length($array_sym) && $inner =~ /^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/o;
+  my $hash_sym = $extract_hash_symbol_name->($inner);
+  return 1 if defined($hash_sym) && length($hash_sym) && $inner =~ /^(?:(?:hash|h)\s*\(\s*\w+\s*\)|\w+)$/o;
+  return 0;
+ }
 
  if ($method eq 'coalesce') {
   my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
@@ -267,7 +294,9 @@ sub _lower_flow_composite_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy)\s*\(/o) {
+ # SPEC-FORMAT-TERSE.1.4.1 — the terse renames `cat` (== concat) and `copy` (== array_copy/
+ # hash_copy) are recognized here too so a composite/assignment-source value lowers identically.
+ if ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
