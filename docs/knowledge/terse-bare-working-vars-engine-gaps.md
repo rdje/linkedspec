@@ -39,8 +39,21 @@ assign target always lowers scalar-first), `push_value(NAME, …)` / `push_nonem
 (`spec_format_terse_1_2_1_*`) → phase0 971 green, gate EXIT 0. **Still open (Channel 2):** the child-append
 `push(Rule[, target])` / fluent `.push(target)` target (first arg is a rule name — ambiguous) and the bare
 **hash** target (no clean bare arg position — `set_key(name,…)` is a value-position read), plus value-position
-bare-word reads (`return(count)` still a bareword) + RHS-shape inference. Rust lockstep parity for `.1.2.1`
-is the next leaf `.1.2.2`.
+bare-word reads (`return(count)` still a bareword) + RHS-shape inference.
+
+**Rust lockstep parity (`.1.2.2`) DONE 2026-06-24 — and unlike `.1.1.2`, it REQUIRED a Rust engine change.**
+`.1.1.2` (wrapped auto-existence) needed no engine change because the interpreter's per-parse `RuntimeContext`
+HashMaps auto-vivify. But a *bare* arg-position target was NOT being mapped to the working variable: Rust's
+`resolve_scalar_target`/`resolve_array_target` (`rust/linkedspec-runtime/src/engine.rs`) only extracted the
+name from a WRAPPED `scalar(VAR)`/`array(VAR)` Call; a bare `Expr::Variable` fell through to `val.to_str()`
+(the evaluated value → `""`), so `assign(v,"ok")` set scalar `""` and `scalar(v)` read Undef. Probe (dump):
+bare scalar → `[null]`, bare array → `[[]]` (vs wrapped `["ok"]` / `[["a","b"]]`). **Fix:** both resolvers now
+also accept a bare `Expr::Variable` target and return its name (mirroring the Perl `^(\w+)$` fallback); the
+HashMap then auto-vivifies it. Scoped to the Channel-1 target positions via an `allow_bare` flag — `true` for
+`push_value`/`push_nonempty`, `false` for the value-position reads `array_copy`/`hash_copy` (those are Channel
+2). Locked with 2 oracle fixtures (`autoexist_{scalar,array}_bare_arg`, Rust == Perl reference) + 4
+`terse_1_2_2_*` integration tests; cargo 248→252 green, clippy zero-new, phase0 971 (Perl untouched), gate
+EXIT 0. The `.1.2.1` change is now landed against the universal contract on both variants.
 
 ## The three behaviors (dump-don't-guess)
 

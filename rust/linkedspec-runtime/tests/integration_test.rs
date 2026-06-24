@@ -814,3 +814,86 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
         "array accumulator is per-parse, not leaked across executes (would be 4 items if leaky)"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.1.2.2 — Rust lockstep parity for .1.2.1 (Channel 1):
+// a BARE (un-wrapped) working var in a type-implying ARG position auto-exists with
+// the position-implied kind (assign target -> scalar, push_value/push_nonempty
+// target -> array). On the Perl reference (.1.2.1) the engine auto-supplies the
+// per-invocation `my`; on Rust resolve_scalar_target/resolve_array_target now map
+// the bare name to the working variable and the per-parse RuntimeContext HashMap
+// auto-vivifies it (no declare, no leak). The mutation target is bare (Channel 1);
+// the value is read back through a wrapper -- bare value-position reads are Channel 2.
+
+#[test]
+fn terse_1_2_2_bare_scalar_arg_auto_exists() {
+    // assign(v, ...) with a BARE target -- no scalar() wrapper, no declare.
+    let grammar = "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["ok"]),
+        "bare assign target auto-exists as a scalar (= Perl reference \"ok\" wrapped one level)"
+    );
+}
+
+#[test]
+fn terse_1_2_2_bare_array_arg_auto_exists() {
+    // push_value(items, ...) with a BARE target.
+    let grammar = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a", "b"]]),
+        "bare push_value target auto-exists as an array (= Perl [\"a\",\"b\"] wrapped one level)"
+    );
+    // push_nonempty(items, ...) with a BARE target -- same array auto-existence,
+    // and the empty value is still skipped.
+    let ne = "Top::\n /x/ -> Done { push_nonempty(items, \"a\"); push_nonempty(items, \"\"); push_nonempty(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(ne, "xhello"),
+        serde_json::json!([["a", "b"]]),
+        "bare push_nonempty target auto-exists as an array and skips the empty value"
+    );
+}
+
+#[test]
+fn terse_1_2_2_bare_matches_wrapped_and_declare() {
+    // The bare arg-position form produces the same value as the wrapped form and the
+    // declare form (the Rust analogue of the Perl "byte-identical / single `my`"
+    // locks): the wrapper/declare are optional in these positions.
+    let bare = "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let declared = "Top::\n /x/ -> Done { declare(scalar, v); assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let b = build_and_run(bare, "xhello");
+    assert_eq!(b, build_and_run(wrapped, "xhello"), "scalar: bare arg == wrapped");
+    assert_eq!(b, build_and_run(declared, "xhello"), "scalar: bare arg == declare");
+
+    let bare_a = "Top::\n /x/ -> Done { push_value(items, \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped_a = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(bare_a, "xhello"),
+        build_and_run(wrapped_a, "xhello"),
+        "array: bare push_value target == wrapped"
+    );
+}
+
+#[test]
+fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
+    // Re-running the SAME engine yields the identical value -- a bare arg-position
+    // working var is per-parse (fresh RuntimeContext per execute), never leaked.
+    let scalar = "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(scalar).expect("parse");
+    validate(&spec).expect("validate");
+    let engine = Engine::new(compile(&spec).expect("compile"));
+    let r1 = engine.execute("xhello").expect("run1");
+    let r2 = engine.execute("xhello").expect("run2");
+    assert_eq!(r1, serde_json::json!(["ok"]), "bare scalar first run");
+    assert_eq!(r1, r2, "bare scalar arg var is per-parse, not leaked across executes");
+
+    let array = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(array).expect("parse");
+    validate(&spec).expect("validate");
+    let engine = Engine::new(compile(&spec).expect("compile"));
+    let r1 = engine.execute("xhello").expect("run1");
+    let r2 = engine.execute("xhello").expect("run2");
+    assert_eq!(r1, serde_json::json!([["a", "b"]]), "bare array first run");
+    assert_eq!(r1, r2, "bare array accumulator is per-parse, not leaked (would be 4 items if leaky)");
+}

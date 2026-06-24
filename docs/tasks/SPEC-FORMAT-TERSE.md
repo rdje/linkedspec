@@ -6,7 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-24` (**`.1.2.1` DONE** — Perl arg-position bare working-variable auto-existence
+- Last updated: `2026-06-24` (**`.1.2.2` DONE** — Rust lockstep parity for `.1.2.1`: REQUIRED a Rust engine
+  change (unlike `.1.1.2`) — `resolve_scalar_target`/`resolve_array_target` now map a bare `Expr::Variable`
+  target to the working var (`allow_bare` gate; push targets only), per-parse HashMap auto-vivifies; 2 oracle
+  fixtures + 4 integration tests; cargo 248→252; clippy zero-new; phase0 971 (Perl untouched); gate EXIT 0;
+  no book change. **Channel 1 complete on BOTH variants;** `.1.2` stays `active` (Channel 2 `.1.2.3`+ pending).
+  Frontier → `.1.4`. Prior **`.1.2.1` DONE** — Perl arg-position bare working-variable auto-existence
   (Channel 1) landed: extended the `.1.1.1` collector `_collect_auto_working_var_decls` with a bare
   arg-position pass (`assign`→`$`, `push_value`/`push_nonempty`→`@`; `\s*,` guard keeps wrapped targets on
   the wrapped path; shared `$record` dedup); all 20 shipped specs byte-identical; +3 phase0 subtests → 971
@@ -238,7 +243,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     by channel, mirroring how `.1.1` split into `.1.1.1`/`.1.1.2`. **`.1.2.1` DONE 2026-06-24** — Perl
     Channel 1 arg-position auto-existence landed (collector extended: bare `assign`→`$`,
     `push_value`/`push_nonempty`→`@`; wrapped target untouched; all 20 specs byte-identical; +3 phase0
-    locks → 971; book taught). Frontier → `.1.2.2` (Rust parity).)
+    locks → 971; book taught). **`.1.2.2` DONE 2026-06-24** — Rust lockstep parity landed; unlike `.1.1.2`
+    it REQUIRED a Rust engine change (the bare-target resolvers `resolve_scalar_target`/`resolve_array_target`
+    now map a bare `Expr::Variable` target to the working var; per-parse HashMap auto-vivifies it); 2 oracle
+    fixtures + 4 integration tests, cargo 248→252. **Channel 1 complete on BOTH variants.** `.1.2` stays
+    `active` — Channel 2 (`.1.2.3`+: value-position bare-word reads + RHS-shape) is still pending, added once
+    `.1.5` literal syntax is designed. Frontier → `.1.4`.)
   Goal: Remove container wrappers as a *requirement* + add type inference (bare words are
     variables/functions, never string literals; type from RHS shape `[]`→array/`{}`→hash/scalar and
     from helper arg position). Wrappers stay accepted aliases during migration (gradual, ADR 0007).
@@ -298,7 +308,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.1` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.2`
-  Status: `pending`
+  Status: `done` (2026-06-24)
   Goal: Rust lockstep parity for `.1.2.1` (ADR 0006). The Rust runtime reproduces arg-position bare
     working-variable auto-existence identically. (The `.1.1.1`→`.1.1.2` precedent suggests this likely
     holds by architecture — the interpreter's per-parse `RuntimeContext` HashMaps auto-vivify on write
@@ -307,8 +317,30 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     cross-check parity holds for any non-recursive arg-position auto-exist spec (the recursive/REP idiom
     stays deferred to `RUST-PARITY`). The `.1.2.1` change is "landed against the universal contract" only
     once this closes. Lock with oracle fixtures + integration tests (mirror `.1.1.2`).
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-06-24 — DOABLE, but (unlike `.1.1.2`) it REQUIRED a Rust engine change.**
+    TOOLBOX-first ground truth (throwaway Rust integration probe, dump-don't-guess): the auto-vivify is
+    inherent (per the `.1.1.2` card), but a **bare** arg-position target was not being mapped to the working
+    variable — `resolve_scalar_target`/`resolve_array_target` (`rust/linkedspec-runtime/src/engine.rs`) only
+    extracted the name from a WRAPPED `scalar(VAR)`/`array(VAR)` Call; a bare `Expr::Variable` fell through
+    to `val.to_str()` (the evaluated value → `""`). Probe BEFORE: bare `assign(v,"ok")`→`[null]`, bare
+    `push_value(items,..)`→`[[]]` (vs wrapped `["ok"]`/`[["a","b"]]`) — a genuine divergence from the Perl
+    `.1.2.1` reference. **Fix:** both resolvers now also accept a bare `Expr::Variable` target and return its
+    name (mirroring the Perl `^(\w+)$` fallback in `ValueExpr::_extract_*_symbol_name`); the per-parse
+    HashMap then auto-vivifies it (no `declare`, fresh ctx per `execute` ⇒ no leak). Scoped to the Channel-1
+    target positions via an `allow_bare` flag: `true` for `push_value`/`push_nonempty`, `false` for the
+    value-position reads `array_copy`/`hash_copy` (bare value-position reads are Channel 2, not this leaf).
+    Probe AFTER: bare == wrapped (`["ok"]`, `[["a","b"]]`). **Locked:** 2 oracle corpus fixtures
+    `autoexist_{scalar,array}_bare_arg` via `tools/gen_oracle_corpus.pl` (regenerated — the existing 7
+    fixtures byte-identical; `corpus_oracle` checks Rust == the Perl reference value) + 4 `terse_1_2_2_*`
+    integration tests (scalar/array/push_nonempty value anchors, bare==wrapped==declare convergence,
+    per-parse no-leak via same-engine re-run). **cargo test 248→252 green**; all 9 oracle fixtures PASS;
+    `cargo clippy` zero-new (engine.rs 11 = baseline — my added `if allow_bare` nest was flattened to a
+    tuple `if let`; my test file adds 0); `perl -c tools/gen_oracle_corpus.pl` OK; **phase0 971 green**
+    (Perl untouched), `bash tools/run_ci_local.sh` **EXIT 0**. No book change (variant-agnostic — `.1.2.1`
+    already taught the contract; Rust now conforms). The recursive/REP idiom stays deferred to `RUST-PARITY`.
+    KM card [[terse-bare-working-vars-engine-gaps]] updated (Rust parity + the engine-change contrast with
+    `.1.1.2`). **`.1.2.1` is now landed against the universal contract on both variants.**
+  Commit: `SPEC-FORMAT-TERSE.1.2.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.3`
   Status: `pending`
@@ -422,8 +454,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.1.2` | `done` 2026-06-24 | Rust lockstep parity for auto-existing variables — assessed **DOABLE, no engine change**: the Rust interpreter's per-parse `RuntimeContext` HashMaps already auto-vivify working vars (no `declare` needed) and are fresh per `execute` (no leak), so auto-existence is inherent (no Perl-style leaky-global hazard to fix). Locked with 5 oracle fixtures (`autoexist_*`, Rust==Perl reference) + 4 integration tests (value anchors, declare/no-declare convergence, per-parse no-leak); cargo 244→248 green; phase0 968 green (Perl untouched). Recursive/REP idiom deferred to `RUST-PARITY` (separate gap, not auto-existence). `.1.1` container now done; `.1.1.1` change is now landed against the universal contract. |
 | — | `SPEC-FORMAT-TERSE.1.2` | `active` (SPLIT 2026-06-24) | Too broad for one slice → split by inference channel (Perl-first + Rust parity) after a `dump_parser_source` ground-truth pass. KM [[terse-bare-working-vars-engine-gaps]]. |
 | — | `SPEC-FORMAT-TERSE.1.2.1` | `done` 2026-06-24 | Channel 1 (Perl) — arg-position bare working-var auto-existence LANDED. Extended `_collect_auto_working_var_decls` (bare `assign`→`$`, `push_value`/`push_nonempty`→`@`; `\s*,` guard keeps wrapped targets on the wrapped path; same dedup) → all 20 specs **byte-identical**; +3 phase0 subtests (17 assertions) → **971 green**; gate EXIT 0; ratio 1.0000; book taught (3 pages). Child-append `push(Rule[,target])`/`.push` target + bare hash (value-position) deferred to Channel 2. |
-| 1 | `SPEC-FORMAT-TERSE.1.2.2` | `pending` (**now next**) | Rust lockstep parity for `.1.2.1` (ADR 0006). Likely holds by architecture (the interpreter's per-parse `RuntimeContext` HashMaps auto-vivify regardless of wrapper/bare); assess blocked-vs-doable, lock with oracle fixtures + integration tests (mirror `.1.1.2`). |
-| 3 | `SPEC-FORMAT-TERSE.1.4` | `pending` (ungated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
+| — | `SPEC-FORMAT-TERSE.1.2.2` | `done` 2026-06-24 | Rust lockstep parity for `.1.2.1` — LANDED. Unlike `.1.1.2` it REQUIRED a Rust engine change: `resolve_scalar_target`/`resolve_array_target` now map a bare `Expr::Variable` target to the working var (mirroring Perl's `^\w+$` fallback), scoped to the Channel-1 positions via `allow_bare` (push_value/push_nonempty true; array_copy/hash_copy false). Probe: bare `[null]`/`[[]]` → `["ok"]`/`[["a","b"]]` (= wrapped = Perl reference). 2 oracle fixtures + 4 integration tests; cargo 248→252 green; clippy zero-new; phase0 971 (Perl untouched); gate EXIT 0. **Channel 1 complete on both variants.** |
+| 1 | `SPEC-FORMAT-TERSE.1.4` | `pending` (**now next**, ungated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
 | … | `.1.2.3`+ (Channel 2),`.1.3`,`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.2.1` + `.1.5`) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -601,6 +633,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.1.2` | Throwaway Rust + Perl `LinkedSpec::Get` probes (dump-don't-guess) on the same minimal grammars; read `runtime.rs`/`engine.rs` variable model; `tools/gen_oracle_corpus.pl` (5 new `autoexist_*` fixtures, existing 2 byte-identical); `cargo test`; `cargo clippy`; `perl -c` generator; `bash tools/run_ci_local.sh`; `mdbook build` | **Assessed DOABLE, no engine change** — Rust HashMaps auto-vivify + fresh ctx per parse ⇒ auto-existence inherent, no leaky-global hazard. Cross-variant proof: scalar no-declare Perl `"ok"`/Rust `["ok"]`; array no-declare Perl `["a","b"]`/Rust `[["a","b"]]`; declare twins identical; `array(undef)` Perl `[null]`/Rust `[[null]]` (= Perl reference wrapped one level). **cargo 244→248 green**; all **7 oracle fixtures PASS**; clippy zero-new (engine.rs 11 = baseline; test files add 0); `perl -c` OK; **phase0 968 green** (Perl untouched), gate **EXIT 0**; `mdbook build` EXIT 0. Recursive/REP idiom deferred to `RUST-PARITY` (separate gap). |
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.2` (split) | `dump_parser_source` ground-truth probes (`perl -Iperl -MLinkedSpec`, `generate_only`+`runtime_ctx_ref`; scratchpad `probe_terse_1_2.pl` + isolated one-liners, dump-don't-guess); confirmed `perl -Iperl` loads `perl/LinkedSpec.pm` (stale `PERL5LIB` present); `perl -c` on `ValueExpr.pm`/`MethodLowering.pm`/`EmitContext.pm`; `grep` wrapper-usage census across `specs/*.spec`; baseline `scripts/check_memory_architecture.sh` + `scripts/check_doctrines.sh` + KM gate | Split `.1.2` → `.1.2.1` (Perl, Channel 1) + `.1.2.2` (Rust parity); Channel 2 (`.1.2.3`+) recorded as a follow-on (not pre-published). Ground truth: bare arg-position var lowers right but no auto-`my` (leaky global); bare value-position word is not a var read (`return count`); wrapped path auto-exists (`.1.1.1`). KM card [[terse-bare-working-vars-engine-gaps]] added (map regenerated). DOCS/TREE/KM only — no engine/book change, so phase0 N/A to the split slice |
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.2.1` | `dump_parser_source` ground truth (scratchpad `probe_terse_1_2_1.pl`, isolated bare forms, dump-don't-guess); all-20-specs generated-source diff (mine vs git-stashed `EmitContext.pm`); `perl -c` on `EmitContext.pm`/`LinkedSpec.pm` + `t/phase0_regression.t`; +3 phase0 locks; `bash tools/run_ci_local.sh`; `mdbook build` | Collector extended (bare arg-position pass; `assign`→`$`, `push_value`/`push_nonempty`→`@`; `\s*,` guard keeps wrapped on the wrapped path; shared `$record` dedup). **All 20 specs byte-identical (0 diff)**; bare forms now emit the preamble `my` (incl. `assign(pair, set_key(hash(pair),…))` → both `my %pair` + `my $pair`); **phase0 968→971 green**; gate **EXIT 0** ("[ci] local CI gate passed", 971); ratio 1.0000; `mdbook build` EXIT 0. Book (3 pages) taught bare arg-position auto-existence + corrected the outdated "arg-position is later" note. Child-append/`.push` target + bare hash deferred to Channel 2. |
+| `2026-06-24` | `SPEC-FORMAT-TERSE.1.2.2` | Throwaway Rust integration probe (bare vs wrapped, dump-don't-guess); read `engine.rs` resolvers; `tools/gen_oracle_corpus.pl` +2 fixtures (regenerated, existing 7 byte-identical); `cargo test`; `cargo clippy`; `perl -c gen_oracle_corpus.pl`; `bash tools/run_ci_local.sh` | **REQUIRED a Rust engine change** (contrast `.1.1.2`): bare `Expr::Variable` target fell through to `val.to_str()` → probe `[null]`/`[[]]`. Added bare-target acceptance to `resolve_scalar_target` + `resolve_array_target` (`allow_bare` gate; push targets true, array_copy/hash_copy false) → probe now `["ok"]`/`[["a","b"]]` (= wrapped = Perl reference). 2 oracle fixtures (`autoexist_{scalar,array}_bare_arg`) + 4 `terse_1_2_2_*` integration tests; **cargo 248→252 green**, 9/9 oracle PASS, clippy zero-new (engine.rs 11 baseline; flattened my `if allow_bare` nest to a tuple `if let`), `perl -c` OK; **phase0 971 green** (Perl untouched), gate **EXIT 0**; no book change (variant-agnostic). Channel 1 complete on both variants. |
 
 ## Commit Log
 
@@ -613,9 +646,34 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.1.2` | `SPEC-FORMAT-TERSE.1.1.2 — Rust lockstep parity for auto-existing variables (oracle + integration locks; no engine change)` | Assessed DOABLE: Rust interpreter's per-parse `RuntimeContext` HashMaps already auto-vivify working vars (no `declare` needed) and are fresh per `execute` (no leak) — no Perl-style leaky-global hazard, so no engine code change. Locked with 5 `autoexist_*` oracle fixtures (`tools/gen_oracle_corpus.pl`) + 4 `terse_1_1_2_*` integration tests; cargo 244→248 green, 7/7 oracle fixtures PASS, clippy zero-new, phase0 968 green (Perl untouched), gate EXIT 0. `.1.1` container done. Recursive/REP idiom deferred to `RUST-PARITY`. KM card [[rust-working-vars-auto-vivify]]. |
 | `SPEC-FORMAT-TERSE.1.2` (split) | `SPEC-FORMAT-TERSE.1.2 — split into .1.2.1 (Perl, Channel 1) + .1.2.2 (Rust parity); record bare-working-var ground truth + KM card` | `.1.2` → container after a `dump_parser_source` ground-truth pass: a bare working var has two inference channels — arg-position (lowers right but leaks; no auto-`my`) and value-position bare-word reads + RHS-shape (`return(count)`→bareword). `.1.2.1` (Perl arg-position auto-existence) is the first frontier child; `.1.2.2` is its Rust parity; Channel 2 leaves added later. KM [[terse-bare-working-vars-engine-gaps]]. DOCS/TREE/KM only — no engine/book change. |
 | `SPEC-FORMAT-TERSE.1.2.1` | `SPEC-FORMAT-TERSE.1.2.1 — Perl arg-position bare working-variable auto-existence (Channel 1; engine + book + 3 phase0 locks)` | Extended `_collect_auto_working_var_decls` (`RuleIR/EmitContext.pm`) with a bare arg-position pass: `assign(NAME,…)`→`my $NAME`, `push_value`/`push_nonempty(NAME,…)`→`my @NAME`; wrapped targets stay on the `.1.1.1` wrapped path (the `\s*,` guard); shared `$record` dedup → all 20 specs byte-identical; +3 phase0 subtests → 971 green; gate EXIT 0; ratio 1.0000; book (3 pages) taught wrapper-optional-in-arg-position. Child-append `push(Rule[,target])`/`.push` target + bare hash deferred to Channel 2. KM [[terse-bare-working-vars-engine-gaps]] (Channel 1 closed). |
+| `SPEC-FORMAT-TERSE.1.2.2` | `SPEC-FORMAT-TERSE.1.2.2 — Rust lockstep parity for arg-position bare working-variable auto-existence (engine + oracle + 4 integration locks)` | Bare `Expr::Variable` target now mapped to the working var in `resolve_scalar_target` + `resolve_array_target` (`allow_bare` gate: push targets true, value-reads false), mirroring Perl's `^\w+$` fallback; per-parse HashMap auto-vivifies. **Required an engine change** (unlike `.1.1.2`). 2 oracle fixtures + 4 `terse_1_2_2_*` tests; cargo 248→252; clippy zero-new; phase0 971 (Perl untouched); gate EXIT 0; no book change. Channel 1 complete on both variants; `.1.2.1` now landed against the universal contract. |
 
 ## Changelog
 
+- `2026-06-24`: **`.1.2.2` DONE — Rust lockstep parity for `.1.2.1`; it REQUIRED a Rust engine change
+  (unlike `.1.1.2`).** PNT (user-directed, single-leaf cadence). **TOOLBOX-first** throwaway Rust integration
+  probe (parse→validate→compile→execute, dump-don't-guess) on bare-vs-wrapped specs: although the
+  interpreter's per-parse `RuntimeContext` HashMaps auto-vivify (the `.1.1.2` finding), a **bare** arg-position
+  target was NOT reaching the working var — `resolve_scalar_target`/`resolve_array_target`
+  (`rust/linkedspec-runtime/src/engine.rs`) only extracted the name from a WRAPPED `scalar(VAR)`/`array(VAR)`
+  Call; a bare `Expr::Variable` fell through to `val.to_str()` (evaluated value → `""`). Probe BEFORE: bare
+  `assign(v,"ok")`→`[null]`, bare `push_value(items,..)`→`[[]]` vs wrapped `["ok"]`/`[["a","b"]]` — a genuine
+  divergence from the Perl `.1.2.1` reference. **Fix:** both resolvers now also accept a bare `Expr::Variable`
+  target and return its name (mirroring Perl's `^(\w+)$` fallback in `ValueExpr::_extract_*_symbol_name`); the
+  HashMap then auto-vivifies it (no `declare`; fresh ctx per `execute` ⇒ no leak). Scoped to Channel-1 target
+  positions via an `allow_bare` flag — `true` for `push_value`/`push_nonempty`, `false` for the value-position
+  reads `array_copy`/`hash_copy` (bare value-position reads are Channel 2, not this leaf). Probe AFTER: bare ==
+  wrapped (`["ok"]`, `[["a","b"]]`). **Locked:** 2 oracle fixtures `autoexist_{scalar,array}_bare_arg`
+  (`tools/gen_oracle_corpus.pl`, regenerated — existing 7 byte-identical; `corpus_oracle` checks Rust == the
+  Perl reference) + 4 `terse_1_2_2_*` integration tests (scalar/array/push_nonempty value anchors,
+  bare==wrapped==declare convergence, per-parse no-leak via same-engine re-run). **cargo 248→252 green**, 9/9
+  oracle PASS, `cargo clippy` zero-new (engine.rs 11 baseline — my added `if allow_bare` nest flattened to a
+  tuple `if let`; test file adds 0), `perl -c gen_oracle_corpus.pl` OK; **phase0 971 green** (Perl untouched),
+  `bash tools/run_ci_local.sh` **EXIT 0**; no book change (variant-agnostic — `.1.2.1` already taught the
+  contract; Rust now conforms). KM card [[terse-bare-working-vars-engine-gaps]] updated (Rust parity + the
+  engine-change contrast with `.1.1.2`). **`.1.2` Channel 1 complete on BOTH variants;** `.1.2` stays `active`
+  (Channel 2 `.1.2.3`+ pending, added once `.1.5` is designed). Frontier → `.1.4` (helper renames). Recursive/REP
+  idiom stays deferred to `RUST-PARITY`.
 - `2026-06-24`: **`.1.2.1` DONE — Perl arg-position bare working-variable auto-existence (Channel 1).**
   PNT (user-directed, fresh session) implemented the first `.1.2` child. **TOOLBOX-first
   `dump_parser_source` ground truth** (scratchpad `probe_terse_1_2_1.pl`, isolated bare forms,

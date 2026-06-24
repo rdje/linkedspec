@@ -183,6 +183,33 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity = .1.2.2): a BARE (un-wrapped)
+    # working var in a type-implying arg position auto-exists with the position-implied
+    # kind -- the assign(...) target is a scalar, the push_value(...) target is an array.
+    # Same divergence-free proof class as the wrapped autoexist_* cases above (the bare
+    # target is the only difference), so the Rust backend must produce the identical
+    # reference value. The value is read back through a wrapper (scalar(v)/array(items)) --
+    # bare value-position reads are Channel 2, not this leaf.
+    {   case   => 'autoexist_scalar_bare_arg',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { assign(v, "ok"); return(scalar(v)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'autoexist_array_bare_arg',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { push_value(items, "a"); push_value(items, "b"); return(array_copy(array(items))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);
