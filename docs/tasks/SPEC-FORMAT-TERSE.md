@@ -6,7 +6,23 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-24` (**`.1.2.2` DONE** — Rust lockstep parity for `.1.2.1`: REQUIRED a Rust engine
+- Last updated: `2026-06-24` (**`.1.4` SPLIT** → `.1.4.1` (Perl reference) + `.1.4.2` (Rust lockstep
+  parity) after a TOOLBOX-first `call_spec_handler_subst` ground-truth pass — too broad for one signoff
+  slice: a two-variant helper-rename change (Perl `ActionIR` + phase0 + book, AND Rust `engine.rs` + oracle
+  + cargo) with separable ownership areas (ADR 0006 lockstep), mirroring `.1.1`→`.1.1.1`/`.1.1.2` and
+  `.1.2`→`.1.2.1`/`.1.2.2`. Ground truth (dump-don't-guess, `perl -Iperl` confirmed `perl/LinkedSpec.pm`):
+  the three new spellings are currently UNRECOGNIZED — `set(scalar(x),1)`→passthrough (vs `assign`→`$x = 1`),
+  `cat("a","b")`→passthrough (vs `concat`→the concat do-block), `copy(a(items))`→`copy([items])` partial /
+  `copy(h(m))`→passthrough (vs `array_copy`→`[@items]` / `hash_copy`→`{%m}`). Per-side nuance found: `cat` is
+  a pure rename via `_normalize_method_name` (`ActionIR/MethodExpr.pm:19-26`); `set` is STATEMENT-level
+  (`ActionIR/Contracts.pm:1749/1753` `\bassign\s*\(` + `DeclareMethod` + `MethodLowering._lower_assign_statement`)
+  — NOT covered by `_normalize_method_name` alone; `copy` is NOT a pure rename — it must resolve array-vs-hash
+  at lowering time (Perl: `extract_array_symbol_name` then `extract_hash_symbol_name`; Rust: a dedicated
+  value-type-dispatching `"copy"` match arm). Rust sites: all in one `Engine::call_helper()` match in
+  `rust/linkedspec-runtime/src/engine.rs` (`assign`@711, `array_copy`@735, `concat`@820, `hash_copy`@1833;
+  aliases = pipe arms `"array" | "a"`). `.1.4` → container; frontier → `.1.4.1`. KM card
+  [[terse-helper-rename-lowering-sites]]. DOCS/TREE/KM only — no engine/book change in this split slice.
+  Prior **`.1.2.2` DONE** — Rust lockstep parity for `.1.2.1`: REQUIRED a Rust engine
   change (unlike `.1.1.2`) — `resolve_scalar_target`/`resolve_array_target` now map a bare `Expr::Variable`
   target to the working var (`allow_bare` gate; push targets only), per-parse HashMap auto-vivifies; 2 oracle
   fixtures + 4 integration tests; cargo 248→252; clippy zero-new; phase0 971 (Perl untouched); gate EXIT 0;
@@ -352,10 +368,57 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.1.4`
+  Status: `active` (SPLIT 2026-06-24 — too broad for one signoff slice. TOOLBOX-first
+    `call_spec_handler_subst` ground truth (dump-don't-guess): the three terse rename spellings are
+    currently UNRECOGNIZED (`set`/`cat`/`copy` all pass through), and the change spans two variants with
+    separable ownership (Perl `ActionIR` + phase0 + book, AND Rust `engine.rs` + oracle + cargo) — a
+    lockstep ADR 0006 obligation, mirroring `.1.1`→`.1.1.1`/`.1.1.2` and `.1.2`→`.1.2.1`/`.1.2.2`. Split
+    Perl-first by variant. KM card [[terse-helper-rename-lowering-sites]]. Frontier → `.1.4.1`.)
+  Goal: Helper renames — `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (new terse names
+    become canonical; old names kept as deprecated aliases that lower identically — gradual, ADR 0007)
+  Children: `.1.4.1` (Perl reference), `.1.4.2` (Rust lockstep parity)
+
+- ID: `SPEC-FORMAT-TERSE.1.4.1`
   Status: `pending`
-  Goal: Helper renames — `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy`
-  Acceptance: `set` replaces `assign`; `cat` replaces `concat`; one `copy(name)` covers arrays and
-    hashes (replaces `array_copy`/`hash_copy`). Old names aliased during migration, then retired.
+  Goal: Perl reference — recognize the terse rename spellings `set`/`cat`/`copy` so each lowers
+    **identically** to its canonical helper: `set(target, val)` ≡ `assign(target, val)` (scalar
+    `$target = val`); `cat(...)` ≡ `concat(...)` (the concat do-block); and one unified `copy(name)` ≡
+    `array_copy(name)` for arrays (`[@name]`) and ≡ `hash_copy(name)` for hashes (`{%name}`), resolving
+    array-vs-hash by the wrapped symbol kind at lowering time. The old names keep lowering unchanged
+    (deprecated aliases during migration — gradual, ADR 0007; retirement is a later explicit leaf).
+  Acceptance: (1) `call_spec_handler_subst` proves byte-equal lowering: `set(scalar(x),1)` == `assign(...)`
+    (`$x = 1`), `cat("a","b")` == `concat("a","b")`, `copy(a(x))` == `array_copy(a(x))` (`[@x]`),
+    `copy(h(x))` == `hash_copy(h(x))` (`{%x}`); (2) the canonical/old-name lowering is byte-UNCHANGED, so
+    all 20 shipped specs (which use the old names) generate byte-identical source — proven by a
+    mine-vs-stashed all-spec diff (mirrors `.1.1.1`/`.1.2.1`); (3) the all-target ActionIR-ready ratio is
+    1.0000 (ADR 0002); (4) `t/phase0_regression.t` green (currently 971) with new locks proving the three
+    new spellings lower identically to their canonical AND the old names are unchanged; (5)
+    `bash tools/run_ci_local.sh` EXIT 0; (6) book updated to teach the terse spellings as canonical with the
+    old names as deprecated aliases (the affected pages are `dsl/value-container-flow-helper-reference.md`,
+    `appendix/helper-contract-catalog.md`, `dsl/declaration-helper-reference.md`). **Ground-truth design
+    (confirmed, dump-don't-guess):** `cat`→`concat` is a pure rename → extend `_normalize_method_name`
+    (`ActionIR/MethodExpr.pm:19-26`); `set`→`assign` is STATEMENT-level (`ActionIR/Contracts.pm:1749/1753`
+    `\bassign\s*\(` recognition + `ActionIR/DeclareMethod._lower_assign_method_statement` +
+    `ActionIR/MethodLowering._lower_assign_statement`) and is NOT reached by `_normalize_method_name` alone
+    (probe: `set(...)` fully passes through) — so `set` must be added to the statement-level recognition
+    (resolve the exact seam with `dump_parser_source` in this leaf); `copy` is NOT a pure rename — add a
+    dedicated `copy` dispatch in `MethodLowering._lower_method_value_expr` (beside `array_copy`@1553 /
+    `hash_copy`@1533) that tries `extract_array_symbol_name` then `extract_hash_symbol_name`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.4.2`
+  Status: `pending`
+  Goal: Rust lockstep parity for `.1.4.1` (ADR 0006) — `Engine::call_helper()`
+    (`rust/linkedspec-runtime/src/engine.rs`) recognizes `set`/`cat`/`copy` identically: pipe the rename
+    onto the canonical arm where it is a pure alias (`"assign" | "set"` @711, `"concat" | "cat"` @820), and
+    add a dedicated value-type-dispatching `"copy"` arm (Array→clone array, Hash→clone hash, else resolve
+    the named target) since `"copy"` cannot appear in both the `array_copy`@735 and `hash_copy`@1833 arms.
+  Acceptance: cargo suite green; oracle cross-check parity holds for `set`/`cat`/`copy` (Rust == the Perl
+    reference value) on non-recursive specs; lock with oracle fixtures + integration tests mirroring
+    `.1.2.2`; `t/phase0_regression.t` 971 untouched (Perl); `bash tools/run_ci_local.sh` EXIT 0; clippy
+    zero-new; no book change (variant-agnostic — `.1.4.1` teaches the contract; Rust conforms). The
+    `.1.4.1` change is "landed against the universal contract" only once this closes.
   Verification: `pending`
   Commit: `pending`
 
@@ -455,11 +518,43 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2` | `active` (SPLIT 2026-06-24) | Too broad for one slice → split by inference channel (Perl-first + Rust parity) after a `dump_parser_source` ground-truth pass. KM [[terse-bare-working-vars-engine-gaps]]. |
 | — | `SPEC-FORMAT-TERSE.1.2.1` | `done` 2026-06-24 | Channel 1 (Perl) — arg-position bare working-var auto-existence LANDED. Extended `_collect_auto_working_var_decls` (bare `assign`→`$`, `push_value`/`push_nonempty`→`@`; `\s*,` guard keeps wrapped targets on the wrapped path; same dedup) → all 20 specs **byte-identical**; +3 phase0 subtests (17 assertions) → **971 green**; gate EXIT 0; ratio 1.0000; book taught (3 pages). Child-append `push(Rule[,target])`/`.push` target + bare hash (value-position) deferred to Channel 2. |
 | — | `SPEC-FORMAT-TERSE.1.2.2` | `done` 2026-06-24 | Rust lockstep parity for `.1.2.1` — LANDED. Unlike `.1.1.2` it REQUIRED a Rust engine change: `resolve_scalar_target`/`resolve_array_target` now map a bare `Expr::Variable` target to the working var (mirroring Perl's `^\w+$` fallback), scoped to the Channel-1 positions via `allow_bare` (push_value/push_nonempty true; array_copy/hash_copy false). Probe: bare `[null]`/`[[]]` → `["ok"]`/`[["a","b"]]` (= wrapped = Perl reference). 2 oracle fixtures + 4 integration tests; cargo 248→252 green; clippy zero-new; phase0 971 (Perl untouched); gate EXIT 0. **Channel 1 complete on both variants.** |
-| 1 | `SPEC-FORMAT-TERSE.1.4` | `pending` (**now next**, ungated) | Helper renames `assign`→`set`, `concat`→`cat`, `array_copy`/`hash_copy`→`copy` (old names aliased). |
+| — | `SPEC-FORMAT-TERSE.1.4` | `active` (SPLIT 2026-06-24) | Too broad for one slice → split by variant (Perl-first + Rust parity) after a TOOLBOX-first `call_spec_handler_subst` ground-truth pass: the three terse spellings (`set`/`cat`/`copy`) are currently unrecognized, and the change spans separable Perl + Rust ownership areas (ADR 0006 lockstep). KM [[terse-helper-rename-lowering-sites]]. |
+| 1 | `SPEC-FORMAT-TERSE.1.4.1` | `pending` (**now next**, ungated) | Perl reference — recognize `set`/`cat`/`copy` so each lowers identically to `assign`/`concat`/`array_copy`+`hash_copy`. `cat` = pure rename (`_normalize_method_name`); `set` = statement-level (`Contracts.pm`/`DeclareMethod`); `copy` = unified array-vs-hash dispatch (`MethodLowering._lower_method_value_expr`). Old-name lowering byte-unchanged (20 specs byte-identical); +phase0 locks; book teach. |
+| 2 | `SPEC-FORMAT-TERSE.1.4.2` | `pending` | Rust lockstep parity for `.1.4.1` — `Engine::call_helper()` (`engine.rs`): `"assign" \| "set"`, `"concat" \| "cat"`, + a dedicated value-type-dispatching `"copy"` arm. Oracle fixtures + integration tests; cargo green; phase0 971 untouched; no book change. |
 | … | `.1.2.3`+ (Channel 2),`.1.3`,`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.2.1` + `.1.5`) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
 
+- `2026-06-24` (**`.1.4` split by variant** — Perl reference `.1.4.1` + Rust lockstep parity `.1.4.2`;
+  grounded by a TOOLBOX-first `call_spec_handler_subst` ground-truth pass, dump-don't-guess; KM card
+  [[terse-helper-rename-lowering-sites]]). Per the splitting rule, a Perl-reference engine change and its
+  lockstep Rust-parity obligation (ADR 0006) are separable and touch unrelated ownership areas (Perl
+  `ActionIR/*` + `t/phase0_regression.t` + book vs Rust `engine.rs` + oracle corpus + cargo tests), which
+  COMMIT.md forbids bundling in one commit — mirroring how `.1.1`→`.1.1.1`/`.1.1.2` and
+  `.1.2`→`.1.2.1`/`.1.2.2` split. **Confirmed engine facts (own probes, `perl -Iperl` → `perl/LinkedSpec.pm`):**
+  the three terse spellings are all currently UNRECOGNIZED — `set(scalar(x),1)`→`set(scalar(x), 1)` (vs
+  `assign`→`$x = 1`), `cat("a","b")`→`cat("a","b")` (vs `concat`→the concat do-block), `copy(a(items))`→
+  `copy([items])` partial / `copy(h(m))`→`copy(h(m))` (vs `array_copy`→`[@items]` / `hash_copy`→`{%m}`).
+  **Three distinct implementation shapes** (why a single `_normalize_method_name` alias does NOT cover the
+  leaf): (i) `cat`→`concat` IS a pure rename → the clean home is `_normalize_method_name`
+  (`ActionIR/MethodExpr.pm:19-26`, applied pre-lowering — same seam as `s`/`a`/`h`→`scalar`/`array`/`hash`;
+  the retired `tail`/`flatten`/`array_values` aliases were the inline-conditional pattern, removed in
+  `COMPAT-ALIAS-RETIREMENT.1`). (ii) `set`→`assign` is **statement-level** — `assign` is recognized by the
+  raw-text regex `\bassign\s*\(` at `ActionIR/Contracts.pm:1749/1753` and lowered via
+  `ActionIR/DeclareMethod._lower_assign_method_statement` + `ActionIR/MethodLowering._lower_assign_statement`,
+  a path `_normalize_method_name` does not reach (probe: `set(...)` is fully unrecognized) — so `.1.4.1`
+  must add `set` to the statement-level recognition (resolve the exact seam with `dump_parser_source`).
+  (iii) `copy` is **not** a pure rename — it unifies `array_copy`/`hash_copy`, so it needs a dedicated
+  dispatch in `MethodLowering._lower_method_value_expr` resolving array-then-hash symbol kind (Perl:
+  `extract_array_symbol_name` → `[@name]` else `extract_hash_symbol_name` → `{%name}`; Rust: a value-type
+  match-arm — Array→clone, Hash→clone). **Rust sites:** all four canonical helpers live in one
+  `Engine::call_helper()` match (`rust/linkedspec-runtime/src/engine.rs`: `assign`@711, `array_copy`@735,
+  `concat`@820, `hash_copy`@1833; aliases = pipe arms `"array" | "a"`); `.1.4.2` pipes `set`/`cat` and adds a
+  separate value-type-dispatching `"copy"` arm (a literal can't repeat across two arms). Direction per ADR
+  0007: the new terse names become canonical, old names stay deprecated aliases that lower identically
+  (retirement is a later explicit leaf); both spellings must lower byte-identically and the 20 shipped specs
+  (old names) must stay byte-identical. `.1.4` is now a container; no engine/book change in this split slice
+  — it owns the design + frontier only.
 - `2026-06-24` (**`.1.2.1` scope — Channel 1 = unambiguous first-arg value-helper positions only**,
   grounded by `dump_parser_source` probes; dump-don't-guess). The auto-`my` sigil MUST match the sigil the
   lowering actually emits, or the engine would create a dead `my` and leave the real variable still leaky.
@@ -634,6 +729,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.2` (split) | `dump_parser_source` ground-truth probes (`perl -Iperl -MLinkedSpec`, `generate_only`+`runtime_ctx_ref`; scratchpad `probe_terse_1_2.pl` + isolated one-liners, dump-don't-guess); confirmed `perl -Iperl` loads `perl/LinkedSpec.pm` (stale `PERL5LIB` present); `perl -c` on `ValueExpr.pm`/`MethodLowering.pm`/`EmitContext.pm`; `grep` wrapper-usage census across `specs/*.spec`; baseline `scripts/check_memory_architecture.sh` + `scripts/check_doctrines.sh` + KM gate | Split `.1.2` → `.1.2.1` (Perl, Channel 1) + `.1.2.2` (Rust parity); Channel 2 (`.1.2.3`+) recorded as a follow-on (not pre-published). Ground truth: bare arg-position var lowers right but no auto-`my` (leaky global); bare value-position word is not a var read (`return count`); wrapped path auto-exists (`.1.1.1`). KM card [[terse-bare-working-vars-engine-gaps]] added (map regenerated). DOCS/TREE/KM only — no engine/book change, so phase0 N/A to the split slice |
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.2.1` | `dump_parser_source` ground truth (scratchpad `probe_terse_1_2_1.pl`, isolated bare forms, dump-don't-guess); all-20-specs generated-source diff (mine vs git-stashed `EmitContext.pm`); `perl -c` on `EmitContext.pm`/`LinkedSpec.pm` + `t/phase0_regression.t`; +3 phase0 locks; `bash tools/run_ci_local.sh`; `mdbook build` | Collector extended (bare arg-position pass; `assign`→`$`, `push_value`/`push_nonempty`→`@`; `\s*,` guard keeps wrapped on the wrapped path; shared `$record` dedup). **All 20 specs byte-identical (0 diff)**; bare forms now emit the preamble `my` (incl. `assign(pair, set_key(hash(pair),…))` → both `my %pair` + `my $pair`); **phase0 968→971 green**; gate **EXIT 0** ("[ci] local CI gate passed", 971); ratio 1.0000; `mdbook build` EXIT 0. Book (3 pages) taught bare arg-position auto-existence + corrected the outdated "arg-position is later" note. Child-append/`.push` target + bare hash deferred to Channel 2. |
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.2.2` | Throwaway Rust integration probe (bare vs wrapped, dump-don't-guess); read `engine.rs` resolvers; `tools/gen_oracle_corpus.pl` +2 fixtures (regenerated, existing 7 byte-identical); `cargo test`; `cargo clippy`; `perl -c gen_oracle_corpus.pl`; `bash tools/run_ci_local.sh` | **REQUIRED a Rust engine change** (contrast `.1.1.2`): bare `Expr::Variable` target fell through to `val.to_str()` → probe `[null]`/`[[]]`. Added bare-target acceptance to `resolve_scalar_target` + `resolve_array_target` (`allow_bare` gate; push targets true, array_copy/hash_copy false) → probe now `["ok"]`/`[["a","b"]]` (= wrapped = Perl reference). 2 oracle fixtures (`autoexist_{scalar,array}_bare_arg`) + 4 `terse_1_2_2_*` integration tests; **cargo 248→252 green**, 9/9 oracle PASS, clippy zero-new (engine.rs 11 baseline; flattened my `if allow_bare` nest to a tuple `if let`), `perl -c` OK; **phase0 971 green** (Perl untouched), gate **EXIT 0**; no book change (variant-agnostic). Channel 1 complete on both variants. |
+| `2026-06-24` | `SPEC-FORMAT-TERSE.1.4` (split) | TOOLBOX `call_spec_handler_subst` ground-truth probes (`perl -Iperl -MLinkedSpec`, dump-don't-guess; `perl -Iperl` confirmed `perl/LinkedSpec.pm` over the stale `PERL5LIB`); read the alias seam `ActionIR/MethodExpr.pm` + the `assign`/`concat`/`array_copy`/`hash_copy` lowering sites; Rust mapping of `Engine::call_helper()`; baseline `scripts/check_doctrines.sh` (MEMORY-ARCH + KNOWLEDGE-MAP) + KM regenerate | Split `.1.4` → `.1.4.1` (Perl) + `.1.4.2` (Rust parity). Ground truth: `set`/`cat`/`copy` all currently UNRECOGNIZED (`set`→passthrough vs `assign`→`$x = 1`; `cat`→passthrough vs `concat`→do-block; `copy(a(x))`→`copy([items])` partial / `copy(h(x))`→passthrough vs `array_copy`→`[@items]` / `hash_copy`→`{%m}`). Three shapes: `cat`=pure rename (`_normalize_method_name`); `set`=statement-level (`Contracts.pm`/`DeclareMethod` — not reached by normalization); `copy`=unified array-vs-hash dispatch (`MethodLowering`). KM card [[terse-helper-rename-lowering-sites]] added (map regenerated). DOCS/TREE/KM only — no engine/book change, so phase0 N/A to the split slice |
 
 ## Commit Log
 
@@ -647,9 +743,37 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.2` (split) | `SPEC-FORMAT-TERSE.1.2 — split into .1.2.1 (Perl, Channel 1) + .1.2.2 (Rust parity); record bare-working-var ground truth + KM card` | `.1.2` → container after a `dump_parser_source` ground-truth pass: a bare working var has two inference channels — arg-position (lowers right but leaks; no auto-`my`) and value-position bare-word reads + RHS-shape (`return(count)`→bareword). `.1.2.1` (Perl arg-position auto-existence) is the first frontier child; `.1.2.2` is its Rust parity; Channel 2 leaves added later. KM [[terse-bare-working-vars-engine-gaps]]. DOCS/TREE/KM only — no engine/book change. |
 | `SPEC-FORMAT-TERSE.1.2.1` | `SPEC-FORMAT-TERSE.1.2.1 — Perl arg-position bare working-variable auto-existence (Channel 1; engine + book + 3 phase0 locks)` | Extended `_collect_auto_working_var_decls` (`RuleIR/EmitContext.pm`) with a bare arg-position pass: `assign(NAME,…)`→`my $NAME`, `push_value`/`push_nonempty(NAME,…)`→`my @NAME`; wrapped targets stay on the `.1.1.1` wrapped path (the `\s*,` guard); shared `$record` dedup → all 20 specs byte-identical; +3 phase0 subtests → 971 green; gate EXIT 0; ratio 1.0000; book (3 pages) taught wrapper-optional-in-arg-position. Child-append `push(Rule[,target])`/`.push` target + bare hash deferred to Channel 2. KM [[terse-bare-working-vars-engine-gaps]] (Channel 1 closed). |
 | `SPEC-FORMAT-TERSE.1.2.2` | `SPEC-FORMAT-TERSE.1.2.2 — Rust lockstep parity for arg-position bare working-variable auto-existence (engine + oracle + 4 integration locks)` | Bare `Expr::Variable` target now mapped to the working var in `resolve_scalar_target` + `resolve_array_target` (`allow_bare` gate: push targets true, value-reads false), mirroring Perl's `^\w+$` fallback; per-parse HashMap auto-vivifies. **Required an engine change** (unlike `.1.1.2`). 2 oracle fixtures + 4 `terse_1_2_2_*` tests; cargo 248→252; clippy zero-new; phase0 971 (Perl untouched); gate EXIT 0; no book change. Channel 1 complete on both variants; `.1.2.1` now landed against the universal contract. |
+| `SPEC-FORMAT-TERSE.1.4` (split) | `SPEC-FORMAT-TERSE.1.4 — split into .1.4.1 (Perl reference) + .1.4.2 (Rust parity); record helper-rename lowering-site ground truth + KM card` | `.1.4` → container after a TOOLBOX-first `call_spec_handler_subst` ground-truth pass: the three terse spellings `set`/`cat`/`copy` are currently unrecognized, and the change spans separable Perl + Rust ownership areas (ADR 0006 lockstep). `.1.4.1` (Perl: `cat`=normalize, `set`=statement-level, `copy`=unified array/hash dispatch) is the first frontier child; `.1.4.2` is its Rust parity. KM [[terse-helper-rename-lowering-sites]]. DOCS/TREE/KM only — no engine/book change. |
 
 ## Changelog
 
+- `2026-06-24`: **`.1.4` SPLIT → `.1.4.1` (Perl reference) + `.1.4.2` (Rust parity).** PNT (user-directed
+  loop, fresh session) picked `.1.4` (helper renames `assign`→`set`, `concat`→`cat`,
+  `array_copy`/`hash_copy`→`copy`, the next terse-format implementation leaf) and, instead of coding, split
+  it after a **TOOLBOX-first `call_spec_handler_subst` ground-truth pass** (dump-don't-guess; `perl -Iperl`
+  confirmed it loads `perl/LinkedSpec.pm` over the stale `PERL5LIB`). The probes proved the three terse
+  spellings are all currently **UNRECOGNIZED**: `set(scalar(x),1)`→`set(scalar(x), 1)` (vs `assign`→`$x = 1`),
+  `cat("a","b")`→`cat("a","b")` (vs `concat`→the concat do-block), `copy(a(items))`→`copy([items])` partial /
+  `copy(h(m))`→`copy(h(m))` (vs `array_copy`→`[@items]` / `hash_copy`→`{%m}`). The change has **three distinct
+  implementation shapes** spanning **two variants with separable ownership** (Perl `ActionIR/*` + phase0 +
+  book vs Rust `engine.rs` + oracle + cargo — COMMIT.md forbids bundling), so per the splitting rule
+  (mirroring `.1.1`→`.1.1.1`/`.1.1.2` and `.1.2`→`.1.2.1`/`.1.2.2`, ADR 0006) `.1.4` became a container with
+  `.1.4.1` (Perl reference) + `.1.4.2` (Rust lockstep parity). **Ground truth (own probes + code read):**
+  `cat`→`concat` is a pure rename → `_normalize_method_name` (`ActionIR/MethodExpr.pm:19-26`, applied
+  pre-lowering, same seam as `s`/`a`/`h`); `set`→`assign` is **statement-level** (`ActionIR/Contracts.pm:1749/1753`
+  `\bassign\s*\(` + `DeclareMethod` + `MethodLowering._lower_assign_statement`) and is NOT reached by
+  `_normalize_method_name` alone (so `.1.4.1` extends the statement-level recognition); `copy` is **not** a
+  pure rename — it unifies `array_copy`/`hash_copy` and needs a dedicated dispatch in
+  `MethodLowering._lower_method_value_expr` resolving array-then-hash symbol kind (`[@name]` else `{%name}`).
+  Rust: all four canonical helpers live in one `Engine::call_helper()` match
+  (`rust/linkedspec-runtime/src/engine.rs`: `assign`@711, `array_copy`@735, `concat`@820, `hash_copy`@1833;
+  aliases = pipe arms); `.1.4.2` pipes `set`/`cat` and adds a separate value-type-dispatching `"copy"` arm.
+  Direction per ADR 0007: new terse names canonical, old names deprecated aliases that lower identically
+  (retirement is a later explicit leaf); the 20 shipped specs (old names) must stay byte-identical. Recorded
+  the ground truth in Decisions + KM card [[terse-helper-rename-lowering-sites]] (map regenerated). Frontier
+  → `.1.4.1`. **DOCS/TREE/KM only — no engine or book change** in this split slice; baseline doctrine + KM
+  gates green. Next PNT: implement `.1.4.1` (Perl reference — `cat`/`set`/`copy` recognition; signoff-critical
+  codegen; dump-don't-guess, all-20-specs byte-identical proof).
 - `2026-06-24`: **`.1.2.2` DONE — Rust lockstep parity for `.1.2.1`; it REQUIRED a Rust engine change
   (unlike `.1.1.2`).** PNT (user-directed, single-leaf cadence). **TOOLBOX-first** throwaway Rust integration
   probe (parse→validate→compile→execute, dump-don't-guess) on bare-vs-wrapped specs: although the

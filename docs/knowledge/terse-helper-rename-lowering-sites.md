@@ -1,0 +1,99 @@
+---
+id: terse-helper-rename-lowering-sites
+title: "SPEC-FORMAT-TERSE.1.4 ground truth — where the helper-rename targets assign/concat/array_copy/hash_copy are recognized + lowered (Perl reference AND Rust), the alias seam, and the three distinct shapes the terse renames set/cat/copy take. cat=pure rename via _normalize_method_name (MethodExpr.pm:19-26); set=STATEMENT-level (Contracts.pm:1749/1753 \\bassign\\s*\\( + DeclareMethod + MethodLowering._lower_assign_statement) — NOT reached by _normalize_method_name; copy=NOT a pure rename, it unifies array_copy/hash_copy and needs a dedicated dispatch resolving array-then-hash symbol kind. Rust: all four canonical helpers live in one Engine::call_helper() match (engine.rs assign@711, array_copy@735, concat@820, hash_copy@1833; aliases=pipe arms) — copy needs its own value-type-dispatch arm because a literal cannot repeat across the array_copy and hash_copy arms."
+answers:
+  - "where does assign / concat / array_copy / hash_copy lower in the perl engine"
+  - "where are the four helper-rename targets recognized in the Rust engine"
+  - "how do I add a new helper alias (set, cat, copy) to LinkedSpec"
+  - "what is the alias-normalization seam for DSL helper names (_normalize_method_name)"
+  - "does set(name,val) / cat(...) / copy(name) currently lower in the engine"
+  - "why is copy(name) not just a rename alias of array_copy / hash_copy"
+  - "how should a unified copy() resolve array vs hash"
+  - "why is SPEC-FORMAT-TERSE.1.4 split into a Perl reference change plus a Rust parity follow-on"
+  - "where is set recognized vs concat / array_copy (statement-level vs value-expr)"
+  - "what does set / cat / copy lower to in linkedspec today"
+date: 2026-06-24
+status: confirmed
+tags: [engine, dsl, helpers, aliases, rename, actionir, spec-format-terse, SPEC-FORMAT-TERSE, MethodLowering, rust, parity]
+evidence: "TOOLBOX `call_spec_handler_subst` probes 2026-06-24 (`perl -Iperl -MLinkedSpec`, dump-don't-guess; `perl -Iperl` confirmed `perl/LinkedSpec.pm` loads over the stale `PERL5LIB` — TOOLBOX §6.5). BEFORE (the gap): `assign(scalar(x),1)`→`$x = 1` but `set(scalar(x),1)`→`set(scalar(x), 1)` (passthrough); `concat(\"a\",\"b\")`→`do { my @__ls_concat_parts = (\"a\", \"b\"); ... join('', @__ls_concat_parts) : undef }` but `cat(\"a\",\"b\")`→`cat(\"a\",\"b\")` (passthrough); `array_copy(a(items))`→`[@items]` but `copy(a(items))`→`copy([items])` (partial — inner `a(items)` lowers but `copy` is unknown); `hash_copy(h(m))`→`{%m}` but `copy(h(m))`→`copy(h(m))` (passthrough). Perl recognition+lowering sites (code-read): assign STATEMENT-level = `ActionIR/Contracts.pm:1749/1753` (`\\bassign\\s*\\(`) + `ActionIR/DeclareMethod._lower_assign_method_statement` (244-263) -> `ActionIR/MethodLowering._lower_assign_statement` (1677-1714) => `$sym = src`; concat VALUE-expr = `ActionIR/MethodLowering._lower_method_value_expr` :538; array_copy = MethodLowering :1553 => `[@sym]`; hash_copy = MethodLowering :1533 => `{%sym}`. Alias seam = `ActionIR/MethodExpr._normalize_method_name` (:19-26, `s`->`scalar`/`a`->`array`/`h`->`hash`), applied at MethodExpr.pm:162 pre-lowering; the retired `tail`/`flatten`/`array_values` aliases were the inline-conditional pattern, removed in COMPAT-ALIAS-RETIREMENT.1 (commit 802dbe3). Rust: one `Engine::call_helper()` match in `rust/linkedspec-runtime/src/engine.rs` — `assign`@711, `array_copy`@735, `concat`@820, `hash_copy`@1833; aliases are pipe arms (`\"array\" | \"a\"`, `\"scalar\" | \"s\"`, `\"push_value\" | \"push\"`); NO recognition in the parser/compiler crates."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $p (q{set(scalar(x), 1)}, q{return(cat(\"a\",\"b\"))}, q{return(copy(a(items)))}, q{return(copy(h(m)))}) { print $p, \"  ->  \", LinkedSpec::call_spec_handler_subst(\"Top\", $p), \"\\n\" }'  # all four still pass through UNCHANGED until .1.4.1 lands (set/cat/copy unrecognized); compare with assign->`$x = 1`, concat->do-block, array_copy->`[@items]`, hash_copy->`{%m}`"
+---
+
+# `.1.4` ground truth: where the helper renames land, on both variants
+
+**Confirmed 2026-06-24** via `call_spec_handler_subst` probes + code-read (`SPEC-FORMAT-TERSE.1.4`
+ground-truth pass; direction ratified in ADR [0007](../decisions/0007-spec-format-terse-direction.md)).
+This is the engine grounding for the terse-format leaf "helper renames `assign`→`set`, `concat`→`cat`,
+`array_copy`/`hash_copy`→`copy`", and the reason that leaf was split by variant (Perl-first `.1.4.1` +
+Rust parity `.1.4.2`). Direction per ADR 0007: the **new terse names become canonical**, the **old names
+stay deprecated aliases that lower identically** (retirement is a later explicit leaf); both spellings must
+lower byte-identically and the 20 shipped specs (old names) must stay byte-identical.
+
+## Current state (the gap — dump-don't-guess)
+
+The three terse spellings are all currently **UNRECOGNIZED** — they pass through unchanged:
+
+| terse spelling | current lowering | canonical lowering (target) |
+| --- | --- | --- |
+| `set(scalar(x), 1)` | `set(scalar(x), 1)` (passthrough) | `assign(scalar(x), 1)` → `$x = 1` |
+| `cat("a","b")` | `cat("a","b")` (passthrough) | `concat("a","b")` → `do { my @__ls_concat_parts = (...); ... join('', @__ls_concat_parts) : undef }` |
+| `copy(a(items))` | `copy([items])` (partial — `a(items)` lowers, `copy` is unknown) | `array_copy(a(items))` → `[@items]` |
+| `copy(h(m))` | `copy(h(m))` (passthrough) | `hash_copy(h(m))` → `{%m}` |
+
+## Three distinct implementation shapes (why one alias does not cover the leaf)
+
+1. **`cat`→`concat` is a PURE rename.** The clean home is the alias-normalization seam
+   `_normalize_method_name` (`perl/LinkedSpec/ActionIR/MethodExpr.pm:19-26`), applied at
+   `MethodExpr.pm:162` *before* lowering — the same seam that already maps `s`→`scalar`, `a`→`array`,
+   `h`→`hash`. `concat` is a VALUE-expression method (`MethodLowering._lower_method_value_expr:538`), so a
+   normalized `cat` reaches it. *(Confirm the value-expr path runs through `_normalize_method_name` with a
+   probe before relying on it.)* The retired `tail`/`drop_last`/`flatten`/`array_values` aliases used the
+   **other** historical pattern — inline `|| $method eq 'alias'` conditionals — and were removed in
+   `COMPAT-ALIAS-RETIREMENT.1` (commit `802dbe3`); see [[rust-retired-array-aliases-not-added]].
+
+2. **`set`→`assign` is STATEMENT-level — not reached by `_normalize_method_name` alone.** `assign` is
+   recognized by the raw-text regex `\bassign\s*\(` at `ActionIR/Contracts.pm:1749/1753` and lowered via
+   `ActionIR/DeclareMethod._lower_assign_method_statement` (244-263) → `ActionIR/MethodLowering._lower_assign_statement`
+   (1677-1714) ⇒ `$sym = src`. Probe shows `set(...)` is **fully** unrecognized (not even partially
+   lowered), so `set` must be added to the statement-level recognition itself (extend the Contracts.pm
+   recognition / DeclareMethod dispatch). `.1.4.1` resolves the exact seam with `dump_parser_source`
+   (statement-level recognition relative to `_normalize_method_name`).
+
+3. **`copy` is NOT a pure rename — it unifies `array_copy` + `hash_copy`.** `array_copy` lowers to
+   `[@sym]` (`MethodLowering:1553`) and `hash_copy` to `{%sym}` (`MethodLowering:1533`) — different sigils.
+   A single `copy(name)` must resolve the symbol's kind at lowering time: add a dedicated `copy` dispatch
+   in `_lower_method_value_expr` that tries `extract_array_symbol_name` (→ `[@name]`) then
+   `extract_hash_symbol_name` (→ `{%name}`).
+
+## Rust parity (`.1.4.2`) sites
+
+All four canonical helpers live in **one** `Engine::call_helper()` match in
+`rust/linkedspec-runtime/src/engine.rs` (`assign`@711, `array_copy`@735, `concat`@820, `hash_copy`@1833;
+there is NO helper recognition in the parser/compiler crates). Aliases are **inline pipe-separated match
+arms** (`"array" | "a"`, `"scalar" | "s"`, `"push_value" | "push"`). So `.1.4.2`:
+
+- `set`: pipe onto the assign arm — `"assign" | "set" => { … }`.
+- `cat`: pipe onto the concat arm — `"concat" | "cat" => { … }`.
+- `copy`: a **separate** value-type-dispatching arm (`RuntimeValue::Array(a)` → clone array,
+  `RuntimeValue::Hash(h)` → clone hash, else resolve the named target) — a literal **cannot** repeat across
+  the `array_copy` and `hash_copy` arms, so `copy` gets its own arm (this matches the Perl array-then-hash
+  resolution). Lock with oracle fixtures + integration tests mirroring `.1.2.2`.
+
+## Why this splits `.1.4`
+
+A Perl-reference engine change and its lockstep Rust-parity obligation (ADR
+[0006](../decisions/0006-multi-backend-vision.md)) are separable and touch **unrelated ownership areas**
+(Perl `ActionIR/*` + `t/phase0_regression.t` + book vs Rust `engine.rs` + oracle corpus + cargo tests),
+which `COMMIT.md` forbids bundling — exactly mirroring `.1.1`→`.1.1.1`/`.1.1.2` and
+`.1.2`→`.1.2.1`/`.1.2.2`. `.1.4` is now a container owning the design + frontier; `.1.4.1` (Perl) is next.
+
+## Links
+
+- Tree: [[SPEC-FORMAT-TERSE]] (leaf `.1.4` → `.1.4.1` Perl / `.1.4.2` Rust parity).
+- Direction: [0007](../decisions/0007-spec-format-terse-direction.md) (terse direction, gradual-alias);
+  [0006](../decisions/0006-multi-backend-vision.md) (lockstep all variants);
+  [0002](../decisions/0002-all-target-actionir-ready-invariant.md) (ratio 1.0000).
+- Related: [[terse-bare-working-vars-engine-gaps]] (the `.1.2` ground-truth pass that this mirrors),
+  [[rust-retired-array-aliases-not-added]] (the two historical alias patterns; parity = match the
+  reference's recognized surface), [[retired-return-helpers-canonical-rewrite]] (`call_spec_handler_subst`
+  as the lowering probe), [[actionir-lowering-stack]], [[spec-format-brainstorm-rounds-1-3]].

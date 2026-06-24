@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-24 — SPEC-FORMAT-TERSE.1.4 — split into .1.4.1 (Perl reference) + .1.4.2 (Rust parity); record helper-rename lowering-site ground truth + KM card
+
+**Scope:** task tree (`docs/tasks/SPEC-FORMAT-TERSE.md`), task-tree index (`docs/TASK_TREE.md`), KM fact card
+(`docs/knowledge/terse-helper-rename-lowering-sites.md` + regenerated `KNOWLEDGE_MAP.md`), live docs. **No
+engine or book change** — this is a tree-split slice that owns the design + frontier only.
+
+**Why split.** PNT (user-directed loop, fresh session) picked `.1.4` (helper renames `assign`→`set`,
+`concat`→`cat`, `array_copy`/`hash_copy`→`copy`) and, per the splitting rule, split it after a TOOLBOX-first
+`call_spec_handler_subst` ground-truth pass. The change spans **two variants with separable ownership** (Perl
+`ActionIR/*` + `t/phase0_regression.t` + book vs Rust `engine.rs` + oracle corpus + cargo tests — COMMIT.md
+forbids bundling), a lockstep ADR 0006 obligation — mirroring `.1.1`→`.1.1.1`/`.1.1.2` and
+`.1.2`→`.1.2.1`/`.1.2.2`. `.1.4` → container; children `.1.4.1` (Perl) + `.1.4.2` (Rust parity).
+
+**Ground truth (own probes, dump-don't-guess; `perl -Iperl` → `perl/LinkedSpec.pm`).** All three terse
+spellings are currently UNRECOGNIZED: `set(scalar(x),1)`→`set(scalar(x), 1)` (vs `assign`→`$x = 1`),
+`cat("a","b")`→`cat("a","b")` (vs `concat`→the concat do-block), `copy(a(items))`→`copy([items])` partial /
+`copy(h(m))`→`copy(h(m))` (vs `array_copy`→`[@items]` / `hash_copy`→`{%m}`). **Three implementation shapes:**
+(i) `cat`→`concat` is a pure rename → `_normalize_method_name` (`ActionIR/MethodExpr.pm:19-26`, pre-lowering);
+(ii) `set`→`assign` is STATEMENT-level (`ActionIR/Contracts.pm:1749/1753` `\bassign\s*\(` + `DeclareMethod` +
+`MethodLowering._lower_assign_statement`) — NOT reached by `_normalize_method_name`, so `.1.4.1` extends the
+statement-level recognition; (iii) `copy` is NOT a pure rename — it unifies `array_copy`/`hash_copy`, needing a
+dedicated dispatch in `MethodLowering._lower_method_value_expr` resolving array-then-hash symbol kind
+(`[@name]` else `{%name}`). **Rust:** all four canonical helpers live in one `Engine::call_helper()` match
+(`rust/linkedspec-runtime/src/engine.rs`: `assign`@711, `array_copy`@735, `concat`@820, `hash_copy`@1833;
+aliases = pipe arms); `.1.4.2` pipes `set`/`cat` and adds a separate value-type-dispatching `"copy"` arm.
+
+**Direction (ADR 0007).** New terse names become canonical, old names stay deprecated aliases that lower
+identically (retirement is a later explicit leaf); both spellings must lower byte-identically and the 20
+shipped specs (old names) must stay byte-identical.
+
+**Validation.** `scripts/check_doctrines.sh` (MEMORY-ARCH + KNOWLEDGE-MAP) EXIT 0; KM map regenerated (49
+facts, 309 question keys). No engine/book change ⇒ phase0 N/A to the split slice (baseline 971 green; cargo
+252 green). Frontier → `.1.4.1`.
+
 ## 2026-06-24 — SPEC-FORMAT-TERSE.1.2.2 — Rust lockstep parity for arg-position bare working-variable auto-existence (engine + oracle + 4 integration locks)
 
 **Scope:** Rust engine (`rust/linkedspec-runtime/src/engine.rs`), oracle generator
