@@ -1,6 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-24 — SPEC-FORMAT-TERSE.1.2 — split into .1.2.1 (Perl, Channel 1) + .1.2.2 (Rust parity); record bare-working-var ground truth + KM card
+
+**Scope:** task tree (`docs/tasks/SPEC-FORMAT-TERSE.md`) + new KM fact card
+(`docs/knowledge/terse-bare-working-vars-engine-gaps.md`, map regenerated) + live docs (`MEMORY.md`,
+`CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`). **DOCS/TREE/KM only — no engine,
+spec, test, or book change.** The honest first outcome of PNT-picking `.1.2` (remove container wrappers +
+type inference): the leaf is too broad for one signoff slice, so it is split after a TOOLBOX-first
+ground-truth pass (mirroring the `.1.1`→`.1.1.1`/`.1.1.2` split).
+
+**Ground truth (TOOLBOX-first, dump-don't-guess).** `dump_parser_source` probes via `perl -Iperl
+-MLinkedSpec` (`generate_only` + `runtime_ctx_ref`; scratchpad `probe_terse_1_2.pl` + isolated
+one-liners; confirmed `perl -Iperl` loads `perl/LinkedSpec.pm` over the stale `PERL5LIB=.../pgen/fx/perl`).
+A **bare** (un-wrapped) working variable has three behaviors, splitting into two inference channels:
+- **Channel 1 — arg position:** a bare name already lowers to the correctly-sigil'd variable
+  (`assign(count, v)` → `$count = v` via ValueExpr `_extract_scalar_symbol_name`'s `^(\w+)$` fallback,
+  `ValueExpr.pm:59`; `push_value(items,..)` / `-> w.push(items)` → `push @items, ..`) **but gets no
+  auto-`my`** — the `.1.1.1` collector regex (`EmitContext.pm:810`) matches only WRAPPED
+  `scalar/array/hash(NAME)`, so a bare var used only in arg positions is a **leaky package global** (the
+  exact `.1.1.1` hazard, still open for bare forms).
+- **Channel 2 — value position:** a bare word is **not** recognized as a variable read —
+  `return(count)` → bareword `return count ;` (not `$count`). Making bare words read as variables needs
+  var/call/literal disambiguation + RHS-shape inference (`[]`→array, `{}`→hash), which couples with `.1.5`
+  literal syntax.
+- **Wrapped refs already auto-exist** (the `.1.1.1` result: `scalar(count)`→`my $count;`,
+  `array(items)`→`my @items;`).
+
+**Split.** `.1.2` → container; added `.1.2.1` (Perl, Channel 1: arg-position bare working-var
+auto-existence — the self-contained, lowest-risk first slice that directly extends the `.1.1.1` collector
+and closes the leaky-global gap) + `.1.2.2` (Rust lockstep parity, ADR 0006). Channel 2 leaves
+(`.1.2.3`+) are **not** pre-published — added once `.1.2.1` lands and `.1.5` is designed (no vague
+placeholders). Wrappers stay accepted aliases during migration (gradual, ADR 0007); the shipped corpus
+uses them pervasively (declare 87 / assign 103 / scalar 133 / array 134 / hash 36), so they must keep
+compiling byte-identically. Frontier → `.1.2.1`.
+
+**Verification:** `dump_parser_source` ground-truth probes (above); `perl -c` clean on the `.1.2` landing
+modules (`ValueExpr.pm`, `MethodLowering.pm`, `EmitContext.pm`); `scripts/check_memory_architecture.sh`,
+`scripts/check_doctrines.sh`, and the KM gate all EXIT 0 (KM card added + map regenerated). No engine/book
+change, so the phase0 regression gate is N/A to this split slice (phase0 stays 968, untouched).
+
 ## 2026-06-24 — SPEC-FORMAT-TERSE.1.1.2 — Rust lockstep parity for auto-existing working variables (oracle + integration locks; NO engine change)
 
 **Scope:** Rust variant test/oracle surface (`tools/gen_oracle_corpus.pl` + 5 generated `autoexist_*`
