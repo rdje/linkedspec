@@ -10,7 +10,10 @@ identically. No Perl implementation knowledge is required.
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a
 > typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`, or the `s()`/`a()`/`h()` aliases)
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
-> required first. A backend MUST supply the same auto-existence: a wrapper-referenced variable
+> required first. The wrapper is also optional in a **type-implying argument position**: the scalar
+> target of `assign(name, …)` and the array target of `push_value(name, …)` / `push_nonempty(name, …)`
+> auto-exist from a **bare** name too, with the kind fixed by that position. A backend MUST supply
+> the same auto-existence: a wrapper- or position-referenced variable
 > with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
 > carried across parses or recursive re-entries. `declare(...)` is the explicit form: use it for an
 > initializer, an explicit kind, or a grouped rule-state preamble. The DSL literals
@@ -42,8 +45,8 @@ identically. No Perl implementation knowledge is required.
 ### `assign(name, value)`
 - **Signature**: `assign(name: string, value: expr)`
 - **Returns**: void
-- **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the typed-wrapper reference auto-creates it as a per-invocation working variable of the wrapper's kind (see the note at the top of this section); otherwise it reassigns the existing variable.
-- **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper.
+- **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
+- **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper; a **bare** target — `assign(name, …)` — auto-exists as a scalar (the assign target position is scalar).
 
 ## 2. Scalar Helpers
 
@@ -250,12 +253,13 @@ identically. No Perl implementation knowledge is required.
 - **Signature**: `push_value(target: array, value: expr)`
 - **Returns**: void
 - **Behavior**: Appends a value to the named accumulator. The preferred explicit form over convention-based `push(Child)`.
-- **Edge cases**: Value can be any expression type. Undef values are appended as-is (use `push_nonempty` to skip).
+- **Edge cases**: Value can be any expression type. Undef values are appended as-is (use `push_nonempty` to skip). The target may be wrapped (`array(items)`) or a **bare** name (`items`); a bare target auto-exists as an array.
 
 ### `push_nonempty(arr, value)`
 - **Signature**: `push_nonempty(target: array, value: expr)`
 - **Returns**: void
 - **Behavior**: Appends the value only if it is defined and non-empty. Skips undef and empty strings.
+- **Edge cases**: Like `push_value`, the target may be wrapped (`array(items)`) or a **bare** name (`items`) that auto-exists as an array.
 
 ### `count(arr)`
 - **Signature**: `count(arr: array)`

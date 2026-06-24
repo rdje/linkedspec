@@ -696,8 +696,11 @@ sub _build_action_rewriter_meta {
 }
 
 # Wrapper-helper -> Perl sigil for auto-existing working variables (SPEC-FORMAT-TERSE.1.1.1).
-# scalar/s -> $, array/a -> @, hash/h -> %. The sigil is taken from the wrapper only;
-# RHS / arg-position type inference is a later leaf (.1.2), not this one.
+# scalar/s -> $, array/a -> @, hash/h -> %. Used for the WRAPPED-form references; the
+# sigil is taken from the wrapper. Bare (un-wrapped) names in type-implying helper arg
+# positions take a POSITION-implied sigil instead — SPEC-FORMAT-TERSE.1.2.1, Channel 1
+# (see _collect_auto_working_var_decls). Full RHS-shape / value-position bare-word
+# inference is a later leaf (.1.2 Channel 2), not these.
 my %AUTO_WORKING_VAR_WRAPPER_SIGIL = (
  scalar => '$', s => '$',
  array  => '@', a => '@',
@@ -770,18 +773,28 @@ sub _mask_action_code_literals {
 
 #------------------------------------------------------------------------------
 # Function: _collect_auto_working_var_decls
-# Purpose : SPEC-FORMAT-TERSE.1.1.1 — auto-existing working variables. Scan every
-#           RAW (pre-lowering) action-code block of a rule for typed-wrapper
-#           variable references — scalar(NAME)/array(NAME)/hash(NAME) and the
-#           s()/a()/h() aliases with a single bare-identifier argument (NOT the
-#           2-arg scalar(container,key) read, which has a comma) — and return the
-#           preamble `my $NAME`/`@NAME`/`%NAME` declarations the engine must supply
-#           so the variable is a per-invocation lexical rather than a leaky package
-#           global (generated handlers are non-strict — see KM card
-#           working-vars-no-strict-need-my-lexical). The sigil is taken from the
-#           wrapper. Deduped against (a) the per-rule accumulator @<label> and
-#           (b) any name already declared with the same sigil in the LOWERED handler
-#           code (declare(...) or raw `my`), so a spec that already declares its
+# Purpose : Auto-existing working variables. Scan every RAW (pre-lowering)
+#           action-code block of a rule for working-variable references and return
+#           the preamble `my $NAME`/`@NAME`/`%NAME` declarations the engine must
+#           supply so each variable is a per-invocation lexical rather than a leaky
+#           package global (generated handlers are non-strict — see KM card
+#           working-vars-no-strict-need-my-lexical). Two reference forms are collected:
+#             (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED typed-wrapper refs
+#                 scalar(NAME)/array(NAME)/hash(NAME) and the s()/a()/h() aliases with
+#                 a single bare-identifier argument (NOT the 2-arg scalar(container,key)
+#                 read, which has a comma). Sigil taken from the wrapper.
+#             (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE (un-wrapped) names in a
+#                 type-implying helper arg position: the scalar target of
+#                 assign(NAME, ...) and the array target of push_value(NAME, ...) /
+#                 push_nonempty(NAME, ...). Such a bare name already LOWERS to the
+#                 correctly-sigil'd variable but otherwise gets no `my` (leaky global).
+#                 Sigil implied by the position ($ for assign, @ for the push family).
+#                 The child-append push(Rule[, target]) / fluent .push(target) target
+#                 (first arg is a rule name — ambiguous) and the bare hash target
+#                 (value-position read — Channel 2) are deliberately NOT collected here.
+#           Deduped against (1) the per-rule accumulator @<label> and (2) any name
+#           already declared with the same sigil in the LOWERED handler code
+#           (declare(...) or raw `my`), so a spec that already declares/wraps its
 #           working vars emits byte-identical generated source (no double `my`).
 # Args    : ($rule_ir, $lowered_text)  # $lowered_text = concatenated lowered code
 # Returns : arrayref of "my <sigil><name>;" declaration strings (possibly empty)
@@ -801,20 +814,39 @@ sub _collect_auto_working_var_decls {
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{bcode_entries} || []};
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{and_icode_entries} || []};
 
- # Collect ordered-unique (sigil, name) wrapper references from the literal-masked code.
+ # Collect ordered-unique (sigil, name) working-variable references from the
+ # literal-masked code. $record adds one ref, skipping DSL literals / engine-reserved
+ # locals and de-duplicating by sigil+name.
  my @collected;
  my %seen;
+ my $record = sub {
+  my ($sigil, $name) = @_;
+  return unless defined($sigil) && defined($name);
+  return if $AUTO_WORKING_VAR_RESERVED{$name};   # DSL literal or engine-reserved local
+  my $dedup_key = $sigil . $name;
+  return if $seen{$dedup_key}++;
+  push @collected, { sigil => $sigil, name => $name };
+ };
  for my $block (@raw_blocks) {
   next unless defined($block) && length($block);
   my $masked = _mask_action_code_literals($block);
+
+  # (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED typed-wrapper refs (sigil from the wrapper).
   while ($masked =~ /\b(scalar|array|hash|s|a|h)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
-   my ($wrapper, $name) = ($1, $2);
-   my $sigil = $AUTO_WORKING_VAR_WRAPPER_SIGIL{$wrapper};
-   next unless defined $sigil;
-   next if $AUTO_WORKING_VAR_RESERVED{$name};   # DSL literal or engine-reserved local
-   my $dedup_key = $sigil . $name;
-   next if $seen{$dedup_key}++;
-   push @collected, { sigil => $sigil, name => $name };
+   $record->($AUTO_WORKING_VAR_WRAPPER_SIGIL{$1}, $2);
+  }
+
+  # (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
+  #     arg position. The bare name already lowers to the correctly-sigil'd variable
+  #     (assign -> $NAME via _lower_assign_statement's scalar-first extraction;
+  #     push_value/push_nonempty -> @NAME) but otherwise gets no preamble `my`. The
+  #     `\s*,` after the name means a WRAPPED target (scalar(x)/array(x), whose name is
+  #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
+  while ($masked =~ /\bassign\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
+   $record->('$', $1);   # assign target lowers to a scalar
+  }
+  while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
+   $record->('@', $1);   # push_value / push_nonempty target lowers to an array
   }
  }
  return [] unless @collected;

@@ -43,13 +43,29 @@ I { declare(scalar, count) }
 
 An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
 
+### The wrapper is optional in a type-implying argument position
+
+A working variable also auto-exists when it appears **bare** (without a `scalar()` / `array()` / `hash()` wrapper) in a helper argument position that already implies its kind. In those positions the wrapper is optional — each pair below is equivalent:
+
+```text
+# scalar target of assign(...) — the bare name is a scalar
+assign(scalar(count), match_group(0))
+assign(count, match_group(0))
+
+# array target of push_value(...) / push_nonempty(...) — the bare name is an array
+push_value(array(items), match_group(0))
+push_value(items, match_group(0))
+```
+
+The kind comes from the **position**: the target of `assign(...)` is a scalar; the target of `push_value(...)` and `push_nonempty(...)` is an array. The variable is the same fresh per-invocation working value described above. (Reading a bare name back as a value — `return(count)` instead of `return(scalar(count))` — and inferring a kind from a value's shape are a later evolution step; for now, read working variables back through their wrapper.)
+
 `declare(...)` stays supported and is still the right choice when you want to:
 
 - give the variable an **initializer** — `declare(scalar, count=0)`;
 - state the **kind and intent** explicitly for readers; or
 - gather a rule's working state in one visible `I { ... }` preamble.
 
-The shipped specs and the examples in this chapter still use `declare(...)` for clarity. Note that the kind is taken from the wrapper only — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash. Inferring the kind from a right-hand side or an argument position is a separate, later evolution step.
+The shipped specs and the examples in this chapter still use `declare(...)` and the typed wrappers for clarity. Where a name is wrapped, the wrapper decides its kind — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash; where a name is bare in a type-implying argument position, that position decides it. Inferring the kind from a value's shape (a right-hand side) is still a separate, later evolution step.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `a(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 

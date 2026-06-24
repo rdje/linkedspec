@@ -43850,6 +43850,125 @@ subtest 'spec_format_terse_1_1_1_reserved_literals_are_not_auto_declared' => sub
     like($src, qr/my \$x\b/, 'a genuine adjacent working variable (s(x)) is still auto-declared');
 };
 
+subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
+    # SPEC-FORMAT-TERSE.1.2.1 (ADR 0007), Channel 1: a BARE (un-wrapped) working variable
+    # used in a type-implying helper arg position auto-exists with the POSITION-implied sigil
+    # -- the scalar target of assign(NAME, ...) and the array target of push_value(NAME, ...)
+    # / push_nonempty(NAME, ...). Before this leaf such a bare var lowered to the right
+    # sigil'd variable but got NO `my`, leaving a leaky package global (non-strict handlers
+    # -- KM card terse-bare-working-vars-engine-gaps). The DECISIVE, isolating proof is
+    # source-level: with no wrapper or declare anywhere, the engine now emits exactly one
+    # preamble `my` (before the while(1) dispatch loop = per-invocation lexical, not leaky).
+    # (Reading a purely-bare var back through the DSL needs a wrapper, which would itself
+    # trigger the .1.1.1 wrapped path -- so isolation is proven at the generated-source level;
+    # the run-twice no-leak BEHAVIOR is locked separately below.)
+    plan tests => 7;
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    # (a) bare assign target -> scalar. The LX read is a Channel-2 bareword (out of scope),
+    #     so `count` appears ONLY in the bare assign arg position -- nothing wrapped here.
+    my $scalar_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(count, match_group(0)) }\n");
+    my $n_scalar = () = ($scalar_src =~ /my \$count\b/g);
+    is($n_scalar, 1, 'bare assign(count, ...) auto-supplies exactly one `my $count`');
+    unlike($scalar_src, qr/my \@count\b/,
+        'bare assign target is a SCALAR -- no `my @count` (sigil follows the assign lowering)');
+    ok(index($scalar_src, 'my $count;') >= 0
+        && index($scalar_src, 'my $count;') < index($scalar_src, 'while (1)'),
+        'the auto `my $count` sits in the preamble before the while(1) dispatch loop (per-invocation, not leaky)');
+    unlike($scalar_src, qr/my [\$\@\%]match_group\b/,
+        'only the bare TARGET is auto-declared -- the value helper match_group(...) is not');
+
+    # (b) bare push_value target -> array.
+    my $array_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n");
+    my $n_array = () = ($array_src =~ /my \@items\b/g);
+    is($n_array, 1, 'bare push_value(items, ...) auto-supplies exactly one `my @items`');
+
+    # (c) bare push_nonempty target -> array.
+    my $nonempty_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_nonempty(items, match_group(0)) }\n");
+    like($nonempty_src, qr/my \@items\b/, 'bare push_nonempty(items, ...) auto-supplies `my @items`');
+
+    # (d) deferral boundary: the child-append fluent .push(target) (whose paired `push(Rule, ...)`
+    #     has a RULE name as first arg -- ambiguous) is NOT collected by Channel 1.
+    my $fluent_src = $gen->("top:: -> w.push(items)\n LX { return(count) }\n\nw : /(\\w+)/  I.return(match_group(0))\n");
+    unlike($fluent_src, qr/my \@items\b/,
+        'fluent .push(items) child-append target is deferred (not auto-declared in .1.2.1)');
+};
+
+subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_declare_single_my' => sub {
+    # The Channel-1 bare-arg collection shares the same de-dup as .1.1.1: by sigil+name,
+    # against the @<label> accumulator and any same-sigil `my` already in the lowered code.
+    # So a name used both bare and wrapped, or bare and declared, still emits exactly one `my`,
+    # and a WRAPPED target is never double-counted by the bare-arg pattern (the `\s*,` after
+    # the name means a wrapped target -- name followed by `(` -- does not match path (b)).
+    plan tests => 4;
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    my $mix_scalar = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(count, num_add(coalesce(s(count), 0), 1)) }\n"
+                          . "LX {return(s(count))}\n");
+    my $n1 = () = ($mix_scalar =~ /my \$count\b/g);
+    is($n1, 1, 'bare assign(count,...) + wrapped s(count) dedup to exactly one `my $count`');
+
+    my $wrapped_assign = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(count), match_group(0)) }\n"
+                              . "LX {return(s(count))}\n");
+    my $n2 = () = ($wrapped_assign =~ /my \$count\b/g);
+    is($n2, 1, 'assign(scalar(count),...) wrapped target emits exactly one `my $count` (bare-arg pattern does not double-match a wrapped target)');
+
+    my $declared = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(count, match_group(0)) }\n"
+                        . "I.declare(scalar, count)\n"
+                        . "LX {return(s(count))}\n");
+    my $n3 = () = ($declared =~ /my \$count\b/g);
+    is($n3, 1, 'declare(scalar,count) + bare assign(count,...) dedup to exactly one `my $count`');
+
+    my $mix_array = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n"
+                         . "LX {return(array_copy(array(items)))}\n");
+    my $n4 = () = ($mix_array =~ /my \@items\b/g);
+    is($n4, 1, 'bare push_value(items,...) + wrapped array(items) dedup to exactly one `my @items`');
+};
+
+subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
+    # Integrated behavior: a bare arg-position working var (mutated bare, read back through a
+    # wrapper) is a PER-INVOCATION lexical -- running the SAME parser twice in-process gives
+    # the same result. A leaky package global would accumulate across parses. This also guards
+    # the cross-channel de-dup: a stray second `my` would not corrupt the value (preamble runs
+    # once), but it is caught by the single-`my` counts above; here we lock the value itself.
+    plan tests => 6;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
+    };
+
+    my $scalar_spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(count, num_add(coalesce(s(count), 0), 1)) }\n"
+                    . "LX {return(s(count))}\n";
+    my $sp = eval { LinkedSpec::Get(\$scalar_spec) };
+    ok(ref($sp) eq 'CODE', 'bare-assign counter compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($sp, 'a b c'), '3', 'bare assign(count,...) counter returns 3 for 3 words');
+    is($run->($sp, 'a b c'), '3', 're-running the SAME parser still returns 3 (per-invocation my, not a leaky global)');
+
+    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n"
+                   . "LX {return(array_copy(array(items)))}\n";
+    my $ap = eval { LinkedSpec::Get(\$array_spec) };
+    ok(ref($ap) eq 'CODE', 'bare-push_value accumulator compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($ap, 'a b c'), '["a","b","c"]', 'bare push_value(items,...) accumulator collects all 3 words');
+    is($run->($ap, 'a b c'), '["a","b","c"]', 're-running the SAME parser still returns 3 items (per-invocation my, not a leaky global)');
+};
+
 done_testing();
 
 sub discover_specs {

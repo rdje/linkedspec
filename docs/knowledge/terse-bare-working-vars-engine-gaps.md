@@ -27,6 +27,21 @@ grounding for the terse-format leaf "remove container wrappers + add type infere
 leaf was split by inference channel (Perl-first + Rust parity). Builds on
 [[working-vars-no-strict-need-my-lexical]] (the `.1.1` wrapped-form scoping model).
 
+## Update (2026-06-24): Channel 1 CLOSED by `.1.2.1`
+
+Behavior (1) below is now **fixed for the unambiguous first-arg value-helper positions**. `SPEC-FORMAT-TERSE.1.2.1`
+extended the `.1.1.1` collector `_collect_auto_working_var_decls` (`perl/LinkedSpec/RuleIR/EmitContext.pm`)
+with a second pass that also scans the literal-masked RAW blocks for a **bare** working var in a type-implying
+first-arg position and emits the **position-implied** `my`: `assign(NAME, …)` → `my $NAME` (scalar — the
+assign target always lowers scalar-first), `push_value(NAME, …)` / `push_nonempty(NAME, …)` → `my @NAME`
+(array). The `\s*,` after the bare name keeps a WRAPPED target (`scalar(x)`/`array(x)`) on the wrapped path
+(no double-collection); both dedup to one `my`. All 20 shipped specs stayed byte-identical; +3 phase0 locks
+(`spec_format_terse_1_2_1_*`) → phase0 971 green, gate EXIT 0. **Still open (Channel 2):** the child-append
+`push(Rule[, target])` / fluent `.push(target)` target (first arg is a rule name — ambiguous) and the bare
+**hash** target (no clean bare arg position — `set_key(name,…)` is a value-position read), plus value-position
+bare-word reads (`return(count)` still a bareword) + RHS-shape inference. Rust lockstep parity for `.1.2.1`
+is the next leaf `.1.2.2`.
+
 ## The three behaviors (dump-don't-guess)
 
 A working variable referenced **only through a wrapper** is the `.1.1.1` path and already works. The

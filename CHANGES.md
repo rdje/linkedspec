@@ -1,6 +1,59 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-24 — SPEC-FORMAT-TERSE.1.2.1 — Perl arg-position bare working-variable auto-existence (Channel 1; engine + book + 3 phase0 locks)
+
+**Scope:** engine (`perl/LinkedSpec/RuleIR/EmitContext.pm`), tests (`t/phase0_regression.t`, +3 subtests),
+book (`docs/linkedspec-book/src/dsl/declaration-helper-reference.md`,
+`docs/linkedspec-book/src/appendix/helper-contract-catalog.md`,
+`docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md`), task tree, KM card, live docs.
+First implementation child of the `.1.2` split (Channel 1, Perl reference). Wrappers/`declare` stay optional
+aliases (gradual, ADR 0007).
+
+**What changed.** Extended the `.1.1.1` rule-level auto-`my` collector
+`RuleIR::EmitContext::_collect_auto_working_var_decls` with a second collection pass (refactored the per-ref
+add into a shared `$record` closure that handles reserved-literal exclusion + sigil+name dedup). Alongside
+the WRAPPED typed-wrapper refs (`scalar/array/hash(NAME)` + `s/a/h`), it now also scans the literal-masked
+RAW blocks for a **bare** (un-wrapped) working variable in a type-implying *first-arg* helper position and
+records it with the **position-implied** sigil:
+- `assign(NAME, …)` → `my $NAME` (scalar — `_lower_assign_statement` extracts the scalar symbol first, so a
+  bare assign target always lowers to `$NAME`),
+- `push_value(NAME, …)` / `push_nonempty(NAME, …)` → `my @NAME` (array).
+
+The `\s*,` after the bare name means a WRAPPED target (`scalar(x)`/`array(x)`, whose name is followed by
+`(`) is NOT matched by the bare pattern — it stays on the wrapped path; both dedup (by sigil+name, vs the
+`@<label>` accumulator and any same-sigil `my` already in the lowered code) to exactly one `my`.
+
+**Ground truth (TOOLBOX-first, dump-don't-guess).** `dump_parser_source` probes (scratchpad
+`probe_terse_1_2_1.pl`, isolated bare forms with no wrapper anywhere; `perl -Iperl` confirmed it loads
+`perl/LinkedSpec.pm` over the stale `PERL5LIB`): before, bare `assign(count,…)`→`$count = …` and
+`push_value(items,…)`→`push @items` with NO preamble `my` (leaky package global; non-strict handlers);
+after, each emits the `my` once in the preamble before `while(1)`. The `assign(pair, set_key(hash(pair),…))`
+case now correctly declares BOTH `my %pair` (from the wrapped `hash(pair)`) AND `my $pair` (the bare assign
+target — a separate scalar holding the hashref, previously leaky).
+
+**Verification.** Generated source for all 20 shipped specs, mine-vs-stashed, diffed = **0 diff** (the corpus
+has no un-wrapped arg-position targets — cleaner than `.1.1.1`'s 19/20). `perl -c` clean on `EmitContext.pm`
++ `LinkedSpec.pm` + the test. **+3 phase0 subtests / 17 assertions** (`spec_format_terse_1_2_1_*`: bare
+scalar+array+push_nonempty auto-exist with the `my` in the preamble before `while(1)`; the sigil follows the
+lowering — no `my @count`; only the target (not the value helper) is declared; deferred `.push(target)`
+boundary; dedup vs wrapped/declare = single `my`; integrated per-invocation no-leak run-twice). **phase0
+968→971 green**; `bash tools/run_ci_local.sh` **EXIT 0** ("[ci] local CI gate passed", 971); ratio 1.0000
+(phase0 all-target guard); `mdbook build` EXIT 0.
+
+**Book (3 pages).** Taught wrapper-optional-in-a-type-implying-argument-position (with `assign`/`push_value`
+equivalence pairs) and corrected the now-outdated "inferring the kind from an argument position is a later
+step" note in `declaration-helper-reference.md`; extended the auto-existence notes + the
+`assign`/`push_value`/`push_nonempty` contract entries in `helper-contract-catalog.md` §1 and the containers
+note in `value-container-flow-helper-reference.md`. Variant-agnostic (no Perl/sigil internals).
+
+**Scope (signoff): Channel 1 = unambiguous first-arg value-helper positions only.** The child-append
+`push(Rule[, target])` / fluent `.push(target)` target is DEFERRED (its first arg is a *rule name* —
+ambiguous), and a bare HASH target has no clean arg-position trigger (`assign`'s target lowers scalar-first;
+`set_key(name,…)` is a value-position read) — both are Channel 2 (value-position bare-word reads + RHS-shape),
+not this leaf. KM card [[terse-bare-working-vars-engine-gaps]] updated (Channel 1 closed). Frontier →
+`.1.2.2` (Rust lockstep parity).
+
 ## 2026-06-24 — SPEC-FORMAT-TERSE.1.2 — split into .1.2.1 (Perl, Channel 1) + .1.2.2 (Rust parity); record bare-working-var ground truth + KM card
 
 **Scope:** task tree (`docs/tasks/SPEC-FORMAT-TERSE.md`) + new KM fact card
