@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.3 — split mutation surface by mechanism; record push/operator ground truth
+
+**Scope:** task tree, task-tree index, Knowledge Map fact card + generated map, live docs. No engine, test,
+fixture, or mdBook behavior change.
+
+**Ground truth:** `.1.3` cannot be one signoff implementation slice:
+- `set(name, "ok")` is already satisfied by `.1.4`: it lowers byte-identically to `assign(name, "ok")` and runs.
+- `push_value(items, "a")` lowers/runs today, but requested `push(items, "a")` passes through Perl as raw
+  `push(items, "a")`, fails handler compilation, and collides with the existing child-call convention
+  `push(Rule[, target[, index]])`.
+- `set_key(name, "k", "v")` works in Perl as a pure hash-valued expression in return/source paths, but not as
+  a standalone mutation statement; Rust only changes a hash when arg0 already evaluates to a hash.
+- `name = "ok"`, `items += "a"`, and `name["k"] = "v"` pass through as invalid/raw Perl; Rust's `CodeBlock`
+  AST has no assignment or plus-equals statement form.
+
+**Tree update:** `.1.3` is now a container. `.1.3.1` scalar function-form audit is done by prior `.1.4`
+evidence; `.1.3.2` is next (array function spelling disambiguation before code); `.1.3.3` owns hash mutation
+semantics; `.1.3.4` owns operator syntax. KM card `terse-mutation-surface-ground-truth` added.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.4.2 — Rust recognize terse helper renames (engine + oracle + integration locks)
 
 **Scope:** Rust runtime engine (`rust/linkedspec-runtime/src/engine.rs`), Rust integration tests, oracle corpus

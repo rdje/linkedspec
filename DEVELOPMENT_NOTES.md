@@ -1,6 +1,28 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.3 — a mutation surface with two spellings per operation is still multiple
+  mechanisms; the dangerous part is `push`, because the desired terse spelling overlaps an intentionally-live
+  child-call convention): Split `.1.3` instead of coding. Durable points. (1) **Audit what prior leaves already
+  closed before adding code.** `set(name,val)` is not new work anymore: `.1.4.1` added `set` to the Perl
+  statement recognizers and `.1.4.2` added the Rust alias. Fresh probes confirm `set(name,"ok")` and
+  `assign(name,"ok")` both lower to `$name = "ok"` and a minimal parser returns `"ok"`. `.1.3.1` can be
+  closed as an audit, not another implementation. (2) **`push(name,value)` is a syntax collision, not just a
+  missing alias.** The live Perl surface already uses `push(Rule)`, `push(Rule,target)`, and indexed variants
+  for child calls; the accumulator KM card says that convention is intentional, not debt. A two-bare-word form
+  can mean "call rule `Item` into target `items`" or "append variable `item` into array `items`" without a
+  disambiguation rule. Today `push_value(items,"a")` lowers/runs, while `push(items,"a")` passes through as raw
+  Perl and fails handler compilation. Rust is already ahead here (`"push_value" | "push"`), so the Perl
+  reference/policy must decide the contract before Rust behavior is treated as canonical. (3) **`set_key` has a
+  pure-value form but not a statement mutation form.** Perl `return(set_key(name,"k","v"))` can return a hash
+  value because hash symbol extraction accepts the bare name in that value path; standalone
+  `set_key(name,...)` does not lower as a mutation statement. Rust only updates if arg0 is already a
+  `RuntimeValue::Hash`. That is its own leaf and likely intersects Channel 2 bare value-position semantics.
+  (4) **Operators are a parser/AST feature.** `name = "ok"`, `items += "a"`, and `name["k"] = "v"` pass through
+  as raw/invalid Perl, and Rust `CodeBlock` parses only expression statements (`call`, variable, indexed var,
+  literal, fluent chain). Operator support needs explicit statement forms on both variants; it should follow
+  the function-form contract, not invent it. No engine/book change; KM card added; next frontier `.1.3.2`.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.4.2 — Rust parity for a Perl helper rename must still respect the Rust
   runtime's value model; `copy` is a dispatching helper, not a repeatable match literal): Brought the Rust
   runtime to lockstep parity for the `.1.4.1` helper renames. Durable points. (1) **`set` and `cat` are real
