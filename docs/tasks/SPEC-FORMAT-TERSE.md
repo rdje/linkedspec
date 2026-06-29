@@ -6,7 +6,9 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.6` DONE; Round 1 closed** — Array end-mutation methods landed on Perl
+- Last updated: `2026-06-29` (**`.2.1` IN PROGRESS / OWNED BEFORE CODE** — Round 2 expression-valued blocks
+  are now the active PNT leaf; KM/TOOLBOX/code-read ground truth and split-before-code come first. Prior
+  **`.1.6` DONE; Round 1 closed** — Array end-mutation methods landed on Perl
   and Rust: `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()`
   are statement-level mutations over named working arrays, with bare / `array(...)` / `a(...)` receivers.
   Phase0 is **990 green** and the oracle corpus is **33 fixtures**. Frontier -> **`.2.1`** (Round 2
@@ -1192,7 +1194,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Children: `.2.1`, `.2.2`, `.2.3`
 
 - ID: `SPEC-FORMAT-TERSE.2.1`
-  Status: `pending`
+  Status: `in_progress` (2026-06-29 — owned before code; ground-truth/split first)
   Goal: Expression-valued blocks — `{ ... }` returns its value (last statement or explicit `return()`)
   Acceptance: A block evaluates to its last statement's value or an explicit `return(...)`; blocks
     compose as expressions.
@@ -1296,7 +1298,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.3` | `done` 2026-06-29 | Rust shape-literal value parity landed: direct `[]` / `{}` values parse and evaluate recursively, with oracle/integration locks and the `.1.2.3.5.4` target-kind boundary preserved. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `done` 2026-06-29 | Rust RHS target-kind inference parity landed: direct shape RHS initializes/replaces array/hash working variables for bare or matching typed aggregate targets, while explicit `scalar(...)` keeps scalar-held payload assignment. |
 | — | `SPEC-FORMAT-TERSE.1.6` | `done` 2026-06-29 | Round 1 array end-mutation methods landed on Perl and Rust; phase0 990 green; oracle corpus 33 fixtures. Round 1 is closed. |
-| 1 | `SPEC-FORMAT-TERSE.2.1` | `pending` | Round 2 expression-valued blocks — next PNT leaf; ground-truth/split before code. |
+| 1 | `SPEC-FORMAT-TERSE.2.1` | `in_progress` | Round 2 expression-valued blocks — owned before code; KM/TOOLBOX/code-read ground truth and split decision next. |
 | … | `.2.2`, `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1830,6 +1832,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.6` | `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods` | Perl and Rust now support statement-level `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` over named working arrays. Added phase0/Rust/oracle/book/KM locks; Round 1 closes and frontier becomes `.2.1`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.2.1` PICKED / OWNED BEFORE CODE — expression-valued blocks.**
+  PNT moved to Round 2 after `.1.6` closed Round 1. This ownership slice records `.2.1` as the active leaf
+  before implementation; the next action is KM retrieval plus TOOLBOX/code-read ground truth and a split
+  decision if expression-valued blocks are broader than one signoff slice.
 
 - `2026-06-29`: **`.1.6` DONE — array end-mutation methods landed and Round 1 closed.**
   Perl and Rust now accept the statement-level receiver-dot methods `items.push_back(value)`,
