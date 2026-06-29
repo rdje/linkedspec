@@ -96,9 +96,25 @@ Examples:
 ```text
 return(hash("kind", "token", "text", entry_text()));
 return(array("?node:", scalar(name), array_copy(array(children))));
+return({ "kind" => "token", "text" => entry_text(), "tags" => [tag, true] });
 ```
 
 Older return helpers still exist and are useful when reading legacy specs, but new public examples should prefer the generalized `return(...)` form when it expresses the intent clearly.
+
+Direct shape literals (`[]` and `{ key => value }`) are value expressions on the Perl reference backend. Use
+them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression
+rules: a bare element such as `tag` reads scalar working variable `tag`, and a bare hash key such as
+`{ field => value }` reads scalar `field` as the runtime key. Quote fixed object field names:
+
+```text
+set(field, "kind");
+set(value, "token");
+return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
+```
+
+That returns an object with a dynamic key from `field`, a fixed `"seen"` field, and a nested array. Target-kind
+inference is still a separate language-evolution slice: `name = [value]` assigns scalar `name` to an array
+payload; it does not infer or initialize array working variable `@name`.
 
 ## Reading and copying collections
 

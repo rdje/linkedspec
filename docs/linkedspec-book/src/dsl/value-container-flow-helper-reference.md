@@ -162,6 +162,15 @@ meta["enabled"] = true;
 if(false); return("unreachable"); else(); return("reachable"); endif()
 ```
 
+> **Shape literals are value expressions on the Perl reference backend.** Direct array and hash literals are
+> accepted in value positions: `[]`, `[value, cat("a", "b")]`, `{ key => value }`, and nested combinations.
+> Shape members lower through the same scoped DSL value-expression rules as the surrounding site: primitive
+> literals stay typed, recognized helpers compose, direct access keeps its own bracket rules, and non-reserved
+> bare names read scalar working variables. A bare hash key is therefore dynamic (`{ key => value }` reads
+> `$key`), not a string literal; quote fixed field names (`{ "kind" => value }`). This leaf does **not**
+> implement RHS target-kind inference: `name = [value]` still assigns scalar `name` to an array payload, not
+> array working variable `@name`.
+
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `scalar(name)` | scalar value | read the working scalar `name`. |
@@ -176,6 +185,8 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `h(name)` | hash value | short alias for `hash(name)`. |
 | `array(...)` | array value | construct one new array payload from the arguments. |
 | `hash(...)` | hash value | construct one new hash/object payload from key/value pairs or flattened hashes. |
+| `[]` / `[expr, ...]` | array value | construct one new array payload with direct literal syntax. |
+| `{ key_expr => value_expr, ... }` | hash value | construct one new hash/object payload with direct literal syntax; bare keys are scalar reads, so quote fixed field names. |
 | `array_copy(array_expr)` / `array_copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
 | `hash_copy(hash_expr)` / `hash_copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 
@@ -200,6 +211,9 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > Quoted string segments are hash keys; numeric segments and helper/value expressions such as
 > `[scalar(i)]` are array indexes. Non-reserved bare path atoms such as `[i]` are scalar array-index reads,
 > equivalent to `[scalar(i)]`.
+> Direct shape literals `[]` and `{ key => value }` are accepted as value expressions on the Perl reference
+> backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field names
+> should be quoted.
 > Each terse helper spelling lowers **identically** to its original in every position, so both work
 > during migration — the original names are deprecated aliases, not yet retired.
 > See the
@@ -216,6 +230,9 @@ assign(scalar(child_name), retv["children"][0]["name"]);
 assign(scalar(dynamic_child_name), retv["children"][i]["name"]);
 assign(array(snapshot), array_copy(array(items)));
 assign(hash(meta_snapshot), hash_copy(hash(meta)));
+set(field, "kind");
+set(value, "token");
+return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
 ```
 
 Use `scalar(array_expr, index)` when the container is already known and the access path is one level deep.

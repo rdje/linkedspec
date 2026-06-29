@@ -846,6 +846,9 @@ sub _mask_action_code_literals {
   #             (f) SPEC-FORMAT-TERSE.1.2.3.3.3, Channel 2 direct-access subset —
   #                 BARE path atoms in accepted direct access value slots:
   #                 foo["a"][INDEX] -> $foo->{"a"}->[$INDEX].
+  #             (g) SPEC-FORMAT-TERSE.1.2.3.5.1, Channel 2 shape-literal subset —
+  #                 BARE scalar reads directly inside accepted [] / {} value literals:
+  #                 [VALUE] -> [$VALUE], { KEY => VALUE } -> {$KEY => $VALUE}.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -896,6 +899,81 @@ sub _collect_auto_working_var_decls {
    $record->('$', $atom) if defined($atom) && $atom =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   }
  };
+ my ($collect_shape_literal_scalar_reads, $collect_shape_member_scalar_reads);
+ my $split_top_level_fat_arrow = sub {
+  my ($text) = @_;
+  return undef unless defined $text;
+
+  my ($paren_depth, $brace_depth, $bracket_depth) = (0, 0, 0);
+  my ($in_single_quote, $in_double_quote, $escape_next) = (0, 0, 0);
+  my $len = length($text);
+  for (my $idx = 0; $idx < $len - 1; ++$idx) {
+   my $char = substr($text, $idx, 1);
+   if ($in_single_quote) {
+    if ($escape_next) { $escape_next = 0; }
+    elsif ($char eq '\\') { $escape_next = 1; }
+    elsif ($char eq "'") { $in_single_quote = 0; }
+    next;
+   }
+   if ($in_double_quote) {
+    if ($escape_next) { $escape_next = 0; }
+    elsif ($char eq '\\') { $escape_next = 1; }
+    elsif ($char eq '"') { $in_double_quote = 0; }
+    next;
+   }
+   if ($char eq "'") { $in_single_quote = 1; next; }
+   if ($char eq '"') { $in_double_quote = 1; next; }
+   if ($char eq '(') { ++$paren_depth; next; }
+   if ($char eq ')') { --$paren_depth if $paren_depth > 0; next; }
+   if ($char eq '{') { ++$brace_depth; next; }
+   if ($char eq '}') { --$brace_depth if $brace_depth > 0; next; }
+   if ($char eq '[') { ++$bracket_depth; next; }
+   if ($char eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
+   next unless $char eq '=' && substr($text, $idx + 1, 1) eq '>';
+   next unless $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0;
+   my $lhs = _trim_action_ir_value(substr($text, 0, $idx));
+   my $rhs = _trim_action_ir_value(substr($text, $idx + 2));
+   return undef unless defined($lhs) && length($lhs);
+   return undef unless defined($rhs) && length($rhs);
+   return [$lhs, $rhs];
+  }
+  return undef;
+ };
+ $collect_shape_member_scalar_reads = sub {
+  my ($member_expr) = @_;
+  my $member = _trim_action_ir_value($member_expr);
+  return unless defined($member) && length($member);
+  $record->('$', $member) if $member =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  $record_direct_access_bare_path_atoms->($member);
+  $collect_shape_literal_scalar_reads->($member);
+ };
+ $collect_shape_literal_scalar_reads = sub {
+  my ($shape_expr) = @_;
+  my $shape = _trim_action_ir_value($shape_expr);
+  return unless defined($shape) && length($shape) >= 2;
+  my $open = substr($shape, 0, 1);
+  my $close = $open eq '[' ? ']' : $open eq '{' ? '}' : undef;
+  return unless defined($close) && substr($shape, -1, 1) eq $close;
+  my $lowered_shape = _lower_method_value_expr($shape);
+  return unless defined($lowered_shape) && length($lowered_shape);
+
+  my $payload = _trim_action_ir_value(substr($shape, 1, length($shape) - 2));
+  return unless defined($payload) && length($payload);
+  my $entries = _split_top_level_csv($payload);
+  return unless $entries;
+
+  if ($open eq '[') {
+   $collect_shape_member_scalar_reads->($_) for @$entries;
+   return;
+  }
+
+  for my $entry (@$entries) {
+   my $pair = $split_top_level_fat_arrow->($entry);
+   next unless $pair;
+   $collect_shape_member_scalar_reads->($pair->[0]);
+   $collect_shape_member_scalar_reads->($pair->[1]);
+  }
+ };
  for my $block (@raw_blocks) {
   next unless defined($block) && length($block);
   my $masked = _mask_action_code_literals($block);
@@ -944,6 +1022,7 @@ sub _collect_auto_working_var_decls {
    my $payload = _trim_action_ir_value($args->[0]);
    $record->('$', $payload) if defined($payload) && $payload =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($payload);
+   $collect_shape_literal_scalar_reads->($payload);
   }
   while ($masked =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
@@ -953,6 +1032,7 @@ sub _collect_auto_working_var_decls {
    my $source_expr = _trim_action_ir_value($args->[1]);
    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($source_expr);
+   $collect_shape_literal_scalar_reads->($source_expr);
   }
   foreach my $statement (@{_split_action_ir_statements($block)}) {
    my $trimmed = _trim_action_ir_value($statement);
@@ -965,6 +1045,7 @@ sub _collect_auto_working_var_decls {
     $record->('@', $target_expr);
     $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
     $record_direct_access_bare_path_atoms->($value_expr);
+    $collect_shape_literal_scalar_reads->($value_expr);
     next;
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
@@ -978,6 +1059,7 @@ sub _collect_auto_working_var_decls {
        my $slot_expr = _trim_action_ir_value($parsed_hash_index->{$slot});
        $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
        $record_direct_access_bare_path_atoms->($slot_expr);
+       $collect_shape_literal_scalar_reads->($slot_expr);
       }
      }
      next;
@@ -988,6 +1070,7 @@ sub _collect_auto_working_var_decls {
    $record->('$', $1) if defined($source_expr) && length($source_expr);
    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($source_expr);
+   $collect_shape_literal_scalar_reads->($source_expr);
    next;
   }
    my $call = _parse_method_function_expr($trimmed);
@@ -1002,7 +1085,16 @@ sub _collect_auto_working_var_decls {
    my $slot_expr = _trim_action_ir_value($args->[$slot_index]);
    $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($slot_expr);
+   $collect_shape_literal_scalar_reads->($slot_expr);
    }
+  }
+  while ($masked =~ /\b(?<expr>(?:push_value|push_nonempty)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+   my $call = _parse_method_function_expr($+{expr});
+   next unless $call && (($call->{method} // '') eq 'push_value' || ($call->{method} // '') eq 'push_nonempty');
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
+   next unless $args;
+   my $value_expr = _trim_action_ir_value($args->[1]);
+   $collect_shape_literal_scalar_reads->($value_expr);
   }
   while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
@@ -1014,6 +1106,7 @@ sub _collect_auto_working_var_decls {
    next unless defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    next if defined($value_expr) && $value_expr =~ /^\w+$/o;   # all-bare child-call form
    $record->('@', $target_expr);
+   $collect_shape_literal_scalar_reads->($value_expr);
   }
  }
  return [] unless @collected;

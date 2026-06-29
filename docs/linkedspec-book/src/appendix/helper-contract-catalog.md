@@ -33,6 +33,37 @@ if(false); return("bad"); else(); return("good"); endif()
 Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alarm`, and
 `undefine` are ordinary identifiers, not primitive literals.
 
+## 0.1 Shape Value Literals
+
+The Perl reference backend accepts direct array and hash shape literals as value expressions:
+
+```text
+[]
+[value, cat("a", "b"), true, []]
+{ key => value, "fixed" => [value] }
+```
+
+Shape literals are accepted in value-consuming sites such as `return(payload)`, scalar assignment sources,
+array append RHS values, hash-index assignment RHS values, `push(target, value)`, and nested constructor
+payloads. Array elements, hash keys, and hash values lower through the scoped DSL value-expression rules:
+primitive literals stay typed, recognized helper calls compose, direct nested access keeps its own bracket
+semantics, nested shape literals recurse, and non-reserved bare names are scalar working-variable reads.
+
+A bare hash-literal key is a dynamic scalar key, not a fixed string field name:
+
+```text
+set(key, "kind");
+set(value, "token");
+return({ key => value });       # {"kind": "token"}
+return({ "kind" => value });    # fixed "kind" field
+```
+
+The shape-literal contract does not change statement syntax or target inference. Direct-access brackets
+(`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`), control-flow/block braces, and
+all-bare child-call routing remain separate surfaces. In this leaf, `name = [value]` assigns scalar working
+variable `name` to an array payload; it does not infer array working variable `@name`. Rust lockstep parity for
+this shape-literal value contract is tracked separately by `SPEC-FORMAT-TERSE.1.2.3.5.3`.
+
 ## 1. Declaration Helpers
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a

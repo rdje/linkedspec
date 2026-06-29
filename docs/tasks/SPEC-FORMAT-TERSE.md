@@ -6,7 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.2.3.5` DONE/SPLIT** — RHS-shape/type-inference was split before code:
+- Last updated: `2026-06-29` (**`.1.2.3.5.1` DONE** — Perl shape-literal value expressions now lower `[]`,
+  `[value]`, and `{ key => value }` through DSL value-expression rules, so shape members compose with scalar
+  bare reads and auto-`my`; fixed hash field names must be quoted. Target-kind inference remains separate:
+  `name = [value]` still assigns scalar `name`, not array working variable `@name`. Phase0 is **988 green**,
+  mdBook/KM/live docs are updated, and frontier -> **`.1.2.3.5.2`**. Prior **`.1.2.3.5` DONE/SPLIT** —
+  RHS-shape/type-inference was split before code:
   Perl shape-literal value expressions, Perl RHS target-kind inference, then Rust parity for each accepted
   contract. Ground truth shows current Perl accepts raw empty `[]`/`{}` only as scalar value expressions and
   current Rust cannot parse bracket/brace value expressions at all; non-empty shapes need expression-aware
@@ -591,8 +596,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     initialize or alias the aggregate working variables `@name` / `%name`, which remain distinct slots.
     Runtime/source dumps prove `items = []; items += "a"; return(items)` keeps `$items` separate from
     `@items`, and `meta = {}; meta[key] = "v"; return(meta)` keeps `$meta` separate from `%meta`. Non-empty
-    shapes such as `[value]` and `{ key => value }` are raw Perl passthrough today, so bare identifiers become
-    Perl barewords/strings rather than the settled scalar reads; they therefore need an expression-aware DSL
+    shapes such as `[value]` and `{ key => value }` were raw Perl passthrough at split time, so bare identifiers
+    became Perl barewords/strings rather than the settled scalar reads; they therefore needed an expression-aware DSL
     literal lowerer before any target-kind inference can be signoff. Rust `parse_expr` has no bracket/brace
     primary expression at all, so Rust parity is also a separate obligation. The split is: `.1.2.3.5.1` Perl
     shape-literal value expressions; `.1.2.3.5.2` Perl RHS-shape target inference; `.1.2.3.5.3` Rust parity for
@@ -600,7 +605,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.3.5 — split RHS-shape inference by mechanism` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.5.1`
-  Status: `pending`
+  Status: `done` (2026-06-29)
   Goal: Perl reference — define and lower `[]` / `{}` as DSL shape-literal value expressions.
   Acceptance: Empty and non-empty array/hash literals accepted in value positions lower through expression-aware
     element/key/value handling, so settled scalar reads compose inside shapes (`[value]`, `{ key => value }`)
@@ -608,8 +613,18 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     future control-flow/block braces, helper-call parsing, primitive literals, and all-bare child-call routing
     remain protected. Add focused Perl runtime/source locks and update the mdBook only if user-visible behavior
     changes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-06-29.** Perl now lowers accepted shape-literal value expressions through scoped
+    DSL value-expression rules: `return([value])` -> `return [$value]`, `return({ key => value })` ->
+    `return {$key => $value}`, `items += [value]` -> `push @items, [$value]`, and
+    `meta[key] = { key => value }` -> `$meta{$key} = {$key => $value}`. Nested shape literals, primitive
+    literals, direct access, and recognized helper calls compose in direct shape members. `_collect_auto_working_var_decls`
+    records scalar bare reads only for shapes accepted by the lowerer, so generated handlers auto-supply one
+    per-invocation `my $value` / `my $key` where needed. Runtime/source locks prove
+    `return(array([value, cat("a","b"), true, []], { key => value, "fixed" => [value] }))` returns the expected
+    typed nested structure with no canonical fallback. Boundary locks prove `name = [value]` still declares and
+    assigns scalar `$name` and does not infer `@name`; `.1.2.3.5.2` owns target-kind inference. Perl syntax
+    checks PASS; phase0 PASS (`t/phase0_regression.t`, **988 tests**); mdBook/KM/live docs updated.
+  Commit: `SPEC-FORMAT-TERSE.1.2.3.5.1 — implement Perl shape-literal values` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.5.2`
   Status: `pending`
@@ -1220,17 +1235,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3.3.3` | `done` 2026-06-29 | Perl scalar bare reads for direct-access bare path atoms landed with auto-`my`; `foo["a"][z]` matches `foo["a"][scalar(z)]`; phase0 987 green and mdBook updated. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.4` | `done` 2026-06-29 | Rust lockstep parity for the accepted scalar bare-read contract landed; parser reservations removed, runtime scalar `Expr::Variable` path locked, oracle corpus 28 fixtures. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5` | `done` 2026-06-29 | RHS-shape/type-inference split before code: Perl shape-literal values, Perl target-kind inference, then Rust parity for each. No engine/book behavior changed. |
-| 1 | `SPEC-FORMAT-TERSE.1.2.3.5.1` | `pending` | Perl shape-literal value expressions (`[]`/`{}`) before target-kind inference, so non-empty shapes lower through DSL expressions instead of raw Perl barewords. |
+| — | `SPEC-FORMAT-TERSE.1.2.3.5.1` | `done` 2026-06-29 | Perl shape-literal value expressions (`[]`/`{}`) landed: non-empty shapes lower through DSL expressions instead of raw Perl barewords; phase0 988 green and mdBook updated. |
+| 1 | `SPEC-FORMAT-TERSE.1.2.3.5.2` | `pending` | Perl RHS target-kind inference decision after shape literals are real values: decide whether `name = []` / `name = {}` infer aggregate working variables or intentionally remain scalar payload assignment. |
 | … | `.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
 
+- `2026-06-29` (**`.1.2.3.5.1` Perl shape-literal value expressions landed**). Direct `[]` / `{}` forms are
+  now DSL value expressions on the Perl reference. The accepted shape subset lowers direct array elements,
+  hash keys, and hash values through scoped value-expression rules, so `[value]` and `{ key => value }` read
+  scalar working variables and auto-supply matching `my` declarations. Bare hash-literal keys are dynamic, not
+  fixed strings; write `{ "kind" => value }` for a fixed field name. This is intentionally not target-kind
+  inference: `name = [value]` remains scalar assignment to an array payload and does not infer `@name`.
+  Direct-access brackets, hash-index assignment brackets, future block braces, helper calls, and all-bare
+  child-call routing stay separate surfaces. Next frontier is `.1.2.3.5.2`.
+
 - `2026-06-29` (**`.1.2.3.5` RHS-shape/type-inference split by mechanism**). The remaining Channel 2 shape
-  work is not one implementation leaf. Perl already accepts raw empty `[]` and `{}` in value/source slots, but
-  only as scalar arrayref/hashref expressions (`name = []` assigns `$name`, while `items += []` mutates
-  `@items`; those slots are distinct). Non-empty shapes such as `[value]` and `{ key => value }` currently pass
-  through raw Perl and turn bare identifiers into barewords/strings, not the settled scalar working-variable
-  reads. Rust has no bracket/brace value-expression parser. Therefore the first safe leaf is Perl
+  work is not one implementation leaf. At split time, Perl already accepted raw empty `[]` and `{}` in
+  value/source slots, but only as scalar arrayref/hashref expressions (`name = []` assigns `$name`, while
+  `items += []` mutates
+  `@items`; those slots are distinct). Non-empty shapes such as `[value]` and `{ key => value }` passed through
+  raw Perl at split time and turned bare identifiers into barewords/strings, not the settled scalar
+  working-variable reads. Rust has no bracket/brace value-expression parser. Therefore the first safe leaf is Perl
   shape-literal value expressions (`.1.2.3.5.1`), followed by Perl RHS target-kind inference
   (`.1.2.3.5.2`), then Rust parity for each accepted contract (`.1.2.3.5.3` and `.1.2.3.5.4`). Direct-access
   brackets, hash-index assignment brackets, future block braces, helper-call syntax, and all-bare child-call
@@ -1666,6 +1692,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.3.3` | Perl syntax checks (`ValueExpr.pm`, `EmitContext.pm`, `phase0_regression.t`); TOOLBOX lowering probes; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks; full local CI | Perl direct-access bare path atoms landed. `foo["a"][z]` now lowers like `foo["a"][scalar(z)]` to `$foo->{"a"}->[$z]` and auto-supplies a per-invocation scalar lexical for `z`; quoted path segments remain hash keys, numeric/helper segments remain array indexes, reserved atoms remain unclaimed, and `scalaref(...)` compatibility is unchanged. Phase0 PASS (`1..987`, 18 new assertions); mdBook/KM/memory/doctrine/local CI PASS. Frontier becomes `.1.2.3.4`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.4` | Focused Rust core parser tests (`parse_scalar_bare_reads_in_mutation_slots`, `parse_direct_nested_access_accepts_bare_segments`); focused Rust runtime `terse_1_2_3_4`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks; full local CI | Rust scalar bare-read parity landed. The parser now accepts bare scalar variables in source slots, mutation key/RHS slots, and multi-segment direct-access path atoms; runtime behavior uses the existing `Expr::Variable` scalar read path. Added 2 integration locks + 3 oracle fixtures; corpus oracle PASS over 28 fixtures; mdBook/KM/memory/doctrine/local CI PASS. Frontier becomes `.1.2.3.5` for RHS-shape/type-inference split. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5` | Knowledge Map retrieval; TOOLBOX `call_spec_handler_subst` probes for empty and non-empty `[]`/`{}` forms; `LinkedSpec::Get` runtime/source dumps for scalar-vs-aggregate slot separation; Rust `expr.rs` code-read; Knowledge Map/memory/doctrine/diff checks | Split RHS-shape/type-inference into concrete children before code. Perl raw empty shapes work as scalar value expressions but do not initialize aggregate working variables; non-empty shapes currently need expression-aware lowering; Rust cannot parse bracket/brace value expressions. No engine/book behavior changed. Frontier becomes `.1.2.3.5.1`. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5.1` | Perl syntax checks (`MethodLowering.pm`, `EmitContext.pm`, `phase0_regression.t`); TOOLBOX lowering probes; generated-source/runtime shape-literal probe; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks | Perl shape-literal value expressions landed. `[]` / `{}` now lower as DSL values; direct shape elements, keys, and values compose with primitive literals, helper calls, direct access, nested shapes, and scalar bare reads. `{ key => value }` lowers to `{$key => $value}`, so fixed field names must be quoted. Target-kind inference remains unchanged: `name = [value]` assigns scalar `$name`, not `@name`. Phase0 PASS (`988` tests); mdBook/KM/live docs updated. Frontier becomes `.1.2.3.5.2`. |
 
 ## Commit Log
 
@@ -1705,8 +1732,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.2.3.3.3` | `SPEC-FORMAT-TERSE.1.2.3.3.3 — implement direct-access bare path atoms` | Perl direct-access bare path atoms now work as scalar array indexes with matching scalar auto-existence. mdBook/KM/live docs updated; phase0 987 green. `.1.2.3.3` closes; frontier becomes `.1.2.3.4`. |
 | `SPEC-FORMAT-TERSE.1.2.3.4` | `SPEC-FORMAT-TERSE.1.2.3.4 — add Rust scalar bare-read parity` | Rust now accepts the Perl scalar bare-read contract in source slots, mutation key/RHS slots, and direct-access bare path atoms through the existing `Expr::Variable` scalar read path. 3 oracle fixtures added; frontier becomes `.1.2.3.5` RHS-shape/type-inference split. |
 | `SPEC-FORMAT-TERSE.1.2.3.5` | `SPEC-FORMAT-TERSE.1.2.3.5 — split RHS-shape inference by mechanism` | No engine/book behavior change. RHS-shape/type inference is split into Perl shape-literal value expressions (`.1.2.3.5.1`), Perl RHS target-kind inference (`.1.2.3.5.2`), and Rust parity for each (`.1.2.3.5.3`/`.1.2.3.5.4`). Frontier becomes `.1.2.3.5.1`. |
+| `SPEC-FORMAT-TERSE.1.2.3.5.1` | `SPEC-FORMAT-TERSE.1.2.3.5.1 — implement Perl shape-literal values` | Perl now lowers accepted `[]` / `{}` shape literals as DSL value expressions, with scalar bare reads inside direct elements, keys, and values plus auto-`my` declarations. Fixed hash fields require quoted keys. Target-kind inference stays deferred to `.1.2.3.5.2`; Rust parity stays `.1.2.3.5.3`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.2.3.5.1` DONE — Perl shape-literal value expressions landed.**
+  Direct `[]` / `{}` shapes now lower as DSL value expressions on the Perl reference. Non-empty shapes lower
+  through accepted value-expression rules, so `[value]` and `{ key => value }` read scalar working variables
+  and auto-supply `my $value` / `my $key`; fixed hash field names must be quoted. Target inference is unchanged:
+  `name = [value]` still assigns scalar `name` to an array payload and does not infer `@name`. Phase0 PASS
+  (`988` tests); mdBook updated. Frontier -> `.1.2.3.5.2`.
 
 - `2026-06-29`: **`.1.2.3.5` DONE/SPLIT — RHS-shape/type inference split by mechanism.**
   Ground truth shows raw empty `[]`/`{}` already pass through Perl as scalar value expressions, but do not

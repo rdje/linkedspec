@@ -1,12 +1,26 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.1 — Perl shape-literal value expressions landed): Implemented the
+  first RHS-shape child as a value-lowering change, not a target-inference change. Durable points. (1) **Shape
+  literals are now DSL values on the Perl reference.** `_lower_method_value_expr` recognizes accepted `[]` and
+  `{ key => value }` value shapes before generic method-call dispatch, recursively lowering direct shape
+  members through primitive literals, scalar bare reads, direct access, nested shapes, and recognized helper
+  calls. (2) **Bare hash keys are dynamic.** `{ key => value }` now lowers as `{$key => $value}`; fixed object
+  fields must be quoted (`{ "kind" => value }`). Existing return-payload tests with bare keys were updated to
+  the new contract. (3) **Collector coverage follows the same shape oracle.** `_collect_auto_working_var_decls`
+  records scalar bare reads only for shapes accepted by the lowerer, including shape literals in return payloads,
+  assignment sources, append RHS values, hash-index RHS values, and push/set value slots. (4) **Target inference
+  stays separate.** `name = [value]` still declares/assigns scalar `$name`; `.1.2.3.5.2` owns any future
+  decision to infer `@name` / `%name` from RHS shape. Rust shape-literal parity stays `.1.2.3.5.3`.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5 — RHS-shape/type-inference split): Split the remaining Channel 2
-  shape work before code. Durable points. (1) **Raw empty shapes are not target inference.** Perl accepts
-  `[]`/`{}` today by passing them through as arrayref/hashref value expressions, so `name = []` writes scalar
-  `$name`; aggregate mutation slots such as `items += []` and `meta[key] = {}` still use separate `@items` /
-  `%meta` state. (2) **Non-empty shapes need a DSL lowerer first.** `[value]` and `{ key => value }` currently
-  pass raw Perl barewords/strings, so they do not compose with the `.1.2.3.3/.4` scalar bare-read contract.
+  shape work before code. Durable points. (1) **Raw empty shapes are not target inference.** Perl accepted
+  `[]`/`{}` at split time by passing them through as arrayref/hashref value expressions, so `name = []` writes
+  scalar `$name`; aggregate mutation slots such as `items += []` and `meta[key] = {}` still use separate `@items` /
+  `%meta` state. (2) **Non-empty shapes needed a DSL lowerer first.** `[value]` and `{ key => value }`
+  passed raw Perl barewords/strings at split time, so they did not compose with the `.1.2.3.3/.4` scalar
+  bare-read contract before `.1.2.3.5.1`.
   Implementing target inference before expression-aware shape literals would bake in the wrong semantics.
   (3) **Rust parity has two obligations.** Rust cannot parse bracket/brace value primaries today; first mirror
   accepted shape-literal values, then mirror whatever target-kind inference the Perl reference adopts. (4)

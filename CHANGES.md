@@ -1,18 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.1 — Perl shape-literal value expressions
+
+**Scope:** Perl ActionIR value lowering, auto-working-variable collection, phase0 regression coverage, mdBook,
+Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** The Perl reference now treats direct `[]` / `{}` forms as DSL shape-literal value
+expressions instead of raw Perl passthrough. Empty literals still lower to `[]` / `{}`; non-empty literals lower
+their direct elements, keys, and values through accepted DSL value-expression rules. This makes `[value]`,
+`{ key => value }`, nested shape literals, primitive literals, direct access, and recognized helper calls
+compose with the settled scalar bare-read contract. Bare hash-literal keys are dynamic scalar reads, so fixed
+field names must be quoted: `{ "kind" => value }`.
+
+**Boundary:** This leaf does not implement RHS target-kind inference. `name = [value]` still writes scalar
+`$name` to an arrayref payload and does not infer `@name`; `.1.2.3.5.2` owns that decision. Direct-access
+brackets, hash-index assignment brackets, future control-flow/block braces, helper-call parsing, primitive
+literals, and all-bare child-call routing remain protected. Rust parity for direct shape literals is still
+tracked by `.1.2.3.5.3`.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; phase0 PASS
+(`t/phase0_regression.t`, 988 tests, including the new 19-assertion lock); mdBook updated.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5 — RHS-shape/type-inference split
 
 **Scope:** task tree, task-tree index, roadmap/live continuity docs, and Knowledge Map. No engine, fixture, or
 mdBook behavior change.
 
-**Ground truth:** Perl already passes empty `[]` and `{}` through as raw arrayref/hashref value expressions in
+**Ground truth:** At split time, Perl already passed empty `[]` and `{}` through as raw arrayref/hashref value expressions in
 scalar/value slots: `return([])`, `name = []`, `items += []`, `set(out,{})`, and `meta[key] = {}` lower to
 valid Perl. That does not mean RHS target-kind inference exists: `name = []` assigns scalar `$name`, while
 `items += ...` mutates a distinct `@items`; likewise `$meta` and `%meta` are separate slots. Non-empty shapes
-such as `[value]` and `{ key => value }` currently pass through raw Perl, so bare identifiers become Perl
-barewords/strings instead of the settled scalar working-variable reads. Rust does not parse `[` or `{` as a
-value-expression starter today.
+such as `[value]` and `{ key => value }` passed through raw Perl at split time, so bare identifiers became Perl
+barewords/strings instead of the settled scalar working-variable reads before `.1.2.3.5.1`. Rust does not parse
+`[` or `{` as a value-expression starter yet.
 
 **Split:** `.1.2.3.5` is now a completed split container. The new frontier is `.1.2.3.5.1` Perl
 shape-literal value expressions, followed by `.1.2.3.5.2` Perl RHS target-kind inference, `.1.2.3.5.3` Rust

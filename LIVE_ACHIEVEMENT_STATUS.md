@@ -7,15 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.1 — Perl shape-literal value expressions landed**
+  (PERL ACTIONIR + AUTO-DECL + PHASE0 + BOOK/KM LOCKS). Direct `[]` / `{}` shapes are now DSL value
+  expressions on the Perl reference instead of raw Perl passthrough. Empty shapes still lower as `[]` / `{}`;
+  non-empty shapes lower their elements, keys, and values through the accepted value-expression rules, so
+  `[value]` and `{ key => value }` read scalar working variables and auto-supply `my $value` / `my $key` when
+  needed. Fixed hash field names must be quoted (`{ "kind" => value }`). Target-kind inference is unchanged:
+  `name = [value]` still assigns scalar `name` to an array payload and does not infer `@name`.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; phase0 PASS
+  (`t/phase0_regression.t`, **988 tests**); mdBook updated.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.5.2`** (Perl RHS target-kind inference).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5 — RHS-shape/type-inference split completed**
   (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM + TOOLBOX/source/runtime/code-read
   probes showed the remaining Channel 2 shape work is too broad for one implementation leaf. Perl already
-  accepts empty `[]`/`{}` as raw scalar value expressions, but `name = []` / `name = {}` assign scalar
-  `$name` / `$meta`-style slots rather than initializing aggregate working variables. Non-empty shapes such as
-  `[value]` and `{ key => value }` currently pass through raw Perl, so bare identifiers become barewords/strings
-  rather than the settled scalar working-variable reads. Rust currently has no bracket/brace value-expression
-  parser. The split children are `.1.2.3.5.1` Perl shape-literal values, `.1.2.3.5.2` Perl RHS target-kind
-  inference, `.1.2.3.5.3` Rust shape-literal parity, and `.1.2.3.5.4` Rust target-inference parity.
+  accepted empty `[]`/`{}` as raw scalar value expressions at split time, but `name = []` / `name = {}` assign
+  scalar `$name` / `$meta`-style slots rather than initializing aggregate working variables. Non-empty shapes such as
+  `[value]` and `{ key => value }` passed through raw Perl at split time, so bare identifiers became
+  barewords/strings rather than the settled scalar working-variable reads before `.1.2.3.5.1`. Rust currently
+  has no bracket/brace value-expression parser. The split children are `.1.2.3.5.1` Perl shape-literal values,
+  `.1.2.3.5.2` Perl RHS target-kind inference, `.1.2.3.5.3` Rust shape-literal parity, and `.1.2.3.5.4`
+  Rust target-inference parity.
   **Verification:** KM/TOOLBOX/source/runtime/code-read probes completed; KM/memory/doctrine/diff checks run for
   the slice.
   **Frontier: `SPEC-FORMAT-TERSE.1.2.3.5.1`** (Perl shape-literal value expressions).

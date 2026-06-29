@@ -16470,12 +16470,12 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return({name=>scalar(block_namei), content=>array_copy(array(assigns))})'),
-        'return {name=>$block_namei, content=>[@assigns]}',
+        'return {$name => $block_namei, $content => [@assigns]}',
         'return(payload) lowers array_copy(array(...)) inside structured hash payloads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return({name=>scalar(block_namei), content=>array_copy(array(assigns))})'),
-        'return {name=>$block_namei, content=>[@assigns]}',
+        'return {$name => $block_namei, $content => [@assigns]}',
         'return(payload) lowers array_copy(array(...)) inside structured hash payloads'
     );
 
@@ -16503,12 +16503,12 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])'),
-        'return ["semantic", { key => $name }, [123, $foo_arr[$idx]]]',
+        'return ["semantic", {$key => $name}, [123, $foo_arr[$idx]]]',
         'general return(payload) lowers nested array/hash payload with scalar helpers'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })'),
-        'return { item => $foo_hash{$key}, list => [$name, 123] }',
+        'return {$item => $foo_hash{$key}, $list => [$name, 123]}',
         'general return(payload) lowers scalar(container,key_or_index) forms inside nested hash/list payload'
     );
     is(
@@ -16518,7 +16518,7 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return({ item => scalaref(myref, {A}[B]{C}[D]) })'),
-        'return { item => $myref->{A}->[B]->{C}->[D] }',
+        'return {$item => $myref->{A}->[B]->{C}->[D]}',
         'general return(payload) lowers scalaref(base,{...}[...]) with hash-first path segments'
     );
     is(
@@ -44961,6 +44961,83 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
         'generated source contains the direct dereference chain');
     is($run->($p, 'xhello'), '"one"',
         'direct nested access runs through mixed hash and array segments');
+};
+
+subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
+    # SPEC-FORMAT-TERSE.1.2.3.5.1: [] / {} are DSL value literals, not
+    # raw-Perl passthrough. Direct shape members lower through the accepted
+    # value-expression rules, including scalar bare reads.
+    plan tests => 19;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('return([value])'), 'return [$value]',
+        'array shape literal lowers a bare element as a scalar read');
+    is($L->('return({ key => value })'), 'return {$key => $value}',
+        'hash shape literal lowers bare key and value slots as scalar reads');
+    is($L->('set(out, [value, cat("a","b")])'), $L->('set(out, array(scalar(value), cat("a","b")))'),
+        'assignment source shape literals compose with helper value expressions');
+    is($L->('items += [value]'), 'push @items, [$value]',
+        'array append RHS accepts a shape literal value expression');
+    is($L->('meta[key] = { key => value }'), '$meta{$key} = {$key => $value}',
+        'hash-index assignment RHS accepts a hash shape literal');
+    is($L->('push(items, [value])'), 'push @items, [$value]',
+        'push(target, shape) is explicit append, not all-bare child-call routing');
+    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+        'direct-access brackets still route through direct-access lowering');
+    is($L->('meta[key] = [value]'), '$meta{$key} = [$value]',
+        'hash-index assignment brackets stay statement syntax while RHS brackets are a value literal');
+
+    my $shape_spec = "Top::\n"
+                   . " /x/ -> Done { set(value,\"ok\"); set(key,\"stage\"); return(array([value, cat(\"a\",\"b\"), true, []], { key => value, \"fixed\" => [value] })) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $shape_parser = eval { LinkedSpec::Get(\$shape_spec) };
+    ok(ref($shape_parser) eq 'CODE', 'shape-literal return spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($shape_parser, 'xhello'), '[["ok","ab",true,[]],{"fixed":["ok"],"stage":"ok"}]',
+        'shape literals run with scalar bare reads and typed nested values');
+
+    my $shape_src = $gen->($shape_spec);
+    my $value_my = () = ($shape_src =~ /my \$value\b/g);
+    my $key_my = () = ($shape_src =~ /my \$key\b/g);
+    is($value_my, 1, 'shape literal scalar value read auto-supplies one my $value');
+    is($key_my, 1, 'shape literal scalar key read auto-supplies one my $key');
+    ok(index($shape_src, 'my $value;') >= 0 && index($shape_src, 'my $value;') < index($shape_src, 'while (1)'),
+        'shape scalar declarations are emitted in the preamble');
+
+    my $d = LinkedSpec::Get(\$shape_spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,RETURN',
+        'shape-literal source spec reports canonical ASSIGN/RETURN nodes');
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'shape-literal source spec has no canonical fallback');
+
+    my $target_boundary_spec = "Top::\n"
+                             . " /x/ -> Done { set(value,\"ok\"); name = [value]; return(scalar(name)) }\n"
+                             . "\nDone::\n /[a-z]+/\n";
+    my $target_src = $gen->($target_boundary_spec);
+    is((() = ($target_src =~ /my \$name\b/g)), 1,
+        'shape RHS assignment still auto-supplies the scalar target');
+    is((() = ($target_src =~ /my \@name\b/g)), 0,
+        'shape RHS assignment does not infer an array target in this leaf');
+    my $target_parser = eval { LinkedSpec::Get(\$target_boundary_spec) };
+    ok(ref($target_parser) eq 'CODE', 'target-boundary shape assignment spec compiles')
+        or diag(normalize_error($@));
+    is($run->($target_parser, 'xhello'), '["ok"]',
+        'target-boundary shape assignment returns the scalar-held arrayref');
 };
 
 done_testing();

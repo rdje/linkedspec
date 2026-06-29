@@ -191,6 +191,117 @@ sub _lower_method_value_expr {
  my $array_symbol_expr_re = qr/^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/;
  my $hash_symbol_expr_re = qr/^(?:(?:hash|h)\s*\(\s*\w+\s*\)|\w+)$/;
  my ($looks_like_array_value_expr, $looks_like_hash_value_expr);
+ my ($lower_shape_literal_value_expr, $lower_shape_member_expr);
+ my $split_top_level_fat_arrow = sub {
+  my ($text) = @_;
+  return undef unless defined $text;
+
+  my $paren_depth = 0;
+  my $brace_depth = 0;
+  my $bracket_depth = 0;
+  my $in_single_quote = 0;
+  my $in_double_quote = 0;
+  my $escape_next = 0;
+  my $len = length($text);
+  for (my $idx = 0; $idx < $len - 1; ++$idx) {
+   my $char = substr($text, $idx, 1);
+   if ($in_single_quote) {
+    if ($escape_next) { $escape_next = 0; }
+    elsif ($char eq '\\') { $escape_next = 1; }
+    elsif ($char eq "'") { $in_single_quote = 0; }
+    next;
+   }
+   if ($in_double_quote) {
+    if ($escape_next) { $escape_next = 0; }
+    elsif ($char eq '\\') { $escape_next = 1; }
+    elsif ($char eq '"') { $in_double_quote = 0; }
+    next;
+   }
+   if ($char eq "'") { $in_single_quote = 1; next; }
+   if ($char eq '"') { $in_double_quote = 1; next; }
+   if ($char eq '(') { ++$paren_depth; next; }
+   if ($char eq ')') { --$paren_depth if $paren_depth > 0; next; }
+   if ($char eq '{') { ++$brace_depth; next; }
+   if ($char eq '}') { --$brace_depth if $brace_depth > 0; next; }
+   if ($char eq '[') { ++$bracket_depth; next; }
+   if ($char eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
+   next unless $char eq '=' && substr($text, $idx + 1, 1) eq '>';
+   next unless $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0;
+   my $lhs = $trim_action_ir_value->(substr($text, 0, $idx));
+   my $rhs = $trim_action_ir_value->(substr($text, $idx + 2));
+   return undef unless defined($lhs) && length($lhs);
+   return undef unless defined($rhs) && length($rhs);
+   return [$lhs, $rhs];
+  }
+  return undef;
+ };
+ $lower_shape_member_expr = sub {
+  my ($member_expr) = @_;
+  return undef unless defined $member_expr;
+  my $member = $trim_action_ir_value->($member_expr);
+  return undef unless defined($member) && length($member);
+
+  my $shape = $lower_shape_literal_value_expr->($member);
+  return $shape if defined($shape) && length($shape);
+
+  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($member, $deps);
+  return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
+
+  my $literal = $lower_primitive_literal_expr->($member);
+  return $literal if defined($literal);
+
+  my $direct_access = $lower_direct_nested_access_value_expr->($member);
+  return $direct_access if defined($direct_access) && length($direct_access);
+
+  my $member_call = $parse_method_function_expr->($member);
+  if ($member_call) {
+   my $lowered_call = _lower_method_value_expr($member, $deps);
+   return $lowered_call if defined($lowered_call) && length($lowered_call) && $lowered_call ne $member;
+  }
+
+  return undef;
+ };
+ $lower_shape_literal_value_expr = sub {
+  my ($shape_expr) = @_;
+  return undef unless defined $shape_expr;
+  my $shape = $trim_action_ir_value->($shape_expr);
+  return undef unless defined($shape) && length($shape);
+  return undef unless length($shape) >= 2;
+
+  my $open = substr($shape, 0, 1);
+  my $close = $open eq '[' ? ']' : $open eq '{' ? '}' : undef;
+  return undef unless defined $close && substr($shape, -1, 1) eq $close;
+  my $payload = substr($shape, 1, length($shape) - 2);
+  $payload = $trim_action_ir_value->($payload);
+
+  if ($open eq '[') {
+   return '[]' unless defined($payload) && length($payload);
+   my $items = $split_top_level_csv->($payload);
+   return undef unless $items;
+   my @lowered_items;
+   foreach my $item (@$items) {
+    my $lowered_item = $lower_shape_member_expr->($item);
+    return undef unless defined($lowered_item) && length($lowered_item);
+    push @lowered_items, $lowered_item;
+   }
+   return '['.join(', ', @lowered_items).']';
+  }
+
+  return '{}' unless defined($payload) && length($payload);
+  my $entries = $split_top_level_csv->($payload);
+  return undef unless $entries;
+  my @lowered_pairs;
+  foreach my $entry (@$entries) {
+   my $pair = $split_top_level_fat_arrow->($entry);
+   return undef unless $pair;
+   my $key_expr = $lower_shape_member_expr->($pair->[0]);
+   my $value_expr = $lower_shape_member_expr->($pair->[1]);
+   return undef unless defined($key_expr) && length($key_expr);
+   return undef unless defined($value_expr) && length($value_expr);
+   push @lowered_pairs, $key_expr.' => '.$value_expr;
+  }
+  return '{'.join(', ', @lowered_pairs).'}';
+ };
  my $lower_flat_list_value_expr = sub {
   my ($flat_expr) = @_;
   return undef unless defined $flat_expr;
@@ -359,6 +470,8 @@ sub _lower_method_value_expr {
  return $literal if defined($literal);
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
  return $direct_access if defined($direct_access) && length($direct_access);
+ my $shape_literal = $lower_shape_literal_value_expr->($trimmed);
+ return $shape_literal if defined($shape_literal) && length($shape_literal);
  my $method_call = $parse_method_function_expr->($trimmed);
  if ($method_call && $method_call->{method} eq 'call') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
