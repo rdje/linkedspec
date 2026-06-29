@@ -58,7 +58,8 @@ return({ key => value });       # {"kind": "token"}
 return({ "kind" => value });    # fixed "kind" field
 ```
 
-Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference:
+Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference and
+Rust backend:
 
 ```text
 items = [value, cat("a", "b")];      # @items = ($value, cat(...))
@@ -68,12 +69,10 @@ set(meta, {});                       # %meta = ()
 set(scalar(payload), [value]);       # $payload = [$value]
 ```
 
-The explicit scalar wrapper is the scalar payload boundary. On Rust, value-expression support for direct shape
-literals is present, but the aggregate target-kind inference rule remains tracked separately; until that parity
-leaf lands, `name = [value]` is still a scalar-held array payload on Rust. Direct-access brackets
-(`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`), control-flow/block braces, and
-all-bare child-call routing remain separate surfaces. Rust lockstep parity for RHS target-kind inference is
-tracked by `SPEC-FORMAT-TERSE.1.2.3.5.4`.
+The explicit scalar wrapper is the scalar payload boundary on both variants: `set(scalar(payload), [value])`
+stores the whole array payload in scalar `payload`, while `array(payload)` remains a separate working array.
+Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`),
+control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
 ## 1. Declaration Helpers
 

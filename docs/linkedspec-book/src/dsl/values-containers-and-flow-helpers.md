@@ -114,7 +114,8 @@ return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
 
 That returns an object with a dynamic key from `field`, a fixed `"seen"` field, and a nested array.
 
-Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference:
+Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference and
+Rust backend:
 
 ```text
 items = [value, cat("a", "b")];     # initializes array working variable items
@@ -130,9 +131,9 @@ set(scalar(payload), [value]);
 return(scalar(payload));
 ```
 
-Rust currently supports the direct shape-literal value forms above, but Rust aggregate target-kind inference is
-the next parity step. Until that lands, `name = [value]` on Rust stores the array payload in scalar `name`
-rather than replacing array working variable `name`.
+This target-kind inference is intentionally tied to direct RHS shape literals. Use an explicit scalar wrapper
+when the goal is a scalar-held shape payload; use `array(name)` / `hash(name)` when the goal is an explicit
+aggregate target.
 
 ## Reading and copying collections
 

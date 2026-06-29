@@ -168,10 +168,11 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > literals stay typed, recognized helpers compose, direct access keeps its own bracket rules, and non-reserved
 > bare names read scalar working variables. A bare hash key is therefore dynamic (`{ key => value }` reads
 > `$key`), not a string literal; quote fixed field names (`{ "kind" => value }`). When a direct shape literal
-> is the RHS of a bare assignment target, it infers the aggregate target kind: `items = [value]` / `set(items,
-> [])` assign `@items`, and `meta = { key => value }` / `set(meta, {})` assign `%meta`. This aggregate
-> target-kind inference is still a Rust parity follow-on. Explicit scalar targets keep scalar payload
-> assignment: `set(scalar(payload), [value])` assigns `$payload = [$value]`.
+> is the RHS of a bare assignment target, it infers the aggregate target kind on both variants:
+> `items = [value]` / `set(items, [])` assign the array working variable, and
+> `meta = { key => value }` / `set(meta, {})` assign the hash working variable. Explicit scalar targets keep
+> scalar payload assignment: `set(scalar(payload), [value])` assigns the whole array payload to scalar
+> `payload`.
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
@@ -216,9 +217,9 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > Direct shape literals `[]` and `{ key => value }` are accepted as value expressions on the Perl reference and
 > Rust backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field
 > names should be quoted. Direct shape literals also infer the aggregate kind of a bare assignment target on
-> the Perl reference: `items = [value]` initializes `@items`, and `meta = { key => value }` initializes `%meta`;
-> use `set(scalar(payload), [value])` for scalar-held shape payloads. Rust target-kind parity is tracked by
-> `SPEC-FORMAT-TERSE.1.2.3.5.4`.
+> both variants: `items = [value]` initializes the array working variable, and
+> `meta = { key => value }` initializes the hash working variable; use `set(scalar(payload), [value])` for
+> scalar-held shape payloads.
 > Each terse helper spelling lowers **identically** to its original in every position, so both work
 > during migration — the original names are deprecated aliases, not yet retired.
 > See the

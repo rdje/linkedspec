@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference parity landed**
+  (RUST RUNTIME + ORACLE/KM). Rust now matches the Perl target-kind rule accepted in `.1.2.3.5.2`: direct RHS
+  shape literals infer aggregate working-variable targets when the assignment target is bare or explicitly
+  aggregate-typed. `items = [value]`, `set(items, [])`, and `set(array(items), [value])` replace the runtime
+  array working variable; `meta = { key => value }`, `assign(meta, {})`, and `set(hash(meta), { key => value })`
+  replace the runtime hash working variable. Explicit scalar targets remain scalar payload assignments:
+  `set(scalar(payload), [value])` stores the array payload in scalar `payload`.
+  **Verification:** focused Rust runtime `.1.2.3.5.4` locks PASS; oracle corpus regenerated to **32 fixtures**
+  and corpus oracle PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.6`** (own before code: array end-mutation methods).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity landed**
   (RUST AST/PARSER + RUNTIME + ORACLE). Rust now accepts direct `[]` / `{}` shape literals as value
   expressions in the same accepted value slots as Perl `.1.2.3.5.1`: return payloads, scalar assignment

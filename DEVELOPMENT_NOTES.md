@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference landed): Mirrored the
+  accepted Perl `.1.2.3.5.2` target-kind contract on the Rust backend. Durable points. (1) **Shape inference
+  is keyed by the raw RHS AST, not the evaluated value alone.** `Engine::direct_shape_literal_kind` only
+  classifies direct `Expr::ArrayLiteral` / `Expr::HashLiteral` values, so non-shape expressions that evaluate
+  to arrays or hashes do not silently redirect scalar assignment. (2) **Bare and matching typed aggregate
+  targets are the only redirected targets.** `items = [value]`, `set(items, [value])`, and
+  `set(array(items), [value])` write the runtime array slot; hash shapes mirror that for `meta` /
+  `hash(meta)`. (3) **The scalar boundary remains explicit.** `set(scalar(payload), [value])` falls through to
+  the existing scalar-target resolver and stores the whole shape payload in scalar `payload`; `array(payload)`
+  remains empty in the lock. (4) **RuntimeContext now has whole-aggregate replacement APIs.** `set_array` and
+  `set_hash` replace a working aggregate after the RHS shape has been evaluated through the normal expression
+  path, matching Perl's assignment semantics rather than append/entry mutation.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity landed): Mirrored the accepted
   `.1.2.3.5.1` direct shape value contract on the Rust backend without advancing `.1.2.3.5.4`. Durable points.
   (1) **Bracket/brace primaries are values, not access/assignment syntax.** `Expr::ArrayLiteral` and

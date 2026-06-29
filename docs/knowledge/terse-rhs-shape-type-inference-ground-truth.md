@@ -13,10 +13,11 @@ answers:
   - "where is current shape-literal value behavior recorded"
   - "where is Rust shape-literal value parity recorded"
   - "where is current RHS shape target-kind behavior recorded"
+  - "where is Rust RHS shape target-kind parity recorded"
 date: 2026-06-29
 status: confirmed
 tags: [dsl, variables, type-inference, channel-2, rhs-shape, spec-format-terse, SPEC-FORMAT-TERSE, perl, rust]
-evidence: "SPEC-FORMAT-TERSE.1.2.3.5 ground truth on 2026-06-29 used KM retrieval, TOOLBOX `call_spec_handler_subst`, `LinkedSpec::Get` runtime/source dumps, and Rust `expr.rs` code-read. At split time, Perl lowered empty shapes as raw Perl values: `return([])` -> `return []`, `return({})` -> `return {}`, `name = []` -> `$name = []`, `items += []` -> `push @items, []`, and `meta[key] = {}` -> `$meta{$key} = {}`. Runtime/source dumps showed scalar and aggregate slots are distinct: `items = []; items += \"a\"; return(items)` returned the scalar `$items` arrayref, not `@items`, and generated source declared both `my $items;` and `my @items;`; similarly `$meta` and `%meta` were separate. At split time, non-empty shapes such as `[value]` and `{ key => value }` passed through raw Perl, so bare identifiers became barewords/strings instead of settled scalar working-variable reads. SPEC-FORMAT-TERSE.1.2.3.5.1 later changed current behavior for Perl shape-literal values; see [[terse-shape-literal-value-expressions]]. SPEC-FORMAT-TERSE.1.2.3.5.2 later changed current behavior for Perl RHS target-kind inference; see [[terse-rhs-shape-target-kind-inference]]. At split time Rust `parse_expr` had no bracket/brace value primary; SPEC-FORMAT-TERSE.1.2.3.5.3 later landed Rust shape-literal value parity; see [[terse-rust-shape-literal-value-parity]]. Therefore `.1.2.3.5` split into `.1.2.3.5.1` Perl shape-literal value expressions, `.1.2.3.5.2` Perl RHS target-kind inference, `.1.2.3.5.3` Rust shape-literal parity, and `.1.2.3.5.4` Rust target-inference parity."
+evidence: "SPEC-FORMAT-TERSE.1.2.3.5 ground truth on 2026-06-29 used KM retrieval, TOOLBOX `call_spec_handler_subst`, `LinkedSpec::Get` runtime/source dumps, and Rust `expr.rs` code-read. At split time, Perl lowered empty shapes as raw Perl values: `return([])` -> `return []`, `return({})` -> `return {}`, `name = []` -> `$name = []`, `items += []` -> `push @items, []`, and `meta[key] = {}` -> `$meta{$key} = {}`. Runtime/source dumps showed scalar and aggregate slots are distinct: `items = []; items += \"a\"; return(items)` returned the scalar `$items` arrayref, not `@items`, and generated source declared both `my $items;` and `my @items;`; similarly `$meta` and `%meta` were separate. At split time, non-empty shapes such as `[value]` and `{ key => value }` passed through raw Perl, so bare identifiers became barewords/strings instead of settled scalar working-variable reads. SPEC-FORMAT-TERSE.1.2.3.5.1 later changed current behavior for Perl shape-literal values; see [[terse-shape-literal-value-expressions]]. SPEC-FORMAT-TERSE.1.2.3.5.2 later changed current behavior for Perl RHS target-kind inference; see [[terse-rhs-shape-target-kind-inference]]. At split time Rust `parse_expr` had no bracket/brace value primary; SPEC-FORMAT-TERSE.1.2.3.5.3 later landed Rust shape-literal value parity, and SPEC-FORMAT-TERSE.1.2.3.5.4 later landed Rust RHS target-kind parity; see [[terse-rust-shape-literal-value-parity]] and [[terse-rust-rhs-shape-target-kind-parity]]. Therefore `.1.2.3.5` split into `.1.2.3.5.1` Perl shape-literal value expressions, `.1.2.3.5.2` Perl RHS target-kind inference, `.1.2.3.5.3` Rust shape-literal parity, and `.1.2.3.5.4` Rust target-inference parity."
 reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{return([])}, q{return({})}, q{name = []}, q{name = {}}, q{items += []}, q{items += {}}, q{set(out, [])}, q{set(out, {})}, q{set_key(meta, key, [])}, q{meta[key] = {}}, q{return([value])}, q{return({ key => value })}) { my $out = LinkedSpec::call_spec_handler_subst(\"Top\", $stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && perl -Iperl -MJSON::PP -MLinkedSpec -e 'my @cases=([scalar_arrayref=>q{name = []; return(name)}],[array_content=>q{set(value,\"ok\"); name = [value]; return(name)}],[array_target_separate=>q{items = []; items += \"a\"; return(items)}]); for my $c (@cases) { my ($label,$action)=@$c; my $spec=\"Top::\\n LX { $action }\\n\"; my $p=LinkedSpec::Get(\\$spec,top_rule=>\"Top\",parse_mode=>\"seek\"); my $res=$p->(\"\"); print \"$label => \".JSON::PP->new->canonical->encode($res).\"\\n\" }'"
 ---
 
@@ -36,7 +37,8 @@ Split-time Perl behavior was narrower than the roadmap phrase "type from RHS sha
   [[terse-shape-literal-value-expressions]], and current Perl RHS target-kind behavior is recorded in
   [[terse-rhs-shape-target-kind-inference]].
 - At split time, Rust had no bracket/brace primary expression for shape values; current Rust shape-literal value
-  parity is recorded in [[terse-rust-shape-literal-value-parity]].
+  parity is recorded in [[terse-rust-shape-literal-value-parity]], and current Rust target-kind parity is
+  recorded in [[terse-rust-rhs-shape-target-kind-parity]].
 
 The safe order is therefore:
 
@@ -45,7 +47,7 @@ The safe order is therefore:
 2. `.1.2.3.5.2`: decide and implement Perl RHS target-kind inference, explicitly choosing aggregate
    initialization for bare targets and scalar payload assignment for explicit `scalar(...)` targets.
 3. `.1.2.3.5.3`: Rust parity for the accepted shape-literal value contract (landed).
-4. `.1.2.3.5.4`: Rust parity for the accepted target-kind inference contract.
+4. `.1.2.3.5.4`: Rust parity for the accepted target-kind inference contract (landed).
 
 This split preserves the settled Channel 2 value-read semantics from `.1.2.3.3` / `.1.2.3.4` and keeps
 direct-access brackets, hash-index assignment brackets, future block braces, helper calls, and all-bare

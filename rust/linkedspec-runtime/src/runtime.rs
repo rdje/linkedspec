@@ -129,6 +129,10 @@ impl RuntimeContext {
         self.arrays.insert(name.to_string(), Vec::new());
     }
 
+    pub fn set_array(&mut self, name: &str, values: Vec<RuntimeValue>) {
+        self.arrays.insert(name.to_string(), values);
+    }
+
     pub fn push_value(&mut self, arr_name: &str, value: RuntimeValue) {
         self.arrays
             .entry(arr_name.to_string())
@@ -148,6 +152,10 @@ impl RuntimeContext {
 
     pub fn declare_hash(&mut self, name: &str) {
         self.hashes.insert(name.to_string(), Vec::new());
+    }
+
+    pub fn set_hash(&mut self, name: &str, values: Vec<(String, RuntimeValue)>) {
+        self.hashes.insert(name.to_string(), values);
     }
 
     pub fn get_hash(&self, name: &str) -> Vec<(String, RuntimeValue)> {

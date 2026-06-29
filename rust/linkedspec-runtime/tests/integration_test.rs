@@ -1387,3 +1387,37 @@ fn terse_1_2_3_5_3_shape_rhs_still_uses_scalar_assignment_until_target_inference
         "Rust shape RHS is a scalar payload until SPEC-FORMAT-TERSE.1.2.3.5.4 adds target-kind inference"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference:
+// direct shape literals on bare assignment targets initialize the aggregate
+// working variable, while explicit scalar targets keep scalar-held payloads.
+
+#[test]
+fn terse_1_2_3_5_4_bare_shape_rhs_infers_array_and_hash_targets() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); items = [value]; items += \"tail\"; meta = { key => value }; meta[\"fixed\"] = \"yes\"; return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(items), scalar(meta))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok", "tail"], {"fixed": "yes", "stage": "ok"}, null, null]]),
+        "bare shape RHS initializes aggregate working variables, not scalar payloads"
+    );
+}
+
+#[test]
+fn terse_1_2_3_5_4_set_and_assign_shape_rhs_infer_bare_targets() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); assign(meta, { key => value }); return(array(array_copy(array(items)), hash_copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok"], {"stage": "ok"}]]),
+        "set/assign use direct shape RHS to infer aggregate target kind for bare targets"
+    );
+}
+
+#[test]
+fn terse_1_2_3_5_4_explicit_typed_targets_and_scalar_boundary() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(array(items), [value]); set(hash(meta), { key => value }); set(scalar(payload), [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(payload), array_copy(array(payload)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], []]]),
+        "explicit array/hash targets accept direct shapes, while scalar(...) stores the shape payload in the scalar"
+    );
+}

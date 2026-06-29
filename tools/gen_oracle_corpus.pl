@@ -321,6 +321,32 @@ Done::
 SPEC
     },
 
+    # ── SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind parity ──
+    #
+    # These fixtures freeze the Perl `.1.2.3.5.2` target-kind inference
+    # contract: direct shape RHS values infer aggregate bare targets, while
+    # explicit scalar targets keep scalar-held shape payloads.
+    {   case   => 'terse_1_2_3_5_4_shape_rhs_infers_bare_targets',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; items += "tail"; meta = { key => value }; meta["fixed"] = "yes"; return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(items), scalar(meta))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_2_3_5_4_shape_rhs_scalar_boundary',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); set(items, [value]); assign(meta, { key => value }); set(scalar(payload), [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(payload), array_copy(array(payload)))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+
     # ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1 helper renames ──
     #
     # These fixtures freeze the Perl reference values for the new canonical terse

@@ -72,6 +72,12 @@ struct StatementIfFrame {
     branch_taken: bool,
 }
 
+#[derive(Clone, Copy)]
+enum ShapeLiteralKind {
+    Array,
+    Hash,
+}
+
 impl SavedMatchState {
     /// Restore the saved caller match state onto the context (invocation exit).
     fn restore(self, ctx: &mut RuntimeContext) {
@@ -553,6 +559,9 @@ impl Engine {
             return Ok(false);
         };
         let evaluated = self.eval_expr(value, ctx, rule_label)?;
+        if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
+            return Ok(true);
+        }
         ctx.set_scalar(name, evaluated);
         Ok(true)
     }
@@ -632,6 +641,64 @@ impl Engine {
         let value = self.eval_expr(effective_args[2].value(), ctx, rule_label)?;
         ctx.set_hash_entry(&hash_name, &key, value);
         Ok(true)
+    }
+
+    fn direct_shape_literal_kind(
+        expr: &linkedspec_core::expr::Expr,
+    ) -> Option<ShapeLiteralKind> {
+        use linkedspec_core::expr::Expr;
+        match expr {
+            Expr::ArrayLiteral { .. } => Some(ShapeLiteralKind::Array),
+            Expr::HashLiteral { .. } => Some(ShapeLiteralKind::Hash),
+            _ => None,
+        }
+    }
+
+    fn assign_direct_shape_to_target(
+        &self,
+        target_name: &str,
+        value_expr: &linkedspec_core::expr::Expr,
+        value: RuntimeValue,
+        ctx: &mut RuntimeContext,
+    ) -> Result<bool, String> {
+        match (Self::direct_shape_literal_kind(value_expr), value) {
+            (Some(ShapeLiteralKind::Array), RuntimeValue::Array(values)) => {
+                ctx.set_array(target_name, values);
+                Ok(true)
+            }
+            (Some(ShapeLiteralKind::Hash), RuntimeValue::Hash(values)) => {
+                ctx.set_hash(target_name, values);
+                Ok(true)
+            }
+            (Some(_), other) => Err(format!(
+                "direct shape literal evaluated to unexpected value kind: {:?}",
+                other
+            )),
+            (None, _) => Ok(false),
+        }
+    }
+
+    fn direct_shape_assignment_target(
+        raw_target: &linkedspec_core::expr::Arg,
+        shape_kind: ShapeLiteralKind,
+    ) -> Option<String> {
+        use linkedspec_core::expr::{Arg, Expr};
+        match raw_target {
+            Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
+            Arg::Positional(Expr::Call { name, args })
+                if matches!(
+                    (shape_kind, name.as_str()),
+                    (ShapeLiteralKind::Array, "array" | "a")
+                        | (ShapeLiteralKind::Hash, "hash" | "h")
+                ) && args.len() == 1 =>
+            {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
+                    _ => None,
+                }
+            }
+            _ => None,
+        }
     }
 
     /// Evaluate an expression tree against the runtime context.
@@ -953,6 +1020,28 @@ impl Engine {
             }
             "assign" | "set" => {
                 if args.len() >= 2 {
+                    if let Some(kind) = Self::direct_shape_literal_kind(raw_args[1].value()) {
+                        if let Some(target) =
+                            Self::direct_shape_assignment_target(&raw_args[0], kind)
+                        {
+                            match (kind, args[1].clone()) {
+                                (ShapeLiteralKind::Array, RuntimeValue::Array(values)) => {
+                                    ctx.set_array(&target, values);
+                                    return Ok(RuntimeValue::Undef);
+                                }
+                                (ShapeLiteralKind::Hash, RuntimeValue::Hash(values)) => {
+                                    ctx.set_hash(&target, values);
+                                    return Ok(RuntimeValue::Undef);
+                                }
+                                (_, other) => {
+                                    return Err(format!(
+                                        "direct shape literal evaluated to unexpected value kind: {:?}",
+                                        other
+                                    ));
+                                }
+                            }
+                        }
+                    }
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
                     ctx.set_scalar(&target, args[1].clone());
                 }

@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference
+
+**Scope:** Rust runtime assignment/helper dispatch, Rust integration locks, Perl-oracle corpus fixtures, mdBook,
+Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now matches the accepted Perl RHS shape target-kind contract. A direct array shape RHS on
+a bare assignment target assigns the array working variable (`items = [value]`, `set(items, [])`,
+`assign(items, [value])`), and a direct hash shape RHS assigns the hash working variable (`meta = { key =>
+value }`, `set(meta, {})`, `assign(meta, { key => value })`). Explicit typed aggregate targets work as the same
+target kind (`set(array(items), [value])`, `set(hash(meta), { key => value })`).
+
+**Boundary:** Explicit scalar targets remain the scalar payload boundary. `set(scalar(payload), [value])`
+stores the whole array payload in scalar `payload`; it does not initialize array working variable `payload`.
+Non-shape RHS values keep the settled scalar assignment rule.
+
+**Validation:** focused Rust runtime `.1.2.3.5.4` locks PASS; oracle corpus regenerated to 32 fixtures and
+corpus oracle PASS. Existing warning volume is from the `rgx/subs/pgen` baseline.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity
 
 **Scope:** Rust expression AST/parser, Rust runtime evaluation, Rust integration locks, Perl-oracle corpus
