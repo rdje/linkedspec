@@ -181,8 +181,10 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 
 In return and assignment-like scalar source slots, a bare scalar name is the same read as
 `scalar(name)`: `return(count)`, `set(out, count)`, and `out = count` read `$count`. This
-source-slot shorthand is intentionally narrower than every value expression. Append RHS values, hash-index
-keys/RHS values, and direct path atoms still use explicit wrappers where shown below.
+source-slot shorthand is intentionally narrower than every value expression. Mutation slots now support the
+same scalar read for array append RHS and hash mutation key/RHS positions: `items += value`,
+`set_key(meta, key, value)`, and `meta[key] = value` read `$value` / `$key` where those slots are scalar-valued.
+Direct path atoms still use explicit wrappers where shown below.
 
 > **Terse spellings (canonical going forward).** The `.spec` format is migrating to terser helper
 > names: `set(target, source)` is the canonical rename of `assign(...)`, `cat(...)` of `concat(...)`,
@@ -190,11 +192,10 @@ keys/RHS values, and direct path atoms still use explicit wrappers where shown b
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
 > array snapshot read). The scalar operator statement `name = value` is equivalent to `set(name, value)` and
 > `assign(name, value)`. The array append operator `items += expr` is equivalent to the explicit
-> append forms `push(items, expr)` / `push_value(items, expr)` for explicit value expressions; when the
-> value is a working scalar, write `items += scalar(value)` until bare append-RHS reads land.
+> append forms `push(items, expr)` / `push_value(items, expr)`; when the value is a working scalar,
+> `items += value` reads `$value`.
 > The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
-> the key and value are explicit expressions; write `meta[scalar(key)] = scalar(value)` for working
-> variables until bare key/RHS reads land.
+> the key and value are scalar-valued expressions; `meta[key] = value` reads `$key` and `$value`.
 > Direct nested access `payload["children"][0]["name"]` is accepted for explicit path segments.
 > Quoted string segments are hash keys; numeric segments and helper/value expressions such as
 > `[scalar(i)]` are array indexes. Bare path atoms such as `[i]` are still deferred; write
@@ -358,15 +359,17 @@ push_value(array(items), trim(match_text()));
 push_value(array(children), hash("kind", "wrapped", "node", call(Node)));
 ```
 
-The terse operator form is equivalent for explicit value expressions:
+The terse operator form is equivalent for explicit value expressions and bare scalar RHS reads:
 
 ```text
 items += trim(match_text());
 children += hash("kind", "wrapped", "node", call(Node));
 items += scalar(value);
+items += value;
 ```
 
-Keep the RHS explicit. `items += value` is intentionally still reserved for the later mutation-slot scalar-read work; use `items += scalar(value)` or `push_value(items, scalar(value))` when `value` is a working scalar.
+In the operator form, a bare RHS identifier is a scalar working-variable read. The all-bare `push(A,B)`
+function-call shape remains child-call syntax, so use `items += value` when appending a working scalar by name.
 
 Hash field assignment has the same statement shape for named hashes:
 
@@ -374,9 +377,11 @@ Hash field assignment has the same statement shape for named hashes:
 meta["kind"] = "token";
 meta[cat("source", "_kind")] = scalar(kind);
 meta[scalar(field_name)] = scalar(field_value);
+meta[field_name] = field_value;
 ```
 
-Keep the key and value explicit. `meta[key] = "token"` and `meta["kind"] = value` are intentionally still reserved for the later mutation-slot scalar-read work; use `meta[scalar(key)] = ...` and `... = scalar(value)` when reading working scalars by name.
+In statement hash mutation slots, bare key/RHS identifiers read scalar working variables, so
+`meta[key] = "token"` reads `$key` and `meta["kind"] = value` reads `$value`.
 
 When the child returns an array-like payload and the current rule accumulator needs one element from it, pass a zero-based index as the second argument:
 
@@ -684,9 +689,12 @@ The terse hash-index operator is the statement form written with the key next to
 meta["stage"] = "normalized";
 meta[cat("source", "_kind")] = scalar(kind);
 meta[scalar(field_name)] = scalar(field_value);
+meta[field_name] = field_value;
 ```
 
-These update the named working hash in place, exactly like `set_key(meta, key, value)`. The expression form remains explicit: `set_key(hash(meta), key, value)` returns a copy instead of mutating `meta`.
+These update the named working hash in place, exactly like `set_key(meta, key, value)`. In statement mutation
+slots, bare key/RHS identifiers read scalar working variables. The expression form remains explicit:
+`set_key(hash(meta), key, value)` returns a copy instead of mutating `meta`.
 
 ## Fallback and presence helpers
 

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3.2 — scalar mutation-slot bare reads
+
+**Scope:** Perl ActionIR mutation-slot lowering, scanner contracts, auto-working-variable collector,
+phase0 regression coverage, mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Perl now treats non-reserved bare identifiers as scalar working-variable reads in the scoped
+mutation slots owned by this leaf: array append RHS (`items += VALUE`), statement-level named-hash mutation
+key/RHS (`set_key(meta, KEY, VALUE)`), and hash-index operator key/RHS (`meta[KEY] = VALUE`). Each newly sigiled
+read gets one per-invocation `my $NAME` unless already declared/wrapped.
+
+**Boundary:** target inference is unchanged (`items` still auto-exists as `@items`; `meta` still auto-exists as
+`%meta`). Primitive literals remain exact, reserved engine locals such as `CAPTURE` are not claimed, direct
+access bare path atoms such as `foo["a"][z]` remain deferred, and all-bare `push(A,B)` / `push(items,value)`
+remain child-call syntax rather than append syntax.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering probes PASS; phase0 PASS
+(`t/phase0_regression.t`, 986 tests, including the new 29-assertion lock); mdBook build PASS; Knowledge Map,
+memory/doctrine/diff checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3.1 — scalar source-slot bare reads
 
 **Scope:** Perl ActionIR return/source lowering, auto-working-variable collector, phase0 regression coverage,
@@ -12,9 +31,9 @@ Each newly sigiled read gets one per-invocation `my $NAME` unless it is already 
 literals remain exact (`true`/`false`/`undef` are not variables), while prefix identifiers such as `trueword`
 and `undefine` are ordinary scalar reads in these source slots.
 
-**Boundary:** this does not broaden generic helper arguments, array append RHS, hash mutation key/RHS slots,
-direct-access bare path atoms, or all-bare child-call syntax. `items += value`, `meta["stage"] = value`,
-`foo["a"][z]`, and `push(A,B)` keep their prior behavior.
+**Boundary at this leaf:** this did not broaden generic helper arguments, array append RHS, hash mutation
+key/RHS slots, direct-access bare path atoms, or all-bare child-call syntax. The mutation key/RHS subset was
+advanced by `.1.2.3.3.2`; direct path atoms remain separate.
 
 **Validation:** Perl syntax checks PASS; TOOLBOX lowering probes PASS; generated-source/runtime no-leak probe
 PASS; phase0 PASS (`t/phase0_regression.t`, 985 tests, including the new 24-assertion lock); mdBook build PASS;

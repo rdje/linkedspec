@@ -1683,6 +1683,43 @@ sub _lower_source_slot_bare_scalar_read_expr {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_mutation_slot_value_expr
+# Purpose : Lower one accepted mutation value slot. A non-reserved bare identifier
+#           is a scalar working-variable read for SPEC-FORMAT-TERSE.1.2.3.3.2;
+#           primitive literals and explicit helper/value expressions keep their
+#           existing lowering. Reserved engine locals are not claimed here.
+# Args    : ($expr, $deps)
+# Returns : Perl value expression string or undef when this slot is not accepted
+#------------------------------------------------------------------------------
+sub _lower_mutation_slot_value_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
+ return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
+
+ my $literal = $lower_primitive_literal_expr->($trimmed);
+ return $literal if defined($literal);
+ return undef if $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+
+ my $lowered = _lower_method_value_expr($trimmed, $deps);
+ $lowered = $trimmed unless defined($lowered) && length($lowered);
+ return $lowered
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_return_payload_expr
 # Purpose : Lower generalized return payload expressions, preserving nested
 #           `[]/{}` literals while lowering embedded scalar/array/hash/flat helpers.
@@ -1836,8 +1873,8 @@ sub _lower_scalar_assignment_operator_statement {
 # Function: _lower_array_append_operator_statement
 # Purpose : Lower the statement form `items += value` to the same explicit array
 #           append emitted for accepted `push(items, value)` / `push_value(...)`
-#           shapes. A bare RHS is deliberately not claimed; Channel 2 owns bare
-#           value-position working-variable reads.
+#           shapes. Bare RHS identifiers are scoped scalar reads in this
+#           mutation value slot.
 # Args    : ($expr, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
@@ -1851,7 +1888,6 @@ sub _lower_array_append_operator_statement {
   return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
- my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -1860,11 +1896,8 @@ sub _lower_array_append_operator_statement {
  my ($target_symbol, $value) = ($1, $2);
  $value = $trim_action_ir_value->($value);
  return undef unless defined($value) && length($value);
- my $literal = $lower_primitive_literal_expr->($value);
- return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !defined($literal);
-
- my $lowered_value = _lower_method_value_expr($value, $deps);
- $lowered_value = $value unless defined($lowered_value) && length($lowered_value);
+ my $lowered_value = _lower_mutation_slot_value_expr($value, $deps);
+ return undef unless defined($lowered_value) && length($lowered_value);
  return "push \@$target_symbol, $lowered_value"
 }
 
@@ -1878,7 +1911,6 @@ sub _parse_hash_index_assignment_operator_statement {
   return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
- my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -1943,10 +1975,6 @@ sub _parse_hash_index_assignment_operator_statement {
  $key = $trim_action_ir_value->($key);
  return undef unless defined($key) && length($key);
  return undef unless defined($value) && length($value);
- my $key_literal = $lower_primitive_literal_expr->($key);
- my $value_literal = $lower_primitive_literal_expr->($value);
- return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !defined($key_literal);
- return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !defined($value_literal);
  return {
   target => $target,
   key    => $key,
@@ -1958,8 +1986,8 @@ sub _parse_hash_index_assignment_operator_statement {
 # Function: _lower_hash_index_assignment_operator_statement
 # Purpose : Lower the statement form `meta["key"] = value` to the same direct
 #           named-hash mutation emitted for `set_key(meta, "key", value)`.
-#           Bare key/RHS identifiers are deliberately not claimed; Channel 2
-#           owns bare value-position working-variable reads.
+#           Bare key/RHS identifiers are scoped scalar reads in this mutation
+#           key/value slot.
 # Args    : ($expr, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
@@ -1980,8 +2008,7 @@ sub _lower_hash_index_assignment_operator_statement {
  my $key_lowered = $lower_scalar_access_key_expr->($parsed->{key});
  return undef unless defined($key_lowered) && length($key_lowered);
 
- my $value_lowered = _lower_method_value_expr($parsed->{value}, $deps);
- $value_lowered = $parsed->{value} unless defined($value_lowered) && length($value_lowered);
+ my $value_lowered = _lower_mutation_slot_value_expr($parsed->{value}, $deps);
  return undef unless defined($value_lowered) && length($value_lowered);
 
  return '$'.$parsed->{target}.'{'.$key_lowered.'} = '.$value_lowered
@@ -2030,8 +2057,7 @@ sub _lower_set_key_statement {
  my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
  return undef unless defined($key_lowered) && length($key_lowered);
 
- my $value_lowered = _lower_method_value_expr($value_expr, $deps);
- $value_lowered = $value_expr unless defined($value_lowered) && length($value_lowered);
+ my $value_lowered = _lower_mutation_slot_value_expr($value_expr, $deps);
  return undef unless defined($value_lowered) && length($value_lowered);
 
  return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered

@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3.2 — mutation-slot bare scalar reads landed): Implemented the second
+  scalar Channel 2 child by changing only accepted mutation key/RHS seams. Durable points. (1) **Do not
+  broaden `_lower_method_value_expr`.** The new `_lower_mutation_slot_value_expr` is called only by
+  statement-level array append, statement-level `set_key`, and hash-index assignment operator lowerers, so
+  generic helper arguments and all-bare `push(A,B)` disambiguation stay stable. (2) **Scanner guards must move
+  with lowerer guards.** `PrimitivePipelineRules` now recognizes bare RHS/key mutation statements for canonical
+  ActionIR, but still avoids reserved nonliteral engine locals such as `CAPTURE` as mutation values. (3)
+  **Every `$NAME` read has a collector peer.** `_collect_auto_working_var_decls` uses the lowerers as the
+  acceptance oracle before adding `@target` / `%target` plus scalar key/RHS `my` declarations, deduping against
+  explicit declarations and wrappers. (4) **The remaining scalar leaf is direct path atoms.** `foo["a"][z]`
+  still stays raw while `foo["a"][scalar(z)]` works; `.1.2.3.3.3` owns that key-vs-index rule.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3.1 — source-slot bare scalar reads landed): Implemented the first scalar
   Channel 2 child by changing only the source-slot seams. Durable points. (1) **The lowering hook is scoped.**
   `_lower_return_payload_expr` handles `return(NAME)` and `_lower_assignment_source_expr` handles
@@ -10,8 +22,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   bare names, and scalar-operator RHS bare names, then dedups against wrappers/declares and reserved names.
   (3) **Literal exactness now composes with scalar reads.** `true`/`false`/`undef` stay primitive literals, but
   prefix identifiers like `trueword` and `undefine` are no longer raw barewords in supported source slots; they
-  read `$trueword` / `$undefine`. (4) **The split boundaries are locked.** `items += value`,
-  `meta["stage"] = value`, `foo["a"][z]`, and all-bare `push(A,B)` retain their previous behavior.
+  read `$trueword` / `$undefine`. (4) **The split boundaries were locked at this leaf.** Mutation key/RHS slots
+  advanced later in `.1.2.3.3.2`; direct `[z]` and all-bare `push(A,B)` remain separate.
 
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3 — Perl scalar bare reads split by lowering seam): Split the scalar
   Channel 2 owner before code. Durable points. (1) **Do not add a generic "bare word means scalar" fallback to

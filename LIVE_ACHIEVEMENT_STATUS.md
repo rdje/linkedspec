@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3.2 — Perl scalar mutation-slot bare reads landed**
+  (PERL ACTIONIR + SCANNER + PHASE0 + BOOK/KM LOCKS). `items += VALUE`,
+  `set_key(meta, KEY, VALUE)`, and `meta[KEY] = VALUE` now read non-reserved bare key/RHS identifiers as scalar
+  working variables and auto-supply one per-invocation `my $NAME` when needed. Target inference is unchanged
+  (`@items` / `%meta`), primitive literals stay exact, reserved engine locals are not claimed, direct path atoms
+  remain deferred, and all-bare `push(A,B)` remains child-call syntax.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering probes PASS; phase0 PASS (`1..986`);
+  mdBook/KM/local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.3.3`** (Perl direct-access bare path atoms).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3.1 — Perl scalar source-slot bare reads landed**
   (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). `return(NAME)`, `set(out, NAME)` / `assign(out, NAME)`, and
   scalar operator `out = NAME` now read scalar working variable `NAME` and auto-supply one per-invocation

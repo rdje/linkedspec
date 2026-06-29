@@ -44176,10 +44176,10 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
         'prefix identifier trueword is not a literal and now follows scalar bare-read semantics');
     is($L->('return(undefine)'), 'return $undefine',
         'prefix identifier undefine is not a literal and now follows scalar bare-read semantics');
-    is($L->('items += value'), 'items += value',
-        'array append bare RHS remains deferred to the mutation key/RHS scalar-read leaf');
-    is($L->('meta["stage"] = value'), 'meta["stage"] = value',
-        'hash-index bare RHS remains deferred to the mutation key/RHS scalar-read leaf');
+    is($L->('items += value'), 'push @items, $value',
+        'array append bare RHS is handled by the later mutation key/RHS scalar-read leaf');
+    is($L->('meta["stage"] = value'), '$meta{"stage"} = $value',
+        'hash-index bare RHS is handled by the later mutation key/RHS scalar-read leaf');
     is($L->('return(foo["a"][z])'), 'return foo["a"][z]',
         'direct-access bare path atom remains deferred');
     is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
@@ -44216,6 +44216,94 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
     is($run->($p, $first_input), '"b"', 'bare return(out) reads the scalar set during the current parse');
     my $empty_input = '';
     is($run->($p, $empty_input), 'null', 're-running the SAME parser with no match returns null, not a leaked previous scalar');
+};
+
+subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub {
+    # SPEC-FORMAT-TERSE.1.2.3.3.2 (Channel 2 scalar mutation-slot subset):
+    # array append RHS, statement-level set_key key/value slots, and hash-index
+    # key/value slots now read bare scalar working variables. This deliberately
+    # leaves all-bare push(...) child-call routing and direct-access [NAME] atoms
+    # unchanged.
+    plan tests => 29;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+    my $run = sub {
+        my ($p, $input) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$input); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+
+    is($L->('items += value'), 'push @items, $value',
+        'array append operator lowers a bare RHS as a scalar read');
+    like($L->('items += true'), qr/^push \@items, do \{ require JSON::PP; JSON::PP::true \}/,
+        'array append primitive literals remain typed values');
+    is($L->('items += CAPTURE'), 'items += CAPTURE',
+        'reserved engine locals are not claimed as mutation-slot scalar reads');
+    is($L->('set_key(meta,key,value)'), '$meta{$key} = $value',
+        'set_key(meta, key, value) lowers bare key and value as scalar reads');
+    is($L->('set_key(meta,"stage",value)'), '$meta{"stage"} = $value',
+        'set_key(meta, "stage", value) lowers a bare value as a scalar read');
+    is($L->('meta[key] = value'), '$meta{$key} = $value',
+        'hash-index operator lowers bare key and value as scalar reads');
+    is($L->('meta["stage"] = value'), '$meta{"stage"} = $value',
+        'hash-index operator lowers a bare value with a literal key');
+    is($L->('meta[key] = "v"'), '$meta{$key} = "v"',
+        'hash-index operator lowers a bare key with a literal value');
+    is($L->('return(foo["a"][z])'), 'return foo["a"][z]',
+        'direct-access bare path atom remains deferred');
+    is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
+        'all-bare push(A,B) remains child-call syntax');
+    like($L->('push(items,value)'), qr/^push \@value, &\{\$\$descr\{spec\}\{items\}\{handler\}\}/,
+        'all-bare push(items,value) keeps child-call precedence');
+
+    my $d = LinkedSpec::Get(\("top:: /x/ -> top[0] { items += value; set_key(meta,key,value); meta[key] = value; return(hash_copy(meta)) }\n"), return_descriptor => 1);
+    my $meta = $d->{spec}{top}{meta}{action_rewriter};
+    is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,PUSH,RETURN',
+        'mutation-slot bare reads report canonical PUSH/ASSIGN/RETURN nodes');
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'mutation-slot bare reads have no canonical fallback');
+
+    my $src = $gen->("top:: -> w { items += value; set_key(meta, key, value); meta[key2] = value2; return(array(array_copy(items), hash_copy(meta))) }\n\nw : /x/\n");
+    for my $pair (['@', 'items'], ['%', 'meta'], ['$', 'value'], ['$', 'key'], ['$', 'key2'], ['$', 'value2']) {
+        my ($sigil, $name) = @$pair;
+        my $q = quotemeta($sigil.$name);
+        my $n = () = ($src =~ /my $q\b/g);
+        is($n, 1, "mutation-slot bare read/target auto-supplies exactly one `my $sigil$name`");
+    }
+    ok(index($src, 'my @items;') >= 0 && index($src, 'my @items;') < index($src, 'while (1)'),
+        'the auto `my @items` sits in the preamble before while(1)');
+    ok(index($src, 'my %meta;') >= 0 && index($src, 'my %meta;') < index($src, 'while (1)'),
+        'the auto `my %meta` sits in the preamble before while(1)');
+
+    my $literal_src = $gen->("top:: -> w { items += true; set_key(meta, false, undef); meta[true] = false; return(hash_copy(meta)) }\n\nw : /x/\n");
+    unlike($literal_src, qr/my \$(?:true|false|undef)\b/,
+        'reserved primitive literals are not auto-declared as scalar reads in mutation slots');
+
+    my $dedup_src = $gen->("top:: -> w { declare(scalar, value, key); declare(array, items); declare(hash, meta); items += value; set_key(meta, key, value); meta[key] = value; return(array_copy(items)) }\n\nw : /x/\n");
+    for my $pair (['$', 'value'], ['$', 'key'], ['@', 'items'], ['%', 'meta']) {
+        my ($sigil, $name) = @$pair;
+        my $q = quotemeta($sigil.$name);
+        my $n = () = ($dedup_src =~ /my $q\b/g);
+        is($n, 1, "mutation-slot bare read/target dedups declared `$sigil$name`");
+    }
+
+    my $runtime_spec = "top:: /(\\w+)=(\\w+)\\s*/ -> top[0] { set(key, match_group(0)); set(value, match_group(1)); items += value; set_key(meta, key, value); meta[\"last\"] = value }\n"
+                     . "LX { return(hash(\"items\", array_copy(items), \"meta\", hash_copy(meta))) }\n";
+    my $p = eval { LinkedSpec::Get(\$runtime_spec, top_rule => 'top', parse_mode => 'seek') };
+    ok(ref($p) eq 'CODE', 'mutation-slot bare-read runtime spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($p, 'a=1 b=2'), '{"items":["1","2"],"meta":{"a":"1","b":"2","last":"2"}}',
+        'mutation-slot bare reads append and hash-store values from the current parse');
+    is($run->($p, 'c=3'), '{"items":["3"],"meta":{"c":"3","last":"3"}}',
+        're-running the SAME parser resets auto-declared mutation-slot state');
 };
 
 subtest 'spec_format_terse_1_4_1_new_spellings_lower_identically_to_canonical' => sub {
@@ -44471,8 +44559,8 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
         'array append operator lowers identically to terse push(target, value)');
     is($L->('items += scalar(label)'), $L->('push(items, scalar(label))'),
         'array append operator lowers identically to push(target, scalar(value))');
-    is($L->('items += value'), 'items += value',
-        'bare RHS remains deferred to Channel 2; wrap it or use an explicit helper form');
+    is($L->('items += value'), 'push @items, $value',
+        'bare RHS now follows the Channel 2 mutation-slot scalar-read rule');
     is($L->('items ++'), 'items ++',
         'increment-like spelling is not claimed by the array append operator');
     is($L->('name = "ok"'), '$name = "ok"',
@@ -44506,8 +44594,8 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
 
 subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_key' => sub {
     # SPEC-FORMAT-TERSE.1.3.4.3: statement-level NAME[KEY] = VALUE is the
-    # hash-index operator spelling. Bare key/RHS identifiers remain deferred to
-    # Channel 2; use literals or explicit helper expressions such as scalar(...).
+    # hash-index operator spelling. Bare key/RHS identifiers now follow the later
+    # Channel 2 mutation-slot scalar-read rule; explicit scalar(...) remains valid.
     plan tests => 14;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -44531,10 +44619,10 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
         'hash-index assignment operator lowers identically to set_key(target, key, value)');
     is($L->('meta[scalar(key)] = scalar(value)'), $L->('set_key(meta, scalar(key), scalar(value))'),
         'hash-index assignment operator lowers identically for explicit scalar key/value reads');
-    is($L->('meta[key] = "v"'), 'meta[key] = "v"',
-        'bare key remains deferred to Channel 2; wrap it or use an explicit helper form');
-    is($L->('meta["stage"] = value'), 'meta["stage"] = value',
-        'bare RHS remains deferred to Channel 2; wrap it or use an explicit helper form');
+    is($L->('meta[key] = "v"'), '$meta{$key} = "v"',
+        'bare key now follows the Channel 2 mutation-slot scalar-read rule');
+    is($L->('meta["stage"] = value'), '$meta{"stage"} = $value',
+        'bare RHS now follows the Channel 2 mutation-slot scalar-read rule');
     is($L->('name = "ok"'), '$name = "ok"',
         'scalar assignment operator remains separate');
     is($L->('items += "a"'), 'push @items, "a"',
@@ -44569,7 +44657,7 @@ subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
     # forms, not bare working-variable reads. That matters most for true/false:
     # on the Perl reference they must become JSON booleans, not the strings
     # "true"/"false"; prefix identifiers such as trueword remain outside the
-    # literal path and now follow the later scalar bare-read source-slot rule.
+    # literal path and now follow scoped scalar bare-read rules where supported.
     plan tests => 18;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);

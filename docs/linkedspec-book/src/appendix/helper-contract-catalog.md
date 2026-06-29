@@ -315,14 +315,14 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 - **Returns**: void
 - **Behavior**: Terse explicit-value append. Lowers identically to `push_value(target, value)` for unambiguous value expressions.
 - **Examples**: `push(items, "a")`, `push(items, scalar(value))`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
-- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable value, wrap the value (`push(items, scalar(value))` or `push_value(items, scalar(value))`) until bare append-RHS reads land.
+- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable by bare name, use the operator form `items += value`; `push_value(items, scalar(value))` remains explicit and unambiguous.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
 - **Returns**: void
-- **Behavior**: Statement-level array append operator. Lowers/runs identically to `push(target, value)` / `push_value(target, value)` for explicit value expressions.
-- **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += scalar(value)`.
-- **Edge cases**: A bare RHS such as `items += value` remains reserved for the later mutation-slot scalar-read work. Use `items += scalar(value)` or `push_value(items, scalar(value))` when appending a working scalar by name.
+- **Behavior**: Statement-level array append operator. Lowers/runs identically to explicit append forms and reads a bare RHS identifier as a scalar working variable.
+- **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += scalar(value)`, `items += value`.
+- **Edge cases**: The target is still an array working variable and auto-exists as `@target`. A bare RHS such as `items += value` reads `$value`; reserved literals such as `true`, `false`, and `undef` keep their literal meaning.
 
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
@@ -503,14 +503,14 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 - **Returns**: hash
 - **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input.
 - **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly.
-- **Operator form**: `name[key] = value` mutates the same named working hash directly when `key` and `value` are explicit expressions.
+- **Operator form**: `name[key] = value` mutates the same named working hash directly; bare key/RHS identifiers in the statement mutation slot read scalar working variables.
 
 ### `name[key] = value`
 - **Signature**: `target[key_expr] = value_expr`
 - **Returns**: void
 - **Behavior**: Statement-level hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions.
-- **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = scalar(kind)`, `meta[scalar(field_name)] = scalar(field_value)`.
-- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key or RHS identifiers are deliberately not accepted yet: write `meta[scalar(key)] = "v"` and `meta["stage"] = scalar(value)` until mutation-slot bare scalar reads land. This is a statement-only mutation form, not a value expression.
+- **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = scalar(kind)`, `meta[scalar(field_name)] = scalar(field_value)`, `meta[field_name] = field_value`.
+- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key/RHS identifiers read scalar working variables in this statement mutation slot. This is a statement-only mutation form, not a value expression.
 
 ### `rename_key(h, old, new)`
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
@@ -997,8 +997,8 @@ unlike the Retired table below):
 |---|---|---|
 | `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
 | `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Bare RHS names read working scalars. Does not imply array `+=` or hash-index assignment. |
-| `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator for explicit value expressions. Bare RHS is still deferred; write `items += scalar(value)` or `push_value(items, scalar(value))` for a working scalar. |
-| `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator for explicit key/value expressions. Bare key or RHS identifiers are still deferred; write `meta[scalar(key)] = scalar(value)` for working scalars. |
+| `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax. |
+| `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in statement mutation slots. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 

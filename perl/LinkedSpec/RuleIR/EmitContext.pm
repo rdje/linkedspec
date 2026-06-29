@@ -327,6 +327,11 @@ sub _lower_hash_index_assignment_operator_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_hash_index_assignment_operator_statement', @args)
 }
 
+sub _parse_hash_index_assignment_operator_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('method_lowering', '_parse_hash_index_assignment_operator_statement', @args)
+}
+
 sub _lower_set_key_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_set_key_statement', @args)
@@ -830,8 +835,11 @@ sub _mask_action_code_literals {
 #             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
 #                 BARE scalar reads in return/assignment-like source slots:
 #                 return(NAME), assign/set(out, NAME), and `out = NAME` -> $NAME.
-#                 Mutation RHS/key slots and direct access [NAME] remain deliberately
-#                 out of scope for later scalar Channel 2 children.
+#             (e) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
+#                 BARE scalar reads in mutation slots:
+#                 items += VALUE, set_key(meta, KEY, VALUE), and meta[KEY] = VALUE.
+#                 Direct access [NAME] remains deliberately out of scope for the
+#                 next scalar Channel 2 child.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -886,10 +894,9 @@ sub _collect_auto_working_var_decls {
   # target lowers to the same scalar `$NAME`, so it auto-exists identically. The
   # scalar assignment operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1) is
   # likewise statement-level and scalar-only. The array append operator
-  # (`NAME += VALUE`, SPEC-FORMAT-TERSE.1.3.4.2) is statement-level and array-only
-  # for accepted non-bare RHS shapes. The hash-index assignment operator
-  # (`NAME[KEY] = VALUE`, SPEC-FORMAT-TERSE.1.3.4.3) is statement-level and
-  # hash-only for accepted explicit key/RHS expressions.
+  # (`NAME += VALUE`) and hash-index assignment operator (`NAME[KEY] = VALUE`)
+  # are statement-level array/hash mutations; `.1.2.3.3.2` additionally collects
+  # the accepted bare scalar key/RHS reads in those mutation slots.
   while ($masked =~ /\b(?:assign|set)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('$', $1);   # assign/set target lowers to a scalar
   }
@@ -928,15 +935,28 @@ sub _collect_auto_working_var_decls {
    my $trimmed = _trim_action_ir_value($statement);
    next unless defined($trimmed) && length($trimmed);
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*(.+)$/s) {
+    my $target_expr = $1;
     my $value_expr = _trim_action_ir_value($2);
-    $record->('@', $1)
-     if defined($value_expr) && length($value_expr) && $value_expr !~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+    my $lowered_append = _lower_array_append_operator_statement($trimmed);
+    next unless defined($lowered_append) && length($lowered_append);
+    $record->('@', $target_expr);
+    $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
     next;
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
+    my $target_expr = $1;
     my $lowered_hash_index = _lower_hash_index_assignment_operator_statement($trimmed);
-    $record->('%', $1) if defined($lowered_hash_index) && length($lowered_hash_index);
-    next if defined($lowered_hash_index) && length($lowered_hash_index);
+    if (defined($lowered_hash_index) && length($lowered_hash_index)) {
+     my $parsed_hash_index = _parse_hash_index_assignment_operator_statement($trimmed);
+     $record->('%', $parsed_hash_index->{target} // $target_expr) if $parsed_hash_index;
+     if ($parsed_hash_index) {
+      for my $slot (qw(key value)) {
+       my $slot_expr = _trim_action_ir_value($parsed_hash_index->{$slot});
+       $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+      }
+     }
+     next;
+    }
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
     my $source_expr = _trim_action_ir_value($2);
@@ -948,9 +968,14 @@ sub _collect_auto_working_var_decls {
    next unless $call && ($call->{method} // '') eq 'set_key';
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 3, 3);
    next unless $args;
+   my $lowered_set_key = _lower_set_key_statement($trimmed);
+   next unless defined($lowered_set_key) && length($lowered_set_key);
    my $target_expr = _trim_action_ir_value($args->[0]);
-   next unless defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-   $record->('%', $target_expr);
+   $record->('%', $target_expr) if defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   for my $slot_index (1, 2) {
+    my $slot_expr = _trim_action_ir_value($args->[$slot_index]);
+    $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   }
   }
   while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});

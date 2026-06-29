@@ -76,9 +76,14 @@ return(scalar(count))
 return(count)
 set(out, count)
 name = value
+
+# mutation key/RHS scalar reads — targets keep their array/hash kind
+items += value
+set_key(meta, key, value)
+meta[key] = value
 ```
 
-The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In return and assignment-like scalar source slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, and `out = count` are the terse forms of `return(scalar(count))`, `set(out, scalar(count))`, and `out = scalar(count)`. The variable is the same fresh per-invocation working value described above. Inferring a kind from a value's shape is still a separate, later evolution step. In array append and hash-index assignment, keep the RHS/key explicit for now: use `items += scalar(value)`, `meta[scalar(key)] = scalar(value)`, `"text"`, `cat(...)`, or another helper expression rather than bare `value` / `key` until that later mutation-slot step lands.
+The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, and `meta[key] = value` are the terse forms of their explicit `scalar(...)` counterparts. The variable is the same fresh per-invocation working value described above. Inferring a kind from a value's shape is still a separate, later evolution step. Direct nested-access path atoms remain explicit for now: use `payload[scalar(index)]` rather than `payload[index]` until the direct path-atom rule lands.
 
 `declare(...)` stays supported and is still the right choice when you want to:
 

@@ -47,6 +47,15 @@ sub _is_primitive_literal_token {
  return 0
 }
 
+sub _is_nonliteral_reserved_bare_token {
+ my ($expr) = @_;
+ my $trimmed = _trim_action_ir_value($expr);
+ return 0 unless defined($trimmed) && length($trimmed);
+ return 0 unless $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ return 0 if _is_primitive_literal_token($trimmed);
+ return $trimmed =~ /^(?:descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o ? 1 : 0
+}
+
 sub _scan_contract_print_foreach_iterable {
  my ($code) = @_;
  my @events;
@@ -189,8 +198,7 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
  next unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*(.+)$/s;
  my ($target_expr, $value_expr) = ($1, _trim_action_ir_value($2));
  next unless defined($value_expr) && length($value_expr);
- # Channel 2 is still deferred: a bare RHS is not accepted as a working-var read.
- next if $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !_is_primitive_literal_token($value_expr);
+ next if _is_nonliteral_reserved_bare_token($value_expr);
  push @events, {
   raw => $trimmed,
   args => {
@@ -267,8 +275,7 @@ sub _parse_hash_index_assignment_operator_statement {
  $key = _trim_action_ir_value($key);
  return undef unless defined($key) && length($key);
  return undef unless defined($value) && length($value);
- return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !_is_primitive_literal_token($key);
- return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !_is_primitive_literal_token($value);
+ return undef if _is_nonliteral_reserved_bare_token($value);
  return {
   target => $target,
   key    => $key,

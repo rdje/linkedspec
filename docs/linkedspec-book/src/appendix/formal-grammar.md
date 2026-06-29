@@ -388,8 +388,8 @@ undef             — undefined/null
 
 `true` and `false` are boolean values, not strings. Literal recognition is exact:
 `trueword`, `false_alarm`, and `undefine` are identifiers, not literals. In supported
-scalar source slots such as `return(trueword)`, those identifiers are working-variable
-reads.
+scalar read slots such as `return(trueword)` and `items += trueword`, those identifiers
+are working-variable reads.
 
 Helper calls use the uniform `callee(args)` shape. Whitespace between the callee
 name and the opening parenthesis is accepted (`set (name, value)` is the same call

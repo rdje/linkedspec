@@ -224,13 +224,13 @@ is the target accumulator. To append a working-variable value, write
 `push(results, scalar(value))` or use `push_value(results, scalar(value))` until the
 array-append RHS form accepts bare scalar reads. Bare scalar reads are currently supported in
 return and assignment-like source slots such as `return(value)`, `set(out, value)`, and
-`out = value`.
+`out = value`, and in mutation slots such as `items += value`.
 
 Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
 "normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`
 in place. The hash target auto-exists just like a declared `hash(meta)` working
-variable; keep the key and value explicit (`"stage"`, `cat(...)`, `scalar(key)`,
-`scalar(value)`) until the hash mutation key/RHS forms accept bare scalar reads.
+variable. In statement mutation slots, bare key/RHS identifiers read scalar working
+variables: `set_key(meta, key, value)` and `meta[key] = value` use `$key` and `$value`.
 
 ### 5.4 Return Value
 

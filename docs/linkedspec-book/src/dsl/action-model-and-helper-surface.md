@@ -87,7 +87,7 @@ Write values into declared variables or containers:
 
 - `assign(target, value)` — write a value
 - `name = value` — terse scalar assignment operator, equivalent to `set(name, value)` / `assign(name, value)`
-- `items += value` — terse array append operator, equivalent to `push(items, value)` / `push_value(items, value)` for explicit value expressions
+- `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax
 - `push(container, value)` — append to an array
 - `push_value(array(name), value)` — named-array push
 - `push_nonempty(array(name), value)` — push only if value is defined and non-empty
