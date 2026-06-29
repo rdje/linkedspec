@@ -81,9 +81,12 @@ name = value
 items += value
 set_key(meta, key, value)
 meta[key] = value
+
+# direct-access path scalar reads — the bare path atom is a scalar array index
+return(payload["children"][index]["name"])
 ```
 
-The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, and `meta[key] = value` are the terse forms of their explicit `scalar(...)` counterparts. The variable is the same fresh per-invocation working value described above. Inferring a kind from a value's shape is still a separate, later evolution step. Direct nested-access path atoms remain explicit for now: use `payload[scalar(index)]` rather than `payload[index]` until the direct path-atom rule lands.
+The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]` are the terse forms of their explicit `scalar(...)` counterparts. The variable is the same fresh per-invocation working value described above. Inferring a kind from a value's shape is still a separate, later evolution step. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
 
 `declare(...)` stays supported and is still the right choice when you want to:
 

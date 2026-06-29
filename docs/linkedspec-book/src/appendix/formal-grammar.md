@@ -401,14 +401,16 @@ Direct nested access is a value-expression form:
 ```text
 direct_access : name direct_segment+
 direct_segment : '[' quoted_string ']'
+               | '[' bare_identifier ']'
                | '[' explicit_index_expr ']'
 ```
 
 The base `name` is a working scalar that holds a structured array/hash payload.
 Quoted string segments (`["field"]` or `['field']`) are hash-key reads. Numeric
 segments and helper/value expressions (`[0]`, `[scalar(i)]`, `[add(1, 2)]`) are
-array-index reads. Bare path atoms such as `[i]` are reserved for the later
-direct-access bare-path design; write `[scalar(i)]` when reading a working scalar today.
+array-index reads. Non-reserved bare path atoms such as `[i]` are also scalar
+array-index reads, equivalent to `[scalar(i)]`. Primitive literals and engine
+locals are not claimed as bare path atoms.
 
 ### 7.1 Declaration Helpers
 ```

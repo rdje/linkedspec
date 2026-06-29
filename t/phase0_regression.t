@@ -44180,8 +44180,8 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
         'array append bare RHS is handled by the later mutation key/RHS scalar-read leaf');
     is($L->('meta["stage"] = value'), '$meta{"stage"} = $value',
         'hash-index bare RHS is handled by the later mutation key/RHS scalar-read leaf');
-    is($L->('return(foo["a"][z])'), 'return foo["a"][z]',
-        'direct-access bare path atom remains deferred');
+    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+        'direct-access bare path atom is handled by the later direct path-atom leaf');
     is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
         'all-bare push(A,B) remains child-call syntax');
 
@@ -44257,8 +44257,8 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         'hash-index operator lowers a bare value with a literal key');
     is($L->('meta[key] = "v"'), '$meta{$key} = "v"',
         'hash-index operator lowers a bare key with a literal value');
-    is($L->('return(foo["a"][z])'), 'return foo["a"][z]',
-        'direct-access bare path atom remains deferred');
+    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+        'direct-access bare path atom is handled by the later direct path-atom leaf');
     is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
         'all-bare push(A,B) remains child-call syntax');
     like($L->('push(items,value)'), qr/^push \@value, &\{\$\$descr\{spec\}\{items\}\{handler\}\}/,
@@ -44304,6 +44304,74 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         'mutation-slot bare reads append and hash-store values from the current parse');
     is($run->($p, 'c=3'), '{"items":["3"],"meta":{"c":"3","last":"3"}}',
         're-running the SAME parser resets auto-declared mutation-slot state');
+};
+
+subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' => sub {
+    # SPEC-FORMAT-TERSE.1.2.3.3.3 (Channel 2 scalar direct-access subset):
+    # a non-reserved bare atom inside direct-access [] is a scalar array index,
+    # matching the explicit [scalar(NAME)] form. scalaref(...) compatibility keeps
+    # its historical path semantics.
+    plan tests => 18;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+    my $run = sub {
+        my ($p, $input) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$input); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+
+    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+        'direct-access bare path atom lowers as a scalar array index');
+    is($L->('return(foo["a"][z])'), $L->('return(foo["a"][scalar(z)])'),
+        'direct-access bare path atom lowers identically to explicit scalar(index)');
+    is($L->('set(out, foo["a"][z])'), '$out = $foo->{"a"}->[$z]',
+        'assignment source direct access lowers a bare path atom');
+    is($L->('items += foo["a"][z]'), 'push @items, $foo->{"a"}->[$z]',
+        'array append RHS direct access lowers a bare path atom');
+    is($L->('meta[key] = foo["a"][z]'), '$meta{$key} = $foo->{"a"}->[$z]',
+        'hash mutation RHS direct access lowers a bare path atom');
+    is($L->('return(foo["a"][true])'), 'return foo["a"][true]',
+        'reserved primitive literal true is not claimed as a direct-access path scalar read');
+    is($L->('return(foo["a"][CAPTURE])'), 'return foo["a"][CAPTURE]',
+        'reserved engine local CAPTURE is not claimed as a direct-access path scalar read');
+    is($L->('return(scalaref(foo,{"a"}[z]))'), 'return $foo->{"a"}->[z]',
+        'scalaref(...) compatibility path keeps its historical bare segment semantics');
+    is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
+        'all-bare push(A,B) remains child-call syntax');
+
+    my $src = $gen->("top:: -> w { set(out, foo[\"a\"][z]); items += foo[\"a\"][idx]; meta[key] = foo[\"a\"][pos]; return(out) }\n\nw : /x/\n");
+    for my $name (qw(z idx pos)) {
+        my $q = quotemeta('$'.$name);
+        my $n = () = ($src =~ /my $q\b/g);
+        is($n, 1, "direct-access bare path atom auto-supplies exactly one `my \$$name`");
+    }
+    like($src, qr/\$foo->\{"a"\}->\[\$z\]/,
+        'generated source contains the direct scalar-index dereference chain');
+    unlike($src, qr/my \$(?:true|CAPTURE)\b/,
+        'reserved direct-access atoms are not auto-declared');
+
+    my $dedup_src = $gen->("top:: -> w { declare(scalar, z); return(foo[\"a\"][z]) }\n\nw : /x/\n");
+    my $dedup_z = () = ($dedup_src =~ /my \$z\b/g);
+    is($dedup_z, 1, 'direct-access bare path atom dedups declared z to one `my $z`');
+
+    my $runtime_spec = "Top::\n"
+                     . " /x/ -> Done { set(foo, hash(\"a\", array(\"zero\", \"one\"))); set(z, 1); return(foo[\"a\"][z]) }\n"
+                     . "\nDone::\n /[a-z]+/\n";
+    my $p = eval { LinkedSpec::Get(\$runtime_spec) };
+    ok(ref($p) eq 'CODE', 'direct-access bare path atom runtime spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($p, 'xhello'), '"one"',
+        'direct-access bare path atom reads the scalar index at runtime');
+    is($run->($p, 'xhello'), '"one"',
+        're-running the SAME parser remains stable with direct-access scalar index reads');
 };
 
 subtest 'spec_format_terse_1_4_1_new_spellings_lower_identically_to_canonical' => sub {
@@ -44835,7 +44903,8 @@ subtest 'spec_format_terse_1_5_4_statement_separator_contract' => sub {
 
 subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => sub {
     # SPEC-FORMAT-TERSE.1.5.5.1: direct nested access lowers for explicit
-    # path segments. Bare path segments stay deferred to Channel 2.
+    # path segments. Non-reserved bare path atoms are handled by the later
+    # Channel 2 scalar-index rule; reserved atoms remain outside direct lowering.
     plan tests => 7;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -44856,9 +44925,9 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
         'single-quoted direct access segment is also a hash-key segment',
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][z])'),
-        'return foo["a"][9]["b"][z]',
-        'bare direct-access path segment remains outside the canonical dereference lowering',
+        LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][true])'),
+        'return foo["a"][9]["b"][true]',
+        'reserved direct-access path segment remains outside the canonical dereference lowering',
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(scalaref(foo,{"a"}[9]{"b"}[scalar(z)]))'),

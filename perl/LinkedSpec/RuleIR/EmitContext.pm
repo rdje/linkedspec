@@ -257,6 +257,11 @@ sub _lower_scalaref_value_expr {
  return _call_actionir_owner_with_deps('value_expr', '_lower_scalaref_value_expr', @args)
 }
 
+sub _split_scalaref_path_segments {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('value_expr', '_split_scalaref_path_segments', @args)
+}
+
 sub _lower_direct_nested_access_value_expr {
  my @args = @_;
  return _call_actionir_owner_with_deps('value_expr', '_lower_direct_nested_access_value_expr', @args)
@@ -835,11 +840,12 @@ sub _mask_action_code_literals {
 #             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
 #                 BARE scalar reads in return/assignment-like source slots:
 #                 return(NAME), assign/set(out, NAME), and `out = NAME` -> $NAME.
-#             (e) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
-#                 BARE scalar reads in mutation slots:
-#                 items += VALUE, set_key(meta, KEY, VALUE), and meta[KEY] = VALUE.
-#                 Direct access [NAME] remains deliberately out of scope for the
-#                 next scalar Channel 2 child.
+  #             (e) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
+  #                 BARE scalar reads in mutation slots:
+  #                 items += VALUE, set_key(meta, KEY, VALUE), and meta[KEY] = VALUE.
+  #             (f) SPEC-FORMAT-TERSE.1.2.3.3.3, Channel 2 direct-access subset —
+  #                 BARE path atoms in accepted direct access value slots:
+  #                 foo["a"][INDEX] -> $foo->{"a"}->[$INDEX].
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -874,6 +880,21 @@ sub _collect_auto_working_var_decls {
   my $dedup_key = $sigil . $name;
   return if $seen{$dedup_key}++;
   push @collected, { sigil => $sigil, name => $name };
+ };
+ my $record_direct_access_bare_path_atoms = sub {
+  my ($expr) = @_;
+  my $trimmed = _trim_action_ir_value($expr);
+  return unless defined($trimmed) && length($trimmed);
+  my $lowered_direct = _lower_direct_nested_access_value_expr($trimmed);
+  return unless defined($lowered_direct) && length($lowered_direct);
+  return unless $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*\s*(\[.*)$/s;
+  my $segments = _split_scalaref_path_segments($1);
+  return unless $segments && @$segments;
+  for my $segment (@$segments) {
+   next unless ($segment->{kind} // '') eq 'index';
+   my $atom = _trim_action_ir_value($segment->{expr});
+   $record->('$', $atom) if defined($atom) && $atom =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  }
  };
  for my $block (@raw_blocks) {
   next unless defined($block) && length($block);
@@ -922,6 +943,7 @@ sub _collect_auto_working_var_decls {
    next unless $args;
    my $payload = _trim_action_ir_value($args->[0]);
    $record->('$', $payload) if defined($payload) && $payload =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   $record_direct_access_bare_path_atoms->($payload);
   }
   while ($masked =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
@@ -930,6 +952,7 @@ sub _collect_auto_working_var_decls {
    next unless $args;
    my $source_expr = _trim_action_ir_value($args->[1]);
    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   $record_direct_access_bare_path_atoms->($source_expr);
   }
   foreach my $statement (@{_split_action_ir_statements($block)}) {
    my $trimmed = _trim_action_ir_value($statement);
@@ -941,6 +964,7 @@ sub _collect_auto_working_var_decls {
     next unless defined($lowered_append) && length($lowered_append);
     $record->('@', $target_expr);
     $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+    $record_direct_access_bare_path_atoms->($value_expr);
     next;
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
@@ -953,17 +977,19 @@ sub _collect_auto_working_var_decls {
       for my $slot (qw(key value)) {
        my $slot_expr = _trim_action_ir_value($parsed_hash_index->{$slot});
        $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+       $record_direct_access_bare_path_atoms->($slot_expr);
       }
      }
      next;
     }
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
-    my $source_expr = _trim_action_ir_value($2);
-    $record->('$', $1) if defined($source_expr) && length($source_expr);
-    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-    next;
-   }
+   my $source_expr = _trim_action_ir_value($2);
+   $record->('$', $1) if defined($source_expr) && length($source_expr);
+   $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   $record_direct_access_bare_path_atoms->($source_expr);
+   next;
+  }
    my $call = _parse_method_function_expr($trimmed);
    next unless $call && ($call->{method} // '') eq 'set_key';
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 3, 3);
@@ -973,8 +999,9 @@ sub _collect_auto_working_var_decls {
    my $target_expr = _trim_action_ir_value($args->[0]);
    $record->('%', $target_expr) if defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    for my $slot_index (1, 2) {
-    my $slot_expr = _trim_action_ir_value($args->[$slot_index]);
-    $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $slot_expr = _trim_action_ir_value($args->[$slot_index]);
+   $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   $record_direct_access_bare_path_atoms->($slot_expr);
    }
   }
   while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {

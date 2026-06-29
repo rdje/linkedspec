@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3.3 — Perl direct-access bare path atoms landed**
+  (PERL ACTIONIR + AUTO-DECL + PHASE0 + BOOK/KM LOCKS). Non-reserved bare atoms inside direct-access bracket
+  paths now read scalar working variables as array indexes: `foo["a"][z]` lowers/runs like
+  `foo["a"][scalar(z)]` (`$foo->{"a"}->[$z]`) and auto-supplies one per-invocation `my $z` when needed.
+  Quoted path segments remain hash keys, numeric/helper segments remain array indexes, primitive literals and
+  engine locals are not claimed, `scalaref(...)` keeps its historical path semantics, RHS-shape inference is
+  still later, and all-bare `push(A,B)` remains child-call syntax.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering probes PASS; phase0 PASS (`1..987`);
+  mdBook build PASS; KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.4`** (Rust scalar bare-read parity).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3.2 — Perl scalar mutation-slot bare reads landed**
   (PERL ACTIONIR + SCANNER + PHASE0 + BOOK/KM LOCKS). `items += VALUE`,
   `set_key(meta, KEY, VALUE)`, and `meta[KEY] = VALUE` now read non-reserved bare key/RHS identifiers as scalar

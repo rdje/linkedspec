@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3.3 — direct-access bare path atoms landed): Closed the Perl scalar
+  direct-access child with the scalar-index rule stated explicitly. Durable points. (1) **Bare path atoms are
+  indexes, not hash keys.** In direct nested access, quoted segments remain hash keys; numeric, helper, and
+  non-reserved bare segments are array indexes. Therefore `foo["a"][z]` is the terse form of
+  `foo["a"][scalar(z)]`, not `foo["a"]["z"]`. (2) **Use the direct lowerer as the collector oracle.**
+  `_collect_auto_working_var_decls` only records bare path atoms after `_lower_direct_nested_access_value_expr`
+  accepts the whole expression, so reserved literals/engine locals and raw fallback shapes do not gain
+  accidental `my` declarations. (3) **Assignment source lowering must prefer real method-value changes before
+  flow fallback.** Direct access in `set(out, foo["a"][z])` needs the changed method-value result before a
+  generic flow/source path can hand back the raw source. (4) **`scalaref(...)` compatibility is unchanged.**
+  `scalaref(foo,{"a"}[z])` keeps its historical `[z]` path atom; use `[scalar(z)]` in that helper when a scalar
+  working-variable index is intended. Rust parity remains the next leaf under `.1.2.3.4`.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3.2 — mutation-slot bare scalar reads landed): Implemented the second
   scalar Channel 2 child by changing only accepted mutation key/RHS seams. Durable points. (1) **Do not
   broaden `_lower_method_value_expr`.** The new `_lower_mutation_slot_value_expr` is called only by

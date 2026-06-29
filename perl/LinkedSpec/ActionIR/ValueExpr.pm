@@ -385,7 +385,11 @@ sub _lower_direct_nested_access_value_expr {
  foreach my $segment (@$segments) {
   my $segment_source = $trim_action_ir_value->($segment->{expr});
   return undef unless defined($segment_source) && length($segment_source);
-  return undef if $segment_source =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  if ($segment_source =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
+   return undef if $segment_source =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
+   $lowered .= '->[$'.$segment_source.']';
+   next;
+  }
 
   my $segment_expr = _lower_scalaref_segment_expr($segment_source, $deps);
   return undef unless defined($segment_expr) && length($segment_expr);
@@ -483,6 +487,7 @@ sub _lower_assignment_source_expr {
  my $method_value = $lower_method_value_expr->($source);
  return $method_value if defined($method_value) && length($method_value) && $source =~ /^call\s*\(/o;
  return $method_value if defined($method_value) && length($method_value) && $method_value ne $source && $source =~ /^input_slice\s*\(/o;
+ return $method_value if defined($method_value) && length($method_value) && $method_value ne $source;
 
  my $lowered = $lower_flow_composite_expr->($source);
  return $lowered if defined($lowered) && length($lowered);

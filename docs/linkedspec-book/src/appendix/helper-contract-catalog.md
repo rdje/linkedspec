@@ -128,17 +128,18 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 - **Returns**: scalar or undef
 - **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload. Quoted string
   segments such as `["children"]` or `['children']` are hash keys. Numeric segments and explicit helper/value
-  expressions such as `[0]` or `[scalar(i)]` are array indexes.
+  expressions such as `[0]` or `[scalar(i)]` are array indexes. A non-reserved bare path atom such as `[i]`
+  is also a scalar array-index read, equivalent to `[scalar(i)]`.
 - **Edge cases**: Returns `undef` when a segment does not exist or the current value has the wrong container
-  kind. Bare path atoms such as `[i]` are not variable reads yet; write `[scalar(i)]` until the direct-access
-  bare-path work lands.
+  kind. Primitive literals and engine locals such as `[true]` or `[CAPTURE]` are not claimed as scalar path
+  variables.
 - **Example**:
   ```text
   Top::
    /x/ -> Done {
      set(payload, hash("children", array(hash("name", "one"), hash("name", "two"))))
      set(i, 1)
-     return(payload["children"][scalar(i)]["name"])
+     return(payload["children"][i]["name"])
    }
 
   Done::
@@ -1002,9 +1003,10 @@ unlike the Retired table below):
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
-Direct nested access, for example `payload["children"][0]["name"]`, is also part of the terse surface. It is
-not a helper rename and does not retire `scalaref(...)`; both direct access and `scalaref(base, path)` remain
-accepted explicit forms.
+Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
+also part of the terse surface. It is not a helper rename and does not retire `scalaref(...)`; both direct
+access and `scalaref(base, path)` remain accepted forms. `scalaref(...)` keeps its historical path notation;
+write `[scalar(i)]` there when the path index should read a scalar working variable.
 
 The helper aliases above produce byte-identical generated code in every position — value expression,
 assignment / declaration source, return payload, and the array-vs-hash type inference used by

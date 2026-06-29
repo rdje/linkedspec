@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3.3 — direct-access bare path atoms
+
+**Scope:** Perl ActionIR direct nested-access value lowering, auto-working-variable collector, phase0 regression
+coverage, mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Perl now treats a non-reserved bare atom inside a direct-access bracket path as a scalar
+working-variable array index. `foo["a"][z]` lowers identically to `foo["a"][scalar(z)]` as
+`$foo->{"a"}->[$z]`, and the collector auto-supplies one per-invocation `my $z` for accepted direct-access
+source/mutation value slots.
+
+**Boundary:** quoted path segments remain hash keys, and numeric/helper path segments remain array indexes.
+Primitive literals and engine locals such as `true` and `CAPTURE` are not claimed as scalar path variables.
+`scalaref(...)` keeps its historical path semantics; write `[scalar(z)]` there when a path index should read a
+working scalar. RHS-shape `[]`/`{}` inference is still later, and all-bare `push(A,B)` remains child-call
+syntax.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering probes PASS; phase0 PASS
+(`t/phase0_regression.t`, 987 tests, including the new 18-assertion lock); mdBook build PASS; Knowledge Map,
+memory/doctrine/diff checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3.2 — scalar mutation-slot bare reads
 
 **Scope:** Perl ActionIR mutation-slot lowering, scanner contracts, auto-working-variable collector,

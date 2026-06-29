@@ -221,10 +221,10 @@ E {return(array_copy(array(results)))}
 
 All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
 is the target accumulator. To append a working-variable value, write
-`push(results, scalar(value))` or use `push_value(results, scalar(value))` until the
-array-append RHS form accepts bare scalar reads. Bare scalar reads are currently supported in
-return and assignment-like source slots such as `return(value)`, `set(out, value)`, and
-`out = value`, and in mutation slots such as `items += value`.
+`items += value`, `push(results, scalar(value))`, or `push_value(results, scalar(value))`.
+Bare scalar reads are currently supported in return and assignment-like source slots such as
+`return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
+`items += value`, and in direct-access path atoms such as `payload["children"][index]`.
 
 Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
 "normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`

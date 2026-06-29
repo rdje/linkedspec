@@ -169,7 +169,7 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `scalar(array(items), index)` | scalar value or `undef` | read one zero-based element from an array value. |
 | `scalar(hash(meta), key)` | scalar value or `undef` | read one field from a hash value. |
 | `scalaref(base, path)` | scalar value or `undef` | read a nested hash/array path such as `{content}` or `[0]{name}`. |
-| `base["field"][0][scalar(i)]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container. |
+| `base["field"][0][i]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container; a bare path atom such as `[i]` reads scalar `i` as an array index. |
 | `array(name)` | array value | read the working array `name`. |
 | `a(name)` | array value | short alias for `array(name)`. |
 | `hash(name)` | hash value | read the working hash `name`. |
@@ -184,7 +184,7 @@ In return and assignment-like scalar source slots, a bare scalar name is the sam
 source-slot shorthand is intentionally narrower than every value expression. Mutation slots now support the
 same scalar read for array append RHS and hash mutation key/RHS positions: `items += value`,
 `set_key(meta, key, value)`, and `meta[key] = value` read `$value` / `$key` where those slots are scalar-valued.
-Direct path atoms still use explicit wrappers where shown below.
+Direct path atoms use the same scalar read rule when the atom is not a primitive literal or engine local.
 
 > **Terse spellings (canonical going forward).** The `.spec` format is migrating to terser helper
 > names: `set(target, source)` is the canonical rename of `assign(...)`, `cat(...)` of `concat(...)`,
@@ -196,10 +196,10 @@ Direct path atoms still use explicit wrappers where shown below.
 > `items += value` reads `$value`.
 > The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
 > the key and value are scalar-valued expressions; `meta[key] = value` reads `$key` and `$value`.
-> Direct nested access `payload["children"][0]["name"]` is accepted for explicit path segments.
+> Direct nested access `payload["children"][0]["name"]` is accepted for mixed path segments.
 > Quoted string segments are hash keys; numeric segments and helper/value expressions such as
-> `[scalar(i)]` are array indexes. Bare path atoms such as `[i]` are still deferred; write
-> `[scalar(i)]` today.
+> `[scalar(i)]` are array indexes. Non-reserved bare path atoms such as `[i]` are scalar array-index reads,
+> equivalent to `[scalar(i)]`.
 > Each terse helper spelling lowers **identically** to its original in every position, so both work
 > during migration — the original names are deprecated aliases, not yet retired.
 > See the
@@ -213,14 +213,16 @@ assign(scalar(kind), scalar(hash(meta), "kind"));
 assign(scalar(content), scalaref(retv, {content}));
 assign(scalar(child_name), scalaref(retv, {children}[0]{name}));
 assign(scalar(child_name), retv["children"][0]["name"]);
+assign(scalar(dynamic_child_name), retv["children"][i]["name"]);
 assign(array(snapshot), array_copy(array(items)));
 assign(hash(meta_snapshot), hash_copy(hash(meta)));
 ```
 
 Use `scalar(array_expr, index)` when the container is already known and the access path is one level deep.
-Use direct nested access when the base is a working scalar that holds a structured array/hash payload and every
-path segment is explicit. `scalaref(base, path)` remains accepted and is still useful for legacy specs and for
-the older `{field}[0]{name}` path notation.
+Use direct nested access when the base is a working scalar that holds a structured array/hash payload.
+`scalaref(base, path)` remains accepted and is still useful for legacy specs and for the older
+`{field}[0]{name}` path notation; it keeps its historical path semantics, so use `[scalar(i)]` there when the
+index should read a scalar working variable.
 
 Example:
 
@@ -229,7 +231,7 @@ assign(scalar(retv), call(Child));
 assign(scalar(child_kind), scalaref(retv, {kind}));
 assign(scalar(first_child_name), scalaref(retv, {children}[0]{name}));
 assign(scalar(second_child_name), retv["children"][1]["name"]);
-assign(scalar(dynamic_child_name), retv["children"][scalar(child_index)]["name"]);
+assign(scalar(dynamic_child_name), retv["children"][child_index]["name"]);
 ```
 
 ## Constructors, snapshots, and flattening
