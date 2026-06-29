@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4 — split operator syntax family into scalar, array, and hash leaves
+
+**Scope:** task tree, task-tree index, ROADMAP_V2, Knowledge Map card + generated map, and live continuity
+docs. No engine, test, fixture, or mdBook behavior change.
+
+**Ground truth:** the three operator spellings are still new syntax. `call_spec_handler_subst` leaves
+`name = "ok"`, `items += "a"`, and `name["k"] = "v"` unchanged, while the settled function forms
+`set(name,"ok")`, `push(items,"a")`, and `set_key(name,"k","v")` lower correctly. A descriptor probe over all
+three operators reports three `RAW_PERL` fallback events and three language-agnostic blocker statements. Rust
+currently parses lifecycle code as `Stmt { expr }` only; there are no assignment, append, or hash-set statement
+variants in the AST/runtime execution path.
+
+**Tree update:** `.1.3.4` is now a container. `.1.3.4.1` owns scalar `name = value` first, `.1.3.4.2` owns
+array `items += value`, and `.1.3.4.3` owns hash `name[key] = value`. The next frontier is `.1.3.4.1`.
+
+**Validation:** KM retrieval and TOOLBOX probes recorded in the task tree; `scripts/check_doctrines.sh` and
+`scripts/check_memory_architecture.sh` pass. Full phase0/cargo/mdBook gates are not applicable to this
+docs-only split beyond the doctrine/KM checks.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.3 — implement set_key(name,key,value) hash mutation statement
 
 **Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust runtime statement execution, phase0

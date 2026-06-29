@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4 — operator syntax is not one implementation seam; split by target
+  mutation): Split the operator family before coding. Durable points. (1) **The function forms now define the
+  contract; operators should lower to those contracts one at a time.** Scalar `name = value` maps to
+  `set(name,value)`, array `items += value` maps to the conservative `.1.3.2` append contract, and hash
+  `name[key] = value` maps to `.1.3.3` `set_key(name,key,value)`. (2) **Perl and Rust fail for different
+  structural reasons.** Perl sees all three as RAW_PERL blockers; Rust cannot parse/execute them because
+  lifecycle code is `Stmt { expr }` only. Scalar assignment is the right first leaf because it can introduce
+  minimal statement support without also solving append disambiguation or hash-index assignment. (3) **Do not
+  let operator syntax smuggle in Channel 2.** `.1.3.4.1` must not make bare value-position reads broadly work;
+  `.1.3.4.2` inherits the explicit bare-value boundary from `.1.3.2`; `.1.3.4.3` should stay equivalent to
+  settled `set_key(...)`.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.3.3 — `set_key` is intentionally position-sensitive: statement form mutates,
   value form stays pure): Landed the hash mutation spelling. Durable points. (1) **Keep mutation and value
   helpers separate by syntactic position.** Top-level `set_key(name,key,value)` is now a statement mutation,

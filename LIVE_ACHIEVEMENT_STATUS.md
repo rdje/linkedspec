@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4 — operator syntax family split into scalar, array, and hash leaves**
+  (DOCS/TREE/KM ONLY; **no engine, test, fixture, or mdBook behavior change**). PNT selected the next frontier
+  after `.1.3.3` and ran the required KM + TOOLBOX recon before code. Ground truth: `name = "ok"`,
+  `items += "a"`, and `name["k"] = "v"` still pass through unchanged as RAW_PERL blockers on Perl; the settled
+  function forms `set(...)`, `push(...)` for unambiguous value expressions, and `set_key(...)` lower correctly.
+  A descriptor probe over all three operator forms reports three `RAW_PERL` fallback events and three
+  language-agnostic blocker statements. Rust code-read shows lifecycle code is expression-statement-only
+  (`Stmt { expr }`) and has no assignment/append/hash-set statement variants. `.1.3.4` is now a container:
+  `.1.3.4.1` scalar `name = value`, `.1.3.4.2` array `items += value`, `.1.3.4.3` hash `name[key] = value`.
+  **Frontier: `SPEC-FORMAT-TERSE.1.3.4.1`** (scalar assignment operator).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.3.3 — hash function mutation `set_key(name,key,value)` landed while
   preserving pure `set_key(hash_expr,key,value)`** (PERL ACTIONIR + RUST ENGINE + BOOK + PHASE0/RUST/ORACLE
   LOCKS). Top-level `set_key(name,key,value)` is now a statement-level named-hash mutation: Perl lowers it to
