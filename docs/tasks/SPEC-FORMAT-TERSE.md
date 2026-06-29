@@ -6,12 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.2.3.5.3` DONE** — Rust shape-literal value parity landed. Rust now parses
-  and evaluates accepted direct shape-literal values (`[]`, `[value]`, `{ key => value }`) through recursive
-  expression AST nodes and runtime `RuntimeValue::Array` / `RuntimeValue::Hash` construction, with oracle and
-  integration locks. This leaf intentionally leaves `.1.2.3.5.4` Rust RHS target-kind inference untouched:
-  `name = [value]` remains a scalar-held payload on Rust until that parity leaf. Frontier -> **`.1.2.3.5.4`**.
-  Prior **`.1.2.3.5.2` DONE** — Perl RHS target-kind inference landed. Direct RHS
+- Last updated: `2026-06-29` (**`.1.2.3.5.4` IN PROGRESS** — Rust RHS shape target-kind inference parity is now
+  owned before code after `.1.2.3.5.3` landed Rust shape-literal value parity. This leaf mirrors the accepted
+  Perl `.1.2.3.5.2` rule for Rust only: direct shape RHS on a bare target initializes array/hash working
+  variables, while explicit `scalar(...)` keeps scalar-held payload assignment. Prior **`.1.2.3.5.3` DONE** —
+  Rust shape-literal values parse/evaluate through recursive expression AST nodes and runtime
+  `RuntimeValue::Array` / `RuntimeValue::Hash` construction, with oracle and integration locks. Prior
+  **`.1.2.3.5.2` DONE** — Perl RHS target-kind inference landed. Direct RHS
   shapes now infer aggregate assignment targets when the target is bare: `name = [value]` / `set(name, [])`
   assign array working variable `@name`, and `name = { key => value }` / `set(name, {})` assign hash working
   variable `%name`. Non-shape RHS values remain scalar assignment, and explicit `scalar(name)` keeps scalar
@@ -672,7 +673,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.3.5.3 — implement Rust shape-literal values` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.5.4`
-  Status: `pending`
+  Status: `in_progress` (2026-06-29)
   Goal: Rust lockstep parity for `.1.2.3.5.2` RHS-shape target-kind inference.
   Acceptance: Rust matches the accepted Perl target-kind inference contract with oracle fixtures and focused
     integration locks. If `.1.2.3.5.2` intentionally preserves scalar arrayref/hashref assignment, Rust must
@@ -1264,7 +1265,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.1` | `done` 2026-06-29 | Perl shape-literal value expressions (`[]`/`{}`) landed: non-empty shapes lower through DSL expressions instead of raw Perl barewords; phase0 988 green and mdBook updated. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.2` | `done` 2026-06-29 | Perl RHS target-kind inference landed: direct RHS shapes infer aggregate bare targets (`name = [value]` -> `@name`, `name = { key => value }` -> `%name`); explicit `scalar(name)` remains scalar payload assignment. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.3` | `done` 2026-06-29 | Rust shape-literal value parity landed: direct `[]` / `{}` values parse and evaluate recursively, with oracle/integration locks and the `.1.2.3.5.4` target-kind boundary preserved. |
-| 1 | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `pending` | Rust lockstep parity for accepted Perl RHS shape target-kind inference: direct shape RHS on a bare target should initialize array/hash working variables, while explicit `scalar(...)` keeps scalar-held payload assignment. |
+| 1 | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `in_progress` | Rust lockstep parity for accepted Perl RHS shape target-kind inference: direct shape RHS on a bare target should initialize array/hash working variables, while explicit `scalar(...)` keeps scalar-held payload assignment. |
 | … | `.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
