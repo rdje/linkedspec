@@ -118,6 +118,11 @@ source rule paragraph text
 
 `ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`assign(...)`, `push_value(...)`, `return(...)`) that must be lowered separately.
 
+The separator contract is deliberately narrow: top-level semicolons split statements,
+and top-level newlines split helper statements when no semicolon is present. Multiple
+helper statements written on one physical line still need semicolons; plain spaces do not
+create a boundary. Nested semicolons inside expression payloads stay inside the payload.
+
 ### CanonicalEvents
 
 `ActionIR::CanonicalEvents` normalizes recognized helper calls into canonical ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Compatibility aliases (older helper names) are normalized to canonical forms here.

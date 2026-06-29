@@ -6,9 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.5.3` DONE** — helper calls keep mandatory `callee(args)` parentheses while
+- Last updated: `2026-06-29` (**`.1.5.4` DONE** — statement separators are newline-or-semicolon across Perl
+  and Rust: newlines split top-level canonical DSL statements, multiple same-line statements require `;`,
+  nested semicolons remain protected, and fluent attached-control tails normalize to explicit newline
+  boundaries. Frontier -> **`.1.5.5` direct nested access surface**. Prior **`.1.5.3` DONE** — helper calls keep mandatory `callee(args)` parentheses while
   optional whitespace before `(` is locked at supported statement/value sites; no-parenthesis helper spellings
-  remain out of scope. Frontier -> **`.1.5.4` statement separator contract**. Prior **`.1.5.2` DONE** —
+  remain out of scope. Prior **`.1.5.2` DONE** —
   primitive literals are now typed values on Perl and Rust: quoted strings, numbers, `undef`, `true`, and
   `false` work in return/mutation/flow positions; `true`/`false` are JSON booleans, exact matching keeps
   `trueword`/`undefine` out of the literal path, and Rust now gates statement-form `if(false)` blocks. Prior **`.1.5` SPLIT** — literals, nested access, call + semicolon rules are
@@ -755,14 +758,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.4`
-  Status: `pending`
+  Status: `done` (2026-06-29)
   Goal: Statement separator contract.
   Acceptance: Newlines separate top-level canonical DSL statements; semicolons remain accepted and are
     required only when multiple statements share one physical line. Perl lowering emits valid generated Perl
     for newline-separated statements; same-line adjacent statements without `;` are rejected or left as
     explicit blockers consistently with Rust; semicolons inside nested expressions/literals stay protected.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-06-29.** Perl `StatementSplit` now requires a line break before implicit
+    statement-boundary splitting and keeps same-line adjacent helpers as raw blockers. Perl `RewritePipeline`
+    inserts a generated `;` when adjacent lowered canonical statements were newline-separated in source and
+    leaves author semicolons unchanged. Bootstrap normalizes captured fluent attached-control tails with
+    internal newline separators, preserving `Top.if(...) { ... } elseif(...) { ... } else { ... }` and
+    lifecycle equivalents without re-opening arbitrary same-line helper adjacency. Rust `linkedspec-core`
+    now distinguishes inline whitespace from statement-separator whitespace: newline or `;` separates
+    statements, while same-line whitespace does not. New locks cover splitter behavior, lowering output,
+    runtime execution, nested-semicolon payload protection, generated corpus parity, and mdBook wording.
+    **Verification:** `perl -Iperl -c` for changed Perl modules PASS; `perl -Iperl -c
+    t/phase0_regression.t` PASS; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t` PASS (`1..982`);
+    `perl -Iperl tools/gen_oracle_corpus.pl` regenerated 20 fixtures; focused Rust core parser tests PASS;
+    focused Rust runtime `.1.5.4` integration test PASS; Rust corpus oracle PASS over 20 fixtures; full Rust
+    runtime suite PASS; `mdbook build docs/linkedspec-book` PASS; Knowledge Map regenerate/check PASS;
+    memory/doctrine checks PASS; `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS.
+  Commit: `SPEC-FORMAT-TERSE.1.5.4 — lock statement separators` (pending commit)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.5`
   Status: `pending`
@@ -873,11 +890,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.3.4.3` | `done` 2026-06-29 | Hash-index assignment operator — `name[key] = value` lowers/runs identically to settled `set_key(name,key,value)` for explicit key/value expressions without broadening Channel 2. |
 | — | `SPEC-FORMAT-TERSE.1.5.2` | `done` 2026-06-29 | Primitive literal parity landed: exact primitive literals are typed value expressions on Perl/Rust, `true`/`false` are booleans, and Rust statement-form `if(false)` gates branches. |
 | — | `SPEC-FORMAT-TERSE.1.5.3` | `done` 2026-06-29 | Function-call spacing locked: optional whitespace before `(` is accepted at supported helper/value sites, and no-parenthesis helper spellings remain out of scope. |
-| 1 | `SPEC-FORMAT-TERSE.1.5.4` | `pending` | Statement separator contract: Perl newline-separated adjacent lowered statements currently compile invalid without `;`; Rust accepts broader whitespace-separated statements, so parity/signoff needs a dedicated leaf. |
-| 2 | `SPEC-FORMAT-TERSE.1.5.5` | `pending` | Direct any-depth nested access remains open and must coordinate explicitly with Channel 2 value-position bare-word reads. |
+| — | `SPEC-FORMAT-TERSE.1.5.4` | `done` 2026-06-29 | Statement separator contract landed: newline-or-semicolon separates top-level canonical DSL statements, same-line multiple statements require `;`, nested semicolons stay protected, and Perl/Rust locks agree. |
+| 1 | `SPEC-FORMAT-TERSE.1.5.5` | `pending` | Direct any-depth nested access remains open and must coordinate explicitly with Channel 2 value-position bare-word reads. |
 | … | `.1.2.3`+ (Channel 2),`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.5` is designed) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.5.4` statement separator contract** — newline-or-semicolon, not arbitrary whitespace).
+  Newlines are the only implicit top-level DSL statement separator; semicolons remain accepted and are required
+  when multiple helper statements share one physical line. Perl and Rust now agree on that boundary:
+  `set(name,"a")` newline `return(scalar(name))` lowers/runs, `set(name,"a"); return(scalar(name))` still
+  lowers/runs, and `set(name,"a") return(scalar(name))` stays non-canonical/rejected. Perl lowering must emit
+  a generated `;` between newline-separated lowered statements because a newline in `.spec` source is not a
+  Perl statement terminator. Nested semicolons inside payloads such as `do { my $x = 1; $x }` stay protected.
+  Fluent attached-control tails are normalized by Bootstrap into newline-separated helper statements instead
+  of weakening the splitter: user-facing `Top.if(...) { ... } elseif(...) { ... } else { ... }` remains
+  supported, but ordinary same-line adjacent helpers do not.
 
 - `2026-06-29` (**`.1.5.2` primitive literal parity** — exact literals are typed values, not prefix
   identifiers). The accepted rule is deliberately exact: `"..."`, `'...'`, integer, float, `undef`, `true`,
@@ -1187,6 +1215,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.1` (split) | KM retrieval first; TOOLBOX `call_spec_handler_subst` probes for literals, call spacing, direct nested access, and `scalaref(...)`; `LinkedSpec::Get` runtime probes for literal values and separator behavior; `StatementSplit` probes; Perl/Rust code-read (`StatementSplit`, `MethodExpr`, `ValueExpr`, `MethodLowering`, Rust `expr.rs`/`engine.rs`); focused Rust parser tests (`parse_`, `hash_index`); `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check` | Split `.1.5` into `.1.5.2` literal parity, `.1.5.3` call-spacing locks, `.1.5.4` separator semantics, and `.1.5.5` direct nested access. Ground truth: Perl strings/numbers/`undef` run, but `true`/`false` are strings; call spacing works at supported helper/value sites; newline-separated lowered statements fail on Perl without `;`; direct nested access is not lowered and Rust only has single array-index `IndexedVar`. KM card [[terse-literals-calls-separators-access-ground-truth]] added. DOCS/TREE/KM only — no engine/book behavior change, so phase0 N/A to split slice. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.2` | Syntax checks on edited Perl ActionIR modules/test/generator; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust `.1.5.2` integration tests; Rust corpus oracle; full Rust runtime suite; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Perl now lowers exact primitive literals through a shared helper, with `true`/`false` as `JSON::PP` booleans and exact-prefix boundaries preserved. Scanner/lowerer guards treat primitive literals as explicit values in `push`, `+=`, and hash-index assignment. Rust statement-form `if/elseif/else/endif` now gates lifecycle statements so `if(false)` selects the `else` branch. Phase0 PASS (`1..980`); oracle corpus regenerated with 18 fixtures; focused Rust tests PASS (2); corpus oracle PASS over 18 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.3` | Syntax checks on edited Perl test/generator; focused Rust parser `.1.5.3` tests; focused Rust runtime `.1.5.3` integration test; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Helper calls keep mandatory `callee(args)` parentheses while optional whitespace before `(` is accepted at supported statement/value sites. Perl locks spaced-vs-tight equality for `return`, `set`, nested helpers, operator RHS calls, and hash-index key/RHS calls; no-parenthesis spellings stay raw/out of helper recognition. Rust parser/runtime/oracle locks prove the same contract. Phase0 PASS (`1..981`); oracle corpus regenerated with 19 fixtures; focused Rust tests PASS; corpus oracle PASS over 19 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.4` | Syntax checks on edited Perl modules/test/generator; TOOLBOX lowerings and runtime probes for newline/semicolon/same-line cases; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core separator tests; focused Rust runtime `.1.5.4` integration test; Rust corpus oracle; full Rust runtime suite; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Newline and semicolon are the statement separators; same-line whitespace is not. Perl `StatementSplit` only implicit-splits across line breaks, `RewritePipeline` emits generated Perl terminators for newline-separated canonical statements, and Bootstrap normalizes fluent attached-control tails with internal newlines. Rust parser/runtime locks enforce the same contract. Phase0 PASS (`1..982`); oracle corpus regenerated with 20 fixtures; focused Rust tests PASS; corpus oracle PASS over 20 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
 
 ## Commit Log
 
@@ -1213,8 +1242,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.5.1` (split) | `SPEC-FORMAT-TERSE.1.5 — split literals/access/call/separator surface` | `.1.5` is now an active container. `.1.5.1` closed the audit/split: primitive literal parity, call-spacing locks, separator semantics, and direct nested access are separate leaves. KM [[terse-literals-calls-separators-access-ground-truth]]. DOCS/TREE/KM only — no engine/book behavior change. |
 | `SPEC-FORMAT-TERSE.1.5.2` | `SPEC-FORMAT-TERSE.1.5.2 — implement primitive literal parity` | Primitive literals are typed values on Perl/Rust; Perl booleans now lower through `JSON::PP`, exact matching preserves identifier prefixes, `push(items,false)` is a value append, and Rust statement-form `if(false)` gates inactive branches. Frontier becomes `.1.5.3`. |
 | `SPEC-FORMAT-TERSE.1.5.3` | `SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses` | Optional whitespace before `(` is locked at supported helper/value sites on Perl and Rust, while no-parenthesis helper spellings remain outside call recognition. Frontier becomes `.1.5.4`. |
+| `SPEC-FORMAT-TERSE.1.5.4` | `SPEC-FORMAT-TERSE.1.5.4 — lock statement separators` | Newline-or-semicolon statement separation is locked on Perl and Rust. Same-line multiple statements require `;`; nested semicolons stay protected; fluent attached-control tails keep working through Bootstrap newline normalization. Frontier becomes `.1.5.5`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.5.4` DONE — statement separator contract landed.**
+  Newline and semicolon are now the only top-level canonical DSL statement separators. Perl emits generated
+  terminators for newline-separated lowered statements, so `set(name,"a")` followed by
+  `return(scalar(name))` compiles and runs; semicolon-separated statements preserve the author semicolon.
+  Plain same-line whitespace is not a separator: adjacent helper statements on one physical line require `;`
+  and otherwise remain explicit blockers, matching Rust parser rejection. Nested semicolons inside expression
+  payloads remain protected, and Bootstrap keeps fluent attached-control tails working by inserting internal
+  newlines. Verification: phase0 PASS (`1..982`), oracle corpus 20 fixtures, focused Rust parser/runtime tests
+  PASS, Rust corpus oracle PASS, full Rust runtime PASS, mdBook/KM updated, and final gates green. Frontier ->
+  `.1.5.5`.
 
 - `2026-06-29`: **`.1.5.3` DONE — function-call spacing and mandatory-call-parentheses locks landed.**
   Helper calls keep the uniform `callee(args)` shape. Optional whitespace before `(` is accepted at supported

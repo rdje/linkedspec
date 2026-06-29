@@ -241,18 +241,22 @@ sub _next_nonspace_char_index {
  return $idx < @$chars ? $idx : undef
 }
 
+sub _span_contains_line_break {
+ my ($chars, $start_idx, $end_idx) = @_;
+ return 0 unless defined($start_idx) && defined($end_idx);
+ for (my $idx = $start_idx; $idx < $end_idx && $idx < @$chars; ++$idx) {
+  return 1 if $chars->[$idx] eq "\n" || $chars->[$idx] eq "\r";
+ }
+ return 0
+}
+
 sub _should_split_on_method_boundary {
  my ($state, $chars, $idx, $trim_action_ir_value) = @_;
  return 0 if $state->{paren_depth} || $state->{brace_depth} || $state->{bracket_depth};
  return 0 unless _looks_like_complete_method_statement($state->{statement}, $trim_action_ir_value);
  my $next_idx = _next_nonspace_char_index($chars, $idx + 1);
  return 0 unless defined $next_idx;
- if (
-  _is_bare_zero_arg_flow_marker_statement($state->{statement}, $trim_action_ir_value) &&
-  $next_idx == ($idx + 1)
- ) {
-  return 0;
- }
+ return 0 unless _span_contains_line_break($chars, $idx + 1, $next_idx);
  return ($chars->[$next_idx] =~ /[A-Za-z_]/o) ? 1 : 0
 }
 

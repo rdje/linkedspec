@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.4 — statement separators are newline-or-semicolon, not arbitrary
+  whitespace): Landed the separator contract on Perl and Rust. Durable points. (1) **Statement detection and
+  emitted-code validity are separate responsibilities.** `StatementSplit` now only creates implicit boundaries
+  across line breaks, while `RewritePipeline` inserts the missing generated Perl `;` when two lowered canonical
+  statements were newline-separated in source. (2) **Same-line adjacency remains an explicit blocker.**
+  `set(name,"a") return(scalar(name))` is kept raw on the Perl reference and rejected by the Rust parser; this
+  preserves the requirement that multiple statements on one physical line use semicolons. (3) **Nested
+  semicolons stay protected.** Payloads such as `return(do { my $x = 1; $x })` remain one statement, and a
+  following newline is the outer separator. (4) **Attached-control sugar needed normalization, not a splitter
+  loophole.** Bootstrap now joins captured fluent `if(...) { ... } elseif(...) { ... } else { ... }` tails with
+  internal newlines, so the conventional user-facing attached-control form keeps working while ordinary
+  same-line helper adjacency stays non-canonical. Verification: phase0 982, oracle corpus 20 fixtures,
+  focused Rust parser/runtime tests, corpus oracle 20 fixtures, full Rust runtime, mdBook, Knowledge Map,
+  memory/doctrine, and local CI gates.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.5.3 — call spacing is a grammar lock, not a new call shorthand):
   Locked the call-spacing contract on Perl and Rust. Durable points. (1) **The call grammar remains
   `callee(args)`.** Whitespace before `(` is only layout; `set (name, value)` and `set(name, value)` are the

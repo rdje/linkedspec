@@ -752,7 +752,7 @@ PERL
     like($out, qr/__STATEMENT_CORE_PARTS_OK__/, 'statement-split core preserves split output after lazy StatementSplit::Mode loading');
     is($err, '', 'ActionIR::StatementSplit::Core require/split subprocess does not emit stderr');
 };
-subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' => sub {
+subtest 'actionir_statement_split_core_requires_newline_or_semicolon_boundaries' => sub {
     plan tests => 7;
 
     my $trim = sub {
@@ -768,8 +768,8 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
             'if(scalar(on))return_undef()else()say("no")endif()',
             $trim,
         ),
-        ['if(scalar(on))', 'return_undef()', 'else()', 'say("no")', 'endif()'],
-        'statement-split core accepts semicolonless single-line if/else helper blocks',
+        ['if(scalar(on))return_undef()else()say("no")endif()'],
+        'statement-split core leaves same-line no-semicolon if/else helper chains as one explicit blocker',
     );
 
     is_deeply(
@@ -777,8 +777,8 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
             'switch(scalar(kind))case("A")return_undef()default()say("miss")endswitch()',
             $trim,
         ),
-        ['switch(scalar(kind))', 'case("A")', 'return_undef()', 'default()', 'say("miss")', 'endswitch()'],
-        'statement-split core accepts semicolonless single-line switch/case helper blocks',
+        ['switch(scalar(kind))case("A")return_undef()default()say("miss")endswitch()'],
+        'statement-split core leaves same-line no-semicolon switch/case helper chains as one explicit blocker',
     );
 
     is_deeply(
@@ -786,8 +786,8 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
             'if(scalar(on)) return_undef() else say("no") endif',
             $trim,
         ),
-        ['if(scalar(on))', 'return_undef()', 'else', 'say("no")', 'endif'],
-        'statement-split core accepts semicolonless single-line if/else helper blocks when zero-arg markers omit parentheses',
+        ['if(scalar(on)) return_undef() else say("no") endif'],
+        'statement-split core leaves same-line spaced no-semicolon if/else helper chains as one explicit blocker',
     );
 
     is_deeply(
@@ -795,8 +795,8 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
             'switch(scalar(kind)) case("A") return_undef() endcase default say("miss") endcase endswitch',
             $trim,
         ),
-        ['switch(scalar(kind))', 'case("A")', 'return_undef()', 'endcase', 'default', 'say("miss")', 'endcase', 'endswitch'],
-        'statement-split core accepts semicolonless single-line switch/case helper blocks when zero-arg markers omit parentheses',
+        ['switch(scalar(kind)) case("A") return_undef() endcase default say("miss") endcase endswitch'],
+        'statement-split core leaves same-line spaced no-semicolon switch/case helper chains as one explicit blocker',
     );
 
     is_deeply(
@@ -804,8 +804,8 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
             'if(scalar(on)){if(scalar(alt_on))return_undef()else()return_undef()endif()}else(){return_undef()}',
             $trim,
         ),
-        ['if(scalar(on)){if(scalar(alt_on))return_undef()else()return_undef()endif()}', 'else(){return_undef()}'],
-        'statement-split core keeps attached if/else branch boundaries intact when the attached branch carries nested marker if flow',
+        ['if(scalar(on)){if(scalar(alt_on))return_undef()else()return_undef()endif()}else(){return_undef()}'],
+        'statement-split core leaves same-line attached if/else branch blocks as one explicit blocker',
     );
 
     is_deeply(
@@ -813,8 +813,8 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
             'if(scalar(on)){switch(scalar(kind))case("A"){return_undef()}default(){say("miss")}endswitch()}else(){return_undef()}',
             $trim,
         ),
-        ['if(scalar(on)){switch(scalar(kind))case("A"){return_undef()}default(){say("miss")}endswitch()}', 'else(){return_undef()}'],
-        'statement-split core keeps attached if/else branch boundaries intact when the attached branch carries nested marker switch flow',
+        ['if(scalar(on)){switch(scalar(kind))case("A"){return_undef()}default(){say("miss")}endswitch()}else(){return_undef()}'],
+        'statement-split core leaves same-line attached switch-bearing branch blocks as one explicit blocker',
     );
 
     is_deeply(
@@ -822,8 +822,8 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
             'if(scalar(on)){switch(scalar(kind),case("A"){return_undef()},default(){say("miss")})}else(){return_undef()}',
             $trim,
         ),
-        ['if(scalar(on)){switch(scalar(kind),case("A"){return_undef()},default(){say("miss")})}', 'else(){return_undef()}'],
-        'statement-split core keeps attached if/else branch boundaries intact when the attached branch carries nested inline-composite switch flow',
+        ['if(scalar(on)){switch(scalar(kind),case("A"){return_undef()},default(){say("miss")})}else(){return_undef()}'],
+        'statement-split core leaves same-line attached inline-composite switch branch blocks as one explicit blocker',
     );
 };
 subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {
@@ -17437,7 +17437,18 @@ SPEC
 
     my $marker_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return(array("semantic_annotation", hash("items", array(events)))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
+ /a/ -> Top {
+  if(scalar(on))
+  declare(array, events)
+  push_value(array(events), hash("items", array(IMATCH_LIST)))
+  return(array("semantic_annotation", hash("items", array(events))))
+  elseif(scalar(alt_on))
+  say("alt")
+  return_undef()
+  else()
+  return_undef()
+  endif()
+ }
 SPEC
 
     my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
@@ -17484,7 +17495,18 @@ SPEC
 
     my $marker_spec = <<'SPEC';
 Top::&
-LX { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return(array("semantic_annotation", hash("items", array(events)))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
+LX {
+  if(scalar(on))
+  declare(array, events)
+  push_value(array(events), hash("items", array(IMATCH_LIST)))
+  return(array("semantic_annotation", hash("items", array(events))))
+  elseif(scalar(alt_on))
+  say("alt")
+  return_undef()
+  else()
+  return_undef()
+  endif()
+}
  /a/ -> Top { return(1) }
 SPEC
 
@@ -44491,6 +44513,70 @@ subtest 'spec_format_terse_1_5_3_call_spacing_and_parentheses_locks' => sub {
         'call-spacing spec reports canonical ASSIGN/PUSH/RETURN nodes');
     is($meta->{canonical_action_ir_fallback_count}, 0,
         'call-spacing spec has no canonical fallback');
+};
+
+subtest 'spec_format_terse_1_5_4_statement_separator_contract' => sub {
+    # SPEC-FORMAT-TERSE.1.5.4: newlines are the only implicit top-level DSL
+    # statement separator; semicolons remain valid, and same-line adjacency
+    # without a semicolon stays an explicit non-canonical blocker.
+    plan tests => 11;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $trim = sub {
+        my ($value) = @_;
+        return undef unless defined $value;
+        $value =~ s/^\s+//;
+        $value =~ s/\s+$//;
+        return $value;
+    };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements("set(name,\"a\")\nreturn(scalar(name))", $trim),
+        ['set(name,"a")', 'return(scalar(name))'],
+        'statement splitter treats newline as an implicit top-level DSL separator',
+    );
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements('set(name,"a"); return(scalar(name))', $trim),
+        ['set(name,"a")', 'return(scalar(name))'],
+        'statement splitter still treats semicolon as an explicit top-level DSL separator',
+    );
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements('set(name,"a") return(scalar(name))', $trim),
+        ['set(name,"a") return(scalar(name))'],
+        'statement splitter rejects same-line whitespace as an implicit DSL separator',
+    );
+
+    is(LinkedSpec::call_spec_handler_subst('Top', "set(name,\"a\")\nreturn(scalar(name))"), "\$name = \"a\";\nreturn \$name",
+        'newline-separated lowered statements emit a Perl statement terminator');
+    is(LinkedSpec::call_spec_handler_subst('Top', 'set(name,"a"); return(scalar(name))'), '$name = "a"; return $name',
+        'semicolon-separated lowered statements preserve the author semicolon');
+    is(LinkedSpec::call_spec_handler_subst('Top', 'set(name,"a") return(scalar(name))'), 'set(name,"a") return(scalar(name))',
+        'same-line no-semicolon adjacent helpers remain raw explicit blockers');
+    is(LinkedSpec::call_spec_handler_subst('Top', "return(do { my \$x = 1; \$x })\ncall(Leaf)"), "return do { my \$x = 1; \$x };\n&{\$\$descr{spec}{Leaf}{handler}}(\$descr, \$STRING, \$minfo)",
+        'nested semicolons inside a payload stay protected while newline separates statements');
+
+    my $newline_spec = "Top::\n"
+                     . " /x/ -> Done { set(name,\"a\")\n return(scalar(name)) }\n"
+                     . "\nDone::\n /[a-z]+/\n";
+    my $np = eval { LinkedSpec::Get(\$newline_spec) };
+    ok(ref($np) eq 'CODE', 'newline-separated statement spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($np, 'xhello'), '"a"',
+        'newline-separated statement spec runs with the lowered assignment before return');
+
+    my $semicolon_spec = "Top::\n"
+                       . " /x/ -> Done { set(name,\"b\"); return(scalar(name)) }\n"
+                       . "\nDone::\n /[a-z]+/\n";
+    my $sp = eval { LinkedSpec::Get(\$semicolon_spec) };
+    ok(ref($sp) eq 'CODE', 'semicolon-separated statement spec still compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($sp, 'xhello'), '"b"',
+        'semicolon-separated statement spec still runs');
 };
 
 done_testing();

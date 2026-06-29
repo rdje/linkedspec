@@ -229,6 +229,33 @@ impl<'a> Parser<'a> {
         }
     }
 
+    fn skip_inline_whitespace(&mut self) {
+        while self.pos < self.src.len() {
+            let ch = self.src.as_bytes()[self.pos];
+            if ch == b' ' || ch == b'\t' {
+                self.pos += 1;
+            } else {
+                break;
+            }
+        }
+    }
+
+    fn skip_statement_separator_whitespace(&mut self) -> bool {
+        let mut has_line_break = false;
+        while self.pos < self.src.len() {
+            let ch = self.src.as_bytes()[self.pos];
+            if ch == b' ' || ch == b'\t' {
+                self.pos += 1;
+            } else if ch == b'\n' || ch == b'\r' {
+                has_line_break = true;
+                self.pos += 1;
+            } else {
+                break;
+            }
+        }
+        has_line_break
+    }
+
     fn advance(&mut self, n: usize) {
         self.pos = (self.pos + n).min(self.src.len());
     }
@@ -251,12 +278,18 @@ impl<'a> Parser<'a> {
             }
             let expr = self.parse_statement_expr()?;
             statements.push(Stmt { expr });
-            self.skip_whitespace();
-            // Consume optional semicolon
+            let has_line_break = self.skip_statement_separator_whitespace();
             if self.peek() == Some(';') {
                 self.advance(1);
+                self.skip_whitespace();
+                continue;
             }
-            self.skip_whitespace();
+            if self.pos < self.src.len() && !has_line_break {
+                return Err(format!(
+                    "expected ';' or newline between statements at byte {}",
+                    self.pos
+                ));
+            }
         }
         Ok(CodeBlock { statements })
     }
@@ -537,16 +570,16 @@ impl<'a> Parser<'a> {
 
     /// Parse optional fluent chain continuations: `.method(args).method2(args2)...`
     fn parse_fluent_chain(&mut self, receiver: Expr) -> Result<Expr, String> {
-        self.skip_whitespace();
+        self.skip_inline_whitespace();
         if self.peek() != Some('.') {
             return Ok(receiver);
         }
         let mut calls: Vec<FluentCall> = Vec::new();
         while self.peek() == Some('.') {
             self.advance(1); // consume '.'
-            self.skip_whitespace();
+            self.skip_inline_whitespace();
             let method = self.parse_name();
-            self.skip_whitespace();
+            self.skip_inline_whitespace();
             if self.peek() != Some('(') {
                 return Err(format!(
                     "expected '(' after fluent method '{}' at position {}",
@@ -567,7 +600,7 @@ impl<'a> Parser<'a> {
             }
             self.advance(1); // consume ')'
             calls.push(FluentCall { method, args });
-            self.skip_whitespace();
+            self.skip_inline_whitespace();
         }
         Ok(Expr::FluentChain { receiver: Box::new(receiver), calls })
     }
@@ -1426,8 +1459,8 @@ mod tests {
     // ── Semicolon handling ──
 
     #[test]
-    fn parse_statements_without_semicolons() {
-        // Semicolons are optional between method-only statements
+    fn parse_newline_separated_statements_without_semicolons() {
+        // Newlines are the implicit separator for method-only statements.
         let code = r#"declare(array, results)
 push_value(array(results), scalar(retv))
 return(array_copy(array(results)))"#;
@@ -1442,6 +1475,13 @@ push_value(array(results), scalar(retv));
 return(array_copy(array(results)));"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 3);
+    }
+
+    #[test]
+    fn parse_same_line_statements_require_semicolons() {
+        let result = CodeBlock::parse("declare(array, results) push_value(array(results), scalar(retv))");
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("expected ';' or newline"));
     }
 
     // ── Regex literal ──

@@ -59,6 +59,29 @@ rule:AND+
  LX  { return(hash("items", array_copy(array(acc)), "count", scalar(n))); }
 ```
 
+## Statement separators
+
+Inside structured action and lifecycle blocks, a newline is an implicit separator between
+top-level helper statements:
+
+```text
+-> child {
+  set(name, "field")
+  return(scalar(name))
+}
+```
+
+Semicolons remain valid, and they are required when multiple statements share one
+physical line:
+
+```text
+-> child { set(name, "field"); return(scalar(name)) }
+```
+
+Plain spaces between same-line helper calls are not statement separators. Semicolons
+inside nested expressions or literal payloads stay inside that expression and do not split
+the outer statement.
+
 ## Control-flow expression forms
 
 LinkedSpec supports two control-flow families — **if/elseif/else** and

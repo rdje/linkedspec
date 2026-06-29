@@ -314,7 +314,7 @@ sub _parse_optional_attached_if_clause_tail {
   return ('', $start_pos) if $else_seen;
   $else_seen = 1 if $head_method eq 'else';
 
-  $tail .= ' ' if length($tail);
+  $tail .= "\n" if length($tail);
   $tail .= $head_stmt->{text};
   $pos = $head_end;
 
@@ -325,7 +325,7 @@ sub _parse_optional_attached_if_clause_tail {
    my ($body_stmt, $body_end) = $parse_method_stmt->($pos);
    last if $body_stmt && $is_if_clause_boundary->($body_stmt);
    last unless $body_stmt;
-   $tail .= ' ' . $body_stmt->{text};
+   $tail .= "\n" . $body_stmt->{text};
    $pos = $body_end;
   }
  }
@@ -333,7 +333,7 @@ sub _parse_optional_attached_if_clause_tail {
  if ($needs_explicit_endif) {
   my ($end_stmt, $end_pos) = $parse_method_stmt->($pos);
   if ($end_stmt && ($end_stmt->{method} // '') eq 'endif') {
-   $tail .= ' ' if length($tail);
+   $tail .= "\n" if length($tail);
    $tail .= $end_stmt->{text};
    $pos = $end_pos;
   }
@@ -570,7 +570,7 @@ sub _build_method_empty_action_code_block_rule {
     if ($tail_method eq 'if' || $tail_method eq 'i') {
      my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
      if (defined($tail) && length($tail)) {
-      $code .= ' ' . $tail;
+      $code .= "\n" . $tail;
       pos($$string) = $new_pos;
      }
     }
@@ -673,7 +673,7 @@ sub _build_method_empty_blind_code_block_rule {
     if ($tail_method eq 'if' || $tail_method eq 'i') {
      my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
      if (defined($tail) && length($tail)) {
-      $code .= ' ' . $tail;
+      $code .= "\n" . $tail;
       pos($$string) = $new_pos;
      }
     }
@@ -728,7 +728,7 @@ sub _build_method_empty_non_action_code_block_rule {
     if ($tail_method eq 'if' || $tail_method eq 'i') {
      my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
      if (defined($tail) && length($tail)) {
-      $code .= ' ' . $tail;
+      $code .= "\n" . $tail;
       pos($$string) = $new_pos;
      }
     }

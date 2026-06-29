@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.5.4 — statement separator contract landed**
+  (PERL ACTIONIR + BOOTSTRAP NORMALIZATION + RUST PARSER/RUNTIME + ORACLE + BOOK/KM LOCKS). Newlines now
+  separate top-level canonical DSL statements, and semicolons remain accepted and required for multiple
+  statements on one physical line. Perl lowering emits valid generated Perl for newline-separated statements
+  such as `set(name,"a")` followed by `return(scalar(name))`; same-line adjacent helpers without `;` stay
+  explicit non-canonical blockers, matching Rust parser rejection. Nested semicolons inside expression payloads
+  remain protected. Bootstrap normalizes captured fluent attached-control tails with internal newlines so
+  `Top.if(...) { ... } elseif(...) { ... } else { ... }` remains supported without weakening the same-line
+  rule. **Verification:** phase0 PASS (`1..982`), oracle corpus regenerated with 20 fixtures, focused Rust
+  parser/runtime `.1.5.4` tests PASS, Rust corpus oracle PASS over 20 fixtures, full Rust runtime PASS,
+  mdBook/KM/memory/doctrine/local gates green.
+  **Frontier: `SPEC-FORMAT-TERSE.1.5.5`** (direct nested access surface).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.5.3 — call spacing and mandatory-call-parentheses locks landed**
   (PERL PHASE0 + RUST PARSER/RUNTIME + ORACLE + BOOK/KM LOCKS). Helper calls keep the uniform
   `callee(args)` shape, while optional whitespace before the opening parenthesis is accepted at supported

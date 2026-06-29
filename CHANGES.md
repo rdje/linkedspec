@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.4 — lock statement separator contract
+
+**Scope:** Perl ActionIR statement splitting/lowering, Bootstrap fluent attached-control normalization, Rust
+parser/runtime locks, oracle corpus, mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity
+docs.
+
+**What changed:** newlines are now the implicit separator between top-level canonical DSL statements. Perl
+lowering inserts a generated Perl terminator when two canonical statements were separated by a newline rather
+than an author semicolon, so `set(name,"a")` followed by `return(scalar(name))` compiles and runs correctly.
+Semicolons remain accepted and are still required when multiple statements share one physical line.
+
+**Boundary:** plain same-line whitespace is not a statement separator. Same-line adjacent helpers such as
+`set(name,"a") return(scalar(name))` stay raw/non-canonical blockers, matching the Rust parser's same-line
+rejection. Semicolons inside nested expressions or literal payloads remain protected. Fluent attached-control
+tails such as `Top.if(...) { ... } elseif(...) { ... } else { ... }` are normalized internally with newline
+boundaries so the user-facing attached-control surface stays supported without weakening same-line adjacency
+rules for ordinary helper statements.
+
+**Validation:** `env PERL5LIB= prove -q -Iperl t/phase0_regression.t` PASS (`1..982`); oracle corpus
+regenerated with 20 fixtures including `terse_1_5_4_newline_statements`; focused Rust parser/runtime `.1.5.4`
+tests PASS; Rust corpus oracle PASS over 20 fixtures; full Rust runtime suite PASS; `mdbook build
+docs/linkedspec-book` PASS; Knowledge Map/memory/doctrine checks PASS; `git diff --check` PASS; `bash
+tools/run_ci_local.sh` PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses
 
 **Scope:** Perl phase0 locks, Rust parser/runtime locks, oracle corpus, mdBook, Knowledge Map, task tree,

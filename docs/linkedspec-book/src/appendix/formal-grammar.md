@@ -248,6 +248,10 @@ children:
 Lifecycle markers are **semicolon-light structured authoring**: a marker followed by
 `{ code }` is a lifecycle block. Markers may also appear as attached-block control
 flow (`if(...) { ... } endif()`, `switch(...) { case(...) ... } endswitch()`).
+Within structured blocks, newlines separate top-level helper statements implicitly.
+Semicolons remain accepted and are required when multiple top-level helper statements
+share one physical line. Plain same-line whitespace is not a statement separator, and
+semicolons inside nested expressions or literal payloads remain protected.
 
 ### 3.7 Fluent Chains
 
@@ -588,6 +592,9 @@ Top::
 
 Both forms lower to identical ActionIR and produce identical parser behavior.
 The choice is stylistic.
+In either form, structured block bodies use the same statement separator rule: newline
+between top-level helper statements is enough, while multiple helper statements on one
+physical line require semicolons.
 
 ## 9. Attached-Block Control Flow
 

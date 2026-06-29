@@ -1186,3 +1186,25 @@ fn terse_1_5_3_call_spacing_runs_like_tight_calls() {
         "optional whitespace before call parentheses preserves runtime values"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.1.5.4 — statement separator contract:
+// Newlines are implicit top-level statement separators; same-line adjacent
+// statements keep requiring semicolons.
+
+#[test]
+fn terse_1_5_4_newline_and_semicolon_statement_separators_run() {
+    let newline_grammar = "Top::\n /x/ -> Done { set(name,\"a\")\n return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(newline_grammar, "xhello"),
+        serde_json::json!(["a"]),
+        "newline-separated statements run in order"
+    );
+
+    let semicolon_grammar =
+        "Top::\n /x/ -> Done { set(name,\"b\"); return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(semicolon_grammar, "xhello"),
+        serde_json::json!(["b"]),
+        "same-line statements separated by semicolon still run in order"
+    );
+}

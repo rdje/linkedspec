@@ -50,6 +50,79 @@ sub _insert_pending_implicit_if_closures_before_stmt {
  $$rewritten_ref .= ' '.$closures;
 }
 
+sub _separator_was_implicit_newline {
+ my ($separator) = @_;
+ return 0 unless defined($separator) && length($separator);
+ return 0 if $separator =~ /;/o;
+ return ($separator =~ /[\r\n]/o) ? 1 : 0
+}
+
+sub _lowered_statement_needs_terminator {
+ my ($lowered_stmt) = @_;
+ return 0 unless defined($lowered_stmt) && length($lowered_stmt);
+ my $trimmed = $lowered_stmt;
+ $trimmed =~ s/^\s+//o;
+ $trimmed =~ s/\s+\z//o;
+ return 0 unless length($trimmed);
+ return 0 if $trimmed =~ /;\z/o;
+ return 0 if $trimmed =~ /\{\z/o;
+ return 0 if $trimmed =~ /^\}\s*(?:elsif\b|else\b)?/o;
+ return 1
+}
+
+sub _insert_pending_newline_terminator {
+ my ($rewritten_ref, $previous_lowered) = @_;
+ return unless ref($previous_lowered) eq 'HASH';
+ return unless $previous_lowered->{implicit_newline_separator};
+ return unless _lowered_statement_needs_terminator($previous_lowered->{lowered_stmt});
+ my $insert_pos = $previous_lowered->{rewritten_end};
+ return unless defined($insert_pos) && $insert_pos >= 0 && $insert_pos <= length($$rewritten_ref);
+ substr($$rewritten_ref, $insert_pos, 0, ';');
+ $previous_lowered->{rewritten_end} = $insert_pos + 1;
+ return
+}
+
+sub _unmatched_event_is_statement_level {
+ my ($event) = @_;
+ return 0 unless ref($event) eq 'HASH';
+ my $contract_id = $event->{contract_id} // '';
+ return 1 if $contract_id =~ /^(?:call|return_call|return_general|return|return_array|return_bare|return_undef)$/o;
+ return 1 if $contract_id =~ /^(?:declare_typed|declare_alias)$/o;
+ return 1 if $contract_id =~ /^(?:push_single_arg|push_indexed_arg|push_target_arg|push_target_indexed_arg|push_scope_target_arg|push_value|push_nonempty)$/o;
+ return 1 if $contract_id =~ /^(?:assign_value|assign_call|assign_call_my|assign_match_my|scalar_assignment_operator|array_append_operator|hash_index_assignment_operator|set_key_statement)$/o;
+ return 1 if $contract_id =~ /^(?:if_flow|elseif_flow|else_flow|endif_flow|switch_flow|case_flow|default_flow|endcase_flow|endswitch_flow)$/o;
+ return 1 if $contract_id =~ /^(?:say_stmt|print_stmt|print_each|exit_now|exit_bare|next_stmt|next_bare|regex_subst|regex_subst_assignment)$/o;
+ return 0
+}
+
+sub _unmatched_event_is_inside_ambiguous_raw_statement {
+ my ($event, $events) = @_;
+ return 0 unless ref($event) eq 'HASH' && ref($events) eq 'ARRAY';
+ my $event_raw = $event->{raw};
+ return 0 unless defined($event_raw) && length($event_raw);
+
+ foreach my $raw_event (@$events) {
+  next unless ref($raw_event) eq 'HASH';
+  next unless ($raw_event->{kind} // '') eq 'RAW_PERL';
+  my $raw_statement = $raw_event->{raw};
+  next unless defined($raw_statement) && length($raw_statement);
+  next unless index($raw_statement, $event_raw) >= 0;
+
+  my $statement_level_count = 0;
+  foreach my $candidate (@$events) {
+   next unless ref($candidate) eq 'HASH';
+   next unless (($candidate->{source} // '') eq 'unmatched_helper_scan_event');
+   next unless _unmatched_event_is_statement_level($candidate);
+   my $candidate_raw = $candidate->{raw};
+   next unless defined($candidate_raw) && length($candidate_raw);
+   ++$statement_level_count if index($raw_statement, $candidate_raw) >= 0;
+   return 1 if $statement_level_count >= 2;
+  }
+ }
+
+ return 0
+}
+
 sub default_deps_for_package {
  my ($pkg) = @_;
  return LinkedSpec::OwnerDispatch::build_dep_map(
@@ -73,27 +146,72 @@ sub _lower_action_code_from_canonical_ir {
   if_stack      => [],
   switch_stack  => [],
   switch_counter => 0,
- rewrite_rules => $rewrite_rules,
+  rewrite_rules => $rewrite_rules,
  };
- foreach my $event (@{$canonical_ir_diag->{canonical_action_ir_events}}) {
+ my $source_search_pos = 0;
+ my $previous_lowered;
+ my $canonical_events = $canonical_ir_diag->{canonical_action_ir_events} || [];
+ foreach my $event (@$canonical_events) {
   my $source_stmt = $event->{raw};
   next unless defined($source_stmt) && length($source_stmt);
 
+  my $source_pos = index($code, $source_stmt, $source_search_pos);
+  if (
+   defined($previous_lowered) &&
+   $source_pos >= 0 &&
+   defined($previous_lowered->{source_end}) &&
+   $source_pos >= $previous_lowered->{source_end}
+  ) {
+   my $separator = substr($code, $previous_lowered->{source_end}, $source_pos - $previous_lowered->{source_end});
+   $previous_lowered->{implicit_newline_separator} = _separator_was_implicit_newline($separator);
+   _insert_pending_newline_terminator(\$rewritten, $previous_lowered);
+  }
+
   _insert_pending_implicit_if_closures_before_stmt(\$rewritten, $lower_ctx, $source_stmt, $event);
 
+  my $is_unmatched_helper_scan_event = (($event->{source} // '') eq 'unmatched_helper_scan_event') ? 1 : 0;
+  if ($is_unmatched_helper_scan_event && _unmatched_event_is_inside_ambiguous_raw_statement($event, $canonical_events)) {
+   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   next;
+  }
+
   my $kind = $event->{kind} // '';
-  next if $kind eq 'RAW_PERL';
+  if ($kind eq 'RAW_PERL') {
+   $previous_lowered = undef;
+   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   next;
+  }
 
   my $contract_id = $event->{contract_id};
-  next unless defined $contract_id && exists $rewrite_by_id{$contract_id};
+  if (!(defined $contract_id && exists $rewrite_by_id{$contract_id})) {
+   $previous_lowered = undef;
+   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   next;
+  }
 
   my $pos = index($rewritten, $source_stmt);
-  next if $pos < 0;
+  if ($pos < 0) {
+   $previous_lowered = undef;
+   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   next;
+  }
 
   my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt, $lower_ctx);
-  next unless defined($lowered_stmt) && length($lowered_stmt);
-  next if $lowered_stmt eq $source_stmt;
+  if (!(defined($lowered_stmt) && length($lowered_stmt)) || $lowered_stmt eq $source_stmt) {
+   $previous_lowered = undef;
+   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   next;
+  }
   substr($rewritten, $pos, length($source_stmt), $lowered_stmt);
+  if (!$is_unmatched_helper_scan_event) {
+   $previous_lowered = {
+    lowered_stmt => $lowered_stmt,
+    rewritten_end => $pos + length($lowered_stmt),
+    source_end => ($source_pos >= 0) ? $source_pos + length($source_stmt) : undef,
+    implicit_newline_separator => 0,
+   };
+  }
+  $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
  }
  my $implicit_closures = _flush_implicit_if_closures($lower_ctx);
  $rewritten .= ' '.$implicit_closures if defined($implicit_closures) && length($implicit_closures);

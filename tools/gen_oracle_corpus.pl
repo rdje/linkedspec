@@ -357,6 +357,23 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.5.4 — statement separator contract ──
+    #
+    # Newline-separated top-level DSL statements are canonical and lower to
+    # valid generated Perl/Rust execution. Same-line adjacency keeps requiring
+    # semicolons; this fixture locks the implicit-newline form.
+    {   case   => 'terse_1_5_4_newline_statements',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(name,"a")
+ return(scalar(name)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);
