@@ -353,6 +353,54 @@ sub _lower_scalaref_value_expr {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_direct_nested_access_value_expr
+# Purpose : Lower direct bracket access such as `foo["a"][0][scalar(i)]`.
+# Args    : ($expr, $deps)
+# Returns : Perl dereference expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_direct_nested_access_value_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*(\[.*)$/s;
+
+ my ($base_symbol, $path_expr) = ($1, $2);
+ return undef if $base_symbol =~ /^(?:undef|true|false)$/o;
+
+ my $segments = _split_scalaref_path_segments($path_expr, $deps);
+ return undef unless $segments && @$segments;
+ return undef if grep { ($_->{kind} // '') ne 'index' } @$segments;
+
+ my $lowered = '$'.$base_symbol;
+ foreach my $segment (@$segments) {
+  my $segment_source = $trim_action_ir_value->($segment->{expr});
+  return undef unless defined($segment_source) && length($segment_source);
+  return undef if $segment_source =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+
+  my $segment_expr = _lower_scalaref_segment_expr($segment_source, $deps);
+  return undef unless defined($segment_expr) && length($segment_expr);
+
+  if ($segment_source =~ /^\"(?:\\.|[^\"])*\"$/s || $segment_source =~ /^'(?:\\.|[^'])*'$/s) {
+   $lowered .= '->{'.$segment_expr.'}';
+  } else {
+   $lowered .= '->['.$segment_expr.']';
+  }
+ }
+
+ return $lowered
+}
+
+#------------------------------------------------------------------------------
 # Function: _infer_scalar_container_kind
 # Purpose : Infer whether `scalar(container, key)` should resolve through array
 #           index or hash key syntax when container kind is not explicit.

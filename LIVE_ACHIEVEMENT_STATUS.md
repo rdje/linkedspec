@@ -7,10 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.5.5.1 — direct nested access with explicit segments landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + ORACLE + BOOK/KM LOCKS). Direct mixed access such as
+  `foo["a"][9]["b"][scalar(z)]` now works on both variants. Perl lowers it to
+  `$foo->{"a"}->[9]->{"b"}->[$z]`, matching the existing explicit `scalaref(...)` path; Rust parses it as
+  `NestedAccess` and walks the scalar-held base payload through hash-key and array-index segments. Quoted
+  string segments are hash keys; numeric/helper segments are array indexes. Bare path atoms such as `[z]`
+  remain deferred to `.1.5.5.2` / Channel 2, and `scalaref(base,path)` remains accepted. **Verification:**
+  phase0 PASS, Rust focused parser/runtime tests PASS, Rust corpus oracle PASS over 21 fixtures, full Rust
+  runtime PASS, mdBook/KM/memory/doctrine/local gates green.
+  **Frontier: `SPEC-FORMAT-TERSE.1.5.5.2`** (bare path-segment / Channel 2 coordination).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.5.5 — direct nested access split by Channel 2 boundary**
-  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM + TOOLBOX probes show direct
-  `foo["a"][9]["b"][scalar(z)]` is not yet a valid lowered value expression: it passes through as
-  `foo["a"][9]["b"][$z]` and generated handler compilation fails near `][`. The existing
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). Split-time KM + TOOLBOX probes showed
+  direct `foo["a"][9]["b"][scalar(z)]` was not yet a valid lowered value expression: it passed through as
+  `foo["a"][9]["b"][$z]` and generated handler compilation failed near `][`. The existing
   `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` path remains the working explicit syntax and lowers to
   `$foo->{"a"}->[9]->{"b"}->[$z]`. Bare segment `z` remains Channel 2 value-position-read work. `.1.5.5` is
   now a container: `.1.5.5.1` explicit path segments first, `.1.5.5.2` bare-segment/Channel-2 coordination.

@@ -32,6 +32,7 @@
 
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::RuntimeContext;
+use linkedspec_core::expr::AccessSegment;
 use linkedspec_core::types::{CompiledSpec, ParseMode, RuntimeValue};
 use serde_json::Value;
 
@@ -675,6 +676,32 @@ impl Engine {
                 let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
                 let arr = ctx.get_array(name);
                 Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
+            }
+            Expr::NestedAccess { base, segments } => {
+                let mut current = ctx.get_scalar(base);
+                for segment in segments {
+                    current = match segment {
+                        AccessSegment::Key { value } => match current {
+                            RuntimeValue::Hash(entries) => entries
+                                .iter()
+                                .find(|(key, _)| key == value)
+                                .map(|(_, value)| value.clone())
+                                .unwrap_or(RuntimeValue::Undef),
+                            _ => RuntimeValue::Undef,
+                        },
+                        AccessSegment::Index { expr } => {
+                            let idx_val = self.eval_expr(expr, ctx, rule_label)?;
+                            let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
+                            match current {
+                                RuntimeValue::Array(items) => {
+                                    items.get(idx).cloned().unwrap_or(RuntimeValue::Undef)
+                                }
+                                _ => RuntimeValue::Undef,
+                            }
+                        }
+                    };
+                }
+                Ok(current)
             }
             Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
             Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),

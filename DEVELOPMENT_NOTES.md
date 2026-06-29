@@ -1,10 +1,24 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
-- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.5 — split direct nested access before code): Grounded the direct-access
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.5.1 — explicit direct nested access landed): Implemented the safe
+  direct-access subset on both variants. Durable points. (1) **Direct access reuses the settled explicit-path
+  semantics.** Perl routes `foo["a"][9]["b"][scalar(z)]` through a new ValueExpr lowerer and emits the same
+  dereference chain as `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])`. Quoted segments are hash keys; numeric and
+  helper/value segments are array indexes. (2) **Rust keeps legacy one-level indexing intact.** A single
+  non-key `name[index]` remains `IndexedVar`; mixed/multi-segment explicit paths become `NestedAccess` with
+  key/index segments and are evaluated from the scalar-held base payload. (3) **Channel 2 is still cleanly
+  separated.** Bare direct-access atoms (`[z]`, `[key]`) are rejected/deferred rather than treated as scalar
+  reads. Use `[scalar(z)]` today. `scalaref(...)` remains an accepted explicit helper, not a retired form.
+  Verification: phase0, focused Rust parser/runtime locks, oracle corpus 21 fixtures, full Rust runtime,
+  mdBook, KM, memory/doctrine, and local CI gates.
+
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.5 — split direct nested access before code): Grounded the then-open direct-access
   leaf with KM + TOOLBOX and split it by the Channel 2 boundary. Durable points. (1) **Direct bracket syntax is
-  not the existing `scalaref` path.** `foo["a"][9]["b"][scalar(z)]` currently emits invalid Perl-shaped code,
-  while `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` lowers correctly to the dereference chain. (2) **Bare path
+  not automatically the existing `scalaref` path.** At split time, `foo["a"][9]["b"][scalar(z)]` emitted invalid
+  Perl-shaped code, while `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` lowered correctly to the dereference chain.
+  The explicit direct form is now implemented by `.1.5.5.1`; this split note explains why it was separated
+  first. (2) **Bare path
   atoms are the same hard problem as bare value-position reads.** The final `[z]` in the brainstorm spelling is
   not a variable read today; it remains a bare atom just like the known `return(count)` gap. (3) **The first
   implementation slice should avoid smuggling Channel 2 in sideways.** `.1.5.5.1` will implement and lock

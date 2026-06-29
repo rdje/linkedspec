@@ -257,6 +257,11 @@ sub _lower_scalaref_value_expr {
  return _call_actionir_owner_with_deps('value_expr', '_lower_scalaref_value_expr', @args)
 }
 
+sub _lower_direct_nested_access_value_expr {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('value_expr', '_lower_direct_nested_access_value_expr', @args)
+}
+
 sub _infer_scalar_container_kind {
  my @args = @_;
  return _call_actionir_owner_with_deps('value_expr', '_infer_scalar_container_kind', @args)

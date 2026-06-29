@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.5.1 — implement direct nested access explicit segments
+
+**Scope:** Perl ActionIR value lowering, Rust action-code expression parser/runtime, Perl/Rust/oracle tests,
+mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** direct mixed nested access now works when every path segment is explicit. Perl lowers
+`foo["a"][9]["b"][scalar(z)]` to the same dereference chain as the settled `scalaref(...)` form:
+`$foo->{"a"}->[9]->{"b"}->[$z]`. Quoted string segments are hash keys; numeric and helper/value-expression
+segments are array indexes. Single-quoted string segments are hash keys too.
+
+**Rust parity:** Rust core gained `AccessSegment` and `Expr::NestedAccess`; mixed or multi-segment direct
+paths parse as nested access, while a single non-key `name[index]` remains the legacy indexed-variable form.
+The runtime walks the scalar-held base payload through hash-key and array-index segments.
+
+**Boundary:** bare path atoms such as `[z]` remain out of scope and are still owned by `.1.5.5.2` / Channel 2
+value-position reads. `scalaref(base,path)` remains accepted; direct access is a new explicit form, not a
+retirement of the helper.
+
+**Validation:** Perl syntax checks PASS; focused Rust parser/runtime tests PASS; oracle corpus regenerated
+with 21 fixtures and Rust corpus oracle PASS; full phase0, Rust runtime suite, mdBook, Knowledge Map,
+memory/doctrine, diff, and local CI gates are recorded in the task tree close-out.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.5 — split direct access by Channel 2 boundary
 
 **Scope:** task tree, task-tree index, Knowledge Map card + generated map, roadmap/live continuity docs. No

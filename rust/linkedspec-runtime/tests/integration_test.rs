@@ -1208,3 +1208,15 @@ fn terse_1_5_4_newline_and_semicolon_statement_separators_run() {
         "same-line statements separated by semicolon still run in order"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.1.5.5.1 — direct nested access with explicit segments.
+
+#[test]
+fn terse_1_5_5_1_direct_nested_access_explicit_segments_run() {
+    let grammar = "Top::\n /x/ -> Done { set(foo, hash(\"a\", array(hash(\"b\", array(\"zero\",\"one\")))))\n set(z,1)\n return(foo[\"a\"][0][\"b\"][scalar(z)]) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["one"]),
+        "direct nested access walks mixed hash and array segments"
+    );
+}

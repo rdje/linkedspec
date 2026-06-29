@@ -374,6 +374,23 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.1.5.5.1 — direct nested access with explicit segments ──
+    #
+    # Direct mixed hash/array access is canonical when every segment is explicit.
+    # Bare path atoms such as `[z]` remain Channel 2 work; this fixture uses
+    # `scalar(z)` for the final index.
+    {   case   => 'terse_1_5_5_1_direct_nested_access',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(foo, hash("a", array(hash("b", array("zero","one")))))
+ set(z,1)
+ return(foo["a"][0]["b"][scalar(z)]) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

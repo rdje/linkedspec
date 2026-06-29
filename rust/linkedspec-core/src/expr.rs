@@ -14,7 +14,7 @@
 //! array_append → name '+=' expr          (statement only)
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
 //! expr        → primary ('.' method_call)*
-//! primary     → call | indexed_var | literal | variable
+//! primary     → call | nested_access | indexed_var | literal | variable
 //! call        → name '(' args? ')'
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
@@ -25,7 +25,8 @@
 //! boolean     → 'true' | 'false'
 //! undef       → 'undef'
 //! variable    → '$'? name                  (bare word variable reference)
-//! indexed_var → variable '[' expr ']'      (array/hash index access)
+//! indexed_var → variable '[' expr ']'      (single-level array index access)
+//! nested_access → variable ('[' expr ']')+ (mixed hash/array path access)
 //! regex       → '/' [^/]* '/'
 //! name        → [a-zA-Z_]\w*
 //! ```
@@ -42,6 +43,18 @@ pub struct CodeBlock {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Stmt {
     pub expr: Expr,
+}
+
+/// One segment in a direct nested-access path.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "kind")]
+pub enum AccessSegment {
+    /// Hash/object key segment from a quoted string: `foo["key"]`
+    #[serde(rename = "key")]
+    Key { value: String },
+    /// Array index segment from a numeric or explicit helper expression: `foo[0]`, `foo[scalar(i)]`
+    #[serde(rename = "index")]
+    Index { expr: Box<Expr> },
 }
 
 /// An expression — the core of the lifecycle code language.
@@ -83,6 +96,12 @@ pub enum Expr {
     IndexedVar {
         name: String,
         index: Box<Expr>,
+    },
+    /// A mixed nested access path: `foo["a"][0]["b"]`
+    #[serde(rename = "nested_access")]
+    NestedAccess {
+        base: String,
+        segments: Vec<AccessSegment>,
     },
     /// A string literal: `"hello"`, `'world'`
     #[serde(rename = "string")]
@@ -166,6 +185,16 @@ impl std::fmt::Display for Expr {
             Expr::AssignHashIndex { name, key, value } => write!(f, "{name}[{key}] = {value}"),
             Expr::Variable { name } => write!(f, "{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
+            Expr::NestedAccess { base, segments } => {
+                write!(f, "{base}")?;
+                for segment in segments {
+                    match segment {
+                        AccessSegment::Key { value } => write!(f, "[\"{value}\"]")?,
+                        AccessSegment::Index { expr } => write!(f, "[{expr}]")?,
+                    }
+                }
+                Ok(())
+            }
             Expr::StringLiteral { value } => write!(f, "\"{value}\""),
             Expr::NumberLiteral { value } => write!(f, "{value}"),
             Expr::BooleanLiteral { value } => write!(f, "{value}"),
@@ -551,21 +580,60 @@ impl<'a> Parser<'a> {
             // Parse any fluent chain continuations: .method(args)
             self.parse_fluent_chain(expr)
         } else if self.peek() == Some('[') {
-            // Indexed variable: name[index]
-            self.advance(1); // consume '['
-            let index = self.parse_expr()?;
-            self.skip_whitespace();
-            if self.peek() != Some(']') {
-                return Err(format!("expected ']' after index in '{}[..]'", name));
+            let segments = self.parse_access_segments(&name)?;
+            let has_hash_key = segments
+                .iter()
+                .any(|segment| matches!(segment, AccessSegment::Key { .. }));
+            let has_bare_segment = segments.iter().any(|segment| {
+                matches!(
+                    segment,
+                    AccessSegment::Index {
+                        expr
+                    } if matches!(expr.as_ref(), Expr::Variable { .. })
+                )
+            });
+            if segments.len() == 1 && !has_hash_key {
+                let AccessSegment::Index { expr } = segments.into_iter().next().unwrap() else {
+                    unreachable!("single non-key access segment must be an index");
+                };
+                let expr = Expr::IndexedVar { name, index: expr };
+                return self.parse_fluent_chain(expr);
             }
-            self.advance(1); // consume ']'
-            let expr = Expr::IndexedVar { name, index: Box::new(index) };
+            if has_bare_segment {
+                return Err("bare direct-access path segments are reserved for Channel 2".into());
+            }
+            let expr = Expr::NestedAccess {
+                base: name,
+                segments,
+            };
             self.parse_fluent_chain(expr)
         } else {
             // Plain variable — check for fluent chain too
             let expr = Expr::Variable { name };
             self.parse_fluent_chain(expr)
         }
+    }
+
+    fn parse_access_segments(&mut self, name: &str) -> Result<Vec<AccessSegment>, String> {
+        let mut segments = Vec::new();
+        while self.peek() == Some('[') {
+            self.advance(1); // consume '['
+            let expr = self.parse_expr()?;
+            self.skip_whitespace();
+            if self.peek() != Some(']') {
+                return Err(format!("expected ']' after index in '{}[..]'", name));
+            }
+            self.advance(1); // consume ']'
+            let segment = match expr {
+                Expr::StringLiteral { value } => AccessSegment::Key { value },
+                other => AccessSegment::Index {
+                    expr: Box::new(other),
+                },
+            };
+            segments.push(segment);
+            self.skip_whitespace();
+        }
+        Ok(segments)
     }
 
     /// Parse optional fluent chain continuations: `.method(args).method2(args2)...`
@@ -1190,6 +1258,32 @@ mod tests {
             }
             _ => panic!("expected Call"),
         }
+    }
+
+    #[test]
+    fn parse_direct_nested_access_explicit_segments() {
+        let code = r#"return(foo["a"][9]["b"][scalar(z)])"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::NestedAccess { base, segments } => {
+                    assert_eq!(base, "foo");
+                    assert_eq!(segments.len(), 4);
+                    assert!(matches!(segments[0], AccessSegment::Key { ref value } if value == "a"));
+                    assert!(matches!(segments[1], AccessSegment::Index { .. }));
+                    assert!(matches!(segments[2], AccessSegment::Key { ref value } if value == "b"));
+                    assert!(matches!(segments[3], AccessSegment::Index { .. }));
+                }
+                other => panic!("expected NestedAccess, got {:?}", other),
+            },
+            _ => panic!("expected Call"),
+        }
+    }
+
+    #[test]
+    fn parse_direct_nested_access_rejects_bare_segments() {
+        let err = CodeBlock::parse(r#"return(foo["a"][z])"#).unwrap_err();
+        assert!(err.contains("reserved for Channel 2"));
     }
 
     // ── Fluent chain parsing ──

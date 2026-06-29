@@ -6,9 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.5.5` SPLIT** — direct nested access is divided before code into
-  `.1.5.5.1` explicit-segment direct access and `.1.5.5.2` bare-segment/Channel-2 coordination. Frontier ->
-  **`.1.5.5.1` direct nested access with explicit path segments**. Prior **`.1.5.4` DONE** — statement
+- Last updated: `2026-06-29` (**`.1.5.5.1` DONE** — direct nested access with explicit path segments
+  landed on Perl and Rust. `foo["a"][9]["b"][scalar(z)]` now reads mixed hash/array payload paths; quoted
+  string segments are hash keys, numeric/helper segments are array indexes, and bare `[z]` remains deferred to
+  `.1.5.5.2` / Channel 2. Frontier -> **`.1.5.5.2` bare path-segment / Channel 2 coordination**. Prior
+  **`.1.5.5` SPLIT** — direct nested access was divided before code into `.1.5.5.1` explicit-segment direct
+  access and `.1.5.5.2` bare-segment/Channel-2 coordination. Prior **`.1.5.4` DONE** — statement
   separators are newline-or-semicolon across Perl and Rust: newlines split top-level canonical DSL statements,
   multiple same-line statements require `;`, nested semicolons remain protected, and fluent attached-control
   tails normalize to explicit newline boundaries. Prior **`.1.5.3` DONE** — helper calls keep mandatory `callee(args)` parentheses while
@@ -781,7 +784,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     focused Rust runtime `.1.5.4` integration test PASS; Rust corpus oracle PASS over 20 fixtures; full Rust
     runtime suite PASS; `mdbook build docs/linkedspec-book` PASS; Knowledge Map regenerate/check PASS;
     memory/doctrine checks PASS; `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS.
-  Commit: `SPEC-FORMAT-TERSE.1.5.4 — lock statement separators` (pending commit)
+  Commit: `SPEC-FORMAT-TERSE.1.5.4 — lock statement separators` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.5`
   Status: `done` (2026-06-29 — split before code)
@@ -801,10 +804,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     probes, matching the open Channel 2 value-position-read gap. Rust code-read shows only single-level
     `IndexedVar { name, index }` parsing/evaluation today. Therefore `.1.5.5` becomes a container before any
     implementation code. No engine/book behavior change in this split slice.
-  Commit: `SPEC-FORMAT-TERSE.1.5.5 — split direct access by Channel 2 boundary` (pending commit)
+  Commit: `SPEC-FORMAT-TERSE.1.5.5 — split direct access by Channel 2 boundary` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.5.1`
-  Status: `pending`
+  Status: `done` (2026-06-29)
   Goal: Direct nested access with explicit path segments.
   Acceptance: Perl and Rust accept any-depth mixed direct bracket access with explicit segment expressions,
     e.g. `foo["a"][9]["b"][scalar(z)]`, while preserving `scalaref(base,path)` as an accepted explicit helper.
@@ -812,8 +815,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     numeric segments are array indexes, and helper/value expressions in brackets are explicit index
     expressions unless later Channel 2 work deliberately broadens them. Bare path segments such as `[z]` remain
     out of scope for this leaf.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-06-29.** Perl now lowers direct nested access in value positions through
+    `ActionIR::ValueExpr::_lower_direct_nested_access_value_expr`, reusing the existing `scalaref(...)`
+    segment splitter/lowerer so explicit paths produce the same dereference chain:
+    `foo["a"][9]["b"][scalar(z)]` -> `$foo->{"a"}->[9]->{"b"}->[$z]`. Single-quoted key segments are hash
+    keys too. Bare path atoms such as `[z]` deliberately remain outside the canonical lowering. Rust core now
+    models `AccessSegment::{Key,Index}` and `Expr::NestedAccess`; one-level non-key `name[index]` stays the
+    legacy `IndexedVar`, while mixed/multi-segment explicit access becomes `NestedAccess` and bare nested
+    segments are rejected as Channel 2-reserved. Rust runtime evaluates the path by walking hash keys and array
+    indexes from the scalar-held base value. **Locks:** Perl phase0 subtest
+    `spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments`; Rust parser tests
+    `parse_direct_nested_access_*`; Rust runtime test
+    `terse_1_5_5_1_direct_nested_access_explicit_segments_run`; oracle fixture
+    `terse_1_5_5_1_direct_nested_access`; mdBook/KM/live-doc updates. Focused syntax/Rust/oracle checks are
+    green; full gates are recorded in the Verification Log.
+  Commit: `SPEC-FORMAT-TERSE.1.5.5.1 — implement direct nested access explicit segments` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.5.2`
   Status: `pending`
@@ -926,11 +942,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.5.3` | `done` 2026-06-29 | Function-call spacing locked: optional whitespace before `(` is accepted at supported helper/value sites, and no-parenthesis helper spellings remain out of scope. |
 | — | `SPEC-FORMAT-TERSE.1.5.4` | `done` 2026-06-29 | Statement separator contract landed: newline-or-semicolon separates top-level canonical DSL statements, same-line multiple statements require `;`, nested semicolons stay protected, and Perl/Rust locks agree. |
 | — | `SPEC-FORMAT-TERSE.1.5.5` | `done` 2026-06-29 | Direct nested access split before code: explicit segment expressions are separable from bare-segment / Channel 2 value-position reads. |
-| 1 | `SPEC-FORMAT-TERSE.1.5.5.1` | `pending` | Direct any-depth nested access with explicit path segments (`foo["a"][9]["b"][scalar(z)]`) is the next safe implementation slice. |
-| 2 | `SPEC-FORMAT-TERSE.1.5.5.2` | `pending` | Bare path segments (`[z]`, `[key]`) remain coupled to Channel 2 value-position bare-word reads. |
+| — | `SPEC-FORMAT-TERSE.1.5.5.1` | `done` 2026-06-29 | Direct any-depth nested access with explicit path segments (`foo["a"][9]["b"][scalar(z)]`) landed on Perl and Rust. Quoted segments are hash keys; numeric/helper segments are array indexes; bare path atoms stay out of scope. |
+| 1 | `SPEC-FORMAT-TERSE.1.5.5.2` | `pending` | Bare path segments (`[z]`, `[key]`) remain coupled to Channel 2 value-position bare-word reads. |
 | … | `.1.2.3`+ (Channel 2),`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.5` is designed) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.5.5.1` direct nested access with explicit segments**). The accepted direct-access
+  subset is intentionally explicit: `foo["a"][9]["b"][scalar(z)]` is canonical, `foo["a"][9]["b"][z]` is not.
+  Quoted string segments (`["a"]` / `['a']`) are hash-key segments. Numeric and helper/value-expression
+  segments (`[9]`, `[scalar(z)]`) are array-index segments. Perl lowers the direct path through the same
+  dereference semantics as `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])`, and Rust models the same mixed path with
+  `Expr::NestedAccess`. A single one-level non-key `foo[index]` remains the legacy indexed-variable form.
+  Bare path atoms remain reserved for `.1.5.5.2` / Channel 2 so this leaf does not pre-empt the global
+  bare-value-read model.
 
 - `2026-06-29` (**`.1.5.5` direct nested access split** — explicit segment expressions before bare
   Channel 2 segments). TOOLBOX probes show direct `foo["a"][9]["b"][scalar(z)]` is not a valid lowered value
@@ -1262,6 +1287,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.3` | Syntax checks on edited Perl test/generator; focused Rust parser `.1.5.3` tests; focused Rust runtime `.1.5.3` integration test; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Helper calls keep mandatory `callee(args)` parentheses while optional whitespace before `(` is accepted at supported statement/value sites. Perl locks spaced-vs-tight equality for `return`, `set`, nested helpers, operator RHS calls, and hash-index key/RHS calls; no-parenthesis spellings stay raw/out of helper recognition. Rust parser/runtime/oracle locks prove the same contract. Phase0 PASS (`1..981`); oracle corpus regenerated with 19 fixtures; focused Rust tests PASS; corpus oracle PASS over 19 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.4` | Syntax checks on edited Perl modules/test/generator; TOOLBOX lowerings and runtime probes for newline/semicolon/same-line cases; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core separator tests; focused Rust runtime `.1.5.4` integration test; Rust corpus oracle; full Rust runtime suite; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Newline and semicolon are the statement separators; same-line whitespace is not. Perl `StatementSplit` only implicit-splits across line breaks, `RewritePipeline` emits generated Perl terminators for newline-separated canonical statements, and Bootstrap normalizes fluent attached-control tails with internal newlines. Rust parser/runtime locks enforce the same contract. Phase0 PASS (`1..982`); oracle corpus regenerated with 20 fixtures; focused Rust tests PASS; corpus oracle PASS over 20 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.5` (split) | KM retrieval; TOOLBOX `call_spec_handler_subst` probes comparing direct bracket access against `scalaref(...)`; `LinkedSpec::Get` generated-source/runtime probe for direct access; Perl code-read (`ValueExpr`, `MethodLowering`); Rust code-read (`expr.rs`, `engine.rs`); Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check` | Split `.1.5.5` into `.1.5.5.1` explicit-segment direct access and `.1.5.5.2` bare path-segment / Channel 2 coordination. Direct `foo["a"][9]["b"][scalar(z)]` currently emits invalid Perl-shaped `foo["a"][9]["b"][$z]`, while `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` lowers correctly. Bare segment `z` remains a Channel 2 value-position read problem. No engine/book behavior change, so phase0/cargo/local CI are N/A to the split slice beyond doctrine/memory/KM checks. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.5.1` | TOOLBOX lowerings for direct access vs `scalaref(...)`; generated-source/runtime probe; Perl syntax checks (`ValueExpr.pm`, `MethodLowering.pm`, `EmitContext.pm`, phase0, oracle generator); focused Rust parser/runtime tests; oracle regeneration; Rust corpus oracle; full phase0; full Rust runtime suite; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Direct nested access with explicit path segments landed. Perl lowers `foo["a"][9]["b"][scalar(z)]` to `$foo->{"a"}->[9]->{"b"}->[$z]` and leaves bare `[z]` outside canonical lowering. Rust parses mixed/multi-segment explicit paths as `NestedAccess`, preserves one-level `name[index]` as `IndexedVar`, rejects bare nested path atoms as Channel 2-reserved, and evaluates mixed hash/array paths from the scalar-held base value. Phase0/Rust/oracle/book/KM/memory/doctrine/local gates green. |
 
 ## Commit Log
 
@@ -1290,8 +1316,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.5.3` | `SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses` | Optional whitespace before `(` is locked at supported helper/value sites on Perl and Rust, while no-parenthesis helper spellings remain outside call recognition. Frontier becomes `.1.5.4`. |
 | `SPEC-FORMAT-TERSE.1.5.4` | `SPEC-FORMAT-TERSE.1.5.4 — lock statement separators` | Newline-or-semicolon statement separation is locked on Perl and Rust. Same-line multiple statements require `;`; nested semicolons stay protected; fluent attached-control tails keep working through Bootstrap newline normalization. Frontier becomes `.1.5.5`. |
 | `SPEC-FORMAT-TERSE.1.5.5` | `SPEC-FORMAT-TERSE.1.5.5 — split direct access by Channel 2 boundary` | `.1.5.5` is now a container. `.1.5.5.1` owns direct nested access with explicit path segments; `.1.5.5.2` owns the bare path-segment / Channel 2 value-position-read coordination. Frontier becomes `.1.5.5.1`. |
+| `SPEC-FORMAT-TERSE.1.5.5.1` | `SPEC-FORMAT-TERSE.1.5.5.1 — implement direct nested access explicit segments` | Perl and Rust now accept explicit mixed direct access such as `foo["a"][9]["b"][scalar(z)]`; `scalaref(...)` remains accepted; bare path atoms stay deferred to `.1.5.5.2` / Channel 2. Frontier becomes `.1.5.5.2`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.5.5.1` DONE — direct nested access with explicit path segments landed.**
+  Perl lowers direct mixed access through the same dereference semantics as `scalaref(...)`: quoted string
+  segments become hash keys and numeric/helper segments become array indexes. Rust now has a `NestedAccess`
+  expression with key/index segments and evaluates it from the scalar-held base payload. One-level
+  `name[index]` stays the legacy indexed-variable form, and bare path atoms such as `[z]` remain deferred to
+  `.1.5.5.2` / Channel 2. Phase0/Rust/oracle/book/KM/local gates green. Frontier -> `.1.5.5.2`.
 
 - `2026-06-29`: **`.1.5.5` SPLIT — direct nested access divided by the Channel 2 boundary.**
   TOOLBOX probes show direct `foo["a"][9]["b"][scalar(z)]` is not yet a valid lowered value expression:

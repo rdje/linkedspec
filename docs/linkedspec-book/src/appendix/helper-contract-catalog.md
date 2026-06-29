@@ -120,6 +120,29 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 - **Edge cases**: Returns `undef` if the key does not exist or container is not array/hash.
 - **Example**: over `/(\w+),(\w+),(\w+)/`, `scalar(array(entry_group(0), entry_group(1), entry_group(2)), 1)` on `a,b,c` → `["b"]`.
 
+### Direct nested access: `base["key"][index]`
+- **Signature**: `base[path_segment...]`, where `base` is a working scalar containing an array/hash payload.
+- **Returns**: scalar or undef
+- **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload. Quoted string
+  segments such as `["children"]` or `['children']` are hash keys. Numeric segments and explicit helper/value
+  expressions such as `[0]` or `[scalar(i)]` are array indexes.
+- **Edge cases**: Returns `undef` when a segment does not exist or the current value has the wrong container
+  kind. Bare path atoms such as `[i]` are not variable reads yet; write `[scalar(i)]` until the Channel 2
+  bare value-position-read work lands.
+- **Example**:
+  ```text
+  Top::
+   /x/ -> Done {
+     set(payload, hash("children", array(hash("name", "one"), hash("name", "two"))))
+     set(i, 1)
+     return(payload["children"][scalar(i)]["name"])
+   }
+
+  Done::
+   /[a-z]+/
+  ```
+  Input `xhello` -> `["two"]`.
+
 ### `concat(args...)`
 - **Signature**: `concat(a: scalar, b: scalar, ...)`
 - **Returns**: scalar
@@ -976,7 +999,11 @@ unlike the Retired table below):
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
-Both spellings produce byte-identical generated code in every position — value expression,
+Direct nested access, for example `payload["children"][0]["name"]`, is also part of the terse surface. It is
+not a helper rename and does not retire `scalaref(...)`; both direct access and `scalaref(base, path)` remain
+accepted explicit forms.
+
+The helper aliases above produce byte-identical generated code in every position — value expression,
 assignment / declaration source, return payload, and the array-vs-hash type inference used by
 numeric reducers and `coalesce(...)`. New `.spec` authoring should prefer the terse names.
 

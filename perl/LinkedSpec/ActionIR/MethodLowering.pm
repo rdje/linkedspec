@@ -36,6 +36,7 @@ sub default_deps_for_package {
    'parse_method_function_expr',
    'normalize_method_args_with_optional_scope',
    'lower_scalaref_value_expr',
+   'lower_direct_nested_access_value_expr',
    'extract_array_symbol_name',
    'extract_hash_symbol_name',
    'extract_scalar_symbol_name',
@@ -175,6 +176,7 @@ sub _lower_method_value_expr {
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $lower_scalaref_value_expr = $require_dep->('lower_scalaref_value_expr');
+ my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
  my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
  my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
@@ -355,6 +357,8 @@ sub _lower_method_value_expr {
  return undef unless defined($trimmed) && length($trimmed);
  my $literal = $lower_primitive_literal_expr->($trimmed);
  return $literal if defined($literal);
+ my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
+ return $direct_access if defined($direct_access) && length($direct_access);
  my $method_call = $parse_method_function_expr->($trimmed);
  if ($method_call && $method_call->{method} eq 'call') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

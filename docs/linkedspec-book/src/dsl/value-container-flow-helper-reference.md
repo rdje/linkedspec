@@ -168,6 +168,7 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `scalar(array(items), index)` | scalar value or `undef` | read one zero-based element from an array value. |
 | `scalar(hash(meta), key)` | scalar value or `undef` | read one field from a hash value. |
 | `scalaref(base, path)` | scalar value or `undef` | read a nested hash/array path such as `{content}` or `[0]{name}`. |
+| `base["field"][0][scalar(i)]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container. |
 | `array(name)` | array value | read the working array `name`. |
 | `a(name)` | array value | short alias for `array(name)`. |
 | `hash(name)` | hash value | read the working hash `name`. |
@@ -188,6 +189,10 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
 > the key and value are explicit expressions; write `meta[scalar(key)] = scalar(value)` for working
 > variables until bare key/RHS reads land.
+> Direct nested access `payload["children"][0]["name"]` is accepted for explicit path segments.
+> Quoted string segments are hash keys; numeric segments and helper/value expressions such as
+> `[scalar(i)]` are array indexes. Bare path atoms such as `[i]` are still deferred to the same
+> value-position bare-read work as `return(i)`; write `[scalar(i)]` today.
 > Each terse helper spelling lowers **identically** to its original in every position, so both work
 > during migration — the original names are deprecated aliases, not yet retired.
 > See the
@@ -200,11 +205,15 @@ assign(scalar(first_item), scalar(array(items), 0));
 assign(scalar(kind), scalar(hash(meta), "kind"));
 assign(scalar(content), scalaref(retv, {content}));
 assign(scalar(child_name), scalaref(retv, {children}[0]{name}));
+assign(scalar(child_name), retv["children"][0]["name"]);
 assign(array(snapshot), array_copy(array(items)));
 assign(hash(meta_snapshot), hash_copy(hash(meta)));
 ```
 
-Use `scalar(array_expr, index)` when the container is already known and the access path is one level deep. Use `scalaref(base, path)` when the payload is a nested reference coming from another rule or a structured object.
+Use `scalar(array_expr, index)` when the container is already known and the access path is one level deep.
+Use direct nested access when the base is a working scalar that holds a structured array/hash payload and every
+path segment is explicit. `scalaref(base, path)` remains accepted and is still useful for legacy specs and for
+the older `{field}[0]{name}` path notation.
 
 Example:
 
@@ -212,6 +221,8 @@ Example:
 assign(scalar(retv), call(Child));
 assign(scalar(child_kind), scalaref(retv, {kind}));
 assign(scalar(first_child_name), scalaref(retv, {children}[0]{name}));
+assign(scalar(second_child_name), retv["children"][1]["name"]);
+assign(scalar(dynamic_child_name), retv["children"][scalar(child_index)]["name"]);
 ```
 
 ## Constructors, snapshots, and flattening

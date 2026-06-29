@@ -2573,6 +2573,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_parse_declare_binding_entry = sub { return { name => 'item' } };
     local *Synthetic::ActionIROwner::_lower_declare_initializer_expr = sub { return '$foo' };
     local *Synthetic::ActionIROwner::_lower_scalaref_value_expr = sub { return '$$foo' };
+    local *Synthetic::ActionIROwner::_lower_direct_nested_access_value_expr = sub { return '$foo->{bar}' };
     local *Synthetic::ActionIROwner::_extract_hash_symbol_name = sub { return 'lookup' };
     local *Synthetic::ActionIROwner::_lower_scalar_access_key_expr = sub { return '$foo->{bar}' };
     local *Synthetic::ActionIROwner::_infer_scalar_container_kind = sub { return 'scalar' };
@@ -13160,7 +13161,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'MethodLowering',
             module      => 'LinkedSpec::ActionIR::MethodLowering',
-            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
+            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _lower_direct_nested_access_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
             sample_key  => 'split_declare_symbol_names',
             sample_name => '_split_declare_symbol_names',
         },
@@ -44577,6 +44578,67 @@ subtest 'spec_format_terse_1_5_4_statement_separator_contract' => sub {
         or diag(normalize_error($@));
     is($run->($sp, 'xhello'), '"b"',
         'semicolon-separated statement spec still runs');
+};
+
+subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => sub {
+    # SPEC-FORMAT-TERSE.1.5.5.1: direct nested access lowers for explicit
+    # path segments. Bare path segments stay deferred to Channel 2.
+    plan tests => 7;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][scalar(z)])'),
+        'return $foo->{"a"}->[9]->{"b"}->[$z]',
+        'direct nested access lowers to the Perl dereference chain for explicit segments',
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(foo['a'][0])}),
+        q{return $foo->{'a'}->[0]},
+        'single-quoted direct access segment is also a hash-key segment',
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][z])'),
+        'return foo["a"][9]["b"][z]',
+        'bare direct-access path segment remains outside the canonical dereference lowering',
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(scalaref(foo,{"a"}[9]{"b"}[scalar(z)]))'),
+        'return $foo->{"a"}->[9]->{"b"}->[$z]',
+        'direct nested access matches the existing scalaref lowering for the explicit path',
+    );
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(foo, hash(\"a\", array(hash(\"b\", array(\"zero\",\"one\")))))\n"
+             . " set(z,1)\n"
+             . " return(foo[\"a\"][0][\"b\"][scalar(z)]) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my @parser_source_chunks;
+    my %ctx = (
+        parser_source_chunks_ref => \@parser_source_chunks,
+        emit_parser_source_line => sub {
+            my ($chunk) = @_;
+            push @parser_source_chunks, $chunk;
+        },
+    );
+    my $dump_stdout = '';
+    my $p = eval {
+        open my $dump_fh, '>', \$dump_stdout or die "open scalar stdout: $!";
+        local *STDOUT = $dump_fh;
+        LinkedSpec::Get(\$spec, dump_parser_source => 1, runtime_ctx_ref => \%ctx);
+    };
+    ok(ref($p) eq 'CODE', 'direct nested access spec compiles to a parser')
+        or diag(normalize_error($@));
+    my $parser_source = join('', @parser_source_chunks);
+    like($parser_source, qr/\$foo->\{"a"\}->\[0\]->\{"b"\}->\[\$z\]/,
+        'generated source contains the direct dereference chain');
+    is($run->($p, 'xhello'), '"one"',
+        'direct nested access runs through mixed hash and array segments');
 };
 
 done_testing();

@@ -394,6 +394,21 @@ name and the opening parenthesis is accepted (`set (name, value)` is the same ca
 as `set(name, value)`), but the parentheses are still mandatory; no-parenthesis
 spellings such as `set name, value` or `return scalar name` are not helper calls.
 
+Direct nested access is a value-expression form:
+
+```text
+direct_access : name direct_segment+
+direct_segment : '[' quoted_string ']'
+               | '[' explicit_index_expr ']'
+```
+
+The base `name` is a working scalar that holds a structured array/hash payload.
+Quoted string segments (`["field"]` or `['field']`) are hash-key reads. Numeric
+segments and helper/value expressions (`[0]`, `[scalar(i)]`, `[add(1, 2)]`) are
+array-index reads. Bare path atoms such as `[i]` are reserved for the later
+Channel 2 bare value-position-read design; write `[scalar(i)]` when reading a
+working scalar today.
+
 ### 7.1 Declaration Helpers
 ```
 declare(scalar, name)      — declare a scalar working variable
@@ -405,6 +420,7 @@ assign(name, value)         — reassign a working variable
 
 ### 7.2 Scalar Helpers
 ```
+base["key"][0]                 — direct nested access into scalar-held payloads
 scalar(container, key)          — read a scalar entry from an array or hash
 concat(args...)                 — concatenate strings
 coalesce(a, b, ...)             — first defined non-null value
