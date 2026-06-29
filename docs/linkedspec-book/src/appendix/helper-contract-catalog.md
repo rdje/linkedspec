@@ -11,7 +11,9 @@ identically. No Perl implementation knowledge is required.
 > typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`, or the `s()`/`a()`/`h()` aliases)
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
-> target of `assign(name, …)` and the array target of `push_value(name, …)` / `push_nonempty(name, …)`
+> target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`;
+> the array target of `push_value(name, …)` / `push_nonempty(name, …)`; and the hash target of
+> statement-level `set_key(name, key, value)`
 > auto-exist from a **bare** name too, with the kind fixed by that position. A backend MUST supply
 > the same auto-existence: a wrapper- or position-referenced variable
 > with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
@@ -47,7 +49,7 @@ identically. No Perl implementation knowledge is required.
 - **Returns**: void
 - **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
 - **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper; a **bare** target — `assign(name, …)` — auto-exists as a scalar (the assign target position is scalar).
-- **Terse spelling**: `set(name, value)` is the canonical terse rename of `assign` (terse-format direction). Both spellings lower identically and a bare `set` target auto-exists exactly like `assign`; `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Terse spelling**: `set(name, value)` is the canonical terse helper rename of `assign`, and `name = value` is the scalar operator spelling. All three forms lower and run identically for scalar targets; a bare `set` target or operator target auto-exists exactly like `assign`. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
 
@@ -912,7 +914,7 @@ Every helper can be used in both structured-block form (`I { declare(...) }`) an
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement helpers such as `set_key(name, key, value)` are the explicit mutation forms.
+Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value` and `set_key(name, key, value)` are the explicit mutation forms.
 
 ### Terse Helper Renames (canonical going forward)
 The `.spec` format is migrating to terser helper names (terse-format direction). For these three
@@ -923,6 +925,7 @@ unlike the Retired table below):
 | Canonical (terse) | Deprecated alias | Notes |
 |---|---|---|
 | `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`. |
+| `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Does not imply array `+=`, hash-index assignment, or bare value-position reads. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 

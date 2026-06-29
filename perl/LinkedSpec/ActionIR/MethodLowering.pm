@@ -1765,6 +1765,38 @@ sub _lower_assign_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_scalar_assignment_operator_statement
+# Purpose : Lower the statement form `name = value` to the same scalar mutation
+#           emitted for `assign(name, value)` / `set(name, value)`.
+# Args    : ($expr, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_scalar_assignment_operator_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s;
+
+ my ($target_symbol, $source) = ($1, $2);
+ $source = $trim_action_ir_value->($source);
+ return undef unless defined($source) && length($source);
+
+ my $source_expr = $lower_assignment_source_expr->($source);
+ return undef unless defined($source_expr) && length($source_expr);
+ return '$'.$target_symbol.' = '.$source_expr
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_set_key_statement
 # Purpose : Lower the statement form `set_key(target, key, value)` to a direct
 #           hash-entry mutation. The pure value helper with the same name remains

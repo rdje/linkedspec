@@ -48,16 +48,18 @@ An auto-existing variable is a fresh **per-invocation** working value — one fo
 A working variable also auto-exists when it appears **bare** (without a `scalar()` / `array()` / `hash()` wrapper) in a helper argument position that already implies its kind. In those positions the wrapper is optional — each pair below is equivalent:
 
 ```text
-# scalar target of assign(...) — the bare name is a scalar
+# scalar target of assign(...) / set(...) and scalar operator assignment — the bare name is a scalar
 assign(scalar(count), match_group(0))
 assign(count, match_group(0))
+set(count, match_group(0))
+count = match_group(0)
 
 # array target of push_value(...) / push_nonempty(...) — the bare name is an array
 push_value(array(items), match_group(0))
 push_value(items, match_group(0))
 ```
 
-The kind comes from the **position**: the target of `assign(...)` is a scalar; the target of `push_value(...)` and `push_nonempty(...)` is an array. The variable is the same fresh per-invocation working value described above. (Reading a bare name back as a value — `return(count)` instead of `return(scalar(count))` — and inferring a kind from a value's shape are a later evolution step; for now, read working variables back through their wrapper.)
+The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)` and `push_nonempty(...)` is an array; the target of statement-level `set_key(name, key, value)` is a hash. The variable is the same fresh per-invocation working value described above. (Reading a bare name back as a value — `return(count)` instead of `return(scalar(count))` — and inferring a kind from a value's shape are a later evolution step; for now, read working variables back through their wrapper.)
 
 `declare(...)` stays supported and is still the right choice when you want to:
 
@@ -339,7 +341,7 @@ Do not redeclare to reset. Redeclaration is a lifetime decision, not a mutation 
 Declaration initializers reuse the same expression language as `assign(...)`, `push_value(...)`, `return(...)`, and flow helpers.
 
 > **Terse spellings.** The same terse helper renames apply here: `set(...)` for `assign(...)`,
-> `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
+> scalar `name = value` for `set(name, value)`, `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind). They lower identically to the original
 > names in initializer and assignment sources, so `declare(array, saved=copy(array(items)))` is
 > equivalent to `declare(array, saved=array_copy(array(items)))`. See the

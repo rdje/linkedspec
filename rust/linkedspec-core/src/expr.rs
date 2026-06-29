@@ -9,7 +9,8 @@
 //!
 //! ```text
 //! stmts       → stmt*
-//! stmt        → expr ';'?
+//! stmt        → scalar_assignment | expr ';'?
+//! scalar_assignment → name '=' expr      (statement only)
 //! expr        → primary ('.' method_call)*
 //! primary     → call | indexed_var | literal | variable
 //! call        → name '(' args? ')'
@@ -50,6 +51,12 @@ pub enum Expr {
     Call {
         name: String,
         args: Vec<Arg>,
+    },
+    /// A statement-only scalar assignment operator: `name = value`
+    #[serde(rename = "assign_scalar")]
+    AssignScalar {
+        name: String,
+        value: Box<Expr>,
     },
     /// A variable reference: `results`, `retv`, `$name`
     #[serde(rename = "variable")]
@@ -139,6 +146,7 @@ impl std::fmt::Display for Expr {
                 }
                 write!(f, ")")
             }
+            Expr::AssignScalar { name, value } => write!(f, "{name} = {value}"),
             Expr::Variable { name } => write!(f, "{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
             Expr::StringLiteral { value } => write!(f, "\"{value}\""),
@@ -224,7 +232,7 @@ impl<'a> Parser<'a> {
                 self.advance(3);
                 self.skip_whitespace();
             }
-            let expr = self.parse_expr()?;
+            let expr = self.parse_statement_expr()?;
             statements.push(Stmt { expr });
             self.skip_whitespace();
             // Consume optional semicolon
@@ -234,6 +242,55 @@ impl<'a> Parser<'a> {
             self.skip_whitespace();
         }
         Ok(CodeBlock { statements })
+    }
+
+    fn parse_statement_expr(&mut self) -> Result<Expr, String> {
+        let start = self.pos;
+        if let Some(expr) = self.try_parse_scalar_assignment_statement()? {
+            return Ok(expr);
+        }
+        self.pos = start;
+        self.parse_expr()
+    }
+
+    fn try_parse_scalar_assignment_statement(&mut self) -> Result<Option<Expr>, String> {
+        self.skip_whitespace();
+        let start = self.pos;
+        let Some(ch) = self.peek() else {
+            return Ok(None);
+        };
+        if !ch.is_ascii_alphabetic() && ch != '_' {
+            return Ok(None);
+        }
+
+        let name = self.parse_name();
+        if name.is_empty()
+            || !name
+                .chars()
+                .all(|c| c.is_ascii_alphanumeric() || c == '_')
+        {
+            self.pos = start;
+            return Ok(None);
+        }
+        self.skip_whitespace();
+        if self.peek() != Some('=') {
+            self.pos = start;
+            return Ok(None);
+        }
+        let after_eq = self.src[self.pos + 1..].chars().next();
+        if matches!(after_eq, Some('=') | Some('>')) {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.advance(1);
+        self.skip_whitespace();
+        if self.pos >= self.src.len() {
+            self.pos = start;
+            return Ok(None);
+        }
+        let value = self.parse_expr()?;
+        Ok(Some(Expr::AssignScalar { name, value: Box::new(value) }))
     }
 
     fn parse_expr(&mut self) -> Result<Expr, String> {
@@ -558,6 +615,55 @@ mod tests {
             }
             _ => panic!("expected Call"),
         }
+    }
+
+    #[test]
+    fn parse_scalar_assignment_statement() {
+        let code = r#"name = cat("o", "k"); return(scalar(name))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(block.statements.len(), 2);
+        match &block.statements[0].expr {
+            Expr::AssignScalar { name, value } => {
+                assert_eq!(name, "name");
+                match value.as_ref() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "cat");
+                        assert_eq!(args.len(), 2);
+                    }
+                    _ => panic!("expected call RHS"),
+                }
+            }
+            _ => panic!("expected scalar assignment"),
+        }
+    }
+
+    #[test]
+    fn parse_keyword_arg_is_not_scalar_assignment() {
+        let code = r#"declare(scalar, name=entry_group(1))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { args, .. } => match &args[1] {
+                Arg::Keyword { name, .. } => assert_eq!(name, "name"),
+                _ => panic!("expected keyword arg"),
+            },
+            _ => panic!("expected Call"),
+        }
+    }
+
+    #[test]
+    fn parse_scalar_assignment_is_statement_only_and_narrow() {
+        assert!(
+            CodeBlock::parse(r#"name == "ok""#).is_err(),
+            "equality-like spelling is not parsed as assignment"
+        );
+        assert!(
+            CodeBlock::parse(r#"name["k"] = "v""#).is_err(),
+            "indexed assignment is reserved for the later hash-index leaf"
+        );
+        assert!(
+            CodeBlock::parse(r#"items += "a""#).is_err(),
+            "array append operator is reserved for the later plus-equals leaf"
+        );
     }
 
     #[test]

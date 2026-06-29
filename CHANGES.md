@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4.1 — implement scalar assignment operator name = value
+
+**Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust expression parser/runtime execution,
+phase0 locks, Rust parser/runtime tests, oracle corpus, mdBook, Knowledge Map, task tree, roadmap tracker, and
+live docs.
+
+**What changed:** top-level `name = value` is now the terse scalar assignment operator. It lowers and runs
+identically to `set(name, value)` / `assign(name, value)`. Perl emits the same scalar assignment and
+auto-supplies one `my $name` preamble for a bare target; Rust parses it as a statement-only `AssignScalar` and
+stores the evaluated RHS in the per-parse scalar map.
+
+**Boundary:** this leaf intentionally does not claim equality (`name == value`), array append (`items += value`),
+hash-index assignment (`name[key] = value`), helper keyword args (`helper(name=value)`), nested assignments, or
+Channel 2 bare value-position reads.
+
+**Validation:** TOOLBOX lowerings prove `name = cat(...)` is byte-identical to `set(name, cat(...))` while the
+out-of-scope operator shapes remain unchanged; descriptor/source/runtime probes show `ASSIGN,RETURN`, fallback
+count 0, one scalar declaration, and stable parser output. `prove -q -Iperl t/phase0_regression.t` PASS
+(`1..977`); oracle corpus regenerated with 14 fixtures; focused Rust core/runtime tests PASS; full Rust runtime
+suite PASS (116 unit + corpus-oracle harness + 41 integration tests); mdBook, Knowledge Map, memory-architecture,
+doctrine, and local CI gates pass.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4 — split operator syntax family into scalar, array, and hash leaves
 
 **Scope:** task tree, task-tree index, ROADMAP_V2, Knowledge Map card + generated map, and live continuity

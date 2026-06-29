@@ -139,7 +139,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying argument position: a **bare** name works as the scalar target of `assign(name, …)`, the array target of `push_value(name, …)` / `push_nonempty(name, …)`, and the hash target of statement-level `set_key(name, key, value)`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying target position: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)` / `push_nonempty(name, …)`; and the hash target of statement-level `set_key(name, key, value)`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
@@ -161,8 +161,10 @@ These helpers are the entry point into local working state and structured values
 > names: `set(target, source)` is the canonical rename of `assign(...)`, `cat(...)` of `concat(...)`,
 > and a single unified `copy(container)` subsumes both `array_copy(...)` and `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
-> array). Each terse spelling lowers **identically** to its original in every position, so both work
-> during migration — the original names are deprecated aliases, not yet retired. See the
+> array). The scalar operator statement `name = value` is equivalent to `set(name, value)` and
+> `assign(name, value)`. Each terse helper spelling lowers **identically** to its original in every
+> position, so both work during migration — the original names are deprecated aliases, not yet retired.
+> See the
 > [Helper Contract Catalog](../appendix/helper-contract-catalog.md#terse-helper-renames-canonical-going-forward).
 
 Examples:
@@ -234,6 +236,7 @@ These helpers are statements. They consume values and change rule behavior.
 
 | Helper | Effect | Use it when |
 | --- | --- | --- |
+| `name = expr` | replace a scalar slot | a named scalar should hold the expression result; equivalent to `set(name, expr)` / `assign(name, expr)`. |
 | `assign(scalar(name), expr)` | replace a scalar slot | a named scalar should hold the expression result. |
 | `assign(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
 | `assign(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |

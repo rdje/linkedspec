@@ -269,6 +269,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.3.4.1 — scalar assignment operator spelling ──
+    #
+    # `name = value` is the statement-level scalar assignment operator. It is
+    # equivalent to `set(name, value)` / `assign(name, value)` and does not imply
+    # array append, hash-index assignment, or bare value-position reads.
+    {   case   => 'terse_1_3_4_1_scalar_assignment_operator',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { name = cat("o", "k"); return(scalar(name)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

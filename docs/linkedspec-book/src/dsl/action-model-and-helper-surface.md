@@ -86,6 +86,7 @@ Detailed reference: [Declaration Helper Reference](declaration-helper-reference.
 Write values into declared variables or containers:
 
 - `assign(target, value)` — write a value
+- `name = value` — terse scalar assignment operator, equivalent to `set(name, value)` / `assign(name, value)`
 - `push(container, value)` — append to an array
 - `push_value(array(name), value)` — named-array push
 - `push_nonempty(array(name), value)` — push only if value is defined and non-empty

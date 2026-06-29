@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4.1 — scalar assignment operator `name = value` landed** (PERL
+  ACTIONIR + RUST PARSER/RUNTIME + BOOK + PHASE0/RUST/ORACLE LOCKS). Top-level `NAME = RHS` now lowers/runs
+  identically to `set(NAME,RHS)` / `assign(NAME,RHS)`. Perl recognizes it through an ASSIGN
+  contract/scanner/lowering path and auto-supplies one `my $NAME` preamble for a bare scalar target; Rust parses
+  it as statement-only `AssignScalar`, executes it with `RuntimeContext::set_scalar`, and rejects nested
+  assignment expressions. Boundaries remain explicit: equality, array append, hash-index assignment, helper
+  keyword args, nested assignment expressions, and Channel 2 bare value-position reads are still separate
+  pending work. **Verification:** TOOLBOX parity probes; descriptor/source/runtime probes (`ASSIGN,RETURN`,
+  fallback 0, one scalar declaration); phase0 PASS (`1..977`); oracle corpus regenerated with 14 fixtures;
+  focused Rust core/runtime tests PASS; full Rust runtime suite PASS (116 unit + corpus-oracle harness + 41
+  integration tests); mdBook + KM + memory/doctrine + local CI gates green. **Frontier:
+  `SPEC-FORMAT-TERSE.1.3.4.2`** (array append operator).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4 — operator syntax family split into scalar, array, and hash leaves**
   (DOCS/TREE/KM ONLY; **no engine, test, fixture, or mdBook behavior change**). PNT selected the next frontier
   after `.1.3.3` and ran the required KM + TOOLBOX recon before code. Ground truth: `name = "ok"`,

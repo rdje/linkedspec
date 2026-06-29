@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4.1 — scalar assignment is a statement boundary, not an expression
+  shortcut): Landed `name = value` on Perl and Rust. Durable points. (1) **Parse the operator only where it is
+  a target-position statement.** Perl recognizes `NAME = RHS` through its own ASSIGN contract/scanner/lowerer;
+  Rust models it as statement-only `Expr::AssignScalar` and rejects it from nested `eval_expr`. That keeps
+  `helper(name=value)` keyword args, equality, append, and hash-index assignment out of this leaf. (2) **The
+  declaration collector must learn operator targets too.** Lowering `$name = ...` without adding `my $name`
+  would revive the same non-strict generated-handler leak that `.1.1.1` fixed; the scalar target is therefore
+  auto-declared exactly once. (3) **Operator syntax must not smuggle in Channel 2.** The RHS still uses the
+  already-supported expression/lowering paths, while bare value-position reads remain pending. (4) **Rust
+  parity needs both parser and executor locks.** Parser tests enforce the narrow syntax (`==`, `+=`,
+  `name[key]=...` rejected/out of scope), and runtime tests prove `name = cat(...)` matches `set(...)` and does
+  not leak across parses. Verification: phase0 977, oracle corpus 14 fixtures, focused Rust core/runtime tests,
+  full Rust runtime suite, mdBook, Knowledge Map, doctrine/memory, and local CI all pass.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4 — operator syntax is not one implementation seam; split by target
   mutation): Split the operator family before coding. Durable points. (1) **The function forms now define the
   contract; operators should lower to those contracts one at a time.** Scalar `name = value` maps to

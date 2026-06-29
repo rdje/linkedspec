@@ -61,6 +61,12 @@ type-implying statement position: `set_key(NAME, key, value)` mutates working ha
 value-position reads: `return(name)` is still a bareword/scalar ambiguity, and bare hash value reads still need
 the later Channel 2 / literal-shape work.
 
+**Update 2026-06-29 (`SPEC-FORMAT-TERSE.1.3.4.1`):** scalar operator assignment adds another clean
+type-implying statement position: `NAME = value` mutates working scalar `NAME` and auto-supplies `my $NAME`
+on Perl; Rust parses it as a statement-only scalar assignment and mutates the per-parse scalar map. This is
+still a target-position rule only. It does not make `return(NAME)` a variable read and does not infer array or
+hash kinds from right-hand-side shapes.
+
 ## The three behaviors (dump-don't-guess)
 
 A working variable referenced **only through a wrapper** is the `.1.1.1` path and already works. The

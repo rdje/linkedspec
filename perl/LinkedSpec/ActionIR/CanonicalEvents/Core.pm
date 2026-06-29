@@ -31,6 +31,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  print_foreach_iterable           => 'PRINT',
  print_each                       => 'PRINT',
  assign_value                     => 'ASSIGN',
+ scalar_assignment_operator       => 'ASSIGN',
  regex_subst                      => 'REGEX_SUBST',
  return_general                   => 'RETURN',
  return                           => 'RETURN',

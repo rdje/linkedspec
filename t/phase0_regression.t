@@ -2529,6 +2529,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_scan_contract_ir_events = sub { return [{ kind => 'CALL' }] };
     local *Synthetic::ActionIROwner::_lower_return_general_statement = sub { return 'return_general_ok' };
     local *Synthetic::ActionIROwner::_lower_assign_method_statement = sub { return 'assign_method_ok' };
+    local *Synthetic::ActionIROwner::_lower_scalar_assignment_operator_statement = sub { return 'scalar_assignment_operator_ok' };
     local *Synthetic::ActionIROwner::_lower_set_key_statement = sub { return 'set_key_statement_ok' };
     local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
     local *Synthetic::ActionIROwner::_lower_push_nonempty_statement = sub { return 'push_nonempty_ok' };
@@ -13177,7 +13178,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -44191,6 +44192,66 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
     my $pp = eval { LinkedSpec::Get(\$pure) };
     is($run->($pp, 'x'), '[{"existing":"old"},{"existing":"old","stage":"v"}]',
         'nested pure set_key(hash(meta),...) returns a copy without mutating meta');
+};
+
+subtest 'spec_format_terse_1_3_4_1_scalar_assignment_operator_matches_set' => sub {
+    # SPEC-FORMAT-TERSE.1.3.4.1: statement-level NAME = VALUE is the scalar
+    # operator spelling. This leaf deliberately does not implement array +=,
+    # hash-index assignment, equality syntax, or Channel 2 bare value reads.
+    plan tests => 13;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('name = "ok"'), '$name = "ok"',
+        'top-level scalar assignment operator lowers to direct scalar assignment');
+    is($L->('name = cat("o", "k")'), $L->('set(name, cat("o", "k"))'),
+        'scalar assignment operator lowers identically to set(name, value)');
+    is($L->('name == "ok"'), 'name == "ok"',
+        'equality-like spelling is not claimed by the scalar assignment operator');
+    is($L->('items += "a"'), 'items += "a"',
+        'array plus-equals remains reserved for the later array operator leaf');
+    is($L->('name["k"] = "v"'), 'name["k"] = "v"',
+        'hash-index assignment remains reserved for the later hash operator leaf');
+
+    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { name = cat(\"o\", \"k\"); return(scalar(name)) }\n"), return_descriptor => 1);
+    my $meta = $d->{spec}{top}{meta}{action_rewriter};
+    is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,RETURN',
+        'scalar assignment operator reports as ASSIGN plus RETURN in canonical ActionIR');
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'scalar assignment operator has no canonical fallback');
+
+    my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { name = \"ok\"; return(scalar(name)) }\n");
+    my $scalar_my = () = ($src =~ /my \$name\b/g);
+    is($scalar_my, 1, 'bare scalar assignment target auto-supplies exactly one `my $name`');
+    ok(index($src, 'my $name;') >= 0 && index($src, 'my $name;') < index($src, 'while (1)'),
+        'the auto `my $name` sits in the preamble before while(1)');
+    unlike($src, qr/my [\@\%]name\b/,
+        'bare scalar assignment target is a SCALAR -- no array or hash declaration for name');
+
+    my $spec = "top:: /(\\w+)\\s*/ -> top[0] { name = cat(match_group(0), \"!\") }\n"
+             . "LX { return(scalar(name)) }\n";
+    my $p = eval { LinkedSpec::Get(\$spec) };
+    is($run->($p, 'a b'), '"b!"',
+        'scalar assignment operator mutates a no-declare scalar target at runtime');
+    is($run->($p, 'a b'), '"b!"',
+        're-running the same parser is stable (per-invocation scalar lexical)');
+
+    my $kw_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { declare(scalar, name=entry_group(1)); return(scalar(name)) }\n");
+    like($kw_src, qr/my \$name\b/,
+        'keyword argument name=entry_group(1) inside declare(...) remains a helper argument, not a top-level operator statement');
 };
 
 done_testing();

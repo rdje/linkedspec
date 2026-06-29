@@ -302,6 +302,11 @@ sub _lower_assign_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_assign_statement', @args)
 }
 
+sub _lower_scalar_assignment_operator_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_scalar_assignment_operator_statement', @args)
+}
+
 sub _lower_set_key_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_set_key_statement', @args)
@@ -849,7 +854,9 @@ sub _collect_auto_working_var_decls {
   #     `\s*,` after the name means a WRAPPED target (scalar(x)/array(x), whose name is
   #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
   # `set` (SPEC-FORMAT-TERSE.1.4.1) is the terse rename of `assign`; a bare `set(NAME, …)`
-  # target lowers to the same scalar `$NAME`, so it auto-exists identically.
+  # target lowers to the same scalar `$NAME`, so it auto-exists identically. The
+  # scalar assignment operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1) is
+  # likewise statement-level and scalar-only.
   while ($masked =~ /\b(?:assign|set)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('$', $1);   # assign/set target lowers to a scalar
   }
@@ -859,6 +866,11 @@ sub _collect_auto_working_var_decls {
   foreach my $statement (@{_split_action_ir_statements($block)}) {
    my $trimmed = _trim_action_ir_value($statement);
    next unless defined($trimmed) && length($trimmed);
+   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
+    my $source_expr = _trim_action_ir_value($2);
+    $record->('$', $1) if defined($source_expr) && length($source_expr);
+    next;
+   }
    my $call = _parse_method_function_expr($trimmed);
    next unless $call && ($call->{method} // '') eq 'set_key';
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 3, 3);

@@ -18,6 +18,7 @@ sub try_scan_contract_ir_events {
   'push_value' => \&_scan_contract_push_value,
   'push_nonempty' => \&_scan_contract_push_nonempty,
   'assign_value' => \&_scan_contract_assign_value,
+  'scalar_assignment_operator' => \&_scan_contract_scalar_assignment_operator,
   'set_key_statement' => \&_scan_contract_set_key_statement,
   'regex_subst' => \&_scan_contract_regex_subst,
   'split_array' => \&_scan_contract_split_array,
@@ -140,6 +141,26 @@ while ($code =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.
   args => {
    target => _trim_action_ir_value($effective_args->[0]),
    source => _trim_action_ir_value($effective_args->[1]),
+  },
+ };
+}
+ return \@events
+}
+
+sub _scan_contract_scalar_assignment_operator {
+ my ($code) = @_;
+ my @events;
+foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $trimmed = _trim_action_ir_value($statement);
+ next unless defined($trimmed) && length($trimmed);
+ next unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s;
+ my ($target_expr, $source_expr) = ($1, _trim_action_ir_value($2));
+ next unless defined($source_expr) && length($source_expr);
+ push @events, {
+  raw => $trimmed,
+  args => {
+   target => $target_expr,
+   source => $source_expr,
   },
  };
 }
