@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity landed**
+  (RUST PARSER/RUNTIME + ORACLE/KM/BOOK LOCKS). Rust now matches the Perl-reference core block-value subset:
+  non-empty brace payloads without a top-level `=>` parse as `Expr::BlockValue`, `{}` and `{ key => value }`
+  remain hash literals, side-effect statements run in order, and the final expression or final `return(expr)`
+  yields the block value. True mid-block early return remains `.2.1.4`; Rust rejects non-final `return(expr)`
+  inside block values instead of leaking a rule return.
+  **Verification:** focused Rust core parser locks PASS; focused Rust runtime `.2.1.3` locks PASS; oracle
+  corpus regenerated to **34 fixtures** and corpus oracle PASS; full Rust core package PASS; full Rust runtime
+  package PASS; mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS (`tools/run_ci_local.sh`,
+  phase0 **991** tests).
+  **Frontier: `SPEC-FORMAT-TERSE.2.1.4`** (true block-local early-return follow-through, if still needed).
 - 2026-06-29: **SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity owned before code**
   (DOCS/TREE/KM ONLY; **no Rust engine, oracle, fixture, mdBook behavior, or Perl behavior change**). Rust
   parity is now scoped to the accepted Perl-reference core: non-empty brace payloads without a top-level `=>`

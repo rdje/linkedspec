@@ -483,8 +483,33 @@ impl Engine {
             if self.execute_set_key_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
-            self.eval_expr(&stmt.expr, ctx, rule_label)?;
+            self.execute_block_statement_expr(&stmt.expr, ctx, rule_label)?;
         }
+        Ok(())
+    }
+
+    fn execute_block_statement_expr(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<(), String> {
+        if self.execute_scalar_assignment_operator_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
+        if self.execute_array_append_operator_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
+        if self.execute_array_end_mutation_method_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
+        if self.execute_hash_index_assignment_operator_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
+        if self.execute_set_key_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
+        self.eval_expr(expr, ctx, rule_label)?;
         Ok(())
     }
 
@@ -705,9 +730,7 @@ impl Engine {
         Ok(true)
     }
 
-    fn direct_shape_literal_kind(
-        expr: &linkedspec_core::expr::Expr,
-    ) -> Option<ShapeLiteralKind> {
+    fn direct_shape_literal_kind(expr: &linkedspec_core::expr::Expr) -> Option<ShapeLiteralKind> {
         use linkedspec_core::expr::Expr;
         match expr {
             Expr::ArrayLiteral { .. } => Some(ShapeLiteralKind::Array),
@@ -848,6 +871,7 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Hash(values))
             }
+            Expr::BlockValue { block } => self.eval_block_value(block, ctx, rule_label),
             Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
             Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),
             Expr::BooleanLiteral { value } => Ok(RuntimeValue::Bool(*value)),
@@ -871,6 +895,88 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
+        }
+    }
+
+    fn eval_block_value(
+        &self,
+        block: &linkedspec_core::expr::CodeBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let Some(last_index) = block.statements.len().checked_sub(1) else {
+            return Ok(RuntimeValue::Undef);
+        };
+
+        let mut if_stack: Vec<StatementIfFrame> = Vec::new();
+        for (index, stmt) in block.statements.iter().enumerate() {
+            if self.handle_statement_if_control(&stmt.expr, &mut if_stack, ctx, rule_label)? {
+                continue;
+            }
+            if !if_stack.last().is_none_or(|frame| frame.current_active) {
+                continue;
+            }
+            if index == last_index {
+                return self.eval_block_final_expr(&stmt.expr, ctx, rule_label);
+            }
+            if Self::return_call_payload(&stmt.expr).is_some() {
+                return Err(
+                    "non-final return(expr) inside an expression-valued block is reserved for SPEC-FORMAT-TERSE.2.1.4"
+                        .to_string(),
+                );
+            }
+            self.execute_block_statement_expr(&stmt.expr, ctx, rule_label)?;
+        }
+        Ok(RuntimeValue::Undef)
+    }
+
+    fn eval_block_final_expr(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::Expr;
+        if let Some(payload) = Self::return_call_payload(expr) {
+            return match payload {
+                Some(value) => self.eval_expr(value, ctx, rule_label),
+                None => Ok(RuntimeValue::Undef),
+            };
+        }
+
+        match expr {
+            Expr::AssignScalar { name, value } => {
+                let evaluated = self.eval_expr(value, ctx, rule_label)?;
+                if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
+                    return Ok(evaluated);
+                }
+                ctx.set_scalar(name, evaluated.clone());
+                Ok(evaluated)
+            }
+            Expr::AssignArrayAppend { name, value } => {
+                let evaluated = self.eval_expr(value, ctx, rule_label)?;
+                ctx.push_value(name, evaluated);
+                Ok(RuntimeValue::Undef)
+            }
+            Expr::AssignHashIndex { name, key, value } => {
+                let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
+                let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+                ctx.set_hash_entry(name, &evaluated_key, evaluated_value.clone());
+                Ok(evaluated_value)
+            }
+            _ => self.eval_expr(expr, ctx, rule_label),
+        }
+    }
+
+    fn return_call_payload(
+        expr: &linkedspec_core::expr::Expr,
+    ) -> Option<Option<&linkedspec_core::expr::Expr>> {
+        use linkedspec_core::expr::Expr;
+        match expr {
+            Expr::Call { name, args } if name == "return" => {
+                Some(args.first().map(|arg| arg.value()))
+            }
+            _ => None,
         }
     }
 
@@ -3781,13 +3887,11 @@ ChildB:
  /(?P<word>\w+)/
  E { return(entry_has(scalar("word"))) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
-        );
+        assert!(run_5_5_1(g_present, "hi")
+            .last()
+            .unwrap()
+            .as_bool()
+            .unwrap());
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -3844,13 +3948,11 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has(scalar("word"))) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
-        );
+        assert!(run_5_5_1(g_present, "hi")
+            .last()
+            .unwrap()
+            .as_bool()
+            .unwrap());
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -3928,7 +4030,7 @@ ChildB:
             4.0
         ); // "cde" past nl → 4
         assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
-        // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
+                                                                                 // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
         assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);
     }
 

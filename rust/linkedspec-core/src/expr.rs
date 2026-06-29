@@ -22,6 +22,7 @@
 //! literal     → string | number | boolean | regex | undef | array | hash
 //! array       → '[' (expr (',' expr)*)? ']'
 //! hash        → '{' (expr '=>' expr (',' expr '=>' expr)*)? '}'
+//! block       → '{' stmt+ '}'              (non-empty, no top-level '=>')
 //! string      → '"' [^"]* '"' | "'" [^']* "'"
 //! number      → -?\d+(\.\d+)?
 //! boolean     → 'true' | 'false'
@@ -72,22 +73,13 @@ pub struct HashLiteralEntry {
 pub enum Expr {
     /// A helper function call: `push_value(array(results), scalar(retv))`
     #[serde(rename = "call")]
-    Call {
-        name: String,
-        args: Vec<Arg>,
-    },
+    Call { name: String, args: Vec<Arg> },
     /// A statement-only scalar assignment operator: `name = value`
     #[serde(rename = "assign_scalar")]
-    AssignScalar {
-        name: String,
-        value: Box<Expr>,
-    },
+    AssignScalar { name: String, value: Box<Expr> },
     /// A statement-only array append operator: `items += value`
     #[serde(rename = "assign_array_append")]
-    AssignArrayAppend {
-        name: String,
-        value: Box<Expr>,
-    },
+    AssignArrayAppend { name: String, value: Box<Expr> },
     /// A statement-only hash-index assignment operator: `meta["key"] = value`
     #[serde(rename = "assign_hash_index")]
     AssignHashIndex {
@@ -97,15 +89,10 @@ pub enum Expr {
     },
     /// A variable reference: `results`, `retv`, `$name`
     #[serde(rename = "variable")]
-    Variable {
-        name: String,
-    },
+    Variable { name: String },
     /// An indexed variable access: `results[0]`, `$hash{"key"}`
     #[serde(rename = "indexed_var")]
-    IndexedVar {
-        name: String,
-        index: Box<Expr>,
-    },
+    IndexedVar { name: String, index: Box<Expr> },
     /// A mixed nested access path: `foo["a"][0]["b"]`
     #[serde(rename = "nested_access")]
     NestedAccess {
@@ -114,34 +101,25 @@ pub enum Expr {
     },
     /// A direct array shape literal: `[]`, `[value, true]`
     #[serde(rename = "array_literal")]
-    ArrayLiteral {
-        items: Vec<Expr>,
-    },
+    ArrayLiteral { items: Vec<Expr> },
     /// A direct hash shape literal: `{ key => value }`
     #[serde(rename = "hash_literal")]
-    HashLiteral {
-        entries: Vec<HashLiteralEntry>,
-    },
+    HashLiteral { entries: Vec<HashLiteralEntry> },
+    /// A value-returning block expression: `{ set(x, "a"); x }`
+    #[serde(rename = "block_value")]
+    BlockValue { block: CodeBlock },
     /// A string literal: `"hello"`, `'world'`
     #[serde(rename = "string")]
-    StringLiteral {
-        value: String,
-    },
+    StringLiteral { value: String },
     /// A numeric literal: `42`, `0`, `3.14`
     #[serde(rename = "number")]
-    NumberLiteral {
-        value: f64,
-    },
+    NumberLiteral { value: f64 },
     /// A boolean literal: `true`, `false`
     #[serde(rename = "boolean")]
-    BooleanLiteral {
-        value: bool,
-    },
+    BooleanLiteral { value: bool },
     /// A regex literal: `/pattern/`
     #[serde(rename = "regex")]
-    RegexLiteral {
-        pattern: String,
-    },
+    RegexLiteral { pattern: String },
     /// Undefined/null: `undef`
     #[serde(rename = "undef")]
     Undef,
@@ -167,10 +145,7 @@ pub enum Arg {
     /// A plain positional argument: `expr`
     Positional(Expr),
     /// A keyword argument: `name=expr`
-    Keyword {
-        name: String,
-        value: Box<Expr>,
-    },
+    Keyword { name: String, value: Box<Expr> },
 }
 
 impl Arg {
@@ -191,7 +166,9 @@ impl std::fmt::Display for Expr {
             Expr::Call { name, args } => {
                 write!(f, "{name}(")?;
                 for (i, arg) in args.iter().enumerate() {
-                    if i > 0 { write!(f, ", ")?; }
+                    if i > 0 {
+                        write!(f, ", ")?;
+                    }
                     match arg {
                         Arg::Positional(e) => write!(f, "{e}")?,
                         Arg::Keyword { name, value } => write!(f, "{name}={value}")?,
@@ -217,7 +194,9 @@ impl std::fmt::Display for Expr {
             Expr::ArrayLiteral { items } => {
                 write!(f, "[")?;
                 for (i, item) in items.iter().enumerate() {
-                    if i > 0 { write!(f, ", ")?; }
+                    if i > 0 {
+                        write!(f, ", ")?;
+                    }
                     write!(f, "{item}")?;
                 }
                 write!(f, "]")
@@ -225,8 +204,20 @@ impl std::fmt::Display for Expr {
             Expr::HashLiteral { entries } => {
                 write!(f, "{{")?;
                 for (i, entry) in entries.iter().enumerate() {
-                    if i > 0 { write!(f, ", ")?; }
+                    if i > 0 {
+                        write!(f, ", ")?;
+                    }
                     write!(f, "{} => {}", entry.key, entry.value)?;
+                }
+                write!(f, "}}")
+            }
+            Expr::BlockValue { block } => {
+                write!(f, "{{")?;
+                for (i, stmt) in block.statements.iter().enumerate() {
+                    if i > 0 {
+                        write!(f, "; ")?;
+                    }
+                    write!(f, "{}", stmt.expr)?;
                 }
                 write!(f, "}}")
             }
@@ -240,7 +231,9 @@ impl std::fmt::Display for Expr {
                 for call in calls {
                     write!(f, ".{}(", call.method)?;
                     for (i, arg) in call.args.iter().enumerate() {
-                        if i > 0 { write!(f, ", ")?; }
+                        if i > 0 {
+                            write!(f, ", ")?;
+                        }
                         match arg {
                             Arg::Positional(e) => write!(f, "{e}")?,
                             Arg::Keyword { name, value } => write!(f, "{name}={value}")?,
@@ -386,11 +379,7 @@ impl<'a> Parser<'a> {
         }
 
         let name = self.parse_name();
-        if name.is_empty()
-            || !name
-                .chars()
-                .all(|c| c.is_ascii_alphanumeric() || c == '_')
-        {
+        if name.is_empty() || !name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_') {
             self.pos = start;
             return Ok(None);
         }
@@ -431,7 +420,11 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
         let value = self.parse_expr()?;
-        Ok(Some(Expr::AssignHashIndex { name, key: Box::new(key), value: Box::new(value) }))
+        Ok(Some(Expr::AssignHashIndex {
+            name,
+            key: Box::new(key),
+            value: Box::new(value),
+        }))
     }
 
     fn try_parse_array_append_statement(&mut self) -> Result<Option<Expr>, String> {
@@ -445,11 +438,7 @@ impl<'a> Parser<'a> {
         }
 
         let name = self.parse_name();
-        if name.is_empty()
-            || !name
-                .chars()
-                .all(|c| c.is_ascii_alphanumeric() || c == '_')
-        {
+        if name.is_empty() || !name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_') {
             self.pos = start;
             return Ok(None);
         }
@@ -466,7 +455,10 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
         let value = self.parse_expr()?;
-        Ok(Some(Expr::AssignArrayAppend { name, value: Box::new(value) }))
+        Ok(Some(Expr::AssignArrayAppend {
+            name,
+            value: Box::new(value),
+        }))
     }
 
     fn try_parse_scalar_assignment_statement(&mut self) -> Result<Option<Expr>, String> {
@@ -480,11 +472,7 @@ impl<'a> Parser<'a> {
         }
 
         let name = self.parse_name();
-        if name.is_empty()
-            || !name
-                .chars()
-                .all(|c| c.is_ascii_alphanumeric() || c == '_')
-        {
+        if name.is_empty() || !name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_') {
             self.pos = start;
             return Ok(None);
         }
@@ -506,7 +494,10 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
         let value = self.parse_expr()?;
-        Ok(Some(Expr::AssignScalar { name, value: Box::new(value) }))
+        Ok(Some(Expr::AssignScalar {
+            name,
+            value: Box::new(value),
+        }))
     }
 
     fn parse_expr(&mut self) -> Result<Expr, String> {
@@ -521,7 +512,7 @@ impl<'a> Parser<'a> {
             '"' | '\'' => self.parse_string(),
             '/' => self.parse_regex(),
             '[' => self.parse_array_literal(),
-            '{' => self.parse_hash_literal(),
+            '{' => self.parse_brace_expr(),
             '$' => {
                 self.advance(1);
                 self.parse_var_or_call()
@@ -529,7 +520,7 @@ impl<'a> Parser<'a> {
             '0'..='9' | '-' => {
                 // Look ahead: if '-' followed by digit, it's a negative number
                 if ch == '-' {
-                    let after = self.src[self.pos+1..].chars().next();
+                    let after = self.src[self.pos + 1..].chars().next();
                     if after.is_some_and(|c| c.is_ascii_digit()) {
                         return self.parse_number();
                     }
@@ -545,7 +536,10 @@ impl<'a> Parser<'a> {
             'u' if self.remaining().starts_with("undef") => {
                 // Check that "undef" is a whole word, not a prefix of a longer name
                 let after = &self.remaining()[5..];
-                if after.is_empty() || !after.chars().next().unwrap().is_alphanumeric() && after.chars().next().unwrap() != '_' {
+                if after.is_empty()
+                    || !after.chars().next().unwrap().is_alphanumeric()
+                        && after.chars().next().unwrap() != '_'
+                {
                     self.advance(5);
                     Ok(Expr::Undef)
                 } else {
@@ -554,7 +548,10 @@ impl<'a> Parser<'a> {
             }
             't' if self.remaining().starts_with("true") => {
                 let after = &self.remaining()[4..];
-                if after.is_empty() || !after.chars().next().unwrap().is_alphanumeric() && after.chars().next().unwrap() != '_' {
+                if after.is_empty()
+                    || !after.chars().next().unwrap().is_alphanumeric()
+                        && after.chars().next().unwrap() != '_'
+                {
                     self.advance(4);
                     Ok(Expr::BooleanLiteral { value: true })
                 } else {
@@ -563,7 +560,10 @@ impl<'a> Parser<'a> {
             }
             'f' if self.remaining().starts_with("false") => {
                 let after = &self.remaining()[5..];
-                if after.is_empty() || !after.chars().next().unwrap().is_alphanumeric() && after.chars().next().unwrap() != '_' {
+                if after.is_empty()
+                    || !after.chars().next().unwrap().is_alphanumeric()
+                        && after.chars().next().unwrap() != '_'
+                {
                     self.advance(5);
                     Ok(Expr::BooleanLiteral { value: false })
                 } else {
@@ -575,7 +575,9 @@ impl<'a> Parser<'a> {
                 let end = (self.pos + 40).min(self.src.len());
                 Err(format!(
                     "unexpected character '{}' at position {} near: '{}'",
-                    ch, self.pos, &self.src[self.pos..end]
+                    ch,
+                    self.pos,
+                    &self.src[self.pos..end]
                 ))
             }
         }
@@ -666,6 +668,152 @@ impl<'a> Parser<'a> {
                 None => return Err("unterminated hash literal".to_string()),
             }
         }
+    }
+
+    fn parse_brace_expr(&mut self) -> Result<Expr, String> {
+        let start = self.pos;
+        let (payload_start, payload_end, after_close) = self.scan_brace_payload_bounds()?;
+        let payload = &self.src[payload_start..payload_end];
+
+        if payload.trim().is_empty() || Self::has_top_level_fat_arrow(payload) {
+            self.pos = start;
+            return self.parse_hash_literal();
+        }
+
+        let block = CodeBlock::parse(payload).map_err(|e| {
+            format!(
+                "invalid expression-valued block starting at position {}: {}",
+                start, e
+            )
+        })?;
+        if block.statements.is_empty() {
+            self.pos = start;
+            return self.parse_hash_literal();
+        }
+
+        self.pos = after_close;
+        Ok(Expr::BlockValue { block })
+    }
+
+    fn scan_brace_payload_bounds(&self) -> Result<(usize, usize, usize), String> {
+        if self.peek() != Some('{') {
+            return Err(format!("expected '{{' at position {}", self.pos));
+        }
+        let close = Self::matching_closing_brace(self.src, self.pos)?;
+        Ok((self.pos + 1, close, close + 1))
+    }
+
+    fn matching_closing_brace(src: &str, open: usize) -> Result<usize, String> {
+        let bytes = src.as_bytes();
+        let mut pos = open;
+        let mut depth = 0usize;
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => {
+                    pos = Self::skip_delimited_literal(src, pos, bytes[pos])
+                        .map_err(|e| format!("{e} while scanning brace literal"))?;
+                    continue;
+                }
+                b'/' => {
+                    if let Some(next) = Self::skip_regex_literal(src, pos) {
+                        pos = next;
+                        continue;
+                    }
+                }
+                b'{' => depth += 1,
+                b'}' => {
+                    depth = depth.saturating_sub(1);
+                    if depth == 0 {
+                        return Ok(pos);
+                    }
+                }
+                _ => {}
+            }
+            pos += 1;
+        }
+        Err(format!(
+            "unterminated brace literal starting at position {open}"
+        ))
+    }
+
+    fn has_top_level_fat_arrow(src: &str) -> bool {
+        let bytes = src.as_bytes();
+        let mut pos = 0usize;
+        let mut paren_depth = 0usize;
+        let mut bracket_depth = 0usize;
+        let mut brace_depth = 0usize;
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => match Self::skip_delimited_literal(src, pos, bytes[pos]) {
+                    Ok(next) => {
+                        pos = next;
+                        continue;
+                    }
+                    Err(_) => return false,
+                },
+                b'/' => {
+                    if let Some(next) = Self::skip_regex_literal(src, pos) {
+                        pos = next;
+                        continue;
+                    }
+                }
+                b'(' => paren_depth += 1,
+                b')' => paren_depth = paren_depth.saturating_sub(1),
+                b'[' => bracket_depth += 1,
+                b']' => bracket_depth = bracket_depth.saturating_sub(1),
+                b'{' => brace_depth += 1,
+                b'}' => brace_depth = brace_depth.saturating_sub(1),
+                b'=' if pos + 1 < bytes.len()
+                    && bytes[pos + 1] == b'>'
+                    && paren_depth == 0
+                    && bracket_depth == 0
+                    && brace_depth == 0 =>
+                {
+                    return true;
+                }
+                _ => {}
+            }
+            pos += 1;
+        }
+        false
+    }
+
+    fn skip_delimited_literal(src: &str, start: usize, delimiter: u8) -> Result<usize, String> {
+        let bytes = src.as_bytes();
+        let mut pos = start + 1;
+        while pos < bytes.len() {
+            if bytes[pos] == b'\\' {
+                pos += 2;
+                continue;
+            }
+            if bytes[pos] == delimiter {
+                return Ok(pos + 1);
+            }
+            pos += 1;
+        }
+        Err(format!(
+            "unterminated delimited literal starting at position {start}"
+        ))
+    }
+
+    fn skip_regex_literal(src: &str, start: usize) -> Option<usize> {
+        let bytes = src.as_bytes();
+        let mut pos = start + 1;
+        while pos < bytes.len() {
+            if bytes[pos] == b'\\' {
+                pos += 2;
+                continue;
+            }
+            if bytes[pos] == b'/' {
+                pos += 1;
+                while pos < bytes.len() && bytes[pos].is_ascii_alphabetic() {
+                    pos += 1;
+                }
+                return Some(pos);
+            }
+            pos += 1;
+        }
+        None
     }
 
     fn parse_var_or_call(&mut self) -> Result<Expr, String> {
@@ -768,7 +916,10 @@ impl<'a> Parser<'a> {
             calls.push(FluentCall { method, args });
             self.skip_inline_whitespace();
         }
-        Ok(Expr::FluentChain { receiver: Box::new(receiver), calls })
+        Ok(Expr::FluentChain {
+            receiver: Box::new(receiver),
+            calls,
+        })
     }
 
     fn parse_args(&mut self) -> Result<Vec<Arg>, String> {
@@ -788,7 +939,10 @@ impl<'a> Parser<'a> {
                 self.advance(1); // consume '='
                 self.skip_whitespace();
                 let value = self.parse_expr()?;
-                args.push(Arg::Keyword { name: maybe_name, value: Box::new(value) });
+                args.push(Arg::Keyword {
+                    name: maybe_name,
+                    value: Box::new(value),
+                });
             } else {
                 // Not a keyword — backtrack and parse as positional expr
                 self.pos = start;
@@ -836,7 +990,10 @@ impl<'a> Parser<'a> {
             }
             self.pos += 1;
         }
-        Err(format!("unterminated string starting at position {}", start))
+        Err(format!(
+            "unterminated string starting at position {}",
+            start
+        ))
     }
 
     fn parse_regex(&mut self) -> Result<Expr, String> {
@@ -851,7 +1008,7 @@ impl<'a> Parser<'a> {
             if ch == b'/' {
                 let pattern = self.src[start..self.pos].to_string();
                 self.advance(1); // consume closing '/'
-                // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
+                                 // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
                 self.skip_whitespace();
                 while self.pos < self.src.len() {
                     let c = self.src.as_bytes()[self.pos];
@@ -970,10 +1127,10 @@ mod tests {
     #[test]
     fn parse_no_paren_helper_keyword_is_not_single_call() {
         let code = r#"return cat("a", "b")"#;
-        let block = CodeBlock::parse(code).unwrap();
+        let err = CodeBlock::parse(code).unwrap_err();
         assert!(
-            !matches!(&block.statements[0].expr, Expr::Call { name, .. } if name == "return"),
-            "bare `return cat(...)` must not parse as return(cat(...))"
+            err.contains("expected ';' or newline"),
+            "bare `return cat(...)` must be rejected, not parsed as return(cat(...)): {err}"
         );
     }
 
@@ -1121,7 +1278,9 @@ mod tests {
                         assert!(matches!(&items[0], Expr::Variable { name } if name == "value"));
                         assert!(matches!(&items[1], Expr::Call { name, .. } if name == "cat"));
                         assert!(matches!(&items[2], Expr::BooleanLiteral { value: true }));
-                        assert!(matches!(&items[3], Expr::ArrayLiteral { items } if items.is_empty()));
+                        assert!(
+                            matches!(&items[3], Expr::ArrayLiteral { items } if items.is_empty())
+                        );
                     }
                     other => panic!("expected ArrayLiteral, got {:?}", other),
                 }
@@ -1140,10 +1299,18 @@ mod tests {
                 match args[0].value() {
                     Expr::HashLiteral { entries } => {
                         assert_eq!(entries.len(), 2);
-                        assert!(matches!(&entries[0].key, Expr::Variable { name } if name == "key"));
-                        assert!(matches!(&entries[0].value, Expr::Variable { name } if name == "value"));
-                        assert!(matches!(&entries[1].key, Expr::StringLiteral { value } if value == "fixed"));
-                        assert!(matches!(&entries[1].value, Expr::ArrayLiteral { items } if items.len() == 1));
+                        assert!(
+                            matches!(&entries[0].key, Expr::Variable { name } if name == "key")
+                        );
+                        assert!(
+                            matches!(&entries[0].value, Expr::Variable { name } if name == "value")
+                        );
+                        assert!(
+                            matches!(&entries[1].key, Expr::StringLiteral { value } if value == "fixed")
+                        );
+                        assert!(
+                            matches!(&entries[1].value, Expr::ArrayLiteral { items } if items.len() == 1)
+                        );
                     }
                     other => panic!("expected HashLiteral, got {:?}", other),
                 }
@@ -1168,7 +1335,9 @@ mod tests {
             Expr::AssignHashIndex { name, key, value } => {
                 assert_eq!(name, "meta");
                 assert!(matches!(key.as_ref(), Expr::Variable { name } if name == "key"));
-                assert!(matches!(value.as_ref(), Expr::HashLiteral { entries } if entries.len() == 1));
+                assert!(
+                    matches!(value.as_ref(), Expr::HashLiteral { entries } if entries.len() == 1)
+                );
             }
             other => panic!("expected hash-index assignment, got {:?}", other),
         }
@@ -1191,9 +1360,62 @@ mod tests {
                 assert_eq!(name, "set");
                 assert_eq!(args.len(), 2);
                 assert!(matches!(args[0].value(), Expr::Variable { name } if name == "out"));
-                assert!(matches!(args[1].value(), Expr::HashLiteral { entries } if entries.len() == 1));
+                assert!(
+                    matches!(args[1].value(), Expr::HashLiteral { entries } if entries.len() == 1)
+                );
             }
             other => panic!("expected set call, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn parse_expression_valued_block_return_payload() {
+        let code = r#"return({ set(x, "a"); x })"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::BlockValue { block } => {
+                        assert_eq!(block.statements.len(), 2);
+                        assert!(
+                            matches!(&block.statements[0].expr, Expr::Call { name, .. } if name == "set")
+                        );
+                        assert!(
+                            matches!(&block.statements[1].expr, Expr::Variable { name } if name == "x")
+                        );
+                    }
+                    other => panic!("expected BlockValue, got {:?}", other),
+                }
+            }
+            other => panic!("expected return call, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn parse_expression_valued_block_preserves_nested_final_hash_literal() {
+        let code = r#"return(array({ set(key, "stage"); set(value, "ok"); { key => value } }))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "array");
+                        match args[0].value() {
+                            Expr::BlockValue { block } => {
+                                assert_eq!(block.statements.len(), 3);
+                                assert!(
+                                    matches!(&block.statements[2].expr, Expr::HashLiteral { entries } if entries.len() == 1)
+                                );
+                            }
+                            other => panic!("expected nested BlockValue, got {:?}", other),
+                        }
+                    }
+                    other => panic!("expected array call, got {:?}", other),
+                }
+            }
+            other => panic!("expected return call, got {:?}", other),
         }
     }
 
@@ -1304,12 +1526,10 @@ mod tests {
         let code = "return(-1)";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
-            Expr::Call { name: _, args } => {
-                match args[0].value() {
-                    Expr::NumberLiteral { value } => assert_eq!(*value, -1.0),
-                    _ => panic!("expected NumberLiteral"),
-                }
-            }
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::NumberLiteral { value } => assert_eq!(*value, -1.0),
+                _ => panic!("expected NumberLiteral"),
+            },
             _ => panic!("expected Call"),
         }
     }
@@ -1319,12 +1539,10 @@ mod tests {
         let code = "return(3.14)";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
-            Expr::Call { name: _, args } => {
-                match args[0].value() {
-                    Expr::NumberLiteral { value } => assert!((*value - 3.14).abs() < 0.001),
-                    _ => panic!("expected NumberLiteral"),
-                }
-            }
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::NumberLiteral { value } => assert!((*value - 3.14).abs() < 0.001),
+                _ => panic!("expected NumberLiteral"),
+            },
             _ => panic!("expected Call"),
         }
     }
@@ -1350,12 +1568,10 @@ mod tests {
         let code = "return('hello world')";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
-            Expr::Call { name: _, args } => {
-                match args[0].value() {
-                    Expr::StringLiteral { value } => assert_eq!(value, "hello world"),
-                    _ => panic!("expected StringLiteral"),
-                }
-            }
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::StringLiteral { value } => assert_eq!(value, "hello world"),
+                _ => panic!("expected StringLiteral"),
+            },
             _ => panic!("expected Call"),
         }
     }
@@ -1383,12 +1599,10 @@ mod tests {
         let code = "return(false)";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
-            Expr::Call { name: _, args } => {
-                match args[0].value() {
-                    Expr::BooleanLiteral { value } => assert!(!*value),
-                    _ => panic!("expected BooleanLiteral false"),
-                }
-            }
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::BooleanLiteral { value } => assert!(!*value),
+                _ => panic!("expected BooleanLiteral false"),
+            },
             _ => panic!("expected Call"),
         }
     }
@@ -1399,12 +1613,10 @@ mod tests {
         let code = "return(trueword)";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
-            Expr::Call { name: _, args } => {
-                match args[0].value() {
-                    Expr::Variable { name } => assert_eq!(name, "trueword"),
-                    _ => panic!("expected Variable for 'trueword'"),
-                }
-            }
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::Variable { name } => assert_eq!(name, "trueword"),
+                _ => panic!("expected Variable for 'trueword'"),
+            },
             _ => panic!("expected Call"),
         }
     }
@@ -1426,12 +1638,10 @@ mod tests {
         let code = "return($CAPTURE)";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
-            Expr::Call { name: _, args } => {
-                match args[0].value() {
-                    Expr::Variable { name } => assert_eq!(name, "CAPTURE"),
-                    _ => panic!("expected Variable"),
-                }
-            }
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::Variable { name } => assert_eq!(name, "CAPTURE"),
+                _ => panic!("expected Variable"),
+            },
             _ => panic!("expected Call"),
         }
     }
@@ -1441,18 +1651,16 @@ mod tests {
         let code = "return(results[0])";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
-            Expr::Call { name: _, args } => {
-                match args[0].value() {
-                    Expr::IndexedVar { name, index } => {
-                        assert_eq!(name, "results");
-                        match index.as_ref() {
-                            Expr::NumberLiteral { value } => assert_eq!(*value, 0.0),
-                            _ => panic!("expected NumberLiteral index"),
-                        }
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::IndexedVar { name, index } => {
+                    assert_eq!(name, "results");
+                    match index.as_ref() {
+                        Expr::NumberLiteral { value } => assert_eq!(*value, 0.0),
+                        _ => panic!("expected NumberLiteral index"),
                     }
-                    _ => panic!("expected IndexedVar"),
                 }
-            }
+                _ => panic!("expected IndexedVar"),
+            },
             _ => panic!("expected Call"),
         }
     }
@@ -1466,9 +1674,13 @@ mod tests {
                 Expr::NestedAccess { base, segments } => {
                     assert_eq!(base, "foo");
                     assert_eq!(segments.len(), 4);
-                    assert!(matches!(segments[0], AccessSegment::Key { ref value } if value == "a"));
+                    assert!(
+                        matches!(segments[0], AccessSegment::Key { ref value } if value == "a")
+                    );
                     assert!(matches!(segments[1], AccessSegment::Index { .. }));
-                    assert!(matches!(segments[2], AccessSegment::Key { ref value } if value == "b"));
+                    assert!(
+                        matches!(segments[2], AccessSegment::Key { ref value } if value == "b")
+                    );
                     assert!(matches!(segments[3], AccessSegment::Index { .. }));
                 }
                 other => panic!("expected NestedAccess, got {:?}", other),
@@ -1485,10 +1697,14 @@ mod tests {
                 Expr::NestedAccess { base, segments } => {
                     assert_eq!(base, "foo");
                     assert_eq!(segments.len(), 2);
-                    assert!(matches!(segments[0], AccessSegment::Key { ref value } if value == "a"));
+                    assert!(
+                        matches!(segments[0], AccessSegment::Key { ref value } if value == "a")
+                    );
                     match &segments[1] {
                         AccessSegment::Index { expr } => {
-                            assert!(matches!(expr.as_ref(), Expr::Variable { name } if name == "z"));
+                            assert!(
+                                matches!(expr.as_ref(), Expr::Variable { name } if name == "z")
+                            );
                         }
                         _ => panic!("expected scalar-index segment"),
                     }
@@ -1524,7 +1740,8 @@ mod tests {
 
     #[test]
     fn parse_fluent_chain_multiple_dots() {
-        let code = "push_value(array(items), scalar(retv)).return(array_copy(array(items))).endif()";
+        let code =
+            "push_value(array(items), scalar(retv)).return(array_copy(array(items))).endif()";
         let block = CodeBlock::parse(code).unwrap();
         let first = &block.statements[0].expr;
         match first {
@@ -1621,18 +1838,30 @@ mod tests {
     fn assert_roundtrip(code: &str) {
         let block1 = CodeBlock::parse(code)
             .unwrap_or_else(|e| panic!("first parse failed for '{code}': {e}"));
-        let displayed = block1.statements.iter()
+        let displayed = block1
+            .statements
+            .iter()
             .map(|s| s.expr.to_string())
             .collect::<Vec<_>>()
             .join("; ");
         let block2 = CodeBlock::parse(&displayed)
             .unwrap_or_else(|e| panic!("second parse failed for '{displayed}': {e}"));
-        assert_eq!(block1.statements.len(), block2.statements.len(),
-            "statement count mismatch: '{code}' → '{displayed}'");
-        for (i, (s1, s2)) in block1.statements.iter().zip(block2.statements.iter()).enumerate() {
-            assert_eq!(s1.expr, s2.expr,
+        assert_eq!(
+            block1.statements.len(),
+            block2.statements.len(),
+            "statement count mismatch: '{code}' → '{displayed}'"
+        );
+        for (i, (s1, s2)) in block1
+            .statements
+            .iter()
+            .zip(block2.statements.iter())
+            .enumerate()
+        {
+            assert_eq!(
+                s1.expr, s2.expr,
                 "statement {i} mismatch: '{code}' → '{displayed}'\n  left: {:?}\n  right: {:?}",
-                s1.expr, s2.expr);
+                s1.expr, s2.expr
+            );
         }
     }
 
@@ -1730,6 +1959,12 @@ mod tests {
     }
 
     #[test]
+    fn roundtrip_expression_valued_block() {
+        assert_roundtrip(r#"return({set(x, "a"); x})"#);
+        assert_roundtrip(r#"return(array({set(key, "stage"); set(value, "ok"); {key => value}}))"#);
+    }
+
+    #[test]
     fn roundtrip_fluent_chain() {
         let code = "assign(scalar(name), entry_text()).return(scalar(name))";
         let block1 = CodeBlock::parse(code).unwrap();
@@ -1752,7 +1987,8 @@ mod tests {
 
     #[test]
     fn roundtrip_fluent_chain_multi() {
-        let code = "push_value(array(items), scalar(retv)).return(array_copy(array(items))).endif()";
+        let code =
+            "push_value(array(items), scalar(retv)).return(array_copy(array(items))).endif()";
         let block1 = CodeBlock::parse(code).unwrap();
         let displayed = block1.statements[0].expr.to_string();
         let block2 = CodeBlock::parse(&displayed).unwrap();
@@ -1830,7 +2066,8 @@ return(array_copy(array(results)));"#;
 
     #[test]
     fn parse_same_line_statements_require_semicolons() {
-        let result = CodeBlock::parse("declare(array, results) push_value(array(results), scalar(retv))");
+        let result =
+            CodeBlock::parse("declare(array, results) push_value(array(results), scalar(retv))");
         assert!(result.is_err());
         assert!(result.unwrap_err().contains("expected ';' or newline"));
     }

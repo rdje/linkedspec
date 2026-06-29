@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity
+
+**Scope:** Rust parser/runtime, Rust parser/runtime tests, Perl-oracle corpus fixture, mdBook, Knowledge Map,
+task tree, roadmap tracker, and live continuity docs. Perl reference behavior is unchanged.
+
+**What changed:** Rust now matches the Perl-reference core expression-valued block contract. `Expr::BlockValue`
+represents non-empty brace payloads without a top-level `=>`; `{}` and keyed `{ key => value }` still parse as
+hash literals. `Engine::eval_expr()` evaluates block values by running side-effect statements in order and
+returning the final expression; a final `return(expr)` is treated as block-local.
+
+**Boundary:** True mid-block early return is still out of scope and remains `.2.1.4`; non-final
+`return(expr)` inside a Rust block value is rejected rather than leaking into the rule return channel.
+
+**Gate hygiene:** Full Rust package verification surfaced two stale historical locks and they now match the
+current contracts: Rust no-parenthesis helper spelling is rejected under mandatory call parentheses plus
+same-line separator enforcement, and the old `.1.2.3.5.3` scalar-held shape-RHS boundary is now validated as
+the live `.1.2.3.5.4` aggregate target-kind behavior.
+
+**Validation:** focused Rust core parser locks PASS; focused Rust runtime `.2.1.3` locks PASS; oracle corpus
+regenerated to **34 fixtures**; Rust corpus oracle PASS; full Rust core package PASS; full Rust runtime package
+PASS; mdBook build PASS; Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS; full local CI
+PASS (`tools/run_ci_local.sh`, phase0 **991** tests).
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.3 — own Rust expression-valued block parity
 
 **Scope:** Task tree, roadmap tracker, live continuity docs, and Knowledge Map. No Rust engine, oracle,

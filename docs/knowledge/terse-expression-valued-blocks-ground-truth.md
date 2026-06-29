@@ -1,12 +1,12 @@
 ---
 id: terse-expression-valued-blocks-ground-truth
-title: "SPEC-FORMAT-TERSE.2.1.1 - Expression-valued blocks are split before code; current braces are hash literals or invalid block-shaped values."
+title: "SPEC-FORMAT-TERSE.2.1.1 - Expression-valued blocks were split before code; split-time braces were hash literals or invalid block-shaped values."
 answers:
-  - "do expression-valued blocks already work"
+  - "did expression-valued blocks work before SPEC-FORMAT-TERSE.2.1.2"
   - "why was SPEC-FORMAT-TERSE.2.1 split"
-  - "how are braces disambiguated between hash literals and block values"
-  - "does return({ set(x,\"a\"); x }) work"
-  - "does Rust have a block-expression AST"
+  - "how were braces disambiguated before expression-valued blocks landed"
+  - "did return({ set(x,\"a\"); x }) work before SPEC-FORMAT-TERSE.2.1.2"
+  - "did Rust have a block-expression AST before SPEC-FORMAT-TERSE.2.1.3"
   - "what is the next leaf after SPEC-FORMAT-TERSE.2.1.1"
 date: 2026-06-29
 status: confirmed
@@ -17,12 +17,12 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{return({})}, q{return({ 
 
 # Expression-Valued Blocks Ground Truth
 
-`SPEC-FORMAT-TERSE.2.1` is not one implementation slice.
+`SPEC-FORMAT-TERSE.2.1` was not one implementation slice.
 
-The accepted future contract says `{ ... }` should be a value expression whose value is the last statement or
-an explicit block-local `return(expr)`. The current implementation does not have that contract yet.
+At split time, the accepted future contract said `{ ... }` should be a value expression whose value is the
+last statement or an explicit block-local `return(expr)`. The implementation did not have that contract yet.
 
-## Current Perl Behavior
+## Split-Time Perl Behavior
 
 Hash shape literals already own brace value syntax:
 
@@ -42,7 +42,7 @@ The first form emits invalid generated Perl because the braces are treated like 
 payload rather than a DSL value block. The second form takes the direct hash-shape target-inference path and
 emits malformed aggregate assignment.
 
-## Current Rust Behavior
+## Split-Time Rust Behavior
 
 Rust has:
 

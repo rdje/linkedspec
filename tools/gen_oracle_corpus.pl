@@ -541,6 +541,21 @@ Top::
  /x/ -> Done { set(value, "b"); items.push_back("a"); items.push_back(value); items.push_front("z"); items.pop_back(); items.pop_front(); return(array_copy(items)) }
 
 Done::
+/[a-z]+/
+SPEC
+    },
+
+    # ── SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity ──
+    #
+    # Non-empty non-hash braces are value blocks whose value is the final
+    # expression, while a final return(expr) is block-local for the core subset.
+    {   case   => 'terse_2_1_3_expression_valued_blocks',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { return(array({ set(x, "a"); x }, { set(y, "b"); return(y) }, { set(key, "stage"); set(value, "ok"); { key => value } })) }
+
+Done::
  /[a-z]+/
 SPEC
     },

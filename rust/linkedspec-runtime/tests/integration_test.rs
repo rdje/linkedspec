@@ -1378,8 +1378,8 @@ fn terse_1_6_explicit_array_receiver_aliases_run() {
 // direct `[]` and `{ key => value }` forms are value expressions. Their members
 // use the same expression semantics as the Perl `.1.2.3.5.1` contract: bare
 // names read scalar working variables, helper calls compose, primitive literals
-// stay typed, and nested shapes recurse. RHS target-kind inference is explicitly
-// deferred to `.1.2.3.5.4`, so this leaf keeps bare assignment targets scalar.
+// stay typed, and nested shapes recurse. RHS target-kind inference landed later
+// in `.1.2.3.5.4`; the live target-kind behavior is locked in that section.
 
 #[test]
 fn terse_1_2_3_5_3_shape_literal_values_return_typed_nested_payload() {
@@ -1401,19 +1401,19 @@ fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
     );
 }
 
-#[test]
-fn terse_1_2_3_5_3_shape_rhs_still_uses_scalar_assignment_until_target_inference_leaf() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(scalar(name), array_copy(array(name)))) }\n\nDone::\n /[a-z]+/\n";
-    assert_eq!(
-        build_and_run(grammar, "xhello"),
-        serde_json::json!([[["ok"], []]]),
-        "Rust shape RHS is a scalar payload until SPEC-FORMAT-TERSE.1.2.3.5.4 adds target-kind inference"
-    );
-}
-
 // ── SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference:
 // direct shape literals on bare assignment targets initialize the aggregate
 // working variable, while explicit scalar targets keep scalar-held payloads.
+
+#[test]
+fn terse_1_2_3_5_4_shape_rhs_no_longer_uses_scalar_assignment_after_target_inference_leaf() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(scalar(name), array_copy(array(name)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[null, ["ok"]]]),
+        "after SPEC-FORMAT-TERSE.1.2.3.5.4, a direct shape RHS on a bare target initializes the aggregate slot"
+    );
+}
 
 #[test]
 fn terse_1_2_3_5_4_bare_shape_rhs_infers_array_and_hash_targets() {
@@ -1442,5 +1442,51 @@ fn terse_1_2_3_5_4_explicit_typed_targets_and_scalar_boundary() {
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], []]]),
         "explicit array/hash targets accept direct shapes, while scalar(...) stores the shape payload in the scalar"
+    );
+}
+
+// ── SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity:
+// non-empty non-hash braces are value blocks, matching the Perl core landed in
+// `.2.1.2`; hash literals keep precedence and true mid-block return remains
+// separate.
+
+#[test]
+fn terse_2_1_3_expression_valued_block_returns_last_expression() {
+    let grammar = "Top::\n /x/ -> Done { return({ set(x, \"a\"); x }) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["a"]),
+        "block values return their final expression"
+    );
+}
+
+#[test]
+fn terse_2_1_3_expression_valued_block_final_return_is_local() {
+    let grammar =
+        "Top::\n /x/ -> Done { return({ set(x, \"a\"); return(x) }) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["a"]),
+        "a final return(expr) inside a block value yields the block payload"
+    );
+}
+
+#[test]
+fn terse_2_1_3_expression_valued_block_assignment_source_is_scalar() {
+    let grammar = "Top::\n /x/ -> Done { set(out, { set(x, \"a\"); x }); return(out) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["a"]),
+        "assignment-source block values do not infer hash targets"
+    );
+}
+
+#[test]
+fn terse_2_1_3_expression_valued_blocks_compose_with_hash_literals() {
+    let grammar = "Top::\n /x/ -> Done { return(array({ set(x, \"a\"); x }, { set(key, \"stage\"); set(value, \"ok\"); { key => value } }, {}, { key => value })) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a", {"stage": "ok"}, {}, {"stage": "ok"}]]),
+        "block values compose in arrays while empty/keyed braces stay hash literals"
     );
 }
