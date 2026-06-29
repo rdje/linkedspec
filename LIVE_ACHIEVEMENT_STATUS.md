@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.2.1.1 — expression-valued block split completed**
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM retrieval, TOOLBOX probes, and
+  code-read showed expression-valued blocks cross too many seams for one implementation leaf. `{}` and
+  `{ key => value }` remain hash shape literals. Non-empty brace payloads without a top-level `=>` currently
+  fail as value blocks: Perl emits invalid generated Perl for forms like `return({ set(x,"a"); x })`, and Rust
+  has no block-expression AST/runtime path. The split children are `.2.1.2` Perl reference core,
+  `.2.1.3` Rust parity, and `.2.1.4` full block-local explicit-return follow-through if needed.
+  **Verification:** KM retrieval; TOOLBOX lowering/runtime/source probes; Perl/Rust code-read; KM/memory/doctrine/diff checks.
+  **Frontier: `SPEC-FORMAT-TERSE.2.1.2`** (Perl reference core expression-valued blocks; owned before code).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.6 — array end-mutation methods landed**
   (PERL ACTIONIR + RUST RUNTIME + ORACLE/KM/BOOK LOCKS). Statement-level receiver-dot methods now mutate named
   working arrays on both variants: `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`,

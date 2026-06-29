@@ -6,8 +6,8 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.2.1` IN PROGRESS / OWNED BEFORE CODE** — Round 2 expression-valued blocks
-  are now the active PNT leaf; KM/TOOLBOX/code-read ground truth and split-before-code come first. Prior
+- Last updated: `2026-06-29` (**`.2.1` SPLIT after KM/TOOLBOX/code-read ground truth; `.2.1.2` IN PROGRESS
+  / OWNED BEFORE CODE** — expression-valued blocks need separate Perl-reference and Rust-parity slices. Prior
   **`.1.6` DONE; Round 1 closed** — Array end-mutation methods landed on Perl
   and Rust: `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()`
   are statement-level mutations over named working arrays, with bare / `array(...)` / `a(...)` receivers.
@@ -1194,10 +1194,48 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Children: `.2.1`, `.2.2`, `.2.3`
 
 - ID: `SPEC-FORMAT-TERSE.2.1`
-  Status: `in_progress` (2026-06-29 — owned before code; ground-truth/split first)
+  Status: `active` (SPLIT 2026-06-29 after KM/TOOLBOX/code-read ground truth)
   Goal: Expression-valued blocks — `{ ... }` returns its value (last statement or explicit `return()`)
   Acceptance: A block evaluates to its last statement's value or an explicit `return(...)`; blocks
     compose as expressions.
+  Children: `.2.1.1`, `.2.1.2`, `.2.1.3`, `.2.1.4`
+  Verification: `SPEC-FORMAT-TERSE.2.1.1`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.1.1`
+  Status: `done` (2026-06-29)
+  Goal: Expression-valued block ground truth and split before code
+  Acceptance: KM retrieval, TOOLBOX lowering/runtime probes, and code-read identify the current Perl/Rust
+    behavior, ambiguity with `{}` / `{ key => value }` shape literals, and safe implementation split.
+  Verification: KM card `terse-expression-valued-blocks-ground-truth`; TOOLBOX probes showed
+    `return({})` and `return({ key => value })` are shape literals, while `return({ set(x,"a"); x })`
+    lowers as invalid Perl hash/block syntax and Rust has no block-expression AST variant.
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.1.2`
+  Status: `in_progress` (2026-06-29 — owned before code)
+  Goal: Perl reference — core expression-valued block values
+  Acceptance: Non-empty `{ ... }` value payloads without top-level `=>` lower as block expressions in
+    value-consuming slots, preserving `{}` and `{ key => value }` as hash literals. The first Perl slice
+    supports last-expression value and final `return(expr)` block value forms; full block-local early return
+    remains a follow-up if needed.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.1.3`
+  Status: `pending`
+  Goal: Rust parity — core expression-valued block values
+  Acceptance: Rust parser/runtime add the same block-expression AST/runtime behavior and preserve hash-literal
+    disambiguation; oracle fixtures match the Perl reference.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.1.4`
+  Status: `pending`
+  Goal: Block-local explicit return semantics and composition follow-through
+  Acceptance: If ground truth or implementation proves final-only `return(expr)` insufficient, add true
+    block-local early-return semantics without leaking into the surrounding rule return channel; lock nested
+    composition and update the book.
   Verification: `pending`
   Commit: `pending`
 
@@ -1298,10 +1336,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.3` | `done` 2026-06-29 | Rust shape-literal value parity landed: direct `[]` / `{}` values parse and evaluate recursively, with oracle/integration locks and the `.1.2.3.5.4` target-kind boundary preserved. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `done` 2026-06-29 | Rust RHS target-kind inference parity landed: direct shape RHS initializes/replaces array/hash working variables for bare or matching typed aggregate targets, while explicit `scalar(...)` keeps scalar-held payload assignment. |
 | — | `SPEC-FORMAT-TERSE.1.6` | `done` 2026-06-29 | Round 1 array end-mutation methods landed on Perl and Rust; phase0 990 green; oracle corpus 33 fixtures. Round 1 is closed. |
-| 1 | `SPEC-FORMAT-TERSE.2.1` | `in_progress` | Round 2 expression-valued blocks — owned before code; KM/TOOLBOX/code-read ground truth and split decision next. |
+| — | `SPEC-FORMAT-TERSE.2.1.1` | `done` 2026-06-29 | Expression-valued block ground truth completed: current Perl/Rust treat `{}` / `{ key => value }` as hash literals and do not have block-valued expression semantics. `.2.1` split by reference/parity and explicit-return depth. |
+| 1 | `SPEC-FORMAT-TERSE.2.1.2` | `in_progress` | Perl reference core expression-valued blocks — owned before code; support non-empty non-hash block values in value-consuming slots while preserving hash literals. |
 | … | `.2.2`, `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.2.1` expression-valued blocks split after ground truth**). KM retrieval and TOOLBOX probes
+  show this is not one safe implementation leaf. Perl currently treats `{}` and `{ key => value }` as shape
+  literals, but block-like values such as `return({ set(x,"a"); x })` lower into invalid generated Perl
+  (`return { $x = "a"; x }`) and `set(out, { ... })` takes the aggregate target-inference path. Rust has
+  `CodeBlock` statements and hash/array literal `Expr` variants, but no block-expression AST or runtime
+  evaluator. Therefore `.2.1.2` owns the Perl reference core, `.2.1.3` owns Rust parity, and `.2.1.4` is kept
+  for true block-local early-return semantics if final-only `return(expr)` is not enough.
 
 - `2026-06-29` (**`.1.6` array end-mutation methods landed**). The accepted Round 1 array method contract is
   statement-level mutation, not value-returning fluent chaining. A single receiver-dot call with receiver
@@ -1786,6 +1833,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core shape_literal`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_2_3_5_3`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust shape-literal value parity landed. `Expr::ArrayLiteral` / `Expr::HashLiteral` parse direct `[]` / `{}` values recursively, and `Engine::eval_expr` evaluates members through the normal expression path into `RuntimeValue::Array` / `RuntimeValue::Hash`. Added parser/runtime boundary locks plus two oracle fixtures, bringing the corpus oracle to 30 fixtures. `name = [value]` still parses/evaluates as scalar payload assignment until `.1.2.3.5.4` implements Rust target-kind inference. Frontier becomes `.1.2.3.5.4`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5.4` | Focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_2_3_5_4`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust RHS shape target-kind inference parity landed. Direct array/hash RHS literals now replace the runtime aggregate slot for bare or matching typed aggregate targets (`items = [value]`, `set(array(items), [value])`, `meta = { key => value }`, `set(hash(meta), { key => value })`), while explicit `scalar(payload)` keeps scalar-held shape payload assignment. Added 3 integration locks + 2 oracle fixtures, bringing the corpus oracle to 32 fixtures. Frontier becomes `.1.6`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.6` | Perl syntax checks (`MethodLowering.pm`, `Contracts.pm`, `Scanner/PrimitivePipelineRules.pm`, `RuleIR/EmitContext.pm`); TOOLBOX lowering/runtime/source probes; focused Rust core parser test (`parse_array_end_mutation_fluent_receivers`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_6`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); `prove -q -Iperl t/phase0_regression.t` | Array end-mutation methods landed. Perl lowers statement-level `push_back`/`push_front`/`pop_back`/`pop_front` receiver-dot calls to array working-variable mutations, records canonical `ARRAY_MUTATE`, and auto-supplies the receiver array plus push-value scalar reads. Rust executes the same statement forms in `Engine::execute_block`; pop methods discard the removed value. Oracle corpus regenerated to 33 fixtures; phase0 PASS (`990` tests). Round 1 is closed and the frontier becomes `.2.1`. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.1` (split) | KM retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-statement-separator-contract`, `terse-array-end-mutation-methods`, `rust-retv-propagation`, `actionir-lowering-stack`); TOOLBOX `call_spec_handler_subst` probes for `{}` / `{ key => value }` / block-shaped values; `LinkedSpec::Get` runtime and generated-source probes; Perl code-read (`MethodLowering`, `EmitContext`); Rust code-read (`expr.rs`, `engine.rs`); Knowledge Map regenerate/check; memory/doctrine/diff checks | Split `.2.1` before code. Current Perl supports hash shape literals but block-shaped values lower into invalid hash/block Perl (`return { $x = "a"; x }`) or aggregate target inference (`%out = (...)`); Rust has statement `CodeBlock` and hash/array literal values but no block-expression AST/runtime. Frontier becomes `.2.1.2` for the Perl reference core; Rust parity and full block-local early return stay split. |
 
 ## Commit Log
 
@@ -1830,8 +1878,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.2.3.5.3` | `SPEC-FORMAT-TERSE.1.2.3.5.3 — implement Rust shape-literal values` | Rust parses/evaluates direct shape literals as value expressions with parser/runtime/oracle locks, while leaving Rust RHS target-kind inference to `.1.2.3.5.4`. |
 | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `SPEC-FORMAT-TERSE.1.2.3.5.4 — implement Rust RHS shape target kind` | Rust now uses direct RHS shape literals to infer aggregate bare or matching typed aggregate assignment targets, while explicit `scalar(...)` keeps scalar-held payload assignment. Added integration/oracle locks; frontier becomes `.1.6`. |
 | `SPEC-FORMAT-TERSE.1.6` | `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods` | Perl and Rust now support statement-level `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` over named working arrays. Added phase0/Rust/oracle/book/KM locks; Round 1 closes and frontier becomes `.2.1`. |
+| `SPEC-FORMAT-TERSE.2.1.1` | `SPEC-FORMAT-TERSE.2.1.1 — split expression-valued blocks` | No engine/book behavior change. `.2.1` is split into Perl-reference core block values (`.2.1.2`), Rust parity (`.2.1.3`), and explicit block-local early-return follow-through (`.2.1.4`). Frontier becomes `.2.1.2`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.2.1.1` DONE / `.2.1.2` OWNED BEFORE CODE — expression-valued blocks split.**
+  KM and TOOLBOX ground truth showed expression-valued blocks are a multi-seam feature, not one safe slice.
+  `{}` and `{ key => value }` stay hash shape literals; non-empty brace payloads without top-level `=>` need
+  distinct block-expression lowering/evaluation. `.2.1.2` now owns the Perl reference core; Rust parity and
+  full block-local early return remain separate children.
 
 - `2026-06-29`: **`.2.1` PICKED / OWNED BEFORE CODE — expression-valued blocks.**
   PNT moved to Round 2 after `.1.6` closed Round 1. This ownership slice records `.2.1` as the active leaf

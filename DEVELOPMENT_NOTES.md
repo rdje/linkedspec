@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.2.1.1 — expression-valued block split): Split Round 2 block values before
+  code. Durable points. (1) **Brace value syntax is already occupied.** Empty `{}` and top-level-fat-arrow
+  `{ key => value }` forms are hash shape literals and must remain so. (2) **Current Perl block-shaped values
+  are not usable.** `return({ set(x,"a"); x })` lowers as invalid Perl hash/block source, while
+  `set(out, { ... })` takes the direct hash-shape target-inference path and emits malformed aggregate
+  assignment. (3) **Rust has a separate missing AST seam.** `CodeBlock` is statement-only; `Expr` has hash and
+  array literals but no block-expression variant or evaluator. (4) **Split by reference/parity/return depth.**
+  `.2.1.2` owns the Perl reference core, `.2.1.3` owns Rust parity, and `.2.1.4` is reserved for true
+  block-local early return if final-only `return(expr)` is not enough.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.6 — array end-mutation methods landed): Added statement-level
   receiver-dot array mutations without changing value-expression semantics. Durable points. (1) **Perl uses
   a top-level receiver-dot splitter, not a broad fluent parser.** `_parse_array_end_mutation_method_statement`

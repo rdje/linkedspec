@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.1 — expression-valued block split
+
+**Scope:** Task tree, roadmap tracker, live continuity docs, and Knowledge Map. No engine, oracle, fixture, or
+mdBook behavior changed in this slice.
+
+**Ground truth:** `{}` and `{ key => value }` are already hash shape literals on Perl/Rust. Non-empty brace
+payloads without a top-level `=>` are not expression-valued blocks today: Perl lowers
+`return({ set(x,"a"); x })` into invalid generated Perl shaped like `return { $x = "a"; x }`, and
+`set(out, { ... })` wrongly follows aggregate hash-target inference. Rust has statement `CodeBlock` parsing and
+hash/array literal value expressions, but no block-expression AST or runtime evaluator.
+
+**Split:** `.2.1.2` owns the Perl reference core: non-empty non-hash `{ ... }` value payloads in value-consuming
+slots, preserving `{}` / `{ key => value }` as hash literals. `.2.1.3` owns Rust parity. `.2.1.4` remains for
+full block-local early-return semantics if final-only `return(expr)` is insufficient.
+
+**Validation:** KM retrieval completed; TOOLBOX lowering/runtime/source probes completed; Perl/Rust code-read
+completed; Knowledge Map/memory/doctrine/diff checks are the relevant gates for this docs/KM split slice.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.6 — array end-mutation methods
 
 **Scope:** Perl ActionIR lowering/scanning/declaration inference, Rust runtime statement execution, Perl phase0
