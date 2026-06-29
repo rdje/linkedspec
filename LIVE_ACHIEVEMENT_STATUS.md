@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.5.5.2 — bare direct-access coordination merged into Channel 2**
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM retrieval plus TOOLBOX reverify
+  showed the post-`.1.5.5.1` boundary is unchanged: `foo["a"][9]["b"][scalar(z)]` lowers through the canonical
+  dereference path, but `foo["a"][9]["b"][z]` remains raw and `return(z)` remains a bareword. Rust keeps the
+  parser rejection lock for bare direct-access segments. Therefore the full brainstorm spelling cannot be
+  implemented as a direct-access-local rule without pre-empting global Channel 2 semantics. `.1.5.5.2` is
+  superseded/merged into new `.1.2.3`, which owns value-position bare-word reads, bare RHS/key expressions,
+  bare direct-access path atoms, and RHS-shape/type inference. **Verification:** TOOLBOX reverify PASS; focused
+  Rust parser rejection lock PASS; KM/memory/doctrine/diff checks green.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3`** (Channel 2 design/split).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.5.5.1 — direct nested access with explicit segments landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + ORACLE + BOOK/KM LOCKS). Direct mixed access such as
   `foo["a"][9]["b"][scalar(z)]` now works on both variants. Perl lowers it to

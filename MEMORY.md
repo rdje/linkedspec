@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `3b35b3c` — `SPEC-FORMAT-TERSE.1.5.5.1 — implement direct nested access explicit segments`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — **`.1.5.5.1` DONE 2026-06-29; frontier -> `.1.5.5.2`**. Direct nested access now works for explicit path segments; bare path atoms remain Channel 2. User in a **PNT loop** (2026-06-23).
-- next_action: Pick **`SPEC-FORMAT-TERSE.1.5.5.2`** — bare path-segment / Channel 2 coordination for direct access (`foo["a"][9]["b"][z]`), unless a split/merge into `.1.2.3` is warranted by ground truth.
+- latest_commit: `c92ed04` — `SPEC-FORMAT-TERSE.1.5.5.1 — handoff: record direct-access commit in MEMORY`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — **`.1.5.5.2` SUPERSEDED/MERGED 2026-06-29; frontier -> `.1.2.3`**. Bare direct-access atoms are owned by global Channel 2, not a local direct-access rule. User in a **PNT loop** (2026-06-23).
+- next_action: Pick **`SPEC-FORMAT-TERSE.1.2.3`** — Channel 2 design/split for value-position bare-word reads + RHS-shape/type inference.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy source baseline engine.rs 11 / helpers.rs 2; oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs`. phase0 baseline = **983 green after `.1.5.5.1`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: MEMORY handoff only; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.1.5.5.2` docs/task/KM merge slice pending commit; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.

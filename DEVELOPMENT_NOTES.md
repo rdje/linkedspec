@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.5.2 — bare direct access merged into Channel 2): Closed the
+  direct-access coordination leaf without code. Durable points. (1) **Do not special-case `[z]` inside direct
+  access.** Reverify after `.1.5.5.1` showed `foo["a"][9]["b"][scalar(z)]` lowers, but `foo["a"][9]["b"][z]`
+  remains raw and `return(z)` remains a bareword. Those are the same value-position bare-word-read problem.
+  (2) **Channel ownership matters more than local convenience.** A direct-access-only rule for `[z]` would
+  choose scalar/array/hash and key-vs-index semantics before the global Channel 2 design decides how bare
+  names behave in return payloads, RHS expressions, hash keys, and helper value slots. (3) **The next safe
+  slice is `.1.2.3`, not code in `.1.5.5.2`.** `.1.2.3` now owns the design/split for value-position
+  bare-word reads + RHS-shape/type inference across Perl and Rust. Verification: TOOLBOX lowering reverify,
+  Rust parser rejection lock, KM/memory/doctrine/diff checks.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.5.5.1 — explicit direct nested access landed): Implemented the safe
   direct-access subset on both variants. Durable points. (1) **Direct access reuses the settled explicit-path
   semantics.** Perl routes `foo["a"][9]["b"][scalar(z)]` through a new ValueExpr lowerer and emits the same

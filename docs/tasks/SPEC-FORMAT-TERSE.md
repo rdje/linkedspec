@@ -6,10 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.5.5.1` DONE** — direct nested access with explicit path segments
+- Last updated: `2026-06-29` (**`.1.5.5.2` SUPERSEDED/MERGED** — reverify showed bare direct-access
+  segments are the same global Channel 2 value-position-read problem as `return(z)`, so this leaf is merged
+  into new **`.1.2.3` Channel 2 design/split** instead of implementing `[z]` locally. Frontier ->
+  **`.1.2.3` value-position bare-word reads + RHS-shape design/split**. Prior **`.1.5.5.1` DONE** — direct nested access with explicit path segments
   landed on Perl and Rust. `foo["a"][9]["b"][scalar(z)]` now reads mixed hash/array payload paths; quoted
   string segments are hash keys, numeric/helper segments are array indexes, and bare `[z]` remains deferred to
-  `.1.5.5.2` / Channel 2. Frontier -> **`.1.5.5.2` bare path-segment / Channel 2 coordination**. Prior
+  Channel 2. Prior
   **`.1.5.5` SPLIT** — direct nested access was divided before code into `.1.5.5.1` explicit-segment direct
   access and `.1.5.5.2` bare-segment/Channel-2 coordination. Prior **`.1.5.4` DONE** — statement
   separators are newline-or-semicolon across Perl and Rust: newlines split top-level canonical DSL statements,
@@ -286,14 +289,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     it REQUIRED a Rust engine change (the bare-target resolvers `resolve_scalar_target`/`resolve_array_target`
     now map a bare `Expr::Variable` target to the working var; per-parse HashMap auto-vivifies it); 2 oracle
     fixtures + 4 integration tests, cargo 248→252. **Channel 1 complete on BOTH variants.** `.1.2` stays
-    `active` — Channel 2 (`.1.2.3`+: value-position bare-word reads + RHS-shape) is still pending, added once
-    `.1.5` literal syntax is designed. Frontier → `.1.4`.)
+    `active` — Channel 2 is now owned by `.1.2.3` after `.1.5` settled primitive literals, separators, and
+    explicit direct nested access; `.1.5.5.2` was superseded into `.1.2.3`. Frontier → `.1.2.3`.)
   Goal: Remove container wrappers as a *requirement* + add type inference (bare words are
     variables/functions, never string literals; type from RHS shape `[]`→array/`{}`→hash/scalar and
     from helper arg position). Wrappers stay accepted aliases during migration (gradual, ADR 0007).
-  Children: `.1.2.1` (Perl, Channel 1), `.1.2.2` (Rust parity for `.1.2.1`). Channel 2 (value-position
-    bare-word reads + RHS-shape inference) leaves `.1.2.3`+ are added once `.1.2.1` lands and `.1.5`
-    (literal `[]`/`{}` syntax) is designed — not pre-published, to avoid vague placeholders.
+  Children: `.1.2.1` (Perl, Channel 1), `.1.2.2` (Rust parity for `.1.2.1`), `.1.2.3` (Channel 2
+    value-position bare-word reads + RHS-shape design/split).
 
 - ID: `SPEC-FORMAT-TERSE.1.2.1`
   Status: `done` (2026-06-24)
@@ -380,6 +382,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     KM card [[terse-bare-working-vars-engine-gaps]] updated (Rust parity + the engine-change contrast with
     `.1.1.2`). **`.1.2.1` is now landed against the universal contract on both variants.**
   Commit: `SPEC-FORMAT-TERSE.1.2.2` (see Commit Log)
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3`
+  Status: `pending`
+  Goal: Channel 2 — value-position bare-word reads and RHS-shape/type inference.
+  Acceptance: Ground the full Channel 2 surface with KM + TOOLBOX/code-read evidence, then either split
+    before code or implement only if the semantics are already coherent at signoff size. The owned surface
+    includes `return(name)`, bare RHS/key/value expressions such as `items += value`, `meta[key] = value`,
+    `array_copy(items)`/`hash_copy(meta)`, bare direct-access path atoms such as `foo["a"][z]`, and any
+    RHS-shape inference for future `[]`/`{}` value syntax. The result must define var-vs-call-vs-literal
+    disambiguation, scalar/array/hash read selection, key-vs-index semantics, Perl reference behavior, and
+    Rust lockstep parity without breaking child-call forms such as all-bare `push(A,B)`.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.1.3`
   Status: `done` (2026-06-29 — mutation surface closed by mechanism. `.1.3.1` audit done;
@@ -832,14 +847,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.5.5.1 — implement direct nested access explicit segments` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.5.2`
-  Status: `pending`
+  Status: `superseded` (2026-06-29 — merged into `SPEC-FORMAT-TERSE.1.2.3`)
   Goal: Bare path-segment / Channel 2 coordination for direct access.
   Acceptance: The full brainstorm spelling `foo["a"][9]["b"][z]` is implemented only after the project has a
     coherent value-position bare-word read model, or this leaf is merged into the future `.1.2.3` Channel 2
     work with explicit task-tree evidence. This leaf must define how bare path atoms choose scalar/array/hash
     reads and key-vs-index semantics without breaking existing child-call and helper-call boundaries.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **SUPERSEDED 2026-06-29.** KM retrieval plus a focused TOOLBOX reverify confirmed the boundary
+    still holds after `.1.5.5.1`: `return(foo["a"][9]["b"][scalar(z)])` lowers to
+    `$foo->{"a"}->[9]->{"b"}->[$z]`, while `return(foo["a"][9]["b"][z])` remains raw
+    `return foo["a"][9]["b"][z]` and `return(z)` remains `return z`. Rust keeps a parser lock rejecting bare
+    direct-access segments as Channel 2-reserved. Therefore implementing `[z]` inside direct access would
+    pre-empt the global value-position bare-word-read model. This leaf is merged into new `.1.2.3`, which owns
+    `return(name)`, bare direct-access path atoms, bare RHS/key expressions, RHS-shape inference, and the
+    Perl/Rust lockstep split.
+  Commit: `SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.6`
   Status: `pending`
@@ -943,10 +965,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.5.4` | `done` 2026-06-29 | Statement separator contract landed: newline-or-semicolon separates top-level canonical DSL statements, same-line multiple statements require `;`, nested semicolons stay protected, and Perl/Rust locks agree. |
 | — | `SPEC-FORMAT-TERSE.1.5.5` | `done` 2026-06-29 | Direct nested access split before code: explicit segment expressions are separable from bare-segment / Channel 2 value-position reads. |
 | — | `SPEC-FORMAT-TERSE.1.5.5.1` | `done` 2026-06-29 | Direct any-depth nested access with explicit path segments (`foo["a"][9]["b"][scalar(z)]`) landed on Perl and Rust. Quoted segments are hash keys; numeric/helper segments are array indexes; bare path atoms stay out of scope. |
-| 1 | `SPEC-FORMAT-TERSE.1.5.5.2` | `pending` | Bare path segments (`[z]`, `[key]`) remain coupled to Channel 2 value-position bare-word reads. |
-| … | `.1.2.3`+ (Channel 2),`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.5` is designed) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
+| — | `SPEC-FORMAT-TERSE.1.5.5.2` | `superseded` 2026-06-29 | Bare direct-access segments are merged into `.1.2.3`; `[z]` must follow the global value-position bare-word-read model, not a direct-access-only rule. |
+| 1 | `SPEC-FORMAT-TERSE.1.2.3` | `pending` | Channel 2 design/split: value-position bare-word reads + RHS-shape/type inference, including `return(name)`, bare RHS/key expressions, and bare direct-access path atoms. |
+| … | `.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.5.5.2` merged into `.1.2.3` Channel 2**). A focused reverify after explicit direct
+  access landed still shows the same boundary: `foo["a"][9]["b"][scalar(z)]` lowers through the canonical
+  dereference path, but `foo["a"][9]["b"][z]` remains raw and `return(z)` remains a bareword. Rust also keeps
+  bare direct-access segments rejected as Channel 2-reserved. Therefore `[z]` cannot be defined locally as a
+  direct-access index rule without pre-empting the broader value-position bare-word-read semantics. The work is
+  merged into new `.1.2.3`, which now owns the Channel 2 design/split across `return(name)`, bare direct path
+  atoms, bare RHS/key expressions, and RHS-shape/type inference.
 
 - `2026-06-29` (**`.1.5.5.1` direct nested access with explicit segments**). The accepted direct-access
   subset is intentionally explicit: `foo["a"][9]["b"][scalar(z)]` is canonical, `foo["a"][9]["b"][z]` is not.
@@ -1288,6 +1319,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.4` | Syntax checks on edited Perl modules/test/generator; TOOLBOX lowerings and runtime probes for newline/semicolon/same-line cases; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core separator tests; focused Rust runtime `.1.5.4` integration test; Rust corpus oracle; full Rust runtime suite; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Newline and semicolon are the statement separators; same-line whitespace is not. Perl `StatementSplit` only implicit-splits across line breaks, `RewritePipeline` emits generated Perl terminators for newline-separated canonical statements, and Bootstrap normalizes fluent attached-control tails with internal newlines. Rust parser/runtime locks enforce the same contract. Phase0 PASS (`1..982`); oracle corpus regenerated with 20 fixtures; focused Rust tests PASS; corpus oracle PASS over 20 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.5` (split) | KM retrieval; TOOLBOX `call_spec_handler_subst` probes comparing direct bracket access against `scalaref(...)`; `LinkedSpec::Get` generated-source/runtime probe for direct access; Perl code-read (`ValueExpr`, `MethodLowering`); Rust code-read (`expr.rs`, `engine.rs`); Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check` | Split `.1.5.5` into `.1.5.5.1` explicit-segment direct access and `.1.5.5.2` bare path-segment / Channel 2 coordination. Direct `foo["a"][9]["b"][scalar(z)]` currently emits invalid Perl-shaped `foo["a"][9]["b"][$z]`, while `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` lowers correctly. Bare segment `z` remains a Channel 2 value-position read problem. No engine/book behavior change, so phase0/cargo/local CI are N/A to the split slice beyond doctrine/memory/KM checks. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.5.1` | TOOLBOX lowerings for direct access vs `scalaref(...)`; generated-source/runtime probe; Perl syntax checks (`ValueExpr.pm`, `MethodLowering.pm`, `EmitContext.pm`, phase0, oracle generator); focused Rust parser/runtime tests; oracle regeneration; Rust corpus oracle; full phase0; full Rust runtime suite; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Direct nested access with explicit path segments landed. Perl lowers `foo["a"][9]["b"][scalar(z)]` to `$foo->{"a"}->[9]->{"b"}->[$z]` and leaves bare `[z]` outside canonical lowering. Rust parses mixed/multi-segment explicit paths as `NestedAccess`, preserves one-level `name[index]` as `IndexedVar`, rejects bare nested path atoms as Channel 2-reserved, and evaluates mixed hash/array paths from the scalar-held base value. Phase0/Rust/oracle/book/KM/memory/doctrine/local gates green. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.5.2` | KM retrieval; TOOLBOX `call_spec_handler_subst` reverify for explicit direct access, bare direct access, `scalaref(...)`, and `return(z)`; Rust focused parser rejection lock `parse_direct_nested_access_rejects_bare_segments`; memory/doctrine/KM checks; `git diff --check` | `.1.5.5.2` is superseded into `.1.2.3`. Reverify shows `foo["a"][9]["b"][z]` and `return(z)` still share the same bare value-position-read gap, while explicit `[scalar(z)]` works. No engine/book behavior changed; the next executable frontier is `.1.2.3`, which owns the global Channel 2 design/split. |
 
 ## Commit Log
 
@@ -1317,8 +1349,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.5.4` | `SPEC-FORMAT-TERSE.1.5.4 — lock statement separators` | Newline-or-semicolon statement separation is locked on Perl and Rust. Same-line multiple statements require `;`; nested semicolons stay protected; fluent attached-control tails keep working through Bootstrap newline normalization. Frontier becomes `.1.5.5`. |
 | `SPEC-FORMAT-TERSE.1.5.5` | `SPEC-FORMAT-TERSE.1.5.5 — split direct access by Channel 2 boundary` | `.1.5.5` is now a container. `.1.5.5.1` owns direct nested access with explicit path segments; `.1.5.5.2` owns the bare path-segment / Channel 2 value-position-read coordination. Frontier becomes `.1.5.5.1`. |
 | `SPEC-FORMAT-TERSE.1.5.5.1` | `SPEC-FORMAT-TERSE.1.5.5.1 — implement direct nested access explicit segments` | Perl and Rust now accept explicit mixed direct access such as `foo["a"][9]["b"][scalar(z)]`; `scalaref(...)` remains accepted; bare path atoms stay deferred to `.1.5.5.2` / Channel 2. Frontier becomes `.1.5.5.2`. |
+| `SPEC-FORMAT-TERSE.1.5.5.2` | `SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2` | No engine/book behavior change. `.1.5.5.2` is superseded into new `.1.2.3` because bare direct-access path atoms share the global value-position bare-word-read model. Frontier becomes `.1.2.3`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.5.5.2` SUPERSEDED/MERGED — bare direct-access path atoms now owned by `.1.2.3`.**
+  KM + TOOLBOX reverify after `.1.5.5.1` confirmed `foo["a"][9]["b"][z]` remains raw while
+  `return(z)` remains a bareword; Rust keeps the parser rejection lock. Implementing `[z]` locally would
+  smuggle Channel 2 into direct access, so the coherent owner is new `.1.2.3` (value-position bare-word reads
+  + RHS-shape/type inference). No engine/book behavior change. Frontier -> `.1.2.3`.
 
 - `2026-06-29`: **`.1.5.5.1` DONE — direct nested access with explicit path segments landed.**
   Perl lowers direct mixed access through the same dereference semantics as `scalaref(...)`: quoted string

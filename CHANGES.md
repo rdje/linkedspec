@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2
+
+**Scope:** task tree, task-tree index, roadmap/live continuity docs, Knowledge Map card + generated map. No
+engine, test fixture, or mdBook behavior change.
+
+**Ground truth:** after explicit direct access landed, TOOLBOX reverify still shows the same Channel 2
+boundary: `return(foo["a"][9]["b"][scalar(z)])` lowers to `$foo->{"a"}->[9]->{"b"}->[$z]`, but
+`return(foo["a"][9]["b"][z])` remains raw and `return(z)` remains a bareword. Rust keeps a focused parser lock
+that rejects bare direct-access segments as Channel 2-reserved.
+
+**Decision:** `.1.5.5.2` is superseded/merged into new `.1.2.3`. Bare direct-access path atoms must be defined
+with the global value-position bare-word-read model, together with bare RHS/key expressions and RHS-shape/type
+inference, instead of as a direct-access-local exception.
+
+**Validation:** TOOLBOX reverify PASS; focused Rust parser rejection lock PASS; Knowledge Map
+regenerate/check PASS; memory/doctrine checks PASS; `git diff --check` PASS. Phase0/Rust runtime/local CI are
+N/A to this docs/tree/KM coordination slice because no behavior changed.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.5.1 — implement direct nested access explicit segments
 
 **Scope:** Perl ActionIR value lowering, Rust action-code expression parser/runtime, Perl/Rust/oracle tests,
