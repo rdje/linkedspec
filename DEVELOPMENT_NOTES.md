@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.3 — call spacing is a grammar lock, not a new call shorthand):
+  Locked the call-spacing contract on Perl and Rust. Durable points. (1) **The call grammar remains
+  `callee(args)`.** Whitespace before `(` is only layout; `set (name, value)` and `set(name, value)` are the
+  same helper call at supported statement/value sites. (2) **Do not use spacing support to smuggle in
+  no-parenthesis calls.** `set name,"v"`, `return scalar name`, and `return(cat "a","b")` stay outside the
+  helper-call surface, preserving room for the statement-separator and Channel 2 designs. (3) **Lock both
+  statement and nested expression sites.** The regression covers return/set, nested `cat`/`scalar`/`array`,
+  operator RHS calls, hash-index key/RHS calls, runtime typed output, and canonical IR metadata. (4) **Rust
+  needed parser/runtime/oracle locks, not a semantic change.** The existing parser already allows whitespace
+  before `(` in call parsing; the new unit/integration/oracle tests freeze that behavior against the Perl
+  reference. Verification: phase0 981, oracle corpus 19 fixtures, focused Rust parser/runtime tests, corpus
+  oracle, mdBook, Knowledge Map, doctrine/memory, and local CI gates.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.5.2 — primitive literals are typed values, not identifiers with special
   prefixes): Landed primitive literal parity on Perl and Rust. Durable points. (1) **Literal recognition must
   be exact.** `true`, `false`, and `undef` are literals; `trueword` and `undefine` are not. This keeps the

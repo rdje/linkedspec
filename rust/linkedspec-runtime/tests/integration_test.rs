@@ -1172,3 +1172,17 @@ fn terse_1_5_2_boolean_literals_work_in_mutations_and_flow() {
         "boolean literals preserve typed values in mutation RHS positions and if(false) selects else"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.1.5.3 — call spacing locks:
+// Calls keep mandatory parentheses, while optional whitespace before `(` is a
+// layout detail at supported statement and value-expression sites.
+
+#[test]
+fn terse_1_5_3_call_spacing_runs_like_tight_calls() {
+    let grammar = "Top::\n /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = scalar (name); return (array(scalar (name), array_copy (array (items)), hash_copy (hash (meta)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["ab", ["cd"], {"stage": "ab"}]]),
+        "optional whitespace before call parentheses preserves runtime values"
+    );
+}

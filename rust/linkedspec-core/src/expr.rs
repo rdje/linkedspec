@@ -735,6 +735,50 @@ mod tests {
     }
 
     #[test]
+    fn parse_call_with_whitespace_before_parentheses() {
+        let code = r#"set (name, cat ("a", "b")); return (scalar (name))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(block.statements.len(), 2);
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "set");
+                assert_eq!(args.len(), 2);
+                match args[1].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "cat");
+                        assert_eq!(args.len(), 2);
+                    }
+                    _ => panic!("expected nested cat call"),
+                }
+            }
+            _ => panic!("expected set call"),
+        }
+        match &block.statements[1].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "scalar");
+                        assert_eq!(args.len(), 1);
+                    }
+                    _ => panic!("expected nested scalar call"),
+                }
+            }
+            _ => panic!("expected return call"),
+        }
+    }
+
+    #[test]
+    fn parse_no_paren_helper_keyword_is_not_single_call() {
+        let code = r#"return cat("a", "b")"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert!(
+            !matches!(&block.statements[0].expr, Expr::Call { name, .. } if name == "return"),
+            "bare `return cat(...)` must not parse as return(cat(...))"
+        );
+    }
+
+    #[test]
     fn parse_keyword_arg() {
         let code = r#"declare(scalar, name=entry_group(1))"#;
         let block = CodeBlock::parse(code).unwrap();

@@ -342,6 +342,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.5.3 — call-spacing locks ──
+    #
+    # Whitespace before the opening parenthesis is accepted at supported call
+    # sites, but the call still keeps its mandatory `callee(args)` shape.
+    {   case   => 'terse_1_5_3_call_spacing',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set (name, cat ("a", "b")); items += cat ("c", "d"); meta[cat ("s", "tage")] = scalar (name); return (array(scalar (name), array_copy (array (items)), hash_copy (hash (meta)))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

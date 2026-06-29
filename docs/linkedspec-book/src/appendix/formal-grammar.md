@@ -385,6 +385,11 @@ undef             — undefined/null
 `true` and `false` are boolean values, not strings. Literal recognition is exact:
 `trueword`, `false_alarm`, and `undefine` are identifiers, not literals.
 
+Helper calls use the uniform `callee(args)` shape. Whitespace between the callee
+name and the opening parenthesis is accepted (`set (name, value)` is the same call
+as `set(name, value)`), but the parentheses are still mandatory; no-parenthesis
+spellings such as `set name, value` or `return scalar name` are not helper calls.
+
 ### 7.1 Declaration Helpers
 ```
 declare(scalar, name)      — declare a scalar working variable

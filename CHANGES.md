@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses
+
+**Scope:** Perl phase0 locks, Rust parser/runtime locks, oracle corpus, mdBook, Knowledge Map, task tree,
+roadmap tracker, and live continuity docs. No production lowerer change was needed: this leaf freezes already
+supported call-spacing behavior and the no-parentheses boundary.
+
+**What changed:** helper calls keep the uniform `callee(args)` grammar. Optional whitespace before the opening
+parenthesis is accepted at supported statement and value-expression sites, including `return (value)`,
+`set (name, value)`, nested helpers such as `cat ("a","b")` and `scalar (name)`, array-append RHS calls, and
+hash-index key/RHS calls.
+
+**Boundary:** the leaf deliberately does not introduce no-parenthesis helper calls. Forms such as
+`set name,"v"`, `return scalar name`, and `return(cat "a","b")` remain outside the helper-call surface. This
+keeps call recognition distinct from the later statement-separator and Channel 2 bare-value-read work.
+
+**Validation:** `env PERL5LIB= prove -q -Iperl t/phase0_regression.t` PASS (`1..981`); oracle corpus
+regenerated with 19 fixtures; focused Rust parser/runtime `.1.5.3` tests PASS; Rust corpus oracle PASS over 19
+fixtures; broader gates recorded in the task tree close-out.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.2 — implement primitive literal parity
 
 **Scope:** Perl ActionIR literal lowering/scanners/legacy push disambiguation, Rust statement-form flow

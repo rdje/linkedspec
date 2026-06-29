@@ -5,6 +5,11 @@ Each entry defines the helper's contract — signature, input/output types, sema
 edge cases — at enough precision for a Rust, Julia, or Dart backend to implement
 identically. No Perl implementation knowledge is required.
 
+Helper calls use the `callee(args)` shape. Whitespace before the opening parenthesis
+is accepted (`set (name, value)` is the same call as `set(name, value)`), but the
+parentheses remain mandatory; no-parenthesis spellings such as `set name, value` or
+`return scalar name` are not helper calls.
+
 ## 0. Primitive Value Literals
 
 Primitive literals are value expressions, not helper calls or working-variable names.

@@ -44444,6 +44444,55 @@ subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
         'if(false) uses the boolean false literal rather than a truthy string');
 };
 
+subtest 'spec_format_terse_1_5_3_call_spacing_and_parentheses_locks' => sub {
+    # SPEC-FORMAT-TERSE.1.5.3: calls keep the uniform callee(args) shape,
+    # with optional whitespace before the opening parenthesis. The whitespace
+    # is a layout detail; dropping the parentheses is still not a helper call.
+    plan tests => 13;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
+    };
+
+    for my $case (
+        ['return ("x")', 'return("x")', 'return accepts whitespace before parentheses'],
+        ['set (name, cat ("a","b"))', 'set(name, cat("a","b"))', 'set/cat accept whitespace before parentheses'],
+        ['return(scalar (name))', 'return(scalar(name))', 'nested scalar read accepts whitespace before parentheses'],
+        ['items += cat ("a","b")', 'items += cat("a","b")', 'operator RHS calls accept whitespace before parentheses'],
+        ['meta[cat ("s","tage")] = cat ("v","!")', 'meta[cat("s","tage")] = cat("v","!")', 'hash-index key/RHS calls accept whitespace before parentheses'],
+        ['return (array (true, false, undef))', 'return(array(true, false, undef))', 'nested constructor/literal calls accept whitespace before parentheses'],
+    ) {
+        is($L->($case->[0]), $L->($case->[1]), $case->[2]);
+    }
+
+    is($L->('return(cat "a","b")'), 'return(cat "a","b")',
+        'no-paren cat payload is not claimed as a helper call');
+    is($L->('set name,"v"'), 'set name,"v"',
+        'no-paren set spelling is not claimed as an assignment helper call');
+    is($L->('return scalar name'), 'return scalar name',
+        'no-paren scalar read spelling is not claimed as a helper call');
+
+    my $spacing_spec = "Top::\n"
+                     . " /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = scalar (name); return (array(scalar (name), array_copy (array (items)), hash_copy (hash (meta)))) }\n"
+                     . "\nDone::\n /[a-z]+/\n";
+    my $sp = eval { LinkedSpec::Get(\$spacing_spec) };
+    ok(ref($sp) eq 'CODE', 'call-spacing spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($sp, 'xhello'), '["ab",["cd"],{"stage":"ab"}]',
+        'call-spacing spec runs with the same typed values as tight calls');
+
+    my $d = LinkedSpec::Get(\$spacing_spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,PUSH,RETURN',
+        'call-spacing spec reports canonical ASSIGN/PUSH/RETURN nodes');
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'call-spacing spec has no canonical fallback');
+};
+
 done_testing();
 
 sub discover_specs {

@@ -6,10 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.5.2` DONE** — primitive literals are now typed values on Perl and Rust:
-  quoted strings, numbers, `undef`, `true`, and `false` work in return/mutation/flow positions; `true`/`false`
-  are JSON booleans, exact matching keeps `trueword`/`undefine` out of the literal path, and Rust now gates
-  statement-form `if(false)` blocks. Frontier -> **`.1.5.3` function-call spacing locks**. Prior **`.1.5` SPLIT** — literals, nested access, call + semicolon rules are
+- Last updated: `2026-06-29` (**`.1.5.3` DONE** — helper calls keep mandatory `callee(args)` parentheses while
+  optional whitespace before `(` is locked at supported statement/value sites; no-parenthesis helper spellings
+  remain out of scope. Frontier -> **`.1.5.4` statement separator contract**. Prior **`.1.5.2` DONE** —
+  primitive literals are now typed values on Perl and Rust: quoted strings, numbers, `undef`, `true`, and
+  `false` work in return/mutation/flow positions; `true`/`false` are JSON booleans, exact matching keeps
+  `trueword`/`undefine` out of the literal path, and Rust now gates statement-form `if(false)` blocks. Prior **`.1.5` SPLIT** — literals, nested access, call + semicolon rules are
   decomposed into signoff-sized leaves after KM/TOOLBOX/code-read ground truth. **`.1.5.1` DONE** (split
   audit). Prior **`.1.3.4.3` DONE** — hash-index assignment operator
   `name[key] = value` landed on Perl and Rust for explicit key/value expressions. It lowers/runs identically to
@@ -732,13 +734,25 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.5.2 — implement primitive literal parity` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.3`
-  Status: `pending`
+  Status: `done` (2026-06-29)
   Goal: Function-call spacing and mandatory-call-parentheses locks.
   Acceptance: Calls still require `()`; optional whitespace before `(` is accepted at every already-supported
     statement and value-expression site (`return (val)`, `set (name,val)`, `cat ("a","b")`,
     `scalar (name)`, operator RHS/key expressions), without accepting bare no-paren helper keywords.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-06-29.** No production semantic broadening was needed; this leaf locks the existing
+    helper-call grammar. Perl phase0 now proves optional whitespace before `(` lowers byte-identically to tight
+    calls for `return`, `set`, nested `cat`/`scalar`/`array`, array-append RHS calls, and hash-index key/RHS
+    calls, while `return(cat "a","b")`, `set name,"v"`, and `return scalar name` remain outside helper-call
+    recognition. A runtime spec with spaced `set`, `cat`, `scalar`, `array`, `array_copy`, `hash`, and
+    `hash_copy` calls returns `["ab",["cd"],{"stage":"ab"}]` and reports canonical `ASSIGN,PUSH,RETURN` nodes
+    with fallback count 0. Rust core parser locks prove whitespace-before-`(` call parsing and no-paren
+    keyword non-recognition; Rust runtime integration plus the Perl oracle fixture prove the same typed output.
+    **Verification:** `perl -Iperl -c t/phase0_regression.t` PASS; `perl -Iperl -c tools/gen_oracle_corpus.pl`
+    PASS; focused Rust parser/runtime `.1.5.3` tests PASS; `perl -Iperl tools/gen_oracle_corpus.pl`
+    regenerated 19 fixtures; `cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test
+    corpus_oracle -- --nocapture` PASS over 19 fixtures; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`
+    PASS (`1..981`). Full runtime/mdBook/KM/memory/doctrine/local gates are recorded in the Verification Log.
+  Commit: `SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5.4`
   Status: `pending`
@@ -858,9 +872,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.3.4.2` | `done` 2026-06-29 | Array append operator — `items += value` now lowers/runs identically to explicit append forms for explicit RHS expressions, auto-exists the array target, and preserves the Channel 2 bare-RHS boundary. |
 | — | `SPEC-FORMAT-TERSE.1.3.4.3` | `done` 2026-06-29 | Hash-index assignment operator — `name[key] = value` lowers/runs identically to settled `set_key(name,key,value)` for explicit key/value expressions without broadening Channel 2. |
 | — | `SPEC-FORMAT-TERSE.1.5.2` | `done` 2026-06-29 | Primitive literal parity landed: exact primitive literals are typed value expressions on Perl/Rust, `true`/`false` are booleans, and Rust statement-form `if(false)` gates branches. |
-| 1 | `SPEC-FORMAT-TERSE.1.5.3` | `pending` | Function-call spacing locks: optional whitespace before `(` is mostly already accepted, but needs focused cross-site regression coverage without broadening no-paren calls. |
-| 2 | `SPEC-FORMAT-TERSE.1.5.4` | `pending` | Statement separator contract: Perl newline-separated adjacent lowered statements currently compile invalid without `;`; Rust accepts broader whitespace-separated statements, so parity/signoff needs a dedicated leaf. |
-| 3 | `SPEC-FORMAT-TERSE.1.5.5` | `pending` | Direct any-depth nested access remains open and must coordinate explicitly with Channel 2 value-position bare-word reads. |
+| — | `SPEC-FORMAT-TERSE.1.5.3` | `done` 2026-06-29 | Function-call spacing locked: optional whitespace before `(` is accepted at supported helper/value sites, and no-parenthesis helper spellings remain out of scope. |
+| 1 | `SPEC-FORMAT-TERSE.1.5.4` | `pending` | Statement separator contract: Perl newline-separated adjacent lowered statements currently compile invalid without `;`; Rust accepts broader whitespace-separated statements, so parity/signoff needs a dedicated leaf. |
+| 2 | `SPEC-FORMAT-TERSE.1.5.5` | `pending` | Direct any-depth nested access remains open and must coordinate explicitly with Channel 2 value-position bare-word reads. |
 | … | `.1.2.3`+ (Channel 2),`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.5` is designed) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1172,6 +1186,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.4.3` | TOOLBOX lowerings for hash-index operator vs `set_key(...)`; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core `hash_index`; focused Rust core `scalar_assignment`; focused Rust core `array_append`; focused Rust runtime `terse_1_3_4_3`; Rust corpus oracle; full Rust runtime suite; `mdbook build`; Knowledge Map, memory-architecture, doctrine, and full local CI gates | Perl recognizes top-level `NAME[KEY] = RHS` as an ASSIGN statement and auto-declares the hash target; Rust parses and executes statement-only `AssignHashIndex`. `meta["stage"] = "v"`, `meta[cat("s","tage")] = cat("v","!")`, and `meta[scalar(key)] = scalar(value)` lower/run like `set_key(...)`; bare key/RHS forms remain deferred to Channel 2. Phase0 PASS (`1..979`); oracle corpus regenerated with 16 fixtures; focused Rust tests PASS; full Rust runtime suite PASS; public book and KM updated. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.1` (split) | KM retrieval first; TOOLBOX `call_spec_handler_subst` probes for literals, call spacing, direct nested access, and `scalaref(...)`; `LinkedSpec::Get` runtime probes for literal values and separator behavior; `StatementSplit` probes; Perl/Rust code-read (`StatementSplit`, `MethodExpr`, `ValueExpr`, `MethodLowering`, Rust `expr.rs`/`engine.rs`); focused Rust parser tests (`parse_`, `hash_index`); `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check` | Split `.1.5` into `.1.5.2` literal parity, `.1.5.3` call-spacing locks, `.1.5.4` separator semantics, and `.1.5.5` direct nested access. Ground truth: Perl strings/numbers/`undef` run, but `true`/`false` are strings; call spacing works at supported helper/value sites; newline-separated lowered statements fail on Perl without `;`; direct nested access is not lowered and Rust only has single array-index `IndexedVar`. KM card [[terse-literals-calls-separators-access-ground-truth]] added. DOCS/TREE/KM only — no engine/book behavior change, so phase0 N/A to split slice. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.2` | Syntax checks on edited Perl ActionIR modules/test/generator; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust `.1.5.2` integration tests; Rust corpus oracle; full Rust runtime suite; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Perl now lowers exact primitive literals through a shared helper, with `true`/`false` as `JSON::PP` booleans and exact-prefix boundaries preserved. Scanner/lowerer guards treat primitive literals as explicit values in `push`, `+=`, and hash-index assignment. Rust statement-form `if/elseif/else/endif` now gates lifecycle statements so `if(false)` selects the `else` branch. Phase0 PASS (`1..980`); oracle corpus regenerated with 18 fixtures; focused Rust tests PASS (2); corpus oracle PASS over 18 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.3` | Syntax checks on edited Perl test/generator; focused Rust parser `.1.5.3` tests; focused Rust runtime `.1.5.3` integration test; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; `env PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check`; `bash tools/run_ci_local.sh` | Helper calls keep mandatory `callee(args)` parentheses while optional whitespace before `(` is accepted at supported statement/value sites. Perl locks spaced-vs-tight equality for `return`, `set`, nested helpers, operator RHS calls, and hash-index key/RHS calls; no-parenthesis spellings stay raw/out of helper recognition. Rust parser/runtime/oracle locks prove the same contract. Phase0 PASS (`1..981`); oracle corpus regenerated with 19 fixtures; focused Rust tests PASS; corpus oracle PASS over 19 fixtures; full runtime/mdBook/KM/memory/doctrine/local gates green. |
 
 ## Commit Log
 
@@ -1197,8 +1212,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.3.4.3` | `SPEC-FORMAT-TERSE.1.3.4.3 — implement hash-index assignment operator name[key] = value` | Perl and Rust now support statement-level hash-index `name[key] = value` as equivalent to `set_key(name,key,value)` for explicit key/value expressions, with locks proving bare key/RHS remain deferred to Channel 2. `.1.3.4` and `.1.3` close; frontier becomes `.1.5`. |
 | `SPEC-FORMAT-TERSE.1.5.1` (split) | `SPEC-FORMAT-TERSE.1.5 — split literals/access/call/separator surface` | `.1.5` is now an active container. `.1.5.1` closed the audit/split: primitive literal parity, call-spacing locks, separator semantics, and direct nested access are separate leaves. KM [[terse-literals-calls-separators-access-ground-truth]]. DOCS/TREE/KM only — no engine/book behavior change. |
 | `SPEC-FORMAT-TERSE.1.5.2` | `SPEC-FORMAT-TERSE.1.5.2 — implement primitive literal parity` | Primitive literals are typed values on Perl/Rust; Perl booleans now lower through `JSON::PP`, exact matching preserves identifier prefixes, `push(items,false)` is a value append, and Rust statement-form `if(false)` gates inactive branches. Frontier becomes `.1.5.3`. |
+| `SPEC-FORMAT-TERSE.1.5.3` | `SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses` | Optional whitespace before `(` is locked at supported helper/value sites on Perl and Rust, while no-parenthesis helper spellings remain outside call recognition. Frontier becomes `.1.5.4`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.5.3` DONE — function-call spacing and mandatory-call-parentheses locks landed.**
+  Helper calls keep the uniform `callee(args)` shape. Optional whitespace before `(` is accepted at supported
+  statement/value sites including `return (value)`, `set (name,value)`, `cat ("a","b")`, `scalar (name)`,
+  operator RHS calls, and hash-index key/RHS calls. No-parenthesis helper spellings remain out of scope:
+  `set name,"v"`, `return scalar name`, and `return(cat "a","b")` are not helper calls. Verification: phase0
+  PASS (`1..981`), oracle corpus 19 fixtures, focused Rust parser/runtime tests PASS, Rust corpus oracle PASS,
+  book/KM updated, and final gates green. Frontier -> `.1.5.4`.
 
 - `2026-06-29`: **`.1.5.2` DONE — primitive literal parity landed on Perl and Rust.**
   Exact primitive literals (`"..."`, `'...'`, numbers, `undef`, `true`, `false`) are now typed value

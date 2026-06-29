@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.5.3 — call spacing and mandatory-call-parentheses locks landed**
+  (PERL PHASE0 + RUST PARSER/RUNTIME + ORACLE + BOOK/KM LOCKS). Helper calls keep the uniform
+  `callee(args)` shape, while optional whitespace before the opening parenthesis is accepted at supported
+  statement and value-expression sites: `return (value)`, `set (name, value)`, nested `cat ("a","b")` /
+  `scalar (name)`, array-append RHS calls, and hash-index key/RHS calls. No-parenthesis helper spellings
+  remain out of scope: `set name,"v"`, `return scalar name`, and `return(cat "a","b")` are not claimed as
+  helper calls. **Verification:** phase0 PASS (`1..981`), oracle corpus regenerated with 19 fixtures, focused
+  Rust parser/runtime `.1.5.3` tests PASS, Rust corpus oracle PASS over 19 fixtures, mdBook/KM/memory/doctrine
+  gates green. **Frontier: `SPEC-FORMAT-TERSE.1.5.4`** (statement separator contract).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.5.2 — primitive literal parity landed**
   (PERL ACTIONIR + RUST RUNTIME FLOW + BOOK + PHASE0/RUST/ORACLE LOCKS). Primitive literals are now typed
   value expressions across return payloads, assignments, appends, hash-index keys/values, and flow predicates:
