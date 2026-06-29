@@ -31,6 +31,7 @@ sub default_deps_for_package {
   [
    'lower_return_general_statement',
    'lower_assign_method_statement',
+   'lower_set_key_statement',
    'lower_push_value_statement',
    'lower_push_nonempty_statement',
    'lower_regex_subst_statement',
@@ -66,6 +67,7 @@ sub _require_lowering_deps {
  return {
   lower_return_general_statement => $require_dep->('lower_return_general_statement'),
   lower_assign_method_statement  => $require_dep->('lower_assign_method_statement'),
+  lower_set_key_statement        => $require_dep->('lower_set_key_statement'),
   lower_push_value_statement     => $require_dep->('lower_push_value_statement'),
   lower_push_nonempty_statement  => $require_dep->('lower_push_nonempty_statement'),
   lower_regex_subst_statement    => $require_dep->('lower_regex_subst_statement'),
@@ -1759,6 +1761,17 @@ sub _build_assignment_and_regex_contracts {
     my $lower = $d->{lower_assign_method_statement};
     $code =~ s/\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
+   },
+  },
+  {
+   id                 => 'set_key_statement',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'set_key',
+   unresolved_pattern => qr/^\s*set_key\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_set_key_statement};
+    return $lower->($code) || $code
    },
   },
   {

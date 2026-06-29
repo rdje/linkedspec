@@ -55,6 +55,12 @@ HashMap then auto-vivifies it. Scoped to the Channel-1 target positions via an `
 `terse_1_2_2_*` integration tests; cargo 248→252 green, clippy zero-new, phase0 971 (Perl untouched), gate
 EXIT 0. The `.1.2.1` change is now landed against the universal contract on both variants.
 
+**Update 2026-06-29 (`SPEC-FORMAT-TERSE.1.3.3`):** the specific bare **hash target** case now has a clean
+type-implying statement position: `set_key(NAME, key, value)` mutates working hash `NAME` and auto-supplies
+`my %NAME` on Perl; Rust mirrors it with a top-level statement handler. This does not close Channel 2
+value-position reads: `return(name)` is still a bareword/scalar ambiguity, and bare hash value reads still need
+the later Channel 2 / literal-shape work.
+
 ## The three behaviors (dump-don't-guess)
 
 A working variable referenced **only through a wrapper** is the `.1.1.1` path and already works. The

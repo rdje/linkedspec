@@ -89,7 +89,7 @@ Write values into declared variables or containers:
 - `push(container, value)` — append to an array
 - `push_value(array(name), value)` — named-array push
 - `push_nonempty(array(name), value)` — push only if value is defined and non-empty
-- `set_key(hash(name), key, value)` — set a hash key
+- `set_key(name, key, value)` — set one key in a named working hash
 
 ### Capture and mark helpers
 

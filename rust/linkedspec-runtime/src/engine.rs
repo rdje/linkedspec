@@ -456,9 +456,56 @@ impl Engine {
         rule_label: &str,
     ) -> Result<(), String> {
         for stmt in &block.statements {
+            if self.execute_set_key_statement(&stmt.expr, ctx, rule_label)? {
+                continue;
+            }
             self.eval_expr(&stmt.expr, ctx, rule_label)?;
         }
         Ok(())
+    }
+
+    /// Execute the top-level mutation form `set_key(target, key, value)`.
+    ///
+    /// Nested `set_key(hash_expr, key, value)` remains a pure hash-valued
+    /// expression in `call_helper`; only a lifecycle statement whose first
+    /// argument names a hash target mutates the runtime hash.
+    fn execute_set_key_statement(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+        let Expr::Call { name, args } = expr else {
+            return Ok(false);
+        };
+        if name != "set_key" {
+            return Ok(false);
+        }
+
+        let effective_args: &[Arg] = if args.len() == 4 {
+            match args.first() {
+                Some(Arg::Positional(Expr::Variable { .. })) => &args[1..],
+                _ => args,
+            }
+        } else {
+            args
+        };
+        if effective_args.len() != 3 {
+            return Ok(false);
+        }
+
+        let hash_name = self.resolve_hash_target(effective_args, &RuntimeValue::Undef, true);
+        if hash_name.is_empty() {
+            return Ok(false);
+        }
+
+        let key = self
+            .eval_expr(effective_args[1].value(), ctx, rule_label)?
+            .to_str();
+        let value = self.eval_expr(effective_args[2].value(), ctx, rule_label)?;
+        ctx.set_hash_entry(&hash_name, &key, value);
+        Ok(true)
     }
 
     /// Evaluate an expression tree against the runtime context.

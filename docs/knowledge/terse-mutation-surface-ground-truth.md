@@ -1,6 +1,6 @@
 ---
 id: terse-mutation-surface-ground-truth
-title: "SPEC-FORMAT-TERSE.1.3 ground truth — mutation surface is split by mechanism. Scalar function form `set(name,val)` is already satisfied by .1.4; array explicit append now accepts `push(target,value)` for unambiguous/non-all-bare values while all-bare `push(A,B)` remains the child-call form; `set_key(name,k,v)` is a pure hash value expression in Perl paths, not a standalone mutation statement, and Rust only updates if arg0 is already a hash; operator forms `name = val`, `items += val`, `name[\"k\"] = val` pass through as raw/invalid Perl and Rust has no assignment statement AST."
+title: "SPEC-FORMAT-TERSE.1.3 ground truth — mutation surface is split by mechanism. Scalar function form `set(name,val)` is already satisfied by .1.4; array explicit append accepts `push(target,value)` for unambiguous/non-all-bare values while all-bare `push(A,B)` remains the child-call form; hash mutation `set_key(name,k,v)` is now a statement-level named-hash mutation (.1.3.3) while value-form `set_key(hash_expr,k,v)` remains pure; operator forms `name = val`, `items += val`, `name[\"k\"] = val` pass through as raw/invalid Perl and Rust has no assignment statement AST."
 answers:
   - "does SPEC-FORMAT-TERSE.1.3 fit in one implementation slice"
   - "does set(name, val) already work as scalar mutation"
@@ -13,8 +13,8 @@ answers:
 date: 2026-06-29
 status: confirmed
 tags: [engine, dsl, mutation, operators, aliases, spec-format-terse, SPEC-FORMAT-TERSE, actionir, rust, parser]
-evidence: "TOOLBOX probes 2026-06-29 (`perl -Iperl -MLinkedSpec`, `call_spec_handler_subst`, `LinkedSpec::Get` descriptor/runtime specs, `dump_parser_source`). Perl lowering after `.1.3.2`: `set(name,\"ok\")` and `assign(name,\"ok\")` both -> `$name = \"ok\"`; `push_value(items,\"a\")` and `push(items,\"a\")` both -> `push @items, \"a\"`; `push(items,scalar(v))` -> `push @items, $v`; `push(items,cat(\"a\",\"b\"))` lowers through the concat do-block and source-dumps with exactly one `my @items`; all-bare `push(items,value)`, `push(Leaf,items)`, `push(Leaf,1)`, and `push(Leaf,items,1)` remain child-call lowerings. `set_key(name,\"k\",\"v\")` alone passes through statement lowering; `assign(hash(name), set_key(hash(name),\"k\",\"v\"))` lowers to `%name = (...)`; operators `name = \"ok\"`, `items += \"a\"`, `name[\"k\"] = \"v\"` pass through unchanged. Runtime: bare `set` returns `\"ok\"`; explicit append `push(items,\"a\"); push(items,scalar(label))` returns `[\"a\",\"b\"]`; `return(set_key(name,\"k\",\"v\"))` returns `{k=>v}` as a pure value, while wrapped assignment returns the same as mutation. Rust code-read: `rust/linkedspec-core/src/expr.rs` grammar is `stmt -> expr`, `expr -> primary ('.' method_call)*`, with calls/variables/indexed vars/literals/fluent chains only; no Assign/PlusEq statement node. Runtime `Engine::call_helper()` has `\"push_value\" | \"push\"` alias and `set_key` only changes when arg0 is `RuntimeValue::Hash`."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{assign(name,\"ok\")},q{push_value(items,\"a\")},q{push(items,\"a\")},q{push(items,scalar(v))},q{push(items,value)},q{push(Leaf,items)},q{set_key(name,\"k\",\"v\")},q{name = \"ok\"},q{items += \"a\"},q{name[\"k\"] = \"v\"}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$expr); $out =~ s/\\n/\\\\n/g; print \"$expr => $out\\n\" }' && rg -n 'stmt +→ expr|enum Expr|\"push_value\" \\| \"push\"|\"set_key\"' rust/linkedspec-core/src/expr.rs rust/linkedspec-runtime/src/engine.rs"
+evidence: "TOOLBOX probes 2026-06-29 (`perl -Iperl -MLinkedSpec`, `call_spec_handler_subst`, `LinkedSpec::Get` descriptor/runtime specs, `dump_parser_source`). Perl after `.1.3.3`: `set_key(meta,\"stage\",cat(\"a\",\"b\"))` lowers to `$meta{\"stage\"} = ...`, reports canonical ASSIGN, source-dumps with exactly one preamble `my %meta`, and runtime returns `{stage:\"ab\"}` stably across same-parser reruns. Nested `set_key(hash(meta),\"stage\",\"v\")` still lowers to the pure copy-valued helper; a lock proves it returns a copy without mutating `meta`. Rust after `.1.3.3`: `Engine::execute_block()` recognizes a top-level `set_key(...)` statement whose first arg names a hash target, calls `RuntimeContext::set_hash_entry`, and leaves nested `set_key(hash_expr,...)` in `call_helper()` pure. Oracle fixture `terse_1_3_3_set_key_statement_hash` passes. Earlier `.1.3.2`: `push(target,value)` lowers/runs like `push_value` only for unambiguous/non-all-bare value expressions; all-bare `push(A,B)` remains child-call. Operators `name = \"ok\"`, `items += \"a\"`, `name[\"k\"] = \"v\"` still pass through unchanged; Rust's `CodeBlock` AST still has no assignment or plus-equals statement variants."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{assign(name,\"ok\")},q{push_value(items,\"a\")},q{push(items,\"a\")},q{push(items,scalar(v))},q{push(items,value)},q{push(Leaf,items)},q{set_key(meta,\"stage\",cat(\"a\",\"b\"))},q{return(set_key(hash(meta),\"stage\",\"v\"))},q{name = \"ok\"},q{items += \"a\"},q{name[\"k\"] = \"v\"}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$expr); $out =~ s/\\n/\\\\n/g; print \"$expr => $out\\n\" }' && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_3_3 && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle"
 ---
 
 # `.1.3` mutation-surface ground truth
@@ -33,11 +33,12 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{assi
   The disambiguation is deliberately conservative: all-bare `push(A,B)` remains a child-call spelling
   (`A` rule into accumulator `B`). To append a bare working-variable value, use `push(items, scalar(value))`
   or `push_value(items, value)` until Channel 2 bare value-position reads land.
-- **Hash `set_key(name,key,value)` is not a settled mutation statement.** Perl can lower it as a pure
-  hash-valued expression in return/source positions, because the hash symbol extractor accepts a bare name.
-  But `set_key(name,...)` alone does not lower as a statement, and it does not by itself store back into a
-  working hash. Rust `set_key` only updates when arg0 is already a `RuntimeValue::Hash`; a bare variable does
-  not provide that today.
+- **Hash `set_key(name,key,value)` is now a settled mutation statement.** `.1.3.3` added a statement-level
+  ASSIGN contract: top-level `set_key(meta, key, value)` mutates working hash `meta` and auto-supplies
+  `my %meta` on the Perl reference; Rust mirrors it in `Engine::execute_block()` by mutating the named hash
+  before normal expression evaluation. The value-form helper remains pure: nested
+  `set_key(hash(meta), key, value)` returns a copied hash and leaves `meta` unchanged unless the caller stores
+  the returned value.
 - **Operator spellings are new syntax.** `name = value`, `items += value`, and `name["k"] = value` pass through
   `call_spec_handler_subst` unchanged and compile as invalid/raw Perl. Rust's `CodeBlock` AST has no assignment
   or plus-equals statement variants; it parses lifecycle code as expression statements only.
@@ -49,5 +50,5 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{assi
 - `.1.3.1` audits and closes the scalar function form already delivered by `.1.4`.
 - `.1.3.2` resolved the `push(name,value)` vs `push(rule,target)` collision with conservative child-call
   precedence.
-- `.1.3.3` defines hash mutation semantics without breaking pure `set_key(hash_expr,...)`.
+- `.1.3.3` closed hash mutation semantics without breaking pure `set_key(hash_expr,...)`.
 - `.1.3.4` owns operator syntax after the function forms are settled.

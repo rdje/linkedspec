@@ -302,6 +302,11 @@ sub _lower_assign_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_assign_statement', @args)
 }
 
+sub _lower_set_key_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_set_key_statement', @args)
+}
+
 sub _lower_method_value_expr {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_method_value_expr', @args)
@@ -784,14 +789,15 @@ sub _mask_action_code_literals {
 #                 a single bare-identifier argument (NOT the 2-arg scalar(container,key)
 #                 read, which has a comma). Sigil taken from the wrapper.
 #             (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE (un-wrapped) names in a
-#                 type-implying helper arg position: the scalar target of
-#                 assign(NAME, ...) and the array target of push_value(NAME, ...) /
-#                 push(NAME, nonbare-value) / push_nonempty(NAME, ...). Such a bare name already LOWERS to the
+  #                 type-implying helper arg position: the scalar target of
+  #                 assign(NAME, ...), the hash target of statement-level
+  #                 set_key(NAME, KEY, VALUE), and the array target of push_value(NAME, ...) /
+  #                 push(NAME, nonbare-value) / push_nonempty(NAME, ...). Such a bare name already LOWERS to the
 #                 correctly-sigil'd variable but otherwise gets no `my` (leaky global).
 #                 Sigil implied by the position ($ for assign, @ for the push family).
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
-#                 (all-bare child-call shape) and the bare hash target
-#                 (value-position read — Channel 2) are deliberately NOT collected here.
+  #                 (all-bare child-call shape) and bare hash value-position reads
+  #                 are deliberately NOT collected here.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -849,6 +855,17 @@ sub _collect_auto_working_var_decls {
   }
   while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('@', $1);   # push_value / push_nonempty target lowers to an array
+  }
+  foreach my $statement (@{_split_action_ir_statements($block)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   my $call = _parse_method_function_expr($trimmed);
+   next unless $call && ($call->{method} // '') eq 'set_key';
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 3, 3);
+   next unless $args;
+   my $target_expr = _trim_action_ir_value($args->[0]);
+   next unless defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   $record->('%', $target_expr);
   }
   while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});

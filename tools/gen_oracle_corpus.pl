@@ -253,6 +253,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.3.3 — hash mutation statement spelling ──
+    #
+    # `set_key(target, key, value)` is a top-level mutation statement when the
+    # first argument names a hash target. The pure hash-valued
+    # `set_key(hash_expr, key, value)` helper remains a value expression.
+    {   case   => 'terse_1_3_3_set_key_statement_hash',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set_key(meta, "stage", cat("a", "b")); return(hash_copy(hash(meta))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

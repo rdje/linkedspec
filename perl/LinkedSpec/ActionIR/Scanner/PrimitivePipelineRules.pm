@@ -18,6 +18,7 @@ sub try_scan_contract_ir_events {
   'push_value' => \&_scan_contract_push_value,
   'push_nonempty' => \&_scan_contract_push_nonempty,
   'assign_value' => \&_scan_contract_assign_value,
+  'set_key_statement' => \&_scan_contract_set_key_statement,
   'regex_subst' => \&_scan_contract_regex_subst,
   'split_array' => \&_scan_contract_split_array,
   'split_each' => \&_scan_contract_split_each,
@@ -139,6 +140,37 @@ while ($code =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.
   args => {
    target => _trim_action_ir_value($effective_args->[0]),
    source => _trim_action_ir_value($effective_args->[1]),
+  },
+ };
+}
+ return \@events
+}
+
+sub _scan_contract_set_key_statement {
+ my ($code) = @_;
+ my @events;
+foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $trimmed = _trim_action_ir_value($statement);
+ next unless defined($trimmed) && length($trimmed);
+ my $call = _parse_method_function_expr($trimmed);
+ next unless $call && $call->{method} eq 'set_key';
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 3, 3);
+ next unless $effective_args;
+ my $target_expr = _trim_action_ir_value($effective_args->[0]);
+ my $key_expr = _trim_action_ir_value($effective_args->[1]);
+ my $value_expr = _trim_action_ir_value($effective_args->[2]);
+ next unless defined($target_expr) && length($target_expr);
+ my ($target_symbol) = $target_expr =~ /^(?:hash|h)\s*\(\s*(\w+)\s*\)$/o;
+ if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
+  $target_symbol = $1;
+ }
+ next unless defined($target_symbol) && length($target_symbol);
+ push @events, {
+  raw => $trimmed,
+  args => {
+   target => $target_symbol,
+   key    => $key_expr,
+   value  => $value_expr,
   },
  };
 }

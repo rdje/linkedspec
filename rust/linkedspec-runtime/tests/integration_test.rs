@@ -967,6 +967,35 @@ fn terse_1_3_2_push_alias_matches_push_value() {
 }
 
 #[test]
+fn terse_1_3_3_set_key_statement_mutates_hash() {
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"stage\", cat(\"a\", \"b\")); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let engine = Engine::new(compile(&spec).expect("compile"));
+    let r1 = engine.execute("xhello").expect("run1");
+    let r2 = engine.execute("xhello").expect("run2");
+    assert_eq!(
+        r1,
+        serde_json::json!([{"stage": "ab"}]),
+        "set_key(meta, key, value) mutates a no-declare hash target"
+    );
+    assert_eq!(
+        r1, r2,
+        "set_key hash target state is per parse, not leaked between executions"
+    );
+}
+
+#[test]
+fn terse_1_3_3_set_key_value_helper_stays_pure_copy() {
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"existing\", \"old\"); set(snapshot, set_key(hash(meta), \"stage\", \"v\")); return(array(hash_copy(hash(meta)), scalar(snapshot))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[{"existing": "old"}, {"existing": "old", "stage": "v"}]]),
+        "nested set_key(hash(meta), key, value) returns a copied hash and does not mutate meta"
+    );
+}
+
+#[test]
 fn terse_1_4_2_set_target_is_per_parse_not_leaky() {
     let grammar = "Top::\n /x/ -> Done { set(v, cat(\"o\", \"k\")); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");

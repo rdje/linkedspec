@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.3.3 — hash function mutation `set_key(name,key,value)` landed while
+  preserving pure `set_key(hash_expr,key,value)`** (PERL ACTIONIR + RUST ENGINE + BOOK + PHASE0/RUST/ORACLE
+  LOCKS). Top-level `set_key(name,key,value)` is now a statement-level named-hash mutation: Perl lowers it to
+  direct `$name{key} = value` assignment and auto-supplies one preamble `my %name` for a bare target; Rust
+  handles top-level `set_key(...)` before generic expression evaluation and mutates the named runtime hash.
+  Nested/value-form `set_key(hash(meta), key, value)` remains a pure copy helper and is locked not to mutate the
+  source hash. Added the `set_key_statement` ASSIGN contract/scanner/lowering path, EmitContext bare-hash
+  collector coverage, Rust `execute_set_key_statement`, +1 phase0 subtest, 2 Rust integration tests, oracle
+  fixture `terse_1_3_3_set_key_statement_hash`, book updates, and KM updates. **Verification:** TOOLBOX
+  lowerings distinguish mutation vs pure value form; descriptor/source/runtime probes show ASSIGN recognition,
+  one `my %meta`, same-parser stability, and non-mutating nested pure behavior; phase0 PASS (976); focused Rust
+  `terse_1_3_3` PASS; corpus oracle PASS over 13 fixtures; mdBook build EXIT 0; Knowledge Map +
+  memory-architecture + doctrine checks OK; full local gate EXIT 0. **Frontier:
+  `SPEC-FORMAT-TERSE.1.3.4`** (operator syntax family).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.3.2 — array function spelling `push(target,value)` landed while preserving
   child-call `push(...)`** (PERL ACTIONIR + BOOK + PHASE0 LOCKS + RUST ORACLE/INTEGRATION LOCKS; **no Rust
   engine change**). Selected conservative disambiguation: `push(target,value)` lowers/runs like

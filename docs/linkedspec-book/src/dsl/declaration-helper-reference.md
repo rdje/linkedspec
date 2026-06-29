@@ -462,13 +462,13 @@ Token::AND
  /[A-Za-z_]+/
  -> Token[0] {
    assign(scalar(text), lowercase(trim(entry_text())));
-   assign(hash(meta), set_key(hash(meta), "text", scalar(text)));
-   assign(hash(meta), set_key(hash(meta), "text_length", length(scalar(text))));
+   set_key(meta, "text", scalar(text));
+   set_key(meta, "text_length", length(scalar(text)));
    return(hash_copy(hash(meta)));
  }
 ```
 
-The hash initializer states the always-present metadata. The later `assign(hash(meta), set_key(...))` statements state the branch-local updates.
+The hash initializer states the always-present metadata. The later `set_key(meta, ...)` statements state the branch-local updates.
 
 ## Worked example: dense initializer moved to assignment
 

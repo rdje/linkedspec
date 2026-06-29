@@ -437,6 +437,7 @@ identically. No Perl implementation knowledge is required.
 - **Signature**: `set_key(h: hash, key: string, value: expr)`
 - **Returns**: hash
 - **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input.
+- **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly.
 
 ### `rename_key(h, old, new)`
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
@@ -911,7 +912,7 @@ Every helper can be used in both structured-block form (`I { declare(...) }`) an
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers.
+Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement helpers such as `set_key(name, key, value)` are the explicit mutation forms.
 
 ### Terse Helper Renames (canonical going forward)
 The `.spec` format is migrating to terser helper names (terse-format direction). For these three

@@ -139,7 +139,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying argument position: a **bare** name works as the scalar target of `assign(name, …)` and the array target of `push_value(name, …)` / `push_nonempty(name, …)`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying argument position: a **bare** name works as the scalar target of `assign(name, …)`, the array target of `push_value(name, …)` / `push_nonempty(name, …)`, and the hash target of statement-level `set_key(name, key, value)`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
@@ -245,6 +245,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `push(rule, target, index)` | call one rule and append one indexed result into a named array | one element from a shaped child return should go straight into an explicit array accumulator. |
 | `push_value(array(name), expr)` | append one value | an array should grow by one item. |
 | `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
+| `set_key(name, key, value)` | set one hash field | a named working hash should be updated in place. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
 | `next()` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
@@ -606,6 +607,8 @@ assign(hash(summary_meta), pick_keys(hash(public_meta), "kind", "source", "stage
 ```
 
 Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(scalar(hash(meta), "kind"))` or `is_defined(scalaref(retv, {kind}))` when the question is "is the value defined?" Those are different questions.
+
+`set_key(...)` has two deliberate forms. As a statement with a named target, `set_key(meta, "stage", "normalized")` mutates the working hash `meta`. As a value expression, `set_key(hash(meta), "stage", "normalized")` returns a new hash value and leaves `meta` unchanged unless you store the result with `assign(hash(meta), ...)`.
 
 ## Fallback and presence helpers
 

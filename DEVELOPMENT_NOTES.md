@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.3.3 — `set_key` is intentionally position-sensitive: statement form mutates,
+  value form stays pure): Landed the hash mutation spelling. Durable points. (1) **Keep mutation and value
+  helpers separate by syntactic position.** Top-level `set_key(name,key,value)` is now a statement mutation,
+  but nested `set_key(hash_expr,key,value)` remains a copy-valued expression. Collapsing those would make
+  expression evaluation order observable and would break the existing pure helper contract. (2) **Event-driven
+  Perl lowering needs all three sites.** Adding a contract entry alone is not enough; the scanner must emit the
+  ASSIGN event, and the auto-working-var collector must learn the same bare hash target so generated handlers
+  get one preamble `my %name`. (3) **Rust mirrors the statement boundary before generic expression eval.**
+  `Engine::execute_block()` handles top-level `set_key(...)` first and mutates the named hash; `call_helper`
+  keeps serving nested pure value calls. (4) **Dependency-surface fixtures are part of the contract.** Adding a
+  new contract lowering dependency required the owner-dispatch synthetic fixtures to expose
+  `_lower_set_key_statement`; otherwise phase0 catches the missing dep callback even when the real lowering
+  works. Verification: phase0 976, focused Rust, corpus oracle 13 fixtures, mdBook, Knowledge Map,
+  memory-architecture, doctrine checks, and full local CI gate all pass.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.3.2 — the `push` alias is valid only after the child-call convention wins
   its ambiguous cases; parse balanced calls before auto-declaring array targets): Landed the array function
   spelling. Durable points. (1) **Do not treat `push` as a flat alias of `push_value`.** The DSL already has a

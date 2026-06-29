@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.3 — implement set_key(name,key,value) hash mutation statement
+
+**Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust runtime statement execution, phase0
+locks, Rust integration tests, oracle corpus, mdBook, Knowledge Map, task tree, ROADMAP_V2, and live docs.
+
+**What changed:** top-level `set_key(name, key, value)` is now the terse named-hash mutation statement. It
+mutates the working hash named by the first argument and auto-exists a bare target as `%name` on the Perl
+reference. Nested/value-form `set_key(hash_expr, key, value)` remains the existing pure copy-valued helper; it
+returns a new hash value and does not mutate the source hash unless the caller stores it back.
+
+**Implementation:** Perl adds a `set_key_statement` ASSIGN contract, scanner event, and lowering path that emits
+direct `$name{key} = value` mutation for statement-level calls, plus bare-target `%name` collection in
+`RuleIR::EmitContext`. Rust executes top-level `set_key(...)` in `Engine::execute_block()` before normal
+expression evaluation, using `RuntimeContext::set_hash_entry`, while leaving `Engine::call_helper("set_key")`
+as the pure value helper.
+
+**Validation:** TOOLBOX lowerings distinguish mutation from pure value form; descriptor/source/runtime probes
+prove ASSIGN recognition, one `my %meta` declaration, same-parser stability, and non-mutating nested pure
+behavior. `prove -q -Iperl t/phase0_regression.t` PASS (`1..976`); focused Rust `terse_1_3_3` tests PASS;
+corpus oracle PASS over 13 fixtures; `mdbook build docs/linkedspec-book` EXIT 0; Knowledge Map,
+memory-architecture, doctrine checks, and `bash tools/run_ci_local.sh` EXIT 0.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.2 — recognize push(target,value) explicit append while preserving child-call push
 
 **Scope:** Perl reference ActionIR recognition/lowering, Perl phase0 locks, Rust oracle + integration locks,

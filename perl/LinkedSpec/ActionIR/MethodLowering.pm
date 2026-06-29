@@ -1765,6 +1765,56 @@ sub _lower_assign_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_set_key_statement
+# Purpose : Lower the statement form `set_key(target, key, value)` to a direct
+#           hash-entry mutation. The pure value helper with the same name remains
+#           in _lower_method_value_expr and is used when nested in return/source
+#           expressions.
+# Args    : ($expr, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_set_key_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
+ my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ my $call = $parse_method_function_expr->($expr);
+ return undef unless $call && $call->{method} eq 'set_key';
+
+ my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 3, 3);
+ return undef unless $effective_args;
+
+ my $target_expr = $trim_action_ir_value->($effective_args->[0]);
+ my $key_expr = $trim_action_ir_value->($effective_args->[1]);
+ my $value_expr = $trim_action_ir_value->($effective_args->[2]);
+ return undef unless defined($target_expr) && length($target_expr);
+ return undef unless defined($key_expr) && length($key_expr);
+ return undef unless defined($value_expr) && length($value_expr);
+
+ my $hash_symbol = $extract_hash_symbol_name->($target_expr);
+ return undef unless defined($hash_symbol) && length($hash_symbol);
+
+ my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+ return undef unless defined($key_lowered) && length($key_lowered);
+
+ my $value_lowered = _lower_method_value_expr($value_expr, $deps);
+ $value_lowered = $value_expr unless defined($value_lowered) && length($value_lowered);
+ return undef unless defined($value_lowered) && length($value_lowered);
+
+ return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_push_value_statement
 # Purpose : Lower explicit value append helper calls:
 #           `push_value(array(target), value)` and the terse

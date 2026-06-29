@@ -120,7 +120,7 @@ Hash helpers make metadata shaping explicit:
 
 ```text
 assign(hash(meta), hash("kind", "rule", "name", scalar(name)));
-assign(hash(meta), set_key(hash(meta), "line", entry_line()));
+set_key(meta, "line", entry_line());
 assign(hash(meta), merge_hash(hash(meta), hash("source", "spec")));
 ```
 
