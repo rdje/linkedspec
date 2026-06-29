@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.3 — own Rust expression-valued block parity
+
+**Scope:** Task tree, roadmap tracker, live continuity docs, and Knowledge Map. No Rust engine, oracle,
+fixture, mdBook behavior, or Perl behavior changed in this ownership slice.
+
+**Ground truth:** Rust currently has statement-only `CodeBlock` parsing and `Expr::ArrayLiteral` /
+`Expr::HashLiteral` value expressions, but no block-value `Expr` variant. `parse_expr()` routes `{` directly
+to `parse_hash_literal()`, so `{}` and `{ key => value }` work as hash literals while
+`{ set(x,"a"); x }` is rejected because the hash parser requires `=>`. `Engine::execute_block()` executes
+statements and returns `()`, and `Engine::eval_expr()` has no block-value arm.
+
+**Owned implementation boundary:** `.2.1.3` will add Rust parser/runtime parity for the accepted Perl-reference
+core: non-empty brace payloads without a top-level `=>` become expression-valued blocks, `{}` / keyed hash
+literals keep precedence, final expression and final `return(expr)` yield the block value, and full mid-block
+early-return remains `.2.1.4`.
+
+**Validation:** Rust code-read completed; mdBook build PASS; Knowledge Map regenerate/check PASS;
+memory/doctrine/diff checks PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.2 — Perl expression-valued blocks
 
 **Scope:** Perl ActionIR value lowering, Perl auto-working-variable collection, phase0 regression coverage,

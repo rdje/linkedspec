@@ -6,8 +6,9 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.2.1.2` DONE; frontier `.2.1.3`** — Perl-reference core expression-valued
-  blocks landed; Rust parity is next. Prior
+- Last updated: `2026-06-29` (**`.2.1.3` OWNED BEFORE CODE; frontier remains `.2.1.3` implementation** —
+  Rust parser/runtime seams recorded for expression-valued block parity after Perl-reference core block
+  values landed in `.2.1.2`. Prior
   **`.1.6` DONE; Round 1 closed** — Array end-mutation methods landed on Perl
   and Rust: `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()`
   are statement-level mutations over named working arrays, with bare / `array(...)` / `a(...)` receivers.
@@ -1222,15 +1223,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Verification: Perl syntax checks; TOOLBOX lowering/runtime probes; `prove -q -Iperl t/phase0_regression.t`
     PASS (**991 tests**); mdBook build PASS; Knowledge Map regenerate/check PASS;
     memory/doctrine/diff checks PASS; full local CI PASS.
-  Commit: `SPEC-FORMAT-TERSE.2.1.2 — implement Perl expression-valued blocks` (pending)
+  Commit: `SPEC-FORMAT-TERSE.2.1.2 — implement Perl expression-valued blocks`
 
 - ID: `SPEC-FORMAT-TERSE.2.1.3`
-  Status: `pending`
+  Status: `in_progress` / owned before code (2026-06-29)
   Goal: Rust parity — core expression-valued block values
   Acceptance: Rust parser/runtime add the same block-expression AST/runtime behavior and preserve hash-literal
-    disambiguation; oracle fixtures match the Perl reference.
-  Verification: `pending`
-  Commit: `pending`
+    disambiguation; oracle fixtures match the Perl reference. Implementation seam is `Expr`/brace parsing in
+    `rust/linkedspec-core/src/expr.rs` plus value-returning block evaluation in
+    `rust/linkedspec-runtime/src/engine.rs`. Preserve `{}` and keyed top-level `=>` hash literals; only
+    non-empty non-fat-arrow brace payloads become block values. Match the Perl core for final expression and
+    final `return(expr)` payloads; true mid-block early return remains `.2.1.4`.
+  Verification: KM card `terse-rust-expression-valued-block-seams`; Rust code-read of `Expr`,
+    `parse_expr()`, `parse_hash_literal()`, `execute_block()`, and `eval_expr()`; mdBook build PASS;
+    Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS.
+  Commit: `SPEC-FORMAT-TERSE.2.1.3 — own Rust expression-valued blocks` (pending)
 
 - ID: `SPEC-FORMAT-TERSE.2.1.4`
   Status: `pending`
@@ -1340,7 +1347,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.6` | `done` 2026-06-29 | Round 1 array end-mutation methods landed on Perl and Rust; phase0 990 green; oracle corpus 33 fixtures. Round 1 is closed. |
 | — | `SPEC-FORMAT-TERSE.2.1.1` | `done` 2026-06-29 | Expression-valued block ground truth completed: current Perl/Rust treat `{}` / `{ key => value }` as hash literals and do not have block-valued expression semantics. `.2.1` split by reference/parity and explicit-return depth. |
 | — | `SPEC-FORMAT-TERSE.2.1.2` | `done` 2026-06-29 | Perl reference core expression-valued blocks landed: non-empty non-hash `{ ... }` values lower to `do { ... }`, final `return(expr)` is block-local for the core subset, and hash literals keep precedence. |
-| 1 | `SPEC-FORMAT-TERSE.2.1.3` | `pending` | Rust parity for the accepted Perl-reference core expression-valued block contract. |
+| 1 | `SPEC-FORMAT-TERSE.2.1.3` | `in_progress` / owned before code | Rust parity for the accepted Perl-reference core expression-valued block contract. Parser/runtime seams are recorded; implementation may now edit Rust under this leaf. |
 | … | `.2.2`, `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1358,6 +1365,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   `{ key => value }` remain hash shape literals. The accepted core supports last-expression values and final
   `return(expr)` as block-local payloads; full early return remains split to `.2.1.4`. Rust parity remains
   split to `.2.1.3`.
+
+- `2026-06-29` (**`.2.1.3` Rust expression-valued block parity owned before code**). Rust code-read shows the
+  parity gap is `Expr` plus runtime expression evaluation, not lifecycle block parsing. `parse_expr()` sends
+  `{` to `parse_hash_literal()`, preserving `{}` and keyed `=>` hashes but rejecting non-empty non-fat-arrow
+  brace payloads. `execute_block()` returns `()`, while `eval_expr()` has no block-value arm. `.2.1.3` owns
+  adding parser/runtime parity for the Perl core; `.2.1.4` keeps true mid-block early return.
 
 - `2026-06-29` (**`.1.6` array end-mutation methods landed**). The accepted Round 1 array method contract is
   statement-level mutation, not value-returning fluent chaining. A single receiver-dot call with receiver
@@ -1844,6 +1857,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.6` | Perl syntax checks (`MethodLowering.pm`, `Contracts.pm`, `Scanner/PrimitivePipelineRules.pm`, `RuleIR/EmitContext.pm`); TOOLBOX lowering/runtime/source probes; focused Rust core parser test (`parse_array_end_mutation_fluent_receivers`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_6`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); `prove -q -Iperl t/phase0_regression.t` | Array end-mutation methods landed. Perl lowers statement-level `push_back`/`push_front`/`pop_back`/`pop_front` receiver-dot calls to array working-variable mutations, records canonical `ARRAY_MUTATE`, and auto-supplies the receiver array plus push-value scalar reads. Rust executes the same statement forms in `Engine::execute_block`; pop methods discard the removed value. Oracle corpus regenerated to 33 fixtures; phase0 PASS (`990` tests). Round 1 is closed and the frontier becomes `.2.1`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.1` (split) | KM retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-statement-separator-contract`, `terse-array-end-mutation-methods`, `rust-retv-propagation`, `actionir-lowering-stack`); TOOLBOX `call_spec_handler_subst` probes for `{}` / `{ key => value }` / block-shaped values; `LinkedSpec::Get` runtime and generated-source probes; Perl code-read (`MethodLowering`, `EmitContext`); Rust code-read (`expr.rs`, `engine.rs`); Knowledge Map regenerate/check; memory/doctrine/diff checks | Split `.2.1` before code. Current Perl supports hash shape literals but block-shaped values lower into invalid hash/block Perl (`return { $x = "a"; x }`) or aggregate target inference (`%out = (...)`); Rust has statement `CodeBlock` and hash/array literal values but no block-expression AST/runtime. Frontier becomes `.2.1.2` for the Perl reference core; Rust parity and full block-local early return stay split. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.2` | Perl syntax checks (`MethodLowering.pm`, `RuleIR/EmitContext.pm`, `phase0_regression.t`); TOOLBOX lowering/runtime probes; `prove -q -Iperl t/phase0_regression.t`; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; `tools/run_ci_local.sh` | Perl-reference core expression-valued blocks landed. Non-empty non-hash brace payloads lower as `do { ... }` values in return payloads, assignment sources, and nested value payloads; final `return(expr)` inside the block is block-local for this core subset. `{}` and `{ key => value }` remain hash literals, and hash literal final expressions are forced as scalar hashrefs inside block values. Phase0 PASS (`991` tests). Full local CI PASS. Frontier becomes `.2.1.3` Rust parity. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.3` (ownership) | KM retrieval (`terse-expression-valued-blocks-ground-truth`, `terse-perl-expression-valued-blocks`); Rust code-read (`Expr`, `parse_expr()`, `parse_hash_literal()`, `execute_block()`, `eval_expr()`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks | Rust expression-valued block parity owned before code. Rust currently has statement-only `CodeBlock`, hash/array value expressions, and no block-value `Expr` or evaluator. `{}` and keyed `=>` hash literals must keep precedence; non-empty non-fat-arrow braces become block values in the implementation slice. Frontier remains `.2.1.3` implementation. |
 
 ## Commit Log
 
@@ -1890,8 +1904,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.6` | `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods` | Perl and Rust now support statement-level `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` over named working arrays. Added phase0/Rust/oracle/book/KM locks; Round 1 closes and frontier becomes `.2.1`. |
 | `SPEC-FORMAT-TERSE.2.1.1` | `SPEC-FORMAT-TERSE.2.1.1 — split expression-valued blocks` | No engine/book behavior change. `.2.1` is split into Perl-reference core block values (`.2.1.2`), Rust parity (`.2.1.3`), and explicit block-local early-return follow-through (`.2.1.4`). Frontier becomes `.2.1.2`. |
 | `SPEC-FORMAT-TERSE.2.1.2` | `SPEC-FORMAT-TERSE.2.1.2 — implement Perl expression-valued blocks` | Perl reference now accepts the core block-value subset in value-consuming sites, preserving hash-literal precedence. Rust parity remains `.2.1.3`; full block-local early return remains `.2.1.4`. |
+| `SPEC-FORMAT-TERSE.2.1.3` | `SPEC-FORMAT-TERSE.2.1.3 — own Rust expression-valued blocks` | No engine/book behavior change. Rust parser/runtime seams are recorded before code; frontier remains `.2.1.3` implementation. |
 
 ## Changelog
+
+- `2026-06-29`: **`.2.1.3` OWNED BEFORE CODE — Rust expression-valued block parity.**
+  Rust parser/runtime seams are recorded before implementation. The leaf owns adding a block-value `Expr` path
+  while preserving `{}` / keyed `=>` hash literals, evaluating side-effect statements, and returning the final
+  expression or final `return(expr)` payload. True mid-block early return remains `.2.1.4`.
 
 - `2026-06-29`: **`.2.1.2` DONE — Perl-reference core expression-valued blocks landed.**
   Non-empty brace payloads without a top-level `=>` now lower as value blocks in Perl reference return

@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `c5f2204` — `SPEC-FORMAT-TERSE.2.1.1 — split expression-valued blocks`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — **`.2.1.2` DONE in working tree / pending commit; frontier `.2.1.3`**. User in a **PNT loop** (2026-06-23).
-- next_action: Finish `.2.1.2` commit workflow, then own `.2.1.3` before any Rust code for core expression-valued block parity.
+- latest_commit: `61de4b2` — `SPEC-FORMAT-TERSE.2.1.2 — implement Perl expression-valued blocks`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — **`.2.1.3` Rust parity OWNED BEFORE CODE in working tree / pending commit**. User in a **PNT loop** (2026-06-23).
+- next_action: Finish `.2.1.3` ownership commit, then implement Rust core expression-valued block parity: parser `Expr`/brace disambiguation, runtime block-value evaluation, oracle fixture, Rust tests, and mdBook/live-doc verification.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy/source warning noise includes nested `rgx` baseline. oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs` (**33 fixtures after `.1.6`**). phase0 baseline = **991 green after `.2.1.2`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.2.1.2` Perl core block-value code/docs/KM pending commit; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.2.1.3` Rust parity ownership docs/KM pending commit; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.

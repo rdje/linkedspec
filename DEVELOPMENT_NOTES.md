@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity owned before code): Recorded
+  the Rust implementation boundary before editing Rust. Durable points. (1) **The missing parser seam is an
+  expression variant, not lifecycle `CodeBlock`.** `CodeBlock` already parses statement lists for lifecycle
+  blocks, while `Expr` has array/hash literals but no block-value form. (2) **Brace disambiguation must keep
+  hash literals first.** `parse_expr()` currently sends `{` to `parse_hash_literal()`, which accepts `{}` and
+  keyed `=>` entries; non-empty non-fat-arrow braces should become block values rather than weakening the hash
+  literal contract. (3) **Runtime needs a value-returning block evaluator.** `execute_block()` intentionally
+  returns `()`, so `.2.1.3` should add a block-value path in `eval_expr()` that executes side-effect statements
+  and returns the final expression or final `return(expr)` payload. (4) **Return depth stays split.** True
+  mid-block early return remains `.2.1.4`; this Rust parity slice should match the Perl core only.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.2.1.2 — Perl expression-valued blocks landed): Implemented the Perl-reference
   core block-value subset. Durable points. (1) **Hash literals keep precedence.** `_lower_method_value_expr`
   still tries direct `[]` / `{}` shape lowering first; only a non-empty brace payload without a top-level `=>`
