@@ -19,7 +19,9 @@
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument)
-//! literal     → string | number | boolean | regex | undef
+//! literal     → string | number | boolean | regex | undef | array | hash
+//! array       → '[' (expr (',' expr)*)? ']'
+//! hash        → '{' (expr '=>' expr (',' expr '=>' expr)*)? '}'
 //! string      → '"' [^"]* '"' | "'" [^']* "'"
 //! number      → -?\d+(\.\d+)?
 //! boolean     → 'true' | 'false'
@@ -55,6 +57,13 @@ pub enum AccessSegment {
     /// Array index segment from a numeric or explicit helper expression: `foo[0]`, `foo[scalar(i)]`
     #[serde(rename = "index")]
     Index { expr: Box<Expr> },
+}
+
+/// One key/value pair in a direct hash shape literal.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct HashLiteralEntry {
+    pub key: Expr,
+    pub value: Expr,
 }
 
 /// An expression — the core of the lifecycle code language.
@@ -102,6 +111,16 @@ pub enum Expr {
     NestedAccess {
         base: String,
         segments: Vec<AccessSegment>,
+    },
+    /// A direct array shape literal: `[]`, `[value, true]`
+    #[serde(rename = "array_literal")]
+    ArrayLiteral {
+        items: Vec<Expr>,
+    },
+    /// A direct hash shape literal: `{ key => value }`
+    #[serde(rename = "hash_literal")]
+    HashLiteral {
+        entries: Vec<HashLiteralEntry>,
     },
     /// A string literal: `"hello"`, `'world'`
     #[serde(rename = "string")]
@@ -194,6 +213,22 @@ impl std::fmt::Display for Expr {
                     }
                 }
                 Ok(())
+            }
+            Expr::ArrayLiteral { items } => {
+                write!(f, "[")?;
+                for (i, item) in items.iter().enumerate() {
+                    if i > 0 { write!(f, ", ")?; }
+                    write!(f, "{item}")?;
+                }
+                write!(f, "]")
+            }
+            Expr::HashLiteral { entries } => {
+                write!(f, "{{")?;
+                for (i, entry) in entries.iter().enumerate() {
+                    if i > 0 { write!(f, ", ")?; }
+                    write!(f, "{} => {}", entry.key, entry.value)?;
+                }
+                write!(f, "}}")
             }
             Expr::StringLiteral { value } => write!(f, "\"{value}\""),
             Expr::NumberLiteral { value } => write!(f, "{value}"),
@@ -485,6 +520,8 @@ impl<'a> Parser<'a> {
         match ch {
             '"' | '\'' => self.parse_string(),
             '/' => self.parse_regex(),
+            '[' => self.parse_array_literal(),
+            '{' => self.parse_hash_literal(),
             '$' => {
                 self.advance(1);
                 self.parse_var_or_call()
@@ -540,6 +577,93 @@ impl<'a> Parser<'a> {
                     "unexpected character '{}' at position {} near: '{}'",
                     ch, self.pos, &self.src[self.pos..end]
                 ))
+            }
+        }
+    }
+
+    fn parse_array_literal(&mut self) -> Result<Expr, String> {
+        self.advance(1); // consume '['
+        let mut items = Vec::new();
+        loop {
+            self.skip_whitespace();
+            if self.peek() == Some(']') {
+                self.advance(1);
+                return Ok(Expr::ArrayLiteral { items });
+            }
+            if self.pos >= self.src.len() {
+                return Err("unterminated array literal".to_string());
+            }
+
+            items.push(self.parse_expr()?);
+            self.skip_whitespace();
+            match self.peek() {
+                Some(',') => {
+                    self.advance(1);
+                }
+                Some(']') => {
+                    self.advance(1);
+                    return Ok(Expr::ArrayLiteral { items });
+                }
+                Some(ch) => {
+                    return Err(format!(
+                        "expected ',' or ']' in array literal at position {}, found '{}'",
+                        self.pos, ch
+                    ));
+                }
+                None => return Err("unterminated array literal".to_string()),
+            }
+        }
+    }
+
+    fn parse_hash_literal(&mut self) -> Result<Expr, String> {
+        self.advance(1); // consume '{'
+        let mut entries = Vec::new();
+        loop {
+            self.skip_whitespace();
+            if self.peek() == Some('}') {
+                self.advance(1);
+                return Ok(Expr::HashLiteral { entries });
+            }
+            if self.pos >= self.src.len() {
+                return Err("unterminated hash literal".to_string());
+            }
+
+            let key = self.parse_expr()?;
+            self.skip_whitespace();
+            if !self.remaining().starts_with("=>") {
+                return Err(format!(
+                    "expected '=>' in hash literal at position {}",
+                    self.pos
+                ));
+            }
+            self.advance(2);
+            self.skip_whitespace();
+            if self.pos >= self.src.len() || self.peek() == Some('}') {
+                return Err(format!(
+                    "expected value after '=>' in hash literal at position {}",
+                    self.pos
+                ));
+            }
+
+            let value = self.parse_expr()?;
+            entries.push(HashLiteralEntry { key, value });
+
+            self.skip_whitespace();
+            match self.peek() {
+                Some(',') => {
+                    self.advance(1);
+                }
+                Some('}') => {
+                    self.advance(1);
+                    return Ok(Expr::HashLiteral { entries });
+                }
+                Some(ch) => {
+                    return Err(format!(
+                        "expected ',' or '}}' in hash literal at position {}, found '{}'",
+                        self.pos, ch
+                    ));
+                }
+                None => return Err("unterminated hash literal".to_string()),
             }
         }
     }
@@ -981,6 +1105,95 @@ mod tests {
                 assert!(matches!(value.as_ref(), Expr::Variable { name } if name == "value"));
             }
             _ => panic!("expected hash-index assignment"),
+        }
+    }
+
+    #[test]
+    fn parse_array_shape_literal_value_expr() {
+        let code = r#"return([value, cat("a", "b"), true, []])"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::ArrayLiteral { items } => {
+                        assert_eq!(items.len(), 4);
+                        assert!(matches!(&items[0], Expr::Variable { name } if name == "value"));
+                        assert!(matches!(&items[1], Expr::Call { name, .. } if name == "cat"));
+                        assert!(matches!(&items[2], Expr::BooleanLiteral { value: true }));
+                        assert!(matches!(&items[3], Expr::ArrayLiteral { items } if items.is_empty()));
+                    }
+                    other => panic!("expected ArrayLiteral, got {:?}", other),
+                }
+            }
+            _ => panic!("expected return call"),
+        }
+    }
+
+    #[test]
+    fn parse_hash_shape_literal_value_expr() {
+        let code = r#"return({ key => value, "fixed" => [value] })"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::HashLiteral { entries } => {
+                        assert_eq!(entries.len(), 2);
+                        assert!(matches!(&entries[0].key, Expr::Variable { name } if name == "key"));
+                        assert!(matches!(&entries[0].value, Expr::Variable { name } if name == "value"));
+                        assert!(matches!(&entries[1].key, Expr::StringLiteral { value } if value == "fixed"));
+                        assert!(matches!(&entries[1].value, Expr::ArrayLiteral { items } if items.len() == 1));
+                    }
+                    other => panic!("expected HashLiteral, got {:?}", other),
+                }
+            }
+            _ => panic!("expected return call"),
+        }
+    }
+
+    #[test]
+    fn parse_shape_literals_in_mutation_slots() {
+        let code = r#"items += [value]; meta[key] = { key => value }"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(block.statements.len(), 2);
+        match &block.statements[0].expr {
+            Expr::AssignArrayAppend { name, value } => {
+                assert_eq!(name, "items");
+                assert!(matches!(value.as_ref(), Expr::ArrayLiteral { items } if items.len() == 1));
+            }
+            other => panic!("expected array append, got {:?}", other),
+        }
+        match &block.statements[1].expr {
+            Expr::AssignHashIndex { name, key, value } => {
+                assert_eq!(name, "meta");
+                assert!(matches!(key.as_ref(), Expr::Variable { name } if name == "key"));
+                assert!(matches!(value.as_ref(), Expr::HashLiteral { entries } if entries.len() == 1));
+            }
+            other => panic!("expected hash-index assignment, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn parse_shape_literal_rhs_keeps_scalar_assignment_ast_until_target_inference_leaf() {
+        let code = r#"name = [value]; set(out, { key => value })"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(block.statements.len(), 2);
+        match &block.statements[0].expr {
+            Expr::AssignScalar { name, value } => {
+                assert_eq!(name, "name");
+                assert!(matches!(value.as_ref(), Expr::ArrayLiteral { items } if items.len() == 1));
+            }
+            other => panic!("expected scalar assignment, got {:?}", other),
+        }
+        match &block.statements[1].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "set");
+                assert_eq!(args.len(), 2);
+                assert!(matches!(args[0].value(), Expr::Variable { name } if name == "out"));
+                assert!(matches!(args[1].value(), Expr::HashLiteral { entries } if entries.len() == 1));
+            }
+            other => panic!("expected set call, got {:?}", other),
         }
     }
 
@@ -1470,6 +1683,12 @@ mod tests {
     #[test]
     fn roundtrip_indexed_variable() {
         assert_roundtrip("results[0]");
+    }
+
+    #[test]
+    fn roundtrip_shape_literals() {
+        assert_roundtrip(r#"return([value, cat("a", "b"), true, []])"#);
+        assert_roundtrip(r#"return({ key => value, "fixed" => [value] })"#);
     }
 
     #[test]

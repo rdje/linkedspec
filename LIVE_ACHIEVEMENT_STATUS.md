@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity landed**
+  (RUST AST/PARSER + RUNTIME + ORACLE). Rust now accepts direct `[]` / `{}` shape literals as value
+  expressions in the same accepted value slots as Perl `.1.2.3.5.1`: return payloads, scalar assignment
+  sources, array append RHS values, hash-index assignment RHS values, and nested payloads. Shape members reuse
+  normal Rust expression evaluation, so `[value, cat("a","b"), true, []]` and
+  `{ key => value, "fixed" => [value] }` preserve typed nested payloads and scalar bare reads. Rust target-kind
+  inference is intentionally still deferred: `name = [value]` remains a scalar-held array payload until
+  `.1.2.3.5.4`.
+  **Verification:** focused Rust parser locks PASS; focused Rust runtime `.1.2.3.5.3` locks PASS; oracle corpus
+  regenerated to **30 fixtures** and corpus oracle PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.5.4`** (Rust RHS target-kind inference parity).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.2 — Perl RHS shape target-kind inference landed**
   (PERL ACTIONIR + DECLARE INIT + AUTO-DECL + PHASE0 + BOOK/KM LOCKS). Direct RHS shape literals now infer the
   aggregate kind of a bare assignment target on the Perl reference: `items = [value]` / `set(items, [])` assign

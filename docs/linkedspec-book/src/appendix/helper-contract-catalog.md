@@ -35,7 +35,7 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 
 ## 0.1 Shape Value Literals
 
-The Perl reference backend accepts direct array and hash shape literals as value expressions:
+The Perl reference and Rust backend accept direct array and hash shape literals as value expressions:
 
 ```text
 []
@@ -68,11 +68,12 @@ set(meta, {});                       # %meta = ()
 set(scalar(payload), [value]);       # $payload = [$value]
 ```
 
-The explicit scalar wrapper is the scalar payload boundary. Direct-access brackets
+The explicit scalar wrapper is the scalar payload boundary. On Rust, value-expression support for direct shape
+literals is present, but the aggregate target-kind inference rule remains tracked separately; until that parity
+leaf lands, `name = [value]` is still a scalar-held array payload on Rust. Direct-access brackets
 (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`), control-flow/block braces, and
-all-bare child-call routing remain separate surfaces. Rust lockstep parity for this shape-literal value contract
-and its RHS target-kind inference is tracked separately by `SPEC-FORMAT-TERSE.1.2.3.5.3` and
-`SPEC-FORMAT-TERSE.1.2.3.5.4`.
+all-bare child-call routing remain separate surfaces. Rust lockstep parity for RHS target-kind inference is
+tracked by `SPEC-FORMAT-TERSE.1.2.3.5.4`.
 
 ## 1. Declaration Helpers
 

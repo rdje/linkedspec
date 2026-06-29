@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity
+
+**Scope:** Rust expression AST/parser, Rust runtime evaluation, Rust integration locks, Perl-oracle corpus
+fixtures, mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now parses and evaluates the accepted direct shape-literal value-expression contract:
+`[]`, `[value, cat("a", "b"), true, []]`, `{ key => value }`, and nested combinations. Array elements, hash
+keys, and hash values evaluate through the existing Rust expression path, so primitive literals stay typed,
+helpers compose, direct access remains distinct, nested shapes recurse, and bare names read scalar working
+variables via `Expr::Variable` / `ctx.get_scalar(name)`. Hash-literal keys use the same `to_str()` key
+coercion as `hash(...)`, so `{ key => value }` is dynamic while `{ "fixed" => value }` is fixed.
+
+**Boundary:** This leaf intentionally does not implement Rust RHS target-kind inference. `name = [value]`
+still parses as `AssignScalar` and stores the array payload in scalar `name`; `array(name)` remains a separate
+working array until `.1.2.3.5.4` mirrors the Perl target-kind contract.
+
+**Validation:** focused Rust parser locks PASS; focused Rust runtime `.1.2.3.5.3` locks PASS; oracle corpus
+regenerated to 30 fixtures and corpus oracle PASS. The broad Cargo formatter was not adopted as a gate because
+the repository has pre-existing unformatted Rust files outside this slice; unintended rustfmt churn was
+reverted.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.2 — Perl RHS shape target-kind inference
 
 **Scope:** Perl ActionIR assignment lowering, declaration initializer shape lowering, auto-working-variable

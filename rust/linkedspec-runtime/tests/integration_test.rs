@@ -1350,3 +1350,40 @@ fn terse_1_2_3_4_mutation_and_direct_access_bare_reads_run() {
         "bare scalar reads work in mutation slots and direct-access path indexes"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity:
+// direct `[]` and `{ key => value }` forms are value expressions. Their members
+// use the same expression semantics as the Perl `.1.2.3.5.1` contract: bare
+// names read scalar working variables, helper calls compose, primitive literals
+// stay typed, and nested shapes recurse. RHS target-kind inference is explicitly
+// deferred to `.1.2.3.5.4`, so this leaf keeps bare assignment targets scalar.
+
+#[test]
+fn terse_1_2_3_5_3_shape_literal_values_return_typed_nested_payload() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array([value, cat(\"a\", \"b\"), true, []], { key => value, \"fixed\" => [value] })) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok", "ab", true, []], {"fixed": ["ok"], "stage": "ok"}]]),
+        "shape literal values preserve typed nested arrays/hashes and scalar bare reads"
+    );
+}
+
+#[test]
+fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); items += [value]; meta[key] = { key => value }; return(array(array_copy(array(items)), hash_copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[[["payload"]], {"stage": {"stage": "payload"}}]]),
+        "array-append and hash-index RHS slots accept direct shape literal values"
+    );
+}
+
+#[test]
+fn terse_1_2_3_5_3_shape_rhs_still_uses_scalar_assignment_until_target_inference_leaf() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(scalar(name), array_copy(array(name)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok"], []]]),
+        "Rust shape RHS is a scalar payload until SPEC-FORMAT-TERSE.1.2.3.5.4 adds target-kind inference"
+    );
+}

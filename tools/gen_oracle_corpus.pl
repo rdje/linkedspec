@@ -295,6 +295,32 @@ Done::
 SPEC
     },
 
+    # ── SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity ──
+    #
+    # These fixtures freeze the Perl `.1.2.3.5.1` value-expression contract for
+    # direct `[]` / `{}` shapes. They deliberately avoid `.1.2.3.5.2` bare-target
+    # inference, which Rust owns separately under `.1.2.3.5.4`.
+    {   case   => 'terse_1_2_3_5_3_shape_literal_return_values',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array([value, cat("a", "b"), true, []], { key => value, "fixed" => [value] })) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_2_3_5_3_shape_literal_mutation_rhs',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "payload"); set(key, "stage"); items += [value]; meta[key] = { key => value }; return(array(array_copy(array(items)), hash_copy(hash(meta)))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+
     # ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1 helper renames ──
     #
     # These fixtures freeze the Perl reference values for the new canonical terse

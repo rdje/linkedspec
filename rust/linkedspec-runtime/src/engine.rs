@@ -703,6 +703,22 @@ impl Engine {
                 }
                 Ok(current)
             }
+            Expr::ArrayLiteral { items } => {
+                let values = items
+                    .iter()
+                    .map(|item| self.eval_expr(item, ctx, rule_label))
+                    .collect::<Result<Vec<_>, _>>()?;
+                Ok(RuntimeValue::Array(values))
+            }
+            Expr::HashLiteral { entries } => {
+                let mut values = Vec::new();
+                for entry in entries {
+                    let key = self.eval_expr(&entry.key, ctx, rule_label)?.to_str();
+                    let value = self.eval_expr(&entry.value, ctx, rule_label)?;
+                    values.push((key, value));
+                }
+                Ok(RuntimeValue::Hash(values))
+            }
             Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
             Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),
             Expr::BooleanLiteral { value } => Ok(RuntimeValue::Bool(*value)),

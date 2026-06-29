@@ -101,7 +101,7 @@ return({ "kind" => "token", "text" => entry_text(), "tags" => [tag, true] });
 
 Older return helpers still exist and are useful when reading legacy specs, but new public examples should prefer the generalized `return(...)` form when it expresses the intent clearly.
 
-Direct shape literals (`[]` and `{ key => value }`) are value expressions on the Perl reference backend. Use
+Direct shape literals (`[]` and `{ key => value }`) are value expressions on the Perl reference and Rust backend. Use
 them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression
 rules: a bare element such as `tag` reads scalar working variable `tag`, and a bare hash key such as
 `{ field => value }` reads scalar `field` as the runtime key. Quote fixed object field names:
@@ -129,6 +129,10 @@ Use an explicit scalar wrapper when the intent is to store the whole array/hash 
 set(scalar(payload), [value]);
 return(scalar(payload));
 ```
+
+Rust currently supports the direct shape-literal value forms above, but Rust aggregate target-kind inference is
+the next parity step. Until that lands, `name = [value]` on Rust stores the array payload in scalar `name`
+rather than replacing array working variable `name`.
 
 ## Reading and copying collections
 

@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity landed): Mirrored the accepted
+  `.1.2.3.5.1` direct shape value contract on the Rust backend without advancing `.1.2.3.5.4`. Durable points.
+  (1) **Bracket/brace primaries are values, not access/assignment syntax.** `Expr::ArrayLiteral` and
+  `Expr::HashLiteral` are parsed only when `[` or `{` starts an expression; existing `name[index]` direct access
+  and `meta[key] = value` statement parsing still own their own bracket sites. (2) **Members reuse normal
+  expression evaluation.** Array elements, hash keys, and hash values call `eval_expr`, so primitive literals,
+  helper calls, scalar bare reads, direct access, and nested shape literals compose without a second evaluator.
+  Hash keys use `RuntimeValue::to_str()`, matching the existing `hash(...)` helper key rule. (3) **Target
+  inference remains deliberately absent on Rust.** `name = [value]` stays `AssignScalar` and stores an array
+  payload in scalar `name`; `array(name)` remains empty in the boundary lock. `.1.2.3.5.4` owns matching the
+  Perl aggregate-target rule. (4) **Oracle fixtures cover only value parity.** The two new corpus cases freeze
+  return payloads and mutation RHS slots, not bare-target aggregate inference.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.2 — Perl RHS shape target-kind inference landed): Implemented the
   second RHS-shape child by making direct shape literals an assignment target-kind oracle. Durable points. (1)
   **Only bare targets infer from shape RHS.** `name = [value]`, `set(name, [])`, and `assign(name, [value])`
