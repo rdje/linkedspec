@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `(this commit)` — `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- latest_commit: `b5ad748` — `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
 - active_work_unit: `SPEC-FORMAT-TERSE` — **Round 1 closed after `.1.6` DONE 2026-06-29**. User in a **PNT loop** (2026-06-23).
 - next_action: Pick `SPEC-FORMAT-TERSE.2.1` (Round 2 expression-valued blocks) and run KM/TOOLBOX/code-read ground truth first; split before code if broader than one signoff slice.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy/source warning noise includes nested `rgx` baseline. oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs` (**33 fixtures after `.1.6`**). phase0 baseline = **990 green after `.1.6`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
