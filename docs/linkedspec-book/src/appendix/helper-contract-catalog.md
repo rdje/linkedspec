@@ -12,7 +12,8 @@ identically. No Perl implementation knowledge is required.
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
 > target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`;
-> the array target of `push_value(name, …)` / `push_nonempty(name, …)`; and the hash target of
+> the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator
+> `name += value`; and the hash target of
 > statement-level `set_key(name, key, value)`
 > auto-exist from a **bare** name too, with the kind fixed by that position. A backend MUST supply
 > the same auto-existence: a wrapper- or position-referenced variable
@@ -259,7 +260,14 @@ identically. No Perl implementation knowledge is required.
 - **Returns**: void
 - **Behavior**: Terse explicit-value append. Lowers identically to `push_value(target, value)` for unambiguous value expressions.
 - **Examples**: `push(items, "a")`, `push(items, scalar(value))`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
-- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a bare working variable value, wrap the value (`push(items, scalar(value))`) or use `push_value(items, value)` until bare value-position reads land.
+- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable value, wrap the value (`push(items, scalar(value))` or `push_value(items, scalar(value))`) until bare value-position reads land.
+
+### `items += value`
+- **Signature**: `target += value: expr`
+- **Returns**: void
+- **Behavior**: Statement-level array append operator. Lowers/runs identically to `push(target, value)` / `push_value(target, value)` for explicit value expressions.
+- **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += scalar(value)`.
+- **Edge cases**: A bare RHS such as `items += value` remains reserved for the later bare value-position read work. Use `items += scalar(value)` or `push_value(items, scalar(value))` when appending a working scalar by name.
 
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
@@ -914,7 +922,7 @@ Every helper can be used in both structured-block form (`I { declare(...) }`) an
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value` and `set_key(name, key, value)` are the explicit mutation forms.
+Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, and `set_key(name, key, value)` are the explicit mutation forms.
 
 ### Terse Helper Renames (canonical going forward)
 The `.spec` format is migrating to terser helper names (terse-format direction). For these three
@@ -926,6 +934,7 @@ unlike the Retired table below):
 |---|---|---|
 | `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`. |
 | `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Does not imply array `+=`, hash-index assignment, or bare value-position reads. |
+| `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator for explicit value expressions. Bare RHS is still deferred; write `items += scalar(value)` or `push_value(items, scalar(value))` for a working scalar. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 

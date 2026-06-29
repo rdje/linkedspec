@@ -67,6 +67,12 @@ on Perl; Rust parses it as a statement-only scalar assignment and mutates the pe
 still a target-position rule only. It does not make `return(NAME)` a variable read and does not infer array or
 hash kinds from right-hand-side shapes.
 
+**Update 2026-06-29 (`SPEC-FORMAT-TERSE.1.3.4.2`):** array operator append adds another clean type-implying
+statement position for the **target only**: `NAME += expr` mutates working array `NAME` and auto-supplies
+`my @NAME` on Perl; Rust parses it as a statement-only array append and mutates the per-parse array map. The
+RHS still follows the existing value-expression rules. `NAME += scalar(value)` is accepted, but bare RHS
+`NAME += value` is deliberately not accepted because Channel 2 still owns bare value-position reads.
+
 ## The three behaviors (dump-don't-guess)
 
 A working variable referenced **only through a wrapper** is the `.1.1.1` path and already works. The

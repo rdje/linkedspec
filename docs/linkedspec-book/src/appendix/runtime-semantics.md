@@ -220,8 +220,8 @@ E {return(array_copy(array(results)))}
 ```
 
 All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
-is the target accumulator. To append a bare working-variable value, write
-`push(results, scalar(value))` or use `push_value(results, value)` until bare
+is the target accumulator. To append a working-variable value, write
+`push(results, scalar(value))` or use `push_value(results, scalar(value))` until bare
 value-position reads are part of the DSL.
 
 ### 5.4 Return Value

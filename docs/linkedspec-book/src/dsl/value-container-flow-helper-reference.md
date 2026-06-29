@@ -14,7 +14,7 @@ Most value helpers return one expression. They become useful when they are place
 | --- | --- | --- |
 | Declaration initializer | `declare(scalar, name=expr)` | a working variable should start with one explicit value. |
 | Assignment | `assign(target, source)` | an existing scalar, array, or hash slot should be replaced. |
-| Array append | `push_value(array(target), value)` | one value should be appended without replacing the whole array. |
+| Array append | `items += expr` / `push(target, expr)` / `push_value(array(target), expr)` | one explicit value expression should be appended without replacing the whole array. |
 | Return payload | `return(payload)` | the rule should return one structured value. |
 | Predicate | `if(condition)` / `elseif(condition)` | helper logic should drive control flow. |
 | Switch driver | `switch(value)` | one value should drive equality or regex cases. |
@@ -139,7 +139,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying target position: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)` / `push_nonempty(name, …)`; and the hash target of statement-level `set_key(name, key, value)`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying target position: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; and the hash target of statement-level `set_key(name, key, value)`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
@@ -162,8 +162,11 @@ These helpers are the entry point into local working state and structured values
 > and a single unified `copy(container)` subsumes both `array_copy(...)` and `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
 > array). The scalar operator statement `name = value` is equivalent to `set(name, value)` and
-> `assign(name, value)`. Each terse helper spelling lowers **identically** to its original in every
-> position, so both work during migration — the original names are deprecated aliases, not yet retired.
+> `assign(name, value)`. The array append operator `items += expr` is equivalent to the explicit
+> append forms `push(items, expr)` / `push_value(items, expr)` for explicit value expressions; when the
+> value is a working variable, write `items += scalar(value)` until bare value-position reads land.
+> Each terse helper spelling lowers **identically** to its original in every position, so both work
+> during migration — the original names are deprecated aliases, not yet retired.
 > See the
 > [Helper Contract Catalog](../appendix/helper-contract-catalog.md#terse-helper-renames-canonical-going-forward).
 
@@ -240,6 +243,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `assign(scalar(name), expr)` | replace a scalar slot | a named scalar should hold the expression result. |
 | `assign(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
 | `assign(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
+| `items += expr` | append one value | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push_value(items, expr)` for accepted RHS shapes. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `assign(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
 | `push(rule)` | call one rule and append its result | the shortest spelling is desired for appending a child result into the current rule accumulator. |
@@ -312,6 +316,16 @@ Use `push_value(...)` instead when the pushed value is not simply the child resu
 push_value(array(items), trim(match_text()));
 push_value(array(children), hash("kind", "wrapped", "node", call(Node)));
 ```
+
+The terse operator form is equivalent for explicit value expressions:
+
+```text
+items += trim(match_text());
+children += hash("kind", "wrapped", "node", call(Node));
+items += scalar(value);
+```
+
+Keep the RHS explicit. `items += value` is intentionally still reserved for the later bare value-position read work; use `items += scalar(value)` or `push_value(items, scalar(value))` when `value` is a working scalar.
 
 When the child returns an array-like payload and the current rule accumulator needs one element from it, pass a zero-based index as the second argument:
 
@@ -913,11 +927,11 @@ Sequence::AND
  Item
  -> Sequence[0] {
    assign(scalar(retv), call(Item));
-   push_value(array(items), scalar(retv));
+   items += scalar(retv);
  }
  -> Sequence[1] {
    assign(scalar(retv), call(Item));
-   push_value(array(items), scalar(retv));
+   items += scalar(retv);
 
    if(num_gt(count(array(items)), 1))
      return(hash(
@@ -932,7 +946,7 @@ Sequence::AND
  }
 ```
 
-The important choice is `push_value(...)`: each child result is appended. The final `return(...)` uses pure array helpers to read or derive views from the accumulated array without mutating it.
+The important choice is the append operation: each child result is appended, here with `items += scalar(retv)`. The final `return(...)` uses pure array helpers to read or derive views from the accumulated array without mutating it.
 
 ## Worked example: classify with switch
 
@@ -966,7 +980,7 @@ The switch is better than a long `elseif` ladder because every branch is driven 
 - Prefer `return(payload)` for new structured returns.
 - Prefer `array_copy(...)` and `hash_copy(...)` when returning a nested snapshot.
 - Prefer `flat_array(...)` and `flat_hash(...)` when splicing into a surrounding constructor.
-- Prefer `push_value(...)` when appending; do not use whole-array assignment as a disguised append.
+- Prefer `items += expr` / `push_value(...)` when appending; do not use whole-array assignment as a disguised append.
 - Prefer `has_key(...)` for field existence and `is_defined(...)` for value definedness.
 - Prefer `coalesce_nonempty(trim(...), fallback)` for human text fallback.
 - Prefer numeric helpers and `num_*` comparisons for counts, indexes, depths, and lengths.

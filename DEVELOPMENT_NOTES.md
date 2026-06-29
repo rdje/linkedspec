@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4.2 — array `+=` is a statement append, not a bare-RHS read): Landed
+  `items += value` on Perl and Rust for explicit RHS expressions. Durable points. (1) **Reuse the settled
+  append contract instead of inventing a second one.** Perl recognizes `NAME += RHS` through its own PUSH
+  contract/scanner/lowerer and emits the same `push @NAME, RHS` as accepted `push(NAME,RHS)` /
+  `push_value(NAME,RHS)` shapes; Rust models it as statement-only `Expr::AssignArrayAppend` and appends through
+  `RuntimeContext::push_value`. (2) **The target is array-position auto-existence.** A bare LHS `items`
+  auto-supplies one `my @items` on Perl; Rust uses the per-parse array map. (3) **Reject bare RHS deliberately.**
+  `items += scalar(value)` is accepted; `items += value` is left untouched on Perl and rejected by the Rust
+  statement parser because Channel 2 still owns bare value-position working-variable reads. (4) **Keep operator
+  family boundaries crisp.** Increment-like `items ++`, scalar `name = value`, hash-index `name[key] = value`,
+  and child-call `push(A,B)` stay separate. Verification: phase0 978, focused Rust core/runtime tests, corpus
+  oracle 15 fixtures, mdBook, Knowledge Map, doctrine/memory, and local CI gates.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4.1 — scalar assignment is a statement boundary, not an expression
   shortcut): Landed `name = value` on Perl and Rust. Durable points. (1) **Parse the operator only where it is
   a target-position statement.** Perl recognizes `NAME = RHS` through its own ASSIGN contract/scanner/lowerer;
@@ -47,8 +60,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   spelling. Durable points. (1) **Do not treat `push` as a flat alias of `push_value`.** The DSL already has a
   live child-call family: `push(Child)`, `push(Child,target)`, and indexed variants. Therefore `push(A,B)` must
   keep child-call meaning, not silently become "append variable B into A". The safe contract is `push(target,
-  value)` only when the value expression is unambiguous/non-all-bare; bare variable values still need
-  `scalar(value)` or the legacy-clear `push_value(target,value)` spelling. (2) **Lowering and declaration
+  value)` only when the value expression is unambiguous/non-all-bare; working-variable values still need an
+  explicit read such as `scalar(value)`. (2) **Lowering and declaration
   collection need the same disambiguation.** The statement contract/scanner/lowering can skip all-bare
   `push(A,B)`, but the auto-`my @target` collector must also skip it or it would invent an accumulator for a
   child-call target. (3) **Do not regex-split function arguments when the DSL allows nested helpers.**

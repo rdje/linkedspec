@@ -6,12 +6,14 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.3.4` SPLIT** — operator syntax decomposed by target/mechanism after
-  Knowledge Map + TOOLBOX recon. Current `name = value`, `items += value`, and `name["k"] = value` forms are
-  RAW_PERL blockers on Perl, and Rust `CodeBlock` still stores expression statements only; implementing all
-  three together would bundle parser/AST/runtime/lowering work across unrelated mutation forms. Children:
-  `.1.3.4.1` scalar assignment operator, `.1.3.4.2` array append operator, `.1.3.4.3` hash-index assignment
-  operator. **Frontier → `.1.3.4.1`**. Prior **`.1.3.3` DONE** — hash mutation spelling landed. Top-level
+- Last updated: `2026-06-29` (**`.1.3.4.2` DONE** — array append operator `items += value` landed on Perl and
+  Rust for explicit RHS expressions. It lowers/runs identically to accepted `push(items, value)` /
+  `push_value(items, value)` append forms, auto-exists the bare array target, and leaves bare RHS
+  `items += value` deferred to Channel 2. **Frontier → `.1.3.4.3`** (hash-index assignment operator). Prior
+  **`.1.3.4.1` DONE** — scalar assignment operator `name = value` landed. Prior **`.1.3.4` SPLIT** — operator
+  syntax decomposed by target/mechanism after Knowledge Map + TOOLBOX recon. Children: `.1.3.4.1` scalar
+  assignment operator, `.1.3.4.2` array append operator, `.1.3.4.3` hash-index assignment operator. Prior
+  **`.1.3.3` DONE** — hash mutation spelling landed. Top-level
   `set_key(name, key, value)` is now a statement-level named-hash mutation on Perl and Rust; nested/value-form
   `set_key(hash_expr, key, value)` remains a pure copy helper and is locked not to mutate its source hash.
   Book + KM + oracle corpus updated. Prior
@@ -426,7 +428,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     All-bare child-call forms keep precedence: `push(Child)`, `push(Child, target)`, `push(Child, index)`,
     `push(Child, target, index)`, and the scope-injected method-chain child-call forms remain child-call
     contracts. In particular `push(items, value)` is still child-call-shaped (`items` rule into `@value`);
-    appending a bare working variable value stays `push(items, scalar(value))` or `push_value(items, value)`
+    appending a working variable value stays `push(items, scalar(value))` or `push_value(items, scalar(value))`
     until Channel 2 bare value-position reads land. Implementation: Perl `push_value` statement recognition now
     also accepts `push` in `ActionIR/Contracts.pm`, `Scanner/PrimitivePipelineRules.pm`, and
     `ActionIR/MethodLowering.pm`, while `RuleIR/EmitContext.pm` collects the target auto-`my @target` using a
@@ -516,13 +518,30 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.3.4.1` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.3.4.2`
-  Status: `pending`
+  Status: `done` (2026-06-29)
   Goal: Array append operator — `items += value` lowers/runs identically to the settled explicit append form.
   Acceptance: Perl and Rust append one value to the named working array; the value expression follows the
     conservative `.1.3.2` disambiguation contract (bare working-variable values remain deferred to Channel 2
     unless explicitly wrapped); existing child-call `push(...)` semantics stay unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-06-29.** Perl now recognizes statement-level `NAME += RHS` through an explicit
+    `array_append_operator` PUSH contract, scanner event, and lowering path that emits the same direct push as
+    `push(NAME,RHS)` / `push_value(NAME,RHS)` for explicit RHS expressions. The auto-working-var collector
+    records the bare array target so generated handlers get exactly one `my @NAME` preamble. Rust now has a
+    statement-only `Expr::AssignArrayAppend` AST variant, parses the operator only at block-statement
+    boundaries, executes it by evaluating RHS then calling `RuntimeContext::push_value`, and rejects nested
+    append expressions during value evaluation. The boundary is intentionally narrow: `items += scalar(value)`
+    works, while `items += value` remains deferred to Channel 2; increment-like `items ++`, child-call
+    `push(A,B)`, scalar assignment, and hash-index assignment remain separate. **Verification:** TOOLBOX
+    lowerings prove `items += "a"` emits `push @items, "a"` and `items += cat(...)` / `items += scalar(...)`
+    lower identically to explicit append forms, while bare RHS and out-of-scope operators remain unchanged;
+    descriptor/source/runtime probes show `PUSH,RETURN`, fallback count 0, exactly one array declaration, no
+    scalar/hash declaration, and stable same-parser output. `perl -c` clean on edited Perl modules/test/
+    generator; `prove -q -Iperl t/phase0_regression.t` PASS (`1..978`); oracle corpus regenerated with 15
+    fixtures; focused Rust core `array_append` tests PASS; focused Rust core `scalar_assignment` regression
+    tests PASS; focused Rust runtime `terse_1_3_4_2` tests PASS; Rust corpus oracle PASS over 15 fixtures;
+    full Rust runtime suite PASS (116 unit + corpus-oracle harness + 43 integration tests); mdBook, doctrine,
+    memory-architecture, and local CI gates recorded in the close-out.
+  Commit: `SPEC-FORMAT-TERSE.1.3.4.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.3.4.3`
   Status: `pending`
@@ -743,10 +762,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.3.3` | `done` 2026-06-29 | Hash function mutation semantics — `set_key(name,key,value)` now mutates a named working hash as a statement on Perl + Rust; pure `set_key(hash_expr,key,value)` remains copy-valued. |
 | — | `SPEC-FORMAT-TERSE.1.3.4` | `active` (SPLIT 2026-06-29) | Operator syntax family split by target/mechanism after KM + TOOLBOX recon: scalar assignment, array append, and hash-index assignment are separate implementation leaves. |
 | — | `SPEC-FORMAT-TERSE.1.3.4.1` | `done` 2026-06-29 | Scalar assignment operator — `name = value` now lowers/runs identically to `set(name,value)` / `assign(name,value)`, without claiming array/hash operators or Channel 2 bare value reads. |
-| 1 | `SPEC-FORMAT-TERSE.1.3.4.2` | `pending` (**now next**) | Array append operator — `items += value` lowers/runs identically to the settled explicit append form, inheriting `.1.3.2`'s child-call and bare-value boundaries. |
-| … | `.1.3.4.3`, `.1.2.3`+ (Channel 2),`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Remaining hash-index operator leaf + Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.2.1` + `.1.5`) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
+| — | `SPEC-FORMAT-TERSE.1.3.4.2` | `done` 2026-06-29 | Array append operator — `items += value` now lowers/runs identically to explicit append forms for explicit RHS expressions, auto-exists the array target, and preserves the Channel 2 bare-RHS boundary. |
+| 1 | `SPEC-FORMAT-TERSE.1.3.4.3` | `pending` | Hash-index assignment operator — `name[key] = value` should lower/run identically to settled `set_key(name,key,value)` without broadening Channel 2. |
+| … | `.1.2.3`+ (Channel 2),`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.2.1` + `.1.5`) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.3.4.2` array append operator** — append statement, not value-position inference).
+  The accepted rule is intentionally narrow: top-level `NAME += RHS` is an array-target statement equivalent
+  to explicit append only when `RHS` is already an explicit value expression. The LHS is a type-implying array
+  target and auto-exists (`my @NAME` on Perl, per-parse array map on Rust). Bare RHS `NAME += value` is not
+  accepted because Channel 2 still owns bare value-position working-variable reads; authors must write
+  `NAME += scalar(value)` or another explicit expression. This keeps `+=` from re-opening the `push(A,B)`
+  child-call ambiguity or silently inventing a bare read model before `.1.2.3`+.
 
 - `2026-06-29` (**`.1.3.4.1` scalar assignment operator** — statement-only target-position assignment, not
   general expression assignment). The accepted rule is intentionally narrow: a top-level lifecycle statement
@@ -782,8 +810,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   and `call(Child)` values are unambiguous and lower identically to `push_value(target,value)`. All-bare forms
   keep the historical child-call meaning because `push(A,B)` already means "call child rule `A` and append into
   accumulator `B`"; changing it would silently break existing `.spec` authoring and contradict the accumulator
-  convention audit. A bare working-variable value therefore still needs `push(items, scalar(value))` or
-  `push_value(items, value)` until Channel 2 bare value-position reads provide a broader disambiguation model.
+  convention audit. A working-variable value therefore still needs an explicit read such as
+  `push(items, scalar(value))` or `push_value(items, scalar(value))` until Channel 2 bare value-position reads
+  provide a broader disambiguation model.
   The declaration collector for `push(...)` must parse balanced call syntax instead of using a comma-splitting
   regex, because values such as `cat("a","b")` contain nested commas and still need exactly one `my @items`.
 
@@ -1011,6 +1040,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.3` | TOOLBOX `call_spec_handler_subst` lowerings for mutation vs pure value form; descriptor/runtime/source-dump probes; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust `terse_1_3_3`; Rust corpus oracle; `mdbook build`; Knowledge Map gate; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `bash tools/run_ci_local.sh` | Perl recognizes `set_key(name,key,value)` as a statement-level named-hash mutation and emits `my %name` for a bare hash target. Nested `set_key(hash_expr,key,value)` remains pure/copy-valued. Rust mirrors statement mutation in `Engine::execute_block()` and keeps value helper behavior in `call_helper()`. Phase0 PASS (976); focused Rust tests PASS; corpus oracle PASS over 13 fixtures; mdBook build EXIT 0; Knowledge Map, memory-architecture, doctrine checks, and full local gate OK. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.4` (split) | KM retrieval; TOOLBOX `call_spec_handler_subst` for operator forms vs settled function forms; `return_descriptor` on a spec containing all three operators; Rust `expr.rs` + `engine.rs` code-read | Split `.1.3.4` into `.1.3.4.1` scalar assignment, `.1.3.4.2` array append, `.1.3.4.3` hash-index assignment. Perl reports `name = "ok"`, `items += "a"`, and `name["k"] = "v"` as three RAW_PERL/language-agnostic blockers while settled function forms lower. Rust lifecycle code is expression-statement-only (`Stmt { expr }`) and has no assignment/append/hash-set statement variants. No engine/book behavior change; split slice owns sequencing and frontier only. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.4.1` | TOOLBOX lowerings for scalar operator vs `set(...)`; descriptor/source/runtime probes; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core `scalar_assignment`; focused Rust runtime `terse_1_3_4_1`; full Rust runtime suite; `mdbook build`; Knowledge Map, memory-architecture, doctrine, and full local CI gates | Perl recognizes top-level `NAME = RHS` as an ASSIGN statement and auto-declares the scalar target; Rust parses and executes statement-only `AssignScalar`. `name = cat(...)` lowers identically to `set(name, cat(...))`; `name == ...`, `items += ...`, `name[key] = ...`, and keyword-arg `name=...` remain out of scope. Phase0 PASS (`1..977`); oracle corpus regenerated with 14 fixtures; focused Rust tests PASS; full runtime suite PASS (116 unit + corpus-oracle harness + 41 integration tests); public book and KM updated. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.4.2` | TOOLBOX lowerings for array operator vs `push(...)` / `push_value(...)`; descriptor/source/runtime probes; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core `array_append`; focused Rust core `scalar_assignment`; focused Rust runtime `terse_1_3_4_2`; Rust corpus oracle; full Rust runtime suite; `mdbook build`; Knowledge Map, memory-architecture, doctrine, and full local CI gates | Perl recognizes top-level `NAME += RHS` as a PUSH statement and auto-declares the array target; Rust parses and executes statement-only `AssignArrayAppend`. `items += "a"`, `items += cat(...)`, and `items += scalar(value)` lower/run like explicit append forms; `items += value`, `items ++`, scalar assignment, and hash-index assignment stay separate. Phase0 PASS (`1..978`); oracle corpus regenerated with 15 fixtures; focused Rust tests PASS; full Rust runtime suite PASS (116 unit + corpus-oracle harness + 43 integration tests); public book and KM updated. |
 
 ## Commit Log
 
@@ -1032,8 +1062,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.3.3` | `SPEC-FORMAT-TERSE.1.3.3 — implement set_key(name,key,value) hash mutation statement` | Perl `ActionIR` now treats top-level `set_key(name,key,value)` as an ASSIGN mutation statement and auto-declares bare hash targets. Rust executes top-level `set_key(...)` statements by mutating the named hash while keeping nested value-form `set_key(hash_expr,...)` pure. Added phase0 locks, Rust integration locks, oracle fixture, and book/KM/live-doc updates. |
 | `SPEC-FORMAT-TERSE.1.3.4` | `SPEC-FORMAT-TERSE.1.3.4 — split operator syntax family into scalar, array, and hash leaves` | Docs/tree/KM/live-doc split slice only. Operator forms are currently RAW_PERL blockers on Perl and unsupported by Rust's expression-statement-only lifecycle AST. Frontier becomes `.1.3.4.1` scalar assignment operator. |
 | `SPEC-FORMAT-TERSE.1.3.4.1` | `SPEC-FORMAT-TERSE.1.3.4.1 — implement scalar assignment operator name = value` | Perl and Rust now support statement-level scalar `name = value` as equivalent to `set(name,value)` / `assign(name,value)`, with focused locks proving the narrow boundary and no Channel 2 broadening. Frontier becomes `.1.3.4.2` array append operator. |
+| `SPEC-FORMAT-TERSE.1.3.4.2` | `SPEC-FORMAT-TERSE.1.3.4.2 — implement array append operator items += value` | Perl and Rust now support statement-level array `items += value` as equivalent to explicit append forms for explicit RHS expressions, with locks proving bare RHS remains deferred to Channel 2. Frontier becomes `.1.3.4.3` hash-index assignment operator. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.3.4.2` DONE — array append operator `items += value` landed on Perl and Rust.**
+  Top-level `NAME += RHS` now lowers/runs like explicit append forms for explicit RHS expressions, and bare
+  array targets auto-exist as per-invocation lexicals on the Perl reference. Rust gained a statement-only
+  `AssignArrayAppend` AST/execution path and rejects that form in nested value evaluation. The accepted
+  boundary is narrow by design: `items += scalar(value)` works, while `items += value` remains pending behind
+  Channel 2; child-call `push(A,B)`, increment-like syntax, scalar assignment, and hash-index assignment remain
+  separate. Verification: TOOLBOX parity probes, descriptor/source/runtime probes, phase0 PASS (`1..978`),
+  oracle corpus regenerated with 15 fixtures, focused Rust core/runtime tests PASS, Rust corpus oracle PASS,
+  mdBook/KM updated, and final gates green. Frontier → `.1.3.4.3`.
 
 - `2026-06-29`: **`.1.3.4.1` DONE — scalar assignment operator `name = value` landed on Perl and Rust.**
   Top-level `NAME = RHS` now lowers/runs like `set(NAME,RHS)` / `assign(NAME,RHS)`, and bare scalar targets
@@ -1070,8 +1111,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   child-call `push(...)`.** Selected disambiguation: `push(target,value)` is an explicit-value append when the
   value expression is unambiguous/non-all-bare (`"literal"`, `scalar(value)`, `array(target)` + wrapped value,
   helper values like `cat(...)`, or `call(Child)`). All-bare two-identifier `push(A,B)` keeps the child-call
-  meaning (`A` rule into `B` accumulator); append a bare working-variable value as `push(items, scalar(value))`
-  or `push_value(items, value)` until Channel 2 bare value-position reads land. Perl recognition extended in
+  meaning (`A` rule into `B` accumulator); append a working-variable value as `push(items, scalar(value))`
+  or `push_value(items, scalar(value))` until Channel 2 bare value-position reads land. Perl recognition extended in
   the `push_value` contract/scanner/lowering path, and the auto-array collector now uses a balanced parser scan
   for `push(...)` so nested comma values such as `cat("a","b")` declare exactly one target array. Rust already
   had the `"push_value" | "push"` runtime alias; this slice locks it with a Perl-oracle fixture and integration

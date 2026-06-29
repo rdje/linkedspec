@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4.2 — array append operator `items += value` landed** (PERL
+  ACTIONIR + RUST PARSER/RUNTIME + BOOK + PHASE0/RUST/ORACLE LOCKS). Top-level `NAME += RHS` now lowers/runs
+  identically to the settled explicit append forms for explicit RHS expressions. Perl recognizes it through a
+  PUSH contract/scanner/lowering path and auto-supplies one `my @NAME` preamble for a bare array target; Rust
+  parses it as statement-only `AssignArrayAppend`, evaluates the RHS, and appends through the per-parse array
+  map. Boundaries remain explicit: `items += scalar(value)` works, while bare `items += value` stays deferred
+  to Channel 2; child-call `push(A,B)`, increment-like `items ++`, scalar assignment, and hash-index
+  assignment are not conflated. **Verification:** TOOLBOX parity probes; descriptor/source/runtime probes
+  (`PUSH,RETURN`, fallback 0, one array declaration); phase0 PASS (`1..978`); oracle corpus regenerated with
+  15 fixtures; focused Rust core/runtime tests PASS; Rust corpus oracle PASS; mdBook + KM + memory/doctrine +
+  local CI gates green. **Frontier: `SPEC-FORMAT-TERSE.1.3.4.3`** (hash-index assignment operator).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4.1 — scalar assignment operator `name = value` landed** (PERL
   ACTIONIR + RUST PARSER/RUNTIME + BOOK + PHASE0/RUST/ORACLE LOCKS). Top-level `NAME = RHS` now lowers/runs
   identically to `set(NAME,RHS)` / `assign(NAME,RHS)`. Perl recognizes it through an ASSIGN
@@ -48,8 +59,8 @@ Current execution status for interruption-safe batch workflow recovery.
   engine change**). Selected conservative disambiguation: `push(target,value)` lowers/runs like
   `push_value(target,value)` only for unambiguous/non-all-bare value expressions (`"literal"`,
   `scalar(value)`, helper values such as `cat(...)`, or `call(Child)`). All-bare `push(A,B)` keeps the
-  child-call meaning (`A` rule into `B` accumulator); appending a bare working-variable value remains
-  `push(items, scalar(value))` or `push_value(items, value)` until Channel 2 bare value-position reads land.
+  child-call meaning (`A` rule into `B` accumulator); appending a working-variable value remains
+  `push(items, scalar(value))` or `push_value(items, scalar(value))` until Channel 2 bare value-position reads land.
   Perl recognition now accepts the alias in the `push_value` contract/scanner/lowering path, and the auto-array
   collector uses a balanced parser-backed scan so nested comma values such as `cat("a","b")` declare exactly
   one `my @items`. Rust already accepted `"push_value" | "push"`; this slice locks it with a Perl-oracle fixture

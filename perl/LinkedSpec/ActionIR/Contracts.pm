@@ -32,6 +32,7 @@ sub default_deps_for_package {
    'lower_return_general_statement',
    'lower_assign_method_statement',
    'lower_scalar_assignment_operator_statement',
+   'lower_array_append_operator_statement',
    'lower_set_key_statement',
    'lower_push_value_statement',
    'lower_push_nonempty_statement',
@@ -69,6 +70,7 @@ sub _require_lowering_deps {
   lower_return_general_statement => $require_dep->('lower_return_general_statement'),
   lower_assign_method_statement  => $require_dep->('lower_assign_method_statement'),
   lower_scalar_assignment_operator_statement => $require_dep->('lower_scalar_assignment_operator_statement'),
+  lower_array_append_operator_statement => $require_dep->('lower_array_append_operator_statement'),
   lower_set_key_statement        => $require_dep->('lower_set_key_statement'),
   lower_push_value_statement     => $require_dep->('lower_push_value_statement'),
   lower_push_nonempty_statement  => $require_dep->('lower_push_nonempty_statement'),
@@ -1757,6 +1759,17 @@ sub _build_assignment_and_regex_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_scalar_assignment_operator_statement};
+    return $lower->($code) || $code
+   },
+  },
+  {
+   id                 => 'array_append_operator',
+   ir_node            => 'PUSH',
+   diag_name          => 'array_append_operator',
+   unresolved_pattern => qr/^\s*[A-Za-z_][A-Za-z0-9_]*\s*\+=/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_array_append_operator_statement};
     return $lower->($code) || $code
    },
   },

@@ -285,6 +285,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.3.4.2 — array append operator spelling ──
+    #
+    # `items += value` is the statement-level array append operator for explicit
+    # RHS shapes. Bare RHS variable reads remain deferred to Channel 2.
+    {   case   => 'terse_1_3_4_2_array_append_operator',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { label = "b"; items += "a"; items += scalar(label); return(array_copy(array(items))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

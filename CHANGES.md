@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4.2 — implement array append operator items += value
+
+**Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust expression parser/runtime execution,
+phase0 locks, Rust parser/runtime tests, oracle corpus, mdBook, Knowledge Map, task tree, roadmap tracker, and
+live docs.
+
+**What changed:** top-level `items += value` is now the terse array append operator for explicit value
+expressions. It lowers and runs identically to the settled explicit append forms `push(items, value)` /
+`push_value(items, value)`. Perl emits the same direct `push @items, ...` and auto-supplies one `my @items`
+preamble for a bare array target; Rust parses it as a statement-only `AssignArrayAppend` and appends the
+evaluated RHS into the per-parse array map.
+
+**Boundary:** this leaf deliberately preserves the `.1.3.2` and Channel 2 boundaries. `items += scalar(value)`
+works; `items += value` is still reserved because bare value-position working-variable reads are not landed.
+Child-call `push(A,B)`, increment-like `items ++`, scalar `name = value`, and hash-index `name[key] = value`
+remain separate semantics.
+
+**Validation:** TOOLBOX lowerings prove `items += "a"`, `items += cat(...)`, and `items += scalar(label)` lower
+like the explicit append forms while `items += value` remains unchanged; descriptor/source/runtime probes show
+`PUSH,RETURN`, fallback count 0, one array declaration, and stable parser output. `prove -q -Iperl
+t/phase0_regression.t` PASS (`1..978`); oracle corpus regenerated with 15 fixtures; focused Rust core/runtime
+tests PASS; Rust corpus oracle PASS over 15 fixtures; full Rust runtime suite PASS (116 unit + corpus-oracle
+harness + 43 integration tests); mdBook, Knowledge Map, memory-architecture, doctrine, and local CI gates
+recorded in the close-out.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4.1 — implement scalar assignment operator name = value
 
 **Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust expression parser/runtime execution,
@@ -74,8 +99,8 @@ mdBook, task tree, Knowledge Map card + generated map, live docs. No Rust engine
 expression is unambiguous/non-all-bare. It lowers identically to `push_value(target, value)` for values such as
 string literals, `scalar(value)`, helper expressions like `cat(...)`, wrapped targets/values, and `call(Child)`.
 All-bare forms keep the existing child-call convention: `push(A, B)` still means "call child rule `A` and append
-into accumulator `B`". To append a bare working-variable value, use `push(items, scalar(value))` or
-`push_value(items, value)` until Channel 2 bare value-position reads land.
+into accumulator `B`". To append a working-variable value, use `push(items, scalar(value))` or
+`push_value(items, scalar(value))` until Channel 2 bare value-position reads land.
 
 **Implementation:** Perl `ActionIR/Contracts.pm`, `Scanner/PrimitivePipelineRules.pm`, and
 `ActionIR/MethodLowering.pm` accept `push` through the `push_value` statement path only for the unambiguous

@@ -459,6 +459,9 @@ impl Engine {
             if self.execute_scalar_assignment_operator_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
+            if self.execute_array_append_operator_statement(&stmt.expr, ctx, rule_label)? {
+                continue;
+            }
             if self.execute_set_key_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
@@ -480,6 +483,22 @@ impl Engine {
         };
         let evaluated = self.eval_expr(value, ctx, rule_label)?;
         ctx.set_scalar(name, evaluated);
+        Ok(true)
+    }
+
+    /// Execute the statement-only array append operator `items += value`.
+    fn execute_array_append_operator_statement(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::Expr;
+        let Expr::AssignArrayAppend { name, value } = expr else {
+            return Ok(false);
+        };
+        let evaluated = self.eval_expr(value, ctx, rule_label)?;
+        ctx.push_value(name, evaluated);
         Ok(true)
     }
 
@@ -556,6 +575,9 @@ impl Engine {
             }
             Expr::AssignScalar { .. } => Err(
                 "scalar assignment operator is statement-only".to_string()
+            ),
+            Expr::AssignArrayAppend { .. } => Err(
+                "array append operator is statement-only".to_string()
             ),
             Expr::Variable { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {

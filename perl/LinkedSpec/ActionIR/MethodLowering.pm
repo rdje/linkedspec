@@ -1797,6 +1797,40 @@ sub _lower_scalar_assignment_operator_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_array_append_operator_statement
+# Purpose : Lower the statement form `items += value` to the same explicit array
+#           append emitted for accepted `push(items, value)` / `push_value(...)`
+#           shapes. A bare RHS is deliberately not claimed; Channel 2 owns bare
+#           value-position working-variable reads.
+# Args    : ($expr, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_array_append_operator_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*(.+)$/s;
+
+ my ($target_symbol, $value) = ($1, $2);
+ $value = $trim_action_ir_value->($value);
+ return undef unless defined($value) && length($value);
+ return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+
+ my $lowered_value = _lower_method_value_expr($value, $deps);
+ $lowered_value = $value unless defined($lowered_value) && length($lowered_value);
+ return "push \@$target_symbol, $lowered_value"
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_set_key_statement
 # Purpose : Lower the statement form `set_key(target, key, value)` to a direct
 #           hash-entry mutation. The pure value helper with the same name remains

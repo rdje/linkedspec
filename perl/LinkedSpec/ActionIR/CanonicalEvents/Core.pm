@@ -32,6 +32,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  print_each                       => 'PRINT',
  assign_value                     => 'ASSIGN',
  scalar_assignment_operator       => 'ASSIGN',
+ array_append_operator            => 'PUSH',
  regex_subst                      => 'REGEX_SUBST',
  return_general                   => 'RETURN',
  return                           => 'RETURN',

@@ -19,6 +19,7 @@ sub try_scan_contract_ir_events {
   'push_nonempty' => \&_scan_contract_push_nonempty,
   'assign_value' => \&_scan_contract_assign_value,
   'scalar_assignment_operator' => \&_scan_contract_scalar_assignment_operator,
+  'array_append_operator' => \&_scan_contract_array_append_operator,
   'set_key_statement' => \&_scan_contract_set_key_statement,
   'regex_subst' => \&_scan_contract_regex_subst,
   'split_array' => \&_scan_contract_split_array,
@@ -161,6 +162,28 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
   args => {
    target => $target_expr,
    source => $source_expr,
+  },
+ };
+}
+ return \@events
+}
+
+sub _scan_contract_array_append_operator {
+ my ($code) = @_;
+ my @events;
+foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $trimmed = _trim_action_ir_value($statement);
+ next unless defined($trimmed) && length($trimmed);
+ next unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*(.+)$/s;
+ my ($target_expr, $value_expr) = ($1, _trim_action_ir_value($2));
+ next unless defined($value_expr) && length($value_expr);
+ # Channel 2 is still deferred: a bare RHS is not accepted as a working-var read.
+ next if $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ push @events, {
+  raw => $trimmed,
+  args => {
+   target => $target_expr,
+   value  => $value_expr,
   },
  };
 }
