@@ -112,9 +112,23 @@ set(value, "token");
 return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
 ```
 
-That returns an object with a dynamic key from `field`, a fixed `"seen"` field, and a nested array. Target-kind
-inference is still a separate language-evolution slice: `name = [value]` assigns scalar `name` to an array
-payload; it does not infer or initialize array working variable `@name`.
+That returns an object with a dynamic key from `field`, a fixed `"seen"` field, and a nested array.
+
+Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference:
+
+```text
+items = [value, cat("a", "b")];     # initializes array working variable items
+meta = { field => value };          # initializes hash working variable meta
+set(items, []);                     # replaces array working variable items with an empty array
+set(meta, {});                      # replaces hash working variable meta with an empty hash
+```
+
+Use an explicit scalar wrapper when the intent is to store the whole array/hash payload in a scalar:
+
+```text
+set(scalar(payload), [value]);
+return(scalar(payload));
+```
 
 ## Reading and copying collections
 

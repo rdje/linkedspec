@@ -80,6 +80,40 @@ sub _declare_alias_to_type {
 }
 
 #------------------------------------------------------------------------------
+# Function: _infer_direct_shape_literal_kind
+# Purpose : Classify an accepted direct [] / {} DSL value literal as an array or
+#           hash source. This delegates acceptance to _lower_method_value_expr so
+#           target inference cannot drift from shape-literal value lowering.
+# Args    : ($expr, $deps)
+# Returns : 'array', 'hash', or undef
+#------------------------------------------------------------------------------
+sub _infer_direct_shape_literal_kind {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed) >= 2;
+
+ my $open = substr($trimmed, 0, 1);
+ my $close = $open eq '[' ? ']' : $open eq '{' ? '}' : undef;
+ return undef unless defined($close) && substr($trimmed, -1, 1) eq $close;
+
+ my $lowered = _lower_method_value_expr($trimmed, $deps);
+ return undef unless defined($lowered) && length($lowered);
+ return 'array' if $open eq '[' && $lowered =~ /^\[.*\]$/s;
+ return 'hash'  if $open eq '{' && $lowered =~ /^\{.*\}$/s;
+ return undef
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_typed_declare_statement
 # Purpose : Lower typed declaration methods into canonical Perl declaration
 #           statements (`my @x`, `my $y`, `my %z`).
@@ -1925,6 +1959,22 @@ sub _lower_assign_statement {
  my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
  my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
  my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ my $target_trimmed = $trim_action_ir_value->($target);
+ if (defined($target_trimmed) && $target_trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
+  my $source_shape_kind = _infer_direct_shape_literal_kind($source, $deps);
+  if (defined($source_shape_kind) && $source_shape_kind eq 'array') {
+   my $source_expr = $lower_declare_initializer_expr->('array', $source);
+   return undef unless defined($source_expr) && length($source_expr);
+   return "\@$target_trimmed = $source_expr";
+  }
+  if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
+   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
+   return undef unless defined($source_expr) && length($source_expr);
+   return "\%$target_trimmed = $source_expr";
+  }
+ }
 
  my $symbol = $extract_scalar_symbol_name->($target);
  if (defined $symbol) {
@@ -1968,6 +2018,7 @@ sub _lower_scalar_assignment_operator_statement {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
+ my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -1976,6 +2027,18 @@ sub _lower_scalar_assignment_operator_statement {
  my ($target_symbol, $source) = ($1, $2);
  $source = $trim_action_ir_value->($source);
  return undef unless defined($source) && length($source);
+
+ my $source_shape_kind = _infer_direct_shape_literal_kind($source, $deps);
+ if (defined($source_shape_kind) && $source_shape_kind eq 'array') {
+  my $source_expr = $lower_declare_initializer_expr->('array', $source);
+  return undef unless defined($source_expr) && length($source_expr);
+  return '@'.$target_symbol.' = '.$source_expr;
+ }
+ if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
+  my $source_expr = $lower_declare_initializer_expr->('hash', $source);
+  return undef unless defined($source_expr) && length($source_expr);
+  return '%'.$target_symbol.' = '.$source_expr;
+ }
 
  my $source_expr = $lower_assignment_source_expr->($source);
  return undef unless defined($source_expr) && length($source_expr);

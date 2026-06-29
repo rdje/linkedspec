@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.2 — Perl RHS shape target-kind inference landed**
+  (PERL ACTIONIR + DECLARE INIT + AUTO-DECL + PHASE0 + BOOK/KM LOCKS). Direct RHS shape literals now infer the
+  aggregate kind of a bare assignment target on the Perl reference: `items = [value]` / `set(items, [])` assign
+  array working variable `@items`, and `meta = { key => value }` / `assign(meta, {})` assign hash working
+  variable `%meta`. Non-shape RHS values remain scalar assignment, and explicit `scalar(name)` targets keep
+  scalar-held payload behavior (`set(scalar(payload), [value])` -> `$payload = [$value]`). Typed array/hash
+  declaration initializers now unwrap lowered direct shapes, so `declare(array, items=[value, cat("a","b")])`
+  and `declare(hash, meta={ key => value, "fixed" => [value] })` compose with scalar bare reads and helper
+  values.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; phase0 PASS
+  (`t/phase0_regression.t`, **989 tests**); mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.5.3`** (Rust shape-literal value parity).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.1 — Perl shape-literal value expressions landed**
   (PERL ACTIONIR + AUTO-DECL + PHASE0 + BOOK/KM LOCKS). Direct `[]` / `{}` shapes are now DSL value
   expressions on the Perl reference instead of raw Perl passthrough. Empty shapes still lower as `[]` / `{}`;

@@ -347,6 +347,20 @@ sub _lower_method_value_expr {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_method_value_expr', @args)
 }
 
+sub _infer_direct_shape_literal_sigil {
+ my ($expr) = @_;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed) >= 2;
+ my $open = substr($trimmed, 0, 1);
+ my $close = $open eq '[' ? ']' : $open eq '{' ? '}' : undef;
+ return undef unless defined($close) && substr($trimmed, -1, 1) eq $close;
+ my $lowered = _lower_method_value_expr($trimmed);
+ return undef unless defined($lowered) && length($lowered);
+ return '@' if $open eq '[' && $lowered =~ /^\[.*\]$/s;
+ return '%' if $open eq '{' && $lowered =~ /^\{.*\}$/s;
+ return undef
+}
+
 sub _lower_return_general_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_return_general_statement', @args)
@@ -825,12 +839,14 @@ sub _mask_action_code_literals {
 #                 a single bare-identifier argument (NOT the 2-arg scalar(container,key)
 #                 read, which has a comma). Sigil taken from the wrapper.
 #             (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE (un-wrapped) names in a
-#                 type-implying helper arg position: the scalar target of
-#                 assign(NAME, ...), the hash target of statement-level
+#                 type-implying helper arg position: the scalar/array/hash target
+#                 of assign/set(NAME, VALUE) depending on direct RHS shape
+#                 inference, the hash target of statement-level
 #                 set_key(NAME, KEY, VALUE), and the array target of push_value(NAME, ...) /
 #                 push(NAME, nonbare-value) / push_nonempty(NAME, ...). Such a bare name already LOWERS to the
 #                 correctly-sigil'd variable but otherwise gets no `my` (leaky global).
-#                 Sigil implied by the position ($ for assign, @ for the push family).
+#                 Sigil implied by the position ($ for non-shape assign/set, @/% for
+#                 direct []/{} assign/set RHS shapes, @ for the push family).
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
 #                 (all-bare child-call shape) and bare hash value-position reads
 #                 are deliberately NOT collected here.
@@ -840,15 +856,18 @@ sub _mask_action_code_literals {
 #             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
 #                 BARE scalar reads in return/assignment-like source slots:
 #                 return(NAME), assign/set(out, NAME), and `out = NAME` -> $NAME.
-  #             (e) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
-  #                 BARE scalar reads in mutation slots:
-  #                 items += VALUE, set_key(meta, KEY, VALUE), and meta[KEY] = VALUE.
-  #             (f) SPEC-FORMAT-TERSE.1.2.3.3.3, Channel 2 direct-access subset —
-  #                 BARE path atoms in accepted direct access value slots:
-  #                 foo["a"][INDEX] -> $foo->{"a"}->[$INDEX].
-  #             (g) SPEC-FORMAT-TERSE.1.2.3.5.1, Channel 2 shape-literal subset —
-  #                 BARE scalar reads directly inside accepted [] / {} value literals:
-  #                 [VALUE] -> [$VALUE], { KEY => VALUE } -> {$KEY => $VALUE}.
+#             (e) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
+#                 BARE scalar reads in mutation slots:
+#                 items += VALUE, set_key(meta, KEY, VALUE), and meta[KEY] = VALUE.
+#             (f) SPEC-FORMAT-TERSE.1.2.3.3.3, Channel 2 direct-access subset —
+#                 BARE path atoms in accepted direct access value slots:
+#                 foo["a"][INDEX] -> $foo->{"a"}->[$INDEX].
+#             (g) SPEC-FORMAT-TERSE.1.2.3.5.1, Channel 2 shape-literal subset —
+#                 BARE scalar reads directly inside accepted [] / {} value literals:
+#                 [VALUE] -> [$VALUE], { KEY => VALUE } -> {$KEY => $VALUE}.
+#             (h) SPEC-FORMAT-TERSE.1.2.3.5.2, Channel 2 RHS-shape subset —
+#                 BARE assignment targets infer @/% from direct [] / {} RHS
+#                 literals: NAME = [VALUE] -> @NAME, NAME = {KEY => VALUE} -> %NAME.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -974,6 +993,15 @@ sub _collect_auto_working_var_decls {
    $collect_shape_member_scalar_reads->($pair->[1]);
   }
  };
+ my $record_assignment_target_for_source = sub {
+  my ($target_expr, $source_expr) = @_;
+  my $target = _trim_action_ir_value($target_expr);
+  return unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  my $source = _trim_action_ir_value($source_expr);
+  return unless defined($source) && length($source);
+  my $shape_sigil = _infer_direct_shape_literal_sigil($source);
+  $record->($shape_sigil // '$', $target);
+ };
  for my $block (@raw_blocks) {
   next unless defined($block) && length($block);
   my $masked = _mask_action_code_literals($block);
@@ -985,20 +1013,17 @@ sub _collect_auto_working_var_decls {
 
   # (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
   #     arg position. The bare name already lowers to the correctly-sigil'd variable
-  #     (assign -> $NAME via _lower_assign_statement's scalar-first extraction;
+  #     (assign/set -> $NAME, or @NAME/%NAME for direct shape RHS inference;
   #     push_value/push/push_nonempty -> @NAME) but otherwise gets no preamble `my`. The
   #     `\s*,` after the name means a WRAPPED target (scalar(x)/array(x), whose name is
   #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
-  # `set` (SPEC-FORMAT-TERSE.1.4.1) is the terse rename of `assign`; a bare `set(NAME, …)`
-  # target lowers to the same scalar `$NAME`, so it auto-exists identically. The
-  # scalar assignment operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1) is
-  # likewise statement-level and scalar-only. The array append operator
+  # `set` (SPEC-FORMAT-TERSE.1.4.1) is the terse rename of `assign`; a bare `set(NAME, ...)`
+  # target follows the same source-driven inference as `assign`. The scalar assignment
+  # operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1) is likewise statement-level
+  # and now infers @/% for direct shape RHS literals. The array append operator
   # (`NAME += VALUE`) and hash-index assignment operator (`NAME[KEY] = VALUE`)
   # are statement-level array/hash mutations; `.1.2.3.3.2` additionally collects
   # the accepted bare scalar key/RHS reads in those mutation slots.
-  while ($masked =~ /\b(?:assign|set)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
-   $record->('$', $1);   # assign/set target lowers to a scalar
-  }
   while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('@', $1);   # push_value / push_nonempty target lowers to an array
   }
@@ -1026,9 +1051,10 @@ sub _collect_auto_working_var_decls {
   }
   while ($masked =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
-   next unless $call && (($call->{method} // '') eq 'assign');
+   next unless $call && (($call->{method} // '') eq 'assign' || ($call->{method} // '') eq 'set');
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
    next unless $args;
+   $record_assignment_target_for_source->($args->[0], $args->[1]);
    my $source_expr = _trim_action_ir_value($args->[1]);
    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($source_expr);
@@ -1066,13 +1092,13 @@ sub _collect_auto_working_var_decls {
     }
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
-   my $source_expr = _trim_action_ir_value($2);
-   $record->('$', $1) if defined($source_expr) && length($source_expr);
-   $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-   $record_direct_access_bare_path_atoms->($source_expr);
-   $collect_shape_literal_scalar_reads->($source_expr);
-   next;
-  }
+    my $source_expr = _trim_action_ir_value($2);
+    $record_assignment_target_for_source->($1, $source_expr);
+    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+    $record_direct_access_bare_path_atoms->($source_expr);
+    $collect_shape_literal_scalar_reads->($source_expr);
+    next;
+   }
    my $call = _parse_method_function_expr($trimmed);
    next unless $call && ($call->{method} // '') eq 'set_key';
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 3, 3);

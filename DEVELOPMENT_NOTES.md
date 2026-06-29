@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.2 — Perl RHS shape target-kind inference landed): Implemented the
+  second RHS-shape child by making direct shape literals an assignment target-kind oracle. Durable points. (1)
+  **Only bare targets infer from shape RHS.** `name = [value]`, `set(name, [])`, and `assign(name, [value])`
+  lower to array assignment (`@name = ...`); `{}` / `{ key => value }` lower to hash assignment (`%name = ...`).
+  Explicit wrappers preserve explicit kind, so `set(scalar(name), [value])` remains `$name = [$value]`. (2)
+  **Inference reuses the shape lowerer.** `ActionIR::MethodLowering::_infer_direct_shape_literal_kind` first
+  checks for a direct outer `[]` / `{}` shape and then delegates acceptance to `_lower_method_value_expr`, so
+  target inference cannot accept a different shape grammar than `.1.2.3.5.1` value lowering. (3) **The
+  collector must not record stale scalar targets.** `_collect_auto_working_var_decls` no longer records
+  `assign/set(NAME, ...)` targets with a broad regex; it parses the call, classifies the source, and records
+  `$NAME`, `@NAME`, or `%NAME` to match lowering. Operator assignments use the same helper. (4) **Declaration
+  initializer shapes use DSL member lowering too.** `declare(array, items=[value])` and
+  `declare(hash, meta={ key => value })` unwrap the lowered shape literal instead of raw payload text, so
+  bare members become scoped scalar reads and recognized helpers compose.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.1 — Perl shape-literal value expressions landed): Implemented the
   first RHS-shape child as a value-lowering change, not a target-inference change. Durable points. (1) **Shape
   literals are now DSL values on the Perl reference.** `_lower_method_value_expr` recognizes accepted `[]` and
@@ -11,8 +26,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   the new contract. (3) **Collector coverage follows the same shape oracle.** `_collect_auto_working_var_decls`
   records scalar bare reads only for shapes accepted by the lowerer, including shape literals in return payloads,
   assignment sources, append RHS values, hash-index RHS values, and push/set value slots. (4) **Target inference
-  stays separate.** `name = [value]` still declares/assigns scalar `$name`; `.1.2.3.5.2` owns any future
-  decision to infer `@name` / `%name` from RHS shape. Rust shape-literal parity stays `.1.2.3.5.3`.
+  stayed separate at this leaf.** `.1.2.3.5.2` later accepted aggregate target inference for direct RHS shapes.
+  Rust shape-literal parity stays `.1.2.3.5.3`.
 
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5 — RHS-shape/type-inference split): Split the remaining Channel 2
   shape work before code. Durable points. (1) **Raw empty shapes are not target inference.** Perl accepted

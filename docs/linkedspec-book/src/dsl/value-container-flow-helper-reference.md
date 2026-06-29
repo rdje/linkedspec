@@ -140,7 +140,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. Use `scalar(name)` as the target when you intentionally want to store an array/hash payload in a scalar (`set(scalar(name), [value])`). `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -167,9 +167,10 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > Shape members lower through the same scoped DSL value-expression rules as the surrounding site: primitive
 > literals stay typed, recognized helpers compose, direct access keeps its own bracket rules, and non-reserved
 > bare names read scalar working variables. A bare hash key is therefore dynamic (`{ key => value }` reads
-> `$key`), not a string literal; quote fixed field names (`{ "kind" => value }`). This leaf does **not**
-> implement RHS target-kind inference: `name = [value]` still assigns scalar `name` to an array payload, not
-> array working variable `@name`.
+> `$key`), not a string literal; quote fixed field names (`{ "kind" => value }`). When a direct shape literal
+> is the RHS of a bare assignment target, it infers the aggregate target kind: `items = [value]` / `set(items,
+> [])` assign `@items`, and `meta = { key => value }` / `set(meta, {})` assign `%meta`. Explicit scalar targets
+> keep scalar payload assignment: `set(scalar(payload), [value])` assigns `$payload = [$value]`.
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
@@ -213,7 +214,9 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > equivalent to `[scalar(i)]`.
 > Direct shape literals `[]` and `{ key => value }` are accepted as value expressions on the Perl reference
 > backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field names
-> should be quoted.
+> should be quoted. Direct shape literals also infer the aggregate kind of a bare assignment target:
+> `items = [value]` initializes `@items`, and `meta = { key => value }` initializes `%meta`; use
+> `set(scalar(payload), [value])` for scalar-held shape payloads.
 > Each terse helper spelling lowers **identically** to its original in every position, so both work
 > during migration — the original names are deprecated aliases, not yet retired.
 > See the

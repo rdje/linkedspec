@@ -130,8 +130,11 @@ sub _lower_declare_initializer_expr {
    return undef if grep { !defined($_) || !length($_) } @lowered_items;
    return '('.join(', ', @lowered_items).')';
   }
-  if ($trimmed =~ /^\[(?<payload>.*)\]$/s) {
-   return '('.$+{payload}.')';
+  if ($trimmed =~ /^\[.*\]$/s) {
+   my $shape_expr = _lower_declare_value_expr($trimmed, $deps);
+   return undef unless defined($shape_expr) && length($shape_expr);
+   return '('.$+{payload}.')' if $shape_expr =~ /^\[(?<payload>.*)\]$/s;
+   return undef;
   }
   # SPEC-FORMAT-TERSE.1.4.1 — `copy` (the unified terse rename of array_copy/hash_copy) is
   # accepted as an array-initializer source here too; the target type ('array') disambiguates,
@@ -160,8 +163,11 @@ sub _lower_declare_initializer_expr {
    }
    return '('.join(', ', @pairs).')';
   }
-  if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
-   return '('.$+{payload}.')';
+  if ($trimmed =~ /^\{.*\}$/s) {
+   my $shape_expr = _lower_declare_value_expr($trimmed, $deps);
+   return undef unless defined($shape_expr) && length($shape_expr);
+   return '('.$+{payload}.')' if $shape_expr =~ /^\{(?<payload>.*)\}$/s;
+   return undef;
   }
   # SPEC-FORMAT-TERSE.1.4.1 — `copy` is accepted as a hash-initializer source too; the target
   # type ('hash') disambiguates, and _lower_declare_value_expr resolves copy(...) to the same

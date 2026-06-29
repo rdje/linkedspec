@@ -58,11 +58,21 @@ return({ key => value });       # {"kind": "token"}
 return({ "kind" => value });    # fixed "kind" field
 ```
 
-The shape-literal contract does not change statement syntax or target inference. Direct-access brackets
+Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference:
+
+```text
+items = [value, cat("a", "b")];      # @items = ($value, cat(...))
+meta = { key => value };             # %meta = ($key => $value)
+set(items, []);                      # @items = ()
+set(meta, {});                       # %meta = ()
+set(scalar(payload), [value]);       # $payload = [$value]
+```
+
+The explicit scalar wrapper is the scalar payload boundary. Direct-access brackets
 (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`), control-flow/block braces, and
-all-bare child-call routing remain separate surfaces. In this leaf, `name = [value]` assigns scalar working
-variable `name` to an array payload; it does not infer array working variable `@name`. Rust lockstep parity for
-this shape-literal value contract is tracked separately by `SPEC-FORMAT-TERSE.1.2.3.5.3`.
+all-bare child-call routing remain separate surfaces. Rust lockstep parity for this shape-literal value contract
+and its RHS target-kind inference is tracked separately by `SPEC-FORMAT-TERSE.1.2.3.5.3` and
+`SPEC-FORMAT-TERSE.1.2.3.5.4`.
 
 ## 1. Declaration Helpers
 
@@ -70,7 +80,9 @@ this shape-literal value contract is tracked separately by `SPEC-FORMAT-TERSE.1.
 > typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`, or the `s()`/`a()`/`h()` aliases)
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
-> target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`;
+> target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`
+> for non-shape RHS values; the array/hash target when a bare assignment receives a direct RHS
+> shape (`name = []`, `set(name, [value])`, `name = {}`, `set(name, { key => value })`);
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
 > the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator
 > `name += value`; and the hash target of
@@ -111,7 +123,7 @@ this shape-literal value contract is tracked separately by `SPEC-FORMAT-TERSE.1.
 - **Signature**: `assign(name: string, value: expr)`
 - **Returns**: void
 - **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
-- **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper; a **bare** target — `assign(name, …)` — auto-exists as a scalar (the assign target position is scalar). In scalar assignment source slots, a bare source name reads a scalar too: `assign(out, value)` is equivalent to `assign(out, scalar(value))`.
+- **Edge cases**: Assigning through a typed wrapper fixes the variable's kind from the wrapper. `assign(scalar(name), [value])` stores the whole array payload in `$name`; `assign(array(name), [value])` replaces `@name`; `assign(hash(name), { key => value })` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`assign(name, value)` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `assign(name, [value])` assigns `@name`, and `assign(name, { key => value })` assigns `%name`. In scalar assignment source slots, a bare source name reads a scalar too: `assign(out, value)` is equivalent to `assign(out, scalar(value))`.
 - **Terse spelling**: `set(name, value)` is the canonical terse helper rename of `assign`, and `name = value` is the scalar operator spelling. All three forms lower and run identically for scalar targets; a bare `set` target or operator target auto-exists exactly like `assign`, and a bare scalar source reads the working scalar. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers

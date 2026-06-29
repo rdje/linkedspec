@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.2 — Perl RHS shape target-kind inference
+
+**Scope:** Perl ActionIR assignment lowering, declaration initializer shape lowering, auto-working-variable
+collection, phase0 regression coverage, mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity
+docs.
+
+**What changed:** Direct `[]` / `{}` RHS shape literals now infer aggregate working-variable targets when the
+assignment target is bare. `name = []` and `set(name, [value])` assign array working variable `@name`; `name =
+{}` and `assign(name, { key => value })` assign hash working variable `%name`. Non-shape RHS values keep the
+settled scalar assignment rule (`name = value` reads `$value` and assigns `$name`). Explicit wrappers remain the
+boundary: `set(scalar(name), [value])` stores the whole array payload in `$name`, while `set(array(name),
+[value])` and `set(hash(name), { key => value })` stay explicit aggregate assignment.
+
+**Adjacent fix:** Typed array/hash declaration initializers that use direct shape literals now lower shape
+members through the same DSL value rules as `.1.2.3.5.1`. `declare(array, items=[value, cat("a","b")])`
+initializes `@items` with `$value` and the `cat(...)` result; `declare(hash, meta={ key => value, "fixed" =>
+[value] })` initializes `%meta` with dynamic `$key`, `$value`, and a nested array payload.
+
+**Boundary:** This is Perl-reference target-kind inference only. Rust still lacks shape-literal value parsing
+and target-kind parity; `.1.2.3.5.3` and `.1.2.3.5.4` own those follow-ons. Direct-access brackets,
+hash-index assignment brackets, control-flow/block braces, helper-call parsing, primitive literals, and
+all-bare child-call routing remain protected.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; phase0 PASS
+(`t/phase0_regression.t`, 989 tests); mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.1 — Perl shape-literal value expressions
 
 **Scope:** Perl ActionIR value lowering, auto-working-variable collection, phase0 regression coverage, mdBook,
@@ -13,11 +39,10 @@ their direct elements, keys, and values through accepted DSL value-expression ru
 compose with the settled scalar bare-read contract. Bare hash-literal keys are dynamic scalar reads, so fixed
 field names must be quoted: `{ "kind" => value }`.
 
-**Boundary:** This leaf does not implement RHS target-kind inference. `name = [value]` still writes scalar
-`$name` to an arrayref payload and does not infer `@name`; `.1.2.3.5.2` owns that decision. Direct-access
-brackets, hash-index assignment brackets, future control-flow/block braces, helper-call parsing, primitive
-literals, and all-bare child-call routing remain protected. Rust parity for direct shape literals is still
-tracked by `.1.2.3.5.3`.
+**Boundary at this leaf:** `.1.2.3.5.1` did not implement RHS target-kind inference; `.1.2.3.5.2` later
+accepted aggregate target inference for direct RHS shapes. Direct-access brackets, hash-index assignment
+brackets, future control-flow/block braces, helper-call parsing, primitive literals, and all-bare child-call
+routing remain protected. Rust parity for direct shape literals is still tracked by `.1.2.3.5.3`.
 
 **Validation:** Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; phase0 PASS
 (`t/phase0_regression.t`, 988 tests, including the new 19-assertion lock); mdBook updated.

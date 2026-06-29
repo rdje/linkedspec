@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 #==============================================================================
-# phase0_regression.t — LinkedSpec primary regression gate (1005 subtests)
+# phase0_regression.t — LinkedSpec primary regression gate (989 subtests)
 #
 # Test categories (in file order):
 #   1. Spec compilation + language-agnostic readiness  (lines ~30-100)
@@ -44967,7 +44967,7 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
     # SPEC-FORMAT-TERSE.1.2.3.5.1: [] / {} are DSL value literals, not
     # raw-Perl passthrough. Direct shape members lower through the accepted
     # value-expression rules, including scalar bare reads.
-    plan tests => 19;
+    plan tests => 15;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -44988,8 +44988,8 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
         'array shape literal lowers a bare element as a scalar read');
     is($L->('return({ key => value })'), 'return {$key => $value}',
         'hash shape literal lowers bare key and value slots as scalar reads');
-    is($L->('set(out, [value, cat("a","b")])'), $L->('set(out, array(scalar(value), cat("a","b")))'),
-        'assignment source shape literals compose with helper value expressions');
+    is($L->('set(scalar(out), [value, cat("a","b")])'), $L->('set(scalar(out), array(scalar(value), cat("a","b")))'),
+        'explicit scalar assignment source shape literals compose with helper value expressions');
     is($L->('items += [value]'), 'push @items, [$value]',
         'array append RHS accepts a shape literal value expression');
     is($L->('meta[key] = { key => value }'), '$meta{$key} = {$key => $value}',
@@ -45025,19 +45025,121 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
     is($meta->{canonical_action_ir_fallback_count}, 0,
         'shape-literal source spec has no canonical fallback');
 
-    my $target_boundary_spec = "Top::\n"
-                             . " /x/ -> Done { set(value,\"ok\"); name = [value]; return(scalar(name)) }\n"
-                             . "\nDone::\n /[a-z]+/\n";
-    my $target_src = $gen->($target_boundary_spec);
-    is((() = ($target_src =~ /my \$name\b/g)), 1,
-        'shape RHS assignment still auto-supplies the scalar target');
-    is((() = ($target_src =~ /my \@name\b/g)), 0,
-        'shape RHS assignment does not infer an array target in this leaf');
-    my $target_parser = eval { LinkedSpec::Get(\$target_boundary_spec) };
-    ok(ref($target_parser) eq 'CODE', 'target-boundary shape assignment spec compiles')
+};
+
+subtest 'spec_format_terse_1_2_3_5_2_rhs_shape_target_kind_inference' => sub {
+    # SPEC-FORMAT-TERSE.1.2.3.5.2: direct [] / {} RHS literals infer the
+    # aggregate working-variable kind for bare assignment targets. Explicit
+    # scalar(...) targets remain scalar payload assignment boundaries.
+    plan tests => 32;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('name = []'), '@name = ()',
+        'empty array RHS infers a bare array assignment target');
+    is($L->('name = {}'), '%name = ()',
+        'empty hash RHS infers a bare hash assignment target');
+    is($L->('name = [value]'), '@name = ($value)',
+        'non-empty array RHS infers a bare array assignment target');
+    is($L->('name = { key => value }'), '%name = ($key => $value)',
+        'non-empty hash RHS infers a bare hash assignment target');
+    is($L->('set(name, [value])'), '@name = ($value)',
+        'set(name, shape) follows the same RHS target-kind inference');
+    is($L->('assign(name, { key => value })'), '%name = ($key => $value)',
+        'assign(name, shape) follows the same RHS target-kind inference');
+    is($L->('set(scalar(name), [value])'), '$name = [$value]',
+        'explicit scalar target keeps scalar payload assignment semantics');
+    is($L->('name = value'), '$name = $value',
+        'non-shape RHS assignment remains scalar assignment');
+
+    my $array_spec = "Top::\n"
+                   . " /x/ -> Done { set(value,\"ok\"); items = [value]; items += \"tail\"; return(array_copy(items)) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $array_parser = eval { LinkedSpec::Get(\$array_spec) };
+    ok(ref($array_parser) eq 'CODE', 'array RHS-shape target inference spec compiles')
         or diag(normalize_error($@));
-    is($run->($target_parser, 'xhello'), '["ok"]',
-        'target-boundary shape assignment returns the scalar-held arrayref');
+    is($run->($array_parser, 'xhello'), '["ok","tail"]',
+        'array RHS-shape target inference runs through later array mutation');
+    my $array_src = $gen->($array_spec);
+    is((() = ($array_src =~ /my \@items\b/g)), 1,
+        'array RHS-shape target auto-supplies one my @items');
+    is((() = ($array_src =~ /my \$items\b/g)), 0,
+        'array RHS-shape target does not auto-supply my $items');
+    is((() = ($array_src =~ /my \$value\b/g)), 1,
+        'array RHS-shape member read auto-supplies one my $value');
+    like($array_src, qr/\@items = \(\$value\)/,
+        'generated source assigns the lowered array shape into @items');
+    like($array_src, qr/push \@items, "tail"/,
+        'generated source keeps subsequent array mutation on @items');
+
+    my $hash_spec = "Top::\n"
+                  . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); meta = { key => value }; meta[\"fixed\"] = \"yes\"; return(hash_copy(meta)) }\n"
+                  . "\nDone::\n /[a-z]+/\n";
+    my $hash_parser = eval { LinkedSpec::Get(\$hash_spec) };
+    ok(ref($hash_parser) eq 'CODE', 'hash RHS-shape target inference spec compiles')
+        or diag(normalize_error($@));
+    is($run->($hash_parser, 'xhello'), '{"fixed":"yes","stage":"ok"}',
+        'hash RHS-shape target inference runs through later hash mutation');
+    my $hash_src = $gen->($hash_spec);
+    is((() = ($hash_src =~ /my \%meta\b/g)), 1,
+        'hash RHS-shape target auto-supplies one my %meta');
+    is((() = ($hash_src =~ /my \$meta\b/g)), 0,
+        'hash RHS-shape target does not auto-supply my $meta');
+    is((() = ($hash_src =~ /my \$key\b/g)), 1,
+        'hash RHS-shape key read auto-supplies one my $key');
+    is((() = ($hash_src =~ /my \$value\b/g)), 1,
+        'hash RHS-shape value read auto-supplies one my $value');
+    like($hash_src, qr/\%meta = \(\$key => \$value\)/,
+        'generated source assigns the lowered hash shape into %meta');
+
+    my $explicit_scalar_spec = "Top::\n"
+                             . " /x/ -> Done { set(value,\"ok\"); set(scalar(name), [value]); return(scalar(name)) }\n"
+                             . "\nDone::\n /[a-z]+/\n";
+    my $explicit_scalar_parser = eval { LinkedSpec::Get(\$explicit_scalar_spec) };
+    ok(ref($explicit_scalar_parser) eq 'CODE', 'explicit scalar shape assignment spec compiles')
+        or diag(normalize_error($@));
+    is($run->($explicit_scalar_parser, 'xhello'), '["ok"]',
+        'explicit scalar target returns the scalar-held arrayref');
+    my $explicit_scalar_src = $gen->($explicit_scalar_spec);
+    is((() = ($explicit_scalar_src =~ /my \$name\b/g)), 1,
+        'explicit scalar target auto-supplies one my $name');
+    is((() = ($explicit_scalar_src =~ /my \@name\b/g)), 0,
+        'explicit scalar target does not auto-supply my @name');
+
+    my $declare_array_spec = "Top::\n"
+                           . " /x/ -> Done { set(value,\"ok\"); declare(array, items=[value, cat(\"a\",\"b\")]); return(array_copy(items)) }\n"
+                           . "\nDone::\n /[a-z]+/\n";
+    my $declare_array_parser = eval { LinkedSpec::Get(\$declare_array_spec) };
+    ok(ref($declare_array_parser) eq 'CODE', 'array declaration shape initializer spec compiles')
+        or diag(normalize_error($@));
+    is($run->($declare_array_parser, 'xhello'), '["ok","ab"]',
+        'array declaration shape initializer lowers members before runtime');
+    like($gen->($declare_array_spec), qr/my \@items = \(\$value, do \{/,
+        'array declaration shape initializer lowers a bare member to $value');
+
+    my $declare_hash_spec = "Top::\n"
+                          . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); declare(hash, meta={ key => value, \"fixed\" => [value] }); return(hash_copy(meta)) }\n"
+                          . "\nDone::\n /[a-z]+/\n";
+    my $declare_hash_parser = eval { LinkedSpec::Get(\$declare_hash_spec) };
+    ok(ref($declare_hash_parser) eq 'CODE', 'hash declaration shape initializer spec compiles')
+        or diag(normalize_error($@));
+    is($run->($declare_hash_parser, 'xhello'), '{"fixed":["ok"],"stage":"ok"}',
+        'hash declaration shape initializer lowers key/value members before runtime');
+    like($gen->($declare_hash_spec), qr/my \%meta = \(\$key => \$value, "fixed" => \[\$value\]\)/,
+        'hash declaration shape initializer lowers nested shape members');
 };
 
 done_testing();
