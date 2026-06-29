@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `110d61f` — `SPEC-FORMAT-TERSE.1.5.3 — lock call spacing and mandatory parentheses`. `.1.5.4` close-out is in flight for the next commit; ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- latest_commit: `f28af09` — `SPEC-FORMAT-TERSE.1.5.4 — lock statement separators`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
 - active_work_unit: `SPEC-FORMAT-TERSE` — **`.1.5.4` DONE 2026-06-29; frontier -> `.1.5.5`**. `.1.5.4` locked newline-or-semicolon statement separators on Perl/Rust while preserving same-line semicolon requirements and nested-semicolon protection. User in a **PNT loop** (2026-06-23).
-- next_action: Finish/commit **`SPEC-FORMAT-TERSE.1.5.4`** close-out, then pick **`SPEC-FORMAT-TERSE.1.5.5`** — direct nested access surface.
+- next_action: Pick **`SPEC-FORMAT-TERSE.1.5.5`** — direct nested access surface. Start with KM + TOOLBOX probes before code, especially Channel 2/bare-value-read interaction with `foo["a"][9]['b'][z]`.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy source baseline engine.rs 11 / helpers.rs 2; oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs`. phase0 baseline = **982 green after `.1.5.4`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.1.5.4` close-out changes pending commit; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: MEMORY handoff only; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.
