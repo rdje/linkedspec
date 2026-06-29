@@ -202,15 +202,27 @@ block holds only that edge's action code).
 
 ### 5.3 Explicit Accumulation
 
-`push_value(target, value)` targets a named accumulator explicitly. This is the
-preferred form — clearer, more portable:
+`push_value(target, value)` targets a named accumulator explicitly. The terse
+spelling `push(target, value)` is equivalent when the value position is
+unambiguous:
 
 ```text
 Foo::
  I {declare(array, results)}
- -> Bar {push_value(array(results), call(Bar))}
+ -> Bar {push_value(array(results), scalar(retv))}
 E {return(array_copy(array(results)))}
 ```
+
+```text
+Foo::
+ -> Bar {push(results, scalar(retv))}
+E {return(array_copy(array(results)))}
+```
+
+All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
+is the target accumulator. To append a bare working-variable value, write
+`push(results, scalar(value))` or use `push_value(results, value)` until bare
+value-position reads are part of the DSL.
 
 ### 5.4 Return Value
 

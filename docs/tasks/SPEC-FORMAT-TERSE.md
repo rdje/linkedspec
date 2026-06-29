@@ -6,13 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.3` SPLIT** — mutation surface split by mechanism after TOOLBOX-first
-  probes. Scalar function form `set(name,val)` is already satisfied by `.1.4.1`/`.1.4.2`; explicit array
-  append currently works as `push_value(name,val)`, while requested `push(name,val)` collides with the live
-  child-call `push(rule[,target])` convention; hash `set_key(name,k,v)` is not yet a standalone mutation
-  statement across variants; operator forms are new syntax. KM [[terse-mutation-surface-ground-truth]]
-  added/regenerated. **`.1.3.1` DONE** by audit; **frontier → `.1.3.2`** (array function spelling
-  disambiguation before code). Prior **`.1.4.2` DONE** — Rust lockstep parity for helper renames: `set` as
+- Last updated: `2026-06-29` (**`.1.3.2` DONE** — array function spelling landed with a conservative
+  disambiguation: `push(target, value)` is accepted as the terse explicit-value append only when the value
+  expression is unambiguous/non-all-bare; all-bare two-identifier `push(A, B)` keeps the existing child-call
+  meaning (`A` rule into `B` accumulator). Perl now recognizes the alias at the contract/scanner/lowering
+  sites plus the auto-array collector; Rust already had the `"push_value" | "push"` runtime alias and is now
+  locked with oracle + integration coverage. Book + KM updated. **Frontier → `.1.3.3`** (hash function
+  mutation semantics). Prior **`.1.3` SPLIT** — mutation surface split by mechanism after TOOLBOX-first
+  probes. Scalar function form `set(name,val)` is already satisfied by `.1.4.1`/`.1.4.2`; hash
+  `set_key(name,k,v)` is not yet a standalone mutation statement across variants; operator forms are new
+  syntax. Prior **`.1.4.2` DONE** — Rust lockstep parity for helper renames: `set` as
   `assign`, `cat` as `concat`, and unified `copy` for array/hash values or wrapped targets; 2 Perl-oracle
   fixtures + 3 Rust integration locks; cargo/clippy/phase0/full gate green; no book change. **`.1.4` container
   done.** Prior **`.1.4.1` DONE** — Perl
@@ -356,11 +359,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.3`
-  Status: `active` (SPLIT 2026-06-29 — too broad for one signoff slice. TOOLBOX-first
+  Status: `active` (SPLIT 2026-06-29 — too broad for one signoff slice. `.1.3.1` audit done;
+    `.1.3.2` array function spelling done; frontier `.1.3.3`. TOOLBOX-first
     `call_spec_handler_subst` + runtime probes show four different states/mechanisms: scalar
     `set(name, val)` already lowers and runs via `.1.4` (`set`→`assign`, bare target auto-exists); explicit
-    array append exists today as `push_value(name, val)`, but requested `push(name, val)` collides with the
-    live child-call `push(rule[, target[, index]])` convention; `set_key(name, k, v)` is currently a pure
+    array append now has a conservative `push(target, value)` spelling for unambiguous value expressions, while
+    all-bare `push(A, B)` keeps the live child-call convention; `set_key(name, k, v)` is currently a pure
     hash value expression in Perl return/source paths but not a standalone mutation statement, and Rust's
     `set_key` only updates when arg0 has already evaluated to a hash; operator forms `name = val`,
     `items += val`, `name["k"] = val` pass through as raw/invalid Perl and require new statement syntax in
@@ -400,7 +404,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.3` (audit recorded in the split commit)
 
 - ID: `SPEC-FORMAT-TERSE.1.3.2`
-  Status: `pending` (**now next**)
+  Status: `done` (2026-06-29)
   Goal: Array function spelling — decide and implement the explicit-value append spelling requested as
     `push(name, value)` without regressing the existing child-call `push(rule[, target[, index]])` convention.
   Acceptance: Existing child-call forms (`push(Child)`, `push(Child, target)`, indexed variants, and fluent
@@ -408,8 +412,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     identically to `push_value(name, value)` on Perl and Rust; ambiguity between two bare identifiers is
     resolved by a documented rule before any engine change; focused phase0/Rust locks prove both the new
     spelling and the legacy child-call convention.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-06-29.** Decision: `push(target, value)` is the terse explicit-value append only
+    when the value expression makes the value role unambiguous (literal, typed wrapper such as
+    `scalar(value)`, wrapped target such as `array(items)`, helper value such as `cat(...)`, or `call(Child)`).
+    All-bare child-call forms keep precedence: `push(Child)`, `push(Child, target)`, `push(Child, index)`,
+    `push(Child, target, index)`, and the scope-injected method-chain child-call forms remain child-call
+    contracts. In particular `push(items, value)` is still child-call-shaped (`items` rule into `@value`);
+    appending a bare working variable value stays `push(items, scalar(value))` or `push_value(items, value)`
+    until Channel 2 bare value-position reads land. Implementation: Perl `push_value` statement recognition now
+    also accepts `push` in `ActionIR/Contracts.pm`, `Scanner/PrimitivePipelineRules.pm`, and
+    `ActionIR/MethodLowering.pm`, while `RuleIR/EmitContext.pm` collects the target auto-`my @target` using a
+    parser-backed balanced `push(...)` scan so nested/comma value expressions do not break declarations. Rust
+    already accepted `"push_value" | "push"`; this leaf locks that existing behavior against the Perl reference
+    with one oracle fixture and one integration test. Focused proof before final gate: `call_spec_handler_subst`
+    lowers `push(items,"a")`, `push(items, scalar(retv))`, `push(array(items), scalar(retv))`, and
+    `push(items, call(Leaf))` like `push_value`, while `push(items, value)`, `push(Leaf, items)`,
+    `push(Leaf, 1)`, and `push(Leaf, items, 1)` remain child-call lowerings; descriptor/runtime probe has zero
+    fallback/unresolved nodes and returns `["a","b"]`; source-dump lock for `push(items, cat("a", "b"))` emits
+    exactly one `my @items` and the concat do-block. `prove -q -Iperl t/phase0_regression.t` PASS (975);
+    focused Rust `terse_1_3_2_push_alias_matches_push_value` PASS; corpus oracle PASS over 12 fixtures;
+    `mdbook build docs/linkedspec-book` EXIT 0; Knowledge Map gate OK; `scripts/check_memory_architecture.sh`
+    OK; `bash tools/run_ci_local.sh` EXIT 0 (`phase0` 975, local CI gate passed).
+  Commit: `SPEC-FORMAT-TERSE.1.3.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.3.3`
   Status: `pending`
@@ -637,12 +661,25 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.4` | `done` 2026-06-29 | Helper renames closed on both variants. Split by variant after a TOOLBOX-first `call_spec_handler_subst` ground-truth pass; `.1.4.1` landed the Perl reference + book, and `.1.4.2` landed Rust `Engine::call_helper()` parity with oracle + integration locks. KM [[terse-helper-rename-lowering-sites]]. |
 | — | `SPEC-FORMAT-TERSE.1.4.1` | `done` 2026-06-24 | Perl reference — `set`/`cat`/`copy` now lower **byte-identically** to `assign`/`concat`/`array_copy`+`hash_copy` in **every** position. `cat`+`set` via `_normalize_method_name`; `set` statement-level recognition extended at the contract + IR-event scanner + auto-`my` collector; `copy` via a dedicated array-then-hash dispatch + every declare-init / return-payload / FlowExpr-source / type-inference recognizer. All 20 specs byte-identical; `set`==`assign` ActionIR node; real terse spec runs == canonical twin end-to-end; +4 phase0 locks → **975 green**; gate EXIT 0; ratio 1.0000; book taught (3 pages). |
 | — | `SPEC-FORMAT-TERSE.1.4.2` | `done` 2026-06-29 | Rust lockstep parity for `.1.4.1` — `Engine::call_helper()` (`engine.rs`): `"assign" \| "set"`, `"concat" \| "cat"`, + a dedicated value-type-dispatching `"copy"` arm. 2 oracle fixtures + 3 integration locks; cargo green; clippy zero-new; phase0 975 untouched; full gate EXIT 0; no book change. |
-| — | `SPEC-FORMAT-TERSE.1.3` | `active` (SPLIT 2026-06-29) | Mutation surface split by mechanism after TOOLBOX-first probes. Scalar function form `set(name,val)` already satisfied; array function spelling, hash mutation semantics, and operator syntax require separate leaves. KM [[terse-mutation-surface-ground-truth]]. |
+| — | `SPEC-FORMAT-TERSE.1.3` | `active` (SPLIT 2026-06-29) | Mutation surface split by mechanism after TOOLBOX-first probes. Scalar function form `set(name,val)` already satisfied; `.1.3.2` array function spelling done; hash mutation semantics and operator syntax remain separate leaves. KM [[terse-mutation-surface-ground-truth]]. |
 | — | `SPEC-FORMAT-TERSE.1.3.1` | `done` 2026-06-29 | Scalar function form audit — `set(name,val)` already lowers/runs like `assign(name,val)` on Perl and Rust via `.1.4.1`/`.1.4.2`; no code needed. |
-| 1 | `SPEC-FORMAT-TERSE.1.3.2` | `pending` (**now next**) | Array function spelling — resolve `push(name,value)` vs existing child-call `push(rule[,target[,index]])` ambiguity before code; preserve the child-call convention and lock the selected explicit-value spelling against `push_value(name,value)`. |
-| … | `.1.3.3`, `.1.3.4`, `.1.2.3`+ (Channel 2),`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Hash function mutation, operator syntax, Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.2.1` + `.1.5`) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
+| — | `SPEC-FORMAT-TERSE.1.3.2` | `done` 2026-06-29 | Array function spelling — `push(target,value)` now lowers/runs like `push_value(target,value)` for unambiguous/non-all-bare value expressions; all-bare `push(A,B)` keeps child-call precedence; Perl reference + Rust oracle/integration locks added. |
+| 1 | `SPEC-FORMAT-TERSE.1.3.3` | `pending` (**now next**) | Hash function mutation semantics — define `set_key(name,key,value)` as a mutation statement without breaking today's pure hash-valued `set_key(hash_expr,key,value)` helper. |
+| … | `.1.3.4`, `.1.2.3`+ (Channel 2),`.1.5`,`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Operator syntax, Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.2.1` + `.1.5`) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.3.2` array function spelling** — conservative `push(target,value)` alias with child-call
+  precedence preserved). The accepted rule is intentionally asymmetric: two-argument `push(...)` is an
+  explicit-value append only when the second argument is not an all-bare identifier expression. Literals,
+  typed wrappers (`scalar(value)`), wrapped targets (`array(items)`), helper value expressions (`cat(...)`),
+  and `call(Child)` values are unambiguous and lower identically to `push_value(target,value)`. All-bare forms
+  keep the historical child-call meaning because `push(A,B)` already means "call child rule `A` and append into
+  accumulator `B`"; changing it would silently break existing `.spec` authoring and contradict the accumulator
+  convention audit. A bare working-variable value therefore still needs `push(items, scalar(value))` or
+  `push_value(items, value)` until Channel 2 bare value-position reads provide a broader disambiguation model.
+  The declaration collector for `push(...)` must parse balanced call syntax instead of using a comma-splitting
+  regex, because values such as `cat("a","b")` contain nested commas and still need exactly one `my @items`.
 
 - `2026-06-29` (**`.1.3` split by mechanism** — scalar function form already satisfied; array
   function spelling, hash mutation semantics, and operators separated; KM card
@@ -864,6 +901,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-24` | `SPEC-FORMAT-TERSE.1.4.1` | TOOLBOX-first `call_spec_handler_subst` parity sweep (4 headline + 11 composed forms, dump-don't-guess); `return_descriptor` ASSIGN-node parity for `set`; end-to-end `LinkedSpec::Get` run of a terse spec vs its canonical twin; all-20-specs generated-source baseline-vs-mine diff (STDOUT capture via `dump_parser_source`); `perl -c` on all 8 edited modules; +4 phase0 locks; `bash tools/run_ci_local.sh`; `mdbook build`; doctrine driver + KM regenerate | Aliases recognized at **every** site each canonical name is (normalize seam + 3 raw-text `set` scanners + `copy` dispatch + declare-init/return-payload/FlowExpr-source/type-inference recognizers). **All 4 headline + 11 composed forms byte-equal to canonical**; `set`==`assign` ASSIGN node; terse spec runs == canonical twin (`["a!","b!","c!"]`, stable on re-run). **All 20 specs byte-identical (0 diff)** — every alias add is new-spelling-guarded. **phase0 971→975 green**; gate **EXIT 0** ("Result: PASS", 975); ratio 1.0000; `mdbook build` EXIT 0. Book (3 pages) taught the renames as canonical + old names as deprecated (not-retired) aliases. KM [[terse-helper-rename-lowering-sites]] updated (landed; reverify proves parity). |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.4.2` | Rust code-read + implementation in `Engine::call_helper()`; `perl -c tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused `cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_4_2 -- --nocapture`; `cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`; full `cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml`; `cargo clippy --manifest-path rust/linkedspec-runtime/Cargo.toml`; `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh`; doctrine + KM gates | Rust now recognizes `set`/`cat` via canonical match arms and unified `copy` via a dedicated array/hash value-copy arm. Added `resolve_hash_target` and one-bare-variable `hash`/`h` reference handling so `copy(h(m))` converges with `hash_copy(h(m))`; bare value-position reads remain deferred. 2 new oracle fixtures (`terse_1_4_2_set_cat_copy_array`, `terse_1_4_2_copy_hash_symbol_empty`) + 3 integration tests. Focused Rust tests PASS; corpus oracle PASS over 11 fixtures; full runtime suite PASS (116 unit + corpus-oracle harness + 36 integration tests); clippy EXIT 0 with existing 13-warning baseline only; phase0 stays **975 green**; full local gate EXIT 0. No book change; `.1.4` container done. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3` (split) | Knowledge Map retrieval first; read `.1.3` acceptance + relevant mdBook/helper cards; TOOLBOX `call_spec_handler_subst` probe over function/operator forms; minimal `LinkedSpec::Get` runtime probes; Rust `expr.rs`/`engine.rs` code-read; KM regenerate | Split `.1.3` by mechanism. `set(name,val)` already lowers/runs like `assign(name,val)` and is locked by `.1.4`; `push_value(name,val)` lowers/runs but requested `push(name,val)` passes through Perl as raw child-call-shaped `push(...)` and fails handler compilation, while conflicting with existing `push(Rule,target)` convention; `set_key(name,k,v)` works as a Perl pure hash value in return/source paths but not as a standalone mutation statement, and Rust only updates if arg0 is already a hash; operators `name = val`, `items += val`, `name["k"] = val` pass through as raw/invalid Perl and Rust has no assignment AST. `.1.3.1` audit done; next `.1.3.2`. No engine/book change, so phase0/cargo N/A to split slice beyond doctrine/KM checks. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.2` | TOOLBOX `call_spec_handler_subst` lowerings for explicit append vs child-call forms; descriptor/runtime probe; `dump_parser_source` lock for nested/comma value; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust integration test; Rust corpus oracle; `mdbook build`; Knowledge Map gate; `scripts/check_memory_architecture.sh`; `bash tools/run_ci_local.sh` | Perl recognizes `push(target,value)` as explicit-value append for unambiguous/non-all-bare value expressions while preserving all-bare child-call precedence. `push(items,"a")`, `push(items, scalar(retv))`, `push(array(items), scalar(retv))`, `push(items, call(Leaf))`, and `push(items, cat("a","b"))` lower like `push_value`; `push(items, value)`, `push(Leaf, items)`, and indexed child-call forms stay child calls. Descriptor/runtime probe has zero fallback/unresolved and returns `["a","b"]`; nested/comma source dump has exactly one `my @items`; phase0 PASS (975); focused Rust test PASS; corpus oracle PASS over 12 fixtures; mdBook build EXIT 0; Knowledge Map and memory-architecture checks OK; full local gate EXIT 0. |
 
 ## Commit Log
 
@@ -881,8 +919,24 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.4.1` | `SPEC-FORMAT-TERSE.1.4.1 — Perl recognize terse renames set/cat/copy lowering identically to assign/concat/array_copy+hash_copy (engine + book + 4 phase0 locks)` | Recognized the aliases at every site each canonical name is (normalize seam for `cat`/`set`; 3 raw-text `set` scanners; dedicated array-then-hash `copy` dispatch; declare-init / return-payload / FlowExpr-source / type-inference recognizers). 4 headline + 11 composed forms byte-equal to canonical; `set`==`assign` ASSIGN node; terse spec runs == canonical twin end-to-end; **all 20 specs byte-identical**; +4 phase0 locks → **975 green**; gate EXIT 0; ratio 1.0000; book taught (3 pages, renames canonical + old names deprecated-not-retired). `.1.4.1` landed on the Perl reference; `.1.4.2` (Rust parity) is next. |
 | `SPEC-FORMAT-TERSE.1.4.2` | `SPEC-FORMAT-TERSE.1.4.2 — Rust recognize terse helper renames (engine + oracle + integration locks)` | Rust `Engine::call_helper()` now treats `set` as `assign`, `cat` as `concat`, and `copy` as unified array/hash copy; `hash`/`h` one-bare-variable references align `copy(h(m))` with `hash_copy(h(m))`. 2 oracle fixtures + 3 integration locks; cargo suite green; clippy zero-new; phase0 975 untouched; full gate EXIT 0; no book change. `.1.4` container done; next frontier `.1.3`. |
 | `SPEC-FORMAT-TERSE.1.3` (split) | `SPEC-FORMAT-TERSE.1.3 — split mutation surface by mechanism; record push/operator ground truth` | `.1.3` → container after TOOLBOX-first probes: scalar `set(name,val)` already done; array explicit-value append spelling must resolve `push(name,value)` vs existing child-call `push(rule,target)`; hash `set_key(name,k,v)` needs a mutation statement contract distinct from pure `set_key(hash_expr,...)`; operators require new statement syntax on Perl + Rust. `.1.3.1` audit done; `.1.3.2` is next. KM [[terse-mutation-surface-ground-truth]]. DOCS/TREE/KM only — no engine/book change. |
+| `SPEC-FORMAT-TERSE.1.3.2` | `SPEC-FORMAT-TERSE.1.3.2 — recognize push(target,value) explicit append while preserving child-call push` | Perl `ActionIR` now treats `push(target,value)` as a `push_value` alias only for unambiguous/non-all-bare value expressions; all-bare `push(A,B)` remains child-call. Added Perl phase0 locks, Rust oracle fixture + integration lock, and book/KM/live-doc updates. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.3.2` DONE — array function spelling `push(target,value)` landed without breaking
+  child-call `push(...)`.** Selected disambiguation: `push(target,value)` is an explicit-value append when the
+  value expression is unambiguous/non-all-bare (`"literal"`, `scalar(value)`, `array(target)` + wrapped value,
+  helper values like `cat(...)`, or `call(Child)`). All-bare two-identifier `push(A,B)` keeps the child-call
+  meaning (`A` rule into `B` accumulator); append a bare working-variable value as `push(items, scalar(value))`
+  or `push_value(items, value)` until Channel 2 bare value-position reads land. Perl recognition extended in
+  the `push_value` contract/scanner/lowering path, and the auto-array collector now uses a balanced parser scan
+  for `push(...)` so nested comma values such as `cat("a","b")` declare exactly one target array. Rust already
+  had the `"push_value" | "push"` runtime alias; this slice locks it with a Perl-oracle fixture and integration
+  test. Verification: TOOLBOX lowerings prove explicit append vs child-call precedence; descriptor/runtime probe
+  returns `["a","b"]` with zero fallback/unresolved; source dump for nested/comma value has one `my @items`;
+  phase0 PASS (975); focused Rust test PASS; corpus oracle PASS over 12 fixtures; mdBook build EXIT 0;
+  Knowledge Map + memory-architecture checks OK; full local gate EXIT 0. Book/KM/live docs updated. Frontier →
+  `.1.3.3` (hash function mutation semantics).
 
 - `2026-06-29`: **`.1.3` SPLIT — mutation surface separated by mechanism; `.1.3.1` scalar function
   audit done; frontier → `.1.3.2`.** Knowledge Map retrieval first found the `.1.2` bare-target and

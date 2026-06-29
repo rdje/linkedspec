@@ -1722,11 +1722,14 @@ sub _build_assignment_and_regex_contracts {
    id                 => 'push_value',
    ir_node            => 'PUSH',
    diag_name          => 'push_value',
-   unresolved_pattern => qr/\bpush_value\s*\(/o,
+   # SPEC-FORMAT-TERSE.1.3.2 — `push(target, value)` is the terse explicit-value
+   # append spelling only for shapes that do not collide with child-call
+   # `push(Rule[, target[, index]])`; bare child-call forms keep precedence.
+   unresolved_pattern => qr/\b(?:push_value|push)\s*\(/o,
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_push_value_statement};
-    $code =~ s/\b(?<expr>push_value\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },

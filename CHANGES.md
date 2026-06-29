@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.2 — recognize push(target,value) explicit append while preserving child-call push
+
+**Scope:** Perl reference ActionIR recognition/lowering, Perl phase0 locks, Rust oracle + integration locks,
+mdBook, task tree, Knowledge Map card + generated map, live docs. No Rust engine change: Rust already had the
+`"push_value" | "push"` runtime alias, and this slice locks it against the Perl reference contract.
+
+**What changed:** `push(target, value)` is now the terse explicit-value append spelling when the value
+expression is unambiguous/non-all-bare. It lowers identically to `push_value(target, value)` for values such as
+string literals, `scalar(value)`, helper expressions like `cat(...)`, wrapped targets/values, and `call(Child)`.
+All-bare forms keep the existing child-call convention: `push(A, B)` still means "call child rule `A` and append
+into accumulator `B`". To append a bare working-variable value, use `push(items, scalar(value))` or
+`push_value(items, value)` until Channel 2 bare value-position reads land.
+
+**Implementation:** Perl `ActionIR/Contracts.pm`, `Scanner/PrimitivePipelineRules.pm`, and
+`ActionIR/MethodLowering.pm` accept `push` through the `push_value` statement path only for the unambiguous
+two-arg shape. `RuleIR/EmitContext.pm` uses a balanced parser-backed scan for `push(...)` target auto-decls so
+nested comma values such as `cat("a","b")` still declare exactly one `my @items`.
+
+**Validation:** TOOLBOX lowerings prove explicit append vs child-call precedence; descriptor/runtime
+probe returns `["a","b"]` with zero fallback/unresolved; source dump for nested/comma value has one `my @items`;
+`prove -q -Iperl t/phase0_regression.t` PASS (`1..975`); focused Rust test
+`terse_1_3_2_push_alias_matches_push_value` PASS; corpus oracle PASS over 12 fixtures; `mdbook build
+docs/linkedspec-book` EXIT 0; `knowledge-map/scripts/check_knowledge_map.sh` OK; `scripts/check_memory_architecture.sh`
+OK; `bash tools/run_ci_local.sh` EXIT 0 (`phase0` 975, local CI gate passed).
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.3 — split mutation surface by mechanism; record push/operator ground truth
 
 **Scope:** task tree, task-tree index, Knowledge Map fact card + generated map, live docs. No engine, test,

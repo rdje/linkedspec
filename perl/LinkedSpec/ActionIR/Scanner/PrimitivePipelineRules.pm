@@ -69,11 +69,22 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_push_value {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>push_value\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
  my $raw_expr = $+{expr};
  my $call = _parse_method_function_expr($raw_expr);
- next unless $call && $call->{method} eq 'push_value';
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
+ next unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
+ my $raw_args = $call->{args} || [];
+ my $effective_args;
+ if ($call->{method} eq 'push_value') {
+  $effective_args = _normalize_method_args_with_optional_scope($raw_args, 2, 2);
+ } else {
+  next unless @$raw_args == 2;
+  my $first_expr = _trim_action_ir_value($raw_args->[0]);
+  my $second_expr = _trim_action_ir_value($raw_args->[1]);
+  next if defined($first_expr) && defined($second_expr)
+       && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o;
+  $effective_args = $raw_args;
+ }
  next unless $effective_args;
  my $target_expr = _trim_action_ir_value($effective_args->[0]);
  my $value_expr = _trim_action_ir_value($effective_args->[1]);

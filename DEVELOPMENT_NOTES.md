@@ -1,6 +1,25 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.3.2 — the `push` alias is valid only after the child-call convention wins
+  its ambiguous cases; parse balanced calls before auto-declaring array targets): Landed the array function
+  spelling. Durable points. (1) **Do not treat `push` as a flat alias of `push_value`.** The DSL already has a
+  live child-call family: `push(Child)`, `push(Child,target)`, and indexed variants. Therefore `push(A,B)` must
+  keep child-call meaning, not silently become "append variable B into A". The safe contract is `push(target,
+  value)` only when the value expression is unambiguous/non-all-bare; bare variable values still need
+  `scalar(value)` or the legacy-clear `push_value(target,value)` spelling. (2) **Lowering and declaration
+  collection need the same disambiguation.** The statement contract/scanner/lowering can skip all-bare
+  `push(A,B)`, but the auto-`my @target` collector must also skip it or it would invent an accumulator for a
+  child-call target. (3) **Do not regex-split function arguments when the DSL allows nested helpers.**
+  `push(items, cat("a","b"))` contains a comma inside the value expression; the collector therefore uses the
+  method-call parser to read balanced `push(...)` calls and then checks exactly two args. The source-dump lock
+  asserting one `my @items` on that nested value protects the bug class. (4) **Rust parity can be "already
+  implemented" but still needs a reference lock.** Rust already dispatched `"push"` through the `push_value`
+  arm, but the reference contract now defines the disambiguation. The new oracle fixture + integration test
+  lock Rust's accepted shape without letting Rust's broader alias decide the Perl/user-facing contract.
+  Verification: phase0 975, focused Rust, corpus oracle 12 fixtures, mdBook, Knowledge Map, memory-architecture,
+  and full local CI gate all pass.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.3 — a mutation surface with two spellings per operation is still multiple
   mechanisms; the dangerous part is `push`, because the desired terse spelling overlaps an intentionally-live
   child-call convention): Split `.1.3` instead of coding. Durable points. (1) **Audit what prior leaves already

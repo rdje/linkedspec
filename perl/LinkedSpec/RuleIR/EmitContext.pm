@@ -786,11 +786,11 @@ sub _mask_action_code_literals {
 #             (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE (un-wrapped) names in a
 #                 type-implying helper arg position: the scalar target of
 #                 assign(NAME, ...) and the array target of push_value(NAME, ...) /
-#                 push_nonempty(NAME, ...). Such a bare name already LOWERS to the
+#                 push(NAME, nonbare-value) / push_nonempty(NAME, ...). Such a bare name already LOWERS to the
 #                 correctly-sigil'd variable but otherwise gets no `my` (leaky global).
 #                 Sigil implied by the position ($ for assign, @ for the push family).
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
-#                 (first arg is a rule name — ambiguous) and the bare hash target
+#                 (all-bare child-call shape) and the bare hash target
 #                 (value-position read — Channel 2) are deliberately NOT collected here.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
@@ -839,7 +839,7 @@ sub _collect_auto_working_var_decls {
   # (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
   #     arg position. The bare name already lowers to the correctly-sigil'd variable
   #     (assign -> $NAME via _lower_assign_statement's scalar-first extraction;
-  #     push_value/push_nonempty -> @NAME) but otherwise gets no preamble `my`. The
+  #     push_value/push/push_nonempty -> @NAME) but otherwise gets no preamble `my`. The
   #     `\s*,` after the name means a WRAPPED target (scalar(x)/array(x), whose name is
   #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
   # `set` (SPEC-FORMAT-TERSE.1.4.1) is the terse rename of `assign`; a bare `set(NAME, …)`
@@ -849,6 +849,17 @@ sub _collect_auto_working_var_decls {
   }
   while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('@', $1);   # push_value / push_nonempty target lowers to an array
+  }
+  while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+   my $call = _parse_method_function_expr($+{expr});
+   next unless $call && ($call->{method} // '') eq 'push';
+   my $args = $call->{args} || [];
+   next unless @$args == 2;
+   my $target_expr = _trim_action_ir_value($args->[0]);
+   my $value_expr = _trim_action_ir_value($args->[1]);
+   next unless defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   next if defined($value_expr) && $value_expr =~ /^\w+$/o;   # all-bare child-call form
+   $record->('@', $target_expr);
   }
  }
  return [] unless @collected;

@@ -240,22 +240,29 @@ identically. No Perl implementation knowledge is required.
 - **Returns**: array
 - **Behavior**: Returns a new array containing all elements of `a1` followed by all elements of `a2`. Neither input is mutated.
 
-### `push(arr, child)`
-- **Signature**: `push(target: array, child: expr)`
+### `push(Child)` / `push(Child, target)`
+- **Signature**: `push(child_rule: rule[, target: array])`
 - **Returns**: void
-- **Behavior**: Appends `child` to the named accumulator array. The target must be a declared array variable (typically the rule's implicit accumulator, named after the rule label).
-- **Convention**: `push(Child)` without explicit target appends to the current rule's implicit accumulator — this is the `push_child_call_builtin` convention. Use `push_value(target, value)` for explicit targeting.
+- **Behavior**: Calls `Child` and appends the child result to an accumulator array. With one argument, the target is the current rule's implicit accumulator; with a second bare identifier, that identifier is the target accumulator.
+- **Convention**: The all-bare child-call forms keep precedence: `push(Child)`, `push(Child, target)`, `push(Child, index)`, and `push(Child, target, index)` are parser child-call helpers.
 
-### `push(arr, child, index)`
-- **Signature**: `push(target: array, child: expr, index: int)`
+### `push(Child, index)` / `push(Child, target, index)`
+- **Signature**: `push(child_rule: rule, index: int)` or `push(child_rule: rule, target: array, index: int)`
 - **Returns**: void
-- **Behavior**: Appends `child` at a specific position. Index disambiguation: if the second argument is an integer, it is treated as an index, not a target name.
-- **Edge cases**: The disambiguation relies on `\d+` (integer) matching before `\w+` (target name). `push(arr, child, 0)` means index 0; `push(arr, child, "name")` means target "name".
+- **Behavior**: Calls `Child`, selects one element from the child result, and appends that element to the implicit or explicit accumulator.
+- **Edge cases**: The disambiguation relies on integer matching before bare target-name matching. `push(Child, 0)` means index 0 into `Child`'s result; `push(Child, target, 0)` appends index 0 to `target`.
+
+### `push(arr, value)`
+- **Signature**: `push(target: array, value: expr)`
+- **Returns**: void
+- **Behavior**: Terse explicit-value append. Lowers identically to `push_value(target, value)` for unambiguous value expressions.
+- **Examples**: `push(items, "a")`, `push(items, scalar(value))`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
+- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a bare working variable value, wrap the value (`push(items, scalar(value))`) or use `push_value(items, value)` until bare value-position reads land.
 
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
 - **Returns**: void
-- **Behavior**: Appends a value to the named accumulator. The preferred explicit form over convention-based `push(Child)`.
+- **Behavior**: Appends a value to the named accumulator. `push(target, value)` is the terse spelling for unambiguous value expressions; `push_value` stays accepted and is still the clearest form when both arguments are bare identifiers.
 - **Edge cases**: Value can be any expression type. Undef values are appended as-is (use `push_nonempty` to skip). The target may be wrapped (`array(items)`) or a **bare** name (`items`); a bare target auto-exists as an array.
 
 ### `push_nonempty(arr, value)`

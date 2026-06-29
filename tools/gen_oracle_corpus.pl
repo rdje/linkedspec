@@ -237,6 +237,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.3.2 — explicit array append terse spelling ──
+    #
+    # `push(target, value)` is the terse explicit-value append spelling when the
+    # value shape is unambiguous; all-bare child-call forms keep `push(Rule,target)`
+    # precedence on the Perl reference.
+    {   case   => 'terse_1_3_2_push_alias_array',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(label, "b"); push(items, "a"); push(items, scalar(label)); return(array_copy(array(items))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

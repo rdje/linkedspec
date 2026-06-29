@@ -950,6 +950,23 @@ fn terse_1_4_2_copy_hash_matches_hash_copy() {
 }
 
 #[test]
+fn terse_1_3_2_push_alias_matches_push_value() {
+    let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, scalar(label)); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, scalar(label)); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(terse, "xhello");
+    assert_eq!(
+        actual,
+        serde_json::json!([["a", "b"]]),
+        "terse push(target, value) appends explicit values with the Perl oracle output shape"
+    );
+    assert_eq!(
+        actual,
+        build_and_run(canonical, "xhello"),
+        "push(target, value) == push_value(target, value) on Rust for explicit-value append"
+    );
+}
+
+#[test]
 fn terse_1_4_2_set_target_is_per_parse_not_leaky() {
     let grammar = "Top::\n /x/ -> Done { set(v, cat(\"o\", \"k\")); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");

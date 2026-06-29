@@ -16234,7 +16234,7 @@ SPEC
     );
 };
 subtest 'emit_context_lowers_push_value_method_contract' => sub {
-    plan tests => 8;
+    plan tests => 19;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(items), scalar(retv))'),
@@ -16251,6 +16251,26 @@ subtest 'emit_context_lowers_push_value_method_contract' => sub {
         'push @items, $retv',
         'push_value optional scope argument is ignored during lowering'
     );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push(items, "a")'),
+        'push @items, "a"',
+        'terse push(target, literal) lowers as explicit value append'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push(items, scalar(retv))'),
+        'push @items, $retv',
+        'terse push(target, scalar(value)) lowers as explicit value append'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), scalar(retv))'),
+        'push @items, $retv',
+        'terse push(array(target), value) lowers as explicit value append'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push(items, call(Leaf))'),
+        'push @items, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)',
+        'terse push(target, call(rule)) lowers as explicit child-result value append'
+    );
 
     my $spec_content = <<'SPEC';
 Top:: I.declare(array, items).declare(scalar, retv).assign(scalar(retv), CAPTURE).push_value(array(items), scalar(retv))
@@ -16265,9 +16285,40 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'push_value method contract avoids unresolved-helper hits');
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_value contract');
     ok($meta->{language_agnostic_action_ir_ready}, 'push_value method contract remains language-agnostic action-IR ready');
+
+    my $push_alias_spec = <<'SPEC';
+Top::
+ /x/ -> Done { set(label, "b"); push(items, "a"); push(items, scalar(label)); return(array_copy(array(items))) }
+
+Done:
+ /[a-z]+/
+SPEC
+    my $push_alias_descr = LinkedSpec::Get(\$push_alias_spec, return_descriptor => 1);
+    ok(defined($push_alias_descr) && ref($push_alias_descr) eq 'HASH', 'descriptor build succeeds for terse push explicit-value alias');
+    my $push_alias_meta = $push_alias_descr->{spec}{Top}{meta}{action_rewriter};
+    is($push_alias_meta->{canonical_action_ir_fallback_count}, 0, 'terse push explicit-value alias avoids RAW_PERL fallback');
+    is($push_alias_meta->{unresolved_helper_count}, 0, 'terse push explicit-value alias avoids unresolved-helper hits');
+    my $push_alias_parser = LinkedSpec::Get(\$push_alias_spec);
+    my $push_alias_input = 'xhello';
+    is_deeply($push_alias_parser->(\$push_alias_input), ['a', 'b'], 'terse push explicit-value alias appends and returns the same array value as push_value');
+
+    my $push_alias_source_spec = <<'SPEC';
+top:: /x/ -> top[0] { push(items, cat("a", "b")) }
+SPEC
+    my $push_alias_source = '';
+    my $push_alias_source_ok = eval {
+        LinkedSpec::Get(\$push_alias_source_spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$push_alias_source);
+        1
+    };
+    ok($push_alias_source_ok, 'generated-source dump succeeds for terse push explicit-value alias with nested comma value')
+        or diag(normalize_error($@));
+    my $push_alias_my_count = () = ($push_alias_source =~ /my \@items\b/g);
+    is($push_alias_my_count, 1, 'bare target in terse push(target, value) auto-supplies exactly one `my @items`');
+    like($push_alias_source, qr/push \@items,\s*do \{ my \@__ls_concat_parts = \("a", "b"\)/,
+        'terse push(target, nested-comma-value) lowers after parser-backed target collection');
 };
 subtest 'emit_context_lowers_push_child_call_contracts' => sub {
-    plan tests => 15;
+    plan tests => 16;
 
     my $handler_call = '&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)';
     is(
@@ -16294,6 +16345,11 @@ subtest 'emit_context_lowers_push_child_call_contracts' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'push(Top, Leaf, items)'),
         'push @items, '.$handler_call,
         'scope-injected push(scope, Rule, target) lowering remains supported for method-chain rendering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push(items, value)'),
+        'push @value, &{$$descr{spec}{items}{handler}}($descr, $STRING, $minfo)',
+        'two-bare-token push(A, B) keeps child-call precedence; wrap the value or use push_value for explicit append'
     );
 
     my $spec_content = <<'SPEC';

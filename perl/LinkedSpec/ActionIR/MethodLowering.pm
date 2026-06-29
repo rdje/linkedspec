@@ -1766,7 +1766,9 @@ sub _lower_assign_statement {
 
 #------------------------------------------------------------------------------
 # Function: _lower_push_value_statement
-# Purpose : Lower `push_value(array(target), value)` helper calls.
+# Purpose : Lower explicit value append helper calls:
+#           `push_value(array(target), value)` and the terse
+#           `push(target, value)` spelling for non-child-call shapes.
 # Args    : ($expr, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
@@ -1785,9 +1787,25 @@ sub _lower_push_value_statement {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $call = $parse_method_function_expr->($expr);
- return undef unless $call && $call->{method} eq 'push_value';
+ return undef unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
 
- my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
+ my $raw_args = $call->{args} || [];
+ my $effective_args;
+ if ($call->{method} eq 'push_value') {
+  $effective_args = $normalize_method_args_with_optional_scope->($raw_args, 2, 2);
+ } else {
+  # SPEC-FORMAT-TERSE.1.3.2 — preserve child-call precedence. `push(Child, target)`
+  # and `push(Child, index)` are both all-bare-token forms and continue through the
+  # child-call contracts. Explicit value append uses `push(target, "literal")`,
+  # `push(target, scalar(value))`, `push(array(target), value)`, or the old
+  # unambiguous `push_value(target, value)`.
+  return undef unless @$raw_args == 2;
+  my $first_expr = $trim_action_ir_value->($raw_args->[0]);
+  my $second_expr = $trim_action_ir_value->($raw_args->[1]);
+  return undef if defined($first_expr) && defined($second_expr)
+             && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o;
+  $effective_args = $raw_args;
+ }
  return undef unless $effective_args;
 
  my $target_expr = $trim_action_ir_value->($effective_args->[0]);
