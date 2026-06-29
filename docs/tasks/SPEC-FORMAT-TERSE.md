@@ -6,11 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.2.3.2` DONE** — Rust aggregate bare value reads now match the Perl
+- Last updated: `2026-06-29` (**`.1.2.3.3` SPLIT** — Perl scalar bare value reads divide by lowering seam:
+  return/assignment-like scalar source slots first, mutation key/RHS slots next, direct-access bare path atoms
+  after the key-vs-index rule is explicit. Frontier -> **`.1.2.3.3.1` Perl scalar source-slot bare reads**.
+  Prior **`.1.2.3.2` DONE** — Rust aggregate bare value reads now match the Perl
   reference: `array_copy(NAME)` and array-first `copy(NAME)` read array working variable `NAME`, while
   `hash_copy(NAME)` reads hash working variable `NAME`; `copy(hash(NAME))` stays the explicit hash-copy path.
-  Oracle corpus is **25 fixtures** and full Rust runtime suite is green. Frontier ->
-  **`.1.2.3.3` Perl scalar bare value reads**. Prior **`.1.2.3.1` DONE** — Perl aggregate bare value reads now
+  Oracle corpus is **25 fixtures** and full Rust runtime suite is green. Prior **`.1.2.3.1` DONE** — Perl aggregate bare value reads now
   auto-exist safely with exactly one `my @NAME` / `my %NAME` per rule; phase0 **984 green**. Prior
   **`.1.2.3` SPLIT** — Channel 2 ground truth shows aggregate bare value reads are separable from scalar bare
   reads/direct `[z]`, which remain later sub-surfaces. Prior
@@ -402,7 +404,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     surface.)
   Goal: Channel 2 — value-position bare-word reads and RHS-shape/type inference.
   Children: `.1.2.3.1` (Perl aggregate bare value reads), `.1.2.3.2` (Rust parity for `.1.2.3.1`),
-    `.1.2.3.3` (Perl scalar bare value reads), `.1.2.3.4` (Rust parity for `.1.2.3.3`). RHS-shape `[]`/`{}`
+    `.1.2.3.3` (Perl scalar bare value reads, split by lowering seam), `.1.2.3.4` (Rust parity for the
+    accepted `.1.2.3.3` scalar-read contract). RHS-shape `[]`/`{}`
     value syntax and any broader expression-valued block interaction are added as later children after the
     read semantics land; they are not pre-published here.
   Verification: **SPLIT 2026-06-29.** KM retrieval and TOOLBOX probes show three distinct sub-surfaces.
@@ -449,21 +452,70 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.3.2 — add Rust aggregate bare-read parity` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.3`
-  Status: `pending`
+  Status: `active` (SPLIT 2026-06-29 — too broad for one signoff code slice. TOOLBOX probes show return and
+    assignment source payloads fall through to raw barewords; statement-level `set_key(meta,key,"v")` already
+    lowers a bare key through `_lower_scalar_access_key_expr`, but bare values stay raw; `items += value` and
+    `meta[key] = value` are rejected by scanner/lowerer guards before key/RHS lowering; direct access
+    deliberately rejects bare path atoms. All-bare child-call `push(A,B)` remains protected.)
   Goal: Perl reference — scalar bare value reads in scalar-like positions.
-  Acceptance: Define and implement the Perl scalar bare-read contract for explicit scalar-like value slots
-    such as `return(NAME)`, `set(out, NAME)`, scalar operator RHS, hash-index key/RHS scalar expressions, and
-    direct-access bare path atoms if the accepted key-vs-index rule is scalar-index. The leaf may split before
-    code if these surfaces are still too broad, but it must not affect all-bare child-call forms such as
-    `push(A,B)`.
+  Children: `.1.2.3.3.1` (return/assignment scalar source slots), `.1.2.3.3.2` (mutation key/RHS scalar slots),
+    `.1.2.3.3.3` (direct-access bare path atoms).
+  Acceptance: The Perl scalar bare-read contract is defined and implemented by child leaves without broadening
+    all-bare child-call forms such as `push(A,B)`. Each child must add generated-source/runtime locks and
+    collector coverage for any newly sigiled scalar reads so generated handlers keep per-invocation lexicals.
+  Verification: **SPLIT 2026-06-29.** KM retrieval plus TOOLBOX `call_spec_handler_subst` probes established
+    the seams: `return(count)` -> `return count`, `set(out,count)` -> `$out = count`, and `name = value` ->
+    `$name = value` share scalar source-slot raw fallback; `set_key(meta,key,"v")` already emits
+    `$meta{$key} = "v"` while `set_key(meta,"stage",value)` leaves `value` raw; `items += value`,
+    `meta[key] = "v"`, `meta["stage"] = value`, and `meta[key] = value` are still raw/reserved because the
+    scanner/lowerer guards reject bare RHS/key tokens; direct `foo["a"][z]` remains raw while
+    `foo["a"][scalar(z)]` lowers to `$foo->{"a"}->[$z]`. `push(A,B)` still lowers as the child-call form.
+    No engine/book behavior changed in the split slice.
+  Commit: `SPEC-FORMAT-TERSE.1.2.3.3 — split scalar bare reads by lowering seam` (see Commit Log)
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3.3.1`
+  Status: `pending`
+  Goal: Perl reference — scalar bare reads in return and assignment-like source slots.
+  Acceptance: `return(NAME)`, `set(out, NAME)` / `assign(out, NAME)`, and scalar assignment operator
+    `out = NAME` lower as scalar working-variable reads (`$NAME`) and auto-supply exactly one preamble
+    `my $NAME` when not already declared/wrapped. Wrapped forms (`scalar(NAME)` / `s(NAME)`) and declared specs
+    remain unchanged, primitive literals remain literals, reserved names are not auto-declared, and all-bare
+    child-call forms such as `push(A,B)` keep the existing child-call lowering. This leaf does not claim array
+    append RHS, hash mutation key/RHS, direct-access bare path atoms, generic helper argument bare reads, or
+    RHS-shape `[]`/`{}` inference.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3.3.2`
+  Status: `pending`
+  Goal: Perl reference — scalar bare reads in mutation key/RHS slots.
+  Acceptance: Accepted mutation forms that currently require explicit scalar wrappers for scalar RHS/key reads
+    gain scoped bare scalar reads without changing target inference: array append RHS (`items += value`),
+    statement-level named hash mutation value (`set_key(meta, key, value)` / `set_key(meta, "stage", value)`),
+    and hash-index operator key/RHS (`meta[key] = value`, `meta["stage"] = value`) lower through `$value` /
+    `$key` where the accepted key slot is scalar-valued. Existing explicit forms and primitive literals remain
+    unchanged, target auto-existence stays `@items` / `%meta`, and all-bare child-call `push(A,B)` remains a
+    child call rather than an append.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3.3.3`
+  Status: `pending`
+  Goal: Perl reference — direct-access bare path atoms.
+  Acceptance: Define and implement the direct-access bare path rule after `.1.2.3.3.1`/`.1.2.3.3.2` settle the
+    scalar read model. If the accepted rule is scalar-index, direct `foo["a"][z]` lowers like
+    `foo["a"][scalar(z)]` (`$foo->{"a"}->[$z]`) and auto-supplies `my $z`; quoted path segments remain hash
+    keys, numeric/helper segments remain array indexes, and `scalaref(...)` compatibility is documented or
+    explicitly left unchanged. This leaf does not introduce RHS-shape `[]`/`{}` inference.
   Verification: `pending`
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.4`
   Status: `pending`
-  Goal: Rust lockstep parity for `.1.2.3.3` scalar bare value reads.
-  Acceptance: Rust parser/runtime behavior matches the accepted Perl scalar bare-read contract without
-    getting ahead on later RHS-shape or block-expression surfaces.
+  Goal: Rust lockstep parity for the accepted `.1.2.3.3` scalar bare value-read contract.
+  Acceptance: Rust parser/runtime behavior matches the accepted Perl scalar bare-read contract after the
+    `.1.2.3.3.x` children land, without getting ahead on later RHS-shape or block-expression surfaces. Split by
+    the same seams if one parity slice is too broad.
   Verification: `pending`
   Commit: `pending`
 
@@ -1040,10 +1092,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3` | `active` (split 2026-06-29) | Channel 2 split by aggregate-vs-scalar value-read surfaces after KM + TOOLBOX ground truth. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.1` | `done` 2026-06-29 | Perl aggregate bare value reads now auto-exist safely (`array_copy(items)`, `hash_copy(meta)`, `copy(items)`); phase0 984 green. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.2` | `done` 2026-06-29 | Rust aggregate bare value reads now match the Perl reference (`array_copy(items)`, `hash_copy(meta)`, array-first `copy(items)`, and `copy(hash(meta))`) with oracle + integration locks. |
-| 1 | `SPEC-FORMAT-TERSE.1.2.3.3` | `pending` | Perl scalar bare value reads. |
+| — | `SPEC-FORMAT-TERSE.1.2.3.3` | `active` (split 2026-06-29) | Perl scalar bare value reads split by lowering seam after TOOLBOX probes: return/assignment sources, mutation key/RHS slots, and direct-access bare path atoms are separate. |
+| 1 | `SPEC-FORMAT-TERSE.1.2.3.3.1` | `pending` | Perl scalar bare reads in return and assignment-like source slots. |
 | … | `.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.2.3.3` Perl scalar bare reads split by lowering seam**). The scalar-read owner is still too
+  broad for one code slice. TOOLBOX probes show return and assignment-like source slots fall through to raw
+  barewords (`return(count)` -> `return count`; `set(out,count)` -> `$out = count`; `name = value` ->
+  `$name = value`). Mutation forms use different acceptance gates: `set_key(meta,key,"v")` already lowers the
+  bare key as `$key`, but bare values remain raw, while array append and hash-index operator forms reject bare
+  RHS/key tokens before lowering. Direct access has its own explicit guard: `foo["a"][z]` remains raw while
+  `foo["a"][scalar(z)]` lowers. Therefore `.1.2.3.3` becomes a container with `.1.2.3.3.1` return/assignment
+  source slots first, `.1.2.3.3.2` mutation key/RHS slots next, and `.1.2.3.3.3` direct-access bare path atoms
+  after the scalar-index rule is explicit. `push(A,B)` remains protected as child-call syntax.
 
 - `2026-06-29` (**`.1.2.3.2` Rust aggregate bare value-read parity landed**). Rust now matches the Perl
   aggregate snapshot-read contract by allowing bare aggregate target names at the aggregate-copy resolver
@@ -1424,6 +1487,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3` (split) | KM retrieval; TOOLBOX `call_spec_handler_subst` probes for scalar-like bare reads, aggregate bare reads, direct bare access, and mutation RHS/key blockers; `dump_parser_source` probes for aggregate bare reads; Perl code-read (`ValueExpr`, `MethodLowering`); Rust code-read (`expr.rs`, `engine.rs` resolver/eval paths); Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check` | Split Channel 2 into aggregate and scalar value-read surfaces. Perl aggregate bare reads lower but lack auto-`my`; Rust aggregate-copy value-read resolvers keep bare reads out; Perl scalar-like reads remain bareword/raw while Rust variables already evaluate as scalar reads. No engine/book behavior change. Frontier becomes `.1.2.3.1`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.1` | Perl syntax checks (`EmitContext.pm`, `phase0_regression.t`); focused generated-source/runtime/no-leak probe for `array_copy(items)`, `hash_copy(meta)`, `copy(items)`; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine/diff checks; `bash tools/run_ci_local.sh` | Perl aggregate bare value reads now auto-exist safely. `_collect_auto_working_var_decls` collects `array_copy(NAME)` and `copy(NAME)` as array reads and `hash_copy(NAME)` as hash reads, deduping with wrapped/declared/mutation paths and skipping reserved literals. Phase0 PASS (`1..984`, including the new 17-assertion subtest with same-parser array/hash reruns); mdBook/KM/local CI PASS. Frontier becomes `.1.2.3.2` for Rust parity. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.2` | `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; `perl -c tools/gen_oracle_corpus.pl`; focused Rust runtime `terse_1_2_3_2`; focused Rust core `parse_direct_nested_access_rejects_bare_segments`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; full Rust runtime suite; `cargo clippy --manifest-path rust/linkedspec-runtime/Cargo.toml`; phase0; mdBook; KM/memory/doctrine/diff checks; full local CI | Rust aggregate bare value reads now match the Perl reference. `array_copy(NAME)` / `copy(NAME)` resolve bare names as array working vars, `hash_copy(NAME)` resolves bare names as hash working vars, and `copy(hash(NAME))` stays the explicit hash path. Added 4 integration locks + 4 oracle fixtures; corpus oracle PASS over 25 fixtures; full runtime PASS (116 unit tests, 25 oracle fixtures, 54 integration tests); clippy EXIT 0 with existing warnings only. Scalar bare reads and bare direct-access path atoms remain deferred to `.1.2.3.3`. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.3` (split) | KM retrieval; TOOLBOX `call_spec_handler_subst` probes for return/assignment bare reads, named hash mutation key/value slots, array append and hash-index operator blockers, direct-access path atoms, `scalaref(...)`, `scalar(container,key)`, and all-bare `push(A,B)`; Perl code-read (`ValueExpr`, `MethodLowering`, scanner, auto-var collector); Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check` | Split Perl scalar bare reads by lowering seam before code. Return/assignment-like source slots remain raw barewords; mutation key/RHS forms are split because named `set_key` already lowers bare keys but not values while operator forms reject bare key/RHS tokens before lowering; direct access keeps a separate bare-segment guard and needs the scalar-index rule stated explicitly. No engine/book behavior changed. Frontier becomes `.1.2.3.3.1`. |
 
 ## Commit Log
 
@@ -1457,8 +1521,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.2.3` | `SPEC-FORMAT-TERSE.1.2.3 — split Channel 2 value reads by aggregate/scalar surfaces` | No engine/book behavior change. Channel 2 is now an active container with aggregate bare value reads first (`.1.2.3.1` Perl, `.1.2.3.2` Rust), followed by scalar bare reads (`.1.2.3.3` Perl, `.1.2.3.4` Rust). Frontier becomes `.1.2.3.1`. |
 | `SPEC-FORMAT-TERSE.1.2.3.1` | `SPEC-FORMAT-TERSE.1.2.3.1 — auto-exist aggregate bare value reads` | Perl aggregate bare value reads now auto-declare per-invocation lexicals: `array_copy(NAME)` / `copy(NAME)` -> `my @NAME`; `hash_copy(NAME)` -> `my %NAME`. Wrapped/declared paths dedup unchanged; scalar bare reads and bare key/RHS/direct path atoms remain deferred. Frontier becomes `.1.2.3.2`. |
 | `SPEC-FORMAT-TERSE.1.2.3.2` | `SPEC-FORMAT-TERSE.1.2.3.2 — add Rust aggregate bare-read parity` | Rust aggregate bare reads now match the Perl reference at the aggregate-copy helper call sites. `array_copy(NAME)` and array-first `copy(NAME)` read arrays, `hash_copy(NAME)` reads hashes, and `copy(hash(NAME))` keeps the explicit hash form. 4 oracle fixtures + 4 integration locks; full runtime suite green; scalar Channel 2 remains next. |
+| `SPEC-FORMAT-TERSE.1.2.3.3` | `SPEC-FORMAT-TERSE.1.2.3.3 — split scalar bare reads by lowering seam` | No engine/book behavior change. Perl scalar bare reads are split into return/assignment source slots (`.1.2.3.3.1`), mutation key/RHS slots (`.1.2.3.3.2`), and direct-access bare path atoms (`.1.2.3.3.3`). Frontier becomes `.1.2.3.3.1`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.2.3.3` SPLIT — Perl scalar bare reads divided by lowering seam.**
+  TOOLBOX probes and code-read show the remaining scalar Channel 2 work is not one safe code change:
+  return/assignment source slots still emit raw barewords; mutation key/RHS slots cross scanner/lowerer guards;
+  direct-access bare path atoms have an explicit rejection and need the scalar-index rule stated. Added
+  `.1.2.3.3.1` (return/assignment source slots), `.1.2.3.3.2` (mutation key/RHS slots), and `.1.2.3.3.3`
+  (direct-access bare path atoms). No engine/book behavior change. Frontier -> `.1.2.3.3.1`.
 
 - `2026-06-29`: **`.1.2.3.2` DONE — Rust aggregate bare value-read parity landed.**
   `array_copy`, `hash_copy`, and `copy` now pass bare aggregate names through the same target resolvers used by

@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3 — Perl scalar bare reads split by lowering seam): Split the scalar
+  Channel 2 owner before code. Durable points. (1) **Do not add a generic "bare word means scalar" fallback to
+  `_lower_method_value_expr`.** That helper is used by many nested/value helper arguments; broadening it would
+  silently change more than the accepted scalar slots and risks all-bare disambiguation such as `push(A,B)`.
+  (2) **Return/assignment source slots are the first safe seam.** `return(count)`, `set(out,count)`, and
+  `name = value` currently fall through to raw barewords and can be scoped through their return/source lowerers
+  plus a scalar auto-`my` collector pass. (3) **Mutation key/RHS slots are separate because their acceptance
+  gates differ.** `set_key(meta,key,"v")` already gets `$key` through `_lower_scalar_access_key_expr`, but
+  `set_key(meta,"stage",value)` leaves the value raw; `items += value` and `meta[key] = value` are blocked by
+  scanner/lowerer guards before the scalar lowerers can run. (4) **Direct `[z]` remains its own rule.** Direct
+  access explicitly rejects bare path atoms, while `[scalar(z)]` works; the `[z]` leaf must state the
+  scalar-index rule instead of inheriting it accidentally. No behavior changed in the split slice.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.2 — Rust aggregate bare value-read parity landed): Closed the Rust
   lockstep leaf by changing only aggregate-copy target resolution. Durable points. (1) **The parity gap was the
   call-site gate, not the parser.** `Expr::Variable` already evaluates as a scalar read in Rust, so broadening

@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3 — Perl scalar bare reads split by lowering seam**
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). TOOLBOX probes showed the remaining
+  scalar Channel 2 work is not one implementation seam. Return/assignment source slots still emit raw barewords
+  (`return(count)`, `set(out,count)`, `name = value`); named hash mutation already lowers a bare key through
+  `$key` but not a bare value; array append and hash-index operator forms reject bare RHS/key tokens before
+  lowering; direct `foo["a"][z]` remains raw while explicit `[scalar(z)]` works. `.1.2.3.3` is now a container:
+  `.1.2.3.3.1` return/assignment source slots, `.1.2.3.3.2` mutation key/RHS slots, and `.1.2.3.3.3`
+  direct-access bare path atoms. **Verification:** TOOLBOX lowering probes PASS; KM/memory/doctrine/diff checks
+  green.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.3.1`** (Perl scalar source-slot bare reads).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.2 — Rust aggregate bare value-read parity landed**
   (RUST ENGINE + ORACLE + INTEGRATION LOCKS; **no mdBook prose change needed because `.1.2.3.1` already taught
   the variant-neutral contract**). Rust aggregate snapshot helpers now resolve bare working-variable reads like

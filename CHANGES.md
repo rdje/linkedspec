@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3 — split scalar bare reads by lowering seam
+
+**Scope:** task tree, task-tree index, roadmap/live continuity docs, Knowledge Map card + generated map. No
+engine, test fixture, or mdBook behavior change.
+
+**Ground truth:** Perl scalar bare-read work is not one implementation seam. Return and assignment-like source
+slots still emit raw barewords (`return(count)` -> `return count`, `set(out,count)` -> `$out = count`,
+`name = value` -> `$name = value`). Mutation slots are mixed: `set_key(meta,key,"v")` already lowers the bare
+key as `$key`, but bare values stay raw; array append and hash-index operator forms reject bare RHS/key tokens
+before lowering. Direct access has its own guard: `foo["a"][z]` remains raw while `foo["a"][scalar(z)]` lowers.
+The all-bare child-call form `push(A,B)` still lowers as child-call syntax and must stay protected.
+
+**Split:** `.1.2.3.3` is now an active container. Its first children are `.1.2.3.3.1` (return/assignment source
+slots), `.1.2.3.3.2` (mutation key/RHS scalar slots), and `.1.2.3.3.3` (direct-access bare path atoms).
+RHS-shape `[]`/`{}` syntax remains later.
+
+**Validation:** TOOLBOX lowering probes PASS; Knowledge Map regenerate/check PASS; memory/doctrine checks PASS;
+`git diff --check` PASS. Phase0/Rust runtime/local CI are N/A to this docs/tree/KM split slice because no
+behavior changed.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.2 — Rust aggregate bare value-read parity
 
 **Scope:** Rust runtime aggregate-copy target resolution, Rust integration locks, Perl-oracle corpus fixtures,
