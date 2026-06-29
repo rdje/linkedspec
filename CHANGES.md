@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.4.2 — Rust recognize terse helper renames (engine + oracle + integration locks)
+
+**Scope:** Rust runtime engine (`rust/linkedspec-runtime/src/engine.rs`), Rust integration tests, oracle corpus
+generator + 2 generated fixtures, task tree/live docs/KM card. No Perl engine or mdBook behavior change.
+
+**What changed:** `Engine::call_helper()` now recognizes the helper-renames that `.1.4.1` made canonical on
+the Perl reference:
+- `set` dispatches through the existing `assign` arm.
+- `cat` dispatches through the existing `concat` arm.
+- `copy` has its own unified array/hash value-copy arm: materialized arrays and hashes clone directly; wrapped
+  array targets use `resolve_array_target(..., false)`; wrapped hash targets use the new `resolve_hash_target`.
+- `hash`/`h` with one bare variable now returns the named runtime hash, so `copy(h(m))` and `hash_copy(h(m))`
+  converge. Bare value-position reads remain deferred to Channel 2.
+
+**Validation:** added oracle fixtures `terse_1_4_2_set_cat_copy_array` and
+`terse_1_4_2_copy_hash_symbol_empty`, plus 3 Rust integration tests for `set`+`cat`+`copy(array)`, hash target
+and hash value copy, and per-parse bare `set` target semantics. `perl -c tools/gen_oracle_corpus.pl` OK;
+oracle regeneration OK; focused `terse_1_4_2` tests PASS; corpus oracle PASS over 11 fixtures; full Rust
+runtime suite PASS (116 unit + 36 integration + corpus-oracle harness); `cargo clippy` EXIT 0 with only the
+existing 13-warning baseline; `perl -Iperl t/phase0_regression.t` PASS (`1..975`); `bash tools/run_ci_local.sh`
+EXIT 0.
+
+**Docs:** no mdBook change: `.1.4.1` already documented the variant-neutral helper contract; this slice makes
+Rust conform. Task-tree/live docs/KM updated. `.1.4` container is now done; next frontier is `.1.3`.
+
 ## 2026-06-24 — SPEC-FORMAT-TERSE.1.4.1 — Perl recognize terse renames set/cat/copy lowering identically to assign/concat/array_copy+hash_copy (engine + book + 4 phase0 locks)
 
 **Scope:** Perl reference engine (8 modules under `perl/LinkedSpec/`), `t/phase0_regression.t` (+4 subtests),

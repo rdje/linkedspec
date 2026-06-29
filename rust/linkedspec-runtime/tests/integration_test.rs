@@ -897,3 +897,66 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
     assert_eq!(r1, serde_json::json!([["a", "b"]]), "bare array first run");
     assert_eq!(r1, r2, "bare array accumulator is per-parse, not leaked (would be 4 items if leaky)");
 }
+
+// ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1:
+// `set` is an assign alias, `cat` is a concat alias, and `copy` is a unified
+// array/hash value-copy helper. These tests stay in the same non-recursive
+// parent-edge proof class as the oracle fixtures.
+
+#[test]
+fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
+    let terse = "Top::\n /x/ -> Done { set(scalar(label), cat(\"a\", \"b\")); push_value(array(items), scalar(label)); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { assign(scalar(label), concat(\"a\", \"b\")); push_value(array(items), scalar(label)); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(terse, "xhello");
+    assert_eq!(
+        actual,
+        serde_json::json!([["ab"]]),
+        "terse set+cat+copy(array) returns the same value shape as the Perl oracle"
+    );
+    assert_eq!(
+        actual,
+        build_and_run(canonical, "xhello"),
+        "set/cat/copy(array) == assign/concat/array_copy on Rust"
+    );
+}
+
+#[test]
+fn terse_1_4_2_copy_hash_matches_hash_copy() {
+    let terse = "Top::\n /x/ -> Done { return(copy(h(m))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { return(hash_copy(h(m))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(terse, "xhello"),
+        serde_json::json!([{}]),
+        "copy(h(m)) produces the Perl empty-hash reference value wrapped one level"
+    );
+    assert_eq!(
+        build_and_run(terse, "xhello"),
+        build_and_run(canonical, "xhello"),
+        "copy(hash target) == hash_copy(hash target) on Rust"
+    );
+
+    let value_terse = "Top::\n /x/ -> Done { return(copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
+    let value_canonical = "Top::\n /x/ -> Done { return(hash_copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(value_terse, "xhello"),
+        serde_json::json!([{"k": "v"}]),
+        "copy clones an already-materialized hash value"
+    );
+    assert_eq!(
+        build_and_run(value_terse, "xhello"),
+        build_and_run(value_canonical, "xhello"),
+        "copy(hash value) == hash_copy(hash value) on Rust"
+    );
+}
+
+#[test]
+fn terse_1_4_2_set_target_is_per_parse_not_leaky() {
+    let grammar = "Top::\n /x/ -> Done { set(v, cat(\"o\", \"k\")); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let engine = Engine::new(compile(&spec).expect("compile"));
+    let r1 = engine.execute("xhello").expect("run1");
+    let r2 = engine.execute("xhello").expect("run2");
+    assert_eq!(r1, serde_json::json!(["ok"]), "set bare target first run");
+    assert_eq!(r1, r2, "set alias uses assign's per-parse target semantics");
+}

@@ -596,6 +596,39 @@ impl Engine {
         val.to_str()
     }
 
+    /// Resolve a hash target name from the first arg of a helper call.
+    ///
+    /// Mirrors `resolve_array_target` for hash-valued helpers: `hash(name)` and
+    /// `h(name)` name the runtime hash `name`, while constructor forms such as
+    /// `hash("key", value)` stay value expressions handled by the `hash` helper.
+    fn resolve_hash_target(
+        &self,
+        raw_args: &[linkedspec_core::expr::Arg],
+        val: &RuntimeValue,
+        allow_bare: bool,
+    ) -> String {
+        use linkedspec_core::expr::{Arg, Expr};
+        if let Some(var_name) = raw_args.first().and_then(|arg| match arg {
+            Arg::Positional(Expr::Call { name, args })
+                if (name == "hash" || name == "h") && args.len() == 1 =>
+            {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => Some(name),
+                    _ => None,
+                }
+            }
+            _ => None,
+        }) {
+            return var_name.clone();
+        }
+        if let (true, Some(Arg::Positional(Expr::Variable { name: var_name }))) =
+            (allow_bare, raw_args.first())
+        {
+            return var_name.clone();
+        }
+        val.to_str()
+    }
+
     /// Resolve a child rule name from the first arg of a `call(...)` helper.
     ///
     /// A bare `call(RuleName)` names the target rule directly — its evaluated
@@ -708,7 +741,7 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            "assign" => {
+            "assign" | "set" => {
                 if args.len() >= 2 {
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
                     ctx.set_scalar(&target, args[1].clone());
@@ -746,6 +779,29 @@ impl Engine {
                                 ))
                             } else {
                                 Ok(RuntimeValue::Array(Vec::new()))
+                            }
+                        }
+                    }
+                } else {
+                    Ok(RuntimeValue::Array(Vec::new()))
+                }
+            }
+            "copy" => {
+                if let Some(arg) = args.first() {
+                    match arg {
+                        RuntimeValue::Array(a) => Ok(RuntimeValue::Array(a.clone())),
+                        RuntimeValue::Hash(h) => Ok(RuntimeValue::Hash(h.clone())),
+                        _ => {
+                            let arr_name = self.resolve_array_target(raw_args, arg, false);
+                            if !arr_name.is_empty() {
+                                Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
+                            } else {
+                                let hash_name = self.resolve_hash_target(raw_args, arg, false);
+                                if !hash_name.is_empty() {
+                                    Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
+                                } else {
+                                    Ok(RuntimeValue::Array(Vec::new()))
+                                }
                             }
                         }
                     }
@@ -817,7 +873,7 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             // ── Scalar/string ──
-            "concat" => {
+            "concat" | "cat" => {
                 let result: String =
                     args.iter().map(|a| a.to_str()).collect();
                 Ok(RuntimeValue::Scalar(result))
@@ -1812,6 +1868,15 @@ impl Engine {
             )),
             // ── Hash helpers ──
             "hash" | "h" => {
+                if let (
+                    true,
+                    Some(linkedspec_core::expr::Arg::Positional(
+                        linkedspec_core::expr::Expr::Variable { name: var_name },
+                    )),
+                ) = (args.len() == 1 && raw_args.len() == 1, raw_args.first())
+                {
+                    return Ok(RuntimeValue::Hash(ctx.get_hash(var_name)));
+                }
                 let mut entries = Vec::new();
                 let mut i = 0;
                 while i + 1 < args.len() {
@@ -1835,7 +1900,7 @@ impl Engine {
                     match arg {
                         RuntimeValue::Hash(h) => Ok(RuntimeValue::Hash(h.clone())),
                         _ => {
-                            let hash_name = self.resolve_array_target(raw_args, arg, false);
+                            let hash_name = self.resolve_hash_target(raw_args, arg, false);
                             if !hash_name.is_empty() {
                                 Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
                             } else {

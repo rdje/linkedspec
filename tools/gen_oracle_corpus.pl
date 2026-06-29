@@ -210,6 +210,33 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1 helper renames ──
+    #
+    # These fixtures freeze the Perl reference values for the new canonical terse
+    # spellings that .1.4.1 taught the book: set (assign), cat (concat), and copy
+    # (array/hash copy). They stay in the same divergence-free proof class as the
+    # earlier authored cases: non-recursive parent edge, action-less child, no retv.
+    {   case   => 'terse_1_4_2_set_cat_copy_array',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(scalar(label), cat("a", "b")); push_value(array(items), scalar(label)); return(copy(array(items))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_4_2_copy_hash_symbol_empty',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { return(copy(h(m))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);
