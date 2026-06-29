@@ -728,9 +728,10 @@ sub _build_action_rewriter_meta {
 # Wrapper-helper -> Perl sigil for auto-existing working variables (SPEC-FORMAT-TERSE.1.1.1).
 # scalar/s -> $, array/a -> @, hash/h -> %. Used for the WRAPPED-form references; the
 # sigil is taken from the wrapper. Bare (un-wrapped) names in type-implying helper arg
-# positions take a POSITION-implied sigil instead — SPEC-FORMAT-TERSE.1.2.1, Channel 1
-# (see _collect_auto_working_var_decls). Full RHS-shape / value-position bare-word
-# inference is a later leaf (.1.2 Channel 2), not these.
+# positions take a POSITION-implied sigil instead — SPEC-FORMAT-TERSE.1.2.1, Channel 1.
+# Bare aggregate value reads take their lowering-implied sigil — SPEC-FORMAT-TERSE.1.2.3.1,
+# Channel 2 aggregate subset. Full scalar RHS-shape / value-position bare-word inference is a
+# later Channel 2 leaf, not these.
 my %AUTO_WORKING_VAR_WRAPPER_SIGIL = (
  scalar => '$', s => '$',
  array  => '@', a => '@',
@@ -808,21 +809,27 @@ sub _mask_action_code_literals {
 #           the preamble `my $NAME`/`@NAME`/`%NAME` declarations the engine must
 #           supply so each variable is a per-invocation lexical rather than a leaky
 #           package global (generated handlers are non-strict — see KM card
-#           working-vars-no-strict-need-my-lexical). Two reference forms are collected:
+#           working-vars-no-strict-need-my-lexical). Three reference forms are collected:
 #             (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED typed-wrapper refs
 #                 scalar(NAME)/array(NAME)/hash(NAME) and the s()/a()/h() aliases with
 #                 a single bare-identifier argument (NOT the 2-arg scalar(container,key)
 #                 read, which has a comma). Sigil taken from the wrapper.
 #             (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE (un-wrapped) names in a
-  #                 type-implying helper arg position: the scalar target of
-  #                 assign(NAME, ...), the hash target of statement-level
-  #                 set_key(NAME, KEY, VALUE), and the array target of push_value(NAME, ...) /
-  #                 push(NAME, nonbare-value) / push_nonempty(NAME, ...). Such a bare name already LOWERS to the
+#                 type-implying helper arg position: the scalar target of
+#                 assign(NAME, ...), the hash target of statement-level
+#                 set_key(NAME, KEY, VALUE), and the array target of push_value(NAME, ...) /
+#                 push(NAME, nonbare-value) / push_nonempty(NAME, ...). Such a bare name already LOWERS to the
 #                 correctly-sigil'd variable but otherwise gets no `my` (leaky global).
 #                 Sigil implied by the position ($ for assign, @ for the push family).
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
-  #                 (all-bare child-call shape) and bare hash value-position reads
-  #                 are deliberately NOT collected here.
+#                 (all-bare child-call shape) and bare hash value-position reads
+#                 are deliberately NOT collected here.
+#             (c) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE
+#                 aggregate value reads that already lower to a sigiled aggregate:
+#                 array_copy(NAME) / copy(NAME) -> @NAME and hash_copy(NAME) -> %NAME.
+#                 Scalar bare value reads such as return(NAME), scalar RHS, and direct
+#                 access [NAME] remain deliberately out of scope for later Channel 2
+#                 leaves.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -886,6 +893,16 @@ sub _collect_auto_working_var_decls {
   }
   while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('@', $1);   # push_value / push_nonempty target lowers to an array
+  }
+  # (c) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE aggregate
+  #     value reads. These forms already lower to sigiled variables; this supplies
+  #     the missing per-invocation lexical. `copy(NAME)` is array-first by the
+  #     existing SPEC-FORMAT-TERSE.1.4.1 contract, matching bare `array_copy(NAME)`.
+  while ($masked =~ /\b(?:array_copy|copy)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
+   $record->('@', $1);
+  }
+  while ($masked =~ /\bhash_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
+   $record->('%', $1);
   }
   foreach my $statement (@{_split_action_ir_statements($block)}) {
    my $trimmed = _trim_action_ir_value($statement);

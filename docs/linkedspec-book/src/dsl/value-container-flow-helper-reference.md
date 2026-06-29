@@ -140,7 +140,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying target position: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; and the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -175,17 +175,17 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `h(name)` | hash value | short alias for `hash(name)`. |
 | `array(...)` | array value | construct one new array payload from the arguments. |
 | `hash(...)` | hash value | construct one new hash/object payload from key/value pairs or flattened hashes. |
-| `array_copy(array_expr)` | array value | snapshot an array value as one nested payload. |
-| `hash_copy(hash_expr)` | hash value | snapshot a hash value as one nested payload. |
+| `array_copy(array_expr)` / `array_copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
+| `hash_copy(hash_expr)` / `hash_copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 
 > **Terse spellings (canonical going forward).** The `.spec` format is migrating to terser helper
 > names: `set(target, source)` is the canonical rename of `assign(...)`, `cat(...)` of `concat(...)`,
 > and a single unified `copy(container)` subsumes both `array_copy(...)` and `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
-> array). The scalar operator statement `name = value` is equivalent to `set(name, value)` and
+> array snapshot read). The scalar operator statement `name = value` is equivalent to `set(name, value)` and
 > `assign(name, value)`. The array append operator `items += expr` is equivalent to the explicit
 > append forms `push(items, expr)` / `push_value(items, expr)` for explicit value expressions; when the
-> value is a working variable, write `items += scalar(value)` until bare value-position reads land.
+> value is a working scalar, write `items += scalar(value)` until scalar bare value-position reads land.
 > The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
 > the key and value are explicit expressions; write `meta[scalar(key)] = scalar(value)` for working
 > variables until bare key/RHS reads land.
@@ -360,7 +360,7 @@ children += hash("kind", "wrapped", "node", call(Node));
 items += scalar(value);
 ```
 
-Keep the RHS explicit. `items += value` is intentionally still reserved for the later bare value-position read work; use `items += scalar(value)` or `push_value(items, scalar(value))` when `value` is a working scalar.
+Keep the RHS explicit. `items += value` is intentionally still reserved for the later scalar bare value-position read work; use `items += scalar(value)` or `push_value(items, scalar(value))` when `value` is a working scalar.
 
 Hash field assignment has the same statement shape for named hashes:
 
@@ -370,7 +370,7 @@ meta[cat("source", "_kind")] = scalar(kind);
 meta[scalar(field_name)] = scalar(field_value);
 ```
 
-Keep the key and value explicit. `meta[key] = "token"` and `meta["kind"] = value` are intentionally still reserved for the later bare value-position read work; use `meta[scalar(key)] = ...` and `... = scalar(value)` when reading working scalars by name.
+Keep the key and value explicit. `meta[key] = "token"` and `meta["kind"] = value` are intentionally still reserved for the later scalar bare value-position read work; use `meta[scalar(key)] = ...` and `... = scalar(value)` when reading working scalars by name.
 
 When the child returns an array-like payload and the current rule accumulator needs one element from it, pass a zero-based index as the second argument:
 

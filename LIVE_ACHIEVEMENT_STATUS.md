@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.1 — Perl aggregate bare value-read auto-existence landed**
+  (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Aggregate bare reads that already lower to sigiled Perl aggregates
+  now get safe per-invocation declarations: `array_copy(items)` and array-first `copy(items)` auto-supply
+  `my @items`, while `hash_copy(meta)` auto-supplies `my %meta`. Wrapped/declared paths dedup unchanged; reserved
+  literals such as `undef` are still skipped. Same-parser array/hash reruns prove the targets do not leak across
+  parses. This does **not** advance scalar bare reads (`return(count)`), bare RHS/key forms, or bare direct-access
+  atoms. **Verification:** Perl syntax checks PASS; focused generated-source/runtime/no-leak probe PASS; phase0
+  PASS (`1..984`); mdBook/KM/local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.2`** (Rust parity for aggregate bare value reads).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3 — Channel 2 value reads split by aggregate/scalar surfaces**
   (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM + TOOLBOX/code-read ground truth
   showed Channel 2 is not one implementation seam. Perl aggregate bare value reads already lower

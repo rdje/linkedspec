@@ -43,9 +43,9 @@ I { declare(scalar, count) }
 
 An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
 
-### The wrapper is optional in a type-implying argument position
+### The wrapper is optional in a type-implying position
 
-A working variable also auto-exists when it appears **bare** (without a `scalar()` / `array()` / `hash()` wrapper) in a helper argument position that already implies its kind. In those positions the wrapper is optional — each pair below is equivalent:
+A working variable also auto-exists when it appears **bare** (without a `scalar()` / `array()` / `hash()` wrapper) in a helper position that already implies its kind. In those positions the wrapper is optional — each pair below is equivalent:
 
 ```text
 # scalar target of assign(...) / set(...) and scalar operator assignment — the bare name is a scalar
@@ -63,9 +63,16 @@ items += match_group(0)
 set_key(meta, "text", match_group(0))
 meta["text"] = match_group(0)
 meta[cat("source", "_kind")] = scalar(kind)
+
+# aggregate snapshot reads — the bare name is the aggregate being copied
+return(array_copy(array(items)))
+return(array_copy(items))
+return(hash_copy(hash(meta)))
+return(hash_copy(meta))
+return(copy(items))
 ```
 
-The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. The variable is the same fresh per-invocation working value described above. (Reading a bare name back as a value — `return(count)` instead of `return(scalar(count))` — and inferring a kind from a value's shape are a later evolution step; for now, read working variables back through their wrapper. In hash-index assignment, keep the key and value explicit too: use `"text"`, `cat(...)`, `scalar(key)`, or another helper expression rather than bare `key` / `value` until that later step lands.)
+The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. The variable is the same fresh per-invocation working value described above. (Scalar bare value reads — `return(count)` instead of `return(scalar(count))` — and inferring a kind from a value's shape are still later evolution steps. In hash-index assignment, keep the key and value explicit too: use `"text"`, `cat(...)`, `scalar(key)`, or another helper expression rather than bare `key` / `value` until that later step lands.)
 
 `declare(...)` stays supported and is still the right choice when you want to:
 
@@ -73,7 +80,7 @@ The kind comes from the **position**: the target of `assign(...)`, `set(...)`, a
 - state the **kind and intent** explicitly for readers; or
 - gather a rule's working state in one visible `I { ... }` preamble.
 
-The shipped specs and the examples in this chapter still use `declare(...)` and the typed wrappers for clarity. Where a name is wrapped, the wrapper decides its kind — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash; where a name is bare in a type-implying argument position, that position decides it. Inferring the kind from a value's shape (a right-hand side) is still a separate, later evolution step.
+The shipped specs and the examples in this chapter still use `declare(...)` and the typed wrappers for clarity. Where a name is wrapped, the wrapper decides its kind — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash; where a name is bare in a type-implying position, that position decides it. Inferring the kind from a value's shape (a right-hand side) is still a separate, later evolution step.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `a(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 

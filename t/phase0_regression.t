@@ -44053,6 +44053,90 @@ subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
     is($run->($ap, 'a b c'), '["a","b","c"]', 're-running the SAME parser still returns 3 items (per-invocation my, not a leaky global)');
 };
 
+subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub {
+    # SPEC-FORMAT-TERSE.1.2.3.1 (Channel 2 aggregate subset): aggregate bare value
+    # reads already lower to sigiled variables on the Perl reference
+    # (`array_copy(items)` -> `[@items]`, `hash_copy(meta)` -> `{%meta}`,
+    # `copy(items)` -> `[@items]`) but previously got no preamble `my`, leaving a
+    # non-strict package-global hazard. This leaf supplies the per-invocation lexical
+    # without changing wrapped/declared forms or scalar bare reads.
+    plan tests => 17;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+    my $run = sub {
+        my ($spec, $input) = @_;
+        my $p = eval { LinkedSpec::Get(\$spec, top_rule => 'top', parse_mode => 'seek') };
+        return 'ERR:' . normalize_error($@) unless ref($p) eq 'CODE';
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$input); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+
+    my $array_spec = "top:: -> w { return(array_copy(items)) }\n\nw : /x/\n";
+    my $array_src = $gen->($array_spec);
+    my $n_array = () = ($array_src =~ /my \@items\b/g);
+    is($n_array, 1, 'bare array_copy(items) auto-supplies exactly one `my @items`');
+    like($array_src, qr/return \[\@items\]/, 'bare array_copy(items) still lowers to the existing array-copy expression');
+    unlike($array_src, qr/my \%items\b/, 'bare array_copy(items) does not infer a hash declaration');
+
+    my $hash_spec = "top:: -> w { return(hash_copy(meta)) }\n\nw : /x/\n";
+    my $hash_src = $gen->($hash_spec);
+    my $n_hash = () = ($hash_src =~ /my \%meta\b/g);
+    is($n_hash, 1, 'bare hash_copy(meta) auto-supplies exactly one `my %meta`');
+    like($hash_src, qr/return \{\%meta\}/, 'bare hash_copy(meta) still lowers to the existing hash-copy expression');
+
+    my $copy_src = $gen->("top:: -> w { return(copy(items)) }\n\nw : /x/\n");
+    my $n_copy = () = ($copy_src =~ /my \@items\b/g);
+    is($n_copy, 1, 'bare copy(items) follows the existing array-first copy rule and auto-supplies `my @items`');
+
+    my $reserved_src = $gen->("top:: -> w { return(array_copy(undef)) }\n\nw : /x/\n");
+    unlike($reserved_src, qr/my \@undef\b/, 'aggregate bare-read collector still skips reserved DSL literal undef');
+
+    my $dedup_target_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)); return(array_copy(items)) }\n");
+    my $n_dedup_target = () = ($dedup_target_src =~ /my \@items\b/g);
+    is($n_dedup_target, 1, 'bare push_value target plus bare array_copy read dedup to one `my @items`');
+
+    my $wrapped_src = $gen->("top:: -> w { return(array_copy(array(items))) }\n\nw : /x/\n");
+    my $n_wrapped = () = ($wrapped_src =~ /my \@items\b/g);
+    is($n_wrapped, 1, 'wrapped array_copy(array(items)) remains on the wrapped path with one `my @items`');
+
+    my $hash_dedup_src = $gen->("top:: -> w { set_key(meta, \"kind\", \"x\"); return(hash_copy(meta)) }\n\nw : /x/\n");
+    my $n_hash_dedup = () = ($hash_dedup_src =~ /my \%meta\b/g);
+    is($n_hash_dedup, 1, 'bare set_key target plus bare hash_copy read dedup to one `my %meta`');
+
+    is($run->($array_spec, 'x'), '[]', 'bare array_copy(items) runtime smoke returns an empty array snapshot');
+
+    my $array_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n"
+                         . "LX {return(array_copy(items))}\n";
+    my $ap = eval { LinkedSpec::Get(\$array_accum_spec, top_rule => 'top', parse_mode => 'seek') };
+    ok(ref($ap) eq 'CODE', 'bare array_copy(items) accumulator compiles to a parser')
+        or diag(normalize_error($@));
+    my $input_array_first = 'a b';
+    my $array_first = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $ap->(\$input_array_first); alarm(0); $J->encode($r) };
+    is(defined($array_first) ? $array_first : ('ERR:' . normalize_error($@)), '["a","b"]', 'bare array_copy(items) returns the current parse array snapshot');
+    my $input_array_rerun = 'c';
+    my $array_rerun = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $ap->(\$input_array_rerun); alarm(0); $J->encode($r) };
+    is(defined($array_rerun) ? $array_rerun : ('ERR:' . normalize_error($@)), '["c"]', 're-running the SAME parser resets the auto-declared bare array read target');
+
+    my $hash_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, match_group(0), true) }\n"
+                         . "LX {return(hash_copy(meta))}\n";
+    my $hp = eval { LinkedSpec::Get(\$hash_accum_spec, top_rule => 'top', parse_mode => 'seek') };
+    ok(ref($hp) eq 'CODE', 'bare hash_copy(meta) mutation/read spec compiles to a parser')
+        or diag(normalize_error($@));
+    my $input_hash_first = 'a';
+    my $hash_first = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $hp->(\$input_hash_first); alarm(0); $J->encode($r) };
+    is(defined($hash_first) ? $hash_first : ('ERR:' . normalize_error($@)), '{"a":true}', 'bare hash_copy(meta) returns the current parse hash snapshot');
+    my $input_hash_second = 'b';
+    my $hash_second = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $hp->(\$input_hash_second); alarm(0); $J->encode($r) };
+    is(defined($hash_second) ? $hash_second : ('ERR:' . normalize_error($@)), '{"b":true}', 're-running the SAME parser resets the auto-declared bare hash read target');
+};
+
 subtest 'spec_format_terse_1_4_1_new_spellings_lower_identically_to_canonical' => sub {
     # SPEC-FORMAT-TERSE.1.4.1 (ADR 0007): the terse helper renames become canonical, the old
     # names stay deprecated aliases that lower identically -- assign<->set, concat<->cat,

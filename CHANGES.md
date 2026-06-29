@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.1 — auto-exist aggregate bare value reads
+
+**Scope:** Perl ActionIR auto-working-variable collector, phase0 regression coverage, mdBook helper/declaration
+wording, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** aggregate bare value reads that already lowered to sigiled Perl aggregate variables now get the
+same per-invocation lexical protection as earlier auto-existence surfaces. The collector records
+`array_copy(NAME)` and array-first `copy(NAME)` as `my @NAME`, and `hash_copy(NAME)` as `my %NAME`, using the same
+literal masking, reserved-name guard, and dedup path as wrapped/declared/mutation forms.
+
+**Boundary:** this is not the scalar Channel 2 leaf. `return(NAME)`, scalar RHS/key reads such as
+`items += value` / `meta[key] = value`, and bare direct-access atoms such as `[z]` remain deferred. Rust parity for
+the aggregate read forms is the next child, `.1.2.3.2`.
+
+**Validation:** Perl syntax checks PASS; focused generated-source/runtime/no-leak probe PASS for
+`array_copy(items)`, `hash_copy(meta)`, and `copy(items)`; full phase0 PASS (`t/phase0_regression.t`, 984 tests,
+including the new 17-assertion subtest); mdBook build PASS; Knowledge Map regenerate/check PASS;
+memory/doctrine/diff checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3 — split Channel 2 value reads by aggregate/scalar surfaces
 
 **Scope:** task tree, task-tree index, roadmap/live continuity docs, Knowledge Map card + generated map. No

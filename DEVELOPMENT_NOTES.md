@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.1 — Perl aggregate bare value-read auto-existence landed): Extended the
+  existing auto-working-variable collector instead of adding a separate pass. Durable points. (1) **Aggregate
+  snapshot helpers are the only new value-read inference surface here.** `array_copy(NAME)` and array-first
+  `copy(NAME)` imply an array working var; `hash_copy(NAME)` implies a hash working var. These forms already
+  lower to `[@NAME]` / `{%NAME}` on Perl, so the safe fix is only to supply the missing `my @NAME` / `my %NAME`
+  preamble. (2) **The collector stays conservative.** It scans literal-masked raw action blocks, skips reserved
+  DSL/engine names, and dedups against wrapped references, mutation targets, accumulator arrays, and explicit
+  declarations. Wrapped forms such as `array_copy(array(items))` and declared forms keep one declaration. (3)
+  **Do not broaden this to scalar Channel 2 by regex drift.** `return(NAME)`, `items += value`, `meta[key] =
+  value`, and bare direct-access atoms such as `[z]` remain pending scalar bare-read work. (4) **Rust parity is
+  still separate.** `.1.2.3.2` must decide/update Rust aggregate target resolution so `array_copy(items)`,
+  `hash_copy(meta)`, and `copy(items)` match the Perl reference without advancing scalar bare reads.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3 — Channel 2 split by aggregate/scalar value-read surfaces): Split the
   broad Channel 2 owner before code. Durable points. (1) **Aggregate bare reads are already partially
   implemented on Perl, but unsafely.** `array_copy(items)`, `hash_copy(meta)`, and `copy(items)` lower to
