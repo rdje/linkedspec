@@ -949,7 +949,8 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
 // ── SPEC-FORMAT-TERSE.1.2.3.2 — Rust lockstep parity for .1.2.3.1:
 // aggregate bare value reads are type-implying snapshot positions. `array_copy(NAME)`
 // and array-first `copy(NAME)` read array `NAME`; `hash_copy(NAME)` reads hash `NAME`.
-// Scalar-like bare value reads and bare direct-access path atoms remain deferred.
+// Scalar-like bare value reads and bare direct-access path atoms landed later
+// under SPEC-FORMAT-TERSE.1.2.3.4.
 
 #[test]
 fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
@@ -1322,5 +1323,30 @@ fn terse_1_5_5_1_direct_nested_access_explicit_segments_run() {
         build_and_run(grammar, "xhello"),
         serde_json::json!(["one"]),
         "direct nested access walks mixed hash and array segments"
+    );
+}
+
+// ── SPEC-FORMAT-TERSE.1.2.3.4 — Rust scalar bare-read parity:
+// source slots, mutation key/RHS slots, and direct-access bare path atoms all
+// evaluate `Expr::Variable` as a scalar working-variable read. RHS-shape
+// inference remains later, and this does not change the `push(...)` disambiguation.
+
+#[test]
+fn terse_1_2_3_4_scalar_source_slot_bare_reads_run() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(out, value); name = value; return(value); return(array(scalar(out), scalar(name))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["ok", ["ok", "ok"]]),
+        "bare scalar reads work in return and assignment source slots"
+    );
+}
+
+#[test]
+fn terse_1_2_3_4_mutation_and_direct_access_bare_reads_run() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); set(idx, 1); set(foo, hash(\"a\", array(\"zero\", \"one\"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(array_copy(array(items)), hash_copy(hash(meta)), foo[\"a\"][idx])) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["payload"], {"stage": "payload"}, "one"]]),
+        "bare scalar reads work in mutation slots and direct-access path indexes"
     );
 }

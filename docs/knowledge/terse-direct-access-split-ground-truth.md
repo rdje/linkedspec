@@ -40,7 +40,8 @@ Channel 2, where bare value-position words become variable reads and need type/s
 
 Direct explicit access landed under [[terse-direct-access-explicit-segments]]. Non-reserved bare direct-access
 path atoms landed under [[terse-direct-access-bare-path-atoms]] and lower as scalar array-index reads. Rust
-lockstep parity is the next frontier leaf, `SPEC-FORMAT-TERSE.1.2.3.4`.
+lockstep parity landed under [[terse-rust-scalar-bare-read-parity]]. The next Channel 2 frontier is
+`SPEC-FORMAT-TERSE.1.2.3.5`, RHS-shape/type-inference split before code.
 
 ## Split Consequence
 

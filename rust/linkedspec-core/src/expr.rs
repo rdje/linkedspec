@@ -396,16 +396,6 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
         let value = self.parse_expr()?;
-        if matches!(key, Expr::Variable { .. }) {
-            return Err(
-                "hash-index assignment operator bare key is reserved for Channel 2".into()
-            );
-        }
-        if matches!(value, Expr::Variable { .. }) {
-            return Err(
-                "hash-index assignment operator bare RHS is reserved for Channel 2".into()
-            );
-        }
         Ok(Some(Expr::AssignHashIndex { name, key: Box::new(key), value: Box::new(value) }))
     }
 
@@ -441,11 +431,6 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
         let value = self.parse_expr()?;
-        if matches!(value, Expr::Variable { .. }) {
-            return Err(
-                "array append operator bare RHS is reserved for Channel 2".into()
-            );
-        }
         Ok(Some(Expr::AssignArrayAppend { name, value: Box::new(value) }))
     }
 
@@ -584,23 +569,12 @@ impl<'a> Parser<'a> {
             let has_hash_key = segments
                 .iter()
                 .any(|segment| matches!(segment, AccessSegment::Key { .. }));
-            let has_bare_segment = segments.iter().any(|segment| {
-                matches!(
-                    segment,
-                    AccessSegment::Index {
-                        expr
-                    } if matches!(expr.as_ref(), Expr::Variable { .. })
-                )
-            });
             if segments.len() == 1 && !has_hash_key {
                 let AccessSegment::Index { expr } = segments.into_iter().next().unwrap() else {
                     unreachable!("single non-key access segment must be an index");
                 };
                 let expr = Expr::IndexedVar { name, index: expr };
                 return self.parse_fluent_chain(expr);
-            }
-            if has_bare_segment {
-                return Err("bare direct-access path segments are reserved for Channel 2".into());
             }
             let expr = Expr::NestedAccess {
                 base: name,
@@ -983,21 +957,31 @@ mod tests {
             "equality-like spelling is not parsed as assignment"
         );
         assert!(
-            CodeBlock::parse(r#"name[key] = "v""#).is_err(),
-            "bare hash-index key is reserved for Channel 2"
-        );
-        assert!(
-            CodeBlock::parse(r#"name["k"] = value"#).is_err(),
-            "bare hash-index RHS is reserved for Channel 2"
-        );
-        assert!(
             CodeBlock::parse(r#"items ++"#).is_err(),
             "increment-like spelling is not parsed as array append"
         );
-        assert!(
-            CodeBlock::parse(r#"items += value"#).is_err(),
-            "bare RHS is reserved for Channel 2"
-        );
+    }
+
+    #[test]
+    fn parse_scalar_bare_reads_in_mutation_slots() {
+        let code = r#"items += value; meta[key] = value"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(block.statements.len(), 2);
+        match &block.statements[0].expr {
+            Expr::AssignArrayAppend { name, value } => {
+                assert_eq!(name, "items");
+                assert!(matches!(value.as_ref(), Expr::Variable { name } if name == "value"));
+            }
+            _ => panic!("expected array append"),
+        }
+        match &block.statements[1].expr {
+            Expr::AssignHashIndex { name, key, value } => {
+                assert_eq!(name, "meta");
+                assert!(matches!(key.as_ref(), Expr::Variable { name } if name == "key"));
+                assert!(matches!(value.as_ref(), Expr::Variable { name } if name == "value"));
+            }
+            _ => panic!("expected hash-index assignment"),
+        }
     }
 
     #[test]
@@ -1281,9 +1265,25 @@ mod tests {
     }
 
     #[test]
-    fn parse_direct_nested_access_rejects_bare_segments() {
-        let err = CodeBlock::parse(r#"return(foo["a"][z])"#).unwrap_err();
-        assert!(err.contains("reserved for Channel 2"));
+    fn parse_direct_nested_access_accepts_bare_segments() {
+        let block = CodeBlock::parse(r#"return(foo["a"][z])"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name: _, args } => match args[0].value() {
+                Expr::NestedAccess { base, segments } => {
+                    assert_eq!(base, "foo");
+                    assert_eq!(segments.len(), 2);
+                    assert!(matches!(segments[0], AccessSegment::Key { ref value } if value == "a"));
+                    match &segments[1] {
+                        AccessSegment::Index { expr } => {
+                            assert!(matches!(expr.as_ref(), Expr::Variable { name } if name == "z"));
+                        }
+                        _ => panic!("expected scalar-index segment"),
+                    }
+                }
+                other => panic!("expected NestedAccess, got {:?}", other),
+            },
+            _ => panic!("expected Call"),
+        }
     }
 
     // ── Fluent chain parsing ──

@@ -258,6 +258,43 @@ Done::
 SPEC
     },
 
+    # ── SPEC-FORMAT-TERSE.1.2.3.4 — Rust parity for scalar bare value reads ──
+    #
+    # These fixtures freeze the Perl reference values after `.1.2.3.3` closed the
+    # accepted scalar bare-read seams: return/assignment source slots, mutation
+    # key/RHS slots, and direct-access bare path atoms. They intentionally do not
+    # claim RHS-shape inference or all-bare `push(...)` changes.
+    {   case   => 'terse_1_2_3_4_return_bare_scalar',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); return(value) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_2_3_4_assignment_source_bare_reads',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); set(out, value); name = value; return(array(scalar(out), scalar(name))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_2_3_4_mutation_direct_bare_reads',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "payload"); set(key, "stage"); set(idx, 1); set(foo, hash("a", array("zero", "one"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(array_copy(array(items)), hash_copy(hash(meta)), foo["a"][idx])) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+
     # ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1 helper renames ──
     #
     # These fixtures freeze the Perl reference values for the new canonical terse
@@ -335,8 +372,9 @@ SPEC
 
     # ── SPEC-FORMAT-TERSE.1.3.4.2 — array append operator spelling ──
     #
-    # `items += value` is the statement-level array append operator for explicit
-    # RHS shapes. Bare RHS variable reads remain deferred to Channel 2.
+    # `items += value` was introduced as the statement-level array append operator
+    # for explicit RHS shapes. Bare RHS variable reads landed later under
+    # SPEC-FORMAT-TERSE.1.2.3.4.
     {   case   => 'terse_1_3_4_2_array_append_operator',
         input  => 'xhello',
         source => <<'SPEC',
@@ -350,9 +388,9 @@ SPEC
 
     # ── SPEC-FORMAT-TERSE.1.3.4.3 — hash-index assignment operator spelling ──
     #
-    # `name[key] = value` is the statement-level hash-index assignment operator
-    # for explicit key/RHS shapes. Bare key and RHS variable reads remain
-    # deferred to Channel 2.
+    # `name[key] = value` was introduced as the statement-level hash-index
+    # assignment operator for explicit key/RHS shapes. Bare key and RHS variable
+    # reads landed later under SPEC-FORMAT-TERSE.1.2.3.4.
     {   case   => 'terse_1_3_4_3_hash_index_assignment_operator',
         input  => 'xhello',
         source => <<'SPEC',

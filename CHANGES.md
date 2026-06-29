@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.4 — Rust scalar bare-read parity
+
+**Scope:** Rust parser scalar bare-read reservations, Rust integration locks, Perl-oracle corpus fixtures,
+task tree, roadmap/live continuity docs, and Knowledge Map.
+
+**What changed:** Rust now accepts the scalar bare-read contract already landed on the Perl reference:
+source-slot reads (`return(value)`, `set(out, value)`, `name = value`), mutation key/RHS reads
+(`items += value`, `set_key(meta, key, value)`, `meta[key] = value`), and direct-access bare path atoms
+(`foo["a"][idx]`). Runtime evaluation already treated `Expr::Variable` as a scalar working-variable read via
+`ctx.get_scalar(name)`, so the implementation removes obsolete parser reservations and locks the behavior.
+
+**Boundary:** this does not add RHS-shape `[]`/`{}` inference, expression-valued blocks, generic helper-argument
+broadening, or any change to the all-bare `push(A,B)` child-call convention. The remaining Channel 2
+RHS-shape/type-inference work is now tracked as `SPEC-FORMAT-TERSE.1.2.3.5`.
+
+**Validation:** focused Rust parser tests PASS; focused Rust runtime `.1.2.3.4` tests PASS; oracle corpus
+regenerated to 28 fixtures and corpus oracle PASS; mdBook build PASS; Knowledge Map, memory/doctrine/diff
+checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3.3 — direct-access bare path atoms
 
 **Scope:** Perl ActionIR direct nested-access value lowering, auto-working-variable collector, phase0 regression

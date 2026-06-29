@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.4 — Rust scalar bare-read parity landed**
+  (RUST PARSER + RUNTIME LOCKS + ORACLE/KM). Rust now accepts the scalar bare-read contract already landed on
+  the Perl reference: `return(value)`, `set(out, value)`, `name = value`, `items += value`,
+  `set_key(meta, key, value)`, `meta[key] = value`, and direct-access path indexes such as `foo["a"][idx]`
+  all evaluate bare identifiers through the existing scalar working-variable read path. The runtime already
+  evaluated `Expr::Variable` as `ctx.get_scalar(name)`; this slice removed obsolete parser reservations and
+  added parser/runtime/oracle locks. RHS-shape `[]`/`{}` inference and expression-valued blocks remain later,
+  all-bare `push(A,B)` remains child-call syntax, and the remaining Channel 2 shape work is now tracked as
+  `SPEC-FORMAT-TERSE.1.2.3.5`.
+  **Verification:** focused Rust parser tests PASS; focused Rust runtime `.1.2.3.4` tests PASS; oracle corpus
+  regenerated to **28 fixtures** and corpus oracle PASS; mdBook build PASS; KM/memory/doctrine/diff checks
+  PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.5`** (RHS-shape/type-inference split before code).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3.3 — Perl direct-access bare path atoms landed**
   (PERL ACTIONIR + AUTO-DECL + PHASE0 + BOOK/KM LOCKS). Non-reserved bare atoms inside direct-access bracket
   paths now read scalar working variables as array indexes: `foo["a"][z]` lowers/runs like

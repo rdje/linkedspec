@@ -11,7 +11,7 @@ answers:
 date: 2026-06-29
 status: confirmed
 tags: [dsl, nested-access, spec-format-terse, SPEC-FORMAT-TERSE, channel-2, actionir, rust, parser]
-evidence: "SPEC-FORMAT-TERSE.1.5.5.1 landed on 2026-06-29. Perl `LinkedSpec::call_spec_handler_subst(\"Top\", q{return(foo[\"a\"][9][\"b\"][scalar(z)])})` returns `return $foo->{\"a\"}->[9]->{\"b\"}->[$z]`; the single-quoted probe `return(foo['a'][0])` returns `return $foo->{'a'}->[0]`. SPEC-FORMAT-TERSE.1.2.3.3.3 later landed non-reserved bare path atoms, so `return(foo[\"a\"][9][\"b\"][z])` now lowers to `return $foo->{\"a\"}->[9]->{\"b\"}->[$z]`. A runtime probe with `set(foo, hash(\"a\", array(hash(\"b\", array(\"zero\",\"one\")))))`, `set(z,1)`, and direct access returns `\"one\"`. Rust added `AccessSegment::{Key,Index}` and `Expr::NestedAccess` for explicit paths; Rust scalar parity for the later bare path atom rule is owned by `.1.2.3.4`."
+evidence: "SPEC-FORMAT-TERSE.1.5.5.1 landed on 2026-06-29. Perl `LinkedSpec::call_spec_handler_subst(\"Top\", q{return(foo[\"a\"][9][\"b\"][scalar(z)])})` returns `return $foo->{\"a\"}->[9]->{\"b\"}->[$z]`; the single-quoted probe `return(foo['a'][0])` returns `return $foo->{'a'}->[0]`. SPEC-FORMAT-TERSE.1.2.3.3.3 later landed non-reserved bare path atoms, so `return(foo[\"a\"][9][\"b\"][z])` now lowers to `return $foo->{\"a\"}->[9]->{\"b\"}->[$z]`. A runtime probe with `set(foo, hash(\"a\", array(hash(\"b\", array(\"zero\",\"one\")))))`, `set(z,1)`, and direct access returns `\"one\"`. Rust added `AccessSegment::{Key,Index}` and `Expr::NestedAccess` for explicit paths under `.1.5.5.1`, and SPEC-FORMAT-TERSE.1.2.3.4 later accepted non-reserved bare path atoms through the existing `Expr::Variable` scalar read path."
 reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{return(foo[\"a\"][9][\"b\"][scalar(z)])}, q{return(foo['\"'\"'a'\"'\"'][0])}, q{return(foo[\"a\"][9][\"b\"][z])}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$expr); $out =~ s/\\n/\\\\n/g; print \"$expr => $out\\n\" }' && cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml parse_direct_nested_access && cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_5_5_1_direct_nested_access_explicit_segments_run"
 ---
 
@@ -39,5 +39,5 @@ The full brainstorm spelling:
 foo["a"][9]["b"][z]
 ```
 
-is now accepted on the Perl reference. Rust parity for the bare path-atom portion is tracked by
-`SPEC-FORMAT-TERSE.1.2.3.4`.
+is now accepted on both variants. The remaining Channel 2 work is RHS-shape/type inference under
+`SPEC-FORMAT-TERSE.1.2.3.5`.

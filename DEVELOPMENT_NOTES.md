@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.4 — Rust scalar bare-read parity landed): Closed the Rust lockstep
+  leaf for the accepted scalar Channel 2 read contract. Durable points. (1) **The runtime already had the
+  scalar semantics.** `Expr::Variable` evaluates through `ctx.get_scalar(name)`, so source-slot bare reads,
+  mutation key/RHS bare reads, and direct-access bare path atoms all needed parser acceptance and regression
+  locks, not a second runtime dispatch path. (2) **Remove only obsolete reservations.** The Rust parser now
+  allows bare RHS/key variables in `items += value` and `meta[key] = value`, and bare index variables in
+  multi-segment direct access such as `foo["a"][idx]`; one-level `name[index]` still stays the legacy
+  `IndexedVar` shape. (3) **Keep the next seam explicit.** RHS-shape `[]`/`{}` inference is still not
+  implemented by this leaf and is now tracked as `SPEC-FORMAT-TERSE.1.2.3.5`; all-bare `push(A,B)` remains
+  child-call routing.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3.3 — direct-access bare path atoms landed): Closed the Perl scalar
   direct-access child with the scalar-index rule stated explicitly. Durable points. (1) **Bare path atoms are
   indexes, not hash keys.** In direct nested access, quoted segments remain hash keys; numeric, helper, and
@@ -12,7 +23,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   flow fallback.** Direct access in `set(out, foo["a"][z])` needs the changed method-value result before a
   generic flow/source path can hand back the raw source. (4) **`scalaref(...)` compatibility is unchanged.**
   `scalaref(foo,{"a"}[z])` keeps its historical `[z]` path atom; use `[scalar(z)]` in that helper when a scalar
-  working-variable index is intended. Rust parity remains the next leaf under `.1.2.3.4`.
+  working-variable index is intended. Rust parity landed later under `.1.2.3.4`.
 
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3.2 — mutation-slot bare scalar reads landed): Implemented the second
   scalar Channel 2 child by changing only accepted mutation key/RHS seams. Durable points. (1) **Do not
@@ -59,9 +70,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   reference already treats the helper as a type-implying aggregate snapshot read. (2) **`copy(NAME)` remains
   array-first by construction.** The `copy` fallback resolves an array target before trying a hash target; a
   bare `copy(items)` therefore means array copy, while `copy(hash(meta))` is the explicit hash form. (3)
-  **Scalar and direct-access Channel 2 boundaries stay intact.** No parser rule changed, the existing
-  `parse_direct_nested_access_rejects_bare_segments` lock still passes, and scalar-like bare reads remain the
-  next Perl-reference leaf. (4) **Freeze both hand-written and oracle evidence.** The slice adds 4 integration
+  **Scalar and direct-access Channel 2 boundaries stay intact.** No parser rule changed in that aggregate
+  leaf; scalar-like bare reads stayed deferred until the later `.1.2.3.3` Perl and `.1.2.3.4` Rust leaves.
+  (4) **Freeze both hand-written and oracle evidence.** The slice adds 4 integration
   locks plus 4 Perl-oracle fixtures; corpus oracle now covers 25 fixtures and the full runtime suite stays green.
 
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.1 — Perl aggregate bare value-read auto-existence landed): Extended the
