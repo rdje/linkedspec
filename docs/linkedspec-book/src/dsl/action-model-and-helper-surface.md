@@ -92,6 +92,7 @@ Write values into declared variables or containers:
 - `push_value(array(name), value)` — named-array push
 - `push_nonempty(array(name), value)` — push only if value is defined and non-empty
 - `set_key(name, key, value)` — set one key in a named working hash
+- `name[key] = value` — terse hash-index assignment operator, equivalent to `set_key(name, key, value)` when the key and value are explicit expressions
 
 ### Capture and mark helpers
 

@@ -9,8 +9,10 @@
 //!
 //! ```text
 //! stmts       → stmt*
-//! stmt        → scalar_assignment | expr ';'?
+//! stmt        → hash_index_assignment | array_append | scalar_assignment | expr ';'?
 //! scalar_assignment → name '=' expr      (statement only)
+//! array_append → name '+=' expr          (statement only)
+//! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
 //! expr        → primary ('.' method_call)*
 //! primary     → call | indexed_var | literal | variable
 //! call        → name '(' args? ')'
@@ -62,6 +64,13 @@ pub enum Expr {
     #[serde(rename = "assign_array_append")]
     AssignArrayAppend {
         name: String,
+        value: Box<Expr>,
+    },
+    /// A statement-only hash-index assignment operator: `meta["key"] = value`
+    #[serde(rename = "assign_hash_index")]
+    AssignHashIndex {
+        name: String,
+        key: Box<Expr>,
         value: Box<Expr>,
     },
     /// A variable reference: `results`, `retv`, `$name`
@@ -154,6 +163,7 @@ impl std::fmt::Display for Expr {
             }
             Expr::AssignScalar { name, value } => write!(f, "{name} = {value}"),
             Expr::AssignArrayAppend { name, value } => write!(f, "{name} += {value}"),
+            Expr::AssignHashIndex { name, key, value } => write!(f, "{name}[{key}] = {value}"),
             Expr::Variable { name } => write!(f, "{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
             Expr::StringLiteral { value } => write!(f, "\"{value}\""),
@@ -253,6 +263,10 @@ impl<'a> Parser<'a> {
 
     fn parse_statement_expr(&mut self) -> Result<Expr, String> {
         let start = self.pos;
+        if let Some(expr) = self.try_parse_hash_index_assignment_statement()? {
+            return Ok(expr);
+        }
+        self.pos = start;
         if let Some(expr) = self.try_parse_array_append_statement()? {
             return Ok(expr);
         }
@@ -262,6 +276,75 @@ impl<'a> Parser<'a> {
         }
         self.pos = start;
         self.parse_expr()
+    }
+
+    fn try_parse_hash_index_assignment_statement(&mut self) -> Result<Option<Expr>, String> {
+        self.skip_whitespace();
+        let start = self.pos;
+        let Some(ch) = self.peek() else {
+            return Ok(None);
+        };
+        if !ch.is_ascii_alphabetic() && ch != '_' {
+            return Ok(None);
+        }
+
+        let name = self.parse_name();
+        if name.is_empty()
+            || !name
+                .chars()
+                .all(|c| c.is_ascii_alphanumeric() || c == '_')
+        {
+            self.pos = start;
+            return Ok(None);
+        }
+        self.skip_whitespace();
+        if self.peek() != Some('[') {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.advance(1);
+        self.skip_whitespace();
+        if self.pos >= self.src.len() {
+            self.pos = start;
+            return Ok(None);
+        }
+        let key = self.parse_expr()?;
+        self.skip_whitespace();
+        if self.peek() != Some(']') {
+            self.pos = start;
+            return Ok(None);
+        }
+        self.advance(1);
+        self.skip_whitespace();
+        if self.peek() != Some('=') {
+            self.pos = start;
+            return Ok(None);
+        }
+        let after_eq = self.src[self.pos + 1..].chars().next();
+        if matches!(after_eq, Some('=') | Some('>')) {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.advance(1);
+        self.skip_whitespace();
+        if self.pos >= self.src.len() {
+            self.pos = start;
+            return Ok(None);
+        }
+        let value = self.parse_expr()?;
+        if matches!(key, Expr::Variable { .. }) {
+            return Err(
+                "hash-index assignment operator bare key is reserved for Channel 2".into()
+            );
+        }
+        if matches!(value, Expr::Variable { .. }) {
+            return Err(
+                "hash-index assignment operator bare RHS is reserved for Channel 2".into()
+            );
+        }
+        Ok(Some(Expr::AssignHashIndex { name, key: Box::new(key), value: Box::new(value) }))
     }
 
     fn try_parse_array_append_statement(&mut self) -> Result<Option<Expr>, String> {
@@ -709,6 +792,33 @@ mod tests {
     }
 
     #[test]
+    fn parse_hash_index_assignment_statement() {
+        let code = r#"meta[cat("s", "tage")] = scalar(value); return(hash_copy(hash(meta)))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(block.statements.len(), 2);
+        match &block.statements[0].expr {
+            Expr::AssignHashIndex { name, key, value } => {
+                assert_eq!(name, "meta");
+                match key.as_ref() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "cat");
+                        assert_eq!(args.len(), 2);
+                    }
+                    _ => panic!("expected call key"),
+                }
+                match value.as_ref() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "scalar");
+                        assert_eq!(args.len(), 1);
+                    }
+                    _ => panic!("expected scalar RHS"),
+                }
+            }
+            _ => panic!("expected hash-index assignment"),
+        }
+    }
+
+    #[test]
     fn parse_keyword_arg_is_not_scalar_assignment() {
         let code = r#"declare(scalar, name=entry_group(1))"#;
         let block = CodeBlock::parse(code).unwrap();
@@ -728,8 +838,12 @@ mod tests {
             "equality-like spelling is not parsed as assignment"
         );
         assert!(
-            CodeBlock::parse(r#"name["k"] = "v""#).is_err(),
-            "indexed assignment is reserved for the later hash-index leaf"
+            CodeBlock::parse(r#"name[key] = "v""#).is_err(),
+            "bare hash-index key is reserved for Channel 2"
+        );
+        assert!(
+            CodeBlock::parse(r#"name["k"] = value"#).is_err(),
+            "bare hash-index RHS is reserved for Channel 2"
         );
         assert!(
             CodeBlock::parse(r#"items ++"#).is_err(),

@@ -224,6 +224,12 @@ is the target accumulator. To append a working-variable value, write
 `push(results, scalar(value))` or use `push_value(results, scalar(value))` until bare
 value-position reads are part of the DSL.
 
+Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
+"normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`
+in place. The hash target auto-exists just like a declared `hash(meta)` working
+variable; keep the key and value explicit (`"stage"`, `cat(...)`, `scalar(key)`,
+`scalar(value)`) until bare value-position reads are part of the DSL.
+
 ### 5.4 Return Value
 
 The rule's return value is whatever the **E-block** returns (or the last lifecycle

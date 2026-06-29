@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4.3 — implement hash-index assignment operator name[key] = value
+
+**Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust expression parser/runtime execution,
+phase0 locks, Rust parser/runtime tests, oracle corpus, mdBook, Knowledge Map, task tree, roadmap tracker, and
+live docs.
+
+**What changed:** top-level `name[key] = value` is now the terse hash-index assignment operator for explicit
+key and value expressions. It lowers and runs identically to the settled statement mutation form
+`set_key(name, key, value)`. Perl emits direct `$name{key} = value` mutation and auto-supplies one `my %name`
+preamble for a bare hash target; Rust parses it as statement-only `AssignHashIndex` and mutates the per-parse
+hash map with the evaluated string key.
+
+**Boundary:** this leaf deliberately preserves the Channel 2 boundary. `meta["stage"] = "v"`,
+`meta[cat("s","tage")] = cat("v","!")`, and `meta[scalar(key)] = scalar(value)` work; bare key or RHS forms
+such as `meta[key] = "v"` and `meta["stage"] = value` remain reserved until bare value-position reads land.
+Nested hash-index assignment is statement-only, and value-form `set_key(hash_expr, key, value)` remains pure.
+
+**Validation:** TOOLBOX lowerings prove the accepted operator shapes lower like `set_key(...)` while bare
+key/RHS boundaries remain unchanged; phase0 PASS (`1..979`); oracle corpus regenerated with 16 fixtures;
+focused Rust core/runtime tests PASS; full Rust runtime suite PASS (116 unit + corpus-oracle harness + 45
+integration tests); mdBook, Knowledge Map, memory-architecture, doctrine, `git diff --check`, and
+`tools/run_ci_local.sh` gates pass.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4.2 — implement array append operator items += value
 
 **Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust expression parser/runtime execution,

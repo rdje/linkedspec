@@ -1054,6 +1054,35 @@ fn terse_1_3_4_2_array_append_target_is_per_parse() {
 }
 
 #[test]
+fn terse_1_3_4_3_hash_index_assignment_operator_matches_set_key() {
+    let operator = "Top::\n /x/ -> Done { meta[cat(\"s\", \"tage\")] = cat(\"a\", \"b\"); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { set_key(meta, cat(\"s\", \"tage\"), cat(\"a\", \"b\")); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(operator, "xhello");
+    assert_eq!(
+        actual,
+        serde_json::json!([{"stage": "ab"}]),
+        "hash-index assignment operator mutates a no-declare hash target"
+    );
+    assert_eq!(
+        actual,
+        build_and_run(canonical, "xhello"),
+        "meta[key] = value matches set_key(meta, key, value) on Rust for explicit key/RHS shapes"
+    );
+}
+
+#[test]
+fn terse_1_3_4_3_hash_index_assignment_target_is_per_parse() {
+    let grammar = "Top::\n /x/ -> Done { meta[\"stage\"] = \"v\"; return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let engine = Engine::new(compile(&spec).expect("compile"));
+    let r1 = engine.execute("xhello").expect("run1");
+    let r2 = engine.execute("xhello").expect("run2");
+    assert_eq!(r1, serde_json::json!([{"stage": "v"}]), "hash-index assignment first run");
+    assert_eq!(r1, r2, "hash-index assignment state is per parse");
+}
+
+#[test]
 fn terse_1_4_2_set_target_is_per_parse_not_leaky() {
     let grammar = "Top::\n /x/ -> Done { set(v, cat(\"o\", \"k\")); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");

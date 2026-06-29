@@ -462,6 +462,9 @@ impl Engine {
             if self.execute_array_append_operator_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
+            if self.execute_hash_index_assignment_operator_statement(&stmt.expr, ctx, rule_label)? {
+                continue;
+            }
             if self.execute_set_key_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
@@ -499,6 +502,23 @@ impl Engine {
         };
         let evaluated = self.eval_expr(value, ctx, rule_label)?;
         ctx.push_value(name, evaluated);
+        Ok(true)
+    }
+
+    /// Execute the statement-only hash-index assignment operator `meta["key"] = value`.
+    fn execute_hash_index_assignment_operator_statement(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::Expr;
+        let Expr::AssignHashIndex { name, key, value } = expr else {
+            return Ok(false);
+        };
+        let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
+        let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+        ctx.set_hash_entry(name, &evaluated_key, evaluated_value);
         Ok(true)
     }
 
@@ -578,6 +598,9 @@ impl Engine {
             ),
             Expr::AssignArrayAppend { .. } => Err(
                 "array append operator is statement-only".to_string()
+            ),
+            Expr::AssignHashIndex { .. } => Err(
+                "hash-index assignment operator is statement-only".to_string()
             ),
             Expr::Variable { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {

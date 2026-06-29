@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4.3 — hash-index assignment is direct hash mutation with explicit
+  key/value expressions): Landed `name[key] = value` on Perl and Rust. Durable points. (1) **Match the settled
+  `set_key` statement contract, not the pure helper.** Top-level `NAME[KEY] = VALUE` mutates the named working
+  hash directly, equivalent to `set_key(NAME, KEY, VALUE)`; nested/value-form `set_key(hash_expr, KEY, VALUE)`
+  remains a pure copy helper. (2) **Auto-existence belongs to the target only.** The bare LHS `NAME` implies a
+  hash target (`my %NAME` on Perl; per-parse hash map on Rust). (3) **Do not let the index syntax create
+  Channel 2 early.** Accepted forms keep the key and RHS explicit: string literals, helper expressions, and
+  wrapped working-variable reads (`scalar(key)` / `scalar(value)`). Bare `NAME[key] = "v"` and
+  `NAME["k"] = value` remain reserved until value-position bare-word reads are designed. (4) **Parser support
+  must be quote/nesting-aware.** A key such as `cat("s","tage")` contains commas and nested parentheses; the
+  scanner/lowerer parses brackets and assignment boundaries instead of regex-splitting blindly. Verification:
+  phase0 979, focused Rust core/runtime tests, corpus oracle 16 fixtures, mdBook, Knowledge Map, doctrine/
+  memory, and local CI gates.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4.2 — array `+=` is a statement append, not a bare-RHS read): Landed
   `items += value` on Perl and Rust for explicit RHS expressions. Durable points. (1) **Reuse the settled
   append contract instead of inventing a second one.** Perl recognizes `NAME += RHS` through its own PUSH

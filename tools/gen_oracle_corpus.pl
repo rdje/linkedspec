@@ -300,6 +300,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.3.4.3 — hash-index assignment operator spelling ──
+    #
+    # `name[key] = value` is the statement-level hash-index assignment operator
+    # for explicit key/RHS shapes. Bare key and RHS variable reads remain
+    # deferred to Channel 2.
+    {   case   => 'terse_1_3_4_3_hash_index_assignment_operator',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { meta[cat("s", "tage")] = cat("a", "b"); return(hash_copy(hash(meta))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

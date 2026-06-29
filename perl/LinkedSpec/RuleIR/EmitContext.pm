@@ -312,6 +312,11 @@ sub _lower_array_append_operator_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_array_append_operator_statement', @args)
 }
 
+sub _lower_hash_index_assignment_operator_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_hash_index_assignment_operator_statement', @args)
+}
+
 sub _lower_set_key_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_set_key_statement', @args)
@@ -863,7 +868,9 @@ sub _collect_auto_working_var_decls {
   # scalar assignment operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1) is
   # likewise statement-level and scalar-only. The array append operator
   # (`NAME += VALUE`, SPEC-FORMAT-TERSE.1.3.4.2) is statement-level and array-only
-  # for accepted non-bare RHS shapes.
+  # for accepted non-bare RHS shapes. The hash-index assignment operator
+  # (`NAME[KEY] = VALUE`, SPEC-FORMAT-TERSE.1.3.4.3) is statement-level and
+  # hash-only for accepted explicit key/RHS expressions.
   while ($masked =~ /\b(?:assign|set)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('$', $1);   # assign/set target lowers to a scalar
   }
@@ -878,6 +885,11 @@ sub _collect_auto_working_var_decls {
     $record->('@', $1)
      if defined($value_expr) && length($value_expr) && $value_expr !~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
     next;
+   }
+   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
+    my $lowered_hash_index = _lower_hash_index_assignment_operator_statement($trimmed);
+    $record->('%', $1) if defined($lowered_hash_index) && length($lowered_hash_index);
+    next if defined($lowered_hash_index) && length($lowered_hash_index);
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
     my $source_expr = _trim_action_ir_value($2);

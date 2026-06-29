@@ -33,6 +33,7 @@ sub default_deps_for_package {
    'lower_assign_method_statement',
    'lower_scalar_assignment_operator_statement',
    'lower_array_append_operator_statement',
+   'lower_hash_index_assignment_operator_statement',
    'lower_set_key_statement',
    'lower_push_value_statement',
    'lower_push_nonempty_statement',
@@ -71,6 +72,7 @@ sub _require_lowering_deps {
   lower_assign_method_statement  => $require_dep->('lower_assign_method_statement'),
   lower_scalar_assignment_operator_statement => $require_dep->('lower_scalar_assignment_operator_statement'),
   lower_array_append_operator_statement => $require_dep->('lower_array_append_operator_statement'),
+  lower_hash_index_assignment_operator_statement => $require_dep->('lower_hash_index_assignment_operator_statement'),
   lower_set_key_statement        => $require_dep->('lower_set_key_statement'),
   lower_push_value_statement     => $require_dep->('lower_push_value_statement'),
   lower_push_nonempty_statement  => $require_dep->('lower_push_nonempty_statement'),
@@ -1770,6 +1772,17 @@ sub _build_assignment_and_regex_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_append_operator_statement};
+    return $lower->($code) || $code
+   },
+  },
+  {
+   id                 => 'hash_index_assignment_operator',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'hash_index_assignment_operator',
+   unresolved_pattern => qr/^\s*[A-Za-z_][A-Za-z0-9_]*\s*\[.*\]\s*=(?!=|>)/so,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_hash_index_assignment_operator_statement};
     return $lower->($code) || $code
    },
   },

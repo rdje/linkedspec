@@ -14,7 +14,7 @@ identically. No Perl implementation knowledge is required.
 > target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`;
 > the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator
 > `name += value`; and the hash target of
-> statement-level `set_key(name, key, value)`
+> statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`
 > auto-exist from a **bare** name too, with the kind fixed by that position. A backend MUST supply
 > the same auto-existence: a wrapper- or position-referenced variable
 > with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
@@ -448,6 +448,14 @@ identically. No Perl implementation knowledge is required.
 - **Returns**: hash
 - **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input.
 - **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly.
+- **Operator form**: `name[key] = value` mutates the same named working hash directly when `key` and `value` are explicit expressions.
+
+### `name[key] = value`
+- **Signature**: `target[key_expr] = value_expr`
+- **Returns**: void
+- **Behavior**: Statement-level hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions.
+- **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = scalar(kind)`, `meta[scalar(field_name)] = scalar(field_value)`.
+- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key or RHS identifiers are deliberately not accepted yet: write `meta[scalar(key)] = "v"` and `meta["stage"] = scalar(value)` until bare value-position reads land. This is a statement-only mutation form, not a value expression.
 
 ### `rename_key(h, old, new)`
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
@@ -922,7 +930,7 @@ Every helper can be used in both structured-block form (`I { declare(...) }`) an
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, and `set_key(name, key, value)` are the explicit mutation forms.
+Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
 
 ### Terse Helper Renames (canonical going forward)
 The `.spec` format is migrating to terser helper names (terse-format direction). For these three
@@ -935,6 +943,7 @@ unlike the Retired table below):
 | `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`. |
 | `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Does not imply array `+=`, hash-index assignment, or bare value-position reads. |
 | `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator for explicit value expressions. Bare RHS is still deferred; write `items += scalar(value)` or `push_value(items, scalar(value))` for a working scalar. |
+| `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator for explicit key/value expressions. Bare key or RHS identifiers are still deferred; write `meta[scalar(key)] = scalar(value)` for working scalars. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 

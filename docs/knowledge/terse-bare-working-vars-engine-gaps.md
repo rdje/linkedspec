@@ -12,6 +12,7 @@ answers:
   - "how does push(child, target) / .push(items) decide the bare target is an array"
   - "what is the engine ground truth for removing the scalar/array/hash wrappers in .spec"
   - "why is SPEC-FORMAT-TERSE.1.2 split into a Perl reference change plus a Rust parity follow-on"
+  - "does name[key] = value close Channel 2 bare value-position reads"
 date: 2026-06-24
 status: confirmed
 tags: [engine, codegen, dsl, variables, wrappers, type-inference, spec-format-terse, SPEC-FORMAT-TERSE, ActionIR, EmitContext]
@@ -72,6 +73,13 @@ statement position for the **target only**: `NAME += expr` mutates working array
 `my @NAME` on Perl; Rust parses it as a statement-only array append and mutates the per-parse array map. The
 RHS still follows the existing value-expression rules. `NAME += scalar(value)` is accepted, but bare RHS
 `NAME += value` is deliberately not accepted because Channel 2 still owns bare value-position reads.
+
+**Update 2026-06-29 (`SPEC-FORMAT-TERSE.1.3.4.3`):** hash-index assignment adds another clean type-implying
+statement position for the **target only**: `NAME[key_expr] = value_expr` mutates working hash `NAME` and
+auto-supplies `my %NAME` on Perl; Rust parses it as a statement-only hash-index assignment and mutates the
+per-parse hash map. The key and RHS still follow existing value-expression rules. `NAME[scalar(key)] =
+scalar(value)` is accepted, but bare key/RHS identifiers such as `NAME[key] = "v"` and `NAME["k"] = value` are
+deliberately not accepted because Channel 2 still owns bare value-position reads.
 
 ## The three behaviors (dump-don't-guess)
 

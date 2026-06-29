@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4.3 — hash-index assignment operator `name[key] = value` landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + BOOK + PHASE0/RUST/ORACLE LOCKS). Top-level `NAME[KEY] = VALUE`
+  now lowers/runs identically to the settled named-hash mutation form `set_key(NAME, KEY, VALUE)` when the key
+  and value are explicit expressions. Perl recognizes it through an ASSIGN contract/scanner/lowering path and
+  auto-supplies one `my %NAME` preamble for a bare hash target; Rust parses it as statement-only
+  `AssignHashIndex`, evaluates the key to a string, and mutates the per-parse hash map. Boundaries remain
+  explicit: `meta["stage"] = "v"`, `meta[cat("s","tage")] = cat("v","!")`, and
+  `meta[scalar(key)] = scalar(value)` work, while bare key/RHS forms such as `meta[key] = "v"` and
+  `meta["stage"] = value` stay deferred to Channel 2. **Verification:** TOOLBOX parity probes; phase0 PASS
+  (`1..979`); oracle corpus regenerated with 16 fixtures; focused Rust core/runtime tests PASS; Rust corpus
+  oracle PASS; mdBook + KM + memory/doctrine + local CI gates green. **Frontier:
+  `SPEC-FORMAT-TERSE.1.5`** (literal/nested-access/call/semicolon surface; scope/split first).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4.2 — array append operator `items += value` landed** (PERL
   ACTIONIR + RUST PARSER/RUNTIME + BOOK + PHASE0/RUST/ORACLE LOCKS). Top-level `NAME += RHS` now lowers/runs
   identically to the settled explicit append forms for explicit RHS expressions. Perl recognizes it through a

@@ -1830,6 +1830,122 @@ sub _lower_array_append_operator_statement {
  return "push \@$target_symbol, $lowered_value"
 }
 
+sub _parse_hash_index_assignment_operator_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /\G([A-Za-z_][A-Za-z0-9_]*)/gc;
+ my $target = $1;
+ $trimmed =~ /\G\s*/gc;
+ return undef unless substr($trimmed, pos($trimmed) || 0, 1) eq '[';
+ pos($trimmed) = (pos($trimmed) || 0) + 1;
+
+ my $key = '';
+ my @stack = (']');
+ my ($in_single_quote, $in_double_quote, $escape_next) = (0, 0, 0);
+ while ((pos($trimmed) || 0) < length($trimmed) && @stack) {
+  my $idx = pos($trimmed) || 0;
+  my $ch = substr($trimmed, $idx, 1);
+  pos($trimmed) = $idx + 1;
+
+  if ($in_single_quote) {
+   $key .= $ch;
+   if ($escape_next) { $escape_next = 0 }
+   elsif ($ch eq '\\') { $escape_next = 1 }
+   elsif ($ch eq "'") { $in_single_quote = 0 }
+   next;
+  }
+  if ($in_double_quote) {
+   $key .= $ch;
+   if ($escape_next) { $escape_next = 0 }
+   elsif ($ch eq '\\') { $escape_next = 1 }
+   elsif ($ch eq '"') { $in_double_quote = 0 }
+   next;
+  }
+  if ($ch eq "'") {
+   $in_single_quote = 1;
+   $key .= $ch;
+   next;
+  }
+  if ($ch eq '"') {
+   $in_double_quote = 1;
+   $key .= $ch;
+   next;
+  }
+  if ($ch eq '(') { push @stack, ')'; $key .= $ch; next; }
+  if ($ch eq '[') { push @stack, ']'; $key .= $ch; next; }
+  if ($ch eq '{') { push @stack, '}'; $key .= $ch; next; }
+  if ($ch eq $stack[-1]) {
+   if (@stack == 1) {
+    pop @stack;
+    last;
+   }
+   pop @stack;
+   $key .= $ch;
+   next;
+  }
+  $key .= $ch;
+ }
+ return undef if @stack;
+
+ my $after_idx = pos($trimmed) || 0;
+ my $after = substr($trimmed, $after_idx);
+ return undef unless $after =~ /^\s*=(?!=|>)\s*(.+)$/s;
+ my $value = $trim_action_ir_value->($1);
+ $key = $trim_action_ir_value->($key);
+ return undef unless defined($key) && length($key);
+ return undef unless defined($value) && length($value);
+ return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ return {
+  target => $target,
+  key    => $key,
+  value  => $value,
+ };
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_hash_index_assignment_operator_statement
+# Purpose : Lower the statement form `meta["key"] = value` to the same direct
+#           named-hash mutation emitted for `set_key(meta, "key", value)`.
+#           Bare key/RHS identifiers are deliberately not claimed; Channel 2
+#           owns bare value-position working-variable reads.
+# Args    : ($expr, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_hash_index_assignment_operator_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+
+ my $parsed = _parse_hash_index_assignment_operator_statement($expr, $deps);
+ return undef unless $parsed;
+
+ my $key_lowered = $lower_scalar_access_key_expr->($parsed->{key});
+ return undef unless defined($key_lowered) && length($key_lowered);
+
+ my $value_lowered = _lower_method_value_expr($parsed->{value}, $deps);
+ $value_lowered = $parsed->{value} unless defined($value_lowered) && length($value_lowered);
+ return undef unless defined($value_lowered) && length($value_lowered);
+
+ return '$'.$parsed->{target}.'{'.$key_lowered.'} = '.$value_lowered
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_set_key_statement
 # Purpose : Lower the statement form `set_key(target, key, value)` to a direct

@@ -20,6 +20,7 @@ sub try_scan_contract_ir_events {
   'assign_value' => \&_scan_contract_assign_value,
   'scalar_assignment_operator' => \&_scan_contract_scalar_assignment_operator,
   'array_append_operator' => \&_scan_contract_array_append_operator,
+  'hash_index_assignment_operator' => \&_scan_contract_hash_index_assignment_operator,
   'set_key_statement' => \&_scan_contract_set_key_statement,
   'regex_subst' => \&_scan_contract_regex_subst,
   'split_array' => \&_scan_contract_split_array,
@@ -184,6 +185,100 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
   args => {
    target => $target_expr,
    value  => $value_expr,
+  },
+ };
+}
+ return \@events
+}
+
+sub _parse_hash_index_assignment_operator_statement {
+ my ($statement) = @_;
+ my $trimmed = _trim_action_ir_value($statement);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /\G([A-Za-z_][A-Za-z0-9_]*)/gc;
+ my $target = $1;
+ $trimmed =~ /\G\s*/gc;
+ return undef unless substr($trimmed, pos($trimmed) || 0, 1) eq '[';
+ pos($trimmed) = (pos($trimmed) || 0) + 1;
+
+ my $key = '';
+ my @stack = (']');
+ my ($in_single_quote, $in_double_quote, $escape_next) = (0, 0, 0);
+ while ((pos($trimmed) || 0) < length($trimmed) && @stack) {
+  my $idx = pos($trimmed) || 0;
+  my $ch = substr($trimmed, $idx, 1);
+  pos($trimmed) = $idx + 1;
+
+  if ($in_single_quote) {
+   $key .= $ch;
+   if ($escape_next) { $escape_next = 0 }
+   elsif ($ch eq '\\') { $escape_next = 1 }
+   elsif ($ch eq "'") { $in_single_quote = 0 }
+   next;
+  }
+  if ($in_double_quote) {
+   $key .= $ch;
+   if ($escape_next) { $escape_next = 0 }
+   elsif ($ch eq '\\') { $escape_next = 1 }
+   elsif ($ch eq '"') { $in_double_quote = 0 }
+   next;
+  }
+  if ($ch eq "'") {
+   $in_single_quote = 1;
+   $key .= $ch;
+   next;
+  }
+  if ($ch eq '"') {
+   $in_double_quote = 1;
+   $key .= $ch;
+   next;
+  }
+  if ($ch eq '(') { push @stack, ')'; $key .= $ch; next; }
+  if ($ch eq '[') { push @stack, ']'; $key .= $ch; next; }
+  if ($ch eq '{') { push @stack, '}'; $key .= $ch; next; }
+  if ($ch eq $stack[-1]) {
+   if (@stack == 1) {
+    pop @stack;
+    last;
+   }
+   pop @stack;
+   $key .= $ch;
+   next;
+  }
+  $key .= $ch;
+ }
+ return undef if @stack;
+
+ my $after_idx = pos($trimmed) || 0;
+ my $after = substr($trimmed, $after_idx);
+ return undef unless $after =~ /^\s*=(?!=|>)\s*(.+)$/s;
+ my $value = _trim_action_ir_value($1);
+ $key = _trim_action_ir_value($key);
+ return undef unless defined($key) && length($key);
+ return undef unless defined($value) && length($value);
+ return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ return {
+  target => $target,
+  key    => $key,
+  value  => $value,
+ };
+}
+
+sub _scan_contract_hash_index_assignment_operator {
+ my ($code) = @_;
+ my @events;
+foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $trimmed = _trim_action_ir_value($statement);
+ next unless defined($trimmed) && length($trimmed);
+ my $parsed = _parse_hash_index_assignment_operator_statement($trimmed);
+ next unless $parsed;
+ push @events, {
+  raw => $trimmed,
+  args => {
+   target => $parsed->{target},
+   key    => $parsed->{key},
+   value  => $parsed->{value},
   },
  };
 }

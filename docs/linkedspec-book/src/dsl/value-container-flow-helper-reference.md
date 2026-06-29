@@ -15,6 +15,7 @@ Most value helpers return one expression. They become useful when they are place
 | Declaration initializer | `declare(scalar, name=expr)` | a working variable should start with one explicit value. |
 | Assignment | `assign(target, source)` | an existing scalar, array, or hash slot should be replaced. |
 | Array append | `items += expr` / `push(target, expr)` / `push_value(array(target), expr)` | one explicit value expression should be appended without replacing the whole array. |
+| Hash field assignment | `meta[key_expr] = expr` / `set_key(name, key_expr, expr)` | one field of a named working hash should be updated in place. |
 | Return payload | `return(payload)` | the rule should return one structured value. |
 | Predicate | `if(condition)` / `elseif(condition)` | helper logic should drive control flow. |
 | Switch driver | `switch(value)` | one value should drive equality or regex cases. |
@@ -139,7 +140,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying target position: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; and the hash target of statement-level `set_key(name, key, value)`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying target position: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; and the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
@@ -165,6 +166,9 @@ These helpers are the entry point into local working state and structured values
 > `assign(name, value)`. The array append operator `items += expr` is equivalent to the explicit
 > append forms `push(items, expr)` / `push_value(items, expr)` for explicit value expressions; when the
 > value is a working variable, write `items += scalar(value)` until bare value-position reads land.
+> The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
+> the key and value are explicit expressions; write `meta[scalar(key)] = scalar(value)` for working
+> variables until bare key/RHS reads land.
 > Each terse helper spelling lowers **identically** to its original in every position, so both work
 > during migration — the original names are deprecated aliases, not yet retired.
 > See the
@@ -244,6 +248,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `assign(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
 | `assign(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
 | `items += expr` | append one value | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push_value(items, expr)` for accepted RHS shapes. |
+| `meta[key_expr] = expr` | set one hash field | a named working hash should update one explicit key; equivalent to `set_key(meta, key_expr, expr)` for accepted key/value shapes. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `assign(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
 | `push(rule)` | call one rule and append its result | the shortest spelling is desired for appending a child result into the current rule accumulator. |
@@ -326,6 +331,16 @@ items += scalar(value);
 ```
 
 Keep the RHS explicit. `items += value` is intentionally still reserved for the later bare value-position read work; use `items += scalar(value)` or `push_value(items, scalar(value))` when `value` is a working scalar.
+
+Hash field assignment has the same statement shape for named hashes:
+
+```text
+meta["kind"] = "token";
+meta[cat("source", "_kind")] = scalar(kind);
+meta[scalar(field_name)] = scalar(field_value);
+```
+
+Keep the key and value explicit. `meta[key] = "token"` and `meta["kind"] = value` are intentionally still reserved for the later bare value-position read work; use `meta[scalar(key)] = ...` and `... = scalar(value)` when reading working scalars by name.
 
 When the child returns an array-like payload and the current rule accumulator needs one element from it, pass a zero-based index as the second argument:
 
@@ -626,6 +641,16 @@ assign(hash(summary_meta), pick_keys(hash(public_meta), "kind", "source", "stage
 Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(scalar(hash(meta), "kind"))` or `is_defined(scalaref(retv, {kind}))` when the question is "is the value defined?" Those are different questions.
 
 `set_key(...)` has two deliberate forms. As a statement with a named target, `set_key(meta, "stage", "normalized")` mutates the working hash `meta`. As a value expression, `set_key(hash(meta), "stage", "normalized")` returns a new hash value and leaves `meta` unchanged unless you store the result with `assign(hash(meta), ...)`.
+
+The terse hash-index operator is the statement form written with the key next to the target:
+
+```text
+meta["stage"] = "normalized";
+meta[cat("source", "_kind")] = scalar(kind);
+meta[scalar(field_name)] = scalar(field_value);
+```
+
+These update the named working hash in place, exactly like `set_key(meta, key, value)`. The expression form remains explicit: `set_key(hash(meta), key, value)` returns a copy instead of mutating `meta`.
 
 ## Fallback and presence helpers
 
@@ -981,6 +1006,7 @@ The switch is better than a long `elseif` ladder because every branch is driven 
 - Prefer `array_copy(...)` and `hash_copy(...)` when returning a nested snapshot.
 - Prefer `flat_array(...)` and `flat_hash(...)` when splicing into a surrounding constructor.
 - Prefer `items += expr` / `push_value(...)` when appending; do not use whole-array assignment as a disguised append.
+- Prefer `meta["field"] = expr` / `set_key(meta, "field", expr)` when updating one hash field; use `set_key(hash_expr, key, value)` when you need a copied hash value.
 - Prefer `has_key(...)` for field existence and `is_defined(...)` for value definedness.
 - Prefer `coalesce_nonempty(trim(...), fallback)` for human text fallback.
 - Prefer numeric helpers and `num_*` comparisons for counts, indexes, depths, and lengths.

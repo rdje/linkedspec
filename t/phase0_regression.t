@@ -2531,6 +2531,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_assign_method_statement = sub { return 'assign_method_ok' };
     local *Synthetic::ActionIROwner::_lower_scalar_assignment_operator_statement = sub { return 'scalar_assignment_operator_ok' };
     local *Synthetic::ActionIROwner::_lower_array_append_operator_statement = sub { return 'array_append_operator_ok' };
+    local *Synthetic::ActionIROwner::_lower_hash_index_assignment_operator_statement = sub { return 'hash_index_assignment_operator_ok' };
     local *Synthetic::ActionIROwner::_lower_set_key_statement = sub { return 'set_key_statement_ok' };
     local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
     local *Synthetic::ActionIROwner::_lower_push_nonempty_statement = sub { return 'push_nonempty_ok' };
@@ -13179,7 +13180,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -44224,8 +44225,8 @@ subtest 'spec_format_terse_1_3_4_1_scalar_assignment_operator_matches_set' => su
         'equality-like spelling is not claimed by the scalar assignment operator');
     is($L->('items ++'), 'items ++',
         'increment-like spelling is not claimed by the scalar assignment operator');
-    is($L->('name["k"] = "v"'), 'name["k"] = "v"',
-        'hash-index assignment remains reserved for the later hash operator leaf');
+    is($L->('name["k"] = "v"'), '$name{"k"} = "v"',
+        'hash-index assignment is handled by its own operator contract');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { name = cat(\"o\", \"k\"); return(scalar(name)) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
@@ -44287,8 +44288,8 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
         'increment-like spelling is not claimed by the array append operator');
     is($L->('name = "ok"'), '$name = "ok"',
         'scalar assignment operator remains separate');
-    is($L->('name["k"] = "v"'), 'name["k"] = "v"',
-        'hash-index assignment remains reserved for the later hash operator leaf');
+    is($L->('name["k"] = "v"'), '$name{"k"} = "v"',
+        'hash-index assignment is handled by its own operator contract');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { items += cat(\"a\", \"b\"); return(array_copy(array(items))) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
@@ -44312,6 +44313,66 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
         'array append operator mutates a no-declare array target at runtime');
     is($run->($p, 'a b'), '["a!","b!"]',
         're-running the same parser is stable (per-invocation array lexical)');
+};
+
+subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_key' => sub {
+    # SPEC-FORMAT-TERSE.1.3.4.3: statement-level NAME[KEY] = VALUE is the
+    # hash-index operator spelling. Bare key/RHS identifiers remain deferred to
+    # Channel 2; use literals or explicit helper expressions such as scalar(...).
+    plan tests => 14;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('meta["stage"] = "v"'), '$meta{"stage"} = "v"',
+        'top-level hash-index assignment operator lowers to direct hash-entry assignment');
+    is($L->('meta[cat("s", "tage")] = cat("v", "!")'), $L->('set_key(meta, cat("s", "tage"), cat("v", "!"))'),
+        'hash-index assignment operator lowers identically to set_key(target, key, value)');
+    is($L->('meta[scalar(key)] = scalar(value)'), $L->('set_key(meta, scalar(key), scalar(value))'),
+        'hash-index assignment operator lowers identically for explicit scalar key/value reads');
+    is($L->('meta[key] = "v"'), 'meta[key] = "v"',
+        'bare key remains deferred to Channel 2; wrap it or use an explicit helper form');
+    is($L->('meta["stage"] = value'), 'meta["stage"] = value',
+        'bare RHS remains deferred to Channel 2; wrap it or use an explicit helper form');
+    is($L->('name = "ok"'), '$name = "ok"',
+        'scalar assignment operator remains separate');
+    is($L->('items += "a"'), 'push @items, "a"',
+        'array append operator remains separate');
+
+    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { meta[cat(\"s\", \"tage\")] = cat(\"a\", \"b\"); return(hash_copy(hash(meta))) }\n"), return_descriptor => 1);
+    my $meta = $d->{spec}{top}{meta}{action_rewriter};
+    is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,RETURN',
+        'hash-index assignment operator reports as ASSIGN plus RETURN in canonical ActionIR');
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'hash-index assignment operator has no canonical fallback');
+
+    my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { meta[\"stage\"] = \"v\"; return(hash_copy(hash(meta))) }\n");
+    my $hash_my = () = ($src =~ /my \%meta\b/g);
+    is($hash_my, 1, 'bare hash-index target auto-supplies exactly one `my %meta`');
+    ok(index($src, 'my %meta;') >= 0 && index($src, 'my %meta;') < index($src, 'while (1)'),
+        'the auto `my %meta` sits in the preamble before while(1)');
+    unlike($src, qr/my [\$\@]meta\b/,
+        'bare hash-index target is a HASH -- no scalar or array declaration for meta');
+
+    my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); meta[match_group(0)] = scalar(label) }\n"
+             . "LX { return(hash_copy(hash(meta))) }\n";
+    my $p = eval { LinkedSpec::Get(\$spec) };
+    is($run->($p, 'a b'), '{"a":"a!","b":"b!"}',
+        'hash-index assignment operator mutates a no-declare hash target at runtime');
+    is($run->($p, 'a b'), '{"a":"a!","b":"b!"}',
+        're-running the same parser is stable (per-invocation hash lexical)');
 };
 
 done_testing();
