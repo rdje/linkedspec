@@ -74,6 +74,19 @@ stores the whole array payload in scalar `payload`, while `array(payload)` remai
 Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`),
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
+The Perl reference also accepts a narrow core of expression-valued blocks in value-consuming sites. A non-empty
+brace payload with no top-level `=>` evaluates its statements and yields the final expression, or a final
+`return(expr)` payload. Hash literals keep precedence: `{}` and `{ key => value }` remain hash shapes.
+
+```text
+return({ set(x, "a"); x });                    # "a"
+set(out, { set(x, "a"); return(x) });          # $out = "a"
+return(array({ set(x, "a"); x }, { "k" => x }));
+```
+
+This core block-value subset is currently a Perl-reference feature; Rust parity is tracked separately. Full
+block-local early return, such as `return({ return("a"); "b" })`, is not part of this subset.
+
 ## 1. Declaration Helpers
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a

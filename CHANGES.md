@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.2 — Perl expression-valued blocks
+
+**Scope:** Perl ActionIR value lowering, Perl auto-working-variable collection, phase0 regression coverage,
+mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** The Perl reference now accepts the core expression-valued block subset. In value-consuming
+sites, a non-empty brace payload without a top-level `=>` lowers to a Perl `do { ... }` value block. The block
+returns its final expression, or a final `return(expr)` payload treated as block-local for this core subset.
+
+**Boundaries:** `{}` and `{ key => value }` remain hash shape literals and continue to take precedence over
+block values. Full block-local early return, such as `return({ return("a"); "b" })`, stays split to
+`.2.1.4`. Rust parity is not part of this slice and remains `.2.1.3`.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/runtime probes PASS; phase0 PASS
+(`t/phase0_regression.t`, 991 tests); mdBook build PASS; Knowledge Map regenerate/check PASS;
+memory/doctrine/diff checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.1 — expression-valued block split
 
 **Scope:** Task tree, roadmap tracker, live continuity docs, and Knowledge Map. No engine, oracle, fixture, or

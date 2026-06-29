@@ -930,7 +930,7 @@ sub _collect_auto_working_var_decls {
    $record->('$', $atom) if defined($atom) && $atom =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   }
  };
- my ($collect_shape_literal_scalar_reads, $collect_shape_member_scalar_reads);
+ my ($collect_shape_literal_scalar_reads, $collect_shape_member_scalar_reads, $collect_block_value_scalar_reads);
  my $split_top_level_fat_arrow = sub {
   my ($text) = @_;
   return undef unless defined $text;
@@ -977,6 +977,7 @@ sub _collect_auto_working_var_decls {
   $record->('$', $member) if $member =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($member);
   $collect_shape_literal_scalar_reads->($member);
+  $collect_block_value_scalar_reads->($member);
  };
  $collect_shape_literal_scalar_reads = sub {
   my ($shape_expr) = @_;
@@ -1004,6 +1005,34 @@ sub _collect_auto_working_var_decls {
    $collect_shape_member_scalar_reads->($pair->[0]);
    $collect_shape_member_scalar_reads->($pair->[1]);
   }
+ };
+ $collect_block_value_scalar_reads = sub {
+  my ($block_expr) = @_;
+  my $block = _trim_action_ir_value($block_expr);
+  return unless defined($block) && length($block) >= 2;
+  return unless substr($block, 0, 1) eq '{' && substr($block, -1, 1) eq '}';
+  my $lowered_block = _lower_method_value_expr($block);
+  return unless defined($lowered_block) && $lowered_block =~ /^\s*do\s*\{/s;
+
+  my $payload = _trim_action_ir_value(substr($block, 1, length($block) - 2));
+  return unless defined($payload) && length($payload);
+  my $statements = _split_action_ir_statements($payload);
+  return unless ref($statements) eq 'ARRAY' && @$statements;
+
+  my $last = _trim_action_ir_value($statements->[-1]);
+  return unless defined($last) && length($last);
+  my $call = _parse_method_function_expr($last);
+  if ($call && ($call->{method} // '') eq 'return') {
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+   return unless $args;
+   $last = _trim_action_ir_value($args->[0]);
+   return unless defined($last) && length($last);
+  }
+
+  $record->('$', $last) if $last =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  $record_direct_access_bare_path_atoms->($last);
+  $collect_shape_literal_scalar_reads->($last);
+  $collect_block_value_scalar_reads->($last);
  };
  my $record_assignment_target_for_source = sub {
   my ($target_expr, $source_expr) = @_;
@@ -1060,6 +1089,7 @@ sub _collect_auto_working_var_decls {
    $record->('$', $payload) if defined($payload) && $payload =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($payload);
    $collect_shape_literal_scalar_reads->($payload);
+   $collect_block_value_scalar_reads->($payload);
   }
   while ($masked =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
@@ -1071,6 +1101,7 @@ sub _collect_auto_working_var_decls {
    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($source_expr);
    $collect_shape_literal_scalar_reads->($source_expr);
+   $collect_block_value_scalar_reads->($source_expr);
   }
   foreach my $statement (@{_split_action_ir_statements($block)}) {
    my $trimmed = _trim_action_ir_value($statement);
@@ -1084,6 +1115,7 @@ sub _collect_auto_working_var_decls {
     $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
     $record_direct_access_bare_path_atoms->($value_expr);
     $collect_shape_literal_scalar_reads->($value_expr);
+    $collect_block_value_scalar_reads->($value_expr);
     next;
    }
    my $parsed_array_end = _parse_array_end_mutation_method_statement($trimmed);
@@ -1096,6 +1128,7 @@ sub _collect_auto_working_var_decls {
      $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
      $record_direct_access_bare_path_atoms->($value_expr);
      $collect_shape_literal_scalar_reads->($value_expr);
+     $collect_block_value_scalar_reads->($value_expr);
     }
     next;
    }
@@ -1111,6 +1144,7 @@ sub _collect_auto_working_var_decls {
        $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
        $record_direct_access_bare_path_atoms->($slot_expr);
        $collect_shape_literal_scalar_reads->($slot_expr);
+       $collect_block_value_scalar_reads->($slot_expr);
       }
      }
      next;
@@ -1122,6 +1156,7 @@ sub _collect_auto_working_var_decls {
     $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
     $record_direct_access_bare_path_atoms->($source_expr);
     $collect_shape_literal_scalar_reads->($source_expr);
+    $collect_block_value_scalar_reads->($source_expr);
     next;
    }
    my $call = _parse_method_function_expr($trimmed);
@@ -1137,6 +1172,7 @@ sub _collect_auto_working_var_decls {
    $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $record_direct_access_bare_path_atoms->($slot_expr);
    $collect_shape_literal_scalar_reads->($slot_expr);
+   $collect_block_value_scalar_reads->($slot_expr);
    }
   }
   while ($masked =~ /\b(?<expr>(?:push_value|push_nonempty)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
@@ -1146,6 +1182,7 @@ sub _collect_auto_working_var_decls {
    next unless $args;
    my $value_expr = _trim_action_ir_value($args->[1]);
    $collect_shape_literal_scalar_reads->($value_expr);
+   $collect_block_value_scalar_reads->($value_expr);
   }
   while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
@@ -1158,6 +1195,7 @@ sub _collect_auto_working_var_decls {
    next if defined($value_expr) && $value_expr =~ /^\w+$/o;   # all-bare child-call form
    $record->('@', $target_expr);
    $collect_shape_literal_scalar_reads->($value_expr);
+   $collect_block_value_scalar_reads->($value_expr);
   }
  }
  return [] unless @collected;

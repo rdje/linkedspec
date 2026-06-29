@@ -235,6 +235,18 @@ scalar working variable (`$value` on the Perl reference). The pop methods discar
 removed value; value-returning forms such as `return(items.pop_back())` are not part of
 this statement-level contract.
 
+On the Perl reference, a non-empty brace payload without a top-level `=>` can also be
+used as a value block in value-consuming sites. The block runs its statements and
+yields the final expression; a final `return(expr)` is treated as the block value,
+not as a separate handler-level return. Empty `{}` and top-level-fat-arrow
+`{ key => value }` forms remain hash shape literals. Rust parity for this block-value
+subset is tracked separately.
+
+```text
+return({ set(name, "ok"); name })          # "ok"
+set(out, { set(name, "ok"); return(name) })
+```
+
 Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
 "normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`
 in place. The hash target auto-exists just like a declared `hash(meta)` working

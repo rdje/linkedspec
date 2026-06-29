@@ -13162,7 +13162,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'MethodLowering',
             module      => 'LinkedSpec::ActionIR::MethodLowering',
-            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _lower_direct_nested_access_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
+            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _lower_direct_nested_access_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _split_action_ir_statements _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
             sample_key  => 'split_declare_symbol_names',
             sample_name => '_split_declare_symbol_names',
         },
@@ -45221,6 +45221,83 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         'explicit array/a receivers mutate the named working array');
     is((() = ($gen->($alias_spec) =~ /my \@items\b/g)), 1,
         'explicit receiver alias spec auto-supplies one my @items');
+};
+
+subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
+    # SPEC-FORMAT-TERSE.2.1.2: Perl reference core expression-valued blocks.
+    # Non-empty brace payloads without a top-level fat arrow are value blocks;
+    # empty and fat-arrow brace payloads remain hash shape literals.
+    plan tests => 16;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('return({ set(x,"a"); x })'), 'return do { $x = "a"; $x }',
+        'return block lowers to a do-block whose final expression is the block value');
+    is($L->('return({ set(x,"a"); return(x) })'), 'return do { $x = "a"; $x }',
+        'final return(expr) inside a block is block-local in the Perl core slice');
+    is($L->('set(out, { set(x,"a"); x })'), '$out = do { $x = "a"; $x }',
+        'assignment source block stays scalar assignment instead of hash target inference');
+    is($L->('return({})'), 'return {}',
+        'empty braces remain a hash shape literal');
+    is($L->('return({ key => value })'), 'return {$key => $value}',
+        'top-level fat-arrow braces remain hash shape literals');
+
+    my $last_expr_spec = "Top::\n"
+                       . " /x/ -> Done { return({ set(x,\"a\"); x }) }\n"
+                       . "\nDone::\n /[a-z]+/\n";
+    my $last_expr_parser = eval { LinkedSpec::Get(\$last_expr_spec) };
+    ok(ref($last_expr_parser) eq 'CODE', 'last-expression block spec compiles')
+        or diag(normalize_error($@));
+    is($run->($last_expr_parser, 'xhello'), '"a"',
+        'last-expression block returns its final scalar value');
+
+    my $final_return_spec = "Top::\n"
+                          . " /x/ -> Done { return({ set(x,\"a\"); return(x) }) }\n"
+                          . "\nDone::\n /[a-z]+/\n";
+    my $final_return_parser = eval { LinkedSpec::Get(\$final_return_spec) };
+    ok(ref($final_return_parser) eq 'CODE', 'final-return block spec compiles')
+        or diag(normalize_error($@));
+    is($run->($final_return_parser, 'xhello'), '"a"',
+        'final return(expr) block returns the payload without leaking a handler return');
+
+    my $assign_spec = "Top::\n"
+                    . " /x/ -> Done { set(out, { set(x,\"a\"); x }); return(out) }\n"
+                    . "\nDone::\n /[a-z]+/\n";
+    my $assign_parser = eval { LinkedSpec::Get(\$assign_spec) };
+    ok(ref($assign_parser) eq 'CODE', 'assignment-source block spec compiles')
+        or diag(normalize_error($@));
+    is($run->($assign_parser, 'xhello'), '"a"',
+        'assignment-source block stores the block value in the scalar target');
+
+    my $nested_spec = "Top::\n"
+                    . " /x/ -> Done { return(array({ set(x,\"a\"); x }, { set(key,\"stage\"); set(value,\"ok\"); { key => value } })) }\n"
+                    . "\nDone::\n /[a-z]+/\n";
+    my $nested_parser = eval { LinkedSpec::Get(\$nested_spec) };
+    ok(ref($nested_parser) eq 'CODE', 'nested block-value spec compiles')
+        or diag(normalize_error($@));
+    is($run->($nested_parser, 'xhello'), '["a",{"stage":"ok"}]',
+        'block values compose inside array payloads and can return hash literals');
+
+    my $assign_src = $gen->($assign_spec);
+    is((() = ($assign_src =~ /my \$x\b/g)), 1,
+        'block final bare expression auto-supplies one my $x');
+    is((() = ($assign_src =~ /my \$out\b/g)), 1,
+        'assignment-source block auto-supplies one my $out');
+    unlike($assign_src, qr/%out\s*=/,
+        'assignment-source block does not infer hash assignment');
 };
 
 done_testing();

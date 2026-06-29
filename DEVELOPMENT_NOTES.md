@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.2.1.2 — Perl expression-valued blocks landed): Implemented the Perl-reference
+  core block-value subset. Durable points. (1) **Hash literals keep precedence.** `_lower_method_value_expr`
+  still tries direct `[]` / `{}` shape lowering first; only a non-empty brace payload without a top-level `=>`
+  can become a block value. (2) **Block values lower to scalar `do { ... }` expressions.** Side-effect
+  statements are lowered through the existing statement lowerers, while the final expression is lowered through
+  value-source rules; final `return(expr)` is rewritten to the payload expression and does not emit a handler
+  `return`. (3) **Final hash literals need scalar protection inside blocks.** A block final expression like
+  `{ key => value }` is emitted as `+{...}` inside the `do` block so nested uses such as
+  `array({ set(key,"stage"); set(value,"ok"); { key => value } })` receive one hashref instead of a flattened
+  key/value list. (4) **Auto-`my` collection follows the new block final expression.** The collector records
+  bare final expressions such as `{ set(x,"a"); x }`, preserving per-invocation lexical working variables.
+  Rust parity remains `.2.1.3`; true early return remains `.2.1.4`.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.2.1.1 — expression-valued block split): Split Round 2 block values before
   code. Durable points. (1) **Brace value syntax is already occupied.** Empty `{}` and top-level-fat-arrow
   `{ key => value }` forms are hash shape literals and must remain so. (2) **Current Perl block-shaped values

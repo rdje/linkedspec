@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.2.1.2 — Perl-reference core expression-valued blocks landed**
+  (PERL ACTIONIR + AUTO-DECL + PHASE0 + BOOK/KM LOCKS). The Perl reference now accepts non-empty brace
+  payloads without a top-level `=>` as value blocks in value-consuming sites. Blocks evaluate their statements
+  and return the final expression; a final `return(expr)` is treated as block-local for this core subset. `{}` and
+  `{ key => value }` remain hash shape literals, and nested final hash literals are preserved as hashrefs.
+  Full block-local early return remains split to `.2.1.4`; Rust parity remains `.2.1.3`.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/runtime probes PASS; phase0 PASS
+  (`t/phase0_regression.t`, **991 tests**); mdBook build PASS; Knowledge Map regenerate/check PASS;
+  memory/doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.1.3`** (Rust parity for core expression-valued blocks).
 - 2026-06-29: **SPEC-FORMAT-TERSE.2.1.1 — expression-valued block split completed**
   (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM retrieval, TOOLBOX probes, and
   code-read showed expression-valued blocks cross too many seams for one implementation leaf. `{}` and

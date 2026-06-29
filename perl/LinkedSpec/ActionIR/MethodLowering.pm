@@ -44,6 +44,7 @@ sub default_deps_for_package {
    'lower_primitive_literal_expr',
    'infer_scalar_container_kind',
    'split_top_level_csv',
+   'split_action_ir_statements',
    'lower_array_pipeline_expr',
    'lower_assignment_source_expr',
    'strip_literal_delimiters',
@@ -111,6 +112,83 @@ sub _infer_direct_shape_literal_kind {
  return 'array' if $open eq '[' && $lowered =~ /^\[.*\]$/s;
  return 'hash'  if $open eq '{' && $lowered =~ /^\{.*\}$/s;
  return undef
+}
+
+sub _extract_outer_brace_payload {
+ my ($expr, $trim_action_ir_value) = @_;
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed) >= 2;
+ return undef unless substr($trimmed, 0, 1) eq '{';
+
+ my $depth = 0;
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $escape_next = 0;
+ my $len = length($trimmed);
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $char = substr($trimmed, $idx, 1);
+  if ($in_single_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($char eq '\\') { $escape_next = 1; }
+   elsif ($char eq "'") { $in_single_quote = 0; }
+   next;
+  }
+  if ($in_double_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($char eq '\\') { $escape_next = 1; }
+   elsif ($char eq '"') { $in_double_quote = 0; }
+   next;
+  }
+  if ($char eq "'") { $in_single_quote = 1; next; }
+  if ($char eq '"') { $in_double_quote = 1; next; }
+  if ($char eq '{') { ++$depth; next; }
+  if ($char eq '}') {
+   --$depth if $depth > 0;
+   return undef if $depth == 0 && $idx != $len - 1;
+  }
+ }
+ return undef unless $depth == 0 && substr($trimmed, -1, 1) eq '}';
+ return substr($trimmed, 1, $len - 2)
+}
+
+sub _has_top_level_fat_arrow {
+ my ($text) = @_;
+ return 0 unless defined $text;
+
+ my $paren_depth = 0;
+ my $brace_depth = 0;
+ my $bracket_depth = 0;
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $escape_next = 0;
+ my $len = length($text);
+ for (my $idx = 0; $idx < $len - 1; ++$idx) {
+  my $char = substr($text, $idx, 1);
+  if ($in_single_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($char eq '\\') { $escape_next = 1; }
+   elsif ($char eq "'") { $in_single_quote = 0; }
+   next;
+  }
+  if ($in_double_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($char eq '\\') { $escape_next = 1; }
+   elsif ($char eq '"') { $in_double_quote = 0; }
+   next;
+  }
+  if ($char eq "'") { $in_single_quote = 1; next; }
+  if ($char eq '"') { $in_double_quote = 1; next; }
+  if ($char eq '(') { ++$paren_depth; next; }
+  if ($char eq ')') { --$paren_depth if $paren_depth > 0; next; }
+  if ($char eq '{') { ++$brace_depth; next; }
+  if ($char eq '}') { --$brace_depth if $brace_depth > 0; next; }
+  if ($char eq '[') { ++$bracket_depth; next; }
+  if ($char eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
+  next unless $char eq '=' && substr($text, $idx + 1, 1) eq '>';
+  return 1 if $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0;
+ }
+ return 0
 }
 
 #------------------------------------------------------------------------------
@@ -184,6 +262,143 @@ sub _normalize_method_tag_expr {
  return $tag if $tag =~ /^\".*\"$/s || $tag =~ /^'.*'$/s;
  return "\"$tag\"" if $tag =~ /^\w+$/o;
  return $tag
+}
+
+sub _lower_block_value_component_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
+ my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $block = _lower_block_value_expr($trimmed, $deps);
+ return $block if defined($block) && length($block);
+
+ my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
+ return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
+
+ my $literal = $lower_primitive_literal_expr->($trimmed);
+ return $literal if defined($literal);
+
+ my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
+ return $direct_access if defined($direct_access) && length($direct_access);
+
+ my $lowered = _lower_method_value_expr($trimmed, $deps);
+ return undef unless defined($lowered) && length($lowered);
+ return $lowered if $lowered ne $trimmed;
+ return $lowered if $trimmed =~ /^\s*(?:\[\s*\]|\{\s*\})\s*$/s;
+ return $lowered if $trimmed =~ /^\s*[\[\{]/s && $lowered =~ /^\s*[\[\{]/s;
+ return undef
+}
+
+sub _lower_block_side_effect_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $call = $parse_method_function_expr->($trimmed);
+ return undef if $call && ($call->{method} // '') eq 'return';
+
+ for my $lowerer (
+  \&_lower_scalar_assignment_operator_statement,
+  \&_lower_array_append_operator_statement,
+  \&_lower_array_end_mutation_method_statement,
+  \&_lower_hash_index_assignment_operator_statement,
+  \&_lower_set_key_statement,
+  \&_lower_push_value_statement,
+  \&_lower_push_nonempty_statement,
+ ) {
+  my $lowered = $lowerer->($trimmed, $deps);
+  return $lowered if defined($lowered) && length($lowered);
+ }
+
+ if ($call && (($call->{method} // '') eq 'assign' || ($call->{method} // '') eq 'set')) {
+  my $args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
+  return undef unless $args;
+  my $lowered = _lower_assign_statement($args->[0], $args->[1], $deps);
+  return $lowered if defined($lowered) && length($lowered);
+ }
+
+ return _lower_block_value_component_expr($trimmed, $deps)
+}
+
+sub _lower_block_value_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $split_action_ir_statements = $require_dep->('split_action_ir_statements');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+
+ my $payload = _extract_outer_brace_payload($expr, $trim_action_ir_value);
+ return undef unless defined $payload;
+ $payload = $trim_action_ir_value->($payload);
+ return undef unless defined($payload) && length($payload);
+ return undef if _has_top_level_fat_arrow($payload);
+
+ my $statements = $split_action_ir_statements->($payload);
+ return undef unless ref($statements) eq 'ARRAY' && @$statements;
+
+ my @lowered;
+ for (my $idx = 0; $idx < @$statements; ++$idx) {
+  my $statement = $trim_action_ir_value->($statements->[$idx]);
+  next unless defined($statement) && length($statement);
+  my $is_last = ($idx == $#$statements);
+
+  if ($is_last) {
+   my $call = $parse_method_function_expr->($statement);
+   if ($call && ($call->{method} // '') eq 'return') {
+    my $args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
+    return undef unless $args;
+    my $payload_expr = _lower_return_payload_expr($args->[0], $deps);
+    return undef unless defined($payload_expr) && length($payload_expr);
+    $payload_expr = '+'.$payload_expr if $payload_expr =~ /^\s*\{/s;
+    push @lowered, $payload_expr;
+    next;
+   }
+
+   my $value_expr = _lower_block_value_component_expr($statement, $deps);
+   return undef unless defined($value_expr) && length($value_expr);
+   $value_expr = '+'.$value_expr if $value_expr =~ /^\s*\{/s;
+   push @lowered, $value_expr;
+   next;
+  }
+
+  my $lowered_statement = _lower_block_side_effect_statement($statement, $deps);
+  return undef unless defined($lowered_statement) && length($lowered_statement);
+  push @lowered, $lowered_statement.';';
+ }
+
+ return undef unless @lowered;
+ return 'do { '.join(' ', @lowered).' }'
 }
 
 #------------------------------------------------------------------------------
@@ -277,6 +492,9 @@ sub _lower_method_value_expr {
 
   my $shape = $lower_shape_literal_value_expr->($member);
   return $shape if defined($shape) && length($shape);
+
+  my $block = _lower_block_value_expr($member, $deps);
+  return $block if defined($block) && length($block);
 
   my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($member, $deps);
   return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
@@ -506,6 +724,8 @@ sub _lower_method_value_expr {
  return $direct_access if defined($direct_access) && length($direct_access);
  my $shape_literal = $lower_shape_literal_value_expr->($trimmed);
  return $shape_literal if defined($shape_literal) && length($shape_literal);
+ my $block_value = _lower_block_value_expr($trimmed, $deps);
+ return $block_value if defined($block_value) && length($block_value);
  my $method_call = $parse_method_function_expr->($trimmed);
  if ($method_call && $method_call->{method} eq 'call') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
