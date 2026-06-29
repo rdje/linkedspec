@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5 — RHS-shape/type-inference split completed**
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM + TOOLBOX/source/runtime/code-read
+  probes showed the remaining Channel 2 shape work is too broad for one implementation leaf. Perl already
+  accepts empty `[]`/`{}` as raw scalar value expressions, but `name = []` / `name = {}` assign scalar
+  `$name` / `$meta`-style slots rather than initializing aggregate working variables. Non-empty shapes such as
+  `[value]` and `{ key => value }` currently pass through raw Perl, so bare identifiers become barewords/strings
+  rather than the settled scalar working-variable reads. Rust currently has no bracket/brace value-expression
+  parser. The split children are `.1.2.3.5.1` Perl shape-literal values, `.1.2.3.5.2` Perl RHS target-kind
+  inference, `.1.2.3.5.3` Rust shape-literal parity, and `.1.2.3.5.4` Rust target-inference parity.
+  **Verification:** KM/TOOLBOX/source/runtime/code-read probes completed; KM/memory/doctrine/diff checks run for
+  the slice.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.5.1`** (Perl shape-literal value expressions).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.4 — Rust scalar bare-read parity landed**
   (RUST PARSER + RUNTIME LOCKS + ORACLE/KM). Rust now accepts the scalar bare-read contract already landed on
   the Perl reference: `return(value)`, `set(out, value)`, `name = value`, `items += value`,

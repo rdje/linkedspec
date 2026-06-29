@@ -6,11 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.2.3.4` DONE** — Rust scalar bare-read parity now matches the accepted
+- Last updated: `2026-06-29` (**`.1.2.3.5` DONE/SPLIT** — RHS-shape/type-inference was split before code:
+  Perl shape-literal value expressions, Perl RHS target-kind inference, then Rust parity for each accepted
+  contract. Ground truth shows current Perl accepts raw empty `[]`/`{}` only as scalar value expressions and
+  current Rust cannot parse bracket/brace value expressions at all; non-empty shapes need expression-aware
+  lowering instead of raw Perl bareword passthrough. No engine/book behavior changed in this split. Frontier
+  -> **`.1.2.3.5.1`**. Prior **`.1.2.3.4` DONE** — Rust scalar bare-read parity now matches the accepted
   `.1.2.3.3` Perl contract. Rust accepts source-slot scalar reads, mutation key/RHS scalar reads, and
   direct-access bare path atoms by relying on the existing `Expr::Variable` scalar read path and removing
-  obsolete parser reservations. Oracle corpus is **28 fixtures**. New pending **`.1.2.3.5`** owns the remaining
-  Channel 2 RHS-shape/type-inference split before any future code changes. Prior **`.1.2.3.3.3` DONE** — Perl
+  obsolete parser reservations. Oracle corpus is **28 fixtures**. Split **`.1.2.3.5`** now owns the remaining
+  Channel 2 RHS-shape/type-inference work through concrete children. Prior **`.1.2.3.3.3` DONE** — Perl
   direct-access bare path atoms work: `foo["a"][z]` lowers like
   `foo["a"][scalar(z)]` (`$foo->{"a"}->[$z]`) and auto-supplies one per-invocation `my $z`; quoted path
   segments stay hash keys, numeric/helper segments stay array indexes, reserved literals and engine locals are
@@ -316,8 +321,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `active` — Channel 2 is now owned by `.1.2.3` after `.1.5` settled primitive literals, separators, and
     explicit direct nested access; `.1.5.5.2` was superseded into `.1.2.3`. **`.1.2.3` SPLIT 2026-06-29**
     into aggregate bare value reads first (`.1.2.3.1` Perl + `.1.2.3.2` Rust), then scalar bare value reads
-    (`.1.2.3.3` Perl + `.1.2.3.4` Rust), with RHS-shape/type inference now tracked as `.1.2.3.5`.
-    Frontier → `.1.2.3.5`.)
+    (`.1.2.3.3` Perl + `.1.2.3.4` Rust), with RHS-shape/type inference split under `.1.2.3.5`.
+    Frontier → `.1.2.3.5.1`.)
   Goal: Remove container wrappers as a *requirement* + add type inference (bare words are
     variables/functions, never string literals; type from RHS shape `[]`→array/`{}`→hash/scalar and
     from helper arg position). Wrappers stay accepted aliases during migration (gradual, ADR 0007).
@@ -412,7 +417,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3`
   Status: `active` (SPLIT 2026-06-29 — value-read children `.1.2.3.1` through `.1.2.3.4` are done; RHS-shape
-    and type-inference work is now tracked as pending `.1.2.3.5`. Split-time ground truth:
+    and type-inference work was split under `.1.2.3.5`. Split-time ground truth:
     aggregate bare value reads already lower on Perl (`array_copy(items)` -> `[@items]`,
     `hash_copy(meta)` -> `{%meta}`, `copy(items)` -> `[@items]`) but do not get a preamble
     `my @items`/`my %meta`; Rust deliberately keeps bare value reads out of aggregate-copy target
@@ -421,7 +426,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Goal: Channel 2 — value-position bare-word reads and RHS-shape/type inference.
   Children: `.1.2.3.1` (Perl aggregate bare value reads), `.1.2.3.2` (Rust parity for `.1.2.3.1`),
     `.1.2.3.3` (Perl scalar bare value reads, split by lowering seam), `.1.2.3.4` (Rust parity for the
-    accepted `.1.2.3.3` scalar-read contract), `.1.2.3.5` (RHS-shape/type-inference split before code).
+    accepted `.1.2.3.3` scalar-read contract), `.1.2.3.5` (RHS-shape/type-inference split container).
   Verification: **SPLIT 2026-06-29.** KM retrieval and TOOLBOX probes show three distinct sub-surfaces.
     (1) Perl aggregate bare value reads already lower to sigiled variables (`return(array_copy(items))` ->
     `return [@items]`, `return(hash_copy(meta))` -> `return {%meta}`, `return(copy(items))` -> `return
@@ -570,13 +575,67 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.3.4 — add Rust scalar bare-read parity` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.5`
-  Status: `pending`
+  Status: `done` (SPLIT 2026-06-29 — no engine/book behavior change)
   Goal: Channel 2 RHS-shape/type-inference split before code.
+  Children: `.1.2.3.5.1` (Perl shape-literal value expressions), `.1.2.3.5.2` (Perl RHS-shape target
+    inference), `.1.2.3.5.3` (Rust parity for `.1.2.3.5.1`), `.1.2.3.5.4` (Rust parity for `.1.2.3.5.2`).
   Acceptance: Ground truth first, then split or implement the remaining `.1.2` shape-inference contract
     without disturbing the now-settled value-read semantics. This owns `[]`/`{}` RHS-shape and any scalar/hash/
     array inference rules still needed after `.1.2.3.4`; it must explicitly protect direct-access brackets,
     control-flow/block braces, helper-call parsing, and all-bare `push(A,B)` child-call routing. If the shape
     surface is too broad, create child leaves before code.
+  Verification: **SPLIT 2026-06-29.** KM retrieval plus TOOLBOX/source/runtime/code-read probes show this is
+    not one signoff implementation seam. Perl lowering accepts empty `[]` and `{}` as raw Perl arrayref/hashref
+    value expressions in scalar/value slots: `return([])` -> `return []`, `name = []` -> `$name = []`, and
+    `items += []` -> `push @items, []`. But `name = []` and `name = {}` assign scalar `$name`; they do not
+    initialize or alias the aggregate working variables `@name` / `%name`, which remain distinct slots.
+    Runtime/source dumps prove `items = []; items += "a"; return(items)` keeps `$items` separate from
+    `@items`, and `meta = {}; meta[key] = "v"; return(meta)` keeps `$meta` separate from `%meta`. Non-empty
+    shapes such as `[value]` and `{ key => value }` are raw Perl passthrough today, so bare identifiers become
+    Perl barewords/strings rather than the settled scalar reads; they therefore need an expression-aware DSL
+    literal lowerer before any target-kind inference can be signoff. Rust `parse_expr` has no bracket/brace
+    primary expression at all, so Rust parity is also a separate obligation. The split is: `.1.2.3.5.1` Perl
+    shape-literal value expressions; `.1.2.3.5.2` Perl RHS-shape target inference; `.1.2.3.5.3` Rust parity for
+    accepted shape-literal values; `.1.2.3.5.4` Rust parity for accepted target inference.
+  Commit: `SPEC-FORMAT-TERSE.1.2.3.5 — split RHS-shape inference by mechanism` (see Commit Log)
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3.5.1`
+  Status: `pending`
+  Goal: Perl reference — define and lower `[]` / `{}` as DSL shape-literal value expressions.
+  Acceptance: Empty and non-empty array/hash literals accepted in value positions lower through expression-aware
+    element/key/value handling, so settled scalar reads compose inside shapes (`[value]`, `{ key => value }`)
+    without raw Perl bareword/string passthrough. Direct-access bracket paths, hash-index assignment brackets,
+    future control-flow/block braces, helper-call parsing, primitive literals, and all-bare child-call routing
+    remain protected. Add focused Perl runtime/source locks and update the mdBook only if user-visible behavior
+    changes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3.5.2`
+  Status: `pending`
+  Goal: Perl reference — decide and implement RHS-shape target-kind inference.
+  Acceptance: After `.1.2.3.5.1` defines shape literals as values, decide whether scalar assignment forms such
+    as `name = []` / `name = {}` initialize aggregate working variables (`@name` / `%name`) or intentionally
+    remain scalar arrayref/hashref assignment. The accepted rule must be explicit, backwards-compatible or
+    consciously migrated, covered by source/runtime locks, and documented in the mdBook if it changes the
+    user-facing contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3.5.3`
+  Status: `pending`
+  Goal: Rust lockstep parity for `.1.2.3.5.1` shape-literal value expressions.
+  Acceptance: Rust parses and evaluates the accepted Perl shape-literal value-expression contract with oracle
+    fixtures and focused integration locks, without advancing RHS target-kind inference ahead of `.1.2.3.5.2`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.2.3.5.4`
+  Status: `pending`
+  Goal: Rust lockstep parity for `.1.2.3.5.2` RHS-shape target-kind inference.
+  Acceptance: Rust matches the accepted Perl target-kind inference contract with oracle fixtures and focused
+    integration locks. If `.1.2.3.5.2` intentionally preserves scalar arrayref/hashref assignment, Rust must
+    lock that behavior rather than inventing aggregate initialization.
   Verification: `pending`
   Commit: `pending`
 
@@ -1160,10 +1219,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3.3.2` | `done` 2026-06-29 | Perl scalar bare reads in mutation key/RHS slots landed with auto-`my`, phase0 986 green, and mdBook updated. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.3.3` | `done` 2026-06-29 | Perl scalar bare reads for direct-access bare path atoms landed with auto-`my`; `foo["a"][z]` matches `foo["a"][scalar(z)]`; phase0 987 green and mdBook updated. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.4` | `done` 2026-06-29 | Rust lockstep parity for the accepted scalar bare-read contract landed; parser reservations removed, runtime scalar `Expr::Variable` path locked, oracle corpus 28 fixtures. |
-| 1 | `SPEC-FORMAT-TERSE.1.2.3.5` | `pending` | RHS-shape/type-inference split before code, now that Channel 2 value-read semantics are landed on both variants. |
+| — | `SPEC-FORMAT-TERSE.1.2.3.5` | `done` 2026-06-29 | RHS-shape/type-inference split before code: Perl shape-literal values, Perl target-kind inference, then Rust parity for each. No engine/book behavior changed. |
+| 1 | `SPEC-FORMAT-TERSE.1.2.3.5.1` | `pending` | Perl shape-literal value expressions (`[]`/`{}`) before target-kind inference, so non-empty shapes lower through DSL expressions instead of raw Perl barewords. |
 | … | `.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.2.3.5` RHS-shape/type-inference split by mechanism**). The remaining Channel 2 shape
+  work is not one implementation leaf. Perl already accepts raw empty `[]` and `{}` in value/source slots, but
+  only as scalar arrayref/hashref expressions (`name = []` assigns `$name`, while `items += []` mutates
+  `@items`; those slots are distinct). Non-empty shapes such as `[value]` and `{ key => value }` currently pass
+  through raw Perl and turn bare identifiers into barewords/strings, not the settled scalar working-variable
+  reads. Rust has no bracket/brace value-expression parser. Therefore the first safe leaf is Perl
+  shape-literal value expressions (`.1.2.3.5.1`), followed by Perl RHS target-kind inference
+  (`.1.2.3.5.2`), then Rust parity for each accepted contract (`.1.2.3.5.3` and `.1.2.3.5.4`). Direct-access
+  brackets, hash-index assignment brackets, future block braces, helper-call syntax, and all-bare child-call
+  routing must stay protected.
 
 - `2026-06-29` (**`.1.2.3.4` Rust scalar bare-read parity landed**). Rust scalar bare-read parity required
   removing parser reservations, not changing runtime scalar evaluation: `Expr::Variable` already reads
@@ -1594,6 +1665,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.3.2` | Perl syntax checks (`MethodLowering.pm`, `PrimitivePipelineRules.pm`, `EmitContext.pm`, `phase0_regression.t`); TOOLBOX lowering probes; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks; full local CI | Perl scalar mutation-slot bare reads landed. `items += VALUE`, `set_key(meta, KEY, VALUE)`, and `meta[KEY] = VALUE` now lower non-reserved bare key/RHS identifiers to `$KEY` / `$VALUE` and auto-supply per-invocation scalar lexicals, while target inference, literals, reserved engine locals, direct `[z]`, and all-bare `push(...)` child-call routing remain unchanged. Phase0 PASS (`1..986`, 29 new assertions); mdBook/KM/local CI PASS. Frontier becomes `.1.2.3.3.3`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.3.3` | Perl syntax checks (`ValueExpr.pm`, `EmitContext.pm`, `phase0_regression.t`); TOOLBOX lowering probes; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks; full local CI | Perl direct-access bare path atoms landed. `foo["a"][z]` now lowers like `foo["a"][scalar(z)]` to `$foo->{"a"}->[$z]` and auto-supplies a per-invocation scalar lexical for `z`; quoted path segments remain hash keys, numeric/helper segments remain array indexes, reserved atoms remain unclaimed, and `scalaref(...)` compatibility is unchanged. Phase0 PASS (`1..987`, 18 new assertions); mdBook/KM/memory/doctrine/local CI PASS. Frontier becomes `.1.2.3.4`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.4` | Focused Rust core parser tests (`parse_scalar_bare_reads_in_mutation_slots`, `parse_direct_nested_access_accepts_bare_segments`); focused Rust runtime `terse_1_2_3_4`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks; full local CI | Rust scalar bare-read parity landed. The parser now accepts bare scalar variables in source slots, mutation key/RHS slots, and multi-segment direct-access path atoms; runtime behavior uses the existing `Expr::Variable` scalar read path. Added 2 integration locks + 3 oracle fixtures; corpus oracle PASS over 28 fixtures; mdBook/KM/memory/doctrine/local CI PASS. Frontier becomes `.1.2.3.5` for RHS-shape/type-inference split. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5` | Knowledge Map retrieval; TOOLBOX `call_spec_handler_subst` probes for empty and non-empty `[]`/`{}` forms; `LinkedSpec::Get` runtime/source dumps for scalar-vs-aggregate slot separation; Rust `expr.rs` code-read; Knowledge Map/memory/doctrine/diff checks | Split RHS-shape/type-inference into concrete children before code. Perl raw empty shapes work as scalar value expressions but do not initialize aggregate working variables; non-empty shapes currently need expression-aware lowering; Rust cannot parse bracket/brace value expressions. No engine/book behavior changed. Frontier becomes `.1.2.3.5.1`. |
 
 ## Commit Log
 
@@ -1632,8 +1704,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.2.3.3.2` | `SPEC-FORMAT-TERSE.1.2.3.3.2 — implement scalar mutation-slot bare reads` | Perl mutation-slot bare reads now work for array append RHS, statement-level `set_key` key/RHS, and hash-index operator key/RHS, with matching scalar auto-existence. mdBook/KM/live docs updated; phase0 986 green. Frontier becomes `.1.2.3.3.3`. |
 | `SPEC-FORMAT-TERSE.1.2.3.3.3` | `SPEC-FORMAT-TERSE.1.2.3.3.3 — implement direct-access bare path atoms` | Perl direct-access bare path atoms now work as scalar array indexes with matching scalar auto-existence. mdBook/KM/live docs updated; phase0 987 green. `.1.2.3.3` closes; frontier becomes `.1.2.3.4`. |
 | `SPEC-FORMAT-TERSE.1.2.3.4` | `SPEC-FORMAT-TERSE.1.2.3.4 — add Rust scalar bare-read parity` | Rust now accepts the Perl scalar bare-read contract in source slots, mutation key/RHS slots, and direct-access bare path atoms through the existing `Expr::Variable` scalar read path. 3 oracle fixtures added; frontier becomes `.1.2.3.5` RHS-shape/type-inference split. |
+| `SPEC-FORMAT-TERSE.1.2.3.5` | `SPEC-FORMAT-TERSE.1.2.3.5 — split RHS-shape inference by mechanism` | No engine/book behavior change. RHS-shape/type inference is split into Perl shape-literal value expressions (`.1.2.3.5.1`), Perl RHS target-kind inference (`.1.2.3.5.2`), and Rust parity for each (`.1.2.3.5.3`/`.1.2.3.5.4`). Frontier becomes `.1.2.3.5.1`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.2.3.5` DONE/SPLIT — RHS-shape/type inference split by mechanism.**
+  Ground truth shows raw empty `[]`/`{}` already pass through Perl as scalar value expressions, but do not
+  initialize aggregate working variables; non-empty shapes need expression-aware lowering before settled scalar
+  reads compose inside shapes; Rust has no bracket/brace value-expression parser. The next children are
+  `.1.2.3.5.1` Perl shape-literal values, `.1.2.3.5.2` Perl target-kind inference, then `.1.2.3.5.3` /
+  `.1.2.3.5.4` Rust parity. No engine/book behavior changed. Frontier -> `.1.2.3.5.1`.
 
 - `2026-06-29`: **`.1.2.3.4` DONE — Rust scalar bare-read parity landed.**
   Rust now accepts bare scalar working-variable reads in the accepted scalar slots: `return(value)`,

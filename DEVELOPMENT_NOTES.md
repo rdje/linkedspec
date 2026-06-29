@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5 — RHS-shape/type-inference split): Split the remaining Channel 2
+  shape work before code. Durable points. (1) **Raw empty shapes are not target inference.** Perl accepts
+  `[]`/`{}` today by passing them through as arrayref/hashref value expressions, so `name = []` writes scalar
+  `$name`; aggregate mutation slots such as `items += []` and `meta[key] = {}` still use separate `@items` /
+  `%meta` state. (2) **Non-empty shapes need a DSL lowerer first.** `[value]` and `{ key => value }` currently
+  pass raw Perl barewords/strings, so they do not compose with the `.1.2.3.3/.4` scalar bare-read contract.
+  Implementing target inference before expression-aware shape literals would bake in the wrong semantics.
+  (3) **Rust parity has two obligations.** Rust cannot parse bracket/brace value primaries today; first mirror
+  accepted shape-literal values, then mirror whatever target-kind inference the Perl reference adopts. (4)
+  **Keep bracket/brace sites separated.** Direct access, hash-index assignment, future block braces, helper
+  calls, and all-bare child-call routing must stay explicit boundaries for the `.1.2.3.5.x` children.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.4 — Rust scalar bare-read parity landed): Closed the Rust lockstep
   leaf for the accepted scalar Channel 2 read contract. Durable points. (1) **The runtime already had the
   scalar semantics.** `Expr::Variable` evaluates through `ctx.get_scalar(name)`, so source-slot bare reads,

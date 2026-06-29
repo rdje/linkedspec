@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5 — RHS-shape/type-inference split
+
+**Scope:** task tree, task-tree index, roadmap/live continuity docs, and Knowledge Map. No engine, fixture, or
+mdBook behavior change.
+
+**Ground truth:** Perl already passes empty `[]` and `{}` through as raw arrayref/hashref value expressions in
+scalar/value slots: `return([])`, `name = []`, `items += []`, `set(out,{})`, and `meta[key] = {}` lower to
+valid Perl. That does not mean RHS target-kind inference exists: `name = []` assigns scalar `$name`, while
+`items += ...` mutates a distinct `@items`; likewise `$meta` and `%meta` are separate slots. Non-empty shapes
+such as `[value]` and `{ key => value }` currently pass through raw Perl, so bare identifiers become Perl
+barewords/strings instead of the settled scalar working-variable reads. Rust does not parse `[` or `{` as a
+value-expression starter today.
+
+**Split:** `.1.2.3.5` is now a completed split container. The new frontier is `.1.2.3.5.1` Perl
+shape-literal value expressions, followed by `.1.2.3.5.2` Perl RHS target-kind inference, `.1.2.3.5.3` Rust
+shape-literal parity, and `.1.2.3.5.4` Rust target-inference parity.
+
+**Validation:** KM/TOOLBOX/source/runtime/code-read probes completed; Knowledge Map, memory/doctrine, and diff
+checks are run for the slice. Phase0/Rust runtime/local CI are N/A unless the final gate is run, because this
+slice changes only docs/tree/KM continuity surfaces.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.4 — Rust scalar bare-read parity
 
 **Scope:** Rust parser scalar bare-read reservations, Rust integration locks, Perl-oracle corpus fixtures,

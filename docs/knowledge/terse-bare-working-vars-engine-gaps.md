@@ -13,6 +13,8 @@ answers:
   - "what is the engine ground truth for removing the scalar/array/hash wrappers in .spec"
   - "why is SPEC-FORMAT-TERSE.1.2 split into a Perl reference change plus a Rust parity follow-on"
   - "does name[key] = value close Channel 2 bare value-position reads"
+  - "what remains after Channel 2 scalar bare reads"
+  - "where is RHS-shape type inference split after SPEC-FORMAT-TERSE.1.2.3.5"
 date: 2026-06-24
 status: confirmed
 tags: [engine, codegen, dsl, variables, wrappers, type-inference, spec-format-terse, SPEC-FORMAT-TERSE, ActionIR, EmitContext]
@@ -81,6 +83,13 @@ per-parse hash map. The key and RHS still follow existing value-expression rules
 scalar(value)` is accepted, but bare key/RHS identifiers such as `NAME[key] = "v"` and `NAME["k"] = value` are
 deliberately not accepted because Channel 2 still owns bare value-position reads.
 
+**Update 2026-06-29 (`SPEC-FORMAT-TERSE.1.2.3.5`):** Channel 2 value-position reads are now closed on both
+Perl and Rust by `.1.2.3.1` through `.1.2.3.4` (aggregate reads, scalar source slots, mutation key/RHS slots,
+and direct-access bare path atoms). The remaining RHS-shape/type-inference work was split before code:
+`.1.2.3.5.1` owns Perl shape-literal value expressions (`[]` / `{}` with expression-aware element/key/value
+lowering), `.1.2.3.5.2` owns Perl RHS target-kind inference, and `.1.2.3.5.3` / `.1.2.3.5.4` own Rust parity.
+Ground truth for the split lives in [[terse-rhs-shape-type-inference-ground-truth]].
+
 ## The three behaviors (dump-don't-guess)
 
 A working variable referenced **only through a wrapper** is the `.1.1.1` path and already works. The
@@ -109,19 +118,20 @@ question for `.1.2` is what happens to a **bare** (un-wrapped) name. Three disti
 - **Channel 1 (`.1.2.1` Perl + `.1.2.2` Rust)** is self-contained and a direct extension of `.1.1.1`:
   also collect bare names in type-implying arg positions and emit the position-implied-sigil `my`,
   closing the leaky-global gap. Lowest risk; the value lowering is already correct.
-- **Channel 2 (`.1.2.3`+)** is the harder half (value-position reads + RHS-shape inference), couples
-  with `.1.5`, and is added once `.1.2.1` lands — not pre-published, to avoid vague placeholders.
+- **Channel 2 (`.1.2.3`+)** is the harder half. Value-position bare reads are now closed by `.1.2.3.1`
+  through `.1.2.3.4`; RHS-shape/type inference is split under `.1.2.3.5`.
 - Wrappers stay **accepted aliases** during migration (gradual, ADR 0007); shipped specs use them
   pervasively (declare 87 / assign 103 / scalar 133 / array 134 / hash 36), so they must keep compiling
   byte-identically.
 
 ## Links
 
-- Tree: [[SPEC-FORMAT-TERSE]] (leaf `.1.2` → `.1.2.1` Perl / `.1.2.2` Rust parity; Channel 2 follow-on).
+- Tree: [[SPEC-FORMAT-TERSE]] (leaf `.1.2` → `.1.2.1` Perl / `.1.2.2` Rust parity; Channel 2 `.1.2.3`+).
 - Builds on: [[working-vars-no-strict-need-my-lexical]] (`.1.1` scoping/non-strict model),
   [[rust-working-vars-auto-vivify]] (`.1.1.2` Rust interpreter auto-vivify).
 - Decision: [0007](../decisions/0007-spec-format-terse-direction.md) (terse direction, gradual-alias);
   [0006](../decisions/0006-multi-backend-vision.md) (lockstep all variants);
   [0002](../decisions/0002-all-target-actionir-ready-invariant.md) (ratio 1.0000).
 - Related: [[actionir-lowering-stack]], [[emitcontext-owner-registry]],
-  [[phase0-all-target-actionir-ready-invariant]], [[spec-format-brainstorm-rounds-1-3]].
+  [[phase0-all-target-actionir-ready-invariant]], [[spec-format-brainstorm-rounds-1-3]],
+  [[terse-rhs-shape-type-inference-ground-truth]].
