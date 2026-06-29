@@ -34,6 +34,7 @@ sub default_deps_for_package {
    'extract_hash_symbol_name',
    'extract_scalar_symbol_name',
    'lower_method_value_expr',
+   'lower_primitive_literal_expr',
    'parse_method_function_expr',
    'normalize_method_args_with_optional_scope',
   ],
@@ -287,12 +288,15 @@ sub _lower_flow_composite_expr {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
+ my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ my $literal = $lower_primitive_literal_expr->($trimmed);
+ return $literal if defined($literal);
 
  # SPEC-FORMAT-TERSE.1.4.1 — the terse renames `cat` (== concat) and `copy` (== array_copy/
  # hash_copy) are recognized here too so a composite/assignment-source value lowers identically.

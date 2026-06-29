@@ -2554,6 +2554,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_trim_action_ir_value = sub { return 'trim_ok' };
     local *Synthetic::ActionIROwner::_lower_flow_composite_expr = sub { return 'flow_expr_ok' };
     local *Synthetic::ActionIROwner::_lower_method_value_expr = sub { return 'method_value_ok' };
+    local *Synthetic::ActionIROwner::_lower_primitive_literal_expr = sub { return 'primitive_literal_ok' };
     local *Synthetic::ActionIROwner::_declare_alias_to_type = sub { return 'array' };
     local *Synthetic::ActionIROwner::_lower_typed_declare_statement = sub { return 'typed_declare_ok' };
     local *Synthetic::ActionIROwner::_lower_assign_statement = sub { return 'assign_ok' };
@@ -13152,14 +13153,14 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'FlowExpr',
             module      => 'LinkedSpec::ActionIR::FlowExpr',
-            callbacks   => [qw(_trim_action_ir_value _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_method_value_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
+            callbacks   => [qw(_trim_action_ir_value _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_method_value_expr _lower_primitive_literal_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
             sample_key  => 'trim_action_ir_value',
             sample_name => '_trim_action_ir_value',
         },
         {
             label       => 'MethodLowering',
             module      => 'LinkedSpec::ActionIR::MethodLowering',
-            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _infer_scalar_container_kind _split_top_level_csv _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
+            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
             sample_key  => 'split_declare_symbol_names',
             sample_name => '_split_declare_symbol_names',
         },
@@ -44373,6 +44374,74 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
         'hash-index assignment operator mutates a no-declare hash target at runtime');
     is($run->($p, 'a b'), '{"a":"a!","b":"b!"}',
         're-running the same parser is stable (per-invocation hash lexical)');
+};
+
+subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
+    # SPEC-FORMAT-TERSE.1.5.2: primitive literals are explicit value-position
+    # forms, not bare working-variable reads. That matters most for true/false:
+    # on the Perl reference they must become JSON booleans, not the strings
+    # "true"/"false"; prefix identifiers such as trueword remain outside the
+    # literal path and keep their existing bare-word behavior.
+    plan tests => 18;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
+    };
+
+    like($L->('return(true)'), qr/^return do \{ require JSON::PP; JSON::PP::true \}/,
+        'return(true) lowers to a JSON::PP boolean true literal');
+    like($L->('return(false)'), qr/^return do \{ require JSON::PP; JSON::PP::false \}/,
+        'return(false) lowers to a JSON::PP boolean false literal');
+    is($L->('return(trueword)'), 'return trueword',
+        'prefix identifier trueword is not claimed as the true literal');
+    is($L->('return(undefine)'), 'return undefine',
+        'prefix identifier undefine is not claimed as the undef literal');
+    like($L->('set(flag,true)'), qr/^\$flag = do \{ require JSON::PP; JSON::PP::true \}/,
+        'set(flag,true) lowers true as a typed value');
+    like($L->('items += false'), qr/^push \@items, do \{ require JSON::PP; JSON::PP::false \}/,
+        'items += false lowers false as an explicit append value');
+    like($L->('push(items, false)'), qr/^push \@items, do \{ require JSON::PP; JSON::PP::false \}/,
+        'push(items,false) uses the value-push contract, not legacy child-call routing');
+    like($L->('meta["enabled"] = true'), qr/^\$meta\{"enabled"\} = do \{ require JSON::PP; JSON::PP::true \}/,
+        'hash-index assignment accepts true as an explicit RHS value');
+    like($L->('meta[true] = false'), qr/^\$meta\{do \{ require JSON::PP; JSON::PP::true \}\} = do \{ require JSON::PP; JSON::PP::false \}/,
+        'hash-index assignment accepts primitive literals in both key and value positions');
+    like($L->('push(items, trueword)'), qr/^push \@trueword, &\{\$\$descr\{spec\}\{items\}\{handler\}\}/,
+        'prefix identifier trueword keeps the legacy all-bare child-call interpretation');
+
+    my $literal_spec = "Top::\n /x/ -> Done { return(array(true, false, \"s\", 42, 3.14, undef)) }\n\nDone::\n /[a-z]+/\n";
+    my $lp = eval { LinkedSpec::Get(\$literal_spec) };
+    ok(ref($lp) eq 'CODE', 'primitive-literal return spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($lp, 'xhello'), '[true,false,"s",42,3.14,null]',
+        'return payload preserves typed booleans, strings, numbers, and undef/null');
+
+    my $mutation_spec = "Top::\n"
+                      . " /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; return(array(scalar(flag), array_copy(array(items)), hash_copy(hash(meta)))) }\n"
+                      . "\nDone::\n /[a-z]+/\n";
+    my $mp = eval { LinkedSpec::Get(\$mutation_spec) };
+    ok(ref($mp) eq 'CODE', 'primitive-literal mutation spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($mp, 'xhello'), '[true,[false,true],{"enabled":true}]',
+        'mutation RHS positions preserve typed boolean values');
+
+    my $d = LinkedSpec::Get(\$mutation_spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,PUSH,RETURN',
+        'primitive literal mutations report canonical ASSIGN/PUSH/RETURN nodes');
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'primitive literal mutations have no canonical fallback');
+
+    my $flow_spec = "Top::\n /x/ -> Done { if(false); return(\"bad\"); else(); return(\"good\"); endif() }\n\nDone::\n /[a-z]+/\n";
+    my $fp = eval { LinkedSpec::Get(\$flow_spec) };
+    ok(ref($fp) eq 'CODE', 'primitive-literal flow spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($fp, 'xhello'), '"good"',
+        'if(false) uses the boolean false literal rather than a truthy string');
 };
 
 done_testing();

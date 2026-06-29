@@ -16,6 +16,15 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
+sub _is_primitive_literal_token {
+ my ($expr) = @_;
+ return 0 unless defined($expr) && length($expr);
+ return 1 if $expr =~ /^-?\d+(?:\.\d+)?$/o;
+ return 1 if $expr =~ /^\"(?:\\.|[^\"])*\"$/s || $expr =~ /^'(?:\\.|[^'])*'$/s;
+ return 1 if $expr eq 'undef' || $expr eq 'true' || $expr eq 'false';
+ return 0
+}
+
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default contracts dependency bundle for one owner
@@ -172,7 +181,7 @@ sub _build_call_and_dispatch_contracts {
    unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*,\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bpush\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)/push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    $code =~ s/\bpush\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)/_is_primitive_literal_token($2) ? $& : "push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)"/ge;
     return $code
    },
   },

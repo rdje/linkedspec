@@ -316,6 +316,32 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.5.2 — primitive literal parity ──
+    #
+    # Primitive literals are explicit typed value expressions across return
+    # payloads, mutation RHS positions, and flow conditions. In particular,
+    # true/false must be JSON booleans, not the strings "true"/"false".
+    {   case   => 'terse_1_5_2_primitive_literals',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { return(array(true, false, "s", 42, 3.14, undef)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_5_2_boolean_mutation_flow',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(scalar(flag), array_copy(array(items)), hash_copy(hash(meta)))); endif() }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

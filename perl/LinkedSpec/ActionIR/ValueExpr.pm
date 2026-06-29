@@ -37,6 +37,35 @@ sub default_deps_for_package {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_primitive_literal_expr
+# Purpose : Lower primitive DSL literals to backend-visible Perl values.
+# Args    : ($expr, $deps)
+# Returns : Perl expression string for a literal, or undef for non-literals
+#------------------------------------------------------------------------------
+sub _lower_primitive_literal_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ return $trimmed if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return $trimmed if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
+ return 'undef' if $trimmed eq 'undef';
+ return 'do { require JSON::PP; JSON::PP::true }' if $trimmed eq 'true';
+ return 'do { require JSON::PP; JSON::PP::false }' if $trimmed eq 'false';
+ return undef
+}
+
+#------------------------------------------------------------------------------
 # Function: _extract_scalar_symbol_name
 # Purpose : Resolve scalar variable symbol name from DSL method token surface.
 # Args    : ($token, $deps)
@@ -130,6 +159,8 @@ sub _lower_scalar_access_key_expr {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ my $literal = _lower_primitive_literal_expr($trimmed, $deps);
+ return $literal if defined($literal);
  return $trimmed if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
  return $trimmed if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
 

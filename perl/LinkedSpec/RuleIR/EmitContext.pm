@@ -247,6 +247,11 @@ sub _lower_scalar_access_key_expr {
  return _call_actionir_owner_with_deps('value_expr', '_lower_scalar_access_key_expr', @args)
 }
 
+sub _lower_primitive_literal_expr {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('value_expr', '_lower_primitive_literal_expr', @args)
+}
+
 sub _lower_scalaref_value_expr {
  my @args = @_;
  return _call_actionir_owner_with_deps('value_expr', '_lower_scalaref_value_expr', @args)

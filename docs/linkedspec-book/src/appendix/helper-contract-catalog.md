@@ -5,6 +5,29 @@ Each entry defines the helper's contract — signature, input/output types, sema
 edge cases — at enough precision for a Rust, Julia, or Dart backend to implement
 identically. No Perl implementation knowledge is required.
 
+## 0. Primitive Value Literals
+
+Primitive literals are value expressions, not helper calls or working-variable names.
+
+- **Strings**: `"text"` and `'text'`.
+- **Numbers**: integer and decimal forms such as `42`, `-1`, and `3.14`.
+- **Booleans**: `true` and `false`, serialized as JSON booleans when returned or placed in containers.
+- **Undefined**: `undef`, serialized as JSON `null`.
+
+These literals are accepted in return payloads, constructor payloads, assignment RHS values,
+append RHS values, hash keys/values, and flow predicates:
+
+```text
+return(array(true, false, "ready", 42, undef));
+flag = true;
+items += false;
+meta["enabled"] = true;
+if(false); return("bad"); else(); return("good"); endif()
+```
+
+Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alarm`, and
+`undefine` are ordinary identifiers, not primitive literals.
+
 ## 1. Declaration Helpers
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a
@@ -78,8 +101,9 @@ identically. No Perl implementation knowledge is required.
 > value (see [Runtime Semantics §5.5](runtime-semantics.md)). Each compact "over
 > `/<regex>/`, `<expr>` on `<input>` → `<output>`" line plugs into this shape: `value`
 > carries `/<regex>/`, its `I.return(<expr>)` computes the result, and `<output>` is the
-> parser's array. Boolean results surface as `1` (true) / `0` (false); an undefined
-> result surfaces as a `null` element. The value-returning predicates (`matches`,
+> parser's array. Predicate helper results in these examples surface in the reference
+> boolean shape (`1` for true, `0` for false); primitive literal `true`/`false` values
+> are typed JSON booleans. An undefined result surfaces as a `null` element. The value-returning predicates (`matches`,
 > `starts_with`, `ends_with`, `contains_substr`) may be returned directly; the
 > definedness predicates (`is_defined`, `is_undefined`) are **condition-only** — use them
 > inside an `if (...)` test in an `I { ... }` block (shown below), not inside `return(...)`.

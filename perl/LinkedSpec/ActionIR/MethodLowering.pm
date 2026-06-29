@@ -40,6 +40,7 @@ sub default_deps_for_package {
    'extract_hash_symbol_name',
    'extract_scalar_symbol_name',
    'lower_scalar_access_key_expr',
+   'lower_primitive_literal_expr',
    'infer_scalar_container_kind',
    'split_top_level_csv',
    'lower_array_pipeline_expr',
@@ -178,6 +179,7 @@ sub _lower_method_value_expr {
  my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
  my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
  my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+ my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
  my $infer_scalar_container_kind = $require_dep->('infer_scalar_container_kind');
  my $split_top_level_csv = $require_dep->('split_top_level_csv');
  my $lower_array_pipeline_expr = $require_dep->('lower_array_pipeline_expr');
@@ -351,6 +353,8 @@ sub _lower_method_value_expr {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ my $literal = $lower_primitive_literal_expr->($trimmed);
+ return $literal if defined($literal);
  my $method_call = $parse_method_function_expr->($trimmed);
  if ($method_call && $method_call->{method} eq 'call') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -1815,6 +1819,7 @@ sub _lower_array_append_operator_statement {
   return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -1823,7 +1828,8 @@ sub _lower_array_append_operator_statement {
  my ($target_symbol, $value) = ($1, $2);
  $value = $trim_action_ir_value->($value);
  return undef unless defined($value) && length($value);
- return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ my $literal = $lower_primitive_literal_expr->($value);
+ return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !defined($literal);
 
  my $lowered_value = _lower_method_value_expr($value, $deps);
  $lowered_value = $value unless defined($lowered_value) && length($lowered_value);
@@ -1840,6 +1846,7 @@ sub _parse_hash_index_assignment_operator_statement {
   return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -1904,8 +1911,10 @@ sub _parse_hash_index_assignment_operator_statement {
  $key = $trim_action_ir_value->($key);
  return undef unless defined($key) && length($key);
  return undef unless defined($value) && length($value);
- return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
- return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ my $key_literal = $lower_primitive_literal_expr->($key);
+ my $value_literal = $lower_primitive_literal_expr->($value);
+ return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !defined($key_literal);
+ return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !defined($value_literal);
  return {
   target => $target,
   key    => $key,
@@ -2017,6 +2026,7 @@ sub _lower_push_value_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
@@ -2034,8 +2044,10 @@ sub _lower_push_value_statement {
   return undef unless @$raw_args == 2;
   my $first_expr = $trim_action_ir_value->($raw_args->[0]);
   my $second_expr = $trim_action_ir_value->($raw_args->[1]);
+  my $second_literal = $lower_primitive_literal_expr->($second_expr);
   return undef if defined($first_expr) && defined($second_expr)
-             && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o;
+             && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
+             && !defined($second_literal);
   $effective_args = $raw_args;
  }
  return undef unless $effective_args;

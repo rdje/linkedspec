@@ -142,6 +142,25 @@ These helpers are the entry point into local working state and structured values
 
 > **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. You do **not** have to `declare(...)` it first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in a type-implying target position: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; and the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`, taking its kind from that position. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
+> **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
+> (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
+> expression is accepted: returns, constructor payloads, assignment RHS values, append RHS
+> values, hash keys/values, and flow predicates. `true` and `false` are JSON booleans when
+> returned or placed in containers, not the strings `"true"` and `"false"`; `undef` serializes
+> as JSON `null`. Literal matching is exact, so names like `trueword` and `undefine` remain
+> identifiers.
+
+Examples:
+
+```text
+return(array(true, false, "ready", 42, undef));
+flag = true;
+items += false;
+push(items, true);
+meta["enabled"] = true;
+if(false); return("unreachable"); else(); return("reachable"); endif()
+```
+
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `scalar(name)` | scalar value | read the working scalar `name`. |

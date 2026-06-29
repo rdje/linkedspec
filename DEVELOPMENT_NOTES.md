@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.2 — primitive literals are typed values, not identifiers with special
+  prefixes): Landed primitive literal parity on Perl and Rust. Durable points. (1) **Literal recognition must
+  be exact.** `true`, `false`, and `undef` are literals; `trueword` and `undefine` are not. This keeps the
+  future Channel 2 bare-value-read design from being pre-empted by a prefix match. (2) **Perl booleans must be
+  JSON booleans.** Lowering uses `JSON::PP::true` / `JSON::PP::false`, so public JSON output is `true`/`false`
+  rather than `"true"`/`"false"`. (3) **Scanner and lowerer disambiguation must share the literal boundary.**
+  `push(items,false)` is a value append, while `push(items,trueword)` stays the historical all-bare child-call
+  form. `items += false` and `meta[true] = false` use the same exact-literal rule. (4) **Rust already had typed
+  literal expressions, but not statement-form branch gating.** The parity fix is a statement control stack in
+  `Engine::execute_block()` for `if(cond); elseif(cond); else(); endif()` marker statements; the existing
+  multi-argument lazy `if(cond,then,else)` helper remains separate. A pre-existing nested-hash-constructor
+  flattening issue was deliberately kept out of scope by returning `[flag, items, hash]` in the parity fixture.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.5 — split before code; literals, calls, separators, and access are
   separate seams): Grounded `.1.5` with KM/TOOLBOX/code-read and split it before implementation. Durable
   points. (1) **Primitive literals need a parity leaf, not just locks.** Perl currently returns `true` and

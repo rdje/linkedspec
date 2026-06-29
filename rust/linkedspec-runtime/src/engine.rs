@@ -60,6 +60,17 @@ struct SavedMatchState {
     match_end_byte: usize,
 }
 
+/// Statement-form conditional state for lifecycle blocks.
+///
+/// This is deliberately separate from the expression-level `if(...)` helper:
+/// `if(cond, then, else)` remains a lazy value expression, while
+/// `if(cond); ... else(); ... endif()` gates subsequent statements in the block.
+struct StatementIfFrame {
+    parent_active: bool,
+    current_active: bool,
+    branch_taken: bool,
+}
+
 impl SavedMatchState {
     /// Restore the saved caller match state onto the context (invocation exit).
     fn restore(self, ctx: &mut RuntimeContext) {
@@ -140,10 +151,7 @@ impl Engine {
     /// Execute the top rule against the given input.
     /// Returns the accumulator as a JSON array.
     pub fn execute(&self, input: &str) -> Result<Value, String> {
-        let top = self
-            .spec
-            .top_rule()
-            .ok_or("no top rule in compiled spec")?;
+        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
         let label = top.label.clone();
         let mut ctx = RuntimeContext::new(input);
         self.execute_rule(&label, 0, &mut ctx)?;
@@ -192,10 +200,12 @@ impl Engine {
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
-        let rule = self
-            .spec
-            .find(label)
-            .ok_or_else(|| format!("rule '{}' (entry idx {}) not found in compiled spec", label, entry_regex_idx))?;
+        let rule = self.spec.find(label).ok_or_else(|| {
+            format!(
+                "rule '{}' (entry idx {}) not found in compiled spec",
+                label, entry_regex_idx
+            )
+        })?;
 
         // Each rule invocation reports its own return value (the value of the
         // last `return(...)` in its blocks — Runtime Semantics §5.4). Save the
@@ -313,15 +323,10 @@ impl Engine {
                 // Self-recursive entry: only try the specified regex slot.
                 // Build a single-pattern alternation for this slot.
                 let entry_pat = &rule.regex_patterns[entry_regex_idx];
-                let entry_alt =
-                    CompiledAlternation::compile(&[entry_pat.clone()])?;
+                let entry_alt = CompiledAlternation::compile(&[entry_pat.clone()])?;
                 match rule.parse_mode {
-                    ParseMode::Consume => {
-                        entry_alt.consume_match(&ctx.input, ctx.pos)
-                    }
-                    ParseMode::Seek => {
-                        entry_alt.seek_match(&ctx.input, ctx.pos)
-                    }
+                    ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
+                    ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
                 }
                 .map(|mut m| {
                     // Fix up the index to match the real regex position
@@ -330,12 +335,8 @@ impl Engine {
                 })
             } else {
                 match rule.parse_mode {
-                    ParseMode::Consume => {
-                        alt.consume_match(&ctx.input, ctx.pos)
-                    }
-                    ParseMode::Seek => {
-                        alt.seek_match(&ctx.input, ctx.pos)
-                    }
+                    ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
+                    ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
                 }
             };
 
@@ -371,11 +372,8 @@ impl Engine {
                         // The child's return value becomes the parent's `retv`
                         // (Runtime Semantics §3.3 / §6.1), readable by the
                         // attached code below and the LE-block after the loop.
-                        let child_retv = self.execute_rule(
-                            &entry.child_label,
-                            entry.child_regex_idx,
-                            ctx,
-                        )?;
+                        let child_retv =
+                            self.execute_rule(&entry.child_label, entry.child_regex_idx, ctx)?;
                         ctx.set_retv(child_retv);
                         // Execute attached code if present
                         if let Some(ref block) = entry.code {
@@ -455,7 +453,14 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<(), String> {
+        let mut if_stack: Vec<StatementIfFrame> = Vec::new();
         for stmt in &block.statements {
+            if self.handle_statement_if_control(&stmt.expr, &mut if_stack, ctx, rule_label)? {
+                continue;
+            }
+            if !if_stack.last().is_none_or(|frame| frame.current_active) {
+                continue;
+            }
             if self.execute_scalar_assignment_operator_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
@@ -471,6 +476,68 @@ impl Engine {
             self.eval_expr(&stmt.expr, ctx, rule_label)?;
         }
         Ok(())
+    }
+
+    /// Handle statement-form `if(cond); elseif(cond); else(); endif()` controls.
+    ///
+    /// Only one-argument `if`/`elseif` and zero-argument `else`/`endif` are
+    /// statement controls. Multi-argument `if(cond, then, else)` remains the
+    /// value helper implemented by `call_helper_lazy`.
+    fn handle_statement_if_control(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        if_stack: &mut Vec<StatementIfFrame>,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::Expr;
+
+        let Expr::Call { name, args } = expr else {
+            return Ok(false);
+        };
+
+        match name.as_str() {
+            "if" if args.len() == 1 => {
+                let parent_active = if_stack.last().is_none_or(|frame| frame.current_active);
+                let cond = if parent_active {
+                    self.eval_expr(args[0].value(), ctx, rule_label)?.as_bool()
+                } else {
+                    false
+                };
+                if_stack.push(StatementIfFrame {
+                    parent_active,
+                    current_active: parent_active && cond,
+                    branch_taken: cond,
+                });
+                Ok(true)
+            }
+            "elseif" if args.len() == 1 => {
+                let Some(frame) = if_stack.last_mut() else {
+                    return Ok(true);
+                };
+                if frame.parent_active && !frame.branch_taken {
+                    let cond = self.eval_expr(args[0].value(), ctx, rule_label)?.as_bool();
+                    frame.current_active = cond;
+                    frame.branch_taken = cond;
+                } else {
+                    frame.current_active = false;
+                }
+                Ok(true)
+            }
+            "else" if args.is_empty() => {
+                let Some(frame) = if_stack.last_mut() else {
+                    return Ok(true);
+                };
+                frame.current_active = frame.parent_active && !frame.branch_taken;
+                frame.branch_taken = true;
+                Ok(true)
+            }
+            "endif" if args.is_empty() => {
+                if_stack.pop();
+                Ok(true)
+            }
+            _ => Ok(false),
+        }
     }
 
     /// Execute the statement-only scalar assignment operator `name = value`.
@@ -593,15 +660,15 @@ impl Engine {
                     .collect::<Result<Vec<_>, _>>()?;
                 self.call_helper_with_args(name, args, &evaluated, ctx, rule_label)
             }
-            Expr::AssignScalar { .. } => Err(
-                "scalar assignment operator is statement-only".to_string()
-            ),
-            Expr::AssignArrayAppend { .. } => Err(
-                "array append operator is statement-only".to_string()
-            ),
-            Expr::AssignHashIndex { .. } => Err(
-                "hash-index assignment operator is statement-only".to_string()
-            ),
+            Expr::AssignScalar { .. } => {
+                Err("scalar assignment operator is statement-only".to_string())
+            }
+            Expr::AssignArrayAppend { .. } => {
+                Err("array append operator is statement-only".to_string())
+            }
+            Expr::AssignHashIndex { .. } => {
+                Err("hash-index assignment operator is statement-only".to_string())
+            }
             Expr::Variable { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {
                 let idx_val = self.eval_expr(index, ctx, rule_label)?;
@@ -609,14 +676,10 @@ impl Engine {
                 let arr = ctx.get_array(name);
                 Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
             }
-            Expr::StringLiteral { value } => {
-                Ok(RuntimeValue::Scalar(value.clone()))
-            }
+            Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
             Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),
             Expr::BooleanLiteral { value } => Ok(RuntimeValue::Bool(*value)),
-            Expr::RegexLiteral { pattern } => {
-                Ok(RuntimeValue::Scalar(pattern.clone()))
-            }
+            Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
                 self.eval_expr(receiver, ctx, rule_label)?;
@@ -649,13 +712,9 @@ impl Engine {
         val: &RuntimeValue,
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
-        if let Some(Arg::Positional(Expr::Call { name, args })) =
-            raw_args.first()
-        {
+        if let Some(Arg::Positional(Expr::Call { name, args })) = raw_args.first() {
             if (name == "scalar" || name == "s") && args.len() == 1 {
-                if let Arg::Positional(Expr::Variable { name: var_name }) =
-                    &args[0]
-                {
+                if let Arg::Positional(Expr::Variable { name: var_name }) = &args[0] {
                     return var_name.clone();
                 }
             }
@@ -666,9 +725,7 @@ impl Engine {
         // fallback in ValueExpr::_extract_scalar_symbol_name. The per-parse
         // RuntimeContext HashMap auto-vivifies on set_scalar, so it auto-exists
         // with no declare and never leaks across parses (fresh ctx per execute).
-        if let Some(Arg::Positional(Expr::Variable { name: var_name })) =
-            raw_args.first()
-        {
+        if let Some(Arg::Positional(Expr::Variable { name: var_name })) = raw_args.first() {
             return var_name.clone();
         }
         val.to_str()
@@ -835,15 +892,9 @@ impl Engine {
                                 // declare(scalar, name=<value>):
                                 //   keyword value IS the initializer
                                 let init = kw.get("name").unwrap();
-                                ctx.declare_scalar_with(
-                                    &var_name,
-                                    init.clone(),
-                                );
+                                ctx.declare_scalar_with(&var_name, init.clone());
                             } else if args.len() >= 3 {
-                                ctx.declare_scalar_with(
-                                    &var_name,
-                                    args[2].clone(),
-                                );
+                                ctx.declare_scalar_with(&var_name, args[2].clone());
                             } else {
                                 ctx.declare_scalar(&var_name);
                             }
@@ -871,9 +922,7 @@ impl Engine {
                         linkedspec_core::expr::Expr::Variable { name: var_name },
                     ) = &raw_args[0]
                     {
-                        return Ok(RuntimeValue::Array(
-                            ctx.get_array(var_name),
-                        ));
+                        return Ok(RuntimeValue::Array(ctx.get_array(var_name)));
                     }
                 }
                 // General constructor: `array(val1, val2, ...)`
@@ -882,15 +931,11 @@ impl Engine {
             "array_copy" => {
                 if let Some(arg) = args.first() {
                     match arg {
-                        RuntimeValue::Array(a) => {
-                            Ok(RuntimeValue::Array(a.clone()))
-                        }
+                        RuntimeValue::Array(a) => Ok(RuntimeValue::Array(a.clone())),
                         _ => {
                             let arr_name = self.resolve_array_target(raw_args, arg, false);
                             if !arr_name.is_empty() {
-                                Ok(RuntimeValue::Array(
-                                    ctx.array_copy(&arr_name),
-                                ))
+                                Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
                             } else {
                                 Ok(RuntimeValue::Array(Vec::new()))
                             }
@@ -958,12 +1003,8 @@ impl Engine {
                     // `scalar(container, key_or_index)` → index into container
                     match &args[0] {
                         RuntimeValue::Array(arr) => {
-                            let idx =
-                                args[1].as_number().unwrap_or(0.0) as usize;
-                            Ok(arr
-                                .get(idx)
-                                .cloned()
-                                .unwrap_or(RuntimeValue::Undef))
+                            let idx = args[1].as_number().unwrap_or(0.0) as usize;
+                            Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
                         }
                         _ => {
                             let key = args[1].to_str();
@@ -988,8 +1029,7 @@ impl Engine {
             }
             // ── Scalar/string ──
             "concat" | "cat" => {
-                let result: String =
-                    args.iter().map(|a| a.to_str()).collect();
+                let result: String = args.iter().map(|a| a.to_str()).collect();
                 Ok(RuntimeValue::Scalar(result))
             }
             "coalesce" => {
@@ -1037,10 +1077,7 @@ impl Engine {
                 if let Some(arg) = args.first() {
                     let idx = arg.as_number().unwrap_or(0.0) as usize;
                     Ok(RuntimeValue::Scalar(
-                        ctx.entry_groups
-                            .get(idx)
-                            .cloned()
-                            .unwrap_or_default(),
+                        ctx.entry_groups.get(idx).cloned().unwrap_or_default(),
                     ))
                 } else {
                     Ok(RuntimeValue::Undef)
@@ -1076,10 +1113,7 @@ impl Engine {
                 ctx.match_groups.first().cloned().unwrap_or_default(),
             )),
             "exit_now" => {
-                let status = args
-                    .first()
-                    .and_then(|a| a.as_number())
-                    .unwrap_or(1.0) as i32;
+                let status = args.first().and_then(|a| a.as_number()).unwrap_or(1.0) as i32;
                 ctx.exit_status = Some(status);
                 Err(format!("exit_now({status})"))
             }
@@ -1102,7 +1136,9 @@ impl Engine {
                     let start = args[1].as_number().unwrap_or(0.0) as usize;
                     Ok(RuntimeValue::Scalar(char_substr_from(&s, start)))
                 } else {
-                    Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str()).unwrap_or_default()))
+                    Ok(RuntimeValue::Scalar(
+                        args.first().map(|a| a.to_str()).unwrap_or_default(),
+                    ))
                 }
             }
             "join_values" => {
@@ -1123,7 +1159,9 @@ impl Engine {
                     let s = args[0].to_str();
                     let delim = args[1].to_str();
                     Ok(RuntimeValue::Array(
-                        s.split(&delim).map(|p| RuntimeValue::Scalar(p.to_string())).collect(),
+                        s.split(&delim)
+                            .map(|p| RuntimeValue::Scalar(p.to_string()))
+                            .collect(),
                     ))
                 } else {
                     Ok(RuntimeValue::Array(vec![]))
@@ -1133,11 +1171,17 @@ impl Engine {
                 if let Some(arr) = args.first() {
                     match arr {
                         RuntimeValue::Array(items) => {
-                            let result: Vec<RuntimeValue> = items.iter().map(|v| {
-                                RuntimeValue::Array(
-                                    v.to_str().split_whitespace().map(|p| RuntimeValue::Scalar(p.to_string())).collect()
-                                )
-                            }).collect();
+                            let result: Vec<RuntimeValue> = items
+                                .iter()
+                                .map(|v| {
+                                    RuntimeValue::Array(
+                                        v.to_str()
+                                            .split_whitespace()
+                                            .map(|p| RuntimeValue::Scalar(p.to_string()))
+                                            .collect(),
+                                    )
+                                })
+                                .collect();
                             Ok(RuntimeValue::Array(result))
                         }
                         _ => Ok(RuntimeValue::Array(vec![])),
@@ -1148,16 +1192,19 @@ impl Engine {
             }
             "trim_each" | "lowercase_each" | "uppercase_each" => {
                 if let Some(RuntimeValue::Array(items)) = args.first() {
-                    let transformed: Vec<RuntimeValue> = items.iter().map(|v| {
-                        let s = v.to_str();
-                        let s = match name {
-                            "trim_each" => s.trim().to_string(),
-                            "lowercase_each" => s.to_lowercase(),
-                            "uppercase_each" => s.to_uppercase(),
-                            _ => s,
-                        };
-                        RuntimeValue::Scalar(s)
-                    }).collect();
+                    let transformed: Vec<RuntimeValue> = items
+                        .iter()
+                        .map(|v| {
+                            let s = v.to_str();
+                            let s = match name {
+                                "trim_each" => s.trim().to_string(),
+                                "lowercase_each" => s.to_lowercase(),
+                                "uppercase_each" => s.to_uppercase(),
+                                _ => s,
+                            };
+                            RuntimeValue::Scalar(s)
+                        })
+                        .collect();
                     Ok(RuntimeValue::Array(transformed))
                 } else {
                     Ok(RuntimeValue::Array(vec![]))
@@ -1178,10 +1225,17 @@ impl Engine {
                     let re = rgx_core::Regex::compile(&pattern);
                     match re {
                         Ok(re) => Ok(RuntimeValue::Array(
-                            items.iter().filter(|v| re.is_match(&v.to_str())).cloned().collect(),
+                            items
+                                .iter()
+                                .filter(|v| re.is_match(&v.to_str()))
+                                .cloned()
+                                .collect(),
                         )),
                         Err(e) => {
-                            eprintln!("warning: filter_match: invalid regex '/{}/': {} — returning empty", pattern, e);
+                            eprintln!(
+                                "warning: filter_match: invalid regex '/{}/': {} — returning empty",
+                                pattern, e
+                            );
                             Ok(RuntimeValue::Array(vec![]))
                         }
                     }
@@ -1192,9 +1246,11 @@ impl Engine {
             "uniq" => {
                 if let Some(RuntimeValue::Array(items)) = args.first() {
                     let mut seen = std::collections::HashSet::new();
-                    let uniq: Vec<RuntimeValue> = items.iter().filter(|v| {
-                        seen.insert(v.to_str())
-                    }).cloned().collect();
+                    let uniq: Vec<RuntimeValue> = items
+                        .iter()
+                        .filter(|v| seen.insert(v.to_str()))
+                        .cloned()
+                        .collect();
                     Ok(RuntimeValue::Array(uniq))
                 } else {
                     Ok(RuntimeValue::Array(vec![]))
@@ -1283,9 +1339,10 @@ impl Engine {
                 let line = ctx.input[..start].chars().filter(|&c| c == '\n').count() + 1;
                 Ok(RuntimeValue::Number(line as f64))
             }
-            "capture_slice_pos" => Ok(RuntimeValue::Number(
-                byte_to_char_offset(&ctx.input, ctx.capture_start.unwrap_or(0)) as f64,
-            )),
+            "capture_slice_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
+                &ctx.input,
+                ctx.capture_start.unwrap_or(0),
+            ) as f64)),
             // ── RUST-PARITY.5.5.4: anonymous capture-slice family ──
             // These read the anonymous capture start `ctx.capture_start` (Perl
             // `$IPOS`, set by `start_capture_slice()`), not a named mark — the
@@ -1405,7 +1462,9 @@ impl Engine {
             "mark_pos" => {
                 let name = args.first().map(|a| a.to_str()).unwrap_or_default();
                 let byte = ctx.marks.get(&name).copied().unwrap_or(0);
-                Ok(RuntimeValue::Number(byte_to_char_offset(&ctx.input, byte) as f64))
+                Ok(RuntimeValue::Number(
+                    byte_to_char_offset(&ctx.input, byte) as f64
+                ))
             }
             "mark_exists" => {
                 let name = args.first().map(|a| a.to_str()).unwrap_or_default();
@@ -1625,14 +1684,19 @@ impl Engine {
                 Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
             }
             "entry_len" => Ok(RuntimeValue::Number(
-                ctx.entry_groups.first().map(|s| s.chars().count()).unwrap_or(0) as f64,
+                ctx.entry_groups
+                    .first()
+                    .map(|s| s.chars().count())
+                    .unwrap_or(0) as f64,
             )),
-            "entry_start_pos" => Ok(RuntimeValue::Number(
-                byte_to_char_offset(&ctx.input, ctx.entry_start_byte) as f64,
-            )),
-            "entry_end_pos" => Ok(RuntimeValue::Number(
-                byte_to_char_offset(&ctx.input, ctx.entry_end_byte) as f64,
-            )),
+            "entry_start_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
+                &ctx.input,
+                ctx.entry_start_byte,
+            ) as f64)),
+            "entry_end_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
+                &ctx.input,
+                ctx.entry_end_byte,
+            ) as f64)),
             "match_line" => {
                 let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
                 let line = ctx.input[..pos].chars().filter(|&c| c == '\n').count() + 1;
@@ -1644,27 +1708,35 @@ impl Engine {
                 Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
             }
             "match_len" => Ok(RuntimeValue::Number(
-                ctx.match_groups.first().map(|s| s.chars().count()).unwrap_or(0) as f64,
+                ctx.match_groups
+                    .first()
+                    .map(|s| s.chars().count())
+                    .unwrap_or(0) as f64,
             )),
-            "match_start_pos" => Ok(RuntimeValue::Number(
-                byte_to_char_offset(&ctx.input, ctx.match_start_byte) as f64,
-            )),
-            "match_end_pos" => Ok(RuntimeValue::Number(
-                byte_to_char_offset(&ctx.input, ctx.match_end_byte) as f64,
-            )),
+            "match_start_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
+                &ctx.input,
+                ctx.match_start_byte,
+            ) as f64)),
+            "match_end_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
+                &ctx.input,
+                ctx.match_end_byte,
+            ) as f64)),
             "match_group" => {
                 if let Some(arg) = args.first() {
                     let idx = arg.as_number().unwrap_or(0.0) as usize;
-                    Ok(RuntimeValue::Scalar(ctx.match_groups.get(idx).cloned().unwrap_or_default()))
+                    Ok(RuntimeValue::Scalar(
+                        ctx.match_groups.get(idx).cloned().unwrap_or_default(),
+                    ))
                 } else {
                     Ok(RuntimeValue::Undef)
                 }
             }
-            "match_groups" => {
-                Ok(RuntimeValue::Array(
-                    ctx.match_groups.iter().map(|g| RuntimeValue::Scalar(g.clone())).collect(),
-                ))
-            }
+            "match_groups" => Ok(RuntimeValue::Array(
+                ctx.match_groups
+                    .iter()
+                    .map(|g| RuntimeValue::Scalar(g.clone()))
+                    .collect(),
+            )),
             // Named-capture readers for the LOCAL match — the immediate regex
             // match inside this code block, which can diverge from the entry match
             // in nested/dispatched contexts (Helper Contract Catalog §8). They read
@@ -1693,9 +1765,21 @@ impl Engine {
                     Ok(RuntimeValue::Number(0.0))
                 }
             }
-            "trim" => Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str().trim().to_string()).unwrap_or_default())),
-            "lowercase" => Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str().to_lowercase()).unwrap_or_default())),
-            "uppercase" => Ok(RuntimeValue::Scalar(args.first().map(|a| a.to_str().to_uppercase()).unwrap_or_default())),
+            "trim" => Ok(RuntimeValue::Scalar(
+                args.first()
+                    .map(|a| a.to_str().trim().to_string())
+                    .unwrap_or_default(),
+            )),
+            "lowercase" => Ok(RuntimeValue::Scalar(
+                args.first()
+                    .map(|a| a.to_str().to_lowercase())
+                    .unwrap_or_default(),
+            )),
+            "uppercase" => Ok(RuntimeValue::Scalar(
+                args.first()
+                    .map(|a| a.to_str().to_uppercase())
+                    .unwrap_or_default(),
+            )),
             "replace_substr" => {
                 if args.len() >= 3 {
                     let s = args[0].to_str();
@@ -1710,7 +1794,9 @@ impl Engine {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let prefix = args[1].to_str();
-                    Ok(RuntimeValue::Scalar(s.strip_prefix(&prefix).unwrap_or(&s).to_string()))
+                    Ok(RuntimeValue::Scalar(
+                        s.strip_prefix(&prefix).unwrap_or(&s).to_string(),
+                    ))
                 } else {
                     Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
                 }
@@ -1719,7 +1805,9 @@ impl Engine {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let suffix = args[1].to_str();
-                    Ok(RuntimeValue::Scalar(s.strip_suffix(&suffix).unwrap_or(&s).to_string()))
+                    Ok(RuntimeValue::Scalar(
+                        s.strip_suffix(&suffix).unwrap_or(&s).to_string(),
+                    ))
                 } else {
                     Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
                 }
@@ -1758,7 +1846,10 @@ impl Engine {
                     match rgx_core::Regex::compile(&pat) {
                         Ok(re) => Ok(RuntimeValue::Bool(re.is_match(&s))),
                         Err(e) => {
-                            eprintln!("warning: matches: invalid regex '/{}/': {} — returning false", pat, e);
+                            eprintln!(
+                                "warning: matches: invalid regex '/{}/': {} — returning false",
+                                pat, e
+                            );
                             Ok(RuntimeValue::Bool(false))
                         }
                     }
@@ -1787,7 +1878,9 @@ impl Engine {
                                 "num_sub" => a - b,
                                 "num_mul" => a * b,
                                 "num_div" if b != 0.0 => a / b,
-                                "num_mod" if b != 0.0 && a.fract() == 0.0 && b.fract() == 0.0 => (a as i64 % b as i64) as f64,
+                                "num_mod" if b != 0.0 && a.fract() == 0.0 && b.fract() == 0.0 => {
+                                    (a as i64 % b as i64) as f64
+                                }
                                 _ => return Ok(RuntimeValue::Undef),
                             };
                             Ok(RuntimeValue::Number(result))
@@ -1799,24 +1892,50 @@ impl Engine {
                 }
             }
             "num_abs" => Ok(RuntimeValue::Number(
-                args.first().and_then(|a| a.as_number()).map(|n| n.abs()).unwrap_or(0.0),
+                args.first()
+                    .and_then(|a| a.as_number())
+                    .map(|n| n.abs())
+                    .unwrap_or(0.0),
             )),
             "num_floor" => Ok(RuntimeValue::Number(
-                args.first().and_then(|a| a.as_number()).map(|n| n.floor()).unwrap_or(0.0),
+                args.first()
+                    .and_then(|a| a.as_number())
+                    .map(|n| n.floor())
+                    .unwrap_or(0.0),
             )),
             "num_ceil" => Ok(RuntimeValue::Number(
-                args.first().and_then(|a| a.as_number()).map(|n| n.ceil()).unwrap_or(0.0),
+                args.first()
+                    .and_then(|a| a.as_number())
+                    .map(|n| n.ceil())
+                    .unwrap_or(0.0),
             )),
             "num_round" => Ok(RuntimeValue::Number(
-                args.first().and_then(|a| a.as_number()).map(|n| n.round()).unwrap_or(0.0),
+                args.first()
+                    .and_then(|a| a.as_number())
+                    .map(|n| n.round())
+                    .unwrap_or(0.0),
             )),
             "num_min" => {
-                let min = args.iter().filter_map(|a| a.as_number()).fold(f64::INFINITY, |a, b| a.min(b));
-                if min.is_finite() { Ok(RuntimeValue::Number(min)) } else { Ok(RuntimeValue::Undef) }
+                let min = args
+                    .iter()
+                    .filter_map(|a| a.as_number())
+                    .fold(f64::INFINITY, |a, b| a.min(b));
+                if min.is_finite() {
+                    Ok(RuntimeValue::Number(min))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
             }
             "num_max" => {
-                let max = args.iter().filter_map(|a| a.as_number()).fold(f64::NEG_INFINITY, |a, b| a.max(b));
-                if max.is_finite() { Ok(RuntimeValue::Number(max)) } else { Ok(RuntimeValue::Undef) }
+                let max = args
+                    .iter()
+                    .filter_map(|a| a.as_number())
+                    .fold(f64::NEG_INFINITY, |a, b| a.max(b));
+                if max.is_finite() {
+                    Ok(RuntimeValue::Number(max))
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
             }
             "num_clamp" => {
                 if args.len() >= 3 {
@@ -1836,13 +1955,19 @@ impl Engine {
             "num_sum" | "num_avg" | "num_median" | "num_range" => {
                 if let Some(RuntimeValue::Array(items)) = args.first() {
                     let nums: Vec<f64> = items.iter().filter_map(|v| v.as_number()).collect();
-                    if nums.is_empty() { return Ok(RuntimeValue::Undef); }
+                    if nums.is_empty() {
+                        return Ok(RuntimeValue::Undef);
+                    }
                     match name {
                         "num_sum" => Ok(RuntimeValue::Number(nums.iter().sum())),
-                        "num_avg" => Ok(RuntimeValue::Number(nums.iter().sum::<f64>() / nums.len() as f64)),
+                        "num_avg" => Ok(RuntimeValue::Number(
+                            nums.iter().sum::<f64>() / nums.len() as f64,
+                        )),
                         "num_median" => {
                             let mut sorted = nums.clone();
-                            sorted.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+                            sorted.sort_by(|a, b| {
+                                a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal)
+                            });
                             let mid = sorted.len() / 2;
                             if sorted.len() % 2 == 0 {
                                 Ok(RuntimeValue::Number((sorted[mid - 1] + sorted[mid]) / 2.0))
@@ -1915,7 +2040,10 @@ impl Engine {
             "slice" => {
                 if let Some(RuntimeValue::Array(items)) = args.first() {
                     let start = args.get(1).and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
-                    let n = args.get(2).and_then(|a| a.as_number()).unwrap_or(items.len() as f64) as usize;
+                    let n = args
+                        .get(2)
+                        .and_then(|a| a.as_number())
+                        .unwrap_or(items.len() as f64) as usize;
                     let end = (start + n).min(items.len());
                     Ok(RuntimeValue::Array(items[start..end].to_vec()))
                 } else {
@@ -1925,7 +2053,9 @@ impl Engine {
             "contains" => {
                 if let Some(RuntimeValue::Array(items)) = args.first() {
                     let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
-                    Ok(RuntimeValue::Bool(items.iter().any(|v| v.to_str() == needle)))
+                    Ok(RuntimeValue::Bool(
+                        items.iter().any(|v| v.to_str() == needle),
+                    ))
                 } else {
                     Ok(RuntimeValue::Bool(false))
                 }
@@ -1949,13 +2079,19 @@ impl Engine {
                 let val = args.first().cloned().unwrap_or(RuntimeValue::Undef);
                 Ok(RuntimeValue::Bool(val.is_nonempty()))
             }
-            "is_defined" => Ok(RuntimeValue::Bool(args.first().is_some_and(|a| a.is_defined()))),
-            "is_undefined" => Ok(RuntimeValue::Bool(args.first().is_none_or(|a| !a.is_defined()))),
+            "is_defined" => Ok(RuntimeValue::Bool(
+                args.first().is_some_and(|a| a.is_defined()),
+            )),
+            "is_undefined" => Ok(RuntimeValue::Bool(
+                args.first().is_none_or(|a| !a.is_defined()),
+            )),
             "flat_array" => Ok(RuntimeValue::Array(
-                args.iter().flat_map(|a| match a {
-                    RuntimeValue::Array(items) => items.clone(),
-                    other => vec![other.clone()],
-                }).collect(),
+                args.iter()
+                    .flat_map(|a| match a {
+                        RuntimeValue::Array(items) => items.clone(),
+                        other => vec![other.clone()],
+                    })
+                    .collect(),
             )),
             // RUST-PARITY.5.5.2 — generic list-context splice (Perl `flat(container)`,
             // MethodLowering.pm:199): an array container splices its elements, a hash
@@ -1975,10 +2111,12 @@ impl Engine {
                 }
             }
             "concat_arrays" => Ok(RuntimeValue::Array(
-                args.iter().flat_map(|a| match a {
-                    RuntimeValue::Array(items) => items.clone(),
-                    other => vec![other.clone()],
-                }).collect(),
+                args.iter()
+                    .flat_map(|a| match a {
+                        RuntimeValue::Array(items) => items.clone(),
+                        other => vec![other.clone()],
+                    })
+                    .collect(),
             )),
             // ── Hash helpers ──
             "hash" | "h" => {
@@ -2064,9 +2202,16 @@ impl Engine {
                     if let RuntimeValue::Hash(entries) = args[0].clone() {
                         let old_key = args[1].to_str();
                         let new_key = args[2].to_str();
-                        let renamed: Vec<_> = entries.into_iter().map(|(k, v)| {
-                            if k == old_key { (new_key.clone(), v) } else { (k, v) }
-                        }).collect();
+                        let renamed: Vec<_> = entries
+                            .into_iter()
+                            .map(|(k, v)| {
+                                if k == old_key {
+                                    (new_key.clone(), v)
+                                } else {
+                                    (k, v)
+                                }
+                            })
+                            .collect();
                         Ok(RuntimeValue::Hash(renamed))
                     } else {
                         Ok(args[0].clone())
@@ -2077,9 +2222,13 @@ impl Engine {
             }
             "drop_keys" => {
                 if let Some(RuntimeValue::Hash(entries)) = args.first().cloned() {
-                    let keys_to_drop: std::collections::HashSet<String> = args[1..].iter().map(|a| a.to_str()).collect();
+                    let keys_to_drop: std::collections::HashSet<String> =
+                        args[1..].iter().map(|a| a.to_str()).collect();
                     Ok(RuntimeValue::Hash(
-                        entries.into_iter().filter(|(k, _)| !keys_to_drop.contains(k)).collect(),
+                        entries
+                            .into_iter()
+                            .filter(|(k, _)| !keys_to_drop.contains(k))
+                            .collect(),
                     ))
                 } else {
                     Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
@@ -2087,9 +2236,13 @@ impl Engine {
             }
             "pick_keys" => {
                 if let Some(RuntimeValue::Hash(entries)) = args.first().cloned() {
-                    let keys_to_keep: std::collections::HashSet<String> = args[1..].iter().map(|a| a.to_str()).collect();
+                    let keys_to_keep: std::collections::HashSet<String> =
+                        args[1..].iter().map(|a| a.to_str()).collect();
                     Ok(RuntimeValue::Hash(
-                        entries.into_iter().filter(|(k, _)| keys_to_keep.contains(k)).collect(),
+                        entries
+                            .into_iter()
+                            .filter(|(k, _)| keys_to_keep.contains(k))
+                            .collect(),
                     ))
                 } else {
                     Ok(RuntimeValue::Undef)
@@ -2097,7 +2250,10 @@ impl Engine {
             }
             "sorted_keys" => {
                 if let Some(RuntimeValue::Hash(entries)) = args.first() {
-                    let mut keys: Vec<RuntimeValue> = entries.iter().map(|(k, _)| RuntimeValue::Scalar(k.clone())).collect();
+                    let mut keys: Vec<RuntimeValue> = entries
+                        .iter()
+                        .map(|(k, _)| RuntimeValue::Scalar(k.clone()))
+                        .collect();
                     keys.sort_by(|a, b| a.to_str().cmp(&b.to_str()));
                     Ok(RuntimeValue::Array(keys))
                 } else {
@@ -2108,7 +2264,9 @@ impl Engine {
                 if let Some(RuntimeValue::Hash(entries)) = args.first() {
                     let mut items: Vec<(String, RuntimeValue)> = entries.clone();
                     items.sort_by(|(ak, _), (bk, _)| ak.cmp(bk));
-                    Ok(RuntimeValue::Array(items.into_iter().map(|(_, v)| v).collect()))
+                    Ok(RuntimeValue::Array(
+                        items.into_iter().map(|(_, v)| v).collect(),
+                    ))
                 } else {
                     Ok(RuntimeValue::Array(vec![]))
                 }
@@ -2133,9 +2291,11 @@ impl Engine {
                     let path = args[1].to_str();
                     // Walk: container{path} → scalar
                     match &args[0] {
-                        RuntimeValue::Hash(entries) => {
-                            Ok(entries.iter().find(|(k, _)| k == &path).map(|(_, v)| v.clone()).unwrap_or(RuntimeValue::Undef))
-                        }
+                        RuntimeValue::Hash(entries) => Ok(entries
+                            .iter()
+                            .find(|(k, _)| k == &path)
+                            .map(|(_, v)| v.clone())
+                            .unwrap_or(RuntimeValue::Undef)),
                         _ => Ok(RuntimeValue::Undef),
                     }
                 } else {
@@ -2187,10 +2347,15 @@ impl Engine {
                 let mut i = 2;
                 while i < raw_args.len() {
                     if let linkedspec_core::expr::Arg::Positional(
-                        linkedspec_core::expr::Expr::Call { name: branch_name, args: branch_args }
-                    ) = &raw_args[i] {
+                        linkedspec_core::expr::Expr::Call {
+                            name: branch_name,
+                            args: branch_args,
+                        },
+                    ) = &raw_args[i]
+                    {
                         if branch_name == "elseif" && !branch_args.is_empty() {
-                            let elseif_cond = self.eval_expr(branch_args[0].value(), ctx, rule_label)?;
+                            let elseif_cond =
+                                self.eval_expr(branch_args[0].value(), ctx, rule_label)?;
                             if elseif_cond.as_bool() {
                                 if branch_args.len() >= 2 {
                                     return self.eval_expr(branch_args[1].value(), ctx, rule_label);
@@ -2225,9 +2390,7 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            "endif" => {
-                Ok(RuntimeValue::Undef)
-            }
+            "endif" => Ok(RuntimeValue::Undef),
             // ── Conditional flow: switch/case/default/endswitch ──
             "switch" => {
                 if raw_args.is_empty() {
@@ -2238,10 +2401,15 @@ impl Engine {
                 let mut i = 1;
                 while i < raw_args.len() {
                     if let linkedspec_core::expr::Arg::Positional(
-                        linkedspec_core::expr::Expr::Call { name: branch_name, args: branch_args }
-                    ) = &raw_args[i] {
+                        linkedspec_core::expr::Expr::Call {
+                            name: branch_name,
+                            args: branch_args,
+                        },
+                    ) = &raw_args[i]
+                    {
                         if branch_name == "case" && !branch_args.is_empty() {
-                            let case_val = self.eval_expr(branch_args[0].value(), ctx, rule_label)?;
+                            let case_val =
+                                self.eval_expr(branch_args[0].value(), ctx, rule_label)?;
                             if case_val.to_str() == switch_str {
                                 if branch_args.len() >= 2 {
                                     return self.eval_expr(branch_args[1].value(), ctx, rule_label);
@@ -2272,9 +2440,7 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            "endswitch" | "endcase" => {
-                Ok(RuntimeValue::Undef)
-            }
+            "endswitch" | "endcase" => Ok(RuntimeValue::Undef),
             _ => {
                 eprintln!(
                     "warning: unknown helper '{}' in rule '{}' — returning undef",
@@ -2429,7 +2595,12 @@ Child::
         // "hello hello" → should match only once due to max=1
         let result = engine.execute("hello hello").unwrap();
         let arr = result.as_array().unwrap();
-        assert_eq!(arr.len(), 1, "expected 1 match due to max bound, got {:?}", arr);
+        assert_eq!(
+            arr.len(),
+            1,
+            "expected 1 match due to max bound, got {:?}",
+            arr
+        );
     }
 
     #[test]
@@ -2472,7 +2643,12 @@ ChildB:
         let outer: &Vec<Value> = result.as_array().unwrap();
         assert!(!outer.is_empty());
         let inner: &Vec<Value> = outer[0].as_array().unwrap();
-        assert_eq!(inner.len(), 2, "expected 2 children in log, got {:?}", inner);
+        assert_eq!(
+            inner.len(),
+            2,
+            "expected 2 children in log, got {:?}",
+            inner
+        );
         assert_eq!(inner[0].as_str().unwrap(), "A");
         assert_eq!(inner[1].as_str().unwrap(), "B");
     }
@@ -2690,7 +2866,11 @@ ChildB:
         let engine = Engine::new(compiled);
         let result = engine.execute("hello world").unwrap();
         let arr = result.as_array().unwrap();
-        assert!(arr[0].as_str().unwrap().contains("hello"), "got {:?}", arr[0]);
+        assert!(
+            arr[0].as_str().unwrap().contains("hello"),
+            "got {:?}",
+            arr[0]
+        );
     }
 
     #[test]
@@ -2902,7 +3082,11 @@ ChildB:
         let result = engine.execute("hello").unwrap();
         let arr = result.as_array().unwrap();
         // next() returns undef
-        assert!(arr[0].is_null(), "next() should return null, got {:?}", arr[0]);
+        assert!(
+            arr[0].is_null(),
+            "next() should return null, got {:?}",
+            arr[0]
+        );
     }
 
     #[test]
@@ -3175,7 +3359,11 @@ ChildB:
         let compiled = compile(&spec).unwrap();
         let engine = Engine::new(compiled);
         let result = engine.execute("hello");
-        assert!(result.is_ok(), "backtrack restore should succeed, got {:?}", result);
+        assert!(
+            result.is_ok(),
+            "backtrack restore should succeed, got {:?}",
+            result
+        );
     }
 
     #[test]
@@ -3227,12 +3415,7 @@ ChildB:
         validate(&spec).unwrap();
         let compiled = compile(&spec).unwrap();
         let engine = Engine::new(compiled);
-        engine
-            .execute(input)
-            .unwrap()
-            .as_array()
-            .unwrap()
-            .clone()
+        engine.execute(input).unwrap().as_array().unwrap().clone()
     }
 
     #[test]
@@ -3402,7 +3585,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(entry_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi").last().unwrap().as_bool().unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -3459,7 +3648,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi").last().unwrap().as_bool().unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -3514,8 +3709,14 @@ ChildB:
  E { return(scalar(input_end_line())) }
 "#;
         assert_eq!(run_5_5_2(g, "abc").last().unwrap().as_f64().unwrap(), 1.0); // no newline
-        assert_eq!(run_5_5_2(g, "a\nb\nc").last().unwrap().as_f64().unwrap(), 3.0); // 2 newlines
-        assert_eq!(run_5_5_2(g, "a\nb\n").last().unwrap().as_f64().unwrap(), 3.0); // trailing newline
+        assert_eq!(
+            run_5_5_2(g, "a\nb\nc").last().unwrap().as_f64().unwrap(),
+            3.0
+        ); // 2 newlines
+        assert_eq!(
+            run_5_5_2(g, "a\nb\n").last().unwrap().as_f64().unwrap(),
+            3.0
+        ); // trailing newline
     }
 
     #[test]
@@ -3526,7 +3727,10 @@ ChildB:
  E { return(scalar(input_end_col())) }
 "#;
         assert_eq!(run_5_5_2(g, "abc").last().unwrap().as_f64().unwrap(), 4.0); // len 3, no nl → 4
-        assert_eq!(run_5_5_2(g, "ab\ncde").last().unwrap().as_f64().unwrap(), 4.0); // "cde" past nl → 4
+        assert_eq!(
+            run_5_5_2(g, "ab\ncde").last().unwrap().as_f64().unwrap(),
+            4.0
+        ); // "cde" past nl → 4
         assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
         // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
         assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);

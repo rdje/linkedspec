@@ -22,7 +22,7 @@ use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -41,14 +41,16 @@ fn run_entry(dir: &Path) -> Result<(), String> {
     };
     let source = read("input.spec")?;
     let input = read("input.txt")?;
-    let expected: Value =
-        serde_json::from_str(&read("expected.json")?).map_err(|e| format!("malformed expected.json: {e}"))?;
+    let expected: Value = serde_json::from_str(&read("expected.json")?)
+        .map_err(|e| format!("malformed expected.json: {e}"))?;
 
     let spec = parse_spec(&source).map_err(|e| format!("parse failed: {e}"))?;
     validate(&spec).map_err(|e| format!("validate failed: {e}"))?;
     let compiled = compile(&spec).map_err(|e| format!("compile failed: {e}"))?;
     let engine = Engine::new(compiled);
-    let actual = engine.execute(&input).map_err(|e| format!("execute failed: {e}"))?;
+    let actual = engine
+        .execute(&input)
+        .map_err(|e| format!("execute failed: {e}"))?;
 
     // Perl↔Rust output-shape rule: the Rust engine wraps the reference value one
     // level (the accumulator), so the expected engine output is `[ <reference> ]`.
@@ -106,7 +108,10 @@ fn oracle_corpus_matches_perl_reference() {
     // those remain deferred from the committed corpus (which stays a controlled
     // green proof set). .7.2/.7.3 add structurally simple shipped specs; .7.4 adds
     // the full drift guard. See docs/knowledge/rust-perl-output-oracle.md.
-    assert!(passed >= 1, "expected at least one green proof fixture, found {passed}");
+    assert!(
+        passed >= 1,
+        "expected at least one green proof fixture, found {passed}"
+    );
     assert!(
         failures.is_empty(),
         "oracle corpus has {} divergence(s):\n{}",

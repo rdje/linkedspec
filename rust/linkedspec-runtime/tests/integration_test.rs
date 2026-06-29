@@ -196,8 +196,12 @@ fn corpus_rep_with_bounds() {
     let result = engine.execute("one two three four five").unwrap();
     let outer: &Vec<Value> = result.as_array().unwrap();
     let inner: &Vec<Value> = outer[0].as_array().unwrap();
-    assert!(inner.len() >= 1 && inner.len() <= 3,
-        "expected 1-3 matches, got {}: {:?}", inner.len(), inner);
+    assert!(
+        inner.len() >= 1 && inner.len() <= 3,
+        "expected 1-3 matches, got {}: {:?}",
+        inner.len(),
+        inner
+    );
 }
 
 // ── RUST-EDGE-SEMANTICS.3 regression tests ──
@@ -273,9 +277,24 @@ ChildC:
     assert_eq!(mixed.acode_dispatch[2].regex_idx, 2);
 
     let engine = Engine::new(compiled);
-    assert_eq!(engine.execute("Hi").unwrap().as_array().unwrap()[0].as_str().unwrap(), "child_a");
-    assert_eq!(engine.execute("Bye").unwrap().as_array().unwrap()[0].as_str().unwrap(), "child_b");
-    assert_eq!(engine.execute("extra").unwrap().as_array().unwrap()[0].as_str().unwrap(), "child_c");
+    assert_eq!(
+        engine.execute("Hi").unwrap().as_array().unwrap()[0]
+            .as_str()
+            .unwrap(),
+        "child_a"
+    );
+    assert_eq!(
+        engine.execute("Bye").unwrap().as_array().unwrap()[0]
+            .as_str()
+            .unwrap(),
+        "child_b"
+    );
+    assert_eq!(
+        engine.execute("extra").unwrap().as_array().unwrap()[0]
+            .as_str()
+            .unwrap(),
+        "child_c"
+    );
 }
 
 // (c) Self-recursive rule with -> same_rule[N].
@@ -328,8 +347,10 @@ ChildB:
     assert_eq!(parser.acode_dispatch.len(), 2);
     assert!(parser.acode_dispatch[0].has_parent_regex);
     assert!(parser.acode_dispatch[1].has_parent_regex);
-    assert_eq!(parser.acode_dispatch[0].regex_idx,
-               parser.acode_dispatch[1].regex_idx);
+    assert_eq!(
+        parser.acode_dispatch[0].regex_idx,
+        parser.acode_dispatch[1].regex_idx
+    );
     assert_eq!(parser.acode_dispatch[0].regex_idx, 0);
 
     let engine = Engine::new(compiled);
@@ -361,7 +382,10 @@ Child:
 
     let engine = Engine::new(compiled);
     let result = engine.execute("second_pattern").unwrap();
-    assert_eq!(result.as_array().unwrap()[0].as_str().unwrap(), "second_pattern");
+    assert_eq!(
+        result.as_array().unwrap()[0].as_str().unwrap(),
+        "second_pattern"
+    );
 }
 
 // (f) Lifecycle with edge-only dispatch.
@@ -511,7 +535,11 @@ Item:
     let result = engine.execute("a b c").unwrap();
     let acc: &Vec<Value> = result.as_array().unwrap();
     let out: &Vec<Value> = acc.last().unwrap().as_array().unwrap();
-    assert_eq!(out.len(), 3, "one child return collected per REP iteration: {out:?}");
+    assert_eq!(
+        out.len(),
+        3,
+        "one child return collected per REP iteration: {out:?}"
+    );
     assert!(
         out.iter().all(|v| v.as_str() == Some("ITEM")),
         "every REP iteration's retv must be the child's return, got {out:?}"
@@ -800,7 +828,10 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
     let r1 = engine.execute("xhello").expect("run1");
     let r2 = engine.execute("xhello").expect("run2");
     assert_eq!(r1, serde_json::json!(["ok"]), "scalar first run");
-    assert_eq!(r1, r2, "scalar var is per-parse, not leaked across executes");
+    assert_eq!(
+        r1, r2,
+        "scalar var is per-parse, not leaked across executes"
+    );
 
     let array = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); push_value(array(items), \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(array).expect("parse");
@@ -827,7 +858,8 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
 #[test]
 fn terse_1_2_2_bare_scalar_arg_auto_exists() {
     // assign(v, ...) with a BARE target -- no scalar() wrapper, no declare.
-    let grammar = "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar =
+        "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["ok"]),
@@ -859,12 +891,21 @@ fn terse_1_2_2_bare_matches_wrapped_and_declare() {
     // The bare arg-position form produces the same value as the wrapped form and the
     // declare form (the Rust analogue of the Perl "byte-identical / single `my`"
     // locks): the wrapper/declare are optional in these positions.
-    let bare = "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let bare =
+        "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     let wrapped = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     let declared = "Top::\n /x/ -> Done { declare(scalar, v); assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     let b = build_and_run(bare, "xhello");
-    assert_eq!(b, build_and_run(wrapped, "xhello"), "scalar: bare arg == wrapped");
-    assert_eq!(b, build_and_run(declared, "xhello"), "scalar: bare arg == declare");
+    assert_eq!(
+        b,
+        build_and_run(wrapped, "xhello"),
+        "scalar: bare arg == wrapped"
+    );
+    assert_eq!(
+        b,
+        build_and_run(declared, "xhello"),
+        "scalar: bare arg == declare"
+    );
 
     let bare_a = "Top::\n /x/ -> Done { push_value(items, \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let wrapped_a = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
@@ -879,14 +920,18 @@ fn terse_1_2_2_bare_matches_wrapped_and_declare() {
 fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
     // Re-running the SAME engine yields the identical value -- a bare arg-position
     // working var is per-parse (fresh RuntimeContext per execute), never leaked.
-    let scalar = "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let scalar =
+        "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(scalar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
     let r1 = engine.execute("xhello").expect("run1");
     let r2 = engine.execute("xhello").expect("run2");
     assert_eq!(r1, serde_json::json!(["ok"]), "bare scalar first run");
-    assert_eq!(r1, r2, "bare scalar arg var is per-parse, not leaked across executes");
+    assert_eq!(
+        r1, r2,
+        "bare scalar arg var is per-parse, not leaked across executes"
+    );
 
     let array = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(array).expect("parse");
@@ -895,7 +940,10 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
     let r1 = engine.execute("xhello").expect("run1");
     let r2 = engine.execute("xhello").expect("run2");
     assert_eq!(r1, serde_json::json!([["a", "b"]]), "bare array first run");
-    assert_eq!(r1, r2, "bare array accumulator is per-parse, not leaked (would be 4 items if leaky)");
+    assert_eq!(
+        r1, r2,
+        "bare array accumulator is per-parse, not leaked (would be 4 items if leaky)"
+    );
 }
 
 // ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1:
@@ -935,8 +983,10 @@ fn terse_1_4_2_copy_hash_matches_hash_copy() {
         "copy(hash target) == hash_copy(hash target) on Rust"
     );
 
-    let value_terse = "Top::\n /x/ -> Done { return(copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
-    let value_canonical = "Top::\n /x/ -> Done { return(hash_copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
+    let value_terse =
+        "Top::\n /x/ -> Done { return(copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
+    let value_canonical =
+        "Top::\n /x/ -> Done { return(hash_copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(value_terse, "xhello"),
         serde_json::json!([{"k": "v"}]),
@@ -1078,7 +1128,11 @@ fn terse_1_3_4_3_hash_index_assignment_target_is_per_parse() {
     let engine = Engine::new(compile(&spec).expect("compile"));
     let r1 = engine.execute("xhello").expect("run1");
     let r2 = engine.execute("xhello").expect("run2");
-    assert_eq!(r1, serde_json::json!([{"stage": "v"}]), "hash-index assignment first run");
+    assert_eq!(
+        r1,
+        serde_json::json!([{"stage": "v"}]),
+        "hash-index assignment first run"
+    );
     assert_eq!(r1, r2, "hash-index assignment state is per parse");
 }
 
@@ -1092,4 +1146,29 @@ fn terse_1_4_2_set_target_is_per_parse_not_leaky() {
     let r2 = engine.execute("xhello").expect("run2");
     assert_eq!(r1, serde_json::json!(["ok"]), "set bare target first run");
     assert_eq!(r1, r2, "set alias uses assign's per-parse target semantics");
+}
+
+// ── SPEC-FORMAT-TERSE.1.5.2 — primitive literal parity:
+// quoted strings, numbers, true, false, and undef are explicit typed value
+// literals in return payloads, mutations, and flow conditions. Prefix
+// identifiers such as trueword remain identifiers, not literals.
+
+#[test]
+fn terse_1_5_2_primitive_literals_return_typed_values() {
+    let grammar = "Top::\n /x/ -> Done { return(array(true, false, \"s\", 42, 3.14, undef)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[true, false, "s", 42, 3.14, null]]),
+        "primitive literals preserve typed JSON values in return payloads"
+    );
+}
+
+#[test]
+fn terse_1_5_2_boolean_literals_work_in_mutations_and_flow() {
+    let grammar = "Top::\n /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; if(false); return(\"bad\"); else(); return(array(scalar(flag), array_copy(array(items)), hash_copy(hash(meta)))); endif() }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[true, [false, true], {"enabled": true}]]),
+        "boolean literals preserve typed values in mutation RHS positions and if(false) selects else"
+    );
 }

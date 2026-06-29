@@ -1,0 +1,54 @@
+---
+id: terse-primitive-literal-parity
+title: "SPEC-FORMAT-TERSE.1.5.2 — primitive literals are typed value expressions on Perl and Rust; true/false are JSON booleans, undef is null, numbers stay numeric, quoted strings stay strings, and exact literal matching keeps trueword/undefine as identifiers."
+answers:
+  - "how do true and false lower in terse .spec actions"
+  - "are true and false returned as strings or booleans"
+  - "which primitive literals are typed value expressions in terse actions"
+  - "do trueword and undefine count as primitive literals"
+  - "does push(items,false) append false or call a child rule"
+  - "does items += false work as an explicit append value"
+  - "can meta[true] = false use primitive literals as key and value"
+  - "why does Rust need statement-form if(false) gating"
+  - "what owns SPEC-FORMAT-TERSE.1.5.2 primitive literal parity"
+date: 2026-06-29
+status: confirmed
+tags: [dsl, literals, booleans, actionir, rust, parity, spec-format-terse, SPEC-FORMAT-TERSE]
+evidence: "SPEC-FORMAT-TERSE.1.5.2, 2026-06-29. Perl `ValueExpr::_lower_primitive_literal_expr` lowers exact string, numeric, `undef`, `true`, and `false` literals; `true`/`false` lower to `JSON::PP::true` / `JSON::PP::false`, not bareword strings. The helper is wired through return/value lowering, flow expressions, scalar/hash access keys, mutation RHS guards, scanner contracts, and legacy `push(...)` disambiguation, so `push(items,false)` is an explicit value append while `push(items,trueword)` keeps the old child-call interpretation. Rust already parsed BooleanLiteral/Undef/Number/String values; this slice added statement-form `if(cond); elseif(cond); else(); endif()` execution gating so `if(false)` skips the then branch instead of evaluating both statement returns. Locked by phase0 subtest `spec_format_terse_1_5_2_primitive_literal_parity`, Rust integration tests `terse_1_5_2_*`, and oracle corpus fixtures `terse_1_5_2_primitive_literals` + `terse_1_5_2_boolean_mutation_flow`."
+reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $s=qq{Top::\\n /x/ -> Done { return(array(true, false, \"s\", 42, 3.14, undef)) }\\n\\nDone::\\n /[a-z]+/\\n}; my $p=LinkedSpec::Get(\\$s); print JSON::PP->new->canonical(1)->allow_nonref(1)->encode($p->(\"xhello\")),\"\\n\"' && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_5_2"
+---
+
+# Primitive Literal Parity
+
+Primitive literals are exact value-expression tokens in the terse DSL:
+
+- quoted strings (`"..."`, `'...'`) stay strings;
+- integer and float literals stay numeric;
+- `undef` becomes the undefined/null value;
+- `true` and `false` become typed booleans, not strings.
+
+The matching is exact. Prefix identifiers such as `trueword` and `undefine` do not enter the literal path;
+they keep the existing identifier/legacy dispatch behavior.
+
+## Perl Reference
+
+The Perl reference lowers exact primitive literals through `LinkedSpec::ActionIR::ValueExpr` and wires that
+lowering into value positions used by returns, assignments, appends, hash-index keys and values, and flow
+conditions. `true` and `false` use `JSON::PP::true` and `JSON::PP::false` so the public JSON value shape is
+typed boolean. The scanner and legacy `push(...)` guards consult the same literal predicate so
+`push(items,false)` is an explicit append value, while `push(items,trueword)` remains the historical all-bare
+child-call form.
+
+## Rust Parity
+
+Rust already had typed `BooleanLiteral`, `NumberLiteral`, string, and `Undef` expression values. The parity
+gap this slice exposed was statement-form flow: `if(false); return("bad"); else(); return("good"); endif()`
+must gate statements, not execute both branches. The runtime now keeps a statement-form conditional stack for
+one-arg `if`/`elseif` and zero-arg `else`/`endif`; multi-arg `if(cond, then, else)` remains the existing lazy
+value helper.
+
+## Links
+
+- Tree: [[SPEC-FORMAT-TERSE]] leaf `.1.5.2`.
+- Related ground truth: [[terse-literals-calls-separators-access-ground-truth]].
+- Mutation boundary: [[terse-mutation-surface-ground-truth]].

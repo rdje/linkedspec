@@ -37,6 +37,16 @@ sub try_scan_contract_ir_events {
  return $handler->($code)
 }
 
+sub _is_primitive_literal_token {
+ my ($expr) = @_;
+ my $trimmed = _trim_action_ir_value($expr);
+ return 0 unless defined($trimmed) && length($trimmed);
+ return 1 if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return 1 if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
+ return 1 if $trimmed eq 'undef' || $trimmed eq 'true' || $trimmed eq 'false';
+ return 0
+}
+
 sub _scan_contract_print_foreach_iterable {
  my ($code) = @_;
  my @events;
@@ -86,7 +96,8 @@ while ($code =~ /\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"
   my $first_expr = _trim_action_ir_value($raw_args->[0]);
   my $second_expr = _trim_action_ir_value($raw_args->[1]);
   next if defined($first_expr) && defined($second_expr)
-       && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o;
+       && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
+       && !_is_primitive_literal_token($second_expr);
   $effective_args = $raw_args;
  }
  next unless $effective_args;
@@ -179,7 +190,7 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
  my ($target_expr, $value_expr) = ($1, _trim_action_ir_value($2));
  next unless defined($value_expr) && length($value_expr);
  # Channel 2 is still deferred: a bare RHS is not accepted as a working-var read.
- next if $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ next if $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !_is_primitive_literal_token($value_expr);
  push @events, {
   raw => $trimmed,
   args => {
@@ -256,8 +267,8 @@ sub _parse_hash_index_assignment_operator_statement {
  $key = _trim_action_ir_value($key);
  return undef unless defined($key) && length($key);
  return undef unless defined($value) && length($value);
- return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
- return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+ return undef if $key =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !_is_primitive_literal_token($key);
+ return undef if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o && !_is_primitive_literal_token($value);
  return {
   target => $target,
   key    => $key,

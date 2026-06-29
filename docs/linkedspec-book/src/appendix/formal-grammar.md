@@ -372,6 +372,19 @@ backend-neutral method-like helper DSL. This section catalogs the canonical
 families. For the full behavioral contract per helper, see the
 [Helper Contract Catalog](helper-contract-catalog.md).
 
+Primitive value literals are accepted anywhere an explicit value expression is
+accepted:
+
+```text
+"text" / 'text'   — string
+42 / -1 / 3.14    — number
+true / false      — typed boolean
+undef             — undefined/null
+```
+
+`true` and `false` are boolean values, not strings. Literal recognition is exact:
+`trueword`, `false_alarm`, and `undefine` are identifiers, not literals.
+
 ### 7.1 Declaration Helpers
 ```
 declare(scalar, name)      — declare a scalar working variable

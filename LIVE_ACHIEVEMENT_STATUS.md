@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.5.2 — primitive literal parity landed**
+  (PERL ACTIONIR + RUST RUNTIME FLOW + BOOK + PHASE0/RUST/ORACLE LOCKS). Primitive literals are now typed
+  value expressions across return payloads, assignments, appends, hash-index keys/values, and flow predicates:
+  quoted strings stay strings, numbers stay numeric, `undef` becomes null, and `true`/`false` become JSON
+  booleans. Perl lowers booleans through `JSON::PP`, with exact matching so `trueword`/`undefine` remain
+  identifiers; scanner/legacy disambiguation now treats `push(items,false)` as a value append while preserving
+  all-bare child-call behavior for non-literal identifiers. Rust gained statement-form `if/elseif/else/endif`
+  gating so `if(false)` skips the then branch; value-form `if(cond,then,else)` is unchanged. **Verification:**
+  phase0 PASS (`1..980`), oracle corpus regenerated with 18 fixtures, focused Rust `.1.5.2` tests PASS, Rust
+  corpus oracle PASS over 18 fixtures, mdBook/KM/memory/doctrine/local gates green. **Frontier:
+  `SPEC-FORMAT-TERSE.1.5.3`** (function-call spacing and mandatory-parentheses locks).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.5 — literal/nested-access/call/semicolon surface split before code**
   (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). PNT selected `.1.5` and ran KM +
   TOOLBOX/code-read first. Ground truth: Perl strings/numbers/`undef` already run, but `true`/`false` return

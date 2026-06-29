@@ -92,9 +92,15 @@ impl RuntimeContext {
 
     // ── Position ──
 
-    pub fn pos(&self) -> usize { self.pos }
-    pub fn set_pos(&mut self, pos: usize) { self.pos = pos; }
-    pub fn remaining(&self) -> &str { &self.input[self.pos..] }
+    pub fn pos(&self) -> usize {
+        self.pos
+    }
+    pub fn set_pos(&mut self, pos: usize) {
+        self.pos = pos;
+    }
+    pub fn remaining(&self) -> &str {
+        &self.input[self.pos..]
+    }
 
     // ── Scalars ──
 
@@ -107,7 +113,10 @@ impl RuntimeContext {
     }
 
     pub fn get_scalar(&self, name: &str) -> RuntimeValue {
-        self.scalars.get(name).cloned().unwrap_or(RuntimeValue::Undef)
+        self.scalars
+            .get(name)
+            .cloned()
+            .unwrap_or(RuntimeValue::Undef)
     }
 
     pub fn set_scalar(&mut self, name: &str, value: RuntimeValue) {
@@ -121,7 +130,10 @@ impl RuntimeContext {
     }
 
     pub fn push_value(&mut self, arr_name: &str, value: RuntimeValue) {
-        self.arrays.entry(arr_name.to_string()).or_default().push(value);
+        self.arrays
+            .entry(arr_name.to_string())
+            .or_default()
+            .push(value);
     }
 
     pub fn get_array(&self, name: &str) -> Vec<RuntimeValue> {

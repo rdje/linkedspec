@@ -15,6 +15,16 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+sub _is_primitive_literal_token {
+ my ($expr) = @_;
+ my $trimmed = _trim_action_ir_value($expr);
+ return 0 unless defined($trimmed) && length($trimmed);
+ return 1 if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return 1 if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
+ return 1 if $trimmed eq 'undef' || $trimmed eq 'true' || $trimmed eq 'false';
+ return 0
+}
+
 sub try_scan_contract_ir_events {
  my ($id, $code) = @_;
  my %dispatch = (
@@ -157,6 +167,7 @@ sub _scan_contract_push_target_arg {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*\)/g) {
+ next if _is_primitive_literal_token($+{target});
  push @events, {raw => $&, args => {source => $+{source}, target => $+{target}}};
 }
  return \@events

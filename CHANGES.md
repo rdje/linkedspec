@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.2 — implement primitive literal parity
+
+**Scope:** Perl ActionIR literal lowering/scanners/legacy push disambiguation, Rust statement-form flow
+gating, phase0/Rust/oracle locks, mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** primitive literals are now explicit typed value expressions across the terse surface:
+quoted strings, numbers, `undef`, `true`, and `false` work in return payloads, assignments, appends,
+hash-index keys/values, and flow predicates. Perl now lowers `true`/`false` to `JSON::PP` boolean values
+instead of bareword strings, with exact matching so `trueword` and `undefine` remain identifiers. Scanner and
+legacy child-call guards now agree that `push(items,false)` is a value append, not `push(rule,target)`.
+
+**Rust parity:** Rust already had typed primitive value expressions, but statement-form
+`if(false); ... else(); ... endif()` previously did not gate lifecycle statements. The runtime now keeps a
+statement-form conditional stack for one-arg `if`/`elseif` and zero-arg `else`/`endif`; multi-arg
+`if(cond,then,else)` remains the existing lazy value helper.
+
+**Boundary:** no Channel 2 bare value-position reads, no direct nested access, no call-spacing broadening, and
+no statement-separator change landed here. A pre-existing Rust nested-hash-constructor flattening limitation is
+not part of this leaf; the parity fixture returns `[flag, items, hash]` to keep the proof scoped.
+
+**Validation:** `env PERL5LIB= prove -q -Iperl t/phase0_regression.t` PASS (`1..980`);
+`perl -Iperl tools/gen_oracle_corpus.pl` regenerated 18 fixtures; focused Rust `.1.5.2` tests PASS; Rust
+corpus oracle PASS over 18 fixtures; broader gates recorded in the task tree close-out.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.5 — split literals/access/call/separator surface
 
 **Scope:** task tree, task-tree index, ROADMAP_V2, Knowledge Map card + generated map, and live continuity

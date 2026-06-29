@@ -208,11 +208,7 @@ pub mod regex_engine {
     }
 
     /// Extract named capture groups belonging to the winning alternative.
-    fn extract_named(
-        regex: &Regex,
-        haystack: &str,
-        info: &AltInfo,
-    ) -> HashMap<String, String> {
+    fn extract_named(regex: &Regex, haystack: &str, info: &AltInfo) -> HashMap<String, String> {
         let mut named = HashMap::new();
         if let Some(caps) = regex.captures(haystack) {
             // capture_names includes group 0 at index 0 (always None).
@@ -264,10 +260,7 @@ pub mod regex_engine {
         #[test]
         fn seek_finds_earliest_match() {
             // dog won't match; caterpillar matches at position 2 → branch 1
-            let alt = CompiledAlternation::compile(&[
-                "dog".into(),
-                "caterpillar".into(),
-            ]).unwrap();
+            let alt = CompiledAlternation::compile(&["dog".into(), "caterpillar".into()]).unwrap();
             let result = alt.seek_match("a caterpillar", 0).unwrap();
             assert_eq!(result.index, 1);
             assert_eq!(result.start, 2);
@@ -277,10 +270,7 @@ pub mod regex_engine {
         #[test]
         fn seek_tie_goes_to_lowest_index() {
             // rgx's top-level alternation: first matching branch wins on ties
-            let alt = CompiledAlternation::compile(&[
-                "cat".into(),
-                "cat".into(),
-            ]).unwrap();
+            let alt = CompiledAlternation::compile(&["cat".into(), "cat".into()]).unwrap();
             let result = alt.seek_match("the cat sat", 0).unwrap();
             assert_eq!(result.index, 0);
         }
@@ -313,10 +303,7 @@ pub mod regex_engine {
 
         #[test]
         fn seek_prefers_earliest_position_across_alternatives() {
-            let alt = CompiledAlternation::compile(&[
-                "dog".into(),
-                "cat".into(),
-            ]).unwrap();
+            let alt = CompiledAlternation::compile(&["dog".into(), "cat".into()]).unwrap();
             let result = alt.seek_match("cat and dog", 0).unwrap();
             assert_eq!(result.index, 1);
             assert_eq!(result.start, 0);
@@ -338,20 +325,14 @@ pub mod regex_engine {
 
         #[test]
         fn consume_respects_second_alternative() {
-            let alt = CompiledAlternation::compile(&[
-                "dog".into(),
-                "cat".into(),
-            ]).unwrap();
+            let alt = CompiledAlternation::compile(&["dog".into(), "cat".into()]).unwrap();
             let result = alt.consume_match("cat", 0).unwrap();
             assert_eq!(result.index, 1);
         }
 
         #[test]
         fn consume_first_alternative_wins() {
-            let alt = CompiledAlternation::compile(&[
-                "cat".into(),
-                "cat".into(),
-            ]).unwrap();
+            let alt = CompiledAlternation::compile(&["cat".into(), "cat".into()]).unwrap();
             let result = alt.consume_match("cat", 0).unwrap();
             assert_eq!(result.index, 0);
         }
@@ -368,10 +349,7 @@ pub mod regex_engine {
 
         #[test]
         fn capture_groups_multiple() {
-            let alt = CompiledAlternation::compile(&[
-                r"(\d+)".into(),
-                r"(\w+)".into(),
-            ]).unwrap();
+            let alt = CompiledAlternation::compile(&[r"(\d+)".into(), r"(\w+)".into()]).unwrap();
             let result = alt.seek_match("hello", 0).unwrap();
             assert_eq!(result.index, 1);
             assert_eq!(result.groups[0], "hello");
@@ -389,7 +367,8 @@ pub mod regex_engine {
 
         #[test]
         fn named_captures_extracted() {
-            let alt = CompiledAlternation::compile(&[r"(?P<year>\d{4})-(?P<month>\d{2})".into()]).unwrap();
+            let alt = CompiledAlternation::compile(&[r"(?P<year>\d{4})-(?P<month>\d{2})".into()])
+                .unwrap();
             let result = alt.seek_match("date: 2024-03-15", 6).unwrap();
             assert_eq!(result.named.get("year").unwrap(), "2024");
             assert_eq!(result.named.get("month").unwrap(), "03");
@@ -397,7 +376,8 @@ pub mod regex_engine {
 
         #[test]
         fn named_captures_multiple() {
-            let alt = CompiledAlternation::compile(&[r"(?P<first>\w+)\s+(?P<second>\w+)".into()]).unwrap();
+            let alt = CompiledAlternation::compile(&[r"(?P<first>\w+)\s+(?P<second>\w+)".into()])
+                .unwrap();
             let result = alt.seek_match("hello world", 0).unwrap();
             assert_eq!(result.named.get("first").unwrap(), "hello");
             assert_eq!(result.named.get("second").unwrap(), "world");
@@ -458,7 +438,8 @@ pub mod regex_engine {
                 r"(?P<num>\d+)".into(),
                 r"(?P<word>\w+)".into(),
                 r"(?P<both>\w+\d+)".into(),
-            ]).unwrap();
+            ])
+            .unwrap();
             let result = alt.seek_match("abc123", 0).unwrap();
             assert_eq!(result.index, 1);
             assert_eq!(result.named.get("word").unwrap(), "abc123");
@@ -472,9 +453,12 @@ pub mod regex_engine {
             let alt = CompiledAlternation::compile(&[
                 r"(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)".into(),
                 r"(?<!\\)/(?:\\.|[^/\\])*?(?<!\\)/".into(),
-            ]).unwrap();
+            ])
+            .unwrap();
             // "DemoParser::" should match pat1 (branch 0) with 4 groups
-            let result = alt.seek_match("DemoParser::\n /pattern/ -> Child", 0).unwrap();
+            let result = alt
+                .seek_match("DemoParser::\n /pattern/ -> Child", 0)
+                .unwrap();
             eprintln!("TEST groups={:?} index={}", result.groups, result.index);
             assert_eq!(result.index, 0, "should match first pattern");
             assert_eq!(result.groups.len(), 5, "full match + 4 groups");
