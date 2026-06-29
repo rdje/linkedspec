@@ -6,12 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.2.3.5.4` DONE** — Rust RHS shape target-kind inference parity landed,
+- Last updated: `2026-06-29` (**`.1.6` IN PROGRESS / OWNED BEFORE CODE** — Round 1 array end-mutation
+  methods are now the active PNT leaf. Prior **`.1.2.3.5.4` DONE** — Rust RHS shape target-kind inference parity landed,
   closing the `.1.2.3.5` RHS-shape split across both variants. Rust now mirrors the accepted Perl
   `.1.2.3.5.2` rule: direct shape RHS on a bare or matching typed aggregate target initializes/replaces the
   array/hash working variable, while explicit `scalar(...)` keeps scalar-held payload assignment. Oracle corpus
-  is **32 fixtures**; focused Rust `.1.2.3.5.4` locks and corpus oracle are green. Frontier -> **`.1.6`**
-  (own before code: array end-mutation methods). Prior **`.1.2.3.5.3` DONE** —
+  is **32 fixtures**; focused Rust `.1.2.3.5.4` locks and corpus oracle are green. Prior **`.1.2.3.5.3` DONE** —
   Rust shape-literal values parse/evaluate through recursive expression AST nodes and runtime
   `RuntimeValue::Array` / `RuntimeValue::Hash` construction, with oracle and integration locks. Prior
   **`.1.2.3.5.2` DONE** — Perl RHS target-kind inference landed. Direct RHS
@@ -1161,7 +1161,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.6`
-  Status: `pending`
+  Status: `in_progress` (2026-06-29 — owned before code)
   Goal: Array mutation methods — `.push_front(v)`, `.push_back(v)`, `.pop_front()`, `.pop_back()`
   Acceptance: The four array end-mutation methods are recognized and lower to ActionIR.
   Verification: `pending`
@@ -1276,7 +1276,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.2` | `done` 2026-06-29 | Perl RHS target-kind inference landed: direct RHS shapes infer aggregate bare targets (`name = [value]` -> `@name`, `name = { key => value }` -> `%name`); explicit `scalar(name)` remains scalar payload assignment. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.3` | `done` 2026-06-29 | Rust shape-literal value parity landed: direct `[]` / `{}` values parse and evaluate recursively, with oracle/integration locks and the `.1.2.3.5.4` target-kind boundary preserved. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `done` 2026-06-29 | Rust RHS target-kind inference parity landed: direct shape RHS initializes/replaces array/hash working variables for bare or matching typed aggregate targets, while explicit `scalar(...)` keeps scalar-held payload assignment. |
-| 1 | `SPEC-FORMAT-TERSE.1.6` | `pending` | Round 1 array end-mutation methods — own before code. |
+| 1 | `SPEC-FORMAT-TERSE.1.6` | `in_progress` | Round 1 array end-mutation methods — owned before code; implementation/audit next. |
 | … | `.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
