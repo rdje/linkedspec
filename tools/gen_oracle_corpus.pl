@@ -211,6 +211,53 @@ Done::
 SPEC
     },
 
+    # ── SPEC-FORMAT-TERSE.1.2.3.2 — Rust parity for aggregate bare value reads ──
+    #
+    # These fixtures freeze the Perl reference values after .1.2.3.1 made aggregate
+    # bare value reads safe on the reference backend. Rust must resolve these bare
+    # snapshot forms to the same named aggregate variables without broadening scalar
+    # bare value reads or bare direct-access path atoms.
+    {   case   => 'terse_1_2_3_2_array_copy_bare_read',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { push_value(items, "a"); push_value(items, "b"); return(array_copy(items)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_2_3_2_hash_copy_bare_read',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set_key(meta, "stage", "v"); return(hash_copy(meta)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_2_3_2_copy_bare_array_first',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { push_value(items, "a"); return(copy(items)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_1_2_3_2_copy_wrapped_hash',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set_key(meta, "stage", "v"); return(copy(hash(meta))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+
     # ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1 helper renames ──
     #
     # These fixtures freeze the Perl reference values for the new canonical terse

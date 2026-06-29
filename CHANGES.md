@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.2 — Rust aggregate bare value-read parity
+
+**Scope:** Rust runtime aggregate-copy target resolution, Rust integration locks, Perl-oracle corpus fixtures,
+Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now resolves aggregate bare value-read snapshot forms the same way the Perl reference does.
+`array_copy(NAME)` and array-first `copy(NAME)` read array working variable `NAME`; `hash_copy(NAME)` reads hash
+working variable `NAME`; `copy(hash(NAME))` remains the explicit wrapped hash-copy path. The change is confined
+to the aggregate resolver call sites for `array_copy`, `hash_copy`, and `copy`; it does not change generic
+`Expr::Variable` evaluation, parser grammar, scalar bare reads, bare hash-index key/RHS reads, or bare
+direct-access path atoms.
+
+**Validation:** focused Rust integration locks PASS for bare array snapshot, bare hash snapshot, array-first
+`copy(NAME)`, wrapped hash copy, and per-execute isolation; focused Rust parser rejection for bare direct-access
+segments PASS; oracle corpus regenerated to 25 fixtures and corpus oracle PASS; full Rust runtime suite PASS
+(116 unit tests, 25 oracle fixtures, 54 integration tests, doc-tests); clippy EXIT 0 with the existing warning
+baseline; phase0, mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.1 — auto-exist aggregate bare value reads
 
 **Scope:** Perl ActionIR auto-working-variable collector, phase0 regression coverage, mdBook helper/declaration

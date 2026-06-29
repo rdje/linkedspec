@@ -946,6 +946,109 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.1.2.3.2 — Rust lockstep parity for .1.2.3.1:
+// aggregate bare value reads are type-implying snapshot positions. `array_copy(NAME)`
+// and array-first `copy(NAME)` read array `NAME`; `hash_copy(NAME)` reads hash `NAME`.
+// Scalar-like bare value reads and bare direct-access path atoms remain deferred.
+
+#[test]
+fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
+    let bare = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(bare, "xhello");
+    assert_eq!(
+        actual,
+        serde_json::json!([["a", "b"]]),
+        "array_copy(items) reads the array working variable under the Perl output shape"
+    );
+    assert_eq!(
+        actual,
+        build_and_run(wrapped, "xhello"),
+        "array_copy(items) == array_copy(array(items)) on Rust"
+    );
+}
+
+#[test]
+fn terse_1_2_3_2_bare_hash_copy_read_matches_wrapped() {
+    let bare = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(meta)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(bare, "xhello");
+    assert_eq!(
+        actual,
+        serde_json::json!([{"stage": "v"}]),
+        "hash_copy(meta) reads the hash working variable under the Perl output shape"
+    );
+    assert_eq!(
+        actual,
+        build_and_run(wrapped, "xhello"),
+        "hash_copy(meta) == hash_copy(hash(meta)) on Rust"
+    );
+}
+
+#[test]
+fn terse_1_2_3_2_copy_bare_array_first_and_wrapped_hash() {
+    let bare_array = "Top::\n /x/ -> Done { push_value(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped_array = "Top::\n /x/ -> Done { push_value(items, \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let actual_array = build_and_run(bare_array, "xhello");
+    assert_eq!(
+        actual_array,
+        serde_json::json!([["a"]]),
+        "copy(items) follows the documented array-first aggregate bare-read rule"
+    );
+    assert_eq!(
+        actual_array,
+        build_and_run(wrapped_array, "xhello"),
+        "copy(items) == array_copy(array(items)) on Rust"
+    );
+
+    let wrapped_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let actual_hash = build_and_run(wrapped_hash, "xhello");
+    assert_eq!(
+        actual_hash,
+        serde_json::json!([{"stage": "v"}]),
+        "copy(hash(meta)) clones the named hash working variable"
+    );
+    assert_eq!(
+        actual_hash,
+        build_and_run(canonical_hash, "xhello"),
+        "copy(hash(meta)) == hash_copy(hash(meta)) on Rust"
+    );
+}
+
+#[test]
+fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
+    let array = "Top::\n /([ab])/ -> Done { push_value(items, match_group(0)); return(array_copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(array).expect("parse array");
+    validate(&spec).expect("validate array");
+    let engine = Engine::new(compile(&spec).expect("compile array"));
+    assert_eq!(
+        engine.execute("ahello").expect("array run1"),
+        serde_json::json!([["a"]]),
+        "bare array read first execution"
+    );
+    assert_eq!(
+        engine.execute("bhello").expect("array run2"),
+        serde_json::json!([["b"]]),
+        "bare array read is isolated to the fresh RuntimeContext per execute"
+    );
+
+    let hash = "Top::\n /([ab])/ -> Done { set_key(meta, match_group(0), \"seen\"); return(hash_copy(meta)) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec(hash).expect("parse hash");
+    validate(&spec).expect("validate hash");
+    let engine = Engine::new(compile(&spec).expect("compile hash"));
+    assert_eq!(
+        engine.execute("ahello").expect("hash run1"),
+        serde_json::json!([{"a": "seen"}]),
+        "bare hash read first execution"
+    );
+    assert_eq!(
+        engine.execute("bhello").expect("hash run2"),
+        serde_json::json!([{"b": "seen"}]),
+        "bare hash read is isolated to the fresh RuntimeContext per execute"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1:
 // `set` is an assign alias, `cat` is a concat alias, and `copy` is a unified
 // array/hash value-copy helper. These tests stay in the same non-recursive
@@ -1193,7 +1296,8 @@ fn terse_1_5_3_call_spacing_runs_like_tight_calls() {
 
 #[test]
 fn terse_1_5_4_newline_and_semicolon_statement_separators_run() {
-    let newline_grammar = "Top::\n /x/ -> Done { set(name,\"a\")\n return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
+    let newline_grammar =
+        "Top::\n /x/ -> Done { set(name,\"a\")\n return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(newline_grammar, "xhello"),
         serde_json::json!(["a"]),

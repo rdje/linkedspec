@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.2 — Rust aggregate bare value-read parity landed): Closed the Rust
+  lockstep leaf by changing only aggregate-copy target resolution. Durable points. (1) **The parity gap was the
+  call-site gate, not the parser.** `Expr::Variable` already evaluates as a scalar read in Rust, so broadening
+  expression evaluation would have advanced the wrong Channel 2 surface. The safe change is narrower:
+  `array_copy`/`hash_copy`/`copy` now pass `allow_bare=true` to aggregate target resolvers only where the Perl
+  reference already treats the helper as a type-implying aggregate snapshot read. (2) **`copy(NAME)` remains
+  array-first by construction.** The `copy` fallback resolves an array target before trying a hash target; a
+  bare `copy(items)` therefore means array copy, while `copy(hash(meta))` is the explicit hash form. (3)
+  **Scalar and direct-access Channel 2 boundaries stay intact.** No parser rule changed, the existing
+  `parse_direct_nested_access_rejects_bare_segments` lock still passes, and scalar-like bare reads remain the
+  next Perl-reference leaf. (4) **Freeze both hand-written and oracle evidence.** The slice adds 4 integration
+  locks plus 4 Perl-oracle fixtures; corpus oracle now covers 25 fixtures and the full runtime suite stays green.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.1 — Perl aggregate bare value-read auto-existence landed): Extended the
   existing auto-working-variable collector instead of adding a separate pass. Durable points. (1) **Aggregate
   snapshot helpers are the only new value-read inference surface here.** `array_copy(NAME)` and array-first

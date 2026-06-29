@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.2 — Rust aggregate bare value-read parity landed**
+  (RUST ENGINE + ORACLE + INTEGRATION LOCKS; **no mdBook prose change needed because `.1.2.3.1` already taught
+  the variant-neutral contract**). Rust aggregate snapshot helpers now resolve bare working-variable reads like
+  the Perl reference: `array_copy(items)` and array-first `copy(items)` read array `items`, while
+  `hash_copy(meta)` reads hash `meta`; `copy(hash(meta))` remains the explicit hash-copy spelling. The change is
+  scoped to aggregate resolver call sites and does **not** advance scalar bare reads, bare hash-index key/RHS
+  forms, or bare direct-access path atoms. **Verification:** focused Rust `.1.2.3.2` tests PASS; focused Rust
+  bare direct-access rejection PASS; oracle corpus regenerated to **25 fixtures** and corpus oracle PASS; full
+  Rust runtime suite PASS (116 unit tests, 25 oracle fixtures, 54 integration tests); clippy EXIT 0 with the
+  existing warning baseline; phase0/mdBook/KM/local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.3`** (Perl scalar bare value reads).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.1 — Perl aggregate bare value-read auto-existence landed**
   (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Aggregate bare reads that already lower to sigiled Perl aggregates
   now get safe per-invocation declarations: `array_copy(items)` and array-first `copy(items)` auto-supply

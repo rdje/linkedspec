@@ -782,10 +782,10 @@ impl Engine {
         // SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity, .1.2.2): in a type-implying
         // array-TARGET position (push_value/push_nonempty), a BARE (un-wrapped) name
         // IS the working array — mirrors the Perl reference's `^(\w+)$` fallback in
-        // ValueExpr::_extract_array_symbol_name. The per-parse RuntimeContext HashMap
-        // auto-vivifies on push_value, so it auto-exists with no declare. `allow_bare`
-        // is false for value-position READS (array_copy / hash_copy): a bare name there
-        // is a value-position read = Channel 2, deliberately NOT this leaf.
+        // ValueExpr::_extract_array_symbol_name. SPEC-FORMAT-TERSE.1.2.3.2 extends
+        // the same narrow aggregate-target interpretation to array snapshot reads
+        // (`array_copy(NAME)` and array-first `copy(NAME)`). Scalar-like bare reads
+        // and bare direct-access path atoms remain owned by later Channel 2 leaves.
         if let (true, Some(Arg::Positional(Expr::Variable { name: var_name }))) =
             (allow_bare, raw_args.first())
         {
@@ -799,6 +799,8 @@ impl Engine {
     /// Mirrors `resolve_array_target` for hash-valued helpers: `hash(name)` and
     /// `h(name)` name the runtime hash `name`, while constructor forms such as
     /// `hash("key", value)` stay value expressions handled by the `hash` helper.
+    /// When `allow_bare` is true, `hash_copy(NAME)` may also name the hash directly;
+    /// scalar-like bare value reads stay outside this resolver.
     fn resolve_hash_target(
         &self,
         raw_args: &[linkedspec_core::expr::Arg],
@@ -960,7 +962,7 @@ impl Engine {
                     match arg {
                         RuntimeValue::Array(a) => Ok(RuntimeValue::Array(a.clone())),
                         _ => {
-                            let arr_name = self.resolve_array_target(raw_args, arg, false);
+                            let arr_name = self.resolve_array_target(raw_args, arg, true);
                             if !arr_name.is_empty() {
                                 Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
                             } else {
@@ -978,11 +980,11 @@ impl Engine {
                         RuntimeValue::Array(a) => Ok(RuntimeValue::Array(a.clone())),
                         RuntimeValue::Hash(h) => Ok(RuntimeValue::Hash(h.clone())),
                         _ => {
-                            let arr_name = self.resolve_array_target(raw_args, arg, false);
+                            let arr_name = self.resolve_array_target(raw_args, arg, true);
                             if !arr_name.is_empty() {
                                 Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
                             } else {
-                                let hash_name = self.resolve_hash_target(raw_args, arg, false);
+                                let hash_name = self.resolve_hash_target(raw_args, arg, true);
                                 if !hash_name.is_empty() {
                                     Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
                                 } else {
@@ -2179,7 +2181,7 @@ impl Engine {
                     match arg {
                         RuntimeValue::Hash(h) => Ok(RuntimeValue::Hash(h.clone())),
                         _ => {
-                            let hash_name = self.resolve_hash_target(raw_args, arg, false);
+                            let hash_name = self.resolve_hash_target(raw_args, arg, true);
                             if !hash_name.is_empty() {
                                 Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
                             } else {

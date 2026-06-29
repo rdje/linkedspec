@@ -6,12 +6,14 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.2.3.1` DONE** — Perl aggregate bare value reads now auto-exist safely:
-  `array_copy(NAME)` / `copy(NAME)` supply exactly one per-rule `my @NAME`, and `hash_copy(NAME)` supplies
-  exactly one `my %NAME`; wrapped/declared paths dedup unchanged; phase0 **984 green**. Frontier ->
-  **`.1.2.3.2` Rust parity for aggregate bare value reads**. Prior **`.1.2.3` SPLIT** — Channel 2 ground truth
-  shows aggregate bare value reads already lower on Perl but lack auto-`my`, Rust keeps those bare value reads out
-  of the aggregate-copy resolvers, and scalar bare reads/direct `[z]` remain a later sub-surface. Prior
+- Last updated: `2026-06-29` (**`.1.2.3.2` DONE** — Rust aggregate bare value reads now match the Perl
+  reference: `array_copy(NAME)` and array-first `copy(NAME)` read array working variable `NAME`, while
+  `hash_copy(NAME)` reads hash working variable `NAME`; `copy(hash(NAME))` stays the explicit hash-copy path.
+  Oracle corpus is **25 fixtures** and full Rust runtime suite is green. Frontier ->
+  **`.1.2.3.3` Perl scalar bare value reads**. Prior **`.1.2.3.1` DONE** — Perl aggregate bare value reads now
+  auto-exist safely with exactly one `my @NAME` / `my %NAME` per rule; phase0 **984 green**. Prior
+  **`.1.2.3` SPLIT** — Channel 2 ground truth shows aggregate bare value reads are separable from scalar bare
+  reads/direct `[z]`, which remain later sub-surfaces. Prior
   **`.1.5.5.2` SUPERSEDED/MERGED** — reverify showed bare
   direct-access segments are the same global Channel 2 value-position-read problem as `return(z)`, so this
   leaf was merged into **`.1.2.3` Channel 2 design/split** instead of implementing `[z]` locally. Prior
@@ -432,14 +434,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.3.1 — auto-exist aggregate bare value reads` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.2`
-  Status: `pending`
+  Status: `done` 2026-06-29
   Goal: Rust lockstep parity for `.1.2.3.1` aggregate bare value reads.
   Acceptance: Rust accepts and evaluates bare aggregate read forms to the same values as the Perl reference
     for `array_copy(NAME)`, `hash_copy(NAME)`, and `copy(NAME)`/`copy(hash(NAME))` under the documented
     array-first `copy` rule, with oracle fixtures and focused integration locks. The change must not make
     scalar bare reads or bare direct-access segments advance ahead of `.1.2.3.3`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-06-29.** `array_copy`, `hash_copy`, and `copy` now allow bare aggregate targets
+    only through their aggregate target resolvers. `copy(NAME)` remains array-first; `copy(hash(NAME))` remains
+    the explicit wrapped hash-copy form. Added 4 integration locks and 4 Perl-oracle fixtures; focused Rust
+    `.1.2.3.2` tests PASS; direct-access bare-segment rejection PASS; oracle corpus PASS over 25 fixtures; full
+    runtime suite PASS (116 unit tests, 25 oracle fixtures, 54 integration tests); clippy EXIT 0 with existing
+    warning baseline. Phase0/mdBook/KM/local CI PASS.
+  Commit: `SPEC-FORMAT-TERSE.1.2.3.2 — add Rust aggregate bare-read parity` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3.3`
   Status: `pending`
@@ -1032,25 +1039,34 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.5.5.2` | `superseded` 2026-06-29 | Bare direct-access segments are merged into `.1.2.3`; `[z]` must follow the global value-position bare-word-read model, not a direct-access-only rule. |
 | — | `SPEC-FORMAT-TERSE.1.2.3` | `active` (split 2026-06-29) | Channel 2 split by aggregate-vs-scalar value-read surfaces after KM + TOOLBOX ground truth. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.1` | `done` 2026-06-29 | Perl aggregate bare value reads now auto-exist safely (`array_copy(items)`, `hash_copy(meta)`, `copy(items)`); phase0 984 green. |
-| 1 | `SPEC-FORMAT-TERSE.1.2.3.2` | `pending` | Rust lockstep parity for aggregate bare value reads. |
+| — | `SPEC-FORMAT-TERSE.1.2.3.2` | `done` 2026-06-29 | Rust aggregate bare value reads now match the Perl reference (`array_copy(items)`, `hash_copy(meta)`, array-first `copy(items)`, and `copy(hash(meta))`) with oracle + integration locks. |
+| 1 | `SPEC-FORMAT-TERSE.1.2.3.3` | `pending` | Perl scalar bare value reads. |
 | … | `.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.2.3.2` Rust aggregate bare value-read parity landed**). Rust now matches the Perl
+  aggregate snapshot-read contract by allowing bare aggregate target names at the aggregate-copy resolver
+  call sites: `array_copy(NAME)` and array-first `copy(NAME)` read array `NAME`, while `hash_copy(NAME)` reads
+  hash `NAME`; `copy(hash(NAME))` stays the explicit wrapped hash-copy form. The implementation did not change
+  generic `Expr::Variable` scalar evaluation or parser acceptance, so scalar bare reads, bare hash-index
+  key/RHS forms, and bare direct-access path atoms remain owned by `.1.2.3.3`.
 
 - `2026-06-29` (**`.1.2.3.1` Perl aggregate bare value-read auto-existence landed**). Aggregate snapshot
   helpers are now type-implying read positions on the Perl reference: `array_copy(NAME)` and `copy(NAME)` imply
   the array working variable `NAME`, while `hash_copy(NAME)` implies the hash working variable `NAME`. The
   collector only supplies the missing per-invocation lexical preamble (`my @NAME` / `my %NAME`) for forms that
   already lower to sigiled aggregates; it does not change scalar bare reads (`return(NAME)`), bare RHS/key forms,
-  or bare direct-access path atoms. `copy(NAME)` follows the existing array-first `copy` rule. Rust parity stays
-  separate in `.1.2.3.2`.
+  or bare direct-access path atoms. `copy(NAME)` follows the existing array-first `copy` rule. Rust parity landed
+  separately in `.1.2.3.2`.
 
 - `2026-06-29` (**`.1.2.3` Channel 2 split by aggregate/scalar value-read surfaces**). TOOLBOX probes and
   code-read show Channel 2 is not one implementation seam. Perl aggregate bare value reads already lower to
   sigiled variables (`array_copy(items)` -> `[@items]`, `hash_copy(meta)` -> `{%meta}`, `copy(items)` ->
-  `[@items]`) but lack auto-`my`, so they are a scoped Perl auto-existence leaf. Rust does not yet mirror
-  those bare aggregate value reads because aggregate-copy resolvers keep `allow_bare=false` in value-read
-  positions. Scalar-like value reads are separate: Perl still emits barewords/raw code for `return(count)`,
+  `[@items]`) but lack auto-`my`, so they are a scoped Perl auto-existence leaf. At split time, Rust did not yet
+  mirror those bare aggregate value reads because aggregate-copy resolvers kept `allow_bare=false` in value-read
+  positions; `.1.2.3.2` has since closed that parity leaf. Scalar-like value reads are separate: Perl still
+  emits barewords/raw code for `return(count)`,
   `set(out,count)`, `items += value`, `meta[key] = value`, and `foo["a"][z]`, while Rust already evaluates a
   plain `Expr::Variable` as a scalar read. Therefore `.1.2.3` becomes an active container: `.1.2.3.1` Perl
   aggregate auto-existence, `.1.2.3.2` Rust aggregate parity, `.1.2.3.3` Perl scalar bare reads, `.1.2.3.4`
@@ -1407,6 +1423,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.5.2` | KM retrieval; TOOLBOX `call_spec_handler_subst` reverify for explicit direct access, bare direct access, `scalaref(...)`, and `return(z)`; Rust focused parser rejection lock `parse_direct_nested_access_rejects_bare_segments`; memory/doctrine/KM checks; `git diff --check` | `.1.5.5.2` is superseded into `.1.2.3`. Reverify shows `foo["a"][9]["b"][z]` and `return(z)` still share the same bare value-position-read gap, while explicit `[scalar(z)]` works. No engine/book behavior changed; the next executable frontier is `.1.2.3`, which owns the global Channel 2 design/split. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3` (split) | KM retrieval; TOOLBOX `call_spec_handler_subst` probes for scalar-like bare reads, aggregate bare reads, direct bare access, and mutation RHS/key blockers; `dump_parser_source` probes for aggregate bare reads; Perl code-read (`ValueExpr`, `MethodLowering`); Rust code-read (`expr.rs`, `engine.rs` resolver/eval paths); Knowledge Map regenerate/check; memory/doctrine checks; `git diff --check` | Split Channel 2 into aggregate and scalar value-read surfaces. Perl aggregate bare reads lower but lack auto-`my`; Rust aggregate-copy value-read resolvers keep bare reads out; Perl scalar-like reads remain bareword/raw while Rust variables already evaluate as scalar reads. No engine/book behavior change. Frontier becomes `.1.2.3.1`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.1` | Perl syntax checks (`EmitContext.pm`, `phase0_regression.t`); focused generated-source/runtime/no-leak probe for `array_copy(items)`, `hash_copy(meta)`, `copy(items)`; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine/diff checks; `bash tools/run_ci_local.sh` | Perl aggregate bare value reads now auto-exist safely. `_collect_auto_working_var_decls` collects `array_copy(NAME)` and `copy(NAME)` as array reads and `hash_copy(NAME)` as hash reads, deduping with wrapped/declared/mutation paths and skipping reserved literals. Phase0 PASS (`1..984`, including the new 17-assertion subtest with same-parser array/hash reruns); mdBook/KM/local CI PASS. Frontier becomes `.1.2.3.2` for Rust parity. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.2` | `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; `perl -c tools/gen_oracle_corpus.pl`; focused Rust runtime `terse_1_2_3_2`; focused Rust core `parse_direct_nested_access_rejects_bare_segments`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; full Rust runtime suite; `cargo clippy --manifest-path rust/linkedspec-runtime/Cargo.toml`; phase0; mdBook; KM/memory/doctrine/diff checks; full local CI | Rust aggregate bare value reads now match the Perl reference. `array_copy(NAME)` / `copy(NAME)` resolve bare names as array working vars, `hash_copy(NAME)` resolves bare names as hash working vars, and `copy(hash(NAME))` stays the explicit hash path. Added 4 integration locks + 4 oracle fixtures; corpus oracle PASS over 25 fixtures; full runtime PASS (116 unit tests, 25 oracle fixtures, 54 integration tests); clippy EXIT 0 with existing warnings only. Scalar bare reads and bare direct-access path atoms remain deferred to `.1.2.3.3`. |
 
 ## Commit Log
 
@@ -1439,8 +1456,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.5.5.2` | `SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2` | No engine/book behavior change. `.1.5.5.2` is superseded into new `.1.2.3` because bare direct-access path atoms share the global value-position bare-word-read model. Frontier becomes `.1.2.3`. |
 | `SPEC-FORMAT-TERSE.1.2.3` | `SPEC-FORMAT-TERSE.1.2.3 — split Channel 2 value reads by aggregate/scalar surfaces` | No engine/book behavior change. Channel 2 is now an active container with aggregate bare value reads first (`.1.2.3.1` Perl, `.1.2.3.2` Rust), followed by scalar bare reads (`.1.2.3.3` Perl, `.1.2.3.4` Rust). Frontier becomes `.1.2.3.1`. |
 | `SPEC-FORMAT-TERSE.1.2.3.1` | `SPEC-FORMAT-TERSE.1.2.3.1 — auto-exist aggregate bare value reads` | Perl aggregate bare value reads now auto-declare per-invocation lexicals: `array_copy(NAME)` / `copy(NAME)` -> `my @NAME`; `hash_copy(NAME)` -> `my %NAME`. Wrapped/declared paths dedup unchanged; scalar bare reads and bare key/RHS/direct path atoms remain deferred. Frontier becomes `.1.2.3.2`. |
+| `SPEC-FORMAT-TERSE.1.2.3.2` | `SPEC-FORMAT-TERSE.1.2.3.2 — add Rust aggregate bare-read parity` | Rust aggregate bare reads now match the Perl reference at the aggregate-copy helper call sites. `array_copy(NAME)` and array-first `copy(NAME)` read arrays, `hash_copy(NAME)` reads hashes, and `copy(hash(NAME))` keeps the explicit hash form. 4 oracle fixtures + 4 integration locks; full runtime suite green; scalar Channel 2 remains next. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.2.3.2` DONE — Rust aggregate bare value-read parity landed.**
+  `array_copy`, `hash_copy`, and `copy` now pass bare aggregate names through the same target resolvers used by
+  mutation/typed-wrapper paths, with `copy(NAME)` preserving the array-first rule and `copy(hash(NAME))`
+  preserving the explicit hash form. Added 4 Rust integration locks and 4 Perl-oracle fixtures; corpus oracle
+  PASS over 25 fixtures; full Rust runtime suite PASS (116 unit tests, 25 oracle fixtures, 54 integration
+  tests); clippy EXIT 0 with existing warning baseline. Scalar bare reads, bare key/RHS forms, and bare direct
+  access remain deferred. Frontier -> `.1.2.3.3`.
 
 - `2026-06-29`: **`.1.2.3.1` DONE — Perl aggregate bare value-read auto-existence landed.**
   `_collect_auto_working_var_decls` now collects aggregate bare snapshot reads that already lower to sigiled
