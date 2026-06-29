@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5.5 — split direct nested access before code): Grounded the direct-access
+  leaf with KM + TOOLBOX and split it by the Channel 2 boundary. Durable points. (1) **Direct bracket syntax is
+  not the existing `scalaref` path.** `foo["a"][9]["b"][scalar(z)]` currently emits invalid Perl-shaped code,
+  while `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` lowers correctly to the dereference chain. (2) **Bare path
+  atoms are the same hard problem as bare value-position reads.** The final `[z]` in the brainstorm spelling is
+  not a variable read today; it remains a bare atom just like the known `return(count)` gap. (3) **The first
+  implementation slice should avoid smuggling Channel 2 in sideways.** `.1.5.5.1` will implement and lock
+  explicit path segments; `.1.5.5.2` will coordinate the bare-segment semantics with the broader Channel 2
+  value-position-read model. No engine/book behavior changed in the split slice.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.5.4 — statement separators are newline-or-semicolon, not arbitrary
   whitespace): Landed the separator contract on Perl and Rust. Durable points. (1) **Statement detection and
   emitted-code validity are separate responsibilities.** `StatementSplit` now only creates implicit boundaries

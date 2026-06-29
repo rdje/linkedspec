@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.5 — split direct access by Channel 2 boundary
+
+**Scope:** task tree, task-tree index, Knowledge Map card + generated map, roadmap/live continuity docs. No
+engine, test fixture, or mdBook behavior change.
+
+**Ground truth:** direct bracket access is not yet a valid lowered value expression. TOOLBOX probes show
+`return(foo["a"][9]["b"][scalar(z)])` passes through as invalid Perl-shaped
+`return foo["a"][9]["b"][$z]`, and a generated-source/runtime probe confirms handler compilation fails near
+`][`. The existing explicit helper remains the working path:
+`return(scalaref(foo,{"a"}[9]{"b"}[scalar(z)]))` lowers to `$foo->{"a"}->[9]->{"b"}->[$z]`.
+
+**Split:** `.1.5.5.1` owns direct nested access with explicit path segments such as
+`foo["a"][9]["b"][scalar(z)]`. `.1.5.5.2` owns the bare path-segment / Channel 2 coordination required for the
+full brainstorm spelling `foo["a"][9]["b"][z]`.
+
+**Validation:** Knowledge Map regenerate/check PASS; memory/doctrine checks PASS; `git diff --check` PASS.
+Phase0/Rust/local CI are N/A to this docs/tree/KM split slice because no behavior changed.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.4 — lock statement separator contract
 
 **Scope:** Perl ActionIR statement splitting/lowering, Bootstrap fluent attached-control normalization, Rust

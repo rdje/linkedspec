@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.5.5 — direct nested access split by Channel 2 boundary**
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM + TOOLBOX probes show direct
+  `foo["a"][9]["b"][scalar(z)]` is not yet a valid lowered value expression: it passes through as
+  `foo["a"][9]["b"][$z]` and generated handler compilation fails near `][`. The existing
+  `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` path remains the working explicit syntax and lowers to
+  `$foo->{"a"}->[9]->{"b"}->[$z]`. Bare segment `z` remains Channel 2 value-position-read work. `.1.5.5` is
+  now a container: `.1.5.5.1` explicit path segments first, `.1.5.5.2` bare-segment/Channel-2 coordination.
+  **Frontier: `SPEC-FORMAT-TERSE.1.5.5.1`** (direct nested access with explicit path segments).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.5.4 — statement separator contract landed**
   (PERL ACTIONIR + BOOTSTRAP NORMALIZATION + RUST PARSER/RUNTIME + ORACLE + BOOK/KM LOCKS). Newlines now
   separate top-level canonical DSL statements, and semicolons remain accepted and required for multiple
