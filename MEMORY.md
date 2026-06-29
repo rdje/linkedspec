@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `f623176` — `SPEC-FORMAT-TERSE.1.3.4.3 — implement hash-index assignment operator name[key] = value`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — **frontier `.1.5` PENDING 2026-06-29**. `.1.3` mutation surface is done; `.1.3.4` operator family is done (`name = value`, `items += value`, `name[key] = value`). User in a **PNT loop** (2026-06-23).
-- next_action: **Pick `SPEC-FORMAT-TERSE.1.5`** — before code, scope/split the literals, nested access, call, and semicolon surface in the task tree; Channel 2 bare value-position reads remain behind this design surface.
+- latest_commit: `cd1b950` — `SPEC-FORMAT-TERSE.1.3.4.3 — handoff: record hash-index slice commit in MEMORY`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — **`.1.5` SPLIT 2026-06-29; frontier `.1.5.2` PENDING**. `.1.5.1` audit/split decomposed literals, call spacing, statement separators, and direct nested access. User in a **PNT loop** (2026-06-23).
+- next_action: **Pick `SPEC-FORMAT-TERSE.1.5.2`** — implement/lock primitive literal parity first (`"..."`, `'...'`, numbers, `undef`, `true`, `false`), with special attention that Perl currently returns `true`/`false` as strings while Rust has typed booleans.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy source baseline engine.rs 11 / helpers.rs 2; oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs`. phase0 baseline = **979 green**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: MEMORY handoff only; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.1.5` split/audit docs/KM pending commit; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.

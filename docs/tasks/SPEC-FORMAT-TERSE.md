@@ -6,12 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.3.4.3` DONE** — hash-index assignment operator
+- Last updated: `2026-06-29` (**`.1.5` SPLIT** — literals, nested access, call + semicolon rules are
+  decomposed into signoff-sized leaves after KM/TOOLBOX/code-read ground truth. **`.1.5.1` DONE** (split
+  audit); frontier -> **`.1.5.2` primitive literal parity**. Prior **`.1.3.4.3` DONE** — hash-index assignment operator
   `name[key] = value` landed on Perl and Rust for explicit key/value expressions. It lowers/runs identically to
   settled `set_key(name, key, value)`, auto-exists the bare hash target, and leaves bare key/RHS identifiers
   deferred to Channel 2. **`.1.3.4` operator family DONE** (scalar `name = value`, array `items += value`,
-  hash `name[key] = value`). **`.1.3` mutation surface DONE. Frontier → `.1.5`** (literals, nested access,
-  call + semicolon rules; scope/split first). Prior **`.1.3.4.2` DONE** — array append operator `items += value`
+  hash `name[key] = value`). **`.1.3` mutation surface DONE.** Prior **`.1.3.4.2` DONE** — array append operator `items += value`
   landed on Perl and Rust for explicit RHS expressions. Prior **`.1.3.4.1` DONE** — scalar assignment
   operator `name = value` landed. Prior **`.1.3.3` DONE** — hash mutation spelling landed. Top-level
   `set_key(name, key, value)` is now a statement-level named-hash mutation on Perl and Rust; nested/value-form
@@ -677,12 +678,66 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.4.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5`
-  Status: `pending`
+  Status: `active` (2026-06-29 — split by literal/call/separator/access surface)
   Goal: Literals, nested access, call + semicolon rules
-  Acceptance: Literals `"..."`, `'...'`, `42`, `3.14`, `true`, `false`, `undef`; nested access
-    `foo["a"][9]['b'][z]` (any mix of string/numeric/variable indices, any depth); function calls
-    always with `()` and a space before `()` allowed (`return (val)` == `return(val)`); semicolons
-    required only when multiple statements share a line.
+  Children: `.1.5.1`, `.1.5.2`, `.1.5.3`, `.1.5.4`, `.1.5.5`
+
+- ID: `SPEC-FORMAT-TERSE.1.5.1`
+  Status: `done` (2026-06-29 — ground truth + split)
+  Goal: Establish exact current behavior for literals, nested access, call spacing, and semicolon/newline
+    separators, then split `.1.5` before implementation.
+  Acceptance: KM retrieval, TOOLBOX probes, and Perl/Rust code-read identify which parts are already true,
+    which parts need parity locks, and which parts require new semantics; `.1.5` becomes an active container
+    with executable child leaves; no implementation code changes in this audit slice.
+  Verification: TOOLBOX `call_spec_handler_subst` probes over literal returns, call whitespace, direct
+    nested access, and existing `scalaref(...)` lowering; `LinkedSpec::Get` runtime probes for primitive
+    literal outputs and separator behavior; `StatementSplit` probes for top-level statement detection;
+    Rust code-read of `expr.rs` + `engine.rs`; `cargo test --quiet --manifest-path
+    rust/linkedspec-core/Cargo.toml parse_` PASS (41 core parser tests + 1 filtered types test, existing
+    rgx/pgen warnings); `cargo test --manifest-path rust/linkedspec-core/Cargo.toml hash_index -- --nocapture`
+    PASS. Result: Perl strings/numbers/`undef` already run; Perl `true`/`false` currently return strings,
+    not typed booleans; optional whitespace before `(` works at real helper/value sites; newline-separated
+    adjacent lowered statements still fail without `;` on Perl; Rust accepts newline-separated parser tests
+    but currently has broader whitespace-separated parsing; direct `foo["a"][9]['b'][z]` is not lowered on
+    Perl and Rust only has single array-index `IndexedVar`, so direct any-depth mixed access remains open.
+  Commit: `SPEC-FORMAT-TERSE.1.5 — split literals/access/call/separator surface`
+
+- ID: `SPEC-FORMAT-TERSE.1.5.2`
+  Status: `pending`
+  Goal: Primitive literal parity and locks.
+  Acceptance: `"..."`, `'...'`, integer, float, `true`, `false`, and `undef` are accepted as typed value
+    literals in return payloads and representative mutation/value-expression RHS positions on Perl and Rust;
+    Perl/Rust agree on observable JSON values; `true`/`false` are booleans, not Perl bareword strings; prefix
+    identifiers such as `trueword`/`undefine` remain out of the literal path.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.5.3`
+  Status: `pending`
+  Goal: Function-call spacing and mandatory-call-parentheses locks.
+  Acceptance: Calls still require `()`; optional whitespace before `(` is accepted at every already-supported
+    statement and value-expression site (`return (val)`, `set (name,val)`, `cat ("a","b")`,
+    `scalar (name)`, operator RHS/key expressions), without accepting bare no-paren helper keywords.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.5.4`
+  Status: `pending`
+  Goal: Statement separator contract.
+  Acceptance: Newlines separate top-level canonical DSL statements; semicolons remain accepted and are
+    required only when multiple statements share one physical line. Perl lowering emits valid generated Perl
+    for newline-separated statements; same-line adjacent statements without `;` are rejected or left as
+    explicit blockers consistently with Rust; semicolons inside nested expressions/literals stay protected.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.1.5.5`
+  Status: `pending`
+  Goal: Direct nested access surface.
+  Acceptance: Any-depth mixed access `foo["a"][9]['b'][z]` is designed and implemented on both variants, or
+    split before code if the Channel 2 dependency is still too broad. The result must define base/value/index
+    semantics explicitly, coordinate with `.1.2.3` value-position bare-word reads, and preserve the existing
+    `scalaref(base, path)` behavior until the direct syntax fully supersedes it.
   Verification: `pending`
   Commit: `pending`
 
@@ -783,10 +838,24 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.3.4.1` | `done` 2026-06-29 | Scalar assignment operator — `name = value` now lowers/runs identically to `set(name,value)` / `assign(name,value)`, without claiming array/hash operators or Channel 2 bare value reads. |
 | — | `SPEC-FORMAT-TERSE.1.3.4.2` | `done` 2026-06-29 | Array append operator — `items += value` now lowers/runs identically to explicit append forms for explicit RHS expressions, auto-exists the array target, and preserves the Channel 2 bare-RHS boundary. |
 | — | `SPEC-FORMAT-TERSE.1.3.4.3` | `done` 2026-06-29 | Hash-index assignment operator — `name[key] = value` lowers/runs identically to settled `set_key(name,key,value)` for explicit key/value expressions without broadening Channel 2. |
-| 1 | `SPEC-FORMAT-TERSE.1.5` | `pending` | Literals, nested access, call + semicolon rules. Scope/split first; Channel 2 bare value-position reads remain behind this literal/nested-access design surface. |
+| 1 | `SPEC-FORMAT-TERSE.1.5.2` | `pending` | Primitive literal parity first: Perl currently returns `true`/`false` as strings while Rust has typed booleans; lock the literal value model before using literals inside access/separator follow-ons. |
+| 2 | `SPEC-FORMAT-TERSE.1.5.3` | `pending` | Function-call spacing locks: optional whitespace before `(` is mostly already accepted, but needs focused cross-site regression coverage without broadening no-paren calls. |
+| 3 | `SPEC-FORMAT-TERSE.1.5.4` | `pending` | Statement separator contract: Perl newline-separated adjacent lowered statements currently compile invalid without `;`; Rust accepts broader whitespace-separated statements, so parity/signoff needs a dedicated leaf. |
+| 4 | `SPEC-FORMAT-TERSE.1.5.5` | `pending` | Direct any-depth nested access remains open and must coordinate explicitly with Channel 2 value-position bare-word reads. |
 | … | `.1.2.3`+ (Channel 2),`.1.6`,`.2.x`,`.3.x`,`.4` | `pending` | Channel 2 (value-position bare-word reads + RHS-shape — added after `.1.5` is designed) + remaining Round 1–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.5` split by value surface, call/separator surface, and access semantics**). `.1.5`
+  is not one implementation seam. Ground truth shows four different risk classes: (1) primitive literals are
+  partly landed, but Perl `true`/`false` currently execute as the strings `"true"`/`"false"` while Rust has
+  typed booleans; (2) optional whitespace before `(` already works at real helper/value sites and mainly needs
+  regression locks; (3) newline-separated adjacent DSL statements are detected by `StatementSplit` but still
+  generate invalid Perl without an inserted `;`, while Rust currently accepts broader whitespace-separated
+  statements; (4) direct any-depth `foo["a"][9]['b'][z]` is still distinct from the existing explicit
+  `scalaref(base,path)` helper and must coordinate with Channel 2 value-position bare-word reads. Therefore
+  `.1.5` is an active container, `.1.5.1` is the audit/split close-out, and the frontier starts with
+  `.1.5.2` primitive literal parity.
 
 - `2026-06-29` (**`.1.3.4.3` hash-index assignment operator** — direct hash mutation, explicit key/value
   expressions). The accepted rule is intentionally narrow: a top-level lifecycle statement `NAME[KEY] = RHS`
@@ -1071,6 +1140,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.4.1` | TOOLBOX lowerings for scalar operator vs `set(...)`; descriptor/source/runtime probes; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core `scalar_assignment`; focused Rust runtime `terse_1_3_4_1`; full Rust runtime suite; `mdbook build`; Knowledge Map, memory-architecture, doctrine, and full local CI gates | Perl recognizes top-level `NAME = RHS` as an ASSIGN statement and auto-declares the scalar target; Rust parses and executes statement-only `AssignScalar`. `name = cat(...)` lowers identically to `set(name, cat(...))`; `name == ...`, `items += ...`, `name[key] = ...`, and keyword-arg `name=...` remain out of scope. Phase0 PASS (`1..977`); oracle corpus regenerated with 14 fixtures; focused Rust tests PASS; full runtime suite PASS (116 unit + corpus-oracle harness + 41 integration tests); public book and KM updated. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.4.2` | TOOLBOX lowerings for array operator vs `push(...)` / `push_value(...)`; descriptor/source/runtime probes; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core `array_append`; focused Rust core `scalar_assignment`; focused Rust runtime `terse_1_3_4_2`; Rust corpus oracle; full Rust runtime suite; `mdbook build`; Knowledge Map, memory-architecture, doctrine, and full local CI gates | Perl recognizes top-level `NAME += RHS` as a PUSH statement and auto-declares the array target; Rust parses and executes statement-only `AssignArrayAppend`. `items += "a"`, `items += cat(...)`, and `items += scalar(value)` lower/run like explicit append forms; `items += value`, `items ++`, scalar assignment, and hash-index assignment stay separate. Phase0 PASS (`1..978`); oracle corpus regenerated with 15 fixtures; focused Rust tests PASS; full Rust runtime suite PASS (116 unit + corpus-oracle harness + 43 integration tests); public book and KM updated. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.3.4.3` | TOOLBOX lowerings for hash-index operator vs `set_key(...)`; `perl -c` edited Perl modules + test/generator; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust core `hash_index`; focused Rust core `scalar_assignment`; focused Rust core `array_append`; focused Rust runtime `terse_1_3_4_3`; Rust corpus oracle; full Rust runtime suite; `mdbook build`; Knowledge Map, memory-architecture, doctrine, and full local CI gates | Perl recognizes top-level `NAME[KEY] = RHS` as an ASSIGN statement and auto-declares the hash target; Rust parses and executes statement-only `AssignHashIndex`. `meta["stage"] = "v"`, `meta[cat("s","tage")] = cat("v","!")`, and `meta[scalar(key)] = scalar(value)` lower/run like `set_key(...)`; bare key/RHS forms remain deferred to Channel 2. Phase0 PASS (`1..979`); oracle corpus regenerated with 16 fixtures; focused Rust tests PASS; full Rust runtime suite PASS; public book and KM updated. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.5.1` (split) | KM retrieval first; TOOLBOX `call_spec_handler_subst` probes for literals, call spacing, direct nested access, and `scalaref(...)`; `LinkedSpec::Get` runtime probes for literal values and separator behavior; `StatementSplit` probes; Perl/Rust code-read (`StatementSplit`, `MethodExpr`, `ValueExpr`, `MethodLowering`, Rust `expr.rs`/`engine.rs`); focused Rust parser tests (`parse_`, `hash_index`); `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check` | Split `.1.5` into `.1.5.2` literal parity, `.1.5.3` call-spacing locks, `.1.5.4` separator semantics, and `.1.5.5` direct nested access. Ground truth: Perl strings/numbers/`undef` run, but `true`/`false` are strings; call spacing works at supported helper/value sites; newline-separated lowered statements fail on Perl without `;`; direct nested access is not lowered and Rust only has single array-index `IndexedVar`. KM card [[terse-literals-calls-separators-access-ground-truth]] added. DOCS/TREE/KM only — no engine/book behavior change, so phase0 N/A to split slice. |
 
 ## Commit Log
 
@@ -1094,8 +1164,18 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.3.4.1` | `SPEC-FORMAT-TERSE.1.3.4.1 — implement scalar assignment operator name = value` | Perl and Rust now support statement-level scalar `name = value` as equivalent to `set(name,value)` / `assign(name,value)`, with focused locks proving the narrow boundary and no Channel 2 broadening. Frontier becomes `.1.3.4.2` array append operator. |
 | `SPEC-FORMAT-TERSE.1.3.4.2` | `SPEC-FORMAT-TERSE.1.3.4.2 — implement array append operator items += value` | Perl and Rust now support statement-level array `items += value` as equivalent to explicit append forms for explicit RHS expressions, with locks proving bare RHS remains deferred to Channel 2. Frontier becomes `.1.3.4.3` hash-index assignment operator. |
 | `SPEC-FORMAT-TERSE.1.3.4.3` | `SPEC-FORMAT-TERSE.1.3.4.3 — implement hash-index assignment operator name[key] = value` | Perl and Rust now support statement-level hash-index `name[key] = value` as equivalent to `set_key(name,key,value)` for explicit key/value expressions, with locks proving bare key/RHS remain deferred to Channel 2. `.1.3.4` and `.1.3` close; frontier becomes `.1.5`. |
+| `SPEC-FORMAT-TERSE.1.5.1` (split) | `SPEC-FORMAT-TERSE.1.5 — split literals/access/call/separator surface` | `.1.5` is now an active container. `.1.5.1` closed the audit/split: primitive literal parity, call-spacing locks, separator semantics, and direct nested access are separate leaves. KM [[terse-literals-calls-separators-access-ground-truth]]. DOCS/TREE/KM only — no engine/book behavior change. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.5` SPLIT — literal/nested-access/call/semicolon surface decomposed before code.**
+  KM retrieval plus TOOLBOX/code-read showed the original leaf crossed four independent seams. Primitive
+  literals need parity work because Perl currently returns `true`/`false` as strings while Rust has typed
+  booleans. Optional whitespace before `(` works at supported call sites and needs focused locks. Statement
+  separators need a dedicated parity leaf: `StatementSplit` detects adjacent newline statements, but Perl
+  lowering emits invalid generated code without `;`, while Rust accepts broader whitespace-separated
+  statements. Direct any-depth nested access remains open and must coordinate with Channel 2 bare
+  value-position reads. `.1.5.1` audit/split is done; frontier -> `.1.5.2`.
 
 - `2026-06-29`: **`.1.3.4.3` DONE — hash-index assignment operator `name[key] = value` landed on Perl and
   Rust.** Top-level `NAME[KEY] = RHS` now lowers/runs like `set_key(NAME, KEY, RHS)` for explicit key/value

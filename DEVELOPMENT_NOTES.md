@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.5 — split before code; literals, calls, separators, and access are
+  separate seams): Grounded `.1.5` with KM/TOOLBOX/code-read and split it before implementation. Durable
+  points. (1) **Primitive literals need a parity leaf, not just locks.** Perl currently returns `true` and
+  `false` as bareword strings, while Rust has `BooleanLiteral`; typed boolean semantics must be made explicit
+  before later leaves rely on them. (2) **Call spacing is mostly a lock leaf.** The method parser accepts
+  whitespace before `(` at supported sites (`return (x)`, `set (name,x)`, nested `cat (...)`, wrapped
+  `scalar (...)`) while no-paren calls remain out of scope. (3) **Statement detection and statement emission
+  are different seams.** `StatementSplit` can identify newline-separated DSL statements, but Perl lowering
+  still emits `$name = "a"\nreturn $name`, which does not compile; Rust currently accepts even broader
+  whitespace-separated statements. The separator leaf must define and enforce "newline separates statements;
+  same-line multiple statements require semicolon" across variants. (4) **Direct nested access is not
+  `scalaref` with prettier punctuation yet.** Existing `scalaref(foo,{"a"}[9]{'b'}[scalar(z)])` lowers on
+  Perl, but direct `foo["a"][9]['b'][z]` is raw on Perl, and Rust only has a single array-index `IndexedVar`.
+  That leaf must coordinate with Channel 2 value-position bare-word reads.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.3.4.3 — hash-index assignment is direct hash mutation with explicit
   key/value expressions): Landed `name[key] = value` on Perl and Rust. Durable points. (1) **Match the settled
   `set_key` statement contract, not the pure helper.** Top-level `NAME[KEY] = VALUE` mutates the named working

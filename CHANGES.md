@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.5 — split literals/access/call/separator surface
+
+**Scope:** task tree, task-tree index, ROADMAP_V2, Knowledge Map card + generated map, and live continuity
+docs. No engine, test fixture, or mdBook behavior change.
+
+**Ground truth:** `.1.5` crosses independent seams. Perl currently lowers/runs string, numeric, and `undef`
+literal returns, but `true` and `false` execute as the strings `"true"` and `"false"`; Rust already parses
+them as typed booleans. Optional whitespace before call parentheses works at real helper/value sites such as
+`return (x)`, `set (name,x)`, `cat ("a","b")`, and `scalar (name)`, but still needs focused locks. The
+statement splitter recognizes adjacent top-level DSL statements, yet Perl lowering emits invalid generated
+Perl when newline-separated lowered statements lack `;`; Rust currently accepts broader whitespace-separated
+statements. Direct any-depth `foo["a"][9]['b'][z]` is not lowered on Perl, and Rust only has single
+array-index `IndexedVar`, so direct mixed access must coordinate with Channel 2 value-position bare-word reads.
+
+**Outcome:** `.1.5` is now an active container. `.1.5.1` closes the audit/split, and the current frontier is
+`.1.5.2` primitive literal parity, followed by call-spacing locks, separator semantics, and direct nested
+access.
+
+**Validation:** KM retrieval first; TOOLBOX `call_spec_handler_subst`, `LinkedSpec::Get`, and
+`StatementSplit` probes; Perl/Rust code-read; focused Rust parser tests (`parse_` and `hash_index`) pass
+with existing rgx/pgen warning noise. `knowledge-map/scripts/check_knowledge_map.sh`,
+`scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`, and `git diff --check` all pass.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.3.4.3 — implement hash-index assignment operator name[key] = value
 
 **Scope:** Perl ActionIR contract/scanner/lowering/autodeclaration, Rust expression parser/runtime execution,

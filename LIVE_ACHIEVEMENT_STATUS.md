@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.5 — literal/nested-access/call/semicolon surface split before code**
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). PNT selected `.1.5` and ran KM +
+  TOOLBOX/code-read first. Ground truth: Perl strings/numbers/`undef` already run, but `true`/`false` return
+  strings while Rust has typed booleans; optional whitespace before `(` works at supported helper/value sites;
+  newline-separated adjacent lowered statements still fail on Perl without `;`, while Rust accepts broader
+  whitespace-separated statements; direct `foo["a"][9]['b'][z]` is not lowered on Perl and Rust only has
+  single array-index access. `.1.5` is now an active container: `.1.5.1` audit/split done, `.1.5.2` primitive
+  literal parity, `.1.5.3` call-spacing locks, `.1.5.4` separator semantics, `.1.5.5` direct nested access.
+  **Frontier: `SPEC-FORMAT-TERSE.1.5.2`**.
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.3.4.3 — hash-index assignment operator `name[key] = value` landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + BOOK + PHASE0/RUST/ORACLE LOCKS). Top-level `NAME[KEY] = VALUE`
   now lowers/runs identically to the settled named-hash mutation form `set_key(NAME, KEY, VALUE)` when the key
