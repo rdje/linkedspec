@@ -387,7 +387,9 @@ undef             — undefined/null
 ```
 
 `true` and `false` are boolean values, not strings. Literal recognition is exact:
-`trueword`, `false_alarm`, and `undefine` are identifiers, not literals.
+`trueword`, `false_alarm`, and `undefine` are identifiers, not literals. In supported
+scalar source slots such as `return(trueword)`, those identifiers are working-variable
+reads.
 
 Helper calls use the uniform `callee(args)` shape. Whitespace between the callee
 name and the opening parenthesis is accepted (`set (name, value)` is the same call
@@ -406,8 +408,7 @@ The base `name` is a working scalar that holds a structured array/hash payload.
 Quoted string segments (`["field"]` or `['field']`) are hash-key reads. Numeric
 segments and helper/value expressions (`[0]`, `[scalar(i)]`, `[add(1, 2)]`) are
 array-index reads. Bare path atoms such as `[i]` are reserved for the later
-Channel 2 bare value-position-read design; write `[scalar(i)]` when reading a
-working scalar today.
+direct-access bare-path design; write `[scalar(i)]` when reading a working scalar today.
 
 ### 7.1 Declaration Helpers
 ```
@@ -416,6 +417,7 @@ declare(array, name)       — declare an array working variable
 declare(hash, name)        — declare a hash working variable
 declare(scalar, name=value) — declare with initializer
 assign(name, value)         — reassign a working variable
+return(name)                — read and return a scalar working variable
 ```
 
 ### 7.2 Scalar Helpers
@@ -667,7 +669,7 @@ A valid `.spec` file must satisfy:
 The following are **legacy compatibility constructs** recognized for migration
 tracking but not recommended for new `.spec` authoring:
 
-- Raw Perl expressions (bare variable references, ad hoc operators)
+- Raw Perl expressions and ad hoc operators outside the documented helper/operator slots
 - `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` (retired)
 - `array_values(...)` — use `array_copy(...)`
 - `flatten(...)` — use `flat(...)`

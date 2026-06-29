@@ -221,14 +221,16 @@ E {return(array_copy(array(results)))}
 
 All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
 is the target accumulator. To append a working-variable value, write
-`push(results, scalar(value))` or use `push_value(results, scalar(value))` until bare
-value-position reads are part of the DSL.
+`push(results, scalar(value))` or use `push_value(results, scalar(value))` until the
+array-append RHS form accepts bare scalar reads. Bare scalar reads are currently supported in
+return and assignment-like source slots such as `return(value)`, `set(out, value)`, and
+`out = value`.
 
 Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
 "normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`
 in place. The hash target auto-exists just like a declared `hash(meta)` working
 variable; keep the key and value explicit (`"stage"`, `cat(...)`, `scalar(key)`,
-`scalar(value)`) until bare value-position reads are part of the DSL.
+`scalar(value)`) until the hash mutation key/RHS forms accept bare scalar reads.
 
 ### 5.4 Return Value
 

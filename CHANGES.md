@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3.1 — scalar source-slot bare reads
+
+**Scope:** Perl ActionIR return/source lowering, auto-working-variable collector, phase0 regression coverage,
+mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Perl now treats bare identifiers as scalar working-variable reads in the scoped source slots
+owned by this leaf: `return(NAME)`, `set(out, NAME)` / `assign(out, NAME)`, and scalar operator `out = NAME`.
+Each newly sigiled read gets one per-invocation `my $NAME` unless it is already declared/wrapped. Primitive
+literals remain exact (`true`/`false`/`undef` are not variables), while prefix identifiers such as `trueword`
+and `undefine` are ordinary scalar reads in these source slots.
+
+**Boundary:** this does not broaden generic helper arguments, array append RHS, hash mutation key/RHS slots,
+direct-access bare path atoms, or all-bare child-call syntax. `items += value`, `meta["stage"] = value`,
+`foo["a"][z]`, and `push(A,B)` keep their prior behavior.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering probes PASS; generated-source/runtime no-leak probe
+PASS; phase0 PASS (`t/phase0_regression.t`, 985 tests, including the new 24-assertion lock); mdBook build PASS;
+Knowledge Map, memory/doctrine/diff checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.3 — split scalar bare reads by lowering seam
 
 **Scope:** task tree, task-tree index, roadmap/live continuity docs, Knowledge Map card + generated map. No

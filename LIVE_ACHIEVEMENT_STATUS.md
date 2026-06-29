@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3.1 — Perl scalar source-slot bare reads landed**
+  (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). `return(NAME)`, `set(out, NAME)` / `assign(out, NAME)`, and
+  scalar operator `out = NAME` now read scalar working variable `NAME` and auto-supply one per-invocation
+  `my $NAME` when needed. Primitive literals remain exact (`true`/`false`/`undef`), while prefix identifiers
+  such as `trueword` are scalar identifiers in these source slots. This does **not** advance array append RHS,
+  hash mutation key/RHS slots, direct path atoms, generic helper arguments, or all-bare child-call `push(A,B)`.
+  **Verification:** Perl syntax checks PASS; TOOLBOX/source/runtime probes PASS; phase0 PASS (`1..985`);
+  mdBook/KM/local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.3.2`** (Perl mutation key/RHS scalar slots).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.3 — Perl scalar bare reads split by lowering seam**
   (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). TOOLBOX probes showed the remaining
   scalar Channel 2 work is not one implementation seam. Return/assignment source slots still emit raw barewords

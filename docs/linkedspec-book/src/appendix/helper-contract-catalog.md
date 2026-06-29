@@ -40,10 +40,13 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
 > target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`;
+> the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
 > the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator
 > `name += value`; and the hash target of
 > statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`
-> auto-exist from a **bare** name too, with the kind fixed by that position. A backend MUST supply
+> auto-exist from a **bare** name too, with the kind fixed by that position. Aggregate snapshot reads
+> `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)` are also type-implying read
+> positions. A backend MUST supply
 > the same auto-existence: a wrapper- or position-referenced variable
 > with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
 > carried across parses or recursive re-entries. `declare(...)` is the explicit form: use it for an
@@ -77,8 +80,8 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 - **Signature**: `assign(name: string, value: expr)`
 - **Returns**: void
 - **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
-- **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper; a **bare** target — `assign(name, …)` — auto-exists as a scalar (the assign target position is scalar).
-- **Terse spelling**: `set(name, value)` is the canonical terse helper rename of `assign`, and `name = value` is the scalar operator spelling. All three forms lower and run identically for scalar targets; a bare `set` target or operator target auto-exists exactly like `assign`. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Edge cases**: Assigning through a typed wrapper — `assign(scalar(name), …)` — fixes the variable's kind from the wrapper; a **bare** target — `assign(name, …)` — auto-exists as a scalar (the assign target position is scalar). In scalar assignment source slots, a bare source name reads a scalar too: `assign(out, value)` is equivalent to `assign(out, scalar(value))`.
+- **Terse spelling**: `set(name, value)` is the canonical terse helper rename of `assign`, and `name = value` is the scalar operator spelling. All three forms lower and run identically for scalar targets; a bare `set` target or operator target auto-exists exactly like `assign`, and a bare scalar source reads the working scalar. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
 
@@ -127,8 +130,8 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
   segments such as `["children"]` or `['children']` are hash keys. Numeric segments and explicit helper/value
   expressions such as `[0]` or `[scalar(i)]` are array indexes.
 - **Edge cases**: Returns `undef` when a segment does not exist or the current value has the wrong container
-  kind. Bare path atoms such as `[i]` are not variable reads yet; write `[scalar(i)]` until the Channel 2
-  bare value-position-read work lands.
+  kind. Bare path atoms such as `[i]` are not variable reads yet; write `[scalar(i)]` until the direct-access
+  bare-path work lands.
 - **Example**:
   ```text
   Top::
@@ -312,14 +315,14 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 - **Returns**: void
 - **Behavior**: Terse explicit-value append. Lowers identically to `push_value(target, value)` for unambiguous value expressions.
 - **Examples**: `push(items, "a")`, `push(items, scalar(value))`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
-- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable value, wrap the value (`push(items, scalar(value))` or `push_value(items, scalar(value))`) until bare value-position reads land.
+- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable value, wrap the value (`push(items, scalar(value))` or `push_value(items, scalar(value))`) until bare append-RHS reads land.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
 - **Returns**: void
 - **Behavior**: Statement-level array append operator. Lowers/runs identically to `push(target, value)` / `push_value(target, value)` for explicit value expressions.
 - **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += scalar(value)`.
-- **Edge cases**: A bare RHS such as `items += value` remains reserved for the later bare value-position read work. Use `items += scalar(value)` or `push_value(items, scalar(value))` when appending a working scalar by name.
+- **Edge cases**: A bare RHS such as `items += value` remains reserved for the later mutation-slot scalar-read work. Use `items += scalar(value)` or `push_value(items, scalar(value))` when appending a working scalar by name.
 
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
@@ -507,7 +510,7 @@ Literal recognition is exact. Prefix identifiers such as `trueword`, `false_alar
 - **Returns**: void
 - **Behavior**: Statement-level hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions.
 - **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = scalar(kind)`, `meta[scalar(field_name)] = scalar(field_value)`.
-- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key or RHS identifiers are deliberately not accepted yet: write `meta[scalar(key)] = "v"` and `meta["stage"] = scalar(value)` until bare value-position reads land. This is a statement-only mutation form, not a value expression.
+- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key or RHS identifiers are deliberately not accepted yet: write `meta[scalar(key)] = "v"` and `meta["stage"] = scalar(value)` until mutation-slot bare scalar reads land. This is a statement-only mutation form, not a value expression.
 
 ### `rename_key(h, old, new)`
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
@@ -701,7 +704,7 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 - **Signature**: `return(value: expr)`
 - **Returns**: the value (from the lifecycle block).
 - **Behavior**: Canonical return from a lifecycle block. Returns the value to the parent rule's accumulator.
-- **Edge cases**: `return(array(...))` returns an array value. `return(scalar(...))` returns a scalar.
+- **Edge cases**: `return(array(...))` returns an array value. `return(scalar(...))` returns a scalar. A bare scalar source such as `return(count)` reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`.
 
 ### `return_undef()`
 - **Signature**: `return_undef()`
@@ -992,8 +995,8 @@ unlike the Retired table below):
 
 | Canonical (terse) | Deprecated alias | Notes |
 |---|---|---|
-| `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`. |
-| `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Does not imply array `+=`, hash-index assignment, or bare value-position reads. |
+| `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
+| `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Bare RHS names read working scalars. Does not imply array `+=` or hash-index assignment. |
 | `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator for explicit value expressions. Bare RHS is still deferred; write `items += scalar(value)` or `push_value(items, scalar(value))` for a working scalar. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator for explicit key/value expressions. Bare key or RHS identifiers are still deferred; write `meta[scalar(key)] = scalar(value)` for working scalars. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |

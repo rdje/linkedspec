@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3.1 — source-slot bare scalar reads landed): Implemented the first scalar
+  Channel 2 child by changing only the source-slot seams. Durable points. (1) **The lowering hook is scoped.**
+  `_lower_return_payload_expr` handles `return(NAME)` and `_lower_assignment_source_expr` handles
+  `set/assign(out, NAME)` plus `out = NAME`; `_lower_method_value_expr` remains unchanged, so helper arguments
+  do not silently become scalar reads. (2) **Every new `$NAME` read must be paired with collector coverage.**
+  `_collect_auto_working_var_decls` now scans raw action blocks for return payload bare names, set/assign source
+  bare names, and scalar-operator RHS bare names, then dedups against wrappers/declares and reserved names.
+  (3) **Literal exactness now composes with scalar reads.** `true`/`false`/`undef` stay primitive literals, but
+  prefix identifiers like `trueword` and `undefine` are no longer raw barewords in supported source slots; they
+  read `$trueword` / `$undefine`. (4) **The split boundaries are locked.** `items += value`,
+  `meta["stage"] = value`, `foo["a"][z]`, and all-bare `push(A,B)` retain their previous behavior.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.3 — Perl scalar bare reads split by lowering seam): Split the scalar
   Channel 2 owner before code. Durable points. (1) **Do not add a generic "bare word means scalar" fallback to
   `_lower_method_value_expr`.** That helper is used by many nested/value helper arguments; broadening it would

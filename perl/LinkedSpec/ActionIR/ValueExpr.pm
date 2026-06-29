@@ -428,6 +428,31 @@ sub _infer_scalar_container_kind {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_source_slot_bare_scalar_read_expr
+# Purpose : Lower one accepted scalar source-slot bare identifier to `$NAME`.
+# Args    : ($expr, $deps)
+# Returns : Perl scalar read expression, or undef for non-source-slot bare reads
+#------------------------------------------------------------------------------
+sub _lower_source_slot_bare_scalar_read_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
+ return undef if $trimmed =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
+ return '$'.$trimmed
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_assignment_source_expr
 # Purpose : Map assignment source tokens from method DSL to Perl expressions.
 # Args    : ($source, $deps)
@@ -451,6 +476,9 @@ sub _lower_assignment_source_expr {
  return 'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)' if $source eq 'CAPTURE';
  return '$IMATCH' if $source eq 'IMATCH';
  return '$LMATCH' if $source eq 'LMATCH';
+
+ my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($source, $deps);
+ return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
 
  my $method_value = $lower_method_value_expr->($source);
  return $method_value if defined($method_value) && length($method_value) && $source =~ /^call\s*\(/o;

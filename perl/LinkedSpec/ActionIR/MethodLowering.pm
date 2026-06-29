@@ -1658,6 +1658,31 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_source_slot_bare_scalar_read_expr
+# Purpose : Lower one accepted scalar source-slot bare identifier to `$NAME`.
+# Args    : ($expr, $deps)
+# Returns : Perl scalar read expression, or undef for non-source-slot bare reads
+#------------------------------------------------------------------------------
+sub _lower_source_slot_bare_scalar_read_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
+ return undef if $trimmed =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
+ return '$'.$trimmed
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_return_payload_expr
 # Purpose : Lower generalized return payload expressions, preserving nested
 #           `[]/{}` literals while lowering embedded scalar/array/hash/flat helpers.
@@ -1685,8 +1710,11 @@ sub _lower_return_payload_expr {
   length($direct) &&
   ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|input_slice|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
-  return $direct;
+ return $direct;
  }
+
+ my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
+ return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
 
  my $rewritten = $trimmed;
  for (1 .. 64) {

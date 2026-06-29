@@ -44137,6 +44137,87 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
     is(defined($hash_second) ? $hash_second : ('ERR:' . normalize_error($@)), '{"b":true}', 're-running the SAME parser resets the auto-declared bare hash read target');
 };
 
+subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' => sub {
+    # SPEC-FORMAT-TERSE.1.2.3.3.1 (Channel 2 scalar source-slot subset):
+    # return(NAME), set/assign(out, NAME), and `out = NAME` now read the scalar
+    # working variable `$NAME` and get the matching per-invocation lexical. This
+    # deliberately does not claim mutation key/RHS slots, direct path atoms, or
+    # generic helper argument bare reads.
+    plan tests => 24;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+    my $run = sub {
+        my ($p, $input) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$input); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+
+    is($L->('return(count)'), 'return $count',
+        'return(NAME) lowers as a scalar source-slot read');
+    is($L->('set(out,count)'), '$out = $count',
+        'set(out, NAME) lowers the source as a scalar read');
+    is($L->('assign(out,count)'), '$out = $count',
+        'assign(out, NAME) lowers the source as a scalar read');
+    is($L->('name = value'), '$name = $value',
+        'scalar assignment operator lowers a bare RHS as a scalar read');
+    like($L->('return(true)'), qr/^return do \{ require JSON::PP; JSON::PP::true \}/,
+        'reserved literal true stays a boolean literal, not a scalar read');
+    is($L->('return(undef)'), 'return undef',
+        'reserved literal undef stays undef, not a scalar read');
+    is($L->('return(trueword)'), 'return $trueword',
+        'prefix identifier trueword is not a literal and now follows scalar bare-read semantics');
+    is($L->('return(undefine)'), 'return $undefine',
+        'prefix identifier undefine is not a literal and now follows scalar bare-read semantics');
+    is($L->('items += value'), 'items += value',
+        'array append bare RHS remains deferred to the mutation key/RHS scalar-read leaf');
+    is($L->('meta["stage"] = value'), 'meta["stage"] = value',
+        'hash-index bare RHS remains deferred to the mutation key/RHS scalar-read leaf');
+    is($L->('return(foo["a"][z])'), 'return foo["a"][z]',
+        'direct-access bare path atom remains deferred');
+    is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
+        'all-bare push(A,B) remains child-call syntax');
+
+    my $return_src = $gen->("top:: -> w { return(count) }\n\nw : /x/\n");
+    my $return_count_my = () = ($return_src =~ /my \$count\b/g);
+    is($return_count_my, 1, 'bare return(count) auto-supplies exactly one `my $count`');
+    like($return_src, qr/return \$count\b/, 'generated source returns `$count` for return(count)');
+    unlike($return_src, qr/my [\@\%]count\b/, 'bare return(count) does not infer array/hash declarations');
+
+    my $source_src = $gen->("top:: -> w { set(out, count); name = value; return(out) }\n\nw : /x/\n");
+    for my $name (qw(out count name value)) {
+        my $q = quotemeta('$'.$name);
+        my $n = () = ($source_src =~ /my $q\b/g);
+        is($n, 1, "source-slot scalar read/target auto-supplies exactly one `my \$$name`");
+    }
+
+    my $literal_src = $gen->("top:: -> w { return(true); set(out, false); name = undef }\n\nw : /x/\n");
+    unlike($literal_src, qr/my \$(?:true|false|undef)\b/,
+        'reserved primitive literals are not auto-declared as scalar reads');
+
+    my $dedup_src = $gen->("top:: -> w { set(out, count); return(s(count)) }\n"
+                         . "I.declare(scalar, count)\n\nw : /x/\n");
+    my $dedup_count = () = ($dedup_src =~ /my \$count\b/g);
+    is($dedup_count, 1, 'bare source read + wrapped/declared count dedup to one `my $count`');
+
+    my $runtime_spec = "top:: /(\\w+)\\s*/ -> top[0] { set(out, match_group(0)) }\n"
+                     . "LX { return(out) }\n";
+    my $p = eval { LinkedSpec::Get(\$runtime_spec, top_rule => 'top', parse_mode => 'seek') };
+    ok(ref($p) eq 'CODE', 'bare return(out) runtime no-leak spec compiles to a parser')
+        or diag(normalize_error($@));
+    my $first_input = 'a b';
+    is($run->($p, $first_input), '"b"', 'bare return(out) reads the scalar set during the current parse');
+    my $empty_input = '';
+    is($run->($p, $empty_input), 'null', 're-running the SAME parser with no match returns null, not a leaked previous scalar');
+};
+
 subtest 'spec_format_terse_1_4_1_new_spellings_lower_identically_to_canonical' => sub {
     # SPEC-FORMAT-TERSE.1.4.1 (ADR 0007): the terse helper renames become canonical, the old
     # names stay deprecated aliases that lower identically -- assign<->set, concat<->cat,
@@ -44488,7 +44569,7 @@ subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
     # forms, not bare working-variable reads. That matters most for true/false:
     # on the Perl reference they must become JSON booleans, not the strings
     # "true"/"false"; prefix identifiers such as trueword remain outside the
-    # literal path and keep their existing bare-word behavior.
+    # literal path and now follow the later scalar bare-read source-slot rule.
     plan tests => 18;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -44503,9 +44584,9 @@ subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
         'return(true) lowers to a JSON::PP boolean true literal');
     like($L->('return(false)'), qr/^return do \{ require JSON::PP; JSON::PP::false \}/,
         'return(false) lowers to a JSON::PP boolean false literal');
-    is($L->('return(trueword)'), 'return trueword',
+    is($L->('return(trueword)'), 'return $trueword',
         'prefix identifier trueword is not claimed as the true literal');
-    is($L->('return(undefine)'), 'return undefine',
+    is($L->('return(undefine)'), 'return $undefine',
         'prefix identifier undefine is not claimed as the undef literal');
     like($L->('set(flag,true)'), qr/^\$flag = do \{ require JSON::PP; JSON::PP::true \}/,
         'set(flag,true) lowers true as a typed value');

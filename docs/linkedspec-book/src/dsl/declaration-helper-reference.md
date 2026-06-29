@@ -70,9 +70,15 @@ return(array_copy(items))
 return(hash_copy(hash(meta)))
 return(hash_copy(meta))
 return(copy(items))
+
+# scalar source-slot reads — the bare name is a scalar value
+return(scalar(count))
+return(count)
+set(out, count)
+name = value
 ```
 
-The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. The variable is the same fresh per-invocation working value described above. (Scalar bare value reads — `return(count)` instead of `return(scalar(count))` — and inferring a kind from a value's shape are still later evolution steps. In hash-index assignment, keep the key and value explicit too: use `"text"`, `cat(...)`, `scalar(key)`, or another helper expression rather than bare `key` / `value` until that later step lands.)
+The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of statement-level `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In return and assignment-like scalar source slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, and `out = count` are the terse forms of `return(scalar(count))`, `set(out, scalar(count))`, and `out = scalar(count)`. The variable is the same fresh per-invocation working value described above. Inferring a kind from a value's shape is still a separate, later evolution step. In array append and hash-index assignment, keep the RHS/key explicit for now: use `items += scalar(value)`, `meta[scalar(key)] = scalar(value)`, `"text"`, `cat(...)`, or another helper expression rather than bare `value` / `key` until that later mutation-slot step lands.
 
 `declare(...)` stays supported and is still the right choice when you want to:
 

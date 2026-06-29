@@ -827,9 +827,11 @@ sub _mask_action_code_literals {
 #             (c) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE
 #                 aggregate value reads that already lower to a sigiled aggregate:
 #                 array_copy(NAME) / copy(NAME) -> @NAME and hash_copy(NAME) -> %NAME.
-#                 Scalar bare value reads such as return(NAME), scalar RHS, and direct
-#                 access [NAME] remain deliberately out of scope for later Channel 2
-#                 leaves.
+#             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
+#                 BARE scalar reads in return/assignment-like source slots:
+#                 return(NAME), assign/set(out, NAME), and `out = NAME` -> $NAME.
+#                 Mutation RHS/key slots and direct access [NAME] remain deliberately
+#                 out of scope for later scalar Channel 2 children.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -904,6 +906,24 @@ sub _collect_auto_working_var_decls {
   while ($masked =~ /\bhash_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    $record->('%', $1);
   }
+  # (d) SPEC-FORMAT-TERSE.1.2.3.3.1 — BARE scalar source-slot reads.
+  #     These forms now lower to `$NAME`; collect the matching scalar lexical.
+  while ($masked =~ /\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+   my $call = _parse_method_function_expr($+{expr});
+   next unless $call && ($call->{method} // '') eq 'return';
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+   next unless $args;
+   my $payload = _trim_action_ir_value($args->[0]);
+   $record->('$', $payload) if defined($payload) && $payload =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  }
+  while ($masked =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+   my $call = _parse_method_function_expr($+{expr});
+   next unless $call && (($call->{method} // '') eq 'assign');
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
+   next unless $args;
+   my $source_expr = _trim_action_ir_value($args->[1]);
+   $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  }
   foreach my $statement (@{_split_action_ir_statements($block)}) {
    my $trimmed = _trim_action_ir_value($statement);
    next unless defined($trimmed) && length($trimmed);
@@ -921,6 +941,7 @@ sub _collect_auto_working_var_decls {
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
     my $source_expr = _trim_action_ir_value($2);
     $record->('$', $1) if defined($source_expr) && length($source_expr);
+    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
     next;
    }
    my $call = _parse_method_function_expr($trimmed);
