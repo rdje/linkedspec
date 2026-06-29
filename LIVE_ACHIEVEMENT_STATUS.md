@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3 — Channel 2 value reads split by aggregate/scalar surfaces**
+  (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM + TOOLBOX/code-read ground truth
+  showed Channel 2 is not one implementation seam. Perl aggregate bare value reads already lower
+  (`array_copy(items)` -> `[@items]`, `hash_copy(meta)` -> `{%meta}`, `copy(items)` -> `[@items]`) but do not
+  get safe preamble declarations, so they still risk non-strict package globals. Rust keeps bare aggregate
+  value reads out of aggregate-copy resolvers. Scalar-like value reads remain separate: Perl still emits
+  bareword/raw forms for `return(count)`, `set(out,count)`, `items += value`, `meta[key] = value`, and
+  `foo["a"][z]`, while Rust already evaluates plain variables as scalar reads. **Verification:** TOOLBOX
+  lowering/source probes PASS; KM/memory/doctrine/diff checks green.
+  **Frontier: `SPEC-FORMAT-TERSE.1.2.3.1`** (Perl aggregate bare value-read auto-existence).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.5.5.2 — bare direct-access coordination merged into Channel 2**
   (DOCS/TREE/KM ONLY; **no engine, fixture, or mdBook behavior change**). KM retrieval plus TOOLBOX reverify
   showed the post-`.1.5.5.1` boundary is unchanged: `foo["a"][9]["b"][scalar(z)]` lowers through the canonical

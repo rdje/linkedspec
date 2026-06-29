@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3 — Channel 2 split by aggregate/scalar value-read surfaces): Split the
+  broad Channel 2 owner before code. Durable points. (1) **Aggregate bare reads are already partially
+  implemented on Perl, but unsafely.** `array_copy(items)`, `hash_copy(meta)`, and `copy(items)` lower to
+  `[@items]`, `{%meta}`, and `[@items]`, but generated source does not auto-declare `my @items` / `my %meta`,
+  so an undeclared bare aggregate read is still a non-strict package-global hazard. This is the first safe
+  Perl leaf: add the missing preamble declarations without changing wrapped/declared specs. (2) **Rust is not
+  lockstep for aggregate bare reads yet.** Its aggregate-copy resolvers pass `allow_bare=false` for value-read
+  positions, so bare `array_copy(items)`/`hash_copy(meta)` do not name the working aggregate the way Perl's
+  current lowering does. That becomes a separate parity leaf. (3) **Scalar bare reads are a different
+  surface.** Perl still emits `return count` / `$out = count` / raw `items += value` / raw `foo["a"][z]`,
+  while Rust already treats `Expr::Variable` as `ctx.get_scalar(name)`. Do not bundle scalar read semantics
+  with aggregate auto-existence; it needs its own Perl reference + Rust parity pair. (4) **RHS-shape `[]`/`{}`
+  inference is later.** It depends on the read semantics landing first and is not pre-published as an ID in
+  this split.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.5.5.2 — bare direct access merged into Channel 2): Closed the
   direct-access coordination leaf without code. Durable points. (1) **Do not special-case `[z]` inside direct
   access.** Reverify after `.1.5.5.1` showed `foo["a"][9]["b"][scalar(z)]` lowers, but `foo["a"][9]["b"][z]`

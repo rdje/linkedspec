@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3 — split Channel 2 value reads by aggregate/scalar surfaces
+
+**Scope:** task tree, task-tree index, roadmap/live continuity docs, Knowledge Map card + generated map. No
+engine, test fixture, or mdBook behavior change.
+
+**Ground truth:** Channel 2 is not one implementation seam. Perl aggregate bare value reads already lower to
+sigiled variables: `array_copy(items)` -> `[@items]`, `hash_copy(meta)` -> `{%meta}`, and `copy(items)` ->
+`[@items]`; generated source shows those forms do not get `my @items` / `my %meta`, so they still carry the
+same non-strict package-global hazard as earlier auto-existence work. Rust deliberately keeps bare aggregate
+value reads out of aggregate-copy resolvers. Scalar-like value reads remain separate: Perl still emits
+bareword/raw forms for `return(count)`, `set(out,count)`, `items += value`, `meta[key] = value`, and
+`foo["a"][z]`, while Rust already evaluates `Expr::Variable` as a scalar read.
+
+**Split:** `.1.2.3` is now an active container. First children are `.1.2.3.1` (Perl aggregate bare value-read
+auto-existence) and `.1.2.3.2` (Rust parity for that aggregate surface), followed by `.1.2.3.3` (Perl scalar
+bare value reads) and `.1.2.3.4` (Rust parity for scalar reads). RHS-shape `[]`/`{}` syntax remains later.
+
+**Validation:** TOOLBOX lowering/source probes PASS; Knowledge Map regenerate/check PASS; memory/doctrine
+checks PASS; `git diff --check` PASS. Phase0/Rust runtime/local CI are N/A to this docs/tree/KM split slice
+because no behavior changed.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2
 
 **Scope:** task tree, task-tree index, roadmap/live continuity docs, Knowledge Map card + generated map. No

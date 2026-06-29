@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `97a0970` — `SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — **`.1.5.5.2` SUPERSEDED/MERGED 2026-06-29; frontier -> `.1.2.3`**. Bare direct-access atoms are owned by global Channel 2, not a local direct-access rule. User in a **PNT loop** (2026-06-23).
-- next_action: Pick **`SPEC-FORMAT-TERSE.1.2.3`** — Channel 2 design/split for value-position bare-word reads + RHS-shape/type inference.
+- latest_commit: `516165a` — `SPEC-FORMAT-TERSE.1.5.5.2 — handoff: record Channel 2 merge commit in MEMORY`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — **`.1.2.3` SPLIT 2026-06-29; frontier -> `.1.2.3.1`**. Channel 2 value reads split by aggregate/scalar surfaces. User in a **PNT loop** (2026-06-23).
+- next_action: Pick **`SPEC-FORMAT-TERSE.1.2.3.1`** — Perl aggregate bare value-read auto-existence for `array_copy(NAME)`, `hash_copy(NAME)`, and `copy(NAME)`.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy source baseline engine.rs 11 / helpers.rs 2; oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs`. phase0 baseline = **983 green after `.1.5.5.1`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: MEMORY handoff only; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.1.2.3` docs/task/KM split pending commit; known unrelated untracked paths `rgx` and `.claude/projects/` must remain unstaged.
