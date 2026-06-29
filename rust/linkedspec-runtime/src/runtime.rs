@@ -140,6 +140,30 @@ impl RuntimeContext {
             .push(value);
     }
 
+    pub fn push_front_value(&mut self, arr_name: &str, value: RuntimeValue) {
+        self.arrays
+            .entry(arr_name.to_string())
+            .or_default()
+            .insert(0, value);
+    }
+
+    pub fn pop_back_value(&mut self, arr_name: &str) -> RuntimeValue {
+        self.arrays
+            .entry(arr_name.to_string())
+            .or_default()
+            .pop()
+            .unwrap_or(RuntimeValue::Undef)
+    }
+
+    pub fn pop_front_value(&mut self, arr_name: &str) -> RuntimeValue {
+        let values = self.arrays.entry(arr_name.to_string()).or_default();
+        if values.is_empty() {
+            RuntimeValue::Undef
+        } else {
+            values.remove(0)
+        }
+    }
+
     pub fn get_array(&self, name: &str) -> Vec<RuntimeValue> {
         self.arrays.get(name).cloned().unwrap_or_default()
     }

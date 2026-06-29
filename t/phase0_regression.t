@@ -2531,6 +2531,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_assign_method_statement = sub { return 'assign_method_ok' };
     local *Synthetic::ActionIROwner::_lower_scalar_assignment_operator_statement = sub { return 'scalar_assignment_operator_ok' };
     local *Synthetic::ActionIROwner::_lower_array_append_operator_statement = sub { return 'array_append_operator_ok' };
+    local *Synthetic::ActionIROwner::_lower_array_end_mutation_method_statement = sub { return 'array_end_mutation_ok' };
     local *Synthetic::ActionIROwner::_lower_hash_index_assignment_operator_statement = sub { return 'hash_index_assignment_operator_ok' };
     local *Synthetic::ActionIROwner::_lower_set_key_statement = sub { return 'set_key_statement_ok' };
     local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
@@ -13182,7 +13183,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -45140,6 +45141,86 @@ subtest 'spec_format_terse_1_2_3_5_2_rhs_shape_target_kind_inference' => sub {
         'hash declaration shape initializer lowers key/value members before runtime');
     like($gen->($declare_hash_spec), qr/my \%meta = \(\$key => \$value, "fixed" => \[\$value\]\)/,
         'hash declaration shape initializer lowers nested shape members');
+};
+
+subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
+    # SPEC-FORMAT-TERSE.1.6: receiver-dot array end mutations are statement-level
+    # ActionIR, with bare receivers naming working arrays and bare push values
+    # staying scalar reads in the mutation-value slot.
+    plan tests => 21;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('items.push_back(value)'), 'push @items, $value',
+        'push_back lowers to a push on the receiver working array');
+    is($L->('items.push_front(value)'), 'unshift @items, $value',
+        'push_front lowers to an unshift on the receiver working array');
+    is($L->('items.pop_back()'), 'pop @items',
+        'pop_back lowers to a discarded pop on the receiver working array');
+    is($L->('items.pop_front()'), 'shift @items',
+        'pop_front lowers to a discarded shift on the receiver working array');
+    is($L->('array(items).push_back("b")'), 'push @items, "b"',
+        'push_back accepts an explicit array(...) receiver');
+    is($L->('a(items).push_front("a")'), 'unshift @items, "a"',
+        'push_front accepts the a(...) receiver alias');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(value,\"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(array_copy(items)) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'array end-mutation spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["a"]',
+        'array end-mutation methods run in receiver order');
+
+    my $src = $gen->($spec);
+    is((() = ($src =~ /my \@items\b/g)), 1,
+        'array end mutations auto-supply one my @items');
+    is((() = ($src =~ /my \$items\b/g)), 0,
+        'array end mutations do not auto-supply my $items');
+    is((() = ($src =~ /my \$value\b/g)), 1,
+        'push method bare value auto-supplies one my $value');
+    like($src, qr/push \@items, "a"/,
+        'generated source contains push_back lowering');
+    like($src, qr/unshift \@items, "z"/,
+        'generated source contains push_front lowering');
+    like($src, qr/pop \@items/,
+        'generated source contains pop_back lowering');
+    like($src, qr/shift \@items/,
+        'generated source contains pop_front lowering');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ARRAY_MUTATE,ASSIGN,RETURN',
+        'array end-mutation spec reports canonical ARRAY_MUTATE/ASSIGN/RETURN nodes');
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'array end-mutation spec has no canonical fallback');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'array end-mutation spec remains language-agnostic ActionIR ready');
+
+    my $alias_spec = "Top::\n"
+                   . " /x/ -> Done { array(items).push_back(\"b\"); a(items).push_front(\"a\"); return(array_copy(items)) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $alias_parser = eval { LinkedSpec::Get(\$alias_spec) };
+    ok(ref($alias_parser) eq 'CODE', 'explicit receiver alias spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($alias_parser, 'xhello'), '["a","b"]',
+        'explicit array/a receivers mutate the named working array');
+    is((() = ($gen->($alias_spec) =~ /my \@items\b/g)), 1,
+        'explicit receiver alias spec auto-supplies one my @items');
 };
 
 done_testing();

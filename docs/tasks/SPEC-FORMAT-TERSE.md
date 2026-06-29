@@ -6,8 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-29` (**`.1.6` IN PROGRESS / OWNED BEFORE CODE** — Round 1 array end-mutation
-  methods are now the active PNT leaf. Prior **`.1.2.3.5.4` DONE** — Rust RHS shape target-kind inference parity landed,
+- Last updated: `2026-06-29` (**`.1.6` DONE; Round 1 closed** — Array end-mutation methods landed on Perl
+  and Rust: `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()`
+  are statement-level mutations over named working arrays, with bare / `array(...)` / `a(...)` receivers.
+  Phase0 is **990 green** and the oracle corpus is **33 fixtures**. Frontier -> **`.2.1`** (Round 2
+  expression-valued blocks). Prior **`.1.2.3.5.4` DONE** — Rust RHS shape target-kind inference parity landed,
   closing the `.1.2.3.5` RHS-shape split across both variants. Rust now mirrors the accepted Perl
   `.1.2.3.5.2` rule: direct shape RHS on a bare or matching typed aggregate target initializes/replaces the
   array/hash working variable, while explicit `scalar(...)` keeps scalar-held payload assignment. Oracle corpus
@@ -233,7 +236,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.0` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1`
-  Status: `proposed`
+  Status: `done` (2026-06-29 — Round 1 closed by `.1.6`; variables/types, mutation, helper renames,
+    literals/calls/access, and array end-mutation methods now have accepted Perl/Rust locks for the published
+    Round 1 leaves.)
   Goal: Round 1 — variables, types, mutation, functions
   Children: `.1.1`, `.1.2`, `.1.3`, `.1.4`, `.1.5`, `.1.6`
 
@@ -326,7 +331,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.1.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2`
-  Status: `active` (SPLIT 2026-06-24 — too broad for one signoff slice. Ground truth via
+  Status: `done` (2026-06-29 — Channel 1 and Channel 2 are closed on Perl and Rust; RHS-shape/type
+    inference completed through `.1.2.3.5.4`. Split 2026-06-24 — too broad for one signoff slice. Ground
+    truth via
     `dump_parser_source` (KM [[terse-bare-working-vars-engine-gaps]]): a bare working var splits into
     two inference channels — (1) ARG-POSITION (already lowers to the right sigil'd variable but gets no
     auto-`my` → leaky global) and (2) VALUE-POSITION (`return(count)`→ bareword `count`, not `$count`) +
@@ -337,12 +344,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     locks → 971; book taught). **`.1.2.2` DONE 2026-06-24** — Rust lockstep parity landed; unlike `.1.1.2`
     it REQUIRED a Rust engine change (the bare-target resolvers `resolve_scalar_target`/`resolve_array_target`
     now map a bare `Expr::Variable` target to the working var; per-parse HashMap auto-vivifies it); 2 oracle
-    fixtures + 4 integration tests, cargo 248→252. **Channel 1 complete on BOTH variants.** `.1.2` stays
-    `active` — Channel 2 is now owned by `.1.2.3` after `.1.5` settled primitive literals, separators, and
+    fixtures + 4 integration tests, cargo 248→252. **Channel 1 complete on BOTH variants.** Channel 2 is
+    owned by `.1.2.3` after `.1.5` settled primitive literals, separators, and
     explicit direct nested access; `.1.5.5.2` was superseded into `.1.2.3`. **`.1.2.3` SPLIT 2026-06-29**
     into aggregate bare value reads first (`.1.2.3.1` Perl + `.1.2.3.2` Rust), then scalar bare value reads
-    (`.1.2.3.3` Perl + `.1.2.3.4` Rust), with RHS-shape/type inference split under `.1.2.3.5`.
-    Frontier → `.1.2.3.5.1`.)
+    (`.1.2.3.3` Perl + `.1.2.3.4` Rust), with RHS-shape/type inference split under `.1.2.3.5`; all
+    `.1.2.3.x` children are now done.)
   Goal: Remove container wrappers as a *requirement* + add type inference (bare words are
     variables/functions, never string literals; type from RHS shape `[]`→array/`{}`→hash/scalar and
     from helper arg position). Wrappers stay accepted aliases during migration (gradual, ADR 0007).
@@ -436,8 +443,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.2.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.2.3`
-  Status: `active` (SPLIT 2026-06-29 — value-read children `.1.2.3.1` through `.1.2.3.4` are done; RHS-shape
-    and type-inference work was split under `.1.2.3.5`. Split-time ground truth:
+  Status: `done` (2026-06-29 — value-read children `.1.2.3.1` through `.1.2.3.4` are done, and
+    RHS-shape/type-inference closed through `.1.2.3.5.1` through `.1.2.3.5.4` on Perl and Rust.
+    Split 2026-06-29. Split-time ground truth:
     aggregate bare value reads already lower on Perl (`array_copy(items)` -> `[@items]`,
     `hash_copy(meta)` -> `{%meta}`, `copy(items)` -> `[@items]`) but do not get a preamble
     `my @items`/`my %meta`; Rust deliberately keeps bare value reads out of aggregate-copy target
@@ -1161,11 +1169,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.5.5.2 — merge bare direct access into Channel 2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.6`
-  Status: `in_progress` (2026-06-29 — owned before code)
+  Status: `done` (2026-06-29)
   Goal: Array mutation methods — `.push_front(v)`, `.push_back(v)`, `.pop_front()`, `.pop_back()`
   Acceptance: The four array end-mutation methods are recognized and lower to ActionIR.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-06-29.** Perl recognizes statement-level receiver-dot array end mutations on bare
+    and explicit array receivers: `items.push_back(value)` -> `push @items, $value`,
+    `items.push_front(value)` -> `unshift @items, $value`, `items.pop_back()` -> `pop @items`, and
+    `items.pop_front()` -> `shift @items`; `array(items)` and `a(items)` are accepted receiver aliases. Push
+    values use the settled mutation-slot value rules, so bare push values read scalar working variables and
+    auto-supply matching `my $value`; accepted receivers auto-supply one `my @items`. The contract/scanner
+    reports canonical `ARRAY_MUTATE` ActionIR with zero fallback. Rust executes the same single-call
+    `Expr::FluentChain` statement forms before generic fluent evaluation, mutating the runtime working array
+    and discarding pop return values. Value-returning forms such as `return(items.pop_back())` remain outside
+    this statement-only slice. Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; focused
+    Rust parser/runtime `.1.6` tests PASS; oracle corpus regenerated to **33 fixtures** and corpus oracle PASS;
+    phase0 PASS (`t/phase0_regression.t`, **990 tests**); mdBook updated.
+  Commit: `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.2`
   Status: `proposed`
@@ -1263,7 +1282,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.5.5` | `done` 2026-06-29 | Direct nested access split before code: explicit segment expressions are separable from bare-segment / Channel 2 value-position reads. |
 | — | `SPEC-FORMAT-TERSE.1.5.5.1` | `done` 2026-06-29 | Direct any-depth nested access with explicit path segments (`foo["a"][9]["b"][scalar(z)]`) landed on Perl and Rust. Quoted segments are hash keys; numeric/helper segments are array indexes; bare path atoms stay out of scope. |
 | — | `SPEC-FORMAT-TERSE.1.5.5.2` | `superseded` 2026-06-29 | Bare direct-access segments are merged into `.1.2.3`; `[z]` must follow the global value-position bare-word-read model, not a direct-access-only rule. |
-| — | `SPEC-FORMAT-TERSE.1.2.3` | `active` (split 2026-06-29) | Channel 2 split by aggregate-vs-scalar value-read surfaces after KM + TOOLBOX ground truth. |
+| — | `SPEC-FORMAT-TERSE.1.2.3` | `done` 2026-06-29 | Channel 2 split by aggregate-vs-scalar value-read surfaces after KM + TOOLBOX ground truth, then closed through scalar/aggregate value-read parity and RHS-shape/type-inference parity. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.1` | `done` 2026-06-29 | Perl aggregate bare value reads now auto-exist safely (`array_copy(items)`, `hash_copy(meta)`, `copy(items)`); phase0 984 green. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.2` | `done` 2026-06-29 | Rust aggregate bare value reads now match the Perl reference (`array_copy(items)`, `hash_copy(meta)`, array-first `copy(items)`, and `copy(hash(meta))`) with oracle + integration locks. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.3` | `done` 2026-06-29 | Perl scalar bare value reads landed across the split seams: return/assignment sources, mutation key/RHS slots, and direct-access bare path atoms. |
@@ -1276,10 +1295,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.2` | `done` 2026-06-29 | Perl RHS target-kind inference landed: direct RHS shapes infer aggregate bare targets (`name = [value]` -> `@name`, `name = { key => value }` -> `%name`); explicit `scalar(name)` remains scalar payload assignment. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.3` | `done` 2026-06-29 | Rust shape-literal value parity landed: direct `[]` / `{}` values parse and evaluate recursively, with oracle/integration locks and the `.1.2.3.5.4` target-kind boundary preserved. |
 | — | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `done` 2026-06-29 | Rust RHS target-kind inference parity landed: direct shape RHS initializes/replaces array/hash working variables for bare or matching typed aggregate targets, while explicit `scalar(...)` keeps scalar-held payload assignment. |
-| 1 | `SPEC-FORMAT-TERSE.1.6` | `in_progress` | Round 1 array end-mutation methods — owned before code; implementation/audit next. |
-| … | `.2.x`,`.3.x`,`.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
+| — | `SPEC-FORMAT-TERSE.1.6` | `done` 2026-06-29 | Round 1 array end-mutation methods landed on Perl and Rust; phase0 990 green; oracle corpus 33 fixtures. Round 1 is closed. |
+| 1 | `SPEC-FORMAT-TERSE.2.1` | `pending` | Round 2 expression-valued blocks — next PNT leaf; ground-truth/split before code. |
+| … | `.2.2`, `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-29` (**`.1.6` array end-mutation methods landed**). The accepted Round 1 array method contract is
+  statement-level mutation, not value-returning fluent chaining. A single receiver-dot call with receiver
+  `name`, `array(name)`, or `a(name)` mutates the named working array: `push_back(value)` appends,
+  `push_front(value)` prepends, `pop_back()` removes the last item, and `pop_front()` removes the first item.
+  Push arguments use the settled mutation-slot value rules, including scalar bare reads; pop methods discard
+  the removed value. Canonical ActionIR reports `ARRAY_MUTATE` so push and pop share one mutation-family node
+  without overloading `PUSH`. Value-returning forms such as `return(items.pop_back())` are deliberately left
+  to a later expression-valued/fluent slice.
 
 - `2026-06-29` (**`.1.2.3.5.4` Rust RHS shape target-kind inference landed**). Rust mirrors the accepted
   Perl aggregate target-kind rule for direct RHS shape literals. The runtime classifies only direct
@@ -1754,6 +1783,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5.2` | Perl syntax checks (`MethodLowering.pm`, `DeclareMethod.pm`, `EmitContext.pm`, `phase0_regression.t`); TOOLBOX lowering probes; generated-source/runtime array/hash/scalar-boundary probes; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks; full local CI | Perl RHS shape target-kind inference landed. Bare assignment targets now infer aggregate kind from direct RHS shapes: `name = [value]` / `set(name, [])` assign `@name`, and `name = { key => value }` / `assign(name, {})` assign `%name`; explicit `scalar(name)` keeps scalar payload assignment. Declaration initializer shapes now lower direct members before unwrapping. Phase0 PASS (`989` tests); full local CI PASS. Frontier becomes `.1.2.3.5.3`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core shape_literal`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_2_3_5_3`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust shape-literal value parity landed. `Expr::ArrayLiteral` / `Expr::HashLiteral` parse direct `[]` / `{}` values recursively, and `Engine::eval_expr` evaluates members through the normal expression path into `RuntimeValue::Array` / `RuntimeValue::Hash`. Added parser/runtime boundary locks plus two oracle fixtures, bringing the corpus oracle to 30 fixtures. `name = [value]` still parses/evaluates as scalar payload assignment until `.1.2.3.5.4` implements Rust target-kind inference. Frontier becomes `.1.2.3.5.4`. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.1.2.3.5.4` | Focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_2_3_5_4`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust RHS shape target-kind inference parity landed. Direct array/hash RHS literals now replace the runtime aggregate slot for bare or matching typed aggregate targets (`items = [value]`, `set(array(items), [value])`, `meta = { key => value }`, `set(hash(meta), { key => value })`), while explicit `scalar(payload)` keeps scalar-held shape payload assignment. Added 3 integration locks + 2 oracle fixtures, bringing the corpus oracle to 32 fixtures. Frontier becomes `.1.6`. |
+| `2026-06-29` | `SPEC-FORMAT-TERSE.1.6` | Perl syntax checks (`MethodLowering.pm`, `Contracts.pm`, `Scanner/PrimitivePipelineRules.pm`, `RuleIR/EmitContext.pm`); TOOLBOX lowering/runtime/source probes; focused Rust core parser test (`parse_array_end_mutation_fluent_receivers`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_6`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); `prove -q -Iperl t/phase0_regression.t` | Array end-mutation methods landed. Perl lowers statement-level `push_back`/`push_front`/`pop_back`/`pop_front` receiver-dot calls to array working-variable mutations, records canonical `ARRAY_MUTATE`, and auto-supplies the receiver array plus push-value scalar reads. Rust executes the same statement forms in `Engine::execute_block`; pop methods discard the removed value. Oracle corpus regenerated to 33 fixtures; phase0 PASS (`990` tests). Round 1 is closed and the frontier becomes `.2.1`. |
 
 ## Commit Log
 
@@ -1797,8 +1827,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.1.2.3.5.2` | `SPEC-FORMAT-TERSE.1.2.3.5.2 — infer Perl RHS shape target kind` | Perl now uses direct RHS shape literals to infer aggregate bare assignment targets: arrays for `[]` / `[value]`, hashes for `{}` / `{ key => value }`; explicit `scalar(...)` keeps scalar-held payload assignment. Declaration initializer direct shapes unwrap lowered members. Frontier becomes `.1.2.3.5.3`. |
 | `SPEC-FORMAT-TERSE.1.2.3.5.3` | `SPEC-FORMAT-TERSE.1.2.3.5.3 — implement Rust shape-literal values` | Rust parses/evaluates direct shape literals as value expressions with parser/runtime/oracle locks, while leaving Rust RHS target-kind inference to `.1.2.3.5.4`. |
 | `SPEC-FORMAT-TERSE.1.2.3.5.4` | `SPEC-FORMAT-TERSE.1.2.3.5.4 — implement Rust RHS shape target kind` | Rust now uses direct RHS shape literals to infer aggregate bare or matching typed aggregate assignment targets, while explicit `scalar(...)` keeps scalar-held payload assignment. Added integration/oracle locks; frontier becomes `.1.6`. |
+| `SPEC-FORMAT-TERSE.1.6` | `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods` | Perl and Rust now support statement-level `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` over named working arrays. Added phase0/Rust/oracle/book/KM locks; Round 1 closes and frontier becomes `.2.1`. |
 
 ## Changelog
+
+- `2026-06-29`: **`.1.6` DONE — array end-mutation methods landed and Round 1 closed.**
+  Perl and Rust now accept the statement-level receiver-dot methods `items.push_back(value)`,
+  `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` over named working arrays, including
+  `array(items)` / `a(items)` receiver aliases. Push values use mutation-slot value semantics, so bare values
+  read scalar working variables; pop methods discard the removed value. Perl reports canonical `ARRAY_MUTATE`
+  with zero fallback, Rust executes the same statement forms, phase0 PASS (`990` tests), and the oracle corpus
+  is now **33 fixtures**. Frontier -> `.2.1`.
 
 - `2026-06-29`: **`.1.2.3.5.4` DONE — Rust RHS shape target-kind inference parity landed.**
   Rust now mirrors the accepted Perl aggregate target-kind contract for direct RHS shape literals. `items =

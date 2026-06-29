@@ -455,6 +455,10 @@ push(arr, child)        — append child to accumulator
 push(arr, child, index) — append child at index
 push_value(arr, value)  — append value to accumulator
 push_nonempty(arr, val) — append if non-empty
+target.push_back(value) — append value to named working array (statement)
+target.push_front(value) — prepend value to named working array (statement)
+target.pop_back()       — remove last item from named working array (statement)
+target.pop_front()      — remove first item from named working array (statement)
 count(arr)              — number of elements
 first(arr)              — first element
 last(arr)               — last element

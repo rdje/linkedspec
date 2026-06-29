@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-29 (SPEC-FORMAT-TERSE.1.6 — array end-mutation methods landed): Added statement-level
+  receiver-dot array mutations without changing value-expression semantics. Durable points. (1) **Perl uses
+  a top-level receiver-dot splitter, not a broad fluent parser.** `_parse_array_end_mutation_method_statement`
+  splits only the top-level dot, protects quoted/nested text, accepts bare / `array(...)` / `a(...)`
+  receivers, and delegates the method-call tail to the existing method-expression parser. (2) **The new
+  ActionIR node is specific.** The contract/scanner emits `ARRAY_MUTATE` rather than overloading `PUSH`, so
+  `pop_*` methods are not mislabeled in canonical metadata. (3) **Auto-declaration follows the lowerer
+  oracle.** The collector records one `my @target` for accepted receivers and records push-value scalar reads
+  only after the lowerer accepts the statement. (4) **Rust keeps this statement-only.** `Engine::execute_block`
+  recognizes a single-call `Expr::FluentChain` with a named array receiver and mutates `RuntimeContext` before
+  generic fluent evaluation; nested/value-return forms remain outside this slice.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference landed): Mirrored the
   accepted Perl `.1.2.3.5.2` target-kind contract on the Rust backend. Durable points. (1) **Shape inference
   is keyed by the raw RHS AST, not the evaluated value alone.** `Engine::direct_shape_literal_kind` only

@@ -42,6 +42,7 @@ sub default_deps_for_package {
    'lower_assign_method_statement',
    'lower_scalar_assignment_operator_statement',
    'lower_array_append_operator_statement',
+   'lower_array_end_mutation_method_statement',
    'lower_hash_index_assignment_operator_statement',
    'lower_set_key_statement',
    'lower_push_value_statement',
@@ -81,6 +82,7 @@ sub _require_lowering_deps {
   lower_assign_method_statement  => $require_dep->('lower_assign_method_statement'),
   lower_scalar_assignment_operator_statement => $require_dep->('lower_scalar_assignment_operator_statement'),
   lower_array_append_operator_statement => $require_dep->('lower_array_append_operator_statement'),
+  lower_array_end_mutation_method_statement => $require_dep->('lower_array_end_mutation_method_statement'),
   lower_hash_index_assignment_operator_statement => $require_dep->('lower_hash_index_assignment_operator_statement'),
   lower_set_key_statement        => $require_dep->('lower_set_key_statement'),
   lower_push_value_statement     => $require_dep->('lower_push_value_statement'),
@@ -1781,6 +1783,17 @@ sub _build_assignment_and_regex_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_append_operator_statement};
+    return $lower->($code) || $code
+   },
+  },
+  {
+   id                 => 'array_end_mutation_method',
+   ir_node            => 'ARRAY_MUTATE',
+   diag_name          => 'array_end_mutation_method',
+   unresolved_pattern => qr/^\s*(?:[A-Za-z_][A-Za-z0-9_]*|(?:array|a)\s*\().*\.\s*(?:push_front|push_back|pop_front|pop_back)\s*\(/so,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_array_end_mutation_method_statement};
     return $lower->($code) || $code
    },
   },

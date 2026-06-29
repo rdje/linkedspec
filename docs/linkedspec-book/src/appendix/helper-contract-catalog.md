@@ -368,6 +368,31 @@ control-flow/block braces, and all-bare child-call routing remain separate surfa
 - **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += scalar(value)`, `items += value`.
 - **Edge cases**: The target is still an array working variable and auto-exists as `@target`. A bare RHS such as `items += value` reads `$value`; reserved literals such as `true`, `false`, and `undef` keep their literal meaning.
 
+### `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()`
+- **Signature**: `target.push_back(value: expr)`, `target.push_front(value: expr)`, `target.pop_back()`, `target.pop_front()`
+- **Returns**: void
+- **Behavior**: Statement-level array end mutations on a named working array. `push_back` appends, `push_front` prepends, `pop_back` removes the last element, and `pop_front` removes the first element. Pop methods discard the removed value.
+- **Examples**: `items.push_back("tail")`, `items.push_front(value)`, `array(items).pop_back()`, `a(items).pop_front()`.
+- **Edge cases**: The receiver may be a bare array working variable (`items`) or an explicit array receiver (`array(items)` / `a(items)`), and it auto-exists as an array. A bare push value reads a scalar working variable, just like `items += value`. These are statement-only mutations; value-returning forms such as `return(items.pop_back())` are outside this contract.
+- **Worked example**:
+  ```text
+  Top::
+   /x/ -> Done {
+    set(value, "b")
+    items.push_back("a")
+    items.push_back(value)
+    items.push_front("z")
+    items.pop_back()
+    items.pop_front()
+    return(array_copy(items))
+   }
+
+  Done:
+   /[a-z]+/
+  ```
+  On input `xhello`, the result is `["a"]`: the push methods build `["z", "a", "b"]`, then `pop_back()`
+  removes `"b"` and `pop_front()` removes `"z"`.
+
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
 - **Returns**: void
@@ -1029,7 +1054,7 @@ Every helper can be used in both structured-block form (`I { declare(...) }`) an
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
+Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
 
 ### Terse Helper Renames (canonical going forward)
 The `.spec` format is migrating to terser helper names (terse-format direction). For these three
@@ -1042,6 +1067,7 @@ unlike the Retired table below):
 | `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
 | `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Bare RHS names read working scalars. Does not imply array `+=` or hash-index assignment. |
 | `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax. |
+| `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)` / `a(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in statement mutation slots. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |

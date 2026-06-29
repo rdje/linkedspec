@@ -474,6 +474,9 @@ impl Engine {
             if self.execute_array_append_operator_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
+            if self.execute_array_end_mutation_method_statement(&stmt.expr, ctx, rule_label)? {
+                continue;
+            }
             if self.execute_hash_index_assignment_operator_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
@@ -597,6 +600,65 @@ impl Engine {
         let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
         ctx.set_hash_entry(name, &evaluated_key, evaluated_value);
         Ok(true)
+    }
+
+    /// Execute statement-level receiver-dot array end mutations.
+    ///
+    /// `items.push_back(value)` and `array(items).push_front(value)` name the
+    /// working array on the receiver side; these are not value-returning fluent
+    /// expressions in this slice.
+    fn execute_array_end_mutation_method_statement(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::Expr;
+        let Expr::FluentChain { receiver, calls } = expr else {
+            return Ok(false);
+        };
+        let [call] = calls.as_slice() else {
+            return Ok(false);
+        };
+        let Some(target) = Self::array_receiver_target(receiver) else {
+            return Ok(false);
+        };
+
+        match call.method.as_str() {
+            "push_back" if call.args.len() == 1 => {
+                let value = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
+                ctx.push_value(&target, value);
+                Ok(true)
+            }
+            "push_front" if call.args.len() == 1 => {
+                let value = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
+                ctx.push_front_value(&target, value);
+                Ok(true)
+            }
+            "pop_back" if call.args.is_empty() => {
+                let _ = ctx.pop_back_value(&target);
+                Ok(true)
+            }
+            "pop_front" if call.args.is_empty() => {
+                let _ = ctx.pop_front_value(&target);
+                Ok(true)
+            }
+            _ => Ok(false),
+        }
+    }
+
+    fn array_receiver_target(receiver: &linkedspec_core::expr::Expr) -> Option<String> {
+        use linkedspec_core::expr::{Arg, Expr};
+        match receiver {
+            Expr::Variable { name } => Some(name.clone()),
+            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
+                    _ => None,
+                }
+            }
+            _ => None,
+        }
     }
 
     /// Execute the top-level mutation form `set_key(target, key, value)`.

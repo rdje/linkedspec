@@ -226,6 +226,15 @@ Bare scalar reads are currently supported in return and assignment-like source s
 `return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
 `items += value`, and in direct-access path atoms such as `payload["children"][index]`.
 
+Array end mutations are also statement-level operations on a named working array:
+`items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`
+removes the last element, and `items.pop_front()` removes the first element. The receiver
+may be bare (`items`) or explicitly typed (`array(items)` / `a(items)`). Push values use
+the same mutation-slot expression rules as `items += value`, so a bare value reads the
+scalar working variable (`$value` on the Perl reference). The pop methods discard the
+removed value; value-returning forms such as `return(items.pop_back())` are not part of
+this statement-level contract.
+
 Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
 "normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`
 in place. The hash target auto-exists just like a declared `hash(meta)` working

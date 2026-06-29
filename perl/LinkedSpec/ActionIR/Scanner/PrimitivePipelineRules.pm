@@ -20,6 +20,7 @@ sub try_scan_contract_ir_events {
   'assign_value' => \&_scan_contract_assign_value,
   'scalar_assignment_operator' => \&_scan_contract_scalar_assignment_operator,
   'array_append_operator' => \&_scan_contract_array_append_operator,
+  'array_end_mutation_method' => \&_scan_contract_array_end_mutation_method,
   'hash_index_assignment_operator' => \&_scan_contract_hash_index_assignment_operator,
   'set_key_statement' => \&_scan_contract_set_key_statement,
   'regex_subst' => \&_scan_contract_regex_subst,
@@ -207,6 +208,92 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
   },
  };
 }
+ return \@events
+}
+
+sub _parse_array_end_mutation_method_statement {
+ my ($statement) = @_;
+ my $trimmed = _trim_action_ir_value($statement);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my ($paren_depth, $bracket_depth, $brace_depth) = (0, 0, 0);
+ my ($in_single_quote, $in_double_quote, $escape_next) = (0, 0, 0);
+ my ($receiver_expr, $call_expr);
+ my $len = length($trimmed);
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($trimmed, $idx, 1);
+  if ($in_single_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($ch eq '\\') { $escape_next = 1; }
+   elsif ($ch eq "'") { $in_single_quote = 0; }
+   next;
+  }
+  if ($in_double_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($ch eq '\\') { $escape_next = 1; }
+   elsif ($ch eq '"') { $in_double_quote = 0; }
+   next;
+  }
+  if ($ch eq "'") { $in_single_quote = 1; next; }
+  if ($ch eq '"') { $in_double_quote = 1; next; }
+  if ($ch eq '(') { ++$paren_depth; next; }
+  if ($ch eq ')') { --$paren_depth if $paren_depth > 0; next; }
+  if ($ch eq '[') { ++$bracket_depth; next; }
+  if ($ch eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
+  if ($ch eq '{') { ++$brace_depth; next; }
+  if ($ch eq '}') { --$brace_depth if $brace_depth > 0; next; }
+  next unless $ch eq '.';
+  next unless $paren_depth == 0 && $bracket_depth == 0 && $brace_depth == 0;
+  $receiver_expr = _trim_action_ir_value(substr($trimmed, 0, $idx));
+  $call_expr = _trim_action_ir_value(substr($trimmed, $idx + 1));
+  last;
+ }
+ return undef unless defined($receiver_expr) && length($receiver_expr);
+ return undef unless defined($call_expr) && length($call_expr);
+ return undef unless $receiver_expr =~ /^(?:[A-Za-z_][A-Za-z0-9_]*|(?:array|a)\s*\()/o;
+
+ my ($target_symbol) = defined($receiver_expr)
+  ? ($receiver_expr =~ /^(?:array|a)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o)
+  : ();
+ if (!defined($target_symbol) && defined($receiver_expr) && $receiver_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  $target_symbol = $1;
+ }
+ return undef unless defined($target_symbol) && length($target_symbol);
+
+ my $call = _parse_method_function_expr($call_expr);
+ return undef unless $call && ($call->{method} // '') =~ /^(?:push_front|push_back|pop_front|pop_back)$/o;
+ my $args = $call->{args} || [];
+ return undef if $call->{method} =~ /^push_/o && @$args != 1;
+ return undef if $call->{method} =~ /^pop_/o && @$args != 0;
+ my $value_expr;
+ if ($call->{method} =~ /^push_/o) {
+  $value_expr = _trim_action_ir_value($args->[0]);
+  return undef unless defined($value_expr) && length($value_expr);
+  return undef if _is_nonliteral_reserved_bare_token($value_expr);
+ }
+
+ return {
+  target => $target_symbol,
+  method => $call->{method},
+  value  => $value_expr,
+ };
+}
+
+sub _scan_contract_array_end_mutation_method {
+ my ($code) = @_;
+ my @events;
+ foreach my $statement (@{_split_action_ir_statements($code)}) {
+  my $trimmed = _trim_action_ir_value($statement);
+  next unless defined($trimmed) && length($trimmed);
+  my $parsed = _parse_array_end_mutation_method_statement($trimmed);
+  next unless $parsed;
+  my %args = (
+   target => $parsed->{target},
+   method => $parsed->{method},
+  );
+  $args{value} = $parsed->{value} if defined $parsed->{value};
+  push @events, {raw => $trimmed, args => \%args};
+ }
  return \@events
 }
 

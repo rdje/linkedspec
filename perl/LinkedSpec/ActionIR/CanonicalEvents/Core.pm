@@ -33,6 +33,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  assign_value                     => 'ASSIGN',
 scalar_assignment_operator       => 'ASSIGN',
 array_append_operator            => 'PUSH',
+array_end_mutation_method        => 'ARRAY_MUTATE',
 hash_index_assignment_operator   => 'ASSIGN',
 regex_subst                      => 'REGEX_SUBST',
  return_general                   => 'RETURN',

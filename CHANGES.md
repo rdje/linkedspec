@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-29 — SPEC-FORMAT-TERSE.1.6 — array end-mutation methods
+
+**Scope:** Perl ActionIR lowering/scanning/declaration inference, Rust runtime statement execution, Perl phase0
+locks, Rust parser/runtime locks, Perl-oracle corpus fixture, mdBook, Knowledge Map, task tree, roadmap
+tracker, and live continuity docs.
+
+**What changed:** The four Round 1 array end-mutation methods are recognized as statement-level mutations on
+named working arrays: `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and
+`items.pop_front()`. Perl lowers them to `push @items, ...`, `unshift @items, ...`, `pop @items`, and
+`shift @items` and reports canonical `ARRAY_MUTATE` ActionIR with no raw fallback. Rust executes the same
+receiver-dot statements in `Engine::execute_block()` before generic fluent evaluation.
+
+**Receiver/value rules:** The receiver may be a bare array working variable (`items`) or an explicit
+`array(items)` / `a(items)` receiver. Push values use the same mutation-slot expression rules as
+`items += value`, so a bare push value reads a scalar working variable. Pop methods discard the removed value.
+
+**Boundary:** These methods are statement-only in this slice. Value-returning forms such as
+`return(items.pop_back())` are not part of the accepted contract.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; focused Rust parser and
+runtime `.1.6` locks PASS; oracle corpus regenerated to 33 fixtures and corpus oracle PASS; phase0 PASS
+(`t/phase0_regression.t`, 990 tests). Existing Cargo warning volume is from the nested `rgx` baseline.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference
 
 **Scope:** Rust runtime assignment/helper dispatch, Rust integration locks, Perl-oracle corpus fixtures, mdBook,

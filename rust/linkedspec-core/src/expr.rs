@@ -1561,6 +1561,44 @@ mod tests {
     }
 
     #[test]
+    fn parse_array_end_mutation_fluent_receivers() {
+        let block = CodeBlock::parse(
+            "items.push_back(value); array(items).pop_front(); a(items).push_front(\"a\")",
+        )
+        .unwrap();
+        assert_eq!(block.statements.len(), 3);
+
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "items"));
+                assert_eq!(calls.len(), 1);
+                assert_eq!(calls[0].method, "push_back");
+                assert_eq!(calls[0].args.len(), 1);
+            }
+            other => panic!("expected bare receiver FluentChain, got {:?}", other),
+        }
+
+        match &block.statements[1].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "array"));
+                assert_eq!(calls.len(), 1);
+                assert_eq!(calls[0].method, "pop_front");
+                assert!(calls[0].args.is_empty());
+            }
+            other => panic!("expected array receiver FluentChain, got {:?}", other),
+        }
+
+        match &block.statements[2].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "a"));
+                assert_eq!(calls.len(), 1);
+                assert_eq!(calls[0].method, "push_front");
+            }
+            other => panic!("expected a receiver FluentChain, got {:?}", other),
+        }
+    }
+
+    #[test]
     fn parse_fluent_chain_on_indexed_var() {
         let code = "results[0].return()";
         let block = CodeBlock::parse(code).unwrap();

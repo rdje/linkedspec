@@ -327,6 +327,16 @@ sub _lower_array_append_operator_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_array_append_operator_statement', @args)
 }
 
+sub _parse_array_end_mutation_method_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('method_lowering', '_parse_array_end_mutation_method_statement', @args)
+}
+
+sub _lower_array_end_mutation_method_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_array_end_mutation_method_statement', @args)
+}
+
 sub _lower_hash_index_assignment_operator_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_hash_index_assignment_operator_statement', @args)
@@ -868,6 +878,8 @@ sub _mask_action_code_literals {
 #             (h) SPEC-FORMAT-TERSE.1.2.3.5.2, Channel 2 RHS-shape subset —
 #                 BARE assignment targets infer @/% from direct [] / {} RHS
 #                 literals: NAME = [VALUE] -> @NAME, NAME = {KEY => VALUE} -> %NAME.
+#             (i) SPEC-FORMAT-TERSE.1.6 — receiver-dot array end mutations:
+#                 NAME.push_back(VALUE), NAME.push_front(VALUE), NAME.pop_back(), NAME.pop_front().
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -1072,6 +1084,19 @@ sub _collect_auto_working_var_decls {
     $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
     $record_direct_access_bare_path_atoms->($value_expr);
     $collect_shape_literal_scalar_reads->($value_expr);
+    next;
+   }
+   my $parsed_array_end = _parse_array_end_mutation_method_statement($trimmed);
+   if ($parsed_array_end) {
+    my $lowered_array_end = _lower_array_end_mutation_method_statement($trimmed);
+    next unless defined($lowered_array_end) && length($lowered_array_end);
+    $record->('@', $parsed_array_end->{target});
+    if (defined($parsed_array_end->{value})) {
+     my $value_expr = _trim_action_ir_value($parsed_array_end->{value});
+     $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+     $record_direct_access_bare_path_atoms->($value_expr);
+     $collect_shape_literal_scalar_reads->($value_expr);
+    }
     next;
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {

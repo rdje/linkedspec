@@ -528,6 +528,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.1.6 — array end-mutation methods ──
+    #
+    # Receiver-dot array methods are statement-level ActionIR mutations over
+    # named working arrays. Push methods consume one value argument; pop methods
+    # mutate and discard the removed value in statement position.
+    {   case   => 'terse_1_6_array_end_mutation_methods',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "b"); items.push_back("a"); items.push_back(value); items.push_front("z"); items.pop_back(); items.pop_front(); return(array_copy(items)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

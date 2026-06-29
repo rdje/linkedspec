@@ -1351,6 +1351,29 @@ fn terse_1_2_3_4_mutation_and_direct_access_bare_reads_run() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.1.6 — array end-mutation methods:
+// statement-level receiver-dot methods mutate a named working array.
+
+#[test]
+fn terse_1_6_array_end_mutation_methods_run_in_order() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a"]]),
+        "push_back/push_front/pop_back/pop_front mutate the receiver working array"
+    );
+}
+
+#[test]
+fn terse_1_6_explicit_array_receiver_aliases_run() {
+    let grammar = "Top::\n /x/ -> Done { array(items).push_back(\"b\"); a(items).push_front(\"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a", "b"]]),
+        "array(...) and a(...) receivers name the working array for end mutations"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity:
 // direct `[]` and `{ key => value }` forms are value expressions. Their members
 // use the same expression semantics as the Perl `.1.2.3.5.1` contract: bare

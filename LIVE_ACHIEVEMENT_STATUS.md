@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-29: **SPEC-FORMAT-TERSE.1.6 — array end-mutation methods landed**
+  (PERL ACTIONIR + RUST RUNTIME + ORACLE/KM/BOOK LOCKS). Statement-level receiver-dot methods now mutate named
+  working arrays on both variants: `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`,
+  and `items.pop_front()`. Receivers may be bare or explicit `array(items)` / `a(items)`; push values use the
+  settled mutation-slot value rules, so bare push values read scalar working variables; pop methods discard the
+  removed value. Perl reports canonical `ARRAY_MUTATE` with zero fallback and auto-supplies one `my @items`
+  plus push-value scalar declarations as needed. Rust executes the same statement forms in
+  `Engine::execute_block`.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/runtime/source probes PASS; focused Rust
+  parser/runtime `.1.6` locks PASS; oracle corpus regenerated to **33 fixtures** and corpus oracle PASS;
+  phase0 PASS (`t/phase0_regression.t`, **990 tests**).
+  **Frontier: `SPEC-FORMAT-TERSE.2.1`** (Round 2 expression-valued blocks; ground-truth/split before code).
 - 2026-06-29: **SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference parity landed**
   (RUST RUNTIME + ORACLE/KM). Rust now matches the Perl target-kind rule accepted in `.1.2.3.5.2`: direct RHS
   shape literals infer aggregate working-variable targets when the assignment target is bare or explicitly

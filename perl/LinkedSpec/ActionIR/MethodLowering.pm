@@ -2077,6 +2077,122 @@ sub _lower_array_append_operator_statement {
  return "push \@$target_symbol, $lowered_value"
 }
 
+sub _split_receiver_dot_method_expr {
+ my ($expr, $trim_action_ir_value) = @_;
+ return undef unless defined($expr) && length($expr);
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my ($paren_depth, $bracket_depth, $brace_depth) = (0, 0, 0);
+ my ($in_single_quote, $in_double_quote, $escape_next) = (0, 0, 0);
+ my $len = length($trimmed);
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($trimmed, $idx, 1);
+  if ($in_single_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($ch eq '\\') { $escape_next = 1; }
+   elsif ($ch eq "'") { $in_single_quote = 0; }
+   next;
+  }
+  if ($in_double_quote) {
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($ch eq '\\') { $escape_next = 1; }
+   elsif ($ch eq '"') { $in_double_quote = 0; }
+   next;
+  }
+  if ($ch eq "'") { $in_single_quote = 1; next; }
+  if ($ch eq '"') { $in_double_quote = 1; next; }
+  if ($ch eq '(') { ++$paren_depth; next; }
+  if ($ch eq ')') { --$paren_depth if $paren_depth > 0; next; }
+  if ($ch eq '[') { ++$bracket_depth; next; }
+  if ($ch eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
+  if ($ch eq '{') { ++$brace_depth; next; }
+  if ($ch eq '}') { --$brace_depth if $brace_depth > 0; next; }
+  next unless $ch eq '.';
+  next unless $paren_depth == 0 && $bracket_depth == 0 && $brace_depth == 0;
+  my $receiver = $trim_action_ir_value->(substr($trimmed, 0, $idx));
+  my $call_expr = $trim_action_ir_value->(substr($trimmed, $idx + 1));
+  return undef unless defined($receiver) && length($receiver);
+  return undef unless defined($call_expr) && length($call_expr);
+  return [$receiver, $call_expr];
+ }
+ return undef;
+}
+
+sub _parse_array_end_mutation_method_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $split = _split_receiver_dot_method_expr($trimmed, $trim_action_ir_value);
+ return undef unless $split;
+ my ($receiver_expr, $call_expr) = @$split;
+ return undef unless defined($receiver_expr) && $receiver_expr =~ /^(?:[A-Za-z_][A-Za-z0-9_]*|(?:array|a)\s*\()/o;
+ my $target_symbol = $extract_array_symbol_name->($receiver_expr);
+ if (!defined($target_symbol) && defined($receiver_expr) && $receiver_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  $target_symbol = $1;
+ }
+ return undef unless defined($target_symbol) && length($target_symbol);
+
+ my $call = $parse_method_function_expr->($call_expr);
+ return undef unless $call && ($call->{method} // '') =~ /^(?:push_front|push_back|pop_front|pop_back)$/o;
+ my $args = $call->{args} || [];
+ return undef if $call->{method} =~ /^push_/o && @$args != 1;
+ return undef if $call->{method} =~ /^pop_/o && @$args != 0;
+
+ my $value_expr;
+ if ($call->{method} =~ /^push_/o) {
+  $value_expr = $trim_action_ir_value->($args->[0]);
+  return undef unless defined($value_expr) && length($value_expr);
+ }
+
+ return {
+  target   => $target_symbol,
+  method   => $call->{method},
+  value    => $value_expr,
+  receiver => $receiver_expr,
+ };
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_array_end_mutation_method_statement
+# Purpose : Lower statement-level receiver-dot array end mutations:
+#           `items.push_back(value)`, `items.push_front(value)`,
+#           `items.pop_back()`, and `items.pop_front()`.
+# Args    : ($expr, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_array_end_mutation_method_statement {
+ my ($expr, $deps) = @_;
+ my $parsed = _parse_array_end_mutation_method_statement($expr, $deps);
+ return undef unless $parsed;
+
+ if ($parsed->{method} eq 'push_back') {
+  my $lowered_value = _lower_mutation_slot_value_expr($parsed->{value}, $deps);
+  return undef unless defined($lowered_value) && length($lowered_value);
+  return 'push @'.$parsed->{target}.', '.$lowered_value;
+ }
+ if ($parsed->{method} eq 'push_front') {
+  my $lowered_value = _lower_mutation_slot_value_expr($parsed->{value}, $deps);
+  return undef unless defined($lowered_value) && length($lowered_value);
+  return 'unshift @'.$parsed->{target}.', '.$lowered_value;
+ }
+ return 'pop @'.$parsed->{target} if $parsed->{method} eq 'pop_back';
+ return 'shift @'.$parsed->{target} if $parsed->{method} eq 'pop_front';
+ return undef
+}
+
 sub _parse_hash_index_assignment_operator_statement {
  my ($expr, $deps) = @_;
  my $require_dep = sub {
