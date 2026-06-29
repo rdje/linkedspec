@@ -18,7 +18,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `eaca558` — `SPEC-FORMAT-TERSE.1.2.3.3 — handoff: record scalar-read split commit in MEMORY`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- latest_commit: `f347f52` — `SPEC-FORMAT-TERSE.1.2.3.3.1 — implement scalar source-slot bare reads`. Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
 - active_work_unit: `SPEC-FORMAT-TERSE` — **`.1.2.3.3.1` DONE 2026-06-29; frontier -> `.1.2.3.3.2`**. Perl scalar source-slot bare reads landed for `return(NAME)`, `set/assign(out, NAME)`, and `out = NAME`; mutation key/RHS slots are next. User in a **PNT loop** (2026-06-23).
 - next_action: Pick **`SPEC-FORMAT-TERSE.1.2.3.3.2`** — Perl scalar bare reads in mutation key/RHS slots (`items += value`, `set_key(meta, key/value)`, `meta[key] = value`) while preserving `push(A,B)` child-call routing and direct `[z]` deferral.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy source baseline runtime 13 warnings; oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs` (**25 fixtures after `.1.2.3.2`**). phase0 baseline = **985 green after `.1.2.3.3.1`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
