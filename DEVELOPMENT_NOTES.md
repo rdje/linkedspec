@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.5.1 — Perl attached-switch separator/source lock landed): Implemented
+  the Perl reference slice. Durable points. (1) **The splitter is the seam.** `StatementSplit::Core` now splits
+  complete attached `case(...) { ... }` and `default { ... }` branch bodies before same-line branch
+  continuations, letting the existing attached-switch lowerers do the semantic work. (2) **Source residue is
+  locked out.** Compact adjacent branches now report `ready=1 raw=0 unresolved=0`, generated handlers do not
+  keep host-shaped `case(...)` / `default { ... }` text, and runtime probes cover first-match, later-case, and
+  default selection. (3) **The separator contract is unchanged.** A same-line ordinary statement after the
+  final attached switch block still needs an explicit semicolon. (4) **Rust remains the next parity leaf.**
+  `.2.2.5.2` should parse the accepted attached-switch contract into Rust statement control while preserving
+  the existing lazy value-form `switch(...)` helper.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.5 — attached switch split/ownership): Split the attached
   `switch/case/default` leaf before code. Durable points. (1) **Perl is partial, not done.** A simple
   one-case/default attached switch can run, but adjacent branch blocks can leave unresolved `case` residue or

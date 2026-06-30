@@ -6,8 +6,10 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.2.5` SPLIT/OWNED before code; frontier `.2.2.5.1`** — attached
-  `switch/case/default` is split into a Perl separator/source lock followed by Rust parity. Prior
+- Last updated: `2026-06-30` (**`.2.2.5.1` DONE; frontier `.2.2.5.2`** — Perl attached
+  `switch/case/default` separator/source lock landed; compact adjacent branches lower with no host residue,
+  and Rust attached-switch parity is next. Prior **`.2.2.5` SPLIT/OWNED before code; frontier `.2.2.5.1`** —
+  attached `switch/case/default` is split into a Perl separator/source lock followed by Rust parity. Prior
   **`.2.2.4` DONE; frontier `.2.2.5`** — `when/otherwise` now lowers as
   portable attached `if/else` alias flow on Perl and Rust; oracle corpus is **37 fixtures**. Prior
   **`.2.2.4` OWNED before code** — `when/otherwise` is scoped as a normalization alias over the landed
@@ -1270,7 +1272,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return`
 
 - ID: `SPEC-FORMAT-TERSE.2.2`
-  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.5` split/owned before code)
+  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.5.1` done, frontier `.2.2.5.2`)
   Goal: Control-flow keywords — `if/elseif/else`, `when`, `otherwise`, `default`, `while`, `switch`
   Acceptance: `if (cond) { ... } elseif (cond) { ... } else { ... }` — parens for conditions, blocks
     for bodies, blocks NEVER inside parens; `when (cond) { ... }` inline conditional; `otherwise { ... }`
@@ -1281,13 +1283,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Verification: `.2.2.1` split/ground truth done; `.2.2.2` Perl attached-block if done; `.2.2.3` Rust parity
     done by normalizing attached branch statements to the existing marker-control runtime; `.2.2.4` landed
     `when/otherwise` aliases over that attached-if model on Perl and Rust; `.2.2.5` split attached
-    `switch/case/default` by Perl separator/source lock and Rust parity.
+    `switch/case/default` by Perl separator/source lock and Rust parity; `.2.2.5.1` landed the Perl
+    separator/source lock with compact adjacent branches lowering without host residue.
   Commit: `SPEC-FORMAT-TERSE.2.2.1 - split control-flow keyword surface`;
     `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`;
     `SPEC-FORMAT-TERSE.2.2.3 - implement Rust attached if blocks`;
     `SPEC-FORMAT-TERSE.2.2.4 - own when otherwise aliases`;
     `SPEC-FORMAT-TERSE.2.2.4 - implement when otherwise aliases`;
-    `.2.2.5` split/ownership commit pending
+    `SPEC-FORMAT-TERSE.2.2.5 - split attached switch surface`;
+    `SPEC-FORMAT-TERSE.2.2.5.1 - implement Perl attached switch separator lock`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.1`
   Status: `done` (2026-06-30)
@@ -1362,32 +1366,35 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     are not language-agnostic ready (`unresolved_helper_count=1` for the second `case`) and can compile invalid
     Perl. Rust currently has lazy value-form `switch(expr, case(...), default(...))` runtime tests, but
     `CodeBlock::parse` only has attached statement parsing for `if`/`when`, not attached `switch/case/default`.
-    Therefore `.2.2.5.1` owns the Perl reference separator/source lock, and `.2.2.5.2` owns Rust parity.
-  Commit: `.2.2.5` split/ownership commit pending
+    Therefore `.2.2.5.1` owns the Perl reference separator/source lock, and `.2.2.5.2` owns Rust parity. `.2.2.5.1`
+    is now done; the container frontier is `.2.2.5.2`.
+  Commit: `SPEC-FORMAT-TERSE.2.2.5 - split attached switch surface`;
+    `SPEC-FORMAT-TERSE.2.2.5.1 - implement Perl attached switch separator lock`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.5.1`
-  Status: `active` (owned before code 2026-06-30)
+  Status: `done` (2026-06-30)
   Goal: Perl reference — attached-block `switch/case/default` separator/source lock
   Acceptance: Perl lowers adjacent attached switch branch blocks such as
     `switch(expr) { case(v) { ... } case(w) { ... } default { ... } }` without raw host-label residue,
     unresolved helpers, or invalid generated Perl; explicit semicolons and optional `endcase()` / `endswitch()`
     remain accepted; a same-line statement after the final attached switch block still requires an explicit
     semicolon per `.1.5.4`.
-  Verification: Current probes show the implementation seam is Perl-side statement splitting / attached-switch
-    body lowering, not value evaluation: `ControlFlow.pm` already has attached-block `switch` / `case` / `default`
-    lowerers, but `StatementSplit::Core` does not yet split adjacent `case/default` branch continuations with
-    the same rigor as attached `elseif/else`. Focused implementation should lock source output, descriptor
-    readiness (`raw=0 unresolved=0`), selected-branch runtime behavior, first-match/default behavior, and the
-    separator boundary after the final attached switch block.
-  Commit: `pending`
+  Verification: `StatementSplit::Core` now recognizes complete attached `case(...) { ... }` and
+    `default { ... }` branch statements and splits before same-line `case(...) {` / `default {` branch
+    continuations. TOOLBOX probes show compact adjacent branches report `ready=1 raw=0 unresolved=0`, generated
+    lowering has no host-shaped `case(...)` or `default { ... }` residue, and runtime probes cover first-match,
+    later-case, and default selection. A same-line ordinary statement after the final attached switch still
+    requires an explicit `;`. Perl syntax checks PASS; phase0 PASS (`Files=1, Tests=991`);
+    mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  Commit: `SPEC-FORMAT-TERSE.2.2.5.1 - implement Perl attached switch separator lock`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.5.2`
-  Status: `pending`
+  Status: `active` (frontier after `.2.2.5.1`, 2026-06-30)
   Goal: Rust parity — attached-block `switch/case/default`
   Acceptance: Rust parses and executes the accepted `.2.2.5.1` attached-switch contract with the same
     first-match/default semantics and oracle parity, while preserving the existing lazy value-form
     `switch(expr, case(...), default(...))`.
-  Verification: `pending` (blocked until `.2.2.5.1` defines the Perl reference contract)
+  Verification: `pending` (Perl reference contract now defined by `.2.2.5.1`)
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.6`
@@ -1495,7 +1502,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.2.3` | `done` 2026-06-30 | Rust parity for attached-block `if/elseif/else` landed with parser/runtime/oracle locks; attached `if` is now portable on Perl and Rust. |
 | — | `SPEC-FORMAT-TERSE.2.2.4` | `done` 2026-06-30 | `when/otherwise` aliases landed on Perl and Rust as normalization over attached `if/else`; oracle corpus 37 fixtures. |
 | — | `SPEC-FORMAT-TERSE.2.2.5` | `active` 2026-06-30 | Attached-block `switch/case/default` split/owned before code: Perl separator/source lock first, Rust parity second. |
-| 1 | `SPEC-FORMAT-TERSE.2.2.5.1` | `active` | Perl reference attached-switch separator/source lock. |
+| — | `SPEC-FORMAT-TERSE.2.2.5.1` | `done` 2026-06-30 | Perl reference attached-switch separator/source lock landed; compact adjacent branches lower without host residue and phase0/local CI pass. |
+| 1 | `SPEC-FORMAT-TERSE.2.2.5.2` | `active` | Rust attached-switch parser/runtime parity over the accepted Perl contract. |
 | … | `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1539,6 +1547,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   `if`/`switch`, but does not parse/execute attached statement blocks for `if`, `switch`, `when`,
   `otherwise`, or `while`. The implementation split is Perl attached-if, Rust attached-if parity,
   `when`/`otherwise`, attached switch/default, and while.
+
+- `2026-06-30` (**`.2.2.5.1` Perl attached-switch separator/source lock landed**). The accepted Perl reference
+  rule is splitter-driven: adjacent attached `case(...) { ... }` and `default { ... }` branch bodies must be
+  separate DSL statements even when they share one physical line inside a `switch(...) { ... }` body. Once split,
+  the existing attached-switch `ControlFlow` lowerers emit the guarded first-match/default sequence. This leaf
+  deliberately preserves the statement-separator contract from `.1.5.4`: after the final attached switch block,
+  an ordinary same-line statement still needs `;`. Rust parity remains separate under `.2.2.5.2`; until that
+  lands, attached statement `switch/case/default` is a Perl-reference lock, not a portable cross-backend
+  contract.
 
 - `2026-06-29` (**`.1.6` array end-mutation methods landed**). The accepted Round 1 array method contract is
   statement-level mutation, not value-returning fluent chaining. A single receiver-dot call with receiver
@@ -2034,6 +2051,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.4` (ownership) | KM retrieval (`terse-control-flow-keyword-surface-ground-truth`, `spec-format-brainstorm-rounds-1-3`); TOOLBOX lowering/descriptor/runtime/generated-source probes for `when/otherwise`; Perl flow code-read (`StatementSplit::Core`, `Scanner::FlowRules`, `Contracts`, `ControlFlow`); Rust code-read (`expr.rs`, `engine.rs`) | Owned `when/otherwise` before code. Current Perl leaves the combined form raw, warns via host experimental `when`, and returns the wrong branch for the true-condition probe. Implementation should normalize `when(cond)` to attached `if(cond)` and `otherwise` to attached `else`, reusing existing Perl control-flow lowering and Rust marker-gating runtime. Frontier remains `.2.2.4` implementation. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.4` | Perl syntax checks; TOOLBOX lowering/descriptor/runtime/generated-source probe; focused Rust core parser test (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core when_otherwise`); focused Rust runtime test (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_2_4`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; `prove -q -Iperl t/phase0_regression.t`; mdBook build; Knowledge Map/memory/doctrine/diff checks; full local CI | `when/otherwise` aliases landed. Perl recognizes the aliases in statement splitting, scanner/contract matching, and `ControlFlow` lowering, while avoiding host Perl `when`. Rust parser normalizes attached `when` / `otherwise` branches to existing `if` / `else` / `endif` statements and reuses the runtime branch engine. Oracle corpus now has **37 fixtures**. Phase0 PASS (`Files=1, Tests=991`); full local CI PASS. Frontier becomes `.2.2.5`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.5` (split/ownership) | KM retrieval (`terse-control-flow-keyword-surface-ground-truth`, `terse-statement-separator-contract`, `spec-format-brainstorm-rounds-1-3`); TOOLBOX descriptor/lowering/runtime probes for attached `switch/case/default`; Perl code-read (`ControlFlow.pm`, `StatementSplit::Core`); Rust code-read (`expr.rs`, `engine.rs`); focused Rust value-form switch tests | Split and owned attached `switch/case/default` before code. Perl has partial attached-switch machinery, but adjacent branch blocks without explicit separators can leave unresolved `case` residue or host-like `default` labels in generated source. Rust has lazy value-form `switch` runtime support but no attached `switch/case/default` statement parser. Frontier becomes `.2.2.5.1` for the Perl separator/source lock, then `.2.2.5.2` Rust parity. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.5.1` | Perl syntax checks; TOOLBOX descriptor/lowering/runtime/generated-source probes for compact attached switch; `prove -q -Iperl t/phase0_regression.t`; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Perl attached `switch/case/default` separator/source lock landed. `StatementSplit::Core` now splits adjacent attached `case/default` branches so descriptor metadata reports `ready=1 raw=0 unresolved=0`, generated handlers have no host-shaped branch residue, runtime selects first/later/default branches correctly, and a same-line statement after the final switch still requires `;`. Phase0 PASS (`Files=1, Tests=991`); full local CI PASS. Frontier becomes `.2.2.5.2` Rust parity. |
 
 ## Commit Log
 
@@ -2091,8 +2109,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.2.4` | `SPEC-FORMAT-TERSE.2.2.4 — own when otherwise aliases` | No engine behavior change. `when/otherwise` is owned as an alias-normalization leaf over attached `if/else`, not host Perl `when`; implementation should reuse existing control-flow lowerers and Rust marker runtime. Frontier remains `.2.2.4` implementation. |
 | `SPEC-FORMAT-TERSE.2.2.4` | `SPEC-FORMAT-TERSE.2.2.4 — implement when otherwise aliases` | Perl and Rust now normalize attached `when(cond) { ... } otherwise { ... }` to the existing attached `if/else` control-flow contract. Oracle corpus 37 fixtures. Frontier becomes `.2.2.5`. |
 | `SPEC-FORMAT-TERSE.2.2.5` | `SPEC-FORMAT-TERSE.2.2.5 — split attached switch surface` | No engine behavior change. Attached `switch/case/default` is split before code into `.2.2.5.1` Perl separator/source lock and `.2.2.5.2` Rust parity. Frontier becomes `.2.2.5.1`. |
+| `SPEC-FORMAT-TERSE.2.2.5.1` | `SPEC-FORMAT-TERSE.2.2.5.1 — implement Perl attached switch separator lock` | Perl compact attached `switch/case/default` now splits adjacent branch bodies, lowers without host branch residue, and preserves the semicolon requirement before any following same-line ordinary statement. Frontier becomes `.2.2.5.2` Rust parity. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.2.5.1` LANDED — Perl attached `switch/case/default` separator/source lock.**
+  `StatementSplit::Core` now splits adjacent attached `case(...) { ... }` and `default { ... }` branch bodies
+  before same-line branch continuations. Compact attached switch lowers with `ready=1 raw=0 unresolved=0`, no
+  host-shaped branch residue, and first/later/default runtime selection locked. The `.1.5.4` separator rule
+  remains: a following same-line ordinary statement needs `;`. Frontier moves to `.2.2.5.2` Rust parity.
 
 - `2026-06-30`: **`.2.2.5` SPLIT/OWNED BEFORE CODE — attached `switch/case/default`.**
   TOOLBOX probes show this surface is not one safe implementation leaf: Perl has partial attached-switch

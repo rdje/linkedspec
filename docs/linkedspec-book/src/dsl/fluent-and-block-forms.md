@@ -92,8 +92,10 @@ LinkedSpec currently supports three portable control-flow families:
 - `if/elseif/else` as inline-composite expressions or statement-marker chains.
 - `switch/case/default` as inline-composite expressions.
 
-Statement-level `switch(...) { case(...) { ... } default { ... } }` and `while(...) { ... }`
-are Round 2 implementation work and should not be used as the portable contract yet.
+Statement-level `switch(...) { case(...) { ... } default { ... } }` is being locked on the
+Perl reference backend first and is not portable across backends until Rust parity lands.
+`while(...) { ... }` remains later Round 2 implementation work. Use inline-composite `switch`
+as the portable switch contract today.
 
 ### If family: marker style
 
@@ -240,8 +242,8 @@ semicolon after the closing `}` or put the next statement on a new line.
 
 ### Switch family: marker style
 
-Marker-style statement `switch` is not portable across backends yet. Use inline-composite `switch`
-for portable specs today:
+Attached statement `switch` is available on the Perl reference backend while Rust parity is pending.
+Use inline-composite `switch` for portable specs today:
 
 ```text
 LX {
@@ -346,7 +348,7 @@ Perl reference and Rust backend.
 | Substantial branch logic (4+ statements) | Structured block | Easier to read and maintain |
 | Single-branch if/else choice | Inline composite or marker style | Expresses intent directly |
 | Multi-branch switch with simple bodies | Inline composite | One expression, no markers to balance |
-| Multi-branch switch with complex bodies | Inline composite today; attached switch after Round 2 | Branch bodies can span lines after parity lands |
+| Multi-branch switch with complex bodies | Inline composite today; attached switch after Rust parity | Branch bodies can span lines after parity lands |
 | Deeply nested if/else chains | Marker-style | Explicit open/close markers prevent ambiguity |
 | Return payload construction | Inline composite | Returns the evaluated expression directly |
 | Conditional accumulation | Marker style today; attached block after Round 2 | Branch body can contain multiple statements |

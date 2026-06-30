@@ -944,8 +944,8 @@ return(switch(
 ))
 ```
 
-Statement-level marker switch and attached-block switch bodies are Round 2 implementation work. Use the
-inline composite form for portable specs today.
+Attached-block switch bodies are being locked on the Perl reference backend first, but Rust parity is still
+pending. Use the inline composite form for portable specs today.
 
 Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / `elseif(...)` when each branch asks a different question.
 

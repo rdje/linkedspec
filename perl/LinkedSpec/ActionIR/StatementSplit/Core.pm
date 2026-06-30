@@ -241,6 +241,15 @@ sub _looks_like_attached_if_branch_statement {
  return 1
 }
 
+sub _looks_like_attached_switch_branch_statement {
+ my ($statement, $trim_action_ir_value) = @_;
+ my $trimmed = $trim_action_ir_value->($statement);
+ return 0 unless defined($trimmed) && length($trimmed);
+ return 0 unless $trimmed =~ /\A(?:case\b\s*\(|default\b\s*\{)/o;
+ return 0 unless $trimmed =~ /\}\s*\z/s;
+ return 1
+}
+
 sub _next_nonspace_char_index {
  my ($chars, $start_idx) = @_;
  my $idx = $start_idx;
@@ -256,6 +265,15 @@ sub _next_token_is_attached_if_continuation {
  my $tail = join('', @{$chars}[$start_idx .. $#$chars]);
  return 1 if $tail =~ /\A(?:elseif|elif)\b\s*\(/o;
  return 1 if $tail =~ /\A(?:else|otherwise)\b\s*\{/o;
+ return 0
+}
+
+sub _next_token_is_attached_switch_continuation {
+ my ($chars, $start_idx) = @_;
+ return 0 unless defined $start_idx && $start_idx < @$chars;
+ my $tail = join('', @{$chars}[$start_idx .. $#$chars]);
+ return 1 if $tail =~ /\Acase\b\s*\(/o;
+ return 1 if $tail =~ /\Adefault\b\s*\{/o;
  return 0
 }
 
@@ -277,6 +295,9 @@ sub _should_split_on_method_boundary {
  return 1
   if _looks_like_attached_if_branch_statement($state->{statement}, $trim_action_ir_value)
   && _next_token_is_attached_if_continuation($chars, $next_idx);
+ return 1
+  if _looks_like_attached_switch_branch_statement($state->{statement}, $trim_action_ir_value)
+  && _next_token_is_attached_switch_continuation($chars, $next_idx);
  return 0 unless _span_contains_line_break($chars, $idx + 1, $next_idx);
  return ($chars->[$next_idx] =~ /[A-Za-z_]/o) ? 1 : 0
 }

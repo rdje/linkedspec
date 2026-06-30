@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.5.1 — implement Perl attached switch separator lock
+
+**Scope:** Perl ActionIR statement splitting, phase0 regression locks, mdBook control-flow wording,
+Knowledge Map, task tree, roadmap tracker, and live continuity docs. Rust attached-switch parity remains
+`.2.2.5.2`.
+
+**What changed:** Compact attached-block `switch/case/default` now lowers through the Perl reference without
+host-shaped branch residue: `switch(expr) { case(v) { ... } case(w) { ... } default { ... } }`.
+
+**Implementation:** `StatementSplit::Core` now recognizes complete attached `case(...) { ... }` and
+`default { ... }` branch bodies and splits them before a following same-line `case(...) {` or `default {`
+continuation. The existing attached-switch lowerers then emit the canonical guarded branch sequence with no raw
+fallback or unresolved helper residue. A same-line ordinary statement after the final attached switch still
+requires `;`.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX descriptor/lowering/runtime/source probes PASS; phase0 PASS
+(`Files=1, Tests=991`); mdBook build PASS; Knowledge Map regenerate/check PASS; memory/doctrine/diff checks
+PASS; full local CI PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.5 — split attached switch surface
 
 **Scope:** Task tree, Knowledge Map fact sources, roadmap tracker, and live continuity docs. No Perl behavior,

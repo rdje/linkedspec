@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.5.1 — Perl attached `switch/case/default` separator/source lock landed**
+  (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Compact attached switch bodies now split adjacent branch blocks:
+  `switch(expr) { case(v) { ... } case(w) { ... } default { ... } }` lowers through ActionIR with no host-shaped
+  `case(...)` / `default { ... }` residue, no raw fallback, and no unresolved helper residue. Runtime locks cover
+  first-match, later-case, and default selection. The existing separator contract is unchanged: an ordinary
+  same-line statement after the final attached switch still requires `;`.
+  **Verification:** Perl syntax checks PASS; TOOLBOX descriptor/lowering/runtime/source probes PASS; phase0 PASS
+  (`Files=1, Tests=991`); mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.5.2`** (Rust attached-switch parser/runtime parity).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.5 — attached `switch/case/default` split/owned before code**
   (DOCS/TREE/KM ONLY; **no engine behavior change**). KM and TOOLBOX probes show the broad attached-switch
   surface needs two implementation leaves: Perl first, Rust second. Perl has partial attached-switch lowering,

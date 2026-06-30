@@ -775,8 +775,9 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 - **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
 - **Behavior**: Evaluates `expr` once and compares it to each `case(val)` in order.
 
-Statement-level `switch(...) { case(...) { ... } default { ... } }` and `while(...) { ... }`
-are Round 2 implementation work, not the current portable helper contract.
+Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is being locked on the Perl
+reference backend first; use inline-composite `switch(...)` for portable specs until Rust parity lands.
+`while(...) { ... }` remains Round 2 implementation work.
 
 ### `case(val, body)`
 - **Signature**: Inline switch branch.

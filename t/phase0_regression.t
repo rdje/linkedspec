@@ -39203,7 +39203,7 @@ SPEC
     );
 };
 subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
-    plan tests => 18;
+    plan tests => 30;
 
     my $rewritten = LinkedSpec::call_spec_handler_subst(
         'Top',
@@ -39305,6 +39305,70 @@ SPEC
         'canonical action-IR nodes include SWITCH/CASE/DEFAULT/ENDSWITCH control-flow markers'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'fluent switch/case/default/endswitch rule remains language-agnostic action-IR ready');
+
+    my $attached_switch = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'switch("b") { case("a") { return("hit") } case("b") { return("second") } default { return("miss") } }'
+    );
+    unlike(
+        $attached_switch,
+        qr/\bcase\s*\(|\bdefault\b\s*\{/,
+        'compact attached switch/case/default lowering leaves no host-shaped case/default residue'
+    );
+    like(
+        $attached_switch,
+        qr/if \(!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq "a"\).*if \(!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq "b"\).*if \(!\$__ls_switch_hit_1\)/s,
+        'compact attached switch lowers adjacent case/default blocks as guarded branch sequence'
+    );
+
+    my $attached_spec_content = <<'SPEC';
+Top::
+ /x/ -> Done { switch("b") { case("a") { return("hit") } case("b") { return("second") } default { return("miss") } } }
+
+Done::
+ /x/
+SPEC
+    my $attached_descr = LinkedSpec::Get(\$attached_spec_content, return_descriptor => 1);
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for compact attached switch/case/default form');
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'compact attached switch avoids RAW_PERL fallback');
+    is($attached_meta->{unresolved_helper_count}, 0, 'compact attached switch avoids unresolved-helper hits');
+    ok($attached_meta->{language_agnostic_action_ir_ready}, 'compact attached switch is language-agnostic ActionIR ready');
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'compact attached switch metadata records SWITCH/CASE/DEFAULT/RETURN nodes'
+    );
+
+    my @runtime_switch_cases = (
+        ['switch("a") { case("a") { return("hit") } case("a") { return("second") } default { return("miss") } }', 'hit'],
+        ['switch("b") { case("a") { return("hit") } case("b") { return("second") } default { return("miss") } }', 'second'],
+        ['switch("z") { case("a") { return("hit") } case("b") { return("second") } default { return("miss") } }', 'miss'],
+    );
+    for my $runtime_case (@runtime_switch_cases) {
+        my ($stmt, $expected) = @$runtime_case;
+        my $spec = "Top::\n /x/ -> Done { $stmt }\n\nDone::\n /x/\n";
+        my $parser = LinkedSpec::Get(\$spec);
+        my $input = 'x';
+        is(
+            JSON::PP->new->canonical(1)->allow_nonref(1)->encode($parser->(\$input)),
+            JSON::PP->new->canonical(1)->allow_nonref(1)->encode($expected),
+            "compact attached switch runtime selects $expected branch",
+        );
+    }
+
+    my $attached_then_return = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'switch("a") { case("a") { set(out,"hit"); return(out) } default { return("miss") } }; return("after")'
+    );
+    like($attached_then_return, qr/\}\s*;\s*return "after"/s, 'explicit semicolon after attached switch separates following same-line statement');
+    my $attached_missing_separator = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'switch("a") { case("a") { set(out,"hit"); return(out) } default { return("miss") } } return("after")'
+    );
+    like($attached_missing_separator, qr/\bswitch\s*\("a"\).*return\("after"\)/s, 'same-line statement after attached switch still requires a semicolon separator');
 };
 subtest 'emit_context_showcase_pipe_operator_if_else_method_chain' => sub {
     plan tests => 7;
