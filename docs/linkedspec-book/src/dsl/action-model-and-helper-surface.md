@@ -131,6 +131,7 @@ Access the input text and match data:
 Structured branching within action bodies:
 
 - `if(condition) { ... }` / `elseif(condition) { ... }` / `else { ... }` / `endif`
+- `when(condition) { ... }` / `otherwise { ... }` as attached-block aliases for `if` / `else`
 - `switch(value) { case X: ... default: ... }` / `endswitch`
 - `coalesce(...)` — return the first defined, non-empty value
 - `is_defined(...)` / `has_key(...)` — existence checks

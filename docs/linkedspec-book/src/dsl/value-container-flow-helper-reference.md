@@ -901,6 +901,28 @@ if(
 
 Use the marker form when branches contain multiple statements or nested flow. Use the inline form when the branch bodies are short enough that compactness improves readability.
 
+Attached-block form is also portable. It lowers to the same marker flow and supplies the closing
+`endif()` implicitly:
+
+```text
+if(is_nonempty(array(items))) {
+  return(hash("kind", "items", "items", array_copy(array(items))))
+} else {
+  return_undef()
+}
+```
+
+For attached blocks, `when(condition) { ... }` is a readable alias for the first `if` branch and
+`otherwise { ... }` is a readable alias for the fallback `else` branch:
+
+```text
+when(matches(scalar(kind), /^node_/)) {
+  return(hash("kind", "node", "text", scalar(kind)))
+} otherwise {
+  return(hash("kind", "other", "text", scalar(kind)))
+}
+```
+
 ## Inline `switch` flow
 
 Use `switch(...)` when one driving value controls several exact branches.

@@ -246,8 +246,8 @@ children:
 | `LX` | Loop exit — runs after a repeated rule's loop terminates. |
 
 Lifecycle markers are **semicolon-light structured authoring**: a marker followed by
-`{ code }` is a lifecycle block. Round 2 is adding attached-block control-flow markers,
-but today portable branch control uses statement markers and inline-composite expressions.
+`{ code }` is a lifecycle block. Portable branch control includes statement markers,
+attached-block `if` forms, and inline-composite expressions.
 Within structured blocks, newlines separate top-level helper statements implicitly.
 Semicolons remain accepted and are required when multiple top-level helper statements
 share one physical line. Plain same-line whitespace is not a statement separator, and
@@ -531,6 +531,8 @@ num_range(arr)           — max - min of array elements
 ```
 if(cond, then, elseif(cond2, then2), else(default))
 if(cond); ... elseif(cond2); ... else(); ... endif()
+if(cond) { ... } elseif(cond2) { ... } else { ... }
+when(cond) { ... } otherwise { ... }
 switch(expr, case(val, body), default(body))
 case(val, body)
 default(body)
@@ -656,11 +658,12 @@ E {
 ```
 
 Round 2 is extending this surface. Perl and Rust now accept attached-block
-`if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations; Rust
-normalizes that syntax to the existing marker-control sequence. `when(...) { ... } otherwise {
-... }`, statement-level `switch(...) { case(...) { ... } default { ... } }`, and `while(...) { ... }`
-remain tracked implementation leaves. Zero-argument markers that are already implemented, such as
-`else`/`endif`, accept bare-keyword form in addition to parenthesized form.
+`if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations, and
+attached-block `when(...) { ... } otherwise { ... }` as aliases for `if(...) { ... } else { ... }`.
+Rust normalizes these attached forms to the existing marker-control sequence. Statement-level
+`switch(...) { case(...) { ... } default { ... } }` and `while(...) { ... }` remain tracked
+implementation leaves. Zero-argument markers that are already implemented, such as `else`/`endif`,
+accept bare-keyword form in addition to parenthesized form.
 
 ## 10. Constraints and Validation
 

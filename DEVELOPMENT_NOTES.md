@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.4 — when/otherwise landed): Implemented the alias leaf. Durable points.
+  (1) **Normalize, do not host-dispatch.** Perl now lowers attached `when(cond) { ... } otherwise { ... }` to
+  canonical `if/else`; generated handlers no longer contain host Perl `when`. (2) **Perl needed every recognition
+  seam.** Statement splitting, scanner events, contract regexes, and `ControlFlow` all needed the aliases so
+  lowering, metadata, diagnostics, and compact same-line branch splitting agree. (3) **Rust stayed parser-only.**
+  `CodeBlock::parse` rewrites `when` to `if` and `otherwise` to `else` before the runtime sees statements, so
+  `handle_statement_if_control` remains the single branch engine. (4) **Oracle parity advanced.** Fixture
+  `terse_2_2_4_when_otherwise_aliases` brings the Rust oracle corpus to 37 fixtures.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.4 — when/otherwise ownership): Owned the `when/otherwise` alias leaf
   before code. Durable points. (1) **Host Perl `when` is explicitly not the contract.** Current generated
   handlers keep raw `when(true) { ... } otherwise { ... }`, emit Perl's experimental-`when` warning, and return

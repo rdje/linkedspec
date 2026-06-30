@@ -39072,7 +39072,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'split_tagged_records flow remains language-agnostic action-IR ready');
 };
 subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
-    plan tests => 18;
+    plan tests => 26;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'if(scalar(on)); push(pipe_operator, rule); elseif(scalar(alt_on)); print("warn"); else(); say("Error: no context"); return_undef(); endif()'),
@@ -39166,6 +39166,40 @@ SPEC
         JSON::PP->new->canonical(1)->allow_nonref(1)->encode($attached_parser->(\$attached_input)),
         '"yes"',
         'compact attached-block if/elseif/else executes only the selected branch',
+    );
+
+    my $when_otherwise_stmt = 'when(true) { return("yes") } otherwise { return("no") }';
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', $when_otherwise_stmt),
+        'if (do { require JSON::PP; JSON::PP::true }) { return "yes" } else { return "no" }',
+        'compact attached-block when/otherwise lowers as canonical if/else flow',
+    );
+
+    my $when_otherwise_spec = qq{Top::\n /x/ -> Done { $when_otherwise_stmt }\n\nDone::\n /x/\n};
+    my $when_otherwise_descr = LinkedSpec::Get(\$when_otherwise_spec, return_descriptor => 1);
+    ok(defined($when_otherwise_descr) && ref($when_otherwise_descr) eq 'HASH', 'descriptor build succeeds for compact attached-block when/otherwise chain');
+
+    my $when_otherwise_meta = $when_otherwise_descr->{spec}{Top}{meta}{action_rewriter};
+    is($when_otherwise_meta->{canonical_action_ir_fallback_count}, 0, 'compact attached-block when/otherwise avoids RAW_PERL fallback');
+    is($when_otherwise_meta->{raw_perl_dependency_count}, 0, 'compact attached-block when/otherwise avoids raw Perl dependency');
+    is($when_otherwise_meta->{unresolved_helper_count}, 0, 'compact attached-block when/otherwise avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$when_otherwise_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$when_otherwise_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$when_otherwise_meta->{canonical_action_ir_nodes}}),
+        'compact attached-block when/otherwise reports canonical IF/ELSE branch nodes'
+    );
+
+    my $when_otherwise_source = '';
+    LinkedSpec::Get(\$when_otherwise_spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$when_otherwise_source);
+    unlike($when_otherwise_source, qr/\b(?:when|otherwise)\b/, 'compact attached-block when/otherwise does not leak host Perl keywords into generated source');
+
+    my $when_otherwise_parser = LinkedSpec::Get(\$when_otherwise_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $when_otherwise_input = 'xx';
+    is(
+        JSON::PP->new->canonical(1)->allow_nonref(1)->encode($when_otherwise_parser->(\$when_otherwise_input)),
+        '"yes"',
+        'compact attached-block when/otherwise executes the canonical selected branch',
     );
 };
 subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' => sub {

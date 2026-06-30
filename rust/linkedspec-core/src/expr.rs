@@ -10,7 +10,7 @@
 //! ```text
 //! stmts       → stmt*
 //! stmt        → attached_if | hash_index_assignment | array_append | scalar_assignment | expr ';'?
-//! attached_if → if '(' expr ')' '{' stmts '}' (elseif '(' expr ')' '{' stmts '}')* (else '{' stmts '}')?
+//! attached_if → (if | when) '(' expr ')' '{' stmts '}' (elseif '(' expr ')' '{' stmts '}')* ((else | otherwise) '{' stmts '}')?
 //! scalar_assignment → name '=' expr      (statement only)
 //! array_append → name '+=' expr          (statement only)
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
@@ -375,9 +375,15 @@ impl<'a> Parser<'a> {
 
     fn try_parse_attached_if_chain(&mut self) -> Result<Option<Vec<Stmt>>, String> {
         let start = self.pos;
-        let Some((if_expr, if_body)) = self.try_parse_attached_conditional_branch("if")? else {
-            self.pos = start;
-            return Ok(None);
+        let (if_expr, if_body) = match self.try_parse_attached_conditional_branch("if", "if")? {
+            Some(branch) => branch,
+            None => match self.try_parse_attached_conditional_branch("when", "if")? {
+                Some(branch) => branch,
+                None => {
+                    self.pos = start;
+                    return Ok(None);
+                }
+            },
         };
 
         let mut statements = Vec::new();
@@ -389,7 +395,7 @@ impl<'a> Parser<'a> {
             self.skip_whitespace();
 
             if let Some((elseif_expr, elseif_body)) =
-                self.try_parse_attached_conditional_branch("elseif")?
+                self.try_parse_attached_conditional_branch("elseif", "elseif")?
             {
                 statements.push(Stmt { expr: elseif_expr });
                 statements.extend(elseif_body.statements);
@@ -413,20 +419,24 @@ impl<'a> Parser<'a> {
     fn try_parse_attached_conditional_branch(
         &mut self,
         keyword: &str,
+        canonical_name: &str,
     ) -> Result<Option<(Expr, CodeBlock)>, String> {
         let start = self.pos;
         if !self.starts_with_keyword(keyword) {
             return Ok(None);
         }
 
-        let expr = self.parse_var_or_call()?;
-        let Expr::Call { name, args } = &expr else {
+        let mut expr = self.parse_var_or_call()?;
+        let Expr::Call { name, args } = &mut expr else {
             self.pos = start;
             return Ok(None);
         };
         if name != keyword || args.len() != 1 {
             self.pos = start;
             return Ok(None);
+        }
+        if name != canonical_name {
+            *name = canonical_name.to_string();
         }
 
         self.skip_whitespace();
@@ -441,18 +451,22 @@ impl<'a> Parser<'a> {
 
     fn try_parse_attached_else_branch(&mut self) -> Result<Option<CodeBlock>, String> {
         let start = self.pos;
-        if !self.starts_with_keyword("else") {
+        let keyword = if self.starts_with_keyword("else") {
+            "else"
+        } else if self.starts_with_keyword("otherwise") {
+            "otherwise"
+        } else {
             return Ok(None);
-        }
+        };
 
-        self.advance("else".len());
+        self.advance(keyword.len());
         self.skip_whitespace();
         if self.peek() != Some('{') {
             self.pos = start;
             return Ok(None);
         }
 
-        self.parse_attached_branch_block("else").map(Some)
+        self.parse_attached_branch_block(keyword).map(Some)
     }
 
     fn parse_attached_branch_block(&mut self, label: &str) -> Result<CodeBlock, String> {
@@ -1288,6 +1302,28 @@ mod tests {
         match &block.statements[7].expr {
             Expr::Call { args, .. } => assert!(args.is_empty()),
             other => panic!("expected endif call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_when_otherwise_aliases_as_canonical_attached_if_else() {
+        let code = r#"when(true) { return("yes") } otherwise { return("no") }"#;
+        let block = CodeBlock::parse(code).unwrap();
+
+        assert_eq!(
+            statement_call_names(&block),
+            vec!["if", "return", "else", "return", "endif"]
+        );
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "if");
+                assert_eq!(args.len(), 1);
+                assert!(matches!(
+                    args[0].value(),
+                    Expr::BooleanLiteral { value: true }
+                ));
+            }
+            other => panic!("expected canonical if call, got {other:?}"),
         }
     }
 

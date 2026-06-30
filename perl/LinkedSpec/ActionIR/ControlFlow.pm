@@ -114,6 +114,7 @@ sub _normalize_bare_zero_arg_flow_marker_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
+ return 'else()' if $trimmed eq 'otherwise';
  return "$1()" if $trimmed =~ /^(else|endif|default|endcase|endswitch)$/o;
  return $trimmed
 }
@@ -140,7 +141,7 @@ sub _lower_if_flow_statement {
  return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
  my $call = $parsed_expr->{call};
  my $attached_block = $parsed_expr->{attached_block};
- return undef unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i');
+ return undef unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i' || $call->{method} eq 'when');
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
  return undef unless $effective_args;

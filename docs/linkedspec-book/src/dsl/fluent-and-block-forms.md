@@ -87,13 +87,13 @@ the outer statement.
 
 LinkedSpec currently supports three portable control-flow families:
 
-- `if/elseif/else` as attached-block statements.
+- `if/elseif/else` as attached-block statements, with `when/otherwise` as readable aliases for
+  the first and fallback attached branches.
 - `if/elseif/else` as inline-composite expressions or statement-marker chains.
 - `switch/case/default` as inline-composite expressions.
 
-`when(...) { ... } otherwise { ... }`, statement-level `switch(...) { case(...) { ... }
-default { ... } }`, and `while(...) { ... }` are Round 2 implementation work and should not be used as the
-portable contract yet.
+Statement-level `switch(...) { case(...) { ... } default { ... } }` and `while(...) { ... }`
+are Round 2 implementation work and should not be used as the portable contract yet.
 
 ### If family: marker style
 
@@ -141,6 +141,40 @@ The fluent equivalent chains the markers with dots:
 
 All three spellings — parenthesized marker, bare marker, fluent chain — lower to the
 same generated handler.
+
+### If family: attached blocks
+
+Attached blocks put each branch body directly after its condition. The parser lowers them to the
+same control markers as marker style, with an implicit `endif()` at the end of the chain.
+
+```text
+-> child {
+  if(is_nonempty(array(src))) {
+    push_value(array(acc), first(array(src)))
+  } elseif(is_defined(scalar(fallback))) {
+    push_value(array(acc), scalar(fallback))
+  } else {
+    push_value(array(acc), "default")
+  }
+}
+```
+
+`when(...) { ... }` is an alias for the first attached `if(...) { ... }` branch, and
+`otherwise { ... }` is an alias for the fallback `else { ... }` branch:
+
+```text
+-> child {
+  when(is_nonempty(array(src))) {
+    return(first(array(src)))
+  } otherwise {
+    return("default")
+  }
+}
+```
+
+Use the aliases when they read better for classification-style rules. They are not host-language
+`when` blocks; both the Perl reference and Rust backend normalize them to canonical `if/else`
+control flow.
 
 ### If family: inline composite
 

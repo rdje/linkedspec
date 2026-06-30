@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.4 — `when/otherwise` aliases landed**
+  (PERL ACTIONIR + RUST PARSER + ORACLE/KM/BOOK). Attached `when(cond) { ... } otherwise { ... }` now lowers as
+  the portable alias form for attached `if(cond) { ... } else { ... }`. Perl recognizes the aliases in the
+  statement splitter, scanner/contract patterns, and `ControlFlow`, so generated handlers avoid host Perl
+  `when`. Rust normalizes the attached aliases in `CodeBlock::parse` to existing `if`/`else`/`endif` statements
+  and reuses `handle_statement_if_control`.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/descriptor/runtime/source probe PASS; focused
+  Rust core `when_otherwise` PASS; focused Rust runtime `terse_2_2_4` PASS; Rust oracle corpus PASS; oracle
+  corpus regenerated to **37 fixtures**; phase0 PASS (`Files=1, Tests=991`); mdBook/KM/memory/doctrine/diff
+  checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.5`** (attached-block `switch/case/default` parity and separator lock).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.4 — `when/otherwise` owned before code**
   (DOCS/TREE/KM ONLY; **no engine behavior change**). TOOLBOX probes show current `when/otherwise` is not DSL
   control flow: the combined attached form stays raw, descriptor metadata is `ready=0 raw=1 unresolved=2`,

@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.4 — implement when otherwise aliases
+
+**Scope:** Perl ActionIR control-flow recognition/lowering, Rust lifecycle-code parser, Rust runtime tests,
+Perl-oracle corpus fixture, mdBook control-flow documentation, Knowledge Map, task tree, roadmap tracker, and
+live continuity docs.
+
+**What changed:** `when(cond) { ... } otherwise { ... }` is now the portable attached-block alias form for
+`if(cond) { ... } else { ... }`.
+
+**Implementation:** Perl recognizes `when`/`otherwise` at the existing statement-splitting,
+scanner/contract, and `ControlFlow` seams, normalizing to canonical `if`/`else` instead of leaking host Perl
+`when`. Rust `CodeBlock::parse` accepts attached `when` starts and `otherwise` fallback branches, then emits
+the existing `if` / `else` / `endif` statement-control sequence. The Rust branch runtime is unchanged.
+
+**Compatibility:** Marker-form `if(cond); ... else(); ... endif()`, attached `if/elseif/else`, and
+inline-composite lazy `if(...)` behavior are unchanged.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/descriptor/runtime/generated-source probe PASS;
+focused Rust core `when_otherwise` test PASS; focused Rust runtime `terse_2_2_4` test PASS; Rust oracle
+corpus PASS; oracle corpus regenerated to **37 fixtures** with `terse_2_2_4_when_otherwise_aliases`;
+phase0 PASS (`Files=1, Tests=991`); mdBook build PASS; Knowledge Map check PASS; memory/doctrine/diff
+checks PASS; full local CI PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.4 — own when otherwise aliases
 
 **Scope:** Task tree, Knowledge Map fact source, roadmap tracker, and live continuity docs. No Perl behavior,

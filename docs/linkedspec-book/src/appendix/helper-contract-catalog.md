@@ -764,13 +764,19 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 - **Sugar**: Compact continuations such as `} elseif(cond2) {` and `} else {` are accepted. A following
   same-line statement still needs the normal semicolon separator after the final `}`.
 
+### `when(cond) { ... } otherwise { ... }`
+- **Signature**: Attached-block alias form.
+- **Returns**: no value of its own; branch statements provide side effects or `return(...)` values.
+- **Behavior**: Equivalent to `if(cond) { ... } else { ... }`. The Perl reference and Rust backend
+  normalize the aliases to canonical `if`/`else` control flow; they are not host-language `when` blocks.
+
 ### `switch(expr, case(val, body), default(body))`
 - **Signature**: Inline composite form.
 - **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
 - **Behavior**: Evaluates `expr` once and compares it to each `case(val)` in order.
 
-`when(...) { ... } otherwise { ... }`, statement-level `switch(...) { case(...) { ... } default { ... } }`,
-and `while(...) { ... }` are Round 2 implementation work, not the current portable helper contract.
+Statement-level `switch(...) { case(...) { ... } default { ... } }` and `while(...) { ... }`
+are Round 2 implementation work, not the current portable helper contract.
 
 ### `case(val, body)`
 - **Signature**: Inline switch branch.

@@ -1546,3 +1546,22 @@ fn terse_2_2_3_attached_if_preserves_marker_and_inline_if_forms() {
         "attached-block parsing does not claim marker-form or inline if expressions"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.2.4 — when/otherwise conditional aliases:
+
+#[test]
+fn terse_2_2_4_when_otherwise_alias_runs_selected_branch() {
+    let true_branch = "Top::\n /x/ -> Done { when(true) { return(\"yes\") } otherwise { return(\"no\") } }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(true_branch, "xhello"),
+        serde_json::json!(["yes"]),
+        "when(true)/otherwise normalizes to attached if/else and executes the true branch"
+    );
+
+    let fallback_branch = "Top::\n /x/ -> Done { when(false) { return(\"yes\") } otherwise { return(\"no\") } }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(fallback_branch, "xhello"),
+        serde_json::json!(["no"]),
+        "when(false)/otherwise normalizes to attached if/else and executes the fallback"
+    );
+}

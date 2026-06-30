@@ -56,7 +56,7 @@ sub _is_bare_zero_arg_flow_marker_statement {
  my ($statement, $trim_action_ir_value) = @_;
  my $trimmed = $trim_action_ir_value->($statement);
  return 0 unless defined($trimmed) && length($trimmed);
- return 1 if $trimmed =~ /^(?:else|endif|default|endcase|endswitch)$/o;
+ return 1 if $trimmed =~ /^(?:else|otherwise|endif|default|endcase|endswitch)$/o;
  return 0
 }
 
@@ -236,7 +236,7 @@ sub _looks_like_attached_if_branch_statement {
  my ($statement, $trim_action_ir_value) = @_;
  my $trimmed = $trim_action_ir_value->($statement);
  return 0 unless defined($trimmed) && length($trimmed);
- return 0 unless $trimmed =~ /\A(?:if|i|elseif|elif)\b/o;
+ return 0 unless $trimmed =~ /\A(?:if|i|when|elseif|elif)\b/o;
  return 0 unless $trimmed =~ /\}\s*\z/s;
  return 1
 }
@@ -255,7 +255,7 @@ sub _next_token_is_attached_if_continuation {
  return 0 unless defined $start_idx && $start_idx < @$chars;
  my $tail = join('', @{$chars}[$start_idx .. $#$chars]);
  return 1 if $tail =~ /\A(?:elseif|elif)\b\s*\(/o;
- return 1 if $tail =~ /\Aelse\b\s*\{/o;
+ return 1 if $tail =~ /\A(?:else|otherwise)\b\s*\{/o;
  return 0
 }
 

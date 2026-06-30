@@ -6,9 +6,10 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.2.4` OWNED before code** — `when/otherwise` is scoped as a
-  normalization alias over the landed attached `if/else` contract, not host Perl `when`; implementation
-  pending on the same leaf. Prior **`.2.2.3` DONE; frontier `.2.2.4`** — Rust attached-block
+- Last updated: `2026-06-30` (**`.2.2.4` DONE; frontier `.2.2.5`** — `when/otherwise` now lowers as
+  portable attached `if/else` alias flow on Perl and Rust; oracle corpus is **37 fixtures**. Prior
+  **`.2.2.4` OWNED before code** — `when/otherwise` is scoped as a normalization alias over the landed
+  attached `if/else` contract, not host Perl `when`. Prior **`.2.2.3` DONE; frontier `.2.2.4`** — Rust attached-block
   `if/elseif/else` parity landed by parsing attached branch bodies into the existing statement-control model,
   with oracle parity locked. Prior **`.2.2.3` OWNED before code** — Rust attached-block `if/elseif/else`
   parity narrowed to `CodeBlock::parse` attached statement parsing plus existing runtime branch gating. Prior
@@ -1267,7 +1268,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return`
 
 - ID: `SPEC-FORMAT-TERSE.2.2`
-  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.4` owned before code)
+  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.4` done)
   Goal: Control-flow keywords — `if/elseif/else`, `when`, `otherwise`, `default`, `while`, `switch`
   Acceptance: `if (cond) { ... } elseif (cond) { ... } else { ... }` — parens for conditions, blocks
     for bodies, blocks NEVER inside parens; `when (cond) { ... }` inline conditional; `otherwise { ... }`
@@ -1275,11 +1276,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     default { ... } }`.
   Children: `.2.2.1`, `.2.2.2`, `.2.2.3`, `.2.2.4`, `.2.2.5`, `.2.2.6`
   Verification: `.2.2.1` split/ground truth done; `.2.2.2` Perl attached-block if done; `.2.2.3` Rust parity
-    done by normalizing attached branch statements to the existing marker-control runtime; `.2.2.4` ownership
-    narrowed `when/otherwise` to aliases over that attached-if model.
+    done by normalizing attached branch statements to the existing marker-control runtime; `.2.2.4` landed
+    `when/otherwise` aliases over that attached-if model on Perl and Rust.
   Commit: `SPEC-FORMAT-TERSE.2.2.1 - split control-flow keyword surface`;
     `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`;
-    `SPEC-FORMAT-TERSE.2.2.3 - implement Rust attached if blocks`; `.2.2.4` implementation pending
+    `SPEC-FORMAT-TERSE.2.2.3 - implement Rust attached if blocks`;
+    `SPEC-FORMAT-TERSE.2.2.4 - own when otherwise aliases`;
+    `SPEC-FORMAT-TERSE.2.2.4 - implement when otherwise aliases`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.1`
   Status: `done` (2026-06-30)
@@ -1325,18 +1328,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `SPEC-FORMAT-TERSE.2.2.3 - implement Rust attached if blocks`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.4`
-  Status: `active` (owned before code 2026-06-30)
+  Status: `done` (2026-06-30)
   Goal: `when/otherwise` conditional aliases
   Acceptance: `when(cond) { ... } otherwise { ... }` is implemented as the readable one-condition alias family
     for attached-block if/else on Perl and Rust, without relying on Perl's host-language `when` feature.
-  Verification: TOOLBOX probes show current Perl behavior is not acceptable: full `when(true) { ... }
-    otherwise { ... }` remains raw, descriptor metadata is `ready=0 raw=1 unresolved=2`, generated source keeps
-    the host `when(...)` statement and emits Perl's experimental-`when` warning, and runtime returns the
-    `otherwise` branch for the true-condition probe. Code-read shows the implementation seams are aliases in
-    Perl `StatementSplit::Core`, scanner/contract patterns, and `ControlFlow` dispatch; Rust should normalize
-    attached `when`/`otherwise` in `CodeBlock::parse` to the existing `if`/`else`/`endif` marker sequence, so no
-    new Rust runtime branch engine is needed.
-  Commit: `SPEC-FORMAT-TERSE.2.2.4 - own when otherwise aliases`; implementation commit pending
+  Verification: Perl now recognizes `when` at the existing attached-if statement-split/scanner/contract/control-flow
+    seams and normalizes bare attached `otherwise` to `else()`. TOOLBOX probes show the compact alias chain lowers
+    to canonical `if/else`, descriptor metadata reports `raw=0 unresolved=0`, generated source has no host
+    `when`/`otherwise`, and runtime selects the true branch. Rust `CodeBlock::parse` now accepts attached `when`
+    starts plus `otherwise` fallback branches and emits the existing `if`/`else`/`endif` statement sequence; no
+    runtime branch engine was added. Focused Perl probe PASS; focused Rust core/runtime tests PASS; Rust oracle
+    corpus PASS; oracle corpus regenerated to **37 fixtures** with `terse_2_2_4_when_otherwise_aliases`;
+    phase0 PASS (`Files=1, Tests=991`); mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  Commit: `SPEC-FORMAT-TERSE.2.2.4 - own when otherwise aliases`;
+    `SPEC-FORMAT-TERSE.2.2.4 - implement when otherwise aliases`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.5`
   Status: `pending`
@@ -1449,7 +1454,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.2.1` | `done` 2026-06-30 | Control-flow keyword surface split before code. Current portable support is marker/composite `if` plus inline-composite `switch`; attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` are separate implementation leaves. |
 | — | `SPEC-FORMAT-TERSE.2.2.2` | `done` 2026-06-30 | Perl reference attached-block `if/elseif/else` without raw fallback — LANDED. |
 | — | `SPEC-FORMAT-TERSE.2.2.3` | `done` 2026-06-30 | Rust parity for attached-block `if/elseif/else` landed with parser/runtime/oracle locks; attached `if` is now portable on Perl and Rust. |
-| 1 | `SPEC-FORMAT-TERSE.2.2.4` | `active` | `when/otherwise` conditional aliases — OWNED before code; implementation pending. |
+| — | `SPEC-FORMAT-TERSE.2.2.4` | `done` 2026-06-30 | `when/otherwise` aliases landed on Perl and Rust as normalization over attached `if/else`; oracle corpus 37 fixtures. |
+| 1 | `SPEC-FORMAT-TERSE.2.2.5` | `pending` | Attached-block `switch/case/default` parity and separator lock. |
 | … | `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1986,6 +1992,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.2` | Perl syntax checks; TOOLBOX compact attached-if lowering/metadata/runtime probes; phase0 (`prove -q -Iperl t/phase0_regression.t`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Perl attached-block `if/elseif/else` landed. `StatementSplit::Core` splits compact same-line `} elseif/else {` branch continuations so the existing ActionIR control-flow lowering can emit the selected branch without raw fallback. Frontier becomes `.2.2.3` Rust parity. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core attached_if`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_2_3`); `perl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks | Rust attached-block `if/elseif/else` parity landed. `CodeBlock::parse` normalizes attached branch bodies into the existing marker-control sequence and reuses `handle_statement_if_control` at runtime. Added oracle fixture `terse_2_2_3_attached_if_blocks`, bringing the corpus to **36 fixtures**. Attached `if` is now portable on Perl and Rust; frontier becomes `.2.2.4` for `when/otherwise`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.4` (ownership) | KM retrieval (`terse-control-flow-keyword-surface-ground-truth`, `spec-format-brainstorm-rounds-1-3`); TOOLBOX lowering/descriptor/runtime/generated-source probes for `when/otherwise`; Perl flow code-read (`StatementSplit::Core`, `Scanner::FlowRules`, `Contracts`, `ControlFlow`); Rust code-read (`expr.rs`, `engine.rs`) | Owned `when/otherwise` before code. Current Perl leaves the combined form raw, warns via host experimental `when`, and returns the wrong branch for the true-condition probe. Implementation should normalize `when(cond)` to attached `if(cond)` and `otherwise` to attached `else`, reusing existing Perl control-flow lowering and Rust marker-gating runtime. Frontier remains `.2.2.4` implementation. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.4` | Perl syntax checks; TOOLBOX lowering/descriptor/runtime/generated-source probe; focused Rust core parser test (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core when_otherwise`); focused Rust runtime test (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_2_4`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; `prove -q -Iperl t/phase0_regression.t`; mdBook build; Knowledge Map/memory/doctrine/diff checks; full local CI | `when/otherwise` aliases landed. Perl recognizes the aliases in statement splitting, scanner/contract matching, and `ControlFlow` lowering, while avoiding host Perl `when`. Rust parser normalizes attached `when` / `otherwise` branches to existing `if` / `else` / `endif` statements and reuses the runtime branch engine. Oracle corpus now has **37 fixtures**. Phase0 PASS (`Files=1, Tests=991`); full local CI PASS. Frontier becomes `.2.2.5`. |
 
 ## Commit Log
 
@@ -2041,8 +2048,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.2.3` | `SPEC-FORMAT-TERSE.2.2.3 — own Rust attached if blocks` | No engine behavior change. Rust parity is owned before code: parse attached `if`/`elseif`/`else` branch bodies into the existing statement-control model, reusing `handle_statement_if_control` rather than adding a second branch runtime. Frontier remains `.2.2.3` implementation. |
 | `SPEC-FORMAT-TERSE.2.2.3` | `SPEC-FORMAT-TERSE.2.2.3 — implement Rust attached if blocks` | Rust `CodeBlock::parse` now normalizes attached `if/elseif/else` branch bodies to the existing marker-control sequence; runtime branch gating is reused unchanged. Added parser/runtime/oracle locks; attached `if` is now portable on Perl and Rust. Frontier becomes `.2.2.4`. |
 | `SPEC-FORMAT-TERSE.2.2.4` | `SPEC-FORMAT-TERSE.2.2.4 — own when otherwise aliases` | No engine behavior change. `when/otherwise` is owned as an alias-normalization leaf over attached `if/else`, not host Perl `when`; implementation should reuse existing control-flow lowerers and Rust marker runtime. Frontier remains `.2.2.4` implementation. |
+| `SPEC-FORMAT-TERSE.2.2.4` | `SPEC-FORMAT-TERSE.2.2.4 — implement when otherwise aliases` | Perl and Rust now normalize attached `when(cond) { ... } otherwise { ... }` to the existing attached `if/else` control-flow contract. Oracle corpus 37 fixtures. Frontier becomes `.2.2.5`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.2.4` LANDED — `when/otherwise` conditional aliases.**
+  Perl now recognizes attached `when(cond) { ... } otherwise { ... }` at the existing splitter,
+  scanner/contract, and `ControlFlow` seams, lowers it as canonical `if/else`, and no longer leaks host Perl
+  `when` into generated handlers. Rust normalizes the same attached form in `CodeBlock::parse` to existing
+  `if`/`else`/`endif` statement controls. Added focused Perl/Rust locks plus oracle fixture
+  `terse_2_2_4_when_otherwise_aliases` (corpus **37 fixtures**). Frontier moves to `.2.2.5` attached
+  `switch/case/default`.
 
 - `2026-06-30`: **`.2.2.4` OWNED BEFORE CODE — `when/otherwise` aliases.**
   TOOLBOX probes show the current combined `when(true) { ... } otherwise { ... }` form is raw

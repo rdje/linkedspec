@@ -589,6 +589,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.2.2.4 — when/otherwise conditional aliases ──
+    #
+    # Attached when/otherwise branch blocks are aliases for the same canonical
+    # if/else/endif marker flow as attached if/else.
+    {   case   => 'terse_2_2_4_when_otherwise_aliases',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { when(false) { return("bad") } otherwise { return("yes") } }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);
