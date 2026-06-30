@@ -538,11 +538,11 @@ num_range(arr)           — max - min of array elements
 
 ### 7.6 Control Flow Helpers
 ```
-if(cond, then, elseif(cond2, then2), else(default))    — Rust value form; Perl parity pending
+if(cond, then, elseif(cond2, then2), else(default))    — portable lazy value form
 if(cond); ... elseif(cond2); ... else(); ... endif()
 if(cond) { ... } elseif(cond2) { ... } else { ... }
 when(cond) { ... } otherwise { ... }
-switch(expr, case(val, body), default(body))           — Rust value form; Perl parity pending
+switch(expr, case(val, body), default(body))           — portable lazy value form
 case(val, body)
 default(body)
 exit_now(status)         — exit parser immediately

@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5 — return-type method chaining split**
+  (TASK TREE + BOOK/KM/LIVE DOCS; **no runtime behavior change**). The receiver-dot value-chain model is now
+  specified before implementation and split by return family. `.2.3.5.1` owns array receiver-dot value chains;
+  `.2.3.5.2`, `.2.3.5.3`, and `.2.3.5.4` own hash, string, and number families. Current `.1.6`
+  receiver-dot array end mutations remain statement-only: `push_back`/`push_front` mutate, `pop_back`/
+  `pop_front` discard the removed value, and value-position/chained forms stay out of contract until a child
+  leaf defines them explicitly. The mdBook inline-control wording is now aligned with `.2.3.4.2`: inline
+  `if(...)` and `switch(...)` are portable lazy value helpers in `return(...)`, assignment RHS, and fluent
+  `.return(...)` slots.
+  **Verification:** LinkedSpec TOOLBOX probes recorded the Perl receiver-chain boundary; Rust source read
+  confirmed the parser/runtime split; mdBook build, Knowledge Map, memory, doctrine, and diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.1`** (array receiver-dot value chains).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.4.2 — Perl inline-composite value control lowering landed**
   (PERL ACTIONIR + PHASE0 + ORACLE + BOOK/KM). Inline `if(...)` and `switch(...)` now produce selected branch
   values on the Perl reference in supported value-consuming slots: `return(...)`, assignment RHS, and fluent

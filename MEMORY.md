@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `55a7153` (`SPEC-FORMAT-TERSE.2.3.4.1 - implement Rust bare aggregate helper args`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — frontier `.2.3.5` after `.2.3.4.2` (return-type method chaining design and first implementation split).
-- next_action: commit `.2.3.4.2`, then PNT into `.2.3.5`: specify return-type method chaining before implementation; keep existing statement-only receiver-dot mutations stable.
+- latest_commit: `76de18b` (`SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — `.2.3.5` split/design complete; frontier `.2.3.5.1` (array receiver-dot value chains).
+- next_action: PNT into `.2.3.5.1`: implement/lock array receiver-dot value chains by explicit return type while preserving `.1.6` statement-only mutation behavior.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy/source warning noise includes nested `rgx` baseline. oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs` (**46 fixtures after `.2.3.4.2`, including `tclite_*`, deep pure-helper composition, bare aggregate helper args, and inline value-control if/switch**). phase0 baseline = **995 green after `.2.3.4.2`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: none expected after the `.2.3.4.2` commit; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: none expected after the `.2.3.5` split commit; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.

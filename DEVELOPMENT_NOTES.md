@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5 — return-type method chaining split): Completed the design/split before
+  code. Durable points. (1) **Do not broaden statement mutations into value chains implicitly.** Perl currently
+  lowers `items.push_back("a")` and `items.pop_back()` only as standalone mutations, while
+  `return(items.pop_back())`, `set(out, items.push_back("a"))`, and chained receiver expressions remain raw.
+  Rust parses `Expr::FluentChain`, but the runtime only special-cases single-call array end mutations as
+  statements; generic fluent expression evaluation returns `undef`. (2) **Receiver-dot value chaining is
+  receiver-as-first-argument plus a return-family contract.** Array-returning calls can feed array methods,
+  hash-returning calls can feed hash methods, and scalar/string/number/boolean terminals either end the chain
+  or continue only through an explicitly compatible next-family contract. (3) **Implementation is split by
+  family.** `.2.3.5.1` owns array receiver-dot value chains first; `.2.3.5.2`, `.2.3.5.3`, and `.2.3.5.4`
+  own hash, string, and number families. (4) **Inline value-control docs are now aligned with `.2.3.4.2`.**
+  mdBook no longer calls inline `if(...)` / `switch(...)` Rust-only or Perl-pending; they are portable lazy
+  value helpers in the supported value slots.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.4.2 — Perl inline value-control lowering landed): Implemented the Perl
   reference side of the inline value-control contract. Durable points. (1) **Value-control lowering belongs in
   value-expression lowering, not statement-control lowering.** `_lower_method_value_expr` now intercepts

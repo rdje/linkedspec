@@ -889,9 +889,10 @@ endif()
 return(hash_copy(hash(meta)));
 ```
 
-Rust supports inline composite `if` for compact value-producing cases. The Perl reference currently does not
-return the selected inline branch value reliably in value positions, so use marker or attached-block flow for
-portable `.spec` files today.
+Inline composite `if(...)` and `switch(...)` are portable value-producing helpers for compact cases in
+`return(...)`, assignment RHS, and fluent `.return(...)` value slots. They evaluate only the selected payload
+branch. Use marker or attached-block flow when branches contain multiple statements or read better as
+statement control.
 
 ```text
 set(result,
@@ -902,8 +903,8 @@ set(result,
 )
 ```
 
-Use the marker form when branches contain multiple statements, nested flow, or must run on every backend.
-Inline value control becomes the shorter portable form only after Perl reference value lowering catches up.
+Use the marker form when branches contain multiple statements, nested flow, or should be visibly statement
+oriented. Inline value control is the shorter portable form for single-expression branch payloads.
 
 Attached-block form is also portable. It lowers to the same marker flow and supplies the closing
 `endif()` implicitly:

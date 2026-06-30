@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5 — split return-type method chaining
+
+**Scope:** Task-tree split, mdBook contract corrections, Knowledge Map, roadmap tracker, and live continuity
+docs. No parser/runtime behavior changed.
+
+**What changed:** Return-type method chaining is now specified before implementation. Receiver-dot value chains
+will be implemented by return family (array, hash, string, number) with explicit Perl/Rust parity locks and
+oracle fixtures. The first executable child is `SPEC-FORMAT-TERSE.2.3.5.1` for array receiver-dot value
+chains.
+
+**Boundary:** Existing `.1.6` receiver-dot array end mutations stay statement-only:
+`items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` mutate the
+named working array and pop methods discard the removed value. Value-position/chained receiver forms such as
+`return(items.pop_back())`, `set(out, items.push_back("a"))`, and
+`items.push_back("a").push_back("b")` remain outside the current runtime contract until their child leaf
+defines return semantics.
+
+**Docs:** Corrected stale mdBook wording that still described inline composite `if(...)` / `switch(...)` as
+Rust-only value forms. Those helpers are now documented as portable lazy value helpers in `return(...)`,
+assignment RHS, and fluent `.return(...)` slots.
+
+**Validation:** TOOLBOX lowering/runtime probes captured the current receiver-chain boundary; Knowledge Map
+regeneration PASS; `bash scripts/check_memory_architecture.sh` PASS; `bash scripts/check_doctrines.sh` PASS;
+`bash knowledge-map/scripts/check_knowledge_map.sh` PASS; `git diff --check` PASS; `mdbook build
+docs/linkedspec-book` PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.4.2 — implement Perl inline value controls
 
 **Scope:** Perl ActionIR value lowering, flow-expression boolean lowering, scanner/rewrite support, auto-working-variable
