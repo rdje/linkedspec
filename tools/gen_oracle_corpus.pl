@@ -722,6 +722,24 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains ──
+    #
+    # Receiver-dot hash value methods are pure helper composition over the
+    # existing hash helper family. Hash-returning links feed later hash helpers;
+    # sorted key/value terminals can continue through the already-landed array
+    # receiver helper family. Boolean terminals are covered by focused backend
+    # tests; this oracle fixture keeps scalar/number/string values for direct
+    # Perl/Rust JSON parity.
+    {   case   => 'terse_2_3_5_2_hash_receiver_value_chains',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), meta.merge_hash(hash(extra)).scalaref("a"), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },

@@ -1933,3 +1933,25 @@ fn terse_2_3_5_1_array_end_mutations_remain_statement_only_in_value_slots() {
         "push_back remains statement-only when it appears in a value expression"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains:
+
+#[test]
+fn terse_2_3_5_2_hash_receiver_value_chains_run() {
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"b\", 2); set_key(meta, \"a\", 1); set_key(extra, \"a\", 9); set_key(extra, \"c\", 3); return(array(meta.set_key(\"c\", 3).sorted_keys().join_values(\",\"), meta.merge_hash(hash(extra)).scalaref(\"a\"), hash(meta).rename_key(\"a\", \"aa\").drop_keys(\"b\").set_key(\"z\", 4).count_keys(), meta.pick_keys(\"a\", \"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a,b,c", 9, 2, true, 0, 2, 2, 0]]),
+        "hash receiver-dot value chains feed hash and array-returning helper results into compatible next helpers"
+    );
+}
+
+#[test]
+fn terse_2_3_5_2_hash_statement_mutations_remain_statement_level() {
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"a\", 1); set(snapshot, meta.set_key(\"b\", 2)); meta[\"c\"] = 3; return(array(join_values(\",\", sorted_keys(hash(meta))), count_keys(scalar(snapshot)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a,c", 2]]),
+        "receiver-dot set_key is a pure value while statement set_key and hash-index assignment still mutate meta"
+    );
+}

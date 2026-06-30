@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.2 — implement hash receiver value chains
+
+**Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain runtime evaluation, Rust hash-helper
+parity cleanup, focused Perl/Rust locks, oracle corpus, mdBook, Knowledge Map, roadmap/task-tree/live docs.
+
+**What changed:** Hash receiver-dot value chains are now portable on Perl and Rust. Hash-returning helpers
+compose from hash receivers (`meta.set_key(...).count_keys()`, `hash(meta).rename_key(...).drop_keys(...)`),
+and `sorted_keys()` / `sorted_values()` bridge into the already-landed array receiver-chain family
+(`meta.sorted_keys().join_values(",")`). Receiver-dot `scalaref(key)` reads one field from the current hash
+value. Bare hash receivers are normalized as hash snapshots so helper optional-scope parsing cannot drop the
+receiver.
+
+**Boundary:** Statement-level `set_key(meta, key, value)` and `meta[key] = value` keep mutating the named
+working hash. Receiver-dot `meta.set_key(key, value)` is pure value composition and does not mutate unless the
+result is assigned back. Bare receiver `.copy()` remains array-family/array-first; hash receiver snapshots use
+`hash_copy()` or explicit `hash(...).hash_copy()`.
+
+**Validation:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -Iperl -c
+t/phase0_regression.t`; hash-chain TOOLBOX probes; focused Rust parser/runtime tests PASS; `perl -Iperl
+tools/gen_oracle_corpus.pl` generated 48 fixtures; Rust `corpus_oracle` PASS over 48 fixtures.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.1 — implement array receiver value chains
 
 **Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain runtime evaluation, focused Perl/Rust

@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains landed): Implemented the hash
+  return-family receiver-chain leaf. Durable points. (1) **Receiver-dot hash chains are pure value
+  composition.** Perl normalizes compatible hash receiver links into helper expressions, and Rust evaluates
+  `Expr::FluentChain` by carrying the current hash value through the helper table. Hash-returning links include
+  `hash_copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys`
+  and `sorted_values` bridge into the array receiver-chain family. (2) **Bare hash receivers must be explicit
+  hash snapshots in Perl normalization.** `merge_hash(meta, ...)` can lose a leading bare word to optional-scope
+  normalization, so receiver chains wrap a bare hash receiver as `hash(meta)` before composing helper calls.
+  (3) **Receiver-dot `scalaref(key)` maps to Perl's established hash-field reader.** The Perl reference lowers
+  the receiver form through `scalar(hash_expr, key)` while Rust uses its existing hash-consuming `scalaref`
+  helper arm; both return the selected field value. (4) **Statement hash mutations remain separate.**
+  `set_key(meta, key, value)` and `meta[key] = value` mutate the named working hash; `meta.set_key(key, value)`
+  is pure and does not mutate unless assigned back. (5) **Rust `merge_hash` now matches the documented helper
+  contract.** Later hash arguments override earlier keys, matching Perl and the mdBook contract.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains landed): Implemented the first
   return-family receiver-chain leaf. Durable points. (1) **Receiver-dot array chains are pure value
   composition.** Perl normalizes compatible receiver-dot array links into value expressions, and Rust evaluates

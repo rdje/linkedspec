@@ -710,11 +710,22 @@ assign(hash(with_owner), set_key(hash(layered), "owner", scalar(rule_name)));
 assign(hash(renamed), rename_key(hash(with_owner), "old_stage", "stage"));
 assign(hash(public_meta), drop_keys(hash(renamed), "debug", "span"));
 assign(hash(summary_meta), pick_keys(hash(public_meta), "kind", "source", "stage"));
+assign(scalar(public_key_csv), meta.pick_keys("kind", "source").sorted_keys().join_values(","));
+assign(scalar(layered_kind), meta.merge_hash(hash("kind", "fallback")).scalaref("kind"));
+assign(scalar(summary_count), hash(meta).drop_keys("debug", "span").count_keys());
 ```
 
 Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(scalar(hash(meta), "kind"))` or `is_defined(scalaref(retv, {kind}))` when the question is "is the value defined?" Those are different questions.
 
 `set_key(...)` has two deliberate forms. As a statement with a named target, `set_key(meta, "stage", "normalized")` mutates the working hash `meta`. As a value expression, `set_key(hash(meta), "stage", "normalized")` returns a new hash value and leaves `meta` unchanged unless you store the result with `assign(hash(meta), ...)`.
+
+Hash receiver-dot value chains are accepted for the same pure hash helpers. The receiver is the first helper
+argument, so `meta.set_key("stage", "normalized").count_keys()` maps to
+`count_keys(set_key(hash(meta), "stage", "normalized"))`. Hash-returning links can continue through more
+hash helpers, and `sorted_keys()` / `sorted_values()` can continue through array receiver helpers such as
+`join_values(...)`, `drop_front(...)`, and `first()`. Receiver-dot `scalaref(key)` reads one field from the
+current hash value. Statement forms remain separate: `set_key(meta, key, value)` and `meta[key] = value`
+mutate the named working hash; `meta.set_key(key, value)` is a pure derived value unless assigned back.
 
 The terse hash-index operator is the statement form written with the key next to the target:
 

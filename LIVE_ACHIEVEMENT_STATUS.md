@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains landed**
+  (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure hash helper chains now work from a hash
+  receiver on Perl and Rust: `meta.set_key("stage", "normalized").count_keys()`,
+  `meta.merge_hash(hash(extra)).scalaref("a")`, and
+  `meta.sorted_keys().join_values(",")` are locked. Hash-returning links feed later hash helpers, while
+  `sorted_keys()` / `sorted_values()` bridge into array receiver chains. Statement-level `set_key(meta, ...)`
+  and `meta[key] = value` remain the mutating forms; receiver-dot `meta.set_key(...)` is pure unless assigned
+  back. Rust `merge_hash` now matches the documented later-argument override contract.
+  **Verification:** Perl syntax checks PASS; phase0 PASS with **997 tests**; focused Rust parser/runtime locks
+  PASS; oracle regeneration produced **48 fixtures**; Rust `corpus_oracle` PASS over 48 fixtures; mdBook/KM/live
+  docs updated.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.3`** (string receiver-dot value chains).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure array helper chains now work from an array
   receiver on Perl and Rust: `items.sorted().drop_front(2).first()`, `items.uniq().join_values(",")`,
@@ -17,7 +29,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Perl syntax checks PASS; phase0 PASS with **996 tests**; focused Rust parser/runtime locks
   PASS; oracle regeneration produced **47 fixtures**; Rust `corpus_oracle` PASS over 47 fixtures; mdBook/KM/live
   docs updated.
-  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.2`** (hash receiver-dot value chains).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.2.3.5.2` (now completed above).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5 — return-type method chaining split**
   (TASK TREE + BOOK/KM/LIVE DOCS; **no runtime behavior change**). The receiver-dot value-chain model is now
   specified before implementation and split by return family. `.2.3.5.1` owns array receiver-dot value chains;

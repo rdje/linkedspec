@@ -502,6 +502,24 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Returns**: array
 - **Behavior**: Returns the hash's values as an array, sorted by their corresponding keys alphabetically. Deterministic.
 
+### Hash receiver-dot value chains
+- **Signature**: `hash_expr.method(args...).next(args...)`
+- **Returns**: the documented return value of the final helper in the chain.
+- **Behavior**: A compatible hash receiver feeds into the first pure hash helper, and each helper's return
+  value feeds the next compatible helper. For example,
+  `meta.set_key("stage", "normalized").count_keys()` is equivalent to
+  `count_keys(set_key(hash(meta), "stage", "normalized"))`. `meta.sorted_keys().join_values(",")` first
+  derives the sorted key array, then continues through the array receiver-chain family.
+- **Allowed hash-returning links**: `hash_copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`,
+  `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
+  override earlier keys.
+- **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
+  compatible array receiver helpers. `count_keys`, `has_key`, and `scalaref` return number, boolean, and
+  scalar values respectively and end the hash-family chain.
+- **Boundary**: `set_key(name, key, value)` and `name[key] = value` remain statement-level mutations of a
+  named working hash. Receiver-dot `meta.set_key(key, value)` is pure value composition; it mutates nothing
+  unless its result is explicitly assigned back.
+
 ### `contains(arr, needle)`
 - **Signature**: `contains(arr: array, needle: scalar)`
 - **Returns**: boolean
@@ -1120,7 +1138,9 @@ helper argument slots accept bare hash working variables as snapshots, so `merge
 is equivalent to the explicit `hash(overlay)` form. Array-consuming helper argument slots likewise accept bare
 array working variables as snapshots, so `count(drop_front(sorted(items)))` is portable. Array receiver-dot
 value chains are the same composition written from the receiver side, so
-`items.sorted().drop_front(2).first()` and `items.filter_match(/^a$/).count()` are portable. Use explicit
+`items.sorted().drop_front(2).first()` and `items.filter_match(/^a$/).count()` are portable. Hash receiver-dot
+value chains apply the same rule to hash helpers, so
+`meta.set_key("stage", "normalized").sorted_keys().join_values(",")` is portable and pure. Use explicit
 aggregate wrappers such as `array(name)` / `hash(name)` anywhere a helper contract does not say a bare
 aggregate read is accepted. Statement forms
 (`name = value`, `items += value`, `set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value

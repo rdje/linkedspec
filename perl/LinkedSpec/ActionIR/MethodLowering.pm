@@ -996,6 +996,11 @@ sub _lower_method_value_expr {
  return undef unless defined($trimmed) && length($trimmed);
  my $literal = $lower_primitive_literal_expr->($trimmed);
  return $literal if defined($literal);
+ my $hash_receiver_chain = _normalize_hash_receiver_value_chain_expr($trimmed, $deps);
+ if (defined($hash_receiver_chain) && length($hash_receiver_chain) && $hash_receiver_chain ne $trimmed) {
+  my $lowered_chain = _lower_method_value_expr($hash_receiver_chain, $deps);
+  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+ }
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
  return $direct_access if defined($direct_access) && length($direct_access);
  my $shape_literal = $lower_shape_literal_value_expr->($trimmed);
@@ -2654,6 +2659,20 @@ sub _is_array_receiver_value_chain_method {
  return $method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|join_values)$/o ? 1 : 0
 }
 
+sub _hash_receiver_value_chain_return_family {
+ my ($method) = @_;
+ return undef unless defined $method;
+ return 'hash' if $method =~ /^(?:hash_copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash)$/o;
+ return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
+ return 'terminal' if $method =~ /^(?:count_keys|has_key|scalaref)$/o;
+ return undef
+}
+
+sub _is_hash_receiver_value_chain_method {
+ my ($method) = @_;
+ return defined(_hash_receiver_value_chain_return_family($method)) ? 1 : 0
+}
+
 sub _normalize_array_receiver_value_chain_expr {
  my ($expr, $deps) = @_;
  my $require_dep = sub {
@@ -2703,6 +2722,98 @@ sub _normalize_array_receiver_value_chain_expr {
    next;
   }
   $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+ }
+
+ return $current_expr;
+}
+
+sub _normalize_hash_receiver_value_chain_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $split = _split_receiver_dot_method_expr($trimmed, $trim_action_ir_value);
+ return undef unless $split;
+ my ($receiver_expr, $tail_expr) = @$split;
+ return undef unless defined($receiver_expr) && length($receiver_expr);
+
+ my @calls;
+ while (defined($tail_expr) && length($tail_expr)) {
+  my $tail_split = _split_receiver_dot_method_expr($tail_expr, $trim_action_ir_value);
+  my $call_expr = $tail_split ? $tail_split->[0] : $tail_expr;
+  my $call = $parse_method_function_expr->($call_expr);
+  return undef unless $call;
+  push @calls, $call;
+  last unless $tail_split;
+  $tail_expr = $tail_split->[1];
+ }
+ return undef unless @calls;
+ return undef unless _is_hash_receiver_value_chain_method($calls[0]->{method} // '');
+
+ my $current_expr = $receiver_expr;
+ if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
+  $current_expr = 'hash('.$current_expr.')';
+ }
+ my $current_family = 'hash';
+ for (my $idx = 0; $idx < @calls; ++$idx) {
+  my $call = $calls[$idx];
+  my $method = $call->{method} // '';
+  my @args = @{$call->{args} || []};
+  my $is_last = ($idx == $#calls) ? 1 : 0;
+
+  if ($current_family eq 'hash') {
+   my $return_family = _hash_receiver_value_chain_return_family($method);
+   return undef unless defined($return_family);
+
+   if ($method eq 'hash_copy') {
+    return undef unless @args == 0;
+    $current_expr = 'hash_copy('.$current_expr.')';
+   } elsif ($method eq 'flat_hash') {
+    return undef unless @args == 0;
+    $current_expr = 'hash(flat_hash('.$current_expr.'))';
+   } elsif ($method eq 'scalaref') {
+    return undef unless @args == 1;
+    $current_expr = 'scalar('.$current_expr.', '.$args[0].')';
+   } else {
+    $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+   }
+
+   return undef if $return_family eq 'terminal' && !$is_last;
+   $current_family = $return_family;
+   next;
+  }
+
+  if ($current_family eq 'array') {
+   return undef unless _is_array_receiver_value_chain_method($method);
+   if ($method eq 'join_values') {
+    return undef unless @args == 1;
+    $current_expr = 'join_values('.$args[0].', '.$current_expr.')';
+    $current_family = 'terminal';
+    next;
+   }
+   if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
+    $current_expr = '__array_value_'.$method.'('.join(', ', ($current_expr, @args)).')';
+    $current_family = 'array';
+    next;
+   }
+   $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+   $current_family = ($method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
+    ? 'array'
+    : 'terminal';
+   next;
+  }
+
+  return undef;
  }
 
  return $current_expr;

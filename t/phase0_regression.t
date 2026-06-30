@@ -45668,6 +45668,70 @@ subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
         'array receiver value-chain spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
+    # SPEC-FORMAT-TERSE.2.3.5.2: hash receiver-dot value chains feed the
+    # receiver into existing pure hash helper contracts. Statement-level
+    # set_key(...) and hash-index assignment remain the mutating forms.
+    plan tests => 13;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(meta.set_key("c",3).sorted_keys().join_values(","))'), qr/__ls_set_key.*sort keys.*join/s,
+        'hash receiver chain lowers through set_key/sorted_keys/join_values helper contracts');
+    like($L->('return(meta.merge_hash(hash("a",9)).scalaref("a"))'), qr/%meta.*"a" => 9.*__ls_scalar_source/s,
+        'hash receiver merge_hash preserves the receiver and later overlay before scalar field read');
+    like($L->('return(hash(meta).rename_key("a","aa").drop_keys("b").set_key("z",4).count_keys())'), qr/__ls_rename_key.*__ls_drop.*__ls_count_keys/s,
+        'explicit hash receiver chains hash-returning helpers into count_keys');
+    like($L->('return(meta.hash_copy().flat_hash().count_keys())'), qr/__ls_flat_hash.*__ls_count_keys/s,
+        'hash_copy/flat_hash receiver chain lowers as a hash-valued snapshot');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set_key(meta,\"b\",2); set_key(meta,\"a\",1); set_key(extra,\"a\",9); set_key(extra,\"c\",3); return(array(meta.set_key(\"c\",3).sorted_keys().join_values(\",\"), meta.merge_hash(hash(extra)).scalaref(\"a\"), hash(meta).rename_key(\"a\",\"aa\").drop_keys(\"b\").set_key(\"z\",4).count_keys(), meta.pick_keys(\"a\",\"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'hash receiver value-chain spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["a,b,c",9,2,1,0,2,2,0]',
+        'hash receiver value chains return hash/array/scalar/number/boolean terminal values');
+
+    my $statement_spec = "Top::\n"
+                       . " /x/ -> Done { set_key(meta,\"a\",1); set(snapshot, meta.set_key(\"b\",2)); meta[\"c\"] = 3; return(array(join_values(\",\", sorted_keys(hash(meta))), count_keys(scalar(snapshot)))) }\n"
+                       . "\nDone::\n /[a-z]+/\n";
+    my $statement_parser = eval { LinkedSpec::Get(\$statement_spec) };
+    ok(ref($statement_parser) eq 'CODE', 'hash statement/pure receiver mixed spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($statement_parser, 'xhello'), '["a,c",2]',
+        'receiver-dot set_key is pure while statement set_key and hash-index assignment mutate meta');
+
+    my $src = $gen->($spec);
+    is((() = ($src =~ /my %meta\b/g)), 1,
+        'hash receiver chains auto-supply one my %meta');
+    is((() = ($src =~ /my \$meta\b/g)), 0,
+        'hash receiver chains do not auto-supply my $meta');
+    unlike($src, qr/\.(?:set_key|merge_hash|hash_copy|flat_hash)\b/,
+        'generated source has no raw receiver-dot hash helper residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'hash receiver value-chain spec has no canonical fallback');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'hash receiver value-chain spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
     # SPEC-FORMAT-TERSE.2.1.2: Perl reference core expression-valued blocks.
     # Non-empty brace payloads without a top-level fat arrow are value blocks;

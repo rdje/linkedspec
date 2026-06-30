@@ -487,6 +487,8 @@ reversed(arr)           — reversed order
 arr.sorted().first()    — receiver-dot array value chain over compatible pure array helpers
 sorted_keys(hash)       — keys sorted by name, as array
 sorted_values(hash)     — values sorted by key name, as array
+hash_expr.set_key(k, v).sorted_keys().join_values(delim)
+                        — receiver-dot hash value chain over compatible pure hash/array helpers
 contains(arr, needle)   — array membership test
 index_of(arr, needle)   — first index of needle
 is_empty(arr)           — true if array/hash is empty

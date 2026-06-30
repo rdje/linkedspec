@@ -1223,6 +1223,12 @@ impl Engine {
                     return self.eval_array_receiver_value_chain(receiver, calls, ctx, rule_label);
                 }
                 if calls
+                    .first()
+                    .is_some_and(|call| Self::is_hash_receiver_value_chain_method(&call.method))
+                {
+                    return self.eval_hash_receiver_value_chain(receiver, calls, ctx, rule_label);
+                }
+                if calls
                     .iter()
                     .any(|call| Self::is_statement_only_array_end_mutation_method(&call.method))
                 {
@@ -1287,6 +1293,33 @@ impl Engine {
         )
     }
 
+    fn is_hash_receiver_value_chain_method(method: &str) -> bool {
+        Self::is_hash_receiver_hash_returning_method(method)
+            || Self::is_hash_receiver_array_returning_method(method)
+            || Self::is_hash_receiver_terminal_method(method)
+    }
+
+    fn is_hash_receiver_hash_returning_method(method: &str) -> bool {
+        matches!(
+            method,
+            "hash_copy"
+                | "merge_hash"
+                | "set_key"
+                | "rename_key"
+                | "drop_keys"
+                | "pick_keys"
+                | "flat_hash"
+        )
+    }
+
+    fn is_hash_receiver_array_returning_method(method: &str) -> bool {
+        matches!(method, "sorted_keys" | "sorted_values")
+    }
+
+    fn is_hash_receiver_terminal_method(method: &str) -> bool {
+        matches!(method, "count_keys" | "has_key" | "scalaref")
+    }
+
     fn eval_array_receiver_value_chain(
         &self,
         receiver: &linkedspec_core::expr::Expr,
@@ -1341,6 +1374,130 @@ impl Engine {
 
             current =
                 self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
+        }
+
+        Ok(current)
+    }
+
+    fn eval_hash_receiver_value_chain(
+        &self,
+        receiver: &linkedspec_core::expr::Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        #[derive(Clone, Copy, Eq, PartialEq)]
+        enum ReceiverFamily {
+            Hash,
+            Array,
+            Terminal,
+        }
+
+        let mut current = match receiver {
+            Expr::Variable { name } => RuntimeValue::Hash(ctx.hash_copy(name)),
+            Expr::Call { name, args } if (name == "hash" || name == "h") && args.len() == 1 => {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => {
+                        RuntimeValue::Hash(ctx.hash_copy(name))
+                    }
+                    _ => self.eval_expr(receiver, ctx, rule_label)?,
+                }
+            }
+            _ => self.eval_expr(receiver, ctx, rule_label)?,
+        };
+        let mut family = ReceiverFamily::Hash;
+
+        for (index, call) in calls.iter().enumerate() {
+            if family == ReceiverFamily::Terminal {
+                return Ok(RuntimeValue::Undef);
+            }
+
+            let evaluated_call_args: Vec<RuntimeValue> = call
+                .args
+                .iter()
+                .map(|arg| self.eval_expr(arg.value(), ctx, rule_label))
+                .collect::<Result<Vec<_>, _>>()?;
+
+            let receiver_arg = Arg::Positional(Expr::Undef);
+            let (raw_args, evaluated) = if family == ReceiverFamily::Array
+                && call.method == "join_values"
+            {
+                let mut raw = call.args.clone();
+                raw.push(receiver_arg);
+                let mut vals = evaluated_call_args;
+                vals.push(current);
+                (raw, vals)
+            } else {
+                let mut raw = Vec::with_capacity(call.args.len() + 1);
+                raw.push(receiver_arg);
+                raw.extend(call.args.clone());
+                let mut vals = Vec::with_capacity(evaluated_call_args.len() + 1);
+                vals.push(current);
+                vals.extend(evaluated_call_args);
+                (raw, vals)
+            };
+
+            match family {
+                ReceiverFamily::Hash => {
+                    if !Self::is_hash_receiver_value_chain_method(&call.method) {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    current = self.call_helper_with_args(
+                        &call.method,
+                        &raw_args,
+                        &evaluated,
+                        ctx,
+                        rule_label,
+                    )?;
+                    if Self::is_hash_receiver_hash_returning_method(&call.method) {
+                        family = ReceiverFamily::Hash;
+                    } else if Self::is_hash_receiver_array_returning_method(&call.method) {
+                        family = ReceiverFamily::Array;
+                    } else {
+                        if index + 1 != calls.len() {
+                            return Ok(RuntimeValue::Undef);
+                        }
+                        family = ReceiverFamily::Terminal;
+                    }
+                }
+                ReceiverFamily::Array => {
+                    if Self::is_statement_only_array_end_mutation_method(&call.method)
+                        || !Self::is_array_receiver_value_chain_method(&call.method)
+                    {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    current = self.call_helper_with_args(
+                        &call.method,
+                        &raw_args,
+                        &evaluated,
+                        ctx,
+                        rule_label,
+                    )?;
+                    family = match call.method.as_str() {
+                        "array_copy"
+                        | "copy"
+                        | "sorted"
+                        | "reversed"
+                        | "take"
+                        | "take_last"
+                        | "drop_front"
+                        | "drop_back"
+                        | "slice"
+                        | "concat_arrays"
+                        | "split_each"
+                        | "trim_each"
+                        | "filter_nonempty"
+                        | "lowercase_each"
+                        | "uppercase_each"
+                        | "uniq"
+                        | "filter_match" => ReceiverFamily::Array,
+                        _ => ReceiverFamily::Terminal,
+                    };
+                }
+                ReceiverFamily::Terminal => return Ok(RuntimeValue::Undef),
+            }
         }
 
         Ok(current)
@@ -3127,13 +3284,15 @@ impl Engine {
             }
             "merge_hash" => {
                 let mut merged = Vec::new();
-                let mut seen = std::collections::HashSet::new();
                 for index in 0..args.len() {
                     let arg = self.hash_consuming_arg(raw_args, args, index, ctx);
                     if let RuntimeValue::Hash(entries) = arg {
                         for (k, v) in &entries {
-                            if !seen.contains(k) {
-                                seen.insert(k.clone());
+                            if let Some((_, existing_value)) =
+                                merged.iter_mut().find(|(existing_key, _)| existing_key == k)
+                            {
+                                *existing_value = v.clone();
+                            } else {
                                 merged.push((k.clone(), v.clone()));
                             }
                         }

@@ -157,6 +157,8 @@ flat_array(array(parts))
 join_values("", array(tokens))
 tokens.uniq().join_values("")
 items.sorted().drop_front(2).first()
+meta.set_key("stage", "normalized").sorted_keys().join_values(",")
+meta.merge_hash(hash("kind", "fallback")).scalaref("kind")
 split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?node:", scalar(type_name))
 ```
 
@@ -170,6 +172,7 @@ Hash helpers make metadata shaping explicit:
 assign(hash(meta), hash("kind", "rule", "name", scalar(name)));
 set_key(meta, "line", entry_line());
 assign(hash(meta), merge_hash(hash(meta), hash("source", "spec")));
+assign(scalar(public_fields), meta.drop_keys("debug").sorted_keys().join_values(","));
 ```
 
 These are especially useful when building AST nodes or diagnostics payloads.

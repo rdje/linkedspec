@@ -2366,6 +2366,20 @@ mod tests {
     }
 
     #[test]
+    fn parse_hash_receiver_value_chain() {
+        let block = CodeBlock::parse(r#"meta.set_key("stage", "v").sorted_keys().count()"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "meta"));
+                let methods: Vec<&str> = calls.iter().map(|call| call.method.as_str()).collect();
+                assert_eq!(methods, vec!["set_key", "sorted_keys", "count"]);
+                assert_eq!(calls[0].args.len(), 2);
+            }
+            other => panic!("expected hash receiver value FluentChain, got {:?}", other),
+        }
+    }
+
+    #[test]
     fn parse_fluent_chain_on_indexed_var() {
         let code = "results[0].return()";
         let block = CodeBlock::parse(code).unwrap();
