@@ -747,8 +747,12 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite form. All branches are evaluated expressions.
-- **Returns**: value of the selected branch.
+- **Returns**: value of the selected branch on the Rust backend.
 - **Behavior**: Evaluates conditions left-to-right. First true condition's branch is returned. If none match, the `else` branch is returned. If no else and no match, returns undef.
+- **Portability status**: Rust supports this as a lazy value expression today. The Perl reference currently
+  does not return the selected branch value reliably from `return(if(...))`, assignment RHS, or fluent
+  `.return(if(...))` value positions. Use statement-marker or attached-block `if` for portable `.spec` files
+  until the Perl reference value-lowering parity slice lands.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.
@@ -773,8 +777,12 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 
 ### `switch(expr, case(val, body), default(body))`
 - **Signature**: Inline composite form.
-- **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
+- **Returns**: value of the first matching `case` body, or the `default` body when no case matches, on the
+  Rust backend.
 - **Behavior**: Evaluates `expr` once and compares it to each `case(val)` in order.
+- **Portability status**: Rust supports this as a lazy value expression today. The Perl reference currently
+  lowers inline value `switch(...)` without returning the selected branch value reliably. Use attached-block
+  `switch` for portable `.spec` files until the Perl reference value-lowering parity slice lands.
 
 ### `switch(expr) { case(val) { ... } default { ... } }`
 - **Signature**: Attached-block statement form.
@@ -1086,11 +1094,16 @@ These helpers read from the **current match** — the regex capture that trigger
 ## Cross-Cutting Contracts
 
 ### Composition Guarantee
-All helpers support **unlimited nested composition**. Example:
+Pure value helpers support **unlimited nested composition**. Example:
 ```
-count(drop_front(sorted_keys(merge_hash(hash_copy(base), overlay))))
+count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))
 ```
-Any helper that accepts an array can receive the output of any array-returning helper. Any helper that accepts a scalar can receive the output of any scalar-returning helper.
+Any portable pure helper that accepts an array can receive the output of an array-returning helper. Any
+portable pure helper that accepts a scalar can receive the output of a scalar-returning helper. Use explicit
+aggregate wrappers such as `array(name)` / `hash(name)` in nested helper argument positions unless the helper's
+contract says a bare aggregate read is accepted there. Statement forms (`name = value`, `items += value`,
+`set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value expressions, and inline value
+`if`/`switch` remains non-portable until the Perl reference value-lowering gap is closed.
 
 ### Fluent / Block Equivalence
 For the locked ordinary helper families, structured-block form (`I { declare(...) }`) and compact

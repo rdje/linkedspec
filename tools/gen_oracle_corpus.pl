@@ -634,6 +634,24 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.4 — deep pure-helper composition audit ──
+    #
+    # The supported "function in any argument position at any depth" subset is
+    # pure value-helper composition. Hash working variables are initialized with
+    # mutation statements, then the return expression composes value-helper
+    # layers without a raw host-language fallback. The second merge input uses
+    # the explicit `hash(...)` wrapper because bare hash argument reads in that
+    # nested helper slot are split to SPEC-FORMAT-TERSE.2.3.4.1.
+    {   case   => 'terse_2_3_4_deep_pure_helper_composition',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },

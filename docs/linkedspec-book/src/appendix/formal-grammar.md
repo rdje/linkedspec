@@ -247,7 +247,8 @@ children:
 
 Lifecycle markers are **semicolon-light structured authoring**: a marker followed by
 `{ code }` is a lifecycle block. Portable branch control includes statement markers,
-attached-block `if` forms, and inline-composite expressions.
+attached-block `if` forms, attached `switch`, and attached `while`. Inline-composite `if`/`switch` value
+expressions are Rust-only until Perl reference value-lowering parity lands.
 Within structured blocks, newlines separate top-level helper statements implicitly.
 Semicolons remain accepted and are required when multiple top-level helper statements
 share one physical line. Plain same-line whitespace is not a statement separator, and
@@ -537,11 +538,11 @@ num_range(arr)           — max - min of array elements
 
 ### 7.6 Control Flow Helpers
 ```
-if(cond, then, elseif(cond2, then2), else(default))
+if(cond, then, elseif(cond2, then2), else(default))    — Rust value form; Perl parity pending
 if(cond); ... elseif(cond2); ... else(); ... endif()
 if(cond) { ... } elseif(cond2) { ... } else { ... }
 when(cond) { ... } otherwise { ... }
-switch(expr, case(val, body), default(body))
+switch(expr, case(val, body), default(body))           — Rust value form; Perl parity pending
 case(val, body)
 default(body)
 exit_now(status)         — exit parser immediately
@@ -653,7 +654,8 @@ I {
 }
 ```
 
-Inline-composite `switch(...)` is also portable:
+Inline-composite `switch(...)` is available on Rust today; use attached-block `switch` for portable authoring
+until Perl value-control parity lands:
 
 ```
 E {
@@ -672,6 +674,8 @@ and attached-block `switch(...) { case(...) { ... } default { ... } }` with firs
 Rust normalizes attached branch forms where that matches its statement-control runtime. Perl and Rust now
 accept attached `while(...) { ... }` with condition re-evaluation and a deterministic 10000-iteration
 loop-safety guard.
+Inline value-form `if(...)` and `switch(...)` are available on Rust today but are not portable until the Perl
+reference value-lowering parity gap is closed.
 Zero-argument markers that are already implemented, such as `else`/`endif`,
 accept bare-keyword form in addition to parenthesized form.
 

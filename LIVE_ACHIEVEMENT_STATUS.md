@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.4 — full composability audit split**
+  (AUDIT/TREE/BOOK/KM + ORACLE FIXTURE; **no runtime behavior change**). Pure value-helper nesting is now
+  locked by the new `terse_2_3_4_deep_pure_helper_composition` oracle fixture:
+  `count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))`; the Rust corpus passes with
+  **42 fixtures**. The unsupported sites were split before code: `.2.3.4.1` owns Rust helper-context aggregate
+  bare reads after diagnostic `merge_hash(hash_copy(base), overlay)` returned Perl `2` but Rust `1`, and
+  `.2.3.4.2` owns Perl inline-composite value-control lowering after generated-source probes showed
+  `return(if(...))` / `return(switch(...))` do not reliably return selected branch values. Receiver-dot
+  value/chaining remains `.2.3.5`.
+  **Verification:** TOOLBOX probes; diagnostic Rust corpus mismatch; final oracle regeneration; Rust
+  `corpus_oracle` PASS over 42 fixtures; mdBook/KM/memory/doctrine/diff and local CI are recorded in commit
+  workflow.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.4.1`** (Rust helper-context aggregate bare reads).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.3.1 — Rust `tclite` default-mode repetition parity landed**
   (RUST CORE/RUNTIME + ORACLE + BOOK/KM). Rust now treats bare default rules as zero-min repeated-choice loops
   and honors `I`/preamble `return(expr)` as an immediate child-invocation return before local entry-regex

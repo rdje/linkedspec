@@ -124,14 +124,16 @@ LinkedSpec currently supports four portable control-flow families:
 
 - `if/elseif/else` as attached-block statements, with `when/otherwise` as readable aliases for
   the first and fallback attached branches.
-- `if/elseif/else` as inline-composite expressions or statement-marker chains.
-- `switch/case/default` as inline-composite expressions or attached-block statements.
+- `if/elseif/else` as statement-marker chains.
+- `switch/case/default` as attached-block statements.
 - `while(cond) { ... }` as an attached-block statement loop with a deterministic iteration-safety guard.
 
 Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is portable on the
 Perl reference and Rust backend. Attached statement-level `while(...) { ... }` is also portable on both
 variants; the condition is evaluated before each iteration, and non-terminating loops hit the same
-10000-iteration safety diagnostic on both implementations.
+10000-iteration safety diagnostic on both implementations. Rust also supports inline-composite `if(...)` and
+`switch(...)` value expressions today, but those value forms are not portable until the Perl reference
+value-lowering parity gap is closed.
 
 ### If family: marker style
 
@@ -256,35 +258,35 @@ when a branch body is long or teaches several statements.
 
 ### If family: inline composite
 
-A full if/elseif/else chain fits into one expression. The first argument is the condition;
-remaining arguments before the next branch marker are the body.
+Rust supports a full if/elseif/else chain as a value expression. The Perl reference does not yet return the
+selected branch value reliably from value-consuming positions, so this form is not portable today. Keep portable
+authoring on marker-style or attached-block `if` until the Perl value-lowering slice lands.
+
+```text
+set(result,
+  if(scalar(on),
+    first(array(acc)),
+    elseif(is_nonempty(array(tmp)), first(array(tmp))),
+    else("default")
+  )
+);
+```
+
+The portable attached-block spelling writes the selected value from branch statements:
 
 ```text
 I {
-  assign(scalar(result),
-    if(scalar(on),
-      first(array(acc)),
-      elseif(is_nonempty(array(tmp)), first(array(tmp))),
-      else("default")
-    )
-  );
+  if(scalar(on)) {
+    set(result, first(array(acc)))
+  } elseif(is_nonempty(array(tmp))) {
+    set(result, first(array(tmp)))
+  } else {
+    set(result, "default")
+  }
 }
 ```
 
-The structured-block equivalent wraps branch bodies in `{ }`:
-
-```text
-I {
-  assign(scalar(result),
-    if(scalar(on), { first(array(acc)) },
-      elseif(is_nonempty(array(tmp)), { first(array(tmp)) }),
-      else({ "default" })
-    )
-  );
-}
-```
-
-Inline composite is also available as the final call on a fluent chain:
+The fluent `.return(if(...))` spelling follows the same portability boundary:
 
 ```text
 -> child
@@ -318,8 +320,9 @@ semicolon after the closing `}` or put the next statement on a new line.
 
 ### Switch family: inline composite
 
-Use inline-composite `switch` when the switch itself should produce a value. The first argument is the switch
-expression; remaining arguments are `case`/`default` branches:
+Rust supports inline-composite `switch` as a value expression. The Perl reference does not yet return the
+selected inline branch value reliably, so use attached-block `switch` for portable `.spec` files today. The
+first argument is the switch expression; remaining arguments are `case`/`default` branches:
 
 ```text
 LX {
@@ -331,7 +334,7 @@ LX {
 }
 ```
 
-The fluent equivalent returns the same inline-composite value:
+The fluent equivalent has the same current Rust-only boundary:
 
 ```text
 LX
@@ -342,7 +345,7 @@ LX
   ));
 ```
 
-With structured branch blocks:
+Rust-only with expression-valued branch blocks:
 
 ```text
 LX {
@@ -443,12 +446,12 @@ The current portable equivalence guarantee is intentionally narrower:
 | --- | --- | --- |
 | Short helper-only sequences (1–3 calls) | Fluent chain | Compact, scans quickly |
 | Substantial branch logic (4+ statements) | Structured block | Easier to read and maintain |
-| Single-branch if/else choice | Inline composite or marker style | Expresses intent directly |
-| Multi-branch switch with simple bodies | Inline composite | One expression, no markers to balance |
+| Single-branch if/else choice | Attached block or marker style | Portable on Perl and Rust |
+| Multi-branch switch with simple bodies | Attached switch | Portable first-match/default behavior |
 | Multi-branch switch with complex bodies | Attached switch | Branch bodies can span lines and contain statements |
 | Repeated statement body in the Perl reference | Attached while | Re-evaluates the condition and has a deterministic safety guard |
 | Deeply nested if/else chains | Marker-style | Explicit open/close markers prevent ambiguity |
-| Return payload construction | Inline composite | Returns the evaluated expression directly |
+| Return payload construction | Attached block or marker style | Avoids the inline value-control parity gap |
 | Conditional accumulation | Attached block or marker style | Branch body can contain multiple statements |
 
 ## Worked example: all forms together
@@ -469,19 +472,25 @@ LX {
    if(is_empty(array(acc)));
    return(hash("kind", scalar(kind), "items", array()));
    else();
-   return(switch(count(array(acc)),
-     case(1, hash("kind", "singleton", "item", first(array(acc)))),
-     case(2, hash(
-       "kind", "pair",
-       "first", scalar(array(acc), 0),
-       "second", scalar(array(acc), 1)
-     )),
-     default(hash(
-       "kind", scalar(kind),
-       "items", array_copy(array(acc)),
-       "count", count(array(acc))
-     ))
-   ));
+   switch(count(array(acc))) {
+     case(1) {
+       return(hash("kind", "singleton", "item", first(array(acc))))
+     }
+     case(2) {
+       return(hash(
+         "kind", "pair",
+         "first", scalar(array(acc), 0),
+         "second", scalar(array(acc), 1)
+       ))
+     }
+     default {
+       return(hash(
+         "kind", scalar(kind),
+         "items", array_copy(array(acc)),
+         "count", count(array(acc))
+       ))
+     }
+   }
    endif();
  }
 ```

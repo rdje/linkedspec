@@ -6,11 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.3.3.3.3.1` DONE; frontier `.2.3.4`** — Rust now matches the
-  Perl-reference `tclite` minimal oracle cases. Bare default rules compile as zero-min repeated-choice loops,
-  child-rule `I.return(...)` exits before local entry-regex re-matching, and `tools/gen_oracle_corpus.pl`
-  restored `tclite_command_subst` (`[]`) plus `tclite_double_quote` (`""`) into the committed green corpus.
-  Rust `corpus_oracle` now passes with **41 fixtures**. Prior **`.2.3.3.3.3` DONE/SPLIT** — retrying
+- Last updated: `2026-06-30` (**`.2.3.4` DONE/SPLIT; frontier `.2.3.4.1`** — the full-composability audit
+  added a green deep pure-helper oracle fixture and split two unsupported sites before code:
+  `.2.3.4.1` owns Rust parity for bare aggregate reads in helper-argument contexts such as
+  `merge_hash(hash_copy(base), overlay)`, and `.2.3.4.2` owns Perl reference inline-composite value control
+  lowering for `return(if(...))` / `return(switch(...))`. Receiver-dot value-returning/chained methods remain
+  `.2.3.5`. The Rust oracle corpus now passes with **42 fixtures**. Prior **`.2.3.3.3.3.1` DONE** — Rust now
+  matches the Perl-reference `tclite` minimal oracle cases. Bare default rules compile as zero-min
+  repeated-choice loops, child-rule `I.return(...)` exits before local entry-regex re-matching, and
+  `tools/gen_oracle_corpus.pl` restored `tclite_command_subst` (`[]`) plus `tclite_double_quote` (`""`) into
+  the committed green corpus. Rust `corpus_oracle` passes with 41 fixtures. Prior **`.2.3.3.3.3` DONE/SPLIT** — retrying
   `tclite` after Rust fluent parity proved the remaining divergence was not a fluent-continuation blocker.
   Prior **`.2.3.3.3.2` DONE** — Rust
   action-edge explicit/flow fluent chains now execute beyond the no-arg subset. Multiline dotted continuations
@@ -76,8 +81,9 @@
   code** — same-line
   `} elseif/else {` was narrowed to the statement-splitting seam. Prior **`.2.2.1` DONE;
   frontier `.2.2.2`** — Round 2 control-flow keyword surface split after KM/TOOLBOX/code-read ground truth.
-  At split time, marker/composite `if` plus inline-composite `switch` were the portable support, while
-  attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` needed separate leaves. Prior
+  At split time, marker/composite `if` plus inline-composite `switch` were believed to be the portable support,
+  while attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` needed separate leaves; later
+  `.2.3.4` corrected inline value-control portability and split the Perl value-lowering gap. Prior
   **`.2.1.4` DONE; frontier
   `.2.2`** — block-local early
   `return(expr)` now works in expression-valued blocks on Perl and Rust without leaking into the surrounding
@@ -1511,7 +1517,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - ID: `SPEC-FORMAT-TERSE.2.3`
   Status: `active` (2026-06-30 — SPLIT/OWNED before code; container)
   Goal: Fluent control-flow, lifecycle blocks, and full composability
-  Children: `.2.3.1`, `.2.3.2`, `.2.3.3` (container), `.2.3.4`, `.2.3.5`
+  Children: `.2.3.1`, `.2.3.2`, `.2.3.3` (container), `.2.3.4` (container), `.2.3.5`
   Acceptance: Fluent chains `.when (cond) { ... }.otherwise { ... }` (parens for condition, block after);
     lifecycle blocks `I { ... }`, `LS { ... }`, etc. take a block after the keyword and drop the value;
     Lisp-style composability everywhere (any function in any argument position at any depth); method
@@ -1726,11 +1732,49 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.3.3.3.3.1 - implement Rust tclite default repetition` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.4`
-  Status: `pending`
+  Status: `done` (SPLIT/AUDIT 2026-06-30 — no runtime behavior change beyond a passing oracle fixture)
   Goal: Full composability audit and gap split
+  Children: `.2.3.4.1` (Rust bare aggregate helper-argument parity), `.2.3.4.2` (Perl inline
+    value-control lowering)
   Acceptance: Representative and adversarial nested helper calls are audited across Perl lowering, Rust AST,
     runtime evaluation, oracle fixtures, and mdBook examples. Any unsupported "function in any argument
     position at any depth" sites are split into concrete leaves instead of accepted by assertion.
+  Verification: **SPLIT/AUDIT 2026-06-30.** TOOLBOX probes and source dumps separated the portable subset from
+    unsupported sites. Pure value-helper composition is portable when helper argument slots are explicit about
+    aggregate kind where Rust still needs it: the new oracle fixture
+    `terse_2_3_4_deep_pure_helper_composition` composes `count(drop_front(sorted_keys(merge_hash(hash_copy(base),
+    hash(overlay)))))` after hash working variables are initialized by statement mutations; Perl lowers it
+    with `ready=1 raw=0 unresolved=0`, and the Rust corpus oracle passes with **42 fixtures**. Direct nested
+    access, shape literals, and value-form `set_key(hash_expr, key, value)` are already covered by existing
+    oracle and Rust locks. Two unsupported "function anywhere" sites were split before implementation: first,
+    Perl `merge_hash(hash_copy(base), overlay)` returns `2` while Rust returns `1` because Rust evaluates bare
+    `overlay` as a scalar before `merge_hash` sees only evaluated `RuntimeValue::Hash` arguments; `.2.3.4.1`
+    owns that Rust helper-context aggregate bare-read parity. Second, Perl inline-composite value controls such
+    as `return(if(1, "yes", else("no")))` lower to generated `do { if (...) { ... } }` shapes that do not
+    return the selected branch value, and nested predicate/branch helper forms can fail handler compilation;
+    `.2.3.4.2` owns the Perl reference lowering fix plus parity locks. Receiver-dot array mutations remain
+    statement-only, and value-returning/chained receiver methods stay in `.2.3.5`.
+  Commit: `pending` (split/audit slice)
+
+- ID: `SPEC-FORMAT-TERSE.2.3.4.1`
+  Status: `pending`
+  Goal: Rust helper-context aggregate bare reads for nested pure composition
+  Acceptance: Rust matches the Perl reference for helper argument positions where the callee implies a hash or
+    array value from a bare working variable, starting with the audited book-shaped case
+    `merge_hash(hash_copy(base), overlay)`. Add focused Rust runtime locks and re-enable the bare-argument
+    oracle form only after it passes. Existing `array_copy(NAME)` / `hash_copy(NAME)` / `copy(NAME)` behavior
+    from `.1.2.3.2` must remain unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.3.4.2`
+  Status: `pending`
+  Goal: Perl inline-composite value control lowering
+  Acceptance: Perl reference inline-composite `if(...)` and `switch(...)` value forms return the selected
+    branch value in all supported value positions (`return(...)`, assignment RHS, and fluent `.return(...)`),
+    with nested helper predicates/branches and expression-valued block branches covered. Rust already has
+    runtime support for lazy value `if`/`switch`; after Perl lands, add oracle fixtures and focused parity
+    checks instead of relying on descriptor readiness alone.
   Verification: `pending`
   Commit: `pending`
 
@@ -1824,7 +1868,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.1.2` | `done` 2026-06-29 | Perl reference core expression-valued blocks landed: non-empty non-hash `{ ... }` values lower to `do { ... }`, final `return(expr)` is block-local for the core subset, and hash literals keep precedence. |
 | — | `SPEC-FORMAT-TERSE.2.1.3` | `done` 2026-06-29 | Rust parity for the accepted Perl-reference core expression-valued block contract landed with parser/runtime locks and a 34-fixture oracle corpus. |
 | — | `SPEC-FORMAT-TERSE.2.1.4` | `done` 2026-06-30 | Block-local early `return(expr)` landed for expression-valued blocks on Perl and Rust; `.2.1` is closed. |
-| — | `SPEC-FORMAT-TERSE.2.2.1` | `done` 2026-06-30 | Control-flow keyword surface split before code. Current portable support is marker/composite `if` plus inline-composite `switch`; attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` are separate implementation leaves. |
+| — | `SPEC-FORMAT-TERSE.2.2.1` | `done` 2026-06-30 | Control-flow keyword surface split before code. Split-time inline value-control assumptions were later corrected by `.2.3.4`; attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` became separate landed leaves. |
 | — | `SPEC-FORMAT-TERSE.2.2.2` | `done` 2026-06-30 | Perl reference attached-block `if/elseif/else` without raw fallback — LANDED. |
 | — | `SPEC-FORMAT-TERSE.2.2.3` | `done` 2026-06-30 | Rust parity for attached-block `if/elseif/else` landed with parser/runtime/oracle locks; attached `if` is now portable on Perl and Rust. |
 | — | `SPEC-FORMAT-TERSE.2.2.4` | `done` 2026-06-30 | `when/otherwise` aliases landed on Perl and Rust as normalization over attached `if/else`; oracle corpus 37 fixtures. |
@@ -1844,11 +1888,24 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.2` | `done` 2026-06-30 | Rust action-edge explicit/flow fluent chains landed for `.push(target)`, `.push(child,target)`, statement-control gating, helper calls, and return continuations. |
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.3` | `done` 2026-06-30 | Rust `tclite` oracle retry after fluent parity proved a remaining default-mode recursive repetition gap and split implementation to `.2.3.3.3.3.1`. |
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `done` 2026-06-30 | Rust default-mode recursive repetition parity for `tclite` landed, including the two active oracle cases and 41-fixture corpus. |
-| 1 | `SPEC-FORMAT-TERSE.2.3.4` | `pending` | Full Lisp-style composability audit and follow-on split. |
-| 2 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
+| — | `SPEC-FORMAT-TERSE.2.3.4` | `done` 2026-06-30 | Full composability audit split unsupported sites before code and added a green deep pure-helper oracle fixture. |
+| 1 | `SPEC-FORMAT-TERSE.2.3.4.1` | `pending` | Rust helper-context aggregate bare reads for nested pure composition. |
+| 2 | `SPEC-FORMAT-TERSE.2.3.4.2` | `pending` | Perl inline-composite value control lowering for `if`/`switch`. |
+| 3 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
 | … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-30` (**`.2.3.4` full composability audit split**). The accepted portable subset today is pure
+  value-helper composition with explicit aggregate wrappers where Rust still needs a type-implying argument.
+  A new green oracle fixture locks
+  `count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))`. The book-shaped bare
+  `merge_hash(hash_copy(base), overlay)` works on Perl but returns one key short on Rust because the Rust
+  runtime evaluates bare `overlay` as a scalar before `merge_hash` sees evaluated hash arguments; `.2.3.4.1`
+  owns that Rust parity gap. Perl inline-composite value controls also cannot be accepted by assertion:
+  generated-source probes show `return(if(...))` and `return(switch(...))` do not return the selected branch
+  value, and nested helper expressions can fail handler compilation; `.2.3.4.2` owns that reference fix.
+  Receiver-dot value/chaining remains `.2.3.5`.
 
 - `2026-06-30` (**`.2.3.3.3.3.1` Rust tclite default repetition landed**). The implementation seam is two
   small parity corrections, not another fluent-chain executor. First, Rust's `RuleMode::Default` is part of
@@ -2497,7 +2554,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.3` (ownership) | KM retrieval (`terse-expression-valued-blocks-ground-truth`, `terse-perl-expression-valued-blocks`); Rust code-read (`Expr`, `parse_expr()`, `parse_hash_literal()`, `execute_block()`, `eval_expr()`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks | Rust expression-valued block parity owned before code. Rust currently has statement-only `CodeBlock`, hash/array value expressions, and no block-value `Expr` or evaluator. `{}` and keyed `=>` hash literals must keep precedence; non-empty non-fat-arrow braces become block values in the implementation slice. Frontier remains `.2.1.3` implementation. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core expression_valued_block`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_3`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); full Rust core package; full Rust runtime package; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine/diff checks; `bash tools/run_ci_local.sh` | Rust expression-valued block parity landed. `Expr::BlockValue` plus `parse_brace_expr()` preserve hash literals and parse non-empty non-fat-arrow braces as block values; runtime `eval_block_value()` returns the final expression or final `return(expr)` payload. Added `terse_2_1_3_expression_valued_blocks`, bringing the oracle corpus to **34 fixtures**. Full local CI PASS (`991` phase0 tests). Frontier becomes `.2.1.4`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.1.4` | Perl syntax checks (`MethodLowering.pm`, phase0, oracle generator); TOOLBOX lowering/runtime probes for non-final `return(expr)` block values; focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_4_expression_valued_block`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Block-local early `return(expr)` landed for expression-valued blocks on Perl and Rust. Perl emits a guarded `do { ... }` value wrapper for blocks with a non-final return and keeps compact output for existing core forms. Rust `eval_block_value()` now returns an active `return(expr)` payload immediately without setting the rule return channel. Added `terse_2_1_4_expression_valued_block_early_return`, bringing the oracle corpus to **35 fixtures**. Frontier becomes `.2.2`. |
-| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.1` (split) | KM retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-statement-separator-contract`, `terse-primitive-literal-parity`, `scanner-rule-family-architecture`); TOOLBOX `call_spec_handler_subst` probes for attached `if`, `when`/`otherwise`, `while`, and attached `switch`; `LinkedSpec::Get(..., return_descriptor => 1)` metadata probes for ActionIR readiness/raw fallback; Perl code-read (`ControlFlow.pm`, `FlowExpr.pm`, `Scanner/FlowRules.pm`); Rust code-read (`expr.rs`, `engine.rs`); focused Rust parser test `parse_lifecycle_block_content` | Split `.2.2` before code. At split time, the portable contract was statement-marker `if(cond); ... elseif(cond); else(); ... endif()` plus inline-composite lazy `if`/`switch`. Perl attached `if`, `when`/`otherwise`, and `while` were not ActionIR-ready; Rust had no attached statement-block parser/runtime for the new keyword surface. mdBook/KM/live docs aligned; frontier became `.2.2.2`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.1` (split) | KM retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-statement-separator-contract`, `terse-primitive-literal-parity`, `scanner-rule-family-architecture`); TOOLBOX `call_spec_handler_subst` probes for attached `if`, `when`/`otherwise`, `while`, and attached `switch`; `LinkedSpec::Get(..., return_descriptor => 1)` metadata probes for ActionIR readiness/raw fallback; Perl code-read (`ControlFlow.pm`, `FlowExpr.pm`, `Scanner/FlowRules.pm`); Rust code-read (`expr.rs`, `engine.rs`); focused Rust parser test `parse_lifecycle_block_content` | Split `.2.2` before code. At split time, the contract was believed to be statement-marker `if(cond); ... elseif(cond); else(); ... endif()` plus inline-composite lazy `if`/`switch`; `.2.3.4` later corrected the inline value-control portability boundary and split Perl value lowering to `.2.3.4.2`. Perl attached `if`, `when`/`otherwise`, and `while` were not ActionIR-ready; Rust had no attached statement-block parser/runtime for the new keyword surface. mdBook/KM/live docs aligned; frontier became `.2.2.2`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.2` | Perl syntax checks; TOOLBOX compact attached-if lowering/metadata/runtime probes; phase0 (`prove -q -Iperl t/phase0_regression.t`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Perl attached-block `if/elseif/else` landed. `StatementSplit::Core` splits compact same-line `} elseif/else {` branch continuations so the existing ActionIR control-flow lowering can emit the selected branch without raw fallback. Frontier becomes `.2.2.3` Rust parity. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core attached_if`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_2_3`); `perl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks | Rust attached-block `if/elseif/else` parity landed. `CodeBlock::parse` normalizes attached branch bodies into the existing marker-control sequence and reuses `handle_statement_if_control` at runtime. Added oracle fixture `terse_2_2_3_attached_if_blocks`, bringing the corpus to **36 fixtures**. Attached `if` is now portable on Perl and Rust; frontier becomes `.2.2.4` for `when/otherwise`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.4` (ownership) | KM retrieval (`terse-control-flow-keyword-surface-ground-truth`, `spec-format-brainstorm-rounds-1-3`); TOOLBOX lowering/descriptor/runtime/generated-source probes for `when/otherwise`; Perl flow code-read (`StatementSplit::Core`, `Scanner::FlowRules`, `Contracts`, `ControlFlow`); Rust code-read (`expr.rs`, `engine.rs`) | Owned `when/otherwise` before code. Current Perl leaves the combined form raw, warns via host experimental `when`, and returns the wrong branch for the true-condition probe. Implementation should normalize `when(cond)` to attached `if(cond)` and `otherwise` to attached `else`, reusing existing Perl control-flow lowering and Rust marker-gating runtime. Frontier remains `.2.2.4` implementation. |
@@ -2518,6 +2575,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.2` | Perl reference probes for shipped `ebnf.spec` action-edge fluent forms; focused Rust core parser (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml parse_action_edge_multiline_fluent_flow_chain -- --nocapture`) and compiler (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml compile_multiline_action_edge_fluent_flow_chain -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_3_3_2 -- --nocapture`); no-arg action-edge regression (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_3_1_action_edge_fluent_push_appends_child_return -- --nocapture`); full Rust core/runtime package tests; mdBook build; oracle generator syntax; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust action-edge explicit/flow fluent chains landed. The Rust parser now keeps multiline dotted action-edge continuations on the preceding edge; the runtime executes `.push(target)`, `.push(child,target)`, `.if/.else/.endif` gating, `.say(...)`, `.return(expr)`, and `.return_undef()` with parent-visible child return-channel semantics. Full local CI PASS. Frontier becomes `.2.3.3.3.3`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.3` | Perl reference probes for `tclite` inputs `[]` and `""`; temporary `tools/gen_oracle_corpus.pl` re-enable of `tclite_command_subst` and `tclite_double_quote`; diagnostic Rust corpus oracle run (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`); committed green-corpus restoration; oracle generator syntax/regeneration; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust `tclite` retry after fluent parity split to implementation. Perl returns tagged `tcl_script` values for both inputs, but Rust still returns `[]` for the two temporarily re-enabled fixtures while the other 39 fixtures pass. The remaining blocker is default-mode recursive repetition/top-level default-rule dispatch parity, not fluent-continuation support. Failing fixtures stay out of the committed corpus until `.2.3.3.3.3.1`; frontier becomes `.2.3.3.3.3.1`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | KM/toolbox probes for Perl `tclite` and minimal edge-only grammars; focused Rust core (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml compile_default_mode_is_zero_min_repeated_choice -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml default_mode_repeats_action_edge_choices_and_allows_zero_matches -- --nocapture`); lifecycle expectation locks (`terse_2_3_2_lifecycle_return_records_surrounding_rule_return`, `terse_2_3_3_3_1`); capture-helper regression families (`helpers_5_5_3`, `helpers_5_5_4`); `perl -c tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust default-mode recursive repetition parity landed. `RuleMode::Default` now compiles as zero-min repeated choice, and Rust exits immediately after an `I`/preamble return before local entry-regex re-matching. One-match capture-helper/lifecycle-order tests now spell `OR{1,1}` explicitly; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures; corpus oracle PASS over 41 fixtures. Frontier becomes `.2.3.4`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.4` | KM retrieval; TOOLBOX lowering/runtime/generated-source probes for deep pure helpers, bare aggregate helper arguments, inline value `if`/`switch`, and receiver-dot method value/chaining; Rust parser/runtime code-read; diagnostic Rust corpus oracle with bare `merge_hash(..., overlay)`; final `perl -Iperl tools/gen_oracle_corpus.pl`; final Rust corpus oracle (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`) | Full composability audit split unsupported surfaces before code. Pure helper nesting is portable with explicit aggregate wrappers and is now locked by `terse_2_3_4_deep_pure_helper_composition`; final corpus oracle PASS over 42 fixtures. Diagnostic bare `overlay` in `merge_hash(hash_copy(base), overlay)` returned Perl `2` but Rust `1`, so `.2.3.4.1` owns Rust helper-context aggregate bare reads. Perl generated-source probes for inline value `if`/`switch` show selected branch values are not returned and nested helper forms can fail handler compilation, so `.2.3.4.2` owns that reference fix. Frontier becomes `.2.3.4.1`. |
 
 ## Commit Log
 
@@ -2590,8 +2648,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.3.3.2` | `SPEC-FORMAT-TERSE.2.3.3.3.2 - implement Rust action-edge fluent flow chains` | Rust action-edge explicit/flow fluent chains now execute with explicit-target child return appends and statement-control gating; frontier becomes `.2.3.3.3.3`. |
 | `SPEC-FORMAT-TERSE.2.3.3.3.3` | `SPEC-FORMAT-TERSE.2.3.3.3.3 - split Rust tclite repetition parity` | `tclite` oracle retry after fluent parity still returned Rust `[]` for `[]` and `""` at that split point; default-mode recursive repetition parity split to `.2.3.3.3.3.1`, which later landed the fixtures. |
 | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1 - implement Rust tclite default repetition` | Rust default-mode recursive repetition parity landed; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures, corpus 41 passes, and frontier becomes `.2.3.4`. |
+| `SPEC-FORMAT-TERSE.2.3.4` | `pending` | Full composability audit split Rust helper-context aggregate bare reads to `.2.3.4.1` and Perl inline value-control lowering to `.2.3.4.2`; added a green deep pure-helper oracle fixture and frontier becomes `.2.3.4.1`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.3.4` AUDIT/SPLIT — full composability boundaries.** Pure helper nesting is portable
+  with explicit aggregate wrappers and is locked by a new oracle fixture
+  `terse_2_3_4_deep_pure_helper_composition`; the Rust corpus now passes with 42 fixtures. Unsupported sites
+  are split before code: `.2.3.4.1` owns Rust helper-context aggregate bare reads such as
+  `merge_hash(hash_copy(base), overlay)`, and `.2.3.4.2` owns Perl inline-composite value-control lowering for
+  `return(if(...))` / `return(switch(...))`. Receiver-dot value/chaining remains `.2.3.5`. Frontier moves to
+  `.2.3.4.1`.
 
 - `2026-06-30`: **`.2.3.3.3.3.1` LANDED — Rust `tclite` default-mode repetition parity.**
   Rust now treats bare default rules as zero-min repeated-choice loops and honors child-rule `I.return(...)`

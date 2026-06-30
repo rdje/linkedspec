@@ -186,14 +186,14 @@ else();
 endif();
 ```
 
-Inline switch flow is useful when one expression drives multiple cases:
+Attached switch flow is useful when one value drives multiple cases:
 
 ```text
-return(switch(scalar(kind),
-  case("word", hash("kind", "word", "text", entry_text())),
-  case("space", hash("kind", "space", "text", entry_text())),
-  default(hash("kind", "other", "text", entry_text()))
-));
+switch(scalar(kind)) {
+  case("word") { return(hash("kind", "word", "text", entry_text())) }
+  case("space") { return(hash("kind", "space", "text", entry_text())) }
+  default { return(hash("kind", "other", "text", entry_text())) }
+}
 ```
 
 ## Practical pattern: token node

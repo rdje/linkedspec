@@ -889,17 +889,21 @@ endif()
 return(hash_copy(hash(meta)));
 ```
 
-Inline composite `if` is also supported for compact cases:
+Rust supports inline composite `if` for compact value-producing cases. The Perl reference currently does not
+return the selected inline branch value reliably in value positions, so use marker or attached-block flow for
+portable `.spec` files today.
 
 ```text
-if(
-  is_nonempty(array(items)),
-  return(hash("kind", "items", "items", array_copy(array(items)))),
-  else(return_undef())
+set(result,
+  if(is_nonempty(array(items)),
+    hash("kind", "items", "items", array_copy(array(items))),
+    else(undef)
+  )
 )
 ```
 
-Use the marker form when branches contain multiple statements or nested flow. Use the inline form when the branch bodies are short enough that compactness improves readability.
+Use the marker form when branches contain multiple statements, nested flow, or must run on every backend.
+Inline value control becomes the shorter portable form only after Perl reference value lowering catches up.
 
 Attached-block form is also portable. It lowers to the same marker flow and supplies the closing
 `endif()` implicitly:
@@ -925,7 +929,9 @@ when(matches(scalar(kind), /^node_/)) {
 
 ## Inline `switch` flow
 
-Use `switch(...)` when one driving value controls several exact branches.
+Rust supports inline `switch(...)` when one driving value controls several exact branches and the switch itself
+must produce a value. The Perl reference value-lowering parity gap is still open, so use attached-block
+`switch` for portable `.spec` files today.
 
 | Helper | Meaning |
 | --- | --- |
@@ -933,7 +939,7 @@ Use `switch(...)` when one driving value controls several exact branches.
 | `case(value, body)` | one equality case. |
 | `default(body)` | fallback branch. |
 
-Inline composite example:
+Rust-only inline composite example until Perl value-control parity lands:
 
 ```text
 return(switch(
@@ -944,7 +950,7 @@ return(switch(
 ))
 ```
 
-Use attached-block `switch` when each branch needs statements instead of one expression:
+Use attached-block `switch` for portable branch logic:
 
 ```text
 switch(scalar(kind)) {
@@ -1080,12 +1086,12 @@ Kind::AND
    assign(scalar(raw), entry_text());
    assign(scalar(kind), replace_substr(lowercase(trim(scalar(raw))), "-", "_"));
 
-   return(switch(scalar(kind),
-     case("word", hash("kind", "word", "raw", scalar(raw))),
-     case("space", hash("kind", "space", "raw", scalar(raw))),
-     case("node", hash("kind", "node", "raw", scalar(raw))),
-     default(hash("kind", "unknown", "raw", scalar(raw)))
-   ));
+   switch(scalar(kind)) {
+     case("word") { return(hash("kind", "word", "raw", scalar(raw))) }
+     case("space") { return(hash("kind", "space", "raw", scalar(raw))) }
+     case("node") { return(hash("kind", "node", "raw", scalar(raw))) }
+     default { return(hash("kind", "unknown", "raw", scalar(raw))) }
+   }
  }
 ```
 

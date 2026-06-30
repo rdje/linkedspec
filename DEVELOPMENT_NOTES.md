@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.4 — full composability audit split): Completed the audit leaf before
+  implementation. Durable points. (1) **Pure helper composition is the accepted portable subset today.** The
+  new oracle fixture composes `count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))`
+  and passes on Rust with the 42-fixture corpus. (2) **Bare aggregate helper arguments are a Rust parity gap,
+  not a book fact.** The Perl reference treats `merge_hash(hash_copy(base), overlay)` as merging `%overlay`,
+  but Rust evaluates bare `overlay` as a scalar before `merge_hash` sees evaluated arguments, so the diagnostic
+  corpus returned Perl `2` vs Rust `1`. `.2.3.4.1` owns that helper-context aggregate bare-read implementation.
+  (3) **Inline value controls are not portable yet.** Perl generated-source probes for `return(if(...))` and
+  `return(switch(...))` produce branch-control `do { ... }` shapes that do not reliably return the selected
+  value, and nested helper predicates/branches can fail handler compilation. Rust's lazy value helpers are not
+  enough for cross-variant portability; `.2.3.4.2` owns the Perl reference fix. (4) **Receiver-dot mutations
+  stay statement-only.** `items.push_back("a")` works as a statement, while value-position/chained forms still
+  belong to `.2.3.5`. (5) **Book examples must prefer attached/marker control until parity lands.** Inline
+  value `if`/`switch` examples are now labeled Rust-only/pending Perl parity rather than taught as portable.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.3.1 — Rust tclite default-mode repetition parity landed):
   Implemented the narrow parity slice that the previous `tclite` retry isolated. Durable points. (1)
   **Default mode is repetition in Rust metadata now.** `RuleMode::Default` participates in the repetition

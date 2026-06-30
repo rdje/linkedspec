@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.4 — split full composability boundaries
+
+**Scope:** Full composability audit, task-tree split, oracle corpus fixture, mdBook contract wording, Knowledge
+Map, roadmap tracker, and live continuity docs. No runtime behavior changed.
+
+**What changed:** The audit separated the currently portable pure value-helper composition subset from two
+unsupported "function anywhere" sites. A new oracle fixture,
+`terse_2_3_4_deep_pure_helper_composition`, locks the supported nested form
+`count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))`; the Rust corpus now has 42
+fixtures and passes. The book now says pure value helpers compose at arbitrary depth, but statement forms,
+receiver-dot mutation methods, and inline value-control forms are not all value expressions.
+
+**Split:** `SPEC-FORMAT-TERSE.2.3.4.1` owns Rust helper-context aggregate bare reads after the diagnostic
+`merge_hash(hash_copy(base), overlay)` fixture returned Perl `2` but Rust `1`. `SPEC-FORMAT-TERSE.2.3.4.2`
+owns Perl inline-composite value-control lowering after generated-source probes showed `return(if(...))` and
+`return(switch(...))` do not reliably return selected branch values. Receiver-dot value-returning/chained
+methods remain `SPEC-FORMAT-TERSE.2.3.5`.
+
+**Validation:** Perl TOOLBOX lowering/runtime/generated-source probes complete; diagnostic Rust corpus run
+exposed the bare-hash argument mismatch; final oracle generator regeneration PASS; final Rust `corpus_oracle`
+PASS over 42 fixtures. Full gates are recorded in the commit workflow.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.3.1 — implement Rust tclite default repetition
 
 **Scope:** Rust default-mode repetition metadata, Rust lifecycle preamble return behavior, shipped `tclite`
