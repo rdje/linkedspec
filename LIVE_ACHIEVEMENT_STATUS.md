@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.1 — Rust compact lifecycle fluent chains landed**
+  (RUST PARSER + COMPILER/RUNTIME LOCKS + BOOK/KM). Rust now normalizes compact lifecycle/body receiver chains
+  such as `I.return(...)`, `E.return(...)`, and `I.declare(...).set(...).return(...)` into executable lifecycle
+  `CodeBlock` statements instead of leaving a standalone `FluentChain` for the compiler to drop. Focused locks
+  cover multiline body placement, regex-first header-line inline placement, compiler lifecycle-slot population,
+  return-channel behavior, and ordered declaration/mutation chains.
+  **Verification:** focused Rust core `lifecycle_compact` PASS; focused Rust runtime `terse_2_3_3_3_1` PASS;
+  full Rust core/runtime package tests PASS; mdBook build PASS; oracle generator syntax PASS; KM
+  regenerate/check PASS; memory/doctrine/diff checks PASS; full local CI PASS. Rustfmt ran on touched Rust
+  files.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.3.3.2`** (Rust action-edge explicit/flow fluent chains).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3 — remaining Rust fluent continuations split**
   (DOCS/TREE/KM ONLY; **no engine behavior change**). The remaining Rust fluent parity work is now split:
   `.2.3.3.3.1` owns compact lifecycle/body receiver chains such as `I.return(...)` and

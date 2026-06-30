@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.1 — implement Rust compact lifecycle fluent chains
+
+**Scope:** Rust body parser normalization for compact lifecycle-marker receiver chains, parser/compiler/runtime
+locks, mdBook wording, Knowledge Map fact sources, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now accepts compact lifecycle/body receiver chains such as `I.return(...)`,
+`E.return(...)`, and `I.declare(...).set(...).return(...)` by normalizing them to existing lifecycle
+`CodeBlock` statement strings before compilation. The compiler therefore reuses the normal lifecycle slots, and
+the runtime executes the existing statement-block model instead of adding a new standalone `FluentChain`
+execution path.
+
+**Boundary:** This slice deliberately does not broaden action-edge explicit/flow fluent semantics. Forms such as
+`.push(child,target)` and `.if(...).push(child,target).else().return_undef().endif()` remain owned by
+`.2.3.3.3.2`; the `tclite` oracle/default-mode repetition audit remains behind that follow-on work.
+
+**Validation:** Focused Rust core `lifecycle_compact` PASS; focused Rust runtime `terse_2_3_3_3_1` PASS; full
+Rust core package PASS; full Rust runtime package PASS; mdBook build PASS; oracle generator syntax PASS;
+Knowledge Map regenerate/check PASS; rustfmt ran on touched Rust files. Memory/doctrine/diff checks and full
+local CI PASS in commit workflow.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3 — split remaining Rust fluent continuations
 
 **Scope:** Task tree, task-tree index, roadmap tracker, Knowledge Map, development notes, and live continuity

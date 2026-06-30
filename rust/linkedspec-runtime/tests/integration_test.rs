@@ -1789,3 +1789,37 @@ fn terse_2_3_3_2_lifecycle_attached_fluent_when_nodot_otherwise() {
         "no-dot lifecycle otherwise executes the fallback attached payload"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.3.3.1 — Rust compact lifecycle/body receiver chains:
+// lifecycle-marker fluent chains normalize to executable lifecycle statement
+// blocks instead of surviving as dropped standalone FluentChain body elements.
+
+#[test]
+fn terse_2_3_3_3_1_lifecycle_compact_return_records_rule_return() {
+    let grammar = "Top::\n I.return(\"from_i\")\n /x/\n E.return(\"from_e\")\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!(["from_i", "from_e"]),
+        "compact lifecycle return(expr) writes the surrounding rule return channel"
+    );
+}
+
+#[test]
+fn terse_2_3_3_3_1_lifecycle_compact_chain_executes_in_order() {
+    let grammar = "Top::\n I.declare(scalar, out).set(out, \"ok\")\n /x/\n E.return(out)\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!(["ok"]),
+        "compact lifecycle helper chains execute as ordered lifecycle statements"
+    );
+}
+
+#[test]
+fn terse_2_3_3_3_1_inline_lifecycle_compact_chain_executes() {
+    let grammar = "Top:: /x/ I.declare(scalar, out).set(out, \"header\") E.return(out)\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!(["header"]),
+        "header-line lifecycle fluent chains are parsed into lifecycle statements"
+    );
+}

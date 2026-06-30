@@ -180,6 +180,17 @@ The no-dot fallback tail is equivalent:
 ```
 
 Lifecycle markers accept the same branch shape, for example `I.when(cond) { ... }.otherwise { ... }`.
+They also accept compact receiver chains for short ordered lifecycle statement lists:
+
+```text
+token : /[A-Za-z_]\w*/
+ I.declare(scalar, text)
+  .set(text, lowercase(entry_text()))
+  .return(hash("kind", "token", "text", scalar(text)))
+```
+
+That form is equivalent to `I { declare(...); set(...); return(...) }`: each method in the
+chain executes as a lifecycle statement for the receiver marker.
 
 ## Empty action edges
 

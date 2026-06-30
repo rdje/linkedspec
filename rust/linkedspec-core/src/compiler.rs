@@ -362,6 +362,25 @@ mod tests {
     }
 
     #[test]
+    fn compile_lifecycle_compact_fluent_chains() {
+        let src = r#"Top::
+ I.declare(scalar, out).set(out, "ok")
+ /x/
+ E.return(out)
+"#;
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        assert!(
+            compiled.rules[0].preamble.is_some(),
+            "I.compact fluent chain should compile as lifecycle preamble code"
+        );
+        assert!(
+            compiled.rules[0].ecode.is_some(),
+            "E.compact fluent chain should compile as lifecycle E code"
+        );
+    }
+
+    #[test]
     fn compile_handles_and_mode() {
         let src = "Top::AND\n /a/ /b/";
         let spec = parse_spec(src).unwrap();

@@ -11,8 +11,9 @@ Most ordinary LinkedSpec helper statements — declaration, assignment, push, re
 value helpers — can be written in either fluent or structured style. No-arg action-edge
 continuations such as `-> child .push` and `-> child[1] .return(expr)` are portable on the
 Perl reference and Rust. Receiver-fluent attached `when/otherwise` block chains are portable on
-action-edge and lifecycle-marker surfaces. Compact lifecycle/body fluent chains such as
-`I.return(...)` are still a later Rust parity surface and are not used in portable examples yet.
+action-edge and lifecycle-marker surfaces. Compact lifecycle receiver chains such as
+`I.return(...)` and `I.declare(...).return(...)` are also portable on lifecycle-marker surfaces:
+they execute as the same ordered lifecycle statements as the equivalent `{ ... }` block.
 
 **Fluent style** chains calls on action edges with `.method()`:
 
@@ -39,6 +40,32 @@ Toplevel:AND+
 For ordinary helper statements, both styles lower to the same action model. The choice between them is
 readability: use fluent chains for short action edges and structured blocks when the action needs multiple
 updates or branch logic.
+
+Compact lifecycle receiver chains are useful when the lifecycle hook is short:
+
+```text
+value : /[A-Za-z_]\w*/ I.return(hash("kind", "name", "text", entry_text()))
+```
+
+For multiple lifecycle statements, the chain runs left to right:
+
+```text
+item : /[A-Za-z_]\w*/
+ I.declare(scalar, text)
+  .set(text, lowercase(entry_text()))
+  .return(hash("kind", "item", "text", scalar(text)))
+```
+
+This is equivalent to:
+
+```text
+item : /[A-Za-z_]\w*/
+ I {
+   declare(scalar, text);
+   set(text, lowercase(entry_text()));
+   return(hash("kind", "item", "text", scalar(text)));
+ }
+```
 
 ## Structured lifecycle blocks
 
@@ -152,8 +179,9 @@ The fluent equivalent chains the markers with dots:
 
 The parenthesized and bare marker spellings are the portable structured marker forms. No-arg
 action-edge `.push` / `.return(expr)` continuations are portable on the Perl reference and Rust.
-Fluent marker/block chains are still being locked separately before the book can present compact
-lifecycle/body fluent continuations as cross-backend portable.
+Compact lifecycle-marker chains such as `I.return(...)` are portable too. Longer action-edge
+explicit/flow fluent chains are still being locked separately before the book presents them as
+portable.
 
 ### If family: attached blocks
 

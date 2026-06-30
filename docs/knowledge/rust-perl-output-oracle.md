@@ -21,14 +21,14 @@ answers:
 date: 2026-06-30
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
-evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 / RUST-PARITY.7.5.3 partial action-edge parity (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. tclite remains deferred because compact lifecycle/body fluent forms such as I.return(...) and default-mode repetition are separate blockers. Lispish (uses { } blocks) needs .7.5.2 (scalaref)."
+evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 / RUST-PARITY.7.5.3 partial action-edge parity (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. tclite remains deferred behind remaining action-edge explicit/flow fluent chains and default-mode repetition audit. Lispish (uses { } blocks) needs .7.5.2 (scalaref)."
 reverify: "cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
 
 **Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-06-30
-(SPEC-FORMAT-TERSE.2.3.3.1).** A language-neutral cross-variant parity gate
+(SPEC-FORMAT-TERSE.2.3.3.3.1).** A language-neutral cross-variant parity gate
 (ADR 0006 §Phase 8.6). The Perl reference is the behavioral oracle; the corpus is its
 frozen output; `cargo test` validates the Rust backend against it with no Perl in the loop.
 
@@ -83,11 +83,16 @@ that: the Rust engine does **not** yet reproduce the shipped recursive specs.
   `ActionEdge` / `AcodeEntry`, and runtime dispatch executes no-arg `.push`,
   `.return(expr)`, and `.return_undef`. Focused locks cover child return capture, child
   return-event suppression, and close-edge return without recursive child redispatch.
-- **tclite is still deferred after action-edge fluent parity.** The shipped spec also uses
-  compact lifecycle/body fluent forms such as `I.return(...)`, which still parse as
-  standalone `FluentChain` body elements that the compiler drops, and it depends on the
-  separate default-mode repetition parity gap. Those blockers remain owned by follow-on
-  `SPEC-FORMAT-TERSE.2.3.3.x` / `RUST-PARITY` work rather than by the action-edge slice.
+- **Compact lifecycle/body fluent chains (`SPEC-FORMAT-TERSE.2.3.3.3.1`, LANDED
+  2026-06-30).** Rust now normalizes lifecycle-marker receiver chains such as
+  `I.return(...)` and `I.declare(...).set(...).return(...)` into executable lifecycle
+  `CodeBlock` statements. Focused parser/compiler/runtime locks cover no surviving
+  standalone lifecycle-surface `FluentChain`, return-channel behavior, ordered
+  declaration/mutation chains, and regex-first header-line inline placement.
+- **tclite is still deferred after compact lifecycle fluent parity.** The remaining
+  fluent blocker is action-edge explicit/flow chains such as `.push(child,target)` and
+  `.if(...).push(...).else().return_undef().endif()`. After that lands, retry the tclite
+  fixtures and split any remaining default-mode repetition divergence before code.
 - **Lispish remains independent.** Lispish uses `{ code }` blocks rather than action-edge
   fluent continuations and still needs the `scalaref(retv, {content})` hashref-field
   accessor parsed (`.7.5.2`).
@@ -117,8 +122,9 @@ ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
 
 - Task tree: [[RUST-PARITY]] / [[SPEC-FORMAT-TERSE]] (leaves `.7.1` oracle, `.7.5.1`
   header-regex fix done; `.7.5.3` action-edge no-arg fluent lowering partially landed under
-  `SPEC-FORMAT-TERSE.2.3.3.1`; tclite still blocked on compact lifecycle/body fluent forms
-  plus default-mode repetition; Lispish on `.7.5.2` scalaref)
+  `SPEC-FORMAT-TERSE.2.3.3.1`; compact lifecycle/body fluent forms landed under
+  `SPEC-FORMAT-TERSE.2.3.3.3.1`; tclite still blocked on action-edge explicit/flow fluent
+  chains plus default-mode repetition audit; Lispish on `.7.5.2` scalaref)
 - ADR: `docs/decisions/0006-multi-backend-vision.md` (§Phase 8.6 language-neutral corpus)
 - Related: [[rust-retv-propagation]], [[rust-edge-semantics-bug]], [[rust-entry-match-separation]]
 - Files: `tools/gen_oracle_corpus.pl`, `rust/linkedspec-runtime/tests/corpus_oracle.rs`,

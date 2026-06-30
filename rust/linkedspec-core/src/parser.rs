@@ -176,8 +176,8 @@ fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
 /// Parse same-line content after the rule header (the `rest` field).
 ///
 /// Only handles elements that can appear on the same line:
-/// regex literals, action edges, blind-call edges, split markers,
-/// conditional markers, and fluent chains.
+/// regex literals, action edges, blind-call edges, compact lifecycle
+/// receiver chains, split markers, conditional markers, and fluent chains.
 fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
     let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
     let re_action =
@@ -187,6 +187,7 @@ fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
         r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))",
     )
     .unwrap();
+    let re_lifecycle = Regex::compile(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
     let re_conditional = Regex::compile(r"^-\?[ \t]+\w+").unwrap();
     let re_fluent = Regex::compile(r"^\.[ \t]*\w+").unwrap();
 
@@ -269,6 +270,25 @@ fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
             ));
             remaining = trimmed[full_match.end()..].to_string();
             continue;
+        }
+
+        if let Some(caps) = re_lifecycle.captures(&trimmed) {
+            let full_match = caps.get(0).unwrap();
+            let marker = caps.get(1).unwrap().as_str().to_string();
+            let rest = trimmed[full_match.end()..].trim_start().to_string();
+            if let Some((code, remainder)) = parse_lifecycle_fluent_chain_statement_code(&rest) {
+                elements.push(BodyElement::new(
+                    BodyElementKind::CodeBlock {
+                        lifecycle: marker,
+                        code,
+                    },
+                    full_match.as_str(),
+                    line_num,
+                ));
+                remaining = remainder;
+                continue;
+            }
+            break;
         }
 
         if let Some(caps) = re_conditional.captures(&trimmed) {
@@ -528,7 +548,7 @@ fn parse_single_element(
         return Some((elem, remainder, advanced));
     }
 
-    // 4. Lifecycle code block: `I { ... }` or bare lifecycle marker
+    // 4. Lifecycle code block: `I { ... }`, `I.return(...)`, or bare marker
     if let Some(caps) = re_lifecycle.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let marker = caps.get(1).unwrap().as_str().to_string();
@@ -559,6 +579,16 @@ fn parse_single_element(
             );
             let advanced = *i > saved_i;
             return Some((elem, remainder, advanced));
+        } else if let Some((code, remainder)) = parse_lifecycle_fluent_chain_statement_code(&rest) {
+            let elem = BodyElement::new(
+                BodyElementKind::CodeBlock {
+                    lifecycle: marker.clone(),
+                    code,
+                },
+                full_match.as_str(),
+                line_num,
+            );
+            return Some((elem, remainder, false));
         } else {
             // Bare lifecycle marker (no block)
             let elem = BodyElement::new(
@@ -777,6 +807,24 @@ fn strip_keyword<'a>(text: &'a str, keyword: &str) -> Option<&'a str> {
     Some(after)
 }
 
+fn parse_lifecycle_fluent_chain_statement_code(rest: &str) -> Option<(String, String)> {
+    let (calls, remainder) = parse_fluent_chain_with_remainder(rest);
+    fluent_calls_to_statement_code(&calls).map(|code| (code, remainder))
+}
+
+fn fluent_calls_to_statement_code(calls: &[FluentCall]) -> Option<String> {
+    if calls.is_empty() || calls.iter().any(|call| call.method.trim().is_empty()) {
+        return None;
+    }
+
+    let statements = calls
+        .iter()
+        .map(|call| format!("{}({})", call.method.trim(), call.args.trim()))
+        .collect::<Vec<_>>()
+        .join("; ");
+    Some(statements)
+}
+
 /// Like scan_line_for_braces but works on &str slices (not just full lines).
 fn scan_line_for_braces_chars<'a>(text: &'a str, depth: &mut i32) -> &'a str {
     for (idx, ch) in text.char_indices() {
@@ -806,7 +854,7 @@ fn parse_fluent_chain_with_remainder(text: &str) -> (Vec<FluentCall>, String) {
 
     while remaining.starts_with('.') {
         remaining = &remaining[1..]; // consume '.'
-        // Find method name
+                                     // Find method name
         let name_end = remaining
             .find(|c: char| !c.is_alphanumeric() && c != '_')
             .unwrap_or(remaining.len());
@@ -876,10 +924,9 @@ mod tests {
         assert_eq!(spec.rules.len(), 1);
         let body = &spec.rules[0].body;
         // Should have: Regex, CodeBlock(I), CodeBlock(E)
-        assert!(
-            body.iter()
-                .any(|e| matches!(e.kind, BodyElementKind::Regex { .. }))
-        );
+        assert!(body
+            .iter()
+            .any(|e| matches!(e.kind, BodyElementKind::Regex { .. })));
         assert!(body.iter().any(
             |e| matches!(&e.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I")
         ));
@@ -1056,6 +1103,65 @@ Done:
                 .iter()
                 .all(|element| !matches!(element.kind, BodyElementKind::FluentChain { .. })),
             "lifecycle fluent branch payload must not survive as a standalone chain"
+        );
+    }
+
+    #[test]
+    fn parse_lifecycle_compact_fluent_chain_as_code_block() {
+        let src = r#"Top::
+ I.declare(scalar, out).set(out, "ok").return(out)
+ /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        let iblock = top
+            .body
+            .iter()
+            .find(|element| {
+                matches!(&element.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I")
+            })
+            .expect("I block");
+
+        match &iblock.kind {
+            BodyElementKind::CodeBlock { code, .. } => {
+                assert_eq!(code, r#"declare(scalar, out); set(out, "ok"); return(out)"#);
+            }
+            _ => panic!("expected lifecycle CodeBlock"),
+        }
+        assert!(
+            top.body
+                .iter()
+                .all(|element| !matches!(element.kind, BodyElementKind::FluentChain { .. })),
+            "compact lifecycle fluent chain must not survive as a standalone chain"
+        );
+    }
+
+    #[test]
+    fn parse_inline_lifecycle_compact_fluent_chain_as_code_block() {
+        let src = r#"Top:: /x/ I.return("from_header") E.return("from_e")
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+
+        assert!(matches!(
+            &top.body[0].kind,
+            BodyElementKind::Regex { pattern } if pattern == "x"
+        ));
+        assert!(matches!(
+            &top.body[1].kind,
+            BodyElementKind::CodeBlock { lifecycle, code }
+                if lifecycle == "I" && code == r#"return("from_header")"#
+        ));
+        assert!(matches!(
+            &top.body[2].kind,
+            BodyElementKind::CodeBlock { lifecycle, code }
+                if lifecycle == "E" && code == r#"return("from_e")"#
+        ));
+        assert!(
+            top.body
+                .iter()
+                .all(|element| !matches!(element.kind, BodyElementKind::FluentChain { .. })),
+            "inline lifecycle fluent chains must not survive as standalone chains"
         );
     }
 

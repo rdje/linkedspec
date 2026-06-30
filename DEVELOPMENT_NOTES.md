@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.1 — Rust compact lifecycle fluent chains): Implemented the compact
+  lifecycle/body receiver-chain slice without adding a second runtime model for standalone body fluent chains.
+  Durable points. (1) **Parser normalization is the seam.** A lifecycle marker followed by a receiver chain now
+  becomes the same lifecycle statement text as the equivalent block form, for example
+  `I.declare(...).set(...).return(...)` becomes `declare(...); set(...); return(...)`. (2) **Compiler/runtime
+  reuse is the signoff property.** `compiler.rs` sees ordinary lifecycle `CodeBlock` entries and populates the
+  existing `preamble` / `ecode` / marker slots; `engine.rs` executes the already-locked lifecycle statement
+  semantics. (3) **Header-line support stays within the current parser contract.** Regex-first inline bodies
+  such as `Top:: /x/ I.return(...) E.return(...)` are accepted; broader header-mode ambiguity is left alone.
+  (4) **Action-edge explicit/flow chains remain separate.** This does not change `.push(child,target)` or
+  fluent `.if(...).push(...).else().return_undef().endif()` execution, which remains `.2.3.3.3.2`.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3 — remaining Rust fluent continuation split): Split before code because
   three different mechanisms were mixed. Durable points. (1) **Lifecycle/body compact chains are parser/compiler
   work first.** `I.return(...)` and `I.declare(...).return(...)` currently become a lifecycle marker followed by
