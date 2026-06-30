@@ -1823,3 +1823,38 @@ fn terse_2_3_3_3_1_inline_lifecycle_compact_chain_executes() {
         "header-line lifecycle fluent chains are parsed into lifecycle statements"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.3.3.2 — Rust action-edge explicit/flow
+// fluent chains: multiline action-edge continuations stay attached to the
+// edge, `.push(target)` / `.push(child,target)` dispatch through the child
+// return channel, and fluent statement controls gate the following calls.
+
+#[test]
+fn terse_2_3_3_3_2_action_edge_fluent_push_target_appends_child_return() {
+    let grammar = "top::\n I { declare(array, out) }\n -> item.push(out)\n E { return(array_copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([["x"]]),
+        "action-edge .push(target) appends the child return to the named array target"
+    );
+}
+
+#[test]
+fn terse_2_3_3_3_2_action_edge_fluent_flow_push_child_target_true_branch() {
+    let grammar = "top::\n I { declare(array, out); declare(scalar, on); set(on, true) }\n -> item\n  .if(s(on))\n    .push(item, out)\n  .else()\n    .return_undef()\n  .endif()\n E { return(array_copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([["x"]]),
+        "active fluent .if branch dispatches .push(child,target)"
+    );
+}
+
+#[test]
+fn terse_2_3_3_3_2_action_edge_fluent_flow_return_undef_false_branch() {
+    let grammar = "top::\n I { declare(array, out); declare(scalar, on); set(on, false) }\n -> item\n  .if(s(on))\n    .push(item, out)\n  .else()\n    .say(\"missing item\")\n    .return_undef()\n  .endif()\n E { return(array_copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([]),
+        "inactive fluent .if branch skips push and active else return_undef closes the edge"
+    );
+}

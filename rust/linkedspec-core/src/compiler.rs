@@ -497,6 +497,34 @@ mod tests {
         assert_eq!(rule.acode_dispatch[1].fluent_chain[0].1, "array(\"done\")");
     }
 
+    #[test]
+    fn compile_multiline_action_edge_fluent_flow_chain() {
+        let src = r#"Wrapper::
+ -> child
+  .if(s(on))
+    .push(child, out)
+  .else()
+    .return_undef()
+  .endif()
+
+child: /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let rule = &compiled.rules[0];
+        assert_eq!(rule.acode_dispatch.len(), 1);
+        assert_eq!(
+            rule.acode_dispatch[0].fluent_chain,
+            vec![
+                ("if".to_string(), "s(on)".to_string()),
+                ("push".to_string(), "child, out".to_string()),
+                ("else".to_string(), "".to_string()),
+                ("return_undef".to_string(), "".to_string()),
+                ("endif".to_string(), "".to_string()),
+            ]
+        );
+    }
+
     // ── build_dependency_regex_map tests ──
 
     #[test]

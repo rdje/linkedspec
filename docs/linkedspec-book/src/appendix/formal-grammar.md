@@ -272,10 +272,11 @@ A fluent chain on an action edge or inside a lifecycle block uses dot-method syn
 Each method is a helper from the ActionIR helper families (§7). For ordinary helper statements,
 compact lifecycle-marker receiver chains and structured block forms are equivalent. Cross-backend
 portability is guaranteed for structured marker/attached-block forms, receiver-fluent
-`when/otherwise` block chains on action-edge and lifecycle-marker surfaces, no-arg action-edge
-`.push` / `.return(expr)` continuations, and compact lifecycle-marker chains such as
-`I.return(expr)` or `I.declare(...).return(...)`. Explicit/flow action-edge chains beyond that
-subset remain a separately locked surface.
+`when/otherwise` block chains on action-edge and lifecycle-marker surfaces, action-edge
+`.push` / `.return(expr)` / `.return_undef()` continuations, explicit action-edge
+`.push(target)` / `.push(child,target)` child-return appends, statement-control fluent chains that
+gate those calls, and compact lifecycle-marker chains such as `I.return(expr)` or
+`I.declare(...).return(...)`.
 
 Zero-arg fluent control-flow markers accept bare-keyword form:
 ```

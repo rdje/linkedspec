@@ -361,6 +361,7 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Returns**: void
 - **Behavior**: Calls `Child` and appends the child result to an accumulator array. With one argument, the target is the current rule's implicit accumulator; with a second bare identifier, that identifier is the target accumulator.
 - **Convention**: The all-bare child-call forms keep precedence: `push(Child)`, `push(Child, target)`, `push(Child, index)`, and `push(Child, target, index)` are parser child-call helpers.
+- **Action-edge fluent form**: after `-> Child`, `.push(target)` uses the edge's `Child` as the child rule and appends its return value to `target`; `.push(Child, target)` is the explicit child-and-target spelling used inside gated fluent chains.
 
 ### `push(Child, index)` / `push(Child, target, index)`
 - **Signature**: `push(child_rule: rule, index: int)` or `push(child_rule: rule, target: array, index: int)`

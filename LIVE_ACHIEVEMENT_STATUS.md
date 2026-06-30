@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.2 — Rust action-edge explicit/flow fluent chains landed**
+  (RUST PARSER + COMPILER/RUNTIME LOCKS + BOOK/KM). Rust now preserves multiline dotted continuations after an
+  action edge on the preceding `ActionEdge` and executes the explicit/flow subset: `.push(target)`,
+  `.push(child,target)`, `.if/.else/.endif` gating, helper calls such as `.say(...)`, and
+  `.return_undef()`/`.return(expr)` continuations. Explicit pushes dispatch the child and append the captured
+  child return value to the named target accumulator without leaking the child's accumulator events.
+  **Verification:** focused Rust core action-edge flow-chain locks PASS; focused Rust runtime
+  `terse_2_3_3_3_2` PASS; existing no-arg action-edge regression PASS; full Rust core/runtime package tests,
+  mdBook build, oracle generator syntax, KM regenerate/check, memory/doctrine/diff checks, and full local CI
+  PASS in commit workflow.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.3.3.3`** (Rust `tclite` oracle re-enable / default-mode repetition audit).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.1 — Rust compact lifecycle fluent chains landed**
   (RUST PARSER + COMPILER/RUNTIME LOCKS + BOOK/KM). Rust now normalizes compact lifecycle/body receiver chains
   such as `I.return(...)`, `E.return(...)`, and `I.declare(...).set(...).return(...)` into executable lifecycle

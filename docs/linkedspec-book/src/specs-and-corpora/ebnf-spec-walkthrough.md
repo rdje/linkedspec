@@ -393,6 +393,11 @@ The same pattern appears for quoted strings, numbers, quantifiers, operators, re
 
 The rationale is simple: `Term` should be a rule reference only after a containing rule has started. If the parser sees a body token before any `grammar_rule` has created a container, the parse should fail with a clear guard message instead of silently producing an orphan token.
 
+This action-edge fluent chain is portable on the Perl reference and Rust backend: the child reader runs only in
+the active branch, `.push(rule_name, rule)` appends the child return to the `rule` accumulator, `.say(...)`
+emits the guard diagnostic in the fallback branch, and `.return_undef()` stops that action edge without adding
+an orphan token.
+
 This is a useful pattern for users writing their own file parsers:
 
 - keep a small scalar state flag,

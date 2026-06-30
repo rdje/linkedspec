@@ -147,16 +147,20 @@ This lowers through the same helper surface as the block form:
 
 Use chains when they stay short. Use blocks when the rule contains branching, multiple updates, or examples meant to teach the shape.
 
-No-arg action-edge continuations are also portable:
+Action-edge continuations are also portable when they stay edge-scoped:
 
 ```text
 -> Item .push
+-> Item .push(items)
+-> Item .if(s(on)).push(Item, items).else().return_undef().endif()
 -> Item[1] .return(array("?items:", array_copy(array(Item))))
 ```
 
 `-> Item .push` dispatches the matched child and appends the child rule return to the
-current rule accumulator named after the current rule. `-> Item[1] .return(expr)` returns
-`expr` for that action edge without separately dispatching the close-edge child.
+current rule accumulator named after the current rule. `-> Item .push(items)` dispatches
+the same child and appends the child return to the `items` accumulator. `.push(Item, items)`
+is the explicit child-and-target form used inside fluent flow chains. `-> Item[1] .return(expr)`
+returns `expr` for that action edge without separately dispatching the close-edge child.
 
 Action edges can also use receiver-fluent attached `when/otherwise` blocks when a short conditional payload is
 clearer than a full structured block:

@@ -177,11 +177,12 @@ The fluent equivalent chains the markers with dots:
   .endif;
 ```
 
-The parenthesized and bare marker spellings are the portable structured marker forms. No-arg
-action-edge `.push` / `.return(expr)` continuations are portable on the Perl reference and Rust.
-Compact lifecycle-marker chains such as `I.return(...)` are portable too. Longer action-edge
-explicit/flow fluent chains are still being locked separately before the book presents them as
-portable.
+The parenthesized and bare marker spellings are the portable structured marker forms. Action-edge
+fluent continuations are portable on the Perl reference and Rust for the edge-scoped child-return
+surface: no-arg `.push`, `.return(expr)`, `.return_undef()`, explicit-target `.push(target)`, and
+`.push(child,target)` inside fluent control chains. Multiline dotted continuations remain attached
+to the preceding action edge, so this form is equivalent to keeping the same calls on one chain.
+Compact lifecycle-marker chains such as `I.return(...)` are portable too.
 
 ### If family: attached blocks
 

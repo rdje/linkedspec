@@ -498,15 +498,42 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<ActionEdgeFlow, String> {
+        let mut if_stack: Vec<StatementIfFrame> = Vec::new();
+        let mut switch_stack: Vec<StatementSwitchFrame> = Vec::new();
+
         for (method, args) in &entry.fluent_chain {
+            let call_args = Self::parse_action_edge_fluent_call_args(method, args)?;
+            let call_expr = linkedspec_core::expr::Expr::Call {
+                name: method.clone(),
+                args: call_args.clone(),
+            };
+            let parent_active = Self::statement_controls_active(&if_stack, &switch_stack);
+            if self.handle_statement_if_control(
+                &call_expr,
+                &mut if_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
+                continue;
+            }
+            if self.handle_statement_switch_control(
+                &call_expr,
+                &mut switch_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
+                continue;
+            }
+
+            if !Self::statement_controls_active(&if_stack, &switch_stack) {
+                continue;
+            }
+
             match method.as_str() {
-                "push" if args.trim().is_empty() => {
-                    let accumulator_len = ctx.accumulator.len();
-                    let child_retv =
-                        self.execute_rule(&entry.child_label, entry.child_regex_idx, ctx)?;
-                    ctx.accumulator.truncate(accumulator_len);
-                    ctx.set_retv(child_retv.clone());
-                    ctx.push_value(rule_label, child_retv);
+                "push" => {
+                    self.execute_action_edge_fluent_push(entry, &call_args, ctx, rule_label)?;
                 }
                 "return" => {
                     let value = self.eval_action_edge_fluent_return(args, ctx, rule_label)?;
@@ -521,13 +548,83 @@ impl Engine {
                     return Ok(ActionEdgeFlow::Returned);
                 }
                 other => {
-                    return Err(format!(
-                        "action-edge fluent method '.{other}' is not supported yet"
-                    ));
+                    self.eval_expr(&call_expr, ctx, rule_label).map_err(|err| {
+                        format!("action-edge fluent method '.{other}' failed: {err}")
+                    })?;
                 }
             }
         }
         Ok(ActionEdgeFlow::Continue)
+    }
+
+    fn parse_action_edge_fluent_call_args(
+        method: &str,
+        args: &str,
+    ) -> Result<Vec<linkedspec_core::expr::Arg>, String> {
+        use linkedspec_core::expr::Expr;
+
+        let code = if args.trim().is_empty() {
+            format!("{method}()")
+        } else {
+            format!("{method}({args})")
+        };
+        let block = linkedspec_core::expr::CodeBlock::parse(&code)
+            .map_err(|err| format!("failed to parse action-edge fluent call '.{method}': {err}"))?;
+        let Some(stmt) = block.statements.first() else {
+            return Ok(Vec::new());
+        };
+        match &stmt.expr {
+            Expr::Call { name, args } if name == method => Ok(args.clone()),
+            _ => Err(format!(
+                "failed to parse action-edge fluent call '.{method}' from {code}"
+            )),
+        }
+    }
+
+    fn execute_action_edge_fluent_push(
+        &self,
+        entry: &linkedspec_core::types::AcodeEntry,
+        args: &[linkedspec_core::expr::Arg],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<(), String> {
+        let (child_label, child_regex_idx, target_label) = match args.len() {
+            0 => (
+                entry.child_label.clone(),
+                entry.child_regex_idx,
+                rule_label.to_string(),
+            ),
+            1 => {
+                let target_value = self.eval_expr(args[0].value(), ctx, rule_label)?;
+                (
+                    entry.child_label.clone(),
+                    entry.child_regex_idx,
+                    self.resolve_array_target(args, &target_value, true),
+                )
+            }
+            _ => {
+                let child_value = self.eval_expr(args[0].value(), ctx, rule_label)?;
+                let child_label = self.resolve_rule_name(args, Some(&child_value));
+                let target_value = self.eval_expr(args[1].value(), ctx, rule_label)?;
+                let child_regex_idx = if child_label == entry.child_label {
+                    entry.child_regex_idx
+                } else {
+                    0
+                };
+                (
+                    child_label,
+                    child_regex_idx,
+                    self.resolve_array_target(&args[1..], &target_value, true),
+                )
+            }
+        };
+
+        let accumulator_len = ctx.accumulator.len();
+        let child_retv = self.execute_rule(&child_label, child_regex_idx, ctx)?;
+        ctx.accumulator.truncate(accumulator_len);
+        ctx.set_retv(child_retv.clone());
+        ctx.push_value(&target_label, child_retv);
+        Ok(())
     }
 
     fn eval_action_edge_fluent_return(

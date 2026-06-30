@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.2 — Rust action-edge fluent flow chains): Implemented the
+  action-edge explicit/flow slice on top of the existing action-edge fluent metadata. Durable points. (1)
+  **Continuation ownership is parser-local.** Multiline dotted lines after an action edge now attach to the
+  preceding `ActionEdge.fluent_chain`; they are not standalone body fluent elements and therefore cannot be
+  dropped by later compilation. (2) **Push remains edge-scoped.** `.push(target)` uses the edge's child rule,
+  while `.push(child,target)` makes the same child explicit; both dispatch the child, capture its rule return,
+  truncate child accumulator leakage, and append the captured value to the named target array. (3)
+  **Flow control reuses the statement-control stack.** `.if/.else/.endif` gates the following fluent calls with
+  the same runtime mechanism as structured blocks, and inactive branch calls are skipped before helper
+  evaluation. (4) **Ordinary helper calls stay ordinary.** Branch helpers such as `.say(...)` run through
+  normal expression/helper evaluation instead of getting action-edge-only cases. (5) **`tclite` is now a
+  separate audit.** With compact lifecycle and action-edge explicit/flow fluent surfaces landed, any remaining
+  `tclite` divergence belongs to `.2.3.3.3.3` default-mode repetition/oracle re-enable work.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.1 — Rust compact lifecycle fluent chains): Implemented the compact
   lifecycle/body receiver-chain slice without adding a second runtime model for standalone body fluent chains.
   Durable points. (1) **Parser normalization is the seam.** A lifecycle marker followed by a receiver chain now

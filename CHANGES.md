@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.2 — implement Rust action-edge fluent flow chains
+
+**Scope:** Rust action-edge fluent continuation parsing, compilation, and runtime execution for explicit
+target pushes and statement-control chains, plus task tree, roadmap tracker, mdBook, Knowledge Map, and live
+continuity docs.
+
+**What changed:** Rust now keeps multiline dotted continuations after `-> child` attached to that action edge
+and executes the accepted explicit/flow subset. `.push(target)` and `.push(child,target)` dispatch the child,
+capture its rule return, suppress child accumulator leakage, and append the return value to the named target
+array. Fluent statement controls such as `.if(...).push(...).else().return_undef().endif()` gate later calls
+with the same control-stack model used by structured blocks, while branch-local helpers such as `.say(...)`
+run through normal helper evaluation.
+
+**Boundary:** This closes the remaining fluent blocker before retrying `tclite`; the next leaf,
+`.2.3.3.3.3`, owns the oracle re-enable/default-mode repetition audit. It does not broaden lifecycle compact
+chain semantics, which already landed in `.2.3.3.3.1`.
+
+**Validation:** Focused Rust core action-edge flow-chain locks PASS; focused Rust runtime `terse_2_3_3_3_2`
+PASS; existing no-arg action-edge fluent regression PASS. Full Rust core/runtime, mdBook, Knowledge Map,
+memory/doctrine/diff, and local CI gates are recorded in the commit workflow.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.1 — implement Rust compact lifecycle fluent chains
 
 **Scope:** Rust body parser normalization for compact lifecycle-marker receiver chains, parser/compiler/runtime

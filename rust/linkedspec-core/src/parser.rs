@@ -355,6 +355,7 @@ fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
         // Try to parse body elements from this line. A single line may
         // contain multiple elements (e.g., `/x/ I { code }`).
         let mut elements = parse_body_elements(lines, &mut i);
+        collect_action_edge_fluent_continuation_lines(lines, &mut i, &mut elements);
         if elements.is_empty() {
             // Unrecognized — capture as raw (validator will catch issues)
             body.push(BodyElement::new(
@@ -370,6 +371,36 @@ fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
         }
     }
     (body, i)
+}
+
+fn collect_action_edge_fluent_continuation_lines(
+    lines: &[&str],
+    i: &mut usize,
+    elements: &mut [BodyElement],
+) {
+    let Some(BodyElement {
+        kind: BodyElementKind::ActionEdge { fluent_chain, .. },
+        ..
+    }) = elements.last_mut()
+    else {
+        return;
+    };
+
+    while *i < lines.len() {
+        let trimmed = lines[*i].trim();
+        if trimmed.is_empty() || trimmed.starts_with('#') || !trimmed.starts_with('.') {
+            break;
+        }
+
+        let (calls, remainder) = parse_fluent_chain_with_remainder(trimmed);
+        let remainder = remainder.trim();
+        if calls.is_empty() || (!remainder.is_empty() && !remainder.starts_with('#')) {
+            break;
+        }
+
+        fluent_chain.extend(calls);
+        *i += 1;
+    }
 }
 
 /// Parse body elements starting at line `i`. A single line may contain multiple
@@ -1033,6 +1064,47 @@ Child: /x/ /y/
                 assert_eq!(
                     fluent_chain[0].args,
                     r#"array("?child:", array_copy(array(Child)))"#
+                );
+            }
+            _ => panic!("expected ActionEdge"),
+        }
+    }
+
+    #[test]
+    fn parse_action_edge_multiline_fluent_flow_chain() {
+        let src = r#"Top::
+ -> item
+  .if(s(on))
+    .push(item, out)
+  .else()
+    .return_undef()
+  .endif()
+
+item: /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        assert_eq!(
+            top.body.len(),
+            1,
+            "multiline fluent continuations are consumed by the action edge"
+        );
+
+        match &top.body[0].kind {
+            BodyElementKind::ActionEdge { fluent_chain, .. } => {
+                let methods = fluent_chain
+                    .iter()
+                    .map(|call| (call.method.as_str(), call.args.as_str()))
+                    .collect::<Vec<_>>();
+                assert_eq!(
+                    methods,
+                    vec![
+                        ("if", "s(on)"),
+                        ("push", "item, out"),
+                        ("else", ""),
+                        ("return_undef", ""),
+                        ("endif", ""),
+                    ]
                 );
             }
             _ => panic!("expected ActionEdge"),
