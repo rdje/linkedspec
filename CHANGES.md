@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3 — split remaining Rust fluent continuations
+
+**Scope:** Task tree, task-tree index, roadmap tracker, Knowledge Map, development notes, and live continuity
+docs. No engine, parser, runtime, oracle fixture, or mdBook behavior changed in this split slice.
+
+**What changed:** The remaining Rust fluent parity work is now split into concrete children. `.2.3.3.3.1`
+owns compact lifecycle/body receiver chains such as `I.return(...)` and `I.declare(...).return(...)`, where Rust
+currently parses a lifecycle marker plus standalone `FluentChain` and the compiler drops the fluent chain.
+`.2.3.3.3.2` owns action-edge explicit/flow chains such as `.push(child,target)` and
+`.if(...).push(...).else().return_undef().endif()`, because action-edge metadata exists but the runtime only
+executes the no-arg `.push` / `.return(expr)` / `.return_undef` subset. `.2.3.3.3.3` owns the deferred
+`tclite` oracle re-enable/default-mode repetition audit after those fluent surfaces land.
+
+**Validation:** KM retrieval PASS; Perl reference probes and shipped-spec/code search completed; Rust
+parser/compiler/runtime code-read completed; focused Rust `.2.3.3.2` regression test PASS; Knowledge Map
+regenerate/check PASS; memory/doctrine checks PASS; `git diff --check` PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.2 — implement Rust attached fluent block payloads
 
 **Scope:** Rust body parser support for action-edge and lifecycle attached fluent `.when(cond) { ... }`

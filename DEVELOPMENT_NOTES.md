@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3 — remaining Rust fluent continuation split): Split before code because
+  three different mechanisms were mixed. Durable points. (1) **Lifecycle/body compact chains are parser/compiler
+  work first.** `I.return(...)` and `I.declare(...).return(...)` currently become a lifecycle marker followed by
+  standalone `BodyElementKind::FluentChain`; `compiler.rs` drops that standalone element, so `.2.3.3.3.1` owns
+  normalizing accepted lifecycle receiver chains into executable lifecycle statement blocks. (2) **Action-edge
+  explicit/flow chains are not the no-arg action-edge subset.** `AcodeEntry.fluent_chain` now exists, but
+  `engine.rs` only executes no-arg `.push`, `.return(expr)`, and `.return_undef`; `.push(child,target)` and
+  `.if(...).push(...).else().return_undef().endif()` need a separate action-edge semantic pass. (3) **Do not
+  hide `tclite` behind fluent work.** Re-enable attempts wait until the two fluent surfaces land; any remaining
+  default-mode repetition divergence gets its own leaf.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.2 — Rust attached fluent block payloads): Implemented the
   attached-block subset without widening into compact lifecycle/body fluent continuations. Durable points.
   (1) **Normalize to the existing statement-block path.** Rust already knew how to execute attached

@@ -308,8 +308,10 @@ Runtime/diagnostic continuity note:
    - `.2.3` is now split/owned before code: `.2.3.1` landed the Perl reference exact fluent
      `.when(cond) { ... }.otherwise { ... }` block-chain fallback contract, `.2.3.2` locked lifecycle
      value/drop and return-channel semantics, `.2.3.3.1` landed Rust action-edge no-arg fluent continuations,
-     `.2.3.3.2` landed Rust action-edge/lifecycle attached fluent block payloads, and remaining body fluent
-     continuations, full nested composability, and return-type method chaining remain separate signoff leaves,
+     `.2.3.3.2` landed Rust action-edge/lifecycle attached fluent block payloads, `.2.3.3.3` split remaining
+     Rust fluent continuations into compact lifecycle/body receiver chains, action-edge explicit/flow chains,
+     and `tclite` re-enable/default-mode repetition audit, while full nested composability and return-type
+     method chaining remain separate signoff leaves,
    - keep existing marker/composite flow behavior stable while each attached-block leaf lands,
    - keep zero-arg fluent control-flow markers punctuation-light too, so `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` stay aligned with the older parenthesized fluent forms,
    - keep those inline composite control-flow surfaces lifecycle-wide across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`, not only on the earlier `LX` proof point,

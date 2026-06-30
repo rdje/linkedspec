@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3 — remaining Rust fluent continuations split**
+  (DOCS/TREE/KM ONLY; **no engine behavior change**). The remaining Rust fluent parity work is now split:
+  `.2.3.3.3.1` owns compact lifecycle/body receiver chains such as `I.return(...)` and
+  `I.declare(...).return(...)`; `.2.3.3.3.2` owns action-edge explicit/flow chains such as
+  `.push(child,target)` and `.if(...).push(...).else().return_undef().endif()`; `.2.3.3.3.3` owns `tclite`
+  re-enable/default-mode repetition audit after fluent parity lands.
+  **Verification:** KM retrieval; Perl reference probes; shipped-spec/code search; Rust parser/compiler/runtime
+  code-read; focused Rust `.2.3.3.2` regression test PASS; KM/memory/doctrine/diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.3.3.1`** (Rust compact lifecycle/body receiver chains).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.2 — Rust attached fluent block payloads landed**
   (RUST PARSER + RUNTIME LOCKS + BOOK/KM). Rust now parses action-edge and lifecycle-marker
   `.when(cond) { ... }` receiver-fluent block chains by normalizing them to existing attached
