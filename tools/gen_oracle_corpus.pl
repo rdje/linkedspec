@@ -71,15 +71,13 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 # (pair: 1) regexes; now they register correctly. But it is NOT SUFFICIENT for
 # tclite: the oracle proved additional independent blockers beyond header-line regexes.
 #
-#   tclite (→ RUST-PARITY.7.5.3 / SPEC-FORMAT-TERSE.2.3.3): originally exposed
-#   dropped fluent continuations on ACTION edges (`-> command_subst .push`,
-#   `-> command_subst[1] .return(...)`). SPEC-FORMAT-TERSE.2.3.3.1 landed the
-#   no-arg action-edge subset on Rust, but the shipped spec still depends on
-#   compact lifecycle/body fluent forms such as `I.return(...)` and on the
-#   default-mode recursive repetition gap. Keep these cases out until those
-#   separate blockers close.
-#     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
-#     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
+#   tclite: the fluent blockers landed under SPEC-FORMAT-TERSE.2.3.3.3.1
+#   (compact lifecycle/body receiver chains) and SPEC-FORMAT-TERSE.2.3.3.3.2
+#   (action-edge explicit/flow chains). SPEC-FORMAT-TERSE.2.3.3.3.3 temporarily
+#   re-enabled `[]` and `""` oracle cases and proved the remaining Rust output is
+#   still `[]` while Perl returns tagged tclite values. Keep those cases OUT of the
+#   committed green corpus until SPEC-FORMAT-TERSE.2.3.3.3.3.1 lands default-mode
+#   recursive repetition parity.
 #
 #   Lispish (→ RUST-PARITY.7.5.2): uses `{ code }` blocks on its edges (not the
 #   fluent form), so it only needs the `scalaref(retv, {content})` hashref-field
@@ -117,7 +115,6 @@ Done::
  /[a-z]+/
 SPEC
     },
-
     # ── SPEC-FORMAT-TERSE.1.1.2 — auto-existing working variables (cross-variant) ──
     #
     # The Perl reference (.1.1.1, ADR 0007) lets a working variable referenced

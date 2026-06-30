@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.3 — Rust `tclite` oracle retry split**
+  (AUDIT/TREE/KM/BOOK STATUS; **no runtime behavior change**). After Rust compact lifecycle/body receiver
+  chains and action-edge explicit/flow fluent chains landed, the deferred `tclite` oracle cases were retried.
+  Perl returns `["?tcl_script:",[["?command_subst:",[]]]]` for `[]` and
+  `["?tcl_script:",[["?double_quote:",[]]]]` for `""`; temporarily re-enabled Rust fixtures still produced
+  actual `[]` for both, while the other 39 corpus fixtures passed. The failing fixtures remain out of the
+  committed green corpus. **Verification:** Perl reference probes complete; diagnostic Rust corpus oracle
+  exposed exactly the two `tclite` failures; final green-corpus regeneration/oracle, mdBook, KM, memory/
+  doctrine/diff checks, and full local CI are recorded in commit workflow.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.3.3.3.1`** (Rust default-mode recursive repetition parity for `tclite`).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.2 — Rust action-edge explicit/flow fluent chains landed**
   (RUST PARSER + COMPILER/RUNTIME LOCKS + BOOK/KM). Rust now preserves multiline dotted continuations after an
   action edge on the preceding `ActionEdge` and executes the explicit/flow subset: `.push(target)`,

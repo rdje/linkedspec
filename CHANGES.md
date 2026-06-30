@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.3 — split Rust tclite repetition parity
+
+**Scope:** Rust `tclite` oracle retry after fluent parity, task-tree split, oracle generator/test comments,
+Knowledge Map, roadmap tracker, mdBook backend-corpus status, and live continuity docs. No runtime behavior
+changed in this slice.
+
+**What changed:** After compact lifecycle/body receiver chains and action-edge explicit/flow fluent chains
+landed, the deferred `tclite` oracle cases were retried instead of inferred. The Perl reference returns
+`["?tcl_script:",[["?command_subst:",[]]]]` for `[]` and
+`["?tcl_script:",[["?double_quote:",[]]]]` for `""`. Temporarily adding those cases to the Rust oracle corpus
+made only those two fixtures fail; both actual Rust outputs were `[]`.
+
+**Boundary:** The failing fixtures are not committed to the green corpus. The remaining implementation work is
+now owned by `SPEC-FORMAT-TERSE.2.3.3.3.3.1`, which will re-enable
+`tclite_command_subst` and `tclite_double_quote` after Rust default-mode recursive repetition parity lands.
+
+**Validation:** The diagnostic corpus retry exposed the two failures with all other 39 fixtures passing. The
+final committed state restores the green corpus; oracle generator syntax/regeneration, Rust corpus oracle,
+mdBook, Knowledge Map, memory/doctrine/diff, and local CI validation are recorded in the commit workflow.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.2 — implement Rust action-edge fluent flow chains
 
 **Scope:** Rust action-edge fluent continuation parsing, compilation, and runtime execution for explicit

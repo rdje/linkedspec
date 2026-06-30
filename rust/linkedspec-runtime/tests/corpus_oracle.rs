@@ -102,12 +102,14 @@ fn oracle_corpus_matches_perl_reference() {
 
     // .7.1 established the mechanism and a green first proof. The shipped recursive
     // specs are landing incrementally as the engine reaches parity: .7.5.1 (DONE)
-    // fixed the header-line-regex → 0-regex compiler gap (a necessary prerequisite),
-    // but tclite still needs .7.5.3 (action-edge fluent `.push`/`.return(...)`
-    // lowering) and Lispish needs .7.5.2 (`scalaref(retv, {content})` parsing), so
-    // those remain deferred from the committed corpus (which stays a controlled
-    // green proof set). .7.2/.7.3 add structurally simple shipped specs; .7.4 adds
-    // the full drift guard. See docs/knowledge/rust-perl-output-oracle.md.
+    // fixed the header-line-regex → 0-regex compiler gap, and the later fluent
+    // slices landed tclite's action-edge/lifecycle fluent surfaces. A retry under
+    // SPEC-FORMAT-TERSE.2.3.3.3.3 still produced Rust `[]` for the tclite `[]` and
+    // `""` cases, so tclite stays out of the committed green corpus until
+    // SPEC-FORMAT-TERSE.2.3.3.3.3.1 lands default-mode recursive repetition parity.
+    // Lispish remains independent on .7.5.2 (`scalaref(retv, {content})` parsing).
+    // .7.2/.7.3 add structurally simple shipped specs; .7.4 adds the full drift
+    // guard. See docs/knowledge/rust-perl-output-oracle.md.
     assert!(
         passed >= 1,
         "expected at least one green proof fixture, found {passed}"

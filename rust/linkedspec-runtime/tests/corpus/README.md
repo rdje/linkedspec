@@ -43,3 +43,8 @@ pathological grammar (e.g. the known RTLUtils catastrophic-backtrack hang) canno
 wedge corpus generation. The case list lives at the top of
 `tools/gen_oracle_corpus.pl`; `.7.2`/`.7.3` extend it, `.7.4` adds the
 enumerate-all-fixtures drift guard.
+
+As of `SPEC-FORMAT-TERSE.2.3.3.3.3`, `tclite` was retried after the Rust fluent-chain
+gaps landed and still diverged: Perl returns tagged `tcl_script` values for `[]` and
+`""`, while Rust returns `[]`. Those fixtures stay out of the committed green corpus
+until `SPEC-FORMAT-TERSE.2.3.3.3.3.1` lands default-mode recursive repetition parity.

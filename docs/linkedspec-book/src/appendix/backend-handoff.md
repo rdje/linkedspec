@@ -51,6 +51,12 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 `input.txt`, and `expected.json`. Your backend is compliant when it produces
 structurally equivalent output for every entry.
 
+The checked-in Rust corpus is kept green while parity work lands incrementally. As of
+`SPEC-FORMAT-TERSE.2.3.3.3.3`, `tclite.spec` is still withheld from the Rust oracle
+fixture set because Rust returns `[]` for the `[]` and `""` inputs where the Perl
+reference returns tagged `tcl_script` values. That remaining gap is default-mode
+recursive repetition parity, not fluent-chain syntax support.
+
 ## Architecture Overview
 
 ```

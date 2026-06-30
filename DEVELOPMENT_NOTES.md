@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.3 — Rust tclite oracle retry split): Retried `tclite`
+  after the fluent blockers were closed, and split before code because the result isolated a different
+  mechanism. Durable points. (1) **The retry is now evidence, not conjecture.** Perl returns
+  `["?tcl_script:",[["?command_subst:",[]]]]` for `[]` and
+  `["?tcl_script:",[["?double_quote:",[]]]]` for `""`; the temporarily re-enabled Rust oracle fixtures
+  expected those values wrapped one level and got `[]` for both. (2) **Fluent parity is no longer the blocker.**
+  Compact lifecycle/body receiver chains and action-edge explicit/flow chains are landed, so the remaining
+  `tclite` failure belongs to default-mode recursive repetition/top-level default-rule dispatch. (3) **Keep the
+  committed corpus green until the implementation lands.** The failed fixtures are not left in
+  `tests/corpus/`; `.2.3.3.3.3.1` owns re-enabling them once the Rust runtime reproduces the Perl values. (4)
+  **Do not let `tclite` swallow broader recursion work silently.** If implementation shows a wider recursive
+  value-parity surface, split it explicitly rather than hiding it inside the fixture re-enable.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.2 — Rust action-edge fluent flow chains): Implemented the
   action-edge explicit/flow slice on top of the existing action-edge fluent metadata. Durable points. (1)
   **Continuation ownership is parser-local.** Multiline dotted lines after an action edge now attach to the
