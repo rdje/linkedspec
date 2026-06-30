@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.1 — lock Perl fluent when otherwise blocks
+
+**Scope:** Perl bootstrap method-chain parsing, phase0 regression locks, mdBook wording, Knowledge Map, task
+tree, roadmap tracker, and live continuity docs. Rust parity remains split to `.2.3.3`.
+
+**What changed:** Perl reference fluent attached control-flow chains now preserve fallback tails after a fluent
+`.when(cond) { ... }` head. Both dotted `.otherwise { ... }` and no-dot `otherwise { ... }` continuations are
+accepted on action-edge and lifecycle surfaces.
+
+**Implementation:** `BootstrapSpec::Core` now accepts an optional leading dot before attached fluent tail
+clauses, recognizes `when` as an attached fluent-if head, and recognizes `otherwise` as an attached fallback
+tail. `ActionIR::ControlFlow` already lowers the resulting attached fallback as canonical `else`, so the fix
+stays in the bootstrap parser.
+
+**Validation:** Perl syntax checks PASS; phase0 PASS (`Files=1, Tests=993`); mdBook build PASS; Knowledge Map
+regenerate/check PASS; memory/doctrine/diff checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3 — split fluent lifecycle composability surface
 
 **Scope:** Task tree, global task-tree index, roadmap tracker, live continuity docs, mdBook wording, and

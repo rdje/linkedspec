@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.1 — Perl fluent when/otherwise block-chain lock): Implemented the Perl
+  reference lock. Durable points. (1) **True-branch probes can hide fallback parser bugs.** The `.2.3` split
+  probes showed `.when(true) { ... }.otherwise { ... }` returning the first branch, but a false condition
+  proved the fallback tail had been ignored. The lock now explicitly tests false `when` branches. (2) **The
+  fix belongs in bootstrap parsing.** `ActionIR::ControlFlow` already knows how to lower attached
+  `otherwise { ... }` once it receives that statement. The missing piece was `BootstrapSpec::Core` preserving
+  the fluent attached tail after a method-empty chain. (3) **Dotted and no-dot continuations share one
+  contract.** The tail parser now accepts an optional leading dot, recognizes `when` as the attached fluent-if
+  head, and treats `otherwise` as an attached fallback tail. (4) **Rust remains separate.** This only locks the
+  Perl reference; Rust fluent block-chain/action-edge parity stays `.2.3.3` / `RUST-PARITY.7.5.3`.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3 — fluent/lifecycle/composability split): Split before code. Durable
   points. (1) **Perl is ahead of the portable contract for fluent block chains.** TOOLBOX descriptor/runtime
   probes show exact action and lifecycle forms like `.when(true) { ... }.otherwise { ... }` already lower with

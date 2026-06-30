@@ -39205,6 +39205,80 @@ SPEC
         'compact attached-block when/otherwise executes the canonical selected branch',
     );
 };
+subtest 'spec_format_terse_2_3_1_locks_perl_fluent_when_otherwise_block_chains' => sub {
+    plan tests => 30;
+
+    require JSON::PP;
+    my $json = JSON::PP->new->canonical(1)->allow_nonref(1);
+
+    my $assert_clean_branch_meta = sub {
+        my ($meta, $label, $expects_assign) = @_;
+        is($meta->{canonical_action_ir_fallback_count}, 0, "$label avoids RAW_PERL fallback");
+        is($meta->{raw_perl_dependency_count}, 0, "$label avoids raw Perl dependency");
+        is($meta->{unresolved_helper_count}, 0, "$label avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "$label remains language-agnostic ActionIR ready");
+        ok(
+            scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+            scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+            scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}) &&
+            (!$expects_assign || scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}})),
+            "$label reports canonical IF/ELSE branch metadata",
+        );
+    };
+
+    my @cases = (
+        {
+            label          => 'action-edge dotted fluent otherwise chain',
+            spec           => qq{Top::\n /x/ -> Done.when(false) { return("bad") }.otherwise { return("fallback") }\n\nDone::\n /x/\n},
+            expected_json  => '"fallback"',
+            source_lock    => 1,
+            expects_assign => 0,
+        },
+        {
+            label          => 'action-edge bare fluent otherwise continuation',
+            spec           => qq{Top::\n /x/ -> Done.when(false) { return("bad") } otherwise { return("fallback") }\n\nDone::\n /x/\n},
+            expected_json  => '"fallback"',
+            source_lock    => 0,
+            expects_assign => 0,
+        },
+        {
+            label          => 'lifecycle dotted fluent otherwise chain',
+            spec           => qq{Top::\n /x/ I.when(false) { set(value,"yes") }.otherwise { set(value,"no") } LX { return(value) }\n},
+            expected_json  => '"no"',
+            source_lock    => 1,
+            expects_assign => 1,
+        },
+        {
+            label          => 'lifecycle bare fluent otherwise continuation',
+            spec           => qq{Top::\n /x/ I.when(false) { set(value,"yes") } otherwise { set(value,"no") } LX { return(value) }\n},
+            expected_json  => '"no"',
+            source_lock    => 0,
+            expects_assign => 1,
+        },
+    );
+
+    for my $case (@cases) {
+        my $descr = LinkedSpec::Get(\$case->{spec}, return_descriptor => 1);
+        ok(defined($descr) && ref($descr) eq 'HASH', "$case->{label} descriptor builds");
+
+        my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+        $assert_clean_branch_meta->($meta, $case->{label}, $case->{expects_assign});
+
+        my $parser = LinkedSpec::Get(\$case->{spec}, top_rule => 'Top', parse_mode => 'consume');
+        my $input = 'x';
+        is(
+            $json->encode($parser->(\$input)),
+            $case->{expected_json},
+            "$case->{label} executes the otherwise fallback when the when condition is false",
+        );
+
+        if ($case->{source_lock}) {
+            my $source = '';
+            LinkedSpec::Get(\$case->{spec}, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$source);
+            unlike($source, qr/\b(?:when|otherwise)\b/, "$case->{label} leaves no host when/otherwise source residue");
+        }
+    }
+};
 subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
     plan tests => 30;
 

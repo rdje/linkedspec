@@ -183,6 +183,32 @@ Use the aliases when they read better for classification-style rules. They are n
 `when` blocks; both the Perl reference and Rust backend normalize them to canonical `if/else`
 control flow.
 
+On the Perl reference, the same branch shape can be written as a fluent block chain on an
+action edge or lifecycle marker:
+
+```text
+-> child
+  .when(is_nonempty(array(src))) {
+    return(first(array(src)))
+  }.otherwise {
+    return("default")
+  }
+```
+
+The fallback can also be written as a no-dot continuation after the first block:
+
+```text
+-> child
+  .when(is_nonempty(array(src))) {
+    return(first(array(src)))
+  } otherwise {
+    return("default")
+  }
+```
+
+Use the structured attached-block spelling above for portable cross-backend examples until
+fluent block chains are locked on every backend.
+
 ### If family: inline composite
 
 A full if/elseif/else chain fits into one expression. The first argument is the condition;

@@ -263,6 +263,11 @@ sub _parse_optional_attached_if_clause_tail {
   $scan_pos = $skip_ws->($scan_pos);
   return (undef, $scan_pos) if $scan_pos >= $source_len;
 
+  if (substr($source, $scan_pos, 1) eq '.') {
+   ++$scan_pos;
+   $scan_pos = $skip_ws->($scan_pos);
+  }
+
   return (undef, $scan_pos) unless substr($source, $scan_pos) =~ /\A(?<method>\w+)/o;
   my $method = $+{method};
   my $stmt_start = $scan_pos;
@@ -301,7 +306,7 @@ sub _parse_optional_attached_if_clause_tail {
   my ($stmt) = @_;
   return 0 unless ref($stmt) eq 'HASH';
   my $method = $stmt->{method} // '';
-  return ($method eq 'elseif' || $method eq 'elif' || $method eq 'else' || $method eq 'endif') ? 1 : 0
+  return ($method eq 'elseif' || $method eq 'elif' || $method eq 'else' || $method eq 'otherwise' || $method eq 'endif') ? 1 : 0
  };
 
  while (1) {
@@ -309,10 +314,10 @@ sub _parse_optional_attached_if_clause_tail {
   last unless $head_stmt;
 
   my $head_method = $head_stmt->{method} // '';
-  last unless $head_method eq 'elseif' || $head_method eq 'elif' || $head_method eq 'else';
+  last unless $head_method eq 'elseif' || $head_method eq 'elif' || $head_method eq 'else' || $head_method eq 'otherwise';
 
   return ('', $start_pos) if $else_seen;
-  $else_seen = 1 if $head_method eq 'else';
+  $else_seen = 1 if $head_method eq 'else' || $head_method eq 'otherwise';
 
   $tail .= "\n" if length($tail);
   $tail .= $head_stmt->{text};
@@ -567,7 +572,7 @@ sub _build_method_empty_action_code_block_rule {
    my $calls = _parse_method_call_chain($chain);
    if ($calls && @$calls && defined($block) && length($block)) {
     my $tail_method = $calls->[-1]{method} || '';
-    if ($tail_method eq 'if' || $tail_method eq 'i') {
+    if ($tail_method eq 'if' || $tail_method eq 'i' || $tail_method eq 'when') {
      my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
      if (defined($tail) && length($tail)) {
       $code .= "\n" . $tail;
@@ -670,7 +675,7 @@ sub _build_method_empty_blind_code_block_rule {
    my $calls = _parse_method_call_chain($chain);
    if ($calls && @$calls && defined($block) && length($block)) {
     my $tail_method = $calls->[-1]{method} || '';
-    if ($tail_method eq 'if' || $tail_method eq 'i') {
+    if ($tail_method eq 'if' || $tail_method eq 'i' || $tail_method eq 'when') {
      my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
      if (defined($tail) && length($tail)) {
       $code .= "\n" . $tail;
@@ -725,7 +730,7 @@ sub _build_method_empty_non_action_code_block_rule {
    my $calls = _parse_method_call_chain($chain);
    if ($calls && @$calls && defined($block) && length($block)) {
     my $tail_method = $calls->[-1]{method} || '';
-    if ($tail_method eq 'if' || $tail_method eq 'i') {
+    if ($tail_method eq 'if' || $tail_method eq 'i' || $tail_method eq 'when') {
      my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
      if (defined($tail) && length($tail)) {
       $code .= "\n" . $tail;

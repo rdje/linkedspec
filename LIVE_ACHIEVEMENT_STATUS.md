@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.1 — Perl fluent `when/otherwise` block chains landed**
+  (PERL BOOTSTRAP + PHASE0 + BOOK/KM LOCKS). Perl now preserves attached fallback tails after fluent
+  `.when(cond) { ... }` chains. Both `.otherwise { ... }` and no-dot `otherwise { ... }` continuations execute
+  on action-edge and lifecycle surfaces. The new locks use false `when` conditions so fallback execution is
+  actually proven, not hidden by a selected first branch.
+  **Verification:** Perl syntax checks PASS; phase0 PASS (`Files=1, Tests=993`); mdBook/KM/memory/doctrine/
+  diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.2`** (lifecycle block value-drop and explicit `return(expr)` channel
+  semantics lock).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3 — fluent/lifecycle/composability surface split/owned**
   (DOCS/TREE/KM ONLY; **no engine behavior change**). `.2.3` was too broad for one signoff slice. KM +
   TOOLBOX probes show the Perl reference already accepts exact action/lifecycle

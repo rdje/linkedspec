@@ -1092,7 +1092,10 @@ count(drop_front(sorted_keys(merge_hash(hash_copy(base), overlay))))
 Any helper that accepts an array can receive the output of any array-returning helper. Any helper that accepts a scalar can receive the output of any scalar-returning helper.
 
 ### Fluent / Block Equivalence
-Every helper can be used in both structured-block form (`I { declare(...) }`) and fluent-chain form (`.declare(...)`). Both forms lower to identical ActionIR and produce identical behavior. This equivalence is regression-locked across all 10 families on all 7 lifecycle markers.
+For the locked ordinary helper families, structured-block form (`I { declare(...) }`) and Perl-reference
+fluent-chain form (`.declare(...)`) lower to the same ActionIR and produce the same behavior. Block-bodied
+fluent control-flow chains are narrower: the Perl reference accepts fluent `when/otherwise` block chains, while
+portable cross-backend examples should use structured attached blocks until Rust parity is landed.
 
 ### Undef Propagation
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
