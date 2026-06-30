@@ -768,6 +768,13 @@ fn build_and_run(grammar: &str, input: &str) -> Value {
     Engine::new(compiled).execute(input).expect("execute")
 }
 
+fn build_and_run_result(grammar: &str, input: &str) -> Result<Value, String> {
+    let spec = parse_spec(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    Engine::new(compiled).execute(input)
+}
+
 #[test]
 fn terse_1_1_2_auto_existing_scalar_var_works_without_declare() {
     // scalar(v) is assigned and read back with NO declare(scalar, v) -- it
@@ -1612,5 +1619,57 @@ fn terse_2_2_5_2_attached_switch_preserves_inline_value_form() {
         build_and_run(grammar, "xhello"),
         serde_json::json!([["inline", "attached"]]),
         "attached switch parsing does not claim or weaken inline lazy switch expressions"
+    );
+}
+
+// ── SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached-block while parity:
+
+#[test]
+fn terse_2_2_6_2_attached_while_counts_and_reevaluates_condition() {
+    let grammar = "Top::\n /x/ -> Done { set(count, 0); while(num_lt(scalar(count), 3)) { set(count, num_add(scalar(count), 1)) }; return(count) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([3]),
+        "attached while re-evaluates its condition after body mutation"
+    );
+}
+
+#[test]
+fn terse_2_2_6_2_attached_while_composes_with_if_and_switch_blocks() {
+    let grammar = "Top::\n /x/ -> Done { set(count, 0); set(kind, \"a\"); set(out, \"\"); while(num_lt(scalar(count), 2)) { if(true) { switch(scalar(kind)) { case(\"a\") { set(out, cat(scalar(out), \"A\")); set(kind, \"b\") } default { set(out, cat(scalar(out), \"B\")) } } } else { set(out, \"bad\") }; set(count, num_add(scalar(count), 1)) }; return(out) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["AB"]),
+        "attached while bodies can contain existing attached if/switch controls"
+    );
+}
+
+#[test]
+fn terse_2_2_6_2_attached_while_return_exits_rule_block() {
+    let grammar = "Top::\n /x/ -> Done { while(true) { return(\"done\") }; return(\"bad\") }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["done"]),
+        "return(expr) inside an attached while exits the surrounding rule action"
+    );
+}
+
+#[test]
+fn terse_2_2_6_2_attached_while_composes_inside_expression_blocks() {
+    let grammar = "Top::\n /x/ -> Done { set(counted, { set(count, 0); while(num_lt(scalar(count), 2)) { set(count, num_add(scalar(count), 1)) }; count }); set(local, { while(true) { return(\"local\") }; \"bad\" }); return(array(counted, local)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[2, "local"]]),
+        "attached while composes with expression-valued block side effects and local return"
+    );
+}
+
+#[test]
+fn terse_2_2_6_2_attached_while_has_iteration_safety_limit() {
+    let grammar = "Top::\n /x/ -> Done { while(true) { set(count, num_add(scalar(count), 1)) } }\n\nDone::\n /[a-z]+/\n";
+    let err = build_and_run_result(grammar, "xhello").unwrap_err();
+    assert!(
+        err.contains("LinkedSpec while iteration safety limit exceeded after 10000 iterations"),
+        "non-terminating attached while must hit the deterministic safety guard: {err}"
     );
 }

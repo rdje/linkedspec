@@ -9,9 +9,10 @@
 //!
 //! ```text
 //! stmts       → stmt*
-//! stmt        → attached_if | attached_switch | hash_index_assignment | array_append | scalar_assignment | expr ';'?
+//! stmt        → attached_if | attached_switch | attached_while | hash_index_assignment | array_append | scalar_assignment | expr ';'?
 //! attached_if → (if | when) '(' expr ')' '{' stmts '}' (elseif '(' expr ')' '{' stmts '}')* ((else | otherwise) '{' stmts '}')?
 //! attached_switch → switch '(' expr ')' '{' (case '(' expr ')' '{' stmts '}' | default '('? ')'? '{' stmts '}')+ '}'
+//! attached_while → while '(' expr ')' '{' stmts '}'
 //! scalar_assignment → name '=' expr      (statement only)
 //! array_append → name '+=' expr          (statement only)
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
@@ -341,6 +342,8 @@ impl<'a> Parser<'a> {
                 self.try_parse_attached_switch_block()?
             {
                 statements.append(&mut attached_switch_statements);
+            } else if let Some(attached_while_statement) = self.try_parse_attached_while_block()? {
+                statements.push(attached_while_statement);
             } else {
                 let expr = self.parse_statement_expr()?;
                 statements.push(Stmt { expr });
@@ -448,6 +451,35 @@ impl<'a> Parser<'a> {
         statements.extend(self.parse_attached_switch_outer_block()?);
         statements.push(Self::zero_arg_call_stmt("endswitch"));
         Ok(Some(statements))
+    }
+
+    fn try_parse_attached_while_block(&mut self) -> Result<Option<Stmt>, String> {
+        let start = self.pos;
+        if !self.starts_with_keyword("while") {
+            return Ok(None);
+        }
+
+        let expr = self.parse_var_or_call()?;
+        let Expr::Call { name, mut args } = expr else {
+            self.pos = start;
+            return Ok(None);
+        };
+        if name != "while" || args.len() != 1 {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.skip_whitespace();
+        if self.peek() != Some('{') {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        let body = self.parse_attached_branch_block("while")?;
+        args.push(Arg::Positional(Expr::BlockValue { block: body }));
+        Ok(Some(Stmt {
+            expr: Expr::Call { name, args },
+        }))
     }
 
     fn parse_attached_switch_outer_block(&mut self) -> Result<Vec<Stmt>, String> {
@@ -1583,6 +1615,48 @@ mod tests {
         assert!(
             err.contains("expected ';' or newline"),
             "attached switch followed by a same-line statement must still need a separator: {err}"
+        );
+    }
+
+    #[test]
+    fn parse_attached_while_block_as_lazy_statement_loop() {
+        let code = r#"set(count, 0); while(num_lt(scalar(count), 3)) { set(count, num_add(scalar(count), 1)) }; return(count)"#;
+        let block = CodeBlock::parse(code).unwrap();
+
+        assert_eq!(statement_call_names(&block), vec!["set", "while", "return"]);
+        match &block.statements[1].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "while");
+                assert_eq!(args.len(), 2);
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "num_lt");
+                        assert_eq!(args.len(), 2);
+                    }
+                    other => panic!("expected while condition call, got {other:?}"),
+                }
+                match args[1].value() {
+                    Expr::BlockValue { block } => {
+                        assert_eq!(statement_call_names(block), vec!["set"]);
+                    }
+                    other => panic!("expected attached while body block, got {other:?}"),
+                }
+            }
+            other => panic!("expected while call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_attached_while_preserves_following_statement_separator_contract() {
+        let block =
+            CodeBlock::parse(r#"while(false) { set(out, "bad") }; return("done")"#).unwrap();
+        assert_eq!(statement_call_names(&block), vec!["while", "return"]);
+
+        let err =
+            CodeBlock::parse(r#"while(false) { set(out, "bad") } return("done")"#).unwrap_err();
+        assert!(
+            err.contains("expected ';' or newline"),
+            "attached while followed by a same-line statement must still need a separator: {err}"
         );
     }
 

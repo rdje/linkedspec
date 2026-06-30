@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached while parity landed): Implemented the Rust parity
+  slice. Durable points. (1) **A loop is not another linear statement-control stack.** Attached `if` and
+  `switch` can be flattened to marker statements, but `while` must re-enter its body. The Rust parser therefore
+  claims `while(cond) { ... }` as one lazy `while` call whose second argument is the parsed body block; the
+  runtime intercepts that call at statement execution instead of trying to jump in a flattened statement list.
+  (2) **Return semantics split by context.** In lifecycle/action blocks, an active `return(expr)` inside the
+  loop stops the current rule-action block after recording the rule return. In expression-valued blocks, the
+  same surface remains block-local and returns the block value without leaking to the surrounding rule. (3)
+  **The safety contract is mirrored, not inferred.** Rust uses the same deterministic 10000-iteration limit and
+  diagnostic string as the Perl reference. (4) **The documented counter-loop pattern exposed a helper gap.**
+  Rust already had numeric arithmetic but not the documented `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/
+  `num_le` comparisons; `.2.2.6.2` adds that narrow helper family so `while(num_lt(...))` examples are truly
+  portable. (5) **Oracle parity advanced.** Fixture `terse_2_2_6_2_attached_while_blocks` brings the Rust
+  oracle corpus to 39 fixtures.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.6.1 — Perl attached while loop/safety landed): Implemented the Perl
   reference slice. Durable points. (1) **Emit an owned loop, but avoid diagnostic residue.** The DSL
   `while(cond) { ... }` lowers through ActionIR as a guarded host `for (; cond; )` block so the post-lowering

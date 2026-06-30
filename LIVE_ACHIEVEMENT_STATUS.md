@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached `while(cond) { ... }` parity landed**
+  (RUST PARSER + RUNTIME LOOP + ORACLE/BOOK/KM LOCKS). Rust now parses attached `while(cond) { ... }` as a
+  lazy statement loop, re-evaluates the condition before each iteration, executes body statements while true,
+  and composes with existing attached `if`/`switch` bodies. The same deterministic safety diagnostic is used
+  after 10000 iterations, and expression-valued block bodies keep block-local `return(expr)` semantics.
+  Rust also gained the documented numeric comparison helper family needed by the portable counter-loop pattern.
+  **Verification:** focused Rust parser `attached_while` PASS; focused Rust runtime `terse_2_2_6_2` PASS;
+  full Rust core/runtime package tests PASS; oracle corpus regenerated to **39 fixtures** with
+  `terse_2_2_6_2_attached_while_blocks`; Rust corpus oracle PASS; mdBook/KM/memory/doctrine/diff checks PASS;
+  full local CI PASS (`Files=1, Tests=992`).
+  **Frontier: `SPEC-FORMAT-TERSE.2.3`** (fluent control-flow/lifecycle-block/full composability discovery and split).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.6.1 — Perl attached `while(cond) { ... }` loop/safety landed**
   (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Perl now lowers attached `while(cond) { ... }` through ActionIR
   with no raw fallback or unresolved helper residue. Conditions are evaluated before each iteration; body

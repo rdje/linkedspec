@@ -786,11 +786,11 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 ### `while(cond) { ... }`
 - **Signature**: Attached-block statement form.
 - **Returns**: no value of its own; body statements provide side effects or `return(...)` values.
-- **Behavior**: The Perl reference evaluates `cond` before every iteration and executes the body while the
-  condition stays true. A `return(expr)` inside the body returns from the surrounding rule/action.
+- **Behavior**: Perl and Rust evaluate `cond` before every iteration and execute the body while the condition
+  stays true. A `return(expr)` inside the body returns from the surrounding rule/action.
 - **Safety**: Each lowered loop has a deterministic 10000-iteration guard. A non-terminating loop fails the
   rule instead of hanging the generated parser.
-- **Portability status**: Perl reference landed; Rust parity is tracked under `SPEC-FORMAT-TERSE.2.2.6.2`.
+- **Portability status**: Portable on Perl and Rust as of `SPEC-FORMAT-TERSE.2.2.6.2`.
 
 ### `case(val, body)`
 - **Signature**: Inline switch branch.

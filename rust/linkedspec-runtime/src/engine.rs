@@ -36,6 +36,8 @@ use linkedspec_core::expr::AccessSegment;
 use linkedspec_core::types::{CompiledSpec, ParseMode, RuntimeValue};
 use serde_json::Value;
 
+const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
+
 /// The runtime engine executes CompiledRule nodes against input text.
 pub struct Engine {
     /// The compiled spec being executed (needed for child rule lookup).
@@ -87,6 +89,17 @@ struct StatementSwitchFrame {
 enum ShapeLiteralKind {
     Array,
     Hash,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum StatementBlockFlow {
+    Continue,
+    Returned,
+}
+
+enum ValueBlockFlow {
+    Continue,
+    Returned(RuntimeValue),
 }
 
 impl SavedMatchState {
@@ -471,6 +484,17 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<(), String> {
+        self.execute_block_statements(block, ctx, rule_label, false)?;
+        Ok(())
+    }
+
+    fn execute_block_statements(
+        &self,
+        block: &linkedspec_core::expr::CodeBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+        stop_on_return_call: bool,
+    ) -> Result<StatementBlockFlow, String> {
         let mut if_stack: Vec<StatementIfFrame> = Vec::new();
         let mut switch_stack: Vec<StatementSwitchFrame> = Vec::new();
         for stmt in &block.statements {
@@ -497,6 +521,16 @@ impl Engine {
             if !Self::statement_controls_active(&if_stack, &switch_stack) {
                 continue;
             }
+            if let Some(flow) = self.execute_statement_while_loop(&stmt.expr, ctx, rule_label)? {
+                if flow == StatementBlockFlow::Returned {
+                    return Ok(flow);
+                }
+                continue;
+            }
+            if stop_on_return_call && Self::return_call_payload(&stmt.expr).is_some() {
+                self.eval_expr(&stmt.expr, ctx, rule_label)?;
+                return Ok(StatementBlockFlow::Returned);
+            }
             if self.execute_scalar_assignment_operator_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
@@ -514,7 +548,7 @@ impl Engine {
             }
             self.execute_block_statement_expr(&stmt.expr, ctx, rule_label)?;
         }
-        Ok(())
+        Ok(StatementBlockFlow::Continue)
     }
 
     fn execute_block_statement_expr(
@@ -540,6 +574,32 @@ impl Engine {
         }
         self.eval_expr(expr, ctx, rule_label)?;
         Ok(())
+    }
+
+    fn execute_statement_while_loop(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Option<StatementBlockFlow>, String> {
+        let Some((condition, body)) = Self::while_call_parts(expr) else {
+            return Ok(None);
+        };
+
+        let mut iterations = 0usize;
+        while self.eval_expr(condition, ctx, rule_label)?.as_bool() {
+            iterations += 1;
+            if iterations > LINKEDSPEC_WHILE_ITERATION_LIMIT {
+                return Err(Self::while_iteration_limit_message());
+            }
+            if self.execute_block_statements(body, ctx, rule_label, true)?
+                == StatementBlockFlow::Returned
+            {
+                return Ok(Some(StatementBlockFlow::Returned));
+            }
+        }
+
+        Ok(Some(StatementBlockFlow::Continue))
     }
 
     fn statement_controls_active(
@@ -897,12 +957,12 @@ impl Engine {
         use linkedspec_core::expr::Expr;
         match expr {
             Expr::Call { name, args } => {
-                // Lazy-evaluation calls: if/switch/elseif/else/case/default
+                // Lazy-evaluation calls: if/switch/while/elseif/else/case/default
                 // Branch bodies must NOT be evaluated eagerly — they are
                 // evaluated only when their condition matches.
                 let is_lazy = matches!(
                     name.as_str(),
-                    "if" | "switch" | "elseif" | "else" | "case" | "default"
+                    "if" | "switch" | "while" | "elseif" | "else" | "case" | "default"
                 );
                 if is_lazy {
                     return self.call_helper_lazy(name, args, ctx, rule_label);
@@ -1035,6 +1095,17 @@ impl Engine {
             if !Self::statement_controls_active(&if_stack, &switch_stack) {
                 continue;
             }
+            if let Some(flow) = self.eval_value_while_loop(&stmt.expr, ctx, rule_label)? {
+                match flow {
+                    ValueBlockFlow::Continue => {
+                        if index == last_index {
+                            return Ok(RuntimeValue::Undef);
+                        }
+                        continue;
+                    }
+                    ValueBlockFlow::Returned(value) => return Ok(value),
+                }
+            }
             if let Some(payload) = Self::return_call_payload(&stmt.expr) {
                 return match payload {
                     Some(value) => self.eval_expr(value, ctx, rule_label),
@@ -1047,6 +1118,84 @@ impl Engine {
             self.execute_block_statement_expr(&stmt.expr, ctx, rule_label)?;
         }
         Ok(RuntimeValue::Undef)
+    }
+
+    fn execute_value_block_side_effects(
+        &self,
+        block: &linkedspec_core::expr::CodeBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<ValueBlockFlow, String> {
+        let mut if_stack: Vec<StatementIfFrame> = Vec::new();
+        let mut switch_stack: Vec<StatementSwitchFrame> = Vec::new();
+        for stmt in &block.statements {
+            let parent_active = Self::statement_controls_active(&if_stack, &switch_stack);
+            if self.handle_statement_if_control(
+                &stmt.expr,
+                &mut if_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
+                continue;
+            }
+            let parent_active = Self::statement_controls_active(&if_stack, &switch_stack);
+            if self.handle_statement_switch_control(
+                &stmt.expr,
+                &mut switch_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
+                continue;
+            }
+            if !Self::statement_controls_active(&if_stack, &switch_stack) {
+                continue;
+            }
+            if let Some(flow) = self.eval_value_while_loop(&stmt.expr, ctx, rule_label)? {
+                match flow {
+                    ValueBlockFlow::Continue => continue,
+                    ValueBlockFlow::Returned(value) => return Ok(ValueBlockFlow::Returned(value)),
+                }
+            }
+            if let Some(payload) = Self::return_call_payload(&stmt.expr) {
+                return match payload {
+                    Some(value) => self
+                        .eval_expr(value, ctx, rule_label)
+                        .map(ValueBlockFlow::Returned),
+                    None => Ok(ValueBlockFlow::Returned(RuntimeValue::Undef)),
+                };
+            }
+            self.execute_block_statement_expr(&stmt.expr, ctx, rule_label)?;
+        }
+        Ok(ValueBlockFlow::Continue)
+    }
+
+    fn eval_value_while_loop(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Option<ValueBlockFlow>, String> {
+        let Some((condition, body)) = Self::while_call_parts(expr) else {
+            return Ok(None);
+        };
+
+        let mut iterations = 0usize;
+        while self.eval_expr(condition, ctx, rule_label)?.as_bool() {
+            iterations += 1;
+            if iterations > LINKEDSPEC_WHILE_ITERATION_LIMIT {
+                return Err(Self::while_iteration_limit_message());
+            }
+            match self.execute_value_block_side_effects(body, ctx, rule_label)? {
+                ValueBlockFlow::Continue => {}
+                ValueBlockFlow::Returned(value) => {
+                    return Ok(Some(ValueBlockFlow::Returned(value)));
+                }
+            }
+        }
+
+        Ok(Some(ValueBlockFlow::Continue))
     }
 
     fn eval_block_final_expr(
@@ -1097,6 +1246,32 @@ impl Engine {
             }
             _ => None,
         }
+    }
+
+    fn while_call_parts(
+        expr: &linkedspec_core::expr::Expr,
+    ) -> Option<(
+        &linkedspec_core::expr::Expr,
+        &linkedspec_core::expr::CodeBlock,
+    )> {
+        use linkedspec_core::expr::Expr;
+        let Expr::Call { name, args } = expr else {
+            return None;
+        };
+        if name != "while" || args.len() != 2 {
+            return None;
+        }
+        let Expr::BlockValue { block } = args[1].value() else {
+            return None;
+        };
+        Some((args[0].value(), block))
+    }
+
+    fn while_iteration_limit_message() -> String {
+        format!(
+            "LinkedSpec while iteration safety limit exceeded after {} iterations",
+            LINKEDSPEC_WHILE_ITERATION_LIMIT
+        )
     }
 
     /// Resolve a scalar target name from an evaluated value.
@@ -1217,7 +1392,7 @@ impl Engine {
         val.map(|v| v.to_str()).unwrap_or_default()
     }
 
-    /// Dispatch a lazy-evaluation call (if/switch/elseif/else/case/default).
+    /// Dispatch a lazy-evaluation call (if/switch/while/elseif/else/case/default).
     ///
     /// These calls receive unevaluated arg AST nodes; the handler evaluates
     /// conditions and branch bodies lazily via `self.eval_expr()`.
@@ -2312,6 +2487,27 @@ impl Engine {
                     Ok(RuntimeValue::Undef)
                 }
             }
+            "num_eq" | "num_ne" | "num_gt" | "num_ge" | "num_lt" | "num_le" => {
+                if args.len() >= 2 {
+                    match (args[0].as_number(), args[1].as_number()) {
+                        (Some(a), Some(b)) => {
+                            let result = match name {
+                                "num_eq" => a == b,
+                                "num_ne" => a != b,
+                                "num_gt" => a > b,
+                                "num_ge" => a >= b,
+                                "num_lt" => a < b,
+                                "num_le" => a <= b,
+                                _ => false,
+                            };
+                            Ok(RuntimeValue::Bool(result))
+                        }
+                        _ => Ok(RuntimeValue::Bool(false)),
+                    }
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
             "num_abs" => Ok(RuntimeValue::Number(
                 args.first()
                     .and_then(|a| a.as_number())
@@ -2845,6 +3041,30 @@ impl Engine {
                         }
                     }
                     return self.eval_expr(raw_args[i].value(), ctx, rule_label);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "while" => {
+                if raw_args.len() != 2 {
+                    return Ok(RuntimeValue::Undef);
+                }
+                let linkedspec_core::expr::Expr::BlockValue { block } = raw_args[1].value() else {
+                    return Ok(RuntimeValue::Undef);
+                };
+
+                let mut iterations = 0usize;
+                while self
+                    .eval_expr(raw_args[0].value(), ctx, rule_label)?
+                    .as_bool()
+                {
+                    iterations += 1;
+                    if iterations > LINKEDSPEC_WHILE_ITERATION_LIMIT {
+                        return Err(Self::while_iteration_limit_message());
+                    }
+                    match self.execute_value_block_side_effects(block, ctx, rule_label)? {
+                        ValueBlockFlow::Continue => {}
+                        ValueBlockFlow::Returned(value) => return Ok(value),
+                    }
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -4006,13 +4226,11 @@ ChildB:
  /(?P<word>\w+)/
  E { return(entry_has(scalar("word"))) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
-        );
+        assert!(run_5_5_1(g_present, "hi")
+            .last()
+            .unwrap()
+            .as_bool()
+            .unwrap());
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -4069,13 +4287,11 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has(scalar("word"))) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
-        );
+        assert!(run_5_5_1(g_present, "hi")
+            .last()
+            .unwrap()
+            .as_bool()
+            .unwrap());
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -4153,7 +4369,7 @@ ChildB:
             4.0
         ); // "cde" past nl → 4
         assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
-        // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
+                                                                                 // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
         assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);
     }
 

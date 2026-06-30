@@ -967,8 +967,8 @@ Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / 
 
 ## Attached `while` flow
 
-The Perl reference accepts attached-block `while` for repeated statement bodies. The condition is evaluated
-before each iteration, and body statements can update the values used by that condition:
+The Perl reference and Rust backend accept attached-block `while` for repeated statement bodies. The condition
+is evaluated before each iteration, and body statements can update the values used by that condition:
 
 ```text
 set(count, 0);
@@ -979,9 +979,8 @@ return(count);
 ```
 
 `return(expr)` inside the loop returns from the surrounding rule/action. Each loop has a deterministic
-10000-iteration guard so a non-terminating loop fails the rule instead of hanging the generated parser. Rust
-parity is tracked separately, so do not rely on attached `while` for portable cross-backend specs until that
-parity leaf lands.
+10000-iteration guard so a non-terminating loop fails instead of hanging the generated parser or Rust
+interpreter execution.
 
 ## Debug output helpers
 

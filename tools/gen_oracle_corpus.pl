@@ -622,6 +622,23 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached-block while parity ──
+    #
+    # Attached while blocks execute their body while the condition is true,
+    # re-evaluating the condition after body mutation. The deterministic
+    # non-termination safety guard is locked by focused integration tests rather
+    # than this finite oracle fixture.
+    {   case   => 'terse_2_2_6_2_attached_while_blocks',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(count, 0); while(num_lt(scalar(count), 3)) { set(count, num_add(scalar(count), 1)) }; return(count) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

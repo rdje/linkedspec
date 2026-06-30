@@ -85,17 +85,18 @@ the outer statement.
 
 ## Control-flow expression forms
 
-LinkedSpec currently supports three portable control-flow families:
+LinkedSpec currently supports four portable control-flow families:
 
 - `if/elseif/else` as attached-block statements, with `when/otherwise` as readable aliases for
   the first and fallback attached branches.
 - `if/elseif/else` as inline-composite expressions or statement-marker chains.
 - `switch/case/default` as inline-composite expressions or attached-block statements.
+- `while(cond) { ... }` as an attached-block statement loop with a deterministic iteration-safety guard.
 
 Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is portable on the
-Perl reference and Rust backend. The Perl reference also accepts attached statement-level
-`while(...) { ... }` with an explicit iteration-safety guard; Rust parity is the next tracked leaf before this
-loop form becomes portable.
+Perl reference and Rust backend. Attached statement-level `while(...) { ... }` is also portable on both
+variants; the condition is evaluated before each iteration, and non-terminating loops hit the same
+10000-iteration safety diagnostic on both implementations.
 
 ### If family: marker style
 
@@ -358,9 +359,8 @@ The current portable equivalence guarantee is intentionally narrower:
 - Inline-composite `switch(...)` evaluates the switch expression once and returns the first matching branch.
 - Attached-block `switch(...) { case(...) { ... } default { ... } }` evaluates the switch expression once
   and executes only the first matching branch or the default branch.
-
-`while(...) { ... }` is still outside the portable guarantee until Rust implements the accepted Perl
-loop-safety contract.
+- Attached-block `while(...) { ... }` evaluates its condition before every iteration, executes its body while
+  true, and fails deterministically after 10000 iterations if the condition never becomes false.
 
 ## When to use which form
 

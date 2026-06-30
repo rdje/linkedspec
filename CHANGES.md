@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.6.2 — implement Rust attached while safety
+
+**Scope:** Rust lifecycle-code parser/runtime, numeric comparison helper parity required by the documented
+counter-loop pattern, Rust integration locks, Perl-oracle corpus fixture, mdBook/KM/task-tree/live docs.
+
+**What changed:** Rust now accepts attached-block `while(cond) { ... }` as portable DSL control flow. The
+parser claims one-argument attached `while(...) { ... }` statements and stores the parsed body as a lazy block.
+The runtime re-evaluates the condition before each iteration, executes body statements while true, supports
+nested attached `if`/`switch` blocks in loop bodies, and preserves block-local `return(expr)` inside
+expression-valued blocks.
+
+**Safety:** Rust mirrors the Perl reference guard: a loop that remains true after 10000 iterations returns the
+diagnostic `LinkedSpec while iteration safety limit exceeded after 10000 iterations` instead of hanging.
+
+**Oracle:** The corpus regenerated to **39 fixtures** with `terse_2_2_6_2_attached_while_blocks`; Rust corpus
+oracle PASS.
+
+**Validation:** Focused Rust parser `attached_while` PASS; focused Rust runtime `terse_2_2_6_2` PASS; full
+Rust core package PASS; full Rust runtime package PASS; Rust corpus oracle PASS; oracle generator
+syntax/regeneration PASS; mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS
+(`Files=1, Tests=992`).
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.6.1 — implement Perl attached while safety
 
 **Scope:** Perl ActionIR control-flow lowering, scanner/contract metadata, canonical diagnostics, phase0

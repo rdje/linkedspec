@@ -6,8 +6,10 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.2.6.1` DONE; frontier `.2.2.6.2`** — Perl attached
-  `while(cond) { ... }` now lowers through ActionIR with a deterministic iteration guard; Rust parity follows. Prior
+- Last updated: `2026-06-30` (**`.2.2.6.2` DONE; frontier `.2.3`** — Rust attached
+  `while(cond) { ... }` parser/runtime parity landed with deterministic iteration safety and oracle corpus
+  **39 fixtures**; attached while is now portable on Perl and Rust. Prior **`.2.2.6.1` DONE** — Perl attached
+  `while(cond) { ... }` now lowers through ActionIR with a deterministic iteration guard. Prior
   **`.2.2.6` SPLIT/OWNED before code; frontier `.2.2.6.1`** — attached
   `while(cond) { ... }` is split into a Perl reference loop/safety contract followed by Rust parity. Prior
   **`.2.2.5.2` DONE; frontier `.2.2.6`** — Rust attached `switch/case/default` parser/runtime parity landed
@@ -1279,7 +1281,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return`
 
 - ID: `SPEC-FORMAT-TERSE.2.2`
-  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.6.1` done, frontier `.2.2.6.2`)
+  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.6.2` done, frontier `.2.3`)
   Goal: Control-flow keywords — `if/elseif/else`, `when`, `otherwise`, `default`, `while`, `switch`
   Acceptance: `if (cond) { ... } elseif (cond) { ... } else { ... }` — parens for conditions, blocks
     for bodies, blocks NEVER inside parens; `when (cond) { ... }` inline conditional; `otherwise { ... }`
@@ -1293,7 +1295,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `switch/case/default` by Perl separator/source lock and Rust parity; `.2.2.5.1` landed the Perl
     separator/source lock with compact adjacent branches lowering without host residue; `.2.2.5.2` landed Rust
     parser/runtime parity with 38 oracle fixtures. `.2.2.6` split `while` before code; `.2.2.6.1` landed the
-    Perl reference loop/safety contract and `.2.2.6.2` is the Rust parity frontier.
+    Perl reference loop/safety contract; `.2.2.6.2` landed Rust parser/runtime/oracle parity with 39 fixtures.
   Commit: `SPEC-FORMAT-TERSE.2.2.1 - split control-flow keyword surface`;
     `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`;
     `SPEC-FORMAT-TERSE.2.2.3 - implement Rust attached if blocks`;
@@ -1303,7 +1305,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `SPEC-FORMAT-TERSE.2.2.5.1 - implement Perl attached switch separator lock`;
     `SPEC-FORMAT-TERSE.2.2.5.2 - implement Rust attached switch blocks`;
     `SPEC-FORMAT-TERSE.2.2.6 - split while loop surface`;
-    `SPEC-FORMAT-TERSE.2.2.6.1 - implement Perl attached while safety`
+    `SPEC-FORMAT-TERSE.2.2.6.1 - implement Perl attached while safety`;
+    `SPEC-FORMAT-TERSE.2.2.6.2 - implement Rust attached while safety`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.1`
   Status: `done` (2026-06-30)
@@ -1417,7 +1420,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.2.5.2 - implement Rust attached switch blocks`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.6`
-  Status: `active` (split/owned before code 2026-06-30; `.2.2.6.1` done, frontier `.2.2.6.2`)
+  Status: `done` (split/owned before code 2026-06-30; `.2.2.6.1` + `.2.2.6.2` done)
   Goal: `while(cond) { ... }` statement loop container
   Acceptance: `while(cond) { ... }` executes a statement block while the condition is true, has an explicit
     forward-progress/iteration safety rule, composes with block-local `return(expr)` where appropriate, and
@@ -1425,8 +1428,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Children: `.2.2.6.1`, `.2.2.6.2`
   Verification: KM retrieval (`terse-control-flow-keyword-surface-ground-truth`,
     `spec-format-brainstorm-rounds-1-3`, `top-rule-recursion-forward-progress-guard`), TOOLBOX probes, and
-    code-read split this into a Perl reference contract and a Rust parity contract. `.2.2.6.1` has since
-    landed the Perl ActionIR loop/safety contract; Rust still has no attached statement-loop parser/runtime.
+    code-read split this into a Perl reference contract and a Rust parity contract. `.2.2.6.1` landed the Perl
+    ActionIR loop/safety contract; `.2.2.6.2` landed Rust parser/runtime/oracle parity with 39 fixtures.
   Commit: `SPEC-FORMAT-TERSE.2.2.6 - split while loop surface`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.6.1`
@@ -1445,13 +1448,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.2.6.1 - implement Perl attached while safety`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.6.2`
-  Status: `active` (frontier after `.2.2.6.1`, 2026-06-30)
+  Status: `done` (2026-06-30)
   Goal: Rust parity — attached-block `while(cond) { ... }` with the accepted Perl safety contract
   Acceptance: Rust parses and executes the `.2.2.6.1` attached-while contract, including nested composition
     with existing statement `if`/`switch` controls, expression-valued block evaluation where applicable, the
     same deterministic iteration safety behavior, and oracle parity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused Rust parser `attached_while` PASS; focused Rust runtime `terse_2_2_6_2` PASS; full
+    Rust core/runtime package tests PASS; oracle generator syntax/regeneration PASS; oracle corpus regenerated
+    to **39 fixtures** with `terse_2_2_6_2_attached_while_blocks`; Rust corpus oracle PASS. Runtime locks cover
+    counted-loop condition re-evaluation, nested attached `if`/`switch` in a loop body, surrounding-rule
+    `return(expr)` exit from a loop, expression-valued block side effects/local return, and deterministic
+    safety-limit diagnostics.
+    mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS (`Files=1, Tests=992`).
+  Commit: `SPEC-FORMAT-TERSE.2.2.6.2 - implement Rust attached while safety`
 
 - ID: `SPEC-FORMAT-TERSE.2.3`
   Status: `pending`
@@ -1551,9 +1560,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.2.5` | `done` 2026-06-30 | Attached-block `switch/case/default` split and closed: Perl separator/source lock first, Rust parser/runtime parity second. |
 | — | `SPEC-FORMAT-TERSE.2.2.5.1` | `done` 2026-06-30 | Perl reference attached-switch separator/source lock landed; compact adjacent branches lower without host residue and phase0/local CI pass. |
 | — | `SPEC-FORMAT-TERSE.2.2.5.2` | `done` 2026-06-30 | Rust attached-switch parser/runtime parity landed; oracle corpus 38 fixtures and lazy value-form switch preserved. |
-| — | `SPEC-FORMAT-TERSE.2.2.6` | `active` 2026-06-30 | `while(cond) { ... }` split/owned before code; Perl reference loop/safety landed, Rust parity remains. |
+| — | `SPEC-FORMAT-TERSE.2.2.6` | `done` 2026-06-30 | `while(cond) { ... }` split/owned before code, then closed by Perl reference loop/safety and Rust parity. |
 | 1 | `SPEC-FORMAT-TERSE.2.2.6.1` | `done` 2026-06-30 | Perl reference attached `while(cond) { ... }` with deterministic iteration safety landed. |
-| 2 | `SPEC-FORMAT-TERSE.2.2.6.2` | `active` | Rust parity for the accepted Perl attached-while loop/safety contract. |
+| 2 | `SPEC-FORMAT-TERSE.2.2.6.2` | `done` 2026-06-30 | Rust attached-while parser/runtime parity landed with deterministic iteration safety and 39 oracle fixtures. |
 | … | `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1624,6 +1633,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   evaluated before every iteration, body statements can mutate the condition state, `return(expr)` returns from
   the surrounding rule/action, and a deterministic 10000-iteration guard prevents parser hangs. Frontier moves
   to `.2.2.6.2` for Rust parity.
+
+- `2026-06-30` (**`.2.2.6.2` Rust attached-while parity landed**). Rust now parses attached
+  `while(cond) { ... }` as a lazy statement loop over a parsed body block and executes it with condition
+  re-evaluation, normal statement-body semantics, expression-valued block-local `return(expr)`, and the same
+  deterministic 10000-iteration guard as the Perl reference. The documented numeric comparison helper family
+  is now present on Rust, so the portable counter-loop pattern is covered by the 39-fixture oracle corpus.
+  Frontier moves to `.2.3`.
 
 - `2026-06-29` (**`.1.6` array end-mutation methods landed**). The accepted Round 1 array method contract is
   statement-level mutation, not value-returning fluent chaining. A single receiver-dot call with receiver
@@ -2123,6 +2139,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.5.2` | Perl syntax checks; phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust core parser tests (`cargo test -p linkedspec-core attached_switch -- --nocapture` from `rust/`); focused Rust runtime tests (`cargo test -p linkedspec-runtime terse_2_2_5_2 -- --nocapture` from `rust/`); lazy value-form switch regression (`cargo test -p linkedspec-runtime cond_switch -- --nocapture` from `rust/`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust attached `switch/case/default` parity landed. `CodeBlock::parse` normalizes attached switch branch bodies to statement controls, `Engine` gates them with a switch stack beside statement-if gating, inactive branch side effects are skipped, lazy value-form switch remains intact, and the oracle corpus now has **38 fixtures**. Phase0 PASS (`Files=1, Tests=991`); full local CI PASS. Frontier becomes `.2.2.6` (`while`). |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.6` (split/ownership) | KM retrieval (`terse-control-flow-keyword-surface-ground-truth`, `spec-format-brainstorm-rounds-1-3`, `top-rule-recursion-forward-progress-guard`); TOOLBOX lowering/descriptor probes for `while(false) { ... }` and `while(true) { ... }`; Perl code-read (`ControlFlow.pm`, `Contracts.pm`, `Scanner/FlowRules.pm`, `StatementSplit::Core`); Rust code-read (`expr.rs`, `engine.rs`) | Split and owned attached `while(cond) { ... }` before code. Perl currently lowers the attached form as raw host code (`ready=0 raw=1 fallback=1 unresolved=0`), while Rust has no attached statement-loop parser/runtime. Frontier becomes `.2.2.6.1` for the Perl reference loop/safety contract; `.2.2.6.2` will provide Rust parity. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.6.1` | Perl syntax checks; TOOLBOX lowering/descriptor/runtime/generated-source probes; `prove -q -Iperl t/phase0_regression.t`; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Perl attached `while(cond) { ... }` loop/safety landed. `ControlFlow` lowers attached while through ActionIR as a guarded host loop, scanner/contract/canonical metadata report `WHILE`, counted loops re-evaluate conditions, `return(expr)` keeps rule/action return semantics, and non-terminating loops hit the deterministic 10000-iteration guard. Phase0 PASS (`Files=1, Tests=992`); full local CI PASS. Frontier becomes `.2.2.6.2` Rust parity. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.6.2` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml attached_while`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_2_6_2`); full Rust core/runtime package tests; oracle generator syntax/regeneration; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust attached `while(cond) { ... }` parity landed. `expr.rs` parses attached while as a lazy loop over a parsed body block, `engine.rs` re-evaluates conditions and executes bodies with normal statement semantics, expression-valued blocks keep block-local `return(expr)`, and non-terminating loops use the same 10000-iteration safety diagnostic as Perl. Added oracle fixture `terse_2_2_6_2_attached_while_blocks`, bringing the corpus to **39 fixtures**. Frontier becomes `.2.3`. |
 
 ## Commit Log
 
@@ -2184,6 +2201,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.2.5.2` | `SPEC-FORMAT-TERSE.2.2.5.2 — implement Rust attached switch blocks` | Rust attached `switch/case/default` now parses and executes with first-match/default statement gating and oracle parity. Lazy value-form switch remains unchanged. Frontier becomes `.2.2.6` (`while`). |
 | `SPEC-FORMAT-TERSE.2.2.6` | `SPEC-FORMAT-TERSE.2.2.6 — split while loop surface` | No engine behavior change. Attached `while(cond) { ... }` is split before code into `.2.2.6.1` Perl reference loop/safety and `.2.2.6.2` Rust parity. Frontier becomes `.2.2.6.1`. |
 | `SPEC-FORMAT-TERSE.2.2.6.1` | `SPEC-FORMAT-TERSE.2.2.6.1 — implement Perl attached while safety` | Perl attached `while(cond) { ... }` now lowers through ActionIR with condition re-evaluation and deterministic iteration safety. Frontier becomes `.2.2.6.2` Rust parity. |
+| `SPEC-FORMAT-TERSE.2.2.6.2` | `SPEC-FORMAT-TERSE.2.2.6.2 — implement Rust attached while safety` | Rust attached `while(cond) { ... }` now parses and executes with the accepted Perl loop/safety contract, expression-block composition, numeric comparison helper parity, and a 39-fixture oracle corpus. Frontier becomes `.2.3`. |
 
 ## Changelog
 
@@ -2197,6 +2215,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Perl lowers attached while through ActionIR without raw fallback or unresolved helper residue. The accepted
   contract includes pre-iteration condition evaluation, ordinary body statement execution, surrounding-rule
   `return(expr)` semantics, and the deterministic 10000-iteration guard. Frontier moves to `.2.2.6.2`.
+
+- `2026-06-30`: **`.2.2.6.2` LANDED — Rust attached `while(cond) { ... }` parity.**
+  Rust parses attached while as a lazy loop over a parsed body block and executes it with condition
+  re-evaluation, normal statement-body semantics, expression-valued block-local `return(expr)`, and the same
+  10000-iteration safety diagnostic as Perl. Numeric comparison helper parity closes the documented counter
+  loop pattern. Oracle corpus now has **39 fixtures**. Frontier moves to `.2.3`.
 
 - `2026-06-30`: **`.2.2.5.2` LANDED — Rust attached `switch/case/default` parity.**
   `CodeBlock::parse` now lowers attached switch branch blocks into `switch` / `case` / `default` /
