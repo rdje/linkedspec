@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.2 — own Perl attached if blocks
+
+**Scope:** Task tree, Knowledge Map fact source, roadmap tracker, and live continuity docs. No engine,
+fixture, mdBook behavior, Rust behavior, or Perl runtime behavior changed in this ownership slice.
+
+**Ground truth:** TOOLBOX probes show newline-separated attached branches already lower through ActionIR with
+zero raw fallback, but compact same-line branch continuations still fall back to raw Perl:
+`if(cond) { ... } elseif(cond2) { ... } else { ... }`.
+
+**Owned implementation boundary:** `.2.2.2` owns the Perl statement-splitting seam only. The scanner and
+`ControlFlow.pm` already recognize individual attached `if`/`elseif`/`else` branch statements, and the rewrite
+pipeline already keeps implicit attached-if closures open across `elseif`/`else` continuations. The remaining
+implementation is to split a complete attached branch before a same-line `elseif`/`else` continuation while
+preserving marker-form `if(...); ... endif()` and inline-composite `if(...)`.
+
+**Validation:** TOOLBOX lowering/metadata probes completed; Perl code-read completed; Knowledge Map
+regenerate/check PASS; memory/doctrine/diff checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.1 — split control-flow keyword surface
 
 **Scope:** Task tree, Knowledge Map, mdBook control-flow documentation, roadmap tracker, and live continuity

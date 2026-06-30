@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.2 — Perl attached-if ownership): Owned the Perl attached-block
+  `if/elseif/else` implementation before code. Durable points. (1) **Attached branch blocks are partially
+  implemented already.** Newline-separated `if(cond) { ... }`, `elseif(cond) { ... }`, and `else { ... }`
+  statements lower through ActionIR with no raw fallback. (2) **The compact same-line form is the gap.**
+  `if(cond) { ... } elseif(cond2) { ... } else { ... }` remains one RAW_PERL statement because the statement
+  splitter does not break a complete attached branch before same-line `elseif`/`else`. (3) **The implementation
+  seam is the splitter, not a new flow lowerer.** `Scanner::FlowRules` and `ControlFlow` already parse/lower
+  individual attached branch statements, and `RewritePipeline` already preserves implicit closures across
+  `elseif`/`else` continuations. (4) **Existing branch forms are invariants.** Marker-form
+  `if(cond); ... endif()` and inline-composite `if(...)` behavior must remain unchanged.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.1 — control-flow keyword surface split): Split Round 2 control flow
   before code. Durable points. (1) **Current portable branch control is narrower than older book wording.**
   Portable today means statement-marker `if(cond); ... elseif(cond); else(); ... endif()` plus inline-composite

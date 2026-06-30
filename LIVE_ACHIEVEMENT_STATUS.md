@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.2 — Perl attached-block if owned before code**
+  (DOCS/TREE/KM ONLY; **no engine behavior change**). TOOLBOX probes narrowed the Perl implementation boundary:
+  newline-separated attached branches already lower through ActionIR, but compact same-line chains such as
+  `if(cond) { ... } elseif(cond2) { ... } else { ... }` still fall back to raw Perl. Code-read points the
+  implementation at `StatementSplit::Core`; scanner/lowering/rewrite support for individual attached branch
+  statements already exists.
+  **Verification:** TOOLBOX lowering/metadata probes; Perl code-read; Knowledge Map regenerate/check PASS;
+  memory/doctrine/diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.2`** (implementation of the same-line attached-branch split).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.1 — control-flow keyword surface split**
   (DOCS/TREE/KM/BOOK ALIGNMENT; **no engine behavior change**). Round 2 control flow is now decomposed into
   signoff-sized leaves. Current portable support is statement-marker `if(cond); ... elseif(cond); else();
