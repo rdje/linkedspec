@@ -574,6 +574,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.2.2.3 — Rust attached-block if parity ──
+    #
+    # Attached if/elseif/else branch blocks are a terse statement spelling for
+    # the same control markers the Rust runtime already executes.
+    {   case   => 'terse_2_2_3_attached_if_blocks',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { if(false) { return("bad") } elseif(true) { return("yes") } else { return("no") } }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

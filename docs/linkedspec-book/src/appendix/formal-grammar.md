@@ -628,7 +628,7 @@ physical line require semicolons.
 
 ## 9. Attached-Block Control Flow
 
-Within lifecycle blocks, the current portable branch-control syntax uses marker statements and inline
+Within lifecycle blocks, portable branch control includes attached-block `if`, marker statements, and inline
 composite expressions. Marker-style `if` is implemented on the Perl reference and Rust backend:
 
 ```
@@ -655,12 +655,12 @@ E {
 }
 ```
 
-Round 2 is extending this surface. The Perl reference now accepts attached-block
-`if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations, but Rust parity
-is still pending, so marker-style `if` remains the portable cross-backend contract. `when(...) { ... }
-otherwise { ... }`, statement-level `switch(...) { case(...) { ... } default { ... } }`, and
-`while(...) { ... }` remain tracked implementation leaves. Zero-argument markers that are already implemented,
-such as `else`/`endif`, accept bare-keyword form in addition to parenthesized form.
+Round 2 is extending this surface. Perl and Rust now accept attached-block
+`if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations; Rust
+normalizes that syntax to the existing marker-control sequence. `when(...) { ... } otherwise {
+... }`, statement-level `switch(...) { case(...) { ... } default { ... } }`, and `while(...) { ... }`
+remain tracked implementation leaves. Zero-argument markers that are already implemented, such as
+`else`/`endif`, accept bare-keyword form in addition to parenthesized form.
 
 ## 10. Constraints and Validation
 

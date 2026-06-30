@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.3 — Rust attached-if landed): Implemented Rust parity for attached-block
+  `if/elseif/else`. Durable points. (1) **Parser normalization was sufficient.** `CodeBlock::parse` now claims
+  only one-argument attached `if(...) { ... }` / `elseif(...) { ... }` branches and bare `else { ... }`, then
+  emits the existing marker-control statement sequence with an implicit `endif`. (2) **Runtime stayed stable.**
+  `Engine::handle_statement_if_control` already gates `if` / `elseif` / `else` / `endif` in lifecycle blocks
+  and block-value evaluation, so no separate Rust branch runtime was added. (3) **Separator rules still hold.**
+  A same-line ordinary statement after the final attached branch still requires `;`; branch continuations are
+  the only same-line adjacency accepted by the attached parser. (4) **Existing forms remain invariants.**
+  Marker-form `if(cond); ... endif()` and inline-composite lazy `if(...)` are preserved and locked by focused
+  runtime tests.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.3 — Rust attached-if ownership): Owned Rust parity before code. Durable
   points. (1) **The parser is the missing seam.** `CodeBlock::parse` handles statement separators and
   expression-valued blocks, but not attached statement branches such as `if(cond) { ... } elseif(cond2)

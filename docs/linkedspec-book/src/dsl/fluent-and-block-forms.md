@@ -85,14 +85,15 @@ the outer statement.
 
 ## Control-flow expression forms
 
-LinkedSpec currently supports two portable control-flow families:
+LinkedSpec currently supports three portable control-flow families:
 
+- `if/elseif/else` as attached-block statements.
 - `if/elseif/else` as inline-composite expressions or statement-marker chains.
 - `switch/case/default` as inline-composite expressions.
 
-Attached-block `if(...) { ... }`, `when(...) { ... } otherwise { ... }`, statement-level
-`switch(...) { case(...) { ... } default { ... } }`, and `while(...) { ... }` are Round 2 implementation
-work and should not be used as the portable contract yet.
+`when(...) { ... } otherwise { ... }`, statement-level `switch(...) { case(...) { ... }
+default { ... } }`, and `while(...) { ... }` are Round 2 implementation work and should not be used as the
+portable contract yet.
 
 ### If family: marker style
 
@@ -184,9 +185,8 @@ Inline composite is also available as the final call on a fluent chain:
 
 ### If family: attached block
 
-Attached-block `if` is the Round 2 target syntax. The Perl reference accepts this form, including compact
-same-line `} elseif/else {` continuations, but it is not the portable contract until Rust parity lands in
-`SPEC-FORMAT-TERSE.2.2.3`:
+Attached-block `if` is the portable block-bodied statement form on Perl and Rust. It accepts compact
+same-line `} elseif/else {` continuations and lowers to the same branch-control model as the marker style:
 
 ```text
 -> child {
@@ -201,7 +201,8 @@ same-line `} elseif/else {` continuations, but it is not the portable contract u
 }
 ```
 
-Use the marker form above for portable cross-backend specs today.
+If a statement follows the attached chain on the same physical line, keep the normal separator rule: add a
+semicolon after the closing `}` or put the next statement on a new line.
 
 ### Switch family: marker style
 

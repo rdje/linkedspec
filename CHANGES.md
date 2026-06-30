@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.3 — implement Rust attached if blocks
+
+**Scope:** Rust lifecycle-code parser, Rust runtime integration tests, Perl-oracle corpus fixture, mdBook
+control-flow documentation, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now accepts portable attached-block `if/elseif/else` statement chains:
+`if(cond) { ... } elseif(cond2) { ... } else { ... }`.
+
+**Implementation:** `CodeBlock::parse` recognizes attached branch chains before ordinary statement-expression
+parsing and normalizes them to the existing marker-control sequence (`if`, branch statements, `elseif`, branch
+statements, `else`, branch statements, `endif`). Runtime branch gating reuses
+`Engine::handle_statement_if_control`; no second branch runtime was added.
+
+**Compatibility:** Existing marker-form `if(cond); ... elseif(cond2); else(); ... endif()` and inline-composite
+lazy `if(...)` behavior is unchanged. The normal separator contract still applies after an attached chain: a
+following same-line statement needs a semicolon after the final `}`.
+
+**Validation:** Focused Rust core parser `attached_if` tests PASS; focused Rust runtime `terse_2_2_3` tests
+PASS; oracle corpus regenerated to **36 fixtures** with `terse_2_2_3_attached_if_blocks`; corpus oracle PASS.
+mdBook and Knowledge Map updated.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.3 — own Rust attached if blocks
 
 **Scope:** Task tree, Knowledge Map fact source, roadmap tracker, and live continuity docs. No Rust code,

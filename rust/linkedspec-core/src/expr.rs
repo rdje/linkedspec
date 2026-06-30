@@ -9,7 +9,8 @@
 //!
 //! ```text
 //! stmts       → stmt*
-//! stmt        → hash_index_assignment | array_append | scalar_assignment | expr ';'?
+//! stmt        → attached_if | hash_index_assignment | array_append | scalar_assignment | expr ';'?
+//! attached_if → if '(' expr ')' '{' stmts '}' (elseif '(' expr ')' '{' stmts '}')* (else '{' stmts '}')?
 //! scalar_assignment → name '=' expr      (statement only)
 //! array_append → name '+=' expr          (statement only)
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
@@ -333,8 +334,12 @@ impl<'a> Parser<'a> {
                 self.advance(3);
                 self.skip_whitespace();
             }
-            let expr = self.parse_statement_expr()?;
-            statements.push(Stmt { expr });
+            if let Some(mut attached_if_statements) = self.try_parse_attached_if_chain()? {
+                statements.append(&mut attached_if_statements);
+            } else {
+                let expr = self.parse_statement_expr()?;
+                statements.push(Stmt { expr });
+            }
             let has_line_break = self.skip_statement_separator_whitespace();
             if self.peek() == Some(';') {
                 self.advance(1);
@@ -366,6 +371,120 @@ impl<'a> Parser<'a> {
         }
         self.pos = start;
         self.parse_expr()
+    }
+
+    fn try_parse_attached_if_chain(&mut self) -> Result<Option<Vec<Stmt>>, String> {
+        let start = self.pos;
+        let Some((if_expr, if_body)) = self.try_parse_attached_conditional_branch("if")? else {
+            self.pos = start;
+            return Ok(None);
+        };
+
+        let mut statements = Vec::new();
+        statements.push(Stmt { expr: if_expr });
+        statements.extend(if_body.statements);
+
+        loop {
+            let before_separator = self.pos;
+            self.skip_whitespace();
+
+            if let Some((elseif_expr, elseif_body)) =
+                self.try_parse_attached_conditional_branch("elseif")?
+            {
+                statements.push(Stmt { expr: elseif_expr });
+                statements.extend(elseif_body.statements);
+                continue;
+            }
+
+            if let Some(else_body) = self.try_parse_attached_else_branch()? {
+                statements.push(Self::zero_arg_call_stmt("else"));
+                statements.extend(else_body.statements);
+                break;
+            }
+
+            self.pos = before_separator;
+            break;
+        }
+
+        statements.push(Self::zero_arg_call_stmt("endif"));
+        Ok(Some(statements))
+    }
+
+    fn try_parse_attached_conditional_branch(
+        &mut self,
+        keyword: &str,
+    ) -> Result<Option<(Expr, CodeBlock)>, String> {
+        let start = self.pos;
+        if !self.starts_with_keyword(keyword) {
+            return Ok(None);
+        }
+
+        let expr = self.parse_var_or_call()?;
+        let Expr::Call { name, args } = &expr else {
+            self.pos = start;
+            return Ok(None);
+        };
+        if name != keyword || args.len() != 1 {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.skip_whitespace();
+        if self.peek() != Some('{') {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        let body = self.parse_attached_branch_block("if/elseif")?;
+        Ok(Some((expr, body)))
+    }
+
+    fn try_parse_attached_else_branch(&mut self) -> Result<Option<CodeBlock>, String> {
+        let start = self.pos;
+        if !self.starts_with_keyword("else") {
+            return Ok(None);
+        }
+
+        self.advance("else".len());
+        self.skip_whitespace();
+        if self.peek() != Some('{') {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.parse_attached_branch_block("else").map(Some)
+    }
+
+    fn parse_attached_branch_block(&mut self, label: &str) -> Result<CodeBlock, String> {
+        let start = self.pos;
+        let (payload_start, payload_end, after_close) = self.scan_brace_payload_bounds()?;
+        let payload = &self.src[payload_start..payload_end];
+        let block = CodeBlock::parse(payload).map_err(|e| {
+            format!("invalid attached {label} branch block starting at position {start}: {e}")
+        })?;
+        self.pos = after_close;
+        Ok(block)
+    }
+
+    fn starts_with_keyword(&self, keyword: &str) -> bool {
+        let remaining = self.remaining();
+        if !remaining.starts_with(keyword) {
+            return false;
+        }
+        let after = &remaining[keyword.len()..];
+        after
+            .chars()
+            .next()
+            .is_none_or(|ch| !ch.is_alphanumeric() && ch != '_')
+    }
+
+    fn zero_arg_call_stmt(name: &str) -> Stmt {
+        Stmt {
+            expr: Expr::Call {
+                name: name.to_string(),
+                args: Vec::new(),
+            },
+        }
     }
 
     fn try_parse_hash_index_assignment_statement(&mut self) -> Result<Option<Expr>, String> {
@@ -1008,7 +1127,7 @@ impl<'a> Parser<'a> {
             if ch == b'/' {
                 let pattern = self.src[start..self.pos].to_string();
                 self.advance(1); // consume closing '/'
-                                 // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
+                // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
                 self.skip_whitespace();
                 while self.pos < self.src.len() {
                     let c = self.src.as_bytes()[self.pos];
@@ -1122,6 +1241,73 @@ mod tests {
             }
             _ => panic!("expected return call"),
         }
+    }
+
+    fn statement_call_names(block: &CodeBlock) -> Vec<&str> {
+        block
+            .statements
+            .iter()
+            .map(|stmt| match &stmt.expr {
+                Expr::Call { name, .. } => name.as_str(),
+                other => panic!("expected call statement, got {other:?}"),
+            })
+            .collect()
+    }
+
+    #[test]
+    fn parse_attached_if_blocks_as_statement_controls() {
+        let code = r#"if(false) { return("bad") } elseif(true) { set(out, "yes"); return(out) } else { return("no") }"#;
+        let block = CodeBlock::parse(code).unwrap();
+
+        assert_eq!(
+            statement_call_names(&block),
+            vec![
+                "if", "return", "elseif", "set", "return", "else", "return", "endif"
+            ]
+        );
+        match &block.statements[0].expr {
+            Expr::Call { args, .. } => {
+                assert_eq!(args.len(), 1);
+                assert!(matches!(
+                    args[0].value(),
+                    Expr::BooleanLiteral { value: false }
+                ));
+            }
+            other => panic!("expected if call, got {other:?}"),
+        }
+        match &block.statements[2].expr {
+            Expr::Call { args, .. } => {
+                assert_eq!(args.len(), 1);
+                assert!(matches!(
+                    args[0].value(),
+                    Expr::BooleanLiteral { value: true }
+                ));
+            }
+            other => panic!("expected elseif call, got {other:?}"),
+        }
+        match &block.statements[7].expr {
+            Expr::Call { args, .. } => assert!(args.is_empty()),
+            other => panic!("expected endif call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_attached_if_preserves_following_statement_separator_contract() {
+        let block =
+            CodeBlock::parse(r#"if(true) { set(out, "a") } else { set(out, "b") }; return(out)"#)
+                .unwrap();
+        assert_eq!(
+            statement_call_names(&block),
+            vec!["if", "set", "else", "set", "endif", "return"]
+        );
+
+        let err =
+            CodeBlock::parse(r#"if(true) { set(out, "a") } else { set(out, "b") } return(out)"#)
+                .unwrap_err();
+        assert!(
+            err.contains("expected ';' or newline"),
+            "attached if followed by a same-line statement must still need a separator: {err}"
+        );
     }
 
     #[test]

@@ -1,6 +1,6 @@
 ---
 id: terse-rust-attached-if-parser-runtime-seam
-title: Rust attached-block if parity is a parser normalization seam over existing statement if runtime gating
+title: Rust attached-block if parity landed as parser normalization over existing statement if runtime gating
 answers:
   - "what does SPEC-FORMAT-TERSE.2.2.3 own"
   - "where should Rust attached if be implemented"
@@ -9,12 +9,12 @@ answers:
 date: 2026-06-30
 status: current
 tags: [spec-format-terse, rust-parity, control-flow, parser, runtime]
-evidence: "SPEC-FORMAT-TERSE.2.2.3 ownership code-read. `rust/linkedspec-core/src/expr.rs` `CodeBlock::parse` parses semicolon/newline-separated statement expressions and expression-valued `{ ... }` blocks, but has no attached statement-block representation for `if(...) { ... } elseif(...) { ... } else { ... }`. `rust/linkedspec-runtime/src/engine.rs` already gates marker-form branch statements in `execute_block()` and `eval_block_value()` via `handle_statement_if_control`, which handles one-arg `if`/`elseif` and zero-arg `else`/`endif`. Therefore Rust attached-if parity should parse/normalize attached branch syntax into that existing statement-control model rather than add a second branch runtime. Focused existing parser smoke `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core parse_lifecycle_block_content` passed with known nested `rgx` warning noise."
-reverify: "rg -n 'fn parse_block|fn parse_statement_expr|fn parse_brace_expr|handle_statement_if_control|execute_block\\(|eval_block_value' rust/linkedspec-core/src/expr.rs rust/linkedspec-runtime/src/engine.rs && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core parse_lifecycle_block_content"
+evidence: "SPEC-FORMAT-TERSE.2.2.3 implementation. `rust/linkedspec-core/src/expr.rs` now parses attached statement branches `if(...) { ... } elseif(...) { ... } else { ... }` before ordinary statement-expression parsing, normalizes them to existing `if`/`elseif`/`else`/`endif` call statements, and preserves the separator contract after the final attached block. `rust/linkedspec-runtime/src/engine.rs` needed no new branch runtime because marker-form branch statements are already gated in `execute_block()` and `eval_block_value()` via `handle_statement_if_control`. Focused parser/runtime/oracle checks passed: core `attached_if`, runtime `terse_2_2_3`, and corpus oracle with fixture `terse_2_2_3_attached_if_blocks`."
+reverify: "cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core attached_if && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_2_3 && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
 ---
 
-Rust parity for Perl `.2.2.2` attached-block `if/elseif/else` is not primarily a new runtime feature.
-The runtime already has branch gating for the marker sequence:
+Rust parity for Perl `.2.2.2` attached-block `if/elseif/else` landed without adding a second runtime branch
+engine. The runtime already had branch gating for the marker sequence:
 
 ```text
 if(cond);
@@ -26,12 +26,12 @@ else();
 endif()
 ```
 
-The missing seam is parsing attached branch bodies inside `CodeBlock::parse`:
+The implementation seam was parsing attached branch bodies inside `CodeBlock::parse`:
 
 ```text
 if(cond) { ... } elseif(cond2) { ... } else { ... }
 ```
 
-The implementation should preserve the existing lazy inline-composite `if(...)` helper and marker-form
-`if(...); ... endif()` behavior, while normalizing attached branch bodies into a statement sequence the current
-runtime can execute.
+The parser now preserves the existing lazy inline-composite `if(...)` helper and marker-form
+`if(...); ... endif()` behavior, while normalizing attached branch bodies into the statement sequence the
+current runtime already executes.

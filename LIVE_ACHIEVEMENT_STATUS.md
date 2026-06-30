@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.3 — Rust attached-block if landed**
+  (RUST PARSER + RUNTIME LOCKS + ORACLE/KM/BOOK). Rust now accepts portable attached-block `if/elseif/else`
+  chains: `if(cond) { ... } elseif(cond2) { ... } else { ... }`. `CodeBlock::parse` normalizes attached
+  branch bodies into the existing marker-control sequence with an implicit `endif`, and the runtime reuses
+  `Engine::handle_statement_if_control` instead of adding a second branch engine. Marker-form and
+  inline-composite `if` behavior remain unchanged, and a same-line statement after the final attached branch
+  still requires `;`.
+  **Verification:** focused Rust core parser `attached_if` PASS; focused Rust runtime `terse_2_2_3` PASS;
+  oracle corpus regenerated to **36 fixtures** and corpus oracle PASS; mdBook/KM/live docs updated.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.4`** (`when/otherwise` conditional aliases; own before code).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.3 — Rust attached-block if owned before code**
   (DOCS/TREE/KM ONLY; **no engine behavior change**). Rust parity for the Perl `.2.2.2` attached-if contract is
   now scoped. `CodeBlock::parse` lacks attached branch parsing, while runtime already has marker-form branch

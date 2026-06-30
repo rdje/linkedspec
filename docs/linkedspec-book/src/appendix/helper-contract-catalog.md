@@ -756,15 +756,21 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
   runs when no prior branch matched, and `endif()` closes the chain.
 - **Sugar**: `else` and `endif` bare-keyword forms are equivalent to `else()` and `endif()`.
 
+### `if(cond) { ... } elseif(cond2) { ... } else { ... }`
+- **Signature**: Attached-block statement form.
+- **Returns**: no value of its own; branch statements provide side effects or `return(...)` values.
+- **Behavior**: Conditions are evaluated left-to-right. Only statements in the active branch execute. The
+  implicit close at the end of the attached chain is equivalent to `endif()`.
+- **Sugar**: Compact continuations such as `} elseif(cond2) {` and `} else {` are accepted. A following
+  same-line statement still needs the normal semicolon separator after the final `}`.
+
 ### `switch(expr, case(val, body), default(body))`
 - **Signature**: Inline composite form.
 - **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
 - **Behavior**: Evaluates `expr` once and compares it to each `case(val)` in order.
 
-Attached-block `if(...) { ... } elseif(...) { ... } else { ... }` is available on the Perl reference, including
-compact same-line branch continuations, but Rust parity is still pending. `when(...) { ... } otherwise { ... }`,
-statement-level `switch(...) { case(...) { ... } default { ... } }`, and `while(...) { ... }` are Round 2
-implementation work, not the current portable helper contract.
+`when(...) { ... } otherwise { ... }`, statement-level `switch(...) { case(...) { ... } default { ... } }`,
+and `while(...) { ... }` are Round 2 implementation work, not the current portable helper contract.
 
 ### `case(val, body)`
 - **Signature**: Inline switch branch.

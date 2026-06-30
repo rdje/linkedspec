@@ -1524,3 +1524,25 @@ fn terse_2_1_4_expression_valued_blocks_compose_with_early_return_hash() {
         "early-return block values compose while hash-literal payloads keep shape"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.2.3 — Rust attached-block if parity:
+
+#[test]
+fn terse_2_2_3_attached_if_elseif_else_runs_selected_branch() {
+    let grammar = "Top::\n /x/ -> Done { if(false) { return(\"bad\") } elseif(true) { return(\"yes\") } else { return(\"no\") } }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["yes"]),
+        "attached-block if/elseif/else executes the selected branch"
+    );
+}
+
+#[test]
+fn terse_2_2_3_attached_if_preserves_marker_and_inline_if_forms() {
+    let grammar = "Top::\n /x/ -> Done { if(false); return(\"bad\"); else(); set(marker, \"marker\"); endif(); set(inline, if(false, \"bad\", \"inline\")); return(array(marker, inline)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["marker", "inline"]]),
+        "attached-block parsing does not claim marker-form or inline if expressions"
+    );
+}

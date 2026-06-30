@@ -6,9 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.2.3` OWNED before code** — Rust attached-block `if/elseif/else`
-  parity narrowed to `CodeBlock::parse` attached statement parsing plus existing runtime branch gating.
-  Prior **`.2.2.2` DONE; frontier `.2.2.3`** — Perl attached-block `if/elseif/else` compact same-line branch
+- Last updated: `2026-06-30` (**`.2.2.3` DONE; frontier `.2.2.4`** — Rust attached-block
+  `if/elseif/else` parity landed by parsing attached branch bodies into the existing statement-control model,
+  with oracle parity locked. Prior **`.2.2.3` OWNED before code** — Rust attached-block `if/elseif/else`
+  parity narrowed to `CodeBlock::parse` attached statement parsing plus existing runtime branch gating. Prior
+  **`.2.2.2` DONE; frontier `.2.2.3`** — Perl attached-block `if/elseif/else` compact same-line branch
   continuations now split, lower through ActionIR, and run without raw fallback. Prior **`.2.2.2` OWNED before
   code** — same-line
   `} elseif/else {` was narrowed to the statement-splitting seam. Prior **`.2.2.1` DONE;
@@ -1263,17 +1265,18 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return`
 
 - ID: `SPEC-FORMAT-TERSE.2.2`
-  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.3` owned before code)
+  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.3` Rust parity done; frontier `.2.2.4`)
   Goal: Control-flow keywords — `if/elseif/else`, `when`, `otherwise`, `default`, `while`, `switch`
   Acceptance: `if (cond) { ... } elseif (cond) { ... } else { ... }` — parens for conditions, blocks
     for bodies, blocks NEVER inside parens; `when (cond) { ... }` inline conditional; `otherwise { ... }`
     and `default { ... }` take no parens/args; `while (cond) { ... }`; `switch (expr) { case(v) { ... }
     default { ... } }`.
   Children: `.2.2.1`, `.2.2.2`, `.2.2.3`, `.2.2.4`, `.2.2.5`, `.2.2.6`
-  Verification: `.2.2.1` split/ground truth done; `.2.2.2` Perl attached-block if done; `.2.2.3` ownership
-    narrowed Rust parity to parser support for attached branch statements plus existing runtime gating.
+  Verification: `.2.2.1` split/ground truth done; `.2.2.2` Perl attached-block if done; `.2.2.3` Rust parity
+    done by normalizing attached branch statements to the existing marker-control runtime.
   Commit: `SPEC-FORMAT-TERSE.2.2.1 - split control-flow keyword surface`;
-    `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`; `.2.2.3` pending
+    `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`;
+    `SPEC-FORMAT-TERSE.2.2.3 - implement Rust attached if blocks`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.1`
   Status: `done` (2026-06-30)
@@ -1305,18 +1308,18 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.3`
-  Status: `active` (owned before code 2026-06-30)
+  Status: `done` (2026-06-30)
   Goal: Rust parity — attached-block `if/elseif/else`
   Acceptance: Rust parses and executes the accepted `.2.2.2` attached-block if contract with the same branch
     gating and oracle parity, while keeping inline-composite and marker-form `if` behavior unchanged.
-  Verification: Rust code-read shows `CodeBlock::parse` currently parses semicolon/newline separated expressions
-    and expression-valued blocks, but has no attached statement-block parser for `if(...) { ... } elseif(...)
-    { ... } else { ... }`. Runtime already gates statement-marker branches through
-    `Engine::handle_statement_if_control` in lifecycle blocks and block-value evaluation, so the implementation
-    should parse attached branches into equivalent statement-control blocks rather than adding a second branch
-    runtime. Focused existing Rust parser smoke PASS (`parse_lifecycle_block_content`), with known nested
-    `rgx` warning noise.
-  Commit: `SPEC-FORMAT-TERSE.2.2.3 - own Rust attached if blocks`; implementation commit pending
+  Verification: `CodeBlock::parse` now recognizes attached `if(...) { ... } elseif(...) { ... } else { ... }`
+    statement chains and emits the existing `if` / branch-body / `elseif` / branch-body / `else` / branch-body /
+    `endif` marker sequence. Runtime branch gating reused `Engine::handle_statement_if_control`; no second Rust
+    branch runtime was added. Focused Rust core `attached_if` tests PASS; focused Rust runtime `terse_2_2_3`
+    tests PASS; oracle corpus regenerated to **36 fixtures** with `terse_2_2_3_attached_if_blocks`; corpus oracle
+    PASS. mdBook/KM/live docs updated; marker-form and inline-composite `if` preserved.
+  Commit: `SPEC-FORMAT-TERSE.2.2.3 - own Rust attached if blocks`;
+    `SPEC-FORMAT-TERSE.2.2.3 - implement Rust attached if blocks`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.4`
   Status: `pending`
@@ -1436,7 +1439,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.1.4` | `done` 2026-06-30 | Block-local early `return(expr)` landed for expression-valued blocks on Perl and Rust; `.2.1` is closed. |
 | — | `SPEC-FORMAT-TERSE.2.2.1` | `done` 2026-06-30 | Control-flow keyword surface split before code. Current portable support is marker/composite `if` plus inline-composite `switch`; attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` are separate implementation leaves. |
 | — | `SPEC-FORMAT-TERSE.2.2.2` | `done` 2026-06-30 | Perl reference attached-block `if/elseif/else` without raw fallback — LANDED. |
-| 1 | `SPEC-FORMAT-TERSE.2.2.3` | `active` | Rust parity for attached-block `if/elseif/else` — OWNED before code; implementation pending. |
+| — | `SPEC-FORMAT-TERSE.2.2.3` | `done` 2026-06-30 | Rust parity for attached-block `if/elseif/else` landed with parser/runtime/oracle locks; attached `if` is now portable on Perl and Rust. |
+| 1 | `SPEC-FORMAT-TERSE.2.2.4` | `pending` | `when/otherwise` conditional aliases — next leaf; own before code. |
 | … | `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1970,6 +1974,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core expression_valued_block`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_3`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); full Rust core package; full Rust runtime package; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine/diff checks; `bash tools/run_ci_local.sh` | Rust expression-valued block parity landed. `Expr::BlockValue` plus `parse_brace_expr()` preserve hash literals and parse non-empty non-fat-arrow braces as block values; runtime `eval_block_value()` returns the final expression or final `return(expr)` payload. Added `terse_2_1_3_expression_valued_blocks`, bringing the oracle corpus to **34 fixtures**. Full local CI PASS (`991` phase0 tests). Frontier becomes `.2.1.4`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.1.4` | Perl syntax checks (`MethodLowering.pm`, phase0, oracle generator); TOOLBOX lowering/runtime probes for non-final `return(expr)` block values; focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_4_expression_valued_block`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Block-local early `return(expr)` landed for expression-valued blocks on Perl and Rust. Perl emits a guarded `do { ... }` value wrapper for blocks with a non-final return and keeps compact output for existing core forms. Rust `eval_block_value()` now returns an active `return(expr)` payload immediately without setting the rule return channel. Added `terse_2_1_4_expression_valued_block_early_return`, bringing the oracle corpus to **35 fixtures**. Frontier becomes `.2.2`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.1` (split) | KM retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-statement-separator-contract`, `terse-primitive-literal-parity`, `scanner-rule-family-architecture`); TOOLBOX `call_spec_handler_subst` probes for attached `if`, `when`/`otherwise`, `while`, and attached `switch`; `LinkedSpec::Get(..., return_descriptor => 1)` metadata probes for ActionIR readiness/raw fallback; Perl code-read (`ControlFlow.pm`, `FlowExpr.pm`, `Scanner/FlowRules.pm`); Rust code-read (`expr.rs`, `engine.rs`); focused Rust parser test `parse_lifecycle_block_content` | Split `.2.2` before code. Current portable contract is statement-marker `if(cond); ... elseif(cond); else(); ... endif()` plus inline-composite lazy `if`/`switch`. Perl attached `if`, `when`/`otherwise`, and `while` are not ActionIR-ready; Rust has no attached statement-block parser/runtime for the new keyword surface. mdBook/KM/live docs aligned; frontier becomes `.2.2.2`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.2` | Perl syntax checks; TOOLBOX compact attached-if lowering/metadata/runtime probes; phase0 (`prove -q -Iperl t/phase0_regression.t`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Perl attached-block `if/elseif/else` landed. `StatementSplit::Core` splits compact same-line `} elseif/else {` branch continuations so the existing ActionIR control-flow lowering can emit the selected branch without raw fallback. Frontier becomes `.2.2.3` Rust parity. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core attached_if`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_2_3`); `perl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks | Rust attached-block `if/elseif/else` parity landed. `CodeBlock::parse` normalizes attached branch bodies into the existing marker-control sequence and reuses `handle_statement_if_control` at runtime. Added oracle fixture `terse_2_2_3_attached_if_blocks`, bringing the corpus to **36 fixtures**. Attached `if` is now portable on Perl and Rust; frontier becomes `.2.2.4` for `when/otherwise`. |
 
 ## Commit Log
 
@@ -2023,8 +2029,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.2.2` | `SPEC-FORMAT-TERSE.2.2.2 — own Perl attached if blocks` | No engine behavior change. Perl attached-block if ownership narrowed the implementation to the same-line branch-continuation splitter: newline-separated `if { ... }` / `elseif { ... }` / `else { ... }` clauses are already ActionIR-ready, while compact `} elseif/else {` chains remain raw. Frontier remains `.2.2.2` implementation. |
 | `SPEC-FORMAT-TERSE.2.2.2` | `SPEC-FORMAT-TERSE.2.2.2 — implement Perl attached if blocks` | Perl compact attached-block `if/elseif/else` now splits, lowers, and runs without raw fallback. Marker-form and inline-composite `if` behavior is unchanged. Frontier becomes `.2.2.3` for Rust parity. |
 | `SPEC-FORMAT-TERSE.2.2.3` | `SPEC-FORMAT-TERSE.2.2.3 — own Rust attached if blocks` | No engine behavior change. Rust parity is owned before code: parse attached `if`/`elseif`/`else` branch bodies into the existing statement-control model, reusing `handle_statement_if_control` rather than adding a second branch runtime. Frontier remains `.2.2.3` implementation. |
+| `SPEC-FORMAT-TERSE.2.2.3` | `SPEC-FORMAT-TERSE.2.2.3 — implement Rust attached if blocks` | Rust `CodeBlock::parse` now normalizes attached `if/elseif/else` branch bodies to the existing marker-control sequence; runtime branch gating is reused unchanged. Added parser/runtime/oracle locks; attached `if` is now portable on Perl and Rust. Frontier becomes `.2.2.4`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.2.3` LANDED — Rust attached-block if parity.**
+  Rust now parses attached `if(cond) { ... } elseif(cond2) { ... } else { ... }` statement chains in
+  `CodeBlock::parse` and normalizes them to the existing `if` / `elseif` / `else` / `endif` marker-control
+  sequence. Runtime branch gating reuses `Engine::handle_statement_if_control`; no second branch runtime was
+  added. Focused parser/runtime locks and the new `terse_2_2_3_attached_if_blocks` oracle fixture keep
+  marker-form `if(cond); ... endif()` and inline-composite `if(...)` behavior unchanged. Attached-block `if`
+  is now portable on Perl and Rust; frontier moves to `.2.2.4` (`when/otherwise`).
 
 - `2026-06-30`: **`.2.2.3` OWNED BEFORE CODE — Rust attached-block if parity.**
   Code-read narrowed the Rust parity slice. `CodeBlock::parse` has expression-valued blocks and
