@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.4 — own when otherwise aliases
+
+**Scope:** Task tree, Knowledge Map fact source, roadmap tracker, and live continuity docs. No Perl behavior,
+Rust behavior, oracle fixture, or mdBook behavior changed in this ownership slice.
+
+**Ground truth:** The current Perl reference does not implement `when/otherwise` as DSL control flow.
+`when(true) { return("yes") } otherwise { return("no") }` remains raw, descriptor metadata reports
+`ready=0 raw=1 unresolved=2`, generated source keeps the host `when(...)` statement and emits Perl's
+experimental-`when` warning, and the runtime probe returns `"no"` despite the true condition.
+
+**Owned implementation boundary:** `.2.2.4` should normalize `when(cond) { ... }` to the already-portable
+attached `if(cond) { ... }` form, and `otherwise { ... }` to attached `else { ... }`. Perl work belongs in the
+existing statement splitter, scanner/contract, and `ControlFlow` dispatch seams. Rust should normalize the
+attached parser output to existing `if`/`else`/`endif` statements, so no new runtime branch engine is needed.
+
+**Validation:** KM retrieval completed; TOOLBOX lowering/descriptor/runtime/generated-source probes completed;
+Perl/Rust code-read completed; Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.3 — implement Rust attached if blocks
 
 **Scope:** Rust lifecycle-code parser, Rust runtime integration tests, Perl-oracle corpus fixture, mdBook

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.4 — when/otherwise ownership): Owned the `when/otherwise` alias leaf
+  before code. Durable points. (1) **Host Perl `when` is explicitly not the contract.** Current generated
+  handlers keep raw `when(true) { ... } otherwise { ... }`, emit Perl's experimental-`when` warning, and return
+  the wrong branch in the true-condition probe. (2) **This is alias normalization.** `when(cond) { ... }`
+  should become the existing attached `if(cond) { ... }`; `otherwise { ... }` should become attached
+  `else { ... }`. (3) **Perl has several recognition seams.** Statement splitting, scanner/contract patterns,
+  and `ControlFlow` dispatch all currently know `if`/`elseif`/`else` but not `when`/`otherwise`. (4) **Rust
+  should stay parser-only.** `CodeBlock::parse` can emit existing `if`/`else`/`endif` statements for attached
+  `when/otherwise`; `handle_statement_if_control` should not need a new branch family.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.3 — Rust attached-if landed): Implemented Rust parity for attached-block
   `if/elseif/else`. Durable points. (1) **Parser normalization was sufficient.** `CodeBlock::parse` now claims
   only one-argument attached `if(...) { ... }` / `elseif(...) { ... }` branches and bare `else { ... }`, then

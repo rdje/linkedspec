@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.4 — `when/otherwise` owned before code**
+  (DOCS/TREE/KM ONLY; **no engine behavior change**). TOOLBOX probes show current `when/otherwise` is not DSL
+  control flow: the combined attached form stays raw, descriptor metadata is `ready=0 raw=1 unresolved=2`,
+  generated handlers emit Perl's experimental-`when` warning, and the runtime probe returns the `otherwise`
+  branch for `when(true)`. The leaf is now scoped as alias normalization over the landed attached-if model:
+  `when(cond) { ... }` maps to attached `if(cond) { ... }`, and `otherwise { ... }` maps to attached
+  `else { ... }`. Rust should normalize in `CodeBlock::parse` and reuse the existing marker runtime.
+  **Verification:** KM retrieval; TOOLBOX lowering/descriptor/runtime/generated-source probes; Perl/Rust
+  code-read.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.4`** (implementation of `when/otherwise` aliases).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.3 — Rust attached-block if landed**
   (RUST PARSER + RUNTIME LOCKS + ORACLE/KM/BOOK). Rust now accepts portable attached-block `if/elseif/else`
   chains: `if(cond) { ... } elseif(cond2) { ... } else { ... }`. `CodeBlock::parse` normalizes attached
