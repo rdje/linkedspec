@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.3 — Rust attached-if ownership): Owned Rust parity before code. Durable
+  points. (1) **The parser is the missing seam.** `CodeBlock::parse` handles statement separators and
+  expression-valued blocks, but not attached statement branches such as `if(cond) { ... } elseif(cond2)
+  { ... } else { ... }`. (2) **Runtime branch gating already exists.** `Engine::handle_statement_if_control`
+  gates marker-form `if/elseif/else/endif` in lifecycle blocks and is reused by expression-valued block
+  evaluation. (3) **Implementation should normalize, not duplicate.** Attached branches should become the same
+  control-flow statement sequence the runtime already understands. (4) **Existing forms are invariants.**
+  Inline-composite lazy `if(...)` and marker-form `if(cond); ... endif()` must remain unchanged.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.2 — Perl attached-if landed): Implemented the Perl reference compact
   attached-block `if/elseif/else` slice. Durable points. (1) **This is a splitter change.**
   `StatementSplit::Core` now recognizes a complete attached `if`/`elseif` branch body followed by same-line

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.3 — own Rust attached if blocks
+
+**Scope:** Task tree, Knowledge Map fact source, roadmap tracker, and live continuity docs. No Rust code,
+oracle fixture, mdBook behavior, or Perl behavior changed in this ownership slice.
+
+**Ground truth:** Rust `CodeBlock::parse` currently parses semicolon/newline-separated expressions and
+expression-valued blocks, but has no attached statement-block form for `if(...) { ... } elseif(...) { ... }
+else { ... }`. Runtime already gates marker-form branches through `Engine::handle_statement_if_control` in
+both lifecycle blocks and expression-valued block evaluation.
+
+**Owned implementation boundary:** `.2.2.3` should parse the accepted Perl `.2.2.2` attached branch syntax
+into the existing statement-control model and reuse current branch gating, while preserving marker-form and
+inline-composite `if` behavior.
+
+**Validation:** Rust code-read completed; focused Rust parser smoke PASS (`parse_lifecycle_block_content`,
+with known nested `rgx` warning noise); Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.2 — implement Perl attached if blocks
 
 **Scope:** Perl ActionIR statement splitting, phase0 regression coverage, mdBook control-flow wording,

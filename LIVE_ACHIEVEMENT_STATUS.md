@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.3 — Rust attached-block if owned before code**
+  (DOCS/TREE/KM ONLY; **no engine behavior change**). Rust parity for the Perl `.2.2.2` attached-if contract is
+  now scoped. `CodeBlock::parse` lacks attached branch parsing, while runtime already has marker-form branch
+  gating through `handle_statement_if_control`. The implementation should parse attached branch bodies into the
+  existing statement-control model and preserve inline-composite `if` plus marker-form `if(...); ... endif()`.
+  **Verification:** Rust code-read; focused Rust parser smoke PASS (`parse_lifecycle_block_content`, known
+  nested `rgx` warning noise); Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.3`** (implementation of Rust attached-block `if/elseif/else` parity).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.2 — Perl attached-block if landed**
   (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Compact attached-block `if/elseif/else` now works on the Perl
   reference without explicit `endif`: `if(cond) { ... } elseif(cond2) { ... } else { ... }` splits into branch
