@@ -52,10 +52,10 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 structurally equivalent output for every entry.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. As of
-`SPEC-FORMAT-TERSE.2.3.3.3.3`, `tclite.spec` is still withheld from the Rust oracle
-fixture set because Rust returns `[]` for the `[]` and `""` inputs where the Perl
-reference returns tagged `tcl_script` values. That remaining gap is default-mode
-recursive repetition parity, not fluent-chain syntax support.
+`SPEC-FORMAT-TERSE.2.3.3.3.3.1`, the two minimal shipped `tclite.spec` fixtures are active
+in the Rust oracle corpus: `[]` returns the tagged `command_subst` shape and `""` returns
+the tagged `double_quote` shape, both wrapped by the Rust runner's normal one-level output
+array. Broader recursive shipped-spec parity, including Lispish, remains tracked separately.
 
 ## Architecture Overview
 

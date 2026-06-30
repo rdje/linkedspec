@@ -292,6 +292,11 @@ impl Engine {
         // ── I-block (preamble, once per rule entry) ──
         if let Some(ref preamble) = rule.preamble {
             self.execute_block(preamble, ctx, label)?;
+            if let Some(my_return) = ctx.take_return_value() {
+                ctx.restore_return_value(caller_return);
+                saved_match.restore(ctx);
+                return Ok(my_return);
+            }
         }
 
         // ── Blind-call dispatch (AND rules) ──
@@ -3373,6 +3378,26 @@ Child::
         assert_eq!(strs[3], "E");
     }
 
+    #[test]
+    fn default_mode_repeats_action_edge_choices_and_allows_zero_matches() {
+        let grammar = r#"Top::
+ -> Item .push
+ LX.return(array("top", array_copy(array(Top))))
+
+Item: /x/ I.return("x")
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+
+        let repeated = engine.execute("xx").unwrap();
+        assert_eq!(repeated, serde_json::json!([["top", ["x", "x"]]]));
+
+        let empty = engine.execute("").unwrap();
+        assert_eq!(empty, serde_json::json!([["top", []]]));
+    }
+
     // ── REP bounds tests ──
 
     #[test]
@@ -4575,10 +4600,11 @@ ChildB:
     }
 
     // ── RUST-PARITY.5.5.3: mark-based capture family ──
-    // A bare `Top::` rule is Seek mode (matches once); over `"  hi"` the
-    // `/(\w+)/` match starts at byte 2, over `"ab cd"` it matches "ab" (cursor
-    // ends at byte 2). `mark_input_start` pins a mark at 0, `mark_input_end` at
-    // the byte length — giving deterministic spans independent of the match.
+    // Use explicit `OR{1,1}` so these tests stay focused on capture/mark
+    // endpoints around one seek match. Bare default rules are repeated-choice
+    // loops, so a later word in the input would intentionally move the cursor.
+    // `mark_input_start` pins a mark at 0, `mark_input_end` at the byte length,
+    // giving deterministic spans independent of the match.
     fn run_5_5_3(grammar: &str, input: &str) -> Vec<Value> {
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4594,7 +4620,7 @@ ChildB:
     #[test]
     fn helpers_5_5_3_capture_from_reads_to_match_start() {
         // mark at 0, match "hi" starts at byte 2 → the pre-match text "  ".
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_from(scalar("a"))) }
 "#;
@@ -4604,7 +4630,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_3_capture_from_undef_on_missing_mark() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { return(capture_from(scalar("nope"))) }
 "#;
@@ -4614,7 +4640,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_3_capture_len_from_is_char_count() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_len_from(scalar("a"))) }
 "#;
@@ -4625,7 +4651,7 @@ ChildB:
     #[test]
     fn helpers_5_5_3_capture_until_cursor_from() {
         // mark 0 → cursor (match-end of "ab" = byte 2).
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_until_cursor_from(scalar("a"))) }
 "#;
@@ -4635,7 +4661,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_3_capture_until_cursor_len_from() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_until_cursor_len_from(scalar("a"))) }
 "#;
@@ -4646,7 +4672,7 @@ ChildB:
     #[test]
     fn helpers_5_5_3_capture_rest_from_reads_to_end() {
         // mark 0 → end-of-input (past the cursor at byte 2).
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_rest_from(scalar("a"))) }
 "#;
@@ -4656,7 +4682,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_3_capture_rest_len_from() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_rest_len_from(scalar("a"))) }
 "#;
@@ -4669,7 +4695,7 @@ ChildB:
         // mark_input_start(a)=0, mark_input_end(b)=byte len; the span is the whole
         // multibyte input. capture_between returns the text; capture_len_between
         // returns the CHAR count (5), not the byte count (6) — char-based parity.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /\w/
  E { mark_input_start(scalar("a")); mark_input_end(scalar("b")); return(capture_between(scalar("a"), scalar("b"))); return(capture_len_between(scalar("a"), scalar("b"))) }
 "#;
@@ -4681,7 +4707,7 @@ ChildB:
     #[test]
     fn helpers_5_5_3_capture_between_undef_when_reversed() {
         // a = end-of-input, b = start-of-input → reversed span → undef.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_end(scalar("a")); mark_input_start(scalar("b")); return(capture_between(scalar("a"), scalar("b"))) }
 "#;
@@ -4692,7 +4718,7 @@ ChildB:
     #[test]
     fn helpers_5_5_3_mark_copy_copies_position() {
         // copy a (=0) into b, then read until cursor from b → "ab".
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); mark_copy(scalar("b"), scalar("a")); return(capture_until_cursor_from(scalar("b"))) }
 "#;
@@ -4703,7 +4729,7 @@ ChildB:
     #[test]
     fn helpers_5_5_3_mark_copy_deletes_target_when_source_missing() {
         // b is set, then mark_copy(b, <missing>) deletes b → capture_from(b) undef.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("b")); mark_copy(scalar("b"), scalar("nope")); return(capture_from(scalar("b"))) }
 "#;
@@ -4715,7 +4741,7 @@ ChildB:
     fn helpers_5_5_3_capture_take_until_cursor_from_advances_mark() {
         // First take reads mark→cursor ("ab") and advances the mark to the cursor;
         // the second read (mark now == cursor) is therefore empty.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_take_until_cursor_from(scalar("a"))); return(capture_until_cursor_from(scalar("a"))) }
 "#;
@@ -4726,7 +4752,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_3_capture_take_until_cursor_len_from_advances_mark() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_take_until_cursor_len_from(scalar("a"))); return(capture_until_cursor_len_from(scalar("a"))) }
 "#;
@@ -4739,7 +4765,7 @@ ChildB:
     fn helpers_5_5_3_capture_take_len_from_advances_mark_to_cursor() {
         // len is mark→match-START ("  " = 2); the mark then advances to the CURSOR
         // (match-end, byte 4), so capture_rest_from is empty afterwards.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_take_len_from(scalar("a"))); return(capture_rest_from(scalar("a"))) }
 "#;
@@ -4750,7 +4776,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_3_capture_take_rest_from_advances_mark_to_end() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_take_rest_from(scalar("a"))); return(capture_rest_from(scalar("a"))) }
 "#;
@@ -4761,7 +4787,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_3_capture_take_rest_len_from_advances_mark_to_end() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  E { mark_input_start(scalar("a")); return(capture_take_rest_len_from(scalar("a"))); return(capture_rest_len_from(scalar("a"))) }
 "#;
@@ -4772,15 +4798,16 @@ ChildB:
 
     // ── RUST-PARITY.5.5.4: anonymous capture-slice family ──
     // `I { start_capture_slice() }` records the anonymous capture start at the
-    // pre-seek cursor (pos 0 for the top rule); a bare `Top::` rule is Seek mode,
-    // so over "  ab cd" the `/(\w+)/` match is "ab" at bytes 2..4 (match-start 2,
-    // cursor 4), end-of-input 7. That fixes the three endpoints the family reads:
-    // match-start (2), cursor (4), end (7). Reuses the run_5_5_3 pipeline harness.
+    // pre-seek cursor (pos 0 for the top rule). `OR{1,1}` keeps the test grammar
+    // to one seek match, so over "  ab cd" the `/(\w+)/` match is "ab" at bytes
+    // 2..4 (match-start 2, cursor 4), end-of-input 7. That fixes the three
+    // endpoints the family reads: match-start (2), cursor (4), end (7). Reuses
+    // the run_5_5_3 pipeline harness.
 
     #[test]
     fn helpers_5_5_4_capture_slice_reads_pre_match_text() {
         // capture_slice ends at match-START → the "  " skipped before the match.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_slice()); return(capture_slice_len()) }
@@ -4793,7 +4820,7 @@ ChildB:
     #[test]
     fn helpers_5_5_4_capture_slice_until_cursor() {
         // ends at the CURSOR (match-end, byte 4) → "  ab".
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_slice_until_cursor()); return(capture_slice_until_cursor_len()) }
@@ -4806,7 +4833,7 @@ ChildB:
     #[test]
     fn helpers_5_5_4_capture_rest_reads_to_end() {
         // ends at END-of-input (byte 7), past the cursor → the whole input.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_rest()); return(capture_rest_len()) }
@@ -4820,7 +4847,7 @@ ChildB:
     fn helpers_5_5_4_capture_take_advances_to_cursor() {
         // capture_take reads to match-START ("  ") and advances capture_start to
         // the CURSOR (byte 4); the following capture_rest is then 4→end = " cd".
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_take()); return(capture_rest()) }
@@ -4834,7 +4861,7 @@ ChildB:
     fn helpers_5_5_4_capture_take_len_advances_to_cursor() {
         // len is capture_start→match-START (2); capture_start then advances to the
         // CURSOR (byte 4), so capture_rest_len afterward is 3 (" cd").
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_take_len()); return(capture_rest_len()) }
@@ -4848,7 +4875,7 @@ ChildB:
     fn helpers_5_5_4_capture_take_until_cursor_advances() {
         // reads capture_start→cursor ("  ab") and advances capture_start to the
         // cursor, so the second until-cursor read (start == cursor) is empty.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_take_until_cursor()); return(capture_slice_until_cursor()) }
@@ -4860,7 +4887,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_4_capture_take_until_cursor_len_advances() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_take_until_cursor_len()); return(capture_slice_until_cursor_len()) }
@@ -4874,7 +4901,7 @@ ChildB:
     fn helpers_5_5_4_capture_take_rest_advances_to_end() {
         // reads capture_start→end ("  ab cd") and advances capture_start to end, so
         // the second capture_rest read is empty.
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_take_rest()); return(capture_rest()) }
@@ -4886,7 +4913,7 @@ ChildB:
 
     #[test]
     fn helpers_5_5_4_capture_take_rest_len_advances_to_end() {
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_take_rest_len()); return(capture_rest_len()) }
@@ -4902,7 +4929,7 @@ ChildB:
         // capture_rest spans capture_start 0 → end-of-input. The text is the raw
         // slice; capture_rest_len is the CHAR count (8: a b , h é l l o), not the
         // byte count (9) — DSL lengths are char-based (.5.3).
-        let g = r#"Top::
+        let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
  E { return(capture_rest()); return(capture_rest_len()) }

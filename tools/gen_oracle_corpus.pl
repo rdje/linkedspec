@@ -71,13 +71,11 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 # (pair: 1) regexes; now they register correctly. But it is NOT SUFFICIENT for
 # tclite: the oracle proved additional independent blockers beyond header-line regexes.
 #
-#   tclite: the fluent blockers landed under SPEC-FORMAT-TERSE.2.3.3.3.1
-#   (compact lifecycle/body receiver chains) and SPEC-FORMAT-TERSE.2.3.3.3.2
-#   (action-edge explicit/flow chains). SPEC-FORMAT-TERSE.2.3.3.3.3 temporarily
-#   re-enabled `[]` and `""` oracle cases and proved the remaining Rust output is
-#   still `[]` while Perl returns tagged tclite values. Keep those cases OUT of the
-#   committed green corpus until SPEC-FORMAT-TERSE.2.3.3.3.3.1 lands default-mode
-#   recursive repetition parity.
+#   tclite: SPEC-FORMAT-TERSE.2.3.3.3.3.1 closed the Rust gap exposed by the
+#   shipped `[]` and `""` probes: bare default rules now repeat as zero-min
+#   choice loops, and a child rule whose I-block returns exits before re-matching
+#   the entry regex. The two minimal tclite fixtures below are active shipped-spec
+#   coverage for that parity.
 #
 #   Lispish (→ RUST-PARITY.7.5.2): uses `{ code }` blocks on its edges (not the
 #   fluent form), so it only needs the `scalaref(retv, {content})` hashref-field
@@ -636,6 +634,9 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
+    { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
+    { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

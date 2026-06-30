@@ -132,7 +132,7 @@ fn corpus_recursive_grammar() {
 
 #[test]
 fn corpus_lifecycle_ordered_output() {
-    let grammar = r#"OrderedParser::
+    let grammar = r#"OrderedParser::OR{1,1}
  /(\w+)/
  I { declare(array, log); push_value(array(log), scalar("I")) }
  LS { push_value(array(log), scalar("LS")) }
@@ -393,7 +393,7 @@ Child:
 // LE/E blocks fire. The lifecycle log is in the second accumulator entry.
 #[test]
 fn regression_edge_only_with_lifecycle_blocks() {
-    let grammar = r#"LifecycleParser::
+    let grammar = r#"LifecycleParser::OR{1,1}
  I { declare(array, log); push_value(array(log), scalar("I")) }
  LS { push_value(array(log), scalar("LS")) }
  LE { push_value(array(log), scalar("LE")) }
@@ -1695,8 +1695,8 @@ fn terse_2_3_2_lifecycle_return_records_surrounding_rule_return() {
         "Top::\n I { return(\"from_i\"); set(out, \"after\") }\n /x/\n E { return(out) }\n";
     assert_eq!(
         build_and_run(grammar, "x"),
-        serde_json::json!(["from_i", "after"]),
-        "top-level lifecycle return(expr) writes the surrounding rule return channel"
+        serde_json::json!(["from_i"]),
+        "top-level I return(expr) exits the rule before matching or E"
     );
 }
 
@@ -1799,8 +1799,8 @@ fn terse_2_3_3_3_1_lifecycle_compact_return_records_rule_return() {
     let grammar = "Top::\n I.return(\"from_i\")\n /x/\n E.return(\"from_e\")\n";
     assert_eq!(
         build_and_run(grammar, "x"),
-        serde_json::json!(["from_i", "from_e"]),
-        "compact lifecycle return(expr) writes the surrounding rule return channel"
+        serde_json::json!(["from_i"]),
+        "compact I.return(expr) exits the rule before matching or E"
     );
 }
 

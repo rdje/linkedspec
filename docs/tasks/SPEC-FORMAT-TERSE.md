@@ -6,12 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.3.3.3.3` DONE/SPLIT; frontier `.2.3.3.3.3.1`** — retrying
-  `tclite` after Rust fluent parity proved the remaining divergence is not a fluent-continuation blocker.
-  The Perl reference returns `["?tcl_script:",[["?command_subst:",[]]]]` for `[]` and
-  `["?tcl_script:",[["?double_quote:",[]]]]` for `""`, while the Rust corpus oracle still returned `[]` for
-  both temporarily re-enabled fixtures. The failing fixtures stay out of the committed green corpus until the
-  new default-mode recursive repetition implementation leaf lands. Prior **`.2.3.3.3.2` DONE** — Rust
+- Last updated: `2026-06-30` (**`.2.3.3.3.3.1` DONE; frontier `.2.3.4`** — Rust now matches the
+  Perl-reference `tclite` minimal oracle cases. Bare default rules compile as zero-min repeated-choice loops,
+  child-rule `I.return(...)` exits before local entry-regex re-matching, and `tools/gen_oracle_corpus.pl`
+  restored `tclite_command_subst` (`[]`) plus `tclite_double_quote` (`""`) into the committed green corpus.
+  Rust `corpus_oracle` now passes with **41 fixtures**. Prior **`.2.3.3.3.3` DONE/SPLIT** — retrying
+  `tclite` after Rust fluent parity proved the remaining divergence was not a fluent-continuation blocker.
+  Prior **`.2.3.3.3.2` DONE** — Rust
   action-edge explicit/flow fluent chains now execute beyond the no-arg subset. Multiline dotted continuations
   after `-> child` stay attached to the preceding action edge, `.push(target)` and `.push(child,target)`
   dispatch the child and append its return value to the explicit target accumulator, statement-control markers
@@ -1703,7 +1704,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.3.3.3.3 - split Rust tclite repetition parity` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.3.3.3.1`
-  Status: `pending`
+  Status: `done` (2026-06-30)
   Goal: Rust default-mode recursive repetition parity for `tclite`
   Acceptance: Rust reproduces the Perl reference for the shipped `tclite` `[]` and `""` oracle cases after
     default-mode recursive repetition/top-level default-rule dispatch is implemented. The `tclite_command_subst`
@@ -1712,8 +1713,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture` passes with those cases included.
     Any broader recursive-rule value parity discovered during implementation must be split rather than hidden
     in this leaf.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Rust default-mode recursive repetition parity landed for the shipped `tclite` minimal
+    fixtures. KM/toolbox probes and generated Perl source showed that parent dependency-regex dispatch passes
+    an already-matched entry context into the child handler, and a child `I.return(...)` exits immediately
+    before local entry-regex matching. Rust now compiles `RuleMode::Default` as zero-min repeated choice
+    (`rep_min = Some(0)`) and exits a rule invocation immediately after preamble execution if the preamble set
+    a return value, restoring caller return/match state before returning the child value. The stale lifecycle
+    tests that expected `I.return(...)` to continue into matching and `E` were corrected to Perl-reference
+    output, and capture-helper/lifecycle-order tests that intentionally need one seek match now spell
+    `OR{1,1}` explicitly. `tools/gen_oracle_corpus.pl` restored `tclite_command_subst` and `tclite_double_quote`; the
+    regenerated corpus has 41 fixtures, and focused Rust locks plus `corpus_oracle` pass.
+  Commit: `SPEC-FORMAT-TERSE.2.3.3.3.3.1 - implement Rust tclite default repetition` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.4`
   Status: `pending`
@@ -1833,12 +1843,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.1` | `done` 2026-06-30 | Rust compact lifecycle/body receiver chains now normalize to lifecycle `CodeBlock` statements and execute. |
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.2` | `done` 2026-06-30 | Rust action-edge explicit/flow fluent chains landed for `.push(target)`, `.push(child,target)`, statement-control gating, helper calls, and return continuations. |
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.3` | `done` 2026-06-30 | Rust `tclite` oracle retry after fluent parity proved a remaining default-mode recursive repetition gap and split implementation to `.2.3.3.3.3.1`. |
-| 1 | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `pending` | Rust default-mode recursive repetition parity for `tclite`, including re-enabling the two oracle cases. |
-| 2 | `SPEC-FORMAT-TERSE.2.3.4` | `pending` | Full Lisp-style composability audit and follow-on split. |
-| 3 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
+| — | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `done` 2026-06-30 | Rust default-mode recursive repetition parity for `tclite` landed, including the two active oracle cases and 41-fixture corpus. |
+| 1 | `SPEC-FORMAT-TERSE.2.3.4` | `pending` | Full Lisp-style composability audit and follow-on split. |
+| 2 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
 | … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-30` (**`.2.3.3.3.3.1` Rust tclite default repetition landed**). The implementation seam is two
+  small parity corrections, not another fluent-chain executor. First, Rust's `RuleMode::Default` is part of
+  the repeated-choice family with `rep_min = Some(0)` and no max, matching the historical bare-rule model
+  described in the book. Second, parent action-edge dispatch has already matched the child's dependency regex;
+  a child `I.return(...)` therefore returns immediately from the child handler before any local re-match or
+  later `E` execution. Rust now checks for a preamble return before entering the rule's match loop and restores
+  caller return/match state before returning the child value. That is sufficient for `tclite_command_subst`
+  (`[]`) and `tclite_double_quote` (`""`) to become active shipped-spec oracle fixtures; broader lifecycle
+  return-control cleanup is not claimed by this leaf.
 
 - `2026-06-30` (**`.2.3.3.3.3` tclite retry split**). With compact lifecycle/body receiver chains and
   action-edge explicit/flow fluent chains landed, `tclite` was retried as an oracle fixture instead of being
@@ -2497,6 +2517,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.1` | Focused Rust core (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml lifecycle_compact -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_3_3_1 -- --nocapture`); full Rust core/runtime package tests; mdBook build; oracle generator syntax; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI; rustfmt on touched Rust files | Rust compact lifecycle/body receiver chains landed. The Rust parser now normalizes lifecycle-marker receiver chains such as `I.return(...)` and `I.declare(...).set(...).return(...)` into lifecycle `CodeBlock` statement strings instead of leaving a dropped standalone `FluentChain`. Parser locks cover multiline body and regex-first header-line inline placement with no surviving lifecycle-surface `FluentChain`; compiler locks prove compact `I`/`E` chains populate lifecycle code slots; runtime locks prove return-channel behavior and ordered declaration/mutation execution. Full local CI PASS. Frontier becomes `.2.3.3.3.2`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.2` | Perl reference probes for shipped `ebnf.spec` action-edge fluent forms; focused Rust core parser (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml parse_action_edge_multiline_fluent_flow_chain -- --nocapture`) and compiler (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml compile_multiline_action_edge_fluent_flow_chain -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_3_3_2 -- --nocapture`); no-arg action-edge regression (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_3_1_action_edge_fluent_push_appends_child_return -- --nocapture`); full Rust core/runtime package tests; mdBook build; oracle generator syntax; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust action-edge explicit/flow fluent chains landed. The Rust parser now keeps multiline dotted action-edge continuations on the preceding edge; the runtime executes `.push(target)`, `.push(child,target)`, `.if/.else/.endif` gating, `.say(...)`, `.return(expr)`, and `.return_undef()` with parent-visible child return-channel semantics. Full local CI PASS. Frontier becomes `.2.3.3.3.3`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.3` | Perl reference probes for `tclite` inputs `[]` and `""`; temporary `tools/gen_oracle_corpus.pl` re-enable of `tclite_command_subst` and `tclite_double_quote`; diagnostic Rust corpus oracle run (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`); committed green-corpus restoration; oracle generator syntax/regeneration; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust `tclite` retry after fluent parity split to implementation. Perl returns tagged `tcl_script` values for both inputs, but Rust still returns `[]` for the two temporarily re-enabled fixtures while the other 39 fixtures pass. The remaining blocker is default-mode recursive repetition/top-level default-rule dispatch parity, not fluent-continuation support. Failing fixtures stay out of the committed corpus until `.2.3.3.3.3.1`; frontier becomes `.2.3.3.3.3.1`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | KM/toolbox probes for Perl `tclite` and minimal edge-only grammars; focused Rust core (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml compile_default_mode_is_zero_min_repeated_choice -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml default_mode_repeats_action_edge_choices_and_allows_zero_matches -- --nocapture`); lifecycle expectation locks (`terse_2_3_2_lifecycle_return_records_surrounding_rule_return`, `terse_2_3_3_3_1`); capture-helper regression families (`helpers_5_5_3`, `helpers_5_5_4`); `perl -c tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust default-mode recursive repetition parity landed. `RuleMode::Default` now compiles as zero-min repeated choice, and Rust exits immediately after an `I`/preamble return before local entry-regex re-matching. One-match capture-helper/lifecycle-order tests now spell `OR{1,1}` explicitly; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures; corpus oracle PASS over 41 fixtures. Frontier becomes `.2.3.4`. |
 
 ## Commit Log
 
@@ -2567,17 +2588,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.3.3` | `SPEC-FORMAT-TERSE.2.3.3.3 - split remaining Rust fluent continuations` | Remaining Rust fluent parity split into compact lifecycle/body receiver chains, action-edge explicit/flow chains, and `tclite`/default-mode repetition re-enable audit. Frontier becomes `.2.3.3.3.1`. |
 | `SPEC-FORMAT-TERSE.2.3.3.3.1` | `SPEC-FORMAT-TERSE.2.3.3.3.1 - implement Rust compact lifecycle fluent chains` | Rust compact lifecycle/body receiver chains now execute as lifecycle `CodeBlock` statements; frontier becomes `.2.3.3.3.2`. |
 | `SPEC-FORMAT-TERSE.2.3.3.3.2` | `SPEC-FORMAT-TERSE.2.3.3.3.2 - implement Rust action-edge fluent flow chains` | Rust action-edge explicit/flow fluent chains now execute with explicit-target child return appends and statement-control gating; frontier becomes `.2.3.3.3.3`. |
-| `SPEC-FORMAT-TERSE.2.3.3.3.3` | `SPEC-FORMAT-TERSE.2.3.3.3.3 - split Rust tclite repetition parity` | `tclite` oracle retry after fluent parity still returns Rust `[]` for `[]` and `""`; default-mode recursive repetition parity split to `.2.3.3.3.3.1`, and the committed corpus remains green until that leaf lands. |
+| `SPEC-FORMAT-TERSE.2.3.3.3.3` | `SPEC-FORMAT-TERSE.2.3.3.3.3 - split Rust tclite repetition parity` | `tclite` oracle retry after fluent parity still returned Rust `[]` for `[]` and `""` at that split point; default-mode recursive repetition parity split to `.2.3.3.3.3.1`, which later landed the fixtures. |
+| `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1 - implement Rust tclite default repetition` | Rust default-mode recursive repetition parity landed; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures, corpus 41 passes, and frontier becomes `.2.3.4`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.3.3.3.3.1` LANDED — Rust `tclite` default-mode repetition parity.**
+  Rust now treats bare default rules as zero-min repeated-choice loops and honors child-rule `I.return(...)`
+  before local entry-regex re-matching. The shipped `tclite_command_subst` (`[]`) and `tclite_double_quote`
+  (`""`) oracle cases are active again; `corpus_oracle` passes with 41 fixtures. Frontier moves to `.2.3.4`.
 
 - `2026-06-30`: **`.2.3.3.3.3` AUDIT/SPLIT — Rust `tclite` retry after fluent parity.**
   Perl reference probes show `tclite` returns `["?tcl_script:",[["?command_subst:",[]]]]` for `[]` and
   `["?tcl_script:",[["?double_quote:",[]]]]` for `""`. Temporarily re-enabling those oracle fixtures made the
   Rust corpus oracle fail exactly those two cases: expected the wrapped Perl values, actual `[]` for both,
-  while the other 39 fixtures passed. The failing fixtures are not committed; `.2.3.3.3.3.1` now owns
-  default-mode recursive repetition parity and will re-enable the fixtures when it lands. Frontier moves to
-  `.2.3.3.3.3.1`.
+  while the other 39 fixtures passed. The failing fixtures were not committed in the split slice; `.2.3.3.3.3.1`
+  later landed default-mode recursive repetition parity and re-enabled them. Frontier moved to `.2.3.3.3.3.1`.
 
 - `2026-06-30`: **`.2.3.3.3.2` LANDED — Rust action-edge explicit/flow fluent chains.**
   Rust now keeps multiline dotted continuations after an action edge attached to that edge and executes

@@ -389,6 +389,16 @@ mod tests {
     }
 
     #[test]
+    fn compile_default_mode_is_zero_min_repeated_choice() {
+        let src = "Top::\n /a/";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        assert_eq!(compiled.rules[0].parse_mode, ParseMode::Seek);
+        assert_eq!(compiled.rules[0].rep_min, Some(0));
+        assert_eq!(compiled.rules[0].rep_max, None);
+    }
+
+    #[test]
     fn compile_extracts_regex_patterns() {
         let src = "Top::\n /hello/ /world/";
         let spec = parse_spec(src).unwrap();

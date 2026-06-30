@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.3.1 — Rust `tclite` default-mode repetition parity landed**
+  (RUST CORE/RUNTIME + ORACLE + BOOK/KM). Rust now treats bare default rules as zero-min repeated-choice loops
+  and honors `I`/preamble `return(expr)` as an immediate child-invocation return before local entry-regex
+  matching. That matches the Perl dispatch model used by shipped `tclite` bracket and quote children.
+  `tools/gen_oracle_corpus.pl` restored `tclite_command_subst` (`[]`) and `tclite_double_quote` (`""`); the
+  regenerated corpus now has **41 fixtures** and both cases pass with the tagged Perl-reference `tcl_script`
+  values. **Verification:** focused Rust core/runtime/default-mode and lifecycle locks PASS; oracle generator
+  syntax/regeneration PASS; Rust `corpus_oracle` PASS over 41 fixtures; mdBook/KM/memory/doctrine/diff and full
+  local CI are recorded in commit workflow.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.4`** (full composability audit and follow-on split).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.3.3 — Rust `tclite` oracle retry split**
   (AUDIT/TREE/KM/BOOK STATUS; **no runtime behavior change**). After Rust compact lifecycle/body receiver
   chains and action-edge explicit/flow fluent chains landed, the deferred `tclite` oracle cases were retried.

@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.3.1 — Rust tclite default-mode repetition parity landed):
+  Implemented the narrow parity slice that the previous `tclite` retry isolated. Durable points. (1)
+  **Default mode is repetition in Rust metadata now.** `RuleMode::Default` participates in the repetition
+  family with `rep_min = Some(0)` and no max, so a bare `Top::` / `Rule:` body behaves like the historical
+  zero-min repeated-choice model instead of a single optional pass. (2) **Dispatched child entry info is already
+  matched by the parent.** Perl action-edge dispatch passes the dependency-regex match into the child handler;
+  if the child has `I.return(...)`, that return exits immediately before the child tries to match its entry
+  regex locally. Rust now mirrors that preamble-return exit path, restoring the caller's return/match state
+  before returning the child value. (3) **The shipped `tclite` minimal fixtures are active again.**
+  `tclite_command_subst` and `tclite_double_quote` are in the generated oracle corpus, and the corpus now has
+  41 passing fixtures. (4) **One-match tests must say so.** Capture-helper and lifecycle-order tests that were
+  only meant to exercise one seek match now use explicit `OR{1,1}` instead of relying on bare default mode as a
+  single pass. (5) **Do not overstate lifecycle scope.** Existing tests that expected `I.return(...)`
+  to continue into matching/`E` were stale against Perl and were corrected, but this leaf should not be cited as
+  a full audit of every lifecycle marker's multi-return control-flow edge.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.3.3 — Rust tclite oracle retry split): Retried `tclite`
   after the fluent blockers were closed, and split before code because the result isolated a different
   mechanism. Durable points. (1) **The retry is now evidence, not conjecture.** Perl returns
@@ -9,8 +25,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   expected those values wrapped one level and got `[]` for both. (2) **Fluent parity is no longer the blocker.**
   Compact lifecycle/body receiver chains and action-edge explicit/flow chains are landed, so the remaining
   `tclite` failure belongs to default-mode recursive repetition/top-level default-rule dispatch. (3) **Keep the
-  committed corpus green until the implementation lands.** The failed fixtures are not left in
-  `tests/corpus/`; `.2.3.3.3.3.1` owns re-enabling them once the Rust runtime reproduces the Perl values. (4)
+  committed corpus green until the implementation lands.** At this split point the failed fixtures were not
+  left in `tests/corpus/`; `.2.3.3.3.3.1` later re-enabled them once the Rust runtime reproduced the Perl
+  values. (4)
   **Do not let `tclite` swallow broader recursion work silently.** If implementation shows a wider recursive
   value-parity surface, split it explicitly rather than hiding it inside the fixture re-enable.
 

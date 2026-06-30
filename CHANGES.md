@@ -1,6 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.3.1 — implement Rust tclite default repetition
+
+**Scope:** Rust default-mode repetition metadata, Rust lifecycle preamble return behavior, shipped `tclite`
+oracle fixture re-enable, task tree, roadmap tracker, mdBook backend status, Knowledge Map, and live
+continuity docs.
+
+**What changed:** Rust now treats bare default rules as zero-min repeated-choice rules (`rep_min = Some(0)`,
+unbounded max), matching the Perl reference model used by shipped recursive specs. Rust rule invocation also
+honors an `I`/preamble `return(expr)` immediately after executing the preamble: the returned value exits that
+child invocation before the child re-matches its entry regex, which is the Perl dispatch behavior used by
+edge-only `tclite` children such as `I.return([])` and quote/bracket close rules. The stale Rust lifecycle
+expectations that assumed `I.return(...)` continued into matching and `E` were corrected to the Perl output.
+Capture-helper and lifecycle-order integration tests that intentionally exercise one seek match now spell
+`OR{1,1}` explicitly instead of depending on the old bare-default single-pass assumption.
+
+**Oracle:** `tools/gen_oracle_corpus.pl` now restores `tclite_command_subst` (`[]`) and
+`tclite_double_quote` (`""`) as active shipped-spec fixtures. The regenerated Rust oracle corpus has 41
+fixtures and the two `tclite` cases now pass with the tagged Perl-reference `tcl_script` values.
+
+**Boundary:** This leaf implements the default-mode repetition and I-block early-return behavior required for
+the two minimal `tclite` fixtures. It does not silently claim broader lifecycle-control cleanup for every
+marker or every possible multiple-return statement shape; any remaining lifecycle-return parity issue must be
+owned by a later leaf if found.
+
+**Validation:** focused Rust core default-mode compile lock PASS; focused Rust runtime default-mode/action-edge
+lock PASS; focused lifecycle expectation locks PASS; oracle generator syntax/regeneration PASS; Rust
+`corpus_oracle` PASS over 41 fixtures. Full memory/doctrine/KM/mdBook/local gates are recorded in the commit
+workflow.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.3.3 — split Rust tclite repetition parity
 
 **Scope:** Rust `tclite` oracle retry after fluent parity, task-tree split, oracle generator/test comments,
@@ -13,9 +42,9 @@ landed, the deferred `tclite` oracle cases were retried instead of inferred. The
 `["?tcl_script:",[["?double_quote:",[]]]]` for `""`. Temporarily adding those cases to the Rust oracle corpus
 made only those two fixtures fail; both actual Rust outputs were `[]`.
 
-**Boundary:** The failing fixtures are not committed to the green corpus. The remaining implementation work is
-now owned by `SPEC-FORMAT-TERSE.2.3.3.3.3.1`, which will re-enable
-`tclite_command_subst` and `tclite_double_quote` after Rust default-mode recursive repetition parity lands.
+**Boundary:** At this split point the failing fixtures were not committed to the green corpus. The remaining
+implementation work was owned by `SPEC-FORMAT-TERSE.2.3.3.3.3.1`, which later re-enabled
+`tclite_command_subst` and `tclite_double_quote` after Rust default-mode recursive repetition parity landed.
 
 **Validation:** The diagnostic corpus retry exposed the two failures with all other 39 fixtures passing. The
 final committed state restores the green corpus; oracle generator syntax/regeneration, Rust corpus oracle,

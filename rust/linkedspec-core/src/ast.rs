@@ -79,7 +79,8 @@ impl RuleMode {
     pub fn is_repetition(&self) -> bool {
         matches!(
             self,
-            RuleMode::Star
+            RuleMode::Default
+                | RuleMode::Star
                 | RuleMode::Plus
                 | RuleMode::OrPlus
                 | RuleMode::AndPlus
@@ -92,7 +93,7 @@ impl RuleMode {
     /// The minimum number of repetitions, if this is a repetition mode.
     pub fn rep_min(&self) -> Option<usize> {
         match self {
-            RuleMode::Star | RuleMode::Optional => Some(0),
+            RuleMode::Default | RuleMode::Star | RuleMode::Optional => Some(0),
             RuleMode::Plus | RuleMode::OrPlus | RuleMode::AndPlus => Some(1),
             RuleMode::OrBounded { min, .. } | RuleMode::AndBounded { min, .. } => Some(*min),
             _ => None,
