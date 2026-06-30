@@ -1216,6 +1216,19 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
+                if calls
+                    .first()
+                    .is_some_and(|call| Self::is_array_receiver_value_chain_method(&call.method))
+                {
+                    return self.eval_array_receiver_value_chain(receiver, calls, ctx, rule_label);
+                }
+                if calls
+                    .iter()
+                    .any(|call| Self::is_statement_only_array_end_mutation_method(&call.method))
+                {
+                    self.eval_expr(receiver, ctx, rule_label)?;
+                    return Ok(RuntimeValue::Undef);
+                }
                 self.eval_expr(receiver, ctx, rule_label)?;
                 for call in calls {
                     let evaluated: Vec<RuntimeValue> = call
@@ -1234,6 +1247,103 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
         }
+    }
+
+    fn is_statement_only_array_end_mutation_method(method: &str) -> bool {
+        matches!(
+            method,
+            "push_back" | "push_front" | "pop_back" | "pop_front"
+        )
+    }
+
+    fn is_array_receiver_value_chain_method(method: &str) -> bool {
+        matches!(
+            method,
+            "array_copy"
+                | "copy"
+                | "sorted"
+                | "reversed"
+                | "take"
+                | "take_last"
+                | "drop_front"
+                | "drop_back"
+                | "slice"
+                | "concat_arrays"
+                | "split_each"
+                | "trim_each"
+                | "filter_nonempty"
+                | "lowercase_each"
+                | "uppercase_each"
+                | "uniq"
+                | "filter_match"
+                | "count"
+                | "first"
+                | "last"
+                | "contains"
+                | "index_of"
+                | "is_empty"
+                | "is_nonempty"
+                | "join_values"
+        )
+    }
+
+    fn eval_array_receiver_value_chain(
+        &self,
+        receiver: &linkedspec_core::expr::Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        let mut current = match receiver {
+            Expr::Variable { name } => RuntimeValue::Array(ctx.array_copy(name)),
+            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => {
+                        RuntimeValue::Array(ctx.array_copy(name))
+                    }
+                    _ => self.eval_expr(receiver, ctx, rule_label)?,
+                }
+            }
+            _ => self.eval_expr(receiver, ctx, rule_label)?,
+        };
+
+        for call in calls {
+            if Self::is_statement_only_array_end_mutation_method(&call.method)
+                || !Self::is_array_receiver_value_chain_method(&call.method)
+            {
+                return Ok(RuntimeValue::Undef);
+            }
+
+            let evaluated_call_args: Vec<RuntimeValue> = call
+                .args
+                .iter()
+                .map(|arg| self.eval_expr(arg.value(), ctx, rule_label))
+                .collect::<Result<Vec<_>, _>>()?;
+
+            let receiver_arg = Arg::Positional(Expr::Undef);
+            let (raw_args, evaluated) = if call.method == "join_values" {
+                let mut raw = call.args.clone();
+                raw.push(receiver_arg);
+                let mut vals = evaluated_call_args;
+                vals.push(current);
+                (raw, vals)
+            } else {
+                let mut raw = Vec::with_capacity(call.args.len() + 1);
+                raw.push(receiver_arg);
+                raw.extend(call.args.clone());
+                let mut vals = Vec::with_capacity(evaluated_call_args.len() + 1);
+                vals.push(current);
+                vals.extend(evaluated_call_args);
+                (raw, vals)
+            };
+
+            current =
+                self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
+        }
+
+        Ok(current)
     }
 
     fn eval_block_value(
@@ -1986,15 +2096,15 @@ impl Engine {
                 if let Some(arr) = args.first() {
                     match arr {
                         RuntimeValue::Array(items) => {
+                            let delim = args.get(1).map(|a| a.to_str()).unwrap_or_default();
                             let result: Vec<RuntimeValue> = items
                                 .iter()
-                                .map(|v| {
-                                    RuntimeValue::Array(
-                                        v.to_str()
-                                            .split_whitespace()
-                                            .map(|p| RuntimeValue::Scalar(p.to_string()))
-                                            .collect(),
-                                    )
+                                .flat_map(|v| {
+                                    let value = v.to_str();
+                                    value
+                                        .split(&delim)
+                                        .map(|p| RuntimeValue::Scalar(p.to_string()))
+                                        .collect::<Vec<_>>()
                                 })
                                 .collect();
                             Ok(RuntimeValue::Array(result))

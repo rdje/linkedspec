@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.1 — implement array receiver value chains
+
+**Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain runtime evaluation, focused Perl/Rust
+locks, oracle corpus, mdBook, Knowledge Map, roadmap/task-tree/live docs.
+
+**What changed:** Array receiver-dot value chains are now portable on Perl and Rust. Compatible array-returning
+helpers feed the next array helper (`items.sorted().drop_front(2).first()`), pipeline-style array links return
+chainable arrays in receiver form (`items.uniq().join_values(",")`, `items.filter_match(/^a$/).count()`), and
+terminal helpers return their documented scalar, number, string, or boolean values. Receiver-dot
+`join_values` preserves the canonical delimiter-first helper contract, so `items.join_values("|")` maps to
+`join_values("|", items)`.
+
+**Boundary:** Public function-style array-pipeline lowering keeps its legacy statement-oriented source shape;
+the new pure array value path is scoped to receiver-dot chains. `split(value, delim)` is not an array receiver
+link because its receiver is scalar/string input. `.1.6` end mutations (`push_back`, `push_front`, `pop_back`,
+`pop_front`) remain statement-only and return `undef` without mutating when used as value expressions.
+
+**Validation:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -Iperl -c
+t/phase0_regression.t`; receiver-chain TOOLBOX probes; `prove -q -Iperl t/phase0_regression.t` PASS (996
+tests); focused Rust parser/runtime tests PASS; `perl -Iperl tools/gen_oracle_corpus.pl` generated 47
+fixtures; Rust `corpus_oracle` PASS over 47 fixtures.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5 — split return-type method chaining
 
 **Scope:** Task-tree split, mdBook contract corrections, Knowledge Map, roadmap tracker, and live continuity

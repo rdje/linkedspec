@@ -2352,6 +2352,20 @@ mod tests {
     }
 
     #[test]
+    fn parse_array_receiver_value_chain() {
+        let block = CodeBlock::parse("items.sorted().drop_front(2).first()").unwrap();
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "items"));
+                let methods: Vec<&str> = calls.iter().map(|call| call.method.as_str()).collect();
+                assert_eq!(methods, vec!["sorted", "drop_front", "first"]);
+                assert_eq!(calls[1].args.len(), 1);
+            }
+            other => panic!("expected array receiver value FluentChain, got {:?}", other),
+        }
+    }
+
+    #[test]
     fn parse_fluent_chain_on_indexed_var() {
         let code = "results[0].return()";
         let block = CodeBlock::parse(code).unwrap();

@@ -670,9 +670,17 @@ assign(array(without_last), drop_back(array(parts)));
 assign(array(combined), concat_arrays(array(parts), array(extra_parts), array("tail")));
 assign(array(canonical), sorted(array(combined)));
 assign(array(reverse_view), reversed(array(canonical)));
+assign(scalar(first_after_sort), items.sorted().drop_front(2).first());
+assign(scalar(public_count), items.filter_match(/^public_/).count());
+assign(scalar(csv), items.uniq().join_values(","));
 ```
 
 Array helpers are pure value helpers unless you use `assign(...)` to store their result. For example, `sorted(array(parts))` does not sort `parts` in place. This is intentional: the rule text says when a working container changes.
+
+Array receiver-dot value chains are accepted for the same pure array helpers. The receiver is the first helper
+argument, except `join_values`, where `items.join_values(delim)` maps to the canonical
+`join_values(delim, items)` contract. The mutating end methods `items.push_back(value)`,
+`items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` remain statement-only.
 
 ## Hash helpers
 
@@ -808,6 +816,13 @@ Nested composition is useful when the transformation reads naturally as one expr
 ```text
 assign(array(public_fields), filter_match(uniq(uppercase_each(array(fields))), /^[A-Z_]+$/));
 lowercase_each(array(public_fields));
+```
+
+Receiver-dot form is equivalent when the source is a named array working variable or array-valued expression:
+
+```text
+assign(array(public_fields), fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/));
+assign(scalar(public_csv), fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/).join_values(","));
 ```
 
 Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.

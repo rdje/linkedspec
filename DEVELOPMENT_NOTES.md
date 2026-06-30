@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains landed): Implemented the first
+  return-family receiver-chain leaf. Durable points. (1) **Receiver-dot array chains are pure value
+  composition.** Perl normalizes compatible receiver-dot array links into value expressions, and Rust evaluates
+  `Expr::FluentChain` by carrying the current array value through the existing helper table. Terminals such as
+  `first`, `count`, `index_of`, `contains`, `is_empty`, `is_nonempty`, and `join_values` return their documented
+  value. (2) **Do not break legacy function-style pipeline lowering.** Public `uniq(...)`,
+  `filter_match(...)`, `uppercase_each(...)`, and related function-style forms keep their pre-existing
+  statement-pipeline lowering. The pure array-value path is private to receiver-dot chains, which is why
+  `items.uniq().join_values(",")` works without changing historical source-shape locks for
+  `filter_match(uniq(uppercase_each(array(items))), /^A/)`. (3) **Delimiter order is part of the contract.**
+  `items.join_values("|")` maps to `join_values("|", items)`, not `join_values(items, "|")`. (4)
+  **Statement mutations are still not values.** `items.push_back(value)` and the other `.1.6` end mutations
+  remain statement-only; value slots return `undef` and do not mutate. (5) **`split_each` needed Rust parity
+  cleanup.** Rust now matches the documented flat-array `split_each(arr, delim)` value behavior when that helper
+  is used in receiver chains and function-style helper calls.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5 — return-type method chaining split): Completed the design/split before
   code. Durable points. (1) **Do not broaden statement mutations into value chains implicitly.** Perl currently
   lowers `items.push_back("a")` and `items.pop_back()` only as standalone mutations, while

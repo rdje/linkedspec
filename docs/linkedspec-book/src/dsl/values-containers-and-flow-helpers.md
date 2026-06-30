@@ -155,6 +155,8 @@ array_copy(array(items))
 hash_copy(hash(meta))
 flat_array(array(parts))
 join_values("", array(tokens))
+tokens.uniq().join_values("")
+items.sorted().drop_front(2).first()
 split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?node:", scalar(type_name))
 ```
 

@@ -831,7 +831,7 @@ sub _lower_method_value_expr {
   return 0 unless $candidate_call;
 
   my $candidate_method = $candidate_call->{method} // '';
-  return 1 if $candidate_method =~ /^(?:array|array_copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
+  return 1 if $candidate_method =~ /^(?:array|array_copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
 
   if ($candidate_method eq 'coalesce') {
    my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
@@ -908,7 +908,87 @@ sub _lower_method_value_expr {
    return 0;
   }
 
-  return 0;
+ return 0;
+ };
+ my $normalize_array_value_regex_expr = sub {
+  my ($pattern_expr) = @_;
+  my $pattern = $trim_action_ir_value->($pattern_expr // '');
+  return undef unless defined($pattern) && length($pattern);
+  return $pattern if $pattern =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
+
+  my $literal = $strip_literal_delimiters->($pattern);
+  return undef unless defined $literal;
+  return '/'.quotemeta($literal).'/'
+ };
+ my $lower_array_value_source_expr = sub {
+  my ($source_expr) = @_;
+  my $target_expr = $trim_action_ir_value->($source_expr);
+  return undef unless defined($target_expr) && length($target_expr);
+
+  my $array_symbol = $extract_array_symbol_name->($target_expr);
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+   return '[@'.$array_symbol.']';
+  }
+
+  return undef unless $looks_like_array_value_expr->($target_expr);
+  my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+  return undef unless defined($lowered_target) && length($lowered_target);
+
+  return 'do { my $__ls_array_value_source = '.$lowered_target.'; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq \'ARRAY\') ? [@{$__ls_array_value_source}] : [] }'
+ };
+ my $lower_array_pipeline_value_expr = sub {
+  my ($call) = @_;
+  return undef unless $call;
+  my $method = $call->{method} // '';
+  return undef unless $method =~ /^__array_value_(split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+  my $op = $1;
+
+  my $args = $call->{args} || [];
+  return undef unless ref($args) eq 'ARRAY';
+
+  if ($op eq 'split_each') {
+   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
+   return undef unless $effective_args;
+   my $source_expr = $lower_array_value_source_expr->($effective_args->[0]);
+   my $delimiter_expr = $normalize_array_value_regex_expr->($effective_args->[1]);
+   return undef unless defined($source_expr) && length($source_expr);
+   return undef unless defined($delimiter_expr) && length($delimiter_expr);
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { split '.$delimiter_expr.', (defined($_) ? $_ : \'\') } @{$__ls_array_pipeline_source}] : [] }';
+  }
+
+  if ($op eq 'filter_match') {
+   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
+   return undef unless $effective_args;
+   my $source_expr = $lower_array_value_source_expr->($effective_args->[0]);
+   my $pattern_expr = $normalize_array_value_regex_expr->($effective_args->[1]);
+   return undef unless defined($source_expr) && length($source_expr);
+   return undef unless defined($pattern_expr) && length($pattern_expr);
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [grep { defined($_) && $_ =~ '.$pattern_expr.' } @{$__ls_array_pipeline_source}] : [] }';
+  }
+
+  my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
+  return undef unless $effective_args;
+  my $source_expr = $lower_array_value_source_expr->($effective_args->[0]);
+  return undef unless defined($source_expr) && length($source_expr);
+
+  if ($op eq 'trim_each') {
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : \'\'; $__ls_array_pipeline_item =~ s/^\s+|\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }';
+  }
+  if ($op eq 'filter_nonempty') {
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [grep { defined($_) && length($_) } @{$__ls_array_pipeline_source}] : [] }';
+  }
+  if ($op eq 'lowercase_each') {
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? lc($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
+  }
+  if ($op eq 'uppercase_each') {
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? uc($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
+  }
+  if ($op eq 'uniq') {
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_key = defined($_) ? "S$_" : "U"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }';
+  }
+
+  return undef
  };
 
  return undef unless defined $expr;
@@ -922,6 +1002,11 @@ sub _lower_method_value_expr {
  return $shape_literal if defined($shape_literal) && length($shape_literal);
  my $block_value = _lower_block_value_expr($trimmed, $deps);
  return $block_value if defined($block_value) && length($block_value);
+ my $array_receiver_chain = _normalize_array_receiver_value_chain_expr($trimmed, $deps);
+ if (defined($array_receiver_chain) && length($array_receiver_chain) && $array_receiver_chain ne $trimmed) {
+  my $lowered_chain = _lower_method_value_expr($array_receiver_chain, $deps);
+  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+ }
  my $method_call = $parse_method_function_expr->($trimmed);
  if ($method_call && $method_call->{method} eq 'if') {
   my $if_value = _lower_inline_if_value_expr($method_call, $deps);
@@ -930,6 +1015,10 @@ sub _lower_method_value_expr {
  if ($method_call && $method_call->{method} eq 'switch') {
   my $switch_value = _lower_inline_switch_value_expr($method_call, $deps);
   return $switch_value if defined($switch_value) && length($switch_value);
+ }
+ if ($method_call) {
+  my $array_pipeline_value = $lower_array_pipeline_value_expr->($method_call);
+  return $array_pipeline_value if defined($array_pipeline_value) && length($array_pipeline_value);
  }
  if ($method_call && $method_call->{method} eq 'call') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -2557,6 +2646,66 @@ sub _split_receiver_dot_method_expr {
   return [$receiver, $call_expr];
  }
  return undef;
+}
+
+sub _is_array_receiver_value_chain_method {
+ my ($method) = @_;
+ return 0 unless defined $method;
+ return $method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|join_values)$/o ? 1 : 0
+}
+
+sub _normalize_array_receiver_value_chain_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $split = _split_receiver_dot_method_expr($trimmed, $trim_action_ir_value);
+ return undef unless $split;
+ my ($receiver_expr, $tail_expr) = @$split;
+ return undef if defined($receiver_expr) && $receiver_expr =~ /^(?:hash|h)\s*\(/o;
+
+ my @calls;
+ while (defined($tail_expr) && length($tail_expr)) {
+  my $tail_split = _split_receiver_dot_method_expr($tail_expr, $trim_action_ir_value);
+  my $call_expr = $tail_split ? $tail_split->[0] : $tail_expr;
+  my $call = $parse_method_function_expr->($call_expr);
+  return undef unless $call;
+  my $method = $call->{method} // '';
+  return undef if $method =~ /^(?:push_front|push_back|pop_front|pop_back)$/o;
+  return undef unless _is_array_receiver_value_chain_method($method);
+  push @calls, $call;
+  last unless $tail_split;
+  $tail_expr = $tail_split->[1];
+ }
+ return undef unless @calls;
+
+ my $current_expr = $receiver_expr;
+ foreach my $call (@calls) {
+  my $method = $call->{method} // '';
+  my @args = @{$call->{args} || []};
+  if ($method eq 'join_values') {
+   return undef unless @args == 1;
+   $current_expr = 'join_values('.$args[0].', '.$current_expr.')';
+   next;
+  }
+  if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
+   $current_expr = '__array_value_'.$method.'('.join(', ', ($current_expr, @args)).')';
+   next;
+  }
+  $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+ }
+
+ return $current_expr;
 }
 
 sub _parse_array_end_mutation_method_statement {

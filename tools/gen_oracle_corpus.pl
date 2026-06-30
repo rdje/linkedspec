@@ -705,6 +705,23 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains ──
+    #
+    # Receiver-dot array value methods are pure helper composition: each call
+    # returns the documented value and feeds that value into the next compatible
+    # array helper. Boolean terminals are covered by focused backend tests; this
+    # oracle fixture uses array/scalar/number terminals whose JSON shape is
+    # already identical across the Perl reference and Rust runtime.
+    {   case   => 'terse_2_3_5_1_array_receiver_value_chains',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { items += "b"; items += "a"; items += "c"; items += "a"; phrases += "aa-b"; phrases += "c-aa"; return(array(items.sorted().drop_front(2).first(), array(items).reversed().take(2).last(), items.sorted().index_of("c"), items.drop_back().join_values("|"), items.uniq().join_values(","), items.filter_match(/^a$/).count(), phrases.split_each("-").filter_match(/^aa$/).count())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },

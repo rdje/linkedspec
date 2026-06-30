@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains landed**
+  (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure array helper chains now work from an array
+  receiver on Perl and Rust: `items.sorted().drop_front(2).first()`, `items.uniq().join_values(",")`,
+  `items.filter_match(/^a$/).count()`, and `phrases.split_each("-").filter_match(/^aa$/).count()` are locked.
+  Receiver-dot `join_values` preserves the delimiter-first helper contract. Public function-style pipeline
+  lowering keeps its legacy source shape; the new pure array-value path is scoped to receiver-dot chains. The
+  `.1.6` end mutations remain statement-only and return `undef` without mutating in value slots.
+  **Verification:** Perl syntax checks PASS; phase0 PASS with **996 tests**; focused Rust parser/runtime locks
+  PASS; oracle regeneration produced **47 fixtures**; Rust `corpus_oracle` PASS over 47 fixtures; mdBook/KM/live
+  docs updated.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.2`** (hash receiver-dot value chains).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5 — return-type method chaining split**
   (TASK TREE + BOOK/KM/LIVE DOCS; **no runtime behavior change**). The receiver-dot value-chain model is now
   specified before implementation and split by return family. `.2.3.5.1` owns array receiver-dot value chains;
@@ -18,7 +29,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `.return(...)` slots.
   **Verification:** LinkedSpec TOOLBOX probes recorded the Perl receiver-chain boundary; Rust source read
   confirmed the parser/runtime split; mdBook build, Knowledge Map, memory, doctrine, and diff checks PASS.
-  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.1`** (array receiver-dot value chains).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.2.3.5.1` (now completed above).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.4.2 — Perl inline-composite value control lowering landed**
   (PERL ACTIONIR + PHASE0 + ORACLE + BOOK/KM). Inline `if(...)` and `switch(...)` now produce selected branch
   values on the Perl reference in supported value-consuming slots: `return(...)`, assignment RHS, and fluent

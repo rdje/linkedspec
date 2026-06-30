@@ -1911,3 +1911,25 @@ fn terse_2_3_4_1_array_consumers_accept_bare_array_arg() {
         "array-consuming helper slots read bare array working variables as snapshots"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains:
+
+#[test]
+fn terse_2_3_5_1_array_receiver_value_chains_run() {
+    let grammar = "Top::\n /x/ -> Done { items += \"b\"; items += \"a\"; items += \"c\"; items += \"a\"; phrases += \"aa-b\"; phrases += \"c-aa\"; return(array(items.sorted().drop_front(2).first(), array(items).reversed().take(2).last(), items.sorted().contains(\"c\"), items.sorted().index_of(\"c\"), items.drop_back().join_values(\"|\"), items.uniq().join_values(\",\"), items.filter_match(/^a$/).count(), phrases.split_each(\"-\").filter_match(/^aa$/).count(), items.sorted().is_nonempty(), missing.sorted().is_empty())) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["b", "c", true, 3, "b|a|c", "b,a,c", 2, 2, true, true]]),
+        "array receiver-dot value chains feed each returned value into the next array helper"
+    );
+}
+
+#[test]
+fn terse_2_3_5_1_array_end_mutations_remain_statement_only_in_value_slots() {
+    let grammar = "Top::\n /x/ -> Done { items.push_back(\"seed\"); return(array(items.push_back(\"value\"), array_copy(items))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[null, ["seed"]]]),
+        "push_back remains statement-only when it appears in a value expression"
+    );
+}

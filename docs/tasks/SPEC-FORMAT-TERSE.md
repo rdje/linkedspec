@@ -6,10 +6,14 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-01` (**`.2.3.5` DONE/SPLIT; frontier `.2.3.5.1`** — return-type method chaining
-  is specified before code. Statement-only receiver-dot array mutations from `.1.6` remain stable, while
-  value-returning receiver-dot chains are split into array, hash, string, and number implementation leaves
-  with explicit backend parity/oracle requirements. Prior **`.2.3.4.2` DONE** — Perl inline-composite
+- Last updated: `2026-07-01` (**`.2.3.5.1` DONE; frontier `.2.3.5.2`** — array receiver-dot value chains
+  now run on Perl and Rust. Pure array helpers can be chained from array receivers, terminal helpers return
+  their documented scalar/number/string/boolean values, and `.1.6` receiver-dot end mutations remain
+  statement-only. The oracle corpus is **47 fixtures** and phase0 is **996 green**. Prior **`.2.3.5`
+  DONE/SPLIT** — return-type method chaining is specified before code. Statement-only receiver-dot array
+  mutations from `.1.6` remain stable, while value-returning receiver-dot chains are split into array, hash,
+  string, and number implementation leaves with explicit backend parity/oracle requirements. Prior
+  **`.2.3.4.2` DONE** — Perl inline-composite
   value-control lowering landed. Inline `if(...)` and `switch(...)` now return the selected branch value in `return(...)`,
   assignment RHS, and fluent `.return(...)` value slots, including nested helper predicates/branches and
   expression-valued block branches. The new
@@ -1834,7 +1838,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.3.5 - split return-type method chaining`
 
 - ID: `SPEC-FORMAT-TERSE.2.3.5.1`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Array receiver-dot value chains
   Acceptance: Define and implement the array-family receiver-dot value contract on Perl and Rust. Pure array
     snapshot methods such as sorted/reversed/take/take_last/drop_front/drop_back/slice/filter/uniq-style forms
@@ -1844,8 +1848,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     contract says so. The existing `.1.6` mutating statements `push_back`, `push_front`, `pop_back`, and
     `pop_front` must remain statement-only unless this leaf explicitly splits destructive value-returning
     variants before code. Add Perl phase0 locks, Rust parser/runtime locks, oracle fixtures, and mdBook examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Perl normalizes receiver-dot array value chains to pure helper value
+    composition without changing legacy public function-style array-pipeline lowering. `items.sorted().drop_front(2).first()`,
+    `items.uniq().join_values(",")`, `items.filter_match(/^a$/).count()`, and
+    `phrases.split_each("-").filter_match(/^aa$/).count()` are locked in phase0. Rust evaluates compatible
+    `Expr::FluentChain` array receivers by feeding the current value through existing helper contracts; `split_each`
+    now returns the documented flat array with the supplied delimiter. Statement-only `.1.6` mutations still
+    return `undef` in value slots and do not mutate there. Added Rust parser/runtime locks, oracle fixture
+    `terse_2_3_5_1_array_receiver_value_chains` (corpus **47 fixtures**), mdBook examples, and KM fact
+    `terse-array-receiver-value-chains`.
+  Commit: `SPEC-FORMAT-TERSE.2.3.5.1 - implement array receiver value chains`
 
 - ID: `SPEC-FORMAT-TERSE.2.3.5.2`
   Status: `pending`
@@ -1988,7 +2000,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.4.1` | `done` 2026-06-30 | Rust helper-context bare aggregate arguments landed for hash- and array-consuming helper slots; corpus 44 fixtures. |
 | — | `SPEC-FORMAT-TERSE.2.3.4.2` | `done` 2026-06-30 | Perl inline-composite value controls landed for `if`/`switch` in supported value positions; corpus 46 fixtures. |
 | — | `SPEC-FORMAT-TERSE.2.3.5` | `done` 2026-07-01 | Return-type method chaining specified before code and split by type family; no runtime behavior changed. |
-| 1 | `SPEC-FORMAT-TERSE.2.3.5.1` | `pending` | Array receiver-dot value chains, with `.1.6` statement-only mutation behavior preserved. |
+| — | `SPEC-FORMAT-TERSE.2.3.5.1` | `done` 2026-07-01 | Array receiver-dot value chains landed on Perl/Rust; phase0 996 green, corpus 47 fixtures, `.1.6` statement-only mutations preserved. |
+| 1 | `SPEC-FORMAT-TERSE.2.3.5.2` | `pending` | Hash receiver-dot value chains, with statement-level hash mutation semantics preserved. |
 | … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -2000,6 +2013,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   either end the chain or continue only through an explicitly compatible family contract. The `.1.6` array end
   mutations (`push_back`, `push_front`, `pop_back`, `pop_front`) stay statement-only until an array child leaf
   explicitly designs destructive value-returning semantics and proves Perl/Rust parity.
+
+- `2026-07-01` (**`.2.3.5.1` array receiver-dot value chains landed**). Array receiver-dot value chains are
+  pure helper composition over compatible array-returning helpers and documented array terminals. `join_values`
+  keeps its delimiter-first function contract, so `items.join_values("|")` maps to `join_values("|", items)`.
+  `split(value, delim)` is intentionally not an array receiver link because its receiver is scalar/string
+  input; string receiver chains remain `.2.3.5.3`. The `.1.6` array end mutations stay statement-only.
 
 - `2026-06-30` (**`.2.3.4.2` Perl inline value-control lowering landed**). Inline-composite `if(...)` and
   `switch(...)` are now portable value expressions in the supported value-consuming slots: `return(...)`,
@@ -2636,6 +2655,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5` | KM retrieval; full bootstrap/roadmap/mdBook/core-code read; TOOLBOX `call_spec_handler_subst` probes for statement receiver-dot mutations, value-position receiver-dot forms, and function-style pure helper composition; mdBook stale inline-control wording audit | Return-type method chaining split before code. Current ground truth: statement-only `.1.6` receiver-dot mutations lower/run, value-position/chained receiver-dot forms remain unsupported, Rust parses `Expr::FluentChain` but only executes single-call array end mutations as statement side effects. Child leaves `.2.3.5.1`–`.2.3.5.4` now own array/hash/string/number receiver-chain implementation. |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.1` | Perl syntax checks and receiver-chain probes; `prove -q -Iperl t/phase0_regression.t`; focused Rust parser/runtime tests (`parse_array_receiver_value_chain`, `terse_2_3_5_1`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; memory/doctrine/KM/diff checks | Array receiver-dot value chains landed. Pure array links compose through array-returning helpers, terminals return documented values, receiver-dot `join_values` preserves delimiter-first helper semantics, `split_each` flattens with the supplied delimiter on Rust, and `.1.6` end mutations remain statement-only. Phase0 PASS (996 tests); oracle corpus PASS over 47 fixtures. |
 | `2026-06-16` | `SPEC-FORMAT-TERSE` | Transcription faithful to `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` | Done — all Rounds 1–3 captured as leaves; Round 4+ as a discovery leaf |
 | `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 | `2026-06-23` | `SPEC-FORMAT-TERSE.1.1` (split) | `dump_parser_source` ground-truth probes (scratchpad `probe_autovar*.pl`, dump-don't-transcribe) establishing the one-scope / non-strict / preamble-`my` model; `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm` = 0; baseline `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh` (2/2), KM gate all EXIT 0 | Split `.1.1` → `.1.1.1`+`.1.1.2`; design recorded; KM card [[working-vars-no-strict-need-my-lexical]] added (map regenerated). Docs/tree/KM-only — no engine/book change, so phase0 N/A to the split slice |
@@ -2710,6 +2730,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `SPEC-FORMAT-TERSE.2.3.5` | `SPEC-FORMAT-TERSE.2.3.5 - split return-type method chaining` | Return-type method chaining specified before code and split into array/hash/string/number receiver-family leaves. No runtime behavior changed; first implementation frontier is `.2.3.5.1` array receiver-dot value chains. |
+| `SPEC-FORMAT-TERSE.2.3.5.1` | `SPEC-FORMAT-TERSE.2.3.5.1 - implement array receiver value chains` | Array receiver-dot value chains landed on Perl/Rust with phase0, focused Rust tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.2`. |
 | `SPEC-FORMAT-TERSE` (creation) | (in the `SPEC-FORMAT-TERSE.0` activation commit) | Tree was created `proposed` in an earlier session; first commit lands with `.0`. |
 | `SPEC-FORMAT-TERSE.0` | `SPEC-FORMAT-TERSE.0 — activate + ratify the terse .spec format direction (ADR 0007)` | Tree `proposed`→`active`; ADR `0007` + INDEX row; migration policy = gradual alias; reference-touching exception; implementation gated by `RTLUTILS-REGEX-HANG`. No engine/book change. |
 | `SPEC-FORMAT-TERSE.1.1` (split) | `SPEC-FORMAT-TERSE.1.1 — split into .1.1.1 (Perl) + .1.1.2 (Rust parity); record auto-existing-variable design + KM card` | `.1.1` → container; first frontier child `.1.1.1`. Design grounded by `dump_parser_source` probes; KM [[working-vars-no-strict-need-my-lexical]]. Docs/tree/KM-only — no engine/book change. |

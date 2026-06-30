@@ -45613,6 +45613,61 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         'explicit receiver alias spec auto-supplies one my @items');
 };
 
+subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
+    # SPEC-FORMAT-TERSE.2.3.5.1: array receiver-dot value chains feed the
+    # receiver into the existing pure helper contracts. The .1.6 end-mutation
+    # methods remain statement-only and are not made value-returning here.
+    plan tests => 11;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(items.sorted().drop_front(2).first())'), qr/sort .* \@items.*__ls_first/s,
+        'array receiver chain lowers through sorted/drop_front/first helper contracts');
+    like($L->('return(items.drop_back().join_values("|"))'), qr/join\("\|", \@\{\$__ls_join_values\}\)/,
+        'receiver-dot join_values keeps the documented delimiter-first helper contract');
+    like($L->('return(items.filter_nonempty().lowercase_each().join_values(","))'), qr/lc\(\$_\).*join\(",", \@\{\$__ls_join_values\}\)/s,
+        'filter/transform receiver chains lower as array-valued helper composition');
+    is($L->('return(items.push_back("a"))'), 'return items.push_back("a")',
+        'push_back remains outside value-chain lowering');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(sep,\"|\"); items += \"b\"; items += \"a\"; items += \"c\"; items += \"a\"; phrases += \"aa-b\"; phrases += \"c-aa\"; return(array(items.sorted().drop_front(2).first(), array(items).reversed().take(2).last(), items.sorted().index_of(\"c\"), items.drop_back().join_values(scalar(sep)), items.uniq().join_values(\",\"), items.filter_match(/^a\$/).count(), phrases.split_each(\"-\").filter_match(/^aa\$/).count(), items.sorted().is_nonempty(), missing.sorted().is_empty())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'array receiver value-chain spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["b","c",3,"b|a|c","b,a,c",2,2,1,1]',
+        'array receiver value chains return arrays/scalars/booleans without mutating the source array');
+
+    my $src = $gen->($spec);
+    is((() = ($src =~ /my \@items\b/g)), 1,
+        'array receiver chains auto-supply one my @items');
+    is((() = ($src =~ /my \@missing\b/g)), 0,
+        'empty missing receiver chains do not require a generated preamble symbol');
+    is((() = ($src =~ /my \$items\b/g)), 0,
+        'array receiver chains do not auto-supply my $items');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'array receiver value-chain spec has no canonical fallback');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'array receiver value-chain spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
     # SPEC-FORMAT-TERSE.2.1.2: Perl reference core expression-valued blocks.
     # Non-empty brace payloads without a top-level fat arrow are value blocks;

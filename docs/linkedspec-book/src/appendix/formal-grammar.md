@@ -484,6 +484,7 @@ drop_back(arr, n)       — all but last n (default 1; alias: drop_last)
 slice(arr, start, n)    — subarray from start, n elements
 sorted(arr)             — sorted ascending
 reversed(arr)           — reversed order
+arr.sorted().first()    — receiver-dot array value chain over compatible pure array helpers
 sorted_keys(hash)       — keys sorted by name, as array
 sorted_values(hash)     — values sorted by key name, as array
 contains(arr, needle)   — array membership test

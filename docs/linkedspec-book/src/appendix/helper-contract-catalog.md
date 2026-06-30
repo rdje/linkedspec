@@ -475,6 +475,23 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Returns**: array
 - **Behavior**: Returns a new array in reverse order. Does not mutate the input.
 
+### Array receiver-dot value chains
+- **Signature**: `array_expr.method(args...).next(args...)`
+- **Returns**: the documented return value of the final helper in the chain.
+- **Behavior**: A compatible array receiver feeds into the first pure array helper, and each helper's return
+  value feeds the next helper. For example, `items.sorted().drop_front(2).first()` is equivalent to
+  `first(drop_front(sorted(items), 2))`, and `items.uniq().join_values(",")` is equivalent to
+  `join_values(",", uniq(items))`.
+- **Allowed array-returning links**: `array_copy`, `copy`, `sorted`, `reversed`, `take`, `take_last`,
+  `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
+  `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
+- **Allowed terminal links**: `count`, `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`,
+  and `join_values`. Receiver-dot `items.join_values(delim)` keeps the helper's canonical delimiter-first
+  contract: it maps to `join_values(delim, items)`.
+- **Boundary**: `split(value, delim)` belongs to the scalar/string receiver family because its receiver is the
+  string being split. Statement-only end mutations (`push_back`, `push_front`, `pop_back`, `pop_front`) remain
+  mutations, not value-chain links.
+
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`
 - **Returns**: array
@@ -1101,9 +1118,11 @@ Any portable pure helper that accepts an array can receive the output of an arra
 portable pure helper that accepts a scalar can receive the output of a scalar-returning helper. Hash-consuming
 helper argument slots accept bare hash working variables as snapshots, so `merge_hash(hash_copy(base), overlay)`
 is equivalent to the explicit `hash(overlay)` form. Array-consuming helper argument slots likewise accept bare
-array working variables as snapshots, so `count(drop_front(sorted(items)))` is portable. Use explicit aggregate
-wrappers such as `array(name)` / `hash(name)` anywhere a helper contract does not say a bare aggregate read is
-accepted. Statement forms
+array working variables as snapshots, so `count(drop_front(sorted(items)))` is portable. Array receiver-dot
+value chains are the same composition written from the receiver side, so
+`items.sorted().drop_front(2).first()` and `items.filter_match(/^a$/).count()` are portable. Use explicit
+aggregate wrappers such as `array(name)` / `hash(name)` anywhere a helper contract does not say a bare
+aggregate read is accepted. Statement forms
 (`name = value`, `items += value`, `set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value
 expressions. Inline value `if`/`switch` is portable in the supported value-consuming slots (`return(...)`,
 assignment RHS, and fluent `.return(...)`), and its contract is the selected payload value rather than any
