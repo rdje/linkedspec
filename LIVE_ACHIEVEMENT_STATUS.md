@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.5 — attached `switch/case/default` split/owned before code**
+  (DOCS/TREE/KM ONLY; **no engine behavior change**). KM and TOOLBOX probes show the broad attached-switch
+  surface needs two implementation leaves: Perl first, Rust second. Perl has partial attached-switch lowering,
+  but adjacent `case/default` branch blocks can leave unresolved `case(...) { ... }` residue or host-like
+  `default { ... }` labels in generated source. Rust has lazy value-form `switch(...)` runtime tests, but no
+  attached `switch/case/default` parser in `CodeBlock::parse`.
+  **Verification:** KM retrieval; TOOLBOX descriptor/lowering/runtime probes; Perl/Rust code-read; focused Rust
+  value-form switch tests PASS with existing warning baseline; memory/doctrine/diff checks.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.5.1`** (Perl reference attached-switch separator/source lock).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.4 — `when/otherwise` aliases landed**
   (PERL ACTIONIR + RUST PARSER + ORACLE/KM/BOOK). Attached `when(cond) { ... } otherwise { ... }` now lowers as
   the portable alias form for attached `if(cond) { ... } else { ... }`. Perl recognizes the aliases in the

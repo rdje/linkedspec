@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.5 — attached switch split/ownership): Split the attached
+  `switch/case/default` leaf before code. Durable points. (1) **Perl is partial, not done.** A simple
+  one-case/default attached switch can run, but adjacent branch blocks can leave unresolved `case` residue or
+  host-like `default` labels in generated source. (2) **Separator semantics are the Perl reference slice.**
+  `.2.2.5.1` should lock adjacent `case/default` block splitting, source output, first-match/default behavior,
+  and the same-line statement separator after the final switch block. (3) **Rust parity follows the locked
+  contract.** Rust already has lazy value-form `switch(...)` helpers, but attached statement blocks currently
+  exist only for `if`/`when` in `CodeBlock::parse`; `.2.2.5.2` should add parser/runtime/oracle parity after
+  the Perl source contract is stable.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.4 — when/otherwise landed): Implemented the alias leaf. Durable points.
   (1) **Normalize, do not host-dispatch.** Perl now lowers attached `when(cond) { ... } otherwise { ... }` to
   canonical `if/else`; generated handlers no longer contain host Perl `when`. (2) **Perl needed every recognition

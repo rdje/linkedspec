@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.5 — split attached switch surface
+
+**Scope:** Task tree, Knowledge Map fact sources, roadmap tracker, and live continuity docs. No Perl behavior,
+Rust behavior, oracle fixture, or mdBook behavior changed in this ownership slice.
+
+**Ground truth:** Attached `switch/case/default` is not one safe implementation leaf. Perl already has
+attached-switch lowering machinery and a one-case/default form can run, but adjacent branch blocks without an
+explicit separator can leave unresolved `case(...) { ... }` residue or host-like `default { ... }` labels in
+generated source. Rust currently has lazy value-form `switch(expr, case(...), default(...))` runtime support,
+but `CodeBlock::parse` only recognizes attached statement blocks for `if`/`when`, not attached switch branches.
+
+**Split:** `.2.2.5` is now a container. `.2.2.5.1` owns the Perl reference separator/source lock for
+attached `switch/case/default`; `.2.2.5.2` owns Rust parser/runtime parity after the Perl contract is locked.
+
+**Validation:** KM retrieval PASS; TOOLBOX descriptor/lowering/runtime probes completed; Perl/Rust code-read
+completed; focused Rust value-form switch tests PASS with existing warning baseline; memory/doctrine/diff
+checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.4 — implement when otherwise aliases
 
 **Scope:** Perl ActionIR control-flow recognition/lowering, Rust lifecycle-code parser, Rust runtime tests,

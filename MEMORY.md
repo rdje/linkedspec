@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `bda08a8` (`SPEC-FORMAT-TERSE.2.2.4 - own when otherwise aliases`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — **`.2.2.4` implementation validated; frontier will advance to `.2.2.5` after commit**. User in a **PNT loop** (2026-06-23).
-- next_action: Commit `SPEC-FORMAT-TERSE.2.2.4 - implement when otherwise aliases`; then update `MEMORY.md` with the new hash and continue to `.2.2.5`.
+- latest_commit: `30f8374` (`SPEC-FORMAT-TERSE.2.2.4 - implement when otherwise aliases`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — **`.2.2.5` split/ownership in flight; frontier will advance to `.2.2.5.1` after commit**. User in a **PNT loop** (2026-06-23).
+- next_action: Commit `SPEC-FORMAT-TERSE.2.2.5 - split attached switch surface`; then implement `.2.2.5.1` Perl attached-switch separator/source lock.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy/source warning noise includes nested `rgx` baseline. oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs` (**37 fixtures after `.2.2.4`**). phase0 baseline = **991 green after `.2.1.4`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.2.2.4` implementation/code/tests/book/KM/live-docs plus prior post-commit `MEMORY.md` hash update; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: post-commit `MEMORY.md` hash/frontier update plus `.2.2.5` split/ownership docs/KM; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.
