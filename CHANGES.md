@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.6.1 — implement Perl attached while safety
+
+**Scope:** Perl ActionIR control-flow lowering, scanner/contract metadata, canonical diagnostics, phase0
+regression locks, mdBook status wording, Knowledge Map, task tree, and live continuity docs. Rust attached
+`while` parity remains `.2.2.6.2`.
+
+**What changed:** The Perl reference now accepts attached-block `while(cond) { ... }` as DSL control flow
+without raw fallback or unresolved helper residue. The condition is evaluated before each iteration, body
+statements run while it stays true, and `return(expr)` inside the loop returns from the surrounding rule/action.
+
+**Safety:** Lowering emits a deterministic per-loop iteration guard. A non-terminating DSL loop trips
+`LinkedSpec while iteration safety limit exceeded after 10000 iterations` and returns control to the parser
+instead of hanging.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/descriptor/runtime/source probes PASS; phase0 PASS
+(`Files=1, Tests=992`); mdBook build PASS; Knowledge Map regenerate/check PASS; memory/doctrine/diff checks
+PASS; full local CI PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.6 — split while loop surface
 
 **Scope:** Task tree, task index, roadmap tracker, live continuity docs, development notes, mdBook status

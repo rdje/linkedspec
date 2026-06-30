@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.6.1 — Perl attached while loop/safety landed): Implemented the Perl
+  reference slice. Durable points. (1) **Emit an owned loop, but avoid diagnostic residue.** The DSL
+  `while(cond) { ... }` lowers through ActionIR as a guarded host `for (; cond; )` block so the post-lowering
+  unresolved-helper scan does not rediscover a raw `while(...)` token. (2) **The guard is local and
+  deterministic.** Each lowered loop receives a unique `__ls_while_guard_N` counter and fails after 10000
+  iterations with `LinkedSpec while iteration safety limit exceeded after 10000 iterations`, preventing
+  non-terminating parser hangs. (3) **Condition mutation is the semantic lock.** Phase0 now proves a loop whose
+  body updates `count` via `set(count,num_add(...))` exits at `3`, so the condition is re-evaluated after body
+  statements. (4) **Rust remains next.** `.2.2.6.2` must mirror this accepted loop/safety contract in the Rust
+  parser/runtime before the book can call attached `while` portable.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.6 — attached while split/ownership): Split before code. Durable points.
   (1) **This is not a one-file parser tweak.** Perl currently treats attached `while(cond) { ... }` as raw host
   code (`ready=0 raw=1 fallback=1`), while Rust has no attached statement-loop parser/runtime. (2) **The

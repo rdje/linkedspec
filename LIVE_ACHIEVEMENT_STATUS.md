@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.6.1 — Perl attached `while(cond) { ... }` loop/safety landed**
+  (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Perl now lowers attached `while(cond) { ... }` through ActionIR
+  with no raw fallback or unresolved helper residue. Conditions are evaluated before each iteration; body
+  statements run while true; `return(expr)` inside the loop returns from the surrounding rule/action. Each loop
+  gets a deterministic local guard (`LinkedSpec while iteration safety limit exceeded after 10000 iterations`)
+  so non-terminating loops return control to the parser instead of hanging. Same-line statement separator rules
+  remain unchanged: a following ordinary statement still needs `;`.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/descriptor/runtime/source probes PASS; phase0
+  PASS (`Files=1, Tests=992`); mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.6.2`** (Rust attached-while parser/runtime parity).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.6 — attached `while(cond) { ... }` split/owned before code**
   (DOCS/TREE/KM ONLY; **no engine behavior change**). KM + TOOLBOX probes show current Perl lowers
   `while(false) { return("bad") }` as raw host code (`ready=0 raw=1 fallback=1 unresolved=0`), while Rust has

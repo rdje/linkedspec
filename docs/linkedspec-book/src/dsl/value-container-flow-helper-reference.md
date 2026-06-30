@@ -965,6 +965,24 @@ only when no case matched.
 
 Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / `elseif(...)` when each branch asks a different question.
 
+## Attached `while` flow
+
+The Perl reference accepts attached-block `while` for repeated statement bodies. The condition is evaluated
+before each iteration, and body statements can update the values used by that condition:
+
+```text
+set(count, 0);
+while(num_lt(scalar(count), 3)) {
+  set(count, num_add(scalar(count), 1));
+}
+return(count);
+```
+
+`return(expr)` inside the loop returns from the surrounding rule/action. Each loop has a deterministic
+10000-iteration guard so a non-terminating loop fails the rule instead of hanging the generated parser. Rust
+parity is tracked separately, so do not rely on attached `while` for portable cross-backend specs until that
+parity leaf lands.
+
 ## Debug output helpers
 
 `say(...)`, `print(...)`, and `print_each(...)` are statement helpers for simple diagnostic output in rule actions.

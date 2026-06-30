@@ -443,6 +443,11 @@ sub _lower_endif_flow_statement {
  return _call_actionir_owner_with_deps('control_flow', '_lower_endif_flow_statement', @args)
 }
 
+sub _lower_while_flow_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('control_flow', '_lower_while_flow_statement', @args)
+}
+
 sub _lower_switch_flow_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('control_flow', '_lower_switch_flow_statement', @args)

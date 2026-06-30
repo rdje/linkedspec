@@ -93,8 +93,9 @@ LinkedSpec currently supports three portable control-flow families:
 - `switch/case/default` as inline-composite expressions or attached-block statements.
 
 Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is portable on the
-Perl reference and Rust backend. `while(...) { ... }` remains later Round 2 implementation work and will
-include an explicit loop-safety rule.
+Perl reference and Rust backend. The Perl reference also accepts attached statement-level
+`while(...) { ... }` with an explicit iteration-safety guard; Rust parity is the next tracked leaf before this
+loop form becomes portable.
 
 ### If family: marker style
 
@@ -317,6 +318,37 @@ LX {
 }
 ```
 
+### While family: attached block (Perl reference status)
+
+Use attached-block `while` when a statement body must repeat while a DSL condition stays true. The condition
+is evaluated before every iteration, so body mutations can make the loop terminate:
+
+```text
+LX {
+  set(count, 0);
+  while(num_lt(scalar(count), 3)) {
+    set(count, num_add(scalar(count), 1));
+  }
+  return(count);
+}
+```
+
+`return(expr)` inside the loop returns from the surrounding rule/action, just like it does inside attached
+`if` or `switch` bodies:
+
+```text
+-> child {
+  while(is_nonempty(array(queue))) {
+    return(first(array(queue)));
+  }
+  return("empty");
+}
+```
+
+The Perl reference guards each attached `while` with a deterministic 10000-iteration safety limit. A loop whose
+condition never becomes false fails the rule instead of hanging the generated parser. A same-line statement
+after the loop still needs the normal semicolon separator after the closing `}`.
+
 ## Equivalence Guarantee
 
 The current portable equivalence guarantee is intentionally narrower:
@@ -327,7 +359,8 @@ The current portable equivalence guarantee is intentionally narrower:
 - Attached-block `switch(...) { case(...) { ... } default { ... } }` evaluates the switch expression once
   and executes only the first matching branch or the default branch.
 
-`while(...) { ... }` is still outside the portable guarantee until its Round 2 loop-safety leaf lands.
+`while(...) { ... }` is still outside the portable guarantee until Rust implements the accepted Perl
+loop-safety contract.
 
 ## When to use which form
 
@@ -338,6 +371,7 @@ The current portable equivalence guarantee is intentionally narrower:
 | Single-branch if/else choice | Inline composite or marker style | Expresses intent directly |
 | Multi-branch switch with simple bodies | Inline composite | One expression, no markers to balance |
 | Multi-branch switch with complex bodies | Attached switch | Branch bodies can span lines and contain statements |
+| Repeated statement body in the Perl reference | Attached while | Re-evaluates the condition and has a deterministic safety guard |
 | Deeply nested if/else chains | Marker-style | Explicit open/close markers prevent ambiguity |
 | Return payload construction | Inline composite | Returns the evaluated expression directly |
 | Conditional accumulation | Attached block or marker style | Branch body can contain multiple statements |

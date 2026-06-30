@@ -2112,6 +2112,7 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
             lower_elseif_flow_statement    => sub { return 'elseif_ok' },
             lower_else_flow_statement      => sub { return 'else_ok' },
             lower_endif_flow_statement     => sub { return 'endif_ok' },
+            lower_while_flow_statement     => sub { return 'while_ok' },
             lower_switch_flow_statement    => sub { return 'switch_ok' },
             lower_case_flow_statement      => sub { return 'case_ok' },
             lower_default_flow_statement   => sub { return 'default_ok' },
@@ -2555,6 +2556,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_elseif_flow_statement = sub { return 'elseif_ok' };
     local *Synthetic::ActionIROwner::_lower_else_flow_statement = sub { return 'else_ok' };
     local *Synthetic::ActionIROwner::_lower_endif_flow_statement = sub { return 'endif_ok' };
+    local *Synthetic::ActionIROwner::_lower_while_flow_statement = sub { return 'while_ok' };
     local *Synthetic::ActionIROwner::_lower_switch_flow_statement = sub { return 'switch_ok' };
     local *Synthetic::ActionIROwner::_lower_case_flow_statement = sub { return 'case_ok' };
     local *Synthetic::ActionIROwner::_lower_default_flow_statement = sub { return 'default_ok' };
@@ -12400,6 +12402,7 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_lower_elseif_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ELSEIF_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_else_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ELSE_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_endif_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ENDIF_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_while_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_WHILE_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_flow_branch_action_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FLOW_BRANCH_ACTION_EXPR__\n" };
         local *LinkedSpec::_lower_inline_switch_branch_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_INLINE_SWITCH_BRANCH_EXPR__\n" };
         local *LinkedSpec::_lower_switch_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SWITCH_FLOW_STATEMENT__\n" };
@@ -13196,7 +13199,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_while_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -39369,6 +39372,89 @@ SPEC
         'switch("a") { case("a") { set(out,"hit"); return(out) } default { return("miss") } } return("after")'
     );
     like($attached_missing_separator, qr/\bswitch\s*\("a"\).*return\("after"\)/s, 'same-line statement after attached switch still requires a semicolon separator');
+};
+subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
+    plan tests => 22;
+
+    require JSON::PP;
+    my $json = JSON::PP->new->canonical(1)->allow_nonref(1);
+
+    my $attached_while = 'while(false) { return("bad") }; return("done")';
+    my $lowered = LinkedSpec::call_spec_handler_subst('Top', $attached_while);
+    like(
+        $lowered,
+        qr/do \{ my \$__ls_while_guard_1 = 0; for \(; do \{ require JSON::PP; JSON::PP::false \}; \)/s,
+        'compact attached while lowers to a scoped guarded host loop with pre-iteration condition evaluation',
+    );
+    unlike($lowered, qr/\bwhile\s*\(/, 'compact attached while lowering leaves no host-shaped while residue');
+    like(
+        $lowered,
+        qr/die "LinkedSpec while iteration safety limit exceeded after 10000 iterations" if \+\+\$__ls_while_guard_1 > 10000/s,
+        'compact attached while lowering includes a deterministic iteration safety guard',
+    );
+    like($lowered, qr/return "done"/s, 'statement after semicolon-separated attached while still lowers');
+
+    my $attached_spec = qq{Top::\n /x/ -> Done { $attached_while }\n\nDone::\n /x/\n};
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for compact attached while form');
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'compact attached while avoids RAW_PERL fallback');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'compact attached while avoids raw Perl dependency');
+    is($attached_meta->{unresolved_helper_count}, 0, 'compact attached while avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'WHILE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'compact attached while metadata records WHILE and RETURN nodes',
+    );
+    ok($attached_meta->{language_agnostic_action_ir_ready}, 'compact attached while is language-agnostic ActionIR ready');
+
+    my $attached_parser = LinkedSpec::Get(\$attached_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $attached_input = 'x';
+    is(
+        $json->encode($attached_parser->(\$attached_input)),
+        '"done"',
+        'compact attached while skips the body when the initial condition is false',
+    );
+
+    my $counting_while = 'set(count,0); while(num_lt(scalar(count),3)) { set(count,num_add(scalar(count),1)) }; return(count)';
+    my $counting_spec = qq{Top::\n /x/ -> Done { $counting_while }\n\nDone::\n /x/\n};
+    my $counting_descr = LinkedSpec::Get(\$counting_spec, return_descriptor => 1);
+    ok(defined($counting_descr) && ref($counting_descr) eq 'HASH', 'descriptor build succeeds for condition-mutating attached while form');
+    my $counting_meta = $counting_descr->{spec}{Top}{meta}{action_rewriter};
+    is($counting_meta->{canonical_action_ir_fallback_count}, 0, 'condition-mutating attached while avoids RAW_PERL fallback');
+    is($counting_meta->{unresolved_helper_count}, 0, 'condition-mutating attached while avoids unresolved-helper hits');
+    ok($counting_meta->{language_agnostic_action_ir_ready}, 'condition-mutating attached while remains language-agnostic ActionIR ready');
+
+    my $counting_parser = LinkedSpec::Get(\$counting_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $counting_input = 'x';
+    is(
+        $json->encode($counting_parser->(\$counting_input)),
+        '3',
+        'compact attached while re-evaluates the condition after body mutations',
+    );
+
+    my $guard_spec = qq{Top::\n /x/ -> Done { while(true) { set(count,1) }; return("bad") }\n\nDone::\n /x/\n};
+    my $guard_source = '';
+    LinkedSpec::Get(\$guard_spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$guard_source);
+    like($guard_source, qr/LinkedSpec while iteration safety limit exceeded after 10000 iterations/s, 'generated source contains the attached-while safety guard');
+
+    my $guard_parser = LinkedSpec::Get(\$guard_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $guard_input = 'x';
+    my ($guard_ok, $guard_ret, $guard_err, $guard_stdout, $guard_stderr) = run_parser_with_captured_io($guard_parser, \$guard_input);
+    ok($guard_ok, 'non-terminating attached while returns control to the parser');
+    is($json->encode($guard_ret), 'null', 'non-terminating attached while guard turns the rule into a failed match');
+    like($guard_stdout.$guard_stderr.$guard_err, qr/LinkedSpec while iteration safety limit exceeded after 10000 iterations/s, 'non-terminating attached while reports the safety guard diagnostic');
+
+    my $attached_then_return = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'while(false) { set(out,"bad") }; return("after")'
+    );
+    like($attached_then_return, qr/\}\s*;\s*return "after"/s, 'explicit semicolon after attached while separates following same-line statement');
+    my $attached_missing_separator = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'while(false) { set(out,"bad") } return("after")'
+    );
+    like($attached_missing_separator, qr/\bwhile\s*\(false\).*return\("after"\)/s, 'same-line statement after attached while still requires a semicolon separator');
 };
 subtest 'emit_context_showcase_pipe_operator_if_else_method_chain' => sub {
     plan tests => 7;

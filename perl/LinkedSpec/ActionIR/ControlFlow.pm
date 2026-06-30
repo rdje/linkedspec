@@ -326,6 +326,7 @@ sub _new_flow_branch_rewrite_ctx {
   if_stack       => [],
   switch_stack   => [],
   switch_counter => ($ctx->{switch_counter} || 0),
+  while_counter  => ($ctx->{while_counter} || 0),
   rewrite_rules  => $ctx->{rewrite_rules},
  }
 }
@@ -336,6 +337,7 @@ sub _clone_flow_branch_rewrite_ctx {
   if_stack       => [map { +{%$_} } @{$ctx->{if_stack} || []}],
   switch_stack   => [map { +{%$_} } @{$ctx->{switch_stack} || []}],
   switch_counter => ($ctx->{switch_counter} || 0),
+  while_counter  => ($ctx->{while_counter} || 0),
   rewrite_rules  => $ctx->{rewrite_rules},
  }
 }
@@ -513,6 +515,7 @@ sub _lower_flow_branch_direct_control_flow_statement {
   elseif    => \&_lower_elseif_flow_statement,
   else      => \&_lower_else_flow_statement,
   endif     => \&_lower_endif_flow_statement,
+  while     => \&_lower_while_flow_statement,
   switch    => \&_lower_switch_flow_statement,
   case      => \&_lower_case_flow_statement,
   default   => \&_lower_default_flow_statement,
@@ -609,6 +612,7 @@ sub _lower_flow_branch_action_list {
  return undef if @{$branch_ctx->{if_stack} || []};
  return undef if @{$branch_ctx->{switch_stack} || []};
  $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
+ $ctx->{while_counter} = $branch_ctx->{while_counter} if defined $branch_ctx->{while_counter};
  return \@actions
 }
 
@@ -753,7 +757,47 @@ sub _lower_attached_switch_body {
 
  push @actions, '}' if $active_switch->{open_case};
  $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
+ $ctx->{while_counter} = $branch_ctx->{while_counter} if defined $branch_ctx->{while_counter};
  return \@actions
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_while_flow_statement
+# Purpose : Lower attached `while(cond) { ... }` statement loops with a
+#           deterministic iteration safety guard.
+# Args    : ($expr, $ctx, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_while_flow_statement {
+ my ($expr, $ctx, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $call = $parsed_expr->{call};
+ my $attached_block = $parsed_expr->{attached_block};
+ return undef unless $call && $call->{method} eq 'while';
+ return undef unless defined $attached_block;
+
+ my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
+ return undef unless $effective_args && @$effective_args == 1;
+ my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
+ return undef unless defined($cond_expr) && length($cond_expr);
+
+ my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
+ return undef unless ref($actions) eq 'ARRAY';
+
+ $ctx->{while_counter} = ($ctx->{while_counter} || 0) + 1;
+ my $guard_var = '__ls_while_guard_'.$ctx->{while_counter};
+ my $body = @$actions ? '; '.join('; ', @$actions) : '';
+ return 'do { my $'.$guard_var.' = 0; for (; '.$cond_expr.'; ) { die "LinkedSpec while iteration safety limit exceeded after 10000 iterations" if ++$'.$guard_var.' > 10000'.$body.' } }'
 }
 
 #------------------------------------------------------------------------------

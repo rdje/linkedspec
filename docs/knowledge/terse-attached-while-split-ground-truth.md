@@ -1,6 +1,6 @@
 ---
 id: terse-attached-while-split-ground-truth
-title: Attached while(cond) blocks are split before code: Perl reference loop/safety first, Rust parity second
+title: Attached while(cond) blocks: Perl reference loop/safety landed, Rust parity remains
 answers:
   - "what owns attached while(cond) blocks"
   - "does Perl support attached while blocks without raw fallback"
@@ -10,21 +10,21 @@ answers:
 date: 2026-06-30
 status: current
 tags: [spec-format-terse, control-flow, while, actionir, rust-parity, safety]
-evidence: "SPEC-FORMAT-TERSE.2.2.6 split/ownership, 2026-06-30. KM retrieval (`terse-control-flow-keyword-surface-ground-truth`, `spec-format-brainstorm-rounds-1-3`, `top-rule-recursion-forward-progress-guard`) and TOOLBOX probes show current Perl lowers `while(false) { return(\"bad\") }` as raw host code: `ready=0 raw=1 fallback=1 unresolved=0`. Perl code-read found existing ActionIR control-flow ownership for attached if/switch, but no while contract in `ControlFlow.pm`, `Contracts.pm`, or `Scanner/FlowRules.pm`. Rust code-read found attached parsers/runtimes for if and switch in `expr.rs`/`engine.rs`, but no attached statement-loop parser/runtime. `.2.2.6` is split into `.2.2.6.1` Perl reference loop/safety and `.2.2.6.2` Rust parity."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{while(false) { return(\"bad\") }}, q{while(true) { return(\"hit\") }}) { my $lower=LinkedSpec::call_spec_handler_subst(\"Top\", $stmt); my $spec=qq{Top::\\n /x/ -> Done { $stmt }\\n\\nDone::\\n /x/\\n}; my $d=LinkedSpec::Get(\\$spec, return_descriptor=>1); my $m=$d->{spec}{Top}{meta}{action_rewriter}; print qq{$stmt => $lower :: ready=$m->{language_agnostic_action_ir_ready} raw=$m->{raw_perl_dependency_count} fallback=$m->{canonical_action_ir_fallback_count} unresolved=$m->{unresolved_helper_count}\\n}; }'"
+evidence: "SPEC-FORMAT-TERSE.2.2.6 split/ownership plus .2.2.6.1 implementation, 2026-06-30. The split showed old Perl lowering for `while(false) { return(\"bad\") }` was raw host code (`ready=0 raw=1 fallback=1 unresolved=0`) and Rust had no attached statement-loop parser/runtime. `.2.2.6.1` then added Perl `ControlFlow`, `Contracts`, `Scanner::FlowRules`, `CanonicalEvents`, and `RewritePipeline` ownership for attached `while(cond) { ... }`. Current probes show Perl descriptor metadata is `ready=1 raw=0 fallback=0 unresolved=0` with `WHILE` nodes; counted loops re-evaluate the condition and return 3; non-terminating loops trip `LinkedSpec while iteration safety limit exceeded after 10000 iterations`. Phase0 PASS (`Files=1, Tests=992`). Rust parity remains `.2.2.6.2`."
+reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $stmt=q{set(count,0); while(num_lt(scalar(count),3)) { set(count,num_add(scalar(count),1)) }; return(count)}; my $spec=qq{Top::\\n /x/ -> Done { $stmt }\\n\\nDone::\\n /x/\\n}; my $d=LinkedSpec::Get(\\$spec, return_descriptor=>1); my $m=$d->{spec}{Top}{meta}{action_rewriter}; my $p=LinkedSpec::Get(\\$spec, top_rule=>\"Top\", parse_mode=>\"consume\"); my $in=\"x\"; print qq{ready=$m->{language_agnostic_action_ir_ready} raw=$m->{raw_perl_dependency_count} fallback=$m->{canonical_action_ir_fallback_count} unresolved=$m->{unresolved_helper_count} nodes=}.join(q{,}, @{$m->{canonical_action_ir_nodes}}).qq{ run=}.JSON::PP->new->canonical(1)->allow_nonref(1)->encode($p->(\\$in)).qq{\\n};'"
 ---
 
-`while(cond) { ... }` is the remaining Round 2 control-flow leaf after attached `if`, `when/otherwise`, and
+`while(cond) { ... }` is the remaining Round 2 control-flow family after attached `if`, `when/otherwise`, and
 attached `switch/case/default` landed on both variants.
 
 Current state:
 
-- **Perl:** attached `while` lowers as raw host code, so it is not ActionIR-owned and not portable.
+- **Perl:** attached `while` is now ActionIR-owned on the reference implementation.
 - **Rust:** no attached statement-loop parser/runtime exists yet.
-- **Safety:** the accepted DSL contract must include deterministic iteration safety so a non-terminating loop
+- **Safety:** each Perl attached loop has a deterministic 10000-iteration guard so a non-terminating loop
   cannot hang a generated parser.
 
 Split:
 
-1. `SPEC-FORMAT-TERSE.2.2.6.1` — Perl reference attached `while(cond) { ... }` with loop safety.
-2. `SPEC-FORMAT-TERSE.2.2.6.2` — Rust parity for the accepted Perl loop/safety contract.
+1. `SPEC-FORMAT-TERSE.2.2.6.1` — Perl reference attached `while(cond) { ... }` with loop safety. DONE.
+2. `SPEC-FORMAT-TERSE.2.2.6.2` — Rust parity for the accepted Perl loop/safety contract. FRONTIER.

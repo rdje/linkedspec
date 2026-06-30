@@ -53,6 +53,7 @@ sub default_deps_for_package {
    'lower_elseif_flow_statement',
    'lower_else_flow_statement',
    'lower_endif_flow_statement',
+   'lower_while_flow_statement',
    'lower_switch_flow_statement',
    'lower_case_flow_statement',
    'lower_default_flow_statement',
@@ -93,6 +94,7 @@ sub _require_lowering_deps {
   lower_elseif_flow_statement    => $require_dep->('lower_elseif_flow_statement'),
   lower_else_flow_statement      => $require_dep->('lower_else_flow_statement'),
   lower_endif_flow_statement     => $require_dep->('lower_endif_flow_statement'),
+  lower_while_flow_statement     => $require_dep->('lower_while_flow_statement'),
   lower_switch_flow_statement    => $require_dep->('lower_switch_flow_statement'),
   lower_case_flow_statement      => $require_dep->('lower_case_flow_statement'),
   lower_default_flow_statement   => $require_dep->('lower_default_flow_statement'),
@@ -2008,6 +2010,18 @@ sub _build_flow_control_contracts {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_endif_flow_statement};
     $code =~ s/^\s*(?<expr>endif\b(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)\s*$/$lower->($+{expr}, $ctx) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'while_flow',
+   ir_node            => 'WHILE',
+   diag_name          => 'while',
+   unresolved_pattern => qr/\bwhile\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/o,
+   lower              => sub {
+    my ($code, $ctx) = @_;
+    my $lower = $d->{lower_while_flow_statement};
+    $code =~ s/^\s*(?<expr>while\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?)\s*$/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },

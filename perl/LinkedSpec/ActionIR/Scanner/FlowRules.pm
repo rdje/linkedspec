@@ -17,6 +17,7 @@ sub try_scan_contract_ir_events {
   'elseif_flow' => \&_scan_contract_elseif_flow,
   'else_flow' => \&_scan_contract_else_flow,
   'endif_flow' => \&_scan_contract_endif_flow,
+  'while_flow' => \&_scan_contract_while_flow,
   'switch_flow' => \&_scan_contract_switch_flow,
   'case_flow' => \&_scan_contract_case_flow,
   'default_flow' => \&_scan_contract_default_flow,
@@ -174,6 +175,21 @@ sub _scan_contract_endif_flow {
  next unless $effective_args;
  push @events, {raw => $+{expr}, args => {}};
 }
+ return \@events
+}
+
+sub _scan_contract_while_flow {
+ my ($code) = @_;
+ my @events;
+ while ($code =~ /\b(?<head>while\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+  my $call = _parse_method_function_expr($+{head});
+  next unless $call;
+  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+  next unless $effective_args && @$effective_args == 1;
+  next unless defined $+{block};
+  my $raw = $+{head}.$+{block};
+  push @events, {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}};
+ }
  return \@events
 }
 
