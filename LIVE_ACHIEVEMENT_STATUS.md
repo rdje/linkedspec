@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3 — fluent/lifecycle/composability surface split/owned**
+  (DOCS/TREE/KM ONLY; **no engine behavior change**). `.2.3` was too broad for one signoff slice. KM +
+  TOOLBOX probes show the Perl reference already accepts exact action/lifecycle
+  `.when(cond) { ... }.otherwise { ... }` fluent block chains with `ready=1 raw=0 fallback=0 unresolved=0`,
+  while Rust still lacks fluent attached-block/action-edge parity. Lifecycle block syntax is present, but final
+  expression value dropping versus explicit `return(expr)` rule-channel behavior needs a focused semantic lock.
+  Full nested composability and return-type method chaining are also separate surfaces; Round 1 receiver-dot
+  array methods remain statement-only.
+  **Verification:** KM retrieval; TOOLBOX descriptor/runtime probes; Perl/Rust code-read; mdBook/KM/memory/
+  doctrine/diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.1`** (Perl reference fluent block-chain contract lock).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached `while(cond) { ... }` parity landed**
   (RUST PARSER + RUNTIME LOOP + ORACLE/BOOK/KM LOCKS). Rust now parses attached `while(cond) { ... }` as a
   lazy statement loop, re-evaluates the condition before each iteration, executes body statements while true,

@@ -7,8 +7,11 @@ Round 2.
 
 ## The two expression styles
 
-Every LinkedSpec helper — declaration, assignment, push, return, flow control — can be
-written either way.
+Most ordinary LinkedSpec helper statements — declaration, assignment, push, return, and pure
+value helpers — can be written in either fluent or structured style. Block-bodied fluent control
+flow is a narrower surface: use the structured attached-block forms below for portable
+cross-backend block control; fluent block chains are documented as portable only after both
+backends preserve the same behavior.
 
 **Fluent style** chains calls on action edges with `.method()`:
 
@@ -142,8 +145,9 @@ The fluent equivalent chains the markers with dots:
   .endif;
 ```
 
-All three spellings — parenthesized marker, bare marker, fluent chain — lower to the
-same generated handler.
+The parenthesized and bare marker spellings are the portable structured marker forms. Fluent
+marker chains are available on the Perl reference and are being locked separately before the book
+can present every action-edge fluent continuation as cross-backend portable.
 
 ### If family: attached blocks
 
@@ -416,5 +420,6 @@ This rule uses:
 - Statement-marker `if` inside `LX`
 - Inline-composite `switch` inside the `else` branch
 
-The same logic could be written with a short fluent chain on an action edge when it stays readable. Use
-structured blocks when the state updates or branch bodies need more room.
+Short action-edge helper sequences can use fluent chains when they stay readable. Use structured blocks when
+state updates, lifecycle phases, or branch bodies need more room, and prefer the structured attached-block
+forms for portable block-bodied control flow.

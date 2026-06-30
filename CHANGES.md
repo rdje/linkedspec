@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3 — split fluent lifecycle composability surface
+
+**Scope:** Task tree, global task-tree index, roadmap tracker, live continuity docs, mdBook wording, and
+Knowledge Map fact sources. No Perl, Rust, or oracle fixture behavior changed in this ownership slice.
+
+**Ground truth:** Perl reference already accepts exact action and lifecycle fluent block chains such as
+`.when(cond) { ... }.otherwise { ... }` with no raw fallback or unresolved helper residue. Rust attached
+statement blocks are portable, but Rust does not yet have expression fluent attached-block payloads and still
+has action-edge fluent continuation parity tracked by `RUST-PARITY.7.5.3`. Lifecycle block syntax exists, but
+final-expression value dropping and explicit `return(expr)` rule-channel behavior need a focused lock.
+Receiver-dot array end methods remain statement-only; value-returning/chained method calls are a later surface.
+
+**Split:** `.2.3` is now a container. `.2.3.1` owns the Perl fluent block-chain contract lock; `.2.3.2` owns
+lifecycle value-drop/return-channel semantics; `.2.3.3` owns Rust fluent block-chain/action-edge parity;
+`.2.3.4` owns full composability audit and follow-on split; `.2.3.5` owns return-type method chaining design
+and first implementation split.
+
+**Validation:** KM retrieval PASS; TOOLBOX descriptor/runtime probes completed; Perl/Rust code-read completed;
+focused Rust parser spot checks PASS where applicable; mdBook build PASS; Knowledge Map regenerate/check PASS;
+memory/doctrine/diff checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.6.2 — implement Rust attached while safety
 
 **Scope:** Rust lifecycle-code parser/runtime, numeric comparison helper parity required by the documented

@@ -6,7 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.2.6.2` DONE; frontier `.2.3`** — Rust attached
+- Last updated: `2026-06-30` (**`.2.3` SPLIT/OWNED; frontier `.2.3.1`** — fluent
+  control-flow, lifecycle block semantics, full composability, Rust fluent-block/action-edge parity, and
+  return-type method chaining are now separate leaves after KM/TOOLBOX/code-read ground truth. Perl already
+  accepts exact action/lifecycle `.when(cond) { ... }.otherwise { ... }` block chains; Rust and the portable
+  book contract do not yet. Lifecycle block syntax exists, but value-drop versus rule-return-channel behavior
+  still needs a focused semantic lock. Prior **`.2.2.6.2` DONE; frontier `.2.3`** — Rust attached
   `while(cond) { ... }` parser/runtime parity landed with deterministic iteration safety and oracle corpus
   **39 fixtures**; attached while is now portable on Perl and Rust. Prior **`.2.2.6.1` DONE** — Perl attached
   `while(cond) { ... }` now lowers through ActionIR with a deterministic iteration guard. Prior
@@ -1463,12 +1468,73 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.2.6.2 - implement Rust attached while safety`
 
 - ID: `SPEC-FORMAT-TERSE.2.3`
-  Status: `pending`
+  Status: `active` (2026-06-30 — SPLIT/OWNED before code; container)
   Goal: Fluent control-flow, lifecycle blocks, and full composability
+  Children: `.2.3.1`, `.2.3.2`, `.2.3.3`, `.2.3.4`, `.2.3.5`
   Acceptance: Fluent chains `.when (cond) { ... }.otherwise { ... }` (parens for condition, block after);
     lifecycle blocks `I { ... }`, `LS { ... }`, etc. take a block after the keyword and drop the value;
     Lisp-style composability everywhere (any function in any argument position at any depth); method
     chaining by return type (array→array, hash→hash, string→string, number→number).
+  Verification: **SPLIT 2026-06-30.** KM retrieval, TOOLBOX probes, and code-read show this is not one safe
+    implementation leaf. Perl reference descriptor/runtime probes already accept exact action and lifecycle
+    fluent block chains such as `Done.when(true) { return("yes") }.otherwise { return("no") }` and
+    `I.when(true) { set(value,"yes") }.otherwise { set(value,"no") }` with
+    `ready=1 raw=0 fallback=0 unresolved=0` and `"yes"` runtime results. Lifecycle block syntax
+    `I { ... }` exists across the family, but its final value is not returned; explicit `return(expr)` still
+    writes the surrounding rule/action return channel and needs a focused contract lock before the book can
+    phrase "drop the value" without ambiguity. Rust currently parses attached statement blocks, but expression
+    fluent chains have only `.method(args)` calls, no attached-block payloads; the compiler preserves blind-edge
+    fluent chains but drops standalone/body fluent chains, and action-edge fluent continuation parity is already
+    tracked by `RUST-PARITY.7.5.3`. Representative nested helper composition works, while value-returning and
+    chained receiver-dot array methods such as `set(out, items.push_back("a"))` and
+    `items.push_back("a").push_back("b")` are not supported; Round 1 array end-mutation methods are
+    statement-only.
+  Commit: `pending` (`SPEC-FORMAT-TERSE.2.3 - split fluent lifecycle composability surface`)
+
+- ID: `SPEC-FORMAT-TERSE.2.3.1`
+  Status: `pending`
+  Goal: Perl reference fluent block-chain contract lock
+  Acceptance: Exact action-edge and lifecycle fluent block chains are source/descriptor/runtime locked on the
+    Perl reference: `.when(cond) { ... }.otherwise { ... }` and the no-dot `otherwise` continuation variant
+    both lower through owned ActionIR/bootstrap machinery with no raw fallback or unresolved helper residue.
+    The book states this as the Perl reference surface unless and until Rust parity lands.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.3.2`
+  Status: `pending`
+  Goal: Lifecycle block value-drop and return-channel semantics lock
+  Acceptance: `I { ... }`, `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, and
+    `LX { ... }` block syntax is verified across parser/runtime/book surfaces; final-expression block values
+    are discarded, and explicit `return(expr)` behavior is documented and regression-locked separately from
+    expression-valued block-local returns.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.3.3`
+  Status: `pending`
+  Goal: Rust fluent block-chain and action-edge parity split/implementation
+  Acceptance: Rust supports the accepted fluent control-flow block-chain contract, including attached block
+    payloads on fluent calls where required, and no longer drops action-edge/body fluent continuations. This
+    leaf must coordinate with `RUST-PARITY.7.5.3` rather than hiding that existing parity gap.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.3.4`
+  Status: `pending`
+  Goal: Full composability audit and gap split
+  Acceptance: Representative and adversarial nested helper calls are audited across Perl lowering, Rust AST,
+    runtime evaluation, oracle fixtures, and mdBook examples. Any unsupported "function in any argument
+    position at any depth" sites are split into concrete leaves instead of accepted by assertion.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.3.5`
+  Status: `pending`
+  Goal: Method chaining by return type design and first implementation split
+  Acceptance: The return-type chaining model is specified before code. Statement-only receiver-dot mutations
+    from `.1.6` remain stable, while value-returning method calls and chains are split by type family
+    (array/hash/string/number) with explicit return contracts and backend parity requirements.
   Verification: `pending`
   Commit: `pending`
 
@@ -1561,11 +1627,29 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.2.5.1` | `done` 2026-06-30 | Perl reference attached-switch separator/source lock landed; compact adjacent branches lower without host residue and phase0/local CI pass. |
 | — | `SPEC-FORMAT-TERSE.2.2.5.2` | `done` 2026-06-30 | Rust attached-switch parser/runtime parity landed; oracle corpus 38 fixtures and lazy value-form switch preserved. |
 | — | `SPEC-FORMAT-TERSE.2.2.6` | `done` 2026-06-30 | `while(cond) { ... }` split/owned before code, then closed by Perl reference loop/safety and Rust parity. |
-| 1 | `SPEC-FORMAT-TERSE.2.2.6.1` | `done` 2026-06-30 | Perl reference attached `while(cond) { ... }` with deterministic iteration safety landed. |
-| 2 | `SPEC-FORMAT-TERSE.2.2.6.2` | `done` 2026-06-30 | Rust attached-while parser/runtime parity landed with deterministic iteration safety and 39 oracle fixtures. |
-| … | `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
+| — | `SPEC-FORMAT-TERSE.2.2.6.1` | `done` 2026-06-30 | Perl reference attached `while(cond) { ... }` with deterministic iteration safety landed. |
+| — | `SPEC-FORMAT-TERSE.2.2.6.2` | `done` 2026-06-30 | Rust attached-while parser/runtime parity landed with deterministic iteration safety and 39 oracle fixtures. |
+| — | `SPEC-FORMAT-TERSE.2.3` | `active` 2026-06-30 | Split/owned before code: fluent block chains, lifecycle value/drop semantics, Rust parity, full composability, and return-type method chaining are separate leaves. |
+| 1 | `SPEC-FORMAT-TERSE.2.3.1` | `pending` | Perl reference fluent block-chain contract lock for exact `.when(cond) { ... }.otherwise { ... }` action/lifecycle forms. |
+| 2 | `SPEC-FORMAT-TERSE.2.3.2` | `pending` | Lifecycle block value-drop and explicit `return(expr)` channel semantics lock. |
+| 3 | `SPEC-FORMAT-TERSE.2.3.3` | `pending` | Rust fluent block-chain/action-edge parity, coordinated with `RUST-PARITY.7.5.3`. |
+| 4 | `SPEC-FORMAT-TERSE.2.3.4` | `pending` | Full Lisp-style composability audit and follow-on split. |
+| 5 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
+| … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-30` (**`.2.3` fluent/lifecycle/composability split after ground truth**). `.2.3` is a container,
+  not an implementation leaf. TOOLBOX probes show the Perl reference already accepts exact fluent block chains
+  on action and lifecycle surfaces (`.when(cond) { ... }.otherwise { ... }`) with no raw fallback, but Rust
+  has no expression fluent attached-block payload and still drops some action/body fluent continuations. The
+  lifecycle block syntax exists, but "drop the value" needs a precise distinction between discarded final
+  expressions and explicit `return(expr)` writing the surrounding rule/action return channel. Nested helper
+  composition is real for representative calls, while value-returning receiver-dot methods are still
+  unsupported and must not be conflated with the statement-only Round 1 array mutation methods. Therefore the
+  split is `.2.3.1` Perl fluent block-chain lock, `.2.3.2` lifecycle value/drop/return-channel lock,
+  `.2.3.3` Rust fluent block-chain/action-edge parity, `.2.3.4` full composability audit, and `.2.3.5`
+  return-type method chaining design/split.
 
 - `2026-06-29` (**`.2.1` expression-valued blocks split after ground truth**). KM retrieval and TOOLBOX probes
   show this is not one safe implementation leaf. Perl currently treats `{}` and `{ key => value }` as shape
@@ -2140,6 +2224,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.6` (split/ownership) | KM retrieval (`terse-control-flow-keyword-surface-ground-truth`, `spec-format-brainstorm-rounds-1-3`, `top-rule-recursion-forward-progress-guard`); TOOLBOX lowering/descriptor probes for `while(false) { ... }` and `while(true) { ... }`; Perl code-read (`ControlFlow.pm`, `Contracts.pm`, `Scanner/FlowRules.pm`, `StatementSplit::Core`); Rust code-read (`expr.rs`, `engine.rs`) | Split and owned attached `while(cond) { ... }` before code. Perl currently lowers the attached form as raw host code (`ready=0 raw=1 fallback=1 unresolved=0`), while Rust has no attached statement-loop parser/runtime. Frontier becomes `.2.2.6.1` for the Perl reference loop/safety contract; `.2.2.6.2` will provide Rust parity. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.6.1` | Perl syntax checks; TOOLBOX lowering/descriptor/runtime/generated-source probes; `prove -q -Iperl t/phase0_regression.t`; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Perl attached `while(cond) { ... }` loop/safety landed. `ControlFlow` lowers attached while through ActionIR as a guarded host loop, scanner/contract/canonical metadata report `WHILE`, counted loops re-evaluate conditions, `return(expr)` keeps rule/action return semantics, and non-terminating loops hit the deterministic 10000-iteration guard. Phase0 PASS (`Files=1, Tests=992`); full local CI PASS. Frontier becomes `.2.2.6.2` Rust parity. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.6.2` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml attached_while`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_2_6_2`); full Rust core/runtime package tests; oracle generator syntax/regeneration; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust attached `while(cond) { ... }` parity landed. `expr.rs` parses attached while as a lazy loop over a parsed body block, `engine.rs` re-evaluates conditions and executes bodies with normal statement semantics, expression-valued blocks keep block-local `return(expr)`, and non-terminating loops use the same 10000-iteration safety diagnostic as Perl. Added oracle fixture `terse_2_2_6_2_attached_while_blocks`, bringing the corpus to **39 fixtures**. Frontier becomes `.2.3`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.3` (split/ownership) | KM retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-control-flow-keyword-surface-ground-truth`, `method-like-dsl-migration-status`, `terse-array-end-mutation-methods`, `rust-perl-output-oracle`); TOOLBOX descriptor/runtime probes for exact action and lifecycle `.when(cond) { ... }.otherwise { ... }`; lifecycle block value/return probes; nested-helper and receiver-dot value-method probes; Perl code-read (`BootstrapSpec::Core`, `ActionIR::ControlFlow`); Rust code-read (`expr.rs`, `parser.rs`, `compiler.rs`, `engine.rs`) | Split and owned `.2.3` before code. Perl already accepts exact fluent block-chain forms on action and lifecycle surfaces with `ready=1 raw=0 fallback=0 unresolved=0`; Rust attached statement blocks are portable, but fluent attached-block payloads/action-edge continuations are not. Lifecycle blocks need a separate value-drop/return-channel lock. Full composability and return-type method chaining are separate surfaces; array end mutations remain statement-only. Frontier becomes `.2.3.1`. |
 
 ## Commit Log
 
@@ -2202,8 +2287,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.2.6` | `SPEC-FORMAT-TERSE.2.2.6 — split while loop surface` | No engine behavior change. Attached `while(cond) { ... }` is split before code into `.2.2.6.1` Perl reference loop/safety and `.2.2.6.2` Rust parity. Frontier becomes `.2.2.6.1`. |
 | `SPEC-FORMAT-TERSE.2.2.6.1` | `SPEC-FORMAT-TERSE.2.2.6.1 — implement Perl attached while safety` | Perl attached `while(cond) { ... }` now lowers through ActionIR with condition re-evaluation and deterministic iteration safety. Frontier becomes `.2.2.6.2` Rust parity. |
 | `SPEC-FORMAT-TERSE.2.2.6.2` | `SPEC-FORMAT-TERSE.2.2.6.2 — implement Rust attached while safety` | Rust attached `while(cond) { ... }` now parses and executes with the accepted Perl loop/safety contract, expression-block composition, numeric comparison helper parity, and a 39-fixture oracle corpus. Frontier becomes `.2.3`. |
+| `SPEC-FORMAT-TERSE.2.3` | `SPEC-FORMAT-TERSE.2.3 - split fluent lifecycle composability surface` | No engine behavior change. `.2.3` is split into Perl fluent block-chain locking, lifecycle value/drop semantics, Rust fluent-block/action-edge parity, full composability audit, and return-type method chaining design. Frontier becomes `.2.3.1`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.3` SPLIT/OWNED BEFORE CODE — fluent control-flow, lifecycle blocks, full
+  composability, and method chaining.** Perl reference already accepts exact action/lifecycle
+  `.when(cond) { ... }.otherwise { ... }` fluent block chains, but Rust does not yet support the same fluent
+  attached-block/action-edge surface and lifecycle value-drop semantics need a separate lock. Full
+  composability and return-type method chaining are split into their own leaves rather than treated as one
+  parser/runtime change. Frontier moves to `.2.3.1`.
 
 - `2026-06-30`: **`.2.2.6` SPLIT/OWNED BEFORE CODE — attached `while(cond) { ... }`.**
   Current Perl lowers attached while as raw host code, and Rust has no attached statement-loop parser/runtime.

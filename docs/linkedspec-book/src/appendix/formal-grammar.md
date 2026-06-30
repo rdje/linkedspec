@@ -268,7 +268,10 @@ forms remain hash literals.
 
 A fluent chain on an action edge or inside a lifecycle block uses dot-method syntax.
 Each method is a helper from the ActionIR helper families (§7). For ordinary helper statements,
-fluent chains and structured block forms are semantically equivalent.
+the Perl reference treats fluent chains and structured block forms as equivalent. Cross-backend
+portability is currently guaranteed for the structured marker/attached-block forms; fluent
+block-bodied control chains are documented as portable only after both backends preserve the same
+action-edge behavior.
 
 Zero-arg fluent control-flow markers accept bare-keyword form:
 ```

@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3 — fluent/lifecycle/composability split): Split before code. Durable
+  points. (1) **Perl is ahead of the portable contract for fluent block chains.** TOOLBOX descriptor/runtime
+  probes show exact action and lifecycle forms like `.when(true) { ... }.otherwise { ... }` already lower with
+  `ready=1 raw=0 fallback=0 unresolved=0` and run correctly on the Perl reference. (2) **Rust parity is not
+  just another attached-statement parser tweak.** Rust statement attached blocks now exist, but expression
+  fluent chains have only `.method(args)` calls, no attached-block payloads, and action/body fluent
+  continuation preservation is tied to the existing `RUST-PARITY.7.5.3` gap. (3) **Lifecycle "drop the value"
+  needs precision.** Final expression values in lifecycle blocks are not surfaced as block values, while
+  explicit `return(expr)` still writes the surrounding rule/action return channel. Lock this before changing
+  book wording or semantics. (4) **Composability and method chaining are separate.** Nested helper composition
+  works for representative ordinary calls, but receiver-dot array end methods remain statement-only; value
+  returning/chained method calls need a design split by return type. Frontier moves to `.2.3.1`.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached while parity landed): Implemented the Rust parity
   slice. Durable points. (1) **A loop is not another linear statement-control stack.** Attached `if` and
   `switch` can be flattened to marker statements, but `while` must re-enter its body. The Rust parser therefore
