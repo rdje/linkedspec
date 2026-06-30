@@ -6,7 +6,10 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.1.4` DONE; frontier `.2.2`** — block-local early
+- Last updated: `2026-06-30` (**`.2.2.1` DONE; frontier `.2.2.2`** — Round 2 control-flow keyword
+  surface split after KM/TOOLBOX/code-read ground truth. Current portable support is marker/composite
+  `if` plus inline-composite `switch`; attached-block `if`, `when`/`otherwise`, statement `switch`, and
+  `while` need separate leaves. Prior **`.2.1.4` DONE; frontier `.2.2`** — block-local early
   `return(expr)` now works in expression-valued blocks on Perl and Rust without leaking into the surrounding
   rule return channel. Prior **`.2.1.3` DONE; frontier `.2.1.4`** — Rust parser/runtime parity for
   expression-valued blocks landed with oracle fixture; true block-local early-return follow-through is next if
@@ -1254,12 +1257,71 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return`
 
 - ID: `SPEC-FORMAT-TERSE.2.2`
-  Status: `pending`
+  Status: `active` (split 2026-06-30 by `.2.2.1`; frontier `.2.2.2`)
   Goal: Control-flow keywords — `if/elseif/else`, `when`, `otherwise`, `default`, `while`, `switch`
   Acceptance: `if (cond) { ... } elseif (cond) { ... } else { ... }` — parens for conditions, blocks
     for bodies, blocks NEVER inside parens; `when (cond) { ... }` inline conditional; `otherwise { ... }`
     and `default { ... }` take no parens/args; `while (cond) { ... }`; `switch (expr) { case(v) { ... }
     default { ... } }`.
+  Children: `.2.2.1`, `.2.2.2`, `.2.2.3`, `.2.2.4`, `.2.2.5`, `.2.2.6`
+  Verification: `.2.2.1` split/ground truth done; implementation leaves pending.
+  Commit: `.2.2.1` pending
+
+- ID: `SPEC-FORMAT-TERSE.2.2.1`
+  Status: `done` (2026-06-30)
+  Goal: Control-flow keyword ground truth and split before code
+  Acceptance: KM retrieval, TOOLBOX lowering/runtime/metadata probes, and Perl/Rust code-read identify the
+    current portable control-flow contract and split the broad `.2.2` surface into signoff-sized leaves.
+  Verification: TOOLBOX `call_spec_handler_subst` + `LinkedSpec::Get(..., return_descriptor => 1)` probes
+    showed attached `if(...) { ... } else { ... }` is still a RAW_PERL dependency on the Perl reference
+    (`language_agnostic_action_ir_ready=0`), `when(...) { ... } otherwise { ... }` is host-Perl behavior with
+    an experimental-warning compile path and not ActionIR-ready, and `while(...) { ... }` is raw. Attached
+    `switch(...) { case(...) { ... } default { ... } }` is Perl ActionIR-ready in metadata but has separator
+    and Rust-parity risks that warrant a dedicated leaf. Rust code-read shows portable runtime support for
+    statement-marker `if(cond); ... elseif(cond); else(); ... endif()` and lazy inline-composite `if`/`switch`,
+    but no attached-block statement parser/runtime for `if`, `switch`, `when`, `otherwise`, or `while`.
+    mdBook/KM/live docs updated; no engine behavior changed.
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.2.2`
+  Status: `pending`
+  Goal: Perl reference — attached-block `if/elseif/else` without explicit `endif`
+  Acceptance: `if(cond) { ... } elseif(cond2) { ... } else { ... }` lowers through ActionIR without raw Perl
+    fallback, executes only the selected branch, and preserves the existing statement-marker
+    `if(cond); ... else(); ... endif()` and inline-composite `if(...)` contracts.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.2.3`
+  Status: `pending`
+  Goal: Rust parity — attached-block `if/elseif/else`
+  Acceptance: Rust parses and executes the accepted `.2.2.2` attached-block if contract with the same branch
+    gating and oracle parity, while keeping inline-composite and marker-form `if` behavior unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.2.4`
+  Status: `pending`
+  Goal: `when/otherwise` conditional aliases
+  Acceptance: `when(cond) { ... } otherwise { ... }` is implemented as the readable one-condition alias family
+    for attached-block if/else on Perl and Rust, without relying on Perl's host-language `when` feature.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.2.5`
+  Status: `pending`
+  Goal: Attached-block `switch/case/default` parity and separator lock
+  Acceptance: `switch(expr) { case(v) { ... } default { ... } }` has portable Perl/Rust behavior, clear
+    statement-separator rules between branch blocks, first-match/default semantics, and no raw fallback.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.2.2.6`
+  Status: `pending`
+  Goal: `while(cond) { ... }` statement loop
+  Acceptance: `while(cond) { ... }` executes a statement block while the condition is true, has an explicit
+    forward-progress/iteration safety rule, composes with block-local `return(expr)` where appropriate, and
+    is implemented on Perl and Rust without raw host-language fallback.
   Verification: `pending`
   Commit: `pending`
 
@@ -1354,7 +1416,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.1.2` | `done` 2026-06-29 | Perl reference core expression-valued blocks landed: non-empty non-hash `{ ... }` values lower to `do { ... }`, final `return(expr)` is block-local for the core subset, and hash literals keep precedence. |
 | — | `SPEC-FORMAT-TERSE.2.1.3` | `done` 2026-06-29 | Rust parity for the accepted Perl-reference core expression-valued block contract landed with parser/runtime locks and a 34-fixture oracle corpus. |
 | — | `SPEC-FORMAT-TERSE.2.1.4` | `done` 2026-06-30 | Block-local early `return(expr)` landed for expression-valued blocks on Perl and Rust; `.2.1` is closed. |
-| 1 | `SPEC-FORMAT-TERSE.2.2` | `pending` | Round 2 control-flow keyword surface; own before code. |
+| — | `SPEC-FORMAT-TERSE.2.2.1` | `done` 2026-06-30 | Control-flow keyword surface split before code. Current portable support is marker/composite `if` plus inline-composite `switch`; attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` are separate implementation leaves. |
+| 1 | `SPEC-FORMAT-TERSE.2.2.2` | `pending` | Perl reference attached-block `if/elseif/else` without raw fallback. |
 | … | `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -1389,6 +1452,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   `return(expr)` anywhere inside an expression-valued block. The return is block-local: it yields `expr` as
   the block value, skips later statements in that block, and does not set the surrounding rule return channel.
   Hash-literal precedence is unchanged for `{}` and top-level-fat-arrow `{ key => value }`.
+
+- `2026-06-30` (**`.2.2.1` control-flow keyword surface split before code**). `.2.2` is too broad for one
+  signoff slice. Perl attached `if(...) { ... } else { ... }` still executes through RAW_PERL fallback and
+  is not ActionIR-ready; `when(...) { ... } otherwise { ... }` currently depends on host Perl experimental
+  `when` behavior and is not a DSL contract; `while(...) { ... }` is raw. Rust already supports
+  statement-marker `if(cond); ... elseif(cond); else(); ... endif()` gating and lazy inline-composite
+  `if`/`switch`, but does not parse/execute attached statement blocks for `if`, `switch`, `when`,
+  `otherwise`, or `while`. The implementation split is Perl attached-if, Rust attached-if parity,
+  `when`/`otherwise`, attached switch/default, and while.
 
 - `2026-06-29` (**`.1.6` array end-mutation methods landed**). The accepted Round 1 array method contract is
   statement-level mutation, not value-returning fluent chaining. A single receiver-dot call with receiver
@@ -1878,6 +1950,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.3` (ownership) | KM retrieval (`terse-expression-valued-blocks-ground-truth`, `terse-perl-expression-valued-blocks`); Rust code-read (`Expr`, `parse_expr()`, `parse_hash_literal()`, `execute_block()`, `eval_expr()`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks | Rust expression-valued block parity owned before code. Rust currently has statement-only `CodeBlock`, hash/array value expressions, and no block-value `Expr` or evaluator. `{}` and keyed `=>` hash literals must keep precedence; non-empty non-fat-arrow braces become block values in the implementation slice. Frontier remains `.2.1.3` implementation. |
 | `2026-06-29` | `SPEC-FORMAT-TERSE.2.1.3` | Focused Rust core parser tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core expression_valued_block`); focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_3`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`); full Rust core package; full Rust runtime package; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine/diff checks; `bash tools/run_ci_local.sh` | Rust expression-valued block parity landed. `Expr::BlockValue` plus `parse_brace_expr()` preserve hash literals and parse non-empty non-fat-arrow braces as block values; runtime `eval_block_value()` returns the final expression or final `return(expr)` payload. Added `terse_2_1_3_expression_valued_blocks`, bringing the oracle corpus to **34 fixtures**. Full local CI PASS (`991` phase0 tests). Frontier becomes `.2.1.4`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.1.4` | Perl syntax checks (`MethodLowering.pm`, phase0, oracle generator); TOOLBOX lowering/runtime probes for non-final `return(expr)` block values; focused Rust runtime tests (`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_4_expression_valued_block`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Block-local early `return(expr)` landed for expression-valued blocks on Perl and Rust. Perl emits a guarded `do { ... }` value wrapper for blocks with a non-final return and keeps compact output for existing core forms. Rust `eval_block_value()` now returns an active `return(expr)` payload immediately without setting the rule return channel. Added `terse_2_1_4_expression_valued_block_early_return`, bringing the oracle corpus to **35 fixtures**. Frontier becomes `.2.2`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.2.1` (split) | KM retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-statement-separator-contract`, `terse-primitive-literal-parity`, `scanner-rule-family-architecture`); TOOLBOX `call_spec_handler_subst` probes for attached `if`, `when`/`otherwise`, `while`, and attached `switch`; `LinkedSpec::Get(..., return_descriptor => 1)` metadata probes for ActionIR readiness/raw fallback; Perl code-read (`ControlFlow.pm`, `FlowExpr.pm`, `Scanner/FlowRules.pm`); Rust code-read (`expr.rs`, `engine.rs`); focused Rust parser test `parse_lifecycle_block_content` | Split `.2.2` before code. Current portable contract is statement-marker `if(cond); ... elseif(cond); else(); ... endif()` plus inline-composite lazy `if`/`switch`. Perl attached `if`, `when`/`otherwise`, and `while` are not ActionIR-ready; Rust has no attached statement-block parser/runtime for the new keyword surface. mdBook/KM/live docs aligned; frontier becomes `.2.2.2`. |
 
 ## Commit Log
 
@@ -1927,8 +2000,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.1.3` | `SPEC-FORMAT-TERSE.2.1.3 — own Rust expression-valued blocks` | No engine/book behavior change. Rust parser/runtime seams are recorded before code; frontier remains `.2.1.3` implementation. |
 | `SPEC-FORMAT-TERSE.2.1.3` | `SPEC-FORMAT-TERSE.2.1.3 — implement Rust expression-valued blocks` | Rust parser/runtime parity for the core block-value subset landed with oracle fixture; frontier becomes `.2.1.4`. |
 | `SPEC-FORMAT-TERSE.2.1.4` | `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return` | Expression-valued blocks now support block-local early `return(expr)` on Perl and Rust without leaking into the surrounding rule return channel. Added Perl/Rust/oracle/book/KM locks; `.2.1` closes and frontier becomes `.2.2`. |
+| `SPEC-FORMAT-TERSE.2.2.1` | `SPEC-FORMAT-TERSE.2.2.1 — split control-flow keyword surface` | No engine behavior change. `.2.2` is split by current support seams: Perl attached-if first, Rust attached-if parity next, then `when`/`otherwise`, attached switch/default, and while. Frontier becomes `.2.2.2`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.2.1` DONE / `.2.2.2` OWNED NEXT — control-flow keyword surface split.**
+  `.2.2` is now an active container with concrete implementation leaves. Current portable support is the
+  statement-marker `if(cond); ... else(); ... endif()` family and inline-composite lazy `if`/`switch`.
+  Attached-block `if`, `when`/`otherwise`, statement-level switch blocks, and `while` remain implementation
+  work. The next leaf is `.2.2.2`, the Perl reference attached-block `if/elseif/else` path.
 
 - `2026-06-30`: **`.2.1.4` DONE — expression-valued block early return landed.**
   Perl and Rust now support `return(expr)` anywhere inside an expression-valued block. The block-local return

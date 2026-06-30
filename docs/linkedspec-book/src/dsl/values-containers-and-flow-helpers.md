@@ -186,17 +186,14 @@ else();
 endif();
 ```
 
-Switch-style flow is useful when one expression drives multiple cases:
+Inline switch flow is useful when one expression drives multiple cases:
 
 ```text
-switch(scalar(kind));
-case("word");
-  return(hash("kind", "word", "text", entry_text()));
-case("space");
-  return(hash("kind", "space", "text", entry_text()));
-default();
-  return(hash("kind", "other", "text", entry_text()));
-endswitch();
+return(switch(scalar(kind),
+  case("word", hash("kind", "word", "text", entry_text())),
+  case("space", hash("kind", "space", "text", entry_text())),
+  default(hash("kind", "other", "text", entry_text()))
+));
 ```
 
 ## Practical pattern: token node

@@ -246,8 +246,8 @@ children:
 | `LX` | Loop exit — runs after a repeated rule's loop terminates. |
 
 Lifecycle markers are **semicolon-light structured authoring**: a marker followed by
-`{ code }` is a lifecycle block. Markers may also appear as attached-block control
-flow (`if(...) { ... } endif()`, `switch(...) { case(...) ... } endswitch()`).
+`{ code }` is a lifecycle block. Round 2 is adding attached-block control-flow markers,
+but today portable branch control uses statement markers and inline-composite expressions.
 Within structured blocks, newlines separate top-level helper statements implicitly.
 Semicolons remain accepted and are required when multiple top-level helper statements
 share one physical line. Plain same-line whitespace is not a statement separator, and
@@ -267,9 +267,8 @@ forms remain hash literals.
 ```
 
 A fluent chain on an action edge or inside a lifecycle block uses dot-method syntax.
-Each method is a helper from the ActionIR helper families (§7). Fluent chains and
-structured block forms are semantically equivalent — they lower to the same ActionIR
-and produce identical parser behavior.
+Each method is a helper from the ActionIR helper families (§7). For ordinary helper statements,
+fluent chains and structured block forms are semantically equivalent.
 
 Zero-arg fluent control-flow markers accept bare-keyword form:
 ```
@@ -531,10 +530,10 @@ num_range(arr)           — max - min of array elements
 ### 7.6 Control Flow Helpers
 ```
 if(cond, then, elseif(cond2, then2), else(default))
-if(cond) { ... } elseif(cond2) { ... } else { ... } endif()
-switch(expr) { case(val) { ... } default { ... } } endswitch()
-case(val) { ... }
-default { ... }
+if(cond); ... elseif(cond2); ... else(); ... endif()
+switch(expr, case(val, body), default(body))
+case(val, body)
+default(body)
 exit_now(status)         — exit parser immediately
 next()                   — skip to next repetition (consume/recognize without append)
 return(value)            — return value (canonical form)
@@ -629,37 +628,37 @@ physical line require semicolons.
 
 ## 9. Attached-Block Control Flow
 
-Within lifecycle blocks, structured control flow uses attached-block syntax:
+Within lifecycle blocks, the current portable branch-control syntax uses marker statements and inline
+composite expressions. Marker-style `if` is implemented on the Perl reference and Rust backend:
 
 ```
 I {
- if(matches(scalar(value), /^yes$/)) {
-   assign(scalar(result), "confirmed")
- } elseif(matches(scalar(value), /^no$/)) {
-   assign(scalar(result), "rejected")
- } else {
-   assign(scalar(result), "unknown")
- } endif()
-}
-
-LE {
- switch(scalar(type)) {
-   case("regex") {
-     push_value(array(re_list), scalar(retv))
-   }
-   case("edge") {
-     push_value(array(edges), scalar(retv))
-   }
-   default {
-     push_value(array(other), scalar(retv))
-   }
- } endswitch()
+ if(matches(scalar(value), /^yes$/));
+ assign(scalar(result), "confirmed");
+ elseif(matches(scalar(value), /^no$/));
+ assign(scalar(result), "rejected");
+ else();
+ assign(scalar(result), "unknown");
+ endif()
 }
 ```
 
-Attached-block and inline-composite forms are equivalent for both `if` and `switch`
-families. Zero-arg terminators accept bare-keyword form (`endif`, `endswitch`,
-`else`, `default`, `endcase`) in addition to parenthesized forms.
+Inline-composite `switch(...)` is also portable:
+
+```
+E {
+ return(switch(scalar(type),
+   case("regex", "regular expression"),
+   case("edge", "edge"),
+   default("other")
+ ))
+}
+```
+
+Round 2 is extending this surface. Attached-block `if(...) { ... }`, `when(...) { ... } otherwise { ... }`,
+statement-level `switch(...) { case(...) { ... } default { ... } }`, and `while(...) { ... }` are tracked
+implementation leaves, not yet the portable contract across backends. Zero-argument markers that are already
+implemented, such as `else`/`endif`, accept bare-keyword form in addition to parenthesized form.
 
 ## 10. Constraints and Validation
 

@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.1 — control-flow keyword surface split): Split Round 2 control flow
+  before code. Durable points. (1) **Current portable branch control is narrower than older book wording.**
+  Portable today means statement-marker `if(cond); ... elseif(cond); else(); ... endif()` plus inline-composite
+  lazy `if`/`switch`; attached-block `if`, `when`/`otherwise`, statement-level `switch`, and `while` are not
+  yet cross-backend contracts. (2) **Perl raw execution is not acceptance.** Attached `if(...) { ... }` may
+  run on the Perl reference, but descriptor metadata records RAW_PERL fallback and unresolved helpers, so it
+  is not language-agnostic ActionIR. `when(...)` rides host Perl's experimental `when` semantics and must be
+  replaced with explicit DSL lowering. (3) **Rust has marker and lazy helper support, not attached statement
+  blocks.** `Engine::handle_statement_if_control` gates marker-style statements; `call_helper` handles lazy
+  inline-composite `if`/`switch`. `CodeBlock::parse` has no attached statement-block AST for Round 2 keyword
+  bodies. (4) **Split order follows seams.** Land Perl attached-if first, Rust parity second, then
+  `when`/`otherwise`, attached switch/default, and while with progress/iteration safety.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.1.4 — expression-valued block early return landed): Closed the block-local
   return-depth split for expression-valued blocks. Durable points. (1) **Early return is value-block-local,
   not rule-local.** `return(expr)` inside a block value yields `expr` from that block and skips later block

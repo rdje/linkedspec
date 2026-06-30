@@ -18,7 +18,7 @@ Most value helpers return one expression. They become useful when they are place
 | Hash field assignment | `meta[key_expr] = expr` / `set_key(name, key_expr, expr)` | one field of a named working hash should be updated in place. |
 | Return payload | `return(payload)` | the rule should return one structured value. |
 | Predicate | `if(condition)` / `elseif(condition)` | helper logic should drive control flow. |
-| Switch driver | `switch(value)` | one value should drive equality or regex cases. |
+| Switch driver | `switch(value)` | one value should drive equality cases. |
 | Constructor payload | `array(...)` / `hash(...)` | nested values should become one array or hash payload. |
 
 Example:
@@ -901,58 +901,29 @@ if(
 
 Use the marker form when branches contain multiple statements or nested flow. Use the inline form when the branch bodies are short enough that compactness improves readability.
 
-## Structured `switch` flow
+## Inline `switch` flow
 
-Use `switch(...)` when one driving value controls several exact or regex branches.
+Use `switch(...)` when one driving value controls several exact branches.
 
 | Helper | Meaning |
 | --- | --- |
-| `switch(value)` | open a switch driven by `value`. |
-| `case(value)` | open one equality or regex case. |
-| `default()` | open the fallback case. |
-| `endcase()` | optional explicit case close. |
-| `endswitch()` | close the switch. |
-
-Marker-style example:
-
-```text
-switch(lowercase(trim(scalar(kind))))
-  case("word")
-    return(hash("kind", "word", "text", scalar(text)));
-  case("space")
-    return(hash("kind", "space", "text", scalar(text)));
-  case(/^node_/)
-    return(hash("kind", "node", "text", scalar(text)));
-  default()
-    return(hash("kind", "unknown", "text", scalar(text)));
-endswitch()
-```
+| `switch(value, branches...)` | evaluate `value` once and choose the first matching branch. |
+| `case(value, body)` | one equality case. |
+| `default(body)` | fallback branch. |
 
 Inline composite example:
 
 ```text
-switch(
+return(switch(
   lowercase(trim(scalar(kind))),
-  case("word", return(hash("kind", "word", "text", scalar(text)))),
-  case("space", return(hash("kind", "space", "text", scalar(text)))),
-  default(return(hash("kind", "unknown", "text", scalar(text))))
-)
+  case("word", hash("kind", "word", "text", scalar(text))),
+  case("space", hash("kind", "space", "text", scalar(text))),
+  default(hash("kind", "unknown", "text", scalar(text)))
+))
 ```
 
-Attached-block branch bodies are useful when a branch contains more than one statement:
-
-```text
-switch(lowercase(trim(scalar(kind)))) {
-  case("word") {
-    assign(hash(meta), set_key(hash(meta), "kind", "word"));
-    return(hash_copy(hash(meta)));
-  }
-  default() {
-    assign(hash(meta), set_key(hash(meta), "kind", "unknown"));
-    return(hash_copy(hash(meta)));
-  }
-}
-```
+Statement-level marker switch and attached-block switch bodies are Round 2 implementation work. Use the
+inline composite form for portable specs today.
 
 Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / `elseif(...)` when each branch asks a different question.
 
@@ -1054,16 +1025,12 @@ Kind::AND
    assign(scalar(raw), entry_text());
    assign(scalar(kind), replace_substr(lowercase(trim(scalar(raw))), "-", "_"));
 
-   switch(scalar(kind))
-     case("word")
-       return(hash("kind", "word", "raw", scalar(raw)));
-     case("space")
-       return(hash("kind", "space", "raw", scalar(raw)));
-     case(/^node_/)
-       return(hash("kind", "node", "raw", scalar(raw), "name", rm_prefix(scalar(kind), "node_")));
-     default()
-       return(hash("kind", "unknown", "raw", scalar(raw)));
-   endswitch()
+   return(switch(scalar(kind),
+     case("word", hash("kind", "word", "raw", scalar(raw))),
+     case("space", hash("kind", "space", "raw", scalar(raw))),
+     case("node", hash("kind", "node", "raw", scalar(raw))),
+     default(hash("kind", "unknown", "raw", scalar(raw)))
+   ));
  }
 ```
 

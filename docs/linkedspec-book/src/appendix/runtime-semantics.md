@@ -237,9 +237,11 @@ this statement-level contract.
 
 A non-empty brace payload without a top-level `=>` can also be used as a value
 block in value-consuming sites. The block runs its statements and yields the final
-expression; a final `return(expr)` is treated as the block value, not as a separate
-handler-level return. Empty `{}` and top-level-fat-arrow `{ key => value }` forms
-remain hash shape literals on both the Perl reference and Rust backend.
+expression unless a `return(expr)` statement is reached earlier. That `return(expr)`
+exits only the expression-valued block, skips later statements in that block, and
+yields `expr` as the block value; it does not set the surrounding rule's return
+channel. Empty `{}` and top-level-fat-arrow `{ key => value }` forms remain hash
+shape literals on both the Perl reference and Rust backend.
 
 ```text
 return({ set(name, "ok"); name })          # "ok"

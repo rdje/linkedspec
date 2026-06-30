@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.1 — control-flow keyword surface split**
+  (DOCS/TREE/KM/BOOK ALIGNMENT; **no engine behavior change**). Round 2 control flow is now decomposed into
+  signoff-sized leaves. Current portable support is statement-marker `if(cond); ... elseif(cond); else();
+  ... endif()` plus inline-composite lazy `if`/`switch`. Attached-block `if`, `when`/`otherwise`,
+  statement-level `switch` blocks, and `while` remain separate implementation work. The mdBook now calls out
+  this boundary instead of presenting attached-block control flow as fully portable.
+  **Verification:** TOOLBOX lowering/runtime/metadata probes; Perl/Rust code-read; focused Rust parser check
+  PASS; mdBook build PASS; Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.2`** (Perl reference attached-block `if/elseif/else`; own before code).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.1.4 — expression-valued block early return landed**
   (PERL ACTIONIR + RUST RUNTIME + ORACLE/KM/BOOK LOCKS). Expression-valued blocks now support block-local
   early `return(expr)` on both variants. `return({ return("a"); "b" })` yields `"a"`; assignment-source block

@@ -749,27 +749,30 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 - **Returns**: value of the selected branch.
 - **Behavior**: Evaluates conditions left-to-right. First true condition's branch is returned. If none match, the `else` branch is returned. If no else and no match, returns undef.
 
-### `if(cond) { ... } elseif(cond2) { ... } else { ... } endif()`
-- **Signature**: Attached-block form.
-- **Returns**: no return value (side effects from block execution).
-- **Behavior**: Each branch is a code block. Conditions evaluated left-to-right. First true condition's block executes. `else` block runs if no condition matches. `endif()` terminates.
-- **Sugar**: `else` (bare), `endif` (bare), and `else()` / `endif()` are equivalent.
-- **Mixed carriers**: Branches can mix attached-block (`{ ... }`) and lighter plain-marker bodies.
+### `if(cond); ... elseif(cond2); ... else(); ... endif()`
+- **Signature**: Statement-marker form.
+- **Returns**: no value of its own; branch statements provide side effects or `return(...)` values.
+- **Behavior**: Conditions are evaluated left-to-right. Only statements in the active branch execute. `else`
+  runs when no prior branch matched, and `endif()` closes the chain.
+- **Sugar**: `else` and `endif` bare-keyword forms are equivalent to `else()` and `endif()`.
 
-### `switch(expr) { case(val) { ... } default { ... } } endswitch()`
-- **Signature**: Outer block switch.
-- **Returns**: no return value (side effects from block execution).
-- **Behavior**: Evaluates `expr` once. Compares to each `case(val)`. First matching case's block executes. `default` runs if no match.
-- **Sugar**: `endswitch`, `default`, `endcase` accept bare-keyword forms.
+### `switch(expr, case(val, body), default(body))`
+- **Signature**: Inline composite form.
+- **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
+- **Behavior**: Evaluates `expr` once and compares it to each `case(val)` in order.
 
-### `case(val) { ... }`, `case(val, { ... })`
+Attached-block `if(...) { ... }`, `when(...) { ... } otherwise { ... }`, statement-level
+`switch(...) { case(...) { ... } default { ... } }`, and `while(...) { ... }` are Round 2 implementation
+work, not the current portable helper contract.
+
+### `case(val, body)`
 - **Signature**: Inline switch branch.
 - **Returns**: branch body value.
-- **Behavior**: Embedded in inline-composite `switch(expr, case(...), ...)` or attached-block `switch`.
+- **Behavior**: Embedded in inline-composite `switch(expr, case(...), ...)`.
 
-### `default { ... }`, `default({ ... })`
+### `default(body)`
 - **Signature**: Default switch branch.
-- **Returns**: branch body value (inline) or void (block).
+- **Returns**: branch body value.
 
 ### `exit_now(status)`
 - **Signature**: `exit_now(status: int)`

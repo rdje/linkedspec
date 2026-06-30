@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.1 — split control-flow keyword surface
+
+**Scope:** Task tree, Knowledge Map, mdBook control-flow documentation, roadmap tracker, and live continuity
+docs. No engine behavior changed.
+
+**What changed:** Round 2 control-flow keyword work is now split before implementation. Current portable
+support is statement-marker `if(cond); ... elseif(cond); else(); ... endif()` plus inline-composite lazy
+`if`/`switch`. Attached-block `if`, `when`/`otherwise`, statement-level `switch` blocks, and `while` are
+separate implementation leaves.
+
+**Ground truth:** TOOLBOX lowering/runtime/metadata probes show Perl attached `if(...) { ... } else { ... }`
+still falls back to raw Perl, `when`/`otherwise` is host Perl behavior rather than a DSL contract, and
+`while(...) { ... }` is raw. Rust code-read shows marker-form `if` gating and inline-composite `if`/`switch`
+support, but no attached statement-block parser/runtime for the new keyword surface.
+
+**Documentation:** The mdBook now distinguishes the current portable control-flow contract from Round 2
+attached-block work and removes statement-switch examples that are not yet portable.
+
+**Validation:** TOOLBOX probes/code-read completed; focused Rust parser check PASS; mdBook build PASS;
+Knowledge Map regenerate/check PASS; memory/doctrine checks PASS; `git diff --check` PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.1.4 — expression-valued block early return
 
 **Scope:** Perl ActionIR value-block lowering, Rust runtime block-value evaluation, Perl/Rust regression
