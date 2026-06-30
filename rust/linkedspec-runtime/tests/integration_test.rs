@@ -1744,3 +1744,48 @@ fn terse_2_3_3_1_action_edge_fluent_return_undef_skips_accumulator() {
         "action-edge .return_undef returns undef without adding an accumulator event"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.3.2 — Rust attached fluent block payloads:
+// action-edge and lifecycle receiver-fluent `.when(cond) { ... }` payloads
+// normalize to attached when/otherwise statement blocks. The fallback tail may
+// be dotted (`.otherwise`) or no-dot (`otherwise`), matching the Perl reference.
+
+#[test]
+fn terse_2_3_3_2_action_edge_attached_fluent_when_dotted_otherwise() {
+    let grammar = "Top::\n /x/ -> Done.when(false) { return(\"bad\") }.otherwise { return(\"fallback\") }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["fallback"]),
+        "dotted action-edge .otherwise executes the fallback attached payload"
+    );
+}
+
+#[test]
+fn terse_2_3_3_2_action_edge_attached_fluent_when_nodot_otherwise() {
+    let grammar = "Top::\n /x/ -> Done.when(false) { return(\"bad\") } otherwise { return(\"fallback\") }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["fallback"]),
+        "no-dot action-edge otherwise executes the fallback attached payload"
+    );
+}
+
+#[test]
+fn terse_2_3_3_2_lifecycle_attached_fluent_when_dotted_otherwise() {
+    let grammar = "Top::\n I.when(false) { set(out, \"bad\") }.otherwise { set(out, \"fallback\") }\n /x/\n E { return(out) }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!(["fallback"]),
+        "dotted lifecycle .otherwise executes the fallback attached payload"
+    );
+}
+
+#[test]
+fn terse_2_3_3_2_lifecycle_attached_fluent_when_nodot_otherwise() {
+    let grammar = "Top::\n I.when(false) { set(out, \"bad\") } otherwise { set(out, \"fallback\") }\n /x/\n E { return(out) }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!(["fallback"]),
+        "no-dot lifecycle otherwise executes the fallback attached payload"
+    );
+}

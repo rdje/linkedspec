@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.2 — implement Rust attached fluent block payloads
+
+**Scope:** Rust body parser support for action-edge and lifecycle attached fluent `.when(cond) { ... }`
+payloads, focused runtime locks, mdBook wording, Knowledge Map, task tree, roadmap tracker, and live
+continuity docs.
+
+**What changed:** Rust now recognizes receiver-fluent `.when(cond) { ... }` block payloads after `-> Target`
+action edges and lifecycle markers such as `I`. The parser normalizes those chains to existing attached
+`when/otherwise` statement blocks, so the already-landed Rust block interpreter executes the selected branch.
+Both dotted `.otherwise { ... }` and no-dot `otherwise { ... }` fallback tails are accepted on action-edge and
+lifecycle surfaces.
+
+**Implementation detail:** Multiline tails such as `}.otherwise {` preserve their fallback payload. The parser
+tracks the physical line that owns a block remainder before consuming the next attached block, avoiding the
+payload-line skip that would otherwise occur after the first multiline branch advances the body cursor.
+
+**Boundary:** Compact lifecycle/body fluent continuations such as `I.return(...)` and any remaining dropped
+standalone `FluentChain` paths remain owned by `.2.3.3.3`; the `tclite` oracle also still has the known
+default-mode repetition blocker.
+
+**Validation:** Focused Rust core `attached_fluent` PASS; focused Rust runtime `terse_2_3_3_2` PASS; full Rust
+core package PASS; full Rust runtime package PASS; mdBook build PASS; Knowledge Map regenerate/check PASS;
+memory/doctrine/diff checks PASS; full local CI PASS (`Files=1, Tests=994`).
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.1 — implement Rust action-edge fluent continuations
 
 **Scope:** Rust parser/compiler/runtime action-edge fluent metadata and execution, focused Rust locks, mdBook

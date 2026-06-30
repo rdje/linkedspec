@@ -458,7 +458,20 @@ fn parse_single_element(
 
         let rest = trimmed[full_match.end()..].trim_start().to_string();
 
-        if rest.starts_with('{') {
+        let saved_i = *i;
+        if let Some((code, remainder)) = parse_attached_fluent_when_chain(lines, i, &rest) {
+            let elem = BodyElement::new(
+                BodyElementKind::ActionEdge {
+                    targets,
+                    code: Some(code),
+                    fluent_chain: Vec::new(),
+                },
+                full_match.as_str(),
+                line_num,
+            );
+            let advanced = *i > saved_i;
+            return Some((elem, remainder, advanced));
+        } else if rest.starts_with('{') {
             // Block may span multiple lines — consume_block_from_rest advances `i`.
             let saved_i = *i;
             let (code, remainder) = consume_block_from_rest(lines, i, &rest)?;
@@ -521,7 +534,19 @@ fn parse_single_element(
         let marker = caps.get(1).unwrap().as_str().to_string();
         let rest = trimmed[full_match.end()..].trim_start().to_string();
 
-        if rest.starts_with('{') {
+        let saved_i = *i;
+        if let Some((code, remainder)) = parse_attached_fluent_when_chain(lines, i, &rest) {
+            let elem = BodyElement::new(
+                BodyElementKind::CodeBlock {
+                    lifecycle: marker.clone(),
+                    code,
+                },
+                full_match.as_str(),
+                line_num,
+            );
+            let advanced = *i > saved_i;
+            return Some((elem, remainder, advanced));
+        } else if rest.starts_with('{') {
             let saved_i = *i;
             let (code, remainder) = consume_block_from_rest(lines, i, &rest)?;
             let elem = BodyElement::new(
@@ -646,7 +671,8 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
                 content.push_str(strip_close.trim());
             }
             *i += 1;
-            return Some((content.trim().to_string(), String::new()));
+            let after_block = line[line_scan.len()..].trim().to_string();
+            return Some((content.trim().to_string(), after_block));
         }
         // Include the whole line
         if !content.is_empty() {
@@ -657,6 +683,98 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
     }
     // Unclosed block (validator catches this)
     Some((content.trim().to_string(), String::new()))
+}
+
+/// Parse attached fluent branch syntax after a receiver-like body element:
+/// `.when(cond) { ... }.otherwise { ... }`.
+///
+/// The runtime already executes attached conditional blocks through CodeBlock's
+/// statement-control model, so the body parser normalizes receiver-fluent
+/// branch payloads into the equivalent attached code string and attaches that
+/// string to the action edge or lifecycle marker that preceded the chain.
+fn parse_attached_fluent_when_chain(
+    lines: &[&str],
+    i: &mut usize,
+    rest: &str,
+) -> Option<(String, String)> {
+    let mut remaining = strip_required_dot_keyword(rest, "when")?
+        .trim_start()
+        .to_string();
+    if !remaining.starts_with('(') {
+        return None;
+    }
+
+    let (condition, close_idx) = extract_paren_content_with_end(&remaining)?;
+    remaining = remaining[close_idx + 1..].trim_start().to_string();
+    if !remaining.starts_with('{') {
+        return None;
+    }
+
+    let when_start_i = *i;
+    let (when_body, remainder) = consume_block_from_rest(lines, i, &remaining)?;
+    let mut code = format!("when({}) {{ {} }}", condition.trim(), when_body.trim());
+    remaining = remainder;
+    let mut remaining_origin_i = block_remainder_origin(when_start_i, *i, &remaining);
+
+    while let Some(after_keyword) = strip_optional_dot_keyword(&remaining, "otherwise") {
+        let tail = after_keyword.trim_start();
+        if !tail.starts_with('{') {
+            break;
+        }
+
+        let block_origin_i = remaining_origin_i;
+        let current_floor_i = *i;
+        let mut block_i = block_origin_i;
+        let (otherwise_body, remainder) = consume_block_from_rest(lines, &mut block_i, tail)?;
+        code.push_str(" otherwise { ");
+        code.push_str(otherwise_body.trim());
+        code.push_str(" }");
+        remaining = remainder;
+        *i = block_i.max(current_floor_i);
+        remaining_origin_i = if remaining.trim().is_empty() {
+            *i
+        } else {
+            block_remainder_origin(block_origin_i, block_i, &remaining)
+        };
+    }
+
+    Some((code, remaining.trim_start().to_string()))
+}
+
+fn block_remainder_origin(start_i: usize, end_i: usize, remainder: &str) -> usize {
+    if !remainder.trim().is_empty() && end_i > start_i {
+        end_i.saturating_sub(1)
+    } else {
+        end_i
+    }
+}
+
+fn strip_required_dot_keyword<'a>(text: &'a str, keyword: &str) -> Option<&'a str> {
+    let trimmed = text.trim_start();
+    let after_dot = trimmed.strip_prefix('.')?.trim_start();
+    strip_keyword(after_dot, keyword)
+}
+
+fn strip_optional_dot_keyword<'a>(text: &'a str, keyword: &str) -> Option<&'a str> {
+    let trimmed = text.trim_start();
+    let candidate = trimmed
+        .strip_prefix('.')
+        .map(str::trim_start)
+        .unwrap_or(trimmed);
+    strip_keyword(candidate, keyword)
+}
+
+fn strip_keyword<'a>(text: &'a str, keyword: &str) -> Option<&'a str> {
+    let trimmed = text.trim_start();
+    let after = trimmed.strip_prefix(keyword)?;
+    if after
+        .chars()
+        .next()
+        .is_some_and(|ch| ch.is_alphanumeric() || ch == '_')
+    {
+        return None;
+    }
+    Some(after)
 }
 
 /// Like scan_line_for_braces but works on &str slices (not just full lines).
@@ -872,6 +990,73 @@ Child: /x/ /y/
             }
             _ => panic!("expected ActionEdge"),
         }
+    }
+
+    #[test]
+    fn parse_action_edge_attached_fluent_when_otherwise_block() {
+        let src = r#"Top::
+ -> Done.when(false) {
+    return("bad")
+ }.otherwise {
+    return("fallback")
+ }
+
+Done:
+ /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        assert_eq!(
+            top.body.len(),
+            1,
+            "attached fluent branch payload is consumed by the action edge"
+        );
+
+        match &top.body[0].kind {
+            BodyElementKind::ActionEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
+                assert_eq!(targets[0].label, "Done");
+                assert!(fluent_chain.is_empty());
+                let code = code.as_ref().expect("attached code");
+                assert!(code.contains("when(false)"), "{code:?}");
+                assert!(code.contains(r#"return("bad")"#), "{code:?}");
+                assert!(code.contains("otherwise"), "{code:?}");
+                assert!(code.contains(r#"return("fallback")"#), "{code:?}");
+            }
+            _ => panic!("expected ActionEdge"),
+        }
+    }
+
+    #[test]
+    fn parse_lifecycle_attached_fluent_when_otherwise_block() {
+        let src = r#"Top::
+ I.when(false) { set(out, "bad") } otherwise { set(out, "fallback") } E { return(out) }
+ /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        let iblock = top.body.iter().find(|element| {
+            matches!(&element.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I")
+        }).expect("I block");
+
+        match &iblock.kind {
+            BodyElementKind::CodeBlock { code, .. } => {
+                assert!(code.contains("when(false)"));
+                assert!(code.contains(r#"set(out, "bad")"#));
+                assert!(code.contains("otherwise"));
+                assert!(code.contains(r#"set(out, "fallback")"#));
+            }
+            _ => panic!("expected lifecycle CodeBlock"),
+        }
+        assert!(
+            top.body
+                .iter()
+                .all(|element| !matches!(element.kind, BodyElementKind::FluentChain { .. })),
+            "lifecycle fluent branch payload must not survive as a standalone chain"
+        );
     }
 
     #[test]

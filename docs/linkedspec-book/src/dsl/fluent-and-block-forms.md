@@ -8,12 +8,11 @@ Round 2.
 ## The two expression styles
 
 Most ordinary LinkedSpec helper statements — declaration, assignment, push, return, and pure
-value helpers — can be written in either fluent or structured style. Block-bodied fluent control
-flow is a narrower surface: use the structured attached-block forms below for portable
-cross-backend block control. No-arg action-edge continuations such as `-> child .push` and
-`-> child[1] .return(expr)` are portable on the Perl reference and Rust. Fluent attached-block
-chains and compact lifecycle/body chains are documented as portable only after both backends
-preserve the same behavior.
+value helpers — can be written in either fluent or structured style. No-arg action-edge
+continuations such as `-> child .push` and `-> child[1] .return(expr)` are portable on the
+Perl reference and Rust. Receiver-fluent attached `when/otherwise` block chains are portable on
+action-edge and lifecycle-marker surfaces. Compact lifecycle/body fluent chains such as
+`I.return(...)` are still a later Rust parity surface and are not used in portable examples yet.
 
 **Fluent style** chains calls on action edges with `.method()`:
 
@@ -190,8 +189,7 @@ Use the aliases when they read better for classification-style rules. They are n
 `when` blocks; both the Perl reference and Rust backend normalize them to canonical `if/else`
 control flow.
 
-On the Perl reference, the same branch shape can be written as a fluent block chain on an
-action edge or lifecycle marker:
+The same branch shape can also be written as a fluent block chain on an action edge:
 
 ```text
 -> child
@@ -213,8 +211,19 @@ The fallback can also be written as a no-dot continuation after the first block:
   }
 ```
 
-Use the structured attached-block spelling above for portable cross-backend examples until
-fluent block chains are locked on every backend.
+Lifecycle markers accept the same receiver-fluent branch shape:
+
+```text
+I.when(is_defined(scalar(input_kind))) {
+  set(kind, input_kind)
+}.otherwise {
+  set(kind, "default")
+}
+```
+
+These fluent block chains normalize to the same attached statement controls as the structured
+block spelling. Use whichever form keeps the rule easier to scan; prefer the structured spelling
+when a branch body is long or teaches several statements.
 
 ### If family: inline composite
 

@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.2 — Rust attached fluent block payloads): Implemented the
+  attached-block subset without widening into compact lifecycle/body fluent continuations. Durable points.
+  (1) **Normalize to the existing statement-block path.** Rust already knew how to execute attached
+  `when/otherwise` blocks, so `-> child.when(cond) { ... }` and `I.when(cond) { ... }` now parse as action or
+  lifecycle code blocks rather than introducing another runtime flow model. (2) **Dotted and no-dot fallback
+  tails are one contract.** The parser accepts `.otherwise { ... }` and `otherwise { ... }` after the fluent
+  `when` head on both action-edge and lifecycle surfaces. (3) **Remainder line ownership matters.** A multiline
+  first branch that closes as `}.otherwise {` leaves the fallback opening brace on the previous physical line
+  while the parser cursor has advanced; the attached-fluent parser therefore tracks the remainder's origin
+  before consuming the next block. (4) **The next Rust fluent parity leaf is still real.** Standalone/body
+  fluent chains such as `I.return(...)` are not claimed here and remain `.2.3.3.3`, along with any remaining
+  `BodyElementKind::FluentChain` paths the compiler drops.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.1 — Rust action-edge fluent continuations): Implemented the
   action-edge subset without broadening into the rest of Rust fluent parity. Durable points. (1)
   **Action-edge fluent continuations need a structured channel.** Rust now carries `-> child .method(...)`

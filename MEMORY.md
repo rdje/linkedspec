@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `f35869b` (`SPEC-FORMAT-TERSE.2.3.2 - lock lifecycle value drop return channel`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — **frontier `.2.3.3.2` pending after `.2.3.3.1` close-out commit** (Rust attached fluent block payloads for `.when(cond) { ... }.otherwise { ... }`).
-- next_action: Commit `SPEC-FORMAT-TERSE.2.3.3.1`, then implement `SPEC-FORMAT-TERSE.2.3.3.2`: Rust attached fluent block payloads for the accepted `.when`/`otherwise` contract, update KM/book/live docs, then run COMMIT.md workflow.
+- latest_commit: `2260b77` (`SPEC-FORMAT-TERSE.2.3.3.1 - implement Rust action-edge fluent continuations`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — **frontier `.2.3.3.3` pending after `.2.3.3.2` close-out commit** (Rust remaining body/standalone fluent continuation audit and implementation split).
+- next_action: Commit `SPEC-FORMAT-TERSE.2.3.3.2`, then implement `SPEC-FORMAT-TERSE.2.3.3.3`: audit remaining Rust body/standalone fluent continuations such as `I.return(...)`, split or implement with evidence, update KM/book/live docs, then run COMMIT.md workflow.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy/source warning noise includes nested `rgx` baseline. oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs` (**39 fixtures after `.2.2.6.2`**). phase0 baseline = **994 green after `.2.3.2`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
-- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.2.3.3.1` implementation/docs pending commit; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.
+- blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: `.2.3.3.2` implementation/docs pending commit; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.

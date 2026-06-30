@@ -158,6 +158,29 @@ No-arg action-edge continuations are also portable:
 current rule accumulator named after the current rule. `-> Item[1] .return(expr)` returns
 `expr` for that action edge without separately dispatching the close-edge child.
 
+Action edges can also use receiver-fluent attached `when/otherwise` blocks when a short conditional payload is
+clearer than a full structured block:
+
+```text
+-> Item.when(is_defined(scalar(retv))) {
+  return(scalar(retv))
+}.otherwise {
+  return("missing")
+}
+```
+
+The no-dot fallback tail is equivalent:
+
+```text
+-> Item.when(is_defined(scalar(retv))) {
+  return(scalar(retv))
+} otherwise {
+  return("missing")
+}
+```
+
+Lifecycle markers accept the same branch shape, for example `I.when(cond) { ... }.otherwise { ... }`.
+
 ## Empty action edges
 
 An empty action edge is a compact call shape:

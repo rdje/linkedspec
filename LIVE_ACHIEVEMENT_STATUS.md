@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.2 — Rust attached fluent block payloads landed**
+  (RUST PARSER + RUNTIME LOCKS + BOOK/KM). Rust now parses action-edge and lifecycle-marker
+  `.when(cond) { ... }` receiver-fluent block chains by normalizing them to existing attached
+  `when/otherwise` statement blocks. Dotted `.otherwise { ... }` and no-dot `otherwise { ... }` fallback tails
+  execute on both surfaces, including multiline `}.otherwise {` placement.
+  **Verification:** focused Rust core `attached_fluent` PASS; focused Rust runtime `terse_2_3_3_2` PASS;
+  full Rust core/runtime package tests PASS; mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS
+  (`Files=1, Tests=994`). Compact lifecycle/body fluent chains such as `I.return(...)` remain the next Rust
+  fluent-parity surface.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.3.3`** (Rust remaining body/standalone fluent continuation audit and
+  implementation split).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.1 — Rust action-edge fluent continuations landed**
   (RUST PARSER + COMPILER + RUNTIME + BOOK/KM LOCKS). Rust now preserves fluent chains on `->` action edges
   through AST and compiled `AcodeEntry` metadata. No-arg `.push` dispatches the matched child, captures its

@@ -6,11 +6,15 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.3.3.1` DONE; frontier `.2.3.3.2`** — Rust now preserves and executes
-  action-edge fluent no-arg `.push`, `.return(expr)`, and `.return_undef` continuations. The `tclite` oracle
-  remains deferred because the implementation exposed separate blockers: compact lifecycle/body fluent forms
-  such as `I.return(...)` are still dropped as standalone `FluentChain` elements, and shipped recursive default
-  rules still depend on default-mode repetition parity. Prior **`.2.3.3` SPLIT/OWNED** — Rust fluent parity is
+- Last updated: `2026-06-30` (**`.2.3.3.2` DONE; frontier `.2.3.3.3`** — Rust now parses attached fluent
+  `.when(cond) { ... }` block payloads on action-edge and lifecycle-marker surfaces by normalizing them to the
+  existing attached `when/otherwise` statement-block model. Dotted `.otherwise { ... }` and no-dot
+  `otherwise { ... }` fallback tails execute on both surfaces, including multiline `}.otherwise {` placement.
+  Prior **`.2.3.3.1` DONE** — Rust now preserves and executes action-edge fluent no-arg `.push`,
+  `.return(expr)`, and `.return_undef` continuations. The `tclite` oracle remains deferred because the
+  implementation exposed separate blockers: compact lifecycle/body fluent forms such as `I.return(...)` are
+  still dropped as standalone `FluentChain` elements, and shipped recursive default rules still depend on
+  default-mode repetition parity. Prior **`.2.3.3` SPLIT/OWNED** — Rust fluent parity is
   not one implementation seam. Action-edge no-arg `.push` / `.return(expr)` continuations were split first and
   coordinated with `RUST-PARITY.7.5.3` / the `tclite` oracle. Rust attached fluent block payloads and any
   remaining body/standalone fluent continuations stay separate follow-on children. Prior **`.2.3.2` DONE** —
@@ -1559,7 +1563,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `.when(cond) { ... }.otherwise { ... }` block payloads are a separate parser/runtime seam, so they stay out
     of the first implementation slice. `.2.3.3.1` later closed action-edge no-arg fluent continuation parity
     but did not re-enable `tclite`: compact lifecycle/body fluent forms (`I.return(...)`) and default-mode
-    repetition remain separate blockers.
+    repetition remain separate blockers. `.2.3.3.2` later closed the Rust attached fluent block-payload subset
+    by normalizing action-edge/lifecycle `.when(cond) { ... }` chains to existing attached statement blocks;
+    compact lifecycle/body fluent continuations remain `.2.3.3.3`.
   Commit: `pending` (container split; first implementation child is `.2.3.3.1`)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.3.1`
@@ -1581,15 +1587,25 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     for `.push`, close-edge `.return(expr)` without child redispatch, and `.return_undef` with no accumulator
     event. `tclite_command_subst` / `tclite_double_quote` stay out of the corpus for now because compact
     lifecycle/body fluent continuations and default-mode repetition are separate remaining blockers.
-  Commit: `pending` (`SPEC-FORMAT-TERSE.2.3.3.1 - implement Rust action-edge fluent continuations`)
+  Commit: `SPEC-FORMAT-TERSE.2.3.3.1 - implement Rust action-edge fluent continuations` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.3.2`
-  Status: `pending`
+  Status: `done` (2026-06-30)
   Goal: Rust attached fluent block payloads for accepted `.when(cond) { ... }.otherwise { ... }` chains
   Acceptance: Rust parses and executes attached fluent block payloads on action-edge and lifecycle surfaces
     for the accepted Perl-reference `.when`/`otherwise` contract, including dotted and no-dot fallback tails.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Rust parser/runtime parity landed by recognizing receiver-fluent `.when(cond) { ... }` tails
+    after `-> Target` action edges and lifecycle markers such as `I`, then attaching normalized
+    `when(cond) { ... } otherwise { ... }` code to the existing action-edge/lifecycle code-block fields. The
+    parser accepts both `.otherwise { ... }` and no-dot `otherwise { ... }`, and tracks the physical source
+    line that owns a remainder so multiline `}.otherwise {` chains do not skip the fallback payload. Focused
+    Rust checks passed: `cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml attached_fluent
+    -- --nocapture` and `cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml
+    terse_2_3_3_2 -- --nocapture`. Runtime locks cover action-edge dotted fallback, action-edge no-dot
+    fallback, lifecycle dotted fallback, and lifecycle no-dot fallback. Full Rust core/runtime package tests,
+    mdBook build, Knowledge Map regenerate/check, memory/doctrine/diff checks, and full local CI PASS
+    (`Files=1, Tests=994`).
+  Commit: `SPEC-FORMAT-TERSE.2.3.3.2 - implement Rust attached fluent block payloads` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.3.3`
   Status: `pending`
@@ -1715,8 +1731,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.1` | `done` 2026-06-30 | Perl reference fluent block-chain contract landed for exact `.when(cond) { ... }.otherwise { ... }` action/lifecycle forms, including the no-dot `otherwise` continuation. |
 | — | `SPEC-FORMAT-TERSE.2.3.2` | `done` 2026-06-30 | Lifecycle blocks locked as statement blocks: final ordinary statement values are discarded, top-level `return(expr)` writes the surrounding channel, and expression-valued block-local return stays separate. |
 | — | `SPEC-FORMAT-TERSE.2.3.3.1` | `done` 2026-06-30 | Rust action-edge fluent no-arg `.push` / `.return(expr)` parity landed; tclite oracle remains deferred behind separate compact lifecycle/body fluent and default-mode repetition gaps. |
-| 1 | `SPEC-FORMAT-TERSE.2.3.3.2` | `pending` | Rust attached fluent block payloads for `.when(cond) { ... }.otherwise { ... }`. |
-| 2 | `SPEC-FORMAT-TERSE.2.3.3.3` | `pending` | Rust remaining body/standalone fluent continuation audit and implementation split. |
+| — | `SPEC-FORMAT-TERSE.2.3.3.2` | `done` 2026-06-30 | Rust attached fluent block payloads landed for action-edge/lifecycle `.when(cond) { ... }` chains with dotted and no-dot fallback tails. |
+| 1 | `SPEC-FORMAT-TERSE.2.3.3.3` | `pending` | Rust remaining body/standalone fluent continuation audit and implementation split. |
 | 4 | `SPEC-FORMAT-TERSE.2.3.4` | `pending` | Full Lisp-style composability audit and follow-on split. |
 | 5 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
 | … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
@@ -2347,6 +2363,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.1` | TOOLBOX false-branch reverify for dotted and no-dot fluent `otherwise`; Perl syntax checks (`perl -c perl/LinkedSpec/BootstrapSpec/Core.pm`, `perl -c t/phase0_regression.t`); phase0 (`prove -q -Iperl t/phase0_regression.t`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks | Perl reference fluent `when/otherwise` block chains landed. The bootstrap parser now preserves attached fallback tails after `.when(...) { ... }`, with or without the dot before `otherwise`. New phase0 locks prove action-edge and lifecycle false-branch fallback execution, descriptor cleanliness (`ready=1 fallback=0 raw=0 unresolved=0`), and no generated host `when`/`otherwise` residue. Phase0 PASS (`Files=1, Tests=993`). Frontier becomes `.2.3.2`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.2` | Perl syntax check (`perl -c t/phase0_regression.t`); phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_2`); mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Lifecycle block value/drop semantics are locked. Phase0 source-locks all seven lifecycle markers and runtime-locks final ordinary statement discard, top-level Perl lifecycle return-channel behavior, and expression-valued block-local return contrast. Rust focused tests lock statement-value discard, top-level lifecycle return-event recording, and expression-block local return. Phase0 PASS (`Files=1, Tests=994`); full local CI PASS. Frontier becomes `.2.3.3`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.1` | Focused Rust core (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml fluent_chain`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_3_1 -- --nocapture`); full Rust core/runtime package tests; `perl -c tools/gen_oracle_corpus.pl`; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust action-edge fluent continuations landed. `ActionEdge` / `AcodeEntry` now carry fluent-chain metadata and runtime dispatch executes no-arg `.push`, `.return(expr)`, and `.return_undef` with parent-visible return-channel semantics. Focused locks cover child return capture, child return-event suppression, close-edge return without recursive child redispatch, and `.return_undef` without an accumulator event. Full local CI PASS (`Files=1, Tests=994`). `tclite` oracle remains deferred behind compact lifecycle/body fluent forms and default-mode repetition parity. Frontier becomes `.2.3.3.2`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.2` | Focused Rust core (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml attached_fluent -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_3_2 -- --nocapture`); full Rust core/runtime package tests; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust attached fluent block payloads landed. The Rust body parser now normalizes action-edge and lifecycle `.when(cond) { ... }` receiver-fluent block chains to existing attached statement blocks, accepts dotted and no-dot `otherwise` fallback tails, and preserves multiline fallback payloads after `}.otherwise {`. Focused runtime locks cover both fallback spellings on both action-edge and lifecycle surfaces. Full local CI PASS (`Files=1, Tests=994`). Frontier becomes `.2.3.3.3`. |
 
 ## Commit Log
 
@@ -2413,8 +2430,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.1` | `SPEC-FORMAT-TERSE.2.3.1 - lock Perl fluent when otherwise blocks` | Perl reference fluent `.when(cond) { ... }.otherwise { ... }` and no-dot `otherwise { ... }` fallback continuations now execute correctly on action-edge and lifecycle surfaces, with phase0 locks. Frontier becomes `.2.3.2`. |
 | `SPEC-FORMAT-TERSE.2.3.2` | `SPEC-FORMAT-TERSE.2.3.2 - lock lifecycle value drop return channel` | Lifecycle blocks are locked as statement blocks: final ordinary statement values are discarded, top-level `return(expr)` writes the surrounding rule/action channel, and expression-valued block-local return stays separate. Phase0 994 green; frontier becomes `.2.3.3`. |
 | `SPEC-FORMAT-TERSE.2.3.3.1` | `SPEC-FORMAT-TERSE.2.3.3.1 - implement Rust action-edge fluent continuations` | Rust action-edge fluent no-arg `.push`, `.return(expr)`, and `.return_undef` now execute through structured action-edge metadata; `tclite` remains deferred behind compact lifecycle/body fluent and default-mode repetition gaps. Frontier becomes `.2.3.3.2`. |
+| `SPEC-FORMAT-TERSE.2.3.3.2` | `SPEC-FORMAT-TERSE.2.3.3.2 - implement Rust attached fluent block payloads` | Rust action-edge/lifecycle `.when(cond) { ... }` fluent block chains now execute through normalized attached statement blocks with dotted or no-dot fallback tails. Frontier becomes `.2.3.3.3`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.3.3.2` LANDED — Rust attached fluent block payloads.**
+  Rust now parses action-edge and lifecycle-marker `.when(cond) { ... }` receiver-fluent block chains and
+  normalizes them to existing attached `when/otherwise` statement blocks. Dotted `.otherwise { ... }` and
+  no-dot `otherwise { ... }` fallback tails execute on both surfaces, including multiline `}.otherwise {`
+  placement. Focused Rust parser/runtime locks PASS. Frontier moves to `.2.3.3.3`.
 
 - `2026-06-30`: **`.2.3.3.1` LANDED — Rust action-edge fluent continuations.**
   Rust now carries fluent chains on `->` action edges through AST, compiled `AcodeEntry`, and runtime dispatch.
