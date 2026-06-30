@@ -135,6 +135,17 @@ This target-kind inference is intentionally tied to direct RHS shape literals. U
 when the goal is a scalar-held shape payload; use `array(name)` / `hash(name)` when the goal is an explicit
 aggregate target.
 
+Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
+returned or assigned:
+
+```text
+set(payload, { set(kind, "token"); return({ "kind" => kind }); "unused" });
+return(payload);
+```
+
+The `return(expr)` inside the block is block-local: it yields the block value and skips later statements in
+that block. The surrounding rule still returns only because the outer action later calls `return(payload)`.
+
 ## Reading and copying collections
 
 Use explicit helpers when you need a snapshot or derived collection:

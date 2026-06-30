@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.1.4 — expression-valued block early return
+
+**Scope:** Perl ActionIR value-block lowering, Rust runtime block-value evaluation, Perl/Rust regression
+coverage, Perl-oracle corpus fixture, mdBook, Knowledge Map, task tree, roadmap tracker, and live continuity
+docs.
+
+**What changed:** Expression-valued blocks now support true block-local early `return(expr)` on both the Perl
+reference and Rust backend. A non-empty brace payload without a top-level `=>` remains a block value; `{}` and
+`{ key => value }` still remain hash literals. When block evaluation reaches `return(expr)`, the block yields
+`expr`, skips later statements inside that block, and does not set or leak the surrounding rule return channel.
+
+**Implementation:** Perl lowering now emits a guarded scalar `do { ... }` wrapper only for blocks that contain
+a non-final `return(expr)`, preserving the existing byte-stable output for final-expression and final-return
+core cases. Rust `eval_block_value()` now evaluates an active `return(expr)` statement before final-expression
+handling and returns its payload from the block.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/runtime probes PASS; focused Rust `.2.1.4` runtime
+locks PASS; oracle corpus regenerated to **35 fixtures** and Rust corpus oracle PASS; phase0 PASS
+(`t/phase0_regression.t`, **991 tests**); mdBook build PASS; Knowledge Map regenerate/check PASS;
+memory/doctrine/diff checks PASS; full local CI PASS.
+
 ## 2026-06-29 — SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity
 
 **Scope:** Rust parser/runtime, Rust parser/runtime tests, Perl-oracle corpus fixture, mdBook, Knowledge Map,

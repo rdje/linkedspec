@@ -344,6 +344,29 @@ sub _lower_block_side_effect_statement {
  return _lower_block_value_component_expr($trimmed, $deps)
 }
 
+sub _lower_block_local_return_payload_expr {
+ my ($statement, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+
+ my $call = $parse_method_function_expr->($statement);
+ return undef unless $call && ($call->{method} // '') eq 'return';
+
+ my $args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
+ return undef unless $args;
+ my $payload_expr = _lower_return_payload_expr($args->[0], $deps);
+ return undef unless defined($payload_expr) && length($payload_expr);
+ $payload_expr = '+'.$payload_expr if $payload_expr =~ /^\s*\{/s;
+ return $payload_expr
+}
+
 sub _lower_block_value_expr {
  my ($expr, $deps) = @_;
  my $require_dep = sub {
@@ -367,21 +390,62 @@ sub _lower_block_value_expr {
  my $statements = $split_action_ir_statements->($payload);
  return undef unless ref($statements) eq 'ARRAY' && @$statements;
 
+ my @statements;
+ foreach my $raw_statement (@$statements) {
+  my $statement = $trim_action_ir_value->($raw_statement);
+  push @statements, $statement if defined($statement) && length($statement);
+ }
+ return undef unless @statements;
+
+ my @return_payloads;
+ my $has_nonfinal_return = 0;
+ for (my $idx = 0; $idx < @statements; ++$idx) {
+  my $call = $parse_method_function_expr->($statements[$idx]);
+  next unless $call && ($call->{method} // '') eq 'return';
+  my $payload_expr = _lower_block_local_return_payload_expr($statements[$idx], $deps);
+  return undef unless defined($payload_expr) && length($payload_expr);
+  $return_payloads[$idx] = $payload_expr;
+  $has_nonfinal_return = 1 if $idx < $#statements;
+ }
+
+ if ($has_nonfinal_return) {
+  my @lowered = (
+   'my $__ls_block_done = 0;',
+   'my $__ls_block_value;',
+  );
+  for (my $idx = 0; $idx < @statements; ++$idx) {
+   if (defined $return_payloads[$idx]) {
+    push @lowered,
+     'unless ($__ls_block_done) { $__ls_block_value = '.$return_payloads[$idx].'; $__ls_block_done = 1; };';
+    next;
+   }
+
+   my $is_last = ($idx == $#statements);
+   if ($is_last) {
+    my $value_expr = _lower_block_value_component_expr($statements[$idx], $deps);
+    return undef unless defined($value_expr) && length($value_expr);
+    $value_expr = '+'.$value_expr if $value_expr =~ /^\s*\{/s;
+    push @lowered,
+     'unless ($__ls_block_done) { $__ls_block_value = '.$value_expr.'; $__ls_block_done = 1; };';
+    next;
+   }
+
+   my $lowered_statement = _lower_block_side_effect_statement($statements[$idx], $deps);
+   return undef unless defined($lowered_statement) && length($lowered_statement);
+   push @lowered, 'unless ($__ls_block_done) { '.$lowered_statement.'; };';
+  }
+
+  return 'do { '.join(' ', @lowered).' $__ls_block_value }'
+ }
+
  my @lowered;
- for (my $idx = 0; $idx < @$statements; ++$idx) {
-  my $statement = $trim_action_ir_value->($statements->[$idx]);
-  next unless defined($statement) && length($statement);
-  my $is_last = ($idx == $#$statements);
+ for (my $idx = 0; $idx < @statements; ++$idx) {
+  my $statement = $statements[$idx];
+  my $is_last = ($idx == $#statements);
 
   if ($is_last) {
-   my $call = $parse_method_function_expr->($statement);
-   if ($call && ($call->{method} // '') eq 'return') {
-    my $args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
-    return undef unless $args;
-    my $payload_expr = _lower_return_payload_expr($args->[0], $deps);
-    return undef unless defined($payload_expr) && length($payload_expr);
-    $payload_expr = '+'.$payload_expr if $payload_expr =~ /^\s*\{/s;
-    push @lowered, $payload_expr;
+   if (defined $return_payloads[$idx]) {
+    push @lowered, $return_payloads[$idx];
     next;
    }
 

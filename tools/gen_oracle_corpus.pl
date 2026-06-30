@@ -559,6 +559,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.2.1.4 — expression-valued block early return ──
+    #
+    # A return(expr) inside a value block exits only that block and skips later
+    # block statements; the surrounding rule-level return remains explicit.
+    {   case   => 'terse_2_1_4_expression_valued_block_early_return',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { return(array({ return("a"); "b" }, { set(x, "c"); return({ "k" => x }); "bad" })) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

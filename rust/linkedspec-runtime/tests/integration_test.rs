@@ -1490,3 +1490,37 @@ fn terse_2_1_3_expression_valued_blocks_compose_with_hash_literals() {
         "block values compose in arrays while empty/keyed braces stay hash literals"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.1.4 — block-local early return:
+// return(expr) exits only the expression-valued block, does not set the
+// surrounding rule return channel, and skips later block statements.
+
+#[test]
+fn terse_2_1_4_expression_valued_block_nonfinal_return_is_local() {
+    let grammar = "Top::\n /x/ -> Done { return({ return(\"a\"); \"b\" }) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["a"]),
+        "non-final return(expr) yields the block payload"
+    );
+}
+
+#[test]
+fn terse_2_1_4_expression_valued_block_assignment_source_stops_after_return() {
+    let grammar = "Top::\n /x/ -> Done { set(out, { set(x, \"a\"); return(x); set(x, \"b\"); x }); return(out) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["a"]),
+        "early return(expr) skips later block statements in assignment-source blocks"
+    );
+}
+
+#[test]
+fn terse_2_1_4_expression_valued_blocks_compose_with_early_return_hash() {
+    let grammar = "Top::\n /x/ -> Done { return(array({ return(\"a\"); \"b\" }, { set(x, \"c\"); return({ \"k\" => x }); \"bad\" })) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["a", {"k": "c"}]]),
+        "early-return block values compose while hash-literal payloads keep shape"
+    );
+}

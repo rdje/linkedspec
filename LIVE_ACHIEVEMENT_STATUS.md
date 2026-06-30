@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.1.4 — expression-valued block early return landed**
+  (PERL ACTIONIR + RUST RUNTIME + ORACLE/KM/BOOK LOCKS). Expression-valued blocks now support block-local
+  early `return(expr)` on both variants. `return({ return("a"); "b" })` yields `"a"`; assignment-source block
+  values skip later statements after the return payload; nested block values preserve hash-literal payloads.
+  `{}` and `{ key => value }` still remain hash shape literals, and the block-local return does not leak into
+  the surrounding rule return channel.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/runtime probes PASS; focused Rust `.2.1.4`
+  runtime locks PASS; oracle corpus regenerated to **35 fixtures** and corpus oracle PASS; phase0 PASS
+  (`t/phase0_regression.t`, **991 tests**); mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2`** (Round 2 control-flow keyword surface; own before code).
 - 2026-06-29: **SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity landed**
   (RUST PARSER/RUNTIME + ORACLE/KM/BOOK LOCKS). Rust now matches the Perl-reference core block-value subset:
   non-empty brace payloads without a top-level `=>` parse as `Expr::BlockValue`, `{}` and `{ key => value }`

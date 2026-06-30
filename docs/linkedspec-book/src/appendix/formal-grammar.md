@@ -253,10 +253,12 @@ Semicolons remain accepted and are required when multiple top-level helper state
 share one physical line. Plain same-line whitespace is not a statement separator, and
 semicolons inside nested expressions or literal payloads remain protected.
 
-In value positions, a non-empty `{ ... }` payload without a top-level `=>` is a core
+In value positions, a non-empty `{ ... }` payload without a top-level `=>` is an
 expression-valued block on the Perl reference and Rust backend. It returns the final
-expression, or a final `return(expr)` payload. Empty `{}` and top-level-fat-arrow
-`{ key => value }` forms remain hash literals.
+expression unless a `return(expr)` statement is reached earlier; that `return(expr)`
+exits only the expression-valued block, skips later statements in that block, and
+yields `expr` as the block value. Empty `{}` and top-level-fat-arrow `{ key => value }`
+forms remain hash literals.
 
 ### 3.7 Fluent Chains
 

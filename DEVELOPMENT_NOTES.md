@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.1.4 — expression-valued block early return landed): Closed the block-local
+  return-depth split for expression-valued blocks. Durable points. (1) **Early return is value-block-local,
+  not rule-local.** `return(expr)` inside a block value yields `expr` from that block and skips later block
+  statements, but it does not set the surrounding rule return channel. The surrounding action must still
+  explicitly return or assign the block value. (2) **Perl keeps old byte-stable core output.** Blocks without a
+  non-final `return(expr)` still lower as the compact `do { ... final }` form; only early-return blocks use
+  the guarded `$__ls_block_done` / `$__ls_block_value` wrapper. (3) **Rust spends the existing return payload
+  detector at block-value depth.** `eval_block_value()` now checks `return_call_payload()` for each active
+  statement before final-expression handling, evaluates the payload, and returns it directly. (4) **Hash
+  precedence remains unchanged.** `{}` and top-level-fat-arrow `{ key => value }` still parse/lower as hash
+  literals; only non-empty non-fat-arrow braces are value blocks.
+
 - 2026-06-29 (SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity landed): Implemented Rust parity
   for the Perl core block-value subset. Durable points. (1) **Hash literals still win.** The parser now routes
   `{` through `parse_brace_expr()`: empty payloads and top-level `=>` payloads keep `Expr::HashLiteral`, while

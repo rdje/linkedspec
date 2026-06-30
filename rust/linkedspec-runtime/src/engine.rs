@@ -916,14 +916,14 @@ impl Engine {
             if !if_stack.last().is_none_or(|frame| frame.current_active) {
                 continue;
             }
+            if let Some(payload) = Self::return_call_payload(&stmt.expr) {
+                return match payload {
+                    Some(value) => self.eval_expr(value, ctx, rule_label),
+                    None => Ok(RuntimeValue::Undef),
+                };
+            }
             if index == last_index {
                 return self.eval_block_final_expr(&stmt.expr, ctx, rule_label);
-            }
-            if Self::return_call_payload(&stmt.expr).is_some() {
-                return Err(
-                    "non-final return(expr) inside an expression-valued block is reserved for SPEC-FORMAT-TERSE.2.1.4"
-                        .to_string(),
-                );
             }
             self.execute_block_statement_expr(&stmt.expr, ctx, rule_label)?;
         }
@@ -3887,11 +3887,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(entry_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi")
-            .last()
-            .unwrap()
-            .as_bool()
-            .unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -3948,11 +3950,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi")
-            .last()
-            .unwrap()
-            .as_bool()
-            .unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -4030,7 +4034,7 @@ ChildB:
             4.0
         ); // "cde" past nl → 4
         assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
-                                                                                 // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
+        // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
         assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);
     }
 

@@ -45227,7 +45227,7 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
     # SPEC-FORMAT-TERSE.2.1.2: Perl reference core expression-valued blocks.
     # Non-empty brace payloads without a top-level fat arrow are value blocks;
     # empty and fat-arrow brace payloads remain hash shape literals.
-    plan tests => 16;
+    plan tests => 25;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -45248,8 +45248,16 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         'return block lowers to a do-block whose final expression is the block value');
     is($L->('return({ set(x,"a"); return(x) })'), 'return do { $x = "a"; $x }',
         'final return(expr) inside a block is block-local in the Perl core slice');
+    my $early_return_lowering = $L->('return({ return("a"); "b" })');
+    like($early_return_lowering, qr/^return do \{ my \$__ls_block_done = 0; my \$__ls_block_value;/,
+        'non-final return(expr) lowers through a block-local guard wrapper');
+    unlike($early_return_lowering, qr/return\s+"a"/,
+        'non-final return(expr) payload does not emit a nested handler return');
     is($L->('set(out, { set(x,"a"); x })'), '$out = do { $x = "a"; $x }',
         'assignment source block stays scalar assignment instead of hash target inference');
+    like($L->('set(out, { set(x,"a"); return(x); set(x,"b"); x })'),
+        qr/^\$out = do \{ my \$__ls_block_done = 0; my \$__ls_block_value;/,
+        'assignment-source block with early return still lowers as a scalar block value');
     is($L->('return({})'), 'return {}',
         'empty braces remain a hash shape literal');
     is($L->('return({ key => value })'), 'return {$key => $value}',
@@ -45273,6 +45281,15 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
     is($run->($final_return_parser, 'xhello'), '"a"',
         'final return(expr) block returns the payload without leaking a handler return');
 
+    my $early_return_spec = "Top::\n"
+                          . " /x/ -> Done { return({ return(\"a\"); \"b\" }) }\n"
+                          . "\nDone::\n /[a-z]+/\n";
+    my $early_return_parser = eval { LinkedSpec::Get(\$early_return_spec) };
+    ok(ref($early_return_parser) eq 'CODE', 'non-final return block spec compiles')
+        or diag(normalize_error($@));
+    is($run->($early_return_parser, 'xhello'), '"a"',
+        'non-final return(expr) exits only the expression-valued block');
+
     my $assign_spec = "Top::\n"
                     . " /x/ -> Done { set(out, { set(x,\"a\"); x }); return(out) }\n"
                     . "\nDone::\n /[a-z]+/\n";
@@ -45282,6 +45299,15 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
     is($run->($assign_parser, 'xhello'), '"a"',
         'assignment-source block stores the block value in the scalar target');
 
+    my $early_assign_spec = "Top::\n"
+                          . " /x/ -> Done { set(out, { set(x,\"a\"); return(x); set(x,\"b\"); x }); return(out) }\n"
+                          . "\nDone::\n /[a-z]+/\n";
+    my $early_assign_parser = eval { LinkedSpec::Get(\$early_assign_spec) };
+    ok(ref($early_assign_parser) eq 'CODE', 'assignment-source early-return block spec compiles')
+        or diag(normalize_error($@));
+    is($run->($early_assign_parser, 'xhello'), '"a"',
+        'assignment-source early return stores the payload and skips later block statements');
+
     my $nested_spec = "Top::\n"
                     . " /x/ -> Done { return(array({ set(x,\"a\"); x }, { set(key,\"stage\"); set(value,\"ok\"); { key => value } })) }\n"
                     . "\nDone::\n /[a-z]+/\n";
@@ -45290,6 +45316,15 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         or diag(normalize_error($@));
     is($run->($nested_parser, 'xhello'), '["a",{"stage":"ok"}]',
         'block values compose inside array payloads and can return hash literals');
+
+    my $early_nested_spec = "Top::\n"
+                          . " /x/ -> Done { return(array({ return(\"a\"); \"b\" }, { set(x,\"c\"); return({ \"k\" => x }); \"bad\" })) }\n"
+                          . "\nDone::\n /[a-z]+/\n";
+    my $early_nested_parser = eval { LinkedSpec::Get(\$early_nested_spec) };
+    ok(ref($early_nested_parser) eq 'CODE', 'nested early-return block-value spec compiles')
+        or diag(normalize_error($@));
+    is($run->($early_nested_parser, 'xhello'), '["a",{"k":"c"}]',
+        'early-return block values compose and preserve hash-literal payloads');
 
     my $assign_src = $gen->($assign_spec);
     is((() = ($assign_src =~ /my \$x\b/g)), 1,
