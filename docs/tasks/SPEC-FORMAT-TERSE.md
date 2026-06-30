@@ -6,9 +6,10 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.2.2` OWNED before code** — Perl attached-block `if/elseif/else`
-  narrowed to the same-line `} elseif/else {` statement-splitting seam. Newline-separated attached branches
-  already lower through ActionIR; same-line compact chains still fall back to raw Perl. Prior **`.2.2.1` DONE;
+- Last updated: `2026-06-30` (**`.2.2.2` DONE; frontier `.2.2.3`** — Perl attached-block
+  `if/elseif/else` compact same-line branch continuations now split, lower through ActionIR, and run without raw
+  fallback. Rust parity remains `.2.2.3`. Prior **`.2.2.2` OWNED before code** — same-line
+  `} elseif/else {` was narrowed to the statement-splitting seam. Prior **`.2.2.1` DONE;
   frontier `.2.2.2`** — Round 2 control-flow keyword surface split after KM/TOOLBOX/code-read ground truth.
   Current portable support is marker/composite `if` plus inline-composite `switch`; attached-block `if`,
   `when`/`otherwise`, statement `switch`, and `while` need separate leaves. Prior **`.2.1.4` DONE; frontier
@@ -1260,16 +1261,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return`
 
 - ID: `SPEC-FORMAT-TERSE.2.2`
-  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.2` owned before code)
+  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.2` done; frontier `.2.2.3`)
   Goal: Control-flow keywords — `if/elseif/else`, `when`, `otherwise`, `default`, `while`, `switch`
   Acceptance: `if (cond) { ... } elseif (cond) { ... } else { ... }` — parens for conditions, blocks
     for bodies, blocks NEVER inside parens; `when (cond) { ... }` inline conditional; `otherwise { ... }`
     and `default { ... }` take no parens/args; `while (cond) { ... }`; `switch (expr) { case(v) { ... }
     default { ... } }`.
   Children: `.2.2.1`, `.2.2.2`, `.2.2.3`, `.2.2.4`, `.2.2.5`, `.2.2.6`
-  Verification: `.2.2.1` split/ground truth done; `.2.2.2` ownership narrowed the Perl attached-if seam to
-    same-line attached branch statement splitting; implementation leaves pending.
-  Commit: `SPEC-FORMAT-TERSE.2.2.1 - split control-flow keyword surface`; `.2.2.2` implementation pending
+  Verification: `.2.2.1` split/ground truth done; `.2.2.2` Perl attached-block if done; Rust parity and later
+    keyword leaves pending.
+  Commit: `SPEC-FORMAT-TERSE.2.2.1 - split control-flow keyword surface`;
+    `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`; `.2.2.3` pending
 
 - ID: `SPEC-FORMAT-TERSE.2.2.1`
   Status: `done` (2026-06-30)
@@ -1288,17 +1290,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.2.1 - split control-flow keyword surface`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.2`
-  Status: `active` (owned before code 2026-06-30)
+  Status: `done` (2026-06-30)
   Goal: Perl reference — attached-block `if/elseif/else` without explicit `endif`
   Acceptance: `if(cond) { ... } elseif(cond2) { ... } else { ... }` lowers through ActionIR without raw Perl
     fallback, executes only the selected branch, and preserves the existing statement-marker
     `if(cond); ... else(); ... endif()` and inline-composite `if(...)` contracts.
-  Verification: Ownership probes show newline-separated attached branch clauses already lower through ActionIR
-    without raw fallback, while compact same-line `} elseif/else {` chains remain one RAW_PERL statement.
-    Code-read identifies `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm` as the missing split seam; scanner
-    and `ControlFlow.pm` already parse/lower individual attached branch statements and `RewritePipeline.pm`
-    already preserves implicit closures across `elseif`/`else` continuations. Implementation pending.
-  Commit: `SPEC-FORMAT-TERSE.2.2.2 - own Perl attached if blocks`; implementation commit pending
+  Verification: `StatementSplit::Core` now splits complete attached `if`/`elseif` branch bodies before same-line
+    attached `elseif(...) { ... }` / `else { ... }` continuations. TOOLBOX lowering/metadata probes show compact
+    attached-block `if/elseif/else` lowers with zero raw fallback/unresolved helpers and runtime selects only the
+    active branch. Perl syntax checks PASS; phase0 PASS (**991 tests**); mdBook build PASS; Knowledge
+    Map/memory/doctrine/diff checks PASS. Marker-form and inline-composite `if` contracts preserved.
+  Commit: `SPEC-FORMAT-TERSE.2.2.2 - implement Perl attached if blocks`
 
 - ID: `SPEC-FORMAT-TERSE.2.2.3`
   Status: `pending`
@@ -1425,7 +1427,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.1.3` | `done` 2026-06-29 | Rust parity for the accepted Perl-reference core expression-valued block contract landed with parser/runtime locks and a 34-fixture oracle corpus. |
 | — | `SPEC-FORMAT-TERSE.2.1.4` | `done` 2026-06-30 | Block-local early `return(expr)` landed for expression-valued blocks on Perl and Rust; `.2.1` is closed. |
 | — | `SPEC-FORMAT-TERSE.2.2.1` | `done` 2026-06-30 | Control-flow keyword surface split before code. Current portable support is marker/composite `if` plus inline-composite `switch`; attached-block `if`, `when`/`otherwise`, statement `switch`, and `while` are separate implementation leaves. |
-| 1 | `SPEC-FORMAT-TERSE.2.2.2` | `pending` | Perl reference attached-block `if/elseif/else` without raw fallback. |
+| — | `SPEC-FORMAT-TERSE.2.2.2` | `done` 2026-06-30 | Perl reference attached-block `if/elseif/else` without raw fallback — LANDED. |
+| 1 | `SPEC-FORMAT-TERSE.2.2.3` | `pending` | Rust parity for attached-block `if/elseif/else`. |
 | … | `.2.3`, `.3.x`, `.4` | `pending` | Remaining Round 2–3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
@@ -2010,8 +2013,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.1.4` | `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return` | Expression-valued blocks now support block-local early `return(expr)` on Perl and Rust without leaking into the surrounding rule return channel. Added Perl/Rust/oracle/book/KM locks; `.2.1` closes and frontier becomes `.2.2`. |
 | `SPEC-FORMAT-TERSE.2.2.1` | `SPEC-FORMAT-TERSE.2.2.1 — split control-flow keyword surface` | No engine behavior change. `.2.2` is split by current support seams: Perl attached-if first, Rust attached-if parity next, then `when`/`otherwise`, attached switch/default, and while. Frontier becomes `.2.2.2`. |
 | `SPEC-FORMAT-TERSE.2.2.2` | `SPEC-FORMAT-TERSE.2.2.2 — own Perl attached if blocks` | No engine behavior change. Perl attached-block if ownership narrowed the implementation to the same-line branch-continuation splitter: newline-separated `if { ... }` / `elseif { ... }` / `else { ... }` clauses are already ActionIR-ready, while compact `} elseif/else {` chains remain raw. Frontier remains `.2.2.2` implementation. |
+| `SPEC-FORMAT-TERSE.2.2.2` | `SPEC-FORMAT-TERSE.2.2.2 — implement Perl attached if blocks` | Perl compact attached-block `if/elseif/else` now splits, lowers, and runs without raw fallback. Marker-form and inline-composite `if` behavior is unchanged. Frontier becomes `.2.2.3` for Rust parity. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.2.2` DONE — Perl attached-block if/elseif/else landed.**
+  `StatementSplit::Core` now splits a complete attached `if`/`elseif` branch body before same-line attached
+  `elseif(...) { ... }` and bare `else { ... }` continuations. Compact
+  `if(cond) { ... } elseif(cond2) { ... } else { ... }` now lowers through ActionIR with no raw fallback and
+  executes only the selected branch. Existing marker-form `if(cond); ... endif()` and inline-composite
+  `if(...)` behavior is unchanged. Frontier moves to `.2.2.3` for Rust parity.
 
 - `2026-06-30`: **`.2.2.2` OWNED BEFORE CODE — Perl attached-block if/elseif/else.**
   TOOLBOX probes and code-read narrowed the Perl reference implementation seam. Newline-separated attached

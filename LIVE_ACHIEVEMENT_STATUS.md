@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.2 — Perl attached-block if landed**
+  (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Compact attached-block `if/elseif/else` now works on the Perl
+  reference without explicit `endif`: `if(cond) { ... } elseif(cond2) { ... } else { ... }` splits into branch
+  statements, lowers without raw fallback, and executes only the selected branch. Marker-form and
+  inline-composite `if` behavior remains unchanged. The mdBook documents this as Perl-reference support, not
+  yet the portable cross-backend contract.
+  **Verification:** Perl syntax checks PASS; TOOLBOX lowering/metadata/runtime probes PASS; phase0 PASS
+  (`t/phase0_regression.t`, **991 tests**); mdBook build PASS; Knowledge Map regenerate/check PASS;
+  memory/doctrine/diff checks PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.3`** (Rust parity for attached-block `if/elseif/else`).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.2 — Perl attached-block if owned before code**
   (DOCS/TREE/KM ONLY; **no engine behavior change**). TOOLBOX probes narrowed the Perl implementation boundary:
   newline-separated attached branches already lower through ActionIR, but compact same-line chains such as

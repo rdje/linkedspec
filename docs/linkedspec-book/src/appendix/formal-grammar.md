@@ -655,10 +655,12 @@ E {
 }
 ```
 
-Round 2 is extending this surface. Attached-block `if(...) { ... }`, `when(...) { ... } otherwise { ... }`,
-statement-level `switch(...) { case(...) { ... } default { ... } }`, and `while(...) { ... }` are tracked
-implementation leaves, not yet the portable contract across backends. Zero-argument markers that are already
-implemented, such as `else`/`endif`, accept bare-keyword form in addition to parenthesized form.
+Round 2 is extending this surface. The Perl reference now accepts attached-block
+`if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations, but Rust parity
+is still pending, so marker-style `if` remains the portable cross-backend contract. `when(...) { ... }
+otherwise { ... }`, statement-level `switch(...) { case(...) { ... } default { ... } }`, and
+`while(...) { ... }` remain tracked implementation leaves. Zero-argument markers that are already implemented,
+such as `else`/`endif`, accept bare-keyword form in addition to parenthesized form.
 
 ## 10. Constraints and Validation
 

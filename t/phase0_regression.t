@@ -753,7 +753,7 @@ PERL
     is($err, '', 'ActionIR::StatementSplit::Core require/split subprocess does not emit stderr');
 };
 subtest 'actionir_statement_split_core_requires_newline_or_semicolon_boundaries' => sub {
-    plan tests => 7;
+    plan tests => 8;
 
     my $trim = sub {
         my ($value) = @_;
@@ -806,6 +806,19 @@ subtest 'actionir_statement_split_core_requires_newline_or_semicolon_boundaries'
         ),
         ['if(scalar(on)){if(scalar(alt_on))return_undef()else()return_undef()endif()}else(){return_undef()}'],
         'statement-split core leaves same-line attached if/else branch blocks as one explicit blocker',
+    );
+
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+            'if(scalar(on)){return_undef()}elseif(scalar(alt_on)){say("alt")}else{return_undef()}',
+            $trim,
+        ),
+        [
+            'if(scalar(on)){return_undef()}',
+            'elseif(scalar(alt_on)){say("alt")}',
+            'else{return_undef()}',
+        ],
+        'statement-split core splits compact same-line attached if/elseif/else branch continuations',
     );
 
     is_deeply(
@@ -39059,7 +39072,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'split_tagged_records flow remains language-agnostic action-IR ready');
 };
 subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
-    plan tests => 12;
+    plan tests => 18;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'if(scalar(on)); push(pipe_operator, rule); elseif(scalar(alt_on)); print("warn"); else(); say("Error: no context"); return_undef(); endif()'),
@@ -39129,6 +39142,31 @@ SPEC
         'canonical action-IR nodes include PUSH/PRINT/SAY/RETURN branch statements'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'fluent if/elseif/else/endif rule remains language-agnostic action-IR ready');
+
+    my $attached_if_stmt = 'if(false) { return("bad") } elseif(true) { return("yes") } else { return("no") }';
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', $attached_if_stmt),
+        'if (do { require JSON::PP; JSON::PP::false }) { return "bad" } elsif (do { require JSON::PP; JSON::PP::true }) { return "yes" } else { return "no" }',
+        'compact attached-block if/elseif/else lowers to structured Perl without explicit endif',
+    );
+
+    my $attached_spec = qq{Top::\n /x/ -> Done { $attached_if_stmt }\n\nDone::\n /x/\n};
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for compact attached-block if/elseif/else chain');
+
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'compact attached-block if/elseif/else avoids RAW_PERL fallback');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'compact attached-block if/elseif/else avoids raw Perl dependency');
+    is($attached_meta->{unresolved_helper_count}, 0, 'compact attached-block if/elseif/else avoids unresolved-helper hits');
+
+    require JSON::PP;
+    my $attached_parser = LinkedSpec::Get(\$attached_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $attached_input = 'xx';
+    is(
+        JSON::PP->new->canonical(1)->allow_nonref(1)->encode($attached_parser->(\$attached_input)),
+        '"yes"',
+        'compact attached-block if/elseif/else executes only the selected branch',
+    );
 };
 subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
     plan tests => 18;

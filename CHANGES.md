@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.2 — implement Perl attached if blocks
+
+**Scope:** Perl ActionIR statement splitting, phase0 regression coverage, mdBook control-flow wording,
+Knowledge Map, task tree, roadmap tracker, and live continuity docs. Rust parity remains `.2.2.3`.
+
+**What changed:** Compact attached-block `if/elseif/else` now lowers through ActionIR on the Perl reference:
+`if(cond) { ... } elseif(cond2) { ... } else { ... }` no longer stays a raw Perl fallback statement.
+
+**Implementation:** `StatementSplit::Core` now splits a complete attached `if`/`elseif` branch body before a
+same-line attached `elseif(...) { ... }` or bare `else { ... }` continuation. Existing marker-form
+`if(cond); ... elseif(cond2); ... else(); ... endif()` and inline-composite `if(...)` behavior is unchanged.
+
+**Validation:** Perl syntax checks PASS; TOOLBOX lowering/metadata/runtime probes PASS; phase0 PASS
+(`t/phase0_regression.t`, **991 tests**); mdBook build PASS; Knowledge Map regenerate/check PASS;
+memory/doctrine/diff checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.2 — own Perl attached if blocks
 
 **Scope:** Task tree, Knowledge Map fact source, roadmap tracker, and live continuity docs. No engine,

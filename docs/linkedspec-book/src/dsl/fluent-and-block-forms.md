@@ -184,8 +184,9 @@ Inline composite is also available as the final call on a fluent chain:
 
 ### If family: attached block
 
-Attached-block `if` is the Round 2 target syntax. It is not the portable contract until
-`SPEC-FORMAT-TERSE.2.2` lands the Perl reference and Rust parity leaves:
+Attached-block `if` is the Round 2 target syntax. The Perl reference accepts this form, including compact
+same-line `} elseif/else {` continuations, but it is not the portable contract until Rust parity lands in
+`SPEC-FORMAT-TERSE.2.2.3`:
 
 ```text
 -> child {
@@ -200,7 +201,7 @@ Attached-block `if` is the Round 2 target syntax. It is not the portable contrac
 }
 ```
 
-Use the marker form above for portable specs today.
+Use the marker form above for portable cross-backend specs today.
 
 ### Switch family: marker style
 

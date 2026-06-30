@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.2 — Perl attached-if landed): Implemented the Perl reference compact
+  attached-block `if/elseif/else` slice. Durable points. (1) **This is a splitter change.**
+  `StatementSplit::Core` now recognizes a complete attached `if`/`elseif` branch body followed by same-line
+  attached `elseif(...) {` or bare `else {` and splits before the continuation. (2) **It deliberately keeps
+  marker-chain blockers intact.** Same-line no-semicolon helper chains such as `if(cond) return(...) else ...`
+  still do not become implicit statements. (3) **Existing branch lowerers were sufficient.** Once split,
+  `ControlFlow` lowers the branch statements and `RewritePipeline` keeps the implicit close open across
+  `elseif`/`else`. (4) **Portable docs remain conservative.** The mdBook now notes Perl-reference support, but
+  cross-backend portable attached-if waits for Rust parity in `.2.2.3`.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.2 — Perl attached-if ownership): Owned the Perl attached-block
   `if/elseif/else` implementation before code. Durable points. (1) **Attached branch blocks are partially
   implemented already.** Newline-separated `if(cond) { ... }`, `elseif(cond) { ... }`, and `else { ... }`
