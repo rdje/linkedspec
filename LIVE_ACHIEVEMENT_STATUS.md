@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.6 — attached `while(cond) { ... }` split/owned before code**
+  (DOCS/TREE/KM ONLY; **no engine behavior change**). KM + TOOLBOX probes show current Perl lowers
+  `while(false) { return("bad") }` as raw host code (`ready=0 raw=1 fallback=1 unresolved=0`), while Rust has
+  no attached statement-loop parser/runtime. The leaf is split into `.2.2.6.1` for the Perl reference
+  loop/safety contract and `.2.2.6.2` for Rust parity. The safety rule is now explicit: non-terminating loops
+  must trip a deterministic iteration guard instead of hanging generated parsers.
+  **Verification:** KM retrieval; TOOLBOX lowering/descriptor probes; Perl/Rust code-read.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.6.1`** (Perl reference attached `while` loop with iteration safety).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.5.2 — Rust attached `switch/case/default` parity landed**
   (RUST PARSER + RUNTIME STACK + ORACLE/BOOK/KM LOCKS). Rust now parses attached switch blocks:
   `switch(expr) { case(v) { ... } case(w) { ... } default { ... } }` and normalizes them to

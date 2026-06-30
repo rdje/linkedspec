@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.6 — split while loop surface
+
+**Scope:** Task tree, task index, roadmap tracker, live continuity docs, development notes, mdBook status
+wording, and Knowledge Map fact sources. No Perl, Rust, or oracle fixture behavior changed in this ownership
+slice.
+
+**Ground truth:** Attached-block `while(cond) { ... }` is not portable yet. Perl currently lowers
+`while(false) { return("bad") }` as raw host code (`ready=0 raw=1 fallback=1 unresolved=0`), and Rust has no
+attached statement-loop parser/runtime.
+
+**Split:** `.2.2.6` is now a container. `.2.2.6.1` owns the Perl reference loop/safety contract:
+ActionIR-owned lowering, condition re-evaluation before each iteration, body execution while true, and a
+deterministic iteration guard for non-terminating loops. `.2.2.6.2` owns Rust parity after that Perl contract
+is locked.
+
+**Validation:** KM retrieval PASS; TOOLBOX lowering/descriptor probes completed; Perl/Rust code-read
+completed; mdBook build PASS; Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.5.2 — implement Rust attached switch blocks
 
 **Scope:** Rust lifecycle-code parser/runtime, Rust integration locks, Perl-oracle corpus fixture, mdBook

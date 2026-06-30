@@ -783,7 +783,7 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 - **Sugar**: `default() { ... }` is equivalent to `default { ... }`. A following same-line statement still
   needs the normal semicolon separator after the final `}`.
 
-`while(...) { ... }` remains Round 2 implementation work.
+`while(...) { ... }` remains Round 2 implementation work and will include an explicit loop-safety rule.
 
 ### `case(val, body)`
 - **Signature**: Inline switch branch.

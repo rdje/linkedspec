@@ -18,9 +18,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `e538ff7` (`SPEC-FORMAT-TERSE.2.2.5.1 - implement Perl attached switch separator lock`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
-- active_work_unit: `SPEC-FORMAT-TERSE` — **`.2.2.5.2` implementation validated; committing close-out**. Rust attached `switch/case/default` parser/runtime parity is green over the accepted Perl contract.
-- next_action: Commit `.2.2.5.2` (`SPEC-FORMAT-TERSE.2.2.5.2 - implement Rust attached switch blocks`), then update this pointer to new HEAD/frontier `.2.2.6`, clear `git_message_brief.txt`, and continue or hand off from the while leaf.
+- latest_commit: `a155db3` (`SPEC-FORMAT-TERSE.2.2.5.2 - implement Rust attached switch blocks`). Ahead of origin remains below push threshold ~300; do NOT push mid-PNT.
+- active_work_unit: `SPEC-FORMAT-TERSE` — **`.2.2.6` split/ownership validated; committing close-out**. Attached `while(cond) { ... }` is split into Perl reference loop/safety and Rust parity leaves before code.
+- next_action: Commit `.2.2.6` (`SPEC-FORMAT-TERSE.2.2.6 - split while loop surface`), then update this pointer to new HEAD/frontier `.2.2.6.1`, clear `git_message_brief.txt`, and continue from the Perl attached-while loop/safety leaf.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → bare `use LinkedSpec` loads the WRONG checkout; always `perl -Iperl` (confirm `$INC{'LinkedSpec.pm'}`=`perl/LinkedSpec.pm`). **Generated Perl handlers are NON-strict**. **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`); clippy/source warning noise includes nested `rgx` baseline. oracle = `tools/gen_oracle_corpus.pl` → `corpus_oracle.rs` (**38 fixtures after `.2.2.5.2`**). phase0 baseline = **991 green after `.2.2.5.2`**; run phase0 FOREGROUND (`timeout 600000`). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - deferred-tracked: `ROADMAP-DRIFT-RECONCILE` (`.1` ROADMAP.md, `.2` ARCHITECTURE_STATE.md) — parked behind the terse track (user "defer"). Other lanes: `RUST-PARITY.7.5.3` (recursive-grammar value parity), `TRACE-OBSERVABILITY`, `DOCTRINE-ENFORCEMENT-ADOPT.3`; `TOP-RULE-AS-NORMAL.3.2` blocked on `RUST-PARITY`.
 - blockers: NONE PNT-eligible-blocking. in_flight_uncommitted: post-commit `MEMORY.md` hash/frontier update only; known unrelated local paths `rgx` and `.claude/projects/` must remain unstaged.

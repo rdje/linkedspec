@@ -93,7 +93,8 @@ LinkedSpec currently supports three portable control-flow families:
 - `switch/case/default` as inline-composite expressions or attached-block statements.
 
 Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is portable on the
-Perl reference and Rust backend. `while(...) { ... }` remains later Round 2 implementation work.
+Perl reference and Rust backend. `while(...) { ... }` remains later Round 2 implementation work and will
+include an explicit loop-safety rule.
 
 ### If family: marker style
 
@@ -326,7 +327,7 @@ The current portable equivalence guarantee is intentionally narrower:
 - Attached-block `switch(...) { case(...) { ... } default { ... } }` evaluates the switch expression once
   and executes only the first matching branch or the default branch.
 
-`while(...) { ... }` is still outside the portable guarantee until its Round 2 leaf lands.
+`while(...) { ... }` is still outside the portable guarantee until its Round 2 loop-safety leaf lands.
 
 ## When to use which form
 

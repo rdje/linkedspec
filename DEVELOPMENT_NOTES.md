@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.6 — attached while split/ownership): Split before code. Durable points.
+  (1) **This is not a one-file parser tweak.** Perl currently treats attached `while(cond) { ... }` as raw host
+  code (`ready=0 raw=1 fallback=1`), while Rust has no attached statement-loop parser/runtime. (2) **The
+  contract needs safety, not just syntax.** A DSL loop can be independent of input progress, so the accepted
+  contract must include a deterministic iteration guard for non-terminating loops. (3) **Split by reference
+  then parity.** `.2.2.6.1` owns the Perl ActionIR loop/safety contract; `.2.2.6.2` mirrors it on Rust after
+  the Perl behavior is locked.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.5.2 — Rust attached-switch parity landed): Implemented the Rust parity
   slice. Durable points. (1) **Parser normalization is the Rust seam.** `CodeBlock::parse` now claims only
   one-argument attached `switch(...) { ... }` blocks with attached `case(value) { ... }` / `default { ... }`
