@@ -123,6 +123,57 @@ sub _unmatched_event_is_inside_ambiguous_raw_statement {
  return 0
 }
 
+sub _flexible_source_stmt_regex {
+ my ($source_stmt) = @_;
+ return undef unless defined($source_stmt) && length($source_stmt);
+ return undef unless $source_stmt =~ /^\s*[A-Za-z_][A-Za-z0-9_]*\s*\(/o;
+
+ my $pattern = '';
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $escape_next = 0;
+ foreach my $char (split //, $source_stmt) {
+  if ($in_single_quote) {
+   $pattern .= quotemeta($char);
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($char eq '\\') { $escape_next = 1; }
+   elsif ($char eq "'") { $in_single_quote = 0; }
+   next;
+  }
+  if ($in_double_quote) {
+   $pattern .= quotemeta($char);
+   if ($escape_next) { $escape_next = 0; }
+   elsif ($char eq '\\') { $escape_next = 1; }
+   elsif ($char eq '"') { $in_double_quote = 0; }
+   next;
+  }
+  if ($char eq "'") { $in_single_quote = 1; $pattern .= quotemeta($char); next; }
+  if ($char eq '"') { $in_double_quote = 1; $pattern .= quotemeta($char); next; }
+  if ($char =~ /\s/o) { $pattern .= '\\s*'; next; }
+  if ($char eq ',') { $pattern .= '\\s*,\\s*'; next; }
+  if ($char eq '(') { $pattern .= '\\(\\s*'; next; }
+  if ($char eq ')') { $pattern .= '\\s*\\)'; next; }
+  $pattern .= quotemeta($char);
+ }
+
+ return qr/$pattern/s
+}
+
+sub _find_source_stmt_span {
+ my ($text, $source_stmt, $start_pos) = @_;
+ return (-1, 0) unless defined($text) && defined($source_stmt);
+ $start_pos = 0 unless defined($start_pos) && $start_pos >= 0;
+
+ my $pos = index($text, $source_stmt, $start_pos);
+ return ($pos, length($source_stmt)) if $pos >= 0;
+
+ my $regex = _flexible_source_stmt_regex($source_stmt);
+ return (-1, 0) unless $regex;
+ my $tail = substr($text, $start_pos);
+ return (-1, 0) unless $tail =~ /$regex/;
+ return ($start_pos + $-[0], $+[0] - $-[0])
+}
+
 sub default_deps_for_package {
  my ($pkg) = @_;
  return LinkedSpec::OwnerDispatch::build_dep_map(
@@ -156,7 +207,7 @@ sub _lower_action_code_from_canonical_ir {
   my $source_stmt = $event->{raw};
   next unless defined($source_stmt) && length($source_stmt);
 
-  my $source_pos = index($code, $source_stmt, $source_search_pos);
+  my ($source_pos, $source_len) = _find_source_stmt_span($code, $source_stmt, $source_search_pos);
   if (
    defined($previous_lowered) &&
    $source_pos >= 0 &&
@@ -179,40 +230,40 @@ sub _lower_action_code_from_canonical_ir {
   my $kind = $event->{kind} // '';
   if ($kind eq 'RAW_PERL') {
    $previous_lowered = undef;
-   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
   }
 
   my $contract_id = $event->{contract_id};
   if (!(defined $contract_id && exists $rewrite_by_id{$contract_id})) {
    $previous_lowered = undef;
-   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
   }
 
-  my $pos = index($rewritten, $source_stmt);
+  my ($pos, $replace_len) = _find_source_stmt_span($rewritten, $source_stmt, 0);
   if ($pos < 0) {
    $previous_lowered = undef;
-   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
   }
 
   my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt, $lower_ctx);
   if (!(defined($lowered_stmt) && length($lowered_stmt)) || $lowered_stmt eq $source_stmt) {
    $previous_lowered = undef;
-   $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+   $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
   }
-  substr($rewritten, $pos, length($source_stmt), $lowered_stmt);
+  substr($rewritten, $pos, $replace_len, $lowered_stmt);
   if (!$is_unmatched_helper_scan_event) {
    $previous_lowered = {
     lowered_stmt => $lowered_stmt,
     rewritten_end => $pos + length($lowered_stmt),
-    source_end => ($source_pos >= 0) ? $source_pos + length($source_stmt) : undef,
+    source_end => ($source_pos >= 0) ? $source_pos + $source_len : undef,
     implicit_newline_separator => 0,
    };
   }
-  $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
+  $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
  }
  my $implicit_closures = _flush_implicit_if_closures($lower_ctx);
  $rewritten .= ' '.$implicit_closures if defined($implicit_closures) && length($implicit_closures);

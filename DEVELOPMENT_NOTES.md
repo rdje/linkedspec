@@ -1,6 +1,23 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.4.2 — Perl inline value-control lowering landed): Implemented the Perl
+  reference side of the inline value-control contract. Durable points. (1) **Value-control lowering belongs in
+  value-expression lowering, not statement-control lowering.** `_lower_method_value_expr` now intercepts
+  inline `if(...)` and `switch(...)` before generic helper lowering and returns scoped `do { ... }` expressions
+  that yield the selected branch payload. Attached blocks and marker chains remain statement-control forms.
+  (2) **Flow booleans and payload booleans have different host needs.** Flow conditions now lower literal
+  `true`/`false` to host `1`/`0`; ordinary payload literals still lower through JSON booleans. This keeps
+  `if(false, ...)`, `elseif(false, ...)`, and attached `while(false)` host-gated without changing return
+  payload semantics. (3) **Inline branches must be scanned as value positions.** Auto-working-variable
+  discovery now recurses through inline `if`/`switch` payloads, nested helper predicates, shape literals,
+  direct access, and expression-valued block branches so selected branch code does not fall back to non-strict
+  package globals. (4) **Do not reintroduce label-frozen regexes.** The legacy labelled `return(Label, ...)`
+  compatibility contract delegates to `lower_return_general_statement`, and its label guard must not use `/o`;
+  the first label seen in-process can otherwise freeze later corpus-order rewrites. (5) **Payload values are
+  the portable assertion.** Fluent/action-edge return compatibility may still include ordinary string tags, but
+  `.2.3.4.2` tests and oracle fixtures assert selected payload values, not mandatory `?...:` tag spelling.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.4.1 — Rust bare aggregate helper-argument parity landed): Implemented the
   narrow Rust parity fix from the `.2.3.4` audit. Durable points. (1) **Do not change global bare-variable
   evaluation.** `Expr::Variable` still reads scalar state; the new `hash_consuming_arg(...)` and
@@ -14,8 +31,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `.2.3.4` keeps the explicit-wrapper fixture, while
   `terse_2_3_4_1_bare_hash_helper_arg_composition` and
   `terse_2_3_4_1_bare_array_helper_arg_composition` lock the bare aggregate argument forms; corpus oracle
-  passes with 44 fixtures. (4) **The next portability blocker is still Perl inline value controls.** `.2.3.4.2`
-  remains the frontier for `return(if(...))` / `return(switch(...))` value-lowering parity.
+  passes with 44 fixtures. (4) **The next portability blocker at that point was Perl inline value controls.**
+  `.2.3.4.2` later closed `return(if(...))` / `return(switch(...))` value-lowering parity and moved the
+  frontier to `.2.3.5`.
 
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.4 — full composability audit split): Completed the audit leaf before
   implementation. Durable points. (1) **Pure helper composition is the accepted portable subset today.** The

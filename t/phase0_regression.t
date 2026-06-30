@@ -13178,7 +13178,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'MethodLowering',
             module      => 'LinkedSpec::ActionIR::MethodLowering',
-            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _lower_direct_nested_access_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _split_action_ir_statements _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
+            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _lower_direct_nested_access_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _split_action_ir_statements _lower_array_pipeline_expr _lower_assignment_source_expr _lower_flow_composite_expr _strip_literal_delimiters)],
             sample_key  => 'split_declare_symbol_names',
             sample_name => '_split_declare_symbol_names',
         },
@@ -39149,7 +39149,7 @@ SPEC
     my $attached_if_stmt = 'if(false) { return("bad") } elseif(true) { return("yes") } else { return("no") }';
     is(
         LinkedSpec::call_spec_handler_subst('Top', $attached_if_stmt),
-        'if (do { require JSON::PP; JSON::PP::false }) { return "bad" } elsif (do { require JSON::PP; JSON::PP::true }) { return "yes" } else { return "no" }',
+        'if (0) { return "bad" } elsif (1) { return "yes" } else { return "no" }',
         'compact attached-block if/elseif/else lowers to structured Perl without explicit endif',
     );
 
@@ -39174,7 +39174,7 @@ SPEC
     my $when_otherwise_stmt = 'when(true) { return("yes") } otherwise { return("no") }';
     is(
         LinkedSpec::call_spec_handler_subst('Top', $when_otherwise_stmt),
-        'if (do { require JSON::PP; JSON::PP::true }) { return "yes" } else { return "no" }',
+        'if (1) { return "yes" } else { return "no" }',
         'compact attached-block when/otherwise lowers as canonical if/else flow',
     );
 
@@ -39551,7 +39551,7 @@ subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
     my $lowered = LinkedSpec::call_spec_handler_subst('Top', $attached_while);
     like(
         $lowered,
-        qr/do \{ my \$__ls_while_guard_1 = 0; for \(; do \{ require JSON::PP; JSON::PP::false \}; \)/s,
+        qr/do \{ my \$__ls_while_guard_1 = 0; for \(; 0; \)/s,
         'compact attached while lowers to a scoped guarded host loop with pre-iteration condition evaluation',
     );
     unlike($lowered, qr/\bwhile\s*\(/, 'compact attached while lowering leaves no host-shaped while residue');
@@ -45723,6 +45723,134 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         'assignment-source block auto-supplies one my $out');
     unlike($assign_src, qr/%out\s*=/,
         'assignment-source block does not infer hash assignment');
+};
+
+subtest 'spec_format_terse_2_3_4_2_perl_inline_value_control_lowering' => sub {
+    # SPEC-FORMAT-TERSE.2.3.4.2: inline-composite if/switch are value expressions
+    # on the Perl reference too. The statement-marker and attached-block control
+    # forms stay separate; these locks cover value-consuming sites only.
+    plan tests => 28;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(if(1, "yes", else("no")))'), qr/^return do \{ my \$__ls_if_value; if \(1\)/,
+        'return(if(...)) lowers through a value-producing if do-block');
+    like($L->('set(out, if(false, "bad", else(cat("o","k"))))'), qr/^\$out = do \{ my \$__ls_if_value;/,
+        'assignment source if(...) lowers as a scalar value expression');
+    like($L->('return(switch("a", case("a", "yes"), default("no")))'), qr/^return do \{ my \$__ls_switch_source = "a";/,
+        'return(switch(...)) lowers through a value-producing switch do-block');
+    like($L->('return(Top, if(false, "bad", else("ok")))'), qr/^return \[.*do \{ my \$__ls_if_value;/,
+        'labelled return used by fluent .return(if(...)) lowers the selected payload expression');
+    like($L->('return(Top, switch("a", case("a", "yes"), default("no")))'), qr/^return \[.*do \{ my \$__ls_switch_source = "a";/,
+        'labelled return used by fluent .return(switch(...)) lowers the selected payload expression');
+
+    my $return_if_spec = "Top::\n"
+                       . " /x/ -> Done { return(if(1, \"yes\", else(\"no\"))) }\n"
+                       . "\nDone::\n /[a-z]+/\n";
+    my $return_if_parser = eval { LinkedSpec::Get(\$return_if_spec) };
+    ok(ref($return_if_parser) eq 'CODE', 'inline if return spec compiles')
+        or diag(normalize_error($@));
+    is($run->($return_if_parser, 'xhello'), '"yes"',
+        'inline if return yields the selected then branch');
+
+    my $fallback_if_spec = "Top::\n"
+                         . " /x/ -> Done { return(if(false, \"bad\", \"fallback\")) }\n"
+                         . "\nDone::\n /[a-z]+/\n";
+    my $fallback_if_parser = eval { LinkedSpec::Get(\$fallback_if_spec) };
+    ok(ref($fallback_if_parser) eq 'CODE', 'inline if plain-fallback spec compiles')
+        or diag(normalize_error($@));
+    is($run->($fallback_if_parser, 'xhello'), '"fallback"',
+        'inline if accepts the Rust-compatible plain third-argument fallback');
+
+    my $assign_if_spec = "Top::\n"
+                       . " /x/ -> Done { set(out, if(false, \"bad\", else(cat(\"o\",\"k\")))); return(out) }\n"
+                       . "\nDone::\n /[a-z]+/\n";
+    my $assign_if_parser = eval { LinkedSpec::Get(\$assign_if_spec) };
+    ok(ref($assign_if_parser) eq 'CODE', 'assignment-source inline if spec compiles')
+        or diag(normalize_error($@));
+    is($run->($assign_if_parser, 'xhello'), '"ok"',
+        'assignment RHS inline if stores the selected branch value');
+
+    my $predicate_if_spec = "Top::\n"
+                          . " /x/ -> Done { set(flag,\"go\"); out = if(is_nonempty(flag), cat(\"y\",\"es\"), else(\"no\")); return(out) }\n"
+                          . "\nDone::\n /[a-z]+/\n";
+    my $predicate_if_parser = eval { LinkedSpec::Get(\$predicate_if_spec) };
+    ok(ref($predicate_if_parser) eq 'CODE', 'nested predicate inline if spec compiles')
+        or diag(normalize_error($@));
+    is($run->($predicate_if_parser, 'xhello'), '"yes"',
+        'inline if composes flow predicates and helper-valued branch payloads');
+
+    my $block_if_spec = "Top::\n"
+                      . " /x/ -> Done { return(if(true, { set(x,\"a\"); return(x) }, else(\"bad\"))) }\n"
+                      . "\nDone::\n /[a-z]+/\n";
+    my $block_if_parser = eval { LinkedSpec::Get(\$block_if_spec) };
+    ok(ref($block_if_parser) eq 'CODE', 'block-branch inline if spec compiles')
+        or diag(normalize_error($@));
+    is($run->($block_if_parser, 'xhello'), '"a"',
+        'inline if selected branch can be an expression-valued block');
+    like($gen->($block_if_spec), qr/my \$x\b/,
+        'inline if block branch scalar reads participate in auto-working-var declaration');
+
+    my $switch_spec = "Top::\n"
+                    . " /x/ -> Done { set(kind,\"b\"); return(switch(kind, case(\"a\", \"bad\"), case(\"b\", cat(\"y\",\"es\")), default(\"no\"))) }\n"
+                    . "\nDone::\n /[a-z]+/\n";
+    my $switch_parser = eval { LinkedSpec::Get(\$switch_spec) };
+    ok(ref($switch_parser) eq 'CODE', 'inline switch return spec compiles')
+        or diag(normalize_error($@));
+    is($run->($switch_parser, 'xhello'), '"yes"',
+        'inline switch returns the first matching case branch value');
+
+    my $switch_default_spec = "Top::\n"
+                            . " /x/ -> Done { set(kind,\"z\"); set(out, switch(kind, case(\"a\", \"bad\"), default(\"no\"))); return(out) }\n"
+                            . "\nDone::\n /[a-z]+/\n";
+    my $switch_default_parser = eval { LinkedSpec::Get(\$switch_default_spec) };
+    ok(ref($switch_default_parser) eq 'CODE', 'inline switch default assignment spec compiles')
+        or diag(normalize_error($@));
+    is($run->($switch_default_parser, 'xhello'), '"no"',
+        'inline switch assignment RHS stores the default branch value');
+
+    my $fluent_if_spec = "Top::&\n /a/ -> Top.return(if(false, \"bad\", else(\"ok\")))\n";
+    my $fluent_if_parser = eval { LinkedSpec::Get(\$fluent_if_spec) };
+    ok(ref($fluent_if_parser) eq 'CODE', 'fluent action-edge .return(if(...)) spec compiles')
+        or diag(normalize_error($@));
+    my $fluent_if_result = eval { $J->decode($run->($fluent_if_parser, 'a')) };
+    ok(ref($fluent_if_result) eq 'ARRAY' && @$fluent_if_result >= 2 && $fluent_if_result->[-1] eq 'ok',
+        'fluent action-edge .return(if(...)) returns the selected branch payload without requiring a specific tag string');
+
+    my $fluent_switch_spec = "Top::&\n /a/ -> Top.return(switch(\"a\", case(\"a\", \"yes\"), default(\"no\")))\n";
+    my $fluent_switch_parser = eval { LinkedSpec::Get(\$fluent_switch_spec) };
+    ok(ref($fluent_switch_parser) eq 'CODE', 'fluent action-edge .return(switch(...)) spec compiles')
+        or diag(normalize_error($@));
+    my $fluent_switch_result = eval { $J->decode($run->($fluent_switch_parser, 'a')) };
+    ok(ref($fluent_switch_result) eq 'ARRAY' && @$fluent_switch_result >= 2 && $fluent_switch_result->[-1] eq 'yes',
+        'fluent action-edge .return(switch(...)) returns the selected case payload without requiring a specific tag string');
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_if_spec, return_descriptor => 1);
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0,
+        'fluent inline if return has no canonical ActionIR fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0,
+        'fluent inline if return has no raw-Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0,
+        'fluent inline if return has no unresolved helper hits');
+    is(
+        (grep { ($_->{kind} // '') eq 'IF' && (($_->{args}{condition} // '') eq 'false') } @{$fluent_meta->{canonical_action_ir_events} || []}) ? 1 : 0,
+        1,
+        'fluent inline if descriptor records the actual condition expression'
+    );
 };
 
 done_testing();

@@ -54,16 +54,16 @@ sub _scan_inline_switch_branch_events {
  while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
   my $switch_call = _parse_method_function_expr($+{expr});
   next unless $switch_call;
-  my $switch_args = _normalize_method_args_with_optional_scope($switch_call->{args} || [], 1, undef);
-  next unless $switch_args && @$switch_args >= 2;
+  my $switch_args = $switch_call->{args} || [];
+  next unless ref($switch_args) eq 'ARRAY' && @$switch_args >= 2;
 
   foreach my $branch_expr (@{$switch_args}[1 .. $#$switch_args]) {
    my $branch_call = _parse_method_function_expr($branch_expr);
    next unless $branch_call && ($branch_call->{method} // '') eq $target_method;
 
    if ($target_method eq 'case') {
-    my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 1, undef);
-    next unless $effective_args && @$effective_args >= 1;
+    my $effective_args = $branch_call->{args} || [];
+    next unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
     push @events, {
      raw  => _trim_action_ir_value($branch_expr),
      args => {value => _trim_action_ir_value($effective_args->[0])},
@@ -77,8 +77,8 @@ sub _scan_inline_switch_branch_events {
    }
 
    if ($target_method eq 'default') {
-    my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 0, undef);
-    next unless $effective_args;
+    my $effective_args = $branch_call->{args} || [];
+    next unless ref($effective_args) eq 'ARRAY';
     push @events, {
      raw  => _trim_action_ir_value($branch_expr),
      args => {},
@@ -97,13 +97,22 @@ sub _scan_contract_case_marker_events {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<head>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
-  my $call = _parse_method_function_expr($+{head});
+  my $head = $+{head};
+  my $block = $+{block};
+  my $call = _parse_method_function_expr($head);
   next unless $call;
-  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+  my $raw_args = $call->{args} || [];
+  next unless ref($raw_args) eq 'ARRAY';
+  my $effective_args;
+  if (@$raw_args == 1) {
+   $effective_args = [$raw_args->[0]];
+  } elsif (@$raw_args == 2 && defined($raw_args->[0]) && $raw_args->[0] =~ /^[A-Z_][A-Za-z0-9_]*$/o) {
+   $effective_args = [$raw_args->[1]];
+  }
   next unless $effective_args;
-  my $raw = $+{head}.($+{block} // '');
+  my $raw = $head.($block // '');
   push @events, {raw => $raw, args => {value => _trim_action_ir_value($effective_args->[0])}};
-  push @events, @{_scan_contract_case_marker_events($+{block})} if defined $+{block};
+  push @events, @{_scan_contract_case_marker_events($block)} if defined $block;
  }
  return \@events
 }
@@ -129,8 +138,8 @@ sub _scan_contract_if_flow {
 while ($code =~ /\b(?<head>(?:if|i|when)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
  my $call = _parse_method_function_expr($+{head});
  next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- next unless $effective_args && @$effective_args >= 1;
+ my $effective_args = $call->{args} || [];
+ next unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
  my $raw = $+{head}.($+{block} // '');
  push @events, {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}};
 }
@@ -143,8 +152,8 @@ sub _scan_contract_elseif_flow {
 while ($code =~ /\b(?<head>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
  my $call = _parse_method_function_expr($+{head});
  next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- next unless $effective_args && @$effective_args >= 1;
+ my $effective_args = $call->{args} || [];
+ next unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
  my $raw = $+{head}.($+{block} // '');
  push @events, {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}};
 }
@@ -199,8 +208,8 @@ sub _scan_contract_switch_flow {
 while ($code =~ /\b(?<head>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
  my $call = _parse_method_function_expr($+{head});
  next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- next unless $effective_args && @$effective_args >= 1;
+ my $effective_args = $call->{args} || [];
+ next unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
  my $raw = $+{head}.($+{block} // '');
  push @events, {raw => $raw, args => {expr => _trim_action_ir_value($effective_args->[0])}};
 }

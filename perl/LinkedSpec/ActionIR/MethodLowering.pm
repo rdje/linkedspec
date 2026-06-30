@@ -47,6 +47,7 @@ sub default_deps_for_package {
    'split_action_ir_statements',
    'lower_array_pipeline_expr',
    'lower_assignment_source_expr',
+   'lower_flow_composite_expr',
    'strip_literal_delimiters',
   ],
  )
@@ -262,6 +263,137 @@ sub _normalize_method_tag_expr {
  return $tag if $tag =~ /^\".*\"$/s || $tag =~ /^'.*'$/s;
  return "\"$tag\"" if $tag =~ /^\w+$/o;
  return $tag
+}
+
+sub _lower_inline_value_branch_payload_expr {
+ my ($expr, $deps) = @_;
+ my $payload_expr = _lower_return_payload_expr($expr, $deps);
+ return undef unless defined($payload_expr) && length($payload_expr);
+ return $payload_expr
+}
+
+sub _lower_inline_if_value_expr {
+ my ($method_call, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
+
+ return undef unless ref($method_call) eq 'HASH' && ($method_call->{method} // '') eq 'if';
+ my $effective_args = $method_call->{args} || [];
+ return undef unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 2;
+
+ my $cond_expr = $lower_flow_composite_expr->($effective_args->[0]);
+ return undef unless defined($cond_expr) && length($cond_expr);
+ my $then_expr = _lower_inline_value_branch_payload_expr($effective_args->[1], $deps);
+ return undef unless defined($then_expr) && length($then_expr);
+
+ my @clauses = ('if ('.$cond_expr.') { $__ls_if_value = '.$then_expr.'; }');
+ my $else_seen = 0;
+ for (my $idx = 2; $idx < @$effective_args; ++$idx) {
+  my $arg = $effective_args->[$idx];
+  my $branch_call = $parse_method_function_expr->($arg);
+  my $branch_method = $branch_call ? ($branch_call->{method} // '') : '';
+
+  if ($branch_method eq 'elseif') {
+   return undef if $else_seen;
+   my $branch_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 2, 2);
+   return undef unless $branch_args;
+   my $branch_cond = $lower_flow_composite_expr->($branch_args->[0]);
+   return undef unless defined($branch_cond) && length($branch_cond);
+   my $branch_value = _lower_inline_value_branch_payload_expr($branch_args->[1], $deps);
+   return undef unless defined($branch_value) && length($branch_value);
+   push @clauses, 'elsif ('.$branch_cond.') { $__ls_if_value = '.$branch_value.'; }';
+   next;
+  }
+
+  if ($branch_method eq 'else') {
+   return undef if $else_seen;
+   my $branch_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 1, 1);
+   return undef unless $branch_args;
+   my $branch_value = _lower_inline_value_branch_payload_expr($branch_args->[0], $deps);
+   return undef unless defined($branch_value) && length($branch_value);
+   push @clauses, 'else { $__ls_if_value = '.$branch_value.'; }';
+   $else_seen = 1;
+   next;
+  }
+
+  return undef if $else_seen || $idx != $#$effective_args;
+  my $fallback_value = _lower_inline_value_branch_payload_expr($arg, $deps);
+  return undef unless defined($fallback_value) && length($fallback_value);
+  push @clauses, 'else { $__ls_if_value = '.$fallback_value.'; }';
+  $else_seen = 1;
+ }
+
+ return 'do { my $__ls_if_value; '.join(' ', @clauses).' $__ls_if_value }'
+}
+
+sub _lower_inline_switch_value_expr {
+ my ($method_call, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+
+ return undef unless ref($method_call) eq 'HASH' && ($method_call->{method} // '') eq 'switch';
+ my $effective_args = $method_call->{args} || [];
+ return undef unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
+
+ my $switch_expr = _lower_inline_value_branch_payload_expr($effective_args->[0], $deps);
+ return undef unless defined($switch_expr) && length($switch_expr);
+
+ my @statements = (
+  'my $__ls_switch_source = '.$switch_expr.';',
+  'my $__ls_switch_value;',
+  'my $__ls_switch_done = 0;',
+ );
+ my $default_seen = 0;
+ for (my $idx = 1; $idx < @$effective_args; ++$idx) {
+  my $branch_call = $parse_method_function_expr->($effective_args->[$idx]);
+  return undef unless $branch_call;
+  my $branch_method = $branch_call->{method} // '';
+
+  if ($branch_method eq 'case') {
+   return undef if $default_seen;
+   my $branch_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 2, 2);
+   return undef unless $branch_args;
+   my $case_expr = _lower_inline_value_branch_payload_expr($branch_args->[0], $deps);
+   return undef unless defined($case_expr) && length($case_expr);
+   my $branch_value = _lower_inline_value_branch_payload_expr($branch_args->[1], $deps);
+   return undef unless defined($branch_value) && length($branch_value);
+   push @statements,
+    'if (!$__ls_switch_done) { my $__ls_switch_case = '.$case_expr.'; if ((defined($__ls_switch_source) ? $__ls_switch_source : "") eq (defined($__ls_switch_case) ? $__ls_switch_case : "")) { $__ls_switch_value = '.$branch_value.'; $__ls_switch_done = 1; } }';
+   next;
+  }
+
+  if ($branch_method eq 'default') {
+   return undef if $default_seen;
+   my $branch_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 1, 1);
+   return undef unless $branch_args;
+   my $branch_value = _lower_inline_value_branch_payload_expr($branch_args->[0], $deps);
+   return undef unless defined($branch_value) && length($branch_value);
+   push @statements,
+    'if (!$__ls_switch_done) { $__ls_switch_value = '.$branch_value.'; $__ls_switch_done = 1; }';
+   $default_seen = 1;
+   next;
+  }
+
+  return undef;
+ }
+
+ push @statements, '$__ls_switch_value';
+ return 'do { '.join(' ', @statements).' }'
 }
 
 sub _lower_block_value_component_expr {
@@ -791,6 +923,14 @@ sub _lower_method_value_expr {
  my $block_value = _lower_block_value_expr($trimmed, $deps);
  return $block_value if defined($block_value) && length($block_value);
  my $method_call = $parse_method_function_expr->($trimmed);
+ if ($method_call && $method_call->{method} eq 'if') {
+  my $if_value = _lower_inline_if_value_expr($method_call, $deps);
+  return $if_value if defined($if_value) && length($if_value);
+ }
+ if ($method_call && $method_call->{method} eq 'switch') {
+  my $switch_value = _lower_inline_switch_value_expr($method_call, $deps);
+  return $switch_value if defined($switch_value) && length($switch_value);
+ }
  if ($method_call && $method_call->{method} eq 'call') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $effective_args;
@@ -2217,7 +2357,23 @@ sub _lower_return_general_statement {
  return undef unless $call && $call->{method} eq 'return';
 
  my $args = $call->{args} || [];
- return undef unless ref($args) eq 'ARRAY' && @$args == 1;
+ return undef unless ref($args) eq 'ARRAY';
+
+ if (@$args >= 2) {
+  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+  my $label = $trim_action_ir_value->($args->[0]);
+  return undef unless defined($label) && $label =~ /^\w+$/o;
+  my @payloads;
+  foreach my $payload_arg (@{$args}[1 .. $#$args]) {
+   my $payload = _lower_return_payload_expr($payload_arg, $deps);
+   $payload = $trim_action_ir_value->($payload_arg) unless defined($payload) && length($payload);
+   return undef unless defined($payload) && length($payload);
+   push @payloads, $payload;
+  }
+  return "return ['?$label:',  ".join(', ', @payloads)."]"
+ }
+
+ return undef unless @$args == 1;
  my $payload = _lower_return_payload_expr($args->[0], $deps);
  return undef unless defined($payload) && length($payload);
  return "return $payload"

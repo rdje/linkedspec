@@ -6,12 +6,17 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.3.4.1` DONE; frontier `.2.3.4.2`** — Rust helper-context bare aggregate
-  argument parity landed. Bare working-variable names now become hash or array snapshots only in helper
-  argument slots whose callee contract already implies that aggregate kind, such as
-  `merge_hash(hash_copy(base), overlay)` and `count(drop_front(sorted(items)))`, while ordinary bare variables
-  still read scalar state. The new `terse_2_3_4_1_bare_hash_helper_arg_composition` and
-  `terse_2_3_4_1_bare_array_helper_arg_composition` oracle fixtures bring the Rust corpus to **44 fixtures**.
+- Last updated: `2026-06-30` (**`.2.3.4.2` DONE; frontier `.2.3.5`** — Perl inline-composite value-control
+  lowering landed. Inline `if(...)` and `switch(...)` now return the selected branch value in `return(...)`,
+  assignment RHS, and fluent `.return(...)` value slots, including nested helper predicates/branches and
+  expression-valued block branches. The new
+  `terse_2_3_4_2_inline_if_value_control` and
+  `terse_2_3_4_2_inline_switch_value_control` oracle fixtures bring the Rust corpus to **46 fixtures**. The
+  contract asserts payload values, not incidental legacy/action-edge tag strings. Prior **`.2.3.4.1` DONE** —
+  Rust helper-context bare aggregate argument parity landed. Bare working-variable names now become hash or
+  array snapshots only in helper argument slots whose callee contract already implies that aggregate kind, such
+  as `merge_hash(hash_copy(base), overlay)` and `count(drop_front(sorted(items)))`, while ordinary bare
+  variables still read scalar state. The `.2.3.4.1` oracle fixtures brought the Rust corpus to **44 fixtures**.
   Prior **`.2.3.4` DONE/SPLIT** — the full-composability audit added a green deep pure-helper
   oracle fixture and split `.2.3.4.1` plus `.2.3.4.2` before code. `.2.3.4.2` owns Perl reference
   inline-composite value control lowering for `return(if(...))` / `return(switch(...))`; receiver-dot
@@ -1777,18 +1782,31 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `drop_front`, `contains`, `index_of`, `num_sum`, and `flat_array`. `tools/gen_oracle_corpus.pl` added
     `terse_2_3_4_1_bare_hash_helper_arg_composition` and
     `terse_2_3_4_1_bare_array_helper_arg_composition`; final Rust `corpus_oracle` passes with **44 fixtures**.
-  Commit: `pending` (this slice)
+  Commit: `SPEC-FORMAT-TERSE.2.3.4.1 - implement Rust bare aggregate helper args`
 
 - ID: `SPEC-FORMAT-TERSE.2.3.4.2`
-  Status: `pending`
+  Status: `done` (2026-06-30)
   Goal: Perl inline-composite value control lowering
   Acceptance: Perl reference inline-composite `if(...)` and `switch(...)` value forms return the selected
     branch value in all supported value positions (`return(...)`, assignment RHS, and fluent `.return(...)`),
     with nested helper predicates/branches and expression-valued block branches covered. Rust already has
     runtime support for lazy value `if`/`switch`; after Perl lands, add oracle fixtures and focused parity
     checks instead of relying on descriptor readiness alone.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-06-30.** Perl value lowering now recognizes inline-composite `if(...)` and
+    `switch(...)` as value expressions before generic method-helper lowering. `if(...)` lowers to a
+    value-producing `do { my $__ls_if_value; ...; $__ls_if_value }` form with lazy selected-branch assignment,
+    accepting `elseif(...)`, `else(...)`, and the Rust-compatible plain third-argument fallback. `switch(...)`
+    evaluates its source once, compares `case(...)` values in order, assigns the first matching branch value,
+    and falls back to `default(...)` when no case matches. Flow conditions lower host booleans as `1`/`0` while
+    ordinary return/assignment payload booleans remain JSON booleans. Inline branch payloads participate in
+    auto-working-variable discovery, including scalar reads inside expression-valued block branches. Focused
+    phase0 locks cover direct return, assignment RHS, nested predicate/helper payloads, expression-valued block
+    payloads, fluent `.return(if(...))`, fluent `.return(switch(...))`, and descriptor metadata with no raw or
+    unresolved fallback. The fluent runtime checks assert the selected payload value and deliberately do not
+    require any specific legacy/action-edge tag string. `tools/gen_oracle_corpus.pl` added
+    `terse_2_3_4_2_inline_if_value_control` and
+    `terse_2_3_4_2_inline_switch_value_control`; Rust `corpus_oracle` passes with **46 fixtures**.
+  Commit: `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls`
 
 - ID: `SPEC-FORMAT-TERSE.2.3.5`
   Status: `pending`
@@ -1902,11 +1920,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `done` 2026-06-30 | Rust default-mode recursive repetition parity for `tclite` landed, including the two active oracle cases and 41-fixture corpus. |
 | — | `SPEC-FORMAT-TERSE.2.3.4` | `done` 2026-06-30 | Full composability audit split unsupported sites before code and added a green deep pure-helper oracle fixture. |
 | — | `SPEC-FORMAT-TERSE.2.3.4.1` | `done` 2026-06-30 | Rust helper-context bare aggregate arguments landed for hash- and array-consuming helper slots; corpus 44 fixtures. |
-| 1 | `SPEC-FORMAT-TERSE.2.3.4.2` | `pending` | Perl inline-composite value control lowering for `if`/`switch`. |
-| 2 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
+| — | `SPEC-FORMAT-TERSE.2.3.4.2` | `done` 2026-06-30 | Perl inline-composite value controls landed for `if`/`switch` in supported value positions; corpus 46 fixtures. |
+| 1 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
 | … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
+
+- `2026-06-30` (**`.2.3.4.2` Perl inline value-control lowering landed**). Inline-composite `if(...)` and
+  `switch(...)` are now portable value expressions in the supported value-consuming slots: `return(...)`,
+  assignment RHS, and fluent `.return(...)`. The selected branch payload is the contract. Legacy/action-edge
+  return arrays may still contain ordinary string tags for compatibility, but no new oracle, book example, or
+  test should require a particular `?...:` tag spelling for this value-control feature. Attached-block
+  `if`/`switch` remain the preferred form for substantial multi-statement branch bodies, while inline value
+  controls are for constructing values lazily inside an expression position.
 
 - `2026-06-30` (**`.2.3.4.1` Rust helper-context bare aggregate arguments landed**). The Rust fix is
   deliberately helper-position typed, not a global bare-variable change. `Expr::Variable` still evaluates as a
@@ -2601,6 +2627,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | KM/toolbox probes for Perl `tclite` and minimal edge-only grammars; focused Rust core (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml compile_default_mode_is_zero_min_repeated_choice -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml default_mode_repeats_action_edge_choices_and_allows_zero_matches -- --nocapture`); lifecycle expectation locks (`terse_2_3_2_lifecycle_return_records_surrounding_rule_return`, `terse_2_3_3_3_1`); capture-helper regression families (`helpers_5_5_3`, `helpers_5_5_4`); `perl -c tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust default-mode recursive repetition parity landed. `RuleMode::Default` now compiles as zero-min repeated choice, and Rust exits immediately after an `I`/preamble return before local entry-regex re-matching. One-match capture-helper/lifecycle-order tests now spell `OR{1,1}` explicitly; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures; corpus oracle PASS over 41 fixtures. Frontier becomes `.2.3.4`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.4` | KM retrieval; TOOLBOX lowering/runtime/generated-source probes for deep pure helpers, bare aggregate helper arguments, inline value `if`/`switch`, and receiver-dot method value/chaining; Rust parser/runtime code-read; diagnostic Rust corpus oracle with bare `merge_hash(..., overlay)`; final `perl -Iperl tools/gen_oracle_corpus.pl`; final Rust corpus oracle (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`) | Full composability audit split unsupported surfaces before code. Pure helper nesting is portable with explicit aggregate wrappers and is now locked by `terse_2_3_4_deep_pure_helper_composition`; final corpus oracle PASS over 42 fixtures. Diagnostic bare `overlay` in `merge_hash(hash_copy(base), overlay)` returned Perl `2` but Rust `1`, so `.2.3.4.1` owns Rust helper-context aggregate bare reads. Perl generated-source probes for inline value `if`/`switch` show selected branch values are not returned and nested helper forms can fail handler compilation, so `.2.3.4.2` owns that reference fix. Frontier becomes `.2.3.4.1`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.4.1` | Focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_4_1 -- --nocapture`); oracle generator (`perl -Iperl tools/gen_oracle_corpus.pl`); Rust corpus oracle (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`) | Rust helper-context bare aggregate arguments landed. `hash_consuming_arg(...)` and `array_consuming_arg(...)` promote bare names to aggregate snapshots only in helper slots whose callee contract implies that aggregate kind; `merge_hash(hash_copy(base), overlay)` now matches the explicit `hash(overlay)` wrapper, and `count(drop_front(sorted(items)))` matches the Perl oracle. Added `terse_2_3_4_1_bare_hash_helper_arg_composition` and `terse_2_3_4_1_bare_array_helper_arg_composition`; corpus oracle PASS over 44 fixtures. Frontier becomes `.2.3.4.2`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.4.2` | Perl syntax checks for changed ActionIR modules and oracle generator; focused Perl lowering/runtime probes for inline `if`/`switch` return, assignment RHS, nested predicates, expression-valued block branches, and fluent `.return(...)`; phase0 (`prove -q -Iperl t/phase0_regression.t`); oracle generator (`perl -Iperl tools/gen_oracle_corpus.pl`); Rust corpus oracle (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`) | Perl inline value-control lowering landed. `if(...)` and `switch(...)` now return selected branch payloads in supported value positions; inline branch payloads compose with helpers and expression-valued blocks; fluent checks assert payload values without requiring a specific compatibility tag string. Added `terse_2_3_4_2_inline_if_value_control` and `terse_2_3_4_2_inline_switch_value_control`; phase0 PASS with 995 tests and corpus oracle PASS over 46 fixtures. Frontier becomes `.2.3.5`. |
 
 ## Commit Log
 
@@ -2674,9 +2701,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.3.3.3` | `SPEC-FORMAT-TERSE.2.3.3.3.3 - split Rust tclite repetition parity` | `tclite` oracle retry after fluent parity still returned Rust `[]` for `[]` and `""` at that split point; default-mode recursive repetition parity split to `.2.3.3.3.3.1`, which later landed the fixtures. |
 | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1 - implement Rust tclite default repetition` | Rust default-mode recursive repetition parity landed; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures, corpus 41 passes, and frontier becomes `.2.3.4`. |
 | `SPEC-FORMAT-TERSE.2.3.4` | `SPEC-FORMAT-TERSE.2.3.4 - split composability boundaries` | Full composability audit split Rust helper-context aggregate bare reads to `.2.3.4.1` and Perl inline value-control lowering to `.2.3.4.2`; added a green deep pure-helper oracle fixture and frontier becomes `.2.3.4.1`. |
-| `SPEC-FORMAT-TERSE.2.3.4.1` | `pending` | Rust helper-context bare aggregate arguments landed for hash- and array-consuming helper slots; corpus 44 passes and frontier becomes `.2.3.4.2`. |
+| `SPEC-FORMAT-TERSE.2.3.4.1` | `SPEC-FORMAT-TERSE.2.3.4.1 - implement Rust bare aggregate helper args` | Rust helper-context bare aggregate arguments landed for hash- and array-consuming helper slots; corpus 44 passes and frontier becomes `.2.3.4.2`. |
+| `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.3.4.2` LANDED — Perl inline value-control lowering.**
+  Inline-composite `if(...)` and `switch(...)` now return selected branch payloads on the Perl reference in
+  `return(...)`, assignment RHS, and fluent `.return(...)` value positions. Branch payloads compose with nested
+  helpers and expression-valued blocks; fluent/action-edge checks assert payload values without making any
+  `?...:` compatibility tag spelling mandatory. The new
+  `terse_2_3_4_2_inline_if_value_control` and
+  `terse_2_3_4_2_inline_switch_value_control` oracle fixtures bring `corpus_oracle` to 46 passing fixtures.
+  Frontier moves to `.2.3.5`.
 
 - `2026-06-30`: **`.2.3.4.1` LANDED — Rust helper-context bare aggregate arguments.**
   Rust now snapshots bare working-variable names only in hash- or array-consuming helper argument slots, so

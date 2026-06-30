@@ -295,6 +295,8 @@ sub _lower_flow_composite_expr {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ return '1' if $trimmed eq 'true';
+ return '0' if $trimmed eq 'false';
  my $literal = $lower_primitive_literal_expr->($trimmed);
  return $literal if defined($literal);
 

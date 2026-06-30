@@ -885,6 +885,9 @@ sub _mask_action_code_literals {
 #                 literals: NAME = [VALUE] -> @NAME, NAME = {KEY => VALUE} -> %NAME.
 #             (i) SPEC-FORMAT-TERSE.1.6 — receiver-dot array end mutations:
 #                 NAME.push_back(VALUE), NAME.push_front(VALUE), NAME.pop_back(), NAME.pop_front().
+#             (j) SPEC-FORMAT-TERSE.2.3.4.2 — inline value-control payloads:
+#                 return(if(...)) / set(out, switch(...)) branches recurse through the
+#                 same scalar-read, shape-literal, direct-access, and block-value discovery.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
 #           (declare(...) or raw `my`), so a spec that already declares/wraps its
@@ -935,7 +938,14 @@ sub _collect_auto_working_var_decls {
    $record->('$', $atom) if defined($atom) && $atom =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   }
  };
- my ($collect_shape_literal_scalar_reads, $collect_shape_member_scalar_reads, $collect_block_value_scalar_reads);
+ my (
+  $collect_shape_literal_scalar_reads,
+  $collect_shape_member_scalar_reads,
+  $collect_block_value_scalar_reads,
+  $collect_inline_control_value_scalar_reads,
+  $collect_value_position_scalar_reads,
+  $collect_flow_expr_scalar_reads,
+ );
  my $split_top_level_fat_arrow = sub {
   my ($text) = @_;
   return undef unless defined $text;
@@ -983,6 +993,7 @@ sub _collect_auto_working_var_decls {
   $record_direct_access_bare_path_atoms->($member);
   $collect_shape_literal_scalar_reads->($member);
   $collect_block_value_scalar_reads->($member);
+  $collect_inline_control_value_scalar_reads->($member);
  };
  $collect_shape_literal_scalar_reads = sub {
   my ($shape_expr) = @_;
@@ -1038,6 +1049,106 @@ sub _collect_auto_working_var_decls {
   $record_direct_access_bare_path_atoms->($last);
   $collect_shape_literal_scalar_reads->($last);
   $collect_block_value_scalar_reads->($last);
+  $collect_inline_control_value_scalar_reads->($last);
+ };
+ $collect_value_position_scalar_reads = sub {
+  my ($value_expr) = @_;
+  my $value = _trim_action_ir_value($value_expr);
+  return unless defined($value) && length($value);
+  $record->('$', $value) if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  $record_direct_access_bare_path_atoms->($value);
+  $collect_shape_literal_scalar_reads->($value);
+  $collect_block_value_scalar_reads->($value);
+  $collect_inline_control_value_scalar_reads->($value);
+ };
+ $collect_flow_expr_scalar_reads = sub {
+  my ($flow_expr) = @_;
+  my $flow = _trim_action_ir_value($flow_expr);
+  return unless defined($flow) && length($flow);
+  my $call = _parse_method_function_expr($flow);
+  return unless $call;
+  my $method = $call->{method} // '';
+
+  if ($method eq 'and' || $method eq 'or') {
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+   return unless $args;
+   $collect_flow_expr_scalar_reads->($_) for @$args;
+   return;
+  }
+
+  if ($method eq 'not') {
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+   return unless $args;
+   $collect_flow_expr_scalar_reads->($args->[0]);
+   return;
+  }
+
+  if ($method =~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o) {
+   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+   return unless $args;
+   $collect_value_position_scalar_reads->($args->[0]);
+   return;
+  }
+ };
+ $collect_inline_control_value_scalar_reads = sub {
+  my ($control_expr) = @_;
+  my $control = _trim_action_ir_value($control_expr);
+  return unless defined($control) && length($control);
+  my $call = _parse_method_function_expr($control);
+  return unless $call;
+  my $method = $call->{method} // '';
+
+  if ($method eq 'if') {
+   my $args = $call->{args} || [];
+   return unless ref($args) eq 'ARRAY' && @$args >= 2;
+   $collect_flow_expr_scalar_reads->($args->[0]);
+   $collect_value_position_scalar_reads->($args->[1]);
+
+   for (my $idx = 2; $idx < @$args; ++$idx) {
+    my $branch_call = _parse_method_function_expr($args->[$idx]);
+    my $branch_method = $branch_call ? ($branch_call->{method} // '') : '';
+    if ($branch_method eq 'elseif') {
+     my $branch_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 2, 2);
+     next unless $branch_args;
+     $collect_flow_expr_scalar_reads->($branch_args->[0]);
+     $collect_value_position_scalar_reads->($branch_args->[1]);
+     next;
+    }
+    if ($branch_method eq 'else') {
+     my $branch_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 1, 1);
+     next unless $branch_args;
+     $collect_value_position_scalar_reads->($branch_args->[0]);
+     next;
+    }
+    $collect_value_position_scalar_reads->($args->[$idx]);
+   }
+   return;
+  }
+
+  if ($method eq 'switch') {
+   my $args = $call->{args} || [];
+   return unless ref($args) eq 'ARRAY' && @$args >= 1;
+   $collect_value_position_scalar_reads->($args->[0]);
+   for my $branch (@{$args}[1 .. $#$args]) {
+    my $branch_call = _parse_method_function_expr($branch);
+    next unless $branch_call;
+    my $branch_method = $branch_call->{method} // '';
+    if ($branch_method eq 'case') {
+     my $branch_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 2, 2);
+     next unless $branch_args;
+     $collect_value_position_scalar_reads->($branch_args->[0]);
+     $collect_value_position_scalar_reads->($branch_args->[1]);
+     next;
+    }
+    if ($branch_method eq 'default') {
+     my $branch_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 1, 1);
+     next unless $branch_args;
+     $collect_value_position_scalar_reads->($branch_args->[0]);
+     next;
+    }
+   }
+   return;
+  }
  };
  my $record_assignment_target_for_source = sub {
   my ($target_expr, $source_expr) = @_;
@@ -1091,10 +1202,7 @@ sub _collect_auto_working_var_decls {
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
    next unless $args;
    my $payload = _trim_action_ir_value($args->[0]);
-   $record->('$', $payload) if defined($payload) && $payload =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-   $record_direct_access_bare_path_atoms->($payload);
-   $collect_shape_literal_scalar_reads->($payload);
-   $collect_block_value_scalar_reads->($payload);
+   $collect_value_position_scalar_reads->($payload);
   }
   while ($masked =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
@@ -1103,10 +1211,7 @@ sub _collect_auto_working_var_decls {
    next unless $args;
    $record_assignment_target_for_source->($args->[0], $args->[1]);
    my $source_expr = _trim_action_ir_value($args->[1]);
-   $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-   $record_direct_access_bare_path_atoms->($source_expr);
-   $collect_shape_literal_scalar_reads->($source_expr);
-   $collect_block_value_scalar_reads->($source_expr);
+   $collect_value_position_scalar_reads->($source_expr);
   }
   foreach my $statement (@{_split_action_ir_statements($block)}) {
    my $trimmed = _trim_action_ir_value($statement);
@@ -1117,10 +1222,7 @@ sub _collect_auto_working_var_decls {
     my $lowered_append = _lower_array_append_operator_statement($trimmed);
     next unless defined($lowered_append) && length($lowered_append);
     $record->('@', $target_expr);
-    $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-    $record_direct_access_bare_path_atoms->($value_expr);
-    $collect_shape_literal_scalar_reads->($value_expr);
-    $collect_block_value_scalar_reads->($value_expr);
+    $collect_value_position_scalar_reads->($value_expr);
     next;
    }
    my $parsed_array_end = _parse_array_end_mutation_method_statement($trimmed);
@@ -1130,10 +1232,7 @@ sub _collect_auto_working_var_decls {
     $record->('@', $parsed_array_end->{target});
     if (defined($parsed_array_end->{value})) {
      my $value_expr = _trim_action_ir_value($parsed_array_end->{value});
-     $record->('$', $value_expr) if defined($value_expr) && $value_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-     $record_direct_access_bare_path_atoms->($value_expr);
-     $collect_shape_literal_scalar_reads->($value_expr);
-     $collect_block_value_scalar_reads->($value_expr);
+     $collect_value_position_scalar_reads->($value_expr);
     }
     next;
    }
@@ -1146,22 +1245,16 @@ sub _collect_auto_working_var_decls {
      if ($parsed_hash_index) {
       for my $slot (qw(key value)) {
        my $slot_expr = _trim_action_ir_value($parsed_hash_index->{$slot});
-       $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-       $record_direct_access_bare_path_atoms->($slot_expr);
-       $collect_shape_literal_scalar_reads->($slot_expr);
-       $collect_block_value_scalar_reads->($slot_expr);
+       $collect_value_position_scalar_reads->($slot_expr);
       }
      }
      next;
     }
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
-    my $source_expr = _trim_action_ir_value($2);
-    $record_assignment_target_for_source->($1, $source_expr);
-    $record->('$', $source_expr) if defined($source_expr) && $source_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-    $record_direct_access_bare_path_atoms->($source_expr);
-    $collect_shape_literal_scalar_reads->($source_expr);
-    $collect_block_value_scalar_reads->($source_expr);
+   my $source_expr = _trim_action_ir_value($2);
+   $record_assignment_target_for_source->($1, $source_expr);
+    $collect_value_position_scalar_reads->($source_expr);
     next;
    }
    my $call = _parse_method_function_expr($trimmed);
@@ -1174,10 +1267,7 @@ sub _collect_auto_working_var_decls {
    $record->('%', $target_expr) if defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    for my $slot_index (1, 2) {
    my $slot_expr = _trim_action_ir_value($args->[$slot_index]);
-   $record->('$', $slot_expr) if defined($slot_expr) && $slot_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-   $record_direct_access_bare_path_atoms->($slot_expr);
-   $collect_shape_literal_scalar_reads->($slot_expr);
-   $collect_block_value_scalar_reads->($slot_expr);
+   $collect_value_position_scalar_reads->($slot_expr);
    }
   }
   while ($masked =~ /\b(?<expr>(?:push_value|push_nonempty)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
@@ -1186,8 +1276,7 @@ sub _collect_auto_working_var_decls {
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
    next unless $args;
    my $value_expr = _trim_action_ir_value($args->[1]);
-   $collect_shape_literal_scalar_reads->($value_expr);
-   $collect_block_value_scalar_reads->($value_expr);
+   $collect_value_position_scalar_reads->($value_expr);
   }
   while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
@@ -1199,8 +1288,7 @@ sub _collect_auto_working_var_decls {
    next unless defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    next if defined($value_expr) && $value_expr =~ /^\w+$/o;   # all-bare child-call form
    $record->('@', $target_expr);
-   $collect_shape_literal_scalar_reads->($value_expr);
-   $collect_block_value_scalar_reads->($value_expr);
+   $collect_value_position_scalar_reads->($value_expr);
   }
  }
  return [] unless @collected;

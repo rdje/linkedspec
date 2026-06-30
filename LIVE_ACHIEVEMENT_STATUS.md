@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.4.2 — Perl inline-composite value control lowering landed**
+  (PERL ACTIONIR + PHASE0 + ORACLE + BOOK/KM). Inline `if(...)` and `switch(...)` now produce selected branch
+  values on the Perl reference in supported value-consuming slots: `return(...)`, assignment RHS, and fluent
+  `.return(...)`. The implementation keeps statement-control forms separate, lowers flow literal
+  `true`/`false` to host `1`/`0`, supports `elseif(...)`, `else(...)`, and the Rust-compatible plain third
+  `if` fallback, evaluates `switch` sources once, and recurses auto-working-variable discovery through inline
+  control payloads and expression-valued branch blocks. `tools/gen_oracle_corpus.pl` added
+  `terse_2_3_4_2_inline_if_value_control` and
+  `terse_2_3_4_2_inline_switch_value_control`; Rust `corpus_oracle` now passes with **46 fixtures**. The
+  asserted portable contract is the selected payload value, not any specific legacy/action-edge `?...:` tag
+  string.
+  **Verification:** changed Perl module syntax checks PASS; phase0 PASS with **995 tests**; oracle
+  regeneration PASS; Rust `corpus_oracle` PASS over 46 fixtures. Full gates are recorded in the commit
+  workflow.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.5`** (return-type method chaining design and first implementation split).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.4.1 — Rust helper-context bare aggregate argument parity landed**
   (RUST RUNTIME + ORACLE + BOOK/KM). Rust now treats bare working-variable names as typed aggregate snapshots
   only in helper argument slots whose callee contract already implies a hash or array, closing the audited

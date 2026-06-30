@@ -131,9 +131,9 @@ LinkedSpec currently supports four portable control-flow families:
 Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is portable on the
 Perl reference and Rust backend. Attached statement-level `while(...) { ... }` is also portable on both
 variants; the condition is evaluated before each iteration, and non-terminating loops hit the same
-10000-iteration safety diagnostic on both implementations. Rust also supports inline-composite `if(...)` and
-`switch(...)` value expressions today, but those value forms are not portable until the Perl reference
-value-lowering parity gap is closed.
+10000-iteration safety diagnostic on both implementations. Inline-composite `if(...)` and `switch(...)` are
+portable value expressions in supported value positions: `return(...)`, assignment RHS, and fluent
+`.return(...)`.
 
 ### If family: marker style
 
@@ -258,9 +258,9 @@ when a branch body is long or teaches several statements.
 
 ### If family: inline composite
 
-Rust supports a full if/elseif/else chain as a value expression. The Perl reference does not yet return the
-selected branch value reliably from value-consuming positions, so this form is not portable today. Keep portable
-authoring on marker-style or attached-block `if` until the Perl value-lowering slice lands.
+Inline-composite `if` supports a full `if`/`elseif`/`else` chain as a portable value expression in supported
+value-consuming positions. It evaluates conditions left-to-right and evaluates only the selected branch
+payload:
 
 ```text
 set(result,
@@ -320,9 +320,9 @@ semicolon after the closing `}` or put the next statement on a new line.
 
 ### Switch family: inline composite
 
-Rust supports inline-composite `switch` as a value expression. The Perl reference does not yet return the
-selected inline branch value reliably, so use attached-block `switch` for portable `.spec` files today. The
-first argument is the switch expression; remaining arguments are `case`/`default` branches:
+Inline-composite `switch` is a portable value expression when one driving value chooses a payload. The first
+argument is the switch expression; remaining arguments are `case`/`default` branches. The source is evaluated
+once, branches are tested in order, and the selected branch payload becomes the value:
 
 ```text
 LX {
@@ -334,7 +334,9 @@ LX {
 }
 ```
 
-The fluent equivalent has the same current Rust-only boundary:
+The fluent equivalent returns the same selected payload. Compatibility return arrays may contain ordinary
+string tags on legacy/action-edge surfaces, but those tag strings are not part of the inline value-control
+contract:
 
 ```text
 LX
@@ -345,7 +347,7 @@ LX
   ));
 ```
 
-Rust-only with expression-valued branch blocks:
+Expression-valued branch blocks are accepted too:
 
 ```text
 LX {
@@ -451,7 +453,8 @@ The current portable equivalence guarantee is intentionally narrower:
 | Multi-branch switch with complex bodies | Attached switch | Branch bodies can span lines and contain statements |
 | Repeated statement body in the Perl reference | Attached while | Re-evaluates the condition and has a deterministic safety guard |
 | Deeply nested if/else chains | Marker-style | Explicit open/close markers prevent ambiguity |
-| Return payload construction | Attached block or marker style | Avoids the inline value-control parity gap |
+| Return payload construction from simple branch values | Inline value `if`/`switch` | Returns the selected payload lazily |
+| Return payload construction with substantial statement bodies | Attached block or marker style | Easier to read and maintain |
 | Conditional accumulation | Attached block or marker style | Branch body can contain multiple statements |
 
 ## Worked example: all forms together

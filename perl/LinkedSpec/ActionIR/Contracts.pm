@@ -300,7 +300,12 @@ sub _build_return_contracts {
    unresolved_pattern => qr/\breturn\s*\(\s*\w+\s*,/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\breturn\s*\(\s*$label\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\s*\)/return ['?$label:', $+{arg}]/g;
+    my $lower = $d->{lower_return_general_statement};
+    $code =~ s/\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+     my $expr = $+{expr};
+     my $lowered = $lower->($expr);
+     (defined($lowered) && length($lowered) && $expr =~ m{^\s*return\s*\(\s*\Q$label\E\s*,}) ? $lowered : $&;
+    }/ge;
     return $code
    },
   },

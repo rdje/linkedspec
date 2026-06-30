@@ -679,6 +679,32 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.4.2 — inline value-control parity ──
+    #
+    # Inline-composite if(...) and switch(...) are value expressions in supported
+    # value-consuming slots. These fixtures freeze the returned payload values
+    # only; tag strings from fluent/action-edge compatibility output are not part
+    # of the asserted contract.
+    {   case   => 'terse_2_3_4_2_inline_if_value_control',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(flag, "go"); return(array(if(is_nonempty(flag), cat("y", "es"), else("no")), if(false, "bad", "fallback"), if(true, { set(block, "branch"); return(block) }, else("bad")))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_2_3_4_2_inline_switch_value_control',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(kind, "b"); set(out, switch(kind, case("a", "bad"), case("b", cat("y", "es")), default("no"))); return(out) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },

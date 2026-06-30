@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.4.2 — implement Perl inline value controls
+
+**Scope:** Perl ActionIR value lowering, flow-expression boolean lowering, scanner/rewrite support, auto-working-variable
+discovery, phase0 regression coverage, generated oracle corpus fixtures, mdBook, Knowledge Map, roadmap
+tracker, task tree, and live continuity docs.
+
+**What changed:** Inline-composite `if(...)` and `switch(...)` now lower as value-producing expressions on the
+Perl reference in supported value positions: `return(...)`, assignment RHS, and fluent `.return(...)`.
+`if(...)` assigns only the selected branch payload into a scoped `do { ... }` value and supports
+`elseif(...)`, `else(...)`, and the Rust-compatible plain third-argument fallback. `switch(...)` evaluates its
+source once, compares `case(...)` values in order, returns the first matching branch payload, and uses
+`default(...)` when no case matched. Inline branch payloads compose with nested helpers and expression-valued
+blocks, and branch-local scalar reads now participate in auto-working-variable declaration.
+
+**Boundary:** The asserted contract is the selected payload value. Legacy/action-edge return arrays may still
+contain ordinary string tags for compatibility, but `.2.3.4.2` does not require a specific `?...:` tag spelling.
+Receiver-dot value-returning/chained methods remain `SPEC-FORMAT-TERSE.2.3.5`.
+
+**Validation:** Perl syntax checks PASS for the changed ActionIR modules and oracle generator; focused probes
+PASS for direct return, assignment RHS, nested predicates, block-valued branches, and fluent `.return(...)`;
+`prove -q -Iperl t/phase0_regression.t` PASS with **995 tests**; `perl -Iperl tools/gen_oracle_corpus.pl`
+regenerated **46 fixtures**; Rust `corpus_oracle` PASS over all 46 fixtures including
+`terse_2_3_4_2_inline_if_value_control` and `terse_2_3_4_2_inline_switch_value_control`.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.4.1 — implement Rust bare aggregate helper args
 
 **Scope:** Rust runtime helper evaluation, focused Rust parity locks, generated oracle corpus fixtures, mdBook

@@ -746,13 +746,13 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 ## 6. Control Flow Helpers
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
-- **Signature**: Inline composite form. All branches are evaluated expressions.
-- **Returns**: value of the selected branch on the Rust backend.
-- **Behavior**: Evaluates conditions left-to-right. First true condition's branch is returned. If none match, the `else` branch is returned. If no else and no match, returns undef.
-- **Portability status**: Rust supports this as a lazy value expression today. The Perl reference currently
-  does not return the selected branch value reliably from `return(if(...))`, assignment RHS, or fluent
-  `.return(if(...))` value positions. Use statement-marker or attached-block `if` for portable `.spec` files
-  until the Perl reference value-lowering parity slice lands.
+- **Signature**: Inline composite value form.
+- **Returns**: value of the selected branch in supported value positions.
+- **Behavior**: Evaluates conditions left-to-right and evaluates only the selected branch payload. First true
+  condition's branch is returned. If none match, the `else(...)` branch or plain third-argument fallback is
+  returned. If no fallback matches, returns `undef`.
+- **Portability status**: Portable on Perl and Rust in `return(...)`, assignment RHS, and fluent
+  `.return(...)` value positions.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.
@@ -777,12 +777,11 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 
 ### `switch(expr, case(val, body), default(body))`
 - **Signature**: Inline composite form.
-- **Returns**: value of the first matching `case` body, or the `default` body when no case matches, on the
-  Rust backend.
-- **Behavior**: Evaluates `expr` once and compares it to each `case(val)` in order.
-- **Portability status**: Rust supports this as a lazy value expression today. The Perl reference currently
-  lowers inline value `switch(...)` without returning the selected branch value reliably. Use attached-block
-  `switch` for portable `.spec` files until the Perl reference value-lowering parity slice lands.
+- **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
+- **Behavior**: Evaluates `expr` once, compares it to each `case(val)` in order, and evaluates only the
+  selected branch payload.
+- **Portability status**: Portable on Perl and Rust in `return(...)`, assignment RHS, and fluent
+  `.return(...)` value positions.
 
 ### `switch(expr) { case(val) { ... } default { ... } }`
 - **Signature**: Attached-block statement form.
@@ -1106,8 +1105,9 @@ array working variables as snapshots, so `count(drop_front(sorted(items)))` is p
 wrappers such as `array(name)` / `hash(name)` anywhere a helper contract does not say a bare aggregate read is
 accepted. Statement forms
 (`name = value`, `items += value`, `set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value
-expressions, and inline value `if`/`switch` remains non-portable until the Perl reference value-lowering gap is
-closed.
+expressions. Inline value `if`/`switch` is portable in the supported value-consuming slots (`return(...)`,
+assignment RHS, and fluent `.return(...)`), and its contract is the selected payload value rather than any
+specific compatibility tag string.
 
 ### Fluent / Block Equivalence
 For the locked ordinary helper families, structured-block form (`I { declare(...) }`) and compact

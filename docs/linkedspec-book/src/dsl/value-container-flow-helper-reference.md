@@ -927,19 +927,38 @@ when(matches(scalar(kind), /^node_/)) {
 }
 ```
 
-## Inline `switch` flow
+## Inline value-control flow
 
-Rust supports inline `switch(...)` when one driving value controls several exact branches and the switch itself
-must produce a value. The Perl reference value-lowering parity gap is still open, so use attached-block
-`switch` for portable `.spec` files today.
+Inline `if(...)` and `switch(...)` are portable value expressions when simple branch payloads need to feed
+`return(...)`, an assignment RHS, or fluent `.return(...)`. They evaluate only the selected payload branch.
+Use attached-block control flow when a branch needs substantial statement bodies or repeated side effects.
 
 | Helper | Meaning |
 | --- | --- |
+| `if(cond, then_value, branches...)` | evaluate `cond`; return `then_value` when true, otherwise choose an `elseif(...)`, `else(...)`, or plain third fallback. |
+| `elseif(cond, value)` | additional inline `if` branch. |
+| `else(value)` | fallback inline `if` branch. |
 | `switch(value, branches...)` | evaluate `value` once and choose the first matching branch. |
 | `case(value, body)` | one equality case. |
 | `default(body)` | fallback branch. |
 
-Rust-only inline composite example until Perl value-control parity lands:
+Inline `if` example:
+
+```text
+return(if(
+  is_nonempty(flag),
+  cat("prefix-", scalar(flag)),
+  else("missing")
+))
+```
+
+The plain third-argument fallback is also accepted for Rust-compatible compact forms:
+
+```text
+set(out, if(false, "bad", "fallback"))
+```
+
+Inline `switch` example:
 
 ```text
 return(switch(
@@ -947,6 +966,16 @@ return(switch(
   case("word", hash("kind", "word", "text", scalar(text))),
   case("space", hash("kind", "space", "text", scalar(text))),
   default(hash("kind", "unknown", "text", scalar(text)))
+))
+```
+
+Expression-valued branch blocks are allowed in selected branches:
+
+```text
+return(if(
+  true,
+  { set(text, "branch"); return(text) },
+  else("fallback")
 ))
 ```
 
