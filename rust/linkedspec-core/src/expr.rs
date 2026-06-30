@@ -9,8 +9,9 @@
 //!
 //! ```text
 //! stmts       → stmt*
-//! stmt        → attached_if | hash_index_assignment | array_append | scalar_assignment | expr ';'?
+//! stmt        → attached_if | attached_switch | hash_index_assignment | array_append | scalar_assignment | expr ';'?
 //! attached_if → (if | when) '(' expr ')' '{' stmts '}' (elseif '(' expr ')' '{' stmts '}')* ((else | otherwise) '{' stmts '}')?
+//! attached_switch → switch '(' expr ')' '{' (case '(' expr ')' '{' stmts '}' | default '('? ')'? '{' stmts '}')+ '}'
 //! scalar_assignment → name '=' expr      (statement only)
 //! array_append → name '+=' expr          (statement only)
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
@@ -336,6 +337,10 @@ impl<'a> Parser<'a> {
             }
             if let Some(mut attached_if_statements) = self.try_parse_attached_if_chain()? {
                 statements.append(&mut attached_if_statements);
+            } else if let Some(mut attached_switch_statements) =
+                self.try_parse_attached_switch_block()?
+            {
+                statements.append(&mut attached_switch_statements);
             } else {
                 let expr = self.parse_statement_expr()?;
                 statements.push(Stmt { expr });
@@ -414,6 +419,129 @@ impl<'a> Parser<'a> {
 
         statements.push(Self::zero_arg_call_stmt("endif"));
         Ok(Some(statements))
+    }
+
+    fn try_parse_attached_switch_block(&mut self) -> Result<Option<Vec<Stmt>>, String> {
+        let start = self.pos;
+        if !self.starts_with_keyword("switch") {
+            return Ok(None);
+        }
+
+        let expr = self.parse_var_or_call()?;
+        let Expr::Call { name, args } = &expr else {
+            self.pos = start;
+            return Ok(None);
+        };
+        if name != "switch" || args.len() != 1 {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.skip_whitespace();
+        if self.peek() != Some('{') {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        let mut statements = Vec::new();
+        statements.push(Stmt { expr });
+        statements.extend(self.parse_attached_switch_outer_block()?);
+        statements.push(Self::zero_arg_call_stmt("endswitch"));
+        Ok(Some(statements))
+    }
+
+    fn parse_attached_switch_outer_block(&mut self) -> Result<Vec<Stmt>, String> {
+        let start = self.pos;
+        let (payload_start, payload_end, after_close) = self.scan_brace_payload_bounds()?;
+        let payload = &self.src[payload_start..payload_end];
+        let mut branch_parser = Parser::new(payload);
+        let statements = branch_parser.parse_attached_switch_body().map_err(|e| {
+            format!("invalid attached switch block starting at position {start}: {e}")
+        })?;
+        self.pos = after_close;
+        Ok(statements)
+    }
+
+    fn parse_attached_switch_body(&mut self) -> Result<Vec<Stmt>, String> {
+        let mut statements = Vec::new();
+        self.skip_whitespace();
+
+        while self.pos < self.src.len() {
+            if let Some((case_expr, case_body)) = self.try_parse_attached_case_branch()? {
+                statements.push(Stmt { expr: case_expr });
+                statements.extend(case_body.statements);
+            } else if let Some(default_body) = self.try_parse_attached_default_branch()? {
+                statements.push(Self::zero_arg_call_stmt("default"));
+                statements.extend(default_body.statements);
+            } else {
+                return Err(format!(
+                    "expected attached case(...) {{...}} or default {{...}} at byte {}",
+                    self.pos
+                ));
+            }
+            self.skip_whitespace();
+        }
+
+        if statements.is_empty() {
+            return Err("attached switch block requires at least one case/default branch".into());
+        }
+        Ok(statements)
+    }
+
+    fn try_parse_attached_case_branch(&mut self) -> Result<Option<(Expr, CodeBlock)>, String> {
+        let start = self.pos;
+        if !self.starts_with_keyword("case") {
+            return Ok(None);
+        }
+
+        let expr = self.parse_var_or_call()?;
+        let Expr::Call { name, args } = &expr else {
+            self.pos = start;
+            return Ok(None);
+        };
+        if name != "case" || args.len() != 1 {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.skip_whitespace();
+        if self.peek() != Some('{') {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        let body = self.parse_attached_branch_block("switch case")?;
+        Ok(Some((expr, body)))
+    }
+
+    fn try_parse_attached_default_branch(&mut self) -> Result<Option<CodeBlock>, String> {
+        let start = self.pos;
+        if !self.starts_with_keyword("default") {
+            return Ok(None);
+        }
+
+        self.advance("default".len());
+        self.skip_whitespace();
+        if self.peek() == Some('(') {
+            self.pos = start;
+            let expr = self.parse_var_or_call()?;
+            let Expr::Call { name, args } = &expr else {
+                self.pos = start;
+                return Ok(None);
+            };
+            if name != "default" || !args.is_empty() {
+                self.pos = start;
+                return Ok(None);
+            }
+            self.skip_whitespace();
+        }
+
+        if self.peek() != Some('{') {
+            self.pos = start;
+            return Ok(None);
+        }
+
+        self.parse_attached_branch_block("switch default").map(Some)
     }
 
     fn try_parse_attached_conditional_branch(
@@ -1343,6 +1471,118 @@ mod tests {
         assert!(
             err.contains("expected ';' or newline"),
             "attached if followed by a same-line statement must still need a separator: {err}"
+        );
+    }
+
+    #[test]
+    fn parse_attached_switch_blocks_as_statement_controls() {
+        let code = r#"switch(kind) { case("a") { set(out, "a") } case("b") { return("b") } default { return("default") } }"#;
+        let block = CodeBlock::parse(code).unwrap();
+
+        assert_eq!(
+            statement_call_names(&block),
+            vec![
+                "switch",
+                "case",
+                "set",
+                "case",
+                "return",
+                "default",
+                "return",
+                "endswitch"
+            ]
+        );
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "switch");
+                assert_eq!(args.len(), 1);
+                assert!(matches!(args[0].value(), Expr::Variable { name } if name == "kind"));
+            }
+            other => panic!("expected switch call, got {other:?}"),
+        }
+        match &block.statements[1].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "case");
+                assert_eq!(args.len(), 1);
+                assert!(matches!(
+                    args[0].value(),
+                    Expr::StringLiteral { value } if value == "a"
+                ));
+            }
+            other => panic!("expected case call, got {other:?}"),
+        }
+        match &block.statements[5].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "default");
+                assert!(args.is_empty());
+            }
+            other => panic!("expected default call, got {other:?}"),
+        }
+        match &block.statements[7].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "endswitch");
+                assert!(args.is_empty());
+            }
+            other => panic!("expected endswitch call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_attached_switch_accepts_default_call_branch() {
+        let code = r#"switch(kind) { case("a") { return("a") } default() { return("default") } }"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(
+            statement_call_names(&block),
+            vec!["switch", "case", "return", "default", "return", "endswitch"]
+        );
+    }
+
+    #[test]
+    fn parse_attached_switch_preserves_inline_switch_value_form() {
+        let code = r#"return(switch(kind, case("a", "A"), default("D")))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(statement_call_names(&block), vec!["return"]);
+
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "switch");
+                        assert_eq!(args.len(), 3);
+                    }
+                    other => panic!("expected inline switch expression, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_attached_switch_preserves_following_statement_separator_contract() {
+        let block =
+            CodeBlock::parse(r#"switch(kind) { case("a") { set(out, "a") } default { set(out, "d") } }; return(out)"#)
+                .unwrap();
+        assert_eq!(
+            statement_call_names(&block),
+            vec![
+                "switch",
+                "case",
+                "set",
+                "default",
+                "set",
+                "endswitch",
+                "return"
+            ]
+        );
+
+        let err = CodeBlock::parse(
+            r#"switch(kind) { case("a") { set(out, "a") } default { set(out, "d") } } return(out)"#,
+        )
+        .unwrap_err();
+        assert!(
+            err.contains("expected ';' or newline"),
+            "attached switch followed by a same-line statement must still need a separator: {err}"
         );
     }
 

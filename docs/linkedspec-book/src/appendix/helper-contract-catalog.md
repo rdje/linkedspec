@@ -775,8 +775,14 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 - **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
 - **Behavior**: Evaluates `expr` once and compares it to each `case(val)` in order.
 
-Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is being locked on the Perl
-reference backend first; use inline-composite `switch(...)` for portable specs until Rust parity lands.
+### `switch(expr) { case(val) { ... } default { ... } }`
+- **Signature**: Attached-block statement form.
+- **Returns**: no value of its own; branch statements provide side effects or `return(...)` values.
+- **Behavior**: Evaluates `expr` once. `case(...)` branches are tested in order, only the first matching branch
+  executes, and `default` executes only when no case matched.
+- **Sugar**: `default() { ... }` is equivalent to `default { ... }`. A following same-line statement still
+  needs the normal semicolon separator after the final `}`.
+
 `while(...) { ... }` remains Round 2 implementation work.
 
 ### `case(val, body)`

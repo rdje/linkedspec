@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.2.5.2 — Rust attached-switch parity landed): Implemented the Rust parity
+  slice. Durable points. (1) **Parser normalization is the Rust seam.** `CodeBlock::parse` now claims only
+  one-argument attached `switch(...) { ... }` blocks with attached `case(value) { ... }` / `default { ... }`
+  branch bodies, then emits `switch` / `case` / `default` / `endswitch` statements. (2) **Runtime needed a
+  switch stack.** Unlike attached `if`, marker switch was not already gated as statements, so the runtime now
+  carries `StatementSwitchFrame` state beside the existing if stack in lifecycle blocks and expression-valued
+  block evaluation. (3) **The branch contract matches the Perl oracle.** The switch expression is evaluated
+  once, cases are first-match, default runs only if no case matched, and inactive branches do not evaluate
+  side effects. Use explicit value expressions such as `scalar(kind)` for portable variable-driven subjects.
+  (4) **Lazy value-form switch remains separate.** Multi-argument `switch(expr, case(...), default(...))` still
+  goes through the lazy helper path and is locked by the existing `cond_switch` tests. (5) **Oracle parity
+  advanced.** Fixture `terse_2_2_5_2_attached_switch_blocks` brings the Rust oracle corpus to 38 fixtures.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.2.5.1 — Perl attached-switch separator/source lock landed): Implemented
   the Perl reference slice. Durable points. (1) **The splitter is the seam.** `StatementSplit::Core` now splits
   complete attached `case(...) { ... }` and `default { ... }` branch bodies before same-line branch

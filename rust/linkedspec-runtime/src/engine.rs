@@ -72,6 +72,17 @@ struct StatementIfFrame {
     branch_taken: bool,
 }
 
+/// Statement-form switch state for lifecycle blocks.
+///
+/// `switch(expr); case(value); ... default(); ... endswitch()` is the statement
+/// sibling of lazy value-form `switch(expr, case(...), default(...))`.
+struct StatementSwitchFrame {
+    parent_active: bool,
+    current_active: bool,
+    branch_taken: bool,
+    switch_value: String,
+}
+
 #[derive(Clone, Copy)]
 enum ShapeLiteralKind {
     Array,
@@ -461,11 +472,29 @@ impl Engine {
         rule_label: &str,
     ) -> Result<(), String> {
         let mut if_stack: Vec<StatementIfFrame> = Vec::new();
+        let mut switch_stack: Vec<StatementSwitchFrame> = Vec::new();
         for stmt in &block.statements {
-            if self.handle_statement_if_control(&stmt.expr, &mut if_stack, ctx, rule_label)? {
+            let parent_active = Self::statement_controls_active(&if_stack, &switch_stack);
+            if self.handle_statement_if_control(
+                &stmt.expr,
+                &mut if_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
                 continue;
             }
-            if !if_stack.last().is_none_or(|frame| frame.current_active) {
+            let parent_active = Self::statement_controls_active(&if_stack, &switch_stack);
+            if self.handle_statement_switch_control(
+                &stmt.expr,
+                &mut switch_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
+                continue;
+            }
+            if !Self::statement_controls_active(&if_stack, &switch_stack) {
                 continue;
             }
             if self.execute_scalar_assignment_operator_statement(&stmt.expr, ctx, rule_label)? {
@@ -513,6 +542,14 @@ impl Engine {
         Ok(())
     }
 
+    fn statement_controls_active(
+        if_stack: &[StatementIfFrame],
+        switch_stack: &[StatementSwitchFrame],
+    ) -> bool {
+        if_stack.iter().all(|frame| frame.current_active)
+            && switch_stack.iter().all(|frame| frame.current_active)
+    }
+
     /// Handle statement-form `if(cond); elseif(cond); else(); endif()` controls.
     ///
     /// Only one-argument `if`/`elseif` and zero-argument `else`/`endif` are
@@ -522,6 +559,7 @@ impl Engine {
         &self,
         expr: &linkedspec_core::expr::Expr,
         if_stack: &mut Vec<StatementIfFrame>,
+        parent_active: bool,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<bool, String> {
@@ -533,7 +571,6 @@ impl Engine {
 
         match name.as_str() {
             "if" if args.len() == 1 => {
-                let parent_active = if_stack.last().is_none_or(|frame| frame.current_active);
                 let cond = if parent_active {
                     self.eval_expr(args[0].value(), ctx, rule_label)?.as_bool()
                 } else {
@@ -569,6 +606,70 @@ impl Engine {
             }
             "endif" if args.is_empty() => {
                 if_stack.pop();
+                Ok(true)
+            }
+            _ => Ok(false),
+        }
+    }
+
+    /// Handle statement-form `switch(expr); case(value); default(); endswitch()` controls.
+    ///
+    /// Only one-argument `switch` / `case` and zero-argument `default` /
+    /// `endswitch` are statement controls. Multi-argument lazy value-form
+    /// `switch(expr, case(...), default(...))` remains in `call_helper_lazy`.
+    fn handle_statement_switch_control(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        switch_stack: &mut Vec<StatementSwitchFrame>,
+        parent_active: bool,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::Expr;
+
+        let Expr::Call { name, args } = expr else {
+            return Ok(false);
+        };
+
+        match name.as_str() {
+            "switch" if args.len() == 1 => {
+                let switch_value = if parent_active {
+                    self.eval_expr(args[0].value(), ctx, rule_label)?.to_str()
+                } else {
+                    String::new()
+                };
+                switch_stack.push(StatementSwitchFrame {
+                    parent_active,
+                    current_active: false,
+                    branch_taken: false,
+                    switch_value,
+                });
+                Ok(true)
+            }
+            "case" if args.len() == 1 => {
+                let Some(frame) = switch_stack.last_mut() else {
+                    return Ok(true);
+                };
+                if frame.parent_active && !frame.branch_taken {
+                    let case_value = self.eval_expr(args[0].value(), ctx, rule_label)?.to_str();
+                    let matches = case_value == frame.switch_value;
+                    frame.current_active = matches;
+                    frame.branch_taken = matches;
+                } else {
+                    frame.current_active = false;
+                }
+                Ok(true)
+            }
+            "default" if args.is_empty() => {
+                let Some(frame) = switch_stack.last_mut() else {
+                    return Ok(true);
+                };
+                frame.current_active = frame.parent_active && !frame.branch_taken;
+                frame.branch_taken = true;
+                Ok(true)
+            }
+            "endswitch" if args.is_empty() => {
+                switch_stack.pop();
                 Ok(true)
             }
             _ => Ok(false),
@@ -909,11 +1010,29 @@ impl Engine {
         };
 
         let mut if_stack: Vec<StatementIfFrame> = Vec::new();
+        let mut switch_stack: Vec<StatementSwitchFrame> = Vec::new();
         for (index, stmt) in block.statements.iter().enumerate() {
-            if self.handle_statement_if_control(&stmt.expr, &mut if_stack, ctx, rule_label)? {
+            let parent_active = Self::statement_controls_active(&if_stack, &switch_stack);
+            if self.handle_statement_if_control(
+                &stmt.expr,
+                &mut if_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
                 continue;
             }
-            if !if_stack.last().is_none_or(|frame| frame.current_active) {
+            let parent_active = Self::statement_controls_active(&if_stack, &switch_stack);
+            if self.handle_statement_switch_control(
+                &stmt.expr,
+                &mut switch_stack,
+                parent_active,
+                ctx,
+                rule_label,
+            )? {
+                continue;
+            }
+            if !Self::statement_controls_active(&if_stack, &switch_stack) {
                 continue;
             }
             if let Some(payload) = Self::return_call_payload(&stmt.expr) {

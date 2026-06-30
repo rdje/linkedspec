@@ -443,8 +443,9 @@ declare_a(items)
 
 Those forms are equivalent for lowering. Prefer the simplest form unless the surrounding method-chain style benefits from the scope token.
 
-For the current portable fluent/block contract — including marker-style `if`, inline-composite `if`/`switch`,
-and the Round 2 attached-block flow work — see the [Fluent and Block Forms](fluent-and-block-forms.md) guide.
+For the current portable fluent/block contract — including attached `if`/`when` blocks, attached
+`switch/case/default` blocks, marker-style `if`, and inline-composite `if`/`switch` — see the
+[Fluent and Block Forms](fluent-and-block-forms.md) guide.
 
 ## Worked example: accumulator state
 

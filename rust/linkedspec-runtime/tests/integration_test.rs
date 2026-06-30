@@ -1565,3 +1565,52 @@ fn terse_2_2_4_when_otherwise_alias_runs_selected_branch() {
         "when(false)/otherwise normalizes to attached if/else and executes the fallback"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.2.5.2 — Rust attached-block switch parity:
+
+#[test]
+fn terse_2_2_5_2_attached_switch_selects_first_matching_case() {
+    let grammar = "Top::\n /x/ -> Done { set(kind, \"a\"); switch(scalar(kind)) { case(\"a\") { return(\"first\") } case(\"a\") { return(\"second\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["first"]),
+        "attached switch uses first-match case semantics"
+    );
+}
+
+#[test]
+fn terse_2_2_5_2_attached_switch_selects_later_case_and_default() {
+    let later_case = "Top::\n /x/ -> Done { set(kind, \"b\"); switch(scalar(kind)) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"later\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(later_case, "xhello"),
+        serde_json::json!(["later"]),
+        "attached switch can select a later case"
+    );
+
+    let fallback = "Top::\n /x/ -> Done { set(kind, \"z\"); switch(scalar(kind)) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"bad\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(fallback, "xhello"),
+        serde_json::json!(["default"]),
+        "attached switch falls through to default"
+    );
+}
+
+#[test]
+fn terse_2_2_5_2_attached_switch_branches_gate_side_effects() {
+    let grammar = "Top::\n /x/ -> Done { set(kind, \"b\"); set(out, \"start\"); switch(scalar(kind)) { case(\"a\") { set(out, \"bad\") } case(\"b\") { if(true) { set(out, \"matched\") } else { set(out, \"bad\") } } default { set(out, \"default\") } }; return(out) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["matched"]),
+        "only the active attached switch branch mutates state"
+    );
+}
+
+#[test]
+fn terse_2_2_5_2_attached_switch_preserves_inline_value_form() {
+    let grammar = "Top::\n /x/ -> Done { set(kind, \"b\"); set(inline, switch(scalar(kind), case(\"a\", \"bad\"), case(\"b\", \"inline\"), default(\"default\"))); switch(scalar(kind)) { case(\"b\") { set(attached, \"attached\") } default { set(attached, \"bad\") } }; return(array(inline, attached)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["inline", "attached"]]),
+        "attached switch parsing does not claim or weaken inline lazy switch expressions"
+    );
+}

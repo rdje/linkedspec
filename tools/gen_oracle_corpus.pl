@@ -604,6 +604,24 @@ Done::
  /[a-z]+/
 SPEC
     },
+
+    # ── SPEC-FORMAT-TERSE.2.2.5.2 — Rust attached-block switch parity ──
+    #
+    # Attached switch/case/default branch blocks are a terse statement spelling
+    # for first-match/default control flow. This fixture freezes the Perl
+    # reference value for a later-case match. The switch subject uses the
+    # explicit scalar wrapper so this case locks branch selection, not the
+    # separate bare-read boundary.
+    {   case   => 'terse_2_2_5_2_attached_switch_blocks',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(kind, "b"); switch(scalar(kind)) { case("a") { return("bad") } case("b") { return("later") } default { return("default") } } }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

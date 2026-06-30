@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.5.2 — implement Rust attached switch blocks
+
+**Scope:** Rust lifecycle-code parser/runtime, Rust integration locks, Perl-oracle corpus fixture, mdBook
+control-flow documentation, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now accepts portable attached-block `switch/case/default` statement bodies:
+`switch(expr) { case(v) { ... } case(w) { ... } default { ... } }`.
+
+**Implementation:** `CodeBlock::parse` recognizes one-argument attached `switch(...) { ... }` blocks before
+ordinary statement parsing, requires `case(value) { ... }` / `default { ... }` branch bodies inside the outer
+block, and normalizes the result to `switch` / `case` / `default` / `endswitch` statement controls. The runtime
+now carries a statement-switch stack beside the existing statement-if stack in both lifecycle block execution
+and expression-valued block evaluation. Branch matching is first-match with default fallback, inactive branches
+do not evaluate side effects, and multi-argument lazy value-form `switch(expr, case(...), default(...))` remains
+unchanged.
+
+**Validation:** Perl syntax checks PASS; phase0 PASS (`Files=1, Tests=991`); focused Rust parser
+`attached_switch` PASS; focused Rust runtime `terse_2_2_5_2` PASS; lazy value-form `cond_switch` PASS; Perl
+oracle corpus regenerated to **38 fixtures** with `terse_2_2_5_2_attached_switch_blocks`; Rust corpus oracle
+PASS; mdBook build PASS; Knowledge Map regenerate/check PASS; memory/doctrine/diff checks PASS; full local CI
+PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.2.5.1 — implement Perl attached switch separator lock
 
 **Scope:** Perl ActionIR statement splitting, phase0 regression locks, mdBook control-flow wording,

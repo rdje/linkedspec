@@ -90,12 +90,10 @@ LinkedSpec currently supports three portable control-flow families:
 - `if/elseif/else` as attached-block statements, with `when/otherwise` as readable aliases for
   the first and fallback attached branches.
 - `if/elseif/else` as inline-composite expressions or statement-marker chains.
-- `switch/case/default` as inline-composite expressions.
+- `switch/case/default` as inline-composite expressions or attached-block statements.
 
-Statement-level `switch(...) { case(...) { ... } default { ... } }` is being locked on the
-Perl reference backend first and is not portable across backends until Rust parity lands.
-`while(...) { ... }` remains later Round 2 implementation work. Use inline-composite `switch`
-as the portable switch contract today.
+Attached statement-level `switch(...) { case(...) { ... } default { ... } }` is portable on the
+Perl reference and Rust backend. `while(...) { ... }` remains later Round 2 implementation work.
 
 ### If family: marker style
 
@@ -240,10 +238,10 @@ same-line `} elseif/else {` continuations and lowers to the same branch-control 
 If a statement follows the attached chain on the same physical line, keep the normal separator rule: add a
 semicolon after the closing `}` or put the next statement on a new line.
 
-### Switch family: marker style
+### Switch family: inline composite
 
-Attached statement `switch` is available on the Perl reference backend while Rust parity is pending.
-Use inline-composite `switch` for portable specs today:
+Use inline-composite `switch` when the switch itself should produce a value. The first argument is the switch
+expression; remaining arguments are `case`/`default` branches:
 
 ```text
 LX {
@@ -266,28 +264,13 @@ LX
   ));
 ```
 
-### Switch family: inline composite
-
-A complete switch fits into one expression. The first argument is the switch expression;
-remaining arguments are `case`/`default` branches:
-
-```text
-LX {
-  return(switch(scalar(kind),
-    case("token", "found a token"),
-    case("list", "found a list"),
-    default("unknown")
-  ));
-}
-```
-
 With structured branch blocks:
 
 ```text
 LX {
   return(switch(scalar(kind),
     case("token", { "found a token" }),
-    case("list", { "found a token" }),
+    case("list", { "found a list" }),
     default({ "unknown" })
   ));
 }
@@ -295,8 +278,9 @@ LX {
 
 ### Switch family: attached block (outer block body)
 
-An outer block body contains the branch markers. This is also Round 2 implementation work, not the current
-portable contract:
+Use attached-block `switch` when each branch has statement bodies, side effects, or early `return(...)`
+statements. The switch subject is evaluated once, `case(...)` branches are tested in order, the first matching
+branch runs, and `default` runs only when no prior case matched:
 
 ```text
 LX {
@@ -314,17 +298,20 @@ LX {
 }
 ```
 
-The planned outer block form can use either marker-style or attached-block branch bodies:
+The outer block form requires branch bodies on each `case(...)` or `default` branch:
 
 ```text
 LX {
   switch(scalar(kind)) {
-    case("token")
+    case("token") {
       return(concat("token: ", scalar(name)));
-    case("list")
+    }
+    case("list") {
       return(concat("list: ", count(array(items))));
-    default
+    }
+    default {
       return("unknown");
+    }
   }
 }
 ```
@@ -336,9 +323,10 @@ The current portable equivalence guarantee is intentionally narrower:
 - Fluent chains and structured-block statements produce the same ordinary helper statements.
 - Inline-composite `if(...)` and statement-marker `if(...); ... endif()` select one branch.
 - Inline-composite `switch(...)` evaluates the switch expression once and returns the first matching branch.
+- Attached-block `switch(...) { case(...) { ... } default { ... } }` evaluates the switch expression once
+  and executes only the first matching branch or the default branch.
 
-Attached-block control flow will join this guarantee only after the relevant Round 2 leaves land on both the
-Perl reference and Rust backend.
+`while(...) { ... }` is still outside the portable guarantee until its Round 2 leaf lands.
 
 ## When to use which form
 
@@ -348,10 +336,10 @@ Perl reference and Rust backend.
 | Substantial branch logic (4+ statements) | Structured block | Easier to read and maintain |
 | Single-branch if/else choice | Inline composite or marker style | Expresses intent directly |
 | Multi-branch switch with simple bodies | Inline composite | One expression, no markers to balance |
-| Multi-branch switch with complex bodies | Inline composite today; attached switch after Rust parity | Branch bodies can span lines after parity lands |
+| Multi-branch switch with complex bodies | Attached switch | Branch bodies can span lines and contain statements |
 | Deeply nested if/else chains | Marker-style | Explicit open/close markers prevent ambiguity |
 | Return payload construction | Inline composite | Returns the evaluated expression directly |
-| Conditional accumulation | Marker style today; attached block after Round 2 | Branch body can contain multiple statements |
+| Conditional accumulation | Attached block or marker style | Branch body can contain multiple statements |
 
 ## Worked example: all forms together
 

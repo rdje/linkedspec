@@ -944,8 +944,24 @@ return(switch(
 ))
 ```
 
-Attached-block switch bodies are being locked on the Perl reference backend first, but Rust parity is still
-pending. Use the inline composite form for portable specs today.
+Use attached-block `switch` when each branch needs statements instead of one expression:
+
+```text
+switch(scalar(kind)) {
+  case("word") {
+    return(hash("kind", "word", "text", scalar(text)))
+  }
+  case("space") {
+    return(hash("kind", "space", "text", scalar(text)))
+  }
+  default {
+    return(hash("kind", "unknown", "text", scalar(text)))
+  }
+}
+```
+
+The attached statement form is portable on Perl and Rust. It uses first-match semantics and runs `default`
+only when no case matched.
 
 Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / `elseif(...)` when each branch asks a different question.
 

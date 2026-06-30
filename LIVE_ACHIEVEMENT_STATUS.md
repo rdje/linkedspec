@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.2.5.2 — Rust attached `switch/case/default` parity landed**
+  (RUST PARSER + RUNTIME STACK + ORACLE/BOOK/KM LOCKS). Rust now parses attached switch blocks:
+  `switch(expr) { case(v) { ... } case(w) { ... } default { ... } }` and normalizes them to
+  `switch` / `case` / `default` / `endswitch` statement controls. The runtime now gates statement switch
+  branches with first-match/default semantics beside the existing if stack, so inactive branch side effects do
+  not run. The existing lazy value-form `switch(expr, case(...), default(...))` remains unchanged.
+  **Verification:** Perl syntax checks PASS; phase0 PASS (`Files=1, Tests=991`); focused Rust parser
+  `attached_switch` PASS; focused Rust runtime `terse_2_2_5_2` PASS; lazy value-form `cond_switch` PASS; Rust
+  corpus oracle PASS with **38 fixtures** including `terse_2_2_5_2_attached_switch_blocks`; mdBook/KM/memory/
+  doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.2.6`** (`while(cond) { ... }` statement loop with progress safety).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.2.5.1 — Perl attached `switch/case/default` separator/source lock landed**
   (PERL ACTIONIR + PHASE0 + BOOK/KM LOCKS). Compact attached switch bodies now split adjacent branch blocks:
   `switch(expr) { case(v) { ... } case(w) { ... } default { ... } }` lowers through ActionIR with no host-shaped

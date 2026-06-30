@@ -658,11 +658,11 @@ E {
 ```
 
 Round 2 is extending this surface. Perl and Rust now accept attached-block
-`if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations, and
-attached-block `when(...) { ... } otherwise { ... }` as aliases for `if(...) { ... } else { ... }`.
-Rust normalizes these attached forms to the existing marker-control sequence. Statement-level
-`switch(...) { case(...) { ... } default { ... } }` is being locked on the Perl reference backend first
-and is not portable until Rust parity lands; `while(...) { ... }` remains a tracked implementation leaf.
+`if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations;
+attached-block `when(...) { ... } otherwise { ... }` as aliases for `if(...) { ... } else { ... }`;
+and attached-block `switch(...) { case(...) { ... } default { ... } }` with first-match/default semantics.
+Rust normalizes attached branch forms to the statement-control sequence it executes. `while(...) { ... }`
+remains a tracked implementation leaf.
 Zero-argument markers that are already implemented, such as `else`/`endif`,
 accept bare-keyword form in addition to parenthesized form.
 
