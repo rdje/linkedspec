@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.4.1 — implement Rust bare aggregate helper args
+
+**Scope:** Rust runtime helper evaluation, focused Rust parity locks, generated oracle corpus fixtures, mdBook
+contract wording, task tree, Knowledge Map, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now promotes a bare working-variable name to a typed aggregate snapshot only in helper
+argument slots whose callee contract already implies a hash or array. This closes the audited
+`merge_hash(hash_copy(base), overlay)` parity gap and the matching array-helper surface without changing global
+`Expr::Variable` behavior, which still reads scalar state. The promotion is shared by hash/object helper
+positions such as `merge_hash(...)`, `set_key(hash_expr, ...)`, `rename_key(...)`, `drop_keys(...)`,
+`pick_keys(...)`, `sorted_keys(...)`, `sorted_values(...)`, `count_keys(...)`, `has_key(...)`, `scalaref(...)`,
+and `flat_hash(...)`, plus array helper positions such as `sorted(...)`, `reversed(...)`, `first(...)`,
+`last(...)`, `take(...)`, `drop_front(...)`, `contains(...)`, `index_of(...)`, `num_sum(...)`, and
+`flat_array(...)`.
+
+**Validation:** Focused Rust runtime locks for `terse_2_3_4_1` PASS; `perl -Iperl tools/gen_oracle_corpus.pl`
+regenerated 44 fixtures; Rust `corpus_oracle` PASS over 44 fixtures including
+`terse_2_3_4_1_bare_hash_helper_arg_composition` and
+`terse_2_3_4_1_bare_array_helper_arg_composition`.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.4 — split full composability boundaries
 
 **Scope:** Full composability audit, task-tree split, oracle corpus fixture, mdBook contract wording, Knowledge

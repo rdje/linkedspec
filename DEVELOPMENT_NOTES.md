@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.4.1 — Rust bare aggregate helper-argument parity landed): Implemented the
+  narrow Rust parity fix from the `.2.3.4` audit. Durable points. (1) **Do not change global bare-variable
+  evaluation.** `Expr::Variable` still reads scalar state; the new `hash_consuming_arg(...)` and
+  `array_consuming_arg(...)` helpers promote a bare name to `ctx.hash_copy(name)` or `ctx.array_copy(name)` only
+  when a helper arm already owns that aggregate-valued argument slot. (2) **The contract is helper-position
+  typed.** `merge_hash(hash_copy(base), overlay)` and `count(drop_front(sorted(items)))` now match the Perl
+  reference, and the same snapshot rule applies to hash/object helper slots (`set_key`, `rename_key`,
+  `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `count_keys`, `has_key`, `scalaref`, `flat_hash`)
+  and array helper slots (`sorted`, `reversed`, `first`, `last`, `take`, `take_last`, `drop_front`, `drop_back`,
+  `slice`, `contains`, `index_of`, `num_sum`, `flat_array`). (3) **The oracle now carries both boundaries.**
+  `.2.3.4` keeps the explicit-wrapper fixture, while
+  `terse_2_3_4_1_bare_hash_helper_arg_composition` and
+  `terse_2_3_4_1_bare_array_helper_arg_composition` lock the bare aggregate argument forms; corpus oracle
+  passes with 44 fixtures. (4) **The next portability blocker is still Perl inline value controls.** `.2.3.4.2`
+  remains the frontier for `return(if(...))` / `return(switch(...))` value-lowering parity.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.4 — full composability audit split): Completed the audit leaf before
   implementation. Durable points. (1) **Pure helper composition is the accepted portable subset today.** The
   new oracle fixture composes `count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))`

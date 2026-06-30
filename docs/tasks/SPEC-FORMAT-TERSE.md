@@ -6,12 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-06-30` (**`.2.3.4` DONE/SPLIT; frontier `.2.3.4.1`** — the full-composability audit
-  added a green deep pure-helper oracle fixture and split two unsupported sites before code:
-  `.2.3.4.1` owns Rust parity for bare aggregate reads in helper-argument contexts such as
-  `merge_hash(hash_copy(base), overlay)`, and `.2.3.4.2` owns Perl reference inline-composite value control
-  lowering for `return(if(...))` / `return(switch(...))`. Receiver-dot value-returning/chained methods remain
-  `.2.3.5`. The Rust oracle corpus now passes with **42 fixtures**. Prior **`.2.3.3.3.3.1` DONE** — Rust now
+- Last updated: `2026-06-30` (**`.2.3.4.1` DONE; frontier `.2.3.4.2`** — Rust helper-context bare aggregate
+  argument parity landed. Bare working-variable names now become hash or array snapshots only in helper
+  argument slots whose callee contract already implies that aggregate kind, such as
+  `merge_hash(hash_copy(base), overlay)` and `count(drop_front(sorted(items)))`, while ordinary bare variables
+  still read scalar state. The new `terse_2_3_4_1_bare_hash_helper_arg_composition` and
+  `terse_2_3_4_1_bare_array_helper_arg_composition` oracle fixtures bring the Rust corpus to **44 fixtures**.
+  Prior **`.2.3.4` DONE/SPLIT** — the full-composability audit added a green deep pure-helper
+  oracle fixture and split `.2.3.4.1` plus `.2.3.4.2` before code. `.2.3.4.2` owns Perl reference
+  inline-composite value control lowering for `return(if(...))` / `return(switch(...))`; receiver-dot
+  value-returning/chained methods remain `.2.3.5`. Prior **`.2.3.3.3.3.1` DONE** — Rust now
   matches the Perl-reference `tclite` minimal oracle cases. Bare default rules compile as zero-min
   repeated-choice loops, child-rule `I.return(...)` exits before local entry-regex re-matching, and
   `tools/gen_oracle_corpus.pl` restored `tclite_command_subst` (`[]`) plus `tclite_double_quote` (`""`) into
@@ -1757,15 +1761,23 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending` (split/audit slice)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.4.1`
-  Status: `pending`
+  Status: `done` (2026-06-30)
   Goal: Rust helper-context aggregate bare reads for nested pure composition
   Acceptance: Rust matches the Perl reference for helper argument positions where the callee implies a hash or
     array value from a bare working variable, starting with the audited book-shaped case
     `merge_hash(hash_copy(base), overlay)`. Add focused Rust runtime locks and re-enable the bare-argument
     oracle form only after it passes. Existing `array_copy(NAME)` / `hash_copy(NAME)` / `copy(NAME)` behavior
     from `.1.2.3.2` must remain unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-06-30.** Rust now keeps global `Expr::Variable` evaluation scalar-only while
+    promoting a bare working-variable name to `ctx.hash_copy(name)` in hash-consuming helper argument slots and
+    `ctx.array_copy(name)` in array-consuming helper argument slots. Focused runtime locks cover
+    `merge_hash(hash_copy(base), overlay)` against the explicit `hash(overlay)` wrapper, a broader hash helper
+    family spanning `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `has_key`, `scalaref`,
+    and `flat_hash`, and an array helper family spanning `sorted`, `reversed`, `first`, `last`, `take`,
+    `drop_front`, `contains`, `index_of`, `num_sum`, and `flat_array`. `tools/gen_oracle_corpus.pl` added
+    `terse_2_3_4_1_bare_hash_helper_arg_composition` and
+    `terse_2_3_4_1_bare_array_helper_arg_composition`; final Rust `corpus_oracle` passes with **44 fixtures**.
+  Commit: `pending` (this slice)
 
 - ID: `SPEC-FORMAT-TERSE.2.3.4.2`
   Status: `pending`
@@ -1889,15 +1901,27 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.3` | `done` 2026-06-30 | Rust `tclite` oracle retry after fluent parity proved a remaining default-mode recursive repetition gap and split implementation to `.2.3.3.3.3.1`. |
 | — | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `done` 2026-06-30 | Rust default-mode recursive repetition parity for `tclite` landed, including the two active oracle cases and 41-fixture corpus. |
 | — | `SPEC-FORMAT-TERSE.2.3.4` | `done` 2026-06-30 | Full composability audit split unsupported sites before code and added a green deep pure-helper oracle fixture. |
-| 1 | `SPEC-FORMAT-TERSE.2.3.4.1` | `pending` | Rust helper-context aggregate bare reads for nested pure composition. |
-| 2 | `SPEC-FORMAT-TERSE.2.3.4.2` | `pending` | Perl inline-composite value control lowering for `if`/`switch`. |
-| 3 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
+| — | `SPEC-FORMAT-TERSE.2.3.4.1` | `done` 2026-06-30 | Rust helper-context bare aggregate arguments landed for hash- and array-consuming helper slots; corpus 44 fixtures. |
+| 1 | `SPEC-FORMAT-TERSE.2.3.4.2` | `pending` | Perl inline-composite value control lowering for `if`/`switch`. |
+| 2 | `SPEC-FORMAT-TERSE.2.3.5` | `pending` | Return-type method chaining design and first implementation split. |
 | … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
 
 ## Decisions
 
-- `2026-06-30` (**`.2.3.4` full composability audit split**). The accepted portable subset today is pure
-  value-helper composition with explicit aggregate wrappers where Rust still needs a type-implying argument.
+- `2026-06-30` (**`.2.3.4.1` Rust helper-context bare aggregate arguments landed**). The Rust fix is
+  deliberately helper-position typed, not a global bare-variable change. `Expr::Variable` still evaluates as a
+  scalar read; hash-consuming helper slots call a narrow resolver that promotes a bare variable name to
+  `ctx.hash_copy(name)` after ordinary evaluation fails to produce a `RuntimeValue::Hash`, and array-consuming
+  helper slots do the same with `ctx.array_copy(name)`. That makes `merge_hash(hash_copy(base), overlay)` and
+  `count(drop_front(sorted(items)))` match the Perl reference and extends the same snapshot semantics to the
+  hash/object helper family (`set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`,
+  `sorted_values`, `count_keys`, `has_key`, `scalaref`, `flat_hash`) plus the array helper family (`sorted`,
+  `reversed`, `first`, `last`, `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `contains`,
+  `index_of`, `num_sum`, `flat_array`) without weakening `.1.2.3.2` aggregate-copy boundaries.
+
+- `2026-06-30` (**`.2.3.4` full composability audit split**). At split time, the accepted portable subset was
+  pure value-helper composition with explicit aggregate wrappers where Rust still needed a type-implying
+  argument.
   A new green oracle fixture locks
   `count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))`. The book-shaped bare
   `merge_hash(hash_copy(base), overlay)` works on Perl but returns one key short on Rust because the Rust
@@ -2576,6 +2600,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.3` | Perl reference probes for `tclite` inputs `[]` and `""`; temporary `tools/gen_oracle_corpus.pl` re-enable of `tclite_command_subst` and `tclite_double_quote`; diagnostic Rust corpus oracle run (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`); committed green-corpus restoration; oracle generator syntax/regeneration; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust `tclite` retry after fluent parity split to implementation. Perl returns tagged `tcl_script` values for both inputs, but Rust still returns `[]` for the two temporarily re-enabled fixtures while the other 39 fixtures pass. The remaining blocker is default-mode recursive repetition/top-level default-rule dispatch parity, not fluent-continuation support. Failing fixtures stay out of the committed corpus until `.2.3.3.3.3.1`; frontier becomes `.2.3.3.3.3.1`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | KM/toolbox probes for Perl `tclite` and minimal edge-only grammars; focused Rust core (`cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml compile_default_mode_is_zero_min_repeated_choice -- --nocapture`); focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml default_mode_repeats_action_edge_choices_and_allows_zero_matches -- --nocapture`); lifecycle expectation locks (`terse_2_3_2_lifecycle_return_records_surrounding_rule_return`, `terse_2_3_3_3_1`); capture-helper regression families (`helpers_5_5_3`, `helpers_5_5_4`); `perl -c tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust default-mode recursive repetition parity landed. `RuleMode::Default` now compiles as zero-min repeated choice, and Rust exits immediately after an `I`/preamble return before local entry-regex re-matching. One-match capture-helper/lifecycle-order tests now spell `OR{1,1}` explicitly; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures; corpus oracle PASS over 41 fixtures. Frontier becomes `.2.3.4`. |
 | `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.4` | KM retrieval; TOOLBOX lowering/runtime/generated-source probes for deep pure helpers, bare aggregate helper arguments, inline value `if`/`switch`, and receiver-dot method value/chaining; Rust parser/runtime code-read; diagnostic Rust corpus oracle with bare `merge_hash(..., overlay)`; final `perl -Iperl tools/gen_oracle_corpus.pl`; final Rust corpus oracle (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`) | Full composability audit split unsupported surfaces before code. Pure helper nesting is portable with explicit aggregate wrappers and is now locked by `terse_2_3_4_deep_pure_helper_composition`; final corpus oracle PASS over 42 fixtures. Diagnostic bare `overlay` in `merge_hash(hash_copy(base), overlay)` returned Perl `2` but Rust `1`, so `.2.3.4.1` owns Rust helper-context aggregate bare reads. Perl generated-source probes for inline value `if`/`switch` show selected branch values are not returned and nested helper forms can fail handler compilation, so `.2.3.4.2` owns that reference fix. Frontier becomes `.2.3.4.1`. |
+| `2026-06-30` | `SPEC-FORMAT-TERSE.2.3.4.1` | Focused Rust runtime (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_4_1 -- --nocapture`); oracle generator (`perl -Iperl tools/gen_oracle_corpus.pl`); Rust corpus oracle (`cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture`) | Rust helper-context bare aggregate arguments landed. `hash_consuming_arg(...)` and `array_consuming_arg(...)` promote bare names to aggregate snapshots only in helper slots whose callee contract implies that aggregate kind; `merge_hash(hash_copy(base), overlay)` now matches the explicit `hash(overlay)` wrapper, and `count(drop_front(sorted(items)))` matches the Perl oracle. Added `terse_2_3_4_1_bare_hash_helper_arg_composition` and `terse_2_3_4_1_bare_array_helper_arg_composition`; corpus oracle PASS over 44 fixtures. Frontier becomes `.2.3.4.2`. |
 
 ## Commit Log
 
@@ -2648,9 +2673,18 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.3.3.2` | `SPEC-FORMAT-TERSE.2.3.3.3.2 - implement Rust action-edge fluent flow chains` | Rust action-edge explicit/flow fluent chains now execute with explicit-target child return appends and statement-control gating; frontier becomes `.2.3.3.3.3`. |
 | `SPEC-FORMAT-TERSE.2.3.3.3.3` | `SPEC-FORMAT-TERSE.2.3.3.3.3 - split Rust tclite repetition parity` | `tclite` oracle retry after fluent parity still returned Rust `[]` for `[]` and `""` at that split point; default-mode recursive repetition parity split to `.2.3.3.3.3.1`, which later landed the fixtures. |
 | `SPEC-FORMAT-TERSE.2.3.3.3.3.1` | `SPEC-FORMAT-TERSE.2.3.3.3.3.1 - implement Rust tclite default repetition` | Rust default-mode recursive repetition parity landed; `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures, corpus 41 passes, and frontier becomes `.2.3.4`. |
-| `SPEC-FORMAT-TERSE.2.3.4` | `pending` | Full composability audit split Rust helper-context aggregate bare reads to `.2.3.4.1` and Perl inline value-control lowering to `.2.3.4.2`; added a green deep pure-helper oracle fixture and frontier becomes `.2.3.4.1`. |
+| `SPEC-FORMAT-TERSE.2.3.4` | `SPEC-FORMAT-TERSE.2.3.4 - split composability boundaries` | Full composability audit split Rust helper-context aggregate bare reads to `.2.3.4.1` and Perl inline value-control lowering to `.2.3.4.2`; added a green deep pure-helper oracle fixture and frontier becomes `.2.3.4.1`. |
+| `SPEC-FORMAT-TERSE.2.3.4.1` | `pending` | Rust helper-context bare aggregate arguments landed for hash- and array-consuming helper slots; corpus 44 passes and frontier becomes `.2.3.4.2`. |
 
 ## Changelog
+
+- `2026-06-30`: **`.2.3.4.1` LANDED — Rust helper-context bare aggregate arguments.**
+  Rust now snapshots bare working-variable names only in hash- or array-consuming helper argument slots, so
+  `merge_hash(hash_copy(base), overlay)` and `count(drop_front(sorted(items)))` match Perl without changing
+  ordinary bare scalar reads. Focused runtime locks cover the merge case, the broader hash/object helper family,
+  and the array helper family; the new `terse_2_3_4_1_bare_hash_helper_arg_composition` and
+  `terse_2_3_4_1_bare_array_helper_arg_composition` oracle fixtures bring `corpus_oracle` to 44 passing
+  fixtures. Frontier moves to `.2.3.4.2`.
 
 - `2026-06-30`: **`.2.3.4` AUDIT/SPLIT — full composability boundaries.** Pure helper nesting is portable
   with explicit aggregate wrappers and is locked by a new oracle fixture

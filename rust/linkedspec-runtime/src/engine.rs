@@ -1551,6 +1551,48 @@ impl Engine {
         val.to_str()
     }
 
+    fn hash_consuming_arg(
+        &self,
+        raw_args: &[linkedspec_core::expr::Arg],
+        args: &[RuntimeValue],
+        index: usize,
+        ctx: &RuntimeContext,
+    ) -> RuntimeValue {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
+        if matches!(evaluated, RuntimeValue::Hash(_)) {
+            return evaluated;
+        }
+
+        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
+            return RuntimeValue::Hash(ctx.hash_copy(name));
+        }
+
+        evaluated
+    }
+
+    fn array_consuming_arg(
+        &self,
+        raw_args: &[linkedspec_core::expr::Arg],
+        args: &[RuntimeValue],
+        index: usize,
+        ctx: &RuntimeContext,
+    ) -> RuntimeValue {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
+        if matches!(evaluated, RuntimeValue::Array(_)) {
+            return evaluated;
+        }
+
+        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
+            return RuntimeValue::Array(ctx.array_copy(name));
+        }
+
+        evaluated
+    }
+
     /// Resolve a child rule name from the first arg of a `call(...)` helper.
     ///
     /// A bare `call(RuleName)` names the target rule directly — its evaluated
@@ -1821,7 +1863,7 @@ impl Engine {
                 }
             }
             "first" => {
-                if let Some(RuntimeValue::Array(arr)) = args.first() {
+                if let RuntimeValue::Array(arr) = self.array_consuming_arg(raw_args, args, 0, ctx) {
                     Ok(arr.first().cloned().unwrap_or(RuntimeValue::Undef))
                 } else if let Some(arg) = args.first() {
                     let arr_name = arg.to_str();
@@ -1832,7 +1874,7 @@ impl Engine {
                 }
             }
             "last" => {
-                if let Some(RuntimeValue::Array(arr)) = args.first() {
+                if let RuntimeValue::Array(arr) = self.array_consuming_arg(raw_args, args, 0, ctx) {
                     Ok(arr.last().cloned().unwrap_or(RuntimeValue::Undef))
                 } else if let Some(arg) = args.first() {
                     let arr_name = arg.to_str();
@@ -2747,7 +2789,8 @@ impl Engine {
                 }
             }
             "num_sum" | "num_avg" | "num_median" | "num_range" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let nums: Vec<f64> = items.iter().filter_map(|v| v.as_number()).collect();
                     if nums.is_empty() {
                         return Ok(RuntimeValue::Undef);
@@ -2782,7 +2825,9 @@ impl Engine {
             }
             // ── Array helpers ──
             "sorted" => {
-                if let Some(RuntimeValue::Array(mut items)) = args.first().cloned() {
+                if let RuntimeValue::Array(mut items) =
+                    self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     items.sort_by(|a, b| a.to_str().cmp(&b.to_str()));
                     Ok(RuntimeValue::Array(items))
                 } else {
@@ -2790,7 +2835,9 @@ impl Engine {
                 }
             }
             "reversed" => {
-                if let Some(RuntimeValue::Array(mut items)) = args.first().cloned() {
+                if let RuntimeValue::Array(mut items) =
+                    self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     items.reverse();
                     Ok(RuntimeValue::Array(items))
                 } else {
@@ -2798,7 +2845,8 @@ impl Engine {
                 }
             }
             "take" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
                     Ok(RuntimeValue::Array(items.iter().take(n).cloned().collect()))
                 } else {
@@ -2806,7 +2854,8 @@ impl Engine {
                 }
             }
             "take_last" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
                     let start = if n > items.len() { 0 } else { items.len() - n };
                     Ok(RuntimeValue::Array(items[start..].to_vec()))
@@ -2815,7 +2864,8 @@ impl Engine {
                 }
             }
             "drop_front" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
                     Ok(RuntimeValue::Array(items.iter().skip(n).cloned().collect()))
                 } else {
@@ -2823,7 +2873,8 @@ impl Engine {
                 }
             }
             "drop_back" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let n = args.get(1).and_then(|a| a.as_number()).unwrap_or(1.0) as usize;
                     let end = if n > items.len() { 0 } else { items.len() - n };
                     Ok(RuntimeValue::Array(items[..end].to_vec()))
@@ -2832,7 +2883,8 @@ impl Engine {
                 }
             }
             "slice" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let start = args.get(1).and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
                     let n = args
                         .get(2)
@@ -2845,7 +2897,8 @@ impl Engine {
                 }
             }
             "contains" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
                     Ok(RuntimeValue::Bool(
                         items.iter().any(|v| v.to_str() == needle),
@@ -2855,7 +2908,8 @@ impl Engine {
                 }
             }
             "index_of" => {
-                if let Some(RuntimeValue::Array(items)) = args.first() {
+                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
                     match items.iter().position(|v| v.to_str() == needle) {
                         Some(i) => Ok(RuntimeValue::Number(i as f64)),
@@ -2881,9 +2935,12 @@ impl Engine {
             )),
             "flat_array" => Ok(RuntimeValue::Array(
                 args.iter()
-                    .flat_map(|a| match a {
-                        RuntimeValue::Array(items) => items.clone(),
-                        other => vec![other.clone()],
+                    .enumerate()
+                    .flat_map(|(index, _)| {
+                        match self.array_consuming_arg(raw_args, args, index, ctx) {
+                            RuntimeValue::Array(items) => items,
+                            other => vec![other],
+                        }
                     })
                     .collect(),
             )),
@@ -2961,9 +3018,10 @@ impl Engine {
             "merge_hash" => {
                 let mut merged = Vec::new();
                 let mut seen = std::collections::HashSet::new();
-                for arg in args {
+                for index in 0..args.len() {
+                    let arg = self.hash_consuming_arg(raw_args, args, index, ctx);
                     if let RuntimeValue::Hash(entries) = arg {
-                        for (k, v) in entries {
+                        for (k, v) in &entries {
                             if !seen.contains(k) {
                                 seen.insert(k.clone());
                                 merged.push((k.clone(), v.clone()));
@@ -2975,7 +3033,9 @@ impl Engine {
             }
             "set_key" => {
                 if args.len() >= 3 {
-                    if let RuntimeValue::Hash(mut entries) = args[0].clone() {
+                    if let RuntimeValue::Hash(mut entries) =
+                        self.hash_consuming_arg(raw_args, args, 0, ctx)
+                    {
                         let key = args[1].to_str();
                         let val = args[2].clone();
                         if let Some(existing) = entries.iter_mut().find(|(k, _)| k == &key) {
@@ -2993,7 +3053,9 @@ impl Engine {
             }
             "rename_key" => {
                 if args.len() >= 3 {
-                    if let RuntimeValue::Hash(entries) = args[0].clone() {
+                    if let RuntimeValue::Hash(entries) =
+                        self.hash_consuming_arg(raw_args, args, 0, ctx)
+                    {
                         let old_key = args[1].to_str();
                         let new_key = args[2].to_str();
                         let renamed: Vec<_> = entries
@@ -3015,7 +3077,8 @@ impl Engine {
                 }
             }
             "drop_keys" => {
-                if let Some(RuntimeValue::Hash(entries)) = args.first().cloned() {
+                if let RuntimeValue::Hash(entries) = self.hash_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let keys_to_drop: std::collections::HashSet<String> =
                         args[1..].iter().map(|a| a.to_str()).collect();
                     Ok(RuntimeValue::Hash(
@@ -3029,7 +3092,8 @@ impl Engine {
                 }
             }
             "pick_keys" => {
-                if let Some(RuntimeValue::Hash(entries)) = args.first().cloned() {
+                if let RuntimeValue::Hash(entries) = self.hash_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let keys_to_keep: std::collections::HashSet<String> =
                         args[1..].iter().map(|a| a.to_str()).collect();
                     Ok(RuntimeValue::Hash(
@@ -3043,7 +3107,8 @@ impl Engine {
                 }
             }
             "sorted_keys" => {
-                if let Some(RuntimeValue::Hash(entries)) = args.first() {
+                if let RuntimeValue::Hash(entries) = self.hash_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let mut keys: Vec<RuntimeValue> = entries
                         .iter()
                         .map(|(k, _)| RuntimeValue::Scalar(k.clone()))
@@ -3055,8 +3120,9 @@ impl Engine {
                 }
             }
             "sorted_values" => {
-                if let Some(RuntimeValue::Hash(entries)) = args.first() {
-                    let mut items: Vec<(String, RuntimeValue)> = entries.clone();
+                if let RuntimeValue::Hash(entries) = self.hash_consuming_arg(raw_args, args, 0, ctx)
+                {
+                    let mut items: Vec<(String, RuntimeValue)> = entries;
                     items.sort_by(|(ak, _), (bk, _)| ak.cmp(bk));
                     Ok(RuntimeValue::Array(
                         items.into_iter().map(|(_, v)| v).collect(),
@@ -3066,14 +3132,16 @@ impl Engine {
                 }
             }
             "count_keys" => {
-                if let Some(RuntimeValue::Hash(entries)) = args.first() {
+                if let RuntimeValue::Hash(entries) = self.hash_consuming_arg(raw_args, args, 0, ctx)
+                {
                     Ok(RuntimeValue::Number(entries.len() as f64))
                 } else {
                     Ok(RuntimeValue::Number(0.0))
                 }
             }
             "has_key" => {
-                if let Some(RuntimeValue::Hash(entries)) = args.first() {
+                if let RuntimeValue::Hash(entries) = self.hash_consuming_arg(raw_args, args, 0, ctx)
+                {
                     let key = args.get(1).map(|a| a.to_str()).unwrap_or_default();
                     Ok(RuntimeValue::Bool(entries.iter().any(|(k, _)| k == &key)))
                 } else {
@@ -3084,7 +3152,7 @@ impl Engine {
                 if args.len() >= 2 {
                     let path = args[1].to_str();
                     // Walk: container{path} → scalar
-                    match &args[0] {
+                    match self.hash_consuming_arg(raw_args, args, 0, ctx) {
                         RuntimeValue::Hash(entries) => Ok(entries
                             .iter()
                             .find(|(k, _)| k == &path)
@@ -3098,10 +3166,11 @@ impl Engine {
             }
             "flat_hash" => {
                 let mut entries = Vec::new();
-                for arg in args {
+                for index in 0..args.len() {
+                    let arg = self.hash_consuming_arg(raw_args, args, index, ctx);
                     match arg {
                         RuntimeValue::Hash(h_entries) => {
-                            for (k, v) in h_entries {
+                            for (k, v) in &h_entries {
                                 entries.push((k.clone(), v.clone()));
                             }
                         }

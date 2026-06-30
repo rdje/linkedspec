@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.4.1 — Rust helper-context bare aggregate argument parity landed**
+  (RUST RUNTIME + ORACLE + BOOK/KM). Rust now treats bare working-variable names as typed aggregate snapshots
+  only in helper argument slots whose callee contract already implies a hash or array, closing the audited
+  `merge_hash(hash_copy(base), overlay)` mismatch and the matching array-helper surface without changing
+  ordinary bare-variable scalar reads. Focused runtime locks cover the merge case, the broader hash/object
+  helper family (`set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `has_key`, `scalaref`,
+  `flat_hash`), and the array helper family (`sorted`, `reversed`, `first`, `last`, `take`, `drop_front`,
+  `contains`, `index_of`, `num_sum`, `flat_array`). `tools/gen_oracle_corpus.pl` added
+  `terse_2_3_4_1_bare_hash_helper_arg_composition` and
+  `terse_2_3_4_1_bare_array_helper_arg_composition`; Rust `corpus_oracle` now passes with **44 fixtures**.
+  **Verification:** focused Rust runtime `terse_2_3_4_1` PASS; oracle regeneration PASS; Rust
+  `corpus_oracle` PASS over 44 fixtures. Full gates are recorded in the commit workflow.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.4.2`** (Perl inline-composite value-control lowering).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.4 — full composability audit split**
   (AUDIT/TREE/BOOK/KM + ORACLE FIXTURE; **no runtime behavior change**). Pure value-helper nesting is now
   locked by the new `terse_2_3_4_deep_pure_helper_composition` oracle fixture:

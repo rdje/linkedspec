@@ -1858,3 +1858,56 @@ fn terse_2_3_3_3_2_action_edge_fluent_flow_return_undef_false_branch() {
         "inactive fluent .if branch skips push and active else return_undef closes the edge"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.4.1 — Rust aggregate-helper bare args:
+
+#[test]
+fn terse_2_3_4_1_bare_hash_merge_arg_matches_wrapped() {
+    let bare = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(hash_copy(base), overlay))))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(bare, "xhello");
+    assert_eq!(
+        actual,
+        serde_json::json!([2]),
+        "merge_hash(hash_copy(base), overlay) reads overlay as a hash snapshot"
+    );
+    assert_eq!(
+        actual,
+        build_and_run(wrapped, "xhello"),
+        "bare hash helper argument matches the explicit hash(overlay) wrapper"
+    );
+}
+
+#[test]
+fn terse_2_3_4_1_hash_consumers_accept_bare_hash_arg() {
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"b\", 2); set_key(meta, \"a\", 1); set_key(extra, \"c\", 3); return(array(sorted_keys(set_key(meta, \"c\", 3)), sorted_keys(rename_key(meta, \"a\", \"aa\")), sorted_keys(drop_keys(meta, \"b\")), sorted_keys(pick_keys(meta, \"a\")), has_key(meta, \"a\"), scalaref(meta, \"b\"), count_keys(flat_hash(meta, extra)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["a", "b", "c"], ["aa", "b"], ["a"], ["a"], true, 2, 3]]),
+        "hash-consuming helper slots read bare hash working variables as snapshots"
+    );
+}
+
+#[test]
+fn terse_2_3_4_1_array_consumers_accept_bare_array_arg() {
+    let grammar = "Top::\n /x/ -> Done { items += \"b\"; items += \"a\"; nums += 1; nums += 2; extra += \"c\"; return(array(sorted(items), reversed(items), first(items), last(items), take(items, 1), take_last(items, 1), drop_front(items), drop_back(items), slice(items, 1, 1), contains(items, \"a\"), index_of(items, \"a\"), num_sum(nums), flat_array(items, extra))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[
+            ["a", "b"],
+            ["a", "b"],
+            "b",
+            "a",
+            ["b"],
+            ["a"],
+            ["a"],
+            ["b"],
+            ["a"],
+            true,
+            1,
+            3,
+            ["b", "a", "c"]
+        ]]),
+        "array-consuming helper slots read bare array working variables as snapshots"
+    );
+}

@@ -639,14 +639,41 @@ SPEC
     # The supported "function in any argument position at any depth" subset is
     # pure value-helper composition. Hash working variables are initialized with
     # mutation statements, then the return expression composes value-helper
-    # layers without a raw host-language fallback. The second merge input uses
-    # the explicit `hash(...)` wrapper because bare hash argument reads in that
-    # nested helper slot are split to SPEC-FORMAT-TERSE.2.3.4.1.
+    # layers without a raw host-language fallback. This fixture preserves the
+    # explicit `hash(...)` wrapper from the audit lock; SPEC-FORMAT-TERSE.2.3.4.1
+    # below locks the now-supported bare aggregate helper argument forms separately.
     {   case   => 'terse_2_3_4_deep_pure_helper_composition',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
  /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    # ── SPEC-FORMAT-TERSE.2.3.4.1 — Rust helper-context aggregate bare reads ──
+    #
+    # Hash-consuming and array-consuming helper argument slots may use a bare
+    # working variable name where the callee contract implies that aggregate
+    # value. This is deliberately narrower than global bare-variable evaluation:
+    # ordinary `Expr::Variable` still reads scalar state, while helper-specific
+    # aggregate slots snapshot hashes or arrays only where their contract says so.
+    {   case   => 'terse_2_3_4_1_bare_hash_helper_arg_composition',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(hash_copy(base), overlay))))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
+    {   case   => 'terse_2_3_4_1_bare_array_helper_arg_composition',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { items += "b"; items += "a"; return(count(drop_front(sorted(items)))) }
 
 Done::
  /[a-z]+/

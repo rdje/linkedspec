@@ -1096,14 +1096,18 @@ These helpers read from the **current match** — the regex capture that trigger
 ### Composition Guarantee
 Pure value helpers support **unlimited nested composition**. Example:
 ```
-count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))
+count(drop_front(sorted_keys(merge_hash(hash_copy(base), overlay))))
 ```
 Any portable pure helper that accepts an array can receive the output of an array-returning helper. Any
-portable pure helper that accepts a scalar can receive the output of a scalar-returning helper. Use explicit
-aggregate wrappers such as `array(name)` / `hash(name)` in nested helper argument positions unless the helper's
-contract says a bare aggregate read is accepted there. Statement forms (`name = value`, `items += value`,
-`set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value expressions, and inline value
-`if`/`switch` remains non-portable until the Perl reference value-lowering gap is closed.
+portable pure helper that accepts a scalar can receive the output of a scalar-returning helper. Hash-consuming
+helper argument slots accept bare hash working variables as snapshots, so `merge_hash(hash_copy(base), overlay)`
+is equivalent to the explicit `hash(overlay)` form. Array-consuming helper argument slots likewise accept bare
+array working variables as snapshots, so `count(drop_front(sorted(items)))` is portable. Use explicit aggregate
+wrappers such as `array(name)` / `hash(name)` anywhere a helper contract does not say a bare aggregate read is
+accepted. Statement forms
+(`name = value`, `items += value`, `set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value
+expressions, and inline value `if`/`switch` remains non-portable until the Perl reference value-lowering gap is
+closed.
 
 ### Fluent / Block Equivalence
 For the locked ordinary helper families, structured-block form (`I { declare(...) }`) and compact
