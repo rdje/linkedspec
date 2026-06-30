@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.3.1 — implement Rust action-edge fluent continuations
+
+**Scope:** Rust parser/compiler/runtime action-edge fluent metadata and execution, focused Rust locks, mdBook
+wording, Knowledge Map, task tree, roadmap tracker, and live continuity docs.
+
+**What changed:** Rust now preserves fluent chains after `->` action edges through `ActionEdge` and compiled
+`AcodeEntry` metadata. Runtime dispatch executes the accepted Perl-reference no-arg continuation surface:
+`.push` dispatches the matched child and appends its return value to the current rule accumulator, while
+`.return(expr)` and `.return_undef` return through the current rule/action channel without forcing a recursive
+close-edge child dispatch. Child return events are suppressed from the shared engine accumulator during
+action-edge `.push`, matching the parent-visible action-edge return channel instead of leaking child events.
+
+**Oracle triage:** The `tclite` fixtures remain deferred. This slice removed the action-edge fluent blocker, but
+the shipped spec still depends on compact lifecycle/body fluent forms such as `I.return(...)` and on the
+separate default-mode repetition parity gap. Those are owned by the follow-on `.2.3.3.x` leaves rather than
+folded into this action-edge slice.
+
+**Validation:** Focused Rust core `fluent_chain` PASS; focused Rust runtime `terse_2_3_3_1` PASS; full Rust
+core package PASS; full Rust runtime package PASS; mdBook build PASS; Knowledge Map, memory, doctrine, and
+diff checks PASS; full local CI PASS (`Files=1, Tests=994`).
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.2 — lock lifecycle value drop return channel
 
 **Scope:** Perl phase0 lifecycle semantics locks, Rust focused runtime locks, mdBook lifecycle/value-block

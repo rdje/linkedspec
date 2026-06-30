@@ -1691,7 +1691,8 @@ fn terse_2_3_2_lifecycle_statement_values_are_discarded() {
 
 #[test]
 fn terse_2_3_2_lifecycle_return_records_surrounding_rule_return() {
-    let grammar = "Top::\n I { return(\"from_i\"); set(out, \"after\") }\n /x/\n E { return(out) }\n";
+    let grammar =
+        "Top::\n I { return(\"from_i\"); set(out, \"after\") }\n /x/\n E { return(out) }\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!(["from_i", "after"]),
@@ -1706,5 +1707,40 @@ fn terse_2_3_2_expression_block_return_inside_lifecycle_stays_local() {
         build_and_run(grammar, "x"),
         serde_json::json!([{"after": "continued", "out": "block"}]),
         "return(expr) inside an expression-valued block does not write the rule return channel"
+    );
+}
+
+// ── SPEC-FORMAT-TERSE.2.3.3.1 — Rust action-edge fluent continuations:
+// no-arg `.push` dispatches the child and appends the child return to the
+// current rule's same-named accumulator; `.return(expr)` returns the expression
+// for the triggering edge without forcing a recursive close-edge dispatch.
+
+#[test]
+fn terse_2_3_3_1_action_edge_fluent_push_appends_child_return() {
+    let grammar = "top::\n -> item .push\n E { return(array_copy(array(top))) }\n\nitem:\n /x/\n I { return(entry_text()) }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([["x"]]),
+        "action-edge .push appends the child return without leaking the child return event"
+    );
+}
+
+#[test]
+fn terse_2_3_3_1_action_edge_fluent_return_closes_recursive_rule() {
+    let grammar = "top::\n -> box .push\n E { return(array_copy(array(top))) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", array_copy(array(box))))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
+    assert_eq!(
+        build_and_run(grammar, "[x]"),
+        serde_json::json!([[["?box:", ["x"]]]]),
+        "action-edge .return(expr) returns the current rule payload at the close edge"
+    );
+}
+
+#[test]
+fn terse_2_3_3_1_action_edge_fluent_return_undef_skips_accumulator() {
+    let grammar = "top::\n -> item .return_undef\n\nitem:\n /x/\n I { return(entry_text()) }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([]),
+        "action-edge .return_undef returns undef without adding an accumulator event"
     );
 }

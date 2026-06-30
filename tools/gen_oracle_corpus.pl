@@ -69,15 +69,15 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 # a regex on a rule's header line (`name : /re/`, or a `/open/ /close/` pair) was
 # swallowed by the mode-suffix group and dropped, so the rule compiled as 0
 # (pair: 1) regexes; now they register correctly. But it is NOT SUFFICIENT for
-# tclite: the oracle proved a SECOND, independent blocker.
+# tclite: the oracle proved additional independent blockers beyond header-line regexes.
 #
-#   tclite (→ RUST-PARITY.7.5.3): accumulates via fluent continuations on ACTION
-#   edges — `-> command_subst .push`, `-> command_subst[1] .return(...)`. The Rust
-#   parser only attaches a `.method` fluent chain to a BLIND edge (`=>`); after a
-#   `->` edge the `.push`/`.return(...)` becomes a standalone FluentChain element
-#   the compiler discards, so the edges dispatch but never accumulate/return and
-#   tclite still yields `[]`. Re-enable once .7.5.3 (action-edge fluent lowering)
-#   lands.
+#   tclite (→ RUST-PARITY.7.5.3 / SPEC-FORMAT-TERSE.2.3.3): originally exposed
+#   dropped fluent continuations on ACTION edges (`-> command_subst .push`,
+#   `-> command_subst[1] .return(...)`). SPEC-FORMAT-TERSE.2.3.3.1 landed the
+#   no-arg action-edge subset on Rust, but the shipped spec still depends on
+#   compact lifecycle/body fluent forms such as `I.return(...)` and on the
+#   default-mode recursive repetition gap. Keep these cases out until those
+#   separate blockers close.
 #     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
 #     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
 #

@@ -60,9 +60,7 @@ impl RuntimeValue {
                 }
             }
             Self::Bool(b) => serde_json::Value::Bool(*b),
-            Self::Array(arr) => {
-                serde_json::Value::Array(arr.iter().map(|v| v.to_json()).collect())
-            }
+            Self::Array(arr) => serde_json::Value::Array(arr.iter().map(|v| v.to_json()).collect()),
             Self::Hash(entries) => {
                 let mut map = serde_json::Map::new();
                 for (k, v) in entries {
@@ -109,8 +107,11 @@ impl RuntimeValue {
         match self {
             Self::Scalar(s) => s.clone(),
             Self::Number(n) => {
-                if n.fract() == 0.0 { format!("{}", *n as i64) }
-                else { format!("{n}") }
+                if n.fract() == 0.0 {
+                    format!("{}", *n as i64)
+                } else {
+                    format!("{n}")
+                }
             }
             Self::Bool(b) => (if *b { "1" } else { "0" }).to_string(),
             Self::Undef => String::new(),
@@ -146,8 +147,11 @@ impl RuntimeValue {
             Self::Undef => 0,
             Self::Scalar(s) => s.len(),
             Self::Number(n) => {
-                if n.fract() == 0.0 { format!("{}", *n as i64).len() }
-                else { format!("{n}").len() }
+                if n.fract() == 0.0 {
+                    format!("{}", *n as i64).len()
+                } else {
+                    format!("{n}").len()
+                }
             }
             Self::Bool(_) => 1,
             Self::Array(a) => a.len(),
@@ -168,14 +172,19 @@ impl std::fmt::Display for RuntimeValue {
             Self::Undef => write!(f, "undef"),
             Self::Scalar(s) => write!(f, "{s}"),
             Self::Number(n) => {
-                if n.fract() == 0.0 { write!(f, "{}", *n as i64) }
-                else { write!(f, "{n}") }
+                if n.fract() == 0.0 {
+                    write!(f, "{}", *n as i64)
+                } else {
+                    write!(f, "{n}")
+                }
             }
             Self::Bool(b) => write!(f, "{b}"),
             Self::Array(a) => {
                 write!(f, "[")?;
                 for (i, v) in a.iter().enumerate() {
-                    if i > 0 { write!(f, ", ")?; }
+                    if i > 0 {
+                        write!(f, ", ")?;
+                    }
                     write!(f, "{v}")?;
                 }
                 write!(f, "]")
@@ -183,7 +192,9 @@ impl std::fmt::Display for RuntimeValue {
             Self::Hash(h) => {
                 write!(f, "{{")?;
                 for (i, (k, v)) in h.iter().enumerate() {
-                    if i > 0 { write!(f, ", ")?; }
+                    if i > 0 {
+                        write!(f, ", ")?;
+                    }
                     write!(f, "{k}: {v}")?;
                 }
                 write!(f, "}}")
@@ -200,6 +211,7 @@ impl std::fmt::Display for RuntimeValue {
 /// - which regex slot of the *child* rule to enter (`child_regex_idx`, from `-> child[N]`)
 /// - whether this edge was anchored to a parent `/regex/` or is edge-only
 /// - optional lifecycle code to execute after the child returns
+/// - optional fluent continuation methods attached to the edge
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AcodeEntry {
     /// Index of the regex pattern in this rule's alternation that triggers this edge.
@@ -213,6 +225,10 @@ pub struct AcodeEntry {
     pub child_regex_idx: usize,
     /// Optional code block to execute after child dispatch.
     pub code: Option<crate::expr::CodeBlock>,
+    /// Optional fluent chain on the edge (`-> rule .push`, `-> rule[1] .return(...)`).
+    /// Each entry is (method_name, args_string).
+    #[serde(default)]
+    pub fluent_chain: Vec<(String, String)>,
     /// True if this edge immediately follows a `/regex/` element in the rule body
     /// (i.e. it is "anchored" to a parent regex). False for edge-only entries that
     /// need child-regex resolution during post-processing.
@@ -259,13 +275,13 @@ pub struct CompiledRule {
     /// Blind-call dispatch: ordered list of entries for `=> child` edges.
     pub bcode_dispatch: Vec<BcodeEntry>,
     /// Lifecycle blocks with parsed expression trees.
-    pub preamble: Option<crate::expr::CodeBlock>,    // I-block
-    pub lxcode: Option<crate::expr::CodeBlock>,      // LX-block (no-match exit)
-    pub lscode: Option<crate::expr::CodeBlock>,      // LS-block (loop start)
-    pub lecode: Option<crate::expr::CodeBlock>,      // LE-block (loop end)
-    pub ecode: Option<crate::expr::CodeBlock>,       // E-block (exit)
-    pub excode: Option<crate::expr::CodeBlock>,      // EX-block (exhaustion)
-    pub itcode: Option<crate::expr::CodeBlock>,      // IT-block (per-iteration)
+    pub preamble: Option<crate::expr::CodeBlock>, // I-block
+    pub lxcode: Option<crate::expr::CodeBlock>, // LX-block (no-match exit)
+    pub lscode: Option<crate::expr::CodeBlock>, // LS-block (loop start)
+    pub lecode: Option<crate::expr::CodeBlock>, // LE-block (loop end)
+    pub ecode: Option<crate::expr::CodeBlock>,  // E-block (exit)
+    pub excode: Option<crate::expr::CodeBlock>, // EX-block (exhaustion)
+    pub itcode: Option<crate::expr::CodeBlock>, // IT-block (per-iteration)
     /// Repetition bounds.
     pub rep_min: Option<usize>,
     pub rep_max: Option<usize>,

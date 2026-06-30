@@ -147,6 +147,17 @@ This lowers through the same helper surface as the block form:
 
 Use chains when they stay short. Use blocks when the rule contains branching, multiple updates, or examples meant to teach the shape.
 
+No-arg action-edge continuations are also portable:
+
+```text
+-> Item .push
+-> Item[1] .return(array("?items:", array_copy(array(Item))))
+```
+
+`-> Item .push` dispatches the matched child and appends the child rule return to the
+current rule accumulator named after the current rule. `-> Item[1] .return(expr)` returns
+`expr` for that action edge without separately dispatching the close-edge child.
+
 ## Empty action edges
 
 An empty action edge is a compact call shape:

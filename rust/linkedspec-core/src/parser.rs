@@ -103,7 +103,16 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
         let is_top = colon == "::";
         let mode = parse_mode_suffix(mode_raw);
 
-        Ok(Some((RuleHeader { label, is_top, mode, rest, line: i + 1 }, i + 1)))
+        Ok(Some((
+            RuleHeader {
+                label,
+                is_top,
+                mode,
+                rest,
+                line: i + 1,
+            },
+            i + 1,
+        )))
     } else {
         Ok(None)
     }
@@ -141,13 +150,21 @@ fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
     let base = caps.get(1)?.as_str();
     let min_str = caps.get(2)?.as_str();
     let max_str = caps.get(3).map(|m| m.as_str());
-    let min: usize = if min_str.is_empty() { 0 } else { min_str.parse().ok()? };
+    let min: usize = if min_str.is_empty() {
+        0
+    } else {
+        min_str.parse().ok()?
+    };
     let max: Option<usize> = match max_str {
         None => Some(min),
         Some("") => None,
         Some(s) => {
             let m: usize = s.parse().ok()?;
-            if m >= min { Some(m) } else { return None; }
+            if m >= min {
+                Some(m)
+            } else {
+                return None;
+            }
         }
     };
     Some((base, min, max))
@@ -163,9 +180,13 @@ fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
 /// conditional markers, and fluent chains.
 fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
     let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
-    let re_action = Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
+    let re_action =
+        Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
     let re_blind = Regex::compile(r"^=>[ \t]+(\w+)").unwrap();
-    let re_split = Regex::compile(r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))").unwrap();
+    let re_split = Regex::compile(
+        r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))",
+    )
+    .unwrap();
     let re_conditional = Regex::compile(r"^-\?[ \t]+\w+").unwrap();
     let re_fluent = Regex::compile(r"^\.[ \t]*\w+").unwrap();
 
@@ -194,21 +215,31 @@ fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
         if let Some(caps) = re_action.captures(&trimmed) {
             let full_match = caps.get(0).unwrap();
             let targets_str = caps.get(1).unwrap().as_str();
-            let index: usize = caps.get(3)
+            let index: usize = caps
+                .get(3)
                 .map(|m| m.as_str().parse().unwrap_or(0))
                 .unwrap_or(0);
             let targets: Vec<EdgeTarget> = targets_str
                 .split('|')
                 .map(|t| t.trim())
                 .filter(|t| !t.is_empty())
-                .map(|label| EdgeTarget { label: label.to_string(), index })
+                .map(|label| EdgeTarget {
+                    label: label.to_string(),
+                    index,
+                })
                 .collect();
+            let rest = trimmed[full_match.end()..].to_string();
+            let (fluent_chain, remainder) = parse_fluent_chain_with_remainder(&rest);
             elements.push(BodyElement::new(
-                BodyElementKind::ActionEdge { targets, code: None },
+                BodyElementKind::ActionEdge {
+                    targets,
+                    code: None,
+                    fluent_chain,
+                },
                 full_match.as_str(),
                 line_num,
             ));
-            remaining = trimmed[full_match.end()..].to_string();
+            remaining = remainder;
             continue;
         }
 
@@ -216,7 +247,11 @@ fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
             let full_match = caps.get(0).unwrap();
             let target = caps.get(1).unwrap().as_str().to_string();
             elements.push(BodyElement::new(
-                BodyElementKind::BlindEdge { target, code: None, fluent_chain: Vec::new() },
+                BodyElementKind::BlindEdge {
+                    target,
+                    code: None,
+                    fluent_chain: Vec::new(),
+                },
                 full_match.as_str(),
                 line_num,
             ));
@@ -238,7 +273,11 @@ fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
 
         if let Some(caps) = re_conditional.captures(&trimmed) {
             let full_match = caps.get(0).unwrap();
-            let word = caps.get(1).unwrap_or_else(|| caps.get(0).unwrap()).as_str().to_string();
+            let word = caps
+                .get(1)
+                .unwrap_or_else(|| caps.get(0).unwrap())
+                .as_str()
+                .to_string();
             elements.push(BodyElement::new(
                 BodyElementKind::Conditional { word },
                 full_match.as_str(),
@@ -299,7 +338,9 @@ fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
         if elements.is_empty() {
             // Unrecognized — capture as raw (validator will catch issues)
             body.push(BodyElement::new(
-                BodyElementKind::Raw { text: trimmed.to_string() },
+                BodyElementKind::Raw {
+                    text: trimmed.to_string(),
+                },
                 trimmed,
                 line_num,
             ));
@@ -329,7 +370,8 @@ fn parse_body_elements(lines: &[&str], i: &mut usize) -> Vec<BodyElement> {
             break;
         }
 
-        if let Some((element, rest, advanced)) = parse_single_element(&trimmed, lines, i, line_num) {
+        if let Some((element, rest, advanced)) = parse_single_element(&trimmed, lines, i, line_num)
+        {
             elements.push(element);
             remaining = rest;
             if advanced {
@@ -371,10 +413,14 @@ fn parse_single_element(
 ) -> Option<(BodyElement, String, bool)> {
     // Regex patterns for classification (order matters!)
     let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
-    let re_action = Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
+    let re_action =
+        Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
     let re_blind = Regex::compile(r"^=>[ \t]+(\w+)").unwrap();
     let re_lifecycle = Regex::compile(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
-    let re_split = Regex::compile(r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))").unwrap();
+    let re_split = Regex::compile(
+        r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))",
+    )
+    .unwrap();
     let re_conditional = Regex::compile(r"^-\?[ \t]+\w+").unwrap();
     let re_fluent = Regex::compile(r"^\.[ \t]*\w+").unwrap();
 
@@ -395,7 +441,8 @@ fn parse_single_element(
     if let Some(caps) = re_action.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let targets_str = caps.get(1).unwrap().as_str();
-        let index: usize = caps.get(3)
+        let index: usize = caps
+            .get(3)
             .map(|m| m.as_str().parse().unwrap_or(0))
             .unwrap_or(0);
 
@@ -403,7 +450,10 @@ fn parse_single_element(
             .split('|')
             .map(|t| t.trim())
             .filter(|t| !t.is_empty())
-            .map(|label| EdgeTarget { label: label.to_string(), index })
+            .map(|label| EdgeTarget {
+                label: label.to_string(),
+                index,
+            })
             .collect();
 
         let rest = trimmed[full_match.end()..].trim_start().to_string();
@@ -413,19 +463,28 @@ fn parse_single_element(
             let saved_i = *i;
             let (code, remainder) = consume_block_from_rest(lines, i, &rest)?;
             let elem = BodyElement::new(
-                BodyElementKind::ActionEdge { targets, code: Some(code) },
+                BodyElementKind::ActionEdge {
+                    targets,
+                    code: Some(code),
+                    fluent_chain: Vec::new(),
+                },
                 full_match.as_str(),
                 line_num,
             );
             let advanced = *i > saved_i;
             return Some((elem, remainder, advanced));
         } else {
+            let (fluent_chain, remainder) = parse_fluent_chain_with_remainder(&rest);
             let elem = BodyElement::new(
-                BodyElementKind::ActionEdge { targets, code: None },
+                BodyElementKind::ActionEdge {
+                    targets,
+                    code: None,
+                    fluent_chain,
+                },
                 full_match.as_str(),
                 line_num,
             );
-            return Some((elem, rest, false));
+            return Some((elem, remainder, false));
         }
     }
 
@@ -440,12 +499,16 @@ fn parse_single_element(
             let (c, rem) = consume_block_from_rest(lines, i, &rest)?;
             (Some(c), Vec::new(), *i > saved_i, rem)
         } else {
-            let chain = parse_fluent_chain(&rest);
-            (None, chain, false, rest)
+            let (chain, rem) = parse_fluent_chain_with_remainder(&rest);
+            (None, chain, false, rem)
         };
 
         let elem = BodyElement::new(
-            BodyElementKind::BlindEdge { target, code, fluent_chain },
+            BodyElementKind::BlindEdge {
+                target,
+                code,
+                fluent_chain,
+            },
             full_match.as_str(),
             line_num,
         );
@@ -462,7 +525,10 @@ fn parse_single_element(
             let saved_i = *i;
             let (code, remainder) = consume_block_from_rest(lines, i, &rest)?;
             let elem = BodyElement::new(
-                BodyElementKind::CodeBlock { lifecycle: marker.clone(), code },
+                BodyElementKind::CodeBlock {
+                    lifecycle: marker.clone(),
+                    code,
+                },
                 &format!("{} {{ {} }}", marker, trimmed),
                 line_num,
             );
@@ -522,11 +588,7 @@ fn parse_single_element(
     if trimmed.starts_with('{') {
         let saved_i = *i;
         let (code, remainder) = consume_block_from_rest(lines, i, trimmed)?;
-        let elem = BodyElement::new(
-            BodyElementKind::PlainBlock { code },
-            trimmed,
-            line_num,
-        );
+        let elem = BodyElement::new(BodyElementKind::PlainBlock { code }, trimmed, line_num);
         let advanced = *i > saved_i;
         return Some((elem, remainder, advanced));
     }
@@ -550,7 +612,9 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
     if depth == 0 {
         // Block closes on the same line
         let block_content = if remainder_scan.ends_with('}') {
-            remainder_scan[..remainder_scan.len()-1].trim().to_string()
+            remainder_scan[..remainder_scan.len() - 1]
+                .trim()
+                .to_string()
         } else {
             remainder_scan.trim().to_string()
         };
@@ -571,19 +635,23 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
         if depth == 0 {
             // Closing brace found on this line
             let strip_close = if line_scan.ends_with('}') {
-                &line_scan[..line_scan.len()-1]
+                &line_scan[..line_scan.len() - 1]
             } else {
                 line_scan
             };
             if !strip_close.trim().is_empty() {
-                if !content.is_empty() { content.push('\n'); }
+                if !content.is_empty() {
+                    content.push('\n');
+                }
                 content.push_str(strip_close.trim());
             }
             *i += 1;
             return Some((content.trim().to_string(), String::new()));
         }
         // Include the whole line
-        if !content.is_empty() { content.push('\n'); }
+        if !content.is_empty() {
+            content.push('\n');
+        }
         content.push_str(line.trim());
         *i += 1;
     }
@@ -610,6 +678,11 @@ fn scan_line_for_braces_chars<'a>(text: &'a str, depth: &mut i32) -> &'a str {
 
 /// Parse a fluent chain like `.method(args).method2(more_args)` into FluentCall list.
 fn parse_fluent_chain(text: &str) -> Vec<FluentCall> {
+    parse_fluent_chain_with_remainder(text).0
+}
+
+/// Parse a fluent chain and return the unconsumed suffix after the chain.
+fn parse_fluent_chain_with_remainder(text: &str) -> (Vec<FluentCall>, String) {
     let mut calls = Vec::new();
     let mut remaining = text.trim();
 
@@ -624,19 +697,28 @@ fn parse_fluent_chain(text: &str) -> Vec<FluentCall> {
 
         // Check for parenthesized args
         if remaining.starts_with('(') {
-            let args = extract_paren_content(remaining);
-            let close_idx = remaining.find(')').unwrap_or(remaining.len());
-            remaining = &remaining[close_idx + 1..];
-            calls.push(FluentCall { method, args: args.unwrap_or_default() });
+            if let Some((args, close_idx)) = extract_paren_content_with_end(remaining) {
+                remaining = remaining[close_idx + 1..].trim_start();
+                calls.push(FluentCall { method, args });
+            } else {
+                calls.push(FluentCall {
+                    method,
+                    args: String::new(),
+                });
+                remaining = "";
+            }
         } else {
-            calls.push(FluentCall { method, args: String::new() });
+            calls.push(FluentCall {
+                method,
+                args: String::new(),
+            });
         }
     }
-    calls
+    (calls, remaining.to_string())
 }
 
-/// Extract content between `(` and matching `)`.
-fn extract_paren_content(s: &str) -> Option<String> {
+/// Extract content between `(` and matching `)`, returning the close index too.
+fn extract_paren_content_with_end(s: &str) -> Option<(String, usize)> {
     if !s.starts_with('(') {
         return None;
     }
@@ -647,7 +729,7 @@ fn extract_paren_content(s: &str) -> Option<String> {
             ')' => {
                 depth -= 1;
                 if depth == 0 {
-                    return Some(s[1..idx].to_string());
+                    return Some((s[1..idx].to_string(), idx));
                 }
             }
             _ => {}
@@ -676,9 +758,16 @@ mod tests {
         assert_eq!(spec.rules.len(), 1);
         let body = &spec.rules[0].body;
         // Should have: Regex, CodeBlock(I), CodeBlock(E)
-        assert!(body.iter().any(|e| matches!(e.kind, BodyElementKind::Regex { .. })));
-        assert!(body.iter().any(|e| matches!(&e.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I")));
-        assert!(body.iter().any(|e| matches!(&e.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "E")));
+        assert!(
+            body.iter()
+                .any(|e| matches!(e.kind, BodyElementKind::Regex { .. }))
+        );
+        assert!(body.iter().any(
+            |e| matches!(&e.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I")
+        ));
+        assert!(body.iter().any(
+            |e| matches!(&e.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "E")
+        ));
     }
 
     #[test]
@@ -714,13 +803,72 @@ mod tests {
     fn parse_action_edge_with_block() {
         let src = "Top::\n /a/ -> Child {\n  return(42)\n}";
         let spec = parse_spec(src).unwrap();
-        let edge = spec.rules[0].body.iter().find(|e| {
-            matches!(&e.kind, BodyElementKind::ActionEdge { .. })
-        }).unwrap();
+        let edge = spec.rules[0]
+            .body
+            .iter()
+            .find(|e| matches!(&e.kind, BodyElementKind::ActionEdge { .. }))
+            .unwrap();
         match &edge.kind {
-            BodyElementKind::ActionEdge { targets, code } => {
+            BodyElementKind::ActionEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
                 assert_eq!(targets[0].label, "Child");
                 assert!(code.as_ref().unwrap().contains("return(42)"));
+                assert!(fluent_chain.is_empty());
+            }
+            _ => panic!("expected ActionEdge"),
+        }
+    }
+
+    #[test]
+    fn parse_action_edge_with_fluent_chain() {
+        let src = r#"Top::
+ -> Child .push
+ -> Child[1] .return(array("?child:", array_copy(array(Child))))
+
+Child: /x/ /y/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        assert_eq!(
+            top.body.len(),
+            2,
+            "fluent chains are consumed by action edges"
+        );
+
+        match &top.body[0].kind {
+            BodyElementKind::ActionEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
+                assert_eq!(targets[0].label, "Child");
+                assert_eq!(targets[0].index, 0);
+                assert!(code.is_none());
+                assert_eq!(fluent_chain.len(), 1);
+                assert_eq!(fluent_chain[0].method, "push");
+                assert_eq!(fluent_chain[0].args, "");
+            }
+            _ => panic!("expected ActionEdge"),
+        }
+
+        match &top.body[1].kind {
+            BodyElementKind::ActionEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
+                assert_eq!(targets[0].label, "Child");
+                assert_eq!(targets[0].index, 1);
+                assert!(code.is_none());
+                assert_eq!(fluent_chain.len(), 1);
+                assert_eq!(fluent_chain[0].method, "return");
+                assert_eq!(
+                    fluent_chain[0].args,
+                    r#"array("?child:", array_copy(array(Child)))"#
+                );
             }
             _ => panic!("expected ActionEdge"),
         }
@@ -755,8 +903,20 @@ mod tests {
             ("R2:OR+", RuleMode::OrPlus),
             ("R3::*", RuleMode::Star),
             ("R4:?", RuleMode::Optional),
-            ("R5:AND{2,4}", RuleMode::AndBounded { min: 2, max: Some(4) }),
-            ("R6:OR{3}", RuleMode::OrBounded { min: 3, max: Some(3) }),
+            (
+                "R5:AND{2,4}",
+                RuleMode::AndBounded {
+                    min: 2,
+                    max: Some(4),
+                },
+            ),
+            (
+                "R6:OR{3}",
+                RuleMode::OrBounded {
+                    min: 3,
+                    max: Some(3),
+                },
+            ),
             ("R7:&", RuleMode::Single),
             ("R8:|", RuleMode::Pipe),
         ];
@@ -770,9 +930,11 @@ mod tests {
     fn parse_blind_edge() {
         let src = "Top::\n /a/ => Child";
         let spec = parse_spec(src).unwrap();
-        let edge = spec.rules[0].body.iter().find(|e| {
-            matches!(&e.kind, BodyElementKind::BlindEdge { .. })
-        }).unwrap();
+        let edge = spec.rules[0]
+            .body
+            .iter()
+            .find(|e| matches!(&e.kind, BodyElementKind::BlindEdge { .. }))
+            .unwrap();
         match &edge.kind {
             BodyElementKind::BlindEdge { target, .. } => assert_eq!(target, "Child"),
             _ => panic!("expected BlindEdge"),
@@ -807,7 +969,11 @@ mod tests {
         // Before .7.5.1 the mode-suffix group `\S*` swallowed `/;/`, leaving the
         // rule with 0 regexes so every dispatch edge to it never fired.
         let spec = parse_spec("Top::\n -> semi\n\nsemi : /;/").unwrap();
-        let semi = spec.rules.iter().find(|r| r.header.label == "semi").unwrap();
+        let semi = spec
+            .rules
+            .iter()
+            .find(|r| r.header.label == "semi")
+            .unwrap();
         assert_eq!(
             regex_patterns_of(semi),
             vec![";".to_string()],

@@ -71,7 +71,11 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                 last_regex_line = Some(element.line);
             }
 
-            BodyElementKind::ActionEdge { targets, code } => {
+            BodyElementKind::ActionEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
                 // An edge is anchored iff it shares the same source line as
                 // the immediately preceding regex (same-line adjacency).
                 let has_parent = last_regex_line == Some(element.line);
@@ -81,20 +85,22 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                     0 // placeholder; post-processing fixes edge-only entries
                 };
 
-                let parsed_code = code
-                    .as_ref()
-                    .and_then(|c| {
-                        CodeBlock::parse(c)
-                            .map_err(|e| {
-                                // Log the parse failure but don't crash — the
-                                // validation layer should catch these earlier.
-                                eprintln!(
-                                    "warning: rule '{}': failed to parse action code: {e}",
-                                    rule.header.label
-                                );
-                            })
-                            .ok()
-                    });
+                let parsed_code = code.as_ref().and_then(|c| {
+                    CodeBlock::parse(c)
+                        .map_err(|e| {
+                            // Log the parse failure but don't crash — the
+                            // validation layer should catch these earlier.
+                            eprintln!(
+                                "warning: rule '{}': failed to parse action code: {e}",
+                                rule.header.label
+                            );
+                        })
+                        .ok()
+                });
+                let fluent: Vec<(String, String)> = fluent_chain
+                    .iter()
+                    .map(|fc| (fc.method.clone(), fc.args.clone()))
+                    .collect();
 
                 for target in targets {
                     let child_regex_idx = target.index; // from `-> rule[N]`
@@ -103,6 +109,7 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                         child_label: target.label.clone(),
                         child_regex_idx,
                         code: parsed_code.clone(),
+                        fluent_chain: fluent.clone(),
                         has_parent_regex: has_parent,
                     });
                 }
@@ -165,17 +172,27 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
             }
 
             // Lifecycle markers without code blocks — reset adjacency tracking.
-            BodyElementKind::LifecycleMarker { .. } => { last_regex_line = None; }
+            BodyElementKind::LifecycleMarker { .. } => {
+                last_regex_line = None;
+            }
             // Fluent chains on action edges are handled by attaching code to the
             // action edge itself — they're already in the ActionEdge.code field.
-            BodyElementKind::FluentChain { .. } => { last_regex_line = None; }
+            BodyElementKind::FluentChain { .. } => {
+                last_regex_line = None;
+            }
             // Conditional markers (`-? word`) are consumed by the runtime.
-            BodyElementKind::Conditional { .. } => { last_regex_line = None; }
+            BodyElementKind::Conditional { .. } => {
+                last_regex_line = None;
+            }
             // Split markers (@capture_slice, @mark) are consumed by the runtime
             // during regex matching — no compile-time action needed.
-            BodyElementKind::SplitMarker { .. } => { last_regex_line = None; }
+            BodyElementKind::SplitMarker { .. } => {
+                last_regex_line = None;
+            }
             // Plain code blocks and raw text are unexpected at compile time.
-            BodyElementKind::PlainBlock { .. } | BodyElementKind::Raw { .. } => { last_regex_line = None; }
+            BodyElementKind::PlainBlock { .. } | BodyElementKind::Raw { .. } => {
+                last_regex_line = None;
+            }
         }
     }
 
@@ -264,9 +281,8 @@ pub fn build_dependency_regex_map(spec: &mut CompiledSpec) -> Result<()> {
         if res.child_label == rule_label {
             let parent_count = spec.rules[res.rule_idx].regex_patterns.len();
             if res.child_regex_idx < parent_count {
-                spec.rules[res.rule_idx]
-                    .acode_dispatch[res.entry_idx]
-                    .regex_idx = res.child_regex_idx;
+                spec.rules[res.rule_idx].acode_dispatch[res.entry_idx].regex_idx =
+                    res.child_regex_idx;
             } else {
                 eprintln!(
                     "warning: rule '{}': self-recursive entry '-> {}[{}]' \
@@ -288,10 +304,7 @@ pub fn build_dependency_regex_map(spec: &mut CompiledSpec) -> Result<()> {
                 eprintln!(
                     "warning: rule '{}': edge-only entry '-> {}[{}]' \
                      references unknown rule '{}' — entry will never fire",
-                    rule_label,
-                    res.child_label,
-                    res.child_regex_idx,
-                    res.child_label
+                    rule_label, res.child_label, res.child_regex_idx, res.child_label
                 );
                 continue;
             }
@@ -312,8 +325,7 @@ pub fn build_dependency_regex_map(spec: &mut CompiledSpec) -> Result<()> {
             continue;
         }
 
-        let resolved_pattern =
-            child.regex_patterns[res.child_regex_idx].clone();
+        let resolved_pattern = child.regex_patterns[res.child_regex_idx].clone();
         let rule = &mut spec.rules[res.rule_idx];
         let new_regex_idx = rule.regex_patterns.len();
         rule.regex_patterns.push(resolved_pattern);
@@ -345,8 +357,8 @@ mod tests {
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         assert!(compiled.rules[0].preamble.is_some()); // I-block
-        assert!(compiled.rules[0].lecode.is_some());    // LE-block
-        assert!(compiled.rules[0].ecode.is_some());     // E-block
+        assert!(compiled.rules[0].lecode.is_some()); // LE-block
+        assert!(compiled.rules[0].ecode.is_some()); // E-block
     }
 
     #[test]
@@ -446,6 +458,24 @@ mod tests {
         assert_eq!(rule.bcode_dispatch[0].fluent_chain.len(), 1);
         assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].0, "declare");
         assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].1, "scalar, name");
+    }
+
+    #[test]
+    fn compile_spec_with_fluent_chain_action_edge() {
+        let src =
+            "Wrapper::\n -> child .push\n -> child[1] .return(array(\"done\"))\n\nchild: /x/ /y/";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let rule = &compiled.rules[0];
+        assert_eq!(rule.acode_dispatch.len(), 2);
+        assert_eq!(rule.acode_dispatch[0].child_label, "child");
+        assert_eq!(rule.acode_dispatch[0].fluent_chain.len(), 1);
+        assert_eq!(rule.acode_dispatch[0].fluent_chain[0].0, "push");
+        assert_eq!(rule.acode_dispatch[0].fluent_chain[0].1, "");
+        assert_eq!(rule.acode_dispatch[1].child_regex_idx, 1);
+        assert_eq!(rule.acode_dispatch[1].fluent_chain.len(), 1);
+        assert_eq!(rule.acode_dispatch[1].fluent_chain[0].0, "return");
+        assert_eq!(rule.acode_dispatch[1].fluent_chain[0].1, "array(\"done\")");
     }
 
     // ── build_dependency_regex_map tests ──
@@ -588,8 +618,11 @@ mod tests {
                 // Verify serde roundtrip
                 let json = serde_json::to_string(&compiled).unwrap();
                 let _back: CompiledSpec = serde_json::from_str(&json).unwrap();
-                assert!(!compiled.rules.is_empty(),
-                    "compiled spec {} has no rules", path.display());
+                assert!(
+                    !compiled.rules.is_empty(),
+                    "compiled spec {} has no rules",
+                    path.display()
+                );
                 // Every rule should have a label
                 for rule in &compiled.rules {
                     assert!(!rule.label.is_empty());

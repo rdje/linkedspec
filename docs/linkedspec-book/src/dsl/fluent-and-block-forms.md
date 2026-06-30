@@ -10,8 +10,10 @@ Round 2.
 Most ordinary LinkedSpec helper statements — declaration, assignment, push, return, and pure
 value helpers — can be written in either fluent or structured style. Block-bodied fluent control
 flow is a narrower surface: use the structured attached-block forms below for portable
-cross-backend block control; fluent block chains are documented as portable only after both
-backends preserve the same behavior.
+cross-backend block control. No-arg action-edge continuations such as `-> child .push` and
+`-> child[1] .return(expr)` are portable on the Perl reference and Rust. Fluent attached-block
+chains and compact lifecycle/body chains are documented as portable only after both backends
+preserve the same behavior.
 
 **Fluent style** chains calls on action edges with `.method()`:
 
@@ -149,9 +151,10 @@ The fluent equivalent chains the markers with dots:
   .endif;
 ```
 
-The parenthesized and bare marker spellings are the portable structured marker forms. Fluent
-marker chains are available on the Perl reference and are being locked separately before the book
-can present every action-edge fluent continuation as cross-backend portable.
+The parenthesized and bare marker spellings are the portable structured marker forms. No-arg
+action-edge `.push` / `.return(expr)` continuations are portable on the Perl reference and Rust.
+Fluent marker/block chains are still being locked separately before the book can present compact
+lifecycle/body fluent continuations as cross-backend portable.
 
 ### If family: attached blocks
 

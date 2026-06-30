@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.3.1 — Rust action-edge fluent continuations): Implemented the
+  action-edge subset without broadening into the rest of Rust fluent parity. Durable points. (1)
+  **Action-edge fluent continuations need a structured channel.** Rust now carries `-> child .method(...)`
+  chains on `ActionEdge` / `AcodeEntry` instead of letting them fall through as standalone `FluentChain` body
+  elements. (2) **No-arg `.push` uses the child return channel, not the child's accumulator event stream.** The
+  runtime dispatches the matched child, captures that child's rule return, truncates any child return event
+  leakage from the shared accumulator, and appends the captured value to the current rule accumulator. (3)
+  **Action-edge `.return(expr)` is a close-edge return, not another child dispatch.** The runtime evaluates the
+  payload in the current rule/action context and returns through the current rule channel. (4) **The tclite
+  oracle exposed later blockers.** Compact lifecycle/body fluent forms such as `I.return(...)` still parse as
+  standalone fluent chains the compiler drops, and shipped recursive default rules still need repetition parity;
+  both remain follow-on work.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.2 — lifecycle value/drop and return-channel lock): Landed the semantic
   lock without changing runtime behavior. Durable points. (1) **Lifecycle blocks are statement blocks.** A
   final ordinary statement can mutate state, but its value is discarded and is not an implicit rule return.

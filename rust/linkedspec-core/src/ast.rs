@@ -126,15 +126,15 @@ pub struct BodyElement {
 pub enum BodyElementKind {
     /// A regex literal: `/pattern/`
     #[serde(rename = "regex")]
-    Regex {
-        pattern: String,
-    },
+    Regex { pattern: String },
     /// An action edge: `-> Target` or `-> Target[N]` or `-> Target1 | Target2 { ... }`
     #[serde(rename = "action_edge")]
     ActionEdge {
         targets: Vec<EdgeTarget>,
         /// The attached code block, if present.
         code: Option<String>,
+        /// Fluent chain methods on this edge, if any.
+        fluent_chain: Vec<FluentCall>,
     },
     /// A blind-call edge: `=> Target` or `=> Target { ... }` or `=> Target .method() { ... }`
     #[serde(rename = "blind_edge")]
@@ -155,34 +155,22 @@ pub enum BodyElementKind {
     },
     /// A plain code block (no lifecycle marker): `{ ... }`
     #[serde(rename = "plain_block")]
-    PlainBlock {
-        code: String,
-    },
+    PlainBlock { code: String },
     /// A split marker: `@capture_slice`, `@mark(name)`, `@capture_from_here`, `@move_pos`
     #[serde(rename = "split_marker")]
-    SplitMarker {
-        marker: String,
-    },
+    SplitMarker { marker: String },
     /// A lifecycle marker without an attached block: bare `I`, `LS`, `LE`, etc.
     #[serde(rename = "lifecycle_marker")]
-    LifecycleMarker {
-        marker: String,
-    },
+    LifecycleMarker { marker: String },
     /// A fluent chain continuation: `.method(args).method2()`
     #[serde(rename = "fluent_chain")]
-    FluentChain {
-        calls: Vec<FluentCall>,
-    },
+    FluentChain { calls: Vec<FluentCall> },
     /// A conditional marker: `-? word`
     #[serde(rename = "conditional")]
-    Conditional {
-        word: String,
-    },
+    Conditional { word: String },
     /// A raw body line (fallback for unrecognized content — should not appear in valid specs).
     #[serde(rename = "raw")]
-    Raw {
-        text: String,
-    },
+    Raw { text: String },
 }
 
 /// A single edge target: `RuleName` or `RuleName[N]`.
@@ -201,7 +189,11 @@ pub struct FluentCall {
 
 impl BodyElement {
     pub fn new(kind: BodyElementKind, source: &str, line: usize) -> Self {
-        Self { kind, source: source.to_string(), line }
+        Self {
+            kind,
+            source: source.to_string(),
+            line,
+        }
     }
 }
 

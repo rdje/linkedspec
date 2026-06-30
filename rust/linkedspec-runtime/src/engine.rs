@@ -97,6 +97,12 @@ enum StatementBlockFlow {
     Returned,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum ActionEdgeFlow {
+    Continue,
+    Returned,
+}
+
 enum ValueBlockFlow {
     Continue,
     Returned(RuntimeValue),
@@ -399,16 +405,25 @@ impl Engine {
                 // ── Action-edge dispatch ──
                 for entry in &rule.acode_dispatch {
                     if entry.regex_idx == m.index {
-                        // Use child_regex_idx for multi-entrypoint support.
-                        // The child's return value becomes the parent's `retv`
-                        // (Runtime Semantics §3.3 / §6.1), readable by the
-                        // attached code below and the LE-block after the loop.
-                        let child_retv =
-                            self.execute_rule(&entry.child_label, entry.child_regex_idx, ctx)?;
-                        ctx.set_retv(child_retv);
-                        // Execute attached code if present
-                        if let Some(ref block) = entry.code {
-                            self.execute_block(block, ctx, label)?;
+                        if entry.fluent_chain.is_empty() {
+                            // Use child_regex_idx for multi-entrypoint support.
+                            // The child's return value becomes the parent's `retv`
+                            // (Runtime Semantics §3.3 / §6.1), readable by the
+                            // attached code below and the LE-block after the loop.
+                            let child_retv =
+                                self.execute_rule(&entry.child_label, entry.child_regex_idx, ctx)?;
+                            ctx.set_retv(child_retv);
+                            // Execute attached code if present
+                            if let Some(ref block) = entry.code {
+                                self.execute_block(block, ctx, label)?;
+                            }
+                        } else if self.execute_action_edge_fluent_chain(entry, ctx, label)?
+                            == ActionEdgeFlow::Returned
+                        {
+                            let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+                            ctx.restore_return_value(caller_return);
+                            saved_match.restore(ctx);
+                            return Ok(my_return);
                         }
                     }
                 }
@@ -475,6 +490,66 @@ impl Engine {
         ctx.restore_return_value(caller_return);
         saved_match.restore(ctx);
         Ok(my_return)
+    }
+
+    fn execute_action_edge_fluent_chain(
+        &self,
+        entry: &linkedspec_core::types::AcodeEntry,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<ActionEdgeFlow, String> {
+        for (method, args) in &entry.fluent_chain {
+            match method.as_str() {
+                "push" if args.trim().is_empty() => {
+                    let accumulator_len = ctx.accumulator.len();
+                    let child_retv =
+                        self.execute_rule(&entry.child_label, entry.child_regex_idx, ctx)?;
+                    ctx.accumulator.truncate(accumulator_len);
+                    ctx.set_retv(child_retv.clone());
+                    ctx.push_value(rule_label, child_retv);
+                }
+                "return" => {
+                    let value = self.eval_action_edge_fluent_return(args, ctx, rule_label)?;
+                    if self.spec.find(rule_label).is_some_and(|rule| rule.is_top) {
+                        ctx.push_accumulator(value.clone());
+                    }
+                    ctx.set_return_value(value);
+                    return Ok(ActionEdgeFlow::Returned);
+                }
+                "return_undef" => {
+                    ctx.set_return_value(RuntimeValue::Undef);
+                    return Ok(ActionEdgeFlow::Returned);
+                }
+                other => {
+                    return Err(format!(
+                        "action-edge fluent method '.{other}' is not supported yet"
+                    ));
+                }
+            }
+        }
+        Ok(ActionEdgeFlow::Continue)
+    }
+
+    fn eval_action_edge_fluent_return(
+        &self,
+        args: &str,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let code = if args.trim().is_empty() {
+            "return()".to_string()
+        } else {
+            format!("return({args})")
+        };
+        let block = linkedspec_core::expr::CodeBlock::parse(&code)?;
+        let Some(stmt) = block.statements.first() else {
+            return Ok(RuntimeValue::Undef);
+        };
+        match Self::return_call_payload(&stmt.expr) {
+            Some(Some(expr)) => self.eval_expr(expr, ctx, rule_label),
+            Some(None) => Ok(RuntimeValue::Undef),
+            None => Err(format!("failed to parse action-edge fluent return: {code}")),
+        }
     }
 
     /// Execute a lifecycle code block (parsed expression tree).
@@ -4226,11 +4301,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(entry_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi")
-            .last()
-            .unwrap()
-            .as_bool()
-            .unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -4287,11 +4364,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi")
-            .last()
-            .unwrap()
-            .as_bool()
-            .unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -4369,7 +4448,7 @@ ChildB:
             4.0
         ); // "cde" past nl → 4
         assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
-                                                                                 // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
+        // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
         assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);
     }
 

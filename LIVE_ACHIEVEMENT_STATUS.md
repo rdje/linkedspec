@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.3.1 — Rust action-edge fluent continuations landed**
+  (RUST PARSER + COMPILER + RUNTIME + BOOK/KM LOCKS). Rust now preserves fluent chains on `->` action edges
+  through AST and compiled `AcodeEntry` metadata. No-arg `.push` dispatches the matched child, captures its
+  rule return, suppresses child return-event leakage from the shared accumulator, and appends the value to the
+  current rule accumulator. `.return(expr)` and `.return_undef` return through the current rule/action channel
+  without recursively dispatching the close-edge child.
+  **Verification:** focused Rust core `fluent_chain` PASS; focused Rust runtime `terse_2_3_3_1` PASS; full Rust
+  core/runtime packages PASS; mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS
+  (`Files=1, Tests=994`). The `tclite` oracle remains deferred behind compact lifecycle/body fluent forms
+  (`I.return(...)`) and default-mode repetition parity, both tracked as follow-on work.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.3.2`** (Rust attached fluent block payloads for
+  `.when(cond) { ... }.otherwise { ... }`).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.2 — lifecycle value/drop return-channel lock landed**
   (PHASE0 + RUST RUNTIME + BOOK/KM LOCKS). Lifecycle blocks are now documented and regression-locked as
   statement blocks, not expression-valued blocks. Final ordinary statement values are discarded; top-level
