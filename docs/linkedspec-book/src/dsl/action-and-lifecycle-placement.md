@@ -293,6 +293,29 @@ Delimited::AND
 
 The `@mark(body_start)` marker is implemented as a later local-end placement update. That means an action on the same slot should not expect the newly written mark yet. Read it from a later slot.
 
+## Lifecycle blocks are statement blocks
+
+Lifecycle blocks execute statements for their side effects and return-channel writes. They do
+not yield the value of their final statement as an implicit block result.
+
+```text
+Top::
+ I {
+   set(out, "from_i");
+   set(ignored, "not_a_return");
+ }
+ /x/
+ E {
+   return(hash("out", scalar(out), "ignored", scalar(ignored)));
+ }
+```
+
+The final `set(ignored, ...)` statement mutates `ignored`, but the rule returns only because the
+later `E { return(...) }` block writes the return channel. A top-level lifecycle `return(expr)` is
+different from `return(expr)` inside an expression-valued block: the lifecycle form writes the
+surrounding rule/action return channel, while the expression-valued block form yields only that
+local block's value.
+
 ## `LX { ... }`: local no-match/failure path
 
 `LX { ... }` is the local no-match or local failure hook for handler paths that otherwise default to `return undef`.

@@ -55,6 +55,10 @@ order:
 | `LX` | Late Exit | After the rule completes (final cleanup/return) |
 
 A rule can use any subset of these blocks. Statements inside a block run in source order.
+Lifecycle blocks are statement blocks, not expression-valued blocks: the value of the
+last statement is discarded unless that statement is an explicit `return(...)`.
+Use `return(...)` when the lifecycle block is meant to write the surrounding rule
+return channel.
 
 ```text
 rule:AND+

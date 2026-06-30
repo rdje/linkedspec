@@ -39279,6 +39279,100 @@ subtest 'spec_format_terse_2_3_1_locks_perl_fluent_when_otherwise_block_chains' 
         }
     }
 };
+subtest 'spec_format_terse_2_3_2_locks_lifecycle_value_drop_and_return_channel' => sub {
+    plan tests => 33;
+
+    require JSON::PP;
+    my $json = JSON::PP->new->canonical(1)->allow_nonref(1);
+
+    my $assert_clean_meta = sub {
+        my ($meta, $label) = @_;
+        is($meta->{canonical_action_ir_fallback_count}, 0, "$label avoids RAW_PERL fallback");
+        is($meta->{raw_perl_dependency_count}, 0, "$label avoids raw Perl dependency");
+        is($meta->{unresolved_helper_count}, 0, "$label avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "$label remains language-agnostic ActionIR ready");
+        ok(
+            scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+            scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+            "$label reports canonical assignment and return metadata",
+        );
+    };
+
+    my $local_slot_source_spec = <<'SPEC';
+Top::&
+I { set(out, "I"); return(out) }
+LS { set(out, "LS"); return(out) }
+LE { set(out, "LE"); return(out) }
+LX { set(out, "LX"); return(out) }
+ /x/ -> Top { return(1) }
+SPEC
+    my $collection_source_spec = <<'SPEC';
+Top::*
+E { set(out, "E"); return(out) }
+EX { set(out, "EX"); return(out) }
+IT { set(out, "IT"); return(out) }
+ => Leaf
+
+Leaf::
+ /x/ I { return("leaf") }
+SPEC
+    my $local_slot_source = '';
+    my $collection_source = '';
+    ok(
+        eval { LinkedSpec::Get(\$local_slot_source_spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$local_slot_source); 1 },
+        'local lifecycle marker source-lock spec generates',
+    );
+    ok(
+        eval { LinkedSpec::Get(\$collection_source_spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$collection_source); 1 },
+        'collection lifecycle marker source-lock spec generates',
+    );
+    for my $marker (qw(I LS LE LX)) {
+        like($local_slot_source, qr/\$out = "$marker"/, "$marker structured lifecycle block lowers into generated source");
+    }
+    for my $marker (qw(E EX IT)) {
+        like($collection_source, qr/\$out = "$marker"/, "$marker structured lifecycle block lowers into generated source");
+    }
+
+    my @runtime_cases = (
+        {
+            label         => 'lifecycle final statement value is not a rule return',
+            spec          => qq{Top::\n I { set(out, "from_i"); set(ignored, "i-final") }\n /x/ -> Done { return(hash("out", scalar(out), "ignored", scalar(ignored))) }\n\nDone::\n /x/\n},
+            expected_json => '{"ignored":"i-final","out":"from_i"}',
+        },
+        {
+            label         => 'top-level lifecycle return writes the surrounding rule channel',
+            spec          => qq{Top::\n I { return("i"); set(out, "after") }\n /x/ -> Done { return("edge") }\n LX { return("lx") }\n\nDone::\n /x/\n},
+            expected_json => '"i"',
+        },
+        {
+            label         => 'expression-valued block return remains block-local',
+            spec          => qq{Top::\n /x/ -> Done { set(out, { return("block"); "after" }); set(after, "continued"); return(hash("out", scalar(out), "after", scalar(after))) }\n\nDone::\n /x/\n},
+            expected_json => '{"after":"continued","out":"block"}',
+        },
+    );
+
+    for my $case (@runtime_cases) {
+        my $descr = LinkedSpec::Get(\$case->{spec}, return_descriptor => 1);
+        ok(defined($descr) && ref($descr) eq 'HASH', "$case->{label} descriptor builds");
+
+        my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+        $assert_clean_meta->($meta, $case->{label});
+
+        my $parser = LinkedSpec::Get(\$case->{spec}, top_rule => 'Top', parse_mode => 'consume');
+        ok(ref($parser) eq 'CODE', "$case->{label} parser builds");
+        my $input = 'x';
+        my $actual_json = eval {
+            local $SIG{ALRM} = sub { die "hang\n" };
+            alarm(8);
+            my $result = $parser->(\$input);
+            alarm(0);
+            $json->encode($result);
+        };
+        alarm(0);
+        $actual_json = 'ERR:' . ($@ // 'unknown') unless defined $actual_json;
+        is($actual_json, $case->{expected_json}, "$case->{label} runtime result is locked");
+    }
+};
 subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
     plan tests => 30;
 

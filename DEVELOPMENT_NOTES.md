@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-06-30 (SPEC-FORMAT-TERSE.2.3.2 — lifecycle value/drop and return-channel lock): Landed the semantic
+  lock without changing runtime behavior. Durable points. (1) **Lifecycle blocks are statement blocks.** A
+  final ordinary statement can mutate state, but its value is discarded and is not an implicit rule return.
+  (2) **Top-level return is a different channel from expression-block return.** A lifecycle/action
+  `return(expr)` writes the surrounding rule/action return channel; `return(expr)` inside an expression-valued
+  block remains local to that value block. (3) **Perl and Rust expose different host shapes here.** The Perl
+  reference uses host return semantics for top-level lifecycle return. Rust already supports multiple
+  top-level lifecycle return events in one block, and existing capture-helper tests rely on that event stream;
+  `.2.3.2` documents and locks the value/drop distinction rather than changing that broader runtime contract.
+  (4) **All seven lifecycle markers are source-locked.** The phase0 lock covers `I`, `LS`, `LE`, `LX`, `E`,
+  `EX`, and `IT`; focused Rust tests cover value discard, top-level lifecycle return event recording, and
+  expression-valued block-local return contrast.
+
 - 2026-06-30 (SPEC-FORMAT-TERSE.2.3.1 — Perl fluent when/otherwise block-chain lock): Implemented the Perl
   reference lock. Durable points. (1) **True-branch probes can hide fallback parser bugs.** The `.2.3` split
   probes showed `.when(true) { ... }.otherwise { ... }` returning the first branch, but a false condition

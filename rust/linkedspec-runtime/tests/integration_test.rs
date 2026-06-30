@@ -1673,3 +1673,38 @@ fn terse_2_2_6_2_attached_while_has_iteration_safety_limit() {
         "non-terminating attached while must hit the deterministic safety guard: {err}"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.2 — lifecycle block value/drop channel:
+// lifecycle blocks execute statements and discard statement values. A top-level
+// lifecycle return(expr) records a surrounding rule return event, while
+// return(expr) inside an expression-valued block remains block-local.
+
+#[test]
+fn terse_2_3_2_lifecycle_statement_values_are_discarded() {
+    let grammar = "Top::\n I { set(out, \"from_i\"); set(ignored, \"i-final\") }\n /x/\n E { return(hash(\"out\", scalar(out), \"ignored\", scalar(ignored))) }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([{"ignored": "i-final", "out": "from_i"}]),
+        "final lifecycle statement values do not become implicit rule returns"
+    );
+}
+
+#[test]
+fn terse_2_3_2_lifecycle_return_records_surrounding_rule_return() {
+    let grammar = "Top::\n I { return(\"from_i\"); set(out, \"after\") }\n /x/\n E { return(out) }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!(["from_i", "after"]),
+        "top-level lifecycle return(expr) writes the surrounding rule return channel"
+    );
+}
+
+#[test]
+fn terse_2_3_2_expression_block_return_inside_lifecycle_stays_local() {
+    let grammar = "Top::\n I { set(out, { return(\"block\"); \"after\" }); set(after, \"continued\") }\n /x/\n E { return(hash(\"out\", scalar(out), \"after\", scalar(after))) }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([{"after": "continued", "out": "block"}]),
+        "return(expr) inside an expression-valued block does not write the rule return channel"
+    );
+}

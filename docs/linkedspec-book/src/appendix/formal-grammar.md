@@ -252,6 +252,8 @@ Within structured blocks, newlines separate top-level helper statements implicit
 Semicolons remain accepted and are required when multiple top-level helper statements
 share one physical line. Plain same-line whitespace is not a statement separator, and
 semicolons inside nested expressions or literal payloads remain protected.
+Lifecycle blocks are not expression-valued blocks: ordinary final statement values are
+discarded, and only an explicit top-level `return(expr)` writes the rule return channel.
 
 In value positions, a non-empty `{ ... }` payload without a top-level `=>` is an
 expression-valued block on the Perl reference and Rust backend. It returns the final

@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-06-30: **SPEC-FORMAT-TERSE.2.3.2 — lifecycle value/drop return-channel lock landed**
+  (PHASE0 + RUST RUNTIME + BOOK/KM LOCKS). Lifecycle blocks are now documented and regression-locked as
+  statement blocks, not expression-valued blocks. Final ordinary statement values are discarded; top-level
+  lifecycle/action `return(expr)` writes the surrounding return channel; expression-valued block
+  `return(expr)` remains block-local. Perl phase0 source-locks all seven lifecycle markers and runtime-locks
+  the three-way distinction. Rust focused tests lock value discard, top-level lifecycle return-event recording,
+  and expression-block local return contrast.
+  **Verification:** Perl syntax check PASS; phase0 PASS (`Files=1, Tests=994`); focused Rust runtime
+  `terse_2_3_2` PASS; mdBook/KM/memory/doctrine/diff checks PASS; full local CI PASS.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.3`** (Rust fluent block-chain/action-edge parity, coordinated with
+  `RUST-PARITY.7.5.3`).
 - 2026-06-30: **SPEC-FORMAT-TERSE.2.3.1 — Perl fluent `when/otherwise` block chains landed**
   (PERL BOOTSTRAP + PHASE0 + BOOK/KM LOCKS). Perl now preserves attached fallback tails after fluent
   `.when(cond) { ... }` chains. Both `.otherwise { ... }` and no-dot `otherwise { ... }` continuations execute

@@ -815,9 +815,9 @@ All numeric helpers return `undef` if any input is missing, non-numeric, or (for
 
 ### `return(value)`
 - **Signature**: `return(value: expr)`
-- **Returns**: the value (from the lifecycle block).
-- **Behavior**: Canonical return from a lifecycle block. Returns the value to the parent rule's accumulator.
-- **Edge cases**: `return(array(...))` returns an array value. `return(scalar(...))` returns a scalar. A bare scalar source such as `return(count)` reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`.
+- **Returns**: the supplied value through the active return channel.
+- **Behavior**: As a top-level action or lifecycle statement, writes the surrounding rule/action return channel. Inside an expression-valued block, it is block-local: it yields that block's value and skips later statements in the block.
+- **Edge cases**: `return(array(...))` returns an array value. `return(scalar(...))` returns a scalar. A bare scalar source such as `return(count)` reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`. A final non-`return(...)` statement in a lifecycle block is evaluated as a statement and is not an implicit rule return.
 
 ### `return_undef()`
 - **Signature**: `return_undef()`

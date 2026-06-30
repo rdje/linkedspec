@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.2 — lock lifecycle value drop return channel
+
+**Scope:** Perl phase0 lifecycle semantics locks, Rust focused runtime locks, mdBook lifecycle/value-block
+wording, Knowledge Map, task tree, roadmap tracker, and live continuity docs. No parser lowering behavior was
+changed.
+
+**What changed:** Lifecycle blocks are now documented and regression-locked as statement blocks. Ordinary final
+statement values are discarded; only top-level `return(expr)` writes the surrounding rule/action return
+channel. Expression-valued block `return(expr)` remains block-local and is locked separately.
+
+**Validation:** Perl syntax check PASS; phase0 PASS (`Files=1, Tests=994`); focused Rust runtime
+`terse_2_3_2` PASS; mdBook build PASS; Knowledge Map check PASS; memory/doctrine/diff checks PASS; full
+local CI PASS.
+
 ## 2026-06-30 — SPEC-FORMAT-TERSE.2.3.1 — lock Perl fluent when otherwise blocks
 
 **Scope:** Perl bootstrap method-chain parsing, phase0 regression locks, mdBook wording, Knowledge Map, task

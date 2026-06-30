@@ -200,6 +200,12 @@ The `I`/`LS`/`LE`/`E`/`EX`/`IT`/`LX` lifecycle blocks are **top-level rule-parag
 members — siblings of the `->`/`=>` edges**, not nested inside an edge's `{ … }` (an edge
 block holds only that edge's action code).
 
+Lifecycle blocks are statement blocks. They run their statements in lifecycle order and discard
+ordinary statement values; a final `set(...)`, helper call, or value expression is not an implicit
+rule return. Use a top-level `return(expr)` statement when a lifecycle block must write the
+surrounding rule return channel. This is separate from expression-valued blocks (§5.3), where
+`return(expr)` is block-local and yields only that value block's result.
+
 ### 5.3 Explicit Accumulation
 
 `push_value(target, value)` targets a named accumulator explicitly. The terse
