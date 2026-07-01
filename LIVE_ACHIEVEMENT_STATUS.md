@@ -7,6 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2 — AST helper-call lowering split**
+  (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). Helper-call AST lowering is now split by
+  argument-slot risk: `.3.2.1` value-only helper families, `.3.2.2` aggregate wrappers and collection/hash
+  helpers with explicit symbol/value slot policy, and `.3.2.3` diagnostics for covered calls that would
+  otherwise leak as generated host-language calls.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.2.1` lower value-only helper-call composition from AST call
+  nodes.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.1 — non-call value AST lowering dispatcher landed**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
   parses through `LinkedSpec::ActionIR::AST` and lowers primitive literals, scoped bare scalar reads, direct

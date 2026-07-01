@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2 — AST helper-call lowering split): Split helper-call AST
+  lowering before code. Durable points. (1) **Calls are not all value slots.** Helpers such as
+  `trim(value)` and `num_add(a,b)` can recursively materialize AST value arguments, but helpers such as
+  `scalar(name)`, `array(items)`, `hash(meta)`, `copy(items)`, and regex/tag/path helpers contain symbol,
+  aggregate, delimiter, or tag slots where premature value lowering would change semantics. (2) **First child
+  is value-only.** `.3.2.1` should cover scalar normalization, string predicates, coalesce/concat, and numeric
+  helper families. (3) **Aggregate wrappers need slot policy.** `.3.2.2` owns wrapper and collection helpers
+  so quoted-name boundaries and array/hash symbol precedence stay locked. (4) **Diagnostics are isolated.**
+  `.3.2.3` retires silent host-call leakage only for helper families covered by the earlier children.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.1 — non-call value AST lowering dispatcher): Landed the first
   production consumer of the Perl ActionIR AST seam. Durable points. (1) **The dispatcher is deliberately
   partial.** `_lower_method_value_expr(...)` now parses with `LinkedSpec::ActionIR::AST`, but top-level helper

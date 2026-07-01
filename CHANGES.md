@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2 — split AST helper-call lowering
+
+**Scope:** Task-tree split, roadmap/live continuity docs, and current frontier update. No parser/compiler/runtime
+code changed.
+
+**What changed:** Converted `.3.2` into a parent contract with three child leaves: `.3.2.1` value-only helper
+families, `.3.2.2` aggregate wrappers plus collection/hash helpers with explicit symbol/value slot policy, and
+`.3.2.3` diagnostics for covered helper-call AST forms that would otherwise leak as generated host-language
+calls.
+
+**Reason:** Helper calls mix ordinary value-expression arguments with symbol, aggregate, delimiter, tag, and
+path slots. Splitting by argument-slot risk keeps the AST call migration behavior-preserving.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.1 — lower non-call values from AST
 
 **Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,
