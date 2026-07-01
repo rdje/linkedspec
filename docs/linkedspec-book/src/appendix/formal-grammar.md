@@ -167,6 +167,9 @@ its associated action code.
   later regex slot of the same rule (used for same-rule recursive entry).
 - **Grouped targets**: `-> RuleA | RuleB { ... }` binds one shared action code
   block to multiple target rules.
+- **Grouped-target boundary**: the shared block is mandatory. `-> RuleA | RuleB`
+  without `{ ... }` is invalid; use separate action edges when there is no shared
+  block to factor.
 
 ### 3.3 Blind-Call Edges
 

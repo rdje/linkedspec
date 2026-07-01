@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.3.1 — edge syntax contract locked): Closed the Round 3 edge-syntax leaf as a
+  confirmation/docs/KM slice. Durable points. (1) **No behavior changed.** `->` remains the action-edge
+  surface and `=>` remains the blind-call surface. (2) **Grouped action targets are factoring only.**
+  `-> A | B { code }` expands the shared code block across the listed targets; each target dispatches
+  independently. (3) **The shared block is mandatory.** `-> A | B` without `{ ... }` remains invalid and is
+  diagnosed as "Grouped action-edge targets require a shared code block". (4) **Existing locks were enough.**
+  Phase0 already covers shared-block parse expansion, validation acceptance, missing-block rejection, and
+  three-target grouping. (5) **Next Round 3 work is arithmetic/comparison spelling.** Frontier moves to
+  `SPEC-FORMAT-TERSE.3.2`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.5.0 — future variant parity ownership/inventory landed): Closed the
   unnumbered "Julia/Lua/Dart variant parity" frontier as an ownership slice before any backend code. Durable
   points. (1) **Implemented backends are Perl and Rust.** Perl remains the reference implementation; Rust is

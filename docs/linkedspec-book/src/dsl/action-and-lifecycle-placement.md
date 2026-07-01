@@ -228,6 +228,8 @@ One action block can be **shared across several target rules** by joining the ta
 
 The shared block is bound to every listed target, so the same action runs for whichever target the dispatch resolves to. Use this when two (or more) alternative child rules should be handled identically and duplicating the block would be the only other option.
 
+Grouped action-edge targets require that shared `{ ... }` block. The block-less form `-> RuleA | RuleB` is invalid; use separate edges when there is no shared action to factor.
+
 A shipped example is `ebnf.spec`, whose `semantic_annotation` rule shares one action across two targets:
 
 ```text

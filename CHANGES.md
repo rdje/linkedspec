@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.3.1 — lock edge syntax contract
+
+**Scope:** Task-tree status, mdBook edge-syntax wording, Knowledge Map fact card, and live continuity docs. No
+parser/compiler/runtime code changed.
+
+**What changed:** Round 3 edge syntax is now a locked contract: `->` remains the action-edge surface, `=>`
+remains the blind-call surface, and grouped action-edge targets remain syntactic factoring only when one shared
+code block is present (`-> RuleA | RuleB { ... }`). The block-less grouped form `-> RuleA | RuleB` stays
+invalid.
+
+**Docs:** The action/lifecycle placement chapter and formal grammar appendix now explicitly state that grouped
+targets require a shared block. A new Knowledge Map fact points to the existing regression locks and the
+validator diagnostic so future sessions do not re-derive this from parser internals.
+
+**Validation:** Focused `perl -Iperl` validation/bootstrap probes confirmed grouped shared-block acceptance,
+two-target `ACODE` expansion, and block-less grouped-target rejection with the current diagnostic. Existing
+phase0 locks already cover two-target parse expansion, shared-block validation acceptance, missing-block
+rejection, and three-target grouping. Full phase0 passed (`prove -q -Iperl t/phase0_regression.t`, 1001
+tests), and `bash tools/run_ci_local.sh` passed.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.5.0 — own future variant parity inventory
 
 **Scope:** Task-tree ownership, roadmap/live continuity docs, mdBook backend-handoff status, and Knowledge Map

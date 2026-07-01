@@ -6,10 +6,14 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-01` (**`.5.0` DONE; future variant parity ownership/inventory complete** — current
-  implemented backends are Perl reference + Rust; Julia/Dart remain accepted future targets from ADR `0006`;
-  Lua needs an explicit decision record before any implementation leaf or code. Frontier is
-  `SPEC-FORMAT-TERSE.3.1` for edge-syntax confirmation. Prior **`.2.3.5.5` DONE; receiver-chain family
+- Last updated: `2026-07-01` (**`.3.1` DONE; edge-syntax contract confirmed/locked** — `->` action edges and
+  `=>` blind-call edges stay as-is; grouped action-edge targets require a shared `{ ... }` block, and the
+  block-less `-> A | B` form stays invalid. Existing phase0 locks already cover parse expansion, validation
+  acceptance, rejection diagnostics, and three-target grouping; the mdBook now states the invalid boundary
+  explicitly. Frontier is `SPEC-FORMAT-TERSE.3.2` for arithmetic/comparison function spellings. Prior **`.5.0`
+  DONE; future variant parity ownership/inventory complete** — current implemented backends are Perl
+  reference + Rust; Julia/Dart remain accepted future targets from ADR `0006`; Lua needs an explicit decision
+  record before any implementation leaf or code. Prior **`.2.3.5.5` DONE; receiver-chain family
   complete** — expression-valued
   blocks now continue through compatible receiver-dot value chains by the runtime type they yield, with no
   block-only helper semantics. Locked examples cover array, early-return array, string-to-array, hash-to-array,
@@ -2024,19 +2028,27 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.3.5.6 - lock aggregate wrapper quoting boundaries`
 
 - ID: `SPEC-FORMAT-TERSE.3`
-  Status: `proposed`
+  Status: `active`
   Goal: Round 3 — edge syntax (confirm) + arithmetic (functions-only)
   Children: `.3.1`, `.3.2`
 
 - ID: `SPEC-FORMAT-TERSE.3.1`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Edge syntax — confirm and lock current behavior
   Acceptance: `->` action edges, `=>` blind-call edges kept as-is. Grouped targets `-> A | B { code }`
     factor a shared code block across child rules (each target dispatches independently; the pipe is
     purely syntactic factoring). The block-less form `-> A | B` (no `{...}`) stays INVALID. (No code
     change expected — documents the decided contract; pair with regression locks if not already present.)
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Existing locks confirmed in `t/phase0_regression.t`:
+    `bootstrap_grouped_action_edge_targets_share_one_code_block`,
+    `validation_accepts_grouped_action_edge_targets_with_shared_code_block`,
+    `validation_rejects_grouped_action_edge_targets_without_shared_code_block`, and
+    `validation_accepts_grouped_action_edge_with_three_targets`. Focused `perl -Iperl` validation/bootstrap
+    probes confirmed grouped shared-block acceptance, two-target `ACODE` expansion, and block-less grouped
+    rejection with the current diagnostic. Full phase0 passed (`prove -q -Iperl t/phase0_regression.t`:
+    1001 tests), and `bash tools/run_ci_local.sh` passed. The mdBook action/lifecycle chapter and formal
+    grammar appendix now state the invalid boundary explicitly. No parser/compiler/runtime code changed.
+  Commit: `SPEC-FORMAT-TERSE.3.1 - lock edge syntax contract`
 
 - ID: `SPEC-FORMAT-TERSE.3.2`
   Status: `pending`
@@ -2196,11 +2208,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.5.6` | `done` 2026-07-01 | Typed wrapper quoted-name boundary locked: bare aggregate wrapper args read typed working variables; quoted args stay constructor payloads; direct `[...]` / `{...}` shapes are the preferred terse constructors. |
 | — | `SPEC-FORMAT-TERSE.2.3.5.5` | `done` 2026-07-01 | Block-valued receiver-dot chaining landed by yielded runtime type; expression-valued blocks feed the existing compatible array/string/hash/number receiver families. |
 | — | `SPEC-FORMAT-TERSE.5.0` | `done` 2026-07-01 | Future backend parity ownership is explicit before any non-Rust variant code: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs an ADR before inclusion. |
-| 1 | `SPEC-FORMAT-TERSE.3.1` | `pending` | Resume remaining Round 3 work now that future-variant ownership is explicit: confirm and lock edge syntax behavior. |
-| 2 | `SPEC-FORMAT-TERSE.3.2` | `pending` | Arithmetic/comparison symbol spellings and no-precedence composition after edge syntax is locked. |
-| 3 | `SPEC-FORMAT-TERSE.4` | `pending` | Round 4+ discovery after Round 3 leaves are closed or deliberately deferred. |
+| — | `SPEC-FORMAT-TERSE.3.1` | `done` 2026-07-01 | Edge syntax contract confirmed and locked with existing regression coverage: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. |
+| 1 | `SPEC-FORMAT-TERSE.3.2` | `pending` | Arithmetic/comparison symbol spellings and no-precedence composition after edge syntax is locked. |
+| 2 | `SPEC-FORMAT-TERSE.4` | `pending` | Round 4+ discovery after Round 3 leaves are closed or deliberately deferred. |
 
 ## Decisions
+
+- `2026-07-01` (**`.3.1` edge syntax contract locked**). Round 3 keeps the existing edge split: `->` remains
+  the action-edge surface, and `=>` remains the blind-call surface. Grouped action-edge targets are accepted
+  only as a factoring form with one shared block, `-> RuleA | RuleB { ... }`; each listed target still
+  dispatches independently. The block-less grouped form `-> RuleA | RuleB` stays invalid, with the validator
+  reporting "Grouped action-edge targets require a shared code block". Existing phase0 locks already cover
+  parse expansion, acceptance, rejection, and three-target grouping, so this leaf closes as a contract/docs/KM
+  lock with no parser/compiler/runtime change.
 
 - `2026-07-01` (**`.2.3.5` return-type method chaining split before code**). Receiver-dot value chains will
   not be implemented by broadening the existing statement-level mutation shortcut. The accepted model is
@@ -2904,6 +2924,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.6` | Perl syntax checks for `MethodLowering.pm`, `ValueExpr.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes for bare vs quoted aggregate wrappers and direct shapes; full phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust `.2.3.5.6` integration tests; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff/local CI gates | Typed wrapper quoted-name boundaries landed. Bare `array(foo)` / `a(foo)` and `hash(bar)` / `h(bar)` are explicit aggregate working-variable reads; quoted wrapper arguments remain literal constructor payloads and are not scalar-indirect aliases; direct `[...]` and `{...}` shapes are the preferred terse constructors. Perl generic value-expression lowering now recognizes direct shape literals in helper composition and avoids reserving primitive literals or inappropriate engine locals as aggregate symbols. Phase0 PASS (1000 tests); oracle corpus PASS over 51 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.5` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused Perl lowering/runtime probes; focused Rust parser/runtime tests (`parse_block_valued_receiver_chain`, `terse_2_3_5_5`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; full phase0 (`prove -q -Iperl t/phase0_regression.t`); `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks | Block-valued receiver-dot chains landed. Expression-valued blocks now feed their yielded array/string/hash/number values into the compatible receiver-family chains; Perl array-yielding blocks use narrow visible-exit recognition and Rust parses fluent chains after block/hash/array primaries. Phase0 PASS (1001 tests); oracle corpus PASS over 52 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.5.0` | Full bootstrap/roadmap/mdBook/codebase read; ADR `0006` + Phase 8/9 task-tree audit; `rg` source inventory for Julia/Dart/Lua implementation paths; Knowledge Map backend fact correction; mdBook backend-handoff status update; memory/doctrine/KM/diff checks; `mdbook build docs/linkedspec-book` | Future variant parity ownership landed before any non-Rust variant code. Implemented backends are Perl reference and Rust; Julia/Dart are accepted future targets but deferred to dedicated backend task trees; Lua is blocked on an explicit decision record before any task-tree leaf or code. No parser/compiler/runtime code changed. |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.3.1` | Existing phase0 locks audited (`bootstrap_grouped_action_edge_targets_share_one_code_block`, `validation_accepts_grouped_action_edge_targets_with_shared_code_block`, `validation_rejects_grouped_action_edge_targets_without_shared_code_block`, `validation_accepts_grouped_action_edge_with_three_targets`); focused `perl -Iperl` validation/bootstrap probes for grouped shared-block acceptance, two-target `ACODE` expansion, and block-less grouped-target rejection; full phase0 (`prove -q -Iperl t/phase0_regression.t`, 1001 tests); `bash tools/run_ci_local.sh`; mdBook boundary wording; Knowledge Map fact card | Edge syntax contract locked without parser/compiler/runtime code change. `->` action edges and `=>` blind-call edges stay as-is. Grouped targets are valid only with one shared `{ ... }` block; the block-less `-> A | B` form stays invalid with the existing diagnostic. Frontier becomes `.3.2` for arithmetic/comparison function spellings. |
 | `2026-06-16` | `SPEC-FORMAT-TERSE` | Transcription faithful to `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` | Done — all Rounds 1–3 captured as leaves; Round 4+ as a discovery leaf |
 | `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 | `2026-06-23` | `SPEC-FORMAT-TERSE.1.1` (split) | `dump_parser_source` ground-truth probes (scratchpad `probe_autovar*.pl`, dump-don't-transcribe) establishing the one-scope / non-strict / preamble-`my` model; `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm` = 0; baseline `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh` (2/2), KM gate all EXIT 0 | Split `.1.1` → `.1.1.1`+`.1.1.2`; design recorded; KM card [[working-vars-no-strict-need-my-lexical]] added (map regenerated). Docs/tree/KM-only — no engine/book change, so phase0 N/A to the split slice |
@@ -2978,6 +2999,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `SPEC-FORMAT-TERSE.5.0` | `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory` | Future backend parity ownership is explicit: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs a new decision record before any code. Frontier returns to `.3.1`. |
+| `SPEC-FORMAT-TERSE.3.1` | `SPEC-FORMAT-TERSE.3.1 - lock edge syntax contract` | Edge syntax confirmed without behavior change: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. Frontier becomes `.3.2`. |
 | `SPEC-FORMAT-TERSE.2.3.5` | `SPEC-FORMAT-TERSE.2.3.5 - split return-type method chaining` | Return-type method chaining specified before code and split into array/hash/string/number receiver-family leaves. No runtime behavior changed; first implementation frontier is `.2.3.5.1` array receiver-dot value chains. |
 | `SPEC-FORMAT-TERSE.2.3.5.1` | `SPEC-FORMAT-TERSE.2.3.5.1 - implement array receiver value chains` | Array receiver-dot value chains landed on Perl/Rust with phase0, focused Rust tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.2`. |
 | `SPEC-FORMAT-TERSE.2.3.5.2` | `SPEC-FORMAT-TERSE.2.3.5.2 - implement hash receiver value chains` | Hash receiver-dot value chains landed on Perl/Rust with focused tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.3`. |
