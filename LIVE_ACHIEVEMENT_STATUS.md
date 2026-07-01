@@ -7,11 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases landed**
+  (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Function-form aliases `add`, `sub`, `mul`,
+  `div`, `mod`, `abs`, `floor`, `ceil`, `round`, `min`, `max`, `clamp`, `sum`, `avg`, `median`, and `range`
+  now dispatch to the existing `num_*` helper family on Perl and Rust. Existing `num_*` spellings remain
+  accepted.
+  **Boundary:** arithmetic symbol callees such as `+(a,b)` remain `.3.2.2`; comparison words remain
+  `.3.2.3`. `gt(10, 2)` is still the existing string comparison helper, not a numeric alias.
+  **Verification:** Perl syntax checks PASS; focused Perl probes PASS, including receiver-chain preservation;
+  phase0 PASS with **1002 tests**; oracle regeneration produced **53 fixtures**; Rust `corpus_oracle` PASS
+  over 53 fixtures; focused Rust integration PASS; mdBook build PASS.
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.2`, then `.3.2.3`, then `.4`.
 - 2026-07-01: **SPEC-FORMAT-TERSE.3.2 — arithmetic/comparison call surface split**
   (TASK TREE + KM + LIVE DOCS; **no runtime behavior change**). Round 3 arithmetic/comparison calls are now
-  split before code. Current ground truth shows the implemented numeric family is `num_*`; bare
-  `add(...)`/`sum(...)` do not yet lower as numeric helpers; symbol callees such as `+(...)` are not portable
-  parser inputs today and raw Perl can misinterpret them if they fall through; and bare
+  split before code. At split time, ground truth showed the implemented numeric family was `num_*`; bare
+  `add(...)`/`sum(...)` did not yet lower as numeric helpers; symbol callees such as `+(...)` were not portable
+  parser inputs and raw Perl could misinterpret them if they fell through; and bare
   `eq`/`ne`/`gt`/`ge`/`lt`/`le` are current string comparisons in the book/lowering path.
   **Decision:** keep one `callee(args)` grammar; do not add the `(op a, b)` Lisp-prefix form. Split children:
   `.3.2.1` numeric word aliases, `.3.2.2` arithmetic symbol callees, `.3.2.3` comparison spelling policy.

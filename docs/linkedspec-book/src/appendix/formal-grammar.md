@@ -552,9 +552,20 @@ num_avg(arr)             — average of array elements
 num_median(arr)          — median of array elements
 num_range(arr)           — max - min of array elements
 
+abs(x), floor(x), ceil(x), round(x)      — aliases for the matching num_* helpers
+add(a, b), sub(a, b), mul(a, b)          — aliases for num_add/num_sub/num_mul
+div(a, b), mod(a, b), clamp(x, lo, hi)   — aliases for num_div/num_mod/num_clamp
+min(...), max(...), sum(arr)             — aliases for num_min/num_max/num_sum
+avg(arr), median(arr), range(arr)        — aliases for num_avg/num_median/num_range
+
 number_expr.abs().ceil().add(n).mul(n)  — receiver-dot number helper chain
 number_expr.gt(n)                       — terminal receiver-dot numeric comparison
 ```
+
+The terse function aliases above do not include comparison words. Bare
+`eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and `le(...)` are string
+comparison helpers; use `num_gt(...)` or receiver-dot `.gt(...)` for numeric
+comparisons.
 
 ### 7.6 Control Flow Helpers
 ```

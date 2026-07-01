@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases landed): Implemented the non-conflicting
+  function-form numeric aliases on both variants. Durable points. (1) **Alias mapping belongs in value
+  lowering/runtime dispatch, not shared Perl parse normalization.** A first attempt at parser-level
+  normalization turned receiver-chain tails like `.floor()` into `num_floor()` too early; the landed Perl path
+  maps aliases only after receiver-dot normalization has had a chance to see raw receiver methods. (2)
+  **Receiver-dot number chains remain stable.** `3.5.floor().add(1)` still lowers through
+  `num_floor`/`num_add` and the older number/block receiver oracle fixtures stay unchanged. (3)
+  **Comparisons are still out of scope.** `gt(...)` remains the string comparison helper; numeric comparison
+  spellings stay behind `.3.2.3`. (4) **Symbol callees are still a parser/lowering problem.** `+(a,b)` is
+  deliberately left for `.3.2.2` because raw host fallback is unsafe. (5) **The oracle corpus is now 53
+  fixtures.** The new fixture locks the Perl reference and Rust runtime on the same alias result vector.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.3.2 — arithmetic call surface split before code): Closed the Round 3
   arithmetic/comparison parent as an ownership split, not an implementation. Durable points. (1) **Keep one
   call grammar.** The accepted surface remains `callee(args)` with word and symbol callees; do not add

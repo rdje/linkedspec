@@ -45936,6 +45936,65 @@ subtest 'spec_format_terse_2_3_5_5_block_valued_receiver_chains' => sub {
         'block-valued receiver-chain spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_3_2_1_numeric_word_aliases' => sub {
+    # SPEC-FORMAT-TERSE.3.2.1: non-comparison numeric word aliases map to
+    # the existing num_* helper family. Comparison words remain string
+    # comparisons until .3.2.3 explicitly decides that policy.
+    plan tests => 11;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(add(abs(-3), floor(2.9), ceil(1.1), round(2.5)))'),
+        qr/__ls_num_add.*__ls_num_abs.*__ls_num_floor.*__ls_num_ceil.*__ls_num_round/s,
+        'numeric word aliases lower through the unary and add num_* helper contracts');
+    like($L->('return(array(sum(array(1,2,3)), avg(array(2,4,6)), median(array(1,5,3)), range(array(1,5,3)), min(4,2,7), max(4,2,7), clamp(add(2,3),0,4)))'),
+        qr/__ls_num_sum.*__ls_num_avg.*__ls_num_median.*__ls_num_range.*__ls_num_min.*__ls_num_max.*__ls_num_clamp.*__ls_num_add/s,
+        'numeric word aliases lower through reducer, min/max, clamp, and nested add contracts');
+    like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('add(1, 2)'),
+        qr/__ls_num_add_terms/s,
+        'numeric word aliases compose inside flow-value lowering');
+    is(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('gt(10, 2)'), '(10 gt 2)',
+        'bare comparison word gt(...) remains the existing string comparison helper');
+    like($L->('return(3.5.floor().add(1))'),
+        qr/__ls_num_add.*__ls_num_floor/s,
+        'function-form numeric aliases do not disturb existing number receiver-dot chains');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { return(array(add(2,3,4), sub(10,3), mul(2,3,4), div(9,2), mod(17,5), abs(-7), floor(3.7), ceil(3.2), round(3.5), min(8,3,5), max(8,3,5), clamp(add(2,5),0,6), sum(array(1,2,3)), avg(array(2,4,6)), median(array(1,5,3)), range(array(1,5,3)))) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'numeric word alias spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[9,7,24,4.5,2,7,3,4,4,3,8,6,6,4,3,4]',
+        'numeric word aliases run through the existing num_* helper family');
+
+    my $src = $gen->($spec);
+    unlike($src, qr/\b(?:add|sub|mul|div|mod|abs|floor|ceil|round|min|max|clamp|sum|avg|median|range)\s*\(/,
+        'generated source has no raw numeric word-alias helper residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'numeric word alias spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'numeric word alias spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'numeric word alias spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

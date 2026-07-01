@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.3.2.1 — implement numeric word aliases
+
+**Scope:** Perl ActionIR value lowering, Rust runtime helper dispatch, oracle corpus, focused Perl/Rust locks,
+mdBook helper/formal docs, task-tree/live docs, and Knowledge Map update.
+
+**What changed:** Non-comparison function-form numeric aliases now map to the existing `num_*` helper family on
+Perl and Rust: `add`, `sub`, `mul`, `div`, `mod`, `abs`, `floor`, `ceil`, `round`, `min`, `max`, `clamp`,
+`sum`, `avg`, `median`, and `range`. Existing `num_*` spellings remain accepted.
+
+**Boundary:** The leaf deliberately does not add arithmetic symbol callees such as `+(a,b)`, and it does not
+change bare comparison words. `gt(10, 2)` remains the existing string comparison helper; numeric comparisons
+remain `num_gt(...)` or receiver-dot terminals such as `score.gt(3)`.
+
+**Validation:** Perl syntax checks passed; focused lowering/runtime probes passed; the full phase0 suite passed
+with 1002 subtests; the Rust focused integration test passed; oracle generation produced 53 fixtures; Rust
+`corpus_oracle` passed over all 53 fixtures; `mdbook build docs/linkedspec-book` passed.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.3.2 — split arithmetic call surface
 
 **Scope:** Task-tree ownership, roadmap/live continuity docs, and Knowledge Map fact card. No

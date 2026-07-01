@@ -733,6 +733,13 @@ receiver-dot call after a comparison returns `undef`/`null`. `declare(...)` and 
 methods are not numeric receiver methods. An expression-valued block whose value is numeric can be the
 receiver, for example `{ 3.5 }.floor().add(2)`.
 
+The same non-comparison numeric family also has function-form word aliases:
+`add`, `sub`, `mul`, `div`, `mod`, `abs`, `floor`, `ceil`, `round`, `min`,
+`max`, `clamp`, `sum`, `avg`, `median`, and `range`. These are exact aliases
+for the corresponding `num_*` helpers and remain ordinary `callee(args)` calls,
+so there is no operator precedence. The aliases deliberately do not include
+bare comparison words; `gt(...)` and `lt(...)` remain string comparisons.
+
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads
 > `entry_group(N)`; output = the parser's one-element accumulator array). The array-form

@@ -6,13 +6,15 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-01` (**`.3.2` SPLIT/OWNED; arithmetic call surface split before code** — current
-  ground truth shows function-form `add(...)` and symbol-form `+(...)` do not yet lower as numeric helpers,
-  Rust does not parse symbol callees, and bare `eq`/`ne`/`gt`/`ge`/`lt`/`le` are already documented/lowered
-  as string comparisons while numeric comparisons use `num_*` or receiver-dot `.gt(...)`-style methods. Round
-  3 now keeps one `callee(args)` call grammar with no `(op a, b)` Lisp-prefix surface. Frontier is
-  `SPEC-FORMAT-TERSE.3.2.1` for non-conflicting numeric word aliases, then `.3.2.2` arithmetic symbol callees;
-  `.3.2.3` owns the comparison spelling decision before any comparison-alias implementation. Prior **`.3.1`
+- Last updated: `2026-07-01` (**`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
+  `sub(...)`, `mul(...)`, `div(...)`, `mod(...)`, `abs(...)`, `floor(...)`, `ceil(...)`, `round(...)`,
+  `min(...)`, `max(...)`, `clamp(...)`, `sum(...)`, `avg(...)`, `median(...)`, and `range(...)` now map to the
+  existing `num_*` helper family on Perl and Rust. Existing `num_*` spellings remain accepted. Bare comparison
+  words such as `gt(...)` remain string comparisons; numeric comparison policy stays isolated behind
+  `.3.2.3`. Arithmetic symbol callees such as `+(a,b)` remain the next frontier, `SPEC-FORMAT-TERSE.3.2.2`,
+  because they require parser/lowering support before raw host fallback can see them. Prior **`.3.2`
+  SPLIT/OWNED; arithmetic call surface split before code** — Round 3 keeps one `callee(args)` call grammar with
+  no `(op a, b)` Lisp-prefix surface. Prior **`.3.1`
   DONE; edge-syntax contract confirmed/locked** — `->` action edges and `=>` blind-call edges stay as-is;
   grouped action-edge targets require a shared `{ ... }` block, and the block-less `-> A | B` form stays
   invalid. Existing phase0 locks already cover parse expansion, validation acceptance, rejection diagnostics,
@@ -2077,7 +2079,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.3.2 - split arithmetic call surface`
 
 - ID: `SPEC-FORMAT-TERSE.3.2.1`
-  Status: `pending`
+  Status: `done` 2026-07-01
   Goal: Numeric word aliases for non-conflicting arithmetic, single-value helpers, multi-value helpers, and
     numeric array reducers
   Acceptance: Function-style calls `add(a,b)`, `sub(a,b)`, `mul(a,b)`, `div(a,b)`, `mod(a,b)`, `abs(v)`,
@@ -2086,8 +2088,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     family on Perl and Rust. The old `num_*` spellings remain accepted aliases. This leaf does not add symbol
     callees and does not change bare comparison helper semantics. Calls are ordinary nested helper calls; no
     operator precedence is introduced.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-01.** Perl maps aliases in value lowering, after receiver-dot normalization, so
+    function-form aliases do not disturb number receiver chains such as `3.5.floor().add(1)`. Rust maps the
+    same alias names in helper dispatch. Focused probes confirmed `add(1,2)` lowers through `num_add`,
+    `gt(10,2)` remains string comparison, and receiver-dot number chains still lower through `num_*`. Full
+    phase0 passed (`prove -q -Iperl t/phase0_regression.t`, 1002 tests); oracle generation produced 53
+    fixtures; Rust `corpus_oracle` passed over 53 fixtures; focused Rust integration test
+    `terse_3_2_1_numeric_word_aliases_run` passed; mdBook build passed.
+  Commit: `SPEC-FORMAT-TERSE.3.2.1 - implement numeric word aliases`
 
 - ID: `SPEC-FORMAT-TERSE.3.2.2`
   Status: `pending`
@@ -2262,12 +2270,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.5.0` | `done` 2026-07-01 | Future backend parity ownership is explicit before any non-Rust variant code: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs an ADR before inclusion. |
 | — | `SPEC-FORMAT-TERSE.3.1` | `done` 2026-07-01 | Edge syntax contract confirmed and locked with existing regression coverage: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. |
 | — | `SPEC-FORMAT-TERSE.3.2` | `active` (split 2026-07-01) | Arithmetic/comparison call surface split before code: word aliases, symbol callees, and comparison-name policy are separate mechanisms. |
-| 1 | `SPEC-FORMAT-TERSE.3.2.1` | `pending` | Non-conflicting numeric word aliases for arithmetic helpers, single/multi-value helpers, and numeric array reducers. |
-| 2 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
-| 3 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison spelling policy before code because bare `gt`/`lt`/etc. are currently string comparisons. |
-| 4 | `SPEC-FORMAT-TERSE.4` | `pending` | Round 4+ discovery after Round 3 leaves are closed or deliberately deferred. |
+| — | `SPEC-FORMAT-TERSE.3.2.1` | `done` 2026-07-01 | Non-conflicting numeric word aliases now map to `num_*` on Perl/Rust; comparison words remain string helpers. |
+| 1 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
+| 2 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison spelling policy before code because bare `gt`/`lt`/etc. are currently string comparisons. |
+| 3 | `SPEC-FORMAT-TERSE.4` | `pending` | Round 4+ discovery after Round 3 leaves are closed or deliberately deferred. |
 
 ## Decisions
+
+- `2026-07-01` (**`.3.2.1` numeric word aliases landed**). Non-comparison function-form numeric aliases are
+  accepted as ordinary helper calls and lower/dispatch to the existing `num_*` family on Perl and Rust:
+  `add`, `sub`, `mul`, `div`, `mod`, `abs`, `floor`, `ceil`, `round`, `min`, `max`, `clamp`, `sum`, `avg`,
+  `median`, and `range`. The Perl implementation keeps this mapping in value lowering instead of the shared
+  parse-normalization seam so existing receiver-dot methods such as `.floor()` and `.add(...)` remain raw
+  receiver methods until receiver-chain normalization handles them. This leaf deliberately leaves `+(a,b)` and
+  the rest of the arithmetic symbol-callee family to `.3.2.2`, and leaves comparison spelling policy to
+  `.3.2.3`; bare `gt(...)` remains the current string comparison helper.
 
 - `2026-07-01` (**`.3.2` arithmetic call surface split before code**). Round 3 arithmetic/comparison calls
   keep one `callee(args)` grammar. The Lisp-prefix `(op a, b)` / `(ge a, b)` form is deliberately not added:
@@ -2993,6 +3010,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-07-01` | `SPEC-FORMAT-TERSE.5.0` | Full bootstrap/roadmap/mdBook/codebase read; ADR `0006` + Phase 8/9 task-tree audit; `rg` source inventory for Julia/Dart/Lua implementation paths; Knowledge Map backend fact correction; mdBook backend-handoff status update; memory/doctrine/KM/diff checks; `mdbook build docs/linkedspec-book` | Future variant parity ownership landed before any non-Rust variant code. Implemented backends are Perl reference and Rust; Julia/Dart are accepted future targets but deferred to dedicated backend task trees; Lua is blocked on an explicit decision record before any task-tree leaf or code. No parser/compiler/runtime code changed. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.1` | Existing phase0 locks audited (`bootstrap_grouped_action_edge_targets_share_one_code_block`, `validation_accepts_grouped_action_edge_targets_with_shared_code_block`, `validation_rejects_grouped_action_edge_targets_without_shared_code_block`, `validation_accepts_grouped_action_edge_with_three_targets`); focused `perl -Iperl` validation/bootstrap probes for grouped shared-block acceptance, two-target `ACODE` expansion, and block-less grouped-target rejection; full phase0 (`prove -q -Iperl t/phase0_regression.t`, 1001 tests); `bash tools/run_ci_local.sh`; mdBook boundary wording; Knowledge Map fact card | Edge syntax contract locked without parser/compiler/runtime code change. `->` action edges and `=>` blind-call edges stay as-is. Grouped targets are valid only with one shared `{ ... }` block; the block-less `-> A | B` form stays invalid with the existing diagnostic. Frontier becomes `.3.2` for arithmetic/comparison function spellings. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.2` | Knowledge Map retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-number-receiver-value-chains`, `terse-composability-audit-boundaries`); TOOLBOX `call_spec_handler_subst`/runtime/flow-lowering probes for `num_*`, bare word aliases, symbol callees, and comparison helpers; source reads of Perl `MethodExpr`/`MethodLowering` and Rust expression parser/runtime helper dispatch; mdBook comparison-helper audit; memory/doctrine/KM/diff checks | Arithmetic/comparison call surface split before code. Current ground truth: `num_*` helpers are the implemented numeric family, bare `add(...)`/`sum(...)` do not lower as numeric helpers, symbol callees are not parsed portably, raw Perl can misinterpret `+(2,3)`, and bare `eq`/`gt`/etc. are current string comparisons. Frontier becomes `.3.2.1` for non-conflicting numeric word aliases. |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.3.2.1` | Perl syntax checks for `MethodExpr.pm`, `MethodLowering.pm`, `FlowExpr.pm`, `BootstrapSpec/Core.pm`, phase0, and oracle generator; focused Perl lowering/runtime probes for numeric aliases, comparison boundary, and receiver-chain preservation; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; full phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust integration test; `mdbook build docs/linkedspec-book` | Numeric word aliases landed on Perl/Rust. `add`/`sub`/`mul`/`div`/`mod`, unary/rounding helpers, `min`/`max`/`clamp`, and reducers `sum`/`avg`/`median`/`range` now dispatch to the existing `num_*` family. Receiver-dot number chains remain stable because Perl aliasing happens after receiver normalization. Bare `gt(...)` remains string comparison. Phase0 PASS (1002 tests); oracle corpus PASS over 53 fixtures. Frontier becomes `.3.2.2`. |
 | `2026-06-16` | `SPEC-FORMAT-TERSE` | Transcription faithful to `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` | Done — all Rounds 1–3 captured as leaves; Round 4+ as a discovery leaf |
 | `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 | `2026-06-23` | `SPEC-FORMAT-TERSE.1.1` (split) | `dump_parser_source` ground-truth probes (scratchpad `probe_autovar*.pl`, dump-don't-transcribe) establishing the one-scope / non-strict / preamble-`my` model; `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm` = 0; baseline `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh` (2/2), KM gate all EXIT 0 | Split `.1.1` → `.1.1.1`+`.1.1.2`; design recorded; KM card [[working-vars-no-strict-need-my-lexical]] added (map regenerated). Docs/tree/KM-only — no engine/book change, so phase0 N/A to the split slice |
@@ -3069,6 +3087,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.5.0` | `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory` | Future backend parity ownership is explicit: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs a new decision record before any code. Frontier returns to `.3.1`. |
 | `SPEC-FORMAT-TERSE.3.1` | `SPEC-FORMAT-TERSE.3.1 - lock edge syntax contract` | Edge syntax confirmed without behavior change: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. Frontier becomes `.3.2`. |
 | `SPEC-FORMAT-TERSE.3.2` | `SPEC-FORMAT-TERSE.3.2 - split arithmetic call surface` | Arithmetic/comparison calls split before code: `.3.2.1` owns non-conflicting numeric word aliases, `.3.2.2` owns arithmetic symbol callees, and `.3.2.3` owns the comparison spelling policy before implementation. Frontier becomes `.3.2.1`. |
+| `SPEC-FORMAT-TERSE.3.2.1` | `SPEC-FORMAT-TERSE.3.2.1 - implement numeric word aliases` | Function-form numeric word aliases now dispatch to the existing `num_*` family on Perl/Rust; bare comparison words stay string helpers. Phase0 1002 green; oracle corpus 53 fixtures; frontier becomes `.3.2.2`. |
 | `SPEC-FORMAT-TERSE.2.3.5` | `SPEC-FORMAT-TERSE.2.3.5 - split return-type method chaining` | Return-type method chaining specified before code and split into array/hash/string/number receiver-family leaves. No runtime behavior changed; first implementation frontier is `.2.3.5.1` array receiver-dot value chains. |
 | `SPEC-FORMAT-TERSE.2.3.5.1` | `SPEC-FORMAT-TERSE.2.3.5.1 - implement array receiver value chains` | Array receiver-dot value chains landed on Perl/Rust with phase0, focused Rust tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.2`. |
 | `SPEC-FORMAT-TERSE.2.3.5.2` | `SPEC-FORMAT-TERSE.2.3.5.2 - implement hash receiver value chains` | Hash receiver-dot value chains landed on Perl/Rust with focused tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.3`. |

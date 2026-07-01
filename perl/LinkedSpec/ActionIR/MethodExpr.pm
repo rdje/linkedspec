@@ -189,7 +189,7 @@ sub _is_bare_method_scope_token {
  my ($token) = @_;
  return 0 unless defined $token;
  $token = _trim_method_expr_value($token);
- return defined($token) && $token =~ /^\w+$/o ? 1 : 0
+ return defined($token) && $token =~ /^[A-Za-z_]\w*$/o ? 1 : 0
 }
 
 #------------------------------------------------------------------------------

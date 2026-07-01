@@ -1389,6 +1389,28 @@ impl Engine {
         }
     }
 
+    fn numeric_word_helper_name(method: &str) -> Option<&'static str> {
+        match method {
+            "abs" => Some("num_abs"),
+            "floor" => Some("num_floor"),
+            "ceil" => Some("num_ceil"),
+            "round" => Some("num_round"),
+            "sum" => Some("num_sum"),
+            "avg" => Some("num_avg"),
+            "median" => Some("num_median"),
+            "range" => Some("num_range"),
+            "add" => Some("num_add"),
+            "sub" => Some("num_sub"),
+            "mul" => Some("num_mul"),
+            "div" => Some("num_div"),
+            "mod" => Some("num_mod"),
+            "clamp" => Some("num_clamp"),
+            "min" => Some("num_min"),
+            "max" => Some("num_max"),
+            _ => None,
+        }
+    }
+
     fn is_number_receiver_value_chain_method(method: &str) -> bool {
         Self::is_number_receiver_number_returning_method(method)
             || Self::is_number_receiver_terminal_method(method)
@@ -2180,6 +2202,7 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
+        let name = Self::numeric_word_helper_name(name).unwrap_or(name);
         match name {
             // ── Declarations ──
             "declare" => {
