@@ -47,13 +47,20 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.0 - adopt text-to-AST doctrine`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.1`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Inventory Perl text-to-text ActionIR lowering sites and define the AST node set.
   Acceptance: Enumerate current string-lowering entry points in `ActionIR::*` and
     `RuleIR::EmitContext`; map each supported expression/statement/control shape to an
     AST node; identify behavior-preserving order of replacement. No behavior change.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Inventoried the raw-string boundaries in
+    `StatementSplit`, `MethodExpr`, scanner rule families, `Contracts`, `CanonicalEvents`,
+    `RewritePipeline`, `MethodLowering`, and `RuleIR::EmitContext`; defined the
+    Rust-aligned AST node set and replacement order; added Knowledge Map fact
+    `perl-actionir-text-to-ast-inventory`; regenerated `KNOWLEDGE_MAP.md`. Checks passed:
+    stale-frontier search, `bash scripts/check_memory_architecture.sh`,
+    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_doctrines.sh`,
+    `mdbook build docs/linkedspec-book`, and `git diff --check`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.1 - inventory Perl ActionIR text lowering`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.2`
   Status: `pending`
@@ -97,8 +104,94 @@ and host-language fallback are migration debt.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | — | `PERL-ACTIONIR-AST-MIGRATION.0` | `done` 2026-07-01 | Doctrine adoption and book alignment before code. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.1` | `pending` | Inventory all text-to-text lowering sites and design AST nodes before implementation. |
-| 2 | `PERL-ACTIONIR-AST-MIGRATION.2` | `pending` | Introduce parser seam behind existing behavior. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.1` | `done` 2026-07-01 | Perl text-to-text lowering inventory, AST node set, and replacement order locked before implementation. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.2` | `pending` | Introduce parser seam behind existing behavior. |
+
+## PERL-ACTIONIR-AST-MIGRATION.1 Inventory
+
+### Current Text Boundaries
+
+- `LinkedSpec::ActionIR::StatementSplit` and `StatementSplit::Core` own the raw
+  action-statement splitter. They scan character-by-character, track delimiter and quote
+  state, call `MethodExpr::_parse_method_function_expr(...)` for complete method-looking
+  statements, and return raw statement strings.
+- `LinkedSpec::ActionIR::MethodExpr` owns the smallest current parse seam. It recognizes
+  `method(arg1, arg2, ...)`, normalizes short aliases such as `s`/`a`/`h`/`cat`/`set`, and
+  splits top-level CSV arguments while preserving nested delimiters and quotes. Its output
+  is still raw text, not AST nodes.
+- `LinkedSpec::ActionIR::Scanner`, `ScannerCore`, and the scanner rule families inspect
+  raw action text with regex/call-shape probes and emit contract-hit event hashes. These
+  events are telemetry and canonicalization inputs, not a typed action AST.
+- `LinkedSpec::ActionIR::Contracts` still contains many `lower => sub { ... }` callbacks
+  that rewrite helper families by source text. Canonical IR-only contracts exist, but the
+  compatibility contract catalog still encodes broad text-to-text lowering behavior.
+- `LinkedSpec::ActionIR::CanonicalEvents` builds helper events from split raw statements
+  and emits `RAW_PERL` fallback events for unrecognized statements. That fallback is
+  migration debt for supported helper/value/control surfaces.
+- `LinkedSpec::ActionIR::RewritePipeline` is the decisive source-text replacement
+  boundary: `_lower_action_code_from_canonical_ir(...)` matches each canonical event's raw
+  statement back into the original source with `index(...)` or a flexible whitespace regex,
+  then `substr(...)`-replaces that source span with the lowered Perl string.
+- `LinkedSpec::ActionIR::MethodLowering` is the largest recursive text parser/lowerer. It
+  repeatedly calls `_lower_method_value_expr(...)`, rewrites return payload helper calls
+  with regex substitution, splits receiver-dot chains from raw text, normalizes receiver
+  chains by constructing helper-call text, and lowers assignment/mutation statements from
+  raw method strings.
+- `LinkedSpec::RuleIR::EmitContext` is the bridge that applies ActionIR rewriting to
+  action/lifecycle code, exposes wrappers for the parser/lowerer helpers, builds rewrite
+  metadata, and still discovers automatic working-variable declarations by scanning raw
+  pre-lowered code.
+- `LinkedSpec::SpecEntry` and `LinkedSpec::Compiler` still emit/eval generated Perl
+  handler source. This is outside the first migration boundary: the immediate doctrine
+  violation is helper/action text lowering before source emission, not the existence of a
+  Perl code-emission backend.
+
+### Rust-Aligned Perl AST Node Set
+
+The Perl parser seam should model the Rust expression/runtime shape instead of inventing a
+separate tree:
+
+- `ActionBlock { statements, source_span }` and `ActionStmt { expr, source_span }`.
+  Standalone expression statements evaluate and silently drop their value.
+- `Call { name, args, source_span }` for helper calls and later user-defined functions.
+  Name resolution may classify a `Call` later, but syntax should not become textual macro
+  expansion.
+- `FluentChain` / `ReceiverChain { receiver, calls }`, where the receiver is any
+  expression, including another function call or a block value.
+- Value nodes: `Variable`, typed variable reads for scalar/array/hash wrappers,
+  `IndexedVar`, `NestedAccess` with explicit access segments, `ArrayLiteral`,
+  `HashLiteral`, `BlockValue`, `StringLiteral`, `NumberLiteral`, `BooleanLiteral`,
+  `RegexLiteral`, and `Undef`.
+- Mutation/assignment nodes aligned with existing Rust variants and Perl helper families:
+  `AssignScalar`, `AssignArrayAppend`, `AssignHashIndex`, `SetKey`, `Push`, and
+  `ArrayEndMutation`.
+- Statement/control nodes: `Declare`, `Return`, `ReturnUndef`, `If`, `While`, `Switch`,
+  `Case`, `Default`, `Say`, `Print`, `PrintEach`, `ExitNow`, and `Next`.
+- `RawPerl { source, reason }` remains only as a temporary migration boundary for legacy
+  compatibility telemetry. New supported surfaces must not add dependencies on it.
+
+All nodes need source spans for diagnostics and parity with today's raw-event telemetry.
+Spans replace fragile raw-statement source replacement; they do not disappear.
+
+### Behavior-Preserving Replacement Order
+
+1. `PERL-ACTIONIR-AST-MIGRATION.2`: introduce `ActionIR::AST` parser modules and focused
+   parser tests behind existing behavior. Reuse or port the proven delimiter/quote logic
+   from `StatementSplit::Core` and `MethodExpr`; run the parser in parallel for
+   diagnostics/parity while `RewritePipeline` remains authoritative.
+2. `PERL-ACTIONIR-AST-MIGRATION.3`: switch value-expression and receiver-chain lowering
+   first. Replace `_lower_method_value_expr(...)`, `_lower_return_payload_expr(...)`, and
+   receiver-dot text normalization with AST lowering that still emits Perl source strings.
+3. `PERL-ACTIONIR-AST-MIGRATION.4`: switch statement/control lowering after the value
+   seam is stable: assignments, array/hash mutations, declarations, returns, if/when,
+   switch/case/default, while, block-local return, print/say, exit, and next.
+4. `PERL-ACTIONIR-AST-MIGRATION.5`: retire supported-surface `RAW_PERL` fallback and
+   unresolved-helper source-text behavior family by family, replacing accidental host-call
+   leakage with LinkedSpec diagnostics and enabling user-defined functions through AST
+   `Call` nodes.
+
+Automatic working-variable discovery should move from regex scanning to AST traversal as
+soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 ## Decisions
 
@@ -111,4 +204,5 @@ and host-language fallback are migration debt.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.1` | Perl ActionIR text-lowering inventory; Rust-aligned AST node set; replacement order; KM fact `perl-actionir-text-to-ast-inventory` + regenerated map; roadmap/task-tree/live-doc sync; stale-frontier, memory/doctrine/KM/diff checks; mdBook build | Perl text-to-text lowering boundaries are mapped before code. Parser seam `.2` is the next frontier; no parser/compiler/runtime code changed. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.0` | ADR `0011`; KM fact `text-to-ast-backend-doctrine` + regenerated map; mdBook backend-handoff/pipeline/formal/architecture updates; roadmap/task-tree/live-doc sync; memory/doctrine/KM/diff checks; mdBook build | Text-to-AST adopted as a cross-variant doctrine before code. Perl ActionIR text-to-text lowering is now migration debt; future backends must parse helper/action text into typed AST/IR before lowering/execution. No parser/compiler/runtime code changed. |

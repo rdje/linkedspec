@@ -7,14 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.1 — Perl ActionIR text-lowering inventory locked**
+  (TASK TREE + KM + LIVE DOCS; **no runtime behavior change**). The current Perl text-to-text boundaries are
+  now explicitly mapped: raw statement splitting in `StatementSplit`, method-call text parsing in `MethodExpr`,
+  raw contract scanners, contract lower callbacks, canonical `RAW_PERL` fallback, source-span replacement in
+  `RewritePipeline`, recursive raw expression/receiver lowering in `MethodLowering`, and the
+  `RuleIR::EmitContext` bridge/auto-working-var scanners. The replacement model is Rust-aligned
+  `ActionBlock`/`ActionStmt` plus typed `Call`, `FluentChain`, value, mutation, and control nodes with source
+  spans. Standalone expression statements silently drop their values, so future user-function calls remain
+  ordinary expressions.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.2` introduce the parser seam behind existing behavior before
+  replacing value/receiver lowering.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.0 — text-to-AST doctrine adopted**
   (ADR + TASK TREE + BOOK/KM/LIVE DOCS; **no runtime behavior change**). The Rust-style text-to-AST path is now
   the cross-variant doctrine: helper/action language must parse into typed AST/IR before lowering, execution, or
   code emission. Perl ActionIR text-to-text lowering is migration debt; future Julia/Dart backends must start
   with AST, and Lua inherits the same rule if later adopted. User-defined functions must be implemented through
   AST call/function nodes, not textual macros.
-  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.1` inventory current Perl text-to-text lowering sites and define
-  the AST node set, then `.2` introduce the parser seam behind existing behavior.
+  **Then-frontier:** `PERL-ACTIONIR-AST-MIGRATION.1` (now completed above), then `.2`.
 - 2026-07-01: **SPEC-FORMAT-TERSE.4 — user-defined function surface owned**
   (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). User-defined pure functions are now the
   active Round 4 terse-language surface. The MVP contract starts with top-level `fn name(args) { ... }`,

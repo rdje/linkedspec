@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.1 — Perl ActionIR text-lowering inventory locked): Completed the
+  no-behavior inventory before implementation. Durable points. (1) **The decisive text-to-text boundary is
+  `RewritePipeline`.** `_lower_action_code_from_canonical_ir(...)` matches canonical event raw statements back
+  into source and `substr(...)`-replaces them with lowered Perl; the AST migration must remove that raw-span
+  replacement for supported surfaces. (2) **The smallest parser seam is `MethodExpr` plus
+  `StatementSplit::Core`.** Those modules already contain most delimiter/quote handling, but return strings;
+  `.2` should reuse or port their mechanics into typed nodes. (3) **`MethodLowering` is the highest-risk
+  recursive text parser.** `_lower_method_value_expr(...)`, `_lower_return_payload_expr(...)`, and receiver-dot
+  normalization repeatedly parse/rewrite raw text and should move first after the parser seam. (4) **AST nodes
+  should mirror Rust.** Use `ActionBlock`/`ActionStmt`, `Call`, `FluentChain`, value/literal/access nodes,
+  assignment/mutation nodes, and control nodes with source spans; standalone expression statements drop their
+  value silently. (5) **Raw fallback becomes legacy telemetry only.** `RAW_PERL` can remain during migration,
+  but new supported surfaces, especially user-defined functions, must flow through AST `Call` nodes.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.0 — text-to-AST doctrine adopted): User explicitly rejected Perl
   source-text lowering as too fragile and adopted the Rust-style text-to-AST path as cross-variant doctrine.
   Durable points. (1) **AST before lowering is now a contract.** Every backend must parse helper/action DSL

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.1 — inventory Perl ActionIR text lowering
+
+**Scope:** Task-tree inventory, roadmap/live continuity docs, Knowledge Map fact card, and migration order.
+No parser/compiler/runtime code changed.
+
+**What changed:** The current Perl text-to-text ActionIR path is now mapped before implementation. The raw
+boundaries are `StatementSplit`/`StatementSplit::Core`, `MethodExpr`, scanner rule families, contract
+lowering callbacks, canonical `RAW_PERL` fallback, source-span replacement in `RewritePipeline`,
+recursive method/value/receiver lowering in `MethodLowering`, and the `RuleIR::EmitContext` bridge.
+
+**AST model:** The Perl parser seam will align with Rust's typed expression model: `ActionBlock`,
+`ActionStmt`, `Call`, `FluentChain`/`ReceiverChain`, typed value/literal/access nodes, assignment and mutation
+nodes, and control/printing/return nodes with source spans. A standalone function or helper call is an
+expression statement whose value is silently dropped.
+
+**Migration order:** `.2` introduces the parser seam behind existing behavior; `.3` moves value-expression and
+receiver-chain lowering to AST; `.4` moves statements/control; `.5` retires supported-surface raw fallback and
+unblocks user-defined functions on AST calls.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.0 — adopt text-to-AST doctrine
 
 **Scope:** ADR, task-tree ownership, mdBook, Knowledge Map, and live docs. No parser/compiler/runtime code
