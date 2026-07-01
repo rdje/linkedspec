@@ -7,14 +7,16 @@ answers:
   - "do malformed covered helpers still leak to raw Perl"
   - "where should user function calls hook into ActionIR"
   - "does unknown user_fn lower as a host call today"
+  - "does return user_fn still leak as a host call"
   - "is all-bare push A B a scalar append"
   - "does bootstrap currently implement fn grammar"
   - "what did PERL-ACTIONIR-AST-MIGRATION.5.1 classify"
+  - "what did PERL-ACTIONIR-AST-MIGRATION.5.3.2 change"
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, fallback, user-functions, diagnostics]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.5.1 used TOOLBOX call_spec_handler_subst, return_descriptor, and ActionIR AST parser probes plus code reads of CanonicalEvents, RewritePipeline, RuleIR::EmitContext, MethodLowering, and ActionIR::AST::Parser. Malformed covered helpers such as substr/count report unresolved-helper metadata with raw_perl_dependency_count == 0. Retired helpers and non-DSL host-shaped statements remain RAW_PERL compatibility debt. all-bare push(A,B) remains child-call aggregation. Unknown typed calls/chains such as return(user_fn(\"x\")) and return(user_fn(\"x\").trim()) currently lower as generated host calls and report ready, so PERL-ACTIONIR-AST-MIGRATION.5.3 owns user-function resolution/diagnostics. Targeted rg found no current fn definition grammar in specs/spec.spec or the bootstrap parser."
-reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'for my $s (q{return(substr(\"abc\"))}, q{return(count(1,2))}, q{return(user_fn(\"x\"))}, q{return(user_fn(\"x\").trim())}, q{return_array(foo)}, q{my $x = 1}, q{push(A,B)}) { my $d=LinkedSpec::Get(\\qq{Top::\\n /x/ -> Done { $s }\\n\\nDone::\\n /x/\\n}, return_descriptor=>1); my $m=$d->{spec}{Top}{meta}{action_rewriter}; print \"$s raw=$m->{raw_perl_dependency_count} unresolved=$m->{unresolved_helper_count} ready=$m->{language_agnostic_action_ir_ready}\\n\" }' && rg -n '\\bfn\\b|fn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(' specs/spec.spec perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm"
+evidence: "PERL-ACTIONIR-AST-MIGRATION.5.1 used TOOLBOX call_spec_handler_subst, return_descriptor, and ActionIR AST parser probes plus code reads of CanonicalEvents, RewritePipeline, RuleIR::EmitContext, MethodLowering, and ActionIR::AST::Parser. Malformed covered helpers such as substr/count report unresolved-helper metadata with raw_perl_dependency_count == 0. Retired helpers and non-DSL host-shaped statements remain RAW_PERL compatibility debt. all-bare push(A,B) remains child-call aggregation. PERL-ACTIONIR-AST-MIGRATION.5.3.2 changed return/value-position unknown typed calls/chains such as return(user_fn(\"x\")) and return(user_fn(\"x\").trim()) from generated host calls into unresolved-helper diagnostics; standalone user_fn(\"x\") / user_fn(\"x\").trim() remain raw until the function registry owns discard semantics. Targeted rg found no current fn definition grammar in specs/spec.spec or the bootstrap parser."
+reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'for my $s (q{return(substr(\"abc\"))}, q{return(count(1,2))}, q{return(user_fn(\"x\"))}, q{return(user_fn(\"x\").trim())}, q{user_fn(\"x\")}, q{user_fn(\"x\").trim()}, q{return_array(foo)}, q{my $x = 1}, q{push(A,B)}) { my $d=LinkedSpec::Get(\\qq{Top::\\n /x/ -> Done { $s }\\n\\nDone::\\n /x/\\n}, return_descriptor=>1); my $m=$d->{spec}{Top}{meta}{action_rewriter}; print \"$s raw=$m->{raw_perl_dependency_count} unresolved=$m->{unresolved_helper_count} ready=$m->{language_agnostic_action_ir_ready}\\n\" }' && rg -n '\\bfn\\b|fn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(' specs/spec.spec perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm"
 ---
 
 After `PERL-ACTIONIR-AST-MIGRATION.5.1`, the remaining Perl ActionIR fallback boundary is classified before
@@ -32,10 +34,12 @@ The all-bare `push(A,B)` form remains the existing child-call aggregation conven
 `items += value`, an unambiguous literal/value `push(...)`, or `push_value(...)` for append intent.
 
 Unknown call names are different. The AST parser already represents `user_fn("x")` as a `call` node and
-`user_fn("x").trim()` as a `fluent_chain` with a `call` receiver. In return-value contexts these currently
-lower as generated host calls and report language-agnostic ready. That is the user-function handoff risk owned
-by `PERL-ACTIONIR-AST-MIGRATION.5.3`, where unknown typed call names must resolve as user functions or
-diagnostics instead of textual/host fallback.
+`user_fn("x").trim()` as a `fluent_chain` with a `call` receiver. After
+`PERL-ACTIONIR-AST-MIGRATION.5.3.2`, return/value-position forms such as
+`return(user_fn("x"))` and `return(user_fn("x").trim())` no longer lower as generated host calls. They use the
+existing `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn` sentinel and descriptor unresolved-helper metadata.
+Standalone `user_fn("x")` and `user_fn("x").trim()` still remain raw until the user-function registry owns
+resolution and discard semantics.
 
 Targeted search found no current `fn <name>(...) { ... }` definition grammar in `specs/spec.spec` or the
 bootstrap parser. `PERL-ACTIONIR-AST-MIGRATION.5.4` still owns locking `specs/spec.spec` as the permanent

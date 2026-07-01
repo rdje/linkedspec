@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.3.2 — diagnose unknown AST calls in value positions
+
+**Scope:** Perl ActionIR `MethodLowering`, focused AST parser tests, task tree, live docs, mdBook status, and
+Knowledge Map.
+
+**What changed:** Unknown typed `call` / `fluent_chain` nodes in value-return positions now emit the existing
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostic sentinel instead of leaking as generated host-language
+calls. This closes the concrete handoff risk from `.5.1`: `return(user_fn("x"))` and
+`return(user_fn("x").trim())` no longer compile to host `user_fn(...)` calls and descriptor metadata reports the
+unresolved helper.
+
+**Compatibility boundary:** Standalone unknown function-shaped statements such as `user_fn("x")` still remain
+raw until the function registry owns standalone result discard. Existing DSL and compatibility helper names are
+explicitly fenced as known so unsupported value-chain surfaces such as `return(items.push_back("a"))`, retired
+return helpers, declaration aliases, source-boundary helpers, and internal trace calls do not get misclassified as
+future user functions.
+
+**Checks:** Syntax checks passed for `MethodLowering`, scanner pipeline rules, contracts, and
+`t/actionir_ast_parser.t`. Focused probes covered return-position unknown calls, supported `call(...)` and
+`input_text()` payloads, flow helper composition, declaration aliases, and unsupported array mutation value
+chains. `prove -Iperl t/actionir_ast_parser.t` passed with **20 subtests**. `prove -Iperl t/phase0_regression.t`
+passed with phase0 **1003 tests**. `mdbook build docs/linkedspec-book`, memory architecture, Knowledge Map,
+doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh` passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.3.1 — retire short wrapper aliases
 
 **Scope:** Perl ActionIR lowering, scanner/contract metadata, shipped specs/corpus fixtures, phase0 locks,
@@ -68,9 +92,10 @@ probes, and code reads before code.
 **Findings:** Malformed AST-covered helpers already emit unresolved-helper metadata without raw fallback.
 Retired helpers and non-DSL host-shaped statements remain explicit compatibility debt. Narrow return payload
 compatibility remains fenced. All-bare `push(A,B)` remains the existing child-call ambiguity contract.
-Unknown typed calls/chains such as `return(user_fn("x"))` and `return(user_fn("x").trim())` are the user-function
-handoff risk because they currently lower as generated host calls and report ready; `.5.3` owns resolving them
-through user-function diagnostics. Targeted `rg` found no current `fn <name>(...) { ... }` grammar in bootstrap or
+At `.5.1`, unknown typed calls/chains such as `return(user_fn("x"))` and
+`return(user_fn("x").trim())` were the user-function handoff risk because they lowered as generated host calls
+and reported ready; `.5.3.2` has since resolved value-position cases through user-function diagnostics. Targeted
+`rg` found no current `fn <name>(...) { ... }` grammar in bootstrap or
 `specs/spec.spec`; `.5.4` still owns the permanent grammar/proof lock.
 
 **Checks:** TOOLBOX probes and code reads completed. `mdbook build docs/linkedspec-book`, memory architecture,

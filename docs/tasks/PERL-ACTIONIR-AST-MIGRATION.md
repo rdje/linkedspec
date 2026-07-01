@@ -492,14 +492,28 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3.1 - retire short wrapper aliases`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.3.2`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Prepare user-function calls to resolve through AST call nodes.
   Acceptance: Function calls use the same typed `call` / `fluent_chain` value path as
     helper calls, preserve receiver-dot chaining and standalone-result discard, and route
     unknown/colliding names through diagnostics rather than textual macro expansion. This
     is the Perl ActionIR handoff needed by `SPEC-FORMAT-TERSE.4.1`/`.4.2`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Unknown typed calls and function-call receivers in
+    return/value positions now lower to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>`
+    instead of generated host-language calls; descriptor metadata reports unresolved helper
+    `user_fn` and blocks language-agnostic readiness. Existing DSL/compatibility names are
+    fenced as known before unknown-call diagnostics, so declaration aliases, retired return
+    helpers, source-boundary helpers, internal trace calls, and statement-only array
+    mutation methods keep their compatibility behavior instead of being misclassified as
+    future user functions. Standalone unknown function-shaped statements remain raw until
+    the function registry owns discard semantics. Checks passed so far:
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`,
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`,
+    `perl -Iperl -c t/actionir_ast_parser.t`, focused lowering probes,
+    `prove -Iperl t/actionir_ast_parser.t`, and `prove -Iperl t/phase0_regression.t`
+    with phase0 1003 tests.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3.2 - diagnose unknown AST calls`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.4`
   Status: `pending`
@@ -540,7 +554,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.2` | `done` 2026-07-01 | Supported standalone value statements now lower as discarded `VALUE_DROP` nodes, while malformed covered helpers diagnose and compatibility/user-function fences remain intact. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.3` | `split` 2026-07-01 | User-function handoff split so `s`/`a`/`h` shorthand wrapper retirement is owned before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | `done` 2026-07-01 | Short wrapper aliases now retire through unresolved-helper diagnostics and repo-owned specs/docs use canonical wrappers. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.3.2` | `pending` | Resume user-function AST call handoff now that wrapper alias retirement is complete. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.5.3.2` | `done` 2026-07-01 | Return/value-position unknown typed calls now diagnose instead of leaking host calls; standalone unknown calls remain raw until function registry discard semantics. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.4` | `pending` | Lock permanent `fn` grammar ownership in `specs/spec.spec` and prove/remove bootstrap-parser support. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -881,10 +896,29 @@ Next owners:
 - `.5.2`: only retire any remaining AST-covered **supported helper/action surface**
   leakage that still falls through as host/raw text; preserve the compatibility fences
   above.
-- `.5.3`: resolve unknown typed `call` / `fluent_chain` names as user functions or
-  diagnostics so they cannot silently become generated host-language calls.
+- `.5.3`: complete. Return/value-position unknown typed `call` / `fluent_chain`
+  names now diagnose instead of silently becoming generated host-language calls;
+  standalone unknown calls remain raw until the function registry owns result discard.
 - `.5.4`: lock `specs/spec.spec` as the function-definition grammar owner and prove
   the bootstrap parser has no lasting `fn` support.
+
+## PERL-ACTIONIR-AST-MIGRATION.5.3.2 Unknown Call Handoff
+
+`MethodLowering::_lower_method_value_expr(...)` now treats truly unknown typed `call`
+nodes and function-call receivers as unresolved helper diagnostics in value-return
+contexts. The important probes are:
+
+- `return(user_fn("x"))` -> `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn`;
+- `return(user_fn("x").trim())` -> `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn`;
+- `user_fn("x")` and `user_fn("x").trim()` as standalone statements still remain raw
+  until the function registry owns standalone result discard.
+
+The implementation fences existing helper names before unknown-call diagnostics. That
+keeps known DSL/compatibility surfaces such as `or(...)`, declaration aliases,
+source-boundary helpers, retired return helpers, internal trace calls, and statement-only
+array mutation methods from being misclassified as future user functions. Known but
+unsupported value-chain forms such as `return(items.push_back("a"))` therefore preserve
+their compatibility fallback instead of becoming unresolved user-function diagnostics.
 
 ## PERL-ACTIONIR-AST-MIGRATION.4.1 Assignment/Mutation Operator AST Statements
 
@@ -1073,6 +1107,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3.2` | Unknown typed call handoff in `MethodLowering`; known-helper fence for DSL/compatibility names; focused probes for `return(user_fn(...))`, `return(user_fn(...).trim())`, `return(call(Leaf))`, `return(input_text())`, `or(...)`, declaration aliases, retired helpers, and statement-only array mutation value chains; syntax checks; focused ActionIR AST suite; phase0 1003 tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Return/value-position unknown typed calls now diagnose through unresolved-helper metadata instead of leaking generated host calls. Standalone unknown function-shaped statements remain raw until function registry discard semantics are implemented. Frontier moves to `.5.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | Migrated repo-owned specs/corpus fixtures/tests/docs/book to `scalar(...)`/`array(...)`/`hash(...)`; removed Perl/Rust lowering normalization of `s(...)`/`a(...)`/`h(...)`; added retired-helper diagnostics lock; syntax checks; focused ActionIR suite; phase0 1003 tests; Rust core/runtime library tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Short wrapper aliases are no longer treated as canonical wrapper spellings. Residual `s`/`a`/`h` calls diagnose as unresolved helpers with zero raw fallback, and the public docs/book now teach canonical wrappers only. Frontier moves to `.5.3.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3` | Read-only `rg` usage discovery for `s(...)`, `a(...)`, and `h(...)` across `specs/`, `t/`, mdBook, task trees, and Knowledge Map; task-tree/live-doc/KM updates; memory/doctrine/KM/diff checks | User policy that short wrapper aliases must be retired is now owned before code. `.5.3` is split into `.5.3.1` short-wrapper alias retirement and `.5.3.2` user-function AST call handoff. Frontier moves to `.5.3.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.2` | Added dropped-value statement lowering through typed AST value traversal; added scanner/canonical/rewrite metadata for `VALUE_DROP`; preserved compatibility `s(...)`/`a(...)`/`h(...)` value-expression substitution; focused syntax checks for touched ActionIR modules, `perl/LinkedSpec.pm`, and `t/actionir_ast_parser.t`; focused AST suite with 20 subtests; phase0 1002 tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Supported standalone value statements such as `trim(" x ")`, `concat("a","b")`, and `" x ".trim()` no longer remain raw fallback and now lower as discarded values. Malformed covered standalone helpers diagnose through unresolved-helper metadata without raw fallback. Unknown user-function-shaped calls/chains remain `.5.3` handoff work. Frontier moves to `.5.3`. |

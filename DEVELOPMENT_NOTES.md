@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.3.2 — user-function AST call handoff preparation):
+  Unknown typed calls in value-return positions no longer leak as generated host-language calls. Durable points.
+  (1) **Value-position unknown calls diagnose.** `return(user_fn("x"))` and
+  `return(user_fn("x").trim())` now lower through the ActionIR AST path to the existing
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn` sentinel, so descriptor metadata reports unresolved helpers
+  rather than language-agnostic readiness. (2) **Known helper names are fenced before unknown-call diagnostics.**
+  The unknown-call walker carries an explicit known-name set for existing DSL helpers, source-boundary helpers,
+  declaration aliases, retired return helpers, statement-only array mutation methods, and internal trace calls.
+  That prevents compatibility surfaces from being mistaken for future user functions. (3) **Standalone function
+  discard remains future work.** `user_fn("x")` and `user_fn("x").trim()` as standalone statements still remain
+  raw until the user-function registry owns resolution and discard semantics. (4) **Known-but-unsupported value
+  chains stay compatible.** `return(items.push_back("a"))` remains raw compatibility text because `push_back`
+  is a statement-only mutation surface, not a value-chain function call. (5) **Full local gate green.** The
+  focused AST suite, phase0 1003-test suite, mdBook build, memory/doctrine/Knowledge Map checks, diff check, and
+  canonical `tools/run_ci_local.sh` gate all pass after the handoff.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.3.1 — short wrapper aliases retired): The short wrapper spellings
   `s(...)`, `a(...)`, and `h(...)` are no longer treated as canonical `scalar(...)` / `array(...)` /
   `hash(...)` wrappers. Durable points. (1) **Canonical wrappers only.** Repo-owned specs, tests, root docs, and

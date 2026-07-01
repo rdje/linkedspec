@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3.2 — unknown AST value calls diagnose**
+  (PERL ACTIONIR + FOCUSED TEST + PHASE0 + BOOK/KM/LIVE DOCS). Unknown typed calls in return/value positions
+  now diagnose through `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` instead of leaking generated host calls.
+  `return(user_fn("x"))` and `return(user_fn("x").trim())` no longer emit host `user_fn(...)`; descriptor
+  metadata records unresolved helper `user_fn` and blocks language-agnostic readiness. Existing DSL and
+  compatibility helper names are fenced as known so declaration aliases, retired return helpers, source-boundary
+  helpers, internal trace calls, and statement-only array mutation methods are not mistaken for future user
+  functions. Standalone unknown function-shaped statements remain raw until the function registry owns discard
+  semantics.
+  **Verification:** syntax checks PASS for touched ActionIR modules and `t/actionir_ast_parser.t`; focused
+  probes PASS for unknown return calls/chains, supported `call(...)`/`input_text()` payloads, flow helper
+  composition, declaration aliases, and unsupported array mutation value chains; `prove -Iperl
+  t/actionir_ast_parser.t` PASS with **20 subtests**; `prove -Iperl t/phase0_regression.t` PASS with phase0
+  **1003 tests**; `mdbook build docs/linkedspec-book`, memory architecture, Knowledge Map, doctrine registry,
+  `git diff --check`, and `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.4` lock `fn` grammar ownership in `specs/spec.spec` and retire or
+  prove absent bootstrap-parser function syntax.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3.1 — short wrapper aliases retired**
   (PERL ACTIONIR + RUST CORE/RUNTIME + SPECS/FIXTURES + PHASE0 + BOOK/KM/LIVE DOCS). `s(...)`, `a(...)`, and
   `h(...)` are no longer canonical wrapper spellings. Repo-owned specs, corpus fixtures, tests, root guides, and
@@ -23,8 +40,8 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3 — short wrapper alias retirement split**
   (TASK TREE + LIVE DOCS + KM; **no parser/compiler/runtime code change**). User clarified that `s(...)`,
   `a(...)`, and `h(...)` should be retired too. Read-only discovery found active use in shipped specs, phase0
-  locks, and book examples, so the former `.5.3` user-function handoff leaf is now split: `.5.3.1` retires the
-  shorthand wrapper aliases and `.5.3.2` resumes user-function AST call handoff.
+  locks, and book examples, so the former `.5.3` user-function handoff leaf was split: `.5.3.1` retired the
+  shorthand wrapper aliases and `.5.3.2` completed the value-position user-function AST diagnostic handoff.
   **Verification:** usage discovery completed; memory/doctrine/Knowledge Map gates PASS; `git diff --check` PASS.
   **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.3.1` retire `s(...)`, `a(...)`, and `h(...)`.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.2 — dropped value statement lowering**
@@ -45,8 +62,8 @@ Current execution status for interruption-safe batch workflow recovery.
   unresolved-helper diagnostics with zero raw fallback; retired helpers and non-DSL host-shaped statements stay
   explicit compatibility debt; narrow return payload compatibility remains fenced; all-bare `push(A,B)` remains
   the child-call ambiguity contract. Unknown typed calls/chains such as `return(user_fn("x"))` and
-  `return(user_fn("x").trim())` are the real handoff risk because they currently lower as generated host calls
-  and report ready; `.5.3` owns resolving them as user functions or diagnostics. Targeted search found no current
+  `return(user_fn("x").trim())` were the real handoff risk because they lowered as generated host calls
+  and reported ready at the time; `.5.3.2` has since resolved value-position cases as diagnostics. Targeted search found no current
   lasting `fn <name>(...) { ... }` grammar in bootstrap or `specs/spec.spec`; `.5.4` still owns the grammar/proof
   lock.
   **Verification:** TOOLBOX `call_spec_handler_subst`, descriptor, and AST parser probes PASS; code reads

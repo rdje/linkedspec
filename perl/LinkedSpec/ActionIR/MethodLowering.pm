@@ -809,8 +809,44 @@ sub _actionir_ast_known_value_call_method {
  return 'concat' if $method eq 'cat';
  my $numeric_alias = _numeric_word_alias_helper_name($method);
  return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
- return $method
-  if $method =~ /^(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|scalar|array|hash|array_copy|hash_copy|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)$/o;
+ state %known = map { $_ => 1 } qw(
+  _trace_runtime_mark_event
+  CAPTURE CAPTURE_IF BACKTRACK IBACKTRACK
+  if i when elseif elif else otherwise endif switch case default endcase endswitch while
+  or and not eq ne gt ge lt le is_defined is_undefined is_empty is_nonempty
+  return return_undef return_array return_a return_m return_ma return_imatch return_im
+  assign set declare declare_s declare_scalar declare_a declare_array declare_h declare_hash
+  call push push_value push_nonempty push_back push_front pop_back pop_front set_key print say exit_now exit next
+  trim lowercase uppercase length substr replace_substr rm_prefix rm_suffix concat
+  starts_with ends_with contains_substr matches coalesce coalesce_nonempty
+  num_abs num_floor num_ceil num_round num_add num_sub num_mul num_div num_mod num_clamp
+  num_min num_max num_eq num_ne num_gt num_ge num_lt num_le num_sum num_avg num_median num_range
+  scalar array hash array_copy hash_copy copy flat flat_array flat_hash
+  count first last drop_front take slice take_last drop_back concat_arrays split split_tagged_records
+  sorted reversed contains index_of split_each trim_each filter_nonempty lowercase_each uppercase_each
+  uniq filter_match count_keys sorted_keys sorted_values has_key merge_hash rename_key drop_keys pick_keys
+  join_values scalaref
+  input_slice input_text input_len input_end_pos input_end_line input_end_col
+  entry_text entry_group entry_groups entry_named entry_has entry_map entry_named_map
+  entry_line entry_start_line entry_col entry_start_col entry_len entry_start_pos entry_end_pos
+  entry_end_line entry_end_col
+  match_text match_group match_groups match_named match_has match_map match_named_map match_len
+  match_start_pos match_end_pos match_start_line match_start_col match_end_line match_end_col match_line match_col
+  cursor_pos cursor_line cursor_col cursor_rest cursor_rest_len
+  capture capture_if capture_slice capture_slice_len capture_slice_length capture_slice_until_cursor
+  capture_slice_until_cursor_len capture_take_until_cursor capture_take_until_cursor_len
+  capture_slice_pos capture_slice_line capture_slice_col capture_slice_here
+  start_capture_slice capture_rest capture_rest_len capture_rest_length capture_take_rest capture_take_rest_len
+  capture_from_rule_start capture_len_from_rule_start capture_take_slice capture_take_slice_len capture_take_len
+  start_capture_slice_from capture_from capture_len_from capture_take capture_take_len_from
+  capture_rest_from capture_rest_len_from capture_take_rest_from capture_take_rest_len_from
+  capture_until_cursor_from capture_until_cursor_len_from capture_take_until_cursor_from
+  capture_take_until_cursor_len_from capture_between capture_len_between capture_take_between
+  capture_take_between_len
+  mark_here mark_input_start mark_input_end mark_entry_start mark_entry_end mark_match_start mark_match_end
+  mark_copy mark_capture_slice clear_mark mark_exists mark_pos mark_line mark_col
+ );
+ return $method if $known{$method};
  return undef
 }
 
@@ -839,7 +875,8 @@ sub _actionir_ast_first_unknown_value_call_name {
     unless _is_array_receiver_value_chain_method($method)
         || _is_hash_receiver_value_chain_method($method)
         || _is_string_receiver_value_chain_method($method)
-        || _is_number_receiver_value_chain_method($method);
+        || _is_number_receiver_value_chain_method($method)
+        || defined(_actionir_ast_known_value_call_method($method));
    foreach my $arg (@{$call->{args} || []}) {
     my $arg_unknown = _actionir_ast_first_unknown_value_call_name($arg);
     return $arg_unknown if defined($arg_unknown) && length($arg_unknown);
@@ -1926,6 +1963,13 @@ sub _lower_method_value_expr {
    return $call_expr if defined($call_expr) && length($call_expr);
    my $unsupported_call = $unsupported_ast_helper_expr->($node->{name});
    return $unsupported_call if defined($unsupported_call) && length($unsupported_call);
+   my $legacy_call = $legacy_method_value_expr->($node->{source});
+   return $legacy_call
+    if defined($legacy_call) && length($legacy_call) && $legacy_call ne ($node->{source} // '');
+   unless (defined(_actionir_ast_known_value_call_method($node->{name}))) {
+    my $unknown_call = _actionir_ast_unsupported_helper_expr($node->{name});
+    return $unknown_call if defined($unknown_call) && length($unknown_call);
+   }
    my $source = $node->{source};
    return $source if defined($source) && length($source);
   }
@@ -1934,6 +1978,12 @@ sub _lower_method_value_expr {
     ? $lower_ast_fluent_chain_node->($node)
     : undef;
    return $chain_expr if defined($chain_expr) && length($chain_expr);
+   my $unknown = _actionir_ast_first_unknown_value_call_name($node);
+   my $unknown_expr = _actionir_ast_unsupported_helper_expr($unknown);
+   return $unknown_expr if defined($unknown_expr) && length($unknown_expr);
+   my $legacy_chain = $legacy_method_value_expr->($node->{source});
+   return $legacy_chain
+    if defined($legacy_chain) && length($legacy_chain) && $legacy_chain ne ($node->{source} // '');
    my $source = $node->{source};
    return $source if defined($source) && length($source);
   }
@@ -2152,7 +2202,12 @@ sub _lower_method_value_expr {
    return $lowered_call if defined($lowered_call) && length($lowered_call);
    my $unsupported_call = $unsupported_ast_helper_expr->($node->{name});
    return $unsupported_call if defined($unsupported_call) && length($unsupported_call);
-   return $legacy_method_value_expr->($node->{source});
+   my $legacy_call = $legacy_method_value_expr->($node->{source});
+   return $legacy_call
+    if defined($legacy_call) && length($legacy_call) && $legacy_call ne ($node->{source} // '');
+   return _actionir_ast_unsupported_helper_expr($node->{name})
+    unless defined(_actionir_ast_known_value_call_method($node->{name}));
+   return undef;
   }
   return undef
  };
@@ -2208,6 +2263,10 @@ sub _lower_method_value_expr {
   my $receiver = $node->{receiver};
   my $calls = $node->{calls} || [];
   return undef unless ref($receiver) eq 'HASH' && ref($calls) eq 'ARRAY' && @$calls;
+
+  my $unknown = _actionir_ast_first_unknown_value_call_name($node);
+  my $unknown_expr = _actionir_ast_unsupported_helper_expr($unknown);
+  return $unknown_expr if defined($unknown_expr) && length($unknown_expr);
 
   my $receiver_expr = $ast_expr_source_node->($receiver);
   $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);
@@ -2419,6 +2478,9 @@ sub _lower_method_value_expr {
    if ($ast_kind ne 'raw_perl') {
     my $ast_lowered = $lower_ast_value_node->($ast_node);
     return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+    my $unknown = _actionir_ast_first_unknown_value_call_name($ast_node);
+    my $unknown_expr = _actionir_ast_unsupported_helper_expr($unknown);
+    return $unknown_expr if defined($unknown_expr) && length($unknown_expr);
    }
   }
  }

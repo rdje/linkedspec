@@ -71,13 +71,18 @@ Standalone supported value statements now lower through the same typed AST value
 traversal and produce canonical `VALUE_DROP` events: their value is computed with the
 covered helper/receiver semantics and then intentionally discarded. For example,
 `trim(" x ")`, `concat("a","b")`, and `" x ".trim()` do not remain raw host calls.
+Unknown typed calls and function-call receiver chains in return/value positions now
+diagnose through unresolved-helper metadata instead of becoming generated host-language
+calls.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl
 host calls. Retired helpers and non-DSL host-shaped statements remain explicit
 compatibility debt, and a few narrow return payload compatibility shapes are still
 fenced. Unknown typed calls and receiver chains are reserved for user-defined function
-resolution; they must not become a broad host-language fallback.
+resolution; they must not become a broad host-language fallback. The Perl reference now
+diagnoses those calls in return/value positions, while standalone unknown function-shaped
+statements remain raw until the function registry owns discard semantics.
 
 ## Why the pipeline matters
 

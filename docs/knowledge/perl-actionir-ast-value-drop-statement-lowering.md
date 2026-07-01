@@ -10,7 +10,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, method-lowering, value-drop]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.5.2 added the value_drop_statement contract, scanner event, canonical VALUE_DROP mapping, and focused t/actionir_ast_parser.t coverage. Supported standalone value statements such as trim(\" x \"), concat(\"a\",\"b\"), and \" x \".trim() lower through MethodLowering AST value traversal and then discard the value; malformed covered helpers report unresolved-helper metadata; unknown user-function-shaped calls/chains remain .5.3 handoff work."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.5.2 added the value_drop_statement contract, scanner event, canonical VALUE_DROP mapping, and focused t/actionir_ast_parser.t coverage. Supported standalone value statements such as trim(\" x \"), concat(\"a\",\"b\"), and \" x \".trim() lower through MethodLowering AST value traversal and then discard the value; malformed covered helpers report unresolved-helper metadata. PERL-ACTIONIR-AST-MIGRATION.5.3.2 changed return/value-position unknown calls such as return(user_fn(\"x\")) into unresolved-helper diagnostics, but standalone unknown user-function-shaped calls/chains remain raw until the function registry owns discard semantics."
 reverify: "prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t"
 ---
 
@@ -21,8 +21,9 @@ statement wrapper discards the result with `undef`.
 
 Malformed covered standalone helpers still use the unresolved-helper sentinel path
 instead of raw fallback. Compatibility value-expression probes for `s(...)`, `a(...)`,
-and `h(...)` still return expressions through `call_spec_handler_subst`; they are not
-treated as dropped statements by that compatibility API. Unknown user-function-shaped
-standalone calls/chains remain raw until `PERL-ACTIONIR-AST-MIGRATION.5.3` owns
-resolution/diagnostics. See also [[perl-actionir-ast-value-only-call-lowering]] and
+and `h(...)` now report retired-wrapper diagnostics rather than becoming dropped
+statements. Unknown user-function-shaped standalone calls/chains still remain raw after
+`PERL-ACTIONIR-AST-MIGRATION.5.3.2`; that leaf only moved return/value-position unknown
+calls onto diagnostics. Standalone result discard waits for the function registry. See
+also [[perl-actionir-ast-value-only-call-lowering]] and
 [[perl-actionir-ast-covered-call-diagnostics]].

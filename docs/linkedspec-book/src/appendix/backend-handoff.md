@@ -43,15 +43,19 @@ block-local returns, and final block expressions now consume typed block/stateme
 fields. Structured control-flow lowering now consumes typed AST fields for the if/when,
 switch/case/default, and attached-while statement families. Standalone supported value
 statements now produce canonical `VALUE_DROP` events: the backend computes the typed
-value expression and intentionally discards the result.
+value expression and intentionally discards the result. Unknown typed calls and
+function-call receiver chains in return/value positions now use the unresolved-helper
+diagnostic path instead of becoming generated host-language calls.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
 calls. Retired helpers, non-DSL host-shaped statements, and a few narrow return payload
 compatibility shapes remain fenced migration debt. Unknown typed calls and receiver
 chains are reserved for user-defined function resolution and diagnostics, not broad
-host-language fallback. New backends should follow the typed-AST model used by the Rust
-implementation from the start.
+host-language fallback. In the Perl reference, return/value-position unknown calls
+currently diagnose; standalone unknown function-shaped statements remain raw until the
+function registry owns result discard semantics. New backends should follow the typed-AST
+model used by the Rust implementation from the start.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
 specified in the documents below.

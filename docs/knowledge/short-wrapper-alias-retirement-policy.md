@@ -22,6 +22,8 @@ the preferred constructor surface where applicable.
 and docs away from the short aliases. Residual `s(...)`, `a(...)`, or `h(...)` calls now
 enter the same unresolved-helper diagnostic path as other retired helper spellings:
 `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:s|a|h`, no raw-Perl fallback, and not
-language-agnostic ready. `PERL-ACTIONIR-AST-MIGRATION.5.3.2` resumes user-function AST
-call handoff. See [[perl-actionir-ast-value-drop-statement-lowering]] for the immediately
-preceding dropped-value statement boundary.
+language-agnostic ready. `PERL-ACTIONIR-AST-MIGRATION.5.3.2` completed the
+value-position user-function diagnostic handoff; standalone unknown calls remain raw
+until the function registry owns discard semantics. See
+[[perl-actionir-ast-value-drop-statement-lowering]] for the immediately preceding
+dropped-value statement boundary.

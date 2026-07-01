@@ -953,10 +953,12 @@ subtest 'standalone AST value statements drop covered values without raw fallbac
     ok(!$unsupported_meta->{language_agnostic_action_ir_ready}, 'unsupported covered standalone helper blocks readiness through diagnostics');
 
     my $unknown = LinkedSpec::call_spec_handler_subst('Top', q{user_fn("x")});
-    is($unknown, q{user_fn("x")}, 'standalone unknown user function remains raw for the user-function handoff slice');
+    is($unknown, q{user_fn("x")},
+        'standalone unknown user function remains raw until the function registry owns discard semantics');
 
     my $unknown_chain = LinkedSpec::call_spec_handler_subst('Top', q{user_fn("x").trim()});
-    is($unknown_chain, q{user_fn("x").trim()}, 'unknown function-call receiver chain remains raw for the user-function handoff slice');
+    is($unknown_chain, q{user_fn("x").trim()},
+        'standalone unknown function-call receiver chain remains raw until function calls resolve');
 
     my $unknown_spec = qq{Top::\n /x/ -> Done { user_fn("x"); user_fn("x").trim() }\nDone::\n /y/\n};
     my $unknown_descriptor = eval { LinkedSpec::Get(\$unknown_spec, return_descriptor => 1) };
@@ -1164,11 +1166,19 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
         unlike($bad_chain, qr/\bsubstr\s*\(/, 'unsupported covered return-payload chain helper does not leak as a host call');
         like($bad_chain, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unsupported covered return-payload chain helper keeps diagnostic sentinel');
 
+        my $unknown_call = LinkedSpec::call_spec_handler_subst('Top', q{return(user_fn("x"))});
+        unlike($unknown_call, qr/\breturn\s+user_fn\s*\(/, 'unknown return-payload call does not leak as a host call');
+        like($unknown_call, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn/, 'unknown return-payload call keeps diagnostic sentinel');
+
+        my $unknown_receiver = LinkedSpec::call_spec_handler_subst('Top', q{return(user_fn("x").trim())});
+        unlike($unknown_receiver, qr/user_fn\s*\("x"\)/, 'unknown function-call receiver does not leak into receiver-chain lowering');
+        like($unknown_receiver, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn/, 'unknown function-call receiver keeps diagnostic sentinel');
+
         my $bare_scalar = LinkedSpec::call_spec_handler_subst('Top', q{return(count)});
         like($bare_scalar, qr/return \$count\b/, 'AST variable return payloads still lower through scalar source-slot reads');
         unlike($bare_scalar, qr/return count\b/, 'AST variable return payloads do not leak raw identifiers');
 
-        my $all = join("\n", $payload, $bad_chain, $bare_scalar);
+        my $all = join("\n", $payload, $bad_chain, $unknown_call, $unknown_receiver, $bare_scalar);
         unlike($all, qr/__bad_/, 'AST return-payload lowering does not reuse fake source text');
     }
 
