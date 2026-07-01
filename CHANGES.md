@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.4 — lower return payloads from AST
+
+**Scope:** Perl ActionIR method/return lowering, focused AST parser/lowering tests, mdBook architecture text,
+Knowledge Map, task tree, and live docs.
+
+**What changed:** `MethodLowering::_lower_return_payload_expr(...)` now parses generalized return payloads
+through `LinkedSpec::ActionIR::AST` and accepts AST-lowered typed payloads before the legacy helper-substitution
+loop. Direct shapes, nested helper calls, direct/nested access, block values, receiver chains, primitive
+literals, and bare scalar reads now share the same typed value traversal used by `_lower_method_value_expr(...)`.
+
+**Compatibility boundary:** Raw fallback remains only for untyped compatibility payloads, including shipped
+surfaces such as `\(my $capt = capture_slice())`. AST `variable` payloads deliberately continue through the
+scalar source-slot read path, so `return(count)` lowers to `return $count` rather than leaking a raw identifier.
+Unsupported covered helper chains inside return payloads keep the existing unresolved-helper sentinel instead of
+turning into generated host calls.
+
+**Tests:** Added focused fake-source coverage for typed return payloads, unsupported covered chain diagnostics,
+bare variable return payloads, and the raw compatibility fallback. Syntax checks,
+`prove -v -Iperl t/actionir_ast_parser.t`, `prove -q -Iperl t/phase0_regression.t`, `mdbook build
+docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`, and
+`bash tools/run_ci_local.sh` passed; phase0 covered 1002 tests.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.3 — lower receiver chains from AST
 
 **Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,

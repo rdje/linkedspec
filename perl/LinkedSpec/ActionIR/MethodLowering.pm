@@ -1517,7 +1517,13 @@ sub _lower_method_value_expr {
   return undef unless ref($node) eq 'HASH';
   my $kind = $node->{kind} // '';
 
-  return $node->{source} if $kind eq 'number' || $kind eq 'string' || $kind eq 'regex';
+  if ($kind eq 'number') {
+   my $source = $node->{source};
+   return $source if defined($source) && $source =~ /\A-?\d+(?:\.\d+)?\z/o;
+   return defined($node->{value}) ? (''.$node->{value}) : undef;
+  }
+  return $ast_string_source_node->($node) if $kind eq 'string';
+  return $ast_regex_source_node->($node) if $kind eq 'regex';
   return 'undef' if $kind eq 'undef';
   return $node->{value} ? 'do { require JSON::PP; JSON::PP::true }' : 'do { require JSON::PP; JSON::PP::false }'
    if $kind eq 'boolean';
@@ -1666,6 +1672,12 @@ sub _lower_method_value_expr {
     $array_chain_return_family->($method),
    ]
   };
+  my $lower_synthetic_chain_expr = sub {
+   my ($current_expr) = @_;
+   my $lowered = _lower_method_value_expr($current_expr, $deps);
+   return $lowered if defined($lowered) && length($lowered);
+   return $legacy_method_value_expr->($current_expr)
+  };
 
   my $first_method = $calls->[0]{method} // '';
   if (_is_hash_receiver_value_chain_method($first_method)) {
@@ -1712,7 +1724,7 @@ sub _lower_method_value_expr {
 
     return undef;
    }
-   return $legacy_method_value_expr->($current_expr)
+   return $lower_synthetic_chain_expr->($current_expr)
   }
 
   if (_is_string_receiver_value_chain_method($first_method)) {
@@ -1757,7 +1769,7 @@ sub _lower_method_value_expr {
     return 'undef' if $current_family eq 'terminal';
     return undef;
    }
-   return $legacy_method_value_expr->($current_expr)
+   return $lower_synthetic_chain_expr->($current_expr)
   }
 
   if (_is_number_receiver_value_chain_method($first_method)) {
@@ -1797,7 +1809,7 @@ sub _lower_method_value_expr {
     return 'undef' if $return_family eq 'terminal' && !$is_last;
     $current_family = $return_family;
    }
-   return $legacy_method_value_expr->($current_expr)
+   return $lower_synthetic_chain_expr->($current_expr)
   }
 
   if (_is_array_receiver_value_chain_method($first_method)) {
@@ -1809,7 +1821,7 @@ sub _lower_method_value_expr {
     return undef unless ref($applied) eq 'ARRAY';
     $current_expr = $applied->[0];
    }
-   return $legacy_method_value_expr->($current_expr)
+   return $lower_synthetic_chain_expr->($current_expr)
   }
 
   return undef
@@ -3329,7 +3341,11 @@ sub _lower_return_payload_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
+ my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
+ my $ast_kind = ref($ast_node) eq 'HASH' ? ($ast_node->{kind} // '') : '';
  my $direct = _lower_method_value_expr($trimmed, $deps);
+ return $direct
+  if defined($direct) && length($direct) && $ast_kind ne '' && $ast_kind ne 'raw_perl' && $ast_kind ne 'variable';
  if (
   defined($direct) &&
   length($direct) &&
@@ -3341,6 +3357,8 @@ sub _lower_return_payload_expr {
  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
  return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
 
+ # Legacy raw fallback: shipped compatibility payloads such as
+ # `\(my $capt = capture_slice())` are not typed ActionIR values yet.
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;

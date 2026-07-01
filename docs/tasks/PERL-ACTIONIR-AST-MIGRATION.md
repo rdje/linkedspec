@@ -83,16 +83,17 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.2 - add Perl ActionIR AST parser seam`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3`
-  Status: `split` (2026-07-01)
+  Status: `done` (2026-07-01)
   Goal: Replace value-expression and receiver-chain lowering with AST lowering.
   Acceptance: Value calls, helper composition, direct access, shape literals, blocks, and
     receiver-dot chains lower from typed AST nodes, not source-text rescans. Existing phase0
     and terse oracle fixtures remain green; accidental host-call leakage becomes a
     LinkedSpec diagnostic.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
-  Verification: **PASS 2026-07-01 (split only).** Split the broad value/receiver migration
-    into focused child leaves before code, preserving the `.3` acceptance as the parent
-    contract.
+  Verification: **PASS 2026-07-01.** Split the broad value/receiver migration into
+    focused child leaves before code, then completed `.3.1` non-call value AST lowering,
+    `.3.2.1`/`.3.2.2` helper-call AST lowering, `.3.2.3` covered-helper diagnostics,
+    `.3.3` receiver-chain AST lowering, and `.3.4` return-payload AST traversal.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3 - split AST value lowering`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.1`
@@ -203,13 +204,24 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.3 - lower receiver chains from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.4`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Replace return-payload helper substitution with AST traversal and diagnostics.
   Acceptance: `_lower_return_payload_expr(...)` walks typed value/call/chain nodes instead
     of regex-substituting helper-looking source spans; accidental generated host-language
     calls on supported surfaces emit a LinkedSpec diagnostic.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** `_lower_return_payload_expr(...)` now parses the
+    trimmed payload through `LinkedSpec::ActionIR::AST` and returns the AST-lowered value
+    directly for typed nodes before the legacy helper-substitution loop. Focused tests
+    poison array/hash/string/call/chain node `source` fields and prove typed return
+    payloads lower from AST fields, unsupported covered chain helpers keep the
+    `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostic sentinel, and the narrow
+    raw compatibility payload `\(my $capt = capture_slice())` still uses the legacy
+    fallback. Checks passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+    `perl -Iperl -c t/actionir_ast_parser.t`, `perl -Iperl -c perl/LinkedSpec.pm`,
+    `prove -v -Iperl t/actionir_ast_parser.t`, `prove -q -Iperl t/phase0_regression.t`
+    (1002 tests), `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map
+    gates, `git diff --check`, and `bash tools/run_ci_local.sh`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.3.4 - lower return payloads from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4`
   Status: `pending`
@@ -246,7 +258,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2.2` | `done` 2026-07-01 | Aggregate-wrapper and collection/hash helper calls now lower from AST call nodes with slot-preserving compatibility. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2.3` | `done` 2026-07-01 | Unsupported covered helper-call AST forms now emit unresolved-helper diagnostics instead of generated host calls. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `done` 2026-07-01 | Receiver-dot `fluent_chain` value chains now lower from AST receiver/call nodes. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `done` 2026-07-01 | Return payloads now enter AST value traversal before the raw fallback. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.4` | `pending` | Replace statement/control lowering with AST lowering. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -280,8 +293,8 @@ Nested unsupported helper calls inside AST-lowered shapes and blocks still pass 
 explicit compatibility bridge. Value-only helper-call composition is now covered by
 `.3.2.1`; aggregate/symbol-slot helper calls are covered by `.3.2.2`; covered-call
 diagnostics are covered by `.3.2.3`; receiver-dot `fluent_chain` lowering is covered by
-`.3.3`; statement/control lowering and remaining return-payload helper substitution are
-the next migration children.
+`.3.3`; return-payload AST traversal is covered by `.3.4`. Statement/control lowering is
+the next migration child.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2.1 Value-Only Helper Calls
 
@@ -318,8 +331,8 @@ per ADR `0007`, not canonical syntax. Slot reconstruction preserves bare symbol 
 for aggregate/source slots and quoted wrapper payloads as literals, so `array(items)`
 continues to read `@items` while `array("items")` constructs a literal payload.
 `.3.2.3` covers diagnostics for covered calls that cannot lower cleanly. Receiver-dot
-`fluent_chain` lowering is now covered by `.3.3`; return-payload AST traversal remains
-queued for `.3.4`.
+`fluent_chain` lowering is now covered by `.3.3`; return-payload AST traversal is now
+covered by `.3.4`.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2.3 Covered-Call Diagnostics
 
@@ -369,6 +382,27 @@ numeric terminal continuations, and unsupported chain helper diagnostics all com
 typed AST fields instead of receiver-dot source splitting. The old text normalizers remain
 only as compatibility fallback for expressions the AST parser cannot own yet.
 
+## PERL-ACTIONIR-AST-MIGRATION.3.4 Return-Payload AST Traversal
+
+`MethodLowering::_lower_return_payload_expr(...)` now parses generalized return payloads
+through `LinkedSpec::ActionIR::AST` and returns the AST-lowered value for typed nodes
+before the legacy helper-substitution loop can run. That means direct shape payloads,
+bare scalar reads, primitive literals, nested helper calls, direct/nested access, block
+values, and receiver-dot chains reuse the same typed value traversal as
+`_lower_method_value_expr(...)`.
+
+The compatibility boundary is deliberately narrow. If the parser reports `raw_perl`, or
+if a typed payload cannot lower through the AST value dispatcher, the old raw fallback
+remains available for shipped compatibility payloads such as
+`\(my $capt = capture_slice())`. Supported typed payloads do not use helper-looking
+regex substitution first.
+
+The focused `.3.4` test poisons array/hash/string/call/chain `source` fields and proves
+return payloads consume typed AST fields rather than source text. It also locks the
+diagnostic behavior for unsupported covered helper chains inside return payloads:
+`"abc".substr()` becomes the existing `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr`
+sentinel instead of generated host Perl.
+
 ## PERL-ACTIONIR-AST-MIGRATION.3 Split
 
 `PERL-ACTIONIR-AST-MIGRATION.3` is intentionally a parent contract, not a single
@@ -384,7 +418,7 @@ Each child must keep existing generated behavior green while removing one text-r
 surface from the supported ActionIR language. User-defined functions remain blocked behind
 the completed `.3` children, because function calls must enter as AST `Call` nodes and may
 act as receiver-chain receivers. `.3.3` has now removed the receiver-dot text splitter from
-AST-owned value chains; `.3.4` remains the return-payload traversal child.
+AST-owned value chains; `.3.4` has now moved typed return payloads onto AST traversal.
 
 ## PERL-ACTIONIR-AST-MIGRATION.2 Parser Seam
 
@@ -512,6 +546,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.4` | Added return-payload AST fast path before raw fallback; focused fake-source tests for typed return arrays/hashes/strings/calls/chains, bare scalar source-slot payloads, unsupported covered chain diagnostics, and raw compatibility payloads; syntax checks; focused AST parser suite; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Typed return payloads now consume AST value/call/chain nodes before legacy helper-substitution fallback. Frontier moves to `.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.3` | Added AST `fluent_chain` receiver-chain dispatcher; focused fake-source tests for number, string-to-array, block-array, hash-to-array, invalid numeric terminal continuation, and unsupported chain helper diagnostics; targeted public lowering probes | Receiver-dot value chains now consume typed AST receiver/call nodes before legacy receiver-dot text normalization. Frontier moves to `.3.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.3` | Added unsupported covered-helper sentinel lowering and diagnostics scan; focused tests for malformed value-only, aggregate, and nested helper calls plus descriptor metadata; targeted public lowering probes; mdBook/doctrine/KM/diff checks; phase0 1002 tests; full local CI | Covered helper families no longer leak unsupported AST forms as generated host-language calls. Unsupported covered forms now report unresolved-helper diagnostics with zero raw-Perl fallback. Frontier moves to `.3.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.2` | Added slot-aware AST aggregate-call dispatcher; focused fake-source AST tests for wrappers, copy, reducers, collection, and hash helpers; targeted public lowering probes; mdBook/doctrine/KM checks; local CI with phase0 1002 tests | Aggregate-wrapper and collection/hash helper calls now consume AST call nodes before helper lowering while preserving deprecated wrapper compatibility, symbol slots, and quoted-name boundaries. Frontier moves to `.3.2.3`. |

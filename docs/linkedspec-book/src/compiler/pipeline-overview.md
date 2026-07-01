@@ -46,8 +46,10 @@ boundaries before reusing the existing Perl helper catalog. Unsupported covered 
 forms now report through the existing unresolved-helper metadata instead of leaking as
 generated host-language calls. Receiver-dot value chains now also consume AST
 `fluent_chain` nodes for the array, hash, string, and number receiver families before the
-legacy receiver-dot text normalizers run. Statement/control lowering and remaining
-return-payload substitution still migrate in later leaves; the wrapper forms remain
+legacy receiver-dot text normalizers run. Generalized return payloads now parse through
+the same AST value traversal before the legacy raw fallback, preserving scalar source-slot
+reads such as `return(count)` and narrow compatibility payloads that are still untyped.
+Statement/control lowering still migrates in later leaves; the wrapper forms remain
 compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters

@@ -475,4 +475,112 @@ subtest 'fluent_chain value lowering consumes AST nodes' => sub {
     ok($parse_calls >= 6, 'receiver-dot chains entered through the AST parser');
 };
 
+subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $str = sub {
+        my ($value) = @_;
+        return { kind => 'string', value => $value, quote => '"', source => '__bad_string_'.$value.'__()' };
+    };
+    my $call = sub {
+        my ($name, @args) = @_;
+        return { kind => 'call', name => $name, source => '__bad_call_'.$name.'__()', args => \@args };
+    };
+    my $chain = sub {
+        my ($receiver, @calls) = @_;
+        return {
+            kind => 'fluent_chain',
+            source => '__bad_chain_source__()',
+            receiver => $receiver,
+            calls => \@calls,
+        };
+    };
+    my $fluent_call = sub {
+        my ($method, @args) = @_;
+        return { method => $method, source => '__bad_fluent_'.$method.'__()', args => \@args };
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            if ($expr eq '[value, true, concat("a","b"), foo["a"][scalar(i)], { key => value }]') {
+                return {
+                    kind => 'array_literal',
+                    source => '__bad_return_payload_array__()',
+                    items => [
+                        $var->('value'),
+                        { kind => 'boolean', value => 1, source => '__bad_true__()' },
+                        $call->('concat', $str->('a'), $str->('b')),
+                        {
+                            kind => 'nested_access',
+                            base => 'foo',
+                            source => '__bad_nested_access__()',
+                            segments => [
+                                { kind => 'key', value => 'a', source => '["a"]' },
+                                { kind => 'index', expr => $call->('scalar', $var->('i')) },
+                            ],
+                        },
+                        {
+                            kind => 'hash_literal',
+                            source => '__bad_hash_literal__()',
+                            entries => [
+                                { key => $var->('key'), value => $var->('value') },
+                            ],
+                        },
+                    ],
+                };
+            }
+            if ($expr eq '["x", "abc".substr()]') {
+                return {
+                    kind => 'array_literal',
+                    source => '__bad_return_payload_chain_array__()',
+                    items => [
+                        $str->('x'),
+                        $chain->($str->('abc'), $fluent_call->('substr')),
+                    ],
+                };
+            }
+            if ($expr eq 'count') {
+                return $var->('count');
+            }
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $payload = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{return([value, true, concat("a","b"), foo["a"][scalar(i)], { key => value }])},
+        );
+        like($payload, qr/\$value/, 'AST return payload lowers bare scalar reads from typed nodes');
+        like($payload, qr/JSON::PP::true/, 'AST return payload lowers booleans from typed nodes');
+        like($payload, qr/__ls_concat_parts/, 'AST return payload lowers nested helper calls from typed nodes');
+        like($payload, qr/\$foo->\{"a"\}->\[\$i\]/, 'AST return payload lowers nested access from typed nodes');
+        like($payload, qr/\{\$key => \$value\}/, 'AST return payload lowers hash literals from typed nodes');
+
+        my $bad_chain = LinkedSpec::call_spec_handler_subst('Top', q{return(["x", "abc".substr()])});
+        unlike($bad_chain, qr/\bsubstr\s*\(/, 'unsupported covered return-payload chain helper does not leak as a host call');
+        like($bad_chain, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unsupported covered return-payload chain helper keeps diagnostic sentinel');
+
+        my $bare_scalar = LinkedSpec::call_spec_handler_subst('Top', q{return(count)});
+        like($bare_scalar, qr/return \$count\b/, 'AST variable return payloads still lower through scalar source-slot reads');
+        unlike($bare_scalar, qr/return count\b/, 'AST variable return payloads do not leak raw identifiers');
+
+        my $all = join("\n", $payload, $bad_chain, $bare_scalar);
+        unlike($all, qr/__bad_/, 'AST return-payload lowering does not reuse fake source text');
+    }
+
+    my $raw_fallback = LinkedSpec::call_spec_handler_subst('Top', q{return(\(my $capt = capture_slice()))});
+    like(
+        $raw_fallback,
+        qr/return \\\(my \$capt = do \{ substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\) \}\)/,
+        'raw compatibility return payloads keep the narrow helper fallback',
+    );
+    ok($parse_calls >= 2, 'return payloads entered through the AST parser');
+};
+
 done_testing();

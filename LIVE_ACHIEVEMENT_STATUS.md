@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.4 — return-payload AST traversal landed**
+  (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_return_payload_expr(...)` now
+  parses generalized return payloads through `LinkedSpec::ActionIR::AST` and returns AST-lowered typed values
+  before the legacy helper-substitution loop. Direct shapes, nested helper calls, direct/nested access, block
+  values, receiver chains, primitive literals, and bare scalar reads now share the typed value traversal used by
+  `_lower_method_value_expr(...)`. AST `variable` payloads still route through scalar source-slot reads, so
+  `return(count)` stays `return $count`; raw compatibility payloads such as `\(my $capt = capture_slice())`
+  keep the narrow legacy fallback.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
+  `perl -Iperl -c t/actionir_ast_parser.t` PASS; `perl -Iperl -c perl/LinkedSpec.pm` PASS;
+  `prove -v -Iperl t/actionir_ast_parser.t` PASS; `prove -q -Iperl t/phase0_regression.t` PASS with phase0
+  **1002 tests**; `mdbook build docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates PASS;
+  `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4` replace statement/control lowering with AST lowering.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.3 — receiver-dot `fluent_chain` AST lowering landed**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
   consumes AST `fluent_chain` nodes for receiver-dot value chains before the legacy receiver-dot text

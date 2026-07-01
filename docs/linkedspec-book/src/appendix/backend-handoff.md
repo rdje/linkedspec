@@ -31,9 +31,11 @@ compatibility syntax, not the canonical destination surface. Unsupported covered
 forms now report unresolved-helper metadata instead of leaking as generated host-language
 calls. Receiver-dot value chains now lower from AST `fluent_chain` nodes for the array,
 hash, string, and number receiver families before the legacy receiver-dot text normalizers
-run. Statement/control lowering and remaining return-payload substitution are still
-migrating family by family, so any remaining text-to-text lowering is migration debt
-rather than a backend pattern to copy.
+run. Generalized return payloads now lower typed value/call/chain nodes through the same
+AST traversal before raw fallback, while narrow untyped compatibility payloads still
+remain migration debt. Statement/control lowering is still migrating family by family, so
+any remaining text-to-text lowering is migration debt rather than a backend pattern to
+copy.
 New backends should follow the typed-AST model used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is

@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.4 — return payloads from AST): Moved typed return-payload
+  lowering onto the ActionIR AST consumer. Durable points. (1) **Typed payloads run before regex substitution.**
+  `_lower_return_payload_expr(...)` now parses the trimmed payload with `LinkedSpec::ActionIR::AST` and accepts
+  AST-lowered values for non-raw nodes before the legacy helper-looking regex loop. (2) **Bare variables keep
+  source-slot semantics.** The direct AST path intentionally excludes `variable` nodes so `return(count)`,
+  `return(trueword)`, and block/control payload variables still lower through `_lower_source_slot_bare_scalar_read_expr(...)`
+  as `$count`, `$trueword`, etc. (3) **Poisoned `source` is not authoritative.** String, regex, and numeric
+  AST nodes rebuild trusted literals from typed fields, and return-payload tests now poison array/hash/string/
+  call/chain/variable source fields. (4) **Unsupported covered chains still diagnose.** A typed payload such as
+  `["x", "abc".substr()]` keeps the `.3.2.3` `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr` path instead of
+  generated host `substr(...)`. (5) **Raw fallback remains compatibility debt.** Untyped payloads such as
+  `\(my $capt = capture_slice())` still use the old narrow fallback until later retirement work can own them.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.3 — receiver-dot `fluent_chain` from AST): Moved
   receiver-dot value-chain lowering onto the ActionIR AST consumer. Durable points. (1) **The chain source is
   no longer authoritative for supported receiver families.** `MethodLowering` now dispatches `fluent_chain`

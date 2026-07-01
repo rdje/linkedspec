@@ -116,8 +116,9 @@ wrapper literal payloads before reusing the Perl helper catalog. Unsupported cov
 helper forms now report unresolved-helper metadata instead of leaking as generated
 host-language calls. Receiver-dot value chains now consume AST `fluent_chain` nodes for
 the supported array, hash, string, and number receiver families. Statement/control
-lowering and remaining return-payload substitution are still explicit migration debt;
-those wrappers are not the canonical destination syntax.
+lowering is still explicit migration debt; return payloads now consume typed value/call/
+chain AST nodes before the narrow raw compatibility fallback. Those wrappers are not the
+canonical destination syntax.
 
 ## The facade owns routing, not semantics
 
@@ -400,9 +401,10 @@ aggregate-wrapper, collection/reducer, and hash helper families while preserving
 existing slot policies. Unsupported covered helper calls now report unresolved-helper
 diagnostics instead of leaking as generated host calls. Receiver-dot value chains now
 consume AST `fluent_chain` nodes for the array, hash, string, and number receiver
-families before the legacy receiver-dot text normalizers run. Statement/control lowering
-and remaining return-payload substitution still migrate family by family, so any
-remaining source-text lowering is legacy debt rather than the model for new work.
+families before the legacy receiver-dot text normalizers run. Return payloads now consume
+typed AST value/call/chain nodes before the narrow raw compatibility fallback.
+Statement/control lowering still migrates family by family, so any remaining source-text
+lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`
 

@@ -10,7 +10,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, lowering, migration]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.1 inventoried StatementSplit/MethodExpr/Scanner/CanonicalEvents/RewritePipeline/MethodLowering/RuleIR::EmitContext and defined a Rust-aligned AST node set plus replacement order. RewritePipeline::_lower_action_code_from_canonical_ir currently finds raw source spans and substr-replaces them with lowered Perl; MethodLowering::_lower_method_value_expr and _lower_return_payload_expr recursively parse/regex-rewrite raw strings; RuleIR::EmitContext applies that rewrite to lifecycle/action blocks and auto-working-var discovery scans raw code."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.1 inventoried StatementSplit/MethodExpr/Scanner/CanonicalEvents/RewritePipeline/MethodLowering/RuleIR::EmitContext and defined a Rust-aligned AST node set plus replacement order. RewritePipeline::_lower_action_code_from_canonical_ir currently finds raw source spans and substr-replaces them with lowered Perl; MethodLowering::_lower_method_value_expr now consumes AST for value/call/chain nodes and _lower_return_payload_expr now consumes AST for typed return payloads before raw fallback; RuleIR::EmitContext still applies the rewrite to lifecycle/action blocks and auto-working-var discovery scans raw code."
 reverify: "rg -n '_lower_action_code_from_canonical_ir|_find_source_stmt_span|_lower_method_value_expr|_lower_return_payload_expr|_collect_auto_working_var_decls|split_action_ir_statements|_parse_method_function_expr' perl/LinkedSpec/ActionIR perl/LinkedSpec/RuleIR/EmitContext.pm"
 ---
 
@@ -24,8 +24,8 @@ text in several places:
 - `CanonicalEvents` emits `RAW_PERL` fallback for unrecognized source statements.
 - `RewritePipeline` matches canonical events back into the original source and replaces
   those spans with lowered Perl strings.
-- `MethodLowering` recursively parses raw value expressions, return payloads, and
-  receiver-dot chains.
+- `MethodLowering` now consumes AST for supported value/call/receiver-chain nodes and
+  typed return payloads, while raw fallback remains for untyped compatibility payloads.
 - `RuleIR::EmitContext` applies the rewrite to action/lifecycle blocks and still scans raw
   pre-lowered code for automatic working-variable declarations.
 
