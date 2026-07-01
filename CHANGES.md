@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.4 — own user-defined function surface
+
+**Scope:** Task-tree ownership, roadmap/live continuity docs, and active-frontier redirection. No
+parser/compiler/runtime code changed.
+
+**What changed:** User-defined `.spec` functions are now an active Round 4 surface under
+`SPEC-FORMAT-TERSE.4`. The MVP is intentionally narrow: top-level `fn name(args) { ... }`, explicit
+parentheses for every arity, explicit positional parameters, pure value/block bodies, and no recursion,
+closures, lambdas, currying, or implicit caller-state capture in the first implementation.
+
+**Contract:** A user-function call is an ordinary value expression. It may feed helper arguments,
+assignments, returns, array/hash mutations, and receiver-dot value chains by the value it yields. A
+standalone function call silently drops its return value.
+
+**Validation:** Docs-only ownership split; `scripts/check_memory_architecture.sh`,
+`knowledge-map/scripts/check_knowledge_map.sh`, `scripts/check_doctrines.sh`, `git diff --check`, and a
+targeted stale-frontier search all passed.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.3.2.1 — implement numeric word aliases
 
 **Scope:** Perl ActionIR value lowering, Rust runtime helper dispatch, oracle corpus, focused Perl/Rust locks,

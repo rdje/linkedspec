@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.4 — user-defined function surface owned**
+  (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). User-defined pure functions are now the
+  active Round 4 terse-language surface. The MVP contract starts with top-level `fn name(args) { ... }`,
+  explicit parentheses for zero and nonzero arities, pure value/block bodies, explicit positional parameters,
+  and no recursion/closures/lambdas/currying/implicit caller-state capture. Function calls are ordinary value
+  expressions: their results can feed helpers, assignments, returns, mutations, and receiver-dot chains; if a
+  call is used as a standalone statement, its value is silently dropped.
+  **Frontier:** `SPEC-FORMAT-TERSE.4.1` contract/inventory before code, then `.3.2.2` arithmetic symbol
+  callees.
 - 2026-07-01: **SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Function-form aliases `add`, `sub`, `mul`,
   `div`, `mod`, `abs`, `floor`, `ceil`, `round`, `min`, `max`, `clamp`, `sum`, `avg`, `median`, and `range`

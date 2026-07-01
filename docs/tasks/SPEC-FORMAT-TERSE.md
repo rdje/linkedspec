@@ -6,7 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-01` (**`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
+- Last updated: `2026-07-01` (**`.4` SPLIT/OWNED; user-defined `.spec` functions accepted into the active
+  terse lane** — user direction added top-level pure function definitions as a tracked Round 4 surface. The
+  accepted contract starts narrow: `fn name(args) { ... }` with explicit parentheses, pure value semantics,
+  no implicit capture, no recursion/closures/lambdas, and calls that are ordinary value expressions. A function
+  call result can be consumed by any value position or used as the receiver of a compatible receiver-dot chain;
+  a standalone call silently drops its return value. Frontier is now `.4.1` before returning to `.3.2.2`.
+  Prior **`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
   `sub(...)`, `mul(...)`, `div(...)`, `mod(...)`, `abs(...)`, `floor(...)`, `ceil(...)`, `round(...)`,
   `min(...)`, `max(...)`, `clamp(...)`, `sum(...)`, `avg(...)`, `median(...)`, and `range(...)` now map to the
   existing `num_*` helper family on Perl and Rust. Existing `num_*` spellings remain accepted. Bare comparison
@@ -2122,11 +2128,63 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.4`
+  Status: `active` (SPLIT/OWNED 2026-07-01 by explicit user direction)
+  Goal: Round 4 — user-defined pure functions in `.spec`
+  Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`
+  Acceptance: User-defined functions are introduced as a disciplined value-expression surface, not a
+    general-purpose sublanguage. The first accepted syntax is top-level `fn name(args) { ... }`, with explicit
+    parentheses required for zero and nonzero arities (`fn name() { ... }`). Function bodies are pure
+    expression/block values over the existing ActionIR helper DSL; parameters are explicit positional values;
+    no implicit capture of caller working variables, recursion, closures, lambdas, currying, or host-code escape
+    is accepted in the first implementation. A call to a user function is an expression with a value, so it can
+    be nested in helper arguments, assigned, returned, appended, or used as the receiver of a compatible
+    receiver-dot value chain. When the call appears as a standalone statement, its result is silently discarded.
+    The syntax/semantics must be represented in `specs/spec.spec`, the Perl bootstrap path, the Rust parser/runtime,
+    oracle corpus, phase0, mdBook, live docs, and Knowledge Map before the surface is complete.
+  Verification: **SPLIT/OWNED 2026-07-01.** User requested custom/user-defined function support and clarified
+    two semantic rules before implementation: function calls are ordinary value expressions and unused return
+    values are dropped without diagnostic noise. Existing KM facts for expression-valued blocks and receiver-dot
+    value chains establish the composability precedent; no parser/compiler/runtime code changed in this split.
+  Commit: `SPEC-FORMAT-TERSE.4 - own user-defined function surface`
+
+- ID: `SPEC-FORMAT-TERSE.4.1`
   Status: `pending`
-  Goal: Round 4+ — resume brainstorming the remaining surfaces, then add leaves
-  Acceptance: A converged direction is brainstormed for the surfaces NOT yet covered — capture/marks,
-    rule modes, split markers, lifecycle semantics, etc. — recorded back into the KM card and this tree
-    as new `.4.x` leaves. (Discovery leaf, not an implementation leaf.)
+  Goal: Function syntax/semantics contract and implementation inventory
+  Acceptance: Record the exact MVP grammar, name-resolution rules, purity limits, parameter binding model,
+    return-value model, receiver-chain behavior, unused-result behavior, collision/error boundaries, and split
+    implementation seams before code. The inventory must inspect `specs/spec.spec`, the Perl bootstrap parser,
+    Perl ActionIR lowering/value-expression seams, the Rust parser/runtime expression model, oracle generation,
+    and mdBook chapters. If the implementation surface is broader than one signoff slice, split `.4.2+` further
+    before code.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.4.2`
+  Status: `pending`
+  Goal: Perl reference user-function implementation
+  Acceptance: The Perl reference accepts the `.4.1` function contract, lowers user-function calls through the
+    existing value-expression model, preserves receiver-dot chaining from function results, silently drops
+    standalone function-call values, rejects collisions/unsupported forms with clear diagnostics, and keeps the
+    all-target ActionIR-ready invariant at ratio 1.0000. Add focused phase0 locks and update `specs/spec.spec`,
+    mdBook, live docs, and Knowledge Map as warranted.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.4.3`
+  Status: `pending`
+  Goal: Rust parity for user-defined pure functions
+  Acceptance: The Rust parser/runtime matches the Perl reference for the `.4.1`/`.4.2` contract, including
+    function-call value semantics, receiver-dot chaining, and silent standalone-result discard. Add Rust parser,
+    runtime, and oracle corpus locks.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.4.4`
+  Status: `pending`
+  Goal: Function surface finalization and deferred extension ledger
+  Acceptance: Close the user-facing docs and retrieval state after Perl/Rust parity. Record explicit deferrals
+    for alternate spellings (`function ... endfunction`, optional zero-arg parentheses, brace-less bodies),
+    statementful functions, recursion, closures, lambdas, currying, and any future function namespace features.
   Verification: `pending`
   Commit: `pending`
 
@@ -2271,11 +2329,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.3.1` | `done` 2026-07-01 | Edge syntax contract confirmed and locked with existing regression coverage: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. |
 | — | `SPEC-FORMAT-TERSE.3.2` | `active` (split 2026-07-01) | Arithmetic/comparison call surface split before code: word aliases, symbol callees, and comparison-name policy are separate mechanisms. |
 | — | `SPEC-FORMAT-TERSE.3.2.1` | `done` 2026-07-01 | Non-conflicting numeric word aliases now map to `num_*` on Perl/Rust; comparison words remain string helpers. |
-| 1 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
-| 2 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison spelling policy before code because bare `gt`/`lt`/etc. are currently string comparisons. |
-| 3 | `SPEC-FORMAT-TERSE.4` | `pending` | Round 4+ discovery after Round 3 leaves are closed or deliberately deferred. |
+| 1 | `SPEC-FORMAT-TERSE.4.1` | `pending` | User explicitly redirected the active terse lane to custom/user-defined functions; contract/inventory must close before code. |
+| 2 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
+| 3 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison spelling policy before code because bare `gt`/`lt`/etc. are currently string comparisons. |
 
 ## Decisions
+
+- `2026-07-01` (**`.4` user-defined function surface accepted and split before code**). User-defined
+  functions are useful enough to enter the active terse lane, but the first implementation is intentionally
+  narrow and uniform with the existing value-expression model. Accepted MVP: top-level `fn name(args) { ... }`,
+  explicit parentheses even for zero args, explicit positional parameters, pure value/block bodies, and no
+  recursion/closures/lambdas/currying/implicit caller-state capture. A function call is an ordinary expression:
+  it may feed helper arguments, assignment, return, array/hash mutations, and receiver-dot value chains by its
+  yielded runtime type. A function call used as a standalone statement silently discards its return value. The
+  alternate spellings (`function ... endfunction`, `fn ... endfn`, optional zero-arg parentheses, and
+  brace-less bodies) remain deferred until the MVP is portable and documented.
 
 - `2026-07-01` (**`.3.2.1` numeric word aliases landed**). Non-comparison function-form numeric aliases are
   accepted as ordinary helper calls and lower/dispatch to the existing `num_*` family on Perl and Rust:
@@ -3000,6 +3068,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.4` | User direction captured; KM retrieval for expression-valued blocks and receiver-dot chains; new KM card `terse-user-defined-functions-mvp-contract` + regenerated `KNOWLEDGE_MAP.md`; task-tree/index/roadmap/live-doc sync; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; targeted stale-frontier `rg` search | User-defined pure functions are owned and split before implementation. The accepted MVP is top-level `fn name(args) { ... }` with explicit parentheses, pure value/block bodies, explicit positional parameters, no implicit caller-state capture, and no recursion/closures/lambdas/currying. Function calls are ordinary values that may feed receiver-dot chains; standalone call results are silently discarded. Frontier becomes `.4.1` before returning to `.3.2.2`. No parser/compiler/runtime code changed. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5` | KM retrieval; full bootstrap/roadmap/mdBook/core-code read; TOOLBOX `call_spec_handler_subst` probes for statement receiver-dot mutations, value-position receiver-dot forms, and function-style pure helper composition; mdBook stale inline-control wording audit | Return-type method chaining split before code. Current ground truth: statement-only `.1.6` receiver-dot mutations lower/run, value-position/chained receiver-dot forms remain unsupported, Rust parses `Expr::FluentChain` but only executes single-call array end mutations as statement side effects. Child leaves `.2.3.5.1`–`.2.3.5.4` now own array/hash/string/number receiver-chain implementation. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.1` | Perl syntax checks and receiver-chain probes; `prove -q -Iperl t/phase0_regression.t`; focused Rust parser/runtime tests (`parse_array_receiver_value_chain`, `terse_2_3_5_1`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; memory/doctrine/KM/diff checks | Array receiver-dot value chains landed. Pure array links compose through array-returning helpers, terminals return documented values, receiver-dot `join_values` preserves delimiter-first helper semantics, `split_each` flattens with the supplied delimiter on Rust, and `.1.6` end mutations remain statement-only. Phase0 PASS (996 tests); oracle corpus PASS over 47 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.2` | Perl syntax checks and hash receiver-chain probes; focused Rust parser/runtime tests (`parse_hash_receiver_value_chain`, `terse_2_3_5_2`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; memory/doctrine/KM/diff checks | Hash receiver-dot value chains landed. Hash-returning links compose through hash helpers, `sorted_keys`/`sorted_values` bridge into array receiver chains, receiver-dot `scalaref` reads hash fields, statement hash mutations stay statement-only, and Rust `merge_hash` later-argument override parity is fixed. Phase0 PASS (997 tests); oracle corpus PASS over 48 fixtures. |
@@ -3084,6 +3153,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.4` | `SPEC-FORMAT-TERSE.4 - own user-defined function surface` | User-defined pure functions are now owned under Round 4. Calls are value expressions, may feed receiver-dot chains, and standalone results are silently discarded. Frontier becomes `.4.1`, then `.3.2.2`. |
 | `SPEC-FORMAT-TERSE.5.0` | `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory` | Future backend parity ownership is explicit: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs a new decision record before any code. Frontier returns to `.3.1`. |
 | `SPEC-FORMAT-TERSE.3.1` | `SPEC-FORMAT-TERSE.3.1 - lock edge syntax contract` | Edge syntax confirmed without behavior change: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. Frontier becomes `.3.2`. |
 | `SPEC-FORMAT-TERSE.3.2` | `SPEC-FORMAT-TERSE.3.2 - split arithmetic call surface` | Arithmetic/comparison calls split before code: `.3.2.1` owns non-conflicting numeric word aliases, `.3.2.2` owns arithmetic symbol callees, and `.3.2.3` owns the comparison spelling policy before implementation. Frontier becomes `.3.2.1`. |
@@ -3167,6 +3237,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-01`: **`.4` SPLIT/OWNED — user-defined pure functions.**
+  User-defined `.spec` functions are now task-tree owned before implementation. The MVP contract starts with
+  top-level `fn name(args) { ... }`, explicit parentheses for every arity, explicit positional parameters,
+  pure value/block bodies, and no implicit caller-state capture, recursion, closures, lambdas, or currying.
+  Function calls are ordinary value expressions: their results can feed helper arguments, assignments,
+  returns, mutation value slots, and receiver-dot chains; a standalone call silently drops the returned value.
+  Frontier moves to `.4.1` for the contract/inventory leaf, with `.3.2.2` still queued afterward.
 
 - `2026-07-01`: **`.2.3.5.5` LANDED — block-valued receiver-dot chains.**
   Expression-valued blocks now work as receivers for the existing compatible array/string/hash/number value

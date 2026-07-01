@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.4 — user-defined function surface owned): Accepted user-defined functions
+  into the active terse lane, with a deliberately constrained first contract. Durable points. (1) **Function
+  calls are value expressions.** They must compose anywhere an ordinary value can compose, including helper
+  arguments, assignment/return payloads, append/mutation value slots, and receiver-dot value chains. (2)
+  **Unused call results are dropped silently.** A standalone call is an expression statement whose value is
+  ignored; it must not warn, mutate hidden storage, or create diagnostic noise merely because the result is not
+  consumed. (3) **MVP syntax is one shape.** Start with top-level `fn name(args) { ... }`, requiring
+  parentheses even for zero args; alternate `function`/`endfunction`, `fn`/`endfn`, and optional-paren forms
+  remain deferred. (4) **Keep this out of general FP scope.** No recursion, closures, lambdas, currying, or
+  implicit caller working-variable capture in the initial implementation. (5) **Next leaf is design/inventory
+  before code.** `SPEC-FORMAT-TERSE.4.1` must inspect the Perl bootstrap/ActionIR and Rust parser/runtime seams
+  before implementation starts.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases landed): Implemented the non-conflicting
   function-form numeric aliases on both variants. Durable points. (1) **Alias mapping belongs in value
   lowering/runtime dispatch, not shared Perl parse normalization.** A first attempt at parser-level
