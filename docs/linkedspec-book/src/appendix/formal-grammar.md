@@ -466,7 +466,8 @@ string_expr.split(delim).trim_each().join_values(delim)
 
 ### 7.3 Array Helpers
 ```
-array(e1, e2, ...)     — construct an array
+array(name)            — read array working variable name when name is bare
+array(e1, e2, ...)     — construct an array; prefer [...] for terse literals
 array_copy(arr)        — shallow copy
 array_values(arr)      — retired alias of array_copy (do not use; see Helper Contract Catalog §Compatibility-Aliases)
 flat_array(arr)        — flatten into list context for insertion
@@ -512,6 +513,7 @@ print_each(arr)         — debug output each element
 
 ### 7.4 Hash Helpers
 ```
+hash(name)              — read hash working variable name when name is bare
 hash(k1, v1, k2, v2)    — construct a hash from flat key/value pairs
 flat_hash(h)             — flatten hash into list context
 hash_copy(h)             — shallow copy

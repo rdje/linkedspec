@@ -502,6 +502,19 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Returns**: array
 - **Behavior**: Returns a new array in reverse order. Does not mutate the input.
 
+### `array(name)` / `array(e1, e2, ...)`
+- **Signature**: `array(name: name-token)` or `array(values: expr...)`
+- **Returns**: array
+- **Behavior**: With exactly one bare name token, reads the named array/list working variable:
+  `array(items)` reads the working array `items`. Quoted strings are literal constructor payloads, so
+  `array("items")` constructs an array containing the string `"items"`. With zero or multiple arguments it
+  constructs an array from the evaluated values.
+- **Terse alias**: `a(...)`.
+- **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
+  lookup. `array(alias)` reads the working array named `alias`; it does not read scalar `alias` and then use
+  that scalar as another variable name. Prefer direct shape literals such as `["items"]` as the terse
+  constructor spelling in new examples.
+
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`
 - **Returns**: the documented return value of the final helper in the chain.
@@ -625,8 +638,18 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 ### `hash(k1, v1, k2, v2, ...)`
 - **Signature**: `hash(keys_and_values: scalar...)`
 - **Returns**: hash
-- **Behavior**: Constructs a hash from flat key/value pairs. Arguments are interpreted as alternating keys and values. Accepts `flat_array(...)` and `flat_hash(...)` for list-context insertion.
-- **Edge cases**: Duplicate keys: last value wins. Odd number of arguments: the last key gets `undef` value.
+- **Behavior**: With exactly one bare name token, reads the named hash/associative-array working variable:
+  `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so
+  `hash("key", value)` constructs a hash entry whose key is `"key"`. With zero or multiple arguments it
+  constructs a hash from flat key/value pairs. Arguments are interpreted as alternating keys and values. Accepts
+  `flat_array(...)` and `flat_hash(...)` for list-context insertion.
+- **Terse alias**: `h(...)`.
+- **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
+  lookup. `hash(alias)` reads the working hash named `alias`; it does not read scalar `alias` and then use
+  that scalar as another variable name. Prefer direct shape literals such as `{ "alias" => value }` as the
+  terse constructor spelling in new examples.
+- **Edge cases**: Duplicate keys: last value wins. In multi-argument constructor use, an odd final key gets
+  `undef` value.
 
 ### `flat_hash(h)`
 - **Signature**: `flat_hash(h: hash)`
@@ -1178,8 +1201,9 @@ value chains apply the same rule to hash helpers, so
 `meta.set_key("stage", "normalized").sorted_keys().join_values(",")` is portable and pure. String receiver-dot
 chains apply the same rule to scalar string helpers, so `raw.trim().lowercase().substr(0, 12)` is portable,
 and `raw.trim().split("-").lowercase_each().join_values("_")` bridges explicitly into the array family. Use explicit
-aggregate wrappers such as `array(name)` / `hash(name)` anywhere a helper contract does not say a bare
-aggregate read is accepted. Statement forms
+aggregate wrappers such as `array(name)` and `hash(name)` anywhere a helper contract does not say a bare
+aggregate read is accepted; quoted strings are literal constructor payloads, not aggregate-name aliases or
+scalar-indirect lookup. Statement forms
 (`name = value`, `items += value`, `set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value
 expressions. Inline value `if`/`switch` is portable in the supported value-consuming slots (`return(...)`,
 assignment RHS, and fluent `.return(...)`), and its contract is the selected payload value rather than any

@@ -773,6 +773,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.5.6 — typed wrapper quoted-name boundaries ──
+    #
+    # Single-argument aggregate wrappers name a working variable only when the
+    # token is bare. Quoted strings remain constructor payloads; direct shape
+    # literals are the terse constructor form.
+    {   case   => 'terse_2_3_5_6_typed_wrapper_quoted_names',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { items += "a"; items += "b"; set_key(meta, "a", 1); set_key(meta, "b", 2); return(array(count(array(items)), count(array("items")), count(array('items')), count(a(items)), count(a("items")), count(["items"]), count(array("literal", "value")), count_keys(hash(meta)), count_keys(hash("meta", 1)), count_keys(hash('meta', 1)), count_keys({ "meta" => 1 }), count_keys(h(meta)), count_keys(h("meta", 1)))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },

@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.6 — aggregate wrapper quoted-name boundaries landed): Locked the
+  aggregate wrapper constructor/read boundary. Durable points. (1) **Bare aggregate wrapper args are typed
+  reads.** `array(foo)` / `a(foo)` read the array working variable `foo`; `hash(bar)` / `h(bar)` read the hash
+  working variable `bar`. This remains useful in typed helper slots where a bare name alone could otherwise
+  follow scalar or callee-inferred rules. (2) **Quoted wrapper args are payloads, not aliases.**
+  `array("foo")` and `array('foo')` construct literal string payloads; quoted hash constructor keys are fixed
+  keys. There is no scalar-indirect lookup where a scalar value names another aggregate. (3) **Direct shapes
+  are the terse constructors.** Prefer `["literal"]`, `{ "key" => value }`, `[]`, and `{}` for new array/hash
+  construction examples. (4) **Generic Perl value lowering must recognize shapes.** Direct shape literals now
+  lower as array/hash value expressions inside generic helper composition, so helper chains do not need wrapper
+  constructors merely to produce literal arrays/hashes. (5) **Reserved aggregate-name filtering matters.**
+  Primitive literals and scalar-only engine locals must not be interpreted as aggregate variable names, while
+  legitimate aggregate locals such as `IMATCH_LIST` and `IMATCH_HASH` remain available.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.4 — number receiver-dot value chains landed): Implemented the
   number return-family receiver-chain leaf. Durable points. (1) **Number receiver chains are pure value
   composition over `num_*`.** Perl normalizes receiver-dot numeric links into helper expressions and Rust

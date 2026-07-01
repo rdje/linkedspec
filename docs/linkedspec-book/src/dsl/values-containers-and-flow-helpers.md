@@ -24,6 +24,13 @@ h(meta)
 
 These aliases are DSL spellings. They are not Perl sigils.
 
+For aggregate wrappers, a single **bare** name token names a working variable: `array(items)` reads the
+array/list working variable `items`, and `hash(meta)` reads the hash/associative-array working variable
+`meta`. Quoted strings are literal values, not variable-name aliases: `array("items")` constructs an array
+payload containing the string `"items"`, and `hash("key", value)` constructs a key/value hash. Prefer direct
+shape literals (`["literal"]`, `{ "key" => value }`, `[]`, `{}`) as the terse constructor spellings in new
+examples.
+
 ## Per-rule default accumulator
 
 Every generated rule handler has a local array named after the rule. In a rule named `Parent`, the conventional accumulator is `@Parent`; in a rule named `sub_gui_list`, it is `@sub_gui_list`.

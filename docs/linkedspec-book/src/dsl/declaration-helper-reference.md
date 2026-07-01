@@ -43,6 +43,23 @@ I { declare(scalar, count) }
 
 An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
 
+For aggregate wrappers, the single argument is a working-variable name token only when it is **bare**:
+
+```text
+array(items)
+```
+
+That reads the array/list working variable `items`. Likewise:
+
+```text
+hash(meta)
+```
+
+reads the hash/associative-array working variable `meta`. Quoted strings remain literal constructor payloads,
+not working-variable aliases or scalar-indirect lookup. For example, `array("items")` constructs an array
+payload containing `"items"`, and `hash("key", value)` constructs a hash field. Prefer direct shape literals
+such as `["items"]`, `{ "key" => value }`, `[]`, and `{}` as the terse constructor forms in new examples.
+
 ### The wrapper is optional in a type-implying position
 
 A working variable also auto-exists when it appears **bare** (without a `scalar()` / `array()` / `hash()` wrapper) in a helper position that already implies its kind. In those positions the wrapper is optional — each pair below is equivalent:
@@ -301,7 +318,7 @@ declare(array, pair=array(scalar(lhs), scalar(rhs)));
 declare(array, groups=entry_groups());
 declare(array, keys=sorted_keys(hash(meta)));
 declare(array, public_keys=take(sorted_keys(pick_keys(hash(meta), "kind", "source")), 2));
-declare(array, merged=concat_arrays(array(items), array(extra_items), array("tail")));
+declare(array, merged=concat_arrays(array(items), array(extra_items), ["tail"]));
 declare(array, snapshot=array_copy(array(items)));
 ```
 

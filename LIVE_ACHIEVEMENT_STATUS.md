@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.6 — aggregate wrapper quoted-name boundaries landed**
+  (PERL ACTIONIR + RUST LOCKS + PHASE0 + ORACLE + BOOK/KM). Bare aggregate wrappers remain explicit typed
+  working-variable reads: `array(foo)` / `a(foo)` read `@foo`, and `hash(bar)` / `h(bar)` read `%bar`.
+  Quoted wrapper arguments are not aliases and are not scalar-indirect lookups: `array("foo")` /
+  `array('foo')` are literal array-constructor payloads, and quoted hash constructor arguments are fixed-key
+  payloads under the existing arity rules. Direct `[...]` / `{...}` shapes are now the preferred terse
+  array/hash constructor examples in the variant-neutral mdBook; `foo.array()`-style postfix typed views stay
+  out of scope.
+  **Verification:** Perl syntax checks PASS; focused lowering/runtime/source probes PASS; phase0 PASS with
+  **1000 tests**; focused Rust `.2.3.5.6` locks PASS; oracle regeneration produced **51 fixtures**; Rust
+  `corpus_oracle` PASS over 51 fixtures; mdBook/KM/live docs updated.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.5`** (block-valued receiver chaining by yielded type), then
+  task-tree-own Julia/Lua/Dart variant parity before any variant code.
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.4 — number receiver-dot value chains landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure numeric helper chains now work from
   scalar, integer-literal, and decimal-literal receivers on Perl and Rust:

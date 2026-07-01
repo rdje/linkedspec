@@ -820,6 +820,11 @@ sub _lower_method_value_expr {
   my $candidate_trimmed = $trim_action_ir_value->($candidate_expr);
   return 0 unless defined($candidate_trimmed) && length($candidate_trimmed);
 
+  if (substr($candidate_trimmed, 0, 1) eq '[') {
+   my $shape = $lower_shape_literal_value_expr->($candidate_trimmed);
+   return 1 if defined($shape) && length($shape);
+  }
+
   return 1 if $candidate_trimmed =~ $array_container_prefix_re;
 
   my $array_symbol = $extract_array_symbol_name->($candidate_trimmed);
@@ -866,6 +871,11 @@ sub _lower_method_value_expr {
   return 0 unless defined $candidate_expr;
   my $candidate_trimmed = $trim_action_ir_value->($candidate_expr);
   return 0 unless defined($candidate_trimmed) && length($candidate_trimmed);
+
+  if (substr($candidate_trimmed, 0, 1) eq '{') {
+   my $shape = $lower_shape_literal_value_expr->($candidate_trimmed);
+   return 1 if defined($shape) && length($shape);
+  }
 
   return 1 if $candidate_trimmed =~ $hash_container_prefix_re;
 
@@ -2367,6 +2377,10 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
   my $args = $split_top_level_csv->($payload);
+  if (@$args == 1) {
+   my $hash_symbol = $extract_hash_symbol_name->($trimmed);
+   return '{%'.$hash_symbol.'}' if defined($hash_symbol) && length($hash_symbol) && $trimmed =~ $hash_symbol_expr_re;
+  }
   my @pairs;
   for (my $i = 0; $i < @$args; ) {
    my $flat_pair_expr = $lower_flat_list_value_expr->($args->[$i]);
@@ -2391,6 +2405,10 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
   my $args = $split_top_level_csv->($payload);
+  if (@$args == 1) {
+   my $array_symbol = $extract_array_symbol_name->($trimmed);
+   return '[@'.$array_symbol.']' if defined($array_symbol) && length($array_symbol) && $trimmed =~ $array_symbol_expr_re;
+  }
   my @lowered = map { _lower_method_value_expr($_, $deps) // $_ } @$args;
   return '['.join(', ', @lowered).']';
  }

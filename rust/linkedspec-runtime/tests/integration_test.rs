@@ -2010,3 +2010,25 @@ fn terse_2_3_5_4_number_terminal_methods_end_chains() {
         "number receiver comparison terminal values cannot continue into later receiver-dot methods"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.5.6 — typed wrapper quoted-name boundaries:
+
+#[test]
+fn terse_2_3_5_6_typed_wrapper_quoted_boundaries_run() {
+    let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(a(items)), count(a(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }), count_keys(h(meta)), count_keys(h(\"meta\", 1)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[2, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 2, 1]]),
+        "bare wrappers read working variables while quoted wrappers and direct shapes construct literal payloads"
+    );
+}
+
+#[test]
+fn terse_2_3_5_6_quoted_names_are_not_runtime_indirect_lookups() {
+    let grammar = "Top::\n /x/ -> Done { set(alias, \"items\"); items += \"a\"; set(hash_alias, \"meta\"); set_key(meta, \"a\", 1); return(array(count(array(\"alias\")), count(array(alias)), count(array(items)), count_keys(hash(\"hash_alias\", 1)), count_keys(hash(hash_alias)), count_keys(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[1, 0, 1, 1, 0, 1]]),
+        "quoted wrapper arguments are literal constructor payloads, not scalar-indirect aggregate names"
+    );
+}

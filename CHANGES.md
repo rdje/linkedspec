@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.6 — lock aggregate wrapper quoting boundaries
+
+**Scope:** Perl ActionIR aggregate-wrapper/value lowering, Rust boundary locks, oracle corpus, mdBook,
+Knowledge Map, roadmap/task-tree/live docs.
+
+**What changed:** Aggregate typed wrappers now have a locked quoting boundary. A wrapper with exactly one bare
+name token remains an explicit typed working-variable read (`array(foo)` / `a(foo)` -> `@foo`,
+`hash(bar)` / `h(bar)` -> `%bar`). Quoted wrapper arguments stay literal constructor payloads, not aliases and
+not runtime scalar-indirect lookups. Direct shape literals (`[...]`, `{...}`, `[]`, `{}`) are the preferred
+terse array/hash constructor surface in the mdBook.
+
+**Boundary:** No `foo.array()` postfix typed-view adapter was added. `array("foo")` / `array('foo')` do not
+read `@foo`; quoted hash constructor keys remain fixed payload keys under the existing constructor rules.
+Primitive literals and inappropriate engine locals are not claimed as aggregate variable names.
+
+**Validation:** Perl syntax checks for `MethodLowering.pm`, `ValueExpr.pm`, `t/phase0_regression.t`, and
+`tools/gen_oracle_corpus.pl`; focused lowering/runtime/source probes; full phase0 PASS with **1000 tests**;
+focused Rust `.2.3.5.6` tests PASS; oracle regeneration produced **51 fixtures**; Rust `corpus_oracle` PASS
+over 51 fixtures; `mdbook build docs/linkedspec-book` PASS.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.4 — implement number receiver value chains
 
 **Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain numeric parsing/runtime evaluation, focused
