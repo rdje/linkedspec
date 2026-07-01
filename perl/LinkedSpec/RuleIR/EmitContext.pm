@@ -357,6 +357,11 @@ sub _lower_method_value_expr {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_method_value_expr', @args)
 }
 
+sub _lower_dropped_value_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_dropped_value_statement', @args)
+}
+
 sub _infer_direct_shape_literal_sigil {
  my ($expr) = @_;
  my $trimmed = _trim_action_ir_value($expr);
@@ -550,13 +555,11 @@ sub _build_action_rewrite_rules {
 sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  my ($rewritten) = _rewrite_action_code_with_diagnostics($label, $code, undef);
   my $trimmed = _trim_action_ir_value($code);
   if (
    defined($trimmed) &&
    length($trimmed) &&
-   $rewritten eq $code &&
-   $trimmed =~ /^(?:s|a|h)\s*\(/o
+   $trimmed =~ /^(?:scalar|s|array|a|hash|h)\s*\(/o
   ) {
    my $call = _parse_method_function_expr($trimmed);
    if ($call && ($call->{method} // '') =~ /^(?:scalar|array|hash)$/o) {
@@ -564,6 +567,7 @@ sub rewrite_action_code_for_compat {
     return $lowered if defined($lowered) && length($lowered);
    }
   }
+  my ($rewritten) = _rewrite_action_code_with_diagnostics($label, $code, undef);
   return $rewritten
  })
 }

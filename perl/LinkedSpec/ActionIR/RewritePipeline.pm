@@ -90,6 +90,7 @@ sub _unmatched_event_is_statement_level {
  return 1 if $contract_id =~ /^(?:declare_typed|declare_alias)$/o;
  return 1 if $contract_id =~ /^(?:push_single_arg|push_indexed_arg|push_target_arg|push_target_indexed_arg|push_scope_target_arg|push_value|push_nonempty)$/o;
  return 1 if $contract_id =~ /^(?:assign_value|assign_call|assign_call_my|assign_match_my|scalar_assignment_operator|array_append_operator|array_end_mutation_method|hash_index_assignment_operator|set_key_statement)$/o;
+ return 1 if $contract_id eq 'value_drop_statement';
  return 1 if $contract_id =~ /^(?:if_flow|elseif_flow|else_flow|endif_flow|while_flow|switch_flow|case_flow|default_flow|endcase_flow|endswitch_flow)$/o;
  return 1 if $contract_id =~ /^(?:say_stmt|print_stmt|print_each|exit_now|exit_bare|next_stmt|next_bare|regex_subst|regex_subst_assignment)$/o;
  return 0

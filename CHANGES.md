@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.2 — lower dropped value statements
+
+**Scope:** Perl ActionIR lowering, scanner/canonical metadata, focused AST parser tests, task tree, live docs,
+mdBook status, and Knowledge Map.
+
+**What changed:** Supported standalone value statements that already parse into typed ActionIR AST value nodes now
+lower as discarded values through a new `VALUE_DROP` contract. Examples such as `trim(" x ")`, `concat("a","b")`,
+and `" x ".trim()` no longer remain raw host-call text; they lower through the existing value-expression
+dispatcher and then discard the result with `undef`.
+
+**Compatibility boundary:** Malformed covered standalone helpers still become
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` diagnostics with zero raw fallback. `call_spec_handler_subst` continues
+to preserve bare `s(...)`, `a(...)`, and `h(...)` compatibility value expressions as expressions, not dropped
+statements. Unknown user-function-shaped standalone calls/chains remain raw and are left to `.5.3`.
+
+**Checks:** Syntax checks passed for touched ActionIR modules, `perl/LinkedSpec.pm`, and
+`t/actionir_ast_parser.t`. The focused AST suite passed with **20 subtests**. `prove -q -Iperl
+t/phase0_regression.t` passed with phase0 **1002 tests**. `mdbook build docs/linkedspec-book`, memory
+architecture, Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh` all passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.1 — audit fallback boundary
 
 **Scope:** Perl ActionIR migration audit, task tree, live docs, mdBook status, and Knowledge Map. No

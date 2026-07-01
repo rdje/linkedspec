@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.2 — dropped value statement lowering**
+  (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). Supported standalone value statements that already parse
+  into typed ActionIR AST value nodes now lower as discarded values through a `VALUE_DROP` contract. `trim(" x ")`,
+  `concat("a","b")`, and simple receiver chains such as `" x ".trim()` no longer remain raw host-call text; they
+  lower through the existing value-expression dispatcher and then discard the result. Malformed covered standalone
+  helpers still report unresolved-helper metadata with zero raw fallback, compatibility `s(...)`/`a(...)`/`h(...)`
+  substitution still returns value expressions, and unknown user-function-shaped calls/chains stay raw for `.5.3`.
+  **Verification:** syntax checks PASS for touched ActionIR modules and `t/actionir_ast_parser.t`; focused
+  `t/actionir_ast_parser.t` PASS with **20 subtests**; `prove -q -Iperl t/phase0_regression.t` PASS with phase0
+  **1002 tests**; `mdbook build docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates PASS;
+  `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.3` prepare user-function calls to resolve through AST call nodes.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.1 — fallback-boundary audit**
   (TASK TREE + BOOK/KM/LIVE DOCS; **no parser/compiler/runtime code change**). The remaining Perl ActionIR
   fallback boundary is now classified before code. Malformed AST-covered helper forms already use

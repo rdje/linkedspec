@@ -40,7 +40,9 @@ consume typed AST `call` fields for `set`/`assign`, `set_key`, `push`, `push_val
 consume typed AST `fluent_chain` fields. Expression-valued block side effects,
 block-local returns, and final block expressions now consume typed block/statement AST
 fields. Structured control-flow lowering now consumes typed AST fields for the if/when,
-switch/case/default, and attached-while statement families.
+switch/case/default, and attached-while statement families. Standalone supported value
+statements now produce canonical `VALUE_DROP` events: the backend computes the typed
+value expression and intentionally discards the result.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host

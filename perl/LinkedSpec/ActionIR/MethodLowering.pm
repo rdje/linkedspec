@@ -794,6 +794,126 @@ sub _actionir_ast_expected_statement_method {
  return 0
 }
 
+sub _actionir_ast_known_value_call_method {
+ my ($method) = @_;
+ return undef unless defined($method) && length($method);
+ return 'scalar' if $method eq 's';
+ return 'array' if $method eq 'a';
+ return 'hash' if $method eq 'h';
+ return 'concat' if $method eq 'cat';
+ my $numeric_alias = _numeric_word_alias_helper_name($method);
+ return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
+ return $method
+  if $method =~ /^(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|scalar|array|hash|array_copy|hash_copy|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)$/o;
+ return undef
+}
+
+sub _actionir_ast_first_unknown_value_call_name {
+ my ($node) = @_;
+ return undef unless ref($node) eq 'HASH';
+ my $kind = $node->{kind} // '';
+
+ if ($kind eq 'call') {
+  my $method = _actionir_ast_known_value_call_method($node->{name});
+  return $node->{name} unless defined($method) && length($method);
+  foreach my $arg (@{$node->{args} || []}) {
+   my $unknown = _actionir_ast_first_unknown_value_call_name($arg);
+   return $unknown if defined($unknown) && length($unknown);
+  }
+  return undef
+ }
+
+ if ($kind eq 'fluent_chain') {
+  my $unknown = _actionir_ast_first_unknown_value_call_name($node->{receiver});
+  return $unknown if defined($unknown) && length($unknown);
+  foreach my $call (@{$node->{calls} || []}) {
+   next unless ref($call) eq 'HASH';
+   my $method = $call->{method};
+   return $method
+    unless _is_array_receiver_value_chain_method($method)
+        || _is_hash_receiver_value_chain_method($method)
+        || _is_string_receiver_value_chain_method($method)
+        || _is_number_receiver_value_chain_method($method);
+   foreach my $arg (@{$call->{args} || []}) {
+    my $arg_unknown = _actionir_ast_first_unknown_value_call_name($arg);
+    return $arg_unknown if defined($arg_unknown) && length($arg_unknown);
+   }
+  }
+  return undef
+ }
+
+ if ($kind eq 'array_literal') {
+  foreach my $item (@{$node->{items} || []}) {
+   my $unknown = _actionir_ast_first_unknown_value_call_name($item);
+   return $unknown if defined($unknown) && length($unknown);
+  }
+  return undef
+ }
+
+ if ($kind eq 'hash_literal') {
+  foreach my $entry (@{$node->{entries} || []}) {
+   foreach my $slot (qw(key value)) {
+    my $unknown = _actionir_ast_first_unknown_value_call_name($entry->{$slot});
+    return $unknown if defined($unknown) && length($unknown);
+   }
+  }
+  return undef
+ }
+
+ if ($kind eq 'indexed_var') {
+  return _actionir_ast_first_unknown_value_call_name($node->{index})
+ }
+
+ if ($kind eq 'nested_access') {
+  foreach my $segment (@{$node->{segments} || []}) {
+   next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
+   my $unknown = _actionir_ast_first_unknown_value_call_name($segment->{expr});
+   return $unknown if defined($unknown) && length($unknown);
+  }
+  return undef
+ }
+
+ if ($kind eq 'block_value') {
+  my $block = $node->{block};
+  return undef unless ref($block) eq 'HASH';
+  my $statements = $block->{statements};
+  return undef unless ref($statements) eq 'ARRAY';
+  foreach my $stmt (@$statements) {
+   next unless ref($stmt) eq 'HASH';
+   my $unknown = _actionir_ast_first_unknown_value_call_name($stmt->{expr});
+   return $unknown if defined($unknown) && length($unknown);
+  }
+  return undef
+ }
+
+ return undef
+}
+
+sub _lower_dropped_value_statement {
+ my ($expr, $deps) = @_;
+ return undef unless defined $expr;
+ my $trim_action_ir_value = (ref($deps) eq 'HASH' && ref($deps->{trim_action_ir_value}) eq 'CODE')
+  ? $deps->{trim_action_ir_value}
+  : undef;
+ die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback 'trim_action_ir_value'"
+  unless ref($trim_action_ir_value) eq 'CODE';
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
+ return undef unless ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') ne 'raw_perl';
+
+ my $unknown = _actionir_ast_first_unknown_value_call_name($ast_node);
+ return _actionir_ast_unsupported_helper_expr($unknown)
+  if defined($unknown) && length($unknown);
+
+ my $lowered = _lower_method_value_expr($trimmed, $deps);
+ return undef unless defined($lowered) && length($lowered);
+ return undef if $lowered eq $trimmed;
+ $lowered = '+'.$lowered if $lowered =~ /^\s*\{/s;
+ return 'do { '.$lowered.'; undef }'
+}
+
 sub _lower_ast_call_statement {
  my ($expr_or_node, $expected_method, $deps) = @_;
  my $node = ref($expr_or_node) eq 'HASH'

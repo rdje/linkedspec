@@ -67,6 +67,10 @@ lowering now consumes typed condition/body nodes before reusing the existing loo
 and its deterministic 10000-iteration safety guard. Bodyless `while(...)` marker nodes
 remain parser shape only because the current DSL has no `endwhile` product syntax. The
 wrapper forms remain compatibility syntax, not the canonical destination surface.
+Standalone supported value statements now lower through the same typed AST value
+traversal and produce canonical `VALUE_DROP` events: their value is computed with the
+covered helper/receiver semantics and then intentionally discarded. For example,
+`trim(" x ")`, `concat("a","b")`, and `" x ".trim()` do not remain raw host calls.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

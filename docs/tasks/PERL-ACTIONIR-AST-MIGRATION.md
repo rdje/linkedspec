@@ -436,14 +436,24 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.1 - audit fallback boundary`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.2`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Retire supported-surface fallback leakage for AST-covered Perl ActionIR forms.
   Acceptance: Forms that parse into supported typed AST nodes but cannot lower no longer
     leak generated host-language calls or raw Perl for supported DSL surfaces; they emit
     clear existing diagnostics or unresolved-helper metadata. Narrow compatibility
     payloads identified by `.5.1` remain intentionally fenced.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Standalone supported value statements now scan as
+    `VALUE_DROP` events and lower through typed AST value traversal as discarded values
+    (`do { <value>; undef }`) instead of remaining raw host calls. Malformed covered
+    standalone helpers still report `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` through
+    unresolved-helper metadata with zero raw fallback. The compatibility value-expression
+    probe for `s(...)`/`a(...)`/`h(...)` still returns expressions rather than dropped
+    statements, and unknown user-function-shaped standalone calls/chains remain raw for
+    `.5.3`. Focused syntax checks passed for all touched ActionIR modules and
+    `perl/LinkedSpec.pm` plus `t/actionir_ast_parser.t`; focused AST suite passed with
+    20 subtests; phase0 passed 1002 tests; mdBook, memory architecture, Knowledge Map,
+    doctrine registry, `git diff --check`, and full local CI passed.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.5.2 - lower dropped value statements`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.3`
   Status: `pending`
@@ -491,7 +501,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | `done` 2026-07-01 | Attached while statement controls now lower from typed condition/body nodes. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5` | `split` 2026-07-01 | Fallback retirement and function handoff split before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.1` | `done` 2026-07-01 | Remaining fallback boundaries audited and classified before code. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.2` | `pending` | Retire AST-covered supported-surface fallback leakage without disturbing fenced compatibility debt. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.5.2` | `done` 2026-07-01 | Supported standalone value statements now lower as discarded `VALUE_DROP` nodes, while malformed covered helpers diagnose and compatibility/user-function fences remain intact. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.3` | `pending` | Prepare user-function calls to resolve through AST call nodes. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -1021,6 +1032,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.2` | Added dropped-value statement lowering through typed AST value traversal; added scanner/canonical/rewrite metadata for `VALUE_DROP`; preserved compatibility `s(...)`/`a(...)`/`h(...)` value-expression substitution; focused syntax checks for touched ActionIR modules, `perl/LinkedSpec.pm`, and `t/actionir_ast_parser.t`; focused AST suite with 20 subtests; phase0 1002 tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Supported standalone value statements such as `trim(" x ")`, `concat("a","b")`, and `" x ".trim()` no longer remain raw fallback and now lower as discarded values. Malformed covered standalone helpers diagnose through unresolved-helper metadata without raw fallback. Unknown user-function-shaped calls/chains remain `.5.3` handoff work. Frontier moves to `.5.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.1` | TOOLBOX `call_spec_handler_subst`, descriptor metadata, and AST parser probes for malformed covered helpers, compatibility payloads, retired helpers, raw statements, all-bare `push(A,B)`, unknown calls/chains, and `fn` grammar ownership; code reads of `CanonicalEvents`, `RewritePipeline`, `RuleIR::EmitContext`, `MethodLowering`, and `ActionIR::AST::Parser`; mdBook/live-doc/KM updates; `mdbook build docs/linkedspec-book`, memory/doctrine/KM/diff checks, and full local CI with phase0 1002 tests | Remaining fallback boundaries are classified before code: AST-covered malformed helpers already diagnose as unresolved, retired/non-DSL/raw surfaces stay compatibility debt, all-bare `push(A,B)` remains child-call ambiguity, unknown typed calls/chains are `.5.3` user-function handoff risk, and `fn` definition grammar remains `.5.4`/`specs/spec.spec` ownership. Frontier moves to `.5.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5` | Split fallback retirement and user-function handoff into `.5.1` fallback-boundary audit, `.5.2` AST-covered fallback leakage retirement, `.5.3` user-function AST call handoff, and `.5.4` `specs/spec.spec` grammar/bootstrap-retirement lock; mdBook/doctrine/KM/diff checks | Final ActionIR migration parent is now owned by focused children before code. Frontier moves to `.5.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | Added `ControlFlow` AST bridge for attached while controls; added focused fake-source locks for typed condition/body lowering and guard preservation; syntax checks; focused AST parser suite with 19 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Attached while structured controls now lower from typed condition/body AST fields while preserving the existing iteration-safety guard. Frontier moves to `.5`. |

@@ -905,6 +905,67 @@ subtest 'covered helper-call diagnostics retire AST host-call leakage' => sub {
     like(join("\n", @{$meta->{unresolved_helper_statements} || []}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unresolved-helper statements carry the sentinel');
 };
 
+subtest 'standalone AST value statements drop covered values without raw fallback' => sub {
+    my $trim = LinkedSpec::call_spec_handler_subst('Top', q{trim(" x ")});
+    like($trim, qr/^do \{ do \{ my \$__ls_trim = " x ";.*undef \}$/s,
+        'standalone trim lowers as a discarded value expression');
+    unlike($trim, qr/^trim\s*\(/, 'standalone trim no longer remains as raw host-call text');
+
+    my $concat = LinkedSpec::call_spec_handler_subst('Top', q{concat("a", "b")});
+    like($concat, qr/^do \{ do \{ my \@__ls_concat_parts = \("a", "b"\);.*undef \}$/s,
+        'standalone concat lowers as a discarded value expression');
+    unlike($concat, qr/^concat\s*\(/, 'standalone concat no longer remains as raw host-call text');
+
+    my $bad_count = LinkedSpec::call_spec_handler_subst('Top', q{count(1,2)});
+    like($bad_count, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:count/,
+        'malformed covered standalone helper lowers to the unresolved-helper sentinel');
+    unlike($bad_count, qr/^count\s*\(/, 'malformed covered standalone helper no longer remains as raw host-call text');
+
+    my $string_chain = LinkedSpec::call_spec_handler_subst('Top', q{" x ".trim()});
+    like($string_chain, qr/^do \{ do \{ my \$__ls_trim = " x ";.*undef \}$/s,
+        'standalone string receiver chain lowers as a discarded value expression');
+    unlike($string_chain, qr/^" x "\.trim\(\)/, 'standalone string receiver chain no longer remains as raw source text');
+
+    is(LinkedSpec::call_spec_handler_subst('Top', q{s(foo)}), q{$foo},
+        'compatibility value substitution preserves scalar shorthand as an expression');
+    is(LinkedSpec::call_spec_handler_subst('Top', q{a("A", "B")}), q{["A", "B"]},
+        'compatibility value substitution preserves array shorthand as an expression');
+    is(LinkedSpec::call_spec_handler_subst('Top', q{h("kind", "node")}), q{{"kind" => "node"}},
+        'compatibility value substitution preserves hash shorthand as an expression');
+
+    my $ready_spec = qq{Top::\n /x/ -> Done { trim(" x "); concat("a","b"); " y ".trim() }\nDone::\n /y/\n};
+    my $ready_descriptor = eval { LinkedSpec::Get(\$ready_spec, return_descriptor => 1) };
+    ok(ref($ready_descriptor) eq 'HASH', 'descriptor builds for supported standalone value statements');
+    my $ready_meta = ref($ready_descriptor) eq 'HASH' ? ($ready_descriptor->{spec}{Top}{meta}{action_rewriter} || {}) : {};
+    is($ready_meta->{raw_perl_dependency_count} || 0, 0, 'supported standalone value statements have no raw Perl dependency');
+    is($ready_meta->{unresolved_helper_count} || 0, 0, 'supported standalone value statements have no unresolved helper');
+    ok($ready_meta->{language_agnostic_action_ir_ready}, 'supported standalone value statements remain language-agnostic ready');
+    ok(grep { $_ eq 'VALUE_DROP' } @{$ready_meta->{canonical_action_ir_nodes} || []},
+        'supported standalone value statements report VALUE_DROP canonical nodes');
+
+    my $unsupported_spec = qq{Top::\n /x/ -> Done { count(1,2) }\nDone::\n /y/\n};
+    my $unsupported_descriptor = eval { LinkedSpec::Get(\$unsupported_spec, return_descriptor => 1) };
+    ok(ref($unsupported_descriptor) eq 'HASH', 'descriptor builds for unsupported covered standalone value statement');
+    my $unsupported_meta = ref($unsupported_descriptor) eq 'HASH' ? ($unsupported_descriptor->{spec}{Top}{meta}{action_rewriter} || {}) : {};
+    is($unsupported_meta->{raw_perl_dependency_count} || 0, 0, 'unsupported covered standalone helper is not reported as raw Perl fallback');
+    is($unsupported_meta->{unresolved_helper_count} || 0, 1, 'unsupported covered standalone helper is reported as unresolved');
+    is_deeply($unsupported_meta->{unresolved_helpers} || [], ['count'], 'unsupported covered standalone helper names the helper');
+    ok(!$unsupported_meta->{language_agnostic_action_ir_ready}, 'unsupported covered standalone helper blocks readiness through diagnostics');
+
+    my $unknown = LinkedSpec::call_spec_handler_subst('Top', q{user_fn("x")});
+    is($unknown, q{user_fn("x")}, 'standalone unknown user function remains raw for the user-function handoff slice');
+
+    my $unknown_chain = LinkedSpec::call_spec_handler_subst('Top', q{user_fn("x").trim()});
+    is($unknown_chain, q{user_fn("x").trim()}, 'unknown function-call receiver chain remains raw for the user-function handoff slice');
+
+    my $unknown_spec = qq{Top::\n /x/ -> Done { user_fn("x"); user_fn("x").trim() }\nDone::\n /y/\n};
+    my $unknown_descriptor = eval { LinkedSpec::Get(\$unknown_spec, return_descriptor => 1) };
+    ok(ref($unknown_descriptor) eq 'HASH', 'descriptor still builds for unknown standalone user-function statements');
+    my $unknown_meta = ref($unknown_descriptor) eq 'HASH' ? ($unknown_descriptor->{spec}{Top}{meta}{action_rewriter} || {}) : {};
+    is($unknown_meta->{raw_perl_dependency_count} || 0, 2, 'unknown standalone user-function statements remain raw Perl dependencies');
+    is($unknown_meta->{unresolved_helper_count} || 0, 0, 'unknown standalone user-function statements are not claimed as covered helper diagnostics yet');
+};
+
 subtest 'fluent_chain value lowering consumes AST nodes' => sub {
     my $parse_calls = 0;
     my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;

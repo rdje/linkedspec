@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.2 — dropped value statements): Retired the supported standalone
+  value-statement raw fallback without changing user-function ownership. Durable points. (1) **Dropped values now
+  have a canonical event.** The scanner recognizes standalone covered value calls and simple receiver chains,
+  maps them to `VALUE_DROP`, and lowers them through typed AST value traversal before appending `undef`.
+  (2) **Malformed covered helpers stay diagnostics.** Bad arity or unknown nested covered calls still surface as
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` with `raw_perl_dependency_count == 0`. (3) **Compatibility value
+  probes are expressions.** `call_spec_handler_subst('Top', 's(foo)')`, `a(...)`, and `h(...)` continue to return
+  value expressions instead of statement-level discard wrappers. (4) **User-defined functions are still `.5.3`.**
+  Unknown standalone calls/chains such as `user_fn("x")` and `user_fn("x").trim()` remain raw until the
+  user-function AST handoff owns resolution/diagnostics.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.1 — fallback-boundary audit): Audited the remaining Perl
   ActionIR fallback boundary before code. Durable points. (1) **Malformed covered helpers are already
   diagnostics, not raw fallback.** `substr`, `count`, and nested covered-helper arity failures use

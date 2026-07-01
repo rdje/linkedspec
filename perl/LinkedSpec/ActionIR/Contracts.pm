@@ -34,7 +34,7 @@ sub _is_primitive_literal_token {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::build_dep_map(
+ my $deps = LinkedSpec::OwnerDispatch::build_dep_map(
   __PACKAGE__,
   $pkg,
   [
@@ -66,7 +66,11 @@ sub default_deps_for_package {
    'lower_declare_method_statement',
    'lower_method_value_expr',
   ],
- )
+ );
+ if (defined($pkg) && length($pkg) && $pkg->can('_lower_dropped_value_statement')) {
+  $deps->{lower_dropped_value_statement} = $pkg->can('_lower_dropped_value_statement');
+ }
+ return $deps
 }
 
 sub _require_lowering_deps {
@@ -78,6 +82,17 @@ sub _require_lowering_deps {
    unless ref($cb) eq 'CODE';
   return $cb
  };
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
+ my $lower_dropped_value_statement = (ref($deps) eq 'HASH' && ref($deps->{lower_dropped_value_statement}) eq 'CODE')
+  ? $deps->{lower_dropped_value_statement}
+  : sub {
+   my ($code) = @_;
+   my $lowered = $lower_method_value_expr->($code);
+   return undef unless defined($lowered) && length($lowered);
+   return undef if defined($code) && $lowered eq $code;
+   $lowered = '+'.$lowered if $lowered =~ /^\s*\{/s;
+   return 'do { '.$lowered.'; undef }'
+  };
  return {
   lower_return_general_statement => $require_dep->('lower_return_general_statement'),
   lower_assign_method_statement  => $require_dep->('lower_assign_method_statement'),
@@ -105,7 +120,8 @@ sub _require_lowering_deps {
   lower_print_each_statement     => $require_dep->('lower_print_each_statement'),
   lower_return_undef_statement   => $require_dep->('lower_return_undef_statement'),
   lower_declare_method_statement => $require_dep->('lower_declare_method_statement'),
-  lower_method_value_expr        => $require_dep->('lower_method_value_expr'),
+  lower_method_value_expr        => $lower_method_value_expr,
+  lower_dropped_value_statement  => $lower_dropped_value_statement,
  }
 }
 
@@ -1964,6 +1980,33 @@ sub _build_array_pipeline_contracts {
 }
 
 #------------------------------------------------------------------------------
+# Function: _build_dropped_value_contracts
+# Purpose : Contracts for supported value expressions used as standalone
+#           statements. Their values are intentionally discarded.
+#------------------------------------------------------------------------------
+sub _build_dropped_value_contracts {
+ my ($d) = @_;
+ my $value_call_re = qr/(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|scalar|s|array|a|hash|h|array_copy|hash_copy|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
+ my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|hash_copy|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
+ my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
+ my $value_drop_statement_re = qr/^\s*(?:(?:$value_call_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))|(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\))\s*\z/so;
+ return [
+  {
+   id                 => 'value_drop_statement',
+   ir_node            => 'VALUE_DROP',
+   diag_name          => 'value_drop',
+   unresolved_pattern => $value_drop_statement_re,
+   lower              => sub {
+    my ($code) = @_;
+    return $code unless defined($code) && $code =~ /$value_drop_statement_re/;
+    my $lower = $d->{lower_dropped_value_statement};
+    return $lower->($code) || $code
+   },
+  },
+ ]
+}
+
+#------------------------------------------------------------------------------
 # Function: _build_flow_control_contracts
 # Purpose : Contracts that lower structured flow-control helper forms.
 #------------------------------------------------------------------------------
@@ -2202,6 +2245,7 @@ sub build_action_lowering_contracts {
   @{_build_passthrough_ir_contracts()},
   @{_build_assignment_and_regex_contracts($d)},
   @{_build_array_pipeline_contracts($d)},
+  @{_build_dropped_value_contracts($d)},
   @{_build_flow_control_contracts($d)},
   @{_build_emit_and_declare_contracts($d)},
  ]

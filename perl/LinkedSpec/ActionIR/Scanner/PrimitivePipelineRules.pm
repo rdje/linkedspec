@@ -32,6 +32,7 @@ sub try_scan_contract_ir_events {
   'uppercase_each' => \&_scan_contract_uppercase_each,
   'uniq_array' => \&_scan_contract_uniq_array,
   'filter_match' => \&_scan_contract_filter_match,
+  'value_drop_statement' => \&_scan_contract_value_drop_statement,
  );
  my $handler = $dispatch{$id};
  return undef unless $handler;
@@ -557,6 +558,26 @@ while ($code =~ /\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[
   },
  };
 }
+ return \@events
+}
+
+sub _scan_contract_value_drop_statement {
+ my ($code) = @_;
+ my @events;
+ my $value_call_re = qr/(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|scalar|s|array|a|hash|h|array_copy|hash_copy|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
+ my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|hash_copy|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
+ my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
+ foreach my $statement (@{_split_action_ir_statements($code)}) {
+  my $trimmed = _trim_action_ir_value($statement);
+  next unless defined($trimmed) && length($trimmed);
+  if ($trimmed =~ /^(?:$value_call_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))\z/so) {
+   push @events, {raw => $trimmed, args => {expr => $trimmed}};
+   next;
+  }
+  if ($trimmed =~ /^(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\)\z/so) {
+   push @events, {raw => $trimmed, args => {expr => $trimmed}};
+  }
+ }
  return \@events
 }
 
