@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.3 — lower switch-family controls from AST
+
+**Scope:** Perl ActionIR control-flow lowering, focused AST parser/lowering tests, task-tree/roadmap/live docs,
+mdBook architecture status, and Knowledge Map.
+
+**What changed:** `LinkedSpec::ActionIR::ControlFlow` now parses `switch`, `case`, `default`, `endcase`, and
+`endswitch` statements through the ActionIR AST parser before entering the existing switch stack lowerers. The
+bridge materializes trusted switch source expressions, case match values, attached case/default bodies, parsed
+switch branch lists, and end markers from typed AST fields instead of reusing original statement text or AST
+`source` strings.
+
+**Compatibility boundary:** The generated Perl switch shape and existing switch-value single evaluation,
+case-order, `default` once-only, attached-switch body, and marker `endcase`/`endswitch` behavior remain
+unchanged. `while` structured-control lowering remains queued for `.4.4.4`.
+
+**Tests:** Syntax checks passed for `ActionIR::ControlFlow` and the focused parser test. `prove -v -Iperl
+t/actionir_ast_parser.t` passed with 18 focused subtests, including fake-source locks for attached
+switch/case/default and marker switch/case/endcase/default/endswitch. `perl -c perl/LinkedSpec.pm`,
+`perl -c -Iperl t/phase0_regression.t`, and `prove -q -Iperl t/phase0_regression.t` passed; phase0 covered
+1002 tests. `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`, and
+`bash tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.2 — lower if-family controls from AST
 
 **Scope:** Perl ActionIR control-flow lowering, focused AST parser/lowering tests, task-tree/roadmap/live docs,

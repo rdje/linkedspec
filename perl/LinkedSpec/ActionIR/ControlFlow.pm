@@ -310,13 +310,65 @@ sub _control_ast_flow_node_source_expr {
  }
 
  return 'endif()' if $kind eq 'control_endif';
+ if ($kind eq 'control_switch') {
+  my $source = _control_ast_value_source_expr($node->{source_expr});
+  return undef unless defined($source) && length($source);
+  my $head = 'switch('.$source.')';
+
+  if (exists $node->{cases} || exists $node->{default}) {
+   my @branches;
+   return undef unless !exists($node->{cases}) || ref($node->{cases}) eq 'ARRAY';
+   foreach my $case (@{$node->{cases} || []}) {
+    my $branch = _control_ast_flow_node_source_expr($case);
+    return undef unless defined($branch) && length($branch);
+    push @branches, $branch;
+   }
+   if (defined $node->{default}) {
+    my $default = _control_ast_flow_node_source_expr($node->{default});
+    return undef unless defined($default) && length($default);
+    push @branches, $default;
+   }
+   return $head.' { '.join(' ', @branches).' }'
+  }
+
+  if (ref($node->{body}) eq 'HASH') {
+   my $body = _control_ast_action_block_source($node->{body});
+   return undef unless defined $body;
+   return $head.' { '.$body.' }'
+  }
+  return $head
+ }
+
+ if ($kind eq 'control_case') {
+  my $match = _control_ast_value_source_expr($node->{match});
+  return undef unless defined($match) && length($match);
+  my $head = 'case('.$match.')';
+  if (ref($node->{body}) eq 'HASH') {
+   my $body = _control_ast_action_block_source($node->{body});
+   return undef unless defined $body;
+   return $head.' { '.$body.' }'
+  }
+  return $head
+ }
+
+ if ($kind eq 'control_default') {
+  if (ref($node->{body}) eq 'HASH') {
+   my $body = _control_ast_action_block_source($node->{body});
+   return undef unless defined $body;
+   return 'default { '.$body.' }'
+  }
+  return 'default()'
+ }
+
+ return 'endcase()' if $kind eq 'control_endcase';
+ return 'endswitch()' if $kind eq 'control_endswitch';
  return undef
 }
 
 sub _control_ast_flow_source_expr {
  my ($expr, $deps) = @_;
  my $node = ref($expr) eq 'HASH' ? $expr : _parse_control_flow_ast_expr($expr, $deps);
- return undef unless ref($node) eq 'HASH' && (($node->{kind} // '') =~ /\Acontrol_(?:if|else|endif)\z/o);
+ return undef unless ref($node) eq 'HASH' && (($node->{kind} // '') =~ /\Acontrol_(?:if|else|endif|switch|case|default|endcase|endswitch)\z/o);
  return _control_ast_flow_node_source_expr($node)
 }
 

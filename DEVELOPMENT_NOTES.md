@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.3 — switch-family control lowering from AST): Moved the switch
+  structured-control family onto typed AST consumption without changing switch semantics. Durable points.
+  (1) **Switch controls now share the AST bridge.** `switch`, `case`, `default`, `endcase`, and `endswitch`
+  statements parse through `LinkedSpec::ActionIR::AST` before the existing switch stack lowerers run.
+  (2) **Parsed branches are authoritative.** Attached `control_switch` nodes materialize from typed
+  `source_expr`, `cases`, and optional `default` fields before generic body fallback, so parsed case/default
+  branch AST nodes drive lowering when available. (3) **Switch mechanics stay unchanged.** Single evaluation of
+  the switch source, case ordering, `default` once-only behavior, attached branch splitting, and marker
+  `endcase`/`endswitch` stack closure still flow through the same `ControlFlow` implementation. (4) **While is
+  the only structured-control child left in `.4.4`.** `.4.4.4` owns typed while condition/body consumption plus
+  preservation of the iteration-safety guard.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.2 — if-family control lowering from AST): Moved the first
   structured-control family onto typed AST consumption without changing generated branch semantics. Durable
   points. (1) **ControlFlow now has an AST bridge.** `if`/`i`/`when`, `elseif`/`elif`, `else`/`otherwise`, and

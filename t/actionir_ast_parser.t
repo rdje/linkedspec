@@ -302,6 +302,125 @@ subtest 'if-family control lowering consumes AST nodes' => sub {
     ok($parse_calls >= 9, 'if-family control lowering entered through the AST parser');
 };
 
+subtest 'switch control lowering consumes AST nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $string = sub {
+        my ($value) = @_;
+        return { kind => 'string', value => $value, quote => '"', source => '__bad_string_'.$value.'__()' };
+    };
+    my $call = sub {
+        my ($name, @args) = @_;
+        return { kind => 'call', name => $name, source => '__bad_call_'.$name.'__()', args => \@args };
+    };
+    my $stmt = sub {
+        my ($expr) = @_;
+        return { kind => 'action_stmt', source => '__bad_stmt_source__()', expr => $expr };
+    };
+    my $block_return = sub {
+        my ($name) = @_;
+        return {
+            kind => 'action_block',
+            source => '__bad_block_source__()',
+            statements => [$stmt->($call->('return', $var->($name)))],
+        };
+    };
+    my $control_case = sub {
+        my ($match, $return_name) = @_;
+        my %node = (
+            kind => 'control_case',
+            source => '__bad_control_case__()',
+            keyword => 'case',
+            canonical_keyword => 'case',
+            args => [$match],
+            match => $match,
+        );
+        $node{body} = $block_return->($return_name) if defined $return_name;
+        return \%node;
+    };
+    my $control_default = sub {
+        my ($return_name) = @_;
+        my %node = (
+            kind => 'control_default',
+            source => '__bad_control_default__()',
+            keyword => 'default',
+            canonical_keyword => 'default',
+            args => [],
+        );
+        $node{body} = $block_return->($return_name) if defined $return_name;
+        return \%node;
+    };
+    my $control_switch = sub {
+        my (%fields) = @_;
+        my %node = (
+            kind => 'control_switch',
+            source => '__bad_control_switch__()',
+            keyword => 'switch',
+            canonical_keyword => 'switch',
+            args => [$fields{source_expr}],
+            source_expr => $fields{source_expr},
+        );
+        $node{cases} = $fields{cases} if exists $fields{cases};
+        $node{default} = $fields{default} if exists $fields{default};
+        $node{body} = $fields{body} if exists $fields{body};
+        return \%node;
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            return $control_switch->(
+                source_expr => $var->('safe_kind'),
+                cases => [$control_case->($string->('a'), 'safe_hit')],
+                default => $control_default->('safe_miss'),
+                body => $block_return->('poison_body_fallback'),
+            ) if $expr eq 'switch(poison_kind) { case(poison_a) { poison_hit() } default { poison_miss() } }';
+            return $control_switch->(source_expr => $var->('safe_marker_kind'))
+                if $expr eq 'switch(poison_marker_kind)';
+            return $control_case->($string->('marker-a'), undef)
+                if $expr eq 'case(poison_marker_a)';
+            return $control_default->(undef)
+                if $expr eq 'default()';
+            return { kind => 'control_endcase', source => '__bad_endcase__()', keyword => 'endcase', canonical_keyword => 'endcase', args => [] }
+                if $expr eq 'endcase()';
+            return { kind => 'control_endswitch', source => '__bad_endswitch__()', keyword => 'endswitch', canonical_keyword => 'endswitch', args => [] }
+                if $expr eq 'endswitch()';
+            return $call->('return', $var->('safe_marker_hit'))
+                if $expr eq 'return(poison_marker_hit)';
+            return $call->('return', $var->('safe_marker_miss'))
+                if $expr eq 'return(poison_marker_miss)';
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $attached = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{switch(poison_kind) { case(poison_a) { poison_hit() } default { poison_miss() } }},
+        );
+        like($attached, qr/my \$__ls_switch_value_\d+ = safe_kind/, 'attached switch source lowers from AST source_expr');
+        like($attached, qr/\$__ls_switch_value_\d+ eq "a".*return \$safe_hit/s, 'attached case lowers from AST match and body fields');
+        like($attached, qr/if \(!\$__ls_switch_hit_\d+\).*return \$safe_miss/s, 'attached default lowers from AST default body');
+
+        my $markers = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{switch(poison_marker_kind); case(poison_marker_a); return(poison_marker_hit); endcase(); default(); return(poison_marker_miss); endswitch()},
+        );
+        like($markers, qr/my \$__ls_switch_value_\d+ = safe_marker_kind/, 'marker switch source lowers from AST source_expr');
+        like($markers, qr/\$__ls_switch_value_\d+ eq "marker-a".*return \$safe_marker_hit/s, 'marker case lowers from AST match field while preserving switch stack');
+        like($markers, qr/if \(!\$__ls_switch_hit_\d+\).*return \$safe_marker_miss/s, 'marker default and endswitch lower from AST markers');
+
+        my $all = join("\n", $attached, $markers);
+        unlike($all, qr/poison|__bad_/, 'switch control lowering does not reuse original text, fake fallback body, or AST source fields');
+    }
+
+    ok($parse_calls >= 8, 'switch control lowering entered through the AST parser');
+};
+
 subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     my $parse_calls = 0;
     my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;

@@ -60,9 +60,11 @@ and final expressions. The parser seam now also represents attached-block and ma
 structured-control statements as typed `control_*` nodes for `if`/`when`/`otherwise`,
 `switch`/`case`/`default`, and `while` families, including attached bodies and switch
 branches. `if`/`when`/`otherwise` statement lowering now consumes typed condition and
-body nodes before reusing the existing branch engine; switch/case/default and while
-lowering still migrate in later leaves. The wrapper forms remain compatibility syntax,
-not the canonical destination surface.
+body nodes before reusing the existing branch engine. `switch`/`case`/`default` statement
+lowering now consumes typed source, match, body, branch-list, and end-marker nodes before
+reusing the existing switch stack engine. `while` lowering remains the last queued
+structured-control family. The wrapper forms remain compatibility syntax, not the
+canonical destination surface.
 
 ## Why the pipeline matters
 

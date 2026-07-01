@@ -353,13 +353,28 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.2 - lower if controls from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.3`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Lower `switch`/`case`/`default` statement forms from AST.
   Acceptance: Switch source expressions, case match values, default branches, and optional
     endcase/endswitch markers consume typed AST fields while preserving existing switch
     state and branch-order behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** `LinkedSpec::ActionIR::ControlFlow`
+    now parses `switch`, `case`, `default`, `endcase`, and `endswitch`
+    statements through `LinkedSpec::ActionIR::AST`, materializes trusted
+    switch source expressions, case match values, attached case/default bodies,
+    and end markers from typed fields, and then reuses the existing switch
+    stack lowerers. Attached `control_switch` nodes prefer parsed `cases` and
+    `default` branch fields over generic body fallback. Fake-source focused
+    locks prove original statement text, fake fallback bodies, and AST `source`
+    fields are not reused for attached or marker switch controls. Checks
+    passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`,
+    `perl -Iperl -c t/actionir_ast_parser.t`,
+    `prove -v -Iperl t/actionir_ast_parser.t`, `perl -c perl/LinkedSpec.pm`,
+    `perl -c -Iperl t/phase0_regression.t`, and
+    `prove -q -Iperl t/phase0_regression.t` with phase0 1002 tests;
+    `mdbook build docs/linkedspec-book`; memory, doctrine, and Knowledge Map
+    gates; `git diff --check`; and `bash tools/run_ci_local.sh`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.3 - lower switch controls from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.4`
   Status: `pending`
@@ -403,7 +418,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4` | `split` 2026-07-01 | Structured control-flow AST lowering split by parser nodes, branch family, switch state, and while safety before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.1` | `done` 2026-07-01 | Typed control-flow AST parser nodes and focused parser locks landed before lowering consumers switch over. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.2` | `done` 2026-07-01 | If/when/otherwise statement controls now lower from typed condition/body nodes. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.4.3` | `pending` | Lower `switch`/`case`/`default` statement forms from typed source/match/body/default nodes. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.4.4.3` | `done` 2026-07-01 | Switch/case/default statement controls now lower from typed source/match/body/default nodes. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | `pending` | Lower `while` statement forms from typed condition/body nodes. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -633,8 +649,31 @@ statement from typed condition and body nodes, then lets the established `Contro
 lowerers preserve attached-block implicit close, marker-style `endif`, and
 when/otherwise alias semantics. Focused tests poison the original statement text and
 every AST `source` field, then prove attached if/elseif/else, when/otherwise, and marker
-if/elseif/else/endif output comes from typed fields. `switch`/`case`/`default` and
-`while` stay queued for `.4.4.3` and `.4.4.4`.
+if/elseif/else/endif output comes from typed fields. At `.4.4.2` completion,
+`switch`/`case`/`default` and `while` were still queued for `.4.4.3` and `.4.4.4`;
+the switch-family handoff is closed in the `.4.4.3` section below.
+
+## PERL-ACTIONIR-AST-MIGRATION.4.4.3 Switch Control AST Lowering
+
+`LinkedSpec::ActionIR::ControlFlow` now runs switch-family statements through the typed
+AST parser before invoking the existing switch stack engine. The covered statement family
+is:
+
+- `switch(...)`;
+- `case(...)`;
+- `default` / `default()`;
+- `endcase` / `endcase()`;
+- `endswitch` / `endswitch()`.
+
+The bridge materializes trusted statement text from typed `source_expr`, `match`, `body`,
+`cases`, and `default` fields, then lets the established `ControlFlow` lowerers preserve
+switch-value single evaluation, case branch order, `default` once-only behavior,
+attached-switch branch splitting, and marker-style `endcase`/`endswitch` stack closure.
+Attached `control_switch` nodes prefer parsed `cases` and `default` branch fields over
+the generic attached-body fallback, so parsed branch AST nodes are authoritative when
+available. Focused tests poison the original statement text, fake fallback bodies, and
+every AST `source` field, then prove attached and marker switch-family output comes from
+typed fields. `while` remains queued for `.4.4.4`.
 
 ## PERL-ACTIONIR-AST-MIGRATION.4.1 Assignment/Mutation Operator AST Statements
 
@@ -820,6 +859,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.3` | Added `ControlFlow` AST bridge for switch, case, default, endcase, and endswitch; added focused fake-source locks for attached switch/case/default and marker switch/case/endcase/default/endswitch; syntax checks; focused AST parser suite with 18 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Switch-family structured controls now lower from typed source/match/body/default AST fields while preserving existing switch stack semantics. Frontier moves to `.4.4.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.2` | Added `ControlFlow` AST bridge for if/i/when, elseif/elif, else/otherwise, and endif; added focused fake-source locks for attached if/elseif/else, when/otherwise, and marker if/elseif/else/endif; syntax checks; focused AST parser suite with 17 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | If-family structured controls now lower from typed condition/body AST fields while preserving existing branch semantics. Frontier moves to `.4.4.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.1` | Added typed control-flow AST parser nodes for attached and marker forms; added focused parser locks for if/when/elseif/elif/else/otherwise/endif/switch/case/default/endcase/endswitch/while, bare and parenthesized markers, plus inline value-helper boundaries; syntax checks; focused AST parser suite with 16 subtests; direct phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Structured control forms now parse into typed AST nodes with parsed condition/source/match/body/case/default fields while production lowering remains unchanged. Frontier moves to `.4.4.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4` | Split structured-control AST lowering into `.4.4.1` parser nodes, `.4.4.2` if/when/otherwise, `.4.4.3` switch/case/default, and `.4.4.4` while; memory/doctrine/KM/diff checks | Structured-control migration is now owned by focused children before code. Frontier moves to `.4.4.1`. |

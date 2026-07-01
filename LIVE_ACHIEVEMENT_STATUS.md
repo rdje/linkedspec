@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.4.3 — switch-family control lowering from AST**
+  (PERL ACTIONIR CONTROLFLOW + FOCUSED TEST + BOOK/KM/LIVE DOCS). `LinkedSpec::ActionIR::ControlFlow` now
+  parses `switch`, `case`, `default`, `endcase`, and `endswitch` statements through the ActionIR AST parser
+  before reusing the existing switch stack lowering engine. Switch source expressions, case match values,
+  attached case/default bodies, parsed switch branch lists, and end markers materialize from typed AST fields,
+  not original statement text, fake fallback bodies, or AST `source` strings. Generated switch shape,
+  switch-source single evaluation, case ordering, default-once behavior, attached-switch body handling, and
+  marker `endcase`/`endswitch` stack closure stay stable.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` PASS;
+  `perl -Iperl -c t/actionir_ast_parser.t` PASS; `prove -v -Iperl t/actionir_ast_parser.t` PASS with **18
+  focused subtests**; `perl -c perl/LinkedSpec.pm` PASS; `perl -c -Iperl t/phase0_regression.t` PASS;
+  `prove -q -Iperl t/phase0_regression.t` PASS with phase0 **1002 tests**; `mdbook build
+  docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates PASS; `git diff --check` PASS; `bash
+  tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.4.4` lower `while` statement forms from typed condition/body
+  nodes while preserving the iteration-safety guard.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.4.2 — if-family control lowering from AST**
   (PERL ACTIONIR CONTROLFLOW + FOCUSED TEST + BOOK/KM/LIVE DOCS). `LinkedSpec::ActionIR::ControlFlow` now
   parses `if`/`i`/`when`, `elseif`/`elif`, `else`/`otherwise`, and `endif` statements through the ActionIR AST
