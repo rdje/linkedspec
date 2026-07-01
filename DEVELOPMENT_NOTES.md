@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.1 — assignment/mutation operators from AST): Landed the first
+  statement-level AST consumer. Durable points. (1) **Typed fields drive operator statements.** `assign_scalar`,
+  `assign_array_append`, and `assign_hash_index` nodes now lower from `name` / `key` / `value` fields before the
+  legacy regex paths. (2) **Compatibility still enters existing policies.** The AST path materializes trusted
+  helper/action text from typed nodes and then reuses the existing scalar assignment, array append, and
+  hash-index lowering logic, preserving target-kind inference and source/mutation slot semantics. (3) **Poisoned
+  source is locked out.** Focused tests intentionally use original poison identifiers plus fake AST `source`
+  fields and assert generated output comes from typed fields. (4) **Helper statements remain separate.** `set`,
+  `push`, `set_key`, `return`, and `return_undef` stay queued for `.4.2`.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4 — statement/control AST split): Split the next migration parent
   before code. Durable points. (1) **Operator statement nodes are first.** `.4.1` should use the AST parser's
   existing `assign_scalar`, `assign_array_append`, and `assign_hash_index` nodes before broadening helper-call

@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.1 — lower statement operators from AST
+
+**Scope:** Perl ActionIR method/statement lowering, focused AST parser/lowering tests, mdBook architecture text,
+Knowledge Map, task tree, and live docs.
+
+**What changed:** `MethodLowering` now consumes AST `assign_scalar`, `assign_array_append`, and
+`assign_hash_index` nodes before the legacy statement-regex paths. The new path reconstructs trusted
+helper/action expression text from typed AST fields, then enters the existing assignment/mutation policies so
+output stays byte-compatible.
+
+**Compatibility boundary:** Existing scalar assignment target-kind inference, array append mutation value-slot
+reads, hash key/value lowering, direct shape-literal assignment, and source-slot scalar reads stay unchanged.
+Helper-call statements, block-value side effects, and structured control flow remain queued for later `.4`
+children.
+
+**Tests:** Added focused fake-source coverage proving `name = [poison]`, `items += poison`, and
+`meta[poison_key] = { poison_key => poison_value }` lower from typed AST target/key/value fields rather than
+original source text or poisoned AST `source` fields. Syntax checks and `prove -v -Iperl t/actionir_ast_parser.t`
+passed; `prove -q -Iperl t/phase0_regression.t` also passed with 1002 tests. `mdbook build
+docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`, and `bash
+tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4 — split AST statement lowering
 
 **Scope:** Task-tree split, roadmap/task index, live continuity docs. No parser/compiler/runtime code changed.

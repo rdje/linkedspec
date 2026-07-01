@@ -237,14 +237,24 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4 - split AST statement lowering`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.1`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Lower parsed assignment/mutation operator statement nodes from AST.
   Acceptance: `assign_scalar`, `assign_array_append`, and `assign_hash_index` statement
     nodes lower from typed target/value/key fields instead of re-reading statement source
     text. Existing assignment target-kind inference, source-slot scalar reads, and
     mutation value-slot behavior remain byte-compatible.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** `MethodLowering` now consumes AST
+    `assign_scalar`, `assign_array_append`, and `assign_hash_index` nodes before the
+    legacy statement regex paths. Focused tests poison the original statement text and
+    AST `source` fields while proving scalar assignment, array append, and hash-index
+    assignment lower from typed target/key/value fields. Checks passed so far:
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+    `perl -Iperl -c t/actionir_ast_parser.t`, `perl -Iperl -c perl/LinkedSpec.pm`, and
+    `prove -v -Iperl t/actionir_ast_parser.t`; `prove -q -Iperl t/phase0_regression.t`
+    passed with 1002 tests; `mdbook build docs/linkedspec-book`,
+    memory/doctrine/Knowledge Map gates, `git diff --check`, and `bash tools/run_ci_local.sh`
+    passed.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.4.1 - lower statement operators from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.2`
   Status: `pending`
@@ -304,7 +314,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `done` 2026-07-01 | Receiver-dot `fluent_chain` value chains now lower from AST receiver/call nodes. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `done` 2026-07-01 | Return payloads now enter AST value traversal before the raw fallback. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4` | `split` 2026-07-01 | Statement/control AST lowering split by behavior family before code. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.1` | `pending` | Lower parsed assignment/mutation operator statement nodes from AST. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.4.1` | `done` 2026-07-01 | Parsed assignment/mutation operator statement nodes now lower from AST fields. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.2` | `pending` | Lower helper-call statements and returns from AST call nodes. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -484,6 +495,25 @@ forms that may need additional AST parser nodes. `.4` is therefore split before 
 The split keeps the `.4` parent acceptance intact while making the first executable leaf
 small enough to validate without changing control-flow semantics.
 
+## PERL-ACTIONIR-AST-MIGRATION.4.1 Assignment/Mutation Operator AST Statements
+
+The first statement-lowering code leaf moves the three assignment-style operator nodes
+already parsed by `LinkedSpec::ActionIR::AST::Parser` onto typed-field lowering:
+
+- `assign_scalar` (`name = value`);
+- `assign_array_append` (`items += value`);
+- `assign_hash_index` (`meta[key] = value`).
+
+`MethodLowering` materializes a trusted helper/action expression from typed AST fields and
+then enters the existing assignment/mutation lowering policies. This keeps direct
+shape-literal target-kind inference, source-slot scalar reads, mutation value-slot reads,
+and hash-key lowering byte-compatible while proving the original statement text and AST
+`source` fields are no longer authoritative for these operator statements.
+
+Helper-call statements (`set`, `push`, `set_key`, `return`, `return_undef`) remain queued
+for `.4.2`; block-value side effects and block-local returns remain `.4.3`; structured
+control-flow statements remain `.4.4`.
+
 ## PERL-ACTIONIR-AST-MIGRATION.2 Parser Seam
 
 The first code slice is additive and read-only with respect to production lowering:
@@ -610,6 +640,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.1` | Added typed AST assignment/mutation operator materialization and focused fake-source tests for scalar assignment, array append, and hash-index assignment; syntax checks; focused AST parser suite; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Assignment/mutation operator statements now consume typed AST node fields before legacy source-text regex paths. Frontier moves to `.4.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4` | Split statement/control AST lowering into `.4.1` assignment/mutation operator nodes, `.4.2` helper-call statements and returns, `.4.3` block-value side-effect traversal/block-local returns, and `.4.4` structured control-flow forms | Statement/control migration is now owned by focused children before code. Frontier moves to `.4.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.4` | Added return-payload AST fast path before raw fallback; focused fake-source tests for typed return arrays/hashes/strings/calls/chains, bare scalar source-slot payloads, unsupported covered chain diagnostics, and raw compatibility payloads; syntax checks; focused AST parser suite; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Typed return payloads now consume AST value/call/chain nodes before legacy helper-substitution fallback. Frontier moves to `.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.3` | Added AST `fluent_chain` receiver-chain dispatcher; focused fake-source tests for number, string-to-array, block-array, hash-to-array, invalid numeric terminal continuation, and unsupported chain helper diagnostics; targeted public lowering probes | Receiver-dot value chains now consume typed AST receiver/call nodes before legacy receiver-dot text normalization. Frontier moves to `.3.4`. |

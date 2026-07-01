@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.1 — assignment/mutation statement operators from AST**
+  (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering` now consumes typed AST
+  `assign_scalar`, `assign_array_append`, and `assign_hash_index` nodes before the legacy statement-regex
+  paths. The implementation materializes trusted helper/action expression text from typed AST fields, then
+  enters the existing scalar assignment, array append, and hash-index mutation policies so target-kind
+  inference, source-slot scalar reads, mutation value-slot reads, and hash-key lowering stay stable.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
+  `perl -Iperl -c t/actionir_ast_parser.t` PASS; `perl -Iperl -c perl/LinkedSpec.pm` PASS;
+  `prove -v -Iperl t/actionir_ast_parser.t` PASS; `prove -q -Iperl t/phase0_regression.t` PASS with phase0
+  **1002 tests**; `mdbook build docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates PASS;
+  `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.2` lower helper-call statements and returns from AST call nodes.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4 — statement/control AST lowering split**
   (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). The broad statement/control migration is
   now split before code into `.4.1` assignment/mutation operator AST nodes, `.4.2` helper-call statements and

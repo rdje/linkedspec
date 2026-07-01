@@ -95,6 +95,71 @@ subtest 'assignment and mutation statement nodes' => sub {
     is($hash->{value}{kind}, 'hash_literal', 'hash assignment RHS is parsed as hash literal');
 };
 
+subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $array = sub {
+        my (@items) = @_;
+        return { kind => 'array_literal', source => '__bad_array_source__()', items => \@items };
+    };
+    my $hash = sub {
+        my (@entries) = @_;
+        return { kind => 'hash_literal', source => '__bad_hash_source__()', entries => \@entries };
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            if ($expr eq 'name = [poison]') {
+                return {
+                    kind => 'assign_scalar',
+                    source => '__bad_assign_scalar__()',
+                    name => 'name',
+                    value => $array->($var->('value')),
+                };
+            }
+            if ($expr eq 'items += poison') {
+                return {
+                    kind => 'assign_array_append',
+                    source => '__bad_assign_append__()',
+                    name => 'items',
+                    value => $var->('value'),
+                };
+            }
+            if ($expr eq 'meta[poison_key] = { poison_key => poison_value }') {
+                return {
+                    kind => 'assign_hash_index',
+                    source => '__bad_assign_hash__()',
+                    name => 'meta',
+                    key => $var->('key'),
+                    value => $hash->({ key => $var->('key'), value => $var->('value') }),
+                };
+            }
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $scalar = LinkedSpec::call_spec_handler_subst('Top', q{name = [poison]});
+        is($scalar, '@name = ($value)', 'scalar assignment operator lowers RHS from AST fields');
+
+        my $append = LinkedSpec::call_spec_handler_subst('Top', q{items += poison});
+        is($append, 'push @items, $value', 'array append operator lowers RHS from AST fields');
+
+        my $hash_assign = LinkedSpec::call_spec_handler_subst('Top', q{meta[poison_key] = { poison_key => poison_value }});
+        is($hash_assign, '$meta{$key} = {$key => $value}', 'hash-index assignment lowers key/RHS from AST fields');
+
+        my $all = join("\n", $scalar, $append, $hash_assign);
+        unlike($all, qr/poison|__bad_/, 'assignment/mutation statement lowering does not reuse fake AST source or original poison text');
+    }
+
+    ok($parse_calls >= 3, 'assignment/mutation statements entered through the AST parser');
+};
+
 subtest 'receiver chains accept all expression receivers' => sub {
     my $call_receiver = parse_expr('builder().trim().split("-").count()');
     is($call_receiver->{kind}, 'fluent_chain', 'function-call receiver chain parses');

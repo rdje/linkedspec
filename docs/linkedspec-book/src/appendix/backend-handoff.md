@@ -33,9 +33,10 @@ calls. Receiver-dot value chains now lower from AST `fluent_chain` nodes for the
 hash, string, and number receiver families before the legacy receiver-dot text normalizers
 run. Generalized return payloads now lower typed value/call/chain nodes through the same
 AST traversal before raw fallback, while narrow untyped compatibility payloads still
-remain migration debt. Statement/control lowering is still migrating family by family, so
-any remaining text-to-text lowering is migration debt rather than a backend pattern to
-copy.
+remain migration debt. Assignment and mutation operator statements now consume typed AST
+target/key/value fields before legacy fallback. Helper-call statements and structured
+control-flow lowering are still migrating family by family, so any remaining text-to-text
+lowering is migration debt rather than a backend pattern to copy.
 New backends should follow the typed-AST model used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
