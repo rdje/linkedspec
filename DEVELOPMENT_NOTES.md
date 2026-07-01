@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.1 — fallback-boundary audit): Audited the remaining Perl
+  ActionIR fallback boundary before code. Durable points. (1) **Malformed covered helpers are already
+  diagnostics, not raw fallback.** `substr`, `count`, and nested covered-helper arity failures use
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER` and unresolved-helper metadata with `raw_perl_dependency_count == 0`.
+  (2) **Compatibility fences stay explicit.** Retired helpers (`return_array`, `return_a`) and non-DSL
+  host-shaped statements (`my $x = 1`, bare `print "x"`) remain `RAW_PERL`; narrow return payload
+  compatibility remains fenced. (3) **Do not disturb `push(A,B)`.** The all-bare form still means child-call
+  aggregation, not scalar append. (4) **Unknown typed calls are the user-function handoff risk.** The AST parser
+  already produces `call` / `fluent_chain` nodes for `user_fn("x")` and `user_fn("x").trim()`, but return-value
+  contexts currently emit generated host calls and report ready. `.5.3` must resolve those names as user
+  functions or diagnostics, not via textual fallback. (5) **No current `fn` definition grammar was found in the
+  bootstrap parser or `specs/spec.spec`.** `.5.4` still owns the permanent `specs/spec.spec` grammar/proof lock.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5 — fallback/function handoff split): Split the last Perl ActionIR
   AST migration parent before code. Durable points. (1) **Fallback retirement needs an audit first.** `.5.1`
   classifies remaining source-text fallback as compatibility debt, supported-surface leakage, or function-handoff

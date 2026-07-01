@@ -39,9 +39,16 @@ consume typed AST `call` fields for `set`/`assign`, `set_key`, `push`, `push_val
 `push_nonempty`, `return`, and `return_undef`, and array end-mutation receiver statements
 consume typed AST `fluent_chain` fields. Expression-valued block side effects,
 block-local returns, and final block expressions now consume typed block/statement AST
-fields. Structured control-flow lowering is still migrating family by family, so any
-remaining text-to-text lowering is migration debt rather than a backend pattern to copy.
-New backends should follow the typed-AST model used by the Rust implementation.
+fields. Structured control-flow lowering now consumes typed AST fields for the if/when,
+switch/case/default, and attached-while statement families.
+
+The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
+already covered by the typed AST path report unresolved-helper metadata rather than host
+calls. Retired helpers, non-DSL host-shaped statements, and a few narrow return payload
+compatibility shapes remain fenced migration debt. Unknown typed calls and receiver
+chains are reserved for user-defined function resolution and diagnostics, not broad
+host-language fallback. New backends should follow the typed-AST model used by the Rust
+implementation from the start.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
 specified in the documents below.

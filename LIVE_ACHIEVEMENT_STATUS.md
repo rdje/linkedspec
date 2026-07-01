@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.1 — fallback-boundary audit**
+  (TASK TREE + BOOK/KM/LIVE DOCS; **no parser/compiler/runtime code change**). The remaining Perl ActionIR
+  fallback boundary is now classified before code. Malformed AST-covered helper forms already use
+  unresolved-helper diagnostics with zero raw fallback; retired helpers and non-DSL host-shaped statements stay
+  explicit compatibility debt; narrow return payload compatibility remains fenced; all-bare `push(A,B)` remains
+  the child-call ambiguity contract. Unknown typed calls/chains such as `return(user_fn("x"))` and
+  `return(user_fn("x").trim())` are the real handoff risk because they currently lower as generated host calls
+  and report ready; `.5.3` owns resolving them as user functions or diagnostics. Targeted search found no current
+  lasting `fn <name>(...) { ... }` grammar in bootstrap or `specs/spec.spec`; `.5.4` still owns the grammar/proof
+  lock.
+  **Verification:** TOOLBOX `call_spec_handler_subst`, descriptor, and AST parser probes PASS; code reads
+  completed for the lowering/metadata seams. `mdbook build docs/linkedspec-book` PASS; memory/doctrine/Knowledge
+  Map gates PASS; `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS with focused AST suite and phase0
+  **1002 tests**.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.2` retire AST-covered supported-surface fallback leakage without
+  disturbing the fenced compatibility debt.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5 — fallback retirement and function handoff split**
   (TASK TREE + LIVE DOCS; **no parser/compiler/runtime code change**). The final Perl ActionIR AST migration
   parent is now split before code into `.5.1` fallback-boundary audit, `.5.2` AST-covered supported-surface

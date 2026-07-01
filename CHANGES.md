@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.1 — audit fallback boundary
+
+**Scope:** Perl ActionIR migration audit, task tree, live docs, mdBook status, and Knowledge Map. No
+parser/compiler/runtime code changed.
+
+**What changed:** Classified the remaining fallback boundary after the Perl ActionIR value, statement, block,
+and structured-control AST migrations. The audit used `call_spec_handler_subst`, descriptor metadata, AST parser
+probes, and code reads before code.
+
+**Findings:** Malformed AST-covered helpers already emit unresolved-helper metadata without raw fallback.
+Retired helpers and non-DSL host-shaped statements remain explicit compatibility debt. Narrow return payload
+compatibility remains fenced. All-bare `push(A,B)` remains the existing child-call ambiguity contract.
+Unknown typed calls/chains such as `return(user_fn("x"))` and `return(user_fn("x").trim())` are the user-function
+handoff risk because they currently lower as generated host calls and report ready; `.5.3` owns resolving them
+through user-function diagnostics. Targeted `rg` found no current `fn <name>(...) { ... }` grammar in bootstrap or
+`specs/spec.spec`; `.5.4` still owns the permanent grammar/proof lock.
+
+**Checks:** TOOLBOX probes and code reads completed. `mdbook build docs/linkedspec-book`, memory architecture,
+Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh` all passed; the local CI
+gate included the focused ActionIR AST parser suite and phase0 **1002 tests**.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5 — split fallback retirement and function handoff
 
 **Scope:** Perl ActionIR migration task tree, live continuity docs, and split planning. No parser/compiler/runtime

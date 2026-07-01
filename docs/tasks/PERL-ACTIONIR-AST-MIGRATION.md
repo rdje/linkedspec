@@ -418,14 +418,22 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5 - split fallback retirement and function handoff`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.1`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Audit the remaining supported-surface text fallback boundary.
   Acceptance: Remaining raw/source-text fallback paths after `.4.4.4` are classified as
     either explicit compatibility debt, supported-surface leakage to retire, or function
     handoff dependency. The audit uses TOOLBOX probes and code reads before code and
     records exact owners/tests for `.5.2`+.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** TOOLBOX `call_spec_handler_subst`,
+    `return_descriptor`, and ActionIR AST parser probes classified malformed covered
+    helpers, raw compatibility statements, retired helpers, all-bare `push(A,B)`,
+    unknown user-function-shaped calls, receiver chains, and `fn` grammar ownership.
+    Code reads covered `CanonicalEvents`, `RewritePipeline`, `RuleIR::EmitContext`,
+    `MethodLowering`, and `ActionIR::AST::Parser`. No parser/compiler/runtime code
+    changed. Checks passed: `mdbook build docs/linkedspec-book`, memory architecture,
+    Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh`
+    with the focused AST suite plus phase0 1002 tests.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.5.1 - audit fallback boundary`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.2`
   Status: `pending`
@@ -482,7 +490,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.3` | `done` 2026-07-01 | Switch/case/default statement controls now lower from typed source/match/body/default nodes. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | `done` 2026-07-01 | Attached while statement controls now lower from typed condition/body nodes. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5` | `split` 2026-07-01 | Fallback retirement and function handoff split before code. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.1` | `pending` | Audit remaining supported-surface text fallback boundary before code. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.5.1` | `done` 2026-07-01 | Remaining fallback boundaries audited and classified before code. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.2` | `pending` | Retire AST-covered supported-surface fallback leakage without disturbing fenced compatibility debt. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -773,6 +782,61 @@ The child sequence is:
 
 No parser/compiler/runtime code changes in the split slice.
 
+## PERL-ACTIONIR-AST-MIGRATION.5.1 Fallback Boundary Audit
+
+The audit used the repo toolbox before code: `call_spec_handler_subst(...)`,
+`LinkedSpec::Get(..., return_descriptor => 1)`, and
+`LinkedSpec::ActionIR::AST::parse_action_statement(...)`, plus code reads of
+`CanonicalEvents`, `RewritePipeline`, `RuleIR::EmitContext`, `MethodLowering`, and
+`ActionIR::AST::Parser`.
+
+Measured boundary:
+
+- **Covered helper diagnostics are already fenced.** Malformed AST-covered helper
+  surfaces such as `return(substr("abc"))`, `return(count(1,2))`, and nested
+  `return(concat(substr("abc"), "x"))` lower through
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` sentinel expressions. Descriptor
+  metadata reports `unresolved_helper_count > 0`, `raw_perl_dependency_count == 0`,
+  and `language_agnostic_action_ir_ready == 0`; these are not `.5.2` raw-fallback
+  leaks.
+- **Deliberate compatibility/raw fences remain.** Retired helpers such as
+  `return_array(foo)` and `return_a()` still report `RAW_PERL`; non-DSL host-shaped
+  statements such as `my $x = 1` and bare `print "x"` also remain `RAW_PERL`.
+  Those are explicit compatibility debt, not supported ActionIR surface. Helper
+  spellings such as `print("x")`, `say("x")`, `exit_now(1)`, `next()`, `next`, and
+  bare `return 1` still lower as supported ActionIR events.
+- **Narrow return compatibility is fenced.** Payloads such as
+  `return(\(my $capt = capture_slice()))` still preserve the compatibility shape,
+  while helper calls inside that payload lower where the scanner recognizes them. This
+  is not the broad supported-surface leakage target.
+- **All-bare `push(A,B)` remains a child-call ambiguity contract.** It lowers as the
+  existing child-call aggregation form (`call(A)` into array `B`) and reports ready.
+  Do not rewrite it as scalar append in `.5.2`; the terse append surface remains
+  `items += value` or unambiguous `push(items, "literal")` / `push_value(...)`.
+- **User-function-shaped calls are the real handoff risk.** The AST parser already
+  represents `user_fn("x")` as `call` and `user_fn("x").trim()` as `fluent_chain` with
+  a `call` receiver. But `return(user_fn("x"))` currently lowers to `return
+  user_fn("x")`, and `return(user_fn("x").trim())` lowers a Perl host call receiver
+  into the trim helper. Descriptor metadata reports these as ready. Standalone
+  `user_fn("x")` and `user_fn("x").trim()` remain `RAW_PERL`. This is not a helper
+  fallback leak to patch generically; it is `.5.3` user-function call resolution and
+  diagnostics work.
+- **Function-definition grammar is not currently present in bootstrap or `spec.spec`.**
+  Targeted `rg` over `specs/spec.spec`, `BootstrapSpec.pm`, and
+  `BootstrapSpec/Core.pm` found no `fn <name>(...) { ... }` grammar. `.5.4` should
+  still add the explicit proof/test or removal lock when the permanent `specs/spec.spec`
+  function grammar lands.
+
+Next owners:
+
+- `.5.2`: only retire any remaining AST-covered **supported helper/action surface**
+  leakage that still falls through as host/raw text; preserve the compatibility fences
+  above.
+- `.5.3`: resolve unknown typed `call` / `fluent_chain` names as user functions or
+  diagnostics so they cannot silently become generated host-language calls.
+- `.5.4`: lock `specs/spec.spec` as the function-definition grammar owner and prove
+  the bootstrap parser has no lasting `fn` support.
+
 ## PERL-ACTIONIR-AST-MIGRATION.4.1 Assignment/Mutation Operator AST Statements
 
 The first statement-lowering code leaf moves the three assignment-style operator nodes
@@ -957,6 +1021,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.1` | TOOLBOX `call_spec_handler_subst`, descriptor metadata, and AST parser probes for malformed covered helpers, compatibility payloads, retired helpers, raw statements, all-bare `push(A,B)`, unknown calls/chains, and `fn` grammar ownership; code reads of `CanonicalEvents`, `RewritePipeline`, `RuleIR::EmitContext`, `MethodLowering`, and `ActionIR::AST::Parser`; mdBook/live-doc/KM updates; `mdbook build docs/linkedspec-book`, memory/doctrine/KM/diff checks, and full local CI with phase0 1002 tests | Remaining fallback boundaries are classified before code: AST-covered malformed helpers already diagnose as unresolved, retired/non-DSL/raw surfaces stay compatibility debt, all-bare `push(A,B)` remains child-call ambiguity, unknown typed calls/chains are `.5.3` user-function handoff risk, and `fn` definition grammar remains `.5.4`/`specs/spec.spec` ownership. Frontier moves to `.5.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5` | Split fallback retirement and user-function handoff into `.5.1` fallback-boundary audit, `.5.2` AST-covered fallback leakage retirement, `.5.3` user-function AST call handoff, and `.5.4` `specs/spec.spec` grammar/bootstrap-retirement lock; mdBook/doctrine/KM/diff checks | Final ActionIR migration parent is now owned by focused children before code. Frontier moves to `.5.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | Added `ControlFlow` AST bridge for attached while controls; added focused fake-source locks for typed condition/body lowering and guard preservation; syntax checks; focused AST parser suite with 19 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Attached while structured controls now lower from typed condition/body AST fields while preserving the existing iteration-safety guard. Frontier moves to `.5`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.3` | Added `ControlFlow` AST bridge for switch, case, default, endcase, and endswitch; added focused fake-source locks for attached switch/case/default and marker switch/case/endcase/default/endswitch; syntax checks; focused AST parser suite with 18 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Switch-family structured controls now lower from typed source/match/body/default AST fields while preserving existing switch stack semantics. Frontier moves to `.4.4.4`. |

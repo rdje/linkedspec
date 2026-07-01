@@ -68,6 +68,13 @@ and its deterministic 10000-iteration safety guard. Bodyless `while(...)` marker
 remain parser shape only because the current DSL has no `endwhile` product syntax. The
 wrapper forms remain compatibility syntax, not the canonical destination surface.
 
+The current fallback boundary is deliberate. Malformed helper forms already covered by
+the typed AST path report unresolved-helper metadata instead of silently becoming Perl
+host calls. Retired helpers and non-DSL host-shaped statements remain explicit
+compatibility debt, and a few narrow return payload compatibility shapes are still
+fenced. Unknown typed calls and receiver chains are reserved for user-defined function
+resolution; they must not become a broad host-language fallback.
+
 ## Why the pipeline matters
 
 Understanding the pipeline helps explain:
