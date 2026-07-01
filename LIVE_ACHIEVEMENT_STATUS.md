@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.5.0 — future variant parity ownership/inventory landed**
+  (TASK TREE + KM + BOOK STATUS + LIVE DOCS; **no runtime behavior change**). The active terse tree now has a
+  concrete ownership container for future backend parity before any non-Rust variant code. Current implemented
+  backends are the Perl reference and the Rust interpreter under `rust/`. Julia and Dart remain the accepted
+  future backend targets from ADR `0006` and Phase 8, but are deferred to dedicated backend implementation
+  task trees before code. Lua is not adopted by the current ADR/book/codebase set and is blocked on an explicit
+  decision record before any task-tree leaf or implementation can exist.
+  **Verification:** full bootstrap/roadmap/mdBook/codebase read completed; source inventory found no tracked
+  Julia/Dart/Lua implementation paths outside the unrelated nested `rgx` checkout; Knowledge Map backend fact
+  corrected from the stale pre-Phase-9 "Perl only" wording; backend handoff chapter status updated to the
+  current 52-fixture Rust corpus state; no parser/compiler/runtime code changed.
+  **Frontier:** `SPEC-FORMAT-TERSE.3.1` (edge syntax confirmation), then `.3.2`, then `.4`.
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.5 — block-valued receiver-dot chains landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM). Expression-valued blocks can now be
   receivers for the existing compatible array/string/hash/number value-chain families. The block evaluates
@@ -17,7 +29,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Perl syntax checks PASS; focused Perl probes PASS; focused Rust `.2.3.5.5` parser/runtime
   locks PASS; oracle regeneration produced **52 fixtures**; Rust `corpus_oracle` PASS over 52 fixtures;
   phase0 PASS with **1001 tests**; mdBook/KM/live docs updated.
-  **Frontier:** task-tree-own Julia/Lua/Dart variant parity before variant code.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.5.0` (now completed above).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.6 — aggregate wrapper quoted-name boundaries landed**
   (PERL ACTIONIR + RUST LOCKS + PHASE0 + ORACLE + BOOK/KM). Bare aggregate wrappers remain explicit typed
   working-variable reads: `array(foo)` / `a(foo)` read `@foo`, and `hash(bar)` / `h(bar)` read `%bar`.
@@ -29,8 +41,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Perl syntax checks PASS; focused lowering/runtime/source probes PASS; phase0 PASS with
   **1000 tests**; focused Rust `.2.3.5.6` locks PASS; oracle regeneration produced **51 fixtures**; Rust
   `corpus_oracle` PASS over 51 fixtures; mdBook/KM/live docs updated.
-  **Then-frontier:** `SPEC-FORMAT-TERSE.2.3.5.5` (now completed above), then task-tree-own Julia/Lua/Dart
-  variant parity before any variant code.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.2.3.5.5` (now completed above), then `SPEC-FORMAT-TERSE.5.0` (now
+  completed above).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.4 — number receiver-dot value chains landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure numeric helper chains now work from
   scalar, integer-literal, and decimal-literal receivers on Perl and Rust:

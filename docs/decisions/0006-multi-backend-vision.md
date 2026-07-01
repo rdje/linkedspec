@@ -6,12 +6,13 @@
 
 ## Context
 
-LinkedSpec is currently Perl 5 only. The HandlerVariantEmitter now produces structured
-HandlerIR (hashref-based AST) with a `%BACKEND_EMITTERS` dispatch table and a JSON
-diagnostic backend as proof of pluggability. All 20 shipped `.spec` files compile with
-`language_agnostic_ready_ratio == 1.0000` and zero compatibility-surface rules. The
-ActionIR lowering stack (100+ helpers across 10 families) is largely backend-neutral
-in intent.
+At the time this ADR was written, LinkedSpec was Perl 5 only. The HandlerVariantEmitter
+already produced structured HandlerIR (hashref-based AST) with a `%BACKEND_EMITTERS`
+dispatch table and a JSON diagnostic backend as proof of pluggability. All 20 shipped
+`.spec` files compiled with `language_agnostic_ready_ratio == 1.0000` and zero
+compatibility-surface rules. The ActionIR lowering stack (100+ helpers across 10 families)
+was largely backend-neutral in intent. Subsequent Phase 9 work implemented the Rust
+interpreter variant; Julia and Dart remain accepted future backend targets.
 
 The user's vision, discussed during MEDIUM-IMPACT.1.3 HandlerIR work (2026-06-12) and
 now formalized, is to grow LinkedSpec beyond Perl — not by abandoning Perl, but by

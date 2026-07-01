@@ -6,7 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-01` (**`.2.3.5.5` DONE; receiver-chain family complete** — expression-valued
+- Last updated: `2026-07-01` (**`.5.0` DONE; future variant parity ownership/inventory complete** — current
+  implemented backends are Perl reference + Rust; Julia/Dart remain accepted future targets from ADR `0006`;
+  Lua needs an explicit decision record before any implementation leaf or code. Frontier is
+  `SPEC-FORMAT-TERSE.3.1` for edge-syntax confirmation. Prior **`.2.3.5.5` DONE; receiver-chain family
+  complete** — expression-valued
   blocks now continue through compatible receiver-dot value chains by the runtime type they yield, with no
   block-only helper semantics. Locked examples cover array, early-return array, string-to-array, hash-to-array,
   and number chains:
@@ -18,8 +22,7 @@
   family normalization, but array-yielding blocks needed narrow exit-shape recognition before array helpers
   such as `sorted(...)` could lower. Rust needed parser follow-through after block/hash/array primaries; its
   runtime already evaluates non-variable fluent receivers through `eval_expr`. Phase0 is **1001 green** and
-  the oracle corpus is **52 fixtures**. Next frontier: task-tree-own Julia/Lua/Dart variant parity before any
-  variant code. Prior **`.2.3.5.6` DONE** — typed wrapper quoted-name
+  the oracle corpus is **52 fixtures**. Prior **`.2.3.5.6` DONE** — typed wrapper quoted-name
   boundaries are locked on Perl/Rust and in the variant-neutral mdBook. `array(foo)` / `a(foo)` and
   `hash(bar)` / `h(bar)` remain explicit typed working-variable reads, but quoted arguments are not aliases:
   `array("foo")` / `array('foo')` are literal array-constructor payloads, and
@@ -344,7 +347,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - ID: `SPEC-FORMAT-TERSE`
   Status: `active`
   Goal: Evolve the `.spec` DSL toward a terser, fully-composable format (brainstorm Rounds 1–3 + resume 4+)
-  Children: `.0` (done), `.1`, `.2`, `.3`, `.4`
+  Children: `.0` (done), `.1`, `.2`, `.3`, `.4`, `.5`
 
 - ID: `SPEC-FORMAT-TERSE.0`
   Status: `done`
@@ -2055,6 +2058,67 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SPEC-FORMAT-TERSE.5`
+  Status: `active` (SPLIT 2026-07-01)
+  Goal: Future backend variant parity ownership before any non-Rust variant code
+  Children: `.5.0` (done), `.5.1` (deferred), `.5.2` (deferred), `.5.3` (blocked)
+  Acceptance: The implemented-variant inventory is explicit, the accepted future backend targets are tied
+    back to ADR `0006`, and no Julia/Dart/Lua implementation can begin without a concrete owning leaf/tree
+    plus a corpus-parity acceptance contract. This ownership slice must not add backend code.
+  Verification: **SPLIT/OWNED 2026-07-01.** `.5.0` records the current backend inventory and future-backend
+    boundaries. Julia and Dart remain accepted future targets from ADR `0006`; Lua is not adopted by any
+    current ADR, task tree, mdBook handoff chapter, or tracked source path and therefore requires a decision
+    record before any implementation leaf can exist. The executable terse-language frontier returns to
+    `.3.1` after this ownership slice.
+  Commit: `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory`
+
+- ID: `SPEC-FORMAT-TERSE.5.0`
+  Status: `done` (2026-07-01)
+  Goal: Inventory implemented/future backend variants and split future parity ownership
+  Acceptance: Re-read the active roadmap/task tree, ADR `0006`, Phase 8/9 task trees, mdBook backend handoff,
+    Knowledge Map backend facts, and tracked source layout. Record that the implemented backends are the Perl
+    reference and the Rust interpreter, that Julia/Dart are accepted future targets but not implemented here,
+    and that Lua is outside the accepted backend set until an ADR or task tree explicitly adopts it. Update
+    live docs and retrieval docs; do not change parser/compiler/runtime code.
+  Verification: **PASS 2026-07-01.** Bootstrap/roadmap/mdBook/codebase read completed before edits. Source
+    inventory found no tracked Julia, Dart, or Lua implementation paths outside the unrelated nested `rgx`
+    checkout. ADR `0006`, Phase 8, and the mdBook backend handoff name Rust/Julia/Dart, while Phase 9 is
+    explicitly Rust-only. The stale Knowledge Map statement that LinkedSpec was "currently Perl 5 only" was
+    corrected to the post-Phase-9 inventory. Backend handoff wording now points at the current 52-fixture
+    Rust corpus state after `.2.3.5.5`. Validation PASS: memory architecture, doctrine driver, Knowledge Map,
+    `git diff --check`, and `mdbook build docs/linkedspec-book`; no engine code changed.
+  Commit: `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory`
+
+- ID: `SPEC-FORMAT-TERSE.5.1`
+  Status: `deferred`
+  Goal: Julia backend parity task-tree adoption
+  Acceptance: When the roadmap selects Julia backend implementation, create or activate a dedicated backend
+    task tree with concrete parser/compiler/runtime/helper/corpus leaves. The acceptance contract must require
+    identical `.spec` input files, mdBook-neutral behavior, and language-neutral corpus parity before any
+    feature is called complete.
+  Verification: `deferred — no Julia backend implementation exists in the tracked source tree today`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.5.2`
+  Status: `deferred`
+  Goal: Dart backend parity task-tree adoption
+  Acceptance: When the roadmap selects Dart backend implementation, create or activate a dedicated backend
+    task tree with concrete parser/compiler/runtime/helper/corpus leaves. The acceptance contract must require
+    identical `.spec` input files, mdBook-neutral behavior, and language-neutral corpus parity before any
+    feature is called complete.
+  Verification: `deferred — no Dart backend implementation exists in the tracked source tree today`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.5.3`
+  Status: `blocked`
+  Goal: Lua backend scope decision before any Lua parity leaf
+  Acceptance: Lua may enter the backend set only after an explicit decision record or roadmap update adopts it
+    and defines the same universal `.spec` / corpus-parity obligations as the accepted future backends. Until
+    then, do not create Lua implementation leaves and do not write Lua backend code.
+  Verification: Blocked on accepted Lua-backend decision; current ADR/book/codebase backend set is Perl,
+    Rust, Julia, and Dart.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -2131,7 +2195,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.5.4` | `done` 2026-07-01 | Number receiver-dot value chains landed on Perl/Rust; numeric literal receivers parse, comparisons are terminal, value-form numeric comparisons lower on Perl, Rust `num_add`/`num_mul` consume all operands, phase0 999 green, corpus 50 fixtures. |
 | — | `SPEC-FORMAT-TERSE.2.3.5.6` | `done` 2026-07-01 | Typed wrapper quoted-name boundary locked: bare aggregate wrapper args read typed working variables; quoted args stay constructor payloads; direct `[...]` / `{...}` shapes are the preferred terse constructors. |
 | — | `SPEC-FORMAT-TERSE.2.3.5.5` | `done` 2026-07-01 | Block-valued receiver-dot chaining landed by yielded runtime type; expression-valued blocks feed the existing compatible array/string/hash/number receiver families. |
-| 1 | Variant parity ownership | `pending` | Task-tree-own Julia/Lua/Dart variant parity before any variant code, then resume remaining Round 3 leaves + Round 4+ discovery when selected. |
+| — | `SPEC-FORMAT-TERSE.5.0` | `done` 2026-07-01 | Future backend parity ownership is explicit before any non-Rust variant code: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs an ADR before inclusion. |
+| 1 | `SPEC-FORMAT-TERSE.3.1` | `pending` | Resume remaining Round 3 work now that future-variant ownership is explicit: confirm and lock edge syntax behavior. |
+| 2 | `SPEC-FORMAT-TERSE.3.2` | `pending` | Arithmetic/comparison symbol spellings and no-precedence composition after edge syntax is locked. |
+| 3 | `SPEC-FORMAT-TERSE.4` | `pending` | Round 4+ discovery after Round 3 leaves are closed or deliberately deferred. |
 
 ## Decisions
 
@@ -2187,6 +2254,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   based: a block is array-like only when all visible exits are array-yielding expressions, which prevents
   broad block-as-array misclassification. Rust keeps the same runtime evaluator and only needed parser
   follow-through after block/hash/array primaries.
+
+- `2026-07-01` (**`.5.0` future variant parity ownership split**). The implemented backend set is the Perl
+  reference plus the Rust interpreter under `rust/`. ADR `0006`, Phase 8, the mdBook backend handoff chapter,
+  and the Knowledge Map define Julia and Dart as accepted future backend targets that must consume identical
+  `.spec` files and pass the language-neutral corpus when implemented. Lua appears only in the current frontier
+  wording that triggered this split; it is not adopted by ADR `0006`, the backend handoff chapter, or any
+  tracked implementation path, so Lua work is blocked on an explicit decision record before any code leaf.
 
 - `2026-06-30` (**`.2.3.4.2` Perl inline value-control lowering landed**). Inline-composite `if(...)` and
   `switch(...)` are now portable value expressions in the supported value-consuming slots: `return(...)`,
@@ -2829,6 +2903,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.4` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes; focused Rust parser/runtime tests (`parse_number_receiver`, `parse_decimal_number_receiver`, `terse_2_3_5_4`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; phase0 (`prove -q -Iperl t/phase0_regression.t`) | Number receiver-dot value chains landed. Numeric links compose through `num_*` helpers, integer/decimal literal receivers parse, comparison methods are terminal, value-form numeric comparisons lower on Perl, Rust `num_add`/`num_mul` consume all operands, and statement/lifecycle methods such as `declare(...)` remain outside terse receiver methods. Phase0 PASS (999 tests); oracle corpus PASS over 50 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.6` | Perl syntax checks for `MethodLowering.pm`, `ValueExpr.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes for bare vs quoted aggregate wrappers and direct shapes; full phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust `.2.3.5.6` integration tests; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff/local CI gates | Typed wrapper quoted-name boundaries landed. Bare `array(foo)` / `a(foo)` and `hash(bar)` / `h(bar)` are explicit aggregate working-variable reads; quoted wrapper arguments remain literal constructor payloads and are not scalar-indirect aliases; direct `[...]` and `{...}` shapes are the preferred terse constructors. Perl generic value-expression lowering now recognizes direct shape literals in helper composition and avoids reserving primitive literals or inappropriate engine locals as aggregate symbols. Phase0 PASS (1000 tests); oracle corpus PASS over 51 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.5` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused Perl lowering/runtime probes; focused Rust parser/runtime tests (`parse_block_valued_receiver_chain`, `terse_2_3_5_5`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; full phase0 (`prove -q -Iperl t/phase0_regression.t`); `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks | Block-valued receiver-dot chains landed. Expression-valued blocks now feed their yielded array/string/hash/number values into the compatible receiver-family chains; Perl array-yielding blocks use narrow visible-exit recognition and Rust parses fluent chains after block/hash/array primaries. Phase0 PASS (1001 tests); oracle corpus PASS over 52 fixtures. |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.5.0` | Full bootstrap/roadmap/mdBook/codebase read; ADR `0006` + Phase 8/9 task-tree audit; `rg` source inventory for Julia/Dart/Lua implementation paths; Knowledge Map backend fact correction; mdBook backend-handoff status update; memory/doctrine/KM/diff checks; `mdbook build docs/linkedspec-book` | Future variant parity ownership landed before any non-Rust variant code. Implemented backends are Perl reference and Rust; Julia/Dart are accepted future targets but deferred to dedicated backend task trees; Lua is blocked on an explicit decision record before any task-tree leaf or code. No parser/compiler/runtime code changed. |
 | `2026-06-16` | `SPEC-FORMAT-TERSE` | Transcription faithful to `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` | Done — all Rounds 1–3 captured as leaves; Round 4+ as a discovery leaf |
 | `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 | `2026-06-23` | `SPEC-FORMAT-TERSE.1.1` (split) | `dump_parser_source` ground-truth probes (scratchpad `probe_autovar*.pl`, dump-don't-transcribe) establishing the one-scope / non-strict / preamble-`my` model; `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm` = 0; baseline `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh` (2/2), KM gate all EXIT 0 | Split `.1.1` → `.1.1.1`+`.1.1.2`; design recorded; KM card [[working-vars-no-strict-need-my-lexical]] added (map regenerated). Docs/tree/KM-only — no engine/book change, so phase0 N/A to the split slice |
@@ -2902,6 +2977,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.5.0` | `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory` | Future backend parity ownership is explicit: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs a new decision record before any code. Frontier returns to `.3.1`. |
 | `SPEC-FORMAT-TERSE.2.3.5` | `SPEC-FORMAT-TERSE.2.3.5 - split return-type method chaining` | Return-type method chaining specified before code and split into array/hash/string/number receiver-family leaves. No runtime behavior changed; first implementation frontier is `.2.3.5.1` array receiver-dot value chains. |
 | `SPEC-FORMAT-TERSE.2.3.5.1` | `SPEC-FORMAT-TERSE.2.3.5.1 - implement array receiver value chains` | Array receiver-dot value chains landed on Perl/Rust with phase0, focused Rust tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.2`. |
 | `SPEC-FORMAT-TERSE.2.3.5.2` | `SPEC-FORMAT-TERSE.2.3.5.2 - implement hash receiver value chains` | Hash receiver-dot value chains landed on Perl/Rust with focused tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.3`. |

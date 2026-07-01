@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.5.0 — future variant parity ownership/inventory landed): Closed the
+  unnumbered "Julia/Lua/Dart variant parity" frontier as an ownership slice before any backend code. Durable
+  points. (1) **Implemented backends are Perl and Rust.** Perl remains the reference implementation; Rust is
+  the implemented interpreter variant under `rust/`, validated incrementally by the language-neutral oracle
+  corpus. (2) **Julia and Dart are accepted future targets, not current implementations.** ADR `0006`, Phase 8,
+  and the backend handoff chapter define Rust/Julia/Dart lockstep obligations, while Phase 9 explicitly scoped
+  implementation to Rust only. (3) **Lua is not in the accepted backend set today.** It appeared in the stale
+  current-frontier wording that triggered the split, but not in ADR `0006`, the mdBook backend handoff, Phase 8
+  deliverables, or tracked source paths. Lua backend work therefore needs a decision record before a task-tree
+  leaf or code exists. (4) **The next executable language slice is Round 3, not backend code.** Future backend
+  leaves are owned/deferred, so PNT returns to `SPEC-FORMAT-TERSE.3.1` (edge syntax confirmation). (5) **Keep
+  KM facts current after roadmap milestones.** The older backend-vision card still said "Perl 5 only" after
+  Phase 9; correcting that avoids future archaeology.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.5 — block-valued receiver-dot chains landed): Closed the
   block-receiver audit with a small Perl gap fix and Rust parser parity. Durable points. (1)
   **Expression-valued blocks are ordinary receiver values.** The block runs first, including block-local

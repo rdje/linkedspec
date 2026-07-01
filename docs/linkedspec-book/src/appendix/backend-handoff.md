@@ -52,10 +52,11 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 structurally equivalent output for every entry.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. As of
-`SPEC-FORMAT-TERSE.2.3.3.3.3.1`, the two minimal shipped `tclite.spec` fixtures are active
-in the Rust oracle corpus: `[]` returns the tagged `command_subst` shape and `""` returns
-the tagged `double_quote` shape, both wrapped by the Rust runner's normal one-level output
-array. Broader recursive shipped-spec parity, including Lispish, remains tracked separately.
+`SPEC-FORMAT-TERSE.2.3.5.5`, the corpus has 52 fixtures, including the two minimal shipped
+`tclite.spec` cases restored by the default-mode repetition parity work and the newer terse
+receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting, and
+block-valued receivers. Broader recursive shipped-spec parity, including Lispish, remains
+tracked separately.
 
 ## Architecture Overview
 

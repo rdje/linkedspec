@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.5.0 — own future variant parity inventory
+
+**Scope:** Task-tree ownership, roadmap/live continuity docs, mdBook backend-handoff status, and Knowledge Map
+backend fact correction. No parser/compiler/runtime code changed.
+
+**What changed:** Future backend parity is now a concrete task-tree-owned surface before any non-Rust variant
+code. The implemented backend inventory is explicit: Perl remains the reference implementation and Rust is the
+implemented interpreter variant under `rust/`. Julia and Dart remain accepted future targets from ADR `0006`
+and Phase 8, but require dedicated backend implementation task trees before code. Lua is not adopted by the
+current ADR/book/codebase set and is blocked on an explicit decision record before any leaf or code can exist.
+
+**Docs:** The stale Knowledge Map backend fact that still said LinkedSpec was "currently Perl 5 only" was
+updated to the post-Phase-9 inventory. The backend handoff chapter now reflects the current 52-fixture Rust
+oracle corpus state after `SPEC-FORMAT-TERSE.2.3.5.5`. The active frontier now returns to
+`SPEC-FORMAT-TERSE.3.1` (edge syntax confirmation).
+
+**Validation:** Full bootstrap/roadmap/mdBook/codebase read completed before edits; `rg` inventory found no
+tracked Julia/Dart/Lua implementation paths outside the unrelated nested `rgx` checkout. Memory architecture,
+doctrine, Knowledge Map, `git diff --check`, and `mdbook build docs/linkedspec-book` passed in the commit
+workflow.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.5 — implement block-valued receiver chains
 
 **Scope:** Perl ActionIR receiver-chain lowering, Rust expression parser, focused Perl/Rust locks, oracle
