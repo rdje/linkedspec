@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.4 — `fn` grammar ownership proof lock):
+  The Perl ActionIR text-to-AST migration now closes with an explicit function-definition ownership boundary.
+  Durable points. (1) **Permanent function syntax is self-hosted.** `specs/spec.spec` now states that
+  `fn name(args) { ... }` belongs to the self-hosted grammar surface, not to a lasting hardcoded bootstrap
+  extension. (2) **Bootstrap has no current first-class `fn` support.** Targeted source checks over
+  `BootstrapSpec.pm` and `BootstrapSpec/Core.pm` find no `fn name(...)` grammar pattern or named
+  function-definition node support. (3) **The raw scanner shape is not support.** A `fn`-shaped line inside a
+  rule currently appears only as generic unsupported paragraph content (`1`) in bootstrap parse output, with no
+  structured function node or payload. (4) **Regression lock.** Phase0 now has a 1004-test green baseline with
+  this proof, and the canonical local CI gate passes after the lock. (5) **Next owner.** User-defined function implementation returns to
+  `SPEC-FORMAT-TERSE.4.1`, which owns the function contract/inventory before adding the actual grammar/runtime
+  behavior.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.3.2 — user-function AST call handoff preparation):
   Unknown typed calls in value-return positions no longer leak as generated host-language calls. Durable points.
   (1) **Value-position unknown calls diagnose.** `return(user_fn("x"))` and
@@ -31,8 +44,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `s(...)`, `a(...)`, and `h(...)` should retire too. Durable points. (1) **Do not treat short wrappers as
   permanent syntax.** Canonical wrapper spellings are `scalar(...)`, `array(...)`, and `hash(...)`; direct shape
   literals remain the preferred constructor surface where applicable. (2) **Retirement must be owned before
-  code.** Shorthand use is active in shipped specs, phase0 locks, and book examples, so `.5.3` is split:
-  `.5.3.1` retires the short aliases; `.5.3.2` resumes user-function AST call handoff.
+  code.** Shorthand use is active in shipped specs, phase0 locks, and book examples, so `.5.3` was split:
+  `.5.3.1` retired the short aliases; `.5.3.2` completed the value-position user-function diagnostic handoff.
 
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.2 — dropped value statements): Retired the supported standalone
   value-statement raw fallback without changing user-function ownership. Durable points. (1) **Dropped values now

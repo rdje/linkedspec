@@ -57,6 +57,10 @@
 #   syntax should be described here first. Changing the hardcoded bootstrap
 #   grammar (`BootstrapSpec/Core.pm`) for language changes is exception-only and
 #   must be justified in the commit message and DEVELOPMENT_NOTES.md.
+#   Function definitions (`fn name(args) { ... }`) follow the same rule: the
+#   accepted permanent grammar owner is this self-hosted grammar. The hardcoded
+#   bootstrap parser must not become the lasting owner; any bootstrap bridge for
+#   that surface is temporary migration debt.
 # =============================================================================
 
 spec_file::

@@ -44098,6 +44098,40 @@ subtest 'spec_self_hosted_compiles_as_language_agnostic' => sub {
     is($summary->{compatibility_surface_rule_count} || 0, 0, 'spec.spec has no compatibility-surface rules');
 };
 
+subtest 'fn_definition_grammar_is_not_bootstrap_owned' => sub {
+    plan tests => 7;
+
+    my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));
+    my $bootstrap_spec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec.pm'));
+    my $bootstrap_spec_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec', 'Core.pm'));
+
+    like(
+        $spec_spec_content,
+        qr/Function definitions \(`fn name\(args\) \{ \.\.\. \}`\).*accepted permanent grammar owner is this self-hosted grammar/s,
+        'spec.spec documents that permanent fn grammar ownership is self-hosted',
+    );
+    unlike($spec_spec_content, qr/^\s*function_definition\s*:/m,
+        'spec.spec has not landed an active function_definition rule before the function implementation leaf');
+    unlike($bootstrap_spec_pm, qr/\bfn\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/,
+        'BootstrapSpec.pm has no fn name(...) grammar support');
+    unlike($bootstrap_spec_core_pm, qr/\bfn\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/,
+        'BootstrapSpec/Core.pm has no fn name(...) grammar support');
+    unlike($bootstrap_spec_core_pm, qr/\b(?:function_definition|user_function_definition|FN_DEF)\b/,
+        'BootstrapSpec/Core.pm has no named function-definition node support');
+
+    require LinkedSpec::BootstrapSpec;
+    my $fn_sample = "Top::\n fn helper(value) { return(scalar(value)) }\n /x/\n";
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$fn_sample);
+    ok($parse_success && ref($retv) eq 'ARRAY',
+        'current bootstrap parse still returns a generic paragraph structure for fn-shaped text')
+        or diag(normalize_error($parse_error));
+
+    require JSON::PP;
+    my $json = JSON::PP->new->canonical(1)->allow_nonref(1)->encode($retv);
+    unlike($json, qr/\b(?:fn|function|helper|value)\b/i,
+        'bootstrap parse result does not contain a structured function-definition node or function payload');
+};
+
 subtest 'plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus' => sub {
     plan tests => 1;
 

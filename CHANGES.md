@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.4 — lock fn grammar ownership
+
+**Scope:** `specs/spec.spec`, phase0 self-hosting regression locks, task tree, live docs, mdBook status, and
+Knowledge Map.
+
+**What changed:** Locked the user-function definition ownership boundary before `SPEC-FORMAT-TERSE.4.1` starts.
+`specs/spec.spec` now documents that permanent `fn name(args) { ... }` grammar belongs to the self-hosted grammar,
+not to a lasting hardcoded bootstrap parser extension.
+
+**Proof lock:** Phase0 now asserts that `BootstrapSpec.pm` and `BootstrapSpec/Core.pm` have no
+`fn name(...)` grammar support or named function-definition node support. The bootstrap scanner may still return
+generic paragraph structure for `fn`-shaped text, but the result does not contain a structured function-definition
+node or function payload.
+
+**Checks:** `perl -Iperl -c t/phase0_regression.t`, direct bootstrap parse probe, targeted source `rg`, and
+`prove -Iperl t/phase0_regression.t` passed with phase0 **1004 tests**. `mdbook build docs/linkedspec-book`,
+memory architecture, Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh`
+passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.3.2 — diagnose unknown AST calls in value positions
 
 **Scope:** Perl ActionIR `MethodLowering`, focused AST parser tests, task tree, live docs, mdBook status, and

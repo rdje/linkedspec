@@ -1,6 +1,6 @@
 # PERL-ACTIONIR-AST-MIGRATION — Perl text-to-AST migration
 
-- Status: `active` (created 2026-07-01 by explicit user directive)
+- Status: `done` (completed 2026-07-01)
 - Roadmap lane: `Overall roadmap — compiler architecture / variant contract`
 - Owner: repo-local workflow
 
@@ -28,7 +28,7 @@ and host-language fallback are migration debt.
 ## Task Tree
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION`
-  Status: `active`
+  Status: `done` (2026-07-01)
   Goal: Migrate Perl ActionIR helper/action handling from text-to-text lowering to typed
     text-to-AST parsing and lowering.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`
@@ -399,7 +399,7 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.4 - lower while controls from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5`
-  Status: `split` (2026-07-01)
+  Status: `done` (2026-07-01)
   Goal: Retire supported-surface text fallback and unblock user-defined functions on AST.
   Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`
   Acceptance: Supported helper/value/control surfaces no longer depend on text-to-text
@@ -516,14 +516,24 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3.2 - diagnose unknown AST calls`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.4`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Lock `fn` grammar ownership in `specs/spec.spec` and retire bootstrap-parser function syntax.
   Acceptance: Permanent `fn <name>(...) { ... }` syntax is represented by
     `specs/spec.spec`/self-hosted grammar ownership. Any bootstrap parser support for
     that exact function-definition surface is removed or proven absent, and docs/tests
     state that bootstrap support is not the lasting owner.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** `specs/spec.spec` now documents that permanent
+    `fn name(args) { ... }` grammar belongs to the self-hosted grammar surface and that
+    any hardcoded bootstrap bridge is temporary migration debt. Phase0 locks assert that
+    `BootstrapSpec.pm` and `BootstrapSpec/Core.pm` have no `fn name(...)` grammar pattern
+    or named function-definition node support. A direct bootstrap parse probe for
+    `fn`-shaped text returns only generic paragraph content (`1`) and no structured
+    function-definition node or function payload. Checks passed so far:
+    `perl -Iperl -c t/phase0_regression.t`, direct bootstrap parse probe, targeted
+    source `rg`, `prove -Iperl t/phase0_regression.t` with phase0 1004 tests,
+    `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map/diff checks,
+    and `bash tools/run_ci_local.sh`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.5.4 - lock fn grammar ownership`
 
 ## Current Frontier
 
@@ -555,7 +565,10 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.3` | `split` 2026-07-01 | User-function handoff split so `s`/`a`/`h` shorthand wrapper retirement is owned before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | `done` 2026-07-01 | Short wrapper aliases now retire through unresolved-helper diagnostics and repo-owned specs/docs use canonical wrappers. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.3.2` | `done` 2026-07-01 | Return/value-position unknown typed calls now diagnose instead of leaking host calls; standalone unknown calls remain raw until function registry discard semantics. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.4` | `pending` | Lock permanent `fn` grammar ownership in `specs/spec.spec` and prove/remove bootstrap-parser support. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.5.4` | `done` 2026-07-01 | Permanent `fn` grammar ownership is locked to `specs/spec.spec`; bootstrap support is proven absent as a first-class function-definition surface. |
+
+Current frontier is empty. PNT returns to `SPEC-FORMAT-TERSE.4.1` for user-defined
+function contract/inventory and later grammar/runtime implementation.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -877,19 +890,18 @@ Measured boundary:
   existing child-call aggregation form (`call(A)` into array `B`) and reports ready.
   Do not rewrite it as scalar append in `.5.2`; the terse append surface remains
   `items += value` or unambiguous `push(items, "literal")` / `push_value(...)`.
-- **User-function-shaped calls are the real handoff risk.** The AST parser already
+- **User-function-shaped calls were the real handoff risk.** The AST parser already
   represents `user_fn("x")` as `call` and `user_fn("x").trim()` as `fluent_chain` with
-  a `call` receiver. But `return(user_fn("x"))` currently lowers to `return
-  user_fn("x")`, and `return(user_fn("x").trim())` lowers a Perl host call receiver
-  into the trim helper. Descriptor metadata reports these as ready. Standalone
-  `user_fn("x")` and `user_fn("x").trim()` remain `RAW_PERL`. This is not a helper
-  fallback leak to patch generically; it is `.5.3` user-function call resolution and
-  diagnostics work.
-- **Function-definition grammar is not currently present in bootstrap or `spec.spec`.**
+  a `call` receiver. At `.5.1`, `return(user_fn("x"))` lowered to `return
+  user_fn("x")`, and `return(user_fn("x").trim())` lowered a Perl host call receiver
+  into the trim helper. Descriptor metadata reported these as ready. `.5.3.2` has since
+  moved return/value-position unknown calls to unresolved-helper diagnostics. Standalone
+  `user_fn("x")` and `user_fn("x").trim()` remain `RAW_PERL` until the function registry
+  owns discard semantics.
+- **Function-definition grammar was not present in bootstrap or `spec.spec`.**
   Targeted `rg` over `specs/spec.spec`, `BootstrapSpec.pm`, and
-  `BootstrapSpec/Core.pm` found no `fn <name>(...) { ... }` grammar. `.5.4` should
-  still add the explicit proof/test or removal lock when the permanent `specs/spec.spec`
-  function grammar lands.
+  `BootstrapSpec/Core.pm` found no `fn <name>(...) { ... }` grammar. `.5.4` has since
+  added the explicit proof/test lock and `specs/spec.spec` ownership policy note.
 
 Next owners:
 
@@ -901,6 +913,22 @@ Next owners:
   standalone unknown calls remain raw until the function registry owns result discard.
 - `.5.4`: lock `specs/spec.spec` as the function-definition grammar owner and prove
   the bootstrap parser has no lasting `fn` support.
+
+## PERL-ACTIONIR-AST-MIGRATION.5.4 Function Grammar Ownership Lock
+
+`fn name(args) { ... }` is an accepted future language surface, but this leaf does not
+implement functions. It locks the owner boundary before the user-function implementation
+tree starts:
+
+- permanent function-definition grammar belongs in `specs/spec.spec`;
+- hardcoded bootstrap support, if ever needed as a bridge, is temporary migration debt;
+- current bootstrap sources contain no `fn name(...)` grammar pattern and no named
+  function-definition node support;
+- current bootstrap parsing of `fn`-shaped text produces only generic unsupported
+  paragraph content, not a structured function node or function payload.
+
+`SPEC-FORMAT-TERSE.4.1` owns the next implementation step: inventorying the function
+MVP seams before adding grammar/runtime behavior.
 
 ## PERL-ACTIONIR-AST-MIGRATION.5.3.2 Unknown Call Handoff
 
@@ -1107,6 +1135,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.4` | Added `specs/spec.spec` function-definition ownership policy note; added phase0 lock proving `BootstrapSpec.pm`/`BootstrapSpec/Core.pm` have no `fn name(...)` grammar or named function-definition node support; direct bootstrap parse probe for `fn`-shaped text; syntax check; targeted source `rg`; phase0 1004 tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Permanent `fn name(args) { ... }` grammar ownership is locked to `specs/spec.spec`. Bootstrap has no current first-class function-definition support; current `fn`-shaped text parses only as generic unsupported paragraph content. Perl ActionIR migration closes; PNT returns to `SPEC-FORMAT-TERSE.4.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3.2` | Unknown typed call handoff in `MethodLowering`; known-helper fence for DSL/compatibility names; focused probes for `return(user_fn(...))`, `return(user_fn(...).trim())`, `return(call(Leaf))`, `return(input_text())`, `or(...)`, declaration aliases, retired helpers, and statement-only array mutation value chains; syntax checks; focused ActionIR AST suite; phase0 1003 tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Return/value-position unknown typed calls now diagnose through unresolved-helper metadata instead of leaking generated host calls. Standalone unknown function-shaped statements remain raw until function registry discard semantics are implemented. Frontier moves to `.5.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | Migrated repo-owned specs/corpus fixtures/tests/docs/book to `scalar(...)`/`array(...)`/`hash(...)`; removed Perl/Rust lowering normalization of `s(...)`/`a(...)`/`h(...)`; added retired-helper diagnostics lock; syntax checks; focused ActionIR suite; phase0 1003 tests; Rust core/runtime library tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Short wrapper aliases are no longer treated as canonical wrapper spellings. Residual `s`/`a`/`h` calls diagnose as unresolved helpers with zero raw fallback, and the public docs/book now teach canonical wrappers only. Frontier moves to `.5.3.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3` | Read-only `rg` usage discovery for `s(...)`, `a(...)`, and `h(...)` across `specs/`, `t/`, mdBook, task trees, and Knowledge Map; task-tree/live-doc/KM updates; memory/doctrine/KM/diff checks | User policy that short wrapper aliases must be retired is now owned before code. `.5.3` is split into `.5.3.1` short-wrapper alias retirement and `.5.3.2` user-function AST call handoff. Frontier moves to `.5.3.1`. |

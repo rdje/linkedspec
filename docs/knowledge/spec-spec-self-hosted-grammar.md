@@ -8,11 +8,12 @@ answers:
   - "where is the LinkedSpec language defined in LinkedSpec itself"
   - "where should fn syntax be implemented"
   - "does spec.spec own user function syntax"
+  - "does bootstrap own fn function syntax"
 date: 2026-06-05
 status: current
 tags: [self-hosting, grammar, phase7]
-evidence: "specs/spec.spec exists and compiles at language_agnostic_ready_ratio == 1.0000; docs/tasks/PHASE7-SELF-HOSTED-SPEC.md (5 leaves, done). On 2026-07-01 the user clarified that permanent fn <name>(...) { ... } support belongs in specs/spec.spec and bootstrap-parser support must be retired once the text-to-AST path can carry it."
-reverify: "ls specs/spec.spec && rg -n 'specs/spec\\.spec|bootstrap-parser fn|bootstrap parser support|Function syntax' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md"
+evidence: "specs/spec.spec exists and compiles at language_agnostic_ready_ratio == 1.0000; docs/tasks/PHASE7-SELF-HOSTED-SPEC.md (5 leaves, done). PERL-ACTIONIR-AST-MIGRATION.5.4 added a spec.spec policy note that permanent fn name(args) { ... } grammar belongs to the self-hosted grammar and added phase0 proof that BootstrapSpec.pm and BootstrapSpec/Core.pm have no current first-class fn grammar/node support."
+reverify: "rg -n 'Function definitions \\(`fn name\\(args\\)' specs/spec.spec && ! rg -n '\\bfn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(|function_definition|user_function_definition|FN_DEF' perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm"
 ---
 
 `specs/spec.spec` is a first-class LinkedSpec grammar that captures the currently supported
@@ -23,6 +24,8 @@ first and keep the phase-0 regression at ratio 1.0000; touching the bootstrap gr
 (known bootstrapping gaps are documented in the spec.spec header + DEVELOPMENT_NOTES.md).
 The accepted user-function grammar follows that rule: final `fn <name>(...) { ... }`
 support is a `specs/spec.spec` language-surface change, while any bootstrap parser
-implementation is temporary migration debt to remove after text-to-AST handoff.
+implementation is temporary migration debt to remove after text-to-AST handoff. After
+`PERL-ACTIONIR-AST-MIGRATION.5.4`, the bootstrap parser has no current first-class
+`fn` grammar or function-definition node support; that absence is phase0-locked.
 Canonical home: `docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`, `specs/spec.spec` header.
 Related: [[andplusplus-lx-parser-hang]].

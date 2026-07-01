@@ -18,7 +18,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, user-functions, value-expressions, receiver-dot, task-tree]
-evidence: "SPEC-FORMAT-TERSE.4 was split/owned on 2026-07-01 after explicit user direction to implement custom/user-defined functions. The task-tree acceptance contract defines the MVP as top-level fn name(args) { ... } with explicit parentheses, pure value/block bodies, explicit positional parameters, no implicit caller-state capture, and no recursion/closures/lambdas/currying. User clarification requires function calls to be ordinary value expressions whose results can feed receiver-dot chains, and unused standalone call results to be silently discarded. The user later clarified that permanent fn <name>(...) { ... } grammar belongs in specs/spec.spec; bootstrap parser support, if any, is temporary migration debt to remove after the text-to-AST migration can carry the surface."
+evidence: "SPEC-FORMAT-TERSE.4 was split/owned on 2026-07-01 after explicit user direction to implement custom/user-defined functions. The task-tree acceptance contract defines the MVP as top-level fn name(args) { ... } with explicit parentheses, pure value/block bodies, explicit positional parameters, no implicit caller-state capture, and no recursion/closures/lambdas/currying. User clarification requires function calls to be ordinary value expressions whose results can feed receiver-dot chains, and unused standalone call results to be silently discarded. PERL-ACTIONIR-AST-MIGRATION.5.4 locked permanent fn grammar ownership to specs/spec.spec and proved bootstrap has no current first-class fn support."
 reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4|Function calls are ordinary value expressions|standalone call silently drops|specs/spec\\.spec|bootstrap-parser fn|bootstrap parser support' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md"
 ---
 
@@ -39,4 +39,6 @@ If a function call appears as a standalone statement, the return value is silent
 Permanent function syntax belongs in `specs/spec.spec`, not as a lasting hardcoded
 bootstrap-parser extension. Any bootstrap support for `fn <name>(...) { ... }` is
 temporary migration debt and should be removed once the text-to-AST path and
-`spec.spec` can own the surface.
+`spec.spec` can own the surface. `PERL-ACTIONIR-AST-MIGRATION.5.4` proved there is no
+current first-class bootstrap support, so `SPEC-FORMAT-TERSE.4.1` can start from the
+self-hosted ownership boundary.

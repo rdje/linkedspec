@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.4 — `fn` grammar ownership locked**
+  (SPEC.SPEC POLICY + PHASE0 LOCK + BOOK/KM/LIVE DOCS). `specs/spec.spec` now states that permanent
+  `fn name(args) { ... }` grammar belongs to the self-hosted grammar surface, not to lasting hardcoded bootstrap
+  support. Phase0 locks prove `BootstrapSpec.pm` and `BootstrapSpec/Core.pm` have no `fn name(...)` grammar
+  pattern or named function-definition node support; current bootstrap parsing of `fn`-shaped text yields only
+  generic unsupported paragraph content, not a structured function node/payload.
+  **Verification:** `perl -Iperl -c t/phase0_regression.t` PASS; direct bootstrap parse probe PASS; targeted
+  source `rg` PASS; `prove -Iperl t/phase0_regression.t` PASS with phase0 **1004 tests**; `mdbook build
+  docs/linkedspec-book`, memory architecture, Knowledge Map, doctrine registry, `git diff --check`, and
+  `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** Perl ActionIR text-to-AST migration is closed by this leaf; PNT returns to
+  `SPEC-FORMAT-TERSE.4.1` for user-defined function contract/inventory.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3.2 — unknown AST value calls diagnose**
   (PERL ACTIONIR + FOCUSED TEST + PHASE0 + BOOK/KM/LIVE DOCS). Unknown typed calls in return/value positions
   now diagnose through `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` instead of leaking generated host calls.
@@ -22,8 +34,7 @@ Current execution status for interruption-safe batch workflow recovery.
   t/actionir_ast_parser.t` PASS with **20 subtests**; `prove -Iperl t/phase0_regression.t` PASS with phase0
   **1003 tests**; `mdbook build docs/linkedspec-book`, memory architecture, Knowledge Map, doctrine registry,
   `git diff --check`, and `bash tools/run_ci_local.sh` PASS.
-  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.4` lock `fn` grammar ownership in `specs/spec.spec` and retire or
-  prove absent bootstrap-parser function syntax.
+  **Then-frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.4`, now complete.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3.1 — short wrapper aliases retired**
   (PERL ACTIONIR + RUST CORE/RUNTIME + SPECS/FIXTURES + PHASE0 + BOOK/KM/LIVE DOCS). `s(...)`, `a(...)`, and
   `h(...)` are no longer canonical wrapper spellings. Repo-owned specs, corpus fixtures, tests, root guides, and
