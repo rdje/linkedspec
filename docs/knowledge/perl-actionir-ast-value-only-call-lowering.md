@@ -35,4 +35,5 @@ hash, or symbol-slot helper semantics. Those families are now covered by
 `docs/knowledge/perl-actionir-ast-aggregate-call-lowering.md`. Legacy wrapper aliases
 such as `scalar(...)`, `array(...)`, and `hash(...)` remain deprecated compatibility
 syntax per ADR 0007, not the canonical destination surface. Receiver-dot `fluent_chain`
-forms still wait for their dedicated migration leaf.
+forms are now covered by `PERL-ACTIONIR-AST-MIGRATION.3.3`; see
+`docs/knowledge/perl-actionir-ast-fluent-chain-lowering.md`.

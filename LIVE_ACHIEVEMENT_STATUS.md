@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.3 — receiver-dot `fluent_chain` AST lowering landed**
+  (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
+  consumes AST `fluent_chain` nodes for receiver-dot value chains before the legacy receiver-dot text
+  normalizers. The dispatcher traverses typed receiver/call/argument nodes for array, hash, string, and number
+  receiver families, then reuses the existing Perl helper catalog through the compatibility bridge. Existing
+  behavior is preserved for bare scalar/hash receiver wrapping, array pipeline helper names, block-valued
+  receivers, string/hash bridges to array terminals, `join_values` delimiter-first mapping, numeric arity
+  checks, and numeric terminal continuation behavior.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
+  `perl -Iperl -c t/actionir_ast_parser.t` PASS; `prove -v -Iperl t/actionir_ast_parser.t` PASS; targeted
+  public lowering probes PASS; `mdbook build docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates
+  PASS; `prove -q -Iperl t/phase0_regression.t` PASS with phase0 **1002 tests**; `bash tools/run_ci_local.sh`
+  PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.4` replace return-payload helper substitution with AST
+  traversal/diagnostics, then `.4` statement/control AST lowering.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2.3 — covered-call diagnostics landed**
   (PERL ACTIONIR + DIAGNOSTICS + FOCUSED TEST + BOOK/KM/LIVE DOCS). Unsupported AST call forms for helper
   families already owned by `.3.2.1`/`.3.2.2` no longer lower into generated host-language calls. Known helper

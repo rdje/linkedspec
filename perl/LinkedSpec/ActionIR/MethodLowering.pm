@@ -1243,6 +1243,7 @@ sub _lower_method_value_expr {
  my $lower_ast_value_node;
  my $lower_ast_value_only_call_node;
  my $lower_ast_aggregate_call_node;
+ my $lower_ast_fluent_chain_node;
  my $ast_expr_source_node;
  my $lower_ast_supported_call_source_node;
  my $ast_string_source_node = sub {
@@ -1347,6 +1348,14 @@ sub _lower_method_value_expr {
    return $call_expr if defined($call_expr) && length($call_expr);
    my $unsupported_call = $unsupported_ast_helper_expr->($node->{name});
    return $unsupported_call if defined($unsupported_call) && length($unsupported_call);
+   my $source = $node->{source};
+   return $source if defined($source) && length($source);
+  }
+  if ($kind eq 'fluent_chain') {
+   my $chain_expr = ref($lower_ast_fluent_chain_node) eq 'CODE'
+    ? $lower_ast_fluent_chain_node->($node)
+    : undef;
+   return $chain_expr if defined($chain_expr) && length($chain_expr);
    my $source = $node->{source};
    return $source if defined($source) && length($source);
   }
@@ -1546,6 +1555,8 @@ sub _lower_method_value_expr {
   }
   return $lower_ast_block_value_node->($node)
    if $kind eq 'block_value';
+  return $lower_ast_fluent_chain_node->($node)
+   if $kind eq 'fluent_chain';
   if ($kind eq 'call') {
    my $lowered_call = $lower_ast_value_only_call_node->($node);
    return $lowered_call if defined($lowered_call) && length($lowered_call);
@@ -1603,6 +1614,206 @@ sub _lower_method_value_expr {
 
   return $legacy_method_value_expr->($method.'('.join(', ', @arg_exprs).')')
  };
+ $lower_ast_fluent_chain_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'fluent_chain';
+  my $receiver = $node->{receiver};
+  my $calls = $node->{calls} || [];
+  return undef unless ref($receiver) eq 'HASH' && ref($calls) eq 'ARRAY' && @$calls;
+
+  my $receiver_expr = $ast_expr_source_node->($receiver);
+  $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);
+  return undef unless defined($receiver_expr) && length($receiver_expr);
+
+  my $chain_arg_exprs = sub {
+   my ($args) = @_;
+   return undef unless ref($args) eq 'ARRAY';
+   my @arg_exprs;
+   foreach my $arg (@$args) {
+    my $arg_expr = $ast_expr_source_node->($arg);
+    $arg_expr = $arg->{source}
+     if ref($arg) eq 'HASH' && !(defined($arg_expr) && length($arg_expr));
+    return undef unless defined($arg_expr) && length($arg_expr);
+    push @arg_exprs, $arg_expr;
+   }
+   return \@arg_exprs
+  };
+
+  my $array_chain_return_family = sub {
+   my ($method) = @_;
+   return 'array' if defined($method)
+    && $method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+   return 'terminal'
+  };
+
+  my $append_array_chain_call = sub {
+   my ($current_expr, $call) = @_;
+   my $method = $call->{method} // '';
+   return undef if $method =~ /^(?:push_front|push_back|pop_front|pop_back)$/o;
+   return undef unless _is_array_receiver_value_chain_method($method);
+   my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
+   return undef unless ref($arg_exprs) eq 'ARRAY';
+
+   if ($method eq 'join_values') {
+    return undef unless @$arg_exprs == 1;
+    return ['join_values('.$arg_exprs->[0].', '.$current_expr.')', 'terminal'];
+   }
+   if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
+    return ['__array_value_'.$method.'('.join(', ', ($current_expr, @$arg_exprs)).')', 'array'];
+   }
+   return [
+    $method.'('.join(', ', ($current_expr, @$arg_exprs)).')',
+    $array_chain_return_family->($method),
+   ]
+  };
+
+  my $first_method = $calls->[0]{method} // '';
+  if (_is_hash_receiver_value_chain_method($first_method)) {
+   my $current_expr = $receiver_expr;
+   $current_expr = 'hash('.$current_expr.')'
+    if ($receiver->{kind} // '') eq 'variable'
+    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $current_family = 'hash';
+   for (my $idx = 0; $idx < @$calls; ++$idx) {
+    my $call = $calls->[$idx];
+    my $method = $call->{method} // '';
+    my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
+    return undef unless ref($arg_exprs) eq 'ARRAY';
+    my $is_last = ($idx == $#$calls) ? 1 : 0;
+
+    if ($current_family eq 'hash') {
+     my $return_family = _hash_receiver_value_chain_return_family($method);
+     return undef unless defined($return_family);
+
+     if ($method eq 'hash_copy') {
+      return undef unless @$arg_exprs == 0;
+      $current_expr = 'hash_copy('.$current_expr.')';
+     } elsif ($method eq 'flat_hash') {
+      return undef unless @$arg_exprs == 0;
+      $current_expr = 'hash(flat_hash('.$current_expr.'))';
+     } elsif ($method eq 'scalaref') {
+      return undef unless @$arg_exprs == 1;
+      $current_expr = 'scalar('.$current_expr.', '.$arg_exprs->[0].')';
+     } else {
+      $current_expr = $method.'('.join(', ', ($current_expr, @$arg_exprs)).')';
+     }
+
+     return undef if $return_family eq 'terminal' && !$is_last;
+     $current_family = $return_family;
+     next;
+    }
+
+    if ($current_family eq 'array') {
+     my $applied = $append_array_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     next;
+    }
+
+    return undef;
+   }
+   return $legacy_method_value_expr->($current_expr)
+  }
+
+  if (_is_string_receiver_value_chain_method($first_method)) {
+   my $current_expr = $receiver_expr;
+   $current_expr = 'scalar('.$current_expr.')'
+    if ($receiver->{kind} // '') eq 'variable'
+    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $current_family = 'string';
+   for (my $idx = 0; $idx < @$calls; ++$idx) {
+    my $call = $calls->[$idx];
+    my $method = $call->{method} // '';
+    my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
+    return undef unless ref($arg_exprs) eq 'ARRAY';
+    my $is_last = ($idx == $#$calls) ? 1 : 0;
+
+    if ($current_family eq 'string') {
+     my $return_family = _string_receiver_value_chain_return_family($method);
+     return undef unless defined($return_family);
+
+     if ($method =~ /^(?:trim|lowercase|uppercase|length)$/o) {
+      return undef unless @$arg_exprs == 0;
+      $current_expr = $method.'('.$current_expr.')';
+     } elsif ($method eq 'concat') {
+      return undef unless @$arg_exprs >= 1;
+      $current_expr = 'concat('.join(', ', ($current_expr, @$arg_exprs)).')';
+     } else {
+      $current_expr = $method.'('.join(', ', ($current_expr, @$arg_exprs)).')';
+     }
+
+     return 'undef' if $return_family eq 'terminal' && !$is_last;
+     $current_family = $return_family;
+     next;
+    }
+
+    if ($current_family eq 'array') {
+     my $applied = $append_array_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     next;
+    }
+
+    return 'undef' if $current_family eq 'terminal';
+    return undef;
+   }
+   return $legacy_method_value_expr->($current_expr)
+  }
+
+  if (_is_number_receiver_value_chain_method($first_method)) {
+   my $current_expr = $receiver_expr;
+   $current_expr = 'scalar('.$current_expr.')'
+    if ($receiver->{kind} // '') eq 'variable'
+    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $current_family = 'number';
+   for (my $idx = 0; $idx < @$calls; ++$idx) {
+    my $call = $calls->[$idx];
+    my $method = $call->{method} // '';
+    my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
+    return undef unless ref($arg_exprs) eq 'ARRAY';
+    my $is_last = ($idx == $#$calls) ? 1 : 0;
+
+    return 'undef' if $current_family eq 'terminal';
+    return undef unless $current_family eq 'number';
+
+    my $return_family = _number_receiver_value_chain_return_family($method);
+    return undef unless defined($return_family);
+    my $helper = _number_receiver_method_helper_name($method);
+    return undef unless defined($helper) && length($helper);
+
+    if ($method =~ /^(?:abs|floor|ceil|round)$/o) {
+     return undef unless @$arg_exprs == 0;
+    } elsif ($method =~ /^(?:sub|div|mod|eq|ne|gt|ge|lt|le)$/o) {
+     return undef unless @$arg_exprs == 1;
+    } elsif ($method eq 'clamp') {
+     return undef unless @$arg_exprs == 2;
+    } elsif ($method =~ /^(?:add|mul|min|max)$/o) {
+     return undef unless @$arg_exprs >= 1;
+    } else {
+     return undef;
+    }
+
+    $current_expr = $helper.'('.join(', ', ($current_expr, @$arg_exprs)).')';
+    return 'undef' if $return_family eq 'terminal' && !$is_last;
+    $current_family = $return_family;
+   }
+   return $legacy_method_value_expr->($current_expr)
+  }
+
+  if (_is_array_receiver_value_chain_method($first_method)) {
+   return undef if defined($receiver_expr) && $receiver_expr =~ /^(?:hash|h)\s*\(/o;
+   my $current_expr = $receiver_expr;
+   for (my $idx = 0; $idx < @$calls; ++$idx) {
+    my $call = $calls->[$idx];
+    my $applied = $append_array_chain_call->($current_expr, $call);
+    return undef unless ref($applied) eq 'ARRAY';
+    $current_expr = $applied->[0];
+   }
+   return $legacy_method_value_expr->($current_expr)
+  }
+
+  return undef
+ };
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -1611,7 +1822,7 @@ sub _lower_method_value_expr {
   my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
   if (ref($ast_node) eq 'HASH') {
    my $ast_kind = $ast_node->{kind} // '';
-   if ($ast_kind ne 'raw_perl' && $ast_kind ne 'fluent_chain') {
+   if ($ast_kind ne 'raw_perl') {
     my $ast_lowered = $lower_ast_value_node->($ast_node);
     return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
    }

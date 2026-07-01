@@ -44,9 +44,11 @@ helpers, numeric reducers over aggregate operands, and hash helpers rebuild thei
 surface from typed AST fields while preserving symbol slots and quoted-wrapper literal
 boundaries before reusing the existing Perl helper catalog. Unsupported covered helper
 forms now report through the existing unresolved-helper metadata instead of leaking as
-generated host-language calls. Receiver-dot chains, statement/control lowering, and
-remaining return-payload substitution still migrate in later leaves; the wrapper forms
-remain compatibility syntax, not the canonical destination surface.
+generated host-language calls. Receiver-dot value chains now also consume AST
+`fluent_chain` nodes for the array, hash, string, and number receiver families before the
+legacy receiver-dot text normalizers run. Statement/control lowering and remaining
+return-payload substitution still migrate in later leaves; the wrapper forms remain
+compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters
 

@@ -11,7 +11,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, method-lowering, aggregate-helpers, wrappers]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.3.2.2 added a slot-aware aggregate-call dispatcher inside MethodLowering. Deprecated scalar/array/hash wrappers, copy helpers, flat helpers, array collection helpers, aggregate numeric reducers, capture map/group helpers, and hash helpers now reconstruct supported helper-call surfaces from typed AST fields before entering the existing Perl helper catalog through the compatibility bridge. Focused fake-source tests in t/actionir_ast_parser.t prove covered aggregate helper calls do not reuse call-node source text. The dispatcher preserves aggregate symbol slots and quoted-wrapper literal boundaries, so array(items) reads @items while array(\"items\") remains a literal payload. PERL-ACTIONIR-AST-MIGRATION.3.2.3 later added unresolved-helper diagnostics for unsupported covered helper forms; receiver-dot fluent_chain lowering remains a later leaf."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.3.2.2 added a slot-aware aggregate-call dispatcher inside MethodLowering. Deprecated scalar/array/hash wrappers, copy helpers, flat helpers, array collection helpers, aggregate numeric reducers, capture map/group helpers, and hash helpers now reconstruct supported helper-call surfaces from typed AST fields before entering the existing Perl helper catalog through the compatibility bridge. Focused fake-source tests in t/actionir_ast_parser.t prove covered aggregate helper calls do not reuse call-node source text. The dispatcher preserves aggregate symbol slots and quoted-wrapper literal boundaries, so array(items) reads @items while array(\"items\") remains a literal payload. PERL-ACTIONIR-AST-MIGRATION.3.2.3 later added unresolved-helper diagnostics for unsupported covered helper forms; .3.3 later added AST fluent_chain lowering for receiver-dot value chains."
 reverify: "prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t"
 ---
 
@@ -43,5 +43,7 @@ literal constructor payloads, so `array("items")` does not alias `@items`.
 
 Follow-up status: `PERL-ACTIONIR-AST-MIGRATION.3.2.3` now diagnoses supported helper
 shapes that cannot lower cleanly through the unresolved-helper metadata channel.
-Receiver-dot `fluent_chain` traversal (`.3.3`), return-payload AST traversal (`.3.4`),
-and statement/control lowering remain pending.
+Receiver-dot `fluent_chain` traversal is now covered by
+`PERL-ACTIONIR-AST-MIGRATION.3.3`; see
+`docs/knowledge/perl-actionir-ast-fluent-chain-lowering.md`. Return-payload AST
+traversal (`.3.4`) and statement/control lowering remain pending.

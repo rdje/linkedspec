@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.3 — lower receiver chains from AST
+
+**Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,
+Knowledge Map, and live docs.
+
+**What changed:** `MethodLowering::_lower_method_value_expr(...)` now dispatches AST `fluent_chain` nodes for
+receiver-dot value chains before the legacy receiver-dot text normalizers. The dispatcher traverses typed
+receiver/call/argument nodes for array, hash, string, and number receiver families, then reuses the existing
+Perl helper catalog through the compatibility bridge so generated output stays stable.
+
+**Compatibility boundary:** The AST path preserves the existing receiver-family contracts: bare scalar/hash
+receiver wrapping, block-valued receivers, array pipeline helper names, string/hash bridges into array
+terminals, `join_values` delimiter-first mapping, numeric method arity checks, and numeric terminal
+continuation behavior. Old receiver-dot text normalizers remain only as fallback for expressions the AST parser
+cannot own yet.
+
+**Tests:** Added focused fake-source coverage proving number chains, string-to-array chains, block-array
+receivers, hash-to-array chains, invalid numeric terminal continuations, and unsupported covered chain helpers
+consume AST node fields instead of poisoned source text. Syntax checks, `prove -v -Iperl t/actionir_ast_parser.t`,
+and targeted public lowering probes passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2.3 — diagnose unsupported AST helper calls
 
 **Scope:** Perl ActionIR method/value lowering, unresolved-helper diagnostics, focused AST parser/lowering
@@ -38,7 +59,7 @@ aliases), and reuse the existing Perl helper catalog through the explicit compat
 compatibility aliases per ADR 0007, not canonical destination syntax. The AST dispatcher preserves aggregate
 symbol slots and quoted-wrapper literal boundaries, so `array(items)` keeps reading `@items` while
 `array("items")` stays a literal constructor payload. Covered-call diagnostics landed in `.3.2.3`; receiver-dot
-chains remain queued for `.3.3`.
+chains are now covered by `.3.3`.
 
 **Tests:** Added focused fake-source AST tests for wrappers, copy helpers, reducers, collection helpers, and hash
 helpers. Syntax checks, `prove -Iperl t/actionir_ast_parser.t`, targeted public lowering probes,

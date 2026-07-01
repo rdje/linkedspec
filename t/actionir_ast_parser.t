@@ -368,9 +368,111 @@ subtest 'covered helper-call diagnostics retire AST host-call leakage' => sub {
     like(join("\n", @{$meta->{unresolved_helper_statements} || []}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unresolved-helper statements carry the sentinel');
 };
 
-subtest 'parser seam is incremental' => sub {
-    my $lowered = LinkedSpec::call_spec_handler_subst('Top', 'return(3.5.floor().add(1))');
-    like($lowered, qr/__ls_num_floor.*__ls_num_add/s, 'receiver-chain lowering remains on the compatibility path until the fluent-chain leaf');
+subtest 'fluent_chain value lowering consumes AST nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $str = sub {
+        my ($value) = @_;
+        return { kind => 'string', value => $value, quote => '"', source => '__bad_string_'.$value.'__()' };
+    };
+    my $num = sub {
+        my ($value) = @_;
+        return { kind => 'number', value => $value, source => '__bad_number_'.$value.'__()' };
+    };
+    my $chain = sub {
+        my ($receiver, @calls) = @_;
+        return {
+            kind => 'fluent_chain',
+            source => '__bad_chain_source__()',
+            receiver => $receiver,
+            calls => \@calls,
+        };
+    };
+    my $fluent_call = sub {
+        my ($method, @args) = @_;
+        return { method => $method, source => '__bad_call_'.$method.'__()', args => \@args };
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            if ($expr eq '3.5.floor().add(1)') {
+                return $chain->(
+                    $num->('3.5'),
+                    $fluent_call->('floor'),
+                    $fluent_call->('add', $num->(1)),
+                );
+            }
+            if ($expr eq '" a-b ".trim().split("-").count()') {
+                return $chain->(
+                    $str->(' a-b '),
+                    $fluent_call->('trim'),
+                    $fluent_call->('split', $str->('-')),
+                    $fluent_call->('count'),
+                );
+            }
+            if ($expr eq '{ [3,1,2] }.sorted().join_values(",")') {
+                return $chain->(
+                    { kind => 'block_value', source => '{ [3,1,2] }' },
+                    $fluent_call->('sorted'),
+                    $fluent_call->('join_values', $str->(',')),
+                );
+            }
+            if ($expr eq 'meta.set_key("c",3).sorted_keys().join_values(",")') {
+                return $chain->(
+                    $var->('meta'),
+                    $fluent_call->('set_key', $str->('c'), $num->(3)),
+                    $fluent_call->('sorted_keys'),
+                    $fluent_call->('join_values', $str->(',')),
+                );
+            }
+            if ($expr eq 'score.floor().gt(2).add(1)') {
+                return $chain->(
+                    $var->('score'),
+                    $fluent_call->('floor'),
+                    $fluent_call->('gt', $num->(2)),
+                    $fluent_call->('add', $num->(1)),
+                );
+            }
+            if ($expr eq '"abc".substr()') {
+                return $chain->(
+                    $str->('abc'),
+                    $fluent_call->('substr'),
+                );
+            }
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $numeric = LinkedSpec::call_spec_handler_subst('Top', q{return(3.5.floor().add(1))});
+        like($numeric, qr/__ls_num_floor.*__ls_num_add/s, 'AST fluent_chain lowering preserves number helper composition');
+
+        my $string_array = LinkedSpec::call_spec_handler_subst('Top', q{return(" a-b ".trim().split("-").count())});
+        like($string_array, qr/__ls_trim.*__ls_split.*__ls_count/s, 'AST fluent_chain lowering bridges string chains into array terminals');
+
+        my $block_array = LinkedSpec::call_spec_handler_subst('Top', q{return({ [3,1,2] }.sorted().join_values(","))});
+        like($block_array, qr/__ls_sorted.*__ls_join_values/s, 'AST fluent_chain lowering preserves block-valued array receivers');
+
+        my $hash_array = LinkedSpec::call_spec_handler_subst('Top', q{return(meta.set_key("c",3).sorted_keys().join_values(","))});
+        like($hash_array, qr/__ls_set_key_source.*__ls_sorted_keys.*__ls_join_values/s, 'AST fluent_chain lowering preserves hash-to-array receiver chains');
+
+        my $invalid_number_continuation = LinkedSpec::call_spec_handler_subst('Top', q{return(score.floor().gt(2).add(1))});
+        is($invalid_number_continuation, q{return undef}, 'AST fluent_chain lowering preserves terminal number-chain continuation behavior');
+
+        my $bad_substr = LinkedSpec::call_spec_handler_subst('Top', q{return("abc".substr())});
+        unlike($bad_substr, qr/\breturn\s+substr\s*\(/, 'unsupported covered chain helper no longer lowers to a host substr call');
+        like($bad_substr, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unsupported covered chain helper leaves diagnostic sentinel');
+
+        my $all = join("\n", $numeric, $string_array, $block_array, $hash_array, $invalid_number_continuation, $bad_substr);
+        unlike($all, qr/__bad_/, 'AST fluent_chain lowering does not reuse fake chain, call, receiver, or argument source text');
+    }
+
+    ok($parse_calls >= 6, 'receiver-dot chains entered through the AST parser');
 };
 
 done_testing();

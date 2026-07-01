@@ -184,13 +184,23 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.2.3 - diagnose unsupported AST helper calls`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.3`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering.
   Acceptance: Function-call receivers, literal receivers, direct-access receivers, shape
-    receivers, and block-valued receivers lower by traversing `fluent_chain` nodes and
-    synthetic AST calls, not by splitting or rebuilding source text.
-  Verification: `pending`
-  Commit: `pending`
+    receivers, and block-valued receivers lower by traversing `fluent_chain` nodes,
+    typed receiver nodes, and typed call-argument nodes, not by splitting receiver-dot
+    source text.
+  Verification: **PASS 2026-07-01.** `MethodLowering::_lower_method_value_expr(...)`
+    now dispatches AST `fluent_chain` nodes before the legacy receiver-dot text
+    normalizers. The dispatcher maps typed receiver/call nodes onto the existing helper
+    catalog for the array, hash, string, and number receiver families while preserving
+    legacy wrapper behavior, array pipeline helper names, string/hash bridges to array
+    terminals, block-valued receivers, numeric terminal continuation behavior, and
+    covered-helper diagnostics for unsupported chain forms. Focused fake-source tests
+    prove number, string-to-array, block-array, hash-to-array, invalid numeric terminal,
+    and unsupported `substr` chain cases do not reuse poisoned chain/call/argument source
+    text.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.3.3 - lower receiver chains from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.4`
   Status: `pending`
@@ -235,8 +245,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2.1` | `done` 2026-07-01 | Value-only helper-call composition now lowers from AST call nodes. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2.2` | `done` 2026-07-01 | Aggregate-wrapper and collection/hash helper calls now lower from AST call nodes with slot-preserving compatibility. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2.3` | `done` 2026-07-01 | Unsupported covered helper-call AST forms now emit unresolved-helper diagnostics instead of generated host calls. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `pending` | Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering. |
-| 2 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `done` 2026-07-01 | Receiver-dot `fluent_chain` value chains now lower from AST receiver/call nodes. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -268,9 +278,10 @@ typed node families directly:
 
 Nested unsupported helper calls inside AST-lowered shapes and blocks still pass through an
 explicit compatibility bridge. Value-only helper-call composition is now covered by
-`.3.2.1`; aggregate/symbol-slot helper calls, receiver-dot `fluent_chain` lowering,
-statement/control lowering, and remaining return-payload helper substitution are the next
-migration children.
+`.3.2.1`; aggregate/symbol-slot helper calls are covered by `.3.2.2`; covered-call
+diagnostics are covered by `.3.2.3`; receiver-dot `fluent_chain` lowering is covered by
+`.3.3`; statement/control lowering and remaining return-payload helper substitution are
+the next migration children.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2.1 Value-Only Helper Calls
 
@@ -306,8 +317,9 @@ The compatibility policy is still explicit: wrapper calls remain deprecated alia
 per ADR `0007`, not canonical syntax. Slot reconstruction preserves bare symbol tokens
 for aggregate/source slots and quoted wrapper payloads as literals, so `array(items)`
 continues to read `@items` while `array("items")` constructs a literal payload.
-`.3.2.3` now covers diagnostics for covered calls that cannot lower cleanly. Receiver-dot
-`fluent_chain` lowering remains queued for `.3.3`.
+`.3.2.3` covers diagnostics for covered calls that cannot lower cleanly. Receiver-dot
+`fluent_chain` lowering is now covered by `.3.3`; return-payload AST traversal remains
+queued for `.3.4`.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2.3 Covered-Call Diagnostics
 
@@ -328,8 +340,34 @@ The implementation is deliberately narrow:
 - Supported helper forms remain byte-compatible with the `.3.2.1`/`.3.2.2` behavior.
 
 This is a diagnostics/telemetry leaf, not a user-function implementation leaf.
-User-defined functions remain blocked until the remaining AST value/receiver/return and
-statement/control migration work is complete.
+User-defined functions remain blocked until the remaining AST return and statement/control
+migration work is complete.
+
+## PERL-ACTIONIR-AST-MIGRATION.3.3 Receiver-Chain AST Lowering
+
+`MethodLowering::_lower_method_value_expr(...)` now consumes `fluent_chain` AST nodes for
+receiver-dot value chains before the legacy receiver-dot text normalizers run. The
+dispatcher traverses typed receiver nodes and typed call-argument nodes, then builds the
+same helper-family surfaces used by the existing Perl helper catalog.
+
+Covered receiver families:
+
+- array receiver chains, including `join_values(...)` delimiter-first mapping and the
+  private array pipeline helper names used for `split_each`, `trim_each`,
+  `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`;
+- hash receiver chains, including bare hash receiver wrapping, `hash_copy`, `flat_hash`,
+  `scalaref`, and hash-to-array bridges through `sorted_keys` / `sorted_values`;
+- string/scalar receiver chains, including bare scalar receiver wrapping, `concat` / `cat`,
+  string terminal helpers, and string-to-array bridging through `split`;
+- number receiver chains, including numeric word receiver methods, arity checks, and
+  terminal comparison continuation behavior.
+
+The focused `.3.3` test poisons top-level chain source, individual fluent-call source,
+receiver source, and argument source fields. It verifies that number chains,
+string-to-array chains, block-valued array receivers, hash-to-array chains, invalid
+numeric terminal continuations, and unsupported chain helper diagnostics all come from
+typed AST fields instead of receiver-dot source splitting. The old text normalizers remain
+only as compatibility fallback for expressions the AST parser cannot own yet.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3 Split
 
@@ -345,7 +383,8 @@ different risk profiles:
 Each child must keep existing generated behavior green while removing one text-rescan
 surface from the supported ActionIR language. User-defined functions remain blocked behind
 the completed `.3` children, because function calls must enter as AST `Call` nodes and may
-act as receiver-chain receivers.
+act as receiver-chain receivers. `.3.3` has now removed the receiver-dot text splitter from
+AST-owned value chains; `.3.4` remains the return-payload traversal child.
 
 ## PERL-ACTIONIR-AST-MIGRATION.2 Parser Seam
 
@@ -473,6 +512,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.3` | Added AST `fluent_chain` receiver-chain dispatcher; focused fake-source tests for number, string-to-array, block-array, hash-to-array, invalid numeric terminal continuation, and unsupported chain helper diagnostics; targeted public lowering probes | Receiver-dot value chains now consume typed AST receiver/call nodes before legacy receiver-dot text normalization. Frontier moves to `.3.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.3` | Added unsupported covered-helper sentinel lowering and diagnostics scan; focused tests for malformed value-only, aggregate, and nested helper calls plus descriptor metadata; targeted public lowering probes; mdBook/doctrine/KM/diff checks; phase0 1002 tests; full local CI | Covered helper families no longer leak unsupported AST forms as generated host-language calls. Unsupported covered forms now report unresolved-helper diagnostics with zero raw-Perl fallback. Frontier moves to `.3.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.2` | Added slot-aware AST aggregate-call dispatcher; focused fake-source AST tests for wrappers, copy, reducers, collection, and hash helpers; targeted public lowering probes; mdBook/doctrine/KM checks; local CI with phase0 1002 tests | Aggregate-wrapper and collection/hash helper calls now consume AST call nodes before helper lowering while preserving deprecated wrapper compatibility, symbol slots, and quoted-name boundaries. Frontier moves to `.3.2.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.1` | Added AST call dispatcher for value-only helper families; focused fake-source AST call tests; targeted public lowering probes for string, numeric, regex predicate, and coalesce/concat composition | Value-only helper-call composition now consumes AST call nodes before helper lowering; aggregate/symbol-slot helper families were left to `.3.2.2`. |

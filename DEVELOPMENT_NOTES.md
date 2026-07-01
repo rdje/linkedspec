@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.3 — receiver-dot `fluent_chain` from AST): Moved
+  receiver-dot value-chain lowering onto the ActionIR AST consumer. Durable points. (1) **The chain source is
+  no longer authoritative for supported receiver families.** `MethodLowering` now dispatches `fluent_chain`
+  nodes before the legacy receiver-dot text normalizers and uses typed receiver/call/argument fields for
+  array, hash, string, and number chains. (2) **The helper catalog remains the byte-compatibility boundary.**
+  The AST dispatcher builds the same helper-family surfaces and then enters the existing Perl helper catalog
+  through the compatibility bridge, preserving wrapper behavior, array pipeline private helper names,
+  hash/string-to-array bridges, block-valued receivers, and numeric terminal rules. (3) **Unsupported covered
+  chain helpers reuse the diagnostics channel.** A malformed chain such as `"abc".substr()` reaches the
+  `.3.2.3` unsupported-helper sentinel instead of leaking as a generated host `substr(...)` call. (4) **The old
+  receiver splitters are fallback only.** They still exist for raw/unparsed compatibility surfaces, but parsed
+  supported `fluent_chain` value expressions are now owned by AST traversal. (5) **Remaining migration risk is
+  return/control.** `.3.4` owns return-payload AST traversal; `.4` owns statement/control lowering.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.3 — covered-call diagnostics): Retired silent host-call
   leakage for helper families already owned by AST call lowering. Durable points. (1) **Known helpers are not
   future functions.** The dispatcher now distinguishes unknown calls from known helper-family calls. Unknown
@@ -27,9 +41,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   The AST bridge rebuilds quoted strings from node values, so `array("items")` remains a literal payload and
   never aliases `@items`. (4) **Nested covered calls are source-independent.** Focused fake-source tests now
   cover wrappers, `copy`, numeric reducers, collection helpers, nested value-only payloads inside hash helpers,
-  and hash terminals. (5) **Diagnostics are now a follow-up landed leaf.** `.3.2.3` replaces unsupported
-  covered-call host-call leakage with unresolved-helper telemetry; receiver-dot `fluent_chain` lowering remains
-  separate.
+  and hash terminals. (5) **Diagnostics and receiver chains are now follow-up landed leaves.** `.3.2.3`
+  replaces unsupported covered-call host-call leakage with unresolved-helper telemetry; `.3.3` moves
+  receiver-dot `fluent_chain` value chains onto AST traversal.
 
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.1 — value-only helper calls from AST): Landed the first
   production AST consumer for helper `call` nodes. Durable points. (1) **Covered calls ignore call-node source

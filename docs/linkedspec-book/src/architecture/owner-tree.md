@@ -114,9 +114,10 @@ with slot-sensitive policy. Deprecated wrapper aliases such as `scalar(...)`,
 operands, and hash helpers; their AST bridge preserves aggregate symbol slots and quoted
 wrapper literal payloads before reusing the Perl helper catalog. Unsupported covered
 helper forms now report unresolved-helper metadata instead of leaking as generated
-host-language calls. Receiver-dot chains, statement/control lowering, and remaining
-return-payload substitution are still explicit migration debt; those wrappers are not the
-canonical destination syntax.
+host-language calls. Receiver-dot value chains now consume AST `fluent_chain` nodes for
+the supported array, hash, string, and number receiver families. Statement/control
+lowering and remaining return-payload substitution are still explicit migration debt;
+those wrappers are not the canonical destination syntax.
 
 ## The facade owns routing, not semantics
 
@@ -396,9 +397,12 @@ chains. `MethodLowering` now consumes that seam for non-call value nodes: primit
 literals, scoped bare scalar reads, direct indexed/nested access, shape literals, and
 block values. It also consumes AST call nodes for value-only helpers plus
 aggregate-wrapper, collection/reducer, and hash helper families while preserving their
-existing slot policies. Receiver-chain lowering, statement/control lowering, covered-call
-diagnostics, and remaining return-payload substitution still migrate family by family, so
-any remaining source-text lowering is legacy debt rather than the model for new work.
+existing slot policies. Unsupported covered helper calls now report unresolved-helper
+diagnostics instead of leaking as generated host calls. Receiver-dot value chains now
+consume AST `fluent_chain` nodes for the array, hash, string, and number receiver
+families before the legacy receiver-dot text normalizers run. Statement/control lowering
+and remaining return-payload substitution still migrate family by family, so any
+remaining source-text lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`
 
