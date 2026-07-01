@@ -17,6 +17,7 @@ source .spec text
   -> prepare pipeline
   -> validate source envelope
   -> bootstrap parse
+  -> helper/action AST
   -> compiled_spec_state
   -> compiled_dependency_regex_state
   -> compiled_descriptor_state
@@ -24,7 +25,14 @@ source .spec text
   -> outward descriptor or parser coderef
 ```
 
-The seven stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
+The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
+
+Every backend must parse helper/action language text into typed AST/IR nodes before
+lowering, interpretation, or code emission. Direct text-to-text helper rewriting into
+host-language source is not a conforming architecture for new backend work. The Rust
+backend already follows this model with expression and statement nodes; the Perl
+reference is being migrated toward the same AST seam while preserving its public
+behavior.
 
 ## Why the pipeline matters
 

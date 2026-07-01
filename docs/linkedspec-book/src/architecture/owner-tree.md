@@ -374,6 +374,13 @@ SpecEntry emits the current backend.
 RuleIR and ActionIR carry the path toward cleaner backend-neutral semantics.
 ```
 
+That path is now explicit doctrine: supported helper/action syntax must flow through
+typed AST/IR before lowering or execution. The current Perl backend still contains
+legacy source-text lowering in parts of ActionIR, but new work must not extend that
+pattern. The migration target is the Rust-style model: parse calls, literals,
+assignments, blocks, and receiver-dot chains into structured nodes first, then lower or
+execute those nodes.
+
 ## `ActionIR::*`
 
 The `LinkedSpec::ActionIR::*` subtree is where the helper DSL becomes structured semantics.

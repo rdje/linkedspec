@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.0 — adopt text-to-AST doctrine
+
+**Scope:** ADR, task-tree ownership, mdBook, Knowledge Map, and live docs. No parser/compiler/runtime code
+changed.
+
+**What changed:** Text-to-AST is now an accepted cross-variant doctrine. Every backend must parse helper/action
+language into typed AST/IR before lowering, interpretation, or code emission. Text-to-text lowering is legacy
+migration debt, not an acceptable architecture for new supported surfaces.
+
+**Perl impact:** The Perl reference backend must migrate away from ActionIR source-text lowering in careful
+slices. The first executable leaves inventory the current lowering sites, introduce an AST parser seam behind
+existing behavior, then replace value/receiver and statement/control lowering families under regression locks.
+
+**Book impact:** The variant-neutral mdBook now states the AST requirement in the backend handoff, compiler
+pipeline, formal grammar, and architecture chapters. User-defined functions must consume this AST path rather
+than adding textual macro expansion.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.4 — own user-defined function surface
 
 **Scope:** Task-tree ownership, roadmap/live continuity docs, and active-frontier redirection. No

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.0 — text-to-AST doctrine adopted): User explicitly rejected Perl
+  source-text lowering as too fragile and adopted the Rust-style text-to-AST path as cross-variant doctrine.
+  Durable points. (1) **AST before lowering is now a contract.** Every backend must parse helper/action DSL
+  text into typed AST/IR before lowering, interpretation, or code emission. (2) **Perl text-to-text is debt.**
+  Existing structured source scans remain only as migration baseline; new supported surfaces must not extend
+  them. (3) **User functions depend on this.** Implement `fn` through AST call/function nodes, not textual macro
+  expansion. (4) **Future variants inherit the rule.** Julia and Dart must start text-to-AST; Lua gets the same
+  rule if later accepted by ADR. (5) **Migration must be sliced.** Inventory first, parser seam second, then
+  value/receiver and statement/control family replacement under phase0/oracle locks.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.4 — user-defined function surface owned): Accepted user-defined functions
   into the active terse lane, with a deliberately constrained first contract. Durable points. (1) **Function
   calls are value expressions.** They must compose anywhere an ordinary value can compose, including helper

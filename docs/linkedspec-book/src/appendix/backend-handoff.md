@@ -9,9 +9,17 @@ and test artifact you need — in reading order.
 A LinkedSpec backend compiles `.spec` grammar files into runnable parsers. It must:
 
 1. Parse `.spec` files according to the formal grammar.
-2. Compile them into runtime handlers via the HandlerIR pipeline.
-3. Execute those handlers with identical semantics to the Perl reference.
-4. Pass the language-neutral test corpus.
+2. Parse helper/action language text into typed AST/IR nodes before lowering,
+   interpretation, or code emission.
+3. Compile the parsed model into runtime handlers via the HandlerIR pipeline.
+4. Execute those handlers with identical semantics to the Perl reference.
+5. Pass the language-neutral test corpus.
+
+Text-to-AST is a backend conformance rule, not an optional implementation style.
+Do not build a backend by applying textual helper rewrites directly into host-language
+source. The Perl reference still contains legacy text-to-text lowering in parts of
+ActionIR, but that is migration debt; new backends should follow the typed-AST model
+used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
 specified in the documents below.
@@ -72,6 +80,12 @@ tracked separately.
            │
            ▼
 ┌─────────────────────────┐
+│  Parsed .spec +          │  ← typed AST/IR, never raw textual helper rewrites
+│  helper/action AST       │
+└──────────┬──────────────┘
+           │
+           ▼
+┌─────────────────────────┐
 │  ActionIR Lowering       │  ← Backend-neutral (helpers → canonical events)
 │  (100+ helpers, 10       │
 │   families)              │
@@ -114,21 +128,26 @@ It provides:
    Can be bootstrap-driven (hardcoded grammar) or self-hosted (parse spec.spec
    with itself, once bootstrapped).
 
-2. **Compiler** — transforms parsed entries into HandlerIR nodes. You can reuse
-   the ActionIR lowering approach (canonical events → lowered code strings) or
-   implement a direct lowering from parsed entries to HandlerIR.
+2. **Helper/action AST parser** — parses lifecycle/action helper code into typed
+   expression and statement nodes. Calls, literals, variables, blocks, direct
+   access, assignments, and receiver-dot chains must be represented structurally.
+   Text-to-text helper rewriting is not a conforming design for new backends.
 
-3. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
+3. **Compiler** — transforms parsed entries and helper/action AST nodes into
+   HandlerIR nodes. You can reuse the ActionIR lowering approach, but the input to
+   lowering is structured AST/IR rather than raw helper source text.
+
+4. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
    in your target language. Must handle all 10 variant kinds.
 
-4. **Runtime** — the execution engine:
+5. **Runtime** — the execution engine:
    - Regex engine with position tracking (equivalent to `//gcp` and `\G` anchoring).
    - Accumulator model (arrays, hashes, scalars).
    - Lifecycle execution engine (I/LS/LE/E/EX/IT/LX ordering).
    - BACKTRACK (local cursor save/restore).
    - Zero-progress guard.
 
-5. **Test harness** — runs `tests/corpus/` entries and compares output to
+6. **Test harness** — runs `tests/corpus/` entries and compares output to
    `expected.json`.
 
 ## Practical Notes

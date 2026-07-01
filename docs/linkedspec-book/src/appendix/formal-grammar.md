@@ -6,6 +6,9 @@ the Perl backend parses — it describes **what** constitutes valid `.spec` synt
 **what** each construct means.
 
 Every shipped LinkedSpec backend must accept exactly the language defined here.
+Backends must parse that language into typed AST/IR before lowering or execution;
+textual helper rewrites directly into host-language source are legacy implementation
+debt, not part of the contract.
 
 ## 1. Paragraph Model
 
