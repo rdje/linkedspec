@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.4 — while control lowering from AST): Moved attached while
+  loops onto typed AST consumption without changing loop semantics. Durable points. (1) **While controls now
+  use the AST bridge.** Attached `while(cond) { ... }` statements parse through `LinkedSpec::ActionIR::AST`
+  before the existing while lowerer runs. (2) **The guard is unchanged.** The bridge materializes typed
+  condition/body fields, then reuses the existing `ControlFlow` lowerer so condition re-evaluation and the
+  deterministic 10000-iteration safety diagnostic stay stable. (3) **Bodyless marker while is not a new
+  product surface.** `control_while` marker nodes still parse for shape consistency, but lowering continues to
+  require an attached body because there is no current `endwhile` syntax. (4) **Structured-control `.4.4`
+  children are now complete.** The next owned step is `.5`: fallback retirement and user-defined functions on
+  the AST path, split before code if needed.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.3 — switch-family control lowering from AST): Moved the switch
   structured-control family onto typed AST consumption without changing switch semantics. Durable points.
   (1) **Switch controls now share the AST bridge.** `switch`, `case`, `default`, `endcase`, and `endswitch`

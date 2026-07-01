@@ -421,6 +421,60 @@ subtest 'switch control lowering consumes AST nodes' => sub {
     ok($parse_calls >= 8, 'switch control lowering entered through the AST parser');
 };
 
+subtest 'while control lowering consumes AST nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $call = sub {
+        my ($name, @args) = @_;
+        return { kind => 'call', name => $name, source => '__bad_call_'.$name.'__()', args => \@args };
+    };
+    my $stmt = sub {
+        my ($expr) = @_;
+        return { kind => 'action_stmt', source => '__bad_stmt_source__()', expr => $expr };
+    };
+    my $block_return = sub {
+        my ($name) = @_;
+        return {
+            kind => 'action_block',
+            source => '__bad_block_source__()',
+            statements => [$stmt->($call->('return', $var->($name)))],
+        };
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            return {
+                kind => 'control_while',
+                source => '__bad_control_while__()',
+                keyword => 'while',
+                canonical_keyword => 'while',
+                args => [$var->('safe_condition')],
+                condition => $var->('safe_condition'),
+                body => $block_return->('safe_loop_value'),
+            } if $expr eq 'while(poison_condition) { poison_body() }';
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $loop = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{while(poison_condition) { poison_body() }},
+        );
+        like($loop, qr/do \{ my \$__ls_while_guard_\d+ = 0; for \(; safe_condition; \)/, 'attached while condition lowers from AST condition field');
+        like($loop, qr/LinkedSpec while iteration safety limit exceeded after 10000 iterations/, 'attached while keeps the existing iteration-safety guard');
+        like($loop, qr/return \$safe_loop_value/, 'attached while body lowers from AST body statements');
+        unlike($loop, qr/poison|__bad_/, 'while control lowering does not reuse original text or AST source fields');
+    }
+
+    ok($parse_calls >= 1, 'while control lowering entered through the AST parser');
+};
+
 subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     my $parse_calls = 0;
     my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;

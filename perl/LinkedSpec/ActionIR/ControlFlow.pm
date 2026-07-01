@@ -362,13 +362,25 @@ sub _control_ast_flow_node_source_expr {
 
  return 'endcase()' if $kind eq 'control_endcase';
  return 'endswitch()' if $kind eq 'control_endswitch';
+
+ if ($kind eq 'control_while') {
+  my $condition = _control_ast_value_source_expr($node->{condition});
+  return undef unless defined($condition) && length($condition);
+  my $head = 'while('.$condition.')';
+  if (ref($node->{body}) eq 'HASH') {
+   my $body = _control_ast_action_block_source($node->{body});
+   return undef unless defined $body;
+   return $head.' { '.$body.' }'
+  }
+  return $head
+ }
  return undef
 }
 
 sub _control_ast_flow_source_expr {
  my ($expr, $deps) = @_;
  my $node = ref($expr) eq 'HASH' ? $expr : _parse_control_flow_ast_expr($expr, $deps);
- return undef unless ref($node) eq 'HASH' && (($node->{kind} // '') =~ /\Acontrol_(?:if|else|endif|switch|case|default|endcase|endswitch)\z/o);
+ return undef unless ref($node) eq 'HASH' && (($node->{kind} // '') =~ /\Acontrol_(?:if|else|endif|switch|case|default|endcase|endswitch|while)\z/o);
  return _control_ast_flow_node_source_expr($node)
 }
 

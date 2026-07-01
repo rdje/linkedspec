@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.4 — lower while controls from AST
+
+**Scope:** Perl ActionIR control-flow lowering, focused AST parser/lowering tests, task-tree/roadmap/live docs,
+mdBook architecture status, and Knowledge Map.
+
+**What changed:** `LinkedSpec::ActionIR::ControlFlow` now parses attached `while(cond) { ... }` statements
+through the ActionIR AST parser before entering the existing while lowerer. The bridge materializes trusted loop
+conditions and attached body statements from typed `control_while` fields instead of reusing original statement
+text or AST `source` strings.
+
+**Compatibility boundary:** Generated Perl loop shape, condition re-evaluation, attached-body lowering, and the
+deterministic 10000-iteration safety guard remain unchanged. Bodyless `while(...)` marker nodes remain parser
+shape only because the current DSL has no `endwhile` product syntax.
+
+**Tests:** Syntax checks passed for `ActionIR::ControlFlow` and the focused parser test. `prove -v -Iperl
+t/actionir_ast_parser.t` passed with 19 focused subtests, including fake-source locks for attached while
+condition/body lowering and guard preservation. `perl -c perl/LinkedSpec.pm`,
+`perl -c -Iperl t/phase0_regression.t`, and `prove -q -Iperl t/phase0_regression.t` passed; phase0 covered
+1002 tests. `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`, and
+`bash tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.3 — lower switch-family controls from AST
 
 **Scope:** Perl ActionIR control-flow lowering, focused AST parser/lowering tests, task-tree/roadmap/live docs,

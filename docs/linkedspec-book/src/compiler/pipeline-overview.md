@@ -62,9 +62,11 @@ structured-control statements as typed `control_*` nodes for `if`/`when`/`otherw
 branches. `if`/`when`/`otherwise` statement lowering now consumes typed condition and
 body nodes before reusing the existing branch engine. `switch`/`case`/`default` statement
 lowering now consumes typed source, match, body, branch-list, and end-marker nodes before
-reusing the existing switch stack engine. `while` lowering remains the last queued
-structured-control family. The wrapper forms remain compatibility syntax, not the
-canonical destination surface.
+reusing the existing switch stack engine. Attached `while(cond) { ... }` statement
+lowering now consumes typed condition/body nodes before reusing the existing loop lowerer
+and its deterministic 10000-iteration safety guard. Bodyless `while(...)` marker nodes
+remain parser shape only because the current DSL has no `endwhile` product syntax. The
+wrapper forms remain compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters
 

@@ -377,12 +377,26 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.3 - lower switch controls from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.4`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Lower `while` statement forms from AST.
   Acceptance: While conditions and attached/marker body statements consume typed AST fields
     while preserving the existing iteration-safety guard and generated behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** `LinkedSpec::ActionIR::ControlFlow`
+    now parses attached `while(cond) { ... }` statements through
+    `LinkedSpec::ActionIR::AST`, materializes trusted loop conditions and
+    attached body statements from typed `control_while` fields, and then reuses
+    the existing while lowerer with the deterministic 10000-iteration guard.
+    Bodyless `while(...)` marker nodes remain parser shape only because the
+    current DSL has no `endwhile` product syntax. Fake-source focused locks
+    prove original statement text and AST `source` fields are not reused for
+    attached while controls. Checks passed: `perl -Iperl -c
+    perl/LinkedSpec/ActionIR/ControlFlow.pm`, `perl -Iperl -c
+    t/actionir_ast_parser.t`, `prove -v -Iperl t/actionir_ast_parser.t`,
+    `perl -c perl/LinkedSpec.pm`, `perl -c -Iperl t/phase0_regression.t`,
+    and `prove -q -Iperl t/phase0_regression.t` with phase0 1002 tests;
+    `mdbook build docs/linkedspec-book`; memory, doctrine, and Knowledge Map
+    gates; `git diff --check`; and `bash tools/run_ci_local.sh`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.4 - lower while controls from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5`
   Status: `pending`
@@ -419,7 +433,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.1` | `done` 2026-07-01 | Typed control-flow AST parser nodes and focused parser locks landed before lowering consumers switch over. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.2` | `done` 2026-07-01 | If/when/otherwise statement controls now lower from typed condition/body nodes. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.4.3` | `done` 2026-07-01 | Switch/case/default statement controls now lower from typed source/match/body/default nodes. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | `pending` | Lower `while` statement forms from typed condition/body nodes. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | `done` 2026-07-01 | Attached while statement controls now lower from typed condition/body nodes. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.5` | `pending` | Retire supported-surface text fallback and unblock user-defined functions on AST. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -675,6 +690,20 @@ available. Focused tests poison the original statement text, fake fallback bodie
 every AST `source` field, then prove attached and marker switch-family output comes from
 typed fields. `while` remains queued for `.4.4.4`.
 
+## PERL-ACTIONIR-AST-MIGRATION.4.4.4 While Control AST Lowering
+
+`LinkedSpec::ActionIR::ControlFlow` now runs the existing attached `while(cond) { ... }`
+statement loop surface through the typed AST parser before invoking the existing while
+lowerer. The bridge materializes trusted statement text from typed `condition` and `body`
+fields, then lets the established lowerer preserve condition re-evaluation, body lowering,
+and the deterministic 10000-iteration safety guard.
+
+Bodyless `while(...)` marker nodes still parse as `control_while`, but they remain
+parser-shape-only for lowering because the current DSL has no `endwhile` control or
+marker-style while product syntax. Focused tests poison the original statement text and
+every AST `source` field, then prove attached while output comes from typed condition/body
+fields while retaining the guard diagnostic.
+
 ## PERL-ACTIONIR-AST-MIGRATION.4.1 Assignment/Mutation Operator AST Statements
 
 The first statement-lowering code leaf moves the three assignment-style operator nodes
@@ -859,6 +888,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.4` | Added `ControlFlow` AST bridge for attached while controls; added focused fake-source locks for typed condition/body lowering and guard preservation; syntax checks; focused AST parser suite with 19 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Attached while structured controls now lower from typed condition/body AST fields while preserving the existing iteration-safety guard. Frontier moves to `.5`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.3` | Added `ControlFlow` AST bridge for switch, case, default, endcase, and endswitch; added focused fake-source locks for attached switch/case/default and marker switch/case/endcase/default/endswitch; syntax checks; focused AST parser suite with 18 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Switch-family structured controls now lower from typed source/match/body/default AST fields while preserving existing switch stack semantics. Frontier moves to `.4.4.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.2` | Added `ControlFlow` AST bridge for if/i/when, elseif/elif, else/otherwise, and endif; added focused fake-source locks for attached if/elseif/else, when/otherwise, and marker if/elseif/else/endif; syntax checks; focused AST parser suite with 17 subtests; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | If-family structured controls now lower from typed condition/body AST fields while preserving existing branch semantics. Frontier moves to `.4.4.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4.1` | Added typed control-flow AST parser nodes for attached and marker forms; added focused parser locks for if/when/elseif/elif/else/otherwise/endif/switch/case/default/endcase/endswitch/while, bare and parenthesized markers, plus inline value-helper boundaries; syntax checks; focused AST parser suite with 16 subtests; direct phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Structured control forms now parse into typed AST nodes with parsed condition/source/match/body/case/default fields while production lowering remains unchanged. Frontier moves to `.4.4.2`. |
