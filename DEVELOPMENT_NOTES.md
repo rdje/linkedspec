@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5 — fallback/function handoff split): Split the last Perl ActionIR
+  AST migration parent before code. Durable points. (1) **Fallback retirement needs an audit first.** `.5.1`
+  classifies remaining source-text fallback as compatibility debt, supported-surface leakage, or function-handoff
+  dependency before changing behavior. (2) **Supported AST-covered leakage gets its own code leaf.** `.5.2`
+  owns diagnostics/no-host-leakage behavior for forms already represented by typed AST nodes. (3) **Function
+  calls stay on AST call nodes.** `.5.3` prepares user-function call resolution through `call`/`fluent_chain`
+  nodes, preserving receiver chaining and standalone-result discard. (4) **`fn` definition grammar is not
+  bootstrap-owned.** `.5.4` locks `specs/spec.spec` ownership and removes or proves absent permanent bootstrap
+  parser support for `fn <name>(...) { ... }`.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.4 — while control lowering from AST): Moved attached while
   loops onto typed AST consumption without changing loop semantics. Durable points. (1) **While controls now
   use the AST bridge.** Attached `while(cond) { ... }` statements parse through `LinkedSpec::ActionIR::AST`

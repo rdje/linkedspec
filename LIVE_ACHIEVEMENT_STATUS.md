@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5 — fallback retirement and function handoff split**
+  (TASK TREE + LIVE DOCS; **no parser/compiler/runtime code change**). The final Perl ActionIR AST migration
+  parent is now split before code into `.5.1` fallback-boundary audit, `.5.2` AST-covered supported-surface
+  fallback leakage retirement, `.5.3` user-function AST call handoff, and `.5.4` `specs/spec.spec` function
+  grammar plus bootstrap-parser retirement lock. The split preserves the user decision that lasting
+  `fn <name>(...) { ... }` grammar belongs in `specs/spec.spec`, while bootstrap parser support is temporary
+  migration debt to remove or prove absent after the AST path can carry the surface.
+  **Verification:** `mdbook build docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates PASS;
+  `git diff --check` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.1` audit the remaining supported-surface text fallback boundary
+  before code.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.4.4 — while control lowering from AST**
   (PERL ACTIONIR CONTROLFLOW + FOCUSED TEST + BOOK/KM/LIVE DOCS). `LinkedSpec::ActionIR::ControlFlow` now
   parses attached `while(cond) { ... }` statements through the ActionIR AST parser before reusing the existing

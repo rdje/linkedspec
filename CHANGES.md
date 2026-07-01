@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5 — split fallback retirement and function handoff
+
+**Scope:** Perl ActionIR migration task tree, live continuity docs, and split planning. No parser/compiler/runtime
+code changed.
+
+**What changed:** Split the broad fallback-retirement/function-handoff parent into focused children:
+`.5.1` fallback-boundary audit, `.5.2` AST-covered supported-surface fallback leakage retirement, `.5.3`
+user-function AST call handoff, and `.5.4` `specs/spec.spec` function grammar plus bootstrap-parser retirement
+lock.
+
+**Reason:** The remaining migration work combines compatibility fallback classification, diagnostics policy, and
+the user-function handoff. Splitting keeps the next code slices narrow and preserves the doctrine that lasting
+`fn <name>(...) { ... }` grammar belongs in `specs/spec.spec`, not the bootstrap parser.
+
+**Checks:** `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, and `git diff --check`
+passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.4 — lower while controls from AST
 
 **Scope:** Perl ActionIR control-flow lowering, focused AST parser/lowering tests, task-tree/roadmap/live docs,
