@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3 — split AST value lowering
+
+**Scope:** Task-tree split, roadmap/live continuity docs, and current frontier update. No parser/compiler/runtime
+code changed.
+
+**What changed:** Converted broad `.3` into a parent contract with four child leaves: `.3.1` non-call value AST
+dispatcher, `.3.2` AST helper-call composition, `.3.3` AST receiver-dot value chains, and `.3.4` AST
+return-payload traversal plus diagnostics.
+
+**Reason:** Value expressions, helper composition, receiver chains, and return-payload helper substitution are
+different lowering mechanisms. Splitting them before code keeps the Perl text-to-AST migration signoff-sized
+and keeps user-defined functions blocked until calls are carried by typed AST nodes.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.2 — add Perl ActionIR AST parser seam
 
 **Scope:** Perl ActionIR parser modules, focused parser tests, mdBook architecture/status text, Knowledge Map,

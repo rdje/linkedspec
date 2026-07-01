@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3 — value/receiver AST lowering split**
+  (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). The broad `.3` parent is now divided into
+  four executable children: `.3.1` non-call value AST dispatcher, `.3.2` AST helper-call composition, `.3.3`
+  AST receiver-dot value chains, and `.3.4` AST return-payload traversal plus diagnostics. This keeps
+  user-defined functions blocked until function calls can enter the Perl reference as typed AST `Call` nodes
+  and act as ordinary receiver-chain-capable value expressions.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.1` introduce the AST value-lowering dispatcher for non-call
+  value nodes.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.2 — Perl ActionIR AST parser seam added**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS; **existing lowering unchanged**). Added
   `LinkedSpec::ActionIR::AST` and `LinkedSpec::ActionIR::AST::Parser` as an additive typed parser seam behind

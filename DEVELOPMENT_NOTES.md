@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3 — value/receiver AST lowering split): Split the broad `.3`
+  migration before code. Durable points. (1) **The parent is a contract, not an implementation leaf.**
+  Value lowering spans non-call values, helper-call composition, receiver-dot chains, and return-payload helper
+  substitution; those need separate verification surfaces. (2) **`.3.1` is the first executable child.**
+  It should route `_lower_method_value_expr(...)` through `LinkedSpec::ActionIR::AST` for primitive literals,
+  bare scalar reads, direct access, shape literals, and block values while preserving helper-call behavior
+  behind an explicit compatibility bridge. (3) **Receiver chains wait for `.3.3`.** Function-call, literal,
+  direct-access, shape, and block receivers must traverse `fluent_chain` nodes rather than rebuilding helper
+  call text. (4) **Return helper substitution waits for `.3.4`.** The regex replacement loop in
+  `_lower_return_payload_expr(...)` must become AST traversal with diagnostics. (5) **User-defined functions
+  remain blocked.** They must consume AST `Call` nodes after the value/receiver children are landed.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.2 — Perl ActionIR AST parser seam added): Landed the first additive
   code seam for the Perl text-to-AST migration. Durable points. (1) **The seam is read-only for now.**
   `LinkedSpec::ActionIR::AST` / `AST::Parser` parse helper/action text into typed nodes, but

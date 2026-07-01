@@ -83,12 +83,53 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.2 - add Perl ActionIR AST parser seam`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3`
-  Status: `pending`
+  Status: `split` (2026-07-01)
   Goal: Replace value-expression and receiver-chain lowering with AST lowering.
   Acceptance: Value calls, helper composition, direct access, shape literals, blocks, and
     receiver-dot chains lower from typed AST nodes, not source-text rescans. Existing phase0
     and terse oracle fixtures remain green; accidental host-call leakage becomes a
     LinkedSpec diagnostic.
+  Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
+  Verification: **PASS 2026-07-01 (split only).** Split the broad value/receiver migration
+    into focused child leaves before code, preserving the `.3` acceptance as the parent
+    contract.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.3 - split AST value lowering`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.3.1`
+  Status: `pending`
+  Goal: Introduce the AST value-lowering dispatcher for non-call value nodes.
+  Acceptance: `_lower_method_value_expr(...)` parses with `LinkedSpec::ActionIR::AST` and
+    dispatches primitive literals, bare scalar reads, direct indexed/nested access, array
+    and hash shape literals, and block values from typed nodes. Existing helper-call
+    behavior may remain behind an explicit compatibility bridge for this leaf, but these
+    supported non-call nodes must no longer depend on fresh source-text rescans.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.3.2`
+  Status: `pending`
+  Goal: Lower helper-call value composition from AST call nodes.
+  Acceptance: Supported value helper calls recursively consume AST argument nodes for
+    helper composition and aggregate wrappers. Text fallback is limited to explicitly
+    unsupported call families with diagnostics/telemetry, not silent host-call leakage.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.3.3`
+  Status: `pending`
+  Goal: Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering.
+  Acceptance: Function-call receivers, literal receivers, direct-access receivers, shape
+    receivers, and block-valued receivers lower by traversing `fluent_chain` nodes and
+    synthetic AST calls, not by splitting or rebuilding source text.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.3.4`
+  Status: `pending`
+  Goal: Replace return-payload helper substitution with AST traversal and diagnostics.
+  Acceptance: `_lower_return_payload_expr(...)` walks typed value/call/chain nodes instead
+    of regex-substituting helper-looking source spans; accidental generated host-language
+    calls on supported surfaces emit a LinkedSpec diagnostic.
   Verification: `pending`
   Commit: `pending`
 
@@ -117,7 +158,27 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.0` | `done` 2026-07-01 | Doctrine adoption and book alignment before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.1` | `done` 2026-07-01 | Perl text-to-text lowering inventory, AST node set, and replacement order locked before implementation. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.2` | `done` 2026-07-01 | Additive `ActionIR::AST` parser seam and focused parser tests landed without switching lowering consumers. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.3` | `pending` | Replace value-expression and receiver-chain lowering with AST lowering. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.3` | `split` 2026-07-01 | Parent contract for value-expression and receiver-chain AST lowering. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.1` | `pending` | Introduce the AST value-lowering dispatcher for non-call value nodes. |
+| 2 | `PERL-ACTIONIR-AST-MIGRATION.3.2` | `pending` | Lower helper-call value composition from AST call nodes. |
+| 3 | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `pending` | Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering. |
+| 4 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
+
+## PERL-ACTIONIR-AST-MIGRATION.3 Split
+
+`PERL-ACTIONIR-AST-MIGRATION.3` is intentionally a parent contract, not a single
+implementation leaf. The migration touches four different lowering mechanisms with
+different risk profiles:
+
+- non-call value nodes in `_lower_method_value_expr(...)`;
+- helper-call value composition and aggregate-wrapper call arguments;
+- receiver-dot value chains;
+- return-payload helper substitution and host-call leakage diagnostics.
+
+Each child must keep existing generated behavior green while removing one text-rescan
+surface from the supported ActionIR language. User-defined functions remain blocked behind
+the completed `.3` children, because function calls must enter as AST `Call` nodes and may
+act as receiver-chain receivers.
 
 ## PERL-ACTIONIR-AST-MIGRATION.2 Parser Seam
 
@@ -242,6 +303,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3` | Split broad `.3` into `.3.1` non-call value dispatcher, `.3.2` AST helper-call composition, `.3.3` AST receiver chains, and `.3.4` AST return-payload traversal/diagnostics | Value/receiver migration is now owned by narrow children before code. Frontier moves to `.3.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.2` | Added `ActionIR::AST` / `AST::Parser`; focused parser tests; local CI test wiring; KM fact `perl-actionir-ast-parser-seam` + regenerated map; mdBook backend/pipeline/owner-tree status; syntax/focused/phase0/local-CI/diff/memory/doctrine/KM checks | Additive Perl AST parser seam exists behind current lowering behavior. Parser covers calls, literals, variables, direct access, shapes, block values, statements, assignments, and receiver chains; `.3` is the next consumer migration leaf. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.1` | Perl ActionIR text-lowering inventory; Rust-aligned AST node set; replacement order; KM fact `perl-actionir-text-to-ast-inventory` + regenerated map; roadmap/task-tree/live-doc sync; stale-frontier, memory/doctrine/KM/diff checks; mdBook build | Perl text-to-text lowering boundaries are mapped before code. Parser seam `.2` is the next frontier; no parser/compiler/runtime code changed. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.0` | ADR `0011`; KM fact `text-to-ast-backend-doctrine` + regenerated map; mdBook backend-handoff/pipeline/formal/architecture updates; roadmap/task-tree/live-doc sync; memory/doctrine/KM/diff checks; mdBook build | Text-to-AST adopted as a cross-variant doctrine before code. Perl ActionIR text-to-text lowering is now migration debt; future backends must parse helper/action text into typed AST/IR before lowering/execution. No parser/compiler/runtime code changed. |
