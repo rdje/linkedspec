@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.1 — non-call value AST lowering dispatcher): Landed the first
+  production consumer of the Perl ActionIR AST seam. Durable points. (1) **The dispatcher is deliberately
+  partial.** `_lower_method_value_expr(...)` now parses with `LinkedSpec::ActionIR::AST`, but top-level helper
+  calls and receiver chains stay on compatibility paths until `.3.2`/`.3.3`. (2) **Non-call values are AST
+  lowered.** Primitive literals, scoped bare scalar reads, direct indexed/nested access, shape literals, and
+  block values lower from typed nodes. (3) **Context still matters for bare identifiers.** Bare variables become
+  `$name` only in value slots that already accepted scalar reads; `scalaref(...)` path atoms such as `{content}`
+  remain literal keys. (4) **Reserved direct-access atoms still opt out.** `foo["a"][true]` and
+  `foo["a"][CAPTURE]` still leave the whole expression on the legacy fallback surface rather than lowering to a
+  dereference. (5) **Block statement side effects are not done yet.** AST block values lower final value and
+  block-return payloads, but statement-level side effects still delegate to the existing statement lowerer until
+  the `.4` statement/control migration.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3 — value/receiver AST lowering split): Split the broad `.3`
   migration before code. Durable points. (1) **The parent is a contract, not an implementation leaf.**
   Value lowering spans non-call values, helper-call composition, receiver-dot chains, and return-payload helper

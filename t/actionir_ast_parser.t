@@ -110,9 +110,40 @@ subtest 'receiver chains accept all expression receivers' => sub {
     is_deeply([map { $_->{method} } @{$block_receiver->{calls}}], ['sorted', 'join_values'], 'block receiver chain methods are ordered');
 };
 
-subtest 'parser seam is additive' => sub {
+subtest 'non-call value lowering consumes AST nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            ++$parse_calls;
+            return $orig_parse_action_expr->(@_);
+        };
+
+        my $shape = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{return([value, true, foo["a"][scalar(i)], { key => value }])},
+        );
+        is(
+            $shape,
+            q!return [$value, do { require JSON::PP; JSON::PP::true }, $foo->{"a"}->[$i], {$key => $value}]!,
+            'AST value lowering preserves shape, scalar-read, literal, and direct-access output',
+        );
+
+        my $block = LinkedSpec::call_spec_handler_subst('Top', q{return({ set(x,"a"); x })});
+        is(
+            $block,
+            q!return do { $x = "a"; $x }!,
+            'AST value lowering preserves block-value output',
+        );
+    }
+
+    ok($parse_calls >= 2, 'value lowering invoked the AST parser for non-call value expressions');
+};
+
+subtest 'parser seam is incremental' => sub {
     my $lowered = LinkedSpec::call_spec_handler_subst('Top', 'return(3.5.floor().add(1))');
-    like($lowered, qr/__ls_num_floor.*__ls_num_add/s, 'existing ActionIR lowering remains authoritative after AST parser introduction');
+    like($lowered, qr/__ls_num_floor.*__ls_num_add/s, 'receiver-chain lowering remains on the compatibility path until the fluent-chain leaf');
 };
 
 done_testing();

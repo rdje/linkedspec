@@ -7,10 +7,11 @@ answers:
   - "can function calls be receiver chain receivers in Perl AST"
   - "are standalone function call results dropped"
   - "does the Perl AST parser replace RewritePipeline yet"
+  - "does Perl MethodLowering consume the ActionIR AST"
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, parser, migration]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.2 added LinkedSpec::ActionIR::AST and LinkedSpec::ActionIR::AST::Parser plus t/actionir_ast_parser.t. The parser covers action blocks/statements, calls, literals, variables, direct access, shape literals, block values, assignments, and receiver-dot chains with source spans. It is additive: RewritePipeline and MethodLowering remain authoritative until later migration leaves switch consumers."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.2 added LinkedSpec::ActionIR::AST and LinkedSpec::ActionIR::AST::Parser plus t/actionir_ast_parser.t. The parser covers action blocks/statements, calls, literals, variables, direct access, shape literals, block values, assignments, and receiver-dot chains with source spans. PERL-ACTIONIR-AST-MIGRATION.3.1 switched MethodLowering non-call value nodes to consume this AST for literals, scoped bare scalar reads, direct access, shape literals, and block values; helper-call composition, receiver chains, statement/control lowering, and return-payload substitution remain queued."
 reverify: "prove -Iperl t/actionir_ast_parser.t && perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm"
 ---
 
@@ -29,7 +30,9 @@ Standalone expression statements carry `drops_value => 1`, so helper calls and f
 user-defined function calls silently discard their value when not consumed. A function
 call, numeric literal, or block value can be a receiver-chain receiver.
 
-This parser does not replace production lowering yet. `RewritePipeline`,
-`MethodLowering`, and `RuleIR::EmitContext` still own the current generated Perl behavior
-until `PERL-ACTIONIR-AST-MIGRATION.3+` switches value/receiver and statement/control
-consumers over to AST.
+This parser does not replace all production lowering yet. `MethodLowering` now consumes
+the AST for non-call value nodes: primitive literals, scoped bare scalar reads, direct
+indexed/nested access, array/hash shape literals, and block values. Helper-call
+composition, receiver-dot `fluent_chain` lowering, statement/control lowering, and
+remaining return-payload helper substitution still migrate in later
+`PERL-ACTIONIR-AST-MIGRATION.3+` leaves.

@@ -19,10 +19,13 @@ Text-to-AST is a backend conformance rule, not an optional implementation style.
 Do not build a backend by applying textual helper rewrites directly into host-language
 source. The Perl reference now has an additive `LinkedSpec::ActionIR::AST` parser seam
 for calls, literals, variables, direct access, shape literals, block values,
-assignments, expression statements, and receiver-dot chains. Its older ActionIR lowering
-consumers still migrate family by family, so any remaining text-to-text lowering is
-migration debt rather than a backend pattern to copy. New backends should follow the
-typed-AST model used by the Rust implementation.
+assignments, expression statements, and receiver-dot chains. Its `MethodLowering`
+consumer has started using that AST for non-call value expressions: primitive literals,
+scoped bare scalar reads, direct indexed/nested access, shape literals, and block
+values. Helper-call composition, receiver-dot chains, statement/control lowering, and
+remaining return-payload substitution are still migrating family by family, so any
+remaining text-to-text lowering is migration debt rather than a backend pattern to copy.
+New backends should follow the typed-AST model used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
 specified in the documents below.

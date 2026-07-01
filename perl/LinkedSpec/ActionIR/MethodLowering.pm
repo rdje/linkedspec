@@ -597,6 +597,18 @@ sub _lower_block_value_expr {
  return 'do { '.join(' ', @lowered).' }'
 }
 
+sub _parse_method_value_ast_expr {
+ my ($expr, $deps) = @_;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST');
+ return LinkedSpec::ActionIR::AST::parse_action_expr($expr, { deps => $deps || {} })
+}
+
+sub _is_reserved_actionir_value_symbol {
+ my ($name) = @_;
+ return 0 unless defined($name) && length($name);
+ return $name =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o ? 1 : 0
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_method_value_expr
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
@@ -1080,14 +1092,213 @@ sub _lower_method_value_expr {
   }
   if ($op eq 'uniq') {
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_key = defined($_) ? "S$_" : "U"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }';
+ }
+
+  return undef
+ };
+ my $legacy_method_value_expr = sub {
+  my ($source_expr) = @_;
+  return undef unless defined $source_expr;
+  my $source_trimmed = $trim_action_ir_value->($source_expr);
+  return undef unless defined($source_trimmed) && length($source_trimmed);
+  my $compat_deps = ref($deps) eq 'HASH'
+   ? { %$deps, __actionir_ast_value_lowering_compat_bridge => 1 }
+   : { __actionir_ast_value_lowering_compat_bridge => 1 };
+  return _lower_method_value_expr($source_trimmed, $compat_deps)
+ };
+ my $lower_ast_value_node;
+ my $lower_ast_direct_access_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH';
+  my $kind = $node->{kind} // '';
+  my $base = $kind eq 'indexed_var' ? $node->{name} : $node->{base};
+  return undef if _is_reserved_actionir_value_symbol($base);
+  return undef unless defined($base) && $base =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+
+  my @segments;
+  if ($kind eq 'indexed_var') {
+   push @segments, { kind => 'index', expr => $node->{index} };
+  } elsif ($kind eq 'nested_access') {
+   @segments = @{$node->{segments} || []};
+  } else {
+   return undef;
+  }
+  return undef unless @segments;
+
+  my $lowered = '$'.$base;
+  foreach my $segment (@segments) {
+   my $segment_kind = $segment->{kind} // '';
+   if ($segment_kind eq 'key') {
+    my $segment_source = $segment->{source};
+    return undef unless defined($segment_source) && length($segment_source) >= 2;
+    my $key_source = substr($segment_source, 1, length($segment_source) - 2);
+    return undef unless defined($key_source) && length($key_source);
+    $lowered .= '->{'.$key_source.'}';
+    next;
+   }
+   return undef unless $segment_kind eq 'index';
+   my $index_node = $segment->{expr};
+   if (ref($index_node) eq 'HASH') {
+    my $index_kind = $index_node->{kind} // '';
+    return undef if $index_kind eq 'undef' || $index_kind eq 'boolean';
+    return undef if $index_kind eq 'variable' && _is_reserved_actionir_value_symbol($index_node->{name});
+   }
+   my $index_expr = $lower_ast_value_node->($segment->{expr}, { bare_scalar_read => 1 });
+   $index_expr = $legacy_method_value_expr->($segment->{expr}{source})
+    unless defined($index_expr) && length($index_expr);
+   return undef unless defined($index_expr) && length($index_expr);
+   $lowered .= '->['.$index_expr.']';
+  }
+  return $lowered
+ };
+ my $lower_ast_block_value_node;
+ $lower_ast_block_value_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'block_value';
+  my $statements = $node->{block}{statements};
+  return undef unless ref($statements) eq 'ARRAY' && @$statements;
+
+  my @return_payloads;
+  my $has_nonfinal_return = 0;
+  for (my $idx = 0; $idx < @$statements; ++$idx) {
+   my $stmt = $statements->[$idx];
+   my $expr_node = ref($stmt) eq 'HASH' ? $stmt->{expr} : undef;
+   next unless ref($expr_node) eq 'HASH'
+    && ($expr_node->{kind} // '') eq 'call'
+    && ($expr_node->{name} // '') eq 'return';
+   my $args = $expr_node->{args} || [];
+   my $payload_expr;
+   if (ref($args) eq 'ARRAY' && @$args == 1) {
+    $payload_expr = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
+    $payload_expr = $legacy_method_value_expr->($args->[0]{source})
+     unless defined($payload_expr) && length($payload_expr);
+   } else {
+    $payload_expr = _lower_block_local_return_payload_expr($stmt->{source}, $deps);
+   }
+   return undef unless defined($payload_expr) && length($payload_expr);
+   $payload_expr = '+'.$payload_expr if $payload_expr =~ /^\s*\{/s;
+   $return_payloads[$idx] = $payload_expr;
+   $has_nonfinal_return = 1 if $idx < $#$statements;
   }
 
+  if ($has_nonfinal_return) {
+   my @lowered = (
+    'my $__ls_block_done = 0;',
+    'my $__ls_block_value;',
+   );
+   for (my $idx = 0; $idx < @$statements; ++$idx) {
+    if (defined $return_payloads[$idx]) {
+     push @lowered,
+      'unless ($__ls_block_done) { $__ls_block_value = '.$return_payloads[$idx].'; $__ls_block_done = 1; };';
+     next;
+    }
+
+    my $stmt = $statements->[$idx];
+    my $is_last = ($idx == $#$statements);
+    if ($is_last) {
+     my $value_expr = $lower_ast_value_node->($stmt->{expr}, { bare_scalar_read => 1 });
+     $value_expr = $legacy_method_value_expr->($stmt->{expr}{source})
+      unless defined($value_expr) && length($value_expr);
+     return undef unless defined($value_expr) && length($value_expr);
+     $value_expr = '+'.$value_expr if $value_expr =~ /^\s*\{/s;
+     push @lowered,
+      'unless ($__ls_block_done) { $__ls_block_value = '.$value_expr.'; $__ls_block_done = 1; };';
+     next;
+    }
+
+    my $lowered_statement = _lower_block_side_effect_statement($stmt->{source}, $deps);
+    return undef unless defined($lowered_statement) && length($lowered_statement);
+    push @lowered, 'unless ($__ls_block_done) { '.$lowered_statement.'; };';
+   }
+   return 'do { '.join(' ', @lowered).' $__ls_block_value }'
+  }
+
+  my @lowered;
+  for (my $idx = 0; $idx < @$statements; ++$idx) {
+   my $stmt = $statements->[$idx];
+   my $is_last = ($idx == $#$statements);
+
+   if ($is_last) {
+    if (defined $return_payloads[$idx]) {
+     push @lowered, $return_payloads[$idx];
+     next;
+    }
+    my $value_expr = $lower_ast_value_node->($stmt->{expr}, { bare_scalar_read => 1 });
+    $value_expr = $legacy_method_value_expr->($stmt->{expr}{source})
+     unless defined($value_expr) && length($value_expr);
+    return undef unless defined($value_expr) && length($value_expr);
+    $value_expr = '+'.$value_expr if $value_expr =~ /^\s*\{/s;
+    push @lowered, $value_expr;
+    next;
+   }
+
+   my $lowered_statement = _lower_block_side_effect_statement($stmt->{source}, $deps);
+   return undef unless defined($lowered_statement) && length($lowered_statement);
+   push @lowered, $lowered_statement.';';
+  }
+  return undef unless @lowered;
+  return 'do { '.join(' ', @lowered).' }'
+ };
+ $lower_ast_value_node = sub {
+  my ($node, $opts) = @_;
+  $opts = {} unless ref($opts) eq 'HASH';
+  return undef unless ref($node) eq 'HASH';
+  my $kind = $node->{kind} // '';
+
+  return $node->{source} if $kind eq 'number' || $kind eq 'string' || $kind eq 'regex';
+  return 'undef' if $kind eq 'undef';
+  return $node->{value} ? 'do { require JSON::PP; JSON::PP::true }' : 'do { require JSON::PP; JSON::PP::false }'
+   if $kind eq 'boolean';
+  return $opts->{bare_scalar_read} ? _lower_source_slot_bare_scalar_read_expr($node->{name}, $deps) : undef
+   if $kind eq 'variable';
+  return $lower_ast_direct_access_node->($node)
+   if $kind eq 'indexed_var' || $kind eq 'nested_access';
+  if ($kind eq 'array_literal') {
+   my @lowered_items;
+   foreach my $item (@{$node->{items} || []}) {
+    my $lowered_item = $lower_ast_value_node->($item, { bare_scalar_read => 1 });
+    $lowered_item = $legacy_method_value_expr->($item->{source})
+     unless defined($lowered_item) && length($lowered_item);
+    return undef unless defined($lowered_item) && length($lowered_item);
+    push @lowered_items, $lowered_item;
+   }
+   return '['.join(', ', @lowered_items).']';
+  }
+  if ($kind eq 'hash_literal') {
+   my @lowered_pairs;
+   foreach my $entry (@{$node->{entries} || []}) {
+    my $key_expr = $lower_ast_value_node->($entry->{key}, { bare_scalar_read => 1 });
+    $key_expr = $legacy_method_value_expr->($entry->{key}{source})
+     unless defined($key_expr) && length($key_expr);
+    my $value_expr = $lower_ast_value_node->($entry->{value}, { bare_scalar_read => 1 });
+    $value_expr = $legacy_method_value_expr->($entry->{value}{source})
+     unless defined($value_expr) && length($value_expr);
+    return undef unless defined($key_expr) && length($key_expr);
+    return undef unless defined($value_expr) && length($value_expr);
+    push @lowered_pairs, $key_expr.' => '.$value_expr;
+   }
+   return '{'.join(', ', @lowered_pairs).'}';
+  }
+  return $lower_ast_block_value_node->($node)
+   if $kind eq 'block_value';
+  return $legacy_method_value_expr->($node->{source})
+   if $kind eq 'call';
   return undef
  };
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ unless (ref($deps) eq 'HASH' && $deps->{__actionir_ast_value_lowering_compat_bridge}) {
+  my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
+  if (ref($ast_node) eq 'HASH') {
+   my $ast_kind = $ast_node->{kind} // '';
+   if ($ast_kind ne 'raw_perl' && $ast_kind ne 'call' && $ast_kind ne 'fluent_chain') {
+    my $ast_lowered = $lower_ast_value_node->($ast_node);
+    return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+   }
+  }
+ }
  my $literal = $lower_primitive_literal_expr->($trimmed);
  return $literal if defined($literal);
  my $hash_receiver_chain = _normalize_hash_receiver_value_chain_expr($trimmed, $deps);

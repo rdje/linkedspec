@@ -96,15 +96,23 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3 - split AST value lowering`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.1`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Introduce the AST value-lowering dispatcher for non-call value nodes.
   Acceptance: `_lower_method_value_expr(...)` parses with `LinkedSpec::ActionIR::AST` and
     dispatches primitive literals, bare scalar reads, direct indexed/nested access, array
     and hash shape literals, and block values from typed nodes. Existing helper-call
     behavior may remain behind an explicit compatibility bridge for this leaf, but these
     supported non-call nodes must no longer depend on fresh source-text rescans.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Added a `MethodLowering` AST dispatcher for
+    primitive literals, scoped bare scalar reads, direct indexed/nested access with the
+    legacy reserved-segment guard, array/hash shape literals, and block values. Helper
+    calls and statement-level side effects remain behind explicit compatibility bridges.
+    Added focused `t/actionir_ast_parser.t` coverage proving AST parser use and preserved
+    generated output. Checks passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+    `perl -Iperl -c t/actionir_ast_parser.t`, `prove -Iperl t/actionir_ast_parser.t`,
+    targeted lowering probes for shapes, blocks, direct access, scalaref key paths, and
+    receiver-chain compatibility, and `prove -q -Iperl t/phase0_regression.t` (1002 tests).
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.3.1 - lower non-call values from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.2`
   Status: `pending`
@@ -159,10 +167,29 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.1` | `done` 2026-07-01 | Perl text-to-text lowering inventory, AST node set, and replacement order locked before implementation. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.2` | `done` 2026-07-01 | Additive `ActionIR::AST` parser seam and focused parser tests landed without switching lowering consumers. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3` | `split` 2026-07-01 | Parent contract for value-expression and receiver-chain AST lowering. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.1` | `pending` | Introduce the AST value-lowering dispatcher for non-call value nodes. |
-| 2 | `PERL-ACTIONIR-AST-MIGRATION.3.2` | `pending` | Lower helper-call value composition from AST call nodes. |
-| 3 | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `pending` | Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering. |
-| 4 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.3.1` | `done` 2026-07-01 | Non-call value nodes now lower from AST. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.2` | `pending` | Lower helper-call value composition from AST call nodes. |
+| 2 | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `pending` | Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering. |
+| 3 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
+
+## PERL-ACTIONIR-AST-MIGRATION.3.1 AST Value Dispatcher
+
+`MethodLowering::_lower_method_value_expr(...)` now parses value input with
+`LinkedSpec::ActionIR::AST` before the legacy text cascade. The dispatcher consumes these
+typed node families directly:
+
+- primitive literal nodes (`number`, `string`, `boolean`, `regex`, `undef`);
+- scoped bare scalar reads in already-supported value slots;
+- `indexed_var` and `nested_access`, while preserving the legacy rule that reserved
+  path atoms such as `true` and `CAPTURE` leave the whole direct-access expression
+  untouched;
+- `array_literal` and `hash_literal`;
+- `block_value` final values and block-local return payloads.
+
+Nested helper calls inside AST-lowered shapes and blocks still pass through an explicit
+compatibility bridge. Top-level helper-call value composition, receiver-dot `fluent_chain`
+lowering, statement/control lowering, and remaining return-payload helper substitution are
+the next migration children.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3 Split
 
@@ -303,6 +330,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.1` | Added `MethodLowering` AST dispatcher for non-call value nodes; focused AST parser/lowering test; targeted lowering probes; phase0 1002 tests | Perl non-call value expressions now lower from AST nodes for literals, scoped bare scalar reads, direct access, shapes, and block values. Helper-call composition, receiver chains, statement/control lowering, and return-payload substitution remain queued. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3` | Split broad `.3` into `.3.1` non-call value dispatcher, `.3.2` AST helper-call composition, `.3.3` AST receiver chains, and `.3.4` AST return-payload traversal/diagnostics | Value/receiver migration is now owned by narrow children before code. Frontier moves to `.3.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.2` | Added `ActionIR::AST` / `AST::Parser`; focused parser tests; local CI test wiring; KM fact `perl-actionir-ast-parser-seam` + regenerated map; mdBook backend/pipeline/owner-tree status; syntax/focused/phase0/local-CI/diff/memory/doctrine/KM checks | Additive Perl AST parser seam exists behind current lowering behavior. Parser covers calls, literals, variables, direct access, shapes, block values, statements, assignments, and receiver chains; `.3` is the next consumer migration leaf. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.1` | Perl ActionIR text-lowering inventory; Rust-aligned AST node set; replacement order; KM fact `perl-actionir-text-to-ast-inventory` + regenerated map; roadmap/task-tree/live-doc sync; stale-frontier, memory/doctrine/KM/diff checks; mdBook build | Perl text-to-text lowering boundaries are mapped before code. Parser seam `.2` is the next frontier; no parser/compiler/runtime code changed. |

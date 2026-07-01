@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.1 — lower non-call values from AST
+
+**Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,
+Knowledge Map, and live docs.
+
+**What changed:** `LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr(...)` now parses through
+`LinkedSpec::ActionIR::AST` before the legacy text cascade and dispatches non-call value nodes directly:
+primitive literals, scoped bare scalar reads, direct indexed/nested access, array/hash shape literals, and
+block values.
+
+**Compatibility boundary:** Helper-call value composition and receiver-dot chains remain on the existing
+compatibility path for later `.3` children. Nested helper calls inside AST-lowered shapes/blocks use an explicit
+compatibility bridge. The direct-access lowering preserves legacy reserved-segment behavior, so `true` and
+engine locals such as `CAPTURE` do not get rewritten as path indexes.
+
+**Tests:** Added focused test coverage proving AST parser use for non-call value lowering while preserving the
+existing generated Perl output. `prove -Iperl t/actionir_ast_parser.t` and
+`prove -q -Iperl t/phase0_regression.t` (1002 tests) passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3 — split AST value lowering
 
 **Scope:** Task-tree split, roadmap/live continuity docs, and current frontier update. No parser/compiler/runtime

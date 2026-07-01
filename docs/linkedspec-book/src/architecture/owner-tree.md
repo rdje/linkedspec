@@ -378,8 +378,11 @@ That path is now explicit doctrine: supported helper/action syntax must flow thr
 typed AST/IR before lowering or execution. The Perl backend now has an additive
 `LinkedSpec::ActionIR::AST` parser seam for calls, literals, variables, direct access,
 shape literals, block values, assignments, expression statements, and receiver-dot
-chains. Existing ActionIR lowering consumers still migrate family by family, so any
-remaining source-text lowering is legacy debt rather than the model for new work.
+chains. `MethodLowering` now consumes that seam for non-call value nodes: primitive
+literals, scoped bare scalar reads, direct indexed/nested access, shape literals, and
+block values. Helper-call composition, receiver-chain lowering, statement/control
+lowering, and remaining return-payload substitution still migrate family by family, so
+any remaining source-text lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`
 
