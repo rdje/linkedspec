@@ -740,6 +740,23 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.5.3 — string receiver-dot value chains ──
+    #
+    # Receiver-dot string value methods are pure helper composition over the
+    # existing string/scalar helper family. split(...) is the explicit bridge
+    # into the already-landed array receiver family. Boolean terminals are
+    # covered by focused backend tests; this oracle fixture keeps string/number
+    # values for direct Perl/Rust JSON parity.
+    {   case   => 'terse_2_3_5_3_string_receiver_value_chains',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(raw, " Node-Name_end "); return(array(raw.trim().lowercase().replace_substr("-", "_").rm_prefix("node_").rm_suffix("_end").cat("!"), raw.trim().length(), raw.trim().split("-").trim_each().lowercase_each().join_values("|"), " a-b ".trim().split("-").count(), "abcdef".substr(1, 3).uppercase(), raw.coalesce_nonempty("fallback").trim())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },

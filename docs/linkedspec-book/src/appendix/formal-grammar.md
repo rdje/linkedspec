@@ -457,6 +457,11 @@ contains_substr(s, needle)      — substring check
 replace_substr(s, old, new)     — literal string replacement
 rm_prefix(s, prefix)            — remove prefix
 rm_suffix(s, suffix)            — remove suffix
+substr(s, start, len?)          — substring from zero-based start
+string_expr.trim().lowercase()
+                        — receiver-dot string value chain over compatible pure scalar helpers
+string_expr.split(delim).trim_each().join_values(delim)
+                        — explicit string-to-array receiver-chain bridge
 ```
 
 ### 7.3 Array Helpers

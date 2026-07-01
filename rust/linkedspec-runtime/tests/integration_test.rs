@@ -1955,3 +1955,36 @@ fn terse_2_3_5_2_hash_statement_mutations_remain_statement_level() {
         "receiver-dot set_key is a pure value while statement set_key and hash-index assignment still mutate meta"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.5.3 — string receiver-dot value chains:
+
+#[test]
+fn terse_2_3_5_3_string_receiver_value_chains_run() {
+    let grammar = "Top::\n /x/ -> Done { set(raw, \" Node-Name_end \"); return(array(raw.trim().lowercase().replace_substr(\"-\", \"_\").rm_prefix(\"node_\").rm_suffix(\"_end\").cat(\"!\"), raw.trim().length(), raw.trim().starts_with(\"Node\"), raw.trim().lowercase().matches(/^node/), raw.trim().contains_substr(\"-\"), raw.trim().ends_with(\"_end\"), raw.trim().split(\"-\").trim_each().lowercase_each().join_values(\"|\"), \" a-b \".trim().split(\"-\").count(), \"abcdef\".substr(1, 3).uppercase(), raw.coalesce_nonempty(\"fallback\").trim())) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[
+            "name!",
+            13,
+            true,
+            true,
+            true,
+            true,
+            "node|name_end",
+            2,
+            "BCD",
+            "Node-Name_end"
+        ]]),
+        "string receiver-dot value chains compose string helpers and bridge split results into array chains"
+    );
+}
+
+#[test]
+fn terse_2_3_5_3_string_terminal_methods_end_chains() {
+    let grammar = "Top::\n /x/ -> Done { set(raw, \"abc\"); return(array(raw.length().trim(), raw.matches(/^a/).lowercase())) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[null, null]]),
+        "string receiver terminal values cannot continue into later receiver-dot methods"
+    );
+}

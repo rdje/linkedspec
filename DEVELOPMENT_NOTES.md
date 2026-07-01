@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.3 — string receiver-dot value chains landed): Implemented the
+  string/scalar return-family receiver-chain leaf. Durable points. (1) **String receiver chains are pure value
+  composition.** Perl normalizes compatible receiver-dot string links into helper expressions, and Rust
+  evaluates `Expr::FluentChain` by carrying the current string value through the helper table. String-returning
+  links include `trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`,
+  `concat`/`cat`, and `coalesce_nonempty`. (2) **Bare scalar receivers must be explicit scalar reads in Perl
+  normalization.** `raw.trim()` wraps the receiver as `scalar(raw)` before helper composition so generated Perl
+  reads `$raw` instead of leaving a host method call. Capture receivers and string-literal receivers are also
+  locked. (3) **`split(delim)` is the explicit bridge into array receiver chains.** After split, the current
+  value is an array and may continue through `trim_each`, `filter_nonempty`, `lowercase_each`, `count`,
+  `join_values`, and the rest of the array receiver family. (4) **Scalar terminals end the chain.** `length`,
+  `starts_with`, `ends_with`, `contains_substr`, and `matches` return number/boolean values; invalid later
+  receiver-dot calls now lower/evaluate to `undef` / JSON `null` instead of leaking generated host residue.
+  (5) **Block-valued receiver chaining is now explicitly owned.** `.2.3.5.5` will audit/lock blocks as values
+  whose yielded runtime type selects the receiver family, after number receiver chains land in `.2.3.5.4`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains landed): Implemented the hash
   return-family receiver-chain leaf. Durable points. (1) **Receiver-dot hash chains are pure value
   composition.** Perl normalizes compatible hash receiver links into helper expressions, and Rust evaluates

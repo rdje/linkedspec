@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.3 — string receiver-dot value chains landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure string/scalar helper chains now
+  work from scalar and string-literal receivers on Perl and Rust:
+  `raw.trim().lowercase().replace_substr("-", "_")`, `raw.trim().split("-").trim_each().join_values("|")`,
+  and `"abcdef".substr(1, 3).uppercase()` are locked. String-returning links compose; `split(delim)` bridges
+  explicitly into the array receiver family; terminal methods (`length`, `starts_with`, `ends_with`,
+  `contains_substr`, `matches`) end the chain and invalid continuations return `undef`/`null`. Value-form
+  `split(...)` and `substr(...)` now lower as portable helper payloads.
+  **Verification:** Perl syntax checks PASS; phase0 PASS with **998 tests**; focused Rust parser/runtime locks
+  PASS; oracle regeneration produced **49 fixtures**; Rust `corpus_oracle` PASS over 49 fixtures; mdBook/KM/live
+  docs updated.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.4`** (number receiver-dot value chains), followed by
+  `SPEC-FORMAT-TERSE.2.3.5.5` (block-valued receiver chaining by yielded type).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure hash helper chains now work from a hash
   receiver on Perl and Rust: `meta.set_key("stage", "normalized").count_keys()`,
@@ -18,7 +31,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Perl syntax checks PASS; phase0 PASS with **997 tests**; focused Rust parser/runtime locks
   PASS; oracle regeneration produced **48 fixtures**; Rust `corpus_oracle` PASS over 48 fixtures; mdBook/KM/live
   docs updated.
-  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.3`** (string receiver-dot value chains).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.2.3.5.3` (now completed above).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure array helper chains now work from an array
   receiver on Perl and Rust: `items.sorted().drop_front(2).first()`, `items.uniq().join_values(",")`,

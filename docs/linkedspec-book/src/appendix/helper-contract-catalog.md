@@ -332,6 +332,33 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Behavior**: Removes the suffix from the value if present. Returns the value unchanged if the suffix does not match. Returns undef if value is undef.
 - **Example**: over `/(\S+)/`, `rm_suffix(entry_group(0), ".spec")` on `parser.spec` → `["parser"]`.
 
+### `substr(s, start, length?)`
+- **Signature**: `substr(value: scalar, start: int, length: int?)`
+- **Returns**: scalar
+- **Behavior**: Returns a substring of `value` starting at zero-based `start`. When `length` is supplied,
+  returns at most that many characters; when omitted, returns from `start` through the end.
+- **Edge cases**: Returns undef if `value` or `start` is undef. Negative or non-integer `start` is normalized
+  to `0`; negative or non-integer `length` is normalized to `0`.
+- **Example**: over `/(\S+)/`, `substr(entry_group(0), 1, 3)` on `abcdef` → `["bcd"]`.
+
+### String receiver-dot value chains
+- **Signature**: `string_expr.method(args...).next(args...)`
+- **Returns**: the documented return value of the final helper in the chain.
+- **Behavior**: A compatible string receiver feeds into the first pure string helper, and each helper's return
+  value feeds the next compatible helper. A bare receiver such as `raw.trim()` reads the scalar working
+  variable `raw`; an explicit receiver such as `scalar(raw).trim()` has the same value. String literals may
+  be receivers too: `"abcdef".substr(1, 3).uppercase()` is equivalent to
+  `uppercase(substr("abcdef", 1, 3))`.
+- **Allowed string-returning links**: `trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`,
+  `rm_suffix`, `substr`, `concat`, `cat`, and `coalesce_nonempty`.
+- **Allowed array bridge**: `split(delim)` returns an array and may continue through compatible array
+  receiver helpers, for example `raw.trim().split("-").trim_each().lowercase_each().join_values("|")`.
+- **Allowed terminal links**: `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` return
+  number/boolean values and end the string-family chain.
+- **Boundary**: `substr(value, start, length?)` here is the pure value substring helper. It is separate from
+  any statement-style or host-language substitution idiom. A terminal string method followed by another
+  receiver-dot call yields `undef` rather than a partially lowered host expression.
+
 ## 3. Array Helpers
 
 ### `array(e1, e2, ...)`
@@ -1140,7 +1167,9 @@ array working variables as snapshots, so `count(drop_front(sorted(items)))` is p
 value chains are the same composition written from the receiver side, so
 `items.sorted().drop_front(2).first()` and `items.filter_match(/^a$/).count()` are portable. Hash receiver-dot
 value chains apply the same rule to hash helpers, so
-`meta.set_key("stage", "normalized").sorted_keys().join_values(",")` is portable and pure. Use explicit
+`meta.set_key("stage", "normalized").sorted_keys().join_values(",")` is portable and pure. String receiver-dot
+chains apply the same rule to scalar string helpers, so `raw.trim().lowercase().substr(0, 12)` is portable,
+and `raw.trim().split("-").lowercase_each().join_values("_")` bridges explicitly into the array family. Use explicit
 aggregate wrappers such as `array(name)` / `hash(name)` anywhere a helper contract does not say a bare
 aggregate read is accepted. Statement forms
 (`name = value`, `items += value`, `set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value

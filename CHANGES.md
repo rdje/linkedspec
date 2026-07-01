@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.3 — implement string receiver value chains
+
+**Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain parser/runtime evaluation, focused
+Perl/Rust locks, oracle corpus, mdBook, Knowledge Map, roadmap/task-tree/live docs.
+
+**What changed:** String/scalar receiver-dot value chains are now portable on Perl and Rust. String-returning
+helpers compose from scalar and string-literal receivers (`raw.trim().lowercase().replace_substr("-", "_")`,
+`"abcdef".substr(1, 3).uppercase()`), and `split(delim)` explicitly bridges into the array receiver-chain
+family (`raw.trim().split("-").trim_each().lowercase_each().join_values("|")`). Value-form `split(...)` and
+`substr(...)` now lower as portable helper payloads.
+
+**Boundary:** Scalar terminals (`length`, `starts_with`, `ends_with`, `contains_substr`, `matches`) end the
+string chain. Invalid post-terminal continuations return `undef` / JSON `null` instead of leaving raw
+receiver-dot host residue. Block-valued receiver chaining is now task-tree owned as
+`SPEC-FORMAT-TERSE.2.3.5.5` after the number-family leaf.
+
+**Validation:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -Iperl -c
+t/phase0_regression.t`; `perl -Iperl -c tools/gen_oracle_corpus.pl`; focused lowering/runtime/source probes;
+`prove -q -Iperl t/phase0_regression.t` PASS (998 tests); focused Rust parser/runtime tests PASS; `perl -Iperl
+tools/gen_oracle_corpus.pl` generated 49 fixtures; Rust `corpus_oracle` PASS over 49 fixtures.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.2 — implement hash receiver value chains
 
 **Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain runtime evaluation, Rust hash-helper

@@ -488,6 +488,7 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 | `replace_substr(value, needle, replacement)` | scalar | perform a literal substring rewrite. |
 | `rm_prefix(value, prefix)` | scalar | remove one literal prefix when present. |
 | `rm_suffix(value, suffix)` | scalar | remove one literal suffix when present. |
+| `substr(value, start, length?)` | scalar | take a substring by zero-based character offset. |
 | `concat(value, value, ...)` | scalar | build one string from scalar fragments. |
 | `length(value)` | scalar number or `undef` | measure scalar string length. |
 
@@ -500,12 +501,25 @@ assign(scalar(core), rm_prefix(scalar(key), "node_"));
 assign(scalar(base), rm_suffix(scalar(core), "_end"));
 assign(scalar(full_key), concat(scalar(base), "::", scalar(stage)));
 assign(scalar(name_len), length(scalar(name)));
+assign(scalar(short_key), raw.trim().lowercase().replace_substr("-", "_").substr(0, 12));
+assign(array(parts), raw.trim().split("-").trim_each().filter_nonempty());
+assign(scalar(public), raw.trim().split("-").lowercase_each().join_values("_"));
 ```
+
+String receiver-dot value chains are accepted for the pure scalar string helpers. The receiver is the first
+helper argument, so `raw.trim().lowercase()` maps to `lowercase(trim(scalar(raw)))`, and
+`"abcdef".substr(1, 3).uppercase()` maps to `uppercase(substr("abcdef", 1, 3))`. String-returning links
+(`trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `cat`/`concat`, and
+`coalesce_nonempty`) can keep chaining through string helpers. `split(delim)` is the explicit bridge from a
+string chain into the array receiver family, so `raw.trim().split("-").trim_each().join_values("|")` is
+portable. Scalar terminals such as `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` end
+the chain.
 
 Rationale:
 
 - Use `replace_substr(...)` for literal replacement, not regex replacement.
 - Use `rm_prefix(...)` and `rm_suffix(...)` when the boundary itself is meaningful parser metadata.
+- Use `substr(...)` when the parser contract is a fixed offset/width slice of a value.
 - Use `concat(...)` when the rule already knows the fragments and does not need array staging.
 - Use `coalesce(length(...), 0)` when missing text should count as zero. Plain `length(undef)` stays undefined.
 

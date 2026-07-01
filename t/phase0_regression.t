@@ -45732,6 +45732,83 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'hash receiver value-chain spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_2_3_5_3_string_receiver_value_chains' => sub {
+    # SPEC-FORMAT-TERSE.2.3.5.3: string/scalar receiver-dot value chains feed
+    # the receiver into pure string helper contracts. split(...) is the explicit
+    # bridge into the already-owned array receiver family; scalar terminals end
+    # the chain.
+    plan tests => 18;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(name.trim().lowercase().replace_substr("-","_").rm_prefix("node_").rm_suffix("_end").cat("!"))'),
+        qr/__ls_trim.*__ls_lower.*__ls_replace_substr.*__ls_rm_prefix.*__ls_rm_suffix.*__ls_concat_parts/s,
+        'string receiver chain lowers through trim/lowercase/replace/rm_prefix/rm_suffix/cat helper contracts');
+    like($L->('return(entry_group(0).trim().length())'), qr/IMATCH_LIST.*__ls_trim.*__ls_length/s,
+        'capture-group string receiver chains lower through scalar capture reads and length terminal');
+    like($L->('return(name.trim().starts_with("node"))'), qr/__ls_trim.*__ls_starts_with_value/s,
+        'string predicate terminals lower as scalar values');
+    like($L->('return(name.trim().split("-").trim_each().join_values("|"))'),
+        qr/__ls_split_value.*__ls_array_pipeline_source.*join\("\|", \@\{\$__ls_join_values\}\)/s,
+        'split receiver chains bridge into array receiver helper composition');
+    like($L->('return("abcdef".substr(1,3).uppercase())'), qr/__ls_substr_value = "abcdef".*uc\(\$__ls_upper\)/s,
+        'string-literal receiver chains lower through substr and uppercase helpers');
+    like($L->('return(split("a-b","-"))'), qr/__ls_split_value = "a-b".*split /s,
+        'value-form split(...) lowers as a portable helper payload');
+    like($L->('return(substr("abcdef",1,3))'), qr/__ls_substr_value = "abcdef".*substr\(\$__ls_substr_value/s,
+        'value-form substr(...) lowers as a portable helper payload');
+    is($L->('return(raw.length().trim())'), 'return undef',
+        'terminal string methods cannot continue through later receiver-dot calls');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(raw, \" Node-Name_end \"); return(array(raw.trim().lowercase().replace_substr(\"-\", \"_\").rm_prefix(\"node_\").rm_suffix(\"_end\").cat(\"!\"), raw.trim().length(), raw.trim().starts_with(\"Node\"), raw.trim().lowercase().matches(/^node/), raw.trim().contains_substr(\"-\"), raw.trim().ends_with(\"_end\"), raw.trim().split(\"-\").trim_each().lowercase_each().join_values(\"|\"), \" a-b \".trim().split(\"-\").count(), \"abcdef\".substr(1, 3).uppercase(), raw.coalesce_nonempty(\"fallback\").trim())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'string receiver value-chain spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["name!",13,1,1,1,1,"node|name_end",2,"BCD","Node-Name_end"]',
+        'string receiver value chains return strings/numbers/booleans and bridge through split arrays');
+
+    my $terminal_spec = "Top::\n"
+                      . " /x/ -> Done { set(raw, \"abc\"); return(array(raw.length().trim(), raw.matches(/^a/).lowercase())) }\n"
+                      . "\nDone::\n /[a-z]+/\n";
+    my $terminal_parser = eval { LinkedSpec::Get(\$terminal_spec) };
+    ok(ref($terminal_parser) eq 'CODE', 'terminal-continuation string receiver spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($terminal_parser, 'xhello'), '[null,null]',
+        'terminal string methods followed by later calls return undef instead of generated host residue');
+
+    my $src = $gen->($spec);
+    is((() = ($src =~ /my \$raw\b/g)), 1,
+        'string receiver chains auto-supply one my $raw');
+    is((() = ($src =~ /my \@raw\b/g)), 0,
+        'string receiver chains do not auto-supply my @raw');
+    is((() = ($src =~ /my %raw\b/g)), 0,
+        'string receiver chains do not auto-supply my %raw');
+    unlike($src, qr/\.(?:trim|lowercase|split|substr|cat)\b/,
+        'generated source has no raw receiver-dot string helper residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'string receiver value-chain spec has no canonical fallback');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'string receiver value-chain spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
     # SPEC-FORMAT-TERSE.2.1.2: Perl reference core expression-valued blocks.
     # Non-empty brace payloads without a top-level fat arrow are value blocks;

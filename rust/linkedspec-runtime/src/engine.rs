@@ -1229,6 +1229,12 @@ impl Engine {
                     return self.eval_hash_receiver_value_chain(receiver, calls, ctx, rule_label);
                 }
                 if calls
+                    .first()
+                    .is_some_and(|call| Self::is_string_receiver_value_chain_method(&call.method))
+                {
+                    return self.eval_string_receiver_value_chain(receiver, calls, ctx, rule_label);
+                }
+                if calls
                     .iter()
                     .any(|call| Self::is_statement_only_array_end_mutation_method(&call.method))
                 {
@@ -1318,6 +1324,39 @@ impl Engine {
 
     fn is_hash_receiver_terminal_method(method: &str) -> bool {
         matches!(method, "count_keys" | "has_key" | "scalaref")
+    }
+
+    fn is_string_receiver_value_chain_method(method: &str) -> bool {
+        Self::is_string_receiver_string_returning_method(method)
+            || Self::is_string_receiver_array_returning_method(method)
+            || Self::is_string_receiver_terminal_method(method)
+    }
+
+    fn is_string_receiver_string_returning_method(method: &str) -> bool {
+        matches!(
+            method,
+            "trim"
+                | "lowercase"
+                | "uppercase"
+                | "replace_substr"
+                | "rm_prefix"
+                | "rm_suffix"
+                | "substr"
+                | "concat"
+                | "cat"
+                | "coalesce_nonempty"
+        )
+    }
+
+    fn is_string_receiver_array_returning_method(method: &str) -> bool {
+        matches!(method, "split")
+    }
+
+    fn is_string_receiver_terminal_method(method: &str) -> bool {
+        matches!(
+            method,
+            "length" | "starts_with" | "ends_with" | "contains_substr" | "matches"
+        )
     }
 
     fn eval_array_receiver_value_chain(
@@ -1421,23 +1460,22 @@ impl Engine {
                 .collect::<Result<Vec<_>, _>>()?;
 
             let receiver_arg = Arg::Positional(Expr::Undef);
-            let (raw_args, evaluated) = if family == ReceiverFamily::Array
-                && call.method == "join_values"
-            {
-                let mut raw = call.args.clone();
-                raw.push(receiver_arg);
-                let mut vals = evaluated_call_args;
-                vals.push(current);
-                (raw, vals)
-            } else {
-                let mut raw = Vec::with_capacity(call.args.len() + 1);
-                raw.push(receiver_arg);
-                raw.extend(call.args.clone());
-                let mut vals = Vec::with_capacity(evaluated_call_args.len() + 1);
-                vals.push(current);
-                vals.extend(evaluated_call_args);
-                (raw, vals)
-            };
+            let (raw_args, evaluated) =
+                if family == ReceiverFamily::Array && call.method == "join_values" {
+                    let mut raw = call.args.clone();
+                    raw.push(receiver_arg);
+                    let mut vals = evaluated_call_args;
+                    vals.push(current);
+                    (raw, vals)
+                } else {
+                    let mut raw = Vec::with_capacity(call.args.len() + 1);
+                    raw.push(receiver_arg);
+                    raw.extend(call.args.clone());
+                    let mut vals = Vec::with_capacity(evaluated_call_args.len() + 1);
+                    vals.push(current);
+                    vals.extend(evaluated_call_args);
+                    (raw, vals)
+                };
 
             match family {
                 ReceiverFamily::Hash => {
@@ -1476,23 +1514,109 @@ impl Engine {
                         rule_label,
                     )?;
                     family = match call.method.as_str() {
-                        "array_copy"
-                        | "copy"
-                        | "sorted"
-                        | "reversed"
-                        | "take"
-                        | "take_last"
-                        | "drop_front"
-                        | "drop_back"
-                        | "slice"
-                        | "concat_arrays"
-                        | "split_each"
-                        | "trim_each"
-                        | "filter_nonempty"
-                        | "lowercase_each"
-                        | "uppercase_each"
-                        | "uniq"
-                        | "filter_match" => ReceiverFamily::Array,
+                        "array_copy" | "copy" | "sorted" | "reversed" | "take" | "take_last"
+                        | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
+                        | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
+                        | "uniq" | "filter_match" => ReceiverFamily::Array,
+                        _ => ReceiverFamily::Terminal,
+                    };
+                }
+                ReceiverFamily::Terminal => return Ok(RuntimeValue::Undef),
+            }
+        }
+
+        Ok(current)
+    }
+
+    fn eval_string_receiver_value_chain(
+        &self,
+        receiver: &linkedspec_core::expr::Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        #[derive(Clone, Copy, Eq, PartialEq)]
+        enum ReceiverFamily {
+            String,
+            Array,
+            Terminal,
+        }
+
+        let mut current = self.eval_expr(receiver, ctx, rule_label)?;
+        let mut family = ReceiverFamily::String;
+
+        for (index, call) in calls.iter().enumerate() {
+            if family == ReceiverFamily::Terminal {
+                return Ok(RuntimeValue::Undef);
+            }
+
+            let evaluated_call_args: Vec<RuntimeValue> = call
+                .args
+                .iter()
+                .map(|arg| self.eval_expr(arg.value(), ctx, rule_label))
+                .collect::<Result<Vec<_>, _>>()?;
+
+            let receiver_arg = Arg::Positional(Expr::Undef);
+            let (raw_args, evaluated) =
+                if family == ReceiverFamily::Array && call.method == "join_values" {
+                    let mut raw = call.args.clone();
+                    raw.push(receiver_arg);
+                    let mut vals = evaluated_call_args;
+                    vals.push(current);
+                    (raw, vals)
+                } else {
+                    let mut raw = Vec::with_capacity(call.args.len() + 1);
+                    raw.push(receiver_arg);
+                    raw.extend(call.args.clone());
+                    let mut vals = Vec::with_capacity(evaluated_call_args.len() + 1);
+                    vals.push(current);
+                    vals.extend(evaluated_call_args);
+                    (raw, vals)
+                };
+
+            match family {
+                ReceiverFamily::String => {
+                    if !Self::is_string_receiver_value_chain_method(&call.method) {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    current = self.call_helper_with_args(
+                        &call.method,
+                        &raw_args,
+                        &evaluated,
+                        ctx,
+                        rule_label,
+                    )?;
+                    if Self::is_string_receiver_string_returning_method(&call.method) {
+                        family = ReceiverFamily::String;
+                    } else if Self::is_string_receiver_array_returning_method(&call.method) {
+                        family = ReceiverFamily::Array;
+                    } else {
+                        if index + 1 != calls.len() {
+                            return Ok(RuntimeValue::Undef);
+                        }
+                        family = ReceiverFamily::Terminal;
+                    }
+                }
+                ReceiverFamily::Array => {
+                    if Self::is_statement_only_array_end_mutation_method(&call.method)
+                        || !Self::is_array_receiver_value_chain_method(&call.method)
+                    {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    current = self.call_helper_with_args(
+                        &call.method,
+                        &raw_args,
+                        &evaluated,
+                        ctx,
+                        rule_label,
+                    )?;
+                    family = match call.method.as_str() {
+                        "array_copy" | "copy" | "sorted" | "reversed" | "take" | "take_last"
+                        | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
+                        | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
+                        | "uniq" | "filter_match" => ReceiverFamily::Array,
                         _ => ReceiverFamily::Terminal,
                     };
                 }
@@ -3288,8 +3412,9 @@ impl Engine {
                     let arg = self.hash_consuming_arg(raw_args, args, index, ctx);
                     if let RuntimeValue::Hash(entries) = arg {
                         for (k, v) in &entries {
-                            if let Some((_, existing_value)) =
-                                merged.iter_mut().find(|(existing_key, _)| existing_key == k)
+                            if let Some((_, existing_value)) = merged
+                                .iter_mut()
+                                .find(|(existing_key, _)| existing_key == k)
                             {
                                 *existing_value = v.clone();
                             } else {

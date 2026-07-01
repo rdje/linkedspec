@@ -602,7 +602,7 @@ sub _lower_block_value_expr {
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
 #           `array(...)`, `input_slice(...)`, `hash_copy(...)`, `merge_hash(...)`, `set_key(...)`,
 #           `rename_key(...)`, `drop_keys(...)`, `pick_keys(...)`, `sorted(...)`, `reversed(...)`, `sorted_keys(...)`, `sorted_values(...)`,
-#           `length(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `drop_front(...)`, `take(...)`, `slice(...)`, `take_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
+#           `length(...)`, `substr(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `split(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `drop_front(...)`, `take(...)`, `slice(...)`, `take_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
 #           `split_tagged_records(...)`, `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
@@ -1001,6 +1001,11 @@ sub _lower_method_value_expr {
   my $lowered_chain = _lower_method_value_expr($hash_receiver_chain, $deps);
   return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
  }
+ my $string_receiver_chain = _normalize_string_receiver_value_chain_expr($trimmed, $deps);
+ if (defined($string_receiver_chain) && length($string_receiver_chain) && $string_receiver_chain ne $trimmed) {
+  my $lowered_chain = _lower_method_value_expr($string_receiver_chain, $deps);
+  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+ }
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
  return $direct_access if defined($direct_access) && length($direct_access);
  my $shape_literal = $lower_shape_literal_value_expr->($trimmed);
@@ -1189,6 +1194,28 @@ sub _lower_method_value_expr {
  return undef unless defined($value_expr) && length($value_expr);
 
  return 'do { my $__ls_length = '.$value_expr.'; defined($__ls_length) ? length($__ls_length) : undef }';
+}
+if ($method_call && $method_call->{method} eq 'substr') {
+ my $substr_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 3);
+ return undef unless $substr_args;
+
+ my $value_expr = _lower_method_value_expr($substr_args->[0], $deps);
+ $value_expr = $trim_action_ir_value->($substr_args->[0]) unless defined($value_expr) && length($value_expr);
+ return undef unless defined($value_expr) && length($value_expr);
+
+ my $start_expr = _lower_method_value_expr($substr_args->[1], $deps);
+ $start_expr = $trim_action_ir_value->($substr_args->[1]) unless defined($start_expr) && length($start_expr);
+ return undef unless defined($start_expr) && length($start_expr);
+
+ if (@$substr_args == 2) {
+  return 'do { my $__ls_substr_value = '.$value_expr.'; my $__ls_substr_start = '.$start_expr.'; if (defined($__ls_substr_value) && defined($__ls_substr_start)) { $__ls_substr_start = 0 unless $__ls_substr_start =~ /\A-?\d+\z/; $__ls_substr_start = 0 if $__ls_substr_start < 0; substr($__ls_substr_value, $__ls_substr_start) } else { undef } }';
+ }
+
+ my $len_expr = _lower_method_value_expr($substr_args->[2], $deps);
+ $len_expr = $trim_action_ir_value->($substr_args->[2]) unless defined($len_expr) && length($len_expr);
+ return undef unless defined($len_expr) && length($len_expr);
+
+ return 'do { my $__ls_substr_value = '.$value_expr.'; my $__ls_substr_start = '.$start_expr.'; my $__ls_substr_len = '.$len_expr.'; if (defined($__ls_substr_value) && defined($__ls_substr_start) && defined($__ls_substr_len)) { $__ls_substr_start = 0 unless $__ls_substr_start =~ /\A-?\d+\z/; $__ls_substr_start = 0 if $__ls_substr_start < 0; $__ls_substr_len = 0 unless $__ls_substr_len =~ /\A-?\d+\z/; $__ls_substr_len = 0 if $__ls_substr_len < 0; substr($__ls_substr_value, $__ls_substr_start, $__ls_substr_len) } else { undef } }';
 }
 if ($method_call && $method_call->{method} eq 'replace_substr') {
  my $replace_substr_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 3, 3);
@@ -1840,6 +1867,24 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   return '['.join(', ', @parts).']';
  }
+ if ($method_call && $method_call->{method} eq 'split') {
+  my $split_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
+  return undef unless $split_args;
+
+  my $source_expr = _lower_method_value_expr($split_args->[0], $deps);
+  $source_expr = $trim_action_ir_value->($split_args->[0]) unless defined($source_expr) && length($source_expr);
+  return undef unless defined($source_expr) && length($source_expr);
+
+  my $delimiter_trimmed = $trim_action_ir_value->($split_args->[1]);
+  return undef unless defined($delimiter_trimmed) && length($delimiter_trimmed);
+  if ($delimiter_trimmed =~ m{^/(?:\\.|[^/])*/[a-z]*$}io) {
+   return 'do { my $__ls_split_value = '.$source_expr.'; defined($__ls_split_value) ? [split '.$delimiter_trimmed.', $__ls_split_value, -1] : [] }';
+  }
+
+  my $delimiter_expr = _lower_method_value_expr($split_args->[1], $deps);
+  $delimiter_expr = $delimiter_trimmed unless defined($delimiter_expr) && length($delimiter_expr);
+  return 'do { my $__ls_split_value = '.$source_expr.'; my $__ls_split_delimiter = '.$delimiter_expr.'; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\Q$__ls_split_delimiter\E/, $__ls_split_value, -1] : [] }';
+ }
  if ($method_call && $method_call->{method} eq 'split_tagged_records') {
   my $record_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 3, undef);
   return undef unless $record_args && @$record_args >= 3;
@@ -2410,7 +2455,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|input_slice|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
  return $direct;
  }
@@ -2421,7 +2466,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|s|array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|a|hash|h)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|s|array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|a|hash|h)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;
@@ -2673,6 +2718,20 @@ sub _is_hash_receiver_value_chain_method {
  return defined(_hash_receiver_value_chain_return_family($method)) ? 1 : 0
 }
 
+sub _string_receiver_value_chain_return_family {
+ my ($method) = @_;
+ return undef unless defined $method;
+ return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|concat|cat|coalesce_nonempty)$/o;
+ return 'array' if $method =~ /^(?:split)$/o;
+ return 'terminal' if $method =~ /^(?:length|starts_with|ends_with|contains_substr|matches)$/o;
+ return undef
+}
+
+sub _is_string_receiver_value_chain_method {
+ my ($method) = @_;
+ return defined(_string_receiver_value_chain_return_family($method)) ? 1 : 0
+}
+
 sub _normalize_array_receiver_value_chain_expr {
  my ($expr, $deps) = @_;
  my $require_dep = sub {
@@ -2722,6 +2781,96 @@ sub _normalize_array_receiver_value_chain_expr {
    next;
   }
   $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+ }
+
+ return $current_expr;
+}
+
+sub _normalize_string_receiver_value_chain_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $split = _split_receiver_dot_method_expr($trimmed, $trim_action_ir_value);
+ return undef unless $split;
+ my ($receiver_expr, $tail_expr) = @$split;
+ return undef unless defined($receiver_expr) && length($receiver_expr);
+
+ my @calls;
+ while (defined($tail_expr) && length($tail_expr)) {
+  my $tail_split = _split_receiver_dot_method_expr($tail_expr, $trim_action_ir_value);
+  my $call_expr = $tail_split ? $tail_split->[0] : $tail_expr;
+  my $call = $parse_method_function_expr->($call_expr);
+  return undef unless $call;
+  push @calls, $call;
+  last unless $tail_split;
+  $tail_expr = $tail_split->[1];
+ }
+ return undef unless @calls;
+ return undef unless _is_string_receiver_value_chain_method($calls[0]->{method} // '');
+
+ my $current_expr = $receiver_expr;
+ if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
+  $current_expr = 'scalar('.$current_expr.')';
+ }
+ my $current_family = 'string';
+ for (my $idx = 0; $idx < @calls; ++$idx) {
+  my $call = $calls[$idx];
+  my $method = $call->{method} // '';
+  my @args = @{$call->{args} || []};
+  my $is_last = ($idx == $#calls) ? 1 : 0;
+
+  if ($current_family eq 'string') {
+   my $return_family = _string_receiver_value_chain_return_family($method);
+   return undef unless defined($return_family);
+
+   if ($method =~ /^(?:trim|lowercase|uppercase|length)$/o) {
+    return undef unless @args == 0;
+    $current_expr = $method.'('.$current_expr.')';
+   } elsif ($method eq 'concat' || $method eq 'cat') {
+    return undef unless @args >= 1;
+    $current_expr = 'concat('.join(', ', ($current_expr, @args)).')';
+   } else {
+    $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+   }
+
+   return 'undef' if $return_family eq 'terminal' && !$is_last;
+   $current_family = $return_family;
+   next;
+  }
+
+  if ($current_family eq 'array') {
+   return undef unless _is_array_receiver_value_chain_method($method);
+   if ($method eq 'join_values') {
+    return undef unless @args == 1;
+    $current_expr = 'join_values('.$args[0].', '.$current_expr.')';
+    $current_family = 'terminal';
+    next;
+   }
+   if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
+    $current_expr = '__array_value_'.$method.'('.join(', ', ($current_expr, @args)).')';
+    $current_family = 'array';
+    next;
+   }
+   $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+   $current_family = ($method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
+    ? 'array'
+    : 'terminal';
+   next;
+  }
+
+  return 'undef' if $current_family eq 'terminal';
+  return undef;
  }
 
  return $current_expr;

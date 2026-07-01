@@ -802,7 +802,10 @@ impl<'a> Parser<'a> {
         let ch = self.peek().unwrap();
 
         match ch {
-            '"' | '\'' => self.parse_string(),
+            '"' | '\'' => {
+                let expr = self.parse_string()?;
+                self.parse_fluent_chain(expr)
+            }
             '/' => self.parse_regex(),
             '[' => self.parse_array_literal(),
             '{' => self.parse_brace_expr(),
@@ -2367,7 +2370,8 @@ mod tests {
 
     #[test]
     fn parse_hash_receiver_value_chain() {
-        let block = CodeBlock::parse(r#"meta.set_key("stage", "v").sorted_keys().count()"#).unwrap();
+        let block =
+            CodeBlock::parse(r#"meta.set_key("stage", "v").sorted_keys().count()"#).unwrap();
         match &block.statements[0].expr {
             Expr::FluentChain { receiver, calls } => {
                 assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "meta"));
@@ -2376,6 +2380,46 @@ mod tests {
                 assert_eq!(calls[0].args.len(), 2);
             }
             other => panic!("expected hash receiver value FluentChain, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn parse_string_receiver_value_chain() {
+        let block =
+            CodeBlock::parse(r#"raw.trim().lowercase().split("-").filter_nonempty().count()"#)
+                .unwrap();
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "raw"));
+                let methods: Vec<&str> = calls.iter().map(|call| call.method.as_str()).collect();
+                assert_eq!(
+                    methods,
+                    vec!["trim", "lowercase", "split", "filter_nonempty", "count"]
+                );
+                assert_eq!(calls[2].args.len(), 1);
+            }
+            other => panic!(
+                "expected string receiver value FluentChain, got {:?}",
+                other
+            ),
+        }
+    }
+
+    #[test]
+    fn parse_string_literal_receiver_value_chain() {
+        let block = CodeBlock::parse(r#"" raw ".trim().uppercase()"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(
+                    matches!(receiver.as_ref(), Expr::StringLiteral { value } if value == " raw ")
+                );
+                let methods: Vec<&str> = calls.iter().map(|call| call.method.as_str()).collect();
+                assert_eq!(methods, vec!["trim", "uppercase"]);
+            }
+            other => panic!(
+                "expected string literal receiver value FluentChain, got {:?}",
+                other
+            ),
         }
     }
 

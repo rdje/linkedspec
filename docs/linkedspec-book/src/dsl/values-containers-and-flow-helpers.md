@@ -159,10 +159,19 @@ tokens.uniq().join_values("")
 items.sorted().drop_front(2).first()
 meta.set_key("stage", "normalized").sorted_keys().join_values(",")
 meta.merge_hash(hash("kind", "fallback")).scalaref("kind")
+raw.trim().lowercase().replace_substr("-", "_")
+raw.trim().split("-").trim_each().filter_nonempty()
+raw.trim().split("-").lowercase_each().join_values("_")
 split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?node:", scalar(type_name))
 ```
 
 This keeps the action code declarative. A reader can tell whether you are copying, flattening, joining, or shaping repeated tagged rows without unpacking raw Perl syntax.
+
+Receiver-dot value chains are pure helper composition. Array receivers can flow through array helpers, hash
+receivers can flow through hash helpers and then array helpers through `sorted_keys()` / `sorted_values()`,
+and string receivers can flow through scalar string helpers. `split(delim)` is the explicit string-to-array
+bridge: after `raw.trim().split("-")`, the chain continues with array helpers such as `trim_each()`,
+`filter_nonempty()`, `lowercase_each()`, `count()`, or `join_values(delim)`.
 
 ## Hash shaping
 
