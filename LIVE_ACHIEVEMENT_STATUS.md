@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.2 — helper-call statements and returns from AST**
+  (PERL ACTIONIR + SCANNER DIAGNOSTIC + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering` now consumes typed
+  AST `call` nodes for `return`, `return_undef`, `set_key`, `push`, `push_value`, and `push_nonempty`, and
+  typed `fluent_chain` nodes for array end-mutation statements. `DeclareMethod` bridges top-level `set`/`assign`
+  through the same AST materialization while preserving the synthetic dependency-builder contract.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
+  `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm` PASS; `perl -Iperl -c
+  perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm` PASS; `perl -Iperl -c
+  t/actionir_ast_parser.t` PASS; `prove -v -Iperl t/actionir_ast_parser.t` PASS; `prove -q -Iperl
+  t/phase0_regression.t` PASS with phase0 **1002 tests**; `mdbook build docs/linkedspec-book` PASS;
+  memory/doctrine/Knowledge Map gates PASS; `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.3` lower block-value side-effect statements and block-local
+  returns from AST block/statement nodes.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.1 — assignment/mutation statement operators from AST**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering` now consumes typed AST
   `assign_scalar`, `assign_array_append`, and `assign_hash_index` nodes before the legacy statement-regex

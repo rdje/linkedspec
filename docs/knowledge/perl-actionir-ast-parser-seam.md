@@ -11,7 +11,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, parser, migration]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.2 added LinkedSpec::ActionIR::AST and LinkedSpec::ActionIR::AST::Parser plus t/actionir_ast_parser.t. The parser covers action blocks/statements, calls, literals, variables, direct access, shape literals, block values, assignments, and receiver-dot chains with source spans. PERL-ACTIONIR-AST-MIGRATION.3.1 switched MethodLowering non-call value nodes to consume this AST; .3.2.1 switched value-only helper-call composition to consume AST call nodes; .3.2.2 switched deprecated wrappers plus aggregate/collection/reducer/hash helper calls to slot-aware AST call lowering; .3.2.3 added unresolved-helper diagnostics for unsupported covered helper calls; .3.3 switched receiver-dot fluent_chain value chains to AST traversal; .3.4 switched typed return payloads to AST traversal before raw fallback; .4.1 switched assignment/mutation operator statements to AST field lowering. Helper-call statements and structured control lowering remain queued."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.2 added LinkedSpec::ActionIR::AST and LinkedSpec::ActionIR::AST::Parser plus t/actionir_ast_parser.t. The parser covers action blocks/statements, calls, literals, variables, direct access, shape literals, block values, assignments, and receiver-dot chains with source spans. PERL-ACTIONIR-AST-MIGRATION.3.1 switched MethodLowering non-call value nodes to consume this AST; .3.2.1 switched value-only helper-call composition to consume AST call nodes; .3.2.2 switched deprecated wrappers plus aggregate/collection/reducer/hash helper calls to slot-aware AST call lowering; .3.2.3 added unresolved-helper diagnostics for unsupported covered helper calls; .3.3 switched receiver-dot fluent_chain value chains to AST traversal; .3.4 switched typed return payloads to AST traversal before raw fallback; .4.1 switched assignment/mutation operator statements to AST field lowering; .4.2 switched helper-call statements, returns, and array end-mutation receiver statements to AST call/fluent-chain lowering. Structured control lowering remains queued."
 reverify: "prove -Iperl t/actionir_ast_parser.t && perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm"
 ---
 
@@ -24,7 +24,8 @@ The Perl reference now has an additive typed parser seam for ActionIR helper/act
 The seam parses action blocks and expression statements into typed nodes with `kind`,
 `source`, and `source_span` fields. It covers calls, primitive literals, variables,
 indexed and nested direct access, array/hash shape literals, block values, scalar
-assignment, array append, hash-index assignment, and receiver-dot `fluent_chain` nodes.
+assignment, array append, hash-index assignment, helper-call statements, and receiver-dot
+`fluent_chain` nodes.
 
 Standalone expression statements carry `drops_value => 1`, so helper calls and future
 user-defined function calls silently discard their value when not consumed. A function

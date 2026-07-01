@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.2 — lower statement calls from AST
+
+**Scope:** Perl ActionIR statement lowering, focused AST parser/lowering tests, scanner diagnostics,
+mdBook architecture text, Knowledge Map, task tree, and live docs.
+
+**What changed:** `MethodLowering` now consumes AST `call` nodes for statement-form `return`,
+`return_undef`, `set_key`, `push`, `push_value`, and `push_nonempty`, and AST `fluent_chain` nodes for array
+end-mutation statements. `DeclareMethod` uses the same typed AST bridge for top-level `set`/`assign`.
+
+**Compatibility boundary:** Typed statements materialize supported call arguments from AST fields, then enter
+the existing statement helper catalog so symbol slots, raw `push_value` value slots, mutation scalar reads,
+return payload lowering, and narrow raw compatibility fallback stay byte-compatible.
+
+**Tests:** Added focused fake-source coverage for `set`, `set_key`, `push_value`, `push`, `push_nonempty`,
+`return`, `return_undef`, and `items.push_back(...)`, plus a sentinel lock for unsupported
+`push_nonempty(...)`. Syntax checks and `prove -v -Iperl t/actionir_ast_parser.t` passed; `prove -q -Iperl
+t/phase0_regression.t` passed with 1002 tests. `mdbook build docs/linkedspec-book`,
+memory/doctrine/Knowledge Map gates, `git diff --check`, and `bash tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.1 — lower statement operators from AST
 
 **Scope:** Perl ActionIR method/statement lowering, focused AST parser/lowering tests, mdBook architecture text,

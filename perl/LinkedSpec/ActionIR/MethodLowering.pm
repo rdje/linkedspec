@@ -449,6 +449,8 @@ sub _lower_block_side_effect_statement {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ my $ast_assign_lowered = _lower_ast_call_statement($trimmed, 'assign', $deps);
+ return $ast_assign_lowered if defined($ast_assign_lowered) && length($ast_assign_lowered);
 
  my $call = $parse_method_function_expr->($trimmed);
  return undef if $call && ($call->{method} // '') eq 'return';
@@ -645,7 +647,9 @@ sub _actionir_ast_value_source_expr {
   foreach my $segment (@{$node->{segments} || []}) {
    return undef unless ref($segment) eq 'HASH';
    if (($segment->{kind} // '') eq 'key') {
-    $expr .= '['._actionir_ast_quote_string_source($segment->{value}, '"').']';
+    my $quote = '"';
+    $quote = $1 if defined($segment->{source}) && $segment->{source} =~ /\A\[\s*(['"])/s;
+    $expr .= '['._actionir_ast_quote_string_source($segment->{value}, $quote).']';
     next;
    }
    return undef unless ($segment->{kind} // '') eq 'index';
@@ -704,6 +708,236 @@ sub _actionir_ast_value_source_expr {
   }
   return $expr
  }
+ return undef
+}
+
+sub _actionir_ast_unsupported_helper_expr {
+ my ($method) = @_;
+ return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
+}
+
+sub _actionir_ast_statement_method {
+ my ($method) = @_;
+ return undef unless defined($method) && length($method);
+ return 'assign' if $method eq 'set';
+ return $method
+}
+
+sub _actionir_ast_call_arg_sources {
+ my ($node) = @_;
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+ my @args;
+ foreach my $arg (@{$node->{args} || []}) {
+  my $arg_expr = _actionir_ast_value_source_expr($arg);
+  return undef unless defined($arg_expr) && length($arg_expr);
+  push @args, $arg_expr;
+ }
+ return \@args
+}
+
+sub _actionir_ast_expected_statement_method {
+ my ($method, $expected) = @_;
+ return 1 unless defined($expected);
+ my @expected = ref($expected) eq 'ARRAY' ? @$expected : ($expected);
+ foreach my $candidate (@expected) {
+  return 1 if defined($candidate) && $method eq $candidate;
+ }
+ return 0
+}
+
+sub _lower_ast_call_statement {
+ my ($expr_or_node, $expected_method, $deps) = @_;
+ my $node = ref($expr_or_node) eq 'HASH'
+  ? $expr_or_node
+  : _parse_method_value_ast_expr($expr_or_node, $deps);
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+
+ my $method = _actionir_ast_statement_method($node->{name});
+ return undef unless defined($method) && length($method);
+ return undef unless _actionir_ast_expected_statement_method($method, $expected_method);
+
+ my $args = _actionir_ast_call_arg_sources($node);
+ return undef unless $args;
+
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ if ($method eq 'return') {
+  if (@$args >= 2) {
+   my $label = $trim_action_ir_value->($args->[0]);
+   return _actionir_ast_unsupported_helper_expr($method)
+    unless defined($label) && $label =~ /^\w+$/o;
+   my @payloads;
+   foreach my $payload_arg (@{$args}[1 .. $#$args]) {
+    my $payload = _lower_return_payload_expr($payload_arg, $deps);
+    $payload = $trim_action_ir_value->($payload_arg) unless defined($payload) && length($payload);
+    return _actionir_ast_unsupported_helper_expr($method)
+     unless defined($payload) && length($payload);
+    push @payloads, $payload;
+   }
+   return "return ['?$label:',  ".join(', ', @payloads)."]"
+  }
+
+  return _actionir_ast_unsupported_helper_expr($method) unless @$args == 1;
+  my $payload = _lower_return_payload_expr($args->[0], $deps);
+  return _actionir_ast_unsupported_helper_expr($method) unless defined($payload) && length($payload);
+  return "return $payload"
+ }
+
+ if ($method eq 'return_undef') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($args, 0, 0);
+  return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
+  return 'return undef'
+ }
+
+ if ($method eq 'assign') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
+  return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
+  my $lower_assign_statement = (ref($deps) eq 'HASH' && ref($deps->{lower_assign_statement}) eq 'CODE')
+   ? $deps->{lower_assign_statement}
+   : sub { return _lower_assign_statement($_[0], $_[1], $deps) };
+  my $lowered = $lower_assign_statement->($effective_args->[0], $effective_args->[1]);
+  return defined($lowered) && length($lowered) ? $lowered : _actionir_ast_unsupported_helper_expr($method)
+ }
+
+ if ($method eq 'set_key') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($args, 3, 3);
+  return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
+  my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
+  my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+  my $target_expr = $trim_action_ir_value->($effective_args->[0]);
+  my $key_expr = $trim_action_ir_value->($effective_args->[1]);
+  my $value_expr = $trim_action_ir_value->($effective_args->[2]);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($target_expr) && length($target_expr)
+       && defined($key_expr) && length($key_expr)
+       && defined($value_expr) && length($value_expr);
+  my $hash_symbol = $extract_hash_symbol_name->($target_expr);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($hash_symbol) && length($hash_symbol);
+  my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($key_lowered) && length($key_lowered);
+  my $value_lowered = _lower_mutation_slot_value_expr($value_expr, $deps);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($value_lowered) && length($value_lowered);
+  return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
+ }
+
+ if ($method eq 'push' || $method eq 'push_value') {
+  my $effective_args;
+  if ($method eq 'push_value') {
+   $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
+   return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
+  } else {
+   return _actionir_ast_unsupported_helper_expr($method) unless @$args == 2;
+   my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
+   my $first_expr = $trim_action_ir_value->($args->[0]);
+   my $second_expr = $trim_action_ir_value->($args->[1]);
+   my $second_literal = $lower_primitive_literal_expr->($second_expr);
+   return undef if defined($first_expr) && defined($second_expr)
+              && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
+              && !defined($second_literal);
+   $effective_args = $args;
+  }
+
+  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+  my $target_expr = $trim_action_ir_value->($effective_args->[0]);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($target_expr) && length($target_expr);
+  my $target_symbol = $extract_array_symbol_name->($target_expr);
+  if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
+   $target_symbol = $1;
+  }
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($target_symbol) && length($target_symbol);
+  my $value_expr = $trim_action_ir_value->($effective_args->[1]);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($value_expr) && length($value_expr);
+  my $lowered_value = _lower_method_value_expr($value_expr, $deps);
+  $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
+  return "push \@$target_symbol, $lowered_value"
+ }
+
+ if ($method eq 'push_nonempty') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
+  return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
+  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+  my $target_expr = $trim_action_ir_value->($effective_args->[0]);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($target_expr) && length($target_expr);
+  my $target_symbol = $extract_array_symbol_name->($target_expr);
+  if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
+   $target_symbol = $1;
+  }
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($target_symbol) && length($target_symbol);
+  my $value_expr = $trim_action_ir_value->($effective_args->[1]);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($value_expr) && length($value_expr);
+  my $lowered_value = _lower_method_value_expr($value_expr, $deps);
+  $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
+  return 'do { my $__ls_push_nonempty = '.$lowered_value.'; if (defined($__ls_push_nonempty)) { my $__ls_push_nonempty_ok = (ref($__ls_push_nonempty) eq \'ARRAY\') ? scalar(@{$__ls_push_nonempty}) : (ref($__ls_push_nonempty) eq \'HASH\') ? scalar(keys %{$__ls_push_nonempty}) : (ref($__ls_push_nonempty) ? 1 : ($__ls_push_nonempty ne \'\')); push @'.$target_symbol.', $__ls_push_nonempty if $__ls_push_nonempty_ok } }'
+ }
+
+ return undef
+}
+
+sub _lower_ast_array_end_mutation_method_statement {
+ my ($node, $deps) = @_;
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'fluent_chain';
+ my $calls = $node->{calls};
+ return undef unless ref($calls) eq 'ARRAY' && @$calls == 1;
+ my $call = $calls->[0];
+ return undef unless ref($call) eq 'HASH';
+ my $method = $call->{method};
+ return undef unless defined($method) && $method =~ /^(?:push_front|push_back|pop_front|pop_back)$/o;
+
+ my $args = $call->{args} || [];
+ return _actionir_ast_unsupported_helper_expr($method)
+  if $method =~ /^push_/o && @$args != 1;
+ return _actionir_ast_unsupported_helper_expr($method)
+  if $method =~ /^pop_/o && @$args != 0;
+
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+
+ my $receiver_expr = _actionir_ast_value_source_expr($node->{receiver});
+ return _actionir_ast_unsupported_helper_expr($method)
+  unless defined($receiver_expr) && length($receiver_expr);
+ my $target_symbol = $extract_array_symbol_name->($receiver_expr);
+ if (!defined($target_symbol) && $receiver_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  $target_symbol = $1;
+ }
+ return _actionir_ast_unsupported_helper_expr($method)
+  unless defined($target_symbol) && length($target_symbol);
+
+ if ($method eq 'push_back' || $method eq 'push_front') {
+  my $value_expr = _actionir_ast_value_source_expr($args->[0]);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($value_expr) && length($value_expr);
+  my $lowered_value = _lower_mutation_slot_value_expr($value_expr, $deps);
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($lowered_value) && length($lowered_value);
+  return ($method eq 'push_back' ? 'push @' : 'unshift @').$target_symbol.', '.$lowered_value
+ }
+
+ return 'pop @'.$target_symbol if $method eq 'pop_back';
+ return 'shift @'.$target_symbol if $method eq 'pop_front';
  return undef
 }
 
@@ -3559,6 +3793,9 @@ sub _lower_return_general_statement {
  };
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
 
+ my $ast_lowered = _lower_ast_call_statement($expr, 'return', $deps);
+ return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'return';
 
@@ -4207,6 +4444,12 @@ sub _parse_array_end_mutation_method_statement {
 #------------------------------------------------------------------------------
 sub _lower_array_end_mutation_method_statement {
  my ($expr, $deps) = @_;
+ my $ast_lowered = _lower_ast_array_end_mutation_method_statement(
+  _parse_method_value_ast_expr($expr, $deps),
+  $deps,
+ );
+ return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+
  my $parsed = _parse_array_end_mutation_method_statement($expr, $deps);
  return undef unless $parsed;
 
@@ -4372,6 +4615,9 @@ sub _lower_set_key_statement {
  my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
+ my $ast_lowered = _lower_ast_call_statement($expr, 'set_key', $deps);
+ return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'set_key';
 
@@ -4419,6 +4665,9 @@ sub _lower_push_value_statement {
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
+
+ my $ast_lowered = _lower_ast_call_statement($expr, ['push', 'push_value'], $deps);
+ return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
@@ -4478,6 +4727,9 @@ sub _lower_push_nonempty_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ my $ast_lowered = _lower_ast_call_statement($expr, 'push_nonempty', $deps);
+ return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'push_nonempty';
@@ -4549,6 +4801,9 @@ sub _lower_return_undef_statement {
  };
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+
+ my $ast_lowered = _lower_ast_call_statement($expr, 'return_undef', $deps);
+ return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'return_undef';

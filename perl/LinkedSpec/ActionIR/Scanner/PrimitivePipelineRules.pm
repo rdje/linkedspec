@@ -133,16 +133,24 @@ while ($code =~ /\b(?<expr>push_nonempty\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.
  my $call = _parse_method_function_expr($raw_expr);
  next unless $call && $call->{method} eq 'push_nonempty';
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
- next unless $effective_args;
+ if (!$effective_args) {
+  push @events, {raw => $raw_expr, args => {}};
+  next;
+ }
  my $target_expr = _trim_action_ir_value($effective_args->[0]);
  my $value_expr = _trim_action_ir_value($effective_args->[1]);
- next unless defined($target_expr) && length($target_expr);
- next unless defined($value_expr) && length($value_expr);
+ if (!defined($target_expr) || !length($target_expr) || !defined($value_expr) || !length($value_expr)) {
+  push @events, {raw => $raw_expr, args => {}};
+  next;
+ }
  my ($target_symbol) = $target_expr =~ /^(?:array|a)\s*\(\s*(\w+)\s*\)$/o;
  if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
   $target_symbol = $1;
  }
- next unless defined($target_symbol) && length($target_symbol);
+ if (!defined($target_symbol) || !length($target_symbol)) {
+  push @events, {raw => $raw_expr, args => {}};
+  next;
+ }
  push @events, {raw => $raw_expr, args => {target => $target_symbol, value => $value_expr, predicate => 'nonempty'}};
 }
  return \@events

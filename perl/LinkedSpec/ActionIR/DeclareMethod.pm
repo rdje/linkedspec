@@ -266,6 +266,31 @@ sub _lower_assign_method_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $lower_assign_statement = $require_dep->('lower_assign_statement');
 
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodLowering');
+ my $ast_node = LinkedSpec::ActionIR::MethodLowering::_parse_method_value_ast_expr($expr, $deps);
+ if (ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') eq 'call') {
+  my $method = LinkedSpec::ActionIR::MethodLowering::_actionir_ast_statement_method($ast_node->{name});
+  if (defined($method) && $method eq 'assign') {
+   my @args;
+   my $all_args_supported = 1;
+   foreach my $arg (@{$ast_node->{args} || []}) {
+    my $arg_expr = LinkedSpec::ActionIR::MethodLowering::_actionir_ast_value_source_expr($arg);
+    if (!defined($arg_expr) || !length($arg_expr)) {
+     $all_args_supported = 0;
+     last;
+    }
+    push @args, $arg_expr;
+   }
+   if ($all_args_supported) {
+    my $effective_args = $normalize_method_args_with_optional_scope->(\@args, 2, 2);
+    if ($effective_args) {
+     my $ast_lowered = $lower_assign_statement->($effective_args->[0], $effective_args->[1]);
+     return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+    }
+   }
+  }
+ }
+
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'assign';
 

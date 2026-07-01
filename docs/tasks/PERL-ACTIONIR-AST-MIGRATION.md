@@ -257,18 +257,27 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.1 - lower statement operators from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.2`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Lower helper-call statements and returns from AST `call` nodes.
   Acceptance: Statement-form `set`/`assign`, `push`, `set_key`, array end-mutation
     helpers, `return`, and `return_undef` consume typed call names/arguments before
     entering the existing statement helper catalog. Symbol/value slot policies remain
     explicit and unsupported covered helper statements diagnose instead of leaking host
     calls.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** `MethodLowering` now consumes AST `call`
+    nodes for `return`, `return_undef`, `set_key`, `push`, `push_value`, and
+    `push_nonempty`, and AST `fluent_chain` nodes for array end-mutation
+    statements. `DeclareMethod` bridges top-level `set`/`assign` through typed
+    call arguments. Focused tests poison original text and AST `source` fields
+    across the statement helper family, and `push_nonempty(items)` now reports
+    an unresolved-helper sentinel instead of leaking a host call. Checks passed:
+    syntax checks for touched modules, focused AST parser suite, phase0 1002
+    tests, `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map
+    gates, `git diff --check`, and `bash tools/run_ci_local.sh`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.4.2 - lower statement calls from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.3`
-  Status: `pending`
+  Status: `pending` (frontier)
   Goal: Lower block-value side-effect statements and block-local returns from AST.
   Acceptance: Expression-valued blocks walk `action_block` / `action_stmt` nodes for
     non-final side-effect statements and block-local `return(...)` payloads instead of
@@ -315,7 +324,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `done` 2026-07-01 | Return payloads now enter AST value traversal before the raw fallback. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4` | `split` 2026-07-01 | Statement/control AST lowering split by behavior family before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.1` | `done` 2026-07-01 | Parsed assignment/mutation operator statement nodes now lower from AST fields. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.2` | `pending` | Lower helper-call statements and returns from AST call nodes. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.4.2` | `done` 2026-07-01 | Helper-call statements, returns, and array end-mutation receiver statements now lower from AST call/fluent-chain fields. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.3` | `pending` | Lower block-value side-effect statements and block-local returns from AST. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -510,9 +520,33 @@ shape-literal target-kind inference, source-slot scalar reads, mutation value-sl
 and hash-key lowering byte-compatible while proving the original statement text and AST
 `source` fields are no longer authoritative for these operator statements.
 
-Helper-call statements (`set`, `push`, `set_key`, `return`, `return_undef`) remain queued
-for `.4.2`; block-value side effects and block-local returns remain `.4.3`; structured
+Helper-call statements (`set`, `push`, `set_key`, `return`, `return_undef`) are now covered
+by `.4.2`; block-value side effects and block-local returns remain `.4.3`; structured
 control-flow statements remain `.4.4`.
+
+## PERL-ACTIONIR-AST-MIGRATION.4.2 Helper-Call Statement AST Lowering
+
+The second statement-lowering code leaf moves statement helper calls onto typed call
+materialization before the legacy parser/regex paths:
+
+- `set(...)` / `assign(...)` through `DeclareMethod` and the existing assignment policy;
+- `set_key(...)` through the hash mutation key/value policy;
+- `push(...)`, `push_value(...)`, and `push_nonempty(...)` through the existing explicit
+  append helpers;
+- `return(...)` and `return_undef()` through the return statement helpers;
+- `items.push_back(...)`, `items.push_front(...)`, `items.pop_back()`, and
+  `items.pop_front()` through AST `fluent_chain` receiver/call fields.
+
+The AST bridge materializes supported call arguments from typed fields, then deliberately
+re-enters the existing statement helper catalog. This preserves the known slot boundaries:
+`push_value` and `push_nonempty` keep their legacy value-expression slot behavior, while
+`set_key` and array end mutations keep mutation scalar-read slots. Raw compatibility
+arguments such as `scalaref(retv, {content})` and host-style `substr($$STRING, ...)` still
+fall back to the legacy path until later migration leaves type those surfaces.
+
+Unsupported covered statement helpers can now surface through the existing unresolved-helper
+sentinel path; the focused lock covers `push_nonempty(items)`, which no longer remains as a
+generated host helper call.
 
 ## PERL-ACTIONIR-AST-MIGRATION.2 Parser Seam
 
@@ -640,6 +674,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.2` | Added typed AST statement-call dispatcher, top-level `set`/`assign` bridge, array end-mutation fluent-chain lowering, scanner sentinel path for unsupported `push_nonempty`, focused fake-source tests, syntax checks, focused AST parser suite, phase0 1002 tests, mdBook/doctrine/KM/diff checks, and full local CI | Helper-call statements and returns now consume AST call/fluent-chain fields before legacy source-text paths. Frontier moves to `.4.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.1` | Added typed AST assignment/mutation operator materialization and focused fake-source tests for scalar assignment, array append, and hash-index assignment; syntax checks; focused AST parser suite; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Assignment/mutation operator statements now consume typed AST node fields before legacy source-text regex paths. Frontier moves to `.4.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4` | Split statement/control AST lowering into `.4.1` assignment/mutation operator nodes, `.4.2` helper-call statements and returns, `.4.3` block-value side-effect traversal/block-local returns, and `.4.4` structured control-flow forms | Statement/control migration is now owned by focused children before code. Frontier moves to `.4.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.4` | Added return-payload AST fast path before raw fallback; focused fake-source tests for typed return arrays/hashes/strings/calls/chains, bare scalar source-slot payloads, unsupported covered chain diagnostics, and raw compatibility payloads; syntax checks; focused AST parser suite; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Typed return payloads now consume AST value/call/chain nodes before legacy helper-substitution fallback. Frontier moves to `.4`. |

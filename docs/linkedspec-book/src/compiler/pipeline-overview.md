@@ -51,9 +51,11 @@ the same AST value traversal before the legacy raw fallback, preserving scalar s
 reads such as `return(count)` and narrow compatibility payloads that are still untyped.
 Assignment and mutation operator statements (`name = value`, `items += value`, and
 `meta[key] = value`) now also consume typed AST target/key/value fields before the legacy
-statement-regex fallback. Helper-call statements and structured control-flow lowering
-still migrate in later leaves; the wrapper forms remain compatibility syntax, not the
-canonical destination surface.
+statement-regex fallback. Helper-call statements now consume typed AST `call` fields for
+`set`/`assign`, `set_key`, `push`, `push_value`, `push_nonempty`, `return`, and
+`return_undef`, while array end-mutation receiver statements consume AST `fluent_chain`
+receiver/call fields. Structured control-flow lowering still migrates in later leaves;
+the wrapper forms remain compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters
 

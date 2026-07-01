@@ -160,6 +160,98 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     ok($parse_calls >= 3, 'assignment/mutation statements entered through the AST parser');
 };
 
+subtest 'statement helper-call lowering consumes AST call nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $array = sub {
+        my (@items) = @_;
+        return { kind => 'array_literal', source => '__bad_array_source__()', items => \@items };
+    };
+    my $call = sub {
+        my ($name, @args) = @_;
+        return { kind => 'call', name => $name, source => '__bad_call_'.$name.'__()', args => \@args };
+    };
+    my $chain = sub {
+        my ($receiver, @calls) = @_;
+        return { kind => 'fluent_chain', source => '__bad_chain_source__()', receiver => $receiver, calls => \@calls };
+    };
+    my $fluent_call = sub {
+        my ($method, @args) = @_;
+        return { method => $method, source => '__bad_fluent_'.$method.'__()', args => \@args };
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            if ($expr eq 'set(name, [poison])') {
+                return $call->('assign', $var->('name'), $array->($var->('value')));
+            }
+            if ($expr eq 'set_key(hash(meta), poison_key, poison_value)') {
+                return $call->('set_key', $call->('hash', $var->('meta')), $var->('key'), $var->('value'));
+            }
+            if ($expr eq 'push_value(items, poison)') {
+                return $call->('push_value', $var->('items'), $var->('value'));
+            }
+            if ($expr eq 'push(array(items), poison)') {
+                return $call->('push', $call->('array', $var->('items')), $var->('value'));
+            }
+            if ($expr eq 'push_nonempty(array(items), poison)') {
+                return $call->('push_nonempty', $call->('array', $var->('items')), $var->('value'));
+            }
+            if ($expr eq 'return([poison])') {
+                return $call->('return', $array->($var->('value')));
+            }
+            if ($expr eq 'return_undef(poison)') {
+                return $call->('return_undef');
+            }
+            if ($expr eq 'items.push_back(poison)') {
+                return $chain->($var->('items'), $fluent_call->('push_back', $var->('value')));
+            }
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $assign = LinkedSpec::call_spec_handler_subst('Top', q{set(name, [poison])});
+        is($assign, '@name = ($value)', 'set/assign statement lowers from AST call args');
+
+        my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(hash(meta), poison_key, poison_value)});
+        is($set_key, '$meta{$key} = $value', 'set_key statement lowers target/key/value from AST call args');
+
+        my $push_value = LinkedSpec::call_spec_handler_subst('Top', q{push_value(items, poison)});
+        is($push_value, 'push @items, value', 'push_value statement lowers from AST call args');
+
+        my $push = LinkedSpec::call_spec_handler_subst('Top', q{push(array(items), poison)});
+        is($push, 'push @items, value', 'push statement lowers explicit append from AST call args');
+
+        my $push_nonempty = LinkedSpec::call_spec_handler_subst('Top', q{push_nonempty(array(items), poison)});
+        like($push_nonempty, qr/push \@items, \$__ls_push_nonempty/, 'push_nonempty statement keeps append guard');
+        like($push_nonempty, qr/my \$__ls_push_nonempty = value\b/, 'push_nonempty value slot lowers from AST call args');
+
+        my $return = LinkedSpec::call_spec_handler_subst('Top', q{return([poison])});
+        is($return, 'return [$value]', 'return statement lowers payload from AST call args');
+
+        my $return_undef = LinkedSpec::call_spec_handler_subst('Top', q{return_undef(poison)});
+        is($return_undef, 'return undef', 'return_undef statement lowers from AST call arity');
+
+        my $push_back = LinkedSpec::call_spec_handler_subst('Top', q{items.push_back(poison)});
+        is($push_back, 'push @items, $value', 'array end-mutation statement lowers from AST receiver/call fields');
+
+        my $all = join("\n", $assign, $set_key, $push_value, $push, $push_nonempty, $return, $return_undef, $push_back);
+        unlike($all, qr/poison|__bad_/, 'statement helper-call lowering does not reuse fake AST source or original poison text');
+    }
+
+    my $bad_push_nonempty = LinkedSpec::call_spec_handler_subst('Top', q{push_nonempty(items)});
+    unlike($bad_push_nonempty, qr/\bpush_nonempty\s*\(/, 'unsupported covered statement helper no longer leaks as a host call');
+    like($bad_push_nonempty, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_nonempty/, 'unsupported covered statement helper leaves diagnostic sentinel');
+
+    ok($parse_calls >= 8, 'statement helper calls entered through the AST parser');
+};
+
 subtest 'receiver chains accept all expression receivers' => sub {
     my $call_receiver = parse_expr('builder().trim().split("-").count()');
     is($call_receiver->{kind}, 'fluent_chain', 'function-call receiver chain parses');

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.2 — helper-call statements from AST): Moved the next statement
+  family onto typed AST consumption. Durable points. (1) **Call statements now have an AST bridge.**
+  `return`, `return_undef`, `set_key`, `push`, `push_value`, and `push_nonempty` statements consume AST `call`
+  names/arguments before legacy text parsing. (2) **Top-level `set`/`assign` needed the DeclareMethod path.**
+  The assign bridge stays lazy inside `_lower_assign_method_statement(...)` so synthetic dependency-builder
+  tests do not gain a new required callback. (3) **Receiver-dot array mutations are fluent-chain statements.**
+  `items.push_back(...)`, `push_front`, `pop_back`, and `pop_front` now lower from typed receiver/call fields.
+  (4) **Raw compatibility still falls back.** Unsupported/raw arguments such as `scalaref(retv, {content})`
+  and host-style `substr($$STRING, ...)` return to the legacy path instead of becoming AST sentinels.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.1 — assignment/mutation operators from AST): Landed the first
   statement-level AST consumer. Durable points. (1) **Typed fields drive operator statements.** `assign_scalar`,
   `assign_array_append`, and `assign_hash_index` nodes now lower from `name` / `key` / `value` fields before the
@@ -8,8 +18,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   helper/action text from typed nodes and then reuses the existing scalar assignment, array append, and
   hash-index lowering logic, preserving target-kind inference and source/mutation slot semantics. (3) **Poisoned
   source is locked out.** Focused tests intentionally use original poison identifiers plus fake AST `source`
-  fields and assert generated output comes from typed fields. (4) **Helper statements remain separate.** `set`,
-  `push`, `set_key`, `return`, and `return_undef` stay queued for `.4.2`.
+  fields and assert generated output comes from typed fields. (4) **Helper statements followed in `.4.2`.**
+  `set`, `push`, `set_key`, `return`, and `return_undef` are now covered by the statement-call AST bridge.
 
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4 — statement/control AST split): Split the next migration parent
   before code. Durable points. (1) **Operator statement nodes are first.** `.4.1` should use the AST parser's

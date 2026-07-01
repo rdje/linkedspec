@@ -27,4 +27,5 @@ inference, source-slot scalar reads, array append mutation value slots, and hash
 lowering while removing source-regex ownership for those operator statements.
 
 Helper-call statements such as `set(...)`, `push(...)`, `set_key(...)`, `return(...)`,
-and `return_undef()` remain queued for `PERL-ACTIONIR-AST-MIGRATION.4.2`.
+and `return_undef()` moved to AST lowering in `PERL-ACTIONIR-AST-MIGRATION.4.2`; see
+`docs/knowledge/perl-actionir-ast-statement-call-lowering.md`.
