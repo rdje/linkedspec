@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.4 — structured-control AST lowering split**
+  (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). The broad structured-control migration is
+  now split before code into `.4.4.1` typed control-flow AST parser nodes and node-shape locks, `.4.4.2`
+  `if`/`when`/`otherwise` lowering from AST, `.4.4.3` `switch`/`case`/`default` lowering from AST, and `.4.4.4`
+  `while` lowering from AST while preserving iteration-safety behavior.
+  **Verification:** memory/doctrine/Knowledge Map gates PASS; `git diff --check` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.4.1` add typed control-flow AST parser nodes and focused parser
+  locks before switching lowering consumers.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.3 — block-value side effects and block-local returns from AST**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering` now routes parsed `block_value` nodes
   into the AST value path before legacy block splitting. Inside AST block values, non-final side-effect
@@ -18,7 +26,7 @@ Current execution status for interruption-safe batch workflow recovery.
   focused subtests**; `prove -q -Iperl t/phase0_regression.t` PASS with phase0 **1002 tests**; `mdbook build
   docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates PASS; `git diff --check` PASS; `bash
   tools/run_ci_local.sh` PASS.
-  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.4` lower structured control-flow statement forms from AST nodes.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.4` split structured control-flow statement AST lowering.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.2 — helper-call statements and returns from AST**
   (PERL ACTIONIR + SCANNER DIAGNOSTIC + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering` now consumes typed
   AST `call` nodes for `return`, `return_undef`, `set_key`, `push`, `push_value`, and `push_nonempty`, and

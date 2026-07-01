@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4 — split structured-control AST lowering
+
+**Scope:** Task-tree split, roadmap/task index, and live continuity docs. No parser/compiler/runtime code
+changed.
+
+**What changed:** Split structured control-flow AST lowering into focused children before code: `.4.4.1`
+control-flow AST parser nodes and node-shape locks, `.4.4.2` `if`/`when`/`otherwise` lowering from AST,
+`.4.4.3` `switch`/`case`/`default` lowering from AST, and `.4.4.4` `while` lowering from AST with existing
+iteration-safety behavior preserved.
+
+**Reason:** Structured control lowering combines parser support for attached blocks and marker forms, branch
+body lowering, switch state, and while safety. Splitting keeps each executable leaf narrow and testable.
+
+**Checks:** Memory/doctrine/Knowledge Map gates and `git diff --check` passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.3 — lower block values from AST statements
 
 **Scope:** Perl ActionIR block-value lowering, focused AST parser/lowering tests, mdBook architecture text,

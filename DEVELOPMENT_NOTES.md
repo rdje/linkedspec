@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4 — structured-control split): Split the remaining structured
+  control-flow AST migration before code. Durable points. (1) **Parser nodes come first.** `.4.4.1` owns typed
+  AST node shapes for attached-block and marker-style control forms before lowering switches over. (2) **Branch
+  families stay separate.** `.4.4.2` owns `if`/`when`/`otherwise`, `.4.4.3` owns switch/case/default state, and
+  `.4.4.4` owns while lowering with iteration-safety behavior preserved. (3) **No runtime behavior changed in
+  the split.** This commit only narrows ownership so code leaves can be validated independently.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.3 — block-value statements from AST): Moved expression-valued
   block internals onto typed AST statements. Durable points. (1) **Block values bridge before text splitting.**
   `_lower_block_value_expr(...)` now tries the parsed `block_value` node through the AST value path before the

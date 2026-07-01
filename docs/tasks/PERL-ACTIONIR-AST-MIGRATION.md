@@ -294,11 +294,50 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.3 - lower block values from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4`
-  Status: `pending` (frontier)
+  Status: `split` (2026-07-01)
   Goal: Lower structured control-flow statement forms from AST.
+  Children: `.4.4.1`, `.4.4.2`, `.4.4.3`, `.4.4.4`
   Acceptance: `if`/`when`/`otherwise`, `switch`/`case`/`default`, and `while` forms lower
     from typed condition/block/case nodes rather than textual marker reconstruction.
     Existing attached-block, fluent-control, and iteration-safety behavior remains stable.
+  Verification: **PASS 2026-07-01 (split only).** Split structured-control AST
+    lowering before code into parser-node, if/when/otherwise, switch/case/default,
+    and while children. Memory/doctrine/Knowledge Map gates and `git diff --check`
+    passed.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4 - split structured-control AST lowering`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.1`
+  Status: `pending` (frontier)
+  Goal: Add typed control-flow AST parser nodes and focused parser locks.
+  Acceptance: Attached-block and marker-style control forms parse into typed AST nodes
+    carrying condition/source/body/case/default fields as applicable, while existing
+    production lowering behavior remains unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.2`
+  Status: `pending`
+  Goal: Lower `if`/`when`/`otherwise` statement forms from AST.
+  Acceptance: If/elseif/else/endif and when/otherwise forms consume typed condition and
+    branch-body nodes before legacy textual marker reconstruction. Existing attached-block
+    and fluent-control behavior stays stable.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.3`
+  Status: `pending`
+  Goal: Lower `switch`/`case`/`default` statement forms from AST.
+  Acceptance: Switch source expressions, case match values, default branches, and optional
+    endcase/endswitch markers consume typed AST fields while preserving existing switch
+    state and branch-order behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.4`
+  Status: `pending`
+  Goal: Lower `while` statement forms from AST.
+  Acceptance: While conditions and attached/marker body statements consume typed AST fields
+    while preserving the existing iteration-safety guard and generated behavior.
   Verification: `pending`
   Commit: `pending`
 
@@ -333,7 +372,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.1` | `done` 2026-07-01 | Parsed assignment/mutation operator statement nodes now lower from AST fields. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.2` | `done` 2026-07-01 | Helper-call statements, returns, and array end-mutation receiver statements now lower from AST call/fluent-chain fields. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.4.3` | `done` 2026-07-01 | Block-value side effects, block-local returns, and final expressions now lower from AST block/statement fields. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.4` | `pending` | Lower structured control-flow statement forms from AST. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.4.4` | `split` 2026-07-01 | Structured control-flow AST lowering split by parser nodes, branch family, switch state, and while safety before code. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.4.4.1` | `pending` | Add typed control-flow AST parser nodes and focused parser locks. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -507,11 +547,23 @@ forms that may need additional AST parser nodes. `.4` is therefore split before 
   symbol/value slot policy;
 - `.4.3`: walk `action_block` / `action_stmt` nodes inside block values and block-local
   `return(...)` handling;
-- `.4.4`: add/use typed control-flow nodes for if/when/otherwise, switch/case/default,
-  and while forms.
+- `.4.4`: split structured control-flow lowering into parser-node, if/when/otherwise,
+  switch/case/default, and while children.
 
 The split keeps the `.4` parent acceptance intact while making the first executable leaf
 small enough to validate without changing control-flow semantics.
+
+## PERL-ACTIONIR-AST-MIGRATION.4.4 Structured-Control AST Split
+
+Structured control-flow lowering is broad enough to need another split before code:
+
+- `.4.4.1`: typed control-flow AST parser nodes and focused parser locks;
+- `.4.4.2`: `if`/`when`/`otherwise` lowering from typed condition/body nodes;
+- `.4.4.3`: `switch`/`case`/`default` lowering from typed source/case/default fields;
+- `.4.4.4`: `while` lowering from typed condition/body nodes while preserving iteration safety.
+
+This keeps parser node shape, branch-body lowering, switch-state handling, and while safety
+on separate verification surfaces.
 
 ## PERL-ACTIONIR-AST-MIGRATION.4.1 Assignment/Mutation Operator AST Statements
 
@@ -697,6 +749,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.4` | Split structured-control AST lowering into `.4.4.1` parser nodes, `.4.4.2` if/when/otherwise, `.4.4.3` switch/case/default, and `.4.4.4` while; memory/doctrine/KM/diff checks | Structured-control migration is now owned by focused children before code. Frontier moves to `.4.4.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.3` | Added AST block-value bridge, AST side-effect statement lowering inside block values, focused fake-source tests, syntax checks, focused AST parser suite with 15 subtests, phase0 1002 tests, mdBook/doctrine/KM/diff checks, and full local CI | Block-value side effects, block-local returns, and final expressions now consume AST block/statement fields before legacy source-text fallback. Frontier moves to `.4.4`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.2` | Added typed AST statement-call dispatcher, top-level `set`/`assign` bridge, array end-mutation fluent-chain lowering, scanner sentinel path for unsupported `push_nonempty`, focused fake-source tests, syntax checks, focused AST parser suite, phase0 1002 tests, mdBook/doctrine/KM/diff checks, and full local CI | Helper-call statements and returns now consume AST call/fluent-chain fields before legacy source-text paths. Frontier moves to `.4.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.4.1` | Added typed AST assignment/mutation operator materialization and focused fake-source tests for scalar assignment, array append, and hash-index assignment; syntax checks; focused AST parser suite; phase0 1002 tests; mdBook/doctrine/KM/diff checks; full local CI | Assignment/mutation operator statements now consume typed AST node fields before legacy source-text regex paths. Frontier moves to `.4.2`. |
