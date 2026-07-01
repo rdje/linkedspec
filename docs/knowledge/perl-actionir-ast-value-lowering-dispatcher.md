@@ -9,7 +9,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, method-lowering, migration]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.3.1 added a MethodLowering AST dispatcher. _lower_method_value_expr now parses with LinkedSpec::ActionIR::AST and lowers primitive literals, scoped bare scalar reads, direct indexed/nested access, array/hash shape literals, and block values from typed nodes. PERL-ACTIONIR-AST-MIGRATION.3.2.1 added AST lowering for value-only helper-call composition. Aggregate-wrapper/symbol-slot helper calls, top-level fluent_chain receiver lowering, statement/control lowering, and remaining return-payload substitution are still later leaves."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.3.1 added a MethodLowering AST dispatcher. _lower_method_value_expr now parses with LinkedSpec::ActionIR::AST and lowers primitive literals, scoped bare scalar reads, direct indexed/nested access, array/hash shape literals, and block values from typed nodes. PERL-ACTIONIR-AST-MIGRATION.3.2.1 added AST lowering for value-only helper-call composition, and .3.2.2 added slot-aware AST lowering for deprecated wrappers plus aggregate-wrapper, collection/reducer, and hash helper calls. Top-level fluent_chain receiver lowering, covered-call diagnostics, statement/control lowering, and remaining return-payload substitution are still later leaves."
 reverify: "prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t"
 ---
 
@@ -27,9 +27,12 @@ The `.3.1` AST-lowered surface is:
 - block values, with statement-level side effects still delegated to the existing
   statement compatibility path until the statement/control leaf lands.
 
-Value-only helper calls have since moved to the AST call dispatcher in
+Value-only helper calls moved to the AST call dispatcher in
 `PERL-ACTIONIR-AST-MIGRATION.3.2.1`; see
-`docs/knowledge/perl-actionir-ast-value-only-call-lowering.md`. Aggregate-wrapper and
-symbol-slot helper calls plus `fluent_chain` receiver-dot chains still use compatibility
-paths. Nested unsupported call nodes inside AST-lowered values go through an explicit
-compatibility bridge so later leaves can replace those families separately.
+`docs/knowledge/perl-actionir-ast-value-only-call-lowering.md`. Aggregate-wrapper,
+collection/reducer, and hash helper calls moved to the slot-aware AST call dispatcher in
+`PERL-ACTIONIR-AST-MIGRATION.3.2.2`; see
+`docs/knowledge/perl-actionir-ast-aggregate-call-lowering.md`. `fluent_chain`
+receiver-dot chains still use compatibility paths. Nested unsupported call nodes inside
+AST-lowered values go through an explicit compatibility bridge so later leaves can
+replace those families separately.

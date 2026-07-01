@@ -24,12 +24,13 @@ consumer has started using that AST for non-call value expressions: primitive li
 scoped bare scalar reads, direct indexed/nested access, shape literals, and block
 values. It also lowers value-only helper-call composition from AST `call` nodes for
 scalar normalization, string predicate/composition, coalesce/concat, and scalar-argument
-numeric helpers while deprecated wrapper aliases such as `scalar(...)`/`array(...)`/
-`hash(...)`, aggregate-wrapper calls, and symbol-slot helper calls continue through
-explicit compatibility paths. Those wrappers are not the canonical destination syntax.
-Receiver-dot chains, statement/control lowering, and remaining return-payload
-substitution are still migrating family by family, so any remaining text-to-text
-lowering is migration debt rather than a backend pattern to copy.
+numeric helpers. It also lowers aggregate-wrapper, collection/reducer, and hash helper
+calls from AST `call` nodes while preserving their existing symbol/value slot policy.
+Deprecated wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)` remain
+compatibility syntax, not the canonical destination surface. Receiver-dot chains,
+statement/control lowering, unsupported covered-call diagnostics, and remaining
+return-payload substitution are still migrating family by family, so any remaining
+text-to-text lowering is migration debt rather than a backend pattern to copy.
 New backends should follow the typed-AST model used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is

@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2.2 — lower aggregate helper calls from AST
+
+**Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,
+Knowledge Map, and live docs.
+
+**What changed:** `MethodLowering::_lower_method_value_expr(...)` now dispatches aggregate-wrapper,
+collection, reducer, and hash helper families from AST `call` nodes before the legacy text cascade. Covered
+calls reconstruct helper surfaces from typed AST argument nodes, normalize aliases (`s`/`a`/`h`, numeric word
+aliases), and reuse the existing Perl helper catalog through the explicit compatibility bridge.
+
+**Compatibility boundary:** Deprecated wrappers (`scalar(...)`, `array(...)`, `hash(...)`) remain accepted
+compatibility aliases per ADR 0007, not canonical destination syntax. The AST dispatcher preserves aggregate
+symbol slots and quoted-wrapper literal boundaries, so `array(items)` keeps reading `@items` while
+`array("items")` stays a literal constructor payload. Receiver-dot chains and covered-call diagnostics remain
+queued for later leaves.
+
+**Tests:** Added focused fake-source AST tests for wrappers, copy helpers, reducers, collection helpers, and hash
+helpers. Syntax checks, `prove -Iperl t/actionir_ast_parser.t`, targeted public lowering probes,
+`mdbook build docs/linkedspec-book`, and `bash tools/run_ci_local.sh` passed; phase0 covered 1002 tests.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2.1 — lower value-only helper calls from AST
 
 **Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,
@@ -11,10 +31,10 @@ for value-only helper families. The dispatcher recursively lowers argument AST n
 bare-variable behavior in helper-call slots, canonicalizes numeric word aliases, and then reuses the existing
 Perl helper catalog through the explicit compatibility bridge.
 
-**Compatibility boundary:** Deprecated wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)`,
-aggregate-wrapper, collection, reducer, hash, symbol-slot, and receiver-chain helpers remain on explicit
-compatibility paths for `.3.2.2`/`.3.3`; those wrappers are not the canonical destination syntax. This leaf
-does not change public helper output.
+**Compatibility boundary:** At this `.3.2.1` leaf, deprecated wrapper aliases such as
+`scalar(...)`/`array(...)`/`hash(...)`, aggregate-wrapper, collection, reducer, hash, symbol-slot, and
+receiver-chain helpers stayed on explicit compatibility paths for `.3.2.2`/`.3.3`; those wrappers are not the
+canonical destination syntax. This leaf did not change public helper output.
 
 **Tests:** Added focused fake-source AST call tests proving covered helper calls do not reuse call-node source
 text. Syntax checks, `prove -Iperl t/actionir_ast_parser.t`, and targeted public lowering probes passed.

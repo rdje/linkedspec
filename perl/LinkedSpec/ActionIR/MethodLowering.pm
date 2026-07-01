@@ -1141,19 +1141,218 @@ sub _lower_method_value_expr {
   num_lt           => [2, 2],
   num_le           => [2, 2],
  );
- my $ast_value_only_call_method = sub {
-  my ($method, $argc) = @_;
+ my %ast_aggregate_call_arity = (
+  scalar               => [1, 2],
+  array                => [0, undef],
+  hash                 => [0, undef],
+  array_copy           => [1, 1],
+  hash_copy            => [1, 1],
+  copy                 => [1, 1],
+  flat                 => [1, 1],
+  flat_array           => [1, 1],
+  flat_hash            => [1, 1],
+  count                => [1, 1],
+  first                => [1, 1],
+  last                 => [1, 1],
+  drop_front           => [1, 2],
+  take                 => [1, 2],
+  slice                => [2, 3],
+  take_last            => [1, 2],
+  drop_back            => [1, 2],
+  concat_arrays        => [1, undef],
+  split                => [2, 2],
+  split_tagged_records => [3, undef],
+  sorted               => [1, 1],
+  reversed             => [1, 1],
+  contains             => [2, 2],
+  index_of             => [2, 2],
+  split_each           => [2, 2],
+  trim_each            => [1, 1],
+  filter_nonempty      => [1, 1],
+  lowercase_each       => [1, 1],
+  uppercase_each       => [1, 1],
+  uniq                 => [1, 1],
+  filter_match         => [2, 2],
+  count_keys           => [1, 1],
+  sorted_keys          => [1, 1],
+  sorted_values        => [1, 1],
+  has_key              => [2, 2],
+  merge_hash           => [1, undef],
+  set_key              => [3, 3],
+  rename_key           => [3, 3],
+  drop_keys            => [2, undef],
+  pick_keys            => [2, undef],
+  join_values          => [2, 2],
+  entry_groups         => [0, 0],
+  match_groups         => [0, 0],
+  entry_map            => [0, 0],
+  entry_named_map      => [0, 0],
+  match_map            => [0, 0],
+  match_named_map      => [0, 0],
+  num_sum              => [1, 1],
+  num_avg              => [1, 1],
+  num_median           => [1, 1],
+  num_range            => [1, 1],
+  num_min              => [1, undef],
+  num_max              => [1, undef],
+ );
+ my $normalize_ast_call_method = sub {
+  my ($method) = @_;
   return undef unless defined($method) && length($method);
+  return 'scalar' if $method eq 's';
+  return 'array' if $method eq 'a';
+  return 'hash' if $method eq 'h';
+  return 'concat' if $method eq 'cat';
   my $numeric_alias = _numeric_word_alias_helper_name($method);
-  $method = $numeric_alias if defined($numeric_alias) && length($numeric_alias);
-  my $arity = $ast_value_only_call_arity{$method};
+  return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
+  return $method
+ };
+ my $ast_call_method_with_arity = sub {
+  my ($method, $argc, $arity_map) = @_;
+  $method = $normalize_ast_call_method->($method);
+  return undef unless defined($method) && length($method);
+  my $arity = $arity_map->{$method};
   return undef unless ref($arity) eq 'ARRAY';
   return undef if $argc < $arity->[0];
   return undef if defined($arity->[1]) && $argc > $arity->[1];
   return $method
  };
+ my $ast_value_only_call_method = sub {
+  my ($method, $argc) = @_;
+  return $ast_call_method_with_arity->($method, $argc, \%ast_value_only_call_arity)
+ };
+ my $ast_aggregate_call_method = sub {
+  my ($method, $argc) = @_;
+  return $ast_call_method_with_arity->($method, $argc, \%ast_aggregate_call_arity)
+ };
  my $lower_ast_value_node;
  my $lower_ast_value_only_call_node;
+ my $lower_ast_aggregate_call_node;
+ my $ast_expr_source_node;
+ my $lower_ast_supported_call_source_node;
+ my $ast_string_source_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH';
+  my $source = $node->{source};
+  return $source if defined($source) && $source =~ /\A(['"])(?:\\.|(?!\1).)*\1\z/s;
+  my $quote = $node->{quote};
+  $quote = '"' unless defined($quote) && ($quote eq '"' || $quote eq "'");
+  my $payload = defined($node->{value}) ? $node->{value} : '';
+  $payload =~ s/\\/\\\\/g;
+  $payload =~ s/\Q$quote\E/\\$quote/g;
+  return $quote.$payload.$quote
+ };
+ my $ast_regex_source_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH';
+  my $source = $node->{source};
+  return $source if defined($source) && $source =~ m{\A/(?:\\.|[^/])*/[A-Za-z]*\z}s;
+  my $pattern = defined($node->{pattern}) ? $node->{pattern} : '';
+  my $flags = defined($node->{flags}) ? $node->{flags} : '';
+  $pattern =~ s{/}{\\/}g;
+  return '/'.$pattern.'/'.$flags
+ };
+ $ast_expr_source_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH';
+  my $kind = $node->{kind} // '';
+
+  if ($kind eq 'number') {
+   my $source = $node->{source};
+   return $source if defined($source) && $source =~ /\A-?\d+(?:\.\d+)?\z/o;
+   return defined($node->{value}) ? (''.$node->{value}) : undef;
+  }
+  return $ast_string_source_node->($node) if $kind eq 'string';
+  return $ast_regex_source_node->($node) if $kind eq 'regex';
+  return 'undef' if $kind eq 'undef';
+  return $node->{value} ? 'true' : 'false' if $kind eq 'boolean';
+  return $node->{name} if $kind eq 'variable' && defined($node->{name}) && length($node->{name});
+  if ($kind eq 'indexed_var') {
+   return undef unless defined($node->{name}) && length($node->{name});
+   my $index_expr = $ast_expr_source_node->($node->{index});
+   return undef unless defined($index_expr) && length($index_expr);
+   return $node->{name}.'['.$index_expr.']';
+  }
+  if ($kind eq 'nested_access') {
+   return undef unless defined($node->{base}) && length($node->{base});
+   my $expr = $node->{base};
+   foreach my $segment (@{$node->{segments} || []}) {
+    my $segment_kind = $segment->{kind} // '';
+    if ($segment_kind eq 'key') {
+     my $segment_source = $segment->{source};
+     if (defined($segment_source) && $segment_source =~ /\A\[(?:['"])(?:\\.|.)*(?:['"])\]\z/s) {
+      $expr .= $segment_source;
+      next;
+     }
+     my $key_node = {
+      kind => 'string',
+      value => $segment->{value},
+      quote => '"',
+      source => undef,
+     };
+     my $key_expr = $ast_string_source_node->($key_node);
+     return undef unless defined($key_expr) && length($key_expr);
+     $expr .= '['.$key_expr.']';
+     next;
+    }
+    return undef unless $segment_kind eq 'index';
+    my $index_expr = $ast_expr_source_node->($segment->{expr});
+    return undef unless defined($index_expr) && length($index_expr);
+    $expr .= '['.$index_expr.']';
+   }
+   return $expr
+  }
+  if ($kind eq 'array_literal') {
+   my @items;
+   foreach my $item (@{$node->{items} || []}) {
+    my $item_expr = $ast_expr_source_node->($item);
+    return undef unless defined($item_expr) && length($item_expr);
+    push @items, $item_expr;
+   }
+   return '['.join(', ', @items).']';
+  }
+  if ($kind eq 'hash_literal') {
+   my @pairs;
+   foreach my $entry (@{$node->{entries} || []}) {
+    my $key_expr = $ast_expr_source_node->($entry->{key});
+    my $value_expr = $ast_expr_source_node->($entry->{value});
+    return undef unless defined($key_expr) && length($key_expr);
+    return undef unless defined($value_expr) && length($value_expr);
+    push @pairs, $key_expr.' => '.$value_expr;
+   }
+   return '{'.join(', ', @pairs).'}';
+  }
+  if ($kind eq 'block_value') {
+   my $source = $node->{source};
+   return $source if defined($source) && length($source);
+   return undef;
+  }
+  if ($kind eq 'call') {
+   my $call_expr = $lower_ast_supported_call_source_node->($node);
+   return $call_expr if defined($call_expr) && length($call_expr);
+   my $source = $node->{source};
+   return $source if defined($source) && length($source);
+  }
+  return undef
+ };
+ $lower_ast_supported_call_source_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+  my $args = $node->{args} || [];
+  return undef unless ref($args) eq 'ARRAY';
+  my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
+  $method = $ast_aggregate_call_method->($node->{name}, scalar(@$args))
+   unless defined($method) && length($method);
+  return undef unless defined($method) && length($method);
+
+  my @arg_exprs;
+  foreach my $arg (@$args) {
+   my $arg_expr = $ast_expr_source_node->($arg);
+   return undef unless defined($arg_expr) && length($arg_expr);
+   push @arg_exprs, $arg_expr;
+  }
+  return $method.'('.join(', ', @arg_exprs).')'
+ };
  my $lower_ast_direct_access_node = sub {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
@@ -1333,6 +1532,8 @@ sub _lower_method_value_expr {
   if ($kind eq 'call') {
    my $lowered_call = $lower_ast_value_only_call_node->($node);
    return $lowered_call if defined($lowered_call) && length($lowered_call);
+   $lowered_call = $lower_ast_aggregate_call_node->($node);
+   return $lowered_call if defined($lowered_call) && length($lowered_call);
    return $legacy_method_value_expr->($node->{source});
   }
   return undef
@@ -1350,9 +1551,13 @@ sub _lower_method_value_expr {
    my $lowered_arg;
    if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'call') {
     $lowered_arg = $lower_ast_value_only_call_node->($arg);
+    $lowered_arg = $ast_expr_source_node->($arg)
+     unless defined($lowered_arg) && length($lowered_arg);
     $lowered_arg = $arg->{source} unless defined($lowered_arg) && length($lowered_arg);
    } else {
     $lowered_arg = $lower_ast_value_node->($arg, { variable_source => 1 });
+    $lowered_arg = $ast_expr_source_node->($arg)
+     unless defined($lowered_arg) && length($lowered_arg);
     $lowered_arg = $arg->{source} unless defined($lowered_arg) && length($lowered_arg);
    }
    return undef unless defined($lowered_arg) && length($lowered_arg);
@@ -1360,6 +1565,24 @@ sub _lower_method_value_expr {
   }
 
   return $legacy_method_value_expr->($method.'('.join(', ', @lowered_args).')')
+ };
+ $lower_ast_aggregate_call_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+  my $args = $node->{args} || [];
+  return undef unless ref($args) eq 'ARRAY';
+  my $method = $ast_aggregate_call_method->($node->{name}, scalar(@$args));
+  return undef unless defined($method) && length($method);
+
+  my @arg_exprs;
+  foreach my $arg (@$args) {
+   my $arg_expr = $ast_expr_source_node->($arg);
+   $arg_expr = $arg->{source} unless defined($arg_expr) && length($arg_expr);
+   return undef unless defined($arg_expr) && length($arg_expr);
+   push @arg_exprs, $arg_expr;
+  }
+
+  return $legacy_method_value_expr->($method.'('.join(', ', @arg_exprs).')')
  };
 
  return undef unless defined $expr;

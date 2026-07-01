@@ -107,9 +107,13 @@ Eleven small but useful examples of that owner-shape cleanup are `LinkedSpec::Ac
 The same ActionIR boundary is where the Perl reference is moving from source-text
 rewrites to typed helper/action AST consumption. `LinkedSpec::ActionIR::AST` is the
 parser seam. `MethodLowering::_lower_method_value_expr(...)` now consumes that seam for
-non-call value nodes and for value-only helper-call composition. Deprecated wrapper
-aliases such as `scalar(...)`/`array(...)`/`hash(...)`, aggregate-wrapper and symbol-slot
-helper calls, receiver-dot chains, statement/control lowering, and remaining
+non-call value nodes, value-only helper-call composition, and aggregate/helper families
+with slot-sensitive policy. Deprecated wrapper aliases such as `scalar(...)`,
+`array(...)`, and `hash(...)` now enter through AST `call` nodes together with
+`copy`/`array_copy`/`hash_copy`, collection helpers, numeric reducers over aggregate
+operands, and hash helpers; their AST bridge preserves aggregate symbol slots and quoted
+wrapper literal payloads before reusing the Perl helper catalog. Receiver-dot chains,
+statement/control lowering, unsupported covered-call diagnostics, and remaining
 return-payload substitution are still explicit migration debt; those wrappers are not the
 canonical destination syntax.
 
@@ -389,8 +393,10 @@ typed AST/IR before lowering or execution. The Perl backend now has an additive
 shape literals, block values, assignments, expression statements, and receiver-dot
 chains. `MethodLowering` now consumes that seam for non-call value nodes: primitive
 literals, scoped bare scalar reads, direct indexed/nested access, shape literals, and
-block values. Helper-call composition, receiver-chain lowering, statement/control
-lowering, and remaining return-payload substitution still migrate family by family, so
+block values. It also consumes AST call nodes for value-only helpers plus
+aggregate-wrapper, collection/reducer, and hash helper families while preserving their
+existing slot policies. Receiver-chain lowering, statement/control lowering, covered-call
+diagnostics, and remaining return-payload substitution still migrate family by family, so
 any remaining source-text lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`

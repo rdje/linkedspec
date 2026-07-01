@@ -7,14 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2.2 — aggregate helper calls from AST**
+  (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
+  dispatches deprecated wrapper aliases plus aggregate-wrapper, collection, reducer, and hash helper families
+  from AST `call` nodes before the legacy text cascade. Covered calls rebuild helper surfaces from typed AST
+  fields, preserving aggregate symbol slots, quoted-wrapper literal boundaries, and nested value-only payloads
+  before reusing the existing Perl helper catalog through the compatibility bridge.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
+  `perl -Iperl -c t/actionir_ast_parser.t` PASS; `prove -Iperl t/actionir_ast_parser.t` PASS; targeted public
+  lowering probes PASS; `mdbook build docs/linkedspec-book` PASS; `bash tools/run_ci_local.sh` PASS with
+  phase0 **1002 tests**.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.2.3` add covered-call diagnostics and retire silent host-call
+  leakage, then `.3.3` receiver-chain AST lowering.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2.1 — value-only helper calls from AST**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
   dispatches supported AST `call` nodes for scalar normalization, string predicate/composition,
   coalesce/concat, scalar-argument numeric helpers, and explicit `num_*` comparisons. Covered calls
   recursively materialize argument AST nodes before reusing the existing Perl helper catalog through the
-  compatibility bridge. Deprecated wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)`,
-  aggregate-wrapper, collection, reducer, hash, symbol-slot, and receiver-chain helpers remain queued and are
-  not the canonical destination syntax.
+  compatibility bridge. At that leaf, deprecated wrapper aliases such as `scalar(...)`/`array(...)`/
+  `hash(...)`, aggregate-wrapper, collection, reducer, hash, symbol-slot, and receiver-chain helpers stayed
+  queued and were not the canonical destination syntax; `.3.2.2` above now covers the aggregate/helper subset.
   **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
   `perl -Iperl -c t/actionir_ast_parser.t` PASS; `prove -Iperl t/actionir_ast_parser.t` PASS; targeted public
   lowering probes PASS.

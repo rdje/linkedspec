@@ -11,7 +11,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, parser, migration]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.2 added LinkedSpec::ActionIR::AST and LinkedSpec::ActionIR::AST::Parser plus t/actionir_ast_parser.t. The parser covers action blocks/statements, calls, literals, variables, direct access, shape literals, block values, assignments, and receiver-dot chains with source spans. PERL-ACTIONIR-AST-MIGRATION.3.1 switched MethodLowering non-call value nodes to consume this AST; .3.2.1 switched value-only helper-call composition to consume AST call nodes. Aggregate/symbol-slot helper calls, receiver chains, statement/control lowering, and return-payload substitution remain queued."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.2 added LinkedSpec::ActionIR::AST and LinkedSpec::ActionIR::AST::Parser plus t/actionir_ast_parser.t. The parser covers action blocks/statements, calls, literals, variables, direct access, shape literals, block values, assignments, and receiver-dot chains with source spans. PERL-ACTIONIR-AST-MIGRATION.3.1 switched MethodLowering non-call value nodes to consume this AST; .3.2.1 switched value-only helper-call composition to consume AST call nodes; .3.2.2 switched deprecated wrappers plus aggregate/collection/reducer/hash helper calls to slot-aware AST call lowering. Receiver chains, covered-call diagnostics, statement/control lowering, and return-payload substitution remain queued."
 reverify: "prove -Iperl t/actionir_ast_parser.t && perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm"
 ---
 
@@ -34,7 +34,9 @@ This parser does not replace all production lowering yet. `MethodLowering` now c
 the AST for non-call value nodes: primitive literals, scoped bare scalar reads, direct
 indexed/nested access, array/hash shape literals, and block values. It also consumes AST
 `call` nodes for value-only helper-call composition: scalar normalization, string
-predicate/composition, coalesce/concat, and scalar-argument numeric helpers. Aggregate
-wrapper and symbol-slot helper calls, receiver-dot `fluent_chain` lowering,
+predicate/composition, coalesce/concat, and scalar-argument numeric helpers. It also
+consumes AST `call` nodes for deprecated wrapper aliases plus aggregate-wrapper,
+collection/reducer, and hash helper families while preserving existing symbol/value
+slot policies. Receiver-dot `fluent_chain` lowering, covered-call diagnostics,
 statement/control lowering, and remaining return-payload helper substitution still
 migrate in later `PERL-ACTIONIR-AST-MIGRATION.3+` leaves.

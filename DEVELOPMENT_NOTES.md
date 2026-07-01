@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.2 — aggregate helper calls from AST): Extended the
+  MethodLowering AST call consumer to the aggregate/symbol-slot helper families. Durable points.
+  (1) **Aggregate slots stay source-shaped.** Covered calls are reconstructed from AST fields before entering
+  the existing Perl helper catalog, but bare aggregate operands are preserved as symbol tokens instead of
+  being lowered to scalar values. This keeps `count(array(items))`, `copy(hash(meta))`, and
+  `merge_hash(hash(base), overlay)` aligned with the existing array/hash inference and auto-declare collectors.
+  (2) **Wrapper aliases remain compatibility syntax.** `scalar(...)`, `array(...)`, and `hash(...)` are now
+  AST-consumed call nodes, including `s`/`a`/`h`, but they are still deprecated compatibility aliases per
+  ADR 0007 rather than the canonical destination surface. (3) **Quoted wrapper payloads are still literals.**
+  The AST bridge rebuilds quoted strings from node values, so `array("items")` remains a literal payload and
+  never aliases `@items`. (4) **Nested covered calls are source-independent.** Focused fake-source tests now
+  cover wrappers, `copy`, numeric reducers, collection helpers, nested value-only payloads inside hash helpers,
+  and hash terminals. (5) **Diagnostics are still a separate leaf.** Unsupported covered-call shapes can still
+  fall back through compatibility until `.3.2.3` owns explicit diagnostics and silent host-call leakage
+  retirement.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.1 — value-only helper calls from AST): Landed the first
   production AST consumer for helper `call` nodes. Durable points. (1) **Covered calls ignore call-node source
   text.** The focused test injects fake source strings on AST call nodes and proves `MethodLowering` uses the

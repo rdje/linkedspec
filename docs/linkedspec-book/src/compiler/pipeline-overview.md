@@ -37,11 +37,15 @@ value expressions in `MethodLowering`: primitive literals, scoped bare scalar re
 direct indexed/nested access, shape literals, and block values lower from AST nodes.
 Value-only helper-call composition now also consumes AST `call` nodes recursively before
 reusing the existing Perl helper catalog, covering scalar normalization, string
-predicate/composition, coalesce/concat, and scalar-argument numeric helpers. Deprecated
-wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)`, helper families with
-aggregate-wrapper or symbol-special slots, receiver-dot chains, statement/control
-lowering, and remaining return-payload substitution still migrate in later leaves; those
-wrappers are compatibility syntax, not the canonical destination surface.
+predicate/composition, coalesce/concat, and scalar-argument numeric helpers. Aggregate
+helper-call families now consume AST `call` nodes too: deprecated wrapper aliases
+(`scalar(...)`/`array(...)`/`hash(...)`), `copy`/`array_copy`/`hash_copy`, collection
+helpers, numeric reducers over aggregate operands, and hash helpers rebuild their helper
+surface from typed AST fields while preserving symbol slots and quoted-wrapper literal
+boundaries before reusing the existing Perl helper catalog. Receiver-dot chains,
+statement/control lowering, diagnostics for unsupported covered calls, and remaining
+return-payload substitution still migrate in later leaves; the wrapper forms remain
+compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters
 
