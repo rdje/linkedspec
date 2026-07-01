@@ -542,6 +542,9 @@ num_sum(arr)             — sum of array elements
 num_avg(arr)             — average of array elements
 num_median(arr)          — median of array elements
 num_range(arr)           — max - min of array elements
+
+number_expr.abs().ceil().add(n).mul(n)  — receiver-dot number helper chain
+number_expr.gt(n)                       — terminal receiver-dot numeric comparison
 ```
 
 ### 7.6 Control Flow Helpers

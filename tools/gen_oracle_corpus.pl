@@ -757,6 +757,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.5.4 — number receiver-dot value chains ──
+    #
+    # Receiver-dot number methods are pure helper composition over the existing
+    # num_* helper family. Boolean comparison terminals are covered by focused
+    # backend tests; this oracle fixture keeps numeric values for direct
+    # Perl/Rust JSON parity.
+    {   case   => 'terse_2_3_5_4_number_receiver_value_chains',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(score, -3.7); return(array(score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12), 5.mod(2), 3.5.floor().add(1), 3.5.round())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },

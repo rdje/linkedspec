@@ -687,6 +687,14 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 
 All numeric helpers return `undef` if any input is missing, non-numeric, or (for division/modulo) zero-divisor, unless wrapped in `coalesce(...)`.
 
+Number receiver-dot value chains are pure value composition over this same family. Receiver methods use terse
+names and map to `num_*`: `value.abs()` -> `num_abs(value)`, `value.add(2, 3)` -> `num_add(value, 2, 3)`,
+`value.clamp(0, 10)` -> `num_clamp(value, 0, 10)`, and `value.gt(3)` -> `num_gt(value, 3)`. Bare receiver
+identifiers read scalar working variables. Integer and float literal receivers are accepted (`5.mod(2)`,
+`3.5.floor().add(1)`). Comparisons (`eq`, `ne`, `gt`, `ge`, `lt`, `le`) are terminal boolean values; a later
+receiver-dot call after a comparison returns `undef`/`null`. `declare(...)` and other statement/lifecycle
+methods are not numeric receiver methods.
+
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads
 > `entry_group(N)`; output = the parser's one-element accumulator array). The array-form

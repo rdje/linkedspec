@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.4 — implement number receiver value chains
+
+**Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain numeric parsing/runtime evaluation, focused
+Perl/Rust locks, oracle corpus, mdBook, Knowledge Map, roadmap/task-tree/live docs.
+
+**What changed:** Number receiver-dot value chains are now portable on Perl and Rust. Numeric receivers feed the
+existing `num_*` helper family as the first argument, so chains such as
+`score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12)`,
+`5.mod(2)`, `3.5.floor().add(1)`, and `3.5.round()` are locked. Perl now treats decimal dots as numeric
+literal syntax instead of receiver separators and lowers value-form numeric comparisons. Rust parses fluent
+chains after numeric literals and evaluates the same receiver family.
+
+**Boundary:** Numeric comparisons (`eq`, `ne`, `gt`, `ge`, `lt`, `le`) are terminal; invalid later receiver
+continuations return `undef` / JSON `null`. Numeric array reducers remain explicit array-consuming helpers with
+no scalar-to-array receiver bridge. `declare(...)` and other statement/lifecycle methods are not terse receiver
+methods.
+
+**Validation:** `rustfmt` on touched Rust files; `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`;
+`perl -Iperl -c t/phase0_regression.t`; `perl -Iperl -c tools/gen_oracle_corpus.pl`; focused
+lowering/runtime/source probes; focused Rust parser/runtime tests PASS; `perl -Iperl tools/gen_oracle_corpus.pl`
+generated 50 fixtures; Rust `corpus_oracle` PASS over 50 fixtures; full phase0 PASS with **999 tests**.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.3 — implement string receiver value chains
 
 **Scope:** Perl ActionIR receiver-chain lowering, Rust fluent-chain parser/runtime evaluation, focused

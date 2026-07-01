@@ -162,6 +162,8 @@ meta.merge_hash(hash("kind", "fallback")).scalaref("kind")
 raw.trim().lowercase().replace_substr("-", "_")
 raw.trim().split("-").trim_each().filter_nonempty()
 raw.trim().split("-").lowercase_each().join_values("_")
+score.abs().ceil().add(2).clamp(0, 10)
+count(array(parts)).gt(0)
 split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?node:", scalar(type_name))
 ```
 
@@ -169,9 +171,11 @@ This keeps the action code declarative. A reader can tell whether you are copyin
 
 Receiver-dot value chains are pure helper composition. Array receivers can flow through array helpers, hash
 receivers can flow through hash helpers and then array helpers through `sorted_keys()` / `sorted_values()`,
-and string receivers can flow through scalar string helpers. `split(delim)` is the explicit string-to-array
-bridge: after `raw.trim().split("-")`, the chain continues with array helpers such as `trim_each()`,
-`filter_nonempty()`, `lowercase_each()`, `count()`, or `join_values(delim)`.
+string receivers can flow through scalar string helpers, and number receivers can flow through numeric helpers.
+`split(delim)` is the explicit string-to-array bridge: after `raw.trim().split("-")`, the chain continues with
+array helpers such as `trim_each()`, `filter_nonempty()`, `lowercase_each()`, `count()`, or
+`join_values(delim)`. Numeric comparisons such as `count(array(parts)).gt(0)` are terminal values; they do not
+continue into later number methods.
 
 ## Hash shaping
 

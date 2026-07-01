@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.4 — number receiver-dot value chains landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure numeric helper chains now work from
+  scalar, integer-literal, and decimal-literal receivers on Perl and Rust:
+  `score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12)`,
+  `5.mod(2)`, `3.5.floor().add(1)`, and `3.5.round()` are locked. Comparison receiver methods (`eq`, `ne`,
+  `gt`, `ge`, `lt`, `le`) are terminal values; invalid continuations return `undef`/`null`. Numeric array
+  reducers remain explicit array-consuming helpers, and statement/lifecycle calls such as `declare(...)` are
+  not terse receiver methods.
+  **Verification:** Rustfmt PASS on touched Rust files; Perl syntax checks PASS; focused Rust parser/runtime
+  locks PASS; oracle regeneration produced **50 fixtures**; Rust `corpus_oracle` PASS over 50 fixtures;
+  phase0 PASS with **999 tests**; mdBook/KM/live docs updated.
+  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.5`** (block-valued receiver chaining by yielded type).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.3 — string receiver-dot value chains landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure string/scalar helper chains now
   work from scalar and string-literal receivers on Perl and Rust:
@@ -18,8 +30,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Perl syntax checks PASS; phase0 PASS with **998 tests**; focused Rust parser/runtime locks
   PASS; oracle regeneration produced **49 fixtures**; Rust `corpus_oracle` PASS over 49 fixtures; mdBook/KM/live
   docs updated.
-  **Frontier: `SPEC-FORMAT-TERSE.2.3.5.4`** (number receiver-dot value chains), followed by
-  `SPEC-FORMAT-TERSE.2.3.5.5` (block-valued receiver chaining by yielded type).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.2.3.5.4` (now completed above).
 - 2026-07-01: **SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Pure hash helper chains now work from a hash
   receiver on Perl and Rust: `meta.set_key("stage", "normalized").count_keys()`,

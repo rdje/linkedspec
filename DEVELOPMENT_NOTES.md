@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.4 — number receiver-dot value chains landed): Implemented the
+  number return-family receiver-chain leaf. Durable points. (1) **Number receiver chains are pure value
+  composition over `num_*`.** Perl normalizes receiver-dot numeric links into helper expressions and Rust
+  evaluates `Expr::FluentChain` by carrying the current number through the same helper family. Supported
+  links are `abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`, `div`, `mod`, `min`, `max`, and `clamp`.
+  (2) **Numeric literal parsing must preserve method dots.** Perl's receiver splitter skips decimal dots, and
+  Rust only consumes a decimal point when it is followed by a digit, so both `3.5.floor()` and `5.add(3)` parse
+  correctly. (3) **Comparison helpers are terminal value links.** `eq`, `ne`, `gt`, `ge`, `lt`, and `le`
+  return boolean/scalar terminal values; invalid later receiver-dot calls return `undef` / JSON `null`.
+  (4) **Multi-operand helpers are part of the contract.** Receiver `add(...)` and `mul(...)` feed every
+  supplied operand to `num_add`/`num_mul`; Rust now consumes all operands instead of the first two. (5)
+  **Keep statement/lifecycle methods out of receiver families.** `declare(...)` and similar statement or
+  lifecycle calls are not terse numeric methods; block-valued chaining remains explicitly owned by `.2.3.5.5`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.3 — string receiver-dot value chains landed): Implemented the
   string/scalar return-family receiver-chain leaf. Durable points. (1) **String receiver chains are pure value
   composition.** Perl normalizes compatible receiver-dot string links into helper expressions, and Rust

@@ -1235,6 +1235,12 @@ impl Engine {
                     return self.eval_string_receiver_value_chain(receiver, calls, ctx, rule_label);
                 }
                 if calls
+                    .first()
+                    .is_some_and(|call| Self::is_number_receiver_value_chain_method(&call.method))
+                {
+                    return self.eval_number_receiver_value_chain(receiver, calls, ctx, rule_label);
+                }
+                if calls
                     .iter()
                     .any(|call| Self::is_statement_only_array_end_mutation_method(&call.method))
                 {
@@ -1357,6 +1363,57 @@ impl Engine {
             method,
             "length" | "starts_with" | "ends_with" | "contains_substr" | "matches"
         )
+    }
+
+    fn number_receiver_helper_name(method: &str) -> Option<&'static str> {
+        match method {
+            "abs" => Some("num_abs"),
+            "floor" => Some("num_floor"),
+            "ceil" => Some("num_ceil"),
+            "round" => Some("num_round"),
+            "add" => Some("num_add"),
+            "sub" => Some("num_sub"),
+            "mul" => Some("num_mul"),
+            "div" => Some("num_div"),
+            "mod" => Some("num_mod"),
+            "min" => Some("num_min"),
+            "max" => Some("num_max"),
+            "clamp" => Some("num_clamp"),
+            "eq" => Some("num_eq"),
+            "ne" => Some("num_ne"),
+            "gt" => Some("num_gt"),
+            "ge" => Some("num_ge"),
+            "lt" => Some("num_lt"),
+            "le" => Some("num_le"),
+            _ => None,
+        }
+    }
+
+    fn is_number_receiver_value_chain_method(method: &str) -> bool {
+        Self::is_number_receiver_number_returning_method(method)
+            || Self::is_number_receiver_terminal_method(method)
+    }
+
+    fn is_number_receiver_number_returning_method(method: &str) -> bool {
+        matches!(
+            method,
+            "abs"
+                | "floor"
+                | "ceil"
+                | "round"
+                | "add"
+                | "sub"
+                | "mul"
+                | "div"
+                | "mod"
+                | "min"
+                | "max"
+                | "clamp"
+        )
+    }
+
+    fn is_number_receiver_terminal_method(method: &str) -> bool {
+        matches!(method, "eq" | "ne" | "gt" | "ge" | "lt" | "le")
     }
 
     fn eval_array_receiver_value_chain(
@@ -1621,6 +1678,77 @@ impl Engine {
                     };
                 }
                 ReceiverFamily::Terminal => return Ok(RuntimeValue::Undef),
+            }
+        }
+
+        Ok(current)
+    }
+
+    fn eval_number_receiver_value_chain(
+        &self,
+        receiver: &linkedspec_core::expr::Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        #[derive(Clone, Copy, Eq, PartialEq)]
+        enum ReceiverFamily {
+            Number,
+            Terminal,
+        }
+
+        let mut current = self.eval_expr(receiver, ctx, rule_label)?;
+        let mut family = ReceiverFamily::Number;
+
+        for (index, call) in calls.iter().enumerate() {
+            if family == ReceiverFamily::Terminal {
+                return Ok(RuntimeValue::Undef);
+            }
+            if !Self::is_number_receiver_value_chain_method(&call.method) {
+                return Ok(RuntimeValue::Undef);
+            }
+
+            let valid_arity = match call.method.as_str() {
+                "abs" | "floor" | "ceil" | "round" => call.args.is_empty(),
+                "sub" | "div" | "mod" | "eq" | "ne" | "gt" | "ge" | "lt" | "le" => {
+                    call.args.len() == 1
+                }
+                "clamp" => call.args.len() == 2,
+                "add" | "mul" | "min" | "max" => !call.args.is_empty(),
+                _ => false,
+            };
+            if !valid_arity {
+                return Ok(RuntimeValue::Undef);
+            }
+
+            let helper_name = match Self::number_receiver_helper_name(&call.method) {
+                Some(name) => name,
+                None => return Ok(RuntimeValue::Undef),
+            };
+            let evaluated_call_args: Vec<RuntimeValue> = call
+                .args
+                .iter()
+                .map(|arg| self.eval_expr(arg.value(), ctx, rule_label))
+                .collect::<Result<Vec<_>, _>>()?;
+
+            let mut raw_args = Vec::with_capacity(call.args.len() + 1);
+            raw_args.push(Arg::Positional(Expr::Undef));
+            raw_args.extend(call.args.clone());
+            let mut evaluated = Vec::with_capacity(evaluated_call_args.len() + 1);
+            evaluated.push(current);
+            evaluated.extend(evaluated_call_args);
+
+            current =
+                self.call_helper_with_args(helper_name, &raw_args, &evaluated, ctx, rule_label)?;
+            if Self::is_number_receiver_terminal_method(&call.method) {
+                if index + 1 != calls.len() {
+                    return Ok(RuntimeValue::Undef);
+                }
+                family = ReceiverFamily::Terminal;
+            } else {
+                family = ReceiverFamily::Number;
             }
         }
 
@@ -3073,16 +3201,28 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             // ── Scalar arithmetic ──
-            "num_add" | "num_sub" | "num_mul" | "num_div" | "num_mod" => {
+            "num_add" | "num_mul" => {
+                if args.len() >= 2 {
+                    let nums: Option<Vec<f64>> = args.iter().map(|arg| arg.as_number()).collect();
+                    match nums {
+                        Some(nums) if name == "num_add" => {
+                            Ok(RuntimeValue::Number(nums.iter().sum()))
+                        }
+                        Some(nums) => Ok(RuntimeValue::Number(nums.iter().product())),
+                        None => Ok(RuntimeValue::Undef),
+                    }
+                } else {
+                    Ok(RuntimeValue::Undef)
+                }
+            }
+            "num_sub" | "num_div" | "num_mod" => {
                 if args.len() >= 2 {
                     let a = args[0].as_number();
                     let b = args[1].as_number();
                     match (a, b) {
                         (Some(a), Some(b)) => {
                             let result = match name {
-                                "num_add" => a + b,
                                 "num_sub" => a - b,
-                                "num_mul" => a * b,
                                 "num_div" if b != 0.0 => a / b,
                                 "num_mod" if b != 0.0 && a.fract() == 0.0 && b.fract() == 0.0 => {
                                     (a as i64 % b as i64) as f64
@@ -4886,13 +5026,11 @@ ChildB:
  /(?P<word>\w+)/
  E { return(entry_has(scalar("word"))) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
-        );
+        assert!(run_5_5_1(g_present, "hi")
+            .last()
+            .unwrap()
+            .as_bool()
+            .unwrap());
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -4949,13 +5087,11 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has(scalar("word"))) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
-        );
+        assert!(run_5_5_1(g_present, "hi")
+            .last()
+            .unwrap()
+            .as_bool()
+            .unwrap());
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -5033,7 +5169,7 @@ ChildB:
             4.0
         ); // "cde" past nl → 4
         assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
-        // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
+                                                                                 // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
         assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);
     }
 

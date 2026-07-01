@@ -818,7 +818,8 @@ impl<'a> Parser<'a> {
                 if ch == '-' {
                     let after = self.src[self.pos + 1..].chars().next();
                     if after.is_some_and(|c| c.is_ascii_digit()) {
-                        return self.parse_number();
+                        let expr = self.parse_number()?;
+                        return self.parse_fluent_chain(expr);
                     }
                 }
                 if ch == '-' {
@@ -826,7 +827,8 @@ impl<'a> Parser<'a> {
                     self.advance(1);
                     self.parse_var_or_call()
                 } else {
-                    self.parse_number()
+                    let expr = self.parse_number()?;
+                    self.parse_fluent_chain(expr)
                 }
             }
             'u' if self.remaining().starts_with("undef") => {
@@ -1304,7 +1306,7 @@ impl<'a> Parser<'a> {
             if ch == b'/' {
                 let pattern = self.src[start..self.pos].to_string();
                 self.advance(1); // consume closing '/'
-                // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
+                                 // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
                 self.skip_whitespace();
                 while self.pos < self.src.len() {
                     let c = self.src.as_bytes()[self.pos];
@@ -1324,11 +1326,44 @@ impl<'a> Parser<'a> {
     fn parse_number(&mut self) -> Result<Expr, String> {
         self.skip_whitespace();
         let rem = self.remaining();
-        let end = rem
-            .char_indices()
-            .find(|(_, c)| !c.is_ascii_digit() && *c != '.' && *c != '-')
-            .map(|(i, _)| i)
-            .unwrap_or(rem.len());
+        let mut end = 0;
+        let mut chars = rem.char_indices().peekable();
+        if matches!(chars.peek(), Some((_, '-'))) {
+            if let Some((idx, ch)) = chars.next() {
+                end = idx + ch.len_utf8();
+            }
+        }
+        let mut saw_digit = false;
+        while let Some((idx, ch)) = chars.peek().copied() {
+            if ch.is_ascii_digit() {
+                saw_digit = true;
+                chars.next();
+                end = idx + ch.len_utf8();
+            } else {
+                break;
+            }
+        }
+        if matches!(chars.peek(), Some((_, '.'))) {
+            let mut lookahead = chars.clone();
+            lookahead.next();
+            if matches!(lookahead.peek(), Some((_, ch)) if ch.is_ascii_digit()) {
+                if let Some((idx, ch)) = chars.next() {
+                    end = idx + ch.len_utf8();
+                }
+                while let Some((idx, ch)) = chars.peek().copied() {
+                    if ch.is_ascii_digit() {
+                        saw_digit = true;
+                        chars.next();
+                        end = idx + ch.len_utf8();
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        if !saw_digit {
+            return Err("invalid number".into());
+        }
         let num_str = &rem[..end];
         match num_str.parse::<f64>() {
             Ok(value) => {
@@ -1438,9 +1473,7 @@ mod tests {
 
         assert_eq!(
             statement_call_names(&block),
-            vec![
-                "if", "return", "elseif", "set", "return", "else", "return", "endif"
-            ]
+            vec!["if", "return", "elseif", "set", "return", "else", "return", "endif"]
         );
         match &block.statements[0].expr {
             Expr::Call { args, .. } => {
@@ -2418,6 +2451,43 @@ mod tests {
             }
             other => panic!(
                 "expected string literal receiver value FluentChain, got {:?}",
+                other
+            ),
+        }
+    }
+
+    #[test]
+    fn parse_number_receiver_value_chain() {
+        let block = CodeBlock::parse(r#"5.add(2, 3).mul(4).gt(39)"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(
+                    matches!(receiver.as_ref(), Expr::NumberLiteral { value } if (*value - 5.0).abs() < 0.001)
+                );
+                let methods: Vec<&str> = calls.iter().map(|call| call.method.as_str()).collect();
+                assert_eq!(methods, vec!["add", "mul", "gt"]);
+                assert_eq!(calls[0].args.len(), 2);
+            }
+            other => panic!(
+                "expected number receiver value FluentChain, got {:?}",
+                other
+            ),
+        }
+    }
+
+    #[test]
+    fn parse_decimal_number_receiver_value_chain() {
+        let block = CodeBlock::parse(r#"3.5.floor().add(1)"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(
+                    matches!(receiver.as_ref(), Expr::NumberLiteral { value } if (*value - 3.5).abs() < 0.001)
+                );
+                let methods: Vec<&str> = calls.iter().map(|call| call.method.as_str()).collect();
+                assert_eq!(methods, vec!["floor", "add"]);
+            }
+            other => panic!(
+                "expected decimal number receiver value FluentChain, got {:?}",
                 other
             ),
         }

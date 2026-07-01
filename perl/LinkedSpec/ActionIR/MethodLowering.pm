@@ -1006,6 +1006,11 @@ sub _lower_method_value_expr {
   my $lowered_chain = _lower_method_value_expr($string_receiver_chain, $deps);
   return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
  }
+ my $number_receiver_chain = _normalize_number_receiver_value_chain_expr($trimmed, $deps);
+ if (defined($number_receiver_chain) && length($number_receiver_chain) && $number_receiver_chain ne $trimmed) {
+  my $lowered_chain = _lower_method_value_expr($number_receiver_chain, $deps);
+  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+ }
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
  return $direct_access if defined($direct_access) && length($direct_access);
  my $shape_literal = $lower_shape_literal_value_expr->($trimmed);
@@ -1459,7 +1464,33 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $rhs_expr = $trim_action_ir_value->($num_mod_args->[1]) unless defined($rhs_expr) && length($rhs_expr);
   return undef unless defined($rhs_expr) && length($rhs_expr);
 
-  return 'do { my $__ls_num_mod_lhs = '.$lhs_expr.'; my $__ls_num_mod_rhs = '.$rhs_expr.'; (defined($__ls_num_mod_lhs) && defined($__ls_num_mod_rhs) && $__ls_num_mod_lhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs != 0) ? ($__ls_num_mod_lhs % $__ls_num_mod_rhs) : undef }';
+ return 'do { my $__ls_num_mod_lhs = '.$lhs_expr.'; my $__ls_num_mod_rhs = '.$rhs_expr.'; (defined($__ls_num_mod_lhs) && defined($__ls_num_mod_rhs) && $__ls_num_mod_lhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs != 0) ? ($__ls_num_mod_lhs % $__ls_num_mod_rhs) : undef }';
+ }
+ if ($method_call && $method_call->{method} =~ /^num_(eq|ne|gt|ge|lt|le)$/o) {
+  my $op_name = $1;
+  my $num_cmp_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
+  return undef unless $num_cmp_args;
+
+  my $lhs_expr = _lower_method_value_expr($num_cmp_args->[0], $deps);
+  $lhs_expr = $trim_action_ir_value->($num_cmp_args->[0]) unless defined($lhs_expr) && length($lhs_expr);
+  return undef unless defined($lhs_expr) && length($lhs_expr);
+
+  my $rhs_expr = _lower_method_value_expr($num_cmp_args->[1], $deps);
+  $rhs_expr = $trim_action_ir_value->($num_cmp_args->[1]) unless defined($rhs_expr) && length($rhs_expr);
+  return undef unless defined($rhs_expr) && length($rhs_expr);
+
+  my %ops = (
+   eq => '==',
+   ne => '!=',
+   gt => '>',
+   ge => '>=',
+   lt => '<',
+   le => '<=',
+  );
+  my $op = $ops{$op_name};
+  return undef unless defined($op);
+
+  return 'do { my $__ls_num_cmp_lhs = '.$lhs_expr.'; my $__ls_num_cmp_rhs = '.$rhs_expr.'; (defined($__ls_num_cmp_lhs) && defined($__ls_num_cmp_rhs) && $__ls_num_cmp_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_cmp_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? (($__ls_num_cmp_lhs '.$op.' $__ls_num_cmp_rhs) ? 1 : 0) : 0 }';
  }
  if ($method_call && $method_call->{method} eq 'num_clamp') {
   my $num_clamp_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 3, 3);
@@ -2683,11 +2714,16 @@ sub _split_receiver_dot_method_expr {
   if ($ch eq '"') { $in_double_quote = 1; next; }
   if ($ch eq '(') { ++$paren_depth; next; }
   if ($ch eq ')') { --$paren_depth if $paren_depth > 0; next; }
-  if ($ch eq '[') { ++$bracket_depth; next; }
-  if ($ch eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
-  if ($ch eq '{') { ++$brace_depth; next; }
-  if ($ch eq '}') { --$brace_depth if $brace_depth > 0; next; }
+ if ($ch eq '[') { ++$bracket_depth; next; }
+ if ($ch eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
+ if ($ch eq '{') { ++$brace_depth; next; }
+ if ($ch eq '}') { --$brace_depth if $brace_depth > 0; next; }
   next unless $ch eq '.';
+  if ($idx > 0 && $idx + 1 < $len) {
+   my $prev_ch = substr($trimmed, $idx - 1, 1);
+   my $next_ch = substr($trimmed, $idx + 1, 1);
+   next if $prev_ch =~ /\d/o && $next_ch =~ /\d/o;
+  }
   next unless $paren_depth == 0 && $bracket_depth == 0 && $brace_depth == 0;
   my $receiver = $trim_action_ir_value->(substr($trimmed, 0, $idx));
   my $call_expr = $trim_action_ir_value->(substr($trimmed, $idx + 1));
@@ -2730,6 +2766,26 @@ sub _string_receiver_value_chain_return_family {
 sub _is_string_receiver_value_chain_method {
  my ($method) = @_;
  return defined(_string_receiver_value_chain_return_family($method)) ? 1 : 0
+}
+
+sub _number_receiver_method_helper_name {
+ my ($method) = @_;
+ return undef unless defined $method;
+ return 'num_'.$method if $method =~ /^(?:abs|floor|ceil|round|add|sub|mul|div|mod|min|max|clamp|eq|ne|gt|ge|lt|le)$/o;
+ return undef
+}
+
+sub _number_receiver_value_chain_return_family {
+ my ($method) = @_;
+ return undef unless defined $method;
+ return 'number' if $method =~ /^(?:abs|floor|ceil|round|add|sub|mul|div|mod|min|max|clamp)$/o;
+ return 'terminal' if $method =~ /^(?:eq|ne|gt|ge|lt|le)$/o;
+ return undef
+}
+
+sub _is_number_receiver_value_chain_method {
+ my ($method) = @_;
+ return defined(_number_receiver_value_chain_return_family($method)) ? 1 : 0
 }
 
 sub _normalize_array_receiver_value_chain_expr {
@@ -2781,6 +2837,78 @@ sub _normalize_array_receiver_value_chain_expr {
    next;
   }
   $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+ }
+
+ return $current_expr;
+}
+
+sub _normalize_number_receiver_value_chain_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $split = _split_receiver_dot_method_expr($trimmed, $trim_action_ir_value);
+ return undef unless $split;
+ my ($receiver_expr, $tail_expr) = @$split;
+ return undef unless defined($receiver_expr) && length($receiver_expr);
+
+ my @calls;
+ while (defined($tail_expr) && length($tail_expr)) {
+  my $tail_split = _split_receiver_dot_method_expr($tail_expr, $trim_action_ir_value);
+  my $call_expr = $tail_split ? $tail_split->[0] : $tail_expr;
+  my $call = $parse_method_function_expr->($call_expr);
+  return undef unless $call;
+  push @calls, $call;
+  last unless $tail_split;
+  $tail_expr = $tail_split->[1];
+ }
+ return undef unless @calls;
+ return undef unless _is_number_receiver_value_chain_method($calls[0]->{method} // '');
+
+ my $current_expr = $receiver_expr;
+ if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
+  $current_expr = 'scalar('.$current_expr.')';
+ }
+ my $current_family = 'number';
+ for (my $idx = 0; $idx < @calls; ++$idx) {
+  my $call = $calls[$idx];
+  my $method = $call->{method} // '';
+  my @args = @{$call->{args} || []};
+  my $is_last = ($idx == $#calls) ? 1 : 0;
+
+  return 'undef' if $current_family eq 'terminal';
+  return undef unless $current_family eq 'number';
+
+  my $return_family = _number_receiver_value_chain_return_family($method);
+  return undef unless defined($return_family);
+  my $helper = _number_receiver_method_helper_name($method);
+  return undef unless defined($helper) && length($helper);
+
+  if ($method =~ /^(?:abs|floor|ceil|round)$/o) {
+   return undef unless @args == 0;
+  } elsif ($method =~ /^(?:sub|div|mod|eq|ne|gt|ge|lt|le)$/o) {
+   return undef unless @args == 1;
+  } elsif ($method eq 'clamp') {
+   return undef unless @args == 2;
+  } elsif ($method =~ /^(?:add|mul|min|max)$/o) {
+   return undef unless @args >= 1;
+  } else {
+   return undef;
+  }
+
+  $current_expr = $helper.'('.join(', ', ($current_expr, @args)).')';
+  return 'undef' if $return_family eq 'terminal' && !$is_last;
+  $current_family = $return_family;
  }
 
  return $current_expr;

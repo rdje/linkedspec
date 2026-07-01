@@ -1988,3 +1988,25 @@ fn terse_2_3_5_3_string_terminal_methods_end_chains() {
         "string receiver terminal values cannot continue into later receiver-dot methods"
     );
 }
+
+// ── SPEC-FORMAT-TERSE.2.3.5.4 — number receiver-dot value chains:
+
+#[test]
+fn terse_2_3_5_4_number_receiver_value_chains_run() {
+    let grammar = "Top::\n /x/ -> Done { set(score, -3.7); return(array(score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12), 5.mod(2), 3.5.floor().add(1), 3.5.round(), score.abs().gt(3), score.abs().le(4))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[8.5, 1, 4, 4, true, true]]),
+        "number receiver-dot value chains compose numeric helpers and comparisons"
+    );
+}
+
+#[test]
+fn terse_2_3_5_4_number_terminal_methods_end_chains() {
+    let grammar = "Top::\n /x/ -> Done { return(array(5.gt(3).add(1), 5.eq(5).abs())) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[null, null]]),
+        "number receiver comparison terminal values cannot continue into later receiver-dot methods"
+    );
+}

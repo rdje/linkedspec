@@ -603,7 +603,19 @@ assign(scalar(score_total), num_sum(array(scores)));
 assign(scalar(score_average), num_avg(array(scores)));
 assign(scalar(score_median), num_median(array(scores)));
 assign(scalar(score_range), num_range(array(scores)));
+assign(scalar(next_depth), depth.add(1));
+assign(scalar(weighted_count), count(array(parts)).add(2, scalar(offset)).mul(3));
+assign(scalar(score_bucket), score.abs().ceil().clamp(0, 10));
 ```
+
+Number receiver-dot value chains are accepted with terse method names. The receiver is the first argument to
+the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
+`num_add(num_ceil(num_abs(scalar(score))), 2)`, and `3.5.floor().add(1)` maps to
+`num_add(num_floor(3.5), 1)`. Number-returning links (`abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
+`div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
+`ne`, `gt`, `ge`, `lt`, `le`) return booleans and end the chain. Array reducers such as `num_sum(array(...))`
+and `num_avg(array(...))` remain explicit array-consuming helpers; there is no implicit number receiver bridge
+from scalar values into array reducers.
 
 Numeric helpers compose with array helpers:
 
@@ -639,6 +651,10 @@ endif()
 
 if(num_ge(num_avg(take(array(scores), 3)), 5))
   return(hash("kind", "high_score", "average", num_avg(take(array(scores), 3))));
+endif()
+
+if(count(array(parts)).gt(0))
+  return(hash("kind", "nonempty", "count", count(array(parts))));
 endif()
 ```
 
