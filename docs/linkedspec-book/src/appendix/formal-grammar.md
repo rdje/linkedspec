@@ -261,7 +261,9 @@ expression-valued block on the Perl reference and Rust backend. It returns the f
 expression unless a `return(expr)` statement is reached earlier; that `return(expr)`
 exits only the expression-valued block, skips later statements in that block, and
 yields `expr` as the block value. Empty `{}` and top-level-fat-arrow `{ key => value }`
-forms remain hash literals.
+forms remain hash literals. Because the block is a value expression, it may also be the
+receiver of a compatible receiver-dot chain, such as `{ [3, 1, 2] }.sorted().join_values(",")`
+or `{ " a-b " }.trim().split("-").count()`.
 
 ### 3.7 Fluent Chains
 
@@ -491,6 +493,8 @@ slice(arr, start, n)    — subarray from start, n elements
 sorted(arr)             — sorted ascending
 reversed(arr)           — reversed order
 arr.sorted().first()    — receiver-dot array value chain over compatible pure array helpers
+{ [3, 1, 2] }.sorted().join_values(delim)
+                        — expression-valued block yielding an array as a receiver
 sorted_keys(hash)       — keys sorted by name, as array
 sorted_values(hash)     — values sorted by key name, as array
 hash_expr.set_key(k, v).sorted_keys().join_values(delim)

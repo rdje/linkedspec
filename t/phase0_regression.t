@@ -45875,6 +45875,67 @@ subtest 'spec_format_terse_2_3_5_4_number_receiver_value_chains' => sub {
         'number receiver value-chain spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_2_3_5_5_block_valued_receiver_chains' => sub {
+    # SPEC-FORMAT-TERSE.2.3.5.5: expression-valued blocks can be receivers
+    # for the same compatible array/hash/string/number value-chain families.
+    # The block itself adds no special receiver semantics; its yielded value is
+    # fed into the already-owned helper family selected by the first method.
+    plan tests => 11;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return({ [3, 1, 2] }.sorted().join_values(","))'),
+        qr/__ls_sorted.*ref\(\$__ls_sorted\) eq 'ARRAY'.*__ls_join_values/s,
+        'array-yielding block receivers lower through the existing array helper contracts');
+    like($L->('return({ return(["x", "y"]); ["bad"] }.join_values("|"))'),
+        qr/__ls_block_done.*__ls_join_values/s,
+        'block-local early return can yield the array receiver value');
+    like($L->('return({ set(raw, " a-b "); raw }.trim().split("-").count())'),
+        qr/__ls_trim.*__ls_split_value.*__ls_count/s,
+        'string-yielding block receivers continue through split into array helper chains');
+    like($L->('return({ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(","))'),
+        qr/__ls_sorted_keys.*__ls_join_values/s,
+        'hash-yielding block receivers continue through sorted_keys into array helper chains');
+    like($L->('return({ 3.5 }.floor().add(2))'),
+        qr/__ls_num_floor_value = do \{ 3\.5 \}.*__ls_num_add/s,
+        'number-yielding block receivers continue through numeric helper chains');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(\",\"), { return([\"x\", \"y\"]); [\"bad\"] }.join_values(\"|\"), { set(raw, \" a-b \"); raw }.trim().split(\"-\").count(), { { \"b\" => 2, \"a\" => 1 } }.sorted_keys().join_values(\",\"), { 3.5 }.floor().add(2))) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'block-valued receiver-chain spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["1,2,3","x|y",2,"a,b",5]',
+        'block-valued receivers feed their yielded runtime values into compatible receiver families');
+
+    my $src = $gen->($spec);
+    unlike($src, qr/\}\.(?:sorted|join_values|trim|sorted_keys|floor)\b/,
+        'generated source has no raw block receiver-dot helper residue');
+    like($src, qr/my \$raw\b/,
+        'block receiver side-effect statements still auto-supply working scalars');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'block-valued receiver-chain spec has no canonical fallback');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'block-valued receiver-chain spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

@@ -152,6 +152,10 @@ return(payload);
 
 The `return(expr)` inside the block is block-local: it yields the block value and skips later statements in
 that block. The surrounding rule still returns only because the outer action later calls `return(payload)`.
+When a block is used as a receiver, its yielded value enters the same compatible receiver-dot helper family:
+`{ [3, 1, 2] }.sorted().join_values(",")`, `{ " a-b " }.trim().split("-").count()`,
+`{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
+array, string, hash, and number contracts.
 
 ## Reading and copying collections
 
@@ -183,6 +187,8 @@ string receivers can flow through scalar string helpers, and number receivers ca
 array helpers such as `trim_each()`, `filter_nonempty()`, `lowercase_each()`, `count()`, or
 `join_values(delim)`. Numeric comparisons such as `count(array(parts)).gt(0)` are terminal values; they do not
 continue into later number methods.
+Expression-valued block receivers do not add a separate dispatch rule: the block evaluates first, then the
+selected helper family consumes the yielded value.
 
 ## Hash shaping
 

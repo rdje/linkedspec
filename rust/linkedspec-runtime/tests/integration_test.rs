@@ -2011,6 +2011,18 @@ fn terse_2_3_5_4_number_terminal_methods_end_chains() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.2.3.5.5 — block-valued receiver-dot chains:
+
+#[test]
+fn terse_2_3_5_5_block_valued_receiver_chains_run() {
+    let grammar = "Top::\n /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(\",\"), { return([\"x\", \"y\"]); [\"bad\"] }.join_values(\"|\"), { set(raw, \" a-b \"); raw }.trim().split(\"-\").count(), { { \"b\" => 2, \"a\" => 1 } }.sorted_keys().join_values(\",\"), { 3.5 }.floor().add(2))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["1,2,3", "x|y", 2, "a,b", 5]]),
+        "block-valued receivers feed their yielded values into compatible array/string/hash/number receiver families"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.3.5.6 — typed wrapper quoted-name boundaries:
 
 #[test]

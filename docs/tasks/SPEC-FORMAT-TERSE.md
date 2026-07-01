@@ -6,7 +6,20 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-01` (**`.2.3.5.6` DONE; frontier `.2.3.5.5`** — typed wrapper quoted-name
+- Last updated: `2026-07-01` (**`.2.3.5.5` DONE; receiver-chain family complete** — expression-valued
+  blocks now continue through compatible receiver-dot value chains by the runtime type they yield, with no
+  block-only helper semantics. Locked examples cover array, early-return array, string-to-array, hash-to-array,
+  and number chains:
+  `{ [3, 1, 2] }.sorted().join_values(",")`,
+  `{ return(["x", "y"]); ["bad"] }.join_values("|")`,
+  `{ set(raw, " a-b "); raw }.trim().split("-").count()`,
+  `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`, and
+  `{ 3.5 }.floor().add(2)`. The Perl audit found string/hash/number block receivers already using existing
+  family normalization, but array-yielding blocks needed narrow exit-shape recognition before array helpers
+  such as `sorted(...)` could lower. Rust needed parser follow-through after block/hash/array primaries; its
+  runtime already evaluates non-variable fluent receivers through `eval_expr`. Phase0 is **1001 green** and
+  the oracle corpus is **52 fixtures**. Next frontier: task-tree-own Julia/Lua/Dart variant parity before any
+  variant code. Prior **`.2.3.5.6` DONE** — typed wrapper quoted-name
   boundaries are locked on Perl/Rust and in the variant-neutral mdBook. `array(foo)` / `a(foo)` and
   `hash(bar)` / `h(bar)` remain explicit typed working-variable reads, but quoted arguments are not aliases:
   `array("foo")` / `array('foo')` are literal array-constructor payloads, and
@@ -1952,7 +1965,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.3.5.4 - implement number receiver value chains`
 
 - ID: `SPEC-FORMAT-TERSE.2.3.5.5`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Block-valued receiver-dot chaining audit/parity
   Acceptance: Verify and, only if needed, implement receiver-dot chaining from expression-valued blocks by the
     runtime type yielded by the block. A block that yields a string, number, array, or hash must be able to
@@ -1961,8 +1974,24 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     oracle fixtures where JSON-stable, and mdBook examples. If the existing expression-valued block + receiver
     family machinery already satisfies the contract, this leaf closes as a verification/documentation slice
     with explicit evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Audit found the contract mostly present but not fully locked. Perl
+    string-, hash-, and number-yielding block receivers already fed the existing receiver-family lowering, but
+    array-yielding blocks were rejected by the array-value recognizer before array helpers such as `sorted(...)`
+    and `join_values(...)` could normalize. Perl now treats an expression-valued block as array-like only when
+    its visible exits are array-yielding expressions, including block-local `return(expr)`, so scalar/hash
+    blocks are not misclassified. Rust runtime evaluation already handled non-variable fluent receivers through
+    `eval_expr`; the parser now allows block/hash/array primaries to continue into `.method(...)` chains.
+    Added Perl phase0 locks, Rust parser/runtime locks, oracle fixture
+    `terse_2_3_5_5_block_valued_receiver_chains`, mdBook examples, and KM fact
+    `terse-block-valued-receiver-chains`. Locked examples cover
+    `{ [3, 1, 2] }.sorted().join_values(",")`,
+    `{ return(["x", "y"]); ["bad"] }.join_values("|")`,
+    `{ set(raw, " a-b "); raw }.trim().split("-").count()`,
+    `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`, and
+    `{ 3.5 }.floor().add(2)`. Validation PASS: Perl syntax checks, focused Perl probes, focused Rust
+    `.2.3.5.5` parser/runtime tests, oracle generator, Rust corpus oracle (**52 fixtures**), full phase0
+    (**1001 tests**), and mdBook/KM/memory/doctrine/diff checks.
+  Commit: `SPEC-FORMAT-TERSE.2.3.5.5 - implement block-valued receiver chains`
 
 - ID: `SPEC-FORMAT-TERSE.2.3.5.6`
   Status: `done` (2026-07-01)
@@ -2101,8 +2130,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.5.3` | `done` 2026-07-01 | String/scalar receiver-dot value chains landed on Perl/Rust; split bridges into array receiver chains, string literal receivers parse on Rust, value-form split/substr payloads are portable, phase0 998 green, corpus 49 fixtures. |
 | — | `SPEC-FORMAT-TERSE.2.3.5.4` | `done` 2026-07-01 | Number receiver-dot value chains landed on Perl/Rust; numeric literal receivers parse, comparisons are terminal, value-form numeric comparisons lower on Perl, Rust `num_add`/`num_mul` consume all operands, phase0 999 green, corpus 50 fixtures. |
 | — | `SPEC-FORMAT-TERSE.2.3.5.6` | `done` 2026-07-01 | Typed wrapper quoted-name boundary locked: bare aggregate wrapper args read typed working variables; quoted args stay constructor payloads; direct `[...]` / `{...}` shapes are the preferred terse constructors. |
-| 1 | `SPEC-FORMAT-TERSE.2.3.5.5` | `pending` | Block-valued receiver-dot chaining by yielded runtime type; audit first, implement only if existing block value + receiver-family machinery does not already satisfy it. |
-| … | `.3.x`, `.4` | `pending` | Remaining Round 3 leaves + Round 4+ discovery, per the Task Tree. |
+| — | `SPEC-FORMAT-TERSE.2.3.5.5` | `done` 2026-07-01 | Block-valued receiver-dot chaining landed by yielded runtime type; expression-valued blocks feed the existing compatible array/string/hash/number receiver families. |
+| 1 | Variant parity ownership | `pending` | Task-tree-own Julia/Lua/Dart variant parity before any variant code, then resume remaining Round 3 leaves + Round 4+ discovery when selected. |
 
 ## Decisions
 
@@ -2151,6 +2180,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   under the existing constructor rules. The terse constructor surface is the direct shape syntax (`[...]` and
   `{...}`), which should be preferred in new examples. Runtime scalar-indirect lookup and postfix typed-view
   adapters such as `foo.array()` are explicitly out of scope.
+
+- `2026-07-01` (**`.2.3.5.5` block-valued receiver-dot chains landed**). Expression-valued blocks are ordinary
+  receiver values. The block evaluates first, including block-local `return(expr)`, and the yielded value
+  selects the already-owned compatible receiver family. Perl array recognition is intentionally exit-shape
+  based: a block is array-like only when all visible exits are array-yielding expressions, which prevents
+  broad block-as-array misclassification. Rust keeps the same runtime evaluator and only needed parser
+  follow-through after block/hash/array primaries.
 
 - `2026-06-30` (**`.2.3.4.2` Perl inline value-control lowering landed**). Inline-composite `if(...)` and
   `switch(...)` are now portable value expressions in the supported value-consuming slots: `return(...)`,
@@ -2792,6 +2828,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.3` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes; focused Rust parser/runtime tests (`parse_string`, `terse_2_3_5_3`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; phase0 (`prove -q -Iperl t/phase0_regression.t`) | String receiver-dot value chains landed. String-returning links compose from bare scalar, explicit scalar, capture, and string-literal receivers; `split(delim)` bridges into array receiver chains; terminal string methods end the chain with `undef`/`null` on invalid continuations; value-form `split(...)` and `substr(...)` lower as portable helper payloads. Phase0 PASS (998 tests); oracle corpus PASS over 49 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.4` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes; focused Rust parser/runtime tests (`parse_number_receiver`, `parse_decimal_number_receiver`, `terse_2_3_5_4`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; phase0 (`prove -q -Iperl t/phase0_regression.t`) | Number receiver-dot value chains landed. Numeric links compose through `num_*` helpers, integer/decimal literal receivers parse, comparison methods are terminal, value-form numeric comparisons lower on Perl, Rust `num_add`/`num_mul` consume all operands, and statement/lifecycle methods such as `declare(...)` remain outside terse receiver methods. Phase0 PASS (999 tests); oracle corpus PASS over 50 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.6` | Perl syntax checks for `MethodLowering.pm`, `ValueExpr.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes for bare vs quoted aggregate wrappers and direct shapes; full phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust `.2.3.5.6` integration tests; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff/local CI gates | Typed wrapper quoted-name boundaries landed. Bare `array(foo)` / `a(foo)` and `hash(bar)` / `h(bar)` are explicit aggregate working-variable reads; quoted wrapper arguments remain literal constructor payloads and are not scalar-indirect aliases; direct `[...]` and `{...}` shapes are the preferred terse constructors. Perl generic value-expression lowering now recognizes direct shape literals in helper composition and avoids reserving primitive literals or inappropriate engine locals as aggregate symbols. Phase0 PASS (1000 tests); oracle corpus PASS over 51 fixtures. |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.5` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused Perl lowering/runtime probes; focused Rust parser/runtime tests (`parse_block_valued_receiver_chain`, `terse_2_3_5_5`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; full phase0 (`prove -q -Iperl t/phase0_regression.t`); `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks | Block-valued receiver-dot chains landed. Expression-valued blocks now feed their yielded array/string/hash/number values into the compatible receiver-family chains; Perl array-yielding blocks use narrow visible-exit recognition and Rust parses fluent chains after block/hash/array primaries. Phase0 PASS (1001 tests); oracle corpus PASS over 52 fixtures. |
 | `2026-06-16` | `SPEC-FORMAT-TERSE` | Transcription faithful to `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` | Done — all Rounds 1–3 captured as leaves; Round 4+ as a discovery leaf |
 | `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 | `2026-06-23` | `SPEC-FORMAT-TERSE.1.1` (split) | `dump_parser_source` ground-truth probes (scratchpad `probe_autovar*.pl`, dump-don't-transcribe) establishing the one-scope / non-strict / preamble-`my` model; `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm` = 0; baseline `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh` (2/2), KM gate all EXIT 0 | Split `.1.1` → `.1.1.1`+`.1.1.2`; design recorded; KM card [[working-vars-no-strict-need-my-lexical]] added (map regenerated). Docs/tree/KM-only — no engine/book change, so phase0 N/A to the split slice |
@@ -2871,6 +2908,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.5.3` | `SPEC-FORMAT-TERSE.2.3.5.3 - implement string receiver value chains` | String receiver-dot value chains landed on Perl/Rust with phase0, focused Rust tests, oracle corpus, mdBook, and KM locks. Frontier becomes `.2.3.5.4`. |
 | `SPEC-FORMAT-TERSE.2.3.5.4` | `SPEC-FORMAT-TERSE.2.3.5.4 - implement number receiver value chains` | Number receiver-dot value chains landed on Perl/Rust with phase0, focused Rust tests, oracle corpus, mdBook, and KM locks. `declare(...)` and other statement/lifecycle methods stay outside receiver methods. Frontier becomes `.2.3.5.5`. |
 | `SPEC-FORMAT-TERSE.2.3.5.6` | `SPEC-FORMAT-TERSE.2.3.5.6 - lock aggregate wrapper quoting boundaries` | Bare aggregate wrapper arguments remain typed working-variable reads; quoted wrapper arguments remain constructor payloads; direct `[...]` / `{...}` shapes are the preferred terse constructors. Phase0 1000 green; oracle corpus 51 fixtures; frontier returns to `.2.3.5.5`. |
+| `SPEC-FORMAT-TERSE.2.3.5.5` | `SPEC-FORMAT-TERSE.2.3.5.5 - implement block-valued receiver chains` | Expression-valued blocks now feed yielded array/string/hash/number values into compatible receiver-dot value chains. Perl array-yielding blocks use narrow visible-exit recognition; Rust parses fluent chains after block/hash/array primaries. Phase0 1001 green; oracle corpus 52 fixtures; receiver-chain family is complete. |
 | `SPEC-FORMAT-TERSE` (creation) | (in the `SPEC-FORMAT-TERSE.0` activation commit) | Tree was created `proposed` in an earlier session; first commit lands with `.0`. |
 | `SPEC-FORMAT-TERSE.0` | `SPEC-FORMAT-TERSE.0 — activate + ratify the terse .spec format direction (ADR 0007)` | Tree `proposed`→`active`; ADR `0007` + INDEX row; migration policy = gradual alias; reference-touching exception; implementation gated by `RTLUTILS-REGEX-HANG`. No engine/book change. |
 | `SPEC-FORMAT-TERSE.1.1` (split) | `SPEC-FORMAT-TERSE.1.1 — split into .1.1.1 (Perl) + .1.1.2 (Rust parity); record auto-existing-variable design + KM card` | `.1.1` → container; first frontier child `.1.1.1`. Design grounded by `dump_parser_source` probes; KM [[working-vars-no-strict-need-my-lexical]]. Docs/tree/KM-only — no engine/book change. |
@@ -2944,6 +2982,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 ## Changelog
 
+- `2026-07-01`: **`.2.3.5.5` LANDED — block-valued receiver-dot chains.**
+  Expression-valued blocks now work as receivers for the existing compatible array/string/hash/number value
+  chains. The block evaluates first, including block-local `return(expr)`, then the yielded value feeds the
+  first receiver method's helper family. Perl now recognizes array-yielding block exits narrowly enough for
+  `{ [3, 1, 2] }.sorted().join_values(",")` and
+  `{ return(["x", "y"]); ["bad"] }.join_values("|")` without treating every block as an array. Rust now parses
+  fluent chains after block/hash/array primaries, using its existing runtime evaluator for non-variable
+  receivers. Phase0 is 1001 green, the Rust oracle corpus is 52 fixtures, and the receiver-chain family is
+  complete.
+
 - `2026-07-01`: **`.2.3.5.6` LANDED — aggregate wrapper quoted-name boundaries.**
   Bare aggregate wrappers remain typed working-variable reads: `array(foo)` / `a(foo)` read `@foo`, and
   `hash(bar)` / `h(bar)` read `%bar`. Quoted wrapper arguments are not aliases and are not scalar-indirect
@@ -2951,7 +2999,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   fixed-key constructor payloads under the existing arity rules. The mdBook now prefers direct terse shape
   constructors (`[...]`, `{...}`, `[]`, `{}`) for new array/hash construction examples, and postfix
   `foo.array()`-style typed-view adapters remain out of scope. Phase0 is 1000 green, the Rust oracle corpus is
-  51 fixtures, and the frontier returns to `.2.3.5.5`.
+  51 fixtures, and the then-frontier returned to `.2.3.5.5`.
 
 - `2026-07-01`: **`.2.3.5.4` LANDED — number receiver-dot value chains.**
   Number receiver-dot chains now compose through the existing `num_*` helper family on Perl and Rust:
@@ -2959,7 +3007,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   `5.mod(2)`, and `3.5.floor().add(1)` are locked. Comparison methods such as `gt`/`le` are terminal values;
   invalid later receiver calls return `undef`/`null`. Numeric array reducers remain explicit array-consuming
   helpers, and statement/lifecycle calls such as `declare(...)` are not receiver methods. Phase0 is 999 green,
-  the Rust oracle corpus is 50 fixtures, and the frontier moves to `.2.3.5.5`.
+  the Rust oracle corpus is 50 fixtures, and the then-frontier moved to `.2.3.5.5`.
 
 - `2026-06-30`: **`.2.3.4.2` LANDED — Perl inline value-control lowering.**
   Inline-composite `if(...)` and `switch(...)` now return selected branch payloads on the Perl reference in

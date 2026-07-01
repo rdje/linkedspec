@@ -174,6 +174,13 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > scalar payload assignment: `set(scalar(payload), [value])` assigns the whole array payload to scalar
 > `payload`.
 
+> **Expression-valued blocks are receiver-capable value expressions.** A non-empty block without a top-level
+> `=>` can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
+> selected by the method being called: `{ [3, 1, 2] }.sorted().join_values(",")` uses the array family,
+> `{ " a-b " }.trim().split("-").count()` uses string helpers and the explicit `split` array bridge,
+> `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")` uses hash then array helpers, and
+> `{ 3.5 }.floor().add(2)` uses the number family. `return(expr)` inside the block is still block-local.
+
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `scalar(name)` | scalar value | read the working scalar `name`. |
@@ -513,7 +520,8 @@ helper argument, so `raw.trim().lowercase()` maps to `lowercase(trim(scalar(raw)
 `coalesce_nonempty`) can keep chaining through string helpers. `split(delim)` is the explicit bridge from a
 string chain into the array receiver family, so `raw.trim().split("-").trim_each().join_values("|")` is
 portable. Scalar terminals such as `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` end
-the chain.
+the chain. A string-yielding expression-valued block can be the receiver, for example
+`{ " a-b " }.trim().split("-").count()`.
 
 Rationale:
 
@@ -615,7 +623,8 @@ the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
 `div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
 `ne`, `gt`, `ge`, `lt`, `le`) return booleans and end the chain. Array reducers such as `num_sum(array(...))`
 and `num_avg(array(...))` remain explicit array-consuming helpers; there is no implicit number receiver bridge
-from scalar values into array reducers.
+from scalar values into array reducers. A number-yielding expression-valued block can be the receiver, for
+example `{ 3.5 }.floor().add(2)`.
 
 Numeric helpers compose with array helpers:
 
@@ -710,7 +719,9 @@ Array helpers are pure value helpers unless you use `assign(...)` to store their
 Array receiver-dot value chains are accepted for the same pure array helpers. The receiver is the first helper
 argument, except `join_values`, where `items.join_values(delim)` maps to the canonical
 `join_values(delim, items)` contract. The mutating end methods `items.push_back(value)`,
-`items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` remain statement-only.
+`items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` remain statement-only. An
+array-yielding expression-valued block can be the receiver too:
+`{ [3, 1, 2] }.sorted().join_values(",")`.
 
 ## Hash helpers
 
@@ -755,7 +766,9 @@ argument, so `meta.set_key("stage", "normalized").count_keys()` maps to
 hash helpers, and `sorted_keys()` / `sorted_values()` can continue through array receiver helpers such as
 `join_values(...)`, `drop_front(...)`, and `first()`. Receiver-dot `scalaref(key)` reads one field from the
 current hash value. Statement forms remain separate: `set_key(meta, key, value)` and `meta[key] = value`
-mutate the named working hash; `meta.set_key(key, value)` is a pure derived value unless assigned back.
+mutate the named working hash; `meta.set_key(key, value)` is a pure derived value unless assigned back. A
+hash-yielding expression-valued block can enter the same family, for example
+`{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`.
 
 The terse hash-index operator is the statement form written with the key next to the target:
 

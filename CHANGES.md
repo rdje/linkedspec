@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.5 — implement block-valued receiver chains
+
+**Scope:** Perl ActionIR receiver-chain lowering, Rust expression parser, focused Perl/Rust locks, oracle
+corpus, mdBook, Knowledge Map, roadmap/task-tree/live docs.
+
+**What changed:** Expression-valued blocks can now be receivers for the existing compatible receiver-dot value
+families. Blocks yielding arrays, strings, hashes, or numbers feed the same array/string/hash/number helper
+chains that `.2.3.5.1` through `.2.3.5.4` own. Locked examples include
+`{ [3, 1, 2] }.sorted().join_values(",")`, `{ return(["x", "y"]); ["bad"] }.join_values("|")`,
+`{ set(raw, " a-b "); raw }.trim().split("-").count()`,
+`{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)`.
+
+**Boundary:** The block adds no special block-only receiver semantics. `return(expr)` inside the block remains
+block-local and yields the receiver value. Perl statically recognizes array-yielding block exits only for the
+array helper recognizer; hash/string/number families continue through their existing value lowering. Rust now
+parses fluent chains after block/hash/array primaries and reuses the existing fluent-chain runtime evaluator.
+
+**Validation:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -Iperl -c
+t/phase0_regression.t`; `perl -Iperl -c tools/gen_oracle_corpus.pl`; focused Perl lowering/runtime probes;
+focused Rust parser/runtime tests PASS; `perl -Iperl tools/gen_oracle_corpus.pl` generated **52 fixtures**;
+Rust `corpus_oracle` PASS over 52 fixtures; full phase0 PASS with **1001 tests**; `mdbook build
+docs/linkedspec-book` PASS; Knowledge Map, memory-architecture, doctrine, and `git diff --check` gates PASS;
+`bash tools/run_ci_local.sh` PASS.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.2.3.5.6 — lock aggregate wrapper quoting boundaries
 
 **Scope:** Perl ActionIR aggregate-wrapper/value lowering, Rust boundary locks, oracle corpus, mdBook,

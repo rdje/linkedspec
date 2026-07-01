@@ -86,7 +86,14 @@ set(out, { set(x, "a"); return(x) });          # $out = "a"
 return({ return("a"); "b" });                  # "a"
 set(out, { set(x, "a"); return(x); set(x, "b"); x });  # $out = "a"
 return(array({ set(x, "a"); x }, { "k" => x }));
+return({ [3, 1, 2] }.sorted().join_values(","));        # "1,2,3"
+return({ " a-b " }.trim().split("-").count());          # 2
 ```
+
+Expression-valued blocks are ordinary value expressions when used as receiver-dot receivers. The block
+evaluates first, including any block-local `return(expr)`, and the yielded value is consumed by the same
+compatible receiver family selected by the first method. Blocks do not create a separate block-only receiver
+dispatch rule.
 
 ## 1. Declaration Helpers
 
@@ -358,6 +365,8 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Boundary**: `substr(value, start, length?)` here is the pure value substring helper. It is separate from
   any statement-style or host-language substitution idiom. A terminal string method followed by another
   receiver-dot call yields `undef` rather than a partially lowered host expression.
+- **Block receivers**: An expression-valued block whose value is a string can be the receiver, for example
+  `{ " a-b " }.trim().split("-").count()`.
 
 ## 3. Array Helpers
 
@@ -531,6 +540,9 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Boundary**: `split(value, delim)` belongs to the scalar/string receiver family because its receiver is the
   string being split. Statement-only end mutations (`push_back`, `push_front`, `pop_back`, `pop_front`) remain
   mutations, not value-chain links.
+- **Block receivers**: An expression-valued block whose value is an array can be the receiver, for example
+  `{ [3, 1, 2] }.sorted().join_values(",")`. A block-local `return(array_expr)` yields the receiver value and
+  skips later block statements before the array chain runs.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`
@@ -559,6 +571,8 @@ return(array({ set(x, "a"); x }, { "k" => x }));
 - **Boundary**: `set_key(name, key, value)` and `name[key] = value` remain statement-level mutations of a
   named working hash. Receiver-dot `meta.set_key(key, value)` is pure value composition; it mutates nothing
   unless its result is explicitly assigned back.
+- **Block receivers**: An expression-valued block whose value is a hash can be the receiver, for example
+  `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`.
 
 ### `contains(arr, needle)`
 - **Signature**: `contains(arr: array, needle: scalar)`
@@ -716,7 +730,8 @@ names and map to `num_*`: `value.abs()` -> `num_abs(value)`, `value.add(2, 3)` -
 identifiers read scalar working variables. Integer and float literal receivers are accepted (`5.mod(2)`,
 `3.5.floor().add(1)`). Comparisons (`eq`, `ne`, `gt`, `ge`, `lt`, `le`) are terminal boolean values; a later
 receiver-dot call after a comparison returns `undef`/`null`. `declare(...)` and other statement/lifecycle
-methods are not numeric receiver methods.
+methods are not numeric receiver methods. An expression-valued block whose value is numeric can be the
+receiver, for example `{ 3.5 }.floor().add(2)`.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads

@@ -440,7 +440,7 @@ sub _lower_block_side_effect_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+ return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
@@ -618,6 +618,7 @@ sub _lower_method_value_expr {
   return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $split_action_ir_statements = $require_dep->('split_action_ir_statements');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $lower_scalaref_value_expr = $require_dep->('lower_scalaref_value_expr');
@@ -812,13 +813,96 @@ sub _lower_method_value_expr {
    return 'do { my $__ls_flat_hash = '.$lowered_hash.'; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }';
   }
 
-  return undef;
+ return undef;
+ };
+ my ($block_exit_looks_array_like, $block_value_exit_exprs);
+ $block_value_exit_exprs = sub {
+  my ($block_expr) = @_;
+  my $payload = _extract_outer_brace_payload($block_expr, $trim_action_ir_value);
+  return undef unless defined $payload;
+  $payload = $trim_action_ir_value->($payload);
+  return undef unless defined($payload) && length($payload);
+  return undef if _has_top_level_fat_arrow($payload);
+
+  my $statements = $split_action_ir_statements->($payload);
+  return undef unless ref($statements) eq 'ARRAY' && @$statements;
+
+  my @statements;
+  foreach my $raw_statement (@$statements) {
+   my $statement = $trim_action_ir_value->($raw_statement);
+   push @statements, $statement if defined($statement) && length($statement);
+  }
+  return undef unless @statements;
+
+  my @exits;
+  for (my $idx = 0; $idx < @statements; ++$idx) {
+   my $statement = $statements[$idx];
+   my $call = $parse_method_function_expr->($statement);
+   if ($call && ($call->{method} // '') eq 'return') {
+    my $return_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
+    return undef unless $return_args;
+    push @exits, $return_args->[0];
+    next;
+   }
+   push @exits, $statement if $idx == $#statements;
+  }
+
+  return @exits ? \@exits : undef;
+ };
+ $block_exit_looks_array_like = sub {
+  my ($exit_expr) = @_;
+  return 0 unless defined $exit_expr;
+  my $exit_trimmed = $trim_action_ir_value->($exit_expr);
+  return 0 unless defined($exit_trimmed) && length($exit_trimmed);
+
+  if (substr($exit_trimmed, 0, 1) eq '[') {
+   my $shape = $lower_shape_literal_value_expr->($exit_trimmed);
+   return 1 if defined($shape) && length($shape);
+   return 0;
+  }
+
+  if (substr($exit_trimmed, 0, 1) eq '{') {
+   my $nested_exits = $block_value_exit_exprs->($exit_trimmed);
+   return 0 unless $nested_exits && @$nested_exits;
+   foreach my $nested_exit (@$nested_exits) {
+    return 0 unless $block_exit_looks_array_like->($nested_exit);
+   }
+   return 1;
+  }
+
+  return 1 if $exit_trimmed =~ $array_container_prefix_re;
+
+  my $exit_call = $parse_method_function_expr->($exit_trimmed);
+  return 0 unless $exit_call;
+  my $exit_method = $exit_call->{method} // '';
+  return 1 if $exit_method =~ /^(?:array|array_copy|copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
+
+  if ($exit_method eq 'coalesce') {
+   my $exit_args = $normalize_method_args_with_optional_scope->($exit_call->{args} || [], 2, undef);
+   return 0 unless $exit_args && @$exit_args;
+   foreach my $arg (@$exit_args) {
+    next unless defined $arg;
+    return 0 unless $block_exit_looks_array_like->($arg);
+   }
+   return 1;
+  }
+
+  return 0;
  };
  $looks_like_array_value_expr = sub {
   my ($candidate_expr) = @_;
   return 0 unless defined $candidate_expr;
   my $candidate_trimmed = $trim_action_ir_value->($candidate_expr);
   return 0 unless defined($candidate_trimmed) && length($candidate_trimmed);
+
+  if (substr($candidate_trimmed, 0, 1) eq '{') {
+   my $exits = $block_value_exit_exprs->($candidate_trimmed);
+   return 0 unless $exits && @$exits;
+   foreach my $exit (@$exits) {
+    return 0 unless $block_exit_looks_array_like->($exit);
+   }
+   return 1;
+  }
 
   if (substr($candidate_trimmed, 0, 1) eq '[') {
    my $shape = $lower_shape_literal_value_expr->($candidate_trimmed);

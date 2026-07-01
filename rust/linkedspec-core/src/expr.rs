@@ -17,7 +17,7 @@
 //! array_append → name '+=' expr          (statement only)
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
 //! expr        → primary ('.' method_call)*
-//! primary     → call | nested_access | indexed_var | literal | variable
+//! primary     → call | nested_access | indexed_var | literal | block | variable
 //! call        → name '(' args? ')'
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
@@ -807,8 +807,14 @@ impl<'a> Parser<'a> {
                 self.parse_fluent_chain(expr)
             }
             '/' => self.parse_regex(),
-            '[' => self.parse_array_literal(),
-            '{' => self.parse_brace_expr(),
+            '[' => {
+                let expr = self.parse_array_literal()?;
+                self.parse_fluent_chain(expr)
+            }
+            '{' => {
+                let expr = self.parse_brace_expr()?;
+                self.parse_fluent_chain(expr)
+            }
             '$' => {
                 self.advance(1);
                 self.parse_var_or_call()
@@ -2398,6 +2404,23 @@ mod tests {
                 assert_eq!(calls[1].args.len(), 1);
             }
             other => panic!("expected array receiver value FluentChain, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn parse_block_valued_receiver_chain() {
+        let block = CodeBlock::parse(r#"{ ["b", "a"] }.sorted().join_values(",")"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::FluentChain { receiver, calls } => {
+                assert!(matches!(receiver.as_ref(), Expr::BlockValue { .. }));
+                let methods: Vec<&str> = calls.iter().map(|call| call.method.as_str()).collect();
+                assert_eq!(methods, vec!["sorted", "join_values"]);
+                assert_eq!(calls[1].args.len(), 1);
+            }
+            other => panic!(
+                "expected block-valued receiver FluentChain, got {:?}",
+                other
+            ),
         }
     }
 

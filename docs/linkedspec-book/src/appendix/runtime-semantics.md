@@ -254,6 +254,12 @@ return({ set(name, "ok"); name })          # "ok"
 set(out, { set(name, "ok"); return(name) })
 ```
 
+When an expression-valued block is the receiver of a receiver-dot value chain, the
+block evaluates first and its yielded value becomes the receiver for the existing
+helper family. For example, `{ [3, 1, 2] }.sorted().join_values(",")` evaluates the
+block to an array, then applies the ordinary array receiver-chain contract; `{ " a-b " }.trim().split("-").count()`
+does the same through string helpers and the explicit `split` array bridge.
+
 Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
 "normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`
 in place. The hash target auto-exists just like a declared `hash(meta)` working

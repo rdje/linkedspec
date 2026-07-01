@@ -773,6 +773,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.2.3.5.5 — block-valued receiver-dot chains ──
+    #
+    # Expression-valued blocks can be receivers for the same compatible
+    # array/string/hash/number receiver helper families. This fixture keeps
+    # JSON-stable scalar/number outputs while proving that the yielded block
+    # value, not a special block-only rule, feeds the receiver chain.
+    {   case   => 'terse_2_3_5_5_block_valued_receiver_chains',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(","), { return(["x", "y"]); ["bad"] }.join_values("|"), { set(raw, " a-b "); raw }.trim().split("-").count(), { { "b" => 2, "a" => 1 } }.sorted_keys().join_values(","), { 3.5 }.floor().add(2))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.5.6 — typed wrapper quoted-name boundaries ──
     #
     # Single-argument aggregate wrappers name a working variable only when the

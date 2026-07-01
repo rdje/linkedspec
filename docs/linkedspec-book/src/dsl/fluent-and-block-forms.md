@@ -87,6 +87,10 @@ Lifecycle blocks are statement blocks, not expression-valued blocks: the value o
 last statement is discarded unless that statement is an explicit `return(...)`.
 Use `return(...)` when the lifecycle block is meant to write the surrounding rule
 return channel.
+Expression-valued blocks are the separate value form used inside value-consuming
+expressions. They can also be receiver-dot receivers when their yielded value matches
+the helper family, for example `{ [3, 1, 2] }.sorted().join_values(",")` or
+`{ " a-b " }.trim().split("-").count()`.
 
 ```text
 rule:AND+

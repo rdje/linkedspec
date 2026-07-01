@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.5 — block-valued receiver-dot chains landed): Closed the
+  block-receiver audit with a small Perl gap fix and Rust parser parity. Durable points. (1)
+  **Expression-valued blocks are ordinary receiver values.** The block runs first, including block-local
+  `return(expr)`, and the yielded value feeds the compatible receiver family selected by the first method.
+  (2) **The Perl gap was array-specific.** String, hash, and number block receivers already lowered through
+  existing receiver-family normalization; array-yielding blocks were rejected by the array-value recognizer
+  before helpers such as `sorted(...)` could lower. (3) **Array block recognition stays narrow.** Perl now
+  marks a block array-like only when its visible exits are array-yielding expressions, avoiding a broad
+  "every block is an array" rule that could misclassify scalar or hash blocks. (4) **Rust needed parser
+  follow-through, not runtime changes.** The runtime already evaluates non-variable fluent receivers through
+  `eval_expr`; the parser now lets block/hash/array primaries continue into `.method(...)` chains. (5)
+  **Contract examples span all families.** Locked forms include `{ [3, 1, 2] }.sorted().join_values(",")`,
+  `{ " a-b " }.trim().split("-").count()`,
+  `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.6 — aggregate wrapper quoted-name boundaries landed): Locked the
   aggregate wrapper constructor/read boundary. Durable points. (1) **Bare aggregate wrapper args are typed
   reads.** `array(foo)` / `a(foo)` read the array working variable `foo`; `hash(bar)` / `h(bar)` read the hash
@@ -27,7 +42,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   (4) **Multi-operand helpers are part of the contract.** Receiver `add(...)` and `mul(...)` feed every
   supplied operand to `num_add`/`num_mul`; Rust now consumes all operands instead of the first two. (5)
   **Keep statement/lifecycle methods out of receiver families.** `declare(...)` and similar statement or
-  lifecycle calls are not terse numeric methods; block-valued chaining remains explicitly owned by `.2.3.5.5`.
+  lifecycle calls are not terse numeric methods; block-valued chaining was closed separately by `.2.3.5.5`.
 
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.3 — string receiver-dot value chains landed): Implemented the
   string/scalar return-family receiver-chain leaf. Durable points. (1) **String receiver chains are pure value
@@ -42,8 +57,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `join_values`, and the rest of the array receiver family. (4) **Scalar terminals end the chain.** `length`,
   `starts_with`, `ends_with`, `contains_substr`, and `matches` return number/boolean values; invalid later
   receiver-dot calls now lower/evaluate to `undef` / JSON `null` instead of leaking generated host residue.
-  (5) **Block-valued receiver chaining is now explicitly owned.** `.2.3.5.5` will audit/lock blocks as values
-  whose yielded runtime type selects the receiver family, after number receiver chains land in `.2.3.5.4`.
+  (5) **Block-valued receiver chaining is separately owned.** `.2.3.5.5` later locked blocks as values whose
+  yielded runtime type selects the receiver family.
 
 - 2026-07-01 (SPEC-FORMAT-TERSE.2.3.5.2 — hash receiver-dot value chains landed): Implemented the hash
   return-family receiver-chain leaf. Durable points. (1) **Receiver-dot hash chains are pure value
