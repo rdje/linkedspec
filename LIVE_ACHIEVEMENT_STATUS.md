@@ -7,6 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3 — short wrapper alias retirement split**
+  (TASK TREE + LIVE DOCS + KM; **no parser/compiler/runtime code change**). User clarified that `s(...)`,
+  `a(...)`, and `h(...)` should be retired too. Read-only discovery found active use in shipped specs, phase0
+  locks, and book examples, so the former `.5.3` user-function handoff leaf is now split: `.5.3.1` retires the
+  shorthand wrapper aliases and `.5.3.2` resumes user-function AST call handoff.
+  **Verification:** usage discovery completed; memory/doctrine/Knowledge Map gates PASS; `git diff --check` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.3.1` retire `s(...)`, `a(...)`, and `h(...)`.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.2 — dropped value statement lowering**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). Supported standalone value statements that already parse
   into typed ActionIR AST value nodes now lower as discarded values through a `VALUE_DROP` contract. `trim(" x ")`,

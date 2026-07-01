@@ -456,6 +456,30 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.2 - lower dropped value statements`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.3`
+  Status: `split` (2026-07-01)
+  Goal: Retire short wrapper aliases before the user-function AST handoff.
+  Acceptance: The user decision that `s(...)`, `a(...)`, and `h(...)` are retirement
+    targets is tracked before code. The broad handoff is split so alias retirement does
+    not get hidden inside user-function resolution work.
+  Verification: **PASS 2026-07-01.** Read-only usage discovery found shipped specs,
+    phase0 locks, book examples, and knowledge cards actively using `s(...)`, `a(...)`,
+    and `h(...)`. The leaf is split into `.5.3.1` short-wrapper alias retirement and
+    `.5.3.2` user-function AST call handoff before code changes.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3 - split short alias retirement`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.5.3.1`
+  Status: `pending`
+  Goal: Retire `s(...)`, `a(...)`, and `h(...)` shorthand wrapper aliases.
+  Acceptance: Repo-owned specs, tests, and user-facing docs migrate to canonical
+    `scalar(...)`, `array(...)`, and `hash(...)` forms. Perl ActionIR lowering no longer
+    treats `s`/`a`/`h` as canonical wrappers; any residual shorthand support is either
+    removed or fenced as explicit compatibility debt with metadata/tests. Existing long
+    forms remain supported, and direct shape literals remain the preferred constructor
+    surface where applicable.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `PERL-ACTIONIR-AST-MIGRATION.5.3.2`
   Status: `pending`
   Goal: Prepare user-function calls to resolve through AST call nodes.
   Acceptance: Function calls use the same typed `call` / `fluent_chain` value path as
@@ -502,7 +526,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.5` | `split` 2026-07-01 | Fallback retirement and function handoff split before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.1` | `done` 2026-07-01 | Remaining fallback boundaries audited and classified before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.2` | `done` 2026-07-01 | Supported standalone value statements now lower as discarded `VALUE_DROP` nodes, while malformed covered helpers diagnose and compatibility/user-function fences remain intact. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.3` | `pending` | Prepare user-function calls to resolve through AST call nodes. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.5.3` | `split` 2026-07-01 | User-function handoff split so `s`/`a`/`h` shorthand wrapper retirement is owned before code. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | `pending` | Retire `s(...)`, `a(...)`, and `h(...)` shorthand wrapper aliases. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -1027,11 +1052,15 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 - `2026-07-01`: The user clarified that `fn <name>(...) { ... }` support should not remain
   in the bootstrap parser after the text-to-AST migration; permanent user-function syntax
   belongs in `specs/spec.spec`, with function calls flowing through AST `Call` nodes.
+- `2026-07-01`: The user clarified that `s(...)`, `a(...)`, and `h(...)` should also be
+  retired. Canonical long wrappers are `scalar(...)`, `array(...)`, and `hash(...)`;
+  direct shape literals remain the preferred constructor surface where applicable.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3` | Read-only `rg` usage discovery for `s(...)`, `a(...)`, and `h(...)` across `specs/`, `t/`, mdBook, task trees, and Knowledge Map; task-tree/live-doc/KM updates; memory/doctrine/KM/diff checks | User policy that short wrapper aliases must be retired is now owned before code. `.5.3` is split into `.5.3.1` short-wrapper alias retirement and `.5.3.2` user-function AST call handoff. Frontier moves to `.5.3.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.2` | Added dropped-value statement lowering through typed AST value traversal; added scanner/canonical/rewrite metadata for `VALUE_DROP`; preserved compatibility `s(...)`/`a(...)`/`h(...)` value-expression substitution; focused syntax checks for touched ActionIR modules, `perl/LinkedSpec.pm`, and `t/actionir_ast_parser.t`; focused AST suite with 20 subtests; phase0 1002 tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Supported standalone value statements such as `trim(" x ")`, `concat("a","b")`, and `" x ".trim()` no longer remain raw fallback and now lower as discarded values. Malformed covered standalone helpers diagnose through unresolved-helper metadata without raw fallback. Unknown user-function-shaped calls/chains remain `.5.3` handoff work. Frontier moves to `.5.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.1` | TOOLBOX `call_spec_handler_subst`, descriptor metadata, and AST parser probes for malformed covered helpers, compatibility payloads, retired helpers, raw statements, all-bare `push(A,B)`, unknown calls/chains, and `fn` grammar ownership; code reads of `CanonicalEvents`, `RewritePipeline`, `RuleIR::EmitContext`, `MethodLowering`, and `ActionIR::AST::Parser`; mdBook/live-doc/KM updates; `mdbook build docs/linkedspec-book`, memory/doctrine/KM/diff checks, and full local CI with phase0 1002 tests | Remaining fallback boundaries are classified before code: AST-covered malformed helpers already diagnose as unresolved, retired/non-DSL/raw surfaces stay compatibility debt, all-bare `push(A,B)` remains child-call ambiguity, unknown typed calls/chains are `.5.3` user-function handoff risk, and `fn` definition grammar remains `.5.4`/`specs/spec.spec` ownership. Frontier moves to `.5.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5` | Split fallback retirement and user-function handoff into `.5.1` fallback-boundary audit, `.5.2` AST-covered fallback leakage retirement, `.5.3` user-function AST call handoff, and `.5.4` `specs/spec.spec` grammar/bootstrap-retirement lock; mdBook/doctrine/KM/diff checks | Final ActionIR migration parent is now owned by focused children before code. Frontier moves to `.5.1`. |

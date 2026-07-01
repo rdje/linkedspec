@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.3 — split short alias retirement
+
+**Scope:** Task tree, live continuity docs, roadmap/index status, and Knowledge Map. No parser/compiler/runtime
+code changed.
+
+**What changed:** Captured the user decision that `s(...)`, `a(...)`, and `h(...)` are retirement targets too.
+The former `.5.3` user-function handoff leaf is now split so shorthand wrapper alias retirement runs first as
+`.5.3.1`, followed by user-function AST call handoff as `.5.3.2`.
+
+**Read-only discovery:** `rg` found active shorthand use in shipped specs, phase0 regression locks, mdBook
+examples, task-tree history, and Knowledge Map facts. This confirms the retirement needs an owned migration
+slice rather than an untracked cleanup.
+
+**Checks:** Memory architecture, Knowledge Map, doctrine registry, and `git diff --check` passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.2 — lower dropped value statements
 
 **Scope:** Perl ActionIR lowering, scanner/canonical metadata, focused AST parser tests, task tree, live docs,

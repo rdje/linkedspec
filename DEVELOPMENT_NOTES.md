@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.3 — short alias retirement split): The user clarified that
+  `s(...)`, `a(...)`, and `h(...)` should retire too. Durable points. (1) **Do not treat short wrappers as
+  permanent syntax.** Canonical wrapper spellings are `scalar(...)`, `array(...)`, and `hash(...)`; direct shape
+  literals remain the preferred constructor surface where applicable. (2) **Retirement must be owned before
+  code.** Shorthand use is active in shipped specs, phase0 locks, and book examples, so `.5.3` is split:
+  `.5.3.1` retires the short aliases; `.5.3.2` resumes user-function AST call handoff.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.2 — dropped value statements): Retired the supported standalone
   value-statement raw fallback without changing user-function ownership. Durable points. (1) **Dropped values now
   have a canonical event.** The scanner recognizes standalone covered value calls and simple receiver chains,
