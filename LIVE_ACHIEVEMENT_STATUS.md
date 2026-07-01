@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.4.1 — user-function contract/inventory locked**
+  (TASK TREE + ROADMAP + BOOK/KM/LIVE DOCS; **no parser/compiler/runtime code change**). The function MVP is
+  now exact before implementation: top-level `fn name(args) { ... }`, exact arity, eager argument evaluation,
+  fresh function-local parameter/work-variable scope, pure value/block body, final-expression or `return(expr)`
+  result, receiver-chain composition from returned values, and silent discard for standalone user-function call
+  statements. Collision boundaries are explicit: function names must not collide with built-in helpers,
+  control/lifecycle keywords, rule labels, reserved runtime symbols, or another function definition; parameters
+  must be unique valid non-reserved identifiers.
+  **Inventory:** `specs/spec.spec` owns final function grammar but has no active `function_definition` rule yet.
+  Bootstrap has no first-class `fn` support. Perl ActionIR already parses user-call shapes and diagnoses
+  value-position unknown calls through unresolved-helper metadata; standalone unknown calls remain raw until the
+  registry owns discard. Rust already parses call/fluent expression shapes, but unknown names fall through
+  `Engine::call_helper` to warning+`undef`; Rust needs a registry resolver before helper fallback.
+  **Verification:** focused TOOLBOX probes PASS; source/book inventory complete; Knowledge Map regenerate/check,
+  memory architecture, doctrine registry, `mdbook build docs/linkedspec-book`, `git diff --check`, and
+  `bash tools/run_ci_local.sh` PASS. Full local CI included phase0 **1004 tests**.
+  **Frontier:** `SPEC-FORMAT-TERSE.4.2.1` (Perl function-definition grammar/registry seam), then `.4.2.2`,
+  `.4.2.3`, `.4.3.1`, `.4.3.2`, and `.3.2.2`.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.4 — `fn` grammar ownership locked**
   (SPEC.SPEC POLICY + PHASE0 LOCK + BOOK/KM/LIVE DOCS). `specs/spec.spec` now states that permanent
   `fn name(args) { ... }` grammar belongs to the self-hosted grammar surface, not to lasting hardcoded bootstrap
@@ -333,8 +351,8 @@ Current execution status for interruption-safe batch workflow recovery.
   call is used as a standalone statement, its value is silently dropped. The durable grammar decision is that
   function syntax belongs in `specs/spec.spec`; any bootstrap-parser `fn <name>(...) { ... }` support is
   temporary migration debt to remove after the text-to-AST path can carry the surface.
-  **Frontier:** `SPEC-FORMAT-TERSE.4.1` contract/inventory before code, then `.3.2.2` arithmetic symbol
-  callees.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.4.1` contract/inventory before code (now complete; current frontier is
+  `.4.2.1`), then `.3.2.2` arithmetic symbol callees.
 - 2026-07-01: **SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM). Function-form aliases `add`, `sub`, `mul`,
   `div`, `mod`, `abs`, `floor`, `ceil`, `round`, `min`, `max`, `clamp`, `sum`, `avg`, `median`, and `range`

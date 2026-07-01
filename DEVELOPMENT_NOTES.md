@@ -1,6 +1,27 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.4.1 — user-function contract/inventory locked):
+  User-defined function implementation is now split by concrete seams before code. Durable points.
+  (1) **MVP grammar/semantics.** The accepted syntax is top-level `fn name(args) { ... }`, including
+  `fn name() { ... }` for zero arity. Calls evaluate arguments eagerly, bind exact-arity positional parameters
+  into a fresh function-local scope, evaluate a pure value/block body, and return either the first
+  `return(expr)` payload or the final expression value. Standalone user-function call statements compute and
+  silently discard the result. (2) **Purity boundary.** The MVP has no implicit caller working-variable capture,
+  recursion, closures, lambdas, currying, host-code escape, parser-state helpers, or side-effect helpers. Local
+  function variables are function-scoped only. (3) **Collision boundary.** Function names share the helper call
+  surface, so definitions must be rejected if they collide with built-in helper/control/lifecycle names, rule
+  labels, reserved runtime symbols, or another function; parameters must be unique valid identifiers and must not
+  use reserved runtime symbols. (4) **Current Perl ground truth.** TOOLBOX probes show value-position
+  `user_fn(...)` calls now diagnose as `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn` with zero raw fallback,
+  while standalone `user_fn(...)` remains raw until the function registry owns discard semantics. (5) **Current
+  Rust ground truth.** Rust parses `Expr::Call` and `Expr::FluentChain`, but `Engine::call_helper` sends
+  unknown names to warning+`undef`; user functions need a registry resolver before helper fallback. (6) **Split
+  before code.** `.4.2` is split into Perl grammar/registry, value-call execution, and discard/purity hardening;
+  `.4.3` is split into Rust registry and runtime/oracle parity. (7) **Gate.** mdBook, Knowledge Map,
+  memory/doctrine checks, diff check, and full local CI pass after the inventory; phase0 remains at 1004 tests.
+  Next frontier: `SPEC-FORMAT-TERSE.4.2.1`.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.4 — `fn` grammar ownership proof lock):
   The Perl ActionIR text-to-AST migration now closes with an explicit function-definition ownership boundary.
   Durable points. (1) **Permanent function syntax is self-hosted.** `specs/spec.spec` now states that

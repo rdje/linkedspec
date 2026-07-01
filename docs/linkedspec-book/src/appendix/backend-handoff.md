@@ -157,7 +157,9 @@ It provides:
 - `spec.spec` — a self-hosted grammar that can bootstrap a new compiler.
 - A locked policy that planned `fn name(args) { ... }` function definitions belong in
   `spec.spec`; they are not current syntax and should not be implemented as a lasting
-  bootstrap-only extension.
+  bootstrap-only extension. The accepted MVP is exact-arity, pure value/block functions
+  with fresh function-local scope, no implicit caller capture, and a registry seam before
+  unknown-helper fallback.
 - `t/phase0_regression.t` — comprehensive regression tests.
 - Phase 0 baseline showing all 20 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
 

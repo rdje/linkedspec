@@ -1,6 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.4.1 — lock user function contract
+
+**Scope:** Task tree, roadmap/index, live docs, mdBook status, Knowledge Map, and focused TOOLBOX/source
+inventory. No parser/compiler/runtime code changed.
+
+**What changed:** Locked the exact user-defined function MVP before implementation. The accepted surface is
+top-level `fn name(args) { ... }` with exact arity, eager argument evaluation, fresh function-local
+parameter/work-variable scope, pure value/block bodies, final-expression or `return(expr)` result, receiver-chain
+composition from returned values, and silent discard for standalone call statements. The MVP excludes implicit
+caller capture, recursion, closures, lambdas, currying, host-code escape, parser-state helpers, and side-effect
+helpers.
+
+**Inventory result:** `specs/spec.spec` remains the permanent grammar owner but has no active
+`function_definition` rule yet. The bootstrap parser has no first-class `fn` node support. Perl ActionIR already
+parses `user_fn(...)` and `user_fn(...).trim()` as typed call/fluent-chain nodes; value slots now diagnose those
+unknown calls through unresolved-helper metadata, while standalone unknown calls remain raw until the registry
+owns discard semantics. Rust already parses call/fluent expression shapes, but unknown callees fall through
+`Engine::call_helper` to warning+`undef`, so Rust needs a registry path before helper fallback.
+
+**Split:** `.4.2` is now a Perl reference container split into function-definition grammar/registry (`.4.2.1`),
+value-call execution (`.4.2.2`), and standalone-discard/purity hardening (`.4.2.3`). `.4.3` is split into Rust
+registry parity (`.4.3.1`) and runtime/oracle parity (`.4.3.2`). Frontier becomes `.4.2.1`.
+
+**Checks:** Focused TOOLBOX probes, source/book inventory, Knowledge Map regenerate/check, memory architecture,
+doctrine registry, `mdbook build docs/linkedspec-book`, `git diff --check`, and `bash tools/run_ci_local.sh`
+passed. The full local CI gate included phase0 **1004 tests**.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.4 — lock fn grammar ownership
 
 **Scope:** `specs/spec.spec`, phase0 self-hosting regression locks, task tree, live docs, mdBook status, and

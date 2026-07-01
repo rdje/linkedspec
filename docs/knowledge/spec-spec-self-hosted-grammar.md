@@ -12,8 +12,8 @@ answers:
 date: 2026-06-05
 status: current
 tags: [self-hosting, grammar, phase7]
-evidence: "specs/spec.spec exists and compiles at language_agnostic_ready_ratio == 1.0000; docs/tasks/PHASE7-SELF-HOSTED-SPEC.md (5 leaves, done). PERL-ACTIONIR-AST-MIGRATION.5.4 added a spec.spec policy note that permanent fn name(args) { ... } grammar belongs to the self-hosted grammar and added phase0 proof that BootstrapSpec.pm and BootstrapSpec/Core.pm have no current first-class fn grammar/node support."
-reverify: "rg -n 'Function definitions \\(`fn name\\(args\\)' specs/spec.spec && ! rg -n '\\bfn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(|function_definition|user_function_definition|FN_DEF' perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm"
+evidence: "specs/spec.spec exists and compiles at language_agnostic_ready_ratio == 1.0000; docs/tasks/PHASE7-SELF-HOSTED-SPEC.md (5 leaves, done). PERL-ACTIONIR-AST-MIGRATION.5.4 added a spec.spec policy note that permanent fn name(args) { ... } grammar belongs to the self-hosted grammar and added phase0 proof that BootstrapSpec.pm and BootstrapSpec/Core.pm have no current first-class fn grammar/node support. SPEC-FORMAT-TERSE.4.1 kept that boundary and made .4.2.1 the first implementation leaf for adding the permanent function_definition grammar/registry seam."
+reverify: "rg -n 'Function definitions .*fn name\\(args\\)|SPEC-FORMAT-TERSE\\.4\\.2\\.1|function-definition grammar' specs/spec.spec docs/tasks/SPEC-FORMAT-TERSE.md && ! rg -n '\\bfn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(|function_definition|user_function_definition|FN_DEF' perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm"
 ---
 
 `specs/spec.spec` is a first-class LinkedSpec grammar that captures the currently supported
@@ -27,5 +27,7 @@ support is a `specs/spec.spec` language-surface change, while any bootstrap pars
 implementation is temporary migration debt to remove after text-to-AST handoff. After
 `PERL-ACTIONIR-AST-MIGRATION.5.4`, the bootstrap parser has no current first-class
 `fn` grammar or function-definition node support; that absence is phase0-locked.
+`SPEC-FORMAT-TERSE.4.1` then made `.4.2.1` the first implementation leaf for the
+self-hosted `function_definition` grammar and function registry seam.
 Canonical home: `docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`, `specs/spec.spec` header.
 Related: [[andplusplus-lx-parser-hang]].
