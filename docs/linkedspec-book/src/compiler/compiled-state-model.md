@@ -16,7 +16,7 @@ In broad terms:
 
 ```text
 compiled_spec_state
-  owns the compiled rules
+  owns the compiled rules and user-function registry
 
 compiled_dependency_regex_state
   owns derived dependency-regex dispatch data
@@ -48,6 +48,8 @@ It contains the information the compiler needs to reason about rules:
 - `compiled_rule_order`
 - `rules_by_label`
 - `redefined_rule_labels`
+- `function_order`
+- `functions_by_name`
 
 The distinction between definition order and compiled rule order matters:
 
@@ -56,6 +58,15 @@ The distinction between definition order and compiled rule order matters:
 - `redefined_rule_labels` records labels whose later definitions replaced earlier ones.
 
 That makes the “last definition wins” reality visible instead of hiding it inside a loose hash overwrite.
+
+It also carries the user-function registry introduced by `SPEC-FORMAT-TERSE.4.2.1`:
+
+- `function_order` preserves top-level `fn` definition order.
+- `functions_by_name` maps each function name to its validated definition record.
+
+Each function definition records its name, ordered parameter list, exact arity, source/body spans, original body
+source, and parsed ActionIR body AST. This is a registry and descriptor seam only: function-call execution is a
+later compiler/runtime step, so registered calls still diagnose as unresolved helpers until that evaluator lands.
 
 ## Per-rule compiled info
 
@@ -132,6 +143,7 @@ When a caller asks for descriptor introspection, the public outward descriptor s
 ```perl
 {
   spec => { ... },
+  functions => { ... },
   dependency_regex_map => { ... },
   meta => { ... },
 }

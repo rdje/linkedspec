@@ -10,15 +10,17 @@ Backends must parse that language into typed AST/IR before lowering or execution
 textual helper rewrites directly into host-language source are legacy implementation
 debt, not part of the contract.
 
-## 1. Paragraph Model
+## 1. File and Paragraph Model
 
-A `.spec` file is a sequence of **rule paragraphs**, not a line-oriented grammar.
-A rule paragraph starts with a **rule header** and continues until the next rule
-header or end of file. Everything between two rule headers belongs to the first
-rule's paragraph.
+A `.spec` file is a sequence of top-level **function definitions** and **rule paragraphs**,
+not a line-oriented grammar. A rule paragraph starts with a **rule header** and continues
+until the next rule header or end of file after top-level function definitions have been
+removed for the current bootstrap bridge. Everything between two rule headers belongs to
+the first rule's paragraph.
 
 Rule headers are recognized **only at top level**: a line matching a rule-label
 pattern inside an open `{ }` block is block content, not a new rule.
+Function definitions are also recognized only at top level.
 
 ```text
 Top::
@@ -40,6 +42,43 @@ Before the first rule paragraph, a `.spec` file may contain:
 
 After the first rule paragraph, blank lines and comment lines between paragraphs
 are **not** part of any rule.
+
+### 1.2 Top-Level Function Definitions
+
+Top-level user-function definitions use this syntax:
+
+```text
+fn name(param1, param2) {
+ action statements or value expressions
+}
+
+fn no_args() {
+ return("ok")
+}
+```
+
+The first implementation accepts explicit parentheses for every arity, including zero
+arity. Parameter names are comma-separated identifiers. A definition's body is parsed as
+an ActionIR action block, so it uses the same helper/value/block DSL described in §7.
+
+Function definitions are file-level declarations. They are not rule paragraphs, not rule
+labels, and not valid inside action/lifecycle blocks. They may appear at top level before
+or between ordinary rule paragraphs; the current Perl reference strips them before the
+hardcoded bootstrap parser sees the rule source, while preserving line numbers for
+diagnostics.
+
+As of `SPEC-FORMAT-TERSE.4.2.1`, functions are validated and recorded in the descriptor
+registry but calls are not executed yet. A call such as `return(normalize(" x "))`
+continues to use the unresolved-helper diagnostic path until the function-call execution
+leaf lands.
+
+The registry rejects:
+
+- duplicate function names
+- invalid or duplicate parameters
+- reserved runtime/lifecycle/function symbols
+- names that collide with built-in helper/control names
+- names that collide with rule labels
 
 ## 2. Rule Header
 
@@ -727,14 +766,16 @@ A valid `.spec` file must satisfy:
 
 1. At least one top rule (`::`) exists.
 2. Every rule label is unique. Duplicate labels are rejected.
-3. Rule definitions must not appear inside open `{ }` blocks.
-4. Every `{ }` block opened inside a rule paragraph must be closed before end of file.
-5. Every `->` edge target must reference an existing rule.
-6. Every regex cluster must be a compilable regex literal.
-7. Rule mode suffixes must use exact supported spellings (§2.2).
-8. Stray preamble text before the first rule paragraph (after blank/comment lines) is
+3. Every function name is unique and must not collide with any rule label or built-in helper/control name.
+4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.
+5. Rule and function definitions must not appear inside open `{ }` blocks.
+6. Every `{ }` block opened inside a rule paragraph or function body must be closed before end of file.
+7. Every `->` edge target must reference an existing rule.
+8. Every regex cluster must be a compilable regex literal.
+9. Rule mode suffixes must use exact supported spellings (§2.2).
+10. Stray preamble text before the first rule paragraph or top-level function definition (after blank/comment lines) is
    rejected.
-9. Action edges and blind-call edges must not be mixed in a single rule (mixed-edge
+11. Action edges and blind-call edges must not be mixed in a single rule (mixed-edge
    detection). A rule with both `->` and `=>` edges is invalid.
 
 ## 11. Compatibility Surface

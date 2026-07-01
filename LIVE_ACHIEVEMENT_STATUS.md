@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.4.2.1 — Perl user-function registry seam landed**
+  (SPEC.SPEC + PERL COMPILER STATE/DESCRIPTOR + PHASE0 + BOOK/KM/LIVE DOCS; **no function-call execution yet**).
+  `specs/spec.spec` now has an active `function_definition` part for top-level `fn name(args) { body }` and
+  dispatches it from `spec_file`. The Perl reference uses a documented temporary pre-bootstrap registry bridge:
+  it extracts top-level function definitions, strips them from the source passed to ordinary validation/bootstrap
+  while preserving newlines, parses bodies through the ActionIR AST block parser, and attaches the registry to
+  compiled state.
+  **Descriptor:** public descriptors now expose `functions`, `meta.function_order`, and `meta.function_count`.
+  Each definition records ordered params, arity, source/body spans, body source, and `body_ast`. Diagnostics reject
+  duplicate functions, invalid/duplicate params, reserved runtime/lifecycle/function symbols, built-in helper or
+  control-name collisions, and rule-label collisions before runtime.
+  **Boundary:** registered value-position calls still diagnose as unresolved helpers with zero raw fallback and
+  remain not ActionIR-ready until `.4.2.2`; standalone discard and purity hardening remain `.4.2.3`.
+  **Verification:** Perl syntax checks PASS for registry/compiler/compiler-state/phase0; focused descriptor probes
+  PASS; `specs/spec.spec` descriptor compile ratio **1.0000**; focused AST suite PASS; `mdbook build
+  docs/linkedspec-book`, memory architecture, Knowledge Map, doctrine registry, and `git diff --check` PASS;
+  `bash tools/run_ci_local.sh` PASS with phase0 **1005 tests**.
+  **Frontier:** `SPEC-FORMAT-TERSE.4.2.2` (Perl user-function value-call execution), then `.4.2.3`, `.4.3.1`,
+  `.4.3.2`, and `.3.2.2`.
 - 2026-07-01: **SPEC-FORMAT-TERSE.4.1 — user-function contract/inventory locked**
   (TASK TREE + ROADMAP + BOOK/KM/LIVE DOCS; **no parser/compiler/runtime code change**). The function MVP is
   now exact before implementation: top-level `fn name(args) { ... }`, exact arity, eager argument evaluation,

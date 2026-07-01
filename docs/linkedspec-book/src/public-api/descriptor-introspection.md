@@ -42,6 +42,7 @@ Descriptor introspection is useful for:
 The active outward descriptor now includes:
 
 - `spec`
+- `functions`
 - `dependency_regex_map`
 - `meta`
 
@@ -64,12 +65,27 @@ In rough form:
   dependency_regex_map => {
     Top => qr/.../,
   },
+  functions => {
+    normalize => {
+      kind => 'user_function_definition',
+      version => 1,
+      name => 'normalize',
+      params => ['value'],
+      arity => 1,
+      source_span => { line_start => 1, line_end => 3, ... },
+      body_span => { ... },
+      body_source => "\n return(trim(value))\n",
+      body_ast => { kind => 'action_block', ... },
+    },
+  },
   meta => {
     descriptor_model => 'compiled_descriptor_state',
     parse_mode => 'seek',
     definition_order => [ ... ],
     compiled_rule_order => [ ... ],
     redefined_rule_labels => [ ... ],
+    function_order => [ 'normalize' ],
+    function_count => 1,
   },
 }
 ```
@@ -98,6 +114,27 @@ It is keyed by rule label. Rules that have no combined dependency regex may not 
 
 This name is intentionally explicit. It replaced older vague vocabulary because the value is not arbitrary “data”; it is a derived map of dependency regexes used by generated dispatch.
 
+## `functions`
+
+`functions` is the outward user-function registry.
+
+As of `SPEC-FORMAT-TERSE.4.2.1`, the Perl reference accepts top-level definitions:
+
+```text
+fn normalize(value) {
+ return(trim(value))
+}
+```
+
+The descriptor records the definition by name, including ordered parameter names, exact arity, source/body
+spans, original body source, and the parsed ActionIR `action_block` body AST. Function definitions are validated
+before runtime: duplicate names, invalid or duplicate parameters, reserved runtime/lifecycle/function symbols,
+built-in helper/control-name collisions, and rule-label collisions are rejected.
+
+This registry is not yet an execution engine. Calls such as `return(normalize(" x "))` still report unresolved
+helper metadata until the value-call execution leaf lands. The registry exists so tooling and the next compiler
+stage have a durable, backend-neutral place to resolve those calls.
+
 ## `meta`
 
 `meta` carries descriptor-level metadata.
@@ -109,6 +146,8 @@ Important current fields include:
 - `definition_order`
 - `compiled_rule_order`
 - `redefined_rule_labels`
+- `function_order`
+- `function_count`
 
 These fields help tooling understand the descriptor without relying on historical implementation guesses.
 

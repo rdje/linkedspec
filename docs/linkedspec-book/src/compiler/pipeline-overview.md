@@ -3,22 +3,26 @@
 At a high level, LinkedSpec’s compile/runtime flow looks like this:
 
 1. validate and prepare the compile pipeline
-2. bootstrap-parse the `.spec` source into parsed entries
-3. build compiled rule-table state
-4. build dependency-regex state
-5. build compiled descriptor state
-6. validate the generated descriptor state
-7. project the outward descriptor or build the runtime parser wrapper
+2. extract top-level user-function definitions into the function registry
+3. bootstrap-parse the stripped `.spec` rule source into parsed entries
+4. build compiled rule-table state
+5. attach the validated function registry to compiled state
+6. build dependency-regex state
+7. build compiled descriptor state
+8. validate the generated descriptor state
+9. project the outward descriptor or build the runtime parser wrapper
 
 In text-diagram form:
 
 ```text
 source .spec text
   -> prepare pipeline
+  -> user-function registry extraction
   -> validate source envelope
   -> bootstrap parse
   -> helper/action AST
   -> compiled_spec_state
+  -> attach function registry
   -> compiled_dependency_regex_state
   -> compiled_descriptor_state
   -> validate descriptor state
@@ -73,7 +77,11 @@ covered helper/receiver semantics and then intentionally discarded. For example,
 `trim(" x ")`, `concat("a","b")`, and `" x ".trim()` do not remain raw host calls.
 Unknown typed calls and function-call receiver chains in return/value positions now
 diagnose through unresolved-helper metadata instead of becoming generated host-language
-calls.
+calls. Top-level user-function definitions now have their own registry extraction seam:
+`fn name(args) { body }` definitions are recorded before bootstrap parsing, body payloads
+are parsed as ActionIR `action_block` AST, and the definitions are projected through the
+public descriptor. Function-call execution is deliberately still pending, so registered
+calls continue to diagnose as unresolved helpers until the evaluator leaf lands.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl
@@ -110,7 +118,17 @@ Two specialty compilation modes are also set here: `parse_only` (build compiled 
 
 The preparation stage also makes diagnostics better. If an invalid option or malformed callback surface is detected before parsing starts, the error can still be attributed to `compiler_pipeline:prepare_pipeline` instead of escaping as an arbitrary low-level failure.
 
-## Stage 2: validate the source envelope
+## Stage 2: extract user-function registry
+
+Before ordinary rule validation/bootstrap, the Perl reference extracts top-level user-function definitions into a
+registry. This bridge recognizes only top-level `fn name(args) { body }` declarations, parses each body into an
+ActionIR action-block AST, and blanks the original source region while preserving newlines. The stripped source
+then flows through the existing rule-validation and bootstrap-parser path.
+
+This stage rejects malformed definitions, duplicate function names, reserved names, built-in helper/control-name
+collisions, invalid or duplicate parameters, and later rule-label collisions. It does not execute function calls.
+
+## Stage 3: validate the source envelope
 
 Before bootstrap parsing, LinkedSpec validates obvious `.spec` source-shape problems through a dedicated validation owner (in the Perl reference backend, `LinkedSpec::Validation` — 1,368 lines, its largest single-purpose validation owner).
 
@@ -126,15 +144,21 @@ Errors from any layer carry structured payloads with `summary`, `detail`, and `r
 
 The high-level principle: malformed input should be rejected with targeted, debuggable messages before it reaches the bootstrap parser, the compiler state models, or (worst) the generated handler runtime.
 
-## Stage 3: bootstrap parse
+## Stage 4: bootstrap parse
 
 The bootstrap parser reads the `.spec` source and produces parsed rule entries.
 
 This stage is still special because LinkedSpec uses a bootstrap grammar to parse the language that defines LinkedSpec parsers. That bootstrap layer is owned separately from the main compiler state model.
 
-**Dual-path parse**: LinkedSpec also runs a second parse through the self-hosted `spec.spec` grammar as a diagnostic side channel. `BootstrapSpec::run_bootstrap_parse()` executes both the hardcoded bootstrap parser (always the primary output for format compatibility) and the `spec.spec`-generated parser, enabling cross-check comparisons via `tools/cross_check_spec_parsers.pl`. A recursion guard prevents infinite loops when `spec.spec` tries to parse itself. The self-hosted `spec.spec` is a faithful description of the format the bootstrap recognizes — it reproduces the bootstrap oracle's paragraph grouping across all shipped specs — so the two paths agree on structure even though the hardcoded bootstrap remains the primary parser. Planned `fn name(args) { ... }` function definitions are not implemented yet; when they land, their permanent grammar owner is `spec.spec`, not a lasting bootstrap-only extension. The locked MVP contract is top-level, exact-arity, pure value/block functions with fresh function-local scope and no implicit caller capture; the first implementation seam is the grammar/registry, before call execution.
+**Dual-path parse**: LinkedSpec also runs a second parse through the self-hosted `spec.spec` grammar as a diagnostic side channel. `BootstrapSpec::run_bootstrap_parse()` executes both the hardcoded bootstrap parser (always the primary output for format compatibility) and the `spec.spec`-generated parser, enabling cross-check comparisons via `tools/cross_check_spec_parsers.pl`. A recursion guard prevents infinite loops when `spec.spec` tries to parse itself. The self-hosted `spec.spec` is a faithful description of the format the bootstrap recognizes — it reproduces the bootstrap oracle's paragraph grouping across all shipped specs — so the two paths agree on structure even though the hardcoded bootstrap remains the primary parser.
 
-## Stage 4: build compiled rule-table state
+Top-level `fn name(args) { ... }` function definitions are active in `spec.spec`, and the Perl reference records
+them through a temporary pre-bootstrap registry bridge before this parse stage. The bridge removes function
+definitions from the source handed to the hardcoded bootstrap parser while preserving newlines, then attaches the
+validated registry to compiled state. This keeps the permanent grammar owner in `spec.spec` without making the
+bootstrap parser the lasting owner of `fn` syntax. Function-call execution is still a later stage.
+
+## Stage 5: build compiled rule-table state
 
 The active low-level compiler seam is:
 
@@ -154,7 +178,7 @@ That state owns:
 
 This is the compiler’s rule source of truth.
 
-## Stage 5: build dependency-regex state
+## Stage 6: build dependency-regex state
 
 The next derived stage is:
 
@@ -166,7 +190,7 @@ Despite the public name, the active internal path can build an explicit `compile
 
 That state is derived from compiled rules. It exists because generated handlers need efficient combined regex dispatch for referenced child-rule regexes.
 
-## Stage 6: build compiled descriptor state
+## Stage 7: build compiled descriptor state
 
 Once compiled rule state and dependency-regex state exist, the compiler builds:
 
@@ -178,7 +202,7 @@ This internal state composes the two earlier state records.
 
 It is important that validation happens against this internal state before projecting the outward descriptor. That keeps the compiler on explicit, owned structures rather than bouncing back into older loose hash shapes too early.
 
-## Stage 7: validate descriptor state
+## Stage 8: validate descriptor state
 
 Generated-descriptor validation checks that the compiled rule state and dependency-regex state agree.
 
@@ -192,7 +216,7 @@ When validation fails, the compiler can preserve structured attribution such as:
 - handler source label
 - specific summary/detail text
 
-## Stage 8: project descriptor or return parser
+## Stage 9: project descriptor or return parser
 
 The final public result depends on options. The entry point shown below (`LinkedSpec::Get(...)`) is the Perl reference backend's surface — see [`Get(...)` and `get_parser(...)`](../public-api/get-and-get-parser.md) for the backend-neutral roles and options.
 

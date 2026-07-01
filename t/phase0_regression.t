@@ -44099,7 +44099,7 @@ subtest 'spec_self_hosted_compiles_as_language_agnostic' => sub {
 };
 
 subtest 'fn_definition_grammar_is_not_bootstrap_owned' => sub {
-    plan tests => 7;
+    plan tests => 8;
 
     my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));
     my $bootstrap_spec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec.pm'));
@@ -44110,8 +44110,10 @@ subtest 'fn_definition_grammar_is_not_bootstrap_owned' => sub {
         qr/Function definitions \(`fn name\(args\) \{ \.\.\. \}`\).*accepted permanent grammar owner is this self-hosted grammar/s,
         'spec.spec documents that permanent fn grammar ownership is self-hosted',
     );
-    unlike($spec_spec_content, qr/^\s*function_definition\s*:/m,
-        'spec.spec has not landed an active function_definition rule before the function implementation leaf');
+    like($spec_spec_content, qr/^\s*function_definition\s*:/m,
+        'spec.spec has landed an active function_definition rule under the function implementation leaf');
+    like($spec_spec_content, qr/->\s*function_definition\s*\{\s*push\(function_definition,\s*current\)\s*\}/,
+        'spec.spec dispatches function_definition as a parsed part');
     unlike($bootstrap_spec_pm, qr/\bfn\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/,
         'BootstrapSpec.pm has no fn name(...) grammar support');
     unlike($bootstrap_spec_core_pm, qr/\bfn\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/,
@@ -44130,6 +44132,100 @@ subtest 'fn_definition_grammar_is_not_bootstrap_owned' => sub {
     my $json = JSON::PP->new->canonical(1)->allow_nonref(1)->encode($retv);
     unlike($json, qr/\b(?:fn|function|helper|value)\b/i,
         'bootstrap parse result does not contain a structured function-definition node or function payload');
+};
+
+subtest 'user_function_registry_descriptor_seam' => sub {
+    plan tests => 31;
+
+    my $spec = <<'SPEC';
+fn normalize(value) {
+ return(trim(value))
+}
+
+fn join_pair(left, right) {
+ return(concat(left, right))
+}
+
+Top::
+ /x/ -> Done { return(normalize(" x ")) }
+Done::
+ /x/
+SPEC
+
+    my %ctx;
+    my $descriptor = eval { LinkedSpec::Get(\$spec, return_descriptor => 1, runtime_ctx_ref => \%ctx) };
+    my $err = $@;
+    ok(!$err, 'function registry descriptor build does not die') or diag(normalize_error($err));
+    ok(ref($descriptor) eq 'HASH', 'function registry descriptor build returns descriptor hash');
+    ok(!exists($ctx{last_error}), 'successful function registry build leaves last_error clear');
+
+    my $functions = ref($descriptor) eq 'HASH' && ref($descriptor->{functions}) eq 'HASH'
+        ? $descriptor->{functions}
+        : {};
+    is_deeply([sort keys %$functions], ['join_pair', 'normalize'], 'descriptor exposes functions by name');
+    is_deeply($descriptor->{meta}{function_order}, ['normalize', 'join_pair'], 'descriptor meta preserves function order');
+    is($descriptor->{meta}{function_count}, 2, 'descriptor meta records function count');
+
+    is_deeply($functions->{normalize}{params}, ['value'], 'normalize params are recorded');
+    is($functions->{normalize}{arity}, 1, 'normalize arity is recorded');
+    like($functions->{normalize}{body_source}, qr/return\(trim\(value\)\)/, 'normalize body source is recorded');
+    is($functions->{normalize}{body_ast}{kind}, 'action_block', 'normalize body AST is an action block');
+    is($functions->{normalize}{body_ast}{statements}[0]{expr}{kind}, 'call', 'normalize body AST records return call node');
+    is($functions->{normalize}{body_ast}{statements}[0]{expr}{name}, 'return', 'normalize body AST records return call name');
+    is_deeply($functions->{join_pair}{params}, ['left', 'right'], 'second function params are recorded in order');
+    ok($functions->{normalize}{source_span}{line_start} == 1 && $functions->{join_pair}{source_span}{line_start} > 1,
+        'function source spans preserve original line positions');
+    is_deeply($descriptor->{meta}{compiled_rule_order}, ['Top', 'Done'], 'function stripping preserves ordinary rule order');
+
+    my $top_meta = ref($descriptor->{spec}{Top}{meta}) eq 'HASH'
+        ? ($descriptor->{spec}{Top}{meta}{action_rewriter} || {})
+        : {};
+    is($top_meta->{raw_perl_dependency_count} || 0, 0, 'registered function value call is not raw Perl fallback');
+    is($top_meta->{unresolved_helper_count} || 0, 1, 'registered function value call remains unresolved until execution leaf');
+    is_deeply($top_meta->{unresolved_helpers} || [], ['normalize'], 'registered function unresolved diagnostic names the function');
+    ok(!$top_meta->{language_agnostic_action_ir_ready}, 'registered function call still blocks readiness before execution leaf');
+
+    my @invalid_cases = (
+        {
+            label => 'duplicate function',
+            spec => "fn f(x) { x }\nfn f(y) { y }\nTop::\n /x/\n",
+            detail => qr/Duplicate user function definition 'f'/,
+        },
+        {
+            label => 'built-in helper collision',
+            spec => "fn trim(x) { x }\nTop::\n /x/\n",
+            detail => qr/collides with built-in helper\/control name 'trim'/,
+        },
+        {
+            label => 'rule label collision',
+            spec => "fn Top(x) { x }\nTop::\n /x/\n",
+            detail => qr/collides with rule label 'Top'/,
+        },
+        {
+            label => 'duplicate parameter',
+            spec => "fn f(x, x) { x }\nTop::\n /x/\n",
+            detail => qr/duplicate parameter 'x' in function 'f'/,
+        },
+        {
+            label => 'reserved parameter',
+            spec => "fn f(STRING) { STRING }\nTop::\n /x/\n",
+            detail => qr/parameter 'STRING' is reserved/,
+        },
+        {
+            label => 'malformed function',
+            spec => "fn f(x)\nTop::\n /x/\n",
+            detail => qr/expected body block after function 'f' parameter list/,
+        },
+    );
+
+    for my $case (@invalid_cases) {
+        my %bad_ctx;
+        my $bad_descriptor = eval { LinkedSpec::Get(\$case->{spec}, return_descriptor => 1, runtime_ctx_ref => \%bad_ctx) };
+        my $bad_err = $@;
+        ok(!$bad_err && !defined($bad_descriptor), "$case->{label} is rejected without outer die")
+            or diag(normalize_error($bad_err));
+        like($bad_ctx{last_error}{detail} || '', $case->{detail}, "$case->{label} diagnostic is recorded");
+    }
 };
 
 subtest 'plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus' => sub {

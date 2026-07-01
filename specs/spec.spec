@@ -28,6 +28,7 @@
 #     blind_bare       `=> Child`                           -> { type: blind_edge }
 #     lifecycle_block  `Marker { code }`  (I LS LE E EX IT LX) -> { type: lifecycle }
 #     lifecycle_fluent `Marker.method(args) { blk }`        -> { type: lifecycle }
+#     function_definition `fn name(args) { body }`           -> { type: function_definition }
 #     split_marker     `@capture_slice` / `@mark(name)`     -> { type: split_marker }
 #     comment          `# ...`                              (skipped, like SPEC_ROOT)
 #
@@ -59,8 +60,8 @@
 #   must be justified in the commit message and DEVELOPMENT_NOTES.md.
 #   Function definitions (`fn name(args) { ... }`) follow the same rule: the
 #   accepted permanent grammar owner is this self-hosted grammar. The hardcoded
-#   bootstrap parser must not become the lasting owner; any bootstrap bridge for
-#   that surface is temporary migration debt.
+#   bootstrap parser must not become the lasting owner; the Perl reference
+#   currently uses a temporary pre-bootstrap registry bridge for this surface.
 # =============================================================================
 
 spec_file::
@@ -86,6 +87,7 @@ spec_file::
  -> blind_bare       { push(blind_bare, current) }
  -> lifecycle_block  { push(lifecycle_block, current) }
  -> lifecycle_fluent { push(lifecycle_fluent, current) }
+ -> function_definition { push(function_definition, current) }
  -> split_marker     { push(split_marker, current) }
  -> comment          { next() }
  LX {
@@ -138,6 +140,10 @@ lifecycle_block: /(\w++)[ \t]*(?<blkLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[
 # ---- lifecycle / code with a fluent chain: `Marker.method(args) { block }` ----
 lifecycle_fluent: /(\w++)(?<chLF>(?:\s*\.\s*\w++(?<prnLF>\s*\((?:[^()"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&prnLF))*+\))?+)++)(?:\s*(?<blkLF>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLF))*+\}))?+/
  I.return(hash("type", "lifecycle", "marker", entry_group(0), "fluent", "1", "raw", entry_text()))
+
+# ---- user function definition: `fn name(args) { body }` ----------------------
+function_definition: /fn[ \t]+([A-Za-z_]\w*)\s*\(([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\)\s*(?<blkFN>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkFN))*+\})/
+ I.return(hash("type", "function_definition", "name", entry_group(0), "params", entry_group(1), "body", entry_group(2)))
 
 # ---- split / mark marker: `@capture_slice`, `@capture_from_here`, `@move_pos`, `@mark(name)`
 split_marker: /@[ \t]*(?:capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*(\w+)[ \t]*\))/

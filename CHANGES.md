@@ -1,6 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.4.2.1 — add Perl user function registry
+
+**Scope:** `specs/spec.spec`, Perl compiler/compiled-state descriptors, new
+`LinkedSpec::UserFunctionRegistry`, phase0 descriptor diagnostics, mdBook, live docs, and Knowledge Map.
+
+**What changed:** Landed the first Perl reference implementation seam for user-defined functions. The
+self-hosted grammar now has an active `function_definition` part for top-level `fn name(args) { body }`, while
+the Perl reference uses a temporary pre-bootstrap registry bridge until the self-hosted function part can be the
+primary parse source. The bridge extracts top-level function definitions, strips them from the source passed to
+ordinary rule validation/bootstrap while preserving line numbers, parses function bodies through the ActionIR AST
+block parser, and attaches the registry to compiled state and public descriptors.
+
+**Descriptor shape:** Public descriptors now carry `functions => { name => definition }` plus
+`meta.function_order` and `meta.function_count`. Each definition records `name`, ordered `params`, `arity`,
+`source_span`, `body_span`, `body_source`, and `body_ast`. The registry rejects duplicate functions, invalid or
+duplicate parameters, reserved runtime/lifecycle/function symbols, built-in helper/control-name collisions, and
+rule-label collisions before runtime.
+
+**Boundary:** This leaf does **not** execute user-function calls. Registered calls in value positions still use
+the unresolved-helper diagnostic path and keep `language_agnostic_action_ir_ready` false until `.4.2.2` adds the
+value-call evaluator. Standalone call discard and purity hardening remain `.4.2.3`.
+
+**Checks:** Perl syntax checks passed for the new registry, compiler state, compiler pipeline, and phase0 test
+file. Focused descriptor probes passed for successful registry projection and duplicate/built-in/rule/parameter
+diagnostics. `specs/spec.spec` still compiles with `language_agnostic_ready_ratio == 1.0000`.
+`prove -Iperl t/actionir_ast_parser.t` passed with **20 tests**. `mdbook build docs/linkedspec-book`,
+memory architecture, Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh`
+passed; the full local CI gate included phase0 **1005 tests**.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.4.1 — lock user function contract
 
 **Scope:** Task tree, roadmap/index, live docs, mdBook status, Knowledge Map, and focused TOOLBOX/source

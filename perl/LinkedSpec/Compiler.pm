@@ -133,6 +133,11 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
+sub _call_user_function_registry {
+ my ($subname, @args) = @_;
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::UserFunctionRegistry', $subname, @args)
+}
+
 sub _normalize_compiled_dependency_regex_output {
  my ($value, $compiled_spec_state) = @_;
  return _call_compiler_state(
@@ -598,13 +603,41 @@ sub run_get_pipeline {
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiler pipeline setup failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'prepare_pipeline' }, DUMP_LOW);
+ return undef;
+ }
+
+ my $function_registry = _call_user_function_registry('empty_function_registry');
+ my $compile_spec_content_ref = $spec_content_ref;
+ my $function_extract = eval {
+  _call_user_function_registry('extract_and_strip_spec_source', $spec_content_ref)
+ };
+ my $function_extract_error = $@;
+ if ($function_extract_error) {
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
+   $runtime_ctx,
+   'compiler_pipeline',
+   stage => 'function_registry',
+   summary => 'User function registry build failed',
+   detail => $function_extract_error,
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "User function registry build failed");
+  _trace_exit($trace_scope, { status => 'error', stage => 'function_registry' }, DUMP_LOW);
   return undef;
+ }
+ if (ref($function_extract) eq 'HASH') {
+  $function_registry = $function_extract->{registry}
+   if ref($function_extract->{registry}) eq 'HASH';
+  if (defined($function_extract->{stripped_source}) && !ref($function_extract->{stripped_source})) {
+   $compile_spec_content_ref = \$function_extract->{stripped_source};
+  }
  }
 
  my %validate_spec_content_failure;
  my $spec_content_valid = eval {
   LinkedSpec::Validation::validate_spec_content(
-   $spec_content_ref,
+   $compile_spec_content_ref,
    {
     on_failure => sub {
      %validate_spec_content_failure = @_;
@@ -679,11 +712,11 @@ sub run_get_pipeline {
  }
 
  unless ($validation_failed) {
-  pos($$spec_content_ref) = 0 if ref($spec_content_ref) eq 'SCALAR';
+  pos($$compile_spec_content_ref) = 0 if ref($compile_spec_content_ref) eq 'SCALAR';
   my %validate_dsl_failure;
   my $dsl_valid = eval {
    LinkedSpec::Validation::validate_dsl_syntax(
-    $spec_content_ref,
+    $compile_spec_content_ref,
     {
      on_failure => sub {
       %validate_dsl_failure = @_;
@@ -763,9 +796,9 @@ sub run_get_pipeline {
 
  _trace_log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
  my $parse_error = '';
- pos($$spec_content_ref) = 0 if ref($spec_content_ref) eq 'SCALAR';
+ pos($$compile_spec_content_ref) = 0 if ref($compile_spec_content_ref) eq 'SCALAR';
  my $bootstrap_parse_eval_ok = eval {
-  ($parse_success, $retv, $parse_error) = $bootstrap_parse->($spec_content_ref);
+  ($parse_success, $retv, $parse_error) = $bootstrap_parse->($compile_spec_content_ref);
   1;
  };
  my $bootstrap_parse_error = $@;
@@ -887,6 +920,31 @@ unless (_call_compiler_state('is_compiled_spec_state', $compiled_spec_state)) {
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);
   return undef;
  }
+
+my $function_registry_valid = eval {
+ _call_user_function_registry(
+  'validate_registry_against_rule_labels',
+  $function_registry,
+  _call_compiler_state('compiled_spec_state_compiled_rule_order', $compiled_spec_state),
+ );
+ _call_compiler_state('set_compiled_spec_function_registry', $compiled_spec_state, $function_registry);
+ 1;
+};
+my $function_registry_validation_error = $@;
+if ($function_registry_validation_error) {
+ _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
+   $runtime_ctx,
+   'compiler_pipeline',
+   stage => 'function_registry',
+   summary => 'User function registry validation failed',
+   detail => $function_registry_validation_error,
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
+  );
+ _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "User function registry validation failed");
+ _trace_exit($trace_scope, { status => 'error', stage => 'function_registry' }, DUMP_LOW);
+ return undef;
+}
  $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
  my $final_descriptor_state = eval { _build_final_descriptor_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
 my $build_final_descriptor_error = $@;

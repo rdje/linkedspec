@@ -16,8 +16,8 @@ answers:
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, user-functions, implementation-inventory, perl-actionir, rust-parity]
-evidence: "SPEC-FORMAT-TERSE.4.1 inspected specs/spec.spec, BootstrapSpec.pm/Core.pm, Perl ActionIR::AST::Parser, MethodLowering, RewritePipeline, Rust expr.rs/ast.rs/types.rs/compiler.rs/engine.rs, oracle generation, and mdBook compiler/backend chapters. TOOLBOX probes show Perl value slots diagnose user_fn(...) through LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn while standalone user_fn(...) remains raw. Rust source read shows Expr::Call/FluentChain parse the shapes but Engine::call_helper sends unknown names to warning+undef. The task tree split .4.2 into Perl grammar/registry, value-call execution, and discard/purity hardening; .4.3 split into Rust registry and runtime/oracle parity."
-reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4\\.2\\.1|SPEC-FORMAT-TERSE\\.4\\.2\\.2|SPEC-FORMAT-TERSE\\.4\\.2\\.3|SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2|warning.*undef|standalone.*remains raw' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md"
+evidence: "SPEC-FORMAT-TERSE.4.1 inspected specs/spec.spec, BootstrapSpec.pm/Core.pm, Perl ActionIR::AST::Parser, MethodLowering, RewritePipeline, Rust expr.rs/ast.rs/types.rs/compiler.rs/engine.rs, oracle generation, and mdBook compiler/backend chapters. TOOLBOX probes showed Perl value slots diagnose user_fn(...) through LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn while standalone user_fn(...) remains raw. Rust source read showed Expr::Call/FluentChain parse the shapes but Engine::call_helper sends unknown names to warning+undef. The task tree split .4.2 into Perl grammar/registry, value-call execution, and discard/purity hardening; .4.3 split into Rust registry and runtime/oracle parity. SPEC-FORMAT-TERSE.4.2.1 then landed the Perl function_definition grammar/registry descriptor seam: specs/spec.spec owns the active function_definition rule, descriptors expose functions plus meta.function_order/function_count, and registered calls intentionally remain unresolved until .4.2.2."
+reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4\\.2\\.1|SPEC-FORMAT-TERSE\\.4\\.2\\.2|SPEC-FORMAT-TERSE\\.4\\.2\\.3|SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2|function_order|function_count|registered calls.*unresolved|standalone.*remains raw' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md"
 ---
 
 `SPEC-FORMAT-TERSE.4.1` found that user-defined functions are too broad for one
@@ -25,8 +25,8 @@ implementation leaf.
 
 Current ground truth:
 
-- `specs/spec.spec` is the permanent owner for top-level `fn name(args) { ... }`, but it has no active
-  `function_definition` rule yet.
+- `specs/spec.spec` is the permanent owner for top-level `fn name(args) { ... }` and now has an active
+  `function_definition` rule.
 - The hardcoded bootstrap parser has no first-class `fn` grammar or function-definition node support.
 - Perl ActionIR already parses `user_fn(...)` and `user_fn(...).method()` into typed `call` and
   `fluent_chain` nodes.
@@ -37,10 +37,10 @@ Current ground truth:
 
 Implementation is split as follows:
 
-- `.4.2.1`: Perl `function_definition` grammar plus function registry/descriptor ingestion. No call execution.
-- `.4.2.2`: Perl user-function value-call execution and receiver-chain composition.
+- `.4.2.1`: DONE — Perl `function_definition` grammar plus function registry/descriptor ingestion. No call execution.
+- `.4.2.2`: NEXT — Perl user-function value-call execution and receiver-chain composition.
 - `.4.2.3`: Perl standalone discard, purity/collision diagnostics, and phase0 hardening.
 - `.4.3.1`: Rust parsed/compiled function registry parity.
 - `.4.3.2`: Rust runtime function execution plus oracle fixtures.
 
-The next PNT frontier is `SPEC-FORMAT-TERSE.4.2.1`.
+The next PNT frontier is `SPEC-FORMAT-TERSE.4.2.2`.

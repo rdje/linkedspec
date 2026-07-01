@@ -1,6 +1,25 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.4.2.1 — Perl user-function registry seam):
+  The Perl reference now records user-defined function definitions without executing calls yet. Durable points.
+  (1) **Grammar owner.** `specs/spec.spec` has an active `function_definition` part for top-level
+  `fn name(args) { body }` and a `spec_file` dispatch edge for it. (2) **Temporary bridge.** Because the
+  hardcoded bootstrap parser is still the primary parse path, `LinkedSpec::UserFunctionRegistry` extracts
+  top-level function definitions before validation/bootstrap and replaces them with whitespace that preserves
+  newlines. This keeps ordinary rule diagnostics and spans stable while the permanent grammar remains
+  self-hosted. (3) **Descriptor registry.** `compiled_spec_state` now carries `function_order` and
+  `functions_by_name`; public descriptors project `functions`, `meta.function_order`, and
+  `meta.function_count`. Each function definition records ordered params, arity, source/body spans, body source,
+  and an ActionIR `action_block` body AST. (4) **Diagnostics.** Definitions reject duplicate names, invalid or
+  duplicate params, reserved runtime/lifecycle/function symbols, built-in helper/control-name collisions, and
+  rule-label collisions before runtime. (5) **Execution still pending.** Registered value-position calls remain
+  unresolved-helper diagnostics with zero raw fallback until `.4.2.2`; standalone discard and purity hardening
+  remain `.4.2.3`. (6) **Gate.** Syntax checks, focused descriptor probes, `specs/spec.spec` descriptor
+  compile at ratio 1.0000, focused AST suite, mdBook build, memory/doctrine/Knowledge Map checks, diff check,
+  and full local CI pass; phase0 is now 1005 tests.
+  Next frontier: `SPEC-FORMAT-TERSE.4.2.2`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.4.1 — user-function contract/inventory locked):
   User-defined function implementation is now split by concrete seams before code. Durable points.
   (1) **MVP grammar/semantics.** The accepted syntax is top-level `fn name(args) { ... }`, including

@@ -46,6 +46,12 @@ statements now produce canonical `VALUE_DROP` events: the backend computes the t
 value expression and intentionally discards the result. Unknown typed calls and
 function-call receiver chains in return/value positions now use the unresolved-helper
 diagnostic path instead of becoming generated host-language calls.
+Top-level `fn name(args) { body }` definitions are now accepted and recorded in the Perl
+reference descriptor registry. Each definition carries params, arity, source/body spans,
+body source, and an ActionIR body AST. The registry rejects duplicate functions,
+reserved names, built-in helper/control collisions, rule-label collisions, and invalid
+or duplicate parameters before runtime. Function-call execution is still pending, so
+registered calls currently remain unresolved-helper diagnostics.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
@@ -155,10 +161,11 @@ It provides:
 
 - A working compiler pipeline you can study for architecture understanding.
 - `spec.spec` — a self-hosted grammar that can bootstrap a new compiler.
-- A locked policy that planned `fn name(args) { ... }` function definitions belong in
-  `spec.spec`; they are not current syntax and should not be implemented as a lasting
-  bootstrap-only extension. The accepted MVP is exact-arity, pure value/block functions
-  with fresh function-local scope, no implicit caller capture, and a registry seam before
+- An active `fn name(args) { ... }` definition surface owned by `spec.spec` and projected
+  through the descriptor `functions` registry. The Perl reference currently uses a
+  temporary pre-bootstrap extraction bridge; do not copy that bridge as the language
+  contract. The accepted MVP is exact-arity, pure value/block functions with fresh
+  function-local scope, no implicit caller capture, and registry resolution before
   unknown-helper fallback.
 - `t/phase0_regression.t` — comprehensive regression tests.
 - Phase 0 baseline showing all 20 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
@@ -174,14 +181,19 @@ It provides:
    access, assignments, and receiver-dot chains must be represented structurally.
    Text-to-text helper rewriting is not a conforming design for new backends.
 
-3. **Compiler** — transforms parsed entries and helper/action AST nodes into
+3. **User-function registry** — records top-level `fn name(args) { body }` definitions
+   as validated AST-backed records before runtime. The registry must preserve definition
+   order, expose definitions by name, reject helper/rule/reserved-name collisions, and
+   provide the data needed for later value-call execution.
+
+4. **Compiler** — transforms parsed entries and helper/action AST nodes into
    HandlerIR nodes. You can reuse the ActionIR lowering approach, but the input to
    lowering is structured AST/IR rather than raw helper source text.
 
-4. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
+5. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
    in your target language. Must handle all 10 variant kinds.
 
-5. **Runtime** — the execution engine:
+6. **Runtime** — the execution engine:
    - Regex engine with position tracking (equivalent to `//gcp` and `\G` anchoring).
    - Accumulator model (arrays, hashes, scalars).
    - Lifecycle execution engine (I/LS/LE/E/EX/IT/LX ordering).

@@ -21,6 +21,8 @@ sub new_compiled_spec_state {
   compiled_rule_order => [],
   rules_by_label => {},
   redefined_rule_labels => [],
+  function_order => [],
+  functions_by_name => {},
  }
 }
 
@@ -33,6 +35,8 @@ sub is_compiled_spec_state {
  return 0 unless ref($value->{compiled_rule_order}) eq 'ARRAY';
  return 0 unless ref($value->{rules_by_label}) eq 'HASH';
  return 0 unless ref($value->{redefined_rule_labels}) eq 'ARRAY';
+ return 0 if exists($value->{function_order}) && ref($value->{function_order}) ne 'ARRAY';
+ return 0 if exists($value->{functions_by_name}) && ref($value->{functions_by_name}) ne 'HASH';
  return 1
 }
 
@@ -86,10 +90,67 @@ sub compiled_spec_state_redefined_rule_labels {
  return $state->{redefined_rule_labels}
 }
 
+sub compiled_spec_state_function_order {
+ my ($state) = @_;
+ return [] unless is_compiled_spec_state($state);
+ return ref($state->{function_order}) eq 'ARRAY' ? $state->{function_order} : []
+}
+
+sub compiled_spec_state_functions_by_name {
+ my ($state) = @_;
+ return {} unless is_compiled_spec_state($state);
+ return ref($state->{functions_by_name}) eq 'HASH' ? $state->{functions_by_name} : {}
+}
+
+sub compiled_spec_state_function_count {
+ my ($state) = @_;
+ return 0 unless is_compiled_spec_state($state);
+ return scalar(@{compiled_spec_state_function_order($state)})
+}
+
+sub set_compiled_spec_function_registry {
+ my ($state, $registry) = @_;
+ die "(LinkedSpec::CompilerState::set_compiled_spec_function_registry) -E- compiled spec state is invalid"
+  unless is_compiled_spec_state($state);
+ die "(LinkedSpec::CompilerState::set_compiled_spec_function_registry) -E- function registry must be HASH ref"
+  unless ref($registry) eq 'HASH';
+ die "(LinkedSpec::CompilerState::set_compiled_spec_function_registry) -E- function registry order must be ARRAY ref"
+  unless ref($registry->{order}) eq 'ARRAY';
+ die "(LinkedSpec::CompilerState::set_compiled_spec_function_registry) -E- function registry by_name must be HASH ref"
+  unless ref($registry->{by_name}) eq 'HASH';
+
+ my @order = @{$registry->{order}};
+ my %functions;
+ foreach my $name (@order) {
+  die "(LinkedSpec::CompilerState::set_compiled_spec_function_registry) -E- function name must be a non-empty scalar"
+   unless defined($name) && !ref($name) && length($name);
+  my $definition = $registry->{by_name}{$name};
+  die "(LinkedSpec::CompilerState::set_compiled_spec_function_registry) -E- function '$name' definition must be HASH ref"
+   unless ref($definition) eq 'HASH';
+  $functions{$name} = { %$definition };
+ }
+ $state->{function_order} = \@order;
+ $state->{functions_by_name} = \%functions;
+ return $state
+}
+
 sub compiled_spec_state_to_legacy_spec {
  my ($state) = @_;
  return undef unless is_compiled_spec_state($state);
  return { %{$state->{rules_by_label}} }
+}
+
+sub compiled_spec_state_to_legacy_functions {
+ my ($state) = @_;
+ return {} unless is_compiled_spec_state($state);
+ my %functions;
+ my $functions_by_name = compiled_spec_state_functions_by_name($state);
+ foreach my $name (@{compiled_spec_state_function_order($state)}) {
+  my $definition = $functions_by_name->{$name};
+  next unless ref($definition) eq 'HASH';
+  $functions{$name} = { %$definition };
+ }
+ return \%functions
 }
 
 sub compiled_spec_state_meta {
@@ -100,6 +161,8 @@ sub compiled_spec_state_meta {
   definition_order => [map { $_->{label} } @{compiled_spec_state_definition_order($state)}],
   compiled_rule_order => [@{$state->{compiled_rule_order}}],
   redefined_rule_labels => [@{$state->{redefined_rule_labels}}],
+  function_order => [@{compiled_spec_state_function_order($state)}],
+  function_count => compiled_spec_state_function_count($state),
  }
 }
 
@@ -472,6 +535,7 @@ sub compiled_descriptor_state_to_legacy_descriptor {
  return undef unless is_compiled_descriptor_state($state);
  return {
   spec => compiled_spec_state_to_legacy_spec(compiled_descriptor_state_spec_state($state)),
+  functions => compiled_spec_state_to_legacy_functions(compiled_descriptor_state_spec_state($state)),
   dependency_regex_map => compiled_dependency_regex_state_to_dependency_regex_map(compiled_descriptor_state_dependency_regex_state($state)),
   meta => { %{compiled_descriptor_state_meta($state)} },
  }
