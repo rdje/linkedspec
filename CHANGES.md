@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.3.2 — split arithmetic call surface
+
+**Scope:** Task-tree ownership, roadmap/live continuity docs, and Knowledge Map fact card. No
+parser/compiler/runtime code changed.
+
+**What changed:** Round 3 arithmetic/comparison function spellings are no longer treated as one implementation
+leaf. The task tree now splits the surface into numeric word aliases (`.3.2.1`), arithmetic symbol callees
+(`.3.2.2`), and comparison spelling policy (`.3.2.3`). The call-shape decision is locked to one
+`callee(args)` grammar; the `(op a, b)` Lisp-prefix surface is not added.
+
+**Why:** Current ground truth shows `num_*` helpers are the existing numeric helper family, while bare
+`add(...)`/`sum(...)` do not lower as numeric helpers. Symbol callees such as `+(...)` need explicit parser and
+lowering support on both variants, and raw Perl fallback can misinterpret `+(2,3)`. Bare `eq`/`ne`/`gt`/`ge`/
+`lt`/`le` are already documented and lowered as string comparisons, so numeric comparison word aliases require
+an explicit compatibility decision before code.
+
+**Validation:** Knowledge Map retrieval, TOOLBOX probes, source reads of the Perl/Rust call parsers and helper
+dispatchers, and mdBook comparison-helper audit established the split. Memory architecture, doctrine,
+Knowledge Map, and diff checks passed.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.3.1 — lock edge syntax contract
 
 **Scope:** Task-tree status, mdBook edge-syntax wording, Knowledge Map fact card, and live continuity docs. No

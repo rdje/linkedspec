@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.3.2 — arithmetic/comparison call surface split**
+  (TASK TREE + KM + LIVE DOCS; **no runtime behavior change**). Round 3 arithmetic/comparison calls are now
+  split before code. Current ground truth shows the implemented numeric family is `num_*`; bare
+  `add(...)`/`sum(...)` do not yet lower as numeric helpers; symbol callees such as `+(...)` are not portable
+  parser inputs today and raw Perl can misinterpret them if they fall through; and bare
+  `eq`/`ne`/`gt`/`ge`/`lt`/`le` are current string comparisons in the book/lowering path.
+  **Decision:** keep one `callee(args)` grammar; do not add the `(op a, b)` Lisp-prefix form. Split children:
+  `.3.2.1` numeric word aliases, `.3.2.2` arithmetic symbol callees, `.3.2.3` comparison spelling policy.
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.1`, then `.3.2.2`, `.3.2.3`, `.4`.
 - 2026-07-01: **SPEC-FORMAT-TERSE.3.1 — edge syntax contract locked**
   (TASK TREE + BOOK + KM + LIVE DOCS; **no runtime behavior change**). Round 3 keeps the existing edge split:
   `->` is the action-edge surface and `=>` is the blind-call surface. Grouped action-edge targets remain valid
@@ -17,7 +26,7 @@ Current execution status for interruption-safe batch workflow recovery.
   acceptance, two-target `ACODE` expansion, and block-less rejection; full phase0 passed (`prove -q -Iperl
   t/phase0_regression.t`, 1001 tests); local CI passed; mdBook formal/action chapters and KM fact card
   updated.
-  **Frontier:** `SPEC-FORMAT-TERSE.3.2` (arithmetic/comparison function spellings), then `.4`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2` (now split above), then `.4`.
 - 2026-07-01: **SPEC-FORMAT-TERSE.5.0 — future variant parity ownership/inventory landed**
   (TASK TREE + KM + BOOK STATUS + LIVE DOCS; **no runtime behavior change**). The active terse tree now has a
   concrete ownership container for future backend parity before any non-Rust variant code. Current implemented

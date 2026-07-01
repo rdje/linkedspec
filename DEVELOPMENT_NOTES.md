@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.3.2 — arithmetic call surface split before code): Closed the Round 3
+  arithmetic/comparison parent as an ownership split, not an implementation. Durable points. (1) **Keep one
+  call grammar.** The accepted surface remains `callee(args)` with word and symbol callees; do not add
+  `(op a, b)` / `(ge a, b)` as a second call grammar. Ordinary nested calls already provide the intended
+  Lisp-style composability. (2) **Word aliases and symbol callees are different mechanisms.** `add(...)` can
+  map to `num_add(...)` through helper-name normalization, but `+(...)` requires parser support before the
+  lowering layer can see it. (3) **Do not leave symbol calls to host fallback.** Probe result `+(2,3)` is
+  dangerous on the Perl path because raw host Perl can reinterpret it as unary-plus/comma behavior instead of
+  numeric addition. (4) **Comparison word aliases are a compatibility decision.** Bare
+  `eq`/`ne`/`gt`/`ge`/`lt`/`le` are current string comparisons in flow/helper docs and lowering; numeric
+  comparisons are `num_*` helpers or receiver terminals such as `score.gt(3)`. (5) **Next safe executable
+  slice is non-conflicting numeric word aliases.** Frontier moves to `SPEC-FORMAT-TERSE.3.2.1`; comparison
+  spellings stay isolated behind `.3.2.3`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.3.1 — edge syntax contract locked): Closed the Round 3 edge-syntax leaf as a
   confirmation/docs/KM slice. Durable points. (1) **No behavior changed.** `->` remains the action-edge
   surface and `=>` remains the blind-call surface. (2) **Grouped action targets are factoring only.**
@@ -8,8 +22,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   independently. (3) **The shared block is mandatory.** `-> A | B` without `{ ... }` remains invalid and is
   diagnosed as "Grouped action-edge targets require a shared code block". (4) **Existing locks were enough.**
   Phase0 already covers shared-block parse expansion, validation acceptance, missing-block rejection, and
-  three-target grouping. (5) **Next Round 3 work is arithmetic/comparison spelling.** Frontier moves to
-  `SPEC-FORMAT-TERSE.3.2`.
+  three-target grouping. (5) **Next Round 3 work was arithmetic/comparison spelling.** It was split by
+  `.3.2`; the current frontier is `.3.2.1`.
 
 - 2026-07-01 (SPEC-FORMAT-TERSE.5.0 — future variant parity ownership/inventory landed): Closed the
   unnumbered "Julia/Lua/Dart variant parity" frontier as an ownership slice before any backend code. Durable
