@@ -2043,8 +2043,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 - ID: `SPEC-FORMAT-TERSE.3`
   Status: `active`
-  Goal: Round 3 — edge syntax (confirm) + arithmetic (functions-only)
-  Children: `.3.1`, `.3.2`
+  Goal: Round 3 — edge syntax plus uniform operator/function expression syntax
+  Children: `.3.1`, `.3.2`, `.3.3`
 
 - ID: `SPEC-FORMAT-TERSE.3.1`
   Status: `done` (2026-07-01)
@@ -2117,13 +2117,34 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - ID: `SPEC-FORMAT-TERSE.3.2.3`
   Status: `pending`
   Goal: Comparison spelling contract before implementation
-  Acceptance: Resolve and record the comparison spelling policy before code. Existing function-form
-    `eq`/`ne`/`gt`/`ge`/`lt`/`le` are string comparisons in flow/helper contexts today, while numeric
-    comparisons are `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le` or number receiver terminals such as
-    `score.gt(3)`. This leaf must decide whether bare comparison word aliases can become numeric, remain
-    string-only, or require a migration/alternate spelling, then split implementation if needed. Symbol
-    comparison callees such as `>(a,b)`, `>=(a,b)`, `<(a,b)`, `<=(a,b)`, `==(a,b)`, and `!=(a,b)` are in scope
-    only after that policy is explicit.
+  Acceptance: Record and split the accepted comparison operator-call surface before code. The intended uniform
+    DSL surface treats comparison operators as ordinary value-producing calls with both word and symbol
+    spellings, for example `gt(a,b)` / `>(a,b)`, `ge(a,b)` / `>=(a,b)`, `ne(a,b)` / `!=(a,b)`, and the
+    corresponding `eq`/`==`, `lt`/`<`, and `le`/`<=` pairs. Current Perl/Rust behavior has a compatibility
+    conflict: function-form `eq`/`ne`/`gt`/`ge`/`lt`/`le` are string comparisons in some flow/helper contexts
+    today, while numeric comparisons are also available as `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/
+    `num_le` and number receiver terminals such as `score.gt(3)`. This leaf must lock the migration boundary
+    so the canonical comparison call contract is uniform without silently breaking legacy string-comparison
+    sites. Split implementation if the string-compatibility bridge, word-call mapping, and symbol-call parsing
+    are not one safe slice.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.3.3`
+  Status: `pending`
+  Goal: Expression-valued assignment and assignment operator-call equivalence
+  Acceptance: Capture the clarified assignment contract before code. The canonical scalar assignment spelling
+    is `target = value`; legacy `assign(target, value)` is migration debt and must not be promoted in new
+    examples. The operator-call spelling `=(target, value)` is accepted as equivalent to `target = value`,
+    following the same "operators are ordinary calls" rule as arithmetic/comparison symbol callees. Assignment
+    is an expression, so it has a value; the initial contract should define that value as the value stored in
+    the target after assignment and target-kind inference. `target = value`, `=(target, value)`, and any
+    retained compatibility function spelling must compose in ordinary value positions, including helper
+    arguments, `return(...)`, expression-valued blocks, user-defined function bodies, and compatible
+    receiver-dot chains. Existing `.1.3.4.1` statement-only scalar assignment remains the current shipped
+    behavior until this leaf or its children implement expression-valued semantics. Split before code if
+    scalar assignment, aggregate shape assignment, hash-index assignment, array append, or backend parity need
+    separate leaves.
   Verification: `pending`
   Commit: `pending`
 
@@ -2331,9 +2352,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.3.2.1` | `done` 2026-07-01 | Non-conflicting numeric word aliases now map to `num_*` on Perl/Rust; comparison words remain string helpers. |
 | 1 | `SPEC-FORMAT-TERSE.4.1` | `pending` | User explicitly redirected the active terse lane to custom/user-defined functions; contract/inventory must close before code. |
 | 2 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
-| 3 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison spelling policy before code because bare `gt`/`lt`/etc. are currently string comparisons. |
+| 3 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison word/symbol operator-call migration before code because bare `gt`/`lt`/etc. currently conflict with string-comparison compatibility. |
+| 4 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
 
 ## Decisions
+
+- `2026-07-01` (**operator calls and assignment expression clarification**). Comparison operators are part of
+  the uniform function-call surface: word spellings such as `gt(a,b)`, `ge(a,b)`, `ne(a,b)` and symbol
+  spellings such as `>(a,b)`, `>=(a,b)`, `!=(a,b)` are ordinary value-producing calls under the canonical
+  contract. `.3.2.3` owns the migration policy because current string-comparison helper behavior still exists
+  and must not be broken silently. Assignment is also an expression: canonical `target = value` replaces
+  legacy `assign(target,value)`, `=(target,value)` is the operator-call equivalent of `target = value`, and the
+  assignment expression's value is the stored value after assignment/target-kind inference. `.3.3` owns the
+  expression-valued assignment contract and any necessary split before parser/compiler/runtime code changes.
 
 - `2026-07-01` (**`.4` user-defined function surface accepted and split before code**). User-defined
   functions are useful enough to enter the active terse lane, but the first implementation is intentionally

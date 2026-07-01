@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.1 — value-only helper calls from AST): Landed the first
+  production AST consumer for helper `call` nodes. Durable points. (1) **Covered calls ignore call-node source
+  text.** The focused test injects fake source strings on AST call nodes and proves `MethodLowering` uses the
+  typed `name`/`args` fields for covered helpers. (2) **Bare helper variables are preserved.** A bare
+  `trim(value)` argument still lowers as the historical helper-slot token `value`, not `$value`; the deprecated
+  `scalar(...)` wrapper remains only a compatibility alias until retirement-aware slot policy says otherwise.
+  (3) **Unsupported argument calls stay compatible, not canonical.** Legacy wrapper aliases
+  (`scalar(...)`/`array(...)`/`hash(...)`), aggregate wrappers, reducers, collection helpers, hash helpers, and
+  receiver-chains still delegate through the explicit compatibility bridge. (4) **Numeric scope is
+  scalar-argument only.** `num_add`/`num_mul`/binary numeric helpers and explicit `num_*` comparisons are
+  covered; `num_sum`/`num_avg`/`num_median`/`num_range` remain aggregate/reducer work for `.3.2.2`.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2 — AST helper-call lowering split): Split helper-call AST
   lowering before code. Durable points. (1) **Calls are not all value slots.** Helpers such as
   `trim(value)` and `num_add(a,b)` can recursively materialize AST value arguments, but helpers such as

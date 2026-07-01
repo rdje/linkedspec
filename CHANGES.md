@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2.1 — lower value-only helper calls from AST
+
+**Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,
+Knowledge Map, and live docs.
+
+**What changed:** `MethodLowering::_lower_method_value_expr(...)` now dispatches supported AST `call` nodes
+for value-only helper families. The dispatcher recursively lowers argument AST nodes, preserves existing
+bare-variable behavior in helper-call slots, canonicalizes numeric word aliases, and then reuses the existing
+Perl helper catalog through the explicit compatibility bridge.
+
+**Compatibility boundary:** Deprecated wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)`,
+aggregate-wrapper, collection, reducer, hash, symbol-slot, and receiver-chain helpers remain on explicit
+compatibility paths for `.3.2.2`/`.3.3`; those wrappers are not the canonical destination syntax. This leaf
+does not change public helper output.
+
+**Tests:** Added focused fake-source AST call tests proving covered helper calls do not reuse call-node source
+text. Syntax checks, `prove -Iperl t/actionir_ast_parser.t`, and targeted public lowering probes passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2 — split AST helper-call lowering
 
 **Scope:** Task-tree split, roadmap/live continuity docs, and current frontier update. No parser/compiler/runtime

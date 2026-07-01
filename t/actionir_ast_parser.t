@@ -141,6 +141,74 @@ subtest 'non-call value lowering consumes AST nodes' => sub {
     ok($parse_calls >= 2, 'value lowering invoked the AST parser for non-call value expressions');
 };
 
+subtest 'value-only helper-call lowering consumes AST call nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            if ($expr eq 'trim(lowercase(value))') {
+                return {
+                    kind => 'call',
+                    name => 'trim',
+                    source => '__bad_outer_host_call__()',
+                    args => [
+                        {
+                            kind => 'call',
+                            name => 'lowercase',
+                            source => '__bad_inner_host_call__()',
+                            args => [
+                                { kind => 'variable', name => 'value', source => 'value' },
+                            ],
+                        },
+                    ],
+                };
+            }
+            if ($expr eq 'num_add(scalar(n),num_mul(2,3))') {
+                return {
+                    kind => 'call',
+                    name => 'num_add',
+                    source => '__bad_num_outer_host_call__()',
+                    args => [
+                        {
+                            kind => 'call',
+                            name => 'scalar',
+                            source => 'scalar(n)',
+                            args => [
+                                { kind => 'variable', name => 'n', source => 'n' },
+                            ],
+                        },
+                        {
+                            kind => 'call',
+                            name => 'num_mul',
+                            source => '__bad_num_inner_host_call__()',
+                            args => [
+                                { kind => 'number', value => 2, source => '2' },
+                                { kind => 'number', value => 3, source => '3' },
+                            ],
+                        },
+                    ],
+                };
+            }
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $string_call = LinkedSpec::call_spec_handler_subst('Top', q{return(trim(lowercase(value)))});
+        like($string_call, qr/\$__ls_trim/, 'AST helper-call lowering preserves the outer string helper output');
+        like($string_call, qr/\$__ls_lower/, 'AST helper-call lowering recursively lowers nested value-only calls');
+        unlike($string_call, qr/__bad_(?:outer|inner)_host_call__/, 'AST helper-call lowering does not reuse fake source text for supported calls');
+
+        my $numeric_call = LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(scalar(n),num_mul(2,3)))});
+        like($numeric_call, qr/\$__ls_num_add_sum/, 'AST helper-call lowering preserves the outer numeric helper output');
+        like($numeric_call, qr/\$__ls_num_mul_product/, 'AST helper-call lowering recursively lowers nested numeric helper calls');
+        unlike($numeric_call, qr/__bad_num_(?:outer|inner)_host_call__/, 'AST helper-call lowering preserves compatibility only for unsupported argument calls');
+    }
+
+    ok($parse_calls >= 2, 'value-only helper calls entered through the AST parser');
+};
+
 subtest 'parser seam is incremental' => sub {
     my $lowered = LinkedSpec::call_spec_handler_subst('Top', 'return(3.5.floor().add(1))');
     like($lowered, qr/__ls_num_floor.*__ls_num_add/s, 'receiver-chain lowering remains on the compatibility path until the fluent-chain leaf');

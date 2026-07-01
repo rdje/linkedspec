@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2.1 — value-only helper calls from AST**
+  (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
+  dispatches supported AST `call` nodes for scalar normalization, string predicate/composition,
+  coalesce/concat, scalar-argument numeric helpers, and explicit `num_*` comparisons. Covered calls
+  recursively materialize argument AST nodes before reusing the existing Perl helper catalog through the
+  compatibility bridge. Deprecated wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)`,
+  aggregate-wrapper, collection, reducer, hash, symbol-slot, and receiver-chain helpers remain queued and are
+  not the canonical destination syntax.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
+  `perl -Iperl -c t/actionir_ast_parser.t` PASS; `prove -Iperl t/actionir_ast_parser.t` PASS; targeted public
+  lowering probes PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.2.2` lower aggregate-wrapper and collection helper calls from
+  AST call nodes.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2 — AST helper-call lowering split**
   (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). Helper-call AST lowering is now split by
   argument-slot risk: `.3.2.1` value-only helper families, `.3.2.2` aggregate wrappers and collection/hash

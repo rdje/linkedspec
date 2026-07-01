@@ -1106,7 +1106,54 @@ sub _lower_method_value_expr {
    : { __actionir_ast_value_lowering_compat_bridge => 1 };
   return _lower_method_value_expr($source_trimmed, $compat_deps)
  };
+ my %ast_value_only_call_arity = (
+  trim             => [1, 1],
+  lowercase        => [1, 1],
+  uppercase        => [1, 1],
+  length           => [1, 1],
+  substr           => [2, 3],
+  replace_substr   => [3, 3],
+  rm_prefix        => [2, 2],
+  rm_suffix        => [2, 2],
+  concat           => [2, undef],
+  starts_with      => [2, 2],
+  ends_with        => [2, 2],
+  contains_substr  => [2, 2],
+  matches          => [2, 2],
+  coalesce         => [2, undef],
+  coalesce_nonempty => [2, undef],
+  num_abs          => [1, 1],
+  num_floor        => [1, 1],
+  num_ceil         => [1, 1],
+  num_round        => [1, 1],
+  num_add          => [2, undef],
+  num_sub          => [2, 2],
+  num_mul          => [2, undef],
+  num_div          => [2, 2],
+  num_mod          => [2, 2],
+  num_clamp        => [3, 3],
+  num_min          => [2, undef],
+  num_max          => [2, undef],
+  num_eq           => [2, 2],
+  num_ne           => [2, 2],
+  num_gt           => [2, 2],
+  num_ge           => [2, 2],
+  num_lt           => [2, 2],
+  num_le           => [2, 2],
+ );
+ my $ast_value_only_call_method = sub {
+  my ($method, $argc) = @_;
+  return undef unless defined($method) && length($method);
+  my $numeric_alias = _numeric_word_alias_helper_name($method);
+  $method = $numeric_alias if defined($numeric_alias) && length($numeric_alias);
+  my $arity = $ast_value_only_call_arity{$method};
+  return undef unless ref($arity) eq 'ARRAY';
+  return undef if $argc < $arity->[0];
+  return undef if defined($arity->[1]) && $argc > $arity->[1];
+  return $method
+ };
  my $lower_ast_value_node;
+ my $lower_ast_value_only_call_node;
  my $lower_ast_direct_access_node = sub {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
@@ -1249,6 +1296,8 @@ sub _lower_method_value_expr {
   return 'undef' if $kind eq 'undef';
   return $node->{value} ? 'do { require JSON::PP; JSON::PP::true }' : 'do { require JSON::PP; JSON::PP::false }'
    if $kind eq 'boolean';
+  return $node->{source}
+   if $kind eq 'variable' && $opts->{variable_source};
   return $opts->{bare_scalar_read} ? _lower_source_slot_bare_scalar_read_expr($node->{name}, $deps) : undef
    if $kind eq 'variable';
   return $lower_ast_direct_access_node->($node)
@@ -1281,9 +1330,36 @@ sub _lower_method_value_expr {
   }
   return $lower_ast_block_value_node->($node)
    if $kind eq 'block_value';
-  return $legacy_method_value_expr->($node->{source})
-   if $kind eq 'call';
+  if ($kind eq 'call') {
+   my $lowered_call = $lower_ast_value_only_call_node->($node);
+   return $lowered_call if defined($lowered_call) && length($lowered_call);
+   return $legacy_method_value_expr->($node->{source});
+  }
   return undef
+ };
+ $lower_ast_value_only_call_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+  my $args = $node->{args} || [];
+  return undef unless ref($args) eq 'ARRAY';
+  my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
+  return undef unless defined($method) && length($method);
+
+  my @lowered_args;
+  foreach my $arg (@$args) {
+   my $lowered_arg;
+   if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'call') {
+    $lowered_arg = $lower_ast_value_only_call_node->($arg);
+    $lowered_arg = $arg->{source} unless defined($lowered_arg) && length($lowered_arg);
+   } else {
+    $lowered_arg = $lower_ast_value_node->($arg, { variable_source => 1 });
+    $lowered_arg = $arg->{source} unless defined($lowered_arg) && length($lowered_arg);
+   }
+   return undef unless defined($lowered_arg) && length($lowered_arg);
+   push @lowered_args, $lowered_arg;
+  }
+
+  return $legacy_method_value_expr->($method.'('.join(', ', @lowered_args).')')
  };
 
  return undef unless defined $expr;
@@ -1293,7 +1369,7 @@ sub _lower_method_value_expr {
   my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
   if (ref($ast_node) eq 'HASH') {
    my $ast_kind = $ast_node->{kind} // '';
-   if ($ast_kind ne 'raw_perl' && $ast_kind ne 'call' && $ast_kind ne 'fluent_chain') {
+   if ($ast_kind ne 'raw_perl' && $ast_kind ne 'fluent_chain') {
     my $ast_lowered = $lower_ast_value_node->($ast_node);
     return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
    }

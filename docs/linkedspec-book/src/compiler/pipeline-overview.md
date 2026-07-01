@@ -35,8 +35,13 @@ reference now exposes an additive `LinkedSpec::ActionIR::AST` parser seam for th
 expression surface. The Perl reference has also started consuming that seam for non-call
 value expressions in `MethodLowering`: primitive literals, scoped bare scalar reads,
 direct indexed/nested access, shape literals, and block values lower from AST nodes.
-Helper-call composition, receiver-dot chains, statement/control lowering, and remaining
-return-payload substitution still migrate in later leaves.
+Value-only helper-call composition now also consumes AST `call` nodes recursively before
+reusing the existing Perl helper catalog, covering scalar normalization, string
+predicate/composition, coalesce/concat, and scalar-argument numeric helpers. Deprecated
+wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)`, helper families with
+aggregate-wrapper or symbol-special slots, receiver-dot chains, statement/control
+lowering, and remaining return-payload substitution still migrate in later leaves; those
+wrappers are compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters
 

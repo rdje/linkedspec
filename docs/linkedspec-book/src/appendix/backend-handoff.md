@@ -22,9 +22,14 @@ for calls, literals, variables, direct access, shape literals, block values,
 assignments, expression statements, and receiver-dot chains. Its `MethodLowering`
 consumer has started using that AST for non-call value expressions: primitive literals,
 scoped bare scalar reads, direct indexed/nested access, shape literals, and block
-values. Helper-call composition, receiver-dot chains, statement/control lowering, and
-remaining return-payload substitution are still migrating family by family, so any
-remaining text-to-text lowering is migration debt rather than a backend pattern to copy.
+values. It also lowers value-only helper-call composition from AST `call` nodes for
+scalar normalization, string predicate/composition, coalesce/concat, and scalar-argument
+numeric helpers while deprecated wrapper aliases such as `scalar(...)`/`array(...)`/
+`hash(...)`, aggregate-wrapper calls, and symbol-slot helper calls continue through
+explicit compatibility paths. Those wrappers are not the canonical destination syntax.
+Receiver-dot chains, statement/control lowering, and remaining return-payload
+substitution are still migrating family by family, so any remaining text-to-text
+lowering is migration debt rather than a backend pattern to copy.
 New backends should follow the typed-AST model used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
