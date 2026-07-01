@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.4.1 — structured control AST parser nodes**
+  (PERL ACTIONIR AST PARSER + FOCUSED TEST + BOOK/KM/LIVE DOCS; **production lowering unchanged**).
+  `LinkedSpec::ActionIR::AST::Parser` now parses attached-block and marker control-flow forms into typed
+  `control_if`, `control_else`, `control_endif`, `control_while`, `control_switch`, `control_case`,
+  `control_default`, `control_endcase`, and `control_endswitch` nodes. Conditions, switch source expressions,
+  case match expressions, attached bodies, body source spans, and switch case/default branches are typed where
+  applicable. Inline value-form `if(...)` / `switch(...)` helpers still parse as generic `call` nodes.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm` PASS;
+  `perl -Iperl -c t/actionir_ast_parser.t` PASS; `prove -v -Iperl t/actionir_ast_parser.t` PASS with **16
+  focused subtests**; `perl -c perl/LinkedSpec.pm` PASS; `perl -c -Iperl t/phase0_regression.t` PASS; direct
+  `perl -Iperl t/phase0_regression.t` PASS with phase0 **1002 tests**; `mdbook build docs/linkedspec-book`
+  PASS; memory/doctrine/Knowledge Map gates PASS; `git diff --check` PASS; `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.4.2` lower `if`/`when`/`otherwise` statement forms from typed
+  condition/body nodes.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4.4 — structured-control AST lowering split**
   (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). The broad structured-control migration is
   now split before code into `.4.4.1` typed control-flow AST parser nodes and node-shape locks, `.4.4.2`

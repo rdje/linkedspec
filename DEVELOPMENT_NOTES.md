@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.1 — control-flow AST parser nodes): Added typed structured
+  control nodes to the additive ActionIR AST parser without switching production lowering. Durable points.
+  (1) **Statement control is now syntactically typed.** Attached and marker forms parse as `control_if`,
+  `control_else`, `control_endif`, `control_while`, `control_switch`, `control_case`, `control_default`,
+  `control_endcase`, and `control_endswitch`. (2) **Bodies and branches are typed too.** Attached bodies are
+  `action_block` nodes with `body_source` / `body_source_span`; attached switch payloads expose parsed
+  `cases` plus an optional `default` branch. (3) **Value control stays separate.** Inline value helpers
+  `if(cond, then, else)` and `switch(value, case(...), default(...))` deliberately remain generic `call` nodes
+  so existing inline value-control lowering is untouched. (4) **Lowering is still queued.** `.4.4.2` owns
+  if/when/otherwise consumption from AST; `.4.4.3` owns switch/case/default; `.4.4.4` owns while.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4 — structured-control split): Split the remaining structured
   control-flow AST migration before code. Durable points. (1) **Parser nodes come first.** `.4.4.1` owns typed
   AST node shapes for attached-block and marker-style control forms before lowering switches over. (2) **Branch

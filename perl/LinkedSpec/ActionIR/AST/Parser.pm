@@ -233,6 +233,9 @@ sub _parse_expr_without_chain {
  my $shape = _parse_shape_or_block_expr($trimmed, $start, $end);
  return $shape if $shape;
 
+ my $control = _parse_control_flow_expr($trimmed, $start, $end);
+ return $control if $control;
+
  my $call = _parse_call_expr($trimmed, $start, $end);
  return $call if $call;
 
@@ -291,6 +294,235 @@ sub _parse_call_expr {
   name => $call->{method},
   args => \@args,
  )
+}
+
+sub _parse_control_flow_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $attached = _parse_attached_control_flow_expr($trimmed, $start, $end);
+ return $attached if $attached;
+ return _parse_control_flow_head($trimmed, $start, $trimmed, $start, $end, undef)
+}
+
+sub _parse_attached_control_flow_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $attached = _split_attached_block_expr($trimmed);
+ return undef unless ref($attached) eq 'HASH';
+
+ my ($head_trimmed, $head_start) = _trim_with_offsets($attached->{head}, $start);
+ return undef unless length($head_trimmed);
+
+ my $body_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
+ my $body = parse_action_block($attached->{body});
+ return _parse_control_flow_head(
+  $head_trimmed,
+  $head_start,
+  $trimmed,
+  $start,
+  $end,
+  {
+   body => $body,
+   body_source => $body_source,
+   body_source_span => _span($start + $attached->{open_idx}, $start + $attached->{close_idx} + 1),
+  },
+ )
+}
+
+sub _parse_control_flow_head {
+ my ($head, $head_start, $source, $start, $end, $attached_fields) = @_;
+ my $normalized = _normalize_control_flow_head($head);
+ return undef unless ref($normalized) eq 'HASH';
+
+ my $call = _parse_method_function_expr($normalized->{head});
+ return undef unless ref($call) eq 'HASH' && defined($call->{method});
+
+ my $open_idx = index($normalized->{head}, '(');
+ return undef if $open_idx < 0;
+ my $payload = substr($normalized->{head}, $open_idx + 1, length($normalized->{head}) - $open_idx - 2);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1);
+
+ my $method = $call->{method};
+ my $keyword = $normalized->{keyword};
+ my $canonical_keyword = _canonical_control_flow_keyword($method);
+ return undef unless defined($canonical_keyword);
+
+ my %common = (
+  keyword => $keyword,
+  canonical_keyword => $canonical_keyword,
+  args => \@args,
+ );
+ if (ref($attached_fields) eq 'HASH') {
+  %common = (%common, %$attached_fields);
+ }
+
+ if ($method eq 'if' || $method eq 'i' || $method eq 'when' || $method eq 'elseif' || $method eq 'elif') {
+  return undef unless @args == 1;
+  my $branch_role = ($method eq 'elseif' || $method eq 'elif') ? 'elseif' : 'if';
+  return _node(
+   'control_if',
+   $source,
+   $start,
+   $end,
+   %common,
+   branch_role => $branch_role,
+   condition => $args[0],
+  )
+ }
+
+ if ($method eq 'else' || $method eq 'otherwise') {
+  return undef unless @args == 0;
+  return _node('control_else', $source, $start, $end, %common, branch_role => 'else')
+ }
+
+ if ($method eq 'endif') {
+  return undef unless @args == 0;
+  return undef if ref($attached_fields) eq 'HASH';
+  return _node('control_endif', $source, $start, $end, %common)
+ }
+
+ if ($method eq 'while') {
+  return undef unless @args == 1;
+  return _node('control_while', $source, $start, $end, %common, condition => $args[0])
+ }
+
+ if ($method eq 'switch') {
+  return undef unless @args == 1;
+  my %switch_fields = (
+   %common,
+   source_expr => $args[0],
+  );
+  if (ref($attached_fields) eq 'HASH') {
+   my $branches = _parse_switch_attached_branches(
+    $attached_fields->{body_source},
+    $attached_fields->{body_source_span}{start},
+   );
+   if (ref($branches) eq 'HASH') {
+    $switch_fields{cases} = $branches->{cases};
+    $switch_fields{default} = $branches->{default};
+   }
+  }
+  return _node('control_switch', $source, $start, $end, %switch_fields)
+ }
+
+ if ($method eq 'case') {
+  return undef unless @args == 1;
+  return _node('control_case', $source, $start, $end, %common, match => $args[0])
+ }
+
+ if ($method eq 'default') {
+  return undef unless @args == 0;
+  return _node('control_default', $source, $start, $end, %common)
+ }
+
+ if ($method eq 'endcase') {
+  return undef unless @args == 0;
+  return undef if ref($attached_fields) eq 'HASH';
+  return _node('control_endcase', $source, $start, $end, %common)
+ }
+
+ if ($method eq 'endswitch') {
+  return undef unless @args == 0;
+  return undef if ref($attached_fields) eq 'HASH';
+  return _node('control_endswitch', $source, $start, $end, %common)
+ }
+
+ return undef
+}
+
+sub _normalize_control_flow_head {
+ my ($head) = @_;
+ my $trimmed = _fallback_trim($head);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ return { head => 'else()', keyword => 'otherwise' }
+  if $trimmed eq 'otherwise';
+ return { head => "$trimmed()", keyword => $trimmed }
+  if $trimmed =~ /\A(?:else|endif|default|endcase|endswitch)\z/o;
+ return undef unless $trimmed =~ /\A([A-Za-z_][A-Za-z0-9_]*)/o;
+ my $keyword = $1;
+ return undef unless defined _canonical_control_flow_keyword($keyword);
+ return { head => $trimmed, keyword => $keyword }
+}
+
+sub _canonical_control_flow_keyword {
+ my ($method) = @_;
+ return undef unless defined $method;
+ return 'if' if $method eq 'i' || $method eq 'when';
+ return 'elseif' if $method eq 'elif';
+ return 'else' if $method eq 'otherwise';
+ return $method
+  if $method =~ /\A(?:if|elseif|else|endif|while|switch|case|default|endcase|endswitch)\z/o;
+ return undef
+}
+
+sub _split_attached_block_expr {
+ my ($text) = @_;
+ return undef unless defined($text) && length($text);
+ my $open_idx = _find_top_level_open_brace($text, 0);
+ return undef unless defined $open_idx;
+ my $close_idx = _find_matching_delim($text, $open_idx, '{', '}');
+ return undef unless defined $close_idx;
+ my $tail = substr($text, $close_idx + 1);
+ my $tail_trimmed = _fallback_trim($tail);
+ return undef if defined($tail_trimmed) && length($tail_trimmed);
+
+ return {
+  head => substr($text, 0, $open_idx),
+  body => substr($text, $open_idx + 1, $close_idx - $open_idx - 1),
+  open_idx => $open_idx,
+  close_idx => $close_idx,
+ }
+}
+
+sub _parse_switch_attached_branches {
+ my ($body_source, $body_start) = @_;
+ return undef unless defined($body_source) && length($body_source) >= 2;
+ return undef unless _outer_delimiter_is_balanced($body_source, '{', '}');
+ my $payload = substr($body_source, 1, length($body_source) - 2);
+ my $payload_start = $body_start + 1;
+ my $len = length($payload);
+ my $pos = 0;
+ my @cases;
+ my $default;
+
+ while ($pos < $len) {
+  $pos = _skip_switch_branch_separators($payload, $pos);
+  last if $pos >= $len;
+
+  my $open_idx = _find_top_level_open_brace($payload, $pos);
+  return undef unless defined $open_idx;
+  my $close_idx = _find_matching_delim($payload, $open_idx, '{', '}');
+  return undef unless defined $close_idx;
+  my $expr = substr($payload, $pos, $close_idx - $pos + 1);
+  my ($expr_trimmed, $expr_start, $expr_end) = _trim_with_offsets($expr, $payload_start + $pos);
+  my $branch = _parse_control_flow_expr($expr_trimmed, $expr_start, $expr_end);
+  return undef unless ref($branch) eq 'HASH';
+  my $kind = $branch->{kind} // '';
+  if ($kind eq 'control_case') {
+   push @cases, $branch;
+  } elsif ($kind eq 'control_default') {
+   return undef if defined $default;
+   $default = $branch;
+  } else {
+   return undef;
+  }
+  $pos = $close_idx + 1;
+ }
+
+ return {
+  cases => \@cases,
+  default => $default,
+ }
+}
+
+sub _skip_switch_branch_separators {
+ my ($text, $pos) = @_;
+ my $len = length($text);
+ while ($pos < $len) {
+  my $ch = substr($text, $pos, 1);
+  last unless $ch =~ /\s/o || $ch eq ';';
+  ++$pos;
+ }
+ return $pos
 }
 
 sub _parse_arg_exprs {
@@ -559,6 +791,30 @@ sub _split_top_level_fluent_segments {
  my ($trimmed, $seg_start, $seg_end) = _trim_with_offsets($segment, $segment_start);
  push @segments, { text => $trimmed, start => $seg_start, end => $seg_end };
  return \@segments
+}
+
+sub _find_top_level_open_brace {
+ my ($text, $start_pos) = @_;
+ return undef unless defined $text;
+ $start_pos = 0 unless defined $start_pos;
+ my $len = length($text);
+ my $state = _new_scan_state();
+
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_quote_only_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  return $idx
+   if $idx >= $start_pos && $ch eq '{' && _scan_is_top_level($state);
+  if ($ch eq '(') { ++$state->{paren_depth}; next; }
+  if ($ch eq ')') { --$state->{paren_depth} if $state->{paren_depth} > 0; next; }
+  if ($ch eq '{') { ++$state->{brace_depth}; next; }
+  if ($ch eq '}') { --$state->{brace_depth} if $state->{brace_depth} > 0; next; }
+  if ($ch eq '[') { ++$state->{bracket_depth}; next; }
+  if ($ch eq ']') { --$state->{bracket_depth} if $state->{bracket_depth} > 0; next; }
+ }
+ return undef
 }
 
 sub _outer_delimiter_is_balanced {

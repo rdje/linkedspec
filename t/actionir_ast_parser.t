@@ -95,6 +95,108 @@ subtest 'assignment and mutation statement nodes' => sub {
     is($hash->{value}{kind}, 'hash_literal', 'hash assignment RHS is parsed as hash literal');
 };
 
+subtest 'structured control forms parse as typed AST nodes' => sub {
+    my $if = parse_expr('if(flag) { set(x,"a") }');
+    is($if->{kind}, 'control_if', 'attached if parses as control_if');
+    is($if->{keyword}, 'if', 'control_if preserves the source keyword');
+    is($if->{canonical_keyword}, 'if', 'control_if carries the canonical keyword');
+    is($if->{condition}{kind}, 'variable', 'control_if condition is parsed as an expression');
+    is($if->{body}{kind}, 'action_block', 'control_if owns its attached body block');
+    is($if->{body}{statements}[0]{expr}{name}, 'assign', 'control_if body statements are parsed');
+
+    my $when = parse_expr('when(is_nonempty(array(items)))');
+    is($when->{kind}, 'control_if', 'marker when parses through the if-family control node');
+    is($when->{keyword}, 'when', 'when preserves its alias keyword');
+    is($when->{canonical_keyword}, 'if', 'when canonicalizes to if');
+    is($when->{condition}{name}, 'is_nonempty', 'when condition is parsed as a call');
+
+    my $elseif = parse_expr('elseif(has_key(hash(meta),"tag")) { return("tagged") }');
+    is($elseif->{kind}, 'control_if', 'attached elseif parses through the if-family control node');
+    is($elseif->{branch_role}, 'elseif', 'elseif branch role is explicit');
+    is($elseif->{canonical_keyword}, 'elseif', 'elseif keeps its canonical keyword');
+    is($elseif->{condition}{name}, 'has_key', 'elseif condition is parsed as a call');
+    is($elseif->{body_source}, '{ return("tagged") }', 'elseif preserves its attached body source');
+
+    my $elif = parse_expr('elif(flag)');
+    is($elif->{kind}, 'control_if', 'marker elif parses through the if-family control node');
+    is($elif->{branch_role}, 'elseif', 'elif branch role is explicit');
+    is($elif->{canonical_keyword}, 'elseif', 'elif canonicalizes to elseif');
+
+    my $else = parse_expr('else');
+    is($else->{kind}, 'control_else', 'bare else marker parses as control_else');
+    is($else->{canonical_keyword}, 'else', 'else carries its canonical keyword');
+
+    my $else_call = parse_expr('else()');
+    is($else_call->{kind}, 'control_else', 'parenthesized else marker parses as control_else');
+
+    my $otherwise = parse_expr('otherwise { return("miss") }');
+    is($otherwise->{kind}, 'control_else', 'attached otherwise parses as control_else');
+    is($otherwise->{keyword}, 'otherwise', 'otherwise preserves its alias keyword');
+    is($otherwise->{canonical_keyword}, 'else', 'otherwise canonicalizes to else');
+    is($otherwise->{body}{statements}[0]{expr}{name}, 'return', 'otherwise body statements are parsed');
+
+    my $endif = parse_expr('endif');
+    is($endif->{kind}, 'control_endif', 'bare endif marker parses as control_endif');
+    is($endif->{canonical_keyword}, 'endif', 'endif carries its canonical keyword');
+
+    my $endif_call = parse_expr('endif()');
+    is($endif_call->{kind}, 'control_endif', 'parenthesized endif marker parses as control_endif');
+
+    my $switch_marker = parse_expr('switch(kind)');
+    is($switch_marker->{kind}, 'control_switch', 'marker switch parses as control_switch');
+    is($switch_marker->{source_expr}{kind}, 'variable', 'marker switch source expression is parsed');
+
+    my $switch = parse_expr('switch(kind) { case("a") { return("hit") } default { return("miss") } }');
+    is($switch->{kind}, 'control_switch', 'attached switch parses as control_switch');
+    is($switch->{source_expr}{kind}, 'variable', 'switch source expression is parsed');
+    is(scalar(@{$switch->{cases}}), 1, 'attached switch owns parsed case branches');
+    is($switch->{cases}[0]{kind}, 'control_case', 'switch case branch is typed');
+    is($switch->{cases}[0]{match}{value}, 'a', 'case match expression is parsed');
+    is($switch->{cases}[0]{body}{statements}[0]{expr}{args}[0]{value}, 'hit', 'case body is parsed');
+    is($switch->{default}{kind}, 'control_default', 'switch default branch is typed');
+    is($switch->{default}{body}{statements}[0]{expr}{args}[0]{value}, 'miss', 'default body is parsed');
+
+    my $case = parse_expr('case(/a/)');
+    is($case->{kind}, 'control_case', 'marker case parses as control_case');
+    is($case->{match}{kind}, 'regex', 'marker case match payload is parsed as an expression');
+
+    my $default = parse_expr('default');
+    is($default->{kind}, 'control_default', 'bare default marker parses as control_default');
+    is($default->{canonical_keyword}, 'default', 'default carries its canonical keyword');
+
+    my $default_call = parse_expr('default()');
+    is($default_call->{kind}, 'control_default', 'parenthesized default marker parses as control_default');
+
+    my $endcase = parse_expr('endcase');
+    is($endcase->{kind}, 'control_endcase', 'bare endcase marker parses as control_endcase');
+
+    my $endcase_call = parse_expr('endcase()');
+    is($endcase_call->{kind}, 'control_endcase', 'parenthesized endcase marker parses as control_endcase');
+
+    my $endswitch = parse_expr('endswitch');
+    is($endswitch->{kind}, 'control_endswitch', 'bare endswitch marker parses as control_endswitch');
+
+    my $endswitch_call = parse_expr('endswitch()');
+    is($endswitch_call->{kind}, 'control_endswitch', 'parenthesized endswitch marker parses as control_endswitch');
+
+    my $while_marker = parse_expr('while(num_lt(count,3))');
+    is($while_marker->{kind}, 'control_while', 'marker while parses as control_while');
+    is($while_marker->{condition}{name}, 'num_lt', 'marker while condition is parsed as a call');
+
+    my $while = parse_expr('while(num_lt(count,3)) { set(count,num_add(count,1)) }');
+    is($while->{kind}, 'control_while', 'attached while parses as control_while');
+    is($while->{condition}{name}, 'num_lt', 'while condition is parsed as a call');
+    is($while->{body}{statements}[0]{expr}{name}, 'assign', 'while body statements are parsed');
+
+    my $inline_if = parse_expr('if(flag, "yes", "no")');
+    is($inline_if->{kind}, 'call', 'inline value if remains a generic call');
+    is($inline_if->{name}, 'if', 'inline value if keeps its helper name');
+
+    my $inline_switch = parse_expr('switch(kind, case("a","hit"), default("miss"))');
+    is($inline_switch->{kind}, 'call', 'inline value switch remains a generic call');
+    is($inline_switch->{name}, 'switch', 'inline value switch keeps its helper name');
+};
+
 subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     my $parse_calls = 0;
     my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;

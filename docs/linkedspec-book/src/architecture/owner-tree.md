@@ -412,8 +412,10 @@ Assignment and mutation operator statements now consume AST target/key/value fie
 Helper-call statements and returns now consume AST `call` fields, and array end-mutation
 receiver statements consume AST `fluent_chain` fields. Expression-valued block side
 effects, block-local returns, and final expressions now consume AST block/statement
-fields. Structured control-flow lowering still migrates family by family, so any
-remaining source-text lowering is legacy debt rather than the model for new work.
+fields. The parser seam now also emits typed control nodes for attached and marker
+`if`/`when`/`otherwise`, `switch`/`case`/`default`, and `while` forms. Structured
+control-flow lowering still migrates family by family, so any remaining source-text
+lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`
 

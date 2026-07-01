@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.1 — parse structured control nodes into AST
+
+**Scope:** Perl ActionIR AST parser, focused parser tests, task-tree/roadmap/live docs, mdBook architecture
+status, and Knowledge Map. Production lowering remains unchanged in this leaf.
+
+**What changed:** `LinkedSpec::ActionIR::AST::Parser` now parses attached-block and marker structured-control
+forms into typed control nodes: `control_if`, `control_else`, `control_endif`, `control_while`,
+`control_switch`, `control_case`, `control_default`, `control_endcase`, and `control_endswitch`. The nodes
+carry parsed condition/source/match expressions, canonical/source keywords, attached body blocks, body source
+spans, and parsed switch case/default branches where applicable.
+
+**Compatibility boundary:** Inline value-form `if(cond, then, else)` and
+`switch(value, case(...), default(...))` still parse as generic `call` nodes. This keeps the existing inline
+value-control lowering path untouched while later `.4.4` children migrate statement-level control lowering.
+
+**Tests:** Syntax checks passed for `AST::Parser` and the focused parser test. Focused locks cover attached
+forms, bare and parenthesized marker controls, and inline value-helper boundaries. `prove -v -Iperl
+t/actionir_ast_parser.t` passed with 16 focused subtests. `perl -c perl/LinkedSpec.pm`,
+`perl -c -Iperl t/phase0_regression.t`, and direct `perl -Iperl t/phase0_regression.t` passed; phase0 covered
+1002 tests. `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`, and
+`bash tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4 — split structured-control AST lowering
 
 **Scope:** Task-tree split, roadmap/task index, and live continuity docs. No parser/compiler/runtime code
