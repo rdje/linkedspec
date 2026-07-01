@@ -59,8 +59,10 @@ receiver/call fields. Expression-valued block internals now consume AST `block_v
 and final expressions. The parser seam now also represents attached-block and marker
 structured-control statements as typed `control_*` nodes for `if`/`when`/`otherwise`,
 `switch`/`case`/`default`, and `while` families, including attached bodies and switch
-branches. Statement-level structured-control lowering still migrates in later leaves;
-the wrapper forms remain compatibility syntax, not the canonical destination surface.
+branches. `if`/`when`/`otherwise` statement lowering now consumes typed condition and
+body nodes before reusing the existing branch engine; switch/case/default and while
+lowering still migrate in later leaves. The wrapper forms remain compatibility syntax,
+not the canonical destination surface.
 
 ## Why the pipeline matters
 

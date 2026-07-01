@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.2 — if-family control lowering from AST): Moved the first
+  structured-control family onto typed AST consumption without changing generated branch semantics. Durable
+  points. (1) **ControlFlow now has an AST bridge.** `if`/`i`/`when`, `elseif`/`elif`, `else`/`otherwise`, and
+  `endif` statements parse through `LinkedSpec::ActionIR::AST` before the existing branch lowerers run.
+  (2) **The bridge materializes from fields, not source.** Conditions and branch bodies are reconstructed from
+  typed AST nodes; focused tests poison original text and AST `source` fields to prove those fields are not the
+  source of generated Perl. (3) **Branch mechanics stay unchanged.** Existing attached-block implicit close,
+  marker-style `endif`, and when/otherwise alias behavior still flow through the same `ControlFlow` stack.
+  (4) **Remaining control families are still split.** `.4.4.3` owns switch/case/default; `.4.4.4` owns while
+  plus its iteration-safety behavior.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.4.1 — control-flow AST parser nodes): Added typed structured
   control nodes to the additive ActionIR AST parser without switching production lowering. Durable points.
   (1) **Statement control is now syntactically typed.** Attached and marker forms parse as `control_if`,

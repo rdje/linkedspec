@@ -119,6 +119,207 @@ sub _normalize_bare_zero_arg_flow_marker_expr {
  return $trimmed
 }
 
+sub _parse_control_flow_ast_expr {
+ my ($expr, $deps) = @_;
+ return undef if ref($expr);
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST');
+ return LinkedSpec::ActionIR::AST::parse_action_expr($expr, { deps => $deps || {} })
+}
+
+sub _control_ast_quote_string_source {
+ my ($value, $quote) = @_;
+ $quote = '"' unless defined($quote) && ($quote eq '"' || $quote eq "'");
+ $value = '' unless defined $value;
+ $value =~ s/\\/\\\\/go;
+ if ($quote eq "'") {
+  $value =~ s/'/\\'/go;
+ } else {
+  $value =~ s/"/\\"/go;
+ }
+ return $quote.$value.$quote
+}
+
+sub _control_ast_value_source_expr {
+ my ($node) = @_;
+ return undef unless ref($node) eq 'HASH';
+ my $kind = $node->{kind} // '';
+
+ if ($kind eq 'number') {
+  my $source = $node->{source};
+  return $source if defined($source) && $source =~ /\A-?\d+(?:\.\d+)?\z/o;
+  return defined($node->{value}) ? (''.$node->{value}) : undef;
+ }
+ return _control_ast_quote_string_source($node->{value}, $node->{quote})
+  if $kind eq 'string';
+ return 'undef' if $kind eq 'undef';
+ return $node->{value} ? 'true' : 'false'
+  if $kind eq 'boolean';
+ return '/'.($node->{pattern} // '').'/'.($node->{flags} // '')
+  if $kind eq 'regex';
+ return $node->{name}
+  if $kind eq 'variable' && defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ if ($kind eq 'indexed_var') {
+  return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $index = _control_ast_value_source_expr($node->{index});
+  return undef unless defined($index) && length($index);
+  return $node->{name}.'['.$index.']'
+ }
+ if ($kind eq 'nested_access') {
+  return undef unless defined($node->{base}) && $node->{base} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $expr = $node->{base};
+  foreach my $segment (@{$node->{segments} || []}) {
+   return undef unless ref($segment) eq 'HASH';
+   if (($segment->{kind} // '') eq 'key') {
+    my $quote = '"';
+    $quote = $1 if defined($segment->{source}) && $segment->{source} =~ /\A\[\s*(['"])/s;
+    $expr .= '['._control_ast_quote_string_source($segment->{value}, $quote).']';
+    next;
+   }
+   return undef unless ($segment->{kind} // '') eq 'index';
+   my $index = _control_ast_value_source_expr($segment->{expr});
+   return undef unless defined($index) && length($index);
+   $expr .= '['.$index.']';
+  }
+  return $expr
+ }
+ if ($kind eq 'array_literal') {
+  my @items;
+  foreach my $item (@{$node->{items} || []}) {
+   my $item_expr = _control_ast_value_source_expr($item);
+   return undef unless defined($item_expr) && length($item_expr);
+   push @items, $item_expr;
+  }
+  return '['.join(', ', @items).']'
+ }
+ if ($kind eq 'hash_literal') {
+  my @pairs;
+  foreach my $entry (@{$node->{entries} || []}) {
+   return undef unless ref($entry) eq 'HASH';
+   my $key_expr = _control_ast_value_source_expr($entry->{key});
+   my $value_expr = _control_ast_value_source_expr($entry->{value});
+   return undef unless defined($key_expr) && length($key_expr);
+   return undef unless defined($value_expr) && length($value_expr);
+   push @pairs, $key_expr.' => '.$value_expr;
+  }
+  return '{'.join(', ', @pairs).'}'
+ }
+ if ($kind eq 'call') {
+  return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my @args;
+  foreach my $arg (@{$node->{args} || []}) {
+   my $arg_expr = _control_ast_value_source_expr($arg);
+   return undef unless defined($arg_expr) && length($arg_expr);
+   push @args, $arg_expr;
+  }
+  return $node->{name}.'('.join(', ', @args).')'
+ }
+ if ($kind eq 'fluent_chain') {
+  my $receiver = _control_ast_value_source_expr($node->{receiver});
+  return undef unless defined($receiver) && length($receiver);
+  my $expr = $receiver;
+  foreach my $call (@{$node->{calls} || []}) {
+   return undef unless ref($call) eq 'HASH';
+   my $method = $call->{method};
+   return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+   my @args;
+   foreach my $arg (@{$call->{args} || []}) {
+    my $arg_expr = _control_ast_value_source_expr($arg);
+    return undef unless defined($arg_expr) && length($arg_expr);
+    push @args, $arg_expr;
+   }
+   $expr .= '.'.$method.'('.join(', ', @args).')';
+  }
+  return $expr
+ }
+ return undef
+}
+
+sub _control_ast_action_block_source {
+ my ($block) = @_;
+ return undef unless ref($block) eq 'HASH' && ($block->{kind} // '') eq 'action_block';
+ my @statements;
+ foreach my $stmt (@{$block->{statements} || []}) {
+  my $source = _control_ast_statement_source_expr($stmt);
+  return undef unless defined($source) && length($source);
+  push @statements, $source;
+ }
+ return join('; ', @statements)
+}
+
+sub _control_ast_statement_source_expr {
+ my ($stmt_or_node) = @_;
+ return undef unless ref($stmt_or_node) eq 'HASH';
+ my $node = (($stmt_or_node->{kind} // '') eq 'action_stmt') ? $stmt_or_node->{expr} : $stmt_or_node;
+ return undef unless ref($node) eq 'HASH';
+ my $kind = $node->{kind} // '';
+
+ if ($kind eq 'assign_scalar') {
+  my $value = _control_ast_value_source_expr($node->{value});
+  return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  return undef unless defined($value) && length($value);
+  return $node->{name}.' = '.$value
+ }
+ if ($kind eq 'assign_array_append') {
+  my $value = _control_ast_value_source_expr($node->{value});
+  return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  return undef unless defined($value) && length($value);
+  return $node->{name}.' += '.$value
+ }
+ if ($kind eq 'assign_hash_index') {
+  my $key = _control_ast_value_source_expr($node->{key});
+  my $value = _control_ast_value_source_expr($node->{value});
+  return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  return undef unless defined($key) && length($key) && defined($value) && length($value);
+  return $node->{name}.'['.$key.'] = '.$value
+ }
+ if ($kind =~ /\Acontrol_/o) {
+  return _control_ast_flow_node_source_expr($node)
+ }
+ return _control_ast_value_source_expr($node)
+}
+
+sub _control_ast_flow_node_source_expr {
+ my ($node) = @_;
+ return undef unless ref($node) eq 'HASH';
+ my $kind = $node->{kind} // '';
+
+ if ($kind eq 'control_if') {
+  my $keyword = $node->{keyword};
+  $keyword = (($node->{branch_role} // '') eq 'elseif') ? 'elseif' : 'if'
+   unless defined($keyword) && $keyword =~ /\A(?:if|i|when|elseif|elif)\z/o;
+  my $condition = _control_ast_value_source_expr($node->{condition});
+  return undef unless defined($condition) && length($condition);
+  my $head = $keyword.'('.$condition.')';
+  if (ref($node->{body}) eq 'HASH') {
+   my $body = _control_ast_action_block_source($node->{body});
+   return undef unless defined $body;
+   return $head.' { '.$body.' }'
+  }
+  return $head
+ }
+
+ if ($kind eq 'control_else') {
+  my $keyword = $node->{keyword};
+  $keyword = 'else' unless defined($keyword) && $keyword =~ /\A(?:else|otherwise)\z/o;
+  if (ref($node->{body}) eq 'HASH') {
+   my $body = _control_ast_action_block_source($node->{body});
+   return undef unless defined $body;
+   return $keyword.' { '.$body.' }'
+  }
+  return $keyword
+ }
+
+ return 'endif()' if $kind eq 'control_endif';
+ return undef
+}
+
+sub _control_ast_flow_source_expr {
+ my ($expr, $deps) = @_;
+ my $node = ref($expr) eq 'HASH' ? $expr : _parse_control_flow_ast_expr($expr, $deps);
+ return undef unless ref($node) eq 'HASH' && (($node->{kind} // '') =~ /\Acontrol_(?:if|else|endif)\z/o);
+ return _control_ast_flow_node_source_expr($node)
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_if_flow_statement
 # Purpose : Lower `if(...)`/`i(...)` fluent control-flow markers.
@@ -375,6 +576,9 @@ sub _parse_method_expr_with_optional_attached_block {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+
+ my $ast_expr = _control_ast_flow_source_expr($expr, $deps);
+ $expr = $ast_expr if defined($ast_expr) && length($ast_expr);
 
  my $trimmed = _normalize_bare_zero_arg_flow_marker_expr($expr, $deps);
  return undef unless defined($trimmed) && length($trimmed);

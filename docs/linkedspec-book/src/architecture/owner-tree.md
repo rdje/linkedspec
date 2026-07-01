@@ -413,9 +413,10 @@ Helper-call statements and returns now consume AST `call` fields, and array end-
 receiver statements consume AST `fluent_chain` fields. Expression-valued block side
 effects, block-local returns, and final expressions now consume AST block/statement
 fields. The parser seam now also emits typed control nodes for attached and marker
-`if`/`when`/`otherwise`, `switch`/`case`/`default`, and `while` forms. Structured
-control-flow lowering still migrates family by family, so any remaining source-text
-lowering is legacy debt rather than the model for new work.
+`if`/`when`/`otherwise`, `switch`/`case`/`default`, and `while` forms. `if`/`when`/`otherwise`
+lowering now consumes typed condition and body nodes before reusing the existing branch
+engine. Switch/case/default and while still migrate family by family, so any remaining
+source-text lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`
 

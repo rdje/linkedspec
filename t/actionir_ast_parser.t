@@ -197,6 +197,111 @@ subtest 'structured control forms parse as typed AST nodes' => sub {
     is($inline_switch->{name}, 'switch', 'inline value switch keeps its helper name');
 };
 
+subtest 'if-family control lowering consumes AST nodes' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $call = sub {
+        my ($name, @args) = @_;
+        return { kind => 'call', name => $name, source => '__bad_call_'.$name.'__()', args => \@args };
+    };
+    my $stmt = sub {
+        my ($expr) = @_;
+        return { kind => 'action_stmt', source => '__bad_stmt_source__()', expr => $expr };
+    };
+    my $block_return = sub {
+        my ($name) = @_;
+        return {
+            kind => 'action_block',
+            source => '__bad_block_source__()',
+            statements => [$stmt->($call->('return', $var->($name)))],
+        };
+    };
+    my $control_if = sub {
+        my ($keyword, $condition, $return_name) = @_;
+        my $branch_role = ($keyword eq 'elseif' || $keyword eq 'elif') ? 'elseif' : 'if';
+        return {
+            kind => 'control_if',
+            source => '__bad_control_'.$keyword.'__()',
+            keyword => $keyword,
+            canonical_keyword => $branch_role eq 'elseif' ? 'elseif' : 'if',
+            branch_role => $branch_role,
+            condition => $var->($condition),
+            body => defined($return_name) ? $block_return->($return_name) : undef,
+        };
+    };
+    my $control_else = sub {
+        my ($keyword, $return_name) = @_;
+        return {
+            kind => 'control_else',
+            source => '__bad_control_'.$keyword.'__()',
+            keyword => $keyword,
+            canonical_keyword => 'else',
+            branch_role => 'else',
+            body => defined($return_name) ? $block_return->($return_name) : undef,
+        };
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            return $control_if->('if', 'safe_if_flag', 'safe_then')
+                if $expr eq 'if(poison_if) { poison_then() }';
+            return $control_if->('elseif', 'safe_alt_flag', 'safe_alt')
+                if $expr eq 'elseif(poison_alt) { poison_alt_body() }';
+            return $control_else->('else', 'safe_else')
+                if $expr eq 'else { poison_else_body() }';
+            return $control_if->('when', 'safe_when_flag', 'safe_when')
+                if $expr eq 'when(poison_when) { poison_when_body() }';
+            return $control_else->('otherwise', 'safe_otherwise')
+                if $expr eq 'otherwise { poison_otherwise_body() }';
+            return $control_if->('if', 'safe_marker_flag', undef)
+                if $expr eq 'if(poison_marker)';
+            return $control_if->('elseif', 'safe_marker_alt_flag', undef)
+                if $expr eq 'elseif(poison_marker_alt)';
+            return $control_else->('else', undef)
+                if $expr eq 'else()';
+            return { kind => 'control_endif', source => '__bad_endif__()', keyword => 'endif', canonical_keyword => 'endif', args => [] }
+                if $expr eq 'endif()';
+            return $call->('return', $var->('safe_marker_then'))
+                if $expr eq 'return(poison_marker_then)';
+            return $call->('return', $var->('safe_marker_alt'))
+                if $expr eq 'return(poison_marker_alt)';
+            return $call->('return', $var->('safe_marker_else'))
+                if $expr eq 'return(poison_marker_else)';
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $attached = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{if(poison_if) { poison_then() } elseif(poison_alt) { poison_alt_body() } else { poison_else_body() }},
+        );
+        like($attached, qr/if \(safe_if_flag\) \{ return \$safe_then \} elsif \(safe_alt_flag\) \{ return \$safe_alt \} else \{ return \$safe_else \}/, 'attached if/elseif/else lowers from AST condition and body fields');
+
+        my $aliases = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{when(poison_when) { poison_when_body() } otherwise { poison_otherwise_body() }},
+        );
+        like($aliases, qr/if \(safe_when_flag\) \{ return \$safe_when \} else \{ return \$safe_otherwise \}/, 'when/otherwise aliases lower from AST condition and body fields');
+
+        my $markers = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{if(poison_marker); return(poison_marker_then); elseif(poison_marker_alt); return(poison_marker_alt); else(); return(poison_marker_else); endif()},
+        );
+        like($markers, qr/if \(safe_marker_flag\) \{; return \$safe_marker_then; \} elsif \(safe_marker_alt_flag\) \{; return \$safe_marker_alt; \} else \{; return \$safe_marker_else; \}/, 'marker if/elseif/else/endif lowers from AST condition fields');
+
+        my $all = join("\n", $attached, $aliases, $markers);
+        unlike($all, qr/poison|__bad_/, 'if-family control lowering does not reuse original text or AST source fields');
+    }
+
+    ok($parse_calls >= 9, 'if-family control lowering entered through the AST parser');
+};
+
 subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     my $parse_calls = 0;
     my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;

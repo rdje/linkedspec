@@ -10,7 +10,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, lowering, migration]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.1 inventoried StatementSplit/MethodExpr/Scanner/CanonicalEvents/RewritePipeline/MethodLowering/RuleIR::EmitContext and defined a Rust-aligned AST node set plus replacement order. RewritePipeline::_lower_action_code_from_canonical_ir currently finds raw source spans and substr-replaces them with lowered Perl; MethodLowering::_lower_method_value_expr now consumes AST for value/call/chain nodes, _lower_return_payload_expr now consumes AST for typed return payloads before raw fallback, assignment/mutation operator statements now consume AST fields, helper-call statements/returns now consume AST call/fluent-chain fields, and block-value internals now consume AST block/statement fields. The AST parser now also represents structured-control statement syntax as typed control nodes, but control-flow lowering still migrates through later .4.4 leaves. RuleIR::EmitContext still applies the rewrite to lifecycle/action blocks and auto-working-var discovery scans raw code."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.1 inventoried StatementSplit/MethodExpr/Scanner/CanonicalEvents/RewritePipeline/MethodLowering/RuleIR::EmitContext and defined a Rust-aligned AST node set plus replacement order. RewritePipeline::_lower_action_code_from_canonical_ir currently finds raw source spans and substr-replaces them with lowered Perl; MethodLowering::_lower_method_value_expr now consumes AST for value/call/chain nodes, _lower_return_payload_expr now consumes AST for typed return payloads before raw fallback, assignment/mutation operator statements now consume AST fields, helper-call statements/returns now consume AST call/fluent-chain fields, and block-value internals now consume AST block/statement fields. The AST parser now also represents structured-control statement syntax as typed control nodes, and if-family controls now lower from typed condition/body nodes; switch/case/default and while lowering still migrate through later .4.4 leaves. RuleIR::EmitContext still applies the rewrite to lifecycle/action blocks and auto-working-var discovery scans raw code."
 reverify: "rg -n '_lower_action_code_from_canonical_ir|_find_source_stmt_span|_lower_method_value_expr|_lower_return_payload_expr|_collect_auto_working_var_decls|split_action_ir_statements|_parse_method_function_expr' perl/LinkedSpec/ActionIR perl/LinkedSpec/RuleIR/EmitContext.pm"
 ---
 
@@ -28,8 +28,9 @@ text in several places:
   return payloads, assignment/mutation operator statements, and helper-call
   statements/returns. Expression-valued block side effects, block-local returns, and
   final expressions now consume AST block/statement fields. The parser seam now covers
-  typed structured-control statement nodes, while raw fallback remains for untyped
-  compatibility payloads and structured-control lowering families that later `.4.4`
+  typed structured-control statement nodes, and `if`/`when`/`otherwise` controls lower
+  from typed condition/body nodes. Raw fallback remains for untyped compatibility
+  payloads and the switch/case/default plus while lowering families that later `.4.4`
   leaves still own.
 - `RuleIR::EmitContext` applies the rewrite to action/lifecycle blocks and still scans raw
   pre-lowered code for automatic working-variable declarations.

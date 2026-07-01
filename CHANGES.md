@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.2 — lower if-family controls from AST
+
+**Scope:** Perl ActionIR control-flow lowering, focused AST parser/lowering tests, task-tree/roadmap/live docs,
+mdBook architecture status, and Knowledge Map.
+
+**What changed:** `LinkedSpec::ActionIR::ControlFlow` now parses `if`/`i`/`when`, `elseif`/`elif`,
+`else`/`otherwise`, and `endif` statements through the ActionIR AST parser before entering the existing branch
+lowering engine. The bridge materializes trusted control statements from typed condition and body nodes instead
+of reusing original statement text or AST `source` strings.
+
+**Compatibility boundary:** The generated Perl branch shape and existing attached-block, marker-style,
+implicit-close, and when/otherwise alias behavior remain unchanged. `switch`/`case`/`default` and `while`
+structured-control lowering remain queued for `.4.4.3` and `.4.4.4`.
+
+**Tests:** Syntax checks passed for `ActionIR::ControlFlow` and the focused parser test. `prove -v -Iperl
+t/actionir_ast_parser.t` passed with 17 focused subtests, including fake-source locks for attached
+if/elseif/else, when/otherwise, and marker if/elseif/else/endif. `perl -c perl/LinkedSpec.pm`,
+`perl -c -Iperl t/phase0_regression.t`, and `prove -q -Iperl t/phase0_regression.t` passed; phase0 covered
+1002 tests. `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`, and
+`bash tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.4.1 — parse structured control nodes into AST
 
 **Scope:** Perl ActionIR AST parser, focused parser tests, task-tree/roadmap/live docs, mdBook architecture
