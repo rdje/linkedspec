@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4 — statement/control AST split): Split the next migration parent
+  before code. Durable points. (1) **Operator statement nodes are first.** `.4.1` should use the AST parser's
+  existing `assign_scalar`, `assign_array_append`, and `assign_hash_index` nodes before broadening helper-call
+  statement behavior. (2) **Helper statements need slot policy.** `.4.2` owns `set`/`assign`, `push`,
+  `set_key`, array end-mutation helpers, `return`, and `return_undef` as AST `call` nodes, preserving the
+  existing symbol/value distinction. (3) **Block values remain a separate risk.** `.4.3` owns side-effect
+  statements and block-local returns inside expression-valued blocks. (4) **Control flow waits for dedicated
+  nodes.** `.4.4` owns if/when/otherwise, switch/case/default, and while forms, where parser support and
+  iteration-safety locks must move together.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.4 — return payloads from AST): Moved typed return-payload
   lowering onto the ActionIR AST consumer. Durable points. (1) **Typed payloads run before regex substitution.**
   `_lower_return_payload_expr(...)` now parses the trimmed payload with `LinkedSpec::ActionIR::AST` and accepts

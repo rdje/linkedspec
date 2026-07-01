@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.4 — statement/control AST lowering split**
+  (TASK TREE + ROADMAP/LIVE DOCS; **no runtime behavior change**). The broad statement/control migration is
+  now split before code into `.4.1` assignment/mutation operator AST nodes, `.4.2` helper-call statements and
+  returns, `.4.3` block-value side-effect traversal and block-local returns, and `.4.4` structured
+  control-flow forms. This keeps assignment operators, helper calls, expression-valued blocks, and control
+  syntax on separate verification surfaces.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.4.1` lower parsed assignment/mutation operator statement nodes
+  from AST.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.4 — return-payload AST traversal landed**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_return_payload_expr(...)` now
   parses generalized return payloads through `LinkedSpec::ActionIR::AST` and returns AST-lowered typed values

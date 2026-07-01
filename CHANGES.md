@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4 — split AST statement lowering
+
+**Scope:** Task-tree split, roadmap/task index, live continuity docs. No parser/compiler/runtime code changed.
+
+**What changed:** Split the broad statement/control AST migration parent into focused child leaves before code:
+`.4.1` assignment/mutation operator statement nodes, `.4.2` helper-call statements and returns, `.4.3`
+block-value side-effect traversal and block-local returns, and `.4.4` structured control-flow forms.
+
+**Reason:** Statement/control lowering mixes already-parsed operator nodes, helper-call statements with
+slot-sensitive argument policies, block-local return behavior, and control forms that may require new typed AST
+nodes. Splitting keeps the next executable leaf narrow and testable.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.4 — lower return payloads from AST
 
 **Scope:** Perl ActionIR method/return lowering, focused AST parser/lowering tests, mdBook architecture text,
