@@ -12,8 +12,8 @@ vhdl_file::
 LX {return(array_copy(array(vhdl_file)))}
 
 
-comment:        /--.*/                         I.declare(scalar, text=entry_text()).return(s(text))
-space:          /\s+/                          I.declare(scalar, text=entry_text()).return(s(text))
+comment:        /--.*/                         I.declare(scalar, text=entry_text()).return(scalar(text))
+space:          /\s+/                          I.declare(scalar, text=entry_text()).return(scalar(text))
 dquote_string:  /"(.+?)(?<!")"/                I.return(array("?dquote_string:", flat_array(entry_groups())))
 library_clause: /(?is)\blibrary\s+(.+?)\s*;/   I.return(array("?library_clause:", flat_array(entry_groups())))
 use_clause:     /(?is)\buse\s+(.+?)\s*;/       I.return(array("?use_clause:", flat_array(entry_groups())))

@@ -6,10 +6,10 @@ portmap::
 -> concatenation  .push
 
 LX {
-	if(num_eq(count(a(portmap)), 1));
-		return(scalar(a(portmap), 0));
+	if(num_eq(count(array(portmap)), 1));
+		return(scalar(array(portmap), 0));
 	else();
-		return(a("?multi:", array_copy(a(portmap))));
+		return(array("?multi:", array_copy(array(portmap))));
 	endif()
 }
 
@@ -17,17 +17,17 @@ LX {
 concatenation: /\{/ /\}/
 -> concatenation  .push
 -> bare_bit_slice .push
--> concatenation[1]    {return(a("?concat:", array_copy(a(concatenation))))}
+-> concatenation[1]    {return(array("?concat:", array_copy(array(concatenation))))}
 bare_bit_slice: /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])?|(?i)(0x[0-9a-f]+|0b[01]+|\d+\'\d+)/ I {
 	declare(array, entry_parts);
-	assign(a(entry_parts), entry_groups());
+	assign(array(entry_parts), entry_groups());
 	if(matches(entry_text(), /:/));
-		return(a("?slice:", a(flat_array(entry_parts))));
+		return(array("?slice:", array(flat_array(entry_parts))));
 	elseif(or(eq(entry_group(1), "0"), is_nonempty(entry_group(1))));
-		return(a("?bit:", a(flat_array(entry_parts))));
+		return(array("?bit:", array(flat_array(entry_parts))));
 	elseif(matches(entry_group(0), /^\d/io));
-		return(a("?constant:", a(flat_array(entry_parts))));
+		return(array("?constant:", array(flat_array(entry_parts))));
 	else();
-		return(a("?bare:", a(flat_array(entry_parts))));
+		return(array("?bare:", array(flat_array(entry_parts))));
 	endif()
 }

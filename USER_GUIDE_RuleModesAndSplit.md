@@ -981,12 +981,12 @@ logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*
   start_capture_slice()
 }
 -> comma {
-  push_nonempty(a(logging_annotation), trim(capture_slice()));
+  push_nonempty(array(logging_annotation), trim(capture_slice()));
   start_capture_slice()
 }
 -> logging_annotation[1] {
-  push_nonempty(a(logging_annotation), trim(capture_slice()));
-  return(a("logging_annotation", a(s(logging_name), array_copy(a(logging_annotation)))))
+  push_nonempty(array(logging_annotation), trim(capture_slice()));
+  return(array("logging_annotation", array(scalar(logging_name), array_copy(array(logging_annotation)))))
 }
 ```
 

@@ -1,15 +1,15 @@
 pplugin_top::   I {declare(array, defs); declare(scalar, retv)}
  -> comment       {next()}
- -> subdef        {assign(s(retv), call(subdef))}
+ -> subdef        {assign(scalar(retv), call(subdef))}
 
 LE {
-    if(is_defined(s(retv)));
-      assign(a(defs), a(flat_array(defs), scalaref(retv, [0]), scalaref(retv, [1])));
+    if(is_defined(scalar(retv)));
+      assign(array(defs), array(flat_array(defs), scalaref(retv, [0]), scalaref(retv, [1])));
     else();
       return_undef();
     endif()
 }
-LX {return(hash(flat_array(a(defs))))}
+LX {return(hash(flat_array(array(defs))))}
 
 
 subdef: /(?<subname>\w\S*)\s*(?<!\\)\{/ /(?<!\\)\}/
@@ -17,7 +17,7 @@ subdef: /(?<subname>\w\S*)\s*(?<!\\)\{/ /(?<!\\)\}/
  -> curlyb
  -> dquotes
  -> squotes
- -> subdef[1]	{return(a(entry_named(subname), sub {eval substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}))}
+ -> subdef[1]	{return(array(entry_named(subname), sub {eval substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}))}
 
 
 curlyb: /(?<!\\)\{/ /(?<!\\)\}/

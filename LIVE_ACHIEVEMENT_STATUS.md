@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3.1 — short wrapper aliases retired**
+  (PERL ACTIONIR + RUST CORE/RUNTIME + SPECS/FIXTURES + PHASE0 + BOOK/KM/LIVE DOCS). `s(...)`, `a(...)`, and
+  `h(...)` are no longer canonical wrapper spellings. Repo-owned specs, corpus fixtures, tests, root guides, and
+  mdBook examples now use `scalar(...)`, `array(...)`, and `hash(...)`. Perl lowering no longer normalizes the
+  short names into long wrappers; residual calls diagnose as `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:s|a|h`
+  with zero raw-Perl fallback. Rust core/runtime wrapper examples and dispatch paths now use the canonical names.
+  **Verification:** residual shorthand scan over specs/corpora clean; syntax checks PASS for touched ActionIR
+  modules/tests; `prove -Iperl t/actionir_ast_parser.t` PASS; `prove -Iperl t/phase0_regression.t` PASS with
+  phase0 **1003 tests**; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --lib` PASS with **140
+  tests**; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib` PASS with **117 tests**;
+  `mdbook build docs/linkedspec-book`, memory architecture, Knowledge Map, doctrine registry, `git diff --check`,
+  and `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.5.3.2` user-function AST call handoff.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.5.3 — short wrapper alias retirement split**
   (TASK TREE + LIVE DOCS + KM; **no parser/compiler/runtime code change**). User clarified that `s(...)`,
   `a(...)`, and `h(...)` should be retired too. Read-only discovery found active use in shipped specs, phase0

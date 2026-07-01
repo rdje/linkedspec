@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.3.1 — short wrapper aliases retired): The short wrapper spellings
+  `s(...)`, `a(...)`, and `h(...)` are no longer treated as canonical `scalar(...)` / `array(...)` /
+  `hash(...)` wrappers. Durable points. (1) **Canonical wrappers only.** Repo-owned specs, tests, root docs, and
+  mdBook examples now use `scalar(...)`, `array(...)`, and `hash(...)`. (2) **Diagnostics, not raw fallback.**
+  Residual short wrapper calls lower to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:s|a|h` and descriptor
+  unresolved-helper metadata with zero raw-Perl fallback. (3) **Long forms and direct shapes remain the surface.**
+  Existing `scalar(...)`/`array(...)`/`hash(...)` behavior stays supported, while direct `[]` / `{}` shape
+  literals remain preferred for constructor payload examples where they are clearer. (4) **Next handoff.**
+  `.5.3.2` can now focus only on user-function AST call resolution.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.5.3 — short alias retirement split): The user clarified that
   `s(...)`, `a(...)`, and `h(...)` should retire too. Durable points. (1) **Do not treat short wrappers as
   permanent syntax.** Canonical wrapper spellings are `scalar(...)`, `array(...)`, and `hash(...)`; direct shape

@@ -2,7 +2,7 @@ sub_gui_list::
  -> sub_gui	{push(sub_gui)}
  -> comment	{next()}
 
- LX {return(hash(flat_array(a(sub_gui_list))))}
+ LX {return(hash(flat_array(array(sub_gui_list))))}
 
 sub_gui: /(\S+)\s+\{/   /\}/ 	
 I {

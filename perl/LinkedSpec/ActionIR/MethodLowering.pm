@@ -765,6 +765,13 @@ sub _actionir_ast_unsupported_helper_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
 }
 
+sub _actionir_ast_retired_wrapper_alias_method {
+ my ($method) = @_;
+ return undef unless defined($method) && length($method);
+ return $method if $method =~ /^(?:s|a|h)$/o;
+ return undef
+}
+
 sub _actionir_ast_statement_method {
  my ($method) = @_;
  return undef unless defined($method) && length($method);
@@ -797,9 +804,8 @@ sub _actionir_ast_expected_statement_method {
 sub _actionir_ast_known_value_call_method {
  my ($method) = @_;
  return undef unless defined($method) && length($method);
- return 'scalar' if $method eq 's';
- return 'array' if $method eq 'a';
- return 'hash' if $method eq 'h';
+ my $retired_alias = _actionir_ast_retired_wrapper_alias_method($method);
+ return $retired_alias if defined($retired_alias) && length($retired_alias);
  return 'concat' if $method eq 'cat';
  my $numeric_alias = _numeric_word_alias_helper_name($method);
  return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
@@ -1217,10 +1223,10 @@ sub _lower_method_value_expr {
  my $split_top_level_csv = $require_dep->('split_top_level_csv');
  my $lower_array_pipeline_expr = $require_dep->('lower_array_pipeline_expr');
  my $strip_literal_delimiters = $require_dep->('strip_literal_delimiters');
- my $array_container_prefix_re = qr/^(?:array|a)\s*\(/;
- my $hash_container_prefix_re = qr/^(?:hash|h)\s*\(/;
- my $array_symbol_expr_re = qr/^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/;
- my $hash_symbol_expr_re = qr/^(?:(?:hash|h)\s*\(\s*\w+\s*\)|\w+)$/;
+ my $array_container_prefix_re = qr/^array\s*\(/;
+ my $hash_container_prefix_re = qr/^hash\s*\(/;
+ my $array_symbol_expr_re = qr/^(?:array\s*\(\s*\w+\s*\)|\w+)$/;
+ my $hash_symbol_expr_re = qr/^(?:hash\s*\(\s*\w+\s*\)|\w+)$/;
  my ($looks_like_array_value_expr, $looks_like_hash_value_expr);
  my ($lower_shape_literal_value_expr, $lower_shape_member_expr);
  my $split_top_level_fat_arrow = sub {
@@ -1522,7 +1528,7 @@ sub _lower_method_value_expr {
 
   # SPEC-FORMAT-TERSE.1.4.1 — the unified terse `copy(X)` is array-like iff X names an array
   # symbol (mirrors the lowering dispatch's array-first resolution); a bare `copy(x)` is
-  # array-like. This keeps `copy` first-class in array type-inference (e.g. num_sum(copy(a(x)))).
+  # array-like. This keeps `copy` first-class in array type-inference (e.g. num_sum(copy(array(x)))).
   if ($candidate_method eq 'copy') {
    my $copy_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 1, 1);
    return 0 unless $copy_args;
@@ -1574,7 +1580,7 @@ sub _lower_method_value_expr {
 
   # SPEC-FORMAT-TERSE.1.4.1 — `copy(X)` is hash-like iff X names a hash symbol AND does NOT
   # resolve as an array (array-first precedence, mirroring the lowering dispatch), so a bare
-  # `copy(x)` / `copy(a(x))` stays array-only and is never double-classified.
+  # `copy(x)` / `copy(array(x))` stays array-only and is never double-classified.
   if ($candidate_method eq 'copy') {
    my $copy_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 1, 1);
    return 0 unless $copy_args;
@@ -1772,9 +1778,6 @@ sub _lower_method_value_expr {
  my $normalize_ast_call_method = sub {
   my ($method) = @_;
   return undef unless defined($method) && length($method);
-  return 'scalar' if $method eq 's';
-  return 'array' if $method eq 'a';
-  return 'hash' if $method eq 'h';
   return 'concat' if $method eq 'cat';
   my $numeric_alias = _numeric_word_alias_helper_name($method);
   return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
@@ -1800,6 +1803,8 @@ sub _lower_method_value_expr {
  };
  my $ast_known_call_method = sub {
   my ($method) = @_;
+  my $retired_alias = _actionir_ast_retired_wrapper_alias_method($method);
+  return $retired_alias if defined($retired_alias) && length($retired_alias);
   $method = $normalize_ast_call_method->($method);
   return undef unless defined($method) && length($method);
   return $method
@@ -2390,7 +2395,7 @@ sub _lower_method_value_expr {
   }
 
   if (_is_array_receiver_value_chain_method($first_method)) {
-   return undef if defined($receiver_expr) && $receiver_expr =~ /^(?:hash|h)\s*\(/o;
+   return undef if defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
    my $current_expr = $receiver_expr;
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
@@ -2549,8 +2554,8 @@ sub _lower_method_value_expr {
    return '$IMATCH_LIST['.$key_trimmed.']';
   }
 
-  my ($explicit_array_symbol) = $container_trimmed =~ /^(?:array|a)\s*\(\s*(\w+)\s*\)$/o;
-  my ($explicit_hash_symbol) = $container_trimmed =~ /^(?:hash|h)\s*\(\s*(\w+)\s*\)$/o;
+  my ($explicit_array_symbol) = $container_trimmed =~ /^array\s*\(\s*(\w+)\s*\)$/o;
+  my ($explicit_hash_symbol) = $container_trimmed =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
   my $array_symbol = $explicit_array_symbol || $extract_array_symbol_name->($container_trimmed);
   my $hash_symbol = $explicit_hash_symbol || $extract_hash_symbol_name->($container_trimmed);
   my $key_lowered = $lower_scalar_access_key_expr->($key_trimmed);
@@ -3769,8 +3774,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
  # SPEC-FORMAT-TERSE.1.4.1 — unified terse `copy(NAME)` that subsumes both `array_copy`
  # and `hash_copy` (ADR 0007). `copy` is NOT a pure rename: it resolves the wrapped symbol
  # kind at lowering time, array first (mirroring `array_copy` -> `[@sym]`) then hash
- # (mirroring `hash_copy` -> `{%sym}`), so `copy(a(x))` == `array_copy(a(x))` (`[@x]`) and
- # `copy(h(x))` == `hash_copy(h(x))` (`{%x}`). A bare `copy(x)` resolves to the array form
+ # (mirroring `hash_copy` -> `{%sym}`), so `copy(array(x))` == `array_copy(array(x))`
+ # (`[@x]`) and `copy(hash(x))` == `hash_copy(hash(x))` (`{%x}`). A bare `copy(x)` resolves to the array form
  # (the array branch claims the `\w+` symbol first), matching bare `array_copy(x)`.
  if ($method_call && $method_call->{method} eq 'copy') {
   my $copy_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -3791,7 +3796,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
  }
  my $pipeline_expr = $lower_array_pipeline_expr->($trimmed);
  return $pipeline_expr if defined($pipeline_expr) && length($pipeline_expr);
- if ($trimmed =~ /^(?:hash|h)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
+ if ($trimmed =~ /^hash\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
   my $args = $split_top_level_csv->($payload);
@@ -3819,7 +3824,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   }
   return '{'.join(', ', @pairs).'}';
  }
- if ($trimmed =~ /^(?:array|a)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
+ if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
   my $args = $split_top_level_csv->($payload);
@@ -3926,7 +3931,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
  return $direct;
  }
@@ -3939,7 +3944,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|s|array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|a|hash|h)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;
@@ -4270,7 +4275,7 @@ sub _normalize_array_receiver_value_chain_expr {
  my $split = _split_receiver_dot_method_expr($trimmed, $trim_action_ir_value);
  return undef unless $split;
  my ($receiver_expr, $tail_expr) = @$split;
- return undef if defined($receiver_expr) && $receiver_expr =~ /^(?:hash|h)\s*\(/o;
+ return undef if defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
 
  my @calls;
  while (defined($tail_expr) && length($tail_expr)) {
@@ -4579,7 +4584,7 @@ sub _parse_array_end_mutation_method_statement {
  my $split = _split_receiver_dot_method_expr($trimmed, $trim_action_ir_value);
  return undef unless $split;
  my ($receiver_expr, $call_expr) = @$split;
- return undef unless defined($receiver_expr) && $receiver_expr =~ /^(?:[A-Za-z_][A-Za-z0-9_]*|(?:array|a)\s*\()/o;
+ return undef unless defined($receiver_expr) && $receiver_expr =~ /^(?:[A-Za-z_][A-Za-z0-9_]*|array\s*\()/o;
  my $target_symbol = $extract_array_symbol_name->($receiver_expr);
  if (!defined($target_symbol) && defined($receiver_expr) && $receiver_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
   $target_symbol = $1;

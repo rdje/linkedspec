@@ -14,15 +14,9 @@ array(items)
 hash(meta)
 ```
 
-Short aliases also exist:
-
-```text
-s(name)
-a(items)
-h(meta)
-```
-
-These aliases are DSL spellings. They are not Perl sigils.
+These are DSL spellings. They are not Perl sigils. Older short wrapper aliases `s(...)`,
+`a(...)`, and `h(...)` are retired; public examples and migrated specs use the canonical
+forms above.
 
 For aggregate wrappers, a single **bare** name token names a working variable: `array(items)` reads the
 array/list working variable `items`, and `hash(meta)` reads the hash/associative-array working variable

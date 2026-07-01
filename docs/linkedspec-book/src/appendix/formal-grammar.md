@@ -744,6 +744,7 @@ tracking but not recommended for new `.spec` authoring:
 
 - Raw Perl expressions and ad hoc operators outside the documented helper/operator slots
 - `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` (retired)
+- `s(...)`, `a(...)`, `h(...)` — use `scalar(...)`, `array(...)`, `hash(...)`
 - `array_values(...)` — use `array_copy(...)`
 - `flatten(...)` — use `flat(...)`
 - `tail(...)` — use `drop_front(...)`

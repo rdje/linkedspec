@@ -12,20 +12,20 @@ Not every user-facing construct looks like a modern method DSL call. LinkedSpec 
 
 For new backend-neutral authoring, many of these are still valid, but some are better treated as compatibility forms rather than defaults.
 
-## Concise container aliases
-The core container/value wrappers also accept short aliases:
-- `s(...)` = `scalar(...)`
-- `a(...)` = `array(...)`
-- `h(...)` = `hash(...)`
+## Canonical container wrappers
+The core container/value wrappers are:
+- `scalar(...)`
+- `array(...)`
+- `hash(...)`
 
-These are concise DSL spellings only. They do not introduce Perl-style sigil syntax.
+These are LinkedSpec DSL spellings. They do not introduce Perl-style sigil syntax. Older short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are retired; use the canonical forms in specs and examples.
 
 Examples:
 
 ```text
-assign(s(name), entry_text())
-assign(a(parts), a("A", "B"))
-return(h("kind", entry_named(kind), "count", count(a(parts))))
+assign(scalar(name), entry_text())
+assign(array(parts), array("A", "B"))
+return(hash("kind", entry_named(kind), "count", count(array(parts))))
 ```
 
 ## `call(rule)`
@@ -538,7 +538,7 @@ Top::AND
  -> Top[2] { return(array("?Top:", scalar(tail), capture_rest_len())) }
 ```
 
-Use it when the rule should begin a new anonymous capture slice explicitly from inside a lifecycle or action block, instead of spelling `assign(s(IPOS), cursor_pos())` directly. `capture_slice_here()` remains supported as a compatibility alias.
+Use it when the rule should begin a new anonymous capture slice explicitly from inside a lifecycle or action block, instead of spelling `assign(scalar(IPOS), cursor_pos())` directly. `capture_slice_here()` remains supported as a compatibility alias.
 
 ### `start_capture_slice_from(name)`
 Reset the current anonymous capture boundary from a stored rule-local named mark.

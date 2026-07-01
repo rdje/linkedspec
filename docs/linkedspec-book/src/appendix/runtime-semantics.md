@@ -235,7 +235,7 @@ Bare scalar reads are currently supported in return and assignment-like source s
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`
 removes the last element, and `items.pop_front()` removes the first element. The receiver
-may be bare (`items`) or explicitly typed (`array(items)` / `a(items)`). Push values use
+may be bare (`items`) or explicitly typed (`array(items)`). Push values use
 the same mutation-slot expression rules as `items += value`, so a bare value reads the
 scalar working variable (`$value` on the Perl reference). The pop methods discard the
 removed value; value-returning forms such as `return(items.pop_back())` are not part of
@@ -324,13 +324,13 @@ the first element is a string tag of the form `"?<rule>:"` naming the producing 
 the payload after it.
 
 ```text
-object: /(?i)\nobject:\s+(\S+)/  I.return(a("?object:", flat_array(entry_groups())))
+object: /(?i)\nobject:\s+(\S+)/  I.return(array("?object:", flat_array(entry_groups())))
 ```
 A match of `object: foo` produces `["?object:", "foo"]`; a tag-only form is used when a
 node carries no payload:
 
 ```text
-manifest: /(?is)\nmanifest:\s+.+?\n\n/  I.return(a("?manifest:"))
+manifest: /(?is)\nmanifest:\s+.+?\n\n/  I.return(array("?manifest:"))
 ```
 → `["?manifest:"]`.
 
@@ -341,7 +341,7 @@ string, the convention lives only in the *spelling*, and a backend needs no tag-
 machinery — it simply builds whatever array, hash, or scalar the spec asks for. You are
 free to use a different convention, or none at all. (Specs that happen to use the tagged
 style include `ds_vhistory.spec`, `portmap.spec`, `vhdl.spec`, and `regdef.spec`;
-`a(...)` is the array constructor, an alias of `array(...)`, and `flat_array(...)` splices
+`array(...)` is the array constructor, and `flat_array(...)` splices
 an array-valued expression such as `entry_groups()` into the array.)
 
 ### 5.7 `return(...)` versus the accumulator

@@ -468,7 +468,7 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3 - split short alias retirement`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.3.1`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Retire `s(...)`, `a(...)`, and `h(...)` shorthand wrapper aliases.
   Acceptance: Repo-owned specs, tests, and user-facing docs migrate to canonical
     `scalar(...)`, `array(...)`, and `hash(...)` forms. Perl ActionIR lowering no longer
@@ -476,8 +476,20 @@ and host-language fallback are migration debt.
     removed or fenced as explicit compatibility debt with metadata/tests. Existing long
     forms remain supported, and direct shape literals remain the preferred constructor
     surface where applicable.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Migrated shipped specs, corpus fixtures, phase0
+    source locks, root guides, and mdBook examples/reference pages from short wrappers
+    to canonical wrappers. Perl ActionIR symbol extraction, method/value lowering,
+    flow inference, scanner contracts, and direct compatibility rewrite paths no longer
+    normalize `s`/`a`/`h` into `scalar`/`array`/`hash`; retired short wrappers now report
+    unresolved-helper diagnostics with zero raw-Perl fallback. Rust core/runtime tests
+    and examples now use canonical wrapper names. Checks passed: residual shorthand scan
+    over repo-owned specs/corpora; `perl -Iperl -c` for touched ActionIR modules and
+    phase0/actionir tests; `prove -Iperl t/actionir_ast_parser.t`; `prove -Iperl
+    t/phase0_regression.t` (1003 tests); `cargo test --manifest-path rust/Cargo.toml -p
+    linkedspec-core --lib`; `cargo test --manifest-path rust/Cargo.toml -p
+    linkedspec-runtime --lib`; `mdbook build docs/linkedspec-book`; memory architecture,
+    Knowledge Map, doctrine registry, `git diff --check`; and `bash tools/run_ci_local.sh`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3.1 - retire short wrapper aliases`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.3.2`
   Status: `pending`
@@ -527,7 +539,8 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.1` | `done` 2026-07-01 | Remaining fallback boundaries audited and classified before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.2` | `done` 2026-07-01 | Supported standalone value statements now lower as discarded `VALUE_DROP` nodes, while malformed covered helpers diagnose and compatibility/user-function fences remain intact. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.5.3` | `split` 2026-07-01 | User-function handoff split so `s`/`a`/`h` shorthand wrapper retirement is owned before code. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | `pending` | Retire `s(...)`, `a(...)`, and `h(...)` shorthand wrapper aliases. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | `done` 2026-07-01 | Short wrapper aliases now retire through unresolved-helper diagnostics and repo-owned specs/docs use canonical wrappers. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.5.3.2` | `pending` | Resume user-function AST call handoff now that wrapper alias retirement is complete. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -1060,6 +1073,7 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3.1` | Migrated repo-owned specs/corpus fixtures/tests/docs/book to `scalar(...)`/`array(...)`/`hash(...)`; removed Perl/Rust lowering normalization of `s(...)`/`a(...)`/`h(...)`; added retired-helper diagnostics lock; syntax checks; focused ActionIR suite; phase0 1003 tests; Rust core/runtime library tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Short wrapper aliases are no longer treated as canonical wrapper spellings. Residual `s`/`a`/`h` calls diagnose as unresolved helpers with zero raw fallback, and the public docs/book now teach canonical wrappers only. Frontier moves to `.5.3.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.3` | Read-only `rg` usage discovery for `s(...)`, `a(...)`, and `h(...)` across `specs/`, `t/`, mdBook, task trees, and Knowledge Map; task-tree/live-doc/KM updates; memory/doctrine/KM/diff checks | User policy that short wrapper aliases must be retired is now owned before code. `.5.3` is split into `.5.3.1` short-wrapper alias retirement and `.5.3.2` user-function AST call handoff. Frontier moves to `.5.3.1`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.2` | Added dropped-value statement lowering through typed AST value traversal; added scanner/canonical/rewrite metadata for `VALUE_DROP`; preserved compatibility `s(...)`/`a(...)`/`h(...)` value-expression substitution; focused syntax checks for touched ActionIR modules, `perl/LinkedSpec.pm`, and `t/actionir_ast_parser.t`; focused AST suite with 20 subtests; phase0 1002 tests; mdBook/memory/doctrine/KM/diff checks; full local CI | Supported standalone value statements such as `trim(" x ")`, `concat("a","b")`, and `" x ".trim()` no longer remain raw fallback and now lower as discarded values. Malformed covered standalone helpers diagnose through unresolved-helper metadata without raw fallback. Unknown user-function-shaped calls/chains remain `.5.3` handoff work. Frontier moves to `.5.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.5.1` | TOOLBOX `call_spec_handler_subst`, descriptor metadata, and AST parser probes for malformed covered helpers, compatibility payloads, retired helpers, raw statements, all-bare `push(A,B)`, unknown calls/chains, and `fn` grammar ownership; code reads of `CanonicalEvents`, `RewritePipeline`, `RuleIR::EmitContext`, `MethodLowering`, and `ActionIR::AST::Parser`; mdBook/live-doc/KM updates; `mdbook build docs/linkedspec-book`, memory/doctrine/KM/diff checks, and full local CI with phase0 1002 tests | Remaining fallback boundaries are classified before code: AST-covered malformed helpers already diagnose as unresolved, retired/non-DSL/raw surfaces stay compatibility debt, all-bare `push(A,B)` remains child-call ambiguity, unknown typed calls/chains are `.5.3` user-function handoff risk, and `fn` definition grammar remains `.5.4`/`specs/spec.spec` ownership. Frontier moves to `.5.2`. |

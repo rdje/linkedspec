@@ -1,8 +1,8 @@
 grep::
- -> re_term	{assign(s(retv), call(re_term))}
- -> or_op	{assign(s(retv), call(or_op))}
- -> and_op	{assign(s(retv), call(and_op))}
- -> group	{assign(s(retv), call(group))}
+ -> re_term	{assign(scalar(retv), call(re_term))}
+ -> or_op	{assign(scalar(retv), call(or_op))}
+ -> and_op	{assign(scalar(retv), call(and_op))}
+ -> group	{assign(scalar(retv), call(group))}
 
 I {
  declare(array, internal);
@@ -33,10 +33,10 @@ LE {
 
 
 group:	/\(/ /\)/
- -> group		{assign(s(retv), call(group))}
- -> re_term		{assign(s(retv), call(re_term))}
- -> or_op		{assign(s(retv), call(or_op))}
- -> and_op		{assign(s(retv), call(and_op))}
+ -> group		{assign(scalar(retv), call(group))}
+ -> re_term		{assign(scalar(retv), call(re_term))}
+ -> or_op		{assign(scalar(retv), call(or_op))}
+ -> and_op		{assign(scalar(retv), call(and_op))}
  -> group[1]		{
   if(is_empty(array(internal)));
    print("\\nERROR: ** Empty **  GROUP\\n");

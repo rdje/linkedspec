@@ -223,24 +223,24 @@ The closing parenthesis edge finalizes the current form:
 ```text
 -> parenthesis[1] {
   ...
-  if(s(has_head));
-   if(is_nonempty(a(tail)));
-    return(a(s(head), array_copy(a(tail))));
+  if(scalar(has_head));
+   if(is_nonempty(array(tail)));
+    return(array(scalar(head), array_copy(array(tail))));
    else();
-    return(a(s(head), undef));
+    return(array(scalar(head), undef));
    endif();
   else();
-   return(a(undef));
+   return(array(undef));
   endif()
 }
 ```
 
-The short aliases matter:
+The canonical wrappers matter:
 
-- `s(head)` means scalar variable `head`.
-- `a(tail)` means array variable `tail`.
-- `array_copy(a(tail))` snapshots the tail elements into the returned array shape.
-- `return(a(...))` returns an array payload.
+- `scalar(head)` means scalar variable `head`.
+- `array(tail)` means array variable `tail`.
+- `array_copy(array(tail))` snapshots the tail elements into the returned array shape.
+- `return(array(...))` returns an array payload.
 
 This is a good real example of why helper DSL matters. The rule contains recursion, accumulation, conditional flow, child calls, array pushes, and structured returns without falling back to ad hoc raw Perl for the core dataflow.
 
@@ -251,19 +251,19 @@ The token readers are intentionally small.
 Double-quoted strings:
 
 ```text
-dquotes: /"(.*?)(?<!\\)"/     I.return(h("type", "DQUOTES", "content", entry_group(0)))
+dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_group(0)))
 ```
 
 Single-quoted strings:
 
 ```text
-squotes: /'(.*?)(?<!\\)'/     I.return(h("type", "SQUOTES", "content", entry_group(0)))
+squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
 ```
 
 Ordinary atoms:
 
 ```text
-others: /[^\s\"\{\}\(\)\[\];]+/  I.return(h("type", "OTHERS", "content", entry_text()))
+others: /[^\s\"\{\}\(\)\[\];]+/  I.return(hash("type", "OTHERS", "content", entry_text()))
 ```
 
 These rules return typed hashes, but the parent `parenthesis` rule usually extracts only the `content` field:
@@ -324,7 +324,7 @@ The square-bracket reader preserves the brackets as content. The curly-brace rea
 The comment rule is:
 
 ```text
-comments: /;.*\n/           I.return(h("type", "COMMENTS", "content", entry_text()))
+comments: /;.*\n/           I.return(hash("type", "COMMENTS", "content", entry_text()))
 ```
 
 Inside `parenthesis`, comments are called but not pushed into the head/tail content:

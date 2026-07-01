@@ -19,9 +19,6 @@ sub _trim_method_expr_value {
 sub _normalize_method_name {
  my ($method) = @_;
  return undef unless defined $method;
- return 'scalar' if $method eq 's';
- return 'array' if $method eq 'a';
- return 'hash' if $method eq 'h';
  # SPEC-FORMAT-TERSE.1.4.1 — terse helper-rename aliases (canonical-new + deprecated-old,
  # gradual migration per ADR 0007). `cat` is a pure value-expression rename of `concat`;
  # `set` is the rename of the statement-level `assign` (the raw-text statement recognizers

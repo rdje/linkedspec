@@ -423,7 +423,7 @@ Important nuance:
 - `capture_slice_line()` returns the 1-based line number of that same anonymous capture boundary, so later diagnostics can report where the current slice started without counting newlines from `$IPOS` by hand.
 - `capture_slice_col()` returns the 1-based column number of that same anonymous capture boundary, so later diagnostics can report where the current slice started on its line without spelling raw `$IPOS`-plus-newline math inline.
 - `capture_slice_length()` is a longer compatibility alias for `capture_slice_len()`, and older migration helpers `capture_from_rule_start()` / `capture_len_from_rule_start()` still lower to the same code.
-- `start_capture_slice()` is the preferred explicit code-block write form for that same anonymous capture boundary, so later anonymous capture helpers start from the current parser position without spelling `assign(s(IPOS), cursor_pos())` directly.
+- `start_capture_slice()` is the preferred explicit code-block write form for that same anonymous capture boundary, so later anonymous capture helpers start from the current parser position without spelling `assign(scalar(IPOS), cursor_pos())` directly.
 - `start_capture_slice_from(name)` is the explicit named-to-anonymous bridge: it reads one stored rule-local mark and resets `$IPOS` to that remembered boundary when the mark exists.
 - `capture_slice_here()` remains supported as a compatibility alias for `start_capture_slice()`.
 - `capture_rest()` reads from that same anonymous capture boundary through end-of-input, so it is the explicit helper form of the old raw tail-capture pattern `substr($$STRING, $IPOS, length($$STRING) - $IPOS)`.

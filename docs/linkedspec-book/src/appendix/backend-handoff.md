@@ -26,8 +26,9 @@ values. It also lowers value-only helper-call composition from AST `call` nodes 
 scalar normalization, string predicate/composition, coalesce/concat, and scalar-argument
 numeric helpers. It also lowers aggregate-wrapper, collection/reducer, and hash helper
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
-Deprecated wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)` remain
-compatibility syntax, not the canonical destination surface. Unsupported covered helper
+Canonical wrappers `scalar(...)`/`array(...)`/`hash(...)` remain the destination
+surface; short wrapper aliases `s(...)`/`a(...)`/`h(...)` are retired and should be reported
+as unresolved helpers rather than normalized. Unsupported covered helper
 forms now report unresolved-helper metadata instead of leaking as generated host-language
 calls. Receiver-dot value chains now lower from AST `fluent_chain` nodes for the array,
 hash, string, and number receiver families before the legacy receiver-dot text normalizers

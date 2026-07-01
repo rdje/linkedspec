@@ -116,7 +116,7 @@ while ($code =~ /\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"
  my $value_expr = _trim_action_ir_value($effective_args->[1]);
  next unless defined($target_expr) && length($target_expr);
  next unless defined($value_expr) && length($value_expr);
- my ($target_symbol) = $target_expr =~ /^(?:array|a)\s*\(\s*(\w+)\s*\)$/o;
+ my ($target_symbol) = $target_expr =~ /^array\s*\(\s*(\w+)\s*\)$/o;
  if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
   $target_symbol = $1;
  }
@@ -144,7 +144,7 @@ while ($code =~ /\b(?<expr>push_nonempty\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.
   push @events, {raw => $raw_expr, args => {}};
   next;
  }
- my ($target_symbol) = $target_expr =~ /^(?:array|a)\s*\(\s*(\w+)\s*\)$/o;
+ my ($target_symbol) = $target_expr =~ /^array\s*\(\s*(\w+)\s*\)$/o;
  if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
   $target_symbol = $1;
  }
@@ -259,10 +259,10 @@ sub _parse_array_end_mutation_method_statement {
  }
  return undef unless defined($receiver_expr) && length($receiver_expr);
  return undef unless defined($call_expr) && length($call_expr);
- return undef unless $receiver_expr =~ /^(?:[A-Za-z_][A-Za-z0-9_]*|(?:array|a)\s*\()/o;
+ return undef unless $receiver_expr =~ /^(?:[A-Za-z_][A-Za-z0-9_]*|array\s*\()/o;
 
  my ($target_symbol) = defined($receiver_expr)
-  ? ($receiver_expr =~ /^(?:array|a)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o)
+  ? ($receiver_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o)
   : ();
  if (!defined($target_symbol) && defined($receiver_expr) && $receiver_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
   $target_symbol = $1;
@@ -413,7 +413,7 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
  my $key_expr = _trim_action_ir_value($effective_args->[1]);
  my $value_expr = _trim_action_ir_value($effective_args->[2]);
  next unless defined($target_expr) && length($target_expr);
- my ($target_symbol) = $target_expr =~ /^(?:hash|h)\s*\(\s*(\w+)\s*\)$/o;
+ my ($target_symbol) = $target_expr =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
  if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
   $target_symbol = $1;
  }
@@ -433,7 +433,7 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_regex_subst {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:(?:scalar|s)\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/g) {
+while ($code =~ /\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/g) {
  push @events, {raw => $&, args => {scope => $+{scope}, target => $+{target}, pattern => $+{pattern}, replacement => $+{replacement}, flags => $+{flags}}};
 }
  return \@events

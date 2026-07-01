@@ -140,7 +140,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` (and the `s()`/`a()`/`h()` aliases) reference a per-rule working variable. Aggregate wrapper names are bare tokens: `array(items)` reads the working array `items`, and `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. Use `scalar(name)` as the target when you intentionally want to store an array/hash payload in a scalar (`set(scalar(name), [value])`). `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` reference a per-rule working variable. Aggregate wrapper names are bare tokens: `array(items)` reads the working array `items`, and `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. Use `scalar(name)` as the target when you intentionally want to store an array/hash payload in a scalar (`set(scalar(name), [value])`). `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -184,21 +184,22 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `scalar(name)` | scalar value | read the working scalar `name`. |
-| `s(name)` | scalar value | short alias for `scalar(name)`. Prefer `scalar(...)` in public examples when space is not tight. |
 | `scalar(array(items), index)` | scalar value or `undef` | read one zero-based element from an array value. |
 | `scalar(hash(meta), key)` | scalar value or `undef` | read one field from a hash value. |
 | `scalaref(base, path)` | scalar value or `undef` | read a nested hash/array path such as `{content}` or `[0]{name}`. |
 | `base["field"][0][i]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container; a bare path atom such as `[i]` reads scalar `i` as an array index. |
 | `array(name)` | array value | read the working array `name`; the name token is bare. |
-| `a(name)` | array value | short alias for `array(name)`. |
 | `hash(name)` | hash value | read the working hash `name`; the name token is bare. |
-| `h(name)` | hash value | short alias for `hash(name)`. |
 | `array(...)` | array value | construct an empty or argument-list array payload; prefer `[...]` as the terse constructor spelling in new examples. |
 | `hash(...)` | hash value | construct an empty or multi-argument hash/object payload from key/value pairs or flattened hashes; use `{ "key" => undef }` for a one-field literal hash with no value. |
 | `[]` / `[expr, ...]` | array value | construct one new array payload with direct literal syntax. |
 | `{ key_expr => value_expr, ... }` | hash value | construct one new hash/object payload with direct literal syntax; bare keys are scalar reads, so quote fixed field names. |
 | `array_copy(array_expr)` / `array_copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
 | `hash_copy(hash_expr)` / `hash_copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
+
+Retired short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are not canonical wrapper
+spellings. Use `scalar(...)`, `array(...)`, and `hash(...)` so descriptors and backend
+handoff metadata see the intended typed wrapper directly.
 
 In return and assignment-like scalar source slots, a bare scalar name is the same read as
 `scalar(name)`: `return(count)`, `set(out, count)`, and `out = count` read `$count`. This

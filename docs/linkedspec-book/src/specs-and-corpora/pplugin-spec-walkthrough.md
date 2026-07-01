@@ -44,7 +44,7 @@ For a plugin with two subroutines:
 }
 ```
 
-The parser returns a flat hash (name => coderef pairs) where each value is the `eval`'d subroutine body. The hash is built by the `LX` block's `return(hash(flat_array(a(defs))))` call.
+The parser returns a flat hash (name => coderef pairs) where each value is the `eval`'d subroutine body. The hash is built by the `LX` block's `return(hash(flat_array(array(defs))))` call.
 
 ## Rule inventory
 

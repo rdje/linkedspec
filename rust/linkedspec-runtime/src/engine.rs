@@ -1014,7 +1014,7 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
         match receiver {
             Expr::Variable { name } => Some(name.clone()),
-            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
+            Expr::Call { name, args } if name == "array" && args.len() == 1 => {
                 match &args[0] {
                     Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
                     _ => None,
@@ -1111,8 +1111,8 @@ impl Engine {
             Arg::Positional(Expr::Call { name, args })
                 if matches!(
                     (shape_kind, name.as_str()),
-                    (ShapeLiteralKind::Array, "array" | "a")
-                        | (ShapeLiteralKind::Hash, "hash" | "h")
+                    (ShapeLiteralKind::Array, "array")
+                        | (ShapeLiteralKind::Hash, "hash")
                 ) && args.len() == 1 =>
             {
                 match &args[0] {
@@ -1449,7 +1449,7 @@ impl Engine {
 
         let mut current = match receiver {
             Expr::Variable { name } => RuntimeValue::Array(ctx.array_copy(name)),
-            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
+            Expr::Call { name, args } if name == "array" && args.len() == 1 => {
                 match &args[0] {
                     Arg::Positional(Expr::Variable { name }) => {
                         RuntimeValue::Array(ctx.array_copy(name))
@@ -1515,7 +1515,7 @@ impl Engine {
 
         let mut current = match receiver {
             Expr::Variable { name } => RuntimeValue::Hash(ctx.hash_copy(name)),
-            Expr::Call { name, args } if (name == "hash" || name == "h") && args.len() == 1 => {
+            Expr::Call { name, args } if name == "hash" && args.len() == 1 => {
                 match &args[0] {
                     Arg::Positional(Expr::Variable { name }) => {
                         RuntimeValue::Hash(ctx.hash_copy(name))
@@ -2003,7 +2003,7 @@ impl Engine {
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
         if let Some(Arg::Positional(Expr::Call { name, args })) = raw_args.first() {
-            if (name == "scalar" || name == "s") && args.len() == 1 {
+            if name == "scalar" && args.len() == 1 {
                 if let Arg::Positional(Expr::Variable { name: var_name }) = &args[0] {
                     return var_name.clone();
                 }
@@ -2025,7 +2025,7 @@ impl Engine {
     ///
     /// In Perl LinkedSpec, `array(results)` is a CONTAINER SPECIFICATION meaning
     /// "the array named results", not a constructor. When raw_arg is a `Call`
-    /// with name `"array"` or `"a"` and one argument, extract the inner
+    /// with name `"array"` and one argument, extract the inner
     /// variable name. Falls back to the evaluated value's `to_str()`.
     fn resolve_array_target(
         &self,
@@ -2034,9 +2034,9 @@ impl Engine {
         allow_bare: bool,
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
-        // Check if the raw arg is `array(variable)` or `a(variable)`
+        // Check if the raw arg is `array(variable)`.
         if let Some(Arg::Positional(Expr::Call { name, args })) = raw_args.first() {
-            if (name == "array" || name == "a") && args.len() == 1 {
+            if name == "array" && args.len() == 1 {
                 if let Arg::Positional(Expr::Variable { name: var_name }) = &args[0] {
                     return var_name.clone();
                 }
@@ -2059,8 +2059,8 @@ impl Engine {
 
     /// Resolve a hash target name from the first arg of a helper call.
     ///
-    /// Mirrors `resolve_array_target` for hash-valued helpers: `hash(name)` and
-    /// `h(name)` name the runtime hash `name`, while constructor forms such as
+    /// Mirrors `resolve_array_target` for hash-valued helpers: `hash(name)`
+    /// names the runtime hash `name`, while constructor forms such as
     /// `hash("key", value)` stay value expressions handled by the `hash` helper.
     /// When `allow_bare` is true, `hash_copy(NAME)` may also name the hash directly;
     /// scalar-like bare value reads stay outside this resolver.
@@ -2073,7 +2073,7 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
         if let Some(var_name) = raw_args.first().and_then(|arg| match arg {
             Arg::Positional(Expr::Call { name, args })
-                if (name == "hash" || name == "h") && args.len() == 1 =>
+                if name == "hash" && args.len() == 1 =>
             {
                 match &args[0] {
                     Arg::Positional(Expr::Variable { name }) => Some(name),
@@ -2271,7 +2271,7 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             // ── Array constructors ──
-            "array" | "a" => {
+            "array" => {
                 // Container reference: `array(varname)` with single bare variable
                 // returns the named array, not a constructed array.
                 if args.len() == 1 && raw_args.len() == 1 {
@@ -2352,7 +2352,7 @@ impl Engine {
             }
             "return_undef" => Ok(RuntimeValue::Undef),
             // ── Scalar access ──
-            "scalar" | "s" => {
+            "scalar" => {
                 if raw_args.len() == 1 {
                     // `scalar(varname)` with bare variable → return its value
                     Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
@@ -2374,7 +2374,7 @@ impl Engine {
             }
             "call" => {
                 // `call(child)` evaluates to the child's return value, so
-                // `assign(s(retv), call(child))` captures it — the Perl
+                // `assign(scalar(retv), call(child))` captures it — the Perl
                 // reference pattern (see specs/tablegrep.spec). The child rule
                 // name comes from the raw arg (a bare label is not a scalar).
                 let child = self.resolve_rule_name(raw_args, args.first());
@@ -3524,7 +3524,7 @@ impl Engine {
                     .collect(),
             )),
             // ── Hash helpers ──
-            "hash" | "h" => {
+            "hash" => {
                 if let (
                     true,
                     Some(linkedspec_core::expr::Arg::Positional(

@@ -7,30 +7,30 @@ grammar_file:: I {
 }
 
 LX {
-  if(s(rule));
-    push_value(a(rules), a(s(rule), flat_array(rule)));
+  if(scalar(rule));
+    push_value(array(rules), array(scalar(rule), flat_array(rule)));
   endif();
 
-  return(a(flat_array(includes), flat_array(rules)))
+  return(array(flat_array(includes), flat_array(rules)))
 }
 
 -> include_dir.push(includes)
 -> include_file.push(includes)
 
 -> grammar_rule   {
-  if(s(rule));
-    push_value(a(rules), a(s(rule), flat_array(rule)));
+  if(scalar(rule));
+    push_value(array(rules), array(scalar(rule), flat_array(rule)));
   endif();
 
-  assign(a(rule), a(flat_array(semantic_annotations)));
-  assign(a(semantic_annotations), a());
+  assign(array(rule), array(flat_array(semantic_annotations)));
+  assign(array(semantic_annotations), array());
 
-  assign(s(rule), call(grammar_rule));
-  assign(s(on), 1)
+  assign(scalar(rule), call(grammar_rule));
+  assign(scalar(on), 1)
 }
 
 -> rule_name
-  .if(s(on))
+  .if(scalar(on))
     .push(rule_name, rule)
   .else()
     .say("Error: Rule name '$LMATCH' reference with no container rule context")
@@ -38,7 +38,7 @@ LX {
   .endif()
 
 -> quoted_string
-  .if(s(on))
+  .if(scalar(on))
     .push(quoted_string, rule)
   .else()
     .say("Error: Quoted string <$LMATCH> occurrence with no container rule context")
@@ -46,7 +46,7 @@ LX {
   .endif()
 
 -> number
-  .if(s(on))
+  .if(scalar(on))
     .push(number, rule)
   .else()
     .say("Error: Number '$LMATCH' occurrence with no container rule context")
@@ -54,7 +54,7 @@ LX {
   .endif()
 
 -> quantifier
-  .if(s(on))
+  .if(scalar(on))
     .push(quantifier, rule)
   .else()
     .say("Error: Quantifier occurrence with no container rule context")
@@ -62,7 +62,7 @@ LX {
   .endif()
 
 -> plus_operator
-  .if(s(on))
+  .if(scalar(on))
     .push(plus_operator, rule)
   .else()
     .say("Error: '+' operator occurrence with no container rule context")
@@ -70,7 +70,7 @@ LX {
   .endif()
 
 -> return_scalar
-  .if(s(on))
+  .if(scalar(on))
     .push(return_scalar, rule)
   .else()
     .say("Error: Scalar return annotation occurrence with no container rule context")
@@ -78,7 +78,7 @@ LX {
   .endif()
 
 -> return_array
-  .if(s(on))
+  .if(scalar(on))
     .push(return_array, rule)
   .else()
     .say("Error: Array return annotation occurrence with no container rule context")
@@ -86,7 +86,7 @@ LX {
   .endif()
 
 -> return_object
-  .if(s(on))
+  .if(scalar(on))
     .push(return_object, rule)
   .else()
     .say("Error: Object return annotation occurrence with no container rule context")
@@ -94,7 +94,7 @@ LX {
   .endif()
 
 -> star_operator
-  .if(s(on))
+  .if(scalar(on))
     .push(star_operator, rule)
   .else()
     .say("Error: '*' operator occurrence with no container rule context")
@@ -102,7 +102,7 @@ LX {
   .endif()
 
 -> question_operator
-  .if(s(on))
+  .if(scalar(on))
     .push(question_operator, rule)
   .else()
     .say("Error: '?' operator occurrence with no container rule context")
@@ -110,7 +110,7 @@ LX {
   .endif()
 
 -> pipe_operator
-  .if(s(on))
+  .if(scalar(on))
     .push(pipe_operator, rule)
   .else()
     .say("Error: '|' operator occurrence with no container rule context")
@@ -118,7 +118,7 @@ LX {
   .endif()
 
 -> open_paren
-  .if(s(on))
+  .if(scalar(on))
     .push(open_paren, rule)
   .else()
     .say("Error: '(' occurrence with no container rule context")
@@ -126,7 +126,7 @@ LX {
   .endif()
 
 -> close_paren
-  .if(s(on))
+  .if(scalar(on))
     .push(close_paren, rule)
   .else()
     .say("Error: ')' occurrence with no container rule context")
@@ -134,7 +134,7 @@ LX {
   .endif()
 
 -> probability
-  .if(s(on))
+  .if(scalar(on))
     .push(probability, rule)
   .else()
     .say("Error: Probability occurrence with no container rule context")
@@ -142,7 +142,7 @@ LX {
   .endif()
 
 -> regex
-  .if(s(on))
+  .if(scalar(on))
     .push(regex, rule)
   .else()
     .say("Error: Regex occurrence with no container rule context")
@@ -151,7 +151,7 @@ LX {
 
 -> semantic_annotation.push(semantic_annotations)
 -> logging_annotation
-  .if(s(on))
+  .if(scalar(on))
     .push(logging_annotation, rule)
   .else()
     .say("Error: Logging annotation occurrence with no container rule context")
@@ -161,30 +161,30 @@ LX {
 -> whitespace
 -> comment
 
-grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/  I.return(a("rule", entry_group(0)))
-rule_name: /\b[[:alpha:]_]\w*/                      I.return(a("rule_reference", entry_text()))
+grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/  I.return(array("rule", entry_group(0)))
+rule_name: /\b[[:alpha:]_]\w*/                      I.return(array("rule_reference", entry_text()))
 
-quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(s(value), "^(?:'|\")|(?:'|\")$", "", go).return(a("quoted_string", s(value)))
-number: /\b\d+\b/                 I.return(a("number", entry_text()))
-quantifier: /\{\s*(?:\d+(?:\s*,\s*\d*)?|,\s*\d+)\s*\}/  I.declare(scalar, value=entry_text()).substr(s(value), "\\{|\\}", "", go).return(a("quantifier", s(value)))
-pipe_operator: /\|/               I.return(a("operator", entry_text()))
-plus_operator: /\+/               I.return(a("operator", entry_text()))
-star_operator: /\*/               I.return(a("operator", entry_text()))
-question_operator: /\?/           I.return(a("operator", entry_text()))
-return_scalar: /->\s*\K(?:\$\d+|"[^"]*"|'[^']*')/  I.return(a("return_scalar", entry_text()))
-return_array: /->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/   I.return(a("return_array", entry_text()))
-return_object: /->\s*\K(?&object_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/ I.return(a("return_object", entry_text()))
-open_paren: /\(/                  I.return(a("group_open", entry_text()))
-close_paren: /\)/                 I.return(a("group_close", entry_text()))
-probability: /@\d+%?/             I.declare(scalar, value=entry_text()).substr(s(value), "@|%", "", go).return(a("probability", s(value)))
-regex: /(?<!\\)\/.+?(?<!\\)\//    I.declare(scalar, value=entry_text()).substr(s(value), "^/|/$", "", go).return(a("regex", s(value)))
+quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(scalar(value), "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", scalar(value)))
+number: /\b\d+\b/                 I.return(array("number", entry_text()))
+quantifier: /\{\s*(?:\d+(?:\s*,\s*\d*)?|,\s*\d+)\s*\}/  I.declare(scalar, value=entry_text()).substr(scalar(value), "\\{|\\}", "", go).return(array("quantifier", scalar(value)))
+pipe_operator: /\|/               I.return(array("operator", entry_text()))
+plus_operator: /\+/               I.return(array("operator", entry_text()))
+star_operator: /\*/               I.return(array("operator", entry_text()))
+question_operator: /\?/           I.return(array("operator", entry_text()))
+return_scalar: /->\s*\K(?:\$\d+|"[^"]*"|'[^']*')/  I.return(array("return_scalar", entry_text()))
+return_array: /->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/   I.return(array("return_array", entry_text()))
+return_object: /->\s*\K(?&object_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/ I.return(array("return_object", entry_text()))
+open_paren: /\(/                  I.return(array("group_open", entry_text()))
+close_paren: /\)/                 I.return(array("group_close", entry_text()))
+probability: /@\d+%?/             I.declare(scalar, value=entry_text()).substr(scalar(value), "@|%", "", go).return(array("probability", scalar(value)))
+regex: /(?<!\\)\/.+?(?<!\\)\//    I.declare(scalar, value=entry_text()).substr(scalar(value), "^/|/$", "", go).return(array("regex", scalar(value)))
 whitespace: /\s+/
 comment: /#.*/
-include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(s(args), "^\s*(?:include_)?dir\(\s*", "", g).substr(s(args), "\s*\)\s*$", "", g).declare(array, parts).split(a(parts), s(args), /\s*,\s*/).trim_each(a(parts)).filter_nonempty(a(parts)).return(a("include_dir", array_copy(a(parts))))
-include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(s(args), "^\s*(?:include(?:_file)?|file)\(\s*", "", g).substr(s(args), "\s*\)\s*$", "", g).declare(array, parts).split(a(parts), s(args), /\s*,\s*/).trim_each(a(parts)).filter_nonempty(a(parts)).return(a("include_file", array_copy(a(parts))))
+include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(scalar(args), "^\s*(?:include_)?dir\(\s*", "", g).substr(scalar(args), "\s*\)\s*$", "", g).declare(array, parts).split(array(parts), scalar(args), /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts)).return(array("include_dir", array_copy(array(parts))))
+include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(scalar(args), "^\s*(?:include(?:_file)?|file)\(\s*", "", g).substr(scalar(args), "\s*\)\s*$", "", g).declare(array, parts).split(array(parts), scalar(args), /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts)).return(array("include_file", array_copy(array(parts))))
 
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(s(c), "\s*$", "", o); substr(s(c), "^\"|\"$", "", go); return(a("semantic_annotation", a(entry_group(0), s(c))))}
+-> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(scalar(c), "\s*$", "", o); substr(scalar(c), "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), scalar(c))))}
 
 logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {declare(scalar, logging_name=entry_group(0)); start_capture_slice()}
 
@@ -193,12 +193,12 @@ logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*
   start_capture_slice()
 }
 -> comma {
-  push_nonempty(a(logging_annotation), trim(capture_slice()));
+  push_nonempty(array(logging_annotation), trim(capture_slice()));
   start_capture_slice()
 }
 -> logging_annotation[1] {
-  push_nonempty(a(logging_annotation), trim(capture_slice()));
-  return(a("logging_annotation", a(s(logging_name), array_copy(a(logging_annotation)))))
+  push_nonempty(array(logging_annotation), trim(capture_slice()));
+  return(array("logging_annotation", array(scalar(logging_name), array_copy(array(logging_annotation)))))
 }
 
 comma: /\s*,\s*/

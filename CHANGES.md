@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.3.1 — retire short wrapper aliases
+
+**Scope:** Perl ActionIR lowering, scanner/contract metadata, shipped specs/corpus fixtures, phase0 locks,
+Rust core/runtime parity paths, root guides, mdBook, task tree, live docs, and Knowledge Map.
+
+**What changed:** Retired `s(...)`, `a(...)`, and `h(...)` as canonical wrapper spellings. Repo-owned specs,
+fixtures, tests, and docs now use `scalar(...)`, `array(...)`, and `hash(...)`. Perl lowering no longer
+normalizes the short names into long wrappers; retired short calls now become
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` diagnostics and keep `raw_perl_dependency_count == 0`.
+
+**Backend/docs sync:** Rust core parser examples and runtime helper dispatch now use canonical wrapper names
+only. The mdBook and root guides teach canonical wrappers and list the short spellings only as retired aliases.
+
+**Checks:** Residual shorthand scan over repo-owned specs/corpora was clean. Syntax checks passed for touched
+ActionIR modules and tests. `prove -Iperl t/actionir_ast_parser.t` passed. `prove -Iperl t/phase0_regression.t`
+passed with phase0 **1003 tests**. `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --lib` passed
+with **140 tests**. `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib` passed with **117
+tests**. `mdbook build docs/linkedspec-book`, memory architecture, Knowledge Map, doctrine registry,
+`git diff --check`, and `bash tools/run_ci_local.sh` passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.5.3 — split short alias retirement
 
 **Scope:** Task tree, live continuity docs, roadmap/index status, and Knowledge Map. No parser/compiler/runtime

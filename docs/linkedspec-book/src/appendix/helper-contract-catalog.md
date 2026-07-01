@@ -98,7 +98,7 @@ dispatch rule.
 ## 1. Declaration Helpers
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a
-> typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`, or the `s()`/`a()`/`h()` aliases)
+> typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`)
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
 > target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`
@@ -116,7 +116,7 @@ dispatch rule.
 > carried across parses or recursive re-entries. `declare(...)` is the explicit form: use it for an
 > initializer, an explicit kind, or a grouped rule-state preamble. The DSL literals
 > `undef`/`true`/`false` and the engine's own handler locals are never treated as working-variable
-> names (so `a(undef)` builds an array holding the `undef` literal, not a variable `undef`).
+> names (so `array(undef)` builds an array holding the `undef` literal, not a variable `undef`).
 
 ### `declare(scalar, name)`
 - **Signature**: `declare("scalar", name: string)`
@@ -159,7 +159,7 @@ dispatch rule.
 >
 > ```text
 > demo::  -> value  .push
-> LX { return(array_copy(a(demo))) }
+> LX { return(array_copy(array(demo))) }
 >
 > value : /<regex>/  I.return( <helper-expression> )
 > ```
@@ -220,7 +220,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(a(demo))) }
+  LX { return(array_copy(array(demo))) }
 
   value : /(\w+) (\w+)/  I.return( concat(entry_group(0), "-", entry_group(1)) )
   ```
@@ -250,7 +250,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(a(demo))) }
+  LX { return(array_copy(array(demo))) }
 
   value : /(\w+)/  I { if (is_defined(entry_group(0))) { return("present") } else { return("absent") } }
   ```
@@ -271,7 +271,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(a(demo))) }
+  LX { return(array_copy(array(demo))) }
 
   value : /\[([^\]]*)\]/  I.return( trim(entry_group(0)) )
   ```
@@ -423,8 +423,8 @@ dispatch rule.
 - **Signature**: `target.push_back(value: expr)`, `target.push_front(value: expr)`, `target.pop_back()`, `target.pop_front()`
 - **Returns**: void
 - **Behavior**: Statement-level array end mutations on a named working array. `push_back` appends, `push_front` prepends, `pop_back` removes the last element, and `pop_front` removes the first element. Pop methods discard the removed value.
-- **Examples**: `items.push_back("tail")`, `items.push_front(value)`, `array(items).pop_back()`, `a(items).pop_front()`.
-- **Edge cases**: The receiver may be a bare array working variable (`items`) or an explicit array receiver (`array(items)` / `a(items)`), and it auto-exists as an array. A bare push value reads a scalar working variable, just like `items += value`. These are statement-only mutations; value-returning forms such as `return(items.pop_back())` are outside this contract.
+- **Examples**: `items.push_back("tail")`, `items.push_front(value)`, `array(items).pop_back()`, `array(items).pop_front()`.
+- **Edge cases**: The receiver may be a bare array working variable (`items`) or an explicit array receiver (`array(items)`), and it auto-exists as an array. A bare push value reads a scalar working variable, just like `items += value`. These are statement-only mutations; value-returning forms such as `return(items.pop_back())` are outside this contract.
 - **Worked example**:
   ```text
   Top::
@@ -518,7 +518,7 @@ dispatch rule.
   `array(items)` reads the working array `items`. Quoted strings are literal constructor payloads, so
   `array("items")` constructs an array containing the string `"items"`. With zero or multiple arguments it
   constructs an array from the evaluated values.
-- **Terse alias**: `a(...)`.
+- **Retired short alias**: `a(...)`; use `array(...)`.
 - **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
   lookup. `array(alias)` reads the working array named `alias`; it does not read scalar `alias` and then use
   that scalar as another variable name. Prefer direct shape literals such as `["items"]` as the terse
@@ -657,7 +657,7 @@ dispatch rule.
   `hash("key", value)` constructs a hash entry whose key is `"key"`. With zero or multiple arguments it
   constructs a hash from flat key/value pairs. Arguments are interpreted as alternating keys and values. Accepts
   `flat_array(...)` and `flat_hash(...)` for list-context insertion.
-- **Terse alias**: `h(...)`.
+- **Retired short alias**: `h(...)`; use `hash(...)`.
 - **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
   lookup. `hash(alias)` reads the working hash named `alias`; it does not read scalar `alias` and then use
   that scalar as another variable name. Prefer direct shape literals such as `{ "alias" => value }` as the
@@ -755,7 +755,7 @@ bare comparison words; `gt(...)` and `lt(...)` remain string comparisons.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(a(demo))) }
+  LX { return(array_copy(array(demo))) }
 
   value : /(\d+)\+(\d+)/  I.return( num_add(entry_group(0), entry_group(1)) )
   ```
@@ -834,7 +834,7 @@ bare comparison words; `gt(...)` and `lt(...)` remain string comparisons.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(a(demo))) }
+  LX { return(array_copy(array(demo))) }
 
   value : /(\d+),(\d+),(\d+),(\d+)/  I.return( num_sum(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )
   ```
@@ -1255,7 +1255,7 @@ unlike the Retired table below):
 | `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment; statement-level. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
 | `name = value` | `set(name, value)` / `assign(name, value)` | scalar assignment operator; statement-level only. Bare RHS names read working scalars. Does not imply array `+=` or hash-index assignment. |
 | `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax. |
-| `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)` / `a(...)`; pop methods discard the removed value. |
+| `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in statement mutation slots. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
@@ -1274,6 +1274,9 @@ The following are retired and must not be used in new `.spec` authoring. Backend
 
 | Retired | Use Instead |
 |---|---|
+| `s(...)` | `scalar(...)` |
+| `a(...)` | `array(...)` |
+| `h(...)` | `hash(...)` |
 | `array_values(...)` | `array_copy(...)` |
 | `flatten(...)` | `flat(...)` |
 | `tail(...)` | `drop_front(...)` |

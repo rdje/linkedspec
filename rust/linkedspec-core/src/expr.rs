@@ -2358,7 +2358,7 @@ mod tests {
     #[test]
     fn parse_array_end_mutation_fluent_receivers() {
         let block = CodeBlock::parse(
-            "items.push_back(value); array(items).pop_front(); a(items).push_front(\"a\")",
+            "items.push_back(value); array(items).pop_front(); array(items).push_front(\"a\")",
         )
         .unwrap();
         assert_eq!(block.statements.len(), 3);
@@ -2385,11 +2385,11 @@ mod tests {
 
         match &block.statements[2].expr {
             Expr::FluentChain { receiver, calls } => {
-                assert!(matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "a"));
+                assert!(matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "array"));
                 assert_eq!(calls.len(), 1);
                 assert_eq!(calls[0].method, "push_front");
             }
-            other => panic!("expected a receiver FluentChain, got {:?}", other),
+            other => panic!("expected array receiver FluentChain, got {:?}", other),
         }
     }
 

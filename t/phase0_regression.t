@@ -13686,19 +13686,19 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
         'match_end_pos() helper rewrite preserves explicit current-local-match right-edge position semantics'
     );
     is(
-        LinkedSpec::call_spec_handler_subst($label, 's(foo)'),
+        LinkedSpec::call_spec_handler_subst($label, 'scalar(foo)'),
         q{$foo},
-        's(name) shorthand rewrite preserves scalar(name) semantics'
+        'scalar(name) canonical wrapper rewrite preserves scalar semantics'
     );
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'a("A", "B")'),
+        LinkedSpec::call_spec_handler_subst($label, 'array("A", "B")'),
         q{["A", "B"]},
-        'a(...) shorthand rewrite preserves array(...) constructor semantics'
+        'array(...) canonical wrapper rewrite preserves array constructor semantics'
     );
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'h("kind", "node")'),
+        LinkedSpec::call_spec_handler_subst($label, 'hash("kind", "node")'),
         q{{"kind" => "node"}},
-        'h(...) shorthand rewrite preserves hash(...) constructor semantics'
+        'hash(...) canonical wrapper rewrite preserves hash constructor semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -15317,7 +15317,7 @@ SPEC
     my $named_map_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_map().'."\n".'match_map()');
     like($named_map_rewrite, qr/\%IMATCH_HASH.*\%LMATCH_HASH/s, 'entry_map() and match_map() lowering snapshot immediate and local named-capture hashes directly without consulting stored marks');
 };
-subtest 'short_container_aliases_behave_like_full_container_forms' => sub {
+subtest 'canonical_container_wrappers_behave_across_supported_positions' => sub {
     plan tests => 5;
 
     my $spec_content = <<'SPEC';
@@ -15325,16 +15325,16 @@ Top::
  I { declare(array, parts); declare(hash, meta); declare(scalar, name) }
  /(\w+)/
  -> Top[0] {
-     assign(a(parts), a("A", "B"));
-     assign(h(meta), h("kind", match_text()));
-     assign(s(name), scalar(h(meta), "kind"));
-     return(h("match", s(name), "group0", match_group(0), "parts_count", count(a(parts)), "kind_present", has_key(h(meta), "kind")))
+     assign(array(parts), array("A", "B"));
+     assign(hash(meta), hash("kind", match_text()));
+     assign(scalar(name), scalar(hash(meta), "kind"));
+     return(hash("match", scalar(name), "group0", match_group(0), "parts_count", count(array(parts)), "kind_present", has_key(hash(meta), "kind")))
  }
 SPEC
 
     my %runtime_ctx;
     my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
-    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for s()/a()/h() shorthand coverage');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for canonical scalar()/array()/hash() wrapper coverage');
 
     my $input = 'foo';
     my $ast = $parser->(\$input);
@@ -15346,17 +15346,45 @@ SPEC
             kind_present => 1,
             parts_count  => 2,
         },
-        's()/a()/h() shorthand aliases preserve scalar/array/hash behavior across assignment, container access, and generalized return payloads'
+        'canonical scalar()/array()/hash() wrappers preserve scalar/array/hash behavior across assignment, container access, and generalized return payloads'
     );
-    is($runtime_ctx{top_rule}, 'Top', 's()/a()/h() shorthand coverage keeps the selected top rule visible in runtime context');
-    ok(!defined($runtime_ctx{last_error}), 's()/a()/h() shorthand parse leaves runtime_ctx last_error clear on success');
+    is($runtime_ctx{top_rule}, 'Top', 'canonical scalar()/array()/hash() wrapper coverage keeps the selected top rule visible in runtime context');
+    ok(!defined($runtime_ctx{last_error}), 'canonical scalar()/array()/hash() wrapper parse leaves runtime_ctx last_error clear on success');
 
     my $alias_rewrite = LinkedSpec::call_spec_handler_subst(
         'Top',
-        'assign(s(name), scalar(h(meta), "kind")); return(h("parts_count", count(a(parts))))'
+        'assign(scalar(name), scalar(hash(meta), "kind")); return(hash("parts_count", count(array(parts))))'
     );
     like($alias_rewrite, qr/\$name.*\$meta\{\"kind\"\}.*\{\"parts_count\" => scalar\(\@parts\)\}/s,
-        's()/a()/h() shorthand lowering reuses the same scalar/hash/array Perl shapes as the long forms');
+        'canonical scalar()/array()/hash() wrapper lowering reuses the expected scalar/hash/array Perl shapes');
+};
+
+subtest 'short_container_aliases_are_retired_as_unresolved_helpers' => sub {
+    plan tests => 7;
+
+    for my $case (
+        ['s(foo)', 's'],
+        ['a("A", "B")', 'a'],
+        ['h("kind", "node")', 'h'],
+    ) {
+        my ($expr, $helper) = @$case;
+        like(
+            LinkedSpec::call_spec_handler_subst('Top', $expr),
+            qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:\Q$helper\E/,
+            "$expr lowers to the retired-helper sentinel"
+        );
+    }
+
+    my $spec = <<'SPEC';
+Top::
+LX { s(foo); a("A"); h("k", "v") }
+SPEC
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    ok(ref($d) eq 'HASH', 'descriptor builds for retired short-wrapper aliases');
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{raw_perl_dependency_count}, 0, 'retired aliases do not fall back to raw Perl');
+    is_deeply($meta->{unresolved_helpers}, [qw(a h s)], 'retired aliases are reported as unresolved helpers');
+    ok(!$meta->{language_agnostic_action_ir_ready}, 'retired aliases block language-agnostic ActionIR readiness');
 };
 subtest 'entry_length_helper_reads_rule_entry_match_width' => sub {
     plan tests => 5;
@@ -15859,7 +15887,7 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
     plan tests => 79;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("group_open", a(IMATCH)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("group_open", array(IMATCH)))'),
         'return ["group_open", [IMATCH]]',
         'return(array(...)) canonical helper preserves tagged return payload'
     );
@@ -16376,9 +16404,9 @@ subtest 'emit_context_lowers_push_child_call_contracts' => sub {
     );
 
     my $spec_content = <<'SPEC';
-Top:: /a/ -> Top { push(Leaf); return(a(array_copy(a(Top)))) }
+Top:: /a/ -> Top { push(Leaf); return(array(array_copy(array(Top)))) }
 Leaf:
- /a/ -> Leaf { return(a("leaf", match_text())) }
+ /a/ -> Leaf { return(array("leaf", match_text())) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -16395,9 +16423,9 @@ SPEC
     is_deeply($event->{args}, { target => 'Top', source => 'Leaf', target_mode => 'implicit_current_label' }, 'push(Rule) canonical event records the implicit destination array and source rule');
 
     my $indexed_spec_content = <<'SPEC';
-Top:: /a/ -> Top { push(Leaf, 1); return(a(array_copy(a(Top)))) }
+Top:: /a/ -> Top { push(Leaf, 1); return(array(array_copy(array(Top)))) }
 Leaf:
- /a/ -> Leaf { return(a("leaf", match_text())) }
+ /a/ -> Leaf { return(array("leaf", match_text())) }
 SPEC
 
     my $indexed_descr = LinkedSpec::Get(\$indexed_spec_content, return_descriptor => 1);
@@ -16412,19 +16440,19 @@ SPEC
 subtest 'emit_context_lowers_push_nonempty_method_contract' => sub {
     plan tests => 13;
 
-    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), trim(capture_slice()))');
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), trim(capture_slice()))');
     like($rewrite, qr/\bpush \@items, \$__ls_push_nonempty if \$__ls_push_nonempty_ok\b/, 'push_nonempty(array(target), value) lowers to a guarded push statement');
     like($rewrite, qr/\$__ls_push_nonempty ne ''/, 'push_nonempty scalar guard treats empty string as empty');
     like($rewrite, qr/ref\(\$__ls_push_nonempty\) eq 'ARRAY'/, 'push_nonempty array guard checks arrayref cardinality');
     like($rewrite, qr/ref\(\$__ls_push_nonempty\) eq 'HASH'/, 'push_nonempty hash guard checks hashref cardinality');
 
     my @items;
-    my $empty_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), "")');
-    my $zero_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), "0")');
-    my $empty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), array())');
-    my $nonempty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), ["item"])');
-    my $empty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), hash())');
-    my $nonempty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), hash("key", "value"))');
+    my $empty_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), "")');
+    my $zero_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), "0")');
+    my $empty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), array())');
+    my $nonempty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), ["item"])');
+    my $empty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), hash())');
+    my $nonempty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), hash("key", "value"))');
     my $ok_eval = eval "$empty_rewrite; $zero_rewrite; $empty_array_rewrite; $nonempty_array_rewrite; $empty_hash_rewrite; $nonempty_hash_rewrite; 1";
     ok($ok_eval, 'push_nonempty generated statements eval cleanly for empty and nonempty scalar/array/hash values') or diag(normalize_error($@));
     is_deeply(\@items, ['0', ['item'], {key => 'value'}], 'push_nonempty skips empty string/array/hash values while preserving meaningful scalar/array/hash payloads');
@@ -16434,8 +16462,8 @@ Top::AND I.declare(array, items)
  /a/
  /,/
  /b/
- -> Top[1] { push_nonempty(a(items), trim(capture_slice())) }
- -> Top[2] { return(a(array_copy(a(items)))) }
+ -> Top[1] { push_nonempty(array(items), trim(capture_slice())) }
+ -> Top[2] { return(array(array_copy(array(items)))) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -40108,7 +40136,7 @@ subtest 'emit_context_meta_exposes_compatibility_surface_without_demoting_ready_
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(CompatReady); return(a("?Top:")) }
+ /a/ -> Top { call(CompatReady); return(array("?Top:")) }
 
 CompatReady::&
  /b/ -> CompatReady { return 1; exit }
@@ -40180,7 +40208,7 @@ subtest 'return_descriptor_exposes_action_rewriter_compatibility_surface_summary
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(CompatReady); return(a("?Top:")) }
+ /a/ -> Top { call(CompatReady); return(array("?Top:")) }
 
 CompatReady::&
  /b/ -> CompatReady { return 1; exit }
@@ -40214,7 +40242,7 @@ subtest 'compatibility_surface_metadata_includes_legacy_helper_wrappers' => sub 
 
     my $spec_content = <<'SPEC';
 Top::&
- /(\w+)/ -> Top { my $retv = call(Leaf); capture_if(Top); return(a("?Top:")) }
+ /(\w+)/ -> Top { my $retv = call(Leaf); capture_if(Top); return(array("?Top:")) }
 
 Leaf:
  /(\w+)/ -> Leaf { return 1 }
@@ -40407,7 +40435,7 @@ subtest 'method_like_exit_now_helper_lowers_without_compatibility_surface' => su
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { exit_now(); exit_now(2); exit_now(s(status)) }
+ /a/ -> Top { exit_now(); exit_now(2); exit_now(scalar(status)) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -40420,7 +40448,7 @@ SPEC
     is($meta->{compatibility_surface_count}, 0, 'exit_now helper is not compatibility-surface syntax');
     ok(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include EXIT for exit_now helper coverage');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'exit_now(); exit_now(2); exit_now(s(status))');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'exit_now(); exit_now(2); exit_now(scalar(status))');
     is($rewritten, 'exit; exit(2); exit($status)', 'exit_now helper lowers to the runtime exit statement and value-lowers its optional status');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'exit_now-only rule remains language-agnostic action-IR ready');
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'exit_now helper does not create compatibility-surface summary entries');
@@ -41580,17 +41608,17 @@ subtest 'ebnf_helper_flow_eliminates_compatibility_surface' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ebnf exposes no prioritized blocked-rule list after compatibility cleanup');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ebnf exposes no top blocked rule after compatibility cleanup');
 };
-subtest 'ebnf_spec_prefers_short_container_aliases_in_core_method_dsl_band' => sub {
+subtest 'ebnf_spec_prefers_canonical_container_wrappers_in_core_method_dsl_band' => sub {
     plan tests => 5;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for alias migration inspection');
-    like($source_content, qr/\.if\(s\(on\)\)/, 'ebnf core method-DSL band now prefers s(on) in fluent guard checks');
-    unlike($source_content, qr/\.if\(scalar\(on\)\)/, 'ebnf fluent guard checks no longer use scalar(on) in the migrated band');
-    like($source_content, qr/I\.return\(a\("rule", entry_group\(0\)\)\)/, 'ebnf grammar_rule token reader now prefers the short array constructor alias');
-    like($source_content, qr/push_value\(a\(rules\), a\(s\(rule\), flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now prefers combined s()/a() aliases');
+    ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for wrapper migration inspection');
+    like($source_content, qr/\.if\(scalar\(on\)\)/, 'ebnf core method-DSL band now prefers scalar(on) in fluent guard checks');
+    unlike($source_content, qr/\.if\(s\(on\)\)/, 'ebnf fluent guard checks no longer use retired s(on) aliases in the migrated band');
+    like($source_content, qr/I\.return\(array\("rule", entry_group\(0\)\)\)/, 'ebnf grammar_rule token reader now uses the canonical array constructor');
+    like($source_content, qr/push_value\(array\(rules\), array\(scalar\(rule\), flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now uses combined scalar()/array() wrappers');
 };
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 16;
@@ -41630,19 +41658,19 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ds_vhistory exposes no prioritized blocked-rule list after vhistory migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ds_vhistory exposes no top blocked rule after vhistory migration');
 };
-subtest 'ds_vhistory_spec_prefers_short_container_aliases_in_vhistory_band' => sub {
+subtest 'ds_vhistory_spec_prefers_canonical_container_wrappers_in_vhistory_band' => sub {
     plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ds_vhistory.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for alias migration inspection');
-    like($source_content, qr/assign\(s\(first_capt\), scalar\(a\(capt\), 0\)\)/, 'ds_vhistory vhistory band now prefers s(first_capt) plus a(capt) in first captured-entry reads');
-    like($source_content, qr/push_value\(a\(object_hier\), a\(s\(entry_tag\), array_copy\(a\(capt\)\)\)\)/, 'ds_vhistory vhistory band now prefers nested a()/s() aliases plus array_copy in object_hier pushes');
-    like($source_content, qr/assign\(s\(cur_object\), call\(object\)\)/, 'ds_vhistory object edge now prefers assign(s(cur_object), call(object)) instead of compatibility assignment');
-    like($source_content, qr/push_value\(a\(capt\), call\(branch\)\)/, 'ds_vhistory child capture edges now prefer push_value(a(capt), call(...))');
-    ok(index($source_content, 'return(a("?ds_vhistory:", array_copy(a(vhistory))))') >= 0, 'ds_vhistory vhistory band now prefers the short array alias plus array_copy in top-level return construction');
-    unlike($source_content, qr/push_value\(array\(vhistory\), array\("\?object:", scalar\(current_object_name\), array_(?:values|copy)\(array\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses the older array()/scalar() wrapper form in object aggregation pushes');
+    ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for wrapper migration inspection');
+    like($source_content, qr/assign\(scalar\(first_capt\), scalar\(array\(capt\), 0\)\)/, 'ds_vhistory vhistory band now uses scalar(first_capt) plus array(capt) in first captured-entry reads');
+    like($source_content, qr/push_value\(array\(object_hier\), array\(scalar\(entry_tag\), array_copy\(array\(capt\)\)\)\)/, 'ds_vhistory vhistory band now uses nested array()/scalar() wrappers plus array_copy in object_hier pushes');
+    like($source_content, qr/assign\(scalar\(cur_object\), call\(object\)\)/, 'ds_vhistory object edge now prefers assign(scalar(cur_object), call(object)) instead of compatibility assignment');
+    like($source_content, qr/push_value\(array\(capt\), call\(branch\)\)/, 'ds_vhistory child capture edges now prefer push_value(array(capt), call(...))');
+    ok(index($source_content, 'return(array("?ds_vhistory:", array_copy(array(vhistory))))') >= 0, 'ds_vhistory vhistory band now uses the canonical array wrapper plus array_copy in top-level return construction');
+    unlike($source_content, qr/push_value\(a\(vhistory\), a\("\?object:", s\(current_object_name\), array_(?:values|copy)\(a\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses retired a()/s() aliases in object aggregation pushes');
     unlike($source_content, qr/\$cur_object\s*=\s*call\(object\)/, 'ds_vhistory object edge no longer uses compatibility assignment syntax');
     unlike($source_content, qr/push \@capt, call\(/, 'ds_vhistory child capture edges no longer use raw-looking push-call wrappers');
 };
@@ -41653,10 +41681,10 @@ subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for entry_groups migration inspection');
-    like($source_content, qr/object:\s+.*?I\.return\(a\("\?object:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory object token reader now prefers entry_groups()');
-    like($source_content, qr/branch_tags:\s+.*?I\.return\(a\("\?branch_tags:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory branch_tags token reader now prefers entry_groups()');
-    like($source_content, qr/derived_from:\s+.*?I\.return\(a\("\?derived_from:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory derived_from token reader now prefers entry_groups()');
-    like($source_content, qr/manifest:\s+.*?I\.return\(a\("\?manifest:"\)\)/, 'ds_vhistory manifest token reader now prefers direct helper return payloads');
+    like($source_content, qr/object:\s+.*?I\.return\(array\("\?object:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory object token reader now prefers entry_groups()');
+    like($source_content, qr/branch_tags:\s+.*?I\.return\(array\("\?branch_tags:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory branch_tags token reader now prefers entry_groups()');
+    like($source_content, qr/derived_from:\s+.*?I\.return\(array\("\?derived_from:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory derived_from token reader now prefers entry_groups()');
+    like($source_content, qr/manifest:\s+.*?I\.return\(array\("\?manifest:"\)\)/, 'ds_vhistory manifest token reader now prefers direct helper return payloads');
     unlike($source_content, qr/^(?:object|branch|branch_tags|version_tags|version|date|comment|author|derived_from):.*\@IMATCH_LIST/m, 'ds_vhistory migrated token readers no longer return raw @IMATCH_LIST');
     unlike($source_content, qr/manifest:.*?return\s+\['\?manifest:'\]/, 'ds_vhistory manifest token reader no longer uses a raw arrayref return literal');
 };
@@ -41747,9 +41775,9 @@ subtest 'regdef_token_readers_prefer_entry_groups' => sub {
     like($source_content, qr/-> reg_def\s+\{push\(reg_def\)\}/, 'regdef top aggregation now prefers push(reg_def)');
     like($source_content, qr/-> reg_fld\s+\{push\(reg_fld\)\}/, 'regdef nested aggregation now prefers push(reg_fld)');
     unlike($source_content, qr/push \@capt, call\(/, 'regdef migrated aggregators no longer use raw push-call wrappers');
-    like($source_content, qr/LX \{return\(a\("\?regdef_top:", array_copy\(a\(regdef_top\)\)\)\)\}/, 'regdef top LX now returns helper-form top payload with array_copy');
-    like($source_content, qr/-> reg_def\[1\]\s+\{return\(a\("\?reg_def:", flat_array\(entry_groups\(\)\), array_copy\(a\(reg_def\)\)\)\)\}/, 'regdef reg_def return now prefers helper-form entry_groups() plus array_copy');
-    like($source_content, qr/reg_fld: .*?I\.return\(a\("\?reg_fld:", flat_array\(entry_groups\(\)\)\)\)/, 'regdef reg_fld return now prefers fluent helper-form entry_groups()');
+    like($source_content, qr/LX \{return\(array\("\?regdef_top:", array_copy\(array\(regdef_top\)\)\)\)\}/, 'regdef top LX now returns helper-form top payload with array_copy');
+    like($source_content, qr/-> reg_def\[1\]\s+\{return\(array\("\?reg_def:", flat_array\(entry_groups\(\)\), array_copy\(array\(reg_def\)\)\)\)\}/, 'regdef reg_def return now prefers helper-form entry_groups() plus array_copy');
+    like($source_content, qr/reg_fld: .*?I\.return\(array\("\?reg_fld:", flat_array\(entry_groups\(\)\)\)\)/, 'regdef reg_fld return now prefers fluent helper-form entry_groups()');
     like($source_content, qr/-> ob_cb\[1\]\s+\{return\(1\)\}/, 'regdef ob_cb completion now uses helper-form return(1)');
     unlike($source_content, qr/^(?:-> reg_def\[1\].*|reg_fld:.*)\@IMATCH_LIST/m, 'regdef migrated token readers no longer return raw @IMATCH_LIST');
     unlike($source_content, qr/return \['\?regdef_top:', \\\@regdef_top\]/, 'regdef top LX no longer uses bare arrayref return syntax');
@@ -41847,8 +41875,8 @@ subtest 'tablegrep_core_flow_prefers_structured_helpers' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'tablegrep source spec text is available for helper-flow inspection');
-    like($source_content, qr/-> re_term\s+\{assign\(s\(retv\), call\(re_term\)\)\}/, 'tablegrep grep child calls now capture through assign(s(retv), call(...))');
-    like($source_content, qr/-> group\s+\{assign\(s\(retv\), call\(group\)\)\}/, 'tablegrep group child calls now capture through assign(s(retv), call(...))');
+    like($source_content, qr/-> re_term\s+\{assign\(scalar\(retv\), call\(re_term\)\)\}/, 'tablegrep grep child calls now capture through assign(scalar(retv), call(...))');
+    like($source_content, qr/-> group\s+\{assign\(scalar\(retv\), call\(group\)\)\}/, 'tablegrep group child calls now capture through assign(scalar(retv), call(...))');
     like($source_content, qr/LS \{declare\(scalar, retv\)\}/, 'tablegrep loop-start retv declaration now uses declare(scalar, retv)');
     like($source_content, qr/return\(array_copy\(array\(internal\)\)\)/, 'tablegrep top lifecycle return now uses helper-form array snapshot return');
     like($source_content, qr/exit_now\(1\)/, 'tablegrep operator guard exits now use exit_now(1)');
@@ -42088,8 +42116,8 @@ subtest 'vhdl_top_token_readers_prefer_entry_text' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for top token-reader helper inspection');
-    like($source_content, qr{comment:\s+/--\.\*/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(s\(text\)\)}, 'vhdl comment token reader now prefers entry_text() through an explicit scalar helper flow');
-    like($source_content, qr{space:\s+/\\s\+/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(s\(text\)\)}, 'vhdl space token reader now prefers entry_text() through an explicit scalar helper flow');
+    like($source_content, qr{comment:\s+/--\.\*/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(scalar\(text\)\)}, 'vhdl comment token reader now prefers entry_text() through an explicit scalar helper flow');
+    like($source_content, qr{space:\s+/\\s\+/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(scalar\(text\)\)}, 'vhdl space token reader now prefers entry_text() through an explicit scalar helper flow');
     unlike($source_content, qr{comment:\s+/--\.\*/\s+I\.return\(\$IMATCH\)}, 'vhdl comment token reader no longer uses raw $IMATCH');
     unlike($source_content, qr{space:\s+/\\s\+/\s+I\.return\(\$IMATCH\)}, 'vhdl space token reader no longer uses raw $IMATCH');
 };
@@ -42525,18 +42553,18 @@ subtest 'hlink_substitution_delimiter_rules_prefer_capture_slice' => sub {
     like($source_content, qr/LX \{print\("\(HLinkSubst\) -E- Unmatched closing brace\\n"\); exit_now\(2\)\}/, 'hlink_substitution brace syntax-error path now uses exit_now(2)');
     unlike($source_content, qr/\bexit 2\b/, 'hlink_substitution delimiter syntax-error paths no longer use bare exit compatibility syntax');
 };
-subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' => sub {
+subtest 'hlink_substitution_spec_prefers_canonical_container_wrappers_in_top_band' => sub {
     plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for alias migration inspection');
-    like($source_content, qr/assign\(s\(retv\), call\(substitute_statement2\)\)/, 'hlink_substitution top band now prefers s(retv) in substitute_statement2 assignment');
-    like($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution top band now prefers a(word_items) plus s(retv) in accumulator pushes');
-    ok(index($source_content, 'return(array_copy(a(word_items)));') >= 0, 'hlink_substitution top band now prefers a(word_items) plus array_copy in aggregate return flow');
+    ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for wrapper migration inspection');
+    like($source_content, qr/assign\(scalar\(retv\), call\(substitute_statement2\)\)/, 'hlink_substitution top band now uses scalar(retv) in substitute_statement2 assignment');
+    like($source_content, qr/push_value\(array\(word_items\), scalar\(retv\)\)/, 'hlink_substitution top band now uses array(word_items) plus scalar(retv) in accumulator pushes');
+    ok(index($source_content, 'return(array_copy(array(word_items)));') >= 0, 'hlink_substitution top band now uses array(word_items) plus array_copy in aggregate return flow');
     like($source_content, qr/-> substitute_statement2\[1\] \{print\("\(HLinkSubst\) -E- Dangling closing bracket\\n"\); exit_now\(1\)\}/, 'hlink_substitution top dangling-bracket path now uses exit_now(1)');
-    unlike($source_content, qr/push_value\(array\(word_items\), scalar\(retv\)\)/, 'hlink_substitution migrated band no longer uses the older array()/scalar() form in accumulator pushes');
+    unlike($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution migrated band no longer uses retired a()/s() aliases in accumulator pushes');
     unlike($source_content, qr/\bexit 1\b/, 'hlink_substitution top dangling-bracket path no longer uses bare exit compatibility syntax');
 };
 subtest 'hlink_substitution_raw_string_prefers_entry_text' => sub {
@@ -42622,20 +42650,20 @@ subtest 'lib_reader_entry_group_migration_preserves_runtime_output' => sub {
     ok(!defined($runtime_ctx{last_error}), 'lib_reader entry_group migration leaves runtime_ctx last_error clear on success');
     ok(!defined($runtime_ctx{top_rule}) || $runtime_ctx{top_rule} eq 'lib_file', 'lib_reader entry_group migration keeps top-level parser context stable');
 };
-subtest 'lib_reader_spec_prefers_short_container_aliases_in_reader_band' => sub {
+subtest 'lib_reader_spec_prefers_canonical_container_wrappers_in_reader_band' => sub {
     plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'lib_reader.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for alias migration inspection');
-    ok(index($source_content, '.substr(s(groupname), "\"", "", go)') >= 0, 'lib_reader group reader now prefers s(groupname) in regex-subst cleanup');
-    ok(index($source_content, 'LX          {return(array_copy(a(lib_file)))}') >= 0, 'lib_reader top lifecycle return now uses helper-form array snapshot return');
-    like($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_copy\(a\(group\)\)\)\)/, 'lib_reader group return now prefers combined s()/a() aliases plus array_copy');
-    like($source_content, qr/LX \{say\("GROUP <", s\(grouptype\), ">\(", s\(groupname\), "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
+    ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for wrapper migration inspection');
+    ok(index($source_content, '.substr(scalar(groupname), "\"", "", go)') >= 0, 'lib_reader group reader now uses scalar(groupname) in regex-subst cleanup');
+    ok(index($source_content, 'LX          {return(array_copy(array(lib_file)))}') >= 0, 'lib_reader top lifecycle return now uses helper-form array snapshot return');
+    like($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_copy\(array\(group\)\)\)\)/, 'lib_reader group return now uses combined scalar()/array() wrappers plus array_copy');
+    like($source_content, qr/LX \{say\("GROUP <", scalar\(grouptype\), ">\(", scalar\(groupname\), "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
     like($source_content, qr/exit_now\(1\)/, 'lib_reader group syntax-error path now uses exit_now(1)');
-    like($source_content, qr/\.split\(a\(value_items\), s\(value\), \/,\//, 'lib_reader cattribute splitter now prefers short array/scalar aliases');
-    unlike($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_(?:values|copy)\(array\(group\)\)\)\)/, 'lib_reader group return no longer uses the older scalar()/array() form in the migrated band');
+    like($source_content, qr/\.split\(array\(value_items\), scalar\(value\), \/,\//, 'lib_reader cattribute splitter now uses canonical array/scalar wrappers');
+    unlike($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_(?:values|copy)\(a\(group\)\)\)\)/, 'lib_reader group return no longer uses retired s()/a() aliases in the migrated band');
     unlike($source_content, qr/return\s+\\\@lib_file|\bexit\s+1\b/, 'lib_reader migrated lifecycle paths no longer use compatibility return-ref or bare exit syntax');
 };
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
@@ -42687,32 +42715,32 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'sdce exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
-subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
+subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
     plan tests => 20;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'sdce source spec text is available for alias migration inspection');
+    ok(defined($source_content) && length($source_content), 'sdce source spec text is available for wrapper migration inspection');
     like($source_content, qr/sdc_esplit:: I \{declare\(array, pieces\); declare\(scalar, retv\); start_capture_slice\(\)\}/, 'sdce top band now prefers start_capture_slice() for explicit anonymous capture-boundary initialization');
-    unlike($source_content, qr/assign\(s\(IPOS\), 0\)/, 'sdce top band no longer uses direct IPOS initialization');
-    like($source_content, qr/LS\s+\{assign\(s\(retv\), capture_slice\(\)\); push_value\(a\(pieces\), s\(retv\)\)\}/, 'sdce top split band now prefers capture_slice() for anonymous capture-boundary reads');
-    unlike($source_content, qr/LS\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(a\(pieces\), s\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
+    unlike($source_content, qr/assign\(scalar\(IPOS\), 0\)/, 'sdce top band no longer uses direct IPOS initialization');
+    like($source_content, qr/LS\s+\{assign\(scalar\(retv\), capture_slice\(\)\); push_value\(array\(pieces\), scalar\(retv\)\)\}/, 'sdce top split band now prefers capture_slice() for anonymous capture-boundary reads');
+    unlike($source_content, qr/LS\s+\{assign\(scalar\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(array\(pieces\), scalar\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
     like($source_content, qr/LE\s+\{start_capture_slice\(\)\}/, 'sdce split bands now prefer start_capture_slice() for direct anonymous capture-boundary movement');
-    unlike($source_content, qr/assign\(s\(IPOS\), cursor_pos\(\)\)/, 'sdce split bands no longer use explicit IPOS assignment plus cursor_pos() in the migrated anonymous-boundary writes');
-    like($source_content, qr/LX\s+\{assign\(s\(retv\), capture_rest\(\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_copy\(a\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus array_copy for anonymous capture-boundary tail reads');
-    unlike($source_content, qr/LX\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_(?:values|copy)\(a\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
-    like($source_content, qr/push_value\(a\(pieces\), s\(retv\)\)/, 'sdce top band now prefers a(pieces) plus s(retv) in accumulator pushes');
-    like($source_content, qr/assign\(s\(segment\), input_slice\(match_end_pos\(\), call\(oc_brace\)\)\)/, 'sdce get_pinport brace segment read now prefers input_slice() with an explicit match-end start');
+    unlike($source_content, qr/assign\(scalar\(IPOS\), cursor_pos\(\)\)/, 'sdce split bands no longer use explicit IPOS assignment plus cursor_pos() in the migrated anonymous-boundary writes');
+    like($source_content, qr/LX\s+\{assign\(scalar\(retv\), capture_rest\(\)\); push_value\(array\(pieces\), scalar\(retv\)\); return\(array_copy\(array\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus array_copy for anonymous capture-boundary tail reads');
+    unlike($source_content, qr/LX\s+\{assign\(scalar\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(array\(pieces\), scalar\(retv\)\); return\(array_(?:values|copy)\(array\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
+    like($source_content, qr/push_value\(array\(pieces\), scalar\(retv\)\)/, 'sdce top band now uses array(pieces) plus scalar(retv) in accumulator pushes');
+    like($source_content, qr/assign\(scalar\(segment\), input_slice\(match_end_pos\(\), call\(oc_brace\)\)\)/, 'sdce get_pinport brace segment read now prefers input_slice() with an explicit match-end start');
     unlike($source_content, qr/substr\(\$\$STRING, \$LSPOS, call\(oc_brace\)\)/, 'sdce get_pinport brace segment read no longer uses raw whole-input substr with LSPOS');
-    like($source_content, qr/assign\(s\(segment\), capture_slice\(\)\)/, 'sdce nested split band now prefers capture_slice() for anonymous capture-boundary reads');
-    unlike($source_content, qr/assign\(s\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');
-    ok(index($source_content, 'split(a(segment_parts), s(segment), /\s+/)') >= 0, 'sdce get_pinport now prefers short aliases in split source and target positions');
-    like($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(entry_groups\(\)\), array_copy\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() plus array_copy in its helper return');
-    unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(IMATCH_LIST\), array_(?:values|copy)\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
+    like($source_content, qr/assign\(scalar\(segment\), capture_slice\(\)\)/, 'sdce nested split band now prefers capture_slice() for anonymous capture-boundary reads');
+    unlike($source_content, qr/assign\(scalar\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');
+    ok(index($source_content, 'split(array(segment_parts), scalar(segment), /\s+/)') >= 0, 'sdce get_pinport now uses canonical wrappers in split source and target positions');
+    like($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(entry_groups\(\)\), array_copy\(array\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() plus array_copy in its helper return');
+    unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
     like($source_content, qr/oc_brace: .*?\{return\(capture_slice_len\(\)\)\}/, 'sdce oc_brace now prefers capture_slice_len() for brace-body width reads');
     unlike($source_content, qr/\$LSPOS - \$IPOS - 1/, 'sdce oc_brace no longer uses raw cursor arithmetic for brace-body width reads');
-    unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
+    unlike($source_content, qr/assign\(a\(pieces\), a\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses retired a() aliases in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
     plan tests => 11;
@@ -42726,8 +42754,8 @@ subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
     like($source_content, qr/push\(quoted_string, 1\);\s+start_capture_slice\(\)/, 'ebnf logging_annotation advances the capture boundary after indexed quoted-string child results');
     unlike($source_content, qr/push \@logging_annotation, call\(quoted_string\)->\[1\]/, 'ebnf logging_annotation no longer uses the raw indexed push-call wrapper');
-    like($source_content, qr/-> comma \{\s+push_nonempty\(a\(logging_annotation\), trim\(capture_slice\(\)\)\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging_annotation advances the capture boundary after comma spans');
-    like($source_content, qr/return\(a\("logging_annotation", a\(s\(logging_name\), array_copy\(a\(logging_annotation\)\)\)\)\)/, 'ebnf logging_annotation now returns helper-form payload with a snapshot array');
+    like($source_content, qr/-> comma \{\s+push_nonempty\(array\(logging_annotation\), trim\(capture_slice\(\)\)\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging_annotation advances the capture boundary after comma spans');
+    like($source_content, qr/return\(array\("logging_annotation", array\(scalar\(logging_name\), array_copy\(array\(logging_annotation\)\)\)\)\)/, 'ebnf logging_annotation now returns helper-form payload with a snapshot array');
     unlike($source_content, qr/\$IMATCH =~ s\/\@\|\\s\*\\\(\//, 'ebnf logging_annotation no longer mutates $IMATCH with raw regex substitution');
     unlike($source_content, qr/return \['logging_annotation', \[\$IMATCH, \[\@logging_annotation\]\]\]/, 'ebnf logging_annotation no longer uses bare arrayref return syntax');
     unlike($source_content, qr/(?:CAPTURE_IF\s*\(|\.capture_if\b)/, 'ebnf logging_annotation no longer uses the legacy capture-if helper surface');
@@ -42818,21 +42846,21 @@ subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
         is_deeply($ast, $expected, "portmap classification matches expected AST for `$input`");
     }
 };
-subtest 'portmap_spec_prefers_short_container_aliases_in_bare_bit_slice_band' => sub {
+subtest 'portmap_spec_prefers_canonical_container_wrappers_in_bare_bit_slice_band' => sub {
     plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'portmap.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'portmap source spec text is available for alias migration inspection');
-    like($source_content, qr/assign\(a\(entry_parts\), entry_groups\(\)\);/, 'portmap bare_bit_slice now prefers a(entry_parts) for immediate group snapshot assignment');
-    like($source_content, qr/if\(num_eq\(count\(a\(portmap\)\), 1\)\);/, 'portmap top lifecycle now branches through helper-form count comparison');
-    like($source_content, qr/return\(scalar\(a\(portmap\), 0\)\);/, 'portmap top lifecycle now returns singleton entries through scalar array access');
-    like($source_content, qr/return\(a\("\?multi:", array_copy\(a\(portmap\)\)\)\);/, 'portmap top lifecycle now builds multi-entry return payload through helper-form array copy');
-    like($source_content, qr/return\(a\("\?concat:", array_copy\(a\(concatenation\)\)\)\)/, 'portmap concatenation rule now builds concat payload through helper-form array copy');
-    like($source_content, qr/return\(a\("\?slice:", a\(flat_array\(entry_parts\)\)\)\);/, 'portmap slice classification return now prefers nested short array aliases');
-    like($source_content, qr/return\(a\("\?bare:", a\(flat_array\(entry_parts\)\)\)\);/, 'portmap bare classification return now prefers nested short array aliases');
-    unlike($source_content, qr/return\(array\("\?slice:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap migrated band no longer uses the older array()/array() form for slice returns');
+    ok(defined($source_content) && length($source_content), 'portmap source spec text is available for wrapper migration inspection');
+    like($source_content, qr/assign\(array\(entry_parts\), entry_groups\(\)\);/, 'portmap bare_bit_slice now uses array(entry_parts) for immediate group snapshot assignment');
+    like($source_content, qr/if\(num_eq\(count\(array\(portmap\)\), 1\)\);/, 'portmap top lifecycle now branches through helper-form count comparison');
+    like($source_content, qr/return\(scalar\(array\(portmap\), 0\)\);/, 'portmap top lifecycle now returns singleton entries through scalar array access');
+    like($source_content, qr/return\(array\("\?multi:", array_copy\(array\(portmap\)\)\)\);/, 'portmap top lifecycle now builds multi-entry return payload through helper-form array copy');
+    like($source_content, qr/return\(array\("\?concat:", array_copy\(array\(concatenation\)\)\)\)/, 'portmap concatenation rule now builds concat payload through helper-form array copy');
+    like($source_content, qr/return\(array\("\?slice:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap slice classification return now uses nested canonical array wrappers');
+    like($source_content, qr/return\(array\("\?bare:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap bare classification return now uses nested canonical array wrappers');
+    unlike($source_content, qr/return\(a\("\?slice:", a\(flat_array\(entry_parts\)\)\);/, 'portmap migrated band no longer uses retired a() aliases for slice returns');
     unlike($source_content, qr/return \@portmap == 1 \? \$portmap\[0\]/, 'portmap migrated band no longer uses bare Perl ternary return syntax');
 };
 subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
@@ -42904,7 +42932,7 @@ PPLUGIN
     is($ast->{foo}->(), 3, 'pplugin foo coderef preserves evaluated body behavior');
    is($ast->{bar}->(), 'ok', 'pplugin bar coderef preserves evaluated body behavior');
 };
-subtest 'pplugin_spec_prefers_short_container_aliases_in_top_aggregation_band' => sub {
+subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_band' => sub {
     plan tests => 14;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'pplugin.spec');
@@ -42913,14 +42941,14 @@ subtest 'pplugin_spec_prefers_short_container_aliases_in_top_aggregation_band' =
     ok(defined($source_content) && length($source_content), 'pplugin source spec text is available for alias migration inspection');
     like($source_content, qr/I \{declare\(array, defs\); declare\(scalar, retv\)\}/, 'pplugin top setup now declares working state through helper-form declarations');
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'pplugin comment edge now uses helper-form next()');
-    like($source_content, qr/-> subdef\s+\{assign\(s\(retv\), call\(subdef\)\)\}/, 'pplugin subdef edge now uses helper-form assignment');
-    like($source_content, qr/if\(is_defined\(s\(retv\)\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
-    like($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation now prefers the short array alias in assign and constructor positions');
+    like($source_content, qr/-> subdef\s+\{assign\(scalar\(retv\), call\(subdef\)\)\}/, 'pplugin subdef edge now uses helper-form assignment');
+    like($source_content, qr/if\(is_defined\(scalar\(retv\)\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
+    like($source_content, qr/assign\(array\(defs\), array\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation now uses canonical array wrappers in assign and constructor positions');
     like($source_content, qr/return_undef\(\);/, 'pplugin top aggregation fallback now uses helper-form return_undef()');
-    like($source_content, qr/^LX \{return\(hash\(flat_array\(a\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
-    like($source_content, qr/subdef\[1\]\s+\{return\(a\(entry_named\(subname\), sub \{eval substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\)\}\)\)\}/, 'pplugin subdef body now uses helper-form array return around the preserved plugin-body coderef');
+    like($source_content, qr/^LX \{return\(hash\(flat_array\(array\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
+    like($source_content, qr/subdef\[1\]\s+\{return\(array\(entry_named\(subname\), sub \{eval substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\)\}\)\)\}/, 'pplugin subdef body now uses helper-form array return around the preserved plugin-body coderef');
     like($source_content, qr/curlyb\[1\]\s+\{return_undef\(\)\}/, 'pplugin curlyb completion now uses helper-form return_undef()');
-    unlike($source_content, qr/assign\(array\(defs\), array\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation no longer uses the older array()/array() form in the migrated band');
+    unlike($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation no longer uses retired a() aliases in the migrated band');
     unlike($source_content, qr/return undef unless defined \$retv/, 'pplugin top aggregation no longer uses bare return-unless compatibility syntax');
     unlike($source_content, qr/^LX \{return \{\@defs\}\}/m, 'pplugin top LX no longer uses bare hashref return compatibility syntax');
     unlike($source_content, qr/curlyb\[1\]\s+\{return\}/, 'pplugin curlyb completion no longer uses bare return compatibility syntax');
@@ -42997,7 +43025,7 @@ subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
 
     ok(defined($source_content) && length($source_content), 'tkgui source spec text is available for delimiter-helper inspection');
     like($source_content, qr/-> sub_gui\s+\{push\(sub_gui\)\}/, 'tkgui top aggregation now prefers push(sub_gui)');
-    like($source_content, qr/LX \{return\(hash\(flat_array\(a\(sub_gui_list\)\)\)\)\}/, 'tkgui top lifecycle now returns the accumulated pair list through helper-form hash construction');
+    like($source_content, qr/LX \{return\(hash\(flat_array\(array\(sub_gui_list\)\)\)\)\}/, 'tkgui top lifecycle now returns the accumulated pair list through helper-form hash construction');
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'tkgui comment skips now use the helper-form next statement');
     unlike($source_content, qr/push \@sub_guis, call\(/, 'tkgui top aggregation no longer uses a raw push-call wrapper');
     like($source_content, qr/assign\(scalar\(subgui_name\), entry_group\(0\)\);/, 'tkgui sub_gui now prefers entry_group(0) for the entry-point name read');
@@ -43267,20 +43295,20 @@ subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'Lispish parenthesis is language-agnostic action-IR ready');
 };
-subtest 'lispish_spec_prefers_short_container_aliases_in_parenthesis_and_reader_band' => sub {
+subtest 'lispish_spec_prefers_canonical_container_wrappers_in_parenthesis_and_reader_band' => sub {
     plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'Lispish source spec text is available for alias migration inspection');
-    like($source_content, qr/if\(is_nonempty\(a\(word\)\)\);/, 'Lispish parenthesis band now prefers a(word) in aggregate flow guards');
-    like($source_content, qr/assign\(s\(head\), join_values\("", a\(word\)\)\);/, 'Lispish parenthesis band now prefers s(head) plus a(word) in head assignment');
-    like($source_content, qr/return\(a\(s\(head\), array_copy\(a\(tail\)\)\)\);/, 'Lispish parenthesis return path now prefers combined s()/a() aliases plus array_copy');
-    like($source_content, qr/I\.return\(h\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now also spend the short hash constructor alias');
+    ok(defined($source_content) && length($source_content), 'Lispish source spec text is available for wrapper migration inspection');
+    like($source_content, qr/if\(is_nonempty\(array\(word\)\)\);/, 'Lispish parenthesis band now uses array(word) in aggregate flow guards');
+    like($source_content, qr/assign\(scalar\(head\), join_values\("", array\(word\)\)\);/, 'Lispish parenthesis band now uses scalar(head) plus array(word) in head assignment');
+    like($source_content, qr/return\(array\(scalar\(head\), array_copy\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path now uses combined scalar()/array() wrappers plus array_copy');
+    like($source_content, qr/I\.return\(hash\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now use the canonical hash constructor');
     like($source_content, qr/-> parenthesis\s+\{return\(call\(parenthesis\)\)\}/, 'Lispish top child-return edge now uses helper-form return(call(...))');
     like($source_content, qr/-> parenthesis\[1\]\s+\{say\("\(Lispish\) -E- Syntax Error"\); exit_now\(1\)\}/, 'Lispish top syntax-error edge now uses exit_now(1)');
-    unlike($source_content, qr/return\(array\(scalar\(head\), array_(?:values|copy)\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path no longer uses the older scalar()/array() form in the migrated band');
+    unlike($source_content, qr/return\(a\(s\(head\), array_(?:values|copy)\(a\(tail\)\)\)\);/, 'Lispish parenthesis return path no longer uses retired s()/a() aliases in the migrated band');
     unlike($source_content, qr/return\s+call\(parenthesis\)/, 'Lispish top child-return edge no longer uses compatibility return-call spelling');
     unlike($source_content, qr/\bexit\s+1\b/, 'Lispish top syntax-error edge no longer uses bare exit compatibility spelling');
 };
@@ -44155,9 +44183,9 @@ subtest 'consume_before_recurse_body_recursion_parses_and_terminates' => sub {
     plan tests => 3;
     my $spec = "top::\n -> sexpr { return(call(sexpr)) }\n\n"
              . "sexpr: /\\(/ /\\)/  I { declare(array, items) }\n"
-             . " -> sexpr     { push_value(a(items), call(sexpr)) }\n"
-             . " -> atom      { push_value(a(items), call(atom)) }\n"
-             . " -> sexpr[1]  { return(array_copy(a(items))) }\n\n"
+             . " -> sexpr     { push_value(array(items), call(sexpr)) }\n"
+             . " -> atom      { push_value(array(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(array_copy(array(items))) }\n\n"
              . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'top') };
     ok(ref($parser) eq 'CODE', 'recursive S-expression grammar builds a parser')
@@ -44174,9 +44202,9 @@ subtest 'top_rule_as_normal_top_recursion_terminates' => sub {
     # is the gap owned by TOP-RULE-AS-NORMAL.2.2 and is intentionally NOT asserted here.
     plan tests => 2;
     my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
-             . " -> sexpr     { push_value(a(items), call(sexpr)) }\n"
-             . " -> atom      { push_value(a(items), call(atom)) }\n"
-             . " -> sexpr[1]  { return(array_copy(a(items))) }\n\n"
+             . " -> sexpr     { push_value(array(items), call(sexpr)) }\n"
+             . " -> atom      { push_value(array(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(array_copy(array(items))) }\n\n"
              . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'sexpr') };
     ok(ref($parser) eq 'CODE', 'top-recursive grammar builds a parser')
@@ -44199,10 +44227,10 @@ subtest 'top_rule_as_normal_recursion_with_lx_parses_sequence' => sub {
     # the two are intentionally different grammars (different arity), not an engine bug.
     plan tests => 3;
     my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
-             . " -> sexpr     { push_value(a(items), call(sexpr)) }\n"
-             . " -> atom      { push_value(a(items), call(atom)) }\n"
-             . " -> sexpr[1]  { return(array_copy(a(items))) }\n"
-             . "LX { return(array_copy(a(items))) }\n\n"
+             . " -> sexpr     { push_value(array(items), call(sexpr)) }\n"
+             . " -> atom      { push_value(array(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(array_copy(array(items))) }\n"
+             . "LX { return(array_copy(array(items))) }\n\n"
              . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'sexpr') };
     ok(ref($parser) eq 'CODE', 'top-recursive grammar with LX builds a parser')
@@ -44252,7 +44280,7 @@ subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => s
 
 subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_declare' => sub {
     # SPEC-FORMAT-TERSE.1.1.1 (ADR 0007): a working variable referenced through a typed
-    # wrapper -- scalar(NAME)/array(NAME)/hash(NAME) or the s()/a()/h() aliases -- needs no
+    # wrapper -- scalar(NAME)/array(NAME)/hash(NAME) -- needs no
     # declare(...). The engine auto-supplies one `my $NAME`/`@NAME`/`%NAME` in the handler
     # preamble, so the variable is a PER-INVOCATION lexical, not a leaky package global
     # (generated handlers are non-strict -- KM card working-vars-no-strict-need-my-lexical).
@@ -44269,8 +44297,8 @@ subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_declare' =
     };
 
     # (a) scalar working variable used WITHOUT declare: a per-match counter.
-    my $scalar_spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(s(count), num_add(coalesce(s(count), 0), 1)) }\n"
-                    . "LX {return(s(count))}\n";
+    my $scalar_spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }\n"
+                    . "LX {return(scalar(count))}\n";
     my $sp = eval { LinkedSpec::Get(\$scalar_spec) };
     ok(ref($sp) eq 'CODE', 'no-declare scalar working var: spec compiles to a parser')
         or diag(normalize_error($@));
@@ -44278,8 +44306,8 @@ subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_declare' =
     is($run->($sp, 'a b c'), '3', 're-running the SAME parser still returns 3 (per-invocation my, not a leaky global)');
 
     # (b) array working variable used WITHOUT declare: a per-match accumulator.
-    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(a(items), match_group(0)) }\n"
-                   . "LX {return(array_copy(a(items)))}\n";
+    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(array(items), match_group(0)) }\n"
+                   . "LX {return(array_copy(array(items)))}\n";
     my $ap = eval { LinkedSpec::Get(\$array_spec) };
     ok(ref($ap) eq 'CODE', 'no-declare array working var: spec compiles to a parser')
         or diag(normalize_error($@));
@@ -44300,9 +44328,9 @@ subtest 'spec_format_terse_1_1_1_declare_path_stays_single_my_no_double' => sub 
             or return "ERR:$@";
         return $src;
     };
-    my $declared = "top:: /(\\w+)\\s*/ -> top[0] { assign(s(count), num_add(coalesce(s(count), 0), 1)) }\n"
+    my $declared = "top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }\n"
                  . "I.declare(scalar, count)\n"
-                 . "LX {return(s(count))}\n";
+                 . "LX {return(scalar(count))}\n";
     (my $no_declare = $declared) =~ s/^I\.declare\(scalar, count\)\n//m;
     my $declared_src = $gen->($declared);
     my $n = () = ($declared_src =~ /my \$count\b/g);
@@ -44311,18 +44339,18 @@ subtest 'spec_format_terse_1_1_1_declare_path_stays_single_my_no_double' => sub 
 };
 
 subtest 'spec_format_terse_1_1_1_reserved_literals_are_not_auto_declared' => sub {
-    # a(undef)/array(undef) is the array constructor wrapping the undef LITERAL, not a
+    # array(undef)/array(undef) is the array constructor wrapping the undef LITERAL, not a
     # reference to a variable named "undef" -- so it must NOT auto-declare `my @undef`
-    # (this guards the Lispish-style `return(a(undef))` form). A genuine adjacent working
+    # (this guards the Lispish-style `return(array(undef))` form). A genuine adjacent working
     # variable in the same spec is still auto-declared.
     plan tests => 2;
     my $src = '';
-    my $spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(s(x), match_group(0)) }\n"
-             . "LX {return(a(undef))}\n";
+    my $spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(x), match_group(0)) }\n"
+             . "LX {return(array(undef))}\n";
     eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
         or diag("gen failed: $@");
-    unlike($src, qr/my \@undef\b/, 'the undef literal in a(undef) is NOT auto-declared as a working variable');
-    like($src, qr/my \$x\b/, 'a genuine adjacent working variable (s(x)) is still auto-declared');
+    unlike($src, qr/my \@undef\b/, 'the undef literal in array(undef) is NOT auto-declared as a working variable');
+    like($src, qr/my \$x\b/, 'a genuine adjacent working variable (scalar(x)) is still auto-declared');
 };
 
 subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
@@ -44390,19 +44418,19 @@ subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_declare_single_my' => su
         return $src;
     };
 
-    my $mix_scalar = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(count, num_add(coalesce(s(count), 0), 1)) }\n"
-                          . "LX {return(s(count))}\n");
+    my $mix_scalar = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(count, num_add(coalesce(scalar(count), 0), 1)) }\n"
+                          . "LX {return(scalar(count))}\n");
     my $n1 = () = ($mix_scalar =~ /my \$count\b/g);
-    is($n1, 1, 'bare assign(count,...) + wrapped s(count) dedup to exactly one `my $count`');
+    is($n1, 1, 'bare assign(count,...) + wrapped scalar(count) dedup to exactly one `my $count`');
 
     my $wrapped_assign = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(count), match_group(0)) }\n"
-                              . "LX {return(s(count))}\n");
+                              . "LX {return(scalar(count))}\n");
     my $n2 = () = ($wrapped_assign =~ /my \$count\b/g);
     is($n2, 1, 'assign(scalar(count),...) wrapped target emits exactly one `my $count` (bare-arg pattern does not double-match a wrapped target)');
 
     my $declared = $gen->("top:: /(\\w+)\\s*/ -> top[0] { assign(count, match_group(0)) }\n"
                         . "I.declare(scalar, count)\n"
-                        . "LX {return(s(count))}\n");
+                        . "LX {return(scalar(count))}\n");
     my $n3 = () = ($declared =~ /my \$count\b/g);
     is($n3, 1, 'declare(scalar,count) + bare assign(count,...) dedup to exactly one `my $count`');
 
@@ -44427,8 +44455,8 @@ subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
         return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
     };
 
-    my $scalar_spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(count, num_add(coalesce(s(count), 0), 1)) }\n"
-                    . "LX {return(s(count))}\n";
+    my $scalar_spec = "top:: /(\\w+)\\s*/ -> top[0] { assign(count, num_add(coalesce(scalar(count), 0), 1)) }\n"
+                    . "LX {return(scalar(count))}\n";
     my $sp = eval { LinkedSpec::Get(\$scalar_spec) };
     ok(ref($sp) eq 'CODE', 'bare-assign counter compiles to a parser')
         or diag(normalize_error($@));
@@ -44593,7 +44621,7 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
     unlike($literal_src, qr/my \$(?:true|false|undef)\b/,
         'reserved primitive literals are not auto-declared as scalar reads');
 
-    my $dedup_src = $gen->("top:: -> w { set(out, count); return(s(count)) }\n"
+    my $dedup_src = $gen->("top:: -> w { set(out, count); return(scalar(count)) }\n"
                          . "I.declare(scalar, count)\n\nw : /x/\n");
     my $dedup_count = () = ($dedup_src =~ /my \$count\b/g);
     is($dedup_count, 1, 'bare source read + wrapped/declared count dedup to one `my $count`');
@@ -44778,22 +44806,22 @@ subtest 'spec_format_terse_1_4_1_new_spellings_lower_identically_to_canonical' =
     my @pairs = (
         ['set(scalar(x), 1)',                    'assign(scalar(x), 1)',                    'set == assign (scalar statement)'],
         ['return(cat("a","b"))',                 'return(concat("a","b"))',                 'cat == concat (return payload)'],
-        ['return(copy(a(items)))',               'return(array_copy(a(items)))',            'copy(array) == array_copy'],
-        ['return(copy(h(m)))',                   'return(hash_copy(h(m)))',                 'copy(hash) == hash_copy'],
+        ['return(copy(array(items)))',               'return(array_copy(array(items)))',            'copy(array) == array_copy'],
+        ['return(copy(hash(m)))',                   'return(hash_copy(hash(m)))',                 'copy(hash) == hash_copy'],
         ['set(scalar(x), cat(a,b))',             'assign(scalar(x), concat(a,b))',          'set+cat == assign+concat (scalar source)'],
-        ['assign(scalar(x), copy(a(y)))',        'assign(scalar(x), array_copy(a(y)))',     'copy as scalar assignment source == array_copy'],
-        ['assign(array(a2), copy(a(y)))',        'assign(array(a2), array_copy(a(y)))',     'copy as array assignment source == array_copy'],
-        ['assign(hash(h2), copy(h(m)))',         'assign(hash(h2), hash_copy(h(m)))',       'copy as hash assignment source == hash_copy'],
+        ['assign(scalar(x), copy(array(y)))',        'assign(scalar(x), array_copy(array(y)))',     'copy as scalar assignment source == array_copy'],
+        ['assign(array(a2), copy(array(y)))',        'assign(array(a2), array_copy(array(y)))',     'copy as array assignment source == array_copy'],
+        ['assign(hash(h2), copy(hash(m)))',         'assign(hash(h2), hash_copy(hash(m)))',       'copy as hash assignment source == hash_copy'],
         ['push_value(array(items), cat(a,b))',   'push_value(array(items), concat(a,b))',   'cat as a push value == concat'],
-        ['return(num_sum(copy(a(x))))',          'return(num_sum(array_copy(a(x))))',       'copy as a numeric-reducer arg == array_copy'],
+        ['return(num_sum(copy(array(x))))',          'return(num_sum(array_copy(array(x))))',       'copy as a numeric-reducer arg == array_copy'],
     );
     for my $p (@pairs) {
         is($L->($p->[0]), $L->($p->[1]), $p->[2]);
     }
     # Old-name (deprecated alias) lowerings stay byte-unchanged.
     is($L->('assign(scalar(x), 1)'), '$x = 1', 'old name assign(scalar(x),1) still lowers to `$x = 1`');
-    is($L->('return(array_copy(a(items)))'), 'return [@items]', 'old name array_copy still lowers to `[@items]`');
-    is($L->('return(hash_copy(h(m)))'), 'return {%m}', 'old name hash_copy still lowers to `{%m}`');
+    is($L->('return(array_copy(array(items)))'), 'return [@items]', 'old name array_copy still lowers to `[@items]`');
+    is($L->('return(hash_copy(hash(m)))'), 'return {%m}', 'old name hash_copy still lowers to `{%m}`');
     like($L->('return(cat("a","b"))'), qr/\@__ls_concat_parts/, 'cat is routed through the concat do-block lowering');
 };
 
@@ -44839,17 +44867,17 @@ subtest 'spec_format_terse_1_4_1_copy_resolves_array_then_hash' => sub {
     # array-vs-hash type-inference used by reducers/coalesce.
     plan tests => 7;
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
-    is($L->('return(copy(a(x)))'), 'return [@x]', 'copy of a wrapped array symbol -> [@x]');
-    is($L->('return(copy(h(m)))'), 'return {%m}', 'copy of a wrapped hash symbol -> {%m}');
+    is($L->('return(copy(array(x)))'), 'return [@x]', 'copy of a wrapped array symbol -> [@x]');
+    is($L->('return(copy(hash(m)))'), 'return {%m}', 'copy of a wrapped hash symbol -> {%m}');
     is($L->('return(copy(items))'), $L->('return(array_copy(items))'),
         'bare copy(items) resolves array-first (== array_copy)');
-    is($L->('assign(array(a2), copy(a(y)))'), $L->('assign(array(a2), array_copy(a(y)))'),
+    is($L->('assign(array(a2), copy(array(y)))'), $L->('assign(array(a2), array_copy(array(y)))'),
         'copy as an array assignment source == array_copy (list init)');
-    is($L->('assign(hash(h2), copy(h(m)))'), $L->('assign(hash(h2), hash_copy(h(m)))'),
+    is($L->('assign(hash(h2), copy(hash(m)))'), $L->('assign(hash(h2), hash_copy(hash(m)))'),
         'copy as a hash assignment source == hash_copy (list init)');
-    is($L->('return(num_sum(copy(a(x))))'), $L->('return(num_sum(array_copy(a(x))))'),
+    is($L->('return(num_sum(copy(array(x))))'), $L->('return(num_sum(array_copy(array(x))))'),
         'copy stays array-like in numeric-reducer type inference (== array_copy)');
-    is($L->('return(coalesce(copy(h(m)), h(n)))'), $L->('return(coalesce(hash_copy(h(m)), h(n)))'),
+    is($L->('return(coalesce(copy(hash(m)), hash(n)))'), $L->('return(coalesce(hash_copy(hash(m)), hash(n)))'),
         'copy stays hash-like in coalesce type inference (== hash_copy)');
 };
 
@@ -44865,9 +44893,9 @@ subtest 'spec_format_terse_1_4_1_terse_spec_runs_identically_to_canonical' => su
         my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
         return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
     };
-    my $terse = "top:: /(\\w+)\\s*/ -> top[0] { set(scalar(label), cat(match_group(0), \"!\")); push_value(words, s(label)) }\n"
+    my $terse = "top:: /(\\w+)\\s*/ -> top[0] { set(scalar(label), cat(match_group(0), \"!\")); push_value(words, scalar(label)) }\n"
               . "LX { return(copy(array(words))) }\n";
-    my $canon = "top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(label), concat(match_group(0), \"!\")); push_value(words, s(label)) }\n"
+    my $canon = "top:: /(\\w+)\\s*/ -> top[0] { assign(scalar(label), concat(match_group(0), \"!\")); push_value(words, scalar(label)) }\n"
               . "LX { return(array_copy(array(words))) }\n";
     my $tp = eval { LinkedSpec::Get(\$terse) };
     my $cp = eval { LinkedSpec::Get(\$canon) };
@@ -45564,8 +45592,8 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         'pop_front lowers to a discarded shift on the receiver working array');
     is($L->('array(items).push_back("b")'), 'push @items, "b"',
         'push_back accepts an explicit array(...) receiver');
-    is($L->('a(items).push_front("a")'), 'unshift @items, "a"',
-        'push_front accepts the a(...) receiver alias');
+    is($L->('array(items).push_front("a")'), 'unshift @items, "a"',
+        'push_front accepts an explicit array(...) receiver');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(value,\"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(array_copy(items)) }\n"
@@ -45602,15 +45630,15 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         'array end-mutation spec remains language-agnostic ActionIR ready');
 
     my $alias_spec = "Top::\n"
-                   . " /x/ -> Done { array(items).push_back(\"b\"); a(items).push_front(\"a\"); return(array_copy(items)) }\n"
+                   . " /x/ -> Done { array(items).push_back(\"b\"); array(items).push_front(\"a\"); return(array_copy(items)) }\n"
                    . "\nDone::\n /[a-z]+/\n";
     my $alias_parser = eval { LinkedSpec::Get(\$alias_spec) };
-    ok(ref($alias_parser) eq 'CODE', 'explicit receiver alias spec compiles to a parser')
+    ok(ref($alias_parser) eq 'CODE', 'explicit receiver spec compiles to a parser')
         or diag(normalize_error($@));
     is($run->($alias_parser, 'xhello'), '["a","b"]',
-        'explicit array/a receivers mutate the named working array');
+        'explicit array(...) receivers mutate the named working array');
     is((() = ($gen->($alias_spec) =~ /my \@items\b/g)), 1,
-        'explicit receiver alias spec auto-supplies one my @items');
+        'explicit receiver spec auto-supplies one my @items');
 };
 
 subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
@@ -46042,7 +46070,7 @@ subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub 
         'multi-argument hash(...) remains a hash constructor');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta,\"a\",1); set_key(meta,\"b\",2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(a(items)), count(a(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }), count_keys(h(meta)), count_keys(h(\"meta\", 1)))) }\n"
+             . " /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta,\"a\",1); set_key(meta,\"b\",2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(array(items)), count(array(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)))) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'typed-wrapper quoted-name boundary spec compiles to a parser')

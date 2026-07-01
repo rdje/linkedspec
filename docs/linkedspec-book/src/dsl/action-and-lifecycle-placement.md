@@ -152,7 +152,7 @@ Action-edge continuations are also portable when they stay edge-scoped:
 ```text
 -> Item .push
 -> Item .push(items)
--> Item .if(s(on)).push(Item, items).else().return_undef().endif()
+-> Item .if(scalar(on)).push(Item, items).else().return_undef().endif()
 -> Item[1] .return(array("?items:", array_copy(array(Item))))
 ```
 
@@ -237,9 +237,9 @@ semantic_annotation: /@(\w+)\s*:\s*/
 -> semantic_annotation | grammar_rule {
   BACKTRACK();
   declare(scalar, c=capture_slice());
-  substr(s(c), "\s*$", "", o);
-  substr(s(c), "^\"|\"$", "", go);
-  return(a("semantic_annotation", a(entry_group(0), s(c))));
+  substr(scalar(c), "\s*$", "", o);
+  substr(scalar(c), "^\"|\"$", "", go);
+  return(array("semantic_annotation", array(entry_group(0), scalar(c))));
 }
 ```
 

@@ -926,12 +926,12 @@ subtest 'standalone AST value statements drop covered values without raw fallbac
         'standalone string receiver chain lowers as a discarded value expression');
     unlike($string_chain, qr/^" x "\.trim\(\)/, 'standalone string receiver chain no longer remains as raw source text');
 
-    is(LinkedSpec::call_spec_handler_subst('Top', q{s(foo)}), q{$foo},
-        'compatibility value substitution preserves scalar shorthand as an expression');
-    is(LinkedSpec::call_spec_handler_subst('Top', q{a("A", "B")}), q{["A", "B"]},
-        'compatibility value substitution preserves array shorthand as an expression');
-    is(LinkedSpec::call_spec_handler_subst('Top', q{h("kind", "node")}), q{{"kind" => "node"}},
-        'compatibility value substitution preserves hash shorthand as an expression');
+    like(LinkedSpec::call_spec_handler_subst('Top', q{s(foo)}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:s/,
+        'retired scalar shorthand lowers to an unresolved-helper diagnostic');
+    like(LinkedSpec::call_spec_handler_subst('Top', q{a("A", "B")}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:a/,
+        'retired array shorthand lowers to an unresolved-helper diagnostic');
+    like(LinkedSpec::call_spec_handler_subst('Top', q{h("kind", "node")}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:h/,
+        'retired hash shorthand lowers to an unresolved-helper diagnostic');
 
     my $ready_spec = qq{Top::\n /x/ -> Done { trim(" x "); concat("a","b"); " y ".trim() }\nDone::\n /y/\n};
     my $ready_descriptor = eval { LinkedSpec::Get(\$ready_spec, return_descriptor => 1) };

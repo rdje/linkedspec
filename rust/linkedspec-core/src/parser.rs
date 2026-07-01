@@ -1074,7 +1074,7 @@ Child: /x/ /y/
     fn parse_action_edge_multiline_fluent_flow_chain() {
         let src = r#"Top::
  -> item
-  .if(s(on))
+  .if(scalar(on))
     .push(item, out)
   .else()
     .return_undef()
@@ -1099,7 +1099,7 @@ item: /x/
                 assert_eq!(
                     methods,
                     vec![
-                        ("if", "s(on)"),
+                        ("if", "scalar(on)"),
                         ("push", "item, out"),
                         ("else", ""),
                         ("return_undef", ""),

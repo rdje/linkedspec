@@ -30,7 +30,7 @@ Use declaration helpers when the state is part of the parser action. Avoid raw d
 
 ## Declarations are optional: working variables auto-exist
 
-You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed wrapper — `scalar(NAME)` / `array(NAME)` / `hash(NAME)`, or the `s()` / `a()` / `h()` aliases — **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper (`scalar` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
+You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed wrapper — `scalar(NAME)` / `array(NAME)` / `hash(NAME)` — **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper (`scalar` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
 
 ```text
 # explicit declaration (still fully supported)
@@ -113,7 +113,7 @@ The kind comes from the **position**: the target of `assign(...)`, `set(...)`, a
 
 The shipped specs and the examples in this chapter still use `declare(...)` and the typed wrappers for clarity. Where a name is wrapped, the wrapper decides its kind — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash; where a name is bare in a type-implying position, that position decides it. Inferring the kind from a value's shape (a right-hand side) is still a separate, later evolution step.
 
-> **Reserved names.** `undef`, `true`, and `false` are literals, so `a(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
+> **Reserved names.** `undef`, `true`, and `false` are literals, so `array(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 
 ## Canonical typed form
 

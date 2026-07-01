@@ -66,7 +66,7 @@ sub _looks_like_array_value_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return 0 unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:array|a)\s*\(/o) {
+ if ($trimmed =~ /^array\s*\(/o) {
   return 1;
  }
 
@@ -89,7 +89,7 @@ sub _looks_like_array_value_expr {
   my $inner = $trim_action_ir_value->($copy_args->[0]);
   return 0 unless defined($inner) && length($inner);
   my $sym = $extract_array_symbol_name->($inner);
-  return 1 if defined($sym) && length($sym) && $inner =~ /^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/o;
+  return 1 if defined($sym) && length($sym) && $inner =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o;
   return 0;
  }
 
@@ -135,7 +135,7 @@ sub _looks_like_hash_value_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return 0 unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:hash|h)\s*\(/o) {
+ if ($trimmed =~ /^hash\s*\(/o) {
   return 1;
  }
 
@@ -151,16 +151,16 @@ sub _looks_like_hash_value_expr {
  return 1 if $method =~ /^(?:hash|hash_copy|merge_hash|set_key|rename_key|drop_keys|pick_keys)$/o;
 
  # SPEC-FORMAT-TERSE.1.4.1 — `copy(X)` is hash-like iff X names a hash symbol AND does not
- # resolve as an array (array-first precedence), so a bare `copy(x)` / `copy(a(x))` stays array-only.
+ # resolve as an array (array-first precedence), so a bare `copy(x)` / `copy(array(x))` stays array-only.
  if ($method eq 'copy') {
   my $copy_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
   return 0 unless $copy_args;
   my $inner = $trim_action_ir_value->($copy_args->[0]);
   return 0 unless defined($inner) && length($inner);
   my $array_sym = $extract_array_symbol_name->($inner);
-  return 0 if defined($array_sym) && length($array_sym) && $inner =~ /^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/o;
+  return 0 if defined($array_sym) && length($array_sym) && $inner =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o;
   my $hash_sym = $extract_hash_symbol_name->($inner);
-  return 1 if defined($hash_sym) && length($hash_sym) && $inner =~ /^(?:(?:hash|h)\s*\(\s*\w+\s*\)|\w+)$/o;
+  return 1 if defined($hash_sym) && length($hash_sym) && $inner =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o;
   return 0;
  }
 
@@ -206,12 +206,12 @@ sub _lower_is_empty_expr {
  my $trimmed = $trim_action_ir_value->($arg_expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:array|a)\s*\(/o) {
+ if ($trimmed =~ /^array\s*\(/o) {
   my $array_symbol = $extract_array_symbol_name->($trimmed);
   return "(!\@$array_symbol)" if defined $array_symbol;
  }
 
- if ($trimmed =~ /^(?:hash|h)\s*\(/o) {
+ if ($trimmed =~ /^hash\s*\(/o) {
   my $hash_symbol = $extract_hash_symbol_name->($trimmed);
   return "(!scalar(keys %$hash_symbol))" if defined $hash_symbol;
  }
@@ -302,7 +302,7 @@ sub _lower_flow_composite_expr {
 
  # SPEC-FORMAT-TERSE.1.4.1 — the terse renames `cat` (== concat) and `copy` (== array_copy/
  # hash_copy) are recognized here too so a composite/assignment-source value lowers identically.
- if ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy)\s*\(/o) {
+ if ($trimmed =~ /^(?:scalaref|scalar|array|hash|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }

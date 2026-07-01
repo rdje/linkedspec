@@ -549,9 +549,9 @@ sub _build_action_rewrite_rules {
 }
 
 # Compatibility rewriter entry point. Runs the canonical rewrite pipeline and falls
-# back to direct value-expr lowering for bare s()/a()/h() calls that no contract
+# back to direct value-expr lowering for bare canonical wrapper calls that no contract
 # recognizes (these are malformed as standalone statements — value accessors belong
-# inside contracts like return(s(...)) — but historically tolerated).
+# inside contracts like return(scalar(...)) — but historically tolerated).
 sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -559,7 +559,7 @@ sub rewrite_action_code_for_compat {
   if (
    defined($trimmed) &&
    length($trimmed) &&
-   $trimmed =~ /^(?:scalar|s|array|a|hash|h)\s*\(/o
+   $trimmed =~ /^(?:scalar|array|hash)\s*\(/o
   ) {
    my $call = _parse_method_function_expr($trimmed);
    if ($call && ($call->{method} // '') =~ /^(?:scalar|array|hash)$/o) {
@@ -769,20 +769,20 @@ sub _build_action_rewriter_meta {
 }
 
 # Wrapper-helper -> Perl sigil for auto-existing working variables (SPEC-FORMAT-TERSE.1.1.1).
-# scalar/s -> $, array/a -> @, hash/h -> %. Used for the WRAPPED-form references; the
+# scalar -> $, array -> @, hash -> %. Used for the WRAPPED-form references; the
 # sigil is taken from the wrapper. Bare (un-wrapped) names in type-implying helper arg
 # positions take a POSITION-implied sigil instead — SPEC-FORMAT-TERSE.1.2.1, Channel 1.
 # Bare aggregate value reads take their lowering-implied sigil — SPEC-FORMAT-TERSE.1.2.3.1,
 # Channel 2 aggregate subset. Full scalar RHS-shape / value-position bare-word inference is a
 # later Channel 2 leaf, not these.
 my %AUTO_WORKING_VAR_WRAPPER_SIGIL = (
- scalar => '$', s => '$',
- array  => '@', a => '@',
- hash   => '%', h => '%',
+ scalar => '$',
+ array  => '@',
+ hash   => '%',
 );
 
 # Names that must NEVER be auto-declared as working variables. Two groups:
-#  (1) DSL literals — `a(undef)`/`array(undef)` is the array constructor wrapping the
+#  (1) DSL literals — `array(undef)` is the array constructor wrapping the
 #      undef literal, NOT a reference to a variable named "undef" (likewise true/false).
 #  (2) Engine-reserved handler locals declared by the preamble template
 #      (_build_handler_preamble) and the variant scaffolding ($descr/$STRING/$info, the
@@ -854,7 +854,7 @@ sub _mask_action_code_literals {
 #           package global (generated handlers are non-strict — see KM card
 #           working-vars-no-strict-need-my-lexical). Three reference forms are collected:
 #             (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED typed-wrapper refs
-#                 scalar(NAME)/array(NAME)/hash(NAME) and the s()/a()/h() aliases with
+#                 scalar(NAME)/array(NAME)/hash(NAME) with
 #                 a single bare-identifier argument (NOT the 2-arg scalar(container,key)
 #                 read, which has a comma). Sigil taken from the wrapper.
 #             (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE (un-wrapped) names in a
@@ -1168,7 +1168,7 @@ sub _collect_auto_working_var_decls {
   my $masked = _mask_action_code_literals($block);
 
   # (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED typed-wrapper refs (sigil from the wrapper).
-  while ($masked =~ /\b(scalar|array|hash|s|a|h)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
+  while ($masked =~ /\b(scalar|array|hash)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    $record->($AUTO_WORKING_VAR_WRAPPER_SIGIL{$1}, $2);
   }
 

@@ -303,11 +303,11 @@ The lifecycle exit block finalizes the last open rule and returns the public pay
 
 ```text
 LX {
-  if(s(rule));
-    push_value(a(rules), a(s(rule), flat_array(rule)));
+  if(scalar(rule));
+    push_value(array(rules), array(scalar(rule), flat_array(rule)));
   endif();
 
-  return(a(flat_array(includes), flat_array(rules)))
+  return(array(flat_array(includes), flat_array(rules)))
 }
 ```
 
@@ -318,11 +318,11 @@ Read this as:
 
 The helper names matter:
 
-- `s(rule)` reads the scalar variable `rule`.
-- `a(rules)` reads the array variable `rules`.
+- `scalar(rule)` reads the scalar variable `rule`.
+- `array(rules)` reads the array variable `rules`.
 - `push_value(...)` appends one constructed value into an array variable.
 - `flat_array(rule)` expands the current rule array into a returned entry.
-- `return(a(...))` returns an array payload.
+- `return(array(...))` returns an array payload.
 
 This is the same helper-first direction used throughout the modern LinkedSpec refactor. The rule still has historical shape in places, but the core top-level accumulator flow is helper-visible and descriptor-ready.
 
@@ -332,15 +332,15 @@ The `grammar_file` rule starts a new rule entry through this action edge:
 
 ```text
 -> grammar_rule   {
-  if(s(rule));
-    push_value(a(rules), a(s(rule), flat_array(rule)));
+  if(scalar(rule));
+    push_value(array(rules), array(scalar(rule), flat_array(rule)));
   endif();
 
-  assign(a(rule), a(flat_array(semantic_annotations)));
-  assign(a(semantic_annotations), a());
+  assign(array(rule), array(flat_array(semantic_annotations)));
+  assign(array(semantic_annotations), array());
 
   $rule = call(grammar_rule);
-  assign(s(on), 1)
+  assign(scalar(on), 1)
 }
 ```
 
@@ -381,7 +381,7 @@ For example:
 
 ```text
 -> rule_name
-  .if(s(on))
+  .if(scalar(on))
     .push(rule_name, rule)
   .else()
     .say("Error: Rule name '$LMATCH' reference with no container rule context")
@@ -411,7 +411,7 @@ The terminal rules normalize text immediately.
 The rule-name reader:
 
 ```text
-grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/  I.return(a("rule", entry_group(0)))
+grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/  I.return(array("rule", entry_group(0)))
 ```
 
 captures the left-hand rule name and returns a two-element token:
@@ -423,7 +423,7 @@ captures the left-hand rule name and returns a two-element token:
 The rule-reference reader:
 
 ```text
-rule_name: /\b[[:alpha:]_]\w*/ I.return(a("rule_reference", entry_text()))
+rule_name: /\b[[:alpha:]_]\w*/ I.return(array("rule_reference", entry_text()))
 ```
 
 returns:
@@ -435,7 +435,7 @@ returns:
 The quoted-string reader:
 
 ```text
-quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(s(value), "^(?:'|\")|(?:'|\")$", "", go).return(a("quoted_string", s(value)))
+quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(scalar(value), "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", scalar(value)))
 ```
 
 normalizes:
@@ -453,7 +453,7 @@ into:
 The regex reader:
 
 ```text
-regex: /(?<!\\)\/.+?(?<!\\)\// I.declare(scalar, value=entry_text()).substr(s(value), "^/|/$", "", go).return(a("regex", s(value)))
+regex: /(?<!\\)\/.+?(?<!\\)\// I.declare(scalar, value=entry_text()).substr(scalar(value), "^/|/$", "", go).return(array("regex", scalar(value)))
 ```
 
 normalizes:
@@ -471,7 +471,7 @@ into:
 The probability reader:
 
 ```text
-probability: /@\d+%?/ I.declare(scalar, value=entry_text()).substr(s(value), "@|%", "", go).return(a("probability", s(value)))
+probability: /@\d+%?/ I.declare(scalar, value=entry_text()).substr(scalar(value), "@|%", "", go).return(array("probability", scalar(value)))
 ```
 
 normalizes:
@@ -585,7 +585,7 @@ The rule is:
 
 ```text
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(s(c), "\s*$", "", o); substr(s(c), "^\"|\"$", "", go); return(a("semantic_annotation", a(entry_group(0), s(c))))}
+-> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(scalar(c), "\s*$", "", o); substr(scalar(c), "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), scalar(c))))}
 ```
 
 The key ideas are:
@@ -594,7 +594,7 @@ The key ideas are:
 - the following action captures the payload until the next semantic annotation or grammar rule,
 - `BACKTRACK()` positions the parser so the next structural token can be processed by its own rule,
 - the payload is trimmed before returning,
-- the action is written entirely in canonical helper DSL (`capture_slice()`, `substr(...)`, `entry_group(0)`, `return(a(...))`) — no raw host-language code, which is why the descriptor below reports this rule as ActionIR-ready.
+- the action is written entirely in canonical helper DSL (`capture_slice()`, `substr(...)`, `entry_group(0)`, `return(array(...))`) — no raw host-language code, which is why the descriptor below reports this rule as ActionIR-ready.
 
 This rule is a good example of why capture-boundary helpers matter. It is parsing an open-ended payload where the right edge is not a fixed delimiter; it is the beginning of the next structural thing.
 
@@ -626,12 +626,12 @@ and then:
   start_capture_slice()
 }
 -> comma {
-  push_nonempty(a(logging_annotation), trim(capture_slice()));
+  push_nonempty(array(logging_annotation), trim(capture_slice()));
   start_capture_slice()
 }
 -> logging_annotation[1] {
-  push_nonempty(a(logging_annotation), trim(capture_slice()));
-  return(a("logging_annotation", a(s(logging_name), array_copy(a(logging_annotation)))))
+  push_nonempty(array(logging_annotation), trim(capture_slice()));
+  return(array("logging_annotation", array(scalar(logging_name), array_copy(array(logging_annotation)))))
 }
 ```
 
@@ -645,10 +645,10 @@ This is a useful advanced example because it combines:
 - `push_nonempty(...)` for trimmed optional capture appends,
 - a normalized typed return payload.
 
-The current regression suite locks this runtime behavior because the optional comma and closing-edge spans are real parser data only after trimming. `push_nonempty(a(logging_annotation), trim(capture_slice()))` makes that intention explicit: read the current anonymous capture slice, trim it, and append it only when the result is not empty. This replaces the old `capture_if(...)` / `CAPTURE_IF()` surface in the live `ebnf.spec` rule while keeping the same runtime shape for nonempty argument fragments.
+The current regression suite locks this runtime behavior because the optional comma and closing-edge spans are real parser data only after trimming. `push_nonempty(array(logging_annotation), trim(capture_slice()))` makes that intention explicit: read the current anonymous capture slice, trim it, and append it only when the result is not empty. This replaces the old `capture_if(...)` / `CAPTURE_IF()` surface in the live `ebnf.spec` rule while keeping the same runtime shape for nonempty argument fragments.
 
 ```text
-push_nonempty(a(logging_annotation), trim(capture_slice()));
+push_nonempty(array(logging_annotation), trim(capture_slice()));
 ```
 
 That is not incidental. The helper is short enough to use in a spec, but explicit enough to expose all three concepts the parser author cares about: the capture boundary, the normalization step, and the accumulator append rule. The regression exists so logging annotations remain a real parser feature, not just descriptor metadata.
@@ -743,7 +743,7 @@ This is why `ebnf.spec` is useful in the book. It shows a shipped parser that st
 - descriptor build succeeds through `LinkedSpec::get_parser('ebnf', return_descriptor => 1)`,
 - `grammar_file` no longer reports raw-Perl fallback dependency,
 - terminal token readers such as `grammar_rule`, `rule_name`, `quoted_string`, `quantifier`, `probability`, and `regex` are ActionIR-ready,
-- the source spec prefers short aliases such as `s(...)` and `a(...)` in the core method-DSL band,
+- the source spec uses canonical wrappers such as `scalar(...)` and `array(...)` in the core method-DSL band,
 - `logging_annotation` uses explicit `start_capture_slice()` boundary movement,
 - `logging_annotation` uses `push_nonempty(...)` instead of the older `capture_if(...)` / `CAPTURE_IF()` helper surface,
 - the full `ebnf` descriptor reports zero compatibility-surface rules,

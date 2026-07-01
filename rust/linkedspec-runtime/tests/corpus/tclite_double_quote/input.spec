@@ -7,7 +7,7 @@ tcl_script::
 -> pound_sign      .push
 -> command_subst   .push
 -> oc_curly_brace  .push
-LX                 .return(a("?tcl_script:", array_copy(a(tcl_script))))
+LX                 .return(array("?tcl_script:", array_copy(array(tcl_script))))
 
 
 semi_colon       : /;/        I.return ([])
@@ -17,7 +17,7 @@ newline          : /\r\n?/    I.return ([])
 double_quote     : /(?<!\\)"/
 -? push
 -> command_subst  .push
--> double_quote   .return(a("?double_quote:", array_copy(a(double_quote))))
+-> double_quote   .return(array("?double_quote:", array_copy(array(double_quote))))
 
 pound_sign       : /#/        I.return ([])
 command_subst    : /(?<!\\)\[/  /(?<!\\)\]/
@@ -29,7 +29,7 @@ command_subst    : /(?<!\\)\[/  /(?<!\\)\]/
 -> space             .push
 -> pound_sign        .push
 -> oc_curly_brace    .push
--> command_subst[1]  .return(a("?command_subst:", array_copy(a(command_subst))))
+-> command_subst[1]  .return(array("?command_subst:", array_copy(array(command_subst))))
 
 oc_curly_brace    : /(?<!\\){/  /(?<!\\)}/
 variable_subst    : /\$[\w:]+/
