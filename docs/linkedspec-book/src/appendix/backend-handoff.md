@@ -17,9 +17,12 @@ A LinkedSpec backend compiles `.spec` grammar files into runnable parsers. It mu
 
 Text-to-AST is a backend conformance rule, not an optional implementation style.
 Do not build a backend by applying textual helper rewrites directly into host-language
-source. The Perl reference still contains legacy text-to-text lowering in parts of
-ActionIR, but that is migration debt; new backends should follow the typed-AST model
-used by the Rust implementation.
+source. The Perl reference now has an additive `LinkedSpec::ActionIR::AST` parser seam
+for calls, literals, variables, direct access, shape literals, block values,
+assignments, expression statements, and receiver-dot chains. Its older ActionIR lowering
+consumers still migrate family by family, so any remaining text-to-text lowering is
+migration debt rather than a backend pattern to copy. New backends should follow the
+typed-AST model used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
 specified in the documents below.

@@ -375,11 +375,11 @@ RuleIR and ActionIR carry the path toward cleaner backend-neutral semantics.
 ```
 
 That path is now explicit doctrine: supported helper/action syntax must flow through
-typed AST/IR before lowering or execution. The current Perl backend still contains
-legacy source-text lowering in parts of ActionIR, but new work must not extend that
-pattern. The migration target is the Rust-style model: parse calls, literals,
-assignments, blocks, and receiver-dot chains into structured nodes first, then lower or
-execute those nodes.
+typed AST/IR before lowering or execution. The Perl backend now has an additive
+`LinkedSpec::ActionIR::AST` parser seam for calls, literals, variables, direct access,
+shape literals, block values, assignments, expression statements, and receiver-dot
+chains. Existing ActionIR lowering consumers still migrate family by family, so any
+remaining source-text lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`
 
@@ -388,6 +388,7 @@ The `LinkedSpec::ActionIR::*` subtree is where the helper DSL becomes structured
 Important families include:
 
 - `MethodExpr` for parsing method-like helper expressions,
+- `AST` / `AST::Parser` for the additive typed helper/action parser seam,
 - `Scanner` and `ScannerCore` for finding helper and compatibility surfaces,
 - scanner rule families such as `PrimitiveBasicRules`, `PrimitivePipelineRules`, `FlowRules`, and `LegacyRules`,
 - `StatementSplit` for safe statement splitting,

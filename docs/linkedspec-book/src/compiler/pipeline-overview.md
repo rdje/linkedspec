@@ -30,9 +30,10 @@ The stages above are a **backend-neutral** description of how any LinkedSpec bac
 Every backend must parse helper/action language text into typed AST/IR nodes before
 lowering, interpretation, or code emission. Direct text-to-text helper rewriting into
 host-language source is not a conforming architecture for new backend work. The Rust
-backend already follows this model with expression and statement nodes; the Perl
-reference is being migrated toward the same AST seam while preserving its public
-behavior.
+backend already follows this model with expression and statement nodes. The Perl
+reference now exposes an additive `LinkedSpec::ActionIR::AST` parser seam for the helper
+expression surface; existing generated behavior still comes from the current ActionIR
+rewrite/lowering pipeline until later migration leaves switch those consumers over.
 
 ## Why the pipeline matters
 

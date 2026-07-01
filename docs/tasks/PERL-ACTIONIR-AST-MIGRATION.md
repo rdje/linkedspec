@@ -63,13 +63,24 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.1 - inventory Perl ActionIR text lowering`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.2`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Introduce a Perl ActionIR AST parser seam behind existing behavior.
   Acceptance: Add focused parser modules/tests for calls, literals, variables, direct
     access, shape literals, blocks, statements, and receiver-dot chains. The seam must
     preserve existing generated behavior until consumers switch over.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Added `LinkedSpec::ActionIR::AST`,
+    `LinkedSpec::ActionIR::AST::Parser`, and `t/actionir_ast_parser.t`; wired the focused
+    parser test into `tools/run_ci_local.sh`; updated mdBook architecture/status text and
+    Knowledge Map fact `perl-actionir-ast-parser-seam`; regenerated `KNOWLEDGE_MAP.md`.
+    Checks passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm`,
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm`,
+    `perl -Iperl -c t/actionir_ast_parser.t`, `prove -Iperl t/actionir_ast_parser.t`,
+    `prove -q -Iperl t/phase0_regression.t` (1002 tests),
+    `bash scripts/check_memory_architecture.sh`,
+    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_doctrines.sh`,
+    `mdbook build docs/linkedspec-book`, `git diff --check`,
+    `bash -n tools/run_ci_local.sh`, and `bash tools/run_ci_local.sh`.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.2 - add Perl ActionIR AST parser seam`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3`
   Status: `pending`
@@ -105,7 +116,34 @@ and host-language fallback are migration debt.
 | --- | --- | --- | --- |
 | — | `PERL-ACTIONIR-AST-MIGRATION.0` | `done` 2026-07-01 | Doctrine adoption and book alignment before code. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.1` | `done` 2026-07-01 | Perl text-to-text lowering inventory, AST node set, and replacement order locked before implementation. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.2` | `pending` | Introduce parser seam behind existing behavior. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.2` | `done` 2026-07-01 | Additive `ActionIR::AST` parser seam and focused parser tests landed without switching lowering consumers. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.3` | `pending` | Replace value-expression and receiver-chain lowering with AST lowering. |
+
+## PERL-ACTIONIR-AST-MIGRATION.2 Parser Seam
+
+The first code slice is additive and read-only with respect to production lowering:
+
+- Added `LinkedSpec::ActionIR::AST` as the public internal facade for the parser seam.
+  It lazy-loads `LinkedSpec::ActionIR::AST::Parser` through `OwnerDispatch`.
+- Added `LinkedSpec::ActionIR::AST::Parser` to parse helper/action text into typed hash
+  nodes with `kind`, `source`, and `source_span` fields.
+- The parser covers `action_block`, `action_stmt`, `call`, `fluent_chain`, `variable`,
+  `indexed_var`, `nested_access`, `array_literal`, `hash_literal`, `block_value`,
+  `string`, `number`, `boolean`, `regex`, `undef`, `assign_scalar`,
+  `assign_array_append`, `assign_hash_index`, and temporary `raw_perl` fallback nodes.
+- `ActionStmt` carries `drops_value => 1`, preserving the contract that a standalone
+  helper or future user-function call silently drops its value.
+- The parser reuses the existing `StatementSplit` and `MethodExpr` seams, then applies an
+  AST-only newline refinement for receiver-chain statements. This does not change
+  `StatementSplit` or `RewritePipeline` behavior.
+- Added focused test coverage in `t/actionir_ast_parser.t` for calls, literals,
+  variables, direct access, shapes, block values, assignments, receiver chains with call,
+  number, and block receivers, and a guard that current ActionIR lowering remains
+  authoritative.
+
+`RewritePipeline`, `MethodLowering`, and `RuleIR::EmitContext` still use the existing
+text-lowering path after this leaf. That is intentional: `.3` switches value-expression
+and receiver-chain consumers over under behavior locks.
 
 ## PERL-ACTIONIR-AST-MIGRATION.1 Inventory
 
@@ -204,5 +242,6 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.2` | Added `ActionIR::AST` / `AST::Parser`; focused parser tests; local CI test wiring; KM fact `perl-actionir-ast-parser-seam` + regenerated map; mdBook backend/pipeline/owner-tree status; syntax/focused/phase0/local-CI/diff/memory/doctrine/KM checks | Additive Perl AST parser seam exists behind current lowering behavior. Parser covers calls, literals, variables, direct access, shapes, block values, statements, assignments, and receiver chains; `.3` is the next consumer migration leaf. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.1` | Perl ActionIR text-lowering inventory; Rust-aligned AST node set; replacement order; KM fact `perl-actionir-text-to-ast-inventory` + regenerated map; roadmap/task-tree/live-doc sync; stale-frontier, memory/doctrine/KM/diff checks; mdBook build | Perl text-to-text lowering boundaries are mapped before code. Parser seam `.2` is the next frontier; no parser/compiler/runtime code changed. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.0` | ADR `0011`; KM fact `text-to-ast-backend-doctrine` + regenerated map; mdBook backend-handoff/pipeline/formal/architecture updates; roadmap/task-tree/live-doc sync; memory/doctrine/KM/diff checks; mdBook build | Text-to-AST adopted as a cross-variant doctrine before code. Perl ActionIR text-to-text lowering is now migration debt; future backends must parse helper/action text into typed AST/IR before lowering/execution. No parser/compiler/runtime code changed. |

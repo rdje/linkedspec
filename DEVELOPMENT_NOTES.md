@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.2 — Perl ActionIR AST parser seam added): Landed the first additive
+  code seam for the Perl text-to-AST migration. Durable points. (1) **The seam is read-only for now.**
+  `LinkedSpec::ActionIR::AST` / `AST::Parser` parse helper/action text into typed nodes, but
+  `RewritePipeline`, `MethodLowering`, and `RuleIR::EmitContext` still own production lowering until `.3+`.
+  (2) **Statement values are explicit drops.** `action_stmt` nodes carry `drops_value => 1`, so standalone
+  helper or future user-function calls silently discard their value. (3) **Function calls are valid
+  receivers.** The parser accepts `call().method(...)`, numeric literal receivers, and block-valued receivers
+  as `fluent_chain` nodes. (4) **The parser reuses existing seams without mutating them.** It calls
+  `StatementSplit` and `MethodExpr`, then applies an AST-only newline refinement for receiver-chain
+  statements; current statement splitting/lowering behavior is unchanged. (5) **Next migration risk is
+  value/receiver lowering.** `.3` should consume these nodes for `_lower_method_value_expr(...)`,
+  `_lower_return_payload_expr(...)`, and receiver-dot normalization before broader statement/control work.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.1 — Perl ActionIR text-lowering inventory locked): Completed the
   no-behavior inventory before implementation. Durable points. (1) **The decisive text-to-text boundary is
   `RewritePipeline`.** `_lower_action_code_from_canonical_ir(...)` matches canonical event raw statements back

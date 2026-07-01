@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.2 — add Perl ActionIR AST parser seam
+
+**Scope:** Perl ActionIR parser modules, focused parser tests, mdBook architecture/status text, Knowledge Map,
+and live docs. Existing ActionIR lowering behavior remains unchanged.
+
+**What changed:** Added `LinkedSpec::ActionIR::AST` and `LinkedSpec::ActionIR::AST::Parser` as an additive
+typed parser seam behind the current `RewritePipeline`. The parser returns structured hash nodes with `kind`,
+`source`, and `source_span` fields and covers action blocks/statements, calls, receiver chains, variables,
+indexed and nested direct access, shape literals, block values, primitive literals, scalar/array/hash
+assignment nodes, and temporary `raw_perl` fallback nodes.
+
+**Semantics:** `ActionStmt` records `drops_value => 1`, so standalone expression statements, including future
+user-function calls, silently discard their value. Function calls can be the receiver of a `fluent_chain`.
+
+**Tests:** Added `t/actionir_ast_parser.t` covering the parser seam and guarding that current ActionIR lowering
+remains authoritative until `.3` switches value/receiver consumers to AST.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.1 — inventory Perl ActionIR text lowering
 
 **Scope:** Task-tree inventory, roadmap/live continuity docs, Knowledge Map fact card, and migration order.

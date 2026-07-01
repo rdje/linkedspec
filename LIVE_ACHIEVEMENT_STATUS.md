@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.2 — Perl ActionIR AST parser seam added**
+  (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS; **existing lowering unchanged**). Added
+  `LinkedSpec::ActionIR::AST` and `LinkedSpec::ActionIR::AST::Parser` as an additive typed parser seam behind
+  the current ActionIR rewrite pipeline. The parser covers action blocks/statements, calls, standalone
+  expression-value drops, receiver chains, variables, direct access, shape literals, block values, primitive
+  literals, and scalar/array/hash assignment nodes with source spans. Focused tests lock function-call,
+  numeric-literal, and block-valued receivers; current `call_spec_handler_subst` lowering remains authoritative.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3` replace value-expression and receiver-chain lowering with AST
+  lowering before user-defined functions proceed.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.1 — Perl ActionIR text-lowering inventory locked**
   (TASK TREE + KM + LIVE DOCS; **no runtime behavior change**). The current Perl text-to-text boundaries are
   now explicitly mapped: raw statement splitting in `StatementSplit`, method-call text parsing in `MethodExpr`,
@@ -16,8 +25,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `ActionBlock`/`ActionStmt` plus typed `Call`, `FluentChain`, value, mutation, and control nodes with source
   spans. Standalone expression statements silently drop their values, so future user-function calls remain
   ordinary expressions.
-  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.2` introduce the parser seam behind existing behavior before
-  replacing value/receiver lowering.
+  **Then-frontier:** `PERL-ACTIONIR-AST-MIGRATION.2` (now completed above), then `.3`.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.0 — text-to-AST doctrine adopted**
   (ADR + TASK TREE + BOOK/KM/LIVE DOCS; **no runtime behavior change**). The Rust-style text-to-AST path is now
   the cross-variant doctrine: helper/action language must parse into typed AST/IR before lowering, execution, or

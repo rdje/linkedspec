@@ -98,7 +98,11 @@ audit_no_machine_specific_absolute_paths
 
 log "running syntax checks"
 perl -c perl/LinkedSpec.pm
+perl -c -Iperl t/actionir_ast_parser.t
 perl -c -Iperl t/phase0_regression.t
+
+log "running ActionIR AST parser focused suite"
+prove -Iperl t/actionir_ast_parser.t
 
 # Memory guard — bail if system RAM is critically low before running the heavy suite
 _ram_used_pct() {
