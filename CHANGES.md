@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.3 — lower block values from AST statements
+
+**Scope:** Perl ActionIR block-value lowering, focused AST parser/lowering tests, mdBook architecture text,
+Knowledge Map, task tree, and live docs.
+
+**What changed:** `MethodLowering` now routes parsed `block_value` nodes into the AST value path before the
+legacy block splitter. Inside AST block values, non-final side-effect statements lower from typed
+`action_stmt.expr` nodes, block-local `return(...)` payloads lower from typed call arguments, and final block
+expressions lower from typed statement expressions.
+
+**Compatibility boundary:** Legacy text splitting remains as fallback for compatibility payloads the AST path
+cannot materialize. Existing guarded early-return output, final-return behavior, hash-shape precedence, and
+source-slot scalar reads stay stable.
+
+**Tests:** Added focused fake-source coverage for expression-valued blocks with side effects, block-local
+early return, post-return guarded side effects, and final expressions. Syntax checks passed;
+`prove -q -Iperl t/actionir_ast_parser.t` passed with 15 focused subtests; `prove -q -Iperl
+t/phase0_regression.t` passed with 1002 tests. `mdbook build docs/linkedspec-book`,
+memory/doctrine/Knowledge Map gates, `git diff --check`, and `bash tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.4.2 — lower statement calls from AST
 
 **Scope:** Perl ActionIR statement lowering, focused AST parser/lowering tests, scanner diagnostics,

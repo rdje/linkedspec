@@ -54,7 +54,9 @@ Assignment and mutation operator statements (`name = value`, `items += value`, a
 statement-regex fallback. Helper-call statements now consume typed AST `call` fields for
 `set`/`assign`, `set_key`, `push`, `push_value`, `push_nonempty`, `return`, and
 `return_undef`, while array end-mutation receiver statements consume AST `fluent_chain`
-receiver/call fields. Structured control-flow lowering still migrates in later leaves;
+receiver/call fields. Expression-valued block internals now consume AST `block_value`,
+`action_block`, and `action_stmt` fields for side effects, block-local return payloads,
+and final expressions. Structured control-flow lowering still migrates in later leaves;
 the wrapper forms remain compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters

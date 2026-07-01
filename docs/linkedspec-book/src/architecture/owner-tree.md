@@ -120,7 +120,9 @@ consume typed value/call/chain AST nodes before the narrow raw compatibility fal
 Statement lowering is migrating family by family: assignment/mutation operator statements
 consume AST target/key/value fields, helper-call statements and returns consume AST
 `call` fields, and array end-mutation receiver statements consume AST `fluent_chain`
-fields before legacy fallback.
+fields before legacy fallback. Expression-valued block internals now consume AST
+`block_value` / `action_block` / `action_stmt` fields for side effects, block-local
+return payloads, and final expressions before legacy fallback.
 Those wrappers are not the canonical destination syntax.
 
 ## The facade owns routing, not semantics
@@ -408,9 +410,10 @@ families before the legacy receiver-dot text normalizers run. Return payloads no
 typed AST value/call/chain nodes before the narrow raw compatibility fallback.
 Assignment and mutation operator statements now consume AST target/key/value fields.
 Helper-call statements and returns now consume AST `call` fields, and array end-mutation
-receiver statements consume AST `fluent_chain` fields. Structured control-flow lowering
-still migrates family by family, so any remaining source-text lowering is legacy debt
-rather than the model for new work.
+receiver statements consume AST `fluent_chain` fields. Expression-valued block side
+effects, block-local returns, and final expressions now consume AST block/statement
+fields. Structured control-flow lowering still migrates family by family, so any
+remaining source-text lowering is legacy debt rather than the model for new work.
 
 ## `ActionIR::*`
 

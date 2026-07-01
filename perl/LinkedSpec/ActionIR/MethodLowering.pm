@@ -478,6 +478,43 @@ sub _lower_block_side_effect_statement {
  return _lower_block_value_component_expr($trimmed, $deps)
 }
 
+sub _lower_ast_block_side_effect_statement {
+ my ($stmt_or_node, $deps) = @_;
+ my $node = ref($stmt_or_node) eq 'HASH' && ($stmt_or_node->{kind} // '') eq 'action_stmt'
+  ? $stmt_or_node->{expr}
+  : $stmt_or_node;
+ return undef unless ref($node) eq 'HASH';
+
+ my $kind = $node->{kind} // '';
+ foreach my $candidate_kind ('assign_scalar', 'assign_array_append', 'assign_hash_index') {
+  next unless $kind eq $candidate_kind;
+  my $lowered = _lower_ast_assignment_operator_statement($node, $deps, $candidate_kind);
+  return $lowered if defined($lowered) && length($lowered);
+ }
+
+ if ($kind eq 'fluent_chain') {
+  my $lowered = _lower_ast_array_end_mutation_method_statement($node, $deps);
+  return $lowered if defined($lowered) && length($lowered);
+ }
+
+ if ($kind eq 'call') {
+  my $method = _actionir_ast_statement_method($node->{name});
+  return undef if defined($method) && $method eq 'return';
+  if (defined($method) && $method =~ /^(?:assign|set_key|push|push_value|push_nonempty)$/o) {
+   my $lowered = _lower_ast_call_statement(
+    $node,
+    ['assign', 'set_key', 'push', 'push_value', 'push_nonempty'],
+    $deps,
+   );
+   return $lowered if defined($lowered) && length($lowered);
+  }
+ }
+
+ my $source = _actionir_ast_value_source_expr($node);
+ return undef unless defined($source) && length($source);
+ return _lower_block_value_component_expr($source, $deps)
+}
+
 sub _lower_block_local_return_payload_expr {
  my ($statement, $deps) = @_;
  my $require_dep = sub {
@@ -514,6 +551,17 @@ sub _lower_block_value_expr {
  my $split_action_ir_statements = $require_dep->('split_action_ir_statements');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+
+ unless (ref($deps) eq 'HASH' && $deps->{__actionir_ast_block_value_bridge}) {
+  my $ast_node = _parse_method_value_ast_expr($expr, $deps);
+  if (ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') eq 'block_value') {
+   my $bridge_deps = ref($deps) eq 'HASH'
+    ? { %$deps, __actionir_ast_block_value_bridge => 1 }
+    : { __actionir_ast_block_value_bridge => 1 };
+   my $ast_lowered = _lower_method_value_expr($expr, $bridge_deps);
+   return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+  }
+ }
 
  my $payload = _extract_outer_brace_payload($expr, $trim_action_ir_value);
  return undef unless defined $payload;
@@ -1883,7 +1931,9 @@ sub _lower_method_value_expr {
      next;
     }
 
-    my $lowered_statement = _lower_block_side_effect_statement($stmt->{source}, $deps);
+    my $lowered_statement = _lower_ast_block_side_effect_statement($stmt, $deps);
+    $lowered_statement = _lower_block_side_effect_statement($stmt->{source}, $deps)
+     unless defined($lowered_statement) && length($lowered_statement);
     return undef unless defined($lowered_statement) && length($lowered_statement);
     push @lowered, 'unless ($__ls_block_done) { '.$lowered_statement.'; };';
    }
@@ -1909,7 +1959,9 @@ sub _lower_method_value_expr {
     next;
    }
 
-   my $lowered_statement = _lower_block_side_effect_statement($stmt->{source}, $deps);
+   my $lowered_statement = _lower_ast_block_side_effect_statement($stmt, $deps);
+   $lowered_statement = _lower_block_side_effect_statement($stmt->{source}, $deps)
+    unless defined($lowered_statement) && length($lowered_statement);
    return undef unless defined($lowered_statement) && length($lowered_statement);
    push @lowered, $lowered_statement.';';
   }

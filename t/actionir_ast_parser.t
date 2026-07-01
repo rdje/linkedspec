@@ -740,4 +740,72 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
     ok($parse_calls >= 2, 'return payloads entered through the AST parser');
 };
 
+subtest 'block-value lowering consumes AST action statements' => sub {
+    my $parse_calls = 0;
+    my $orig_parse_action_expr = \&LinkedSpec::ActionIR::AST::parse_action_expr;
+    my $var = sub {
+        my ($name) = @_;
+        return { kind => 'variable', name => $name, source => '__bad_var_'.$name.'__()' };
+    };
+    my $str = sub {
+        my ($value) = @_;
+        return { kind => 'string', value => $value, quote => '"', source => '__bad_string_'.$value.'__()' };
+    };
+    my $call = sub {
+        my ($name, @args) = @_;
+        return { kind => 'call', name => $name, source => '__bad_call_'.$name.'__()', args => \@args };
+    };
+    my $stmt = sub {
+        my ($label, $expr) = @_;
+        return {
+            kind => 'action_stmt',
+            source => '__bad_stmt_'.$label.'__()',
+            expr => $expr,
+            drops_value => 1,
+        };
+    };
+    my $block = sub {
+        return {
+            kind => 'block_value',
+            source => '__bad_block_source__()',
+            block => {
+                kind => 'action_block',
+                source => '__bad_action_block_source__()',
+                statements => [
+                    $stmt->('set_x', $call->('assign', $var->('x'), $str->('a'))),
+                    $stmt->('return_value', $call->('return', $var->('value'))),
+                    $stmt->('set_y', $call->('assign', $var->('y'), $str->('b'))),
+                    $stmt->('final_y', $var->('y')),
+                ],
+            },
+        };
+    };
+
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
+            my ($expr, @rest) = @_;
+            ++$parse_calls;
+            if ($expr eq '{ set(x,"poison"); return(poison); set(y,"poison"); y }') {
+                return $block->();
+            }
+            return $orig_parse_action_expr->($expr, @rest);
+        };
+
+        my $lowered = LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{return({ set(x,"poison"); return(poison); set(y,"poison"); y })},
+        );
+        like($lowered, qr/^return do \{ my \$__ls_block_done = 0; my \$__ls_block_value;/,
+            'non-final block-local return still uses the guarded block-value wrapper');
+        like($lowered, qr/\$x = "a"/, 'block side-effect assignment lowers from AST action statement fields');
+        like($lowered, qr/\$__ls_block_value = \$value/, 'block-local return payload lowers from AST call argument');
+        like($lowered, qr/\$y = "b"/, 'post-return guarded side effect also lowers from AST action statement fields');
+        like($lowered, qr/\$__ls_block_value = \$y/, 'final block expression lowers from AST statement expression');
+        unlike($lowered, qr/poison|__bad_/, 'block-value lowering does not reuse fake statement source or original poison text');
+    }
+
+    ok($parse_calls >= 1, 'block-value lowering entered through the AST parser');
+};
+
 done_testing();

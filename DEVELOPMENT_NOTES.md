@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.3 — block-value statements from AST): Moved expression-valued
+  block internals onto typed AST statements. Durable points. (1) **Block values bridge before text splitting.**
+  `_lower_block_value_expr(...)` now tries the parsed `block_value` node through the AST value path before the
+  legacy source splitter. (2) **Side effects use `action_stmt.expr`.** AST block lowering now lowers non-final
+  assignments, helper-call statements, and array end mutations from the typed statement expression before
+  falling back to `stmt->{source}`. (3) **Block-local return stays block-local.** `return(expr)` inside an
+  expression-valued block still uses the guarded `__ls_block_done` / `__ls_block_value` wrapper for non-final
+  returns, but supported payloads come from typed AST call arguments. (4) **Compatibility remains bounded.**
+  The legacy splitter remains only as fallback for untyped compatibility surfaces that later leaves still own.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.4.2 — helper-call statements from AST): Moved the next statement
   family onto typed AST consumption. Durable points. (1) **Call statements now have an AST bridge.**
   `return`, `return_undef`, `set_key`, `push`, `push_value`, and `push_nonempty` statements consume AST `call`
