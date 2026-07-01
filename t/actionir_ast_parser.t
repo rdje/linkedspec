@@ -344,6 +344,30 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
     ok($parse_calls >= 8, 'aggregate helper calls entered through the AST parser');
 };
 
+subtest 'covered helper-call diagnostics retire AST host-call leakage' => sub {
+    my $bad_substr = LinkedSpec::call_spec_handler_subst('Top', q{return(substr("abc"))});
+    unlike($bad_substr, qr/\breturn\s+substr\s*\(/, 'unsupported covered value helper no longer lowers to a host substr call');
+    like($bad_substr, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unsupported covered value helper leaves diagnostic sentinel');
+
+    my $bad_count = LinkedSpec::call_spec_handler_subst('Top', q{return(count())});
+    unlike($bad_count, qr/\breturn\s+count\s*\(/, 'unsupported covered aggregate helper no longer lowers to a host count call');
+    like($bad_count, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:count/, 'unsupported covered aggregate helper leaves diagnostic sentinel');
+
+    my $nested_bad = LinkedSpec::call_spec_handler_subst('Top', q{return(concat(substr("abc"),"x"))});
+    unlike($nested_bad, qr/\@__ls_concat_parts = \(substr\s*\(/, 'nested unsupported covered helper no longer becomes a host-call concat operand');
+    like($nested_bad, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'nested unsupported covered helper remains visible to diagnostics');
+
+    my $spec = qq{Top::\n /x/ -> Done { return(substr("abc")) }\nDone::\n /y/\n};
+    my $descriptor = eval { LinkedSpec::Get(\$spec, return_descriptor => 1) };
+    ok(ref($descriptor) eq 'HASH', 'descriptor still builds with unsupported covered helper sentinel');
+    my $meta = ref($descriptor) eq 'HASH' ? ($descriptor->{spec}{Top}{meta}{action_rewriter} || {}) : {};
+    is($meta->{raw_perl_dependency_count} || 0, 0, 'unsupported covered helper is not reported as raw Perl fallback');
+    is($meta->{unresolved_helper_count} || 0, 1, 'unsupported covered helper is reported as one unresolved helper');
+    is_deeply($meta->{unresolved_helpers} || [], ['substr'], 'unsupported covered helper diagnostic names the helper');
+    ok(!$meta->{language_agnostic_action_ir_ready}, 'unsupported covered helper blocks language-agnostic readiness through diagnostics');
+    like(join("\n", @{$meta->{unresolved_helper_statements} || []}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unresolved-helper statements carry the sentinel');
+};
+
 subtest 'parser seam is incremental' => sub {
     my $lowered = LinkedSpec::call_spec_handler_subst('Top', 'return(3.5.floor().add(1))');
     like($lowered, qr/__ls_num_floor.*__ls_num_add/s, 'receiver-chain lowering remains on the compatibility path until the fluent-chain leaf');

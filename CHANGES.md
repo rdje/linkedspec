@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2.3 — diagnose unsupported AST helper calls
+
+**Scope:** Perl ActionIR method/value lowering, unresolved-helper diagnostics, focused AST parser/lowering
+tests, mdBook architecture text, Knowledge Map, and live docs.
+
+**What changed:** Helper families already covered by the `.3.2.1` and `.3.2.2` AST call dispatchers no longer
+fall through as generated Perl host calls when the specific AST form cannot be lowered. `MethodLowering` now
+emits a harmless `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` sentinel expression for known covered helper
+calls that fail arity or AST argument materialization, while unknown calls stay reserved for future
+user-function handling.
+
+**Diagnostics:** `ActionIR::Diagnostics::_find_unresolved_action_helpers(...)` now scans the sentinel into the
+existing unresolved-helper metadata. Descriptors report `unresolved_helper_count`, `unresolved_helpers`, and a
+not-language-agnostic-ready rule without incrementing `raw_perl_dependency_count`. This retires the silent
+host-call leakage path for malformed covered helper calls.
+
+**Tests:** Added focused coverage for malformed value-only helpers, malformed aggregate helpers, nested
+malformed helpers inside a valid covered helper, and descriptor telemetry. Syntax checks,
+`prove -v -Iperl t/actionir_ast_parser.t`, targeted public lowering probes, and
+`prove -q -Iperl t/phase0_regression.t` passed; phase0 covered 1002 tests. `mdbook build
+docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`, and
+`bash tools/run_ci_local.sh` also passed.
+
 ## 2026-07-01 — PERL-ACTIONIR-AST-MIGRATION.3.2.2 — lower aggregate helper calls from AST
 
 **Scope:** Perl ActionIR method/value lowering, focused AST parser/lowering tests, mdBook architecture text,
@@ -14,8 +37,8 @@ aliases), and reuse the existing Perl helper catalog through the explicit compat
 **Compatibility boundary:** Deprecated wrappers (`scalar(...)`, `array(...)`, `hash(...)`) remain accepted
 compatibility aliases per ADR 0007, not canonical destination syntax. The AST dispatcher preserves aggregate
 symbol slots and quoted-wrapper literal boundaries, so `array(items)` keeps reading `@items` while
-`array("items")` stays a literal constructor payload. Receiver-dot chains and covered-call diagnostics remain
-queued for later leaves.
+`array("items")` stays a literal constructor payload. Covered-call diagnostics landed in `.3.2.3`; receiver-dot
+chains remain queued for `.3.3`.
 
 **Tests:** Added focused fake-source AST tests for wrappers, copy helpers, reducers, collection helpers, and hash
 helpers. Syntax checks, `prove -Iperl t/actionir_ast_parser.t`, targeted public lowering probes,

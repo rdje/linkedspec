@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2.3 — covered-call diagnostics landed**
+  (PERL ACTIONIR + DIAGNOSTICS + FOCUSED TEST + BOOK/KM/LIVE DOCS). Unsupported AST call forms for helper
+  families already owned by `.3.2.1`/`.3.2.2` no longer lower into generated host-language calls. Known helper
+  calls that fail covered AST arity or argument materialization now become a harmless
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` sentinel expression, and `ActionIR::Diagnostics` reports that
+  sentinel through the existing unresolved-helper metadata while keeping `raw_perl_dependency_count == 0`.
+  Unknown calls remain reserved for the future user-function path.
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS;
+  `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm` PASS; `perl -Iperl -c t/actionir_ast_parser.t`
+  PASS; `prove -v -Iperl t/actionir_ast_parser.t` PASS; targeted public lowering probes PASS;
+  `prove -q -Iperl t/phase0_regression.t` PASS with phase0 **1002 tests**; `mdbook build
+  docs/linkedspec-book` PASS; memory/doctrine/Knowledge Map gates PASS; `bash tools/run_ci_local.sh` PASS.
+  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.3` replace receiver-dot `fluent_chain` lowering with AST
+  traversal, then `.3.4` return-payload AST traversal.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2.2 — aggregate helper calls from AST**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
   dispatches deprecated wrapper aliases plus aggregate-wrapper, collection, reducer, and hash helper families
@@ -17,8 +31,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `perl -Iperl -c t/actionir_ast_parser.t` PASS; `prove -Iperl t/actionir_ast_parser.t` PASS; targeted public
   lowering probes PASS; `mdbook build docs/linkedspec-book` PASS; `bash tools/run_ci_local.sh` PASS with
   phase0 **1002 tests**.
-  **Frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.2.3` add covered-call diagnostics and retire silent host-call
-  leakage, then `.3.3` receiver-chain AST lowering.
+  **Then-frontier:** `PERL-ACTIONIR-AST-MIGRATION.3.2.3` (now completed above), then `.3.3`.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.3.2.1 — value-only helper calls from AST**
   (PERL ACTIONIR + FOCUSED TEST + BOOK/KM/LIVE DOCS). `MethodLowering::_lower_method_value_expr(...)` now
   dispatches supported AST `call` nodes for scalar normalization, string predicate/composition,
@@ -89,7 +102,9 @@ Current execution status for interruption-safe batch workflow recovery.
   explicit parentheses for zero and nonzero arities, pure value/block bodies, explicit positional parameters,
   and no recursion/closures/lambdas/currying/implicit caller-state capture. Function calls are ordinary value
   expressions: their results can feed helpers, assignments, returns, mutations, and receiver-dot chains; if a
-  call is used as a standalone statement, its value is silently dropped.
+  call is used as a standalone statement, its value is silently dropped. The durable grammar decision is that
+  function syntax belongs in `specs/spec.spec`; any bootstrap-parser `fn <name>(...) { ... }` support is
+  temporary migration debt to remove after the text-to-AST path can carry the surface.
   **Frontier:** `SPEC-FORMAT-TERSE.4.1` contract/inventory before code, then `.3.2.2` arithmetic symbol
   callees.
 - 2026-07-01: **SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases landed**

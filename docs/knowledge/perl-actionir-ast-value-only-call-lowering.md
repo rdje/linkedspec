@@ -10,7 +10,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, method-lowering, helper-calls]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.3.2.1 added a value-only call dispatcher inside MethodLowering. Supported AST call nodes recursively lower covered argument nodes before reusing the existing Perl helper catalog through the compatibility bridge. Covered families include trim/lowercase/uppercase/length, substr/replace_substr/rm_prefix/rm_suffix, starts_with/ends_with/contains_substr/matches, concat/coalesce/coalesce_nonempty, and scalar-argument numeric helpers. PERL-ACTIONIR-AST-MIGRATION.3.2.2 later added slot-aware AST lowering for deprecated wrapper aliases plus aggregate-wrapper, collection/reducer, and hash helper calls; see [[perl-actionir-ast-aggregate-call-lowering]]."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.3.2.1 added a value-only call dispatcher inside MethodLowering. Supported AST call nodes recursively lower covered argument nodes before reusing the existing Perl helper catalog through the compatibility bridge. Covered families include trim/lowercase/uppercase/length, substr/replace_substr/rm_prefix/rm_suffix, starts_with/ends_with/contains_substr/matches, concat/coalesce/coalesce_nonempty, and scalar-argument numeric helpers. PERL-ACTIONIR-AST-MIGRATION.3.2.2 later added slot-aware AST lowering for deprecated wrapper aliases plus aggregate-wrapper, collection/reducer, and hash helper calls; .3.2.3 added unresolved-helper diagnostics for unsupported covered helper forms. See [[perl-actionir-ast-aggregate-call-lowering]] and [[perl-actionir-ast-covered-call-diagnostics]]."
 reverify: "prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t"
 ---
 
@@ -19,8 +19,9 @@ calls from typed `LinkedSpec::ActionIR::AST` `call` nodes. The dispatcher ignore
 call node's source text for covered helper families, recursively materializes covered
 argument AST nodes, and then invokes the existing Perl helper catalog through the
 explicit compatibility bridge with already-lowered argument expressions. Unsupported
-nested call arguments keep their original DSL source until their helper family is
-owned by a later migration leaf.
+nested call arguments from known helper families now report through the `.3.2.3`
+unresolved-helper sentinel path. Unknown call names remain future/user-function
+territory until their grammar and resolution are owned.
 
 The covered `.3.2.1` families are scalar/string value helpers, string predicates,
 `concat`, `coalesce`, `coalesce_nonempty`, scalar-argument numeric helpers, and explicit

@@ -1225,6 +1225,21 @@ sub _lower_method_value_expr {
   my ($method, $argc) = @_;
   return $ast_call_method_with_arity->($method, $argc, \%ast_aggregate_call_arity)
  };
+ my $ast_known_call_method = sub {
+  my ($method) = @_;
+  $method = $normalize_ast_call_method->($method);
+  return undef unless defined($method) && length($method);
+  return $method
+   if exists $ast_value_only_call_arity{$method}
+   || exists $ast_aggregate_call_arity{$method};
+  return undef
+ };
+ my $unsupported_ast_helper_expr = sub {
+  my ($method) = @_;
+  $method = $ast_known_call_method->($method);
+  return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
+ };
  my $lower_ast_value_node;
  my $lower_ast_value_only_call_node;
  my $lower_ast_aggregate_call_node;
@@ -1330,6 +1345,8 @@ sub _lower_method_value_expr {
   if ($kind eq 'call') {
    my $call_expr = $lower_ast_supported_call_source_node->($node);
    return $call_expr if defined($call_expr) && length($call_expr);
+   my $unsupported_call = $unsupported_ast_helper_expr->($node->{name});
+   return $unsupported_call if defined($unsupported_call) && length($unsupported_call);
    my $source = $node->{source};
    return $source if defined($source) && length($source);
   }
@@ -1534,6 +1551,8 @@ sub _lower_method_value_expr {
    return $lowered_call if defined($lowered_call) && length($lowered_call);
    $lowered_call = $lower_ast_aggregate_call_node->($node);
    return $lowered_call if defined($lowered_call) && length($lowered_call);
+   my $unsupported_call = $unsupported_ast_helper_expr->($node->{name});
+   return $unsupported_call if defined($unsupported_call) && length($unsupported_call);
    return $legacy_method_value_expr->($node->{source});
   }
   return undef

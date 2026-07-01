@@ -11,7 +11,9 @@
   accepted contract starts narrow: `fn name(args) { ... }` with explicit parentheses, pure value semantics,
   no implicit capture, no recursion/closures/lambdas, and calls that are ordinary value expressions. A function
   call result can be consumed by any value position or used as the receiver of a compatible receiver-dot chain;
-  a standalone call silently drops its return value. Frontier is now `.4.1` before returning to `.3.2.2`.
+  a standalone call silently drops its return value. User follow-up: the permanent function grammar belongs in
+  `specs/spec.spec`; bootstrap-parser `fn` support, if any, is temporary migration debt to remove once
+  text-to-AST can carry the surface. Frontier is now `.4.1` before returning to `.3.2.2`.
   Prior **`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
   `sub(...)`, `mul(...)`, `div(...)`, `mod(...)`, `abs(...)`, `floor(...)`, `ceil(...)`, `round(...)`,
   `min(...)`, `max(...)`, `clamp(...)`, `sum(...)`, `avg(...)`, `median(...)`, and `range(...)` now map to the
@@ -356,7 +358,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 2. Implement the bootstrap-grammar + ActionIR lowering changes (`BootstrapSpec/Core.pm`,
    `ActionIR/*`), keeping the all-target ActionIR-ready invariant (ratio 1.0000, zero
    compatibility-surface) — or introduce the new form as canonical with the old form aliased
-   during migration.
+   during migration. For user-defined `fn` syntax specifically, bootstrap-parser support is
+   not the permanent destination; any bridge there must be explicitly temporary and removed
+   once `specs/spec.spec` plus the text-to-AST path can own the surface.
 3. Update the mdBook (the behavioral spec) and add regression coverage in `t/phase0_regression.t`.
 4. Run the full gate; commit per `COMMIT.md`.
 
@@ -2160,8 +2164,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     is accepted in the first implementation. A call to a user function is an expression with a value, so it can
     be nested in helper arguments, assigned, returned, appended, or used as the receiver of a compatible
     receiver-dot value chain. When the call appears as a standalone statement, its result is silently discarded.
-    The syntax/semantics must be represented in `specs/spec.spec`, the Perl bootstrap path, the Rust parser/runtime,
-    oracle corpus, phase0, mdBook, live docs, and Knowledge Map before the surface is complete.
+    The syntax/semantics must be represented in `specs/spec.spec`, the Perl ActionIR AST path, the Rust
+    parser/runtime, oracle corpus, phase0, mdBook, live docs, and Knowledge Map before the surface is complete.
+    The bootstrap parser must not be the final owner of `fn <name>(...) { ... }`; bootstrap support, if any, is
+    a temporary migration bridge to remove after the text-to-AST path can carry the surface through
+    `specs/spec.spec`.
   Verification: **SPLIT/OWNED 2026-07-01.** User requested custom/user-defined function support and clarified
     two semantic rules before implementation: function calls are ordinary value expressions and unused return
     values are dropped without diagnostic noise. Existing KM facts for expression-valued blocks and receiver-dot
@@ -2173,10 +2180,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Goal: Function syntax/semantics contract and implementation inventory
   Acceptance: Record the exact MVP grammar, name-resolution rules, purity limits, parameter binding model,
     return-value model, receiver-chain behavior, unused-result behavior, collision/error boundaries, and split
-    implementation seams before code. The inventory must inspect `specs/spec.spec`, the Perl bootstrap parser,
-    Perl ActionIR lowering/value-expression seams, the Rust parser/runtime expression model, oracle generation,
-    and mdBook chapters. If the implementation surface is broader than one signoff slice, split `.4.2+` further
-    before code.
+    implementation seams before code. The inventory must inspect `specs/spec.spec`, the Perl bootstrap parser
+    only to identify/remove any temporary `fn` support boundary, Perl ActionIR AST lowering/value-expression
+    seams, the Rust parser/runtime expression model, oracle generation, and mdBook chapters. If the
+    implementation surface is broader than one signoff slice, split `.4.2+` further before code.
   Verification: `pending`
   Commit: `pending`
 
@@ -2186,8 +2193,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Acceptance: The Perl reference accepts the `.4.1` function contract, lowers user-function calls through the
     existing value-expression model, preserves receiver-dot chaining from function results, silently drops
     standalone function-call values, rejects collisions/unsupported forms with clear diagnostics, and keeps the
-    all-target ActionIR-ready invariant at ratio 1.0000. Add focused phase0 locks and update `specs/spec.spec`,
-    mdBook, live docs, and Knowledge Map as warranted.
+    all-target ActionIR-ready invariant at ratio 1.0000. The final grammar owner is `specs/spec.spec`; do not
+    leave permanent `fn` syntax support in the bootstrap parser. Add focused phase0 locks and update
+    `specs/spec.spec`, mdBook, live docs, and Knowledge Map as warranted.
   Verification: `pending`
   Commit: `pending`
 
@@ -2356,6 +2364,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 4 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
 
 ## Decisions
+
+- `2026-07-01` (**function grammar ownership: `specs/spec.spec`, not bootstrap**). After the text-to-AST
+  migration, support for `fn <name>(...) { ... }` must live in `specs/spec.spec`. Bootstrap-parser support for
+  that syntax is not a permanent language surface; if a temporary bridge exists during migration, it must be
+  removed once the AST path and self-hosted grammar carry user-defined functions.
 
 - `2026-07-01` (**operator calls and assignment expression clarification**). Comparison operators are part of
   the uniform function-call surface: word spellings such as `gt(a,b)`, `ge(a,b)`, `ne(a,b)` and symbol
@@ -3099,7 +3112,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-07-01` | `SPEC-FORMAT-TERSE.4` | User direction captured; KM retrieval for expression-valued blocks and receiver-dot chains; new KM card `terse-user-defined-functions-mvp-contract` + regenerated `KNOWLEDGE_MAP.md`; task-tree/index/roadmap/live-doc sync; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; targeted stale-frontier `rg` search | User-defined pure functions are owned and split before implementation. The accepted MVP is top-level `fn name(args) { ... }` with explicit parentheses, pure value/block bodies, explicit positional parameters, no implicit caller-state capture, and no recursion/closures/lambdas/currying. Function calls are ordinary values that may feed receiver-dot chains; standalone call results are silently discarded. Frontier becomes `.4.1` before returning to `.3.2.2`. No parser/compiler/runtime code changed. |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.4` | User direction captured; KM retrieval for expression-valued blocks and receiver-dot chains; new KM card `terse-user-defined-functions-mvp-contract` + regenerated `KNOWLEDGE_MAP.md`; task-tree/index/roadmap/live-doc sync; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; targeted stale-frontier `rg` search | User-defined pure functions are owned and split before implementation. The accepted MVP is top-level `fn name(args) { ... }` with explicit parentheses, pure value/block bodies, explicit positional parameters, no implicit caller-state capture, and no recursion/closures/lambdas/currying. Function calls are ordinary values that may feed receiver-dot chains; standalone call results are silently discarded. Follow-up decision: final `fn` grammar belongs in `specs/spec.spec`; bootstrap-parser support is temporary migration debt to remove after text-to-AST handoff. Frontier becomes `.4.1` before returning to `.3.2.2`. No parser/compiler/runtime code changed. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5` | KM retrieval; full bootstrap/roadmap/mdBook/core-code read; TOOLBOX `call_spec_handler_subst` probes for statement receiver-dot mutations, value-position receiver-dot forms, and function-style pure helper composition; mdBook stale inline-control wording audit | Return-type method chaining split before code. Current ground truth: statement-only `.1.6` receiver-dot mutations lower/run, value-position/chained receiver-dot forms remain unsupported, Rust parses `Expr::FluentChain` but only executes single-call array end mutations as statement side effects. Child leaves `.2.3.5.1`–`.2.3.5.4` now own array/hash/string/number receiver-chain implementation. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.1` | Perl syntax checks and receiver-chain probes; `prove -q -Iperl t/phase0_regression.t`; focused Rust parser/runtime tests (`parse_array_receiver_value_chain`, `terse_2_3_5_1`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; memory/doctrine/KM/diff checks | Array receiver-dot value chains landed. Pure array links compose through array-returning helpers, terminals return documented values, receiver-dot `join_values` preserves delimiter-first helper semantics, `split_each` flattens with the supplied delimiter on Rust, and `.1.6` end mutations remain statement-only. Phase0 PASS (996 tests); oracle corpus PASS over 47 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.2` | Perl syntax checks and hash receiver-chain probes; focused Rust parser/runtime tests (`parse_hash_receiver_value_chain`, `terse_2_3_5_2`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; memory/doctrine/KM/diff checks | Hash receiver-dot value chains landed. Hash-returning links compose through hash helpers, `sorted_keys`/`sorted_values` bridge into array receiver chains, receiver-dot `scalaref` reads hash fields, statement hash mutations stay statement-only, and Rust `merge_hash` later-argument override parity is fixed. Phase0 PASS (997 tests); oracle corpus PASS over 48 fixtures. |
@@ -3275,6 +3288,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   pure value/block bodies, and no implicit caller-state capture, recursion, closures, lambdas, or currying.
   Function calls are ordinary value expressions: their results can feed helper arguments, assignments,
   returns, mutation value slots, and receiver-dot chains; a standalone call silently drops the returned value.
+  Follow-up user decision: final `fn` syntax belongs in `specs/spec.spec`; bootstrap-parser support is temporary
+  migration debt to remove after text-to-AST handoff.
   Frontier moves to `.4.1` for the contract/inventory leaf, with `.3.2.2` still queued afterward.
 
 - `2026-07-01`: **`.2.3.5.5` LANDED — block-valued receiver-dot chains.**

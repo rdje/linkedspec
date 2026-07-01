@@ -27,10 +27,11 @@ scalar normalization, string predicate/composition, coalesce/concat, and scalar-
 numeric helpers. It also lowers aggregate-wrapper, collection/reducer, and hash helper
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
 Deprecated wrapper aliases such as `scalar(...)`/`array(...)`/`hash(...)` remain
-compatibility syntax, not the canonical destination surface. Receiver-dot chains,
-statement/control lowering, unsupported covered-call diagnostics, and remaining
-return-payload substitution are still migrating family by family, so any remaining
-text-to-text lowering is migration debt rather than a backend pattern to copy.
+compatibility syntax, not the canonical destination surface. Unsupported covered helper
+forms now report unresolved-helper metadata instead of leaking as generated host-language
+calls. Receiver-dot chains, statement/control lowering, and remaining return-payload
+substitution are still migrating family by family, so any remaining text-to-text lowering
+is migration debt rather than a backend pattern to copy.
 New backends should follow the typed-AST model used by the Rust implementation.
 
 You do **not** need to read the Perl source code. Every behavioral contract is

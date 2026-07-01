@@ -42,10 +42,11 @@ helper-call families now consume AST `call` nodes too: deprecated wrapper aliase
 (`scalar(...)`/`array(...)`/`hash(...)`), `copy`/`array_copy`/`hash_copy`, collection
 helpers, numeric reducers over aggregate operands, and hash helpers rebuild their helper
 surface from typed AST fields while preserving symbol slots and quoted-wrapper literal
-boundaries before reusing the existing Perl helper catalog. Receiver-dot chains,
-statement/control lowering, diagnostics for unsupported covered calls, and remaining
-return-payload substitution still migrate in later leaves; the wrapper forms remain
-compatibility syntax, not the canonical destination surface.
+boundaries before reusing the existing Perl helper catalog. Unsupported covered helper
+forms now report through the existing unresolved-helper metadata instead of leaking as
+generated host-language calls. Receiver-dot chains, statement/control lowering, and
+remaining return-payload substitution still migrate in later leaves; the wrapper forms
+remain compatibility syntax, not the canonical destination surface.
 
 ## Why the pipeline matters
 

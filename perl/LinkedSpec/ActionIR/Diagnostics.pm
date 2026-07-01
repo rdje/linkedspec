@@ -67,6 +67,18 @@ sub _find_unresolved_action_helpers {
    push @events, map { +{helper => $helper_name, raw => $statement} } (1 .. $count);
   }
  }
+ foreach my $statement (@statements) {
+  while ($statement =~ /LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:([A-Za-z_][A-Za-z0-9_]*)/g) {
+   my $helper_name = $1;
+   ++$hits{$helper_name};
+   ++$total;
+   push @events, {
+    helper => $helper_name,
+    raw => $statement,
+    reason => 'unsupported_ast_helper_call',
+   };
+  }
+ }
 
  return {
   unresolved_helper_count => $total,

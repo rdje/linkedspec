@@ -166,13 +166,22 @@ and host-language fallback are migration debt.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.2.2 - lower aggregate helper calls from AST`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.2.3`
-  Status: `pending`
+  Status: `done` (2026-07-01)
   Goal: Add covered-call diagnostics and retire silent host-call leakage.
   Acceptance: Helper families covered by `.3.2.1` and `.3.2.2` no longer fall through as
     generated host-language calls when their AST form is unsupported; they emit a clear
     LinkedSpec diagnostic/telemetry path instead.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-01.** Unsupported AST call forms for helper families
+    already owned by `.3.2.1`/`.3.2.2` now lower to a harmless
+    `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` sentinel expression instead of a
+    generated host-language call. `ActionIR::Diagnostics` scans that sentinel into the
+    existing unresolved-helper metadata, so descriptor summaries report
+    `unresolved_helper_count` / `unresolved_helpers` and mark the rule not
+    language-agnostic ready while keeping `raw_perl_dependency_count == 0`. Focused
+    tests cover malformed value-only helpers, malformed aggregate helpers, nested
+    malformed helpers inside a valid covered helper, and descriptor telemetry. Phase0
+    remains green and local CI passes.
+  Commit: `PERL-ACTIONIR-AST-MIGRATION.3.2.3 - diagnose unsupported AST helper calls`
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.3`
   Status: `pending`
@@ -206,7 +215,10 @@ and host-language fallback are migration debt.
   Goal: Retire supported-surface text fallback and unblock user-defined functions on AST.
   Acceptance: Supported helper/value/control surfaces no longer depend on text-to-text
     fallback; unsupported call spellings emit clear diagnostics; user-defined function
-    calls are implemented through AST call nodes rather than textual macro expansion.
+    calls are implemented through AST call nodes rather than textual macro expansion. The
+    permanent `fn <name>(...) { ... }` grammar belongs in `specs/spec.spec`; bootstrap
+    parser support, if any, is temporary migration debt to remove after this AST path can
+    carry the surface.
   Verification: `pending`
   Commit: `pending`
 
@@ -222,9 +234,9 @@ and host-language fallback are migration debt.
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2` | `split` 2026-07-01 | Parent contract for AST helper-call value composition. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2.1` | `done` 2026-07-01 | Value-only helper-call composition now lowers from AST call nodes. |
 | — | `PERL-ACTIONIR-AST-MIGRATION.3.2.2` | `done` 2026-07-01 | Aggregate-wrapper and collection/hash helper calls now lower from AST call nodes with slot-preserving compatibility. |
-| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.2.3` | `pending` | Add covered-call diagnostics and retire silent host-call leakage. |
-| 2 | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `pending` | Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering. |
-| 3 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
+| — | `PERL-ACTIONIR-AST-MIGRATION.3.2.3` | `done` 2026-07-01 | Unsupported covered helper-call AST forms now emit unresolved-helper diagnostics instead of generated host calls. |
+| 1 | `PERL-ACTIONIR-AST-MIGRATION.3.3` | `pending` | Replace receiver-dot value-chain normalization with AST `fluent_chain` lowering. |
+| 2 | `PERL-ACTIONIR-AST-MIGRATION.3.4` | `pending` | Replace return-payload helper substitution with AST traversal and diagnostics. |
 
 ## PERL-ACTIONIR-AST-MIGRATION.3.2 Split
 
@@ -294,8 +306,30 @@ The compatibility policy is still explicit: wrapper calls remain deprecated alia
 per ADR `0007`, not canonical syntax. Slot reconstruction preserves bare symbol tokens
 for aggregate/source slots and quoted wrapper payloads as literals, so `array(items)`
 continues to read `@items` while `array("items")` constructs a literal payload.
-Receiver-dot `fluent_chain` lowering remains queued for `.3.3`; diagnostics for covered
-calls that cannot lower cleanly remain queued for `.3.2.3`.
+`.3.2.3` now covers diagnostics for covered calls that cannot lower cleanly. Receiver-dot
+`fluent_chain` lowering remains queued for `.3.3`.
+
+## PERL-ACTIONIR-AST-MIGRATION.3.2.3 Covered-Call Diagnostics
+
+Malformed helper calls from families already owned by `.3.2.1`/`.3.2.2` no longer survive
+as generated Perl calls. Examples before this leaf included `return(substr("abc"))`,
+`return(count())`, and nested `return(concat(substr("abc"),"x"))`.
+
+The implementation is deliberately narrow:
+
+- `_lower_method_value_expr(...)` distinguishes unknown calls from known helper-family
+  calls. Unknown calls remain future/user-function territory; known helpers that fail
+  AST arity or AST argument materialization return a harmless
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` sentinel expression.
+- `ActionIR::Diagnostics::_find_unresolved_action_helpers(...)` scans that sentinel into
+  the existing unresolved-helper metadata. Descriptors now report the helper name under
+  `unresolved_helpers`, keep `raw_perl_dependency_count == 0`, and mark the rule as not
+  language-agnostic ready.
+- Supported helper forms remain byte-compatible with the `.3.2.1`/`.3.2.2` behavior.
+
+This is a diagnostics/telemetry leaf, not a user-function implementation leaf.
+User-defined functions remain blocked until the remaining AST value/receiver/return and
+statement/control migration work is complete.
 
 ## PERL-ACTIONIR-AST-MIGRATION.3 Split
 
@@ -431,11 +465,15 @@ soon as the parser seam can cover the relevant action/lifecycle blocks.
   adopted the Rust-style text-to-AST path as the cross-variant doctrine. Perl must migrate
   carefully; future Julia/Dart backends, and Lua if later adopted, must start from
   text-to-AST rather than text-to-text lowering.
+- `2026-07-01`: The user clarified that `fn <name>(...) { ... }` support should not remain
+  in the bootstrap parser after the text-to-AST migration; permanent user-function syntax
+  belongs in `specs/spec.spec`, with function calls flowing through AST `Call` nodes.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.3` | Added unsupported covered-helper sentinel lowering and diagnostics scan; focused tests for malformed value-only, aggregate, and nested helper calls plus descriptor metadata; targeted public lowering probes; mdBook/doctrine/KM/diff checks; phase0 1002 tests; full local CI | Covered helper families no longer leak unsupported AST forms as generated host-language calls. Unsupported covered forms now report unresolved-helper diagnostics with zero raw-Perl fallback. Frontier moves to `.3.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.2` | Added slot-aware AST aggregate-call dispatcher; focused fake-source AST tests for wrappers, copy, reducers, collection, and hash helpers; targeted public lowering probes; mdBook/doctrine/KM checks; local CI with phase0 1002 tests | Aggregate-wrapper and collection/hash helper calls now consume AST call nodes before helper lowering while preserving deprecated wrapper compatibility, symbol slots, and quoted-name boundaries. Frontier moves to `.3.2.3`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2.1` | Added AST call dispatcher for value-only helper families; focused fake-source AST call tests; targeted public lowering probes for string, numeric, regex predicate, and coalesce/concat composition | Value-only helper-call composition now consumes AST call nodes before helper lowering; aggregate/symbol-slot helper families were left to `.3.2.2`. |
 | `2026-07-01` | `PERL-ACTIONIR-AST-MIGRATION.3.2` | Split AST helper-call lowering into `.3.2.1` value-only helpers, `.3.2.2` aggregate/symbol-slot helpers, and `.3.2.3` diagnostics/host-call leakage retirement | Helper-call AST migration is owned by slot-risk-specific children before code. Frontier moves to `.3.2.1`. |

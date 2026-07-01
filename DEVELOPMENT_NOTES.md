@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.3 — covered-call diagnostics): Retired silent host-call
+  leakage for helper families already owned by AST call lowering. Durable points. (1) **Known helpers are not
+  future functions.** The dispatcher now distinguishes unknown calls from known helper-family calls. Unknown
+  calls remain available for the future user-function path; known covered helpers with unsupported arity or
+  unsupported AST argument materialization become diagnostics. (2) **The sentinel is metadata plumbing, not a
+  new public helper.** `MethodLowering` emits a harmless `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>`
+  expression returning `undef`; it prevents generated Perl from accidentally trying to call host routines such
+  as `substr(...)` or `count(...)`. (3) **Diagnostics reuse the existing unresolved-helper channel.**
+  `ActionIR::Diagnostics` scans the sentinel into `unresolved_helper_count` / `unresolved_helpers`, marks the
+  rule not language-agnostic-ready, and leaves `raw_perl_dependency_count == 0`. (4) **Supported calls remain
+  byte-compatible.** Valid `.3.2.1` / `.3.2.2` helper forms still enter the existing helper catalog through the
+  compatibility bridge. (5) **Receiver and return seams are still separate.** `.3.3` owns receiver-dot
+  `fluent_chain` AST traversal and `.3.4` owns return-payload AST traversal.
+
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.2 — aggregate helper calls from AST): Extended the
   MethodLowering AST call consumer to the aggregate/symbol-slot helper families. Durable points.
   (1) **Aggregate slots stay source-shaped.** Covered calls are reconstructed from AST fields before entering
@@ -13,9 +27,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   The AST bridge rebuilds quoted strings from node values, so `array("items")` remains a literal payload and
   never aliases `@items`. (4) **Nested covered calls are source-independent.** Focused fake-source tests now
   cover wrappers, `copy`, numeric reducers, collection helpers, nested value-only payloads inside hash helpers,
-  and hash terminals. (5) **Diagnostics are still a separate leaf.** Unsupported covered-call shapes can still
-  fall back through compatibility until `.3.2.3` owns explicit diagnostics and silent host-call leakage
-  retirement.
+  and hash terminals. (5) **Diagnostics are now a follow-up landed leaf.** `.3.2.3` replaces unsupported
+  covered-call host-call leakage with unresolved-helper telemetry; receiver-dot `fluent_chain` lowering remains
+  separate.
 
 - 2026-07-01 (PERL-ACTIONIR-AST-MIGRATION.3.2.1 — value-only helper calls from AST): Landed the first
   production AST consumer for helper `call` nodes. Durable points. (1) **Covered calls ignore call-node source
@@ -109,9 +123,12 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   ignored; it must not warn, mutate hidden storage, or create diagnostic noise merely because the result is not
   consumed. (3) **MVP syntax is one shape.** Start with top-level `fn name(args) { ... }`, requiring
   parentheses even for zero args; alternate `function`/`endfunction`, `fn`/`endfn`, and optional-paren forms
-  remain deferred. (4) **Keep this out of general FP scope.** No recursion, closures, lambdas, currying, or
-  implicit caller working-variable capture in the initial implementation. (5) **Next leaf is design/inventory
-  before code.** `SPEC-FORMAT-TERSE.4.1` must inspect the Perl bootstrap/ActionIR and Rust parser/runtime seams
+  remain deferred. (4) **`specs/spec.spec` owns the language surface.** The user clarified that any temporary
+  bootstrap parser support for `fn <name>(...) { ... }` must be removed after the text-to-AST migration; the
+  permanent function grammar belongs in `specs/spec.spec`. (5) **Keep this out of general FP scope.** No
+  recursion, closures, lambdas, currying, or implicit caller working-variable capture in the initial
+  implementation. (6) **Next leaf is design/inventory before code.** `SPEC-FORMAT-TERSE.4.1` must inspect
+  `specs/spec.spec`, the Perl bootstrap removal boundary, ActionIR AST seams, and Rust parser/runtime seams
   before implementation starts.
 
 - 2026-07-01 (SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases landed): Implemented the non-conflicting

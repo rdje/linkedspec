@@ -112,8 +112,9 @@ with slot-sensitive policy. Deprecated wrapper aliases such as `scalar(...)`,
 `array(...)`, and `hash(...)` now enter through AST `call` nodes together with
 `copy`/`array_copy`/`hash_copy`, collection helpers, numeric reducers over aggregate
 operands, and hash helpers; their AST bridge preserves aggregate symbol slots and quoted
-wrapper literal payloads before reusing the Perl helper catalog. Receiver-dot chains,
-statement/control lowering, unsupported covered-call diagnostics, and remaining
+wrapper literal payloads before reusing the Perl helper catalog. Unsupported covered
+helper forms now report unresolved-helper metadata instead of leaking as generated
+host-language calls. Receiver-dot chains, statement/control lowering, and remaining
 return-payload substitution are still explicit migration debt; those wrappers are not the
 canonical destination syntax.
 
