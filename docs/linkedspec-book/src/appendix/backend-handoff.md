@@ -82,6 +82,15 @@ For `.spec` language evolution, `specs/spec.spec` is the first authoritative gra
 later `.spec` stages derive from its parsed payloads rather than a competing permanent
 bootstrap grammar.
 
+The accepted parse-job annotation design is `parse_job(text_expr, options)` once
+implemented. It yields a marker value plus sidecar metadata: deterministic job id, parent
+AST path, node kind, payload kind, exact text, source span, parser spec id, optional top
+rule, result policy, and failure policy. Result policies are `replace_marker`,
+`replace_field`, `sibling_field`, and `append_child`; failure policies are `fail`,
+`keep_text`, and `diagnostic_node`. Backends must treat this as a neutral metadata
+contract, not a host-language callback surface. Current shipped parsers do not yet accept
+or execute `parse_job(...)`.
+
 Spec import/composition is a separate backend conformance target once implemented. The
 accepted design uses file-scope `import "path.spec" as alias` and
 `include "path.spec"` directives. `import` creates a qualified namespace such as
@@ -232,6 +241,10 @@ It provides:
    optional top rule, parent AST path, payload kind, result insertion policy, and failure
    behavior. Parser resolution must be deterministic and diagnostics must report both the
    selected next-stage parser and the original parent source span.
+
+   Once implemented, the portable authoring marker is `parse_job(text_expr, options)`.
+   It creates a marker value plus sidecar metadata rather than executing the next parser
+   inline.
 
 3. **Spec import/composition graph** — once implemented, loads file-scope `import` and
    `include` directives as parsed `.spec` dependencies with aliases, structured namespace

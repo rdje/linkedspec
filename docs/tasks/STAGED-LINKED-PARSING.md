@@ -77,13 +77,25 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.2 - specify spec import composition contract`
 
 - ID: `STAGED-LINKED-PARSING.3`
-  Status: `pending`
+  Status: `done`
   Goal: Design staged parse-job annotations and AST payload metadata.
   Acceptance: Define how a rule/action marks extracted text as a parse job,
     including node kind, parser spec id, top rule, source span, and failure
     policy.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Added ADR `0014` for the
+    design-only `parse_job(text_expr, options)` annotation contract. The
+    marker produces a stage-N AST value plus neutral sidecar metadata:
+    deterministic job id, parent AST path, node kind, payload kind, exact
+    text, source span/provenance, parser spec id, optional top rule, result
+    policy, and failure policy. Result policies are `replace_marker`,
+    `replace_field`, `sibling_field`, and `append_child`; failure policies are
+    `fail`, `keep_text`, and `diagnostic_node`. Updated the mdBook,
+    roadmap/live docs, task index, and Knowledge Map. Checks passed:
+    `mdbook build docs/linkedspec-book`,
+    `knowledge-map/scripts/check_knowledge_map.sh`,
+    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
+    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
+  Commit: `STAGED-LINKED-PARSING.3 - specify staged parse-job annotations`
 
 - ID: `STAGED-LINKED-PARSING.4`
   Status: `pending`
@@ -107,7 +119,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `STAGED-LINKED-PARSING.3` | `pending` | Parse-job annotations can now reference the import/composition namespace boundary without conflating grammar reuse and runtime payload parsing. |
+| 1 | `STAGED-LINKED-PARSING.4` | `pending` | Parse-job metadata now has a concrete schema; dynamic registry/dispatch can define deterministic lookup, caching, and multi-payload routing against it. |
 
 ## Decisions
 
@@ -125,12 +137,15 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   `include "path.spec"` for structured unqualified composition. This is
   grammar material reuse, not staged runtime payload parsing. Current shipped
   parsers do not yet accept those directives.
+- `2026-07-02`: Staged runtime payloads will use a future
+  `parse_job(text_expr, options)` marker that creates AST marker values plus
+  neutral sidecar metadata. Current shipped parsers do not yet accept or
+  execute that helper.
 
 ## Open Questions
 
-- Exact authoring syntax for staged parse annotations is deferred to `.3`.
-- Whether staged parse jobs are declared only in `.spec` metadata or may also
-  be produced by portable action helpers is deferred to `.3`.
+- Parser registry lookup, cache keys, version boundaries, and multi-payload
+  dispatch are deferred to `.4`.
 
 ## Blockers
 
@@ -142,6 +157,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | --- | --- | --- | --- |
 | `2026-07-02` | `STAGED-LINKED-PARSING.1` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 | `2026-07-02` | `STAGED-LINKED-PARSING.2` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
+| `2026-07-02` | `STAGED-LINKED-PARSING.3` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 
 ## Commit Log
 
@@ -149,8 +165,10 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | --- | --- | --- |
 | `STAGED-LINKED-PARSING.1` | `STAGED-LINKED-PARSING.1 - adopt staged linked parsing doctrine` | ADR/book/KM/live-doc architecture adoption; no runtime code change. |
 | `STAGED-LINKED-PARSING.2` | `STAGED-LINKED-PARSING.2 - specify spec import composition contract` | ADR/book/KM/live-doc design adoption; no runtime code change. |
+| `STAGED-LINKED-PARSING.3` | `STAGED-LINKED-PARSING.3 - specify staged parse-job annotations` | ADR/book/KM/live-doc design adoption; no runtime code change. |
 
 ## Changelog
 
 - `2026-07-02`: `.1` done — staged linked parsing adopted as language-neutral doctrine; frontier moves to `.2`.
 - `2026-07-02`: `.2` done — spec import/composition contract specified before implementation; frontier moves to `.3`.
+- `2026-07-02`: `.3` done — staged parse-job annotation and metadata contract specified before implementation; frontier moves to `.4`.

@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — STAGED-LINKED-PARSING.3 — specify staged parse-job annotations
+
+**Scope:** Architecture decision, mdBook staged parsing/backend text, task-tree frontier, roadmap/live docs, and
+Knowledge Map.
+
+**What changed:** Added ADR `0014`, specifying the design-only staged parse-job annotation contract before
+implementation. The reserved future authoring marker is `parse_job(text_expr, options)`, which produces a marker
+value in the stage-N AST plus neutral sidecar metadata.
+
+**Contract:** Parse-job metadata includes deterministic job id, parent AST path, node kind, payload kind, exact
+text, source span/provenance, parser spec identity, optional top rule, result policy, and failure policy. Result
+policies are `replace_marker`, `replace_field`, `sibling_field`, and `append_child`; failure policies are `fail`,
+`keep_text`, and `diagnostic_node`.
+
+**Neutrality:** The marker and sidecar schema are implementation-language neutral across Perl5, Raku, Rust, Julia,
+Lua, Dart, Zig, Go, or future backends. Current shipped parsers do not yet accept or execute `parse_job(...)`.
+
+**Checks:** mdBook build, Knowledge Map regeneration/check, memory architecture, doctrine registry,
+`git diff --check`, and full local CI pass in the commit workflow.
+
 ## 2026-07-02 — STAGED-LINKED-PARSING.2 — specify spec import composition contract
 
 **Scope:** Architecture decision, mdBook backend/rationale text, task-tree frontier, roadmap/live docs, and

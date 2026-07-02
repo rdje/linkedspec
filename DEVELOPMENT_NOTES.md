@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.3 — parse-job annotation contract):
+  Parse-job marking now has a design contract before implementation. Durable points. (1) **Authoring marker.**
+  Future `.spec` code uses `parse_job(text_expr, options)` to mark extracted text for later parsing. Current
+  shipped parsers do not yet accept or execute that helper. (2) **Sidecar metadata, not user payload.** The marker
+  can appear in the AST, but scheduling metadata lives in a neutral sidecar to avoid collisions with user fields.
+  Required metadata: deterministic job id, parent AST path, node kind, payload kind, exact text, source span or
+  provenance list, parser spec id, optional top rule, result policy, and failure policy. (3) **Source provenance is
+  mandatory.** Text derived from entry/capture helpers must retain corresponding spans; constructed text must carry
+  provenance rather than silently losing attribution. (4) **Policies are explicit.** Result policies:
+  `replace_marker`, `replace_field`, `sibling_field`, `append_child`. Failure policies: `fail`, `keep_text`,
+  `diagnostic_node`. (5) **Neutrality.** This is a `.spec`/AST/diagnostic contract, not a Perl/Rust callback
+  mechanism; Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, and future implementations inherit the same schema.
+  Next frontier: `STAGED-LINKED-PARSING.4`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.2 — spec import/composition contract):
   Spec-file composition now has a design contract before implementation. Durable points. (1) **Syntax is
   file-scope.** Future `.spec` source uses `import "path.spec" as alias` for qualified grammar reuse and

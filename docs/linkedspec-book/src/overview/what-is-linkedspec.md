@@ -27,6 +27,11 @@ Dart, Zig, Go, or another backend can implement it, but none of those languages 
 the contract. The contract is `.spec` source, typed AST payloads, parse jobs, descriptors,
 diagnostics, and deterministic parser entry points.
 
+The reserved design for marking such payloads is `parse_job(text_expr, options)`: a
+future portable helper that records parser identity, source span, parent AST path, result
+insertion policy, and failure policy as metadata. Current shipped parsers do not yet
+accept or execute that helper.
+
 LinkedSpec also has a reserved design for spec-file composition. Future file-scope
 directives such as `import "common/atoms.spec" as atoms` and
 `include "common/lifecycle.spec"` compose grammar material. They are not the same as

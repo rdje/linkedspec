@@ -21,6 +21,12 @@ anchors, hard inner island." The stage can capture the island text with source s
 semantic intent, then a later spec can parse that payload into a deeper AST. Different
 payload fields from the same stage may route to different next-stage specs.
 
+The planned authoring marker for those deferred payloads is `parse_job(text_expr,
+options)`. It records the parent AST path, node kind, payload kind, exact text, source
+span, parser spec identity, optional top rule, insertion policy, and failure policy as
+metadata. It is not implemented yet; the design exists so every backend can agree on the
+same annotation shape before scheduler code is written.
+
 This is separate from spec-file inclusion. Inclusion or imports compose spec definitions.
 Staged dispatch parses runtime text payloads carried by AST nodes. Both are useful, but
 they solve different problems and must remain distinguishable in diagnostics and

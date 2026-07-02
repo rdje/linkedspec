@@ -47,12 +47,36 @@ parse graph, not necessarily to one stage-N+1 spec.
 
 A parse job is a neutral contract, not a host-language trick. The job records:
 
+- job id
+- parent AST path
+- node kind
+- payload kind
 - parser spec identity
 - optional top rule
 - source text and source span
-- parent AST path and payload kind
 - result insertion policy
 - failure policy and diagnostic owner
+
+The accepted annotation design is a future portable helper:
+
+```text
+parse_job(text_expr, hash(
+  "node_kind", "function_definition",
+  "payload_kind", "function_body",
+  "spec", "specs/action-body.spec",
+  "top", "action_block",
+  "into", "body_ast",
+  "on_error", "fail"
+))
+```
+
+The helper creates a marker value in the stage-N AST and a backend-neutral metadata
+sidecar. It does not execute the next parser inline. Result policies define where the
+later AST is stitched (`replace_marker`, `replace_field`, `sibling_field`, or
+`append_child`). Failure policies define whether a next-stage failure aborts the composed
+parse (`fail`), preserves the original text plus diagnostics (`keep_text`), or emits a
+structured diagnostic node (`diagnostic_node`). Current shipped parsers do not yet accept
+or execute `parse_job(...)`.
 
 Spec imports/composition are a separate feature. Imports let a spec reuse definitions
 from other spec files. Staged parse dispatch runs another parser over text produced by a

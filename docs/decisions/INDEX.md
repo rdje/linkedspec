@@ -24,6 +24,7 @@ changed* lives in git (layer D), not here.
 | [0011](0011-text-to-ast-backend-doctrine.md) | Backend helper/action semantics must parse text to typed AST/IR before lowering or execution; Perl ActionIR text-to-text lowering is migration debt | 2026-07-01 | accepted | architecture, compiler, actionir, ast, doctrine, cross-variant-parity |
 | [0012](0012-staged-linked-parsing-architecture.md) | Staged linked parsing is the core parser-composition architecture: stage-N specs may emit source-provenance text islands that later specs parse through a deterministic, language-neutral parse graph | 2026-07-02 | accepted | architecture, parser-composition, staged-parsing, spec-language, language-neutral |
 | [0013](0013-spec-import-composition-contract.md) | Spec imports compose grammar material, not runtime payload parsing: file-scope `import` aliases and structured `include` merges are deterministic, source-aware, and language-neutral | 2026-07-02 | accepted | architecture, parser-composition, spec-language, imports, language-neutral |
+| [0014](0014-staged-parse-job-annotation-contract.md) | Staged parse jobs use neutral `parse_job(text_expr, options)` annotations, source-aware sidecar metadata, explicit result policies, and explicit failure policies | 2026-07-02 | accepted | architecture, staged-parsing, parser-composition, ast, diagnostics, language-neutral |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.3 — staged parse-job annotations specified**
+  (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
+  ADR `0014` now reserves future `parse_job(text_expr, options)` markers for runtime payload refinement before
+  implementation.
+
+  **Contract:** the marker produces a stage-N AST value plus neutral sidecar metadata: deterministic job id,
+  parent AST path, node kind, payload kind, exact text, source span/provenance, parser spec id, optional top rule,
+  result policy, and failure policy.
+
+  **Policies:** result policies are `replace_marker`, `replace_field`, `sibling_field`, and `append_child`.
+  Failure policies are `fail`, `keep_text`, and `diagnostic_node`. Current shipped parsers do not yet accept or
+  execute `parse_job(...)`.
+
+  **Verification:** mdBook build PASS; Knowledge Map, memory, doctrine, and diff gates PASS; full local CI PASS
+  with phase0 1015 green.
+
+  **Frontier:** `STAGED-LINKED-PARSING.4` — design parser registry and dynamic next-stage dispatch.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.2 — spec import/composition contract specified**
   (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
   ADR `0013` now reserves future file-scope `import "path.spec" as alias` and
