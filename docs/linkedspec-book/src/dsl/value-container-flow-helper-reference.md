@@ -603,11 +603,17 @@ Numeric helpers keep arithmetic and reducers explicit. They return `undef` when 
 The non-comparison numeric helpers also accept terse function-form aliases:
 `abs`, `floor`, `ceil`, `round`, `sum`, `avg`, `median`, `range`, `add`, `sub`,
 `mul`, `div`, `mod`, `clamp`, `min`, and `max`. They lower to the corresponding
-`num_*` helper and compose as ordinary nested calls. There is no operator
-precedence in this form; write the grouping explicitly with calls such as
+`num_*` helper and compose as ordinary nested calls.
+
+Arithmetic symbols are accepted as the equivalent call names for the binary or
+variadic arithmetic family: `+(a, b)` -> `num_add(a, b)`, `-(a, b)` ->
+`num_sub(a, b)`, `*(a, b)` -> `num_mul(a, b)`, `/(a, b)` -> `num_div(a, b)`,
+and `%(a, b)` -> `num_mod(a, b)`. There is no operator precedence in either
+form; write grouping explicitly with nested calls such as `+(*(a, b), c)` or
 `add(mul(a, b), c)`. This alias set deliberately does not include comparison
-words: `gt(...)`, `lt(...)`, and the other bare comparison helpers remain string
-comparisons; use `num_gt(...)` or receiver `.gt(...)` for numeric comparisons.
+words or comparison symbols: `gt(...)`, `lt(...)`, and the other bare comparison
+helpers remain string comparisons; use `num_gt(...)` or receiver `.gt(...)` for
+numeric comparisons.
 
 Examples:
 
@@ -615,9 +621,11 @@ Examples:
 assign(scalar(part_count), count(array(parts)));
 assign(scalar(next_depth), num_add(scalar(depth), 1));
 assign(scalar(next_depth), add(scalar(depth), 1));
+assign(scalar(next_depth), +(scalar(depth), 1));
 assign(scalar(distance), num_abs(num_sub(scalar(end_pos), scalar(start_pos))));
 assign(scalar(distance), abs(sub(scalar(end_pos), scalar(start_pos))));
 assign(scalar(bucket), num_mod(count(array(parts)), 3));
+assign(scalar(bucket), %(count(array(parts)), 3));
 assign(scalar(bounded_count), num_clamp(count(array(parts)), 1, 5));
 assign(scalar(score_total), num_sum(array(scores)));
 assign(scalar(score_total), sum(array(scores)));

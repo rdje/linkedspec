@@ -32,6 +32,75 @@ sub _normalize_method_name {
  return $method
 }
 
+sub _looks_like_slash_symbol_call_at {
+ my ($text, $idx) = @_;
+ return 0 unless defined $text;
+ my $len = length($text);
+ return 0 if $idx < 0 || $idx >= $len || substr($text, $idx, 1) ne '/';
+
+ my $cursor = $idx + 1;
+ ++$cursor while $cursor < $len && substr($text, $cursor, 1) =~ /\s/o;
+ return 0 unless $cursor < $len && substr($text, $cursor, 1) eq '(';
+
+ my $depth = 0;
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $escape_next = 0;
+
+ for (my $pos = $cursor; $pos < $len; ++$pos) {
+  my $char = substr($text, $pos, 1);
+
+  if ($in_single_quote) {
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq "'") {
+    $in_single_quote = 0;
+   }
+   next;
+  }
+  if ($in_double_quote) {
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq '"') {
+    $in_double_quote = 0;
+   }
+   next;
+  }
+
+  if ($char eq "'") {
+   $in_single_quote = 1;
+   next;
+  }
+  if ($char eq '"') {
+   $in_double_quote = 1;
+   next;
+  }
+  if ($char eq '\\') {
+   ++$pos;
+   next;
+  }
+  if ($char eq '(') {
+   ++$depth;
+   next;
+  }
+  if ($char eq ')') {
+   --$depth if $depth > 0;
+   next unless $depth == 0;
+
+   my $after = $pos + 1;
+   ++$after while $after < $len && substr($text, $after, 1) =~ /\s/o;
+   return 1 if $after >= $len || substr($text, $after, 1) =~ /[,;\.\)\]]/o;
+   return 0;
+  }
+ }
+
+ return 0
+}
+
 #------------------------------------------------------------------------------
 # Function: _split_top_level_csv
 # Purpose : Split comma-separated argument lists while honoring nested scopes
@@ -53,8 +122,10 @@ sub _split_top_level_csv {
  my $in_slash_quote = 0;
  my $slash_escape_next = 0;
  my $escape_next = 0;
+ my $idx = -1;
 
  foreach my $char (split //, $text) {
+  ++$idx;
   if ($in_slash_quote) {
    $current .= $char;
    if ($slash_escape_next) {
@@ -103,7 +174,7 @@ sub _split_top_level_csv {
   if ($char eq '/') {
    my $current_context = $current;
    $current_context =~ s/\s+$//o;
-   if (!length($current_context)) {
+   if (!length($current_context) && !_looks_like_slash_symbol_call_at($text, $idx)) {
     $in_slash_quote = 1;
     $slash_escape_next = 0;
     $current .= $char;
@@ -165,7 +236,7 @@ sub _parse_method_function_expr {
  return undef unless defined $expr;
  my $trimmed = _trim_method_expr_value($expr);
  return undef unless defined($trimmed) && length($trimmed);
- return undef unless $trimmed =~ /^(?<method>\w+)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))$/o;
+ return undef unless $trimmed =~ /^(?<method>\w+|[+\-*\/%])\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))$/o;
  my $method = _normalize_method_name($+{method});
 
  my $payload = $+{PAREN};

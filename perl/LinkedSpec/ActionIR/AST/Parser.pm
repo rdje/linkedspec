@@ -92,6 +92,12 @@ sub _parse_method_function_expr {
  return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr)
 }
 
+sub _looks_like_slash_symbol_call_at {
+ my ($text, $idx) = @_;
+ _require_method_expr_pkg();
+ return LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($text, $idx)
+}
+
 sub _find_piece_offset {
  my ($haystack, $needle, $search_pos) = @_;
  $search_pos = 0 unless defined $search_pos;
@@ -947,6 +953,7 @@ sub _consume_quote_only_scan_char {
   return 1;
  }
  if ($ch eq '/') {
+  return 0 if _looks_like_slash_symbol_call_at($text, $idx);
   my $prefix = substr($text, 0, $idx);
   $prefix =~ s/\s+$//o;
   if (!length($prefix) || substr($prefix, -1, 1) =~ /[\(\[,=>]/o) {

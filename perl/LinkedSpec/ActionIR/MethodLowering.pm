@@ -4738,6 +4738,14 @@ sub _number_receiver_method_helper_name {
 sub _numeric_word_alias_helper_name {
  my ($method) = @_;
  return undef unless defined $method;
+ state %symbol_alias = (
+  '+' => 'num_add',
+  '-' => 'num_sub',
+  '*' => 'num_mul',
+  '/' => 'num_div',
+  '%' => 'num_mod',
+ );
+ return $symbol_alias{$method} if exists $symbol_alias{$method};
  return 'num_'.$method if $method =~ /^(?:abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max)$/o;
  return undef
 }

@@ -46312,6 +46312,62 @@ subtest 'spec_format_terse_3_2_1_numeric_word_aliases' => sub {
         'numeric word alias spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_3_2_2_arithmetic_symbol_callees' => sub {
+    # SPEC-FORMAT-TERSE.3.2.2: arithmetic symbol callees are ordinary
+    # callee(args) forms and must lower before any raw Perl fallback can
+    # reinterpret `+(...)` as host syntax.
+    plan tests => 10;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(array(+(2,3,4), -(10,3), *(2,3,4), /(9,2), %(17,5), +(2, *(3,4))))'),
+        qr/__ls_num_add.*__ls_num_sub.*__ls_num_mul.*__ls_num_div.*__ls_num_mod.*__ls_num_mul/s,
+        'arithmetic symbol callees lower through the num_* helper contracts');
+    like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('+(1, 2)'),
+        qr/__ls_num_add_terms/s,
+        'plus symbol callees compose inside flow-value lowering');
+    like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('/(9, 2)'),
+        qr/__ls_num_div/s,
+        'slash symbol callees are division calls, not slash literals, in flow-value lowering');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { return(array(+(2,3,4), -(10,3), *(2,3,4), /(9,2), %(17,5), +(2, *(3,4)))) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'arithmetic symbol-callee spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[9,7,24,4.5,2,14]',
+        'arithmetic symbol callees run through the existing num_* helper family');
+
+    my $src = $gen->($spec);
+    like($src, qr/__ls_num_add.*__ls_num_sub.*__ls_num_mul.*__ls_num_div.*__ls_num_mod/s,
+        'generated source uses numeric helper lowering for all arithmetic symbol callees');
+    unlike($src, qr/\+\s*\(\s*2\s*,\s*3|-\s*\(\s*10\s*,\s*3|\*\s*\(\s*2\s*,\s*3|\/\s*\(\s*9\s*,\s*2|%\s*\(\s*17\s*,\s*5/,
+        'generated source has no raw arithmetic symbol-callee residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'arithmetic symbol-callee spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'arithmetic symbol-callee spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'arithmetic symbol-callee spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

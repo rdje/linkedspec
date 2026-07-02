@@ -806,7 +806,20 @@ impl<'a> Parser<'a> {
                 let expr = self.parse_string()?;
                 self.parse_fluent_chain(expr)
             }
-            '/' => self.parse_regex(),
+            '+' | '*' | '%' => {
+                if self.is_symbol_call_at_current() {
+                    self.parse_symbol_call()
+                } else {
+                    Err(self.unexpected_character_error(ch))
+                }
+            }
+            '/' => {
+                if self.is_symbol_call_at_current() {
+                    self.parse_symbol_call()
+                } else {
+                    self.parse_regex()
+                }
+            }
             '[' => {
                 let expr = self.parse_array_literal()?;
                 self.parse_fluent_chain(expr)
@@ -826,6 +839,9 @@ impl<'a> Parser<'a> {
                     if after.is_some_and(|c| c.is_ascii_digit()) {
                         let expr = self.parse_number()?;
                         return self.parse_fluent_chain(expr);
+                    }
+                    if self.is_symbol_call_at_current() {
+                        return self.parse_symbol_call();
                     }
                 }
                 if ch == '-' {
@@ -875,16 +891,128 @@ impl<'a> Parser<'a> {
                 }
             }
             c if c.is_alphabetic() || c == '_' => self.parse_var_or_call(),
-            _ => {
-                let end = (self.pos + 40).min(self.src.len());
-                Err(format!(
-                    "unexpected character '{}' at position {} near: '{}'",
-                    ch,
-                    self.pos,
-                    &self.src[self.pos..end]
-                ))
-            }
+            _ => Err(self.unexpected_character_error(ch)),
         }
+    }
+
+    fn unexpected_character_error(&self, ch: char) -> String {
+        let end = (self.pos + 40).min(self.src.len());
+        format!(
+            "unexpected character '{}' at position {} near: '{}'",
+            ch,
+            self.pos,
+            &self.src[self.pos..end]
+        )
+    }
+
+    fn is_symbol_call_at_current(&self) -> bool {
+        let Some(ch) = self.peek() else {
+            return false;
+        };
+        if !matches!(ch, '+' | '-' | '*' | '/' | '%') {
+            return false;
+        }
+
+        let mut cursor = self.pos + ch.len_utf8();
+        while cursor < self.src.len() && self.src.as_bytes()[cursor].is_ascii_whitespace() {
+            cursor += 1;
+        }
+        if self.src.as_bytes().get(cursor) != Some(&b'(') {
+            return false;
+        }
+        self.symbol_call_paren_has_expression_boundary(cursor)
+    }
+
+    fn symbol_call_paren_has_expression_boundary(&self, open_idx: usize) -> bool {
+        let bytes = self.src.as_bytes();
+        let mut depth = 0usize;
+        let mut in_single_quote = false;
+        let mut in_double_quote = false;
+        let mut escape_next = false;
+
+        let mut pos = open_idx;
+        while pos < bytes.len() {
+            let byte = bytes[pos];
+
+            if in_single_quote {
+                if escape_next {
+                    escape_next = false;
+                } else if byte == b'\\' {
+                    escape_next = true;
+                } else if byte == b'\'' {
+                    in_single_quote = false;
+                }
+                pos += 1;
+                continue;
+            }
+            if in_double_quote {
+                if escape_next {
+                    escape_next = false;
+                } else if byte == b'\\' {
+                    escape_next = true;
+                } else if byte == b'"' {
+                    in_double_quote = false;
+                }
+                pos += 1;
+                continue;
+            }
+
+            match byte {
+                b'\'' => in_single_quote = true,
+                b'"' => in_double_quote = true,
+                b'\\' => {
+                    pos += 2;
+                    continue;
+                }
+                b'(' => depth += 1,
+                b')' => {
+                    depth = depth.saturating_sub(1);
+                    if depth == 0 {
+                        let mut after = pos + 1;
+                        while after < bytes.len() && bytes[after].is_ascii_whitespace() {
+                            after += 1;
+                        }
+                        return after >= bytes.len()
+                            || matches!(bytes[after], b',' | b';' | b'.' | b')' | b']');
+                    }
+                }
+                _ => {}
+            }
+            pos += 1;
+        }
+
+        false
+    }
+
+    fn parse_symbol_call(&mut self) -> Result<Expr, String> {
+        let name = self
+            .peek()
+            .filter(|ch| matches!(ch, '+' | '-' | '*' | '/' | '%'))
+            .ok_or_else(|| format!("expected arithmetic symbol call at position {}", self.pos))?
+            .to_string();
+        self.advance(1);
+        self.skip_whitespace();
+        if self.peek() != Some('(') {
+            return Err(format!(
+                "expected '(' after arithmetic symbol '{}' at position {}",
+                name, self.pos
+            ));
+        }
+        self.advance(1);
+        let args = if self.peek() == Some(')') {
+            Vec::new()
+        } else {
+            self.parse_args()?
+        };
+        if self.peek() != Some(')') {
+            return Err(format!(
+                "expected ')' after args in arithmetic symbol call '{}'",
+                name
+            ));
+        }
+        self.advance(1);
+
+        self.parse_fluent_chain(Expr::Call { name, args })
     }
 
     fn parse_array_literal(&mut self) -> Result<Expr, String> {
@@ -2790,6 +2918,56 @@ return(array_copy(array(results)));"#;
                 }
             }
             _ => panic!("expected Call"),
+        }
+    }
+
+    #[test]
+    fn parse_arithmetic_symbol_callees() {
+        let code = r#"return(array(+(2,3,4), -(10,3), *(2,3,4), /(9,2), %(17,5), +(2, *(3,4))))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "array");
+                        let names: Vec<&str> = args
+                            .iter()
+                            .map(|arg| match arg.value() {
+                                Expr::Call { name, .. } => name.as_str(),
+                                other => panic!("expected symbol call, got {other:?}"),
+                            })
+                            .collect();
+                        assert_eq!(names, vec!["+", "-", "*", "/", "%", "+"]);
+                        match args[5].value() {
+                            Expr::Call { args, .. } => {
+                                assert!(
+                                    matches!(args[1].value(), Expr::Call { name, .. } if name == "*")
+                                );
+                            }
+                            other => panic!("expected nested addition call, got {other:?}"),
+                        }
+                    }
+                    other => panic!("expected array call, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_parenthesized_regex_literal_stays_regex() {
+        let code = r#"return(/(\d+)/)"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::RegexLiteral { pattern } => assert_eq!(pattern, r"(\d+)"),
+                    other => panic!("expected RegexLiteral, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
         }
     }
 

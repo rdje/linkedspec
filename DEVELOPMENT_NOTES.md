@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees):
+  Arithmetic symbol calls are now a real portable helper-call surface, not host-language fallback. Durable points.
+  (1) **Call shape.** `+(...)`, `-(...)`, `*(...)`, `/(...)`, and `%(...)` parse as ordinary call expressions and
+  map to `num_add`, `num_sub`, `num_mul`, `num_div`, and `num_mod` on Perl and Rust. (2) **Slash disambiguation.**
+  `/(` is treated as division only when a balanced argument list and safe call boundary are present; slash regexes
+  still win for regex literals, including escaped-paren and lookbehind-close-brace forms. (3) **No precedence.**
+  Symbol callees are function calls, so grouping is explicit: `+(2, *(3,4))`, not infix precedence. (4) **Gate.**
+  Phase0 passes with 1008 tests, Rust corpus oracle passes with 55 fixtures, Rust core passes, and the focused
+  Rust `.3.2.2` integration lock passes, and full local CI passes. The full runtime integration binary still has unrelated stale
+  short-wrapper alias failures from the earlier `s/a/h` retirement baseline; the `.3.2.2` test in that binary is
+  green.
+  Next frontier: `SPEC-FORMAT-TERSE.3.2.3`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.4 — function surface finalization ledger):
   The user-function MVP is now closed as a portable Perl/Rust contract rather than an open-ended syntax family.
   Durable points. (1) **Accepted surface.** Top-level `fn name(args) { ... }` is the only accepted definition
@@ -12,7 +25,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   closure.** The formal grammar, pipeline/backend handoff, descriptor/state model docs, task tree, and Knowledge
   Map now carry the same boundary. (4) **Gate.** mdBook, memory/doctrine/Knowledge Map/diff/local-CI gates pass;
   no parser/compiler/runtime code changed.
-  Next frontier: `SPEC-FORMAT-TERSE.3.2.2`.
+  Next frontier: `SPEC-FORMAT-TERSE.3.2.3`.
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity):
   Rust now executes the user-function registry shape landed in `.4.3.1`. Durable points. (1) **Resolution

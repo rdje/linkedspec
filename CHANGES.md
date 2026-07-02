@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.2 — implement arithmetic symbol callees
+
+**Scope:** Perl ActionIR method-expression parsing/lowering, slash-call disambiguation, Rust expression parsing and
+runtime helper dispatch, phase0 locks, oracle corpus, mdBook, live docs, and Knowledge Map.
+
+**What changed:** Arithmetic symbol callees are now ordinary `callee(args)` forms. `+(a,b)`, `-(a,b)`,
+`*(a,b)`, `/(a,b)`, and `%(a,b)` dispatch through `num_add`, `num_sub`, `num_mul`, `num_div`, and `num_mod`
+on both Perl and Rust. Nested calls such as `+(2, *(3,4))` compose through the existing numeric helper family.
+
+**Slash boundary:** The slash symbol callee is recognized only when `/` is followed by a balanced parenthesized
+argument list and a call boundary. The scanner skips quoted strings and escaped characters, and does not treat
+`}` as a call boundary, so regex literals such as `/(\))/` and `/(?<!\\)}/` remain regexes.
+
+**Checks:** Perl syntax checks, focused Perl lowering/runtime/source probes, full phase0 (1008 tests), Rust core
+parser tests, the focused Rust `.3.2.2` runtime test, oracle generation, Rust corpus oracle, mdBook build,
+memory/Knowledge Map/doctrine/diff checks, and full local CI passed. A broader full runtime integration run also
+showed the new `.3.2.2` test passing, but still has unrelated stale short-wrapper alias tests from the earlier
+`s/a/h` retirement baseline.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.4.4 — finalize function surface ledger
 
 **Scope:** mdBook function syntax/architecture chapters, task-tree frontier, live docs, and Knowledge Map.

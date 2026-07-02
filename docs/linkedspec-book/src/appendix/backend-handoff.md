@@ -115,10 +115,10 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 structurally equivalent output for every entry.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. As of
-`SPEC-FORMAT-TERSE.4.3.2`, the corpus has 54 fixtures, including the two minimal shipped
+`SPEC-FORMAT-TERSE.3.2.2`, the corpus has 55 fixtures, including the two minimal shipped
 `tclite.spec` cases restored by the default-mode repetition parity work; terse
 receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting,
-and block-valued receivers; numeric word aliases; and the shared Perl/Rust
+and block-valued receivers; numeric word aliases; arithmetic symbol callees; and the shared Perl/Rust
 `terse_4_3_2_user_function_runtime` fixture. Broader recursive shipped-spec parity,
 including Lispish, remains tracked separately.
 

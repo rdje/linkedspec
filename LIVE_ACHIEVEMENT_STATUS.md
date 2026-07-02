@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
+  Arithmetic symbol calls are now portable helper calls: `+(a,b)`, `-(a,b)`, `*(a,b)`, `/(a,b)`, and `%(a,b)`
+  parse as ordinary `callee(args)` forms and dispatch to `num_add`, `num_sub`, `num_mul`, `num_div`, and
+  `num_mod` on both Perl and Rust. Nested symbol calls compose through the same numeric helper family.
+
+  Slash-call recognition is intentionally narrow. The scanner accepts `/(` as division only with a balanced
+  parenthesized argument list and a safe call boundary, while preserving slash regex literals such as `/(\))/`
+  and `/(?<!\\)}/`.
+
+  **Verification:** Perl syntax checks PASS; focused Perl lowering/runtime/source probes PASS; full phase0 PASS
+  with **1008 tests**; oracle regeneration produced **55 fixtures** including
+  `terse_3_2_2_arithmetic_symbol_callees`; Rust corpus oracle PASS; Rust core PASS; focused Rust runtime `.3.2.2`
+  PASS; mdBook, memory/Knowledge Map/doctrine/diff checks, and full local CI PASS. A broader full Rust runtime
+  integration run also shows the new `.3.2.2` test passing but still contains unrelated stale `s(...)`/`a(...)`/`h(...)`
+  short-wrapper tests from the prior alias-retirement baseline.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3` (comparison spelling contract), then `.3.3`.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.4 — user-function surface finalized**
   (BOOK + TASK TREE + KNOWLEDGE MAP + LIVE DOCS).
   The public contract now closes the portable user-function MVP after Perl/Rust parity: top-level

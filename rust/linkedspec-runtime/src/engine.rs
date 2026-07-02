@@ -1434,6 +1434,11 @@ impl Engine {
 
     fn numeric_word_helper_name(method: &str) -> Option<&'static str> {
         match method {
+            "+" => Some("num_add"),
+            "-" => Some("num_sub"),
+            "*" => Some("num_mul"),
+            "/" => Some("num_div"),
+            "%" => Some("num_mod"),
             "abs" => Some("num_abs"),
             "floor" => Some("num_floor"),
             "ceil" => Some("num_ceil"),

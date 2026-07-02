@@ -312,6 +312,10 @@ sub _lower_flow_composite_expr {
 
  my $method = $call->{method} // '';
  my $args = $call->{args} || [];
+ if ($method =~ /^[+\-*\/%]$/o) {
+  my $lowered_value = $lower_method_value_expr->($trimmed);
+  return $lowered_value if defined($lowered_value) && length($lowered_value);
+ }
  my %string_compare_ops = map { $_ => 1 } qw(eq ne gt ge lt le);
  my %numeric_compare_ops = (
   num_eq => '==',

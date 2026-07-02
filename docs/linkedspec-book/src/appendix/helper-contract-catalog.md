@@ -736,9 +736,13 @@ receiver, for example `{ 3.5 }.floor().add(2)`.
 The same non-comparison numeric family also has function-form word aliases:
 `add`, `sub`, `mul`, `div`, `mod`, `abs`, `floor`, `ceil`, `round`, `min`,
 `max`, `clamp`, `sum`, `avg`, `median`, and `range`. These are exact aliases
-for the corresponding `num_*` helpers and remain ordinary `callee(args)` calls,
-so there is no operator precedence. The aliases deliberately do not include
-bare comparison words; `gt(...)` and `lt(...)` remain string comparisons.
+for the corresponding `num_*` helpers. Arithmetic symbol callees are accepted as
+the same ordinary call form for the arithmetic subset: `+(a, b)`, `-(a, b)`,
+`*(a, b)`, `/(a, b)`, and `%(a, b)` map to `num_add`, `num_sub`, `num_mul`,
+`num_div`, and `num_mod`. These aliases remain ordinary `callee(args)` calls, so
+there is no operator precedence; write `+(*(a, b), c)` when you need explicit
+grouping. The aliases deliberately do not include bare comparison words or
+comparison symbols; `gt(...)` and `lt(...)` remain string comparisons.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads

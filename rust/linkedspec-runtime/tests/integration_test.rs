@@ -2023,6 +2023,18 @@ fn terse_3_2_1_numeric_word_aliases_run() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees:
+
+#[test]
+fn terse_3_2_2_arithmetic_symbol_callees_run() {
+    let grammar = "Top::\n /x/ -> Done { return(array(+(2,3,4), -(10,3), *(2,3,4), /(9,2), %(17,5), +(2, *(3,4)))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[9, 7, 24, 4.5, 2, 14]]),
+        "arithmetic symbol callees dispatch through the existing num_* helper family"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

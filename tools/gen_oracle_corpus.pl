@@ -788,6 +788,20 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees ──
+    #
+    # Symbol callees are ordinary callee(args) forms and must lower to the same
+    # num_* helpers before any backend can reinterpret them as host syntax.
+    {   case   => 'terse_3_2_2_arithmetic_symbol_callees',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { return(array(+(2,3,4), -(10,3), *(2,3,4), /(9,2), %(17,5), +(2, *(3,4)))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

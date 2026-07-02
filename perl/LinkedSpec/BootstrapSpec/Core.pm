@@ -38,6 +38,14 @@ sub _trim_bootstrap_value {
  return $value
 }
 
+sub _looks_like_slash_symbol_call_at {
+ my ($source, $idx) = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
+  return LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($source, $idx)
+ })
+}
+
 #------------------------------------------------------------------------------
 # Function: _parse_method_call_chain
 # Purpose : Parse `.method(args).method2(args2)` chains into ordered call
@@ -238,7 +246,7 @@ sub _parse_optional_attached_if_clause_tail {
    if ($char eq '/') {
     my $prefix = substr($source, $scan_pos, $idx - $scan_pos);
     $prefix =~ s/\s+$//o;
-    if (!length($prefix)) {
+    if (!length($prefix) && !_looks_like_slash_symbol_call_at($source, $idx)) {
      $in_slash_quote = 1;
      $slash_escape_next = 0;
      next;

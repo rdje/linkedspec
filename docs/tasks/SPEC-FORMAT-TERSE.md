@@ -6,8 +6,8 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (**`.4.4` DONE; user-function MVP surface and deferral ledger finalized
-  after `.4.3.2` landed Rust user-function runtime/oracle parity**.
+- Last updated: `2026-07-02` (**`.3.2.2` DONE; arithmetic symbol callees landed on Perl/Rust after
+  `.4.4` finalized the user-function MVP surface**.
   Prior **`.4.1` DONE; user-defined function MVP contract/inventory locked before code** —
   the accepted contract is now explicit: top-level `fn name(args) { ... }`, exact arity, eager argument
   evaluation, fresh function-local parameter/work-variable scope, pure value/block bodies, final-expression or
@@ -22,14 +22,15 @@
   returned values, discards standalone call results, and passes a Perl/Rust oracle fixture. The finalized MVP
   ledger keeps only explicit-paren, braced `fn` definitions in scope and defers alternate spellings, optional
   zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/
-  currying, and function namespaces. Frontier is now `.3.2.2`.
+  currying, and function namespaces. Arithmetic symbol callees `+(...)`, `-(...)`, `*(...)`, `/(...)`, and
+  `%(...)` now parse and dispatch to the existing `num_*` helpers on Perl and Rust, with slash-call lookahead
+  preserving slash regex literals such as `/(\))/` and `/(?<!\\)}/`. Frontier is now `.3.2.3`.
   Prior **`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
   `sub(...)`, `mul(...)`, `div(...)`, `mod(...)`, `abs(...)`, `floor(...)`, `ceil(...)`, `round(...)`,
   `min(...)`, `max(...)`, `clamp(...)`, `sum(...)`, `avg(...)`, `median(...)`, and `range(...)` now map to the
   existing `num_*` helper family on Perl and Rust. Existing `num_*` spellings remain accepted. Bare comparison
   words such as `gt(...)` remain string comparisons; numeric comparison policy stays isolated behind
-  `.3.2.3`. Arithmetic symbol callees such as `+(a,b)` remain the next frontier, `SPEC-FORMAT-TERSE.3.2.2`,
-  because they require parser/lowering support before raw host fallback can see them. Prior **`.3.2`
+  `.3.2.3`. Prior **`.3.2`
   SPLIT/OWNED; arithmetic call surface split before code** — Round 3 keeps one `callee(args)` call grammar with
   no `(op a, b)` Lisp-prefix surface. Prior **`.3.1`
   DONE; edge-syntax contract confirmed/locked** — `->` action edges and `=>` blind-call edges stay as-is;
@@ -2117,15 +2118,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.3.2.1 - implement numeric word aliases`
 
 - ID: `SPEC-FORMAT-TERSE.3.2.2`
-  Status: `pending`
+  Status: `done` 2026-07-02
   Goal: Arithmetic symbol callees for the numeric helper family
   Acceptance: Symbol function calls `+(a,b)`, `-(a,b)`, `*(a,b)`, `/(a,b)`, and `%(a,b)` parse and map to
     `num_add`, `num_sub`, `num_mul`, `num_div`, and `num_mod` on Perl and Rust. The implementation must reject
     or lower these before any raw host-language fallback can reinterpret them; in particular, `+(2,3)` must be
     numeric addition, not Perl unary-plus/comma behavior. No `(op a, b)` Lisp-prefix form is accepted and no
     operator precedence is introduced.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Perl method-expression parsing, ActionIR AST scanning, validation,
+    bootstrap balanced parsing, and flow-composite lowering now recognize `+`, `-`, `*`, `/`, and `%` as
+    ordinary callee names when they form a balanced symbol call. The slash disambiguator requires `/` followed
+    by optional whitespace and a balanced parenthesized argument list with a call boundary, skips quoted strings
+    and backslash-escaped characters, and deliberately does not treat `}` as a call boundary so regex literals
+    such as `/(\))/` and `/(?<!\\)}/` remain regexes. Rust mirrors the same parser distinction and helper
+    dispatch maps the symbols to `num_add`, `num_sub`, `num_mul`, `num_div`, and `num_mod`.
+    Focused Perl lowering/runtime/source probes passed; `perl -Iperl -c` passed for the edited Perl modules;
+    full phase0 passed (`prove -q -Iperl t/phase0_regression.t`, 1008 tests); oracle generation produced
+    55 fixtures including `terse_3_2_2_arithmetic_symbol_callees`; Rust corpus oracle passed; Rust core tests
+    passed; the focused Rust runtime `.3.2.2` integration test passed; mdBook, memory/Knowledge Map/doctrine/diff
+    checks, and full local CI passed. A broader full runtime integration run also confirmed the new `.3.2.2` test
+    passes, while exposing unrelated stale `s(...)`/`a(...)`/`h(...)` short-wrapper tests already inconsistent
+    with the earlier alias-retirement leaf.
+  Commit: `SPEC-FORMAT-TERSE.3.2.2 - implement arithmetic symbol callees`
 
 - ID: `SPEC-FORMAT-TERSE.3.2.3`
   Status: `pending`
@@ -3278,6 +3292,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.1` | Existing phase0 locks audited (`bootstrap_grouped_action_edge_targets_share_one_code_block`, `validation_accepts_grouped_action_edge_targets_with_shared_code_block`, `validation_rejects_grouped_action_edge_targets_without_shared_code_block`, `validation_accepts_grouped_action_edge_with_three_targets`); focused `perl -Iperl` validation/bootstrap probes for grouped shared-block acceptance, two-target `ACODE` expansion, and block-less grouped-target rejection; full phase0 (`prove -q -Iperl t/phase0_regression.t`, 1001 tests); `bash tools/run_ci_local.sh`; mdBook boundary wording; Knowledge Map fact card | Edge syntax contract locked without parser/compiler/runtime code change. `->` action edges and `=>` blind-call edges stay as-is. Grouped targets are valid only with one shared `{ ... }` block; the block-less `-> A | B` form stays invalid with the existing diagnostic. Frontier becomes `.3.2` for arithmetic/comparison function spellings. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.2` | Knowledge Map retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-number-receiver-value-chains`, `terse-composability-audit-boundaries`); TOOLBOX `call_spec_handler_subst`/runtime/flow-lowering probes for `num_*`, bare word aliases, symbol callees, and comparison helpers; source reads of Perl `MethodExpr`/`MethodLowering` and Rust expression parser/runtime helper dispatch; mdBook comparison-helper audit; memory/doctrine/KM/diff checks | Arithmetic/comparison call surface split before code. Current ground truth: `num_*` helpers are the implemented numeric family, bare `add(...)`/`sum(...)` do not lower as numeric helpers, symbol callees are not parsed portably, raw Perl can misinterpret `+(2,3)`, and bare `eq`/`gt`/etc. are current string comparisons. Frontier becomes `.3.2.1` for non-conflicting numeric word aliases. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.2.1` | Perl syntax checks for `MethodExpr.pm`, `MethodLowering.pm`, `FlowExpr.pm`, `BootstrapSpec/Core.pm`, phase0, and oracle generator; focused Perl lowering/runtime probes for numeric aliases, comparison boundary, and receiver-chain preservation; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; full phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust integration test; `mdbook build docs/linkedspec-book` | Numeric word aliases landed on Perl/Rust. `add`/`sub`/`mul`/`div`/`mod`, unary/rounding helpers, `min`/`max`/`clamp`, and reducers `sum`/`avg`/`median`/`range` now dispatch to the existing `num_*` family. Receiver-dot number chains remain stable because Perl aliasing happens after receiver normalization. Bare `gt(...)` remains string comparison. Phase0 PASS (1002 tests); oracle corpus PASS over 53 fixtures. Frontier becomes `.3.2.2`. |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.2` | Perl syntax checks for `MethodExpr.pm`, `AST/Parser.pm`, `Validation.pm`, `BootstrapSpec/Core.pm`, `MethodLowering.pm`, and `FlowExpr.pm`; TOOLBOX lowering/runtime/source probes for `+(...)`, `-(...)`, `*(...)`, `/(...)`, `%(...)`, nested symbol calls, and slash-regex preservation; full phase0 (`prove -q -Iperl t/phase0_regression.t`); Rust core parser tests; focused Rust runtime `.3.2.2` integration test; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; Rust core suite | Arithmetic symbol callees landed on Perl/Rust. `+(a,b)`, `-(a,b)`, `*(a,b)`, `/(a,b)`, and `%(a,b)` now dispatch to the existing numeric helper family without raw host fallback, while slash-regex literals such as `/(\))/` and `/(?<!\\)}/` remain regexes. Phase0 PASS (1008 tests); oracle corpus PASS over 55 fixtures. Broader full Rust runtime integration also confirmed `.3.2.2` passes, but still contains unrelated stale short-wrapper alias tests from the earlier `s/a/h` retirement baseline. Frontier becomes `.3.2.3`. |
 | `2026-06-16` | `SPEC-FORMAT-TERSE` | Transcription faithful to `docs/knowledge/spec-format-brainstorm-rounds-1-3.md` | Done — all Rounds 1–3 captured as leaves; Round 4+ as a discovery leaf |
 | `2026-06-18` | `SPEC-FORMAT-TERSE.0` | ADR `0007` written + indexed; cross-checked Rounds 1–3 vs the user's 2026-06-18 clarifications (all consistent); `scripts/check_memory_architecture.sh`; KM gate | self-check + KM gate pass. Direction ratified; migration policy = gradual alias; tree `proposed`→`active`. Design-only — regression gate N/A to `.0`. No engine/book change |
 | `2026-06-23` | `SPEC-FORMAT-TERSE.1.1` (split) | `dump_parser_source` ground-truth probes (scratchpad `probe_autovar*.pl`, dump-don't-transcribe) establishing the one-scope / non-strict / preamble-`my` model; `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm` = 0; baseline `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh` (2/2), KM gate all EXIT 0 | Split `.1.1` → `.1.1.1`+`.1.1.2`; design recorded; KM card [[working-vars-no-strict-need-my-lexical]] added (map regenerated). Docs/tree/KM-only — no engine/book change, so phase0 N/A to the split slice |

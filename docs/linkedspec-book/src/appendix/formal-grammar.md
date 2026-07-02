@@ -625,15 +625,19 @@ add(a, b), sub(a, b), mul(a, b)          — aliases for num_add/num_sub/num_mul
 div(a, b), mod(a, b), clamp(x, lo, hi)   — aliases for num_div/num_mod/num_clamp
 min(...), max(...), sum(arr)             — aliases for num_min/num_max/num_sum
 avg(arr), median(arr), range(arr)        — aliases for num_avg/num_median/num_range
++(a, b), -(a, b), *(a, b)                — aliases for num_add/num_sub/num_mul
+/(a, b), %(a, b)                         — aliases for num_div/num_mod
 
 number_expr.abs().ceil().add(n).mul(n)  — receiver-dot number helper chain
 number_expr.gt(n)                       — terminal receiver-dot numeric comparison
 ```
 
-The terse function aliases above do not include comparison words. Bare
-`eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and `le(...)` are string
-comparison helpers; use `num_gt(...)` or receiver-dot `.gt(...)` for numeric
-comparisons.
+The terse function aliases above are ordinary calls, not infix operators, so
+they do not introduce precedence. Write nested calls such as `+(*(a, b), c)` when
+you need grouping. The alias set does not include comparison words or comparison
+symbols. Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and
+`le(...)` are string comparison helpers; use `num_gt(...)` or receiver-dot
+`.gt(...)` for numeric comparisons.
 
 ### 7.6 Control Flow Helpers
 ```

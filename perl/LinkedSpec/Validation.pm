@@ -32,6 +32,14 @@ sub _trace_log_output {
  })
 }
 
+sub _looks_like_slash_symbol_call_at {
+ my ($fragment, $idx) = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
+  return LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($fragment, $idx)
+ })
+}
+
 sub _parse_rule_label_line {
  my ($line) = @_;
  return undef unless defined $line;
@@ -1067,6 +1075,7 @@ sub _consume_slash_construct {
  return undef unless defined $fragment;
  $len = length($fragment) unless defined $len;
  return undef if $i >= $len || substr($fragment, $i, 1) ne q{/};
+ return undef if _looks_like_slash_symbol_call_at($fragment, $i);
 
  my $prev_immediate = $i > 0 ? substr($fragment, $i - 1, 1) : '';
  my $prev_nonspace_idx = $i - 1;
