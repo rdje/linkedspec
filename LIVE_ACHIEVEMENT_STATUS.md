@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.1 — string comparison bridge contract locked**
+  (TASK TREE + ROADMAP + BOOK/KM + LIVE DOCS; **no parser/compiler/runtime code change**).
+  The explicit string-comparison bridge names are now contract-locked before implementation:
+  `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le`. They preserve today's lexical string
+  comparison semantics and are intentionally not numeric helpers, receiver-dot links, or symbol callees.
+
+  Current shipped behavior remains unchanged. Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and
+  `le(...)` are still the runnable string comparison helpers. The book names `str_*` as the accepted bridge but
+  states that those names are not shipped until `.3.2.3.2` implements them.
+
+  **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` PASS; Knowledge Map regenerate/check
+  PASS; memory/doctrine/diff checks PASS; mdBook build PASS; full local CI PASS with phase0 **1008 tests**.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3.2` (implement explicit string-comparison helpers), then `.3.2.3.3`,
+  `.3.2.3.4`, and `.3.3`.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3 — comparison call surface split/owned**
   (TASK TREE + ROADMAP + BOOK/KM + LIVE DOCS; **no parser/compiler/runtime code change**).
   The comparison operator-call migration is now split before implementation. Current shipped behavior remains:
@@ -23,8 +39,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** focused KM/TOOLBOX/source/mdBook audit complete; Knowledge Map regenerate/check PASS;
   memory/doctrine/diff checks PASS; mdBook build PASS; full local CI PASS with phase0 **1008 tests**.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3.1` (explicit string-comparison bridge contract), then `.3.2.3.2`,
-  `.3.2.3.3`, `.3.2.3.4`, and `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3.1` (explicit string-comparison bridge contract; now done),
+  then `.3.2.3.2`, `.3.2.3.3`, `.3.2.3.4`, and `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
@@ -43,7 +59,7 @@ Current execution status for interruption-safe batch workflow recovery.
   integration run also shows the new `.3.2.2` test passing but still contains unrelated stale `s(...)`/`a(...)`/`h(...)`
   short-wrapper tests from the prior alias-retirement baseline.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.1`), then `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.2`), then `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.4 — user-function surface finalized**
   (BOOK + TASK TREE + KNOWLEDGE MAP + LIVE DOCS).

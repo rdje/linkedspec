@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.1 — lock string comparison bridge
+
+**Scope:** Task tree, roadmap/status docs, mdBook comparison-helper wording, Knowledge Map, and live recovery
+docs. No parser/compiler/runtime code changed.
+
+**What changed:** The explicit string-comparison bridge contract is now locked before implementation. The
+accepted names are `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le`; they preserve today's
+lexical string comparison semantics and are not numeric helpers, receiver-dot links, or symbol callees.
+
+**Compatibility boundary:** Current shipped behavior remains unchanged. Bare `eq(...)`, `ne(...)`, `gt(...)`,
+`ge(...)`, `lt(...)`, and `le(...)` remain the runnable string helpers until `.3.2.3.2` implements `str_*`.
+The book names the accepted bridge but warns that `str_*` is not shipped syntax yet. Bare comparison words
+cannot flip to numeric aliases until the bridge implementation exists and repo-owned string examples/tests are
+migrated or compatibility-covered.
+
+**Checks:** `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`, Knowledge Map regenerate/check, memory
+architecture, doctrine registry, mdBook build, `git diff --check`, and full local CI passed. Local CI included
+phase0 passing with **1008 tests**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3 — split comparison call surface
 
 **Scope:** Task tree, roadmap/status docs, mdBook comparison-helper notes, Knowledge Map, and live recovery docs.

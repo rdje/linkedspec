@@ -746,7 +746,10 @@ comparison symbols; `gt(...)` and `lt(...)` remain string comparisons.
 The comparison operator-call migration is task-tree-owned separately: current
 shipped behavior stays on `num_gt(...)` or receiver `.gt(...)` for numeric
 comparisons until the explicit string-comparison bridge and numeric comparison
-word/symbol aliases land.
+word/symbol aliases land. The accepted bridge names are `str_eq`, `str_ne`,
+`str_gt`, `str_ge`, `str_lt`, and `str_le`; they will preserve the same lexical
+string semantics as today's bare comparison helpers once implemented, but are not
+part of the shipped helper surface yet.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads

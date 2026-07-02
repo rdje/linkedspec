@@ -640,8 +640,9 @@ symbols. Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and
 `.gt(...)` for numeric comparisons.
 The task-tree-owned comparison migration will add explicit string-comparison
 bridge names before any numeric comparison word or symbol aliases become the
-current grammar; until those leaves land, the grammar above is the shipped
-surface.
+current grammar. The accepted bridge names are `str_eq`, `str_ne`, `str_gt`,
+`str_ge`, `str_lt`, and `str_le`; they are not shipped syntax until their
+implementation leaf lands, so the grammar above remains the current surface.
 
 ### 7.6 Control Flow Helpers
 ```

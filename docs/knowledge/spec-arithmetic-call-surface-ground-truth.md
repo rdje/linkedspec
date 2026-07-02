@@ -50,5 +50,6 @@ The `.3.2` split frontier is:
 - `.3.2.1`: done; non-conflicting numeric word aliases for arithmetic, single/multi-value helpers, and reducers.
 - `.3.2.2`: done; arithmetic symbol callees such as `+(a,b)`.
 - `.3.2.3`: split/owned; comparison spelling policy and implementation sequencing are now recorded before code.
-- `.3.2.3.1`: current next task; explicit string-comparison bridge contract before numeric comparison word
-  aliases and symbol callees.
+- `.3.2.3.1`: done; explicit string-comparison bridge contract locked before numeric comparison word aliases
+  and symbol callees.
+- `.3.2.3.2`: current next task; implement `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`.

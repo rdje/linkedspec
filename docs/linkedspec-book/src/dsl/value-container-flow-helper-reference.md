@@ -575,6 +575,15 @@ endif()
 
 Use string comparisons for lexical text semantics. Use numeric comparisons for counts, offsets, depths, and computed numeric helpers.
 
+Compatibility bridge contract:
+
+- The currently shipped string comparison spellings are the bare helpers above.
+- The accepted explicit bridge names are `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le`.
+- Those `str_*` names will preserve the same lexical string semantics as today's bare helpers once the
+  implementation leaf lands; they are not numeric helpers and are not comparison-symbol calls.
+- Until that implementation ships, do not use `str_*` in runnable specs. After it ships, prefer `str_*` for
+  text comparisons so bare comparison words can later become numeric aliases without changing lexical intent.
+
 ## Numeric value helpers
 
 Numeric helpers keep arithmetic and reducers explicit. They return `undef` when required numeric operands are missing or not numeric-looking.
@@ -693,7 +702,8 @@ Do not use `gt(...)` or `lt(...)` for counters. Those are string comparisons and
 The comparison operator-call migration is split separately. Until that work lands, numeric comparisons should
 use `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le` or number receiver terminals such as
 `count(array(parts)).gt(0)`; bare comparison words remain string helpers and comparison symbol callees are not
-part of the shipped surface.
+part of the shipped surface. The explicit string bridge contract is locked as `str_eq`/`str_ne`/`str_gt`/
+`str_ge`/`str_lt`/`str_le`, but those names are not shipped until their implementation leaf lands.
 
 ## Array helpers
 
