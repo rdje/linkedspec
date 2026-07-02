@@ -13,6 +13,7 @@ answers:
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.1"
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.2"
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.3"
+  - "what is the next task after SPEC-FORMAT-TERSE.3.2.3.2"
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, arithmetic, comparison, helper-aliases, parser, rust-parity, mdbook]
@@ -36,8 +37,10 @@ reverify: "perl -Iperl -c perl/LinkedSpec/ActionIR/MethodExpr.pm && perl -Iperl 
 - Slash symbol-call parsing is deliberately narrow: `/(` becomes division only when followed by a balanced
   parenthesized argument list and a call boundary. The lookahead skips quoted strings and escaped characters and
   does not treat `}` as a valid call boundary, preserving regex literals such as `/(\))/` and `/(?<!\\)}/`.
-- Bare `eq`/`ne`/`gt`/`ge`/`lt`/`le` are already string comparisons in flow/helper contexts. Numeric
-  comparisons are `num_eq`/`num_gt`/etc. or receiver terminals such as `score.gt(3)`.
+- `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` are shipped lexical string comparisons.
+- Bare `eq`/`ne`/`gt`/`ge`/`lt`/`le` remain string-comparison compatibility aliases in flow/helper contexts
+  until `.3.2.3.3`. Numeric comparisons are `num_eq`/`num_gt`/etc. or receiver terminals such as
+  `score.gt(3)`.
 - Perl aliasing is deliberately not done in the shared method-expression parser normalization seam. It happens
   in value lowering after receiver-dot normalization, so receiver chains such as `3.5.floor().add(1)` keep their
   existing number-chain behavior.
@@ -52,4 +55,5 @@ The `.3.2` split frontier is:
 - `.3.2.3`: split/owned; comparison spelling policy and implementation sequencing are now recorded before code.
 - `.3.2.3.1`: done; explicit string-comparison bridge contract locked before numeric comparison word aliases
   and symbol callees.
-- `.3.2.3.2`: current next task; implement `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`.
+- `.3.2.3.2`: done; explicit `str_*` string comparison helpers ship on Perl/Rust.
+- `.3.2.3.3`: current next task; flip ordinary comparison word calls to numeric `num_*` aliases.

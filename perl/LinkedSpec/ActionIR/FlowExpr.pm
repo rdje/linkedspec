@@ -302,7 +302,7 @@ sub _lower_flow_composite_expr {
 
  # SPEC-FORMAT-TERSE.1.4.1 — the terse renames `cat` (== concat) and `copy` (== array_copy/
  # hash_copy) are recognized here too so a composite/assignment-source value lowers identically.
- if ($trimmed =~ /^(?:scalaref|scalar|array|hash|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy)\s*\(/o) {
+ if ($trimmed =~ /^(?:scalaref|scalar|array|hash|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
@@ -316,7 +316,20 @@ sub _lower_flow_composite_expr {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
- my %string_compare_ops = map { $_ => 1 } qw(eq ne gt ge lt le);
+ my %string_compare_ops = (
+  eq     => 'eq',
+  ne     => 'ne',
+  gt     => 'gt',
+  ge     => 'ge',
+  lt     => 'lt',
+  le     => 'le',
+  str_eq => 'eq',
+  str_ne => 'ne',
+  str_gt => 'gt',
+  str_ge => 'ge',
+  str_lt => 'lt',
+  str_le => 'le',
+ );
  my %numeric_compare_ops = (
   num_eq => '==',
   num_ne => '!=',
@@ -380,7 +393,7 @@ sub _lower_flow_composite_expr {
   my $rhs = _lower_flow_composite_expr($effective_args->[1], $deps);
   return undef unless defined($lhs) && length($lhs);
   return undef unless defined($rhs) && length($rhs);
-  return "($lhs $method $rhs)";
+  return "($lhs $string_compare_ops{$method} $rhs)";
  }
 
  if (exists $numeric_compare_ops{$method}) {

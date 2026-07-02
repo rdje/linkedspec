@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.2.3.2 — explicit string comparison helpers):
+  The bridge family is now implemented, not just contracted. Durable points. (1) **Names.** `str_eq`,
+  `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le` are shipped two-argument lexical string predicates on
+  Perl and Rust. (2) **Perl lowering.** Flow/value lowering maps those names to Perl string comparison
+  operators and emits scoped generated-source temps, so generated handlers do not retain raw `str_*` helper
+  calls. (3) **Rust dispatch.** Validation reserves the names and runtime helper dispatch string-coerces both
+  operands before evaluating the matching comparison. (4) **Compatibility.** Bare `eq`/`ne`/`gt`/`ge`/`lt`/`le`
+  remain runnable string-comparison aliases until `.3.2.3.3` flips ordinary word calls to numeric aliases;
+  comparison symbol callees remain `.3.2.3.4`. (5) **Gate.** Focused Perl/Rust locks, oracle corpus, phase0,
+  mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1009 tests and the
+  oracle corpus is 56 fixtures.
+  Next frontier: `SPEC-FORMAT-TERSE.3.2.3.3`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.2.3.1 — string comparison bridge contract):
   The explicit bridge before comparison-word numeric aliases is now locked. Durable points. (1) **Bridge names.**
   `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le` are the accepted explicit string comparison
@@ -25,8 +38,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   and `str_le`; those must land before bare comparison words flip to numeric aliases. (4) **Split order.**
   `.3.2.3.1` locks the bridge contract, `.3.2.3.2` implements string helpers, `.3.2.3.3` flips word calls,
   and `.3.2.3.4` adds symbol callees. `=(target,value)` stays `.3.3`; `=>` stays the blind-call edge.
-  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3.1`; current frontier after the bridge contract is
-  `SPEC-FORMAT-TERSE.3.2.3.2`.
+  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3.1`; current frontier after the string-helper implementation is
+  `SPEC-FORMAT-TERSE.3.2.3.3`.
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees):
   Arithmetic symbol calls are now a real portable helper-call surface, not host-language fallback. Durable points.
@@ -39,8 +52,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   Rust `.3.2.2` integration lock passes, and full local CI passes. The full runtime integration binary still has unrelated stale
   short-wrapper alias failures from the earlier `s/a/h` retirement baseline; the `.3.2.2` test in that binary is
   green.
-  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3`; current frontier after the bridge contract is
-  `SPEC-FORMAT-TERSE.3.2.3.2`.
+  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3`; current frontier after the string-helper implementation is
+  `SPEC-FORMAT-TERSE.3.2.3.3`.
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.4 — function surface finalization ledger):
   The user-function MVP is now closed as a portable Perl/Rust contract rather than an open-ended syntax family.
@@ -53,8 +66,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   closure.** The formal grammar, pipeline/backend handoff, descriptor/state model docs, task tree, and Knowledge
   Map now carry the same boundary. (4) **Gate.** mdBook, memory/doctrine/Knowledge Map/diff/local-CI gates pass;
   no parser/compiler/runtime code changed.
-  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3`; current frontier after the bridge contract is
-  `SPEC-FORMAT-TERSE.3.2.3.2`.
+  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3`; current frontier after the string-helper implementation is
+  `SPEC-FORMAT-TERSE.3.2.3.3`.
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity):
   Rust now executes the user-function registry shape landed in `.4.3.1`. Durable points. (1) **Resolution

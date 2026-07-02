@@ -636,13 +636,13 @@ The terse function aliases above are ordinary calls, not infix operators, so
 they do not introduce precedence. Write nested calls such as `+(*(a, b), c)` when
 you need grouping. The alias set does not include comparison words or comparison
 symbols. Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and
-`le(...)` are string comparison helpers; use `num_gt(...)` or receiver-dot
-`.gt(...)` for numeric comparisons.
-The task-tree-owned comparison migration will add explicit string-comparison
-bridge names before any numeric comparison word or symbol aliases become the
-current grammar. The accepted bridge names are `str_eq`, `str_ne`, `str_gt`,
-`str_ge`, `str_lt`, and `str_le`; they are not shipped syntax until their
-implementation leaf lands, so the grammar above remains the current surface.
+`le(...)` remain string-comparison compatibility aliases; use `num_gt(...)` or
+receiver-dot `.gt(...)` for numeric comparisons.
+The task-tree-owned comparison migration has added the explicit
+string-comparison bridge names `str_eq`, `str_ne`, `str_gt`, `str_ge`,
+`str_lt`, and `str_le`. Prefer those shipped names for lexical string
+comparisons before any numeric comparison word or symbol aliases become the
+current grammar.
 
 ### 7.6 Control Flow Helpers
 ```

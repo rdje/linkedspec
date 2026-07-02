@@ -818,7 +818,7 @@ sub _actionir_ast_known_value_call_method {
   assign set declare declare_s declare_scalar declare_a declare_array declare_h declare_hash
   call push push_value push_nonempty push_back push_front pop_back pop_front set_key print say exit_now exit next
   trim lowercase uppercase length substr replace_substr rm_prefix rm_suffix concat
-  starts_with ends_with contains_substr matches coalesce coalesce_nonempty
+  str_eq str_ne str_gt str_ge str_lt str_le starts_with ends_with contains_substr matches coalesce coalesce_nonempty
   num_abs num_floor num_ceil num_round num_add num_sub num_mul num_div num_mod num_clamp
   num_min num_max num_eq num_ne num_gt num_ge num_lt num_le num_sum num_avg num_median num_range
   scalar array hash array_copy hash_copy copy flat flat_array flat_hash
@@ -1984,6 +1984,12 @@ sub _lower_method_value_expr {
   rm_prefix        => [2, 2],
   rm_suffix        => [2, 2],
   concat           => [2, undef],
+  str_eq           => [2, 2],
+  str_ne           => [2, 2],
+  str_gt           => [2, 2],
+  str_ge           => [2, 2],
+  str_lt           => [2, 2],
+  str_le           => [2, 2],
   starts_with      => [2, 2],
   ends_with        => [2, 2],
   contains_substr  => [2, 2],
@@ -3501,6 +3507,29 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   return 'do { my @__ls_num_max_terms = ('.join(', ', @lowered_terms).'); my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@__ls_num_max_terms) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }';
  }
+ if ($method_call && $method_call->{method} =~ /^(?:str_eq|str_ne|str_gt|str_ge|str_lt|str_le)$/o) {
+  my %string_compare_ops = (
+   str_eq => 'eq',
+   str_ne => 'ne',
+   str_gt => 'gt',
+   str_ge => 'ge',
+   str_lt => 'lt',
+   str_le => 'le',
+  );
+  my $string_compare_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
+  return undef unless $string_compare_args;
+
+  my $lhs_expr = _lower_method_value_expr($string_compare_args->[0], $deps);
+  $lhs_expr = $trim_action_ir_value->($string_compare_args->[0]) unless defined($lhs_expr) && length($lhs_expr);
+  return undef unless defined($lhs_expr) && length($lhs_expr);
+
+  my $rhs_expr = _lower_method_value_expr($string_compare_args->[1], $deps);
+  $rhs_expr = $trim_action_ir_value->($string_compare_args->[1]) unless defined($rhs_expr) && length($rhs_expr);
+  return undef unless defined($rhs_expr) && length($rhs_expr);
+
+  my $op = $string_compare_ops{$method_call->{method}};
+  return 'do { my $__ls_str_cmp_lhs = '.$lhs_expr.'; my $__ls_str_cmp_rhs = '.$rhs_expr.'; ($__ls_str_cmp_lhs '.$op.' $__ls_str_cmp_rhs) ? 1 : 0 }';
+ }
  if ($method_call && $method_call->{method} eq 'starts_with') {
   my $starts_with_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
   return undef unless $starts_with_args;
@@ -4429,7 +4458,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
  return $direct;
  }
@@ -4442,7 +4471,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.2 — implement string comparison helpers
+
+**Scope:** Perl ActionIR flow/value lowering, Rust helper validation/runtime dispatch, phase0 locks, Rust
+integration test, oracle corpus, mdBook, task tree, live recovery docs, and Knowledge Map.
+
+**What changed:** `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le` are now shipped explicit
+lexical string comparison helpers on Perl and Rust. They compose in value and flow predicates, lower without raw
+helper residue, and return boolean-like values matching the existing bare string comparison semantics.
+
+**Compatibility boundary:** Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and `le(...)` remain
+runnable string-comparison compatibility aliases for now. The next owned leaf, `.3.2.3.3`, may flip ordinary
+comparison word calls to numeric `num_*` aliases because new lexical string examples can now use `str_*`.
+Comparison symbol callees remain unimplemented until `.3.2.3.4`.
+
+**Checks:** Perl syntax checks, focused Rust runtime string-helper test, oracle generation, Rust corpus oracle,
+phase0, mdBook build, Knowledge Map regenerate/check, memory architecture, doctrine registry, `git diff
+--check`, and full local CI passed. Local CI includes phase0 passing with **1009 tests** and the corpus oracle
+passing over **56 fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.1 — lock string comparison bridge
 
 **Scope:** Task tree, roadmap/status docs, mdBook comparison-helper wording, Knowledge Map, and live recovery

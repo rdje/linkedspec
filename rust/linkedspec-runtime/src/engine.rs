@@ -3236,6 +3236,24 @@ impl Engine {
                     Ok(RuntimeValue::Bool(false))
                 }
             }
+            "str_eq" | "str_ne" | "str_gt" | "str_ge" | "str_lt" | "str_le" => {
+                if args.len() >= 2 {
+                    let lhs = args[0].to_str();
+                    let rhs = args[1].to_str();
+                    let result = match name {
+                        "str_eq" => lhs == rhs,
+                        "str_ne" => lhs != rhs,
+                        "str_gt" => lhs > rhs,
+                        "str_ge" => lhs >= rhs,
+                        "str_lt" => lhs < rhs,
+                        "str_le" => lhs <= rhs,
+                        _ => false,
+                    };
+                    Ok(RuntimeValue::Bool(result))
+                } else {
+                    Ok(RuntimeValue::Bool(false))
+                }
+            }
             "matches" => {
                 if args.len() >= 2 {
                     let s = args[0].to_str();

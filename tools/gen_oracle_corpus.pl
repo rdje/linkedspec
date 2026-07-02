@@ -802,6 +802,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.2.3.2 — explicit string comparison helpers ──
+    #
+    # str_* helpers preserve the current lexical string comparison semantics
+    # under explicit names before bare comparison words become future numeric
+    # aliases. This fixture uses control flow to emit backend-stable strings
+    # instead of relying on Perl/Rust boolean JSON shape equivalence.
+    {   case   => 'terse_3_2_3_2_string_comparison_helpers',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(out, ""); if(str_eq("node", "node")) { set(out, cat(scalar(out), "E")) }; if(str_ne("node", "edge")) { set(out, cat(scalar(out), "N")) }; if(str_gt("2", "10")) { set(out, cat(scalar(out), "G")) }; if(str_ge("2", "2")) { set(out, cat(scalar(out), "H")) }; if(str_lt("10", "2")) { set(out, cat(scalar(out), "L")) }; if(str_le("10", "10")) { set(out, cat(scalar(out), "M")) }; if(str_gt("10", "2")) { set(out, cat(scalar(out), "X")) }; return(out) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

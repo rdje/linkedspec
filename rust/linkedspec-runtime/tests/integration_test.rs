@@ -2035,6 +2035,18 @@ fn terse_3_2_2_arithmetic_symbol_callees_run() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.2.3.2 — explicit string comparison helpers:
+
+#[test]
+fn terse_3_2_3_2_string_comparison_helpers_run() {
+    let grammar = "Top::\n /x/ -> Done { return(array(str_eq(\"a\",\"a\"), str_ne(\"a\",\"b\"), str_gt(\"2\",\"10\"), str_ge(\"2\",\"2\"), str_lt(\"10\",\"2\"), str_le(\"10\",\"10\"), str_gt(\"10\",\"2\"), num_gt(\"10\",\"2\"))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[true, true, true, true, true, true, false, true]]),
+        "str_* helpers preserve lexical string semantics while num_gt remains numeric"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

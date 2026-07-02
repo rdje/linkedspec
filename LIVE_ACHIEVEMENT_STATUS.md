@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.2 — explicit string comparison helpers landed**
+  (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM).
+  The explicit string-comparison bridge is now runnable: `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and
+  `str_le` lower/dispatch as lexical string predicates on Perl and Rust. These names are now preferred for new
+  text comparisons.
+
+  Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and `le(...)` remain runnable string-comparison
+  compatibility aliases until `.3.2.3.3` flips ordinary comparison word calls to numeric `num_*` aliases.
+  Comparison symbol callees remain `.3.2.3.4`.
+
+  **Verification:** Perl syntax checks PASS; focused Rust runtime `.3.2.3.2` PASS; oracle regeneration produced
+  **56 fixtures** including `terse_3_2_3_2_string_comparison_helpers`; Rust corpus oracle PASS; phase0 PASS with
+  **1009 tests**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3.3` (numeric comparison word aliases), then `.3.2.3.4` and `.3.3`.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.1 — string comparison bridge contract locked**
   (TASK TREE + ROADMAP + BOOK/KM + LIVE DOCS; **no parser/compiler/runtime code change**).
   The explicit string-comparison bridge names are now contract-locked before implementation:
@@ -20,8 +36,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` PASS; Knowledge Map regenerate/check
   PASS; memory/doctrine/diff checks PASS; mdBook build PASS; full local CI PASS with phase0 **1008 tests**.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3.2` (implement explicit string-comparison helpers), then `.3.2.3.3`,
-  `.3.2.3.4`, and `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3.2` (now done), then `.3.2.3.3`, `.3.2.3.4`, and `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3 — comparison call surface split/owned**
   (TASK TREE + ROADMAP + BOOK/KM + LIVE DOCS; **no parser/compiler/runtime code change**).
@@ -59,7 +74,7 @@ Current execution status for interruption-safe batch workflow recovery.
   integration run also shows the new `.3.2.2` test passing but still contains unrelated stale `s(...)`/`a(...)`/`h(...)`
   short-wrapper tests from the prior alias-retirement baseline.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.2`), then `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.3`), then `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.4 — user-function surface finalized**
   (BOOK + TASK TREE + KNOWLEDGE MAP + LIVE DOCS).
