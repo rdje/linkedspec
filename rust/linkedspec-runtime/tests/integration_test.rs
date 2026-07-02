@@ -2123,6 +2123,43 @@ Done::
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.3.4 — assignment expression closure:
+
+#[test]
+fn terse_3_3_4_assignment_expression_closure_run() {
+    let grammar = r#"fn keep(value) { return(fn_out = value) }
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(scalar(name), "!")), other, set(third, keep("fn")), third, assign(legacy, "compat"), legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[
+            "ok",
+            "ok",
+            "ok!",
+            "ok!",
+            "fn",
+            "fn",
+            "compat",
+            "compat",
+            ["ok"],
+            ["ok"],
+            {"stage": "ok"},
+            {"stage": "ok"},
+            ["ok", "tail"],
+            ["ok", "tail"],
+            {"extra": "ok!", "stage": "ok"},
+            {"extra": "ok!", "stage": "ok"},
+            3,
+            3
+        ]]),
+        "assignment expression closure composes scalar, aggregate, mutation, and legacy compatibility forms"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

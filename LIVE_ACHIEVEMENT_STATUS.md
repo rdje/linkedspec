@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.3.4 — assignment-expression closure and legacy spelling cleanup landed**
+  (PHASE0 + RUST RUNTIME + ORACLE + BOOK/KM + STATUS DRIFT REPAIR).
+  The parent `.3.3` assignment-expression contract is now locked across scalar assignment values, direct-shape
+  aggregate assignment values, array append snapshot values, hash-index mutation snapshot values,
+  user-function body assignment, `=(target,value)`, canonical `set(...)`, compatible receiver-chain terminals,
+  and retained legacy `assign(...)` compatibility.
+
+  Public mdBook examples now prefer `set(...)` or operator assignment. `assign(...)` remains supported and is
+  documented as a legacy alias with current value semantics, not promoted as new syntax.
+
+  **Verification:** phase0 closure lock PASS with **1015 tests**; focused Rust runtime `.3.3.4` PASS; oracle
+  regeneration produced **62 fixtures** including `terse_3_3_4_assignment_expression_closure`; Rust corpus oracle
+  PASS; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains. Future backend leaves are deferred or
+  blocked by explicit roadmap decisions.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
   Array append and hash-index mutation operators are now value expressions on Perl and Rust. `items += value`
@@ -15,17 +32,17 @@ Current execution status for interruption-safe batch workflow recovery.
   arguments, expression-valued blocks, and compatible receiver chains such as `(items += value).count()` and
   `(meta[key] = value).count_keys()`.
 
-  The compatibility boundary is locked: statement behavior is preserved, array end-mutation methods such as
-  `items.push_back(value)` remain statement-level, and full assignment-expression closure / legacy
-  `assign(...)` example cleanup remains `.3.3.4`.
+  The compatibility boundary is locked: statement behavior is preserved and array end-mutation methods such as
+  `items.push_back(value)` remain statement-level. Full assignment-expression closure / legacy `assign(...)`
+  example cleanup later landed in `.3.3.4`.
 
   **Verification:** Perl syntax checks PASS; focused `t/actionir_ast_parser.t` PASS; focused Rust parser/runtime
   `.3.3.3` PASS; oracle regeneration produced **61 fixtures** including
   `terse_3_3_3_mutation_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with **1014 tests**;
   mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.3.4` (legacy function spelling cleanup and full assignment-expression
-  closure).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.4` (now done; no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf
+  remains).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM).
@@ -43,7 +60,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `terse_3_3_2_aggregate_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with **1013 tests**;
   mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.3` (now done; current frontier is `.3.3.4`).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.3` (now done; `.3.3.4` is also done and no concrete
+  `SPEC-FORMAT-TERSE` PNT-eligible leaf remains).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
@@ -62,7 +80,8 @@ Current execution status for interruption-safe batch workflow recovery.
   fixtures** including `terse_3_3_1_scalar_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with
   **1012 tests**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.2` (now done; current frontier is `.3.3.4`).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.2` (now done; `.3.3.4` is also done and no concrete
+  `SPEC-FORMAT-TERSE` PNT-eligible leaf remains).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split before code**
   (TASK TREE + BOOK/KM + LIVE DOCS; NO PARSER/COMPILER/RUNTIME CHANGE).

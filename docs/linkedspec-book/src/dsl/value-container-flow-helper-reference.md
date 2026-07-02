@@ -96,7 +96,7 @@ Other modern helpers do not silently guess the current rule accumulator. They ca
 ```text
 push_value(array(Parent), capture_slice());
 push_nonempty(array(Parent), trim(capture_slice()));
-assign(array(Parent), array());
+set(array(Parent), array());
 return(hash("children", array_copy(array(Parent))));
 ```
 
@@ -140,7 +140,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` reference a per-rule working variable. Aggregate wrapper names are bare tokens: `array(items)` reads the working array `items`, and `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. Use `scalar(name)` as the target when you intentionally want to store an array/hash payload in a scalar (`set(scalar(name), [value])`). `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` reference a per-rule working variable. Aggregate wrapper names are bare tokens: `array(items)` reads the working array `items`, and `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `set(name, …)`, legacy `assign(name, …)`, and the scalar assignment operator `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. Use `scalar(name)` as the target when you intentionally want to store an array/hash payload in a scalar (`set(scalar(name), [value])`). `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -214,7 +214,7 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > and a single unified `copy(container)` subsumes both `array_copy(...)` and `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
 > array snapshot read). The assignment operator `name = value` is equivalent to `set(name, value)` and
-> `assign(name, value)`; in value positions it yields the stored scalar or direct-shape aggregate value. The
+> legacy `assign(name, value)`; in value positions it yields the stored scalar or direct-shape aggregate value. The
 > array append operator `items += expr` is equivalent to the explicit
 > append forms `push(items, expr)` / `push_value(items, expr)`; when the value is a working scalar,
 > `items += value` reads `$value`, and in value positions the expression yields the updated array snapshot.
@@ -240,14 +240,14 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 Examples:
 
 ```text
-assign(scalar(first_item), scalar(array(items), 0));
-assign(scalar(kind), scalar(hash(meta), "kind"));
-assign(scalar(content), scalaref(retv, {content}));
-assign(scalar(child_name), scalaref(retv, {children}[0]{name}));
-assign(scalar(child_name), retv["children"][0]["name"]);
-assign(scalar(dynamic_child_name), retv["children"][i]["name"]);
-assign(array(snapshot), array_copy(array(items)));
-assign(hash(meta_snapshot), hash_copy(hash(meta)));
+set(scalar(first_item), scalar(array(items), 0));
+set(scalar(kind), scalar(hash(meta), "kind"));
+set(scalar(content), scalaref(retv, {content}));
+set(scalar(child_name), scalaref(retv, {children}[0]{name}));
+set(scalar(child_name), retv["children"][0]["name"]);
+set(scalar(dynamic_child_name), retv["children"][i]["name"]);
+set(array(snapshot), array_copy(array(items)));
+set(hash(meta_snapshot), hash_copy(hash(meta)));
 set(field, "kind");
 set(value, "token");
 return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
@@ -262,11 +262,11 @@ index should read a scalar working variable.
 Example:
 
 ```text
-assign(scalar(retv), call(Child));
-assign(scalar(child_kind), scalaref(retv, {kind}));
-assign(scalar(first_child_name), scalaref(retv, {children}[0]{name}));
-assign(scalar(second_child_name), retv["children"][1]["name"]);
-assign(scalar(dynamic_child_name), retv["children"][child_index]["name"]);
+set(scalar(retv), call(Child));
+set(scalar(child_kind), scalaref(retv, {kind}));
+set(scalar(first_child_name), scalaref(retv, {children}[0]{name}));
+set(scalar(second_child_name), retv["children"][1]["name"]);
+set(scalar(dynamic_child_name), retv["children"][child_index]["name"]);
 ```
 
 ## Constructors, snapshots, and flattening
@@ -317,14 +317,14 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 
 | Helper | Effect | Use it when |
 | --- | --- | --- |
-| `name = expr` | replace a scalar slot | a named scalar should hold the expression result; equivalent to `set(name, expr)` / `assign(name, expr)`. |
-| `assign(scalar(name), expr)` | replace a scalar slot | a named scalar should hold the expression result. |
-| `assign(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
-| `assign(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
+| `name = expr` | replace a scalar slot | a named scalar should hold the expression result; equivalent to `set(name, expr)` / legacy `assign(name, expr)`. |
+| `set(scalar(name), expr)` | replace a scalar slot | a named scalar should hold the expression result. |
+| `set(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
+| `set(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
 | `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push_value(items, expr)` for accepted RHS shapes. |
 | `meta[key_expr] = expr` | set one hash field and yield the updated hash snapshot when used as an expression | a named working hash should update one explicit key; equivalent to `set_key(meta, key_expr, expr)` for accepted key/value shapes. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
-| `assign(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
+| `set(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
 | `push(rule)` | call one rule and append its result | the shortest spelling is desired for appending a child result into the current rule accumulator. |
 | `push(rule, index)` | call one rule and append one indexed result | one element from a shaped child return should go straight into the current rule's conventional array accumulator. |
 | `push(rule, target)` | call one rule and append into a named array | a child rule result should go straight into an explicit array accumulator. |
@@ -345,7 +345,7 @@ Parent::AND
  I { declare(array, children); declare(scalar, retv); }
  Child
  -> Parent[0] {
-   assign(scalar(retv), call(Child));
+   set(scalar(retv), call(Child));
    push_value(array(children), scalar(retv));
    return(hash("kind", "parent", "children", array_copy(array(children))));
  }
@@ -483,7 +483,7 @@ push_value(array(children), scalar(retv));
 That appends one value.
 
 ```text
-assign(array(children), array(scalar(retv)));
+set(array(children), array(scalar(retv)));
 ```
 
 That replaces the whole array with a one-item array. It is correct only when replacement is the intent.
@@ -507,15 +507,15 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 Examples:
 
 ```text
-assign(scalar(name), lowercase(trim(entry_group(0))));
-assign(scalar(key), replace_substr(lowercase(trim(scalar(name))), "-", "_"));
-assign(scalar(core), rm_prefix(scalar(key), "node_"));
-assign(scalar(base), rm_suffix(scalar(core), "_end"));
-assign(scalar(full_key), concat(scalar(base), "::", scalar(stage)));
-assign(scalar(name_len), length(scalar(name)));
-assign(scalar(short_key), raw.trim().lowercase().replace_substr("-", "_").substr(0, 12));
-assign(array(parts), raw.trim().split("-").trim_each().filter_nonempty());
-assign(scalar(public), raw.trim().split("-").lowercase_each().join_values("_"));
+set(scalar(name), lowercase(trim(entry_group(0))));
+set(scalar(key), replace_substr(lowercase(trim(scalar(name))), "-", "_"));
+set(scalar(core), rm_prefix(scalar(key), "node_"));
+set(scalar(base), rm_suffix(scalar(core), "_end"));
+set(scalar(full_key), concat(scalar(base), "::", scalar(stage)));
+set(scalar(name_len), length(scalar(name)));
+set(scalar(short_key), raw.trim().lowercase().replace_substr("-", "_").substr(0, 12));
+set(array(parts), raw.trim().split("-").trim_each().filter_nonempty());
+set(scalar(public), raw.trim().split("-").lowercase_each().join_values("_"));
 ```
 
 String receiver-dot value chains are accepted for the pure scalar string helpers. The receiver is the first
@@ -635,24 +635,24 @@ function calls, not infix operators. For lexical string comparisons, use
 Examples:
 
 ```text
-assign(scalar(part_count), count(array(parts)));
-assign(scalar(next_depth), num_add(scalar(depth), 1));
-assign(scalar(next_depth), add(scalar(depth), 1));
-assign(scalar(next_depth), +(scalar(depth), 1));
-assign(scalar(distance), num_abs(num_sub(scalar(end_pos), scalar(start_pos))));
-assign(scalar(distance), abs(sub(scalar(end_pos), scalar(start_pos))));
-assign(scalar(bucket), num_mod(count(array(parts)), 3));
-assign(scalar(bucket), %(count(array(parts)), 3));
-assign(scalar(bounded_count), num_clamp(count(array(parts)), 1, 5));
-assign(scalar(score_total), num_sum(array(scores)));
-assign(scalar(score_total), sum(array(scores)));
-assign(scalar(score_average), num_avg(array(scores)));
-assign(scalar(score_median), num_median(array(scores)));
-assign(scalar(score_range), num_range(array(scores)));
-assign(scalar(next_depth), depth.add(1));
-assign(scalar(weighted_count), count(array(parts)).add(2, scalar(offset)).mul(3));
-assign(scalar(score_bucket), score.abs().ceil().clamp(0, 10));
-assign(scalar(has_parts), >(count(array(parts)), 0));
+set(scalar(part_count), count(array(parts)));
+set(scalar(next_depth), num_add(scalar(depth), 1));
+set(scalar(next_depth), add(scalar(depth), 1));
+set(scalar(next_depth), +(scalar(depth), 1));
+set(scalar(distance), num_abs(num_sub(scalar(end_pos), scalar(start_pos))));
+set(scalar(distance), abs(sub(scalar(end_pos), scalar(start_pos))));
+set(scalar(bucket), num_mod(count(array(parts)), 3));
+set(scalar(bucket), %(count(array(parts)), 3));
+set(scalar(bounded_count), num_clamp(count(array(parts)), 1, 5));
+set(scalar(score_total), num_sum(array(scores)));
+set(scalar(score_total), sum(array(scores)));
+set(scalar(score_average), num_avg(array(scores)));
+set(scalar(score_median), num_median(array(scores)));
+set(scalar(score_range), num_range(array(scores)));
+set(scalar(next_depth), depth.add(1));
+set(scalar(weighted_count), count(array(parts)).add(2, scalar(offset)).mul(3));
+set(scalar(score_bucket), score.abs().ceil().clamp(0, 10));
+set(scalar(has_parts), >(count(array(parts)), 0));
 ```
 
 Number receiver-dot value chains are accepted with terse method names. The receiver is the first argument to
@@ -668,9 +668,9 @@ example `{ 3.5 }.floor().add(2)`.
 Numeric helpers compose with array helpers:
 
 ```text
-assign(scalar(top_score_average), num_avg(take(sorted(array(scores)), 3)));
-assign(scalar(score_floor), num_min(take(array(scores), 5)));
-assign(scalar(score_ceiling), num_max(concat_arrays(array(scores), array(extra_scores))));
+set(scalar(top_score_average), num_avg(take(sorted(array(scores)), 3)));
+set(scalar(score_floor), num_min(take(array(scores), 5)));
+set(scalar(score_ceiling), num_max(concat_arrays(array(scores), array(extra_scores))));
 ```
 
 ## Numeric comparisons
@@ -761,24 +761,24 @@ Array helpers return either scalar information about an array or a new array val
 Examples:
 
 ```text
-assign(scalar(first_part), first(array(parts)));
-assign(scalar(last_part), last(array(parts)));
-assign(scalar(kind_index), index_of(sorted_keys(hash(meta)), "kind"));
-assign(scalar(has_tail), contains(array(parts), "tail"));
-assign(array(rest_parts), drop_front(array(parts)));
-assign(array(first_two), take(array(parts), 2));
-assign(array(middle), slice(array(parts), 1, 3));
-assign(array(last_two), take_last(array(parts), 2));
-assign(array(without_last), drop_back(array(parts)));
-assign(array(combined), concat_arrays(array(parts), array(extra_parts), ["tail"]));
-assign(array(canonical), sorted(array(combined)));
-assign(array(reverse_view), reversed(array(canonical)));
-assign(scalar(first_after_sort), items.sorted().drop_front(2).first());
-assign(scalar(public_count), items.filter_match(/^public_/).count());
-assign(scalar(csv), items.uniq().join_values(","));
+set(scalar(first_part), first(array(parts)));
+set(scalar(last_part), last(array(parts)));
+set(scalar(kind_index), index_of(sorted_keys(hash(meta)), "kind"));
+set(scalar(has_tail), contains(array(parts), "tail"));
+set(array(rest_parts), drop_front(array(parts)));
+set(array(first_two), take(array(parts), 2));
+set(array(middle), slice(array(parts), 1, 3));
+set(array(last_two), take_last(array(parts), 2));
+set(array(without_last), drop_back(array(parts)));
+set(array(combined), concat_arrays(array(parts), array(extra_parts), ["tail"]));
+set(array(canonical), sorted(array(combined)));
+set(array(reverse_view), reversed(array(canonical)));
+set(scalar(first_after_sort), items.sorted().drop_front(2).first());
+set(scalar(public_count), items.filter_match(/^public_/).count());
+set(scalar(csv), items.uniq().join_values(","));
 ```
 
-Array helpers are pure value helpers unless you use `assign(...)` to store their result. For example, `sorted(array(parts))` does not sort `parts` in place. This is intentional: the rule text says when a working container changes.
+Array helpers are pure value helpers unless you use `set(...)` to store their result. For example, `sorted(array(parts))` does not sort `parts` in place. This is intentional: the rule text says when a working container changes.
 
 Array receiver-dot value chains are accepted for the same pure array helpers. The receiver is the first helper
 argument, except `join_values`, where `items.join_values(delim)` maps to the canonical
@@ -806,23 +806,23 @@ Hash helpers return scalar information about an object or a new hash/array value
 Examples:
 
 ```text
-assign(scalar(meta_count), count_keys(hash(meta)));
-assign(array(public_keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")));
-assign(array(public_values), sorted_values(pick_keys(hash(meta), "kind", "source", "stage")));
-assign(scalar(has_kind), has_key(hash(meta), "kind"));
-assign(hash(layered), merge_hash(hash(meta), hash("stage", "normalized")));
-assign(hash(with_owner), set_key(hash(layered), "owner", scalar(rule_name)));
-assign(hash(renamed), rename_key(hash(with_owner), "old_stage", "stage"));
-assign(hash(public_meta), drop_keys(hash(renamed), "debug", "span"));
-assign(hash(summary_meta), pick_keys(hash(public_meta), "kind", "source", "stage"));
-assign(scalar(public_key_csv), meta.pick_keys("kind", "source").sorted_keys().join_values(","));
-assign(scalar(layered_kind), meta.merge_hash(hash("kind", "fallback")).scalaref("kind"));
-assign(scalar(summary_count), hash(meta).drop_keys("debug", "span").count_keys());
+set(scalar(meta_count), count_keys(hash(meta)));
+set(array(public_keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")));
+set(array(public_values), sorted_values(pick_keys(hash(meta), "kind", "source", "stage")));
+set(scalar(has_kind), has_key(hash(meta), "kind"));
+set(hash(layered), merge_hash(hash(meta), hash("stage", "normalized")));
+set(hash(with_owner), set_key(hash(layered), "owner", scalar(rule_name)));
+set(hash(renamed), rename_key(hash(with_owner), "old_stage", "stage"));
+set(hash(public_meta), drop_keys(hash(renamed), "debug", "span"));
+set(hash(summary_meta), pick_keys(hash(public_meta), "kind", "source", "stage"));
+set(scalar(public_key_csv), meta.pick_keys("kind", "source").sorted_keys().join_values(","));
+set(scalar(layered_kind), meta.merge_hash(hash("kind", "fallback")).scalaref("kind"));
+set(scalar(summary_count), hash(meta).drop_keys("debug", "span").count_keys());
 ```
 
 Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(scalar(hash(meta), "kind"))` or `is_defined(scalaref(retv, {kind}))` when the question is "is the value defined?" Those are different questions.
 
-`set_key(...)` has two deliberate forms. As a statement with a named target, `set_key(meta, "stage", "normalized")` mutates the working hash `meta`. As a value expression, `set_key(hash(meta), "stage", "normalized")` returns a new hash value and leaves `meta` unchanged unless you store the result with `assign(hash(meta), ...)`.
+`set_key(...)` has two deliberate forms. As a statement with a named target, `set_key(meta, "stage", "normalized")` mutates the working hash `meta`. As a value expression, `set_key(hash(meta), "stage", "normalized")` returns a new hash value and leaves `meta` unchanged unless you store the result with `set(hash(meta), ...)`.
 
 Hash receiver-dot value chains are accepted for the same pure hash helpers. The receiver is the first helper
 argument, so `meta.set_key("stage", "normalized").count_keys()` maps to
@@ -864,12 +864,12 @@ Fallback helpers choose values. Presence helpers ask what shape or value is avai
 Examples:
 
 ```text
-assign(scalar(name), coalesce(scalaref(retv, {name}), scalar(IMATCH), "UNKNOWN"));
-assign(scalar(public_name), coalesce_nonempty(trim(scalar(name)), "anonymous"));
-assign(scalar(has_public_name), is_defined(scalar(public_name)));
-assign(scalar(missing_kind), is_undefined(scalar(hash(meta), "kind")));
-assign(scalar(has_items), is_nonempty(array(items)));
-assign(scalar(no_public_meta), is_empty(pick_keys(hash(meta), "kind", "source")));
+set(scalar(name), coalesce(scalaref(retv, {name}), scalar(IMATCH), "UNKNOWN"));
+set(scalar(public_name), coalesce_nonempty(trim(scalar(name)), "anonymous"));
+set(scalar(has_public_name), is_defined(scalar(public_name)));
+set(scalar(missing_kind), is_undefined(scalar(hash(meta), "kind")));
+set(scalar(has_items), is_nonempty(array(items)));
+set(scalar(no_public_meta), is_empty(pick_keys(hash(meta), "kind", "source")));
 ```
 
 Rationale:
@@ -915,7 +915,7 @@ FieldList::AND
  I { declare(array, fields); declare(scalar, raw); }
  /([A-Za-z_, ]+)/
  -> FieldList[0] {
-   assign(scalar(raw), entry_group(0));
+   set(scalar(raw), entry_group(0));
    split(array(fields), scalar(raw), /,/);
    trim_each(array(fields));
    filter_nonempty(array(fields));
@@ -933,15 +933,15 @@ FieldList::AND
 Nested composition is useful when the transformation reads naturally as one expression:
 
 ```text
-assign(array(public_fields), filter_match(uniq(uppercase_each(array(fields))), /^[A-Z_]+$/));
+set(array(public_fields), filter_match(uniq(uppercase_each(array(fields))), /^[A-Z_]+$/));
 lowercase_each(array(public_fields));
 ```
 
 Receiver-dot form is equivalent when the source is a named array working variable or array-valued expression:
 
 ```text
-assign(array(public_fields), fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/));
-assign(scalar(public_csv), fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/).join_values(","));
+set(array(public_fields), fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/));
+set(scalar(public_csv), fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/).join_values(","));
 ```
 
 Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
@@ -1013,11 +1013,11 @@ Example:
 
 ```text
 if(is_undefined(scalar(hash(meta), "kind")))
-  assign(hash(meta), set_key(hash(meta), "kind", "unknown"));
+  set(hash(meta), set_key(hash(meta), "kind", "unknown"));
 elseif(str_eq(lowercase(trim(scalar(hash(meta), "kind"))), "word"))
-  assign(hash(meta), set_key(hash(meta), "normalized_kind", "word"));
+  set(hash(meta), set_key(hash(meta), "normalized_kind", "word"));
 else()
-  assign(hash(meta), set_key(hash(meta), "normalized_kind", "other"));
+  set(hash(meta), set_key(hash(meta), "normalized_kind", "other"));
 endif()
 
 return(hash_copy(hash(meta)));
@@ -1189,12 +1189,12 @@ Node::AND
  I { declare(scalar, retv); declare(hash, meta); }
  Child
  -> Node[0] {
-   assign(scalar(retv), call(Child));
-   assign(hash(meta), hash(
+   set(scalar(retv), call(Child));
+   set(hash(meta), hash(
      "kind", coalesce_nonempty(trim(scalaref(retv, {kind})), "node"),
      "name", coalesce_nonempty(trim(scalaref(retv, {name})), scalar(IMATCH), "anonymous")
    ));
-   assign(hash(meta), set_key(hash(meta), "normalized_name", replace_substr(lowercase(trim(scalar(hash(meta), "name"))), " ", "_")));
+   set(hash(meta), set_key(hash(meta), "normalized_name", replace_substr(lowercase(trim(scalar(hash(meta), "name"))), " ", "_")));
    return(hash_copy(hash(meta)));
  }
 ```
@@ -1216,11 +1216,11 @@ Sequence::AND
  Item
  Item
  -> Sequence[0] {
-   assign(scalar(retv), call(Item));
+   set(scalar(retv), call(Item));
    items += scalar(retv);
  }
  -> Sequence[1] {
-   assign(scalar(retv), call(Item));
+   set(scalar(retv), call(Item));
    items += scalar(retv);
 
    if(num_gt(count(array(items)), 1))
@@ -1247,8 +1247,8 @@ Kind::AND
  I { declare(scalar, raw); declare(scalar, kind); }
  /[A-Za-z_]+/
  -> Kind[0] {
-   assign(scalar(raw), entry_text());
-   assign(scalar(kind), replace_substr(lowercase(trim(scalar(raw))), "-", "_"));
+   set(scalar(raw), entry_text());
+   set(scalar(kind), replace_substr(lowercase(trim(scalar(raw))), "-", "_"));
 
    switch(scalar(kind)) {
      case("word") { return(hash("kind", "word", "raw", scalar(raw))) }

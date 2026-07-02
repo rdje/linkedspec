@@ -12,7 +12,7 @@ answers:
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, assignment, expressions, aggregate, target-kind-inference, rust-parity, oracle]
-evidence: "SPEC-FORMAT-TERSE.3.3.2 implementation in perl/LinkedSpec/ActionIR/MethodLowering.pm, perl/LinkedSpec/RuleIR/EmitContext.pm, rust/linkedspec-core/src/expr.rs, and rust/linkedspec-runtime/src/engine.rs; locks in t/actionir_ast_parser.t, t/phase0_regression.t spec_format_terse_3_3_2_aggregate_assignment_expression_values, rust/linkedspec-runtime/tests/integration_test.rs terse_3_3_2_aggregate_assignment_expressions_run, and rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions"
+evidence: "SPEC-FORMAT-TERSE.3.3.2 implementation in perl/LinkedSpec/ActionIR/MethodLowering.pm, perl/LinkedSpec/RuleIR/EmitContext.pm, rust/linkedspec-core/src/expr.rs, and rust/linkedspec-runtime/src/engine.rs; locks in t/actionir_ast_parser.t, t/phase0_regression.t spec_format_terse_3_3_2_aggregate_assignment_expression_values, rust/linkedspec-runtime/tests/integration_test.rs terse_3_3_2_aggregate_assignment_expressions_run, and rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions. SPEC-FORMAT-TERSE.3.3.4 later closed the parent docs/oracle compatibility contract; see [[terse-assignment-expression-closure]]."
 reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_2_aggregate_assignment_expressions_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
 ---
 
@@ -29,5 +29,6 @@ reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && carg
   and yields a scalar-held array payload.
 
 This leaf extends the target-kind inference contract from statement assignments into value positions. It did not
-close array append values or hash-index mutation values; those later landed in `SPEC-FORMAT-TERSE.3.3.3`. See
-[[terse-mutation-assignment-expression-values]].
+close array append values or hash-index mutation values; those later landed in `SPEC-FORMAT-TERSE.3.3.3`.
+`SPEC-FORMAT-TERSE.3.3.4` then closed the parent docs/oracle compatibility contract. See
+[[terse-mutation-assignment-expression-values]] and [[terse-assignment-expression-closure]].

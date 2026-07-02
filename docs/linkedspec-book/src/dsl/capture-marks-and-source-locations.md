@@ -31,7 +31,7 @@ Top::AND
  I { start_capture_slice(); declare(scalar, first); }
  /BEGIN/
  /END/
- -> Top[0] { assign(scalar(first), capture_slice()); }
+ -> Top[0] { set(scalar(first), capture_slice()); }
  -> Top[1] { return(hash("body", scalar(first))); }
 ```
 
@@ -43,7 +43,7 @@ The important distinction:
 That makes `capture_take()` useful for segmented parsing:
 
 ```text
-assign(scalar(part), capture_take());
+set(scalar(part), capture_take());
 ```
 
 Read it as:
@@ -62,7 +62,7 @@ Example:
 
 ```text
 mark_here(body_start);
-assign(scalar(body), capture_from(body_start));
+set(scalar(body), capture_from(body_start));
 ```
 
 Named marks are better than anonymous capture state when the rule needs durable labels such as:
@@ -90,16 +90,16 @@ The cursor is the live current parser position.
 Use cursor helpers when you want to know where the parser is now:
 
 ```text
-assign(scalar(where), cursor_pos());
-assign(scalar(line), cursor_line());
-assign(scalar(col), cursor_col());
+set(scalar(where), cursor_pos());
+set(scalar(line), cursor_line());
+set(scalar(col), cursor_col());
 ```
 
 Tail helpers read from the cursor to end-of-input:
 
 ```text
-assign(scalar(rest), cursor_rest());
-assign(scalar(width), cursor_rest_len());
+set(scalar(rest), cursor_rest());
+set(scalar(width), cursor_rest_len());
 ```
 
 ## `entry_*`: the immediate match that entered the rule/action
@@ -109,10 +109,10 @@ Entry helpers read the immediate match that brought the action into this context
 Examples:
 
 ```text
-assign(scalar(token), entry_text());
-assign(scalar(name), entry_group(0));
-assign(scalar(line), entry_line());
-assign(scalar(col), entry_col());
+set(scalar(token), entry_text());
+set(scalar(name), entry_group(0));
+set(scalar(line), entry_line());
+set(scalar(col), entry_col());
 ```
 
 Use `entry_*` when the action wants the match associated with rule entry or handoff.
@@ -124,9 +124,9 @@ Match helpers read the current local match.
 Examples:
 
 ```text
-assign(scalar(text), match_text());
-assign(scalar(line), match_line());
-assign(scalar(end_col), match_end_col());
+set(scalar(text), match_text());
+set(scalar(line), match_line());
+set(scalar(end_col), match_end_col());
 ```
 
 Use `match_*` when the action wants the local match currently being processed, not the broader entry match.
@@ -163,11 +163,11 @@ Whole-input helpers are absolute. They do not mean cursor, entry, or local match
 Examples:
 
 ```text
-assign(scalar(source), input_text());
-assign(scalar(length), input_len());
-assign(scalar(end_pos), input_end_pos());
-assign(scalar(end_line), input_end_line());
-assign(scalar(end_col), input_end_col());
+set(scalar(source), input_text());
+set(scalar(length), input_len());
+set(scalar(end_pos), input_end_pos());
+set(scalar(end_line), input_end_line());
+set(scalar(end_col), input_end_col());
 ```
 
 These are useful for diagnostics and source metadata when the rule needs to reference the full input.

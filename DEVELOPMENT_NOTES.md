@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.3.4 — assignment-expression closure):
+  The parent assignment-expression contract is closed. Durable points. (1) **Closure fixture.** One portable
+  Perl/Rust fixture composes scalar assignment, `=(...)`, canonical `set(...)`, legacy `assign(...)`,
+  user-function body assignment, direct RHS array/hash shape assignment, array append snapshot values,
+  hash-index snapshot values, aggregate snapshot reads, and receiver-chain terminals. (2) **Docs policy.**
+  Public examples now prefer `set(...)` or operator assignment; `assign(...)` stays only as a documented legacy
+  alias with current value semantics. (3) **Status repair.** Function-track parent containers are marked done
+  now that their child leaves and `.4.4` finalization are complete. (4) **Gate.** Focused locks, oracle corpus,
+  mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1015 tests and the
+  oracle corpus is 62 fixtures.
+  Next frontier: no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values):
   Array append and hash-index mutation operators now have expression values. Durable points. (1) **Value
   contract.** `items += value` mutates the named array and yields the updated array snapshot; `meta[key] =
@@ -13,7 +25,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `AssignHashIndex`, and the parser accepts parenthesized mutation receivers for fluent chains. (5) **Gate.**
   Focused locks, oracle corpus, full phase0, mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates
   pass; phase0 is now 1014 tests and the oracle corpus is 61 fixtures.
-  Next frontier: `SPEC-FORMAT-TERSE.3.3.4`.
+  Next frontier at the time: `SPEC-FORMAT-TERSE.3.3.4` (now done; no concrete `SPEC-FORMAT-TERSE`
+  PNT-eligible leaf remains).
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values):
   Direct RHS shape assignments now return assigned aggregate values after target-kind inference. Durable points.

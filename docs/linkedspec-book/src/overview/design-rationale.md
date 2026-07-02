@@ -31,7 +31,7 @@ But concision must not hide what is happening. The project direction is toward:
 Historically, LinkedSpec tolerated raw Perl-shaped behavior inside `.spec` action blocks. The long-term direction is cleaner:
 
 - less raw embedded host-language code in `.spec` files
-- more explicit helper DSL (`assign(...)`, `return(hash(...))`, `push_value(...)`)
+- more explicit helper DSL (`set(...)`, `return(hash(...))`, `push_value(...)`)
 - canonical ActionIR lowering (helpers lower to a structured intermediate representation)
 - portability across backends — the same helper DSL must execute identically in the Perl reference backend, the Rust backend, and any future backend
 

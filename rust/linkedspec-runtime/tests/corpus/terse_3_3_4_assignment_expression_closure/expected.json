@@ -1,0 +1,40 @@
+[
+   "ok",
+   "ok",
+   "ok!",
+   "ok!",
+   "fn",
+   "fn",
+   "compat",
+   "compat",
+   [
+      "ok"
+   ],
+   [
+      "ok"
+   ],
+   {
+      "stage" : "ok"
+   },
+   {
+      "stage" : "ok"
+   },
+   [
+      "ok",
+      "tail"
+   ],
+   [
+      "ok",
+      "tail"
+   ],
+   {
+      "extra" : "ok!",
+      "stage" : "ok"
+   },
+   {
+      "extra" : "ok!",
+      "stage" : "ok"
+   },
+   3,
+   3
+]

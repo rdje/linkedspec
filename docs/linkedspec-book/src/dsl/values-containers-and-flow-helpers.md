@@ -196,10 +196,10 @@ selected helper family consumes the yielded value.
 Hash helpers make metadata shaping explicit:
 
 ```text
-assign(hash(meta), hash("kind", "rule", "name", scalar(name)));
+set(hash(meta), hash("kind", "rule", "name", scalar(name)));
 set_key(meta, "line", entry_line());
-assign(hash(meta), merge_hash(hash(meta), hash("source", "spec")));
-assign(scalar(public_fields), meta.drop_keys("debug").sorted_keys().join_values(","));
+set(hash(meta), merge_hash(hash(meta), hash("source", "spec")));
+set(scalar(public_fields), meta.drop_keys("debug").sorted_keys().join_values(","));
 ```
 
 These are especially useful when building AST nodes or diagnostics payloads.
@@ -236,7 +236,7 @@ Here is a compact token-node pattern:
 Token::
  /(\w+)/ {
    declare(scalar, text);
-   assign(scalar(text), entry_group(0));
+   set(scalar(text), entry_group(0));
    return(hash(
      "kind", "token",
      "text", scalar(text),

@@ -897,6 +897,23 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.3.4 — assignment expression closure ──
+    #
+    # The parent `.3.3` contract is closed once scalar, direct-shape
+    # aggregate, append, and hash-index assignment expressions all compose in
+    # one portable program. Legacy assign(...) remains a compatibility spelling
+    # but public docs should prefer `set(...)` or operator forms.
+    {   case   => 'terse_3_3_4_assignment_expression_closure',
+        input  => 'xhello',
+        source => <<'SPEC',
+fn keep(value) { return(fn_out = value) }
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(scalar(name), "!")), other, set(third, keep("fn")), third, assign(legacy, "compat"), legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

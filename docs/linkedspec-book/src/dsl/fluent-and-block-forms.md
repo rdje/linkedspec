@@ -21,7 +21,7 @@ they execute as the same ordered lifecycle statements as the equivalent `{ ... }
 /[A-Za-z_, ]+/ -> FieldList
   .declare(array, parts)
   .declare(scalar, raw)
-  .assign(scalar(raw), entry_text())
+  .set(scalar(raw), entry_text())
   .split(array(parts), scalar(raw), /,/)
   .filter_nonempty(array(parts))
   .return(hash("kind", "field_list", "fields", array_copy(array(parts))));
@@ -95,7 +95,7 @@ the helper family, for example `{ [3, 1, 2] }.sorted().join_values(",")` or
 ```text
 rule:AND+
  I   { declare(array, acc); declare(scalar, n, 0); }
- E   { push_value(array(acc), call(child)); assign(scalar(n), num_add(scalar(n), 1)); }
+ E   { push_value(array(acc), call(child)); set(scalar(n), num_add(scalar(n), 1)); }
  LX  { return(hash("items", array_copy(array(acc)), "count", scalar(n))); }
 ```
 
@@ -311,7 +311,7 @@ same-line `} elseif/else {` continuations and lowers to the same branch-control 
   if(scalar(on)) {
     push_value(array(acc), call(child));
   } elseif(is_nonempty(array(tmp))) {
-    assign(scalar(found), first(array(tmp)));
+    set(scalar(found), first(array(tmp)));
     push_value(array(acc), scalar(found));
   } else {
     push_value(array(acc), "default");

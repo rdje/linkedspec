@@ -336,11 +336,11 @@ The `grammar_file` rule starts a new rule entry through this action edge:
     push_value(array(rules), array(scalar(rule), flat_array(rule)));
   endif();
 
-  assign(array(rule), array(flat_array(semantic_annotations)));
-  assign(array(semantic_annotations), array());
+  set(array(rule), array(flat_array(semantic_annotations)));
+  set(array(semantic_annotations), array());
 
   $rule = call(grammar_rule);
-  assign(scalar(on), 1)
+  set(scalar(on), 1)
 }
 ```
 
@@ -489,7 +489,7 @@ into:
 The repeated pattern is deliberate:
 
 - read the immediate match with `entry_text()` or `entry_group(...)`,
-- assign it into a named scalar when cleanup is needed,
+- set it into a named scalar when cleanup is needed,
 - normalize with `substr(...)`,
 - return a typed array token.
 

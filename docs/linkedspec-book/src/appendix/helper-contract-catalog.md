@@ -101,7 +101,7 @@ dispatch rule.
 > typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`)
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
-> target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value`
+> target of `set(name, …)`, legacy `assign(name, …)`, and the scalar assignment operator `name = value`
 > for non-shape RHS values; the array/hash target when a bare assignment receives a direct RHS
 > shape (`name = []`, `set(name, [value])`, `name = {}`, `set(name, { key => value })`);
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
@@ -140,12 +140,12 @@ dispatch rule.
 - **Returns**: void
 - **Behavior**: Declares an empty hash/object working variable.
 
-### `assign(name, value)`
+### `assign(name, value)` legacy alias
 - **Signature**: `assign(name: string, value: expr)`
-- **Returns**: void
-- **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
+- **Returns**: In statement position, the stored value is ignored. In value position, it yields the value stored in the target: a scalar for non-shape scalar assignment, an array for direct RHS array-shape assignment, or a hash for direct RHS hash-shape assignment.
+- **Behavior**: Legacy alias for `set(name, value)`. It sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
 - **Edge cases**: Assigning through a typed wrapper fixes the variable's kind from the wrapper. `assign(scalar(name), [value])` stores the whole array payload in `$name`; `assign(array(name), [value])` replaces `@name`; `assign(hash(name), { key => value })` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`assign(name, value)` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `assign(name, [value])` assigns `@name`, and `assign(name, { key => value })` assigns `%name`. In scalar assignment source slots, a bare source name reads a scalar too: `assign(out, value)` is equivalent to `assign(out, scalar(value))`.
-- **Terse spelling**: `set(name, value)` is the canonical terse helper rename of `assign`, and `name = value` is the operator spelling. In statement position, all three forms lower and run identically for assignment targets; a bare `set` target or operator target auto-exists exactly like `assign`, and a bare scalar source reads the working scalar. In value positions, scalar assignments store and yield the stored scalar, while direct RHS shape assignments store and yield the assigned array/hash value after target-kind inference. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Terse spelling**: `set(name, value)` is the canonical helper name, and `name = value` is the operator spelling. In statement position, all three forms lower and run identically for assignment targets; a bare `set` target or operator target auto-exists exactly like legacy `assign`, and a bare scalar source reads the working scalar. In value positions, scalar assignments store and yield the stored scalar, while direct RHS shape assignments store and yield the assigned array/hash value after target-kind inference. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
 

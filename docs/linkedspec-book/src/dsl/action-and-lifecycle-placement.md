@@ -38,8 +38,8 @@ Token::AND
  }
  /[A-Za-z_]+/
  -> Token[0] {
-   assign(scalar(text), lowercase(trim(entry_text())));
-   assign(hash(meta), set_key(hash(meta), "text", scalar(text)));
+   set(scalar(text), lowercase(trim(entry_text())));
+   set(hash(meta), set_key(hash(meta), "text", scalar(text)));
    return(hash_copy(hash(meta)));
  }
 ```
@@ -74,11 +74,11 @@ List::AND
  Item
  Item
  -> List[0] {
-   assign(scalar(retv), call(Item));
+   set(scalar(retv), call(Item));
    push_value(array(items), scalar(retv));
  }
  -> List[1] {
-   assign(scalar(retv), call(Item));
+   set(scalar(retv), call(Item));
    push_value(array(items), scalar(retv));
    return(set_key(hash(meta), "items", array_copy(array(items))));
  }
@@ -114,7 +114,7 @@ Use an action edge when:
 Action bodies should use helper statements:
 
 ```text
-assign(scalar(name), entry_text());
+set(scalar(name), entry_text());
 push_value(array(items), scalar(retv));
 return(hash("kind", "name", "value", scalar(name)));
 ```
@@ -130,7 +130,7 @@ Example:
 ```text
 /[A-Za-z_]+/ -> Name[0]
   .declare(scalar, text)
-  .assign(scalar(text), lowercase(trim(entry_text())))
+  .set(scalar(text), lowercase(trim(entry_text())))
   .return(hash("kind", "name", "text", scalar(text)));
 ```
 
@@ -140,7 +140,7 @@ This lowers through the same helper surface as the block form:
 /[A-Za-z_]+/
 -> Name[0] {
   declare(scalar, text);
-  assign(scalar(text), lowercase(trim(entry_text())));
+  set(scalar(text), lowercase(trim(entry_text())));
   return(hash("kind", "name", "text", scalar(text)));
 }
 ```
@@ -211,7 +211,7 @@ When the parent needs to inspect or reshape the child result, use the explicit h
 ```text
 -> Parent[0] {
   declare(scalar, retv);
-  assign(scalar(retv), call(Child));
+  set(scalar(retv), call(Child));
   return(hash("kind", "parent", "child", scalar(retv)));
 }
 ```
@@ -279,7 +279,7 @@ The full parser-orchestration model for `=>`, including rule-label semantics and
 In new public examples, prefer the more explicit child-result pattern unless the rule is specifically teaching blind-call behavior:
 
 ```text
-assign(scalar(retv), call(Child));
+set(scalar(retv), call(Child));
 push_value(array(children), scalar(retv));
 ```
 
@@ -337,7 +337,7 @@ Delimited::AND
  /[^}]*/
  /\}/
  -> Delimited[2] {
-   assign(scalar(body), capture_from(body_start));
+   set(scalar(body), capture_from(body_start));
    return(hash("kind", "delimited", "body", scalar(body)));
  }
 ```
@@ -411,7 +411,7 @@ Items:*
  }
  /[A-Za-z_]+/
  -> Items[0] {
-   assign(scalar(item), entry_text());
+   set(scalar(item), entry_text());
  }
  IT {
    push_value(array(items), scalar(item));
@@ -467,7 +467,7 @@ Use this as the default decision guide:
 | Declare state shared by the rule | `I { declare(...) }` |
 | Initialize metadata shared by return paths | `I { declare(hash, meta=hash(...)) }` |
 | Transform one matched token | `-> Rule[index] { ... }` |
-| Capture and reshape one child result | `assign(scalar(retv), call(Child))` inside an action body |
+| Capture and reshape one child result | `set(scalar(retv), call(Child))` inside an action body |
 | Append repeated child results | `push_value(array(items), scalar(retv))` inside action/iteration logic |
 | Mark a grammar boundary | `@mark(name)` or `@capture_slice` at the grammar slot |
 | Move a boundary from code | `mark_here(name)` or `start_capture_slice()` inside a block |
@@ -487,9 +487,9 @@ Block::AND
  /[^}]*/
  /\}/
  -> Block[2] {
-   assign(scalar(body), capture_from(body_start));
-   assign(hash(meta), set_key(hash(meta), "body", scalar(body)));
-   assign(hash(meta), set_key(hash(meta), "body_start_line", mark_line(body_start)));
+   set(scalar(body), capture_from(body_start));
+   set(hash(meta), set_key(hash(meta), "body", scalar(body)));
+   set(hash(meta), set_key(hash(meta), "body_start_line", mark_line(body_start)));
    return(hash_copy(hash(meta)));
  }
 ```
@@ -514,12 +514,12 @@ Pair::AND
  /\s*=\s*/
  Value
  -> Pair[0] {
-   assign(scalar(retv), call(Name));
-   assign(scalar(lhs), scalar(retv));
+   set(scalar(retv), call(Name));
+   set(scalar(lhs), scalar(retv));
  }
  -> Pair[2] {
-   assign(scalar(retv), call(Value));
-   assign(scalar(rhs), scalar(retv));
+   set(scalar(retv), call(Value));
+   set(scalar(rhs), scalar(retv));
    return(hash("kind", "pair", "lhs", scalar(lhs), "rhs", scalar(rhs)));
  }
 ```

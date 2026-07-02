@@ -46765,6 +46765,55 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
         'mutation assignment expression spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
+    # SPEC-FORMAT-TERSE.3.3.4: the parent assignment-expression contract is
+    # closed when scalar, direct-shape aggregate, append, hash-index, and legacy
+    # assign(...) compatibility spellings compose in one portable program.
+    plan tests => 8;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    my $spec = "fn keep(value) { return(fn_out = value) }\n"
+             . "Top::\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(name = value, name, =(other, cat(scalar(name), \"!\")), other, set(third, keep(\"fn\")), third, assign(legacy, \"compat\"), legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += \"tail\", array_copy(items), meta[\"extra\"] = other, hash_copy(meta), (items += \"last\").count(), (meta[\"last\"] = value).count_keys())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'assignment expression closure spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'),
+        '["ok","ok","ok!","ok!","fn","fn","compat","compat",["ok"],["ok"],{"stage":"ok"},{"stage":"ok"},["ok","tail"],["ok","tail"],{"extra":"ok!","stage":"ok"},{"extra":"ok!","stage":"ok"},3,3]',
+        'scalar, aggregate, mutation, function-local, and legacy compatibility assignments compose');
+
+    my $src = $gen->($spec);
+    like($src, qr/\$name = \$value.*\$other = .*__ls_concat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$legacy = "compat"/s,
+        'generated source contains scalar, operator-call, set, and legacy assign compatibility values');
+    like($src, qr/(?=.*\@items = \(\$value\))(?=.*push \@items, "tail")(?=.*%meta = \(\$key => \$value\))(?=.*\$meta\{"extra"\} = \$other)/s,
+        'generated source contains aggregate and mutation assignment values');
+    unlike($src, qr/\bassign\s*\(|=\s*\(\s*other\b|items\s*\+=|meta\["extra"\]\s*=/,
+        'generated source has no raw legacy/operator/mutation residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'assignment expression closure spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'assignment expression closure spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'assignment expression closure spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

@@ -313,7 +313,7 @@ Parent::AND
    declare(array, children);
  }
  /child-anchor/ -> Parent[0] {
-   assign(scalar(retv), call(Child));
+   set(scalar(retv), call(Child));
    push_value(array(children), scalar(retv));
    return(hash("kind", "parent", "children", array_copy(array(children))));
  }
@@ -398,7 +398,7 @@ Use `call(Child)` inside an action edge when the parent has its own local regex 
 Field::AND
  I { declare(scalar, retv); }
  /field\s+/ -> Field[0] {
-   assign(scalar(retv), call(Name));
+   set(scalar(retv), call(Name));
    return(hash("kind", "field", "name", scalar(retv)));
  }
 
@@ -426,7 +426,7 @@ Avoid blind calls when:
 - the parent needs slot-specific local match helpers,
 - the parent and child matching responsibilities are mixed,
 - one rule would need both `->` and `=>`,
-- the return payload needs complex reshaping that is clearer as explicit `assign(scalar(retv), call(Child))` dataflow.
+- the return payload needs complex reshaping that is clearer as explicit `set(scalar(retv), call(Child))` dataflow.
 
 When you do use blind calls:
 

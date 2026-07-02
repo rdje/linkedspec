@@ -24,7 +24,7 @@ Helper DSL makes common parser actions explicit.
 Instead of asking readers to understand a substring expression, a mutable array push, and a return shape all at once, a rule can say:
 
 ```text
-assign(scalar(name), entry_group(0));
+set(scalar(name), entry_group(0));
 push_value(array(items), scalar(name));
 return(hash("kind", "names", "items", array_copy(array(items))));
 ```
@@ -36,7 +36,7 @@ That is still compact, but it is more self-describing.
 Source-level helper DSL:
 
 ```text
-assign(scalar(name), entry_group(0));
+set(scalar(name), entry_group(0));
 return(hash("kind", "token", "name", scalar(name)));
 ```
 
@@ -54,7 +54,7 @@ LinkedSpec still recognizes older compatibility forms because real specs exist a
 However, new public examples should prefer canonical helper forms:
 
 ```text
-assign(scalar(retv), call(Child));
+set(scalar(retv), call(Child));
 push_value(array(items), scalar(retv));
 ```
 
@@ -85,7 +85,7 @@ Names should reduce guessing.
 
 Start with the core families:
 
-- `assign(...)` for writing values
+- `set(...)` for writing values
 - `return(...)` for returning payloads
 - `scalar(...)`, `array(...)`, `hash(...)` for value construction
 - `entry_*` and `match_*` readers for match data
@@ -116,7 +116,7 @@ source rule paragraph text
 
 ### StatementSplit
 
-`ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`assign(...)`, `push_value(...)`, `return(...)`) that must be lowered separately.
+`ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`set(...)`, `push_value(...)`, `return(...)`) that must be lowered separately.
 
 The separator contract is deliberately narrow: top-level semicolons split statements,
 and top-level newlines split helper statements when no semicolon is present. Multiple

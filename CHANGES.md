@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.4 — close assignment expression docs
+
+**Scope:** Parent assignment-expression closure fixture, Rust runtime lock, oracle corpus, mdBook public example
+cleanup, task-tree/status drift repair, live recovery docs, and Knowledge Map.
+
+**What changed:** The `.3.3` assignment-expression family is now closed across scalar assignment values, direct
+RHS shape aggregate assignment values, `items += value`, `meta[key] = value`, `=(target,value)`, canonical
+`set(...)`, user-function body assignment, receiver-chain terminals, and retained legacy `assign(...)`
+compatibility. Public book examples now prefer `set(...)` or operator assignment; `assign(...)` remains documented
+as a legacy alias with current value semantics.
+
+**Compatibility boundary:** Existing `assign(...)` specs remain supported. The docs no longer promote it as new
+syntax. No new concrete `SPEC-FORMAT-TERSE` PNT-eligible implementation leaf remains after this closure; future
+backend leaves stay deferred or blocked by explicit roadmap decisions.
+
+**Checks:** Focused Perl phase0 closure lock, focused Rust runtime closure test, oracle generation, Rust corpus
+oracle, mdBook build, Knowledge Map regenerate/check, memory architecture, doctrine registry, `git diff --check`,
+and full local CI passed. Local CI includes phase0 passing with **1015 tests** and the corpus oracle passing over
+**62 fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.3 — implement mutation assignment values
 
 **Scope:** Perl ActionIR mutation assignment expression lowering and auto-declarations, Rust parser/runtime
@@ -15,7 +35,8 @@ arguments, expression-valued blocks, and compatible receiver chains such as `(it
 
 **Compatibility boundary:** Statement behavior is preserved. This does not make array end-mutation methods
 value-returning; `items.push_back(...)` / `pop_back()` remain statement-level mutation methods. The remaining
-assignment-expression closure work is `.3.3.4`: legacy `assign(...)` example cleanup and any final contract drift.
+assignment-expression closure work was `.3.3.4`, which later landed legacy `assign(...)` example cleanup and final
+contract-drift closure.
 
 **Checks:** Perl syntax checks, focused `t/actionir_ast_parser.t`, focused Rust parser/runtime tests, oracle
 generation, Rust corpus oracle, full phase0, mdBook build, Knowledge Map regenerate/check, memory architecture,

@@ -506,7 +506,7 @@ declare(scalar, name)      — declare a scalar working variable
 declare(array, name)       — declare an array working variable
 declare(hash, name)        — declare a hash working variable
 declare(scalar, name=value) — declare with initializer
-assign(name, value)         — reassign a working variable
+set(name, value)            — assign a working variable; legacy assign(name, value) is still accepted
 return(name)                — read and return a scalar working variable
 ```
 
@@ -753,11 +753,11 @@ composite expressions. Marker-style `if` is implemented on the Perl reference an
 ```
 I {
  if(matches(scalar(value), /^yes$/));
- assign(scalar(result), "confirmed");
+ set(scalar(result), "confirmed");
  elseif(matches(scalar(value), /^no$/));
- assign(scalar(result), "rejected");
+ set(scalar(result), "rejected");
  else();
- assign(scalar(result), "unknown");
+ set(scalar(result), "unknown");
  endif()
 }
 ```
@@ -840,7 +840,7 @@ New `.spec` files must maintain this invariant.
 DemoParser::
  I  { declare(array, results) }
  LS { declare(scalar, retv) }
- /pattern1/ -> Child { assign(scalar(retv), call(Child)) }
+ /pattern1/ -> Child { set(scalar(retv), call(Child)) }
  LE { if(is_defined(scalar(retv))); push_value(array(results), scalar(retv)); endif() }
  E  { return(array("?result:", array_copy(array(results)))) }
 

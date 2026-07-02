@@ -6,7 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (**`.3.3.2` DONE; aggregate assignment expression values after target-kind
+- Last updated: `2026-07-02` (**`.3.3.4` DONE; expression-valued assignment closure is locked across
+  scalar, direct-shape aggregate, array append, hash-index mutation, user-function body, receiver-chain,
+  and legacy `assign(...)` compatibility spellings. Public mdBook examples now prefer `set(...)` or operator
+  assignment forms while retaining `assign(...)` only as a documented legacy alias. Oracle corpus reaches
+  **62 fixtures** and phase0 reaches **1015 green**; no concrete PNT-eligible `SPEC-FORMAT-TERSE` leaf remains
+  after this closure, with future variant leaves deferred/blocked by explicit roadmap decisions.
+  Prior **`.3.3.2` DONE; aggregate assignment expression values after target-kind
   inference now ship on Perl/Rust; frontier moves to `.3.3.3` array append/hash-index mutation expression
   values**.
   Prior **`.4.1` DONE; user-defined function MVP contract/inventory locked before code** —
@@ -2351,18 +2357,27 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.3.3.3 - implement mutation assignment values`
 
 - ID: `SPEC-FORMAT-TERSE.3.3.4`
-  Status: `pending`
+  Status: `done` (2026-07-02)
   Goal: Legacy function spelling cleanup and full assignment-expression closure
   Acceptance: After scalar, aggregate, append, and hash-index expression semantics land, reconcile the retained
     `assign(...)` compatibility surface with canonical `set(...)` and operator spellings. Public examples must
     prefer `target = value` or `set(...)` as appropriate and must not promote `assign(...)` as new syntax.
     Close mdBook/KM/status drift, add any missing oracle/corpus fixtures, and confirm the parent `.3.3`
     contract across Perl and Rust.
-  Verification: `pending`
-  Commit: `pending`
+  Outcome: The parent `.3.3` assignment-expression contract is now closed. A single portable fixture composes
+    scalar assignment values, operator-call `=(...)`, canonical `set(...)`, legacy `assign(...)`, user-function
+    body assignment, direct RHS array/hash shape assignment, array append mutation values, hash-index mutation
+    values, aggregate snapshot reads, and receiver-chain terminals. Public mdBook examples now prefer `set(...)`
+    or operator assignment while the helper catalog keeps `assign(...)` as a legacy alias with current value
+    semantics. Function-track parent/container status drift was also reconciled after the already-landed `.4.2`,
+    `.4.3`, and `.4.4` children.
+  Verification: Perl phase0 closure lock (`1015` tests), focused Rust runtime closure lock, oracle generator,
+    Rust corpus oracle over **62 fixtures**, mdBook build, Knowledge Map regenerate/check, memory architecture,
+    doctrine registry, `git diff --check`, and full local CI.
+  Commit: `SPEC-FORMAT-TERSE.3.3.4 - close assignment expression docs`
 
 - ID: `SPEC-FORMAT-TERSE.4`
-  Status: `active` (SPLIT/OWNED 2026-07-01 by explicit user direction)
+  Status: `done` (2026-07-02; split/owned 2026-07-01 by explicit user direction)
   Goal: Round 4 — user-defined pure functions in `.spec`
   Children: `.4.1` (done), `.4.2` (Perl reference container: `.4.2.1`–`.4.2.3`), `.4.3`
     (Rust parity container: `.4.3.1`–`.4.3.2`), `.4.4`
@@ -2379,10 +2394,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     The bootstrap parser must not be the final owner of `fn <name>(...) { ... }`; bootstrap support, if any, is
     a temporary migration bridge to remove after the text-to-AST path can carry the surface through
     `specs/spec.spec`.
-  Verification: **SPLIT/OWNED 2026-07-01.** User requested custom/user-defined function support and clarified
-    two semantic rules before implementation: function calls are ordinary value expressions and unused return
-    values are dropped without diagnostic noise. Existing KM facts for expression-valued blocks and receiver-dot
-    value chains establish the composability precedent; no parser/compiler/runtime code changed in this split.
+  Verification: **DONE 2026-07-02.** The split/inventory leaf `.4.1`, Perl implementation leaves
+    `.4.2.1`–`.4.2.3`, Rust parity leaves `.4.3.1`–`.4.3.2`, and docs/retrieval finalization leaf `.4.4`
+    are complete. The accepted MVP surface is top-level `fn name(args) { ... }` with explicit parentheses,
+    fresh function-local stores, value-call composition, receiver-chain continuation, standalone result discard,
+    and explicit deferrals for alternate spellings, optional zero-arg parentheses, brace-less bodies,
+    caller-state/persistent side effects, recursion, closures/lambdas/currying, and namespaces.
   Commit: `SPEC-FORMAT-TERSE.4 - own user-defined function surface`
 
 - ID: `SPEC-FORMAT-TERSE.4.1`
@@ -2408,7 +2425,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.4.1 - lock user function contract`
 
 - ID: `SPEC-FORMAT-TERSE.4.2`
-  Status: `active` (split 2026-07-01 by `.4.1` inventory)
+  Status: `done` (2026-07-01; split by `.4.1` inventory)
   Goal: Perl reference user-function implementation
   Children: `.4.2.1`, `.4.2.2`, `.4.2.3`
   Acceptance: The Perl reference accepts the `.4.1` function contract through a sequence of signoff-sized
@@ -2416,8 +2433,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     standalone discard plus receiver-chain/error hardening. The final grammar owner is `specs/spec.spec`; do not
     leave permanent `fn` syntax support in the bootstrap parser. Add focused phase0 locks and update
     `specs/spec.spec`, mdBook, live docs, and Knowledge Map as warranted.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-01.** Perl registry/descriptor ingestion landed in `.4.2.1`, exact-arity
+    value-call execution landed in `.4.2.2`, and standalone discard plus purity/recursion hardening landed in
+    `.4.2.3`. Registered Perl user functions now execute as pure values, use fresh function-local working
+    stores, compose in supported value positions/receiver chains, and keep unsupported constructs on explicit
+    diagnostics with zero raw fallback.
+  Commit: closed by child commits `.4.2.1`, `.4.2.2`, and `.4.2.3`
 
 - ID: `SPEC-FORMAT-TERSE.4.2.1`
   Status: `done` (2026-07-01 — Perl registry/descriptor seam landed)
@@ -2488,14 +2509,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.4.2.3 - harden Perl user function discard`
 
 - ID: `SPEC-FORMAT-TERSE.4.3`
-  Status: `pending` (split 2026-07-01 by `.4.1` inventory)
+  Status: `done` (2026-07-02; split 2026-07-01 by `.4.1` inventory)
   Goal: Rust parity for user-defined pure functions
   Children: `.4.3.1`, `.4.3.2`
   Acceptance: The Rust parser/runtime matches the Perl reference for the `.4.1`/`.4.2` contract, including
     function-call value semantics, receiver-dot chaining, and silent standalone-result discard. Add Rust parser,
     runtime, and oracle corpus locks.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Rust registry/compiler parity landed in `.4.3.1` and runtime/oracle
+    parity landed in `.4.3.2`. Rust registered user functions parse, validate, compile, execute before helper
+    fallback, bind eager caller-context arguments into fresh function-local stores, return body values into
+    compatible receiver chains, discard standalone results, and diagnose arity/recursion hazards.
+  Commit: closed by child commits `.4.3.1` and `.4.3.2`
 
 - ID: `SPEC-FORMAT-TERSE.4.3.1`
   Status: `done` (2026-07-02)
@@ -2703,13 +2727,23 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.3.2.3.2` | `done` 2026-07-02 | Explicit `str_*` string-comparison helpers landed on Perl/Rust; bare comparison words remained string-compatibility aliases until `.3.2.3.3`. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.3` | `done` 2026-07-02 | Ordinary comparison word calls now map to numeric `num_*` aliases on Perl/Rust; lexical strings use explicit `str_*`. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.4` | `done` 2026-07-02 | Comparison symbol callees `==`, `!=`, `>`, `>=`, `<`, and `<=` now map to numeric `num_*` aliases on Perl/Rust without claiming assignment `=(...)` or blind-call `=>`. |
-| — | `SPEC-FORMAT-TERSE.3.3` | `done` 2026-07-02 | Expression-valued assignment plus `=(target,value)` equivalence split before code. Scalar, direct-shape aggregate, array append, and hash-index mutation expression values are now landed; compatibility/docs closure remains `.3.3.4`. |
+| — | `SPEC-FORMAT-TERSE.3.3` | `done` 2026-07-02 | Expression-valued assignment plus `=(target,value)` equivalence split before code. Scalar, direct-shape aggregate, array append, hash-index mutation, and compatibility/docs closure are now landed. |
 | — | `SPEC-FORMAT-TERSE.3.3.1` | `done` 2026-07-02 | Scalar non-shape assignment expressions now store and return the scalar value on Perl/Rust, including `=(target,value)` and scalar `set`/`assign` compatibility. |
 | — | `SPEC-FORMAT-TERSE.3.3.2` | `done` 2026-07-02 | Direct RHS shape assignment expressions now store and return array/hash values on Perl/Rust after target-kind inference; scalar wrapper targets still keep scalar-held payloads. |
 | — | `SPEC-FORMAT-TERSE.3.3.3` | `done` 2026-07-02 | Array append and hash-index mutation expression values now mutate and return updated aggregate snapshots on Perl/Rust; corpus 61 fixtures and phase0 1014 green. |
-| 1 | `SPEC-FORMAT-TERSE.3.3.4` | `pending` | Legacy function spelling cleanup and full assignment-expression closure are the next implementation slice. |
+| — | `SPEC-FORMAT-TERSE.3.3.4` | `done` 2026-07-02 | Legacy `assign(...)` compatibility is documented as an alias while public examples prefer `set(...)`/operators; the parent assignment-expression fixture passes on Perl/Rust with 62 corpus fixtures and phase0 1015 green. |
+| — | `SPEC-FORMAT-TERSE` | `no PNT-eligible leaf` | All concrete terse implementation/doc-closure leaves in the active roadmap are done. Future backend leaves `.5.1`/`.5.2` are deferred to roadmap selection, and `.5.3` is blocked on a Lua backend decision. |
 
 ## Decisions
+
+- `2026-07-02` (**`.3.3.4` assignment-expression closure landed**). The parent `.3.3` contract is now locked
+  across scalar assignment values, direct RHS shape aggregate assignment values, array append snapshot values,
+  hash-index mutation snapshot values, user-function body assignment, operator-call `=(...)`, canonical
+  `set(...)`, and legacy `assign(...)` compatibility. Public mdBook examples prefer `set(...)`, `name = value`,
+  `items += value`, and `meta[key] = value`; `assign(...)` remains documented only as a legacy alias with the
+  same current value semantics. The closure oracle fixture raises the corpus to **62 fixtures** and phase0 to
+  **1015 tests**. No concrete PNT-eligible `SPEC-FORMAT-TERSE` implementation leaf remains after this closure;
+  future backend leaves stay deferred/blocked by explicit roadmap decisions.
 
 - `2026-07-02` (**`.3.3.3` mutation assignment expression values landed**). Array append and hash-index
   mutation operators now have expression values on Perl and Rust. `items += value` pushes into the named working
@@ -3539,6 +3573,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.4` | mdBook `assign(...)` public-example audit; phase0 closure lock; focused Rust runtime closure test; oracle generator; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Assignment-expression closure landed. Scalar, direct-shape aggregate, append, hash-index, user-function body, receiver-chain, canonical `set(...)`, operator, and legacy `assign(...)` compatibility forms now compose in one Perl/Rust corpus fixture. Public examples prefer `set(...)`/operator assignment; `assign(...)` remains a legacy alias reference. Corpus reaches **62 fixtures**, phase0 reaches **1015 tests**, and the `SPEC-FORMAT-TERSE` active roadmap has no remaining concrete PNT-eligible leaf. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.3` | Perl syntax checks for `ActionIR::MethodLowering`, `RuleIR::EmitContext`, and `t/phase0_regression.t`; focused `t/actionir_ast_parser.t`; focused Rust parser tests for assignment expressions and parenthesized mutation receiver chains; focused Rust runtime `.3.3.3`; oracle generator; Rust corpus oracle; full phase0; mdBook/live-doc/KM updates; phase0/full gates before commit | Array append and hash-index mutation expressions now mutate and return updated aggregate snapshots on Perl/Rust. `items += value` yields the updated array, `meta[key] = value` yields the updated hash, and both feed helper args, returns, block values, and compatible receiver chains. Oracle corpus reaches **61 fixtures** and phase0 reaches **1014 tests**. Frontier becomes `.3.3.4`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.2` | Perl syntax checks for `ActionIR::MethodLowering` and `RuleIR::EmitContext`; focused `t/actionir_ast_parser.t`; generated-source declaration probes for direct-shape assignment expression targets; focused Rust core scalar-assignment parser tests; focused Rust runtime `.3.3.2`; oracle generator; Rust corpus oracle; full phase0; mdBook/live-doc/KM updates; phase0/full gates before commit | Direct RHS shape assignment expressions now store and return assigned arrays/hashes on Perl/Rust. Bare targets infer `@`/`%` from the direct shape RHS, typed `array(...)`/`hash(...)` targets match the shape, and explicit `scalar(...)` targets keep scalar-held payloads. Oracle corpus reaches **60 fixtures** and phase0 reaches **1013 tests**. Frontier becomes `.3.3.3`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.1` | Perl syntax checks for ActionIR method parsing/lowering; focused `t/actionir_ast_parser.t`; focused Perl runtime/source probe for scalar assignment expressions; focused Rust parser tests for `=(...)`, scalar assignment args, and keyword-arg boundaries; focused Rust runtime `.3.3.1`; oracle generator and Rust corpus oracle; mdBook/live-doc/KM updates; phase0/full gates before commit | Scalar assignment expressions now store and return their assigned scalar value on Perl/Rust. `name = value`, `=(name,value)`, `set(name,value)`, and `assign(name,value)` work in scalar value positions. Direct RHS shape assignment values later landed in `.3.3.2`; array append values and hash-index mutation values later landed in `.3.3.3`. Oracle corpus reaches **59 fixtures** and phase0 reaches **1012 tests**. Frontier becomes `.3.3.2`. |
@@ -3641,6 +3676,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.3.3.4` | `SPEC-FORMAT-TERSE.3.3.4 - close assignment expression docs` | Parent assignment-expression closure fixture locks scalar, aggregate, mutation, user-function, receiver-chain, operator, canonical `set`, and legacy `assign` compatibility forms; public book examples now prefer `set`/operators; corpus 62 fixtures, phase0 1015 green, and no concrete `SPEC-FORMAT-TERSE` PNT leaf remains. |
 | `SPEC-FORMAT-TERSE.3.3.3` | `SPEC-FORMAT-TERSE.3.3.3 - implement mutation assignment values` | Array append and hash-index mutation expressions now return updated aggregate snapshots on Perl/Rust; corpus 61 fixtures, phase0 1014 green, and frontier becomes `.3.3.4`. |
 | `SPEC-FORMAT-TERSE.3.3.2` | `SPEC-FORMAT-TERSE.3.3.2 - implement aggregate assignment values` | Direct RHS shape assignment expressions now return the assigned array/hash value after target-kind inference on Perl/Rust; corpus 60 fixtures, phase0 1013 green, and frontier becomes `.3.3.3`. |
 | `SPEC-FORMAT-TERSE.3.3` | `SPEC-FORMAT-TERSE.3.3 - split expression-valued assignment` | Assignment expression values are split before code into scalar, aggregate, append/hash-index, and compatibility/docs closure leaves; current shipped assignment remains statement-only and frontier becomes `.3.3.1`. |
@@ -3740,6 +3776,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-02`: **`.3.3.4` LANDED — assignment-expression closure and legacy spelling cleanup.**
+  The full `.3.3` assignment-expression family is now closed on Perl/Rust: scalar assignments, direct-shape
+  array/hash assignments, `items += value`, `meta[key] = value`, `=(target,value)`, canonical `set(...)`,
+  user-function body assignment, receiver-chain terminals, and legacy `assign(...)` compatibility compose in one
+  portable fixture. Public mdBook examples now prefer `set(...)` or operator assignment; `assign(...)` remains
+  only as a documented legacy alias with current value semantics. The oracle corpus is **62 fixtures**, phase0 is
+  **1015 green**, and the `SPEC-FORMAT-TERSE` tree has no remaining concrete PNT-eligible implementation leaf.
 
 - `2026-07-02`: **`.3.3.3` LANDED — mutation assignment expression values.**
   Array append and hash-index mutation operators now mutate and yield updated aggregate snapshots on Perl/Rust:

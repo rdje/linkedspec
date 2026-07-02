@@ -35,10 +35,10 @@ You do **not** have to `declare(...)` a working variable before using it. A vari
 ```text
 # explicit declaration (still fully supported)
 I { declare(scalar, count) }
--> Item[0] { assign(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
+-> Item[0] { set(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
 
 # auto-existing — no declare needed
--> Item[0] { assign(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
+-> Item[0] { set(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
 ```
 
 An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
@@ -65,9 +65,8 @@ such as `["items"]`, `{ "key" => value }`, `[]`, and `{}` as the terse construct
 A working variable also auto-exists when it appears **bare** (without a `scalar()` / `array()` / `hash()` wrapper) in a helper position that already implies its kind. In those positions the wrapper is optional — each pair below is equivalent:
 
 ```text
-# scalar target of assign(...) / set(...) and scalar operator assignment — the bare name is a scalar
-assign(scalar(count), match_group(0))
-assign(count, match_group(0))
+# scalar target of set(...), legacy assign(...), and scalar operator assignment — the bare name is a scalar
+set(scalar(count), match_group(0))
 set(count, match_group(0))
 count = match_group(0)
 
@@ -103,7 +102,7 @@ meta[key] = value
 return(payload["children"][index]["name"])
 ```
 
-The kind comes from the **position**: the target of `assign(...)`, `set(...)`, and `name = value` is a scalar; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]` are the terse forms of their explicit `scalar(...)` counterparts. The variable is the same fresh per-invocation working value described above. Inferring a kind from a value's shape is still a separate, later evolution step. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
+The kind comes from the **position**: the target of `set(...)`, legacy `assign(...)`, and `name = value` is a scalar for non-shape RHS values; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]` are the terse forms of their explicit `scalar(...)` counterparts. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
 
 `declare(...)` stays supported and is still the right choice when you want to:
 
@@ -111,7 +110,7 @@ The kind comes from the **position**: the target of `assign(...)`, `set(...)`, a
 - state the **kind and intent** explicitly for readers; or
 - gather a rule's working state in one visible `I { ... }` preamble.
 
-The shipped specs and the examples in this chapter still use `declare(...)` and the typed wrappers for clarity. Where a name is wrapped, the wrapper decides its kind — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash; where a name is bare in a type-implying position, that position decides it. Inferring the kind from a value's shape (a right-hand side) is still a separate, later evolution step.
+The shipped specs and the examples in this chapter still use `declare(...)` and the typed wrappers for clarity. Where a name is wrapped, the wrapper decides its kind — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash; where a name is bare in a type-implying position, that position decides it. Direct RHS shape assignment can also infer the target kind for array/hash assignment; explicit `scalar(name)` keeps array/hash payloads in a scalar.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `array(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 
@@ -189,7 +188,7 @@ Action-edge declarations are useful for short-lived scratch values:
 ```text
 -> Token[0] {
   declare(scalar, normalized);
-  assign(scalar(normalized), lowercase(trim(entry_text())));
+  set(scalar(normalized), lowercase(trim(entry_text())));
   return(hash("kind", "token", "text", scalar(normalized)));
 }
 ```
@@ -250,7 +249,7 @@ declare(array, items=array(), diagnostics);
 declare(hash, meta=hash("kind", "node"), seen);
 ```
 
-Use initialized declarations when the startup value is obvious. If the initializer becomes dense, declare first and assign later.
+Use initialized declarations when the startup value is obvious. If the initializer becomes dense, declare first and set the value later.
 
 Preferred for simple startup:
 
@@ -265,7 +264,7 @@ Preferred for dense startup:
 ```text
 I {
   declare(scalar, name);
-  assign(scalar(name), coalesce_nonempty(trim(scalaref(retv, {name})), entry_text(), "anonymous"));
+  set(scalar(name), coalesce_nonempty(trim(scalaref(retv, {name})), entry_text(), "anonymous"));
 }
 ```
 
@@ -304,7 +303,7 @@ I {
 }
 ```
 
-That is readable because both initializers are short. If the second expression grew into a longer fallback chain, split it into `declare(...)` plus `assign(...)`.
+That is readable because both initializers are short. If the second expression grew into a longer fallback chain, split it into `declare(...)` plus `set(...)`.
 
 ## Array initializer examples
 
@@ -384,7 +383,7 @@ Do not redeclare to reset. Redeclaration is a lifetime decision, not a mutation 
 
 Declaration initializers reuse the same expression language as `set(...)`, `push_value(...)`, `return(...)`, and flow helpers.
 
-> **Terse spellings.** The same terse helper renames apply here: `set(...)` for `assign(...)`,
+> **Terse spellings.** The same terse helper renames apply here: `set(...)` for legacy `assign(...)`,
 > scalar `name = value` and `=(name, value)` for scalar assignment, array append `items += expr` for explicit append values, hash-index assignment `meta["key"] = expr` for `set_key(meta, "key", expr)`, `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind). They lower identically to the original
 > names in initializer and assignment sources, so `declare(array, saved=copy(array(items)))` is
@@ -442,7 +441,7 @@ They also work in method-chain style:
 /[A-Za-z_, ]+/ -> FieldList
   .declare(array, parts)
   .declare(scalar, raw)
-  .assign(scalar(raw), entry_text())
+  .set(scalar(raw), entry_text())
   .split(array(parts), scalar(raw), /,/)
   .trim_each(array(parts))
   .filter_nonempty(array(parts))
@@ -477,11 +476,11 @@ List::AND
  Item
  Item
  -> List[0] {
-   assign(scalar(retv), call(Item));
+   set(scalar(retv), call(Item));
    push_value(array(items), scalar(retv));
  }
  -> List[1] {
-   assign(scalar(retv), call(Item));
+   set(scalar(retv), call(Item));
    push_value(array(items), scalar(retv));
    return(hash(
      "kind", "list",
@@ -509,7 +508,7 @@ Token::AND
  }
  /[A-Za-z_]+/
  -> Token[0] {
-   assign(scalar(text), lowercase(trim(entry_text())));
+   set(scalar(text), lowercase(trim(entry_text())));
    meta["text"] = scalar(text);
    meta["text_length"] = length(scalar(text));
    return(hash_copy(hash(meta)));
@@ -533,7 +532,7 @@ For public examples, prefer:
 ```text
 I {
   declare(scalar, name);
-  assign(scalar(name), coalesce_nonempty(
+  set(scalar(name), coalesce_nonempty(
     trim(scalaref(retv, {name})),
     trim(entry_group(0)),
     "anonymous"
@@ -584,7 +583,7 @@ declare(array, items);
 Prefer:
 
 ```text
-assign(array(items), array());
+set(array(items), array());
 ```
 
 Do not pack unrelated state into one unreadable declaration line:
@@ -608,8 +607,8 @@ declare(scalar, count, stage, message);
 - Use `scalar`, `array`, and `hash` types according to how the value will be used, not according to how it happens to be emitted today.
 - Prefer `declare(type, ...)` in public docs; mention aliases when documenting compatibility or compact chains.
 - Prefer initialized declarations when the initializer is short and obvious.
-- Prefer `declare(...)` plus `assign(...)` when initialization has a long fallback or normalization chain.
-- Reset live containers with `assign(array(name), array())` or `assign(hash(name), hash(...))`; do not redeclare for mutation.
+- Prefer `declare(...)` plus `set(...)` when initialization has a long fallback or normalization chain.
+- Reset live containers with `set(array(name), array())` or `set(hash(name), hash(...))`; do not redeclare for mutation.
 - Keep declarations near the top of the rule or local action body so the reader sees the rule's working state before the transformations.
 
 ## Related chapters

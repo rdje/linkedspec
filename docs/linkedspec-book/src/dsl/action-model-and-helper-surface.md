@@ -36,7 +36,7 @@ A helper-oriented rule should make the intent visible:
 Top::
  /name=(\w+)/ -> Value {
    declare(scalar, name);
-   assign(scalar(name), entry_group(0));
+   set(scalar(name), entry_group(0));
    return(hash("kind", "assignment", "name", scalar(name)));
  }
 ```
@@ -162,7 +162,7 @@ Emit debug or informational output during parsing:
 Invoke child rules and handle results:
 
 - `call(RuleName)` — call a child rule and capture its return value
-- Combined with `assign(scalar(retv), call(Child))` to store child results
+- Combined with `set(scalar(retv), call(Child))` to store child results
 
 ## How helpers reach emitted code
 
@@ -174,7 +174,7 @@ Every helper call passes through the ActionIR lowering pipeline (see [ActionIR L
 4. The appropriate lowering owner (`MethodExpr`, `FlowExpr`, `ValueExpr`, `ControlFlow`, `MethodLowering`, `DeclareMethod`, `ArrayPipeline`, `Diagnostics`) lowers the event to emitted code
 5. The final emitted Perl is generated — but the lowering pipeline is designed so that other backends can substitute their own final stage
 
-This is why writing `assign(scalar(name), entry_group(0))` is fundamentally different from writing raw Perl: the helper form is inspectable, validatable, and retargetable. Raw Perl is opaque to the lowering pipeline.
+This is why writing `set(scalar(name), entry_group(0))` is fundamentally different from writing raw Perl: the helper form is inspectable, validatable, and retargetable. Raw Perl is opaque to the lowering pipeline.
 
 The linked chapters below introduce these families in public-facing terms. The repo-root ActionIR guides remain the exhaustive working references while the book continues growing.
 
