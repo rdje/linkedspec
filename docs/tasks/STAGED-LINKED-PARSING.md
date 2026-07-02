@@ -122,11 +122,86 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.4 - specify staged parser registry dispatch`
 
 - ID: `STAGED-LINKED-PARSING.5`
-  Status: `pending`
-  Goal: Implement the first narrow staged-parsing prototype.
+  Status: `active`
+  Goal: Split and implement the first narrow staged-parsing prototype.
+  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`, `.5.6`
   Acceptance: Pick one self-contained payload family, parse it through a
-    staged next-spec path, preserve source provenance, and prove diagnostics
-    plus parity gates.
+    staged next-spec path, preserve source provenance, keep the contract 100%
+    implementation-language neutral, and prove diagnostics plus parity gates.
+  Verification: `active`
+  Commit: `pending`
+
+- ID: `STAGED-LINKED-PARSING.5.1`
+  Status: `done`
+  Goal: Select the first staged-prototype payload family and split executable
+    implementation leaves.
+  Acceptance: Choose the first self-contained payload family; record why it is
+    narrow enough; make backend neutrality a hard acceptance condition for all
+    prototype leaves; add/update ADR, task-tree, roadmap, mdBook, live docs,
+    memory, and Knowledge Map with no runtime code change.
+  Verification: **DONE 2026-07-02.** Split `.5` into executable leaves
+    `.5.1` through `.5.6`, selected user-function body text as the first
+    staged prototype payload family, added ADR `0016` for the mandatory
+    implementation-language-neutrality rule, added Knowledge Map fact
+    `staged-prototype-function-body-selection`, and synced the mdBook,
+    roadmap/live docs, task index, and memory. No runtime code changed.
+    Checks passed: `mdbook build docs/linkedspec-book`,
+    `knowledge-map/scripts/check_knowledge_map.sh`,
+    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
+    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
+  Commit: `STAGED-LINKED-PARSING.5.1 - select staged prototype payload family`
+
+- ID: `STAGED-LINKED-PARSING.5.2`
+  Status: `pending`
+  Goal: Audit the function-body staged-prototype seams before code.
+  Acceptance: Map `specs/spec.spec` function-body extraction, current Perl/Rust
+    temporary user-function bridges, body source/span records, diagnostics, and
+    existing tests; derive the exact expected returned `function_definition` AST
+    shape before implementation; inventory the function-definition variation
+    matrix that must test the spec rule returning that AST; choose the dedicated
+    small spec file/top rule used for focused AST-shape tests; identify the
+    minimal next-stage spec/top-rule shape and the exact code seams to touch.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `STAGED-LINKED-PARSING.5.3`
+  Status: `pending`
+  Goal: Preserve source provenance for function-body payload parse jobs.
+  Acceptance: Stage-N user-function records expose neutral body payload text,
+    source span/provenance, parent AST path, function name, params, and payload
+    kind without making Perl or Rust storage details part of the contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `STAGED-LINKED-PARSING.5.4`
+  Status: `pending`
+  Goal: Add the minimal neutral parse-job marker/sidecar prototype.
+  Acceptance: Function-body payloads can be represented as staged parse jobs
+    with deterministic job id, parser spec identity, top rule, result policy,
+    failure policy, and source-aware diagnostics; the observable shape remains
+    implementation-language neutral.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `STAGED-LINKED-PARSING.5.5`
+  Status: `pending`
+  Goal: Add the minimal registry/dispatch path for one next-stage spec.
+  Acceptance: A deterministic registry resolves, loads, compiles, and executes
+    the selected function-body parser spec/top rule through a stable queue,
+    preserving neutral diagnostics and avoiding backend-specific semantics.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `STAGED-LINKED-PARSING.5.6`
+  Status: `pending`
+  Goal: Prove the function-body staged prototype end to end.
+  Acceptance: User-function bodies parse through the staged next-spec path,
+    tests assert the predicted returned `function_definition` AST shape across
+    a broad variation matrix of function definitions using a dedicated small
+    spec file/top rule for focused AST-shape tests, current user-function
+    semantics stay stable, source-provenance diagnostics are locked, public docs
+    describe implemented behavior accurately, and Perl/Rust parity plus local
+    gates pass.
   Verification: `pending`
   Commit: `pending`
 
@@ -134,7 +209,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `STAGED-LINKED-PARSING.5` | `pending` | Doctrine, import composition, parse-job annotation metadata, and registry dispatch are now specified before code; the next safe step is a narrow prototype. |
+| 1 | `STAGED-LINKED-PARSING.5.2` | `pending` | Function-body payloads are selected; the next safe step is a read-only seam audit before any implementation code. |
 
 ## Decisions
 
@@ -161,10 +236,31 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   capability/version boundaries, isolated runtime contexts, result stitching,
   and cycle diagnostics. Current shipped parsers do not yet implement this
   queue.
+- `2026-07-02`: Every staged linked parsing artifact is 100%
+  implementation-language neutral: syntax, AST metadata, dispatch semantics,
+  cache identities, diagnostics, tests, and docs must be specified over
+  `.spec`/AST contracts rather than Perl5, Raku, Rust, Julia, Lua, Dart, Zig,
+  Go, or any other host implementation.
+- `2026-07-02`: The first prototype payload family is user-defined function
+  body text. `specs/spec.spec` already extracts the body as a bounded text
+  island, and current Perl/Rust bridges provide behavior to preserve while the
+  staged path replaces bridge debt.
+- `2026-07-02`: Function-body staged prototype tests must assert the predicted
+  returned `function_definition` AST shape. Runtime behavior alone is not
+  sufficient proof.
+- `2026-07-02`: The spec-file rule that returns user-defined function AST must
+  be tested thoroughly across many function-definition variations, including
+  whitespace, zero/multiple parameters, nested bodies, strings, regex-looking
+  text, comments or adjacent rules where applicable, and malformed definitions.
+- `2026-07-02`: Function-definition AST-shape tests may and should use a
+  dedicated small spec file/top rule focused on the user-function definition
+  parser surface instead of only exercising the whole `specs/spec.spec` file.
 
 ## Open Questions
 
-- The first prototype payload family is deferred to `.5`.
+- The exact returned `function_definition` AST shape, function-definition
+  variation test matrix, dedicated small test spec/top rule, and next-stage
+  spec file/top-rule shape for function-body payloads are deferred to `.5.2`.
 
 ## Blockers
 
@@ -178,6 +274,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `2026-07-02` | `STAGED-LINKED-PARSING.2` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 | `2026-07-02` | `STAGED-LINKED-PARSING.3` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 | `2026-07-02` | `STAGED-LINKED-PARSING.4` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
+| `2026-07-02` | `STAGED-LINKED-PARSING.5.1` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — broad prototype leaf split; function-body payload selected; ADR `0016`, mdBook, Knowledge Map, roadmap/live docs, task index, and memory synced; no runtime code change; full local CI passes with phase0 1015 green. |
 
 ## Commit Log
 
@@ -187,6 +284,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `STAGED-LINKED-PARSING.2` | `STAGED-LINKED-PARSING.2 - specify spec import composition contract` | ADR/book/KM/live-doc design adoption; no runtime code change. |
 | `STAGED-LINKED-PARSING.3` | `STAGED-LINKED-PARSING.3 - specify staged parse-job annotations` | ADR/book/KM/live-doc design adoption; no runtime code change. |
 | `STAGED-LINKED-PARSING.4` | `STAGED-LINKED-PARSING.4 - specify staged parser registry dispatch` | ADR/book/KM/live-doc design adoption; no runtime code change. |
+| `STAGED-LINKED-PARSING.5.1` | `STAGED-LINKED-PARSING.5.1 - select staged prototype payload family` | Payload-family selection and prototype split; no runtime code change. |
 
 ## Changelog
 
@@ -194,3 +292,4 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 - `2026-07-02`: `.2` done — spec import/composition contract specified before implementation; frontier moves to `.3`.
 - `2026-07-02`: `.3` done — staged parse-job annotation and metadata contract specified before implementation; frontier moves to `.4`.
 - `2026-07-02`: `.4` done — staged parser registry/dispatch contract specified before implementation; frontier moves to `.5`.
+- `2026-07-02`: `.5.1` done — broad prototype split; function-body payload selected as first staged prototype target; all follow-up leaves must stay implementation-language neutral; frontier moves to `.5.2`.

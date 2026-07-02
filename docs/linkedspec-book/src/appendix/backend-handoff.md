@@ -102,6 +102,22 @@ and diagnose active-chain cycles that repeat spec identity, top rule, payload di
 source span. Current shipped parsers do not yet implement this staged registry/dispatch
 queue.
 
+The first prototype target is user-function body payloads. A backend should treat that
+as a narrow proof of the neutral staged contract: `specs/spec.spec` extracts a bounded
+body payload, a parse job names the next parser/top rule, source provenance is preserved,
+and the refined body AST is stitched back deterministically. Do not copy a Perl or Rust
+bridge as the semantic model; host implementation details are adapters around the
+`.spec`/AST contract.
+
+The proof must include an AST-shape oracle for the returned function-definition node.
+Runtime equality alone is not enough: a backend must be able to predict and then assert
+the `function_definition` AST shape, including the refined body payload and provenance
+fields that staged dispatch is responsible for. That oracle should be fed by a large
+variation suite for the spec rule returning the AST: whitespace forms, arity forms,
+nested blocks, quoted strings, regex-looking payloads, adjacency to rules or other
+definitions, and invalid definitions with expected diagnostics. Use a dedicated small
+spec file/top rule for those focused AST-shape tests when that gives a tighter harness.
+
 Spec import/composition is a separate backend conformance target once implemented. The
 accepted design uses file-scope `import "path.spec" as alias` and
 `include "path.spec"` directives. `import` creates a qualified namespace such as

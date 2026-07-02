@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — STAGED-LINKED-PARSING.5.1 — select staged prototype payload family
+
+**Scope:** Task-tree split, ADR, mdBook staged parsing/backend text, roadmap/live docs, and Knowledge Map; no
+runtime code change.
+
+**What changed:** Split the broad first-prototype leaf into executable leaves `.5.1` through `.5.6`. The first
+prototype payload family is user-defined function body text: `specs/spec.spec` already extracts a bounded body
+payload, and current Perl/Rust user-function bridges provide behavior to preserve while the staged path replaces
+bridge debt.
+
+**Neutrality:** Added ADR `0016`, making language neutrality a hard requirement for every staged parsing artifact.
+Syntax, AST metadata, source provenance, parse-job scheduling, registry/cache identity, diagnostics, fixtures, and
+mdBook wording must be `.spec`/AST contracts. Backend mechanics are adapters and evidence, not semantics.
+
+**Next:** `STAGED-LINKED-PARSING.5.2` audits the function-body seams before code: current extraction, source spans,
+temporary bridges, diagnostics, tests, the predicted returned `function_definition` AST shape, a large
+function-definition variation matrix for the spec rule that returns that AST, the dedicated small spec/top rule
+used for focused AST-shape tests, and the minimal next-stage spec/top-rule shape.
+
+**Checks:** mdBook build, Knowledge Map regeneration/check, memory architecture, doctrine registry,
+`git diff --check`, and full local CI pass in the commit workflow.
+
 ## 2026-07-02 — STAGED-LINKED-PARSING.4 — specify staged parser registry dispatch
 
 **Scope:** Architecture decision, mdBook staged parsing/backend text, task-tree frontier, roadmap/live docs, and

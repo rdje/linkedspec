@@ -7,6 +7,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.5.1 — staged prototype payload selected and split**
+  (TASK TREE + ADR + MDBOOK + KNOWLEDGE MAP; **no runtime code change**).
+  The first prototype payload family is user-defined function body text. `specs/spec.spec` already extracts
+  `fn name(args) { body }` as a bounded text island, and the current Perl/Rust user-function bridges provide
+  behavior to preserve while staged parsing replaces that bridge debt.
+
+  **Neutrality gate:** ADR `0016` now makes staged parsing artifacts 100% implementation-language neutral.
+  Syntax, AST metadata, source provenance, parse-job scheduling, registry/cache identity, diagnostics, fixtures,
+  and docs are `.spec`/AST contracts. Backend mechanics are adapters, not semantics.
+
+  **Split:** `.5` is now `.5.1` payload selection, `.5.2` seam audit, `.5.3` provenance, `.5.4` parse-job
+  sidecar, `.5.5` minimal registry/dispatch, and `.5.6` end-to-end function-body proof. The seam audit must
+  predict the returned `function_definition` AST shape and a broad function-definition variation matrix; the proof
+  must assert that shape directly across those variations using a dedicated small spec file/top rule for focused
+  AST-shape tests.
+
+  **Verification:** mdBook build PASS; Knowledge Map, memory, doctrine, and diff gates PASS; full local CI PASS
+  with phase0 1015 green.
+
+  **Frontier:** `STAGED-LINKED-PARSING.5.2` — audit the function-body staged-prototype seams before code.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.4 — staged parser registry dispatch specified**
   (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
   ADR `0015` now reserves deterministic parser registry and dispatch queue semantics before implementation.

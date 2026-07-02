@@ -115,6 +115,24 @@ Other `.spec`-language stages derive from payloads produced through that self-ho
 path. The hardcoded bootstrap parser may bridge old behavior, but permanent syntax
 should not fork into bootstrap-only grammar.
 
+The first planned staged-dispatch prototype targets user-function body payloads. The
+self-hosted `specs/spec.spec` grammar already extracts `fn name(args) { body }` as a
+bounded text island, and current backends already have behavior to preserve for those
+function bodies. The prototype must describe the body payload, parse job, diagnostics,
+and stitched result in `.spec`/AST terms; the fact that a current implementation proves
+the slice first is evidence, not the language contract. Current shipped parsers still do
+not implement the staged dispatch queue.
+
+Prototype tests should prove AST shape, not only behavior. Before the function-body
+prototype changes runtime behavior, the seam audit must predict the returned
+`function_definition` AST shape, and the implementation proof must assert that exact
+shape along with source provenance and diagnostics. The spec-file rule that returns
+that AST needs broad variation coverage: whitespace, zero and multiple parameters,
+nested braced bodies, strings, regex-looking text, adjacency to other spec constructs,
+and malformed definitions where those forms should diagnose. A dedicated small spec
+file/top rule is appropriate for these focused AST-shape tests; the whole
+`specs/spec.spec` parser is not the only valid test harness.
+
 The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
 Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source
 provenance, deterministic parser resolution, and result stitching behavior.

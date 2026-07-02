@@ -1,6 +1,24 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.5.1 — prototype split and payload selection):
+  The broad prototype leaf is now split before code. Durable points. (1) **First payload family.** The prototype
+  targets user-defined function body text because `specs/spec.spec` already extracts `fn name(args) { body }` as a
+  bounded text island, and the current Perl/Rust bridges give a concrete behavior contract to preserve while the
+  staged path replaces bridge debt. (2) **Neutrality is a gate.** ADR `0016` makes every staged artifact
+  implementation-language neutral: `.spec` syntax, AST metadata, source provenance, parse jobs, dispatch/cache
+  identity, diagnostics, fixtures, and docs are the contract; backend loaders/callbacks/internals are adapters. (3)
+  **Implementation split.** Follow-up leaves are a seam audit, provenance plumbing, parse-job sidecar prototype,
+  minimal registry/dispatch path, and end-to-end function-body proof with parity gates. Current shipped parsers do
+  not yet implement staged dispatch. (4) **AST-shape oracle.** The seam audit must predict the returned
+  `function_definition` AST shape before implementation, and the proof leaf must test that shape directly rather
+  than relying only on runtime behavior. (5) **Variation-heavy rule tests.** The spec-file rule that returns the
+  user-function AST needs broad coverage across function-definition variations: whitespace, arity, nested bodies,
+  strings, regex-looking text, adjacency, and malformed definitions where applicable. A dedicated small spec
+  file/top rule should be used for focused AST-shape tests instead of relying only on the whole `specs/spec.spec`
+  parser.
+  Next frontier: `STAGED-LINKED-PARSING.5.2`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.4 — parser registry/dispatch contract):
   Dynamic staged dispatch now has a design contract before implementation. Durable points. (1) **Registry
   operations.** Backends expose neutral `resolve`, `load`, `compile`, and `execute` operations rather than
