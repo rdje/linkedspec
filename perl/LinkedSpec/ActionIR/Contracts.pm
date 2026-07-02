@@ -1998,7 +1998,6 @@ sub _build_dropped_value_contracts {
    unresolved_pattern => $value_drop_statement_re,
    lower              => sub {
     my ($code) = @_;
-    return $code unless defined($code) && $code =~ /$value_drop_statement_re/;
     my $lower = $d->{lower_dropped_value_statement};
     return $lower->($code) || $code
    },

@@ -82,8 +82,10 @@ calls. Top-level user-function definitions now have their own registry extractio
 are parsed as ActionIR `action_block` AST, and the definitions are projected through the
 public descriptor. During rule ActionIR lowering, the compiler threads that registry into
 the value-expression lowerer so registered exact-arity calls execute as value-producing
-expressions. Standalone call discard and purity hardening remain separate follow-on
-surfaces.
+expressions. Registered standalone calls and receiver chains are classified through the
+same registry as canonical `VALUE_DROP` statements, so the call value is computed and
+discarded without raw fallback. Recursion and unsupported function-body forms are fenced
+as unresolved-helper diagnostics.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl
@@ -91,8 +93,9 @@ host calls. Retired helpers and non-DSL host-shaped statements remain explicit
 compatibility debt, and a few narrow return payload compatibility shapes are still
 fenced. Unknown typed calls and receiver chains are reserved for user-defined function
 resolution; they must not become a broad host-language fallback. The Perl reference now
-diagnoses those calls in return/value positions, while standalone unknown function-shaped
-statements remain raw until the function registry owns discard semantics.
+diagnoses those calls in return/value positions. In standalone statement position,
+registered user-function calls/chains lower as `VALUE_DROP`; unregistered call-shaped
+statements remain raw compatibility debt.
 
 ## Why the pipeline matters
 
@@ -161,7 +164,7 @@ them through a temporary pre-bootstrap registry bridge before this parse stage. 
 definitions from the source handed to the hardcoded bootstrap parser while preserving newlines, then attaches the
 validated registry to compiled state. This keeps the permanent grammar owner in `spec.spec` without making the
 bootstrap parser the lasting owner of `fn` syntax. The registry is also made available to rule ActionIR lowering,
-where registered value calls are compiled.
+where registered value calls and standalone discard calls are compiled on the Perl reference.
 
 ## Stage 5: build compiled rule-table state
 

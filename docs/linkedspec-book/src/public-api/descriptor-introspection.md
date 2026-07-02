@@ -118,8 +118,8 @@ This name is intentionally explicit. It replaced older vague vocabulary because 
 
 `functions` is the outward user-function registry.
 
-As of `SPEC-FORMAT-TERSE.4.2.2`, the Perl reference accepts top-level definitions and
-executes registered exact-arity calls in value positions:
+As of `SPEC-FORMAT-TERSE.4.2.3`, the Perl reference accepts top-level definitions and
+executes registered exact-arity calls in value positions and standalone discard statements:
 
 ```text
 fn normalize(value) {
@@ -135,8 +135,9 @@ built-in helper/control-name collisions, and rule-label collisions are rejected.
 The compiler also uses this registry while lowering rule actions. Calls such as
 `return(normalize(" x "))` now resolve on the Perl reference when the callee is registered
 and the arity matches. Wrong-arity registered calls still report unresolved-helper
-metadata with zero raw fallback. Standalone result discard and Rust runtime parity remain
-follow-on work.
+metadata with zero raw fallback. A standalone `normalize(" x ")` lowers as a canonical
+`VALUE_DROP`: the value is computed through the function resolver and then discarded.
+Rust runtime parity remains follow-on work.
 
 ## `meta`
 

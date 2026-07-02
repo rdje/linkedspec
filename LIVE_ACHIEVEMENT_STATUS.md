@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.4.2.3 — Perl user-function standalone discard/hardening landed**
+  (ACTIONIR CANONICAL EVENTS + VALUE_DROP + METHOD LOWERING + PHASE0 + BOOK/KM/LIVE DOCS).
+  Registered standalone `fn name(...)` calls and receiver chains now compute their value through the same
+  user-function lowering path as value-position calls, then discard it as canonical `VALUE_DROP` with zero raw
+  fallback. The classifier is registry-aware, so unknown unregistered standalone calls remain raw compatibility
+  debt instead of being swept into the user-function path.
+
+  Phase0 also locks nested user-function parameter passing, direct and mutual recursion diagnostics,
+  parser-state helper bodies, host-code-shaped bodies, and nested function syntax as unresolved-helper metadata
+  with zero raw fallback. Focused AST suite, full phase0 (**1007 tests**), mdBook build, memory/doctrine/Knowledge
+  Map checks, diff check, and full local CI all pass.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.4.3.1` (Rust function-definition AST/compiler registry parity), then
+  `.4.3.2`, `.3.2.2`, `.3.2.3`.
+
 - 2026-07-01: **SPEC-FORMAT-TERSE.4.2.2 — Perl user-function value-call execution landed**
   (COMPILER REGISTRY THREADING + ACTIONIR METHOD LOWERING + PHASE0 + BOOK/KM/LIVE DOCS).
   Registered exact-arity `fn name(args) { ... }` calls now execute in Perl value positions instead of remaining
@@ -17,11 +32,10 @@ Current execution status for interruption-safe batch workflow recovery.
   Phase0 locks composition through `return(...)`, assignment RHS, array append RHS, hash mutation value, helper
   arguments, returned-value receiver chains, final-expression bodies, non-final function-local returns, and
   local/caller shadowing. Wrong-arity registered calls remain unresolved-helper metadata with zero raw fallback.
-  Standalone result discard, recursion/purity hardening, unsupported body-effect diagnostics, and Rust parity are
-  still tracked follow-ons.
+  Standalone result discard, recursion/purity hardening, and unsupported body-effect diagnostics landed in
+  `.4.2.3`; Rust parity remains tracked under `.4.3`.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.4.2.3` (Perl standalone discard, purity diagnostics, and phase0 hardening),
-  then `.4.3.1`, `.4.3.2`, `.3.2.2`, `.3.2.3`.
+  **Frontier after this historical leaf:** `.4.2.3`, then `.4.3.1`, `.4.3.2`, `.3.2.2`, `.3.2.3`.
 
 - 2026-07-01: **SPEC-FORMAT-TERSE.4.2.1 — Perl user-function registry seam landed**
   (SPEC.SPEC + PERL COMPILER STATE/DESCRIPTOR + PHASE0 + BOOK/KM/LIVE DOCS; registry-only leaf).

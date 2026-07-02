@@ -66,8 +66,8 @@ It also carries the user-function registry introduced by `SPEC-FORMAT-TERSE.4.2.
 
 Each function definition records its name, ordered parameter list, exact arity, source/body spans, original body
 source, and parsed ActionIR body AST. The Perl reference now also passes this registry into rule ActionIR
-lowering, where registered exact-arity calls execute as value-producing expressions. Wrong-arity calls remain
-unresolved-helper diagnostics with zero raw fallback.
+lowering, where registered exact-arity calls execute as value-producing expressions or standalone `VALUE_DROP`
+statements. Wrong-arity calls remain unresolved-helper diagnostics with zero raw fallback.
 
 ## Per-rule compiled info
 

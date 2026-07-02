@@ -52,7 +52,8 @@ body source, and an ActionIR body AST. The registry rejects duplicate functions,
 reserved names, built-in helper/control collisions, rule-label collisions, and invalid
 or duplicate parameters before runtime. The Perl reference now resolves registered
 exact-arity calls during value-expression lowering; wrong-arity registered calls remain
-unresolved-helper diagnostics with zero raw fallback.
+unresolved-helper diagnostics with zero raw fallback. Registered standalone calls and
+receiver chains now lower as canonical `VALUE_DROP` statements on the Perl reference.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
@@ -60,9 +61,9 @@ calls. Retired helpers, non-DSL host-shaped statements, and a few narrow return 
 compatibility shapes remain fenced migration debt. Unknown typed calls and receiver
 chains are reserved for user-defined function resolution and diagnostics, not broad
 host-language fallback. In the Perl reference, return/value-position unknown calls
-currently diagnose; standalone unknown function-shaped statements remain raw until the
-function registry owns result discard semantics. New backends should follow the typed-AST
-model used by the Rust implementation from the start.
+currently diagnose. Standalone registered calls/chains lower as `VALUE_DROP`, while
+unregistered call-shaped statements remain raw compatibility debt. New backends should
+follow the typed-AST model used by the Rust implementation from the start.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
 specified in the documents below.
@@ -168,7 +169,8 @@ It provides:
   contract. The accepted MVP is exact-arity, pure value/block functions with fresh
   function-local scope, no implicit caller capture, and registry resolution before
   unknown-helper fallback. Calls execute in value positions and compatible receiver
-  chains; standalone discard and purity hardening are still separate surfaces.
+  chains; registered standalone calls compute and discard through `VALUE_DROP`. Recursion
+  and unsupported function-body forms are diagnostics, not raw fallback.
 - `t/phase0_regression.t` — comprehensive regression tests.
 - Phase 0 baseline showing all 20 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
 

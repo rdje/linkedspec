@@ -44295,6 +44295,98 @@ SPEC
     is_deeply($bad_meta->{unresolved_helpers} || [], ['normalize'], 'wrong-arity registered call reports the registered callee as unresolved');
 };
 
+subtest 'user_function_standalone_discard_and_hardening' => sub {
+    plan tests => 23;
+
+    my $spec = <<'SPEC';
+fn normalize(value) { return(trim(value)) }
+fn identity(value) { return(value) }
+fn wrap(value) { return(identity(value)) }
+Top::
+ /x/ -> Done { normalize(" x "); normalize(" Z ").lowercase(); set(out, wrap("ok")); return(out) }
+Done::
+ /x/
+SPEC
+
+    my $descriptor = eval { LinkedSpec::Get(\$spec, return_descriptor => 1) };
+    my $err = $@;
+    ok(!$err, 'standalone function discard descriptor build does not die') or diag(normalize_error($err));
+    ok(ref($descriptor) eq 'HASH', 'standalone function discard descriptor build returns descriptor hash');
+    my $top_meta = ref($descriptor) eq 'HASH'
+        ? ($descriptor->{spec}{Top}{meta}{action_rewriter} || {})
+        : {};
+    is($top_meta->{raw_perl_dependency_count} || 0, 0, 'standalone registered function calls are not raw Perl fallback');
+    is($top_meta->{unresolved_helper_count} || 0, 0, 'standalone registered function calls do not report unresolved helpers');
+    ok(grep { $_ eq 'VALUE_DROP' } @{$top_meta->{canonical_action_ir_nodes} || []}, 'standalone registered function calls produce VALUE_DROP nodes');
+    ok($top_meta->{language_agnostic_action_ir_ready}, 'standalone registered function calls stay language-agnostic ready');
+
+    my $src = '';
+    my $source_ok = eval {
+        LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src);
+        1;
+    };
+    ok($source_ok && length($src), 'standalone function discard source generation captures parser source')
+        or diag(normalize_error($@));
+    unlike($src, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, 'standalone registered calls emit no unsupported-helper sentinel');
+    unlike($src, qr/\bnormalize\s*\(/, 'standalone registered calls do not leave raw function-call source behind');
+
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'standalone function discard spec compiles to a parser')
+        or diag(normalize_error($@));
+    my $result = ref($parser) eq 'CODE' ? eval { $parser->(\"x") } : undef;
+    is($result, 'ok', 'nested user-function calls pass parameter values and standalone return values are discarded');
+
+    my $unknown_standalone_spec = <<'SPEC';
+Top::
+ /x/ -> Done { user_fn("x"); return("ok") }
+Done::
+ /x/
+SPEC
+    my $unknown_descriptor = eval { LinkedSpec::Get(\$unknown_standalone_spec, return_descriptor => 1) };
+    my $unknown_meta = ref($unknown_descriptor) eq 'HASH'
+        ? ($unknown_descriptor->{spec}{Top}{meta}{action_rewriter} || {})
+        : {};
+    is($unknown_meta->{raw_perl_dependency_count} || 0, 1, 'unregistered standalone calls remain explicit raw compatibility debt');
+    is_deeply($unknown_meta->{raw_perl_dependency_statements} || [], ['user_fn("x")'], 'unregistered standalone raw statement is named exactly');
+
+    my @diag_cases = (
+        {
+            label => 'direct recursion',
+            spec => "fn loop(value) { return(loop(value)) }\nTop::\n /x/ -> Done { return(loop(\"x\")) }\nDone::\n /x/\n",
+            helpers => ['loop'],
+        },
+        {
+            label => 'mutual recursion',
+            spec => "fn alpha(value) { return(beta(value)) }\nfn beta(value) { return(alpha(value)) }\nTop::\n /x/ -> Done { return(alpha(\"x\")) }\nDone::\n /x/\n",
+            helpers => ['alpha'],
+        },
+        {
+            label => 'parser-state helper in function body',
+            spec => "fn read_entry() { return(entry_text()) }\nTop::\n /(x)/ -> Done { return(read_entry()) }\nDone::\n /x/\n",
+            helpers => ['entry_text'],
+        },
+        {
+            label => 'host-code-shaped function body',
+            spec => "fn bad_host(value) { my \$x = 1; return(value) }\nTop::\n /x/ -> Done { return(bad_host(\"x\")) }\nDone::\n /x/\n",
+            helpers => ['bad_host'],
+        },
+        {
+            label => 'nested function syntax in function body',
+            spec => "fn bad_nested(value) { fn inner(x) { return(x) }; return(value) }\nTop::\n /x/ -> Done { return(bad_nested(\"x\")) }\nDone::\n /x/\n",
+            helpers => ['bad_nested'],
+        },
+    );
+
+    for my $case (@diag_cases) {
+        my $case_descriptor = eval { LinkedSpec::Get(\$case->{spec}, return_descriptor => 1) };
+        my $case_meta = ref($case_descriptor) eq 'HASH'
+            ? ($case_descriptor->{spec}{Top}{meta}{action_rewriter} || {})
+            : {};
+        is($case_meta->{raw_perl_dependency_count} || 0, 0, "$case->{label} is not raw Perl fallback");
+        is_deeply($case_meta->{unresolved_helpers} || [], $case->{helpers}, "$case->{label} reports deterministic unresolved helper diagnostics");
+    }
+};
+
 subtest 'plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus' => sub {
     plan tests => 1;
 

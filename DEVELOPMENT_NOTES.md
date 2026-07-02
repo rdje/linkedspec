@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.4.2.3 — Perl user-function standalone discard/hardening):
+  The Perl reference now closes the remaining `.4.2` user-function boundary. Durable points. (1) **Dynamic
+  VALUE_DROP seam.** Static helper contracts cannot know user-defined names, so `ActionIR::CanonicalEvents`
+  now uses the compiled function registry to classify only registered standalone calls/chains as `VALUE_DROP`;
+  `Contracts` then lets the existing dropped-value lowerer compute and discard them. Unknown unregistered
+  standalone calls stay raw compatibility debt. (2) **Nested function calls.** `MethodLowering` now recognizes
+  function-local scalar params when a user-function call passes them as arguments to another user function; this
+  fixes the `wrap(value) -> identity(value)` case so the value is passed, not the bare token name. (3)
+  **Hardening diagnostics.** Direct recursion, mutual recursion, parser-state helper bodies, host-code-shaped
+  bodies, and nested function syntax all stay unresolved-helper diagnostics with zero raw fallback. (4) **Gate.**
+  Syntax checks, focused AST suite, phase0, mdBook build, memory/doctrine/Knowledge Map checks, diff check, and
+  full local CI pass; phase0 is now 1007 tests.
+  Next frontier: `SPEC-FORMAT-TERSE.4.3.1`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.4.2.2 — Perl user-function value-call execution):
   Registered user-function calls now execute in Perl value positions. Durable points. (1) **Registry threading.**
   `Compiler` captures the extracted function registry in the `compile_spec_entry` callback; `SpecEntry` places it

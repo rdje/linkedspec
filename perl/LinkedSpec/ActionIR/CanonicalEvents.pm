@@ -36,6 +36,61 @@ sub _canonicalize_helper_action_ir_event {
  })
 }
 
+sub _user_function_registry_by_name {
+ my ($deps) = @_;
+ return undef unless ref($deps) eq 'HASH';
+ my $registry = $deps->{user_function_registry};
+ return undef unless ref($registry) eq 'HASH';
+ return ref($registry->{by_name}) eq 'HASH' ? $registry->{by_name} : undef
+}
+
+sub _registered_user_function_definition_for_name {
+ my ($deps, $name) = @_;
+ return undef unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ my $by_name = _user_function_registry_by_name($deps);
+ return undef unless ref($by_name) eq 'HASH';
+ my $definition = $by_name->{$name};
+ return undef unless ref($definition) eq 'HASH'
+              && ($definition->{kind} // '') eq 'user_function_definition';
+ return $definition
+}
+
+sub _statement_is_registered_user_function_value_drop {
+ my ($statement, $deps) = @_;
+ return 0 unless defined($statement) && length($statement);
+ return 0 unless ref(_user_function_registry_by_name($deps)) eq 'HASH';
+
+ my $node = eval {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST::Parser');
+  LinkedSpec::ActionIR::AST::Parser::parse_action_expr($statement, { deps => $deps });
+ };
+ return 0 unless ref($node) eq 'HASH';
+ my $kind = $node->{kind} // '';
+
+ if ($kind eq 'call') {
+  return ref(_registered_user_function_definition_for_name($deps, $node->{name})) eq 'HASH' ? 1 : 0
+ }
+
+ if ($kind eq 'fluent_chain') {
+  my $receiver = $node->{receiver};
+  return 0 unless ref($receiver) eq 'HASH' && ($receiver->{kind} // '') eq 'call';
+  return ref(_registered_user_function_definition_for_name($deps, $receiver->{name})) eq 'HASH' ? 1 : 0
+ }
+
+ return 0
+}
+
+sub _registered_user_function_value_drop_event {
+ my ($statement) = @_;
+ return {
+  kind        => 'VALUE_DROP',
+  source      => 'registered_user_function_value_drop',
+  contract_id => 'value_drop_statement',
+  raw         => $statement,
+  args        => { value => $statement },
+ }
+}
+
 sub _build_canonical_action_ir_events {
  my ($label, $code, $helper_events, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
@@ -63,6 +118,8 @@ sub _build_canonical_action_ir_events {
  foreach my $statement (@{$split_action_ir_statements->($code)}) {
   if (exists $helper_event_queue{$statement} && @{$helper_event_queue{$statement}}) {
    push @canonical_events, shift @{$helper_event_queue{$statement}};
+  } elsif (_statement_is_registered_user_function_value_drop($statement, $deps)) {
+   push @canonical_events, _registered_user_function_value_drop_event($statement);
   } else {
    push @canonical_events, {
     kind        => 'RAW_PERL',

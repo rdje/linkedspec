@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.4.2.3 — harden Perl user function discard
+
+**Scope:** Perl ActionIR canonical event classification, value-drop lowering, user-function argument lowering,
+phase0 hardening locks, mdBook, live docs, and Knowledge Map.
+
+**What changed:** Registered standalone user-function calls and receiver chains now lower as canonical
+`VALUE_DROP` events. The canonical event builder uses the compiled function registry to recognize only registered
+function expressions, then the existing value-drop lowerer computes the function result and discards it with no
+raw Perl fallback. Unregistered standalone calls remain explicit raw compatibility debt.
+
+**Hardening:** Nested user-function calls now pass function-local parameter values, not bare parameter names.
+Direct recursion, mutual recursion, parser-state helpers in function bodies, host-code-shaped function bodies, and
+nested function syntax inside function bodies are phase0-locked as deterministic unresolved-helper diagnostics
+with zero raw fallback.
+
+**Checks:** Perl syntax checks passed for `CanonicalEvents.pm`, `Contracts.pm`, `MethodLowering.pm`,
+`RuleIR/EmitContext.pm`, and `t/phase0_regression.t`. TOOLBOX descriptor/runtime probes passed for the standalone
+discard and diagnostic boundaries. `prove -Iperl t/actionir_ast_parser.t` passed with **20 tests**,
+`prove -Iperl t/phase0_regression.t` passed with **1007 tests**, `mdbook build docs/linkedspec-book` passed, and
+memory architecture, Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh`
+passed.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.4.2.2 — execute Perl user function value calls
 
 **Scope:** Perl compiler registry threading, RuleIR emit context dependencies, ActionIR MethodLowering,

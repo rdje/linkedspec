@@ -23,7 +23,8 @@ and docs away from the short aliases. Residual `s(...)`, `a(...)`, or `h(...)` c
 enter the same unresolved-helper diagnostic path as other retired helper spellings:
 `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:s|a|h`, no raw-Perl fallback, and not
 language-agnostic ready. `PERL-ACTIONIR-AST-MIGRATION.5.3.2` completed the
-value-position user-function diagnostic handoff; standalone unknown calls remain raw
-until the function registry owns discard semantics. See
+value-position user-function diagnostic handoff, and `SPEC-FORMAT-TERSE.4.2.3` later
+added registry-aware `VALUE_DROP` discard for registered standalone user-function calls.
+Unregistered standalone call-shaped statements remain raw compatibility debt. See
 [[perl-actionir-ast-value-drop-statement-lowering]] for the immediately preceding
 dropped-value statement boundary.

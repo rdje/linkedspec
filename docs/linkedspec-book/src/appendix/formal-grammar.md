@@ -67,12 +67,14 @@ or between ordinary rule paragraphs; the current Perl reference strips them befo
 hardcoded bootstrap parser sees the rule source, while preserving line numbers for
 diagnostics.
 
-As of `SPEC-FORMAT-TERSE.4.2.2`, the Perl reference validates and records functions in the
-descriptor registry and executes registered exact-arity calls in value positions. A call
-such as `return(normalize(" x "))` evaluates the argument first, binds it to the function's
-parameter in a fresh function-local scope, and returns the body result. Calls can feed helper
-arguments and compatible receiver-dot chains. Standalone call result discard, recursion
-rejection, purity hardening, and Rust parity remain follow-on work.
+As of `SPEC-FORMAT-TERSE.4.2.3`, the Perl reference validates and records functions in the
+descriptor registry and executes registered exact-arity calls in value positions and
+standalone discard statements. A call such as `return(normalize(" x "))` evaluates the
+argument first, binds it to the function's parameter in a fresh function-local scope, and
+returns the body result. A standalone `normalize(" x ")` computes that value and discards it
+through the canonical `VALUE_DROP` path. Calls can feed helper arguments and compatible
+receiver-dot chains. Recursive and unsupported function-body forms are fenced as
+unresolved-helper diagnostics with zero raw fallback. Rust parity remains follow-on work.
 
 The registry rejects:
 

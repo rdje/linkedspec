@@ -15,7 +15,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, user-functions, descriptor, compiler-state, perl-reference]
-evidence: "SPEC-FORMAT-TERSE.4.2.1 added specs/spec.spec function_definition grammar and spec_file dispatch; added LinkedSpec::UserFunctionRegistry; added compiled_spec_state function_order/functions_by_name and public descriptor functions/meta.function_order/meta.function_count; phase0 subtest user_function_registry_descriptor_seam proved descriptor projection, body ActionIR AST capture, duplicate/builtin/rule/parameter diagnostics, and the pre-execution boundary. SPEC-FORMAT-TERSE.4.2.2 then threaded the registry into Perl RuleIR/ActionIR lowering so exact-arity registered value calls execute with zero raw fallback/unresolved helpers."
+evidence: "SPEC-FORMAT-TERSE.4.2.1 added specs/spec.spec function_definition grammar and spec_file dispatch; added LinkedSpec::UserFunctionRegistry; added compiled_spec_state function_order/functions_by_name and public descriptor functions/meta.function_order/meta.function_count; phase0 subtest user_function_registry_descriptor_seam proved descriptor projection, body ActionIR AST capture, duplicate/builtin/rule/parameter diagnostics, and the pre-execution boundary. SPEC-FORMAT-TERSE.4.2.2 then threaded the registry into Perl RuleIR/ActionIR lowering so exact-arity registered value calls execute with zero raw fallback/unresolved helpers. SPEC-FORMAT-TERSE.4.2.3 uses the same registry in canonical-event classification so registered standalone calls/chains lower as VALUE_DROP while unregistered standalone call-shaped statements remain raw compatibility debt."
 reverify: "rg -n 'function_definition:|-> function_definition' specs/spec.spec && rg -n 'function_order|functions_by_name|compiled_spec_state_to_legacy_functions|functions =>' perl/LinkedSpec/CompilerState.pm docs/linkedspec-book/src/public-api/descriptor-introspection.md && prove -Iperl t/phase0_regression.t"
 ---
 
@@ -55,6 +55,7 @@ rule-label collisions before runtime.
 
 Registered calls were not executable in `.4.2.1`. `.4.2.2` makes exact-arity
 registered calls executable in Perl value positions and compatible receiver-dot chains
-with zero raw fallback and zero unresolved helpers. Wrong-arity registered calls still
-report unresolved-helper metadata. Standalone discard and purity hardening remain
-`.4.2.3`.
+with zero raw fallback and zero unresolved helpers. `.4.2.3` adds registry-aware
+standalone discard: registered calls/chains lower as `VALUE_DROP`, while unregistered
+standalone call-shaped statements stay raw compatibility debt. Wrong-arity registered
+calls still report unresolved-helper metadata.

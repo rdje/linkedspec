@@ -82,7 +82,7 @@ sub _actionir_owner_default_deps {
   my $code = _actionir_owner_callback($owner_key, 'default_deps_for_package');
   my $owner_deps = $code->(__PACKAGE__);
   if (
-   $owner_key eq 'method_lowering'
+   ($owner_key eq 'method_lowering' || $owner_key eq 'canonical_events')
    && ref($__ls_current_function_registry) eq 'HASH'
    && ref($owner_deps) eq 'HASH'
   ) {

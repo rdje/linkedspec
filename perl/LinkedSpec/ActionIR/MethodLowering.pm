@@ -2167,7 +2167,14 @@ sub _lower_method_value_expr {
    my $arg_source = $lower_user_function_node_source_expr->($arg);
    return _actionir_ast_unsupported_helper_expr($name)
     unless defined($arg_source) && length($arg_source);
-   my $arg_expr = _lower_method_value_expr($arg_source, $deps);
+   my $arg_expr;
+   if (ref($arg) eq 'HASH'
+    && ($arg->{kind} // '') eq 'variable'
+    && _user_function_scalar_value_name($deps, $arg->{name})) {
+    $arg_expr = _lower_source_slot_bare_scalar_read_expr($arg->{name}, $deps);
+   }
+   $arg_expr = _lower_method_value_expr($arg_source, $deps)
+    unless defined($arg_expr) && length($arg_expr);
    $arg_expr = $arg_source unless defined($arg_expr) && length($arg_expr);
    return _actionir_ast_unsupported_helper_expr($name)
     unless defined($arg_expr) && length($arg_expr);
