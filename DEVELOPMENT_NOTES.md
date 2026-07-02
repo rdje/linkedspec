@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (RUST-PARITY.7.5.3 — action-edge fluent closure reconciliation):
+  No Rust runtime code was needed for this slice. Durable points. (1) **Closure evidence.**
+  `SPEC-FORMAT-TERSE.2.3.3.1` added action-edge fluent metadata and no-arg `.push` / `.return(...)` /
+  `.return_undef`; `.2.3.3.3.2` completed explicit-target and flow-control action-edge continuations; and
+  `.2.3.3.3.3.1` fixed the separate `tclite` default-mode repetition / child-preamble-return gap. (2)
+  **Corpus evidence.** `tclite_command_subst` and `tclite_double_quote` are active oracle fixtures, and the
+  current 62-fixture Rust corpus oracle passes. (3) **Task-tree repair.** `RUST-PARITY.7.5.3` is marked done,
+  `.7.5.2` is the remaining `.7.5` frontier for Lispish `scalaref(retv, {content})`, and `.7.2`/`.7.3` stay
+  blocked until that shipped-spec gap is resolved. (4) **Docs.** The corpus README and live recovery docs no
+  longer describe `tclite` as deferred behind fluent continuations.
+  Next frontier: `RUST-PARITY.7.5.2`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3.4 — assignment-expression closure):
   The parent assignment-expression contract is closed. Durable points. (1) **Closure fixture.** One portable
   Perl/Rust fixture composes scalar assignment, `=(...)`, canonical `set(...)`, legacy `assign(...)`,

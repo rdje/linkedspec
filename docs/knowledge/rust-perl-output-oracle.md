@@ -25,7 +25,7 @@ answers:
 date: 2026-06-30
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
-evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 / RUST-PARITY.7.5.3 partial action-edge parity (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3 (2026-06-30): retrying tclite after fluent parity still failed the two temporarily re-enabled fixtures: Perl returns tagged tcl_script values for [] and \"\", while Rust returned []. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active; corpus_oracle passes over 41 fixtures. Lispish (uses { } blocks) needs .7.5.2 (scalaref)."
+evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3 (2026-06-30): retrying tclite after fluent parity still failed the two temporarily re-enabled fixtures: Perl returns tagged tcl_script values for [] and \"\", while Rust returned []. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active; corpus_oracle passes over 41 fixtures. RUST-PARITY.7.5.3 reconciliation (2026-07-02): the action-edge fluent parity leaf is marked done from those committed implementation/corpus facts; the remaining .7.5 blocker is Lispish .7.5.2 (scalaref)."
 reverify: "cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
@@ -80,7 +80,7 @@ that: the Rust engine does **not** yet reproduce the shipped recursive specs.
   self-recursive `-> command_subst[1]` resolves to idx 1 = close). **BUT this alone did NOT
   green tclite** — with the regexes registering, the oracle still showed tclite `[]` → `[]`.
   See the next bullet.
-- **Action-edge no-arg fluent continuations (`.7.5.3` partial, LANDED 2026-06-30 under
+- **Action-edge no-arg fluent continuations (`.7.5.3`, LANDED 2026-06-30 under
   `SPEC-FORMAT-TERSE.2.3.3.1`).** tclite originally exposed that Rust dropped
   continuations on ACTION edges such as `-> command_subst .push` and
   `-> command_subst[1] .return(...)`. Rust now carries action-edge `fluent_chain` through
@@ -131,7 +131,7 @@ ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
 ## Links
 
 - Task tree: [[RUST-PARITY]] / [[SPEC-FORMAT-TERSE]] (leaves `.7.1` oracle, `.7.5.1`
-  header-regex fix done; `.7.5.3` action-edge no-arg fluent lowering partially landed under
+  header-regex fix done; `.7.5.3` action-edge fluent closure reconciled done from
   `SPEC-FORMAT-TERSE.2.3.3.1`; compact lifecycle/body fluent forms landed under
   `SPEC-FORMAT-TERSE.2.3.3.3.1`; action-edge explicit/flow fluent chains landed under
   `SPEC-FORMAT-TERSE.2.3.3.3.2`; tclite retry under `.2.3.3.3.3` split default-mode recursive repetition

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — RUST-PARITY.7.5.3 — reconcile action-edge fluent closure
+
+**Scope:** Rust parity task-tree reconciliation, corpus README drift fix, roadmap/live status repair, and
+Knowledge Map. No parser/compiler/runtime code changed.
+
+**What changed:** The stale `RUST-PARITY.7.5.3` frontier is now marked done from committed implementation
+evidence. Action-edge fluent continuations were implemented under `SPEC-FORMAT-TERSE.2.3.3.1` and
+`.2.3.3.3.2`, while the separate `tclite` default-mode repetition gap closed under `.2.3.3.3.3.1`. The two
+shipped `tclite` oracle fixtures are active and green in the current corpus.
+
+**Boundary:** This does not close the independent Lispish gap. `RUST-PARITY.7.5.2` remains the next frontier for
+`scalaref(retv, {content})`; `.7.2` and `.7.3` remain blocked until `.7.5.2` is resolved.
+
+**Checks:** Rust corpus oracle, mdBook build, Knowledge Map regenerate/check, memory architecture, doctrine
+registry, `git diff --check`, and full local CI passed. The corpus oracle now passes over the current **62
+fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.4 — close assignment expression docs
 
 **Scope:** Parent assignment-expression closure fixture, Rust runtime lock, oracle corpus, mdBook public example

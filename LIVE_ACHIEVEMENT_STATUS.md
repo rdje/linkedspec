@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **RUST-PARITY.7.5.3 — action-edge fluent closure reconciled**
+  (TASK TREE + CORPUS README + ROADMAP/LIVE DOCS + KM; **no runtime behavior change**).
+  The stale Rust parity frontier is now closed against committed evidence: `SPEC-FORMAT-TERSE.2.3.3.1` added
+  action-edge fluent metadata plus no-arg `.push` / `.return(...)` / `.return_undef`; `.2.3.3.3.2` completed
+  explicit-target and flow-control action-edge continuations; and `.2.3.3.3.3.1` fixed the separate `tclite`
+  default-mode repetition / child-preamble-return gap and restored the two shipped `tclite` oracle fixtures.
+
+  **Verification:** source/corpus audit confirms `execute_action_edge_fluent_chain`, active
+  `tclite_command_subst` / `tclite_double_quote`, and `RUST-PARITY.7.5.3` task evidence; Rust corpus oracle PASS
+  over **62 fixtures**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `RUST-PARITY.7.5.2` — Lispish `scalaref(retv, {content})` hash-field accessor support. `.7.2`
+  and `.7.3` remain blocked until `.7.5.2` closes.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.4 — assignment-expression closure and legacy spelling cleanup landed**
   (PHASE0 + RUST RUNTIME + ORACLE + BOOK/KM + STATUS DRIFT REPAIR).
   The parent `.3.3` assignment-expression contract is now locked across scalar assignment values, direct-shape
