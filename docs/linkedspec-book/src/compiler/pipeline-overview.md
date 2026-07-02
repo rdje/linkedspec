@@ -59,6 +59,21 @@ from other spec files. Staged parse dispatch runs another parser over text produ
 previous parse. Keeping those concepts separate lets diagnostics explain whether a
 failure happened while loading grammar material or while refining a runtime payload.
 
+The accepted import/composition design is deliberately file-scope and language-neutral:
+
+```text
+import "common/atoms.spec" as atoms
+include "common/lifecycle.spec"
+```
+
+`import` loads reusable grammar material behind an explicit alias, so references use a
+qualified rule name such as `atoms.Identifier`. `include` performs a structured merge of
+another parsed `.spec` into the current unqualified namespace. It is not text
+concatenation, and it does not parse runtime payloads. Resolution order, collision
+diagnostics, cycle reporting, source provenance, and descriptor fingerprints are part of
+the neutral contract. This is a design contract for upcoming implementation; current
+shipped parsers do not yet accept those directives.
+
 For `.spec` language evolution, `specs/spec.spec` is the first authoritative grammar.
 Other `.spec`-language stages derive from payloads produced through that self-hosted
 path. The hardcoded bootstrap parser may bridge old behavior, but permanent syntax

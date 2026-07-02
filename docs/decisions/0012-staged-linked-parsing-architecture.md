@@ -65,5 +65,6 @@ Adopt **staged linked parsing** as a core LinkedSpec architecture:
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`
-- Related: ADR `0011` text-to-AST backend doctrine, ADR `0006` multi-backend vision,
-  ADR `0007` terse `.spec` format direction
+- Related: ADR `0013` spec import/composition contract, ADR `0011` text-to-AST
+  backend doctrine, ADR `0006` multi-backend vision, ADR `0007` terse `.spec`
+  format direction

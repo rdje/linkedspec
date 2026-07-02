@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.2 — spec import/composition contract):
+  Spec-file composition now has a design contract before implementation. Durable points. (1) **Syntax is
+  file-scope.** Future `.spec` source uses `import "path.spec" as alias` for qualified grammar reuse and
+  `include "path.spec"` for structured unqualified composition. Current shipped parsers do not yet accept either
+  directive. (2) **Import is not dispatch.** Imports/includes compose parsed grammar material; staged parse jobs
+  parse runtime text payloads extracted into AST nodes. Keep diagnostics and descriptors separate. (3)
+  **Structured, not textual.** `include` is a parsed-spec merge with preserved source provenance, not raw
+  concatenation. (4) **Determinism.** Resolve relative to the containing spec, then configured search roots or
+  registry identities in declared order; duplicate aliases/rules, ambiguous unqualified references, missing specs,
+  and cycles are hard diagnostics. (5) **Neutrality.** The directive graph, namespace rules, cycle diagnostics,
+  and dependency fingerprints are specified over `.spec` identities and content digests, not host-language module
+  loaders. Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, and future implementations inherit the same contract.
+  Next frontier: `STAGED-LINKED-PARSING.3`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.1 — architecture doctrine):
   User clarified the architectural identity behind the project name: LinkedSpec is not just a compact grammar DSL;
   it is a staged parser-composition model. Durable points. (1) **Parse what is easy now.** A stage should consume

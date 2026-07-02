@@ -14,10 +14,11 @@ answers:
   - "how should extracted text islands be parsed"
   - "what should a next-stage parse record contain"
   - "does spec.spec remain the first .spec grammar"
+  - "what is the import composition contract for staged parsing"
 date: 2026-07-02
 status: current
 tags: [architecture, staged-parsing, parser-composition, language-neutral, spec-spec]
-evidence: "ADR 0012 adopts staged linked parsing as core architecture: stage-N specs may emit AST nodes carrying raw extracted text, source span, payload kind, and parse intent; each payload can become a parse job naming parser spec identity, optional top rule, parent AST path, insertion policy, and failure policy; one stage may spawn many different next-stage specs. The mdBook overview, design rationale, compiler pipeline, and backend handoff now explain that spec imports/composition are separate from staged parse dispatch. The contract is implementation-language neutral across Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or future backends. For .spec language evolution, specs/spec.spec remains the first authoritative grammar; hardcoded bootstrap grammar is bridge debt, not a competing permanent owner."
+evidence: "ADR 0012 adopts staged linked parsing as core architecture: stage-N specs may emit AST nodes carrying raw extracted text, source span, payload kind, and parse intent; each payload can become a parse job naming parser spec identity, optional top rule, parent AST path, insertion policy, and failure policy; one stage may spawn many different next-stage specs. ADR 0013 separately accepts the design-only spec import/composition contract: file-scope import aliases and structured includes compose grammar material, while staged parse jobs parse runtime payload text. The contract is implementation-language neutral across Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or future backends. For .spec language evolution, specs/spec.spec remains the first authoritative grammar; hardcoded bootstrap grammar is bridge debt, not a competing permanent owner."
 reverify: "rg -n 'staged linked parsing|parse job|text islands|Spec imports|implementation-language neutral|Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go|0012|STAGED-LINKED-PARSING' docs/decisions docs/tasks docs/linkedspec-book/src ROADMAP_V2.md"
 ---
 
@@ -40,6 +41,11 @@ A parse job should carry at least:
 Spec imports/composition and staged parse dispatch are different. Imports compose
 grammar material. Staged dispatch parses runtime payload text that a previous parser
 extracted.
+
+The accepted import/composition design uses future file-scope directives such as
+`import "common/atoms.spec" as atoms` and `include "common/lifecycle.spec"`. Imported
+rules are qualified through the alias; included rules merge structurally into the current
+namespace. This is a design contract until the parser implementation lands.
 
 This model is language-neutral. It is not a Perl5 or Rust trick. Any backend that
 implements LinkedSpec should preserve the same parse-job contract and diagnostics,

@@ -26,6 +26,15 @@ Staged dispatch parses runtime text payloads carried by AST nodes. Both are usef
 they solve different problems and must remain distinguishable in diagnostics and
 descriptors.
 
+The planned import/composition surface follows that split. A file-scope
+`import "path.spec" as alias` directive reuses another spec through qualified names like
+`alias.Rule`; a file-scope `include "path.spec"` directive structurally merges parsed
+spec material into the current unqualified namespace. Neither directive performs runtime
+payload parsing. They describe the grammar graph, preserve source provenance, and fail
+deterministically on cycles, duplicate aliases, duplicate included rule names, or
+ambiguous unqualified references. The current implementation does not yet accept those
+directives; the point of the design is to reserve neutral semantics before code.
+
 ## 2. Concision matters, but not at the expense of trust
 
 The `.spec` language is intentionally compact. A few lines of rules with attached actions should express a useful parser.
@@ -53,6 +62,11 @@ parser" or "Rust can call another parser." It is a language-neutral parse-job co
 that any backend can implement: Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or a later
 target all receive the same source spans, parser identities, top-rule selection, result
 stitching rules, and failure semantics.
+
+The import/composition graph follows the same rule. A backend may use its own module
+loader or filesystem APIs internally, but the observable contract is the `.spec`
+directive graph: normalized spec identities, alias namespaces, structured includes,
+cycle diagnostics, and content-based descriptor fingerprints.
 
 ## 4. The compiler is state-first, not hash-first
 

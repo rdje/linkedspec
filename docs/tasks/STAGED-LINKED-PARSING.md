@@ -59,12 +59,22 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.1 - adopt staged linked parsing doctrine`
 
 - ID: `STAGED-LINKED-PARSING.2`
-  Status: `pending`
+  Status: `done`
   Goal: Design spec-file imports/composition.
   Acceptance: Define import/include semantics, naming, dependency resolution,
     cycle diagnostics, and public syntax before code.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Added ADR `0013` for the
+    language-neutral import/composition contract: future file-scope
+    `import "path.spec" as alias` and `include "path.spec"` directives,
+    qualified imported references, structured include merges, deterministic
+    resolution, source-aware diagnostics, cycle/collision errors, descriptor
+    fingerprinting, and an explicit not-yet-implemented status. Updated the
+    mdBook, roadmap/live docs, task index, and Knowledge Map. Checks passed:
+    `mdbook build docs/linkedspec-book`,
+    `knowledge-map/scripts/check_knowledge_map.sh`,
+    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
+    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
+  Commit: `STAGED-LINKED-PARSING.2 - specify spec import composition contract`
 
 - ID: `STAGED-LINKED-PARSING.3`
   Status: `pending`
@@ -97,7 +107,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `STAGED-LINKED-PARSING.2` | `pending` | Imports/composition must be specified before parse-job annotations can reference reusable grammar material cleanly. |
+| 1 | `STAGED-LINKED-PARSING.3` | `pending` | Parse-job annotations can now reference the import/composition namespace boundary without conflating grammar reuse and runtime payload parsing. |
 
 ## Decisions
 
@@ -110,11 +120,15 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 - `2026-07-02`: For `.spec` language evolution, `specs/spec.spec` is the first
   authoritative grammar. Permanent syntax such as user-defined functions must
   derive from that self-hosted grammar path, not from lasting bootstrap grammar.
+- `2026-07-02`: Spec-file composition will use future file-scope directives:
+  `import "path.spec" as alias` for qualified references and
+  `include "path.spec"` for structured unqualified composition. This is
+  grammar material reuse, not staged runtime payload parsing. Current shipped
+  parsers do not yet accept those directives.
 
 ## Open Questions
 
-- Exact authoring syntax for imports and staged parse annotations is deferred
-  to `.2` and `.3`.
+- Exact authoring syntax for staged parse annotations is deferred to `.3`.
 - Whether staged parse jobs are declared only in `.spec` metadata or may also
   be produced by portable action helpers is deferred to `.3`.
 
@@ -127,13 +141,16 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-02` | `STAGED-LINKED-PARSING.1` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
+| `2026-07-02` | `STAGED-LINKED-PARSING.2` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `STAGED-LINKED-PARSING.1` | `STAGED-LINKED-PARSING.1 - adopt staged linked parsing doctrine` | ADR/book/KM/live-doc architecture adoption; no runtime code change. |
+| `STAGED-LINKED-PARSING.2` | `STAGED-LINKED-PARSING.2 - specify spec import composition contract` | ADR/book/KM/live-doc design adoption; no runtime code change. |
 
 ## Changelog
 
 - `2026-07-02`: `.1` done — staged linked parsing adopted as language-neutral doctrine; frontier moves to `.2`.
+- `2026-07-02`: `.2` done — spec import/composition contract specified before implementation; frontier moves to `.3`.

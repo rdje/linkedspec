@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.2 — spec import/composition contract specified**
+  (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
+  ADR `0013` now reserves future file-scope `import "path.spec" as alias` and
+  `include "path.spec"` directives for grammar composition before implementation.
+
+  **Contract:** `import` creates qualified references such as `alias.Rule`; `include` performs a structured merge
+  into the current unqualified namespace. Both compose parsed grammar material only. They are not staged parse
+  jobs and do not parse runtime payload text.
+
+  **Diagnostics/neutrality:** resolution order, duplicate alias/rule diagnostics, ambiguous reference diagnostics,
+  import-cycle reporting, source provenance, and descriptor fingerprints are language-neutral across Perl5, Raku,
+  Rust, Julia, Lua, Dart, Zig, Go, and future implementations. Current shipped parsers do not yet accept the
+  directives.
+
+  **Verification:** mdBook build PASS; Knowledge Map, memory, doctrine, and diff gates PASS; full local CI PASS
+  with phase0 1015 green.
+
+  **Frontier:** `STAGED-LINKED-PARSING.3` — design staged parse-job annotations and AST payload metadata.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.1 — staged linked parsing doctrine adopted**
   (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
   ADR `0012` now defines LinkedSpec as a staged linked parsing architecture: a stage may parse only the easy

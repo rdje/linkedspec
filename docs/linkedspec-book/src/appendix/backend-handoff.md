@@ -82,6 +82,16 @@ For `.spec` language evolution, `specs/spec.spec` is the first authoritative gra
 later `.spec` stages derive from its parsed payloads rather than a competing permanent
 bootstrap grammar.
 
+Spec import/composition is a separate backend conformance target once implemented. The
+accepted design uses file-scope `import "path.spec" as alias` and
+`include "path.spec"` directives. `import` creates a qualified namespace such as
+`alias.Rule`; `include` performs a structured merge into the current unqualified
+namespace. Implement this as parsed `.spec` composition, not raw text concatenation.
+Backends must agree on resolution order, normalized spec identities, duplicate-name
+diagnostics, import-cycle diagnostics, source provenance, and descriptor fingerprints.
+Current shipped parsers do not yet accept these directives, so do not treat them as a
+runtime requirement until the implementation leaf lands.
+
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
 calls. Retired helpers, non-DSL host-shaped statements, and a few narrow return payload
@@ -223,31 +233,35 @@ It provides:
    behavior. Parser resolution must be deterministic and diagnostics must report both the
    selected next-stage parser and the original parent source span.
 
-3. **Helper/action AST parser** — parses lifecycle/action helper code into typed
+3. **Spec import/composition graph** — once implemented, loads file-scope `import` and
+   `include` directives as parsed `.spec` dependencies with aliases, structured namespace
+   merges, cycle diagnostics, source provenance, and descriptor fingerprints.
+
+4. **Helper/action AST parser** — parses lifecycle/action helper code into typed
    expression and statement nodes. Calls, literals, variables, blocks, direct
    access, assignments, and receiver-dot chains must be represented structurally.
    Text-to-text helper rewriting is not a conforming design for new backends.
 
-4. **User-function registry and resolver** — records top-level `fn name(args) { body }`
+5. **User-function registry and resolver** — records top-level `fn name(args) { body }`
    definitions as validated AST-backed records before runtime. The registry must preserve
    definition order, expose definitions by name, reject helper/rule/reserved-name
    collisions, and resolve exact-arity value calls before unknown-helper fallback.
 
-5. **Compiler** — transforms parsed entries and helper/action AST nodes into
+6. **Compiler** — transforms parsed entries and helper/action AST nodes into
    HandlerIR nodes. You can reuse the ActionIR lowering approach, but the input to
    lowering is structured AST/IR rather than raw helper source text.
 
-6. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
+7. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
    in your target language. Must handle all 10 variant kinds.
 
-7. **Runtime** — the execution engine:
+8. **Runtime** — the execution engine:
    - Regex engine with position tracking (equivalent to `//gcp` and `\G` anchoring).
    - Accumulator model (arrays, hashes, scalars).
    - Lifecycle execution engine (I/LS/LE/E/EX/IT/LX ordering).
    - BACKTRACK (local cursor save/restore).
    - Zero-progress guard.
 
-8. **Test harness** — runs `tests/corpus/` entries and compares output to
+9. **Test harness** — runs `tests/corpus/` entries and compares output to
    `expected.json`.
 
 ## Practical Notes

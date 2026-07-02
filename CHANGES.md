@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — STAGED-LINKED-PARSING.2 — specify spec import composition contract
+
+**Scope:** Architecture decision, mdBook backend/rationale text, task-tree frontier, roadmap/live docs, and
+Knowledge Map.
+
+**What changed:** Added ADR `0013`, specifying spec-file import/composition before implementation. The reserved
+future syntax is file-scope `import "path.spec" as alias` for qualified grammar reuse and
+`include "path.spec"` for structured unqualified composition.
+
+**Contract:** Imports/includes compose grammar material only. They are not staged parse jobs and do not parse
+runtime text payloads. Resolution must be deterministic; duplicate aliases, duplicate included rule names,
+ambiguous unqualified references, missing specs, and import cycles are hard diagnostics with source provenance.
+Descriptor fingerprints include normalized spec identities and content digests for composed dependencies.
+
+**Neutrality:** The directive graph is implementation-language neutral across Perl5, Raku, Rust, Julia, Lua,
+Dart, Zig, Go, or future backends. Current shipped parsers do not yet accept the directives; this slice reserves
+the syntax and semantics before code.
+
+**Checks:** mdBook build, Knowledge Map regeneration/check, memory architecture, doctrine registry,
+`git diff --check`, and full local CI pass in the commit workflow.
+
 ## 2026-07-02 — STAGED-LINKED-PARSING.1 — adopt staged linked parsing doctrine
 
 **Scope:** Architecture doctrine, task-tree ownership, mdBook pipeline/backend explanation, roadmap/live docs, and
