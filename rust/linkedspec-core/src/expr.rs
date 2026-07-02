@@ -22,6 +22,8 @@
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
+//! scalaref_path → ('{' expr '}' | '[' expr ']')+
+//!                  (second positional arg of scalaref only; bare names are literal path atoms)
 //! literal     → string | number | boolean | regex | undef | array | hash
 //! grouped     → '(' expr ')'
 //! array       → '[' (expr (',' expr)*)? ']'
@@ -65,6 +67,18 @@ pub enum AccessSegment {
     Index { expr: Box<Expr> },
 }
 
+/// One segment in the legacy `scalaref(base, {key}[index])` path syntax.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "kind")]
+pub enum ScalarRefPathSegment {
+    /// Hash/object key segment from `{key_expr}`.
+    #[serde(rename = "key")]
+    Key { expr: Box<Expr> },
+    /// Array index segment from `[index_expr]`.
+    #[serde(rename = "index")]
+    Index { expr: Box<Expr> },
+}
+
 /// One key/value pair in a direct hash shape literal.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HashLiteralEntry {
@@ -104,6 +118,9 @@ pub enum Expr {
         base: String,
         segments: Vec<AccessSegment>,
     },
+    /// A legacy `scalaref` path argument: `{content}`, `{children}[0]{name}`.
+    #[serde(rename = "scalaref_path")]
+    ScalarRefPath { segments: Vec<ScalarRefPathSegment> },
     /// A direct array shape literal: `[]`, `[value, true]`
     #[serde(rename = "array_literal")]
     ArrayLiteral { items: Vec<Expr> },
@@ -192,6 +209,15 @@ impl std::fmt::Display for Expr {
                     match segment {
                         AccessSegment::Key { value } => write!(f, "[\"{value}\"]")?,
                         AccessSegment::Index { expr } => write!(f, "[{expr}]")?,
+                    }
+                }
+                Ok(())
+            }
+            Expr::ScalarRefPath { segments } => {
+                for segment in segments {
+                    match segment {
+                        ScalarRefPathSegment::Key { expr } => write!(f, "{{{expr}}}")?,
+                        ScalarRefPathSegment::Index { expr } => write!(f, "[{expr}]")?,
                     }
                 }
                 Ok(())
@@ -1199,6 +1225,47 @@ impl<'a> Parser<'a> {
         ))
     }
 
+    fn scan_bracket_payload_bounds(&self) -> Result<(usize, usize, usize), String> {
+        if self.peek() != Some('[') {
+            return Err(format!("expected '[' at position {}", self.pos));
+        }
+        let close = Self::matching_closing_bracket(self.src, self.pos)?;
+        Ok((self.pos + 1, close, close + 1))
+    }
+
+    fn matching_closing_bracket(src: &str, open: usize) -> Result<usize, String> {
+        let bytes = src.as_bytes();
+        let mut pos = open;
+        let mut depth = 0usize;
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => {
+                    pos = Self::skip_delimited_literal(src, pos, bytes[pos])
+                        .map_err(|e| format!("{e} while scanning bracket literal"))?;
+                    continue;
+                }
+                b'/' => {
+                    if let Some(next) = Self::skip_regex_literal(src, pos) {
+                        pos = next;
+                        continue;
+                    }
+                }
+                b'[' => depth += 1,
+                b']' => {
+                    depth = depth.saturating_sub(1);
+                    if depth == 0 {
+                        return Ok(pos);
+                    }
+                }
+                _ => {}
+            }
+            pos += 1;
+        }
+        Err(format!(
+            "unterminated bracket literal starting at position {open}"
+        ))
+    }
+
     fn has_top_level_fat_arrow(src: &str) -> bool {
         let bytes = src.as_bytes();
         let mut pos = 0usize;
@@ -1389,6 +1456,10 @@ impl<'a> Parser<'a> {
         matches!(callee, "declare")
     }
 
+    fn callee_expects_scalaref_path_arg(callee: &str, positional_index: usize) -> bool {
+        callee == "scalaref" && positional_index == 1
+    }
+
     fn parse_args_for_callee(&mut self, callee: &str) -> Result<Vec<Arg>, String> {
         let mut args = Vec::new();
         let allow_keywords = Self::callee_allows_keyword_args(callee);
@@ -1414,7 +1485,13 @@ impl<'a> Parser<'a> {
             } else {
                 // Not a keyword — backtrack and parse as positional expr
                 self.pos = start;
-                let value = self.parse_expr()?;
+                let value = if Self::callee_expects_scalaref_path_arg(callee, args.len())
+                    && matches!(self.peek(), Some('{' | '['))
+                {
+                    self.parse_scalaref_path_literal()?
+                } else {
+                    self.parse_expr()?
+                };
                 args.push(Arg::Positional(value));
             }
 
@@ -1426,6 +1503,68 @@ impl<'a> Parser<'a> {
             }
         }
         Ok(args)
+    }
+
+    fn parse_scalaref_path_literal(&mut self) -> Result<Expr, String> {
+        let mut segments = Vec::new();
+        loop {
+            self.skip_whitespace();
+            let Some(open) = self.peek() else {
+                break;
+            };
+            let (kind, payload_start, payload_end, after_close) = match open {
+                '{' => {
+                    let (payload_start, payload_end, after_close) =
+                        self.scan_brace_payload_bounds()?;
+                    ("key", payload_start, payload_end, after_close)
+                }
+                '[' => {
+                    let (payload_start, payload_end, after_close) =
+                        self.scan_bracket_payload_bounds()?;
+                    ("index", payload_start, payload_end, after_close)
+                }
+                _ => break,
+            };
+
+            let payload = &self.src[payload_start..payload_end];
+            let expr = Self::parse_scalaref_path_segment_expr(payload)?;
+            self.pos = after_close;
+            match kind {
+                "key" => segments.push(ScalarRefPathSegment::Key {
+                    expr: Box::new(expr),
+                }),
+                "index" => segments.push(ScalarRefPathSegment::Index {
+                    expr: Box::new(expr),
+                }),
+                _ => unreachable!("scalaref path kind is controlled above"),
+            }
+        }
+
+        if segments.is_empty() {
+            return Err(format!(
+                "expected scalaref path segment at position {}",
+                self.pos
+            ));
+        }
+        Ok(Expr::ScalarRefPath { segments })
+    }
+
+    fn parse_scalaref_path_segment_expr(payload: &str) -> Result<Expr, String> {
+        let trimmed = payload.trim();
+        if trimmed.is_empty() {
+            return Err("empty scalaref path segment".to_string());
+        }
+
+        let mut parser = Parser::new(trimmed);
+        let expr = parser.parse_expr()?;
+        parser.skip_whitespace();
+        if parser.pos != parser.src.len() {
+            return Err(format!(
+                "unexpected trailing content in scalaref path segment near '{}'",
+                &parser.src[parser.pos..]
+            ));
+        }
+        Ok(expr)
     }
 
     fn parse_name(&mut self) -> String {
@@ -2456,6 +2595,84 @@ mod tests {
                 other => panic!("expected NestedAccess, got {:?}", other),
             },
             _ => panic!("expected Call"),
+        }
+    }
+
+    #[test]
+    fn parse_scalaref_legacy_key_path_second_arg() {
+        let block = CodeBlock::parse(r#"return(scalaref(retv, {content}))"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "scalaref");
+                        assert_eq!(args.len(), 2);
+                        match args[1].value() {
+                            Expr::ScalarRefPath { segments } => {
+                                assert_eq!(segments.len(), 1);
+                                match &segments[0] {
+                                    ScalarRefPathSegment::Key { expr } => {
+                                        assert!(
+                                            matches!(expr.as_ref(), Expr::Variable { name } if name == "content")
+                                        );
+                                    }
+                                    other => panic!("expected key segment, got {:?}", other),
+                                }
+                            }
+                            other => panic!("expected ScalarRefPath, got {:?}", other),
+                        }
+                    }
+                    other => panic!("expected scalaref call, got {:?}", other),
+                }
+            }
+            _ => panic!("expected return call"),
+        }
+    }
+
+    #[test]
+    fn parse_scalaref_legacy_nested_path_segments() {
+        let block = CodeBlock::parse(r#"return(scalaref(foo, {"a"}[9]{"b"}[scalar(z)]))"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { args, .. } => match args[0].value() {
+                Expr::Call { args, .. } => match args[1].value() {
+                    Expr::ScalarRefPath { segments } => {
+                        assert_eq!(segments.len(), 4);
+                        assert!(
+                            matches!(&segments[0], ScalarRefPathSegment::Key { expr } if matches!(expr.as_ref(), Expr::StringLiteral { value } if value == "a"))
+                        );
+                        assert!(
+                            matches!(&segments[1], ScalarRefPathSegment::Index { expr } if matches!(expr.as_ref(), Expr::NumberLiteral { value } if *value == 9.0))
+                        );
+                        assert!(
+                            matches!(&segments[2], ScalarRefPathSegment::Key { expr } if matches!(expr.as_ref(), Expr::StringLiteral { value } if value == "b"))
+                        );
+                        assert!(
+                            matches!(&segments[3], ScalarRefPathSegment::Index { expr } if matches!(expr.as_ref(), Expr::Call { name, .. } if name == "scalar"))
+                        );
+                    }
+                    other => panic!("expected ScalarRefPath, got {:?}", other),
+                },
+                other => panic!("expected scalaref call, got {:?}", other),
+            },
+            _ => panic!("expected return call"),
+        }
+    }
+
+    #[test]
+    fn parse_scalaref_path_hook_does_not_change_general_brace_expression() {
+        let block = CodeBlock::parse(r#"return({content})"#).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { args, .. } => match args[0].value() {
+                Expr::BlockValue { block } => {
+                    assert_eq!(block.statements.len(), 1);
+                    assert!(
+                        matches!(&block.statements[0].expr, Expr::Variable { name } if name == "content")
+                    );
+                }
+                other => panic!("expected BlockValue, got {:?}", other),
+            },
+            _ => panic!("expected return call"),
         }
     }
 

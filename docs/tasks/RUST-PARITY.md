@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (`.7.5.3` reconciled done — action-edge fluent continuation support and the
-  shipped `tclite` oracle fixtures landed under `SPEC-FORMAT-TERSE.2.3.3.*`; remaining recursive shipped-spec
-  blocker is `.7.5.2` for Lispish `scalaref(retv, {content})`; frontier → `.7.5.2`)
+- Last updated: `2026-07-02` (`.7.5.2` done — Lispish `scalaref(retv, {content})` parity landed, the
+  `lispish_x_y` oracle fixture is active, and the Rust corpus oracle is green over 63 fixtures; frontier → `.7.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -179,7 +178,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - ID: `RUST-PARITY.7.5`
   Status: `active`
   Goal: Rust engine output-parity fixes for shipped recursive specs — unblock the oracle corpus (`.7.2`/`.7.3`). Discovered by `.7.1`'s oracle.
-  Children: `.7.5.1` (done), `.7.5.2` (pending), `.7.5.3` (done)
+  Children: `.7.5.1` (done), `.7.5.2` (done), `.7.5.3` (done)
   Note: Split 2026-06-17 (PNT rule 5). Originally two children; **`.7.5.3` added 2026-06-17** when `.7.5.1` (the parser header-regex fix) proved **necessary but NOT sufficient** for tclite. `.7.5.1` made the header-line regexes register (proven by unit tests), but the oracle still showed tclite → `[]`: tclite accumulates via **fluent continuations on ACTION edges** (`-> command_subst .push`, `-> command_subst[1] .return(...)`), and the Rust parser only attached a `.method` fluent chain to a BLIND edge (`=>`) at that point. **`.7.5.3` is now closed by later committed terse-track implementation evidence:** `SPEC-FORMAT-TERSE.2.3.3.1` carried action-edge `fluent_chain` through parser/compiler/runtime for no-arg `.push` / `.return(expr)` / `.return_undef`; `.2.3.3.3.2` completed explicit-target and flow-chain action-edge semantics; `.2.3.3.3.3.1` landed the remaining default-mode recursive repetition/preamble-return behavior and restored the two shipped `tclite` oracle fixtures. **Lispish-green still needs `.7.5.2`** (it uses `{ code }` blocks and `scalaref(retv, {content})`, not the fluent form). Still re-evaluate the **child-`return` accumulator leak** and the **group-indexing divergence** (Open Questions) as part of whichever child surfaces them. Acceptance (tree-level): the Rust engine reproduces the Perl reference (modulo the one-level wrap) for `tclite` (`[]`→`["?tcl_script:",[["?command_subst:",[]]]]`; `""`→`["?tcl_script:",[["?double_quote:",[]]]]`) and `Lispish` (`(x y)`→`["x",["y"]]`); each deferred case is re-enabled in `tools/gen_oracle_corpus.pl` by the child that closes its last blocker and passes the fixture-runner; `cargo test` + clippy zero-new; baseline green.
 
 - ID: `RUST-PARITY.7.5.1`
@@ -190,11 +189,12 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.5.1` (see Commit Log)
 
 - ID: `RUST-PARITY.7.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Add `{…}` hash-literal / field-accessor support to the Rust action-code expression parser (the second Lispish gap)
   Acceptance: `scalaref(retv, {content})` parses and evaluates (extract the named field from the referenced hash) so Lispish `(x y)` reproduces the Perl reference `["x",["y"]]`. **Root cause (confirmed):** `rust/linkedspec-core/src/expr.rs:299` — `parse_expr` has no `{` case (no hash/object/field-accessor syntax in the expression language), so `{content}` raises `unexpected character '{'`. **Scope:** larger than `.7.5.1` — needs a new `Expr` variant + parser production + engine evaluation (`scalaref(ref, {field})` reads `field` from the hash the ref points at). Decide the exact `{…}` semantics against the Perl reference (`specs/Lispish.spec:40-43`, `scalaref(retv, {content})`; line 78 `CAPTURE`) before implementing. Depends on `.7.5.1` (done — the Lispish child rules now register their regexes). **Note:** Lispish uses `{ code }` blocks on its edges (not the fluent form), so it does NOT need `.7.5.3`; `.7.5.1` + `.7.5.2` should green it. Re-enable the Lispish case in `tools/gen_oracle_corpus.pl`; fixture-runner green; baseline + green; clippy zero-new.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-02. Added a scalaref-only legacy path AST (`Expr::ScalarRefPath` with mixed `{key}` / `[index]` segments) parsed only for the second positional argument of `scalaref`, so general brace expressions and normal hash literals stay on their existing paths. Runtime `scalaref` now walks hash/array values with legacy semantics: bare key atoms such as `{content}` are literal hash keys, explicit expressions such as `{scalar(k)}` / `[scalar(i)]` evaluate, and the direct-access bare-path rule remains unchanged. The engine now also contains child-return accumulator containment (`execute_child_rule`) so a child `return(...)` feeds the parent `retv` without leaking into the parent accumulator, action-edge blocks that explicitly call their child avoid duplicate pre-dispatch, and explicit aggregate-wrapper assignment (`assign(array(word), array())`, `set(hash(meta), hash(...))`) replaces the array/hash store instead of falling back to scalar assignment. Re-enabled `lispish_x_y` in `tools/gen_oracle_corpus.pl`; regenerated corpus contains 63 fixtures and `lispish_x_y` expected value `["x",["y"]]`. Focused parser/runtime checks and Rust corpus oracle pass; full commit-gate evidence is recorded below.
+  Boundary: `scalaref(...)` is restored here as legacy compatibility only; user directive 2026-07-02 says it shall be retired/removed under a separate owning task-tree migration.
+  Commit: `RUST-PARITY.7.5.2 - land Lispish scalaref parity` (see Commit Log)
 
 - ID: `RUST-PARITY.7.5.3`
   Status: `done`
@@ -237,14 +237,14 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.5` | `active` | split 2026-06-17 into `.7.5.1` (parser fix, **done**) + `.7.5.2` (scalaref) + `.7.5.3` (action-edge fluent lowering, added when `.7.5.1` proved necessary-not-sufficient for tclite) |
 | — | `RUST-PARITY.7.5.1` | `done` | header-line-regex → 0-regex parser bug fixed (2026-06-17); `(\S*)`→`([^\s/]*)`; regexes on header lines register, bracket-pairs repaired (open[0]/close[1]); 4 unit tests; 242 green; clippy zero-new. Oracle then revealed a 2nd tclite blocker → `.7.5.3` |
 | — | `RUST-PARITY.7.5.3` | `done` | action-edge fluent closure reconciled 2026-07-02 from committed `SPEC-FORMAT-TERSE.2.3.3.*` evidence; shipped `tclite` oracle fixtures are active and green |
-| 1 | `RUST-PARITY.7.5.2` | `pending` | add `{…}` hash-literal/field-accessor to `expr.rs` for `scalaref(retv, {content})` (Lispish; uses `{ }` blocks not fluent, so unaffected by `.7.5.3`); depends on `.7.5.1` (done) |
-| 2 | `RUST-PARITY.7.2` | `pending` | (blocked on `.7.5.2`) expand corpus to structurally simple specs (batch 1), authoring inputs |
-| 3 | `RUST-PARITY.7.3` | `pending` | expand corpus to remaining/harder specs (batch 2), RTLUtils-guarded |
-| 4 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 5 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 6 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.5.2` | `done` | Lispish `scalaref(retv, {content})` parity landed 2026-07-02; `lispish_x_y` is active and green in the 63-fixture corpus |
+| 1 | `RUST-PARITY.7.2` | `pending` | expand corpus to structurally simple specs (batch 1), authoring inputs |
+| 2 | `RUST-PARITY.7.3` | `pending` | expand corpus to remaining/harder specs (batch 2), RTLUtils-guarded |
+| 3 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 4 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 5 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; `.7.5.3` is closed by later terse-track implementation evidence; `.7.5.2`, `.8`, and `.9` remain.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, so `.7.2`, `.8`, and `.9` remain.)
 
 ## Decisions
 
@@ -292,6 +292,16 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   dropped, tclite no longer blocked by that surface") is therefore satisfied. The remaining `.7.5` leaf is
   `.7.5.2` for Lispish `scalaref(retv, {content})`; `.7.2`/`.7.3` remain blocked until that shipped-spec gap is
   closed.
+- `2026-07-02` (`.7.5.2` implementation): Lispish parity landed by matching the Perl-generated mechanism rather
+  than guessing from source text. TOOLBOX-generated Perl source showed block-bearing action edges with explicit
+  `call(child)` own the child dispatch inside the lowered block, `scalaref(retv, {content})` lowers to a hashref
+  field read (`$retv->{content}`), and Lispish word clearing depends on `assign(array(word), array())` replacing
+  `@word` with an empty array. Rust now parses a dedicated `ScalarRefPath` only as `scalaref`'s second positional
+  argument, evaluates legacy path segments with literal bare key/index atoms unless wrapped in an explicit value
+  expression, contains child return accumulator pushes before returning to the parent, skips automatic action-edge
+  pre-dispatch when the attached block explicitly calls the same child, and routes `assign(array(...), array())`
+  / `set(hash(...), hash(...))` through aggregate-store replacement. `lispish_x_y` is re-enabled in the oracle
+  corpus and passes with expected `["x",["y"]]`; the current corpus is 63 fixtures. Frontier → `.7.2`.
 
 ## Open Questions
 
@@ -324,6 +334,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-06-17` | `RUST-PARITY.7.1` | `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl` (generate); `cargo test --manifest-path rust/Cargo.toml` (full); `cargo clippy -p linkedspec-core -p linkedspec-runtime --tests`; `scripts/check_memory_architecture.sh` | generator syntax OK; 2 fixtures generated; `cargo test` = **238 passed / 0 failed** (237 baseline + 1 `corpus_oracle`); clippy core 10 / runtime 13 / validation.rs 4 = baseline (zero-new; `corpus_oracle.rs` clean); self-check exit 0. Oracle caught tclite/Lispish divergence (→ `.7.5`); green proof on 2 authored grammars |
 | `2026-06-17` | `RUST-PARITY.7.5.1` | `cargo test --manifest-path rust/Cargo.toml` (full, baseline 238); `cargo clippy -p linkedspec-core -p linkedspec-runtime --tests` (warning-multiset diff); `perl -c tools/gen_oracle_corpus.pl`; `scripts/check_memory_architecture.sh` | `cargo test` = **242 passed / 0 failed** (238 baseline + 4 new: 3 parser + 1 compiler header-line-regex tests; `linkedspec_core` 90→94; corpus_oracle 1 green proof — tclite re-deferred to `.7.5.3`); clippy warning multiset = baseline (linkedspec-core 10 / linkedspec-runtime 13 / validation.rs 4 — zero-new); clippy `--tests` exit-101 is pre-existing `approx_constant` in untouched `expr.rs:687`/`types_test.rs:143` (Open Questions); generator `perl -c` OK; self-check exit 0. Oracle revealed a 2nd tclite blocker (action-edge fluent lowering) → new leaf `.7.5.3` |
 | `2026-07-02` | `RUST-PARITY.7.5.3` | KM retrieval; source/corpus evidence audit; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Reconciliation slice only, no runtime code change. Existing code contains action-edge fluent parsing/compilation/runtime execution (`ActionEdge.fluent_chain`, `AcodeEntry.fluent_chain`, `execute_action_edge_fluent_chain`), and `tools/gen_oracle_corpus.pl` plus the checked-in corpus contain active `tclite_command_subst` and `tclite_double_quote` fixtures. Rust `corpus_oracle` passes on the current **62-fixture** corpus; full local CI remains green. Frontier → `.7.5.2` |
+| `2026-07-02` | `RUST-PARITY.7.5.2` | TOOLBOX Perl generated-source probes; `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Lispish `scalaref(retv, {content})` parity landed and `lispish_x_y` is active. Focused parser/runtime checks and 63-fixture corpus oracle pass; full gate evidence is recorded in the commit workflow. Frontier → `.7.2` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -382,6 +393,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.1` | `RUST-PARITY.7.1 — Perl↔Rust output-oracle mechanism + green first proof` | new `tools/gen_oracle_corpus.pl` (timeout-guarded Perl generator) + `rust/linkedspec-runtime/tests/corpus_oracle.rs` runner + `tests/corpus/` (2 authored proof fixtures + README); oracle caught tclite/Lispish divergence → new leaf `.7.5`; 238/238 green; knowledge card |
 | `RUST-PARITY.7.5.1` | `RUST-PARITY.7.5.1 — fix the header-line-regex → 0-regex parser bug in the Rust variant` | parser.rs:86 `(\S*)`→`([^\s/]*)`; header-line regexes now register, bracket-pairs repaired (open[0]/close[1]); 4 unit tests (3 parser + 1 compiler); 242/242 green; clippy zero-new. Oracle revealed a 2nd tclite blocker (action-edge fluent lowering) → new leaf `.7.5.3`; tclite oracle cases re-deferred |
 | `RUST-PARITY.7.5.3` | `RUST-PARITY.7.5.3 - reconcile action-edge fluent closure` | no runtime code change; closes stale parity leaf against `SPEC-FORMAT-TERSE.2.3.3.*` implementation evidence, active `tclite_*` oracle fixtures, and current 62-fixture corpus oracle |
+| `RUST-PARITY.7.5.2` | `RUST-PARITY.7.5.2 - land Lispish scalaref parity` | expr.rs `ScalarRefPath` parser hook + runtime legacy scalaref path evaluation, child-return accumulator containment, explicit action-block call compatibility, aggregate-wrapper assignment replacement, active `lispish_x_y` fixture; 63-fixture corpus oracle green |
 
 ## Changelog
 
@@ -407,3 +419,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   executed by the current Rust parser/compiler/runtime, the shipped `tclite_command_subst` and
   `tclite_double_quote` fixtures are active in the oracle corpus, and the current corpus oracle passes over 62
   fixtures. Frontier → `.7.5.2` (Lispish `scalaref(retv, {content})`).
+- `2026-07-02`: `.7.5.2` done — Lispish `scalaref(retv, {content})` parity landed. Rust now has a scoped legacy
+  `scalaref` path parser/evaluator, child-return accumulator containment, explicit action-edge block `call(child)`
+  compatibility, and aggregate-wrapper assignment replacement needed by `assign(array(word), array())`. The
+  `lispish_x_y` oracle case is active and green; corpus oracle passes over **63 fixtures**. Frontier → `.7.2`.

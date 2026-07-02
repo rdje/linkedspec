@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **RUST-PARITY.7.5.2 — Lispish scalaref parity landed**
+  (RUST CORE + RUST RUNTIME + ORACLE + BOOK/KM/LIVE DOCS).
+  Rust now parses Lispish's legacy `scalaref(retv, {content})` path only in `scalaref`'s second positional
+  argument and evaluates mixed key/index paths against hashes and arrays. Child-return accumulator pushes are
+  contained at child invocation boundaries, attached action blocks that explicitly call their child avoid duplicate
+  dispatch, and explicit aggregate-wrapper assignment replaces array/hash working stores.
+
+  The `lispish_x_y` shipped-spec fixture is active again and expects `["x",["y"]]`; the Rust corpus oracle now
+  passes over **63 fixtures**. `scalaref(...)` and the existing Perl-shaped hash literal spelling are legacy
+  compatibility surfaces restored here only for parity; retirement/removal is a separate owned migration leaf.
+
+  **Verification:** focused Rust parser/runtime `.7.5.2` checks PASS; `retv_5_1` checks PASS; oracle generator
+  syntax/regeneration PASS; Rust corpus oracle PASS over 63 fixtures; mdBook, Knowledge Map, memory/doctrine/diff
+  checks, and full local CI PASS.
+
+  **Frontier:** `RUST-PARITY.7.2` — expand the structurally simple oracle corpus batch.
+
 - 2026-07-02: **RUST-PARITY.7.5.3 — action-edge fluent closure reconciled**
   (TASK TREE + CORPUS README + ROADMAP/LIVE DOCS + KM; **no runtime behavior change**).
   The stale Rust parity frontier is now closed against committed evidence: `SPEC-FORMAT-TERSE.2.3.3.1` added

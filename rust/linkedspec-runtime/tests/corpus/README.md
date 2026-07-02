@@ -48,3 +48,8 @@ enumerate-all-fixtures drift guard.
 Rust default-mode recursive repetition and child-preamble-return gap was fixed. The
 committed corpus includes `tclite_command_subst` (`[]`) and `tclite_double_quote` (`""`),
 and both now pass with the tagged Perl-reference `tcl_script` values.
+
+`RUST-PARITY.7.5.2` restored the minimal shipped `Lispish.spec` fixture after Rust gained
+the legacy `scalaref(retv, {content})` path semantics, child-return containment, and the
+Lispish aggregate-wrapper assignment behavior. The committed corpus includes `lispish_x_y`
+(`(x y)`), whose Perl reference value is `["x",["y"]]`; the corpus now has 63 fixtures.

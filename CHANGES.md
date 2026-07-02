@@ -1,6 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — RUST-PARITY.7.5.2 — land Lispish scalaref parity
+
+**Scope:** Rust expression parser, Rust runtime, focused parser/runtime locks, oracle generator/corpus,
+task-tree/live docs, mdBook backend handoff, and Knowledge Map.
+
+**What changed:** Rust now parses the legacy `scalaref(base, path)` path surface needed by Lispish, scoped to
+`scalaref`'s second positional argument so general brace expressions and hash literals keep their existing
+behavior. Runtime `scalaref` walks mixed hash-key and array-index path segments; bare legacy path atoms such as
+`{content}` are literal field names, while explicit scalar/helper expressions still evaluate.
+
+**Runtime parity fixes:** Child rule returns are now contained when used through parent dispatch/call paths, so a
+child `return(...)` feeds the parent-visible return value without leaking the child's accumulator pushes into the
+parent output. Action-edge blocks that explicitly call their child avoid duplicate pre-dispatch, matching the
+generated Perl pattern used by Lispish. Explicit aggregate-wrapper assignment now replaces the array/hash working
+store, so forms such as `assign(array(word), array())` clear the working array instead of falling back to scalar
+assignment.
+
+**Corpus:** The `lispish_x_y` shipped-spec fixture is active again. Oracle regeneration now produces **63
+fixtures**, and the Rust corpus oracle passes over the expanded corpus.
+
+**Compatibility boundary:** This is a parity slice for the existing shipped surface, not a language-design rewrite.
+`scalaref(...)` and the Perl-shaped hash literal spelling are legacy compatibility surfaces restored here only so
+Rust matches shipped Lispish behavior. They are slated for retirement/removal under a separate task-tree-owned
+parser/lowering/spec/docs migration.
+
+**Checks:** Focused Rust parser/runtime checks, `retv_5_1` regression checks, Perl oracle generator syntax and
+regeneration, Rust corpus oracle, mdBook build, Knowledge Map regenerate/check, memory architecture, doctrine
+registry, `git diff --check`, and full local CI passed.
+
 ## 2026-07-02 — RUST-PARITY.7.5.3 — reconcile action-edge fluent closure
 
 **Scope:** Rust parity task-tree reconciliation, corpus README drift fix, roadmap/live status repair, and

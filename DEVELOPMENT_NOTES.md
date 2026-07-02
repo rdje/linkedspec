@@ -1,6 +1,23 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (RUST-PARITY.7.5.2 — Lispish scalaref parity):
+  Lispish is now active in the Rust oracle corpus. Durable points. (1) **Scoped legacy parser hook.** Rust adds
+  `Expr::ScalarRefPath` only for `scalaref`'s second positional argument, preserving the existing meaning of
+  ordinary brace expressions and hash literals. Bare path atoms such as `{content}` are literal legacy field
+  names; explicit expressions such as `{scalar(k)}` and `[scalar(i)]` still evaluate. (2) **Return containment.**
+  Child dispatch and `call(child)` now route child returns through the return channel without leaking child
+  accumulator events into the parent accumulator. This updates the old `.5.1` additive-return model for child
+  invocation boundaries while preserving top-level `execute()` accumulator output. (3) **Lispish action shape.**
+  Generated Perl for Lispish uses action blocks that call the child inside the block, so Rust now skips automatic
+  pre-dispatch when an attached action block explicitly calls the same child. (4) **Aggregate wrapper assignment.**
+  `assign(array(word), array())` and matching hash wrapper assignments replace the aggregate working store rather
+  than scalarizing the RHS. (5) **Compatibility boundary.** `scalaref(...)` and the existing Perl-shaped hash
+  literal spelling are restored here only for shipped-surface Rust parity; both are legacy compatibility surfaces
+  slated for retirement/removal under a separate task-tree-owned migration. The oracle corpus is now 63 fixtures,
+  including `lispish_x_y`.
+  Next frontier: `RUST-PARITY.7.2`.
+
 - 2026-07-02 (RUST-PARITY.7.5.3 — action-edge fluent closure reconciliation):
   No Rust runtime code was needed for this slice. Durable points. (1) **Closure evidence.**
   `SPEC-FORMAT-TERSE.2.3.3.1` added action-edge fluent metadata and no-arg `.push` / `.return(...)` /

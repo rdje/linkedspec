@@ -32,7 +32,7 @@
 
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::RuntimeContext;
-use linkedspec_core::expr::AccessSegment;
+use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr, ScalarRefPathSegment};
 use linkedspec_core::types::{CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue};
 use serde_json::Value;
 
@@ -228,6 +228,18 @@ impl Engine {
         result
     }
 
+    fn execute_child_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let accumulator_len = ctx.accumulator.len();
+        let child_retv = self.execute_rule(label, entry_regex_idx, ctx)?;
+        ctx.accumulator.truncate(accumulator_len);
+        Ok(child_retv)
+    }
+
     /// The rule body, wrapped by [`execute_rule`] (which adds the recursion
     /// termination guard). All recursive dispatch goes through `execute_rule`,
     /// never directly through this method.
@@ -305,7 +317,7 @@ impl Engine {
                 // Execute child rule; its return value becomes the parent's
                 // `retv` (Runtime Semantics §6.2), readable by the attached
                 // code, fluent chain, and the E-block below.
-                let child_retv = self.execute_rule(&entry.child_label, 0, ctx)?;
+                let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
                 ctx.set_retv(child_retv);
                 // Execute attached code if present
                 if let Some(ref block) = entry.code {
@@ -411,16 +423,36 @@ impl Engine {
                 for entry in &rule.acode_dispatch {
                     if entry.regex_idx == m.index {
                         if entry.fluent_chain.is_empty() {
-                            // Use child_regex_idx for multi-entrypoint support.
-                            // The child's return value becomes the parent's `retv`
-                            // (Runtime Semantics §3.3 / §6.1), readable by the
-                            // attached code below and the LE-block after the loop.
-                            let child_retv =
-                                self.execute_rule(&entry.child_label, entry.child_regex_idx, ctx)?;
-                            ctx.set_retv(child_retv);
-                            // Execute attached code if present
                             if let Some(ref block) = entry.code {
-                                self.execute_block(block, ctx, label)?;
+                                if Self::block_calls_rule(block, &entry.child_label) {
+                                    // Perl block-bearing action edges own their
+                                    // explicit child call inside the lowered
+                                    // block (`call(child)` becomes the child
+                                    // handler call). Do not pre-dispatch the
+                                    // same child or legacy recursive specs such
+                                    // as Lispish consume it twice.
+                                    self.execute_block(block, ctx, label)?;
+                                } else {
+                                    // Use child_regex_idx for multi-entrypoint
+                                    // support. The child's return value becomes
+                                    // the parent's `retv` (Runtime Semantics
+                                    // §3.3 / §6.1), readable by the attached
+                                    // code below and the LE-block after the loop.
+                                    let child_retv = self.execute_child_rule(
+                                        &entry.child_label,
+                                        entry.child_regex_idx,
+                                        ctx,
+                                    )?;
+                                    ctx.set_retv(child_retv);
+                                    self.execute_block(block, ctx, label)?;
+                                }
+                            } else {
+                                let child_retv = self.execute_child_rule(
+                                    &entry.child_label,
+                                    entry.child_regex_idx,
+                                    ctx,
+                                )?;
+                                ctx.set_retv(child_retv);
                             }
                         } else if self.execute_action_edge_fluent_chain(entry, ctx, label)?
                             == ActionEdgeFlow::Returned
@@ -495,6 +527,72 @@ impl Engine {
         ctx.restore_return_value(caller_return);
         saved_match.restore(ctx);
         Ok(my_return)
+    }
+
+    fn block_calls_rule(block: &CodeBlock, rule_label: &str) -> bool {
+        block
+            .statements
+            .iter()
+            .any(|stmt| Self::expr_calls_rule(&stmt.expr, rule_label))
+    }
+
+    fn expr_calls_rule(expr: &Expr, rule_label: &str) -> bool {
+        match expr {
+            Expr::Call { name, args } => {
+                (name == "call" && Self::call_names_rule(args, rule_label))
+                    || args.iter().any(|arg| Self::arg_calls_rule(arg, rule_label))
+            }
+            Expr::AssignScalar { value, .. } => Self::expr_calls_rule(value, rule_label),
+            Expr::AssignArrayAppend { value, .. } => Self::expr_calls_rule(value, rule_label),
+            Expr::AssignHashIndex { key, value, .. } => {
+                Self::expr_calls_rule(key, rule_label) || Self::expr_calls_rule(value, rule_label)
+            }
+            Expr::IndexedVar { index, .. } => Self::expr_calls_rule(index, rule_label),
+            Expr::NestedAccess { segments, .. } => segments.iter().any(|segment| match segment {
+                AccessSegment::Key { .. } => false,
+                AccessSegment::Index { expr } => Self::expr_calls_rule(expr, rule_label),
+            }),
+            Expr::ScalarRefPath { segments } => segments.iter().any(|segment| match segment {
+                ScalarRefPathSegment::Key { expr } | ScalarRefPathSegment::Index { expr } => {
+                    Self::expr_calls_rule(expr, rule_label)
+                }
+            }),
+            Expr::ArrayLiteral { items } => items
+                .iter()
+                .any(|item| Self::expr_calls_rule(item, rule_label)),
+            Expr::HashLiteral { entries } => entries.iter().any(|entry| {
+                Self::expr_calls_rule(&entry.key, rule_label)
+                    || Self::expr_calls_rule(&entry.value, rule_label)
+            }),
+            Expr::BlockValue { block } => Self::block_calls_rule(block, rule_label),
+            Expr::FluentChain { receiver, calls } => {
+                Self::expr_calls_rule(receiver, rule_label)
+                    || calls.iter().any(|call| {
+                        call.args
+                            .iter()
+                            .any(|arg| Self::arg_calls_rule(arg, rule_label))
+                    })
+            }
+            Expr::Variable { .. }
+            | Expr::StringLiteral { .. }
+            | Expr::NumberLiteral { .. }
+            | Expr::BooleanLiteral { .. }
+            | Expr::RegexLiteral { .. }
+            | Expr::Undef => false,
+        }
+    }
+
+    fn arg_calls_rule(arg: &Arg, rule_label: &str) -> bool {
+        Self::expr_calls_rule(arg.value(), rule_label)
+    }
+
+    fn call_names_rule(args: &[Arg], rule_label: &str) -> bool {
+        match args.first().map(Arg::value) {
+            Some(Expr::Variable { name }) | Some(Expr::StringLiteral { value: name }) => {
+                name == rule_label
+            }
+            _ => false,
+        }
     }
 
     fn execute_action_edge_fluent_chain(
@@ -624,9 +722,7 @@ impl Engine {
             }
         };
 
-        let accumulator_len = ctx.accumulator.len();
-        let child_retv = self.execute_rule(&child_label, child_regex_idx, ctx)?;
-        ctx.accumulator.truncate(accumulator_len);
+        let child_retv = self.execute_child_rule(&child_label, child_regex_idx, ctx)?;
         ctx.set_retv(child_retv.clone());
         ctx.push_value(&target_label, child_retv);
         Ok(())
@@ -1147,6 +1243,51 @@ impl Engine {
         }
     }
 
+    fn aggregate_wrapper_assignment_target(
+        raw_target: &linkedspec_core::expr::Arg,
+        value: &RuntimeValue,
+    ) -> Option<(ShapeLiteralKind, String)> {
+        use linkedspec_core::expr::{Arg, Expr};
+        let Arg::Positional(Expr::Call { name, args }) = raw_target else {
+            return None;
+        };
+        if args.len() != 1 {
+            return None;
+        }
+        let Arg::Positional(Expr::Variable { name: target }) = &args[0] else {
+            return None;
+        };
+        match (name.as_str(), value) {
+            ("array", RuntimeValue::Array(_)) => Some((ShapeLiteralKind::Array, target.clone())),
+            ("hash", RuntimeValue::Hash(_)) => Some((ShapeLiteralKind::Hash, target.clone())),
+            _ => None,
+        }
+    }
+
+    fn store_aggregate_assignment(
+        target: &str,
+        kind: ShapeLiteralKind,
+        value: RuntimeValue,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        match (kind, value) {
+            (ShapeLiteralKind::Array, RuntimeValue::Array(values)) => {
+                let stored = RuntimeValue::Array(values.clone());
+                ctx.set_array(target, values);
+                Ok(stored)
+            }
+            (ShapeLiteralKind::Hash, RuntimeValue::Hash(values)) => {
+                let stored = RuntimeValue::Hash(values.clone());
+                ctx.set_hash(target, values);
+                Ok(stored)
+            }
+            (_, other) => Err(format!(
+                "aggregate assignment evaluated to unexpected value kind: {:?}",
+                other
+            )),
+        }
+    }
+
     /// Evaluate an expression tree against the runtime context.
     fn eval_expr(
         &self,
@@ -1254,6 +1395,9 @@ impl Engine {
                     values.push((key, value));
                 }
                 Ok(RuntimeValue::Hash(values))
+            }
+            Expr::ScalarRefPath { segments } => {
+                Ok(RuntimeValue::Scalar(Self::format_scalaref_path(segments)))
             }
             Expr::BlockValue { block } => self.eval_block_value(block, ctx, rule_label),
             Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
@@ -2218,6 +2362,104 @@ impl Engine {
         evaluated
     }
 
+    fn scalaref_container_arg(
+        &self,
+        raw_args: &[linkedspec_core::expr::Arg],
+        args: &[RuntimeValue],
+        index: usize,
+        ctx: &RuntimeContext,
+        first_segment: Option<&ScalarRefPathSegment>,
+    ) -> RuntimeValue {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
+        if matches!(evaluated, RuntimeValue::Array(_) | RuntimeValue::Hash(_)) {
+            return evaluated;
+        }
+
+        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
+            return match first_segment {
+                Some(ScalarRefPathSegment::Index { .. }) => {
+                    RuntimeValue::Array(ctx.array_copy(name))
+                }
+                _ => RuntimeValue::Hash(ctx.hash_copy(name)),
+            };
+        }
+
+        evaluated
+    }
+
+    fn format_scalaref_path(segments: &[ScalarRefPathSegment]) -> String {
+        let mut path = String::new();
+        for segment in segments {
+            match segment {
+                ScalarRefPathSegment::Key { expr } => {
+                    path.push('{');
+                    path.push_str(&expr.to_string());
+                    path.push('}');
+                }
+                ScalarRefPathSegment::Index { expr } => {
+                    path.push('[');
+                    path.push_str(&expr.to_string());
+                    path.push(']');
+                }
+            }
+        }
+        path
+    }
+
+    fn eval_scalaref_path(
+        &self,
+        base: RuntimeValue,
+        segments: &[ScalarRefPathSegment],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let mut current = base;
+        for segment in segments {
+            current = match segment {
+                ScalarRefPathSegment::Key { expr } => {
+                    let key = self
+                        .eval_scalaref_path_atom(expr, ctx, rule_label)?
+                        .to_str();
+                    match current {
+                        RuntimeValue::Hash(entries) => entries
+                            .into_iter()
+                            .find(|(entry_key, _)| entry_key == &key)
+                            .map(|(_, value)| value)
+                            .unwrap_or(RuntimeValue::Undef),
+                        _ => RuntimeValue::Undef,
+                    }
+                }
+                ScalarRefPathSegment::Index { expr } => {
+                    let idx_value = self.eval_scalaref_path_atom(expr, ctx, rule_label)?;
+                    let idx = idx_value.as_number().unwrap_or(0.0) as usize;
+                    match current {
+                        RuntimeValue::Array(items) => {
+                            items.get(idx).cloned().unwrap_or(RuntimeValue::Undef)
+                        }
+                        _ => RuntimeValue::Undef,
+                    }
+                }
+            };
+        }
+        Ok(current)
+    }
+
+    fn eval_scalaref_path_atom(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::Expr;
+
+        match expr {
+            Expr::Variable { name } => Ok(RuntimeValue::Scalar(name.clone())),
+            other => self.eval_expr(other, ctx, rule_label),
+        }
+    }
+
     /// Resolve a child rule name from the first arg of a `call(...)` helper.
     ///
     /// A bare `call(RuleName)` names the target rule directly — its evaluated
@@ -2327,28 +2569,26 @@ impl Engine {
             }
             "assign" | "set" | "=" => {
                 if args.len() >= 2 {
+                    if let Some((kind, target)) =
+                        Self::aggregate_wrapper_assignment_target(&raw_args[0], &args[1])
+                    {
+                        return Self::store_aggregate_assignment(
+                            &target,
+                            kind,
+                            args[1].clone(),
+                            ctx,
+                        );
+                    }
                     if let Some(kind) = Self::direct_shape_literal_kind(raw_args[1].value()) {
                         if let Some(target) =
                             Self::direct_shape_assignment_target(&raw_args[0], kind)
                         {
-                            match (kind, args[1].clone()) {
-                                (ShapeLiteralKind::Array, RuntimeValue::Array(values)) => {
-                                    let stored = RuntimeValue::Array(values.clone());
-                                    ctx.set_array(&target, values);
-                                    return Ok(stored);
-                                }
-                                (ShapeLiteralKind::Hash, RuntimeValue::Hash(values)) => {
-                                    let stored = RuntimeValue::Hash(values.clone());
-                                    ctx.set_hash(&target, values);
-                                    return Ok(stored);
-                                }
-                                (_, other) => {
-                                    return Err(format!(
-                                        "direct shape literal evaluated to unexpected value kind: {:?}",
-                                        other
-                                    ));
-                                }
-                            }
+                            return Self::store_aggregate_assignment(
+                                &target,
+                                kind,
+                                args[1].clone(),
+                                ctx,
+                            );
                         }
                         let target = self.resolve_scalar_target(raw_args, &args[0]);
                         ctx.set_scalar(&target, args[1].clone());
@@ -2469,7 +2709,7 @@ impl Engine {
                 // name comes from the raw arg (a bare label is not a scalar).
                 let child = self.resolve_rule_name(raw_args, args.first());
                 if !child.is_empty() {
-                    let child_retv = self.execute_rule(&child, 0, ctx)?;
+                    let child_retv = self.execute_child_rule(&child, 0, ctx)?;
                     return Ok(child_retv);
                 }
                 Ok(RuntimeValue::Undef)
@@ -3815,12 +4055,21 @@ impl Engine {
             }
             "scalaref" => {
                 if args.len() >= 2 {
-                    let path = args[1].to_str();
-                    // Walk: container{path} → scalar
+                    use linkedspec_core::expr::Expr;
+
+                    if let Some(Expr::ScalarRefPath { segments }) =
+                        raw_args.get(1).map(|arg| arg.value())
+                    {
+                        let base =
+                            self.scalaref_container_arg(raw_args, args, 0, ctx, segments.first());
+                        return self.eval_scalaref_path(base, segments, ctx, rule_label);
+                    }
+
+                    let key = args[1].to_str();
                     match self.hash_consuming_arg(raw_args, args, 0, ctx) {
                         RuntimeValue::Hash(entries) => Ok(entries
                             .iter()
-                            .find(|(k, _)| k == &path)
+                            .find(|(k, _)| k == &key)
                             .map(|(_, v)| v.clone())
                             .unwrap_or(RuntimeValue::Undef)),
                         _ => Ok(RuntimeValue::Undef),

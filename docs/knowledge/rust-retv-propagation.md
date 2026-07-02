@@ -8,25 +8,30 @@ answers:
   - "what does execute_rule return in the Rust engine"
   - "how does return(expr) work in the Rust runtime vs the accumulator"
   - "how does call(child) resolve a rule name in Rust"
-date: 2026-06-16
+  - "does child return leak into the parent accumulator in Rust"
+  - "how does Rust contain child accumulator pushes"
+date: 2026-07-02
 status: confirmed
 tags: [rust, engine, runtime, retv, dispatch, RUST-PARITY]
-evidence: "RUST-PARITY.5.1 (2026-06-16): rust/linkedspec-runtime/src/engine.rs execute_rule + acode/bcode dispatch + return/call helpers; rust/linkedspec-runtime/src/runtime.rs return_value channel + set_retv. Matches book appendix/runtime-semantics.md §3.3/§5.4/§6.1. 186/186 tests green."
+evidence: "RUST-PARITY.5.1 (2026-06-16): rust/linkedspec-runtime/src/engine.rs execute_rule + acode/bcode dispatch + return/call helpers; rust/linkedspec-runtime/src/runtime.rs return_value channel + set_retv. Matches book appendix/runtime-semantics.md §3.3/§5.4/§6.1. 186/186 tests green. RUST-PARITY.7.5.2 (2026-07-02): execute_child_rule contains child accumulator pushes after dispatch/call while preserving child return values for retv/call results; focused rust_parity_7_5_2 and retv_5_1 tests pass."
 reverify: "cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'set_retv\\|return_value\\|fn execute_rule' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs"
 ---
 
 # Rust Engine: Child-Return (`retv`) Propagation
 
-**Confirmed 2026-06-16 (RUST-PARITY.5.1).** Fixes the audit's top BLOCKER: before this,
-`scalar(retv)` resolved to undef after `->`/`=>` dispatch, so nearly every grammar produced
-null/wrong output.
+**Confirmed 2026-06-16 (RUST-PARITY.5.1); updated 2026-07-02
+(RUST-PARITY.7.5.2).** Fixes the audit's top BLOCKER: before `.5.1`, `scalar(retv)`
+resolved to undef after `->`/`=>` dispatch, so nearly every grammar produced null/wrong
+output. `.7.5.2` then corrected the child-invocation accumulator boundary exposed by
+Lispish.
 
 ## The model
 
 The Rust runtime interprets against **one shared `RuntimeContext`** for the whole parse (a
-single scalars/arrays/accumulator map — there is no per-rule variable scope yet). A rule's
-result is modeled as pushes onto the single shared `ctx.accumulator`, which `execute()`
-returns as the top-level JSON.
+single scalars/arrays map — there is no per-rule variable scope yet). `execute()` returns
+the top-level accumulator. A rule's own `return(expr)` records a return channel value and
+pushes to the current invocation accumulator; child invocation boundaries now remove those
+child pushes from the parent accumulator after dispatch/call.
 
 ## How `retv` works now
 
@@ -39,9 +44,12 @@ returns as the top-level JSON.
 3. After both `->` (acode) and `=>` (bcode) dispatch, the engine calls
    `ctx.set_retv(child_retv)`, so the parent's attached code / `LE` / `E` read the child's
    result as `scalar(retv)` (Runtime Semantics §3.3 / §6.1).
-4. `return(expr)` records the channel **and** still pushes the accumulator — the accumulator
-   is `execute()`'s return contract, so this is purely additive and the 182-test baseline is
-   unchanged. `execute()` still returns `ctx.accumulator`, **not** the new channel.
+4. `return(expr)` records the channel **and** still pushes the current invocation
+   accumulator. `execute()` still returns `ctx.accumulator`, **not** the channel.
+5. Child dispatch and `call(child)` route through `execute_child_rule`, which snapshots the
+   accumulator length, runs the child, then truncates the accumulator back to the parent
+   length. The child's return value is still returned and stored in `retv`; only the child's
+   accumulator events are contained.
 
 ## Gotcha: `call(child)` rule-name resolution
 

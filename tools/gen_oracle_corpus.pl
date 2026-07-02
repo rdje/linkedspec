@@ -77,10 +77,8 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 #   the entry regex. The two minimal tclite fixtures below are active shipped-spec
 #   coverage for that parity.
 #
-#   Lispish (→ RUST-PARITY.7.5.2): uses `{ code }` blocks on its edges (not the
-#   fluent form), so it only needs the `scalaref(retv, {content})` hashref-field
-#   accessor parsed (expr.rs has no `{` case).
-#     { case => 'lispish_x_y',          spec => 'Lispish', input => '(x y)' },
+#   Lispish: RUST-PARITY.7.5.2 closes the remaining Rust blocker by parsing and
+#   evaluating the legacy `scalaref(retv, {content})` hashref-field accessor.
 # See docs/knowledge/rust-perl-output-oracle.md.
 # The proof grammars use the parent→child dispatch form (`Parent:: /re/ -> Child
 # { ... }`) — a lone rule with top-level blocks returns 0 in the Perl reference
@@ -965,6 +963,8 @@ SPEC
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
+    # ── RUST-PARITY.7.5.2 — shipped Lispish scalaref path parity ──
+    { case => 'lispish_x_y', spec => 'Lispish', input => '(x y)' },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

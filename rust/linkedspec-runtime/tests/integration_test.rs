@@ -1889,6 +1889,46 @@ fn terse_2_3_4_1_hash_consumers_accept_bare_hash_arg() {
 }
 
 #[test]
+fn rust_parity_7_5_2_scalaref_legacy_path_reads_child_retval_field() {
+    let grammar = "Top::\n /x/ -> Done { return(scalaref(retv, {content})) }\n\nDone::\n /[a-z]+/ I.return(hash(\"content\", entry_text()))\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["x"]),
+        "scalaref(retv, {{content}}) reads a literal hash field from the child return value"
+    );
+}
+
+#[test]
+fn rust_parity_7_5_2_scalaref_legacy_path_walks_nested_arrays_and_hashes() {
+    let grammar = "Top::\n /x/ -> Done { set(i, 1); return(scalaref(retv, {children}[scalar(i)]{name})) }\n\nDone::\n /[a-z]+/ I.return(hash(\"children\", array(hash(\"name\", \"zero\"), hash(\"name\", entry_text()))))\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["x"]),
+        "legacy scalaref paths walk hash keys and explicit scalar array indexes"
+    );
+}
+
+#[test]
+fn rust_parity_7_5_2_assign_array_wrapper_replaces_array_value() {
+    let grammar = "Top::\n /x/ -> Done { push_value(array(word), \"x\"); assign(array(word), array()); push_value(array(word), \"y\"); return(array_copy(array(word))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["y"]]),
+        "assign(array(name), array()) replaces the working array instead of assigning a scalar"
+    );
+}
+
+#[test]
+fn rust_parity_7_5_2_set_hash_wrapper_replaces_hash_value() {
+    let grammar = "Top::\n /x/ -> Done { set_key(hash(meta), \"old\", \"x\"); set(hash(meta), hash(\"new\", \"y\")); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([{"new": "y"}]),
+        "set(hash(name), hash(...)) replaces the working hash instead of assigning a scalar"
+    );
+}
+
+#[test]
 fn terse_2_3_4_1_array_consumers_accept_bare_array_arg() {
     let grammar = "Top::\n /x/ -> Done { items += \"b\"; items += \"a\"; nums += 1; nums += 2; extra += \"c\"; return(array(sorted(items), reversed(items), first(items), last(items), take(items, 1), take_last(items, 1), drop_front(items), drop_back(items), slice(items, 1, 1), contains(items, \"a\"), index_of(items, \"a\"), num_sum(nums), flat_array(items, extra))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
