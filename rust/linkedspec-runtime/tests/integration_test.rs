@@ -2023,6 +2023,123 @@ fn terse_3_2_1_numeric_word_aliases_run() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
+
+#[test]
+fn terse_4_3_2_user_function_value_calls_run() {
+    let grammar = r#"fn normalize(value) { return(trim(value)) }
+fn bracket(value) { return(cat("[", value, "]")) }
+Top::
+ /x/ -> Done { return(array(normalize(" x "), bracket(normalize(" y ")))) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["x", "[y]"]]),
+        "registered user functions execute as ordinary value calls"
+    );
+}
+
+#[test]
+fn terse_4_3_2_user_function_scope_is_local() {
+    let grammar = r#"fn shadow(value) { set(value, "function"); set(extra, "hidden"); return(value) }
+Top::
+ /x/ -> Done { set(value, "caller"); return(array(shadow("arg"), value, extra)) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["function", "caller", null]]),
+        "function-local variables and params do not leak into the caller"
+    );
+}
+
+#[test]
+fn terse_4_3_2_user_function_receiver_chains_continue_by_returned_type() {
+    let grammar = r#"fn words(value) { return([trim(value), uppercase(trim(value))]) }
+fn meta() { return({ "b" => 2, "a" => 1 }) }
+Top::
+ /x/ -> Done { return(array(words(" go ").join_values("|"), words(" a ").count(), meta().sorted_keys().join_values(","))) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["go|GO", 2, "a,b"]]),
+        "returned arrays and hashes feed compatible receiver-dot value chains"
+    );
+}
+
+#[test]
+fn terse_4_3_2_user_function_standalone_results_are_discarded() {
+    let grammar = r#"fn touch(value) { set(scratch, cat(value, "!")); return(scratch) }
+Top::
+ /x/ -> Done { touch("drop"); touch("X").lowercase(); return(array("ok", scratch)) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["ok", null]]),
+        "standalone user-function calls execute and discard their return values"
+    );
+}
+
+#[test]
+fn terse_4_3_2_user_function_wrong_arity_diagnoses() {
+    let grammar = r#"fn one(value) { return(value) }
+Top::
+ /x/ -> Done { return(one()) }
+
+Done::
+ /[a-z]+/
+"#;
+    let err = build_and_run_result(grammar, "xhello").unwrap_err();
+    assert!(
+        err.contains("user function 'one' expects 1 argument(s), got 0"),
+        "expected exact-arity diagnostic, got: {err}"
+    );
+}
+
+#[test]
+fn terse_4_3_2_user_function_recursion_diagnoses() {
+    let grammar = r#"fn loop(value) { return(loop(value)) }
+Top::
+ /x/ -> Done { return(loop("x")) }
+
+Done::
+ /[a-z]+/
+"#;
+    let err = build_and_run_result(grammar, "xhello").unwrap_err();
+    assert!(
+        err.contains("recursive user function call 'loop' is not supported"),
+        "expected recursion diagnostic, got: {err}"
+    );
+}
+
+#[test]
+fn terse_4_3_2_user_function_mutual_recursion_diagnoses() {
+    let grammar = r#"fn left(value) { return(right(value)) }
+fn right(value) { return(left(value)) }
+Top::
+ /x/ -> Done { return(left("x")) }
+
+Done::
+ /[a-z]+/
+"#;
+    let err = build_and_run_result(grammar, "xhello").unwrap_err();
+    assert!(
+        err.contains("recursive user function call 'left' is not supported"),
+        "expected mutual-recursion diagnostic, got: {err}"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.3.5.5 — block-valued receiver-dot chains:
 
 #[test]

@@ -362,7 +362,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { return(copy(h(m))) }
+ /x/ -> Done { return(copy(hash(m))) }
 
 Done::
  /[a-z]+/
@@ -788,6 +788,23 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
+    #
+    # Registered calls execute as values, standalone calls discard their result,
+    # function-local variables stay local, and returned arrays feed compatible
+    # receiver-dot chains.
+    {   case   => 'terse_4_3_2_user_function_runtime',
+        input  => 'xhello',
+        source => <<'SPEC',
+fn normalize(value) { return(trim(scalar(value))) }
+fn words(value) { set(scratch, trim(scalar(value))); return([scalar(scratch), uppercase(scalar(scratch))]) }
+Top::
+ /x/ -> Done { normalize(" drop "); return(array(normalize(" x "), words(" go ").join_values("|"), words(" a ").count(), scalar(scratch))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.5.5 — block-valued receiver-dot chains ──
     #
     # Expression-valued blocks can be receivers for the same compatible
@@ -813,7 +830,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { items += "a"; items += "b"; set_key(meta, "a", 1); set_key(meta, "b", 2); return(array(count(array(items)), count(array("items")), count(array('items')), count(a(items)), count(a("items")), count(["items"]), count(array("literal", "value")), count_keys(hash(meta)), count_keys(hash("meta", 1)), count_keys(hash('meta', 1)), count_keys({ "meta" => 1 }), count_keys(h(meta)), count_keys(h("meta", 1)))) }
+ /x/ -> Done { items += "a"; items += "b"; set_key(meta, "a", 1); set_key(meta, "b", 2); return(array(count(array(items)), count(array("items")), count(array('items')), count(array(items)), count(array("items")), count(["items"]), count(array("literal", "value")), count_keys(hash(meta)), count_keys(hash("meta", 1)), count_keys(hash('meta', 1)), count_keys({ "meta" => 1 }), count_keys(hash(meta)), count_keys(hash("meta", 1)))) }
 
 Done::
  /[a-z]+/

@@ -87,11 +87,12 @@ same registry as canonical `VALUE_DROP` statements, so the call value is compute
 discarded without raw fallback. Recursion and unsupported function-body forms are fenced
 as unresolved-helper diagnostics.
 
-The Rust backend now implements the parse/compile half of this stage: it extracts
+The Rust backend implements the same stage end to end for the MVP surface: it extracts
 top-level function definitions into `SpecFile.functions`, validates their names and
-params before runtime, and compiles bodies into `CompiledUserFunction` records with
-parsed `CodeBlock` bodies. Rust runtime call resolution is still the follow-on parity
-stage.
+params before runtime, compiles bodies into `CompiledUserFunction` records with parsed
+`CodeBlock` bodies, resolves registered calls before helper fallback, executes them in
+fresh function-local stores, and lets returned values continue through compatible
+receiver-dot chains. Standalone registered calls execute and discard their result.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

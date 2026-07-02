@@ -74,9 +74,10 @@ argument first, binds it to the function's parameter in a fresh function-local s
 returns the body result. A standalone `normalize(" x ")` computes that value and discards it
 through the canonical `VALUE_DROP` path. Calls can feed helper arguments and compatible
 receiver-dot chains. Recursive and unsupported function-body forms are fenced as
-unresolved-helper diagnostics with zero raw fallback. Rust now parses, validates, and
-compiles the same top-level function registry shape, while Rust runtime call resolution
-and oracle parity remain follow-on work.
+diagnostics with zero raw fallback on the Perl reference, and Rust directly diagnoses
+recursive user-function calls. Rust now parses, validates, compiles, and executes the
+same MVP function surface, including value calls, compatible receiver chains, standalone
+discard, and fresh function-local scope.
 
 The registry rejects:
 

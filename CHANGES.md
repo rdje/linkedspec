@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.4.3.2 — execute Rust user functions
+
+**Scope:** Rust runtime engine/context, focused Rust integration tests, oracle corpus generator/fixture, mdBook,
+live docs, and Knowledge Map.
+
+**What changed:** Rust registered user-function calls now execute as ordinary value calls. `Engine` resolves a
+registered callee before the normal helper fallback, checks exact arity, evaluates arguments eagerly in the
+caller context, binds parameters into fresh function-local scalar/array/hash variable stores, evaluates the
+compiled `CodeBlock` body, and returns either a final expression or `return(expr)` payload.
+
+**Composability and hardening:** Returned arrays, hashes, strings, and numbers can continue through compatible
+receiver-dot value chains. Standalone registered calls execute through the same path and discard their returned
+value. Function-local stores are restored after return, so params and local working variables do not leak into
+the caller. Direct and mutual recursion now report deterministic unsupported-recursion diagnostics instead of recursing.
+
+**Oracle hygiene:** The oracle generator now also uses canonical `array(...)`/`hash(...)` spellings in the older
+short-wrapper-retirement cases, so a full corpus regeneration no longer rewrites unrelated fixtures.
+
+**Checks:** `cargo fmt --all`, focused Rust runtime `terse_4_3_2`, `perl -Iperl tools/gen_oracle_corpus.pl`,
+`cargo test -p linkedspec-runtime --test corpus_oracle`, `cargo test -p linkedspec-runtime --lib`, and
+`cargo test -p linkedspec-core` passed. The oracle corpus now has **54 fixtures**, including
+`terse_4_3_2_user_function_runtime`. The remaining memory, Knowledge Map, doctrine, mdBook, diff, and local CI
+checks passed before commit.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.4.3.1 — add Rust user function registry
 
 **Scope:** Rust core AST/parser/compiler/validation/type model, focused Rust tests, mdBook, live docs, and

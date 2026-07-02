@@ -61,6 +61,22 @@ pub struct RuntimeContext {
     /// Inserted on entry and removed on exit (balanced), so the set is empty
     /// between top-level parses.
     recursion_active: std::collections::HashSet<(String, usize)>,
+    /// Active user-function call stack. User functions are pure MVP value
+    /// helpers; recursion is unsupported and must diagnose instead of recursing.
+    user_functions_active: Vec<String>,
+}
+
+/// Saved scalar/array/hash variable stores.
+///
+/// User-defined functions run with fresh local stores, then the caller's stores
+/// are restored after the function returns. Parser state, marks, input cursor,
+/// accumulator, and the rule return channel intentionally stay outside this
+/// snapshot.
+#[derive(Debug, Clone)]
+pub(crate) struct RuntimeVariableStores {
+    scalars: std::collections::HashMap<String, RuntimeValue>,
+    arrays: std::collections::HashMap<String, Vec<RuntimeValue>>,
+    hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
 }
 
 impl RuntimeContext {
@@ -87,6 +103,7 @@ impl RuntimeContext {
             backtrack_stack: Vec::new(),
             return_value: None,
             recursion_active: std::collections::HashSet::new(),
+            user_functions_active: Vec::new(),
         }
     }
 
@@ -197,6 +214,44 @@ impl RuntimeContext {
 
     pub fn hash_copy(&self, name: &str) -> Vec<(String, RuntimeValue)> {
         self.get_hash(name)
+    }
+
+    // ── User-function local variables ──
+
+    pub(crate) fn take_variable_stores(&mut self) -> RuntimeVariableStores {
+        RuntimeVariableStores {
+            scalars: std::mem::take(&mut self.scalars),
+            arrays: std::mem::take(&mut self.arrays),
+            hashes: std::mem::take(&mut self.hashes),
+        }
+    }
+
+    pub(crate) fn restore_variable_stores(&mut self, stores: RuntimeVariableStores) {
+        self.scalars = stores.scalars;
+        self.arrays = stores.arrays;
+        self.hashes = stores.hashes;
+    }
+
+    pub(crate) fn enter_user_function(&mut self, name: &str) -> bool {
+        if self
+            .user_functions_active
+            .iter()
+            .any(|active| active == name)
+        {
+            return false;
+        }
+        self.user_functions_active.push(name.to_string());
+        true
+    }
+
+    pub(crate) fn exit_user_function(&mut self, name: &str) {
+        if let Some(index) = self
+            .user_functions_active
+            .iter()
+            .rposition(|active| active == name)
+        {
+            self.user_functions_active.remove(index);
+        }
     }
 
     // ── Child return value (retv) ──

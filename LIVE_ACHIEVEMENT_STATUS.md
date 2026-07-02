@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity landed**
+  (RUST RUNTIME + ORACLE CORPUS + BOOK/KM/LIVE DOCS).
+  Rust registered user-function calls now resolve before ordinary helper fallback, check exact arity, evaluate
+  arguments eagerly in the caller context, bind params into fresh function-local scalar/array/hash stores, and
+  evaluate compiled function `CodeBlock` bodies for final-expression or `return(expr)` results.
+
+  Returned values feed compatible receiver-dot chains by runtime type, so user functions can return arrays,
+  hashes, strings, and numbers into the existing fluent value-chain surface. Standalone registered calls execute
+  through the same value path and discard their result. Function-local variables are restored away after return,
+  and direct/mutual recursion diagnoses deterministically.
+
+  **Verification:** focused Rust runtime `.4.3.2` locks PASS; oracle generation PASS; Rust corpus oracle PASS
+  with **54 fixtures** including `terse_4_3_2_user_function_runtime`; Rust runtime lib and Rust core suites PASS;
+  mdBook build, memory/doctrine/Knowledge Map checks, diff check, and full local CI all pass.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.4.4` (function surface finalization and deferred extension ledger), then
+  `.3.2.2`, `.3.2.3`.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.3.1 — Rust user-function registry parity landed**
   (RUST AST/PARSER/VALIDATION/COMPILER + BOOK/KM/LIVE DOCS).
   Rust `.spec` parsing now extracts top-level `fn name(args) { ... }` declarations before or between rule

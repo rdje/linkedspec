@@ -6,8 +6,8 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (**`.4.3.1` DONE; Rust function-definition AST/compiler registry parity landed
-  after `.4.2.3` closed the Perl standalone user-function discard and hardening slice**.
+- Last updated: `2026-07-02` (**`.4.3.2` DONE; Rust user-function runtime and oracle parity landed
+  after `.4.3.1` added the Rust function-definition AST/compiler registry**.
   Prior **`.4.1` DONE; user-defined function MVP contract/inventory locked before code** —
   the accepted contract is now explicit: top-level `fn name(args) { ... }`, exact arity, eager argument
   evaluation, fresh function-local parameter/work-variable scope, pure value/block bodies, final-expression or
@@ -17,8 +17,10 @@
   labels, reserved runtime symbols, or another function definition. The inventory found a broad implementation
   surface across `specs/spec.spec`, function-definition extraction/registry, Perl ActionIR user-call lowering,
   Rust `SpecFile`/`CompiledSpec`/runtime function registry, oracle fixtures, phase0, mdBook, and Knowledge Map;
-  `.4.2` and `.4.3` are split into smaller implementation leaves. Frontier is now `.4.3.2` before returning to
-  `.3.2.2`.
+  `.4.2` and `.4.3` are split into smaller implementation leaves. Rust now resolves registered function calls
+  before helper fallback, runs them in fresh function-local stores, feeds compatible receiver-dot chains from
+  returned values, discards standalone call results, and passes a Perl/Rust oracle fixture. Frontier is now
+  `.4.4` for the final function-surface/deferral ledger before returning to `.3.2.2`.
   Prior **`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
   `sub(...)`, `mul(...)`, `div(...)`, `mod(...)`, `abs(...)`, `floor(...)`, `ceil(...)`, `round(...)`,
   `min(...)`, `max(...)`, `clamp(...)`, `sum(...)`, `avg(...)`, `median(...)`, and `range(...)` now map to the
@@ -2306,20 +2308,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     duplicate user-function names, rule-label collisions, built-in helper/control-name collisions including
     `.3.2.1` numeric word aliases, lifecycle/runtime/function-keyword collisions, invalid params, duplicate
     params, and reserved params before runtime. Rust `CompiledSpec` now carries `CompiledUserFunction` records whose bodies are parsed into
-    `CodeBlock` values, with compile-stage diagnostics for invalid function body code. This is registry parity
-    only: Rust runtime call resolution, standalone discard, receiver-chain execution, and oracle fixtures remain
-    owned by `.4.3.2`.
+    `CodeBlock` values, with compile-stage diagnostics for invalid function body code. This was registry parity
+    only: Rust runtime call resolution, standalone discard, receiver-chain execution, and oracle fixtures were
+    deferred to `.4.3.2` and are now closed there.
   Commit: `SPEC-FORMAT-TERSE.4.3.1 - add Rust user function registry`
 
 - ID: `SPEC-FORMAT-TERSE.4.3.2`
-  Status: `pending`
+  Status: `done` (2026-07-02)
   Goal: Rust user-function runtime parity and oracle fixtures
   Acceptance: Rust `Engine` resolves user-function calls before unknown-helper fallback, evaluates arguments
     eagerly, executes the function body in a fresh local scope, returns final-expression or `return(expr)` values,
     supports receiver-dot continuation from returned values, silently discards standalone call results, and
     matches the Perl reference in focused integration tests plus oracle fixtures.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Rust `Engine` now resolves registered user-function calls before ordinary
+    helper fallback, reports exact-arity diagnostics, evaluates arguments in the caller context, binds parameters
+    into fresh function-local scalar/array/hash stores, evaluates compiled `CodeBlock` bodies for final-expression
+    or `return(expr)` results, restores caller variable stores after return, rejects direct/mutual recursion with a
+    deterministic diagnostic, and lets returned arrays/hashes/scalars continue through compatible receiver-dot
+    chains. Standalone registered function calls execute through the same value path and discard their results.
+    Focused Rust runtime locks cover value calls, local scope, receiver chains, standalone discard, wrong arity,
+    and recursion diagnostics. The Perl/Rust oracle corpus now includes
+    `terse_4_3_2_user_function_runtime`, raising the corpus to **54 fixtures**.
+  Commit: `SPEC-FORMAT-TERSE.4.3.2 - execute Rust user functions`
 
 - ID: `SPEC-FORMAT-TERSE.4.4`
   Status: `pending`
@@ -2475,8 +2485,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.4.2.1` | `done` 2026-07-01 | Perl reference function-definition grammar/registry descriptor seam landed; registered calls were intentionally unresolved until `.4.2.2`. |
 | — | `SPEC-FORMAT-TERSE.4.2.2` | `done` 2026-07-01 | Perl registered exact-arity value calls now execute in value positions and compatible receiver chains. |
 | — | `SPEC-FORMAT-TERSE.4.2.3` | `done` 2026-07-01 | Perl registered standalone calls now lower as `VALUE_DROP`; recursion/unsupported body diagnostics stay unresolved-helper metadata with zero raw fallback. |
-| — | `SPEC-FORMAT-TERSE.4.3.1` | `done` 2026-07-02 | Rust parsed/compiled function registry parity landed; runtime call execution remains `.4.3.2`. |
-| 1 | `SPEC-FORMAT-TERSE.4.3.2` | `pending` | Rust user-function runtime parity and oracle fixtures. |
+| — | `SPEC-FORMAT-TERSE.4.3.1` | `done` 2026-07-02 | Rust parsed/compiled function registry parity landed; runtime call execution remained `.4.3.2`. |
+| — | `SPEC-FORMAT-TERSE.4.3.2` | `done` 2026-07-02 | Rust registered user-function calls now execute as values, feed compatible receiver chains, discard standalone results, and pass the Perl/Rust oracle fixture; corpus 54 fixtures. |
+| 1 | `SPEC-FORMAT-TERSE.4.4` | `pending` | Function surface finalization and deferred extension ledger after Perl/Rust MVP parity. |
 | 2 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
 | 3 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison word/symbol operator-call migration before code because bare `gt`/`lt`/etc. currently conflict with string-comparison compatibility. |
 | 4 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
@@ -3230,6 +3241,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.4.3.2` | `cargo fmt --all`; focused Rust runtime `terse_4_3_2`; oracle generator; Rust corpus oracle; `cargo test -p linkedspec-runtime --lib`; `cargo test -p linkedspec-core`; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust user-function runtime parity landed. Registered calls resolve before helper fallback, execute with eager caller-context args and fresh function-local variable stores, return body values into compatible receiver chains, diagnose wrong arity/recursion, and standalone calls discard results. Oracle corpus now includes `terse_4_3_2_user_function_runtime` and passes with **54 fixtures**. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.4.3.1` | Rust code review; `cargo fmt --all --check`; `cargo test -p linkedspec-core`; `cargo test -p linkedspec-runtime --lib`; `cargo test -p linkedspec-runtime --test corpus_oracle`; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust function-definition AST/compiler registry parity landed. `SpecFile` records top-level function definitions before or between rules, `validate()` rejects duplicate/collision/parameter hazards before runtime, and `CompiledSpec` carries `CompiledUserFunction` records with parsed `CodeBlock` bodies and source metadata. Runtime call execution and oracle fixtures remain `.4.3.2`. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.4.2.3` | Syntax checks for `CanonicalEvents.pm`, `Contracts.pm`, `MethodLowering.pm`, `RuleIR/EmitContext.pm`, and `t/phase0_regression.t`; TOOLBOX descriptor/runtime probes for standalone registered calls, standalone receiver chains, unregistered standalone calls, direct/mutual recursion, parser-state helper bodies, host-code-shaped bodies, and nested function syntax; `prove -Iperl t/actionir_ast_parser.t`; `prove -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; memory/doctrine/Knowledge Map/diff checks; full local CI | Perl registered standalone user-function calls lower to `VALUE_DROP` with zero raw fallback/unresolved helpers and language-agnostic readiness. Nested user-function calls now pass function-local parameter values, not bare parameter names. Recursion and unsupported function-body constructs stay deterministic unresolved-helper diagnostics with zero raw fallback. Phase0 PASS with **1007 tests** and full local CI PASS. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.4.2.2` | Syntax checks for `MethodLowering.pm`, `Compiler.pm`, `SpecEntry.pm`, `RuleIR/EmitContext.pm`, and `t/phase0_regression.t`; focused integrated probes for registered calls in return/assignment/mutation/helper/receiver-chain slots; phase0 user-function execution regression locks; mdBook build; memory/doctrine/Knowledge Map/diff checks; full local CI | Perl registered user-function value calls execute for exact arity. The compiler threads the function registry into rule ActionIR lowering; generated calls eagerly evaluate args, bind fresh function-local params/locals, and return final-expression or `return(expr)` payloads. Wrong-arity registered calls remain unresolved-helper diagnostics with zero raw fallback. Standalone discard, recursion rejection, and purity diagnostics remain `.4.2.3`. |
@@ -3320,6 +3332,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.4.3.2` | `SPEC-FORMAT-TERSE.4.3.2 - execute Rust user functions` | Rust runtime parity landed for registered value calls, receiver chains, standalone discard, local function scope, exact-arity diagnostics, recursion diagnostics, and the 54-fixture oracle corpus. Frontier becomes `.4.4`. |
 | `SPEC-FORMAT-TERSE.4.3.1` | `SPEC-FORMAT-TERSE.4.3.1 - add Rust user function registry` | Rust parsed/compiled registry parity landed: `SpecFile.functions`, `FunctionDefinition`, `CompiledSpec.functions`, `CompiledUserFunction`, and pre-runtime diagnostics. Frontier becomes `.4.3.2`. |
 | `SPEC-FORMAT-TERSE.4.2.3` | `SPEC-FORMAT-TERSE.4.2.3 - harden Perl user function discard` | Registered standalone calls now lower as `VALUE_DROP`, nested user-function parameter passing is fixed, and recursion/unsupported body diagnostics are phase0-locked. Frontier becomes `.4.3.1`. |
 | `SPEC-FORMAT-TERSE.4.2.1` | `SPEC-FORMAT-TERSE.4.2.1 - add Perl user function registry` | Perl registry/descriptor seam landed: `specs/spec.spec` owns active `function_definition`, descriptors expose `functions`, and registered calls intentionally remain unresolved until `.4.2.2`. Frontier becomes `.4.2.2`. |
@@ -3408,6 +3421,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-02`: **`.4.3.2` DONE — Rust user-function runtime and oracle parity landed.**
+  Rust registered user-function calls now resolve before ordinary helper fallback, evaluate arguments eagerly in
+  the caller context, bind params into fresh function-local scalar/array/hash stores, evaluate compiled
+  `CodeBlock` bodies, and return final-expression or `return(expr)` values. Returned arrays, hashes, strings,
+  and numbers feed compatible receiver-dot chains. Standalone registered calls execute and discard their result.
+  Wrong arity and direct/mutual recursion diagnose deterministically. The oracle corpus adds
+  `terse_4_3_2_user_function_runtime`, bringing the corpus to **54 fixtures**. Frontier moves to `.4.4` for the
+  final function-surface/deferral ledger before `.3.2.2`.
 
 - `2026-07-02`: **`.4.3.1` DONE — Rust function-definition AST/compiler registry parity landed.**
   Rust `.spec` parsing now recognizes top-level `fn name(args) { ... }` declarations before or between rule

@@ -7,14 +7,14 @@ answers:
   - "does Rust SpecFile include functions"
   - "does Rust CompiledSpec include functions"
   - "what did SPEC-FORMAT-TERSE.4.3.1 implement"
-  - "does Rust execute user functions yet"
+  - "when did Rust runtime execution land after the registry"
   - "what Rust diagnostics exist for user functions"
   - "where are Rust user function bodies stored"
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, rust, user-functions, compiler, registry]
-evidence: "SPEC-FORMAT-TERSE.4.3.1 added SpecFile.functions and FunctionDefinition/SourceSpan in rust/linkedspec-core/src/ast.rs; parser.rs now extracts top-level fn name(args) { ... } definitions before or between rules and stops rule body collection at top-level functions; validation.rs rejects duplicate names, rule-label collisions, helper/control collisions including the .3.2.1 numeric word aliases, lifecycle/runtime/function-keyword collisions, invalid params, duplicate params, and reserved params; types.rs adds CompiledUserFunction and CompiledSpec.functions; compiler.rs parses function body_source into CodeBlock. Rust runtime execution remains owned by SPEC-FORMAT-TERSE.4.3.2."
-reverify: "rg -n 'FunctionDefinition|CompiledUserFunction|functions: Vec|compile_user_function|parse_top_level_user_function|validate_rejects_user_function' rust/linkedspec-core/src rust/linkedspec-core/tests && rg -n 'SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2' docs/tasks/SPEC-FORMAT-TERSE.md"
+evidence: "SPEC-FORMAT-TERSE.4.3.1 added SpecFile.functions and FunctionDefinition/SourceSpan in rust/linkedspec-core/src/ast.rs; parser.rs now extracts top-level fn name(args) { ... } definitions before or between rules and stops rule body collection at top-level functions; validation.rs rejects duplicate names, rule-label collisions, helper/control collisions including the .3.2.1 numeric word aliases, lifecycle/runtime/function-keyword collisions, invalid params, duplicate params, and reserved params; types.rs adds CompiledUserFunction and CompiledSpec.functions; compiler.rs parses function body_source into CodeBlock. SPEC-FORMAT-TERSE.4.3.2 then added Rust runtime execution; see rust-user-function-runtime-parity."
+reverify: "rg -n 'FunctionDefinition|CompiledUserFunction|functions: Vec|compile_user_function|parse_top_level_user_function|validate_rejects_user_function' rust/linkedspec-core/src rust/linkedspec-core/tests && rg -n 'SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2|rust-user-function-runtime-parity' docs/tasks/SPEC-FORMAT-TERSE.md docs/knowledge"
 ---
 
 `SPEC-FORMAT-TERSE.4.3.1` gives the Rust backend the user-function registry shape
@@ -42,6 +42,7 @@ Compilation records each validated definition as a `CompiledUserFunction` in
 `CompiledSpec.functions`. The compiled record preserves source metadata and parses
 `body_source` into a `CodeBlock`; invalid body code becomes a compile error.
 
-This is registry parity only. Rust user-function call resolution, function-local
-execution scope, receiver-chain continuation, standalone result discard, and oracle
-fixtures remain `SPEC-FORMAT-TERSE.4.3.2`.
+This card is the registry-parity fact. Runtime execution landed afterward in
+`SPEC-FORMAT-TERSE.4.3.2`; see `rust-user-function-runtime-parity` for the resolver,
+function-local scope, receiver-chain, standalone discard, recursion diagnostic, and
+oracle-corpus details.

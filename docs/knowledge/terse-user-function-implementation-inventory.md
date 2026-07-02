@@ -13,11 +13,12 @@ answers:
   - "what does SPEC-FORMAT-TERSE.4.2.3 own"
   - "what does SPEC-FORMAT-TERSE.4.3.1 own"
   - "what does SPEC-FORMAT-TERSE.4.3.2 own"
+  - "what is the next user function finalization leaf"
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, user-functions, implementation-inventory, perl-actionir, rust-parity]
-evidence: "SPEC-FORMAT-TERSE.4.1 inspected specs/spec.spec, BootstrapSpec.pm/Core.pm, Perl ActionIR::AST::Parser, MethodLowering, RewritePipeline, Rust expr.rs/ast.rs/types.rs/compiler.rs/engine.rs, oracle generation, and mdBook compiler/backend chapters. TOOLBOX probes showed Perl value slots diagnose user_fn(...) through LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn while standalone user_fn(...) remains raw. Rust source read showed Expr::Call/FluentChain parse the shapes but Engine::call_helper sends unknown names to warning+undef. The task tree split .4.2 into Perl grammar/registry, value-call execution, and discard/purity hardening; .4.3 split into Rust registry and runtime/oracle parity. SPEC-FORMAT-TERSE.4.2.1 landed the Perl function_definition grammar/registry descriptor seam; .4.2.2 landed Perl exact-arity registered value-call execution and receiver-chain composition; .4.2.3 landed registered standalone discard and hardening diagnostics; .4.3.1 landed Rust parsed/compiled function registry parity. Next frontier is Rust runtime/oracle parity in .4.3.2."
-reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4\\.2\\.1|SPEC-FORMAT-TERSE\\.4\\.2\\.2|SPEC-FORMAT-TERSE\\.4\\.2\\.3|SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2|FunctionDefinition|CompiledUserFunction|function_order|function_count|VALUE_DROP|standalone.*raw' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md docs/knowledge/rust-user-function-registry-parity.md"
+evidence: "SPEC-FORMAT-TERSE.4.1 inspected specs/spec.spec, BootstrapSpec.pm/Core.pm, Perl ActionIR::AST::Parser, MethodLowering, RewritePipeline, Rust expr.rs/ast.rs/types.rs/compiler.rs/engine.rs, oracle generation, and mdBook compiler/backend chapters. TOOLBOX probes showed Perl value slots diagnose user_fn(...) through LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn while standalone user_fn(...) remains raw. Rust source read showed Expr::Call/FluentChain parse the shapes but Engine::call_helper sent unknown names to warning+undef before implementation. The task tree split .4.2 into Perl grammar/registry, value-call execution, and discard/purity hardening; .4.3 split into Rust registry and runtime/oracle parity. SPEC-FORMAT-TERSE.4.2.1 landed the Perl function_definition grammar/registry descriptor seam; .4.2.2 landed Perl exact-arity registered value-call execution and receiver-chain composition; .4.2.3 landed registered standalone discard and hardening diagnostics; .4.3.1 landed Rust parsed/compiled function registry parity; .4.3.2 landed Rust runtime execution and oracle parity. Next frontier is .4.4, the function surface finalization and deferred extension ledger."
+reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4\\.2\\.1|SPEC-FORMAT-TERSE\\.4\\.2\\.2|SPEC-FORMAT-TERSE\\.4\\.2\\.3|SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2|SPEC-FORMAT-TERSE\\.4\\.4|FunctionDefinition|CompiledUserFunction|function_order|function_count|VALUE_DROP|standalone.*raw|terse_4_3_2_user_function_runtime' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md docs/knowledge/rust-user-function-runtime-parity.md"
 ---
 
 `SPEC-FORMAT-TERSE.4.1` found that user-defined functions are too broad for one
@@ -32,8 +33,9 @@ Current ground truth:
   `fluent_chain` nodes.
 - Perl value slots diagnose unknown user calls as unresolved helpers; registered standalone user-function calls
   lower as `VALUE_DROP`, while unregistered standalone call-shaped statements remain raw compatibility debt.
-- Rust `SpecFile` and `CompiledSpec` now carry parsed/compiled user-function registry records, but runtime
-  dispatch still needs `.4.3.2` to resolve registered callees before unknown-helper fallback.
+- Rust `SpecFile` and `CompiledSpec` carry parsed/compiled user-function registry records, and Rust runtime
+  dispatch now resolves registered callees before unknown-helper fallback with fresh function-local stores,
+  receiver-chain continuation, standalone discard, and recursion diagnostics.
 
 Implementation is split as follows:
 
@@ -41,6 +43,7 @@ Implementation is split as follows:
 - `.4.2.2`: DONE — Perl user-function exact-arity value-call execution and receiver-chain composition.
 - `.4.2.3`: DONE — Perl standalone discard, purity/collision diagnostics, and phase0 hardening.
 - `.4.3.1`: DONE — Rust parsed/compiled function registry parity.
-- `.4.3.2`: Rust runtime function execution plus oracle fixtures.
+- `.4.3.2`: DONE — Rust runtime function execution plus oracle fixtures.
+- `.4.4`: Function surface finalization and deferred extension ledger.
 
-The next PNT frontier is `SPEC-FORMAT-TERSE.4.3.2`.
+The next PNT frontier is `SPEC-FORMAT-TERSE.4.4`.

@@ -137,8 +137,9 @@ The compiler also uses this registry while lowering rule actions. Calls such as
 and the arity matches. Wrong-arity registered calls still report unresolved-helper
 metadata with zero raw fallback. A standalone `normalize(" x ")` lowers as a canonical
 `VALUE_DROP`: the value is computed through the function resolver and then discarded.
-The Rust backend now has parsed/compiled registry parity for these definitions, but
-Rust runtime call resolution and oracle parity remain follow-on work.
+The Rust backend has matching parsed/compiled registry support and runtime MVP execution:
+registered calls resolve before helper fallback, run in fresh function-local stores, feed
+compatible receiver chains, and discard standalone results.
 
 ## `meta`
 

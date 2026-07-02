@@ -71,8 +71,9 @@ statements. Wrong-arity calls remain unresolved-helper diagnostics with zero raw
 
 The Rust backend now carries the same registry shape through parse and compile stages. `SpecFile.functions`
 records top-level definitions, and `CompiledSpec.functions` stores `CompiledUserFunction` entries with parsed
-`CodeBlock` bodies and the same source metadata. Rust runtime resolution of those compiled functions is a
-separate follow-on stage.
+`CodeBlock` bodies and the same source metadata. The Rust runtime resolves those compiled functions before
+ordinary helper fallback, executes them in fresh function-local variable stores, restores caller stores after
+return, and supports compatible receiver chains and standalone discard.
 
 ## Per-rule compiled info
 

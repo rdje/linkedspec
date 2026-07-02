@@ -33,7 +33,7 @@
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::RuntimeContext;
 use linkedspec_core::expr::AccessSegment;
-use linkedspec_core::types::{CompiledSpec, ParseMode, RuntimeValue};
+use linkedspec_core::types::{CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue};
 use serde_json::Value;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
@@ -1141,6 +1141,22 @@ impl Engine {
                 if is_lazy {
                     return self.call_helper_lazy(name, args, ctx, rule_label);
                 }
+                if let Some(function) = self.spec.find_function(name) {
+                    if args.len() != function.arity {
+                        return Err(format!(
+                            "user function '{}' expects {} argument(s), got {} in rule '{}'",
+                            function.name,
+                            function.arity,
+                            args.len(),
+                            rule_label
+                        ));
+                    }
+                    let evaluated: Vec<RuntimeValue> = args
+                        .iter()
+                        .map(|a| self.eval_expr(a.value(), ctx, rule_label))
+                        .collect::<Result<Vec<_>, _>>()?;
+                    return self.execute_user_function(function, &evaluated, ctx);
+                }
                 // Normal eager evaluation for all other helpers
                 let evaluated: Vec<RuntimeValue> = args
                     .iter()
@@ -1262,6 +1278,36 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
         }
+    }
+
+    fn execute_user_function(
+        &self,
+        function: &CompiledUserFunction,
+        args: &[RuntimeValue],
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        if !ctx.enter_user_function(&function.name) {
+            return Err(format!(
+                "recursive user function call '{}' is not supported",
+                function.name
+            ));
+        }
+
+        let caller_stores = ctx.take_variable_stores();
+        for (param, value) in function.params.iter().zip(args.iter().cloned()) {
+            ctx.set_scalar(param, value.clone());
+            match value {
+                RuntimeValue::Array(values) => ctx.set_array(param, values),
+                RuntimeValue::Hash(values) => ctx.set_hash(param, values),
+                _ => {}
+            }
+        }
+
+        let function_label = format!("function '{}'", function.name);
+        let result = self.eval_block_value(&function.body, ctx, &function_label);
+        ctx.restore_variable_stores(caller_stores);
+        ctx.exit_user_function(&function.name);
+        result.map_err(|err| format!("user function '{}': {}", function.name, err))
     }
 
     fn is_statement_only_array_end_mutation_method(method: &str) -> bool {

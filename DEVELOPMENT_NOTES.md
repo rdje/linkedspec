@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity):
+  Rust now executes the user-function registry shape landed in `.4.3.1`. Durable points. (1) **Resolution
+  boundary.** `Engine::eval_expr` checks `CompiledSpec.functions` before ordinary helper fallback, so registered
+  callees run as user functions and wrong arity diagnoses before any unknown-helper path. (2) **Execution scope.**
+  Arguments are evaluated eagerly in the caller context; params bind into fresh function-local scalar stores, with
+  aggregate params also exposed through local array/hash stores. The caller's scalar/array/hash stores are
+  restored after the body returns, so function locals do not leak. (3) **Return and composition.** The compiled
+  body `CodeBlock` yields final-expression or `return(expr)` values, and returned arrays/hashes/scalars feed the
+  existing compatible receiver-dot chains. Standalone calls execute and discard their result. (4) **Hardening.**
+  Direct and mutual recursion report unsupported-recursion diagnostics instead of recursing. (5) **Gate.** Focused
+  `.4.3.2` runtime locks, oracle generation, the 54-fixture Rust corpus oracle, Rust runtime lib, and Rust core
+  tests pass; mdBook/memory/doctrine/Knowledge Map/diff/local-CI gates pass before commit.
+  Next frontier: `SPEC-FORMAT-TERSE.4.4`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.3.1 — Rust user-function registry parity):
   Rust now has the parsed/compiled user-function registry shape needed before runtime execution. Durable points.
   (1) **Parsed registry.** `SpecFile` carries `functions`; the parser extracts top-level `fn name(args) { ... }`
