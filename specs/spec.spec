@@ -101,7 +101,7 @@ spec_file::
 rule_header: /(\w++)[ \t]*(::|:)[ \t]*((?:&|\||\+|\*|\?|OR\+|OR\{[^}]++\}|OR|AND\+|AND\{[^}]++\}|AND)?)/
  I {
   declare(scalar, top=0);
-  if(eq(entry_group(1), "::")) { assign(scalar(top), 1) }
+  if(str_eq(entry_group(1), "::")) { assign(scalar(top), 1) }
   return(hash("type", "rule", "label", entry_group(0), "top", scalar(top), "mode", entry_group(2)))
  }
 

@@ -554,12 +554,6 @@ These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expr
 | `str_ge(lhs, rhs)` | string greater-than-or-equal. |
 | `str_lt(lhs, rhs)` | string less-than. |
 | `str_le(lhs, rhs)` | string less-than-or-equal. |
-| `eq(lhs, rhs)` | compatibility alias for string equality until the comparison-word numeric alias leaf lands. |
-| `ne(lhs, rhs)` | compatibility alias for string inequality until the comparison-word numeric alias leaf lands. |
-| `gt(lhs, rhs)` | compatibility alias for string greater-than until the comparison-word numeric alias leaf lands. |
-| `ge(lhs, rhs)` | compatibility alias for string greater-than-or-equal until the comparison-word numeric alias leaf lands. |
-| `lt(lhs, rhs)` | compatibility alias for string less-than until the comparison-word numeric alias leaf lands. |
-| `le(lhs, rhs)` | compatibility alias for string less-than-or-equal until the comparison-word numeric alias leaf lands. |
 | `starts_with(value, prefix)` | value begins with the literal prefix. |
 | `ends_with(value, suffix)` | value ends with the literal suffix. |
 | `contains_substr(value, needle)` | value contains the literal substring. |
@@ -585,8 +579,8 @@ Compatibility bridge status:
 
 - The explicit bridge names `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le` are shipped and
   preferred for lexical text comparisons.
-- The bare helpers `eq`, `ne`, `gt`, `ge`, `lt`, and `le` remain runnable string-comparison compatibility
-  aliases until the task-tree-owned numeric comparison-word alias leaf lands.
+- The bare helpers `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are numeric comparison aliases. They are no longer
+  lexical string comparisons.
 - The `str_*` names are not numeric helpers and are not comparison-symbol calls.
 
 ## Numeric value helpers
@@ -625,10 +619,10 @@ variadic arithmetic family: `+(a, b)` -> `num_add(a, b)`, `-(a, b)` ->
 and `%(a, b)` -> `num_mod(a, b)`. There is no operator precedence in either
 form; write grouping explicitly with nested calls such as `+(*(a, b), c)` or
 `add(mul(a, b), c)`. This alias set deliberately does not include comparison
-words or comparison symbols: `str_gt(...)`, `str_lt(...)`, and the other `str_*`
-helpers are the preferred string comparisons; the bare comparison helpers remain
-string-comparison compatibility aliases until the numeric comparison-word alias
-leaf lands. Use `num_gt(...)` or receiver `.gt(...)` for numeric comparisons.
+symbols: `str_gt(...)`, `str_lt(...)`, and the other `str_*` helpers are the
+preferred string comparisons; comparison words such as `gt(...)` and `le(...)`
+are numeric aliases over the matching `num_*` helpers. Comparison symbol
+callees are still deferred.
 
 Examples:
 
@@ -682,11 +676,21 @@ Use numeric comparisons when the operands are numbers, counts, or numeric helper
 | `num_ge(lhs, rhs)` | numeric greater-than-or-equal. |
 | `num_lt(lhs, rhs)` | numeric less-than. |
 | `num_le(lhs, rhs)` | numeric less-than-or-equal. |
+| `eq(lhs, rhs)` | alias for `num_eq(lhs, rhs)`. |
+| `ne(lhs, rhs)` | alias for `num_ne(lhs, rhs)`. |
+| `gt(lhs, rhs)` | alias for `num_gt(lhs, rhs)`. |
+| `ge(lhs, rhs)` | alias for `num_ge(lhs, rhs)`. |
+| `lt(lhs, rhs)` | alias for `num_lt(lhs, rhs)`. |
+| `le(lhs, rhs)` | alias for `num_le(lhs, rhs)`. |
 
 Examples:
 
 ```text
 if(num_gt(count(array(parts)), 0))
+  return(hash("kind", "nonempty", "count", count(array(parts))));
+endif()
+
+if(gt(count(array(parts)), 0))
   return(hash("kind", "nonempty", "count", count(array(parts))));
 endif()
 
@@ -705,11 +709,11 @@ endif()
 
 Do not use `str_gt(...)` or `str_lt(...)` for counters. They are string comparisons and can produce surprising ordering for numeric-looking text.
 
-The comparison operator-call migration is split separately. Until that work lands, numeric comparisons should
-use `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le` or number receiver terminals such as
-`count(array(parts)).gt(0)`; bare comparison words remain string-comparison compatibility aliases and comparison
-symbol callees are not part of the shipped surface. The explicit string bridge names are shipped as
-`str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`; prefer those names in new lexical string comparisons.
+The comparison operator-call migration is still split for symbols. Numeric comparisons can use
+`num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le`, bare word aliases such as `gt(...)`, or number receiver
+terminals such as `count(array(parts)).gt(0)`. Comparison symbol callees are not part of the shipped surface
+yet. The explicit string bridge names are shipped as `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`;
+prefer those names in lexical string comparisons.
 
 ## Array helpers
 
@@ -953,14 +957,14 @@ Examples:
 ```text
 if(and(
   has_key(hash(meta), "kind"),
-  eq(lowercase(trim(scalar(hash(meta), "kind"))), "node")
+  str_eq(lowercase(trim(scalar(hash(meta), "kind"))), "node")
 ))
   return(hash("kind", "node"));
 endif()
 
 if(or(
-  eq(scalar(kind), "word"),
-  eq(scalar(kind), "identifier"),
+  str_eq(scalar(kind), "word"),
+  str_eq(scalar(kind), "identifier"),
   matches(scalar(kind), /^name_/)
 ))
   return(hash("kind", "named"));
@@ -991,7 +995,7 @@ Example:
 ```text
 if(is_undefined(scalar(hash(meta), "kind")))
   assign(hash(meta), set_key(hash(meta), "kind", "unknown"));
-elseif(eq(lowercase(trim(scalar(hash(meta), "kind"))), "word"))
+elseif(str_eq(lowercase(trim(scalar(hash(meta), "kind"))), "word"))
   assign(hash(meta), set_key(hash(meta), "normalized_kind", "word"));
 else()
   assign(hash(meta), set_key(hash(meta), "normalized_kind", "other"));

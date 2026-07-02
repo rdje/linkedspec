@@ -627,6 +627,8 @@ min(...), max(...), sum(arr)             — aliases for num_min/num_max/num_sum
 avg(arr), median(arr), range(arr)        — aliases for num_avg/num_median/num_range
 +(a, b), -(a, b), *(a, b)                — aliases for num_add/num_sub/num_mul
 /(a, b), %(a, b)                         — aliases for num_div/num_mod
+eq(a, b), ne(a, b), gt(a, b)             — aliases for num_eq/num_ne/num_gt
+ge(a, b), lt(a, b), le(a, b)             — aliases for num_ge/num_lt/num_le
 
 number_expr.abs().ceil().add(n).mul(n)  — receiver-dot number helper chain
 number_expr.gt(n)                       — terminal receiver-dot numeric comparison
@@ -634,15 +636,12 @@ number_expr.gt(n)                       — terminal receiver-dot numeric compar
 
 The terse function aliases above are ordinary calls, not infix operators, so
 they do not introduce precedence. Write nested calls such as `+(*(a, b), c)` when
-you need grouping. The alias set does not include comparison words or comparison
-symbols. Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and
-`le(...)` remain string-comparison compatibility aliases; use `num_gt(...)` or
-receiver-dot `.gt(...)` for numeric comparisons.
-The task-tree-owned comparison migration has added the explicit
-string-comparison bridge names `str_eq`, `str_ne`, `str_gt`, `str_ge`,
-`str_lt`, and `str_le`. Prefer those shipped names for lexical string
-comparisons before any numeric comparison word or symbol aliases become the
-current grammar.
+you need grouping. Comparison word aliases are numeric calls over the matching
+`num_*` helpers. Comparison symbols such as `>(a, b)`, `>=(a, b)`, and
+`==(a, b)` are still deferred. The task-tree-owned comparison migration has
+added the explicit string-comparison bridge names `str_eq`, `str_ne`, `str_gt`,
+`str_ge`, `str_lt`, and `str_le`; use those shipped names for lexical string
+comparisons.
 
 ### 7.6 Control Flow Helpers
 ```

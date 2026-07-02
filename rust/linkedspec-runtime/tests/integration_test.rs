@@ -2047,6 +2047,18 @@ fn terse_3_2_3_2_string_comparison_helpers_run() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.2.3.3 — numeric comparison word aliases:
+
+#[test]
+fn terse_3_2_3_3_numeric_comparison_word_aliases_run() {
+    let grammar = "Top::\n /x/ -> Done { return(array(eq(\"2\",\"2\"), ne(\"2\",\"3\"), gt(\"10\",\"2\"), ge(\"2\",\"2\"), lt(\"2\",\"10\"), le(\"2\",\"2\"), gt(\"2\",\"10\"), str_gt(\"2\",\"10\"))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[true, true, true, true, true, true, false, true]]),
+        "bare comparison word calls dispatch numerically while str_gt remains lexical"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

@@ -11,11 +11,12 @@ answers:
   - "does =(target,value) belong to comparison symbols"
   - "what is next after SPEC-FORMAT-TERSE.3.2.3.1"
   - "what is next after SPEC-FORMAT-TERSE.3.2.3.2"
+  - "what is next after SPEC-FORMAT-TERSE.3.2.3.3"
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, comparisons, helper-aliases, task-tree, mdbook, rust-parity]
-evidence: "SPEC-FORMAT-TERSE.3.2.3 split/ownership; TOOLBOX call_spec_handler_subst/runtime/flow probes for gt/num_gt/receiver gt/comparison symbols; perl/LinkedSpec/ActionIR/FlowExpr.pm; perl/LinkedSpec/ActionIR/MethodExpr.pm; perl/LinkedSpec/ActionIR/MethodLowering.pm; rust/linkedspec-core/src/expr.rs; rust/linkedspec-runtime/src/engine.rs; docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md"
-reverify: "rg -n \"SPEC-FORMAT-TERSE\\.3\\.2\\.3\\.3|str_eq|comparison call surface\" docs/tasks/SPEC-FORMAT-TERSE.md docs/TASK_TREE.md docs/linkedspec-book/src docs/knowledge && perl -Iperl -MLinkedSpec -e 'print $INC{\"LinkedSpec.pm\"}'"
+evidence: "SPEC-FORMAT-TERSE.3.2.3 split/ownership and SPEC-FORMAT-TERSE.3.2.3.3 implementation; TOOLBOX call_spec_handler_subst/runtime/flow probes for gt/num_gt/receiver gt/comparison symbols; perl/LinkedSpec/ActionIR/FlowExpr.pm; perl/LinkedSpec/ActionIR/MethodExpr.pm; perl/LinkedSpec/ActionIR/MethodLowering.pm; rust/linkedspec-core/src/expr.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-runtime/src/engine.rs; docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md"
+reverify: "rg -n \"SPEC-FORMAT-TERSE\\.3\\.2\\.3\\.3|numeric comparison word|comparison call surface\" docs/tasks/SPEC-FORMAT-TERSE.md docs/TASK_TREE.md docs/linkedspec-book/src docs/knowledge && perl -Iperl -MLinkedSpec::RuleIR::EmitContext -e 'print LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{gt(10, 2)})'"
 ---
 
 # Terse Comparison Call Surface Split
@@ -27,8 +28,8 @@ Current shipped behavior remains:
 - `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le` are numeric comparison helpers.
 - Number receiver terminals such as `score.gt(3)` are numeric comparisons.
 - `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` are shipped lexical string comparisons.
-- Bare `eq`/`ne`/`gt`/`ge`/`lt`/`le` remain string-comparison compatibility aliases in documented
-  flow/helper contexts until `.3.2.3.3`.
+- Bare `eq`/`ne`/`gt`/`ge`/`lt`/`le` are numeric aliases over the matching `num_*` helpers in flow/helper
+  contexts.
 - Comparison symbol callees such as `>(a,b)`, `>=(a,b)`, `==(a,b)`, and `!=(a,b)` are not implemented yet.
 
 The accepted future numeric comparison operator-call surface is ordinary `callee(args)` calls with both word
@@ -41,14 +42,14 @@ and symbol spellings:
 - `lt(a,b)` / `<(a,b)` -> `num_lt(a,b)`
 - `le(a,b)` / `<=(a,b)` -> `num_le(a,b)`
 
-Because today's bare comparison words are string comparisons, implementation is split behind an explicit
-string-comparison bridge:
+Because the migration started with bare comparison words serving as string comparisons, implementation was split
+behind an explicit string-comparison bridge:
 
 - `.3.2.3.1`: done; explicit string bridge contract locked.
 - `.3.2.3.2`: done; `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le` now ship as lexical
   string comparisons.
-- `.3.2.3.3`: current next task; flip ordinary comparison word calls to numeric `num_*` aliases.
-- `.3.2.3.4`: add numeric comparison symbol callees.
+- `.3.2.3.3`: done; ordinary comparison word calls now map to numeric `num_*` aliases.
+- `.3.2.3.4`: current next task; add numeric comparison symbol callees.
 
 `=(target,value)` is not part of the comparison-symbol slice. It remains assignment operator-call syntax owned
 by `SPEC-FORMAT-TERSE.3.3`; `=>` remains the blind-call edge operator.

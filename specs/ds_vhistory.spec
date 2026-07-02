@@ -11,7 +11,7 @@ declare(scalar, cur_object, first_capt, entry_tag, current_object_name)
 LX  {
  if(is_nonempty(array(capt)));
   assign(scalar(first_capt), scalar(array(capt), 0));
-  if(eq(scalaref(first_capt, [0]), "?branch:"));
+  if(str_eq(scalaref(first_capt, [0]), "?branch:"));
    assign(scalar(entry_tag), "?branch_entry:");
   else();
    assign(scalar(entry_tag), "?version_entry:");
@@ -30,7 +30,7 @@ LX  {
 -> object             {
   if(is_nonempty(array(capt)));
    assign(scalar(first_capt), scalar(array(capt), 0));
-   if(eq(scalaref(first_capt, [0]), "?branch:"));
+   if(str_eq(scalaref(first_capt, [0]), "?branch:"));
     assign(scalar(entry_tag), "?branch_entry:");
    else();
     assign(scalar(entry_tag), "?version_entry:");
@@ -54,7 +54,7 @@ LX  {
 -> separator          {
   if(is_nonempty(array(capt)));
    assign(scalar(first_capt), scalar(array(capt), 0));
-   if(eq(scalaref(first_capt, [0]), "?branch:"));
+   if(str_eq(scalaref(first_capt, [0]), "?branch:"));
     assign(scalar(entry_tag), "?branch_entry:");
    else();
     assign(scalar(entry_tag), "?version_entry:");

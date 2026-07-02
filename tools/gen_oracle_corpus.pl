@@ -818,6 +818,20 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.2.3.3 — numeric comparison word aliases ──
+    #
+    # Bare comparison words now dispatch through num_* semantics. Keep str_gt in
+    # the same fixture to prove lexical comparison remains available explicitly.
+    {   case   => 'terse_3_2_3_3_numeric_comparison_word_aliases',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(out, ""); if(eq("2", "2")) { set(out, cat(scalar(out), "E")) }; if(ne("2", "3")) { set(out, cat(scalar(out), "N")) }; if(gt("10", "2")) { set(out, cat(scalar(out), "G")) }; if(ge("2", "2")) { set(out, cat(scalar(out), "H")) }; if(lt("2", "10")) { set(out, cat(scalar(out), "L")) }; if(le("2", "2")) { set(out, cat(scalar(out), "M")) }; if(gt("2", "10")) { set(out, cat(scalar(out), "X")) }; if(str_gt("2", "10")) { set(out, cat(scalar(out), "S")) }; return(out) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

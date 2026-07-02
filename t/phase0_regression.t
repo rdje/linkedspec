@@ -12721,7 +12721,7 @@ subtest 'emit_context_avoids_deps_flow_expr_dep_builder' => sub {
         no warnings 'redefine';
         local *LinkedSpec::Deps::flow_expr_deps_for_package = sub { die "__UNEXPECTED_DEPS_FLOW_EXPR_DEPS__\n" };
         $empty_expr = LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(array(items))');
-        $compound_expr = LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('or(eq(scalar(foo), "x"), not(is_empty(array(items))))');
+        $compound_expr = LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('or(str_eq(scalar(foo), "x"), not(is_empty(array(items))))');
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12732,7 +12732,7 @@ subtest 'emit_context_avoids_deps_flow_expr_dep_builder' => sub {
     ok(defined($empty_expr), 'EmitContext still returns lowered empty-check output through the FlowExpr-owned default deps');
     is($empty_expr, '(!@items)', 'EmitContext preserves empty-check flow lowering after moving default deps into FlowExpr');
     ok(defined($compound_expr), 'EmitContext still returns lowered composite flow output through the FlowExpr-owned default deps');
-    is($compound_expr, '((($foo eq "x")) || ((!((!@items)))))', 'EmitContext preserves composite flow lowering after moving default deps into FlowExpr');
+    is($compound_expr, '((do { my $__ls_str_cmp_lhs = $foo; my $__ls_str_cmp_rhs = "x"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }) || ((!((!@items)))))', 'EmitContext preserves composite flow lowering after moving default deps into FlowExpr');
 };
 subtest 'emit_context_avoids_deps_array_pipeline_dep_builder' => sub {
     plan tests => 6;
@@ -15912,8 +15912,8 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'assign helper accepts join_values(delimiter, projected-array-expression) source lowering'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{eq(join_values(", ", sorted_keys(hash(meta))), "kind, source")}),
-        q{(do { my $__ls_join_values = [sort keys %meta]; defined($__ls_join_values) ? join(", ", @{$__ls_join_values}) : $__ls_join_values } eq "kind, source")},
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{str_eq(join_values(", ", sorted_keys(hash(meta))), "kind, source")}),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_join_values = [sort keys %meta]; defined($__ls_join_values) ? join(", ", @{$__ls_join_values}) : $__ls_join_values }; my $__ls_str_cmp_rhs = "kind, source"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'join_values(...) over projected arrays composes inside flow comparisons'
     );
     is(
@@ -16227,8 +16227,8 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'return(payload) accepts scalar(projected-hash-expression, key) lowering'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{eq(scalar(sorted_keys(hash(meta)), 0), "kind")}),
-        q{(do { my $__ls_scalar_source = [sort keys %meta]; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef } eq "kind")},
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{str_eq(scalar(sorted_keys(hash(meta)), 0), "kind")}),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_scalar_source = [sort keys %meta]; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef }; my $__ls_str_cmp_rhs = "kind"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'scalar(projected-array-expression, index) composes inside flow comparisons'
     );
     is(
@@ -16242,8 +16242,8 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'return(payload) accepts last(projected-array-expression) lowering'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{eq(first(sorted_keys(hash(meta))), "kind")}),
-        q{(do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef } eq "kind")},
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{str_eq(first(sorted_keys(hash(meta))), "kind")}),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }; my $__ls_str_cmp_rhs = "kind"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'first(...) over projected arrays composes inside flow comparisons'
     );
     is(
@@ -34038,12 +34038,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_replace_substr_helpers_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized).assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")).if(eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")).return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))).else.return(hash("normalized", scalar(normalized), "normalized_kind", "other")).endif
+ /a/ -> Top .declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized).assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")).if(str_eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")).return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))).else.return(hash("normalized", scalar(normalized), "normalized_kind", "other")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")); if(eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")); return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))); else; return(hash("normalized", scalar(normalized), "normalized_kind", "other")); endif }
+ /a/ -> Top { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")); if(str_eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")); return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))); else; return(hash("normalized", scalar(normalized), "normalized_kind", "other")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34081,13 +34081,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_replace_substr_helpe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized).assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")).if(eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")).return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))).else.return(hash("normalized", scalar(normalized), "normalized_kind", "other")).endif
+LX.declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized).assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")).if(str_eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")).return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))).else.return(hash("normalized", scalar(normalized), "normalized_kind", "other")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")); if(eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")); return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))); else; return(hash("normalized", scalar(normalized), "normalized_kind", "other")); endif }
+LX { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")); if(str_eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")); return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))); else; return(hash("normalized", scalar(normalized), "normalized_kind", "other")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -35884,8 +35884,8 @@ subtest 'emit_context_lowers_coalesce_nonempty_value_helpers' => sub {
         'coalesce_nonempty(...) lowers scalar fallback chains into nested first-defined-nonempty value expressions'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")'),
-        '(do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : "WORD" } } eq "WORD")',
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")'),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "WORD" } }; my $__ls_str_cmp_rhs = "WORD"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'coalesce_nonempty(...) composes inside canonical flow comparisons'
     );
     is(
@@ -35899,12 +35899,12 @@ subtest 'method_like_fluent_and_structured_action_coalesce_value_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")).if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
+ /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")).if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
+ /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35942,12 +35942,12 @@ subtest 'method_like_fluent_and_structured_action_coalesce_nonempty_value_helper
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")).if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
+ /a/ -> Top .declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
+ /a/ -> Top { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35985,13 +35985,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_value_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")).if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
+LX.declare(scalar, chosen).assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")).if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
+LX { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36030,13 +36030,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_nonempty_value_hel
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")).if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
+LX.declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
+LX { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36343,12 +36343,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_normalization_helpers_l
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))).if(eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
+ /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
+ /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36386,13 +36386,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_normalization_helper
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))).if(eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
+LX.declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
+LX { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36624,8 +36624,8 @@ subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
         'replace_substr(...) lowers composed fallback expressions into guarded literal substring rewrites'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(replace_substr(lowercase(trim(scalar(raw_name))), "-", "_"), "node_item")'),
-        '(do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } } eq "node_item")',
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(replace_substr(lowercase(trim(scalar(raw_name))), "-", "_"), "node_item")'),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_str_cmp_rhs = "node_item"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'replace_substr(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
@@ -36648,13 +36648,13 @@ subtest 'emit_context_lowers_scalar_boundary_transform_value_helpers' => sub {
         'rm_suffix(...) lowers composed fallback expressions into guarded literal suffix trims'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(rm_prefix(lowercase(trim(scalar(raw_name))), "node_"), "item_end")'),
-        '(do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } } eq "item_end")',
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_prefix(lowercase(trim(scalar(raw_name))), "node_"), "item_end")'),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }; my $__ls_str_cmp_rhs = "item_end"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'rm_prefix(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end"), "node_item")'),
-        '(do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } } eq "node_item")',
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end"), "node_item")'),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }; my $__ls_str_cmp_rhs = "node_item"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'rm_suffix(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
@@ -36682,8 +36682,8 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
         'concat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('eq(concat(lowercase(trim(scalar(raw_name))), "_", scalar(stage)), "node_init")'),
-        q{(do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef } eq "node_init")},
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(concat(lowercase(trim(scalar(raw_name))), "_", scalar(stage)), "node_init")'),
+        q{do { my $__ls_str_cmp_lhs = do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }; my $__ls_str_cmp_rhs = "node_init"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'concat(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
@@ -39131,11 +39131,11 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
     );
     my $indexed_scalar_if = LinkedSpec::call_spec_handler_subst(
         'Top',
-        'if(eq(scalar(foo_arr, idx), scalar(foo_hash, key))); say("shape"); endif()'
+        'if(str_eq(scalar(foo_arr, idx), scalar(foo_hash, key))); say("shape"); endif()'
     );
     like(
         $indexed_scalar_if,
-        qr/\$foo_arr\[\$idx\]\s+eq\s+\$foo_hash\{\$key\}/s,
+        qr/__ls_str_cmp_lhs\s*=\s*\$foo_arr\[\$idx\].*__ls_str_cmp_rhs\s*=\s*\$foo_hash\{\$key\}.*__ls_str_cmp_lhs\s+eq\s+\$__ls_str_cmp_rhs/s,
         'scalar(array_symbol, index_symbol) and scalar(hash_symbol, key_symbol) lower into array/hash entry access'
     );
     like(
@@ -46255,8 +46255,9 @@ subtest 'spec_format_terse_2_3_5_5_block_valued_receiver_chains' => sub {
 
 subtest 'spec_format_terse_3_2_1_numeric_word_aliases' => sub {
     # SPEC-FORMAT-TERSE.3.2.1: non-comparison numeric word aliases map to
-    # the existing num_* helper family. Comparison words remain string
-    # comparisons until .3.2.3 explicitly decides that policy.
+    # the existing num_* helper family. SPEC-FORMAT-TERSE.3.2.3.3 later
+    # flips comparison words to numeric aliases, which this historical test
+    # now observes.
     plan tests => 11;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -46283,8 +46284,8 @@ subtest 'spec_format_terse_3_2_1_numeric_word_aliases' => sub {
     like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('add(1, 2)'),
         qr/__ls_num_add_terms/s,
         'numeric word aliases compose inside flow-value lowering');
-    is(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('gt(10, 2)'), '(10 gt 2)',
-        'bare comparison word gt(...) remains the existing string comparison helper');
+    is(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('gt(10, 2)'), '(10 > 2)',
+        'bare comparison word gt(...) lowers as a numeric comparison alias');
     like($L->('return(3.5.floor().add(1))'),
         qr/__ls_num_add.*__ls_num_floor/s,
         'function-form numeric aliases do not disturb existing number receiver-dot chains');
@@ -46370,8 +46371,8 @@ subtest 'spec_format_terse_3_2_2_arithmetic_symbol_callees' => sub {
 
 subtest 'spec_format_terse_3_2_3_2_string_comparison_helpers' => sub {
     # SPEC-FORMAT-TERSE.3.2.3.2: explicit str_* helpers preserve lexical
-    # string comparison semantics before bare comparison words can become
-    # numeric aliases in a later leaf.
+    # string comparison semantics after bare comparison words become numeric
+    # aliases.
     plan tests => 10;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -46395,8 +46396,8 @@ subtest 'spec_format_terse_3_2_3_2_string_comparison_helpers' => sub {
     like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_gt("2", "10")'),
         qr/__ls_str_cmp_lhs.* gt .*__ls_str_cmp_rhs/s,
         'str_* helpers compose inside flow predicates');
-    is(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('gt(10, 2)'), '(10 gt 2)',
-        'bare comparison word gt(...) remains the existing string comparison helper');
+    is(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('gt(10, 2)'), '(10 > 2)',
+        'bare comparison word gt(...) now lowers as a numeric comparison alias');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { return(array(str_eq(\"a\",\"a\"), str_ne(\"a\",\"b\"), str_gt(\"2\",\"10\"), str_ge(\"2\",\"2\"), str_lt(\"10\",\"2\"), str_le(\"10\",\"10\"), str_gt(\"10\",\"2\"), num_gt(\"10\",\"2\"))) }\n"
@@ -46421,6 +46422,62 @@ subtest 'spec_format_terse_3_2_3_2_string_comparison_helpers' => sub {
         'string comparison helper spec has no unresolved-helper hits');
     ok($meta->{language_agnostic_action_ir_ready},
         'string comparison helper spec remains language-agnostic ActionIR ready');
+};
+
+subtest 'spec_format_terse_3_2_3_3_numeric_comparison_word_aliases' => sub {
+    # SPEC-FORMAT-TERSE.3.2.3.3: ordinary comparison word calls now map to the
+    # numeric num_* family. Lexical string comparisons stay explicit as str_*.
+    plan tests => 11;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(array(eq("2","2"), ne("2","3"), gt("10","2"), ge("2","2"), lt("2","10"), le("2","2")))'),
+        qr/__ls_num_cmp_lhs.*==.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*!=.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*>.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*>=.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*<.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*<=.*__ls_num_cmp_rhs/s,
+        'bare comparison word calls lower through numeric comparison contracts');
+    is(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('gt(10, 2)'), '(10 > 2)',
+        'bare comparison word calls compose as numeric comparisons inside flow predicates');
+    like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_gt("2", "10")'),
+        qr/__ls_str_cmp_lhs.* gt .*__ls_str_cmp_rhs/s,
+        'explicit str_* helpers remain lexical inside flow predicates');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { return(array(eq(\"2\",\"2\"), ne(\"2\",\"3\"), gt(\"10\",\"2\"), ge(\"2\",\"2\"), lt(\"2\",\"10\"), le(\"2\",\"2\"), gt(\"2\",\"10\"), str_gt(\"2\",\"10\"))) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'numeric comparison word alias spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[1,1,1,1,1,1,0,1]',
+        'comparison words run numerically while str_gt remains lexical');
+
+    my $src = $gen->($spec);
+    like($src, qr/__ls_num_cmp_lhs.*__ls_num_cmp_rhs/s,
+        'generated source contains numeric comparison lowering');
+    like($src, qr/__ls_str_cmp_lhs.*__ls_str_cmp_rhs/s,
+        'generated source still contains explicit string comparison lowering where str_* is used');
+    unlike($src, qr/\b(?:eq|ne|gt|ge|lt|le)\s*\(/,
+        'generated source has no raw comparison word-callee residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'numeric comparison word alias spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'numeric comparison word alias spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'numeric comparison word alias spec remains language-agnostic ActionIR ready');
 };
 
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {

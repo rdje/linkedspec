@@ -29,15 +29,14 @@ Accepted explicit bridge names:
 - `str_lt(lhs,rhs)`
 - `str_le(lhs,rhs)`
 
-These names preserve today's lexical string comparison semantics of the bare
-`eq`/`ne`/`gt`/`ge`/`lt`/`le` helpers. They are shipped two-argument string predicates, not numeric helpers,
+These names preserve the prior lexical string comparison semantics of the bare
+`eq`/`ne`/`gt`/`ge`/`lt`/`le` helpers before `.3.2.3.3`. They are shipped two-argument string predicates, not numeric helpers,
 not receiver-dot methods, and not comparison symbol callees.
 
-Current shipped behavior after `.3.2.3.2`: use `str_*` for new lexical comparisons, and use `num_*` helpers or
-number receiver terminals for numeric comparisons.
+Current shipped behavior after `.3.2.3.3`: use `str_*` for lexical comparisons, and use `num_*` helpers,
+bare comparison word aliases, or number receiver terminals for numeric comparisons.
 
-Bare comparison words remain runnable string-comparison compatibility aliases only until
-`SPEC-FORMAT-TERSE.3.2.3.3` flips ordinary comparison word calls to numeric aliases. Repo-owned string examples
-can now move to `str_*` or keep explicit compatibility coverage.
+Bare comparison words are no longer string-comparison compatibility aliases. Repo-owned lexical string examples
+should use `str_*`; `eq`/`ne`/`gt`/`ge`/`lt`/`le` are numeric aliases.
 
-The next frontier after `.3.2.3.2` is `SPEC-FORMAT-TERSE.3.2.3.3`.
+The next comparison frontier after `.3.2.3.3` is `SPEC-FORMAT-TERSE.3.2.3.4` for comparison symbol callees.

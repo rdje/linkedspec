@@ -1455,6 +1455,12 @@ impl Engine {
             "clamp" => Some("num_clamp"),
             "min" => Some("num_min"),
             "max" => Some("num_max"),
+            "eq" => Some("num_eq"),
+            "ne" => Some("num_ne"),
+            "gt" => Some("num_gt"),
+            "ge" => Some("num_ge"),
+            "lt" => Some("num_lt"),
+            "le" => Some("num_le"),
             _ => None,
         }
     }

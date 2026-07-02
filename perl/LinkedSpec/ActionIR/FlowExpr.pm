@@ -317,12 +317,6 @@ sub _lower_flow_composite_expr {
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
  my %string_compare_ops = (
-  eq     => 'eq',
-  ne     => 'ne',
-  gt     => 'gt',
-  ge     => 'ge',
-  lt     => 'lt',
-  le     => 'le',
   str_eq => 'eq',
   str_ne => 'ne',
   str_gt => 'gt',
@@ -331,6 +325,12 @@ sub _lower_flow_composite_expr {
   str_le => 'le',
  );
  my %numeric_compare_ops = (
+  eq     => '==',
+  ne     => '!=',
+  gt     => '>',
+  ge     => '>=',
+  lt     => '<',
+  le     => '<=',
   num_eq => '==',
   num_ne => '!=',
   num_gt => '>',

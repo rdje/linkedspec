@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.3 — flip comparison word aliases
+
+**Scope:** Perl ActionIR comparison lowering, Rust helper validation/runtime dispatch, shipped `.spec`
+lexical-comparison migrations, phase0 locks, Rust integration test, oracle corpus, mdBook, task tree, live
+recovery docs, and Knowledge Map.
+
+**What changed:** Ordinary value-call comparison words `eq`, `ne`, `gt`, `ge`, `lt`, and `le` now map to the
+numeric `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` helpers on Perl and Rust. Explicit
+`num_*` helpers and number receiver terminals remain accepted numeric comparisons.
+
+**Compatibility boundary:** Lexical string comparisons now use the explicit `str_eq`, `str_ne`, `str_gt`,
+`str_ge`, `str_lt`, and `str_le` bridge shipped by `.3.2.3.2`; repo-owned specs and tests that depended on
+bare string comparison words were migrated to `str_*`. Comparison symbol callees remain unimplemented until
+`.3.2.3.4`.
+
+**Checks:** Perl syntax checks, focused Perl lowering/runtime/source probes, focused Rust runtime comparison-word
+test, oracle generation, Rust corpus oracle, phase0, mdBook build, Knowledge Map regenerate/check, memory
+architecture, doctrine registry, `git diff --check`, and full local CI passed. Local CI includes phase0 passing
+with **1010 tests** and the corpus oracle passing over **57 fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.2 — implement string comparison helpers
 
 **Scope:** Perl ActionIR flow/value lowering, Rust helper validation/runtime dispatch, phase0 locks, Rust

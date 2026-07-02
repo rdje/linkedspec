@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.3 — numeric comparison word aliases landed**
+  (PERL ACTIONIR + RUST RUNTIME + SHIPPED SPEC MIGRATION + PHASE0 + ORACLE + BOOK/KM).
+  Bare value-call comparison words now use numeric semantics: `eq`, `ne`, `gt`, `ge`, `lt`, and `le` map to
+  `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` on Perl and Rust. Explicit `num_*` calls and
+  number receiver terminals such as `score.gt(3)` remain accepted numeric comparisons.
+
+  Lexical string comparisons are now the explicit `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and
+  `str_le` family. Repo-owned specs and phase0 examples that relied on bare word string comparison were
+  migrated to `str_*`, including `portmap`, `spec`, `ds_vhistory`, and `simenv` sites. Comparison symbol
+  callees remain `.3.2.3.4`.
+
+  **Verification:** Perl syntax checks PASS; focused Perl lowering/runtime/source probes PASS; focused Rust
+  runtime `.3.2.3.3` PASS; oracle regeneration produced **57 fixtures** including
+  `terse_3_2_3_3_numeric_comparison_word_aliases`; Rust corpus oracle PASS; phase0 PASS with **1010 tests**;
+  mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3.4` (numeric comparison symbol callees), then `.3.3`.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.2 — explicit string comparison helpers landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM).
   The explicit string-comparison bridge is now runnable: `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and
@@ -21,7 +39,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **56 fixtures** including `terse_3_2_3_2_string_comparison_helpers`; Rust corpus oracle PASS; phase0 PASS with
   **1009 tests**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3.3` (numeric comparison word aliases), then `.3.2.3.4` and `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3.3` (now done), then `.3.2.3.4` and `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.1 — string comparison bridge contract locked**
   (TASK TREE + ROADMAP + BOOK/KM + LIVE DOCS; **no parser/compiler/runtime code change**).
@@ -74,7 +92,7 @@ Current execution status for interruption-safe batch workflow recovery.
   integration run also shows the new `.3.2.2` test passing but still contains unrelated stale `s(...)`/`a(...)`/`h(...)`
   short-wrapper tests from the prior alias-retirement baseline.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.3`), then `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.4` after `.3.2.3.3` landed), then `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.4 — user-function surface finalized**
   (BOOK + TASK TREE + KNOWLEDGE MAP + LIVE DOCS).

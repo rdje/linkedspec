@@ -34,7 +34,7 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
                                        declare(scalar, block_namee=match_text());
 	                                       substr(scalar(block_namee), /^.*\s+/, "", o);
 
-                                       if(ne(scalar(block_namee), scalar(block_namei)));
+                                       if(str_ne(scalar(block_namee), scalar(block_namei)));
                                          print("(simenv) -E- BEGIN Block Name '", scalar(block_namei), "' and END Block name '", scalar(block_namee), "' do not match.\n");
                                          print("             BEGIN statement is on line ", cursor_line(), " while END statement is on line ", match_line(), "\n");
 	                                         exit_now();

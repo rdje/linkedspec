@@ -23,7 +23,7 @@ bare_bit_slice: /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])
 	assign(array(entry_parts), entry_groups());
 	if(matches(entry_text(), /:/));
 		return(array("?slice:", array(flat_array(entry_parts))));
-	elseif(or(eq(entry_group(1), "0"), is_nonempty(entry_group(1))));
+	elseif(or(str_eq(entry_group(1), "0"), is_nonempty(entry_group(1))));
 		return(array("?bit:", array(flat_array(entry_parts))));
 	elseif(matches(entry_group(0), /^\d/io));
 		return(array("?constant:", array(flat_array(entry_parts))));

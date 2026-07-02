@@ -6,8 +6,9 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (**`.3.2.3.2` DONE; explicit `str_*` string-comparison helpers now ship on Perl/Rust
-  after `.3.2.3.1` locked their bridge contract; frontier moves to `.3.2.3.3` numeric comparison word aliases**.
+- Last updated: `2026-07-02` (**`.3.2.3.3` DONE; bare comparison word calls now map to numeric `num_*`
+  aliases on Perl/Rust after explicit `str_*` string-comparison helpers shipped; frontier moves to `.3.2.3.4`
+  numeric comparison symbol callees**.
   Prior **`.4.1` DONE; user-defined function MVP contract/inventory locked before code** —
   the accepted contract is now explicit: top-level `fn name(args) { ... }`, exact arity, eager argument
   evaluation, fresh function-local parameter/work-variable scope, pure value/block bodies, final-expression or
@@ -27,8 +28,9 @@
   preserving slash regex literals such as `/(\))/` and `/(?<!\\)}/`. The comparison migration is split behind
   an explicit `str_*` string bridge before numeric comparison word aliases and symbol callees. The bridge
   contract and implementation are now locked: `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le`
-  ship as explicit lexical string comparisons on Perl and Rust. Bare comparison words remain runnable string
-  compatibility aliases until `.3.2.3.3` flips them to numeric aliases.
+  ship as explicit lexical string comparisons on Perl and Rust. Bare comparison words `eq`, `ne`, `gt`, `ge`,
+  `lt`, and `le` now map to numeric `num_*` comparison helpers after `.3.2.3.3`; symbol callees remain
+  `.3.2.3.4`.
   Prior **`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
   `sub(...)`, `mul(...)`, `div(...)`, `mod(...)`, `abs(...)`, `floor(...)`, `ceil(...)`, `round(...)`,
   `min(...)`, `max(...)`, `clamp(...)`, `sum(...)`, `avg(...)`, `median(...)`, and `range(...)` now map to the
@@ -2207,17 +2209,26 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     compatibility. The Rust focused runtime test and oracle fixture prove Perl/Rust parity over lexical
     ordering cases such as `str_gt("2","10")` versus numeric `num_gt("10","2")`. The book now prefers
     `str_*` for lexical comparisons, while bare comparison words remain compatibility aliases until `.3.2.3.3`.
-  Commit: `pending`
+  Commit: `SPEC-FORMAT-TERSE.3.2.3.2 - implement string comparison helpers`
 
 - ID: `SPEC-FORMAT-TERSE.3.2.3.3`
-  Status: `pending`
+  Status: `done` 2026-07-02
   Goal: Numeric comparison word aliases
   Acceptance: After the string bridge lands, map ordinary value-call comparison words `eq`, `ne`, `gt`, `ge`,
     `lt`, and `le` to `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` on Perl and Rust. Preserve
     explicit `num_*` helper names and number receiver terminals. This leaf must close raw fallback for the
     word-call shapes it owns, update legacy-string compatibility notes, and add focused parity/oracle locks.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Perl flow/value lowering now treats bare `eq`, `ne`, `gt`, `ge`, `lt`, and
+    `le` as numeric comparison aliases over the existing `num_*` family, including flow predicates and dropped
+    value statements. Rust validation and runtime helper dispatch accept the same aliases and route them through
+    numeric comparison semantics. Explicit `num_*` helper names and number receiver terminals remain stable.
+    Lexical string comparisons now use `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le`; repo-owned
+    shipped specs and tests with string-intent bare comparison words were migrated to `str_*`. Phase0 locks prove
+    numeric lowering, runtime results, generated-source cleanup, zero fallback/unresolved metadata, and
+    `str_gt("2","10")` remaining lexical while bare `gt("2","10")` is numeric false. The Rust focused runtime
+    test and oracle fixture prove Perl/Rust parity. Oracle corpus reaches **57 fixtures** and phase0 reaches
+    **1010 tests**.
+  Commit: `SPEC-FORMAT-TERSE.3.2.3.3 - flip comparison word aliases`
 
 - ID: `SPEC-FORMAT-TERSE.3.2.3.4`
   Status: `pending`
@@ -2576,7 +2587,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.5.0` | `done` 2026-07-01 | Future backend parity ownership is explicit before any non-Rust variant code: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs an ADR before inclusion. |
 | — | `SPEC-FORMAT-TERSE.3.1` | `done` 2026-07-01 | Edge syntax contract confirmed and locked with existing regression coverage: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. |
 | — | `SPEC-FORMAT-TERSE.3.2` | `active` (split 2026-07-01) | Arithmetic/comparison call surface split before code: word aliases, symbol callees, and comparison-name policy are separate mechanisms. |
-| — | `SPEC-FORMAT-TERSE.3.2.1` | `done` 2026-07-01 | Non-conflicting numeric word aliases now map to `num_*` on Perl/Rust; comparison words remain string helpers. |
+| — | `SPEC-FORMAT-TERSE.3.2.1` | `done` 2026-07-01 | Non-conflicting numeric word aliases map to `num_*` on Perl/Rust; comparison words stayed string helpers until `.3.2.3.3` later flipped them. |
 | — | `SPEC-FORMAT-TERSE.4.1` | `done` 2026-07-01 | User-defined function MVP contract/inventory locked before code; implementation split into `.4.2.1`–`.4.2.3` and `.4.3.1`–`.4.3.2`. |
 | — | `SPEC-FORMAT-TERSE.4.2.1` | `done` 2026-07-01 | Perl reference function-definition grammar/registry descriptor seam landed; registered calls were intentionally unresolved until `.4.2.2`. |
 | — | `SPEC-FORMAT-TERSE.4.2.2` | `done` 2026-07-01 | Perl registered exact-arity value calls now execute in value positions and compatible receiver chains. |
@@ -2587,12 +2598,19 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.3.2.2` | `done` 2026-07-02 | Arithmetic symbol callees `+(...)`, `-(...)`, `*(...)`, `/(...)`, and `%(...)` now map to `num_add`/`num_sub`/`num_mul`/`num_div`/`num_mod` on Perl/Rust while slash regex literals remain regexes. |
 | — | `SPEC-FORMAT-TERSE.3.2.3` | `active` (split 2026-07-02) | Comparison call surface split before implementation: explicit string bridge first, numeric comparison word aliases next, symbol callees after that. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.1` | `done` 2026-07-02 | Explicit `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` compatibility bridge contract locked before changing bare comparison words; no runtime behavior changed. |
-| — | `SPEC-FORMAT-TERSE.3.2.3.2` | `done` 2026-07-02 | Explicit `str_*` string-comparison helpers landed on Perl/Rust; bare comparison words remain string-compatibility aliases until `.3.2.3.3`. |
-| 1 | `SPEC-FORMAT-TERSE.3.2.3.3` | `pending` | Flip ordinary comparison word calls to numeric `num_*` aliases only after the explicit string bridge exists. |
-| 2 | `SPEC-FORMAT-TERSE.3.2.3.4` | `pending` | Add numeric comparison symbol callees `==`, `!=`, `>`, `>=`, `<`, and `<=` without claiming assignment `=(...)` or blind-call `=>`. |
-| 3 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
+| — | `SPEC-FORMAT-TERSE.3.2.3.2` | `done` 2026-07-02 | Explicit `str_*` string-comparison helpers landed on Perl/Rust; bare comparison words remained string-compatibility aliases until `.3.2.3.3`. |
+| — | `SPEC-FORMAT-TERSE.3.2.3.3` | `done` 2026-07-02 | Ordinary comparison word calls now map to numeric `num_*` aliases on Perl/Rust; lexical strings use explicit `str_*`. |
+| 1 | `SPEC-FORMAT-TERSE.3.2.3.4` | `pending` | Add numeric comparison symbol callees `==`, `!=`, `>`, `>=`, `<`, and `<=` without claiming assignment `=(...)` or blind-call `=>`. |
+| 2 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
 
 ## Decisions
+
+- `2026-07-02` (**`.3.2.3.3` numeric comparison word aliases implemented**). Bare value-call comparison words
+  `eq(lhs,rhs)`, `ne(lhs,rhs)`, `gt(lhs,rhs)`, `ge(lhs,rhs)`, `lt(lhs,rhs)`, and `le(lhs,rhs)` are now numeric
+  aliases for `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` on Perl and Rust. Lexical string
+  comparisons must use the explicit bridge names `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and
+  `str_le`; repo-owned lexical comparison sites are migrated accordingly. Comparison symbol callees remain
+  `.3.2.3.4`; assignment `=(...)` remains `.3.3`; `=>` remains the blind-call edge operator.
 
 - `2026-07-02` (**`.3.2.3.2` explicit string-comparison helpers implemented**). `str_eq(lhs,rhs)`,
   `str_ne(lhs,rhs)`, `str_gt(lhs,rhs)`, `str_ge(lhs,rhs)`, `str_lt(lhs,rhs)`, and `str_le(lhs,rhs)` are now
@@ -3376,6 +3394,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.3` | KM retrieval (`terse-numeric-comparison-word-aliases`, `terse-string-comparison-bridge-contract`, `terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); Perl syntax checks for ActionIR comparison/lowering contracts and phase0; focused Perl lowering/runtime/source probes for numeric bare words and lexical `str_*`; oracle generator; focused Rust runtime comparison-word lock; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Bare value-call comparison words `eq`/`ne`/`gt`/`ge`/`lt`/`le` now route to numeric `num_*` comparison helpers on Perl/Rust. Explicit `str_*` remains the lexical string surface, and shipped specs/tests with lexical bare comparison intent moved to `str_*`. Comparison symbol callees remain `.3.2.3.4`; assignment `=(...)` remains `.3.3`. Oracle corpus reaches **57 fixtures** and phase0 reaches **1010 tests** after the focused numeric-word lock. Frontier becomes `.3.2.3.4`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.2` | KM retrieval (`terse-string-comparison-bridge-contract`, `terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); Perl syntax checks for ActionIR comparison/lowering contracts and phase0; focused Rust runtime string-comparison helper lock; oracle generator; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Explicit `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` helpers landed on Perl/Rust as lexical string predicates. Bare comparison words remain string-compatibility aliases until `.3.2.3.3`; numeric comparisons remain `num_*` or number receiver terminals; comparison symbol callees remain `.3.2.3.4`. Oracle corpus reaches **56 fixtures** and phase0 reaches **1009 tests** after the focused string-helper lock. Frontier becomes `.3.2.3.3`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.1` | KM retrieval (`terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); source re-read of `ActionIR/FlowExpr.pm` string/numeric comparison dispatch; mdBook string/numeric comparison wording audit; `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`; Knowledge Map regenerate/check; memory/doctrine/diff checks; mdBook build; full local CI | Explicit string bridge contract locked before code. The accepted names are `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`; they preserve today's lexical string comparison semantics and are not numeric helpers, receiver-dot links, or symbol callees. The book states these names are accepted but not shipped until `.3.2.3.2`; current runtime behavior is unchanged. Full local CI passed with phase0 1008. Frontier becomes `.3.2.3.2`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3` | KM retrieval (`spec-arithmetic-call-surface-ground-truth`, `terse-expression-valued-assignment-and-operator-calls`); TOOLBOX `call_spec_handler_subst`/runtime/flow probes for bare comparison words, numeric comparison helpers, receiver numeric comparisons, and comparison symbol calls; Perl source reads of `ActionIR/MethodExpr.pm`, `ActionIR/FlowExpr.pm`, `ActionIR/MethodLowering.pm`, `ActionIR/AST/Parser.pm`, `BootstrapSpec/Core.pm`, and `Validation.pm`; Rust source reads of `linkedspec-core/src/expr.rs`, `linkedspec-core/src/validation.rs`, and `linkedspec-runtime/src/engine.rs`; mdBook comparison-helper audit | Comparison call surface split before code. Current shipped behavior remains unchanged: `num_*` comparisons and receiver `.gt(...)`-style terminals are numeric, bare `eq`/`ne`/`gt`/`ge`/`lt`/`le` are string comparisons in documented flow/helper contexts, and comparison symbol callees are not implemented. The future canonical numeric comparison call surface is word + symbol aliases over `num_*`, but implementation is split behind an explicit `str_*` string-comparison bridge. Frontier becomes `.3.2.3.1`. |
@@ -3472,6 +3491,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.3.2.3.3` | `SPEC-FORMAT-TERSE.3.2.3.3 - flip comparison word aliases` | Bare comparison word calls now map to numeric `num_*` aliases on Perl/Rust; lexical string comparisons use `str_*`; corpus 57 passes and frontier becomes `.3.2.3.4`. |
 | `SPEC-FORMAT-TERSE.3.2.3.2` | `SPEC-FORMAT-TERSE.3.2.3.2 - implement string comparison helpers` | Explicit `str_*` lexical string comparisons landed on Perl/Rust; corpus 56 passes and frontier becomes `.3.2.3.3`. |
 | `SPEC-FORMAT-TERSE.3.2.3.1` | `SPEC-FORMAT-TERSE.3.2.3.1 - lock string comparison bridge` | Explicit `str_*` string-bridge names locked before implementation; no runtime behavior changed; frontier becomes `.3.2.3.2`. |
 | `SPEC-FORMAT-TERSE.4.4` | `SPEC-FORMAT-TERSE.4.4 - finalize function surface ledger` | Function MVP docs/retrieval closure landed; frontier becomes `.3.2.2`. |
@@ -3484,7 +3504,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.5.0` | `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory` | Future backend parity ownership is explicit: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs a new decision record before any code. Frontier returns to `.3.1`. |
 | `SPEC-FORMAT-TERSE.3.1` | `SPEC-FORMAT-TERSE.3.1 - lock edge syntax contract` | Edge syntax confirmed without behavior change: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. Frontier becomes `.3.2`. |
 | `SPEC-FORMAT-TERSE.3.2` | `SPEC-FORMAT-TERSE.3.2 - split arithmetic call surface` | Arithmetic/comparison calls split before code: `.3.2.1` owns non-conflicting numeric word aliases, `.3.2.2` owns arithmetic symbol callees, and `.3.2.3` owns the comparison spelling policy before implementation. Frontier becomes `.3.2.1`. |
-| `SPEC-FORMAT-TERSE.3.2.1` | `SPEC-FORMAT-TERSE.3.2.1 - implement numeric word aliases` | Function-form numeric word aliases now dispatch to the existing `num_*` family on Perl/Rust; bare comparison words stay string helpers. Phase0 1002 green; oracle corpus 53 fixtures; frontier becomes `.3.2.2`. |
+| `SPEC-FORMAT-TERSE.3.2.1` | `SPEC-FORMAT-TERSE.3.2.1 - implement numeric word aliases` | Function-form numeric word aliases dispatch to the existing `num_*` family on Perl/Rust; bare comparison words stayed string helpers only until `.3.2.3.3`. Phase0 1002 green; oracle corpus 53 fixtures; frontier becomes `.3.2.2`. |
 | `SPEC-FORMAT-TERSE.3.2.2` | `SPEC-FORMAT-TERSE.3.2.2 - implement arithmetic symbol callees` | Arithmetic symbol callees `+(...)`, `-(...)`, `*(...)`, `/(...)`, and `%(...)` now dispatch to `num_add`/`num_sub`/`num_mul`/`num_div`/`num_mod` on Perl/Rust; slash regex literals remain regexes. Frontier becomes `.3.2.3`. |
 | `SPEC-FORMAT-TERSE.3.2.3` | `SPEC-FORMAT-TERSE.3.2.3 - split comparison call surface` | Comparison call migration split before code: explicit `str_*` string bridge first, numeric comparison word aliases second, numeric comparison symbol callees third. Current shipped comparison behavior is unchanged; frontier becomes `.3.2.3.1`. |
 | `SPEC-FORMAT-TERSE.2.3.5` | `SPEC-FORMAT-TERSE.2.3.5 - split return-type method chaining` | Return-type method chaining specified before code and split into array/hash/string/number receiver-family leaves. No runtime behavior changed; first implementation frontier is `.2.3.5.1` array receiver-dot value chains. |
@@ -3567,6 +3587,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 ## Changelog
 
+- `2026-07-02`: **`.3.2.3.3` DONE — numeric comparison word aliases shipped.**
+  Bare value-call `eq`, `ne`, `gt`, `ge`, `lt`, and `le` now lower/dispatch as numeric aliases for
+  `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` on Perl and Rust. Explicit `str_eq`,
+  `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le` remain the lexical string comparison surface, and
+  repo-owned specs/tests with string comparison intent have moved to `str_*`. Added phase0, Rust runtime, and
+  oracle locks; corpus reaches 57 fixtures and phase0 reaches 1010 tests. Frontier moves to `.3.2.3.4`.
+
 - `2026-07-02`: **`.3.2.3.2` DONE — explicit string-comparison helpers shipped.**
   `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le` now lower/dispatch as portable lexical
   string predicates on Perl and Rust. The book now prefers `str_*` for new text comparisons. Bare
@@ -3586,7 +3613,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   `ge`/`>=`, `lt`/`<`, and `le`/`<=`, all mapping to the existing `num_*` comparison family. Because current
   bare comparison words are documented string comparisons, implementation is split behind explicit
   `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` string helpers. Then-frontier moved to `.3.2.3.1`;
-  current frontier after the string-helper implementation is `.3.2.3.3`. No parser/compiler/runtime behavior changed in
+  current frontier after the word-alias implementation is `.3.2.3.4`. No parser/compiler/runtime behavior changed in
   this split slice.
 
 - `2026-07-02`: **`.4.4` DONE — function MVP surface and deferred extension ledger finalized.**
