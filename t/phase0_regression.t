@@ -46480,6 +46480,69 @@ subtest 'spec_format_terse_3_2_3_3_numeric_comparison_word_aliases' => sub {
         'numeric comparison word alias spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_3_2_3_4_numeric_comparison_symbol_callees' => sub {
+    # SPEC-FORMAT-TERSE.3.2.3.4: comparison symbol callees are ordinary
+    # callee(args) forms over the numeric num_* comparison family. The single
+    # equals operator-call spelling remains deferred to .3.3.
+    plan tests => 13;
+    require JSON::PP;
+    require LinkedSpec::ActionIR::MethodExpr;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(array(==("2","2"), !=("2","3"), >("10","2"), >=("2","2"), <("2","10"), <=("2","2")))'),
+        qr/__ls_num_cmp_lhs.*==.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*!=.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*>.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*>=.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*<.*__ls_num_cmp_rhs.*__ls_num_cmp_lhs.*<=.*__ls_num_cmp_rhs/s,
+        'comparison symbol callees lower through numeric comparison contracts');
+    like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('>(10, 2)'),
+        qr/__ls_num_cmp_lhs.*>.*__ls_num_cmp_rhs/s,
+        'comparison symbol callees compose inside flow predicates through numeric lowering');
+    like(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('/(9, 2)'),
+        qr/__ls_num_div/s,
+        'existing slash symbol callees still lower as division calls');
+    ok(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('==(2, 2)'),
+        'double-equals is parsed as a symbol callee');
+    ok(!defined(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('=(target, value)')),
+        'single-equals operator-call spelling remains deferred');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { return(array(==(\"2\",\"2\"), !=(\"2\",\"3\"), >(\"10\",\"2\"), >=(\"2\",\"2\"), <(\"2\",\"10\"), <=(\"2\",\"2\"), >(\"2\",\"10\"), str_gt(\"2\",\"10\"))) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'numeric comparison symbol-callee spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[1,1,1,1,1,1,0,1]',
+        'comparison symbols run numerically while str_gt remains lexical');
+
+    my $src = $gen->($spec);
+    like($src, qr/__ls_num_cmp_lhs.*__ls_num_cmp_rhs/s,
+        'generated source contains numeric comparison lowering');
+    like($src, qr/__ls_str_cmp_lhs.*__ls_str_cmp_rhs/s,
+        'generated source still contains explicit string comparison lowering where str_* is used');
+    unlike($src, qr/(?:==|!=|>=|<=|>|<)\s*\(\s*(?:"2"|"10"|2|10)/,
+        'generated source has no raw comparison symbol-callee residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'numeric comparison symbol-callee spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'numeric comparison symbol-callee spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'numeric comparison symbol-callee spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

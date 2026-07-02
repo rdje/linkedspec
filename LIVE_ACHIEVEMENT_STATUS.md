@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.4 — numeric comparison symbol callees landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
+  Comparison symbol callees are now portable numeric helper calls: `==(a,b)`, `!=(a,b)`, `>(a,b)`,
+  `>=(a,b)`, `<(a,b)`, and `<=(a,b)` parse as ordinary `callee(args)` forms and dispatch to
+  `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` on Perl and Rust.
+
+  The compatibility boundaries are locked: slash regex literals and arithmetic slash calls keep the `.3.2.2`
+  behavior; lexical string comparisons stay on `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`; raw
+  `=(target,value)` assignment operator calls remain `.3.3`; and `=>` remains the blind-call edge operator.
+
+  **Verification:** Perl syntax checks PASS; focused Perl lowering/runtime/source probes PASS; focused Rust
+  parser/runtime `.3.2.3.4` PASS; oracle regeneration produced **58 fixtures** including
+  `terse_3_2_3_4_numeric_comparison_symbol_callees`; Rust corpus oracle PASS; phase0 PASS with **1011 tests**;
+  mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.3` (expression-valued assignment and `=(target,value)` equivalence).
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.3 — numeric comparison word aliases landed**
   (PERL ACTIONIR + RUST RUNTIME + SHIPPED SPEC MIGRATION + PHASE0 + ORACLE + BOOK/KM).
   Bare value-call comparison words now use numeric semantics: `eq`, `ne`, `gt`, `ge`, `lt`, and `le` map to
@@ -92,7 +109,7 @@ Current execution status for interruption-safe batch workflow recovery.
   integration run also shows the new `.3.2.2` test passing but still contains unrelated stale `s(...)`/`a(...)`/`h(...)`
   short-wrapper tests from the prior alias-retirement baseline.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.4` after `.3.2.3.3` landed), then `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (later split through `.3.2.3.4` before `.3.3`), then `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.4 — user-function surface finalized**
   (BOOK + TASK TREE + KNOWLEDGE MAP + LIVE DOCS).

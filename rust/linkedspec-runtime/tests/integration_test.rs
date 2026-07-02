@@ -2059,6 +2059,18 @@ fn terse_3_2_3_3_numeric_comparison_word_aliases_run() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.2.3.4 — numeric comparison symbol callees:
+
+#[test]
+fn terse_3_2_3_4_numeric_comparison_symbol_callees_run() {
+    let grammar = "Top::\n /x/ -> Done { return(array(==(\"2\",\"2\"), !=(\"2\",\"3\"), >(\"10\",\"2\"), >=(\"2\",\"2\"), <(\"2\",\"10\"), <=(\"2\",\"2\"), >(\"2\",\"10\"), str_gt(\"2\",\"10\"))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[true, true, true, true, true, true, false, true]]),
+        "comparison symbol calls dispatch numerically while str_gt remains lexical"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

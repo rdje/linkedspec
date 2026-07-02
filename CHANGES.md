@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.4 — implement comparison symbol callees
+
+**Scope:** Perl ActionIR method-call parsing/lowering, Rust expression parsing/runtime dispatch, phase0 locks,
+Rust parser/runtime tests, oracle corpus, mdBook, task tree, live recovery docs, and Knowledge Map.
+
+**What changed:** Comparison symbol callees are now ordinary `callee(args)` forms over the numeric comparison
+helper family. `==(a,b)`, `!=(a,b)`, `>(a,b)`, `>=(a,b)`, `<(a,b)`, and `<=(a,b)` dispatch through
+`num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` on Perl and Rust.
+
+**Compatibility boundary:** Slash regex handling from `.3.2.2` remains intact, arithmetic slash calls still map
+to `num_div`, lexical string comparisons still use `str_*`, and `=(target,value)` remains deferred to
+`SPEC-FORMAT-TERSE.3.3`. The `=>` blind-call edge operator is unchanged.
+
+**Checks:** Perl syntax checks, focused Perl lowering/runtime/source probes, focused Rust parser/runtime tests,
+oracle generation, Rust corpus oracle, phase0, mdBook build, Knowledge Map regenerate/check, memory
+architecture, doctrine registry, `git diff --check`, and full local CI passed. Local CI includes phase0 passing
+with **1011 tests** and the corpus oracle passing over **58 fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.3 — flip comparison word aliases
 
 **Scope:** Perl ActionIR comparison lowering, Rust helper validation/runtime dispatch, shipped `.spec`

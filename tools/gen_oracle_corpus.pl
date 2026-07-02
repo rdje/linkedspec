@@ -832,6 +832,20 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.2.3.4 — numeric comparison symbol callees ──
+    #
+    # Comparison symbol callees dispatch through num_* semantics. Keep str_gt in
+    # the same fixture to prove lexical comparison remains available explicitly.
+    {   case   => 'terse_3_2_3_4_numeric_comparison_symbol_callees',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(out, ""); if(==("2", "2")) { set(out, cat(scalar(out), "E")) }; if(!=("2", "3")) { set(out, cat(scalar(out), "N")) }; if(>("10", "2")) { set(out, cat(scalar(out), "G")) }; if(>=("2", "2")) { set(out, cat(scalar(out), "H")) }; if(<("2", "10")) { set(out, cat(scalar(out), "L")) }; if(<=("2", "2")) { set(out, cat(scalar(out), "M")) }; if(>("2", "10")) { set(out, cat(scalar(out), "X")) }; if(str_gt("2", "10")) { set(out, cat(scalar(out), "S")) }; return(out) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

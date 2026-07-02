@@ -4773,6 +4773,12 @@ sub _numeric_word_alias_helper_name {
   '*' => 'num_mul',
   '/' => 'num_div',
   '%' => 'num_mod',
+  '==' => 'num_eq',
+  '!=' => 'num_ne',
+  '>' => 'num_gt',
+  '>=' => 'num_ge',
+  '<' => 'num_lt',
+  '<=' => 'num_le',
  );
  return $symbol_alias{$method} if exists $symbol_alias{$method};
  return 'num_'.$method if $method =~ /^(?:abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le)$/o;

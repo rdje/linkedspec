@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.2.3.4 — numeric comparison symbol callees):
+  The comparison symbol-call surface is now complete. Durable points. (1) **Symbols.** `==`, `!=`, `>`, `>=`,
+  `<`, and `<=` parse as ordinary value-call callees and normalize to `num_eq`, `num_ne`, `num_gt`, `num_ge`,
+  `num_lt`, and `num_le` on Perl and Rust. (2) **Parser boundary.** Rust argument parsing now only treats
+  `name=expr` as a keyword argument when a real identifier exists before `=`, so `==(...)` is not split as an
+  empty keyword argument. (3) **Deferred assignment.** Single `=(target,value)` is still rejected/not parsed as
+  a helper call; expression-valued assignment remains `.3.3`. (4) **Compatibility.** Slash regex literals and
+  arithmetic slash calls keep the `.3.2.2` behavior, `str_*` remains the lexical string family, and `=>`
+  remains a blind-call edge. (5) **Gate.** Focused Perl/Rust locks, oracle corpus, phase0, mdBook, Knowledge
+  Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1011 tests and the oracle corpus is 58
+  fixtures.
+  Next frontier: `SPEC-FORMAT-TERSE.3.3`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.2.3.3 — numeric comparison word aliases):
   The comparison-word flip is now complete. Durable points. (1) **Names.** Bare value-call `eq`, `ne`, `gt`,
   `ge`, `lt`, and `le` now normalize to `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, and `num_le` on Perl

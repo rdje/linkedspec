@@ -6,6 +6,7 @@ answers:
   - "does gt(10,2) lower as numeric greater-than"
   - "how do I write lexical string comparison now"
   - "what is next after SPEC-FORMAT-TERSE.3.2.3.3"
+  - "are comparison symbol callees implemented after word aliases"
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, comparisons, helper-aliases, string-helpers, rust-parity, mdbook]
@@ -27,5 +28,6 @@ reverify: "perl -Iperl -MLinkedSpec::RuleIR::EmitContext -e 'print LinkedSpec::R
 Lexical string comparisons use the explicit bridge names `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`,
 and `str_le`.
 
-Comparison symbol callees such as `>(a,b)`, `>=(a,b)`, `==(a,b)`, and `!=(a,b)` remain deferred to
-`SPEC-FORMAT-TERSE.3.2.3.4`.
+Comparison symbol callees such as `>(a,b)`, `>=(a,b)`, `==(a,b)`, and `!=(a,b)` landed in
+`SPEC-FORMAT-TERSE.3.2.3.4` and map to the same numeric `num_*` family. Assignment operator-call spelling
+`=(target,value)` remains deferred to `SPEC-FORMAT-TERSE.3.3`.

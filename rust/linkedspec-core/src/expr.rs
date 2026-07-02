@@ -18,7 +18,7 @@
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
 //! expr        → primary ('.' method_call)*
 //! primary     → call | nested_access | indexed_var | literal | block | variable
-//! call        → name '(' args? ')'
+//! call        → name '(' args? ')' | symbol '(' args? ')'
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument)
@@ -35,6 +35,7 @@
 //! nested_access → variable ('[' expr ']')+ (mixed hash/array path access)
 //! regex       → '/' [^/]* '/'
 //! name        → [a-zA-Z_]\w*
+//! symbol      → '+' | '-' | '*' | '/' | '%' | '==' | '!=' | '>' | '>=' | '<' | '<='
 //! ```
 
 use serde::{Deserialize, Serialize};
@@ -806,7 +807,7 @@ impl<'a> Parser<'a> {
                 let expr = self.parse_string()?;
                 self.parse_fluent_chain(expr)
             }
-            '+' | '*' | '%' => {
+            '+' | '*' | '%' | '=' | '!' | '>' | '<' => {
                 if self.is_symbol_call_at_current() {
                     self.parse_symbol_call()
                 } else {
@@ -906,21 +907,23 @@ impl<'a> Parser<'a> {
     }
 
     fn is_symbol_call_at_current(&self) -> bool {
-        let Some(ch) = self.peek() else {
-            return false;
-        };
-        if !matches!(ch, '+' | '-' | '*' | '/' | '%') {
-            return false;
-        }
+        self.symbol_call_token_at_current().is_some()
+    }
 
-        let mut cursor = self.pos + ch.len_utf8();
+    fn symbol_call_token_at_current(&self) -> Option<&'static str> {
+        let token = ["==", "!=", ">=", "<=", "+", "-", "*", "/", "%", ">", "<"]
+            .into_iter()
+            .find(|candidate| self.remaining().starts_with(candidate))?;
+
+        let mut cursor = self.pos + token.len();
         while cursor < self.src.len() && self.src.as_bytes()[cursor].is_ascii_whitespace() {
             cursor += 1;
         }
         if self.src.as_bytes().get(cursor) != Some(&b'(') {
-            return false;
+            return None;
         }
         self.symbol_call_paren_has_expression_boundary(cursor)
+            .then_some(token)
     }
 
     fn symbol_call_paren_has_expression_boundary(&self, open_idx: usize) -> bool {
@@ -986,15 +989,14 @@ impl<'a> Parser<'a> {
 
     fn parse_symbol_call(&mut self) -> Result<Expr, String> {
         let name = self
-            .peek()
-            .filter(|ch| matches!(ch, '+' | '-' | '*' | '/' | '%'))
-            .ok_or_else(|| format!("expected arithmetic symbol call at position {}", self.pos))?
+            .symbol_call_token_at_current()
+            .ok_or_else(|| format!("expected symbol call at position {}", self.pos))?
             .to_string();
-        self.advance(1);
+        self.advance(name.len());
         self.skip_whitespace();
         if self.peek() != Some('(') {
             return Err(format!(
-                "expected '(' after arithmetic symbol '{}' at position {}",
+                "expected '(' after symbol '{}' at position {}",
                 name, self.pos
             ));
         }
@@ -1005,10 +1007,7 @@ impl<'a> Parser<'a> {
             self.parse_args()?
         };
         if self.peek() != Some(')') {
-            return Err(format!(
-                "expected ')' after args in arithmetic symbol call '{}'",
-                name
-            ));
+            return Err(format!("expected ')' after args in symbol call '{}'", name));
         }
         self.advance(1);
 
@@ -1367,7 +1366,7 @@ impl<'a> Parser<'a> {
             let maybe_name = self.parse_name();
             self.skip_whitespace();
 
-            if self.peek() == Some('=') {
+            if !maybe_name.is_empty() && self.peek() == Some('=') {
                 self.advance(1); // consume '='
                 self.skip_whitespace();
                 let value = self.parse_expr()?;
@@ -2953,6 +2952,39 @@ return(array_copy(array(results)));"#;
             }
             other => panic!("expected return call, got {other:?}"),
         }
+    }
+
+    #[test]
+    fn parse_comparison_symbol_callees() {
+        let code = r#"return(array(==(2,2), !=(2,3), >(10,2), >=(2,2), <(2,10), <=(2,2)))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "array");
+                        let names: Vec<&str> = args
+                            .iter()
+                            .map(|arg| match arg.value() {
+                                Expr::Call { name, .. } => name.as_str(),
+                                other => panic!("expected comparison symbol call, got {other:?}"),
+                            })
+                            .collect();
+                        assert_eq!(names, vec!["==", "!=", ">", ">=", "<", "<="]);
+                    }
+                    other => panic!("expected array call, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_single_equals_symbol_callee_stays_deferred() {
+        let result = CodeBlock::parse("return(=(target, value))");
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("unexpected character '='"));
     }
 
     #[test]

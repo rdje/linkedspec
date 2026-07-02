@@ -618,11 +618,15 @@ variadic arithmetic family: `+(a, b)` -> `num_add(a, b)`, `-(a, b)` ->
 `num_sub(a, b)`, `*(a, b)` -> `num_mul(a, b)`, `/(a, b)` -> `num_div(a, b)`,
 and `%(a, b)` -> `num_mod(a, b)`. There is no operator precedence in either
 form; write grouping explicitly with nested calls such as `+(*(a, b), c)` or
-`add(mul(a, b), c)`. This alias set deliberately does not include comparison
-symbols: `str_gt(...)`, `str_lt(...)`, and the other `str_*` helpers are the
-preferred string comparisons; comparison words such as `gt(...)` and `le(...)`
-are numeric aliases over the matching `num_*` helpers. Comparison symbol
-callees are still deferred.
+`add(mul(a, b), c)`.
+
+Comparison symbols are accepted as the equivalent call names for the numeric
+comparison family: `==(a, b)` -> `num_eq(a, b)`, `!=(a, b)` -> `num_ne(a, b)`,
+`>(a, b)` -> `num_gt(a, b)`, `>=(a, b)` -> `num_ge(a, b)`, `<(a, b)` ->
+`num_lt(a, b)`, and `<=(a, b)` -> `num_le(a, b)`. They are still ordinary
+function calls, not infix operators. For lexical string comparisons, use
+`str_eq(...)`, `str_ne(...)`, `str_gt(...)`, `str_ge(...)`, `str_lt(...)`, and
+`str_le(...)`.
 
 Examples:
 
@@ -644,6 +648,7 @@ assign(scalar(score_range), num_range(array(scores)));
 assign(scalar(next_depth), depth.add(1));
 assign(scalar(weighted_count), count(array(parts)).add(2, scalar(offset)).mul(3));
 assign(scalar(score_bucket), score.abs().ceil().clamp(0, 10));
+assign(scalar(has_parts), >(count(array(parts)), 0));
 ```
 
 Number receiver-dot value chains are accepted with terse method names. The receiver is the first argument to
@@ -682,6 +687,12 @@ Use numeric comparisons when the operands are numbers, counts, or numeric helper
 | `ge(lhs, rhs)` | alias for `num_ge(lhs, rhs)`. |
 | `lt(lhs, rhs)` | alias for `num_lt(lhs, rhs)`. |
 | `le(lhs, rhs)` | alias for `num_le(lhs, rhs)`. |
+| `==(lhs, rhs)` | alias for `num_eq(lhs, rhs)`. |
+| `!=(lhs, rhs)` | alias for `num_ne(lhs, rhs)`. |
+| `>(lhs, rhs)` | alias for `num_gt(lhs, rhs)`. |
+| `>=(lhs, rhs)` | alias for `num_ge(lhs, rhs)`. |
+| `<(lhs, rhs)` | alias for `num_lt(lhs, rhs)`. |
+| `<=(lhs, rhs)` | alias for `num_le(lhs, rhs)`. |
 
 Examples:
 
@@ -691,6 +702,10 @@ if(num_gt(count(array(parts)), 0))
 endif()
 
 if(gt(count(array(parts)), 0))
+  return(hash("kind", "nonempty", "count", count(array(parts))));
+endif()
+
+if(>(count(array(parts)), 0))
   return(hash("kind", "nonempty", "count", count(array(parts))));
 endif()
 
@@ -709,11 +724,10 @@ endif()
 
 Do not use `str_gt(...)` or `str_lt(...)` for counters. They are string comparisons and can produce surprising ordering for numeric-looking text.
 
-The comparison operator-call migration is still split for symbols. Numeric comparisons can use
-`num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le`, bare word aliases such as `gt(...)`, or number receiver
-terminals such as `count(array(parts)).gt(0)`. Comparison symbol callees are not part of the shipped surface
-yet. The explicit string bridge names are shipped as `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`;
-prefer those names in lexical string comparisons.
+Numeric comparisons can use `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le`, bare word aliases such as
+`gt(...)`, symbol callees such as `>(...)`, or number receiver terminals such as
+`count(array(parts)).gt(0)`. The explicit string bridge names are shipped as
+`str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`; prefer those names in lexical string comparisons.
 
 ## Array helpers
 

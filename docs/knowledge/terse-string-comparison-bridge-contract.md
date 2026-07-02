@@ -34,9 +34,10 @@ These names preserve the prior lexical string comparison semantics of the bare
 not receiver-dot methods, and not comparison symbol callees.
 
 Current shipped behavior after `.3.2.3.3`: use `str_*` for lexical comparisons, and use `num_*` helpers,
-bare comparison word aliases, or number receiver terminals for numeric comparisons.
+bare comparison word aliases, comparison symbol aliases, or number receiver terminals for numeric comparisons.
 
 Bare comparison words are no longer string-comparison compatibility aliases. Repo-owned lexical string examples
 should use `str_*`; `eq`/`ne`/`gt`/`ge`/`lt`/`le` are numeric aliases.
 
-The next comparison frontier after `.3.2.3.3` is `SPEC-FORMAT-TERSE.3.2.3.4` for comparison symbol callees.
+`SPEC-FORMAT-TERSE.3.2.3.4` later added comparison symbol aliases. The next frontier is
+`SPEC-FORMAT-TERSE.3.3` for expression-valued assignment and `=(target,value)` equivalence.

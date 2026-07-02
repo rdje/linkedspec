@@ -742,9 +742,10 @@ arithmetic subset: `+(a, b)`, `-(a, b)`, `*(a, b)`, `/(a, b)`, and `%(a, b)`
 map to `num_add`, `num_sub`, `num_mul`, `num_div`, and `num_mod`. These aliases
 remain ordinary `callee(args)` calls, so there is no operator precedence; write
 `+(*(a, b), c)` when you need explicit grouping. Comparison symbol callees are
-still task-tree-owned separately and are not yet shipped. The shipped explicit
-string bridge names are `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and
-`str_le`; use them for lexical string comparisons.
+accepted as numeric aliases too: `==(a, b)`, `!=(a, b)`, `>(a, b)`, `>=(a, b)`,
+`<(a, b)`, and `<=(a, b)` map to the corresponding `num_*` comparison helpers.
+The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
+`str_ge`, `str_lt`, and `str_le`; use them for lexical string comparisons.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads
