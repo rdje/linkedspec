@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SCALAREF-RETIREMENT.2 — scalaref retirement inventory contract locked**
+  (INVENTORY + REPLACEMENT CONTRACT + KM; **no runtime behavior change**).
+  The retirement inventory now covers shipped specs, checked-in oracle fixtures, Perl/Rust implementation support,
+  tests/tools, public mdBook pages, user guides, historical task-tree records, and Knowledge Map cards. Shipped
+  specs currently contain 16 function-form `scalaref(...)` calls. Public mdBook/user-guide examples contain 332
+  function-form references. Receiver-dot `.scalaref(...)` appears in hash receiver-chain examples/tests and is in
+  scope because it is the same public field-read helper name.
+
+  **Replacement contract:** migrate `scalaref(base, {field})` to `base["field"]`, `scalaref(base, [0])` to
+  `base[0]`, and mixed paths such as `{children}[0]{name}` to `["children"][0]["name"]`. For receiver-dot
+  `.scalaref(key)`, named hashes use `scalar(hash(meta), key)` or `meta[key]`; expression receivers first assign
+  to a named hash temporary, then read `scalar(hash(temp), key)` or `temp[key]`.
+
+  **Verification:** `rg` inventory PASS; Perl `call_spec_handler_subst` direct-access probes PASS; focused Rust
+  direct-access parser/runtime tests PASS; Knowledge Map/memory/doctrine/diff checks PASS.
+
+  **Frontier:** `SCALAREF-RETIREMENT.3` — migrate shipped specs, tests, oracle fixtures, and public docs away
+  from `scalaref(...)` before implementation removal.
+
 - 2026-07-02: **SCALAREF-RETIREMENT.1 — scalaref retirement track owned**
   (TASK TREE + ROADMAP/LIVE DOCS + KM; **no runtime behavior change**).
   The user directive that `scalaref(...)` shall be retired and removed is now tracked in

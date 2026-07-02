@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SCALAREF-RETIREMENT.2 — scalaref retirement inventory contract):
+  The inventory is complete enough to migrate. Durable points. (1) **Function form.** Shipped specs use
+  `scalaref(base, path)` only as a scalar-held hash/array field read; direct nested access is the canonical
+  replacement (`retv["content"]`, `retv[0]`, `retv["children"][0]["name"]`). Quote former `{field}` names. (2)
+  **Receiver-dot form.** `.scalaref(key)` is the same user-facing helper name and is in retirement scope. Named
+  hashes can use `scalar(hash(meta), key)` or direct `meta[key]`. Expression receivers such as
+  `meta.merge_hash(...).scalaref("a")` need an explicit named hash temporary before the field read. (3)
+  **Implementation ordering.** Do not remove Perl/Rust support until `.3` migrates shipped specs, oracle fixtures,
+  tests, and public docs. (4) **Counts.** Current shipped specs have 16 function-form calls; mdBook/user-guide
+  examples have 332 function-form references; receiver-dot examples/tests exist in the hash receiver-chain slice.
+  Next frontier: `SCALAREF-RETIREMENT.3`.
+
 - 2026-07-02 (SCALAREF-RETIREMENT.1 — scalaref retirement ownership):
   `scalaref(...)` is now explicitly removal-bound, not merely legacy. Durable points. (1) **Separate owner.**
   `SCALAREF-RETIREMENT` owns the user directive to retire/remove the helper, separate from `RUST-PARITY.7.5.2`

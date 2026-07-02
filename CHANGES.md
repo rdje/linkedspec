@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SCALAREF-RETIREMENT.2 — inventory scalaref retirement contract
+
+**Scope:** Inventory and replacement-contract documentation for `scalaref(...)` retirement. No parser, compiler,
+runtime, shipped-spec, oracle, mdBook, or user-guide behavior changed in this slice.
+
+**What changed:** `docs/tasks/SCALAREF-RETIREMENT.md` now records the complete retirement inventory. Live uses are
+classified across shipped specs, checked-in oracle fixtures, Perl/Rust implementation support, tests/tools, public
+docs, user guides, historical task-tree records, and Knowledge Map cards. The current shipped specs contain 16
+function-form `scalaref(...)` calls; public mdBook/user-guide examples contain 332 function-form references; and
+receiver-dot `.scalaref(...)` appears in hash receiver-chain examples/tests.
+
+**Replacement contract:** Function-form `scalaref(base, {key})` migrates to direct nested access
+`base["key"]`; `[0]` segments stay `[0]`; mixed paths such as `{children}[0]{name}` become
+`["children"][0]["name"]`. Receiver-dot `.scalaref(key)` is in retirement scope too: named hashes use
+`scalar(hash(meta), key)` or `meta[key]`, while expression receivers must first assign to a named hash temporary
+before reading that key.
+
+**Boundary:** This is still pre-removal work. The next leaf, `SCALAREF-RETIREMENT.3`, performs the actual shipped
+spec/test/oracle/public-doc migration. Implementation support stays intact until `.4`.
+
+**Checks:** `rg` inventory, Perl `call_spec_handler_subst` direct-access probes, focused Rust direct-access
+parser/runtime tests, Knowledge Map regeneration/check, memory architecture, doctrine registry, and
+`git diff --check` passed.
+
 ## 2026-07-02 — SCALAREF-RETIREMENT.1 — own scalaref retirement track
 
 **Scope:** Task-tree ownership, task-tree index, roadmap/live docs, memory, and Knowledge Map. No parser,
