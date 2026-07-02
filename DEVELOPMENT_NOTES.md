@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.1 — architecture doctrine):
+  User clarified the architectural identity behind the project name: LinkedSpec is not just a compact grammar DSL;
+  it is a staged parser-composition model. Durable points. (1) **Parse what is easy now.** A stage should consume
+  reliable high-level anchors and extract bounded text islands when their inner grammar would make the outer stage
+  brittle. (2) **Link stages through parse jobs.** The AST should carry payload text, source span, payload kind,
+  parent path, parser identity/top-rule intent, insertion policy, and failure policy so a later spec can refine the
+  payload into deeper AST. (3) **One stage can fan out.** Stage N does not imply one stage-N+1 grammar; different
+  payload kinds can route to different next specs. (4) **Imports are not dispatch.** Spec imports/composition
+  reuse grammar material; staged dispatch parses runtime payload text. Keep diagnostics distinct. (5)
+  **Language-neutral always.** This must be specified over `.spec`, AST, descriptors, parse jobs, and diagnostics,
+  not Perl/Rust mechanics; Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, and future implementations inherit the
+  same contract. (6) **`specs/spec.spec` first.** For `.spec` language evolution, `specs/spec.spec` is the first
+  authoritative grammar; permanent syntax should derive from that staged/self-hosted path rather than bootstrap.
+  Next frontier: `STAGED-LINKED-PARSING.2` when this architecture track resumes.
+
 - 2026-07-02 (RUST-PARITY.7.2 — first shipped-spec oracle batch after scalaref retirement):
   The corpus expansion found and closed two Rust parity seams before adding only green fixtures. Durable points.
   (1) **Header-rest must not be a second parser.** The old Rust inline-rest parser had its own narrow element

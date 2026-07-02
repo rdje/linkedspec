@@ -15,6 +15,18 @@ LinkedSpec compiles `.spec` files into parsers that excel at:
 
 It is intentionally not trying to be a strict, textbook EBNF parser-generator clone. The design center is practical extraction and recognition, not exhaustive ambiguity resolution.
 
+LinkedSpec's larger model is **staged linked parsing**. A first `.spec` can parse the
+outer structure that has clear anchors, return AST nodes that carry source-provenance
+text islands, and route those islands to later `.spec` parsers that understand their
+inner grammar. One stage may spawn several different next-stage parsers because different
+payload fields can have different sublanguages. This makes LinkedSpec a parse graph
+rather than only a single up-front grammar.
+
+That staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
+Dart, Zig, Go, or another backend can implement it, but none of those languages defines
+the contract. The contract is `.spec` source, typed AST payloads, parse jobs, descriptors,
+diagnostics, and deterministic parser entry points.
+
 ## How it works at a glance
 
 A `.spec` file is organized as rule paragraphs. Each rule has:

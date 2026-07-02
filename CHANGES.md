@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — STAGED-LINKED-PARSING.1 — adopt staged linked parsing doctrine
+
+**Scope:** Architecture doctrine, task-tree ownership, mdBook pipeline/backend explanation, roadmap/live docs, and
+Knowledge Map.
+
+**What changed:** Added ADR `0012`, making staged linked parsing a first-class LinkedSpec architecture. A stage-N
+`.spec` may parse the structure that has reliable anchors, emit AST nodes carrying source-provenance text islands,
+and route those payloads to one or more later `.spec` parsers through deterministic parse jobs.
+
+**Contract:** Staged parse dispatch is separate from spec imports/composition. Imports compose grammar material;
+parse jobs refine runtime payload text extracted by an earlier parser. Parse jobs must carry parser identity,
+optional top rule, payload/source span, parent AST path, result insertion policy, and failure/diagnostic policy.
+
+**Neutrality:** The staged parse graph is implementation-language neutral across Perl5, Raku, Rust, Julia, Lua,
+Dart, Zig, Go, or future backends. The contract is `.spec`, AST payloads, parse jobs, descriptors, diagnostics,
+and deterministic parser entry semantics, not a host-language parser trick.
+
+**Checks:** mdBook build, Knowledge Map regeneration/check, memory architecture, doctrine registry,
+`git diff --check`, and full local CI pass in the commit workflow.
+
 ## 2026-07-02 — RUST-PARITY.7.2 — expand shipped-spec oracle batch
 
 **Scope:** Rust parser header-rest parsing, Rust regex/capture helper projection, focused Rust tests, oracle

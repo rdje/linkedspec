@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.1 — staged linked parsing doctrine adopted**
+  (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
+  ADR `0012` now defines LinkedSpec as a staged linked parsing architecture: a stage may parse only the easy
+  anchored surface, emit source-provenance text islands, and route each payload to one or more later `.spec`
+  parsers through deterministic parse jobs.
+
+  **Contract:** spec imports/composition and staged parse dispatch are separate. Imports compose grammar material;
+  parse jobs refine runtime payload text and carry parser identity, optional top rule, source span, parent AST path,
+  result insertion policy, and failure/diagnostic policy.
+
+  **Language neutrality:** the staged parse graph is specified over `.spec`, AST payloads, descriptors, parse jobs,
+  diagnostics, and parser entry semantics, not host-language mechanics. Perl5, Raku, Rust, Julia, Lua, Dart, Zig,
+  Go, and future implementations inherit the same contract.
+
+  **Verification:** mdBook build PASS; Knowledge Map, memory, doctrine, and diff gates PASS; full local CI PASS
+  with phase0 1015 green.
+
+  **Frontier:** `STAGED-LINKED-PARSING.2` — design spec imports/composition when this architecture track resumes.
+
 - 2026-07-02: **RUST-PARITY.7.2 — first shipped-spec oracle batch landed**
   (RUST PARSER + CAPTURE INDEXING + ORACLE CORPUS).
   Rust header-rest parsing now shares the normal body-element parser, so compact header-line lifecycle chains and

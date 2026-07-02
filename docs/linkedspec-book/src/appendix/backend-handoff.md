@@ -11,9 +11,16 @@ A LinkedSpec backend compiles `.spec` grammar files into runnable parsers. It mu
 1. Parse `.spec` files according to the formal grammar.
 2. Parse helper/action language text into typed AST/IR nodes before lowering,
    interpretation, or code emission.
-3. Compile the parsed model into runtime handlers via the HandlerIR pipeline.
-4. Execute those handlers with identical semantics to the Perl reference.
-5. Pass the language-neutral test corpus.
+3. Preserve staged linked parsing semantics: extracted text payloads can become
+   source-provenance parse jobs routed to later `.spec` parsers.
+4. Compile the parsed model into runtime handlers via the HandlerIR pipeline.
+5. Execute those handlers with identical semantics to the Perl reference.
+6. Pass the language-neutral test corpus.
+
+The backend contract is implementation-language neutral. The same `.spec` source,
+AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
+apply whether the implementation is Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or a
+future language.
 
 Text-to-AST is a backend conformance rule, not an optional implementation style.
 Do not build a backend by applying textual helper rewrites directly into host-language
@@ -64,6 +71,16 @@ bodies. Do not add alternate spellings (`function ... endfunction`, `fn ... endf
 optional zero-argument parentheses, brace-less bodies, caller-state-mutating functions,
 recursive user functions, closures/lambdas/currying, or function namespaces unless a
 future task-tree leaf and contract explicitly adopt them.
+
+Staged linked parsing is also a backend conformance rule. A backend must be able to
+represent an AST node that contains extracted text and a parse intent, then dispatch that
+payload to a deterministic next parser while preserving source spans and parent-node
+context. One stage can emit several different parse-job kinds; each kind may route to a
+different next-stage `.spec`. This is different from spec imports: imports compose grammar
+files, while staged dispatch parses runtime payload text already extracted by a parser.
+For `.spec` language evolution, `specs/spec.spec` is the first authoritative grammar and
+later `.spec` stages derive from its parsed payloads rather than a competing permanent
+bootstrap grammar.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
@@ -201,31 +218,36 @@ It provides:
    Can be bootstrap-driven (hardcoded grammar) or self-hosted (parse spec.spec
    with itself, once bootstrapped).
 
-2. **Helper/action AST parser** — parses lifecycle/action helper code into typed
+2. **Staged parse-job model** — records source-provenance payload text, parser spec id,
+   optional top rule, parent AST path, payload kind, result insertion policy, and failure
+   behavior. Parser resolution must be deterministic and diagnostics must report both the
+   selected next-stage parser and the original parent source span.
+
+3. **Helper/action AST parser** — parses lifecycle/action helper code into typed
    expression and statement nodes. Calls, literals, variables, blocks, direct
    access, assignments, and receiver-dot chains must be represented structurally.
    Text-to-text helper rewriting is not a conforming design for new backends.
 
-3. **User-function registry and resolver** — records top-level `fn name(args) { body }`
+4. **User-function registry and resolver** — records top-level `fn name(args) { body }`
    definitions as validated AST-backed records before runtime. The registry must preserve
    definition order, expose definitions by name, reject helper/rule/reserved-name
    collisions, and resolve exact-arity value calls before unknown-helper fallback.
 
-4. **Compiler** — transforms parsed entries and helper/action AST nodes into
+5. **Compiler** — transforms parsed entries and helper/action AST nodes into
    HandlerIR nodes. You can reuse the ActionIR lowering approach, but the input to
    lowering is structured AST/IR rather than raw helper source text.
 
-5. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
+6. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
    in your target language. Must handle all 10 variant kinds.
 
-6. **Runtime** — the execution engine:
+7. **Runtime** — the execution engine:
    - Regex engine with position tracking (equivalent to `//gcp` and `\G` anchoring).
    - Accumulator model (arrays, hashes, scalars).
    - Lifecycle execution engine (I/LS/LE/E/EX/IT/LX ordering).
    - BACKTRACK (local cursor save/restore).
    - Zero-progress guard.
 
-6. **Test harness** — runs `tests/corpus/` entries and compares output to
+8. **Test harness** — runs `tests/corpus/` entries and compares output to
    `expected.json`.
 
 ## Practical Notes

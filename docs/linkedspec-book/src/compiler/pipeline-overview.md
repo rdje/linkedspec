@@ -31,6 +31,43 @@ source .spec text
 
 The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
 
+## Staged linked parsing
+
+LinkedSpec does not require every useful grammar boundary to be swallowed by one
+up-front parser. A stage may parse the structure that is easy to anchor, emit an AST
+node containing an extracted text payload plus source span, and create a later parse job
+for that payload. The next job can load the spec that owns the payload's sublanguage and
+replace or augment the text field with a deeper AST.
+
+For example, a stage can recognize a top-level function shell, preserve its body text
+with source provenance, and route that body to the action/body grammar that owns helper
+statements. The same stage might also extract regex payloads, annotations, or embedded
+DSL fragments, each routed to a different next-stage spec. Stage N therefore maps to a
+parse graph, not necessarily to one stage-N+1 spec.
+
+A parse job is a neutral contract, not a host-language trick. The job records:
+
+- parser spec identity
+- optional top rule
+- source text and source span
+- parent AST path and payload kind
+- result insertion policy
+- failure policy and diagnostic owner
+
+Spec imports/composition are a separate feature. Imports let a spec reuse definitions
+from other spec files. Staged parse dispatch runs another parser over text produced by a
+previous parse. Keeping those concepts separate lets diagnostics explain whether a
+failure happened while loading grammar material or while refining a runtime payload.
+
+For `.spec` language evolution, `specs/spec.spec` is the first authoritative grammar.
+Other `.spec`-language stages derive from payloads produced through that self-hosted
+path. The hardcoded bootstrap parser may bridge old behavior, but permanent syntax
+should not fork into bootstrap-only grammar.
+
+The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
+Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source
+provenance, deterministic parser resolution, and result stitching behavior.
+
 Every backend must parse helper/action language text into typed AST/IR nodes before
 lowering, interpretation, or code emission. Direct text-to-text helper rewriting into
 host-language source is not a conforming architecture for new backend work. The Rust

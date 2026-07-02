@@ -22,6 +22,7 @@ changed* lives in git (layer D), not here.
 | [0009](0009-doctrine-enforcement-architecture.md) | Adopt the portable Doctrine-Enforcement architecture (registry driver `scripts/check_doctrines.sh` + E1→E4 gates) and a LinkedSpec `TOOLBOX.md` of its own debug tools | 2026-06-22 | accepted | doctrine, enforcement, process, ci, debug-toolbox, portable-architecture |
 | [0010](0010-top-rule-is-ordinary-rule-entered-first.md) | The top rule is an ordinary rule merely entered first (`::` = entry marker; no-regex dispatch loop is idiom, not law); authorize making Perl handle it uniformly w.r.t. regex + recursion, with consume-before-recurse termination; cross-variant parity required | 2026-06-23 | accepted | engine, parser, dsl, top-rule, recursion, doctrine-exception, cross-variant-parity |
 | [0011](0011-text-to-ast-backend-doctrine.md) | Backend helper/action semantics must parse text to typed AST/IR before lowering or execution; Perl ActionIR text-to-text lowering is migration debt | 2026-07-01 | accepted | architecture, compiler, actionir, ast, doctrine, cross-variant-parity |
+| [0012](0012-staged-linked-parsing-architecture.md) | Staged linked parsing is the core parser-composition architecture: stage-N specs may emit source-provenance text islands that later specs parse through a deterministic, language-neutral parse graph | 2026-07-02 | accepted | architecture, parser-composition, staged-parsing, spec-language, language-neutral |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
