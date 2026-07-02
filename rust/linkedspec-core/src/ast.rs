@@ -20,6 +20,8 @@ pub struct FunctionDefinition {
     pub params: Vec<String>,
     pub arity: usize,
     pub body_source: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub body_payload: Option<serde_json::Value>,
     pub source: String,
     pub source_span: SourceSpan,
     pub body_span: SourceSpan,

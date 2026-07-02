@@ -4,6 +4,9 @@ use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
+use linkedspec_runtime::spec_parser::{
+    parse_spec_with_user_functions, parse_user_function_definition_asts,
+};
 use serde_json::Value;
 
 const SIMPLE_GRAMMAR: &str = r#"DemoParser::
@@ -69,7 +72,7 @@ fn parse_all_shipped_specs() {
         let path = entry.path();
         if path.extension().is_some_and(|e| e == "spec") {
             let source = fs::read_to_string(&path).unwrap();
-            match parse_spec(&source) {
+            match parse_spec_with_user_functions(&source) {
                 Ok(spec) => {
                     if let Err(e) = validate(&spec) {
                         failed.push(format!("{}: validation failed: {e}", path.display()));
@@ -91,6 +94,213 @@ fn parse_all_shipped_specs() {
         panic!("{} specs failed", failed.len());
     }
     assert!(parsed > 0, "no .spec files found");
+}
+
+#[test]
+fn spec_defined_user_function_parser_returns_expected_ast_shape() {
+    let grammar = r#"fn zero() {return("zero")}
+
+Top::
+ /x/ -> Done { return(zero()) }
+
+fn choose(value, other) {
+ if(value) { return("{ok}") } else { return("}") }
+ return(other)
+}
+
+Done:
+ /[a-z]+/
+
+fn after(value) {return(value)}
+"#;
+
+    let asts = parse_user_function_definition_asts(grammar).expect("function AST parse");
+    assert_eq!(
+        asts.len(),
+        3,
+        "only top-level function definitions become AST nodes: {asts:#?}"
+    );
+
+    let zero = asts[0].as_object().expect("zero object");
+    assert_eq!(zero["type"], serde_json::json!("function_definition"));
+    assert_eq!(zero["kind"], serde_json::json!("user_function_definition"));
+    assert_eq!(zero["version"], serde_json::json!(1));
+    assert_eq!(zero["name"], serde_json::json!("zero"));
+    assert_eq!(zero["params"], serde_json::json!([]));
+    assert_eq!(zero["arity"], serde_json::json!(0));
+    assert_eq!(zero["body_source"], serde_json::json!(r#"return("zero")"#));
+    assert_eq!(
+        zero["body_payload"]["kind"],
+        serde_json::json!("staged_payload")
+    );
+    assert_eq!(
+        zero["body_payload"]["payload_kind"],
+        serde_json::json!("function_body")
+    );
+    assert_eq!(zero["body_payload"]["text"], zero["body_source"]);
+    assert_eq!(zero["body_payload"]["source_span"], zero["body_span"]);
+
+    let choose = asts[1].as_object().expect("choose object");
+    assert_eq!(choose["name"], serde_json::json!("choose"));
+    assert_eq!(choose["params"], serde_json::json!(["value", "other"]));
+    assert_eq!(choose["arity"], serde_json::json!(2));
+    assert!(
+        choose["body_source"]
+            .as_str()
+            .unwrap()
+            .contains(r#"return("{ok}")"#)
+    );
+    assert!(
+        choose["body_source"]
+            .as_str()
+            .unwrap()
+            .contains(r#"return("}")"#),
+        "nested body braces and braces inside strings must not close the function early"
+    );
+
+    let spec = parse_spec_with_user_functions(grammar).expect("full spec parse");
+    assert_eq!(spec.function_names(), vec!["zero", "choose", "after"]);
+    assert_eq!(spec.rules.len(), 2);
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    assert_eq!(compiled.functions.len(), 3);
+    assert_eq!(
+        Engine::new(compiled).execute("xhello").expect("execute"),
+        serde_json::json!(["zero"])
+    );
+}
+
+#[test]
+fn spec_defined_user_function_parser_accepts_definition_variations() {
+    let cases = [
+        (
+            "zero arity compact body",
+            r#"fn compact() {return("ok")}
+Top::
+ /x/ -> Done { return(compact()) }
+Done:
+ /[a-z]+/
+"#,
+            "compact",
+            serde_json::json!([]),
+            r#"return("ok")"#,
+        ),
+        (
+            "spaced parameters",
+            r#"fn spaced( left , right ) { return(cat(left, right)) }
+Top::
+ /x/ -> Done { return(spaced("a", "b")) }
+Done:
+ /[a-z]+/
+"#,
+            "spaced",
+            serde_json::json!(["left", "right"]),
+            "return(cat(left, right))",
+        ),
+        (
+            "nested blocks and strings",
+            r#"fn choose(value) {
+ if(value) { return("{ok}") } else { return("}") }
+}
+Top::
+ /x/ -> Done { return(choose("yes")) }
+Done:
+ /[a-z]+/
+"#,
+            "choose",
+            serde_json::json!(["value"]),
+            r#"return("{ok}")"#,
+        ),
+        (
+            "regex literal close brace",
+            r#"fn has_close(value) {
+ if(matches(value, /}/)) { return("brace") }
+ return(value)
+}
+Top::
+ /x/ -> Done { return(has_close("}")) }
+Done:
+ /[a-z]+/
+"#,
+            "has_close",
+            serde_json::json!(["value"]),
+            r#"matches(value, /}/)"#,
+        ),
+        (
+            "shape literal body",
+            r#"fn meta() { return({ "b" => 2, "a" => [1, 2] }) }
+Top::
+ /x/ -> Done { return(meta().keys().sort()) }
+Done:
+ /[a-z]+/
+"#,
+            "meta",
+            serde_json::json!([]),
+            r#"return({ "b" => 2, "a" => [1, 2] })"#,
+        ),
+    ];
+
+    for (label, grammar, name, params, body_fragment) in cases {
+        let asts = parse_user_function_definition_asts(grammar)
+            .unwrap_or_else(|err| panic!("{label}: AST parse failed: {err}"));
+        assert_eq!(asts.len(), 1, "{label}: expected one function AST");
+        let node = asts[0].as_object().expect("function object");
+        assert_eq!(
+            node["type"],
+            serde_json::json!("function_definition"),
+            "{label}: AST node was {node:#?}"
+        );
+        assert_eq!(node["name"], serde_json::json!(name));
+        assert_eq!(node["params"], params);
+        assert!(
+            node["body_source"]
+                .as_str()
+                .unwrap()
+                .contains(body_fragment),
+            "{label}: body_source did not contain {body_fragment:?}"
+        );
+        assert_eq!(node["body_payload"]["text"], node["body_source"]);
+        assert_eq!(node["body_payload"]["source_span"], node["body_span"]);
+
+        let spec = parse_spec_with_user_functions(grammar)
+            .unwrap_or_else(|err| panic!("{label}: full spec parse failed: {err}"));
+        assert_eq!(spec.functions.len(), 1, "{label}: function count");
+        assert_eq!(spec.functions[0].name, name, "{label}: function name");
+        assert!(
+            spec.functions[0].body_payload.is_some(),
+            "{label}: body_payload must be preserved"
+        );
+    }
+}
+
+#[test]
+fn spec_defined_user_function_parser_reports_malformed_definitions() {
+    let grammar = r#"fn bad(value
+Top::
+ /x/
+"#;
+    let err = parse_spec_with_user_functions(grammar).unwrap_err();
+    assert!(
+        err.contains("user function definition parse error"),
+        "expected spec-defined parse error, got: {err}"
+    );
+}
+
+#[test]
+fn spec_defined_user_function_parser_reports_malformed_definition_ast() {
+    let asts = parse_user_function_definition_asts("fn bad(value\nTop::\n /x/\n")
+        .expect("malformed function definition AST parse");
+    assert_eq!(
+        asts.len(),
+        1,
+        "malformed definition must produce one AST node"
+    );
+    assert_eq!(
+        asts[0]["type"],
+        serde_json::json!("function_definition_error"),
+        "malformed definition AST was {asts:#?}"
+    );
+    assert_eq!(asts[0]["source_text"], serde_json::json!("fn bad(value"));
 }
 
 // ── Test corpus runner (.7.1) ──
@@ -241,6 +451,60 @@ Number:
     let r = engine.execute("42").unwrap();
     let arr = r.as_array().unwrap();
     assert_eq!(arr[0].as_str().unwrap(), "42");
+}
+
+#[test]
+fn regression_edge_only_scanner_rule_repeats_until_no_match() {
+    let grammar = r#"Top::
+ -> Word .push(items)
+ -> Number .push(items)
+ E { return(copy(items)) }
+
+Word:
+ /[A-Za-z]+/
+ I.return(entry_text())
+
+Number:
+ /\d+/
+ I.return(entry_text())
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let top = compiled.find("Top").unwrap();
+    assert_eq!(top.rep_min, Some(0));
+    assert!(top.acode_dispatch.iter().all(|e| !e.has_parent_regex));
+
+    let result = Engine::new(compiled).execute("hello 42 world").unwrap();
+    assert_eq!(result, serde_json::json!([["hello", "42", "world"]]));
+}
+
+#[test]
+fn regression_edge_only_child_i_return_pushes_parent_entry_match() {
+    let grammar = r#"Top::
+ -> Bad .push(definitions)
+ LX { return(copy(definitions)) }
+
+Bad:
+ /(?m)^[ \t]*fn\b[^\n]*/
+ I.return({
+  "type" => "function_definition_error",
+  "source_text" => entry_text()
+ })
+"#;
+    let spec = parse_spec(grammar).unwrap();
+    validate(&spec).unwrap();
+    let compiled = compile(&spec).unwrap();
+    let result = Engine::new(compiled)
+        .execute("fn bad(value\nTop::\n /x/\n")
+        .unwrap();
+    assert_eq!(
+        result,
+        serde_json::json!([[{
+            "type": "function_definition_error",
+            "source_text": "fn bad(value"
+        }]])
+    );
 }
 
 // (b) Mixed rule: both /regex/ entries and edge-only entries.
@@ -762,14 +1026,14 @@ fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
 /// useful message on any stage failure (the auto-exist locks below are all
 /// expected to compile and run cleanly).
 fn build_and_run(grammar: &str, input: &str) -> Value {
-    let spec = parse_spec(grammar).expect("parse");
+    let spec = parse_spec_with_user_functions(grammar).expect("parse");
     validate(&spec).expect("validate");
     let compiled = compile(&spec).expect("compile");
     Engine::new(compiled).execute(input).expect("execute")
 }
 
 fn build_and_run_result(grammar: &str, input: &str) -> Result<Value, String> {
-    let spec = parse_spec(grammar).expect("parse");
+    let spec = parse_spec_with_user_functions(grammar).expect("parse");
     validate(&spec).expect("validate");
     let compiled = compile(&spec).expect("compile");
     Engine::new(compiled).execute(input)
@@ -1697,6 +1961,37 @@ fn terse_2_3_2_lifecycle_return_records_surrounding_rule_return() {
         build_and_run(grammar, "x"),
         serde_json::json!(["from_i"]),
         "top-level I return(expr) exits the rule before matching or E"
+    );
+}
+
+#[test]
+fn terse_2_3_2_lifecycle_return_undef_records_surrounding_rule_return() {
+    let grammar =
+        "Top::\n I { return_undef(); return(\"bad\") }\n /x/\n E { return(\"also_bad\") }\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([]),
+        "block-form return_undef() exits the surrounding rule without pushing an accumulator value"
+    );
+}
+
+#[test]
+fn terse_2_3_2_action_edge_return_exits_before_lx() {
+    let grammar = "Top::\n /x/ -> Done { return(\"good\") }\n LX { return(\"bad\") }\n\nDone:\n /y/\n I.return_undef()\n";
+    assert_eq!(
+        build_and_run(grammar, "xy"),
+        serde_json::json!(["good"]),
+        "attached action-block return(expr) exits before the rule can fall through to LX"
+    );
+}
+
+#[test]
+fn terse_2_3_2_child_rule_capture_slice_starts_after_entry_match() {
+    let grammar = "Top::\n -> Body .push\n E { return(array_copy(array(Top))) }\n\nBody: /\\{/ /\\}/\n -> Body[1] { return(capture_slice()) }\n";
+    assert_eq!(
+        build_and_run(grammar, "{abc}"),
+        serde_json::json!([["abc"]]),
+        "a dispatched delimiter rule captures the text island between its opener and close edge"
     );
 }
 

@@ -129,12 +129,18 @@ The current provenance seam is the neutral `body_payload` returned by
 a dispatched parse job. It contains exact function-body text, half-open source span,
 source-slice provenance, source-order parent path, function name, params, arity,
 `node_kind = function_definition`, and `payload_kind = function_body`. The Perl
-reference consumes that spec-returned AST today. The spec's body shell is a linked
-opener/closer parse: `body_brace` handles nested brace islands, quoted strings,
-comments, and regex literals are protected before brace dispatch, and the outer close
-is matched by `function_definition[1]`. Other backend bridges must converge on the
+reference and Rust runtime both consume that spec-returned AST today. The spec's body
+shell is a linked opener/closer parse: `body_brace` handles nested brace islands,
+quoted strings, comments, and regex literals are protected before brace dispatch, and
+the outer close is matched by `function_definition[1]`. Backends must converge on this
 same spec-defined AST contract instead of maintaining host-language definition grammars
 before the parse-job sidecar becomes portable.
+
+Rust is interpreted rather than generated Perl source, so the inspectable artifact is
+the compiled rule table plus lifecycle/action expression AST rather than emitted handler
+code. The Rust adapter still follows the same contract: it executes
+`specs/user_function_definition.spec`, validates the returned nodes, strips definition
+spans, and only then passes rule-only source to the core parser.
 
 Spec import/composition is a separate backend conformance target once implemented. The
 accepted design uses file-scope `import "path.spec" as alias` and

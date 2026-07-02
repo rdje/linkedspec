@@ -8,8 +8,7 @@
 //! Code blocks (`{ ... }`) are properly captured as multi-line content.
 
 use crate::ast::{
-    BodyElement, BodyElementKind, EdgeTarget, FluentCall, FunctionDefinition, Rule, RuleHeader,
-    RuleMode, SourceSpan, SpecFile,
+    BodyElement, BodyElementKind, EdgeTarget, FluentCall, Rule, RuleHeader, RuleMode, SpecFile,
 };
 use crate::error::{LinkedSpecError, Result};
 use rgx_core::Regex;
@@ -18,17 +17,10 @@ use rgx_core::Regex;
 pub fn parse_spec(source: &str) -> Result<SpecFile> {
     let lines: Vec<&str> = source.lines().collect();
     let len = lines.len();
-    let mut functions: Vec<FunctionDefinition> = Vec::new();
     let mut rules: Vec<Rule> = Vec::new();
     let mut i = skip_blanks_and_comments(&lines, 0);
 
     while i < len {
-        if let Some((definition, next_i)) = parse_function_definition(&lines, i)? {
-            functions.push(definition);
-            i = skip_blanks_and_comments(&lines, next_i);
-            continue;
-        }
-
         // Try to parse a rule header at the current line
         if let Some((header, next_i)) = parse_rule_header(&lines, i)? {
             let rest = header.rest.trim().to_string();
@@ -75,7 +67,10 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
         });
     }
 
-    Ok(SpecFile { functions, rules })
+    Ok(SpecFile {
+        functions: Vec::new(),
+        rules,
+    })
 }
 
 /// Skip blank lines and comment lines, return first non-skipped index.
@@ -89,360 +84,6 @@ fn skip_blanks_and_comments(lines: &[&str], mut i: usize) -> usize {
         }
     }
     i
-}
-
-fn is_function_definition_start(trimmed: &str) -> bool {
-    let Some(after_fn) = trimmed.strip_prefix("fn") else {
-        return false;
-    };
-    after_fn.chars().next().is_some_and(|ch| ch.is_whitespace())
-}
-
-fn parse_function_definition(
-    lines: &[&str],
-    start_i: usize,
-) -> Result<Option<(FunctionDefinition, usize)>> {
-    if start_i >= lines.len() || !is_function_definition_start(lines[start_i].trim_start()) {
-        return Ok(None);
-    }
-
-    let mut source = String::new();
-    let mut end_i = start_i;
-    while end_i < lines.len() {
-        if end_i > start_i {
-            source.push('\n');
-        }
-        source.push_str(lines[end_i]);
-
-        if let Some(close_idx) = function_body_close_index(&source) {
-            let trailing = source[close_idx + 1..].trim();
-            if !trailing.is_empty() && !trailing.starts_with('#') {
-                return Err(LinkedSpecError::Parse {
-                    line: end_i + 1,
-                    message: format!(
-                        "unexpected trailing text after function definition: {trailing}"
-                    ),
-                });
-            }
-            let definition = build_function_definition(&source, start_i + 1, end_i + 1)?;
-            return Ok(Some((definition, end_i + 1)));
-        }
-
-        end_i += 1;
-    }
-
-    Err(LinkedSpecError::Parse {
-        line: start_i + 1,
-        message: "unterminated function definition".into(),
-    })
-}
-
-fn build_function_definition(
-    source: &str,
-    line_start: usize,
-    line_end: usize,
-) -> Result<FunctionDefinition> {
-    let Some(body_open) = function_body_open_index(source) else {
-        return Err(LinkedSpecError::Parse {
-            line: line_start,
-            message: "expected body block after function parameter list".into(),
-        });
-    };
-    let Some(body_close) = matching_brace_index(source, body_open) else {
-        return Err(LinkedSpecError::Parse {
-            line: line_start,
-            message: "unterminated function body block".into(),
-        });
-    };
-
-    let header = &source[..body_open];
-    let (name, params) = parse_function_header(header, line_start)?;
-    let body_source = source[body_open + 1..body_close].trim().to_string();
-    let source_span = SourceSpan {
-        line_start,
-        line_end,
-    };
-    let body_span = SourceSpan {
-        line_start: line_for_byte_index(source, body_open + 1, line_start),
-        line_end: line_for_byte_index(source, body_close, line_start),
-    };
-    let arity = params.len();
-
-    Ok(FunctionDefinition {
-        name,
-        params,
-        arity,
-        body_source,
-        source: source.trim().to_string(),
-        source_span,
-        body_span,
-    })
-}
-
-fn parse_function_header(header: &str, line: usize) -> Result<(String, Vec<String>)> {
-    let mut cursor = 0;
-    skip_ascii_ws(header, &mut cursor);
-    if !consume_keyword(header, &mut cursor, "fn") {
-        return Err(LinkedSpecError::Parse {
-            line,
-            message: "expected function keyword fn".into(),
-        });
-    }
-    if !header[cursor..]
-        .chars()
-        .next()
-        .is_some_and(|ch| ch.is_whitespace())
-    {
-        return Err(LinkedSpecError::Parse {
-            line,
-            message: "expected whitespace after fn".into(),
-        });
-    }
-    skip_ascii_ws(header, &mut cursor);
-
-    let name_start = cursor;
-    while header[cursor..]
-        .chars()
-        .next()
-        .is_some_and(|ch| ch.is_ascii_alphanumeric() || ch == '_')
-    {
-        cursor += header[cursor..].chars().next().unwrap().len_utf8();
-    }
-    let name = header[name_start..cursor].to_string();
-    if !is_identifier(&name) {
-        return Err(LinkedSpecError::Parse {
-            line,
-            message: "expected function name after fn".into(),
-        });
-    }
-
-    skip_ascii_ws(header, &mut cursor);
-    if header[cursor..].chars().next() != Some('(') {
-        return Err(LinkedSpecError::Parse {
-            line,
-            message: format!("expected '(' after function name '{name}'"),
-        });
-    }
-    let params_open = cursor;
-    let Some(params_close) = matching_paren_index(header, params_open) else {
-        return Err(LinkedSpecError::Parse {
-            line,
-            message: format!("unterminated parameter list for function '{name}'"),
-        });
-    };
-    let params_source = &header[params_open + 1..params_close];
-    let params = parse_parameter_list(params_source, &name, line)?;
-    cursor = params_close + 1;
-    skip_ascii_ws(header, &mut cursor);
-    if !header[cursor..].trim().is_empty() {
-        return Err(LinkedSpecError::Parse {
-            line,
-            message: format!("unexpected text before function '{name}' body"),
-        });
-    }
-
-    Ok((name, params))
-}
-
-fn parse_parameter_list(
-    params_source: &str,
-    function_name: &str,
-    line: usize,
-) -> Result<Vec<String>> {
-    let trimmed = params_source.trim();
-    if trimmed.is_empty() {
-        return Ok(Vec::new());
-    }
-
-    let mut params = Vec::new();
-    for raw in trimmed.split(',') {
-        let param = raw.trim();
-        if !is_identifier(param) {
-            return Err(LinkedSpecError::Parse {
-                line,
-                message: format!("invalid parameter in function '{function_name}'"),
-            });
-        }
-        params.push(param.to_string());
-    }
-    Ok(params)
-}
-
-fn function_body_close_index(source: &str) -> Option<usize> {
-    let open = function_body_open_index(source)?;
-    matching_brace_index(source, open)
-}
-
-fn function_body_open_index(source: &str) -> Option<usize> {
-    let mut cursor = 0;
-    skip_ascii_ws(source, &mut cursor);
-    if !consume_keyword(source, &mut cursor, "fn") {
-        return None;
-    }
-    if !source[cursor..]
-        .chars()
-        .next()
-        .is_some_and(|ch| ch.is_whitespace())
-    {
-        return None;
-    }
-    skip_ascii_ws(source, &mut cursor);
-    while source[cursor..]
-        .chars()
-        .next()
-        .is_some_and(|ch| ch.is_ascii_alphanumeric() || ch == '_')
-    {
-        cursor += source[cursor..].chars().next().unwrap().len_utf8();
-    }
-    skip_ascii_ws(source, &mut cursor);
-    if source[cursor..].chars().next()? != '(' {
-        return None;
-    }
-    cursor = matching_paren_index(source, cursor)? + 1;
-    skip_ascii_ws(source, &mut cursor);
-    if source[cursor..].chars().next()? == '{' {
-        Some(cursor)
-    } else {
-        None
-    }
-}
-
-fn matching_paren_index(source: &str, open_idx: usize) -> Option<usize> {
-    matching_delimiter_index(source, open_idx, '(', ')')
-}
-
-fn matching_brace_index(source: &str, open_idx: usize) -> Option<usize> {
-    matching_delimiter_index(source, open_idx, '{', '}')
-}
-
-fn matching_delimiter_index(
-    source: &str,
-    open_idx: usize,
-    open_ch: char,
-    close_ch: char,
-) -> Option<usize> {
-    let open_byte = open_ch as u8;
-    let close_byte = close_ch as u8;
-    let bytes = source.as_bytes();
-    let mut pos = open_idx;
-    let mut depth = 0usize;
-
-    while pos < bytes.len() {
-        match bytes[pos] {
-            b'\'' | b'"' => {
-                pos = skip_delimited_literal(source, pos, bytes[pos])?;
-                continue;
-            }
-            b'/' => {
-                if let Some(next) = skip_regex_literal(source, pos) {
-                    pos = next;
-                    continue;
-                }
-            }
-            b'#' => {
-                pos = skip_line_comment(source, pos);
-                continue;
-            }
-            byte if byte == open_byte => {
-                depth += 1;
-            }
-            byte if byte == close_byte => {
-                depth = depth.checked_sub(1)?;
-                if depth == 0 {
-                    return Some(pos);
-                }
-            }
-            _ => {}
-        }
-        pos += 1;
-    }
-
-    None
-}
-
-fn skip_delimited_literal(source: &str, start: usize, delimiter: u8) -> Option<usize> {
-    let bytes = source.as_bytes();
-    let mut pos = start + 1;
-    while pos < bytes.len() {
-        if bytes[pos] == b'\\' {
-            pos += 2;
-            continue;
-        }
-        if bytes[pos] == delimiter {
-            return Some(pos + 1);
-        }
-        pos += 1;
-    }
-    None
-}
-
-fn skip_regex_literal(source: &str, start: usize) -> Option<usize> {
-    let bytes = source.as_bytes();
-    let mut pos = start + 1;
-    while pos < bytes.len() {
-        if bytes[pos] == b'\\' {
-            pos += 2;
-            continue;
-        }
-        if bytes[pos] == b'/' {
-            pos += 1;
-            while pos < bytes.len() && bytes[pos].is_ascii_alphabetic() {
-                pos += 1;
-            }
-            return Some(pos);
-        }
-        pos += 1;
-    }
-    None
-}
-
-fn skip_line_comment(source: &str, start: usize) -> usize {
-    source[start..]
-        .find('\n')
-        .map(|offset| start + offset)
-        .unwrap_or(source.len())
-}
-
-fn skip_ascii_ws(source: &str, cursor: &mut usize) {
-    while source[*cursor..]
-        .chars()
-        .next()
-        .is_some_and(|ch| ch.is_whitespace())
-    {
-        *cursor += source[*cursor..].chars().next().unwrap().len_utf8();
-    }
-}
-
-fn consume_keyword(source: &str, cursor: &mut usize, keyword: &str) -> bool {
-    let Some(after) = source[*cursor..].strip_prefix(keyword) else {
-        return false;
-    };
-    if after
-        .chars()
-        .next()
-        .is_some_and(|ch| ch.is_ascii_alphanumeric() || ch == '_')
-    {
-        return false;
-    }
-    *cursor += keyword.len();
-    true
-}
-
-fn is_identifier(value: &str) -> bool {
-    let mut chars = value.chars();
-    let Some(first) = chars.next() else {
-        return false;
-    };
-    (first.is_ascii_alphabetic() || first == '_')
-        && chars.all(|ch| ch.is_ascii_alphanumeric() || ch == '_')
-}
-
-fn line_for_byte_index(source: &str, byte_idx: usize, base_line: usize) -> usize {
-    base_line
-        + source[..byte_idx.min(source.len())]
-            .bytes()
-            .filter(|byte| *byte == b'\n')
-            .count()
 }
 
 // ── Rule header parsing ──
@@ -603,8 +244,10 @@ fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
             continue;
         }
 
-        // Stop if we hit a new rule header or top-level function definition.
-        if header_re.is_match(trimmed) || is_function_definition_start(trimmed) {
+        // Stop if we hit a new rule header. Top-level user functions are stripped
+        // by the runtime-level spec-defined parser before this core rule parser
+        // sees the source.
+        if header_re.is_match(trimmed) {
             break;
         }
 
@@ -866,7 +509,9 @@ fn parse_single_element(
             );
             let advanced = *i > saved_i;
             return Some((elem, remainder, advanced));
-        } else if let Some((code, remainder)) = parse_lifecycle_fluent_chain_statement_code(&rest) {
+        } else if let Some((code, remainder, advanced)) =
+            parse_lifecycle_fluent_chain_statement_code(lines, i, &rest)
+        {
             let elem = BodyElement::new(
                 BodyElementKind::CodeBlock {
                     lifecycle: marker.clone(),
@@ -875,7 +520,7 @@ fn parse_single_element(
                 full_match.as_str(),
                 line_num,
             );
-            return Some((elem, remainder, false));
+            return Some((elem, remainder, advanced));
         } else {
             // Bare lifecycle marker (no block)
             let elem = BodyElement::new(
@@ -1094,9 +739,28 @@ fn strip_keyword<'a>(text: &'a str, keyword: &str) -> Option<&'a str> {
     Some(after)
 }
 
-fn parse_lifecycle_fluent_chain_statement_code(rest: &str) -> Option<(String, String)> {
-    let (calls, remainder) = parse_fluent_chain_with_remainder(rest);
-    fluent_calls_to_statement_code(&calls).map(|code| (code, remainder))
+fn parse_lifecycle_fluent_chain_statement_code(
+    lines: &[&str],
+    i: &mut usize,
+    rest: &str,
+) -> Option<(String, String, bool)> {
+    let start_i = *i;
+    let mut text = rest.trim_start().to_string();
+    if !text.starts_with('.') {
+        return None;
+    }
+
+    while !compact_fluent_chain_parentheses_are_complete(&text) {
+        if *i + 1 >= lines.len() {
+            return None;
+        }
+        *i += 1;
+        text.push('\n');
+        text.push_str(lines[*i].trim());
+    }
+
+    let (calls, remainder) = parse_fluent_chain_with_remainder(&text);
+    fluent_calls_to_statement_code(&calls).map(|code| (code, remainder, *i > start_i))
 }
 
 fn fluent_calls_to_statement_code(calls: &[FluentCall]) -> Option<String> {
@@ -1110,6 +774,120 @@ fn fluent_calls_to_statement_code(calls: &[FluentCall]) -> Option<String> {
         .collect::<Vec<_>>()
         .join("; ");
     Some(statements)
+}
+
+fn compact_fluent_chain_parentheses_are_complete(text: &str) -> bool {
+    let bytes = text.as_bytes();
+    let mut pos = skip_ascii_ws(bytes, 0);
+    if bytes.get(pos) != Some(&b'.') {
+        return true;
+    }
+
+    while pos < bytes.len() {
+        pos = skip_ascii_ws(bytes, pos);
+        if bytes.get(pos) != Some(&b'.') {
+            return true;
+        }
+        pos += 1;
+        pos = skip_ascii_ws(bytes, pos);
+        let method_start = pos;
+        while bytes
+            .get(pos)
+            .is_some_and(|ch| ch.is_ascii_alphanumeric() || *ch == b'_')
+        {
+            pos += 1;
+        }
+        if pos == method_start {
+            return true;
+        }
+
+        pos = skip_ascii_ws(bytes, pos);
+        if bytes.get(pos) != Some(&b'(') {
+            return true;
+        }
+        pos += 1;
+        let mut depth = 1usize;
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => {
+                    let Some(next) = skip_delimited_literal_bytes(bytes, pos, bytes[pos]) else {
+                        return false;
+                    };
+                    pos = next;
+                }
+                b'/' => {
+                    if let Some(next) = skip_regex_literal_bytes(bytes, pos) {
+                        pos = next;
+                    } else {
+                        pos += 1;
+                    }
+                }
+                b'(' => {
+                    depth += 1;
+                    pos += 1;
+                }
+                b')' => {
+                    depth -= 1;
+                    pos += 1;
+                    if depth == 0 {
+                        break;
+                    }
+                }
+                _ => pos += 1,
+            }
+        }
+        if depth != 0 {
+            return false;
+        }
+
+        pos = skip_ascii_ws(bytes, pos);
+        if bytes.get(pos) != Some(&b'.') {
+            return true;
+        }
+    }
+
+    true
+}
+
+fn skip_ascii_ws(bytes: &[u8], mut pos: usize) -> usize {
+    while bytes.get(pos).is_some_and(|ch| ch.is_ascii_whitespace()) {
+        pos += 1;
+    }
+    pos
+}
+
+fn skip_delimited_literal_bytes(bytes: &[u8], start: usize, delimiter: u8) -> Option<usize> {
+    let mut pos = start + 1;
+    while pos < bytes.len() {
+        if bytes[pos] == b'\\' {
+            pos += 2;
+            continue;
+        }
+        if bytes[pos] == delimiter {
+            return Some(pos + 1);
+        }
+        pos += 1;
+    }
+    None
+}
+
+fn skip_regex_literal_bytes(bytes: &[u8], start: usize) -> Option<usize> {
+    let mut pos = start + 1;
+    while pos < bytes.len() {
+        if bytes[pos] == b'\\' {
+            pos += 2;
+            continue;
+        }
+        if bytes[pos] == b'/' {
+            pos += 1;
+            while bytes.get(pos).is_some_and(|ch| ch.is_ascii_alphabetic()) {
+                pos += 1;
+            }
+            return Some(pos);
+        }
+        pos += 1;
+    }
+    None
 }
 
 /// Like scan_line_for_braces but works on &str slices (not just full lines).
@@ -1206,7 +984,7 @@ mod tests {
     }
 
     #[test]
-    fn parse_top_level_user_function_before_rules() {
+    fn core_parser_does_not_parse_user_function_definitions_before_rules() {
         let src = r#"fn normalize(value) {
  return(trim(value))
 }
@@ -1214,78 +992,26 @@ mod tests {
 Top::
  /x/
 "#;
-        let spec = parse_spec(src).unwrap();
-        assert_eq!(spec.functions.len(), 1);
-        let function = &spec.functions[0];
-        assert_eq!(function.name, "normalize");
-        assert_eq!(function.params, vec!["value".to_string()]);
-        assert_eq!(function.arity, 1);
-        assert_eq!(function.source_span.line_start, 1);
-        assert_eq!(function.source_span.line_end, 3);
-        assert_eq!(function.body_span.line_start, 1);
-        assert_eq!(function.body_span.line_end, 3);
-        assert!(function.body_source.contains("return(trim(value))"));
-        assert_eq!(spec.rules.len(), 1);
-        assert_eq!(spec.rules[0].header.label, "Top");
+        let err = parse_spec(src).unwrap_err().to_string();
+        assert!(
+            err.contains("expected rule definition"),
+            "core rule parser must not own top-level function DSL syntax: {err}"
+        );
     }
 
     #[test]
-    fn parse_top_level_user_function_between_rules() {
+    fn core_parser_leaves_functions_empty_for_rule_only_sources() {
         let src = r#"Top::
  -> Done
-
-fn identity(value) { return(value) }
 
 Done:
  /x/
 "#;
         let spec = parse_spec(src).unwrap();
-        assert_eq!(spec.functions.len(), 1);
-        assert_eq!(spec.functions[0].name, "identity");
-        assert_eq!(
-            spec.rules[0].body.len(),
-            1,
-            "top-level fn must not be swallowed as a raw rule body line"
-        );
+        assert!(spec.functions.is_empty());
         assert_eq!(spec.rules.len(), 2);
+        assert_eq!(spec.rules[0].header.label, "Top");
         assert_eq!(spec.rules[1].header.label, "Done");
-    }
-
-    #[test]
-    fn parse_user_function_body_with_nested_blocks_and_braces_in_strings() {
-        let src = r#"fn choose(value) {
- if(value) { return("{ok}") } else { return("}") }
-}
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
-        assert_eq!(spec.functions.len(), 1);
-        assert_eq!(spec.functions[0].name, "choose");
-        assert!(spec.functions[0].body_source.contains(r#"return("{ok}")"#));
-        assert!(spec.functions[0].body_source.contains(r#"return("}")"#));
-        assert_eq!(spec.rules.len(), 1);
-    }
-
-    #[test]
-    fn parse_user_function_body_with_braces_in_regex_literals() {
-        let src = r#"fn has_close_brace(value) {
- if(matches(value, /}/)) { return("brace") }
- return("none")
-}
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
-        assert_eq!(spec.functions.len(), 1);
-        assert_eq!(spec.functions[0].name, "has_close_brace");
-        assert!(
-            spec.functions[0]
-                .body_source
-                .contains(r#"matches(value, /}/)"#)
-        );
-        assert!(spec.functions[0].body_source.contains(r#"return("none")"#));
-        assert_eq!(spec.rules.len(), 1);
     }
 
     #[test]
@@ -1546,6 +1272,47 @@ Done:
                 .iter()
                 .all(|element| !matches!(element.kind, BodyElementKind::FluentChain { .. })),
             "compact lifecycle fluent chain must not survive as a standalone chain"
+        );
+    }
+
+    #[test]
+    fn parse_lifecycle_compact_fluent_chain_multiline_args_as_code_block() {
+        let src = r#"Top::
+ I.return({
+  "type" => "function_definition_error",
+  "source_text" => entry_text()
+ })
+ /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        let iblock = top
+            .body
+            .iter()
+            .find(|element| {
+                matches!(&element.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I")
+            })
+            .expect("I block");
+
+        match &iblock.kind {
+            BodyElementKind::CodeBlock { code, .. } => {
+                assert!(code.starts_with("return({"), "{code:?}");
+                assert!(
+                    code.contains(r#""type" => "function_definition_error""#),
+                    "{code:?}"
+                );
+                assert!(
+                    code.contains(r#""source_text" => entry_text()"#),
+                    "{code:?}"
+                );
+            }
+            _ => panic!("expected lifecycle CodeBlock"),
+        }
+        assert!(
+            top.body
+                .iter()
+                .any(|element| matches!(&element.kind, BodyElementKind::Regex { pattern } if pattern == "x")),
+            "regex after multiline compact lifecycle chain was not parsed"
         );
     }
 

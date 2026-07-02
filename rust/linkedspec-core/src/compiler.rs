@@ -64,6 +64,7 @@ fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<Compile
         arity: function.arity,
         body,
         body_source: function.body_source.clone(),
+        body_payload: function.body_payload.clone(),
         source: function.source.clone(),
         source_span: function.source_span.clone(),
         body_span: function.body_span.clone(),
@@ -365,7 +366,33 @@ pub fn build_dependency_regex_map(spec: &mut CompiledSpec) -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::ast::{FunctionDefinition, SourceSpan};
     use crate::parser::parse_spec;
+
+    fn spec_with_user_functions(functions: Vec<FunctionDefinition>, rules_src: &str) -> SpecFile {
+        let mut spec = parse_spec(rules_src).unwrap();
+        spec.functions = functions;
+        spec
+    }
+
+    fn user_function(name: &str, params: &[&str], body_source: &str) -> FunctionDefinition {
+        FunctionDefinition {
+            name: name.to_string(),
+            params: params.iter().map(|param| param.to_string()).collect(),
+            arity: params.len(),
+            body_source: body_source.to_string(),
+            body_payload: None,
+            source: format!("fn {name}({}) {{ {body_source} }}", params.join(", ")),
+            source_span: SourceSpan {
+                line_start: 1,
+                line_end: 3,
+            },
+            body_span: SourceSpan {
+                line_start: 1,
+                line_end: 3,
+            },
+        }
+    }
 
     #[test]
     fn compile_simple_spec() {
@@ -444,14 +471,14 @@ mod tests {
 
     #[test]
     fn compile_user_function_registry() {
-        let src = r#"fn normalize(value) {
- return(trim(value))
-}
-
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec = spec_with_user_functions(
+            vec![user_function(
+                "normalize",
+                &["value"],
+                "return(trim(value))",
+            )],
+            "Top::\n /x/\n",
+        );
         let compiled = compile(&spec).unwrap();
         assert_eq!(compiled.functions.len(), 1);
         let function = compiled.find_function("normalize").unwrap();
@@ -468,11 +495,10 @@ Top::
 
     #[test]
     fn compile_user_function_body_parse_error_is_compile_error() {
-        let src = r#"fn bad(value) { return(@invalid) }
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec = spec_with_user_functions(
+            vec![user_function("bad", &["value"], "return(@invalid)")],
+            "Top::\n /x/\n",
+        );
         let err = compile(&spec).unwrap_err().to_string();
         assert!(err.contains("function 'bad': failed to parse body code"));
     }

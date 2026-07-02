@@ -69,11 +69,13 @@ source, and parsed ActionIR body AST. The Perl reference now also passes this re
 lowering, where registered exact-arity calls execute as value-producing expressions or standalone `VALUE_DROP`
 statements. Wrong-arity calls remain unresolved-helper diagnostics with zero raw fallback.
 
-The Rust backend now carries the same registry shape through parse and compile stages. `SpecFile.functions`
-records top-level definitions, and `CompiledSpec.functions` stores `CompiledUserFunction` entries with parsed
-`CodeBlock` bodies and the same source metadata. The Rust runtime resolves those compiled functions before
-ordinary helper fallback, executes them in fresh function-local variable stores, restores caller stores after
-return, and supports compatible receiver chains and standalone discard.
+The Rust backend now carries the same registry shape after executing the spec-defined definition parser.
+`linkedspec-runtime::spec_parser` runs `specs/user_function_definition.spec`, validates returned AST nodes, strips
+definition spans, and then feeds rule-only source to the core parser. `SpecFile.functions` records those
+spec-returned definitions, and `CompiledSpec.functions` stores `CompiledUserFunction` entries with parsed
+`CodeBlock` bodies, source metadata, and the neutral `body_payload`. The Rust runtime resolves those compiled
+functions before ordinary helper fallback, executes them in fresh function-local variable stores, restores caller
+stores after return, and supports compatible receiver chains and standalone discard.
 
 This registry is intentionally flat for the MVP. It is not an overload table, namespace/module model, closure
 environment, lambda catalog, or currying/partial-application representation. Those extensions require their own

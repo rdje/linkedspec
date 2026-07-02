@@ -19,9 +19,9 @@
 //! `engine.execute(input) == json!([expected])`.
 
 use linkedspec_core::compiler::compile;
-use linkedspec_core::parser::parse_spec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
+use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::{Value, json};
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -43,7 +43,7 @@ fn run_entry(dir: &Path) -> Result<(), String> {
     let expected: Value = serde_json::from_str(&read("expected.json")?)
         .map_err(|e| format!("malformed expected.json: {e}"))?;
 
-    let spec = parse_spec(&source).map_err(|e| format!("parse failed: {e}"))?;
+    let spec = parse_spec_with_user_functions(&source).map_err(|e| format!("parse failed: {e}"))?;
     validate(&spec).map_err(|e| format!("validate failed: {e}"))?;
     let compiled = compile(&spec).map_err(|e| format!("compile failed: {e}"))?;
     let engine = Engine::new(compiled);

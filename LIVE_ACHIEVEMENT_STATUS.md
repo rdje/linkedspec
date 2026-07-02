@@ -7,6 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.5.3.2 — Rust raw function-definition parser retired**
+  (SPEC PARSER + RUST ADAPTER + RUNTIME HELPER PARITY + TESTS).
+  Rust now consumes the same `specs/user_function_definition.spec` returned AST contract as the Perl reference.
+  The core Rust rule parser no longer owns top-level `fn name(params) { body }` grammar; the runtime
+  `spec_parser` executes the spec parser first, validates the neutral `function_definition` /
+  `function_definition_error` nodes, strips the exact definition spans, then parses the remaining rule-only
+  source.
+
+  **Runtime support:** Rust now preserves the returned `body_payload` into `CompiledUserFunction`, handles
+  PCRE-style named captures and leading inline flag toggles inside composed RGX alternations, supports regex
+  literal delimiters in `split`/`split_each`, resolves bare named-capture helper keys, collects multiline compact
+  lifecycle fluent arguments such as `I.return({ ... })`, starts child-rule capture slices after the entry match,
+  and runs self-recursive finalizer edges without seeking a later close.
+
+  **Verification:** focused `spec_defined_user_function_parser_*` tests PASS with concrete input strings and exact
+  AST-shape assertions; regex split, inline flag, named capture, edge-only scanner, edge-only child `I.return`,
+  `terse_2_3_2_`, core parser, core user-function, shipped-spec parse/compile, and Rust corpus oracle checks PASS.
+
+  **Frontier:** `STAGED-LINKED-PARSING.5.4` — add the minimal neutral parse-job marker/sidecar prototype.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.5.3.1 — spec-defined function-definition AST consumed by Perl**
   (SPEC PARSER + PERL REGISTRY BRIDGE + TESTS + MDBOOK + KNOWLEDGE MAP; runtime behavior unchanged).
   `specs/user_function_definition.spec` is now the executable grammar owner for the `fn name(params) { body }`

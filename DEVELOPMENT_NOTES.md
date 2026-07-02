@@ -1,6 +1,23 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.5.3.2 — Rust consumes spec-defined user-function definition AST):
+  Rust now follows the same definition-shell ownership rule as Perl: `specs/user_function_definition.spec` is the
+  executable grammar owner for top-level `fn name(params) { body }` definitions. The old Rust core parser no
+  longer raw-scans `fn` declarations; runtime `spec_parser` executes the spec parser first, validates returned
+  `function_definition` / `function_definition_error` nodes, strips their exact source spans, then feeds the
+  remaining rule-only source to the core parser. `body_payload` survives into `CompiledUserFunction` for the later
+  staged parse-job work.
+  Debugging points that should not be re-derived: (1) composed RGX alternations must scope leading inline flag
+  toggles such as `(?m)` per alternative, or line-anchored branches can drift; (2) regex-literal delimiters in
+  `.split(/\s*,\s*/)` must execute as regex splits, not literal string splits; (3) compact lifecycle chains with
+  multiline arguments, for example `I.return({ ... })`, must collect continuation lines before lowering; (4)
+  dispatched child rules set the anonymous capture cursor at entry end so `capture_slice()` returns the island
+  after the opener; (5) self-recursive close/finalizer edges such as `-> function_definition[1] { return(...) }`
+  run their block directly unless the block explicitly calls the rule, otherwise the runtime can seek to a later
+  close and consume too much.
+  Next frontier: `STAGED-LINKED-PARSING.5.4`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.5.3.1 — spec-defined user-function definition AST):
   User-function definition parsing now has an executable spec-owned reference. `specs/user_function_definition.spec`
   parses the `fn name(params) { body }` shell and returns `function_definition` AST nodes with exact source/body

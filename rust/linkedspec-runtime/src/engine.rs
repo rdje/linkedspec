@@ -61,6 +61,7 @@ struct SavedMatchState {
     entry_end_byte: usize,
     match_start_byte: usize,
     match_end_byte: usize,
+    capture_start: Option<usize>,
 }
 
 /// Statement-form conditional state for lifecycle blocks.
@@ -119,6 +120,7 @@ impl SavedMatchState {
         ctx.entry_end_byte = self.entry_end_byte;
         ctx.match_start_byte = self.match_start_byte;
         ctx.match_end_byte = self.match_end_byte;
+        ctx.capture_start = self.capture_start;
     }
 }
 
@@ -129,6 +131,35 @@ impl SavedMatchState {
 fn byte_to_char_offset(input: &str, byte_off: usize) -> usize {
     let clamped = byte_off.min(input.len());
     input[..clamped].chars().count()
+}
+
+fn line_col_at_char_offset(input: &str, char_off: usize) -> (usize, usize) {
+    let mut line = 1;
+    let mut col = 1;
+    for ch in input.chars().take(char_off.min(input.chars().count())) {
+        if ch == '\n' {
+            line += 1;
+            col = 1;
+        } else {
+            col += 1;
+        }
+    }
+    (line, col)
+}
+
+fn line_col_at_byte_offset(input: &str, byte_off: usize) -> (usize, usize) {
+    line_col_at_char_offset(input, byte_to_char_offset(input, byte_off))
+}
+
+fn line_col_from_optional_char_arg(
+    input: &str,
+    args: &[RuntimeValue],
+    default_byte_off: usize,
+) -> (usize, usize) {
+    match args.first().and_then(RuntimeValue::as_number) {
+        Some(pos) => line_col_at_char_offset(input, pos.max(0.0) as usize),
+        None => line_col_at_byte_offset(input, default_byte_off),
+    }
 }
 
 /// `len` characters of `s` starting at character index `start` (Perl `substr`
@@ -163,6 +194,78 @@ fn span_char_len(input: &str, start: usize, end: usize) -> Option<usize> {
         Some(input[start..end].chars().count())
     } else {
         None
+    }
+}
+
+fn next_char_boundary_after(input: &str, byte_off: usize) -> usize {
+    if byte_off >= input.len() {
+        return input.len();
+    }
+    input[byte_off..]
+        .char_indices()
+        .nth(1)
+        .map(|(offset, _)| byte_off + offset)
+        .unwrap_or(input.len())
+}
+
+fn regex_literal_arg(args: &[Arg], index: usize) -> Option<&str> {
+    match args.get(index).map(Arg::value) {
+        Some(Expr::RegexLiteral { pattern }) => Some(pattern.as_str()),
+        _ => None,
+    }
+}
+
+fn split_string_literal(input: &str, delimiter: &str) -> Vec<RuntimeValue> {
+    input
+        .split(delimiter)
+        .map(|part| RuntimeValue::Scalar(part.to_string()))
+        .collect()
+}
+
+fn split_string_regex(input: &str, pattern: &str) -> Result<Vec<RuntimeValue>, String> {
+    let alt = CompiledAlternation::compile(&[pattern.to_string()])?;
+    let mut parts = Vec::new();
+    let mut slice_start = 0usize;
+    let mut search_start = 0usize;
+
+    while search_start <= input.len() {
+        let Some(matched) = alt.seek_match(input, search_start) else {
+            break;
+        };
+
+        if matched.start < slice_start {
+            break;
+        }
+
+        parts.push(RuntimeValue::Scalar(
+            input[slice_start..matched.start].to_string(),
+        ));
+        slice_start = matched.end;
+
+        if matched.start == matched.end {
+            if matched.end >= input.len() {
+                break;
+            }
+            search_start = next_char_boundary_after(input, matched.end);
+        } else {
+            search_start = matched.end;
+        }
+    }
+
+    parts.push(RuntimeValue::Scalar(input[slice_start..].to_string()));
+    Ok(parts)
+}
+
+fn split_string_for_arg(
+    input: &str,
+    raw_args: &[Arg],
+    delimiter_index: usize,
+    delimiter: &RuntimeValue,
+) -> Result<Vec<RuntimeValue>, String> {
+    if let Some(pattern) = regex_literal_arg(raw_args, delimiter_index) {
+        split_string_regex(input, pattern)
+    } else {
+        Ok(split_string_literal(input, &delimiter.to_str()))
     }
 }
 
@@ -281,6 +384,7 @@ impl Engine {
             entry_end_byte: ctx.entry_end_byte,
             match_start_byte: ctx.match_start_byte,
             match_end_byte: ctx.match_end_byte,
+            capture_start: ctx.capture_start,
         };
         // ENTRY match (`IMATCH`) = the dispatcher's local match (`$$info{match}`).
         // For the top rule the caller has no local match, so this starts empty
@@ -293,6 +397,17 @@ impl Engine {
         // LOCAL match (`LMATCH`) starts empty until this rule matches its regex.
         ctx.match_start_byte = 0;
         ctx.match_end_byte = 0;
+        ctx.capture_start = Some(ctx.entry_end_byte);
+
+        macro_rules! return_if_rule_returned {
+            () => {
+                if let Some(my_return) = ctx.take_return_value() {
+                    ctx.restore_return_value(caller_return);
+                    saved_match.restore(ctx);
+                    return Ok(my_return);
+                }
+            };
+        }
 
         // Build regex alternation (or fallback for edge-only rules)
         let alt = if rule.regex_patterns.is_empty() {
@@ -304,11 +419,7 @@ impl Engine {
         // ── I-block (preamble, once per rule entry) ──
         if let Some(ref preamble) = rule.preamble {
             self.execute_block(preamble, ctx, label)?;
-            if let Some(my_return) = ctx.take_return_value() {
-                ctx.restore_return_value(caller_return);
-                saved_match.restore(ctx);
-                return Ok(my_return);
-            }
+            return_if_rule_returned!();
         }
 
         // ── Blind-call dispatch (AND rules) ──
@@ -322,6 +433,7 @@ impl Engine {
                 // Execute attached code if present
                 if let Some(ref block) = entry.code {
                     self.execute_block(block, ctx, label)?;
+                    return_if_rule_returned!();
                 }
                 // Fluent chain calls on the blind edge
                 for (method, _args_str) in &entry.fluent_chain {
@@ -333,11 +445,13 @@ impl Engine {
                     let empty_kw = std::collections::HashMap::new();
                     let empty_raw: &[linkedspec_core::expr::Arg] = &[];
                     self.call_helper(method, empty_raw, &args_val, &empty_kw, ctx, label)?;
+                    return_if_rule_returned!();
                 }
             }
             // After blind-call dispatch, fire E-block and exit
             if let Some(ref ecode) = rule.ecode {
                 self.execute_block(ecode, ctx, label)?;
+                return_if_rule_returned!();
             }
             let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
             ctx.restore_return_value(caller_return);
@@ -370,6 +484,7 @@ impl Engine {
             // ── LS-block (loop start, fires before each match attempt) ──
             if let Some(ref lscode) = rule.lscode {
                 self.execute_block(lscode, ctx, label)?;
+                return_if_rule_returned!();
             }
 
             // ── Match ──
@@ -434,6 +549,18 @@ impl Engine {
                                     // same child or legacy recursive specs such
                                     // as Lispish consume it twice.
                                     self.execute_block(block, ctx, label)?;
+                                    return_if_rule_returned!();
+                                } else if entry.child_label == label {
+                                    // A self-recursive code edge such as
+                                    // `-> rule[1] { return(...) }` is usually a
+                                    // close/finalizer branch. The matched regex
+                                    // already selected that entry point; running
+                                    // the same rule again would seek forward to a
+                                    // later close marker and move the cursor
+                                    // past the current construct before the
+                                    // block can return.
+                                    self.execute_block(block, ctx, label)?;
+                                    return_if_rule_returned!();
                                 } else {
                                     // Use child_regex_idx for multi-entrypoint
                                     // support. The child's return value becomes
@@ -447,6 +574,7 @@ impl Engine {
                                     )?;
                                     ctx.set_retv(child_retv);
                                     self.execute_block(block, ctx, label)?;
+                                    return_if_rule_returned!();
                                 }
                             } else {
                                 let child_retv = self.execute_child_rule(
@@ -470,6 +598,7 @@ impl Engine {
                 // ── LE-block (loop end, after successful match) ──
                 if let Some(ref lecode) = rule.lecode {
                     self.execute_block(lecode, ctx, label)?;
+                    return_if_rule_returned!();
                 }
 
                 matches += 1;
@@ -477,12 +606,14 @@ impl Engine {
                 // ── IT-block (per-iteration, REP only) ──
                 if let Some(ref itcode) = rule.itcode {
                     self.execute_block(itcode, ctx, label)?;
+                    return_if_rule_returned!();
                 }
             } else {
                 // No match — exit the matching loop
                 // ── LX-block (no-match exit, fires when loop ends without match) ──
                 if let Some(ref lxcode) = rule.lxcode {
                     self.execute_block(lxcode, ctx, label)?;
+                    return_if_rule_returned!();
                 }
                 break;
             }
@@ -515,11 +646,13 @@ impl Engine {
         // ── EX-block (REP exhaustion, fires after loop completes normally) ──
         if let Some(ref excode) = rule.excode {
             self.execute_block(excode, ctx, label)?;
+            return_if_rule_returned!();
         }
 
         // ── E-block (exit, fires once after all matching/repetition is done) ──
         if let Some(ref ecode) = rule.ecode {
             self.execute_block(ecode, ctx, label)?;
+            return_if_rule_returned!();
         }
 
         // This invocation's return value is whatever its blocks last returned;
@@ -754,7 +887,7 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<(), String> {
-        self.execute_block_statements(block, ctx, rule_label, false)?;
+        self.execute_block_statements(block, ctx, rule_label, true)?;
         Ok(())
     }
 
@@ -2186,6 +2319,7 @@ impl Engine {
             Expr::Call { name, args } if name == "return" => {
                 Some(args.first().map(|arg| arg.value()))
             }
+            Expr::Call { name, args } if name == "return_undef" && args.is_empty() => Some(None),
             _ => None,
         }
     }
@@ -2372,6 +2506,17 @@ impl Engine {
             return name.clone();
         }
         val.map(|v| v.to_str()).unwrap_or_default()
+    }
+
+    fn resolve_named_capture_key(
+        raw_args: &[linkedspec_core::expr::Arg],
+        args: &[RuntimeValue],
+    ) -> Option<String> {
+        use linkedspec_core::expr::{Arg, Expr};
+        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.first() {
+            return Some(name.clone());
+        }
+        args.first().map(RuntimeValue::to_str)
     }
 
     /// Dispatch a lazy-evaluation call (if/switch/while/elseif/else/case/default).
@@ -2576,7 +2721,10 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            "return_undef" => Ok(RuntimeValue::Undef),
+            "return_undef" => {
+                ctx.set_return_value(RuntimeValue::Undef);
+                Ok(RuntimeValue::Undef)
+            }
             // ── Scalar access ──
             "scalar" => {
                 if raw_args.len() == 1 {
@@ -2686,7 +2834,7 @@ impl Engine {
             // triggered this rule's code (Helper Contract Catalog §8). They read
             // the populated `ctx.entry_named` map. `entry_named_map` is a retired
             // alias of `entry_map`: identical behavior, accepted for legacy specs.
-            "entry_named" => Ok(match args.first().map(|a| a.to_str()) {
+            "entry_named" => Ok(match Self::resolve_named_capture_key(raw_args, args) {
                 Some(name) => ctx
                     .entry_named
                     .get(&name)
@@ -2695,8 +2843,8 @@ impl Engine {
                 None => RuntimeValue::Undef,
             }),
             "entry_has" => Ok(RuntimeValue::Bool(
-                args.first()
-                    .map(|a| ctx.entry_named.contains_key(&a.to_str()))
+                Self::resolve_named_capture_key(raw_args, args)
+                    .map(|name| ctx.entry_named.contains_key(&name))
                     .unwrap_or(false),
             )),
             "entry_map" | "entry_named_map" => Ok(named_map_to_hash(&ctx.entry_named)),
@@ -2748,12 +2896,9 @@ impl Engine {
             "split" => {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
-                    let delim = args[1].to_str();
-                    Ok(RuntimeValue::Array(
-                        s.split(&delim)
-                            .map(|p| RuntimeValue::Scalar(p.to_string()))
-                            .collect(),
-                    ))
+                    Ok(RuntimeValue::Array(split_string_for_arg(
+                        &s, raw_args, 1, &args[1],
+                    )?))
                 } else {
                     Ok(RuntimeValue::Array(vec![]))
                 }
@@ -2762,17 +2907,13 @@ impl Engine {
                 if let Some(arr) = args.first() {
                     match arr {
                         RuntimeValue::Array(items) => {
-                            let delim = args.get(1).map(|a| a.to_str()).unwrap_or_default();
-                            let result: Vec<RuntimeValue> = items
-                                .iter()
-                                .flat_map(|v| {
-                                    let value = v.to_str();
-                                    value
-                                        .split(&delim)
-                                        .map(|p| RuntimeValue::Scalar(p.to_string()))
-                                        .collect::<Vec<_>>()
-                                })
-                                .collect();
+                            let delimiter = args.get(1).cloned().unwrap_or(RuntimeValue::Undef);
+                            let mut result = Vec::new();
+                            for item in items {
+                                let value = item.to_str();
+                                result
+                                    .extend(split_string_for_arg(&value, raw_args, 1, &delimiter)?);
+                            }
                             Ok(RuntimeValue::Array(result))
                         }
                         _ => Ok(RuntimeValue::Array(vec![])),
@@ -2866,13 +3007,11 @@ impl Engine {
                 byte_to_char_offset(&ctx.input, ctx.pos) as f64,
             )),
             "cursor_line" => {
-                let line = ctx.input[..ctx.pos].chars().filter(|&c| c == '\n').count() + 1;
+                let (line, _) = line_col_at_byte_offset(&ctx.input, ctx.pos);
                 Ok(RuntimeValue::Number(line as f64))
             }
             "cursor_col" => {
-                // Char distance from the last newline (Perl columns are char-based).
-                let last_nl = ctx.input[..ctx.pos].rfind('\n').map(|i| i + 1).unwrap_or(0);
-                let col = ctx.input[last_nl..ctx.pos].chars().count() + 1;
+                let (_, col) = line_col_at_byte_offset(&ctx.input, ctx.pos);
                 Ok(RuntimeValue::Number(col as f64))
             }
             "cursor_rest" => Ok(RuntimeValue::Scalar(ctx.remaining().to_string())),
@@ -3265,14 +3404,24 @@ impl Engine {
             }
             // ── Entry/match detail ──
             "entry_line" | "entry_start_line" => {
-                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
-                let line = ctx.input[..pos].chars().filter(|&c| c == '\n').count() + 1;
+                let (line, _) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_start_byte);
                 Ok(RuntimeValue::Number(line as f64))
             }
-            "entry_col" => {
-                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
-                let last_nl = ctx.input[..pos].rfind('\n').map(|i| i + 1).unwrap_or(0);
-                Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
+            "entry_col" | "entry_start_col" => {
+                let (_, col) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_start_byte);
+                Ok(RuntimeValue::Number(col as f64))
+            }
+            "entry_end_line" => {
+                let (line, _) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_end_byte);
+                Ok(RuntimeValue::Number(line as f64))
+            }
+            "entry_end_col" => {
+                let (_, col) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_end_byte);
+                Ok(RuntimeValue::Number(col as f64))
             }
             "entry_len" => Ok(RuntimeValue::Number(
                 span_char_len(&ctx.input, ctx.entry_start_byte, ctx.entry_end_byte).unwrap_or(0)
@@ -3286,15 +3435,25 @@ impl Engine {
                 &ctx.input,
                 ctx.entry_end_byte,
             ) as f64)),
-            "match_line" => {
-                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
-                let line = ctx.input[..pos].chars().filter(|&c| c == '\n').count() + 1;
+            "match_line" | "match_start_line" => {
+                let (line, _) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_start_byte);
                 Ok(RuntimeValue::Number(line as f64))
             }
-            "match_col" => {
-                let pos = args.first().and_then(|a| a.as_number()).unwrap_or(0.0) as usize;
-                let last_nl = ctx.input[..pos].rfind('\n').map(|i| i + 1).unwrap_or(0);
-                Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
+            "match_col" | "match_start_col" => {
+                let (_, col) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_start_byte);
+                Ok(RuntimeValue::Number(col as f64))
+            }
+            "match_end_line" => {
+                let (line, _) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_end_byte);
+                Ok(RuntimeValue::Number(line as f64))
+            }
+            "match_end_col" => {
+                let (_, col) =
+                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_end_byte);
+                Ok(RuntimeValue::Number(col as f64))
             }
             "match_len" => Ok(RuntimeValue::Number(
                 span_char_len(&ctx.input, ctx.match_start_byte, ctx.match_end_byte).unwrap_or(0)
@@ -3329,7 +3488,7 @@ impl Engine {
             // in nested/dispatched contexts (Helper Contract Catalog §8). They read
             // the populated `ctx.match_named` map. `match_named_map` is a retired
             // alias of `match_map`.
-            "match_named" => Ok(match args.first().map(|a| a.to_str()) {
+            "match_named" => Ok(match Self::resolve_named_capture_key(raw_args, args) {
                 Some(name) => ctx
                     .match_named
                     .get(&name)
@@ -3338,8 +3497,8 @@ impl Engine {
                 None => RuntimeValue::Undef,
             }),
             "match_has" => Ok(RuntimeValue::Bool(
-                args.first()
-                    .map(|a| ctx.match_named.contains_key(&a.to_str()))
+                Self::resolve_named_capture_key(raw_args, args)
+                    .map(|name| ctx.match_named.contains_key(&name))
                     .unwrap_or(false),
             )),
             "match_map" | "match_named_map" => Ok(named_map_to_hash(&ctx.match_named)),
@@ -5114,6 +5273,32 @@ ChildB:
     }
 
     #[test]
+    fn helpers_5_3_split_accepts_regex_literal_delimiter() {
+        let grammar = r#"Top::
+ /x/
+ E { return("left , right,third".split(/\s*,\s*/).trim_each()) }
+"#;
+        let acc = run_5_3(grammar, "x");
+        assert_eq!(
+            acc.last().unwrap(),
+            &serde_json::json!(["left", "right", "third"])
+        );
+    }
+
+    #[test]
+    fn helpers_5_3_split_each_accepts_regex_literal_delimiter() {
+        let grammar = r#"Top::
+ /x/
+ E { return(["a, b", "c ,d"].split_each(/\s*,\s*/).trim_each()) }
+"#;
+        let acc = run_5_3(grammar, "x");
+        assert_eq!(
+            acc.last().unwrap(),
+            &serde_json::json!(["a", "b", "c", "d"])
+        );
+    }
+
+    #[test]
     fn chars_5_3_substr_is_char_based_no_panic() {
         // substr(café, 3, 1) = "é" (char index 3). Byte-slicing s[3..4] would
         // panic — byte 3 is the first of the two bytes of 'é'.
@@ -5260,6 +5445,13 @@ ChildB:
         let acc = run_5_5_1(present, "2024-03");
         assert_eq!(acc.last().unwrap().as_str().unwrap(), "2024");
 
+        let bare_name = r#"Top::
+ /(?P<year>\d+)-(?P<month>\d+)/
+ E { return(entry_named(year)) }
+"#;
+        let acc = run_5_5_1(bare_name, "2024-03");
+        assert_eq!(acc.last().unwrap().as_str().unwrap(), "2024");
+
         // An absent name returns undef (JSON null), per the catalog.
         let absent = r#"Top::
  /(?P<year>\d+)/
@@ -5282,6 +5474,18 @@ ChildB:
 "#;
         assert!(
             run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
+
+        let g_present_bare = r#"Top::
+ /(?P<word>\w+)/
+ E { return(entry_has(word)) }
+"#;
+        assert!(
+            run_5_5_1(g_present_bare, "hi")
                 .last()
                 .unwrap()
                 .as_bool()
@@ -5330,6 +5534,13 @@ ChildB:
         let acc = run_5_5_1(present, "2024-03");
         assert_eq!(acc.last().unwrap().as_str().unwrap(), "03");
 
+        let bare_name = r#"Top::
+ /(?P<year>\d+)-(?P<month>\d+)/
+ E { return(match_named(month)) }
+"#;
+        let acc = run_5_5_1(bare_name, "2024-03");
+        assert_eq!(acc.last().unwrap().as_str().unwrap(), "03");
+
         let absent = r#"Top::
  /(?P<year>\d+)/
  E { return(match_named(scalar("nope"))) }
@@ -5345,6 +5556,18 @@ ChildB:
 "#;
         assert!(
             run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
+
+        let g_present_bare = r#"Top::
+ /(?P<word>\w+)/
+ E { return(match_has(word)) }
+"#;
+        assert!(
+            run_5_5_1(g_present_bare, "hi")
                 .last()
                 .unwrap()
                 .as_bool()

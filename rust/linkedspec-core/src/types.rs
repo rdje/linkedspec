@@ -295,6 +295,8 @@ pub struct CompiledUserFunction {
     pub arity: usize,
     pub body: crate::expr::CodeBlock,
     pub body_source: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub body_payload: Option<serde_json::Value>,
     pub source: String,
     pub source_span: crate::ast::SourceSpan,
     pub body_span: crate::ast::SourceSpan,

@@ -1,6 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — STAGED-LINKED-PARSING.5.3.2 — retire Rust raw user-function definition parser
+
+**Scope:** Rust core parser/compiler/runtime, the Rust spec-defined user-function parser adapter, focused Rust
+AST-shape tests, runtime helper parity needed by `specs/user_function_definition.spec`, mdBook/backend notes,
+task-tree frontier, roadmap/live docs, and Knowledge Map. The shared
+`specs/user_function_definition.spec` contract is unchanged.
+
+**What changed:** Rust no longer parses `fn name(params) { body }` shells with a competing raw parser in
+`linkedspec-core::parser`. Rule-only parsing now leaves `SpecFile.functions` empty; the runtime-level
+`spec_parser` module loads `specs/user_function_definition.spec`, executes it through the Rust engine, validates
+the returned neutral `function_definition` / `function_definition_error` AST, strips exact source spans, and
+attaches the resulting definitions before validation and compile.
+
+**Runtime support:** The Rust engine now supports the spec surface needed by that parser: PCRE-style named
+captures and leading inline flag toggles survive composed RGX alternations, regex-literal delimiters work in
+`split` and `split_each`, bare `entry_named(name)` / `match_named(name)` resolve capture keys, multiline compact
+lifecycle chains such as `I.return({ ... })` collect their full argument, child-rule capture slices start at the
+entry end, and self-recursive close/finalizer edges execute their block without seeking a later close.
+
+**Tests:** Focused Rust tests execute `specs/user_function_definition.spec` against concrete input strings and
+assert the returned AST shape, spans, params, body text, body payload, and malformed-definition diagnostics. The
+suite covers compact, spaced-param, multiline, nested-brace, string-brace, regex-brace, direct-shape, and malformed
+forms, plus minimal regressions for edge-only child `I.return(...).push(...)`, regex-delimiter split, and
+inline-flag branch identity.
+
+**Checks:** `cargo fmt`; focused Rust runtime/core tests for the spec-defined UDF parser and touched helper
+surfaces; shipped-spec parse/compile; Rust corpus oracle; `mdbook build docs/linkedspec-book`; Knowledge Map,
+memory-architecture, doctrine, and whitespace gates; and `bash tools/run_ci_local.sh` all passed. The local CI
+gate ended with phase0 **1016 green**.
+
 ## 2026-07-02 — STAGED-LINKED-PARSING.5.3.1 — consume spec-defined function AST in Perl
 
 **Scope:** `specs/user_function_definition.spec`, the Perl user-function registry bridge, focused AST-shape

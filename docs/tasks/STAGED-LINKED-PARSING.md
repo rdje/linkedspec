@@ -236,7 +236,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.5.3.1 - consume spec-defined function AST in Perl`
 
 - ID: `STAGED-LINKED-PARSING.5.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Retire remaining host-language user-function definition parser bridges,
     starting with Rust, so user-defined function definitions are parsed only by
     the spec-defined parser contract.
@@ -249,8 +249,37 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     further grammar simplification is accepted when it improves readability or
     predictability, without treating complex regexes as forbidden when they are
     the cleanest local extractor.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Rust no longer owns a raw parser for
+    top-level `fn name(params) { body }` shells. The core Rust rule parser
+    rejects leading `fn` source and leaves `SpecFile.functions` empty for
+    rule-only parsing; `linkedspec-runtime::spec_parser` now loads
+    `specs/user_function_definition.spec`, executes it through the Rust
+    runtime, validates the returned neutral `function_definition` /
+    `function_definition_error` AST shape, strips definition spans, and attaches
+    the resulting `FunctionDefinition` records before validation/compile.
+    Rust preserves the returned `body_payload` into `CompiledUserFunction`.
+    Runtime support needed by that spec was locked: PCRE-style named captures
+    and leading inline flag toggles are normalized safely before composed RGX
+    alternations, regex-literal delimiters work in `split`/`split_each`, bare
+    `entry_named(name)` / `match_named(name)` read named capture keys, compact
+    multiline lifecycle fluent chains such as `I.return({ ... })` collect their
+    full argument before lowering, rule-local anonymous capture starts at the
+    child entry end, and self-recursive finalizer edges such as
+    `-> function_definition[1] { return(...) }` execute their block without
+    seeking a later close. Focused Rust tests assert the exact returned AST
+    shape across compact, spaced-param, multiline, nested-brace, string-brace,
+    regex-brace, direct-shape, and malformed variants, plus the minimal
+    edge-only `I.return(...).push(...)` regression. Checks passed:
+    `cargo fmt`; focused Rust tests for `spec_defined_user_function_parser_*`,
+    regex delimiter splitting, inline flag/named-capture normalization,
+    edge-only scanner/child-I-return, `terse_2_3_2_`, named capture helpers,
+    core parser, core user functions, shipped-spec parse/compile, and
+    `cargo test -q -p linkedspec-runtime --test corpus_oracle`. Commit-gate
+    checks also passed: `mdbook build docs/linkedspec-book`,
+    `knowledge-map/scripts/check_knowledge_map.sh`,
+    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
+    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1016 green).
+  Commit: `STAGED-LINKED-PARSING.5.3.2 - retire Rust raw function parser`
 
 - ID: `STAGED-LINKED-PARSING.5.4`
   Status: `pending`
@@ -288,7 +317,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `STAGED-LINKED-PARSING.5.3.2` | `pending` | Retire remaining host-language user-function definition parser bridges, starting with Rust, so active variants converge on the spec-owned AST contract before parse-job marker work continues. |
+| 1 | `STAGED-LINKED-PARSING.5.4` | `pending` | Add the minimal neutral parse-job marker/sidecar prototype now that active Perl/Rust definition-shell bridges converge on the spec-owned AST contract. |
 
 ## Decisions
 

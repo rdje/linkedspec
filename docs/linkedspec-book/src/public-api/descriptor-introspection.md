@@ -143,8 +143,8 @@ fn normalize(value) {
 
 The Perl reference descriptor records the definition by name, including ordered parameter names, exact arity,
 source/body spans, original body source, a neutral staged `body_payload`, and the parsed ActionIR `action_block`
-body AST. That definition shell is parsed by `specs/user_function_definition.spec`; the Perl registry consumes
-the returned AST rather than raw-scanning the `fn` syntax. The `body_payload` is the implementation-language-neutral
+body AST. The definition shell is parsed by `specs/user_function_definition.spec`; active backends consume that
+returned AST rather than raw-scanning the `fn` syntax. The `body_payload` is the implementation-language-neutral
 text island for future staged dispatch: it carries the exact body text, half-open source span, source-slice
 provenance, source-order parent path, function name, params, arity, and `payload_kind = function_body`. It is
 metadata for staged parsing; current shipped parsers do not yet dispatch it through a later `.spec` parser. The

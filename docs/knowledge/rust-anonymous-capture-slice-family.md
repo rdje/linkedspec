@@ -13,8 +13,8 @@ answers:
 date: 2026-06-16
 status: confirmed
 tags: [rust, engine, runtime, capture, RUST-PARITY]
-evidence: "RUST-PARITY.5.5.4 (2026-06-16): rust/linkedspec-runtime/src/engine.rs call_helper arms for capture_slice (fixed), capture_slice_len (fixed), capture_slice_until_cursor(+_len), capture_take(+_len), capture_take_until_cursor(+_len), capture_rest(+_len), capture_take_rest(+_len); reuses span_text/span_char_len. Authoritative contract: perl/LinkedSpec/ActionIR/Contracts.pm ~366-656. 233/233 tests green (223 baseline + 10 helpers_5_5_4_*)."
-reverify: "cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n '\"capture_slice\"\\|\"capture_slice_until_cursor\"\\|\"capture_take\"\\|\"capture_rest\"\\|\"capture_take_rest\"' linkedspec-runtime/src/engine.rs | head"
+evidence: "RUST-PARITY.5.5.4 (2026-06-16): rust/linkedspec-runtime/src/engine.rs call_helper arms for capture_slice (fixed), capture_slice_len (fixed), capture_slice_until_cursor(+_len), capture_take(+_len), capture_take_until_cursor(+_len), capture_rest(+_len), capture_take_rest(+_len); reuses span_text/span_char_len. STAGED-LINKED-PARSING.5.3.2 (2026-07-02) additionally made dispatched rule invocations set ctx.capture_start to the entry match end, matching Perl's child-handler IPOS for opener/closer island parsing; user_function_definition.spec body_payload tests lock capture_slice() as the text after the function opener and before the outer close. Authoritative contract: perl/LinkedSpec/ActionIR/Contracts.pm ~366-656 plus the generated-handler child-entry behavior."
+reverify: "cd rust && cargo test -q -p linkedspec-runtime terse_2_3_2_child_rule_capture_slice_starts_after_entry_match spec_defined_user_function_parser_returns_expected_ast_shape && rg -n 'capture_start = Some\\(ctx.entry_end_byte\\)|\"capture_slice\"|\"capture_take\"' linkedspec-runtime/src/engine.rs"
 ---
 
 # Rust Engine: Anonymous Capture-Slice Family
@@ -32,6 +32,13 @@ These readers operate on a single **anonymous capture cursor**, `ctx.capture_sta
 (`ctx.capture_start = Some(ctx.pos)`), normally from an `I`-block which runs *before* the
 rule's seek/match, so it records a position at or before the match start. Reads default an
 unset cursor to 0.
+
+When a rule is entered through a parent dispatch edge, Rust now initializes
+`ctx.capture_start` to that child invocation's entry-match end. This mirrors the Perl
+generated handler's child-entry `$IPOS` behavior and is what lets
+`user_function_definition.spec` return a function body payload with `capture_slice()`:
+the opener regex consumes through `{`, the capture cursor starts after that opener, and
+the close edge reads up to the outer `}` match start.
 
 ## The endpoint rule (the parity fix)
 

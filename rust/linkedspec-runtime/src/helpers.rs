@@ -78,14 +78,19 @@ pub mod regex_engine {
                 });
             }
 
+            let normalized_patterns: Vec<String> = patterns
+                .iter()
+                .map(|pattern| normalize_pattern_syntax(pattern))
+                .collect();
+
             // First pass: compile each pattern individually to count capture groups
             // and collect named capture names.
             let mut alt_infos: Vec<AltInfo> = Vec::with_capacity(patterns.len());
             let mut group_offset: usize = 1; // start after group 0 (full match)
 
-            for (i, pat) in patterns.iter().enumerate() {
+            for (i, pat) in normalized_patterns.iter().enumerate() {
                 let re = Regex::compile(pat)
-                    .map_err(|e| format!("regex compile error for '/{}/': {}", pat, e))?;
+                    .map_err(|e| format!("regex compile error for '/{}/': {}", patterns[i], e))?;
                 let capture_names: Vec<Option<String>> = re
                     .capture_names()
                     .map(|opt| opt.map(|s| s.to_string()))
@@ -102,7 +107,7 @@ pub mod regex_engine {
             }
 
             // Build the combined regex: pat1|pat2|pat3
-            let combined_pattern = patterns.join("|");
+            let combined_pattern = normalized_patterns.join("|");
             let combined_regex = Regex::compile(&combined_pattern)
                 .map_err(|e| format!("regex compile error for combined alternation: {}", e))?;
 
@@ -181,6 +186,111 @@ pub mod regex_engine {
                 named,
             })
         }
+    }
+
+    fn normalize_pattern_syntax(pattern: &str) -> String {
+        normalize_leading_inline_flag_toggle(&normalize_named_capture_syntax(pattern))
+    }
+
+    fn normalize_leading_inline_flag_toggle(pattern: &str) -> String {
+        let Some(rest) = pattern.strip_prefix("(?") else {
+            return pattern.to_string();
+        };
+
+        let mut flags = String::new();
+        let mut consumed = 2;
+        for ch in rest.chars() {
+            if matches!(ch, 'm' | 'i' | 's' | 'x') {
+                flags.push(ch);
+                consumed += ch.len_utf8();
+            } else {
+                break;
+            }
+        }
+
+        if flags.is_empty() || pattern.as_bytes().get(consumed) != Some(&b')') {
+            return pattern.to_string();
+        }
+
+        let body = &pattern[consumed + 1..];
+        format!("(?{flags}:{body})")
+    }
+
+    fn normalize_named_capture_syntax(pattern: &str) -> String {
+        let chars: Vec<char> = pattern.chars().collect();
+        let mut out = String::with_capacity(pattern.len());
+        let mut i = 0;
+        let mut escaped = false;
+        let mut in_class = false;
+
+        while i < chars.len() {
+            let ch = chars[i];
+            if escaped {
+                out.push(ch);
+                escaped = false;
+                i += 1;
+                continue;
+            }
+            if ch == '\\' {
+                out.push(ch);
+                escaped = true;
+                i += 1;
+                continue;
+            }
+            if in_class {
+                out.push(ch);
+                if ch == ']' {
+                    in_class = false;
+                }
+                i += 1;
+                continue;
+            }
+            if ch == '[' {
+                out.push(ch);
+                in_class = true;
+                i += 1;
+                continue;
+            }
+
+            if ch == '('
+                && chars.get(i + 1) == Some(&'?')
+                && chars.get(i + 2) == Some(&'<')
+                && chars
+                    .get(i + 3)
+                    .is_some_and(|candidate| is_capture_name_start(*candidate))
+            {
+                let name_start = i + 3;
+                let mut name_end = name_start + 1;
+                while chars
+                    .get(name_end)
+                    .is_some_and(|candidate| is_capture_name_continue(*candidate))
+                {
+                    name_end += 1;
+                }
+                if chars.get(name_end) == Some(&'>') {
+                    out.push_str("(?P<");
+                    for name_ch in &chars[name_start..name_end] {
+                        out.push(*name_ch);
+                    }
+                    out.push('>');
+                    i = name_end + 1;
+                    continue;
+                }
+            }
+
+            out.push(ch);
+            i += 1;
+        }
+
+        out
+    }
+
+    fn is_capture_name_start(ch: char) -> bool {
+        ch == '_' || ch.is_ascii_alphabetic()
+    }
+
+    fn is_capture_name_continue(ch: char) -> bool {
+        ch == '_' || ch.is_ascii_alphanumeric()
     }
 
     /// Extract positional capture groups belonging to the winning alternative.
@@ -402,6 +512,60 @@ pub mod regex_engine {
         }
 
         #[test]
+        fn pcre_style_named_captures_are_extracted() {
+            let alt =
+                CompiledAlternation::compile(&[r"(?<year>\d{4})-(?<month>\d{2})".into()]).unwrap();
+            let result = alt.seek_match("date: 2024-03-15", 6).unwrap();
+            assert_eq!(result.named.get("year").unwrap(), "2024");
+            assert_eq!(result.named.get("month").unwrap(), "03");
+        }
+
+        #[test]
+        fn leading_inline_flag_toggles_are_scoped_per_alternative() {
+            let alt = CompiledAlternation::compile(&[
+                r"(?m)^fn[ \t]+(?<name>[A-Za-z_]\w*)\s*\(".into(),
+                r"(?ms)^[ \t]*[A-Za-z_]\w*[ \t]*(?:::|:).*?(?=^[ \t]*(?:fn\b|[A-Za-z_]\w*[ \t]*(?:::|:))|\z)".into(),
+            ])
+            .unwrap();
+
+            let input = "\n\nTop::\n /x/\n\nfn choose(value) {";
+            let paragraph = alt.seek_match(input, 0).expect("rule paragraph match");
+            assert_eq!(paragraph.index, 1);
+            assert_eq!(paragraph.start, 2);
+
+            let function = alt
+                .seek_match(input, paragraph.end)
+                .expect("later function match");
+            assert_eq!(function.index, 0);
+            assert_eq!(function.named.get("name").unwrap(), "choose");
+        }
+
+        #[test]
+        fn leading_inline_flag_toggle_preserves_word_boundary() {
+            let alt = CompiledAlternation::compile(&[r"(?m)^[ \t]*fn\b[^\n]*".into()]).unwrap();
+            let result = alt
+                .seek_match("fn bad(value\nTop::\n /x/\n", 0)
+                .expect("malformed function header match");
+            assert_eq!(result.start, 0);
+            assert_eq!(result.matched_text(), "fn bad(value");
+        }
+
+        #[test]
+        fn leading_inline_flag_toggle_preserves_branch_index() {
+            let alt = CompiledAlternation::compile(&[
+                r"(?m)^[ \t]*fn[ \t]+(?<name>[A-Za-z_]\w*)\s*\(\s*(?<params>[A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\s*\)\s*\{".into(),
+                r"(?m)^[ \t]*fn\b[^\n]*".into(),
+                r"(?ms)^[ \t]*[A-Za-z_]\w*[ \t]*(?:::|:).*?(?=^[ \t]*(?:fn\b|[A-Za-z_]\w*[ \t]*(?:::|:))|\z)".into(),
+            ])
+            .unwrap();
+            let result = alt
+                .seek_match("fn bad(value\nTop::\n /x/\n", 0)
+                .expect("malformed function header match");
+            assert_eq!(result.index, 1);
+            assert_eq!(result.matched_text(), "fn bad(value");
+        }
+
+        #[test]
         fn named_captures_multiple() {
             let alt = CompiledAlternation::compile(&[r"(?P<first>\w+)\s+(?P<second>\w+)".into()])
                 .unwrap();
@@ -486,7 +650,6 @@ pub mod regex_engine {
             let result = alt
                 .seek_match("DemoParser::\n /pattern/ -> Child", 0)
                 .unwrap();
-            eprintln!("TEST groups={:?} index={}", result.groups, result.index);
             assert_eq!(result.index, 0, "should match first pattern");
             assert_eq!(result.groups.len(), 5, "full match + 4 groups");
             assert_eq!(result.groups[0], "DemoParser::");

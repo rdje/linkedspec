@@ -585,7 +585,33 @@ fn check_unused_rules(spec: &SpecFile) -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::ast::{FunctionDefinition, SourceSpan};
     use crate::parser::parse_spec;
+
+    fn spec_with_user_functions(functions: Vec<FunctionDefinition>, rules_src: &str) -> SpecFile {
+        let mut spec = parse_spec(rules_src).unwrap();
+        spec.functions = functions;
+        spec
+    }
+
+    fn user_function(name: &str, params: &[&str]) -> FunctionDefinition {
+        FunctionDefinition {
+            name: name.to_string(),
+            params: params.iter().map(|param| param.to_string()).collect(),
+            arity: params.len(),
+            body_source: "return(value)".to_string(),
+            body_payload: None,
+            source: format!("fn {name}({}) {{ return(value) }}", params.join(", ")),
+            source_span: SourceSpan {
+                line_start: 1,
+                line_end: 1,
+            },
+            body_span: SourceSpan {
+                line_start: 1,
+                line_end: 1,
+            },
+        }
+    }
 
     #[test]
     fn validate_accepts_valid_spec() {
@@ -620,22 +646,22 @@ mod tests {
 
     #[test]
     fn validate_accepts_user_function_registry() {
-        let src = r#"fn normalize(value) { return(trim(value)) }
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec = spec_with_user_functions(
+            vec![user_function("normalize", &["value"])],
+            "Top::\n /x/\n",
+        );
         validate(&spec).unwrap();
     }
 
     #[test]
     fn validate_rejects_duplicate_user_function_names() {
-        let src = r#"fn normalize(value) { return(value) }
-fn normalize(other) { return(other) }
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec = spec_with_user_functions(
+            vec![
+                user_function("normalize", &["value"]),
+                user_function("normalize", &["other"]),
+            ],
+            "Top::\n /x/\n",
+        );
         assert!(
             validate(&spec)
                 .unwrap_err()
@@ -646,11 +672,8 @@ Top::
 
     #[test]
     fn validate_rejects_user_function_rule_label_collision() {
-        let src = r#"fn Top(value) { return(value) }
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec =
+            spec_with_user_functions(vec![user_function("Top", &["value"])], "Top::\n /x/\n");
         assert!(
             validate(&spec)
                 .unwrap_err()
@@ -661,11 +684,8 @@ Top::
 
     #[test]
     fn validate_rejects_user_function_builtin_collision() {
-        let src = r#"fn trim(value) { return(value) }
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec =
+            spec_with_user_functions(vec![user_function("trim", &["value"])], "Top::\n /x/\n");
         assert!(
             validate(&spec)
                 .unwrap_err()
@@ -680,13 +700,8 @@ Top::
             "add", "sub", "mul", "div", "mod", "abs", "floor", "ceil", "round", "min", "max",
             "clamp", "sum", "avg", "median", "range",
         ] {
-            let src = format!(
-                r#"fn {name}(value) {{ return(value) }}
-Top::
- /x/
-"#
-            );
-            let spec = parse_spec(&src).unwrap();
+            let spec =
+                spec_with_user_functions(vec![user_function(name, &["value"])], "Top::\n /x/\n");
             assert!(
                 validate(&spec)
                     .unwrap_err()
@@ -699,11 +714,10 @@ Top::
 
     #[test]
     fn validate_rejects_user_function_duplicate_parameter() {
-        let src = r#"fn normalize(value, value) { return(value) }
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec = spec_with_user_functions(
+            vec![user_function("normalize", &["value", "value"])],
+            "Top::\n /x/\n",
+        );
         assert!(
             validate(&spec)
                 .unwrap_err()
@@ -714,11 +728,8 @@ Top::
 
     #[test]
     fn validate_rejects_user_function_reserved_parameter() {
-        let src = r#"fn normalize(ctx) { return(ctx) }
-Top::
- /x/
-"#;
-        let spec = parse_spec(src).unwrap();
+        let spec =
+            spec_with_user_functions(vec![user_function("normalize", &["ctx"])], "Top::\n /x/\n");
         assert!(
             validate(&spec)
                 .unwrap_err()

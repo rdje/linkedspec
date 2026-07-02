@@ -63,9 +63,9 @@ an ActionIR action block, so it uses the same helper/value/block DSL described i
 
 Function definitions are file-level declarations. They are not rule paragraphs, not rule
 labels, and not valid inside action/lifecycle blocks. They may appear at top level before
-or between ordinary rule paragraphs; the current Perl reference strips them before the
-hardcoded bootstrap parser sees the rule source, while preserving line numbers for
-diagnostics.
+or between ordinary rule paragraphs. Active backends extract them by executing
+`specs/user_function_definition.spec`, then strip those source spans before ordinary rule
+parsing while preserving line numbers for diagnostics.
 
 As of `SPEC-FORMAT-TERSE.4.2.3`, the Perl reference validates and records functions in the
 descriptor registry and executes registered exact-arity calls in value positions and
@@ -75,9 +75,9 @@ returns the body result. A standalone `normalize(" x ")` computes that value and
 through the canonical `VALUE_DROP` path. Calls can feed helper arguments and compatible
 receiver-dot chains. Recursive and unsupported function-body forms are fenced as
 diagnostics with zero raw fallback on the Perl reference, and Rust directly diagnoses
-recursive user-function calls. Rust now parses, validates, compiles, and executes the
-same MVP function surface, including value calls, compatible receiver chains, standalone
-discard, and fresh function-local scope.
+recursive user-function calls. Rust now validates, compiles, and executes the same MVP
+function surface after consuming the same spec-returned definition AST, including value
+calls, compatible receiver chains, standalone discard, and fresh function-local scope.
 
 The registry rejects:
 

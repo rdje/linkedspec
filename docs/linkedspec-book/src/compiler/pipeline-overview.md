@@ -142,8 +142,8 @@ target node carries `type`, `name`, parsed `params`, `arity`, exact `source_text
 neutral `source_span`, exact inner `body_source`, `body_span`, a `body_parse_job`, and
 the stitched `body_ast` after dispatch.
 
-The current Perl reference bridge now consumes a focused spec-defined parser for the
-definition shell: `specs/user_function_definition.spec`. That spec returns the
+The current Perl reference bridge and Rust runtime adapter now consume a focused
+spec-defined parser for the definition shell: `specs/user_function_definition.spec`. That spec returns the
 pre-dispatch `function_definition` AST, including a neutral `body_payload` with
 `kind = staged_payload`, `node_kind = function_definition`,
 `payload_kind = function_body`, exact payload text, half-open source/body spans,
@@ -153,10 +153,10 @@ islands handle inner `{ ... }` blocks, while `function_definition[1]` owns the o
 close edge. Quoted strings, comments, and regex literals are matched as body islands
 before brace dispatch so braces inside them do not end the function. The Perl registry
 validates that returned AST, annotates the source-order parent path, then stitches in
-the existing body ActionIR AST. Current shipped parsers do not yet dispatch the body
-payload through a next-stage `.spec`; remaining host-language definition-parser
-bridges, starting with Rust, are explicit follow-on debt before parse-job marker work
-continues.
+the existing body ActionIR AST. The Rust adapter validates the same returned AST, strips
+definition spans, then parses the remaining rule-only source through the core rule
+parser. Current shipped parsers do not yet dispatch the body payload through a
+next-stage `.spec`; the next staged-parsing work is the neutral parse-job sidecar.
 
 The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
 Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source
@@ -268,10 +268,11 @@ The preparation stage also makes diagnostics better. If an invalid option or mal
 
 ## Stage 2: extract user-function registry
 
-Before ordinary rule validation/bootstrap, the Perl reference extracts top-level user-function definitions into a
-registry. This bridge recognizes only top-level `fn name(args) { body }` declarations, parses each body into an
-ActionIR action-block AST, and blanks the original source region while preserving newlines. The stripped source
-then flows through the existing rule-validation and bootstrap-parser path.
+Before ordinary rule validation/bootstrap, active backends extract top-level user-function definitions into a
+registry by executing `specs/user_function_definition.spec`. This bridge recognizes only top-level
+`fn name(args) { body }` declarations, preserves the returned source/body spans and neutral body payload, and
+blanks the original source region while preserving newlines. The stripped source then flows through the existing
+rule-validation and bootstrap-parser path.
 
 This stage rejects malformed definitions, duplicate function names, reserved names, built-in helper/control-name
 collisions including numeric word aliases, invalid or duplicate parameters, and later rule-label collisions. Execution is not done in this
