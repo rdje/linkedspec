@@ -27,6 +27,12 @@ span, parser spec identity, optional top rule, insertion policy, and failure pol
 metadata. It is not implemented yet; the design exists so every backend can agree on the
 same annotation shape before scheduler code is written.
 
+The scheduler side has the same bias toward explicitness. A staged parser registry
+resolves spec ids in a declared order, caches compiled parsers by content and capability
+fingerprints, processes jobs in a stable AST-path/source-span/job-id queue, and diagnoses
+cycles by repeated active parser/payload/source tuples. That keeps dynamic loading
+predictable rather than magical.
+
 This is separate from spec-file inclusion. Inclusion or imports compose spec definitions.
 Staged dispatch parses runtime text payloads carried by AST nodes. Both are useful, but
 they solve different problems and must remain distinguishable in diagnostics and

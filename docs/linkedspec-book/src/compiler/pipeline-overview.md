@@ -78,6 +78,18 @@ parse (`fail`), preserves the original text plus diagnostics (`keep_text`), or e
 structured diagnostic node (`diagnostic_node`). Current shipped parsers do not yet accept
 or execute `parse_job(...)`.
 
+When implemented, parse jobs dispatch through a staged parser registry with neutral
+`resolve`, `load`, `compile`, and `execute` operations. Resolution checks already-known
+import aliases and composed spec identities, then paths relative to the declaring spec,
+then configured search roots and registry providers in declared order. The scheduler
+collects jobs after the current stage parse, orders them by parent AST path, source span,
+and job id, executes them in that stable order, stitches their results, and queues any
+new jobs emitted by stitched results at the next stage depth. Cache keys include the
+normalized spec identity, content digest, import/include graph fingerprint, selected top
+rule, `.spec` language version, helper/action contract version, staged parsing contract
+version, and backend capability set. Active-chain repeats of spec identity, top rule,
+payload digest, and source span are staged-dispatch cycles and must diagnose.
+
 Spec imports/composition are a separate feature. Imports let a spec reuse definitions
 from other spec files. Staged parse dispatch runs another parser over text produced by a
 previous parse. Keeping those concepts separate lets diagnostics explain whether a

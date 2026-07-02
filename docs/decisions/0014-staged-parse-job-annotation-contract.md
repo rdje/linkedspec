@@ -88,5 +88,6 @@ Adopt this design contract before implementation:
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`
-- Related: ADR `0012` staged linked parsing architecture, ADR `0013` spec
-  import/composition contract, ADR `0011` text-to-AST backend doctrine
+- Related: ADR `0015` staged parser registry/dispatch contract, ADR `0012`
+  staged linked parsing architecture, ADR `0013` spec import/composition contract,
+  ADR `0011` text-to-AST backend doctrine

@@ -14,12 +14,13 @@ answers:
   - "how should extracted text islands be parsed"
   - "what should a next-stage parse record contain"
   - "how is a parse job annotated"
+  - "how are staged parse jobs dispatched"
   - "does spec.spec remain the first .spec grammar"
   - "what is the import composition contract for staged parsing"
 date: 2026-07-02
 status: current
 tags: [architecture, staged-parsing, parser-composition, language-neutral, spec-spec]
-evidence: "ADR 0012 adopts staged linked parsing as core architecture: stage-N specs may emit AST nodes carrying raw extracted text, source span, payload kind, and parse intent; each payload can become a parse job naming parser spec identity, optional top rule, parent AST path, insertion policy, and failure policy; one stage may spawn many different next-stage specs. ADR 0013 separately accepts the design-only spec import/composition contract: file-scope import aliases and structured includes compose grammar material, while staged parse jobs parse runtime payload text. ADR 0014 accepts the design-only parse_job(text_expr, options) annotation plus source-aware sidecar metadata schema. The contract is implementation-language neutral across Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or future backends. For .spec language evolution, specs/spec.spec remains the first authoritative grammar; hardcoded bootstrap grammar is bridge debt, not a competing permanent owner."
+evidence: "ADR 0012 adopts staged linked parsing as core architecture: stage-N specs may emit AST nodes carrying raw extracted text, source span, payload kind, and parse intent; each payload can become a parse job naming parser spec identity, optional top rule, parent AST path, insertion policy, and failure policy; one stage may spawn many different next-stage specs. ADR 0013 separately accepts the design-only spec import/composition contract: file-scope import aliases and structured includes compose grammar material, while staged parse jobs parse runtime payload text. ADR 0014 accepts the design-only parse_job(text_expr, options) annotation plus source-aware sidecar metadata schema. ADR 0015 accepts the design-only deterministic registry/dispatch queue. The contract is implementation-language neutral across Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or future backends. For .spec language evolution, specs/spec.spec remains the first authoritative grammar; hardcoded bootstrap grammar is bridge debt, not a competing permanent owner."
 reverify: "rg -n 'staged linked parsing|parse job|text islands|Spec imports|implementation-language neutral|Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go|0012|STAGED-LINKED-PARSING' docs/decisions docs/tasks docs/linkedspec-book/src ROADMAP_V2.md"
 ---
 
@@ -44,6 +45,10 @@ A parse job should carry at least:
 The accepted design-only authoring marker is `parse_job(text_expr, options)`. It creates
 a marker value in the AST and a backend-neutral metadata sidecar. Current shipped parsers
 do not yet accept or execute that helper.
+
+The accepted dispatch design resolves parse jobs through a neutral registry, orders them
+by parent AST path, source span, and job id, caches compiled parsers by content and
+capability fingerprints, and diagnoses active-chain cycles.
 
 Spec imports/composition and staged parse dispatch are different. Imports compose
 grammar material. Staged dispatch parses runtime payload text that a previous parser

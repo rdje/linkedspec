@@ -98,13 +98,28 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.3 - specify staged parse-job annotations`
 
 - ID: `STAGED-LINKED-PARSING.4`
-  Status: `pending`
+  Status: `done`
   Goal: Design parser registry and dynamic next-stage dispatch.
   Acceptance: Define deterministic parser lookup/loading, cache keys, version
     boundaries, and how multiple payload kinds in one stage route to different
     next-stage specs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** Added ADR `0015` for the
+    design-only staged parser registry and dispatch queue contract. The
+    registry exposes neutral `resolve`, `load`, `compile`, and `execute`
+    operations; resolution order covers parent import aliases/composed
+    identities, declaring-spec-relative paths, configured search roots, and
+    registry providers. Cache keys include normalized spec identity, content
+    digest, import/include graph fingerprint, selected top rule, `.spec`
+    language version, helper/action contract version, staged parsing contract
+    version, and backend capabilities. Dispatch uses a stable queue ordered by
+    parent AST path, source span, and job id; active-chain cycles repeat spec
+    identity/top rule/payload digest/source span. Updated the mdBook,
+    roadmap/live docs, task index, and Knowledge Map. Checks passed:
+    `mdbook build docs/linkedspec-book`,
+    `knowledge-map/scripts/check_knowledge_map.sh`,
+    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
+    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
+  Commit: `STAGED-LINKED-PARSING.4 - specify staged parser registry dispatch`
 
 - ID: `STAGED-LINKED-PARSING.5`
   Status: `pending`
@@ -119,7 +134,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `STAGED-LINKED-PARSING.4` | `pending` | Parse-job metadata now has a concrete schema; dynamic registry/dispatch can define deterministic lookup, caching, and multi-payload routing against it. |
+| 1 | `STAGED-LINKED-PARSING.5` | `pending` | Doctrine, import composition, parse-job annotation metadata, and registry dispatch are now specified before code; the next safe step is a narrow prototype. |
 
 ## Decisions
 
@@ -141,11 +156,15 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   `parse_job(text_expr, options)` marker that creates AST marker values plus
   neutral sidecar metadata. Current shipped parsers do not yet accept or
   execute that helper.
+- `2026-07-02`: Staged parse jobs will dispatch through a deterministic
+  registry and stable queue with explicit resolution order, cache keys,
+  capability/version boundaries, isolated runtime contexts, result stitching,
+  and cycle diagnostics. Current shipped parsers do not yet implement this
+  queue.
 
 ## Open Questions
 
-- Parser registry lookup, cache keys, version boundaries, and multi-payload
-  dispatch are deferred to `.4`.
+- The first prototype payload family is deferred to `.5`.
 
 ## Blockers
 
@@ -158,6 +177,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `2026-07-02` | `STAGED-LINKED-PARSING.1` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 | `2026-07-02` | `STAGED-LINKED-PARSING.2` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 | `2026-07-02` | `STAGED-LINKED-PARSING.3` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
+| `2026-07-02` | `STAGED-LINKED-PARSING.4` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 
 ## Commit Log
 
@@ -166,9 +186,11 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `STAGED-LINKED-PARSING.1` | `STAGED-LINKED-PARSING.1 - adopt staged linked parsing doctrine` | ADR/book/KM/live-doc architecture adoption; no runtime code change. |
 | `STAGED-LINKED-PARSING.2` | `STAGED-LINKED-PARSING.2 - specify spec import composition contract` | ADR/book/KM/live-doc design adoption; no runtime code change. |
 | `STAGED-LINKED-PARSING.3` | `STAGED-LINKED-PARSING.3 - specify staged parse-job annotations` | ADR/book/KM/live-doc design adoption; no runtime code change. |
+| `STAGED-LINKED-PARSING.4` | `STAGED-LINKED-PARSING.4 - specify staged parser registry dispatch` | ADR/book/KM/live-doc design adoption; no runtime code change. |
 
 ## Changelog
 
 - `2026-07-02`: `.1` done — staged linked parsing adopted as language-neutral doctrine; frontier moves to `.2`.
 - `2026-07-02`: `.2` done — spec import/composition contract specified before implementation; frontier moves to `.3`.
 - `2026-07-02`: `.3` done — staged parse-job annotation and metadata contract specified before implementation; frontier moves to `.4`.
+- `2026-07-02`: `.4` done — staged parser registry/dispatch contract specified before implementation; frontier moves to `.5`.

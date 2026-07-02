@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — STAGED-LINKED-PARSING.4 — specify staged parser registry dispatch
+
+**Scope:** Architecture decision, mdBook staged parsing/backend text, task-tree frontier, roadmap/live docs, and
+Knowledge Map.
+
+**What changed:** Added ADR `0015`, specifying the design-only staged parser registry and dispatch queue before
+implementation. The registry exposes neutral `resolve`, `load`, `compile`, and `execute` operations.
+
+**Contract:** Parse-job resolution is deterministic: parent import aliases/composed identities, declaring-spec
+relative paths, configured search roots, then explicit registry providers. Cache keys include normalized spec
+identity, content digest, import/include graph fingerprint, selected top rule, `.spec` language version,
+helper/action contract version, staged parsing contract version, and backend capability set.
+
+**Dispatch:** The scheduler completes the current stage, collects jobs in parent-AST-path/source-span/job-id order,
+executes and stitches results in that stable order, and enqueues newly emitted jobs at the next stage depth.
+Active-chain cycles repeat normalized spec identity, top rule, payload digest, and source span.
+
+**Checks:** mdBook build, Knowledge Map regeneration/check, memory architecture, doctrine registry,
+`git diff --check`, and full local CI pass in the commit workflow.
+
 ## 2026-07-02 — STAGED-LINKED-PARSING.3 — specify staged parse-job annotations
 
 **Scope:** Architecture decision, mdBook staged parsing/backend text, task-tree frontier, roadmap/live docs, and

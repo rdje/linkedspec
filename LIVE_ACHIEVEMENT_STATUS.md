@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.4 — staged parser registry dispatch specified**
+  (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
+  ADR `0015` now reserves deterministic parser registry and dispatch queue semantics before implementation.
+
+  **Contract:** the registry exposes neutral `resolve`, `load`, `compile`, and `execute` operations. Resolution
+  checks parent import aliases/composed identities, declaring-spec-relative paths, configured search roots, and
+  registry providers in declared order.
+
+  **Queue/cache:** jobs run in parent-AST-path/source-span/job-id order. Cache keys include normalized spec
+  identity, content digest, import/include graph fingerprint, selected top rule, `.spec` language version,
+  helper/action contract version, staged parsing contract version, and backend capability set. Active-chain cycles
+  repeat spec identity, top rule, payload digest, and source span.
+
+  **Verification:** mdBook build PASS; Knowledge Map, memory, doctrine, and diff gates PASS; full local CI PASS
+  with phase0 1015 green.
+
+  **Frontier:** `STAGED-LINKED-PARSING.5` — implement the first narrow staged-parsing prototype.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.3 — staged parse-job annotations specified**
   (ARCHITECTURE + MDBOOK + TASK TREE + KNOWLEDGE MAP; **no runtime code change**).
   ADR `0014` now reserves future `parse_job(text_expr, options)` markers for runtime payload refinement before

@@ -32,6 +32,10 @@ future portable helper that records parser identity, source span, parent AST pat
 insertion policy, and failure policy as metadata. Current shipped parsers do not yet
 accept or execute that helper.
 
+The reserved dispatch design resolves those jobs through a deterministic parser registry,
+caches compiled next-stage parsers by content/capability fingerprints, and runs jobs in a
+stable queue. Current shipped parsers do not yet implement that staged dispatch queue.
+
 LinkedSpec also has a reserved design for spec-file composition. Future file-scope
 directives such as `import "common/atoms.spec" as atoms` and
 `include "common/lifecycle.spec"` compose grammar material. They are not the same as

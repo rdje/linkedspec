@@ -91,6 +91,17 @@ rule, result policy, and failure policy. Result policies are `replace_marker`,
 contract, not a host-language callback surface. Current shipped parsers do not yet accept
 or execute `parse_job(...)`.
 
+The accepted staged dispatch design is also neutral. Implement a registry with
+`resolve`, `load`, `compile`, and `execute` operations. Resolution order is parent
+import aliases/composed identities, declaring-spec-relative paths, configured search
+roots, then explicit registry providers. Cache compiled parsers by normalized spec
+identity, content digest, import/include graph fingerprint, selected top rule, `.spec`
+language version, helper/action contract version, staged parsing contract version, and
+backend capability set. Dispatch jobs in stable parent-AST-path/source-span/job-id order,
+and diagnose active-chain cycles that repeat spec identity, top rule, payload digest, and
+source span. Current shipped parsers do not yet implement this staged registry/dispatch
+queue.
+
 Spec import/composition is a separate backend conformance target once implemented. The
 accepted design uses file-scope `import "path.spec" as alias` and
 `include "path.spec"` directives. `import` creates a qualified namespace such as
@@ -246,35 +257,40 @@ It provides:
    It creates a marker value plus sidecar metadata rather than executing the next parser
    inline.
 
-3. **Spec import/composition graph** — once implemented, loads file-scope `import` and
+3. **Staged parser registry and queue** — resolves parser spec ids deterministically,
+   caches compiled next-stage parsers by content/version/capability fingerprints,
+   dispatches jobs in stable queue order, isolates runtime contexts, stitches results,
+   and diagnoses cycles.
+
+4. **Spec import/composition graph** — once implemented, loads file-scope `import` and
    `include` directives as parsed `.spec` dependencies with aliases, structured namespace
    merges, cycle diagnostics, source provenance, and descriptor fingerprints.
 
-4. **Helper/action AST parser** — parses lifecycle/action helper code into typed
+5. **Helper/action AST parser** — parses lifecycle/action helper code into typed
    expression and statement nodes. Calls, literals, variables, blocks, direct
    access, assignments, and receiver-dot chains must be represented structurally.
    Text-to-text helper rewriting is not a conforming design for new backends.
 
-5. **User-function registry and resolver** — records top-level `fn name(args) { body }`
+6. **User-function registry and resolver** — records top-level `fn name(args) { body }`
    definitions as validated AST-backed records before runtime. The registry must preserve
    definition order, expose definitions by name, reject helper/rule/reserved-name
    collisions, and resolve exact-arity value calls before unknown-helper fallback.
 
-6. **Compiler** — transforms parsed entries and helper/action AST nodes into
+7. **Compiler** — transforms parsed entries and helper/action AST nodes into
    HandlerIR nodes. You can reuse the ActionIR lowering approach, but the input to
    lowering is structured AST/IR rather than raw helper source text.
 
-7. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
+8. **HandlerIR emitter** — consumes HandlerIR nodes and produces runnable code
    in your target language. Must handle all 10 variant kinds.
 
-8. **Runtime** — the execution engine:
+9. **Runtime** — the execution engine:
    - Regex engine with position tracking (equivalent to `//gcp` and `\G` anchoring).
    - Accumulator model (arrays, hashes, scalars).
    - Lifecycle execution engine (I/LS/LE/E/EX/IT/LX ordering).
    - BACKTRACK (local cursor save/restore).
    - Zero-progress guard.
 
-9. **Test harness** — runs `tests/corpus/` entries and compares output to
+10. **Test harness** — runs `tests/corpus/` entries and compares output to
    `expected.json`.
 
 ## Practical Notes

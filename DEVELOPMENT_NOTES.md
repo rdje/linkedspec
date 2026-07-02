@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.4 — parser registry/dispatch contract):
+  Dynamic staged dispatch now has a design contract before implementation. Durable points. (1) **Registry
+  operations.** Backends expose neutral `resolve`, `load`, `compile`, and `execute` operations rather than
+  host-language loaders. (2) **Resolution order.** A parse job resolves through parent import aliases/composed
+  identities, declaring-spec-relative paths, configured search roots, then registry providers, all in declared
+  order; missing/ambiguous/colliding resolutions diagnose. (3) **Cache identity.** Cache keys include normalized
+  spec identity, content digest, import/include graph fingerprint, top rule, `.spec` language version,
+  helper/action contract version, staged parsing contract version, and backend capabilities. (4) **Stable queue.**
+  Collect jobs after a stage parse; order by parent AST path, source span, and job id; execute/stitch in that
+  order; enqueue newly emitted jobs at the next depth. (5) **Cycle guard.** Active-chain repeats of normalized
+  spec identity, top rule, payload digest, and source span are hard diagnostics. Current shipped parsers do not
+  yet implement the staged registry/dispatch queue.
+  Next frontier: `STAGED-LINKED-PARSING.5`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.3 — parse-job annotation contract):
   Parse-job marking now has a design contract before implementation. Durable points. (1) **Authoring marker.**
   Future `.spec` code uses `parse_job(text_expr, options)` to mark extracted text for later parsing. Current
