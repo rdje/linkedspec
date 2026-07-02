@@ -2089,6 +2089,23 @@ Done::
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values:
+
+#[test]
+fn terse_3_3_2_aggregate_assignment_expressions_run() {
+    let grammar = r#"Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(scalar(payload), [value]), payload, =(more, [value, "x"]).count())) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok"], ["ok"], {"stage": "ok"}, {"stage": "ok"}, ["ok"], ["ok"], 2]]),
+        "aggregate assignment expressions store and return arrays/hashes while scalar(...) keeps payloads"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

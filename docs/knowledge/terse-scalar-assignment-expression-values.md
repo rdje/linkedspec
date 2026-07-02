@@ -8,12 +8,13 @@ answers:
   - "do set and assign yield scalar values in value positions"
   - "can an assignment expression feed a receiver chain"
   - "are direct shape assignment expressions implemented"
+  - "where are aggregate assignment expression values recorded"
   - "what is next after SPEC-FORMAT-TERSE.3.3.1"
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, assignment, expressions, scalar, rust-parity, oracle]
-evidence: "SPEC-FORMAT-TERSE.3.3.1 implementation in perl/LinkedSpec/ActionIR/MethodExpr.pm, perl/LinkedSpec/ActionIR/MethodLowering.pm, rust/linkedspec-core/src/expr.rs, and rust/linkedspec-runtime/src/engine.rs; locks in t/actionir_ast_parser.t, t/phase0_regression.t spec_format_terse_3_3_1_scalar_assignment_expression_values, rust/linkedspec-runtime/tests/integration_test.rs terse_3_3_1_scalar_assignment_expressions_run, and rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions"
-reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_1_scalar_assignment_expressions_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
+evidence: "SPEC-FORMAT-TERSE.3.3.1 implementation in perl/LinkedSpec/ActionIR/MethodExpr.pm, perl/LinkedSpec/ActionIR/MethodLowering.pm, rust/linkedspec-core/src/expr.rs, and rust/linkedspec-runtime/src/engine.rs; locks in t/actionir_ast_parser.t, t/phase0_regression.t spec_format_terse_3_3_1_scalar_assignment_expression_values, rust/linkedspec-runtime/tests/integration_test.rs terse_3_3_1_scalar_assignment_expressions_run, and rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions. SPEC-FORMAT-TERSE.3.3.2 later landed direct RHS shape assignment expression values; see [[terse-aggregate-assignment-expression-values]]."
+reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_1_scalar_assignment_expressions_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_2_aggregate_assignment_expressions_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
 ---
 
 # Terse Scalar Assignment Expression Values
@@ -27,5 +28,6 @@ reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && carg
 - Assignment expression values can appear in helper arguments, expression-valued blocks, user functions, and
   compatible receiver chains such as `=(raw, " hi ").trim()`.
 
-The leaf deliberately does not implement direct shape assignment values, array append values, or hash-index
-mutation values. Those remain owned by `SPEC-FORMAT-TERSE.3.3.2` and `.3.3.3`.
+`SPEC-FORMAT-TERSE.3.3.2` later implemented direct RHS shape assignment values after target-kind inference:
+`return(items = [value])` and `return(meta = { key => value })` now store and yield aggregate values on Perl and
+Rust. Array append values and hash-index mutation values remain owned by `SPEC-FORMAT-TERSE.3.3.3`.

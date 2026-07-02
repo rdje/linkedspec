@@ -232,11 +232,13 @@ Bare scalar reads are currently supported in return and assignment-like source s
 `return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
 `items += value`, and in direct-access path atoms such as `payload["children"][index]`.
 
-Scalar assignment also has a value form. `name = "ok"` and `=(name, "ok")` store the scalar and evaluate to
-the stored value, so they can appear inside `return(...)`, helper arguments, expression-valued blocks,
-user-function bodies, and compatible scalar receiver chains such as `=(raw, " text ").trim()`. The value-form
-contract currently covers scalar non-shape assignment only; direct shape RHS assignment, array append, and
-hash-index mutation remain statement-level contracts.
+Assignment also has a value form. `name = "ok"` and `=(name, "ok")` store the scalar and evaluate to the stored
+value, so they can appear inside `return(...)`, helper arguments, expression-valued blocks, user-function bodies,
+and compatible scalar receiver chains such as `=(raw, " text ").trim()`. Direct shape RHS assignments participate
+in the same value contract after target-kind inference: `items = [value]`, `set(items, [value])`, and
+`=(items, [value])` store `items` as an array and evaluate to the assigned array value; `meta = { key => value }`
+stores `meta` as a hash and evaluates to the assigned hash value. Explicit `scalar(payload)` targets keep
+scalar-held shape payloads. Array append and hash-index mutation remain statement-level contracts.
 
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`

@@ -2443,10 +2443,11 @@ sub _lower_method_value_expr {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
 
-  my ($target_name, $value_node);
+  my ($target_name, $target_sigil, $value_node);
   my $kind = $node->{kind} // '';
   if ($kind eq 'assign_scalar') {
    $target_name = $node->{name};
+   $target_sigil = '$';
    $value_node = $node->{value};
   } elsif ($kind eq 'call') {
    my $method = $node->{name} // '';
@@ -2458,6 +2459,7 @@ sub _lower_method_value_expr {
 
    if (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'variable') {
     $target_name = $target_node->{name};
+    $target_sigil = '$';
    } elsif (ref($target_node) eq 'HASH'
        && ($target_node->{kind} // '') eq 'call'
        && ($target_node->{name} // '') eq 'scalar') {
@@ -2467,6 +2469,18 @@ sub _lower_method_value_expr {
      && ref($target_args->[0]) eq 'HASH'
      && ($target_args->[0]{kind} // '') eq 'variable') {
      $target_name = $target_args->[0]{name};
+     $target_sigil = '$';
+    }
+   } elsif (ref($target_node) eq 'HASH'
+       && ($target_node->{kind} // '') eq 'call'
+       && (($target_node->{name} // '') eq 'array' || ($target_node->{name} // '') eq 'hash')) {
+    my $target_args = $target_node->{args} || [];
+    if (ref($target_args) eq 'ARRAY'
+     && @$target_args == 1
+     && ref($target_args->[0]) eq 'HASH'
+     && ($target_args->[0]{kind} // '') eq 'variable') {
+     $target_name = $target_args->[0]{name};
+     $target_sigil = ($target_node->{name} // '') eq 'array' ? '@' : '%';
     }
    }
 
@@ -2476,6 +2490,7 @@ sub _lower_method_value_expr {
      if ref($target_node) eq 'HASH' && !(defined($target_source) && length($target_source));
     $target_name = $extract_scalar_symbol_name->($target_source)
      if defined($target_source) && length($target_source);
+    $target_sigil = '$' if defined($target_name) && length($target_name);
    }
   } else {
    return undef;
@@ -2483,8 +2498,49 @@ sub _lower_method_value_expr {
 
   return undef unless defined($target_name) && $target_name =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   return undef unless ref($value_node) eq 'HASH';
-  return undef if ($value_node->{kind} // '') =~ /^(?:array_literal|hash_literal)$/o;
+  $target_sigil = '$' unless defined($target_sigil) && $target_sigil =~ /^[\$\@\%]$/o;
 
+  my $value_kind = $value_node->{kind} // '';
+  my $direct_shape_sigil = $value_kind eq 'array_literal' ? '@'
+                         : $value_kind eq 'hash_literal'  ? '%'
+                         : undef;
+  if (defined($direct_shape_sigil)) {
+   return undef if $target_sigil eq '@' && $direct_shape_sigil ne '@';
+   return undef if $target_sigil eq '%' && $direct_shape_sigil ne '%';
+
+   my $source_expr = $ast_expr_source_node->($value_node);
+   $source_expr = $value_node->{source}
+    unless defined($source_expr) && length($source_expr);
+   return undef unless defined($source_expr) && length($source_expr);
+
+   if ($target_sigil eq '$') {
+    my $value_expr = $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
+    $value_expr = $legacy_method_value_expr->($value_node->{source})
+     unless defined($value_expr) && length($value_expr);
+    $value_expr = $source_expr unless defined($value_expr) && length($value_expr);
+    return undef unless defined($value_expr) && length($value_expr);
+    return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
+     if (($node->{kind} // '') eq 'call')
+     && ref(($node->{args} || [])->[0]) eq 'HASH'
+     && ((($node->{args} || [])->[0]{kind} // '') eq 'call')
+     && (((($node->{args} || [])->[0]{name} // '') eq 'scalar'));
+    $target_sigil = $direct_shape_sigil;
+   }
+
+   my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
+   if ($target_sigil eq '@') {
+    my $initializer = $lower_declare_initializer_expr->('array', $source_expr);
+    return undef unless defined($initializer) && length($initializer);
+   return 'do { @'.$target_name.' = '.$initializer.'; [@'.$target_name.'] }'
+   }
+   if ($target_sigil eq '%') {
+    my $initializer = $lower_declare_initializer_expr->('hash', $source_expr);
+    return undef unless defined($initializer) && length($initializer);
+    return 'do { %'.$target_name.' = '.$initializer.'; +{%'.$target_name.'} }'
+   }
+  }
+
+  return undef unless $target_sigil eq '$';
   my $value_expr = $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
   $value_expr = $legacy_method_value_expr->($value_node->{source})
    unless defined($value_expr) && length($value_expr);

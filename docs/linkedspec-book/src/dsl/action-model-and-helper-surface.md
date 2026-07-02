@@ -86,9 +86,9 @@ Detailed reference: [Declaration Helper Reference](declaration-helper-reference.
 
 Write values into declared variables or containers:
 
-- `set(target, value)` — write a value; `assign(target, value)` is the legacy alias
-- `name = value` — terse scalar assignment operator; in scalar contexts it also yields the stored value
-- `=(name, value)` — operator-call spelling for the same scalar assignment value expression
+- `set(target, value)` — write a value; `assign(target, value)` is the legacy alias. Scalar and direct-shape aggregate assignments also yield the stored value in value positions.
+- `name = value` — terse assignment operator; scalar RHS values yield the stored scalar, and direct array/hash RHS shapes yield the assigned aggregate value after target-kind inference
+- `=(name, value)` — operator-call spelling for the same assignment value expression
 - `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; statement-level today
 - `push(container, value)` — append to an array
 - `push_value(array(name), value)` — named-array push

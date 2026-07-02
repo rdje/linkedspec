@@ -546,7 +546,7 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     ok($parse_calls >= 3, 'assignment/mutation statements entered through the AST parser');
 };
 
-subtest 'scalar assignment expression lowering consumes AST nodes' => sub {
+subtest 'assignment expression lowering consumes AST nodes' => sub {
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(name = "ok")}),
         q{return do { $name = "ok"; $name }},
@@ -562,10 +562,20 @@ subtest 'scalar assignment expression lowering consumes AST nodes' => sub {
         q{return do { $out = do { $name = "ok"; $name }; $out }},
         'set compatibility spelling returns the stored scalar value in value position'
     );
-    unlike(
+    is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(set(items, [value]))}),
-        qr/do \{ \$items =/,
-        'direct shape RHS is not claimed as scalar assignment expression value in this leaf'
+        q{return do { @items = ($value); [@items] }},
+        'direct array shape RHS assignment returns the stored array value'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(=(meta, { key => value }))}),
+        q{return do { %meta = ($key => $value); +{%meta} }},
+        'single-equals operator call returns the stored hash value'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(set(scalar(payload), [value]))}),
+        q{return do { $payload = [$value]; $payload }},
+        'explicit scalar target keeps a scalar-held direct shape payload'
     );
 };
 

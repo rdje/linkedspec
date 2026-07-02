@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values landed**
+  (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM).
+  Direct RHS shape assignments are now value expressions on Perl and Rust. `items = [value]`,
+  `set(items, [value])`, `=(items, [value])`, and matching `array(items)` targets store the array working variable
+  and return the assigned array value; `meta = { key => value }`, `set(meta, { key => value })`, and matching
+  `hash(meta)` targets store the hash working variable and return the assigned hash value.
+
+  The compatibility boundary is locked: explicit `scalar(payload)` targets keep scalar-held shape payloads;
+  statement behavior is preserved; array append and hash-index mutation expression values remain `.3.3.3`.
+
+  **Verification:** Perl syntax checks PASS; focused `t/actionir_ast_parser.t` PASS; generated-source declaration
+  probes PASS; focused Rust parser/runtime `.3.3.2` PASS; oracle regeneration produced **60 fixtures** including
+  `terse_3_3_2_aggregate_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with **1013 tests**;
+  mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.3.3` (array append and hash-index mutation expression value contracts).
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
   Scalar non-shape assignment is now a value expression on Perl and Rust. `name = value`, `=(name,value)`,
@@ -24,7 +41,7 @@ Current execution status for interruption-safe batch workflow recovery.
   fixtures** including `terse_3_3_1_scalar_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with
   **1012 tests**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.3.2` (aggregate assignment expression values after target-kind inference).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.2` (now done; current frontier is `.3.3.3`).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split before code**
   (TASK TREE + BOOK/KM + LIVE DOCS; NO PARSER/COMPILER/RUNTIME CHANGE).

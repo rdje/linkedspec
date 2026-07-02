@@ -962,6 +962,7 @@ sub _collect_auto_working_var_decls {
   $collect_inline_control_value_scalar_reads,
   $collect_value_position_scalar_reads,
   $collect_flow_expr_scalar_reads,
+  $collect_ast_value_refs,
  );
  my $split_top_level_fat_arrow = sub {
   my ($text) = @_;
@@ -1072,6 +1073,7 @@ sub _collect_auto_working_var_decls {
   my ($value_expr) = @_;
   my $value = _trim_action_ir_value($value_expr);
   return unless defined($value) && length($value);
+  $collect_ast_value_refs->($value) if ref($collect_ast_value_refs) eq 'CODE';
   $record->('$', $value) if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($value);
   $collect_shape_literal_scalar_reads->($value);
@@ -1175,6 +1177,157 @@ sub _collect_auto_working_var_decls {
   return unless defined($source) && length($source);
   my $shape_sigil = _infer_direct_shape_literal_sigil($source);
   $record->($shape_sigil // '$', $target);
+ };
+ my $direct_shape_sigil_for_ast_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH';
+  my $kind = $node->{kind} // '';
+  return '@' if $kind eq 'array_literal';
+  return '%' if $kind eq 'hash_literal';
+  return undef
+ };
+ my $record_ast_assignment_target = sub {
+  my ($target_node, $value_node) = @_;
+  return unless ref($target_node) eq 'HASH';
+  my $shape_sigil = $direct_shape_sigil_for_ast_node->($value_node);
+  my $target_kind = $target_node->{kind} // '';
+
+  if ($target_kind eq 'variable') {
+   $record->($shape_sigil // '$', $target_node->{name});
+   return;
+  }
+
+  return unless $target_kind eq 'call';
+  my $target_name = $target_node->{name} // '';
+  my $target_args = $target_node->{args} || [];
+  return unless ref($target_args) eq 'ARRAY'
+             && @$target_args == 1
+             && ref($target_args->[0]) eq 'HASH'
+             && ($target_args->[0]{kind} // '') eq 'variable';
+  my $name = $target_args->[0]{name};
+  if ($target_name eq 'scalar') {
+   $record->('$', $name);
+   return;
+  }
+  if ($target_name eq 'array') {
+   return if defined($shape_sigil) && $shape_sigil ne '@';
+   $record->('@', $name);
+   return;
+  }
+  if ($target_name eq 'hash') {
+   return if defined($shape_sigil) && $shape_sigil ne '%';
+   $record->('%', $name);
+   return;
+  }
+ };
+ my $parse_ast_value_expr = sub {
+  my ($expr) = @_;
+  return undef unless defined($expr) && length($expr);
+  my $node;
+  eval {
+   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST');
+   $node = LinkedSpec::ActionIR::AST::parse_action_expr($expr, {});
+   1;
+  } or return undef;
+  return ref($node) eq 'HASH' ? $node : undef
+ };
+ my $collect_ast_node_refs;
+ $collect_ast_node_refs = sub {
+  my ($node, $bare_scalar_ok) = @_;
+  return unless ref($node) eq 'HASH';
+  my $kind = $node->{kind} // '';
+
+  if ($kind eq 'variable') {
+   $record->('$', $node->{name}) if $bare_scalar_ok;
+   return;
+  }
+
+  if ($kind eq 'assign_scalar') {
+   $record->($direct_shape_sigil_for_ast_node->($node->{value}) // '$', $node->{name});
+   $collect_ast_node_refs->($node->{value}, 1);
+   return;
+  }
+
+  if ($kind eq 'array_literal') {
+   $collect_ast_node_refs->($_, 1) for @{$node->{items} || []};
+   return;
+  }
+
+  if ($kind eq 'hash_literal') {
+   foreach my $entry (@{$node->{entries} || []}) {
+    next unless ref($entry) eq 'HASH';
+    $collect_ast_node_refs->($entry->{key}, 1);
+    $collect_ast_node_refs->($entry->{value}, 1);
+   }
+   return;
+  }
+
+  if ($kind eq 'indexed_var') {
+   $record->('%', $node->{name});
+   $collect_ast_node_refs->($node->{index}, 1);
+   return;
+  }
+
+  if ($kind eq 'nested_access') {
+   $record->('$', $node->{base});
+   foreach my $segment (@{$node->{segments} || []}) {
+    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
+    $collect_ast_node_refs->($segment->{expr}, 1);
+   }
+   return;
+  }
+
+  if ($kind eq 'call') {
+   my $name = $node->{name} // '';
+   my $args = $node->{args} || [];
+   if (($name eq '=' || $name eq 'assign' || $name eq 'set')
+    && ref($args) eq 'ARRAY'
+    && @$args == 2) {
+    $record_ast_assignment_target->($args->[0], $args->[1]);
+    $collect_ast_node_refs->($args->[1], 1);
+    return;
+   }
+   if (($name eq 'scalar' || $name eq 'array' || $name eq 'hash')
+    && ref($args) eq 'ARRAY'
+    && @$args == 1
+    && ref($args->[0]) eq 'HASH'
+    && ($args->[0]{kind} // '') eq 'variable') {
+    my $sigil = $name eq 'array' ? '@' : $name eq 'hash' ? '%' : '$';
+    $record->($sigil, $args->[0]{name});
+    return;
+   }
+   $collect_ast_node_refs->($_, 0) for @$args;
+   return;
+  }
+
+  if ($kind eq 'fluent_chain') {
+   $collect_ast_node_refs->($node->{receiver}, 0);
+   foreach my $call (@{$node->{calls} || []}) {
+    next unless ref($call) eq 'HASH';
+    $collect_ast_node_refs->($_, 0) for @{$call->{args} || []};
+   }
+   return;
+  }
+
+  if ($kind eq 'block_value') {
+   my $block = $node->{block};
+   return unless ref($block) eq 'HASH';
+  foreach my $stmt (@{$block->{statements} || []}) {
+   next unless ref($stmt) eq 'HASH';
+   $collect_ast_node_refs->($stmt->{expr}, 0);
+  }
+  return;
+ }
+
+ if ($kind eq 'action_stmt') {
+  $collect_ast_node_refs->($node->{expr}, 0);
+  return;
+ }
+ };
+ $collect_ast_value_refs = sub {
+  my ($expr) = @_;
+  my $node = $parse_ast_value_expr->($expr);
+  $collect_ast_node_refs->($node, 1) if ref($node) eq 'HASH';
  };
  for my $block (@raw_blocks) {
   next unless defined($block) && length($block);

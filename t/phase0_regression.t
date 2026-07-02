@@ -46606,6 +46606,86 @@ subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
         'scalar assignment expression spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub {
+    # SPEC-FORMAT-TERSE.3.3.2: direct RHS shape assignment expressions
+    # store array/hash working variables after target-kind inference and
+    # return the aggregate value stored. Explicit scalar targets keep the
+    # scalar-held shape payload boundary.
+    plan tests => 17;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('return(items = [value])'),
+        'return do { @items = ($value); [@items] }',
+        'bare direct array RHS assignment returns the stored array value');
+    is($L->('return(set(items, [value]))'),
+        'return do { @items = ($value); [@items] }',
+        'set with bare direct array RHS returns the stored array value');
+    is($L->('return(=(items, [value]))'),
+        'return do { @items = ($value); [@items] }',
+        'operator-call direct array RHS returns the stored array value');
+    is($L->('return(set(meta, { key => value }))'),
+        'return do { %meta = ($key => $value); +{%meta} }',
+        'bare direct hash RHS assignment returns the stored hash value');
+    is($L->('return(set(array(items), [value]))'),
+        'return do { @items = ($value); [@items] }',
+        'explicit array target returns the stored array value');
+    is($L->('return(set(hash(meta), { key => value }))'),
+        'return do { %meta = ($key => $value); +{%meta} }',
+        'explicit hash target returns the stored hash value');
+    is($L->('return(set(scalar(payload), [value]))'),
+        'return do { $payload = [$value]; $payload }',
+        'explicit scalar target returns the scalar-held shape payload');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(scalar(payload), [value]), payload, =(more, [value, \"x\"]).count())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'aggregate assignment expression spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[["ok"],["ok"],{"stage":"ok"},{"stage":"ok"},["ok"],["ok"],2]',
+        'aggregate assignment expressions store and return arrays/hashes while scalar(...) keeps payloads');
+
+    my $block_spec = "Top::\n"
+                   . " /x/ -> Done { set(value, \"ok\"); return({ block_items = [value, \"b\"] }) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $block_parser = eval { LinkedSpec::Get(\$block_spec) };
+    ok(ref($block_parser) eq 'CODE', 'aggregate assignment block-value spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($block_parser, 'xhello'), '["ok","b"]',
+        'direct shape assignment expression can be the value yielded by a block');
+
+    my $src = $gen->($spec);
+    like($src, qr/my \@items;.*my %meta;.*my \@more;/s,
+        'generated source auto-declares aggregate assignment expression targets');
+    like($src, qr/\@items = \(\$value\).*%meta = \(\$key => \$value\).*__ls_count/s,
+        'generated source contains aggregate assignment values and receiver-chain lowering');
+    unlike($src, qr/return\s+\[.*(?:assign|set)\s*\(|=\s*\(\s*items/s,
+        'generated source has no raw aggregate assign helper or operator-call residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'aggregate assignment expression spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'aggregate assignment expression spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'aggregate assignment expression spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

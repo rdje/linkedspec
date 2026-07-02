@@ -1165,12 +1165,12 @@ impl Engine {
                 self.call_helper_with_args(name, args, &evaluated, ctx, rule_label)
             }
             Expr::AssignScalar { name, value } => {
-                if Self::direct_shape_literal_kind(value).is_some() {
-                    return Err(
-                        "direct shape assignment expression values are deferred".to_string(),
-                    );
-                }
                 let evaluated = self.eval_expr(value, ctx, rule_label)?;
+                if Self::direct_shape_literal_kind(value).is_some()
+                    && self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)?
+                {
+                    return Ok(evaluated);
+                }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
             }
@@ -1996,10 +1996,10 @@ impl Engine {
                 let evaluated = self.eval_expr(value, ctx, rule_label)?;
                 if Self::direct_shape_literal_kind(value).is_some() {
                     if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
-                        return Ok(RuntimeValue::Undef);
+                        return Ok(evaluated);
                     }
                     ctx.set_scalar(name, evaluated);
-                    return Ok(RuntimeValue::Undef);
+                    return Ok(ctx.get_scalar(name));
                 }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
@@ -2307,23 +2307,19 @@ impl Engine {
             "assign" | "set" | "=" => {
                 if args.len() >= 2 {
                     if let Some(kind) = Self::direct_shape_literal_kind(raw_args[1].value()) {
-                        if name == "=" {
-                            return Err(
-                                "direct shape assignment expression values are deferred"
-                                    .to_string(),
-                            );
-                        }
                         if let Some(target) =
                             Self::direct_shape_assignment_target(&raw_args[0], kind)
                         {
                             match (kind, args[1].clone()) {
                                 (ShapeLiteralKind::Array, RuntimeValue::Array(values)) => {
+                                    let stored = RuntimeValue::Array(values.clone());
                                     ctx.set_array(&target, values);
-                                    return Ok(RuntimeValue::Undef);
+                                    return Ok(stored);
                                 }
                                 (ShapeLiteralKind::Hash, RuntimeValue::Hash(values)) => {
+                                    let stored = RuntimeValue::Hash(values.clone());
                                     ctx.set_hash(&target, values);
-                                    return Ok(RuntimeValue::Undef);
+                                    return Ok(stored);
                                 }
                                 (_, other) => {
                                     return Err(format!(
@@ -2335,7 +2331,7 @@ impl Engine {
                         }
                         let target = self.resolve_scalar_target(raw_args, &args[0]);
                         ctx.set_scalar(&target, args[1].clone());
-                        return Ok(RuntimeValue::Undef);
+                        return Ok(args[1].clone());
                     }
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
                     ctx.set_scalar(&target, args[1].clone());

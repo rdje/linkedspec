@@ -865,6 +865,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values ──
+    #
+    # Direct RHS shape assignment forms now store and yield the assigned
+    # aggregate value in value positions. This fixture covers bare infix
+    # assignment, set(...) compatibility, scalar-held shape payloads, and
+    # receiver chaining on the operator-call aggregate assignment value.
+    {   case   => 'terse_3_3_2_aggregate_assignment_expressions',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(scalar(payload), [value]), payload, =(more, [value, "x"]).count())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

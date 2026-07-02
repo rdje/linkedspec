@@ -172,7 +172,8 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > `items = [value]` / `set(items, [])` assign the array working variable, and
 > `meta = { key => value }` / `set(meta, {})` assign the hash working variable. Explicit scalar targets keep
 > scalar payload assignment: `set(scalar(payload), [value])` assigns the whole array payload to scalar
-> `payload`.
+> `payload`. In value positions, those direct-shape assignments yield the assigned array/hash value; the explicit
+> `scalar(...)` form yields the scalar-held payload.
 
 > **Expression-valued blocks are receiver-capable value expressions.** A non-empty block without a top-level
 > `=>` can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
@@ -212,8 +213,9 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > names: `set(target, source)` is the canonical rename of `assign(...)`, `cat(...)` of `concat(...)`,
 > and a single unified `copy(container)` subsumes both `array_copy(...)` and `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
-> array snapshot read). The scalar operator statement `name = value` is equivalent to `set(name, value)` and
-> `assign(name, value)`. The array append operator `items += expr` is equivalent to the explicit
+> array snapshot read). The assignment operator `name = value` is equivalent to `set(name, value)` and
+> `assign(name, value)`; in value positions it yields the stored scalar or direct-shape aggregate value. The
+> array append operator `items += expr` is equivalent to the explicit
 > append forms `push(items, expr)` / `push_value(items, expr)`; when the value is a working scalar,
 > `items += value` reads `$value`.
 > The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
@@ -227,7 +229,8 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > names should be quoted. Direct shape literals also infer the aggregate kind of a bare assignment target on
 > both variants: `items = [value]` initializes the array working variable, and
 > `meta = { key => value }` initializes the hash working variable; use `set(scalar(payload), [value])` for
-> scalar-held shape payloads.
+> scalar-held shape payloads. In value positions, the direct-shape assignment yields the assigned array/hash
+> value.
 > Each terse helper spelling lowers **identically** to its original in every position, so both work
 > during migration — the original names are deprecated aliases, not yet retired.
 > See the

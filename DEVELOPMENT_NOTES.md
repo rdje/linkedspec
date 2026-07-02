@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values):
+  Direct RHS shape assignments now return assigned aggregate values after target-kind inference. Durable points.
+  (1) **Value contract.** `items = [value]`, `set(items,[value])`, `=(items,[value])`, and matching
+  `array(items)` targets store and yield the assigned array; `meta = { key => value }`,
+  `set(meta,{ key => value })`, and matching `hash(meta)` targets store and yield the assigned hash. (2) **Scalar
+  boundary.** `set(scalar(payload), [value])` stores the whole shape payload in the scalar and yields that
+  payload, not an aggregate working variable snapshot. (3) **Perl declaration guard.** Value-position aggregate
+  assignments record `@`/`%` targets from the AST without treating ordinary helper arguments like
+  `array_copy(items)` as `$items`. (4) **Rust parity.** `Expr::AssignScalar` and `set`/`assign`/`=` helper calls
+  now route direct shapes through target-kind assignment and return the stored aggregate value. (5) **Gate.**
+  Focused locks, oracle corpus, full phase0, mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates
+  pass; phase0 is now 1013 tests and the oracle corpus is 60 fixtures.
+  Next frontier: `SPEC-FORMAT-TERSE.3.3.3`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values):
   The scalar assignment-expression subset is now implemented. Durable points. (1) **Value contract.**
   `name = value`, `=(name,value)`, scalar `set(name,value)`, and scalar `assign(name,value)` store into the
@@ -13,7 +27,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   preserve `.2.3.5.6` quoted-wrapper behavior. (5) **Gate.** Focused Perl/Rust locks, oracle corpus, phase0,
   mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1012 tests and the
   oracle corpus is 59 fixtures.
-  Next frontier: `SPEC-FORMAT-TERSE.3.3.2`.
+  Next frontier at the time: `SPEC-FORMAT-TERSE.3.3.2` (now done).
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split):
   The assignment-expression destination contract is now split before code. Durable points. (1) **Destination.**

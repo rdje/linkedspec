@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.2 — implement aggregate assignment values
+
+**Scope:** Perl ActionIR aggregate assignment expression lowering and auto-declarations, Rust runtime assignment
+evaluation, phase0 locks, Rust parser/runtime tests, oracle corpus, mdBook, task tree, live recovery docs, and
+Knowledge Map.
+
+**What changed:** Direct RHS shape assignments are now value expressions on Perl and Rust. Bare targets infer array
+or hash kind from the RHS and yield the assigned aggregate value: `items = [value]`, `set(items, [value])`,
+`=(items, [value])`, `meta = { key => value }`, and matching `array(...)` / `hash(...)` targets compose in
+`return(...)`, helper arguments, blocks, and receiver chains.
+
+**Compatibility boundary:** Explicit `scalar(payload)` still stores the whole shape payload in a scalar and yields
+that payload. Statement behavior is preserved. Array append values and hash-index mutation values remain deferred
+to `.3.3.3`.
+
+**Checks:** Perl syntax checks, focused `t/actionir_ast_parser.t`, generated-source declaration probes, focused Rust
+parser/runtime tests, oracle generation, Rust corpus oracle, full phase0, mdBook build, Knowledge Map
+regenerate/check, memory architecture, doctrine registry, `git diff --check`, and full local CI passed. Local CI
+includes phase0 passing with **1013 tests** and the corpus oracle passing over **60 fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.1 — implement scalar assignment values
 
 **Scope:** Perl ActionIR method-call parsing/lowering, Rust expression parsing/runtime dispatch, phase0 locks,

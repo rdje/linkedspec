@@ -919,9 +919,11 @@ impl<'a> Parser<'a> {
     }
 
     fn symbol_call_token_at_current(&self) -> Option<&'static str> {
-        let token = ["==", "!=", ">=", "<=", "=", "+", "-", "*", "/", "%", ">", "<"]
-            .into_iter()
-            .find(|candidate| self.remaining().starts_with(candidate))?;
+        let token = [
+            "==", "!=", ">=", "<=", "=", "+", "-", "*", "/", "%", ">", "<",
+        ]
+        .into_iter()
+        .find(|candidate| self.remaining().starts_with(candidate))?;
 
         let mut cursor = self.pos + token.len();
         while cursor < self.src.len() && self.src.as_bytes()[cursor].is_ascii_whitespace() {
@@ -3013,7 +3015,7 @@ return(array_copy(array(results)));"#;
 
     #[test]
     fn parse_scalar_assignment_value_expression_in_args() {
-        let code = r#"return(array(name = "ok", set(out, other = name), =(again, out)))"#;
+        let code = r#"return(array(name = "ok", set(out, other = name), =(again, out), =(items, [name])))"#;
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
             Expr::Call { name, args } => {
@@ -3030,7 +3032,9 @@ return(array_copy(array(results)));"#;
                                 assert_eq!(name, "set");
                                 match args[1].value() {
                                     Expr::AssignScalar { name, .. } => assert_eq!(name, "other"),
-                                    other => panic!("expected nested scalar assignment, got {other:?}"),
+                                    other => {
+                                        panic!("expected nested scalar assignment, got {other:?}")
+                                    }
                                 }
                             }
                             other => panic!("expected set call, got {other:?}"),
@@ -3038,6 +3042,17 @@ return(array_copy(array(results)));"#;
                         match args[2].value() {
                             Expr::Call { name, .. } => assert_eq!(name, "="),
                             other => panic!("expected assignment operator call, got {other:?}"),
+                        }
+                        match args[3].value() {
+                            Expr::Call { name, args } => {
+                                assert_eq!(name, "=");
+                                assert!(
+                                    matches!(args[1].value(), Expr::ArrayLiteral { items } if items.len() == 1)
+                                );
+                            }
+                            other => {
+                                panic!("expected aggregate assignment operator call, got {other:?}")
+                            }
                         }
                     }
                     other => panic!("expected array call, got {other:?}"),

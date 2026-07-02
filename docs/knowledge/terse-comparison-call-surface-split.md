@@ -55,8 +55,9 @@ behind an explicit string-comparison bridge:
 - `.3.2.3.4`: done; comparison symbol callees now map to numeric `num_*` aliases.
 - `.3.3`: done/split; expression-valued assignment and `=(target,value)` equivalence are now split before code.
 - `.3.3.1`: done; scalar assignment expression values and scalar `=(target,value)` equivalence now ship.
-- `.3.3.2`: current next task; aggregate assignment expression values after target-kind inference.
+- `.3.3.2`: done; aggregate assignment expression values after target-kind inference now ship.
+- `.3.3.3`: current next task; array append and hash-index mutation expression value contracts.
 
 `=(target,value)` is not part of the comparison-symbol slice. It remains assignment operator-call syntax owned
-by `SPEC-FORMAT-TERSE.3.3`, with the scalar subset implemented first under `.3.3.1`; `=>` remains the
-blind-call edge operator.
+by `SPEC-FORMAT-TERSE.3.3`, with scalar and aggregate direct-shape subsets implemented first under `.3.3.1` and
+`.3.3.2`; `=>` remains the blind-call edge operator.
