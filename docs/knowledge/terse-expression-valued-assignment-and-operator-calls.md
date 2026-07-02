@@ -30,3 +30,5 @@ Current implementation is not yet at the full contract. `SPEC-FORMAT-TERSE.1.3.4
 statement-only scalar assignment. The follow-up owner is `SPEC-FORMAT-TERSE.3.3`, which must define and
 split expression-valued assignment before changing parser/compiler/runtime behavior.
 
+As of `SPEC-FORMAT-TERSE.3.2.3`, comparison calls are split before implementation: explicit string
+comparison helpers come first, numeric comparison word aliases second, and comparison symbol callees third.

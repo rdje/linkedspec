@@ -690,6 +690,11 @@ endif()
 
 Do not use `gt(...)` or `lt(...)` for counters. Those are string comparisons and can produce surprising ordering for numeric-looking text.
 
+The comparison operator-call migration is split separately. Until that work lands, numeric comparisons should
+use `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le` or number receiver terminals such as
+`count(array(parts)).gt(0)`; bare comparison words remain string helpers and comparison symbol callees are not
+part of the shipped surface.
+
 ## Array helpers
 
 Array helpers return either scalar information about an array or a new array value derived from it.

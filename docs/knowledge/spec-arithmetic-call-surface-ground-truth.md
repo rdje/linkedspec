@@ -12,6 +12,7 @@ answers:
   - "why was SPEC-FORMAT-TERSE.3.2 split"
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.1"
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.2"
+  - "what is the next task after SPEC-FORMAT-TERSE.3.2.3"
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, arithmetic, comparison, helper-aliases, parser, rust-parity, mdbook]
@@ -44,8 +45,10 @@ reverify: "perl -Iperl -c perl/LinkedSpec/ActionIR/MethodExpr.pm && perl -Iperl 
 The accepted call-shape decision is one uniform `callee(args)` grammar with word and symbol callees. The
 Lisp-prefix `(op a, b)` / `(ge a, b)` surface is not added.
 
-The split frontier is:
+The `.3.2` split frontier is:
 
 - `.3.2.1`: done; non-conflicting numeric word aliases for arithmetic, single/multi-value helpers, and reducers.
 - `.3.2.2`: done; arithmetic symbol callees such as `+(a,b)`.
-- `.3.2.3`: current next task; comparison spelling policy before implementation.
+- `.3.2.3`: split/owned; comparison spelling policy and implementation sequencing are now recorded before code.
+- `.3.2.3.1`: current next task; explicit string-comparison bridge contract before numeric comparison word
+  aliases and symbol callees.

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3 — split comparison call surface
+
+**Scope:** Task tree, roadmap/status docs, mdBook comparison-helper notes, Knowledge Map, and live recovery docs.
+No parser/compiler/runtime code changed.
+
+**What changed:** The comparison operator-call migration is now split before implementation. The future
+canonical numeric surface is ordinary `callee(args)` calls with word and symbol spellings: `eq`/`==`,
+`ne`/`!=`, `gt`/`>`, `ge`/`>=`, `lt`/`<`, and `le`/`<=`, all mapping to the existing `num_*` comparison family.
+
+**Compatibility boundary:** Current shipped behavior remains unchanged. Bare `eq(...)`, `ne(...)`, `gt(...)`,
+`ge(...)`, `lt(...)`, and `le(...)` remain string comparisons until the explicit string bridge lands. The split
+frontier is `.3.2.3.1` string bridge contract, `.3.2.3.2` string helper implementation, `.3.2.3.3` numeric
+word aliases, and `.3.2.3.4` comparison symbol callees.
+
+**Checks:** Knowledge Map regenerate/check, memory architecture, doctrine registry, mdBook build, `git diff
+--check`, and full local CI passed. Local CI included phase0 passing with **1008 tests**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.2 — implement arithmetic symbol callees
 
 **Scope:** Perl ActionIR method-expression parsing/lowering, slash-call disambiguation, Rust expression parsing and

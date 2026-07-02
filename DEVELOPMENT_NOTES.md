@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.2.3 — comparison call surface split):
+  Comparison operator calls are now owned as a split migration, not a single implementation leaf. Durable
+  points. (1) **Current behavior stays unchanged.** `num_eq`/`num_gt` and receiver terminals such as
+  `score.gt(3)` are numeric comparisons; bare `eq`/`ne`/`gt`/`ge`/`lt`/`le` remain string comparisons in the
+  documented flow/helper contexts; comparison symbols are not implemented yet. (2) **Destination contract.**
+  The future numeric comparison call surface is ordinary `callee(args)` form with word and symbol pairs:
+  `eq`/`==`, `ne`/`!=`, `gt`/`>`, `ge`/`>=`, `lt`/`<`, and `le`/`<=`, all mapping to `num_*`. (3)
+  **Compatibility bridge.** The explicit string family is `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`,
+  and `str_le`; those must land before bare comparison words flip to numeric aliases. (4) **Split order.**
+  `.3.2.3.1` locks the bridge contract, `.3.2.3.2` implements string helpers, `.3.2.3.3` flips word calls,
+  and `.3.2.3.4` adds symbol callees. `=(target,value)` stays `.3.3`; `=>` stays the blind-call edge.
+  Next frontier: `SPEC-FORMAT-TERSE.3.2.3.1`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees):
   Arithmetic symbol calls are now a real portable helper-call surface, not host-language fallback. Durable points.
   (1) **Call shape.** `+(...)`, `-(...)`, `*(...)`, `/(...)`, and `%(...)` parse as ordinary call expressions and
@@ -12,7 +25,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   Rust `.3.2.2` integration lock passes, and full local CI passes. The full runtime integration binary still has unrelated stale
   short-wrapper alias failures from the earlier `s/a/h` retirement baseline; the `.3.2.2` test in that binary is
   green.
-  Next frontier: `SPEC-FORMAT-TERSE.3.2.3`.
+  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3`; current frontier after the split is
+  `SPEC-FORMAT-TERSE.3.2.3.1`.
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.4 — function surface finalization ledger):
   The user-function MVP is now closed as a portable Perl/Rust contract rather than an open-ended syntax family.
@@ -25,7 +39,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   closure.** The formal grammar, pipeline/backend handoff, descriptor/state model docs, task tree, and Knowledge
   Map now carry the same boundary. (4) **Gate.** mdBook, memory/doctrine/Knowledge Map/diff/local-CI gates pass;
   no parser/compiler/runtime code changed.
-  Next frontier: `SPEC-FORMAT-TERSE.3.2.3`.
+  Then-frontier: `SPEC-FORMAT-TERSE.3.2.3`; current frontier after the split is
+  `SPEC-FORMAT-TERSE.3.2.3.1`.
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity):
   Rust now executes the user-function registry shape landed in `.4.3.1`. Durable points. (1) **Resolution

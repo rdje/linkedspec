@@ -638,6 +638,10 @@ you need grouping. The alias set does not include comparison words or comparison
 symbols. Bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and
 `le(...)` are string comparison helpers; use `num_gt(...)` or receiver-dot
 `.gt(...)` for numeric comparisons.
+The task-tree-owned comparison migration will add explicit string-comparison
+bridge names before any numeric comparison word or symbol aliases become the
+current grammar; until those leaves land, the grammar above is the shipped
+surface.
 
 ### 7.6 Control Flow Helpers
 ```

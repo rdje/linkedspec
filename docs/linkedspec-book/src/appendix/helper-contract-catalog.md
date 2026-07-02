@@ -743,6 +743,10 @@ the same ordinary call form for the arithmetic subset: `+(a, b)`, `-(a, b)`,
 there is no operator precedence; write `+(*(a, b), c)` when you need explicit
 grouping. The aliases deliberately do not include bare comparison words or
 comparison symbols; `gt(...)` and `lt(...)` remain string comparisons.
+The comparison operator-call migration is task-tree-owned separately: current
+shipped behavior stays on `num_gt(...)` or receiver `.gt(...)` for numeric
+comparisons until the explicit string-comparison bridge and numeric comparison
+word/symbol aliases land.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads

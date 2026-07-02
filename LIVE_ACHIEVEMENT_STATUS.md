@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3 — comparison call surface split/owned**
+  (TASK TREE + ROADMAP + BOOK/KM + LIVE DOCS; **no parser/compiler/runtime code change**).
+  The comparison operator-call migration is now split before implementation. Current shipped behavior remains:
+  numeric comparisons use `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le` or receiver terminals such as
+  `score.gt(3)`, while bare `eq(...)`, `ne(...)`, `gt(...)`, `ge(...)`, `lt(...)`, and `le(...)` remain string
+  comparisons in documented flow/helper contexts.
+
+  The future canonical numeric comparison call surface is ordinary `callee(args)` form with word/symbol pairs:
+  `eq`/`==`, `ne`/`!=`, `gt`/`>`, `ge`/`>=`, `lt`/`<`, and `le`/`<=`, all mapping to the existing `num_*`
+  comparison helpers. Because of the string-compatibility conflict, the implementation frontier is split:
+  `.3.2.3.1` string bridge contract, `.3.2.3.2` explicit `str_*` helpers, `.3.2.3.3` numeric comparison word
+  aliases, and `.3.2.3.4` comparison symbol callees.
+
+  **Verification:** focused KM/TOOLBOX/source/mdBook audit complete; Knowledge Map regenerate/check PASS;
+  memory/doctrine/diff checks PASS; mdBook build PASS; full local CI PASS with phase0 **1008 tests**.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3.1` (explicit string-comparison bridge contract), then `.3.2.3.2`,
+  `.3.2.3.3`, `.3.2.3.4`, and `.3.3`.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.2 — arithmetic symbol callees landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
   Arithmetic symbol calls are now portable helper calls: `+(a,b)`, `-(a,b)`, `*(a,b)`, `/(a,b)`, and `%(a,b)`
@@ -24,7 +43,7 @@ Current execution status for interruption-safe batch workflow recovery.
   integration run also shows the new `.3.2.2` test passing but still contains unrelated stale `s(...)`/`a(...)`/`h(...)`
   short-wrapper tests from the prior alias-retirement baseline.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.2.3` (comparison spelling contract), then `.3.3`.
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.2.3` (now split; current frontier is `.3.2.3.1`), then `.3.3`.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.4 — user-function surface finalized**
   (BOOK + TASK TREE + KNOWLEDGE MAP + LIVE DOCS).

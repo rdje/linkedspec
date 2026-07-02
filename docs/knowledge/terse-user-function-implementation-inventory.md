@@ -48,4 +48,4 @@ Implementation is split as follows:
 - `.4.3.2`: DONE — Rust runtime function execution plus oracle fixtures.
 - `.4.4`: DONE — function surface finalization and deferred extension ledger.
 
-The next PNT frontier is `SPEC-FORMAT-TERSE.3.2.3`.
+The next PNT frontier is `SPEC-FORMAT-TERSE.3.2.3.1` after the `.3.2.3` comparison-call split.
