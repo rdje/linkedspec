@@ -15,7 +15,7 @@ const SIMPLE_GRAMMAR: &str = r#"DemoParser::
 
 Child::
  /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(1)) }
+ I { declare(scalar, name=entry_group(0)) }
  E { return(scalar(name)) }
 "#;
 
@@ -136,7 +136,7 @@ fn corpus_lifecycle_ordered_output() {
  /(\w+)/
  I { declare(array, log); push_value(array(log), scalar("I")) }
  LS { push_value(array(log), scalar("LS")) }
- LE { push_value(array(log), entry_group(1)) }
+ LE { push_value(array(log), entry_group(0)) }
  E { push_value(array(log), scalar("E")); return(array_copy(array(log))) }
 "#;
     let spec = parse_spec(grammar).unwrap();
@@ -186,7 +186,7 @@ fn corpus_rep_with_bounds() {
     let grammar = r#"Repeater::OR{1,3}
  /(\w+)/
  I { declare(array, words) }
- LE { push_value(array(words), entry_group(1)) }
+ LE { push_value(array(words), entry_group(0)) }
  E { return(array_copy(array(words))) }
 "#;
     let spec = parse_spec(grammar).unwrap();

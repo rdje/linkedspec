@@ -35,7 +35,6 @@ fn corpus_dir() -> PathBuf {
 /// than aborting on the first). The engine output must equal the reference value
 /// wrapped one level (the Perl↔Rust output-shape rule).
 fn run_entry(dir: &Path) -> Result<(), String> {
-    let name = dir.file_name().unwrap().to_string_lossy().to_string();
     let read = |file: &str| -> Result<String, String> {
         fs::read_to_string(dir.join(file)).map_err(|e| format!("cannot read {file}: {e}"))
     };

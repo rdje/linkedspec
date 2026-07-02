@@ -52,4 +52,8 @@ and both now pass with the tagged Perl-reference `tcl_script` values.
 `SCALAREF-RETIREMENT.3` keeps the minimal shipped `Lispish.spec` fixture active after
 migrating its child-return field reads to direct `retv["content"]` access. The committed
 corpus includes `lispish_x_y` (`(x y)`), whose Perl reference value is `["x",["y"]]`; the
-corpus now has 63 fixtures.
+corpus then had 63 fixtures.
+
+`RUST-PARITY.7.2` added the first post-retirement shipped-spec expansion: two
+`hlink_substitution` raw-string cases (`hlink_raw_string` and
+`hlink_raw_escaped_brackets`). The corpus now has 65 fixtures.

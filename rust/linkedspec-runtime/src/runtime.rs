@@ -20,11 +20,11 @@ pub struct RuntimeContext {
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
     /// The rule's main accumulator (return value).
     pub accumulator: Vec<RuntimeValue>,
-    /// Entry match groups from the last regex match (group 0 = full match).
+    /// Entry capture groups (group 0 = first participating capture).
     pub entry_groups: Vec<String>,
     /// Named entry match groups.
     pub entry_named: std::collections::HashMap<String, String>,
-    /// Local match groups (nested/child match).
+    /// Local capture groups (group 0 = first participating capture).
     pub match_groups: Vec<String>,
     /// Named local match groups.
     pub match_named: std::collections::HashMap<String, String>,

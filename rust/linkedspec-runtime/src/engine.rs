@@ -395,14 +395,16 @@ impl Engine {
             };
 
             if let Some(m) = match_result {
-                let entry_was_empty = ctx.entry_groups.is_empty();
+                let entry_was_empty = ctx.entry_groups.is_empty()
+                    && ctx.entry_named.is_empty()
+                    && ctx.entry_start_byte == ctx.entry_end_byte;
                 ctx.set_pos(m.end);
                 // LOCAL match (`LMATCH`) — the rule's own regex match. This is
                 // what `match_*` helpers read; it must NOT touch the entry match
                 // (Perl keeps `IMATCH` and `LMATCH` separate — only an explicit
                 // I-block bridge copies one to the other). `m.start`/`m.end` are
                 // byte offsets (exposed as char offsets by `match_*_pos`).
-                ctx.match_groups = m.groups.clone();
+                ctx.match_groups = m.captures.clone();
                 ctx.match_named = m.named.clone();
                 ctx.match_start_byte = m.start;
                 ctx.match_end_byte = m.end;
@@ -413,7 +415,7 @@ impl Engine {
                 // left untouched, so `entry_*` and `match_*` diverge correctly
                 // in nested contexts.
                 if entry_was_empty {
-                    ctx.entry_groups = m.groups.clone();
+                    ctx.entry_groups = m.captures.clone();
                     ctx.entry_named = m.named.clone();
                     ctx.entry_start_byte = m.start;
                     ctx.entry_end_byte = m.end;
@@ -2660,7 +2662,7 @@ impl Engine {
             }
             // ── Entry/match ──
             "entry_text" => Ok(RuntimeValue::Scalar(
-                ctx.entry_groups.first().cloned().unwrap_or_default(),
+                span_text(&ctx.input, ctx.entry_start_byte, ctx.entry_end_byte).unwrap_or_default(),
             )),
             "entry_group" => {
                 if let Some(arg) = args.first() {
@@ -2699,7 +2701,7 @@ impl Engine {
             )),
             "entry_map" | "entry_named_map" => Ok(named_map_to_hash(&ctx.entry_named)),
             "match_text" => Ok(RuntimeValue::Scalar(
-                ctx.match_groups.first().cloned().unwrap_or_default(),
+                span_text(&ctx.input, ctx.match_start_byte, ctx.match_end_byte).unwrap_or_default(),
             )),
             "exit_now" => {
                 let status = args.first().and_then(|a| a.as_number()).unwrap_or(1.0) as i32;
@@ -3273,10 +3275,8 @@ impl Engine {
                 Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
             }
             "entry_len" => Ok(RuntimeValue::Number(
-                ctx.entry_groups
-                    .first()
-                    .map(|s| s.chars().count())
-                    .unwrap_or(0) as f64,
+                span_char_len(&ctx.input, ctx.entry_start_byte, ctx.entry_end_byte).unwrap_or(0)
+                    as f64,
             )),
             "entry_start_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
                 &ctx.input,
@@ -3297,10 +3297,8 @@ impl Engine {
                 Ok(RuntimeValue::Number((pos - last_nl + 1) as f64))
             }
             "match_len" => Ok(RuntimeValue::Number(
-                ctx.match_groups
-                    .first()
-                    .map(|s| s.chars().count())
-                    .unwrap_or(0) as f64,
+                span_char_len(&ctx.input, ctx.match_start_byte, ctx.match_end_byte).unwrap_or(0)
+                    as f64,
             )),
             "match_start_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
                 &ctx.input,
@@ -4146,7 +4144,7 @@ mod tests {
 
 Child::
  /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(1)) }
+ I { declare(scalar, name=entry_group(0)) }
  E { return(scalar(name)) }
 "#;
 
@@ -4449,7 +4447,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
- LE { assign(scalar(word), entry_group(1)) }
+ LE { assign(scalar(word), entry_group(0)) }
  E { return(scalar(word)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4466,7 +4464,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
- E { assign(scalar(word), entry_group(1)); return(scalar(word)) }
+ E { assign(scalar(word), entry_group(0)); return(scalar(word)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4482,7 +4480,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(array, results) }
- LE { push_value(array(results), entry_group(1)) }
+ LE { push_value(array(results), entry_group(0)) }
  E { return(array_copy(array(results))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4500,7 +4498,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(array, items); declare(scalar, item_count) }
- LE { push_value(array(items), entry_group(1)) }
+ LE { push_value(array(items), entry_group(0)) }
  E { assign(scalar(item_count), count(array(items))); return(scalar(item_count)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4518,7 +4516,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(array, items) }
- LE { push_nonempty(array(items), entry_group(1)) }
+ LE { push_nonempty(array(items), entry_group(0)) }
  E { return(array_copy(array(items))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4537,8 +4535,8 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)=(\d+)/
  I { declare(hash, config) }
- LE { set_key(hash(config), entry_group(1), entry_group(2)) }
- E { return(entry_group(1)) }
+ LE { set_key(hash(config), entry_group(0), entry_group(1)) }
+ E { return(entry_group(0)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4556,7 +4554,7 @@ ChildB:
     fn helpers_5_2_entry_text_and_entry_group() {
         let grammar = r#"Top::
  /hello[ \t]+(\w+)/
- E { return(concat(scalar(entry_text()), scalar(" "), scalar(entry_group(1)))) }
+ E { return(concat(scalar(entry_text()), scalar(" "), scalar(entry_group(0)))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4564,11 +4562,7 @@ ChildB:
         let engine = Engine::new(compiled);
         let result = engine.execute("hello world").unwrap();
         let arr = result.as_array().unwrap();
-        assert!(
-            arr[0].as_str().unwrap().contains("hello"),
-            "got {:?}",
-            arr[0]
-        );
+        assert_eq!(arr[0].as_str().unwrap(), "hello world world");
     }
 
     #[test]
@@ -4584,7 +4578,10 @@ ChildB:
         let result = engine.execute("key=42").unwrap();
         let outer: &Vec<Value> = result.as_array().unwrap();
         let groups: &Vec<Value> = outer[0].as_array().unwrap();
-        assert!(groups.len() >= 2, "expected >=2 groups, got {:?}", groups);
+        assert_eq!(
+            groups,
+            &vec![serde_json::json!("key"), serde_json::json!("42")]
+        );
     }
 
     #[test]
@@ -4593,7 +4590,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
- LE { assign(scalar(word), entry_group(1)) }
+ LE { assign(scalar(word), entry_group(0)) }
  E { return(scalar(word)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4627,7 +4624,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(coalesce(scalar(val), scalar("fallback"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4643,7 +4640,7 @@ ChildB:
     fn helpers_5_2_concat_strings() {
         let grammar = r#"Top::
  /(\w+) (\w+)/
- E { return(concat(entry_group(1), scalar("+"), entry_group(2))) }
+ E { return(concat(entry_group(0), scalar("+"), entry_group(1))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4736,7 +4733,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(array, items) }
- LE { push_value(array(items), entry_group(1)) }
+ LE { push_value(array(items), entry_group(0)) }
  E { return(array_copy(array(items))); return_undef() }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4793,7 +4790,7 @@ ChildB:
         let grammar = r#"Top::
  /(\d+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(coalesce_nonempty(scalar(""), scalar(val), scalar("final"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4816,7 +4813,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(if(is_nonempty(val), scalar("found"), scalar("empty"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4852,7 +4849,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(if(is_defined(val), entry_text(), scalar("fallback"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4908,7 +4905,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(switch(scalar(val),
                case(scalar("hello"), scalar("greeting")),
                case(scalar("world"), scalar("planet")),
@@ -4928,7 +4925,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(switch(scalar(val),
                case(scalar("red"), scalar("color")),
                default(scalar("not_a_color")))) }
@@ -4947,7 +4944,7 @@ ChildB:
         let grammar = r#"Top::
  /(\d+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(switch(scalar(val),
                case(scalar("1"), scalar("one")),
                case(scalar("2"), scalar("two")),
@@ -4985,7 +4982,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(if(is_defined(val), entry_text(), exit_now(1))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -5005,7 +5002,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(1)) }
+ LE { assign(scalar(val), entry_group(0)) }
  E { return(if(is_defined(val), scalar("ok"),
                elseif(is_empty(val), exit_now(1)),
                scalar("fallback"))) }
@@ -5069,7 +5066,7 @@ ChildB:
         // IBACKTRACK with empty stack should not crash
         let grammar = r#"Top::
  /(\w+)/
- E { IBACKTRACK(); return(entry_group(1)) }
+ E { IBACKTRACK(); return(entry_group(0)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();

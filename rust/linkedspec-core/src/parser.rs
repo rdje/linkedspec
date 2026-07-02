@@ -31,16 +31,27 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
 
         // Try to parse a rule header at the current line
         if let Some((header, next_i)) = parse_rule_header(&lines, i)? {
-            let (mut body, next_i) = collect_body(&lines, next_i);
-            // Parse same-line content (rest) as inline body elements
             let rest = header.rest.trim().to_string();
+            let mut body_start_i = next_i;
+            let mut inline_elements = Vec::new();
+
+            // Parse same-line content (rest) as inline body elements. Do this
+            // before collecting following lines so a block opened in the
+            // header rest can consume its continuation lines as one element.
             if !rest.is_empty() {
-                if let Some(inline_elements) = parse_inline_body(&rest, header.line) {
-                    // Prepend inline elements before the multi-line body
-                    let mut combined = inline_elements;
-                    combined.extend(body);
-                    body = combined;
+                let mut inline_i = header.line.saturating_sub(1);
+                if let Some(parsed_inline) =
+                    parse_inline_body(&rest, header.line, &lines, &mut inline_i)
+                {
+                    inline_elements = parsed_inline;
+                    body_start_i = body_start_i.max(inline_i);
                 }
+            }
+
+            let (mut body, next_i) = collect_body(&lines, body_start_i);
+            if !inline_elements.is_empty() {
+                inline_elements.extend(body);
+                body = inline_elements;
             }
             rules.push(Rule { header, body });
             i = next_i;
@@ -535,153 +546,36 @@ fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
 // ── Body collection ──
 
 /// Collect body elements from `start` until the next rule header at depth 0.
-/// Parse same-line content after the rule header (the `rest` field).
+/// Parse header-rest content as body elements.
 ///
-/// Only handles elements that can appear on the same line:
-/// regex literals, action edges, blind-call edges, compact lifecycle
-/// receiver chains, split markers, conditional markers, and fluent chains.
-fn parse_inline_body(rest: &str, line_num: usize) -> Option<Vec<BodyElement>> {
-    let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
-    let re_action =
-        Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
-    let re_blind = Regex::compile(r"^=>[ \t]+(\w+)").unwrap();
-    let re_split = Regex::compile(
-        r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))",
-    )
-    .unwrap();
-    let re_lifecycle = Regex::compile(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
-    let re_conditional = Regex::compile(r"^-\?[ \t]+\w+").unwrap();
-    let re_fluent = Regex::compile(r"^\.[ \t]*\w+").unwrap();
-
+/// Header-rest elements use the same parser as ordinary body lines so compact
+/// and multiline authoring stay structurally equivalent.
+fn parse_inline_body(
+    rest: &str,
+    line_num: usize,
+    lines: &[&str],
+    i: &mut usize,
+) -> Option<Vec<BodyElement>> {
     let mut elements = Vec::new();
     let mut remaining = rest.trim().to_string();
 
     while !remaining.is_empty() {
-        let trimmed = remaining.trim_start().to_string();
-        if trimmed.is_empty() {
+        let trimmed = remaining.trim().to_string();
+        if trimmed.is_empty() || trimmed.starts_with('#') {
             break;
         }
 
-        // Try each element type
-        if let Some(caps) = re_regex.captures(&trimmed) {
-            let full_match = caps.get(0).unwrap();
-            let pattern = caps.get(1).unwrap().as_str().to_string();
-            elements.push(BodyElement::new(
-                BodyElementKind::Regex { pattern },
-                full_match.as_str(),
-                line_num,
-            ));
-            remaining = trimmed[full_match.end()..].to_string();
-            continue;
-        }
-
-        if let Some(caps) = re_action.captures(&trimmed) {
-            let full_match = caps.get(0).unwrap();
-            let targets_str = caps.get(1).unwrap().as_str();
-            let index: usize = caps
-                .get(3)
-                .map(|m| m.as_str().parse().unwrap_or(0))
-                .unwrap_or(0);
-            let targets: Vec<EdgeTarget> = targets_str
-                .split('|')
-                .map(|t| t.trim())
-                .filter(|t| !t.is_empty())
-                .map(|label| EdgeTarget {
-                    label: label.to_string(),
-                    index,
-                })
-                .collect();
-            let rest = trimmed[full_match.end()..].to_string();
-            let (fluent_chain, remainder) = parse_fluent_chain_with_remainder(&rest);
-            elements.push(BodyElement::new(
-                BodyElementKind::ActionEdge {
-                    targets,
-                    code: None,
-                    fluent_chain,
-                },
-                full_match.as_str(),
-                line_num,
-            ));
-            remaining = remainder;
-            continue;
-        }
-
-        if let Some(caps) = re_blind.captures(&trimmed) {
-            let full_match = caps.get(0).unwrap();
-            let target = caps.get(1).unwrap().as_str().to_string();
-            elements.push(BodyElement::new(
-                BodyElementKind::BlindEdge {
-                    target,
-                    code: None,
-                    fluent_chain: Vec::new(),
-                },
-                full_match.as_str(),
-                line_num,
-            ));
-            remaining = trimmed[full_match.end()..].to_string();
-            continue;
-        }
-
-        if let Some(caps) = re_split.captures(&trimmed) {
-            let full_match = caps.get(0).unwrap();
-            let marker = caps.get(1).unwrap().as_str().to_string();
-            elements.push(BodyElement::new(
-                BodyElementKind::SplitMarker { marker },
-                full_match.as_str(),
-                line_num,
-            ));
-            remaining = trimmed[full_match.end()..].to_string();
-            continue;
-        }
-
-        if let Some(caps) = re_lifecycle.captures(&trimmed) {
-            let full_match = caps.get(0).unwrap();
-            let marker = caps.get(1).unwrap().as_str().to_string();
-            let rest = trimmed[full_match.end()..].trim_start().to_string();
-            if let Some((code, remainder)) = parse_lifecycle_fluent_chain_statement_code(&rest) {
-                elements.push(BodyElement::new(
-                    BodyElementKind::CodeBlock {
-                        lifecycle: marker,
-                        code,
-                    },
-                    full_match.as_str(),
-                    line_num,
-                ));
-                remaining = remainder;
-                continue;
-            }
+        let before = trimmed.clone();
+        let Some((element, remainder, _advanced)) =
+            parse_single_element(&trimmed, lines, i, line_num)
+        else {
+            break;
+        };
+        elements.push(element);
+        remaining = remainder;
+        if remaining.trim() == before {
             break;
         }
-
-        if let Some(caps) = re_conditional.captures(&trimmed) {
-            let full_match = caps.get(0).unwrap();
-            let word = caps
-                .get(1)
-                .unwrap_or_else(|| caps.get(0).unwrap())
-                .as_str()
-                .to_string();
-            elements.push(BodyElement::new(
-                BodyElementKind::Conditional { word },
-                full_match.as_str(),
-                line_num,
-            ));
-            remaining = trimmed[full_match.end()..].to_string();
-            continue;
-        }
-
-        if let Some(caps) = re_fluent.captures(&trimmed) {
-            let full_match = caps.get(0).unwrap();
-            elements.push(BodyElement::new(
-                BodyElementKind::FluentChain { calls: Vec::new() },
-                full_match.as_str(),
-                line_num,
-            ));
-            remaining = trimmed[full_match.end()..].to_string();
-            continue;
-        }
-
-        // Unknown content — stop parsing inline elements
-        break;
     }
 
     if elements.is_empty() {
@@ -1682,6 +1576,64 @@ Done:
                 .all(|element| !matches!(element.kind, BodyElementKind::FluentChain { .. })),
             "inline lifecycle fluent chains must not survive as standalone chains"
         );
+    }
+
+    #[test]
+    fn parse_header_rest_lifecycle_block_after_regex_as_code_block() {
+        let src = r#"Top:: /x/ I { return(entry_text()) } E { return("done") }
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+
+        assert_eq!(top.body.len(), 3);
+        assert!(matches!(
+            &top.body[0].kind,
+            BodyElementKind::Regex { pattern } if pattern == "x"
+        ));
+        assert!(matches!(
+            &top.body[1].kind,
+            BodyElementKind::CodeBlock { lifecycle, code }
+                if lifecycle == "I" && code == "return(entry_text())"
+        ));
+        assert!(matches!(
+            &top.body[2].kind,
+            BodyElementKind::CodeBlock { lifecycle, code }
+                if lifecycle == "E" && code == r#"return("done")"#
+        ));
+    }
+
+    #[test]
+    fn parse_header_rest_multiline_lifecycle_block_before_body_line() {
+        let src = r#"Top:: /x/ I {
+  declare(scalar, out)
+  set(out, "ok")
+}
+/y/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+
+        assert_eq!(
+            top.body.len(),
+            3,
+            "header-rest multiline block must consume its continuation before normal body collection"
+        );
+        assert!(matches!(
+            &top.body[0].kind,
+            BodyElementKind::Regex { pattern } if pattern == "x"
+        ));
+        match &top.body[1].kind {
+            BodyElementKind::CodeBlock { lifecycle, code } => {
+                assert_eq!(lifecycle, "I");
+                assert!(code.contains("declare(scalar, out)"));
+                assert!(code.contains(r#"set(out, "ok")"#));
+            }
+            _ => panic!("expected lifecycle CodeBlock"),
+        }
+        assert!(matches!(
+            &top.body[2].kind,
+            BodyElementKind::Regex { pattern } if pattern == "y"
+        ));
     }
 
     #[test]

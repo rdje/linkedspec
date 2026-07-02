@@ -965,6 +965,9 @@ SPEC
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
     # ── SCALAREF-RETIREMENT.3 — shipped Lispish direct-access migration ──
     { case => 'lispish_x_y', spec => 'Lispish', input => '(x y)' },
+    # ── RUST-PARITY.7.2 — structurally simple shipped-spec corpus batch ──
+    { case => 'hlink_raw_string',              spec => 'hlink_substitution', input => 'plain text' },
+    { case => 'hlink_raw_escaped_brackets',    spec => 'hlink_substitution', input => 'plain \[text\]' },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

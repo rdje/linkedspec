@@ -56,16 +56,19 @@ A dispatched child's `entry_*` reads the **parent's** match while its `match_*` 
 **own** — they diverge in nested contexts. The parent's `match_*` after a child dispatch still
 reads the parent's own match. (See the `match_5_2_*` integration tests.)
 
-## Out of scope here
+## Indexing Update
 
-Group **indexing** is unchanged (`entry_group(0)` reads `entry_groups[0]` = full match in
-Rust). The Perl `match_group(0)` = *first capture* indexing difference is a separate parity
-item, not part of `.5.2`.
+`RUST-PARITY.5.2` was about **which match register** a helper reads. The separate group
+indexing gap was later fixed in `RUST-PARITY.7.2`: Rust now uses the same captures-only
+helper layout as Perl (`entry_group(0)` / `match_group(0)` = first participating capture),
+while whole-match text comes from `entry_text()` / `match_text()`. See
+[[rust-capture-group-helper-indexing]].
 
 ## Links
 
 - Task tree: [[RUST-PARITY]] (leaf `.5.2`)
-- Related: [[rust-retv-propagation]], [[rust-edge-semantics-bug]], [[runtimecontext-boundary]]
+- Related: [[rust-retv-propagation]], [[rust-edge-semantics-bug]], [[runtimecontext-boundary]],
+  [[rust-capture-group-helper-indexing]]
 - Files: `rust/linkedspec-runtime/src/engine.rs`
 - Contract: `docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md`,
   `docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md`

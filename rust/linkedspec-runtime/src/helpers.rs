@@ -135,7 +135,7 @@ pub mod regex_engine {
             let alt_idx = branch.saturating_sub(1);
 
             let info = self.alt_infos.get(alt_idx)?;
-            let groups = extract_groups(combined, remaining, info);
+            let (groups, captures) = extract_groups(combined, remaining, info);
             let named = extract_named(combined, remaining, info);
 
             Some(MatchResult {
@@ -143,6 +143,7 @@ pub mod regex_engine {
                 start: pos + m.start,
                 end: pos + m.end,
                 groups,
+                captures,
                 named,
             })
         }
@@ -168,7 +169,7 @@ pub mod regex_engine {
             let alt_idx = branch.saturating_sub(1);
 
             let info = self.alt_infos.get(alt_idx)?;
-            let groups = extract_groups(combined, remaining, info);
+            let (groups, captures) = extract_groups(combined, remaining, info);
             let named = extract_named(combined, remaining, info);
 
             Some(MatchResult {
@@ -176,6 +177,7 @@ pub mod regex_engine {
                 start: pos,
                 end: pos + m.end,
                 groups,
+                captures,
                 named,
             })
         }
@@ -183,10 +185,13 @@ pub mod regex_engine {
 
     /// Extract positional capture groups belonging to the winning alternative.
     ///
-    /// Index 0 is always the full match. Subsequent indices are the winning
-    /// branch's capture groups (re-indexed from 0 within the result).
-    fn extract_groups(regex: &Regex, haystack: &str, info: &AltInfo) -> Vec<String> {
+    /// `groups` keeps the internal regex-oriented layout: index 0 is the full
+    /// match, then every capture slot in the winning branch. `captures` is the
+    /// LinkedSpec helper surface: capture-only, compacted by participation like
+    /// Perl `LinkedRE.pm`'s `grep { defined } $1..$N`.
+    fn extract_groups(regex: &Regex, haystack: &str, info: &AltInfo) -> (Vec<String>, Vec<String>) {
         let mut groups = Vec::with_capacity(1 + info.group_count);
+        let mut captures = Vec::with_capacity(info.group_count);
         if let Some(caps) = regex.captures(haystack) {
             // Group 0: full match
             groups.push(
@@ -197,6 +202,9 @@ pub mod regex_engine {
             // Winning branch's groups (offset by info.group_offset)
             for local_idx in 0..info.group_count {
                 let global_idx = info.group_offset + local_idx;
+                if let Some(m) = caps.get(global_idx) {
+                    captures.push(m.as_str().to_string());
+                }
                 groups.push(
                     caps.get(global_idx)
                         .map(|m| m.as_str().to_string())
@@ -204,7 +212,7 @@ pub mod regex_engine {
                 );
             }
         }
-        groups
+        (groups, captures)
     }
 
     /// Extract named capture groups belonging to the winning alternative.
@@ -237,6 +245,12 @@ pub mod regex_engine {
         pub end: usize,
         /// Capture groups (index 0 = full match, then each parenthesized group).
         pub groups: Vec<String>,
+        /// Capture-only list exposed by LinkedSpec helpers.
+        ///
+        /// Index 0 is the first participating capture. Non-participating
+        /// optional groups are omitted, while participating empty-string captures
+        /// remain present.
+        pub captures: Vec<String>,
         /// Named capture groups (e.g. `(?P<name>...)` → `"name" => "value"`).
         pub named: HashMap<String, String>,
     }
@@ -345,6 +359,7 @@ pub mod regex_engine {
             assert_eq!(result.groups[0], "42-hello");
             assert_eq!(result.groups[1], "42");
             assert_eq!(result.groups[2], "hello");
+            assert_eq!(result.captures, vec!["42", "hello"]);
         }
 
         #[test]
@@ -354,6 +369,7 @@ pub mod regex_engine {
             assert_eq!(result.index, 1);
             assert_eq!(result.groups[0], "hello");
             assert_eq!(result.groups[1], "hello");
+            assert_eq!(result.captures, vec!["hello"]);
         }
 
         #[test]
@@ -363,6 +379,17 @@ pub mod regex_engine {
             assert_eq!(result.groups.len(), 2);
             assert_eq!(result.groups[0], "abc");
             assert_eq!(result.groups[1], "");
+            assert!(result.captures.is_empty());
+        }
+
+        #[test]
+        fn capture_groups_empty_match_remains_participating() {
+            let alt = CompiledAlternation::compile(&[r"()abc".into()]).unwrap();
+            let result = alt.seek_match("abc", 0).unwrap();
+            assert_eq!(result.groups.len(), 2);
+            assert_eq!(result.groups[0], "abc");
+            assert_eq!(result.groups[1], "");
+            assert_eq!(result.captures, vec![""]);
         }
 
         #[test]

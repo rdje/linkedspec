@@ -10,7 +10,7 @@ answers:
 date: 2026-07-02
 status: confirmed
 tags: [dsl, retirement, scalaref, direct-access, docs]
-evidence: "SCALAREF-RETIREMENT.3 migrated shipped specs, checked-in Rust oracle inputs, focused tests, generator fixtures, user guides, and mdBook chapters away from active scalaref(...) and .scalaref(...) examples. SCALAREF-RETIREMENT.4 then removed implementation support and added focused negative tests. SCALAREF-RETIREMENT.5 swept the older root language-neutral tests/corpus fixtures and current-facing docs/KM wording. Phase0 passes with 1015 tests; Rust corpus oracle passes over 63 fixtures; active scalaref scans are clean except intentional negative locks."
+evidence: "SCALAREF-RETIREMENT.3 migrated shipped specs, checked-in Rust oracle inputs, focused tests, generator fixtures, user guides, and mdBook chapters away from active scalaref(...) and .scalaref(...) examples. SCALAREF-RETIREMENT.4 then removed implementation support and added focused negative tests. SCALAREF-RETIREMENT.5 swept the older root language-neutral tests/corpus fixtures and current-facing docs/KM wording. RUST-PARITY.7.2 later expanded the Rust corpus to 65 fixtures while preserving the migrated Lispish direct-access fixture. Phase0 passes with 1015 tests; active scalaref scans are clean except intentional negative locks."
 reverify: "bash -lc '! rg -n \"scalaref\\(|\\.scalaref\\(\" specs tests/corpus rust/linkedspec-runtime/tests/corpus docs/linkedspec-book/src USER_GUIDE*.md tools/gen_oracle_corpus.pl rust/README.md'"
 ---
 

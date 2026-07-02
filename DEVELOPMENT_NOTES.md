@@ -1,6 +1,24 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (RUST-PARITY.7.2 — first shipped-spec oracle batch after scalaref retirement):
+  The corpus expansion found and closed two Rust parity seams before adding only green fixtures. Durable points.
+  (1) **Header-rest must not be a second parser.** The old Rust inline-rest parser had its own narrow element
+  recognizers, so compact shipped forms such as `raw_string: /.../ I.return(entry_text())` and multiline
+  header-rest blocks could be parsed differently from identical body-line forms. `parse_inline_body` now delegates
+  to `parse_single_element`, and any block it consumes advances the following body collection start. (2) **Capture
+  helper lists are captures-only.** Perl's helper contract is not regex-library group numbering: `entry_group(0)`
+  / `match_group(0)` read the first participating capture, not the full match. Rust now stores both the internal
+  regex group layout and the LinkedSpec helper projection; helpers use the compacted capture projection while
+  `entry_text()` / `match_text()` read the full match from spans. Optional captures that did not participate drop
+  out; participating empty captures stay present. (3) **First clean shipped-spec batch is small on purpose.** The
+  two accepted fixtures are `hlink_substitution` raw-string paths. Broader candidates (`portmap`, `lib_reader`,
+  `ebnf`, `BNF`, `DT`, `ifelse`, `operators_try`, and `spec.spec` smokes) still expose structural output gaps and
+  stay for `.7.3`/later. (4) **Book already had the contract.** The mdBook helper catalog and regex chapter already
+  say numbered groups are 0-based, captures-only, compacted, and that whole match text comes from
+  `entry_text()`/`match_text()`, so no public-book edit was required.
+  Next frontier: `RUST-PARITY.7.3`.
+
 - 2026-07-02 (SCALAREF-RETIREMENT.5 — closed scalaref retirement tree):
   Final no-drift sweep complete. Durable points. (1) **Root corpus cleaned.** The older language-neutral
   `tests/corpus/lispish` and `tests/corpus/tablegrep` examples now use direct nested access (`retv["content"]`,

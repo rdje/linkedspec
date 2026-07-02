@@ -1,6 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — RUST-PARITY.7.2 — expand shipped-spec oracle batch
+
+**Scope:** Rust parser header-rest parsing, Rust regex/capture helper projection, focused Rust tests, oracle
+generator/corpus fixtures, task-tree/live docs, and Knowledge Map.
+
+**What changed:** Rust rule-header rest content now uses the same body-element parser as ordinary body lines.
+That keeps compact header-line lifecycle chains and multiline header-rest lifecycle blocks executable and prevents
+their continuation lines from being collected a second time as ordinary body lines.
+
+**Capture parity:** Rust `entry_group(N)` / `match_group(N)` now match the documented Perl contract: the helper
+list is captures-only, 0-based over participating captures, and compacted by dropping non-participating optional
+captures while retaining participating empty-string captures. `entry_text()` and `match_text()` now read whole-match
+text from stored spans rather than relying on group index 0.
+
+**Corpus:** Added two clean shipped-spec oracle fixtures for `hlink_substitution` raw-string paths:
+`hlink_raw_string` and `hlink_raw_escaped_brackets`. Oracle regeneration now produces **65 fixtures** and the Rust
+fixture runner passes over all 65. Broader attempted candidates (`portmap`, `lib_reader`, `ebnf`, `BNF`, `DT`,
+`ifelse`, `operators_try`, and selected `spec.spec` smokes) still diverge structurally and are deferred with
+evidence in the task tree.
+
+**Docs:** The mdBook backend handoff appendix now reports the 65-fixture corpus and names the new
+`hlink_substitution` raw-string cases. No helper-contract page edit was needed: the helper catalog and regex
+chapter already document the captures-only, 0-based, compacted capture contract. This slice brings Rust back into
+that documented behavior.
+
+**Checks:** Focused Rust parser/runtime checks, oracle generator syntax/regeneration, Rust corpus oracle, mdBook
+build, Knowledge Map regeneration/check, memory architecture, doctrine registry, `git diff --check`, and full local
+CI passed in the commit workflow.
+
 ## 2026-07-02 — SCALAREF-RETIREMENT.5 — close scalaref retirement tree
 
 **Scope:** Final drift sweep for legacy `scalaref(...)` references across root corpus fixtures, current-facing

@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (`.7.5.2` temporary Lispish legacy parity landed, `SCALAREF-RETIREMENT.3/.4`
-  migrated/removed `scalaref(...)`, the `lispish_x_y` oracle fixture remains active through direct access, and
-  the Rust corpus oracle is green over 63 fixtures; frontier → `.7.2`)
+- Last updated: `2026-07-02` (`.7.2` done — first shipped-spec corpus expansion after `SCALAREF-RETIREMENT`;
+  Rust capture helpers now use Perl-compatible captures-only indexing and the corpus oracle is green over 65
+  fixtures)
 - Owner: repo-local workflow
 
 ## Goal
@@ -156,16 +156,30 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.1` (see Commit Log)
 
 - ID: `RUST-PARITY.7.2`
-  Status: `pending`
+  Status: `done`
   Goal: Expand the oracle corpus to the structurally simple specs (batch 1), authoring inputs
   Acceptance: representative inputs authored + fixtures generated for a first batch of clean specs (candidate set: `BNF`, `ebnf`, `DT`, `ifelse`, `operators_try`, `portmap`, `lib_reader` — exact set decided in-slice); the Rust fixture-runner is green over them; any Perl↔Rust divergence is either fixed in the engine or recorded as a deferred follow-up with evidence; `cargo test` + clippy zero-new; baseline green.
-  Verification: `pending`
+  Verification: Done — 2026-07-02. First clean shipped-spec batch is deliberately small: `hlink_substitution`
+  raw-string paths now have two oracle fixtures (`hlink_raw_string`, `hlink_raw_escaped_brackets`), taking the
+  Rust corpus from 63 to 65 fixtures. The slice also fixed two Rust parity blockers surfaced while trying broader
+  shipped-spec candidates: (1) header-rest lifecycle/code blocks now use the same `parse_single_element` path as
+  normal body lines, so compact header-line forms such as `raw_string: /.../ I.return(entry_text())` and multiline
+  header-rest blocks are parsed as executable `CodeBlock`s before following body lines are collected; (2)
+  `entry_group(N)` / `match_group(N)` now expose Perl-compatible **captures-only**, compacted groups (`0` = first
+  participating capture; non-participating optional groups omitted; participating empty captures retained), while
+  `entry_text()` / `match_text()` read the full match from stored spans. Focused parser/runtime checks and the
+  65-fixture corpus oracle pass. Deferred evidence from attempted candidates: `portmap_*` still differ on nested
+  aggregate shape / multi-branch payloads; `lib_reader_cell_attribute` returns `[[]]` instead of the expected group
+  AST; `ebnf_expression_rules` has a structural rule-payload mismatch; `BNF`, `DT`, `ifelse`, and `operators_try`
+  return `[]`/`[null]` or hit action-parser warnings; four `spec.spec` smoke cases still return `[[[]]]`. Those are
+  not RGX top-level branch-index issues (the Rust regex path still uses RGX branch identification); they remain
+  `.7.3`/later shipped-spec parity work.
   Commit: `pending`
 
 - ID: `RUST-PARITY.7.3`
   Status: `pending`
   Goal: Expand the oracle corpus to the remaining/harder specs (batch 2), RTLUtils-guarded
-  Acceptance: inputs authored + fixtures generated (timeout-guarded) for the remaining specs incl. legacy/plugin/RTL-touching ones (candidate set: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`, `tkgui`, `hlink_substitution`, `ds_vhistory`, `verilog`, `spec.spec` — exact set decided in-slice); the `RTLUtils` hang is guarded; parity gaps fixed or recorded; the Rust fixture-runner is green; `cargo test` + clippy zero-new; baseline green.
+  Acceptance: inputs authored + fixtures generated (timeout-guarded) for the remaining specs incl. legacy/plugin/RTL-touching ones (candidate set: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`, `tkgui`, remaining non-raw `hlink_substitution` delimiter paths, `ds_vhistory`, `verilog`, `spec.spec` — exact set decided in-slice); the `RTLUtils` hang is guarded; parity gaps fixed or recorded; the Rust fixture-runner is green; `cargo test` + clippy zero-new; baseline green.
   Verification: `pending`
   Commit: `pending`
 
@@ -177,7 +191,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `pending`
 
 - ID: `RUST-PARITY.7.5`
-  Status: `active`
+  Status: `done`
   Goal: Rust engine output-parity fixes for shipped recursive specs — unblock the oracle corpus (`.7.2`/`.7.3`). Discovered by `.7.1`'s oracle.
   Children: `.7.5.1` (done), `.7.5.2` (done), `.7.5.3` (done)
   Note: Split 2026-06-17 (PNT rule 5). Originally two children; **`.7.5.3` added 2026-06-17** when `.7.5.1` (the parser header-regex fix) proved **necessary but NOT sufficient** for tclite. `.7.5.1` made the header-line regexes register (proven by unit tests), but the oracle still showed tclite → `[]`: tclite accumulates via **fluent continuations on ACTION edges** (`-> command_subst .push`, `-> command_subst[1] .return(...)`), and the Rust parser only attached a `.method` fluent chain to a BLIND edge (`=>`) at that point. **`.7.5.3` is now closed by later committed terse-track implementation evidence:** `SPEC-FORMAT-TERSE.2.3.3.1` carried action-edge `fluent_chain` through parser/compiler/runtime for no-arg `.push` / `.return(expr)` / `.return_undef`; `.2.3.3.3.2` completed explicit-target and flow-chain action-edge semantics; `.2.3.3.3.3.1` landed the remaining default-mode recursive repetition/preamble-return behavior and restored the two shipped `tclite` oracle fixtures. **Lispish-green still needs `.7.5.2`** (it uses `{ code }` blocks and `scalaref(retv, {content})`, not the fluent form). Still re-evaluate the **child-`return` accumulator leak** and the **group-indexing divergence** (Open Questions) as part of whichever child surfaces them. Acceptance (tree-level): the Rust engine reproduces the Perl reference (modulo the one-level wrap) for `tclite` (`[]`→`["?tcl_script:",[["?command_subst:",[]]]]`; `""`→`["?tcl_script:",[["?double_quote:",[]]]]`) and `Lispish` (`(x y)`→`["x",["y"]]`); each deferred case is re-enabled in `tools/gen_oracle_corpus.pl` by the child that closes its last blocker and passes the fixture-runner; `cargo test` + clippy zero-new; baseline green.
@@ -235,17 +249,17 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.6` | `done` | strict_syntax validation mode landed (2026-06-16); `validate_with_options(spec, strict)` promotes the unused-rule warning to a hard error (undefined already fatal); Perl semantics verified empirically (top rule not exempt) |
 | — | `RUST-PARITY.7` | `active` | split into `.7.1`–`.7.5` (2026-06-16 / `.7.5` added 2026-06-17 — oracle proved shipped specs don't reach Rust parity) |
 | — | `RUST-PARITY.7.1` | `done` | oracle mechanism + canonical wrap rule + green first proof landed (2026-06-17); the oracle proved tclite/Lispish do NOT match (engine gap → `.7.5`), so the proof is on 2 controlled authored grammars |
-| — | `RUST-PARITY.7.5` | `active` | split 2026-06-17 into `.7.5.1` (parser fix, **done**) + `.7.5.2` (scalaref) + `.7.5.3` (action-edge fluent lowering, added when `.7.5.1` proved necessary-not-sufficient for tclite) |
+| — | `RUST-PARITY.7.5` | `done` | all shipped recursive-spec blockers from `.7.1` are closed: header-line regexes, action-edge fluent/default-mode `tclite`, and Lispish after direct-access migration |
 | — | `RUST-PARITY.7.5.1` | `done` | header-line-regex → 0-regex parser bug fixed (2026-06-17); `(\S*)`→`([^\s/]*)`; regexes on header lines register, bracket-pairs repaired (open[0]/close[1]); 4 unit tests; 242 green; clippy zero-new. Oracle then revealed a 2nd tclite blocker → `.7.5.3` |
 | — | `RUST-PARITY.7.5.3` | `done` | action-edge fluent closure reconciled 2026-07-02 from committed `SPEC-FORMAT-TERSE.2.3.3.*` evidence; shipped `tclite` oracle fixtures are active and green |
 | — | `RUST-PARITY.7.5.2` | `done` | Temporary Lispish legacy `scalaref(retv, {content})` parity landed 2026-07-02; `SCALAREF-RETIREMENT.3/.4` then migrated and removed the helper, while `lispish_x_y` remains active and green through direct access |
-| 1 | `RUST-PARITY.7.2` | `pending` | expand corpus to structurally simple specs (batch 1), authoring inputs |
-| 2 | `RUST-PARITY.7.3` | `pending` | expand corpus to remaining/harder specs (batch 2), RTLUtils-guarded |
-| 3 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 4 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 5 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.2` | `done` | first shipped-spec batch landed: `hlink_substitution` raw-string cases plus Rust captures-only group parity; corpus 65 fixtures |
+| 1 | `RUST-PARITY.7.3` | `pending` | expand corpus to remaining/harder specs (batch 2), RTLUtils-guarded |
+| 2 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 3 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 4 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, so `.7.2`, `.8`, and `.9` remain.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, and `.7.2` has landed the first shipped-spec batch, so `.7.3`, `.8`, and `.9` remain.)
 
 ## Decisions
 
@@ -310,7 +324,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - (`.5.5.3`) **RESOLVED 2026-06-16 as option (a)** (user-confirmed; implemented). The mark-family readers have TWO end positions in the Perl reference (`Contracts.pm` ~690–1047), and the existing Rust `capture_from` did not match the non-cursor one. **Non-cursor readers** (`capture_from`/`capture_len_from`/`capture_take`/`capture_take_len_from`) end at `$LSPOS - length $LMATCH` = the **start of the current local match** (= `ctx.match_start_byte` in Rust). **`_until_cursor_` readers** end at `pos $$STRING` = the cursor (= `ctx.pos`). **`capture_rest*`** ends at `length($$STRING)` (end of input). **`_take_` variants MUTATE the mark** (advance it to the read's end position) — non-take variants do not. `capture_between(a,b)` = `substr(start_mark, end_mark - start_mark)`; `capture_len_between` = the width. `mark_input_start(name)` = mark 0; `mark_input_end(name)` = mark `len(input)`; `mark_copy(target, source)` is **2-arg** (copies source's pos to target; returns it, or deletes target + returns undef if source absent — note the book catalog §7 wrongly shows a 1-arg `mark_copy(name)`, another book imprecision to flag). **The discrepancy:** the existing Rust `capture_from` (engine.rs:1044) returns `ctx.input[mark..ctx.pos]` (to match_END), but Perl `capture_from` goes to match_START (`pos - len(LMATCH)`); e.g. test `helpers_5_2_mark_and_capture_from` (mark at 0, whole-input match "hello") asserts `"hello"`, but strict Perl gives `""` (everything before the match). So `capture_len_from` per strict Perl would be `pos - mark - len(LMATCH)`, **inconsistent** with the existing `capture_from`. **Decide before implementing `.5.5.3`:** (a) fix `capture_from` to Perl's match-start semantics and update `helpers_5_2_mark_and_capture_from` (correct parity, but changes a landed test), or (b) implement the family consistent with the existing match-end `capture_from` (internally coherent, but a known parity gap). Recommend (a) with explicit justification, but it is a deliberate call that wants fresh focus. `LMATCH` length in Rust = `ctx.match_end_byte - ctx.match_start_byte` (`.5.2`/`.5.3` spans); positions byte-internal, char at the DSL boundary (`.5.3` `byte_to_char_offset`). **Resolution:** option (a) — `capture_from` fixed to end at `ctx.match_start_byte`; the landed test `helpers_5_2_mark_and_capture_from` updated `"hello"`→`""`. The whole non-cursor family (`capture_from`/`capture_len_from`/`capture_take_len_from`) ends at match-start; `_until_cursor_` at `ctx.pos`; `_rest_` at `ctx.input.len()`; `_take_*` advance the mark to the read's endpoint. Book catalog §7 corrected (incl. the 2-arg `mark_copy` and anonymous `capture_slice` endpoint imprecisions flagged here). See knowledge card `docs/knowledge/rust-mark-based-capture-family.md`.
 - (`.5.5.3` discovered) **Parity-inventory gap + anon-slice gap.** Reading `Contracts.pm` fully surfaced mark helpers absent from BOTH the Rust engine and the `RUST-PARITY.1` inventory: `mark_match_start`/`mark_match_end` (`$LSPOS - length $LMATCH` / `$LSPOS`), `mark_entry_start`/`mark_entry_end` (`$IPOS - length $IMATCH` / `$IPOS`), the bare mark-based `capture_take(mark)`, and `capture_take_between`/`capture_take_between_len`. **STILL DEFERRED** — these are mark/match/entry-anchored helpers (a different family from the anonymous capture-slice subject of `.5.5`); flag for a follow-up parity leaf (`.5.5.5`?). The **anon-slice gap is RESOLVED 2026-06-16 in `.5.5.4`**: `capture_slice`/`capture_slice_len` now read to match-start (was the cursor), and the full anonymous capture-slice family was implemented + documented in catalog §7. While implementing, `.5.5.4` also surfaced that the inventory's anonymous list itself omitted `capture_rest`/`capture_rest_len`/`capture_take` (anonymous, no-mark) — these are the same family, so they were folded into `.5.5.4` (the anonymous capture-slice family is now complete in Rust + book).
 - None yet — inventory leaf will identify any.
-- (`.5.2`) Group indexing differs between Perl (`match_group(0)` = first capture) and Rust (`entry_group(0)`/`match_group(0)` read index 0 = full match). Not a `.5.2` concern (that leaf is about *which* match, not indexing); flag for a later parity leaf if it proves user-visible.
+- (`.5.2` note, resolved in `.7.2`) Group indexing used to differ between Perl (`match_group(0)` = first
+  capture) and Rust (`entry_group(0)`/`match_group(0)` read index 0 = full match). `.7.2` fixed the Rust helper
+  surface to match the documented Perl contract: `entry_group(0)` / `match_group(0)` now read the first
+  participating capture, `entry_groups()` / `match_groups()` are captures-only and compacted, and whole-match text
+  is read through `entry_text()` / `match_text()` from stored spans.
 - (`.5.3`) `entry_line`/`entry_col`/`match_line`/`match_col` take a position **argument** rather than deriving from the stored entry/match span (an existing quirk). `.5.3` fixed only `cursor` line/col (its named scope); revisit these in a later parity leaf alongside the group-indexing item.
 - (`.7.5.1` discovered) **Pre-existing `cargo clippy --tests` exit-101.** Clippy's deny-by-default `clippy::approx_constant` lint hard-errors on two `3.14` float literals in test code that predate the RUST-PARITY work and were untouched by `.7.5.1`: `rust/linkedspec-core/src/expr.rs:687` (`(*value - 3.14).abs()`) and `rust/linkedspec-core/tests/types_test.rs:143` (`Some(3.14)`). So `cargo clippy -p linkedspec-core --tests` has exited 101 since before `.7.1` — the prior leaves' "clippy zero-new" gate measured the **warning multiset** (core 10 / runtime 13 / validation.rs 4), not clippy's exit code. Trivial to fix (`#[allow(clippy::approx_constant)]` on the two test fns, or change the literal), but it is a pre-existing hygiene issue unrelated to any parity leaf — flag for a small dedicated hygiene leaf rather than bundle it into a parity slice.
 
@@ -336,6 +354,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-06-17` | `RUST-PARITY.7.5.1` | `cargo test --manifest-path rust/Cargo.toml` (full, baseline 238); `cargo clippy -p linkedspec-core -p linkedspec-runtime --tests` (warning-multiset diff); `perl -c tools/gen_oracle_corpus.pl`; `scripts/check_memory_architecture.sh` | `cargo test` = **242 passed / 0 failed** (238 baseline + 4 new: 3 parser + 1 compiler header-line-regex tests; `linkedspec_core` 90→94; corpus_oracle 1 green proof — tclite re-deferred to `.7.5.3`); clippy warning multiset = baseline (linkedspec-core 10 / linkedspec-runtime 13 / validation.rs 4 — zero-new); clippy `--tests` exit-101 is pre-existing `approx_constant` in untouched `expr.rs:687`/`types_test.rs:143` (Open Questions); generator `perl -c` OK; self-check exit 0. Oracle revealed a 2nd tclite blocker (action-edge fluent lowering) → new leaf `.7.5.3` |
 | `2026-07-02` | `RUST-PARITY.7.5.3` | KM retrieval; source/corpus evidence audit; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Reconciliation slice only, no runtime code change. Existing code contains action-edge fluent parsing/compilation/runtime execution (`ActionEdge.fluent_chain`, `AcodeEntry.fluent_chain`, `execute_action_edge_fluent_chain`), and `tools/gen_oracle_corpus.pl` plus the checked-in corpus contain active `tclite_command_subst` and `tclite_double_quote` fixtures. Rust `corpus_oracle` passes on the current **62-fixture** corpus; full local CI remains green. Frontier → `.7.5.2` |
 | `2026-07-02` | `RUST-PARITY.7.5.2` | TOOLBOX Perl generated-source probes; `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Lispish `scalaref(retv, {content})` parity landed and `lispish_x_y` is active. Focused parser/runtime checks and 63-fixture corpus oracle pass; full gate evidence is recorded in the commit workflow. Frontier → `.7.2` |
+| `2026-07-02` | `RUST-PARITY.7.2` | `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Header-rest multiline lifecycle parsing and captures-only helper indexing landed; `hlink_substitution` raw-string fixtures are active; 65-fixture corpus oracle passes. Broader candidate divergences are recorded and deferred to `.7.3`/later. |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -395,6 +414,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.5.1` | `RUST-PARITY.7.5.1 — fix the header-line-regex → 0-regex parser bug in the Rust variant` | parser.rs:86 `(\S*)`→`([^\s/]*)`; header-line regexes now register, bracket-pairs repaired (open[0]/close[1]); 4 unit tests (3 parser + 1 compiler); 242/242 green; clippy zero-new. Oracle revealed a 2nd tclite blocker (action-edge fluent lowering) → new leaf `.7.5.3`; tclite oracle cases re-deferred |
 | `RUST-PARITY.7.5.3` | `RUST-PARITY.7.5.3 - reconcile action-edge fluent closure` | no runtime code change; closes stale parity leaf against `SPEC-FORMAT-TERSE.2.3.3.*` implementation evidence, active `tclite_*` oracle fixtures, and current 62-fixture corpus oracle |
 | `RUST-PARITY.7.5.2` | `RUST-PARITY.7.5.2 - land Lispish scalaref parity` | expr.rs `ScalarRefPath` parser hook + runtime legacy scalaref path evaluation, child-return accumulator containment, explicit action-block call compatibility, aggregate-wrapper assignment replacement, active `lispish_x_y` fixture; 63-fixture corpus oracle green |
+| `RUST-PARITY.7.2` | `RUST-PARITY.7.2 - expand shipped-spec oracle batch` | parser header-rest multiline lifecycle fix; Rust captures-only entry/match group indexing; two `hlink_substitution` raw-string oracle fixtures; 65-fixture corpus oracle green |
 
 ## Changelog
 
@@ -424,3 +444,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   `scalaref` path parser/evaluator, child-return accumulator containment, explicit action-edge block `call(child)`
   compatibility, and aggregate-wrapper assignment replacement needed by `assign(array(word), array())`. The
   `lispish_x_y` oracle case is active and green; corpus oracle passes over **63 fixtures**. Frontier → `.7.2`.
+- `2026-07-02`: `.7.2` done — first shipped-spec oracle expansion after `SCALAREF-RETIREMENT`. Rust header-rest
+  parsing now uses the normal body-element parser, so compact header-line lifecycle chains and multiline
+  lifecycle blocks are not dropped or double-collected. Rust `entry_group`/`match_group` helpers now match the
+  documented Perl contract: captures-only, 0-based over participating captures, compacting non-participating
+  optional groups while retaining participating empty captures; `entry_text`/`match_text` remain whole-match span
+  readers. Added two clean `hlink_substitution` raw-string fixtures, taking the corpus to **65 fixtures**. Attempted
+  broader simple-spec candidates (`portmap`, `lib_reader`, `ebnf`, `BNF`, `DT`, `ifelse`, `operators_try`, and
+  selected `spec.spec` smokes) still diverge structurally and are recorded for `.7.3`/later. Frontier → `.7.3`.

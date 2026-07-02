@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **RUST-PARITY.7.2 — first shipped-spec oracle batch landed**
+  (RUST PARSER + CAPTURE INDEXING + ORACLE CORPUS).
+  Rust header-rest parsing now shares the normal body-element parser, so compact header-line lifecycle chains and
+  multiline header-rest lifecycle blocks are parsed and consumed correctly. Rust `entry_group`/`match_group`
+  helpers now expose captures-only, compacted capture lists with `0` as the first participating capture; whole
+  matches stay on `entry_text`/`match_text`.
+
+  **Corpus:** `hlink_substitution` raw-string paths are active through `hlink_raw_string` and
+  `hlink_raw_escaped_brackets`; oracle regeneration now produces **65 fixtures** and the Rust corpus oracle passes
+  over all 65. Broader attempted shipped-spec candidates remain deferred with structural divergence evidence in
+  `docs/tasks/RUST-PARITY.md`.
+
+  **Verification:** focused parser/runtime checks PASS; oracle generation PASS; Rust corpus oracle PASS (65);
+  mdBook already aligned with the capture contract and builds PASS; Knowledge Map, memory, doctrine, diff, and full
+  local CI gates pass in commit workflow.
+
+  **Frontier:** `RUST-PARITY.7.3` — expand the remaining/harder shipped-spec corpus batch with the recorded
+  divergence ledger.
+
 - 2026-07-02: **SCALAREF-RETIREMENT.5 — scalaref retirement tree closed**
   (FINAL DRIFT SWEEP + ROOT CORPUS + LIVE DOCS/KM/TASK INDEX).
   Root language-neutral corpus fixtures now use direct nested access instead of `scalaref(...)`; current-facing
