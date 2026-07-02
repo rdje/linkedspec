@@ -44181,9 +44181,9 @@ SPEC
         ? ($descriptor->{spec}{Top}{meta}{action_rewriter} || {})
         : {};
     is($top_meta->{raw_perl_dependency_count} || 0, 0, 'registered function value call is not raw Perl fallback');
-    is($top_meta->{unresolved_helper_count} || 0, 1, 'registered function value call remains unresolved until execution leaf');
-    is_deeply($top_meta->{unresolved_helpers} || [], ['normalize'], 'registered function unresolved diagnostic names the function');
-    ok(!$top_meta->{language_agnostic_action_ir_ready}, 'registered function call still blocks readiness before execution leaf');
+    is($top_meta->{unresolved_helper_count} || 0, 0, 'registered function value call resolves after the execution leaf');
+    is_deeply($top_meta->{unresolved_helpers} || [], [], 'registered function execution leaves no unresolved helper diagnostic');
+    ok($top_meta->{language_agnostic_action_ir_ready}, 'registered function call no longer blocks readiness after execution leaf');
 
     my @invalid_cases = (
         {
@@ -44226,6 +44226,73 @@ SPEC
             or diag(normalize_error($bad_err));
         like($bad_ctx{last_error}{detail} || '', $case->{detail}, "$case->{label} diagnostic is recorded");
     }
+};
+
+subtest 'user_function_value_call_execution' => sub {
+    plan tests => 14;
+
+    my $spec = <<'SPEC';
+fn normalize(value) { return(trim(value)) }
+fn join_pair(left, right) { return(concat(left, right)) }
+fn final_expr(value) { trim(value) }
+fn choose(value) { return(value); "bad" }
+fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
+fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+fn local_shadow(value) { temp = value; return(temp) }
+Top::
+ /x/ -> Done { set(out, normalize(" x ")); items += join_pair("a","b"); meta["k"] = normalize(" v " ); return([out, final_expr(" y "), join_pair("a","b"), count(mk_items("a","b")), mk_meta("stage","ok").scalaref("stage"), normalize(" Z " ).lowercase(), choose("first"), count(array_copy(items)), hash_copy(meta).scalaref("k"), local_shadow("inner"), temp]) }
+Done::
+ /x/
+SPEC
+
+    my %ctx;
+    my $descriptor = eval { LinkedSpec::Get(\$spec, return_descriptor => 1, runtime_ctx_ref => \%ctx) };
+    my $err = $@;
+    ok(!$err, 'function execution descriptor build does not die') or diag(normalize_error($err));
+    ok(ref($descriptor) eq 'HASH', 'function execution descriptor build returns descriptor hash');
+    ok(!exists($ctx{last_error}), 'function execution build leaves last_error clear');
+
+    my $top_meta = ref($descriptor) eq 'HASH'
+        ? ($descriptor->{spec}{Top}{meta}{action_rewriter} || {})
+        : {};
+    is($top_meta->{raw_perl_dependency_count} || 0, 0, 'registered function calls are not raw Perl fallback');
+    is($top_meta->{unresolved_helper_count} || 0, 0, 'registered function calls do not report unresolved helpers');
+    is_deeply($top_meta->{unresolved_helpers} || [], [], 'registered function calls leave the unresolved helper list empty');
+    ok($top_meta->{language_agnostic_action_ir_ready}, 'registered function value calls stay language-agnostic ready');
+
+    my $src = '';
+    my $source_ok = eval {
+        LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src);
+        1;
+    };
+    ok($source_ok && length($src), 'function execution source generation succeeds and captures parser source')
+        or diag(normalize_error($@));
+    unlike($src, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, 'generated source has no unsupported-helper sentinel for registered calls');
+
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'function execution spec compiles to a parser')
+        or diag(normalize_error($@));
+    my $result = ref($parser) eq 'CODE' ? eval { $parser->(\"x") } : undef;
+    is_deeply(
+        $result,
+        ['x', 'y', 'ab', 2, 'ok', 'z', 'first', 1, 'v', 'inner', undef],
+        'registered functions compose in return, assignment RHS, mutation RHS, helper args, final expr, early return, local scope, and receiver chains',
+    );
+
+    my $bad_arity_spec = <<'SPEC';
+fn normalize(value) { return(trim(value)) }
+Top::
+ /x/ -> Done { return(normalize()) }
+Done::
+ /x/
+SPEC
+    my $bad_descriptor = eval { LinkedSpec::Get(\$bad_arity_spec, return_descriptor => 1) };
+    ok(ref($bad_descriptor) eq 'HASH', 'wrong-arity registered call still builds a diagnostic descriptor');
+    my $bad_meta = ref($bad_descriptor) eq 'HASH'
+        ? ($bad_descriptor->{spec}{Top}{meta}{action_rewriter} || {})
+        : {};
+    is($bad_meta->{raw_perl_dependency_count} || 0, 0, 'wrong-arity registered call is not raw Perl fallback');
+    is_deeply($bad_meta->{unresolved_helpers} || [], ['normalize'], 'wrong-arity registered call reports the registered callee as unresolved');
 };
 
 subtest 'plugin_bridge_dispatch_calls_mechanically_gated_in_plg_corpus' => sub {

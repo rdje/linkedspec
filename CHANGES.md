@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-01 — SPEC-FORMAT-TERSE.4.2.2 — execute Perl user function value calls
+
+**Scope:** Perl compiler registry threading, RuleIR emit context dependencies, ActionIR MethodLowering,
+phase0 execution locks, mdBook, live docs, and Knowledge Map.
+
+**What changed:** Registered exact-arity user-function calls now execute on the Perl reference in value
+positions. The compiler threads the extracted function registry into each rule's ActionIR lowering pass, and
+MethodLowering resolves registered callees before unknown-helper fallback. Generated calls evaluate arguments
+eagerly in the caller context, bind positional parameters in a fresh function-local scope, evaluate the function
+body AST as a value-producing `do { ... }` expression, and return either a final expression or a function-local
+`return(expr)` payload.
+
+**Composability:** Phase0 now locks calls in `return(...)`, assignment RHS, array append RHS, hash mutation
+value, helper arguments, final-expression bodies, non-final function-local `return(expr)`, compatible
+receiver-dot chains from returned values, and local/caller shadowing. Wrong-arity registered calls remain
+unresolved-helper diagnostics with zero raw fallback.
+
+**Boundary:** Standalone user-function call result discard, recursion rejection, hard purity diagnostics,
+unsupported function-body side-effect diagnostics, and Rust parity remain follow-on leaves (`.4.2.3` and `.4.3`).
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.4.2.1 — add Perl user function registry
 
 **Scope:** `specs/spec.spec`, Perl compiler/compiled-state descriptors, new

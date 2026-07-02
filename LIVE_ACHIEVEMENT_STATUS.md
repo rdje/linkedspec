@@ -7,8 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-01: **SPEC-FORMAT-TERSE.4.2.2 — Perl user-function value-call execution landed**
+  (COMPILER REGISTRY THREADING + ACTIONIR METHOD LOWERING + PHASE0 + BOOK/KM/LIVE DOCS).
+  Registered exact-arity `fn name(args) { ... }` calls now execute in Perl value positions instead of remaining
+  unresolved-helper diagnostics. Calls evaluate args eagerly in the caller, bind positional params into fresh
+  function-local lexicals, lower body AST statements inside a value-producing `do { ... }`, and return either a
+  final expression or function-local `return(expr)` payload.
+
+  Phase0 locks composition through `return(...)`, assignment RHS, array append RHS, hash mutation value, helper
+  arguments, returned-value receiver chains, final-expression bodies, non-final function-local returns, and
+  local/caller shadowing. Wrong-arity registered calls remain unresolved-helper metadata with zero raw fallback.
+  Standalone result discard, recursion/purity hardening, unsupported body-effect diagnostics, and Rust parity are
+  still tracked follow-ons.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.4.2.3` (Perl standalone discard, purity diagnostics, and phase0 hardening),
+  then `.4.3.1`, `.4.3.2`, `.3.2.2`, `.3.2.3`.
+
 - 2026-07-01: **SPEC-FORMAT-TERSE.4.2.1 — Perl user-function registry seam landed**
-  (SPEC.SPEC + PERL COMPILER STATE/DESCRIPTOR + PHASE0 + BOOK/KM/LIVE DOCS; **no function-call execution yet**).
+  (SPEC.SPEC + PERL COMPILER STATE/DESCRIPTOR + PHASE0 + BOOK/KM/LIVE DOCS; registry-only leaf).
   `specs/spec.spec` now has an active `function_definition` part for top-level `fn name(args) { body }` and
   dispatches it from `spec_file`. The Perl reference uses a documented temporary pre-bootstrap registry bridge:
   it extracts top-level function definitions, strips them from the source passed to ordinary validation/bootstrap

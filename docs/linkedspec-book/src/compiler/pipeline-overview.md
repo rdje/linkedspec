@@ -80,8 +80,10 @@ diagnose through unresolved-helper metadata instead of becoming generated host-l
 calls. Top-level user-function definitions now have their own registry extraction seam:
 `fn name(args) { body }` definitions are recorded before bootstrap parsing, body payloads
 are parsed as ActionIR `action_block` AST, and the definitions are projected through the
-public descriptor. Function-call execution is deliberately still pending, so registered
-calls continue to diagnose as unresolved helpers until the evaluator leaf lands.
+public descriptor. During rule ActionIR lowering, the compiler threads that registry into
+the value-expression lowerer so registered exact-arity calls execute as value-producing
+expressions. Standalone call discard and purity hardening remain separate follow-on
+surfaces.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl
@@ -126,7 +128,9 @@ ActionIR action-block AST, and blanks the original source region while preservin
 then flows through the existing rule-validation and bootstrap-parser path.
 
 This stage rejects malformed definitions, duplicate function names, reserved names, built-in helper/control-name
-collisions, invalid or duplicate parameters, and later rule-label collisions. It does not execute function calls.
+collisions, invalid or duplicate parameters, and later rule-label collisions. Execution is not done in this
+extraction stage; the registry is passed forward so the rule action-lowering stage can resolve value-position
+calls.
 
 ## Stage 3: validate the source envelope
 
@@ -156,7 +160,8 @@ Top-level `fn name(args) { ... }` function definitions are active in `spec.spec`
 them through a temporary pre-bootstrap registry bridge before this parse stage. The bridge removes function
 definitions from the source handed to the hardcoded bootstrap parser while preserving newlines, then attaches the
 validated registry to compiled state. This keeps the permanent grammar owner in `spec.spec` without making the
-bootstrap parser the lasting owner of `fn` syntax. Function-call execution is still a later stage.
+bootstrap parser the lasting owner of `fn` syntax. The registry is also made available to rule ActionIR lowering,
+where registered value calls are compiled.
 
 ## Stage 5: build compiled rule-table state
 
@@ -172,6 +177,7 @@ That state owns:
 
 - deterministic definition information
 - compiled rule order
+- the user-function registry used by rule action lowering and descriptor projection
 - rules by label
 - redefinition metadata
 - per-rule compiled info such as regexes, handlers, dependency refs, and rule metadata

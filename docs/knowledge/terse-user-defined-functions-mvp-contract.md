@@ -21,10 +21,11 @@ answers:
   - "do user functions have exact arity"
   - "what function name collisions are rejected"
   - "does SPEC-FORMAT-TERSE.4.2.1 execute user functions"
+  - "does SPEC-FORMAT-TERSE.4.2.2 execute user functions"
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, user-functions, value-expressions, receiver-dot, task-tree]
-evidence: "SPEC-FORMAT-TERSE.4 was split/owned on 2026-07-01 after explicit user direction to implement custom/user-defined functions. SPEC-FORMAT-TERSE.4.1 then locked the MVP contract/inventory before code: top-level fn name(args) { ... }, exact explicit arity, eager argument evaluation, fresh function-local parameter/work-variable scope, pure value/block bodies, final-expression or return(expr) result, no implicit caller-state capture, and no recursion/closures/lambdas/currying/host-code escape. Function names share the helper call surface, so definitions must reject collisions with built-in helper/control/lifecycle names, rule labels, reserved runtime symbols, and other functions. User clarification requires function calls to be ordinary value expressions whose results can feed receiver-dot chains, and unused standalone call results to be silently discarded. PERL-ACTIONIR-AST-MIGRATION.5.4 locked permanent fn grammar ownership to specs/spec.spec and proved bootstrap has no current first-class fn support. SPEC-FORMAT-TERSE.4.2.1 landed definition registration only: specs/spec.spec has active function_definition grammar and descriptors expose functions, but registered calls still diagnose as unresolved until .4.2.2."
+evidence: "SPEC-FORMAT-TERSE.4 was split/owned on 2026-07-01 after explicit user direction to implement custom/user-defined functions. SPEC-FORMAT-TERSE.4.1 then locked the MVP contract/inventory before code: top-level fn name(args) { ... }, exact explicit arity, eager argument evaluation, fresh function-local parameter/work-variable scope, pure value/block bodies, final-expression or return(expr) result, no implicit caller-state capture, and no recursion/closures/lambdas/currying/host-code escape. Function names share the helper call surface, so definitions must reject collisions with built-in helper/control/lifecycle names, rule labels, reserved runtime symbols, and other functions. User clarification requires function calls to be ordinary value expressions whose results can feed receiver-dot chains, and unused standalone call results to be silently discarded. PERL-ACTIONIR-AST-MIGRATION.5.4 locked permanent fn grammar ownership to specs/spec.spec and proved bootstrap has no current first-class fn support. SPEC-FORMAT-TERSE.4.2.1 landed definition registration; SPEC-FORMAT-TERSE.4.2.2 landed Perl exact-arity registered value-call execution and receiver-chain composition. Standalone discard and purity hardening remain .4.2.3."
 reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4\\.1|SPEC-FORMAT-TERSE\\.4\\.2\\.1|top-level fn name\\(args\\)|exact arity|fresh function-local|standalone.*discard|collide with built-in helper|registered.*unresolved|Frontier moves to \\.4\\.2\\.2' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md"
 ---
 
@@ -55,5 +56,6 @@ Permanent function syntax belongs in `specs/spec.spec`, not as a lasting hardcod
 bootstrap-parser extension. `PERL-ACTIONIR-AST-MIGRATION.5.4` proved there is no current
 first-class bootstrap support. `SPEC-FORMAT-TERSE.4.2.1` then landed the self-hosted
 `function_definition` grammar and Perl descriptor registry seam through a temporary
-pre-bootstrap extraction bridge. That leaf records definitions only; call execution
-starts at `.4.2.2`.
+pre-bootstrap extraction bridge. `.4.2.2` then made exact-arity registered calls
+executable in Perl value positions and compatible receiver chains. Standalone discard
+and purity hardening remain `.4.2.3`.

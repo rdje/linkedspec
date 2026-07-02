@@ -387,6 +387,8 @@ sub compile_spec_entry {
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_rule_ir', label => $rule_ir->{label} }, DUMP_HIGH);
   return
  }
+ $rule_ir->{function_registry} = $deps->{function_registry}
+  if ref($deps->{function_registry}) eq 'HASH';
 
  LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context');
  my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);

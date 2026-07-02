@@ -21,6 +21,8 @@ use constant {
  DUMP_LOW => 100,
 };
 
+our $__ls_current_function_registry;
+
 #------------------------------------------------------------------------------
 # Function: _actionir_owner_package
 # Purpose : Resolve one local ActionIR owner key to its package name and
@@ -78,7 +80,18 @@ sub _actionir_owner_default_deps {
  my ($owner_key) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $code = _actionir_owner_callback($owner_key, 'default_deps_for_package');
-  return $code->(__PACKAGE__)
+  my $owner_deps = $code->(__PACKAGE__);
+  if (
+   $owner_key eq 'method_lowering'
+   && ref($__ls_current_function_registry) eq 'HASH'
+   && ref($owner_deps) eq 'HASH'
+  ) {
+   $owner_deps = {
+    %$owner_deps,
+    user_function_registry => $__ls_current_function_registry,
+   };
+  }
+  return $owner_deps
  })
 }
 
@@ -1319,6 +1332,9 @@ sub _collect_auto_working_var_decls {
 #------------------------------------------------------------------------------
 sub build_rule_ir_emit_context {
  my ($rule_ir) = @_;
+ local $__ls_current_function_registry = ref($rule_ir->{function_registry}) eq 'HASH'
+  ? $rule_ir->{function_registry}
+  : undef;
  my $label = $rule_ir->{label};
  my $rewrite_rules = _build_action_rewrite_rules($label);
  my $rewrite_diag_acc = _build_rewrite_diag_acc();

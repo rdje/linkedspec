@@ -50,8 +50,9 @@ Top-level `fn name(args) { body }` definitions are now accepted and recorded in 
 reference descriptor registry. Each definition carries params, arity, source/body spans,
 body source, and an ActionIR body AST. The registry rejects duplicate functions,
 reserved names, built-in helper/control collisions, rule-label collisions, and invalid
-or duplicate parameters before runtime. Function-call execution is still pending, so
-registered calls currently remain unresolved-helper diagnostics.
+or duplicate parameters before runtime. The Perl reference now resolves registered
+exact-arity calls during value-expression lowering; wrong-arity registered calls remain
+unresolved-helper diagnostics with zero raw fallback.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
@@ -166,7 +167,8 @@ It provides:
   temporary pre-bootstrap extraction bridge; do not copy that bridge as the language
   contract. The accepted MVP is exact-arity, pure value/block functions with fresh
   function-local scope, no implicit caller capture, and registry resolution before
-  unknown-helper fallback.
+  unknown-helper fallback. Calls execute in value positions and compatible receiver
+  chains; standalone discard and purity hardening are still separate surfaces.
 - `t/phase0_regression.t` — comprehensive regression tests.
 - Phase 0 baseline showing all 20 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
 
@@ -181,10 +183,10 @@ It provides:
    access, assignments, and receiver-dot chains must be represented structurally.
    Text-to-text helper rewriting is not a conforming design for new backends.
 
-3. **User-function registry** — records top-level `fn name(args) { body }` definitions
-   as validated AST-backed records before runtime. The registry must preserve definition
-   order, expose definitions by name, reject helper/rule/reserved-name collisions, and
-   provide the data needed for later value-call execution.
+3. **User-function registry and resolver** — records top-level `fn name(args) { body }`
+   definitions as validated AST-backed records before runtime. The registry must preserve
+   definition order, expose definitions by name, reject helper/rule/reserved-name
+   collisions, and resolve exact-arity value calls before unknown-helper fallback.
 
 4. **Compiler** — transforms parsed entries and helper/action AST nodes into
    HandlerIR nodes. You can reuse the ActionIR lowering approach, but the input to

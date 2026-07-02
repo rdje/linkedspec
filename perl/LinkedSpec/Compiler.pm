@@ -567,6 +567,7 @@ sub run_get_pipeline {
  _trace_log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
 
  my $validation_failed = 0;
+ my $function_registry;
  my ($bootstrap_parse, $compile_spec_entry);
  my $pipeline_setup_ok = eval {
   $parse_mode = _normalize_parse_mode($option->{parse_mode});
@@ -585,7 +586,16 @@ sub run_get_pipeline {
    die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency 'compile_spec_entry'"
     unless defined $compile_spec_entry;
   } else {
-   $compile_spec_entry = sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx, parse_mode => $parse_mode }) };
+   $compile_spec_entry = sub {
+    return $default_compile_spec_entry->(
+     $_[0],
+     {
+      runtime_ctx => $runtime_ctx,
+      parse_mode => $parse_mode,
+      function_registry => $function_registry,
+     },
+    )
+   };
   }
   LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::Validation', 'validate_spec_content');
   1;
@@ -606,7 +616,7 @@ sub run_get_pipeline {
  return undef;
  }
 
- my $function_registry = _call_user_function_registry('empty_function_registry');
+ $function_registry = _call_user_function_registry('empty_function_registry');
  my $compile_spec_content_ref = $spec_content_ref;
  my $function_extract = eval {
   _call_user_function_registry('extract_and_strip_spec_source', $spec_content_ref)

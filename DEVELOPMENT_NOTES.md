@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-01 (SPEC-FORMAT-TERSE.4.2.2 — Perl user-function value-call execution):
+  Registered user-function calls now execute in Perl value positions. Durable points. (1) **Registry threading.**
+  `Compiler` captures the extracted function registry in the `compile_spec_entry` callback; `SpecEntry` places it
+  on `RuleIR`; `RuleIR::EmitContext` localizes it into MethodLowering deps while rewriting rule actions.
+  (2) **Resolution boundary.** `MethodLowering` checks registered callees before unknown-helper fallback, while
+  built-in helper/control names remain excluded by the `.4.2.1` definition validator. Wrong-arity registered
+  calls deliberately stay unresolved-helper diagnostics with zero raw fallback. (3) **Execution shape.**
+  Generated calls are `do { ... }` value expressions: caller arguments are evaluated eagerly into temps, params
+  bind as function-local lexicals, local scalar/array/hash working vars are declared inside the expression, body
+  statements are lowered from the ActionIR AST, and the result is either the final expression or a function-local
+  `return(expr)` payload. (4) **Composition locks.** Phase0 covers return payloads, assignment RHS, array append
+  RHS, hash mutation value, helper arguments, returned-value receiver chains, final-expression bodies, non-final
+  function-local returns, and local/caller shadowing. (5) **Still pending.** Standalone discard, recursion/purity
+  diagnostics, hard unsupported-body rejection, and Rust parity remain tracked follow-ons.
+  Next frontier: `SPEC-FORMAT-TERSE.4.2.3`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.4.2.1 — Perl user-function registry seam):
   The Perl reference now records user-defined function definitions without executing calls yet. Durable points.
   (1) **Grammar owner.** `specs/spec.spec` has an active `function_definition` part for top-level

@@ -65,8 +65,9 @@ It also carries the user-function registry introduced by `SPEC-FORMAT-TERSE.4.2.
 - `functions_by_name` maps each function name to its validated definition record.
 
 Each function definition records its name, ordered parameter list, exact arity, source/body spans, original body
-source, and parsed ActionIR body AST. This is a registry and descriptor seam only: function-call execution is a
-later compiler/runtime step, so registered calls still diagnose as unresolved helpers until that evaluator lands.
+source, and parsed ActionIR body AST. The Perl reference now also passes this registry into rule ActionIR
+lowering, where registered exact-arity calls execute as value-producing expressions. Wrong-arity calls remain
+unresolved-helper diagnostics with zero raw fallback.
 
 ## Per-rule compiled info
 
