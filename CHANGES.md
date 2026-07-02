@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — STAGED-LINKED-PARSING.5.2 — audit function definition AST shape
+
+**Scope:** Read-only architecture audit, ADR, mdBook/backend notes, task-tree frontier, roadmap/live docs, and
+Knowledge Map; no runtime code change.
+
+**What changed:** Audited the function-body staged-prototype seams before implementation. The focused probes show
+that a direct top regex rule cannot read its own captures through `entry_group(...)`; focused function-definition
+AST tests must use a tiny wrapper top rule that dispatches into a normal `function_definition` rule and returns
+the accumulated nodes from `LX`.
+
+**Findings:** The current numbered-capture `specs/spec.spec` function rule mis-shapes zero-argument functions
+because optional captures are compacted, and it does not protect regex literals containing braces. Perl and Rust
+bridges also differ on provenance storage: Perl preserves exact inner body text plus byte spans, while Rust trims
+`body_source` and records line spans.
+
+**Contract:** Added ADR `0017`, defining the neutral target `function_definition` AST shape: `type`, `name`,
+`params`, `arity`, `source_text`, `source_span`, exact inner `body_source`, `body_span`, `body_parse_job`, and
+stitched `body_ast` after dispatch. The variation matrix includes zero/one/many params, whitespace, nesting,
+quoted braces, escaped quotes, regex-brace bodies, adjacency, malformed definitions, duplicates, collisions, and
+reserved names.
+
+**Next:** `STAGED-LINKED-PARSING.5.3` preserves source provenance for function-body payload parse jobs.
+
+**Checks:** mdBook build, Knowledge Map regeneration/check, memory architecture, doctrine registry,
+`git diff --check`, and full local CI pass in the commit workflow.
+
 ## 2026-07-02 — STAGED-LINKED-PARSING.5.1 — select staged prototype payload family
 
 **Scope:** Task-tree split, ADR, mdBook staged parsing/backend text, roadmap/live docs, and Knowledge Map; no

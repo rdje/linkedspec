@@ -118,6 +118,12 @@ nested blocks, quoted strings, regex-looking payloads, adjacency to rules or oth
 definitions, and invalid definitions with expected diagnostics. Use a dedicated small
 spec file/top rule for those focused AST-shape tests when that gives a tighter harness.
 
+For backend implementers, the expected harness is a wrapper top rule that dispatches to
+a normal `function_definition` rule and returns collected nodes. The function rule must
+not rely on compacted numbered captures for optional fields. The neutral returned node
+uses parsed parameter arrays, exact inner body text, neutral source/body spans, a
+function-body parse-job field, and a stitched body AST after dispatch.
+
 Spec import/composition is a separate backend conformance target once implemented. The
 accepted design uses file-scope `import "path.spec" as alias` and
 `include "path.spec"` directives. `import` creates a qualified namespace such as

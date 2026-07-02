@@ -133,6 +133,15 @@ and malformed definitions where those forms should diagnose. A dedicated small s
 file/top rule is appropriate for these focused AST-shape tests; the whole
 `specs/spec.spec` parser is not the only valid test harness.
 
+The `.5.2` audit fixes the expected harness and target shape before code. A focused
+function-definition AST test should dispatch from a wrapper top rule into a normal
+`function_definition` rule; a direct top regex rule cannot read its own captures through
+`entry_group(...)`. Optional fields should use named captures or equivalent structured
+fields, because compacted numbered captures mis-shape zero-argument functions. The
+target node carries `type`, `name`, parsed `params`, `arity`, exact `source_text`,
+neutral `source_span`, exact inner `body_source`, `body_span`, a `body_parse_job`, and
+the stitched `body_ast` after dispatch.
+
 The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
 Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source
 provenance, deterministic parser resolution, and result stitching behavior.

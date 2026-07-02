@@ -7,6 +7,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.5.2 — function-definition AST-shape audit completed**
+  (READ-ONLY AUDIT + ADR + MDBOOK + KNOWLEDGE MAP; **no runtime code change**).
+  The next staged prototype seam is now specified before code.
+
+  **Harness:** focused AST-shape tests must use a dedicated small spec/top rule: a wrapper top rule dispatches
+  into a normal `function_definition` rule and returns collected nodes from `LX`. Direct top regex rules cannot
+  read their own captures through `entry_group(...)`.
+
+  **Findings:** the current numbered-capture `specs/spec.spec` rule mis-shapes zero-argument functions because
+  optional captures are compacted. It also fails/truncates regex literals containing braces in function bodies.
+  Current Perl/Rust bridges differ on exact body text and span storage, so staged provenance must be neutral.
+
+  **Contract:** ADR `0017` defines the target returned node with `type`, `name`, `params`, `arity`,
+  `source_text`, `source_span`, exact inner `body_source`, `body_span`, `body_parse_job`, and stitched `body_ast`
+  after dispatch.
+
+  **Verification:** mdBook build PASS; Knowledge Map, memory, doctrine, and diff gates PASS; full local CI PASS
+  with phase0 1015 green.
+
+  **Frontier:** `STAGED-LINKED-PARSING.5.3` — preserve source provenance for function-body payload parse jobs.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.5.1 — staged prototype payload selected and split**
   (TASK TREE + ADR + MDBOOK + KNOWLEDGE MAP; **no runtime code change**).
   The first prototype payload family is user-defined function body text. `specs/spec.spec` already extracts

@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.5.2 — function-definition AST-shape audit):
+  The function-body prototype seam is now audited before code. Durable points. (1) **Harness shape.** A direct
+  top regex rule cannot read its own captures through `entry_group(...)`; focused AST tests need a tiny wrapper
+  top rule that dispatches to a normal `function_definition` rule and returns collected nodes from `LX`. (2)
+  **Current self-hosted rule gaps.** The current `specs/spec.spec` rule uses numbered captures across an optional
+  parameter list, so zero-arg functions compact captures and mis-shape as `params = body`, `body = null`. It also
+  does not protect regex literals containing braces, so `/}/` truncates and `/{/` can miss the body. (3) **Bridge
+  divergence.** Perl stores exact inner body text and byte spans; Rust trims `body_source` and stores line spans.
+  The staged contract must define neutral provenance instead of copying either shape. (4) **Target AST.** ADR
+  `0017` defines the expected function-definition node: `type`, `name`, `params`, `arity`, `source_text`,
+  `source_span`, exact inner `body_source`, `body_span`, `body_parse_job`, and stitched `body_ast` after dispatch.
+  (5) **Variation matrix.** The proof must cover zero/one/many params, whitespace, functions before/between rules,
+  nested braces, quoted braces, escaped quotes, regex-brace bodies, adjacency, malformed definitions, duplicates,
+  collisions, and reserved names.
+  Next frontier: `STAGED-LINKED-PARSING.5.3`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.5.1 — prototype split and payload selection):
   The broad prototype leaf is now split before code. Durable points. (1) **First payload family.** The prototype
   targets user-defined function body text because `specs/spec.spec` already extracts `fn name(args) { body }` as a
