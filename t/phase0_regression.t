@@ -44131,8 +44131,112 @@ subtest 'fn_definition_grammar_is_not_bootstrap_owned' => sub {
         'bootstrap parse result does not contain a structured function-definition node or function payload');
 };
 
+subtest 'user_function_definition_spec_ast_shape' => sub {
+    my $user_function_spec_path = File::Spec->catfile($spec_dir, 'user_function_definition.spec');
+    my $user_function_spec = slurp($user_function_spec_path);
+
+    unlike($user_function_spec, qr/\b(?:declare|array|scalar|hash|scalaref)\s*\(/,
+        'user_function_definition.spec does not use legacy typed-wrapper constructs');
+
+    my $parser = eval { LinkedSpec::Get(\$user_function_spec, top_rule => 'user_function_definitions') };
+    my $compile_err = $@;
+    ok(ref($parser) eq 'CODE', 'user_function_definition.spec compiles to a parser')
+        or diag(normalize_error($compile_err));
+
+    my $input = <<'SPEC';
+fn no_args() { return("ok") }
+fn empty_spaces( ) { return("ok") }
+fn spaced( left , right ) { return(cat(left, right)) }
+fn one(value) { return(value) }
+fn pair(left, right) { return(cat(left, right)) }
+fn multiline(value) {
+ value.trim().lowercase()
+}
+fn nested(value) { if(value) { return({ "kind" => value }) } else { return([]) } }
+fn string_braces(value) { return("{not block}") }
+fn regex_body(value) { return(matches(value, /}/)) }
+fn direct_shapes(value) { return([value, { "kind" => value }]) }
+fn assign_value(value) { return(out = value) }
+fn hash_set(key, value) { meta[key] = value; return(meta[key]) }
+fn adjacent_braces() { {}{} }
+
+Top::
+ /x/
+SPEC
+
+    my $ast = eval { $parser->(\$input) };
+    my $parse_err = $@;
+    ok(!$parse_err && ref($ast) eq 'ARRAY', 'user function definition spec parses a multi-definition sample')
+        or diag(normalize_error($parse_err));
+    is(scalar(@$ast), 13, 'spec parser returns one AST node per user function definition');
+    is_deeply([map { $_->{name} } @$ast],
+        [qw(no_args empty_spaces spaced one pair multiline nested string_braces regex_body direct_shapes assign_value hash_set adjacent_braces)],
+        'returned AST preserves source order');
+
+    my $no_args = $ast->[0];
+    is($no_args->{type}, 'function_definition', 'AST node type is function_definition');
+    is($no_args->{kind}, 'user_function_definition', 'AST node kind is user_function_definition');
+    is_deeply($no_args->{params}, [], 'zero-arg function returns an empty params array');
+    is($no_args->{arity}, 0, 'zero-arg function returns arity 0');
+    is($no_args->{body_source}, ' return("ok") ', 'zero-arg function body source preserves exact text');
+    is($no_args->{source_span}{start}, index($input, 'fn no_args'), 'source_span start is exact');
+    is($no_args->{source_span}{end}, index($input, "\nfn empty_spaces"), 'source_span end is exact half-open offset');
+
+    my $empty_spaces = $ast->[1];
+    is_deeply($empty_spaces->{params}, [], 'empty parameter list may contain whitespace');
+
+    my $spaced = $ast->[2];
+    is_deeply($spaced->{params}, [qw(left right)], 'spaced parameter list trims inner whitespace');
+
+    my $pair = $ast->[4];
+    is_deeply($pair->{params}, [qw(left right)], 'multi-param function params are split and trimmed');
+    is($pair->{arity}, 2, 'multi-param function arity is recorded');
+    is($pair->{body_payload}{payload_kind}, 'function_body', 'body payload identifies function body payload kind');
+    is_deeply($pair->{body_payload}{parent_ast_path}, ['functions', '__pending_source_order__', 'body_source'],
+        'direct spec parser returns pending source-order parent path before registry annotation');
+    is($pair->{body_payload}{text}, $pair->{body_source}, 'body payload text equals body_source');
+    is_deeply($pair->{body_payload}{source_span}, $pair->{body_span}, 'body payload span equals body_span');
+    is_deeply($pair->{body_payload}{provenance},
+        [{ kind => 'source_slice', source_span => $pair->{body_span} }],
+        'body payload provenance points at the exact source slice');
+
+    my $multiline = $ast->[5];
+    is($multiline->{body_source}, "\n value.trim().lowercase()\n", 'multiline function body preserves newlines');
+    ok($multiline->{body_span}{line_end} > $multiline->{body_span}{line_start},
+        'multiline function body span records multiple lines');
+
+    like($ast->[6]{body_source}, qr/return\(\{ "kind" => value \}\)/,
+        'nested brace body is captured as body text');
+    like($ast->[7]{body_source}, qr/\{not block\}/,
+        'braces inside strings do not terminate the function body');
+    like($ast->[8]{body_source}, qr{/\}/},
+        'braces inside regex literals do not terminate the function body');
+    is($ast->[12]{body_source}, ' {}{} ',
+        'adjacent nested body_brace matches do not consume the function close edge');
+
+    my $malformed_input = "fn f(x)\nTop::\n /x/\n";
+    my $malformed_ast = eval { $parser->(\$malformed_input) };
+    my $malformed_err = $@;
+    ok(!$malformed_err && ref($malformed_ast) eq 'ARRAY', 'malformed function text is parsed into diagnostic AST');
+    is($malformed_ast->[0]{type}, 'function_definition_error', 'malformed function returns a function_definition_error node');
+    like($malformed_ast->[0]{message}, qr/invalid user function definition/,
+        'malformed function diagnostic message is carried by the AST node');
+
+    my $unbalanced_input = "fn bad() { { }\nTop::\n /x/\n";
+    my $unbalanced_ast = eval { $parser->(\$unbalanced_input) };
+    my $unbalanced_err = $@;
+    ok(!$unbalanced_err && ref($unbalanced_ast) eq 'ARRAY',
+        'unbalanced nested body brace is parsed into diagnostic AST instead of a null node');
+    is($unbalanced_ast->[0]{type}, 'function_definition_error',
+        'unbalanced nested body brace returns a function_definition_error node');
+    like($unbalanced_ast->[0]{message}, qr/unbalanced user function definition/,
+        'unbalanced nested body brace diagnostic names the unbalanced function definition');
+
+    done_testing();
+};
+
 subtest 'user_function_registry_descriptor_seam' => sub {
-    plan tests => 31;
+    plan tests => 43;
 
     my $spec = <<'SPEC';
 fn normalize(value) {
@@ -44172,6 +44276,22 @@ SPEC
     is_deeply($functions->{join_pair}{params}, ['left', 'right'], 'second function params are recorded in order');
     ok($functions->{normalize}{source_span}{line_start} == 1 && $functions->{join_pair}{source_span}{line_start} > 1,
         'function source spans preserve original line positions');
+    my $normalize_payload = $functions->{normalize}{body_payload} || {};
+    my $normalize_body_start = index($spec, $functions->{normalize}{body_source});
+    my $normalize_body_end = $normalize_body_start + length($functions->{normalize}{body_source});
+    ok(ref($normalize_payload) eq 'HASH', 'normalize body payload is exposed as a neutral record');
+    is($normalize_payload->{kind}, 'staged_payload', 'normalize body payload records neutral payload kind');
+    is($normalize_payload->{payload_kind}, 'function_body', 'normalize body payload records function_body payload kind');
+    is($normalize_payload->{node_kind}, 'function_definition', 'normalize body payload records owning node kind');
+    is_deeply($normalize_payload->{parent_ast_path}, ['functions', '0', 'body_source'], 'normalize body payload parent path is source-order based');
+    is($normalize_payload->{function_name}, 'normalize', 'normalize body payload records function name');
+    is_deeply($normalize_payload->{params}, ['value'], 'normalize body payload records params');
+    is($normalize_payload->{arity}, 1, 'normalize body payload records arity');
+    is($normalize_payload->{text}, $functions->{normalize}{body_source}, 'normalize body payload preserves exact body text');
+    is($normalize_payload->{source_span}{start}, $normalize_body_start, 'normalize body payload start offset is exact');
+    is($normalize_payload->{source_span}{end}, $normalize_body_end, 'normalize body payload end offset is exact');
+    is_deeply($normalize_payload->{provenance}, [{ kind => 'source_slice', source_span => $normalize_payload->{source_span} }],
+        'normalize body payload records source-slice provenance');
     is_deeply($descriptor->{meta}{compiled_rule_order}, ['Top', 'Done'], 'function stripping preserves ordinary rule order');
 
     my $top_meta = ref($descriptor->{spec}{Top}{meta}) eq 'HASH'
@@ -44211,7 +44331,7 @@ SPEC
         {
             label => 'malformed function',
             spec => "fn f(x)\nTop::\n /x/\n",
-            detail => qr/expected body block after function 'f' parameter list/,
+            detail => qr/invalid user function definition/,
         },
     );
 

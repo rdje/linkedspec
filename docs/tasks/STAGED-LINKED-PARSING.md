@@ -186,11 +186,69 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.5.2 - audit function definition AST shape`
 
 - ID: `STAGED-LINKED-PARSING.5.3`
+  Status: `active`
+  Goal: Replace host-language user-function definition parsing with a
+    spec-defined parser AST, then preserve that AST as the source-provenance
+    payload for later parse-job dispatch.
+  Children: `.5.3.1` (Perl reference), `.5.3.2` (remaining host-language
+    bridge retirement, starting Rust)
+
+- ID: `STAGED-LINKED-PARSING.5.3.1`
+  Status: `done`
+  Goal: Perl reference — consume a spec-defined user-function definition AST.
+  Acceptance: `specs/user_function_definition.spec` is the executable grammar
+    owner for `fn name(params) { body }` definition shells; it returns a
+    source-ordered `function_definition` AST with parsed params, arity, exact
+    source/body text, source/body spans, source-slice provenance, and neutral
+    `body_payload`; the Perl registry consumes that AST rather than raw-scanning
+    definition syntax; focused tests assert the predicted returned AST shape
+    across many definition variations; the grammar uses linked opener/closer
+    body rules where they make the definition parser easier to read or more
+    predictable, while still allowing focused regex rules for local lexical
+    tokens.
+  Verification: **DONE 2026-07-02.** Added
+    `specs/user_function_definition.spec` and direct AST-shape tests for
+    zero-arg, whitespace-param, multi-param, multiline, nested-brace,
+    string-brace, regex-brace, direct-shape, assignment, hash-index,
+    adjacent-nested-brace, malformed, and unbalanced-body cases. The new spec
+    uses direct `[...]` / `{ ... }` shapes and receiver/bare-variable forms; it
+    does not use `declare(...)`, `array(...)`, `scalar(...)`, `hash(...)`, or
+    `scalaref(...)`. `LinkedSpec::UserFunctionRegistry` now loads that spec
+    parser, executes it over the source spec, validates the returned AST,
+    post-annotates the source-order parent path, and strips definitions before
+    bootstrap parsing. The previous raw Perl function-definition scanner
+    helpers were removed. Runtime user-function execution remains unchanged
+    after the definition AST is returned and the existing ActionIR body AST is
+    stitched in. The uncommitted Rust raw-parser payload expansion was removed
+    from this slice. A first monolithic-body regex draft was replaced before
+    commit after the focused variation test exposed a runtime hang; the active
+    spec now follows LinkedSpec's existing opener/closer plus linked-body-rule
+    idiom. Generated-handler debug confirmed `body_brace` starts only on `{`
+    and `function_definition[1]` owns the outer `}` close edge; focused tests
+    lock both adjacent nested braces and unbalanced nested-body diagnostics.
+    Checks passed: `perl -Iperl -c perl/LinkedSpec/UserFunctionRegistry.pm`,
+    `perl -Iperl -c t/phase0_regression.t`, direct parser AST probes,
+    generated-handler debug dump, focused descriptor payload probe,
+    `perl -Iperl t/phase0_regression.t` (phase0 1016 green), `mdbook build
+    docs/linkedspec-book`, `knowledge-map/scripts/check_knowledge_map.sh`,
+    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
+    `git diff --check`, and `bash tools/run_ci_local.sh`.
+  Commit: `STAGED-LINKED-PARSING.5.3.1 - consume spec-defined function AST in Perl`
+
+- ID: `STAGED-LINKED-PARSING.5.3.2`
   Status: `pending`
-  Goal: Preserve source provenance for function-body payload parse jobs.
-  Acceptance: Stage-N user-function records expose neutral body payload text,
-    source span/provenance, parent AST path, function name, params, and payload
-    kind without making Perl or Rust storage details part of the contract.
+  Goal: Retire remaining host-language user-function definition parser bridges,
+    starting with Rust, so user-defined function definitions are parsed only by
+    the spec-defined parser contract.
+  Acceptance: No backend maintains a competing raw grammar owner for
+    `fn name(params) { body }` definition shells; Rust and any other active
+    backend consume the same implementation-language-neutral AST contract from
+    `specs/user_function_definition.spec` or a derived spec parser; parity
+    tests prove direct `[...]` / `{ ... }` shape literals and returned
+    `function_definition` AST shape are supported on the active variants;
+    further grammar simplification is accepted when it improves readability or
+    predictability, without treating complex regexes as forbidden when they are
+    the cleanest local extractor.
   Verification: `pending`
   Commit: `pending`
 
@@ -230,7 +288,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `STAGED-LINKED-PARSING.5.3` | `pending` | The AST-shape audit identified the neutral function-definition payload/provenance shape; next preserve that source provenance in the implementation seam before parse-job dispatch. |
+| 1 | `STAGED-LINKED-PARSING.5.3.2` | `pending` | Retire remaining host-language user-function definition parser bridges, starting with Rust, so active variants converge on the spec-owned AST contract before parse-job marker work continues. |
 
 ## Decisions
 
@@ -287,11 +345,28 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   source-ordered array elements with `type`, `name`, `params`, `arity`,
   `source_text`, `source_span`, exact inner `body_source`, `body_span`, a
   function-body parse job, and the staged `body_ast` once dispatch completes.
+- `2026-07-02`: `specs/user_function_definition.spec` is the focused executable
+  grammar owner for top-level user-function definition shells. It returns
+  source-ordered `function_definition` AST nodes with exact source/body text,
+  parsed params, arity, source/body spans, source-slice provenance, and a
+  neutral `body_payload`. New parser specs must use the modern direct-shape /
+  receiver surface where implemented, not legacy typed-wrapper ceremony.
+- `2026-07-02`: Consuming the spec-defined AST in one backend is not enough to
+  close the language-neutral contract. Remaining host-language user-function
+  definition parser bridges, starting with Rust's pre-existing bridge, are
+  explicit debt under `.5.3.2`.
+- `2026-07-02`: Complex regexes are allowed when they are the cleanest local
+  extractor, but the first monolithic-body `function_definition` matcher was
+  hard to read and triggered a focused variation-test hang. The `.5.3.1`
+  implementation therefore uses LinkedSpec's opener/closer plus linked
+  body-island rules for the function body, while keeping small regex rules for
+  local lexical tokens.
 
 ## Open Questions
 
-- The exact implementation placement for the neutral source-span fields is
-  deferred to `.5.3`.
+- The exact parse-job marker/sidecar schema is deferred to `.5.4`; `.5.3.1`
+  defines and consumes the user-function definition AST on the Perl reference,
+  while `.5.3.2` closes remaining host-language parser bridge debt first.
 
 ## Blockers
 
@@ -307,6 +382,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `2026-07-02` | `STAGED-LINKED-PARSING.4` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — mdBook builds; Knowledge Map is in sync; memory/doctrine/diff gates pass; full local CI passes with phase0 1015 green. |
 | `2026-07-02` | `STAGED-LINKED-PARSING.5.1` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — broad prototype leaf split; function-body payload selected; ADR `0016`, mdBook, Knowledge Map, roadmap/live docs, task index, and memory synced; no runtime code change; full local CI passes with phase0 1015 green. |
 | `2026-07-02` | `STAGED-LINKED-PARSING.5.2` | `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — function-definition AST-shape audit recorded; wrapper-top small-spec harness, named-capture requirement, zero-arg/regex-brace current gaps, neutral AST/provenance target, ADR `0017`, mdBook, Knowledge Map, roadmap/live docs, task index, and memory synced; no runtime code change; full local CI passes with phase0 1015 green. |
+| `2026-07-02` | `STAGED-LINKED-PARSING.5.3.1` | `perl -Iperl -c perl/LinkedSpec/UserFunctionRegistry.pm`; `perl -Iperl -c t/phase0_regression.t`; direct `specs/user_function_definition.spec` AST probes; generated-handler debug dump; focused descriptor payload probe; `perl -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — `specs/user_function_definition.spec` returns the predicted function-definition AST shape with linked body-island rules; `body_brace` does not consume the outer close edge; malformed/unbalanced definitions return diagnostic AST nodes; Perl registry consumes the spec-returned AST; legacy Perl scanner helpers removed; remaining Rust bridge retirement is split to `.5.3.2`. |
 
 ## Commit Log
 
@@ -318,6 +394,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `STAGED-LINKED-PARSING.4` | `STAGED-LINKED-PARSING.4 - specify staged parser registry dispatch` | ADR/book/KM/live-doc design adoption; no runtime code change. |
 | `STAGED-LINKED-PARSING.5.1` | `STAGED-LINKED-PARSING.5.1 - select staged prototype payload family` | Payload-family selection and prototype split; no runtime code change. |
 | `STAGED-LINKED-PARSING.5.2` | `STAGED-LINKED-PARSING.5.2 - audit function definition AST shape` | Function-definition AST-shape audit and neutral target contract; no runtime code change. |
+| `STAGED-LINKED-PARSING.5.3.1` | `STAGED-LINKED-PARSING.5.3.1 - consume spec-defined function AST in Perl` | `specs/user_function_definition.spec` returns the definition AST; Perl registry consumes it and no longer raw-scans function definition syntax. |
 
 ## Changelog
 
@@ -327,3 +404,4 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 - `2026-07-02`: `.4` done — staged parser registry/dispatch contract specified before implementation; frontier moves to `.5`.
 - `2026-07-02`: `.5.1` done — broad prototype split; function-body payload selected as first staged prototype target; all follow-up leaves must stay implementation-language neutral; frontier moves to `.5.2`.
 - `2026-07-02`: `.5.2` done — function-definition AST-shape audit captured wrapper-top harness, named-capture requirement, current zero-arg/regex-brace gaps, neutral target AST/provenance shape, and variation matrix; frontier moves to `.5.3`.
+- `2026-07-02`: `.5.3.1` done — `specs/user_function_definition.spec` returns the predicted user-function definition AST shape and the Perl registry consumes that spec-returned AST instead of raw-scanning function definition syntax; frontier moves to `.5.3.2`.

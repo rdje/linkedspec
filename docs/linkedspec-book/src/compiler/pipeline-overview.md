@@ -142,6 +142,22 @@ target node carries `type`, `name`, parsed `params`, `arity`, exact `source_text
 neutral `source_span`, exact inner `body_source`, `body_span`, a `body_parse_job`, and
 the stitched `body_ast` after dispatch.
 
+The current Perl reference bridge now consumes a focused spec-defined parser for the
+definition shell: `specs/user_function_definition.spec`. That spec returns the
+pre-dispatch `function_definition` AST, including a neutral `body_payload` with
+`kind = staged_payload`, `node_kind = function_definition`,
+`payload_kind = function_body`, exact payload text, half-open source/body spans,
+source-slice provenance, a source-order parent path, and the function name, params,
+and arity. The function shell uses linked opener/closer rules: nested `body_brace`
+islands handle inner `{ ... }` blocks, while `function_definition[1]` owns the outer
+close edge. Quoted strings, comments, and regex literals are matched as body islands
+before brace dispatch so braces inside them do not end the function. The Perl registry
+validates that returned AST, annotates the source-order parent path, then stitches in
+the existing body ActionIR AST. Current shipped parsers do not yet dispatch the body
+payload through a next-stage `.spec`; remaining host-language definition-parser
+bridges, starting with Rust, are explicit follow-on debt before parse-job marker work
+continues.
+
 The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
 Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source
 provenance, deterministic parser resolution, and result stitching behavior.

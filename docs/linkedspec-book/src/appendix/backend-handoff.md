@@ -124,6 +124,18 @@ not rely on compacted numbered captures for optional fields. The neutral returne
 uses parsed parameter arrays, exact inner body text, neutral source/body spans, a
 function-body parse-job field, and a stitched body AST after dispatch.
 
+The current provenance seam is the neutral `body_payload` returned by
+`specs/user_function_definition.spec`. It is not a backend callback and it is not yet
+a dispatched parse job. It contains exact function-body text, half-open source span,
+source-slice provenance, source-order parent path, function name, params, arity,
+`node_kind = function_definition`, and `payload_kind = function_body`. The Perl
+reference consumes that spec-returned AST today. The spec's body shell is a linked
+opener/closer parse: `body_brace` handles nested brace islands, quoted strings,
+comments, and regex literals are protected before brace dispatch, and the outer close
+is matched by `function_definition[1]`. Other backend bridges must converge on the
+same spec-defined AST contract instead of maintaining host-language definition grammars
+before the parse-job sidecar becomes portable.
+
 Spec import/composition is a separate backend conformance target once implemented. The
 accepted design uses file-scope `import "path.spec" as alias` and
 `include "path.spec"` directives. `import` creates a qualified namespace such as

@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (STAGED-LINKED-PARSING.5.3.1 — spec-defined user-function definition AST):
+  User-function definition parsing now has an executable spec-owned reference. `specs/user_function_definition.spec`
+  parses the `fn name(params) { body }` shell and returns `function_definition` AST nodes with exact source/body
+  text, spans, provenance, parsed params, arity, and a neutral `body_payload`. The new spec uses direct shape
+  literals and receiver/bare-variable forms, not `declare(...)`, `array(...)`, `scalar(...)`, `hash(...)`, or
+  `scalaref(...)`. It uses a linked opener/closer shell for the outer function body and linked body-island rules
+  for nested braces, strings, comments, and regex literals. Generated-handler debug showed `body_brace` can start
+  only on `{`, while `function_definition[1]` owns the outer `}` close edge; focused tests lock adjacent nested
+  braces and unbalanced nested-body diagnostics. The Perl registry bridge now consumes that returned AST,
+  validates its shape, post-annotates the source-order parent path, and strips function definitions before
+  bootstrap parsing; the previous raw Perl scanner functions are gone. Runtime execution is unchanged: function
+  bodies still run through the existing ActionIR body parser after the definition AST is returned. The uncommitted
+  Rust body-payload/raw-parser expansion was removed from this slice; the remaining Rust host-language
+  function-definition bridge is now the next explicit retirement frontier.
+  Next frontier: `STAGED-LINKED-PARSING.5.3.2`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.5.2 — function-definition AST-shape audit):
   The function-body prototype seam is now audited before code. Durable points. (1) **Harness shape.** A direct
   top regex rule cannot read its own captures through `entry_group(...)`; focused AST tests need a tiny wrapper

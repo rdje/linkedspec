@@ -7,6 +7,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **STAGED-LINKED-PARSING.5.3.1 — spec-defined function-definition AST consumed by Perl**
+  (SPEC PARSER + PERL REGISTRY BRIDGE + TESTS + MDBOOK + KNOWLEDGE MAP; runtime behavior unchanged).
+  `specs/user_function_definition.spec` is now the executable grammar owner for the `fn name(params) { body }`
+  shell. It returns source-ordered `function_definition` AST nodes with parsed params, arity, exact source/body
+  text, half-open source/body spans, source-slice provenance, and a neutral `body_payload`.
+
+  **Spec surface:** The new spec uses direct `[...]` / `{ ... }` shapes and receiver/bare-variable forms. It does
+  not use `declare(...)`, `array(...)`, `scalar(...)`, `hash(...)`, or `scalaref(...)`.
+
+  **Perl bridge:** `LinkedSpec::UserFunctionRegistry` now loads the spec parser, consumes the returned AST,
+  validates the shape, post-annotates the source-order parent path, and strips definitions before bootstrap
+  parsing. The previous raw Perl function-definition scanner is removed.
+
+  **Parser shape:** The first monolithic-body regex draft was replaced before commit. The focused spec now uses a
+  linked opener/closer shell plus body-island rules for nested braces, strings, comments, and regex literals.
+  Generated-handler debug and focused tests show adjacent `body_brace` matches do not consume the outer
+  `function_definition[1]` close edge; unbalanced nested bodies return a diagnostic AST instead of `null`.
+
+  **Verification:** direct spec-parser AST probe PASS; focused Perl descriptor payload probe PASS; mdBook,
+  Knowledge Map, memory, doctrine, and diff gates PASS; full local CI PASS.
+
+  **Frontier:** `STAGED-LINKED-PARSING.5.3.2` — retire remaining host-language definition parser bridges,
+  starting with Rust, in favor of the same spec-owned AST contract.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.5.2 — function-definition AST-shape audit completed**
   (READ-ONLY AUDIT + ADR + MDBOOK + KNOWLEDGE MAP; **no runtime code change**).
   The next staged prototype seam is now specified before code.

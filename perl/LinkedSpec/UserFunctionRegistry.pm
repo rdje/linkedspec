@@ -15,6 +15,9 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
+my $__function_definition_parser;
+my $__loading_function_definition_parser = 0;
+
 sub empty_function_registry {
  return {
   kind => 'user_function_registry',
@@ -58,31 +61,20 @@ sub extract_and_strip_spec_source {
   unless ref($spec_content_ref) eq 'SCALAR';
 
  my $source = $$spec_content_ref;
- my $stripped = $source;
  my $registry = empty_function_registry();
- my $len = length($source);
- my $idx = 0;
- my $line_can_start_token = 1;
- my $scan = _new_top_level_scan_state();
+ return { stripped_source => $source, registry => $registry }
+  if $__loading_function_definition_parser;
 
- while ($idx < $len) {
-  if ($line_can_start_token && _scan_is_clear($scan) && ($scan->{brace_depth} || 0) == 0) {
-   my $candidate = $idx;
-   ++$candidate while $candidate < $len && substr($source, $candidate, 1) =~ /[ \t]/o;
-   if (_starts_with_function_keyword($source, $candidate)) {
-    my $definition = _parse_function_definition_at($source, $candidate);
-    _record_function_definition($registry, $definition);
-    substr($stripped, $definition->{source_span}{start}, $definition->{source_span}{end} - $definition->{source_span}{start})
-     = _blank_preserving_newlines(substr($source, $definition->{source_span}{start}, $definition->{source_span}{end} - $definition->{source_span}{start}));
-    $idx = $definition->{source_span}{end};
-    $line_can_start_token = 0;
-    next;
-   }
-  }
-
-  my ($next_idx, $next_line_can_start_token) = _advance_top_level_scan($source, $idx, $scan, $line_can_start_token);
-  $idx = $next_idx;
-  $line_can_start_token = $next_line_can_start_token;
+ my $definitions = _parse_function_definition_asts($spec_content_ref);
+ my $stripped = $source;
+ foreach my $node (@$definitions) {
+  _die_function_definition_error_node($source, $node)
+   if _is_function_definition_error_node($node);
+  my $definition = _normalize_function_definition_ast($source, $node, scalar(@{$registry->{order}}));
+  _record_function_definition($registry, $definition);
+  my $span = $definition->{source_span};
+  substr($stripped, $span->{start}, $span->{end} - $span->{start})
+   = _blank_preserving_newlines(substr($source, $span->{start}, $span->{end} - $span->{start}));
  }
 
  return {
@@ -108,153 +100,107 @@ sub validate_registry_against_rule_labels {
  return 1
 }
 
-sub _new_top_level_scan_state {
- return {
-  brace_depth => 0,
-  in_single => 0,
-  in_double => 0,
-  in_regex => 0,
-  in_comment => 0,
-  escape_next => 0,
+sub _parse_function_definition_asts {
+ my ($spec_content_ref) = @_;
+ my $parser = _function_definition_parser();
+ my $input = $$spec_content_ref;
+ my $ast = eval { $parser->(\$input) };
+ my $error = $@;
+ if ($error) {
+  die "Invalid user function definition parser failure: $error";
  }
+ return [] unless defined $ast;
+ die "Invalid user function definition parser result: expected ARRAY AST\n"
+  unless ref($ast) eq 'ARRAY';
+ return $ast
 }
 
-sub _scan_is_clear {
- my ($scan) = @_;
- return !$scan->{in_single} && !$scan->{in_double} && !$scan->{in_regex} && !$scan->{in_comment}
+sub _function_definition_parser {
+ return $__function_definition_parser
+  if ref($__function_definition_parser) eq 'CODE';
+ die "Recursive user function definition parser load\n"
+  if $__loading_function_definition_parser;
+
+ my $previous_loading_state = $__loading_function_definition_parser;
+ $__loading_function_definition_parser = 1;
+ my ($spec_source, $parser);
+ my $load_ok = eval {
+  $spec_source = _load_function_definition_spec_source();
+  $parser = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__,
+   'LinkedSpec',
+   'Get',
+   \$spec_source,
+   top_rule => 'user_function_definitions',
+  );
+  1
+ };
+ my $load_error = $@;
+ $__loading_function_definition_parser = $previous_loading_state;
+ die $load_error unless $load_ok;
+ die "Could not compile specs/user_function_definition.spec into a parser\n"
+  unless ref($parser) eq 'CODE';
+ $__function_definition_parser = $parser;
+ return $__function_definition_parser
 }
 
-sub _starts_with_function_keyword {
- my ($source, $idx) = @_;
- return 0 unless defined($idx) && $idx >= 0 && $idx < length($source);
- return 0 unless substr($source, $idx, 2) eq 'fn';
- my $next = substr($source, $idx + 2, 1);
- return (!defined($next) || $next !~ /[A-Za-z0-9_]/o) ? 1 : 0
+sub _load_function_definition_spec_source {
+ my $path = _function_definition_spec_path();
+ open my $fh, '<', $path
+  or die "Could not read user function definition spec '$path': $!\n";
+ local $/;
+ return <$fh>
 }
 
-sub _advance_top_level_scan {
- my ($source, $idx, $scan, $line_can_start_token) = @_;
- my $ch = substr($source, $idx, 1);
-
- if ($scan->{in_comment}) {
-  if ($ch eq "\n") {
-   $scan->{in_comment} = 0;
-   return ($idx + 1, 1);
-  }
-  return ($idx + 1, $line_can_start_token);
- }
-
- if ($scan->{in_single} || $scan->{in_double} || $scan->{in_regex}) {
-  if ($scan->{escape_next}) {
-   $scan->{escape_next} = 0;
-  } elsif ($ch eq '\\') {
-   $scan->{escape_next} = 1;
-  } elsif ($scan->{in_single} && $ch eq "'") {
-   $scan->{in_single} = 0;
-  } elsif ($scan->{in_double} && $ch eq '"') {
-   $scan->{in_double} = 0;
-  } elsif ($scan->{in_regex} && $ch eq '/') {
-   $scan->{in_regex} = 0;
-  } elsif ($scan->{in_regex} && $ch eq "\n") {
-   $scan->{in_regex} = 0;
-   return ($idx + 1, 1);
-  }
-  return ($idx + 1, $line_can_start_token);
- }
-
- if ($ch eq '#') {
-  $scan->{in_comment} = 1;
-  return ($idx + 1, 0);
- }
- if ($ch eq "'") {
-  $scan->{in_single} = 1;
-  return ($idx + 1, 0);
- }
- if ($ch eq '"') {
-  $scan->{in_double} = 1;
-  return ($idx + 1, 0);
- }
- if ($ch eq '/') {
-  my $regex_end = _scan_slash_construct_end($source, $idx);
-  if (defined($regex_end)) {
-   return ($regex_end + 1, 0);
-  }
- }
- if ($ch eq '{') {
-  ++$scan->{brace_depth};
- } elsif ($ch eq '}') {
-  --$scan->{brace_depth} if $scan->{brace_depth} > 0;
- }
-
- if ($ch eq "\n") {
-  return ($idx + 1, 1);
- }
- if ($line_can_start_token && ($ch eq ' ' || $ch eq "\t")) {
-  return ($idx + 1, 1);
- }
- return ($idx + 1, 0)
+sub _function_definition_spec_path {
+ require Cwd;
+ require File::Basename;
+ require File::Spec;
+ my $module_file = Cwd::abs_path(__FILE__) || __FILE__;
+ my $module_dir = (File::Basename::fileparse($module_file))[1];
+ my $perl_root = File::Basename::dirname($module_dir);
+ my $repo_root = File::Basename::dirname($perl_root);
+ return File::Spec->catfile($repo_root, 'specs', 'user_function_definition.spec')
 }
 
-sub _parse_function_definition_at {
- my ($source, $start) = @_;
- my $cursor = $start;
- my $len = length($source);
+sub _normalize_function_definition_ast {
+ my ($source, $node, $ordinal) = @_;
+ die "Invalid user function definition AST: expected HASH node\n"
+  unless ref($node) eq 'HASH';
+ die "Invalid user function definition AST: expected type=function_definition\n"
+  unless ($node->{type} // '') eq 'function_definition';
+ die "Invalid user function definition AST: expected kind=user_function_definition\n"
+  unless ($node->{kind} // '') eq 'user_function_definition';
 
- _die_parse_error($source, $start, 'expected function keyword fn')
-  unless _starts_with_function_keyword($source, $cursor);
- $cursor += 2;
- _die_parse_error($source, $start, 'expected whitespace after fn')
-  unless $cursor < $len && substr($source, $cursor, 1) =~ /\s/o;
- $cursor = _skip_ws($source, $cursor);
+ my $name = _require_identifier_field($node, 'name');
+ my $params = _require_identifier_array_field($node, 'params');
+ my $arity = _require_integer_field($node, 'arity');
+ die "Invalid user function definition AST for '$name': arity does not match params\n"
+  unless $arity == scalar(@$params);
 
- my $name_start = $cursor;
- ++$cursor while $cursor < $len && substr($source, $cursor, 1) =~ /[A-Za-z0-9_]/o;
- my $name = substr($source, $name_start, $cursor - $name_start);
- _die_parse_error($source, $start, 'expected function name after fn')
-  unless _is_identifier($name);
- $cursor = _skip_ws($source, $cursor);
+ my $source_span = _require_span_field($node, 'source_span');
+ my $body_span = _require_span_field($node, 'body_span');
+ my $body_source = _require_string_field($node, 'body_source');
+ my $body_payload = _normalize_body_payload($node->{body_payload}, $name, $params, $arity, $body_source, $body_span, $ordinal);
 
- _die_parse_error($source, $start, "expected '(' after function name '$name'")
-  unless $cursor < $len && substr($source, $cursor, 1) eq '(';
- my $params_open = $cursor;
- my $params_close = _scan_matching_delimiter($source, $params_open, '(', ')');
- _die_parse_error($source, $start, "unterminated parameter list for function '$name'")
-  unless defined $params_close;
- my $params_source = substr($source, $params_open + 1, $params_close - $params_open - 1);
- my $params = _parse_parameter_list($source, $start, $name, $params_source);
- $cursor = _skip_ws($source, $params_close + 1);
-
- _die_parse_error($source, $start, "expected body block after function '$name' parameter list")
-  unless $cursor < $len && substr($source, $cursor, 1) eq '{';
- my $body_open = $cursor;
- my $body_close = _scan_matching_delimiter($source, $body_open, '{', '}');
- _die_parse_error($source, $start, "unterminated body block for function '$name'")
-  unless defined $body_close;
-
- my $end = $body_close + 1;
- my $body_source = substr($source, $body_open + 1, $body_close - $body_open - 1);
- my $body_ast = _parse_function_body_ast($name, $body_source, $source, $start);
- my $line_start = _line_number_at($source, $start);
- my $line_end = _line_number_at($source, $end);
+ my %seen;
+ foreach my $param (@$params) {
+  _die_parse_error_at_span($source, $source_span, "duplicate parameter '$param' in function '$name'")
+   if $seen{$param}++;
+ }
 
  my $definition = {
   kind => 'user_function_definition',
   version => 1,
   name => $name,
-  params => $params,
-  arity => scalar(@$params),
-  source_span => {
-   start => 0 + $start,
-   end => 0 + $end,
-   line_start => 0 + $line_start,
-   line_end => 0 + $line_end,
-  },
-  body_span => {
-   start => 0 + ($body_open + 1),
-   end => 0 + $body_close,
-  },
+  params => [@$params],
+  arity => $arity,
+  source_text => defined($node->{source_text}) && !ref($node->{source_text}) ? $node->{source_text} : '',
+  source_span => $source_span,
+  body_span => $body_span,
   body_source => $body_source,
-  body_ast => $body_ast,
+  body_ast => _parse_function_body_ast($name, $body_source, $source, $source_span),
+  body_payload => $body_payload,
  };
 
  _validate_function_name($definition);
@@ -264,37 +210,36 @@ sub _parse_function_definition_at {
  return $definition
 }
 
-sub _parse_parameter_list {
- my ($source, $definition_start, $name, $params_source) = @_;
- my $trimmed = _trim($params_source);
- return [] unless defined($trimmed) && length($trimmed);
- my @params = split /\s*,\s*/, $trimmed, -1;
- my %seen;
- foreach my $param (@params) {
-  $param = _trim($param);
-  _die_parse_error($source, $definition_start, "invalid parameter in function '$name'")
-   unless _is_identifier($param);
-  _die_parse_error($source, $definition_start, "duplicate parameter '$param' in function '$name'")
-   if $seen{$param}++;
- }
- return \@params
-}
+sub _normalize_body_payload {
+ my ($payload, $name, $params, $arity, $body_source, $body_span, $ordinal) = @_;
+ die "Invalid user function definition AST: body_payload must be HASH\n"
+  unless ref($payload) eq 'HASH';
+ die "Invalid user function definition AST: body_payload.kind must be staged_payload\n"
+  unless ($payload->{kind} // '') eq 'staged_payload';
+ die "Invalid user function definition AST: body_payload.node_kind must be function_definition\n"
+  unless ($payload->{node_kind} // '') eq 'function_definition';
+ die "Invalid user function definition AST: body_payload.payload_kind must be function_body\n"
+  unless ($payload->{payload_kind} // '') eq 'function_body';
 
-sub _parse_function_body_ast {
- my ($name, $body_source, $source, $definition_start) = @_;
- my $body_ast = eval {
-  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
-   __PACKAGE__,
-   'LinkedSpec::ActionIR::AST',
-   'parse_action_block',
-   $body_source,
-  )
- };
- my $error = $@;
- if ($error) {
-  _die_parse_error($source, $definition_start, "could not parse body AST for function '$name': $error");
- }
- return $body_ast
+ my $payload_name = _require_string_field($payload, 'function_name');
+ die "Invalid user function definition AST: body_payload function name mismatch\n"
+  unless $payload_name eq $name;
+ my $payload_params = _require_identifier_array_field($payload, 'params');
+ die "Invalid user function definition AST: body_payload params mismatch\n"
+  unless _arrays_equal($payload_params, $params);
+ my $payload_arity = _require_integer_field($payload, 'arity');
+ die "Invalid user function definition AST: body_payload arity mismatch\n"
+  unless $payload_arity == $arity;
+ my $payload_text = _require_string_field($payload, 'text');
+ die "Invalid user function definition AST: body_payload text mismatch\n"
+  unless $payload_text eq $body_source;
+ my $payload_span = _require_span_field($payload, 'source_span');
+ die "Invalid user function definition AST: body_payload span mismatch\n"
+  unless _spans_equal($payload_span, $body_span);
+
+ my $out = _clone_plain($payload);
+ $out->{parent_ast_path} = ['functions', "$ordinal", 'body_source'];
+ return $out
 }
 
 sub _record_function_definition {
@@ -314,6 +259,39 @@ sub _record_function_definition {
  push @{$registry->{order}}, $name;
  $registry->{by_name}{$name} = $definition;
  return 1
+}
+
+sub _parse_function_body_ast {
+ my ($name, $body_source, $source, $source_span) = @_;
+ my $body_ast = eval {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__,
+   'LinkedSpec::ActionIR::AST',
+   'parse_action_block',
+   $body_source,
+  )
+ };
+ my $error = $@;
+ if ($error) {
+  _die_parse_error_at_span($source, $source_span, "could not parse body AST for function '$name': $error");
+ }
+ return $body_ast
+}
+
+sub _is_function_definition_error_node {
+ my ($node) = @_;
+ return ref($node) eq 'HASH' && ($node->{type} // '') eq 'function_definition_error'
+}
+
+sub _die_function_definition_error_node {
+ my ($source, $node) = @_;
+ my $span = ref($node->{source_span}) eq 'HASH'
+  ? _span_or_default($node->{source_span})
+  : { start => 0, end => 0, line_start => 1, line_end => 1 };
+ my $message = defined($node->{message}) && !ref($node->{message}) && length($node->{message})
+  ? $node->{message}
+  : 'invalid user function definition';
+ _die_parse_error_at_span($source, $span, $message);
 }
 
 sub _validate_function_name {
@@ -384,94 +362,100 @@ sub _is_identifier {
  return defined($value) && !ref($value) && $value =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o ? 1 : 0
 }
 
-sub _trim {
- my ($value) = @_;
- return undef unless defined $value;
- $value =~ s/^\s+//o;
- $value =~ s/\s+\z//o;
+sub _require_identifier_field {
+ my ($node, $field) = @_;
+ my $value = _require_string_field($node, $field);
+ die "Invalid user function definition AST: field '$field' is not an identifier\n"
+  unless _is_identifier($value);
  return $value
 }
 
-sub _skip_ws {
- my ($source, $idx) = @_;
- my $len = length($source);
- ++$idx while $idx < $len && substr($source, $idx, 1) =~ /\s/o;
- return $idx
+sub _require_string_field {
+ my ($node, $field) = @_;
+ die "Invalid user function definition AST: missing field '$field'\n"
+  unless ref($node) eq 'HASH' && exists($node->{$field});
+ die "Invalid user function definition AST: field '$field' must be scalar text\n"
+  if ref($node->{$field});
+ return defined($node->{$field}) ? "$node->{$field}" : ''
 }
 
-sub _scan_matching_delimiter {
- my ($source, $open_idx, $open, $close) = @_;
- return undef unless defined($open_idx) && substr($source, $open_idx, 1) eq $open;
- my $len = length($source);
- my $depth = 1;
- my $idx = $open_idx + 1;
- my $in_single = 0;
- my $in_double = 0;
- my $escape_next = 0;
-
- while ($idx < $len) {
-  my $ch = substr($source, $idx, 1);
-  if ($in_single || $in_double) {
-   if ($escape_next) {
-    $escape_next = 0;
-   } elsif ($ch eq '\\') {
-    $escape_next = 1;
-   } elsif ($in_single && $ch eq "'") {
-    $in_single = 0;
-   } elsif ($in_double && $ch eq '"') {
-    $in_double = 0;
-   }
-   ++$idx;
-   next;
-  }
-
-  if ($ch eq "'") {
-   $in_single = 1;
-   ++$idx;
-   next;
-  }
-  if ($ch eq '"') {
-   $in_double = 1;
-   ++$idx;
-   next;
-  }
-  if ($ch eq '/') {
-   my $regex_end = _scan_slash_construct_end($source, $idx);
-   if (defined($regex_end)) {
-    $idx = $regex_end + 1;
-    next;
-   }
-  }
-  if ($ch eq $open) {
-   ++$depth;
-  } elsif ($ch eq $close) {
-   --$depth;
-   return $idx if $depth == 0;
-  }
-  ++$idx;
- }
- return undef
+sub _require_integer_field {
+ my ($node, $field) = @_;
+ die "Invalid user function definition AST: missing integer field '$field'\n"
+  unless ref($node) eq 'HASH' && exists($node->{$field});
+ my $value = $node->{$field};
+ die "Invalid user function definition AST: field '$field' must be integer\n"
+  unless defined($value) && !ref($value) && $value =~ /\A\d+\z/o;
+ return 0 + $value
 }
 
-sub _scan_slash_construct_end {
- my ($source, $slash_idx) = @_;
- return undef unless defined($slash_idx) && substr($source, $slash_idx, 1) eq '/';
- my $idx = $slash_idx + 1;
- my $len = length($source);
- my $escape_next = 0;
- while ($idx < $len) {
-  my $ch = substr($source, $idx, 1);
-  return undef if $ch eq "\n";
-  if ($escape_next) {
-   $escape_next = 0;
-  } elsif ($ch eq '\\') {
-   $escape_next = 1;
-  } elsif ($ch eq '/') {
-   return $idx;
-  }
-  ++$idx;
+sub _require_identifier_array_field {
+ my ($node, $field) = @_;
+ die "Invalid user function definition AST: missing array field '$field'\n"
+  unless ref($node) eq 'HASH' && exists($node->{$field});
+ die "Invalid user function definition AST: field '$field' must be ARRAY\n"
+  unless ref($node->{$field}) eq 'ARRAY';
+ my @values;
+ foreach my $value (@{$node->{$field}}) {
+  die "Invalid user function definition AST: field '$field' contains a non-identifier\n"
+   unless _is_identifier($value);
+  push @values, "$value";
  }
- return undef
+ return \@values
+}
+
+sub _require_span_field {
+ my ($node, $field) = @_;
+ die "Invalid user function definition AST: missing span field '$field'\n"
+  unless ref($node) eq 'HASH' && exists($node->{$field});
+ die "Invalid user function definition AST: field '$field' must be HASH span\n"
+  unless ref($node->{$field}) eq 'HASH';
+ return _span_or_default($node->{$field}, $field)
+}
+
+sub _span_or_default {
+ my ($span, $field) = @_;
+ my %out;
+ foreach my $key (qw(start end line_start line_end)) {
+  die "Invalid user function definition AST: span '$field' missing '$key'\n"
+   unless exists($span->{$key});
+  die "Invalid user function definition AST: span '$field' '$key' must be integer\n"
+   unless defined($span->{$key}) && !ref($span->{$key}) && $span->{$key} =~ /\A\d+\z/o;
+  $out{$key} = 0 + $span->{$key};
+ }
+ return \%out
+}
+
+sub _arrays_equal {
+ my ($left, $right) = @_;
+ return 0 unless ref($left) eq 'ARRAY' && ref($right) eq 'ARRAY';
+ return 0 unless @$left == @$right;
+ for (my $i = 0; $i < @$left; ++$i) {
+  return 0 unless (defined($left->[$i]) ? $left->[$i] : '') eq (defined($right->[$i]) ? $right->[$i] : '');
+ }
+ return 1
+}
+
+sub _spans_equal {
+ my ($left, $right) = @_;
+ return 0 unless ref($left) eq 'HASH' && ref($right) eq 'HASH';
+ foreach my $key (qw(start end line_start line_end)) {
+  return 0 unless ($left->{$key} // '') eq ($right->{$key} // '');
+ }
+ return 1
+}
+
+sub _clone_plain {
+ my ($value) = @_;
+ return [map { _clone_plain($_) } @$value] if ref($value) eq 'ARRAY';
+ if (ref($value) eq 'HASH') {
+  my %copy;
+  foreach my $key (keys %$value) {
+   $copy{$key} = _clone_plain($value->{$key});
+  }
+  return \%copy
+ }
+ return $value
 }
 
 sub _blank_preserving_newlines {
@@ -490,9 +474,11 @@ sub _line_number_at {
  return 1 + ($prefix =~ tr/\n//)
 }
 
-sub _die_parse_error {
- my ($source, $definition_start, $reason) = @_;
- my $line = _line_number_at($source, $definition_start);
+sub _die_parse_error_at_span {
+ my ($source, $span, $reason) = @_;
+ my $line = (ref($span) eq 'HASH' && $span->{line_start})
+  ? $span->{line_start}
+  : _line_number_at($source, 0);
  die "Invalid user function definition at line $line: $reason\n";
 }
 
