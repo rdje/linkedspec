@@ -65,6 +65,7 @@ fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<Compile
         body,
         body_source: function.body_source.clone(),
         body_payload: function.body_payload.clone(),
+        body_parse_job: function.body_parse_job.clone(),
         source: function.source.clone(),
         source_span: function.source_span.clone(),
         body_span: function.body_span.clone(),
@@ -382,6 +383,7 @@ mod tests {
             arity: params.len(),
             body_source: body_source.to_string(),
             body_payload: None,
+            body_parse_job: None,
             source: format!("fn {name}({}) {{ {body_source} }}", params.join(", ")),
             source_span: SourceSpan {
                 line_start: 1,

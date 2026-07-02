@@ -120,7 +120,7 @@ fn function_from_ast(
         ));
     }
 
-    let body_payload = object
+    let mut body_payload = object
         .get("body_payload")
         .cloned()
         .ok_or_else(|| format!("function_definition node {idx} is missing body_payload"))?;
@@ -133,6 +133,22 @@ fn function_from_ast(
         body_span,
         idx,
     )?;
+    normalize_parent_ast_path(&mut body_payload, idx, "body_payload")?;
+
+    let mut body_parse_job = object
+        .get("body_parse_job")
+        .cloned()
+        .ok_or_else(|| format!("function_definition node {idx} is missing body_parse_job"))?;
+    validate_body_parse_job(
+        &body_parse_job,
+        &name,
+        &params,
+        arity,
+        &body_source,
+        body_span,
+        idx,
+    )?;
+    normalize_body_parse_job(&mut body_parse_job, idx, body_span)?;
 
     Ok((
         FunctionDefinition {
@@ -141,6 +157,7 @@ fn function_from_ast(
             arity,
             body_source,
             body_payload: Some(body_payload),
+            body_parse_job: Some(body_parse_job),
             source: source_text,
             source_span: SourceSpan {
                 line_start: source_span.line_start,
@@ -233,6 +250,7 @@ fn validate_body_payload(
     assert_string_field(object, "kind", "staged_payload", idx)?;
     assert_string_field(object, "node_kind", "function_definition", idx)?;
     assert_string_field(object, "payload_kind", "function_body", idx)?;
+    validate_function_body_parent_path(object, "body_payload", idx)?;
     if string_field(object, "function_name", "body_payload")? != name {
         return Err(format!(
             "function_definition node {idx} body_payload function_name does not match name"
@@ -260,6 +278,135 @@ fn validate_body_payload(
         ));
     }
     Ok(())
+}
+
+fn validate_body_parse_job(
+    job: &Value,
+    name: &str,
+    params: &[String],
+    arity: usize,
+    body_source: &str,
+    body_span: AstSpan,
+    idx: usize,
+) -> Result<(), String> {
+    let object = as_object(
+        job,
+        &format!("function_definition node {idx} body_parse_job"),
+    )?;
+    assert_string_field(object, "kind", "parse_job", idx)?;
+    assert_string_field(object, "node_kind", "function_definition", idx)?;
+    assert_string_field(object, "payload_kind", "function_body", idx)?;
+    validate_function_body_parent_path(object, "body_parse_job", idx)?;
+    if string_field(object, "job_id", "body_parse_job")?.is_empty() {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job job_id must be non-empty"
+        ));
+    }
+    if string_field(object, "function_name", "body_parse_job")? != name {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job function_name does not match name"
+        ));
+    }
+    if string_array_field(object, "params", idx)? != params {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job params do not match params"
+        ));
+    }
+    if usize_field(object, "arity", idx)? != arity {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job arity does not match arity"
+        ));
+    }
+    if string_field(object, "text", "body_parse_job")? != body_source {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job text does not match body_source"
+        ));
+    }
+    let job_span = span_field(object, "source_span", idx)?;
+    if job_span != body_span {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job source_span does not match body_span"
+        ));
+    }
+    if string_field(object, "parser_spec_id", "body_parse_job")? != "actionir-body.spec" {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job parser_spec_id must be actionir-body.spec"
+        ));
+    }
+    if string_field(object, "top_rule", "body_parse_job")? != "action_block" {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job top_rule must be action_block"
+        ));
+    }
+    if string_field(object, "result_policy", "body_parse_job")? != "replace_field" {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job result_policy must be replace_field"
+        ));
+    }
+    if string_field(object, "result_field", "body_parse_job")? != "body_ast" {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job result_field must be body_ast"
+        ));
+    }
+    if string_field(object, "failure_policy", "body_parse_job")? != "fail" {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job failure_policy must be fail"
+        ));
+    }
+    if string_field(object, "diagnostic_owner", "body_parse_job")? != "function_body" {
+        return Err(format!(
+            "function_definition node {idx} body_parse_job diagnostic_owner must be function_body"
+        ));
+    }
+    Ok(())
+}
+
+fn validate_function_body_parent_path(
+    object: &Map<String, Value>,
+    context: &str,
+    idx: usize,
+) -> Result<(), String> {
+    let path = string_array_field(object, "parent_ast_path", idx)?;
+    if path.len() != 3 || path[0] != "functions" || path[2] != "body_source" {
+        return Err(format!(
+            "function_definition node {idx} {context} parent_ast_path must target functions[*].body_source"
+        ));
+    }
+    Ok(())
+}
+
+fn normalize_parent_ast_path(value: &mut Value, idx: usize, context: &str) -> Result<(), String> {
+    let object = value
+        .as_object_mut()
+        .ok_or_else(|| format!("function_definition node {idx} {context} must be a JSON object"))?;
+    object.insert(
+        "parent_ast_path".to_string(),
+        Value::Array(vec![
+            Value::String("functions".to_string()),
+            Value::String(idx.to_string()),
+            Value::String("body_source".to_string()),
+        ]),
+    );
+    Ok(())
+}
+
+fn normalize_body_parse_job(job: &mut Value, idx: usize, body_span: AstSpan) -> Result<(), String> {
+    normalize_parent_ast_path(job, idx, "body_parse_job")?;
+    let object = job.as_object_mut().ok_or_else(|| {
+        format!("function_definition node {idx} body_parse_job must be a JSON object")
+    })?;
+    object.insert(
+        "job_id".to_string(),
+        Value::String(body_parse_job_id(idx, body_span)),
+    );
+    Ok(())
+}
+
+fn body_parse_job_id(idx: usize, body_span: AstSpan) -> String {
+    format!(
+        "parse_job:function_body:functions.{idx}.body_source:actionir-body.spec:action_block:{}-{}",
+        body_span.start, body_span.end
+    )
 }
 
 fn validate_span_text(

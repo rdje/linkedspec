@@ -139,6 +139,40 @@ fn after(value) {return(value)}
     );
     assert_eq!(zero["body_payload"]["text"], zero["body_source"]);
     assert_eq!(zero["body_payload"]["source_span"], zero["body_span"]);
+    assert_eq!(
+        zero["body_parse_job"]["kind"],
+        serde_json::json!("parse_job")
+    );
+    assert_eq!(
+        zero["body_parse_job"]["job_id"],
+        serde_json::json!("parse_job:function_body:zero:actionir-body.spec:action_block")
+    );
+    assert_eq!(
+        zero["body_parse_job"]["parent_ast_path"],
+        serde_json::json!(["functions", "__pending_source_order__", "body_source"])
+    );
+    assert_eq!(
+        zero["body_parse_job"]["parser_spec_id"],
+        serde_json::json!("actionir-body.spec")
+    );
+    assert_eq!(
+        zero["body_parse_job"]["top_rule"],
+        serde_json::json!("action_block")
+    );
+    assert_eq!(
+        zero["body_parse_job"]["result_policy"],
+        serde_json::json!("replace_field")
+    );
+    assert_eq!(
+        zero["body_parse_job"]["result_field"],
+        serde_json::json!("body_ast")
+    );
+    assert_eq!(
+        zero["body_parse_job"]["failure_policy"],
+        serde_json::json!("fail")
+    );
+    assert_eq!(zero["body_parse_job"]["text"], zero["body_source"]);
+    assert_eq!(zero["body_parse_job"]["source_span"], zero["body_span"]);
 
     let choose = asts[1].as_object().expect("choose object");
     assert_eq!(choose["name"], serde_json::json!("choose"));
@@ -160,10 +194,28 @@ fn after(value) {return(value)}
 
     let spec = parse_spec_with_user_functions(grammar).expect("full spec parse");
     assert_eq!(spec.function_names(), vec!["zero", "choose", "after"]);
+    let zero_job = spec.functions[0]
+        .body_parse_job
+        .as_ref()
+        .expect("zero parse job");
+    assert_eq!(
+        zero_job["parent_ast_path"],
+        serde_json::json!(["functions", "0", "body_source"])
+    );
+    assert_eq!(
+        zero_job["job_id"],
+        serde_json::json!(
+            "parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:11-25"
+        )
+    );
     assert_eq!(spec.rules.len(), 2);
     validate(&spec).expect("validate");
     let compiled = compile(&spec).expect("compile");
     assert_eq!(compiled.functions.len(), 3);
+    assert!(
+        compiled.functions[0].body_parse_job.is_some(),
+        "compiled functions preserve the neutral body parse job"
+    );
     assert_eq!(
         Engine::new(compiled).execute("xhello").expect("execute"),
         serde_json::json!(["zero"])
@@ -261,6 +313,12 @@ Done:
         );
         assert_eq!(node["body_payload"]["text"], node["body_source"]);
         assert_eq!(node["body_payload"]["source_span"], node["body_span"]);
+        assert_eq!(node["body_parse_job"]["text"], node["body_source"]);
+        assert_eq!(node["body_parse_job"]["source_span"], node["body_span"]);
+        assert_eq!(
+            node["body_parse_job"]["parser_spec_id"],
+            serde_json::json!("actionir-body.spec")
+        );
 
         let spec = parse_spec_with_user_functions(grammar)
             .unwrap_or_else(|err| panic!("{label}: full spec parse failed: {err}"));
@@ -269,6 +327,10 @@ Done:
         assert!(
             spec.functions[0].body_payload.is_some(),
             "{label}: body_payload must be preserved"
+        );
+        assert!(
+            spec.functions[0].body_parse_job.is_some(),
+            "{label}: body_parse_job must be preserved"
         );
     }
 }

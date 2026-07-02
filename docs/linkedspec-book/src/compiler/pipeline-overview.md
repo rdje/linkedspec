@@ -148,15 +148,20 @@ pre-dispatch `function_definition` AST, including a neutral `body_payload` with
 `kind = staged_payload`, `node_kind = function_definition`,
 `payload_kind = function_body`, exact payload text, half-open source/body spans,
 source-slice provenance, a source-order parent path, and the function name, params,
-and arity. The function shell uses linked opener/closer rules: nested `body_brace`
-islands handle inner `{ ... }` blocks, while `function_definition[1]` owns the outer
-close edge. Quoted strings, comments, and regex literals are matched as body islands
-before brace dispatch so braces inside them do not end the function. The Perl registry
-validates that returned AST, annotates the source-order parent path, then stitches in
-the existing body ActionIR AST. The Rust adapter validates the same returned AST, strips
-definition spans, then parses the remaining rule-only source through the core rule
-parser. Current shipped parsers do not yet dispatch the body payload through a
-next-stage `.spec`; the next staged-parsing work is the neutral parse-job sidecar.
+and arity. It also returns `body_parse_job`, a neutral parse-intent sidecar for the same
+payload. The sidecar carries a deterministic job id, source-order parent AST path,
+`parser_spec_id = actionir-body.spec`, `top_rule = action_block`,
+`result_policy = replace_field`, `result_field = body_ast`, `failure_policy = fail`,
+exact text, source span, and diagnostic ownership.
+
+The function shell uses linked opener/closer rules: nested `body_brace` islands handle
+inner `{ ... }` blocks, while `function_definition[1]` owns the outer close edge.
+Quoted strings, comments, and regex literals are matched as body islands before brace
+dispatch so braces inside them do not end the function. The Perl registry and Rust
+adapter validate that returned AST, normalize source-order parent paths and parse-job
+ids, preserve the sidecar in descriptor/compiled function state, and stitch in the
+existing body ActionIR AST. Current shipped parsers do not yet dispatch the body payload
+through a next-stage `.spec`; the next staged-parsing work is the registry/dispatch path.
 
 The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
 Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source
@@ -270,9 +275,9 @@ The preparation stage also makes diagnostics better. If an invalid option or mal
 
 Before ordinary rule validation/bootstrap, active backends extract top-level user-function definitions into a
 registry by executing `specs/user_function_definition.spec`. This bridge recognizes only top-level
-`fn name(args) { body }` declarations, preserves the returned source/body spans and neutral body payload, and
-blanks the original source region while preserving newlines. The stripped source then flows through the existing
-rule-validation and bootstrap-parser path.
+`fn name(args) { body }` declarations, preserves the returned source/body spans, neutral body payload, and neutral
+body parse-job sidecar, and blanks the original source region while preserving newlines. The stripped source then
+flows through the existing rule-validation and bootstrap-parser path.
 
 This stage rejects malformed definitions, duplicate function names, reserved names, built-in helper/control-name
 collisions including numeric word aliases, invalid or duplicate parameters, and later rule-label collisions. Execution is not done in this

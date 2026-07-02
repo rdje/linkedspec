@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — STAGED-LINKED-PARSING.5.4 — add function-body parse-job sidecar
+
+**Scope:** `specs/user_function_definition.spec`, Perl user-function registry normalization, Rust parsed/compiled
+function records, focused Perl/Rust AST-shape tests, mdBook staged parsing/descriptor/backend notes, task tree,
+roadmap companion, live docs, and Knowledge Map. Runtime user-function behavior is unchanged.
+
+**What changed:** Function-definition AST nodes now carry a neutral `body_parse_job` sidecar next to the existing
+`body_payload` text island. The sidecar records `kind = parse_job`, deterministic job id, parent AST path,
+`parser_spec_id = actionir-body.spec`, `top_rule = action_block`, `result_policy = replace_field`,
+`result_field = body_ast`, `failure_policy = fail`, exact body text, source span, and diagnostic owner.
+
+**Backend handling:** The Perl registry and Rust runtime adapter validate the spec-returned sidecar, normalize the
+pending source-order parent path and job id once function ordinal is known, and preserve the sidecar through
+descriptor / parsed / compiled function state. This leaf intentionally does not add staged parser registry or
+dispatch execution; existing function execution still uses the current parsed ActionIR body AST.
+
+**Tests:** Perl phase0 now asserts both raw spec AST and descriptor-normalized `body_parse_job` shape. Rust
+integration tests assert raw `specs/user_function_definition.spec` output, normalized parsed `SpecFile.functions`,
+and compiled-function sidecar preservation.
+
+**Checks:** `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/phase0_regression.t`; direct
+`specs/user_function_definition.spec` AST probe; Perl descriptor `body_parse_job` probe; `cargo fmt` for both Rust
+crates; focused Rust runtime `spec_defined_user_function_parser_*`; focused Rust core `user_function`; and
+`prove -v -Iperl t/phase0_regression.t` all passed. Phase0 ended with **1016 green**.
+
 ## 2026-07-02 — STAGED-LINKED-PARSING.5.3.2 — retire Rust raw user-function definition parser
 
 **Scope:** Rust core parser/compiler/runtime, the Rust spec-defined user-function parser adapter, focused Rust

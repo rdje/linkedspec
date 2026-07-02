@@ -182,6 +182,7 @@ sub _normalize_function_definition_ast {
  my $body_span = _require_span_field($node, 'body_span');
  my $body_source = _require_string_field($node, 'body_source');
  my $body_payload = _normalize_body_payload($node->{body_payload}, $name, $params, $arity, $body_source, $body_span, $ordinal);
+ my $body_parse_job = _normalize_body_parse_job($node->{body_parse_job}, $name, $params, $arity, $body_source, $body_span, $ordinal);
 
  my %seen;
  foreach my $param (@$params) {
@@ -201,6 +202,7 @@ sub _normalize_function_definition_ast {
   body_source => $body_source,
   body_ast => _parse_function_body_ast($name, $body_source, $source, $source_span),
   body_payload => $body_payload,
+  body_parse_job => $body_parse_job,
  };
 
  _validate_function_name($definition);
@@ -238,8 +240,77 @@ sub _normalize_body_payload {
   unless _spans_equal($payload_span, $body_span);
 
  my $out = _clone_plain($payload);
- $out->{parent_ast_path} = ['functions', "$ordinal", 'body_source'];
+ $out->{parent_ast_path} = _body_parent_ast_path($ordinal);
  return $out
+}
+
+sub _normalize_body_parse_job {
+ my ($job, $name, $params, $arity, $body_source, $body_span, $ordinal) = @_;
+ die "Invalid user function definition AST: body_parse_job must be HASH\n"
+  unless ref($job) eq 'HASH';
+ die "Invalid user function definition AST: body_parse_job.kind must be parse_job\n"
+  unless ($job->{kind} // '') eq 'parse_job';
+ die "Invalid user function definition AST: body_parse_job.node_kind must be function_definition\n"
+  unless ($job->{node_kind} // '') eq 'function_definition';
+ die "Invalid user function definition AST: body_parse_job.payload_kind must be function_body\n"
+  unless ($job->{payload_kind} // '') eq 'function_body';
+
+ my $job_id = _require_string_field($job, 'job_id');
+ die "Invalid user function definition AST: body_parse_job.job_id must be non-empty\n"
+  unless length($job_id);
+ my $parent_path = _require_string_array_field($job, 'parent_ast_path');
+ die "Invalid user function definition AST: body_parse_job parent path must target functions[*].body_source\n"
+  unless @$parent_path == 3 && $parent_path->[0] eq 'functions' && $parent_path->[2] eq 'body_source';
+ my $job_name = _require_string_field($job, 'function_name');
+ die "Invalid user function definition AST: body_parse_job function name mismatch\n"
+  unless $job_name eq $name;
+ my $job_params = _require_identifier_array_field($job, 'params');
+ die "Invalid user function definition AST: body_parse_job params mismatch\n"
+  unless _arrays_equal($job_params, $params);
+ my $job_arity = _require_integer_field($job, 'arity');
+ die "Invalid user function definition AST: body_parse_job arity mismatch\n"
+  unless $job_arity == $arity;
+ my $job_text = _require_string_field($job, 'text');
+ die "Invalid user function definition AST: body_parse_job text mismatch\n"
+  unless $job_text eq $body_source;
+ my $job_span = _require_span_field($job, 'source_span');
+ die "Invalid user function definition AST: body_parse_job span mismatch\n"
+  unless _spans_equal($job_span, $body_span);
+ die "Invalid user function definition AST: body_parse_job.parser_spec_id must be actionir-body.spec\n"
+  unless _require_string_field($job, 'parser_spec_id') eq 'actionir-body.spec';
+ die "Invalid user function definition AST: body_parse_job.top_rule must be action_block\n"
+  unless _require_string_field($job, 'top_rule') eq 'action_block';
+ die "Invalid user function definition AST: body_parse_job.result_policy must be replace_field\n"
+  unless _require_string_field($job, 'result_policy') eq 'replace_field';
+ die "Invalid user function definition AST: body_parse_job.result_field must be body_ast\n"
+  unless _require_string_field($job, 'result_field') eq 'body_ast';
+ die "Invalid user function definition AST: body_parse_job.failure_policy must be fail\n"
+  unless _require_string_field($job, 'failure_policy') eq 'fail';
+ die "Invalid user function definition AST: body_parse_job.diagnostic_owner must be function_body\n"
+  unless _require_string_field($job, 'diagnostic_owner') eq 'function_body';
+
+ my $out = _clone_plain($job);
+ $out->{parent_ast_path} = _body_parent_ast_path($ordinal);
+ $out->{job_id} = _body_parse_job_id($out->{parent_ast_path}, $out->{payload_kind}, $out->{parser_spec_id}, $out->{top_rule}, $job_span);
+ return $out
+}
+
+sub _body_parent_ast_path {
+ my ($ordinal) = @_;
+ return ['functions', "$ordinal", 'body_source']
+}
+
+sub _body_parse_job_id {
+ my ($parent_path, $payload_kind, $parser_spec_id, $top_rule, $span) = @_;
+ my $path_text = join('.', @$parent_path);
+ return join(':',
+  'parse_job',
+  $payload_kind,
+  $path_text,
+  $parser_spec_id,
+  $top_rule,
+  ($span->{start} // 0).'-'.($span->{end} // 0),
+ )
 }
 
 sub _record_function_definition {
@@ -400,6 +471,21 @@ sub _require_identifier_array_field {
   die "Invalid user function definition AST: field '$field' contains a non-identifier\n"
    unless _is_identifier($value);
   push @values, "$value";
+ }
+ return \@values
+}
+
+sub _require_string_array_field {
+ my ($node, $field) = @_;
+ die "Invalid user function definition AST: missing array field '$field'\n"
+  unless ref($node) eq 'HASH' && exists($node->{$field});
+ die "Invalid user function definition AST: field '$field' must be ARRAY\n"
+  unless ref($node->{$field}) eq 'ARRAY';
+ my @values;
+ foreach my $value (@{$node->{$field}}) {
+  die "Invalid user function definition AST: field '$field' contains a non-scalar value\n"
+   if ref($value);
+  push @values, defined($value) ? "$value" : '';
  }
  return \@values
 }

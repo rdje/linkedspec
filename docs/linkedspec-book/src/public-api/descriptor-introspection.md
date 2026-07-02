@@ -89,6 +89,20 @@ In rough form:
           { kind => 'source_slice', source_span => { ... } },
         ],
       },
+      body_parse_job => {
+        kind => 'parse_job',
+        job_id => 'parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:21-43',
+        parent_ast_path => ['functions', '0', 'body_source'],
+        node_kind => 'function_definition',
+        payload_kind => 'function_body',
+        parser_spec_id => 'actionir-body.spec',
+        top_rule => 'action_block',
+        result_policy => 'replace_field',
+        result_field => 'body_ast',
+        failure_policy => 'fail',
+        text => "\n return(trim(value))\n",
+        source_span => { start => 21, end => 43, line_start => 1, line_end => 3 },
+      },
       body_ast => { kind => 'action_block', ... },
     },
   },
@@ -142,14 +156,16 @@ fn normalize(value) {
 ```
 
 The Perl reference descriptor records the definition by name, including ordered parameter names, exact arity,
-source/body spans, original body source, a neutral staged `body_payload`, and the parsed ActionIR `action_block`
-body AST. The definition shell is parsed by `specs/user_function_definition.spec`; active backends consume that
-returned AST rather than raw-scanning the `fn` syntax. The `body_payload` is the implementation-language-neutral
-text island for future staged dispatch: it carries the exact body text, half-open source span, source-slice
-provenance, source-order parent path, function name, params, arity, and `payload_kind = function_body`. It is
-metadata for staged parsing; current shipped parsers do not yet dispatch it through a later `.spec` parser. The
-definition parser uses linked body-island rules for nested braces, strings, comments, and regex literals, so
-normal nested function-body constructs do not depend on a host-language scanner.
+source/body spans, original body source, a neutral staged `body_payload`, a neutral `body_parse_job`, and the
+parsed ActionIR `action_block` body AST. The definition shell is parsed by
+`specs/user_function_definition.spec`; active backends consume that returned AST rather than raw-scanning the
+`fn` syntax. The `body_payload` is the implementation-language-neutral text island for future staged dispatch:
+it carries the exact body text, half-open source span, source-slice provenance, source-order parent path,
+function name, params, arity, and `payload_kind = function_body`. The `body_parse_job` is the parse-intent
+sidecar for the same text island: it records the deterministic job id, parent AST path, parser spec identity,
+top rule, result/failure policies, exact text, and source span. Current shipped parsers do not yet dispatch it
+through a later `.spec` parser. The definition parser uses linked body-island rules for nested braces, strings,
+comments, and regex literals, so normal nested function-body constructs do not depend on a host-language scanner.
 Function definitions are validated before runtime: duplicate names, invalid or duplicate parameters, reserved
 runtime/lifecycle/function symbols, built-in helper/control-name collisions including numeric word aliases, and
 rule-label collisions are rejected.

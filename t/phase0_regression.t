@@ -44199,6 +44199,19 @@ SPEC
     is_deeply($pair->{body_payload}{provenance},
         [{ kind => 'source_slice', source_span => $pair->{body_span} }],
         'body payload provenance points at the exact source slice');
+    is($pair->{body_parse_job}{kind}, 'parse_job', 'body parse job records neutral job kind');
+    is($pair->{body_parse_job}{payload_kind}, 'function_body', 'body parse job identifies function body payload kind');
+    is_deeply($pair->{body_parse_job}{parent_ast_path}, ['functions', '__pending_source_order__', 'body_source'],
+        'direct spec parser returns pending source-order parse-job parent path before registry annotation');
+    is($pair->{body_parse_job}{job_id}, 'parse_job:function_body:pair:actionir-body.spec:action_block',
+        'direct spec parser returns a deterministic pre-registry parse-job id');
+    is($pair->{body_parse_job}{text}, $pair->{body_source}, 'body parse job text equals body_source');
+    is_deeply($pair->{body_parse_job}{source_span}, $pair->{body_span}, 'body parse job span equals body_span');
+    is($pair->{body_parse_job}{parser_spec_id}, 'actionir-body.spec', 'body parse job records parser spec identity');
+    is($pair->{body_parse_job}{top_rule}, 'action_block', 'body parse job records target top rule');
+    is($pair->{body_parse_job}{result_policy}, 'replace_field', 'body parse job records result policy');
+    is($pair->{body_parse_job}{result_field}, 'body_ast', 'body parse job records result field');
+    is($pair->{body_parse_job}{failure_policy}, 'fail', 'body parse job records failure policy');
 
     my $multiline = $ast->[5];
     is($multiline->{body_source}, "\n value.trim().lowercase()\n", 'multiline function body preserves newlines');
@@ -44236,7 +44249,7 @@ SPEC
 };
 
 subtest 'user_function_registry_descriptor_seam' => sub {
-    plan tests => 43;
+    plan tests => 57;
 
     my $spec = <<'SPEC';
 fn normalize(value) {
@@ -44292,6 +44305,22 @@ SPEC
     is($normalize_payload->{source_span}{end}, $normalize_body_end, 'normalize body payload end offset is exact');
     is_deeply($normalize_payload->{provenance}, [{ kind => 'source_slice', source_span => $normalize_payload->{source_span} }],
         'normalize body payload records source-slice provenance');
+    my $normalize_job = $functions->{normalize}{body_parse_job} || {};
+    ok(ref($normalize_job) eq 'HASH', 'normalize body parse job is exposed as a neutral record');
+    is($normalize_job->{kind}, 'parse_job', 'normalize body parse job records job kind');
+    is($normalize_job->{payload_kind}, 'function_body', 'normalize body parse job records function_body payload kind');
+    is($normalize_job->{node_kind}, 'function_definition', 'normalize body parse job records owning node kind');
+    is_deeply($normalize_job->{parent_ast_path}, ['functions', '0', 'body_source'], 'normalize body parse job parent path is source-order based');
+    is($normalize_job->{job_id}, 'parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:' . $normalize_body_start . '-' . $normalize_body_end,
+        'normalize body parse job id is deterministic over path, parser identity, top rule, and source span');
+    is($normalize_job->{parser_spec_id}, 'actionir-body.spec', 'normalize body parse job records parser spec identity');
+    is($normalize_job->{top_rule}, 'action_block', 'normalize body parse job records target top rule');
+    is($normalize_job->{result_policy}, 'replace_field', 'normalize body parse job records result policy');
+    is($normalize_job->{result_field}, 'body_ast', 'normalize body parse job records result field');
+    is($normalize_job->{failure_policy}, 'fail', 'normalize body parse job records failure policy');
+    is($normalize_job->{diagnostic_owner}, 'function_body', 'normalize body parse job records diagnostic owner');
+    is($normalize_job->{text}, $functions->{normalize}{body_source}, 'normalize body parse job preserves exact body text');
+    is_deeply($normalize_job->{source_span}, $normalize_payload->{source_span}, 'normalize body parse job span matches payload span');
     is_deeply($descriptor->{meta}{compiled_rule_order}, ['Top', 'Done'], 'function stripping preserves ordinary rule order');
 
     my $top_meta = ref($descriptor->{spec}{Top}{meta}) eq 'HASH'

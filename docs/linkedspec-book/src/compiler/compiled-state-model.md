@@ -73,9 +73,11 @@ The Rust backend now carries the same registry shape after executing the spec-de
 `linkedspec-runtime::spec_parser` runs `specs/user_function_definition.spec`, validates returned AST nodes, strips
 definition spans, and then feeds rule-only source to the core parser. `SpecFile.functions` records those
 spec-returned definitions, and `CompiledSpec.functions` stores `CompiledUserFunction` entries with parsed
-`CodeBlock` bodies, source metadata, and the neutral `body_payload`. The Rust runtime resolves those compiled
-functions before ordinary helper fallback, executes them in fresh function-local variable stores, restores caller
-stores after return, and supports compatible receiver chains and standalone discard.
+`CodeBlock` bodies, source metadata, the neutral `body_payload`, and the neutral `body_parse_job` sidecar. The
+sidecar is preserved metadata for the future staged dispatch path; function execution still runs through the
+compiled ActionIR body. The Rust runtime resolves those compiled functions before ordinary helper fallback,
+executes them in fresh function-local variable stores, restores caller stores after return, and supports
+compatible receiver chains and standalone discard.
 
 This registry is intentionally flat for the MVP. It is not an overload table, namespace/module model, closure
 environment, lambda catalog, or currying/partial-application representation. Those extensions require their own

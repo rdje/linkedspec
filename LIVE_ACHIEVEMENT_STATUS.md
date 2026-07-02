@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **STAGED-LINKED-PARSING.5.4 — function-body parse-job sidecar added**
+  (SPEC AST + PERL/RUST SIDECARE PRESERVATION + TESTS + MDBOOK).
+  `specs/user_function_definition.spec` now returns `body_parse_job` beside `body_payload` for each
+  `function_definition` AST node. The sidecar is neutral metadata only: deterministic job id, parent AST path,
+  parser spec identity (`actionir-body.spec`), top rule (`action_block`), result policy (`replace_field` into
+  `body_ast`), failure policy (`fail`), exact text, source span, and diagnostic owner.
+
+  **Backend handling:** Perl descriptor state and Rust parsed/compiled function state preserve the sidecar after
+  validating and normalizing the source-order parent path/job id. Runtime user-function execution still uses the
+  existing parsed ActionIR body AST; no staged registry/dispatch queue was implemented in this slice.
+
+  **Verification:** direct spec AST probe PASS; Perl descriptor `body_parse_job` probe PASS; focused Rust
+  `spec_defined_user_function_parser_*` tests PASS; focused Rust core `user_function` tests PASS; full Perl
+  phase0 PASS with 1016 top-level tests.
+
+  **Frontier:** `STAGED-LINKED-PARSING.5.5` — add the minimal registry/dispatch path for one next-stage spec.
+
 - 2026-07-02: **STAGED-LINKED-PARSING.5.3.2 — Rust raw function-definition parser retired**
   (SPEC PARSER + RUST ADAPTER + RUNTIME HELPER PARITY + TESTS).
   Rust now consumes the same `specs/user_function_definition.spec` returned AST contract as the Perl reference.

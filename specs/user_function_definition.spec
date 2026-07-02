@@ -7,6 +7,8 @@
 # `function_definition` records with exact body payload text and source
 # provenance. It deliberately does not parse the body language; the returned
 # `body_payload` is the text island consumed by later staged parsing.
+# `body_parse_job` is the neutral parse-intent sidecar for that payload; it is
+# metadata only in this prototype and does not execute the next parser inline.
 # =============================================================================
 
 user_function_definitions::
@@ -71,6 +73,30 @@ function_definition: /(?m)^[ \t]*fn[ \t]+(?<name>[A-Za-z_]\w*)\s*\(\s*(?<params>
      }
     }
    ]
+  },
+  "body_parse_job" => {
+   "kind" => "parse_job",
+   "version" => 1,
+   "job_id" => concat("parse_job:function_body:", entry_named(name), ":actionir-body.spec:action_block"),
+   "parent_ast_path" => ["functions", "__pending_source_order__", "body_source"],
+   "node_kind" => "function_definition",
+   "payload_kind" => "function_body",
+   "function_name" => entry_named(name),
+   "params" => entry_named(params).split(/\s*,\s*/).trim_each().filter_nonempty(),
+   "arity" => count(entry_named(params).split(/\s*,\s*/).trim_each().filter_nonempty()),
+   "text" => capture_slice(),
+   "source_span" => {
+    "start" => entry_end_pos(),
+    "end" => match_start_pos(),
+    "line_start" => entry_end_line(),
+    "line_end" => match_start_line()
+   },
+   "parser_spec_id" => "actionir-body.spec",
+   "top_rule" => "action_block",
+   "result_policy" => "replace_field",
+   "result_field" => "body_ast",
+   "failure_policy" => "fail",
+   "diagnostic_owner" => "function_body"
   }
  })
 }

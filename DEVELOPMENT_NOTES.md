@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (STAGED-LINKED-PARSING.5.4 — function-body parse-job sidecar):
+  Function-definition ASTs now have two separate staged records. `body_payload` remains the exact neutral text
+  island with provenance. `body_parse_job` is the parse-intent sidecar for that text island: `kind = parse_job`,
+  deterministic job id, parent AST path, `parser_spec_id = actionir-body.spec`, `top_rule = action_block`,
+  `result_policy = replace_field`, `result_field = body_ast`, `failure_policy = fail`, exact text, source span,
+  and diagnostic owner. The direct spec parser emits a source-order pending path; the Perl registry and Rust
+  adapter normalize that path and job id after function ordinal assignment. The sidecar is preserved in Perl
+  descriptors and Rust parsed/compiled function state, but no registry/dispatch queue executes it yet.
+  Next frontier: `STAGED-LINKED-PARSING.5.5`.
+
 - 2026-07-02 (STAGED-LINKED-PARSING.5.3.2 — Rust consumes spec-defined user-function definition AST):
   Rust now follows the same definition-shell ownership rule as Perl: `specs/user_function_definition.spec` is the
   executable grammar owner for top-level `fn name(params) { body }` definitions. The old Rust core parser no
