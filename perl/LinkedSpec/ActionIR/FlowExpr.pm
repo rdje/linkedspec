@@ -35,6 +35,7 @@ sub default_deps_for_package {
    'extract_scalar_symbol_name',
    'lower_method_value_expr',
    'lower_primitive_literal_expr',
+   'lower_direct_nested_access_value_expr',
    'parse_method_function_expr',
    'normalize_method_args_with_optional_scope',
   ],
@@ -201,6 +202,7 @@ sub _lower_is_empty_expr {
  my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
  my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
+ my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
 
  return undef unless defined $arg_expr;
  my $trimmed = $trim_action_ir_value->($arg_expr);
@@ -221,7 +223,8 @@ sub _lower_is_empty_expr {
   return "(!defined(\$$scalar_symbol) || \$$scalar_symbol eq '')";
  }
 
- my $lowered = $lower_method_value_expr->($trimmed);
+ my $lowered = $lower_direct_nested_access_value_expr->($trimmed);
+ $lowered = $lower_method_value_expr->($trimmed) unless defined($lowered) && length($lowered);
  $lowered = $trimmed unless defined($lowered) && length($lowered);
 
  if (_looks_like_array_value_expr($trimmed, $deps)) {
@@ -253,11 +256,15 @@ sub _lower_defined_target_expr {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
+ my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
 
  return undef unless defined $arg_expr;
  my $trimmed = $trim_action_ir_value->($arg_expr);
  return undef unless defined($trimmed) && length($trimmed);
+
+ my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
+ return $direct_access if defined($direct_access) && length($direct_access);
 
  my $call = $parse_method_function_expr->($trimmed);
  if ($call) {
@@ -289,6 +296,7 @@ sub _lower_flow_composite_expr {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
  my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
+ my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
@@ -299,6 +307,9 @@ sub _lower_flow_composite_expr {
  return '0' if $trimmed eq 'false';
  my $literal = $lower_primitive_literal_expr->($trimmed);
  return $literal if defined($literal);
+
+ my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
+ return $direct_access if defined($direct_access) && length($direct_access);
 
  # SPEC-FORMAT-TERSE.1.4.1 — the terse renames `cat` (== concat) and `copy` (== array_copy/
  # hash_copy) are recognized here too so a composite/assignment-source value lowers identically.

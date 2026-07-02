@@ -269,7 +269,7 @@ others: /[^\s\"\{\}\(\)\[\];]+/  I.return(hash("type", "OTHERS", "content", entr
 These rules return typed hashes, but the parent `parenthesis` rule usually extracts only the `content` field:
 
 ```text
-scalaref(retv, {content})
+retv["content"]
 ```
 
 That is why:
@@ -418,7 +418,7 @@ Use `Lispish.spec` as a compact example of:
 - action-local accumulator state,
 - helper-style assignment and array mutation,
 - `entry_text()` versus `entry_group(...)` in token readers,
-- `scalaref(retv, {content})` for reading child-result fields,
+- `retv["content"]` for reading child-result fields,
 - descriptor-mode readiness checks,
 - the difference between a shipped parser and a tiny tutorial parser.
 

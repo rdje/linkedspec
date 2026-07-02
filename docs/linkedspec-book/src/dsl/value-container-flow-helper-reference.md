@@ -187,7 +187,6 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `scalar(name)` | scalar value | read the working scalar `name`. |
 | `scalar(array(items), index)` | scalar value or `undef` | read one zero-based element from an array value. |
 | `scalar(hash(meta), key)` | scalar value or `undef` | read one field from a hash value. |
-| `scalaref(base, path)` | scalar value or `undef` | read a nested hash/array path such as `{content}` or `[0]{name}`. |
 | `base["field"][0][i]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container; a bare path atom such as `[i]` reads scalar `i` as an array index. |
 | `array(name)` | array value | read the working array `name`; the name token is bare. |
 | `hash(name)` | hash value | read the working hash `name`; the name token is bare. |
@@ -242,8 +241,7 @@ Examples:
 ```text
 set(scalar(first_item), scalar(array(items), 0));
 set(scalar(kind), scalar(hash(meta), "kind"));
-set(scalar(content), scalaref(retv, {content}));
-set(scalar(child_name), scalaref(retv, {children}[0]{name}));
+set(scalar(content), retv["content"]);
 set(scalar(child_name), retv["children"][0]["name"]);
 set(scalar(dynamic_child_name), retv["children"][i]["name"]);
 set(array(snapshot), array_copy(array(items)));
@@ -255,16 +253,14 @@ return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
 
 Use `scalar(array_expr, index)` when the container is already known and the access path is one level deep.
 Use direct nested access when the base is a working scalar that holds a structured array/hash payload.
-`scalaref(base, path)` remains accepted and is still useful for legacy specs and for the older
-`{field}[0]{name}` path notation; it keeps its historical path semantics, so use `[scalar(i)]` there when the
-index should read a scalar working variable.
+The older path-helper spelling is retirement-bound; new specs and examples should use direct nested access.
 
 Example:
 
 ```text
 set(scalar(retv), call(Child));
-set(scalar(child_kind), scalaref(retv, {kind}));
-set(scalar(first_child_name), scalaref(retv, {children}[0]{name}));
+set(scalar(child_kind), retv["kind"]);
+set(scalar(first_child_name), retv["children"][0]["name"]);
 set(scalar(second_child_name), retv["children"][1]["name"]);
 set(scalar(dynamic_child_name), retv["children"][child_index]["name"]);
 ```
@@ -816,11 +812,12 @@ set(hash(renamed), rename_key(hash(with_owner), "old_stage", "stage"));
 set(hash(public_meta), drop_keys(hash(renamed), "debug", "span"));
 set(hash(summary_meta), pick_keys(hash(public_meta), "kind", "source", "stage"));
 set(scalar(public_key_csv), meta.pick_keys("kind", "source").sorted_keys().join_values(","));
-set(scalar(layered_kind), meta.merge_hash(hash("kind", "fallback")).scalaref("kind"));
+set(hash(layered), meta.merge_hash(hash("kind", "fallback")));
+set(scalar(layered_kind), scalar(hash(layered), "kind"));
 set(scalar(summary_count), hash(meta).drop_keys("debug", "span").count_keys());
 ```
 
-Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(scalar(hash(meta), "kind"))` or `is_defined(scalaref(retv, {kind}))` when the question is "is the value defined?" Those are different questions.
+Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(scalar(hash(meta), "kind"))` or `is_defined(retv["kind"])` when the question is "is the value defined?" Those are different questions.
 
 `set_key(...)` has two deliberate forms. As a statement with a named target, `set_key(meta, "stage", "normalized")` mutates the working hash `meta`. As a value expression, `set_key(hash(meta), "stage", "normalized")` returns a new hash value and leaves `meta` unchanged unless you store the result with `set(hash(meta), ...)`.
 
@@ -828,8 +825,9 @@ Hash receiver-dot value chains are accepted for the same pure hash helpers. The 
 argument, so `meta.set_key("stage", "normalized").count_keys()` maps to
 `count_keys(set_key(hash(meta), "stage", "normalized"))`. Hash-returning links can continue through more
 hash helpers, and `sorted_keys()` / `sorted_values()` can continue through array receiver helpers such as
-`join_values(...)`, `drop_front(...)`, and `first()`. Receiver-dot `scalaref(key)` reads one field from the
-current hash value. Named mutation forms remain separate from receiver-dot pure composition:
+`join_values(...)`, `drop_front(...)`, and `first()`. For field reads from hash-returning receiver chains, assign
+the chain result to a named hash and use `scalar(hash(name), key)`. Direct bracket reads such as `retv["key"]`
+are for scalar hashref payloads, not named working-hash value reads. Named mutation forms remain separate from receiver-dot pure composition:
 `set_key(meta, key, value)` and `meta[key] = value` mutate the named working hash, and the hash-index assignment
 form yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is a pure
 derived value unless assigned back. A hash-yielding expression-valued block can enter the same family, for example
@@ -864,7 +862,7 @@ Fallback helpers choose values. Presence helpers ask what shape or value is avai
 Examples:
 
 ```text
-set(scalar(name), coalesce(scalaref(retv, {name}), scalar(IMATCH), "UNKNOWN"));
+set(scalar(name), coalesce(retv["name"], scalar(IMATCH), "UNKNOWN"));
 set(scalar(public_name), coalesce_nonempty(trim(scalar(name)), "anonymous"));
 set(scalar(has_public_name), is_defined(scalar(public_name)));
 set(scalar(missing_kind), is_undefined(scalar(hash(meta), "kind")));
@@ -1191,8 +1189,8 @@ Node::AND
  -> Node[0] {
    set(scalar(retv), call(Child));
    set(hash(meta), hash(
-     "kind", coalesce_nonempty(trim(scalaref(retv, {kind})), "node"),
-     "name", coalesce_nonempty(trim(scalaref(retv, {name})), scalar(IMATCH), "anonymous")
+     "kind", coalesce_nonempty(trim(retv["kind"]), "node"),
+     "name", coalesce_nonempty(trim(retv["name"]), scalar(IMATCH), "anonymous")
    ));
    set(hash(meta), set_key(hash(meta), "normalized_name", replace_substr(lowercase(trim(scalar(hash(meta), "name"))), " ", "_")));
    return(hash_copy(hash(meta)));

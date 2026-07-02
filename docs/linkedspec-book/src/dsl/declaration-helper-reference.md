@@ -264,7 +264,7 @@ Preferred for dense startup:
 ```text
 I {
   declare(scalar, name);
-  set(scalar(name), coalesce_nonempty(trim(scalaref(retv, {name})), entry_text(), "anonymous"));
+  set(scalar(name), coalesce_nonempty(trim(retv["name"]), entry_text(), "anonymous"));
 }
 ```
 
@@ -280,7 +280,7 @@ Examples:
 declare(scalar, kind="word");
 declare(scalar, text=trim(entry_text()));
 declare(scalar, normalized=replace_substr(lowercase(trim(entry_text())), "-", "_"));
-declare(scalar, content=scalaref(retv, {content}));
+declare(scalar, content=retv["content"]);
 declare(scalar, has_kind=has_key(hash(meta), "kind"));
 declare(scalar, item_count=count(array(items)));
 declare(scalar, body_width=capture_slice_len());
@@ -397,7 +397,7 @@ Common initializer sources include:
 | Literals | `"node"`, `1`, `0` |
 | Working values | `scalar(name)`, `array(items)`, `hash(meta)` |
 | Source readers | `entry_text()`, `entry_group(0)`, `capture_slice()`, `cursor_pos()` |
-| Child payload access | `scalaref(retv, {content})`, `scalaref(retv, {children}[0]{name})` |
+| Child payload access | `retv["content"]`, `retv["children"][0]["name"]` |
 | Constructors | `array(...)`, `hash(...)` |
 | Aggregate helpers | `array_copy(...)`, `hash_copy(...)`, `sorted_keys(...)`, `pick_keys(...)`, `split_tagged_records(...)` |
 | String helpers | `trim(...)`, `lowercase(...)`, `replace_substr(...)`, `concat(...)` |
@@ -523,7 +523,7 @@ This version is legal but harder to read:
 
 ```text
 I {
-  declare(scalar, name=coalesce_nonempty(trim(scalaref(retv, {name})), trim(entry_group(0)), "anonymous"));
+  declare(scalar, name=coalesce_nonempty(trim(retv["name"]), trim(entry_group(0)), "anonymous"));
 }
 ```
 
@@ -533,7 +533,7 @@ For public examples, prefer:
 I {
   declare(scalar, name);
   set(scalar(name), coalesce_nonempty(
-    trim(scalaref(retv, {name})),
+    trim(retv["name"]),
     trim(entry_group(0)),
     "anonymous"
   ));

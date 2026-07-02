@@ -73,8 +73,8 @@ Examples:
 
 ```text
 is_defined(scalar(name))
-is_defined(scalaref(retv, {content}))
-is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))
+is_defined(retv["content"])
+is_defined(coalesce(retv["type"], scalar(IMATCH)))
 ```
 
 Typical meanings:
@@ -98,8 +98,8 @@ This is the direct inverse convenience helper.
 Examples:
 
 ```text
-is_undefined(scalaref(retv, {type}))
-is_undefined(coalesce(scalaref(retv, {content}), scalar(IMATCH)))
+is_undefined(retv["type"])
+is_undefined(coalesce(retv["content"], scalar(IMATCH)))
 ```
 
 Use it when the rule should take a missing-value branch only if no defined value is available yet.
@@ -180,7 +180,7 @@ Examples:
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(scalar(name))), "_end")
 contains_substr(lowercase(trim(scalar(name))), "node")
-contains_substr(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "NODE")
+contains_substr(uppercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), "NODE")
 matches(scalar(token), /^[A-Z_]+$/)
 ```
 
@@ -268,13 +268,13 @@ This expression language is designed for nesting.
 ### Example: field must exist, even if it is empty
 
 ```text
-is_defined(scalaref(retv, {content}))
+is_defined(retv["content"])
 ```
 
 ### Example: child type is still missing after fallback
 
 ```text
-is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))
+is_undefined(coalesce(retv["type"], scalar(IMATCH)))
 ```
 
 ### Example: nonempty and not disabled
@@ -387,23 +387,23 @@ Examples:
 ```text
 declare(scalar, flag=or(scalar(on), scalar(off)))
 assign(scalar(flag), and(is_nonempty(array(items)), scalar(enabled)))
-assign(scalar(has_type), is_defined(scalaref(retv, {type})))
+assign(scalar(has_type), is_defined(retv["type"]))
 if(not(is_empty(scalar(name)))); ... endif()
 ```
 
-## Scalar and nested-access expressions inside conditions
-You can combine `scalar(...)` and `scalaref(...)` with the flow-expression helpers.
+## Scalar and Nested-Access Expressions Inside Conditions
+You can combine `scalar(...)` and direct nested access with the flow-expression helpers.
 
 Examples:
 
 ```text
-eq(scalaref(retv, {type}), "SPACE")
-ne(scalaref(retv, {type}), "COMMENTS")
-is_defined(scalaref(retv, {content}))
-is_undefined(scalaref(retv, {type}))
-is_nonempty(scalaref(retv, {content}))
+eq(retv["type"], "SPACE")
+ne(retv["type"], "COMMENTS")
+is_defined(retv["content"])
+is_undefined(retv["type"])
+is_nonempty(retv["content"])
 has_key(hash(meta), "kind")
-has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
+has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")
 has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")
 has_key(set_key(hash(meta), "stage", "normalized"), "stage")
 has_key(rename_key(hash(meta), "old_stage", "stage"), "stage")
@@ -413,7 +413,7 @@ contains(sorted_keys(hash(meta)), "kind")
 contains(sorted_values(pick_keys(hash(meta), "kind", "source")), "NODE")
 num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)
 num_gt(count(sorted_keys(pick_keys(hash(meta), "kind", "source"))), 1)
-num_gt(coalesce(length(trim(scalaref(retv, {content}))), 0), 3)
+num_gt(coalesce(length(trim(retv["content"])), 0), 3)
 eq(first(sorted_keys(pick_keys(hash(meta), "kind", "source"))), "kind")
 eq(scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0), "kind")
 eq(scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind"), "NODE")
@@ -423,9 +423,9 @@ is_empty(sorted_values(pick_keys(merge_hash(hash(meta), hash("stage", "normalize
 is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))
 num_gt(count(array(parts)), 0)
 num_gt(count_keys(hash(meta)), 1)
-eq(lowercase(trim(scalaref(retv, {type}))), "word")
-eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")
-eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")
+eq(lowercase(trim(retv["type"])), "word")
+eq(coalesce(retv["type"], "UNKNOWN"), "WORD")
+eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD")
 ```
 
 This is very useful when a child rule returns a structured hash payload and the current rule wants to branch on one field.
@@ -454,9 +454,9 @@ The branch body there may still be legacy/raw, but the condition itself is canon
 ### Example: classify token kinds
 
 ```text
-if(eq(scalaref(retv, {type}), "SPACE"));
+if(eq(retv["type"], "SPACE"));
   ...
-elseif(ne(scalaref(retv, {type}), "COMMENTS"));
+elseif(ne(retv["type"], "COMMENTS"));
   ...
 endif()
 ```
@@ -464,20 +464,20 @@ endif()
 ### Example: separate "missing" from "empty"
 
 ```text
-if(is_undefined(scalaref(retv, {content})));
+if(is_undefined(retv["content"]));
   return(hash("kind", "MISSING_CONTENT"));
-elseif(is_empty(scalaref(retv, {content})));
+elseif(is_empty(retv["content"]));
   return(hash("kind", "EMPTY_CONTENT"));
 else;
-  return(hash("kind", "HAS_CONTENT", "content", scalaref(retv, {content})));
+  return(hash("kind", "HAS_CONTENT", "content", retv["content"]));
 endif()
 ```
 
 ### Example: fallback branch only when no defined value survives
 
 ```text
-if(is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH))));
-  return(hash("kind", "CLASSIFIED", "type", coalesce(scalaref(retv, {type}), scalar(IMATCH))));
+if(is_defined(coalesce(retv["type"], scalar(IMATCH))));
+  return(hash("kind", "CLASSIFIED", "type", coalesce(retv["type"], scalar(IMATCH))));
 else;
   return(hash("kind", "UNCLASSIFIED"));
 endif()
@@ -486,7 +486,7 @@ endif()
 ### Example: fallback branch only when no nonempty scalar survives
 
 ```text
-if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD"));
+if(eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD"));
   return(hash("kind", "WORDISH"));
 else;
   return(hash("kind", "OTHER"));
@@ -496,7 +496,7 @@ endif()
 ### Example: normalize before comparing
 
 ```text
-if(eq(lowercase(trim(coalesce(scalaref(retv, {type}), " WORD "))), "word"));
+if(eq(lowercase(trim(coalesce(retv["type"], " WORD "))), "word"));
   return(hash("kind", "WORD"));
 else;
   return(hash("kind", "OTHER"));
@@ -506,7 +506,7 @@ endif()
 ### Example: branch on array size
 
 ```text
-if(num_gt(count(coalesce(scalaref(retv, {parts}), array("empty"))), 1));
+if(num_gt(count(coalesce(retv["parts"], array("empty"))), 1));
   return(hash("kind", "MULTI_PART"));
 else;
   return(hash("kind", "SINGLE_PART"));
@@ -516,7 +516,7 @@ endif()
 ### Example: branch on hash/object richness
 
 ```text
-if(num_gt(count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))), 1));
+if(num_gt(count_keys(coalesce(retv["meta"], hash("kind", "fallback"))), 1));
   return(hash("kind", "RICH_META"));
 else;
   return(hash("kind", "MIN_META"));
@@ -526,7 +526,7 @@ endif()
 ### Example: branch on key existence rather than value definedness
 
 ```text
-if(has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"));
+if(has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind"));
   return(hash("kind", "HAS_KIND_KEY"));
 else;
   return(hash("kind", "NO_KIND_KEY"));
@@ -536,7 +536,7 @@ endif()
 ### Example: branch on one normalized merged object shape
 
 ```text
-if(has_key(merge_hash(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized")), "kind"));
+if(has_key(merge_hash(coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized")), "kind"));
   return(hash("kind", "HAS_NORMALIZED_KIND"));
 else;
   return(hash("kind", "NO_NORMALIZED_KIND"));
@@ -615,7 +615,7 @@ endif()
 - Prefer `contains(...)` when the real question is “does this array or projected array contain one exact scalar value?”
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness, especially after `sorted_values(...)`, `pick_keys(...)`, `drop_keys(...)`, or aggregate `coalesce(...)` have already built one value for you.
 - Do not use `is_defined(...)` as a substitute for `is_nonempty(...)`; an empty string is still defined.
-- Do not use `is_defined(scalaref(...))` as a substitute for `has_key(...)` when you specifically need key existence semantics.
+- Do not use `is_defined(payload["field"])` as a substitute for `has_key(...)` when you specifically need key existence semantics.
 - Prefer `eq(...)` / `ne(...)` over raw string comparisons when the logic is part of canonical helper flow.
 - Prefer `num_*` helpers over string comparisons for counters, indices, and numeric depths.
 - Keep nested expressions readable; if one condition becomes too large, split the logic by first assigning a temporary flag.

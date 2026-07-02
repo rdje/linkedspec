@@ -7,6 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SCALAREF-RETIREMENT.3 — scalaref live surface migrated**
+  (SHIPPED SPECS + TESTS + CORPUS + PUBLIC DOCS; **implementation support still present until `.4`**).
+  Shipped specs, checked-in Rust oracle fixtures, focused tests, public mdBook chapters, and user guides no longer
+  use `scalaref(...)` or receiver-dot `.scalaref(...)` as active examples. Lispish now reads child-return payloads
+  with `retv["content"]`; other migrated specs use direct array/hash payload access such as `retv[0]`,
+  `first_capt[0]`, `cur_object[1]`, and `retv["type"]`.
+
+  **Replacement contract in active docs:** scalar hashref/array payloads use direct nested access; named working
+  hash field reads use `scalar(hash(name), key)`; direct bracket reads are not working-hash value reads. Rust now
+  supports `scalar(hash_expr, key)` over runtime hash values, and Perl flow expressions lower direct nested access
+  before flow fallback.
+
+  **Verification:** active `scalaref(` / `.scalaref(` scans clean across shipped specs, checked-in corpus, public
+  docs, tests, and generator; `prove -q -Iperl t/phase0_regression.t` PASS (1015); Rust corpus oracle PASS (63);
+  `mdbook build docs/linkedspec-book` PASS; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml --check`
+  PASS; `git diff --check` PASS.
+
+  **Frontier:** `SCALAREF-RETIREMENT.4` — remove Perl/Rust recognition/execution for `scalaref(...)` and add
+  rejection coverage.
+
 - 2026-07-02: **SCALAREF-RETIREMENT.2 — scalaref retirement inventory contract locked**
   (INVENTORY + REPLACEMENT CONTRACT + KM; **no runtime behavior change**).
   The retirement inventory now covers shipped specs, checked-in oracle fixtures, Perl/Rust implementation support,
@@ -17,8 +37,8 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Replacement contract:** migrate `scalaref(base, {field})` to `base["field"]`, `scalaref(base, [0])` to
   `base[0]`, and mixed paths such as `{children}[0]{name}` to `["children"][0]["name"]`. For receiver-dot
-  `.scalaref(key)`, named hashes use `scalar(hash(meta), key)` or `meta[key]`; expression receivers first assign
-  to a named hash temporary, then read `scalar(hash(temp), key)` or `temp[key]`.
+  `.scalaref(key)`, named working hashes use `scalar(hash(meta), key)`; direct bracket reads are for scalar
+  hashref payloads, not working-hash value reads.
 
   **Verification:** `rg` inventory PASS; Perl `call_spec_handler_subst` direct-access probes PASS; focused Rust
   direct-access parser/runtime tests PASS; Knowledge Map/memory/doctrine/diff checks PASS.

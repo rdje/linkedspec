@@ -634,7 +634,7 @@ Canonical `call(rule)` value capture is locked too: fluent and structured author
 
 That same supported call-value equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on canonical `assign(scalar(retv), call(rule))` capture chains on both action-edge and lifecycle surfaces.
 
-Nested accessor payloads are locked too: fluent and structured authoring now agree on supported `scalaref(base, path)` plus indexed/keyed `scalar(...)` payload reads on both action-edge and lifecycle surfaces, so path-following value composition stays inside the same backend-neutral method-like DSL equivalence contract.
+Nested accessor payloads are locked too: fluent and structured authoring now agree on supported direct nested access plus indexed/keyed `scalar(...)` payload reads on both action-edge and lifecycle surfaces, so path-following value composition stays inside the same backend-neutral method-like DSL equivalence contract.
 
 Array-normalization pipelines are locked too: fluent and structured authoring now agree on representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` flows on both action-edge and lifecycle surfaces, so multi-stage token cleanup stays inside the same backend-neutral method-like DSL equivalence contract instead of feeling like a one-off migration detail from the VHDL corpus.
 
@@ -830,7 +830,7 @@ Start with [`USER_GUIDE_ActionIR_MethodLowering.md`](USER_GUIDE_ActionIR_MethodL
 Typical patterns:
 - `array(...)`
 - `hash(...)`
-- `scalaref(...)`
+- direct nested access
 - `scalar(sorted_keys(...), 0)`
 - `scalar(merge_hash(...), "kind")`
 - `scalar(set_key(...), "stage")`
@@ -895,7 +895,7 @@ Typical patterns:
 - stable hash/object summaries via `sorted_keys(...)` and `sorted_values(...)`
 - array membership flags via `contains(array_expr, value_expr)`
 - aggregate-shape emptiness checks via `is_empty(sorted_values(...))` and `is_nonempty(pick_keys(...))`
-- nested reads via `scalar(array(...), idx)` and `scalaref(...)`
+- nested reads via `scalar(array(...), idx)` and direct nested access
 - deep Lisp-style composition inside `declare(...)`, `assign(...)`, `return(...)`, `if(...)`, and `switch(...)`
 
 ### I need assignment semantics or special assignment sources

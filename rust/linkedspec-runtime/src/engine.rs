@@ -2693,6 +2693,14 @@ impl Engine {
                             let idx = args[1].as_number().unwrap_or(0.0) as usize;
                             Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
                         }
+                        RuntimeValue::Hash(entries) => {
+                            let key = args[1].to_str();
+                            Ok(entries
+                                .iter()
+                                .find(|(entry_key, _)| entry_key == &key)
+                                .map(|(_, value)| value.clone())
+                                .unwrap_or(RuntimeValue::Undef))
+                        }
                         _ => {
                             let key = args[1].to_str();
                             Ok(ctx.get_scalar(&key))

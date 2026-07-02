@@ -26,9 +26,12 @@ Function-form calls migrate directly:
 - `scalaref(base, {children}[0]{name})` -> `base["children"][0]["name"]`
 - dynamic indexes can use `base["children"][i]` or `base["children"][scalar(i)]`
 
-Receiver-dot `.scalaref(key)` is also in scope for retirement. For a named hash, use
-`scalar(hash(meta), key)` or direct `meta[key]`. For an expression receiver, assign the
-hash expression to a named hash temporary first, then read from that temporary.
+Receiver-dot `.scalaref(key)` is also in scope for retirement. For a named working
+hash, use `scalar(hash(meta), key)`. Direct bracket reads such as `retv["key"]` are for
+scalar hashref payloads, not working-hash value reads. For an expression receiver,
+assign the hash expression to a named working hash temporary first, then read from that
+temporary with `scalar(hash(temp), key)`.
 
-Implementation support must remain until `SCALAREF-RETIREMENT.3` migrates shipped specs,
-fixtures, tests, and public docs. Removal belongs to `SCALAREF-RETIREMENT.4`.
+`SCALAREF-RETIREMENT.3` has migrated shipped specs, fixtures, tests, and public docs.
+Implementation support remains only as pre-removal compatibility until
+`SCALAREF-RETIREMENT.4`.

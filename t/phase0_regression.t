@@ -13171,7 +13171,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'FlowExpr',
             module      => 'LinkedSpec::ActionIR::FlowExpr',
-            callbacks   => [qw(_trim_action_ir_value _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_method_value_expr _lower_primitive_literal_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
+            callbacks   => [qw(_trim_action_ir_value _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_method_value_expr _lower_primitive_literal_expr _lower_direct_nested_access_value_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
             sample_key  => 'trim_action_ir_value',
             sample_name => '_trim_action_ir_value',
         },
@@ -15852,8 +15852,8 @@ subtest 'emit_context_lowers_typed_declare_methods_and_aliases' => sub {
         'long declare_* aliases lower to same declaration semantics'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare(scalar, flag=or(scalar(on), scalar(off)), token=scalaref(myref, {kind}))'),
-        'my $flag = (($on) || ($off)); my $token = $myref->{kind}',
+        LinkedSpec::call_spec_handler_subst('Top', 'declare(scalar, flag=or(scalar(on), scalar(off)), token=myref["kind"])'),
+        'my $flag = (($on) || ($off)); my $token = $myref->{"kind"}',
         'declare(scalar, name=expr, ...) supports flow/value expression initializers'
     );
     is(
@@ -16557,14 +16557,14 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
         'general return(payload) lowers scalar(container,key_or_index) forms inside nested hash/list payload'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(scalaref(myref, [A][B]{C}[D]))'),
-        'return $myref->[A]->[B]->{C}->[D]',
-        'general return(payload) lowers scalaref(base,[...]{...}) with mixed index/key path segments'
+        LinkedSpec::call_spec_handler_subst('Top', 'return(myref[A][B]["C"][D])'),
+        'return $myref->[$A]->[$B]->{"C"}->[$D]',
+        'general return(payload) lowers base[...]["..."] with mixed index/key path segments'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({ item => scalaref(myref, {A}[B]{C}[D]) })'),
-        'return {$item => $myref->{A}->[B]->{C}->[D]}',
-        'general return(payload) lowers scalaref(base,{...}[...]) with hash-first path segments'
+        LinkedSpec::call_spec_handler_subst('Top', 'return({ item => myref["A"][B]["C"][D] })'),
+        'return {$item => $myref->{"A"}->[$B]->{"C"}->[$D]}',
+        'general return(payload) lowers base["..."][...] with hash-first path segments'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("kind", "node", "item", scalar(foo_hash, key), "list", array(scalar(name), 123)))'),
@@ -33366,12 +33366,12 @@ subtest 'method_like_fluent_and_structured_action_length_value_helpers_lower_equ
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, clean_name).declare(scalar, clean_length).assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))).assign(scalar(clean_length), length(scalar(clean_name))).return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH))))
+ /a/ -> Top .declare(scalar, clean_name).declare(scalar, clean_length).assign(scalar(clean_name), trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN "))).assign(scalar(clean_length), length(scalar(clean_name))).return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH))))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
+ /a/ -> Top { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33407,13 +33407,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_length_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, clean_name).declare(scalar, clean_length).assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))).assign(scalar(clean_length), length(scalar(clean_name))).return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH))))
+LX.declare(scalar, clean_name).declare(scalar, clean_length).assign(scalar(clean_name), trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN "))).assign(scalar(clean_length), length(scalar(clean_name))).return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH))))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
+LX { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -35598,12 +35598,12 @@ subtest 'method_like_fluent_and_structured_action_nested_accessor_payloads_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, content).assign(scalar(content), scalaref(retv, {content})).return(hash("content", scalar(content), "head", scalar(items, 0))).return(array(scalaref(tree, [0]{kind}), scalar(hash(by_name), key)))
+ /a/ -> Top .declare(scalar, content).assign(scalar(content), retv["content"]).return(hash("content", scalar(content), "head", scalar(items, 0))).return(array(tree[0]["kind"], scalar(hash(by_name), key)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, content); assign(scalar(content), scalaref(retv, {content})); return(hash("content", scalar(content), "head", scalar(items, 0))); return(array(scalaref(tree, [0]{kind}), scalar(hash(by_name), key))) }
+ /a/ -> Top { declare(scalar, content); assign(scalar(content), retv["content"]); return(hash("content", scalar(content), "head", scalar(items, 0))); return(array(tree[0]["kind"], scalar(hash(by_name), key))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35631,7 +35631,7 @@ SPEC
         scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge nested accessor fluent form preserves DECLARE/ASSIGN/RETURN coverage across scalaref and indexed scalar payload reads'
+        'action-edge nested accessor fluent form preserves DECLARE/ASSIGN/RETURN coverage across direct and indexed scalar payload reads'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_nested_accessor_payloads_lower_equivalently' => sub {
@@ -35639,13 +35639,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_nested_accessor_payloads_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, content).assign(scalar(content), scalaref(retv, {content})).return(hash("content", scalar(content), "head", scalar(items, 0))).return(array(scalaref(tree, [0]{kind}), scalar(hash(by_name), key)))
+LX.declare(scalar, content).assign(scalar(content), retv["content"]).return(hash("content", scalar(content), "head", scalar(items, 0))).return(array(tree[0]["kind"], scalar(hash(by_name), key)))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, content); assign(scalar(content), scalaref(retv, {content})); return(hash("content", scalar(content), "head", scalar(items, 0))); return(array(scalaref(tree, [0]{kind}), scalar(hash(by_name), key))) }
+LX { declare(scalar, content); assign(scalar(content), retv["content"]); return(hash("content", scalar(content), "head", scalar(items, 0))); return(array(tree[0]["kind"], scalar(hash(by_name), key))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -35674,7 +35674,7 @@ SPEC
         scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle nested accessor fluent form preserves DECLARE/ASSIGN/RETURN coverage across scalaref and indexed scalar payload reads'
+        'lifecycle nested accessor fluent form preserves DECLARE/ASSIGN/RETURN coverage across direct and indexed scalar payload reads'
     );
 };
 subtest 'method_like_fluent_and_structured_action_array_normalization_pipelines_lower_equivalently' => sub {
@@ -35865,13 +35865,13 @@ subtest 'emit_context_lowers_coalesce_value_helpers' => sub {
     plan tests => 2;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))'),
-        '$name = do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }',
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(name), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"))'),
+        '$name = do { my $__ls_coalesce = $retv->{"content"}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }',
         'coalesce(...) lowers scalar fallback chains into nested first-defined value expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"), "parts", coalesce(scalaref(retv, {parts}), ["empty"])))'),
-        'return {"content" => do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }, "parts" => do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }}',
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"), "parts", coalesce(retv["parts"], ["empty"])))'),
+        'return {"content" => do { my $__ls_coalesce = $retv->{"content"}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }, "parts" => do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }}',
         'coalesce(...) lowers inside general return payloads for both scalar and aggregate fallback values'
     );
 };
@@ -35879,18 +35879,18 @@ subtest 'emit_context_lowers_coalesce_nonempty_value_helpers' => sub {
     plan tests => 3;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(name), coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN"))'),
-        '$name = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{content}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $IMATCH; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : "UNKNOWN" } }',
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(name), coalesce_nonempty(trim(retv["content"]), scalar(IMATCH), "UNKNOWN"))'),
+        '$name = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"content"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $IMATCH; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : "UNKNOWN" } }',
         'coalesce_nonempty(...) lowers scalar fallback chains into nested first-defined-nonempty value expressions'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "WORD" } }; my $__ls_str_cmp_rhs = "WORD"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD")'),
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "WORD" } }; my $__ls_str_cmp_rhs = "WORD"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'coalesce_nonempty(...) composes inside canonical flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN")))'),
-        'return {"content" => do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{content}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $IMATCH; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : "UNKNOWN" } }}',
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce_nonempty(trim(retv["content"]), scalar(IMATCH), "UNKNOWN")))'),
+        'return {"content" => do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"content"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $IMATCH; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : "UNKNOWN" } }}',
         'coalesce_nonempty(...) lowers inside general return payloads'
     );
 };
@@ -35899,12 +35899,12 @@ subtest 'method_like_fluent_and_structured_action_coalesce_value_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")).if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
+ /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")).if(str_eq(coalesce(retv["type"], "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(retv["parts"], ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
+ /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")); if(str_eq(coalesce(retv["type"], "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(retv["parts"], ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35942,12 +35942,12 @@ subtest 'method_like_fluent_and_structured_action_coalesce_nonempty_value_helper
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
+ /a/ -> Top .declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(retv["content"]), trim(scalar(IMATCH)), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
+ /a/ -> Top { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(retv["content"]), trim(scalar(IMATCH)), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35985,13 +35985,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_value_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")).if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
+LX.declare(scalar, chosen).assign(scalar(chosen), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")).if(str_eq(coalesce(retv["type"], "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "parts", coalesce(retv["parts"], ["empty"]))).else.return(hash("chosen", scalar(chosen), "parts", ["fallback"])).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(str_eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
+LX { declare(scalar, chosen); assign(scalar(chosen), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")); if(str_eq(coalesce(retv["type"], "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(retv["parts"], ["empty"]))); else; return(hash("chosen", scalar(chosen), "parts", ["fallback"])); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36030,13 +36030,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_nonempty_value_hel
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
+LX.declare(scalar, kind="WORD", chosen).assign(scalar(chosen), coalesce_nonempty(trim(retv["content"]), trim(scalar(IMATCH)), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD")).return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"))).else.return(hash("chosen", scalar(chosen), "kind", "OTHER")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
+LX { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(retv["content"]), trim(scalar(IMATCH)), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36074,33 +36074,33 @@ subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_defined(scalaref(retv, {content}))'),
-        'defined($retv->{content})',
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_defined(retv["content"])'),
+        'defined($retv->{"content"})',
         'is_defined(...) lowers nested payload access into a direct defined() check'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))'),
-        '(!defined(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }))',
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_undefined(coalesce(retv["type"], scalar(IMATCH)))'),
+        '(!defined(do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }))',
         'is_undefined(...) lowers parser-oriented fallback chains into a negated defined() check'
     );
 
     my $defined_if = LinkedSpec::call_spec_handler_subst(
         'Top',
-        'if(is_defined(scalaref(retv, {content}))); return(hash("content", scalaref(retv, {content}))); else; return_undef(); endif()'
+        'if(is_defined(retv["content"])); return(hash("content", retv["content"])); else; return_undef(); endif()'
     );
     like(
         $defined_if,
-        qr/if \(defined\(\$retv->\{content\}\)\) \{/s,
+        qr/if \(defined\(\$retv->\{"content"\}\)\) \{/s,
         'if(is_defined(...)) lowers through the canonical flow-expression path inside branch conditions'
     );
 
     my $undefined_if = LinkedSpec::call_spec_handler_subst(
         'Top',
-        'if(is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))); return_undef(); endif()'
+        'if(is_undefined(coalesce(retv["type"], scalar(IMATCH)))); return_undef(); endif()'
     );
     like(
         $undefined_if,
-        qr/if \(\(!defined\(do \{ my \$__ls_coalesce = \$retv->\{type\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \$IMATCH \}\)\)\) \{/s,
+        qr/if \(\(!defined\(do \{ my \$__ls_coalesce = \$retv->\{"type"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \$IMATCH \}\)\)\) \{/s,
         'if(is_undefined(...)) lowers nested coalesce(...) targets inside the same canonical flow-expression path'
     );
 };
@@ -36109,12 +36109,12 @@ subtest 'method_like_fluent_and_structured_action_definedness_flow_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).if(is_defined(scalaref(retv, {content}))).assign(scalar(chosen), scalaref(retv, {content})).elseif(is_undefined(scalaref(retv, {type}))).assign(scalar(chosen), "MISSING_TYPE").else.assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")).endif.return(hash("chosen", scalar(chosen)))
+ /a/ -> Top .declare(scalar, chosen).if(is_defined(retv["content"])).assign(scalar(chosen), retv["content"]).elseif(is_undefined(retv["type"])).assign(scalar(chosen), "MISSING_TYPE").else.assign(scalar(chosen), coalesce(retv["type"], "UNKNOWN")).endif.return(hash("chosen", scalar(chosen)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); if(is_defined(scalaref(retv, {content}))); assign(scalar(chosen), scalaref(retv, {content})); elseif(is_undefined(scalaref(retv, {type}))); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
+ /a/ -> Top { declare(scalar, chosen); if(is_defined(retv["content"])); assign(scalar(chosen), retv["content"]); elseif(is_undefined(retv["type"])); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(retv["type"], "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36153,13 +36153,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_definedness_flow_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).if(is_defined(scalaref(retv, {content}))).assign(scalar(chosen), scalaref(retv, {content})).elseif(is_undefined(scalaref(retv, {type}))).assign(scalar(chosen), "MISSING_TYPE").else.assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")).endif.return(hash("chosen", scalar(chosen)))
+LX.declare(scalar, chosen).if(is_defined(retv["content"])).assign(scalar(chosen), retv["content"]).elseif(is_undefined(retv["type"])).assign(scalar(chosen), "MISSING_TYPE").else.assign(scalar(chosen), coalesce(retv["type"], "UNKNOWN")).endif.return(hash("chosen", scalar(chosen)))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); if(is_defined(scalaref(retv, {content}))); assign(scalar(chosen), scalaref(retv, {content})); elseif(is_undefined(scalaref(retv, {type}))); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
+LX { declare(scalar, chosen); if(is_defined(retv["content"])); assign(scalar(chosen), retv["content"]); elseif(is_undefined(retv["type"])); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(retv["type"], "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36215,11 +36215,11 @@ subtest 'emit_context_lowers_aggregate_expression_emptiness_flow_helpers' => sub
 
     my $array_if = LinkedSpec::call_spec_handler_subst(
         'Top',
-        'if(is_empty(coalesce(scalaref(retv, {parts}), array()))); return_undef(); endif()'
+        'if(is_empty(coalesce(retv["parts"], array()))); return_undef(); endif()'
     );
     like(
         $array_if,
-        qr/if \(do \{ my \$__ls_empty_array = do \{ my \$__ls_coalesce = \$retv->\{parts\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \[\] \}; \(!defined\(\$__ls_empty_array\) \|\| !\@\{\$__ls_empty_array\}\) \}\) \{/s,
+        qr/if \(do \{ my \$__ls_empty_array = do \{ my \$__ls_coalesce = \$retv->\{"parts"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \[\] \}; \(!defined\(\$__ls_empty_array\) \|\| !\@\{\$__ls_empty_array\}\) \}\) \{/s,
         'if(is_empty(...)) lowers aggregate fallback arrays through the canonical empty-array flow path'
     );
 
@@ -36323,8 +36323,8 @@ subtest 'emit_context_lowers_scalar_normalization_value_helpers' => sub {
     plan tests => 3;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('trim(scalaref(retv, {content}))'),
-        'do { my $__ls_trim = $retv->{content}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('trim(retv["content"])'),
+        'do { my $__ls_trim = $retv->{"content"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }',
         'trim(...) lowers nested payload access into a whitespace-normalizing scalar expression'
     );
     is(
@@ -36333,8 +36333,8 @@ subtest 'emit_context_lowers_scalar_normalization_value_helpers' => sub {
         'lowercase(...) composes directly with trim(...) inside scalar value lowering'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('uppercase(coalesce(scalaref(retv, {type}), "word"))'),
-        'do { my $__ls_upper = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('uppercase(coalesce(retv["type"], "word"))'),
+        'do { my $__ls_upper = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }',
         'uppercase(...) composes directly with coalesce(...) inside scalar value lowering'
     );
 };
@@ -36343,12 +36343,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_normalization_helpers_l
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
+ /a/ -> Top .declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(retv["type"], "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
+ /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(retv["type"], "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36386,13 +36386,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_normalization_helper
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
+LX.declare(scalar, chosen).assign(scalar(chosen), lowercase(trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")).return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(retv["type"], "word"))))).else.return(hash("chosen", scalar(chosen), "type", "OTHER")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
+LX { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(retv["type"], "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36435,8 +36435,8 @@ subtest 'emit_context_lowers_count_value_helpers' => sub {
         'count(array(name)) lowers array variables into scalar(@array) reducer form'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count(coalesce(scalaref(retv, {parts}), ["empty"]))'),
-        'do { my $__ls_count = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count(coalesce(retv["parts"], ["empty"]))'),
+        'do { my $__ls_count = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
         'count(...) lowers array-valued fallback expressions into arrayref-size reducer form'
     );
     is(
@@ -36445,8 +36445,8 @@ subtest 'emit_context_lowers_count_value_helpers' => sub {
         'count(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("part_count", count(coalesce(scalaref(retv, {parts}), ["empty"]))))'),
-        'return {"part_count" => do { my $__ls_count = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }}',
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("part_count", count(coalesce(retv["parts"], ["empty"]))))'),
+        'return {"part_count" => do { my $__ls_count = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }}',
         'count(...) lowers inside general return payloads'
     );
 };
@@ -36455,12 +36455,12 @@ subtest 'method_like_fluent_and_structured_action_count_value_helpers_lower_equi
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, part_count).assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", scalar(part_count), "seen", count(array(parts)))).else.return(hash("part_count", scalar(part_count), "seen", 0)).endif
+ /a/ -> Top .declare(scalar, part_count).assign(scalar(part_count), count(coalesce(retv["parts"], ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", scalar(part_count), "seen", count(array(parts)))).else.return(hash("part_count", scalar(part_count), "seen", 0)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, part_count); assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", scalar(part_count), "seen", count(array(parts)))); else; return(hash("part_count", scalar(part_count), "seen", 0)); endif }
+ /a/ -> Top { declare(scalar, part_count); assign(scalar(part_count), count(coalesce(retv["parts"], ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", scalar(part_count), "seen", count(array(parts)))); else; return(hash("part_count", scalar(part_count), "seen", 0)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36498,13 +36498,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_count_value_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, part_count).assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", scalar(part_count), "seen", count(array(parts)))).else.return(hash("part_count", scalar(part_count), "seen", 0)).endif
+LX.declare(scalar, part_count).assign(scalar(part_count), count(coalesce(retv["parts"], ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", scalar(part_count), "seen", count(array(parts)))).else.return(hash("part_count", scalar(part_count), "seen", 0)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, part_count); assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", scalar(part_count), "seen", count(array(parts)))); else; return(hash("part_count", scalar(part_count), "seen", 0)); endif }
+LX { declare(scalar, part_count); assign(scalar(part_count), count(coalesce(retv["parts"], ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", scalar(part_count), "seen", count(array(parts)))); else; return(hash("part_count", scalar(part_count), "seen", 0)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36547,8 +36547,8 @@ subtest 'emit_context_lowers_contains_value_helpers' => sub {
         'contains(array(name), value) lowers working arrays into a boolean-like membership expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains(coalesce(scalaref(retv, {parts}), ["empty"]), scalar(IMATCH))'),
-        'do { my $__ls_contains_array = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_contains_needle = $IMATCH; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains(coalesce(retv["parts"], ["empty"]), scalar(IMATCH))'),
+        'do { my $__ls_contains_array = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_contains_needle = $IMATCH; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
         'contains(...) lowers array-valued fallback expressions into guarded membership checks'
     );
     is(
@@ -36571,8 +36571,8 @@ subtest 'emit_context_lowers_matches_value_helpers' => sub {
         'matches(normalized-scalar, /regex/) lowers into a boolean-like regex-membership expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('matches(coalesce(scalaref(retv, {type}), scalar(IMATCH)), /^[A-Z_]+$/)'),
-        'do { my $__ls_matches_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^[A-Z_]+$/) ? 1 : 0) : 0 }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('matches(coalesce(retv["type"], scalar(IMATCH)), /^[A-Z_]+$/)'),
+        'do { my $__ls_matches_value = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^[A-Z_]+$/) ? 1 : 0) : 0 }',
         'matches(...) lowers composed fallback expressions into guarded regex-membership checks'
     );
     is(
@@ -36595,8 +36595,8 @@ subtest 'emit_context_lowers_contains_substr_value_helpers' => sub {
         'contains_substr(normalized-scalar, needle) lowers into a boolean-like substring-membership expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), "WORD")'),
-        'do { my $__ls_contains_substr_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; my $__ls_contains_substr_needle = "WORD"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains_substr(coalesce(retv["type"], scalar(IMATCH)), "WORD")'),
+        'do { my $__ls_contains_substr_value = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; my $__ls_contains_substr_needle = "WORD"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
         'contains_substr(...) lowers composed fallback expressions into guarded substring-membership checks'
     );
     is(
@@ -36619,8 +36619,8 @@ subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
         'replace_substr(normalized-scalar, needle, replacement) lowers into a pure literal substring rewrite expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('replace_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), " ", "_")'),
-        'do { my $__ls_replace_substr_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('replace_substr(coalesce(retv["type"], scalar(IMATCH)), " ", "_")'),
+        'do { my $__ls_replace_substr_value = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
         'replace_substr(...) lowers composed fallback expressions into guarded literal substring rewrites'
     );
     is(
@@ -36677,8 +36677,8 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
         'concat(...) lowers normalized scalar fragments into one guarded pure scalar expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))'),
-        q{do { my @__ls_concat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $IMATCH; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat(coalesce_nonempty(trim(retv["type"]), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))'),
+        q{do { my @__ls_concat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $IMATCH; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
         'concat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
     );
     is(
@@ -36813,8 +36813,8 @@ subtest 'emit_context_lowers_index_of_value_helpers' => sub {
         'index_of(array(name), value) lowers working arrays into a first-match index expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('index_of(coalesce(scalaref(retv, {parts}), ["empty"]), scalar(IMATCH))'),
-        q{do { my $__ls_index_of_array = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_index_of_needle = $IMATCH; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }},
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('index_of(coalesce(retv["parts"], ["empty"]), scalar(IMATCH))'),
+        q{do { my $__ls_index_of_array = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_index_of_needle = $IMATCH; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }},
         'index_of(...) lowers array-valued fallback expressions into guarded first-match index checks'
     );
     is(
@@ -36925,8 +36925,8 @@ subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
         'count_keys(hash(name)) lowers hash variables into scalar(keys %hash) reducer form'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))'),
-        'do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count_keys(coalesce(retv["meta"], hash("kind", "fallback")))'),
+        'do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
         'count_keys(...) lowers hash-valued fallback expressions into hashref-size reducer form'
     );
     is(
@@ -36935,8 +36935,8 @@ subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
         'count_keys(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("meta_key_count", count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))))'),
-        'return {"meta_key_count" => do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }}',
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("meta_key_count", count_keys(coalesce(retv["meta"], hash("kind", "fallback")))))'),
+        'return {"meta_key_count" => do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }}',
         'count_keys(...) lowers inside general return payloads'
     );
 };
@@ -36945,12 +36945,12 @@ subtest 'method_like_fluent_and_structured_action_count_keys_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, meta_key_count).assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)).endif
+ /a/ -> Top .declare(scalar, meta_key_count).assign(scalar(meta_key_count), count_keys(coalesce(retv["meta"], hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, meta_key_count); assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)); endif }
+ /a/ -> Top { declare(scalar, meta_key_count); assign(scalar(meta_key_count), count_keys(coalesce(retv["meta"], hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36988,13 +36988,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_count_keys_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, meta_key_count).assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)).endif
+LX.declare(scalar, meta_key_count).assign(scalar(meta_key_count), count_keys(coalesce(retv["meta"], hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, meta_key_count); assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)); endif }
+LX { declare(scalar, meta_key_count); assign(scalar(meta_key_count), count_keys(coalesce(retv["meta"], hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37037,8 +37037,8 @@ subtest 'emit_context_lowers_has_key_value_helpers' => sub {
         'has_key(hash(name), key) lowers working hashes into an exists(...) boolean-like expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")'),
-        'do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")'),
+        'do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
         'has_key(...) lowers hash-valued fallback expressions into guarded key-existence checks'
     );
     is(
@@ -37047,8 +37047,8 @@ subtest 'emit_context_lowers_has_key_value_helpers' => sub {
         'has_key(...) composes directly inside flow conditions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")))'),
-        'return {"has_kind" => do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }}',
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")))'),
+        'return {"has_kind" => do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }}',
         'has_key(...) lowers inside general return payloads'
     );
 };
@@ -37057,12 +37057,12 @@ subtest 'method_like_fluent_and_structured_action_has_key_value_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "existing", "source", "rule")).declare(scalar, has_kind).assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)).endif
+ /a/ -> Top .declare(hash, meta=hash("kind", "existing", "source", "rule")).declare(scalar, has_kind).assign(scalar(has_kind), has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)); endif }
+ /a/ -> Top { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); assign(scalar(has_kind), has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37100,13 +37100,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_has_key_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "existing", "source", "rule")).declare(scalar, has_kind).assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)).endif
+LX.declare(hash, meta=hash("kind", "existing", "source", "rule")).declare(scalar, has_kind).assign(scalar(has_kind), has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)); endif }
+LX { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); assign(scalar(has_kind), has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37144,8 +37144,8 @@ subtest 'emit_context_lowers_merge_hash_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('merge_hash(hash(meta), hash("kind", "node"), coalesce(scalaref(retv, {meta}), hash("source", "fallback")))'),
-        '{%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}',
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('merge_hash(hash(meta), hash("kind", "node"), coalesce(retv["meta"], hash("source", "fallback")))'),
+        '{%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}',
         'merge_hash(...) lowers working hashes, constructor hashes, and fallback hash expressions into one composed hash payload'
     );
     is(
@@ -37159,8 +37159,8 @@ subtest 'emit_context_lowers_merge_hash_value_helpers' => sub {
         'merge_hash(...) lowers inside general return payloads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'assign(hash(meta), merge_hash(hash(meta), hash("kind", "node"), coalesce(scalaref(retv, {meta}), hash("source", "fallback"))))'),
-        '%meta = (%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () })',
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(hash(meta), merge_hash(hash(meta), hash("kind", "node"), coalesce(retv["meta"], hash("source", "fallback"))))'),
+        '%meta = (%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () })',
         'merge_hash(...) lowers inside hash assignment sources'
     );
 };
@@ -37169,12 +37169,12 @@ subtest 'method_like_fluent_and_structured_action_merge_hash_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta_base=hash("kind", "existing", "source", "rule")).declare(hash, merged_meta).declare(scalar, has_kind).assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized"))).assign(scalar(has_kind), has_key(hash(merged_meta), "kind")).if(scalar(has_kind)).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .declare(hash, meta_base=hash("kind", "existing", "source", "rule")).declare(hash, merged_meta).declare(scalar, has_kind).assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))).assign(scalar(has_kind), has_key(hash(merged_meta), "kind")).if(scalar(has_kind)).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized"))); assign(scalar(has_kind), has_key(hash(merged_meta), "kind")); if(scalar(has_kind)); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))); assign(scalar(has_kind), has_key(hash(merged_meta), "kind")); if(scalar(has_kind)); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37212,13 +37212,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_merge_hash_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta_base=hash("kind", "existing", "source", "rule")).declare(hash, merged_meta).declare(scalar, has_kind).assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized"))).assign(scalar(has_kind), has_key(hash(merged_meta), "kind")).if(scalar(has_kind)).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
+LX.declare(hash, meta_base=hash("kind", "existing", "source", "rule")).declare(hash, merged_meta).declare(scalar, has_kind).assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))).assign(scalar(has_kind), has_key(hash(merged_meta), "kind")).if(scalar(has_kind)).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized"))); assign(scalar(has_kind), has_key(hash(merged_meta), "kind")); if(scalar(has_kind)); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
+LX { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))); assign(scalar(has_kind), has_key(hash(merged_meta), "kind")); if(scalar(has_kind)); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37281,12 +37281,12 @@ subtest 'method_like_fluent_and_structured_action_hash_copy_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37324,13 +37324,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_hash_copy_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37393,12 +37393,12 @@ subtest 'method_like_fluent_and_structured_action_set_key_value_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))).assign(scalar(has_stage), has_key(hash(normalized), "stage")).assign(scalar(chosen_stage), scalar(hash(normalized), "stage")).if(scalar(has_stage)).return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))).assign(scalar(has_stage), has_key(hash(normalized), "stage")).assign(scalar(chosen_stage), scalar(hash(normalized), "stage")).if(scalar(has_stage)).return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37436,13 +37436,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_set_key_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))).assign(scalar(has_stage), has_key(hash(normalized), "stage")).assign(scalar(chosen_stage), scalar(hash(normalized), "stage")).if(scalar(has_stage)).return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
+LX.declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))).assign(scalar(has_stage), has_key(hash(normalized), "stage")).assign(scalar(chosen_stage), scalar(hash(normalized), "stage")).if(scalar(has_stage)).return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
+LX { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37617,12 +37617,12 @@ subtest 'method_like_fluent_and_structured_action_drop_keys_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")).assign(scalar(has_kind), has_key(hash(cleaned), "kind")).if(scalar(has_kind)).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")).assign(scalar(has_kind), has_key(hash(cleaned), "kind")).if(scalar(has_kind)).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37660,13 +37660,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_keys_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")).assign(scalar(has_kind), has_key(hash(cleaned), "kind")).if(scalar(has_kind)).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")).assign(scalar(has_kind), has_key(hash(cleaned), "kind")).if(scalar(has_kind)).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37729,12 +37729,12 @@ subtest 'method_like_fluent_and_structured_action_pick_keys_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(hash, projected).declare(scalar, has_kind).assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage")).assign(scalar(has_kind), has_key(hash(projected), "kind")).if(scalar(has_kind)).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(hash, projected).declare(scalar, has_kind).assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")).assign(scalar(has_kind), has_key(hash(projected), "kind")).if(scalar(has_kind)).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage")); assign(scalar(has_kind), has_key(hash(projected), "kind")); if(scalar(has_kind)); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")); assign(scalar(has_kind), has_key(hash(projected), "kind")); if(scalar(has_kind)); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37772,13 +37772,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_pick_keys_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(hash, projected).declare(scalar, has_kind).assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage")).assign(scalar(has_kind), has_key(hash(projected), "kind")).if(scalar(has_kind)).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(hash, projected).declare(scalar, has_kind).assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")).assign(scalar(has_kind), has_key(hash(projected), "kind")).if(scalar(has_kind)).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage")); assign(scalar(has_kind), has_key(hash(projected), "kind")); if(scalar(has_kind)); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")); assign(scalar(has_kind), has_key(hash(projected), "kind")); if(scalar(has_kind)); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37841,12 +37841,12 @@ subtest 'method_like_fluent_and_structured_action_sorted_keys_value_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(key_count), count(array(projected_keys))).if(num_gt(scalar(key_count), 0)).return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(key_count), count(array(projected_keys))).if(num_gt(scalar(key_count), 0)).return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37884,13 +37884,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_keys_value_helpers_l
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(key_count), count(array(projected_keys))).if(num_gt(scalar(key_count), 0)).return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(key_count), count(array(projected_keys))).if(num_gt(scalar(key_count), 0)).return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37953,12 +37953,12 @@ subtest 'method_like_fluent_and_structured_action_sorted_values_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_values).declare(scalar, value_count).assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(value_count), count(array(projected_values))).if(num_gt(scalar(value_count), 0)).return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_values).declare(scalar, value_count).assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(value_count), count(array(projected_values))).if(num_gt(scalar(value_count), 0)).return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(value_count), count(array(projected_values))); if(num_gt(scalar(value_count), 0)); return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(value_count), count(array(projected_values))); if(num_gt(scalar(value_count), 0)); return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37996,13 +37996,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_values_value_helpers
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_values).declare(scalar, value_count).assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(value_count), count(array(projected_values))).if(num_gt(scalar(value_count), 0)).return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_values).declare(scalar, value_count).assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(value_count), count(array(projected_values))).if(num_gt(scalar(value_count), 0)).return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(value_count), count(array(projected_values))); if(num_gt(scalar(value_count), 0)); return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(value_count), count(array(projected_values))); if(num_gt(scalar(value_count), 0)); return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -42943,12 +42943,12 @@ subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_ba
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'pplugin comment edge now uses helper-form next()');
     like($source_content, qr/-> subdef\s+\{assign\(scalar\(retv\), call\(subdef\)\)\}/, 'pplugin subdef edge now uses helper-form assignment');
     like($source_content, qr/if\(is_defined\(scalar\(retv\)\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
-    like($source_content, qr/assign\(array\(defs\), array\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation now uses canonical array wrappers in assign and constructor positions');
+    like($source_content, qr/assign\(array\(defs\), array\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)/, 'pplugin top aggregation now uses canonical array wrappers and direct access in assign and constructor positions');
     like($source_content, qr/return_undef\(\);/, 'pplugin top aggregation fallback now uses helper-form return_undef()');
     like($source_content, qr/^LX \{return\(hash\(flat_array\(array\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
     like($source_content, qr/subdef\[1\]\s+\{return\(array\(entry_named\(subname\), sub \{eval substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\)\}\)\)\}/, 'pplugin subdef body now uses helper-form array return around the preserved plugin-body coderef');
     like($source_content, qr/curlyb\[1\]\s+\{return_undef\(\)\}/, 'pplugin curlyb completion now uses helper-form return_undef()');
-    unlike($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation no longer uses retired a() aliases in the migrated band');
+    unlike($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)\)/, 'pplugin top aggregation no longer uses retired a() aliases in the migrated band');
     unlike($source_content, qr/return undef unless defined \$retv/, 'pplugin top aggregation no longer uses bare return-unless compatibility syntax');
     unlike($source_content, qr/^LX \{return \{\@defs\}\}/m, 'pplugin top LX no longer uses bare hashref return compatibility syntax');
     unlike($source_content, qr/curlyb\[1\]\s+\{return\}/, 'pplugin curlyb completion no longer uses bare return compatibility syntax');
@@ -44240,7 +44240,7 @@ fn mk_items(first, second) { items += first; items += second; return(array_copy(
 fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
 fn local_shadow(value) { temp = value; return(temp) }
 Top::
- /x/ -> Done { set(out, normalize(" x ")); items += join_pair("a","b"); meta["k"] = normalize(" v " ); return([out, final_expr(" y "), join_pair("a","b"), count(mk_items("a","b")), mk_meta("stage","ok").scalaref("stage"), normalize(" Z " ).lowercase(), choose("first"), count(array_copy(items)), hash_copy(meta).scalaref("k"), local_shadow("inner"), temp]) }
+ /x/ -> Done { set(out, normalize(" x ")); items += join_pair("a","b"); meta["k"] = normalize(" v " ); set(scalar(stage_meta), mk_meta("stage","ok")); set(stage_count, count_keys(scalar(stage_meta))); return([out, final_expr(" y "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["stage"], normalize(" Z " ).lowercase(), choose("first"), count(array_copy(items)), scalar(hash(meta),"k"), local_shadow("inner"), temp]) }
 Done::
  /x/
 SPEC
@@ -45017,8 +45017,7 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
 subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' => sub {
     # SPEC-FORMAT-TERSE.1.2.3.3.3 (Channel 2 scalar direct-access subset):
     # a non-reserved bare atom inside direct-access [] is a scalar array index,
-    # matching the explicit [scalar(NAME)] form. scalaref(...) compatibility keeps
-    # its historical path semantics.
+    # matching the explicit [scalar(NAME)] form.
     plan tests => 18;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -45050,8 +45049,8 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         'reserved primitive literal true is not claimed as a direct-access path scalar read');
     is($L->('return(foo["a"][CAPTURE])'), 'return foo["a"][CAPTURE]',
         'reserved engine local CAPTURE is not claimed as a direct-access path scalar read');
-    is($L->('return(scalaref(foo,{"a"}[z]))'), 'return $foo->{"a"}->[z]',
-        'scalaref(...) compatibility path keeps its historical bare segment semantics');
+    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+        'direct-access bare path atom keeps scalar-index semantics across repeated lowering');
     is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
         'all-bare push(A,B) remains child-call syntax');
 
@@ -45638,7 +45637,7 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
         'reserved direct-access path segment remains outside the canonical dereference lowering',
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(scalaref(foo,{"a"}[9]{"b"}[scalar(z)]))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][scalar(z)])'),
         'return $foo->{"a"}->[9]->{"b"}->[$z]',
         'direct nested access matches the existing scalaref lowering for the explicit path',
     );
@@ -46008,15 +46007,15 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
 
     like($L->('return(meta.set_key("c",3).sorted_keys().join_values(","))'), qr/__ls_set_key.*sort keys.*join/s,
         'hash receiver chain lowers through set_key/sorted_keys/join_values helper contracts');
-    like($L->('return(meta.merge_hash(hash("a",9)).scalaref("a"))'), qr/%meta.*"a" => 9.*__ls_scalar_source/s,
-        'hash receiver merge_hash preserves the receiver and later overlay before scalar field read');
+    like($L->('return(scalar(hash(meta), "a"))'), qr/\$meta\{"a"\}/s,
+        'named hash scalar field reads replace receiver-dot scalaref for direct field access');
     like($L->('return(hash(meta).rename_key("a","aa").drop_keys("b").set_key("z",4).count_keys())'), qr/__ls_rename_key.*__ls_drop.*__ls_count_keys/s,
         'explicit hash receiver chains hash-returning helpers into count_keys');
     like($L->('return(meta.hash_copy().flat_hash().count_keys())'), qr/__ls_flat_hash.*__ls_count_keys/s,
         'hash_copy/flat_hash receiver chain lowers as a hash-valued snapshot');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { set_key(meta,\"b\",2); set_key(meta,\"a\",1); set_key(extra,\"a\",9); set_key(extra,\"c\",3); return(array(meta.set_key(\"c\",3).sorted_keys().join_values(\",\"), meta.merge_hash(hash(extra)).scalaref(\"a\"), hash(meta).rename_key(\"a\",\"aa\").drop_keys(\"b\").set_key(\"z\",4).count_keys(), meta.pick_keys(\"a\",\"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }\n"
+             . " /x/ -> Done { set_key(meta,\"b\",2); set_key(meta,\"a\",1); set_key(extra,\"a\",9); set_key(extra,\"c\",3); set_key(layered,\"a\",scalar(hash(extra),\"a\")); return(array(meta.set_key(\"c\",3).sorted_keys().join_values(\",\"), scalar(hash(layered),\"a\"), hash(meta).rename_key(\"a\",\"aa\").drop_keys(\"b\").set_key(\"z\",4).count_keys(), meta.pick_keys(\"a\",\"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'hash receiver value-chain spec compiles to a parser')

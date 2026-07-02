@@ -26,9 +26,9 @@ Small examples:
 
 ```text
 join_values("", array(word))
-scalaref(retv, {content})
+retv["content"]
 array_copy(array(items))
-hash("type", scalaref(retv, {type}), "content", scalaref(retv, {content}))
+hash("type", retv["type"], "content", retv["content"])
 ```
 
 Larger examples:
@@ -41,7 +41,7 @@ assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/
 return(hash(
   "kind", "NODE",
   "head", scalar(items, 0),
-  "content", scalaref(retv, {content}),
+  "content", retv["content"],
   "parts", array_copy(array(parts))
 ))
 ```
@@ -141,7 +141,7 @@ That broader shape matters because `join_values(...)` is not just “join one na
 ```text
 join_values(", ", sorted_keys(hash(meta)))
 join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source")))
-join_values(", ", coalesce(scalaref(retv, {parts}), array("fallback")))
+join_values(", ", coalesce(retv["parts"], array("fallback")))
 ```
 
 So the usual parser-oriented pattern can stay compact:
@@ -159,7 +159,7 @@ slice(array(parts), 1)
 slice(array(parts), 1, 2)
 slice(sorted_keys(hash(meta)), 1)
 slice(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))
-slice(coalesce(scalaref(retv, {parts}), array("fallback")), scalar(slice_start))
+slice(coalesce(retv["parts"], array("fallback")), scalar(slice_start))
 ```
 
 Use `slice(...)` when:
@@ -199,8 +199,8 @@ Examples:
 
 ```text
 trim(scalar(IMATCH))
-lowercase(trim(scalaref(retv, {content})))
-uppercase(coalesce(scalaref(retv, {type}), "word"))
+lowercase(trim(retv["content"]))
+uppercase(coalesce(retv["type"], "word"))
 ```
 
 Use cases:
@@ -213,8 +213,8 @@ Examples in context:
 
 ```text
 assign(scalar(clean_name), trim(scalar(IMATCH)))
-assign(scalar(norm_type), lowercase(trim(coalesce(scalaref(retv, {type}), " WORD "))))
-return(hash("kind", uppercase(trim(coalesce(scalaref(retv, {kind}), "unknown")))))
+assign(scalar(norm_type), lowercase(trim(coalesce(retv["type"], " WORD "))))
+return(hash("kind", uppercase(trim(coalesce(retv["kind"], "unknown")))))
 ```
 
 Important semantic note:
@@ -229,7 +229,7 @@ Examples:
 ```text
 concat(scalar(name), "_", scalar(stage))
 concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_"))
-concat(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))
+concat(coalesce_nonempty(trim(retv["type"]), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))
 ```
 
 Use cases:
@@ -263,8 +263,8 @@ Examples:
 
 ```text
 length(scalar(name))
-length(trim(scalaref(retv, {content})))
-length(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+length(trim(retv["content"]))
+length(coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"))
 ```
 
 Use cases:
@@ -276,8 +276,8 @@ Examples in context:
 
 ```text
 assign(scalar(clean_length), length(trim(scalar(IMATCH))))
-assign(scalar(content_length), length(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))
-return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))))
+assign(scalar(content_length), length(coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")))
+return(hash("content_length", length(trim(coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")))))
 if(num_gt(coalesce(length(trim(scalar(name))), 0), 3))
 ```
 
@@ -295,7 +295,7 @@ coalesce(length(trim(scalar(name))), 0)
 ### Defaulting and coalescing scalar values
 
 ```text
-coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")
+coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")
 coalesce(scalar(explicit_name), scalar(fallback_name), "unnamed")
 ```
 
@@ -311,17 +311,17 @@ So it behaves like a parser-oriented "first defined value wins" helper, not a ge
 Examples:
 
 ```text
-assign(scalar(chosen_name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+assign(scalar(chosen_name), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"))
 return(hash("name", coalesce(scalar(explicit_name), scalar(fallback_name), "unnamed")))
-if(eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD"))
+if(eq(coalesce(retv["type"], "UNKNOWN"), "WORD"))
 ```
 
 ### Defaulting nonempty scalar values with `coalesce_nonempty(...)`
 
 ```text
-coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN")
+coalesce_nonempty(trim(retv["content"]), scalar(IMATCH), "UNKNOWN")
 coalesce_nonempty(trim(scalar(explicit_name)), trim(scalar(fallback_name)), "unnamed")
-coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD")
+coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD")
 ```
 
 Use `coalesce_nonempty(...)` when you want the first **defined nonempty scalar** value in a fallback chain.
@@ -337,9 +337,9 @@ So `coalesce_nonempty(...)` is the parser-oriented helper for “first real text
 Examples:
 
 ```text
-assign(scalar(chosen_name), coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN"))
-return(hash("chosen_type", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD")))
-if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD"))
+assign(scalar(chosen_name), coalesce_nonempty(trim(retv["content"]), scalar(IMATCH), "UNKNOWN"))
+return(hash("chosen_type", coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD")))
+if(eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD"))
 ```
 
 ### Presence checks versus emptiness checks
@@ -350,10 +350,10 @@ Once you start composing scalar helpers deeply, it becomes important to distingu
 That is the difference between:
 
 ```text
-is_defined(scalaref(retv, {content}))
-is_undefined(scalaref(retv, {content}))
-is_empty(scalaref(retv, {content}))
-is_nonempty(scalaref(retv, {content}))
+is_defined(retv["content"])
+is_undefined(retv["content"])
+is_empty(retv["content"])
+is_nonempty(retv["content"])
 ```
 
 Use `is_defined(...)` / `is_undefined(...)` when presence matters.
@@ -362,15 +362,15 @@ Use `is_empty(...)` / `is_nonempty(...)` when content size matters.
 Examples:
 
 ```text
-if(is_defined(scalaref(retv, {content})))
-if(is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH))))
-if(is_empty(scalaref(retv, {content})))
+if(is_defined(retv["content"]))
+if(is_undefined(coalesce(retv["type"], scalar(IMATCH))))
+if(is_empty(retv["content"]))
 if(is_nonempty(join_values("", array(word))))
 if(is_empty(sorted_values(pick_keys(hash(meta), "kind", "source"))))
 if(is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))
-assign(scalar(content_empty), is_empty(scalaref(retv, {content})))
+assign(scalar(content_empty), is_empty(retv["content"]))
 assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))
-return(hash("content_empty", is_empty(scalaref(retv, {content})), "meta_nonempty", is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))))
+return(hash("content_empty", is_empty(retv["content"]), "meta_nonempty", is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))))
 ```
 
 Important semantic difference:
@@ -388,9 +388,9 @@ One more practical point now matters too:
 ### String scalars read from returned payloads
 
 ```text
-scalaref(retv, {content})
-scalaref(retv, {type})
-scalaref(tree, [0]{name})
+retv["content"]
+retv["type"]
+tree[0]["name"]
 ```
 
 This is the canonical way to say "read one field from a nested returned payload."
@@ -398,9 +398,9 @@ This is the canonical way to say "read one field from a nested returned payload.
 Examples:
 
 ```text
-assign(scalar(kind), scalaref(retv, {type}))
-assign(scalar(content), scalaref(retv, {content}))
-return(hash("head_name", scalaref(tree, [0]{name})))
+assign(scalar(kind), retv["type"])
+assign(scalar(content), retv["content"])
+return(hash("head_name", tree[0]["name"]))
 ```
 
 ## Integer scalar methods
@@ -698,11 +698,11 @@ num_abs(coalesce(num_sub(scalar(depth), scalar(upper_limit)), 0))
 num_floor(coalesce(num_sub(scalar(depth), scalar(offset)), 0))
 num_ceil(coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)), 0))
 num_round(coalesce(num_add(length(trim(scalar(name))), 0.5), 0))
-num_sum(coalesce(scalaref(retv, {scores}), array()))
-coalesce(num_avg(coalesce(scalaref(retv, {scores}), array())), 0)
-coalesce(num_median(coalesce(scalaref(retv, {scores}), array())), 0)
-coalesce(num_range(coalesce(scalaref(retv, {scores}), array())), 0)
-coalesce(num_min(coalesce(scalaref(retv, {scores}), array())), 0)
+num_sum(coalesce(retv["scores"], array()))
+coalesce(num_avg(coalesce(retv["scores"], array())), 0)
+coalesce(num_median(coalesce(retv["scores"], array())), 0)
+coalesce(num_range(coalesce(retv["scores"], array())), 0)
+coalesce(num_min(coalesce(retv["scores"], array())), 0)
 num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))
@@ -710,7 +710,7 @@ coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)),
 num_mod(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 3)
 num_clamp(coalesce(num_add(count(array(parts)), scalar(offset)), 0), scalar(lower_limit), 10)
 num_min(coalesce(num_add(count(array(parts)), scalar(offset)), 0), scalar(lower_limit), 10)
-coalesce(num_max(coalesce(scalaref(retv, {scores}), array())), 0)
+coalesce(num_max(coalesce(retv["scores"], array())), 0)
 num_max(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 2, scalar(upper_limit))
 num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
 ```
@@ -778,17 +778,17 @@ assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "sour
 assign(scalar(chosen_kind), scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind"))
 assign(scalar(chosen_stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
 assign(scalar(stage_after_rename), scalar(rename_key(hash(meta), "old_stage", "stage"), "stage"))
-assign(scalar(fallback_part), scalar(coalesce(scalaref(retv, {parts}), array("fallback")), 0))
-assign(scalar(fallback_kind), scalar(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+assign(scalar(fallback_part), scalar(coalesce(retv["parts"], array("fallback")), 0))
+assign(scalar(fallback_kind), scalar(coalesce(retv["meta"], hash("kind", "fallback")), "kind"))
 return(hash("head", scalar(items, 0)))
 ```
 
-### Multi-step nested reads with `scalaref(...)`
+### Multi-step Nested Reads With Direct Access
 
 ```text
-scalaref(retv, {content})
-scalaref(tree, [0]{kind})
-scalaref(report, {stats}{count})
+retv["content"]
+tree[0]["kind"]
+report["stats"]["count"]
 ```
 
 Use this when the value lives inside a returned object or another nested aggregate.
@@ -796,9 +796,9 @@ Use this when the value lives inside a returned object or another nested aggrega
 Examples:
 
 ```text
-assign(scalar(kind), scalaref(retv, {type}))
-assign(scalar(count), scalaref(report, {stats}{count}))
-if(eq(scalaref(retv, {type}), "SPACE"))
+assign(scalar(kind), retv["type"])
+assign(scalar(count), report["stats"]["count"])
+if(eq(retv["type"], "SPACE"))
 ```
 
 ## Array methods
@@ -850,7 +850,7 @@ concat_arrays(array(parts), array("tail"))
 concat_arrays(array(parts), sorted_keys(hash(meta)))
 concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))
 concat_arrays(
-  coalesce(scalaref(retv, {parts}), array("fallback")),
+  coalesce(retv["parts"], array("fallback")),
   take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 1),
   array("done")
 )
@@ -886,8 +886,8 @@ Important semantic notes:
 Examples:
 
 ```text
-coalesce(scalaref(retv, {parts}), array("empty"))
-coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))
+coalesce(retv["parts"], array("empty"))
+coalesce(retv["meta"], hash("kind", "fallback"))
 ```
 
 That is useful when:
@@ -897,8 +897,8 @@ That is useful when:
 When you need to branch on presence rather than build a fallback value immediately, pair that with `is_defined(...)` or `is_undefined(...)`:
 
 ```text
-if(is_defined(scalaref(retv, {parts})))
-if(is_undefined(scalaref(retv, {meta})))
+if(is_defined(retv["parts"]))
+if(is_undefined(retv["meta"]))
 ```
 
 ### Aggregate size as a scalar with `count(...)`
@@ -908,7 +908,7 @@ Examples:
 
 ```text
 count(array(parts))
-count(coalesce(scalaref(retv, {parts}), array("empty")))
+count(coalesce(retv["parts"], array("empty")))
 count(array("a", "b", "c"))
 ```
 
@@ -921,7 +921,7 @@ Examples in context:
 
 ```text
 assign(scalar(part_count), count(array(parts)))
-assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
+assign(scalar(part_count), count(coalesce(retv["parts"], array("empty"))))
 return(hash("part_count", count(array(parts))))
 if(num_gt(count(array(parts)), 0))
 ```
@@ -941,7 +941,7 @@ first(array(parts))
 last(array(parts))
 first(sorted_keys(hash(meta)))
 last(sorted_values(pick_keys(hash(meta), "kind", "source")))
-first(coalesce(scalaref(retv, {parts}), array("fallback")))
+first(coalesce(retv["parts"], array("fallback")))
 ```
 
 Use cases:
@@ -974,7 +974,7 @@ index_of(array(parts), "kind")
 index_of(sorted_keys(hash(meta)), "kind")
 index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized")
 index_of(concat_arrays(array(parts), array("tail")), "tail")
-index_of(coalesce(scalaref(retv, {parts}), array("fallback")), scalar(IMATCH))
+index_of(coalesce(retv["parts"], array("fallback")), scalar(IMATCH))
 ```
 
 Use cases:
@@ -1016,7 +1016,7 @@ drop_front(array(parts), 2)
 drop_front(sorted_keys(hash(meta)))
 drop_front(sorted_keys(hash(meta)), scalar(skip_count))
 drop_front(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-drop_front(coalesce(scalaref(retv, {parts}), array("fallback")))
+drop_front(coalesce(retv["parts"], array("fallback")))
 ```
 
 Use cases:
@@ -1082,7 +1082,7 @@ take(array(parts), 2)
 take(sorted_keys(hash(meta)))
 take(sorted_keys(hash(meta)), scalar(take_count))
 take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-take(coalesce(scalaref(retv, {parts}), array("fallback")))
+take(coalesce(retv["parts"], array("fallback")))
 ```
 
 Use cases:
@@ -1145,7 +1145,7 @@ take_last(array(parts), 2)
 take_last(sorted_keys(hash(meta)))
 take_last(sorted_keys(hash(meta)), scalar(take_last_count))
 take_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-take_last(coalesce(scalaref(retv, {parts}), array("fallback")))
+take_last(coalesce(retv["parts"], array("fallback")))
 ```
 
 Use cases:
@@ -1205,7 +1205,7 @@ Examples:
 ```text
 replace_substr(scalar(name), "-", "_")
 replace_substr(lowercase(trim(scalar(name))), " ", "_")
-replace_substr(coalesce(scalaref(retv, {kind}), scalar(IMATCH)), "::", ".")
+replace_substr(coalesce(retv["kind"], scalar(IMATCH)), "::", ".")
 replace_substr(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "-", "_")
 ```
 
@@ -1223,9 +1223,9 @@ normalized_name:
  => Top {
       declare(scalar, raw_name, normalized_name, normalized_kind)
 
-      assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
+      assign(scalar(raw_name), coalesce(retv["name"], scalar(IMATCH), ""))
       assign(scalar(normalized_name), replace_substr(lowercase(trim(scalar(raw_name))), "-", "_"))
-      assign(scalar(normalized_kind), replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), "node type"))), " ", "_"))
+      assign(scalar(normalized_kind), replace_substr(lowercase(trim(coalesce(retv["kind"], "node type"))), " ", "_"))
 
       return(hash(
         "raw_name", scalar(raw_name),
@@ -1239,7 +1239,7 @@ Representative shorter patterns:
 
 ```text
 assign(scalar(normalized_name), replace_substr(lowercase(trim(scalar(name))), "-", "_"))
-assign(scalar(normalized_kind), replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), " ", "_"))
+assign(scalar(normalized_kind), replace_substr(lowercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), " ", "_"))
 return(hash("normalized_name", replace_substr(lowercase(trim(scalar(name))), "-", "_")))
 if(eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item"))
 if(starts_with(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"))
@@ -1260,7 +1260,7 @@ Examples:
 ```text
 rm_prefix(lowercase(trim(scalar(name))), "node_")
 rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end")
-rm_prefix(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "raw_word"), "raw_")
+rm_prefix(coalesce_nonempty(trim(retv["type"]), scalar(IMATCH), "raw_word"), "raw_")
 rm_suffix(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "_draft")
 ```
 
@@ -1279,7 +1279,7 @@ normalized_boundary_name:
  => Top {
       declare(scalar, raw_name, underscored_name, core_name, base_name)
 
-      assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
+      assign(scalar(raw_name), coalesce(retv["name"], scalar(IMATCH), ""))
       assign(scalar(underscored_name), replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"))
       assign(scalar(core_name), rm_prefix(scalar(underscored_name), "node_"))
       assign(scalar(base_name), rm_suffix(scalar(underscored_name), "_end"))
@@ -1320,10 +1320,10 @@ starts_with(scalar(name), "pre")
 ends_with(scalar(name), "fix")
 contains_substr(scalar(name), "efi")
 starts_with(lowercase(trim(scalar(name))), "node_")
-ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")
-contains_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "node")
+ends_with(lowercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), "_end")
+contains_substr(lowercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), "node")
 matches(lowercase(trim(scalar(name))), /^node_/)
-matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/)
+matches(uppercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), /^[A-Z_]+$/)
 ```
 
 Useful when:
@@ -1342,12 +1342,12 @@ token_shape:
  => Top {
       declare(scalar, raw_name, lowered_name, has_node_prefix, has_end_suffix, has_mid_node, is_wordish)
 
-      assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
+      assign(scalar(raw_name), coalesce(retv["name"], scalar(IMATCH), ""))
       assign(scalar(lowered_name), lowercase(trim(scalar(raw_name))))
       assign(scalar(has_node_prefix), starts_with(scalar(lowered_name), "node_"))
       assign(scalar(has_end_suffix), ends_with(scalar(lowered_name), "_end"))
       assign(scalar(has_mid_node), contains_substr(scalar(lowered_name), "node"))
-      assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/))
+      assign(scalar(is_wordish), matches(uppercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), /^[A-Z_]+$/))
 
       return(hash(
         "name", scalar(lowered_name),
@@ -1365,12 +1365,12 @@ Representative shorter patterns:
 assign(scalar(has_node_prefix), starts_with(lowercase(trim(scalar(name))), "node_"))
 assign(scalar(has_end_suffix), ends_with(lowercase(trim(scalar(name))), "_end"))
 assign(scalar(has_mid_node), contains_substr(lowercase(trim(scalar(name))), "node"))
-assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/))
+assign(scalar(is_wordish), matches(uppercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), /^[A-Z_]+$/))
 return(hash(
   "has_node_prefix", starts_with(lowercase(trim(scalar(name))), "node_"),
   "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end"),
   "has_mid_node", contains_substr(lowercase(trim(scalar(name))), "node"),
-  "is_wordish", matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/)
+  "is_wordish", matches(uppercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), /^[A-Z_]+$/)
 ))
 if(and(starts_with(lowercase(trim(scalar(name))), "node_"), contains_substr(lowercase(trim(scalar(name))), "node")))
 if(matches(lowercase(trim(scalar(name))), /^node_/))
@@ -1378,7 +1378,7 @@ if(matches(lowercase(trim(scalar(name))), /^node_/))
 
 Semantic notes:
 - all four helpers return scalar `1` or `0`,
-- they compose directly with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
+- they compose directly with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and direct nested access,
 - undefined main values return `0`,
 - undefined prefix/suffix expressions return `0`,
 - undefined substring needles return `0`,
@@ -1396,7 +1396,7 @@ drop_back(array(parts), 2)
 drop_back(sorted_keys(hash(meta)))
 drop_back(sorted_keys(hash(meta)), scalar(drop_count))
 drop_back(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-drop_back(coalesce(scalaref(retv, {parts}), array("fallback")))
+drop_back(coalesce(retv["parts"], array("fallback")))
 ```
 
 Use cases:
@@ -1457,7 +1457,7 @@ Examples:
 ```text
 contains(array(parts), "foo")
 contains(sorted_keys(hash(meta)), "kind")
-contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))
+contains(coalesce(retv["parts"], array("empty")), scalar(IMATCH))
 ```
 
 Use cases:
@@ -1470,7 +1470,7 @@ Examples in context:
 ```text
 assign(scalar(has_kind), contains(sorted_keys(hash(meta)), "kind"))
 assign(scalar(has_node_value), contains(sorted_values(pick_keys(hash(meta), "kind", "source")), "NODE"))
-return(hash("has_match", contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))))
+return(hash("has_match", contains(coalesce(retv["parts"], array("empty")), scalar(IMATCH))))
 if(contains(sorted_keys(drop_keys(hash(meta), "debug")), "kind"))
 ```
 
@@ -1487,7 +1487,7 @@ Examples:
 
 ```text
 count_keys(hash(meta))
-count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))
+count_keys(coalesce(retv["meta"], hash("kind", "fallback")))
 count_keys(hash("kind", "NODE", "source", "Top"))
 ```
 
@@ -1500,9 +1500,9 @@ Examples in context:
 
 ```text
 assign(scalar(meta_key_count), count_keys(hash(meta)))
-assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))))
+assign(scalar(meta_key_count), count_keys(coalesce(retv["meta"], hash("kind", "fallback"))))
 return(hash("meta_key_count", count_keys(hash(meta))))
-if(num_gt(count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))), 1))
+if(num_gt(count_keys(coalesce(retv["meta"], hash("kind", "fallback"))), 1))
 ```
 
 Important semantic note:
@@ -1517,7 +1517,7 @@ Examples:
 
 ```text
 has_key(hash(meta), "kind")
-has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
+has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")
 has_key(hash("kind", "NODE", "source", "Top"), "source")
 ```
 
@@ -1530,9 +1530,9 @@ Examples in context:
 
 ```text
 assign(scalar(has_kind), has_key(hash(meta), "kind"))
-assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+assign(scalar(has_kind), has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind"))
 return(hash("has_kind", has_key(hash(meta), "kind")))
-if(has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+if(has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind"))
 ```
 
 Important semantic note:
@@ -1542,7 +1542,7 @@ Important semantic note:
 
 That means:
 - use `has_key(...)` when the parser is asking “does this shape include this field?”,
-- use `is_defined(scalaref(...))` when the parser is asking “is the resolved field value defined?”.
+- use `is_defined(payload["field"])` when the parser is asking “is the resolved field value defined?”.
 
 ### Hash/object layering with `merge_hash(...)`
 `merge_hash(...)` is the parser-oriented helper for “build one new object from several object layers.”
@@ -1551,7 +1551,7 @@ Examples:
 
 ```text
 merge_hash(hash(meta), hash("stage", "normalized"))
-merge_hash(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("source", scalar(rule_name)))
+merge_hash(coalesce(retv["meta"], hash("kind", "fallback")), hash("source", scalar(rule_name)))
 merge_hash(hash(base_meta), hash(overrides), hash("kind", "NODE"))
 ```
 
@@ -1564,7 +1564,7 @@ Examples in context:
 
 ```text
 assign(hash(merged_meta), merge_hash(hash(base_meta), hash("stage", "normalized")))
-assign(hash(merged_meta), merge_hash(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("source", scalar(rule_name))))
+assign(hash(merged_meta), merge_hash(coalesce(retv["meta"], hash("kind", "fallback")), hash("source", scalar(rule_name))))
 return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta)))))
 if(has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind"))
 ```
@@ -1615,7 +1615,7 @@ Examples:
 ```text
 set_key(hash(meta), "stage", "normalized")
 set_key(merge_hash(hash(meta), hash("kind", "NODE")), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))
-set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "source", scalar(rule_name))
+set_key(coalesce(retv["meta"], hash("kind", "fallback")), "source", scalar(rule_name))
 ```
 
 Use cases:
@@ -1629,7 +1629,7 @@ Examples in context:
 assign(hash(normalized_meta), set_key(hash(meta), "stage", "normalized"))
 assign(hash(normalized_meta), set_key(merge_hash(hash(meta), hash("kind", "NODE")), "owner", scalar(rule_name)))
 assign(scalar(chosen_stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
-return(set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "source", scalar(rule_name)))
+return(set_key(coalesce(retv["meta"], hash("kind", "fallback")), "source", scalar(rule_name)))
 if(has_key(set_key(hash(meta), "stage", "normalized"), "stage"))
 ```
 
@@ -1680,7 +1680,7 @@ Examples:
 ```text
 drop_keys(hash(meta), "debug")
 drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug", "span")
-drop_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "raw_text")
+drop_keys(coalesce(retv["meta"], hash("kind", "fallback")), "raw_text")
 ```
 
 Use cases:
@@ -1792,7 +1792,7 @@ Examples:
 return(hash(
   "type", "RESULT",
   "meta", hash("threshold", scalar(threshold), "confidence", scalar(confidence)),
-  "content", scalaref(retv, {content})
+  "content", retv["content"]
 ))
 ```
 
@@ -1810,16 +1810,16 @@ declare(hash, meta=hash("kind", "node", "depth", scalar(depth)))
 ### In assignments
 
 ```text
-assign(scalar(token), scalaref(retv, {content}))
-assign(scalar(chosen_name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+assign(scalar(token), retv["content"])
+assign(scalar(chosen_name), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"))
 assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
-assign(hash(meta), hash("head", scalar(items, 0), "content", scalaref(retv, {content})))
+assign(hash(meta), hash("head", scalar(items, 0), "content", retv["content"]))
 ```
 
 ### In `push_value(...)`
 
 ```text
-push_value(array(nodes), hash("type", scalaref(retv, {type}), "content", scalaref(retv, {content})))
+push_value(array(nodes), hash("type", retv["type"], "content", retv["content"]))
 push_value(array(words), join_values("", array(word)))
 push_value(array(payloads), array_copy(array(parts)))
 ```
@@ -1828,7 +1828,7 @@ push_value(array(payloads), array_copy(array(parts)))
 
 ```text
 return(hash("type", "NODE", "content", scalar(name)))
-return(hash("type", "NODE", "content", coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))
+return(hash("type", "NODE", "content", coalesce(retv["content"], scalar(IMATCH), "UNKNOWN")))
 return(array("?node:", scalar(name), array_copy(array(parts))))
 return(hash("meta", hash("depth", scalar(depth)), "items", array_copy(array(items))))
 ```
@@ -1836,8 +1836,8 @@ return(hash("meta", hash("depth", scalar(depth)), "items", array_copy(array(item
 ### In conditions and control flow
 
 ```text
-if(and(is_nonempty(array(parts)), eq(scalaref(retv, {type}), "WORD")))
-switch(scalaref(retv, {type}))
+if(and(is_nonempty(array(parts)), eq(retv["type"], "WORD")))
+switch(retv["type"])
 ```
 
 Examples:
@@ -1851,14 +1851,14 @@ endif
 ```
 
 ```text
-switch(scalaref(retv, {type}))
+switch(retv["type"])
   case("SPACE") {
     return_undef()
   }
   default {
     return(hash(
-      "type", scalaref(retv, {type}),
-      "content", scalaref(retv, {content}),
+      "type", retv["type"],
+      "content", retv["content"],
       "parts", array_copy(array(parts))
     ))
   }
@@ -1943,11 +1943,11 @@ I {
 -> child {
   assign(scalar(retv), call(child))
   push_value(array(nodes), hash(
-    "type", scalaref(retv, {type}),
-    "content", scalaref(retv, {content})
+    "type", retv["type"],
+    "content", retv["content"]
   ))
-  if(is_nonempty(scalaref(retv, {content})))
-    push_value(array(names), scalaref(retv, {content}))
+  if(is_nonempty(retv["content"]))
+    push_value(array(names), retv["content"])
   endif
 }
 
@@ -1962,7 +1962,7 @@ I {
 
 What this example teaches:
 - child results are captured canonically with `assign(scalar(retv), call(child))`,
-- fields are read out of the child payload with `scalaref(...)`,
+- fields are read out of the child payload with direct nested access,
 - hashes are pushed into one accumulator array,
 - strings are pushed into another accumulator array,
 - the final return wraps both arrays in one object payload.
@@ -1979,12 +1979,12 @@ I {
 }
 
 -> child {
-  assign(scalar(chosen_type), coalesce(scalaref(retv, {type}), "UNKNOWN"))
-  assign(scalar(chosen_content), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+  assign(scalar(chosen_type), coalesce(retv["type"], "UNKNOWN"))
+  assign(scalar(chosen_content), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"))
   return(hash(
     "type", scalar(chosen_type),
     "content", scalar(chosen_content),
-    "parts", coalesce(scalaref(retv, {parts}), array("empty"))
+    "parts", coalesce(retv["parts"], array("empty"))
   ))
 }
 ```
@@ -2007,8 +2007,8 @@ I {
 }
 
 -> child[1] {
-  assign(scalar(chosen_type), uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))
-  assign(scalar(chosen_content), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))))
+  assign(scalar(chosen_type), uppercase(trim(coalesce(retv["type"], "word"))))
+  assign(scalar(chosen_content), lowercase(trim(coalesce(retv["content"], scalar(IMATCH), " UNKNOWN "))))
   return(hash(
     "type", scalar(chosen_type),
     "content", scalar(chosen_content)
@@ -2033,18 +2033,18 @@ I {
 }
 
 -> child[1] {
-  assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
+  assign(scalar(part_count), count(coalesce(retv["parts"], array("empty"))))
   if(num_gt(scalar(part_count), 1))
     return(hash(
       "kind", "MULTI_PART",
       "part_count", scalar(part_count),
-      "parts", coalesce(scalaref(retv, {parts}), array("empty"))
+      "parts", coalesce(retv["parts"], array("empty"))
     ))
   else
     return(hash(
       "kind", "SINGLE_PART",
       "part_count", scalar(part_count),
-      "parts", coalesce(scalaref(retv, {parts}), array("empty"))
+      "parts", coalesce(retv["parts"], array("empty"))
     ))
   endif
 }
@@ -2066,20 +2066,20 @@ This is the common parser shape where one rule wants:
   declare(scalar, meta_key_count)
   assign(
     scalar(meta_key_count),
-    count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))
+    count_keys(coalesce(retv["meta"], hash("kind", "fallback")))
   )
 
   if(num_gt(scalar(meta_key_count), 1))
     return(hash(
       "kind", "RICH_META",
       "meta_key_count", scalar(meta_key_count),
-      "meta", coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))
+      "meta", coalesce(retv["meta"], hash("kind", "fallback"))
     ))
   else
     return(hash(
       "kind", "MIN_META",
       "meta_key_count", scalar(meta_key_count),
-      "meta", coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))
+      "meta", coalesce(retv["meta"], hash("kind", "fallback"))
     ))
   endif
 }
@@ -2111,7 +2111,7 @@ This is the pattern to use when a parser wants one canonical metadata object bui
     hash(merged_meta),
     merge_hash(
       hash(base_meta),
-      coalesce(scalaref(retv, {meta}), hash("kind", "fallback")),
+      coalesce(retv["meta"], hash("kind", "fallback")),
       hash("stage", "normalized")
     )
   )
@@ -2365,15 +2365,15 @@ This is the pattern to use when the parser cares about object shape first and va
 
 ```text
 -> metadata_shape_check[1] {
-  if(has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+  if(has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind"))
     return(hash(
       "kind", "HAS_KIND_KEY",
-      "has_kind", has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
+      "has_kind", has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")
     ))
-  elseif(is_defined(scalaref(retv, {kind})))
+  elseif(is_defined(retv["kind"]))
     return(hash(
       "kind", "DEFINED_KIND_VALUE",
-      "value", scalaref(retv, {kind})
+      "value", retv["kind"]
     ))
   else
     return(hash("kind", "NO_KIND_INFORMATION"))
@@ -2394,12 +2394,12 @@ This is the pattern to use when the parser needs to keep three states distinct:
 
 ```text
 -> child[1] {
-  if(is_undefined(scalaref(retv, {content})))
+  if(is_undefined(retv["content"]))
     return(hash("kind", "MISSING_CONTENT"))
-  elseif(is_empty(scalaref(retv, {content})))
-    return(hash("kind", "EMPTY_CONTENT", "content", scalaref(retv, {content})))
+  elseif(is_empty(retv["content"]))
+    return(hash("kind", "EMPTY_CONTENT", "content", retv["content"]))
   else
-    return(hash("kind", "HAS_CONTENT", "content", scalaref(retv, {content})))
+    return(hash("kind", "HAS_CONTENT", "content", retv["content"]))
   endif
 }
 ```
@@ -2500,17 +2500,17 @@ I {
 
 -> child {
   assign(scalar(retv), call(child))
-  switch(scalaref(retv, {type})) {
+  switch(retv["type"]) {
     case("SPACE") {
       return_undef()
     }
     case("WORD") {
-      push_value(array(words), scalaref(retv, {content}))
+      push_value(array(words), retv["content"])
     }
     default {
       return(hash(
-        "type", scalaref(retv, {type}),
-        "content", scalaref(retv, {content}),
+        "type", retv["type"],
+        "content", retv["content"],
         "words", array_copy(array(words))
       ))
     }
@@ -2533,7 +2533,7 @@ return(hash(
   "primary", hash(
     "name", join_values("", array(word)),
     "head", scalar(items, 0),
-    "content", scalaref(retv, {content})
+    "content", retv["content"]
   ),
   "normalized_preview", array(
     flat_array(IMATCH_LIST),
@@ -2543,8 +2543,8 @@ return(hash(
     "depth", scalar(depth),
     "confidence", scalar(confidence),
     "node", hash(
-      "type", scalaref(tree, [0]{type}),
-      "name", scalaref(tree, [0]{name})
+      "type", tree[0]["type"],
+      "name", tree[0]["name"]
     )
   )
 ))
@@ -2562,7 +2562,7 @@ The language goal is "no explicit DSL composition ceiling," not "always write th
 
 ## Practical guidance
 - Use `scalar(...)` when the thing you need next is one scalar value.
-- Use `scalaref(...)` when you are following a nested path through a returned payload or nested aggregate.
+- Use direct nested access when you are following a nested path through a returned payload or nested aggregate.
 - Use `array(...)` when you are constructing one array value.
 - Use `hash(...)` when you are constructing one object/hash value.
 - Use `array_copy(...)` when you want one nested array snapshot.

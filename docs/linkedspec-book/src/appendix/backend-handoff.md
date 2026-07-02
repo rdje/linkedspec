@@ -117,7 +117,7 @@ structurally equivalent output for every entry.
 The checked-in Rust corpus is kept green while parity work lands incrementally. As of
 `RUST-PARITY.7.5.2`, the corpus has 63 fixtures, including the two minimal shipped
 `tclite.spec` cases restored by the default-mode repetition parity work; the shipped
-`Lispish.spec` `lispish_x_y` case restored by legacy `scalaref` path parity; terse
+`Lispish.spec` `lispish_x_y` case now migrated to direct nested access; terse
 receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting,
 and block-valued receivers; numeric word aliases; arithmetic/comparison symbol callees;
 explicit string comparisons; assignment-expression fixtures; and the shared Perl/Rust

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — .spec language evolution / compatibility retirement`
 - Created: `2026-07-02`
-- Last updated: `2026-07-02` (`.2` done — inventory/replacement contract locked; frontier -> `.3`)
+- Last updated: `2026-07-02` (`.3` done — live surface migrated; frontier -> `.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -54,11 +54,11 @@ with canonical direct nested access and the eventual non-Perl-shaped hash/object
   Commit: `SCALAREF-RETIREMENT.2 - inventory scalaref retirement contract` (see Commit Log)
 
 - ID: `SCALAREF-RETIREMENT.3`
-  Status: `pending`
+  Status: `done`
   Goal: Migrate shipped specs, tests, oracle fixtures, and public docs away from `scalaref(...)`.
   Acceptance: No shipped spec or public book example requires `scalaref(...)`; Lispish and every migrated fixture still produce the same reference output through the canonical replacement; docs call `scalaref(...)` retired/removal-bound rather than supported.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-02. Active `scalaref(` / `.scalaref(` scans are clean across shipped specs, checked-in corpus, public docs, tests, and generator. Lispish and migrated receiver-chain fixtures stay green with stable expected output.
+  Commit: `SCALAREF-RETIREMENT.3 - migrate scalaref live surface` (see Commit Log)
 
 - ID: `SCALAREF-RETIREMENT.4`
   Status: `pending`
@@ -80,9 +80,9 @@ with canonical direct nested access and the eventual non-Perl-shaped hash/object
 | --- | --- | --- | --- |
 | — | `SCALAREF-RETIREMENT.1` | `done` | Directive owned and split before behavior changes. |
 | — | `SCALAREF-RETIREMENT.2` | `done` | Inventory and replacement contract locked before behavior changes. |
-| 1 | `SCALAREF-RETIREMENT.3` | `pending` | Migrate live specs/tests/docs after the replacement contract is known. |
-| 2 | `SCALAREF-RETIREMENT.4` | `pending` | Remove implementation support after live users are migrated. |
-| 3 | `SCALAREF-RETIREMENT.5` | `pending` | Final no-drift sweep and tree close. |
+| — | `SCALAREF-RETIREMENT.3` | `done` | Live specs/tests/docs migrated after the replacement contract was locked. |
+| 1 | `SCALAREF-RETIREMENT.4` | `pending` | Remove implementation support after live users are migrated. |
+| 2 | `SCALAREF-RETIREMENT.5` | `pending` | Final no-drift sweep and tree close. |
 
 ## Inventory and Replacement Contract
 
@@ -92,7 +92,7 @@ with canonical direct nested access and the eventual non-Perl-shaped hash/object
 | --- | --- | --- | --- |
 | Shipped specs | `specs/Lispish.spec`, `specs/pplugin.spec`, `specs/ds_vhistory.spec`, `specs/tablegrep.spec` | 16 function-form `scalaref(...)` calls. | Use direct nested access: `{field}` -> `["field"]`, `[0]` -> `[0]`, and mixed `[0]{name}` -> `[0]["name"]`. |
 | Oracle fixtures | `rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.spec`, `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.spec` | 6 calls in checked-in corpus inputs: 4 function-form Lispish calls and 1 receiver-dot hash call, plus one duplicate match from the grep expression. | Regenerate fixtures after spec/test migration; keep expected JSON unchanged. |
-| Implementation support | `perl/LinkedSpec/ActionIR/{ValueExpr,MethodLowering,FlowExpr}.pm`, `perl/LinkedSpec/RuleIR/EmitContext.pm`, `rust/linkedspec-core/src/{expr,validation}.rs`, `rust/linkedspec-runtime/src/engine.rs` | Perl owns function-form lowering and receiver-dot method lowering; Rust owns scoped `ScalarRefPath`, validation, runtime dispatch, and receiver-dot execution. | Remove only after `.3` migrates live uses and locks negative behavior. |
+| Implementation support | `perl/LinkedSpec/ActionIR/{ValueExpr,MethodLowering,FlowExpr}.pm`, `perl/LinkedSpec/RuleIR/EmitContext.pm`, `rust/linkedspec-core/src/{expr,validation}.rs`, `rust/linkedspec-runtime/src/engine.rs` | Perl owns function-form lowering and receiver-dot method lowering; Rust owns scoped `ScalarRefPath`, validation, runtime dispatch, and receiver-dot execution. | Remove in `.4` now that `.3` migrated live uses; `.4` locks negative behavior. |
 | Tests/tools | `t/phase0_regression.t`, `rust/linkedspec-runtime/tests/integration_test.rs`, `tools/gen_oracle_corpus.pl`, `rust/README.md`, corpus README | Positive locks, generated fixtures, and helper inventories still teach or depend on `scalaref`. | Migrate positive tests to direct access or `scalar(hash(...), key)`; add negative tests in `.4`. |
 | Public docs | `docs/linkedspec-book/src/**`, `USER_GUIDE*.md` | 332 public/user-guide function-form references plus receiver-dot examples. | Replace examples during `.3`; historical architecture notes can remain only when explicitly labeled historical/retired. |
 | Historical live docs | `docs/tasks/**`, `docs/knowledge/**`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `KNOWLEDGE_MAP.md` | Prior evidence records mention the old helper. | Preserve historical records, but add current retirement facts and avoid stale support claims in live status. |
@@ -103,13 +103,14 @@ Canonical replacement:
 - Function form `scalaref(base, [0])` becomes `base[0]`.
 - Mixed function paths such as `scalaref(base, {children}[0]{name})` become `base["children"][0]["name"]`.
 - Dynamic array indexes use direct bare or explicit scalar indexes: `base["children"][i]` or `base["children"][scalar(i)]`.
-- Receiver-dot `.scalaref("key")` is in scope for retirement because it is the same public field-read helper name. For a named hash, use `scalar(hash(meta), "key")` or direct `meta["key"]`. For an expression receiver such as `meta.merge_hash(hash(extra)).scalaref("a")`, assign the expression to a named hash first, then read `scalar(hash(temp), "a")` or `temp["a"]`.
+- Receiver-dot `.scalaref("key")` is in scope for retirement because it is the same public field-read helper name. For a named working hash, use `scalar(hash(meta), "key")`. Direct bracket reads such as `retv["key"]` are for scalar hashref payloads, not working-hash value reads. For an expression receiver such as `meta.merge_hash(hash(extra)).scalaref("a")`, assign the expression to a named working hash first, then read `scalar(hash(temp), "a")`.
 
 ## Decisions
 
 - `2026-07-02`: User directive accepted: `scalaref(...)` shall be retired and removed. The directive is split into this tree rather than folded into `RUST-PARITY.7.5.2` because `.7.5.2` is a parity fix for the current shipped surface, while retirement changes the language contract.
 - `2026-07-02`: Replacement is expected to be direct nested access plus the future non-Perl-shaped hash/object literal surface, but `.2` must prove the exact contract from current uses before code changes.
-- `2026-07-02`: `.2` proved direct nested access is sufficient for function-form shipped spec calls. Receiver-dot `.scalaref(key)` is also in retirement scope; expression receivers require a named hash temporary before reading with `scalar(hash(temp), key)` or direct `temp["key"]`.
+- `2026-07-02`: `.2` proved direct nested access is sufficient for function-form shipped spec calls. Receiver-dot `.scalaref(key)` is also in retirement scope; expression receivers require a named working-hash temporary before reading with `scalar(hash(temp), key)`. Direct bracket reads remain valid for scalar hashref payloads such as `retv["key"]`, not as working-hash value reads.
+- `2026-07-02`: `.3` migrated the active live surface away from both function-form and receiver-dot `scalaref` examples. Implementation recognition remains only as pre-removal compatibility until `.4`.
 
 ## Open Questions
 
@@ -118,7 +119,7 @@ Canonical replacement:
 
 ## Blockers
 
-- None for `.2`; behavior changes are blocked until `.2` completes.
+- None for `.4`; live users are migrated and implementation removal is unblocked.
 
 ## Verification Log
 
@@ -126,6 +127,7 @@ Canonical replacement:
 | --- | --- | --- | --- |
 | `2026-07-02` | `SCALAREF-RETIREMENT.1` | Task-tree/index/roadmap/live-doc/KM tracking only; Knowledge Map regeneration/check, memory architecture, doctrine registry, mdBook build, `git diff --check` | Directive owned; no behavior change |
 | `2026-07-02` | `SCALAREF-RETIREMENT.2` | `rg` inventory across specs, corpus, Perl/Rust implementation, tests, tools, mdBook, user guides, live docs, task trees, and Knowledge Map; Perl `call_spec_handler_subst` direct-access probes; Rust direct-access parser/runtime focused tests; Knowledge Map/memory/doctrine/diff checks in commit workflow | Replacement contract locked; no behavior change |
+| `2026-07-02` | `SCALAREF-RETIREMENT.3` | `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; focused Rust `scalaref_retirement_3`, hash receiver-chain, and hash consumer tests; Rust corpus oracle; `perl -c -Iperl t/phase0_regression.t`; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml --check`; active `scalaref(` / `.scalaref(` scans; `git diff --check` | Live specs/tests/corpus/docs migrated; phase0 1015 green; corpus oracle 63 fixtures green |
 
 ## Commit Log
 
@@ -133,8 +135,10 @@ Canonical replacement:
 | --- | --- | --- |
 | `SCALAREF-RETIREMENT.1` | `SCALAREF-RETIREMENT.1 - own scalaref retirement track` | Tracking-only split; next executable leaf is `.2` inventory/design. |
 | `SCALAREF-RETIREMENT.2` | `SCALAREF-RETIREMENT.2 - inventory scalaref retirement contract` | Inventory/replacement contract only; next executable leaf is `.3` migration. |
+| `SCALAREF-RETIREMENT.3` | `SCALAREF-RETIREMENT.3 - migrate scalaref live surface` | Shipped specs, checked-in corpus, tests, and public docs no longer use active `scalaref` examples; next executable leaf is `.4` implementation removal. |
 
 ## Changelog
 
 - `2026-07-02`: Created tree from user directive that `scalaref(...)` shall be retired and removed.
 - `2026-07-02`: `.2` inventory done. Function form migrates to direct nested access; receiver-dot form migrates through named hash temporaries where the receiver is an expression.
+- `2026-07-02`: `.3` migration done. Active `scalaref` examples are gone from shipped specs, checked-in corpus, tests, generator, mdBook, and user guides; implementation removal moves to `.4`.

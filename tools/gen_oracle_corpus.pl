@@ -77,8 +77,8 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 #   the entry regex. The two minimal tclite fixtures below are active shipped-spec
 #   coverage for that parity.
 #
-#   Lispish: RUST-PARITY.7.5.2 closes the remaining Rust blocker by parsing and
-#   evaluating the legacy `scalaref(retv, {content})` hashref-field accessor.
+#   Lispish: SCALAREF-RETIREMENT.3 keeps the shipped Lispish corpus active after
+#   migrating child-return field reads to direct `retv["content"]` access.
 # See docs/knowledge/rust-perl-output-oracle.md.
 # The proof grammars use the parent→child dispatch form (`Parent:: /re/ -> Child
 # { ... }`) — a lone rule with top-level blocks returns 0 in the Perl reference
@@ -732,7 +732,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), meta.merge_hash(hash(extra)).scalaref("a"), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), scalar(hash(layered), "a"), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
 
 Done::
  /[a-z]+/
@@ -963,7 +963,7 @@ SPEC
     # ── SPEC-FORMAT-TERSE.2.3.3.3.3.1 — shipped tclite parity ──
     { case => 'tclite_command_subst', spec => 'tclite', input => '[]' },
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
-    # ── RUST-PARITY.7.5.2 — shipped Lispish scalaref path parity ──
+    # ── SCALAREF-RETIREMENT.3 — shipped Lispish direct-access migration ──
     { case => 'lispish_x_y', spec => 'Lispish', input => '(x y)' },
 );
 

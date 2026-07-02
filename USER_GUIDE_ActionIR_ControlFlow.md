@@ -617,8 +617,8 @@ Examples:
 
 ```text
 print("begin_end_blocks: BEGIN (", scalar(IMATCH), "\n")
-print("Object ", scalaref(cur_object, [1]), "\n")
-print("token=", scalar(token), " type=", scalaref(retv, {type}), "\n")
+print("Object ", cur_object[1], "\n")
+print("token=", scalar(token), " type=", retv["type"], "\n")
 ```
 
 Use it when:
@@ -702,13 +702,13 @@ endif()
 ### Example: classify child return types
 
 ```text
-switch(scalaref(retv, {type}))
+switch(retv["type"])
   case("SPACE")
     assign(array(word), array());
   case("COMMENTS")
     return_undef();
   default
-    push_value(array(word), scalaref(retv, {content}));
+    push_value(array(word), retv["content"]);
 endswitch
 ```
 
@@ -716,10 +716,10 @@ endswitch
 
 ```text
 switch(
-  scalaref(retv, {type}),
+  retv["type"],
   case("SPACE", assign(array(word), array())),
   case("COMMENTS", return_undef()),
-  default(push_value(array(word), scalaref(retv, {content})))
+  default(push_value(array(word), retv["content"]))
 )
 ```
 

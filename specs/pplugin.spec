@@ -4,7 +4,7 @@ pplugin_top::   I {declare(array, defs); declare(scalar, retv)}
 
 LE {
     if(is_defined(scalar(retv)));
-      assign(array(defs), array(flat_array(defs), scalaref(retv, [0]), scalaref(retv, [1])));
+      assign(array(defs), array(flat_array(defs), retv[0], retv[1]));
     else();
       return_undef();
     endif()

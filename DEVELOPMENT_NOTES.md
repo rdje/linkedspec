@@ -1,13 +1,30 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SCALAREF-RETIREMENT.3 — migrated scalaref live surface):
+  The shipped/live surface no longer depends on the helper. Durable points. (1) **Direct-access function-form
+  migration.** Shipped spec paths now use `retv["content"]`, `retv[0]`, `first_capt[0]`, and mixed
+  `retv["children"][i]["name"]` forms; checked-in oracle inputs were regenerated and expected JSON stayed stable.
+  (2) **Flow lowering gap closed.** Perl `FlowExpr` must consult `_lower_direct_nested_access_value_expr(...)`
+  before falling back inside `is_defined`, `is_undefined`, `is_empty`, and composite flow expressions; otherwise
+  direct-access replacements compile in value contexts but not flow contexts. (3) **Receiver-dot replacement.**
+  Working-hash field reads use `scalar(hash(name), key)`. Direct bracket reads are only for scalar hashref
+  payloads, for example `retv["key"]` or a scalar variable intentionally holding a hashref. (4) **Rust parity
+  support.** Rust `scalar(hash_expr, key)` now reads from `RuntimeValue::Hash`, which keeps named-hash-temp
+  replacements executable. (5) **Removal ordering.** Implementation recognition for `scalaref(...)` intentionally
+  remains until `SCALAREF-RETIREMENT.4` adds rejection/removal coverage.
+  Verification: phase0 1015 PASS, Rust corpus oracle PASS over 63 fixtures, mdBook build PASS, active
+  `scalaref(` / `.scalaref(` scans clean on shipped specs/corpus/docs/tests/tools. Next frontier:
+  `SCALAREF-RETIREMENT.4`.
+
 - 2026-07-02 (SCALAREF-RETIREMENT.2 — scalaref retirement inventory contract):
   The inventory is complete enough to migrate. Durable points. (1) **Function form.** Shipped specs use
   `scalaref(base, path)` only as a scalar-held hash/array field read; direct nested access is the canonical
   replacement (`retv["content"]`, `retv[0]`, `retv["children"][0]["name"]`). Quote former `{field}` names. (2)
   **Receiver-dot form.** `.scalaref(key)` is the same user-facing helper name and is in retirement scope. Named
-  hashes can use `scalar(hash(meta), key)` or direct `meta[key]`. Expression receivers such as
-  `meta.merge_hash(...).scalaref("a")` need an explicit named hash temporary before the field read. (3)
+  working hashes can use `scalar(hash(meta), key)`. Direct bracket reads such as `retv["key"]` are for scalar
+  hashref payloads, not named working-hash value reads. Expression receivers such as
+  `meta.merge_hash(...).scalaref("a")` need an explicit named working-hash temporary before the field read. (3)
   **Implementation ordering.** Do not remove Perl/Rust support until `.3` migrates shipped specs, oracle fixtures,
   tests, and public docs. (4) **Counts.** Current shipped specs have 16 function-form calls; mdBook/user-guide
   examples have 332 function-form references; receiver-dot examples/tests exist in the hash receiver-chain slice.

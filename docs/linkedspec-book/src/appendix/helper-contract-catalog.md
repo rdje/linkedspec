@@ -566,8 +566,10 @@ dispatch rule.
   `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
   override earlier keys.
 - **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
-  compatible array receiver helpers. `count_keys`, `has_key`, and `scalaref` return number, boolean, and
-  scalar values respectively and end the hash-family chain.
+  compatible array receiver helpers. `count_keys` and `has_key` return number and boolean terminal values.
+  Field reads from a named working hash use `scalar(hash(name), key)` after storing expression receivers in a
+  named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref payloads, not working-hash
+  value reads.
 - **Boundary**: `set_key(name, key, value)` and `name[key] = value` mutate the named working hash; hash-index
   assignment also yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is
   pure value composition; it mutates nothing unless its result is explicitly assigned back.
@@ -1270,9 +1272,9 @@ unlike the Retired table below):
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
-also part of the terse surface. It is not a helper rename and does not retire `scalaref(...)`; both direct
-access and `scalaref(base, path)` remain accepted forms. `scalaref(...)` keeps its historical path notation;
-write `[scalar(i)]` there when the path index should read a scalar working variable.
+also part of the terse surface. It is not a helper rename; it is the replacement surface for the older nested
+path helper spelling. Quoted segments are hash keys, and bare path atoms such as `[i]` read scalar working
+variables as array indexes.
 
 The helper aliases above lower identically within their supported statement/helper families. Assignment forms
 (`set(...)`, `assign(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the

@@ -144,9 +144,9 @@ Examples:
 ```text
 assign(scalar(flag), not(is_empty(scalar(name))))
 assign(scalar(msi_lsi), join_values("", array(capt)))
-assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+assign(scalar(name), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"))
 assign(scalar(first_capt), scalar(array(capt), 0))
-assign(scalar(token), scalaref(retv, {content}))
+assign(scalar(token), retv["content"])
 assign(scalar(retv), call(Leaf))
 ```
 
@@ -157,7 +157,7 @@ This is important because it means you do not need different assignment syntax f
 Example:
 
 ```text
-assign(scalar(chosen_name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+assign(scalar(chosen_name), coalesce(retv["content"], scalar(IMATCH), "UNKNOWN"))
 ```
 
 Read that as:
@@ -191,7 +191,7 @@ Examples:
 assign(scalar(head), scalar(submatchs, 0))
 assign(scalar(first_capture), scalar(array(capt), 0))
 assign(scalar(name), scalar(hash(by_name), key))
-assign(scalar(object_name), scalaref(cur_object, [1]))
+assign(scalar(object_name), cur_object[1])
 ```
 
 Use cases:

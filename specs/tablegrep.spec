@@ -21,13 +21,13 @@ LE {
   return_undef();
  endif();
  
- if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
+ if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(retv["type"], /_OP/o)));
   print("ERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
   exit_now(1);
  endif();
  
  push_value(array(internal), scalar(retv));
- assign(scalar(prev_node_type), scalaref(retv, {type}))
+ assign(scalar(prev_node_type), retv["type"])
 }
 #======== End Of grep ========
 
@@ -56,13 +56,13 @@ LE {
   return_undef();
  endif();
  
- if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
+ if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(retv["type"], /_OP/o)));
   print("\nERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
   exit_now(1);
  endif();
 
  push_value(array(internal), scalar(retv));
- assign(scalar(prev_node_type), scalaref(retv, {type}))
+ assign(scalar(prev_node_type), retv["type"])
 }
 #==========
 

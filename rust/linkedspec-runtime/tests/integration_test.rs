@@ -1880,7 +1880,12 @@ fn terse_2_3_4_1_bare_hash_merge_arg_matches_wrapped() {
 
 #[test]
 fn terse_2_3_4_1_hash_consumers_accept_bare_hash_arg() {
-    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"b\", 2); set_key(meta, \"a\", 1); set_key(extra, \"c\", 3); return(array(sorted_keys(set_key(meta, \"c\", 3)), sorted_keys(rename_key(meta, \"a\", \"aa\")), sorted_keys(drop_keys(meta, \"b\")), sorted_keys(pick_keys(meta, \"a\")), has_key(meta, \"a\"), scalaref(meta, \"b\"), count_keys(flat_hash(meta, extra)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = r#"Top::
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "c", 3); return(array(sorted_keys(set_key(meta, "c", 3)), sorted_keys(rename_key(meta, "a", "aa")), sorted_keys(drop_keys(meta, "b")), sorted_keys(pick_keys(meta, "a")), has_key(meta, "a"), scalar(hash(meta), "b"), count_keys(flat_hash(meta, extra)))) }
+
+Done::
+ /[a-z]+/
+"#;
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["a", "b", "c"], ["aa", "b"], ["a"], ["a"], true, 2, 3]]),
@@ -1889,22 +1894,32 @@ fn terse_2_3_4_1_hash_consumers_accept_bare_hash_arg() {
 }
 
 #[test]
-fn rust_parity_7_5_2_scalaref_legacy_path_reads_child_retval_field() {
-    let grammar = "Top::\n /x/ -> Done { return(scalaref(retv, {content})) }\n\nDone::\n /[a-z]+/ I.return(hash(\"content\", entry_text()))\n";
+fn scalaref_retirement_3_direct_access_reads_child_retval_field() {
+    let grammar = r#"Top::
+ /x/ -> Done { return(retv["content"]) }
+
+Done::
+ /[a-z]+/ I.return(hash("content", entry_text()))
+"#;
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["x"]),
-        "scalaref(retv, {{content}}) reads a literal hash field from the child return value"
+        "direct nested access reads a literal hash field from the child return value"
     );
 }
 
 #[test]
-fn rust_parity_7_5_2_scalaref_legacy_path_walks_nested_arrays_and_hashes() {
-    let grammar = "Top::\n /x/ -> Done { set(i, 1); return(scalaref(retv, {children}[scalar(i)]{name})) }\n\nDone::\n /[a-z]+/ I.return(hash(\"children\", array(hash(\"name\", \"zero\"), hash(\"name\", entry_text()))))\n";
+fn scalaref_retirement_3_direct_access_walks_nested_arrays_and_hashes() {
+    let grammar = r#"Top::
+ /x/ -> Done { set(i, 1); return(retv["children"][scalar(i)]["name"]) }
+
+Done::
+ /[a-z]+/ I.return(hash("children", array(hash("name", "zero"), hash("name", entry_text()))))
+"#;
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["x"]),
-        "legacy scalaref paths walk hash keys and explicit scalar array indexes"
+        "direct nested access walks hash keys and explicit scalar array indexes"
     );
 }
 
@@ -1978,7 +1993,12 @@ fn terse_2_3_5_1_array_end_mutations_remain_statement_only_in_value_slots() {
 
 #[test]
 fn terse_2_3_5_2_hash_receiver_value_chains_run() {
-    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"b\", 2); set_key(meta, \"a\", 1); set_key(extra, \"a\", 9); set_key(extra, \"c\", 3); return(array(meta.set_key(\"c\", 3).sorted_keys().join_values(\",\"), meta.merge_hash(hash(extra)).scalaref(\"a\"), hash(meta).rename_key(\"a\", \"aa\").drop_keys(\"b\").set_key(\"z\", 4).count_keys(), meta.pick_keys(\"a\", \"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = r#"Top::
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), scalar(hash(layered), "a"), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
+
+Done::
+ /[a-z]+/
+"#;
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a,b,c", 9, 2, true, 0, 2, 2, 0]]),

@@ -107,7 +107,7 @@ fn oracle_corpus_matches_perl_reference() {
     // SPEC-FORMAT-TERSE.2.3.3.3.3 still produced Rust `[]` for the tclite `[]` and
     // `""` cases, so tclite stays out of the committed green corpus until
     // SPEC-FORMAT-TERSE.2.3.3.3.3.1 lands default-mode recursive repetition parity.
-    // Lispish remains independent on .7.5.2 (`scalaref(retv, {content})` parsing).
+    // Lispish remains active after SCALAREF-RETIREMENT.3 (`retv["content"]` parsing).
     // .7.2/.7.3 add structurally simple shipped specs; .7.4 adds the full drift
     // guard. See docs/knowledge/rust-perl-output-oracle.md.
     assert!(

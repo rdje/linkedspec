@@ -84,7 +84,7 @@ You can initialize each declaration entry by writing `name=expr`.
 
 ```text
 declare(scalar, flag=or(scalar(on), scalar(off)))
-declare(scalar, token=scalaref(retv, {content}))
+declare(scalar, token=retv["content"])
 declare(scalar, joined=join_values("", array(parts)))
 ```
 
@@ -130,7 +130,7 @@ declare(hash, by_name, seen)
 You can also mix initialized and uninitialized entries in the same call.
 
 ```text
-declare(scalar, flag=1, name, token=scalaref(retv, {content}))
+declare(scalar, flag=1, name, token=retv["content"])
 ```
 
 That is often useful when a rule has some variables with obvious startup values and others that are filled later.
@@ -171,7 +171,7 @@ This pattern is useful when:
 
 ## What initializer expressions may contain
 Initializer expressions reuse the broader value-expression lowering surface. In practice that means you can initialize from:
-- helper value expressions such as `scalar(...)`, `array(...)`, `hash(...)`, `scalaref(...)`, `join_values(...)`, `split_tagged_records(...)`, and ActionIR boolean/value helpers,
+- helper value expressions such as `scalar(...)`, `array(...)`, `hash(...)`, direct nested access, `join_values(...)`, `split_tagged_records(...)`, and ActionIR boolean/value helpers,
 - array/list constructors,
 - hash constructors,
 - simple raw literals.
@@ -200,13 +200,13 @@ I {my @items; my $retv}
 ### Prefer this
 
 ```text
-declare(scalar, token=scalaref(retv, {content}))
+declare(scalar, token=retv["content"])
 ```
 
 ### Over this
 
 ```text
-my $token = $retv->{content}
+my $token = $retv->{"content"}
 ```
 
 The second form may still work in Perl, but the first form is much easier to migrate across backends.

@@ -1,6 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SCALAREF-RETIREMENT.3 — migrate scalaref live surface
+
+**Scope:** Shipped specs, checked-in Rust oracle fixtures, public/user guides, focused tests, and the minimum
+Perl/Rust support needed for the replacement forms. Implementation recognition for `scalaref(...)` remains until
+the removal leaf `.4`.
+
+**What changed:** The live shipped surface no longer uses `scalaref(...)` or receiver-dot `.scalaref(...)`.
+`specs/Lispish.spec`, `specs/ds_vhistory.spec`, `specs/pplugin.spec`, and `specs/tablegrep.spec` now use direct
+nested access such as `retv["content"]`, `retv[0]`, and `cur_object[1]`. The Rust oracle generator and checked-in
+fixtures were regenerated with the same direct-access spelling, while expected JSON stayed stable.
+
+**Runtime/lowering support:** Perl flow-expression lowering now recognizes direct nested access inside presence,
+emptiness, and composite flow expressions, so `is_defined(retv["content"])` lowers to the same dereference shape as
+other direct-access value contexts. Rust `scalar(hash_expr, key)` now reads from hash runtime values, which supports
+the named-hash-temp replacement for receiver-dot field reads.
+
+**Docs:** User guides, mdBook helper references, corpus docs, and emitted-Perl reference examples now teach direct
+nested access or `scalar(hash(name), key)` for working-hash field reads. Direct bracket reads are documented as
+scalar hashref payload reads, not named working-hash value reads.
+
+**Checks:** `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`; `perl -c tools/gen_oracle_corpus.pl`;
+`perl tools/gen_oracle_corpus.pl`; focused Rust tests for `scalaref_retirement_3`,
+`terse_2_3_5_2_hash_receiver_value_chains_run`, and
+`terse_2_3_4_1_hash_consumers_accept_bare_hash_arg`; `cargo test -q --manifest-path rust/Cargo.toml -p
+linkedspec-runtime --test corpus_oracle`; `perl -c -Iperl t/phase0_regression.t`; `prove -q -Iperl
+t/phase0_regression.t` (1015 PASS); `mdbook build docs/linkedspec-book`; `cargo fmt --manifest-path
+rust/linkedspec-runtime/Cargo.toml --check`; active `scalaref(` / `.scalaref(` scans; `git diff --check`.
+
 ## 2026-07-02 — SCALAREF-RETIREMENT.2 — inventory scalaref retirement contract
 
 **Scope:** Inventory and replacement-contract documentation for `scalaref(...)` retirement. No parser, compiler,
@@ -14,9 +42,10 @@ receiver-dot `.scalaref(...)` appears in hash receiver-chain examples/tests.
 
 **Replacement contract:** Function-form `scalaref(base, {key})` migrates to direct nested access
 `base["key"]`; `[0]` segments stay `[0]`; mixed paths such as `{children}[0]{name}` become
-`["children"][0]["name"]`. Receiver-dot `.scalaref(key)` is in retirement scope too: named hashes use
-`scalar(hash(meta), key)` or `meta[key]`, while expression receivers must first assign to a named hash temporary
-before reading that key.
+`["children"][0]["name"]`. Receiver-dot `.scalaref(key)` is in retirement scope too: named working hashes use
+`scalar(hash(meta), key)`, while expression receivers must first assign to a named working-hash temporary before
+reading that key. Direct bracket reads are for scalar hashref payloads such as `retv["key"]`, not working-hash
+value reads.
 
 **Boundary:** This is still pre-removal work. The next leaf, `SCALAREF-RETIREMENT.3`, performs the actual shipped
 spec/test/oracle/public-doc migration. Implementation support stays intact until `.4`.
