@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SCALAREF-RETIREMENT.1 — scalaref retirement track owned**
+  (TASK TREE + ROADMAP/LIVE DOCS + KM; **no runtime behavior change**).
+  The user directive that `scalaref(...)` shall be retired and removed is now tracked in
+  `docs/tasks/SCALAREF-RETIREMENT.md`. The tree deliberately separates current shipped-surface parity from
+  retirement work: `.2` inventories all live uses and selects the canonical replacement, `.3` migrates shipped
+  specs/tests/docs, `.4` removes Perl/Rust recognition/execution, and `.5` performs the final drift sweep.
+
+  `RUST-PARITY.7.5.2` remains the committed parity slice for existing Lispish behavior. No parser, compiler,
+  runtime, corpus, shipped-spec, or public-book behavior changed in this ownership slice.
+
+  **Verification:** Knowledge Map regeneration/check PASS; memory architecture PASS; doctrine registry PASS;
+  mdBook build PASS; `git diff --check` PASS.
+
+  **Frontier:** `SCALAREF-RETIREMENT.2` — inventory every `scalaref(...)` use and select the replacement contract
+  before migrating specs/docs or removing implementation support.
+
 - 2026-07-02: **RUST-PARITY.7.5.2 — Lispish scalaref parity landed**
   (RUST CORE + RUST RUNTIME + ORACLE + BOOK/KM/LIVE DOCS).
   Rust now parses Lispish's legacy `scalaref(retv, {content})` path only in `scalaref`'s second positional

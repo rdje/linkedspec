@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SCALAREF-RETIREMENT.1 — scalaref retirement ownership):
+  `scalaref(...)` is now explicitly removal-bound, not merely legacy. Durable points. (1) **Separate owner.**
+  `SCALAREF-RETIREMENT` owns the user directive to retire/remove the helper, separate from `RUST-PARITY.7.5.2`
+  which restored current shipped Lispish parity. (2) **No behavior change yet.** This slice only creates the
+  ownership track and live retrieval facts; current Perl/Rust behavior remains intact. (3) **Next proof step.**
+  `.2` must inventory every `scalaref(...)` use across shipped specs, tests, docs, oracle fixtures, and
+  implementation code before any spec migration or parser/runtime deletion. (4) **Expected destination.** Direct
+  nested access is the likely replacement where it can express the current path reads; any remaining gap tied to
+  Perl-shaped hash/object literal spelling must be named before removal.
+  Next frontier: `SCALAREF-RETIREMENT.2`.
+
 - 2026-07-02 (RUST-PARITY.7.5.2 — Lispish scalaref parity):
   Lispish is now active in the Rust oracle corpus. Durable points. (1) **Scoped legacy parser hook.** Rust adds
   `Expr::ScalarRefPath` only for `scalaref`'s second positional argument, preserving the existing meaning of

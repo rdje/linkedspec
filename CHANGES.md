@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SCALAREF-RETIREMENT.1 — own scalaref retirement track
+
+**Scope:** Task-tree ownership, task-tree index, roadmap/live docs, memory, and Knowledge Map. No parser,
+compiler, runtime, shipped-spec, oracle, or mdBook behavior changed in this ownership slice.
+
+**What changed:** The 2026-07-02 user directive that `scalaref(...)` shall be retired and removed is now owned by
+`docs/tasks/SCALAREF-RETIREMENT.md`. The tree splits the work into inventory/replacement design, shipped
+spec/test/doc migration, Perl/Rust removal, and final drift cleanup, so no behavior change happens before the live
+uses and replacement contract are proven.
+
+**Boundary:** `RUST-PARITY.7.5.2` remains a parity fix for the current shipped Lispish surface. The restored
+legacy `scalaref(retv, {content})` support is removal-bound, but removal must proceed under
+`SCALAREF-RETIREMENT.2+` after a complete inventory. The mdBook is intentionally unchanged here because the
+codebase behavior is unchanged; the migration/removal leaves will update user-facing docs when the public contract
+changes.
+
+**Checks:** Knowledge Map regeneration/check, memory architecture, doctrine registry, mdBook build, and
+`git diff --check` passed.
+
 ## 2026-07-02 — RUST-PARITY.7.5.2 — land Lispish scalaref parity
 
 **Scope:** Rust expression parser, Rust runtime, focused parser/runtime locks, oracle generator/corpus,
