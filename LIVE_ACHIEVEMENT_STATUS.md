@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.4.4 — user-function surface finalized**
+  (BOOK + TASK TREE + KNOWLEDGE MAP + LIVE DOCS).
+  The public contract now closes the portable user-function MVP after Perl/Rust parity: top-level
+  `fn name(args) { ... }`, explicit parentheses for every arity including `fn name() { ... }`, braced
+  value-oriented bodies, exact arity, fresh function-local stores, final-expression or `return(expr)` results,
+  ordinary value-call composition, compatible receiver-chain continuation, and standalone result discard.
+
+  The deferred ledger is explicit: `function ... endfunction`, `fn ... endfn`, optional zero-arg parentheses,
+  brace-less bodies, caller-state/parser-state/persistent side-effect functions, recursive user functions,
+  closures, lambdas, currying/partial application, and namespace/module features require future task-tree
+  ownership before any implementation.
+
+  **Verification:** mdBook build, memory/doctrine/Knowledge Map checks, diff check, and full local CI all pass.
+  No parser/compiler/runtime code changed.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.2.2` (arithmetic symbol callees), then `.3.2.3`, `.3.3`.
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity landed**
   (RUST RUNTIME + ORACLE CORPUS + BOOK/KM/LIVE DOCS).
   Rust registered user-function calls now resolve before ordinary helper fallback, check exact arity, evaluate

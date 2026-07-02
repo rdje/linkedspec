@@ -141,6 +141,11 @@ The Rust backend has matching parsed/compiled registry support and runtime MVP e
 registered calls resolve before helper fallback, run in fresh function-local stores, feed
 compatible receiver chains, and discard standalone results.
 
+The `functions` registry is a flat MVP registry keyed by function name. It does not yet
+model namespaces/modules, overload sets, optional-argument variants, closures, lambdas, or
+curried/partial applications; those are deferred language-extension topics rather than
+descriptor fields a tool should expect today.
+
 ## `meta`
 
 `meta` carries descriptor-level metadata.

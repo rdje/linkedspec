@@ -75,6 +75,10 @@ records top-level definitions, and `CompiledSpec.functions` stores `CompiledUser
 ordinary helper fallback, executes them in fresh function-local variable stores, restores caller stores after
 return, and supports compatible receiver chains and standalone discard.
 
+This registry is intentionally flat for the MVP. It is not an overload table, namespace/module model, closure
+environment, lambda catalog, or currying/partial-application representation. Those extensions require their own
+future contract before the internal state model grows fields for them.
+
 ## Per-rule compiled info
 
 Each compiled rule entry can carry fields such as:

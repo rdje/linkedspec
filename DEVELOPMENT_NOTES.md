@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.4.4 — function surface finalization ledger):
+  The user-function MVP is now closed as a portable Perl/Rust contract rather than an open-ended syntax family.
+  Durable points. (1) **Accepted surface.** Top-level `fn name(args) { ... }` is the only accepted definition
+  spelling; parentheses are explicit for every arity, including `fn name() { ... }`; bodies are braced and
+  value-oriented; calls compose as values, receiver-chain receivers, and standalone discarded statements. (2)
+  **Deferred features.** Alternate spellings (`function ... endfunction`, `fn ... endfn`), omitted zero-arg
+  parentheses, brace-less bodies, caller-state/parser-state/persistent side-effect functions, recursion support,
+  closures, lambdas, currying/partial application, and namespaces are explicitly not in the MVP. (3) **Book/KM
+  closure.** The formal grammar, pipeline/backend handoff, descriptor/state model docs, task tree, and Knowledge
+  Map now carry the same boundary. (4) **Gate.** mdBook, memory/doctrine/Knowledge Map/diff/local-CI gates pass;
+  no parser/compiler/runtime code changed.
+  Next frontier: `SPEC-FORMAT-TERSE.3.2.2`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity):
   Rust now executes the user-function registry shape landed in `.4.3.1`. Durable points. (1) **Resolution
   boundary.** `Engine::eval_expr` checks `CompiledSpec.functions` before ordinary helper fallback, so registered

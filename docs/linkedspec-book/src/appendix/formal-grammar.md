@@ -87,6 +87,25 @@ The registry rejects:
 - names that collide with built-in helper/control names, including numeric word aliases such as `add`
 - names that collide with rule labels
 
+The finalized MVP function surface is deliberately narrow. The only accepted definition
+spelling is top-level `fn name(args) { ... }`, with explicit parentheses for every
+arity and a braced body. Zero-argument functions therefore use `fn name() { ... }`;
+`fn name { ... }` is not part of the language. Function bodies are value-oriented:
+they may use the supported helper/value/block DSL and function-local working variables,
+then return the final expression or an explicit `return(expr)` payload.
+
+The following are deferred extension topics, not accepted syntax or semantics:
+
+- alternate definition spellings such as `function name(args) ... endfunction` or
+  `fn name(args) ... endfn`
+- optional zero-argument parentheses
+- brace-less or single-expression body forms
+- functions whose observable purpose is caller-state, parser-state, or persistent
+  side-effect mutation rather than a returned value
+- direct or mutual recursive user functions
+- closures, lambdas, currying, partial application, or implicit caller-scope capture
+- future namespace/module features for functions
+
 ## 2. Rule Header
 
 A rule header is a single token at the start of a line (after optional leading

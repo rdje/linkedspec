@@ -58,6 +58,12 @@ The Rust backend carries the same definitions through parsed and compiled regist
 records and executes the MVP runtime surface: registered calls resolve before helper
 fallback, run in fresh function-local stores, feed compatible receiver chains, and
 discard standalone results.
+The function surface is closed at that MVP boundary. New backends should implement
+top-level `fn name(args) { ... }` with explicit parentheses and braced, value-oriented
+bodies. Do not add alternate spellings (`function ... endfunction`, `fn ... endfn`),
+optional zero-argument parentheses, brace-less bodies, caller-state-mutating functions,
+recursive user functions, closures/lambdas/currying, or function namespaces unless a
+future task-tree leaf and contract explicitly adopt them.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
@@ -109,11 +115,12 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 structurally equivalent output for every entry.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. As of
-`SPEC-FORMAT-TERSE.2.3.5.5`, the corpus has 52 fixtures, including the two minimal shipped
-`tclite.spec` cases restored by the default-mode repetition parity work and the newer terse
-receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting, and
-block-valued receivers. Broader recursive shipped-spec parity, including Lispish, remains
-tracked separately.
+`SPEC-FORMAT-TERSE.4.3.2`, the corpus has 54 fixtures, including the two minimal shipped
+`tclite.spec` cases restored by the default-mode repetition parity work; terse
+receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting,
+and block-valued receivers; numeric word aliases; and the shared Perl/Rust
+`terse_4_3_2_user_function_runtime` fixture. Broader recursive shipped-spec parity,
+including Lispish, remains tracked separately.
 
 ## Architecture Overview
 
@@ -179,7 +186,10 @@ It provides:
 - The Rust backend's parsed and compiled state records the same top-level function
   registry shape with parsed body `CodeBlock` values, and its runtime resolves registered
   calls before helper fallback with fresh function-local stores, receiver-chain
-  continuation, standalone discard, and recursion diagnostics.
+  continuation, standalone discard, and recursion diagnostics. The accepted MVP stops at
+  explicit-paren, braced `fn` definitions; alternate spellings, omitted zero-arg parens,
+  brace-less forms, statementful/caller-mutating functions, recursion support,
+  closures/lambdas/currying, and namespaces remain deferred.
 - `t/phase0_regression.t` — comprehensive regression tests.
 - Phase 0 baseline showing all 20 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
 

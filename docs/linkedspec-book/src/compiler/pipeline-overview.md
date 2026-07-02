@@ -93,6 +93,11 @@ params before runtime, compiles bodies into `CompiledUserFunction` records with 
 `CodeBlock` bodies, resolves registered calls before helper fallback, executes them in
 fresh function-local stores, and lets returned values continue through compatible
 receiver-dot chains. Standalone registered calls execute and discard their result.
+This closes the portable MVP surface: top-level `fn name(args) { ... }` with explicit
+parentheses and a braced value-oriented body. Alternate spellings, optional zero-arg
+parentheses, brace-less bodies, caller-state-mutating functions, recursion,
+closures/lambdas/currying, and function namespaces are future extension topics, not
+current parser/compiler/runtime behavior.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

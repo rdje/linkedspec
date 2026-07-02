@@ -6,8 +6,8 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (**`.4.3.2` DONE; Rust user-function runtime and oracle parity landed
-  after `.4.3.1` added the Rust function-definition AST/compiler registry**.
+- Last updated: `2026-07-02` (**`.4.4` DONE; user-function MVP surface and deferral ledger finalized
+  after `.4.3.2` landed Rust user-function runtime/oracle parity**.
   Prior **`.4.1` DONE; user-defined function MVP contract/inventory locked before code** —
   the accepted contract is now explicit: top-level `fn name(args) { ... }`, exact arity, eager argument
   evaluation, fresh function-local parameter/work-variable scope, pure value/block bodies, final-expression or
@@ -19,8 +19,10 @@
   Rust `SpecFile`/`CompiledSpec`/runtime function registry, oracle fixtures, phase0, mdBook, and Knowledge Map;
   `.4.2` and `.4.3` are split into smaller implementation leaves. Rust now resolves registered function calls
   before helper fallback, runs them in fresh function-local stores, feeds compatible receiver-dot chains from
-  returned values, discards standalone call results, and passes a Perl/Rust oracle fixture. Frontier is now
-  `.4.4` for the final function-surface/deferral ledger before returning to `.3.2.2`.
+  returned values, discards standalone call results, and passes a Perl/Rust oracle fixture. The finalized MVP
+  ledger keeps only explicit-paren, braced `fn` definitions in scope and defers alternate spellings, optional
+  zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/
+  currying, and function namespaces. Frontier is now `.3.2.2`.
   Prior **`.3.2.1` DONE; numeric word aliases landed** — function-form `add(...)`,
   `sub(...)`, `mul(...)`, `div(...)`, `mod(...)`, `abs(...)`, `floor(...)`, `ceil(...)`, `round(...)`,
   `min(...)`, `max(...)`, `clamp(...)`, `sum(...)`, `avg(...)`, `median(...)`, and `range(...)` now map to the
@@ -2332,13 +2334,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.4.3.2 - execute Rust user functions`
 
 - ID: `SPEC-FORMAT-TERSE.4.4`
-  Status: `pending`
+  Status: `done` (2026-07-02)
   Goal: Function surface finalization and deferred extension ledger
   Acceptance: Close the user-facing docs and retrieval state after Perl/Rust parity. Record explicit deferrals
     for alternate spellings (`function ... endfunction`, optional zero-arg parentheses, brace-less bodies),
     statementful functions, recursion, closures, lambdas, currying, and any future function namespace features.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-02.** The public book now states the exact accepted MVP surface: top-level
+    `fn name(args) { ... }`, explicit parentheses for every arity including `fn name() { ... }`, braced
+    value-oriented bodies, exact arity, fresh function-local variable stores, final-expression/`return(expr)`
+    results, value-call composition, receiver-chain continuation, and standalone result discard on Perl/Rust.
+    The same public/retrieval state explicitly defers alternate spellings (`function ... endfunction` and
+    `fn ... endfn`), omitted zero-arg parentheses, brace-less bodies, caller-state/parser-state/persistent
+    side-effect functions, recursive user functions, closures, lambdas, currying/partial application, and future
+    namespace/module features. No parser/compiler/runtime code changed.
+  Commit: `SPEC-FORMAT-TERSE.4.4 - finalize function surface ledger`
 
 - ID: `SPEC-FORMAT-TERSE.5`
   Status: `active` (SPLIT 2026-07-01)
@@ -2487,12 +2496,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.4.2.3` | `done` 2026-07-01 | Perl registered standalone calls now lower as `VALUE_DROP`; recursion/unsupported body diagnostics stay unresolved-helper metadata with zero raw fallback. |
 | — | `SPEC-FORMAT-TERSE.4.3.1` | `done` 2026-07-02 | Rust parsed/compiled function registry parity landed; runtime call execution remained `.4.3.2`. |
 | — | `SPEC-FORMAT-TERSE.4.3.2` | `done` 2026-07-02 | Rust registered user-function calls now execute as values, feed compatible receiver chains, discard standalone results, and pass the Perl/Rust oracle fixture; corpus 54 fixtures. |
-| 1 | `SPEC-FORMAT-TERSE.4.4` | `pending` | Function surface finalization and deferred extension ledger after Perl/Rust MVP parity. |
-| 2 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
-| 3 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison word/symbol operator-call migration before code because bare `gt`/`lt`/etc. currently conflict with string-comparison compatibility. |
-| 4 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
+| — | `SPEC-FORMAT-TERSE.4.4` | `done` 2026-07-02 | Function MVP surface finalized in the book/KM/task tree; alternate spellings, optional zero-arg parentheses, brace-less bodies, side-effect/caller-mutating functions, recursion, closures/lambdas/currying, and namespaces are explicitly deferred. |
+| 1 | `SPEC-FORMAT-TERSE.3.2.2` | `pending` | Arithmetic symbol callees after word aliases are locked, with raw-host fallback hazards closed. |
+| 2 | `SPEC-FORMAT-TERSE.3.2.3` | `pending` | Comparison word/symbol operator-call migration before code because bare `gt`/`lt`/etc. currently conflict with string-comparison compatibility. |
+| 3 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
 
 ## Decisions
+
+- `2026-07-02` (**`.4.4` user-function extension ledger finalized**). The portable MVP surface is now closed at
+  top-level `fn name(args) { ... }`, exact explicit arity, explicit zero-arg parentheses (`fn name() { ... }`),
+  braced value-oriented bodies, fresh function-local stores, final-expression/`return(expr)` results, value-call
+  composition, receiver-chain continuation, and standalone result discard on Perl/Rust. The following are not
+  accepted syntax/semantics without a future owning leaf: alternate spellings (`function ... endfunction` and
+  `fn ... endfn`), omitted zero-arg parentheses, brace-less bodies, caller-state/parser-state/persistent
+  side-effect functions, recursive user functions, closures, lambdas, currying/partial application, and
+  namespace/module features.
 
 - `2026-07-01` (**function grammar ownership: `specs/spec.spec`, not bootstrap**). After the text-to-AST
   migration, support for `fn <name>(...) { ... }` must live in `specs/spec.spec`. Bootstrap-parser support for
@@ -3241,6 +3259,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.4.4` | mdBook/function-surface audit; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Function MVP surface finalized after Perl/Rust parity. The book, task tree, and Knowledge Map now state the accepted explicit-paren braced `fn` contract and explicitly defer alternate spellings, optional zero-arg parentheses, brace-less bodies, caller-state/persistent side-effect functions, recursion, closures/lambdas/currying, and namespaces. No parser/compiler/runtime code changed. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.4.3.2` | `cargo fmt --all`; focused Rust runtime `terse_4_3_2`; oracle generator; Rust corpus oracle; `cargo test -p linkedspec-runtime --lib`; `cargo test -p linkedspec-core`; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust user-function runtime parity landed. Registered calls resolve before helper fallback, execute with eager caller-context args and fresh function-local variable stores, return body values into compatible receiver chains, diagnose wrong arity/recursion, and standalone calls discard results. Oracle corpus now includes `terse_4_3_2_user_function_runtime` and passes with **54 fixtures**. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.4.3.1` | Rust code review; `cargo fmt --all --check`; `cargo test -p linkedspec-core`; `cargo test -p linkedspec-runtime --lib`; `cargo test -p linkedspec-runtime --test corpus_oracle`; `mdbook build docs/linkedspec-book`; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Rust function-definition AST/compiler registry parity landed. `SpecFile` records top-level function definitions before or between rules, `validate()` rejects duplicate/collision/parameter hazards before runtime, and `CompiledSpec` carries `CompiledUserFunction` records with parsed `CodeBlock` bodies and source metadata. Runtime call execution and oracle fixtures remain `.4.3.2`. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.4.2.3` | Syntax checks for `CanonicalEvents.pm`, `Contracts.pm`, `MethodLowering.pm`, `RuleIR/EmitContext.pm`, and `t/phase0_regression.t`; TOOLBOX descriptor/runtime probes for standalone registered calls, standalone receiver chains, unregistered standalone calls, direct/mutual recursion, parser-state helper bodies, host-code-shaped bodies, and nested function syntax; `prove -Iperl t/actionir_ast_parser.t`; `prove -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; memory/doctrine/Knowledge Map/diff checks; full local CI | Perl registered standalone user-function calls lower to `VALUE_DROP` with zero raw fallback/unresolved helpers and language-agnostic readiness. Nested user-function calls now pass function-local parameter values, not bare parameter names. Recursion and unsupported function-body constructs stay deterministic unresolved-helper diagnostics with zero raw fallback. Phase0 PASS with **1007 tests** and full local CI PASS. |
@@ -3332,6 +3351,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.4.4` | `SPEC-FORMAT-TERSE.4.4 - finalize function surface ledger` | Function MVP docs/retrieval closure landed; frontier becomes `.3.2.2`. |
 | `SPEC-FORMAT-TERSE.4.3.2` | `SPEC-FORMAT-TERSE.4.3.2 - execute Rust user functions` | Rust runtime parity landed for registered value calls, receiver chains, standalone discard, local function scope, exact-arity diagnostics, recursion diagnostics, and the 54-fixture oracle corpus. Frontier becomes `.4.4`. |
 | `SPEC-FORMAT-TERSE.4.3.1` | `SPEC-FORMAT-TERSE.4.3.1 - add Rust user function registry` | Rust parsed/compiled registry parity landed: `SpecFile.functions`, `FunctionDefinition`, `CompiledSpec.functions`, `CompiledUserFunction`, and pre-runtime diagnostics. Frontier becomes `.4.3.2`. |
 | `SPEC-FORMAT-TERSE.4.2.3` | `SPEC-FORMAT-TERSE.4.2.3 - harden Perl user function discard` | Registered standalone calls now lower as `VALUE_DROP`, nested user-function parameter passing is fixed, and recursion/unsupported body diagnostics are phase0-locked. Frontier becomes `.4.3.1`. |
@@ -3421,6 +3441,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-02`: **`.4.4` DONE — function MVP surface and deferred extension ledger finalized.**
+  The public book, task tree, and retrieval cards now make the accepted user-function surface explicit after
+  Perl/Rust parity: top-level `fn name(args) { ... }`, explicit parentheses for every arity, braced
+  value-oriented bodies, exact arity, fresh function-local stores, final-expression/`return(expr)` results,
+  value-call composition, receiver-chain continuation, and standalone result discard. Alternate spellings,
+  omitted zero-arg parentheses, brace-less bodies, caller-state/parser-state/persistent side-effect functions,
+  recursive user functions, closures, lambdas, currying/partial application, and namespace/module features are
+  explicitly deferred. Frontier moves back to `.3.2.2`.
 
 - `2026-07-02`: **`.4.3.2` DONE — Rust user-function runtime and oracle parity landed.**
   Rust registered user-function calls now resolve before ordinary helper fallback, evaluate arguments eagerly in

@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.4.4 — finalize function surface ledger
+
+**Scope:** mdBook function syntax/architecture chapters, task-tree frontier, live docs, and Knowledge Map.
+
+**What changed:** The portable user-function MVP is now documented as closed after Perl/Rust parity. The accepted
+surface is top-level `fn name(args) { ... }`, explicit parentheses for every arity including `fn name() { ... }`,
+braced value-oriented bodies, exact arity, fresh function-local variable stores, final-expression or
+`return(expr)` results, value-call composition, compatible receiver-chain continuation, and standalone result
+discard.
+
+**Deferred ledger:** Alternate spellings (`function ... endfunction`, `fn ... endfn`), optional zero-arg
+parentheses, brace-less bodies, caller-state/parser-state/persistent side-effect functions, recursive user
+functions, closures, lambdas, currying/partial application, and namespace/module features are explicitly
+deferred until a future owning task-tree leaf and contract adopt them.
+
+**Checks:** mdBook build, memory architecture, Knowledge Map regenerate/check, doctrine registry, `git diff
+--check`, and full local CI passed. No parser/compiler/runtime code changed.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.4.3.2 — execute Rust user functions
 
 **Scope:** Rust runtime engine/context, focused Rust integration tests, oracle corpus generator/fixture, mdBook,
