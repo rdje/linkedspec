@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.4.3.1 — add Rust user function registry
+
+**Scope:** Rust core AST/parser/compiler/validation/type model, focused Rust tests, mdBook, live docs, and
+Knowledge Map.
+
+**What changed:** Rust `.spec` parsing now extracts top-level `fn name(args) { ... }` definitions before or
+between rule paragraphs into `SpecFile.functions`. Each `FunctionDefinition` records ordered params, exact arity,
+original source, body source, and source/body spans. Rule parsing is preserved, and top-level function
+definitions no longer get swallowed into raw rule body text.
+
+**Compiled model and diagnostics:** Rust validation now rejects duplicate user functions, rule-label collisions,
+built-in helper/control-name collisions including the landed numeric word aliases, lifecycle/runtime/function-keyword
+collisions, invalid params, duplicate params, and reserved params before runtime. Compilation projects validated definitions into
+`CompiledSpec.functions` as `CompiledUserFunction` records with parsed `CodeBlock` bodies and source metadata;
+invalid function body code reports a compile-stage diagnostic.
+
+**Boundary:** This is registry parity only. Rust user-function call execution, exact-arity runtime resolution,
+receiver-chain continuation, standalone-result discard, and oracle fixtures remain owned by
+`SPEC-FORMAT-TERSE.4.3.2`.
+
+**Checks:** `cargo fmt --all --check`, `cargo test -p linkedspec-core`, `cargo test -p linkedspec-runtime --lib`,
+`cargo test -p linkedspec-runtime --test corpus_oracle`, `mdbook build docs/linkedspec-book`, memory
+architecture, Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh` passed.
+
 ## 2026-07-01 — SPEC-FORMAT-TERSE.4.2.3 — harden Perl user function discard
 
 **Scope:** Perl ActionIR canonical event classification, value-drop lowering, user-function argument lowering,

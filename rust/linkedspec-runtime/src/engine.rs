@@ -1014,12 +1014,10 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
         match receiver {
             Expr::Variable { name } => Some(name.clone()),
-            Expr::Call { name, args } if name == "array" && args.len() == 1 => {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
-                    _ => None,
-                }
-            }
+            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
+                Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
+                _ => None,
+            },
             _ => None,
         }
     }
@@ -1111,8 +1109,7 @@ impl Engine {
             Arg::Positional(Expr::Call { name, args })
                 if matches!(
                     (shape_kind, name.as_str()),
-                    (ShapeLiteralKind::Array, "array")
-                        | (ShapeLiteralKind::Hash, "hash")
+                    (ShapeLiteralKind::Array, "array") | (ShapeLiteralKind::Hash, "hash")
                 ) && args.len() == 1 =>
             {
                 match &args[0] {
@@ -1449,14 +1446,12 @@ impl Engine {
 
         let mut current = match receiver {
             Expr::Variable { name } => RuntimeValue::Array(ctx.array_copy(name)),
-            Expr::Call { name, args } if name == "array" && args.len() == 1 => {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => {
-                        RuntimeValue::Array(ctx.array_copy(name))
-                    }
-                    _ => self.eval_expr(receiver, ctx, rule_label)?,
+            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
+                Arg::Positional(Expr::Variable { name }) => {
+                    RuntimeValue::Array(ctx.array_copy(name))
                 }
-            }
+                _ => self.eval_expr(receiver, ctx, rule_label)?,
+            },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
 
@@ -1515,14 +1510,10 @@ impl Engine {
 
         let mut current = match receiver {
             Expr::Variable { name } => RuntimeValue::Hash(ctx.hash_copy(name)),
-            Expr::Call { name, args } if name == "hash" && args.len() == 1 => {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => {
-                        RuntimeValue::Hash(ctx.hash_copy(name))
-                    }
-                    _ => self.eval_expr(receiver, ctx, rule_label)?,
-                }
-            }
+            Expr::Call { name, args } if name == "hash" && args.len() == 1 => match &args[0] {
+                Arg::Positional(Expr::Variable { name }) => RuntimeValue::Hash(ctx.hash_copy(name)),
+                _ => self.eval_expr(receiver, ctx, rule_label)?,
+            },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
         let mut family = ReceiverFamily::Hash;
@@ -2072,9 +2063,7 @@ impl Engine {
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
         if let Some(var_name) = raw_args.first().and_then(|arg| match arg {
-            Arg::Positional(Expr::Call { name, args })
-                if name == "hash" && args.len() == 1 =>
-            {
+            Arg::Positional(Expr::Call { name, args }) if name == "hash" && args.len() == 1 => {
                 match &args[0] {
                     Arg::Positional(Expr::Variable { name }) => Some(name),
                     _ => None,
@@ -5049,11 +5038,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(entry_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi")
-            .last()
-            .unwrap()
-            .as_bool()
-            .unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -5110,11 +5101,13 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has(scalar("word"))) }
 "#;
-        assert!(run_5_5_1(g_present, "hi")
-            .last()
-            .unwrap()
-            .as_bool()
-            .unwrap());
+        assert!(
+            run_5_5_1(g_present, "hi")
+                .last()
+                .unwrap()
+                .as_bool()
+                .unwrap()
+        );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
@@ -5192,7 +5185,7 @@ ChildB:
             4.0
         ); // "cde" past nl → 4
         assert_eq!(run_5_5_2(g, "ab\n").last().unwrap().as_f64().unwrap(), 1.0); // empty final line → 1
-                                                                                 // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
+        // Char-based, not byte-based: 'é' is 2 bytes but 1 column → "héllo" = 5 chars → 6.
         assert_eq!(run_5_5_2(g, "héllo").last().unwrap().as_f64().unwrap(), 6.0);
     }
 

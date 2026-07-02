@@ -16,8 +16,8 @@ answers:
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, user-functions, implementation-inventory, perl-actionir, rust-parity]
-evidence: "SPEC-FORMAT-TERSE.4.1 inspected specs/spec.spec, BootstrapSpec.pm/Core.pm, Perl ActionIR::AST::Parser, MethodLowering, RewritePipeline, Rust expr.rs/ast.rs/types.rs/compiler.rs/engine.rs, oracle generation, and mdBook compiler/backend chapters. TOOLBOX probes showed Perl value slots diagnose user_fn(...) through LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn while standalone user_fn(...) remains raw. Rust source read showed Expr::Call/FluentChain parse the shapes but Engine::call_helper sends unknown names to warning+undef. The task tree split .4.2 into Perl grammar/registry, value-call execution, and discard/purity hardening; .4.3 split into Rust registry and runtime/oracle parity. SPEC-FORMAT-TERSE.4.2.1 landed the Perl function_definition grammar/registry descriptor seam; .4.2.2 landed Perl exact-arity registered value-call execution and receiver-chain composition; .4.2.3 landed registered standalone discard and hardening diagnostics. Next frontier is Rust registry parity in .4.3.1."
-reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4\\.2\\.1|SPEC-FORMAT-TERSE\\.4\\.2\\.2|SPEC-FORMAT-TERSE\\.4\\.2\\.3|SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2|function_order|function_count|registered calls.*unresolved|standalone.*remains raw' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md"
+evidence: "SPEC-FORMAT-TERSE.4.1 inspected specs/spec.spec, BootstrapSpec.pm/Core.pm, Perl ActionIR::AST::Parser, MethodLowering, RewritePipeline, Rust expr.rs/ast.rs/types.rs/compiler.rs/engine.rs, oracle generation, and mdBook compiler/backend chapters. TOOLBOX probes showed Perl value slots diagnose user_fn(...) through LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:user_fn while standalone user_fn(...) remains raw. Rust source read showed Expr::Call/FluentChain parse the shapes but Engine::call_helper sends unknown names to warning+undef. The task tree split .4.2 into Perl grammar/registry, value-call execution, and discard/purity hardening; .4.3 split into Rust registry and runtime/oracle parity. SPEC-FORMAT-TERSE.4.2.1 landed the Perl function_definition grammar/registry descriptor seam; .4.2.2 landed Perl exact-arity registered value-call execution and receiver-chain composition; .4.2.3 landed registered standalone discard and hardening diagnostics; .4.3.1 landed Rust parsed/compiled function registry parity. Next frontier is Rust runtime/oracle parity in .4.3.2."
+reverify: "rg -n 'SPEC-FORMAT-TERSE\\.4\\.2\\.1|SPEC-FORMAT-TERSE\\.4\\.2\\.2|SPEC-FORMAT-TERSE\\.4\\.2\\.3|SPEC-FORMAT-TERSE\\.4\\.3\\.1|SPEC-FORMAT-TERSE\\.4\\.3\\.2|FunctionDefinition|CompiledUserFunction|function_order|function_count|VALUE_DROP|standalone.*raw' docs/tasks/SPEC-FORMAT-TERSE.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md docs/knowledge/rust-user-function-registry-parity.md"
 ---
 
 `SPEC-FORMAT-TERSE.4.1` found that user-defined functions are too broad for one
@@ -32,15 +32,15 @@ Current ground truth:
   `fluent_chain` nodes.
 - Perl value slots diagnose unknown user calls as unresolved helpers; registered standalone user-function calls
   lower as `VALUE_DROP`, while unregistered standalone call-shaped statements remain raw compatibility debt.
-- Rust `Expr::Call` and `Expr::FluentChain` already parse the call shapes, but runtime dispatch treats unknown
-  callees as helper misses and returns `undef` after a warning.
+- Rust `SpecFile` and `CompiledSpec` now carry parsed/compiled user-function registry records, but runtime
+  dispatch still needs `.4.3.2` to resolve registered callees before unknown-helper fallback.
 
 Implementation is split as follows:
 
 - `.4.2.1`: DONE — Perl `function_definition` grammar plus function registry/descriptor ingestion.
 - `.4.2.2`: DONE — Perl user-function exact-arity value-call execution and receiver-chain composition.
 - `.4.2.3`: DONE — Perl standalone discard, purity/collision diagnostics, and phase0 hardening.
-- `.4.3.1`: Rust parsed/compiled function registry parity.
+- `.4.3.1`: DONE — Rust parsed/compiled function registry parity.
 - `.4.3.2`: Rust runtime function execution plus oracle fixtures.
 
-The next PNT frontier is `SPEC-FORMAT-TERSE.4.3.1`.
+The next PNT frontier is `SPEC-FORMAT-TERSE.4.3.2`.

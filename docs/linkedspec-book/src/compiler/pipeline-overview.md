@@ -87,6 +87,12 @@ same registry as canonical `VALUE_DROP` statements, so the call value is compute
 discarded without raw fallback. Recursion and unsupported function-body forms are fenced
 as unresolved-helper diagnostics.
 
+The Rust backend now implements the parse/compile half of this stage: it extracts
+top-level function definitions into `SpecFile.functions`, validates their names and
+params before runtime, and compiles bodies into `CompiledUserFunction` records with
+parsed `CodeBlock` bodies. Rust runtime call resolution is still the follow-on parity
+stage.
+
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl
 host calls. Retired helpers and non-DSL host-shaped statements remain explicit
@@ -131,7 +137,7 @@ ActionIR action-block AST, and blanks the original source region while preservin
 then flows through the existing rule-validation and bootstrap-parser path.
 
 This stage rejects malformed definitions, duplicate function names, reserved names, built-in helper/control-name
-collisions, invalid or duplicate parameters, and later rule-label collisions. Execution is not done in this
+collisions including numeric word aliases, invalid or duplicate parameters, and later rule-label collisions. Execution is not done in this
 extraction stage; the registry is passed forward so the rule action-lowering stage can resolve value-position
 calls.
 

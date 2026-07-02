@@ -69,6 +69,11 @@ source, and parsed ActionIR body AST. The Perl reference now also passes this re
 lowering, where registered exact-arity calls execute as value-producing expressions or standalone `VALUE_DROP`
 statements. Wrong-arity calls remain unresolved-helper diagnostics with zero raw fallback.
 
+The Rust backend now carries the same registry shape through parse and compile stages. `SpecFile.functions`
+records top-level definitions, and `CompiledSpec.functions` stores `CompiledUserFunction` entries with parsed
+`CodeBlock` bodies and the same source metadata. Rust runtime resolution of those compiled functions is a
+separate follow-on stage.
+
 ## Per-rule compiled info
 
 Each compiled rule entry can carry fields such as:

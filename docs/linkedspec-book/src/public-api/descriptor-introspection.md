@@ -130,14 +130,15 @@ fn normalize(value) {
 The descriptor records the definition by name, including ordered parameter names, exact arity, source/body
 spans, original body source, and the parsed ActionIR `action_block` body AST. Function definitions are validated
 before runtime: duplicate names, invalid or duplicate parameters, reserved runtime/lifecycle/function symbols,
-built-in helper/control-name collisions, and rule-label collisions are rejected.
+built-in helper/control-name collisions including numeric word aliases, and rule-label collisions are rejected.
 
 The compiler also uses this registry while lowering rule actions. Calls such as
 `return(normalize(" x "))` now resolve on the Perl reference when the callee is registered
 and the arity matches. Wrong-arity registered calls still report unresolved-helper
 metadata with zero raw fallback. A standalone `normalize(" x ")` lowers as a canonical
 `VALUE_DROP`: the value is computed through the function resolver and then discarded.
-Rust runtime parity remains follow-on work.
+The Rust backend now has parsed/compiled registry parity for these definitions, but
+Rust runtime call resolution and oracle parity remain follow-on work.
 
 ## `meta`
 

@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.4.3.1 — Rust user-function registry parity landed**
+  (RUST AST/PARSER/VALIDATION/COMPILER + BOOK/KM/LIVE DOCS).
+  Rust `.spec` parsing now extracts top-level `fn name(args) { ... }` declarations before or between rule
+  paragraphs into `SpecFile.functions`, preserving ordered params, exact arity, source/body spans, original
+  source, and body source. Rule parsing is preserved, and function definitions do not become raw rule body text.
+
+  Rust validation rejects duplicate functions, rule-label collisions, helper/control-name collisions including
+  numeric word aliases, lifecycle/runtime/function-keyword collisions, invalid params, duplicate params, and
+  reserved params before runtime. Rust compilation now projects definitions into `CompiledSpec.functions` as `CompiledUserFunction`
+  records with parsed `CodeBlock` bodies and source metadata. Runtime user-call execution remains explicitly
+  unclaimed until `.4.3.2`.
+
+  **Verification:** Rust format check, `linkedspec-core`, `linkedspec-runtime --lib`, Rust corpus oracle, mdBook
+  build, memory/doctrine/Knowledge Map checks, diff check, and full local CI all pass.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.4.3.2` (Rust user-function runtime parity and oracle fixtures), then
+  `.3.2.2`, `.3.2.3`.
+
 - 2026-07-01: **SPEC-FORMAT-TERSE.4.2.3 — Perl user-function standalone discard/hardening landed**
   (ACTIONIR CANONICAL EVENTS + VALUE_DROP + METHOD LOWERING + PHASE0 + BOOK/KM/LIVE DOCS).
   Registered standalone `fn name(...)` calls and receiver chains now compute their value through the same

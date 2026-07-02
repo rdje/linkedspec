@@ -1312,7 +1312,7 @@ impl<'a> Parser<'a> {
             if ch == b'/' {
                 let pattern = self.src[start..self.pos].to_string();
                 self.advance(1); // consume closing '/'
-                                 // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
+                // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
                 self.skip_whitespace();
                 while self.pos < self.src.len() {
                     let c = self.src.as_bytes()[self.pos];
@@ -1479,7 +1479,9 @@ mod tests {
 
         assert_eq!(
             statement_call_names(&block),
-            vec!["if", "return", "elseif", "set", "return", "else", "return", "endif"]
+            vec![
+                "if", "return", "elseif", "set", "return", "else", "return", "endif"
+            ]
         );
         match &block.statements[0].expr {
             Expr::Call { args, .. } => {

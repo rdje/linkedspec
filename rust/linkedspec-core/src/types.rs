@@ -287,9 +287,24 @@ pub struct CompiledRule {
     pub rep_max: Option<usize>,
 }
 
+/// A compiled top-level user-defined function definition.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CompiledUserFunction {
+    pub name: String,
+    pub params: Vec<String>,
+    pub arity: usize,
+    pub body: crate::expr::CodeBlock,
+    pub body_source: String,
+    pub source: String,
+    pub source_span: crate::ast::SourceSpan,
+    pub body_span: crate::ast::SourceSpan,
+}
+
 /// A fully compiled specification — maps rule labels to compiled rules.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CompiledSpec {
+    #[serde(default)]
+    pub functions: Vec<CompiledUserFunction>,
     pub rules: Vec<CompiledRule>,
 }
 
@@ -302,5 +317,10 @@ impl CompiledSpec {
     /// Find the top rule.
     pub fn top_rule(&self) -> Option<&CompiledRule> {
         self.rules.iter().find(|r| r.is_top)
+    }
+
+    /// Find a compiled user function by name.
+    pub fn find_function(&self, name: &str) -> Option<&CompiledUserFunction> {
+        self.functions.iter().find(|f| f.name == name)
     }
 }

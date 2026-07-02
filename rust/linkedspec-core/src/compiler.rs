@@ -28,19 +28,46 @@
 //! in `AcodeEntry.child_regex_idx` and used during Phase 2 resolution.
 
 use crate::ast::{BodyElementKind, Rule, SpecFile};
-use crate::error::Result;
+use crate::error::{LinkedSpecError, Result};
 use crate::expr::CodeBlock;
-use crate::types::{AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, ParseMode};
+use crate::types::{
+    AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode,
+};
 
 /// Compile a parsed `SpecFile` into a `CompiledSpec` ready for the runtime.
 pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
+    let mut functions = Vec::new();
+    for function in &spec.functions {
+        functions.push(compile_function(function)?);
+    }
+
     let mut rules = Vec::new();
     for rule in &spec.rules {
         rules.push(compile_rule(rule)?);
     }
-    let mut compiled = CompiledSpec { rules };
+    let mut compiled = CompiledSpec { functions, rules };
     build_dependency_regex_map(&mut compiled)?;
     Ok(compiled)
+}
+
+fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<CompiledUserFunction> {
+    let body = CodeBlock::parse(&function.body_source).map_err(|e| {
+        LinkedSpecError::Compile(format!(
+            "function '{}': failed to parse body code: {e}",
+            function.name
+        ))
+    })?;
+
+    Ok(CompiledUserFunction {
+        name: function.name.clone(),
+        params: function.params.clone(),
+        arity: function.arity,
+        body,
+        body_source: function.body_source.clone(),
+        source: function.source.clone(),
+        source_span: function.source_span.clone(),
+        body_span: function.body_span.clone(),
+    })
 }
 
 fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
@@ -413,6 +440,41 @@ mod tests {
         let compiled = compile(&spec).unwrap();
         let json = serde_json::to_string(&compiled).unwrap();
         let _back: CompiledSpec = serde_json::from_str(&json).unwrap();
+    }
+
+    #[test]
+    fn compile_user_function_registry() {
+        let src = r#"fn normalize(value) {
+ return(trim(value))
+}
+
+Top::
+ /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        assert_eq!(compiled.functions.len(), 1);
+        let function = compiled.find_function("normalize").unwrap();
+        assert_eq!(function.name, "normalize");
+        assert_eq!(function.params, vec!["value".to_string()]);
+        assert_eq!(function.arity, 1);
+        assert_eq!(function.source_span.line_start, 1);
+        assert_eq!(function.source_span.line_end, 3);
+        assert_eq!(function.body_source, "return(trim(value))");
+        assert_eq!(function.body.statements.len(), 1);
+        assert_eq!(compiled.rules.len(), 1);
+        assert_eq!(compiled.rules[0].label, "Top");
+    }
+
+    #[test]
+    fn compile_user_function_body_parse_error_is_compile_error() {
+        let src = r#"fn bad(value) { return(@invalid) }
+Top::
+ /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let err = compile(&spec).unwrap_err().to_string();
+        assert!(err.contains("function 'bad': failed to parse body code"));
     }
 
     // ── Action edge → regex association tests ──

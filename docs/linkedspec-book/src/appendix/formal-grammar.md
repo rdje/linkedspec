@@ -74,14 +74,16 @@ argument first, binds it to the function's parameter in a fresh function-local s
 returns the body result. A standalone `normalize(" x ")` computes that value and discards it
 through the canonical `VALUE_DROP` path. Calls can feed helper arguments and compatible
 receiver-dot chains. Recursive and unsupported function-body forms are fenced as
-unresolved-helper diagnostics with zero raw fallback. Rust parity remains follow-on work.
+unresolved-helper diagnostics with zero raw fallback. Rust now parses, validates, and
+compiles the same top-level function registry shape, while Rust runtime call resolution
+and oracle parity remain follow-on work.
 
 The registry rejects:
 
 - duplicate function names
 - invalid or duplicate parameters
 - reserved runtime/lifecycle/function symbols
-- names that collide with built-in helper/control names
+- names that collide with built-in helper/control names, including numeric word aliases such as `add`
 - names that collide with rule labels
 
 ## 2. Rule Header
@@ -770,7 +772,7 @@ A valid `.spec` file must satisfy:
 
 1. At least one top rule (`::`) exists.
 2. Every rule label is unique. Duplicate labels are rejected.
-3. Every function name is unique and must not collide with any rule label or built-in helper/control name.
+3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
 4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.
 5. Rule and function definitions must not appear inside open `{ }` blocks.
 6. Every `{ }` block opened inside a rule paragraph or function body must be closed before end of file.

@@ -58,6 +58,7 @@ fn compiled_rule_json_roundtrip() {
 #[test]
 fn compiled_spec_json_roundtrip() {
     let spec = CompiledSpec {
+        functions: Vec::new(),
         rules: vec![
             CompiledRule {
                 label: "Top".into(),

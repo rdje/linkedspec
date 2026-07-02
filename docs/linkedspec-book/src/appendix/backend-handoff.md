@@ -54,6 +54,8 @@ or duplicate parameters before runtime. The Perl reference now resolves register
 exact-arity calls during value-expression lowering; wrong-arity registered calls remain
 unresolved-helper diagnostics with zero raw fallback. Registered standalone calls and
 receiver chains now lower as canonical `VALUE_DROP` statements on the Perl reference.
+The Rust backend now carries the same definitions through parsed and compiled registry
+records; Rust runtime call execution is the remaining parity stage.
 
 The remaining fallback boundary is not a backend pattern to copy. Malformed helper forms
 already covered by the typed AST path report unresolved-helper metadata rather than host
@@ -63,7 +65,8 @@ chains are reserved for user-defined function resolution and diagnostics, not br
 host-language fallback. In the Perl reference, return/value-position unknown calls
 currently diagnose. Standalone registered calls/chains lower as `VALUE_DROP`, while
 unregistered call-shaped statements remain raw compatibility debt. New backends should
-follow the typed-AST model used by the Rust implementation from the start.
+follow the typed-AST model used by the Rust implementation from the start, including a
+validated function registry before runtime resolution.
 
 You do **not** need to read the Perl source code. Every behavioral contract is
 specified in the documents below.
@@ -171,6 +174,9 @@ It provides:
   unknown-helper fallback. Calls execute in value positions and compatible receiver
   chains; registered standalone calls compute and discard through `VALUE_DROP`. Recursion
   and unsupported function-body forms are diagnostics, not raw fallback.
+- The Rust backend's parsed and compiled state now records the same top-level function
+  registry shape with parsed body `CodeBlock` values. Runtime user-function resolution is
+  still the active Rust parity follow-on.
 - `t/phase0_regression.t` — comprehensive regression tests.
 - Phase 0 baseline showing all 20 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
 

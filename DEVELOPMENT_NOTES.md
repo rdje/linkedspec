@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.4.3.1 — Rust user-function registry parity):
+  Rust now has the parsed/compiled user-function registry shape needed before runtime execution. Durable points.
+  (1) **Parsed registry.** `SpecFile` carries `functions`; the parser extracts top-level `fn name(args) { ... }`
+  definitions before or between rule paragraphs, keeps their source/body spans and body source, and prevents those
+  definitions from becoming raw rule body text. (2) **Validation boundary.** Rust rejects duplicate functions,
+  rule-label collisions, built-in helper/control-name collisions including `.3.2.1` numeric word aliases,
+  lifecycle/runtime/function-keyword collisions, invalid params, duplicate params, and reserved params before
+  runtime. (3) **Compiled registry.**
+  `CompiledSpec` carries `CompiledUserFunction` records, each with ordered params, exact arity, parsed
+  `CodeBlock` body, source/body spans, and source text; malformed body code becomes a compile diagnostic.
+  (4) **Still pending.** Runtime call resolution, fresh function-local execution scope, receiver-chain
+  continuation, standalone discard, and oracle fixtures are intentionally left to `.4.3.2`. (5) **Gate.** Rust
+  format check, core tests, runtime lib tests, corpus oracle, mdBook build, memory/doctrine/Knowledge Map checks,
+  diff check, and full local CI pass after the registry slice.
+  Next frontier: `SPEC-FORMAT-TERSE.4.3.2`.
+
 - 2026-07-01 (SPEC-FORMAT-TERSE.4.2.3 — Perl user-function standalone discard/hardening):
   The Perl reference now closes the remaining `.4.2` user-function boundary. Durable points. (1) **Dynamic
   VALUE_DROP seam.** Static helper contracts cannot know user-defined names, so `ActionIR::CanonicalEvents`

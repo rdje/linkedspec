@@ -8,7 +8,28 @@ use serde::{Deserialize, Serialize};
 /// A complete `.spec` file AST.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpecFile {
+    #[serde(default)]
+    pub functions: Vec<FunctionDefinition>,
     pub rules: Vec<Rule>,
+}
+
+/// A top-level user-defined function definition.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FunctionDefinition {
+    pub name: String,
+    pub params: Vec<String>,
+    pub arity: usize,
+    pub body_source: String,
+    pub source: String,
+    pub source_span: SourceSpan,
+    pub body_span: SourceSpan,
+}
+
+/// 1-based source line span metadata.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SourceSpan {
+    pub line_start: usize,
+    pub line_end: usize,
 }
 
 /// A single rule paragraph — one `RuleName:: /regex/ ...` block.
@@ -207,6 +228,11 @@ impl SpecFile {
     /// Returns all rule labels.
     pub fn labels(&self) -> Vec<&str> {
         self.rules.iter().map(|r| r.header.label.as_str()).collect()
+    }
+
+    /// Returns all top-level user-function names in source order.
+    pub fn function_names(&self) -> Vec<&str> {
+        self.functions.iter().map(|f| f.name.as_str()).collect()
     }
 
     /// Look up a rule by label.
