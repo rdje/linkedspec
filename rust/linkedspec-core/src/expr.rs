@@ -13,7 +13,7 @@
 //! attached_if → (if | when) '(' expr ')' '{' stmts '}' (elseif '(' expr ')' '{' stmts '}')* ((else | otherwise) '{' stmts '}')?
 //! attached_switch → switch '(' expr ')' '{' (case '(' expr ')' '{' stmts '}' | default '('? ')'? '{' stmts '}')+ '}'
 //! attached_while → while '(' expr ')' '{' stmts '}'
-//! scalar_assignment → name '=' expr      (statement only)
+//! scalar_assignment → name '=' expr      (scalar expression; statement-compatible)
 //! array_append → name '+=' expr          (statement only)
 //! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
 //! expr        → primary ('.' method_call)*
@@ -21,7 +21,7 @@
 //! call        → name '(' args? ')' | symbol '(' args? ')'
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
-//! arg         → expr | name '=' expr       (keyword argument)
+//! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
 //! literal     → string | number | boolean | regex | undef | array | hash
 //! array       → '[' (expr (',' expr)*)? ']'
 //! hash        → '{' (expr '=>' expr (',' expr '=>' expr)*)? '}'
@@ -35,7 +35,7 @@
 //! nested_access → variable ('[' expr ']')+ (mixed hash/array path access)
 //! regex       → '/' [^/]* '/'
 //! name        → [a-zA-Z_]\w*
-//! symbol      → '+' | '-' | '*' | '/' | '%' | '==' | '!=' | '>' | '>=' | '<' | '<='
+//! symbol      → '+' | '-' | '*' | '/' | '%' | '=' | '==' | '!=' | '>' | '>=' | '<' | '<='
 //! ```
 
 use serde::{Deserialize, Serialize};
@@ -78,7 +78,7 @@ pub enum Expr {
     /// A helper function call: `push_value(array(results), scalar(retv))`
     #[serde(rename = "call")]
     Call { name: String, args: Vec<Arg> },
-    /// A statement-only scalar assignment operator: `name = value`
+    /// A scalar assignment operator: `name = value`
     #[serde(rename = "assign_scalar")]
     AssignScalar { name: String, value: Box<Expr> },
     /// A statement-only array append operator: `items += value`
@@ -800,6 +800,14 @@ impl<'a> Parser<'a> {
             return Err("unexpected end of expression".into());
         }
 
+        let scalar_assignment_start = self.pos;
+        if matches!(self.peek(), Some(ch) if ch.is_ascii_alphabetic() || ch == '_') {
+            if let Some(expr) = self.try_parse_scalar_assignment_statement()? {
+                return self.parse_fluent_chain(expr);
+            }
+            self.pos = scalar_assignment_start;
+        }
+
         let ch = self.peek().unwrap();
 
         match ch {
@@ -911,7 +919,7 @@ impl<'a> Parser<'a> {
     }
 
     fn symbol_call_token_at_current(&self) -> Option<&'static str> {
-        let token = ["==", "!=", ">=", "<=", "+", "-", "*", "/", "%", ">", "<"]
+        let token = ["==", "!=", ">=", "<=", "=", "+", "-", "*", "/", "%", ">", "<"]
             .into_iter()
             .find(|candidate| self.remaining().starts_with(candidate))?;
 
@@ -1004,7 +1012,7 @@ impl<'a> Parser<'a> {
         let args = if self.peek() == Some(')') {
             Vec::new()
         } else {
-            self.parse_args()?
+            self.parse_args_for_callee(&name)?
         };
         if self.peek() != Some(')') {
             return Err(format!("expected ')' after args in symbol call '{}'", name));
@@ -1257,7 +1265,7 @@ impl<'a> Parser<'a> {
             let args = if self.peek() == Some(')') {
                 Vec::new()
             } else {
-                self.parse_args()?
+                self.parse_args_for_callee(&name)?
             };
             if self.peek() != Some(')') {
                 return Err(format!("expected ')' after args in call to '{}'", name));
@@ -1335,7 +1343,7 @@ impl<'a> Parser<'a> {
             let args = if self.peek() == Some(')') {
                 Vec::new()
             } else {
-                self.parse_args()?
+                self.parse_args_for_callee(&method)?
             };
             if self.peek() != Some(')') {
                 return Err(format!(
@@ -1353,20 +1361,25 @@ impl<'a> Parser<'a> {
         })
     }
 
-    fn parse_args(&mut self) -> Result<Vec<Arg>, String> {
+    fn callee_allows_keyword_args(callee: &str) -> bool {
+        matches!(callee, "declare")
+    }
+
+    fn parse_args_for_callee(&mut self, callee: &str) -> Result<Vec<Arg>, String> {
         let mut args = Vec::new();
+        let allow_keywords = Self::callee_allows_keyword_args(callee);
         loop {
             self.skip_whitespace();
             if self.pos >= self.src.len() || self.peek() == Some(')') {
                 break;
             }
 
-            // Check for keyword arg: name=expr
+            // Check for keyword arg only on callees that own keyword syntax.
             let start = self.pos;
             let maybe_name = self.parse_name();
             self.skip_whitespace();
 
-            if !maybe_name.is_empty() && self.peek() == Some('=') {
+            if allow_keywords && !maybe_name.is_empty() && self.peek() == Some('=') {
                 self.advance(1); // consume '='
                 self.skip_whitespace();
                 let value = self.parse_expr()?;
@@ -2981,10 +2994,57 @@ return(array_copy(array(results)));"#;
     }
 
     #[test]
-    fn parse_single_equals_symbol_callee_stays_deferred() {
-        let result = CodeBlock::parse("return(=(target, value))");
-        assert!(result.is_err());
-        assert!(result.unwrap_err().contains("unexpected character '='"));
+    fn parse_single_equals_symbol_callee_as_assignment_operator_call() {
+        let block = CodeBlock::parse("return(=(target, value))").unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "=");
+                        assert_eq!(args.len(), 2);
+                    }
+                    other => panic!("expected assignment operator call, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_scalar_assignment_value_expression_in_args() {
+        let code = r#"return(array(name = "ok", set(out, other = name), =(again, out)))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "array");
+                        match args[0].value() {
+                            Expr::AssignScalar { name, .. } => assert_eq!(name, "name"),
+                            other => panic!("expected scalar assignment arg, got {other:?}"),
+                        }
+                        match args[1].value() {
+                            Expr::Call { name, args } => {
+                                assert_eq!(name, "set");
+                                match args[1].value() {
+                                    Expr::AssignScalar { name, .. } => assert_eq!(name, "other"),
+                                    other => panic!("expected nested scalar assignment, got {other:?}"),
+                                }
+                            }
+                            other => panic!("expected set call, got {other:?}"),
+                        }
+                        match args[2].value() {
+                            Expr::Call { name, .. } => assert_eq!(name, "="),
+                            other => panic!("expected assignment operator call, got {other:?}"),
+                        }
+                    }
+                    other => panic!("expected array call, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
+        }
     }
 
     #[test]

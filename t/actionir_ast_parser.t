@@ -93,6 +93,12 @@ subtest 'assignment and mutation statement nodes' => sub {
     is($hash->{kind}, 'assign_hash_index', 'hash-index assignment parses as assign_hash_index');
     is($hash->{key}{kind}, 'variable', 'hash assignment key is parsed as expression');
     is($hash->{value}{kind}, 'hash_literal', 'hash assignment RHS is parsed as hash literal');
+
+    my $operator_call = parse_expr('=(target, value)');
+    is($operator_call->{kind}, 'call', 'single-equals operator spelling parses as a call');
+    is($operator_call->{name}, '=', 'single-equals operator call keeps the symbol callee');
+    is($operator_call->{args}[0]{kind}, 'variable', 'single-equals operator target is parsed');
+    is($operator_call->{args}[1]{kind}, 'variable', 'single-equals operator value is parsed');
 };
 
 subtest 'structured control forms parse as typed AST nodes' => sub {
@@ -538,6 +544,29 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     }
 
     ok($parse_calls >= 3, 'assignment/mutation statements entered through the AST parser');
+};
+
+subtest 'scalar assignment expression lowering consumes AST nodes' => sub {
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(name = "ok")}),
+        q{return do { $name = "ok"; $name }},
+        'scalar assignment expression returns the stored scalar value'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(=(other, name = "ok"))}),
+        q{return do { $other = do { $name = "ok"; $name }; $other }},
+        'single-equals operator call composes with a nested scalar assignment value'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(set(out, name = "ok"))}),
+        q{return do { $out = do { $name = "ok"; $name }; $out }},
+        'set compatibility spelling returns the stored scalar value in value position'
+    );
+    unlike(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(set(items, [value]))}),
+        qr/do \{ \$items =/,
+        'direct shape RHS is not claimed as scalar assignment expression value in this leaf'
+    );
 };
 
 subtest 'statement helper-call lowering consumes AST call nodes' => sub {

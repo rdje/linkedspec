@@ -87,7 +87,8 @@ Detailed reference: [Declaration Helper Reference](declaration-helper-reference.
 Write values into declared variables or containers:
 
 - `set(target, value)` — write a value; `assign(target, value)` is the legacy alias
-- `name = value` — terse scalar assignment operator, equivalent to `set(name, value)` as a statement today
+- `name = value` — terse scalar assignment operator; in scalar contexts it also yields the stored value
+- `=(name, value)` — operator-call spelling for the same scalar assignment value expression
 - `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; statement-level today
 - `push(container, value)` — append to an array
 - `push_value(array(name), value)` — named-array push

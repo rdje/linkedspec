@@ -46483,7 +46483,7 @@ subtest 'spec_format_terse_3_2_3_3_numeric_comparison_word_aliases' => sub {
 subtest 'spec_format_terse_3_2_3_4_numeric_comparison_symbol_callees' => sub {
     # SPEC-FORMAT-TERSE.3.2.3.4: comparison symbol callees are ordinary
     # callee(args) forms over the numeric num_* comparison family. The single
-    # equals operator-call spelling remains deferred to .3.3.
+    # equals operator-call spelling is parsed separately for assignment.
     plan tests => 13;
     require JSON::PP;
     require LinkedSpec::ActionIR::MethodExpr;
@@ -46513,8 +46513,8 @@ subtest 'spec_format_terse_3_2_3_4_numeric_comparison_symbol_callees' => sub {
         'existing slash symbol callees still lower as division calls');
     ok(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('==(2, 2)'),
         'double-equals is parsed as a symbol callee');
-    ok(!defined(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('=(target, value)')),
-        'single-equals operator-call spelling remains deferred');
+    ok(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('=(target, value)'),
+        'single-equals operator-call spelling is parsed for assignment, not comparison');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { return(array(==(\"2\",\"2\"), !=(\"2\",\"3\"), >(\"10\",\"2\"), >=(\"2\",\"2\"), <(\"2\",\"10\"), <=(\"2\",\"2\"), >(\"2\",\"10\"), str_gt(\"2\",\"10\"))) }\n"
@@ -46541,6 +46541,69 @@ subtest 'spec_format_terse_3_2_3_4_numeric_comparison_symbol_callees' => sub {
         'numeric comparison symbol-callee spec has no unresolved-helper hits');
     ok($meta->{language_agnostic_action_ir_ready},
         'numeric comparison symbol-callee spec remains language-agnostic ActionIR ready');
+};
+
+subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
+    # SPEC-FORMAT-TERSE.3.3.1: scalar assignment expressions store and return
+    # the assigned scalar value. Direct RHS shape inference, array append, and
+    # hash-index mutation value contracts remain later leaves.
+    plan tests => 12;
+    require JSON::PP;
+    require LinkedSpec::ActionIR::MethodExpr;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('return(name = "ok")'),
+        'return do { $name = "ok"; $name }',
+        'scalar assignment operator lowers as a value expression');
+    is($L->('return(=(other, name = "ok"))'),
+        'return do { $other = do { $name = "ok"; $name }; $other }',
+        'single-equals operator call returns the stored scalar value');
+    is($L->('return(set(out, name = "ok"))'),
+        'return do { $out = do { $name = "ok"; $name }; $out }',
+        'set compatibility spelling returns the stored scalar value');
+    like($L->('return(set(items, [value]))'),
+        qr/^return\s+(?!do \{ \$items =)/,
+        'direct shape RHS is not claimed by the scalar expression-value leaf');
+    ok(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('=(target, value)'),
+        'single-equals operator-call spelling parses');
+
+    my $spec = "fn store(value) { return(local = value) }\n"
+             . "Top::\n"
+             . " /x/ -> Done { return(array(name = \"ok\", name, =(other, cat(scalar(name), \"!\")), other, set(third, store(\"fn\")), third, { block = cat(scalar(third), \"!\"); block }, =(raw, \" hi \").trim())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'scalar assignment expression spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["ok","ok","ok!","ok!","fn","fn","fn!","hi"]',
+        'scalar assignment expressions compose in return/helper/block/function/receiver-chain contexts');
+
+    my $src = $gen->($spec);
+    like($src, qr/\$name = "ok".*\$other = .*concat.*\$third = .*\$block = .*concat.*\$raw = " hi ".*__ls_trim/s,
+        'generated source contains lowered scalar assignment expressions and receiver-chain lowering');
+    unlike($src, qr/\bassign\s*\(|\bset\s*\(|=\s*\(\s*(?:other|raw)\b/,
+        'generated source has no raw assign helper or single-equals operator-call residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'scalar assignment expression spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'scalar assignment expression spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'scalar assignment expression spec remains language-agnostic ActionIR ready');
 };
 
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {

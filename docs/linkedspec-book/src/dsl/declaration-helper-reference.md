@@ -385,7 +385,7 @@ Do not redeclare to reset. Redeclaration is a lifetime decision, not a mutation 
 Declaration initializers reuse the same expression language as `set(...)`, `push_value(...)`, `return(...)`, and flow helpers.
 
 > **Terse spellings.** The same terse helper renames apply here: `set(...)` for `assign(...)`,
-> scalar `name = value` for `set(name, value)`, array append `items += expr` for explicit append values, hash-index assignment `meta["key"] = expr` for `set_key(meta, "key", expr)`, `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
+> scalar `name = value` and `=(name, value)` for scalar assignment, array append `items += expr` for explicit append values, hash-index assignment `meta["key"] = expr` for `set_key(meta, "key", expr)`, `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind). They lower identically to the original
 > names in initializer and assignment sources, so `declare(array, saved=copy(array(items)))` is
 > equivalent to `declare(array, saved=array_copy(array(items)))`. See the

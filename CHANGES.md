@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.1 — implement scalar assignment values
+
+**Scope:** Perl ActionIR method-call parsing/lowering, Rust expression parsing/runtime dispatch, phase0 locks,
+Rust parser/runtime tests, oracle corpus, mdBook, task tree, live recovery docs, and Knowledge Map.
+
+**What changed:** Scalar non-shape assignment is now an expression value on Perl and Rust. `name = value`,
+`=(name,value)`, scalar `set(name,value)`, and scalar `assign(name,value)` store the scalar and yield the stored
+value in return payloads, helper arguments, expression-valued blocks, user-function bodies, and compatible
+scalar receiver chains such as `=(raw, " hi ").trim()`.
+
+**Compatibility boundary:** Statement behavior is preserved. Direct RHS shape assignment expression values,
+array append values, and hash-index mutation values remain deferred to `.3.3.2`/`.3.3.3`. Perl aggregate-call
+lowering keeps nested wrapper calls such as `count(array(items))` source-shaped while allowing direct
+multi-argument `array(name, other)` scalar payload reads.
+
+**Checks:** Perl syntax checks, focused `t/actionir_ast_parser.t`, focused Perl runtime/source probes, focused
+Rust parser/runtime tests, oracle generation, Rust corpus oracle, phase0, mdBook build, Knowledge Map
+regenerate/check, memory architecture, doctrine registry, `git diff --check`, and full local CI passed. Local CI
+includes phase0 passing with **1012 tests** and the corpus oracle passing over **59 fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.3 — split expression-valued assignment
 
 **Scope:** Task tree, mdBook assignment wording, live recovery docs, and Knowledge Map. No parser/compiler/runtime

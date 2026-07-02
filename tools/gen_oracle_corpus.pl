@@ -846,6 +846,25 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values ──
+    #
+    # Scalar non-shape assignment forms now store and yield the assigned value
+    # in value positions. This fixture covers infix `name = value`, operator
+    # call `=(name, value)`, scalar set/assign compatibility via `set(...)`, a
+    # function-local assignment return, an expression-valued block, and receiver
+    # chaining on the assigned value. Direct RHS shapes, array append values, and
+    # hash-index mutation values remain deferred to later `.3.3.x` leaves.
+    {   case   => 'terse_3_3_1_scalar_assignment_expressions',
+        input  => 'xhello',
+        source => <<'SPEC',
+fn store(value) { return(local = value) }
+Top::
+ /x/ -> Done { return(array(name = "ok", name, =(other, cat(scalar(name), "!")), other, set(third, store("fn")), third, { block = cat(scalar(third), "!"); block }, =(raw, " hi ").trim())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

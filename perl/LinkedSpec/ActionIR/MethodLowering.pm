@@ -804,6 +804,7 @@ sub _actionir_ast_expected_statement_method {
 sub _actionir_ast_known_value_call_method {
  my ($method) = @_;
  return undef unless defined($method) && length($method);
+ return '=' if $method eq '=';
  my $retired_alias = _actionir_ast_retired_wrapper_alias_method($method);
  return $retired_alias if defined($retired_alias) && length($retired_alias);
  return 'concat' if $method eq 'cat';
@@ -2117,6 +2118,7 @@ sub _lower_method_value_expr {
  my $lower_ast_value_only_call_node;
  my $lower_ast_aggregate_call_node;
  my $lower_ast_fluent_chain_node;
+ my $lower_ast_scalar_assignment_value_node;
  my $lower_ast_user_function_call_node;
  my $ast_expr_source_node;
  my $lower_ast_supported_call_source_node;
@@ -2327,6 +2329,12 @@ sub _lower_method_value_expr {
    return $scalar_read if defined($scalar_read) && length($scalar_read);
    return $node->{name}
   }
+  if ($kind eq 'assign_scalar') {
+   return undef unless defined($node->{name}) && $node->{name} =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $value_expr = $ast_expr_source_node->($node->{value});
+   return undef unless defined($value_expr) && length($value_expr);
+   return $node->{name}.' = '.$value_expr;
+  }
   if ($kind eq 'indexed_var') {
    return undef unless defined($node->{name}) && length($node->{name});
    my $index_expr = $ast_expr_source_node->($node->{index});
@@ -2388,6 +2396,17 @@ sub _lower_method_value_expr {
    return undef;
   }
   if ($kind eq 'call') {
+   if (($node->{name} // '') eq '=') {
+    my @args;
+    foreach my $arg (@{$node->{args} || []}) {
+     my $arg_expr = $ast_expr_source_node->($arg);
+     $arg_expr = $arg->{source}
+      if ref($arg) eq 'HASH' && !(defined($arg_expr) && length($arg_expr));
+     return undef unless defined($arg_expr) && length($arg_expr);
+     push @args, $arg_expr;
+    }
+    return '=('.join(', ', @args).')';
+   }
    my $user_function_call = $lower_ast_user_function_call_node->($node);
    return $user_function_call if defined($user_function_call) && length($user_function_call);
    my $call_expr = $lower_ast_supported_call_source_node->($node);
@@ -2419,6 +2438,61 @@ sub _lower_method_value_expr {
    return $source if defined($source) && length($source);
   }
   return undef
+ };
+ $lower_ast_scalar_assignment_value_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH';
+
+  my ($target_name, $value_node);
+  my $kind = $node->{kind} // '';
+  if ($kind eq 'assign_scalar') {
+   $target_name = $node->{name};
+   $value_node = $node->{value};
+  } elsif ($kind eq 'call') {
+   my $method = $node->{name} // '';
+   return undef unless $method eq '=' || $method eq 'assign';
+   my $args = $node->{args} || [];
+   return undef unless ref($args) eq 'ARRAY' && @$args == 2;
+   my $target_node = $args->[0];
+   $value_node = $args->[1];
+
+   if (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'variable') {
+    $target_name = $target_node->{name};
+   } elsif (ref($target_node) eq 'HASH'
+       && ($target_node->{kind} // '') eq 'call'
+       && ($target_node->{name} // '') eq 'scalar') {
+    my $target_args = $target_node->{args} || [];
+    if (ref($target_args) eq 'ARRAY'
+     && @$target_args == 1
+     && ref($target_args->[0]) eq 'HASH'
+     && ($target_args->[0]{kind} // '') eq 'variable') {
+     $target_name = $target_args->[0]{name};
+    }
+   }
+
+   unless (defined($target_name) && length($target_name)) {
+    my $target_source = $ast_expr_source_node->($target_node);
+    $target_source = $target_node->{source}
+     if ref($target_node) eq 'HASH' && !(defined($target_source) && length($target_source));
+    $target_name = $extract_scalar_symbol_name->($target_source)
+     if defined($target_source) && length($target_source);
+   }
+  } else {
+   return undef;
+  }
+
+  return undef unless defined($target_name) && $target_name =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  return undef unless ref($value_node) eq 'HASH';
+  return undef if ($value_node->{kind} // '') =~ /^(?:array_literal|hash_literal)$/o;
+
+  my $value_expr = $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
+  $value_expr = $legacy_method_value_expr->($value_node->{source})
+   unless defined($value_expr) && length($value_expr);
+  $value_expr = $value_node->{source}
+   if !(defined($value_expr) && length($value_expr)) && defined($value_node->{source});
+  return undef unless defined($value_expr) && length($value_expr);
+
+  return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
  };
  $lower_ast_supported_call_source_node = sub {
   my ($node) = @_;
@@ -2594,6 +2668,8 @@ sub _lower_method_value_expr {
    if $kind eq 'variable' && $opts->{variable_source};
   return $opts->{bare_scalar_read} ? _lower_source_slot_bare_scalar_read_expr($node->{name}, $deps) : undef
    if $kind eq 'variable';
+  return $lower_ast_scalar_assignment_value_node->($node)
+   if $kind eq 'assign_scalar';
   return $lower_ast_direct_access_node->($node)
    if $kind eq 'indexed_var' || $kind eq 'nested_access';
   if ($kind eq 'array_literal') {
@@ -2627,9 +2703,11 @@ sub _lower_method_value_expr {
   return $lower_ast_fluent_chain_node->($node)
    if $kind eq 'fluent_chain';
   if ($kind eq 'call') {
+   my $scalar_assignment = $lower_ast_scalar_assignment_value_node->($node);
+   return $scalar_assignment if defined($scalar_assignment) && length($scalar_assignment);
    my $user_function_call = $lower_ast_user_function_call_node->($node);
    return $user_function_call if defined($user_function_call) && length($user_function_call);
-   my $lowered_call = $lower_ast_value_only_call_node->($node);
+   my $lowered_call = $lower_ast_value_only_call_node->($node, $opts);
    return $lowered_call if defined($lowered_call) && length($lowered_call);
    $lowered_call = $lower_ast_aggregate_call_node->($node);
    return $lowered_call if defined($lowered_call) && length($lowered_call);
@@ -2645,7 +2723,8 @@ sub _lower_method_value_expr {
   return undef
  };
  $lower_ast_value_only_call_node = sub {
-  my ($node) = @_;
+  my ($node, $opts) = @_;
+  $opts = {} unless ref($opts) eq 'HASH';
   return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
   my $args = $node->{args} || [];
   return undef unless ref($args) eq 'ARRAY';
@@ -2656,7 +2735,9 @@ sub _lower_method_value_expr {
   foreach my $arg (@$args) {
    my $lowered_arg;
    if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'call') {
-    $lowered_arg = $lower_ast_value_only_call_node->($arg);
+    $lowered_arg = $lower_ast_scalar_assignment_value_node->($arg);
+    $lowered_arg = $lower_ast_value_only_call_node->($arg, $opts)
+     unless defined($lowered_arg) && length($lowered_arg);
     $lowered_arg = $ast_expr_source_node->($arg)
      unless defined($lowered_arg) && length($lowered_arg);
     $lowered_arg = $arg->{source} unless defined($lowered_arg) && length($lowered_arg);
@@ -2666,7 +2747,8 @@ sub _lower_method_value_expr {
      && _user_function_scalar_value_name($deps, $arg->{name})) {
      $lowered_arg = _lower_source_slot_bare_scalar_read_expr($arg->{name}, $deps);
     } else {
-     $lowered_arg = $lower_ast_value_node->($arg, { variable_source => 1 });
+     my $arg_opts = $opts->{bare_scalar_read} ? { bare_scalar_read => 1 } : { variable_source => 1 };
+     $lowered_arg = $lower_ast_value_node->($arg, $arg_opts);
     }
     $lowered_arg = $ast_expr_source_node->($arg)
      unless defined($lowered_arg) && length($lowered_arg);
@@ -2688,7 +2770,19 @@ sub _lower_method_value_expr {
 
   my @arg_exprs;
   foreach my $arg (@$args) {
-   my $arg_expr = $ast_expr_source_node->($arg);
+   my $arg_expr = $lower_ast_scalar_assignment_value_node->($arg);
+   if (!(defined($arg_expr) && length($arg_expr)) && $method eq 'array' && @$args != 1) {
+    my $arg_kind = ref($arg) eq 'HASH' ? ($arg->{kind} // '') : '';
+    $arg_expr = $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
+     if $arg_kind eq 'variable'
+     || $arg_kind eq 'assign_scalar'
+     || $arg_kind eq 'array_literal'
+     || $arg_kind eq 'hash_literal'
+     || $arg_kind eq 'block_value'
+     || $arg_kind eq 'fluent_chain';
+   }
+   $arg_expr = $ast_expr_source_node->($arg)
+    unless defined($arg_expr) && length($arg_expr);
    $arg_expr = $arg->{source} unless defined($arg_expr) && length($arg_expr);
    return undef unless defined($arg_expr) && length($arg_expr);
    push @arg_exprs, $arg_expr;
@@ -2716,7 +2810,9 @@ sub _lower_method_value_expr {
    return undef unless ref($args) eq 'ARRAY';
    my @arg_exprs;
    foreach my $arg (@$args) {
-    my $arg_expr = $ast_expr_source_node->($arg);
+    my $arg_expr = $lower_ast_scalar_assignment_value_node->($arg);
+    $arg_expr = $ast_expr_source_node->($arg)
+     unless defined($arg_expr) && length($arg_expr);
     $arg_expr = $arg->{source}
      if ref($arg) eq 'HASH' && !(defined($arg_expr) && length($arg_expr));
     return undef unless defined($arg_expr) && length($arg_expr);

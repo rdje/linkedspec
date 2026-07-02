@@ -65,4 +65,5 @@ The `.3.2` split frontier is:
 - `.3.2.3.3`: done; ordinary comparison word calls now map to numeric `num_*` aliases.
 - `.3.2.3.4`: done; numeric comparison symbol callees.
 - `.3.3`: done/split; expression-valued assignment and `=(target,value)` equivalence are now split before code.
-- `.3.3.1`: current next task; scalar assignment expression values and scalar `=(target,value)` equivalence.
+- `.3.3.1`: done; scalar assignment expression values and scalar `=(target,value)` equivalence ship on Perl/Rust.
+- `.3.3.2`: current next task; aggregate assignment expression values after target-kind inference.

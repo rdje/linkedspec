@@ -40,5 +40,5 @@ Bare comparison words are no longer string-comparison compatibility aliases. Rep
 should use `str_*`; `eq`/`ne`/`gt`/`ge`/`lt`/`le` are numeric aliases.
 
 `SPEC-FORMAT-TERSE.3.2.3.4` later added comparison symbol aliases. `SPEC-FORMAT-TERSE.3.3` then split
-expression-valued assignment before code; the current frontier is `.3.3.1` for scalar assignment expression
-values and scalar `=(target,value)` equivalence.
+expression-valued assignment before code, and `.3.3.1` landed scalar assignment expression values. The current
+frontier is `.3.3.2` for aggregate assignment expression values after target-kind inference.

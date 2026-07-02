@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
+  Scalar non-shape assignment is now a value expression on Perl and Rust. `name = value`, `=(name,value)`,
+  scalar `set(name,value)`, and scalar `assign(name,value)` store the scalar and return the stored value in
+  return payloads, helper arguments, expression-valued blocks, exact-arity user-function bodies, and compatible
+  scalar receiver chains.
+
+  The compatibility boundary is locked: statement behavior is preserved; direct RHS shape assignment values
+  remain `.3.3.2`; and array append/hash-index mutation expression values remain `.3.3.3`. Perl aggregate-call
+  lowering keeps nested aggregate wrapper calls such as `count(array(items))` source-shaped while direct
+  multi-argument `array(name, other)` scalar payloads read scalars.
+
+  **Verification:** Perl syntax checks PASS; focused `t/actionir_ast_parser.t` PASS; focused Perl
+  runtime/source probes PASS; focused Rust parser/runtime `.3.3.1` PASS; oracle regeneration produced **59
+  fixtures** including `terse_3_3_1_scalar_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with
+  **1012 tests**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.3.2` (aggregate assignment expression values after target-kind inference).
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split before code**
   (TASK TREE + BOOK/KM + LIVE DOCS; NO PARSER/COMPILER/RUNTIME CHANGE).
   The assignment-expression destination contract is now owned and split: `target = value` remains canonical,

@@ -1164,8 +1164,15 @@ impl Engine {
                     .collect::<Result<Vec<_>, _>>()?;
                 self.call_helper_with_args(name, args, &evaluated, ctx, rule_label)
             }
-            Expr::AssignScalar { .. } => {
-                Err("scalar assignment operator is statement-only".to_string())
+            Expr::AssignScalar { name, value } => {
+                if Self::direct_shape_literal_kind(value).is_some() {
+                    return Err(
+                        "direct shape assignment expression values are deferred".to_string(),
+                    );
+                }
+                let evaluated = self.eval_expr(value, ctx, rule_label)?;
+                ctx.set_scalar(name, evaluated.clone());
+                Ok(evaluated)
             }
             Expr::AssignArrayAppend { .. } => {
                 Err("array append operator is statement-only".to_string())
@@ -1987,8 +1994,12 @@ impl Engine {
         match expr {
             Expr::AssignScalar { name, value } => {
                 let evaluated = self.eval_expr(value, ctx, rule_label)?;
-                if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
-                    return Ok(evaluated);
+                if Self::direct_shape_literal_kind(value).is_some() {
+                    if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    ctx.set_scalar(name, evaluated);
+                    return Ok(RuntimeValue::Undef);
                 }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
@@ -2293,9 +2304,15 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            "assign" | "set" => {
+            "assign" | "set" | "=" => {
                 if args.len() >= 2 {
                     if let Some(kind) = Self::direct_shape_literal_kind(raw_args[1].value()) {
+                        if name == "=" {
+                            return Err(
+                                "direct shape assignment expression values are deferred"
+                                    .to_string(),
+                            );
+                        }
                         if let Some(target) =
                             Self::direct_shape_assignment_target(&raw_args[0], kind)
                         {
@@ -2316,9 +2333,13 @@ impl Engine {
                                 }
                             }
                         }
+                        let target = self.resolve_scalar_target(raw_args, &args[0]);
+                        ctx.set_scalar(&target, args[1].clone());
+                        return Ok(RuntimeValue::Undef);
                     }
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
                     ctx.set_scalar(&target, args[1].clone());
+                    return Ok(args[1].clone());
                 }
                 Ok(RuntimeValue::Undef)
             }

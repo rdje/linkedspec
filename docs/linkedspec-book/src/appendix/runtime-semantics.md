@@ -232,6 +232,12 @@ Bare scalar reads are currently supported in return and assignment-like source s
 `return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
 `items += value`, and in direct-access path atoms such as `payload["children"][index]`.
 
+Scalar assignment also has a value form. `name = "ok"` and `=(name, "ok")` store the scalar and evaluate to
+the stored value, so they can appear inside `return(...)`, helper arguments, expression-valued blocks,
+user-function bodies, and compatible scalar receiver chains such as `=(raw, " text ").trim()`. The value-form
+contract currently covers scalar non-shape assignment only; direct shape RHS assignment, array append, and
+hash-index mutation remain statement-level contracts.
+
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`
 removes the last element, and `items.pop_front()` removes the first element. The receiver

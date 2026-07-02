@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values):
+  The scalar assignment-expression subset is now implemented. Durable points. (1) **Value contract.**
+  `name = value`, `=(name,value)`, scalar `set(name,value)`, and scalar `assign(name,value)` store into the
+  scalar target and yield the stored scalar value. (2) **Composition.** The forms compose in return payloads,
+  helper arguments, expression-valued blocks, exact-arity user-function bodies, and compatible scalar receiver
+  chains such as `=(raw, " hi ").trim()`. (3) **Boundary.** Direct RHS shape values are intentionally deferred
+  so `.3.3.2` can preserve target-kind inference for arrays/hashes; array append and hash-index mutation values
+  remain `.3.3.3`. (4) **Perl lowering guard.** Multi-argument `array(...)` only lowers direct scalar payloads
+  needed by this slice; nested aggregate wrapper calls such as `count(array(items))` stay source-shaped to
+  preserve `.2.3.5.6` quoted-wrapper behavior. (5) **Gate.** Focused Perl/Rust locks, oracle corpus, phase0,
+  mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1012 tests and the
+  oracle corpus is 59 fixtures.
+  Next frontier: `SPEC-FORMAT-TERSE.3.3.2`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split):
   The assignment-expression destination contract is now split before code. Durable points. (1) **Destination.**
   `target = value` is canonical, `=(target,value)` is the planned ordinary operator-call equivalent, and legacy

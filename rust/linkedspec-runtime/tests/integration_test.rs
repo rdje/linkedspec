@@ -2071,6 +2071,24 @@ fn terse_3_2_3_4_numeric_comparison_symbol_callees_run() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values:
+
+#[test]
+fn terse_3_3_1_scalar_assignment_expressions_run() {
+    let grammar = r#"fn store(value) { return(local = value) }
+Top::
+ /x/ -> Done { return(array(name = "ok", name, =(other, cat(scalar(name), "!")), other, set(third, store("fn")), third, { block = cat(scalar(third), "!"); block }, =(raw, " hi ").trim())) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["ok", "ok", "ok!", "ok!", "fn", "fn", "fn!", "hi"]]),
+        "scalar assignment expressions store and return the scalar value in return/helper/block/function/receiver-chain contexts"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

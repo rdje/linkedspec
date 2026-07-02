@@ -68,8 +68,11 @@ items = [];
 meta = { "kind" => "token", "line" => entry_line() };
 ```
 
-Use assignment when you want to set or replace the target. These assignment forms are statements today; they
-are not ordinary value expressions yet.
+Use assignment when you want to set or replace the target. Assignment remains valid as a statement. The scalar
+subset is also a value expression: `name = "ok"` and `=(name, "ok")` both store the scalar and yield the stored
+value when used in `return(...)`, helper arguments, expression-valued blocks, user functions, or compatible
+receiver chains. Direct shape RHS values such as `name = [value]`, array append `items += value`, and hash-index
+mutation `meta[key] = value` remain statement-level until their own expression-value contracts land.
 
 ## Pushing values
 
