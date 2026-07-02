@@ -7,6 +7,7 @@ use linkedspec_runtime::engine::Engine;
 use linkedspec_runtime::spec_parser::{
     parse_spec_with_user_functions, parse_user_function_definition_asts,
 };
+use linkedspec_runtime::staged_parser_registry::execute_parse_jobs;
 use serde_json::Value;
 
 const SIMPLE_GRAMMAR: &str = r#"DemoParser::
@@ -94,6 +95,117 @@ fn parse_all_shipped_specs() {
         panic!("{} specs failed", failed.len());
     }
     assert!(parsed > 0, "no .spec files found");
+}
+
+#[test]
+fn staged_parser_registry_dispatches_function_body_jobs() {
+    let job_later = serde_json::json!({
+        "kind": "parse_job",
+        "job_id": "parse_job:function_body:functions.1.body_source:actionir-body.spec:action_block:40-51",
+        "parent_ast_path": ["functions", "1", "body_source"],
+        "node_kind": "function_definition",
+        "payload_kind": "function_body",
+        "text": "return(\"b\")",
+        "source_span": {"start": 40, "end": 51, "line_start": 3, "line_end": 3},
+        "parser_spec_id": "actionir-body.spec",
+        "top_rule": "action_block",
+        "result_policy": "replace_field",
+        "result_field": "body_ast",
+        "failure_policy": "fail",
+        "diagnostic_owner": "function_body",
+    });
+    let job_earlier = serde_json::json!({
+        "kind": "parse_job",
+        "job_id": "parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:10-21",
+        "parent_ast_path": ["functions", "0", "body_source"],
+        "node_kind": "function_definition",
+        "payload_kind": "function_body",
+        "text": "return(\"a\")",
+        "source_span": {"start": 10, "end": 21, "line_start": 1, "line_end": 1},
+        "parser_spec_id": "actionir-body.spec",
+        "top_rule": "action_block",
+        "result_policy": "replace_field",
+        "result_field": "body_ast",
+        "failure_policy": "fail",
+        "diagnostic_owner": "function_body",
+    });
+
+    let results = execute_parse_jobs(&[job_later, job_earlier]).expect("staged parse dispatch");
+    assert_eq!(results.len(), 2);
+    assert_eq!(
+        results[0]["job_id"],
+        serde_json::json!(
+            "parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:10-21"
+        )
+    );
+    assert_eq!(results[0]["queue_index"], serde_json::json!(0));
+    assert_eq!(
+        results[0]["phases"],
+        serde_json::json!(["resolve", "load", "compile", "execute"])
+    );
+    assert_eq!(
+        results[0]["resolved_spec_id"],
+        serde_json::json!("builtin:actionir-body.spec")
+    );
+    assert_eq!(
+        results[0]["registry_provider"],
+        serde_json::json!("builtin")
+    );
+    assert_eq!(
+        results[0]["cache_key"]["kind"],
+        serde_json::json!("staged_parser_cache_key")
+    );
+    assert_eq!(
+        results[0]["cache_key"]["normalized_spec_identity"],
+        serde_json::json!("builtin:actionir-body.spec")
+    );
+    assert_eq!(
+        results[0]["cache_key"]["content_digest"],
+        serde_json::json!(
+            "sha256:87ca81d966bb41f7025d31e4bae426af101e2ec75ff2ac14e96517d97fbbf55c"
+        )
+    );
+    assert_eq!(
+        results[0]["result"]["kind"],
+        serde_json::json!("action_block")
+    );
+    assert_eq!(
+        results[0]["result"]["statements"][0]["kind"],
+        serde_json::json!("action_stmt")
+    );
+    assert_eq!(
+        results[0]["result"]["statements"][0]["expr"]["kind"],
+        serde_json::json!("call")
+    );
+    assert_eq!(
+        results[0]["result"]["statements"][0]["expr"]["name"],
+        serde_json::json!("return")
+    );
+
+    let bad_job = serde_json::json!({
+        "kind": "parse_job",
+        "job_id": "parse_job:function_body:functions.0.body_source:missing.spec:action_block:10-21",
+        "parent_ast_path": ["functions", "0", "body_source"],
+        "node_kind": "function_definition",
+        "payload_kind": "function_body",
+        "text": "return(\"a\")",
+        "source_span": {"start": 10, "end": 21, "line_start": 1, "line_end": 1},
+        "parser_spec_id": "missing.spec",
+        "top_rule": "action_block",
+        "result_policy": "replace_field",
+        "result_field": "body_ast",
+        "failure_policy": "fail",
+        "diagnostic_owner": "function_body",
+    });
+    let err = execute_parse_jobs(&[bad_job]).expect_err("missing parser spec should fail");
+    assert!(err.contains("phase=resolve"), "{err}");
+    assert!(
+        err.contains(
+            "job_id=parse_job:function_body:functions.0.body_source:missing.spec:action_block:10-21"
+        ),
+        "{err}"
+    );
+    assert!(err.contains("parser_spec_id=missing.spec"), "{err}");
 }
 
 #[test]
@@ -194,6 +306,16 @@ fn after(value) {return(value)}
 
     let spec = parse_spec_with_user_functions(grammar).expect("full spec parse");
     assert_eq!(spec.function_names(), vec!["zero", "choose", "after"]);
+    let zero_body_ast = spec.functions[0].body_ast.as_ref().expect("zero body ast");
+    assert_eq!(zero_body_ast["kind"], serde_json::json!("action_block"));
+    assert_eq!(
+        zero_body_ast["statements"][0]["expr"]["kind"],
+        serde_json::json!("call")
+    );
+    assert_eq!(
+        zero_body_ast["statements"][0]["expr"]["name"],
+        serde_json::json!("return")
+    );
     let zero_job = spec.functions[0]
         .body_parse_job
         .as_ref()
@@ -215,6 +337,10 @@ fn after(value) {return(value)}
     assert!(
         compiled.functions[0].body_parse_job.is_some(),
         "compiled functions preserve the neutral body parse job"
+    );
+    assert!(
+        compiled.functions[0].body_ast.is_some(),
+        "compiled functions preserve the dispatched body AST"
     );
     assert_eq!(
         Engine::new(compiled).execute("xhello").expect("execute"),
@@ -331,6 +457,10 @@ Done:
         assert!(
             spec.functions[0].body_parse_job.is_some(),
             "{label}: body_parse_job must be preserved"
+        );
+        assert!(
+            spec.functions[0].body_ast.is_some(),
+            "{label}: dispatched body_ast must be preserved"
         );
     }
 }

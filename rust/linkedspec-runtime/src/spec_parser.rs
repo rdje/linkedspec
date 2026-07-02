@@ -6,6 +6,7 @@
 //! its returned AST.
 
 use crate::engine::Engine;
+use crate::staged_parser_registry;
 use linkedspec_core::ast::{FunctionDefinition, SourceSpan, SpecFile};
 use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
@@ -149,6 +150,9 @@ fn function_from_ast(
         idx,
     )?;
     normalize_body_parse_job(&mut body_parse_job, idx, body_span)?;
+    let body_ast = staged_parser_registry::execute_parse_job(&body_parse_job).map_err(|err| {
+        format!("function_definition node {idx} body_parse_job dispatch failed: {err}")
+    })?;
 
     Ok((
         FunctionDefinition {
@@ -158,6 +162,7 @@ fn function_from_ast(
             body_source,
             body_payload: Some(body_payload),
             body_parse_job: Some(body_parse_job),
+            body_ast: Some(body_ast),
             source: source_text,
             source_span: SourceSpan {
                 line_start: source_span.line_start,

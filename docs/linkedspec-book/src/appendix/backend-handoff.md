@@ -99,8 +99,9 @@ identity, content digest, import/include graph fingerprint, selected top rule, `
 language version, helper/action contract version, staged parsing contract version, and
 backend capability set. Dispatch jobs in stable parent-AST-path/source-span/job-id order,
 and diagnose active-chain cycles that repeat spec identity, top rule, payload digest, and
-source span. Current shipped parsers do not yet implement this staged registry/dispatch
-queue.
+source span. Current shipped parsers implement only the first narrow function-body
+provider; general staged registry/provider search and recursive dispatch queues remain
+future work.
 
 The first prototype target is user-function body payloads. A backend should treat that
 as a narrow proof of the neutral staged contract: `specs/spec.spec` extracts a bounded
@@ -125,25 +126,31 @@ uses parsed parameter arrays, exact inner body text, neutral source/body spans, 
 function-body parse-job field, and a stitched body AST after dispatch.
 
 The current provenance seam is the neutral `body_payload` plus `body_parse_job` returned
-by `specs/user_function_definition.spec`. Neither field is a backend callback, and the
-parse job is not yet dispatched. `body_payload` contains exact function-body text,
+by `specs/user_function_definition.spec`. Neither field is a backend callback.
+`body_payload` contains exact function-body text,
 half-open source span, source-slice provenance, source-order parent path, function name,
 params, arity, `node_kind = function_definition`, and `payload_kind = function_body`.
 `body_parse_job` is the parse-intent sidecar for that payload: deterministic job id,
 parent AST path, parser spec identity, top rule, result/failure policies, exact text,
 source span, and diagnostic ownership. The Perl reference and Rust runtime both consume
 that spec-returned AST today and normalize the source-order path/job id once the function
-ordinal is known. The spec's body shell is a linked opener/closer parse: `body_brace`
+ordinal is known. They dispatch that job through the minimal staged parser registry:
+`resolve` maps `actionir-body.spec` to a built-in provider identity, `load` records the
+adapter contract digest, `compile` selects top rule `action_block`, and `execute` returns
+the body `action_block` AST stitched into `body_ast`. General provider search roots,
+imports, and recursive staged queues remain future work. The spec's body shell is a
+linked opener/closer parse: `body_brace`
 handles nested brace islands, quoted strings, comments, and regex literals are protected
 before brace dispatch, and the outer close is matched by `function_definition[1]`.
 Backends must converge on this same spec-defined AST contract instead of maintaining
-host-language definition grammars before the staged dispatch queue becomes portable.
+host-language definition grammars as the staged dispatch queue becomes portable.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
 code. The Rust adapter still follows the same contract: it executes
 `specs/user_function_definition.spec`, validates the returned nodes, strips definition
-spans, and only then passes rule-only source to the core parser.
+spans, dispatches normalized body parse jobs through the staged registry adapter, and
+only then passes rule-only source to the core parser.
 
 Spec import/composition is a separate backend conformance target once implemented. The
 accepted design uses file-scope `import "path.spec" as alias` and

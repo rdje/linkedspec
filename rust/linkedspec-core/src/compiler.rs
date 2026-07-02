@@ -51,12 +51,21 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
 }
 
 fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<CompiledUserFunction> {
-    let body = CodeBlock::parse(&function.body_source).map_err(|e| {
-        LinkedSpecError::Compile(format!(
-            "function '{}': failed to parse body code: {e}",
-            function.name
-        ))
-    })?;
+    let body = if let Some(body_ast) = &function.body_ast {
+        serde_json::from_value::<CodeBlock>(body_ast.clone()).map_err(|e| {
+            LinkedSpecError::Compile(format!(
+                "function '{}': failed to compile dispatched body AST: {e}",
+                function.name
+            ))
+        })?
+    } else {
+        CodeBlock::parse(&function.body_source).map_err(|e| {
+            LinkedSpecError::Compile(format!(
+                "function '{}': failed to parse body code: {e}",
+                function.name
+            ))
+        })?
+    };
 
     Ok(CompiledUserFunction {
         name: function.name.clone(),
@@ -66,6 +75,7 @@ fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<Compile
         body_source: function.body_source.clone(),
         body_payload: function.body_payload.clone(),
         body_parse_job: function.body_parse_job.clone(),
+        body_ast: function.body_ast.clone(),
         source: function.source.clone(),
         source_span: function.source_span.clone(),
         body_span: function.body_span.clone(),
@@ -384,6 +394,7 @@ mod tests {
             body_source: body_source.to_string(),
             body_payload: None,
             body_parse_job: None,
+            body_ast: None,
             source: format!("fn {name}({}) {{ {body_source} }}", params.join(", ")),
             source_span: SourceSpan {
                 line_start: 1,

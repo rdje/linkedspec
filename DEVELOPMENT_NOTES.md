@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (STAGED-LINKED-PARSING.5.5 — minimal staged parser registry dispatch):
+  Function-body parse jobs now execute through an explicit staged registry path instead of direct body-parser
+  calls. The first neutral provider supports `parser_spec_id = actionir-body.spec` with `top_rule =
+  action_block`: resolve returns `builtin:actionir-body.spec`, load records the adapter contract digest
+  `sha256:87ca81d966bb41f7025d31e4bae426af101e2ec75ff2ac14e96517d97fbbf55c`, compile builds a cache key over
+  spec identity/digest/top rule/version/capability fields, and execute returns an `action_block` body AST.
+  Dispatch order is parent AST path, source span, then job id. Perl exposes this in
+  `LinkedSpec::StagedParserRegistry`; Rust exposes it in `linkedspec-runtime::staged_parser_registry`. General
+  public `parse_job(...)` authoring, filesystem/import provider search, and recursive staged queues are still
+  future work. Next frontier: `STAGED-LINKED-PARSING.5.6`.
+
 - 2026-07-03 (STAGED-LINKED-PARSING.5.4 — function-body parse-job sidecar):
   Function-definition ASTs now have two separate staged records. `body_payload` remains the exact neutral text
   island with provenance. `body_parse_job` is the parse-intent sidecar for that text island: `kind = parse_job`,
@@ -8,8 +19,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `result_policy = replace_field`, `result_field = body_ast`, `failure_policy = fail`, exact text, source span,
   and diagnostic owner. The direct spec parser emits a source-order pending path; the Perl registry and Rust
   adapter normalize that path and job id after function ordinal assignment. The sidecar is preserved in Perl
-  descriptors and Rust parsed/compiled function state, but no registry/dispatch queue executes it yet.
-  Next frontier: `STAGED-LINKED-PARSING.5.5`.
+  descriptors and Rust parsed/compiled function state; `.5.5` now dispatches the function-body job through the
+  minimal staged registry path.
+  Next frontier after `.5.4`: `STAGED-LINKED-PARSING.5.5`.
 
 - 2026-07-02 (STAGED-LINKED-PARSING.5.3.2 — Rust consumes spec-defined user-function definition AST):
   Rust now follows the same definition-shell ownership rule as Perl: `specs/user_function_definition.spec` is the

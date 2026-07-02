@@ -73,9 +73,10 @@ The Rust backend now carries the same registry shape after executing the spec-de
 `linkedspec-runtime::spec_parser` runs `specs/user_function_definition.spec`, validates returned AST nodes, strips
 definition spans, and then feeds rule-only source to the core parser. `SpecFile.functions` records those
 spec-returned definitions, and `CompiledSpec.functions` stores `CompiledUserFunction` entries with parsed
-`CodeBlock` bodies, source metadata, the neutral `body_payload`, and the neutral `body_parse_job` sidecar. The
-sidecar is preserved metadata for the future staged dispatch path; function execution still runs through the
-compiled ActionIR body. The Rust runtime resolves those compiled functions before ordinary helper fallback,
+`CodeBlock` bodies, source metadata, the neutral `body_payload`, the neutral `body_parse_job` sidecar, and the
+stitched `body_ast` returned by the minimal staged registry dispatch. The current dispatch path resolves
+`actionir-body.spec` through a built-in registry provider for top rule `action_block`; function execution still
+runs through the compiled ActionIR body. The Rust runtime resolves those compiled functions before ordinary helper fallback,
 executes them in fresh function-local variable stores, restores caller stores after return, and supports
 compatible receiver chains and standalone discard.
 

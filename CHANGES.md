@@ -1,6 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — STAGED-LINKED-PARSING.5.5 — dispatch function-body parse jobs
+
+**Scope:** New Perl/Rust staged parser registry adapters, user-function body parsing path, Rust parsed/compiled
+function state, focused Perl/Rust registry tests, mdBook staged parsing/descriptor/backend notes, task tree,
+roadmap companion, live docs, and Knowledge Map.
+
+**What changed:** Function-body `body_parse_job` records now execute through a minimal staged parser registry.
+The first provider supports the neutral `actionir-body.spec` / `action_block` identity: `resolve` maps it to a
+built-in provider identity, `load` records the adapter contract digest, `compile` creates a cache-keyed parser
+adapter, and `execute` parses the exact body text into an `action_block` AST.
+
+**Backend handling:** Perl now routes user-function body AST construction through
+`LinkedSpec::StagedParserRegistry`; Rust adds `linkedspec-runtime::staged_parser_registry` and stores the
+stitched `body_ast` on parsed and compiled function records. Existing user-function execution remains stable:
+Perl lowering and Rust runtime execution still consume the compiled ActionIR body, now backed by the dispatched
+body AST path.
+
+**Tests:** Perl phase0 adds a focused staged-registry subtest for stable queue order, phase sequence, cache-key
+fields, returned `action_block` shape, and resolve diagnostics. Rust integration tests lock the same registry
+contract and assert that `parse_spec_with_user_functions` preserves stitched `body_ast` through compile.
+
+**Checks:** Perl syntax checks for the new registry, user-function registry, and phase0 file; Rust format for both
+crates; focused Rust runtime staged-registry and spec-defined user-function parser tests; focused Rust core
+`user_function` tests; `prove -v -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`;
+Knowledge Map, memory, doctrine, and whitespace gates; and `bash tools/run_ci_local.sh` passed. Phase0 ended
+with **1017 green**.
+
 ## 2026-07-03 — STAGED-LINKED-PARSING.5.4 — add function-body parse-job sidecar
 
 **Scope:** `specs/user_function_definition.spec`, Perl user-function registry normalization, Rust parsed/compiled

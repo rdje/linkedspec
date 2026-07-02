@@ -13,6 +13,7 @@ pub mod engine;
 pub mod helpers;
 pub mod runtime;
 pub mod spec_parser;
+pub mod staged_parser_registry;
 
 /// Crate version, matching the workspace version.
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

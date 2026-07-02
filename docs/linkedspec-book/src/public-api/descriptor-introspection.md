@@ -157,15 +157,17 @@ fn normalize(value) {
 
 The Perl reference descriptor records the definition by name, including ordered parameter names, exact arity,
 source/body spans, original body source, a neutral staged `body_payload`, a neutral `body_parse_job`, and the
-parsed ActionIR `action_block` body AST. The definition shell is parsed by
+stitched ActionIR `action_block` body AST. The definition shell is parsed by
 `specs/user_function_definition.spec`; active backends consume that returned AST rather than raw-scanning the
-`fn` syntax. The `body_payload` is the implementation-language-neutral text island for future staged dispatch:
+`fn` syntax. The `body_payload` is the implementation-language-neutral text island for staged dispatch:
 it carries the exact body text, half-open source span, source-slice provenance, source-order parent path,
 function name, params, arity, and `payload_kind = function_body`. The `body_parse_job` is the parse-intent
 sidecar for the same text island: it records the deterministic job id, parent AST path, parser spec identity,
-top rule, result/failure policies, exact text, and source span. Current shipped parsers do not yet dispatch it
-through a later `.spec` parser. The definition parser uses linked body-island rules for nested braces, strings,
-comments, and regex literals, so normal nested function-body constructs do not depend on a host-language scanner.
+top rule, result/failure policies, exact text, and source span. Current shipped parsers dispatch this one job
+through the minimal staged registry provider for `actionir-body.spec` / `action_block` and stitch the result into
+`body_ast`; general public `parse_job(...)` authoring and provider search remain future work. The definition
+parser uses linked body-island rules for nested braces, strings, comments, and regex literals, so normal
+nested function-body constructs do not depend on a host-language scanner.
 Function definitions are validated before runtime: duplicate names, invalid or duplicate parameters, reserved
 runtime/lifecycle/function symbols, built-in helper/control-name collisions including numeric word aliases, and
 rule-label collisions are rejected.

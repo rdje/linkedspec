@@ -24,6 +24,8 @@ pub struct FunctionDefinition {
     pub body_payload: Option<serde_json::Value>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub body_parse_job: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub body_ast: Option<serde_json::Value>,
     pub source: String,
     pub source_span: SourceSpan,
     pub body_span: SourceSpan,

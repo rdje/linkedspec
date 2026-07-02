@@ -602,6 +602,7 @@ mod tests {
             body_source: "return(value)".to_string(),
             body_payload: None,
             body_parse_job: None,
+            body_ast: None,
             source: format!("fn {name}({}) {{ return(value) }}", params.join(", ")),
             source_span: SourceSpan {
                 line_start: 1,

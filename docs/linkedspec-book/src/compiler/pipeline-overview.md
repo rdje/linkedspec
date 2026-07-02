@@ -115,13 +115,17 @@ Other `.spec`-language stages derive from payloads produced through that self-ho
 path. The hardcoded bootstrap parser may bridge old behavior, but permanent syntax
 should not fork into bootstrap-only grammar.
 
-The first planned staged-dispatch prototype targets user-function body payloads. The
+The first staged-dispatch prototype targets user-function body payloads. The
 self-hosted `specs/spec.spec` grammar already extracts `fn name(args) { body }` as a
 bounded text island, and current backends already have behavior to preserve for those
-function bodies. The prototype must describe the body payload, parse job, diagnostics,
-and stitched result in `.spec`/AST terms; the fact that a current implementation proves
-the slice first is evidence, not the language contract. Current shipped parsers still do
-not implement the staged dispatch queue.
+function bodies. The prototype describes the body payload, parse job, diagnostics, and
+stitched result in `.spec`/AST terms; the fact that a current implementation proves the
+slice first is evidence, not the language contract. Current shipped parsers implement
+only the narrow `body_parse_job` path: a built-in registry provider resolves
+`actionir-body.spec`, compiles the `action_block` adapter, executes jobs in stable queue
+order, and stitches the returned `action_block` AST into `body_ast`. General public
+`parse_job(...)` authoring, filesystem/import resolution, multiple provider search, and
+recursive staged queues remain future work.
 
 Prototype tests should prove AST shape, not only behavior. Before the function-body
 prototype changes runtime behavior, the seam audit must predict the returned
@@ -159,9 +163,11 @@ inner `{ ... }` blocks, while `function_definition[1]` owns the outer close edge
 Quoted strings, comments, and regex literals are matched as body islands before brace
 dispatch so braces inside them do not end the function. The Perl registry and Rust
 adapter validate that returned AST, normalize source-order parent paths and parse-job
-ids, preserve the sidecar in descriptor/compiled function state, and stitch in the
-existing body ActionIR AST. Current shipped parsers do not yet dispatch the body payload
-through a next-stage `.spec`; the next staged-parsing work is the registry/dispatch path.
+ids, preserve the sidecar in descriptor/compiled function state, dispatch the
+`body_parse_job` through the minimal staged parser registry, and stitch the returned
+body ActionIR AST into `body_ast`. The current registry provider is intentionally narrow:
+`actionir-body.spec` is resolved as a built-in neutral identity and executed by the
+existing ActionIR body-parser adapter until a self-hosted body spec exists.
 
 The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
 Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source

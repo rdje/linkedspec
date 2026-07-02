@@ -200,9 +200,9 @@ sub _normalize_function_definition_ast {
   source_span => $source_span,
   body_span => $body_span,
   body_source => $body_source,
-  body_ast => _parse_function_body_ast($name, $body_source, $source, $source_span),
   body_payload => $body_payload,
   body_parse_job => $body_parse_job,
+  body_ast => _parse_function_body_ast($name, $body_parse_job, $source, $source_span),
  };
 
  _validate_function_name($definition);
@@ -333,18 +333,18 @@ sub _record_function_definition {
 }
 
 sub _parse_function_body_ast {
- my ($name, $body_source, $source, $source_span) = @_;
+ my ($name, $body_parse_job, $source, $source_span) = @_;
  my $body_ast = eval {
   return LinkedSpec::OwnerDispatch::dispatch_owner_call(
    __PACKAGE__,
-   'LinkedSpec::ActionIR::AST',
-   'parse_action_block',
-   $body_source,
+   'LinkedSpec::StagedParserRegistry',
+   'execute_parse_job',
+   $body_parse_job,
   )
  };
  my $error = $@;
  if ($error) {
-  _die_parse_error_at_span($source, $source_span, "could not parse body AST for function '$name': $error");
+  _die_parse_error_at_span($source, $source_span, "could not dispatch staged body parse job for function '$name': $error");
  }
  return $body_ast
 }

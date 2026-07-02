@@ -44248,6 +44248,67 @@ SPEC
     done_testing();
 };
 
+subtest 'staged_parser_registry_dispatches_function_body_jobs' => sub {
+    require LinkedSpec::StagedParserRegistry;
+
+    my $job_later = {
+        kind => 'parse_job',
+        job_id => 'parse_job:function_body:functions.1.body_source:actionir-body.spec:action_block:40-51',
+        parent_ast_path => ['functions', '1', 'body_source'],
+        node_kind => 'function_definition',
+        payload_kind => 'function_body',
+        text => 'return("b")',
+        source_span => { start => 40, end => 51, line_start => 3, line_end => 3 },
+        parser_spec_id => 'actionir-body.spec',
+        top_rule => 'action_block',
+        result_policy => 'replace_field',
+        result_field => 'body_ast',
+        failure_policy => 'fail',
+        diagnostic_owner => 'function_body',
+    };
+    my $job_earlier = {
+        %$job_later,
+        job_id => 'parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:10-21',
+        parent_ast_path => ['functions', '0', 'body_source'],
+        text => 'return("a")',
+        source_span => { start => 10, end => 21, line_start => 1, line_end => 1 },
+    };
+
+    my $results = eval { LinkedSpec::StagedParserRegistry::execute_parse_jobs([$job_later, $job_earlier]) };
+    my $err = $@;
+    ok(!$err && ref($results) eq 'ARRAY', 'staged parser registry dispatches function-body jobs')
+        or diag(normalize_error($err));
+    is(scalar(@$results), 2, 'registry returns one staged result per job');
+    is($results->[0]{job_id}, $job_earlier->{job_id}, 'registry queue orders jobs by parent AST path before input order');
+    is($results->[0]{queue_index}, 0, 'first queued result records queue index');
+    is_deeply($results->[0]{phases}, [qw(resolve load compile execute)], 'registry result records neutral phase sequence');
+    is($results->[0]{resolved_spec_id}, 'builtin:actionir-body.spec', 'registry resolves actionir-body.spec through the builtin provider identity');
+    is($results->[0]{registry_provider}, 'builtin', 'registry result records the provider used for resolution');
+    is($results->[0]{cache_key}{kind}, 'staged_parser_cache_key', 'registry result carries a neutral cache-key record');
+    is($results->[0]{cache_key}{normalized_spec_identity}, 'builtin:actionir-body.spec', 'cache key names normalized spec identity');
+    is($results->[0]{cache_key}{content_digest}, 'sha256:87ca81d966bb41f7025d31e4bae426af101e2ec75ff2ac14e96517d97fbbf55c',
+        'cache key records the adapter contract digest');
+    is($results->[0]{result}{kind}, 'action_block', 'registry executes the action_block parser and returns an action block AST');
+    is($results->[0]{result}{statements}[0]{expr}{kind}, 'call', 'registry action block result contains parsed statement expression');
+    is($results->[0]{result}{statements}[0]{expr}{name}, 'return', 'registry action block result parses the return call');
+    is($results->[0]{failure_policy}, 'fail', 'registry result preserves failure policy');
+
+    my $bad_job = {
+        %$job_earlier,
+        job_id => 'parse_job:function_body:functions.0.body_source:missing.spec:action_block:10-21',
+        parser_spec_id => 'missing.spec',
+    };
+    my $bad_ok = eval { LinkedSpec::StagedParserRegistry::execute_parse_jobs([$bad_job]); 1 };
+    my $bad_err = $@;
+    ok(!$bad_ok, 'unsupported parser spec id is rejected');
+    like($bad_err, qr/phase=resolve/, 'unsupported parser diagnostic names resolve phase');
+    like($bad_err, qr/job_id=parse_job:function_body:functions\.0\.body_source:missing\.spec:action_block:10-21/,
+        'unsupported parser diagnostic names job id');
+    like($bad_err, qr/parser_spec_id=missing\.spec/, 'unsupported parser diagnostic names parser spec id');
+
+    done_testing();
+};
+
 subtest 'user_function_registry_descriptor_seam' => sub {
     plan tests => 57;
 

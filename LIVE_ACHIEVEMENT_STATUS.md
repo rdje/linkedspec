@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **STAGED-LINKED-PARSING.5.5 — function-body parse jobs dispatched**
+  (MINIMAL STAGED REGISTRY + PERL/RUST BODY AST STITCHING + TESTS + MDBOOK).
+  Function-body `body_parse_job` records now execute through the first staged parser registry path. The neutral
+  `actionir-body.spec` / `action_block` identity resolves to a built-in provider, records a fixed adapter
+  contract digest, compiles a cache-keyed parser adapter, executes jobs in stable parent-path/source-span/job-id
+  order, and stitches the returned `action_block` AST into `body_ast`.
+
+  **Backend handling:** Perl routes body AST construction through `LinkedSpec::StagedParserRegistry`. Rust adds
+  `linkedspec-runtime::staged_parser_registry`, stores stitched `body_ast` on parsed and compiled function
+  records, and still executes registered user functions through the compiled ActionIR body.
+
+  **Verification:** Perl syntax checks PASS; focused Rust staged-registry test PASS; focused Rust
+  `spec_defined_user_function_parser_*` tests PASS; focused Rust core `user_function` tests PASS; full Perl
+  phase0 PASS with 1017 top-level tests; mdBook, Knowledge Map, memory, doctrine, whitespace, and full local CI
+  gates PASS.
+
+  **Frontier:** `STAGED-LINKED-PARSING.5.6` — prove the function-body staged prototype end to end.
+
 - 2026-07-03: **STAGED-LINKED-PARSING.5.4 — function-body parse-job sidecar added**
   (SPEC AST + PERL/RUST SIDECARE PRESERVATION + TESTS + MDBOOK).
   `specs/user_function_definition.spec` now returns `body_parse_job` beside `body_payload` for each
