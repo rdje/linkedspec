@@ -46686,6 +46686,85 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
         'aggregate assignment expression spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
+    # SPEC-FORMAT-TERSE.3.3.3: mutation assignment expressions for array
+    # append and hash-index assignment mutate their working targets and return
+    # the updated aggregate snapshot.
+    plan tests => 16;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('return(items += value)'),
+        'return do { push @items, $value; [@items] }',
+        'array append expression returns the updated array snapshot');
+    is($L->('return(meta[key] = value)'),
+        'return do { $meta{$key} = $value; +{%meta} }',
+        'hash-index assignment expression returns the updated hash snapshot');
+    is($L->('return((items += value).count())'),
+        'return do { my $__ls_count = do { push @items, $value; [@items] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
+        'array append expression can feed an array receiver chain');
+    is($L->('return((meta[key] = value).count_keys())'),
+        'return do { my $__ls_count_keys = do { $meta{$key} = $value; +{%meta} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
+        'hash-index assignment expression can feed a hash receiver chain');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items += value, array_copy(items), meta[key] = value, hash_copy(meta), (items += \"x\").count(), (meta[\"last\"] = value).count_keys())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'mutation assignment expression spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[["ok"],["ok"],{"stage":"ok"},{"stage":"ok"},2,2]',
+        'mutation assignment expressions store and return aggregate snapshots');
+
+    my $block_array_spec = "Top::\n"
+                         . " /x/ -> Done { set(value, \"ok\"); return({ items += value }) }\n"
+                         . "\nDone::\n /[a-z]+/\n";
+    my $block_array_parser = eval { LinkedSpec::Get(\$block_array_spec) };
+    ok(ref($block_array_parser) eq 'CODE', 'array append block-value spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($block_array_parser, 'xhello'), '["ok"]',
+        'array append expression can be the value yielded by a block');
+
+    my $block_hash_spec = "Top::\n"
+                        . " /x/ -> Done { set(key, \"stage\"); set(value, \"ok\"); return({ meta[key] = value }) }\n"
+                        . "\nDone::\n /[a-z]+/\n";
+    my $block_hash_parser = eval { LinkedSpec::Get(\$block_hash_spec) };
+    ok(ref($block_hash_parser) eq 'CODE', 'hash-index block-value spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($block_hash_parser, 'xhello'), '{"stage":"ok"}',
+        'hash-index assignment expression can be the value yielded by a block');
+
+    my $src = $gen->($spec);
+    like($src, qr/my \@items;.*my %meta;.*my \$value;.*my \$key;/s,
+        'generated source auto-declares mutation expression targets and scalar key/RHS reads');
+    like($src, qr/push \@items, \$value.*\$meta\{\$key\} = \$value.*__ls_count.*__ls_count_keys/s,
+        'generated source contains snapshot-returning mutation values and receiver-chain lowering');
+    unlike($src, qr/items\s*\+=|meta\[key\]\s*=/,
+        'generated source has no raw append/hash-index expression residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'mutation assignment expression spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'mutation assignment expression spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'mutation assignment expression spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

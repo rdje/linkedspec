@@ -140,7 +140,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` reference a per-rule working variable. Aggregate wrapper names are bare tokens: `array(items)` reads the working array `items`, and `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. Use `scalar(name)` as the target when you intentionally want to store an array/hash payload in a scalar (`set(scalar(name), [value])`). `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `scalar(name)`, `array(name)`, and `hash(name)` reference a per-rule working variable. Aggregate wrapper names are bare tokens: `array(items)` reads the working array `items`, and `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first — referencing one through its typed wrapper auto-creates it as a fresh per-invocation working value of that kind. The wrapper is also optional in type-implying positions: a **bare** name works as the scalar target of `assign(name, …)`, `set(name, …)`, and the scalar assignment operator `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator `name += expr`; the hash target of `set_key(name, key, value)` and hash-index assignment `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. The name takes its kind from that position. Use `scalar(name)` as the target when you intentionally want to store an array/hash payload in a scalar (`set(scalar(name), [value])`). `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -217,9 +217,10 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > `assign(name, value)`; in value positions it yields the stored scalar or direct-shape aggregate value. The
 > array append operator `items += expr` is equivalent to the explicit
 > append forms `push(items, expr)` / `push_value(items, expr)`; when the value is a working scalar,
-> `items += value` reads `$value`.
+> `items += value` reads `$value`, and in value positions the expression yields the updated array snapshot.
 > The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
-> the key and value are scalar-valued expressions; `meta[key] = value` reads `$key` and `$value`.
+> the key and value are scalar-valued expressions; `meta[key] = value` reads `$key` and `$value`, and in value
+> positions the expression yields the updated hash snapshot.
 > Direct nested access `payload["children"][0]["name"]` is accepted for mixed path segments.
 > Quoted string segments are hash keys; numeric segments and helper/value expressions such as
 > `[scalar(i)]` are array indexes. Non-reserved bare path atoms such as `[i]` are scalar array-index reads,
@@ -312,7 +313,7 @@ Use flattening when a surrounding `array(...)` or `hash(...)` is already the pay
 
 ## Assignment, calls, appends, and returns
 
-These helpers are statements. They consume values and change rule behavior.
+These helpers mutate or dispatch rule state. The assignment forms also have the value contracts noted below.
 
 | Helper | Effect | Use it when |
 | --- | --- | --- |
@@ -320,8 +321,8 @@ These helpers are statements. They consume values and change rule behavior.
 | `assign(scalar(name), expr)` | replace a scalar slot | a named scalar should hold the expression result. |
 | `assign(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
 | `assign(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
-| `items += expr` | append one value | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push_value(items, expr)` for accepted RHS shapes. |
-| `meta[key_expr] = expr` | set one hash field | a named working hash should update one explicit key; equivalent to `set_key(meta, key_expr, expr)` for accepted key/value shapes. |
+| `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push_value(items, expr)` for accepted RHS shapes. |
+| `meta[key_expr] = expr` | set one hash field and yield the updated hash snapshot when used as an expression | a named working hash should update one explicit key; equivalent to `set_key(meta, key_expr, expr)` for accepted key/value shapes. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `assign(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
 | `push(rule)` | call one rule and append its result | the shortest spelling is desired for appending a child result into the current rule accumulator. |
@@ -828,9 +829,10 @@ argument, so `meta.set_key("stage", "normalized").count_keys()` maps to
 `count_keys(set_key(hash(meta), "stage", "normalized"))`. Hash-returning links can continue through more
 hash helpers, and `sorted_keys()` / `sorted_values()` can continue through array receiver helpers such as
 `join_values(...)`, `drop_front(...)`, and `first()`. Receiver-dot `scalaref(key)` reads one field from the
-current hash value. Statement forms remain separate: `set_key(meta, key, value)` and `meta[key] = value`
-mutate the named working hash; `meta.set_key(key, value)` is a pure derived value unless assigned back. A
-hash-yielding expression-valued block can enter the same family, for example
+current hash value. Named mutation forms remain separate from receiver-dot pure composition:
+`set_key(meta, key, value)` and `meta[key] = value` mutate the named working hash, and the hash-index assignment
+form yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is a pure
+derived value unless assigned back. A hash-yielding expression-valued block can enter the same family, for example
 `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`.
 
 The terse hash-index operator is the statement form written with the key next to the target:

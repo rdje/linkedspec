@@ -577,6 +577,21 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
         q{return do { $payload = [$value]; $payload }},
         'explicit scalar target keeps a scalar-held direct shape payload'
     );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(items += value)}),
+        q{return do { push @items, $value; [@items] }},
+        'array append expression returns the updated array snapshot'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(meta[key] = value)}),
+        q{return do { $meta{$key} = $value; +{%meta} }},
+        'hash-index assignment expression returns the updated hash snapshot'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return((items += value).count())}),
+        q{return do { my $__ls_count = do { push @items, $value; [@items] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }},
+        'array append expression can feed an aggregate receiver chain'
+    );
 };
 
 subtest 'statement helper-call lowering consumes AST call nodes' => sub {

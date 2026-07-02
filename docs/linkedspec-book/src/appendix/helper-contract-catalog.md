@@ -107,7 +107,7 @@ dispatch rule.
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
 > the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator
 > `name += value`; and the hash target of
-> statement-level `set_key(name, key, value)` and hash-index assignment `name[key] = value`
+> `set_key(name, key, value)` and hash-index assignment `name[key] = value`
 > auto-exist from a **bare** name too, with the kind fixed by that position. Aggregate snapshot reads
 > `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)` are also type-implying read
 > positions. A backend MUST supply
@@ -414,8 +414,8 @@ dispatch rule.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
-- **Returns**: void
-- **Behavior**: Statement-level array append operator. Lowers/runs identically to explicit append forms and reads a bare RHS identifier as a scalar working variable.
+- **Returns**: updated array snapshot in value positions; side-effect-only behavior when used as a statement.
+- **Behavior**: Array append operator. Lowers/runs identically to explicit append forms, mutates the named working array, and reads a bare RHS identifier as a scalar working variable. In value positions it evaluates to the updated array snapshot after the push.
 - **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += scalar(value)`, `items += value`.
 - **Edge cases**: The target is still an array working variable and auto-exists as `@target`. A bare RHS such as `items += value` reads `$value`; reserved literals such as `true`, `false`, and `undef` keep their literal meaning.
 
@@ -568,9 +568,9 @@ dispatch rule.
 - **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
   compatible array receiver helpers. `count_keys`, `has_key`, and `scalaref` return number, boolean, and
   scalar values respectively and end the hash-family chain.
-- **Boundary**: `set_key(name, key, value)` and `name[key] = value` remain statement-level mutations of a
-  named working hash. Receiver-dot `meta.set_key(key, value)` is pure value composition; it mutates nothing
-  unless its result is explicitly assigned back.
+- **Boundary**: `set_key(name, key, value)` and `name[key] = value` mutate the named working hash; hash-index
+  assignment also yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is
+  pure value composition; it mutates nothing unless its result is explicitly assigned back.
 - **Block receivers**: An expression-valued block whose value is a hash can be the receiver, for example
   `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`.
 
@@ -686,14 +686,14 @@ dispatch rule.
 - **Returns**: hash
 - **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input.
 - **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly.
-- **Operator form**: `name[key] = value` mutates the same named working hash directly; bare key/RHS identifiers in the statement mutation slot read scalar working variables.
+- **Operator form**: `name[key] = value` mutates the same named working hash directly, and yields the updated hash snapshot in value positions; bare key/RHS identifiers in the mutation slot read scalar working variables.
 
 ### `name[key] = value`
 - **Signature**: `target[key_expr] = value_expr`
-- **Returns**: void
-- **Behavior**: Statement-level hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions.
+- **Returns**: updated hash snapshot in value positions; side-effect-only behavior when used as a statement.
+- **Behavior**: Hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions, and evaluates to the updated hash snapshot when used as a value.
 - **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = scalar(kind)`, `meta[scalar(field_name)] = scalar(field_value)`, `meta[field_name] = field_value`.
-- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key/RHS identifiers read scalar working variables in this statement mutation slot. This is a statement-only mutation form, not a value expression.
+- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key/RHS identifiers read scalar working variables in this mutation slot. Receiver-dot `meta.set_key(key, value)` remains pure copy-valued composition; use `meta[key] = value` when you want mutation.
 
 ### `rename_key(h, old, new)`
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
@@ -1232,9 +1232,11 @@ chains apply the same rule to scalar string helpers, so `raw.trim().lowercase().
 and `raw.trim().split("-").lowercase_each().join_values("_")` bridges explicitly into the array family. Use explicit
 aggregate wrappers such as `array(name)` and `hash(name)` anywhere a helper contract does not say a bare
 aggregate read is accepted; quoted strings are literal constructor payloads, not aggregate-name aliases or
-scalar-indirect lookup. Statement forms
-(`name = value`, `items += value`, `set_key(name, key, value)`, `items.push_back(value)`, etc.) are not value
-expressions. Inline value `if`/`switch` is portable in the supported value-consuming slots (`return(...)`,
+scalar-indirect lookup. Mutation statement forms remain available, and assignment/mutation operators also have
+expression values where documented: `name = value` yields the stored value, `items += value` yields the updated
+array snapshot, and `name[key] = value` yields the updated hash snapshot. Array end mutations such as
+`items.push_back(value)` remain statement-only. Inline value `if`/`switch` is portable in the supported
+value-consuming slots (`return(...)`,
 assignment RHS, and fluent `.return(...)`), and its contract is the selected payload value rather than any
 specific compatibility tag string.
 
@@ -1260,10 +1262,10 @@ unlike the Retired table below):
 | Canonical (terse) | Deprecated alias | Notes |
 |---|---|---|
 | `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment. Scalar non-shape assignments and direct RHS shape assignments yield the stored value in value positions; a bare direct shape target infers array/hash kind. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
-| `name = value` / `=(name, value)` | `set(name, value)` / `assign(name, value)` | assignment expression/operator spelling. It stores the target and yields the stored scalar or direct-shape aggregate value in value positions. Array `+=` and hash-index assignment remain separate contracts. |
-| `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax. |
+| `name = value` / `=(name, value)` | `set(name, value)` / `assign(name, value)` | assignment expression/operator spelling. It stores the target and yields the stored scalar or direct-shape aggregate value in value positions. |
+| `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
-| `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in statement mutation slots. |
+| `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
@@ -1273,9 +1275,10 @@ access and `scalaref(base, path)` remain accepted forms. `scalaref(...)` keeps i
 write `[scalar(i)]` there when the path index should read a scalar working variable.
 
 The helper aliases above lower identically within their supported statement/helper families. Assignment forms
-(`set(...)`, `assign(...)`, `name = value`, and `=(name, value)`) now also compose as value expressions when the
-target is scalar or when a direct RHS shape literal infers an array/hash target. Array append and hash-index
-assignment remain statement-level until their `SPEC-FORMAT-TERSE.3.3` follow-on leaves land.
+(`set(...)`, `assign(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the
+target is scalar or when a direct RHS shape literal infers an array/hash target. Mutation assignment operators also
+compose as value expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the
+updated hash snapshot. Array end mutations remain statement-only.
 Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the value positions documented by
 their contracts. New `.spec` authoring should prefer the terse names.
 

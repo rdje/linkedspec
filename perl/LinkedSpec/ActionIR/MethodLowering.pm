@@ -2445,6 +2445,37 @@ sub _lower_method_value_expr {
 
   my ($target_name, $target_sigil, $value_node);
   my $kind = $node->{kind} // '';
+  if ($kind eq 'assign_array_append') {
+   my $target = $node->{name};
+   return undef unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $value_source = $ast_expr_source_node->($node->{value});
+   $value_source = $node->{value}{source}
+    if ref($node->{value}) eq 'HASH' && !(defined($value_source) && length($value_source));
+   return undef unless defined($value_source) && length($value_source);
+   my $lowered_value = _lower_mutation_slot_value_expr($value_source, $deps);
+   return undef unless defined($lowered_value) && length($lowered_value);
+   return 'do { push @'.$target.', '.$lowered_value.'; [@'.$target.'] }'
+  }
+
+  if ($kind eq 'assign_hash_index') {
+   my $target = $node->{name};
+   return undef unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $key_source = $ast_expr_source_node->($node->{key});
+   $key_source = $node->{key}{source}
+    if ref($node->{key}) eq 'HASH' && !(defined($key_source) && length($key_source));
+   my $value_source = $ast_expr_source_node->($node->{value});
+   $value_source = $node->{value}{source}
+    if ref($node->{value}) eq 'HASH' && !(defined($value_source) && length($value_source));
+   return undef unless defined($key_source) && length($key_source);
+   return undef unless defined($value_source) && length($value_source);
+   my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+   my $key_lowered = $lower_scalar_access_key_expr->($key_source);
+   return undef unless defined($key_lowered) && length($key_lowered);
+   my $value_lowered = _lower_mutation_slot_value_expr($value_source, $deps);
+   return undef unless defined($value_lowered) && length($value_lowered);
+   return 'do { $'.$target.'{'.$key_lowered.'} = '.$value_lowered.'; +{%'.$target.'} }'
+  }
+
   if ($kind eq 'assign_scalar') {
    $target_name = $node->{name};
    $target_sigil = '$';
@@ -2725,7 +2756,7 @@ sub _lower_method_value_expr {
   return $opts->{bare_scalar_read} ? _lower_source_slot_bare_scalar_read_expr($node->{name}, $deps) : undef
    if $kind eq 'variable';
   return $lower_ast_scalar_assignment_value_node->($node)
-   if $kind eq 'assign_scalar';
+   if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index';
   return $lower_ast_direct_access_node->($node)
    if $kind eq 'indexed_var' || $kind eq 'nested_access';
   if ($kind eq 'array_literal') {
@@ -2860,6 +2891,13 @@ sub _lower_method_value_expr {
   my $receiver_expr = $ast_expr_source_node->($receiver);
   $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);
   return undef unless defined($receiver_expr) && length($receiver_expr);
+  if (($receiver->{kind} // '') eq 'raw_perl' && $receiver_expr =~ /^\((.*)\)$/s) {
+   my $inner = $1;
+   my $inner_node = _parse_method_value_ast_expr($inner, $deps);
+   my $inner_expr = $lower_ast_value_node->($inner_node, { bare_scalar_read => 1 })
+    if ref($inner_node) eq 'HASH';
+   $receiver_expr = $inner_expr if defined($inner_expr) && length($inner_expr);
+  }
 
   my $chain_arg_exprs = sub {
    my ($args) = @_;

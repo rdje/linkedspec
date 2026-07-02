@@ -881,6 +881,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values ──
+    #
+    # Array append and hash-index assignment forms now mutate their working
+    # targets and yield the updated aggregate snapshot in value positions. This
+    # fixture covers helper arguments, snapshot reads after mutation, and
+    # receiver chaining on the mutation expression result.
+    {   case   => 'terse_3_3_3_mutation_assignment_expressions',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, array_copy(items), meta[key] = value, hash_copy(meta), (items += "x").count(), (meta["last"] = value).count_keys())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.4.3.2 — user-function runtime parity ──
     #
     # Registered calls execute as values, standalone calls discard their result,

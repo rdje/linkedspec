@@ -15,7 +15,7 @@ answers:
 date: 2026-06-29
 status: confirmed
 tags: [engine, dsl, mutation, operators, aliases, spec-format-terse, SPEC-FORMAT-TERSE, actionir, rust, parser]
-evidence: "TOOLBOX probes 2026-06-29 (`perl -Iperl -MLinkedSpec`, `call_spec_handler_subst`, `LinkedSpec::Get` descriptor/runtime specs, `dump_parser_source`). Perl after `.1.3.4.3`: `meta[\"stage\"] = \"v\"`, `meta[cat(\"s\",\"tage\")] = cat(\"v\",\"!\")`, and `meta[scalar(key)] = scalar(value)` lower identically to direct `set_key(...)` mutation, while bare key/RHS forms were deferred to Channel 2 at that time. Rust after `.1.3.4.3`: `CodeBlock` parses `AssignHashIndex` only at statement boundaries and `Engine::execute_block()` mutates the named hash by evaluated string key. Perl/Rust earlier `.1.3.4.2`: array append `items += expr` is statement-only. Earlier `.1.3.4.1`: scalar `name = expr` is statement-only scalar mutation. Earlier `.1.3.3`: `set_key(meta,\"stage\",cat(\"a\",\"b\"))` mutates a named hash while nested `set_key(hash(meta),...)` remains pure. Earlier `.1.3.2`: `push(target,value)` lowers/runs like `push_value` only for unambiguous/non-all-bare value expressions; all-bare `push(A,B)` remains child-call. SPEC-FORMAT-TERSE.1.2.3.3.2 and `.1.2.3.4` later landed Perl/Rust scalar bare key/RHS reads, so `items += value`, `set_key(meta,key,value)`, and `meta[key] = value` now read scalar working variables."
+evidence: "TOOLBOX probes 2026-06-29 (`perl -Iperl -MLinkedSpec`, `call_spec_handler_subst`, `LinkedSpec::Get` descriptor/runtime specs, `dump_parser_source`). Perl after `.1.3.4.3`: `meta[\"stage\"] = \"v\"`, `meta[cat(\"s\",\"tage\")] = cat(\"v\",\"!\")`, and `meta[scalar(key)] = scalar(value)` lower identically to direct `set_key(...)` mutation, while bare key/RHS forms were deferred to Channel 2 at that time. Rust after `.1.3.4.3`: `CodeBlock` parses `AssignHashIndex` only at statement boundaries and `Engine::execute_block()` mutates the named hash by evaluated string key. Perl/Rust earlier `.1.3.4.2`: array append `items += expr` was statement-only. Earlier `.1.3.4.1`: scalar `name = expr` was statement-only scalar mutation. Earlier `.1.3.3`: `set_key(meta,\"stage\",cat(\"a\",\"b\"))` mutates a named hash while nested `set_key(hash(meta),...)` remains pure. Earlier `.1.3.2`: `push(target,value)` lowers/runs like `push_value` only for unambiguous/non-all-bare value expressions; all-bare `push(A,B)` remains child-call. SPEC-FORMAT-TERSE.1.2.3.3.2 and `.1.2.3.4` later landed Perl/Rust scalar bare key/RHS reads, so `items += value`, `set_key(meta,key,value)`, and `meta[key] = value` now read scalar working variables. SPEC-FORMAT-TERSE.3.3.1 later made scalar assignment expression-valued, and SPEC-FORMAT-TERSE.3.3.3 later made `items += value` and `meta[key] = value` expression-valued snapshot mutations."
 reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{assign(name,\"ok\")},q{name = \"ok\"},q{push_value(items,\"a\")},q{push(items,\"a\")},q{push(items,scalar(v))},q{push(items,value)},q{items += \"a\"},q{items += scalar(v)},q{items += v},q{set_key(meta,\"stage\",cat(\"a\",\"b\"))},q{return(set_key(hash(meta),\"stage\",\"v\"))},q{meta[\"stage\"] = \"v\"},q{meta[cat(\"s\",\"tage\")] = cat(\"v\",\"!\")},q{meta[scalar(key)] = scalar(value)},q{meta[key] = \"v\"},q{meta[\"stage\"] = value}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$expr); $out =~ s/\\n/\\\\n/g; print \"$expr => $out\\n\" }' && cargo test --manifest-path rust/linkedspec-core/Cargo.toml hash_index && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_3_4_3 && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle"
 ---
 
@@ -24,6 +24,12 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{assi
 `SPEC-FORMAT-TERSE.1.3` names six spellings, but they do not share one implementation seam.
 
 ## Current State
+
+Update 2026-07-02: the original `.1.3` statement-mutation contracts still hold, but later assignment-expression
+work broadened value use. `SPEC-FORMAT-TERSE.3.3.1` made scalar assignment yield the stored scalar value, and
+`SPEC-FORMAT-TERSE.3.3.3` made `items += value` yield the updated array snapshot and `meta[key] = value` yield the
+updated hash snapshot when those mutation operators are used as expressions. Array end mutations such as
+`items.push_back(value)` remain statement-only.
 
 - **Scalar function form is already satisfied.** `set(name, value)` is the terse rename of `assign(name, value)`.
   Perl `.1.4.1` added the `set` recognition sites and Rust `.1.4.2` added `"assign" | "set"`. Fresh probes
@@ -44,20 +50,23 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{assi
 - **Scalar assignment operator is now a settled mutation statement.** `.1.3.4.1` added `name = value`
   as a statement-level scalar assignment operator. It lowers/runs identically to `set(name, value)` /
   `assign(name, value)`, auto-supplies a scalar working slot on Perl, and is parsed/executed as an
-  `AssignScalar` statement on Rust. It is statement-only and does not make bare value-position reads work.
+  `AssignScalar` statement on Rust. That leaf did not make bare value-position reads work; `.3.3.1` later made
+  scalar assignment yield the stored scalar value in expression positions.
 - **Array append operator is now a settled mutation statement.** `.1.3.4.2`
   added `items += value` as a statement-level array append operator. It lowers/runs identically to
   `push(items, value)` / `push_value(items, value)` for explicit values such as literals, helper calls, and
   wrapped working-variable reads (`items += scalar(value)`). It auto-supplies an array working slot on Perl and
   is parsed/executed as an `AssignArrayAppend` statement on Rust. Channel 2 later added bare scalar RHS reads,
-  so `items += value` reads scalar `$value` / `value` on both variants.
+  so `items += value` reads scalar `$value` / `value` on both variants; `.3.3.3` later made expression use yield
+  the updated array snapshot.
 - **Hash-index assignment operator is now a settled mutation statement.**
   `.1.3.4.3` added `name[key] = value` as a statement-level named-hash mutation. It lowers/runs identically to
   `set_key(name, key, value)`, auto-supplies a hash working slot on Perl, and is parsed/executed as an
   `AssignHashIndex` statement on Rust. The key and value still use the already-supported expression rules:
   `meta["stage"] = "v"`, `meta[cat("s","tage")] = cat("v","!")`, and
   `meta[scalar(key)] = scalar(value)` work. Channel 2 later added bare scalar key/RHS reads, so
-  `meta[key] = value` now reads scalar `key` and `value` on both variants.
+  `meta[key] = value` now reads scalar `key` and `value` on both variants; `.3.3.3` later made expression use
+  yield the updated hash snapshot.
 
 ## Split Consequence
 

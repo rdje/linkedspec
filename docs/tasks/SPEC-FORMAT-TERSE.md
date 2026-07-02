@@ -77,8 +77,9 @@
   string literals. Prior **`.2.3.5.2` DONE** —
   hash receiver-dot value chains now run on Perl and Rust. Pure hash helpers can be chained from hash
   receivers, `sorted_keys`/`sorted_values` bridge into array receiver chains, receiver-dot `scalaref(key)` reads
-  a field from the current hash value, and statement-level `set_key(meta, ...)` / `meta[key] = value` remain the
-  mutating forms. Rust `merge_hash` now matches the documented later-argument override contract. Prior
+  a field from the current hash value, and named `set_key(meta, ...)` / `meta[key] = value` remain the mutating
+  forms; `.3.3.3` later added hash-index expression values. Rust `merge_hash` now matches the documented
+  later-argument override contract. Prior
   **`.2.3.5.1` DONE** — array receiver-dot value chains
   now run on Perl and Rust. Pure array helpers can be chained from array receivers, terminal helpers return
   their documented scalar/number/string/boolean values, and `.1.6` receiver-dot end mutations remain
@@ -2320,7 +2321,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     Explicit `scalar(payload)` remains a scalar-held payload boundary, so `set(scalar(payload), [value])` stores
     and yields the array payload in the scalar. Assignment-expression targets now auto-declare `@`/`%` variables
     in generated Perl source without reintroducing stale scalar declarations. Array append and hash-index
-    mutation expression values remain `.3.3.3`.
+    mutation expression values later landed in `.3.3.3`.
   Verification: Perl syntax checks for `ActionIR::MethodLowering` and `RuleIR::EmitContext`; focused
     `t/actionir_ast_parser.t`; focused generated-source probes for aggregate assignment expression lowering and
     declaration inference; focused Rust core scalar-assignment parser tests; focused Rust runtime `.3.3.2`
@@ -2329,15 +2330,25 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.3.3.2 - implement aggregate assignment values`
 
 - ID: `SPEC-FORMAT-TERSE.3.3.3`
-  Status: `pending`
+  Status: `done` (2026-07-02)
   Goal: Mutation expression values for array append and hash-index assignment
   Acceptance: Define and implement value contracts for mutation operators that are currently statement-only:
     `items += value` and `meta[key] = value`. Before code, lock whether each expression returns the updated
     target aggregate snapshot or the stored element value; after that decision, implement Perl/Rust parity,
     preserve statement-side behavior, and add oracle coverage for helper arguments, `return(...)`, block
     values, and compatible receiver chains.
-  Verification: `pending`
-  Commit: `pending`
+  Outcome: Array append and hash-index mutation operators are now value expressions on Perl and Rust. Both mutate
+    the named working target and yield the updated aggregate snapshot: `items += value` returns `[@items]` /
+    array snapshot after the push, and `meta[key] = value` returns `+{%meta}` / hash snapshot after the field
+    update. These values compose in `return(...)`, helper arguments, expression-valued blocks, and compatible
+    receiver chains such as `(items += value).count()` and `(meta[key] = value).count_keys()`. Statement-side
+    behavior remains unchanged.
+  Verification: Perl syntax checks for `ActionIR::MethodLowering`, `RuleIR::EmitContext`, and
+    `t/phase0_regression.t`; focused `t/actionir_ast_parser.t`; focused Rust parser tests for assignment
+    expression parsing and parenthesized mutation receiver chains; focused Rust runtime `.3.3.3`; oracle
+    generator and Rust corpus oracle over **61 fixtures**; full phase0 PASS with **1014 tests**; mdBook/live-doc/KM
+    updates and full gates before commit.
+  Commit: `SPEC-FORMAT-TERSE.3.3.3 - implement mutation assignment values`
 
 - ID: `SPEC-FORMAT-TERSE.3.3.4`
   Status: `pending`
@@ -2692,12 +2703,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.3.2.3.2` | `done` 2026-07-02 | Explicit `str_*` string-comparison helpers landed on Perl/Rust; bare comparison words remained string-compatibility aliases until `.3.2.3.3`. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.3` | `done` 2026-07-02 | Ordinary comparison word calls now map to numeric `num_*` aliases on Perl/Rust; lexical strings use explicit `str_*`. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.4` | `done` 2026-07-02 | Comparison symbol callees `==`, `!=`, `>`, `>=`, `<`, and `<=` now map to numeric `num_*` aliases on Perl/Rust without claiming assignment `=(...)` or blind-call `=>`. |
-| — | `SPEC-FORMAT-TERSE.3.3` | `done` 2026-07-02 | Expression-valued assignment plus `=(target,value)` equivalence split before code. Scalar and direct-shape aggregate assignment expression values are now landed; append/hash-index mutation values remain follow-ons. |
+| — | `SPEC-FORMAT-TERSE.3.3` | `done` 2026-07-02 | Expression-valued assignment plus `=(target,value)` equivalence split before code. Scalar, direct-shape aggregate, array append, and hash-index mutation expression values are now landed; compatibility/docs closure remains `.3.3.4`. |
 | — | `SPEC-FORMAT-TERSE.3.3.1` | `done` 2026-07-02 | Scalar non-shape assignment expressions now store and return the scalar value on Perl/Rust, including `=(target,value)` and scalar `set`/`assign` compatibility. |
 | — | `SPEC-FORMAT-TERSE.3.3.2` | `done` 2026-07-02 | Direct RHS shape assignment expressions now store and return array/hash values on Perl/Rust after target-kind inference; scalar wrapper targets still keep scalar-held payloads. |
-| 1 | `SPEC-FORMAT-TERSE.3.3.3` | `pending` | Array append and hash-index mutation expression value contracts are the next implementation slice. |
+| — | `SPEC-FORMAT-TERSE.3.3.3` | `done` 2026-07-02 | Array append and hash-index mutation expression values now mutate and return updated aggregate snapshots on Perl/Rust; corpus 61 fixtures and phase0 1014 green. |
+| 1 | `SPEC-FORMAT-TERSE.3.3.4` | `pending` | Legacy function spelling cleanup and full assignment-expression closure are the next implementation slice. |
 
 ## Decisions
+
+- `2026-07-02` (**`.3.3.3` mutation assignment expression values landed**). Array append and hash-index
+  mutation operators now have expression values on Perl and Rust. `items += value` pushes into the named working
+  array and yields the updated array snapshot; `meta[key] = value` writes the named working hash field and yields
+  the updated hash snapshot. These snapshot values compose in helper arguments, `return(...)`, expression-valued
+  blocks, and compatible receiver chains such as `(items += value).count()` and
+  `(meta[key] = value).count_keys()`. Statement behavior is preserved, and the new
+  `terse_3_3_3_mutation_assignment_expressions` oracle fixture raises the corpus to **61 fixtures**.
 
 - `2026-07-02` (**`.3.3.2` aggregate assignment expression values landed**). Direct RHS shape assignment now has
   a value contract after target-kind inference: `items = [value]`, `set(items, [value])`, `=(items, [value])`,
@@ -2706,7 +2726,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   hash value. Explicit `scalar(payload)` remains the scalar-held payload boundary. The implementation keeps
   generated Perl declarations aligned to the inferred target kind and adds the
   `terse_3_3_2_aggregate_assignment_expressions` oracle fixture. Array append and hash-index mutation expression
-  values remain `.3.3.3`.
+  values later landed in `.3.3.3`.
 
 - `2026-07-02` (**`.3.3.1` scalar assignment expression values landed**). Scalar non-shape assignment now has
   a value contract: `name = value`, `=(name,value)`, `set(name,value)`, and `assign(name,value)` store the scalar
@@ -3519,8 +3539,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.3` | Perl syntax checks for `ActionIR::MethodLowering`, `RuleIR::EmitContext`, and `t/phase0_regression.t`; focused `t/actionir_ast_parser.t`; focused Rust parser tests for assignment expressions and parenthesized mutation receiver chains; focused Rust runtime `.3.3.3`; oracle generator; Rust corpus oracle; full phase0; mdBook/live-doc/KM updates; phase0/full gates before commit | Array append and hash-index mutation expressions now mutate and return updated aggregate snapshots on Perl/Rust. `items += value` yields the updated array, `meta[key] = value` yields the updated hash, and both feed helper args, returns, block values, and compatible receiver chains. Oracle corpus reaches **61 fixtures** and phase0 reaches **1014 tests**. Frontier becomes `.3.3.4`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.2` | Perl syntax checks for `ActionIR::MethodLowering` and `RuleIR::EmitContext`; focused `t/actionir_ast_parser.t`; generated-source declaration probes for direct-shape assignment expression targets; focused Rust core scalar-assignment parser tests; focused Rust runtime `.3.3.2`; oracle generator; Rust corpus oracle; full phase0; mdBook/live-doc/KM updates; phase0/full gates before commit | Direct RHS shape assignment expressions now store and return assigned arrays/hashes on Perl/Rust. Bare targets infer `@`/`%` from the direct shape RHS, typed `array(...)`/`hash(...)` targets match the shape, and explicit `scalar(...)` targets keep scalar-held payloads. Oracle corpus reaches **60 fixtures** and phase0 reaches **1013 tests**. Frontier becomes `.3.3.3`. |
-| `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.1` | Perl syntax checks for ActionIR method parsing/lowering; focused `t/actionir_ast_parser.t`; focused Perl runtime/source probe for scalar assignment expressions; focused Rust parser tests for `=(...)`, scalar assignment args, and keyword-arg boundaries; focused Rust runtime `.3.3.1`; oracle generator and Rust corpus oracle; mdBook/live-doc/KM updates; phase0/full gates before commit | Scalar assignment expressions now store and return their assigned scalar value on Perl/Rust. `name = value`, `=(name,value)`, `set(name,value)`, and `assign(name,value)` work in scalar value positions. Direct RHS shape assignment values, array append values, and hash-index mutation values remain deferred. Oracle corpus reaches **59 fixtures** and phase0 reaches **1012 tests**. Frontier becomes `.3.3.2`. |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.1` | Perl syntax checks for ActionIR method parsing/lowering; focused `t/actionir_ast_parser.t`; focused Perl runtime/source probe for scalar assignment expressions; focused Rust parser tests for `=(...)`, scalar assignment args, and keyword-arg boundaries; focused Rust runtime `.3.3.1`; oracle generator and Rust corpus oracle; mdBook/live-doc/KM updates; phase0/full gates before commit | Scalar assignment expressions now store and return their assigned scalar value on Perl/Rust. `name = value`, `=(name,value)`, `set(name,value)`, and `assign(name,value)` work in scalar value positions. Direct RHS shape assignment values later landed in `.3.3.2`; array append values and hash-index mutation values later landed in `.3.3.3`. Oracle corpus reaches **59 fixtures** and phase0 reaches **1012 tests**. Frontier becomes `.3.3.2`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.3` | KM retrieval (`terse-expression-valued-assignment-and-operator-calls`, `terse-mutation-surface-ground-truth`); TOOLBOX `call_spec_handler_subst` and `LinkedSpec::Get` probes for statement assignment vs value-position assignment; Rust source/test audit for expression-level assignment diagnostics; mdBook drift correction; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Expression-valued assignment was split before code. At split time, scalar assignment, array append, and hash-index assignment were still statement-only, and `=(target,value)` was not runnable yet. The first implementation child was `.3.3.1` for scalar assignment expression values and scalar `=(target,value)` equivalence. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.4` | KM retrieval (`terse-numeric-comparison-symbol-callees`, `terse-numeric-comparison-word-aliases`, `terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); Perl syntax checks for ActionIR symbol parsing/lowering and phase0; focused Perl lowering/runtime/source probes for comparison symbols, slash division, `str_*`, and single-equals deferral; oracle generator; focused Rust parser/runtime symbol-callee locks; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Comparison symbol callees `==`/`!=`/`>`/`>=`/`<`/`<=` now route to numeric `num_*` comparison helpers on Perl/Rust. Rust argument parsing now requires a real identifier before treating `name=expr` as a keyword arg, so `==(...)` parses as a symbol call. Slash regex/division behavior remains intact, lexical strings use `str_*`, and `=(target,value)` stays `.3.3`. Oracle corpus reaches **58 fixtures** and phase0 reaches **1011 tests**. Frontier becomes `.3.3`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.3` | KM retrieval (`terse-numeric-comparison-word-aliases`, `terse-string-comparison-bridge-contract`, `terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); Perl syntax checks for ActionIR comparison/lowering contracts and phase0; focused Perl lowering/runtime/source probes for numeric bare words and lexical `str_*`; oracle generator; focused Rust runtime comparison-word lock; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Bare value-call comparison words `eq`/`ne`/`gt`/`ge`/`lt`/`le` now route to numeric `num_*` comparison helpers on Perl/Rust. Explicit `str_*` remains the lexical string surface, and shipped specs/tests with lexical bare comparison intent moved to `str_*`. Comparison symbol callees remain `.3.2.3.4`; assignment `=(...)` remains `.3.3`. Oracle corpus reaches **57 fixtures** and phase0 reaches **1010 tests** after the focused numeric-word lock. Frontier becomes `.3.2.3.4`. |
@@ -3620,6 +3641,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.3.3.3` | `SPEC-FORMAT-TERSE.3.3.3 - implement mutation assignment values` | Array append and hash-index mutation expressions now return updated aggregate snapshots on Perl/Rust; corpus 61 fixtures, phase0 1014 green, and frontier becomes `.3.3.4`. |
 | `SPEC-FORMAT-TERSE.3.3.2` | `SPEC-FORMAT-TERSE.3.3.2 - implement aggregate assignment values` | Direct RHS shape assignment expressions now return the assigned array/hash value after target-kind inference on Perl/Rust; corpus 60 fixtures, phase0 1013 green, and frontier becomes `.3.3.3`. |
 | `SPEC-FORMAT-TERSE.3.3` | `SPEC-FORMAT-TERSE.3.3 - split expression-valued assignment` | Assignment expression values are split before code into scalar, aggregate, append/hash-index, and compatibility/docs closure leaves; current shipped assignment remains statement-only and frontier becomes `.3.3.1`. |
 | `SPEC-FORMAT-TERSE.3.2.3.4` | `SPEC-FORMAT-TERSE.3.2.3.4 - implement comparison symbol callees` | Comparison symbol callees now map to numeric `num_*` aliases on Perl/Rust; corpus 58 passes and frontier becomes `.3.3`. |
@@ -3718,6 +3740,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-02`: **`.3.3.3` LANDED — mutation assignment expression values.**
+  Array append and hash-index mutation operators now mutate and yield updated aggregate snapshots on Perl/Rust:
+  `items += value` returns the updated array, and `meta[key] = value` returns the updated hash. Snapshot values
+  compose in `return(...)`, helper arguments, expression-valued blocks, and compatible receiver chains such as
+  `(items += value).count()` and `(meta[key] = value).count_keys()`. Statement behavior is preserved. The oracle
+  corpus is **61 fixtures**, phase0 is **1014 green**, and the frontier moves to `.3.3.4` for legacy function
+  spelling cleanup and full assignment-expression closure.
 
 - `2026-07-02`: **`.3.3.2` LANDED — aggregate assignment expression values.**
   Direct RHS shape assignments now store and yield aggregate values after target-kind inference on Perl/Rust:

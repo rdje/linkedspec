@@ -7,6 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values landed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
+  Array append and hash-index mutation operators are now value expressions on Perl and Rust. `items += value`
+  mutates the named working array and returns the updated array snapshot; `meta[key] = value` mutates the named
+  working hash and returns the updated hash snapshot. These snapshot values compose in `return(...)`, helper
+  arguments, expression-valued blocks, and compatible receiver chains such as `(items += value).count()` and
+  `(meta[key] = value).count_keys()`.
+
+  The compatibility boundary is locked: statement behavior is preserved, array end-mutation methods such as
+  `items.push_back(value)` remain statement-level, and full assignment-expression closure / legacy
+  `assign(...)` example cleanup remains `.3.3.4`.
+
+  **Verification:** Perl syntax checks PASS; focused `t/actionir_ast_parser.t` PASS; focused Rust parser/runtime
+  `.3.3.3` PASS; oracle regeneration produced **61 fixtures** including
+  `terse_3_3_3_mutation_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with **1014 tests**;
+  mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.3.4` (legacy function spelling cleanup and full assignment-expression
+  closure).
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values landed**
   (PERL ACTIONIR + RUST RUNTIME + PHASE0 + ORACLE + BOOK/KM).
   Direct RHS shape assignments are now value expressions on Perl and Rust. `items = [value]`,
@@ -15,14 +35,15 @@ Current execution status for interruption-safe batch workflow recovery.
   `hash(meta)` targets store the hash working variable and return the assigned hash value.
 
   The compatibility boundary is locked: explicit `scalar(payload)` targets keep scalar-held shape payloads;
-  statement behavior is preserved; array append and hash-index mutation expression values remain `.3.3.3`.
+  statement behavior is preserved; array append and hash-index mutation expression values later landed in
+  `.3.3.3`.
 
   **Verification:** Perl syntax checks PASS; focused `t/actionir_ast_parser.t` PASS; generated-source declaration
   probes PASS; focused Rust parser/runtime `.3.3.2` PASS; oracle regeneration produced **60 fixtures** including
   `terse_3_3_2_aggregate_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with **1013 tests**;
   mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.3.3` (array append and hash-index mutation expression value contracts).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.3` (now done; current frontier is `.3.3.4`).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
@@ -32,7 +53,7 @@ Current execution status for interruption-safe batch workflow recovery.
   scalar receiver chains.
 
   The compatibility boundary is locked: statement behavior is preserved; direct RHS shape assignment values
-  remain `.3.3.2`; and array append/hash-index mutation expression values remain `.3.3.3`. Perl aggregate-call
+  later landed in `.3.3.2`; and array append/hash-index mutation expression values later landed in `.3.3.3`. Perl aggregate-call
   lowering keeps nested aggregate wrapper calls such as `count(array(items))` source-shaped while direct
   multi-argument `array(name, other)` scalar payloads read scalars.
 
@@ -41,7 +62,7 @@ Current execution status for interruption-safe batch workflow recovery.
   fixtures** including `terse_3_3_1_scalar_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with
   **1012 tests**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.2` (now done; current frontier is `.3.3.3`).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.2` (now done; current frontier is `.3.3.4`).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split before code**
   (TASK TREE + BOOK/KM + LIVE DOCS; NO PARSER/COMPILER/RUNTIME CHANGE).

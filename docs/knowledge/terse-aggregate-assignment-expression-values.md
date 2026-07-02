@@ -28,5 +28,6 @@ reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && carg
 - Explicit `scalar(payload)` targets keep the scalar payload boundary, so `set(scalar(payload), [value])` stores
   and yields a scalar-held array payload.
 
-This leaf extends the target-kind inference contract from statement assignments into value positions. It does not
-close array append values or hash-index mutation values; those remain owned by `SPEC-FORMAT-TERSE.3.3.3`.
+This leaf extends the target-kind inference contract from statement assignments into value positions. It did not
+close array append values or hash-index mutation values; those later landed in `SPEC-FORMAT-TERSE.3.3.3`. See
+[[terse-mutation-assignment-expression-values]].

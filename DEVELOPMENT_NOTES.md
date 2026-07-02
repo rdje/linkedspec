@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values):
+  Array append and hash-index mutation operators now have expression values. Durable points. (1) **Value
+  contract.** `items += value` mutates the named array and yields the updated array snapshot; `meta[key] =
+  value` mutates the named hash and yields the updated hash snapshot. The snapshot choice matches `.3.3.2`
+  aggregate assignment values and makes receiver chains useful. (2) **Composition.** The forms compose in helper
+  arguments, `return(...)`, expression-valued blocks, and receiver chains such as `(items += value).count()` and
+  `(meta[key] = value).count_keys()`. (3) **Perl lowering.** AST assignment-value lowering emits scoped `do { ... }`
+  mutation expressions and the auto-declaration collector records `@target` / `%target` plus scalar key/RHS
+  reads. (4) **Rust parity.** Rust expression evaluation now handles `AssignArrayAppend` and
+  `AssignHashIndex`, and the parser accepts parenthesized mutation receivers for fluent chains. (5) **Gate.**
+  Focused locks, oracle corpus, full phase0, mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates
+  pass; phase0 is now 1014 tests and the oracle corpus is 61 fixtures.
+  Next frontier: `SPEC-FORMAT-TERSE.3.3.4`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values):
   Direct RHS shape assignments now return assigned aggregate values after target-kind inference. Durable points.
   (1) **Value contract.** `items = [value]`, `set(items,[value])`, `=(items,[value])`, and matching
@@ -20,9 +34,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `name = value`, `=(name,value)`, scalar `set(name,value)`, and scalar `assign(name,value)` store into the
   scalar target and yield the stored scalar value. (2) **Composition.** The forms compose in return payloads,
   helper arguments, expression-valued blocks, exact-arity user-function bodies, and compatible scalar receiver
-  chains such as `=(raw, " hi ").trim()`. (3) **Boundary.** Direct RHS shape values are intentionally deferred
-  so `.3.3.2` can preserve target-kind inference for arrays/hashes; array append and hash-index mutation values
-  remain `.3.3.3`. (4) **Perl lowering guard.** Multi-argument `array(...)` only lowers direct scalar payloads
+  chains such as `=(raw, " hi ").trim()`. (3) **Boundary.** Direct RHS shape values were intentionally deferred
+  so `.3.3.2` could preserve target-kind inference for arrays/hashes; array append and hash-index mutation values
+  later landed in `.3.3.3`. (4) **Perl lowering guard.** Multi-argument `array(...)` only lowers direct scalar payloads
   needed by this slice; nested aggregate wrapper calls such as `count(array(items))` stay source-shaped to
   preserve `.2.3.5.6` quoted-wrapper behavior. (5) **Gate.** Focused Perl/Rust locks, oracle corpus, phase0,
   mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1012 tests and the

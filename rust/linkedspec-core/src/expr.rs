@@ -14,15 +14,16 @@
 //! attached_switch → switch '(' expr ')' '{' (case '(' expr ')' '{' stmts '}' | default '('? ')'? '{' stmts '}')+ '}'
 //! attached_while → while '(' expr ')' '{' stmts '}'
 //! scalar_assignment → name '=' expr      (scalar expression; statement-compatible)
-//! array_append → name '+=' expr          (statement only)
-//! hash_index_assignment → name '[' expr ']' '=' expr  (statement only)
+//! array_append → name '+=' expr          (array mutation expression; statement-compatible)
+//! hash_index_assignment → name '[' expr ']' '=' expr  (hash mutation expression; statement-compatible)
 //! expr        → primary ('.' method_call)*
-//! primary     → call | nested_access | indexed_var | literal | block | variable
+//! primary     → call | nested_access | indexed_var | literal | block | grouped | variable
 //! call        → name '(' args? ')' | symbol '(' args? ')'
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
 //! literal     → string | number | boolean | regex | undef | array | hash
+//! grouped     → '(' expr ')'
 //! array       → '[' (expr (',' expr)*)? ']'
 //! hash        → '{' (expr '=>' expr (',' expr '=>' expr)*)? '}'
 //! block       → '{' stmt+ '}'              (non-empty, no top-level '=>')
@@ -81,10 +82,10 @@ pub enum Expr {
     /// A scalar assignment operator: `name = value`
     #[serde(rename = "assign_scalar")]
     AssignScalar { name: String, value: Box<Expr> },
-    /// A statement-only array append operator: `items += value`
+    /// An array append operator: `items += value`
     #[serde(rename = "assign_array_append")]
     AssignArrayAppend { name: String, value: Box<Expr> },
-    /// A statement-only hash-index assignment operator: `meta["key"] = value`
+    /// A hash-index assignment operator: `meta["key"] = value`
     #[serde(rename = "assign_hash_index")]
     AssignHashIndex {
         name: String,
@@ -800,12 +801,20 @@ impl<'a> Parser<'a> {
             return Err("unexpected end of expression".into());
         }
 
-        let scalar_assignment_start = self.pos;
+        let assignment_start = self.pos;
         if matches!(self.peek(), Some(ch) if ch.is_ascii_alphabetic() || ch == '_') {
+            if let Some(expr) = self.try_parse_hash_index_assignment_statement()? {
+                return self.parse_fluent_chain(expr);
+            }
+            self.pos = assignment_start;
+            if let Some(expr) = self.try_parse_array_append_statement()? {
+                return self.parse_fluent_chain(expr);
+            }
+            self.pos = assignment_start;
             if let Some(expr) = self.try_parse_scalar_assignment_statement()? {
                 return self.parse_fluent_chain(expr);
             }
-            self.pos = scalar_assignment_start;
+            self.pos = assignment_start;
         }
 
         let ch = self.peek().unwrap();
@@ -837,6 +846,7 @@ impl<'a> Parser<'a> {
                 let expr = self.parse_brace_expr()?;
                 self.parse_fluent_chain(expr)
             }
+            '(' => self.parse_parenthesized_expr(),
             '$' => {
                 self.advance(1);
                 self.parse_var_or_call()
@@ -1022,6 +1032,18 @@ impl<'a> Parser<'a> {
         self.advance(1);
 
         self.parse_fluent_chain(Expr::Call { name, args })
+    }
+
+    fn parse_parenthesized_expr(&mut self) -> Result<Expr, String> {
+        self.advance(1); // consume '('
+        self.skip_whitespace();
+        let expr = self.parse_expr()?;
+        self.skip_whitespace();
+        if self.peek() != Some(')') {
+            return Err("expected ')' after parenthesized expression".into());
+        }
+        self.advance(1);
+        self.parse_fluent_chain(expr)
     }
 
     fn parse_array_literal(&mut self) -> Result<Expr, String> {
@@ -3015,7 +3037,7 @@ return(array_copy(array(results)));"#;
 
     #[test]
     fn parse_scalar_assignment_value_expression_in_args() {
-        let code = r#"return(array(name = "ok", set(out, other = name), =(again, out), =(items, [name])))"#;
+        let code = r#"return(array(name = "ok", set(out, other = name), =(again, out), =(items, [name]), items += value, meta[key] = value))"#;
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
             Expr::Call { name, args } => {
@@ -3053,6 +3075,65 @@ return(array_copy(array(results)));"#;
                             other => {
                                 panic!("expected aggregate assignment operator call, got {other:?}")
                             }
+                        }
+                        match args[4].value() {
+                            Expr::AssignArrayAppend { name, value } => {
+                                assert_eq!(name, "items");
+                                assert!(
+                                    matches!(value.as_ref(), Expr::Variable { name } if name == "value")
+                                );
+                            }
+                            other => panic!("expected array append assignment, got {other:?}"),
+                        }
+                        match args[5].value() {
+                            Expr::AssignHashIndex { name, key, value } => {
+                                assert_eq!(name, "meta");
+                                assert!(
+                                    matches!(key.as_ref(), Expr::Variable { name } if name == "key")
+                                );
+                                assert!(
+                                    matches!(value.as_ref(), Expr::Variable { name } if name == "value")
+                                );
+                            }
+                            other => panic!("expected hash-index assignment, got {other:?}"),
+                        }
+                    }
+                    other => panic!("expected array call, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_parenthesized_mutation_assignment_receiver_chains() {
+        let code = r#"return(array((items += value).count(), (meta[key] = value).count_keys()))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "array");
+                        match args[0].value() {
+                            Expr::FluentChain { receiver, calls } => {
+                                assert!(matches!(
+                                    receiver.as_ref(),
+                                    Expr::AssignArrayAppend { name, .. } if name == "items"
+                                ));
+                                assert_eq!(calls[0].method, "count");
+                            }
+                            other => panic!("expected array append receiver chain, got {other:?}"),
+                        }
+                        match args[1].value() {
+                            Expr::FluentChain { receiver, calls } => {
+                                assert!(matches!(
+                                    receiver.as_ref(),
+                                    Expr::AssignHashIndex { name, .. } if name == "meta"
+                                ));
+                                assert_eq!(calls[0].method, "count_keys");
+                            }
+                            other => panic!("expected hash-index receiver chain, got {other:?}"),
                         }
                     }
                     other => panic!("expected array call, got {other:?}"),

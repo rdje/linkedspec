@@ -932,7 +932,7 @@ impl Engine {
         Ok(true)
     }
 
-    /// Execute the statement-only array append operator `items += value`.
+    /// Execute the statement-level array append operator `items += value`.
     fn execute_array_append_operator_statement(
         &self,
         expr: &linkedspec_core::expr::Expr,
@@ -948,7 +948,7 @@ impl Engine {
         Ok(true)
     }
 
-    /// Execute the statement-only hash-index assignment operator `meta["key"] = value`.
+    /// Execute the statement-level hash-index assignment operator `meta["key"] = value`.
     fn execute_hash_index_assignment_operator_statement(
         &self,
         expr: &linkedspec_core::expr::Expr,
@@ -963,6 +963,32 @@ impl Engine {
         let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
         ctx.set_hash_entry(name, &evaluated_key, evaluated_value);
         Ok(true)
+    }
+
+    fn eval_array_append_expression(
+        &self,
+        name: &str,
+        value: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let evaluated = self.eval_expr(value, ctx, rule_label)?;
+        ctx.push_value(name, evaluated);
+        Ok(RuntimeValue::Array(ctx.get_array(name)))
+    }
+
+    fn eval_hash_index_assignment_expression(
+        &self,
+        name: &str,
+        key: &linkedspec_core::expr::Expr,
+        value: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
+        let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+        ctx.set_hash_entry(name, &evaluated_key, evaluated_value);
+        Ok(RuntimeValue::Hash(ctx.get_hash(name)))
     }
 
     /// Execute statement-level receiver-dot array end mutations.
@@ -1174,11 +1200,11 @@ impl Engine {
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
             }
-            Expr::AssignArrayAppend { .. } => {
-                Err("array append operator is statement-only".to_string())
+            Expr::AssignArrayAppend { name, value } => {
+                self.eval_array_append_expression(name, value, ctx, rule_label)
             }
-            Expr::AssignHashIndex { .. } => {
-                Err("hash-index assignment operator is statement-only".to_string())
+            Expr::AssignHashIndex { name, key, value } => {
+                self.eval_hash_index_assignment_expression(name, key, value, ctx, rule_label)
             }
             Expr::Variable { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {
@@ -2005,15 +2031,10 @@ impl Engine {
                 Ok(evaluated)
             }
             Expr::AssignArrayAppend { name, value } => {
-                let evaluated = self.eval_expr(value, ctx, rule_label)?;
-                ctx.push_value(name, evaluated);
-                Ok(RuntimeValue::Undef)
+                self.eval_array_append_expression(name, value, ctx, rule_label)
             }
             Expr::AssignHashIndex { name, key, value } => {
-                let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
-                let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
-                ctx.set_hash_entry(name, &evaluated_key, evaluated_value.clone());
-                Ok(evaluated_value)
+                self.eval_hash_index_assignment_expression(name, key, value, ctx, rule_label)
             }
             _ => self.eval_expr(expr, ctx, rule_label),
         }

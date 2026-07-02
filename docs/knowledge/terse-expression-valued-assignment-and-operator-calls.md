@@ -9,11 +9,11 @@ answers:
   - "are gt(a,b) and >=(a,b) part of the uniform operator call surface"
   - "why was SPEC-FORMAT-TERSE.3.3 split before code"
   - "what is the next assignment expression leaf after SPEC-FORMAT-TERSE.3.3"
-  - "which assignment or mutation operators are still statement-only after scalar assignment values"
+  - "which assignment expression leaves are implemented after SPEC-FORMAT-TERSE.3.3.3"
 date: 2026-07-02
 status: current
 tags: [spec-format-terse, operators, assignment, expressions, comparisons, task-tree]
-evidence: "User clarification on 2026-07-01 accepted the uniform operator-call doctrine: comparison operators should be captured as ordinary call/method spellings such as gt(a,b), >=(a,b), ne(a,b), and !=(a,b). The same clarification states that assign(a,b) is replaced by a = b, that =(a,b) is equivalent to a = b, and that assignment is an expression with a value. SPEC-FORMAT-TERSE.3.2.3.4 landed comparison symbol calls on 2026-07-02. SPEC-FORMAT-TERSE.3.3 audited assignment before code and split implementation into .3.3.1 scalar expression values, .3.3.2 aggregate target-kind expression values, .3.3.3 append/hash-index mutation expression values, and .3.3.4 compatibility/docs/oracle closure. SPEC-FORMAT-TERSE.3.3.1 ships the scalar subset; SPEC-FORMAT-TERSE.3.3.2 ships direct RHS shape assignment expression values; append and hash-index mutation expression values remain deferred to .3.3.3."
+evidence: "User clarification on 2026-07-01 accepted the uniform operator-call doctrine: comparison operators should be captured as ordinary call/method spellings such as gt(a,b), >=(a,b), ne(a,b), and !=(a,b). The same clarification states that assign(a,b) is replaced by a = b, that =(a,b) is equivalent to a = b, and that assignment is an expression with a value. SPEC-FORMAT-TERSE.3.2.3.4 landed comparison symbol calls on 2026-07-02. SPEC-FORMAT-TERSE.3.3 audited assignment before code and split implementation into .3.3.1 scalar expression values, .3.3.2 aggregate target-kind expression values, .3.3.3 append/hash-index mutation expression values, and .3.3.4 compatibility/docs/oracle closure. SPEC-FORMAT-TERSE.3.3.1 ships the scalar subset; SPEC-FORMAT-TERSE.3.3.2 ships direct RHS shape assignment expression values; SPEC-FORMAT-TERSE.3.3.3 ships append and hash-index mutation expression values; .3.3.4 remains the compatibility/docs/oracle closure."
 reverify: "rg -n \"SPEC-FORMAT-TERSE\\.3\\.3|SPEC-FORMAT-TERSE\\.3\\.3\\.1|=\\(target, value\\)|statement-only|expression-valued assignment\" docs/tasks/SPEC-FORMAT-TERSE.md docs/TASK_TREE.md docs/knowledge/terse-expression-valued-assignment-and-operator-calls.md docs/linkedspec-book/src/appendix/helper-contract-catalog.md"
 ---
 
@@ -45,6 +45,12 @@ contracts could land separately. `SPEC-FORMAT-TERSE.3.3.1` landed the scalar sub
 - Matching explicit `array(target)` and `hash(target)` assignment targets yield aggregate snapshots.
 - Explicit `scalar(target)` assignment targets still keep scalar-held shape payloads.
 
-The full assignment contract is still not closed. Append/hash-index mutation expression values are deferred to
-`.3.3.3`, and compatibility/docs closure remains `.3.3.4`. See [[terse-scalar-assignment-expression-values]]
-and [[terse-aggregate-assignment-expression-values]] for the landed subsets.
+`SPEC-FORMAT-TERSE.3.3.3` then landed the mutation subset:
+
+- `return(items += value)` mutates the named array and yields the updated array snapshot.
+- `return(meta[key] = value)` mutates the named hash and yields the updated hash snapshot.
+- Parenthesized mutation assignment expressions can feed compatible receiver chains.
+
+The implementation frontier is now `.3.3.4` for compatibility/docs/oracle closure. See
+[[terse-scalar-assignment-expression-values]], [[terse-aggregate-assignment-expression-values]], and
+[[terse-mutation-assignment-expression-values]] for the landed subsets.

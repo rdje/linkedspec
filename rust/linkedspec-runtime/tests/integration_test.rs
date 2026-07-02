@@ -2106,6 +2106,23 @@ Done::
     );
 }
 
+// ── SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values:
+
+#[test]
+fn terse_3_3_3_mutation_assignment_expressions_run() {
+    let grammar = r#"Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, array_copy(items), meta[key] = value, hash_copy(meta), (items += "x").count(), (meta["last"] = value).count_keys())) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok"], ["ok"], {"stage": "ok"}, {"stage": "ok"}, 2, 2]]),
+        "mutation assignment expressions store and return aggregate snapshots"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.4.3.2 — Rust user-function runtime parity:
 
 #[test]

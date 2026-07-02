@@ -67,4 +67,5 @@ The `.3.2` split frontier is:
 - `.3.3`: done/split; expression-valued assignment and `=(target,value)` equivalence are now split before code.
 - `.3.3.1`: done; scalar assignment expression values and scalar `=(target,value)` equivalence ship on Perl/Rust.
 - `.3.3.2`: done; aggregate assignment expression values after target-kind inference ship on Perl/Rust.
-- `.3.3.3`: current next task; array append and hash-index mutation expression value contracts.
+- `.3.3.3`: done; array append and hash-index mutation expression values ship on Perl/Rust.
+- `.3.3.4`: current next task; legacy function spelling cleanup and full assignment-expression closure.

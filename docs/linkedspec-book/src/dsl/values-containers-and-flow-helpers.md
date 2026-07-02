@@ -68,13 +68,13 @@ items = [];
 meta = { "kind" => "token", "line" => entry_line() };
 ```
 
-Use assignment when you want to set or replace the target. Assignment remains valid as a statement, and scalar plus
-direct-shape aggregate assignments are also value expressions. `name = "ok"` and `=(name, "ok")` store the scalar
-and yield it. Direct shape assignments such as `items = [value]`, `set(items, [value])`,
-`=(items, [value])`, and `meta = { key => value }` store the inferred aggregate target and yield the assigned
-array or hash value. These forms compose in `return(...)`, helper arguments, expression-valued blocks, user
-functions, or compatible receiver chains. Array append `items += value` and hash-index mutation
-`meta[key] = value` remain statement-level until their own expression-value contracts land.
+Use assignment when you want to set or replace the target. Assignment remains valid as a statement, and assignment
+forms are also value expressions. `name = "ok"` and `=(name, "ok")` store the scalar and yield it. Direct shape
+assignments such as `items = [value]`, `set(items, [value])`, `=(items, [value])`, and
+`meta = { key => value }` store the inferred aggregate target and yield the assigned array or hash value. Mutation
+assignments also compose as values: `items += value` mutates the named array and yields the updated array snapshot,
+while `meta[key] = value` mutates the named hash and yields the updated hash snapshot. These forms compose in
+`return(...)`, helper arguments, expression-valued blocks, user functions, or compatible receiver chains.
 
 ## Pushing values
 

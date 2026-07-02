@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.3 — implement mutation assignment values
+
+**Scope:** Perl ActionIR mutation assignment expression lowering and auto-declarations, Rust parser/runtime
+expression evaluation, phase0 locks, Rust parser/runtime tests, oracle corpus, mdBook, task tree, live recovery
+docs, and Knowledge Map.
+
+**What changed:** Array append and hash-index mutation operators are now value expressions on Perl and Rust.
+`items += value` mutates the named working array and yields the updated array snapshot. `meta[key] = value`
+mutates the named working hash and yields the updated hash snapshot. Both forms compose in `return(...)`, helper
+arguments, expression-valued blocks, and compatible receiver chains such as `(items += value).count()` and
+`(meta[key] = value).count_keys()`.
+
+**Compatibility boundary:** Statement behavior is preserved. This does not make array end-mutation methods
+value-returning; `items.push_back(...)` / `pop_back()` remain statement-level mutation methods. The remaining
+assignment-expression closure work is `.3.3.4`: legacy `assign(...)` example cleanup and any final contract drift.
+
+**Checks:** Perl syntax checks, focused `t/actionir_ast_parser.t`, focused Rust parser/runtime tests, oracle
+generation, Rust corpus oracle, full phase0, mdBook build, Knowledge Map regenerate/check, memory architecture,
+doctrine registry, `git diff --check`, and full local CI passed. Local CI includes phase0 passing with **1014
+tests** and the corpus oracle passing over **61 fixtures**.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.3.2 — implement aggregate assignment values
 
 **Scope:** Perl ActionIR aggregate assignment expression lowering and auto-declarations, Rust runtime assignment
@@ -13,8 +34,8 @@ or hash kind from the RHS and yield the assigned aggregate value: `items = [valu
 `return(...)`, helper arguments, blocks, and receiver chains.
 
 **Compatibility boundary:** Explicit `scalar(payload)` still stores the whole shape payload in a scalar and yields
-that payload. Statement behavior is preserved. Array append values and hash-index mutation values remain deferred
-to `.3.3.3`.
+that payload. Statement behavior is preserved. Array append values and hash-index mutation values later landed in
+`.3.3.3`.
 
 **Checks:** Perl syntax checks, focused `t/actionir_ast_parser.t`, generated-source declaration probes, focused Rust
 parser/runtime tests, oracle generation, Rust corpus oracle, full phase0, mdBook build, Knowledge Map
@@ -31,8 +52,8 @@ Rust parser/runtime tests, oracle corpus, mdBook, task tree, live recovery docs,
 value in return payloads, helper arguments, expression-valued blocks, user-function bodies, and compatible
 scalar receiver chains such as `=(raw, " hi ").trim()`.
 
-**Compatibility boundary:** Statement behavior is preserved. Direct RHS shape assignment expression values,
-array append values, and hash-index mutation values remain deferred to `.3.3.2`/`.3.3.3`. Perl aggregate-call
+**Compatibility boundary:** Statement behavior is preserved. Direct RHS shape assignment expression values later
+landed in `.3.3.2`; array append values and hash-index mutation values later landed in `.3.3.3`. Perl aggregate-call
 lowering keeps nested wrapper calls such as `count(array(items))` source-shaped while allowing direct
 multi-argument `array(name, other)` scalar payload reads.
 

@@ -1248,6 +1248,19 @@ sub _collect_auto_working_var_decls {
    return;
   }
 
+  if ($kind eq 'assign_array_append') {
+   $record->('@', $node->{name});
+   $collect_ast_node_refs->($node->{value}, 1);
+   return;
+  }
+
+  if ($kind eq 'assign_hash_index') {
+   $record->('%', $node->{name});
+   $collect_ast_node_refs->($node->{key}, 1);
+   $collect_ast_node_refs->($node->{value}, 1);
+   return;
+  }
+
   if ($kind eq 'array_literal') {
    $collect_ast_node_refs->($_, 1) for @{$node->{items} || []};
    return;

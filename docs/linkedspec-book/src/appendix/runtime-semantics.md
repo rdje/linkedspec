@@ -238,7 +238,9 @@ and compatible scalar receiver chains such as `=(raw, " text ").trim()`. Direct 
 in the same value contract after target-kind inference: `items = [value]`, `set(items, [value])`, and
 `=(items, [value])` store `items` as an array and evaluate to the assigned array value; `meta = { key => value }`
 stores `meta` as a hash and evaluates to the assigned hash value. Explicit `scalar(payload)` targets keep
-scalar-held shape payloads. Array append and hash-index mutation remain statement-level contracts.
+scalar-held shape payloads. Mutation assignments also have expression values: `items += value` appends to the
+named array and evaluates to the updated array snapshot, while `meta[key] = value` updates the named hash and
+evaluates to the updated hash snapshot.
 
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`
@@ -268,11 +270,11 @@ helper family. For example, `{ [3, 1, 2] }.sorted().join_values(",")` evaluates 
 block to an array, then applies the ordinary array receiver-chain contract; `{ " a-b " }.trim().split("-").count()`
 does the same through string helpers and the explicit `split` array bridge.
 
-Named hash mutation is also a statement-level operation. `set_key(meta, "stage",
-"normalized")` and `meta["stage"] = "normalized"` both update the working hash `meta`
-in place. The hash target auto-exists just like a declared `hash(meta)` working
-variable. In statement mutation slots, bare key/RHS identifiers read scalar working
-variables: `set_key(meta, key, value)` and `meta[key] = value` use `$key` and `$value`.
+Named hash mutation updates a working hash in place. `set_key(meta, "stage", "normalized")` and
+`meta["stage"] = "normalized"` both update the working hash `meta`. The hash target auto-exists just like a
+declared `hash(meta)` working variable. In mutation slots, bare key/RHS identifiers read scalar working variables:
+`set_key(meta, key, value)` and `meta[key] = value` use `$key` and `$value`. When `meta[key] = value` is used as an
+expression, it yields the updated hash snapshot after the field write.
 
 ### 5.4 Return Value
 
