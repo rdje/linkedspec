@@ -1,29 +1,31 @@
 ---
 id: rust-scalaref-legacy-path-parity
-title: Rust supports legacy scalaref paths only in scalaref's second argument; bare path atoms are literal keys and Lispish lispish_x_y is active
+title: Rust temporarily supported legacy scalaref paths in RUST-PARITY.7.5.2; SCALAREF-RETIREMENT.4 later removed that support
 answers:
-  - "does Rust support scalaref(retv, {content})"
-  - "how does Rust parse legacy scalaref paths"
-  - "are bare scalaref path atoms literal keys or scalar reads"
+  - "did Rust support scalaref(retv, {content}) before retirement"
+  - "how did Rust parse legacy scalaref paths before retirement"
+  - "were bare scalaref path atoms literal keys or scalar reads"
   - "why did Lispish output xy instead of the nested y tail"
   - "how is assign(array(word), array()) handled in Rust"
   - "does child return leak into the parent accumulator in Rust"
   - "which fixture proves Lispish Rust parity"
 date: 2026-07-02
-status: confirmed
+status: historical
 tags: [rust, scalaref, Lispish, oracle, RUST-PARITY, runtime]
-evidence: "RUST-PARITY.7.5.2 (2026-07-02): rust/linkedspec-core/src/expr.rs adds scoped Expr::ScalarRefPath parsing for scalaref's second positional argument; rust/linkedspec-runtime/src/engine.rs evaluates legacy paths, contains child-return accumulator pushes, skips duplicate action-edge pre-dispatch when the block explicitly calls the child, and replaces explicit aggregate-wrapper assignments. rust/linkedspec-runtime/tests/integration_test.rs has rust_parity_7_5_2 locks; tools/gen_oracle_corpus.pl enables lispish_x_y; corpus_oracle passes over 63 fixtures."
-reverify: "cargo test -q --manifest-path rust/linkedspec-core/Cargo.toml parse_scalaref && cargo test -q --manifest-path rust/linkedspec-runtime/Cargo.toml rust_parity_7_5_2 && cargo test -q --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
+evidence: "RUST-PARITY.7.5.2 (2026-07-02) temporarily added scoped Expr::ScalarRefPath parsing for scalaref's second positional argument and runtime evaluation for legacy paths so Rust matched the then-current shipped Lispish surface. The same leaf also contained child-return accumulator pushes, skipped duplicate action-edge pre-dispatch when the block explicitly calls the child, and replaced explicit aggregate-wrapper assignments. SCALAREF-RETIREMENT.3 migrated Lispish to direct access, and SCALAREF-RETIREMENT.4 removed ScalarRefPath and runtime scalaref support."
+reverify: "rg -n 'RUST-PARITY.7.5.2|SCALAREF-RETIREMENT.4|ScalarRefPath' docs/TASK_TREE.md docs/tasks/SCALAREF-RETIREMENT.md docs/knowledge/scalaref-implementation-removed.md"
 ---
 
-# Rust `scalaref` Legacy Path Parity
+# Historical Rust `scalaref` Legacy Path Parity
 
 `RUST-PARITY.7.5.2` made the Rust backend run the minimal shipped Lispish fixture
-`lispish_x_y` (`(x y)` -> Perl reference `["x",["y"]]`).
+`lispish_x_y` (`(x y)` -> Perl reference `["x",["y"]]`) when that fixture still used
+legacy `scalaref(...)` path reads.
 
-The parser hook is intentionally narrow. `Expr::ScalarRefPath` is produced only for the
-second positional argument of `scalaref(...)` when that argument starts with `{` or `[`.
-General brace expressions and normal hash literals keep their existing parsers.
+That parser hook was intentionally narrow while it existed. `Expr::ScalarRefPath` was
+produced only for the second positional argument of `scalaref(...)` when that argument
+started with `{` or `[`. General brace expressions and normal hash literals kept their
+existing parsers.
 
 Legacy path semantics differ from direct nested access:
 
@@ -44,7 +46,6 @@ Two runtime boundaries were needed for Lispish:
   the array working store. Without that replacement, Lispish cleared `word` as a scalar and
   left stale array contents, producing the wrong tail.
 
-`scalaref(...)` and the existing Perl-shaped hash literal spelling are legacy
-compatibility surfaces. They are restored here only to match shipped Lispish behavior; the
-2026-07-02 user directive is to retire/remove `scalaref(...)`, which needs a separate
-task-tree-owned parser/lowering/spec/docs migration.
+`SCALAREF-RETIREMENT.3` migrated the fixture to direct nested access, and
+`SCALAREF-RETIREMENT.4` removed `ScalarRefPath` plus runtime helper support. For current
+behavior, read [[scalaref-implementation-removed]].

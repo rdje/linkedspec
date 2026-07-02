@@ -211,13 +211,13 @@ sub _lower_scalar_access_key_expr {
 }
 
 #------------------------------------------------------------------------------
-# Function: _split_scalaref_path_segments
-# Purpose : Parse scalaref path payloads like `[A][B]{C}[D]` into ordered path
-#           segments while preserving nested expression payloads.
+# Function: _split_nested_access_path_segments
+# Purpose : Parse direct bracket path payloads like `[A][B]["C"][D]` into
+#           ordered segments while preserving nested expression payloads.
 # Args    : ($path_expr, $deps)
 # Returns : arrayref of { kind => 'index'|'key', expr => ... } or undef
 #------------------------------------------------------------------------------
-sub _split_scalaref_path_segments {
+sub _split_nested_access_path_segments {
  my ($path_expr, $deps) = @_;
  my $require_dep = sub {
   my ($name) = @_;
@@ -326,13 +326,13 @@ sub _split_scalaref_path_segments {
 }
 
 #------------------------------------------------------------------------------
-# Function: _lower_scalaref_segment_expr
-# Purpose : Lower one scalaref path segment expression while preserving literal
-#           bareword path atoms (e.g. `{A}` or `[B]`) when no lowering applies.
+# Function: _lower_nested_access_segment_expr
+# Purpose : Lower one direct-access path segment expression while preserving
+#           literal bareword index atoms when no lowering applies.
 # Args    : ($segment_expr, $deps)
 # Returns : Perl expression string or undef
 #------------------------------------------------------------------------------
-sub _lower_scalaref_segment_expr {
+sub _lower_nested_access_segment_expr {
  my ($segment_expr, $deps) = @_;
  my $require_dep = sub {
   my ($name) = @_;
@@ -356,38 +356,6 @@ sub _lower_scalaref_segment_expr {
  return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
 
  return $trimmed
-}
-
-#------------------------------------------------------------------------------
-# Function: _lower_scalaref_value_expr
-# Purpose : Lower `scalaref(base_ref, path)` helper into Perl dereference path
-#           expression (e.g. `$ref->[A]->{B}`).
-# Args    : ($base_expr, $path_expr, $deps)
-# Returns : Perl expression string or undef
-#------------------------------------------------------------------------------
-sub _lower_scalaref_value_expr {
- my ($base_expr, $path_expr, $deps) = @_;
- my $base_symbol = _extract_scalar_symbol_name($base_expr, $deps);
- return undef unless defined $base_symbol;
-
- my $segments = _split_scalaref_path_segments($path_expr, $deps);
- return undef unless $segments && @$segments;
-
- my $lowered = '$'.$base_symbol;
- foreach my $segment (@$segments) {
-  my $segment_kind = $segment->{kind} // '';
-  my $segment_expr = _lower_scalaref_segment_expr($segment->{expr}, $deps);
-  return undef unless defined($segment_expr) && length($segment_expr);
-
-  if ($segment_kind eq 'index') {
-   $lowered .= '->['.$segment_expr.']';
-  } elsif ($segment_kind eq 'key') {
-   $lowered .= '->{'.$segment_expr.'}';
-  } else {
-   return undef;
-  }
- }
- return $lowered
 }
 
 #------------------------------------------------------------------------------
@@ -415,7 +383,7 @@ sub _lower_direct_nested_access_value_expr {
  my ($base_symbol, $path_expr) = ($1, $2);
  return undef if $base_symbol =~ /^(?:undef|true|false)$/o;
 
- my $segments = _split_scalaref_path_segments($path_expr, $deps);
+ my $segments = _split_nested_access_path_segments($path_expr, $deps);
  return undef unless $segments && @$segments;
  return undef if grep { ($_->{kind} // '') ne 'index' } @$segments;
 
@@ -429,7 +397,7 @@ sub _lower_direct_nested_access_value_expr {
    next;
   }
 
-  my $segment_expr = _lower_scalaref_segment_expr($segment_source, $deps);
+  my $segment_expr = _lower_nested_access_segment_expr($segment_source, $deps);
   return undef unless defined($segment_expr) && length($segment_expr);
 
   if ($segment_source =~ /^\"(?:\\.|[^\"])*\"$/s || $segment_source =~ /^'(?:\\.|[^'])*'$/s) {

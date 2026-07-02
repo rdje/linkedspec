@@ -265,14 +265,9 @@ sub _lower_primitive_literal_expr {
  return _call_actionir_owner_with_deps('value_expr', '_lower_primitive_literal_expr', @args)
 }
 
-sub _lower_scalaref_value_expr {
+sub _split_nested_access_path_segments {
  my @args = @_;
- return _call_actionir_owner_with_deps('value_expr', '_lower_scalaref_value_expr', @args)
-}
-
-sub _split_scalaref_path_segments {
- my @args = @_;
- return _call_actionir_owner_with_deps('value_expr', '_split_scalaref_path_segments', @args)
+ return _call_actionir_owner_with_deps('value_expr', '_split_nested_access_path_segments', @args)
 }
 
 sub _lower_direct_nested_access_value_expr {
@@ -947,7 +942,7 @@ sub _collect_auto_working_var_decls {
   my $lowered_direct = _lower_direct_nested_access_value_expr($trimmed);
   return unless defined($lowered_direct) && length($lowered_direct);
   return unless $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*\s*(\[.*)$/s;
-  my $segments = _split_scalaref_path_segments($1);
+  my $segments = _split_nested_access_path_segments($1);
   return unless $segments && @$segments;
   for my $segment (@$segments) {
    next unless ($segment->{kind} // '') eq 'index';

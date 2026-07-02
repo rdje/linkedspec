@@ -10,8 +10,8 @@ answers:
 date: 2026-07-02
 status: confirmed
 tags: [dsl, retirement, scalaref, direct-access, docs]
-evidence: "SCALAREF-RETIREMENT.3 migrated shipped specs, checked-in Rust oracle inputs, focused tests, generator fixtures, user guides, and mdBook chapters away from active scalaref(...) and .scalaref(...) examples. Phase0 passes with 1015 tests; Rust corpus oracle passes over 63 fixtures; active scalaref scans are clean across the migrated live surface."
-reverify: "bash -lc '! rg -n \"scalaref\\(|\\.scalaref\\(\" specs rust/linkedspec-runtime/tests/corpus docs/linkedspec-book/src USER_GUIDE*.md tools/gen_oracle_corpus.pl rust/README.md t/phase0_regression.t rust/linkedspec-runtime/tests/integration_test.rs'"
+evidence: "SCALAREF-RETIREMENT.3 migrated shipped specs, checked-in Rust oracle inputs, focused tests, generator fixtures, user guides, and mdBook chapters away from active scalaref(...) and .scalaref(...) examples. Phase0 passes with 1015 tests; Rust corpus oracle passes over 63 fixtures; active scalaref scans are clean across the shipped/public live surface. SCALAREF-RETIREMENT.4 then removed implementation support and added focused negative tests."
+reverify: "bash -lc '! rg -n \"scalaref\\(|\\.scalaref\\(\" specs rust/linkedspec-runtime/tests/corpus docs/linkedspec-book/src USER_GUIDE*.md tools/gen_oracle_corpus.pl rust/README.md'"
 ---
 
 # `scalaref(...)` Live Surface Migration
@@ -28,5 +28,5 @@ Receiver-dot field reads on named working hashes use `scalar(hash(name), key)`. 
 bracket reads such as `retv["key"]` are for scalar variables intentionally holding a
 hashref/arrayref payload, not for named working-hash value reads.
 
-Implementation support still exists until `SCALAREF-RETIREMENT.4`, which owns removing
-Perl/Rust recognition and execution plus rejection coverage.
+Implementation support was removed by `SCALAREF-RETIREMENT.4`, which also added focused
+negative tests for the old function-form and receiver-dot spellings.

@@ -1560,7 +1560,7 @@ subtest 'actionir_value_expr_helpers_keep_inline_callback_validation' => sub {
     my $value_expr_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ValueExpr.pm'));
     ok(defined($value_expr_pm) && length($value_expr_pm), 'ValueExpr.pm source is available for source-shape inspection');
     unlike($value_expr_pm, qr/sub _require_dep\b/, 'ValueExpr.pm no longer carries a separate local dependency-validator wrapper');
-    like($value_expr_pm, qr/sub _extract_scalar_symbol_name\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_scalar_access_key_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _split_scalaref_path_segments\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_scalaref_segment_expr\b.*my \$require_dep = sub \{.*\$lower_method_value_expr = \$require_dep->\('lower_method_value_expr'\).*sub _lower_assignment_source_expr\b.*my \$require_dep = sub \{.*\$lower_method_value_expr = \$require_dep->\('lower_method_value_expr'\).*sub _strip_literal_delimiters\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\)/s, 'ValueExpr.pm now keeps callback validation inline inside its value-expression lowering seams');
+    like($value_expr_pm, qr/sub _extract_scalar_symbol_name\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_scalar_access_key_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _split_nested_access_path_segments\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_nested_access_segment_expr\b.*my \$require_dep = sub \{.*\$lower_method_value_expr = \$require_dep->\('lower_method_value_expr'\).*sub _lower_assignment_source_expr\b.*my \$require_dep = sub \{.*\$lower_method_value_expr = \$require_dep->\('lower_method_value_expr'\).*sub _strip_literal_delimiters\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\)/s, 'ValueExpr.pm now keeps callback validation inline inside its value-expression lowering seams');
 };
 subtest 'actionir_flow_expr_helpers_keep_inline_callback_validation' => sub {
     plan tests => 3;
@@ -1996,7 +1996,6 @@ subtest 'emit_context_method_lowering_deps_route_through_owner_default_map' => s
             lower_declare_initializer_expr => sub { return 'init_ok' },
             parse_method_function_expr => sub { return { method => 'scalar', args => ['flag'] } },
             normalize_method_args_with_optional_scope => sub { return ['flag'] },
-            lower_scalaref_value_expr => sub { return 'scalaref_ok' },
             extract_array_symbol_name => sub { return 'items' },
             extract_hash_symbol_name => sub { return 'map' },
             extract_scalar_symbol_name => sub { return "scalar_for_$pkg" },
@@ -2588,7 +2587,6 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_split_declare_symbol_names = sub { return ['item'] };
     local *Synthetic::ActionIROwner::_parse_declare_binding_entry = sub { return { name => 'item' } };
     local *Synthetic::ActionIROwner::_lower_declare_initializer_expr = sub { return '$foo' };
-    local *Synthetic::ActionIROwner::_lower_scalaref_value_expr = sub { return '$$foo' };
     local *Synthetic::ActionIROwner::_lower_direct_nested_access_value_expr = sub { return '$foo->{bar}' };
     local *Synthetic::ActionIROwner::_extract_hash_symbol_name = sub { return 'lookup' };
     local *Synthetic::ActionIROwner::_lower_scalar_access_key_expr = sub { return '$foo->{bar}' };
@@ -12374,9 +12372,8 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_extract_array_symbol_name = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_ARRAY_SYMBOL_NAME__\n" };
         local *LinkedSpec::_extract_hash_symbol_name = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_HASH_SYMBOL_NAME__\n" };
         local *LinkedSpec::_lower_scalar_access_key_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SCALAR_ACCESS_KEY_EXPR__\n" };
-        local *LinkedSpec::_split_scalaref_path_segments = sub { die "__UNEXPECTED_LINKEDSPEC_SPLIT_SCALAREF_PATH_SEGMENTS__\n" };
-        local *LinkedSpec::_lower_scalaref_segment_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SCALAREF_SEGMENT_EXPR__\n" };
-        local *LinkedSpec::_lower_scalaref_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SCALAREF_VALUE_EXPR__\n" };
+        local *LinkedSpec::_split_nested_access_path_segments = sub { die "__UNEXPECTED_LINKEDSPEC_SPLIT_NESTED_ACCESS_PATH_SEGMENTS__\n" };
+        local *LinkedSpec::_lower_nested_access_segment_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_NESTED_ACCESS_SEGMENT_EXPR__\n" };
         local *LinkedSpec::_infer_scalar_container_kind = sub { die "__UNEXPECTED_LINKEDSPEC_INFER_SCALAR_CONTAINER_KIND__\n" };
         local *LinkedSpec::_lower_assignment_source_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ASSIGNMENT_SOURCE_EXPR__\n" };
         local *LinkedSpec::_strip_literal_delimiters = sub { die "__UNEXPECTED_LINKEDSPEC_STRIP_LITERAL_DELIMITERS__\n" };
@@ -12695,12 +12692,12 @@ subtest 'emit_context_avoids_deps_action_contract_dep_builder' => sub {
 subtest 'emit_context_avoids_deps_value_expr_dep_builder' => sub {
     plan tests => 6;
 
-    my ($ok_run, $err, $key_expr, $scalaref_expr) = (0, '', undef, undef);
+    my ($ok_run, $err, $key_expr, $direct_expr) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::value_expr_deps_for_package = sub { die "__UNEXPECTED_DEPS_VALUE_EXPR_DEPS__\n" };
         $key_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr('scalar(foo)');
-        $scalaref_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalaref_value_expr('retv', '[scalar(foo)]');
+        $direct_expr = LinkedSpec::RuleIR::EmitContext::_lower_direct_nested_access_value_expr('retv["content"][scalar(foo)]');
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12710,8 +12707,8 @@ subtest 'emit_context_avoids_deps_value_expr_dep_builder' => sub {
     unlike($err, qr/__UNEXPECTED_DEPS_VALUE_EXPR_DEPS__/, 'EmitContext does not call the trapped Deps value-expression dep builder');
     ok(defined($key_expr), 'EmitContext still returns lowered scalar access output through the ValueExpr-owned default deps');
     is($key_expr, '$foo', 'EmitContext preserves scalar access key lowering after moving default deps into ValueExpr');
-    ok(defined($scalaref_expr), 'EmitContext still returns lowered scalaref output through the ValueExpr-owned default deps');
-    is($scalaref_expr, '$retv->[$foo]', 'EmitContext preserves scalaref lowering after moving default deps into ValueExpr');
+    ok(defined($direct_expr), 'EmitContext still returns lowered direct-access output through the ValueExpr-owned default deps');
+    is($direct_expr, '$retv->{"content"}->[$foo]', 'EmitContext preserves direct nested-access lowering after moving default deps into ValueExpr');
 };
 subtest 'emit_context_avoids_deps_flow_expr_dep_builder' => sub {
     plan tests => 6;
@@ -13035,11 +13032,11 @@ subtest 'emit_context_require_avoids_value_expr_load_until_value_helper' => sub 
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_EAGER__\n" : "__VALUE_EXPR_STILL_LAZY__\n";
 my $key_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr("scalar(foo)");
-my $scalaref_expr = LinkedSpec::RuleIR::EmitContext::_lower_scalaref_value_expr("retv", "[scalar(foo)]");
-print defined($key_expr) && defined($scalaref_expr) ? "__VALUE_EXPR_RESULT_OK__\n" : "__VALUE_EXPR_RESULT_BAD__\n";
+my $direct_expr = LinkedSpec::RuleIR::EmitContext::_lower_direct_nested_access_value_expr("retv[\"content\"][scalar(foo)]");
+print defined($key_expr) && defined($direct_expr) ? "__VALUE_EXPR_RESULT_OK__\n" : "__VALUE_EXPR_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_AFTER_HELPER__\n" : "__VALUE_EXPR_STILL_UNLOADED__\n";
-if (defined($key_expr) && $key_expr eq "\$foo" && defined($scalaref_expr) && $scalaref_expr eq "\$retv->[\$foo]") {
+if (defined($key_expr) && $key_expr eq "\$foo" && defined($direct_expr) && $direct_expr eq "\$retv->{\"content\"}->[\$foo]") {
     print "__VALUE_EXPR_PAYLOAD_OK__\n";
 } else {
     print "__VALUE_EXPR_PAYLOAD_BAD__\n";
@@ -13051,7 +13048,7 @@ PERL
     like($out, qr/__VALUE_EXPR_RESULT_OK__/, 'value helper still returns lowered output after lazy ValueExpr loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'value helper lazy-loads EmitContext on demand');
     like($out, qr/__VALUE_EXPR_AFTER_HELPER__/, 'value helper lazy-loads ValueExpr on demand');
-    like($out, qr/__VALUE_EXPR_PAYLOAD_OK__/, 'value helper preserves scalar-access and scalaref lowering after lazy ValueExpr loading');
+    like($out, qr/__VALUE_EXPR_PAYLOAD_OK__/, 'value helper preserves scalar-access and direct nested-access lowering after lazy ValueExpr loading');
     is($err, '', 'EmitContext require/value-expr subprocess does not emit stderr');
 };
 subtest 'emit_context_require_avoids_control_flow_load_until_control_helper' => sub {
@@ -13178,7 +13175,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'MethodLowering',
             module      => 'LinkedSpec::ActionIR::MethodLowering',
-            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _lower_direct_nested_access_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _split_action_ir_statements _lower_array_pipeline_expr _lower_assignment_source_expr _lower_flow_composite_expr _strip_literal_delimiters)],
+            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_direct_nested_access_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _lower_primitive_literal_expr _infer_scalar_container_kind _split_top_level_csv _split_action_ir_statements _lower_array_pipeline_expr _lower_assignment_source_expr _lower_flow_composite_expr _strip_literal_delimiters)],
             sample_key  => 'split_declare_symbol_names',
             sample_name => '_split_declare_symbol_names',
         },
@@ -45612,7 +45609,7 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
     # SPEC-FORMAT-TERSE.1.5.5.1: direct nested access lowers for explicit
     # path segments. Non-reserved bare path atoms are handled by the later
     # Channel 2 scalar-index rule; reserved atoms remain outside direct lowering.
-    plan tests => 7;
+    plan tests => 8;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $run = sub {
@@ -45639,7 +45636,12 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][scalar(z)])'),
         'return $foo->{"a"}->[9]->{"b"}->[$z]',
-        'direct nested access matches the existing scalaref lowering for the explicit path',
+        'direct nested access lowers the explicit mixed path',
+    );
+    like(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(scalaref(foo, "a"))'),
+        qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:scalaref/,
+        'retired function-form scalaref is no longer lowered as a supported value helper',
     );
 
     my $spec = "Top::\n"
@@ -45988,7 +45990,7 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.2: hash receiver-dot value chains feed the
     # receiver into existing pure hash helper contracts. Statement-level
     # set_key(...) and hash-index assignment remain the mutating forms.
-    plan tests => 13;
+    plan tests => 14;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -46008,7 +46010,9 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
     like($L->('return(meta.set_key("c",3).sorted_keys().join_values(","))'), qr/__ls_set_key.*sort keys.*join/s,
         'hash receiver chain lowers through set_key/sorted_keys/join_values helper contracts');
     like($L->('return(scalar(hash(meta), "a"))'), qr/\$meta\{"a"\}/s,
-        'named hash scalar field reads replace receiver-dot scalaref for direct field access');
+        'named hash scalar field reads are the direct field-access spelling');
+    like($L->('return(hash(meta).scalaref("a"))'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:scalaref/s,
+        'retired receiver-dot scalaref is no longer lowered as a supported hash method');
     like($L->('return(hash(meta).rename_key("a","aa").drop_keys("b").set_key("z",4).count_keys())'), qr/__ls_rename_key.*__ls_drop.*__ls_count_keys/s,
         'explicit hash receiver chains hash-returning helpers into count_keys');
     like($L->('return(meta.hash_copy().flat_hash().count_keys())'), qr/__ls_flat_hash.*__ls_count_keys/s,

@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SCALAREF-RETIREMENT.4 — remove scalaref implementation support
+
+**Scope:** Perl ActionIR value/method/flow lowering, Perl EmitContext owner bridge, Rust expression parser,
+Rust validation/runtime dispatch, focused Perl/Rust regression locks, public architecture wording, and Knowledge
+Map/live-doc synchronization.
+
+**What changed:** `scalaref(...)` is no longer a supported helper on Perl or Rust. Perl removed the
+function-form lowering path, the receiver-dot hash-chain terminal, and helper-whitelist recognition. The remaining
+direct-access internals were renamed to `_split_nested_access_path_segments(...)` and
+`_lower_nested_access_segment_expr(...)` so they describe the surviving `foo["key"][idx]` surface rather than the
+retired helper. Rust removed the scoped `ScalarRefPath` AST/parser hook, validation support, runtime evaluator,
+and `call_helper("scalaref", ...)` arm.
+
+**Behavior:** Migrated positive examples continue to use direct nested access or `scalar(hash(name), key)`.
+Function-form `scalaref(...)` now follows the existing unsupported/unknown-helper policy: Perl emits the
+unsupported-helper diagnostic sentinel in focused lowering, while Rust evaluation returns `undef`/JSON `null`.
+Receiver-dot `.scalaref(...)` is no longer a supported hash receiver method.
+
+**Checks:** Perl syntax checks for the touched ActionIR/EmitContext modules and `t/phase0_regression.t`; focused
+Rust parser/runtime checks for direct access and `SCALAREF-RETIREMENT.3`/`.4`; implementation and public-surface
+`scalaref` scans; full phase0; Rust corpus oracle; mdBook build; Knowledge Map regeneration/check; memory
+architecture; doctrine registry; `git diff --check`.
+
 ## 2026-07-02 — SCALAREF-RETIREMENT.3 — migrate scalaref live surface
 
 **Scope:** Shipped specs, checked-in Rust oracle fixtures, public/user guides, focused tests, and the minimum

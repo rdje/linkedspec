@@ -1924,6 +1924,36 @@ Done::
 }
 
 #[test]
+fn scalaref_retirement_4_function_helper_returns_undef_as_unknown_helper() {
+    let grammar = r#"Top::
+ /x/ -> Done { return(scalaref(retv, "content")) }
+
+Done::
+ /[a-z]+/ I.return(hash("content", entry_text()))
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([null]),
+        "function-form scalaref is no longer a recognized Rust helper"
+    );
+}
+
+#[test]
+fn scalaref_retirement_4_receiver_method_returns_undef() {
+    let grammar = r#"Top::
+ /x/ -> Done { set_key(meta, "a", 1); return(hash(meta).scalaref("a")) }
+
+Done::
+ /[a-z]+/
+"#;
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([null]),
+        "receiver-dot scalaref is no longer a recognized Rust hash method"
+    );
+}
+
+#[test]
 fn rust_parity_7_5_2_assign_array_wrapper_replaces_array_value() {
     let grammar = "Top::\n /x/ -> Done { push_value(array(word), \"x\"); assign(array(word), array()); push_value(array(word), \"y\"); return(array_copy(array(word))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(

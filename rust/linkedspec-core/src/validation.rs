@@ -359,7 +359,6 @@ fn is_known_actionir_call_name(name: &str) -> bool {
                 | "rm_suffix"
                 | "say"
                 | "scalar"
-                | "scalaref"
                 | "set"
                 | "set_key"
                 | "slice"

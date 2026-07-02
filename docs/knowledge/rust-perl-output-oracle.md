@@ -22,13 +22,13 @@ answers:
   - "which leaf owns Rust tclite default-mode repetition parity"
   - "when did the shipped tclite fixtures enter the Rust oracle corpus"
   - "when did the shipped Lispish fixture enter the Rust oracle corpus"
-  - "does Rust support scalaref(retv, {content})"
+  - "did Rust temporarily support scalaref(retv, {content}) before retirement"
   - "does child return leak into the parent accumulator in Rust"
   - "does a regex on a rule header line register in the Rust parser"
 date: 2026-07-02
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
-evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3 (2026-06-30): retrying tclite after fluent parity still failed the two temporarily re-enabled fixtures: Perl returns tagged tcl_script values for [] and \"\", while Rust returned []. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active; corpus_oracle passes over 41 fixtures. RUST-PARITY.7.5.3 reconciliation (2026-07-02): the action-edge fluent parity leaf is marked done from those committed implementation/corpus facts. RUST-PARITY.7.5.2 (2026-07-02): Rust parses scoped ScalarRefPath in scalaref's second argument, evaluates legacy {content}/[index] paths, contains child-return accumulator pushes at child invocation boundaries, supports Lispish aggregate-wrapper assignment, and enables lispish_x_y; corpus_oracle passes over 63 fixtures."
+evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active. RUST-PARITY.7.5.2 (2026-07-02) temporarily restored legacy Lispish scalaref parity; SCALAREF-RETIREMENT.3 migrated Lispish to direct access, and SCALAREF-RETIREMENT.4 removed scalaref implementation support. corpus_oracle passes over 63 fixtures."
 reverify: "cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
@@ -108,12 +108,12 @@ owned by `.7.2` / `.7.3`.
   return exits before local entry-regex matching. `tclite_command_subst` (`[]`) and `tclite_double_quote`
   (`""`) are active fixtures in `tools/gen_oracle_corpus.pl` and the checked-in corpus; `corpus_oracle` passes
   with 41 fixtures.
-- **Lispish legacy `scalaref` path parity (`.7.5.2`, LANDED 2026-07-02).** Lispish uses
-  `{ code }` blocks rather than action-edge fluent continuations and reads child return
-  fields through the legacy `scalaref(retv, {content})` path surface. Rust now parses a
-  scoped `ScalarRefPath` only for `scalaref`'s second positional argument, evaluates mixed
-  `{key}` / `[index]` paths, treats bare legacy path atoms as literal keys, and enables the
-  `lispish_x_y` fixture.
+- **Lispish fixture parity (`.7.5.2` then `SCALAREF-RETIREMENT`, LANDED 2026-07-02).**
+  Lispish uses `{ code }` blocks rather than action-edge fluent continuations. `.7.5.2`
+  temporarily restored legacy `scalaref(retv, {content})` parity so the shipped fixture
+  could enter the oracle corpus. `SCALAREF-RETIREMENT.3` then migrated that fixture to
+  direct nested access, and `SCALAREF-RETIREMENT.4` removed `ScalarRefPath` plus runtime
+  helper support. The `lispish_x_y` fixture remains active in the 63-fixture corpus.
 - **Child return accumulator containment (`.7.5.2`, LANDED 2026-07-02).** The `.5.1`
   model made `return(expr)` push to the current invocation accumulator and record the
   return channel. `.7.5.2` adds child invocation containment: after child dispatch or
@@ -142,8 +142,9 @@ ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
   `SPEC-FORMAT-TERSE.2.3.3.1`; compact lifecycle/body fluent forms landed under
   `SPEC-FORMAT-TERSE.2.3.3.3.1`; action-edge explicit/flow fluent chains landed under
   `SPEC-FORMAT-TERSE.2.3.3.3.2`; tclite retry under `.2.3.3.3.3` split default-mode recursive repetition
-  parity, `.2.3.3.3.3.1` landed the two minimal shipped `tclite` fixtures, and `.7.5.2`
-  landed the minimal shipped Lispish fixture)
+  parity, `.2.3.3.3.3.1` landed the two minimal shipped `tclite` fixtures, `.7.5.2`
+  temporarily landed the minimal shipped Lispish fixture, and `SCALAREF-RETIREMENT.3/.4`
+  migrated it to direct access before removing the legacy helper)
 - ADR: `docs/decisions/0006-multi-backend-vision.md` (§Phase 8.6 language-neutral corpus)
 - Related: [[rust-tclite-default-mode-repetition-gap]], [[rust-retv-propagation]],
   [[rust-lifecycle-i-return-dispatch-parity]], [[rust-edge-semantics-bug]], [[rust-entry-match-separation]]

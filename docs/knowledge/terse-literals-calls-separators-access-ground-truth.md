@@ -13,7 +13,7 @@ answers:
 date: 2026-06-29
 status: confirmed
 tags: [dsl, literals, calls, semicolons, nested-access, spec-format-terse, SPEC-FORMAT-TERSE, actionir, rust, parser]
-evidence: "KM retrieval first, then TOOLBOX probes 2026-06-29 at SPEC-FORMAT-TERSE.1.5 split time. `call_spec_handler_subst` showed string/number/undef returns lower, optional whitespace before `(` lowers at supported sites (`return (..)`, `set (..)`, `cat (..)` in value positions, `scalar (..)`), direct mixed bracket access was not yet the working scalaref path, and explicit `scalaref(foo,{\"a\"}[9]{'b'}[scalar(z)])` lowered to `$foo->{\"a\"}->[9]->{'b'}->[$z]`. `LinkedSpec::Get` runtime probes showed Perl returns JSON `\"true\"`/`\"false\"` strings for `return(true)`/`return(false)`, not booleans. Separator probes showed `StatementSplit` identifies newline-separated `set(...)\nreturn(...)`, but rewrite emits `$name = \"a\"\nreturn $name`, which fails generated-handler compilation without an explicit semicolon. Later direct-access work landed explicit segments under SPEC-FORMAT-TERSE.1.5.5.1 and non-reserved bare path atoms under SPEC-FORMAT-TERSE.1.2.3.3.3."
+evidence: "KM retrieval first, then TOOLBOX probes 2026-06-29 at SPEC-FORMAT-TERSE.1.5 split time. `call_spec_handler_subst` showed string/number/undef returns lower, optional whitespace before `(` lowers at supported sites (`return (..)`, `set (..)`, `cat (..)` in value positions, `scalar (..)`), direct mixed bracket access was not yet the working scalaref path, and explicit `scalaref(foo,{\"a\"}[9]{'b'}[scalar(z)])` lowered to `$foo->{\"a\"}->[9]->{'b'}->[$z]`. `LinkedSpec::Get` runtime probes showed Perl returns JSON `\"true\"`/`\"false\"` strings for `return(true)`/`return(false)`, not booleans. Separator probes showed `StatementSplit` identifies newline-separated `set(...)\nreturn(...)`, but rewrite emits `$name = \"a\"\nreturn $name`, which fails generated-handler compilation without an explicit semicolon. Later direct-access work landed explicit segments under SPEC-FORMAT-TERSE.1.5.5.1 and non-reserved bare path atoms under SPEC-FORMAT-TERSE.1.2.3.3.3; SCALAREF-RETIREMENT.4 later removed the legacy helper."
 reverify: "rg -n 'SPEC-FORMAT-TERSE.1.5.1|SPEC-FORMAT-TERSE.1.5.5.1|SPEC-FORMAT-TERSE.1.2.3.3.3|terse-direct-access-bare-path-atoms' docs/tasks/SPEC-FORMAT-TERSE.md docs/knowledge/terse-literals-calls-separators-access-ground-truth.md docs/knowledge/terse-direct-access-explicit-segments.md docs/knowledge/terse-direct-access-bare-path-atoms.md"
 ---
 
@@ -37,10 +37,10 @@ implementation seam.
   statements, so generated handler compilation fails unless the author writes `;`. Rust currently accepts
   newline-separated parser tests and also has broader whitespace-separated statement parsing.
 - **Direct nested access was not landed at split time.** Existing explicit helper syntax could express nested
-  paths via `scalaref(base,path)`, for example `scalaref(foo,{"a"}[9]{'b'}[scalar(z)])`. Direct explicit
-  bracket access later landed under `.1.5.5.1`, and non-reserved bare path atoms later landed under
-  `.1.2.3.3.3`; see [[terse-direct-access-explicit-segments]] and [[terse-direct-access-bare-path-atoms]] for
-  current behavior.
+  paths via `scalaref(base,path)` at that point. Direct explicit bracket access later landed under `.1.5.5.1`,
+  non-reserved bare path atoms later landed under `.1.2.3.3.3`, and `SCALAREF-RETIREMENT.4` later removed the
+  legacy helper; see [[terse-direct-access-explicit-segments]], [[terse-direct-access-bare-path-atoms]], and
+  [[scalaref-implementation-removed]] for current behavior.
 
 ## Split Consequence
 

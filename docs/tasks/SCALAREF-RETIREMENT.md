@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — .spec language evolution / compatibility retirement`
 - Created: `2026-07-02`
-- Last updated: `2026-07-02` (`.3` done — live surface migrated; frontier -> `.4`)
+- Last updated: `2026-07-02` (`.4` done — implementation support removed; frontier `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -61,11 +61,11 @@ with canonical direct nested access and the eventual non-Perl-shaped hash/object
   Commit: `SCALAREF-RETIREMENT.3 - migrate scalaref live surface` (see Commit Log)
 
 - ID: `SCALAREF-RETIREMENT.4`
-  Status: `pending`
+  Status: `done`
   Goal: Remove `scalaref(...)` recognition/execution from Perl and Rust.
   Acceptance: Perl lowering/scanner contracts and Rust parser/runtime no longer accept `scalaref(...)` as a supported helper; unsupported uses fail consistently with the current diagnostic policy; focused negative tests lock the rejection; migrated positive tests stay green.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-02. Perl function-form and receiver-dot support removed from ActionIR lowering/flow/return paths; Rust `ScalarRefPath` parsing/runtime dispatch removed; focused Perl/Rust negative locks added while migrated direct-access positives stay green.
+  Commit: `SCALAREF-RETIREMENT.4 - remove scalaref implementation support` (pending commit in this slice)
 
 - ID: `SCALAREF-RETIREMENT.5`
   Status: `pending`
@@ -81,8 +81,8 @@ with canonical direct nested access and the eventual non-Perl-shaped hash/object
 | — | `SCALAREF-RETIREMENT.1` | `done` | Directive owned and split before behavior changes. |
 | — | `SCALAREF-RETIREMENT.2` | `done` | Inventory and replacement contract locked before behavior changes. |
 | — | `SCALAREF-RETIREMENT.3` | `done` | Live specs/tests/docs migrated after the replacement contract was locked. |
-| 1 | `SCALAREF-RETIREMENT.4` | `pending` | Remove implementation support after live users are migrated. |
-| 2 | `SCALAREF-RETIREMENT.5` | `pending` | Final no-drift sweep and tree close. |
+| — | `SCALAREF-RETIREMENT.4` | `done` | Implementation support removed after live users were migrated. |
+| 1 | `SCALAREF-RETIREMENT.5` | `pending` | Final no-drift sweep and tree close. |
 
 ## Inventory and Replacement Contract
 
@@ -111,6 +111,7 @@ Canonical replacement:
 - `2026-07-02`: Replacement is expected to be direct nested access plus the future non-Perl-shaped hash/object literal surface, but `.2` must prove the exact contract from current uses before code changes.
 - `2026-07-02`: `.2` proved direct nested access is sufficient for function-form shipped spec calls. Receiver-dot `.scalaref(key)` is also in retirement scope; expression receivers require a named working-hash temporary before reading with `scalar(hash(temp), key)`. Direct bracket reads remain valid for scalar hashref payloads such as `retv["key"]`, not as working-hash value reads.
 - `2026-07-02`: `.3` migrated the active live surface away from both function-form and receiver-dot `scalaref` examples. Implementation recognition remains only as pre-removal compatibility until `.4`.
+- `2026-07-02`: `.4` removed implementation recognition/execution. Old `scalaref(...)` spellings now follow the existing unsupported-helper/unknown-helper policy; direct nested access and named working-hash reads are the supported replacements.
 
 ## Open Questions
 
@@ -128,6 +129,7 @@ Canonical replacement:
 | `2026-07-02` | `SCALAREF-RETIREMENT.1` | Task-tree/index/roadmap/live-doc/KM tracking only; Knowledge Map regeneration/check, memory architecture, doctrine registry, mdBook build, `git diff --check` | Directive owned; no behavior change |
 | `2026-07-02` | `SCALAREF-RETIREMENT.2` | `rg` inventory across specs, corpus, Perl/Rust implementation, tests, tools, mdBook, user guides, live docs, task trees, and Knowledge Map; Perl `call_spec_handler_subst` direct-access probes; Rust direct-access parser/runtime focused tests; Knowledge Map/memory/doctrine/diff checks in commit workflow | Replacement contract locked; no behavior change |
 | `2026-07-02` | `SCALAREF-RETIREMENT.3` | `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; focused Rust `scalaref_retirement_3`, hash receiver-chain, and hash consumer tests; Rust corpus oracle; `perl -c -Iperl t/phase0_regression.t`; `prove -q -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml --check`; active `scalaref(` / `.scalaref(` scans; `git diff --check` | Live specs/tests/corpus/docs migrated; phase0 1015 green; corpus oracle 63 fixtures green |
+| `2026-07-02` | `SCALAREF-RETIREMENT.4` | Perl syntax checks for `ValueExpr.pm`, `MethodLowering.pm`, `FlowExpr.pm`, `EmitContext.pm`, and `t/phase0_regression.t`; `prove -q -Iperl t/phase0_regression.t`; focused Rust parser/runtime checks for direct access and `scalaref_retirement_3`/`.4`; `cargo fmt --all -- --check`; `cargo check` for `linkedspec-core` and `linkedspec-runtime`; Rust corpus oracle; implementation removal scan; public-surface scan; `mdbook build docs/linkedspec-book`; Knowledge Map, memory architecture, doctrine registry, and diff checks | Implementation support removed; rejection behavior locked; migrated positives stay green; phase0 1015 green |
 
 ## Commit Log
 
@@ -136,9 +138,11 @@ Canonical replacement:
 | `SCALAREF-RETIREMENT.1` | `SCALAREF-RETIREMENT.1 - own scalaref retirement track` | Tracking-only split; next executable leaf is `.2` inventory/design. |
 | `SCALAREF-RETIREMENT.2` | `SCALAREF-RETIREMENT.2 - inventory scalaref retirement contract` | Inventory/replacement contract only; next executable leaf is `.3` migration. |
 | `SCALAREF-RETIREMENT.3` | `SCALAREF-RETIREMENT.3 - migrate scalaref live surface` | Shipped specs, checked-in corpus, tests, and public docs no longer use active `scalaref` examples; next executable leaf is `.4` implementation removal. |
+| `SCALAREF-RETIREMENT.4` | `SCALAREF-RETIREMENT.4 - remove scalaref implementation support` | Perl/Rust implementation support removed; next executable leaf is `.5` final drift sweep. |
 
 ## Changelog
 
 - `2026-07-02`: Created tree from user directive that `scalaref(...)` shall be retired and removed.
 - `2026-07-02`: `.2` inventory done. Function form migrates to direct nested access; receiver-dot form migrates through named hash temporaries where the receiver is an expression.
 - `2026-07-02`: `.3` migration done. Active `scalaref` examples are gone from shipped specs, checked-in corpus, tests, generator, mdBook, and user guides; implementation removal moves to `.4`.
+- `2026-07-02`: `.4` implementation removal done. Perl/Rust no longer support function-form or receiver-dot `scalaref`; final drift sweep moves to `.5`.

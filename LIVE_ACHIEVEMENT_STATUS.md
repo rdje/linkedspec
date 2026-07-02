@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SCALAREF-RETIREMENT.4 — scalaref implementation support removed**
+  (PERL ACTIONIR + RUST PARSER/RUNTIME + REJECTION LOCKS).
+  Perl no longer lowers function-form `scalaref(...)` or receiver-dot `.scalaref(...)`, and Rust no longer parses
+  or evaluates the legacy `ScalarRefPath` form. The surviving direct-access internals now use neutral nested
+  access names, while direct `retv["content"]` / `retv[0]` payload reads and named working-hash reads through
+  `scalar(hash(name), key)` remain supported.
+
+  **Rejection contract:** focused Perl lowering reports the existing
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:scalaref` sentinel; Rust unknown-helper evaluation returns
+  `undef`/JSON `null`. Focused negative tests lock both function-form and receiver-dot spellings.
+
+  **Verification:** Perl syntax checks PASS; `prove -q -Iperl t/phase0_regression.t` PASS (1015); Rust
+  direct-access and `scalaref_retirement_3`/`.4` focused tests PASS; `cargo fmt --all -- --check` PASS;
+  `cargo check` for `linkedspec-core` and `linkedspec-runtime` PASS; Rust corpus oracle PASS; implementation
+  removal and public-surface scans PASS; `mdbook build docs/linkedspec-book` PASS; Knowledge Map check PASS;
+  memory/doctrine/diff final gates PASS in commit workflow.
+
+  **Frontier:** `SCALAREF-RETIREMENT.5` — final no-drift sweep and tree close-out.
+
 - 2026-07-02: **SCALAREF-RETIREMENT.3 — scalaref live surface migrated**
   (SHIPPED SPECS + TESTS + CORPUS + PUBLIC DOCS; **implementation support still present until `.4`**).
   Shipped specs, checked-in Rust oracle fixtures, focused tests, public mdBook chapters, and user guides no longer

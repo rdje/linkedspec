@@ -11,8 +11,8 @@ answers:
 date: 2026-07-02
 status: confirmed
 tags: [dsl, retirement, scalaref, direct-access, migration]
-evidence: "SCALAREF-RETIREMENT.2 inventory: rg found 16 function-form scalaref calls in shipped specs, live corpus/test/tool/doc implementation support, 332 mdBook/user-guide function-form references, and receiver-dot .scalaref examples. Perl call_spec_handler_subst proves retv[\"content\"], retv[\"children\"][0][\"name\"], cur_object[1], and first_capt[0] lower correctly. Rust direct-access parser/runtime focused tests pass."
-reverify: "rg -n 'scalaref\\(' specs rust/linkedspec-runtime/tests/corpus docs/linkedspec-book/src USER_GUIDE*.md perl rust t tools && perl -Iperl -MLinkedSpec -e 'for my $expr (q{return(retv[\"content\"])}, q{return(retv[\"children\"][0][\"name\"])}, q{return(cur_object[1])}) { print LinkedSpec::call_spec_handler_subst(\"Top\",$expr), \"\\n\" }'"
+evidence: "SCALAREF-RETIREMENT.2 inventory: rg found 16 function-form scalaref calls in shipped specs, live corpus/test/tool/doc implementation support, 332 mdBook/user-guide function-form references, and receiver-dot .scalaref examples before migration. SCALAREF-RETIREMENT.3 migrated shipped specs/corpus/docs/tests to direct access or named working-hash reads, and .4 removed implementation support. Perl call_spec_handler_subst proves retv[\"content\"], retv[\"children\"][0][\"name\"], cur_object[1], and first_capt[0] lower correctly. Rust direct-access parser/runtime focused tests pass."
+reverify: "bash -lc '! rg -n \"scalaref\\(|\\.scalaref\\(\" specs rust/linkedspec-runtime/tests/corpus docs/linkedspec-book/src USER_GUIDE*.md tools/gen_oracle_corpus.pl rust/README.md'"
 ---
 
 # `scalaref(...)` Retirement Inventory Contract
@@ -33,5 +33,4 @@ assign the hash expression to a named working hash temporary first, then read fr
 temporary with `scalar(hash(temp), key)`.
 
 `SCALAREF-RETIREMENT.3` has migrated shipped specs, fixtures, tests, and public docs.
-Implementation support remains only as pre-removal compatibility until
-`SCALAREF-RETIREMENT.4`.
+`SCALAREF-RETIREMENT.4` has removed implementation support.

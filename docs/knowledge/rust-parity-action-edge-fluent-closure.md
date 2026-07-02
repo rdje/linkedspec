@@ -10,8 +10,8 @@ answers:
 date: 2026-07-02
 status: current
 tags: [rust, RUST-PARITY, spec-format-terse, fluent, tclite, oracle]
-evidence: "RUST-PARITY.7.5.3 was a stale parity frontier after SPEC-FORMAT-TERSE landed the implementation pieces: .2.3.3.1 added ActionEdge/AcodeEntry fluent_chain metadata plus no-arg action-edge .push/.return/.return_undef runtime execution; .2.3.3.3.2 completed explicit-target and flow action-edge continuations; .2.3.3.3.3.1 fixed the separate tclite default-mode repetition and child-preamble-return gap, then restored tclite_command_subst and tclite_double_quote to the oracle corpus. The 2026-07-02 RUST-PARITY.7.5.3 reconciliation marks the leaf done and moves the frontier to RUST-PARITY.7.5.2 for Lispish scalaref(retv, {content})."
-reverify: "rg -n 'RUST-PARITY\\.7\\.5\\.3|SPEC-FORMAT-TERSE\\.2\\.3\\.3\\.3\\.2|execute_action_edge_fluent_chain|tclite_command_subst|tclite_double_quote|RUST-PARITY\\.7\\.5\\.2' docs/tasks/RUST-PARITY.md docs/tasks/SPEC-FORMAT-TERSE.md rust/linkedspec-runtime/src/engine.rs tools/gen_oracle_corpus.pl"
+evidence: "RUST-PARITY.7.5.3 was a stale parity frontier after SPEC-FORMAT-TERSE landed the implementation pieces: .2.3.3.1 added ActionEdge/AcodeEntry fluent_chain metadata plus no-arg action-edge .push/.return/.return_undef runtime execution; .2.3.3.3.2 completed explicit-target and flow action-edge continuations; .2.3.3.3.3.1 fixed the separate tclite default-mode repetition and child-preamble-return gap, then restored tclite_command_subst and tclite_double_quote to the oracle corpus. The 2026-07-02 RUST-PARITY.7.5.3 reconciliation marked the leaf done, .7.5.2 later temporarily restored Lispish parity, and SCALAREF-RETIREMENT.3/.4 migrated/removed scalaref before RUST-PARITY returns to .7.2."
+reverify: "rg -n 'RUST-PARITY\\.7\\.5\\.3|SPEC-FORMAT-TERSE\\.2\\.3\\.3\\.3\\.2|execute_action_edge_fluent_chain|tclite_command_subst|tclite_double_quote|RUST-PARITY\\.7\\.2|SCALAREF-RETIREMENT\\.4' docs/TASK_TREE.md docs/tasks/RUST-PARITY.md docs/tasks/SPEC-FORMAT-TERSE.md docs/tasks/SCALAREF-RETIREMENT.md rust/linkedspec-runtime/src/engine.rs tools/gen_oracle_corpus.pl"
 ---
 
 # Rust Parity Action-Edge Fluent Closure
@@ -24,5 +24,5 @@ owned `SPEC-FORMAT-TERSE` Rust work:
 - `.2.3.3.3.3.1`: the separate `tclite` default-mode repetition and child-preamble-return fix, with
   `tclite_command_subst` and `tclite_double_quote` restored as active oracle fixtures.
 
-The current RUST-PARITY frontier is `.7.5.2`, the independent Lispish `scalaref(retv, {content})` parser/runtime
-gap. Do not re-audit action-edge fluent continuations before working that leaf.
+The next RUST-PARITY frontier is `.7.2` after `SCALAREF-RETIREMENT` closes. Do not
+re-audit action-edge fluent continuations before working that leaf.

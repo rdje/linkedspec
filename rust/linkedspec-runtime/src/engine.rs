@@ -32,7 +32,7 @@
 
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::RuntimeContext;
-use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr, ScalarRefPathSegment};
+use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::types::{CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue};
 use serde_json::Value;
 
@@ -551,11 +551,6 @@ impl Engine {
             Expr::NestedAccess { segments, .. } => segments.iter().any(|segment| match segment {
                 AccessSegment::Key { .. } => false,
                 AccessSegment::Index { expr } => Self::expr_calls_rule(expr, rule_label),
-            }),
-            Expr::ScalarRefPath { segments } => segments.iter().any(|segment| match segment {
-                ScalarRefPathSegment::Key { expr } | ScalarRefPathSegment::Index { expr } => {
-                    Self::expr_calls_rule(expr, rule_label)
-                }
             }),
             Expr::ArrayLiteral { items } => items
                 .iter()
@@ -1396,9 +1391,6 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Hash(values))
             }
-            Expr::ScalarRefPath { segments } => {
-                Ok(RuntimeValue::Scalar(Self::format_scalaref_path(segments)))
-            }
             Expr::BlockValue { block } => self.eval_block_value(block, ctx, rule_label),
             Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
             Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),
@@ -1549,7 +1541,7 @@ impl Engine {
     }
 
     fn is_hash_receiver_terminal_method(method: &str) -> bool {
-        matches!(method, "count_keys" | "has_key" | "scalaref")
+        matches!(method, "count_keys" | "has_key")
     }
 
     fn is_string_receiver_value_chain_method(method: &str) -> bool {
@@ -2360,104 +2352,6 @@ impl Engine {
         }
 
         evaluated
-    }
-
-    fn scalaref_container_arg(
-        &self,
-        raw_args: &[linkedspec_core::expr::Arg],
-        args: &[RuntimeValue],
-        index: usize,
-        ctx: &RuntimeContext,
-        first_segment: Option<&ScalarRefPathSegment>,
-    ) -> RuntimeValue {
-        use linkedspec_core::expr::{Arg, Expr};
-
-        let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
-        if matches!(evaluated, RuntimeValue::Array(_) | RuntimeValue::Hash(_)) {
-            return evaluated;
-        }
-
-        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
-            return match first_segment {
-                Some(ScalarRefPathSegment::Index { .. }) => {
-                    RuntimeValue::Array(ctx.array_copy(name))
-                }
-                _ => RuntimeValue::Hash(ctx.hash_copy(name)),
-            };
-        }
-
-        evaluated
-    }
-
-    fn format_scalaref_path(segments: &[ScalarRefPathSegment]) -> String {
-        let mut path = String::new();
-        for segment in segments {
-            match segment {
-                ScalarRefPathSegment::Key { expr } => {
-                    path.push('{');
-                    path.push_str(&expr.to_string());
-                    path.push('}');
-                }
-                ScalarRefPathSegment::Index { expr } => {
-                    path.push('[');
-                    path.push_str(&expr.to_string());
-                    path.push(']');
-                }
-            }
-        }
-        path
-    }
-
-    fn eval_scalaref_path(
-        &self,
-        base: RuntimeValue,
-        segments: &[ScalarRefPathSegment],
-        ctx: &mut RuntimeContext,
-        rule_label: &str,
-    ) -> Result<RuntimeValue, String> {
-        let mut current = base;
-        for segment in segments {
-            current = match segment {
-                ScalarRefPathSegment::Key { expr } => {
-                    let key = self
-                        .eval_scalaref_path_atom(expr, ctx, rule_label)?
-                        .to_str();
-                    match current {
-                        RuntimeValue::Hash(entries) => entries
-                            .into_iter()
-                            .find(|(entry_key, _)| entry_key == &key)
-                            .map(|(_, value)| value)
-                            .unwrap_or(RuntimeValue::Undef),
-                        _ => RuntimeValue::Undef,
-                    }
-                }
-                ScalarRefPathSegment::Index { expr } => {
-                    let idx_value = self.eval_scalaref_path_atom(expr, ctx, rule_label)?;
-                    let idx = idx_value.as_number().unwrap_or(0.0) as usize;
-                    match current {
-                        RuntimeValue::Array(items) => {
-                            items.get(idx).cloned().unwrap_or(RuntimeValue::Undef)
-                        }
-                        _ => RuntimeValue::Undef,
-                    }
-                }
-            };
-        }
-        Ok(current)
-    }
-
-    fn eval_scalaref_path_atom(
-        &self,
-        expr: &linkedspec_core::expr::Expr,
-        ctx: &mut RuntimeContext,
-        rule_label: &str,
-    ) -> Result<RuntimeValue, String> {
-        use linkedspec_core::expr::Expr;
-
-        match expr {
-            Expr::Variable { name } => Ok(RuntimeValue::Scalar(name.clone())),
-            other => self.eval_expr(other, ctx, rule_label),
-        }
     }
 
     /// Resolve a child rule name from the first arg of a `call(...)` helper.
@@ -4059,31 +3953,6 @@ impl Engine {
                     Ok(RuntimeValue::Bool(entries.iter().any(|(k, _)| k == &key)))
                 } else {
                     Ok(RuntimeValue::Bool(false))
-                }
-            }
-            "scalaref" => {
-                if args.len() >= 2 {
-                    use linkedspec_core::expr::Expr;
-
-                    if let Some(Expr::ScalarRefPath { segments }) =
-                        raw_args.get(1).map(|arg| arg.value())
-                    {
-                        let base =
-                            self.scalaref_container_arg(raw_args, args, 0, ctx, segments.first());
-                        return self.eval_scalaref_path(base, segments, ctx, rule_label);
-                    }
-
-                    let key = args[1].to_str();
-                    match self.hash_consuming_arg(raw_args, args, 0, ctx) {
-                        RuntimeValue::Hash(entries) => Ok(entries
-                            .iter()
-                            .find(|(k, _)| k == &key)
-                            .map(|(_, v)| v.clone())
-                            .unwrap_or(RuntimeValue::Undef)),
-                        _ => Ok(RuntimeValue::Undef),
-                    }
-                } else {
-                    Ok(RuntimeValue::Undef)
                 }
             }
             "flat_hash" => {

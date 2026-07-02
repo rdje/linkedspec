@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SCALAREF-RETIREMENT.4 — removed scalaref implementation support):
+  `scalaref(...)` is now retired in implementation, not just migrated out of examples. Durable points. (1)
+  **Perl surface removed.** `ValueExpr` no longer exposes `_lower_scalaref_value_expr(...)`; MethodLowering no
+  longer accepts function-form `scalaref(...)` or receiver-dot `.scalaref(...)`; FlowExpr and return-payload
+  helper whitelists no longer treat it as a value helper. The surviving path parser was renamed to
+  `_split_nested_access_path_segments(...)` / `_lower_nested_access_segment_expr(...)` because it now serves only
+  direct nested access. (2) **Rust surface removed.** `ScalarRefPath`, the special second-argument parser hook,
+  validation support, runtime path evaluation, and the helper dispatch arm are gone. (3) **Failure policy.**
+  Perl focused lowering reports the existing unsupported-helper sentinel for both function-form and receiver-dot
+  uses; Rust unknown-helper evaluation returns `undef`/JSON `null`. (4) **Positive path.** Direct access such as
+  `retv["content"]` and named working-hash reads through `scalar(hash(meta), key)` remain the canonical
+  replacement contract.
+  Next frontier: `SCALAREF-RETIREMENT.5` final drift sweep and tree close-out.
+
 - 2026-07-02 (SCALAREF-RETIREMENT.3 — migrated scalaref live surface):
   The shipped/live surface no longer depends on the helper. Durable points. (1) **Direct-access function-form
   migration.** Shipped spec paths now use `retv["content"]`, `retv[0]`, `first_capt[0]`, and mixed
@@ -12,7 +26,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   payloads, for example `retv["key"]` or a scalar variable intentionally holding a hashref. (4) **Rust parity
   support.** Rust `scalar(hash_expr, key)` now reads from `RuntimeValue::Hash`, which keeps named-hash-temp
   replacements executable. (5) **Removal ordering.** Implementation recognition for `scalaref(...)` intentionally
-  remains until `SCALAREF-RETIREMENT.4` adds rejection/removal coverage.
+  remained until `SCALAREF-RETIREMENT.4`, which has since removed it.
   Verification: phase0 1015 PASS, Rust corpus oracle PASS over 63 fixtures, mdBook build PASS, active
   `scalaref(` / `.scalaref(` scans clean on shipped specs/corpus/docs/tests/tools. Next frontier:
   `SCALAREF-RETIREMENT.4`.
