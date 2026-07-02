@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SCALAREF-RETIREMENT.5 — scalaref retirement tree closed**
+  (FINAL DRIFT SWEEP + ROOT CORPUS + LIVE DOCS/KM/TASK INDEX).
+  Root language-neutral corpus fixtures now use direct nested access instead of `scalaref(...)`; current-facing
+  roadmap, architecture, method-like DSL, Rust parity, and Knowledge Map wording now labels legacy support as
+  retired/historical; `SCALAREF-RETIREMENT` moved to the completed task-tree index.
+
+  **Verification:** active `scalaref(` / `.scalaref(` scan over shipped specs, root/Rust corpus fixtures, mdBook,
+  user guide, generator, sources, and tests shows only intentional negative locks; root Lispish/tablegrep corpus
+  specs compile through `LinkedSpec::Get`; `tools/run_ci_local.sh` passes with phase0 1015 green; Knowledge Map,
+  mdBook, memory, doctrine, and diff gates pass in commit workflow.
+
+  **Frontier:** `RUST-PARITY.7.2` — expand the structurally simple oracle corpus batch.
+
 - 2026-07-02: **SCALAREF-RETIREMENT.4 — scalaref implementation support removed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + REJECTION LOCKS).
   Perl no longer lowers function-form `scalaref(...)` or receiver-dot `.scalaref(...)`, and Rust no longer parses
@@ -24,7 +37,7 @@ Current execution status for interruption-safe batch workflow recovery.
   removal and public-surface scans PASS; `mdbook build docs/linkedspec-book` PASS; Knowledge Map check PASS;
   memory/doctrine/diff final gates PASS in commit workflow.
 
-  **Frontier:** `SCALAREF-RETIREMENT.5` — final no-drift sweep and tree close-out.
+  **Frontier:** `SCALAREF-RETIREMENT.5` — final no-drift sweep and tree close-out (now complete).
 
 - 2026-07-02: **SCALAREF-RETIREMENT.3 — scalaref live surface migrated**
   (SHIPPED SPECS + TESTS + CORPUS + PUBLIC DOCS; **implementation support still present until `.4`**).

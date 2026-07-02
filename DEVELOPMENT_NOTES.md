@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SCALAREF-RETIREMENT.5 — closed scalaref retirement tree):
+  Final no-drift sweep complete. Durable points. (1) **Root corpus cleaned.** The older language-neutral
+  `tests/corpus/lispish` and `tests/corpus/tablegrep` examples now use direct nested access (`retv["content"]`,
+  `retv["type"]`) and compile through `LinkedSpec::Get`. (2) **Current-facing prose reconciled.** Roadmap,
+  architecture, method-like DSL, Rust parity, and KM wording now treats `scalaref(...)` as historical/retired
+  rather than active support. (3) **Residual active uses intentional.** Active scans across shipped specs, root
+  corpus, Rust corpus, mdBook, user guide, generator, sources, and tests find only the focused negative locks.
+  `tools/run_ci_local.sh` passes with phase0 1015 green. (4) **PNT handoff.** `SCALAREF-RETIREMENT` is closed;
+  resume at `RUST-PARITY.7.2`.
+
 - 2026-07-02 (SCALAREF-RETIREMENT.4 — removed scalaref implementation support):
   `scalaref(...)` is now retired in implementation, not just migrated out of examples. Durable points. (1)
   **Perl surface removed.** `ValueExpr` no longer exposes `_lower_scalaref_value_expr(...)`; MethodLowering no

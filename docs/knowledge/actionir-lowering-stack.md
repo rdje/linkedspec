@@ -22,7 +22,7 @@ The ActionIR subtree transforms `.spec` action code through a staged pipeline:
 5. **RewritePipeline** — glues scan→classify→lower together
 6. **MethodLowering** — the main lowering engine: converts method-call IR into Perl expressions. Handles 100+ helpers across scalar, numeric, array, hash, control-flow, and I/O families
 7. **FlowExpr** — flow-expression lowering for composite conditionals and switch
-8. **ValueExpr** — value-expression lowering for scalaref, array, hash projections
+8. **ValueExpr** — value-expression lowering for scalar access, direct nested access, array, and hash projections
 9. **ArrayPipeline** — array-pipeline plan building from split/filter/transform chains
 10. **ControlFlow** — marker-style and composite if/switch/else/endif lowering
 11. **DeclareMethod** — declare/assign typed declarations

@@ -29,8 +29,8 @@ The lowering boundary is:
 - parameters are rebound inside a generated function-local `do { ... }` block
 - function-local scalar, array, and hash working variables are declared in that block
 - final expression bodies and body-local `return(expr)` produce the function result
-- array/hash results can feed compatible receiver-dot chains such as `.length()` and
-  `.scalaref(...)`
+- array/hash results can feed compatible receiver-dot chains such as `.length()`; retired
+  `.scalaref(...)` field reads use named working-hash reads such as `scalar(hash(name), key)` instead
 - wrong arity remains an unresolved-helper diagnostic with zero raw fallback
 
 `SPEC-FORMAT-TERSE.4.2.3` adds standalone registered-call discard: a standalone

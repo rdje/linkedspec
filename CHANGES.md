@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SCALAREF-RETIREMENT.5 — close scalaref retirement tree
+
+**Scope:** Final drift sweep for legacy `scalaref(...)` references across root corpus fixtures, current-facing
+roadmap/architecture/task-tree prose, Knowledge Map cards, live docs, and task-tree/index status.
+
+**What changed:** Root language-neutral corpus fixtures for Lispish and tablegrep now use direct nested access
+(`retv["content"]`, `retv["type"]`) instead of legacy `scalaref(...)`. Current-facing roadmap, architecture,
+method-like DSL, Rust parity, and Knowledge Map wording now labels historical `scalaref` support as retired rather
+than active. `SCALAREF-RETIREMENT` is closed and moved to the completed task-tree index.
+
+**Checks:** Active `scalaref(` / `.scalaref(` scans now show only the intentional negative regression locks; the
+root Lispish/tablegrep corpus specs compile through `LinkedSpec::Get`; `tools/run_ci_local.sh` passes with phase0
+1015 green; Knowledge Map regeneration/check, mdBook, memory architecture, doctrine registry, and `git diff --check`
+pass in the commit workflow.
+
 ## 2026-07-02 — SCALAREF-RETIREMENT.4 — remove scalaref implementation support
 
 **Scope:** Perl ActionIR value/method/flow lowering, Perl EmitContext owner bridge, Rust expression parser,

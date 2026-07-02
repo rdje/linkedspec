@@ -37,10 +37,10 @@ I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
     assign(array(word), array());
    endif()
 }
- -> dquotes           {assign(scalar(retv), call(dquotes)); push_value(array(word), scalaref(retv, {content}))}
- -> sbrackets         {assign(scalar(retv), call(sbrackets)); push_value(array(word), scalaref(retv, {content}))}
- -> curlyb            {assign(scalar(retv), call(curlyb)); push_value(array(word), scalaref(retv, {content}))}
- -> others            {assign(scalar(retv), call(others)); push_value(array(word), scalaref(retv, {content}))}
+ -> dquotes           {assign(scalar(retv), call(dquotes)); push_value(array(word), retv["content"])}
+ -> sbrackets         {assign(scalar(retv), call(sbrackets)); push_value(array(word), retv["content"])}
+ -> curlyb            {assign(scalar(retv), call(curlyb)); push_value(array(word), retv["content"])}
+ -> others            {assign(scalar(retv), call(others)); push_value(array(word), retv["content"])}
  -> comments          {call(comments)}
 
  -> parenthesis[1]    {

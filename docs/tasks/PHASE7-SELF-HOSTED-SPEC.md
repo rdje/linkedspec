@@ -156,7 +156,7 @@ Helper functions recognized and lowered through ActionIR (sampled from 19 shippe
 - **Value constructors**: `hash(...)`, `array(...)`, `flat_array(...)`, `array_copy(...)`
 - **Return/control**: `return(...)`, `return_undef()`, `call(...)`, `assign(...)`, `next()`
 - **Match introspection**: `match_text()`, `entry_group(n)`, `entry_named(name)`
-- **State access**: `scalar(name)`, `array(name)`, `scalaref(name, {...})`
+- **State access**: `scalar(name)`, `array(name)`, `hash(name)`, direct nested access such as `base["field"][idx]`
 - **State mutation**: `push_value(...)`, `assign(scalar(x), ...)`, `push(...)`
 - **Predicates**: `matches(...)`, `contains_substr(...)`, `is_defined(...)`, `not(...)`, `and(...)`, `or(...)`, `is_empty(...)`
 - **Conditionals**: `if(cond); ...; else(); ...; endif()`

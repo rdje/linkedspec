@@ -82,9 +82,10 @@
   value-form `split(...)` / `substr(...)` are portable helper payloads. Rust now parses fluent chains after
   string literals. Prior **`.2.3.5.2` DONE** —
   hash receiver-dot value chains now run on Perl and Rust. Pure hash helpers can be chained from hash
-  receivers, `sorted_keys`/`sorted_values` bridge into array receiver chains, receiver-dot `scalaref(key)` reads
-  a field from the current hash value, and named `set_key(meta, ...)` / `meta[key] = value` remain the mutating
-  forms; `.3.3.3` later added hash-index expression values. Rust `merge_hash` now matches the documented
+  receivers, `sorted_keys`/`sorted_values` bridge into array receiver chains, and named `set_key(meta, ...)` /
+  `meta[key] = value` remain the mutating forms; receiver-dot `scalaref(key)` was later retired and replaced by
+  named working-hash reads such as `scalar(hash(meta), key)`. `.3.3.3` later added hash-index expression values.
+  Rust `merge_hash` now matches the documented
   later-argument override contract. Prior
   **`.2.3.5.1` DONE** — array receiver-dot value chains
   now run on Perl and Rust. Pure array helpers can be chained from array receivers, terminal helpers return
@@ -222,7 +223,8 @@
   direct-access bare path atoms work: `foo["a"][z]` lowers like
   `foo["a"][scalar(z)]` (`$foo->{"a"}->[$z]`) and auto-supplies one per-invocation `my $z`; quoted path
   segments stay hash keys, numeric/helper segments stay array indexes, reserved literals and engine locals are
-  not claimed, `scalaref(...)` compatibility is unchanged, and RHS-shape inference stays later. Phase0 is
+  not claimed, `scalaref(...)` compatibility was unchanged at that historical leaf and was later retired under
+  `SCALAREF-RETIREMENT`. RHS-shape inference stays later. Phase0 is
   **987 green** and mdBook is updated. Prior **`.1.2.3.3.2` DONE** — Perl scalar mutation-slot bare reads work:
   `items += VALUE`, `set_key(meta, KEY, VALUE)`, and `meta[KEY] = VALUE` read scalar working variables in
   accepted key/RHS slots, auto-supply one per-invocation `my $NAME`, preserve target inference (`@items` /
@@ -1295,8 +1297,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     coordination)
   Acceptance: Any-depth mixed access `foo["a"][9]['b'][z]` is designed and implemented on both variants, or
     split before code if the Channel 2 dependency is still too broad. The result must define base/value/index
-    semantics explicitly, coordinate with `.1.2.3` value-position bare-word reads, and preserve the existing
-    `scalaref(base, path)` behavior until the direct syntax fully supersedes it.
+    semantics explicitly, coordinate with `.1.2.3` value-position bare-word reads, and preserve the then-existing
+    `scalaref(base, path)` behavior until the direct syntax fully supersedes it. That legacy helper was later
+    retired under `SCALAREF-RETIREMENT`.
   Verification: **SPLIT 2026-06-29.** KM retrieval first (`terse-literals-calls-separators-access-ground-truth`,
     `terse-bare-working-vars-engine-gaps`), then TOOLBOX probes and code-read. Direct
     `return(foo["a"][9]["b"][scalar(z)])` currently rewrites to invalid Perl-shaped
@@ -1312,14 +1315,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Status: `done` (2026-06-29)
   Goal: Direct nested access with explicit path segments.
   Acceptance: Perl and Rust accept any-depth mixed direct bracket access with explicit segment expressions,
-    e.g. `foo["a"][9]["b"][scalar(z)]`, while preserving `scalaref(base,path)` as an accepted explicit helper.
+    e.g. `foo["a"][9]["b"][scalar(z)]`, while preserving the then-existing `scalaref(base,path)` explicit helper.
+    That legacy helper was later retired under `SCALAREF-RETIREMENT`.
     Segment kind semantics are documented and locked conservatively: quoted string segments are hash keys,
     numeric segments are array indexes, and helper/value expressions in brackets are explicit index
     expressions unless later Channel 2 work deliberately broadens them. Bare path segments such as `[z]` remain
     out of scope for this leaf.
   Verification: **DONE 2026-06-29.** Perl now lowers direct nested access in value positions through
-    `ActionIR::ValueExpr::_lower_direct_nested_access_value_expr`, reusing the existing `scalaref(...)`
-    segment splitter/lowerer so explicit paths produce the same dereference chain:
+    `ActionIR::ValueExpr::_lower_direct_nested_access_value_expr`, reusing the then-existing `scalaref(...)`
+    segment splitter/lowerer so explicit paths produced the same dereference chain:
     `foo["a"][9]["b"][scalar(z)]` -> `$foo->{"a"}->[9]->{"b"}->[$z]`. Single-quoted key segments are hash
     keys too. Bare path atoms such as `[z]` deliberately remain outside the canonical lowering. Rust core now
     models `AccessSegment::{Key,Index}` and `Expr::NestedAccess`; one-level non-key `name[index]` stays the
@@ -3258,7 +3262,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   subset is intentionally explicit: `foo["a"][9]["b"][scalar(z)]` is canonical, `foo["a"][9]["b"][z]` is not.
   Quoted string segments (`["a"]` / `['a']`) are hash-key segments. Numeric and helper/value-expression
   segments (`[9]`, `[scalar(z)]`) are array-index segments. Perl lowers the direct path through the same
-  dereference semantics as `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])`, and Rust models the same mixed path with
+  dereference semantics as the historical `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` path, and Rust models the same mixed path with
   `Expr::NestedAccess`. A single one-level non-key `foo[index]` remains the legacy indexed-variable form.
   Bare path atoms remain reserved for `.1.5.5.2` / Channel 2 so this leaf does not pre-empt the global
   bare-value-read model.
@@ -3266,7 +3270,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - `2026-06-29` (**`.1.5.5` direct nested access split** — explicit segment expressions before bare
   Channel 2 segments). TOOLBOX probes show direct `foo["a"][9]["b"][scalar(z)]` is not a valid lowered value
   expression today: it passes through as `foo["a"][9]["b"][$z]` and generated handler compilation fails near
-  `][`. The existing `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` path remains the working explicit syntax and
+  `][`. The then-existing `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` path was the working explicit syntax and
   lowers to `$foo->{"a"}->[9]->{"b"}->[$z]`. Bare path segment `z` is still a bare atom, so the full
   brainstorm spelling `foo["a"][9]["b"][z]` depends on Channel 2 value-position reads. Therefore `.1.5.5`
   becomes a container: `.1.5.5.1` implements explicit path segments first; `.1.5.5.2` owns bare path
@@ -4299,7 +4303,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - `2026-06-29`: **`.1.5.5` SPLIT — direct nested access divided by the Channel 2 boundary.**
   TOOLBOX probes show direct `foo["a"][9]["b"][scalar(z)]` is not yet a valid lowered value expression:
   it passes through as `foo["a"][9]["b"][$z]` and generated handler compilation fails near `][`.
-  Existing `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` remains the working explicit form and lowers to
+  Existing-at-the-time `scalaref(foo,{"a"}[9]{"b"}[scalar(z)])` was the working explicit form and lowered to
   `$foo->{"a"}->[9]->{"b"}->[$z]`. Bare segment `z` is still not a variable read, so the full brainstorm
   spelling `foo["a"][9]["b"][z]` is deferred to Channel 2. `.1.5.5.1` now owns explicit-segment direct
   access; `.1.5.5.2` owns bare-segment/Channel-2 coordination. No engine/book behavior change in this split

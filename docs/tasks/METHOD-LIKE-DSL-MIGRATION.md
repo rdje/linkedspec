@@ -96,7 +96,7 @@ The method-like DSL surface is extensive. All 19 shipped `.spec` files report ze
 - **Hash ops**: `count_keys(...)`, `has_key(...)`, `merge_hash(...)`, `hash_copy(...)`, `set_key(...)`, `rename_key(...)`, `drop_keys(...)`, `pick_keys(...)`, `sorted_keys(...)`, `sorted_values(...)`
 - **Control flow**: `if(cond); ...; else(); ...; endif()`, `switch(expr) { case(val) ... default ... }`, `exit_now(n)`, `next()`
 - **Return/flow**: `return(...)`, `return_undef()`, `call(...)`, `is_defined(...)`, `is_undefined(...)`, `is_empty(...)`, `is_nonempty(...)`
-- **State access**: `scalar(name)`, `scalar(container, key_or_index)`, `scalaref(name, {...})`, `array(name)`
+- **State access**: `scalar(name)`, `scalar(container, key_or_index)`, direct nested access such as `base["field"][idx]`, `array(name)`, `hash(name)`
 - **Predicates**: `and(...)`, `or(...)`, `not(...)`
 - **I/O**: `print(...)`, `print_each(...)`
 

@@ -33,5 +33,6 @@ The AST path does not make AST `source` fields authoritative. It materializes su
 arguments from typed node fields and then re-enters the existing statement helper catalog.
 This preserves existing slot behavior: `push_value`/`push_nonempty` keep their legacy value
 slot, while `set_key` and array end mutations keep mutation scalar-read slots. Raw
-compatibility arguments such as `scalaref(retv, {content})` and host-style
-`substr($$STRING, ...)` still fall back to the legacy path until a later leaf types them.
+compatibility arguments such as host-style `substr($$STRING, ...)` still fall back to the
+legacy path until a later leaf types them. The former `scalaref(retv, {content})` example
+was migrated to direct nested access and then removed under `SCALAREF-RETIREMENT`.

@@ -10,8 +10,8 @@ answers:
 date: 2026-07-02
 status: confirmed
 tags: [dsl, retirement, scalaref, direct-access, docs]
-evidence: "SCALAREF-RETIREMENT.3 migrated shipped specs, checked-in Rust oracle inputs, focused tests, generator fixtures, user guides, and mdBook chapters away from active scalaref(...) and .scalaref(...) examples. Phase0 passes with 1015 tests; Rust corpus oracle passes over 63 fixtures; active scalaref scans are clean across the shipped/public live surface. SCALAREF-RETIREMENT.4 then removed implementation support and added focused negative tests."
-reverify: "bash -lc '! rg -n \"scalaref\\(|\\.scalaref\\(\" specs rust/linkedspec-runtime/tests/corpus docs/linkedspec-book/src USER_GUIDE*.md tools/gen_oracle_corpus.pl rust/README.md'"
+evidence: "SCALAREF-RETIREMENT.3 migrated shipped specs, checked-in Rust oracle inputs, focused tests, generator fixtures, user guides, and mdBook chapters away from active scalaref(...) and .scalaref(...) examples. SCALAREF-RETIREMENT.4 then removed implementation support and added focused negative tests. SCALAREF-RETIREMENT.5 swept the older root language-neutral tests/corpus fixtures and current-facing docs/KM wording. Phase0 passes with 1015 tests; Rust corpus oracle passes over 63 fixtures; active scalaref scans are clean except intentional negative locks."
+reverify: "bash -lc '! rg -n \"scalaref\\(|\\.scalaref\\(\" specs tests/corpus rust/linkedspec-runtime/tests/corpus docs/linkedspec-book/src USER_GUIDE*.md tools/gen_oracle_corpus.pl rust/README.md'"
 ---
 
 # `scalaref(...)` Live Surface Migration
@@ -29,4 +29,5 @@ bracket reads such as `retv["key"]` are for scalar variables intentionally holdi
 hashref/arrayref payload, not for named working-hash value reads.
 
 Implementation support was removed by `SCALAREF-RETIREMENT.4`, which also added focused
-negative tests for the old function-form and receiver-dot spellings.
+negative tests for the old function-form and receiver-dot spellings. `SCALAREF-RETIREMENT.5`
+closed the remaining root corpus and current-facing prose drift.
