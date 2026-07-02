@@ -39,5 +39,6 @@ bare comparison word aliases, comparison symbol aliases, or number receiver term
 Bare comparison words are no longer string-comparison compatibility aliases. Repo-owned lexical string examples
 should use `str_*`; `eq`/`ne`/`gt`/`ge`/`lt`/`le` are numeric aliases.
 
-`SPEC-FORMAT-TERSE.3.2.3.4` later added comparison symbol aliases. The next frontier is
-`SPEC-FORMAT-TERSE.3.3` for expression-valued assignment and `=(target,value)` equivalence.
+`SPEC-FORMAT-TERSE.3.2.3.4` later added comparison symbol aliases. `SPEC-FORMAT-TERSE.3.3` then split
+expression-valued assignment before code; the current frontier is `.3.3.1` for scalar assignment expression
+values and scalar `=(target,value)` equivalence.

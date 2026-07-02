@@ -34,4 +34,5 @@ The single-equals spelling `=(target,value)` is not part of comparison symbols a
 Rust parser note: `==(...)` exposed that argument parsing must not treat an empty token before `=` as a
 keyword-argument name. The parser now requires a non-empty identifier before recognizing `name=expr`.
 
-The next task-tree frontier after this leaf is `SPEC-FORMAT-TERSE.3.3`.
+The next task-tree frontier after this leaf was `SPEC-FORMAT-TERSE.3.3`; that leaf is now split/done. The
+current implementation frontier is `SPEC-FORMAT-TERSE.3.3.1`.

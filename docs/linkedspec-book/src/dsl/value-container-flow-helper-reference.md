@@ -13,7 +13,7 @@ Most value helpers return one expression. They become useful when they are place
 | Site | Shape | Use it when |
 | --- | --- | --- |
 | Declaration initializer | `declare(scalar, name=expr)` | a working variable should start with one explicit value. |
-| Assignment | `assign(target, source)` | an existing scalar, array, or hash slot should be replaced. |
+| Assignment | `set(target, source)` / `target = source` | an existing scalar, array, or hash slot should be replaced. `assign(...)` is the legacy alias. |
 | Array append | `items += expr` / `push(target, expr)` / `push_value(array(target), expr)` | one explicit value expression should be appended without replacing the whole array. |
 | Hash field assignment | `meta[key_expr] = expr` / `set_key(name, key_expr, expr)` | one field of a named working hash should be updated in place. |
 | Return payload | `return(payload)` | the rule should return one structured value. |

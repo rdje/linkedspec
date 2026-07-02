@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-02 (SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split):
+  The assignment-expression destination contract is now split before code. Durable points. (1) **Destination.**
+  `target = value` is canonical, `=(target,value)` is the planned ordinary operator-call equivalent, and legacy
+  `assign(target,value)` is migration debt rather than preferred new syntax. (2) **Expression value.** The
+  value contract is the value stored after assignment and target-kind inference. (3) **Current behavior.**
+  TOOLBOX probes confirm today is still statement-only: `name = "ok"; return(name)` runs, but value-position
+  `return(name = "ok")`, `return(=(name,"ok"))`, `return(set(name,"ok"))`, and nested assignment helper args do
+  not yet produce values. Rust expression evaluation still rejects scalar assignment, array append, and
+  hash-index assignment as statement-only. (4) **Split order.** `.3.3.1` owns scalar assignment expression
+  values and scalar `=(...)`; `.3.3.2` owns aggregate assignment expression values after target-kind inference;
+  `.3.3.3` owns append/hash-index mutation expression contracts; `.3.3.4` owns compatibility/docs/oracle
+  closure. (5) **Docs.** The book now states assignment/mutation forms are statement-level today and avoids
+  promoting `assign(...)` in new examples.
+  Next frontier: `SPEC-FORMAT-TERSE.3.3.1`.
+
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.2.3.4 — numeric comparison symbol callees):
   The comparison symbol-call surface is now complete. Durable points. (1) **Symbols.** `==`, `!=`, `>`, `>=`,
   `<`, and `<=` parse as ordinary value-call callees and normalize to `num_eq`, `num_ne`, `num_gt`, `num_ge`,
@@ -12,7 +27,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   remains a blind-call edge. (5) **Gate.** Focused Perl/Rust locks, oracle corpus, phase0, mdBook, Knowledge
   Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1011 tests and the oracle corpus is 58
   fixtures.
-  Next frontier: `SPEC-FORMAT-TERSE.3.3`.
+  Then-frontier: `SPEC-FORMAT-TERSE.3.3` (now split/done; current frontier is `.3.3.1`).
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.2.3.3 — numeric comparison word aliases):
   The comparison-word flip is now complete. Durable points. (1) **Names.** Bare value-call `eq`, `ne`, `gt`,

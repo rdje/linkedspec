@@ -53,7 +53,8 @@ behind an explicit string-comparison bridge:
   string comparisons.
 - `.3.2.3.3`: done; ordinary comparison word calls now map to numeric `num_*` aliases.
 - `.3.2.3.4`: done; comparison symbol callees now map to numeric `num_*` aliases.
-- `.3.3`: current next task; expression-valued assignment and `=(target,value)` equivalence.
+- `.3.3`: done/split; expression-valued assignment and `=(target,value)` equivalence are now split before code.
+- `.3.3.1`: current next task; scalar assignment expression values and scalar `=(target,value)` equivalence.
 
 `=(target,value)` is not part of the comparison-symbol slice. It remains assignment operator-call syntax owned
-by `SPEC-FORMAT-TERSE.3.3`; `=>` remains the blind-call edge operator.
+by `SPEC-FORMAT-TERSE.3.3` and implemented first under `.3.3.1`; `=>` remains the blind-call edge operator.

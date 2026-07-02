@@ -145,7 +145,7 @@ dispatch rule.
 - **Returns**: void
 - **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
 - **Edge cases**: Assigning through a typed wrapper fixes the variable's kind from the wrapper. `assign(scalar(name), [value])` stores the whole array payload in `$name`; `assign(array(name), [value])` replaces `@name`; `assign(hash(name), { key => value })` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`assign(name, value)` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `assign(name, [value])` assigns `@name`, and `assign(name, { key => value })` assigns `%name`. In scalar assignment source slots, a bare source name reads a scalar too: `assign(out, value)` is equivalent to `assign(out, scalar(value))`.
-- **Terse spelling**: `set(name, value)` is the canonical terse helper rename of `assign`, and `name = value` is the scalar operator spelling. All three forms lower and run identically for scalar targets; a bare `set` target or operator target auto-exists exactly like `assign`, and a bare scalar source reads the working scalar. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Terse spelling**: `set(name, value)` is the canonical terse helper rename of `assign`, and `name = value` is the scalar operator spelling. In statement position, all three forms lower and run identically for scalar targets; a bare `set` target or operator target auto-exists exactly like `assign`, and a bare scalar source reads the working scalar. They are not ordinary value expressions yet. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
 
@@ -1272,9 +1272,11 @@ also part of the terse surface. It is not a helper rename and does not retire `s
 access and `scalaref(base, path)` remain accepted forms. `scalaref(...)` keeps its historical path notation;
 write `[scalar(i)]` there when the path index should read a scalar working variable.
 
-The helper aliases above produce byte-identical generated code in every position — value expression,
-assignment / declaration source, return payload, and the array-vs-hash type inference used by
-numeric reducers and `coalesce(...)`. New `.spec` authoring should prefer the terse names.
+The helper aliases above lower identically within their supported statement/helper families. Assignment and
+mutation forms (`set(...)`, `assign(...)`, `name = value`, `items += value`, and `name[key] = value`) are
+statement-level today; they are not ordinary value expressions until the `SPEC-FORMAT-TERSE.3.3` child leaves
+land. Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the value positions
+documented by their contracts. New `.spec` authoring should prefer the terse names.
 
 ### Compatibility Aliases (Retired)
 The following are retired and must not be used in new `.spec` authoring. Backends may implement them for compatibility with legacy specs but should treat them as deprecated:

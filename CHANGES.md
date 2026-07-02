@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-02 — SPEC-FORMAT-TERSE.3.3 — split expression-valued assignment
+
+**Scope:** Task tree, mdBook assignment wording, live recovery docs, and Knowledge Map. No parser/compiler/runtime
+code changed.
+
+**What changed:** The expression-valued assignment contract is now split before implementation. `target = value`
+remains the canonical destination spelling, `=(target,value)` is the planned ordinary operator-call equivalent,
+and legacy `assign(target,value)` stays migration debt rather than new-example syntax.
+
+**Compatibility boundary:** Current shipped behavior is unchanged and remains statement-level for scalar
+assignment, array append, and hash-index assignment. TOOLBOX probes confirm `name = "ok"; return(name)` runs
+today while `return(name = "ok")`, `return(=(name,"ok"))`, `return(set(name,"ok"))`, and assignment nested in a
+helper argument do not yet produce expression values. The implementation frontier is `.3.3.1` for scalar
+assignment expression values and scalar `=(target,value)` equivalence.
+
+**Checks:** TOOLBOX assignment probes, Rust source/test audit, mdBook build, Knowledge Map regenerate/check,
+memory architecture, doctrine registry, `git diff --check`, and full local CI passed.
+
 ## 2026-07-02 — SPEC-FORMAT-TERSE.3.2.3.4 — implement comparison symbol callees
 
 **Scope:** Perl ActionIR method-call parsing/lowering, Rust expression parsing/runtime dispatch, phase0 locks,

@@ -57,17 +57,19 @@ Most helpers do not guess the current rule array. They can still read or mutate 
 
 ## Assignment
 
-Use `assign(target, source)` to replace a target value.
+Use `set(target, source)` or `target = source` to replace a target value. `assign(target, source)` remains a
+supported legacy alias, but new examples should prefer the terse spelling.
 
 Examples:
 
 ```text
-assign(scalar(name), entry_group(0));
-assign(array(items), array());
-assign(hash(meta), hash("kind", "token", "line", entry_line()));
+set(scalar(name), entry_group(0));
+items = [];
+meta = { "kind" => "token", "line" => entry_line() };
 ```
 
-Use assignment when you want to set or replace the target.
+Use assignment when you want to set or replace the target. These assignment forms are statements today; they
+are not ordinary value expressions yet.
 
 ## Pushing values
 
@@ -76,14 +78,14 @@ Use `push_value(array(target), value)` when you want to append.
 Example:
 
 ```text
-assign(scalar(child), call(Child));
+set(scalar(child), call(Child));
 push_value(array(items), scalar(child));
 ```
 
 Do not use whole-array assignment when you mean append.
 
 ```text
-assign(array(items), array(scalar(child)));
+set(array(items), array(scalar(child)));
 ```
 
 That replaces the whole array. It does not append to it.

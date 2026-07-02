@@ -30,4 +30,4 @@ and `str_le`.
 
 Comparison symbol callees such as `>(a,b)`, `>=(a,b)`, `==(a,b)`, and `!=(a,b)` landed in
 `SPEC-FORMAT-TERSE.3.2.3.4` and map to the same numeric `num_*` family. Assignment operator-call spelling
-`=(target,value)` remains deferred to `SPEC-FORMAT-TERSE.3.3`.
+`=(target,value)` was split under `SPEC-FORMAT-TERSE.3.3`; scalar implementation starts at `.3.3.1`.

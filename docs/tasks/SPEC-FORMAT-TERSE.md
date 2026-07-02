@@ -6,8 +6,8 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (**`.3.2.3.4` DONE; comparison symbol callees now map to numeric `num_*`
-  aliases on Perl/Rust after comparison words landed; frontier moves to `.3.3` expression-valued assignment**.
+- Last updated: `2026-07-02` (**`.3.3` SPLIT/DONE; expression-valued assignment is now split before code;
+  frontier moves to `.3.3.1` scalar assignment expression values and `=(target,value)` scalar equivalence**.
   Prior **`.4.1` DONE; user-defined function MVP contract/inventory locked before code** —
   the accepted contract is now explicit: top-level `fn name(args) { ... }`, exact arity, eager argument
   evaluation, fresh function-local parameter/work-variable scope, pure value/block bodies, final-expression or
@@ -2250,8 +2250,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.3.2.3.4 - implement comparison symbol callees`
 
 - ID: `SPEC-FORMAT-TERSE.3.3`
-  Status: `pending`
+  Status: `done` (SPLIT/OWNED 2026-07-02; no parser/compiler/runtime code change)
   Goal: Expression-valued assignment and assignment operator-call equivalence
+  Children: `.3.3.1` (scalar assignment expression values and `=(target,value)` scalar equivalence), `.3.3.2`
+    (aggregate assignment expression values after target-kind inference), `.3.3.3` (array append/hash-index
+    mutation expression values), `.3.3.4` (legacy function spelling cleanup, docs, and oracle closure)
   Acceptance: Capture the clarified assignment contract before code. The canonical scalar assignment spelling
     is `target = value`; legacy `assign(target, value)` is migration debt and must not be promoted in new
     examples. The operator-call spelling `=(target, value)` is accepted as equivalent to `target = value`,
@@ -2264,6 +2267,62 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     behavior until this leaf or its children implement expression-valued semantics. Split before code if
     scalar assignment, aggregate shape assignment, hash-index assignment, array append, or backend parity need
     separate leaves.
+  Outcome: Current behavior was audited before code: statement-form `name = "ok"; return(name)` runs, but
+    `return(name = "ok")`, `return(=(name,"ok"))`, `return(set(name,"ok"))`, and `set(out, name = "ok")`
+    still fail/null on the Perl reference today; Rust still explicitly treats scalar assignment, array append,
+    and hash-index assignment as statement-only in expression evaluation. The book now reflects that current
+    boundary instead of claiming assignment aliases compose in every value position. Implementation is split
+    by target/mutation mechanism before code.
+  Verification: KM retrieval (`terse-expression-valued-assignment-and-operator-calls`,
+    `terse-mutation-surface-ground-truth`); TOOLBOX `call_spec_handler_subst` and `LinkedSpec::Get` probes for
+    statement assignment vs value-position assignment; Rust source/test audit for statement-only expression
+    diagnostics; mdBook drift correction; Knowledge Map regenerate/check; memory/doctrine/diff checks; full
+    local CI.
+  Commit: `SPEC-FORMAT-TERSE.3.3 - split expression-valued assignment`
+
+- ID: `SPEC-FORMAT-TERSE.3.3.1`
+  Status: `pending`
+  Goal: Scalar assignment expression values and `=(target,value)` scalar equivalence
+  Acceptance: Implement the scalar subset first on Perl and Rust. `target = value`, `=(target, value)`, and
+    retained scalar compatibility spellings (`set(target, value)` and legacy `assign(target, value)`) must be
+    ordinary value expressions when the target is scalar or a bare target inferred as scalar from a non-shape
+    RHS. The expression value is the scalar value stored in the target after assignment. The forms must compose
+    in `return(...)`, helper arguments, expression-valued blocks, user-defined function bodies, and compatible
+    scalar receiver-dot chains. This leaf must preserve statement behavior and explicitly exclude direct RHS
+    shape target-kind inference, array append, and hash-index assignment.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.3.3.2`
+  Status: `pending`
+  Goal: Aggregate assignment expression values after target-kind inference
+  Acceptance: Extend expression-valued assignment to array/hash targets and direct RHS shape target-kind
+    inference after `.3.3.1` lands. `target = [value]`, `target = { key => value }`, `set(target, [value])`,
+    `set(target, { key => value })`, matching typed aggregate targets, and the operator-call spelling must
+    return the aggregate value stored in the target after assignment. Explicit `scalar(target)` remains the
+    scalar payload boundary. Backend parity and oracle fixtures must cover both array and hash results.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.3.3.3`
+  Status: `pending`
+  Goal: Mutation expression values for array append and hash-index assignment
+  Acceptance: Define and implement value contracts for mutation operators that are currently statement-only:
+    `items += value` and `meta[key] = value`. Before code, lock whether each expression returns the updated
+    target aggregate snapshot or the stored element value; after that decision, implement Perl/Rust parity,
+    preserve statement-side behavior, and add oracle coverage for helper arguments, `return(...)`, block
+    values, and compatible receiver chains.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.3.3.4`
+  Status: `pending`
+  Goal: Legacy function spelling cleanup and full assignment-expression closure
+  Acceptance: After scalar, aggregate, append, and hash-index expression semantics land, reconcile the retained
+    `assign(...)` compatibility surface with canonical `set(...)` and operator spellings. Public examples must
+    prefer `target = value` or `set(...)` as appropriate and must not promote `assign(...)` as new syntax.
+    Close mdBook/KM/status drift, add any missing oracle/corpus fixtures, and confirm the parent `.3.3`
+    contract across Perl and Rust.
   Verification: `pending`
   Commit: `pending`
 
@@ -2609,9 +2668,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.3.2.3.2` | `done` 2026-07-02 | Explicit `str_*` string-comparison helpers landed on Perl/Rust; bare comparison words remained string-compatibility aliases until `.3.2.3.3`. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.3` | `done` 2026-07-02 | Ordinary comparison word calls now map to numeric `num_*` aliases on Perl/Rust; lexical strings use explicit `str_*`. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.4` | `done` 2026-07-02 | Comparison symbol callees `==`, `!=`, `>`, `>=`, `<`, and `<=` now map to numeric `num_*` aliases on Perl/Rust without claiming assignment `=(...)` or blind-call `=>`. |
-| 1 | `SPEC-FORMAT-TERSE.3.3` | `pending` | Expression-valued assignment plus `=(target,value)` equivalence must be owned before changing the current statement-only assignment implementation. |
+| — | `SPEC-FORMAT-TERSE.3.3` | `done` 2026-07-02 | Expression-valued assignment plus `=(target,value)` equivalence split before code. Current shipped assignment/mutation remains statement-only; implementation starts at scalar `.3.3.1`. |
+| 1 | `SPEC-FORMAT-TERSE.3.3.1` | `pending` | Scalar assignment expression values and `=(target,value)` scalar equivalence are the first safe implementation slice. |
 
 ## Decisions
+
+- `2026-07-02` (**`.3.3` expression-valued assignment split before code**). The destination contract remains:
+  `target = value` is canonical, `=(target,value)` is the ordinary operator-call equivalent, legacy
+  `assign(target,value)` is migration debt, and assignment expressions evaluate to the value stored after
+  assignment and target-kind inference. Current shipped behavior is narrower: scalar assignment, array append,
+  and hash-index assignment are statement-level operations today, while value-position assignment forms fail or
+  remain unevaluated. Implementation is therefore split into scalar assignment expressions first (`.3.3.1`),
+  aggregate target-kind assignment expressions second (`.3.3.2`), append/hash-index mutation expression
+  contracts third (`.3.3.3`), and compatibility/docs/oracle closure last (`.3.3.4`). No parser/compiler/runtime
+  code changed in this split.
 
 - `2026-07-02` (**`.3.2.3.4` numeric comparison symbol callees implemented**). Comparison symbols
   `==(lhs,rhs)`, `!=(lhs,rhs)`, `>(lhs,rhs)`, `>=(lhs,rhs)`, `<(lhs,rhs)`, and `<=(lhs,rhs)` are now numeric
@@ -3408,6 +3478,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-02` | `SPEC-FORMAT-TERSE.3.3` | KM retrieval (`terse-expression-valued-assignment-and-operator-calls`, `terse-mutation-surface-ground-truth`); TOOLBOX `call_spec_handler_subst` and `LinkedSpec::Get` probes for statement assignment vs value-position assignment; Rust source/test audit for expression-level assignment diagnostics; mdBook drift correction; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Expression-valued assignment was split before code. Current shipped behavior remains statement-only for scalar assignment, array append, and hash-index assignment; `=(target,value)` is not runnable yet. The first implementation child is `.3.3.1` for scalar assignment expression values and scalar `=(target,value)` equivalence. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.4` | KM retrieval (`terse-numeric-comparison-symbol-callees`, `terse-numeric-comparison-word-aliases`, `terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); Perl syntax checks for ActionIR symbol parsing/lowering and phase0; focused Perl lowering/runtime/source probes for comparison symbols, slash division, `str_*`, and single-equals deferral; oracle generator; focused Rust parser/runtime symbol-callee locks; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Comparison symbol callees `==`/`!=`/`>`/`>=`/`<`/`<=` now route to numeric `num_*` comparison helpers on Perl/Rust. Rust argument parsing now requires a real identifier before treating `name=expr` as a keyword arg, so `==(...)` parses as a symbol call. Slash regex/division behavior remains intact, lexical strings use `str_*`, and `=(target,value)` stays `.3.3`. Oracle corpus reaches **58 fixtures** and phase0 reaches **1011 tests**. Frontier becomes `.3.3`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.3` | KM retrieval (`terse-numeric-comparison-word-aliases`, `terse-string-comparison-bridge-contract`, `terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); Perl syntax checks for ActionIR comparison/lowering contracts and phase0; focused Perl lowering/runtime/source probes for numeric bare words and lexical `str_*`; oracle generator; focused Rust runtime comparison-word lock; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Bare value-call comparison words `eq`/`ne`/`gt`/`ge`/`lt`/`le` now route to numeric `num_*` comparison helpers on Perl/Rust. Explicit `str_*` remains the lexical string surface, and shipped specs/tests with lexical bare comparison intent moved to `str_*`. Comparison symbol callees remain `.3.2.3.4`; assignment `=(...)` remains `.3.3`. Oracle corpus reaches **57 fixtures** and phase0 reaches **1010 tests** after the focused numeric-word lock. Frontier becomes `.3.2.3.4`. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.2.3.2` | KM retrieval (`terse-string-comparison-bridge-contract`, `terse-comparison-call-surface-split`, `spec-arithmetic-call-surface-ground-truth`); Perl syntax checks for ActionIR comparison/lowering contracts and phase0; focused Rust runtime string-comparison helper lock; oracle generator; Rust corpus oracle; phase0; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Explicit `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` helpers landed on Perl/Rust as lexical string predicates. Bare comparison words remain string-compatibility aliases until `.3.2.3.3`; numeric comparisons remain `num_*` or number receiver terminals; comparison symbol callees remain `.3.2.3.4`. Oracle corpus reaches **56 fixtures** and phase0 reaches **1009 tests** after the focused string-helper lock. Frontier becomes `.3.2.3.3`. |
@@ -3506,6 +3577,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.3.3` | `SPEC-FORMAT-TERSE.3.3 - split expression-valued assignment` | Assignment expression values are split before code into scalar, aggregate, append/hash-index, and compatibility/docs closure leaves; current shipped assignment remains statement-only and frontier becomes `.3.3.1`. |
 | `SPEC-FORMAT-TERSE.3.2.3.4` | `SPEC-FORMAT-TERSE.3.2.3.4 - implement comparison symbol callees` | Comparison symbol callees now map to numeric `num_*` aliases on Perl/Rust; corpus 58 passes and frontier becomes `.3.3`. |
 | `SPEC-FORMAT-TERSE.3.2.3.3` | `SPEC-FORMAT-TERSE.3.2.3.3 - flip comparison word aliases` | Bare comparison word calls now map to numeric `num_*` aliases on Perl/Rust; lexical string comparisons use `str_*`; corpus 57 passes and frontier becomes `.3.2.3.4`. |
 | `SPEC-FORMAT-TERSE.3.2.3.2` | `SPEC-FORMAT-TERSE.3.2.3.2 - implement string comparison helpers` | Explicit `str_*` lexical string comparisons landed on Perl/Rust; corpus 56 passes and frontier becomes `.3.2.3.3`. |
@@ -3602,6 +3674,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-02`: **`.3.3` SPLIT/DONE — expression-valued assignment split before code.**
+  The assignment-expression destination contract is now owned without changing parser/compiler/runtime
+  behavior: `target = value` remains canonical, `=(target,value)` is the planned operator-call equivalent, and
+  legacy `assign(target,value)` stays migration debt. TOOLBOX probes and Rust source audit confirm the current
+  shipped implementation is still statement-only for scalar assignment, array append, and hash-index
+  assignment. The implementation is split into scalar expression values (`.3.3.1`), aggregate target-kind
+  expression values (`.3.3.2`), append/hash-index mutation expression values (`.3.3.3`), and compatibility/docs
+  closure (`.3.3.4`). Frontier moves to `.3.3.1`.
 
 - `2026-07-02`: **`.3.2.3.4` DONE — numeric comparison symbol callees shipped.**
   Comparison symbol callees `==`, `!=`, `>`, `>=`, `<`, and `<=` now lower/dispatch as numeric aliases for

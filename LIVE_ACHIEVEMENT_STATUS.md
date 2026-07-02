@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-02: **SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split before code**
+  (TASK TREE + BOOK/KM + LIVE DOCS; NO PARSER/COMPILER/RUNTIME CHANGE).
+  The assignment-expression destination contract is now owned and split: `target = value` remains canonical,
+  `=(target,value)` is the planned ordinary operator-call equivalent, and legacy `assign(target,value)` stays
+  migration debt rather than preferred new syntax. Assignment expressions will evaluate to the value stored
+  after assignment and target-kind inference.
+
+  Current shipped behavior is unchanged and still statement-only for scalar assignment, array append, and
+  hash-index assignment. Probes confirm `name = "ok"; return(name)` works today, while `return(name = "ok")`,
+  `return(=(name,"ok"))`, `return(set(name,"ok"))`, and nested assignment in helper arguments do not yet yield
+  expression values. Rust expression evaluation still diagnoses those assignment/mutation nodes as
+  statement-only.
+
+  **Verification:** KM retrieval PASS; TOOLBOX assignment lowering/runtime probes PASS; Rust source/test audit
+  PASS; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.3.3.1` (scalar assignment expression values and scalar `=(target,value)`
+  equivalence).
+
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.4 — numeric comparison symbol callees landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
   Comparison symbol callees are now portable numeric helper calls: `==(a,b)`, `!=(a,b)`, `>(a,b)`,
@@ -22,7 +41,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `terse_3_2_3_4_numeric_comparison_symbol_callees`; Rust corpus oracle PASS; phase0 PASS with **1011 tests**;
   mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.3.3` (expression-valued assignment and `=(target,value)` equivalence).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3` (now split/done; current frontier is `.3.3.1`).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.2.3.3 — numeric comparison word aliases landed**
   (PERL ACTIONIR + RUST RUNTIME + SHIPPED SPEC MIGRATION + PHASE0 + ORACLE + BOOK/KM).

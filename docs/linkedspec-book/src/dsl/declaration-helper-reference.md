@@ -336,10 +336,10 @@ Use `array_copy(...)` when the initializer should snapshot an existing array-val
 declare(array, saved_items=array_copy(array(items)));
 ```
 
-Use `assign(array(name), array())` to clear or reset a live array later. Do not redeclare a variable just to clear it.
+Use `set(array(name), array())` to clear or reset a live array later. Do not redeclare a variable just to clear it.
 
 ```text
-assign(array(items), array());
+set(array(items), array());
 ```
 
 ## Hash initializer examples
@@ -372,17 +372,17 @@ I {
 
 That is useful when every return path should include the same baseline metadata.
 
-Use `assign(hash(name), hash())` or another hash-valued assignment to reset later:
+Use `set(hash(name), hash())` or another hash-valued assignment to reset later:
 
 ```text
-assign(hash(meta), hash("kind", "fallback"));
+set(hash(meta), hash("kind", "fallback"));
 ```
 
 Do not redeclare to reset. Redeclaration is a lifetime decision, not a mutation operation.
 
 ## Initializer expression surface
 
-Declaration initializers reuse the same expression language as `assign(...)`, `push_value(...)`, `return(...)`, and flow helpers.
+Declaration initializers reuse the same expression language as `set(...)`, `push_value(...)`, `return(...)`, and flow helpers.
 
 > **Terse spellings.** The same terse helper renames apply here: `set(...)` for `assign(...)`,
 > scalar `name = value` for `set(name, value)`, array append `items += expr` for explicit append values, hash-index assignment `meta["key"] = expr` for `set_key(meta, "key", expr)`, `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`

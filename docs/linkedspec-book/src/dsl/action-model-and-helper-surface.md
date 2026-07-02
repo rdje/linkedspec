@@ -77,7 +77,8 @@ Declare typed working variables at the start of a rule or action body:
 - `declare_a(name)` — declare an array
 - `declare_h(name)` — declare a hash
 
-Prefer initialized declarations when the initializer is short; use `declare(...)` plus `assign(...)` when initialization has a fallback chain.
+Prefer initialized declarations when the initializer is short; use `declare(...)` plus `set(...)` when
+initialization has a fallback chain.
 
 Detailed reference: [Declaration Helper Reference](declaration-helper-reference.md).
 
@@ -85,9 +86,9 @@ Detailed reference: [Declaration Helper Reference](declaration-helper-reference.
 
 Write values into declared variables or containers:
 
-- `assign(target, value)` — write a value
-- `name = value` — terse scalar assignment operator, equivalent to `set(name, value)` / `assign(name, value)`
-- `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax
+- `set(target, value)` — write a value; `assign(target, value)` is the legacy alias
+- `name = value` — terse scalar assignment operator, equivalent to `set(name, value)` as a statement today
+- `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; statement-level today
 - `push(container, value)` — append to an array
 - `push_value(array(name), value)` — named-array push
 - `push_nonempty(array(name), value)` — push only if value is defined and non-empty
