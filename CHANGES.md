@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.4.1 — fix header-rest action-edge parsing
+
+**Scope:** Rust parser/compiler/runtime regression coverage, mdBook grammar/action-edge wording, task tree/index,
+roadmap pointer, live docs, memory pointer, and Knowledge Map.
+
+**What changed:** Rust now preserves compact header-rest body syntax instead of swallowing it as an invalid rule
+mode suffix. This fixes regex-less top rules such as `lib_file:: -> group .push` and compact spellings such as
+`Top::->Child.push`. The action-edge and blind-call recognizers now match the authoritative `specs/spec.spec`
+grammar: spaces/tabs after `->` and `=>` are optional, not required.
+
+**Evidence:** Parser tests lock spaced and compact header-rest action edges plus compact blind-call edges; a compiler
+test proves `Wrapper::->child.push` emits the dependency-resolved child regex and fluent `.push` action dispatch;
+and a runtime regression proves compact header-rest `->item.push` dispatch produces the expected child result. A
+real `lib_reader` compiled-rule dump now includes the top `group` dispatch. Representative `lib_reader`
+sattribute/cattribute probes no longer collapse to `[[]]`, but still expose null capture fields, so the remaining
+runtime capture-propagation blocker is split to `RUST-PARITY.7.3.4.4`.
+
+**Checks:** `cargo fmt` for `linkedspec-core` and `linkedspec-runtime`; focused core parser/compiler tests
+(`action_edge`, `parse_blind_edge`); focused runtime compact-arrow regression; Rust `corpus_oracle`; mdBook build;
+Knowledge Map check; memory-architecture check; doctrine registry; `git diff --check`; full local CI gate.
+
 ## 2026-07-03 — RUST-PARITY.7.3.4 — triage structural oracle mismatches
 
 **Scope:** Task-tree/index, roadmap pointer, live docs, memory pointer, and Knowledge Map. No Rust parser/runtime

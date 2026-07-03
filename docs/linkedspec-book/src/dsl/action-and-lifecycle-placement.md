@@ -124,6 +124,8 @@ Prefer those forms over raw Perl assignment, push, and return statements in new 
 ## Method-chain action edges
 
 Short helper-only action edges can be written as method chains.
+Whitespace after `->` is optional; examples usually include a space for readability,
+but compact forms such as `->Item.push` and `Top::->Item.push` are valid.
 
 Example:
 
@@ -260,6 +262,8 @@ Blind-call edges use `=>`:
 ```text
 => Child
 ```
+
+Whitespace after `=>` is optional; `=>Child` is the same edge written compactly.
 
 They are often used in ordered wrapper rules:
 

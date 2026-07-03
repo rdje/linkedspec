@@ -609,6 +609,26 @@ mod tests {
     }
 
     #[test]
+    fn compile_header_rest_action_edge_with_fluent_chain() {
+        let src = "Wrapper::->child.push\nLX { return(array_copy(array(Wrapper))) }\n\nchild: /x/";
+        let spec = parse_spec(src).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let rule = compiled.find("Wrapper").unwrap();
+
+        assert_eq!(rule.regex_patterns, vec!["x".to_string()]);
+        assert_eq!(rule.acode_dispatch.len(), 1);
+        assert_eq!(rule.acode_dispatch[0].regex_idx, 0);
+        assert_eq!(rule.acode_dispatch[0].child_label, "child");
+        assert_eq!(rule.acode_dispatch[0].child_regex_idx, 0);
+        assert!(!rule.acode_dispatch[0].has_parent_regex);
+        assert_eq!(
+            rule.acode_dispatch[0].fluent_chain,
+            vec![("push".to_string(), "".to_string())]
+        );
+        assert!(rule.lxcode.is_some());
+    }
+
+    #[test]
     fn compile_multiline_action_edge_fluent_flow_chain() {
         let src = r#"Wrapper::
  -> child

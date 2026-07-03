@@ -113,9 +113,20 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
         let label = caps.get(1).unwrap().as_str().to_string();
         let colon = caps.get(2).unwrap().as_str();
         let mode_raw = caps.get(3).unwrap().as_str();
-        let rest = caps.get(4).unwrap().as_str().to_string();
+        let parsed_mode = parse_mode_suffix_strict(mode_raw);
+        let rest_raw = caps.get(4).unwrap().as_str();
+        let (mode, rest) = match parsed_mode {
+            Some(mode) => (mode, rest_raw.to_string()),
+            None => {
+                let restored = if rest_raw.is_empty() {
+                    mode_raw.to_string()
+                } else {
+                    format!("{mode_raw} {rest_raw}")
+                };
+                (RuleMode::Default, restored)
+            }
+        };
         let is_top = colon == "::";
-        let mode = parse_mode_suffix(mode_raw);
 
         Ok(Some((
             RuleHeader {
@@ -132,19 +143,24 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
     }
 }
 
-/// Parse the mode suffix string into a `RuleMode`.
-fn parse_mode_suffix(raw: &str) -> RuleMode {
+/// Parse a mode suffix only when the token is a recognized mode.
+///
+/// Header-rest content can start with ordinary body syntax (`-> Child`,
+/// `I.return(...)`, `/regex/`, ...). The header scanner captures the first
+/// non-space, non-slash token after `:`/`::`; unrecognized tokens must be
+/// restored to the body rest instead of silently discarded as default mode.
+fn parse_mode_suffix_strict(raw: &str) -> Option<RuleMode> {
     if raw.is_empty() {
-        return RuleMode::Default;
+        return Some(RuleMode::Default);
     }
     if let Some((base, min, max)) = parse_bounded(raw) {
         return match base {
-            "AND" => RuleMode::AndBounded { min, max },
-            "OR" => RuleMode::OrBounded { min, max },
-            _ => RuleMode::Default,
+            "AND" => Some(RuleMode::AndBounded { min, max }),
+            "OR" => Some(RuleMode::OrBounded { min, max }),
+            _ => None,
         };
     }
-    match raw {
+    Some(match raw {
         "AND" => RuleMode::And,
         "AND+" => RuleMode::AndPlus,
         "OR" => RuleMode::Or,
@@ -154,8 +170,8 @@ fn parse_mode_suffix(raw: &str) -> RuleMode {
         "+" => RuleMode::Plus,
         "*" => RuleMode::Star,
         "?" => RuleMode::Optional,
-        _ => RuleMode::Default,
-    }
+        _ => return None,
+    })
 }
 
 fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
@@ -364,8 +380,8 @@ fn parse_single_element(
     // Regex patterns for classification (order matters!)
     let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
     let re_action =
-        Regex::compile(r"^->[ \t]+(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
-    let re_blind = Regex::compile(r"^=>[ \t]+(\w+)").unwrap();
+        Regex::compile(r"^->[ \t]*(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
+    let re_blind = Regex::compile(r"^=>[ \t]*(\w+)").unwrap();
     let re_lifecycle = Regex::compile(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
     let re_split = Regex::compile(
         r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))",
@@ -1138,6 +1154,64 @@ Child: /x/ /y/
     }
 
     #[test]
+    fn parse_header_rest_action_edge_with_fluent_chain() {
+        let src = r#"Top:: -> Child .push
+
+Child: /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        assert_eq!(top.header.mode, RuleMode::Default);
+        assert_eq!(top.header.rest, "-> Child .push");
+        assert_eq!(top.body.len(), 1);
+
+        match &top.body[0].kind {
+            BodyElementKind::ActionEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
+                assert_eq!(targets[0].label, "Child");
+                assert_eq!(targets[0].index, 0);
+                assert!(code.is_none());
+                assert_eq!(fluent_chain.len(), 1);
+                assert_eq!(fluent_chain[0].method, "push");
+                assert_eq!(fluent_chain[0].args, "");
+            }
+            _ => panic!("expected ActionEdge"),
+        }
+    }
+
+    #[test]
+    fn parse_header_rest_action_edge_allows_no_space_after_arrow() {
+        let src = r#"Top::->Child.push
+
+Child: /x/
+"#;
+        let spec = parse_spec(src).unwrap();
+        let top = &spec.rules[0];
+        assert_eq!(top.header.mode, RuleMode::Default);
+        assert_eq!(top.header.rest, "->Child.push");
+        assert_eq!(top.body.len(), 1);
+
+        match &top.body[0].kind {
+            BodyElementKind::ActionEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
+                assert_eq!(targets[0].label, "Child");
+                assert_eq!(targets[0].index, 0);
+                assert!(code.is_none());
+                assert_eq!(fluent_chain.len(), 1);
+                assert_eq!(fluent_chain[0].method, "push");
+                assert_eq!(fluent_chain[0].args, "");
+            }
+            _ => panic!("expected ActionEdge"),
+        }
+    }
+
+    #[test]
     fn parse_action_edge_multiline_fluent_flow_chain() {
         let src = r#"Top::
  -> item
@@ -1458,6 +1532,21 @@ Done:
     #[test]
     fn parse_blind_edge() {
         let src = "Top::\n /a/ => Child";
+        let spec = parse_spec(src).unwrap();
+        let edge = spec.rules[0]
+            .body
+            .iter()
+            .find(|e| matches!(&e.kind, BodyElementKind::BlindEdge { .. }))
+            .unwrap();
+        match &edge.kind {
+            BodyElementKind::BlindEdge { target, .. } => assert_eq!(target, "Child"),
+            _ => panic!("expected BlindEdge"),
+        }
+    }
+
+    #[test]
+    fn parse_blind_edge_allows_no_space_after_arrow() {
+        let src = "Top::\n /a/ =>Child";
         let spec = parse_spec(src).unwrap();
         let edge = spec.rules[0]
             .body

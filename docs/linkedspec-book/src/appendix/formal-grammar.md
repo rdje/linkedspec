@@ -231,6 +231,9 @@ An action edge binds the current rule to a child rule via an **action code block
 After the regex cluster(s) match, the parser transfers to `TargetRule` and executes
 its associated action code.
 
+- **Whitespace**: spaces or tabs after `->` are optional. Examples use `-> Rule`
+  for readability, but `->Rule` and compact header-rest forms such as
+  `Top::->Rule.push` are valid spellings.
 - **Target indexing**: `-> rule` means entry slot `[0]`. `-> rule[N]` selects a
   later regex slot of the same rule (used for same-rule recursive entry).
 - **Grouped targets**: `-> RuleA | RuleB { ... }` binds one shared action code
@@ -248,6 +251,9 @@ its associated action code.
 A blind-call edge delegates to `ChildRule` **without** an action code block. The
 child rule's own action code runs. This is used for parser orchestration where the
 parent rule controls dispatch but does not transform the child's result.
+
+- **Whitespace**: spaces or tabs after `=>` are optional. Examples use `=> Child`
+  for readability, but `=>Child` is valid.
 
 Blind-call behavior follows the **rule label mode**, not the edge alone. Explicit
 `:AND` on the child rule is required for sequential blind-call dispatch. A bare

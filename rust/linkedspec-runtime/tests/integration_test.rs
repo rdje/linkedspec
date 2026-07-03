@@ -2358,6 +2358,17 @@ fn terse_2_3_3_1_action_edge_fluent_push_appends_child_return() {
 }
 
 #[test]
+fn rust_parity_7_3_4_1_header_rest_action_edge_allows_compact_arrow_spacing() {
+    let grammar =
+        "top::->item.push\nE{return(array_copy(array(top)))}\n\nitem:/x/I.return(entry_text())\n";
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([["x"]]),
+        "header-rest action-edge dispatch accepts zero spaces after ::, ->, and before .push"
+    );
+}
+
+#[test]
 fn terse_2_3_3_1_action_edge_fluent_return_closes_recursive_rule() {
     let grammar = "top::\n -> box .push\n E { return(array_copy(array(top))) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", array_copy(array(box))))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
     assert_eq!(

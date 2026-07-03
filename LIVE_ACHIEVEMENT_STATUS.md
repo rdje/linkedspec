@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.4.1 — header-rest action-edge parsing**
+  (RUST PARSER/COMPILER FIX; NO ORACLE FIXTURE LANDED).
+  Rust now keeps compact header-rest body syntax instead of consuming it as an invalid mode suffix. This repairs
+  regex-less top rules such as `lib_file:: -> group .push` and compact forms such as `Top::->Child.push`.
+
+  **Spacing contract:** The project grammar does not require a space after `->` or `=>`; `specs/spec.spec` uses
+  `->[ \t]*` and `=>[ \t]*`. The Rust parser now follows that optional-whitespace contract.
+
+  **Verification:** Focused parser/compiler/runtime tests cover spaced and compact header-rest action edges,
+  compact blind-call edges, compiled dependency-resolved `.push` dispatch, and compact runtime dispatch. A real
+  `lib_reader` compiled-rule dump now includes the top `group` action dispatch; representative probes no longer
+  collapse to `[[]]`.
+
+  **Frontier:** `RUST-PARITY.7.3.4.4` — fix runtime capture propagation for `lib_reader` dependency-resolved child
+  regex matches; current representative outputs still have null capture fields.
+
 - 2026-07-03: **RUST-PARITY.7.3.4 — triage structural oracle mismatches**
   (NO RUST RUNTIME/PARSER/CORPUS CODE CHANGE).
   Reproduced the recorded `portmap`, `lib_reader`, and `ebnf` structural mismatches with the Perl reference and

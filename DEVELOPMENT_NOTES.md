@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.4.1 — header-rest action-edge parsing):
+  The `lib_reader` top-rule collapse was parser/compiler-owned first. Rust's rule-header scanner captured the first
+  non-space token after `:`/`::` as a mode suffix and treated unknown tokens as default mode, which silently dropped
+  ordinary header-rest body syntax such as `->`, `->Child.push`, and `I.return(...)`. The parser now accepts only
+  recognized mode suffixes as modes and restores unrecognized tokens to the body rest. Edge spacing was corrected at
+  the same boundary: `specs/spec.spec` uses `->[ \t]*` and `=>[ \t]*`, so spaces after `->`/`=>` are optional; the
+  old Rust `[ \t]+` requirement was implementation drift. `lib_file` now compiles the `group` `.push` dispatch and
+  representative probes produce `GROUP` nodes instead of `[[]]`. Their capture fields are still null, which is
+  runtime capture propagation for dependency-resolved child regex matches and is now owned by
+  `RUST-PARITY.7.3.4.4`.
+
 - 2026-07-03 (RUST-PARITY.7.3.4 — structural mismatch triage):
   The `portmap`/`lib_reader`/`ebnf` divergences are not fixture-selection problems. Perl reference probes encode all
   representative outputs cleanly, but the Rust `corpus_oracle` path diverges before any fixture can be safely

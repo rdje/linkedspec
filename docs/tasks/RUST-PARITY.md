@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (`.7.3.7` done — oracle timeout guard now covers parser build and parse;
-  frontier returns to `.7.3.4`)
+- Last updated: `2026-07-03` (`.7.3.4.1` done — header-rest action-edge parsing fixed;
+  frontier advances to `.7.3.4.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -328,12 +328,33 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.4 - triage structural oracle mismatches`
 
 - ID: `RUST-PARITY.7.3.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Fix Rust parser/compiler handling for header-rest action edges on regex-less top rules, starting with
     `lib_reader`'s `lib_file:: -> group .push`.
   Acceptance: The Rust compiled `lib_file` rule contains the `group` action-edge fluent push; the representative
     `lib_reader` sattribute and cattribute inputs reproduce the Perl wrapped `GROUP` AST through the oracle path or
     are cleanly blocked by a later runtime owner with evidence; focused parser/compiler/runtime tests pass.
+  Verification: Done — 2026-07-03. The Rust header parser now treats only recognized suffixes (`AND`, `OR+`,
+    bounded forms, symbolic repeaters, and siblings) as rule modes. When the first header-rest token is ordinary
+    body syntax such as `->`, `->Child.push`, or `I.return(...)`, the token is restored into the rule body instead
+    of being silently consumed as an unrecognized default mode. Action and blind-call edge recognition now matches
+    `specs/spec.spec`: spaces/tabs after `->` and `=>` are optional (`[ \t]*`), so `->Child`, `=>Child`, and
+    compact header-rest forms such as `Top::->Child.push` are valid. Parser, compiler, and runtime regression
+    tests lock the compact action-edge path. A real `lib_reader` compiled-rule dump now shows `lib_file` has the
+    `group` action-edge fluent `.push` dispatch and the dependency-resolved child regex; representative sattribute
+    and cattribute probes no longer collapse to `[[]]`. They still produce `GROUP` nodes with null capture fields,
+    proving the remaining blocker is runtime capture propagation for dependency-resolved edge-only child regexes,
+    split below as `.7.3.4.4`.
+  Commit: `RUST-PARITY.7.3.4.1 - fix header-rest action-edge parsing`
+
+- ID: `RUST-PARITY.7.3.4.4`
+  Status: `pending`
+  Goal: Fix Rust runtime capture propagation for dependency-resolved action-edge child regex matches exposed by
+    `lib_reader`.
+  Acceptance: `entry_group(0)` and `entry_group(1)` in child rules reached through a parent edge-only,
+    dependency-resolved child regex expose the actual child match captures instead of null values; representative
+    `lib_reader` sattribute and cattribute inputs reproduce the Perl wrapped `GROUP` AST through the oracle path or
+    split again with narrower runtime evidence; focused runtime tests pass.
   Verification: `pending`
   Commit: `pending`
 
@@ -481,7 +502,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.3.4` | `deferred` | neutral scalar-ref/action-payload contract or hlink spec migration needed before bracket/mixed fixtures |
 | — | `RUST-PARITY.7.3.7` | `done` | user-directed trace/toolbox timeout census fixed the oracle guard boundary so parser build and parse are both hard-timeout protected |
 | — | `RUST-PARITY.7.3.4` | `done` | structural mismatch triage split owners for `portmap`, `lib_reader`, and `ebnf`; no unsafe fixture landed |
-| 1 | `RUST-PARITY.7.3.4.1` | `pending` | fix parser/compiler header-rest action edges on regex-less top rules (`lib_reader`) |
+| — | `RUST-PARITY.7.3.4.1` | `done` | parser/compiler header-rest action edges now compile compact `lib_reader` top dispatch; remaining `lib_reader` blocker is runtime capture propagation |
+| 1 | `RUST-PARITY.7.3.4.4` | `pending` | fix runtime capture propagation for dependency-resolved `lib_reader` child regex matches |
 | 2 | `RUST-PARITY.7.3.4.2` | `pending` | fix runtime boolean/list-context parity exposed by `portmap` scalar classification |
 | 3 | `RUST-PARITY.7.3.4.3` | `pending` | fix action-edge fluent child/target aggregation for `ebnf` payloads and `portmap` concatenation |
 | 4 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
@@ -626,6 +648,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-03` | `RUST-PARITY.7.3.3.3` | Direct Perl `Data::Dumper`/`JSON::PP` scalar-ref probe; Rust source audit of `RuntimeValue`; temporary Rust `hlink_substitution` execution probe then removal; `git diff -- rust/linkedspec-runtime/tests/integration_test.rs`; Rust `corpus_oracle`; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/DEFERRED — Perl bracket/mixed outputs contain scalar refs that `JSON::PP` cannot encode; Rust has no neutral scalar-ref runtime value and the current hlink scalar-ref action payload fails parsing before falling through to `exit_now(2)`. Bracket/mixed fixtures are deferred to `.7.3.3.4`; temporary probe removed; corpus oracle passes over **66** fixtures; full local CI passes with phase0 **1018** tests. Frontier → `.7.3.4` |
 | `2026-07-03` | `RUST-PARITY.7.3.7` | Shipped-spec/input fork+SIGKILL census; focused `BNF` build-vs-parse separation; `LINKEDSPEC_TRACE_LEVEL=debug` trace to `/tmp/linkedspec-bnf-build.trace`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; forced `ORACLE_TIMEOUT=0` generator run; normal generator regeneration; Rust `corpus_oracle` | PASS — `BNF` timeout was parser construction outside the prior oracle guard, not parse execution; trace reached successful parser generation. `tools/gen_oracle_corpus.pl` now builds and parses inside the timeout child; forced timeout reports `hard kill during parser build/parse`; normal regeneration writes **66** byte-identical fixtures; Rust `corpus_oracle` passes. Frontier → `.7.3.4` |
 | `2026-07-03` | `RUST-PARITY.7.3.4` | `perl -Iperl` module-path check; Perl reference `LinkedSpec::get_parser`/`JSON::PP` probes for `portmap`, `lib_reader`, and `ebnf`; temporary Rust probe using the `corpus_oracle` parse/validate/compile/execute path; Rust compiled-rule dumps; `LinkedSpec::call_spec_handler_subst` lowering probe | PASS/SPLIT — all three structural mismatches reproduced. `portmap` exposes runtime boolean/list-context and recursive fluent aggregation gaps; `lib_reader` first exposes a parser/compiler drop of header-rest action edges on regex-less top rules; `ebnf` compiles the fluent chains but runtime duplicates rule headers and drops token payloads. No fixture was safe to land; implementation split to `.7.3.4.1`-`.7.3.4.3`. Frontier → `.7.3.4.1` |
+| `2026-07-03` | `RUST-PARITY.7.3.4.1` | `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused core `action_edge` and `parse_blind_edge` tests; focused runtime compact-arrow regression; real `lib_reader` compile/execute probe; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/SPLIT — Rust now preserves header-rest body syntax that starts with `->`, `->Child.push`, or lifecycle fluent calls, and `->`/`=>` spacing matches `specs/spec.spec` optional whitespace. `lib_file` now compiles the `group` `.push` dispatch and representative `lib_reader` probes no longer collapse to `[[]]`; remaining null capture fields are split to `.7.3.4.4`. Frontier → `.7.3.4.4` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
