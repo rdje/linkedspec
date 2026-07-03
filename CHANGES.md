@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.4 — triage structural oracle mismatches
+
+**Scope:** Task-tree/index, roadmap pointer, live docs, memory pointer, and Knowledge Map. No Rust parser/runtime
+code and no oracle corpus fixtures changed.
+
+**What changed:** Reproduced the `.7.2` structural divergences for `portmap`, `lib_reader`, and `ebnf`, then split
+the implementation work into narrower owners before any code change. The next frontier is `RUST-PARITY.7.3.4.1`
+for Rust parser/compiler handling of header-rest action edges on regex-less top rules.
+
+**Evidence:** Perl reference probes (`perl -Iperl`, `LinkedSpec::get_parser`, `JSON::PP`) produced JSON-safe
+reference values for representative inputs. A temporary Rust probe using the same parse/validate/compile/execute
+path as `corpus_oracle` reproduced the mismatches: `portmap` scalar cases have wrong nesting/tagging and the bit
+case warns `unknown helper 'or'`; `portmap` concatenation returns `[["?multi:",[]]]`; `lib_reader` sattribute and
+cattribute inputs collapse to `[[]]` because Rust drops `lib_file:: -> group .push` from the compiled top rule;
+and `ebnf` expression/logging inputs duplicate rule headers while dropping token payloads despite compiled fluent
+chains being present.
+
+**Checks:** Read-only/temporary reproduction only. The commit gates below verify the documentation/memory state and
+the existing 66-fixture oracle remains green.
+
 ## 2026-07-03 — RUST-PARITY.7.3.7 — hard-timeout parser construction too
 
 **Scope:** Oracle generator timeout boundary, corpus README, task-tree/index, roadmap pointer, live docs, and

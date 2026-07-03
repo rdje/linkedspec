@@ -306,11 +306,54 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: Deferred by `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures`
 
 - ID: `RUST-PARITY.7.3.4`
-  Status: `pending`
+  Status: `done`
   Goal: Triage `.7.2` simple-spec structural divergences (`portmap`, `lib_reader`, `ebnf`).
   Acceptance: Reproduce each recorded mismatch with the oracle/toolbox path, classify whether the first fix is in
     parser, compiler, runtime, or fixture selection, land only a safe green fixture or split an implementation leaf
     with evidence.
+  Verification: Done — 2026-07-03. Reproduced the Perl reference outputs with `perl -Iperl` and
+    `LinkedSpec::get_parser`, then reproduced Rust outputs through a temporary `/private/tmp` probe that uses the
+    same `parse_spec_with_user_functions -> validate -> compile -> Engine::execute` path as `corpus_oracle`.
+    `portmap` is not fixture-safe yet: `foo` reference `["?bare:",["foo"]]` becomes Rust
+    `[["?bare:",[["foo"]]]]`, `bar[3]` becomes a `?bare:` node and warns `unknown helper 'or'`, and
+    `{foo bar[2]}` becomes `[["?multi:",[]]]`. First owners: Rust runtime boolean helper parity (`or`/siblings),
+    list-context splice semantics for `array(flat_array(...))`, and action-edge fluent/recursive aggregation for
+    concatenation. `lib_reader` is parser/compiler-owned first: `lib_file:: -> group .push` is present in the
+    shipped spec, but the Rust compiled `lib_file` rule has no regex patterns and no action dispatch, so both
+    `cell("foo"){ attr : "bar"; }` and `cell("foo"){ attr("bar,baz"); }` collapse to `[[]]` instead of the Perl
+    `GROUP` AST. `ebnf` is runtime-owned after compile: grammar-file `.push(child, rule)` fluent chains are present
+    in the compiled table, but `Expr := Term ("+" Term)*` returns duplicated rule headers and drops token payloads
+    (`[[[],[[["rule","Expr"],["rule","Expr"]],[["rule","Term"],["rule","Term"]]]]]`). No green fixture was landed;
+    implementation is split into `.7.3.4.1`-`.7.3.4.3`.
+  Commit: `RUST-PARITY.7.3.4 - triage structural oracle mismatches`
+
+- ID: `RUST-PARITY.7.3.4.1`
+  Status: `pending`
+  Goal: Fix Rust parser/compiler handling for header-rest action edges on regex-less top rules, starting with
+    `lib_reader`'s `lib_file:: -> group .push`.
+  Acceptance: The Rust compiled `lib_file` rule contains the `group` action-edge fluent push; the representative
+    `lib_reader` sattribute and cattribute inputs reproduce the Perl wrapped `GROUP` AST through the oracle path or
+    are cleanly blocked by a later runtime owner with evidence; focused parser/compiler/runtime tests pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.4.2`
+  Status: `pending`
+  Goal: Fix Rust runtime helper/list-context parity exposed by `portmap` scalar classification.
+  Acceptance: Rust recognizes the Perl helper surface needed by `portmap` conditionals (`or` at minimum, plus any
+    sibling boolean helper proved necessary) and splices list-context array helper payloads so
+    `array(flat_array(entry_parts))` matches the Perl shape; `foo`, `bar[3]`, `baz[7:0]`, and `0x1f` can be added
+    or proven blocked with exact remaining evidence; focused runtime tests pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.4.3`
+  Status: `pending`
+  Goal: Fix Rust action-edge fluent child/target aggregation semantics for recursive/grammar-file payloads.
+  Acceptance: `push(child, target)` and no-arg `.push` on action edges match the Perl child-call/target semantics
+    for `ebnf` rule payloads and `portmap` concatenation; the representative `ebnf_expression_rules`,
+    `ebnf_logging_annotation`, and `portmap` concatenation cases either become green oracle fixtures or are split
+    again with narrower evidence.
   Verification: `pending`
   Commit: `pending`
 
@@ -437,12 +480,15 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.3.3` | `done` | bracket/mixed hlink scalar-ref fixtures deferred with Perl JSON failure and Rust action-branch evidence |
 | — | `RUST-PARITY.7.3.3.4` | `deferred` | neutral scalar-ref/action-payload contract or hlink spec migration needed before bracket/mixed fixtures |
 | — | `RUST-PARITY.7.3.7` | `done` | user-directed trace/toolbox timeout census fixed the oracle guard boundary so parser build and parse are both hard-timeout protected |
-| 1 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
-| 2 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
-| 3 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
-| 4 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 5 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 6 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.4` | `done` | structural mismatch triage split owners for `portmap`, `lib_reader`, and `ebnf`; no unsafe fixture landed |
+| 1 | `RUST-PARITY.7.3.4.1` | `pending` | fix parser/compiler header-rest action edges on regex-less top rules (`lib_reader`) |
+| 2 | `RUST-PARITY.7.3.4.2` | `pending` | fix runtime boolean/list-context parity exposed by `portmap` scalar classification |
+| 3 | `RUST-PARITY.7.3.4.3` | `pending` | fix action-edge fluent child/target aggregation for `ebnf` payloads and `portmap` concatenation |
+| 4 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
+| 5 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
+| 6 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 7 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 8 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
@@ -579,6 +625,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-03` | `RUST-PARITY.7.3.3.2` | Direct Perl `JSON::PP` curly probe; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — `hlink_curly_brace` added for `{abc}` with expected `["{abc}"]`; generator produced **66** fixtures; Rust `corpus_oracle` passes over the 66-fixture corpus; full local CI passes with phase0 **1018** tests. Bracket/mixed scalar-ref hlink cases untouched. Frontier → `.7.3.3.3` |
 | `2026-07-03` | `RUST-PARITY.7.3.3.3` | Direct Perl `Data::Dumper`/`JSON::PP` scalar-ref probe; Rust source audit of `RuntimeValue`; temporary Rust `hlink_substitution` execution probe then removal; `git diff -- rust/linkedspec-runtime/tests/integration_test.rs`; Rust `corpus_oracle`; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/DEFERRED — Perl bracket/mixed outputs contain scalar refs that `JSON::PP` cannot encode; Rust has no neutral scalar-ref runtime value and the current hlink scalar-ref action payload fails parsing before falling through to `exit_now(2)`. Bracket/mixed fixtures are deferred to `.7.3.3.4`; temporary probe removed; corpus oracle passes over **66** fixtures; full local CI passes with phase0 **1018** tests. Frontier → `.7.3.4` |
 | `2026-07-03` | `RUST-PARITY.7.3.7` | Shipped-spec/input fork+SIGKILL census; focused `BNF` build-vs-parse separation; `LINKEDSPEC_TRACE_LEVEL=debug` trace to `/tmp/linkedspec-bnf-build.trace`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; forced `ORACLE_TIMEOUT=0` generator run; normal generator regeneration; Rust `corpus_oracle` | PASS — `BNF` timeout was parser construction outside the prior oracle guard, not parse execution; trace reached successful parser generation. `tools/gen_oracle_corpus.pl` now builds and parses inside the timeout child; forced timeout reports `hard kill during parser build/parse`; normal regeneration writes **66** byte-identical fixtures; Rust `corpus_oracle` passes. Frontier → `.7.3.4` |
+| `2026-07-03` | `RUST-PARITY.7.3.4` | `perl -Iperl` module-path check; Perl reference `LinkedSpec::get_parser`/`JSON::PP` probes for `portmap`, `lib_reader`, and `ebnf`; temporary Rust probe using the `corpus_oracle` parse/validate/compile/execute path; Rust compiled-rule dumps; `LinkedSpec::call_spec_handler_subst` lowering probe | PASS/SPLIT — all three structural mismatches reproduced. `portmap` exposes runtime boolean/list-context and recursive fluent aggregation gaps; `lib_reader` first exposes a parser/compiler drop of header-rest action edges on regex-less top rules; `ebnf` compiles the fluent chains but runtime duplicates rule headers and drops token payloads. No fixture was safe to land; implementation split to `.7.3.4.1`-`.7.3.4.3`. Frontier → `.7.3.4.1` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -645,6 +692,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.3.3.2` | `RUST-PARITY.7.3.3.2 - add hlink curly oracle fixture` | added `hlink_curly_brace` for `{abc}` to the oracle generator and checked-in corpus; 66-fixture corpus oracle green |
 | `RUST-PARITY.7.3.3.3` | `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures` | no generator/corpus/runtime code change; records Perl scalar-ref JSON failure plus Rust scalar-ref action-branch failure and defers bracket/mixed fixtures to `.7.3.3.4` |
 | `RUST-PARITY.7.3.7` | `RUST-PARITY.7.3.7 - hard-timeout parser construction too` | oracle generator now hard-timeout guards parser construction plus parse execution; normal regeneration remains 66-fixture byte-identical; corpus oracle green |
+| `RUST-PARITY.7.3.4` | `RUST-PARITY.7.3.4 - triage structural oracle mismatches` | no runtime/corpus code change; reproduces `portmap`/`lib_reader`/`ebnf` Rust structural divergences and splits parser/runtime implementation owners into `.7.3.4.1`-`.7.3.4.3` |
 
 ## Changelog
 

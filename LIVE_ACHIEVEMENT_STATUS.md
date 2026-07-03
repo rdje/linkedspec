@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.4 — triage structural oracle mismatches**
+  (NO RUST RUNTIME/PARSER/CORPUS CODE CHANGE).
+  Reproduced the recorded `portmap`, `lib_reader`, and `ebnf` structural mismatches with the Perl reference and
+  the Rust `corpus_oracle` execution path, then split narrower implementation owners before any code change.
+
+  **Findings:** `portmap` needs Rust runtime boolean/list-context parity (`or` is missing; `array(flat_array(...))`
+  nests too deeply) plus action-edge fluent recursive aggregation before concat fixtures are safe. `lib_reader`
+  first needs a parser/compiler fix: Rust drops the regex-less top-rule header-rest edge
+  `lib_file:: -> group .push`, so representative group inputs collapse to `[[]]`. `ebnf` compiles its fluent
+  chains but runtime execution duplicates rule headers and drops token payloads, so it is owned by action-edge
+  fluent child/target aggregation.
+
+  **Verification:** Perl `LinkedSpec::get_parser`/`JSON::PP` probes for representative `portmap`, `lib_reader`,
+  and `ebnf` inputs; temporary Rust probe using parse/validate/compile/execute; Rust compiled-rule dumps;
+  `LinkedSpec::call_spec_handler_subst` lowering probe for child-target `push(...)`.
+
+  **Frontier:** `RUST-PARITY.7.3.4.1` — fix parser/compiler handling for header-rest action edges on regex-less
+  top rules, starting with `lib_reader`.
+
 - 2026-07-03: **RUST-PARITY.7.3.7 — oracle timeout covers parser build and parse**
   (GENERATOR SAFETY FIX; NO CORPUS FIXTURE VALUE CHANGE).
   The user-directed timeout re-debug found the remaining live issue in the oracle guard boundary. A shipped-spec

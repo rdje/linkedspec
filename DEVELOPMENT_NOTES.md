@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.4 — structural mismatch triage):
+  The `portmap`/`lib_reader`/`ebnf` divergences are not fixture-selection problems. Perl reference probes encode all
+  representative outputs cleanly, but the Rust `corpus_oracle` path diverges before any fixture can be safely
+  landed. `portmap` shows two runtime gaps: missing boolean helper parity (`bar[3]` warns `unknown helper 'or'`
+  and is classified as `?bare:`) and missing list-context splice semantics (`array(flat_array(entry_parts))`
+  becomes one nested array too deep); concatenation additionally exposes action-edge fluent recursive aggregation
+  (`{foo bar[2]}` -> `[["?multi:",[]]]`). `lib_reader` first belongs to parser/compiler: the shipped
+  `lib_file:: -> group .push` header-rest edge is absent from the Rust compiled `lib_file` rule, so top-level
+  sattribute/cattribute inputs return `[[]]`. `ebnf` compiles its `.if(...).push(child, rule)...` chains, but the
+  runtime duplicates rule headers and drops token payloads, so the first owner is action-edge fluent child/target
+  semantics. Work is split into `.7.3.4.1` parser/compiler header-rest edge fix, `.7.3.4.2` runtime
+  boolean/list-context parity, and `.7.3.4.3` action-edge fluent aggregation.
+
 - 2026-07-03 (RUST-PARITY.7.3.7 — oracle timeout covers parser build + parse):
   The user-directed timeout re-debug found that a "timeout" can occur before parser execution. A fork+SIGKILL
   census over shipped specs made `BNF` exceed a 5s build+parse wrapper even on empty input. Focused probes showed
