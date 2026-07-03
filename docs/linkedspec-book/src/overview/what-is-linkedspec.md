@@ -34,7 +34,11 @@ accept or execute that helper.
 
 The reserved dispatch design resolves those jobs through a deterministic parser registry,
 caches compiled next-stage parsers by content/capability fingerprints, and runs jobs in a
-stable queue. Current shipped parsers do not yet implement that staged dispatch queue.
+stable queue. Current shipped parsers implement only the first narrow
+`body_parse_job` path for top-level user-function bodies: `actionir-body.spec` resolves
+through a built-in provider, runs top rule `action_block`, and stitches the returned
+body AST into `body_ast`. General public parse-job authoring, provider search, and
+recursive staged queues remain future work.
 
 LinkedSpec also has a reserved design for spec-file composition. Future file-scope
 directives such as `import "common/atoms.spec" as atoms` and

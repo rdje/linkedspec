@@ -206,6 +206,8 @@ fn staged_parser_registry_dispatches_function_body_jobs() {
         "{err}"
     );
     assert!(err.contains("parser_spec_id=missing.spec"), "{err}");
+    assert!(err.contains("source_span=10-21"), "{err}");
+    assert!(err.contains("failure_policy=fail"), "{err}");
 }
 
 #[test]
@@ -463,6 +465,149 @@ Done:
             "{label}: dispatched body_ast must be preserved"
         );
     }
+}
+
+#[test]
+fn function_body_staged_prototype_end_to_end_shape_and_runtime() {
+    let grammar = r#"fn normalize(value) { return(trim(value)) }
+fn join_pair(left, right) { return(concat(left, right)) }
+fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
+fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+
+Top::
+ /x/ -> Done { set(scalar(stage_meta), mk_meta("k","v")); return([normalize(" x "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["k"]]) }
+Done:
+ /[a-z]+/
+"#;
+
+    let asts = parse_user_function_definition_asts(grammar).expect("function AST parse");
+    assert_eq!(asts.len(), 4);
+    assert_eq!(
+        asts.iter()
+            .map(|node| node["name"].as_str().unwrap())
+            .collect::<Vec<_>>(),
+        vec!["normalize", "join_pair", "mk_items", "mk_meta"]
+    );
+    for node in &asts {
+        assert_eq!(node["type"], serde_json::json!("function_definition"));
+        assert_eq!(
+            node["body_parse_job"]["parent_ast_path"],
+            serde_json::json!(["functions", "__pending_source_order__", "body_source"])
+        );
+        assert_eq!(
+            node["body_parse_job"]["parser_spec_id"],
+            serde_json::json!("actionir-body.spec")
+        );
+        assert_eq!(node["body_parse_job"]["source_span"], node["body_span"]);
+    }
+
+    let spec = parse_spec_with_user_functions(grammar).expect("full spec parse");
+    assert_eq!(
+        spec.function_names(),
+        vec!["normalize", "join_pair", "mk_items", "mk_meta"]
+    );
+    let expected = [
+        ("normalize", vec!["value"], 1usize),
+        ("join_pair", vec!["left", "right"], 2usize),
+        ("mk_items", vec!["first", "second"], 2usize),
+        ("mk_meta", vec!["key", "value"], 2usize),
+    ];
+    for (idx, (name, params, arity)) in expected.iter().enumerate() {
+        let function = &spec.functions[idx];
+        assert_eq!(&function.name, name);
+        assert_eq!(
+            function.params,
+            params
+                .iter()
+                .map(|param| param.to_string())
+                .collect::<Vec<_>>()
+        );
+        assert_eq!(function.arity, *arity);
+
+        let payload = function.body_payload.as_ref().expect("body payload");
+        let job = function.body_parse_job.as_ref().expect("body parse job");
+        let body_ast = function.body_ast.as_ref().expect("body ast");
+        assert_eq!(payload["kind"], serde_json::json!("staged_payload"));
+        assert_eq!(payload["payload_kind"], serde_json::json!("function_body"));
+        assert_eq!(
+            payload["parent_ast_path"],
+            serde_json::json!(["functions", idx.to_string(), "body_source"])
+        );
+        assert_eq!(payload["text"], serde_json::json!(function.body_source));
+        assert_eq!(job["kind"], serde_json::json!("parse_job"));
+        assert_eq!(
+            job["parent_ast_path"],
+            serde_json::json!(["functions", idx.to_string(), "body_source"])
+        );
+        assert_eq!(job["text"], serde_json::json!(function.body_source));
+        assert_eq!(job["source_span"], payload["source_span"]);
+        assert_eq!(
+            job["parser_spec_id"],
+            serde_json::json!("actionir-body.spec")
+        );
+        assert_eq!(job["top_rule"], serde_json::json!("action_block"));
+        assert_eq!(job["result_policy"], serde_json::json!("replace_field"));
+        assert_eq!(job["result_field"], serde_json::json!("body_ast"));
+        assert_eq!(job["failure_policy"], serde_json::json!("fail"));
+
+        let start = job["source_span"]["start"].as_u64().expect("span start");
+        let end = job["source_span"]["end"].as_u64().expect("span end");
+        assert_eq!(
+            job["job_id"],
+            serde_json::json!(format!(
+                "parse_job:function_body:functions.{idx}.body_source:actionir-body.spec:action_block:{start}-{end}"
+            ))
+        );
+        assert_eq!(body_ast["kind"], serde_json::json!("action_block"));
+        assert!(
+            body_ast["statements"]
+                .as_array()
+                .is_some_and(|items| !items.is_empty()),
+            "{name}: body_ast should contain parsed statements: {body_ast:#?}"
+        );
+    }
+
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    assert_eq!(compiled.functions.len(), 4);
+    for (idx, function) in compiled.functions.iter().enumerate() {
+        assert!(
+            function.body_parse_job.is_some(),
+            "compiled function {idx} preserves body_parse_job"
+        );
+        assert!(
+            function.body_ast.is_some(),
+            "compiled function {idx} preserves stitched body_ast"
+        );
+    }
+    assert_eq!(
+        Engine::new(compiled).execute("xhello").expect("execute"),
+        serde_json::json!([["x", "ab", 2, "v"]])
+    );
+
+    let bad_job = serde_json::json!({
+        "kind": "parse_job",
+        "job_id": "parse_job:function_body:functions.0.body_source:missing.spec:action_block:10-21",
+        "parent_ast_path": ["functions", "0", "body_source"],
+        "node_kind": "function_definition",
+        "payload_kind": "function_body",
+        "text": "return(\"a\")",
+        "source_span": {"start": 10, "end": 21, "line_start": 1, "line_end": 1},
+        "parser_spec_id": "missing.spec",
+        "top_rule": "action_block",
+        "result_policy": "replace_field",
+        "result_field": "body_ast",
+        "failure_policy": "fail",
+        "diagnostic_owner": "function_body",
+    });
+    let err = execute_parse_jobs(&[bad_job]).expect_err("missing parser spec should fail");
+    assert!(err.contains("phase=resolve"), "{err}");
+    assert!(
+        err.contains("parent_ast_path=functions.0.body_source"),
+        "{err}"
+    );
+    assert!(err.contains("source_span=10-21"), "{err}");
+    assert!(err.contains("failure_policy=fail"), "{err}");
 }
 
 #[test]

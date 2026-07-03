@@ -27,6 +27,16 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 
 ## Strategic Principles
 1. Keep staged extraction as a first-class concept.
+   - Current staged linked parsing status (2026-07-03):
+     the first function-body prototype is proven end to end. Top-level
+     user-function definition shells are parsed by `specs/user_function_definition.spec`;
+     their exact body text is preserved in `body_payload`, the neutral
+     `body_parse_job` dispatches through the minimal built-in
+     `actionir-body.spec` / `action_block` registry provider, and the returned
+     body `action_block` AST is stitched into `body_ast` on Perl and Rust.
+     Public `parse_job(...)` authoring, import/provider search roots, multiple
+     payload parser families, recursive staged queues, and cycle diagnostics
+     remain future work.
 2. Keep recursion ergonomics simple.
 3. Make parser behavior explicit (not accidental).
 4. Improve trust with deterministic diagnostics and regression tests.

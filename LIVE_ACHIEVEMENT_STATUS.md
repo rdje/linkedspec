@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **STAGED-LINKED-PARSING.5.6 — function-body staged prototype proved**
+  (END-TO-END AST SHAPE + PROVENANCE DIAGNOSTICS + PERL/RUST PARITY + MDBOOK).
+  The first staged linked parsing prototype is now proven end to end. Perl phase0 locks a multi-function sample
+  whose descriptor exposes source-ordered user functions, exact `body_payload` text/spans, normalized
+  `body_parse_job` records, deterministic source-span-based job ids, and stitched `body_ast` action blocks.
+  Runtime behavior remains stable (`["x", "ab", 2, "v"]` for the proof sample), and unsupported body-parser
+  dispatch diagnostics preserve registry phase, parent AST path, source span, and failure policy.
+
+  **Rust parity:** Rust integration coverage now proves the same neutral contract through raw
+  `specs/user_function_definition.spec` AST output, normalized parsed `SpecFile.functions`, compiled
+  `CompiledUserFunction` preservation, runtime output, and dispatch diagnostics.
+
+  **Verification:** standalone Perl proof PASS; Perl syntax checks PASS; focused Rust staged prototype,
+  staged-registry, and spec-defined user-function tests PASS; direct Perl phase0 TAP run PASS with **1018**
+  top-level tests; mdBook, Knowledge Map, memory, doctrine, whitespace, and full local CI gates PASS.
+
+  **Frontier:** staged prototype tree frontier is empty; PNT returns to `RUST-PARITY.7.3` unless a new staged
+  linked parsing leaf is explicitly split.
+
 - 2026-07-03: **STAGED-LINKED-PARSING.5.5 — function-body parse jobs dispatched**
   (MINIMAL STAGED REGISTRY + PERL/RUST BODY AST STITCHING + TESTS + MDBOOK).
   Function-body `body_parse_job` records now execute through the first staged parser registry path. The neutral

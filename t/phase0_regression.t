@@ -44305,6 +44305,123 @@ subtest 'staged_parser_registry_dispatches_function_body_jobs' => sub {
     like($bad_err, qr/job_id=parse_job:function_body:functions\.0\.body_source:missing\.spec:action_block:10-21/,
         'unsupported parser diagnostic names job id');
     like($bad_err, qr/parser_spec_id=missing\.spec/, 'unsupported parser diagnostic names parser spec id');
+    like($bad_err, qr/source_span=10-21/, 'unsupported parser diagnostic preserves the original source span');
+    like($bad_err, qr/failure_policy=fail/, 'unsupported parser diagnostic preserves failure policy');
+
+    done_testing();
+};
+
+subtest 'function_body_staged_prototype_end_to_end' => sub {
+    require LinkedSpec::StagedParserRegistry;
+
+    my $spec = <<'SPEC';
+fn normalize(value) { return(trim(value)) }
+fn join_pair(left, right) { return(concat(left, right)) }
+fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
+fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+
+Top::
+ /x/ -> Done { set(scalar(stage_meta), mk_meta("k","v")); return([normalize(" x "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["k"]]) }
+Done::
+ /x/
+SPEC
+
+    my %ctx;
+    my $descriptor = eval { LinkedSpec::Get(\$spec, return_descriptor => 1, runtime_ctx_ref => \%ctx) };
+    my $err = $@;
+    ok(!$err, 'function-body staged prototype descriptor build does not die') or diag(normalize_error($err));
+    ok(ref($descriptor) eq 'HASH', 'function-body staged prototype descriptor build returns descriptor hash');
+    ok(!exists($ctx{last_error}), 'function-body staged prototype build leaves last_error clear');
+
+    my $descriptor_hash = ref($descriptor) eq 'HASH' ? $descriptor : {};
+    is_deeply(
+        $descriptor_hash->{meta}{function_order},
+        [qw(normalize join_pair mk_items mk_meta)],
+        'prototype descriptor preserves source-order function registry',
+    );
+
+    my $functions = ref($descriptor_hash->{functions}) eq 'HASH' ? $descriptor_hash->{functions} : {};
+    my @expected = (
+        [normalize => ['value'], 1],
+        [join_pair => ['left', 'right'], 2],
+        [mk_items => ['first', 'second'], 2],
+        [mk_meta => ['key', 'value'], 2],
+    );
+
+    for my $idx (0 .. $#expected) {
+        my ($name, $params, $arity) = @{$expected[$idx]};
+        my $fn = ref($functions->{$name}) eq 'HASH' ? $functions->{$name} : {};
+        ok(ref($functions->{$name}) eq 'HASH', "$name function definition is exposed");
+        is_deeply($fn->{params}, $params, "$name params are recorded");
+        is($fn->{arity}, $arity, "$name arity is recorded");
+
+        my $payload = ref($fn->{body_payload}) eq 'HASH' ? $fn->{body_payload} : {};
+        my $job = ref($fn->{body_parse_job}) eq 'HASH' ? $fn->{body_parse_job} : {};
+        my $body_ast = ref($fn->{body_ast}) eq 'HASH' ? $fn->{body_ast} : {};
+        my $body_start = defined($fn->{body_source}) ? index($spec, $fn->{body_source}) : -1;
+        my $body_end = $body_start >= 0 ? $body_start + length($fn->{body_source}) : -1;
+
+        is($payload->{kind}, 'staged_payload', "$name body payload is neutral staged payload data");
+        is($payload->{payload_kind}, 'function_body', "$name body payload records function_body kind");
+        is_deeply($payload->{parent_ast_path}, ['functions', "$idx", 'body_source'],
+            "$name body payload parent path is normalized by source order");
+        is($payload->{text}, $fn->{body_source}, "$name body payload preserves exact body text");
+        is($payload->{source_span}{start}, $body_start, "$name body payload start span is exact");
+        is($payload->{source_span}{end}, $body_end, "$name body payload end span is exact");
+
+        is($job->{kind}, 'parse_job', "$name body parse job is neutral parse-job data");
+        is_deeply($job->{parent_ast_path}, ['functions', "$idx", 'body_source'],
+            "$name body parse job parent path is normalized by source order");
+        is($job->{text}, $fn->{body_source}, "$name body parse job preserves exact body text");
+        is_deeply($job->{source_span}, $payload->{source_span}, "$name body parse job span matches payload span");
+        is($job->{parser_spec_id}, 'actionir-body.spec', "$name body parse job names the body parser spec");
+        is($job->{top_rule}, 'action_block', "$name body parse job names the body parser top rule");
+        is($job->{result_policy}, 'replace_field', "$name body parse job uses replace_field result policy");
+        is($job->{result_field}, 'body_ast', "$name body parse job targets body_ast");
+        is($job->{failure_policy}, 'fail', "$name body parse job keeps fail failure policy");
+        is(
+            $job->{job_id},
+            'parse_job:function_body:functions.' . $idx . '.body_source:actionir-body.spec:action_block:' . $body_start . '-' . $body_end,
+            "$name body parse job id is deterministic over normalized path and source span",
+        );
+
+        is($body_ast->{kind}, 'action_block', "$name staged dispatch stitched an action_block body AST");
+        ok(ref($body_ast->{statements}) eq 'ARRAY' && @{$body_ast->{statements}} >= 1,
+            "$name body AST contains parsed action statements");
+    }
+
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'function-body staged prototype compiles to a runnable parser')
+        or diag(normalize_error($@));
+    my $result = ref($parser) eq 'CODE' ? eval { $parser->(\"x") } : undef;
+    is_deeply(
+        $result,
+        ['x', 'ab', 2, 'v'],
+        'function-body staged prototype preserves user-function runtime semantics',
+    );
+
+    my $bad_job = {
+        kind => 'parse_job',
+        job_id => 'parse_job:function_body:functions.0.body_source:missing.spec:action_block:10-21',
+        parent_ast_path => ['functions', '0', 'body_source'],
+        node_kind => 'function_definition',
+        payload_kind => 'function_body',
+        text => 'return("a")',
+        source_span => { start => 10, end => 21, line_start => 1, line_end => 1 },
+        parser_spec_id => 'missing.spec',
+        top_rule => 'action_block',
+        result_policy => 'replace_field',
+        result_field => 'body_ast',
+        failure_policy => 'fail',
+        diagnostic_owner => 'function_body',
+    };
+    my $bad_ok = eval { LinkedSpec::StagedParserRegistry::execute_parse_jobs([$bad_job]); 1 };
+    my $bad_err = $@;
+    ok(!$bad_ok, 'prototype source-provenance diagnostic rejects unsupported body parser');
+    like($bad_err, qr/phase=resolve/, 'prototype diagnostic names registry phase');
+    like($bad_err, qr/parent_ast_path=functions\.0\.body_source/, 'prototype diagnostic names parent AST path');
+    like($bad_err, qr/source_span=10-21/, 'prototype diagnostic names original body source span');
+    like($bad_err, qr/failure_policy=fail/, 'prototype diagnostic names failure policy');
 
     done_testing();
 };

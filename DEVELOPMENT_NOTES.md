@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (STAGED-LINKED-PARSING.5.6 — function-body staged prototype proof):
+  The first staged linked parsing prototype is now proven end to end rather than merely wired. The proof sample
+  exercises four user functions with scalar, multi-param, array-local, and hash-local bodies. Perl descriptor
+  tests assert source-order function registry shape, exact `body_payload` text/spans, normalized
+  `body_parse_job` paths/job ids, stitched `body_ast` action blocks, runtime output, and dispatch diagnostics
+  containing phase, parent AST path, source span, and failure policy. Rust integration tests assert the same
+  neutral contract across raw spec-parser AST output, normalized parsed state, compiled function records, runtime
+  output, and diagnostics. This closes the first prototype leaf; broad public `parse_job(...)`, provider/import
+  search, multiple payload parser families, recursive queues, and cycle diagnostics remain future work. PNT
+  returns to `RUST-PARITY.7.3` after commit.
+
 - 2026-07-03 (STAGED-LINKED-PARSING.5.5 — minimal staged parser registry dispatch):
   Function-body parse jobs now execute through an explicit staged registry path instead of direct body-parser
   calls. The first neutral provider supports `parser_spec_id = actionir-body.spec` with `top_rule =

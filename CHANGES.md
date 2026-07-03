@@ -1,6 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — STAGED-LINKED-PARSING.5.6 — prove function-body staged prototype
+
+**Scope:** Focused Perl/Rust end-to-end tests, mdBook staged parsing overview/example text, task tree/index,
+roadmaps, live docs, memory pointer, and Knowledge Map evidence. Production parser behavior is unchanged from
+`.5.5`; this slice locks the proof.
+
+**What changed:** Added a Perl phase0 proof that builds a multi-function descriptor, verifies source-order
+function registry shape, normalized `body_payload` / `body_parse_job` provenance, deterministic body job ids,
+`actionir-body.spec` / `action_block` identity, `replace_field` into `body_ast`, stitched `action_block` body
+ASTs, stable runtime output, and source-provenance diagnostics for an unsupported body parser.
+
+**Rust parity:** Added a matching Rust integration proof over raw `specs/user_function_definition.spec` AST
+output, normalized `SpecFile.functions`, compiled `CompiledUserFunction` records, runtime execution, and dispatch
+diagnostics. The expected Rust runtime shape remains the normal top-rule result collection containing the returned
+payload.
+
+**Docs:** The book now shows the current proof sample and clarifies that shipped parsers implement only the narrow
+`body_parse_job` path. General public `parse_job(...)` authoring, provider/import search roots, multiple staged
+parser families, recursive queues, and cycle diagnostics remain future leaves.
+
+**Checks:** standalone Perl `LinkedSpec::Get`/registry proof; `perl -c -Iperl
+t/phase0_regression.t`; `perl -c -Iperl perl/LinkedSpec/StagedParserRegistry.pm`; `cargo fmt --manifest-path
+rust/linkedspec-runtime/Cargo.toml`; focused Rust
+`function_body_staged_prototype_end_to_end_shape_and_runtime`,
+`staged_parser_registry_dispatches_function_body_jobs`, and `spec_defined_user_function_parser`;
+direct phase0 TAP run with **1018 green**; `mdbook build docs/linkedspec-book`; Knowledge Map, memory,
+doctrine, and whitespace gates; and full local CI (`bash tools/run_ci_local.sh`) all passed.
+
 ## 2026-07-03 — STAGED-LINKED-PARSING.5.5 — dispatch function-body parse jobs
 
 **Scope:** New Perl/Rust staged parser registry adapters, user-function body parsing path, Rust parsed/compiled

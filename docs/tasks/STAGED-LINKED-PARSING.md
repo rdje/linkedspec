@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — .spec language model / parser composition`
 - Created: `2026-07-02`
-- Last updated: `2026-07-02`
+- Last updated: `2026-07-03`
 - Owner: repo-local workflow
 
 ## Goal
@@ -122,14 +122,21 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.4 - specify staged parser registry dispatch`
 
 - ID: `STAGED-LINKED-PARSING.5`
-  Status: `active`
+  Status: `done`
   Goal: Split and implement the first narrow staged-parsing prototype.
   Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`, `.5.6`
   Acceptance: Pick one self-contained payload family, parse it through a
     staged next-spec path, preserve source provenance, keep the contract 100%
     implementation-language neutral, and prove diagnostics plus parity gates.
-  Verification: `active`
-  Commit: `pending`
+  Verification: **DONE 2026-07-03.** The first prototype payload family is
+    user-function body text. Perl and Rust now consume the spec-defined
+    definition shell AST, preserve exact body payload/source-provenance data,
+    dispatch normalized `body_parse_job` records through the minimal staged
+    registry path, stitch `body_ast`, preserve current user-function runtime
+    behavior, and lock source-provenance diagnostics. General public
+    `parse_job(...)` authoring, import/provider search roots, multiple staged
+    parser families, and recursive queues remain future work.
+  Commit: `STAGED-LINKED-PARSING.5.6 - prove function-body staged prototype`
 
 - ID: `STAGED-LINKED-PARSING.5.1`
   Status: `done`
@@ -348,7 +355,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Commit: `STAGED-LINKED-PARSING.5.5 - dispatch function-body parse jobs`
 
 - ID: `STAGED-LINKED-PARSING.5.6`
-  Status: `pending`
+  Status: `done`
   Goal: Prove the function-body staged prototype end to end.
   Acceptance: User-function bodies parse through the staged next-spec path,
     tests assert the predicted returned `function_definition` AST shape across
@@ -357,14 +364,30 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     semantics stay stable, source-provenance diagnostics are locked, public docs
     describe implemented behavior accurately, and Perl/Rust parity plus local
     gates pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-03.** Perl phase0 now has
+    `function_body_staged_prototype_end_to_end`, which checks a multi-function
+    descriptor/runtime sample: source-order function registry, normalized
+    `body_payload`/`body_parse_job` parent paths, deterministic job ids over
+    source spans, `actionir-body.spec` / `action_block` parser identity,
+    `replace_field` into `body_ast`, stitched `action_block` body ASTs, stable
+    runtime output, and resolve diagnostics that include phase, parent AST
+    path, source span, and failure policy. Rust integration tests add the same
+    end-to-end proof over parsed `SpecFile.functions`, compiled
+    `CompiledUserFunction` records, runtime output, and dispatch diagnostics.
+    The existing dedicated `specs/user_function_definition.spec` variation
+    tests remain the small-spec AST-shape matrix for zero/multiple params,
+    whitespace, multiline/nested bodies, strings, regex braces, direct shapes,
+    assignments, hash mutations, malformed definitions, and unbalanced bodies.
+    Public mdBook wording now reflects the implemented narrow `body_parse_job`
+    path without presenting general public `parse_job(...)` authoring as
+    shipped.
+  Commit: `STAGED-LINKED-PARSING.5.6 - prove function-body staged prototype`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `STAGED-LINKED-PARSING.5.6` | `pending` | Prove the function-body staged prototype end to end now that the minimal registry path stitches body ASTs. |
+| - | _none_ | - | The first function-body staged prototype is complete. PNT returns to `RUST-PARITY.7.3` unless a new staged linked parsing leaf is explicitly split. |
 
 ## Decisions
 
@@ -451,12 +474,17 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   parse job's `replace_field`/`body_ast` policy. General public
   `parse_job(...)` authoring, filesystem/provider search roots, imports, and
   recursive staged queues remain future work.
+- `2026-07-03`: The function-body staged prototype is now proven end to end on
+  Perl and Rust. The proof asserts descriptor/parsed/compiled AST shape,
+  normalized parse-job provenance, stitched `body_ast`, runtime behavior, and
+  source-provenance diagnostics. This closes the first prototype; the broader
+  public staged-dispatch surface remains future work.
 
 ## Open Questions
 
-- `.5.6` owns the end-to-end prototype proof: broader AST-shape matrix,
-  source-provenance diagnostics, public-doc examples, and parity gates on top
-  of the `.5.5` minimal registry path.
+- General public `parse_job(...)` authoring, import/provider search roots,
+  multiple payload parser families, recursive staged queues, and cycle
+  diagnostics remain future work. They need new leaves before implementation.
 
 ## Blockers
 
@@ -476,6 +504,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `2026-07-02` | `STAGED-LINKED-PARSING.5.3.2` | `cargo fmt`; focused Rust `spec_defined_user_function_parser_*`; helper/runtime parity checks; Rust corpus oracle; `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — Rust consumes `specs/user_function_definition.spec` AST output and no longer owns a raw `fn` definition parser bridge; active Perl/Rust backends share the neutral definition-shell AST contract. |
 | `2026-07-03` | `STAGED-LINKED-PARSING.5.4` | `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/phase0_regression.t`; direct spec AST probe; descriptor `body_parse_job` probe; `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml spec_defined_user_function_parser -- --nocapture`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-core/Cargo.toml user_function -- --nocapture`; `prove -v -Iperl t/phase0_regression.t` | PASS — function-definition ASTs now carry neutral `body_parse_job` sidecars; Perl and Rust validate, normalize, and preserve them without implementing dispatch; phase0 passes with 1016 top-level tests. |
 | `2026-07-03` | `STAGED-LINKED-PARSING.5.5` | `perl -c -Iperl perl/LinkedSpec/StagedParserRegistry.pm`; `perl -c -Iperl perl/LinkedSpec/UserFunctionRegistry.pm`; `perl -c -Iperl t/phase0_regression.t`; `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml staged_parser_registry_dispatches_function_body_jobs -- --nocapture`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml spec_defined_user_function_parser -- --nocapture`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-core/Cargo.toml user_function -- --nocapture`; `prove -v -Iperl t/phase0_regression.t`; `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — minimal Perl/Rust staged registry path resolves, loads, compiles, and executes `actionir-body.spec` / `action_block` function-body jobs in stable queue order, stitches `body_ast`, preserves existing function execution behavior, phase0 passes with 1017 top-level tests, and the full local CI gate passes. |
+| `2026-07-03` | `STAGED-LINKED-PARSING.5.6` | standalone Perl `LinkedSpec::Get`/registry proof; `perl -c -Iperl t/phase0_regression.t`; `perl -c -Iperl perl/LinkedSpec/StagedParserRegistry.pm`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml function_body_staged_prototype_end_to_end_shape_and_runtime -- --nocapture`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml staged_parser_registry_dispatches_function_body_jobs -- --nocapture`; `RUSTFLAGS=-Awarnings cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml spec_defined_user_function_parser -- --nocapture`; `perl -Iperl t/phase0_regression.t` with TAP reach check; `mdbook build docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — Perl/Rust end-to-end proof locks descriptor/parsed/compiled `body_payload`, `body_parse_job`, stitched `body_ast`, runtime behavior, and source-provenance diagnostics; phase0 passes with 1018 top-level tests, and the full local CI gate passes. |
 
 ## Commit Log
 
@@ -491,6 +520,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 | `STAGED-LINKED-PARSING.5.3.2` | `STAGED-LINKED-PARSING.5.3.2 - retire Rust raw function parser` | Rust consumes the spec-defined definition AST and no longer owns a competing raw `fn` definition parser. |
 | `STAGED-LINKED-PARSING.5.4` | `STAGED-LINKED-PARSING.5.4 - add function-body parse-job sidecar` | Function-body payloads now carry neutral `body_parse_job` metadata in Perl descriptors and Rust parsed/compiled function state; dispatch remains pending. |
 | `STAGED-LINKED-PARSING.5.5` | `STAGED-LINKED-PARSING.5.5 - dispatch function-body parse jobs` | Minimal staged registry path now dispatches function-body parse jobs to `actionir-body.spec` / `action_block` and stitches `body_ast` on Perl and Rust. |
+| `STAGED-LINKED-PARSING.5.6` | `STAGED-LINKED-PARSING.5.6 - prove function-body staged prototype` | End-to-end Perl/Rust proof locks staged function-body AST shape, provenance diagnostics, runtime stability, and public docs. |
 
 ## Changelog
 
@@ -504,3 +534,4 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 - `2026-07-02`: `.5.3.2` done — Rust consumes the same spec-returned user-function definition AST contract and no longer owns a raw definition parser bridge; frontier moves to `.5.4`.
 - `2026-07-03`: `.5.4` done — function-body payloads now carry neutral `body_parse_job` sidecars with deterministic ids, parser identity, top rule, result/failure policies, exact text, and source spans; frontier moves to `.5.5`.
 - `2026-07-03`: `.5.5` done — minimal staged registry dispatch now executes function-body parse jobs through `actionir-body.spec` / `action_block`, records neutral cache/phase metadata in tests, stitches `body_ast`, and moves the frontier to `.5.6`.
+- `2026-07-03`: `.5.6` done — function-body staged prototype proved end to end on Perl and Rust with descriptor/parsed/compiled AST-shape assertions, runtime stability checks, source-provenance diagnostics, mdBook sync, and phase0 1018 green; no staged frontier remains, so PNT returns to `RUST-PARITY.7.3`.

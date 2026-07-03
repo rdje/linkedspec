@@ -169,6 +169,31 @@ body ActionIR AST into `body_ast`. The current registry provider is intentionall
 `actionir-body.spec` is resolved as a built-in neutral identity and executed by the
 existing ActionIR body-parser adapter until a self-hosted body spec exists.
 
+The current end-to-end proof covers both descriptor shape and runtime behavior. A spec
+with several function bodies such as:
+
+```text
+fn normalize(value) { return(trim(value)) }
+fn join_pair(left, right) { return(concat(left, right)) }
+fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
+fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+
+Top::
+ /x/ -> Done {
+  set(scalar(stage_meta), mk_meta("k", "v"))
+  return([normalize(" x "), join_pair("a", "b"), count(mk_items("a", "b")), stage_meta["k"]])
+ }
+Done::
+ /x/
+```
+
+has a function registry ordered as `normalize`, `join_pair`, `mk_items`, `mk_meta`.
+For each function, the descriptor exposes the exact body text in `body_payload`, a
+normalized `body_parse_job` at `functions.<index>.body_source`, and a stitched
+`body_ast` whose `kind` is `action_block`. Running the parser on `x` returns
+`["x", "ab", 2, "v"]` on the Perl reference backend; the Rust backend returns the
+same payload inside its normal top-rule result collection shape.
+
 The staged model is implementation-language neutral. Perl5, Raku, Rust, Julia, Lua,
 Dart, Zig, Go, and future backends must preserve the same parse-job semantics, source
 provenance, deterministic parser resolution, and result stitching behavior.
