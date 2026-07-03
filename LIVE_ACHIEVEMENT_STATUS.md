@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.2 — oracle timeout guard hardened**
+  (GENERATOR SAFETY FIX; NO CORPUS FIXTURE VALUE CHANGE).
+  The historical `RTLUtils` timeout was verified retired from the active core tree: `perl/RTLUtils.pm`,
+  `perl/FSMGen.pm`, and `perl/VHDL/ConstantEval.pm` are absent, and the current core/spec/corpus scan finds only
+  retirement comments/docs. The actual fix was the oracle generator's guard: `alarm()` cannot interrupt a
+  catastrophic regex, so `tools/gen_oracle_corpus.pl` now forks one child per parser run, serializes the result to
+  JSON, and has the parent enforce `ORACLE_TIMEOUT` with wall-clock wait plus `SIGKILL`.
+
+  **Verification:** KM/toolbox context read; `perl -Iperl` module path confirmed; no current core RTLUtils files;
+  fork+SIGKILL census around the current generator completed 65 fixtures; `perl -c -Iperl
+  tools/gen_oracle_corpus.pl` PASS; normal generator run regenerated **65** fixtures byte-identically;
+  `ORACLE_TIMEOUT=0` proves the hard-kill branch; Rust `corpus_oracle` PASS; Knowledge Map, memory, doctrine,
+  whitespace, and full local CI gates PASS (phase0 **1018** tests). Corpus README and KM wording updated.
+
+  **Frontier:** `RUST-PARITY.7.3.3` — try remaining `hlink_substitution` delimiter/link-path fixtures with the
+  hardened timeout guard in place.
+
 - 2026-07-03: **RUST-PARITY.7.3.1 — batch-2 shipped-spec oracle lanes split and timeout owner assigned**
   (NO RUNTIME/CORPUS CODE CHANGE; TASK-TREE OWNERSHIP BEFORE THE NEXT ORACLE BATCH).
   The broad `RUST-PARITY.7.3` leaf is now split into narrower executable lanes before any generator, corpus, or

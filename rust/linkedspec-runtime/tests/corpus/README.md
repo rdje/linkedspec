@@ -34,15 +34,17 @@ output-shape mapping when comparing:
 ## Regenerating
 
 ```sh
-perl tools/gen_oracle_corpus.pl            # default 15s per-parse timeout
+perl tools/gen_oracle_corpus.pl            # default 15s hard per-parse timeout
 ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
 ```
 
-The generator runs every oracle parse under a hard `alarm(...)` timeout so a
-pathological grammar (e.g. the known RTLUtils catastrophic-backtrack hang) cannot
-wedge corpus generation. The case list lives at the top of
-`tools/gen_oracle_corpus.pl`; `.7.2`/`.7.3` extend it, `.7.4` adds the
-enumerate-all-fixtures drift guard.
+The generator runs every oracle parse in a child process. If a parse exceeds
+`ORACLE_TIMEOUT`, the parent kills that child with `SIGKILL`, so catastrophic
+regex backtracking cannot wedge corpus generation. The historical `RTLUtils`
+hang is retired with the legacy VHDL/RTL/FSM subsystem; the process-level guard
+remains as generic protection for future pathological specs. The case list
+lives at the top of `tools/gen_oracle_corpus.pl`; `.7.2`/`.7.3` extend it,
+`.7.4` adds the enumerate-all-fixtures drift guard.
 
 `SPEC-FORMAT-TERSE.2.3.3.3.3.1` restored the minimal shipped `tclite` fixtures after the
 Rust default-mode recursive repetition and child-preamble-return gap was fixed. The

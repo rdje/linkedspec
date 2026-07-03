@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.2 — harden oracle timeout guard
+
+**Scope:** Oracle generator timeout enforcement, corpus README, task tree/index, roadmap companion, live docs,
+memory pointer, and Knowledge Map. No corpus fixture expected values changed.
+
+**What changed:** Replaced the generator's per-parse `alarm()` guard with a real process-level hard timeout:
+`tools/gen_oracle_corpus.pl` now forks a child for each parser run, has the child serialize the Perl reference
+result to JSON, and has the parent enforce `ORACLE_TIMEOUT` with wall-clock wait plus `SIGKILL`. This matches
+`TOOLBOX.md`: `alarm()` cannot interrupt catastrophic regex backtracking inside one Perl opcode.
+
+**Evidence:** The historic `RTLUtils` timeout is not live in the current core tree (`perl/RTLUtils.pm`,
+`perl/FSMGen.pm`, and `perl/VHDL/ConstantEval.pm` are absent; the remaining current-core hits are retirement
+comments/docs). A fork+SIGKILL wrapper around the pre-change current generator completed all 65 fixtures in
+about 11.3s, proving no live corpus hang. After the change, `perl -c -Iperl tools/gen_oracle_corpus.pl` passes,
+normal regeneration writes all **65** fixtures byte-identically, and `ORACLE_TIMEOUT=0 perl -Iperl
+tools/gen_oracle_corpus.pl` proves the hard-kill path.
+
+**Checks:** Rust `corpus_oracle` PASS over the 65-fixture corpus; Knowledge Map, memory, doctrine, and whitespace
+gates PASS; full local CI PASS with phase0 **1018** tests.
+
 ## 2026-07-03 — RUST-PARITY.7.3.1 — split batch-2 oracle lanes and timeout owner
 
 **Scope:** Task-tree/index, roadmap companion, live docs, memory pointer, and Knowledge Map. No parser, runtime,

@@ -26,9 +26,10 @@
 #   engine.execute(input) == [ expected ].
 #
 # Safety
-#   Every oracle parse runs under a hard `alarm(...)` timeout (default 15s,
-#   override with ORACLE_TIMEOUT) so a pathological grammar with catastrophic
-#   regex backtracking cannot wedge corpus generation.
+#   Every oracle parse runs in a child process under a hard wall-clock timeout
+#   (default 15s, override with ORACLE_TIMEOUT). The parent kills the child with
+#   SIGKILL on timeout; this deliberately does not rely on `alarm()`, because a
+#   catastrophic regex can stay inside one Perl opcode and defer safe signals.
 #
 # Usage
 #   perl tools/gen_oracle_corpus.pl            # regenerate all cases
@@ -44,8 +45,11 @@ use FindBin qw($Bin);
 use lib "$Bin/../perl";
 use File::Spec;
 use File::Path qw(make_path);
+use File::Temp qw(tempfile);
 use JSON::PP ();
 use LinkedSpec;
+use POSIX ();
+use Time::HiRes ();
 
 my $REPO    = File::Spec->rel2abs( File::Spec->catdir( $Bin, File::Spec->updir ) );
 my $SPECDIR = File::Spec->catdir( $REPO, 'specs' );
@@ -1005,24 +1009,81 @@ for my $case (@CASES) {
 }
 printf "Generated %d oracle fixture(s) into %s\n", $written, $CORPUS;
 
-# Run a built reference parser coderef on one input under a hard timeout; return
-# the decoded result structure (arrayref/hashref/scalar).
+# Run a built reference parser coderef on one input under a hard wall-clock
+# timeout; return the decoded result structure (arrayref/hashref/scalar).
 sub run_oracle {
     my ( $parser, $name, $input, $timeout ) = @_;
 
-    my $result;
-    my $ok = eval {
-        local $SIG{ALRM} = sub { die "ORACLE_TIMEOUT after ${timeout}s\n" };
-        alarm($timeout);
-        $result = $parser->( \$input );
-        alarm(0);
-        1;
-    };
-    my $err = $@ // '';
-    alarm(0);
-    die "oracle parse failed for case='$name' input=" . _show($input) . ": $err"
-        unless $ok;
-    return $result;
+    my $safe_name = $name;
+    $safe_name =~ s/[^A-Za-z0-9_.-]+/_/g;
+
+    my ( $out_fh, $out_path ) = tempfile(
+        "linkedspec-oracle-${safe_name}-out-XXXX",
+        TMPDIR => 1,
+        UNLINK => 1,
+    );
+    my ( $err_fh, $err_path ) = tempfile(
+        "linkedspec-oracle-${safe_name}-err-XXXX",
+        TMPDIR => 1,
+        UNLINK => 1,
+    );
+    close $out_fh or die "cannot close oracle temp output $out_path: $!\n";
+    close $err_fh or die "cannot close oracle temp error $err_path: $!\n";
+
+    my $pid = fork();
+    die "oracle fork failed for case='$name': $!\n" unless defined $pid;
+
+    if ( $pid == 0 ) {
+        my $ok = eval {
+            my $result     = $parser->( \$input );
+            my $child_json = JSON::PP->new->canonical(1)->pretty(1);
+            spew( $out_path, $child_json->encode($result) );
+            1;
+        };
+        if ( !$ok ) {
+            my $err = $@ // 'unknown oracle child failure';
+            spew( $err_path, $err );
+            POSIX::_exit(1);
+        }
+        POSIX::_exit(0);
+    }
+
+    my $start  = Time::HiRes::time();
+    my $status = undef;
+    while ( Time::HiRes::time() - $start < $timeout ) {
+        my $done = waitpid( $pid, POSIX::WNOHANG() );
+        if ( $done == $pid ) {
+            $status = $?;
+            last;
+        }
+        die "oracle waitpid failed for case='$name': $!\n" if $done == -1;
+        Time::HiRes::sleep(0.02);
+    }
+
+    if ( !defined $status ) {
+        kill 'KILL', $pid;
+        waitpid( $pid, 0 );
+        die "ORACLE_TIMEOUT after ${timeout}s (hard kill) for case='$name' input="
+            . _show($input) . "\n";
+    }
+
+    if ( $status & 127 ) {
+        die "oracle parse failed for case='$name' input=" . _show($input)
+            . ": child died with signal " . ( $status & 127 ) . "\n";
+    }
+
+    my $exit = $status >> 8;
+    if ( $exit != 0 ) {
+        my $err = -s $err_path ? slurp($err_path) : "child exited with status $exit\n";
+        die "oracle parse failed for case='$name' input=" . _show($input) . ": $err";
+    }
+
+    my $json_text = slurp($out_path);
+    die "oracle parse failed for case='$name' input=" . _show($input)
+        . ": child produced no JSON\n"
+        unless length $json_text;
+
+    return JSON::PP->new->decode($json_text);
 }
 
 sub slurp {

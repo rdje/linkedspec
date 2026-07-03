@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.2 — oracle timeout hardening):
+  The timeout question split in `.7.3.1` resolved to two facts. First, the historic `RTLUtils`
+  catastrophic-backtrack timeout is not live in the current core tree: `perl/RTLUtils.pm`, `perl/FSMGen.pm`, and
+  `perl/VHDL/ConstantEval.pm` are absent, and the only current core hits are retirement comments/docs. Second, the
+  oracle generator's generic guard was weaker than its documentation: `alarm()` cannot interrupt a catastrophic
+  regex opcode. `tools/gen_oracle_corpus.pl` now runs each parser call in a child process, has the child serialize
+  its result to JSON, and has the parent enforce `ORACLE_TIMEOUT` with wall-clock wait plus `SIGKILL`. Normal
+  regeneration remains byte-stable over 65 fixtures, and `ORACLE_TIMEOUT=0` proves the hard-kill path.
+
 - 2026-07-03 (RUST-PARITY.7.3.1 — batch-2 oracle lane split + timeout owner):
   `RUST-PARITY.7.3` should not be implemented as one broad shipped-spec corpus slice. The current oracle generator
   already has the required hard `alarm(...)` timeout, and the corpus runner is green over 65 fixtures. `.7.2`

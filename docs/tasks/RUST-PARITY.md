@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (`.7.3.1` done — batch-2 shipped-spec oracle work split into narrow lanes after
-  `.7.2` recorded concrete divergences; next frontier is `.7.3.2` trace-first timeout/hang investigation)
+- Last updated: `2026-07-03` (`.7.3.2` done — historic RTLUtils timeout verified retired; oracle generator now
+  uses a process-level fork/SIGKILL hard timeout; next frontier is `.7.3.3` hlink delimiter/link-path fixtures)
 - Owner: repo-local workflow
 
 ## Goal
@@ -204,7 +204,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.1 - split batch-2 oracle lanes and timeout owner`
 
 - ID: `RUST-PARITY.7.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Debug and resolve the shipped-spec oracle timeout/hang risk with LinkedSpec trace/toolbox evidence.
   Acceptance: Verify whether the historical `RTLUtils` timeout/hang reference is live in the current tree or stale
     after legacy retirement/noncore quarantine; run LinkedSpec's toolbox before guessing (fork+SIGKILL hard-timeout
@@ -213,8 +213,22 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     fix the live root cause under this leaf or split a narrower implementation owner with evidence before code; if
     the timeout is stale, update generator/corpus/task/KM wording so it says the historic RTLUtils hang is retired
     while retaining a generic safety guard for future pathological specs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-03.** Read the `rtlutils-regex-hang` and `rust-perl-output-oracle` Knowledge Map
+    cards, `TOOLBOX.md` hang protocol, the oracle generator, and the corpus README. Verified the current core tree
+    has no `perl/RTLUtils.pm`, `perl/FSMGen.pm`, or `perl/VHDL/ConstantEval.pm`; `perl -Iperl` loads
+    `perl/LinkedSpec.pm`; current core/spec/corpus scans find only a retirement comment plus docs, while the old
+    `RTLUtils.pm` hit is confined to the unrelated nested `rgx` checkout. A fork+SIGKILL wrapper around the
+    current 65-fixture generator completed normally (`GENERATOR_EXIT status=0 elapsed=11.305s`), proving no live
+    corpus hang. The stale/weak guard was the generator implementation itself: `alarm()` cannot interrupt a
+    catastrophic regex. Replaced `run_oracle` with a per-case child process that serializes the result to JSON,
+    while the parent enforces `ORACLE_TIMEOUT` with wall-clock wait + `SIGKILL`. `perl -c -Iperl
+    tools/gen_oracle_corpus.pl` passes; `perl -Iperl tools/gen_oracle_corpus.pl` regenerates all **65** fixtures
+    byte-identically; `ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl` proves the hard-kill path with
+    `ORACLE_TIMEOUT after 0s (hard kill) for case='proof_edge_array_literal' input="xhello"`. Corpus README and
+    oracle Knowledge Map wording now say the historic `RTLUtils` hang is retired and the remaining guard is generic
+    process-level protection. Rust `corpus_oracle` passes over the **65** fixtures; Knowledge Map, memory,
+    doctrine, whitespace, and full local CI gates pass (phase0 **1018** tests).
+  Commit: `RUST-PARITY.7.3.2 - harden oracle timeout guard`
 
 - ID: `RUST-PARITY.7.3.3`
   Status: `pending`
@@ -325,14 +339,14 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.5.2` | `done` | Temporary Lispish legacy `scalaref(retv, {content})` parity landed 2026-07-02; `SCALAREF-RETIREMENT.3/.4` then migrated and removed the helper, while `lispish_x_y` remains active and green through direct access |
 | — | `RUST-PARITY.7.2` | `done` | first shipped-spec batch landed: `hlink_substitution` raw-string cases plus Rust captures-only group parity; corpus 65 fixtures |
 | — | `RUST-PARITY.7.3.1` | `done` | batch-2 oracle work split into timeout/hang, hlink, simple-spec divergence, null-output/action-parser, and RTL/plugin/legacy lanes |
-| 1 | `RUST-PARITY.7.3.2` | `pending` | debug whether the referenced timeout/hang risk is live or stale with LinkedSpec toolbox/trace evidence |
-| 2 | `RUST-PARITY.7.3.3` | `pending` | try remaining `hlink_substitution` delimiter/link-path fixtures after the timeout concern is resolved or retired |
-| 3 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
-| 4 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
-| 5 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs after the timeout concern is resolved or retired |
-| 6 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 7 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 8 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.2` | `done` | historic RTLUtils timeout verified retired; oracle generator now enforces a process-level fork/SIGKILL hard timeout |
+| 1 | `RUST-PARITY.7.3.3` | `pending` | try remaining `hlink_substitution` delimiter/link-path fixtures with the hardened timeout guard in place |
+| 2 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
+| 3 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
+| 4 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
+| 5 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 6 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 7 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
@@ -398,6 +412,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   action-parser/null-output candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec` smokes), and
   RTL/plugin/legacy specs after the timeout concern is resolved or retired. No parser/runtime/corpus code changes
   belong to the split leaf.
+- `2026-07-03` (`.7.3.2` implementation): the historical `RTLUtils` timeout is not live in the current core tree;
+  the stale risk was the oracle generator's use of `alarm()` despite the toolbox warning that `alarm()` cannot
+  interrupt a catastrophic regex. The oracle now runs each parse in a forked child and enforces
+  `ORACLE_TIMEOUT` from the parent with `SIGKILL`. This keeps the generic timeout guard real before broader
+  shipped-spec corpus work resumes.
 
 ## Open Questions
 
@@ -437,6 +456,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-02` | `RUST-PARITY.7.5.2` | TOOLBOX Perl generated-source probes; `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Lispish `scalaref(retv, {content})` parity landed and `lispish_x_y` is active. Focused parser/runtime checks and 63-fixture corpus oracle pass; full gate evidence is recorded in the commit workflow. Frontier → `.7.2` |
 | `2026-07-02` | `RUST-PARITY.7.2` | `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Header-rest multiline lifecycle parsing and captures-only helper indexing landed; `hlink_substitution` raw-string fixtures are active; 65-fixture corpus oracle passes. Broader candidate divergences are recorded and deferred to `.7.3`/later. |
 | `2026-07-03` | `RUST-PARITY.7.3.1` | Task/KM context read; `tools/gen_oracle_corpus.pl` audit; corpus README/runner audit; `TOOLBOX.md` hang protocol read; Knowledge Map oracle-card retrieval; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check` | PASS — batch-2 oracle work split into trace-first timeout/hang, hlink delimiter/link-path, simple-spec structural divergence, action-parser/null-output, and RTL/plugin/legacy lanes. No parser/runtime/corpus code changed. |
+| `2026-07-03` | `RUST-PARITY.7.3.2` | KM retrieval (`rtlutils-regex-hang`, `rust-perl-output-oracle`); `perl -Iperl` module-path check; core/spec/corpus `RTLUtils` scan; fork+SIGKILL census around the current generator; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; forced `ORACLE_TIMEOUT=0` hard-kill check; Rust `corpus_oracle`; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — no live current RTLUtils timeout; generator completed 65 fixtures under a parent hard-timeout wrapper; `run_oracle` now uses per-case fork/SIGKILL instead of `alarm()`; normal regeneration is byte-identical; forced timeout reports `ORACLE_TIMEOUT after 0s (hard kill)`; Rust `corpus_oracle` passes; full local CI passes with phase0 1018 tests. Frontier → `.7.3.3` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -498,6 +518,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.5.2` | `RUST-PARITY.7.5.2 - land Lispish scalaref parity` | expr.rs `ScalarRefPath` parser hook + runtime legacy scalaref path evaluation, child-return accumulator containment, explicit action-block call compatibility, aggregate-wrapper assignment replacement, active `lispish_x_y` fixture; 63-fixture corpus oracle green |
 | `RUST-PARITY.7.2` | `RUST-PARITY.7.2 - expand shipped-spec oracle batch` | parser header-rest multiline lifecycle fix; Rust captures-only entry/match group indexing; two `hlink_substitution` raw-string oracle fixtures; 65-fixture corpus oracle green |
 | `RUST-PARITY.7.3.1` | `RUST-PARITY.7.3.1 - split batch-2 oracle lanes and timeout owner` | no runtime/corpus code change; splits the broad remaining shipped-spec oracle batch into timeout/hang investigation, hlink, simple-spec divergence, action-parser/null-output, and RTL/plugin/legacy lanes |
+| `RUST-PARITY.7.3.2` | `RUST-PARITY.7.3.2 - harden oracle timeout guard` | tools/gen_oracle_corpus.pl now enforces per-case fork/SIGKILL timeouts; historic RTLUtils timeout verified retired from current core; corpus README and KM wording updated |
 
 ## Changelog
 
@@ -540,3 +561,6 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   `hlink_substitution` delimiter/link-path fixtures; `.7.3.4` triages `portmap`/`lib_reader`/`ebnf`; `.7.3.5`
   triages `BNF`/`DT`/`ifelse`/`operators_try`/`spec.spec`; `.7.3.6` audits RTL/plugin/legacy candidates after
   the timeout concern is resolved or retired. Frontier → `.7.3.2`.
+- `2026-07-03`: `.7.3.2` done — historic `RTLUtils` timeout verified retired from the active core, and the oracle
+  generator's generic timeout is now a real process-level guard (`fork` per parse; parent `SIGKILL` on
+  `ORACLE_TIMEOUT`) instead of `alarm()`. Frontier → `.7.3.3`.

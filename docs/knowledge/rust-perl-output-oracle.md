@@ -1,11 +1,14 @@
 ---
 id: rust-perl-output-oracle
-title: The Perl↔Rust output oracle — a timeout-guarded Perl generator (tools/gen_oracle_corpus.pl) emits canonical-JSON fixtures into rust/linkedspec-runtime/tests/corpus/, and a Rust fixture-runner (tests/corpus_oracle.rs) asserts engine.execute(input) == [reference]; the Rust engine wraps the Perl top-rule value one level
+title: The Perl↔Rust output oracle — a process-hard-timeout Perl generator (tools/gen_oracle_corpus.pl) emits canonical-JSON fixtures into rust/linkedspec-runtime/tests/corpus/, and a Rust fixture-runner (tests/corpus_oracle.rs) asserts engine.execute(input) == [reference]; the Rust engine wraps the Perl top-rule value one level
 answers:
   - "what is the Perl↔Rust output oracle"
   - "how does the Rust variant test output parity against the Perl reference"
   - "where is the cross-variant test corpus"
   - "how do I regenerate the oracle corpus fixtures"
+  - "how does gen_oracle_corpus enforce hard timeouts"
+  - "does the oracle generator still rely on alarm for catastrophic regex timeouts"
+  - "is the RTLUtils oracle timeout still live"
   - "why does the Rust engine output wrap the Perl reference value one level"
   - "does the Rust engine reproduce tclite or Lispish output yet"
   - "why does tclite return [] in the Rust engine"
@@ -25,11 +28,11 @@ answers:
   - "did Rust temporarily support scalaref(retv, {content}) before retirement"
   - "does child return leak into the parent accumulator in Rust"
   - "does a regex on a rule header line register in the Rust parser"
-date: 2026-07-02
+date: 2026-07-03
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
-evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, alarm-timeout-guarded, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active. RUST-PARITY.7.5.2 (2026-07-02) temporarily restored legacy Lispish scalaref parity; SCALAREF-RETIREMENT.3 migrated Lispish to direct access, and SCALAREF-RETIREMENT.4 removed scalaref implementation support. RUST-PARITY.7.2 fixed Rust captures-only numbered helper indexing and added two hlink_substitution raw-string fixtures. corpus_oracle passes over 65 fixtures."
-reverify: "cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
+evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active. RUST-PARITY.7.5.2 (2026-07-02) temporarily restored legacy Lispish scalaref parity; SCALAREF-RETIREMENT.3 migrated Lispish to direct access, and SCALAREF-RETIREMENT.4 removed scalaref implementation support. RUST-PARITY.7.2 fixed Rust captures-only numbered helper indexing and added two hlink_substitution raw-string fixtures. RUST-PARITY.7.3.2 (2026-07-03): verified the historic RTLUtils timeout is retired from the current core tree, changed gen_oracle_corpus run_oracle from alarm() to per-case fork+SIGKILL process timeout, regenerated 65 fixtures byte-identically, and proved ORACLE_TIMEOUT=0 hard-kills the first parse. corpus_oracle passes over 65 fixtures."
+reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; perl -Iperl tools/gen_oracle_corpus.pl; cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
@@ -42,8 +45,9 @@ frozen output; `cargo test` validates the Rust backend against it with no Perl i
 ## Mechanism
 
 - **Generator** `tools/gen_oracle_corpus.pl` — for each `(spec, input)` case it runs the
-  Perl reference parser under a hard `alarm(...)` timeout (default 15s — guards the known
-  RTLUtils catastrophic-backtrack hang) and writes one corpus directory per case:
+  Perl reference parser in a child process under a hard wall-clock timeout (default 15s).
+  The parent kills the child with `SIGKILL` on timeout, deliberately avoiding `alarm()`
+  because catastrophic regex backtracking can defer Perl safe signals. It writes one corpus directory per case:
   `tests/corpus/<case>/{input.spec, input.txt, expected.json}`. `expected.json` is
   `JSON::PP->canonical(1)` (sorted keys → byte-stable regeneration). A case is either a
   shipped spec (`spec => 'tclite'`, slurped from `specs/`) or an authored inline grammar
@@ -135,9 +139,13 @@ a literal edge return and an action-less child), so both backends agree exactly.
 ## Regenerating
 
 ```sh
-perl tools/gen_oracle_corpus.pl            # default 15s per-parse timeout
+perl tools/gen_oracle_corpus.pl            # default 15s hard per-parse timeout
 ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
 ```
+
+The historic `RTLUtils` catastrophic-backtrack timeout is retired with the deleted
+legacy VHDL/RTL/FSM subsystem. The process-level guard remains as generic protection
+for future pathological specs.
 
 ## Links
 
@@ -148,7 +156,7 @@ ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
   `SPEC-FORMAT-TERSE.2.3.3.3.2`; tclite retry under `.2.3.3.3.3` split default-mode recursive repetition
   parity, `.2.3.3.3.3.1` landed the two minimal shipped `tclite` fixtures, `.7.5.2`
   temporarily landed the minimal shipped Lispish fixture, and `SCALAREF-RETIREMENT.3/.4`
-  migrated it to direct access before removing the legacy helper)
+  migrated it to direct access before removing the legacy helper; `.7.3.2` hardens the oracle timeout path)
 - ADR: `docs/decisions/0006-multi-backend-vision.md` (§Phase 8.6 language-neutral corpus)
 - Related: [[rust-tclite-default-mode-repetition-gap]], [[rust-retv-propagation]],
   [[rust-lifecycle-i-return-dispatch-parity]], [[rust-edge-semantics-bug]], [[rust-entry-match-separation]]
