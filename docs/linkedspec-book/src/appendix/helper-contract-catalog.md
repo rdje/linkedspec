@@ -348,6 +348,17 @@ dispatch rule.
   to `0`; negative or non-integer `length` is normalized to `0`.
 - **Example**: over `/(\S+)/`, `substr(entry_group(0), 1, 3)` on `abcdef` → `["bcd"]`.
 
+### `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)`
+- **Signature**: `substr(scalar(target), pattern: regex-or-scalar, replacement: scalar, flags: scalar)` or
+  `regex_subst(scalar(target), pattern, replacement, flags)`
+- **Returns**: no value; mutates the named scalar target.
+- **Behavior**: Applies regex substitution to the current scalar target value. `g` performs global replacement;
+  `i`, `m`, `s`, and `x` are regex flags; `o` is accepted as a compatibility no-op. Replacement strings can use
+  capture references such as `$1`.
+- **Boundary**: This is the legacy statement-style mutation form used by shipped specs. It is intentionally
+  separate from pure `substr(value, start, length?)` character slicing and from literal `replace_substr(...)`.
+- **Example**: `substr(scalar(value), "\"|\\s", "", go)` removes quotes and whitespace from `value` in place.
+
 ### String receiver-dot value chains
 - **Signature**: `string_expr.method(args...).next(args...)`
 - **Returns**: the documented return value of the final helper in the chain.
@@ -608,6 +619,14 @@ dispatch rule.
 - **Signature**: `split(value: scalar, delim: scalar)`
 - **Returns**: array
 - **Behavior**: Splits a string on the delimiter, returning an array of substrings.
+
+### `split(array(target), scalar(source), delimiter)`
+- **Signature**: `split(array(target), scalar(source), delimiter: regex-or-scalar)`
+- **Returns**: no value; mutates the named array target.
+- **Behavior**: Splits `source` on `delimiter` and replaces `target` with the resulting list. Regex delimiters
+  split by regex match; scalar delimiters split literally.
+- **Boundary**: This statement-style array pipeline helper is separate from pure `split(value, delim)`, which
+  returns an array value for expression and receiver-chain use.
 
 ### `split_each(arr, delim)`
 - **Signature**: `split_each(arr: array, delim: scalar)`

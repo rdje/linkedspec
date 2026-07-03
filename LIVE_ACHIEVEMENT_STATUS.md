@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.4.4 — lib_reader action-helper parity**
+  (RUST RUNTIME HELPER FIX + TWO ORACLE FIXTURES).
+  Rust now executes the statement-form helper mutations used by `specs/lib_reader.spec`: scalar regex substitution
+  through `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)`, and array target replacement
+  through `split(array(target), scalar(source), delimiter)`.
+
+  **Clarification:** the dependency-resolved edge-only child-regex capture path is now locked by a focused
+  regression and was not the remaining failure. The representative `lib_reader` null/quoted fields were caused by
+  the missing statement-form mutation helpers after `.7.3.4.1` made the top dispatch reachable.
+
+  **Verification:** focused `.7.3.4.4` integration tests pass; `perl -c -Iperl tools/gen_oracle_corpus.pl` passes;
+  oracle regeneration produces **68 fixtures** including `lib_reader_sattribute` and `lib_reader_cattribute`;
+  Rust `corpus_oracle` passes over all 68 fixtures; mdBook, Knowledge Map, memory architecture, doctrine, and
+  whitespace gates pass. Broad `linkedspec-runtime` package testing passes 124 unit tests and the 68-fixture corpus
+  oracle, then reproduces the known 9 unrelated integration failures (141 passed / 9 failed).
+
+  **Frontier:** `RUST-PARITY.7.3.4.2` — fix runtime boolean/list-context parity exposed by `portmap` scalar
+  classification.
+
 - 2026-07-03: **SPEC-FORMAT-TERSE.6.2.2 — shipped specs use canonical terse helper spellings**
   (SHIPPED-SPEC MIGRATION; OLD HELPER ALIASES REMAIN COMPATIBILITY SUPPORT).
   Migrated active shipped-spec `assign(...)`, `push_value(...)`, `array_copy(...)`, `hash_copy(...)`, and
@@ -45,8 +64,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Inventory:** 70 active `declare(...)` hits across 13 shipped specs under `specs/`.
 
   **Frontier:** `SPEC-FORMAT-TERSE.6.2` — migrate shipped specs to auto-existing variables, assignments, direct
-  shape literals, and type-implying terse positions. `RUST-PARITY.7.3.4.4` remains pending behind this active
-  terse migration.
+  shape literals, and type-implying terse positions. `RUST-PARITY.7.3.4.4` has since closed; see the current top
+  entry for the active Rust frontier.
 
 - 2026-07-03: **RUST-PARITY.7.3.4.1 — header-rest action-edge parsing**
   (RUST PARSER/COMPILER FIX; NO ORACLE FIXTURE LANDED).
@@ -61,8 +80,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `lib_reader` compiled-rule dump now includes the top `group` action dispatch; representative probes no longer
   collapse to `[[]]`.
 
-  **Frontier:** `RUST-PARITY.7.3.4.4` — fix runtime capture propagation for `lib_reader` dependency-resolved child
-  regex matches; current representative outputs still have null capture fields.
+  **Then-frontier:** `RUST-PARITY.7.3.4.4`; that follow-up has since closed by implementing the statement-form
+  mutation helpers used by `lib_reader`.
 
 - 2026-07-03: **RUST-PARITY.7.3.4 — triage structural oracle mismatches**
   (NO RUST RUNTIME/PARSER/CORPUS CODE CHANGE).

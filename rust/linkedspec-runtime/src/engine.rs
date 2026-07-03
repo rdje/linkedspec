@@ -215,6 +215,95 @@ fn regex_literal_arg(args: &[Arg], index: usize) -> Option<&str> {
     }
 }
 
+fn scalar_mutation_target_arg(arg: &Arg) -> Option<String> {
+    match arg.value() {
+        Expr::Call { name, args } if name == "scalar" && args.len() == 1 => match args[0].value() {
+            Expr::Variable { name } => Some(name.clone()),
+            _ => None,
+        },
+        Expr::Variable { name } => Some(name.clone()),
+        _ => None,
+    }
+}
+
+fn regex_subst_call_parts(raw_args: &[Arg]) -> Option<(String, usize, usize, usize)> {
+    if raw_args.len() >= 5
+        && let Some(target) = scalar_mutation_target_arg(&raw_args[1])
+    {
+        return Some((target, 2, 3, 4));
+    }
+    if raw_args.len() >= 4
+        && let Some(target) = scalar_mutation_target_arg(&raw_args[0])
+    {
+        return Some((target, 1, 2, 3));
+    }
+    None
+}
+
+fn array_mutation_target_arg(arg: &Arg) -> Option<String> {
+    match arg.value() {
+        Expr::Call { name, args } if name == "array" && args.len() == 1 => match args[0].value() {
+            Expr::Variable { name } => Some(name.clone()),
+            _ => None,
+        },
+        Expr::Variable { name } => Some(name.clone()),
+        _ => None,
+    }
+}
+
+fn split_statement_call_parts(raw_args: &[Arg]) -> Option<(String, usize, usize)> {
+    if raw_args.len() >= 4
+        && let Some(target) = array_mutation_target_arg(&raw_args[1])
+    {
+        return Some((target, 2, 3));
+    }
+    if raw_args.len() >= 3
+        && let Some(target) = array_mutation_target_arg(&raw_args[0])
+    {
+        return Some((target, 1, 2));
+    }
+    None
+}
+
+fn literal_or_value_arg_text(raw_args: &[Arg], args: &[RuntimeValue], index: usize) -> String {
+    match raw_args.get(index).map(Arg::value) {
+        Some(Expr::StringLiteral { value }) | Some(Expr::RegexLiteral { pattern: value }) => {
+            value.clone()
+        }
+        _ => args
+            .get(index)
+            .map(RuntimeValue::to_str)
+            .unwrap_or_default(),
+    }
+}
+
+fn regex_subst_flags_arg(raw_args: &[Arg], args: &[RuntimeValue], index: usize) -> String {
+    match raw_args.get(index).map(Arg::value) {
+        Some(Expr::Variable { name }) => name.clone(),
+        Some(Expr::StringLiteral { value }) | Some(Expr::RegexLiteral { pattern: value }) => {
+            value.clone()
+        }
+        _ => args
+            .get(index)
+            .map(RuntimeValue::to_str)
+            .unwrap_or_default(),
+    }
+}
+
+fn regex_subst_pattern_with_flags(pattern: &str, flags: &str) -> String {
+    let mut inline_flags = String::new();
+    for flag in ['i', 'm', 's', 'x'] {
+        if flags.contains(flag) {
+            inline_flags.push(flag);
+        }
+    }
+    if inline_flags.is_empty() {
+        pattern.to_string()
+    } else {
+        format!("(?{inline_flags}:{pattern})")
+    }
+}
+
 fn split_string_literal(input: &str, delimiter: &str) -> Vec<RuntimeValue> {
     input
         .split(delimiter)
@@ -2862,7 +2951,31 @@ impl Engine {
             // so the more complete behavior — Hash-arg merge for `hash`, raw-AST
             // target resolution for `hash_copy` — wins.)
             // ── String/array index ──
-            "substr" => {
+            "substr" | "regex_subst" => {
+                if let Some((target, pattern_idx, replacement_idx, flags_idx)) =
+                    regex_subst_call_parts(raw_args)
+                {
+                    let pattern = literal_or_value_arg_text(raw_args, args, pattern_idx);
+                    let replacement = literal_or_value_arg_text(raw_args, args, replacement_idx);
+                    let flags = regex_subst_flags_arg(raw_args, args, flags_idx);
+                    let effective_pattern = regex_subst_pattern_with_flags(&pattern, &flags);
+                    let re = rgx_core::Regex::compile(&effective_pattern).map_err(|e| {
+                        format!(
+                            "regex_subst({target}) in rule '{rule_label}' has invalid pattern /{pattern}/: {e}"
+                        )
+                    })?;
+                    let current = ctx.get_scalar(&target).to_str();
+                    let updated = if flags.contains('g') {
+                        re.replace_all(&current, replacement.as_str()).into_owned()
+                    } else {
+                        re.replace(&current, replacement.as_str()).into_owned()
+                    };
+                    ctx.set_scalar(&target, RuntimeValue::Scalar(updated));
+                    return Ok(RuntimeValue::Undef);
+                }
+                if name == "regex_subst" {
+                    return Ok(RuntimeValue::Undef);
+                }
                 // Char-based (Perl `substr`): start/len are character offsets, so
                 // byte-slicing would panic on a multibyte boundary and diverge.
                 if args.len() >= 3 {
@@ -2894,6 +3007,21 @@ impl Engine {
                 }
             }
             "split" => {
+                if let Some((target, source_idx, delimiter_idx)) =
+                    split_statement_call_parts(raw_args)
+                {
+                    let source = args
+                        .get(source_idx)
+                        .map(RuntimeValue::to_str)
+                        .unwrap_or_default();
+                    let delimiter = args
+                        .get(delimiter_idx)
+                        .cloned()
+                        .unwrap_or(RuntimeValue::Undef);
+                    let parts = split_string_for_arg(&source, raw_args, delimiter_idx, &delimiter)?;
+                    ctx.set_array(&target, parts);
+                    return Ok(RuntimeValue::Undef);
+                }
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     Ok(RuntimeValue::Array(split_string_for_arg(
@@ -5777,9 +5905,10 @@ ChildB:
         // returns the CHAR count (5), not the byte count (6) — char-based parity.
         let g = r#"Top::OR{1,1}
  /\w/
- E { mark_input_start(scalar("a")); mark_input_end(scalar("b")); return(capture_between(scalar("a"), scalar("b"))); return(capture_len_between(scalar("a"), scalar("b"))) }
+ E { mark_input_start(scalar("a")); mark_input_end(scalar("b")); return(array(capture_between(scalar("a"), scalar("b")), capture_len_between(scalar("a"), scalar("b")))) }
 "#;
         let acc = run_5_5_3(g, "héllo");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "héllo");
         assert_eq!(acc[1].as_f64().unwrap(), 5.0);
     }
@@ -5823,9 +5952,10 @@ ChildB:
         // the second read (mark now == cursor) is therefore empty.
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_take_until_cursor_from(scalar("a"))); return(capture_until_cursor_from(scalar("a"))) }
+ E { mark_input_start(scalar("a")); return(array(capture_take_until_cursor_from(scalar("a")), capture_until_cursor_from(scalar("a")))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "ab");
         assert_eq!(acc[1].as_str().unwrap(), "");
     }
@@ -5834,9 +5964,10 @@ ChildB:
     fn helpers_5_5_3_capture_take_until_cursor_len_from_advances_mark() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_take_until_cursor_len_from(scalar("a"))); return(capture_until_cursor_len_from(scalar("a"))) }
+ E { mark_input_start(scalar("a")); return(array(capture_take_until_cursor_len_from(scalar("a")), capture_until_cursor_len_from(scalar("a")))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_f64().unwrap(), 2.0);
         assert_eq!(acc[1].as_f64().unwrap(), 0.0);
     }
@@ -5847,9 +5978,10 @@ ChildB:
         // (match-end, byte 4), so capture_rest_from is empty afterwards.
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_take_len_from(scalar("a"))); return(capture_rest_from(scalar("a"))) }
+ E { mark_input_start(scalar("a")); return(array(capture_take_len_from(scalar("a")), capture_rest_from(scalar("a")))) }
 "#;
         let acc = run_5_5_3(g, "  hi");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_f64().unwrap(), 2.0);
         assert_eq!(acc[1].as_str().unwrap(), "");
     }
@@ -5858,9 +5990,10 @@ ChildB:
     fn helpers_5_5_3_capture_take_rest_from_advances_mark_to_end() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_take_rest_from(scalar("a"))); return(capture_rest_from(scalar("a"))) }
+ E { mark_input_start(scalar("a")); return(array(capture_take_rest_from(scalar("a")), capture_rest_from(scalar("a")))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "ab cd");
         assert_eq!(acc[1].as_str().unwrap(), "");
     }
@@ -5869,9 +6002,10 @@ ChildB:
     fn helpers_5_5_3_capture_take_rest_len_from_advances_mark_to_end() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_take_rest_len_from(scalar("a"))); return(capture_rest_len_from(scalar("a"))) }
+ E { mark_input_start(scalar("a")); return(array(capture_take_rest_len_from(scalar("a")), capture_rest_len_from(scalar("a")))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_f64().unwrap(), 5.0);
         assert_eq!(acc[1].as_f64().unwrap(), 0.0);
     }
@@ -5890,9 +6024,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_slice()); return(capture_slice_len()) }
+ E { return(array(capture_slice(), capture_slice_len())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "  ");
         assert_eq!(acc[1].as_f64().unwrap(), 2.0);
     }
@@ -5903,9 +6038,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_slice_until_cursor()); return(capture_slice_until_cursor_len()) }
+ E { return(array(capture_slice_until_cursor(), capture_slice_until_cursor_len())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "  ab");
         assert_eq!(acc[1].as_f64().unwrap(), 4.0);
     }
@@ -5916,9 +6052,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_rest()); return(capture_rest_len()) }
+ E { return(array(capture_rest(), capture_rest_len())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "  ab cd");
         assert_eq!(acc[1].as_f64().unwrap(), 7.0);
     }
@@ -5930,9 +6067,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_take()); return(capture_rest()) }
+ E { return(array(capture_take(), capture_rest())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "  ");
         assert_eq!(acc[1].as_str().unwrap(), " cd");
     }
@@ -5944,9 +6082,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_take_len()); return(capture_rest_len()) }
+ E { return(array(capture_take_len(), capture_rest_len())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_f64().unwrap(), 2.0);
         assert_eq!(acc[1].as_f64().unwrap(), 3.0);
     }
@@ -5958,9 +6097,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_take_until_cursor()); return(capture_slice_until_cursor()) }
+ E { return(array(capture_take_until_cursor(), capture_slice_until_cursor())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "  ab");
         assert_eq!(acc[1].as_str().unwrap(), "");
     }
@@ -5970,9 +6110,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_take_until_cursor_len()); return(capture_slice_until_cursor_len()) }
+ E { return(array(capture_take_until_cursor_len(), capture_slice_until_cursor_len())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_f64().unwrap(), 4.0);
         assert_eq!(acc[1].as_f64().unwrap(), 0.0);
     }
@@ -5984,9 +6125,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_take_rest()); return(capture_rest()) }
+ E { return(array(capture_take_rest(), capture_rest())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "  ab cd");
         assert_eq!(acc[1].as_str().unwrap(), "");
     }
@@ -5996,9 +6138,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_take_rest_len()); return(capture_rest_len()) }
+ E { return(array(capture_take_rest_len(), capture_rest_len())) }
 "#;
         let acc = run_5_5_3(g, "  ab cd");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_f64().unwrap(), 7.0);
         assert_eq!(acc[1].as_f64().unwrap(), 0.0);
     }
@@ -6012,9 +6155,10 @@ ChildB:
         let g = r#"Top::OR{1,1}
  /(\w+)/
  I { start_capture_slice() }
- E { return(capture_rest()); return(capture_rest_len()) }
+ E { return(array(capture_rest(), capture_rest_len())) }
 "#;
         let acc = run_5_5_3(g, "ab,héllo");
+        let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "ab,héllo");
         assert_eq!(acc[1].as_f64().unwrap(), 8.0);
     }

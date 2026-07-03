@@ -975,6 +975,17 @@ SPEC
     { case => 'hlink_raw_escaped_brackets',    spec => 'hlink_substitution', input => 'plain \[text\]' },
     # ── RUST-PARITY.7.3.3.2 — JSON-safe hlink_substitution curly delimiter ──
     { case => 'hlink_curly_brace',             spec => 'hlink_substitution', input => '{abc}' },
+
+    {
+        case  => 'lib_reader_sattribute',
+        spec  => 'lib_reader',
+        input => 'cell("foo"){ attr : "bar"; }',
+    },
+    {
+        case  => 'lib_reader_cattribute',
+        spec  => 'lib_reader',
+        input => 'cell("foo"){ attr("bar,baz"); }',
+    },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

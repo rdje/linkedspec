@@ -532,6 +532,17 @@ Rationale:
 - Use `concat(...)` when the rule already knows the fragments and does not need array staging.
 - Use `coalesce(length(...), 0)` when missing text should count as zero. Plain `length(undef)` stays undefined.
 
+Statement-style regex substitution is a separate mutation form used by some shipped specs:
+
+```text
+substr(scalar(value), "\"|\\s", "", go);
+regex_subst(scalar(value), /^\[(\d+)\]$/, "$1", o);
+```
+
+Those forms mutate the named scalar target. `g` applies the replacement globally; `i`, `m`, `s`, and `x` are regex
+flags; `o` is accepted as a compatibility no-op. Keep this form out of receiver-dot value chains, where
+`substr(value, start, length?)` means character slicing.
+
 Example:
 
 ```text

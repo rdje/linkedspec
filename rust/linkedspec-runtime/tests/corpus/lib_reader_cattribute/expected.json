@@ -1,0 +1,17 @@
+[
+   [
+      "GROUP",
+      "cell",
+      "foo",
+      [
+         [
+            "CATTRIBUTE",
+            "attr",
+            [
+               "bar",
+               "baz"
+            ]
+         ]
+      ]
+   ]
+]

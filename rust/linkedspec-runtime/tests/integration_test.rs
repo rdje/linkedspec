@@ -2369,6 +2369,58 @@ fn rust_parity_7_3_4_1_header_rest_action_edge_allows_compact_arrow_spacing() {
 }
 
 #[test]
+fn rust_parity_7_3_4_4_dependency_edge_child_entry_captures() {
+    let grammar = "top::\n -> item .push\n E { return(array_copy(array(top))) }\n\nitem:\n /\\b(\\w+)=(\\w+)/\n I { return(array(\"ITEM\", entry_group(0), entry_group(1))) }\n";
+    assert_eq!(
+        build_and_run(grammar, "foo=bar"),
+        serde_json::json!([[["ITEM", "foo", "bar"]]]),
+        "an edge-only parent match resolved from the child regex seeds the child entry captures"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_4_regex_subst_mutates_scalar_targets() {
+    let grammar = r#"Top::
+ -> Item .push
+ E { return(array_copy(array(Top))) }
+
+Item:
+ /("[^"]+")/
+ I { raw = entry_group(0); substr(scalar(raw), "\"", "", go); bracket = "[42]"; substr(scalar(bracket), /^\[(\d+)\]$/, "$1", o); csv = "a,b"; parts = []; split(array(parts), scalar(csv), /,/); return(array(scalar(raw), scalar(bracket), copy(array(parts)))) }
+"#;
+    assert_eq!(
+        build_and_run(grammar, "\"abc\""),
+        serde_json::json!([[["abc", "42", ["a", "b"]]]]),
+        "statement-form regex_subst mutates scalars and split mutates array targets"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_4_lib_reader_keeps_entry_captures() {
+    use std::fs;
+    use std::path::Path;
+
+    let spec_path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../specs/lib_reader.spec");
+    let grammar = fs::read_to_string(&spec_path).expect("read specs/lib_reader.spec");
+
+    assert_eq!(
+        build_and_run(&grammar, "cell(\"foo\"){ attr : \"bar\"; }"),
+        serde_json::json!([[["GROUP", "cell", "foo", [["SATTRIBUTE", "attr", "bar"]]]]]),
+        "lib_reader sattribute nodes retain the group opener and attribute entry captures"
+    );
+    assert_eq!(
+        build_and_run(&grammar, "cell(\"foo\"){ attr(\"bar,baz\"); }"),
+        serde_json::json!([[[
+            "GROUP",
+            "cell",
+            "foo",
+            [["CATTRIBUTE", "attr", ["bar", "baz"]]]
+        ]]]),
+        "lib_reader cattribute nodes retain the group opener and attribute entry captures"
+    );
+}
+
+#[test]
 fn terse_2_3_3_1_action_edge_fluent_return_closes_recursive_rule() {
     let grammar = "top::\n -> box .push\n E { return(array_copy(array(top))) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", array_copy(array(box))))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
     assert_eq!(

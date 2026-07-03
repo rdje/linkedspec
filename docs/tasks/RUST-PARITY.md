@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (`.7.3.4.1` done — header-rest action-edge parsing fixed;
-  frontier advances to `.7.3.4.4`)
+- Last updated: `2026-07-03` (`.7.3.4.4` done — lib_reader statement-form mutation
+  helpers and oracle fixtures landed; frontier advances to `.7.3.4.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -348,15 +348,23 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.4.1 - fix header-rest action-edge parsing`
 
 - ID: `RUST-PARITY.7.3.4.4`
-  Status: `pending`
+  Status: `done`
   Goal: Fix Rust runtime capture propagation for dependency-resolved action-edge child regex matches exposed by
     `lib_reader`.
   Acceptance: `entry_group(0)` and `entry_group(1)` in child rules reached through a parent edge-only,
     dependency-resolved child regex expose the actual child match captures instead of null values; representative
     `lib_reader` sattribute and cattribute inputs reproduce the Perl wrapped `GROUP` AST through the oracle path or
     split again with narrower runtime evidence; focused runtime tests pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-03. A focused edge-only child-regex regression proves dependency-resolved action-edge
+    dispatch already seeds the child entry captures correctly. The representative `lib_reader` null fields were
+    instead caused by missing Rust execution for shipped-spec statement-form mutations after the parser/compiler
+    fix: `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)` must mutate the scalar target,
+    and `split(array(target), scalar(source), delimiter)` must replace the array target. Rust now detects those
+    statement forms before the pure value `substr`/`split` helpers, applies regex replacement with `g` global and
+    inline `i/m/s/x` flags (`o` is a no-op), and updates scalar/array working variables. Focused `.7.3.4.4` tests
+    pass, and `tools/gen_oracle_corpus.pl` now includes `lib_reader_sattribute` and `lib_reader_cattribute`; the
+    68-fixture Rust `corpus_oracle` passes.
+  Commit: `RUST-PARITY.7.3.4.4 - land lib_reader action-helper parity`
 
 - ID: `RUST-PARITY.7.3.4.2`
   Status: `pending`
@@ -502,15 +510,15 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.3.4` | `deferred` | neutral scalar-ref/action-payload contract or hlink spec migration needed before bracket/mixed fixtures |
 | — | `RUST-PARITY.7.3.7` | `done` | user-directed trace/toolbox timeout census fixed the oracle guard boundary so parser build and parse are both hard-timeout protected |
 | — | `RUST-PARITY.7.3.4` | `done` | structural mismatch triage split owners for `portmap`, `lib_reader`, and `ebnf`; no unsafe fixture landed |
-| — | `RUST-PARITY.7.3.4.1` | `done` | parser/compiler header-rest action edges now compile compact `lib_reader` top dispatch; remaining `lib_reader` blocker is runtime capture propagation |
-| 1 | `RUST-PARITY.7.3.4.4` | `pending` | fix runtime capture propagation for dependency-resolved `lib_reader` child regex matches |
-| 2 | `RUST-PARITY.7.3.4.2` | `pending` | fix runtime boolean/list-context parity exposed by `portmap` scalar classification |
-| 3 | `RUST-PARITY.7.3.4.3` | `pending` | fix action-edge fluent child/target aggregation for `ebnf` payloads and `portmap` concatenation |
-| 4 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
-| 5 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
-| 6 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 7 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 8 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.4.1` | `done` | parser/compiler header-rest action edges now compile compact `lib_reader` top dispatch |
+| — | `RUST-PARITY.7.3.4.4` | `done` | statement-form `substr`/`regex_subst` scalar mutation and `split(array, scalar, delim)` array mutation now let `lib_reader` fixtures pass |
+| 1 | `RUST-PARITY.7.3.4.2` | `pending` | fix runtime boolean/list-context parity exposed by `portmap` scalar classification |
+| 2 | `RUST-PARITY.7.3.4.3` | `pending` | fix action-edge fluent child/target aggregation for `ebnf` payloads and `portmap` concatenation |
+| 3 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
+| 4 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
+| 5 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 6 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 7 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
@@ -649,6 +657,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-03` | `RUST-PARITY.7.3.7` | Shipped-spec/input fork+SIGKILL census; focused `BNF` build-vs-parse separation; `LINKEDSPEC_TRACE_LEVEL=debug` trace to `/tmp/linkedspec-bnf-build.trace`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; forced `ORACLE_TIMEOUT=0` generator run; normal generator regeneration; Rust `corpus_oracle` | PASS — `BNF` timeout was parser construction outside the prior oracle guard, not parse execution; trace reached successful parser generation. `tools/gen_oracle_corpus.pl` now builds and parses inside the timeout child; forced timeout reports `hard kill during parser build/parse`; normal regeneration writes **66** byte-identical fixtures; Rust `corpus_oracle` passes. Frontier → `.7.3.4` |
 | `2026-07-03` | `RUST-PARITY.7.3.4` | `perl -Iperl` module-path check; Perl reference `LinkedSpec::get_parser`/`JSON::PP` probes for `portmap`, `lib_reader`, and `ebnf`; temporary Rust probe using the `corpus_oracle` parse/validate/compile/execute path; Rust compiled-rule dumps; `LinkedSpec::call_spec_handler_subst` lowering probe | PASS/SPLIT — all three structural mismatches reproduced. `portmap` exposes runtime boolean/list-context and recursive fluent aggregation gaps; `lib_reader` first exposes a parser/compiler drop of header-rest action edges on regex-less top rules; `ebnf` compiles the fluent chains but runtime duplicates rule headers and drops token payloads. No fixture was safe to land; implementation split to `.7.3.4.1`-`.7.3.4.3`. Frontier → `.7.3.4.1` |
 | `2026-07-03` | `RUST-PARITY.7.3.4.1` | `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused core `action_edge` and `parse_blind_edge` tests; focused runtime compact-arrow regression; real `lib_reader` compile/execute probe; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/SPLIT — Rust now preserves header-rest body syntax that starts with `->`, `->Child.push`, or lifecycle fluent calls, and `->`/`=>` spacing matches `specs/spec.spec` optional whitespace. `lib_file` now compiles the `group` `.push` dispatch and representative `lib_reader` probes no longer collapse to `[[]]`; remaining null capture fields are split to `.7.3.4.4`. Frontier → `.7.3.4.4` |
+| `2026-07-03` | `RUST-PARITY.7.3.4.4` | `cargo fmt --manifest-path rust/Cargo.toml --all`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust `.7.3.4.4` integration tests; Rust `corpus_oracle`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; broad `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime` residual check | PASS/RESIDUAL — dependency-resolved edge-only child captures are locked, and the actual `lib_reader` blocker is closed by Rust statement-form helper mutation parity: `substr`/`regex_subst` mutates scalar targets with regex replacement flags and `split(array(target), scalar(source), delimiter)` mutates array targets. Added `lib_reader_sattribute` and `lib_reader_cattribute`; the oracle corpus now has **68 fixtures** and Rust `corpus_oracle` passes. Runtime lib clippy exits 0 with the existing warning baseline; `clippy --tests` still exits 101 on the existing `approx_constant` test literal. The broad runtime package run passes 124 unit tests and the 68-fixture corpus oracle, then reproduces the known 9 broader integration failures outside this leaf (141 passed / 9 failed). Frontier → `.7.3.4.2` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -716,6 +725,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.3.3.3` | `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures` | no generator/corpus/runtime code change; records Perl scalar-ref JSON failure plus Rust scalar-ref action-branch failure and defers bracket/mixed fixtures to `.7.3.3.4` |
 | `RUST-PARITY.7.3.7` | `RUST-PARITY.7.3.7 - hard-timeout parser construction too` | oracle generator now hard-timeout guards parser construction plus parse execution; normal regeneration remains 66-fixture byte-identical; corpus oracle green |
 | `RUST-PARITY.7.3.4` | `RUST-PARITY.7.3.4 - triage structural oracle mismatches` | no runtime/corpus code change; reproduces `portmap`/`lib_reader`/`ebnf` Rust structural divergences and splits parser/runtime implementation owners into `.7.3.4.1`-`.7.3.4.3` |
+| `RUST-PARITY.7.3.4.4` | `RUST-PARITY.7.3.4.4 - land lib_reader action-helper parity` | engine.rs statement-form scalar regex substitution + array split mutation helpers; `.7.3.4.4` integration locks; two `lib_reader` oracle fixtures; 68-fixture corpus oracle green |
 
 ## Changelog
 
@@ -772,3 +782,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   under a 5s build+parse child census because parser construction takes about 6.4s; parsing empty input after
   build is fast, and trace reaches successful parser generation. The oracle generator now builds and parses inside
   the forked `ORACLE_TIMEOUT` child, so future parser-build hangs are hard-killed too. Frontier → `.7.3.4`.
+- `2026-07-03`: `.7.3.4.4` done — `lib_reader` sattribute/cattribute oracle fixtures landed. A focused
+  dependency-resolved edge-only child-regex regression showed child entry captures were already seeded correctly;
+  the remaining divergence was shipped-spec action-helper mutation parity. Rust now executes statement-form
+  `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)` as scalar regex substitution with
+  target mutation, and statement-form `split(array(target), scalar(source), delimiter)` as array target
+  replacement. Added `lib_reader_sattribute` and `lib_reader_cattribute`; corpus oracle passes over **68 fixtures**.
+  Frontier → `.7.3.4.2`.

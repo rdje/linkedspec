@@ -212,11 +212,11 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 structurally equivalent output for every entry.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. As of
-`RUST-PARITY.7.3.3.2`, the corpus has 66 fixtures, including the two minimal shipped
+`RUST-PARITY.7.3.4.4`, the corpus has 68 fixtures, including the two minimal shipped
 `tclite.spec` cases restored by the default-mode repetition parity work; the shipped
 `Lispish.spec` `lispish_x_y` case now migrated to direct nested access; the first
 `hlink_substitution` raw-string cases plus the JSON-safe `{abc}` curly-brace delimiter
-case; terse receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate
+case; `lib_reader.spec` scalar-attribute and comma-list attribute cases; terse receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate
 wrapper quoting, and block-valued receivers; numeric word
 aliases; arithmetic/comparison symbol callees; explicit string comparisons;
 assignment-expression fixtures; and the shared Perl/Rust user-function runtime fixture.

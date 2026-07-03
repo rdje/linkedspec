@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.4.4 — land lib_reader action-helper parity
+
+**Scope:** Rust runtime helper execution, focused integration coverage, oracle generator/corpus fixtures, mdBook
+corpus/helper documentation, task-tree tracking, live docs, and Knowledge Map.
+
+**What changed:** Closed the representative `lib_reader` sattribute/cattribute divergence after the
+parser/compiler header-rest fix. A focused edge-only child-regex regression showed dependency-resolved action-edge
+dispatch already seeds child entry captures correctly. The remaining blocker was Rust runtime execution of the
+statement-form helpers used by the shipped spec: `substr(scalar(target), pattern, replacement, flags)` /
+`regex_subst(...)` now mutates the scalar target with regex replacement (`g` global; inline `i/m/s/x`; `o` no-op),
+and `split(array(target), scalar(source), delimiter)` now replaces the target array. The pure value
+`substr(value, start, length?)` and `split(value, delimiter)` paths remain separate.
+
+**Evidence:** Added focused `.7.3.4.4` integration locks for edge-only child captures, scalar regex substitution
+mutation, array split mutation, and real `specs/lib_reader.spec` sattribute/cattribute execution. Added
+`lib_reader_sattribute` and `lib_reader_cattribute` to `tools/gen_oracle_corpus.pl`; regeneration now produces
+**68 fixtures**, and Rust `corpus_oracle` passes over all 68.
+
 ## 2026-07-03 — SPEC-FORMAT-TERSE.6.2.2 — migrate shipped-spec helper spellings
 
 **Scope:** 16 shipped `.spec` files plus stale phase0 source expectations, task-tree tracking, live docs, and the

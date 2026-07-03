@@ -81,6 +81,11 @@ The important point is that these files collectively exercise the system:
 - runtime parser invocation,
 - real nested return payloads.
 
+The Rust oracle corpus tracks this maturity incrementally. `RUST-PARITY.7.3.4.4` adds
+`lib_reader_sattribute` and `lib_reader_cattribute`, so the checked-in corpus now verifies
+`lib_reader.spec` grouped scalar attributes and comma-list attributes against the Perl
+reference output.
+
 ## Current maturity reading
 
 The mature center of gravity is currently:

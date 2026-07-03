@@ -537,6 +537,9 @@ replace_substr(s, old, new)     — literal string replacement
 rm_prefix(s, prefix)            — remove prefix
 rm_suffix(s, suffix)            — remove suffix
 substr(s, start, len?)          — substring from zero-based start
+substr(scalar(target), /re/, repl, flags)
+regex_subst(scalar(target), /re/, repl, flags)
+                        — regex substitution mutating a scalar target
 string_expr.trim().lowercase()
                         — receiver-dot string value chain over compatible pure scalar helpers
 string_expr.split(delim).trim_each().join_values(delim)
@@ -582,6 +585,8 @@ is_empty(arr)           — true if array/hash is empty
 is_nonempty(arr)        — true if array/hash has elements
 join_values(delim, arr) — join array elements with delimiter
 split(s, delim)         — split string into array
+split(array(target), scalar(source), delim)
+                        — replace target array with split source pieces
 split_each(arr, delim)  — split each element
 trim_each(arr)          — trim each element
 filter_nonempty(arr)    — remove empty elements

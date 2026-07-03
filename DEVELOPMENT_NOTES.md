@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.4.4 — lib_reader action-helper parity):
+  The `lib_reader` follow-up turned out to be narrower than the leaf title suggested. A focused edge-only
+  child-regex test proves dependency-resolved action dispatch already carries child entry captures. The observable
+  null/quoted fields in representative `lib_reader` outputs came from statement-form helper mutation drift:
+  `substr(scalar(target), pattern, replacement, flags)` is the legacy regex-substitution form in shipped specs, not
+  the pure value substring helper, and `split(array(target), scalar(source), delimiter)` is an array-replacement
+  statement, not the pure array-valued split. Rust now detects those mutation shapes before value-form helpers,
+  updates the target working variable, and keeps pure `substr(value, start, length?)` / `split(value, delimiter)`
+  behavior separate. `lib_reader_sattribute` and `lib_reader_cattribute` are now checked-in oracle fixtures, taking
+  the corpus to 68 fixtures.
+
 - 2026-07-03 (SPEC-FORMAT-TERSE.6.2.2 — shipped specs old-helper-free):
   The second shipped-spec terse migration removes active old helper spellings without changing alias support.
   `set`, `push`, `copy`, and `cat` are now the shipped-spec source spellings for helper aliases that were already
@@ -41,7 +52,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   old Rust `[ \t]+` requirement was implementation drift. `lib_file` now compiles the `group` `.push` dispatch and
   representative probes produce `GROUP` nodes instead of `[[]]`. Their capture fields are still null, which is
   runtime capture propagation for dependency-resolved child regex matches and is now owned by
-  `RUST-PARITY.7.3.4.4`.
+  `RUST-PARITY.7.3.4.4`; that follow-up is now closed by the statement-form helper mutation work above.
 
 - 2026-07-03 (RUST-PARITY.7.3.4 — structural mismatch triage):
   The `portmap`/`lib_reader`/`ebnf` divergences are not fixture-selection problems. Perl reference probes encode all
