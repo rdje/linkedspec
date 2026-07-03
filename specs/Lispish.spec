@@ -9,19 +9,19 @@ I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
  -> parenthesis       {
    if(is_nonempty(array(word)));
     if(is_empty(scalar(has_head)));
-     assign(scalar(head), join_values("", array(word)));
-     assign(scalar(has_head), 1);
+     set(scalar(head), join_values("", array(word)));
+     set(scalar(has_head), 1);
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push(array(tail), join_values("", array(word)));
     endif();
-    assign(array(word), array());
+    set(array(word), array());
    endif();
-   assign(scalar(retv), call(parenthesis));
+   set(scalar(retv), call(parenthesis));
    if(is_empty(scalar(has_head)));
-    assign(scalar(head), scalar(retv));
-    assign(scalar(has_head), 1);
+    set(scalar(head), scalar(retv));
+    set(scalar(has_head), 1);
    else();
-    push_value(array(tail), scalar(retv));
+    push(array(tail), scalar(retv));
    endif()
 }
 
@@ -29,33 +29,33 @@ I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
    call(spaces);
    if(is_nonempty(array(word)));
     if(is_empty(scalar(has_head)));
-     assign(scalar(head), join_values("", array(word)));
-     assign(scalar(has_head), 1);
+     set(scalar(head), join_values("", array(word)));
+     set(scalar(has_head), 1);
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push(array(tail), join_values("", array(word)));
     endif();
-    assign(array(word), array());
+    set(array(word), array());
    endif()
 }
- -> dquotes           {assign(scalar(retv), call(dquotes)); push_value(array(word), retv["content"])}
- -> sbrackets         {assign(scalar(retv), call(sbrackets)); push_value(array(word), retv["content"])}
- -> curlyb            {assign(scalar(retv), call(curlyb)); push_value(array(word), retv["content"])}
- -> others            {assign(scalar(retv), call(others)); push_value(array(word), retv["content"])}
+ -> dquotes           {set(scalar(retv), call(dquotes)); push(array(word), retv["content"])}
+ -> sbrackets         {set(scalar(retv), call(sbrackets)); push(array(word), retv["content"])}
+ -> curlyb            {set(scalar(retv), call(curlyb)); push(array(word), retv["content"])}
+ -> others            {set(scalar(retv), call(others)); push(array(word), retv["content"])}
  -> comments          {call(comments)}
 
  -> parenthesis[1]    {
    if(is_nonempty(array(word)));
     if(is_empty(scalar(has_head)));
-     assign(scalar(head), join_values("", array(word)));
-     assign(scalar(has_head), 1);
+     set(scalar(head), join_values("", array(word)));
+     set(scalar(has_head), 1);
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push(array(tail), join_values("", array(word)));
     endif();
    endif();
 
    if(scalar(has_head));
     if(is_nonempty(array(tail)));
-     return(array(scalar(head), array_copy(array(tail))));
+     return(array(scalar(head), copy(array(tail))));
     else();
      return(array(scalar(head), undef));
     endif();
@@ -75,7 +75,7 @@ curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {content = undef}
  -> dquotes
  -> squotes
  -> curlyb[1]                 {
- assign(scalar(content), CAPTURE);
+ set(scalar(content), CAPTURE);
  return(hash("type", "CBRACE", "content", scalar(content)))
 }
 

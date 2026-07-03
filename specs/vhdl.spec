@@ -9,7 +9,7 @@ vhdl_file::
 -> package_body               .push
 -> configuration_declaration  .push
 
-LX {return(array_copy(array(vhdl_file)))}
+LX {return(copy(array(vhdl_file)))}
 
 
 comment:        /--.*/                         I {text = entry_text(); return(scalar(text))}
@@ -25,9 +25,9 @@ I {entity_header_parts = []}
 -> dquote_string         .push
 -> port_clause           .push
 -> entity_declaration[1] {
-   assign(array(entity_header_parts), entry_groups());
+   set(array(entity_header_parts), entry_groups());
    lowercase_each(array(entity_header_parts));
-   return(array("?entity_declaration:", flat_array(entity_header_parts), array_copy(array(entity_declaration))))
+   return(array("?entity_declaration:", flat_array(entity_header_parts), copy(array(entity_declaration))))
 }
 
 architecture_body: /(?i)\barchitecture\s+(\w+)\s+of\s+(\w+)\s+is\b/ /(?i)\bbegin\b/ /(?i)\bend\b(?:\s+architecture\b)?(?:\s+\w+)?\s*;/
@@ -54,9 +54,9 @@ I {architecture_header_parts = []}
 -> disconnection_specification          .push
 
 -> architecture_body[1]                 {
-   assign(array(architecture_header_parts), entry_groups());
+   set(array(architecture_header_parts), entry_groups());
    lowercase_each(array(architecture_header_parts));
-   return(array(flat_array(architecture_header_parts), array_copy(array(architecture_body)), call(architecture_statement_part)))
+   return(array(flat_array(architecture_header_parts), copy(array(architecture_body)), call(architecture_statement_part)))
 }
 
 architecture_statement_part:
@@ -70,7 +70,7 @@ architecture_statement_part:
 #-> concurrent_assertion_statement         .push
 -> generate_statement                      .push
 -> component_instantiation_statement       .push
--> architecture_body[2]                    {return(array_copy(array(architecture_statement_part)))}
+-> architecture_body[2]                    {return(copy(array(architecture_statement_part)))}
 -> concurrent_signal_assignment_statement  .push
 
 
@@ -85,7 +85,7 @@ generate_statement: /(?is)(?:\w+\s*:\s*(?:(for|if)\s+(.+?))\s*)?\bgenerate\b/ /(
 #-> concurrent_assertion_statement         .push
 -> generate_statement                      .push
 -> component_instantiation_statement       .push
--> generate_statement[1]                   .return(array("?generate_statement:", flat_array(entry_groups()), array_copy(array(generate_statement))))
+-> generate_statement[1]                   .return(array("?generate_statement:", flat_array(entry_groups()), copy(array(generate_statement))))
 -> concurrent_signal_assignment_statement  .push
 
 
@@ -104,9 +104,9 @@ I {instantiation_parts = []}
 -> generic_map_aspect                      .push
 -> port_map_aspect                         .push
 -> component_instantiation_statement[1]    {
-   assign(array(instantiation_parts), entry_groups());
+   set(array(instantiation_parts), entry_groups());
    lowercase_each(array(instantiation_parts));
-   return(array("?component_instantiation_statement:", flat_array(instantiation_parts), array_copy(array(component_instantiation_statement))))
+   return(array("?component_instantiation_statement:", flat_array(instantiation_parts), copy(array(component_instantiation_statement))))
 }
 
 
@@ -115,7 +115,7 @@ generic_map_aspect: /(?i)generic\s+map\s*\(/  /\)/
 -> dquote_string          .push
 -> space                  .push
 -> association_element    .push
--> generic_map_aspect[1]  .return(array("?generic_map_aspect:", array_copy(array(generic_map_aspect))))
+-> generic_map_aspect[1]  .return(array("?generic_map_aspect:", copy(array(generic_map_aspect))))
 
 
 port_map_aspect: /(?i)port\s+map\s*\(/  /\)/
@@ -123,7 +123,7 @@ port_map_aspect: /(?i)port\s+map\s*\(/  /\)/
 -> dquote_string          .push
 -> space                  .push
 -> association_element    .push
--> port_map_aspect[1]     .return(array("?port_map_aspect:", array_copy(array(port_map_aspect))))
+-> port_map_aspect[1]     .return(array("?port_map_aspect:", copy(array(port_map_aspect))))
 
 # The 'port' is to deal w/ generic_map_aspect's association_element's followed
 # by a port_map_aspect. I know it is not ** elegant ** but...
@@ -148,11 +148,11 @@ process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\be
 -> if_endif 
 -> case_endcase 
 -> loop_endloop
--> process_statement[1]                 {assign(scalar(pos_begin), cursor_pos())}
+-> process_statement[1]                 {set(scalar(pos_begin), cursor_pos())}
 
 -> process_statement[2]                 {
-   assign(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
-   return(array("?process_statement:", flat_array(entry_groups()), array_copy(array(process_statement)), scalar(process_statement_part)))
+   set(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
+   return(array("?process_statement:", flat_array(entry_groups()), copy(array(process_statement)), scalar(process_statement_part)))
 }
 
 
@@ -161,7 +161,7 @@ component_declaration:    /(?i)\bcomponent\s+(\w+)\s+is\b/ /(?i)\bend\b(?:\s+com
 -> comment                  .push
 -> dquote_string            .push
 -> port_clause              .push
--> component_declaration[1] .return(array("?component_declaration:", flat_array(entry_groups()), array_copy(array(component_declaration))))
+-> component_declaration[1] .return(array("?component_declaration:", flat_array(entry_groups()), copy(array(component_declaration))))
 
 
 package_declaration:    /(?i)\bpackage\s+(\w+)\s+is\b/ /(?i)\bend\b(?!\s+component\b)(?:\s+package\b)?(?:\s+\w+)?\s*;/ 
@@ -186,9 +186,9 @@ I {imatch_copy = []}
 -> group_template_declaration .push
 -> group_declaration          .push
 -> package_declaration[1]        {
-	assign(array(imatch_copy), array(entry_group(0)));
+	set(array(imatch_copy), array(entry_group(0)));
 	lowercase_each(array(imatch_copy));
-	return(array("?package_declaration:", scalar(array(imatch_copy), 0), array_copy(array(package_declaration))))
+	return(array("?package_declaration:", scalar(array(imatch_copy), 0), copy(array(package_declaration))))
 }
 
 
@@ -208,7 +208,7 @@ package_body: /(?i)\bpackage\s+body\s+(\w+)\s+is\b/ /(?i)\bend(?:\s+package\s+bo
 -> use_clause                .push     
 -> group_template_declaration.push     
 -> group_declaration         .push              
--> package_body[1]                .return(array("?package_body:", entry_group(0), array_copy(array(package_body))))
+-> package_body[1]                .return(array("?package_body:", entry_group(0), copy(array(package_body))))
 
 
 configuration_declaration: /(?i)\bconfiguration\s+(\w+)\s+of\s+(\w+)\s+is\b/  /(?i)\bend\b(?:\s+configuration\b)?(?:\s+(\w+))?\s*;/
@@ -216,7 +216,7 @@ configuration_declaration: /(?i)\bconfiguration\s+(\w+)\s+of\s+(\w+)\s+is\b/  /(
 -> attribute_specification       .push
 -> group_declaration             .push
 -> block_configuration           .push
--> configuration_declaration[1]  .return(array("?configuration_declaration:", flat_array(entry_groups()), array_copy(array(configuration_declaration))))
+-> configuration_declaration[1]  .return(array("?configuration_declaration:", flat_array(entry_groups()), copy(array(configuration_declaration))))
 
 block_configuration: /(?i)\bfor\b(?!\s+generate)/  /(?i)end\s+for\s*;/
 -> use_clause
@@ -250,14 +250,14 @@ I {pos_begin = undef; subprogram_statement_part = undef; subprogram_statement_to
 -> group_template_declaration
 -> group_declaration
 
--> subprogram_body[1] {assign(scalar(pos_begin), cursor_pos())}
+-> subprogram_body[1] {set(scalar(pos_begin), cursor_pos())}
 
 -> subprogram_body[2] {
-   assign(scalar(subprogram_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
+   set(scalar(subprogram_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
    split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/);
    split_each(array(subprogram_statement_tokens), /^(\s+)/);
    filter_nonempty(array(subprogram_statement_tokens));
-   return(array("?subprogram_body:", flat_array(entry_groups()), array_copy(array(subprogram_statement_tokens))))
+   return(array("?subprogram_body:", flat_array(entry_groups()), copy(array(subprogram_statement_tokens))))
 }
 
 
@@ -293,36 +293,36 @@ port_clause:   /(?i)\bport\s*\(/ /\)\s*;/
 
 interface_signal_declaration: /(\w+)\s*:\s*(\w+)\s+(\w+)/ /\s*;|\s*(?=\)\s*;)/
 I {port_decl_parts = []}
--> signal_decl_range                 {assign(array(port_decl_parts), entry_groups()); push_value(array(port_decl_parts), call(signal_decl_range))}
--> interface_signal_declaration[1]   {assign(array(port_decl_parts), entry_groups()); return(array("?port_decl:", array_copy(array(port_decl_parts))))}
+-> signal_decl_range                 {set(array(port_decl_parts), entry_groups()); push(array(port_decl_parts), call(signal_decl_range))}
+-> interface_signal_declaration[1]   {set(array(port_decl_parts), entry_groups()); return(array("?port_decl:", copy(array(port_decl_parts))))}
 
 
 signal_decl_range: /\(/ /\)/ I {capt = []; msi_lsi = []}
-LS {push_value(array(capt), capture_slice())}
+LS {push(array(capt), capture_slice())}
 LE {start_capture_slice()}
 
 -> opar_cpar              {
    pos1 = undef;
    pos2 = undef;
-   assign(scalar(pos1), pos($$STRING)-1);
+   set(scalar(pos1), pos($$STRING)-1);
    call(opar_cpar);
-   assign(scalar(pos2), cursor_pos());
-   push_value(array(capt), substr($$STRING, $pos1, $pos2-$pos1))
+   set(scalar(pos2), cursor_pos());
+   push(array(capt), substr($$STRING, $pos1, $pos2-$pos1))
 }
 -> downto_or_to           {
    msi_lsi = undef;
-   assign(scalar(msi_lsi), join_values("", array(capt)));
+   set(scalar(msi_lsi), join_values("", array(capt)));
    substr(scalar(msi_lsi), /^\s+|\n\s*|\s+$/, //, goi);
-   push_value(array(msi_lsi), scalar(msi_lsi));
-   assign(array(capt), array())
+   push(array(msi_lsi), scalar(msi_lsi));
+   set(array(capt), array())
 } 
 -> signal_decl_range[1]   {
    if(not(is_empty(array(capt))));
     msi_lsi = undef;
-    assign(scalar(msi_lsi), join_values("", array(capt)));
+    set(scalar(msi_lsi), join_values("", array(capt)));
     if(scalar(msi_lsi));
      substr(scalar(msi_lsi), /^\s+|\n\s*|\s+$/, //, goi);
-     push_value(array(msi_lsi), scalar(msi_lsi));
+     push(array(msi_lsi), scalar(msi_lsi));
     endif();
    endif();
 
@@ -335,7 +335,7 @@ type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/
 -> record_endrecord
 -> type_declaration[1]      {
 	type_definition = undef;
-	assign(scalar(type_definition), CAPTURE);
+	set(scalar(type_definition), CAPTURE);
 	return(array("?type_declaration:", flat_array(entry_groups()), scalar(type_definition)))}
 record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 

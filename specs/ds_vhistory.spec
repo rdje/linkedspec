@@ -15,70 +15,70 @@ current_object_name = undef
 }
 LX  {
  if(is_nonempty(array(capt)));
-  assign(scalar(first_capt), scalar(array(capt), 0));
+  set(scalar(first_capt), scalar(array(capt), 0));
   if(str_eq(first_capt[0], "?branch:"));
-   assign(scalar(entry_tag), "?branch_entry:");
+   set(scalar(entry_tag), "?branch_entry:");
   else();
-   assign(scalar(entry_tag), "?version_entry:");
+   set(scalar(entry_tag), "?version_entry:");
   endif();
-  push_value(array(object_hier), array(scalar(entry_tag), array_copy(array(capt))));
+  push(array(object_hier), array(scalar(entry_tag), copy(array(capt))));
  endif();
 
  if(is_nonempty(array(object_hier)));
-  assign(scalar(current_object_name), cur_object[1]);
-  push_value(array(vhistory), array("?object:", scalar(current_object_name), array_copy(array(object_hier))));
+  set(scalar(current_object_name), cur_object[1]);
+  push(array(vhistory), array("?object:", scalar(current_object_name), copy(array(object_hier))));
  endif();
 
- return(array("?ds_vhistory:", array_copy(array(vhistory))))
+ return(array("?ds_vhistory:", copy(array(vhistory))))
 } 
 
 -> object             {
   if(is_nonempty(array(capt)));
-   assign(scalar(first_capt), scalar(array(capt), 0));
+   set(scalar(first_capt), scalar(array(capt), 0));
    if(str_eq(first_capt[0], "?branch:"));
-    assign(scalar(entry_tag), "?branch_entry:");
+    set(scalar(entry_tag), "?branch_entry:");
    else();
-    assign(scalar(entry_tag), "?version_entry:");
+    set(scalar(entry_tag), "?version_entry:");
    endif();
-   push_value(array(object_hier), array(scalar(entry_tag), array_copy(array(capt))));
-   assign(array(capt), array());
+   push(array(object_hier), array(scalar(entry_tag), copy(array(capt))));
+   set(array(capt), array());
 
   endif();
 
   if(is_nonempty(array(object_hier)));
-   assign(scalar(current_object_name), cur_object[1]);
-   push_value(array(vhistory), array("?object:", scalar(current_object_name), array_copy(array(object_hier))));
-   assign(array(object_hier), array());
+   set(scalar(current_object_name), cur_object[1]);
+   push(array(vhistory), array("?object:", scalar(current_object_name), copy(array(object_hier))));
+   set(array(object_hier), array());
   endif();
 
-  assign(scalar(cur_object), call(object));
+  set(scalar(cur_object), call(object));
   print("\tObject   ", cur_object[1], "\n")
 }
 
 
 -> separator          {
   if(is_nonempty(array(capt)));
-   assign(scalar(first_capt), scalar(array(capt), 0));
+   set(scalar(first_capt), scalar(array(capt), 0));
    if(str_eq(first_capt[0], "?branch:"));
-    assign(scalar(entry_tag), "?branch_entry:");
+    set(scalar(entry_tag), "?branch_entry:");
    else();
-    assign(scalar(entry_tag), "?version_entry:");
+    set(scalar(entry_tag), "?version_entry:");
    endif();
-   push_value(array(object_hier), array(scalar(entry_tag), array_copy(array(capt))));
-   assign(array(capt), array());
+   push(array(object_hier), array(scalar(entry_tag), copy(array(capt))));
+   set(array(capt), array());
   endif();
 }
 
 
--> branch             {push_value(array(capt), call(branch))}
--> version            {push_value(array(capt), call(version))}
--> branch_tags        {push_value(array(capt), call(branch_tags))}
--> version_tags       {push_value(array(capt), call(version_tags))}
--> date               {push_value(array(capt), call(date))}
--> author             {push_value(array(capt), call(author))}
--> comment            {push_value(array(capt), call(comment))}
--> manifest           {push_value(array(capt), call(manifest))}
--> derived_from       {push_value(array(capt), call(derived_from))}
+-> branch             {push(array(capt), call(branch))}
+-> version            {push(array(capt), call(version))}
+-> branch_tags        {push(array(capt), call(branch_tags))}
+-> version_tags       {push(array(capt), call(version_tags))}
+-> date               {push(array(capt), call(date))}
+-> author             {push(array(capt), call(author))}
+-> comment            {push(array(capt), call(comment))}
+-> manifest           {push(array(capt), call(manifest))}
+-> derived_from       {push(array(capt), call(derived_from))}
 
 
 

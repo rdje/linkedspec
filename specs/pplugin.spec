@@ -1,10 +1,10 @@
 pplugin_top::   I {defs = []; retv = undef}
  -> comment       {next()}
- -> subdef        {assign(scalar(retv), call(subdef))}
+ -> subdef        {set(scalar(retv), call(subdef))}
 
 LE {
     if(is_defined(scalar(retv)));
-      assign(array(defs), array(flat_array(defs), retv[0], retv[1]));
+      set(array(defs), array(flat_array(defs), retv[0], retv[1]));
     else();
       return_undef();
     endif()

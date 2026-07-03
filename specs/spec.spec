@@ -72,10 +72,10 @@ spec_file::
  }
  -> rule_header {
   if(scalar(started)) {
-   push_value(array(paragraphs), array_copy(array(current)));
-   assign(array(current), array())
+   push(array(paragraphs), copy(array(current)));
+   set(array(current), array())
   }
-  assign(scalar(started), 1);
+  set(scalar(started), 1);
   push(rule_header, current)
  }
  -> regex_anchor     { push(regex_anchor, current) }
@@ -92,16 +92,16 @@ spec_file::
  -> comment          { next() }
  LX {
   if(scalar(started)) {
-   push_value(array(paragraphs), array_copy(array(current)))
+   push(array(paragraphs), copy(array(current)))
   }
-  return(array_copy(array(paragraphs)))
+  return(copy(array(paragraphs)))
  }
 
 # ---- rule header: `Name:` (body rule) or `Name::` (top rule) + optional mode --
 rule_header: /(\w++)[ \t]*(::|:)[ \t]*((?:&|\||\+|\*|\?|OR\+|OR\{[^}]++\}|OR|AND\+|AND\{[^}]++\}|AND)?)/
  I {
   top = 0;
-  if(str_eq(entry_group(1), "::")) { assign(scalar(top), 1) }
+  if(str_eq(entry_group(1), "::")) { set(scalar(top), 1) }
   return(hash("type", "rule", "label", entry_group(0), "top", scalar(top), "mode", entry_group(2)))
  }
 

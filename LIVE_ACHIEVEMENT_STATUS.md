@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **SPEC-FORMAT-TERSE.6.2.2 — shipped specs use canonical terse helper spellings**
+  (SHIPPED-SPEC MIGRATION; OLD HELPER ALIASES REMAIN COMPATIBILITY SUPPORT).
+  Migrated active shipped-spec `assign(...)`, `push_value(...)`, `array_copy(...)`, `hash_copy(...)`, and
+  `concat(...)` spellings to `set(...)`, `push(...)`, `copy(...)`, and `cat(...)` where the terse equivalent
+  already ships. `portmap.spec` also now omits redundant standalone flow-marker separators after `if(...)`,
+  `elseif(...)`, and `else()`.
+
+  **Verification:** old-helper scan over `specs/` is clean; the `portmap.spec` standalone flow-marker separator
+  scan is clean; registered descriptor compilation passes for all 21 shipped specs; phase0 passes with **1018**
+  tests; Rust `corpus_oracle` passes over **66 fixtures**.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.6.2.3` — migrate typed wrappers/constructors toward bare reads and direct
+  shape literals where accepted terse inference makes the replacement unambiguous.
+
 - 2026-07-03: **SPEC-FORMAT-TERSE.6.2.1 — shipped specs no longer use `declare(...)`**
   (SHIPPED-SPEC MIGRATION; NO RUNTIME DECLARE EXPANSION).
   Removed active `declare(...)` and fluent `.declare(...)` use from the 13 shipped specs inventoried by `.6.1`.

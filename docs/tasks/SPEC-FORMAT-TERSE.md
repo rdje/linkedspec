@@ -6,13 +6,13 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (**`.6.2.1` DONE; shipped specs no longer use active `declare(...)` or
-  `.declare(...)` forms. The 70-hit inventory across 13 shipped specs was migrated to auto-existing variables,
-  terse assignment/reset forms such as `name = value`, `items = []`, and `name = undef`, and explicit lifecycle
-  blocks where fluent `I.declare(...)` had been the only verbose piece. Focused shipped-spec compilation, phase0
-  (**1018 green**), and the Rust corpus oracle (**66 fixtures**) pass. Frontier moves to `.6.2.2` for old helper
-  spellings. The user's broader type-method-surface directive is tracked as future lane `.7`, starting with an
-  inventory before any code.
+- Last updated: `2026-07-03` (**`.6.2.2` DONE; shipped specs no longer use active old helper spellings
+  `assign(...)`, `push_value(...)`, `array_copy(...)`, `hash_copy(...)`, or `concat(...)`. The migration uses the
+  landed terse aliases `set(...)`, `push(...)`, `copy(...)`, and `cat(...)`, with explicit `array(...)` push
+  targets where needed to avoid all-bare child-call ambiguity. `portmap.spec` also drops redundant standalone
+  separators after flow markers. Focused shipped-spec compilation, phase0 (**1018 green**), and the Rust corpus
+  oracle (**66 fixtures**) pass. Frontier moves to `.6.2.3` for typed-wrapper/direct-shape cleanup. The user's
+  broader type-method-surface directive is tracked as future lane `.7`, starting with an inventory before any code.
   Prior **`.3.3.4` DONE; expression-valued assignment closure is locked across
   scalar, direct-shape aggregate, array append, hash-index mutation, user-function body, receiver-chain,
   and legacy `assign(...)` compatibility spellings. Public mdBook examples now prefer `set(...)` or operator
@@ -2689,13 +2689,20 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.6.2.1 - remove declare from shipped specs`
 
 - ID: `SPEC-FORMAT-TERSE.6.2.2`
-  Status: `pending`
+  Status: `done` (2026-07-03)
   Goal: Migrate old shipped-spec helper spellings to canonical terse helper spellings.
   Acceptance: Active shipped specs no longer use `assign(...)`, `push_value(...)`, `array_copy(...)`,
     `hash_copy(...)`, or `concat(...)` when a shipped terse equivalent already exists (`set`, `push`, `copy`,
-    `cat`, assignment operators); migrated specs compile and focused behavior checks stay stable.
-  Verification: `pending`
-  Commit: `pending`
+    `cat`, assignment operators); `portmap.spec` also drops standalone statement separators after flow markers
+    such as `if(...)`, `elseif(...)`, and `else()` where no following same-line construct makes the separator
+    necessary; migrated specs compile and focused behavior checks stay stable.
+  Verification: PASS — 2026-07-03. Active shipped-spec old-helper spelling scan
+    `rg -n '\b(assign|push_value|array_copy|hash_copy|concat)\s*\(' specs` returns no hits. The `portmap.spec`
+    flow-marker separator scan `rg -n '^\s*(?:if|elseif)\(.*\);\s*$|^\s*else\(\);\s*$' specs/portmap.spec`
+    returns no hits. Registered descriptor compilation passes for all 21 shipped specs; stale phase0
+    source-inspection expectations were updated to assert `set`, `push`, `copy`, and `cat`; `prove -q -Iperl
+    t/phase0_regression.t` passes with **1018** tests; Rust `corpus_oracle` passes over **66 fixtures**.
+  Commit: `SPEC-FORMAT-TERSE.6.2.2 - migrate shipped-spec helper spellings`
 
 - ID: `SPEC-FORMAT-TERSE.6.2.3`
   Status: `pending`
@@ -2784,10 +2791,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | --- | --- | --- | --- |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
-| 1 | `SPEC-FORMAT-TERSE.6.2.2` | `pending` | migrate old helper spellings such as `assign`, `push_value`, `array_copy`/`hash_copy`, and `concat` |
-| 2 | `SPEC-FORMAT-TERSE.6.2.3` | `pending` | migrate typed wrappers/constructors where terse inference is unambiguous |
-| 3 | `SPEC-FORMAT-TERSE.6.2.4` | `pending` | final shipped-spec terse-surface verification before doc/corpus sweeps |
-| 4 | `SPEC-FORMAT-TERSE.6.3` | `pending` | sweep public docs, checked-in corpus/test specs, and examples after shipped specs are clean |
+| — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
+| 1 | `SPEC-FORMAT-TERSE.6.2.3` | `pending` | migrate typed wrappers/constructors where terse inference is unambiguous |
+| 2 | `SPEC-FORMAT-TERSE.6.2.4` | `pending` | final shipped-spec terse-surface verification before doc/corpus sweeps |
+| 3 | `SPEC-FORMAT-TERSE.6.3` | `pending` | sweep public docs, checked-in corpus/test specs, and examples after shipped specs are clean |
 | 5 | `SPEC-FORMAT-TERSE.6.4` | `pending` | decide post-migration compatibility support only after live spec-file use is gone |
 | 6 | `SPEC-FORMAT-TERSE.7.1` | `pending` | backlog from user directive: audit supported types and helper families before adding/backfilling methods such as string `substr()` |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
@@ -3734,6 +3741,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-03` | `SPEC-FORMAT-TERSE.6.2.2` | `rg -n '\b(assign|push_value|array_copy|hash_copy|concat)\s*\(' specs`; `rg -n '^\s*(?:if|elseif)\(.*\);\s*$|^\s*else\(\);\s*$' specs/portmap.spec`; registered descriptor compile for all 21 shipped specs; `perl -c -Iperl t/phase0_regression.t`; `prove -q -Iperl t/phase0_regression.t`; `cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle` | Shipped specs no longer use active old helper spellings. `portmap.spec` no longer keeps redundant standalone flow-marker separators. Stale phase0 source expectations now assert the canonical terse spellings. Phase0 passes with **1018** tests and the Rust oracle corpus passes over **66 fixtures**. Frontier becomes `.6.2.3` for typed-wrapper/direct-shape cleanup. |
 | `2026-07-03` | `SPEC-FORMAT-TERSE.6.2.1` | `rg -n 'declare\(|\.declare\(' specs`; focused `perl -Iperl -MLinkedSpec` descriptor compile for all 13 edited shipped specs; `prove -q -Iperl t/phase0_regression.t`; `cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle`; Knowledge Map/memory/doctrine/diff checks; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | Shipped specs no longer use active `declare(...)` or fluent `.declare(...)`. `BNF`, `ds_vhistory`, `ebnf`, `hlink_substitution`, `lib_reader`, `Lispish`, `portmap`, `pplugin`, `sdce`, `simenv`, `spec`, `tablegrep`, and `vhdl` compile after the migration. Stale phase0 expectations now assert the replacement assignment/capture/source-read nodes instead of `DECLARE`. Phase0 passes with **1018** tests, the Rust oracle corpus passes over **66 fixtures**, mdBook builds, and the full local CI gate passes. Frontier becomes `.6.2.2` for old helper spelling cleanup. |
 | `2026-07-03` | `SPEC-FORMAT-TERSE.6.1` | `rg -n '(^|[.{;[:space:]])declare\(' specs`; `rg -l '(^|[.{;[:space:]])declare\(' specs`; task-tree/roadmap/live-doc/mdBook/KM ownership updates; no `.spec` edits | User directive owned under `SPEC-FORMAT-TERSE`; 70 active shipped-spec hits across 13 files inventoried; next executable leaf `.6.2` migrates specs before any runtime-helper expansion or oracle fixture change. |
 | `2026-07-02` | `SPEC-FORMAT-TERSE.3.3.4` | mdBook `assign(...)` public-example audit; phase0 closure lock; focused Rust runtime closure test; oracle generator; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; full local CI | Assignment-expression closure landed. Scalar, direct-shape aggregate, append, hash-index, user-function body, receiver-chain, canonical `set(...)`, operator, and legacy `assign(...)` compatibility forms now compose in one Perl/Rust corpus fixture. Public examples prefer `set(...)`/operator assignment; `assign(...)` remains a legacy alias reference. Corpus reaches **62 fixtures**, phase0 reaches **1015 tests**, and the `SPEC-FORMAT-TERSE` active roadmap has no remaining concrete PNT-eligible leaf. |
@@ -3839,6 +3847,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.6.2.2` | `SPEC-FORMAT-TERSE.6.2.2 - migrate shipped-spec helper spellings` | Migrated active shipped-spec old helper spellings to `set`, `push`, `copy`, and `cat`; cleaned redundant standalone `portmap.spec` flow-marker separators; phase0 and Rust corpus oracle pass; frontier becomes `.6.2.3`. |
 | `SPEC-FORMAT-TERSE.6.2.1` | `SPEC-FORMAT-TERSE.6.2.1 - remove declare from shipped specs` | Removed the 70 active shipped-spec `declare(...)` / `.declare(...)` uses with terse assignments/resets and structured lifecycle blocks; phase0 and Rust corpus oracle pass; frontier becomes `.6.2.2`. |
 | `SPEC-FORMAT-TERSE.6.1` | `SPEC-FORMAT-TERSE.6.1 - own declare retirement migration` | User directive owned under `SPEC-FORMAT-TERSE`; shipped-spec inventory recorded; no `.spec` file changed; frontier becomes `.6.2`. |
 | `SPEC-FORMAT-TERSE.3.3.4` | `SPEC-FORMAT-TERSE.3.3.4 - close assignment expression docs` | Parent assignment-expression closure fixture locks scalar, aggregate, mutation, user-function, receiver-chain, operator, canonical `set`, and legacy `assign` compatibility forms; public book examples now prefer `set`/operators; corpus 62 fixtures, phase0 1015 green, and no concrete `SPEC-FORMAT-TERSE` PNT leaf remains. |

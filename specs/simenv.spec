@@ -2,15 +2,15 @@ top::            I {blocks = []; retv = undef}
 
  -> comments
  -> begin_end_blocks          {
-	                       assign(scalar(retv), call(begin_end_blocks));
+	                       set(scalar(retv), call(begin_end_blocks));
 	                       if(scalar(retv));
-	                         push_value(array(blocks), scalar(retv));
+	                         push(array(blocks), scalar(retv));
 	                       endif()
 		              }
 
 LX {
      if(is_nonempty(array(blocks)));
-       return(array_copy(array(blocks)));
+       return(copy(array(blocks)));
      else();
        return_undef();
      endif()
@@ -22,14 +22,14 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); 
  -> comments
  -> anyvariable                       {
                                        if(is_nonempty(array(keyval_pairs)));
-                                         push_value(array(assigns), array_copy(array(keyval_pairs)));
+                                         push(array(assigns), copy(array(keyval_pairs)));
                                        endif();
-	                                       assign(scalar(retv), call(anyvariable));
-                                       assign(array(keyval_pairs), array(scalar(retv)))
+	                                       set(scalar(retv), call(anyvariable));
+                                       set(array(keyval_pairs), array(scalar(retv)))
                                       }
 
- -> multiline_value                   {push_value(array(keyval_pairs), call(multiline_value))}
- -> singleline_value                  {push_value(array(keyval_pairs), call(singleline_value))}
+ -> multiline_value                   {push(array(keyval_pairs), call(multiline_value))}
+ -> singleline_value                  {push(array(keyval_pairs), call(singleline_value))}
  -> begin_end_blocks[1]               {
                                        block_namee = match_text();
 	                                       substr(scalar(block_namee), /^.*\s+/, "", o);
@@ -41,11 +41,11 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); 
                                        endif();
 
                                        if(is_nonempty(array(keyval_pairs)));
-                                         push_value(array(assigns), array_copy(array(keyval_pairs)));
+                                         push(array(assigns), copy(array(keyval_pairs)));
                                        endif();
                                        print("begin_end_blocks: END    (", match_text(), "\n");
                                        if(is_nonempty(array(assigns)));
-	                                         return(hash("name", scalar(block_namei), "content", array_copy(array(assigns))));
+	                                         return(hash("name", scalar(block_namei), "content", copy(array(assigns))));
                                        else();
                                          return_undef();
                                        endif()
@@ -75,25 +75,25 @@ multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
 
 
 singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> perl_command_substitution          {push_value(array(matches), call(perl_command_substitution));   assign(scalar(last_pos), cursor_pos())}
- -> command_substitution               {push_value(array(matches), call(command_substitution));        assign(scalar(last_pos), cursor_pos())}
- -> bvariable_substitution             {push_value(array(matches), call(bvariable_substitution));      assign(scalar(last_pos), cursor_pos())}
- -> variable_substitution              {push_value(array(matches), call(variable_substitution));       assign(scalar(last_pos), cursor_pos())}
- -> squotes                            {push_value(array(matches), call(squotes));                     assign(scalar(last_pos), cursor_pos())}
- -> dquotes                            {push_value(array(matches), call(dquotes));                     assign(scalar(last_pos), cursor_pos())}
- -> perl_squotes                       {push_value(array(matches), call(perl_squotes));                assign(scalar(last_pos), cursor_pos())}
- -> perl_dquotes                       {push_value(array(matches), call(perl_dquotes));                assign(scalar(last_pos), cursor_pos())}
- -> bs_nl                              {push_value(array(matches), call(bs_nl));                       assign(scalar(last_pos), cursor_pos())}
+ -> perl_command_substitution          {push(array(matches), call(perl_command_substitution));   set(scalar(last_pos), cursor_pos())}
+ -> command_substitution               {push(array(matches), call(command_substitution));        set(scalar(last_pos), cursor_pos())}
+ -> bvariable_substitution             {push(array(matches), call(bvariable_substitution));      set(scalar(last_pos), cursor_pos())}
+ -> variable_substitution              {push(array(matches), call(variable_substitution));       set(scalar(last_pos), cursor_pos())}
+ -> squotes                            {push(array(matches), call(squotes));                     set(scalar(last_pos), cursor_pos())}
+ -> dquotes                            {push(array(matches), call(dquotes));                     set(scalar(last_pos), cursor_pos())}
+ -> perl_squotes                       {push(array(matches), call(perl_squotes));                set(scalar(last_pos), cursor_pos())}
+ -> perl_dquotes                       {push(array(matches), call(perl_dquotes));                set(scalar(last_pos), cursor_pos())}
+ -> bs_nl                              {push(array(matches), call(bs_nl));                       set(scalar(last_pos), cursor_pos())}
  -> singleline_value[1]     {print("singleline_value: END\n");  print("<", capture_slice(), ">\n");
 	 print_each(array(matches), "singleline_value:<<", ">>\n");
 	 if(is_nonempty(array(matches)));
-	   return(hash("type", "singleline_value", "content", array_copy(array(matches))));
+	   return(hash("type", "singleline_value", "content", copy(array(matches))));
 	 else();
 	   return(hash("type", "singleline_value", "content", undef));
 	 endif()
    }
 
- LS {assign(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push_value(array(matches), hash("type", "verbatim", "content", input_slice(scalar(last_pos), scalar(shift)))); endif()}
+ LS {set(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push(array(matches), hash("type", "verbatim", "content", input_slice(scalar(last_pos), scalar(shift)))); endif()}
  LX {print("(simenv) -E- End of Line not found for *singleline_value* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -110,17 +110,17 @@ squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
      exit_now()}
 
 dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> bvariable_substitution                    {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
- -> variable_substitution                     {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
+ -> bvariable_substitution                    {push(array(matches), call(bvariable_substitution));   set(scalar(last_pos), cursor_pos())}
+ -> variable_substitution                     {push(array(matches), call(bvariable_substitution));   set(scalar(last_pos), cursor_pos())}
  -> dquotes[1]                                {print("dquotes: END\n");  print("<", capture_slice(), ">\n");
 	 print_each(array(matches), "perl_dquotes:<<", ">>\n");
          if(is_nonempty(array(matches)));
-           return(hash("type", "dquotes", "content", array_copy(array(matches))));
+           return(hash("type", "dquotes", "content", copy(array(matches))));
          else();
            return(hash("type", "dquotes", "content", undef));
          endif()}
 
- LS {assign(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push_value(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
+ LS {set(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *dquotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -138,51 +138,51 @@ perl_squotes: /q\(/  /\)/                   I {print("perl_squotes: START\n")}
 
 perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
  -> parenthesis
- -> bvariable_substitution                    {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
- -> variable_substitution                     {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
+ -> bvariable_substitution                    {push(array(matches), call(bvariable_substitution));   set(scalar(last_pos), cursor_pos())}
+ -> variable_substitution                     {push(array(matches), call(bvariable_substitution));   set(scalar(last_pos), cursor_pos())}
  -> perl_dquotes[1]                           {print("perl_dquotes: END\n"); print("<", capture_slice(), ">\n");
 	 print_each(array(matches), "perl_dquotes:<<", ">>\n");
          if(is_nonempty(array(matches)));
-           return(hash("type", "dquotes", "content", array_copy(array(matches))));
+           return(hash("type", "dquotes", "content", copy(array(matches))));
          else();
            return(hash("type", "dquotes", "content", undef));
          endif()}
 
- LS {assign(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push_value(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
+ LS {set(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *perl_dquotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
 
 command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> bvariable_substitution                    {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
- -> variable_substitution                     {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
+ -> bvariable_substitution                    {push(array(matches), call(bvariable_substitution));   set(scalar(last_pos), cursor_pos())}
+ -> variable_substitution                     {push(array(matches), call(bvariable_substitution));   set(scalar(last_pos), cursor_pos())}
  -> command_substitution[1]                   {
 	                                       print("command_substitution: END\n"); print("<", capture_slice(), ">\n");
 	                                       print_each(array(matches), "command_substitution:<<", ">>\n");
                                                if(is_nonempty(array(matches)));
-                                                 return(hash("type", "command_substitution", "content", array_copy(array(matches))));
+                                                 return(hash("type", "command_substitution", "content", copy(array(matches))));
                                                else();
                                                  return(hash("type", "command_substitution", "content", undef));
                                                endif()
 				              }
 
- LS {assign(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push_value(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
+ LS {set(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
  LX {print("(simenv) -E- Unmatched back-tick for *command_substitution* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
 
 perl_command_substitution: /qx\(/  /\)/     I {print("perl_command_substitution: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> bvariable_substitution		      {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
- -> variable_substitution                     {push_value(array(matches), call(variable_substitution));    assign(scalar(last_pos), cursor_pos())}
+ -> bvariable_substitution		      {push(array(matches), call(bvariable_substitution));   set(scalar(last_pos), cursor_pos())}
+ -> variable_substitution                     {push(array(matches), call(variable_substitution));    set(scalar(last_pos), cursor_pos())}
  -> perl_command_substitution[1]              {print("perl_command_substitution: END\n"); print("<", capture_slice(), ">\n");
 	 print_each(array(matches), "perl_command_substitution:<<", ">>\n");
 	 if(is_nonempty(array(matches)));
-	   return(hash("type", "command_substitution", "content", array_copy(array(matches))));
+	   return(hash("type", "command_substitution", "content", copy(array(matches))));
 	 else();
 	   return(hash("type", "command_substitution", "content", undef));
 	 endif()}
 
- LS {assign(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push_value(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
+ LS {set(scalar(shift), num_sub(match_start_pos(), scalar(last_pos))); if(num_gt(scalar(shift), 0)); push(array(matches), input_slice(scalar(last_pos), scalar(shift))); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *perl_command_substitution* starting on line ", capture_slice_line(), "\n");
      exit_now()}
  

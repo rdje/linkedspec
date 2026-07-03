@@ -1,8 +1,8 @@
 grep::
- -> re_term	{assign(scalar(retv), call(re_term))}
- -> or_op	{assign(scalar(retv), call(or_op))}
- -> and_op	{assign(scalar(retv), call(and_op))}
- -> group	{assign(scalar(retv), call(group))}
+ -> re_term	{set(scalar(retv), call(re_term))}
+ -> or_op	{set(scalar(retv), call(or_op))}
+ -> and_op	{set(scalar(retv), call(and_op))}
+ -> group	{set(scalar(retv), call(group))}
 
 I {
  internal = [];
@@ -13,7 +13,7 @@ LX {
  if(is_empty(array(internal)));
   return_undef();
  endif();
- return(array_copy(array(internal)))
+ return(copy(array(internal)))
 }
 LS {retv = undef}
 LE {
@@ -26,17 +26,17 @@ LE {
   exit_now(1);
  endif();
  
- push_value(array(internal), scalar(retv));
- assign(scalar(prev_node_type), retv["type"])
+ push(array(internal), scalar(retv));
+ set(scalar(prev_node_type), retv["type"])
 }
 #======== End Of grep ========
 
 
 group:	/\(/ /\)/
- -> group		{assign(scalar(retv), call(group))}
- -> re_term		{assign(scalar(retv), call(re_term))}
- -> or_op		{assign(scalar(retv), call(or_op))}
- -> and_op		{assign(scalar(retv), call(and_op))}
+ -> group		{set(scalar(retv), call(group))}
+ -> re_term		{set(scalar(retv), call(re_term))}
+ -> or_op		{set(scalar(retv), call(or_op))}
+ -> and_op		{set(scalar(retv), call(and_op))}
  -> group[1]		{
   if(is_empty(array(internal)));
    print("\\nERROR: ** Empty **  GROUP\\n");
@@ -61,8 +61,8 @@ LE {
   exit_now(1);
  endif();
 
- push_value(array(internal), scalar(retv));
- assign(scalar(prev_node_type), retv["type"])
+ push(array(internal), scalar(retv));
+ set(scalar(prev_node_type), retv["type"])
 }
 #==========
 

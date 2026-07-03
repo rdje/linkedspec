@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (SPEC-FORMAT-TERSE.6.2.2 — shipped specs old-helper-free):
+  The second shipped-spec terse migration removes active old helper spellings without changing alias support.
+  `set`, `push`, `copy`, and `cat` are now the shipped-spec source spellings for helper aliases that were already
+  portable on Perl and Rust. The main caution was `push(...)`: all-bare `push(A,B)` is still the child-call
+  convention, so migrated accumulator appends keep explicit targets such as `push(array(items), value)` where
+  ambiguity would otherwise be possible. `portmap.spec` also demonstrates the separator rule directly: standalone
+  flow markers do not need trailing semicolons, while real same-line statement separation still uses semicolons.
+  Wrappers and constructors are deliberately left for `.6.2.3`; this slice only proves the helper-name migration
+  by compiling all shipped specs, keeping phase0 at 1018 green tests, and keeping the Rust oracle corpus green over
+  66 fixtures.
+
 - 2026-07-03 (SPEC-FORMAT-TERSE.6.2.1 — shipped specs declare-free):
   The first shipped-spec declaration migration is intentionally narrow. It removes `declare(...)` / `.declare(...)`
   without broadening runtime declaration support and without mixing in the remaining verbose helper families.

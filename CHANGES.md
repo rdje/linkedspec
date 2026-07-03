@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — SPEC-FORMAT-TERSE.6.2.2 — migrate shipped-spec helper spellings
+
+**Scope:** 16 shipped `.spec` files plus stale phase0 source expectations, task-tree tracking, live docs, and the
+mdBook project-status note. No runtime helper alias behavior was removed.
+
+**What changed:** Migrated active shipped-spec uses of old helper spellings to the canonical terse surface:
+`assign(...)` -> `set(...)`, `push_value(...)` -> `push(...)`, `array_copy(...)`/`hash_copy(...)` -> `copy(...)`,
+and `concat(...)` -> `cat(...)` where the terse spelling was already shipped. `push(...)` targets that could
+otherwise collide with all-bare child-call syntax keep explicit `array(...)` receivers. `portmap.spec` also drops
+redundant standalone separators after `if(...)`, `elseif(...)`, and `else()` flow markers.
+
+**Evidence:** `rg -n '\b(assign|push_value|array_copy|hash_copy|concat)\s*\(' specs` is clean, and
+`rg -n '^\s*(?:if|elseif)\(.*\);\s*$|^\s*else\(\);\s*$' specs/portmap.spec` is clean. Registered descriptor
+compilation passes for all 21 shipped specs. `prove -q -Iperl t/phase0_regression.t` passes with **1018** tests,
+and Rust `corpus_oracle` passes over **66 fixtures**. The next frontier is `SPEC-FORMAT-TERSE.6.2.3` for
+typed-wrapper/direct-shape cleanup.
+
 ## 2026-07-03 — SPEC-FORMAT-TERSE.6.2.1 — remove declare from shipped specs
 
 **Scope:** 13 shipped `.spec` files plus stale phase0 expectations and the task/live tracking docs. No runtime

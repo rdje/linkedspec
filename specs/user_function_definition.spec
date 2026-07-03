@@ -77,7 +77,7 @@ function_definition: /(?m)^[ \t]*fn[ \t]+(?<name>[A-Za-z_]\w*)\s*\(\s*(?<params>
   "body_parse_job" => {
    "kind" => "parse_job",
    "version" => 1,
-   "job_id" => concat("parse_job:function_body:", entry_named(name), ":actionir-body.spec:action_block"),
+   "job_id" => cat("parse_job:function_body:", entry_named(name), ":actionir-body.spec:action_block"),
    "parent_ast_path" => ["functions", "__pending_source_order__", "body_source"],
    "node_kind" => "function_definition",
    "payload_kind" => "function_body",
