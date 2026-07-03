@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.7 — oracle timeout covers parser build + parse):
+  The user-directed timeout re-debug found that a "timeout" can occur before parser execution. A fork+SIGKILL
+  census over shipped specs made `BNF` exceed a 5s build+parse wrapper even on empty input. Focused probes showed
+  `LinkedSpec::get_parser("BNF")` spends about 6.4s in parser construction, `get_parser("ebnf")` is the same
+  slow-build class at about 7.0s, and parsing empty input after the BNF parser exists takes about 0.03s.
+  `LINKEDSPEC_TRACE_LEVEL=debug` reaches `Parser generation completed successfully`, so the live issue is the
+  oracle guard boundary, not a parser execution hang. `tools/gen_oracle_corpus.pl` now builds the parser and runs
+  the parse in the forked child; the parent `ORACLE_TIMEOUT`/`SIGKILL` guard covers both phases. This is the
+  permanent guard shape for broad shipped-spec corpus expansion.
+
 - 2026-07-03 (RUST-PARITY.7.3.3.3 — hlink scalar-ref fixtures deferred):
   Bracket/mixed `hlink_substitution` oracle fixtures are not just waiting on a JSON spelling. Perl's reference AST
   uses scalar references for bracket payloads, which `JSON::PP` cannot encode, and current Rust has neither a

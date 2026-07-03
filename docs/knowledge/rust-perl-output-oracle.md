@@ -7,6 +7,8 @@ answers:
   - "where is the cross-variant test corpus"
   - "how do I regenerate the oracle corpus fixtures"
   - "how does gen_oracle_corpus enforce hard timeouts"
+  - "does the oracle timeout cover parser construction"
+  - "does the oracle timeout cover parser build"
   - "does the oracle generator still rely on alarm for catastrophic regex timeouts"
   - "is the RTLUtils oracle timeout still live"
   - "why does the Rust engine output wrap the Perl reference value one level"
@@ -33,22 +35,24 @@ date: 2026-07-03
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
 evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active. RUST-PARITY.7.5.2 (2026-07-02) temporarily restored legacy Lispish scalaref parity; SCALAREF-RETIREMENT.3 migrated Lispish to direct access, and SCALAREF-RETIREMENT.4 removed scalaref implementation support. RUST-PARITY.7.2 fixed Rust captures-only numbered helper indexing and added two hlink_substitution raw-string fixtures. RUST-PARITY.7.3.2 (2026-07-03): verified the historic RTLUtils timeout is retired from the current core tree, changed gen_oracle_corpus run_oracle from alarm() to per-case fork+SIGKILL process timeout, regenerated 65 fixtures byte-identically, and proved ORACLE_TIMEOUT=0 hard-kills the first parse. RUST-PARITY.7.3.3.2 added hlink_curly_brace for {abc}; corpus_oracle passes over 66 fixtures."
-reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; perl -Iperl tools/gen_oracle_corpus.pl; cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
+evidence_update_2026_07_03: "RUST-PARITY.7.3.7: user-directed timeout trace census found BNF timing out under a 5s build+parse child wrapper because get_parser('BNF') spends about 6.4s in parser construction while parsing empty input takes about 0.03s. LINKEDSPEC_TRACE_LEVEL=debug reached Parser generation completed successfully, so the live issue was the oracle guard boundary, not a parser execution hang. tools/gen_oracle_corpus.pl now builds the parser and executes the parse inside the forked child so ORACLE_TIMEOUT hard-kills parser construction and parse execution."
+reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
 
 **Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-03
-(RUST-PARITY.7.3.3.2).** A language-neutral cross-variant parity gate
+(RUST-PARITY.7.3.7).** A language-neutral cross-variant parity gate
 (ADR 0006 §Phase 8.6). The Perl reference is the behavioral oracle; the corpus is its
 frozen output; `cargo test` validates the Rust backend against it with no Perl in the loop.
 
 ## Mechanism
 
-- **Generator** `tools/gen_oracle_corpus.pl` — for each `(spec, input)` case it runs the
-  Perl reference parser in a child process under a hard wall-clock timeout (default 15s).
-  The parent kills the child with `SIGKILL` on timeout, deliberately avoiding `alarm()`
-  because catastrophic regex backtracking can defer Perl safe signals. It writes one corpus directory per case:
+- **Generator** `tools/gen_oracle_corpus.pl` — for each `(spec, input)` case it builds the
+  Perl reference parser and runs the parse in a child process under a hard wall-clock
+  timeout (default 15s). The parent kills the child with `SIGKILL` on timeout,
+  deliberately avoiding `alarm()` because catastrophic regex backtracking can defer Perl
+  safe signals. It writes one corpus directory per case:
   `tests/corpus/<case>/{input.spec, input.txt, expected.json}`. `expected.json` is
   `JSON::PP->canonical(1)` (sorted keys → byte-stable regeneration). A case is either a
   shipped spec (`spec => 'tclite'`, slurped from `specs/`) or an authored inline grammar
@@ -143,13 +147,14 @@ a literal edge return and an action-less child), so both backends agree exactly.
 ## Regenerating
 
 ```sh
-perl tools/gen_oracle_corpus.pl            # default 15s hard per-parse timeout
+perl tools/gen_oracle_corpus.pl            # default 15s hard per-case build+parse timeout
 ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
 ```
 
 The historic `RTLUtils` catastrophic-backtrack timeout is retired with the deleted
-legacy VHDL/RTL/FSM subsystem. The process-level guard remains as generic protection
-for future pathological specs.
+legacy VHDL/RTL/FSM subsystem. The process-level guard now covers both parser construction
+and parser execution, so future pathological shipped specs cannot wedge corpus generation
+while being compiled before their input is parsed.
 
 ## Links
 

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.7 — hard-timeout parser construction too
+
+**Scope:** Oracle generator timeout boundary, corpus README, task-tree/index, roadmap pointer, live docs, and
+Knowledge Map. No corpus fixture expected values changed.
+
+**What changed:** `tools/gen_oracle_corpus.pl` now builds the Perl reference parser and runs the parse inside the
+same forked child that the parent guards with `ORACLE_TIMEOUT` and `SIGKILL`. Previously the parser was built in
+the parent and only `$parser->(...)` was hard-timeout protected.
+
+**Evidence:** A user-directed shipped-spec/input census reproduced a live timeout on `BNF` under a 5s build+parse
+child wrapper. Focused probes showed `LinkedSpec::get_parser("BNF")` takes about 6.4s while parsing empty input
+after construction is about 0.03s; `LINKEDSPEC_TRACE_LEVEL=debug` trace reached successful parser generation.
+That pins the issue to the oracle guard boundary, not a parser execution hang or BNF regex rewrite.
+
+**Checks:** `perl -c -Iperl tools/gen_oracle_corpus.pl` PASS; forced `ORACLE_TIMEOUT=0` reports `hard kill during
+parser build/parse`; normal regeneration writes **66** fixtures byte-identically; Rust `corpus_oracle` PASS;
+Knowledge Map, memory architecture, doctrine, and whitespace gates PASS; full local CI PASS with phase0 **1018**
+tests.
+
 ## 2026-07-03 — RUST-PARITY.7.3.3.3 — defer hlink scalar-ref fixtures
 
 **Scope:** Task-tree/index, roadmap pointer, live docs, and Knowledge Map. No generator, corpus, Rust parser, or

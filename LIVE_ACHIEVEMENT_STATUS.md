@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.7 — oracle timeout covers parser build and parse**
+  (GENERATOR SAFETY FIX; NO CORPUS FIXTURE VALUE CHANGE).
+  The user-directed timeout re-debug found the remaining live issue in the oracle guard boundary. A shipped-spec
+  fork+SIGKILL census made `BNF` exceed a 5s build+parse child wrapper; focused probes showed parser construction
+  took about 6.4s while parsing empty input after construction took about 0.03s, and `LINKEDSPEC_TRACE_LEVEL=debug`
+  trace reached successful parser generation.
+
+  **Fix:** `tools/gen_oracle_corpus.pl` now builds the Perl reference parser and executes the parse inside the
+  same forked child. The parent `ORACLE_TIMEOUT`/`SIGKILL` guard therefore covers parser construction and parser
+  execution, including future pathological shipped specs.
+
+  **Verification:** `perl -c -Iperl tools/gen_oracle_corpus.pl` PASS; forced `ORACLE_TIMEOUT=0` reports
+  `hard kill during parser build/parse`; normal regeneration writes **66** fixtures byte-identically; Rust
+  `corpus_oracle` PASS over the 66-fixture corpus; Knowledge Map, memory architecture, doctrine, and whitespace
+  gates PASS; full local CI PASS with phase0 **1018** tests. Knowledge Map and corpus README updated.
+
+  **Frontier:** `RUST-PARITY.7.3.4` — triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and
+  `ebnf`.
+
 - 2026-07-03: **RUST-PARITY.7.3.3.3 — hlink scalar-ref fixtures deferred**
   (NO GENERATOR/CORPUS/RUNTIME CODE CHANGE).
   Bracket/mixed `hlink_substitution` fixture candidates remain out of the JSON oracle. Perl returns scalar refs

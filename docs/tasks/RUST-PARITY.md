@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (`.7.3.3.3` done — hlink scalar-ref bracket/mixed fixtures deferred behind a
-  neutral representation/action-payload owner; next frontier is `.7.3.4`)
+- Last updated: `2026-07-03` (`.7.3.7` done — oracle timeout guard now covers parser build and parse;
+  frontier returns to `.7.3.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -179,7 +179,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Status: `active`
   Goal: Expand the oracle corpus to the remaining/harder specs (batch 2), with timeout/hang risk debugged before
     more broad shipped-spec work.
-  Children: `.7.3.1`, `.7.3.2`, `.7.3.3`, `.7.3.4`, `.7.3.5`, `.7.3.6`
+  Children: `.7.3.1`, `.7.3.2`, `.7.3.3`, `.7.3.4`, `.7.3.5`, `.7.3.6`, `.7.3.7`
   Acceptance: inputs authored + fixtures generated (timeout-guarded) for the remaining specs incl. legacy/plugin/RTL-touching ones (candidate set: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`, `tkgui`, remaining non-raw `hlink_substitution` delimiter paths, `ds_vhistory`, `verilog`, `spec.spec` — exact set decided in-slice); any current timeout/hang risk is reproduced with LinkedSpec's toolbox first, pinpointed to exact source/rule/regex evidence, and either fixed or proven stale/retired before the broad legacy/plugin/RTL smoke lane continues; parity gaps fixed or recorded; the Rust fixture-runner is green; `cargo test` + clippy zero-new; baseline green.
   Verification: `active`
   Commit: `pending`
@@ -333,6 +333,32 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `RUST-PARITY.7.3.7`
+  Status: `done`
+  Goal: Re-run the timeout/hang investigation with LinkedSpec trace/toolbox evidence after the user-directed
+    correction to debug the timeout "once and for all."
+  Acceptance: Build a current shipped-spec/input census that runs each candidate under a fork+SIGKILL wall-clock
+    guard; if any case times out, rerun that exact spec/input path with `LINKEDSPEC_TRACE_LEVEL=debug`,
+    per-call trace options, parser-source dumps, and descriptor/runtime context as applicable; pinpoint the exact
+    file, rule, regex/action path, and source location; then either fix the live root cause under this leaf or split
+    a narrower implementation leaf before changing runtime/compiler behavior. If no current timeout exists, record
+    the trace/toolbox evidence and preserve the hard-timeout guard as the permanent broad-corpus safety net.
+  Verification: **DONE 2026-07-03.** A current shipped-spec/input fork+SIGKILL census found a live timeout
+    reproducer immediately: `BNF` exceeded a 5s build+parse child wrapper even on empty input. Focused separation
+    showed this is parser construction, not parser execution: `LinkedSpec::get_parser("BNF")` took about 6.4s,
+    while parsing empty input after construction took about 0.03s; `ebnf` showed the same build-cost class at
+    about 7.0s. `LINKEDSPEC_TRACE_LEVEL=debug` / `trace_log_file` for `BNF` reached `Parser generation completed
+    successfully` and `ParserFactory` returned a coderef, proving the live issue was the oracle guard boundary:
+    `tools/gen_oracle_corpus.pl` built parsers in the parent before the timeout-protected child parse. Fixed the
+    generator so each child now builds the reference parser and runs the parse under the same `ORACLE_TIMEOUT`
+    wall-clock guard; the parent `SIGKILL`s either parser-construction or parse-execution hangs. Updated corpus
+    README and Knowledge Map wording. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; forced
+    `ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl` reports `hard kill during parser build/parse`;
+    normal regeneration writes **66** fixtures byte-identically; Rust `corpus_oracle` passes over the 66-fixture
+    corpus; Knowledge Map, memory architecture, doctrine, and whitespace gates pass; full local CI passes with
+    phase0 **1018** tests.
+  Commit: `RUST-PARITY.7.3.7 - hard-timeout parser construction too`
+
 - ID: `RUST-PARITY.7.4`
   Status: `pending`
   Goal: Regression guard + finalize the oracle corpus
@@ -410,6 +436,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.3.2` | `done` | added the JSON-safe `{abc}` hlink curly-brace delimiter fixture; corpus 66 fixtures |
 | — | `RUST-PARITY.7.3.3.3` | `done` | bracket/mixed hlink scalar-ref fixtures deferred with Perl JSON failure and Rust action-branch evidence |
 | — | `RUST-PARITY.7.3.3.4` | `deferred` | neutral scalar-ref/action-payload contract or hlink spec migration needed before bracket/mixed fixtures |
+| — | `RUST-PARITY.7.3.7` | `done` | user-directed trace/toolbox timeout census fixed the oracle guard boundary so parser build and parse are both hard-timeout protected |
 | 1 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
 | 2 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
 | 3 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
@@ -501,6 +528,13 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   `[abc]` path falls through to unmatched-closing-bracket `exit_now(2)`. The follow-up owner `.7.3.3.4` must
   either define a tagged scalar-ref JSON contract with Rust parser/runtime support, or migrate
   `specs/hlink_substitution.spec` to a portable bracket payload shape. Frontier → `.7.3.4`.
+- `2026-07-03` (`.7.3.7` implementation): the user-directed timeout re-debug found the remaining live timeout
+  weakness in the oracle guard boundary. A build+parse child census made `BNF` time out under 5s, but focused
+  probes showed parser execution was fast after construction; `get_parser("BNF")` / `get_parser("ebnf")` are
+  slow build paths, and trace reached successful parser generation. Therefore the fix is not a BNF regex rewrite:
+  the oracle generator must guard parser construction too. `tools/gen_oracle_corpus.pl` now builds the parser and
+  parses inside the forked child, so `ORACLE_TIMEOUT` covers both phases before broad shipped-spec work resumes.
+  Frontier → `.7.3.4`.
 
 ## Open Questions
 
@@ -544,6 +578,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-03` | `RUST-PARITY.7.3.3.1` | Shipped spec read; existing hlink corpus read; phase0 hlink parser-smoke read; direct `JSON::PP` scalar-ref probe | PASS — `{abc}` is JSON-safe; bracket and mixed hlink outputs contain Perl scalar refs that the current oracle cannot encode. No generator/corpus/runtime code changed. Frontier → `.7.3.3.2` |
 | `2026-07-03` | `RUST-PARITY.7.3.3.2` | Direct Perl `JSON::PP` curly probe; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — `hlink_curly_brace` added for `{abc}` with expected `["{abc}"]`; generator produced **66** fixtures; Rust `corpus_oracle` passes over the 66-fixture corpus; full local CI passes with phase0 **1018** tests. Bracket/mixed scalar-ref hlink cases untouched. Frontier → `.7.3.3.3` |
 | `2026-07-03` | `RUST-PARITY.7.3.3.3` | Direct Perl `Data::Dumper`/`JSON::PP` scalar-ref probe; Rust source audit of `RuntimeValue`; temporary Rust `hlink_substitution` execution probe then removal; `git diff -- rust/linkedspec-runtime/tests/integration_test.rs`; Rust `corpus_oracle`; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/DEFERRED — Perl bracket/mixed outputs contain scalar refs that `JSON::PP` cannot encode; Rust has no neutral scalar-ref runtime value and the current hlink scalar-ref action payload fails parsing before falling through to `exit_now(2)`. Bracket/mixed fixtures are deferred to `.7.3.3.4`; temporary probe removed; corpus oracle passes over **66** fixtures; full local CI passes with phase0 **1018** tests. Frontier → `.7.3.4` |
+| `2026-07-03` | `RUST-PARITY.7.3.7` | Shipped-spec/input fork+SIGKILL census; focused `BNF` build-vs-parse separation; `LINKEDSPEC_TRACE_LEVEL=debug` trace to `/tmp/linkedspec-bnf-build.trace`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; forced `ORACLE_TIMEOUT=0` generator run; normal generator regeneration; Rust `corpus_oracle` | PASS — `BNF` timeout was parser construction outside the prior oracle guard, not parse execution; trace reached successful parser generation. `tools/gen_oracle_corpus.pl` now builds and parses inside the timeout child; forced timeout reports `hard kill during parser build/parse`; normal regeneration writes **66** byte-identical fixtures; Rust `corpus_oracle` passes. Frontier → `.7.3.4` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -609,6 +644,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.3.3.1` | `RUST-PARITY.7.3.3.1 - split hlink delimiter fixtures` | no generator/corpus/runtime code change; splits JSON-safe curly fixture from scalar-ref bracket/mixed representation work |
 | `RUST-PARITY.7.3.3.2` | `RUST-PARITY.7.3.3.2 - add hlink curly oracle fixture` | added `hlink_curly_brace` for `{abc}` to the oracle generator and checked-in corpus; 66-fixture corpus oracle green |
 | `RUST-PARITY.7.3.3.3` | `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures` | no generator/corpus/runtime code change; records Perl scalar-ref JSON failure plus Rust scalar-ref action-branch failure and defers bracket/mixed fixtures to `.7.3.3.4` |
+| `RUST-PARITY.7.3.7` | `RUST-PARITY.7.3.7 - hard-timeout parser construction too` | oracle generator now hard-timeout guards parser construction plus parse execution; normal regeneration remains 66-fixture byte-identical; corpus oracle green |
 
 ## Changelog
 
@@ -661,3 +697,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-07-03`: `.7.3.3.3` done — bracket/mixed `hlink_substitution` fixtures deferred with evidence. Perl
   emits scalar refs that the JSON oracle cannot encode, and Rust currently cannot execute the shipped scalar-ref
   action branch. Added deferred owner `.7.3.3.4`; frontier → `.7.3.4`.
+- `2026-07-03`: `.7.3.7` done — user-directed timeout re-debug found the live guard-boundary gap. `BNF` timed out
+  under a 5s build+parse child census because parser construction takes about 6.4s; parsing empty input after
+  build is fast, and trace reaches successful parser generation. The oracle generator now builds and parses inside
+  the forked `ORACLE_TIMEOUT` child, so future parser-build hangs are hard-killed too. Frontier → `.7.3.4`.

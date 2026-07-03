@@ -4,10 +4,10 @@
 # Purpose
 #   Generate a *language-neutral* test corpus (ADR 0006 §Phase 8.6) under
 #   `rust/linkedspec-runtime/tests/corpus/`. The Perl reference is the behavioral
-#   oracle: for each (spec, input) case this tool runs the reference parser and
-#   records its result as canonical JSON. A backend's fixture-runner then asserts
-#   it reproduces the same value (modulo each backend's documented output-shape
-#   rule — see "Output-shape rule" below).
+#   oracle: for each (spec, input) case this tool builds and runs the reference
+#   parser, then records its result as canonical JSON. A backend's fixture-runner
+#   asserts it reproduces the same value (modulo each backend's documented
+#   output-shape rule — see "Output-shape rule" below).
 #
 # Corpus entry layout (one directory per case; matches the book's
 # `appendix/backend-handoff.md` corpus contract):
@@ -26,10 +26,11 @@
 #   engine.execute(input) == [ expected ].
 #
 # Safety
-#   Every oracle parse runs in a child process under a hard wall-clock timeout
-#   (default 15s, override with ORACLE_TIMEOUT). The parent kills the child with
-#   SIGKILL on timeout; this deliberately does not rely on `alarm()`, because a
-#   catastrophic regex can stay inside one Perl opcode and defer safe signals.
+#   Every oracle case builds the reference parser and runs the parse in a child
+#   process under a hard wall-clock timeout (default 15s, override with
+#   ORACLE_TIMEOUT). The parent kills the child with SIGKILL on timeout; this
+#   deliberately does not rely on `alarm()`, because a catastrophic regex can
+#   stay inside one Perl opcode and defer safe signals.
 #
 # Usage
 #   perl tools/gen_oracle_corpus.pl            # regenerate all cases
@@ -983,22 +984,16 @@ for my $case (@CASES) {
     my $name  = $case->{case};
     my $input = $case->{input};
 
-    my ( $spec_src, $parser );
+    my $spec_src;
     if ( defined $case->{source} ) {
         $spec_src = $case->{source};
-        $parser   = LinkedSpec::Get( \$spec_src );
-        die "Get(<inline $name>) did not return a CODE ref\n"
-            unless ref $parser eq 'CODE';
     }
     else {
         my $spec = $case->{spec};
         $spec_src = slurp( File::Spec->catfile( $SPECDIR, "$spec.spec" ) );
-        $parser   = LinkedSpec::get_parser($spec);
-        die "get_parser('$spec') did not return a CODE ref\n"
-            unless ref $parser eq 'CODE';
     }
 
-    my $value = run_oracle( $parser, $name, $input, $TIMEOUT );
+    my $value = run_oracle( $case, $name, $input, $TIMEOUT );
 
     my $dir = File::Spec->catdir( $CORPUS, $name );
     make_path($dir);
@@ -1011,10 +1006,10 @@ for my $case (@CASES) {
 }
 printf "Generated %d oracle fixture(s) into %s\n", $written, $CORPUS;
 
-# Run a built reference parser coderef on one input under a hard wall-clock
-# timeout; return the decoded result structure (arrayref/hashref/scalar).
+# Build the reference parser and run one input under a hard wall-clock timeout;
+# return the decoded result structure (arrayref/hashref/scalar).
 sub run_oracle {
-    my ( $parser, $name, $input, $timeout ) = @_;
+    my ( $case, $name, $input, $timeout ) = @_;
 
     my $safe_name = $name;
     $safe_name =~ s/[^A-Za-z0-9_.-]+/_/g;
@@ -1036,7 +1031,23 @@ sub run_oracle {
     die "oracle fork failed for case='$name': $!\n" unless defined $pid;
 
     if ( $pid == 0 ) {
-        my $ok = eval {
+        my $stage = 'parser build';
+        my $ok    = eval {
+            my $parser;
+            if ( defined $case->{source} ) {
+                my $source = $case->{source};
+                $parser = LinkedSpec::Get( \$source );
+                die "Get(<inline $name>) did not return a CODE ref\n"
+                    unless ref $parser eq 'CODE';
+            }
+            else {
+                my $spec = $case->{spec};
+                $parser = LinkedSpec::get_parser($spec);
+                die "get_parser('$spec') did not return a CODE ref\n"
+                    unless ref $parser eq 'CODE';
+            }
+
+            $stage = 'parser execute';
             my $result     = $parser->( \$input );
             my $child_json = JSON::PP->new->canonical(1)->pretty(1);
             spew( $out_path, $child_json->encode($result) );
@@ -1044,7 +1055,7 @@ sub run_oracle {
         };
         if ( !$ok ) {
             my $err = $@ // 'unknown oracle child failure';
-            spew( $err_path, $err );
+            spew( $err_path, "$stage: $err" );
             POSIX::_exit(1);
         }
         POSIX::_exit(0);
@@ -1065,23 +1076,23 @@ sub run_oracle {
     if ( !defined $status ) {
         kill 'KILL', $pid;
         waitpid( $pid, 0 );
-        die "ORACLE_TIMEOUT after ${timeout}s (hard kill) for case='$name' input="
+        die "ORACLE_TIMEOUT after ${timeout}s (hard kill during parser build/parse) for case='$name' input="
             . _show($input) . "\n";
     }
 
     if ( $status & 127 ) {
-        die "oracle parse failed for case='$name' input=" . _show($input)
+        die "oracle build/parse failed for case='$name' input=" . _show($input)
             . ": child died with signal " . ( $status & 127 ) . "\n";
     }
 
     my $exit = $status >> 8;
     if ( $exit != 0 ) {
         my $err = -s $err_path ? slurp($err_path) : "child exited with status $exit\n";
-        die "oracle parse failed for case='$name' input=" . _show($input) . ": $err";
+        die "oracle build/parse failed for case='$name' input=" . _show($input) . ": $err";
     }
 
     my $json_text = slurp($out_path);
-    die "oracle parse failed for case='$name' input=" . _show($input)
+    die "oracle build/parse failed for case='$name' input=" . _show($input)
         . ": child produced no JSON\n"
         unless length $json_text;
 
