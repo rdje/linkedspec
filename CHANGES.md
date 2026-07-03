@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — SPEC-FORMAT-TERSE.6.2.3.1 — add scalar slot shorthand
+
+**Scope:** Perl ActionIR lowering/autodeclare, Rust expression parsing/runtime evaluation, focused Perl/Rust
+regression coverage, oracle corpus fixture, mdBook reference pages, task-tree/live docs, and Knowledge Map.
+
+**What changed:** Added `:name` as the terse scalar-slot spelling. In value positions it reads scalar working
+variable `name`, equivalent to one-argument `scalar(name)`. In assignment-like target positions,
+`set(:payload, [value])` and `assign(:payload, [value])` preserve the explicit scalar payload boundary, storing the
+whole direct-shape payload in scalar `payload`; bare `set(payload, [value])` still infers aggregate array
+assignment. The long `scalar(name)` form remains accepted compatibility syntax.
+
+**Evidence:** Perl lowering probes cover `return(:name)`, `set(:payload, [value])`, direct `[:value]`, and
+legacy `array(:value)` constructor payloads. Phase0 now passes with **1019** tests. Rust core/runtime focused tests
+cover parsing/evaluation of `:name`, and the Perl-derived oracle corpus includes
+`terse_6_2_3_1_scalar_slot_shorthand`; regeneration now produces **73 fixtures**, and Rust `corpus_oracle` passes
+over all 73. mdBook pages now document `:name` as the preferred scalar-slot spelling.
+
 ## 2026-07-03 — RUST-PARITY.7.3.4.2 — land portmap scalar helper parity
 
 **Scope:** Rust runtime helper execution, regex-dispatch alternation isolation, focused integration coverage,

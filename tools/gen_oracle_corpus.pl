@@ -344,6 +344,16 @@ Done::
  /[a-z]+/
 SPEC
     },
+    {   case   => 'terse_6_2_3_1_scalar_slot_shorthand',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "ok"); set(:payload, [value]); set(snapshot, :payload); return(array(:value, :payload, copy(array(payload)), :snapshot)) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
 
     # ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1 helper renames ──
     #

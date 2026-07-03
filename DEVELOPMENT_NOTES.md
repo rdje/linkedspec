@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (SPEC-FORMAT-TERSE.6.2.3.1 — scalar-slot shorthand):
+  `:name` is intentionally a scalar-slot expression, not a new aggregate or sigil system. Perl wires it through
+  the existing scalar source-slot helper and scalar target extractor, then teaches the autodeclare collector to
+  record `:name` as `$name` in value positions and `set(:name, ...)` as an explicit scalar target. Rust keeps the
+  boundary visible with a dedicated `Expr::ScalarSlot { name }` AST node; runtime evaluation calls
+  `ctx.get_scalar(name)`, and scalar-target resolution treats the raw `ScalarSlot` target as the variable name.
+  Direct-shape inference is deliberately unchanged: bare `set(payload, [value])` assigns `@payload`, while
+  `set(:payload, [value])` assigns `$payload = [ ... ]`. The oracle corpus now has 73 fixtures including
+  `terse_6_2_3_1_scalar_slot_shorthand`, and phase0 is 1019 green.
+
 - 2026-07-03 (RUST-PARITY.7.3.4.2 — portmap scalar helper parity):
   The `portmap` scalar mismatch had three independent runtime causes. First, `or(...)` was missing from Rust's
   helper surface, so `bar[3]` could not take the bit-classification branch; Rust now implements `or`, `and`, and
@@ -413,7 +423,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   now that their child leaves and `.4.4` finalization are complete. (4) **Gate.** Focused locks, oracle corpus,
   mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates pass; phase0 is now 1015 tests and the
   oracle corpus is 62 fixtures.
-  Next frontier: no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains.
+  Next frontier at that time: no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remained immediately after this
+  closure.
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values):
   Array append and hash-index mutation operators now have expression values. Durable points. (1) **Value
@@ -428,7 +439,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   Focused locks, oracle corpus, full phase0, mdBook, Knowledge Map, memory/doctrine/diff, and full local CI gates
   pass; phase0 is now 1014 tests and the oracle corpus is 61 fixtures.
   Next frontier at the time: `SPEC-FORMAT-TERSE.3.3.4` (now done; no concrete `SPEC-FORMAT-TERSE`
-  PNT-eligible leaf remains).
+  PNT-eligible leaf remained immediately after that closure).
 
 - 2026-07-02 (SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values):
   Direct RHS shape assignments now return assigned aggregate values after target-kind inference. Durable points.

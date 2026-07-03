@@ -47217,6 +47217,70 @@ subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub 
         'wrapper-looking text inside string literals is not auto-declared');
 };
 
+subtest 'spec_format_terse_6_2_3_1_scalar_slot_shorthand' => sub {
+    # SPEC-FORMAT-TERSE.6.2.3.1: `:name` is the terse spelling for the scalar
+    # slot named `name`. It reads the scalar value in value positions and fixes
+    # assignment-like targets to scalar storage, so direct-shape aggregate
+    # inference remains reserved for bare targets.
+    plan tests => 15;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('return(:name)'), 'return $name',
+        'return(:name) lowers as a scalar-slot read');
+    is($L->('set(:payload, [value]); return(:payload)'), '$payload = [$value]; return $payload',
+        'set(:payload, shape) keeps the direct-shape payload in the scalar slot');
+    is($L->('return(array(:value, scalar(value)))'), 'return [$value, $value]',
+        'legacy array(...) constructor lowers scalar-slot members');
+    is($L->('return([:value, scalar(value)])'), 'return [$value, $value]',
+        'direct array shape lowers scalar-slot members');
+    is($L->('return({ :key => :value })'), 'return {$key => $value}',
+        'direct hash shape lowers scalar-slot keys and values');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(:payload, [value]); set(snapshot, :payload); return(array(:value, :payload, copy(array(payload)), :snapshot)) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'scalar-slot shorthand spec compiles')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["ok",["ok"],[],["ok"]]',
+        'scalar-slot shorthand reads and stores scalar-held direct-shape payloads');
+
+    my $src = $gen->($spec);
+    is((() = ($src =~ /my \$value\b/g)), 1,
+        'scalar-slot shorthand spec auto-supplies one my $value');
+    is((() = ($src =~ /my \$payload\b/g)), 1,
+        'scalar-slot target auto-supplies one my $payload');
+    is((() = ($src =~ /my \$snapshot\b/g)), 1,
+        'scalar-slot value source auto-supplies one my $snapshot');
+    like($src, qr/\$payload = \[\$value\]/,
+        'generated source stores shape payload in $payload');
+    unlike($src, qr/\@payload\s*=\s*\(\$value\)/,
+        'scalar-slot target does not trigger array assignment inference');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'scalar-slot shorthand spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'scalar-slot shorthand spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'scalar-slot shorthand spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
     # SPEC-FORMAT-TERSE.2.1.2: Perl reference core expression-valued blocks.
     # Non-empty brace payloads without a top-level fat arrow are value blocks;

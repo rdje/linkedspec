@@ -6,19 +6,22 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (**`.6.2.2` DONE; shipped specs no longer use active old helper spellings
-  `assign(...)`, `push_value(...)`, `array_copy(...)`, `hash_copy(...)`, or `concat(...)`. The migration uses the
-  landed terse aliases `set(...)`, `push(...)`, `copy(...)`, and `cat(...)`, with explicit `array(...)` push
-  targets where needed to avoid all-bare child-call ambiguity. `portmap.spec` also drops redundant standalone
-  separators after flow markers. Focused shipped-spec compilation, phase0 (**1018 green**), and the Rust corpus
-  oracle (**66 fixtures**) pass. Frontier moves to `.6.2.3` for typed-wrapper/direct-shape cleanup. The user's
-  broader type-method-surface directive is tracked as future lane `.7`, starting with an inventory before any code.
+- Last updated: `2026-07-03` (**`.6.2.3.1` DONE; the scalar-slot shorthand `:name` is accepted in scalar value
+  positions and scalar mutation targets on Perl/Rust, with direct shape literals still inferring aggregate targets
+  unless the scalar boundary is explicit through `:name` or `scalar(name)`. Focused shorthand tests, phase0
+  (**1019 green**), and the Rust corpus oracle (**73 fixtures**) pass. Frontier moves to `.6.2.3.2` for migrating
+  shipped-spec typed wrappers/constructors now that the scalar shorthand is proven. Prior **`.6.2.2` DONE; shipped
+  specs no longer use active old helper spellings `assign(...)`, `push_value(...)`, `array_copy(...)`,
+  `hash_copy(...)`, or `concat(...)`. The migration uses the landed terse aliases `set(...)`, `push(...)`,
+  `copy(...)`, and `cat(...)`, with explicit `array(...)` push targets where needed to avoid all-bare child-call
+  ambiguity. `portmap.spec` also drops redundant standalone separators after flow markers. The user's broader
+  type-method-surface directive is tracked as future lane `.7`, starting with an inventory before any code.
   Prior **`.3.3.4` DONE; expression-valued assignment closure is locked across
   scalar, direct-shape aggregate, array append, hash-index mutation, user-function body, receiver-chain,
   and legacy `assign(...)` compatibility spellings. Public mdBook examples now prefer `set(...)` or operator
   assignment forms while retaining `assign(...)` only as a documented legacy alias. Oracle corpus reaches
-  **62 fixtures** and phase0 reaches **1015 green**; no concrete PNT-eligible `SPEC-FORMAT-TERSE` leaf remains
-  after this closure, with future variant leaves deferred/blocked by explicit roadmap decisions.
+  **62 fixtures** and phase0 reaches **1015 green**; no concrete PNT-eligible `SPEC-FORMAT-TERSE` leaf remained
+  immediately after that closure, with future variant leaves deferred/blocked by explicit roadmap decisions.
   Prior **`.3.3.2` DONE; aggregate assignment expression values after target-kind
   inference now ship on Perl/Rust; frontier moves to `.3.3.3` array append/hash-index mutation expression
   values**.
@@ -2705,12 +2708,50 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.6.2.2 - migrate shipped-spec helper spellings`
 
 - ID: `SPEC-FORMAT-TERSE.6.2.3`
+  Status: `active` (split 2026-07-03; `.6.2.3.1` done, frontier `.6.2.3.2`)
+  Goal: Migrate shipped-spec typed wrappers/constructors toward terse scalar-slot reads, bare reads, and direct
+    shape literals where the accepted inference rules make the replacement unambiguous.
+  Children: `.6.2.3.1`, `.6.2.3.2`
+  Acceptance: Wrapper cleanup proceeds only through concrete child leaves. Parser/runtime syntax extensions are
+    owned before any shipped-spec migration uses them; any remaining `scalar(...)`, `array(...)`, or `hash(...)`
+    use is explicitly classified as still-needed compatibility syntax or split into a narrower owner.
+  Verification: Split before code on 2026-07-03 after the user accepted `:name` as the non-Perl scalar-slot
+    shorthand. `.6.2.3.1` owns the syntax and lockstep Perl/Rust behavior first and is done; `.6.2.3.2` migrates
+    shipped specs only after the syntax is proven.
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.6.2.3.1`
+  Status: `done` (2026-07-03)
+  Goal: Add `:name` as a terse scalar-slot expression for the value of scalar working variable `name`, with
+    `set(:name, value)` preserving the explicit scalar target boundary that `set(scalar(name), value)` has today.
+  Acceptance: Perl reference lowering and Rust parsing/runtime treat `:name` as equivalent to one-argument
+    `scalar(name)` in value positions and as an explicit scalar target in assignment-like target positions;
+    direct-shape aggregate inference for bare `name = [...]` / `set(name, [...])` remains unchanged; the mdBook
+    documents `:name` as the preferred terse scalar spelling while `scalar(name)` remains accepted compatibility
+    syntax; focused Perl/Rust tests and one oracle fixture lock the behavior.
+  Verification: **DONE 2026-07-03.** Perl now recognizes `:name` in scalar source slots, direct shape literals,
+    legacy `array(...)` / `hash(...)` constructor payloads, scalar assignment-like targets, and auto-working-var
+    declaration collection. Rust adds `Expr::ScalarSlot { name }`, parses leading `:name` as a fluent-capable
+    value primary, evaluates it through `ctx.get_scalar(name)`, and resolves it as an explicit scalar target.
+    Direct-shape aggregate inference remains unchanged: bare `set(payload, [value])` assigns the array working
+    variable, while `set(:payload, [value])` stores the whole array payload in scalar `payload`. **Verification:**
+    `perl -c -Iperl` on `ActionIR/ValueExpr.pm`, `ActionIR/MethodLowering.pm`, `RuleIR/EmitContext.pm`, and
+    `tools/gen_oracle_corpus.pl`; focused `call_spec_handler_subst` probes for `return(:name)`,
+    `set(:payload, [value])`, `[:value]`, `array(:value)`, and hash shape members; `prove -q -Iperl
+    t/phase0_regression.t` PASS (**1019 tests**); `cargo fmt --manifest-path rust/Cargo.toml --all`;
+    `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core parse_scalar_slot_shorthand_expr` PASS;
+    `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_6_2_3_1_scalar_slot_shorthand_runs
+    -- --nocapture` PASS; `perl -Iperl tools/gen_oracle_corpus.pl` generated **73 fixtures** including
+    `terse_6_2_3_1_scalar_slot_shorthand`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime
+    --test corpus_oracle -- --nocapture` PASS over all 73 fixtures. mdBook + KM updated.
+  Commit: `SPEC-FORMAT-TERSE.6.2.3.1 - add scalar slot shorthand`
+
+- ID: `SPEC-FORMAT-TERSE.6.2.3.2`
   Status: `pending`
-  Goal: Migrate shipped-spec typed wrappers/constructors toward bare reads and direct shape literals where the
-    accepted terse inference rules make the replacement unambiguous.
+  Goal: Migrate shipped-spec typed-wrapper usage to `:name`, bare aggregate reads, and direct shape literals
+    where `.6.2.3.1` plus existing inference rules make the replacement unambiguous.
   Acceptance: Obvious current-facing wrapper verbosity is removed from shipped specs without changing behavior;
-    any remaining `scalar(...)`, `array(...)`, or `hash(...)` use is explicitly classified as still-needed
-    compatibility syntax or split into a narrower parser/runtime owner.
+    remaining wrappers are annotated in this task tree as compatibility/ambiguity holdouts or split again.
   Verification: `pending`
   Commit: `pending`
 
@@ -2792,11 +2833,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
-| 1 | `SPEC-FORMAT-TERSE.6.2.3` | `pending` | migrate typed wrappers/constructors where terse inference is unambiguous |
+| — | `SPEC-FORMAT-TERSE.6.2.3` | `active` | split typed-wrapper/direct-shape cleanup so `:name` syntax lands before shipped-spec migration |
+| — | `SPEC-FORMAT-TERSE.6.2.3.1` | `done` | `:name` scalar-slot shorthand lands on Perl/Rust; phase0 1019; oracle 73 fixtures |
+| 1 | `SPEC-FORMAT-TERSE.6.2.3.2` | `pending` | migrate typed wrappers/constructors where terse inference and `:name` are unambiguous |
 | 2 | `SPEC-FORMAT-TERSE.6.2.4` | `pending` | final shipped-spec terse-surface verification before doc/corpus sweeps |
 | 3 | `SPEC-FORMAT-TERSE.6.3` | `pending` | sweep public docs, checked-in corpus/test specs, and examples after shipped specs are clean |
-| 5 | `SPEC-FORMAT-TERSE.6.4` | `pending` | decide post-migration compatibility support only after live spec-file use is gone |
-| 6 | `SPEC-FORMAT-TERSE.7.1` | `pending` | backlog from user directive: audit supported types and helper families before adding/backfilling methods such as string `substr()` |
+| 4 | `SPEC-FORMAT-TERSE.6.4` | `pending` | decide post-migration compatibility support only after live spec-file use is gone |
+| 5 | `SPEC-FORMAT-TERSE.7.1` | `pending` | backlog from user directive: audit supported types and helper families before adding/backfilling methods such as string `substr()` |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
@@ -3741,6 +3784,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-03` | `SPEC-FORMAT-TERSE.6.2.3.1` | Perl syntax checks for `ActionIR::ValueExpr`, `ActionIR::MethodLowering`, `RuleIR::EmitContext`, and `tools/gen_oracle_corpus.pl`; focused lowering probes for `:name` in return, shape, constructor, and scalar-target positions; `prove -q -Iperl t/phase0_regression.t`; focused Rust core/runtime tests; oracle generator; Rust corpus oracle; mdBook/KM/live-doc updates | `:name` now reads scalar slot `name` on Perl/Rust. `set(:payload, [value])` keeps scalar-held direct-shape payload assignment while bare direct-shape targets still infer aggregates. Phase0 passes with **1019** tests, the generated oracle corpus reaches **73 fixtures**, and Rust `corpus_oracle` passes over all 73 including `terse_6_2_3_1_scalar_slot_shorthand`. Frontier becomes `.6.2.3.2` for shipped-spec wrapper migration. |
 | `2026-07-03` | `SPEC-FORMAT-TERSE.6.2.2` | `rg -n '\b(assign|push_value|array_copy|hash_copy|concat)\s*\(' specs`; `rg -n '^\s*(?:if|elseif)\(.*\);\s*$|^\s*else\(\);\s*$' specs/portmap.spec`; registered descriptor compile for all 21 shipped specs; `perl -c -Iperl t/phase0_regression.t`; `prove -q -Iperl t/phase0_regression.t`; `cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle` | Shipped specs no longer use active old helper spellings. `portmap.spec` no longer keeps redundant standalone flow-marker separators. Stale phase0 source expectations now assert the canonical terse spellings. Phase0 passes with **1018** tests and the Rust oracle corpus passes over **66 fixtures**. Frontier becomes `.6.2.3` for typed-wrapper/direct-shape cleanup. |
 | `2026-07-03` | `SPEC-FORMAT-TERSE.6.2.1` | `rg -n 'declare\(|\.declare\(' specs`; focused `perl -Iperl -MLinkedSpec` descriptor compile for all 13 edited shipped specs; `prove -q -Iperl t/phase0_regression.t`; `cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle`; Knowledge Map/memory/doctrine/diff checks; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | Shipped specs no longer use active `declare(...)` or fluent `.declare(...)`. `BNF`, `ds_vhistory`, `ebnf`, `hlink_substitution`, `lib_reader`, `Lispish`, `portmap`, `pplugin`, `sdce`, `simenv`, `spec`, `tablegrep`, and `vhdl` compile after the migration. Stale phase0 expectations now assert the replacement assignment/capture/source-read nodes instead of `DECLARE`. Phase0 passes with **1018** tests, the Rust oracle corpus passes over **66 fixtures**, mdBook builds, and the full local CI gate passes. Frontier becomes `.6.2.2` for old helper spelling cleanup. |
 | `2026-07-03` | `SPEC-FORMAT-TERSE.6.1` | `rg -n '(^|[.{;[:space:]])declare\(' specs`; `rg -l '(^|[.{;[:space:]])declare\(' specs`; task-tree/roadmap/live-doc/mdBook/KM ownership updates; no `.spec` edits | User directive owned under `SPEC-FORMAT-TERSE`; 70 active shipped-spec hits across 13 files inventoried; next executable leaf `.6.2` migrates specs before any runtime-helper expansion or oracle fixture change. |
@@ -3847,6 +3891,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.6.2.3.1` | `SPEC-FORMAT-TERSE.6.2.3.1 - add scalar slot shorthand` | Added `:name` as the scalar-slot shorthand on Perl/Rust; `set(:payload, [value])` keeps scalar payload assignment while bare direct-shape targets still infer aggregates; phase0 1019 and oracle 73 fixtures pass; frontier becomes `.6.2.3.2`. |
 | `SPEC-FORMAT-TERSE.6.2.2` | `SPEC-FORMAT-TERSE.6.2.2 - migrate shipped-spec helper spellings` | Migrated active shipped-spec old helper spellings to `set`, `push`, `copy`, and `cat`; cleaned redundant standalone `portmap.spec` flow-marker separators; phase0 and Rust corpus oracle pass; frontier becomes `.6.2.3`. |
 | `SPEC-FORMAT-TERSE.6.2.1` | `SPEC-FORMAT-TERSE.6.2.1 - remove declare from shipped specs` | Removed the 70 active shipped-spec `declare(...)` / `.declare(...)` uses with terse assignments/resets and structured lifecycle blocks; phase0 and Rust corpus oracle pass; frontier becomes `.6.2.2`. |
 | `SPEC-FORMAT-TERSE.6.1` | `SPEC-FORMAT-TERSE.6.1 - own declare retirement migration` | User directive owned under `SPEC-FORMAT-TERSE`; shipped-spec inventory recorded; no `.spec` file changed; frontier becomes `.6.2`. |
@@ -3972,7 +4017,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   user-function body assignment, receiver-chain terminals, and legacy `assign(...)` compatibility compose in one
   portable fixture. Public mdBook examples now prefer `set(...)` or operator assignment; `assign(...)` remains
   only as a documented legacy alias with current value semantics. The oracle corpus is **62 fixtures**, phase0 is
-  **1015 green**, and the `SPEC-FORMAT-TERSE` tree has no remaining concrete PNT-eligible implementation leaf.
+  **1015 green**, and the `SPEC-FORMAT-TERSE` tree had no remaining concrete PNT-eligible implementation leaf at
+  that time.
 
 - `2026-07-02`: **`.3.3.3` LANDED — mutation assignment expression values.**
   Array append and hash-index mutation operators now mutate and yield updated aggregate snapshots on Perl/Rust:

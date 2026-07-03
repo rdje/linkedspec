@@ -35,7 +35,7 @@ positions. Avoid both raw declaration code and `declare(...)` in new examples.
 
 ## Declarations are optional: working variables auto-exist
 
-You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed wrapper — `scalar(NAME)` / `array(NAME)` / `hash(NAME)` — **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper (`scalar` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
+You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed wrapper — `scalar(NAME)` / `array(NAME)` / `hash(NAME)` — or through the scalar-slot shorthand `:NAME` **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper or shorthand (`scalar` / `:NAME` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
 
 ```text
 # explicit declaration (still fully supported)
@@ -107,7 +107,7 @@ meta[key] = value
 return(payload["children"][index]["name"])
 ```
 
-The kind comes from the **position**: the target of `set(...)`, legacy `assign(...)`, and `name = value` is a scalar for non-shape RHS values; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]` are the terse forms of their explicit `scalar(...)` counterparts. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
+The kind comes from the **position**: the target of `set(...)`, legacy `assign(...)`, and `name = value` is a scalar for non-shape RHS values; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`, `return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]` are the terse forms of their explicit `scalar(...)` counterparts. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
 
 `declare(...)` is retirement-bound for spec files. Use terse replacements instead:
 
@@ -119,7 +119,7 @@ The kind comes from the **position**: the target of `set(...)`, legacy `assign(.
 
 Where a name is wrapped, the wrapper still decides its kind. Where a name is bare in a type-implying position, that
 position decides it. Direct RHS shape assignment infers the target kind for array/hash assignment; explicit
-`scalar(name)` keeps array/hash payloads in a scalar.
+`:name` or `scalar(name)` keeps array/hash payloads in a scalar.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `array(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 

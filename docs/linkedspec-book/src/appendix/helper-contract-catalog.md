@@ -67,10 +67,13 @@ meta = { key => value };             # %meta = ($key => $value)
 set(items, []);                      # @items = ()
 set(meta, {});                       # %meta = ()
 set(scalar(payload), [value]);       # $payload = [$value]
+set(:payload, [value]);              # same scalar payload boundary, terser
 ```
 
-The explicit scalar wrapper is the scalar payload boundary on both variants: `set(scalar(payload), [value])`
-stores the whole array payload in scalar `payload`, while `array(payload)` remains a separate working array.
+The explicit scalar wrapper and scalar-slot shorthand are scalar payload boundaries on both variants:
+`set(scalar(payload), [value])` and `set(:payload, [value])` store the whole array payload in scalar
+`payload`, while `array(payload)` remains a separate working array. In value positions, `:name` reads the
+scalar slot named `name`; `scalar(name)` remains the long compatible spelling.
 Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`),
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
@@ -98,7 +101,7 @@ dispatch rule.
 ## 1. Declaration Helpers
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a
-> typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`)
+> typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`) or the scalar-slot shorthand `:name`
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
 > target of `set(name, …)`, legacy `assign(name, …)`, and the scalar assignment operator `name = value`
@@ -144,7 +147,7 @@ dispatch rule.
 - **Signature**: `assign(name: string, value: expr)`
 - **Returns**: In statement position, the stored value is ignored. In value position, it yields the value stored in the target: a scalar for non-shape scalar assignment, an array for direct RHS array-shape assignment, or a hash for direct RHS hash-shape assignment.
 - **Behavior**: Legacy alias for `set(name, value)`. It sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
-- **Edge cases**: Assigning through a typed wrapper fixes the variable's kind from the wrapper. `assign(scalar(name), [value])` stores the whole array payload in `$name`; `assign(array(name), [value])` replaces `@name`; `assign(hash(name), { key => value })` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`assign(name, value)` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `assign(name, [value])` assigns `@name`, and `assign(name, { key => value })` assigns `%name`. In scalar assignment source slots, a bare source name reads a scalar too: `assign(out, value)` is equivalent to `assign(out, scalar(value))`.
+- **Edge cases**: Assigning through a typed wrapper fixes the variable's kind from the wrapper. `assign(scalar(name), [value])` and `assign(:name, [value])` store the whole array payload in `$name`; `assign(array(name), [value])` replaces `@name`; `assign(hash(name), { key => value })` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`assign(name, value)` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `assign(name, [value])` assigns `@name`, and `assign(name, { key => value })` assigns `%name`. In scalar assignment source slots, a bare source name or scalar-slot shorthand reads a scalar too: `assign(out, value)` and `assign(out, :value)` are equivalent to `assign(out, scalar(value))`.
 - **Terse spelling**: `set(name, value)` is the canonical helper name, and `name = value` is the operator spelling. In statement position, all three forms lower and run identically for assignment targets; a bare `set` target or operator target auto-exists exactly like legacy `assign`, and a bare scalar source reads the working scalar. In value positions, scalar assignments store and yield the stored scalar, while direct RHS shape assignments store and yield the assigned array/hash value after target-kind inference. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
@@ -968,7 +971,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: `return(value: expr)`
 - **Returns**: the supplied value through the active return channel.
 - **Behavior**: As a top-level action or lifecycle statement, writes the surrounding rule/action return channel. Inside an expression-valued block, it is block-local: it yields that block's value and skips later statements in the block.
-- **Edge cases**: `return(array(...))` returns an array value. `return(scalar(...))` returns a scalar. A bare scalar source such as `return(count)` reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`. A final non-`return(...)` statement in a lifecycle block is evaluated as a statement and is not an implicit rule return.
+- **Edge cases**: `return(array(...))` returns an array value. `return(:count)` and `return(scalar(count))` return the scalar slot `count`. A bare scalar source such as `return(count)` also reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`. A final non-`return(...)` statement in a lifecycle block is evaluated as a statement and is not an implicit rule return.
 
 ### `return_undef()`
 - **Signature**: `return_undef()`

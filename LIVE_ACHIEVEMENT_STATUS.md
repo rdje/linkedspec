@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **SPEC-FORMAT-TERSE.6.2.3.1 — scalar-slot shorthand `:name`**
+  (TERSE SCALAR READ/TARGET SYNTAX; PERL/RUST LOCKSTEP).
+  LinkedSpec now accepts `:name` as the terse spelling for the scalar slot named `name`. In value positions,
+  `:name` reads the same scalar value as `scalar(name)`. In assignment-like target positions,
+  `set(:payload, [value])` and `assign(:payload, [value])` keep the scalar payload boundary, while bare
+  `set(payload, [value])` still infers array assignment.
+
+  **Fix:** Perl lowering recognizes `:name` in scalar source slots, direct shape literals, legacy constructors,
+  scalar assignment targets, and the autodeclare collector. Rust adds a dedicated `Expr::ScalarSlot` parser/runtime
+  node and resolves it through scalar evaluation/target paths without changing direct-shape aggregate inference.
+
+  **Verification:** Perl syntax checks for the edited modules pass; focused lowering probes pass; phase0 passes
+  with **1019** tests; Rust core/runtime focused tests pass; oracle regeneration produces **73 fixtures** including
+  `terse_6_2_3_1_scalar_slot_shorthand`; Rust `corpus_oracle` passes over all 73 fixtures. mdBook and Knowledge
+  Map were updated.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.6.2.3.2` — migrate shipped-spec typed-wrapper usage to `:name`, bare aggregate
+  reads, and direct shape literals where unambiguous; split or annotate remaining compatibility holdouts.
+
 - 2026-07-03: **RUST-PARITY.7.3.4.2 — portmap scalar helper parity**
   (RUST RUNTIME HELPER/DISPATCH FIX + FOUR ORACLE FIXTURES).
   Rust now reproduces the Perl reference for representative `specs/portmap.spec` scalar classifications:
@@ -581,8 +600,8 @@ Current execution status for interruption-safe batch workflow recovery.
   regeneration produced **62 fixtures** including `terse_3_3_4_assignment_expression_closure`; Rust corpus oracle
   PASS; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Frontier:** no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains. Future backend leaves are deferred or
-  blocked by explicit roadmap decisions.
+  **Then-frontier:** no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remained immediately after this closure.
+  Future backend leaves were deferred or blocked by explicit roadmap decisions at that point.
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.3 — mutation assignment expression values landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
@@ -620,8 +639,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `terse_3_3_2_aggregate_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with **1013 tests**;
   mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.3` (now done; `.3.3.4` is also done and no concrete
-  `SPEC-FORMAT-TERSE` PNT-eligible leaf remains).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.3` (now done; `.3.3.4` also completed that sublane, and no concrete
+  `SPEC-FORMAT-TERSE` PNT-eligible leaf remained immediately after that closure).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3.1 — scalar assignment expression values landed**
   (PERL ACTIONIR + RUST PARSER/RUNTIME + PHASE0 + ORACLE + BOOK/KM).
@@ -640,8 +659,8 @@ Current execution status for interruption-safe batch workflow recovery.
   fixtures** including `terse_3_3_1_scalar_assignment_expressions`; Rust corpus oracle PASS; phase0 PASS with
   **1012 tests**; mdBook, Knowledge Map, memory/doctrine/diff checks, and full local CI PASS.
 
-  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.2` (now done; `.3.3.4` is also done and no concrete
-  `SPEC-FORMAT-TERSE` PNT-eligible leaf remains).
+  **Then-frontier:** `SPEC-FORMAT-TERSE.3.3.2` (now done; `.3.3.4` also completed that sublane, and no concrete
+  `SPEC-FORMAT-TERSE` PNT-eligible leaf remained immediately after that closure).
 
 - 2026-07-02: **SPEC-FORMAT-TERSE.3.3 — expression-valued assignment split before code**
   (TASK TREE + BOOK/KM + LIVE DOCS; NO PARSER/COMPILER/RUNTIME CHANGE).

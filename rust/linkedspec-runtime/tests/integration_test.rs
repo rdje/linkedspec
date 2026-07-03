@@ -2053,6 +2053,16 @@ fn terse_1_2_3_5_4_explicit_typed_targets_and_scalar_boundary() {
     );
 }
 
+#[test]
+fn terse_6_2_3_1_scalar_slot_shorthand_runs() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(:payload, [value]); set(snapshot, :payload); return(array(:value, :payload, copy(array(payload)), :snapshot)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["ok", ["ok"], [], ["ok"]]]),
+        ":name reads scalar slots and set(:name, shape) keeps the shape payload in the scalar"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.1.3 — Rust expression-valued block parity:
 // non-empty non-hash braces are value blocks, matching the Perl core landed in
 // `.2.1.2`; hash literals keep precedence and true mid-block return remains

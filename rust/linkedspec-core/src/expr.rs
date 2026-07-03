@@ -95,6 +95,9 @@ pub enum Expr {
     /// A variable reference: `results`, `retv`, `$name`
     #[serde(rename = "variable")]
     Variable { name: String },
+    /// An explicit scalar-slot reference: `:name`
+    #[serde(rename = "scalar_slot")]
+    ScalarSlot { name: String },
     /// An indexed variable access: `results[0]`, `$hash{"key"}`
     #[serde(rename = "indexed_var")]
     IndexedVar { name: String, index: Box<Expr> },
@@ -185,6 +188,7 @@ impl std::fmt::Display for Expr {
             Expr::AssignArrayAppend { name, value } => write!(f, "{name} += {value}"),
             Expr::AssignHashIndex { name, key, value } => write!(f, "{name}[{key}] = {value}"),
             Expr::Variable { name } => write!(f, "{name}"),
+            Expr::ScalarSlot { name } => write!(f, ":{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
             Expr::NestedAccess { base, segments } => {
                 write!(f, "{base}")?;
@@ -842,6 +846,7 @@ impl<'a> Parser<'a> {
                 let expr = self.parse_array_literal()?;
                 self.parse_fluent_chain(expr)
             }
+            ':' => self.parse_scalar_slot(),
             '{' => {
                 let expr = self.parse_brace_expr()?;
                 self.parse_fluent_chain(expr)
@@ -1321,6 +1326,29 @@ impl<'a> Parser<'a> {
             let expr = Expr::Variable { name };
             self.parse_fluent_chain(expr)
         }
+    }
+
+    fn parse_scalar_slot(&mut self) -> Result<Expr, String> {
+        self.advance(1);
+        let start = self.pos;
+        let Some(first) = self.peek() else {
+            return Err("expected scalar slot name after ':'".into());
+        };
+        if !(first.is_ascii_alphabetic() || first == '_') {
+            return Err(format!(
+                "expected scalar slot name after ':' at position {}",
+                self.pos
+            ));
+        }
+        while let Some(ch) = self.peek() {
+            if ch.is_ascii_alphanumeric() || ch == '_' {
+                self.advance(ch.len_utf8());
+            } else {
+                break;
+            }
+        }
+        let name = self.src[start..self.pos].to_string();
+        self.parse_fluent_chain(Expr::ScalarSlot { name })
     }
 
     fn parse_access_segments(&mut self, name: &str) -> Result<Vec<AccessSegment>, String> {
@@ -2030,6 +2058,35 @@ mod tests {
                 }
             }
             _ => panic!("expected return call"),
+        }
+    }
+
+    #[test]
+    fn parse_scalar_slot_shorthand_expr() {
+        let code = r#"set(:payload, [value]); return([:value, :payload])"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "set");
+                assert!(matches!(args[0].value(), Expr::ScalarSlot { name } if name == "payload"));
+            }
+            other => panic!("expected set call, got {:?}", other),
+        }
+        match &block.statements[1].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::ArrayLiteral { items } => {
+                        assert_eq!(items.len(), 2);
+                        assert!(matches!(&items[0], Expr::ScalarSlot { name } if name == "value"));
+                        assert!(
+                            matches!(&items[1], Expr::ScalarSlot { name } if name == "payload")
+                        );
+                    }
+                    other => panic!("expected ArrayLiteral, got {:?}", other),
+                }
+            }
+            other => panic!("expected return call, got {:?}", other),
         }
     }
 

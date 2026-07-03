@@ -935,6 +935,13 @@ sub _collect_auto_working_var_decls {
   return if $seen{$dedup_key}++;
   push @collected, { sigil => $sigil, name => $name };
  };
+ my $record_scalar_slot_read = sub {
+  my ($expr) = @_;
+  my $value = _trim_action_ir_value($expr);
+  return 0 unless defined($value) && $value =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
+  $record->('$', $1);
+  return 1;
+ };
  my $record_direct_access_bare_path_atoms = sub {
   my ($expr) = @_;
   my $trimmed = _trim_action_ir_value($expr);
@@ -1002,6 +1009,7 @@ sub _collect_auto_working_var_decls {
   my ($member_expr) = @_;
   my $member = _trim_action_ir_value($member_expr);
   return unless defined($member) && length($member);
+  return if $record_scalar_slot_read->($member);
   $record->('$', $member) if $member =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($member);
   $collect_shape_literal_scalar_reads->($member);
@@ -1058,6 +1066,7 @@ sub _collect_auto_working_var_decls {
    return unless defined($last) && length($last);
   }
 
+  return if $record_scalar_slot_read->($last);
   $record->('$', $last) if $last =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($last);
   $collect_shape_literal_scalar_reads->($last);
@@ -1069,6 +1078,7 @@ sub _collect_auto_working_var_decls {
   my $value = _trim_action_ir_value($value_expr);
   return unless defined($value) && length($value);
   $collect_ast_value_refs->($value) if ref($collect_ast_value_refs) eq 'CODE';
+  return if $record_scalar_slot_read->($value);
   $record->('$', $value) if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($value);
   $collect_shape_literal_scalar_reads->($value);
@@ -1167,7 +1177,12 @@ sub _collect_auto_working_var_decls {
  my $record_assignment_target_for_source = sub {
   my ($target_expr, $source_expr) = @_;
   my $target = _trim_action_ir_value($target_expr);
-  return unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  return unless defined($target) && length($target);
+  if ($target =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
+   $record->('$', $1);
+   return;
+  }
+  return unless $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   my $source = _trim_action_ir_value($source_expr);
   return unless defined($source) && length($source);
   my $shape_sigil = _infer_direct_shape_literal_sigil($source);

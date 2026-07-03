@@ -2749,6 +2749,11 @@ sub _lower_method_value_expr {
   return 'undef' if $kind eq 'undef';
   return $node->{value} ? 'do { require JSON::PP; JSON::PP::true }' : 'do { require JSON::PP; JSON::PP::false }'
    if $kind eq 'boolean';
+  if ($kind eq 'raw_perl') {
+   my $scalar_slot_read = _lower_source_slot_bare_scalar_read_expr($node->{source}, $deps);
+   return $scalar_slot_read if defined($scalar_slot_read) && length($scalar_slot_read);
+   return undef;
+  }
   return $node->{source}
    if $kind eq 'variable' && $opts->{variable_source};
   return $opts->{bare_scalar_read} ? _lower_source_slot_bare_scalar_read_expr($node->{name}, $deps) : undef
@@ -4520,7 +4525,9 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    return undef unless $i + 1 < @$args;
    my $key_expr = _normalize_method_tag_expr($args->[$i], $deps);
    return undef unless defined($key_expr) && length($key_expr);
-   my $val_expr = _lower_method_value_expr($args->[$i + 1], $deps);
+   my $val_expr = $lower_shape_member_expr->($args->[$i + 1]);
+   $val_expr = _lower_method_value_expr($args->[$i + 1], $deps)
+    unless defined($val_expr) && length($val_expr);
    $val_expr = $trim_action_ir_value->($args->[$i + 1]) unless defined($val_expr) && length($val_expr);
    return undef unless defined($val_expr) && length($val_expr);
    push @pairs, $key_expr.' => '.$val_expr;
@@ -4536,7 +4543,12 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    my $array_symbol = $extract_array_symbol_name->($trimmed);
    return '[@'.$array_symbol.']' if defined($array_symbol) && length($array_symbol) && $trimmed =~ $array_symbol_expr_re;
   }
-  my @lowered = map { _lower_method_value_expr($_, $deps) // $_ } @$args;
+  my @lowered = map {
+   my $lowered_arg = $lower_shape_member_expr->($_);
+   $lowered_arg = _lower_method_value_expr($_, $deps)
+    unless defined($lowered_arg) && length($lowered_arg);
+   defined($lowered_arg) && length($lowered_arg) ? $lowered_arg : $_;
+  } @$args;
   return '['.join(', ', @lowered).']';
  }
 
@@ -4545,7 +4557,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
 #------------------------------------------------------------------------------
 # Function: _lower_source_slot_bare_scalar_read_expr
-# Purpose : Lower one accepted scalar source-slot bare identifier to `$NAME`.
+# Purpose : Lower one accepted scalar source-slot identifier to `$NAME`.
 # Args    : ($expr, $deps)
 # Returns : Perl scalar read expression, or undef for non-source-slot bare reads
 #------------------------------------------------------------------------------
@@ -4563,9 +4575,16 @@ sub _lower_source_slot_bare_scalar_read_expr {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
- return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
- return undef if $trimmed =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
- return '$'.$trimmed
+ my $name;
+ if ($trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  $name = $1;
+ } elsif ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  $name = $1;
+ } else {
+  return undef;
+ }
+ return undef if $name =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
+ return '$'.$name
 }
 
 #------------------------------------------------------------------------------

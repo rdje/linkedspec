@@ -506,6 +506,18 @@ array-index reads. Non-reserved bare path atoms such as `[i]` are also scalar
 array-index reads, equivalent to `[scalar(i)]`. Primitive literals and engine
 locals are not claimed as bare path atoms.
 
+Scalar-slot shorthand:
+
+```text
+:name                         — read scalar slot name, equivalent to scalar(name)
+set(:name, [value])            — assign the array payload to scalar slot name
+```
+
+Use the shorthand when the value must visibly be a scalar slot but the full
+`scalar(name)` wrapper is too noisy. Bare direct-shape targets still infer
+aggregate kind: `set(name, [value])` assigns the working array `name`, while
+`set(:name, [value])` assigns the scalar `name`.
+
 ### 7.1 Declaration Helpers
 ```
 declare(scalar, name)      — declare a scalar working variable
@@ -514,6 +526,7 @@ declare(hash, name)        — declare a hash working variable
 declare(scalar, name=value) — declare with initializer
 set(name, value)            — assign a working variable; legacy assign(name, value) is still accepted
 return(name)                — read and return a scalar working variable
+:name                       — explicit scalar-slot read shorthand
 ```
 
 ### 7.2 Scalar Helpers

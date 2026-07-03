@@ -221,6 +221,7 @@ fn scalar_mutation_target_arg(arg: &Arg) -> Option<String> {
             Expr::Variable { name } => Some(name.clone()),
             _ => None,
         },
+        Expr::ScalarSlot { name } => Some(name.clone()),
         Expr::Variable { name } => Some(name.clone()),
         _ => None,
     }
@@ -793,6 +794,7 @@ impl Engine {
                     })
             }
             Expr::Variable { .. }
+            | Expr::ScalarSlot { .. }
             | Expr::StringLiteral { .. }
             | Expr::NumberLiteral { .. }
             | Expr::BooleanLiteral { .. }
@@ -1567,6 +1569,7 @@ impl Engine {
                 self.eval_hash_index_assignment_expression(name, key, value, ctx, rule_label)
             }
             Expr::Variable { name } => Ok(ctx.get_scalar(name)),
+            Expr::ScalarSlot { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {
                 let idx_val = self.eval_expr(index, ctx, rule_label)?;
                 let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
@@ -2455,6 +2458,9 @@ impl Engine {
                     return var_name.clone();
                 }
             }
+        }
+        if let Some(Arg::Positional(Expr::ScalarSlot { name: var_name })) = raw_args.first() {
+            return var_name.clone();
         }
         // SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity, .1.2.2): a BARE
         // (un-wrapped) name in the scalar-target position (e.g. assign(v, ...)) IS

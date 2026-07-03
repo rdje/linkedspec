@@ -57,7 +57,7 @@ The current helper surface is broad, but it is easier to learn in families. Each
 
 Construct and transform values during parsing:
 
-- `scalar(name)` — read a named scalar value
+- `:name` — read the named scalar slot; `scalar(name)` remains the long compatible form
 - `array(name)` — read a named array value
 - `hash(name)` — read a named hash value
 - `flat_array(...)` — flatten arguments into an array

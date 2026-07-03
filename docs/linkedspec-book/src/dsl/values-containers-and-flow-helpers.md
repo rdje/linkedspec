@@ -132,16 +132,16 @@ set(items, []);                     # replaces array working variable items with
 set(meta, {});                      # replaces hash working variable meta with an empty hash
 ```
 
-Use an explicit scalar wrapper when the intent is to store the whole array/hash payload in a scalar:
+Use the scalar-slot shorthand when the intent is to store the whole array/hash payload in a scalar:
 
 ```text
-set(scalar(payload), [value]);
-return(scalar(payload));
+set(:payload, [value]);
+return(:payload);
 ```
 
 This target-kind inference is intentionally tied to direct RHS shape literals. Use an explicit scalar wrapper
-when the goal is a scalar-held shape payload; use `array(name)` / `hash(name)` when the goal is an explicit
-aggregate target.
+or the preferred `:name` shorthand when the goal is a scalar-held shape payload; use `array(name)` / `hash(name)`
+when the goal is an explicit aggregate target.
 
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
 returned or assigned:
