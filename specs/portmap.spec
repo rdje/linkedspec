@@ -19,7 +19,7 @@ concatenation: /\{/ /\}/
 -> bare_bit_slice .push
 -> concatenation[1]    {return(array("?concat:", array_copy(array(concatenation))))}
 bare_bit_slice: /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])?|(?i)(0x[0-9a-f]+|0b[01]+|\d+\'\d+)/ I {
-	declare(array, entry_parts);
+	entry_parts = [];
 	assign(array(entry_parts), entry_groups());
 	if(matches(entry_text(), /:/));
 		return(array("?slice:", array(flat_array(entry_parts))));

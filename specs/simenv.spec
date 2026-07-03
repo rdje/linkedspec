@@ -1,4 +1,4 @@
-top::            I {declare(array, blocks); declare(scalar, retv)}
+top::            I {blocks = []; retv = undef}
 
  -> comments
  -> begin_end_blocks          {
@@ -17,7 +17,7 @@ LX {
    }
 
 
-begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=entry_text(), retv); declare(array, assigns, keyval_pairs); print("begin_end_blocks: BEGIN   (", entry_text(), "\n"); substr(scalar(block_namei), /^.*\s+/, "", o)}
+begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); retv = undef; assigns = []; keyval_pairs = []; print("begin_end_blocks: BEGIN   (", entry_text(), "\n"); substr(scalar(block_namei), /^.*\s+/, "", o)}
 
  -> comments
  -> anyvariable                       {
@@ -31,7 +31,7 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
  -> multiline_value                   {push_value(array(keyval_pairs), call(multiline_value))}
  -> singleline_value                  {push_value(array(keyval_pairs), call(singleline_value))}
  -> begin_end_blocks[1]               {
-                                       declare(scalar, block_namee=match_text());
+                                       block_namee = match_text();
 	                                       substr(scalar(block_namee), /^.*\s+/, "", o);
 
                                        if(str_ne(scalar(block_namee), scalar(block_namei)));
@@ -56,7 +56,7 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
 
       
 anyvariable: /\S+\s*(?==)/ I {
-	                                       declare(scalar, variable_name=entry_text());
+	                                       variable_name = entry_text();
 	                                       substr(scalar(variable_name), /\s+$/, "", o);
 	                                       print("anyvariable: VARIABLE NAME (", scalar(variable_name), ")\n");
 		                                       return(hash("type", "anyvariable", "content", scalar(variable_name)))
@@ -74,7 +74,7 @@ multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
      exit_now()}
 
 
-singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {declare(array, matches); declare(scalar, last_pos=capture_slice_pos(), shift)}
+singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {matches = []; last_pos = capture_slice_pos(); shift = undef}
  -> perl_command_substitution          {push_value(array(matches), call(perl_command_substitution));   assign(scalar(last_pos), cursor_pos())}
  -> command_substitution               {push_value(array(matches), call(command_substitution));        assign(scalar(last_pos), cursor_pos())}
  -> bvariable_substitution             {push_value(array(matches), call(bvariable_substitution));      assign(scalar(last_pos), cursor_pos())}
@@ -109,7 +109,7 @@ squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
  LX {print("(simenv) -E- Closing tick not found for *$squotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
-dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); declare(array, matches); declare(scalar, last_pos=capture_slice_pos(), shift)}
+dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
  -> bvariable_substitution                    {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
  -> variable_substitution                     {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
  -> dquotes[1]                                {print("dquotes: END\n");  print("<", capture_slice(), ">\n");
@@ -136,7 +136,7 @@ perl_squotes: /q\(/  /\)/                   I {print("perl_squotes: START\n")}
  LX {print("(simenv) -E- Closing Parenthesis not found for *$perl_squotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
-perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); declare(array, matches); declare(scalar, last_pos=capture_slice_pos(), shift)}
+perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
  -> parenthesis
  -> bvariable_substitution                    {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
  -> variable_substitution                     {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
@@ -153,7 +153,7 @@ perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); d
      exit_now()}
 
 
-command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: START\n"); declare(array, matches); declare(scalar, last_pos=capture_slice_pos(), shift)}
+command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
  -> bvariable_substitution                    {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
  -> variable_substitution                     {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
  -> command_substitution[1]                   {
@@ -171,7 +171,7 @@ command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: STAR
      exit_now()}
 
 
-perl_command_substitution: /qx\(/  /\)/     I {print("perl_command_substitution: START\n"); declare(array, matches); declare(scalar, last_pos=capture_slice_pos(), shift)}
+perl_command_substitution: /qx\(/  /\)/     I {print("perl_command_substitution: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
  -> bvariable_substitution		      {push_value(array(matches), call(bvariable_substitution));   assign(scalar(last_pos), cursor_pos())}
  -> variable_substitution                     {push_value(array(matches), call(variable_substitution));    assign(scalar(last_pos), cursor_pos())}
  -> perl_command_substitution[1]              {print("perl_command_substitution: END\n"); print("<", capture_slice(), ">\n");
@@ -200,7 +200,7 @@ bvariable_substitution: /(?<!\\)\$\{/ /\}/  I {print("bvariable_substitution: ST
  
 
 variable_substitution: /(?<!\\)\$\w+/       I {
-	                                       declare(scalar, variable_name=entry_text());
+	                                       variable_name = entry_text();
 	                                       substr(scalar(variable_name), /^\$/, "", o);
 	                                       print("variable_substitution: (", scalar(variable_name), ")\n");
 					       return(hash("type", "variable_substitution", "content", scalar(variable_name)))
@@ -222,4 +222,4 @@ parenthesis: /\(/   /\)/                    I {print("parenthesis: OPENING Paren
      exit_now()}
 
 
-comments: /#.*\n/                           I {declare(scalar, comment_text=entry_text()); substr(scalar(comment_text), /\n$/, "", o); print("comments: <", scalar(comment_text), ">\n")}
+comments: /#.*\n/                           I {comment_text = entry_text(); substr(scalar(comment_text), /\n$/, "", o); print("comments: <", scalar(comment_text), ">\n")}

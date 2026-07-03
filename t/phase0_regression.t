@@ -41497,12 +41497,11 @@ subtest 'ebnf_grammar_file_helper_flow_eliminates_raw_fallback' => sub {
     is($meta->{unresolved_helper_count}, 0, 'ebnf grammar_file avoids unresolved-helper hits');
     is_deeply($meta->{language_agnostic_action_ir_blocker_statements}, [], 'ebnf grammar_file exposes no language-agnostic blocker statements');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'ebnf grammar_file canonical action-IR nodes include DECLARE/ASSIGN/IF/PUSH/RETURN after helper migration'
+        'ebnf grammar_file canonical action-IR nodes include ASSIGN/IF/PUSH/RETURN after declare retirement'
     );
     ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'ebnf grammar_file canonical action-IR nodes include CALL after grammar_rule binding');
     ok($meta->{language_agnostic_action_ir_ready}, 'ebnf grammar_file is language-agnostic action-IR ready');
@@ -41556,46 +41555,46 @@ subtest 'ebnf_helper_flow_eliminates_compatibility_surface' => sub {
 
     my $include_meta = $descr->{spec}{include_dir}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$include_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$include_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$include_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT' } @{$include_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'TRIM_EACH' } @{$include_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$include_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$include_meta->{canonical_action_ir_nodes}}),
-        'ebnf include_dir canonical action-IR nodes include declare/subst/split/trim/filter/return after compatibility cleanup'
+        'ebnf include_dir canonical action-IR nodes include assign/subst/split/trim/filter/return after declare retirement'
     );
 
     my $include_file_meta = $descr->{spec}{include_file}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'TRIM_EACH' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$include_file_meta->{canonical_action_ir_nodes}}),
-        'ebnf include_file canonical action-IR nodes include declare/subst/split/trim/filter/return after compatibility cleanup'
+        'ebnf include_file canonical action-IR nodes include assign/subst/split/trim/filter/return after declare retirement'
     );
 
     my $semantic_meta = $descr->{spec}{semantic_annotation}{meta}{action_rewriter};
     ok(
         scalar(grep { $_ eq 'BACKTRACK' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CAPTURE_SLICE' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IMATCH_GROUP_READ' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$semantic_meta->{canonical_action_ir_nodes}}),
-        'ebnf semantic_annotation canonical action-IR nodes include backtrack/capture/subst/return after compatibility cleanup'
+        'ebnf semantic_annotation canonical action-IR nodes include backtrack/capture/assign/subst/return after declare retirement'
     );
 
     my $logging_meta = $descr->{spec}{logging_annotation}{meta}{action_rewriter};
     ok(
+        scalar(grep { $_ eq 'ASSIGN' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CAPTURE_SLICE' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CAPTURE_SLICE_START' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IMATCH_GROUP_READ' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$logging_meta->{canonical_action_ir_nodes}}),
-        'ebnf logging_annotation canonical action-IR nodes include capture-start/push/return after compatibility cleanup'
+        'ebnf logging_annotation canonical action-IR nodes include assign/capture-start/push/return after declare retirement'
     );
 
     my $summary = $descr->{meta}{action_rewriter_migration};
@@ -41632,14 +41631,13 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     is($meta->{compatibility_surface_count}, 0, 'ds_vhistory vhistory no longer reports compatibility-surface statements');
     is_deeply($meta->{compatibility_surface_statements}, [], 'ds_vhistory vhistory exposes no compatibility-surface statements');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'ds_vhistory vhistory canonical action-IR nodes include DECLARE/ASSIGN/IF/ELSE/ENDIF/PUSH/RETURN after helper migration'
+        'ds_vhistory vhistory canonical action-IR nodes include ASSIGN/IF/ELSE/ENDIF/PUSH/RETURN after declare retirement'
     );
     ok(
         scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
@@ -41801,7 +41799,7 @@ subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallb
     }
 };
 subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' => sub {
-    plan tests => 11;
+    plan tests => 9;
 
     my $descr = LinkedSpec::get_parser('tablegrep', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep accumulator migration check');
@@ -41814,7 +41812,6 @@ subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' =>
         is(scalar @push_internal_raw, 0, "tablegrep $rule no longer reports push \@internal, \$retv as raw-perl fallback");
         ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include PUSH after accumulator migration");
         ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include ASSIGN after accumulator migration");
-        ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include DECLARE after accumulator migration");
     }
 };
 subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
@@ -41838,11 +41835,11 @@ subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($re_term_meta->{raw_perl_dependency_statements}, [], 'tablegrep re_term exposes no raw-Perl fallback statements');
     is($re_term_meta->{unresolved_helper_count}, 0, 'tablegrep re_term avoids unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$re_term_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$re_term_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$re_term_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$re_term_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$re_term_meta->{canonical_action_ir_nodes}}),
-        'tablegrep re_term canonical action-IR nodes include DECLARE/IF/REGEX_SUBST/RETURN after helper migration'
+        'tablegrep re_term canonical action-IR nodes include ASSIGN/IF/REGEX_SUBST/RETURN after declare retirement'
     );
     ok($re_term_meta->{language_agnostic_action_ir_ready}, 'tablegrep re_term is language-agnostic action-IR ready');
 
@@ -41860,7 +41857,7 @@ subtest 'tablegrep_terminal_token_band_prefers_entry_group_reads' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'tablegrep source spec text is available for terminal-token reader inspection');
-    like($source_content, qr/declare\(scalar,\s*field=entry_group\(0\),\s*sens=entry_group\(1\),\s*re=entry_group\(2\)\);/, 'tablegrep re_term now prefers entry_group(0..2) for immediate capture reads');
+    like($source_content, qr/field = entry_group\(0\);\s+sens = entry_group\(1\);\s+re = entry_group\(2\);/s, 'tablegrep re_term now prefers terse entry_group(0..2) assignments for immediate capture reads');
     like($source_content, qr/return\(hash\("type", "STERM", "field", scalar\(subscript\), "sens", scalar\(sens\), "re", scalar\(re\)\)\)/, 'tablegrep subscript terminal return shape remains preserved after entry_group migration');
     like($source_content, qr/or_op:\s*\/\\\|\\\|\//, 'tablegrep operator token rules remain present after terminal-token migration');
     unlike($source_content, qr/declare\(scalar,\s*field=scalar\(IMATCH_LIST,\s*0\),\s*sens=scalar\(IMATCH_LIST,\s*1\),\s*re=scalar\(IMATCH_LIST,\s*2\)\);/, 'tablegrep re_term no longer uses scalar(IMATCH_LIST, ...) in the migrated terminal-token band');
@@ -41874,14 +41871,14 @@ subtest 'tablegrep_core_flow_prefers_structured_helpers' => sub {
     ok(defined($source_content) && length($source_content), 'tablegrep source spec text is available for helper-flow inspection');
     like($source_content, qr/-> re_term\s+\{assign\(scalar\(retv\), call\(re_term\)\)\}/, 'tablegrep grep child calls now capture through assign(scalar(retv), call(...))');
     like($source_content, qr/-> group\s+\{assign\(scalar\(retv\), call\(group\)\)\}/, 'tablegrep group child calls now capture through assign(scalar(retv), call(...))');
-    like($source_content, qr/LS \{declare\(scalar, retv\)\}/, 'tablegrep loop-start retv declaration now uses declare(scalar, retv)');
+    like($source_content, qr/LS \{retv = undef\}/, 'tablegrep loop-start retv reset now uses terse scalar assignment');
     like($source_content, qr/return\(array_copy\(array\(internal\)\)\)/, 'tablegrep top lifecycle return now uses helper-form array snapshot return');
     like($source_content, qr/exit_now\(1\)/, 'tablegrep operator guard exits now use exit_now(1)');
     unlike($source_content, qr/\$retv\s*=\s*call\(/, 'tablegrep no longer uses compatibility child-call assignment wrappers');
     unlike($source_content, qr/\b(?:exit\s+\d+|my\s+\$retv|return\s+\@internal)/, 'tablegrep no longer uses bare exit/my/conditional-return compatibility spellings in the migrated flow');
 };
 subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' => sub {
-    plan tests => 11;
+    plan tests => 10;
 
     my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl signal_decl_range migration check');
@@ -41903,7 +41900,6 @@ subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' =
     is($meta->{raw_perl_dependency_count}, 0, 'vhdl signal_decl_range no longer reports raw-Perl fallback dependency');
     is_deeply($meta->{raw_perl_dependency_statements}, [], 'vhdl signal_decl_range exposes no raw-Perl fallback statements');
     cmp_ok($meta->{raw_perl_dependency_count}, '<', 9, 'vhdl signal_decl_range raw-perl dependency count is reduced from previous baseline');
-    ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include DECLARE');
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include PUSH');
     ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include ASSIGN');
     ok($meta->{language_agnostic_action_ir_ready}, 'vhdl signal_decl_range is now language-agnostic action-IR ready');
@@ -41920,11 +41916,11 @@ subtest 'vhdl_package_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($package_decl_meta->{raw_perl_dependency_statements}, [], 'vhdl package_declaration exposes no raw-Perl fallback statements');
     is($package_decl_meta->{unresolved_helper_count}, 0, 'vhdl package_declaration avoids unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$package_decl_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$package_decl_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IMATCH_GROUP_READ' } @{$package_decl_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'MAP_LOWERCASE' } @{$package_decl_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$package_decl_meta->{canonical_action_ir_nodes}}),
-        'vhdl package_declaration canonical action-IR nodes include DECLARE/ASSIGN/MAP_LOWERCASE/RETURN after helper migration'
+        'vhdl package_declaration canonical action-IR nodes include ASSIGN/IMATCH_GROUP_READ/MAP_LOWERCASE/RETURN after declare retirement'
     );
     ok($package_decl_meta->{language_agnostic_action_ir_ready}, 'vhdl package_declaration is language-agnostic action-IR ready');
 
@@ -41963,10 +41959,10 @@ subtest 'vhdl_declaration_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($type_meta->{raw_perl_dependency_statements}, [], 'vhdl type_declaration exposes no raw-Perl fallback statements');
     is($type_meta->{unresolved_helper_count}, 0, 'vhdl type_declaration avoids unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$type_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$type_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IMATCH_GROUPS_READ' } @{$type_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$type_meta->{canonical_action_ir_nodes}}),
-        'vhdl type_declaration canonical action-IR nodes include DECLARE/ASSIGN/RETURN after helper migration'
+        'vhdl type_declaration canonical action-IR nodes include ASSIGN/IMATCH_GROUPS_READ/RETURN after declare retirement'
     );
     ok($type_meta->{language_agnostic_action_ir_ready}, 'vhdl type_declaration is language-agnostic action-IR ready');
 
@@ -42048,10 +42044,10 @@ subtest 'vhdl_process_statement_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($meta->{raw_perl_dependency_statements}, [], 'vhdl process_statement exposes no raw-Perl fallback statements');
     is($meta->{unresolved_helper_count}, 0, 'vhdl process_statement avoids unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CURSOR_POS_READ' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'vhdl process_statement canonical action-IR nodes include DECLARE/ASSIGN/RETURN after helper migration'
+        'vhdl process_statement canonical action-IR nodes include ASSIGN/CURSOR_POS_READ/RETURN after declare retirement'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'vhdl process_statement is language-agnostic action-IR ready');
 
@@ -42074,13 +42070,13 @@ subtest 'vhdl_subprogram_body_helper_flow_eliminates_raw_fallback' => sub {
     is($meta->{unresolved_helper_count}, 0, 'vhdl subprogram_body avoids unresolved-helper hits');
     is_deeply($meta->{language_agnostic_action_ir_blocker_statements}, [], 'vhdl subprogram_body exposes no language-agnostic blocker statements');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CURSOR_POS_READ' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT_EACH' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'vhdl subprogram_body canonical action-IR nodes include DECLARE/ASSIGN/SPLIT/SPLIT_EACH/FILTER_NONEMPTY/RETURN after helper migration'
+        'vhdl subprogram_body canonical action-IR nodes include ASSIGN/CURSOR_POS_READ/SPLIT/SPLIT_EACH/FILTER_NONEMPTY/RETURN after declare retirement'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'vhdl subprogram_body is language-agnostic action-IR ready');
 
@@ -42113,8 +42109,8 @@ subtest 'vhdl_top_token_readers_prefer_entry_text' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for top token-reader helper inspection');
-    like($source_content, qr{comment:\s+/--\.\*/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(scalar\(text\)\)}, 'vhdl comment token reader now prefers entry_text() through an explicit scalar helper flow');
-    like($source_content, qr{space:\s+/\\s\+/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(scalar\(text\)\)}, 'vhdl space token reader now prefers entry_text() through an explicit scalar helper flow');
+    like($source_content, qr{comment:\s+/--\.\*/\s+I \{text = entry_text\(\); return\(scalar\(text\)\)\}}, 'vhdl comment token reader now prefers entry_text() through terse scalar assignment');
+    like($source_content, qr{space:\s+/\\s\+/\s+I \{text = entry_text\(\); return\(scalar\(text\)\)\}}, 'vhdl space token reader now prefers entry_text() through terse scalar assignment');
     unlike($source_content, qr{comment:\s+/--\.\*/\s+I\.return\(\$IMATCH\)}, 'vhdl comment token reader no longer uses raw $IMATCH');
     unlike($source_content, qr{space:\s+/\\s\+/\s+I\.return\(\$IMATCH\)}, 'vhdl space token reader no longer uses raw $IMATCH');
 };
@@ -42147,7 +42143,7 @@ subtest 'vhdl_interface_port_decl_prefers_helper_array_flow' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for interface port helper-array inspection');
-    like($source_content, qr/interface_signal_declaration: .*?\nI \{declare\(array, port_decl_parts\)\}/s, 'vhdl interface_signal_declaration now declares an explicit helper array for port declaration parts');
+    like($source_content, qr/interface_signal_declaration: .*?\nI \{port_decl_parts = \[\]\}/s, 'vhdl interface_signal_declaration now initializes a terse helper array for port declaration parts');
     like($source_content, qr/-> signal_decl_range\s+\{assign\(array\(port_decl_parts\), entry_groups\(\)\); push_value\(array\(port_decl_parts\), call\(signal_decl_range\)\)\}/, 'vhdl interface_signal_declaration now snapshots entry_groups() before appending the optional signal_decl_range child result');
     like($source_content, qr/-> interface_signal_declaration\[1\]\s+\{assign\(array\(port_decl_parts\), entry_groups\(\)\); return\(array\("\?port_decl:", array_copy\(array\(port_decl_parts\)\)\)\)\}/, 'vhdl interface_signal_declaration now returns the helper array copy instead of raw @IMATCH_LIST');
     unlike($source_content, qr/-> signal_decl_range\s+\{push \@IMATCH_LIST, call\(signal_decl_range\)\}/, 'vhdl interface_signal_declaration no longer pushes child results directly into raw @IMATCH_LIST');
@@ -42159,11 +42155,11 @@ subtest 'vhdl_declaration_readers_prefer_entry_group_locals' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for declaration-reader helper inspection');
-    like($source_content, qr/constant_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), subtype_indication=entry_group\(1\), expression=entry_group\(2\)\);/s, 'vhdl constant_declaration now prefers entry_group(...) locals');
-    like($source_content, qr/variable_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), subtype_indication=entry_group\(1\), expression=entry_group\(2\)\);/s, 'vhdl variable_declaration now prefers entry_group(...) locals');
-    like($source_content, qr/file_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), remainder_info=entry_group\(1\)\);/s, 'vhdl file_declaration now prefers entry_group(...) locals');
-    like($source_content, qr/signal_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), subtype_indication=entry_group\(1\), signal_kind=entry_group\(2\), expression=entry_group\(3\)\);/s, 'vhdl signal_declaration now prefers entry_group(...) locals');
-    like($source_content, qr/configuration_specification: .*?declare\(scalar, instantiation_list=entry_group\(0\), component_name=entry_group\(1\), binding_indication=entry_group\(2\)\);/s, 'vhdl configuration_specification now prefers entry_group(...) locals');
+    like($source_content, qr/constant_declaration: .*?identifier_list = entry_group\(0\);\s+subtype_indication = entry_group\(1\);\s+expression = entry_group\(2\);/s, 'vhdl constant_declaration now prefers terse entry_group(...) local assignments');
+    like($source_content, qr/variable_declaration: .*?identifier_list = entry_group\(0\);\s+subtype_indication = entry_group\(1\);\s+expression = entry_group\(2\);/s, 'vhdl variable_declaration now prefers terse entry_group(...) local assignments');
+    like($source_content, qr/file_declaration: .*?identifier_list = entry_group\(0\);\s+remainder_info = entry_group\(1\);/s, 'vhdl file_declaration now prefers terse entry_group(...) local assignments');
+    like($source_content, qr/signal_declaration: .*?identifier_list = entry_group\(0\);\s+subtype_indication = entry_group\(1\);\s+signal_kind = entry_group\(2\);\s+expression = entry_group\(3\);/s, 'vhdl signal_declaration now prefers terse entry_group(...) local assignments');
+    like($source_content, qr/configuration_specification: .*?instantiation_list = entry_group\(0\);\s+component_name = entry_group\(1\);\s+binding_indication = entry_group\(2\);/s, 'vhdl configuration_specification now prefers terse entry_group(...) local assignments');
     like($source_content, qr/constant_declaration: .*?return\(split_tagged_records\(scalar\(identifier_list\), \/\\s\*,\\s\*\/o, "\?constant_declaration:", scalar\(subtype_indication\), scalar\(expression\)\)\)/s, 'vhdl constant_declaration now prefers split_tagged_records for identifier-list returns');
     like($source_content, qr/variable_declaration: .*?return\(split_tagged_records\(scalar\(identifier_list\), \/\\s\*,\\s\*\/o, "\?variable_declaration:", scalar\(subtype_indication\), scalar\(expression\)\)\)/s, 'vhdl variable_declaration now prefers split_tagged_records for identifier-list returns');
     like($source_content, qr/file_declaration: .*?return\(split_tagged_records\(scalar\(identifier_list\), \/\\s\*,\\s\*\/o, "\?file_declaration:", scalar\(remainder_info\)\)\)/s, 'vhdl file_declaration now prefers split_tagged_records for identifier-list returns');
@@ -42241,11 +42237,10 @@ subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub 
     is($meta->{unresolved_helper_count}, 0, 'simenv begin_end_blocks avoids unresolved-helper hits');
     is_deeply($meta->{language_agnostic_action_ir_blocker_statements}, [], 'simenv begin_end_blocks exposes no language-agnostic blocker statements');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'simenv begin_end_blocks canonical action-IR nodes include DECLARE/ASSIGN/PUSH/RETURN'
+        'simenv begin_end_blocks canonical action-IR nodes include ASSIGN/PUSH/RETURN after declare retirement'
     );
     ok(
         scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
@@ -42360,16 +42355,17 @@ subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'BNF descriptor exposes no compatibility-surface rules after helper return migration');
 };
 subtest 'bnf_token_readers_prefer_entry_text' => sub {
-    plan tests => 7;
+    plan tests => 8;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'BNF.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'BNF source spec text is available for token-reader helper inspection');
-    ok(index($source_content, 'declare(scalar, text=entry_text());') >= 0, 'BNF migrated token readers now prefer entry_text() before cleanup');
+    ok(index($source_content, 'text = entry_text();') >= 0, 'BNF migrated token readers now prefer terse assignment from entry_text()');
     like($source_content, qr/node:\s+.*?entry_text\(\)/s, 'BNF node now prefers entry_text() for the immediate token read');
     ok(index($source_content, 'substr(scalar(text), "^/|/$", "", go);') >= 0, 'BNF regex now prefers helperized string-pattern cleanup after entry_text()');
     like($source_content, qr/group\[1\].*?return\(1\);/s, 'BNF group completion now prefers helper-form numeric return');
+    unlike($source_content, qr/declare\(scalar,\s*text=entry_text\(\)\)/, 'BNF token readers no longer use declare(...) for entry_text() locals');
     unlike($source_content, qr/scalar\(IMATCH\)/, 'BNF migrated token readers no longer rely on scalar(IMATCH)');
     unlike($source_content, qr/group\[1\].*?return\s+1;/s, 'BNF group completion no longer uses a bare compatibility return');
 };
@@ -42480,14 +42476,13 @@ subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
 
     my $top_meta = $descr->{spec}{substitute_top}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PRINT' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'EXIT' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
-        'hlink_substitution substitute_top canonical action-IR nodes include DECLARE/ASSIGN/PUSH/IF/PRINT/EXIT/RETURN after helper migration'
+        'hlink_substitution substitute_top canonical action-IR nodes include ASSIGN/PUSH/IF/PRINT/EXIT/RETURN after declare retirement'
     );
 
     my $curlyb_meta = $descr->{spec}{curlyb}{meta}{action_rewriter};
@@ -42593,13 +42588,13 @@ subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
 
     my $group_meta = $descr->{spec}{group}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$group_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$group_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$group_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$group_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$group_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$group_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'EXIT' } @{$group_meta->{canonical_action_ir_nodes}}),
-        'lib_reader group canonical action-IR nodes include DECLARE/REGEX_SUBST/PUSH/RETURN/SAY/EXIT after helper migration'
+        'lib_reader group canonical action-IR nodes include ASSIGN/REGEX_SUBST/PUSH/RETURN/SAY/EXIT after declare retirement'
     );
 
     my $lib_file_meta = $descr->{spec}{lib_file}{meta}{action_rewriter};
@@ -42654,12 +42649,12 @@ subtest 'lib_reader_spec_prefers_canonical_container_wrappers_in_reader_band' =>
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for wrapper migration inspection');
-    ok(index($source_content, '.substr(scalar(groupname), "\"", "", go)') >= 0, 'lib_reader group reader now uses scalar(groupname) in regex-subst cleanup');
+    ok(index($source_content, 'substr(scalar(groupname), "\"", "", go)') >= 0, 'lib_reader group reader now uses scalar(groupname) in regex-subst cleanup');
     ok(index($source_content, 'LX          {return(array_copy(array(lib_file)))}') >= 0, 'lib_reader top lifecycle return now uses helper-form array snapshot return');
     like($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_copy\(array\(group\)\)\)\)/, 'lib_reader group return now uses combined scalar()/array() wrappers plus array_copy');
     like($source_content, qr/LX \{say\("GROUP <", scalar\(grouptype\), ">\(", scalar\(groupname\), "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
     like($source_content, qr/exit_now\(1\)/, 'lib_reader group syntax-error path now uses exit_now(1)');
-    like($source_content, qr/\.split\(array\(value_items\), scalar\(value\), \/,\//, 'lib_reader cattribute splitter now uses canonical array/scalar wrappers');
+    like($source_content, qr/split\(array\(value_items\), scalar\(value\), \/,\//, 'lib_reader cattribute splitter now uses canonical array/scalar wrappers');
     unlike($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_(?:values|copy)\(a\(group\)\)\)\)/, 'lib_reader group return no longer uses retired s()/a() aliases in the migrated band');
     unlike($source_content, qr/return\s+\\\@lib_file|\bexit\s+1\b/, 'lib_reader migrated lifecycle paths no longer use compatibility return-ref or bare exit syntax');
 };
@@ -42680,23 +42675,22 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
 
     my $top_meta = $descr->{spec}{sdc_esplit}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
-        'sdce sdc_esplit canonical action-IR nodes include DECLARE/ASSIGN/PUSH/RETURN after helper migration'
+        'sdce sdc_esplit canonical action-IR nodes include ASSIGN/PUSH/RETURN after declare retirement'
     );
 
     my $get_meta = $descr->{spec}{get_pinport}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$get_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CAPTURE_SLICE' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'INPUT_SLICE_READ' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$get_meta->{canonical_action_ir_nodes}}),
-        'sdce get_pinport canonical action-IR nodes include DECLARE/ASSIGN/CALL/INPUT_SLICE/SPLIT/FILTER_NONEMPTY/RETURN after helper migration'
+        'sdce get_pinport canonical action-IR nodes include ASSIGN/CALL/CAPTURE_SLICE/INPUT_SLICE/SPLIT/FILTER_NONEMPTY/RETURN after declare retirement'
     );
 
     my $oc_meta = $descr->{spec}{oc_brace}{meta}{action_rewriter};
@@ -42719,7 +42713,7 @@ subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'sdce source spec text is available for wrapper migration inspection');
-    like($source_content, qr/sdc_esplit:: I \{declare\(array, pieces\); declare\(scalar, retv\); start_capture_slice\(\)\}/, 'sdce top band now prefers start_capture_slice() for explicit anonymous capture-boundary initialization');
+    like($source_content, qr/sdc_esplit:: I \{pieces = \[\]; retv = undef; start_capture_slice\(\)\}/, 'sdce top band now prefers terse initialization plus start_capture_slice() for explicit anonymous capture-boundary initialization');
     unlike($source_content, qr/assign\(scalar\(IPOS\), 0\)/, 'sdce top band no longer uses direct IPOS initialization');
     like($source_content, qr/LS\s+\{assign\(scalar\(retv\), capture_slice\(\)\); push_value\(array\(pieces\), scalar\(retv\)\)\}/, 'sdce top split band now prefers capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/LS\s+\{assign\(scalar\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(array\(pieces\), scalar\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
@@ -42746,7 +42740,7 @@ subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for capture-slice marker inspection');
-    like($source_content, qr/logging_annotation: .*?I \{declare\(scalar, logging_name=entry_group\(0\)\); start_capture_slice\(\)\}/, 'ebnf logging_annotation now initializes the anonymous capture boundary explicitly');
+    like($source_content, qr/logging_annotation: .*?I \{logging_name = entry_group\(0\); start_capture_slice\(\)\}/, 'ebnf logging_annotation now initializes the name and anonymous capture boundary explicitly');
     unlike($source_content, qr/logging_annotation: .*?\@capture_slice/, 'ebnf logging_annotation no longer relies on the paragraph-level @capture_slice marker');
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
     like($source_content, qr/push\(quoted_string, 1\);\s+start_capture_slice\(\)/, 'ebnf logging_annotation advances the capture boundary after indexed quoted-string child results');
@@ -42879,13 +42873,12 @@ subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
 
     my $meta = $descr->{spec}{pplugin_top}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'NEXT' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'pplugin_top canonical action-IR nodes include DECLARE/ASSIGN/NEXT/CALL/IF/RETURN after helper migration'
+        'pplugin_top canonical action-IR nodes include ASSIGN/NEXT/CALL/IF/RETURN after declare retirement'
     );
 
     my $subdef_meta = $descr->{spec}{subdef}{meta}{action_rewriter};
@@ -42936,7 +42929,7 @@ subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_ba
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'pplugin source spec text is available for alias migration inspection');
-    like($source_content, qr/I \{declare\(array, defs\); declare\(scalar, retv\)\}/, 'pplugin top setup now declares working state through helper-form declarations');
+    like($source_content, qr/I \{defs = \[\]; retv = undef\}/, 'pplugin top setup now initializes working state through terse assignments');
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'pplugin comment edge now uses helper-form next()');
     like($source_content, qr/-> subdef\s+\{assign\(scalar\(retv\), call\(subdef\)\)\}/, 'pplugin subdef edge now uses helper-form assignment');
     like($source_content, qr/if\(is_defined\(scalar\(retv\)\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
@@ -43077,11 +43070,11 @@ subtest 'simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback' => sub 
     is_deeply($top_meta->{raw_perl_dependency_statements}, [], 'simenv top exposes no raw-Perl fallback statements');
     is($top_meta->{unresolved_helper_count}, 0, 'simenv top avoids unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
-        'simenv top canonical action-IR nodes include DECLARE/IF/PUSH/RETURN after helper migration'
+        'simenv top canonical action-IR nodes include ASSIGN/IF/PUSH/RETURN after declare retirement'
     );
     ok($top_meta->{language_agnostic_action_ir_ready}, 'simenv top is language-agnostic action-IR ready');
 
@@ -43091,11 +43084,11 @@ subtest 'simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback' => sub 
     is_deeply($any_meta->{raw_perl_dependency_statements}, [], 'simenv anyvariable exposes no raw-Perl fallback statements');
     is($any_meta->{unresolved_helper_count}, 0, 'simenv anyvariable avoids unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$any_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$any_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$any_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PRINT' } @{$any_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$any_meta->{canonical_action_ir_nodes}}),
-        'simenv anyvariable canonical action-IR nodes include DECLARE/REGEX_SUBST/PRINT/RETURN after helper migration'
+        'simenv anyvariable canonical action-IR nodes include ASSIGN/REGEX_SUBST/PRINT/RETURN after declare retirement'
     );
     ok($any_meta->{language_agnostic_action_ir_ready}, 'simenv anyvariable is language-agnostic action-IR ready');
 
@@ -43112,9 +43105,9 @@ subtest 'simenv_token_readers_prefer_entry_text' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'simenv source spec text is available for token-reader helper inspection');
-    like($source_content, qr/anyvariable: .*?declare\(scalar, variable_name=entry_text\(\)\);/s, 'simenv anyvariable now prefers entry_text() for the immediate token read');
-    like($source_content, qr/variable_substitution: .*?declare\(scalar, variable_name=entry_text\(\)\);/s, 'simenv variable_substitution now prefers entry_text() for the immediate token read');
-    like($source_content, qr/comments: .*?declare\(scalar, comment_text=entry_text\(\)\);/s, 'simenv comments now prefers entry_text() for the immediate token read');
+    like($source_content, qr/anyvariable: .*?variable_name = entry_text\(\);/s, 'simenv anyvariable now prefers terse entry_text() assignment for the immediate token read');
+    like($source_content, qr/variable_substitution: .*?variable_name = entry_text\(\);/s, 'simenv variable_substitution now prefers terse entry_text() assignment for the immediate token read');
+    like($source_content, qr/comments: .*?comment_text = entry_text\(\);/s, 'simenv comments now prefers terse entry_text() assignment for the immediate token read');
     unlike($source_content, qr/declare\(scalar, variable_name=scalar\(IMATCH\)\);/, 'simenv migrated token readers no longer rely on scalar(IMATCH) for variable-name capture');
 };
 subtest 'simenv_begin_end_blocks_prefers_line_helpers' => sub {
@@ -43189,10 +43182,10 @@ subtest 'simenv_remaining_compatibility_source_prefers_helpers' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'simenv source spec text is available for final compatibility-source inspection');
-    like($source_content, qr/top::\s+I \{declare\(array, blocks\); declare\(scalar, retv\)\}/, 'simenv top now declares retv through helper-form declaration');
+    like($source_content, qr/top::\s+I \{blocks = \[\]; retv = undef\}/, 'simenv top now initializes working state through terse assignments');
     like($source_content, qr/assign\(scalar\(retv\), call\(begin_end_blocks\)\)/, 'simenv top now assigns child block calls through helper-form assignment');
     like($source_content, qr/push_value\(array\(keyval_pairs\), call\(multiline_value\)\)/, 'simenv begin_end_blocks now appends multiline values through push_value');
-    like($source_content, qr/declare\(scalar, last_pos=capture_slice_pos\(\), shift\)/, 'simenv substitution readers initialize position tracking with capture_slice_pos()');
+    like($source_content, qr/last_pos = capture_slice_pos\(\); shift = undef/, 'simenv substitution readers initialize position tracking with terse capture_slice_pos() assignment');
     like($source_content, qr/assign\(scalar\(last_pos\), cursor_pos\(\)\)/, 'simenv substitution readers advance position tracking with cursor_pos()');
     like($source_content, qr/input_slice\(scalar\(last_pos\), scalar\(shift\)\)/, 'simenv verbatim slices now use input_slice()');
     like($source_content, qr/print_each\(array\(matches\), "perl_command_substitution:<<", ">>\\n"\)/, 'simenv debug match loops now use print_each()');
@@ -43252,10 +43245,10 @@ subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
 
     my $curlyb_meta = $descr->{spec}{curlyb}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CALL' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$curlyb_meta->{canonical_action_ir_nodes}}),
-        'Lispish curlyb canonical action-IR nodes include DECLARE/ASSIGN/RETURN after helper migration'
+        'Lispish curlyb canonical action-IR nodes include ASSIGN/CALL/RETURN after declare retirement'
     );
 
     my $top_meta = $descr->{spec}{Lispish}{meta}{action_rewriter};
@@ -43282,13 +43275,12 @@ subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($meta->{raw_perl_dependency_statements}, [], 'Lispish parenthesis exposes no raw-Perl fallback statements');
     is($meta->{unresolved_helper_count}, 0, 'Lispish parenthesis avoids unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'Lispish parenthesis canonical action-IR nodes include DECLARE/ASSIGN/PUSH/IF/CALL/RETURN after helper migration'
+        'Lispish parenthesis canonical action-IR nodes include ASSIGN/PUSH/IF/CALL/RETURN after declare retirement'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'Lispish parenthesis is language-agnostic action-IR ready');
 };

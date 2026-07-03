@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — SPEC-FORMAT-TERSE.6.2.1 — remove declare from shipped specs
+
+**Scope:** 13 shipped `.spec` files plus stale phase0 expectations and the task/live tracking docs. No runtime
+`declare(...)` implementation support was expanded.
+
+**What changed:** Removed active `declare(...)` and fluent `.declare(...)` use from `BNF`, `ds_vhistory`, `ebnf`,
+`hlink_substitution`, `lib_reader`, `Lispish`, `portmap`, `pplugin`, `sdce`, `simenv`, `spec`, `tablegrep`, and
+`vhdl`. The replacements use the landed terse surface: scalar assignments, explicit `undef` resets, array reset
+shape literals, and structured lifecycle blocks where an old fluent declaration chain needed ordered follow-up
+statements.
+
+**Evidence:** `rg -n 'declare\(|\.declare\(' specs` is clean. Focused descriptor compilation passes for all
+edited shipped specs, `prove -q -Iperl t/phase0_regression.t` passes with **1018** tests, Rust `corpus_oracle`
+passes over **66 fixtures**, `mdbook build docs/linkedspec-book` passes, and the full local CI gate passes. The
+next frontier is `SPEC-FORMAT-TERSE.6.2.2` for old helper spelling cleanup; the broader user directive to
+audit/backfill useful type methods, including string `substr()`, is tracked as future `SPEC-FORMAT-TERSE.7.1`
+backlog before implementation.
+
 ## 2026-07-03 — SPEC-FORMAT-TERSE.6.1 — own declare retirement migration
 
 **Scope:** Terse-format task tree, task-tree index, roadmap/live docs, mdBook guidance, memory pointer, and

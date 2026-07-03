@@ -5,8 +5,13 @@
 # --------------------------------------------
 
 vhistory::  I {
-declare(array, vhistory, capt, object_hier);
-declare(scalar, cur_object, first_capt, entry_tag, current_object_name)
+vhistory = [];
+capt = [];
+object_hier = [];
+cur_object = undef;
+first_capt = undef;
+entry_tag = undef;
+current_object_name = undef
 }
 LX  {
  if(is_nonempty(array(capt)));

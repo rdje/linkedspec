@@ -66,9 +66,9 @@
 
 spec_file::
  I {
-  declare(array, paragraphs);
-  declare(array, current);
-  declare(scalar, started=0)
+  paragraphs = [];
+  current = [];
+  started = 0
  }
  -> rule_header {
   if(scalar(started)) {
@@ -100,7 +100,7 @@ spec_file::
 # ---- rule header: `Name:` (body rule) or `Name::` (top rule) + optional mode --
 rule_header: /(\w++)[ \t]*(::|:)[ \t]*((?:&|\||\+|\*|\?|OR\+|OR\{[^}]++\}|OR|AND\+|AND\{[^}]++\}|AND)?)/
  I {
-  declare(scalar, top=0);
+  top = 0;
   if(str_eq(entry_group(1), "::")) { assign(scalar(top), 1) }
   return(hash("type", "rule", "label", entry_group(0), "top", scalar(top), "mode", entry_group(2)))
  }

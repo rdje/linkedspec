@@ -1,4 +1,4 @@
-pplugin_top::   I {declare(array, defs); declare(scalar, retv)}
+pplugin_top::   I {defs = []; retv = undef}
  -> comment       {next()}
  -> subdef        {assign(scalar(retv), call(subdef))}
 

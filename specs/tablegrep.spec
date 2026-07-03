@@ -5,8 +5,8 @@ grep::
  -> group	{assign(scalar(retv), call(group))}
 
 I {
- declare(array, internal);
- declare(scalar, prev_node_type)
+ internal = [];
+ prev_node_type = undef
 }
 
 LX {
@@ -15,7 +15,7 @@ LX {
  endif();
  return(array_copy(array(internal)))
 }
-LS {declare(scalar, retv)}
+LS {retv = undef}
 LE {
  if(not(scalar(retv)));
   return_undef();
@@ -46,11 +46,11 @@ group:	/\(/ /\)/
  }
 
 I {
- declare(array, internal);
- declare(scalar, prev_node_type)
+ internal = [];
+ prev_node_type = undef
 }
 
-LS {declare(scalar, retv)}
+LS {retv = undef}
 LE {
  if(not(scalar(retv)));
   return_undef();
@@ -69,9 +69,11 @@ LE {
 
 re_term: /((?:\w+|\[\d+\]))\s*([!=])~\s*\/(.+?)(?<!\\)\//
 I {
- declare(scalar, field=entry_group(0), sens=entry_group(1), re=entry_group(2));
+ field = entry_group(0);
+ sens = entry_group(1);
+ re = entry_group(2);
  if(matches(scalar(field), /^\[\d+\]$/o));
-  declare(scalar, subscript=scalar(field));
+  subscript = scalar(field);
   substr(scalar(subscript), /^\[(\d+)\]$/, "$1", o);
   return(hash("type", "STERM", "field", scalar(subscript), "sens", scalar(sens), "re", scalar(re)));
  else();

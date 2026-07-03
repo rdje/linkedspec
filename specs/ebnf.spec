@@ -2,8 +2,12 @@
 # This spec will parse EBNF-style grammar definitions
 
 grammar_file:: I {
-  declare(array, rules, rule, includes, semantic_annotations);
-  declare(scalar, rule, on)
+  rules = [];
+  rule = [];
+  includes = [];
+  semantic_annotations = [];
+  rule = undef;
+  on = undef
 }
 
 LX {
@@ -164,9 +168,9 @@ LX {
 grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/  I.return(array("rule", entry_group(0)))
 rule_name: /\b[[:alpha:]_]\w*/                      I.return(array("rule_reference", entry_text()))
 
-quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(scalar(value), "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", scalar(value)))
+quoted_string: /"[^"]*"|'[^']*'/  I {value = entry_text(); substr(scalar(value), "^(?:'|\")|(?:'|\")$", "", go); return(array("quoted_string", scalar(value)))}
 number: /\b\d+\b/                 I.return(array("number", entry_text()))
-quantifier: /\{\s*(?:\d+(?:\s*,\s*\d*)?|,\s*\d+)\s*\}/  I.declare(scalar, value=entry_text()).substr(scalar(value), "\\{|\\}", "", go).return(array("quantifier", scalar(value)))
+quantifier: /\{\s*(?:\d+(?:\s*,\s*\d*)?|,\s*\d+)\s*\}/  I {value = entry_text(); substr(scalar(value), "\\{|\\}", "", go); return(array("quantifier", scalar(value)))}
 pipe_operator: /\|/               I.return(array("operator", entry_text()))
 plus_operator: /\+/               I.return(array("operator", entry_text()))
 star_operator: /\*/               I.return(array("operator", entry_text()))
@@ -176,17 +180,17 @@ return_array: /->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&conte
 return_object: /->\s*\K(?&object_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/ I.return(array("return_object", entry_text()))
 open_paren: /\(/                  I.return(array("group_open", entry_text()))
 close_paren: /\)/                 I.return(array("group_close", entry_text()))
-probability: /@\d+%?/             I.declare(scalar, value=entry_text()).substr(scalar(value), "@|%", "", go).return(array("probability", scalar(value)))
-regex: /(?<!\\)\/.+?(?<!\\)\//    I.declare(scalar, value=entry_text()).substr(scalar(value), "^/|/$", "", go).return(array("regex", scalar(value)))
+probability: /@\d+%?/             I {value = entry_text(); substr(scalar(value), "@|%", "", go); return(array("probability", scalar(value)))}
+regex: /(?<!\\)\/.+?(?<!\\)\//    I {value = entry_text(); substr(scalar(value), "^/|/$", "", go); return(array("regex", scalar(value)))}
 whitespace: /\s+/
 comment: /#.*/
-include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(scalar(args), "^\s*(?:include_)?dir\(\s*", "", g).substr(scalar(args), "\s*\)\s*$", "", g).declare(array, parts).split(array(parts), scalar(args), /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts)).return(array("include_dir", array_copy(array(parts))))
-include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(scalar(args), "^\s*(?:include(?:_file)?|file)\(\s*", "", g).substr(scalar(args), "\s*\)\s*$", "", g).declare(array, parts).split(array(parts), scalar(args), /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts)).return(array("include_file", array_copy(array(parts))))
+include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr(scalar(args), "^\s*(?:include_)?dir\(\s*", "", g); substr(scalar(args), "\s*\)\s*$", "", g); parts = []; split(array(parts), scalar(args), /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array("include_dir", array_copy(array(parts))))}
+include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr(scalar(args), "^\s*(?:include(?:_file)?|file)\(\s*", "", g); substr(scalar(args), "\s*\)\s*$", "", g); parts = []; split(array(parts), scalar(args), /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array("include_file", array_copy(array(parts))))}
 
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(scalar(c), "\s*$", "", o); substr(scalar(c), "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), scalar(c))))}
+-> semantic_annotation | grammar_rule {BACKTRACK(); c = capture_slice(); substr(scalar(c), "\s*$", "", o); substr(scalar(c), "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), scalar(c))))}
 
-logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {declare(scalar, logging_name=entry_group(0)); start_capture_slice()}
+logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {logging_name = entry_group(0); start_capture_slice()}
 
 -> quoted_string {
   push(quoted_string, 1);

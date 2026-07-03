@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **SPEC-FORMAT-TERSE.6.2.1 — shipped specs no longer use `declare(...)`**
+  (SHIPPED-SPEC MIGRATION; NO RUNTIME DECLARE EXPANSION).
+  Removed active `declare(...)` and fluent `.declare(...)` use from the 13 shipped specs inventoried by `.6.1`.
+  Replacement forms use the landed terse surface: `name = value`, `name = undef`, `items = []`, and structured
+  lifecycle blocks where old fluent declaration chains needed ordered follow-up statements.
+
+  **Verification:** `rg -n 'declare\(|\.declare\(' specs` is clean; focused descriptor compilation passes for all
+  edited shipped specs; phase0 passes with **1018** tests; Rust `corpus_oracle` passes over **66 fixtures**;
+  mdBook builds; full local CI passes.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.6.2.2` — migrate old helper spellings (`assign`, `push_value`,
+  `array_copy`/`hash_copy`, `concat`, etc.) after the declaration-only slice is committed.
+
+  **Backlog captured:** the supported-type method audit, including the user's explicit string `substr()` method
+  directive, is tracked as `SPEC-FORMAT-TERSE.7.1` after the `.6` migration lane unless explicitly reprioritized.
+
 - 2026-07-03: **SPEC-FORMAT-TERSE.6.1 — declaration retirement migration owned**
   (TRACKING/PUBLIC-GUIDANCE SLICE; NO `.spec` FILE CHANGED).
   The directive that `declare(...)` shall not be used in spec files is now owned under the existing terse-format

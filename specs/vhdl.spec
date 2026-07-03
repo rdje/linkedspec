@@ -12,14 +12,14 @@ vhdl_file::
 LX {return(array_copy(array(vhdl_file)))}
 
 
-comment:        /--.*/                         I.declare(scalar, text=entry_text()).return(scalar(text))
-space:          /\s+/                          I.declare(scalar, text=entry_text()).return(scalar(text))
+comment:        /--.*/                         I {text = entry_text(); return(scalar(text))}
+space:          /\s+/                          I {text = entry_text(); return(scalar(text))}
 dquote_string:  /"(.+?)(?<!")"/                I.return(array("?dquote_string:", flat_array(entry_groups())))
 library_clause: /(?is)\blibrary\s+(.+?)\s*;/   I.return(array("?library_clause:", flat_array(entry_groups())))
 use_clause:     /(?is)\buse\s+(.+?)\s*;/       I.return(array("?use_clause:", flat_array(entry_groups())))
 
 entity_declaration:    /(?i)\bentity\s+(\w+)\s+is\b/ /(?i)\bend\b(?:\s+entity\b)?(?:\s+\w+)?\s*;/
-I {declare(array, entity_header_parts)}
+I {entity_header_parts = []}
 -? push
 -> comment               .push
 -> dquote_string         .push
@@ -31,7 +31,7 @@ I {declare(array, entity_header_parts)}
 }
 
 architecture_body: /(?i)\barchitecture\s+(\w+)\s+of\s+(\w+)\s+is\b/ /(?i)\bbegin\b/ /(?i)\bend\b(?:\s+architecture\b)?(?:\s+\w+)?\s*;/
-I {declare(array, architecture_header_parts)}
+I {architecture_header_parts = []}
 -> comment                              .push
 -> dquote_string                        .push
 -> space                                .push
@@ -97,7 +97,7 @@ block_statement: /(?i)(?:(\w+)\s*:\s*)?\bblock\b/ /(?i)\bend\s+block\b.*?;/
 -> block_statement[1]  .return(array("?block_statement:", flat_array(entry_groups())))
 
 component_instantiation_statement: /(?i)(\w+)\s*:\s*(?:entity\s+(\S+)(?:\s+\(\s*(\S+)\s*\))?|configuration\s+(\w+)|(?:component\s+)?(\w+))/  /;/
-I {declare(array, instantiation_parts)}
+I {instantiation_parts = []}
 -> comment                                 .push
 -> dquote_string                           .push
 -> space                                   .push
@@ -129,7 +129,7 @@ port_map_aspect: /(?i)port\s+map\s*\(/  /\)/
 # by a port_map_aspect. I know it is not ** elegant ** but...
 association_element: /(?is)(\w+)\s*=>\s*(.+?)(?=\s*(?:,|\)\s*(?:;|port\b)))/  I.return(array("?association_element:", flat_array(entry_groups())))
 
-process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\bend(?:\s+postponed)?\s+process\b.*?;/  I {declare(scalar, pos_begin, process_statement_part)}
+process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\bend(?:\s+postponed)?\s+process\b.*?;/  I {pos_begin = undef; process_statement_part = undef}
 -> comment                              .push
 -> dquote_string                        .push
 -> subprogram_body                      .push
@@ -165,7 +165,7 @@ component_declaration:    /(?i)\bcomponent\s+(\w+)\s+is\b/ /(?i)\bend\b(?:\s+com
 
 
 package_declaration:    /(?i)\bpackage\s+(\w+)\s+is\b/ /(?i)\bend\b(?!\s+component\b)(?:\s+package\b)?(?:\s+\w+)?\s*;/ 
-I {declare(array, imatch_copy)}
+I {imatch_copy = []}
 
 -> comment                    .push
 -> dquote_string              .push
@@ -226,7 +226,7 @@ block_configuration: /(?i)\bfor\b(?!\s+generate)/  /(?i)end\s+for\s*;/
 subprogram_declaration:    /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s*;/ I.return(array("?subprogram_declaration:", flat_array(entry_groups())))
 
 subprogram_body:           /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s+is\b/   /(?i)\bbegin\b/ /(?is)\bend\b.*?;/
-I {declare(scalar, pos_begin, subprogram_statement_part); declare(array, subprogram_statement_tokens)}
+I {pos_begin = undef; subprogram_statement_part = undef; subprogram_statement_tokens = []}
 
 
 -> comment 
@@ -292,24 +292,25 @@ port_clause:   /(?i)\bport\s*\(/ /\)\s*;/
 
 
 interface_signal_declaration: /(\w+)\s*:\s*(\w+)\s+(\w+)/ /\s*;|\s*(?=\)\s*;)/
-I {declare(array, port_decl_parts)}
+I {port_decl_parts = []}
 -> signal_decl_range                 {assign(array(port_decl_parts), entry_groups()); push_value(array(port_decl_parts), call(signal_decl_range))}
 -> interface_signal_declaration[1]   {assign(array(port_decl_parts), entry_groups()); return(array("?port_decl:", array_copy(array(port_decl_parts))))}
 
 
-signal_decl_range: /\(/ /\)/ I {declare(array, capt, msi_lsi)}
+signal_decl_range: /\(/ /\)/ I {capt = []; msi_lsi = []}
 LS {push_value(array(capt), capture_slice())}
 LE {start_capture_slice()}
 
 -> opar_cpar              {
-   declare(scalar, pos1, pos2);
+   pos1 = undef;
+   pos2 = undef;
    assign(scalar(pos1), pos($$STRING)-1);
    call(opar_cpar);
    assign(scalar(pos2), cursor_pos());
    push_value(array(capt), substr($$STRING, $pos1, $pos2-$pos1))
 }
 -> downto_or_to           {
-   declare(scalar, msi_lsi);
+   msi_lsi = undef;
    assign(scalar(msi_lsi), join_values("", array(capt)));
    substr(scalar(msi_lsi), /^\s+|\n\s*|\s+$/, //, goi);
    push_value(array(msi_lsi), scalar(msi_lsi));
@@ -317,7 +318,7 @@ LE {start_capture_slice()}
 } 
 -> signal_decl_range[1]   {
    if(not(is_empty(array(capt))));
-    declare(scalar, msi_lsi);
+    msi_lsi = undef;
     assign(scalar(msi_lsi), join_values("", array(capt)));
     if(scalar(msi_lsi));
      substr(scalar(msi_lsi), /^\s+|\n\s*|\s+$/, //, goi);
@@ -333,7 +334,7 @@ type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/
 
 -> record_endrecord
 -> type_declaration[1]      {
-	declare(scalar, type_definition);
+	type_definition = undef;
 	assign(scalar(type_definition), CAPTURE);
 	return(array("?type_declaration:", flat_array(entry_groups()), scalar(type_definition)))}
 record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
@@ -341,19 +342,24 @@ record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 
 subtype_declaration:  /(?is)\bsubtype\s+(\w+)\s+is\s+(.+?)\s*;/                     I.return(array("?subtype_declaration:", flat_array(entry_groups())))
 constant_declaration: /(?is)\bconstant\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/   I {
-  declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), expression=entry_group(2));
+  identifier_list = entry_group(0);
+  subtype_indication = entry_group(1);
+  expression = entry_group(2);
 
   return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?constant_declaration:", scalar(subtype_indication), scalar(expression)))
 }
 
 variable_declaration: /(?is)\b(?:shared\s+)?variable\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/ I {
-  declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), expression=entry_group(2));
+  identifier_list = entry_group(0);
+  subtype_indication = entry_group(1);
+  expression = entry_group(2);
 
   return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?variable_declaration:", scalar(subtype_indication), scalar(expression)))
 }
 
 file_declaration: /(?is)\bfile\s+(.+?)\s*:\s*(.+?)\s*;/ I {
-  declare(scalar, identifier_list=entry_group(0), remainder_info=entry_group(1));
+  identifier_list = entry_group(0);
+  remainder_info = entry_group(1);
 
   return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?file_declaration:", scalar(remainder_info)))
 }
@@ -365,13 +371,18 @@ group_template_declaration: /(?is)group\s+(\w+)\s+is\s+\(\s*(.+?)\s*\)\s*;/     
 group_declaration:          /(?is)group\s+(\w+)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*;/    I.return(array("?group_declaration:", flat_array(entry_groups())))
 
 signal_declaration: /(?is)\bsignal\s+(.+?)\s*:\s*(.+?)(?:\s+(register|bus))?(?:\s*:=\s*(.+?))?\s*;/ I {
-  declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), signal_kind=entry_group(2), expression=entry_group(3));
+  identifier_list = entry_group(0);
+  subtype_indication = entry_group(1);
+  signal_kind = entry_group(2);
+  expression = entry_group(3);
 
   return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?signal_declaration:", scalar(subtype_indication), scalar(signal_kind), scalar(expression)))
 }
 
 configuration_specification: /(?is)\bfor\s+(.+?)\s*:\s*(\w+)\s+(.+?)\s*;/ I {
-  declare(scalar, instantiation_list=entry_group(0), component_name=entry_group(1), binding_indication=entry_group(2));
+  instantiation_list = entry_group(0);
+  component_name = entry_group(1);
+  binding_indication = entry_group(2);
 
   return(split_tagged_records(scalar(instantiation_list), /\s*,\s*/o, "?configuration_specification:", scalar(component_name), scalar(binding_indication)))
 }

@@ -1,4 +1,4 @@
-substitute_top::   I        {declare(scalar, retv); declare(array, word_items)}
+substitute_top::   I        {retv = undef; word_items = []}
  -> substitute_statement2   {assign(scalar(retv), call(substitute_statement2))}
  -> curlyb                  {assign(scalar(retv), call(curlyb))}
  -> raw_string              {assign(scalar(retv), call(raw_string))}

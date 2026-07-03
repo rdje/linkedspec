@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (SPEC-FORMAT-TERSE.6.2.1 — shipped specs declare-free):
+  The first shipped-spec declaration migration is intentionally narrow. It removes `declare(...)` / `.declare(...)`
+  without broadening runtime declaration support and without mixing in the remaining verbose helper families.
+  Preserving behavior mostly means choosing the corresponding terse initialization form: scalars use `name = value`
+  or `name = undef`, arrays use `items = []`, and old fluent lifecycle chains become structured blocks when later
+  operations must remain ordered (`I { value = entry_text(); ...; return(...) }`). Existing wrappers and helper
+  names such as `scalar(...)`, `array(...)`, `assign(...)`, `push_value(...)`, `array_copy(...)`, and `concat(...)`
+  are deliberately left for `.6.2.2`/`.6.2.3`, so the no-`declare` proof stays crisp: shipped specs compile, phase0
+  is 1018 green, and Rust `corpus_oracle` is green over 66 fixtures. The user's broader method-surface directive is
+  tracked as `.7`: inventory supported types first, then verify/backfill methods such as string `substr()` before
+  code.
+
 - 2026-07-03 (SPEC-FORMAT-TERSE.6.1 — declaration retirement owned):
   The active terse-format gap is not a Rust runtime `declare` initializer problem. The directive is language-surface
   cleanup: `declare(...)` shall not be used in spec files because `.1.1` auto-existing variables, `.1.3` mutation

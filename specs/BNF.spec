@@ -16,26 +16,26 @@ description::			I {print("HELLO\n")}
  -> g_repetition
  
 construction_start:	/[a-zA-Z_]\w*\s*->/	I {
-	declare(scalar, text=entry_text());
+	text = entry_text();
 	substr(scalar(text), "\\s*->$", "", o);
 	print("(construction_start)         -I- seen(", scalar(text), ")\n")
 }
 
 node: 			/[a-zA-Z_]\w*/		I {print("(node)         -I- <", entry_text(), ">\n")}
 dquote_str:		/"[^"]+"/		I {
-	declare(scalar, text=entry_text());
+	text = entry_text();
 	substr(scalar(text), "^(?:\")|(?:\")$", "", go);
 	print("(dquote_str)         -I- seen(", scalar(text), ")\n")
 }
 
 squote_str:		/'[^']+?'/		I {
-	declare(scalar, text=entry_text());
+	text = entry_text();
 	substr(scalar(text), "^'|'$", "", go);
 	print("(squote_str)         -I- seen(", scalar(text), ")\n")
 }
 
 regex:			/\/.+\//		I {
-	declare(scalar, text=entry_text());
+	text = entry_text();
 	substr(scalar(text), "^/|/$", "", go);
 	print("(regex)         -I- seen#", scalar(text), "#\n")
 }

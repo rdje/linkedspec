@@ -4,7 +4,7 @@ Lispish::
  -> comments
 
 parenthesis: /\(/ /\)/
-I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
+I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
 
  -> parenthesis       {
    if(is_nonempty(array(word)));
@@ -70,7 +70,7 @@ dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_
 
 squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
 
-curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {declare(scalar, content)}
+curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {content = undef}
  -> curlyb
  -> dquotes
  -> squotes
