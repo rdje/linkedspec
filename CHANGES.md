@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.1 — split batch-2 oracle lanes and timeout owner
+
+**Scope:** Task-tree/index, roadmap companion, live docs, memory pointer, and Knowledge Map. No parser, runtime,
+oracle generator, corpus fixture, or mdBook user-facing behavior changed.
+
+**What changed:** Split the broad `RUST-PARITY.7.3` shipped-spec oracle batch into narrower leaves before code,
+and made the timeout/hang question the immediate owned frontier. `.7.3.2` now owns trace-first timeout/hang
+investigation with LinkedSpec's toolbox; `.7.3.3` tries remaining `hlink_substitution` delimiter/link-path
+fixtures; `.7.3.4` triages the recorded `portmap` / `lib_reader` / `ebnf` structural mismatches; `.7.3.5`
+triages the recorded `BNF` / `DT` / `ifelse` / `operators_try` / `spec.spec` null-output or action-parser-warning
+candidates; and `.7.3.6` audits RTL/plugin legacy specs after the timeout concern is resolved or retired.
+
+**Evidence:** The audit read the active `RUST-PARITY` task tree, current oracle generator, corpus README, corpus
+runner, and Knowledge Map oracle card. The generator already has the hard `alarm(...)` guard; the committed corpus
+is green at 65 fixtures; `.7.2` already recorded the concrete divergences that justify splitting instead of
+bundling broad fixture work. The timeout leaf records the project toolbox requirement: use the fork+SIGKILL
+hard-timeout census for true hangs because `alarm()` cannot interrupt a catastrophic regex opcode, then use
+`LINKEDSPEC_TRACE_LEVEL=debug`, per-call trace options, and parser-source dumps against a live reproducer.
+
+**Checks:** `knowledge-map/scripts/check_knowledge_map.sh`; `scripts/check_memory_architecture.sh`;
+`scripts/check_doctrines.sh`; and `git diff --check` all passed.
+
 ## 2026-07-03 — STAGED-LINKED-PARSING.5.6 — prove function-body staged prototype
 
 **Scope:** Focused Perl/Rust end-to-end tests, mdBook staged parsing overview/example text, task tree/index,

@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.1 — batch-2 oracle lane split + timeout owner):
+  `RUST-PARITY.7.3` should not be implemented as one broad shipped-spec corpus slice. The current oracle generator
+  already has the required hard `alarm(...)` timeout, and the corpus runner is green over 65 fixtures. `.7.2`
+  recorded enough concrete divergence evidence to split the remaining batch before touching generator/runtime code:
+  make the timeout/hang question first, then keep `hlink_substitution` delimiter/link-path attempts separate,
+  triage `portmap`/`lib_reader`/`ebnf` structural mismatches separately, triage `BNF`/`DT`/`ifelse`/
+  `operators_try`/`spec.spec` null-output or action-parser-warning candidates separately, and isolate
+  RTL/plugin/legacy safety smokes until after the timeout concern is resolved or retired. `TOOLBOX.md` is explicit:
+  a true hang uses the fork+SIGKILL hard-timeout census first because `alarm()` cannot interrupt a catastrophic
+  regex opcode; trace/debug and parser-source dumps come next on the exact live reproducer. Future `.7.3.*` leaves
+  should either land green fixtures or record exact divergence evidence and split a narrower implementation owner
+  before changing Rust behavior.
+
 - 2026-07-03 (STAGED-LINKED-PARSING.5.6 — function-body staged prototype proof):
   The first staged linked parsing prototype is now proven end to end rather than merely wired. The proof sample
   exercises four user functions with scalar, multi-param, array-local, and hash-local bodies. Perl descriptor

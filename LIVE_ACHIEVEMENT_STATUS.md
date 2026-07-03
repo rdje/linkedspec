@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.1 — batch-2 shipped-spec oracle lanes split and timeout owner assigned**
+  (NO RUNTIME/CORPUS CODE CHANGE; TASK-TREE OWNERSHIP BEFORE THE NEXT ORACLE BATCH).
+  The broad `RUST-PARITY.7.3` leaf is now split into narrower executable lanes before any generator, corpus, or
+  Rust behavior change. The split preserves `.7.2`'s recorded divergence evidence and makes timeout/hang debugging
+  the immediate owned frontier: `.7.3.2` verifies whether the referenced `RTLUtils`/oracle timeout is live or stale
+  with LinkedSpec's toolbox and trace surfaces, `.7.3.3` tries remaining `hlink_substitution` delimiter/link-path
+  fixtures, `.7.3.4` handles `portmap` / `lib_reader` / `ebnf` structural mismatches, `.7.3.5` handles `BNF` /
+  `DT` / `ifelse` / `operators_try` / `spec.spec` null-output or action-parser-warning candidates, and `.7.3.6`
+  covers RTL/plugin/legacy shipped-spec smokes after the timeout concern is resolved or retired.
+
+  **Verification:** task-tree/KM context read; oracle generator, corpus README, and corpus runner audited;
+  `TOOLBOX.md` hang protocol re-read; Knowledge Map, memory, doctrine, and whitespace gates PASS. No
+  parser/runtime/corpus code changed.
+
+  **Frontier:** `RUST-PARITY.7.3.2` — debug the timeout/hang risk first with fork+SIGKILL census plus trace on a
+  live reproducer, then fix or retire stale timeout wording before broad corpus expansion.
+
 - 2026-07-03: **STAGED-LINKED-PARSING.5.6 — function-body staged prototype proved**
   (END-TO-END AST SHAPE + PROVENANCE DIAGNOSTICS + PERL/RUST PARITY + MDBOOK).
   The first staged linked parsing prototype is now proven end to end. Perl phase0 locks a multi-function sample

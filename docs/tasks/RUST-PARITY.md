@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-02` (`.7.2` done — first shipped-spec corpus expansion after `SCALAREF-RETIREMENT`;
-  Rust capture helpers now use Perl-compatible captures-only indexing and the corpus oracle is green over 65
-  fixtures)
+- Last updated: `2026-07-03` (`.7.3.1` done — batch-2 shipped-spec oracle work split into narrow lanes after
+  `.7.2` recorded concrete divergences; next frontier is `.7.3.2` trace-first timeout/hang investigation)
 - Owner: repo-local workflow
 
 ## Goal
@@ -177,9 +176,80 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `pending`
 
 - ID: `RUST-PARITY.7.3`
+  Status: `active`
+  Goal: Expand the oracle corpus to the remaining/harder specs (batch 2), with timeout/hang risk debugged before
+    more broad shipped-spec work.
+  Children: `.7.3.1`, `.7.3.2`, `.7.3.3`, `.7.3.4`, `.7.3.5`, `.7.3.6`
+  Acceptance: inputs authored + fixtures generated (timeout-guarded) for the remaining specs incl. legacy/plugin/RTL-touching ones (candidate set: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`, `tkgui`, remaining non-raw `hlink_substitution` delimiter paths, `ds_vhistory`, `verilog`, `spec.spec` — exact set decided in-slice); any current timeout/hang risk is reproduced with LinkedSpec's toolbox first, pinpointed to exact source/rule/regex evidence, and either fixed or proven stale/retired before the broad legacy/plugin/RTL smoke lane continues; parity gaps fixed or recorded; the Rust fixture-runner is green; `cargo test` + clippy zero-new; baseline green.
+  Verification: `active`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.1`
+  Status: `done`
+  Goal: Split batch-2 shipped-spec oracle work into narrow, evidence-backed lanes, with timeout debugging first.
+  Acceptance: Record why `.7.3` is too broad for one signoff slice, preserve `.7.2`'s known divergence evidence,
+    split candidate families into follow-up leaves, make the timeout/hang investigation the immediate owned
+    frontier, update live trackers and Knowledge Map, and avoid runtime/corpus code changes.
+  Verification: **DONE 2026-07-03.** Read `docs/tasks/RUST-PARITY.md`, `tools/gen_oracle_corpus.pl`,
+    `rust/linkedspec-runtime/tests/corpus/README.md`, `rust/linkedspec-runtime/tests/corpus_oracle.rs`, and the
+    Knowledge Map oracle card. The generator already has the hard `alarm(...)` timeout; the committed corpus has
+    65 fixtures; `.7.2` already recorded concrete divergences for `portmap`, `lib_reader`, `ebnf`, `BNF`, `DT`,
+    `ifelse`, `operators_try`, and `spec.spec` smokes. The user then directed that any referenced timeout must be
+    debugged directly, not merely guarded. Re-read `TOOLBOX.md`: true hangs require the fork+SIGKILL census first
+    because `alarm()` cannot interrupt a catastrophic regex opcode; trace (`LINKEDSPEC_TRACE_LEVEL=debug`,
+    per-call trace options, parser-source dumps) follows once there is a live reproducer/rule path. Split the
+    remaining batch into a trace-first timeout/hang investigation, hlink delimiter/link-path fixture expansion,
+    recorded simple-spec structural divergence lanes, null-output/action-parser lanes, and post-timeout
+    RTL/plugin/legacy safety smokes. No parser/runtime/corpus code changed.
+  Commit: `RUST-PARITY.7.3.1 - split batch-2 oracle lanes and timeout owner`
+
+- ID: `RUST-PARITY.7.3.2`
   Status: `pending`
-  Goal: Expand the oracle corpus to the remaining/harder specs (batch 2), RTLUtils-guarded
-  Acceptance: inputs authored + fixtures generated (timeout-guarded) for the remaining specs incl. legacy/plugin/RTL-touching ones (candidate set: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`, `tkgui`, remaining non-raw `hlink_substitution` delimiter paths, `ds_vhistory`, `verilog`, `spec.spec` — exact set decided in-slice); the `RTLUtils` hang is guarded; parity gaps fixed or recorded; the Rust fixture-runner is green; `cargo test` + clippy zero-new; baseline green.
+  Goal: Debug and resolve the shipped-spec oracle timeout/hang risk with LinkedSpec trace/toolbox evidence.
+  Acceptance: Verify whether the historical `RTLUtils` timeout/hang reference is live in the current tree or stale
+    after legacy retirement/noncore quarantine; run LinkedSpec's toolbox before guessing (fork+SIGKILL hard-timeout
+    census for any live hang, then `LINKEDSPEC_TRACE_LEVEL=debug` / per-call trace options / parser-source dumps
+    on the exact reproducer); record the exact source file, rule, regex, and call path if a hang is live; either
+    fix the live root cause under this leaf or split a narrower implementation owner with evidence before code; if
+    the timeout is stale, update generator/corpus/task/KM wording so it says the historic RTLUtils hang is retired
+    while retaining a generic safety guard for future pathological specs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.3`
+  Status: `pending`
+  Goal: Try the remaining `hlink_substitution` delimiter/link-path shipped-spec fixtures.
+  Acceptance: Author representative non-raw `hlink_substitution` inputs, regenerate fixtures with the timeout
+    guard, keep `corpus_oracle` green if they match, or record exact divergence evidence and split a narrower
+    fix leaf before changing engine behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.4`
+  Status: `pending`
+  Goal: Triage `.7.2` simple-spec structural divergences (`portmap`, `lib_reader`, `ebnf`).
+  Acceptance: Reproduce each recorded mismatch with the oracle/toolbox path, classify whether the first fix is in
+    parser, compiler, runtime, or fixture selection, land only a safe green fixture or split an implementation leaf
+    with evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.5`
+  Status: `pending`
+  Goal: Triage `.7.2` action-parser/null-output candidates (`BNF`, `DT`, `ifelse`, `operators_try`, and
+    `spec.spec` smokes).
+  Acceptance: Reproduce the `[]`/`[null]`/action-parser-warning behavior under timeout, separate invalid fixture
+    choice from real Rust parity gaps, and land or defer each case with precise evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.6`
+  Status: `pending`
+  Goal: Audit RTL/plugin/legacy shipped-spec candidates (`pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`,
+    `regdef`, `tkgui`, `ds_vhistory`, `verilog`) under the oracle timeout guard.
+  Acceptance: Pick minimal representative inputs after `.7.3.2` has resolved or retired the timeout/hang concern,
+    keep the generic guard active during generation, keep green fixtures only when Rust matches the Perl reference,
+    and route plugin/RTL-only blockers to explicit follow-up leaves instead of broadening `.7.3`.
   Verification: `pending`
   Commit: `pending`
 
@@ -254,12 +324,17 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.5.3` | `done` | action-edge fluent closure reconciled 2026-07-02 from committed `SPEC-FORMAT-TERSE.2.3.3.*` evidence; shipped `tclite` oracle fixtures are active and green |
 | — | `RUST-PARITY.7.5.2` | `done` | Temporary Lispish legacy `scalaref(retv, {content})` parity landed 2026-07-02; `SCALAREF-RETIREMENT.3/.4` then migrated and removed the helper, while `lispish_x_y` remains active and green through direct access |
 | — | `RUST-PARITY.7.2` | `done` | first shipped-spec batch landed: `hlink_substitution` raw-string cases plus Rust captures-only group parity; corpus 65 fixtures |
-| 1 | `RUST-PARITY.7.3` | `pending` | expand corpus to remaining/harder specs (batch 2), RTLUtils-guarded |
-| 2 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 3 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 4 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.1` | `done` | batch-2 oracle work split into timeout/hang, hlink, simple-spec divergence, null-output/action-parser, and RTL/plugin/legacy lanes |
+| 1 | `RUST-PARITY.7.3.2` | `pending` | debug whether the referenced timeout/hang risk is live or stale with LinkedSpec toolbox/trace evidence |
+| 2 | `RUST-PARITY.7.3.3` | `pending` | try remaining `hlink_substitution` delimiter/link-path fixtures after the timeout concern is resolved or retired |
+| 3 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
+| 4 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
+| 5 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs after the timeout concern is resolved or retired |
+| 6 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 7 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 8 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, and `.7.2` has landed the first shipped-spec batch, so `.7.3`, `.8`, and `.9` remain.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
 ## Decisions
 
@@ -317,6 +392,12 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   pre-dispatch when the attached block explicitly calls the same child, and routes `assign(array(...), array())`
   / `set(hash(...), hash(...))` through aggregate-store replacement. `lispish_x_y` is re-enabled in the oracle
   corpus and passes with expected `["x",["y"]]`; the current corpus is 63 fixtures. Frontier → `.7.2`.
+- `2026-07-03` (`.7.3.1` split): `.7.3` is too broad for one signoff slice. Batch 2 now starts with a
+  trace-first timeout/hang investigation, then has separate lanes for remaining `hlink_substitution`
+  delimiter/link-path fixtures, known simple-spec structural divergences (`portmap`, `lib_reader`, `ebnf`),
+  action-parser/null-output candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec` smokes), and
+  RTL/plugin/legacy specs after the timeout concern is resolved or retired. No parser/runtime/corpus code changes
+  belong to the split leaf.
 
 ## Open Questions
 
@@ -355,6 +436,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-02` | `RUST-PARITY.7.5.3` | KM retrieval; source/corpus evidence audit; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Reconciliation slice only, no runtime code change. Existing code contains action-edge fluent parsing/compilation/runtime execution (`ActionEdge.fluent_chain`, `AcodeEntry.fluent_chain`, `execute_action_edge_fluent_chain`), and `tools/gen_oracle_corpus.pl` plus the checked-in corpus contain active `tclite_command_subst` and `tclite_double_quote` fixtures. Rust `corpus_oracle` passes on the current **62-fixture** corpus; full local CI remains green. Frontier → `.7.5.2` |
 | `2026-07-02` | `RUST-PARITY.7.5.2` | TOOLBOX Perl generated-source probes; `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Lispish `scalaref(retv, {content})` parity landed and `lispish_x_y` is active. Focused parser/runtime checks and 63-fixture corpus oracle pass; full gate evidence is recorded in the commit workflow. Frontier → `.7.2` |
 | `2026-07-02` | `RUST-PARITY.7.2` | `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Header-rest multiline lifecycle parsing and captures-only helper indexing landed; `hlink_substitution` raw-string fixtures are active; 65-fixture corpus oracle passes. Broader candidate divergences are recorded and deferred to `.7.3`/later. |
+| `2026-07-03` | `RUST-PARITY.7.3.1` | Task/KM context read; `tools/gen_oracle_corpus.pl` audit; corpus README/runner audit; `TOOLBOX.md` hang protocol read; Knowledge Map oracle-card retrieval; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check` | PASS — batch-2 oracle work split into trace-first timeout/hang, hlink delimiter/link-path, simple-spec structural divergence, action-parser/null-output, and RTL/plugin/legacy lanes. No parser/runtime/corpus code changed. |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -415,6 +497,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.5.3` | `RUST-PARITY.7.5.3 - reconcile action-edge fluent closure` | no runtime code change; closes stale parity leaf against `SPEC-FORMAT-TERSE.2.3.3.*` implementation evidence, active `tclite_*` oracle fixtures, and current 62-fixture corpus oracle |
 | `RUST-PARITY.7.5.2` | `RUST-PARITY.7.5.2 - land Lispish scalaref parity` | expr.rs `ScalarRefPath` parser hook + runtime legacy scalaref path evaluation, child-return accumulator containment, explicit action-block call compatibility, aggregate-wrapper assignment replacement, active `lispish_x_y` fixture; 63-fixture corpus oracle green |
 | `RUST-PARITY.7.2` | `RUST-PARITY.7.2 - expand shipped-spec oracle batch` | parser header-rest multiline lifecycle fix; Rust captures-only entry/match group indexing; two `hlink_substitution` raw-string oracle fixtures; 65-fixture corpus oracle green |
+| `RUST-PARITY.7.3.1` | `RUST-PARITY.7.3.1 - split batch-2 oracle lanes and timeout owner` | no runtime/corpus code change; splits the broad remaining shipped-spec oracle batch into timeout/hang investigation, hlink, simple-spec divergence, action-parser/null-output, and RTL/plugin/legacy lanes |
 
 ## Changelog
 
@@ -452,3 +535,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   readers. Added two clean `hlink_substitution` raw-string fixtures, taking the corpus to **65 fixtures**. Attempted
   broader simple-spec candidates (`portmap`, `lib_reader`, `ebnf`, `BNF`, `DT`, `ifelse`, `operators_try`, and
   selected `spec.spec` smokes) still diverge structurally and are recorded for `.7.3`/later. Frontier → `.7.3`.
+- `2026-07-03`: `.7.3.1` done — batch-2 oracle work split before code. `.7.3.2` debugs whether the referenced
+  timeout/hang risk is live or stale with LinkedSpec toolbox/trace evidence; `.7.3.3` tries the remaining
+  `hlink_substitution` delimiter/link-path fixtures; `.7.3.4` triages `portmap`/`lib_reader`/`ebnf`; `.7.3.5`
+  triages `BNF`/`DT`/`ifelse`/`operators_try`/`spec.spec`; `.7.3.6` audits RTL/plugin/legacy candidates after
+  the timeout concern is resolved or retired. Frontier → `.7.3.2`.
