@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — SPEC-FORMAT-TERSE.6.1 — own declare retirement migration
+
+**Scope:** Terse-format task tree, task-tree index, roadmap/live docs, mdBook guidance, memory pointer, and
+Knowledge Map. No `.spec` file changed in this ownership slice.
+
+**What changed:** The user directive that `declare(...)` shall not be used in spec files is now owned under the
+existing `SPEC-FORMAT-TERSE` tree. This implements the already-ratified ADR `0007` gradual migration promise:
+auto-existing variables, assignment operators, direct shape literals, and type-implying positions are the
+replacement path, not expanded runtime `declare` support.
+
+**Evidence:** Inventory found 70 active `declare(...)` hits across 13 shipped specs under `specs/`. The next
+frontier is `SPEC-FORMAT-TERSE.6.2`, which migrates shipped specs before any broader docs/corpus sweep or
+post-migration compatibility decision.
+
 ## 2026-07-03 — RUST-PARITY.7.3.4.1 — fix header-rest action-edge parsing
 
 **Scope:** Rust parser/compiler/runtime regression coverage, mdBook grammar/action-edge wording, task tree/index,

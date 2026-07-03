@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (SPEC-FORMAT-TERSE.6.1 — declaration retirement owned):
+  The active terse-format gap is not a Rust runtime `declare` initializer problem. The directive is language-surface
+  cleanup: `declare(...)` shall not be used in spec files because `.1.1` auto-existing variables, `.1.3` mutation
+  forms, `.1.2.3.5` direct RHS shape target-kind inference, and `.3.3` expression-valued assignments already give
+  the terse replacements. Inventory before shipped-spec edits found 70 active `declare(...)` hits across 13
+  shipped specs. `SPEC-FORMAT-TERSE.6.2` must migrate those specs first; post-migration implementation-support
+  policy waits for `.6.4`.
+
 - 2026-07-03 (RUST-PARITY.7.3.4.1 — header-rest action-edge parsing):
   The `lib_reader` top-rule collapse was parser/compiler-owned first. Rust's rule-header scanner captured the first
   non-space token after `:`/`::` as a mode suffix and treated unknown tokens as default mode, which silently dropped

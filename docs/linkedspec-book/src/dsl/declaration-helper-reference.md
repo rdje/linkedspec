@@ -1,6 +1,11 @@
 # Declaration Helper Reference
 
-This chapter is the public reference for LinkedSpec's declaration helper family.
+This chapter records the legacy declaration helper family and the terse-format replacement policy.
+
+> **Current policy.** New `.spec` files should not use `declare(...)`. Working variables auto-exist through the
+> terse format, and kind is inferred from wrappers, helper argument positions, assignment targets, and direct RHS
+> shape values. Use `name = value`, `items = []`, `meta = { ... }`, `items += value`, `meta[key] = value`,
+> `set(...)`, and existing terse read positions instead.
 
 Read [Action Model and Helper Surface](action-model-and-helper-surface.md) first if the helper-DSL direction is still new. Read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter when you want the value expressions that can feed declaration initializers.
 
@@ -16,7 +21,7 @@ my $retv;
 my %meta;
 ```
 
-The helper-oriented form is:
+The old helper-oriented form was:
 
 ```text
 declare(array, items);
@@ -24,9 +29,9 @@ declare(scalar, retv);
 declare(hash, meta);
 ```
 
-That looks small, but it is an important architectural boundary. `declare(...)` is a typed ActionIR node. Raw `my` is host-language code. The helper form tells LinkedSpec and future backends what kind of working value the rule is creating.
-
-Use declaration helpers when the state is part of the parser action. Avoid raw declaration code in new examples.
+That form replaced raw host-language declarations, but it is no longer the preferred authoring surface. The terse
+format now gives the parser the same kind information through first use, assignment shape, and type-implying helper
+positions. Avoid both raw declaration code and `declare(...)` in new examples.
 
 ## Declarations are optional: working variables auto-exist
 
@@ -104,19 +109,23 @@ return(payload["children"][index]["name"])
 
 The kind comes from the **position**: the target of `set(...)`, legacy `assign(...)`, and `name = value` is a scalar for non-shape RHS values; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name reads the working scalar: `return(count)`, `set(out, count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]` are the terse forms of their explicit `scalar(...)` counterparts. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
 
-`declare(...)` stays supported and is still the right choice when you want to:
+`declare(...)` is retirement-bound for spec files. Use terse replacements instead:
 
-- give the variable an **initializer** — `declare(scalar, count=0)`;
-- state the **kind and intent** explicitly for readers; or
-- gather a rule's working state in one visible `I { ... }` preamble.
+- `declare(scalar, count=0)` -> `count = 0`;
+- `declare(array, items)` -> `items = []` when an explicit reset is needed, or just `items += value` on first use;
+- `declare(hash, meta)` -> `meta = {}` when an explicit reset is needed, or just `meta[key] = value` on first use;
+- `declare(array, items=[value])` -> `items = [value]`;
+- `declare(hash, meta={ key => value })` -> `meta = { key => value }`.
 
-The shipped specs and the examples in this chapter still use `declare(...)` and the typed wrappers for clarity. Where a name is wrapped, the wrapper decides its kind — `scalar(...)` is a scalar, `array(...)` an array, `hash(...)` a hash; where a name is bare in a type-implying position, that position decides it. Direct RHS shape assignment can also infer the target kind for array/hash assignment; explicit `scalar(name)` keeps array/hash payloads in a scalar.
+Where a name is wrapped, the wrapper still decides its kind. Where a name is bare in a type-implying position, that
+position decides it. Direct RHS shape assignment infers the target kind for array/hash assignment; explicit
+`scalar(name)` keeps array/hash payloads in a scalar.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `array(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 
 ## Canonical typed form
 
-The preferred declaration shape is:
+The legacy declaration shape is:
 
 ```text
 declare(type, entry1, entry2, ...)
@@ -143,9 +152,9 @@ declare(hash, by_name, seen);
 
 Each entry must be a plain symbol name or an initialized entry of the form `name=expr`.
 
-## Declaration aliases
+## Legacy declaration aliases
 
-Aliases exist for convenience and compatibility. They lower to the same typed declaration model.
+Aliases exist for compatibility with older specs. Do not use them in new spec files.
 
 | Alias | Equivalent canonical form |
 | --- | --- |
@@ -167,33 +176,35 @@ declare_h(meta, seen);
 declare_hash(meta, seen);
 ```
 
-For new public documentation, prefer the canonical `declare(type, ...)` form unless the example is explicitly teaching aliases or fluent chain compactness.
+For new public documentation, use the terse replacements instead of any declaration helper or alias.
 
-## Where declarations should live
+## Where state should live
 
-Most shared rule state should be declared in the rule-entry lifecycle block:
+Most shared rule state should be initialized or first used in the rule-entry lifecycle block:
 
 ```text
 I {
-  declare(array, items);
-  declare(scalar, retv);
-  declare(hash, meta);
+  items = [];
+  retv = undef;
+  meta = {};
 }
 ```
 
-`I { ... }` runs at rule-handler entry, before the rule's action-edge logic needs the working state. That makes it the clearest place for accumulators, child-result slots, flags, and metadata objects that multiple action edges will share.
+`I { ... }` runs at rule-handler entry, before the rule's action-edge logic needs the working state. That makes it
+the clearest place for accumulators, child-result slots, flags, and metadata objects that multiple action edges
+will share.
 
-Action-edge declarations are useful for short-lived scratch values:
+Action-edge blocks can introduce short-lived scratch values through assignment:
 
 ```text
 -> Token[0] {
-  declare(scalar, normalized);
-  set(scalar(normalized), lowercase(trim(entry_text())));
-  return(hash("kind", "token", "text", scalar(normalized)));
+  normalized = lowercase(trim(entry_text()));
+  return({ "kind" => "token", "text" => normalized });
 }
 ```
 
-Use action-edge declarations only when the variable is local to that action body. If a later action edge or later lifecycle hook must read the value, declare it earlier in `I { ... }`.
+Use action-edge-local assignment only when the variable is local to that action body. If a later action edge or
+later lifecycle hook must read the value, initialize or first use it earlier in `I { ... }`.
 
 Other lifecycle blocks such as `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, and `LX { ... }` can contain helper statements too, but they are not the default home for shared declaration state. Use them only when the state truly belongs to that lifecycle moment. The exact firing point depends on the rule's handler shape, so `I { ... }` is the stable default for "this rule owns these working variables."
 
@@ -574,42 +585,47 @@ declare(array, items);
 push_value(array(items), scalar(retv));
 ```
 
-Do not redeclare to reset:
+Do not use legacy declaration syntax to reset:
 
 ```text
 declare(array, items);
 ```
 
-Prefer:
+Prefer terse assignment:
 
 ```text
-set(array(items), array());
+items = [];
 ```
 
-Do not pack unrelated state into one unreadable declaration line:
+Do not pack unrelated state into one unreadable legacy declaration line:
 
 ```text
 declare(scalar, retv, head, has_head, raw, normalized, count, stage, message);
 ```
 
-Prefer grouped declarations:
+Prefer grouped terse initialization only when explicit initialization helps readability:
 
 ```text
-declare(scalar, retv, head, has_head);
-declare(scalar, raw, normalized);
-declare(scalar, count, stage, message);
+retv = undef;
+head = undef;
+has_head = false;
+raw = undef;
+normalized = undef;
+count = 0;
+stage = undef;
+message = undef;
 ```
 
 ## Practical guidance
 
-- Use `I { declare(...) }` for rule-owned working state that multiple action edges need.
-- Use action-edge `declare(...)` for short-lived scratch values local to that action body.
+- Use `I { ... }` for rule-owned working state that multiple action edges need.
+- Use action-edge assignment for short-lived scratch values local to that action body.
 - Use `scalar`, `array`, and `hash` types according to how the value will be used, not according to how it happens to be emitted today.
-- Prefer `declare(type, ...)` in public docs; mention aliases when documenting compatibility or compact chains.
-- Prefer initialized declarations when the initializer is short and obvious.
-- Prefer `declare(...)` plus `set(...)` when initialization has a long fallback or normalization chain.
-- Reset live containers with `set(array(name), array())` or `set(hash(name), hash(...))`; do not redeclare for mutation.
-- Keep declarations near the top of the rule or local action body so the reader sees the rule's working state before the transformations.
+- Prefer assignment and direct shapes in public docs; mention declaration helpers only as legacy compatibility.
+- Prefer direct initialization when the initializer is short and obvious.
+- Prefer a separate assignment sequence when initialization has a long fallback or normalization chain.
+- Reset live containers with `name = []` or `name = { ... }`; do not redeclare for mutation.
+- Keep state setup near the top of the rule or local action body so the reader sees the working values before the transformations.
 
 ## Related chapters
 

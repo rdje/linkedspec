@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **SPEC-FORMAT-TERSE.6.1 — declaration retirement migration owned**
+  (TRACKING/PUBLIC-GUIDANCE SLICE; NO `.spec` FILE CHANGED).
+  The directive that `declare(...)` shall not be used in spec files is now owned under the existing terse-format
+  task tree. This implements ADR `0007`'s gradual migration path rather than expanding runtime `declare` behavior.
+
+  **Inventory:** 70 active `declare(...)` hits across 13 shipped specs under `specs/`.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.6.2` — migrate shipped specs to auto-existing variables, assignments, direct
+  shape literals, and type-implying terse positions. `RUST-PARITY.7.3.4.4` remains pending behind this active
+  terse migration.
+
 - 2026-07-03: **RUST-PARITY.7.3.4.1 — header-rest action-edge parsing**
   (RUST PARSER/COMPILER FIX; NO ORACLE FIXTURE LANDED).
   Rust now keeps compact header-rest body syntax instead of consuming it as an invalid mode suffix. This repairs
