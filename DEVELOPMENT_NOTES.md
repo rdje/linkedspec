@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.4.2 — portmap scalar helper parity):
+  The `portmap` scalar mismatch had three independent runtime causes. First, `or(...)` was missing from Rust's
+  helper surface, so `bar[3]` could not take the bit-classification branch; Rust now implements `or`, `and`, and
+  `not` using the existing `RuntimeValue` truthiness. Second, Perl lowers `array(flat_array(entry_parts))` in list
+  context, so the flattening helper splices into the enclosing constructor; Rust now splices explicit
+  `flat`/`flat_array`/`flat_hash` call arguments while keeping `array_copy(...)` nested. Third, `CompiledAlternation`
+  joined rule regexes as raw `pat1|pat2`, which let the internal `|(?i)(0x...)` branch inside `bare_bit_slice`
+  become a sibling action-edge branch. Wrapping each rule regex as `(?:pattern)` preserves dispatch ownership and
+  fixes the constant path. The four scalar `portmap` fixtures are active (`foo`, `bar[3]`, `baz[7:0]`, `0x1f`),
+  bringing the oracle corpus to 72 fixtures. Concatenation remains owned by `.7.3.4.3` because it depends on
+  action-edge fluent recursive aggregation, not scalar helper/list-context parity.
+
 - 2026-07-03 (RUST-PARITY.7.3.4.4 — lib_reader action-helper parity):
   The `lib_reader` follow-up turned out to be narrower than the leaf title suggested. A focused edge-only
   child-regex test proves dependency-resolved action dispatch already carries child entry captures. The observable

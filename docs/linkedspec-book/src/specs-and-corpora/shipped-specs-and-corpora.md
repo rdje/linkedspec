@@ -82,9 +82,10 @@ The important point is that these files collectively exercise the system:
 - real nested return payloads.
 
 The Rust oracle corpus tracks this maturity incrementally. `RUST-PARITY.7.3.4.4` adds
-`lib_reader_sattribute` and `lib_reader_cattribute`, so the checked-in corpus now verifies
-`lib_reader.spec` grouped scalar attributes and comma-list attributes against the Perl
-reference output.
+`lib_reader_sattribute` and `lib_reader_cattribute`, and `RUST-PARITY.7.3.4.2` adds
+`portmap_bare`, `portmap_bit`, `portmap_slice`, and `portmap_constant`, so the
+checked-in corpus now verifies `lib_reader.spec` grouped attributes and `portmap.spec`
+scalar classification against the Perl reference output.
 
 ## Current maturity reading
 

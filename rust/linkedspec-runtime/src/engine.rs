@@ -2579,6 +2579,29 @@ impl Engine {
         evaluated
     }
 
+    fn is_list_context_splice_arg(raw_arg: &linkedspec_core::expr::Arg) -> bool {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        matches!(
+            raw_arg,
+            Arg::Positional(Expr::Call { name, .. })
+                if matches!(name.as_str(), "flat" | "flat_array" | "flat_hash")
+        )
+    }
+
+    fn push_list_context_values(target: &mut Vec<RuntimeValue>, value: &RuntimeValue) {
+        match value {
+            RuntimeValue::Array(items) => target.extend(items.iter().cloned()),
+            RuntimeValue::Hash(entries) => {
+                for (key, item) in entries {
+                    target.push(RuntimeValue::Scalar(key.clone()));
+                    target.push(item.clone());
+                }
+            }
+            other => target.push(other.clone()),
+        }
+    }
+
     /// Resolve a child rule name from the first arg of a `call(...)` helper.
     ///
     /// A bare `call(RuleName)` names the target rule directly — its evaluated
@@ -2742,8 +2765,19 @@ impl Engine {
                         return Ok(RuntimeValue::Array(ctx.get_array(var_name)));
                     }
                 }
-                // General constructor: `array(val1, val2, ...)`
-                Ok(RuntimeValue::Array(args.to_vec()))
+                // General constructor: `array(val1, val2, ...)`. Explicit
+                // flattening helpers are list-context splices in the Perl
+                // lowering, so `array(flat_array(items))` opens `items` into
+                // this constructor while `array(array_copy(items))` stays nested.
+                let mut values = Vec::new();
+                for (raw_arg, value) in raw_args.iter().zip(args.iter()) {
+                    if Self::is_list_context_splice_arg(raw_arg) {
+                        Self::push_list_context_values(&mut values, value);
+                    } else {
+                        values.push(value.clone());
+                    }
+                }
+                Ok(RuntimeValue::Array(values))
             }
             "array_copy" => {
                 if let Some(arg) = args.first() {
@@ -3749,6 +3783,13 @@ impl Engine {
                     Ok(RuntimeValue::Bool(false))
                 }
             }
+            "or" => Ok(RuntimeValue::Bool(args.iter().any(RuntimeValue::as_bool))),
+            "and" => Ok(RuntimeValue::Bool(
+                !args.is_empty() && args.iter().all(RuntimeValue::as_bool),
+            )),
+            "not" => Ok(RuntimeValue::Bool(
+                args.first().is_none_or(|arg| !arg.as_bool()),
+            )),
             // ── Coalesce ──
             "coalesce_nonempty" => {
                 for a in args {

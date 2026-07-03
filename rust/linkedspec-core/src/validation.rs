@@ -200,7 +200,8 @@ fn is_known_actionir_call_name(name: &str) -> bool {
     is_numeric_word_alias_name(name)
         || matches!(
             name,
-            "array"
+            "and"
+                | "array"
                 | "array_copy"
                 | "assign"
                 | "BACKTRACK"
@@ -321,6 +322,8 @@ fn is_known_actionir_call_name(name: &str) -> bool {
                 | "matches"
                 | "merge_hash"
                 | "next"
+                | "not"
+                | "or"
                 | "num_abs"
                 | "num_add"
                 | "num_avg"

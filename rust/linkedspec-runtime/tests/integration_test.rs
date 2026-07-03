@@ -2421,6 +2421,72 @@ fn rust_parity_7_3_4_4_lib_reader_keeps_entry_captures() {
 }
 
 #[test]
+fn rust_parity_7_3_4_2_array_constructor_splices_flattening_helpers() {
+    let grammar = r#"Top::
+ /x/
+ I {
+   set(array(parts), array("a", "b"));
+   return(array("?node:", array(flat_array(parts)), array_copy(parts)));
+ }
+"#;
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([["?node:", ["a", "b"], ["a", "b"]]]),
+        "array(flat_array(name)) splices into the inner constructor while array_copy(name) stays nested"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_2_boolean_helpers_match_flow_truthiness() {
+    let grammar = r#"Top::
+ /x/
+ I {
+   return(array(
+     or(false, "", "0", is_nonempty("x")),
+     and(true, 1, is_nonempty("x")),
+     not(false),
+     not("x")
+   ));
+ }
+"#;
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([[true, true, true, false]]),
+        "or/and/not use RuntimeValue truthiness compatible with Rust flow predicates"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_2_portmap_scalar_classifications_run() {
+    use std::fs;
+    use std::path::Path;
+
+    let spec_path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../specs/portmap.spec");
+    let grammar = fs::read_to_string(&spec_path).expect("read specs/portmap.spec");
+
+    assert_eq!(
+        build_and_run(&grammar, "foo"),
+        serde_json::json!([["?bare:", ["foo"]]]),
+        "portmap bare signal classification keeps a one-level capture snapshot"
+    );
+    assert_eq!(
+        build_and_run(&grammar, "bar[3]"),
+        serde_json::json!([["?bit:", ["bar", "3"]]]),
+        "portmap bit classification uses or(...) and preserves flat capture shape"
+    );
+    assert_eq!(
+        build_and_run(&grammar, "baz[7:0]"),
+        serde_json::json!([["?slice:", ["baz", "7", "0"]]]),
+        "portmap slice classification preserves both numeric slice captures"
+    );
+    assert_eq!(
+        build_and_run(&grammar, "0x1f"),
+        serde_json::json!([["?constant:", ["0x1f"]]]),
+        "portmap constant classification preserves the constant capture"
+    );
+}
+
+#[test]
 fn terse_2_3_3_1_action_edge_fluent_return_closes_recursive_rule() {
     let grammar = "top::\n -> box .push\n E { return(array_copy(array(top))) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", array_copy(array(box))))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
     assert_eq!(

@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.4.2 — portmap scalar helper parity**
+  (RUST RUNTIME HELPER/DISPATCH FIX + FOUR ORACLE FIXTURES).
+  Rust now reproduces the Perl reference for representative `specs/portmap.spec` scalar classifications:
+  `foo` -> `["?bare:",["foo"]]`, `bar[3]` -> `["?bit:",["bar","3"]]`,
+  `baz[7:0]` -> `["?slice:",["baz","7","0"]]`, and `0x1f` -> `["?constant:",["0x1f"]]`.
+
+  **Fix:** Rust validation/runtime now recognize `or`, `and`, and `not`; `array(...)` now splices explicit
+  flattening helper arguments (`flat`, `flat_array`, `flat_hash`) in Perl list context while keeping
+  `array_copy(...)` nested; and the regex dispatcher wraps each rule regex before joining alternatives so an
+  internal `|` branch cannot steal a sibling action-edge dispatch index.
+
+  **Verification:** focused `.7.3.4.2` integration tests pass; the regex-engine internal-alternation regression
+  passes; `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; oracle regeneration produces **72 fixtures**
+  including `portmap_bare`, `portmap_bit`, `portmap_slice`, and `portmap_constant`; Rust `corpus_oracle` passes
+  over all 72 fixtures; clippy, mdBook, Knowledge Map, memory architecture, doctrine, and whitespace gates pass.
+
+  **Frontier:** `RUST-PARITY.7.3.4.3` — fix action-edge fluent child/target aggregation for `ebnf` payloads and
+  `portmap` concatenation.
+
 - 2026-07-03: **RUST-PARITY.7.3.4.4 — lib_reader action-helper parity**
   (RUST RUNTIME HELPER FIX + TWO ORACLE FIXTURES).
   Rust now executes the statement-form helper mutations used by `specs/lib_reader.spec`: scalar regex substitution

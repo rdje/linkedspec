@@ -976,6 +976,12 @@ SPEC
     # ── RUST-PARITY.7.3.3.2 — JSON-safe hlink_substitution curly delimiter ──
     { case => 'hlink_curly_brace',             spec => 'hlink_substitution', input => '{abc}' },
 
+    # ── RUST-PARITY.7.3.4.2 — shipped portmap scalar classification parity ──
+    { case => 'portmap_bare',     spec => 'portmap', input => 'foo' },
+    { case => 'portmap_bit',      spec => 'portmap', input => 'bar[3]' },
+    { case => 'portmap_slice',    spec => 'portmap', input => 'baz[7:0]' },
+    { case => 'portmap_constant', spec => 'portmap', input => '0x1f' },
+
     {
         case  => 'lib_reader_sattribute',
         spec  => 'lib_reader',

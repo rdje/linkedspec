@@ -1,6 +1,6 @@
 # `portmap.spec` Walkthrough
 
-`specs/portmap.spec` parses VHDL/Verilog port-map expressions — the signal connection lists that wire component instances to ports. It handles bare signal names, bit slices (`sig[3:0]`), constants (`0x1F`, `3'b101`), and concatenations (`{sig1, sig2}`).
+`specs/portmap.spec` parses VHDL/Verilog port-map expressions — the signal connection lists that wire component instances to ports. It handles bare signal names, bit/slice forms (`sig[3]`, `sig[3:0]`), constants (`0x1F`, `0b101`, `4'1011`), and concatenations (`{sig1 sig2}`).
 
 It demonstrates:
 
@@ -21,7 +21,7 @@ reference (Perl) backend loads it by spec name:
 use LinkedSpec;
 
 my $parser = LinkedSpec::get_parser('portmap');
-my $input = '{sig_a, sig_b[7:0], 1\'b0}';
+my $input = '{sig_a sig_b[7:0] 0x1f}';
 my $ast = $parser->(\$input);
 ```
 
@@ -32,32 +32,45 @@ another backend produces the equivalent structure in its own value types.
 
 For a bare signal `clk`:
 
-```perl
-['?bare:', 'clk', undef, undef, undef]
+```json
+["?bare:", ["clk"]]
 ```
 
-For a bit slice `addr[7:0]`:
+For a single bit `bar[3]`:
 
-```perl
-['?slice:', 'addr', 7, 0, undef]
+```json
+["?bit:", ["bar", "3"]]
 ```
 
-For a constant `4'b1011`:
+For a slice `addr[7:0]`:
 
-```perl
-['?constant:', "4'b1011", undef, undef, undef]
+```json
+["?slice:", ["addr", "7", "0"]]
 ```
 
-For a concatenation `{sig_a, sig_b}`:
+For a constant `0x1f`:
 
-```perl
-['?concat:',
-  ['?bare:', 'sig_a', undef, undef, undef],
-  ['?bare:', 'sig_b', undef, undef, undef],
+```json
+["?constant:", ["0x1f"]]
+```
+
+For a concatenation `{sig_a sig_b[7:0] 0x1f}`:
+
+```json
+[
+  "?concat:",
+  [
+    ["?bare:", ["sig_a"]],
+    ["?slice:", ["sig_b", "7", "0"]],
+    ["?constant:", ["0x1f"]]
+  ]
 ]
 ```
 
-The first element of each array is a tag string (`?bare:`, `?slice:`, `?bit:`, `?constant:`, `?concat:`, `?multi:`) that identifies the node kind. The remaining elements are the capture group data flattened into the array.
+The first element of each array is a tag string (`?bare:`, `?slice:`, `?bit:`,
+`?constant:`, `?concat:`, `?multi:`) that identifies the node kind. Scalar
+classifications place the participating regex captures in the second element; a
+concatenation places its child nodes in the second element.
 
 ## Rule inventory
 
@@ -87,7 +100,7 @@ The `if/elseif/else` chain in its `I` block then classifies the match: if the en
 
 ## Descriptor readiness
 
-The `portmap.spec` compiles with `language_agnostic_ready_ratio == 1.0000` — zero raw-Perl dependency. All helpers (`assign`, `return`, `push_value`, `array_copy`, `flat_array`, `entry_groups`, `if/elseif/else/endif`, `matches`, `or`, `eq`, `is_nonempty`) are canonical ActionIR.
+The `portmap.spec` compiles with `language_agnostic_ready_ratio == 1.0000` — zero raw-Perl dependency. All helpers (`set`, `return`, `copy`, `flat_array`, `entry_groups`, `if/elseif/else/endif`, `matches`, `or`, `str_eq`, `is_nonempty`, `num_eq`, `count`) are canonical ActionIR.
 
 ## Why this spec is interesting
 

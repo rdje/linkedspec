@@ -7,7 +7,8 @@
 //!
 //! ## Design
 //!
-//! Patterns are combined into a single top-level alternation `(pat1)|(pat2)|(pat3)`
+//! Patterns are combined into a single top-level alternation
+//! `(?:pat1)|(?:pat2)|(?:pat3)`
 //! and rgx's `MatchResult.matched_branch_number` identifies which branch matched.
 //! This mirrors Perl's `LinkedRE::oredRE` which builds a single combined regex with
 //! `(?{$pos=N})` embedded-code position tracking, but uses rgx's native branch
@@ -22,11 +23,12 @@
 //! ### Group numbering
 //!
 //! In the combined regex, capture groups are numbered sequentially across all
-//! branches. For example, `(\d+)|(\w+)|(\S+)` produces:
+//! branches. For example, `(?:(\d+))|(?:(\w+))|(?:(\S+))` produces:
 //! - Group 0: full match (always)
 //! - Group 1: branch 0's capture
 //! - Group 2: branch 1's capture
 //! - Group 3: branch 2's capture
+//!
 //! `AltInfo.group_offset` stores the starting group index for each branch (1-based,
 //! excluding group 0), so only the winning branch's groups are extracted.
 
@@ -50,7 +52,7 @@ pub mod regex_engine {
     /// A compiled alternation of multiple regex patterns.
     ///
     /// All patterns are combined into a single top-level alternation
-    /// `(pat1)|(pat2)|(pat3)`. rgx's `matched_branch_number` identifies
+    /// `(?:pat1)|(?:pat2)|(?:pat3)`. rgx's `matched_branch_number` identifies
     /// which branch matched — the portable equivalent of Perl's
     /// `(?{$pos=N})` embedded-code position tracking.
     pub struct CompiledAlternation {
@@ -106,8 +108,14 @@ pub mod regex_engine {
                 group_offset += group_count;
             }
 
-            // Build the combined regex: pat1|pat2|pat3
-            let combined_pattern = normalized_patterns.join("|");
+            // Build the combined regex with one non-capturing wrapper per
+            // rule regex. This keeps a rule's own top-level `|` branches from
+            // being reported as separate dispatch alternatives.
+            let combined_pattern = normalized_patterns
+                .iter()
+                .map(|pattern| format!("(?:{pattern})"))
+                .collect::<Vec<_>>()
+                .join("|");
             let combined_regex = Regex::compile(&combined_pattern)
                 .map_err(|e| format!("regex compile error for combined alternation: {}", e))?;
 
@@ -480,6 +488,21 @@ pub mod regex_engine {
             assert_eq!(result.groups[0], "hello");
             assert_eq!(result.groups[1], "hello");
             assert_eq!(result.captures, vec!["hello"]);
+        }
+
+        #[test]
+        fn internal_top_level_alternation_stays_inside_own_pattern() {
+            let alt = CompiledAlternation::compile(&[
+                r"([[:alpha:]]\w*)|(?i)(0x[0-9a-f]+)".into(),
+                r"\{".into(),
+            ])
+            .unwrap();
+            let result = alt.seek_match("0x1f", 0).unwrap();
+            assert_eq!(result.index, 0);
+            assert_eq!(result.groups[0], "0x1f");
+            assert_eq!(result.groups[1], "");
+            assert_eq!(result.groups[2], "0x1f");
+            assert_eq!(result.captures, vec!["0x1f"]);
         }
 
         #[test]

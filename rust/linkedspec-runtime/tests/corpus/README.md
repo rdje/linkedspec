@@ -61,4 +61,9 @@ corpus then had 63 fixtures.
 `hlink_substitution` raw-string cases (`hlink_raw_string` and
 `hlink_raw_escaped_brackets`). `RUST-PARITY.7.3.3.2` then added the JSON-safe
 curly-brace delimiter fixture (`hlink_curly_brace`, input `{abc}`). The corpus
-now has 66 fixtures.
+then had 66 fixtures.
+
+`RUST-PARITY.7.3.4.4` added `lib_reader_sattribute` and `lib_reader_cattribute`.
+`RUST-PARITY.7.3.4.2` then added `portmap_bare`, `portmap_bit`,
+`portmap_slice`, and `portmap_constant`, proving the shipped `portmap.spec`
+scalar classifications against the Perl reference. The corpus now has 72 fixtures.

@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.4.2 — land portmap scalar helper parity
+
+**Scope:** Rust runtime helper execution, regex-dispatch alternation isolation, focused integration coverage,
+oracle generator/corpus fixtures, mdBook `portmap` documentation, task-tree tracking, live docs, and Knowledge Map.
+
+**What changed:** Closed the representative `portmap` scalar-classification divergence. Rust validation/runtime now
+recognize `or`, `and`, and `not`; `array(flat_array(...))`, `array(flat(...))`, and `array(flat_hash(...))` splice
+their list-context payloads into the surrounding constructor while non-flattening helpers such as
+`array_copy(...)` remain nested. The regex alternation dispatcher now wraps each rule regex in a non-capturing
+branch before joining alternatives, so a rule's own top-level `|` no longer masquerades as a sibling action-edge
+dispatch branch; this fixes the `portmap` constant branch (`0x1f`) that previously routed through the
+`concatenation` edge and produced `null`.
+
+**Evidence:** Added focused `.7.3.4.2` integration locks for list-context splicing, boolean helper truthiness, and
+real `specs/portmap.spec` scalar outputs for `foo`, `bar[3]`, `baz[7:0]`, and `0x1f`. Added a regex-engine unit
+test for internal top-level alternation ownership. Added `portmap_bare`, `portmap_bit`, `portmap_slice`, and
+`portmap_constant` to `tools/gen_oracle_corpus.pl`; regeneration now produces **72 fixtures**, and Rust
+`corpus_oracle` passes over all 72. Clippy, mdBook, Knowledge Map, memory architecture, doctrine, and whitespace
+gates pass.
+
 ## 2026-07-03 — RUST-PARITY.7.3.4.4 — land lib_reader action-helper parity
 
 **Scope:** Rust runtime helper execution, focused integration coverage, oracle generator/corpus fixtures, mdBook
