@@ -1,6 +1,6 @@
 ---
 id: rust-parity-batch2-oracle-split
-title: RUST-PARITY.7.3 batch-2 oracle expansion is split with timeout debugging first
+title: RUST-PARITY.7.3 batch-2 oracle expansion is split; timeout and hlink scalar-ref lanes are closed/deferred before simple-spec triage
 answers:
   - "how is RUST-PARITY.7.3 split"
   - "what is the next RUST-PARITY.7.3 task"
@@ -14,7 +14,7 @@ answers:
 date: 2026-07-03
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.7.3.1 split the remaining/harder shipped-spec oracle batch after reading docs/tasks/RUST-PARITY.md, tools/gen_oracle_corpus.pl, rust/linkedspec-runtime/tests/corpus/README.md, rust/linkedspec-runtime/tests/corpus_oracle.rs, TOOLBOX.md, and the rust-perl-output-oracle Knowledge Map card. The corpus was green over 65 fixtures after .7.2, and .7.2 recorded concrete divergences for portmap, lib_reader, ebnf, BNF, DT, ifelse, operators_try, and spec.spec smokes. After the user directed timeout debugging instead of treating the timeout as a vague guard, the split leaves became .7.3.2 trace-first timeout/hang investigation, .7.3.3 hlink_substitution delimiter/link paths, .7.3.4 portmap/lib_reader/ebnf structural divergence triage, .7.3.5 BNF/DT/ifelse/operators_try/spec.spec null-output or action-parser-warning triage, and .7.3.6 post-timeout RTL/plugin/legacy safety smoke. RUST-PARITY.7.3.2 then verified the historic RTLUtils timeout is retired and hardened gen_oracle_corpus with per-case fork/SIGKILL timeouts. RUST-PARITY.7.3.3.1 split hlink delimiter work after bracket outputs exposed the scalar-ref JSON gap. RUST-PARITY.7.3.3.2 added the JSON-safe {abc} fixture, so the current frontier is .7.3.3.3."
+evidence: "RUST-PARITY.7.3.1 split the remaining/harder shipped-spec oracle batch after reading docs/tasks/RUST-PARITY.md, tools/gen_oracle_corpus.pl, rust/linkedspec-runtime/tests/corpus/README.md, rust/linkedspec-runtime/tests/corpus_oracle.rs, TOOLBOX.md, and the rust-perl-output-oracle Knowledge Map card. The corpus was green over 65 fixtures after .7.2, and .7.2 recorded concrete divergences for portmap, lib_reader, ebnf, BNF, DT, ifelse, operators_try, and spec.spec smokes. After the user directed timeout debugging instead of treating the timeout as a vague guard, the split leaves became .7.3.2 trace-first timeout/hang investigation, .7.3.3 hlink_substitution delimiter/link paths, .7.3.4 portmap/lib_reader/ebnf structural divergence triage, .7.3.5 BNF/DT/ifelse/operators_try/spec.spec null-output or action-parser-warning triage, and .7.3.6 post-timeout RTL/plugin/legacy safety smoke. RUST-PARITY.7.3.2 then verified the historic RTLUtils timeout is retired and hardened gen_oracle_corpus with per-case fork/SIGKILL timeouts. RUST-PARITY.7.3.3.1 split hlink delimiter work after bracket outputs exposed the scalar-ref JSON gap. RUST-PARITY.7.3.3.2 added the JSON-safe {abc} fixture, raising the corpus to 66. RUST-PARITY.7.3.3.3 deferred bracket/mixed hlink fixtures to .7.3.3.4 because Perl scalar refs cannot be JSON-encoded and Rust cannot currently execute the scalar-ref action branch. The current frontier is .7.3.4."
 reverify: "rg -n 'RUST-PARITY\\.7\\.3\\.[1-6]|timeout/hang|hlink_substitution|portmap|lib_reader|operators_try|RTL/plugin/legacy' docs/tasks/RUST-PARITY.md docs/TASK_TREE.md"
 ---
 
@@ -32,16 +32,20 @@ the current core tree, and `tools/gen_oracle_corpus.pl` now enforces its generic
 timeout with per-case fork/SIGKILL instead of `alarm()`. `RUST-PARITY.7.3.3.1`
 is also done: hlink delimiter candidates are split by JSON representability.
 `RUST-PARITY.7.3.3.2` added the JSON-safe `{abc}` curly fixture with the
-hardened oracle guard in place. The current frontier is
-`RUST-PARITY.7.3.3.3`: decide or defer scalar-ref representation for bracket and
-mixed hlink fixtures.
+hardened oracle guard in place. `RUST-PARITY.7.3.3.3` then deferred bracket and
+mixed hlink fixtures because they require a neutral scalar-ref/action-payload
+contract or a hlink spec migration. The current frontier is
+`RUST-PARITY.7.3.4`: triage `portmap`, `lib_reader`, and `ebnf` structural
+divergences.
 
 The later lanes are:
 
 - `.7.3.3.2`: done — JSON-safe `hlink_substitution` curly-brace fixture.
-- `.7.3.3.3`: scalar-ref representation decision for `hlink_substitution`
-  bracket/mixed fixtures.
-- `.7.3.4`: `portmap`, `lib_reader`, and `ebnf` structural divergence triage.
+- `.7.3.3.3`: done — scalar-ref representation decision deferred bracket/mixed
+  fixtures with Perl JSON failure and Rust action-branch evidence.
+- `.7.3.3.4`: deferred — neutral scalar-ref/action-payload contract or hlink
+  spec migration before bracket/mixed fixtures.
+- `.7.3.4`: current frontier — `portmap`, `lib_reader`, and `ebnf` structural divergence triage.
 - `.7.3.5`: `BNF`, `DT`, `ifelse`, `operators_try`, and `spec.spec` null-output
   or action-parser-warning triage.
 - `.7.3.6`: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`,

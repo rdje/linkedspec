@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.3.3 — hlink scalar-ref fixtures deferred**
+  (NO GENERATOR/CORPUS/RUNTIME CODE CHANGE).
+  Bracket/mixed `hlink_substitution` fixture candidates remain out of the JSON oracle. Perl returns scalar refs
+  for `[abc]` / mixed bracket payloads and `JSON::PP` cannot encode them; Rust also lacks a scalar-ref
+  `RuntimeValue` and currently cannot execute the shipped scalar-ref action branch (`return(\(my $capt =
+  capture_slice()))` fails parsing before `[abc]` exits via unmatched closing bracket).
+
+  **Verification:** direct Perl `Data::Dumper`/`JSON::PP` probe recorded scalar-ref outputs and JSON failure;
+  Rust source audit plus a temporary focused Rust execution probe recorded the unsupported action branch; temporary
+  probe removed and `git diff -- rust/linkedspec-runtime/tests/integration_test.rs` was empty. Knowledge Map,
+  memory architecture, doctrine, and whitespace gates PASS; Rust `corpus_oracle` PASS; full local CI PASS with
+  phase0 **1018** tests.
+
+  **Frontier:** `RUST-PARITY.7.3.4` — triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and
+  `ebnf`.
+
 - 2026-07-03: **RUST-PARITY.7.3.3.2 — hlink curly-brace oracle fixture**
   (GENERATOR/CORPUS FIXTURE ADDITION; NO RUST RUNTIME/PARSER CHANGE).
   Added `hlink_curly_brace` to `tools/gen_oracle_corpus.pl` for `hlink_substitution` input `{abc}`. The fixture

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (`.7.3.3.2` done — JSON-safe `hlink_substitution` curly fixture added; next
-  frontier is `.7.3.3.3` scalar-ref oracle representation)
+- Last updated: `2026-07-03` (`.7.3.3.3` done — hlink scalar-ref bracket/mixed fixtures deferred behind a
+  neutral representation/action-payload owner; next frontier is `.7.3.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -231,13 +231,14 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.2 - harden oracle timeout guard`
 
 - ID: `RUST-PARITY.7.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Try the remaining `hlink_substitution` delimiter/link-path shipped-spec fixtures.
-  Children: `.7.3.3.1`, `.7.3.3.2`, `.7.3.3.3`
+  Children: `.7.3.3.1`, `.7.3.3.2`, `.7.3.3.3`, `.7.3.3.4`
   Acceptance: Author representative non-raw `hlink_substitution` inputs, regenerate fixtures with the timeout
     guard, keep `corpus_oracle` green if they match, or record exact divergence evidence and split a narrower
     fix leaf before changing engine behavior.
-  Verification: `active`
+  Verification: Done/closed 2026-07-03 — JSON-safe `{abc}` is active; bracket/mixed scalar-ref cases are
+    deliberately deferred under `.7.3.3.4` with Perl/Rust evidence and do not block `.7.3.4`.
   Commit: `pending`
 
 - ID: `RUST-PARITY.7.3.3.1`
@@ -272,13 +273,37 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.3.2 - add hlink curly oracle fixture`
 
 - ID: `RUST-PARITY.7.3.3.3`
-  Status: `pending`
+  Status: `done`
   Goal: Decide the cross-variant oracle representation for `hlink_substitution` scalar-ref bracket outputs.
   Acceptance: Define whether/how Perl scalar references in reference ASTs are canonicalized into the JSON oracle,
     probe Rust's representable output for `[abc]` and mixed `foo[bar]{baz}`, then either implement a neutral
     representation with tests/docs or explicitly defer bracket/mixed hlink fixtures with evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-03.** Direct Perl `Data::Dumper`/`JSON::PP` probing shows `[abc]` returns
+    `[\'abc']`, while `foo[bar]{baz}` returns a mixed array containing `\'bar`; both fail JSON encoding with
+    `cannot encode reference to scalar`. Rust source audit shows `RuntimeValue` is currently JSON-native
+    (`Undef`, `Scalar`, `Number`, `Array`, `Hash`, `Bool`) with no scalar-reference representation. A temporary
+    focused Rust execution probe against `specs/hlink_substitution.spec` was then run and removed: it reported
+    the existing action parser warning for `substitute_statement2`
+    (`unexpected character '\' ... near: '\(my $capt = capture_slice()))'`) and `[abc]` fell through to
+    `(HLinkSubst) -E- Unmatched closing bracket` / `Err("exit_now(2)")`. Therefore bracket/mixed fixtures are not
+    a simple JSON adapter addition. They are deferred behind `.7.3.3.4`, which must either define a neutral
+    tagged scalar-ref JSON contract plus Rust parser/runtime support for the scalar-ref action payload, or migrate
+    the shipped hlink spec away from host Perl scalar-ref AST values. No generator/corpus/runtime code changed;
+    the temporary Rust probe was removed and `git diff -- rust/linkedspec-runtime/tests/integration_test.rs` was
+    empty afterward. Knowledge Map, memory architecture, doctrine, and whitespace gates pass; Rust
+    `corpus_oracle` passes over the 66-fixture corpus; full local CI passes with phase0 **1018** tests.
+  Commit: `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures`
+
+- ID: `RUST-PARITY.7.3.3.4`
+  Status: `deferred`
+  Goal: Implement or retire `hlink_substitution` scalar-ref bracket/mixed oracle support.
+  Acceptance: Reopen only when the project chooses one language-neutral path: either define a tagged scalar-ref
+    JSON oracle contract and add Rust action-parser/runtime support for the current `return(\(...))` payload shape,
+    or migrate `specs/hlink_substitution.spec` so bracket payloads use portable value shapes instead of Perl scalar
+    references. Then add `[abc]` and `foo[bar]{baz}` oracle fixtures and keep `corpus_oracle` green.
+  Verification: Deferred 2026-07-03 by `.7.3.3.3` evidence: Perl emits scalar refs that `JSON::PP` cannot encode,
+    and Rust currently cannot execute the scalar-ref action branch in `hlink_substitution`.
+  Commit: Deferred by `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures`
 
 - ID: `RUST-PARITY.7.3.4`
   Status: `pending`
@@ -383,13 +408,14 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.2` | `done` | historic RTLUtils timeout verified retired; oracle generator now enforces a process-level fork/SIGKILL hard timeout |
 | — | `RUST-PARITY.7.3.3.1` | `done` | hlink delimiter candidates split after bracket outputs exposed a scalar-ref JSON representation gap |
 | — | `RUST-PARITY.7.3.3.2` | `done` | added the JSON-safe `{abc}` hlink curly-brace delimiter fixture; corpus 66 fixtures |
-| 1 | `RUST-PARITY.7.3.3.3` | `pending` | decide/own scalar-ref canonical JSON representation before bracket/mixed hlink fixtures |
-| 2 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
-| 3 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
-| 4 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
-| 5 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 6 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 7 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.3.3` | `done` | bracket/mixed hlink scalar-ref fixtures deferred with Perl JSON failure and Rust action-branch evidence |
+| — | `RUST-PARITY.7.3.3.4` | `deferred` | neutral scalar-ref/action-payload contract or hlink spec migration needed before bracket/mixed fixtures |
+| 1 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
+| 2 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
+| 3 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
+| 4 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 5 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 6 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
@@ -468,6 +494,13 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   oracle fixture (`hlink_curly_brace`, input `{abc}`, expected `["{abc}"]`). This raises the corpus to **66**
   fixtures without Rust runtime/parser changes. Bracket and mixed scalar-ref hlink cases remain out of the JSON
   oracle until `.7.3.3.3` decides or defers their representation.
+- `2026-07-03` (`.7.3.3.3` decision): bracket/mixed `hlink_substitution` fixtures are deferred, not encoded under
+  an ad hoc oracle shape. Perl returns scalar references for `[abc]` and mixed `foo[bar]{baz}`, and `JSON::PP`
+  cannot encode them. Rust currently has no scalar-reference `RuntimeValue` and cannot execute the shipped
+  scalar-ref action branch either: the action parser rejects `return(\(my $capt = capture_slice()))`, then the
+  `[abc]` path falls through to unmatched-closing-bracket `exit_now(2)`. The follow-up owner `.7.3.3.4` must
+  either define a tagged scalar-ref JSON contract with Rust parser/runtime support, or migrate
+  `specs/hlink_substitution.spec` to a portable bracket payload shape. Frontier → `.7.3.4`.
 
 ## Open Questions
 
@@ -510,6 +543,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-03` | `RUST-PARITY.7.3.2` | KM retrieval (`rtlutils-regex-hang`, `rust-perl-output-oracle`); `perl -Iperl` module-path check; core/spec/corpus `RTLUtils` scan; fork+SIGKILL census around the current generator; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; forced `ORACLE_TIMEOUT=0` hard-kill check; Rust `corpus_oracle`; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — no live current RTLUtils timeout; generator completed 65 fixtures under a parent hard-timeout wrapper; `run_oracle` now uses per-case fork/SIGKILL instead of `alarm()`; normal regeneration is byte-identical; forced timeout reports `ORACLE_TIMEOUT after 0s (hard kill)`; Rust `corpus_oracle` passes; full local CI passes with phase0 1018 tests. Frontier → `.7.3.3` |
 | `2026-07-03` | `RUST-PARITY.7.3.3.1` | Shipped spec read; existing hlink corpus read; phase0 hlink parser-smoke read; direct `JSON::PP` scalar-ref probe | PASS — `{abc}` is JSON-safe; bracket and mixed hlink outputs contain Perl scalar refs that the current oracle cannot encode. No generator/corpus/runtime code changed. Frontier → `.7.3.3.2` |
 | `2026-07-03` | `RUST-PARITY.7.3.3.2` | Direct Perl `JSON::PP` curly probe; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — `hlink_curly_brace` added for `{abc}` with expected `["{abc}"]`; generator produced **66** fixtures; Rust `corpus_oracle` passes over the 66-fixture corpus; full local CI passes with phase0 **1018** tests. Bracket/mixed scalar-ref hlink cases untouched. Frontier → `.7.3.3.3` |
+| `2026-07-03` | `RUST-PARITY.7.3.3.3` | Direct Perl `Data::Dumper`/`JSON::PP` scalar-ref probe; Rust source audit of `RuntimeValue`; temporary Rust `hlink_substitution` execution probe then removal; `git diff -- rust/linkedspec-runtime/tests/integration_test.rs`; Rust `corpus_oracle`; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/DEFERRED — Perl bracket/mixed outputs contain scalar refs that `JSON::PP` cannot encode; Rust has no neutral scalar-ref runtime value and the current hlink scalar-ref action payload fails parsing before falling through to `exit_now(2)`. Bracket/mixed fixtures are deferred to `.7.3.3.4`; temporary probe removed; corpus oracle passes over **66** fixtures; full local CI passes with phase0 **1018** tests. Frontier → `.7.3.4` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -574,6 +608,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.3.2` | `RUST-PARITY.7.3.2 - harden oracle timeout guard` | tools/gen_oracle_corpus.pl now enforces per-case fork/SIGKILL timeouts; historic RTLUtils timeout verified retired from current core; corpus README and KM wording updated |
 | `RUST-PARITY.7.3.3.1` | `RUST-PARITY.7.3.3.1 - split hlink delimiter fixtures` | no generator/corpus/runtime code change; splits JSON-safe curly fixture from scalar-ref bracket/mixed representation work |
 | `RUST-PARITY.7.3.3.2` | `RUST-PARITY.7.3.3.2 - add hlink curly oracle fixture` | added `hlink_curly_brace` for `{abc}` to the oracle generator and checked-in corpus; 66-fixture corpus oracle green |
+| `RUST-PARITY.7.3.3.3` | `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures` | no generator/corpus/runtime code change; records Perl scalar-ref JSON failure plus Rust scalar-ref action-branch failure and defers bracket/mixed fixtures to `.7.3.3.4` |
 
 ## Changelog
 
@@ -623,3 +658,6 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   `[abc]` and `foo[bar]{baz}` require a scalar-ref oracle representation decision first. Frontier → `.7.3.3.2`.
 - `2026-07-03`: `.7.3.3.2` done — added the JSON-safe `hlink_curly_brace` fixture for `{abc}`. The oracle corpus
   now has **66 fixtures** and Rust `corpus_oracle` passes. Frontier → `.7.3.3.3`.
+- `2026-07-03`: `.7.3.3.3` done — bracket/mixed `hlink_substitution` fixtures deferred with evidence. Perl
+  emits scalar refs that the JSON oracle cannot encode, and Rust currently cannot execute the shipped scalar-ref
+  action branch. Added deferred owner `.7.3.3.4`; frontier → `.7.3.4`.

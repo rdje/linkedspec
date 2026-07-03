@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.3.3 — defer hlink scalar-ref fixtures
+
+**Scope:** Task-tree/index, roadmap pointer, live docs, and Knowledge Map. No generator, corpus, Rust parser, or
+Rust runtime code changed.
+
+**What changed:** Closed the scalar-ref representation decision for bracket/mixed `hlink_substitution` fixtures
+by deferring them to a dedicated follow-up owner (`RUST-PARITY.7.3.3.4`). The current corpus remains at **66**
+fixtures, including the JSON-safe `{abc}` hlink curly fixture; `[abc]` and `foo[bar]{baz}` stay out of the JSON
+oracle.
+
+**Evidence:** Direct Perl probing shows `[abc]` returns a scalar reference and mixed `foo[bar]{baz}` returns an
+array containing a scalar reference; `JSON::PP` fails with `cannot encode reference to scalar`. Rust audit/probe
+shows the gap is broader than JSON: `RuntimeValue` has no scalar-ref representation, and the shipped hlink
+scalar-ref action payload fails Rust action parsing before `[abc]` falls through to unmatched-closing-bracket
+`exit_now(2)`.
+
+**Checks:** Temporary Rust probe removed; `git diff -- rust/linkedspec-runtime/tests/integration_test.rs` empty.
+Knowledge Map, memory architecture, doctrine, and whitespace gates PASS; Rust `corpus_oracle` PASS; full local CI
+PASS with phase0 **1018** tests.
+
 ## 2026-07-03 — RUST-PARITY.7.3.3.2 — add hlink curly oracle fixture
 
 **Scope:** Oracle generator case list, one generated corpus fixture, corpus README, mdBook backend handoff,

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.3.3 — hlink scalar-ref fixtures deferred):
+  Bracket/mixed `hlink_substitution` oracle fixtures are not just waiting on a JSON spelling. Perl's reference AST
+  uses scalar references for bracket payloads, which `JSON::PP` cannot encode, and current Rust has neither a
+  scalar-ref `RuntimeValue` nor working execution for the shipped scalar-ref action branch:
+  `return(\(my $capt = capture_slice()))` is rejected by the Rust action parser and `[abc]` falls through to
+  unmatched-closing-bracket `exit_now(2)`. Keep `[abc]` and `foo[bar]{baz}` out of the corpus until
+  `RUST-PARITY.7.3.3.4` either defines a tagged scalar-ref JSON contract plus Rust support or migrates the hlink
+  spec to portable value shapes. PNT advances to `.7.3.4`.
+
 - 2026-07-03 (RUST-PARITY.7.3.3.2 — hlink curly oracle fixture):
   The JSON-safe `hlink_substitution` curly delimiter candidate is now an active oracle fixture:
   `hlink_curly_brace` with input `{abc}` and Perl reference `["{abc}"]`. This was deliberately limited to the
