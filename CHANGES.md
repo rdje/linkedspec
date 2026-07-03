@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.3.1 — split hlink delimiter fixtures
+
+**Scope:** Task-tree/index, live docs, roadmap pointer, and Knowledge Map. No generator, corpus, parser, or runtime
+code changed.
+
+**What changed:** Split the remaining `hlink_substitution` delimiter fixture work after read-only probing showed
+two separate paths: `{abc}` is a JSON-safe curly-brace fixture candidate, while `[abc]` and mixed
+`foo[bar]{baz}` return Perl scalar references that the current JSON oracle cannot encode.
+
+**Evidence:** Existing phase0 locks expect `[abc]` to return `[\'abc']`; direct `JSON::PP` probing fails with
+`cannot encode reference to scalar`. The scalar-ref representation decision is now owned by `.7.3.3.3`; the next
+frontier `.7.3.3.2` can add the JSON-safe `{abc}` fixture without broadening scope.
+
 ## 2026-07-03 — RUST-PARITY.7.3.2 — harden oracle timeout guard
 
 **Scope:** Oracle generator timeout enforcement, corpus README, task tree/index, roadmap companion, live docs,

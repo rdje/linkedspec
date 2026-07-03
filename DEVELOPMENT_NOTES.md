@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.3.1 — hlink delimiter fixture split):
+  The remaining `hlink_substitution` delimiter cases split by oracle representability. `{abc}` is JSON-safe and
+  can be added as a normal shipped-spec fixture. `[abc]` and mixed `foo[bar]{baz}` return Perl scalar references
+  in the reference AST (`[\'abc']` in phase0), and `JSON::PP` refuses scalar refs with `cannot encode reference to
+  scalar`. That is an oracle-representation decision, not a Rust-runtime fix to guess inside the curly fixture
+  slice. `.7.3.3.2` owns the JSON-safe curly case; `.7.3.3.3` owns scalar-ref canonicalization or explicit
+  deferral for bracket/mixed hlink cases.
+
 - 2026-07-03 (RUST-PARITY.7.3.2 — oracle timeout hardening):
   The timeout question split in `.7.3.1` resolved to two facts. First, the historic `RTLUtils`
   catastrophic-backtrack timeout is not live in the current core tree: `perl/RTLUtils.pm`, `perl/FSMGen.pm`, and

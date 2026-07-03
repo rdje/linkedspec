@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-03` (`.7.3.2` done — historic RTLUtils timeout verified retired; oracle generator now
-  uses a process-level fork/SIGKILL hard timeout; next frontier is `.7.3.3` hlink delimiter/link-path fixtures)
+- Last updated: `2026-07-03` (`.7.3.3.1` done — hlink delimiter fixtures split after the bracket path exposed a
+  Perl scalar-ref JSON representation gap; next frontier is `.7.3.3.2` JSON-safe curly fixture)
 - Owner: repo-local workflow
 
 ## Goal
@@ -231,11 +231,45 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.2 - harden oracle timeout guard`
 
 - ID: `RUST-PARITY.7.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Try the remaining `hlink_substitution` delimiter/link-path shipped-spec fixtures.
+  Children: `.7.3.3.1`, `.7.3.3.2`, `.7.3.3.3`
   Acceptance: Author representative non-raw `hlink_substitution` inputs, regenerate fixtures with the timeout
     guard, keep `corpus_oracle` green if they match, or record exact divergence evidence and split a narrower
     fix leaf before changing engine behavior.
+  Verification: `active`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.3.1`
+  Status: `done`
+  Goal: Triage and split the remaining `hlink_substitution` delimiter fixture candidates before code.
+  Acceptance: Read the shipped spec and existing hlink tests/fixtures, identify which non-raw inputs are
+    JSON-safe fixture candidates, identify any oracle-representation blockers, split follow-up leaves, and avoid
+    generator/corpus/runtime changes.
+  Verification: **DONE 2026-07-03.** Read `specs/hlink_substitution.spec`, existing
+    `hlink_raw_string` / `hlink_raw_escaped_brackets` corpus entries, and phase0
+    `hlink_substitution_parser_smoke` cases. The candidate `{abc}` returns a plain string value (`["{abc}"]`) and
+    is JSON-safe. The bracket candidates `[abc]` and `foo[bar]{baz}` return Perl scalar references in the reference
+    AST (`[\'abc']` / mixed arrays), and `JSON::PP` refuses to encode scalar references (`cannot encode reference to
+    scalar`). Split the work into `.7.3.3.2` for the JSON-safe curly fixture and `.7.3.3.3` for the scalar-ref
+    oracle representation decision before bracket/mixed fixtures.
+  Commit: `RUST-PARITY.7.3.3.1 - split hlink delimiter fixtures`
+
+- ID: `RUST-PARITY.7.3.3.2`
+  Status: `pending`
+  Goal: Add the JSON-safe `hlink_substitution` curly-brace delimiter fixture.
+  Acceptance: Add a representative `{abc}` fixture to the oracle generator, regenerate fixtures with the hardened
+    timeout guard, prove Rust `corpus_oracle` remains green, update live docs/KM, and leave scalar-ref bracket
+    cases untouched.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.7.3.3.3`
+  Status: `pending`
+  Goal: Decide the cross-variant oracle representation for `hlink_substitution` scalar-ref bracket outputs.
+  Acceptance: Define whether/how Perl scalar references in reference ASTs are canonicalized into the JSON oracle,
+    probe Rust's representable output for `[abc]` and mixed `foo[bar]{baz}`, then either implement a neutral
+    representation with tests/docs or explicitly defer bracket/mixed hlink fixtures with evidence.
   Verification: `pending`
   Commit: `pending`
 
@@ -340,13 +374,15 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.2` | `done` | first shipped-spec batch landed: `hlink_substitution` raw-string cases plus Rust captures-only group parity; corpus 65 fixtures |
 | — | `RUST-PARITY.7.3.1` | `done` | batch-2 oracle work split into timeout/hang, hlink, simple-spec divergence, null-output/action-parser, and RTL/plugin/legacy lanes |
 | — | `RUST-PARITY.7.3.2` | `done` | historic RTLUtils timeout verified retired; oracle generator now enforces a process-level fork/SIGKILL hard timeout |
-| 1 | `RUST-PARITY.7.3.3` | `pending` | try remaining `hlink_substitution` delimiter/link-path fixtures with the hardened timeout guard in place |
-| 2 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
-| 3 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
-| 4 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
-| 5 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 6 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 7 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.3.1` | `done` | hlink delimiter candidates split after bracket outputs exposed a scalar-ref JSON representation gap |
+| 1 | `RUST-PARITY.7.3.3.2` | `pending` | add the JSON-safe `{abc}` hlink curly-brace delimiter fixture |
+| 2 | `RUST-PARITY.7.3.3.3` | `pending` | decide/own scalar-ref canonical JSON representation before bracket/mixed hlink fixtures |
+| 3 | `RUST-PARITY.7.3.4` | `pending` | triage `.7.2` structural mismatches for `portmap`, `lib_reader`, and `ebnf` |
+| 4 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
+| 5 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
+| 6 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 7 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 8 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
@@ -417,6 +453,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   interrupt a catastrophic regex. The oracle now runs each parse in a forked child and enforces
   `ORACLE_TIMEOUT` from the parent with `SIGKILL`. This keeps the generic timeout guard real before broader
   shipped-spec corpus work resumes.
+- `2026-07-03` (`.7.3.3.1` split): `hlink_substitution` delimiter fixtures divide by oracle representability.
+  `{abc}` returns a JSON-safe string, while `[abc]` and mixed bracket/brace inputs return Perl scalar references
+  that `JSON::PP` cannot encode. Add the curly fixture first; do not add bracket/mixed fixtures until the
+  scalar-ref representation is explicitly designed.
 
 ## Open Questions
 
@@ -457,6 +497,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-02` | `RUST-PARITY.7.2` | `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`; `cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`; focused Rust parser/runtime checks; `perl -c tools/gen_oracle_corpus.pl`; `perl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check`; full local CI | Header-rest multiline lifecycle parsing and captures-only helper indexing landed; `hlink_substitution` raw-string fixtures are active; 65-fixture corpus oracle passes. Broader candidate divergences are recorded and deferred to `.7.3`/later. |
 | `2026-07-03` | `RUST-PARITY.7.3.1` | Task/KM context read; `tools/gen_oracle_corpus.pl` audit; corpus README/runner audit; `TOOLBOX.md` hang protocol read; Knowledge Map oracle-card retrieval; Knowledge Map regenerate/check; memory architecture; doctrine registry; `git diff --check` | PASS — batch-2 oracle work split into trace-first timeout/hang, hlink delimiter/link-path, simple-spec structural divergence, action-parser/null-output, and RTL/plugin/legacy lanes. No parser/runtime/corpus code changed. |
 | `2026-07-03` | `RUST-PARITY.7.3.2` | KM retrieval (`rtlutils-regex-hang`, `rust-perl-output-oracle`); `perl -Iperl` module-path check; core/spec/corpus `RTLUtils` scan; fork+SIGKILL census around the current generator; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; forced `ORACLE_TIMEOUT=0` hard-kill check; Rust `corpus_oracle`; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — no live current RTLUtils timeout; generator completed 65 fixtures under a parent hard-timeout wrapper; `run_oracle` now uses per-case fork/SIGKILL instead of `alarm()`; normal regeneration is byte-identical; forced timeout reports `ORACLE_TIMEOUT after 0s (hard kill)`; Rust `corpus_oracle` passes; full local CI passes with phase0 1018 tests. Frontier → `.7.3.3` |
+| `2026-07-03` | `RUST-PARITY.7.3.3.1` | Shipped spec read; existing hlink corpus read; phase0 hlink parser-smoke read; direct `JSON::PP` scalar-ref probe | PASS — `{abc}` is JSON-safe; bracket and mixed hlink outputs contain Perl scalar refs that the current oracle cannot encode. No generator/corpus/runtime code changed. Frontier → `.7.3.3.2` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -519,6 +560,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.2` | `RUST-PARITY.7.2 - expand shipped-spec oracle batch` | parser header-rest multiline lifecycle fix; Rust captures-only entry/match group indexing; two `hlink_substitution` raw-string oracle fixtures; 65-fixture corpus oracle green |
 | `RUST-PARITY.7.3.1` | `RUST-PARITY.7.3.1 - split batch-2 oracle lanes and timeout owner` | no runtime/corpus code change; splits the broad remaining shipped-spec oracle batch into timeout/hang investigation, hlink, simple-spec divergence, action-parser/null-output, and RTL/plugin/legacy lanes |
 | `RUST-PARITY.7.3.2` | `RUST-PARITY.7.3.2 - harden oracle timeout guard` | tools/gen_oracle_corpus.pl now enforces per-case fork/SIGKILL timeouts; historic RTLUtils timeout verified retired from current core; corpus README and KM wording updated |
+| `RUST-PARITY.7.3.3.1` | `RUST-PARITY.7.3.3.1 - split hlink delimiter fixtures` | no generator/corpus/runtime code change; splits JSON-safe curly fixture from scalar-ref bracket/mixed representation work |
 
 ## Changelog
 
@@ -564,3 +606,5 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-07-03`: `.7.3.2` done — historic `RTLUtils` timeout verified retired from the active core, and the oracle
   generator's generic timeout is now a real process-level guard (`fork` per parse; parent `SIGKILL` on
   `ORACLE_TIMEOUT`) instead of `alarm()`. Frontier → `.7.3.3`.
+- `2026-07-03`: `.7.3.3.1` done — hlink delimiter candidates split. `{abc}` is the next JSON-safe fixture;
+  `[abc]` and `foo[bar]{baz}` require a scalar-ref oracle representation decision first. Frontier → `.7.3.3.2`.

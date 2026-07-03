@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.3.1 — hlink delimiter fixtures split**
+  (NO GENERATOR/CORPUS/RUNTIME CODE CHANGE).
+  Read the shipped `hlink_substitution.spec`, existing hlink corpus fixtures, and the phase0
+  `hlink_substitution_parser_smoke` cases. The delimiter candidates split cleanly by JSON representability:
+  `{abc}` returns a plain string payload and can be added as a normal fixture, while `[abc]` and mixed
+  `foo[bar]{baz}` return Perl scalar references that `JSON::PP` cannot encode.
+
+  **Verification:** direct `JSON::PP` scalar-ref probe fails with `cannot encode reference to scalar`; new KM fact
+  card records the blocker. No generator/corpus/runtime code changed.
+
+  **Frontier:** `RUST-PARITY.7.3.3.2` — add the JSON-safe `{abc}` hlink curly-brace fixture.
+
 - 2026-07-03: **RUST-PARITY.7.3.2 — oracle timeout guard hardened**
   (GENERATOR SAFETY FIX; NO CORPUS FIXTURE VALUE CHANGE).
   The historical `RTLUtils` timeout was verified retired from the active core tree: `perl/RTLUtils.pm`,
