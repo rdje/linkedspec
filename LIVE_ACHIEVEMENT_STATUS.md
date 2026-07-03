@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-03: **RUST-PARITY.7.3.3.2 — hlink curly-brace oracle fixture**
+  (GENERATOR/CORPUS FIXTURE ADDITION; NO RUST RUNTIME/PARSER CHANGE).
+  Added `hlink_curly_brace` to `tools/gen_oracle_corpus.pl` for `hlink_substitution` input `{abc}`. The fixture
+  stores the Perl reference value `["{abc}"]`, matching the JSON-safe curly delimiter path split out by
+  `.7.3.3.1`.
+
+  **Verification:** direct Perl `JSON::PP` probe encoded `{abc}` as `["{abc}"]`; `perl -c -Iperl
+  tools/gen_oracle_corpus.pl` PASS; `perl -Iperl tools/gen_oracle_corpus.pl` generated **66** fixtures; Rust
+  `corpus_oracle` PASS over the 66-fixture corpus; mdBook PASS; Knowledge Map, memory, doctrine, whitespace, and
+  full local CI gates PASS (phase0 **1018** tests).
+
+  **Frontier:** `RUST-PARITY.7.3.3.3` — decide or explicitly defer scalar-ref oracle representation for `[abc]`
+  and mixed `foo[bar]{baz}` hlink fixtures.
+
 - 2026-07-03: **RUST-PARITY.7.3.3.1 — hlink delimiter fixtures split**
   (NO GENERATOR/CORPUS/RUNTIME CODE CHANGE).
   Read the shipped `hlink_substitution.spec`, existing hlink corpus fixtures, and the phase0

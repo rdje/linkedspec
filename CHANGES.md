@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-03 — RUST-PARITY.7.3.3.2 — add hlink curly oracle fixture
+
+**Scope:** Oracle generator case list, one generated corpus fixture, corpus README, mdBook backend handoff,
+task-tree/index, live docs, roadmap pointer, and Knowledge Map. No Rust runtime/parser behavior changed.
+
+**What changed:** Added the JSON-safe `hlink_substitution` curly-brace delimiter case `hlink_curly_brace`
+(`{abc}`) to `tools/gen_oracle_corpus.pl` and regenerated the language-neutral oracle corpus. The new fixture
+stores `{abc}` as input and `["{abc}"]` as the Perl reference value.
+
+**Evidence:** Direct `perl -Iperl -MJSON::PP -MLinkedSpec` probing encoded `{abc}` as canonical JSON
+`["{abc}"]`; generator syntax passed; normal regeneration wrote **66** fixtures; Rust `corpus_oracle` passed over
+the 66-fixture corpus. Bracket/mixed scalar-reference hlink cases remain untouched and owned by `.7.3.3.3`.
+
+**Checks:** mdBook build PASS; Knowledge Map, memory architecture, doctrine, and whitespace gates PASS; full local
+CI PASS with phase0 **1018** tests.
+
 ## 2026-07-03 — RUST-PARITY.7.3.3.1 — split hlink delimiter fixtures
 
 **Scope:** Task-tree/index, live docs, roadmap pointer, and Knowledge Map. No generator, corpus, parser, or runtime

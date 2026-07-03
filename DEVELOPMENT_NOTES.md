@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-03 (RUST-PARITY.7.3.3.2 — hlink curly oracle fixture):
+  The JSON-safe `hlink_substitution` curly delimiter candidate is now an active oracle fixture:
+  `hlink_curly_brace` with input `{abc}` and Perl reference `["{abc}"]`. This was deliberately limited to the
+  plain-string path from `.7.3.3.1`; the scalar-ref bracket and mixed hlink cases still need the explicit
+  representation decision owned by `.7.3.3.3`. The generator remains under the fork/SIGKILL hard timeout, and
+  Rust `corpus_oracle` is green over 66 fixtures without runtime changes.
+
 - 2026-07-03 (RUST-PARITY.7.3.3.1 — hlink delimiter fixture split):
   The remaining `hlink_substitution` delimiter cases split by oracle representability. `{abc}` is JSON-safe and
   can be added as a normal shipped-spec fixture. `[abc]` and mixed `foo[bar]{baz}` return Perl scalar references

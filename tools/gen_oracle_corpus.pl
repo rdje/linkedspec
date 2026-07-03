@@ -972,6 +972,8 @@ SPEC
     # ── RUST-PARITY.7.2 — structurally simple shipped-spec corpus batch ──
     { case => 'hlink_raw_string',              spec => 'hlink_substitution', input => 'plain text' },
     { case => 'hlink_raw_escaped_brackets',    spec => 'hlink_substitution', input => 'plain \[text\]' },
+    # ── RUST-PARITY.7.3.3.2 — JSON-safe hlink_substitution curly delimiter ──
+    { case => 'hlink_curly_brace',             spec => 'hlink_substitution', input => '{abc}' },
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

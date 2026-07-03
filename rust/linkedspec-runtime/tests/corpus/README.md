@@ -58,4 +58,6 @@ corpus then had 63 fixtures.
 
 `RUST-PARITY.7.2` added the first post-retirement shipped-spec expansion: two
 `hlink_substitution` raw-string cases (`hlink_raw_string` and
-`hlink_raw_escaped_brackets`). The corpus now has 65 fixtures.
+`hlink_raw_escaped_brackets`). `RUST-PARITY.7.3.3.2` then added the JSON-safe
+curly-brace delimiter fixture (`hlink_curly_brace`, input `{abc}`). The corpus
+now has 66 fixtures.

@@ -14,7 +14,7 @@ answers:
 date: 2026-07-03
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.7.3.1 split the remaining/harder shipped-spec oracle batch after reading docs/tasks/RUST-PARITY.md, tools/gen_oracle_corpus.pl, rust/linkedspec-runtime/tests/corpus/README.md, rust/linkedspec-runtime/tests/corpus_oracle.rs, TOOLBOX.md, and the rust-perl-output-oracle Knowledge Map card. The corpus is green over 65 fixtures after .7.2, and .7.2 recorded concrete divergences for portmap, lib_reader, ebnf, BNF, DT, ifelse, operators_try, and spec.spec smokes. After the user directed timeout debugging instead of treating the timeout as a vague guard, the split leaves became .7.3.2 trace-first timeout/hang investigation, .7.3.3 hlink_substitution delimiter/link paths, .7.3.4 portmap/lib_reader/ebnf structural divergence triage, .7.3.5 BNF/DT/ifelse/operators_try/spec.spec null-output or action-parser-warning triage, and .7.3.6 post-timeout RTL/plugin/legacy safety smoke. RUST-PARITY.7.3.2 then verified the historic RTLUtils timeout is retired and hardened gen_oracle_corpus with per-case fork/SIGKILL timeouts. RUST-PARITY.7.3.3.1 split hlink delimiter work after bracket outputs exposed the scalar-ref JSON gap, so the current frontier is .7.3.3.2."
+evidence: "RUST-PARITY.7.3.1 split the remaining/harder shipped-spec oracle batch after reading docs/tasks/RUST-PARITY.md, tools/gen_oracle_corpus.pl, rust/linkedspec-runtime/tests/corpus/README.md, rust/linkedspec-runtime/tests/corpus_oracle.rs, TOOLBOX.md, and the rust-perl-output-oracle Knowledge Map card. The corpus was green over 65 fixtures after .7.2, and .7.2 recorded concrete divergences for portmap, lib_reader, ebnf, BNF, DT, ifelse, operators_try, and spec.spec smokes. After the user directed timeout debugging instead of treating the timeout as a vague guard, the split leaves became .7.3.2 trace-first timeout/hang investigation, .7.3.3 hlink_substitution delimiter/link paths, .7.3.4 portmap/lib_reader/ebnf structural divergence triage, .7.3.5 BNF/DT/ifelse/operators_try/spec.spec null-output or action-parser-warning triage, and .7.3.6 post-timeout RTL/plugin/legacy safety smoke. RUST-PARITY.7.3.2 then verified the historic RTLUtils timeout is retired and hardened gen_oracle_corpus with per-case fork/SIGKILL timeouts. RUST-PARITY.7.3.3.1 split hlink delimiter work after bracket outputs exposed the scalar-ref JSON gap. RUST-PARITY.7.3.3.2 added the JSON-safe {abc} fixture, so the current frontier is .7.3.3.3."
 reverify: "rg -n 'RUST-PARITY\\.7\\.3\\.[1-6]|timeout/hang|hlink_substitution|portmap|lib_reader|operators_try|RTL/plugin/legacy' docs/tasks/RUST-PARITY.md docs/TASK_TREE.md"
 ---
 
@@ -31,12 +31,14 @@ adjacent specs that should not proceed until timeout wording is current.
 the current core tree, and `tools/gen_oracle_corpus.pl` now enforces its generic
 timeout with per-case fork/SIGKILL instead of `alarm()`. `RUST-PARITY.7.3.3.1`
 is also done: hlink delimiter candidates are split by JSON representability.
-The current frontier is `RUST-PARITY.7.3.3.2`: add the JSON-safe `{abc}` curly
-fixture with the hardened oracle guard in place.
+`RUST-PARITY.7.3.3.2` added the JSON-safe `{abc}` curly fixture with the
+hardened oracle guard in place. The current frontier is
+`RUST-PARITY.7.3.3.3`: decide or defer scalar-ref representation for bracket and
+mixed hlink fixtures.
 
 The later lanes are:
 
-- `.7.3.3.2`: JSON-safe `hlink_substitution` curly-brace fixture.
+- `.7.3.3.2`: done — JSON-safe `hlink_substitution` curly-brace fixture.
 - `.7.3.3.3`: scalar-ref representation decision for `hlink_substitution`
   bracket/mixed fixtures.
 - `.7.3.4`: `portmap`, `lib_reader`, and `ebnf` structural divergence triage.
