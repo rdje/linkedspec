@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.2 — non-repetition generated dispatch tracing):
+  Non-repetition Perl generated handler templates now emit branch decisions through
+  `trace_generated_handler_branch(...)`. Keep new non-REP branches on that helper rather than hand-formatting trace
+  strings. Current branch names include `match`, `no_match_lx`, `acode_index_<n>`, `required_index_0`,
+  `required_sequence_index`, `bcode_call_<Rule>`, `bcode_child_result`, and `bcode_no_child_match`. These are
+  debug-level events, so CLI/per-call probes that need generated-handler branches must use `--trace debug` or
+  `trace_level => 'debug'`. Repetition loops are intentionally still plain generated Perl here; `.3.3` owns min/max,
+  loop continuation, and zero-progress trace decisions.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.1 — generated-handler branch helper seam):
   `LinkedSpec::Trace::trace_generated_handler_branch(%args)` is the only helper contract generated Perl handler
   templates should use for branch decisions. It returns the normalized original `taken` value, so wrapping a branch

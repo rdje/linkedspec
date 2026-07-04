@@ -7,8 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.3.2 — trace non-repetition generated dispatch**
+  (NON-REP GENERATED HANDLER BRANCH TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.3).
+
+  **Fix:** Perl generated handlers for non-repetition runtime paths now wrap emitted branch conditions with
+  `LinkedSpec::Trace::trace_generated_handler_branch(...)`. Debug trace now reports match/miss, `LX` no-match,
+  acode index dispatch, AND sequence index checks, bcode child-call dispatch, and bcode child-result decisions
+  inside generated handler bodies. Repetition loop min/max/zero-progress branches remain owned by `.3.3`.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`,
+  `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`, and focused `prove` pass. The regression isolates runtime
+  trace from compile-time bootstrap trace and source-inspects a REP handler to prove repetition instrumentation is
+  still deferred. `tools/run_ci_local.sh` passes with phase0 at 1021 green.
+
+  **Frontier:** `TRACE-OBSERVABILITY.3.3` — instrument repetition generated handler paths.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.3.1 — add generated-handler trace helper seam**
-  (HELPER CONTRACT CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.2).
+  (HELPER CONTRACT CLOSED; TRACE-OBSERVABILITY.3.2 HAS SINCE CLOSED).
 
   **Fix:** Added `LinkedSpec::Trace::trace_generated_handler_branch(%args)`, the reusable Perl reference helper
   that generated handler templates can use for branch decisions. It returns the original branch boolean, emits a
@@ -17,10 +32,11 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Verification:** `perl -c -Iperl perl/LinkedSpec/Trace.pm`, `perl -c -Iperl t/trace_generated_handler_branch.t`,
   focused `prove`, mdBook, Knowledge Map, memory/doctrine, whitespace, and `tools/run_ci_local.sh` pass. Full local
-  CI includes phase0 at 1021 green. Template call-site wiring remains owned by `.3.2` and `.3.3`.
+  CI includes phase0 at 1021 green. Template call-site wiring was left to `.3.2` and `.3.3`; `.3.2` has since
+  closed non-repetition template wiring.
 
-  **Frontier:** `TRACE-OBSERVABILITY.3.2` — instrument non-repetition generated handler dispatch paths with the
-  helper seam.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.2`; `.3.2` has since closed and current frontier is
+  `TRACE-OBSERVABILITY.3.3`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3 — split trace coverage extension**
   (DOCS-ONLY SPLIT CLOSED; TRACE-OBSERVABILITY.3.1 HAS SINCE CLOSED).
@@ -34,7 +50,7 @@ Current execution status for interruption-safe batch workflow recovery.
   CLI behavior changed in this split.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3.1`; `.3.1` has since closed and the current frontier is
-  `TRACE-OBSERVABILITY.3.2`.
+  `TRACE-OBSERVABILITY.3.3`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.2 — add trace CLI control**
   (DISCOVERABLE TRACE CONTROL CLOSED; TRACE-OBSERVABILITY.3 HAS SINCE SPLIT).
@@ -50,7 +66,7 @@ Current execution status for interruption-safe batch workflow recovery.
   remains `["alpha","beta"]`; full local CI includes phase0 at 1021 green.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3`; `.3` has since split, `.3.1` has since closed, and the
-  current frontier is `TRACE-OBSERVABILITY.3.2`.
+  current frontier is `TRACE-OBSERVABILITY.3.3`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.1 — audit trace coverage gaps**
   (READ-ONLY AUDIT CLOSED; TRACE-OBSERVABILITY.2 HAS SINCE CLOSED).
@@ -67,7 +83,7 @@ Current execution status for interruption-safe batch workflow recovery.
   doctrine/memory gates.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.2`; `.2` has since closed, `.3` has since split, `.3.1` has
-  since closed, and the current frontier is `TRACE-OBSERVABILITY.3.2`.
+  since closed, and the current frontier is `TRACE-OBSERVABILITY.3.3`.
 
 - 2026-07-04: **TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values**
   (TOP-RULE-AS-NORMAL TREE CLOSED; FRONTIER AT COMPLETION TRACE-OBSERVABILITY.1, NOW CLOSED).
@@ -85,7 +101,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.1` — coverage audit before CLI/docs/coverage implementation;
   `.1` and `.2` have since closed, `.3` has since split, `.3.1` has since closed, and the current frontier is
-  `TRACE-OBSERVABILITY.3.2`.
+  `TRACE-OBSERVABILITY.3.3`.
 
 - 2026-07-04: **RUST-PARITY.9 — finalize Rust parity documentation**
   (RUST-PARITY TREE CLOSED; TOP-RULE-AS-NORMAL.3.2 UNBLOCKED).

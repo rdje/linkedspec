@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.2 — trace non-repetition generated dispatch
+
+**Scope:** Perl generated handler templates, focused runtime trace regression, mdBook trace docs, toolbox,
+task-tree/frontier sync, live recovery docs, and Knowledge Map.
+
+**What changed:** Non-repetition generated handlers now wrap emitted branch conditions with
+`LinkedSpec::Trace::trace_generated_handler_branch(...)`. The Perl reference trace can now show runtime regex
+match/miss decisions, `LX` no-match paths, acode index choices, AND sequence index checks, bcode child-call
+dispatch, and bcode child-result checks in generated handler bodies. Repetition handlers are deliberately left
+untraced in this slice and remain owned by `TRACE-OBSERVABILITY.3.3`.
+
+**Evidence:** Focused coverage in `t/trace_generated_nonrep_dispatch.t` builds parsers with trace disabled, resets
+debug routed trace before runtime invocation, and proves `_default`, `AND_BCODE`, `OR_BCODE`, `AND_ACODE`, and
+`OR_ACODE` branch decisions appear without changing parser results. The same test inspects generated source to
+prove `REP_ACODE` bodies remain uninstrumented for the next leaf. Full local CI passes, including phase0 at 1021
+green.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.1 — add generated-handler trace helper seam
 
 **Scope:** Perl trace owner, focused helper regression, mdBook trace docs, task-tree/frontier sync, live recovery

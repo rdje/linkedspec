@@ -435,8 +435,14 @@ When generated handler templates use the branch helper, decision names follow th
 generated_handler_branch:<handler_kind>:<rule_label>:<branch>
 ```
 
-Those helper events return the original branch boolean and evaluate lazy detail builders only when tracing is
-enabled, so branch tracing should not perturb parser behavior.
+In the Perl reference backend, non-repetition generated handlers emit those decisions at `debug` level for regex
+match/miss, `LX` no-match paths, acode dispatch, AND sequence checks, bcode child-call dispatch, and bcode
+child-result checks. Typical branch names are `match`, `no_match_lx`, `acode_index_0`,
+`required_sequence_index`, `bcode_call_Child`, and `bcode_child_result`. Repetition min/max and zero-progress loop
+decisions remain a later coverage slice.
+
+Those helper events return the normalized original branch boolean and evaluate lazy detail builders only when
+tracing is enabled, so branch tracing should not perturb parser behavior.
 
 Those names are intentionally concrete. Trace output should help users answer:
 

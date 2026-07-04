@@ -368,14 +368,31 @@ sub _linkedre_or_expr {
 # Purpose : Build the if/elsif dispatch block for per-regex acode entries.
 #------------------------------------------------------------------------------
 sub _build_acodes_dispatch_block {
-    my ($acodes_ref) = @_;
+    my ($acodes_ref, %args) = @_;
     return '' unless ref($acodes_ref) eq 'ARRAY' && @$acodes_ref;
+    my $trace_enabled = $args{trace_enabled} ? 1 : 0;
+    my $label = $args{label};
+    my $handler_kind = $args{handler_kind};
     my $once   = 0;
     my $idx    = 0;
     my $acodes = '';
-    $acodes .= ($once++ ? " elsif " : "\n   if")
-        . '($$minfo{index} == ' . $idx++ . ") {\n    $_\n   }"
-        foreach (@$acodes_ref);
+    foreach my $acode (@$acodes_ref) {
+        my $expected_idx = $idx++;
+        my $condition = _trace_branch_condition(
+            enabled => $trace_enabled,
+            label => $label,
+            handler_kind => $handler_kind,
+            branch => 'acode_index_' . $expected_idx,
+            taken_expr => '$$minfo{index} == ' . $expected_idx,
+            meta => [
+                [ match_index => '$$minfo{index}' ],
+                [ pos => 'pos($$STRING)' ],
+            ],
+            details_expr => 'sub { ' . _quote_perl_string('expected_index=' . $expected_idx) . ' }',
+        );
+        $acodes .= ($once++ ? " elsif " : "\n   if")
+            . "($condition) {\n    $acode\n   }";
+    }
     return $acodes;
 }
 
@@ -384,15 +401,30 @@ sub _build_acodes_dispatch_block {
 # Purpose : Build the if/elsif dispatch block for per-edge bcode entries.
 #------------------------------------------------------------------------------
 sub _build_bcodes_dispatch_block {
-    my ($bcalls_ref, $bcodes_ref) = @_;
+    my ($bcalls_ref, $bcodes_ref, %args) = @_;
     return '' unless ref($bcalls_ref) eq 'ARRAY' && @$bcalls_ref;
     return '' unless ref($bcodes_ref) eq 'HASH';
+    my $trace_enabled = $args{trace_enabled} ? 1 : 0;
+    my $label = $args{label};
+    my $handler_kind = $args{handler_kind};
     my $once   = 0;
     my $bcodes = '';
     foreach my $call (@$bcalls_ref) {
         my $call_code = defined($bcodes_ref->{$call}) ? $bcodes_ref->{$call} : '';
+        my $condition = _trace_branch_condition(
+            enabled => $trace_enabled,
+            label => $label,
+            handler_kind => $handler_kind,
+            branch => 'bcode_call_' . $call,
+            taken_expr => '$call eq ' . _quote_perl_string($call),
+            meta => [
+                [ call => '$call' ],
+                [ pos => 'pos($$STRING)' ],
+            ],
+            details_expr => 'sub { ' . _quote_perl_string('expected_call=' . $call) . ' }',
+        );
         $bcodes .= ($once++ ? " elsif " : "\n   if")
-            . "(\$call eq \"$call\") {\n    $call_code\n   }";
+            . "($condition) {\n    $call_code\n   }";
     }
     return $bcodes;
 }
@@ -408,6 +440,53 @@ sub _build_lmatch_extraction {
    my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
    my $LINDEX      = $$minfo{index};
    my $LSPOS       = pos $$STRING;';
+}
+
+sub _quote_perl_string {
+    my ($value) = @_;
+    $value = '' unless defined $value;
+    $value =~ s/\\/\\\\/g;
+    $value =~ s/'/\\'/g;
+    $value =~ s/\r/\\r/g;
+    $value =~ s/\n/\\n/g;
+    return "'" . $value . "'";
+}
+
+sub _trace_branches_enabled {
+    my ($ir) = @_;
+    return 0 if ref($ir) eq 'HASH'
+        && exists($ir->{trace_generated_handler_branches})
+        && !$ir->{trace_generated_handler_branches};
+    return 1;
+}
+
+sub _trace_branch_condition {
+    my (%args) = @_;
+    my $taken_expr = $args{taken_expr} // '0';
+    return $taken_expr unless $args{enabled};
+
+    my @fields = (
+        'rule_label => ' . _quote_perl_string($args{label}),
+        'handler_kind => ' . _quote_perl_string($args{handler_kind}),
+        'branch => ' . _quote_perl_string($args{branch}),
+        'taken => (' . $taken_expr . ')',
+    );
+    if (ref($args{meta}) eq 'ARRAY') {
+        foreach my $pair (@{$args{meta}}) {
+            next unless ref($pair) eq 'ARRAY' && @$pair == 2;
+            push @fields, $pair->[0] . ' => ' . $pair->[1];
+        }
+    }
+    push @fields, 'details => ' . $args{details_expr}
+        if defined($args{details_expr}) && length($args{details_expr});
+    return 'LinkedSpec::Trace::trace_generated_handler_branch(' . join(', ', @fields) . ')';
+}
+
+sub _trace_branch_statement {
+    my (%args) = @_;
+    return '' unless $args{enabled};
+    my $indent = defined($args{indent}) ? $args{indent} : '';
+    return $indent . _trace_branch_condition(%args) . ";\n";
 }
 
 #===========================================================================
@@ -465,18 +544,51 @@ sub _emit_handler_perl {
 sub _emit_default_handler {
     my ($ir) = @_;
     my $label      = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
     my $lxcode     = $ir->{lxcode} || 'return undef';
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
-        my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
+    my $acodes     = _build_acodes_dispatch_block(
+        $ir->{acodes_ref},
+        label => $label,
+        handler_kind => $handler_kind,
+        trace_enabled => $trace_enabled,
+    );
     my $lmatch     = _build_lmatch_extraction();
+    my $match_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '  ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'match',
+        taken_expr => 'defined($minfo) ? 1 : 0',
+        meta => [
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
+    );
+    my $lx_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '   ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'no_match_lx',
+        taken_expr => '1',
+        meta => [
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "no regex match; executing LX/default miss path" }',
+    );
     return '
 
  while (1) {
   my $minfo = ' . $match_expr . ';
+' . $match_trace . '
 
   unless($minfo) {
+' . $lx_trace . '
   ' . $lxcode . '
   }
 ' . $lmatch . '
@@ -496,11 +608,31 @@ sub _emit_default_handler {
 sub _emit_and_bcode_handler {
     my ($ir) = @_;
     my $label      = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $lxcode     = $ir->{lxcode} || 'return undef';
     my $lecode     = $ir->{lecode} || 'push @' . $label . '_collect, $' . $label;
     my $ecode      = $ir->{ecode}  || 'return \@' . $label . '_collect';
-    my $bcodes     = _build_bcodes_dispatch_block($ir->{bcalls_ref}, $ir->{bcodes_ref});
+    my $bcodes     = _build_bcodes_dispatch_block(
+        $ir->{bcalls_ref},
+        $ir->{bcodes_ref},
+        label => $label,
+        handler_kind => $handler_kind,
+        trace_enabled => $trace_enabled,
+    );
     my $bcalls     = join(' ', @{$ir->{bcalls_ref}});
+    my $child_result_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'bcode_child_result',
+        taken_expr => '$' . $label,
+        meta => [
+            [ call => '$current_call' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "return_ref=" . (ref($' . $label . ') || "") }',
+    );
 
     # When REs + and_icode are present (AND rule with per-regex I-block), emit
     # regex match + IMATCH bridge + return->assignment + push before edge dispatch.
@@ -509,9 +641,35 @@ sub _emit_and_bcode_handler {
     if (ref($ir->{REs}) eq 'ARRAY' && @{$ir->{REs}}) {
         my $match_expr = _linkedre_or_expr(%$ir, label => $label);
         my $lmatch = _build_lmatch_extraction();
+        my $match_trace = _trace_branch_statement(
+            enabled => $trace_enabled,
+            indent => '  ',
+            label => $label,
+            handler_kind => $handler_kind,
+            branch => 'match',
+            taken_expr => 'defined($minfo) ? 1 : 0',
+            meta => [
+                [ pos => 'pos($$STRING)' ],
+            ],
+            details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
+        );
+        my $lx_trace = _trace_branch_statement(
+            enabled => $trace_enabled,
+            indent => '   ',
+            label => $label,
+            handler_kind => $handler_kind,
+            branch => 'no_match_lx',
+            taken_expr => '1',
+            meta => [
+                [ pos => 'pos($$STRING)' ],
+            ],
+            details_expr => 'sub { "no regex match; executing LX/default miss path" }',
+        );
         $match_section .= '
   my $minfo = ' . $match_expr . ';
+' . $match_trace . '
   unless($minfo) {
+' . $lx_trace . '
    ' . $lxcode . '
   }
  ' . $lmatch . '
@@ -547,7 +705,7 @@ sub _emit_and_bcode_handler {
 
    ' . $bcodes . '
 
-   unless ($' . $label . ') {
+   unless (' . $child_result_condition . ') {
     ' . $lxcode . '
    }
 
@@ -564,6 +722,8 @@ sub _emit_and_bcode_handler {
 sub _emit_and_single_acode_handler {
     my ($ir) = @_;
     my $label      = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
     my $lxcode     = $ir->{lxcode} || 'return undef';
     my $lscode     = $ir->{lscode} || '';
@@ -575,8 +735,49 @@ sub _emit_and_single_acode_handler {
     # `push @acodes_transformed` was missing — so the edge action was dropped and the
     # handler fell through to an empty `[]`; it also used the same broken `\$"`
     # substitution (a reference to the list-separator $") as the multi-regex handler.
-    my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
+    my $acodes = _build_acodes_dispatch_block(
+        $ir->{acodes_ref},
+        label => $label,
+        handler_kind => $handler_kind,
+        trace_enabled => $trace_enabled,
+    );
     my $lmatch     = _build_lmatch_extraction();
+    my $match_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => ' ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'match',
+        taken_expr => 'defined($minfo) ? 1 : 0',
+        meta => [
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
+    );
+    my $lx_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '  ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'no_match_lx',
+        taken_expr => '1',
+        meta => [
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "no regex match; executing LX/default miss path" }',
+    );
+    my $index_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'required_index_0',
+        taken_expr => '$$minfo{index} == 0',
+        meta => [
+            [ match_index => '$$minfo{index}' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "expected_index=0" }',
+    );
 
     # Per-regex I-block code (routed through acode_entries by RuleIR for AND rules).
     # It runs after the regex match with return→assignment so the handler collects
@@ -605,11 +806,13 @@ sub _emit_and_single_acode_handler {
 
  my @' . $label . '_collect;
  my $minfo = ' . $match_expr . ';
+' . $match_trace . '
  unless($minfo) {
+' . $lx_trace . '
   ' . $lxcode . '
  }
 
- unless($$minfo{index} == 0) {
+ unless(' . $index_condition . ') {
   ' . $lxcode . '
  }
 ' . $lmatch . '
@@ -630,6 +833,8 @@ sub _emit_and_single_acode_handler {
 sub _emit_and_acode_seq_handler {
     my ($ir) = @_;
     my $label       = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr  = _linkedre_or_expr(%$ir, label => $label);
     my $lxcode      = $ir->{lxcode} || 'return undef';
     my $lscode      = $ir->{lscode} || '';
@@ -645,8 +850,39 @@ sub _emit_and_acode_seq_handler {
     # `\$"` parses as a reference to the list-separator variable $", so the emitter
     # produced invalid `SCALAR(0x..)<label> = ...` Perl (compile-fail for a top rule,
     # dropped payload for a child) AND the wrong (collect-wrapped) result shape.
-    my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
+    my $acodes = _build_acodes_dispatch_block(
+        $ir->{acodes_ref},
+        label => $label,
+        handler_kind => $handler_kind,
+        trace_enabled => $trace_enabled,
+    );
     my $lmatch      = _build_lmatch_extraction();
+    my $match_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '  ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'match',
+        taken_expr => 'defined($minfo) ? 1 : 0',
+        meta => [
+            [ loop_count => '$idx' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
+    );
+    my $index_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'required_sequence_index',
+        taken_expr => '$$minfo{index} == $idx',
+        meta => [
+            [ loop_count => '$idx' ],
+            [ match_index => '$$minfo{index}' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "expected_index=$idx" }',
+    );
     return '
 
  my @' . $label . '_collect;
@@ -654,11 +890,12 @@ sub _emit_and_acode_seq_handler {
 
  while ($idx < ' . $acode_count . ') {
   my $minfo = ' . $match_expr . ';
+' . $match_trace . '
   unless($minfo) {
    ' . $lxcode . '
   }
 
-  unless($$minfo{index} == $idx) {
+  unless(' . $index_condition . ') {
    ' . $lxcode . '
   }
 ' . $lmatch . '
@@ -682,10 +919,42 @@ sub _emit_and_acode_seq_handler {
 sub _emit_or_bcode_handler {
     my ($ir) = @_;
     my $label  = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $lxcode = $ir->{lxcode} || 'return $' . $label;
     my $ecode  = $ir->{ecode}  || 'return undef';
-    my $bcodes = _build_bcodes_dispatch_block($ir->{bcalls_ref}, $ir->{bcodes_ref});
+    my $bcodes = _build_bcodes_dispatch_block(
+        $ir->{bcalls_ref},
+        $ir->{bcodes_ref},
+        label => $label,
+        handler_kind => $handler_kind,
+        trace_enabled => $trace_enabled,
+    );
     my $bcalls = join(' ', @{$ir->{bcalls_ref}});
+    my $child_result_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'bcode_child_result',
+        taken_expr => '$' . $label,
+        meta => [
+            [ call => '$current_call' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "return_ref=" . (ref($' . $label . ') || "") }',
+    );
+    my $no_child_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '  ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'bcode_no_child_match',
+        taken_expr => '1',
+        meta => [
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "executing OR bcode miss/default E path" }',
+    );
     return '
 
   my $' . $label . ';
@@ -694,11 +963,12 @@ sub _emit_or_bcode_handler {
 
    ' . $bcodes . '
 
-   if ($' . $label . ') {
+   if (' . $child_result_condition . ') {
     ' . $lxcode . '
    }
   }
 
+' . $no_child_trace . '
   ' . $ecode . '
  ';
 }
@@ -709,14 +979,47 @@ sub _emit_or_bcode_handler {
 sub _emit_or_acode_handler {
     my ($ir) = @_;
     my $label      = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
     my $lxcode     = $ir->{lxcode} || 'return undef';
-        my $acodes = _build_acodes_dispatch_block($ir->{acodes_ref});
+    my $acodes     = _build_acodes_dispatch_block(
+        $ir->{acodes_ref},
+        label => $label,
+        handler_kind => $handler_kind,
+        trace_enabled => $trace_enabled,
+    );
     my $lmatch     = _build_lmatch_extraction();
+    my $match_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => ' ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'match',
+        taken_expr => 'defined($minfo) ? 1 : 0',
+        meta => [
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
+    );
+    my $lx_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '  ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'no_match_lx',
+        taken_expr => '1',
+        meta => [
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "no regex match; executing LX/default miss path" }',
+    );
     return '
 
  my $minfo = ' . $match_expr . ';
+' . $match_trace . '
  unless($minfo) {
+' . $lx_trace . '
  ' . $lxcode . '
  }
 ' . $lmatch . '
@@ -743,6 +1046,7 @@ sub _emit_rep_bcode_handler {
         kind   => 'or_bcode',
         ecode  => 'return undef',
         lxcode => $ir->{lxcode} || 'return $' . $label,
+        trace_generated_handler_branches => 0,
     });
     return undef unless defined $or_body;
 
@@ -804,6 +1108,7 @@ sub _emit_rep_and_bcode_handler {
         %$ir,
         kind  => 'and_bcode',
         ecode => 'return \@' . $label . '_collect',
+        trace_generated_handler_branches => 0,
     });
     return undef unless defined $and_body;
 
@@ -866,6 +1171,7 @@ sub _emit_rep_and_acode_handler {
         kind        => 'and_acode_seq',
         acode_count => $ir->{acode_count},
         ecode       => 'return \@' . $label . '_collect',
+        trace_generated_handler_branches => 0,
     });
     return undef unless defined $and_body;
 

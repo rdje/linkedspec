@@ -12,7 +12,7 @@ The Perl reference backend ships a small command-line runner at `bin/linkedspec`
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
-  --trace high \
+  --trace debug \
   --trace-file linkedspec.trace.log \
   --trace-mode route \
   --trace-reset
@@ -94,6 +94,13 @@ The helper accepts `rule_label` (or `label`), `handler_kind` (or `kind`), `branc
 as `match_index`, `call`, `pos`, `loop_count`, `rep_min`, and `rep_max`, plus `reason` or `details`. If `details`
 is a coderef, LinkedSpec evaluates it only when the configured trace level enables the event. A details coderef
 error is captured in trace text instead of changing the branch result. The default event level is `debug`.
+
+The Perl reference generated handlers now use this helper for non-repetition dispatch branches. At `debug` trace
+level, emitted handler bodies report regex match/miss decisions, `LX` no-match paths, acode index choices,
+AND sequence index checks, bcode child-call dispatch, and bcode child-result checks. Current branch names include
+`match`, `no_match_lx`, `acode_index_<n>`, `required_index_0`, `required_sequence_index`,
+`bcode_call_<Rule>`, `bcode_child_result`, and `bcode_no_child_match`. Repetition loop decisions such as min/max,
+loop continuation, and zero-progress cutoff remain a separate coverage slice.
 
 ### `log_output($level, $message, $context)`
 

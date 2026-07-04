@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.3.1` generated-handler trace helper seam complete; `.3.2` is next)
+- Last updated: `2026-07-04` (`.3.2` non-repetition generated dispatch tracing done; `.3.3` next)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -85,9 +85,9 @@ Coverage plan:
 1. `.2`: done — add a discoverable CLI/control surface and document the exact env/per-call/API controls. Correct
    docs say `configure_trace`, per-call options, env vars, and `bin/linkedspec` flags are the reliable controls;
    lazy facade package-variable mutation is compatibility state, not the preferred control path.
-2. `.3`: extend Perl reference coverage in small sub-leaves: first add low-overhead runtime decision helpers for
-   generated handlers, then instrument handler variant templates for match/no-match, dispatch, lifecycle path, and
-   repetition decisions, then add missing compile/ActionIR owner ENTER/EXIT and branch decisions.
+2. `.3`: extend Perl reference coverage in small sub-leaves: helper seam and non-repetition generated handler
+   dispatch tracing are now in place; next instrument repetition decisions, then add missing compile/ActionIR
+   owner ENTER/EXIT and branch decisions.
 3. Future backend-parity leaf: after the Perl reference trace semantics are concrete, define/implement the Rust
    equivalent trace model instead of pretending the current Perl-only trace surface already covers Rust.
 
@@ -131,7 +131,7 @@ Coverage plan:
     decisions), compile pipeline first, then the generated runtime parser (emit trace into handlers).
   Acceptance: done — split into executable children below so coverage work can land in signoff-sized slices.
   Verification: task-tree split review; no runtime/code behavior change.
-  Commit: `pending this commit`
+  Commit: `8e371460` (`TRACE-OBSERVABILITY.3 - split trace coverage extension`)
 - ID: `TRACE-OBSERVABILITY.3.1` · Status: `done` (closed 2026-07-04)
   Goal: Generated-handler trace helper contract — add the smallest reusable Perl runtime helper seam for emitted
     handler branch decisions, prove trace-off behavior stays quiet/cheap, and document the emitted-call contract.
@@ -143,12 +143,20 @@ Coverage plan:
   Verification: `perl -c -Iperl perl/LinkedSpec/Trace.pm`; `perl -c -Iperl t/trace_generated_handler_branch.t`;
     `prove -v -Iperl t/trace_generated_handler_branch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace;
     `bash tools/run_ci_local.sh`.
-  Commit: `pending this commit`
-- ID: `TRACE-OBSERVABILITY.3.2` · Status: `pending`
+  Commit: `95b84fab` (`TRACE-OBSERVABILITY.3.1 - add generated-handler trace helper seam`)
+- ID: `TRACE-OBSERVABILITY.3.2` · Status: `done` (closed 2026-07-04)
   Goal: Instrument non-repetition generated handler dispatch paths: match/no-match, acode index dispatch, bcode
     child-call dispatch, and `LX`/`EX` outcomes.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: done — `_default`, `AND_BCODE`, `OR_BCODE`, `AND_ACODE`, `AND_SINGLE_ACODE`, and `OR_ACODE`
+    templates route their non-repetition branch conditions through `trace_generated_handler_branch`; debug trace
+    reports `match`, `no_match_lx`, `acode_index_<n>`, `required_index_0`, `required_sequence_index`,
+    `bcode_call_<Rule>`, `bcode_child_result`, and `bcode_no_child_match` decisions. Repetition templates remain
+    deliberately uninstrumented for `.3.3`.
+  Verification: `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`;
+    `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`;
+    `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace;
+    `tools/run_ci_local.sh`.
+  Commit: `pending this commit`
 - ID: `TRACE-OBSERVABILITY.3.3` · Status: `pending`
   Goal: Instrument repetition generated handler paths: min/max bounds, loop entry/exit, zero-progress cutoff, and
     per-iteration success/failure decisions.
@@ -169,11 +177,10 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.3.2` | `pending` | Instrument non-repetition generated handler dispatch now that the helper seam exists. |
-| 2 | `.3.3` | `pending` | Instrument repetition paths separately because min/max/zero-progress loops have distinct risks. |
-| 3 | `.3.4` | `pending` | Add compile/ActionIR owner scopes after runtime handler trace semantics are concrete. |
-| 4 | `.3.5` | `pending` | Close coverage docs/probes and decide the backend-parity split. |
-| 5 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
+| 1 | `.3.3` | `pending` | Instrument repetition paths separately because min/max/zero-progress loops have distinct risks. |
+| 2 | `.3.4` | `pending` | Add compile/ActionIR owner scopes after runtime handler trace semantics are concrete. |
+| 3 | `.3.5` | `pending` | Close coverage docs/probes and decide the backend-parity split. |
+| 4 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
 
 ## Decisions
 
@@ -188,6 +195,9 @@ Coverage plan:
   reference semantics are concrete.
 - `2026-07-04`: `.3.1` adds only the helper contract. It deliberately does not instrument non-repetition or
   repetition templates; `.3.2` and `.3.3` own those emitted call-site changes.
+- `2026-07-04`: `.3.2` instruments only non-repetition generated handler dispatch. Repetition wrappers disable
+  nested non-REP branch calls inside REP coderef bodies, and `REP_ACODE` source remains plain until `.3.3` owns the
+  min/max/zero-progress trace design.
 
 ## Open Questions
 
@@ -209,6 +219,7 @@ Coverage plan:
 | `2026-07-04` | `.2` | `perl -c bin/linkedspec`; `perl -c -Iperl t/trace_cli.t`; `prove -v -Iperl t/trace_cli.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `tools/run_ci_local.sh` | PASS — CLI help exposes trace flags; routed trace file is non-empty; stdout remains canonical parser JSON; full local CI passes with phase0 1021 green |
 | `2026-07-04` | `.3` | task-tree split review; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `git diff --check` | PASS — coverage extension split before code |
 | `2026-07-04` | `.3.1` | `perl -c -Iperl perl/LinkedSpec/Trace.pm`; `perl -c -Iperl t/trace_generated_handler_branch.t`; `prove -v -Iperl t/trace_generated_handler_branch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — helper contract added before generated template instrumentation; full local CI passed with phase0 1021 green |
+| `2026-07-04` | `.3.2` | `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`; `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`; `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — non-repetition generated handler branch decisions traced; repetition source remains deferred to `.3.3` |
 
 ## Commit Log
 
@@ -218,6 +229,8 @@ Coverage plan:
 | `.1` | `9085a026` (`TRACE-OBSERVABILITY.1 - audit trace coverage gaps`) | Coverage audit and plan; no runtime/code behavior change. |
 | `.2` | `30981c44` (`TRACE-OBSERVABILITY.2 - add trace CLI control`) | CLI/docs control; no trace coverage expansion yet. |
 | `.3` | `8e371460` (`TRACE-OBSERVABILITY.3 - split trace coverage extension`) | Split Perl reference coverage extension into executable child leaves; no runtime/code behavior change. |
+| `.3.1` | `95b84fab` (`TRACE-OBSERVABILITY.3.1 - add generated-handler trace helper seam`) | Helper contract for emitted generated handler branch decisions; no template call-site wiring yet. |
+| `.3.2` | `pending this commit` (`TRACE-OBSERVABILITY.3.2 - trace non-repetition generated dispatch`) | Non-repetition generated handler template call-site wiring; REP remains next. |
 | `.3.1` | `pending this commit` | Generated-handler branch trace helper contract; templates not yet instrumented. |
 
 ## Changelog
