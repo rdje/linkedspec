@@ -290,9 +290,11 @@ The trace surface is useful for:
 - debugging mark/capture behavior
 
 Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
-handler wrappers, selected decisions, dumps, and mark/capture events. Generated handler internals such as
-match/no-match branches, acode/bcode dispatch branches, repetition min/max paths, and most ActionIR lowering
-branches are still planned coverage work.
+handler wrappers, selected decisions, dumps, and mark/capture events. The Perl reference backend also has a
+generated-handler branch helper contract so emitted templates can record branch decisions without changing branch
+results. Generated handler internals such as match/no-match branches, acode/bcode dispatch branches, repetition
+min/max paths, and most ActionIR lowering branches are still planned coverage work until those templates and owners
+are wired to the helper.
 
 Tracing is controlled separately from runtime context.
 
@@ -426,6 +428,15 @@ resolve_top_rule_handler
 validate_input_ref
 invoke_top_rule:<top_rule>
 ```
+
+When generated handler templates use the branch helper, decision names follow this shape:
+
+```text
+generated_handler_branch:<handler_kind>:<rule_label>:<branch>
+```
+
+Those helper events return the original branch boolean and evaluate lazy detail builders only when tracing is
+enabled, so branch tracing should not perturb parser behavior.
 
 Those names are intentionally concrete. Trace output should help users answer:
 

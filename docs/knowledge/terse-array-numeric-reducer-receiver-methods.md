@@ -46,4 +46,4 @@ inventory did not need additional backfill in this slice; mutating or ambiguous 
 
 The follow-up `SPEC-FORMAT-TERSE.7.4` no-drift sweep is now done. No `SPEC-FORMAT-TERSE` leaf is currently
 pending. `TRACE-OBSERVABILITY.1` and `.2` have since closed, `.3` has since split, and PNT returns to
-`TRACE-OBSERVABILITY.3.1` unless a new terse leaf is split or another active tree is reprioritized.
+`TRACE-OBSERVABILITY.3.2` unless a new terse leaf is split or another active tree is reprioritized.

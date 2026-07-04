@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.1 — add generated-handler trace helper seam
+
+**Scope:** Perl trace owner, focused helper regression, mdBook trace docs, task-tree/frontier sync, live recovery
+docs, and Knowledge Map.
+
+**What changed:** Added `LinkedSpec::Trace::trace_generated_handler_branch(%args)`, an owner-level helper for
+emitted handler branch decisions. The helper returns the original `taken` boolean, emits structured
+`generated_handler_branch:<handler_kind>:<rule_label>:<branch>` decisions when tracing is enabled, records emitted
+metadata such as `match_index`, `call`, `pos`, loop count, and repetition bounds, and evaluates lazy `details`
+builders only when trace output is enabled. Detail-builder errors are captured in trace text and do not perturb the
+branch result.
+
+**Evidence:** Focused regression coverage proves trace-off quiet/lazy behavior, trace-on structured output, and
+detail-builder error isolation. The mdBook documents the helper as a Perl-reference owner-level emitted-call
+contract and keeps branch-template instrumentation scoped to `TRACE-OBSERVABILITY.3.2` and `.3.3`. Full local CI
+passes, including phase0 at 1021 green.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3 — split trace coverage extension
 
 **Scope:** Task-tree split, roadmap/frontier sync, live recovery docs, and Knowledge Map. No runtime/code behavior

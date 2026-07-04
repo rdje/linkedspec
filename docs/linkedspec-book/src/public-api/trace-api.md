@@ -71,6 +71,30 @@ Emits a decision/branch trace message. `$taken` is a boolean (1 for yes, 0 for n
 LinkedSpec::trace_decision('use_cache', 1, 'cache hit for rule Foo', 300);
 ```
 
+### `LinkedSpec::Trace::trace_generated_handler_branch(%args)`
+
+Owner-level helper for generated handler branch decisions. It is designed for emitted Perl handler templates and
+returns the normalized boolean value of `taken`, so generated code can wrap a branch condition without changing the
+branch result.
+
+```perl
+if (LinkedSpec::Trace::trace_generated_handler_branch(
+  rule_label => 'Top',
+  handler_kind => 'default',
+  branch => 'acode_index',
+  taken => ($$minfo{index} == 0),
+  match_index => $$minfo{index},
+  details => sub { 'expected_index=0' },
+)) {
+  ...
+}
+```
+
+The helper accepts `rule_label` (or `label`), `handler_kind` (or `kind`), `branch`, `taken`, optional metadata such
+as `match_index`, `call`, `pos`, `loop_count`, `rep_min`, and `rep_max`, plus `reason` or `details`. If `details`
+is a coderef, LinkedSpec evaluates it only when the configured trace level enables the event. A details coderef
+error is captured in trace text instead of changing the branch result. The default event level is `debug`.
+
 ### `log_output($level, $message, $context)`
 
 Central trace/log entry point with verbosity gating. Output goes to console or file depending on `configure_trace` settings. Returns `undef`.
@@ -143,7 +167,7 @@ Treat these variables as compatibility state, not the preferred control API. Use
 
 ## Typical usage
 
-The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, and mark/capture events. It is not yet an exhaustive branch tracer for every generated handler body or every ActionIR lowering branch.
+The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, and the reusable generated-handler branch helper contract. It is not yet an exhaustive branch tracer for every generated handler body or every ActionIR lowering branch.
 
 The consistent scope naming makes it possible to follow a single parse through nested trace output:
 
@@ -157,6 +181,6 @@ LinkedSpec::parser_invoke:Top
 <- LinkedSpec::parser_invoke:Top (returned AST)
 ```
 
-Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes. Generated runtime-handler branches such as match/no-match dispatch, `if`/`elsif`, repetition min/max paths, and bcode/acode dispatch are still a planned coverage extension rather than guaranteed current output.
+Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes. Generated runtime-handler branches such as match/no-match dispatch, `if`/`elsif`, repetition min/max paths, and bcode/acode dispatch now have a shared helper to call, but the templates are wired in later coverage leaves; they are not guaranteed current output yet.
 
 The trace API is intentionally kept separate from the structured `last_error` diagnostics channel. Trace output is for developers and debugging; structured `last_error` payloads are for callers programmatically handling failures.

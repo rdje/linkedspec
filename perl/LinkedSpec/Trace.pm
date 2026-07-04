@@ -392,6 +392,49 @@ sub trace_decision {
  return $taken ? 1 : 0
 }
 
+sub trace_generated_handler_branch {
+ my (%args) = @_;
+ _trace_initialize();
+ my $taken = $args{taken} ? 1 : 0;
+ my $level = exists($args{level}) ? (_trace_parse_level($args{level}) // DUMP_DEBUG) : DUMP_DEBUG;
+ return $taken unless should_dump($level);
+
+ my $rule_label = defined($args{rule_label}) ? $args{rule_label} : $args{label};
+ $rule_label = '<unknown_rule>' unless defined($rule_label) && length($rule_label);
+ my $handler_kind = defined($args{handler_kind}) ? $args{handler_kind} : $args{kind};
+ $handler_kind = '' unless defined($handler_kind);
+ my $branch = defined($args{branch}) && length($args{branch}) ? $args{branch} : '<branch>';
+
+ my @context = (
+  'rule=' . $rule_label,
+  'branch=' . $branch,
+ );
+ push @context, 'handler_kind=' . $handler_kind if length($handler_kind);
+ foreach my $field (qw(match_index call pos loop_count rep_min rep_max)) {
+  push @context, $field . '=' . $args{$field} if defined($args{$field});
+ }
+
+ my $details = exists($args{reason}) ? $args{reason} : $args{details};
+ if (ref($details) eq 'CODE') {
+  my $ok = eval {
+   $details = $details->(%args);
+   1
+  };
+  unless ($ok) {
+   my $details_error = $@ || 'unknown trace detail error';
+   $details_error =~ s/\s+\z//o;
+   $details = 'details_error=' . $details_error;
+  }
+ }
+ my $details_text = _trace_stringify($details);
+ push @context, $details_text if defined($details_text) && length($details_text);
+
+ my $decision_name = length($handler_kind)
+  ? "generated_handler_branch:$handler_kind:$rule_label:$branch"
+  : "generated_handler_branch:$rule_label:$branch";
+ return trace_decision($decision_name, $taken, join("\n", @context), $level)
+}
+
 sub trace_mark_event {
  my (%args) = @_;
  _trace_initialize();

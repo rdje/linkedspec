@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.1 — generated-handler branch helper seam):
+  `LinkedSpec::Trace::trace_generated_handler_branch(%args)` is the only helper contract generated Perl handler
+  templates should use for branch decisions. It returns the normalized original `taken` value, so wrapping a branch
+  condition must not change parser behavior. Keep branch details lazy with `details => sub { ... }`; the helper
+  deliberately skips that builder when trace is disabled and captures builder errors in the trace text when enabled.
+  Do not hand-format generated-handler branch trace messages in templates; `.3.2` and `.3.3` should wire templates
+  through this helper.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3 — coverage extension split before code):
   Do not instrument "see everything" as one patch. Generated handler branch tracing needs a small reusable emitted
   helper seam first, then separate non-repetition and repetition template leaves because dispatch/no-match/LX/EX and

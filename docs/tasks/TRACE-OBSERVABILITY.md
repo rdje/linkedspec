@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.3` coverage extension split complete; `.3.1` is next)
+- Last updated: `2026-07-04` (`.3.1` generated-handler trace helper seam complete; `.3.2` is next)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -132,11 +132,18 @@ Coverage plan:
   Acceptance: done — split into executable children below so coverage work can land in signoff-sized slices.
   Verification: task-tree split review; no runtime/code behavior change.
   Commit: `pending this commit`
-- ID: `TRACE-OBSERVABILITY.3.1` · Status: `pending`
+- ID: `TRACE-OBSERVABILITY.3.1` · Status: `done` (closed 2026-07-04)
   Goal: Generated-handler trace helper contract — add the smallest reusable Perl runtime helper seam for emitted
     handler branch decisions, prove trace-off behavior stays quiet/cheap, and document the emitted-call contract.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: done — `LinkedSpec::Trace::trace_generated_handler_branch(%args)` returns the original branch
+    boolean, emits structured `generated_handler_branch:<kind>:<rule>:<branch>` decisions when enabled, evaluates
+    lazy details only when trace output is enabled, and captures detail-builder errors without perturbing branch
+    behavior. mdBook documents the owner-level emitted-call contract and keeps template instrumentation scoped to
+    later leaves.
+  Verification: `perl -c -Iperl perl/LinkedSpec/Trace.pm`; `perl -c -Iperl t/trace_generated_handler_branch.t`;
+    `prove -v -Iperl t/trace_generated_handler_branch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace;
+    `bash tools/run_ci_local.sh`.
+  Commit: `pending this commit`
 - ID: `TRACE-OBSERVABILITY.3.2` · Status: `pending`
   Goal: Instrument non-repetition generated handler dispatch paths: match/no-match, acode index dispatch, bcode
     child-call dispatch, and `LX`/`EX` outcomes.
@@ -162,12 +169,11 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.3.1` | `pending` | Need a small emitted-handler trace helper seam before instrumenting each generated branch template. |
-| 2 | `.3.2` | `pending` | Instrument non-repetition generated handler dispatch once the helper seam exists. |
-| 3 | `.3.3` | `pending` | Instrument repetition paths separately because min/max/zero-progress loops have distinct risks. |
-| 4 | `.3.4` | `pending` | Add compile/ActionIR owner scopes after runtime handler trace semantics are concrete. |
-| 5 | `.3.5` | `pending` | Close coverage docs/probes and decide the backend-parity split. |
-| 6 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
+| 1 | `.3.2` | `pending` | Instrument non-repetition generated handler dispatch now that the helper seam exists. |
+| 2 | `.3.3` | `pending` | Instrument repetition paths separately because min/max/zero-progress loops have distinct risks. |
+| 3 | `.3.4` | `pending` | Add compile/ActionIR owner scopes after runtime handler trace semantics are concrete. |
+| 4 | `.3.5` | `pending` | Close coverage docs/probes and decide the backend-parity split. |
+| 5 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
 
 ## Decisions
 
@@ -180,6 +186,8 @@ Coverage plan:
 - `2026-07-04`: `.3` is split before code. Generated handler helper/seam work comes first, generated non-REP and
   REP branches are separate leaves, compile/ActionIR owner scopes follow, and backend parity waits until Perl
   reference semantics are concrete.
+- `2026-07-04`: `.3.1` adds only the helper contract. It deliberately does not instrument non-repetition or
+  repetition templates; `.3.2` and `.3.3` own those emitted call-site changes.
 
 ## Open Questions
 
@@ -200,6 +208,7 @@ Coverage plan:
 | `2026-07-04` | `.1` | `rg` trace call-site inventory; `dump_parser_source` probe; routed debug trace probe to `/tmp/linkedspec_trace_audit.log`; direct facade/owner state probes; Rust trace search | PASS — audit recorded; generated handler control flow is not exhaustively traced; CLI/docs and coverage gaps are explicit |
 | `2026-07-04` | `.2` | `perl -c bin/linkedspec`; `perl -c -Iperl t/trace_cli.t`; `prove -v -Iperl t/trace_cli.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `tools/run_ci_local.sh` | PASS — CLI help exposes trace flags; routed trace file is non-empty; stdout remains canonical parser JSON; full local CI passes with phase0 1021 green |
 | `2026-07-04` | `.3` | task-tree split review; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `git diff --check` | PASS — coverage extension split before code |
+| `2026-07-04` | `.3.1` | `perl -c -Iperl perl/LinkedSpec/Trace.pm`; `perl -c -Iperl t/trace_generated_handler_branch.t`; `prove -v -Iperl t/trace_generated_handler_branch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — helper contract added before generated template instrumentation; full local CI passed with phase0 1021 green |
 
 ## Commit Log
 
@@ -208,7 +217,8 @@ Coverage plan:
 | (creation) | (with the triage WIP commit) | Scaffold owning the trace directives. |
 | `.1` | `9085a026` (`TRACE-OBSERVABILITY.1 - audit trace coverage gaps`) | Coverage audit and plan; no runtime/code behavior change. |
 | `.2` | `30981c44` (`TRACE-OBSERVABILITY.2 - add trace CLI control`) | CLI/docs control; no trace coverage expansion yet. |
-| `.3` | `pending this commit` | Split Perl reference coverage extension into executable child leaves; no runtime/code behavior change. |
+| `.3` | `8e371460` (`TRACE-OBSERVABILITY.3 - split trace coverage extension`) | Split Perl reference coverage extension into executable child leaves; no runtime/code behavior change. |
+| `.3.1` | `pending this commit` | Generated-handler branch trace helper contract; templates not yet instrumented. |
 
 ## Changelog
 
@@ -223,3 +233,6 @@ Coverage plan:
   coverage extension.
 - `2026-07-04`: Split `.3` before implementation into helper-seam, non-repetition generated dispatch, repetition
   generated dispatch, compile/ActionIR owner-scope, and coverage-closeout leaves. `.3.1` is now the PNT frontier.
+- `2026-07-04`: Closed `.3.1` helper seam. `LinkedSpec::Trace::trace_generated_handler_branch(%args)` is the
+  owner-level contract for emitted branch decisions; `.3.2` is now the PNT frontier for non-repetition template
+  call sites.
