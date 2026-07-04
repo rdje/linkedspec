@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.4.6 — close compile ActionIR trace coverage
+
+**Scope:** Compile/ActionIR trace closeout probes, mdBook trace coverage boundaries, toolbox, task-tree/frontier
+sync, live recovery docs, and Knowledge Map. No runtime/code behavior changed in this slice.
+
+**What changed:** The compile/ActionIR coverage lane is now closed through the planned Perl reference owner
+namespaces: RuleIR planning, EmitContext owner bridge/rewrite orchestration, ActionIR scanner/canonical/
+diagnostic/rewrite pipeline, compact lowerers, and MethodLowering. A representative descriptor-compile probe
+emits all those namespaces together while preserving the descriptor's language-agnostic ActionIR readiness.
+
+The mdBook and toolbox now state that the remaining trace work is global no-drift/coverage closeout plus the
+required Rust/future-variant parity split, not another known opaque compile/ActionIR owner.
+
+**Evidence:** A routed debug `LinkedSpec::Get(... return_descriptor => 1, trace_level => 'debug')` probe over
+return/set/receiver/control paths emitted `rule_ir`, `emit_context`, `actionir:scanner`,
+`actionir:rewrite_pipeline`, `actionir:control_flow`, and `actionir:method_lowering` decisions together with
+`ready=1 raw=0 unresolved=0`. Full local CI passes with phase0 at 1021 tests.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.4.5 — trace MethodLowering decisions
 
 **Scope:** Perl `ActionIR::MethodLowering`, focused trace regression, mdBook trace docs, toolbox, task-tree/frontier
@@ -102,7 +120,8 @@ children are `.3.4.1` RuleIR planning, `.3.4.2` EmitContext bridge, `.3.4.3` sca
 rewrite, `.3.4.4` compact lowering owners, `.3.4.5` MethodLowering, and `.3.4.6` closeout.
 
 **Evidence:** Read-only `rg` trace call-site inventory, `wc -l` owner sizing, targeted RuleIR/EmitContext reads,
-and ActionIR owner inventory. The next frontier is `TRACE-OBSERVABILITY.3.4.1`.
+and ActionIR owner inventory. The frontier at completion was `TRACE-OBSERVABILITY.3.4.1`; `.3.4.1` through
+`.3.4.6` have since closed.
 
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.3 — trace repetition generated paths
 

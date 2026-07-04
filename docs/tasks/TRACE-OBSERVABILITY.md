@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.3.4.5` MethodLowering trace closed)
+- Last updated: `2026-07-04` (`.3.4.6` compile/ActionIR trace closeout)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -79,7 +79,8 @@ The important gaps are now pinned:
   templates; RuleIR planning decisions, the EmitContext owner bridge/rewrite orchestration layer,
   scanner/canonical/diagnostic/rewrite-pipeline internals, compact ActionIR lowerers, and
   `ActionIR::MethodLowering` helper-family/assignment/mutation/receiver-chain/unsupported-form decisions are now
-  traced. `.3.4.6` owns compile/ActionIR coverage closeout probes and boundary reconciliation.
+  traced. `.3.4.6` closed the compile/ActionIR coverage boundary with a representative descriptor-compile probe.
+  `.3.5` owns global coverage/no-drift closeout and the backend parity split.
 - Rust currently has no analogous trace API/sink surface in `rust/linkedspec-runtime`; `rg` finds no runtime trace
   implementation beyond ordinary test variables named `log`.
 
@@ -90,7 +91,8 @@ Coverage plan:
    lazy facade package-variable mutation is compatibility state, not the preferred control path.
 2. `.3`: extend Perl reference coverage in small sub-leaves: helper seam, non-repetition generated handler
    dispatch tracing, repetition generated handler tracing, and compile/ActionIR owner decisions through
-   MethodLowering are now in place; next close compile/ActionIR coverage with representative probes/docs.
+   MethodLowering are now in place. `.3.4.6` closed the compile/ActionIR coverage boundary with a normal
+   descriptor-compile trace probe.
 3. Required backend-parity split: after the Perl reference trace semantics are concrete, define/implement the Rust
    and future-variant equivalent trace model instead of pretending the current Perl-only trace surface already
    covers Rust.
@@ -262,14 +264,20 @@ Coverage plan:
     adjacent RuleIR/EmitContext/ActionIR trace suites; `prove -v -Iperl t/actionir_ast_parser.t
     t/trace_actionir_method_lowering.t`; mdBook; Knowledge Map; memory/doctrine; whitespace;
     `bash tools/run_ci_local.sh`.
-  Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.3.4.6` · Status: `active`
+  Commit: `cfe2d9d1` (`TRACE-OBSERVABILITY.3.4.5 - trace MethodLowering decisions`)
+- ID: `TRACE-OBSERVABILITY.3.4.6` · Status: `done` (closed 2026-07-04)
   Goal: Compile/ActionIR coverage closeout — run trace probes across representative lowering paths, update mdBook/
     TOOLBOX/Knowledge Map coverage boundaries, and decide whether `.3.5` can focus only on global closeout/backend
     parity split.
-  Verification: `pending`
+  Acceptance: done — a representative descriptor compile with debug routed trace emits `rule_ir:`,
+    `emit_context:`, `actionir:scanner`, `actionir:rewrite_pipeline`, `actionir:control_flow`, and
+    `actionir:method_lowering` decisions together while preserving ActionIR readiness (`ready=1 raw=0 unresolved=0`).
+    The planned compile/ActionIR Perl reference owner namespaces are now covered through MethodLowering; `.3.5`
+    can focus on overall trace no-drift/examples and the Rust/future-variant parity split.
+  Verification: representative `LinkedSpec::Get(... return_descriptor => 1, trace_level => 'debug',
+    trace_log_mode => 'route')` probe; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh`.
   Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.3.5` · Status: `pending`
+- ID: `TRACE-OBSERVABILITY.3.5` · Status: `active`
   Goal: Coverage closeout — update mdBook examples/coverage boundaries, run no-drift trace probes, and decide
     how the required Rust/future-variant trace parity split follows from concrete Perl reference semantics.
   Verification: `pending`
@@ -279,9 +287,8 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.3.4.6` | `active` | Close compile/ActionIR coverage docs/probes after MethodLowering instrumentation. |
-| 2 | `.3.5` | `pending` | Close overall trace coverage docs/probes and decide the backend-parity split. |
-| 3 | required backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
+| 1 | `.3.5` | `active` | Close overall trace coverage docs/probes and decide the backend-parity split. |
+| 2 | required backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
 
 ## Decisions
 
@@ -322,6 +329,10 @@ Coverage plan:
   classification, AST-vs-string fallback/bypass decisions, unsupported helper exits, receiver-chain transitions,
   assignment/mutation operators, mutation-slot values, return-payload fallback choices, and the scoped
   `_lower_assign_statement` enter/exit boundary.
+- `2026-07-04`: `.3.4.6` closes the compile/ActionIR coverage boundary. The representative descriptor-compile
+  trace probe emitted RuleIR, EmitContext, scanner/rewrite, compact control-flow, and MethodLowering decisions
+  together with `ready=1 raw=0 unresolved=0`; `.3.5` can focus on global trace closeout and the backend parity
+  split instead of another compile/ActionIR owner.
 - `2026-07-04`: User clarified that trace capabilities documented in the mdBook are the external contract every
   variant must honor to claim trace parity. Concrete function names and internals may differ by backend, but
   user-visible trace controls, levels, event classes, and sink behavior must be equivalent across Perl, Rust, and
@@ -329,8 +340,8 @@ Coverage plan:
 
 ## Open Questions
 
-- Compile/ActionIR closeout: run representative trace probes and reconcile remaining docs/coverage boundaries after
-  MethodLowering instrumentation.
+- Overall trace closeout: run no-drift trace probes/examples and split backend parity from concrete Perl reference
+  semantics.
 - Required backend parity: Rust and future variants must implement equivalent trace capabilities before claiming
   trace parity; the current Perl-only surface is reference progress, not parity closeout.
 - Auto-instrumentation (`Devel::*`/aspect style) is not the preferred first path: generated template instrumentation
@@ -357,6 +368,7 @@ Coverage plan:
 | `2026-07-04` | `.3.4.3` | `perl -c -Iperl perl/LinkedSpec/ActionIR/Trace.pm`; `perl -c -Iperl perl/LinkedSpec/ActionIR/{Scanner.pm,ScannerCore.pm,CanonicalEvents.pm,Diagnostics.pm,RewritePipeline.pm}`; `perl -c -Iperl t/trace_actionir_pipeline.t`; `prove -v -Iperl t/trace_actionir_pipeline.t`; `prove -v -Iperl t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t`; `prove -v -Iperl t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — ActionIR pipeline decisions traced through scanner/canonical/diagnostic/rewrite probes, attached-if closure handling, and Trace-lazy subprocess coverage; full local CI passed with phase0 1021 green |
 | `2026-07-04` | `.3.4.4` | `perl -c -Iperl perl/LinkedSpec/ActionIR/{FlowExpr.pm,ValueExpr.pm,ArrayPipeline.pm,DeclareMethod.pm,ControlFlow.pm}`; `perl -c -Iperl t/trace_actionir_compact_lowerers.t`; `prove -v -Iperl t/trace_actionir_compact_lowerers.t`; `prove -v -Iperl t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t`; `prove -v -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — compact lowerer decisions traced through production owner dispatch and Trace-lazy subprocess coverage; full local CI passed with phase0 1021 green |
 | `2026-07-04` | `.3.4.5` | `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -c -Iperl t/trace_actionir_method_lowering.t`; `prove -v -Iperl t/trace_actionir_method_lowering.t`; `prove -v -Iperl t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t`; `prove -v -Iperl t/actionir_ast_parser.t t/trace_actionir_method_lowering.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — MethodLowering decisions traced through production owner dispatch and Trace-lazy subprocess coverage; full local CI passed with phase0 1021 green |
+| `2026-07-04` | `.3.4.6` | representative debug routed descriptor-compile probe across return/set/receiver/control paths; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — normal compile path emits `rule_ir`, `emit_context`, `actionir:scanner`, `actionir:rewrite_pipeline`, `actionir:control_flow`, and `actionir:method_lowering` decisions together; full local CI passed with phase0 1021 green |
 
 ## Commit Log
 
@@ -374,7 +386,8 @@ Coverage plan:
 | `.3.4.2` | `c8cbd663` (`TRACE-OBSERVABILITY.3.4.2 - trace EmitContext owner bridge`) | EmitContext owner-bridge and rewrite orchestration trace call-site wiring. |
 | `.3.4.3` | `8a29c712` (`TRACE-OBSERVABILITY.3.4.3 - trace ActionIR pipeline decisions`) | Scanner/canonical/diagnostic/rewrite-pipeline ActionIR trace call-site wiring. |
 | `.3.4.4` | `276c333e` (`TRACE-OBSERVABILITY.3.4.4 - trace compact ActionIR lowerers`) | Compact lowerer ActionIR trace call-site wiring outside `MethodLowering`. |
-| `.3.4.5` | `pending` (`TRACE-OBSERVABILITY.3.4.5 - trace MethodLowering decisions`) | MethodLowering ActionIR trace call-site wiring. |
+| `.3.4.5` | `cfe2d9d1` (`TRACE-OBSERVABILITY.3.4.5 - trace MethodLowering decisions`) | MethodLowering ActionIR trace call-site wiring. |
+| `.3.4.6` | `pending` (`TRACE-OBSERVABILITY.3.4.6 - close compile ActionIR trace coverage`) | Compile/ActionIR coverage closeout probe/docs. |
 
 ## Changelog
 
@@ -421,3 +434,6 @@ Coverage plan:
   receiver-chain, assignment/mutation, mutation-slot, unsupported-helper, return-payload, and assignment-scope
   decisions for `ActionIR::MethodLowering`. `.3.4.6` is now the PNT frontier for compile/ActionIR coverage
   closeout probes/docs.
+- `2026-07-04`: Closed `.3.4.6` compile/ActionIR coverage closeout. A normal descriptor compile now demonstrates
+  the planned compile/ActionIR trace namespaces together through MethodLowering while preserving ActionIR readiness.
+  `.3.5` is now the PNT frontier for overall trace closeout and backend parity split.

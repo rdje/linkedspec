@@ -7,8 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.6 — close compile ActionIR trace coverage**
+  (COMPILE/ACTIONIR TRACE COVERAGE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.5).
+
+  **Fix:** Closed the compile/ActionIR trace lane after the planned Perl reference owner namespaces were covered:
+  RuleIR planning, EmitContext owner bridge/rewrite orchestration, ActionIR scanner/canonical/diagnostic/rewrite
+  pipeline, compact lowerers, and MethodLowering. A representative descriptor compile now shows those namespaces
+  together and keeps the descriptor language-agnostic ready.
+
+  **Verification:** A routed debug `LinkedSpec::Get(... return_descriptor => 1, trace_level => 'debug')` probe over
+  return/set/receiver/control paths emitted `rule_ir`, `emit_context`, `actionir:scanner`,
+  `actionir:rewrite_pipeline`, `actionir:control_flow`, and `actionir:method_lowering` decisions with
+  `ready=1 raw=0 unresolved=0`. mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full
+  local CI includes phase0 at 1021 green.
+
+  **Frontier:** `TRACE-OBSERVABILITY.3.5` — overall trace closeout and backend parity split.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4.5 — trace MethodLowering decisions**
-  (METHODLOWERING TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.6).
+  (METHODLOWERING TRACE CLOSED; `.3.4.6` HAS SINCE CLOSED).
 
   **Fix:** `perl/LinkedSpec/ActionIR/MethodLowering.pm` now emits debug-level
   `DECISION actionir:method_lowering:<phase>:<label>:<decision>` events for helper-family selection,
@@ -22,10 +38,11 @@ Current execution status for interruption-safe batch workflow recovery.
   mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full local CI includes phase0 at
   1021 green.
 
-  **Frontier:** `TRACE-OBSERVABILITY.3.4.6` — compile/ActionIR coverage closeout probes/docs.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.6`; `.3.4.6` has since closed and current frontier is
+  `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4.4 — trace compact ActionIR lowerers**
-  (COMPACT ACTIONIR LOWERER TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.5).
+  (COMPACT ACTIONIR LOWERER TRACE CLOSED; `.3.4.5` HAS SINCE CLOSED).
 
   **Fix:** `FlowExpr`, `ValueExpr`, `ArrayPipeline`, `DeclareMethod`, and `ControlFlow` now emit debug-level
   `DECISION actionir:<owner>:<phase>:<label>:<decision>` events and matching owner scopes for the compact lowering
@@ -40,10 +57,11 @@ Current execution status for interruption-safe batch workflow recovery.
   ActionIR pipeline trace suites, ActionIR AST focused suite, mdBook, Knowledge Map, memory/doctrine, whitespace,
   and full local CI pass. Full local CI includes phase0 at 1021 green.
 
-  **Frontier:** `TRACE-OBSERVABILITY.3.4.5` — instrument `ActionIR::MethodLowering`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.5`; `.3.4.5` and `.3.4.6` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4.3 — trace ActionIR pipeline decisions**
-  (ACTIONIR PIPELINE TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.4).
+  (ACTIONIR PIPELINE TRACE CLOSED; `.3.4.4` HAS SINCE CLOSED).
 
   **Fix:** `perl/LinkedSpec/ActionIR/Trace.pm` now provides the shared lazy formatting seam for ActionIR owner
   internals, and the scanner, scanner-core, canonical-events, diagnostics, and rewrite-pipeline owners emit
@@ -57,11 +75,11 @@ Current execution status for interruption-safe batch workflow recovery.
   suites, mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full local CI includes phase0
   at 1021 green.
 
-  **Frontier:** `TRACE-OBSERVABILITY.3.4.4` — instrument compact ActionIR lowering owners outside
-  `MethodLowering`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.4`; `.3.4.4` through `.3.4.6` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4.2 — trace EmitContext owner bridge**
-  (EMITCONTEXT OWNER-BRIDGE TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.3).
+  (EMITCONTEXT OWNER-BRIDGE TRACE CLOSED; `.3.4.3` HAS SINCE CLOSED).
 
   **Fix:** `perl/LinkedSpec/RuleIR/EmitContext.pm` now emits debug-level
   `DECISION emit_context:<phase>:<label>:<decision>` events and matching owner/rewrite scopes for ActionIR owner
@@ -75,7 +93,8 @@ Current execution status for interruption-safe batch workflow recovery.
   mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full local CI includes phase0 at
   1021 green.
 
-  **Frontier:** `TRACE-OBSERVABILITY.3.4.3` — instrument scanner/canonical/diagnostic/rewrite-pipeline owners.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.3`; `.3.4.3` has since closed and current frontier is
+  `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4.1 — trace RuleIR planning decisions**
   (RULEIR PLANNING TRACE CLOSED; EMITCONTEXT FRONTIER HAS SINCE CLOSED).
@@ -90,8 +109,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `perl -c -Iperl t/trace_ruleir_planning.t`, focused `prove`, mdBook, Knowledge Map, memory/doctrine,
   whitespace, and full local CI pass.
 
-  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.2`; `.3.4.2` has since closed and current frontier is
-  `TRACE-OBSERVABILITY.3.4.6`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.2`; `.3.4.2` through `.3.4.6` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4 — split compile action trace coverage**
   (COMPILE/ACTIONIR TRACE COVERAGE SPLIT; RULEIR FRONTIER HAS SINCE CLOSED).
@@ -105,8 +124,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Read-only `rg` trace call-site inventory, owner sizing with `wc -l`, targeted reads of RuleIR
   and EmitContext, and ActionIR owner inventory. No runtime/code behavior changed in the split.
 
-  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.1`; `.3.4.1` has since closed and current frontier is
-  `TRACE-OBSERVABILITY.3.4.3`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.1`; `.3.4.1` through `.3.4.6` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.3 — trace repetition generated paths**
   (REP GENERATED HANDLER BRANCH TRACE CLOSED; TRACE-OBSERVABILITY.3.4 HAS SINCE SPLIT).
@@ -122,8 +141,8 @@ Current execution status for interruption-safe batch workflow recovery.
   memory/doctrine, whitespace, and full local CI pass. The REP regression locks runtime traces for `REP_ACODE` and
   `REP_AND_ACODE` and source-locks all four REP template families.
 
-  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4`; `.3.4` has since split and current frontier is
-  `TRACE-OBSERVABILITY.3.4.3`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4`; `.3.4` has since split, `.3.4.1` through `.3.4.6` have
+  since closed, and current frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.2 — trace non-repetition generated dispatch**
   (NON-REP GENERATED HANDLER BRANCH TRACE CLOSED; TRACE-OBSERVABILITY.3.3 HAS SINCE CLOSED).
@@ -139,7 +158,7 @@ Current execution status for interruption-safe batch workflow recovery.
   updated under `.3.3` to expect REP instrumentation. `tools/run_ci_local.sh` passes with phase0 at 1021 green.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3.3`; `.3.3` has since closed, `.3.4` has since split, `.3.4.1`
-  through `.3.4.5` have since closed, and current frontier is `TRACE-OBSERVABILITY.3.4.6`.
+  through `.3.4.6` have since closed, and current frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.1 — add generated-handler trace helper seam**
   (HELPER CONTRACT CLOSED; TRACE-OBSERVABILITY.3.2 HAS SINCE CLOSED).
@@ -155,7 +174,7 @@ Current execution status for interruption-safe batch workflow recovery.
   closed non-repetition template wiring.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3.2`; `.3.2` and `.3.3` have since closed, `.3.4` has since
-  split, `.3.4.1` through `.3.4.5` have since closed, and current frontier is `TRACE-OBSERVABILITY.3.4.6`.
+  split, `.3.4.1` through `.3.4.6` have since closed, and current frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3 — split trace coverage extension**
   (DOCS-ONLY SPLIT CLOSED; TRACE-OBSERVABILITY.3.1 HAS SINCE CLOSED).
@@ -168,8 +187,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Task-tree/frontier review plus memory/doctrine/Knowledge Map/whitespace gates. No runtime or
   CLI behavior changed in this split.
 
-  **Frontier at completion:** `TRACE-OBSERVABILITY.3.1`; `.3.1` through `.3.4.2` have since closed and the current
-  frontier is `TRACE-OBSERVABILITY.3.4.6`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.1`; `.3.1` through `.3.4.6` have since closed and the current
+  frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.2 — add trace CLI control**
   (DISCOVERABLE TRACE CONTROL CLOSED; TRACE-OBSERVABILITY.3 HAS SINCE SPLIT).
@@ -184,8 +203,8 @@ Current execution status for interruption-safe batch workflow recovery.
   proves CLI help exposes the trace flags and a routed high-level trace writes a non-empty trace log while stdout
   remains `["alpha","beta"]`; full local CI includes phase0 at 1021 green.
 
-  **Frontier at completion:** `TRACE-OBSERVABILITY.3`; `.3` has since split, `.3.1` through `.3.4.2` have since
-  closed, and the current frontier is `TRACE-OBSERVABILITY.3.4.6`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3`; `.3` has since split, `.3.1` through `.3.4.6` have since
+  closed, and the current frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.1 — audit trace coverage gaps**
   (READ-ONLY AUDIT CLOSED; TRACE-OBSERVABILITY.2 HAS SINCE CLOSED).
@@ -203,7 +222,7 @@ Current execution status for interruption-safe batch workflow recovery.
   doctrine/memory gates.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.2`; `.2` has since closed, `.3` has since split, `.3.1`
-  through `.3.4.5` have since closed, and the current frontier is `TRACE-OBSERVABILITY.3.4.6`.
+  through `.3.4.6` have since closed, and the current frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values**
   (TOP-RULE-AS-NORMAL TREE CLOSED; FRONTIER AT COMPLETION TRACE-OBSERVABILITY.1, NOW CLOSED).
@@ -220,8 +239,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `LX` recursion, and top-rule sequence recursion.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.1` — coverage audit before CLI/docs/coverage implementation;
-  `.1` and `.2` have since closed, `.3` has since split, `.3.1` through `.3.4.2` have since closed, and the current
-  frontier is `TRACE-OBSERVABILITY.3.4.6`.
+  `.1` and `.2` have since closed, `.3` has since split, `.3.1` through `.3.4.6` have since closed, and the current
+  frontier is `TRACE-OBSERVABILITY.3.5`.
 
 - 2026-07-04: **RUST-PARITY.9 — finalize Rust parity documentation**
   (RUST-PARITY TREE CLOSED; TOP-RULE-AS-NORMAL.3.2 UNBLOCKED).

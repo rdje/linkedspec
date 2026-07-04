@@ -138,6 +138,9 @@ flow/value/array/declaration/control-flow lowering choices, source-span or contr
 rewrites, unmatched helper events, implicit attached-if closure insertion, and `MethodLowering` helper-family,
 assignment/mutation, receiver-chain, AST-vs-string fallback, and unsupported-helper decisions.
 
+The planned Perl reference compile/ActionIR owner trace coverage is closed through MethodLowering; later trace work
+belongs to overall no-drift examples and cross-variant parity rather than another known opaque ActionIR owner.
+
 ### Lowering owners
 
 Each contract family has a dedicated lowering owner:

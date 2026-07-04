@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.4.6 — compile/ActionIR trace closeout):
+  The planned Perl reference compile/ActionIR trace namespaces are covered through MethodLowering. A normal
+  descriptor compile with routed debug trace now emits `rule_ir`, `emit_context`, `actionir:scanner`,
+  `actionir:rewrite_pipeline`, `actionir:control_flow`, and `actionir:method_lowering` decisions together while
+  the descriptor remains language-agnostic ready (`ready=1 raw=0 unresolved=0`). Treat `.3.5` as the global trace
+  no-drift/example closeout and backend-parity split leaf, not another compile/ActionIR owner-instrumentation leaf.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.4.5 — MethodLowering trace):
   `ActionIR::MethodLowering` now uses the same lazy `LinkedSpec::ActionIR::Trace` seam and
   `actionir:method_lowering:<phase>:<label>:<decision>` namespace as the other ActionIR owners. Current covered

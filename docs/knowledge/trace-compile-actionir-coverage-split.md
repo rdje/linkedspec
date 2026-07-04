@@ -28,3 +28,7 @@ Execution order:
 
 `MethodLowering.pm` is separate because it is the largest ActionIR owner and contains many helper-family,
 assignment/mutation, receiver-chain, AST-vs-string fallback, and unsupported-form branch decisions.
+
+As of `TRACE-OBSERVABILITY.3.4.6`, this split is closed through MethodLowering. A normal descriptor compile emits
+the planned RuleIR, EmitContext, ActionIR pipeline, compact lowerer, and MethodLowering trace namespaces together
+while preserving ActionIR readiness.

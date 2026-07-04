@@ -211,6 +211,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `DECISION actionir:method_lowering:<phase>:<label>:<decision>` lines and assignment scopes for helper-family
   selection, AST-vs-string fallback/bypass choices, unsupported helper exits, receiver-chain transitions,
   assignment/mutation operator routing, mutation-slot values, and return-payload fallback choices.
+- **Compile/ActionIR coverage boundary:** the planned Perl reference compile/ActionIR owner namespaces are covered
+  through MethodLowering. Later trace work is global no-drift/example closeout and cross-variant trace parity, not
+  another known opaque compile/ActionIR owner.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

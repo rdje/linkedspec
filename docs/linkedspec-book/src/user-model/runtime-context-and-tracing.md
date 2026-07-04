@@ -301,6 +301,9 @@ debug-level `ActionIR::MethodLowering` helper-family/assignment/mutation/receive
 Perl reference backend also emits debug-level generated-handler branch decisions for non-repetition dispatch paths
 and repetition loop paths.
 
+In the Perl reference backend, the planned compile/ActionIR owner coverage is closed through MethodLowering. The
+remaining trace work is overall coverage/no-drift closeout and the required Rust/future-variant parity split.
+
 Tracing is controlled separately from runtime context.
 
 You can configure tracing directly:

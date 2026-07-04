@@ -180,6 +180,9 @@ Treat these variables as compatibility state, not the preferred control API. Use
 
 The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, RuleIR planning decisions, EmitContext owner-bridge/rewrite-orchestration decisions, ActionIR scanner/canonical/diagnostic/rewrite-pipeline decisions, compact ActionIR lowerer decisions, `ActionIR::MethodLowering` helper-family/assignment/mutation/receiver-chain/fallback decisions, and generated-handler branch decisions for the Perl reference non-repetition and repetition templates.
 
+In the Perl reference backend, the planned compile/ActionIR owner coverage is closed through MethodLowering. The
+remaining trace work is overall coverage/no-drift closeout and the required Rust/future-variant parity split.
+
 The consistent scope naming makes it possible to follow a single parse through nested trace output:
 
 ```text
