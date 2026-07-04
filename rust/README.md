@@ -16,8 +16,8 @@ specifications and executes regex matching, child rule dispatch, and lifecycle c
 It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) that emits a Rust module embedding a
 `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
 plan-aware executor: default, OR acode, AND acode, AND bcode, OR bcode, REP acode, REP bcode, REP-AND acode, and
-REP-AND bcode families run directly. The remaining generated-source work is corpus/oracle integration under
-`RUST-PARITY.8.5`.
+REP-AND bcode families run directly. The generated-source test harness validates every supported structural family
+and a manifest-backed corpus subset; the full 88-fixture corpus remains the interpreter oracle gate.
 
 ## Quick Start
 
@@ -91,7 +91,8 @@ The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust varian
 - Uses the **same** rule modes (AND, OR, OR+, AND+, bounded, *, +, ?, &, |)
 - **Does not** generate Perl code or use `eval` — the default runtime path interprets `CompiledSpec` directly
 - Provides generated Rust source that embeds `CompiledSpec` plus a validated family plan; default/OR/AND acode and
-  AND/OR/REP acode-bcode families now execute directly through the plan-aware generated executor
+  AND/OR/REP acode-bcode families now execute directly through the plan-aware generated executor, with an
+  all-family compile/run matrix plus a curated manifest-backed corpus-subset proof
 - **Does not** implement the legacy plugin system (`.plg` files, `PPlugin`)
 
 ## Test Corpus

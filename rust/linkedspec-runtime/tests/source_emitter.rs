@@ -9,7 +9,9 @@ use linkedspec_runtime::source_emitter::{
     GeneratedRuleFamily, GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source,
     execute_generated_parser,
 };
-use serde_json::json;
+use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
+use serde::Deserialize;
+use serde_json::{Value, json};
 use std::collections::BTreeSet;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -161,6 +163,24 @@ const REP_RECURSION_GUARD_SOURCE_EMITTER_SPEC: &str = r#"Top::OR+
  /x*/ -> Top { return(concat("guard:", call(Top))) }
 "#;
 
+const GENERATED_SOURCE_CORPUS_SUBSET: &[&str] = &[
+    "proof_edge_array_literal",
+    "proof_edge_scalar_literal",
+    "autoexist_array_bare_arg",
+    "terse_1_5_2_primitive_literals",
+    "terse_2_2_3_attached_if_blocks",
+    "terse_4_3_2_user_function_runtime",
+    "tclite_command_subst",
+    "portmap_bare",
+];
+
+#[derive(Debug, Deserialize)]
+struct CorpusManifest {
+    format: u64,
+    case_count: usize,
+    cases: Vec<String>,
+}
+
 struct TempProject {
     root: PathBuf,
 }
@@ -188,6 +208,89 @@ impl Drop for TempProject {
     fn drop(&mut self) {
         let _ = fs::remove_dir_all(&self.root);
     }
+}
+
+fn corpus_dir() -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/corpus")
+}
+
+fn load_corpus_manifest(dir: &Path) -> CorpusManifest {
+    let path = dir.join("manifest.json");
+    let text = fs::read_to_string(&path)
+        .unwrap_or_else(|e| panic!("cannot read corpus manifest {}: {e}", path.display()));
+    let manifest: CorpusManifest = serde_json::from_str(&text)
+        .unwrap_or_else(|e| panic!("malformed corpus manifest {}: {e}", path.display()));
+
+    assert_eq!(
+        manifest.format,
+        1,
+        "unsupported corpus manifest format {} in {}",
+        manifest.format,
+        path.display()
+    );
+    assert_eq!(
+        manifest.case_count,
+        manifest.cases.len(),
+        "corpus manifest case_count={} does not match cases.len()={}",
+        manifest.case_count,
+        manifest.cases.len()
+    );
+    assert!(
+        manifest.case_count > 0,
+        "corpus manifest must name at least one fixture"
+    );
+
+    let case_set: BTreeSet<&str> = manifest.cases.iter().map(String::as_str).collect();
+    assert_eq!(
+        case_set.len(),
+        manifest.cases.len(),
+        "corpus manifest contains duplicate case names"
+    );
+    manifest
+}
+
+fn run_generated_crate(prefix: &str, lib_rs: String) {
+    let project = TempProject::new(prefix);
+    let runtime_manifest = Path::new(env!("CARGO_MANIFEST_DIR"));
+    fs::write(
+        project.path().join("Cargo.toml"),
+        format!(
+            r#"[package]
+name = "{prefix}"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+linkedspec-runtime = {{ path = "{}" }}
+serde_json = "1"
+"#,
+            runtime_manifest.display()
+        ),
+    )
+    .expect("write generated smoke Cargo.toml");
+
+    fs::write(project.path().join("src/lib.rs"), lib_rs).expect("write generated smoke lib.rs");
+
+    let output = Command::new("cargo")
+        .arg("test")
+        .arg("--offline")
+        .arg("--quiet")
+        .env("CARGO_TARGET_DIR", project.path().join("target"))
+        .current_dir(project.path())
+        .output()
+        .expect("run generated smoke cargo test");
+
+    assert!(
+        output.status.success(),
+        "generated smoke cargo test failed\nstatus: {}\nstdout:\n{}\nstderr:\n{}",
+        output.status,
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr)
+    );
+}
+
+fn rust_module_name_for_case(case_name: &str) -> String {
+    format!("corpus_{case_name}")
 }
 
 #[test]
@@ -404,46 +507,9 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
     );
     generated_tests.push_str("}\n");
 
-    let project = TempProject::new("linkedspec-source-emitter");
-    let runtime_manifest = Path::new(env!("CARGO_MANIFEST_DIR"));
-    fs::write(
-        project.path().join("Cargo.toml"),
-        format!(
-            r#"[package]
-name = "linkedspec_generated_smoke"
-version = "0.0.0"
-edition = "2024"
-
-[dependencies]
-linkedspec-runtime = {{ path = "{}" }}
-serde_json = "1"
-"#,
-            runtime_manifest.display()
-        ),
-    )
-    .expect("write generated smoke Cargo.toml");
-
-    fs::write(
-        project.path().join("src/lib.rs"),
+    run_generated_crate(
+        "linkedspec_generated_smoke",
         format!("{generated_modules}\n{generated_tests}"),
-    )
-    .expect("write generated smoke lib.rs");
-
-    let output = Command::new("cargo")
-        .arg("test")
-        .arg("--offline")
-        .arg("--quiet")
-        .env("CARGO_TARGET_DIR", project.path().join("target"))
-        .current_dir(project.path())
-        .output()
-        .expect("run generated smoke cargo test");
-
-    assert!(
-        output.status.success(),
-        "generated smoke cargo test failed\nstatus: {}\nstdout:\n{}\nstderr:\n{}",
-        output.status,
-        String::from_utf8_lossy(&output.stdout),
-        String::from_utf8_lossy(&output.stderr)
     );
 }
 
@@ -485,4 +551,104 @@ fn legacy_repetition_family_plan_marker_still_executes_directly() {
     let actual = execute_generated_parser(&compiled_spec_json, &legacy_generated_rules, "abab")
         .expect("legacy repetition marker should execute through direct specialization");
     assert_eq!(actual, json!([[["A", "B"], ["A", "B"]]]));
+}
+
+#[test]
+fn generated_rust_source_matches_manifest_backed_corpus_subset() {
+    let dir = corpus_dir();
+    assert!(
+        dir.is_dir(),
+        "corpus directory missing: {} (run `perl tools/gen_oracle_corpus.pl`)",
+        dir.display()
+    );
+
+    let manifest = load_corpus_manifest(&dir);
+    let manifest_cases: BTreeSet<&str> = manifest.cases.iter().map(String::as_str).collect();
+    for case_name in GENERATED_SOURCE_CORPUS_SUBSET {
+        assert!(
+            manifest_cases.contains(case_name),
+            "generated-source corpus subset case {case_name:?} is not listed in manifest.json"
+        );
+    }
+
+    let mut generated_modules = String::new();
+    let mut generated_tests = String::from("#[cfg(test)]\nmod generated_corpus_tests {\n");
+
+    for case_name in GENERATED_SOURCE_CORPUS_SUBSET {
+        let case_dir = dir.join(case_name);
+        let read = |file: &str| -> String {
+            fs::read_to_string(case_dir.join(file)).unwrap_or_else(|e| {
+                panic!(
+                    "cannot read generated-source corpus subset file {}/{}: {e}",
+                    case_dir.display(),
+                    file
+                )
+            })
+        };
+        let source = read("input.spec");
+        let input = read("input.txt");
+        let expected_reference: Value =
+            serde_json::from_str(&read("expected.json")).unwrap_or_else(|e| {
+                panic!(
+                    "malformed expected.json for generated-source corpus subset case {case_name}: {e}"
+                )
+            });
+        let expected_engine_output = json!([expected_reference]);
+
+        let parsed = parse_spec_with_user_functions(&source).unwrap_or_else(|e| {
+            panic!("parse failed for generated-source corpus subset case {case_name}: {e}")
+        });
+        validate(&parsed).unwrap_or_else(|e| {
+            panic!("validate failed for generated-source corpus subset case {case_name}: {e}")
+        });
+        let compiled = compile(&parsed).unwrap_or_else(|e| {
+            panic!("compile failed for generated-source corpus subset case {case_name}: {e}")
+        });
+
+        let interpreted = Engine::new(compiled.clone())
+            .execute(&input)
+            .unwrap_or_else(|e| {
+                panic!(
+                    "interpreted execution failed for generated-source corpus subset case {case_name}: {e}"
+                )
+            });
+        assert_eq!(
+            interpreted, expected_engine_output,
+            "generated-source corpus subset case {case_name} must first satisfy the interpreter oracle"
+        );
+
+        let generated = emit_rust_source(&compiled).unwrap_or_else(|e| {
+            panic!("emit failed for generated-source corpus subset case {case_name}: {e}")
+        });
+        assert!(generated.contains("GENERATED_RULES"));
+
+        let module = rust_module_name_for_case(case_name);
+        generated_modules.push_str("pub mod ");
+        generated_modules.push_str(&module);
+        generated_modules.push_str(" {\n");
+        generated_modules.push_str(&generated);
+        generated_modules.push_str("}\n\n");
+
+        let input_literal =
+            serde_json::to_string(&input).expect("encode generated corpus test input");
+        let expected_literal = serde_json::to_string(&expected_engine_output)
+            .expect("encode generated corpus expectation");
+        generated_tests.push_str("    #[test]\n    fn ");
+        generated_tests.push_str(&module);
+        generated_tests.push_str("_matches_oracle() {\n        let actual = crate::");
+        generated_tests.push_str(&module);
+        generated_tests.push_str("::parse(");
+        generated_tests.push_str(&input_literal);
+        generated_tests.push_str(").expect(\"generated corpus parser should run\");\n        let expected: serde_json::Value = serde_json::from_str(");
+        generated_tests.push_str(
+            &serde_json::to_string(&expected_literal).expect("encode expected JSON literal"),
+        );
+        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n    }\n");
+    }
+
+    generated_tests.push_str("}\n");
+    run_generated_crate(
+        "linkedspec_generated_corpus_subset",
+        format!("{generated_modules}\n{generated_tests}"),
+    );
 }

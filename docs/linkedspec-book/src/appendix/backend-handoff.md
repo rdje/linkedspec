@@ -220,7 +220,14 @@ asserting that family coverage in the source-emitter matrix. `.8.4` added direct
 generated execution for the four explicit REP subfamilies (`RepAcode`,
 `RepBcode`, `RepAndAcode`, and `RepAndBcode`), including bounded repetition,
 zero-progress termination, and same-position recursive-call guard coverage.
-All-variant/oracle integration remains owned by `.8.5`.
+`.8.5` integrated the generated-source proof with the oracle corpus: the
+source-emitter test still compiles and runs an all-family generated matrix, and
+it now also compiles/runs a curated subset selected from the checked-in
+`tests/corpus/manifest.json`. That generated-source corpus subset includes
+authored proof fixtures, terse helper/control/user-function fixtures, and
+shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
+full 88-fixture corpus remains the Rust interpreter oracle gate unless a later
+leaf explicitly broadens generated-source corpus coverage.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`

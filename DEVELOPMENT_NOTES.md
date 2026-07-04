@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.5 — generated-source oracle/corpus integration):
+  Keep two generated-source proof layers distinct. The synthetic `source_emitter` matrix is the structural-family
+  proof: it must cover every current generated family and compile/run the emitted modules in an isolated crate. The
+  manifest-backed corpus subset is the oracle-contract proof: it loads real `tests/corpus/manifest.json` entries,
+  first checks normal Rust interpreter output against `[expected.json]`, then emits those same compiled specs and
+  proves generated `parse(...)` returns the same value. The current generated-source corpus subset is intentionally
+  curated rather than exhaustive: authored proof fixtures, terse helper/control/user-function fixtures, and shipped
+  `tclite`/`portmap` smokes. The full 88-fixture corpus remains the interpreter parity gate until a separate leaf
+  explicitly broadens generated-source corpus coverage.
+
 - 2026-07-04 (RUST-PARITY.8.4 — REP generated-family direct execution):
   Generated source now has explicit repetition family markers instead of one opaque `Repetition` bucket:
   `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode`. `GeneratedPlanExecutor` routes all four directly.

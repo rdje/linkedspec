@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.5 — integrate generated source with oracle corpus
+
+**Scope:** Rust generated-source test harness, oracle/corpus integration proof, task-tree frontier docs, mdBook
+backend handoff, live recovery docs, and Knowledge Map.
+
+**What changed:** The source-emitter integration test now validates generated Rust source against the
+manifest-backed oracle corpus as well as the synthetic all-family matrix. A curated manifest subset is loaded from
+`rust/linkedspec-runtime/tests/corpus/manifest.json`, checked for manifest membership, parsed with the full
+user-function-aware parser, verified against the normal Rust interpreter's `[expected.json]` oracle mapping, emitted
+as generated Rust modules, compiled in an isolated temporary crate, and executed through generated `parse(...)`.
+
+**Evidence:** The all-family generated-source matrix still covers every supported structural family (`Default`,
+`OrAcode`, `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, `OrBcode`, `RepAcode`, `RepBcode`, `RepAndAcode`, and
+`RepAndBcode`) plus zero-progress/recursion and legacy `Repetition` compatibility. The new manifest-backed subset
+proves generated source on `proof_edge_array_literal`, `proof_edge_scalar_literal`, `autoexist_array_bare_arg`,
+`terse_1_5_2_primitive_literals`, `terse_2_2_3_attached_if_blocks`,
+`terse_4_3_2_user_function_runtime`, `tclite_command_subst`, and `portmap_bare`. This is a generated-source subset
+proof, not a claim that generated source currently compiles all 88 corpus fixtures; the full 88-fixture oracle
+remains the interpreter corpus gate.
+
 ## 2026-07-04 — RUST-PARITY.8.4 — emit REP generated families
 
 **Scope:** Rust generated-source execution routing, repeated acode/bcode runtime loops, source-emitter compile/run

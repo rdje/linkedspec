@@ -45,8 +45,9 @@ generated rule-family plan, `.8.3.2` landed direct default/OR acode generated
 execution, `.8.3.3` landed direct AND acode generated execution, `.8.3.4`
 landed direct AND/OR bcode generated execution, `.8.3.5` closed the
 non-repetition generated-family matrix, and `.8.4` closed direct REP
-generated-family execution. The current frontier is `RUST-PARITY.8.5`:
-generated-source validation against the oracle/corpus contract.
+generated-family execution. `RUST-PARITY.8.5` then added generated-source
+validation against a manifest-backed corpus subset. The current frontier is
+`RUST-PARITY.9`: documentation sync/finalization.
 
 The later lanes are:
 
@@ -73,4 +74,5 @@ The later lanes are:
 - `.8.3.4`: done — direct AND/OR bcode generated execution.
 - `.8.3.5`: done — non-repetition generated-family matrix closeout.
 - `.8.4`: done — REP family direct execution and termination guards.
-- `.8.5`: current frontier — generated-source validation against the oracle/corpus contract.
+- `.8.5`: done — generated-source validation against the oracle/corpus subset.
+- `.9`: current frontier — documentation sync/finalization.

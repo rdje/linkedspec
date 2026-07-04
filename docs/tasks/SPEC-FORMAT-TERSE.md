@@ -12,7 +12,7 @@
   receiver methods, not scalar number receiver links; mutation/lifecycle/control/child-dispatch/parser-state/
   declaration/compatibility helpers remain explicit unless a future leaf defines type-correct receiver semantics.
   No Perl/Rust behavior change was needed. The `.7` lane is closed, and no `SPEC-FORMAT-TERSE` leaf is currently
-  pending. PNT returns to `RUST-PARITY.7.3.4.3` unless a new terse leaf is split. Prior **`.7.3` DONE; array/list numeric reducer receiver methods landed as terminal
+  pending. PNT returns to `RUST-PARITY.9` unless a new terse leaf is split. Prior **`.7.3` DONE; array/list numeric reducer receiver methods landed as terminal
   Perl/Rust links. `sum`, `avg`, `median`, `range`, `min`, and `max` now work from array receivers, including after
   array-returning links such as `sorted().take(...)` and Perl internal pure array-pipeline links such as `uniq()`.
   Invalid reducer continuations return `undef`/`null`; hash and number mutation/ambiguous boundaries remain
@@ -3023,7 +3023,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.7.2` | `done` | string/scalar receiver methods already cover the useful pure helper set; `substr()` method/helper equivalence verified on Perl/Rust; no code change |
 | — | `SPEC-FORMAT-TERSE.7.3` | `done` | array/list numeric reducer receiver methods landed as terminal links; hash/number boundaries kept explicit; phase0 1021; oracle 74 fixtures |
 | — | `SPEC-FORMAT-TERSE.7.4` | `done` | final type-method no-drift sweep closed; current docs/KM/task-tree/roadmap agree on method families and explicit boundaries |
-| — | _none_ | `frontier empty` | no `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to `RUST-PARITY.7.3.4.3` unless a new terse leaf is split |
+| — | _none_ | `frontier empty` | no `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to `RUST-PARITY.9` unless a new terse leaf is split |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |

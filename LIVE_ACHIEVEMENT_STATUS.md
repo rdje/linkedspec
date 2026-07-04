@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **RUST-PARITY.8.5 — integrate generated source with oracle corpus**
+  (GENERATED SOURCE NOW HAS MANIFEST-BACKED CORPUS-SUBSET PROOF).
+
+  **Fix:** The `source_emitter` integration test now loads the real oracle `manifest.json`, verifies the selected
+  corpus case names are present, parses each case with the full user-function-aware parser, confirms interpreter
+  output against `[expected.json]`, emits generated Rust modules for those compiled specs, and compiles/runs them in
+  an isolated temp crate.
+
+  **Verification:** Focused generated-source testing passes with three tests: all-family matrix, legacy
+  `Repetition` compatibility, and the new manifest-backed subset. The subset covers authored oracle proofs,
+  auto-existing arrays, primitive literals, attached if blocks, user-function runtime, shipped `tclite`, and shipped
+  `portmap`. Limitation is explicit: this is generated-source proof on a curated subset, while the full 88-fixture
+  corpus remains the interpreter oracle gate.
+
+  **Frontier:** `RUST-PARITY.9` — documentation sync/finalization.
+
 - 2026-07-04: **RUST-PARITY.8.4 — emit REP generated families**
   (GENERATED SOURCE NOW DIRECTLY RUNS EXPLICIT REP SUBFAMILIES).
 
