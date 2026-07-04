@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.4 — compile/ActionIR coverage split):
+  Do not instrument compile/ActionIR trace coverage as one patch. The owner surface is too large:
+  `RuleIR.pm`, `RuleIR/EmitContext.pm`, scanner/canonical/diagnostic/rewrite owners, compact lowering owners, and
+  `ActionIR::MethodLowering` need separate reviewable slices. The sequence is now `.3.4.1` RuleIR planning,
+  `.3.4.2` EmitContext owner bridge, `.3.4.3` scanner/canonical/diagnostics/rewrite pipeline, `.3.4.4` compact
+  lowering owners, `.3.4.5` MethodLowering, and `.3.4.6` closeout. Start with RuleIR because it selects the handler
+  family/action-mode names the rest of the trace should reuse.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.3 — repetition generated path tracing):
   Repetition Perl generated handler templates now emit debug-level REP branch decisions through
   `trace_generated_handler_branch(...)`. Common REP branch names are `loop_enter`, `iteration_result`,

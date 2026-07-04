@@ -7,8 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4 — split compile action trace coverage**
+  (COMPILE/ACTIONIR TRACE COVERAGE SPLIT; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.1).
+
+  **Split:** A read-only owner audit showed the compile/ActionIR trace leaf spans `RuleIR.pm`,
+  `RuleIR/EmitContext.pm`, the scanner/canonical/diagnostic/rewrite owners, compact value/flow/control/declaration/
+  array lowering owners, and the large `ActionIR::MethodLowering` owner. The parent `.3.4` is now split into
+  signoff-sized children: `.3.4.1` RuleIR planning, `.3.4.2` EmitContext bridge, `.3.4.3` scanner/canonical/
+  diagnostics/rewrite, `.3.4.4` compact lowering owners, `.3.4.5` MethodLowering, and `.3.4.6` closeout.
+
+  **Verification:** Read-only `rg` trace call-site inventory, owner sizing with `wc -l`, targeted reads of RuleIR
+  and EmitContext, and ActionIR owner inventory. No runtime/code behavior changed in the split.
+
+  **Frontier:** `TRACE-OBSERVABILITY.3.4.1` — instrument RuleIR planning decisions.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.3.3 — trace repetition generated paths**
-  (REP GENERATED HANDLER BRANCH TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4).
+  (REP GENERATED HANDLER BRANCH TRACE CLOSED; TRACE-OBSERVABILITY.3.4 HAS SINCE SPLIT).
 
   **Fix:** Perl generated handlers for repetition runtime paths now wrap REP loop branch conditions with
   `LinkedSpec::Trace::trace_generated_handler_branch(...)`. Debug trace now reports REP loop entry,
@@ -21,7 +35,8 @@ Current execution status for interruption-safe batch workflow recovery.
   memory/doctrine, whitespace, and full local CI pass. The REP regression locks runtime traces for `REP_ACODE` and
   `REP_AND_ACODE` and source-locks all four REP template families.
 
-  **Frontier:** `TRACE-OBSERVABILITY.3.4` — add compile/ActionIR owner ENTER/EXIT scopes and branch decisions.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4`; `.3.4` has since split and current frontier is
+  `TRACE-OBSERVABILITY.3.4.1`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.2 — trace non-repetition generated dispatch**
   (NON-REP GENERATED HANDLER BRANCH TRACE CLOSED; TRACE-OBSERVABILITY.3.3 HAS SINCE CLOSED).
@@ -83,7 +98,7 @@ Current execution status for interruption-safe batch workflow recovery.
   remains `["alpha","beta"]`; full local CI includes phase0 at 1021 green.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3`; `.3` has since split, `.3.1` through `.3.3` have since
-  closed, and the current frontier is `TRACE-OBSERVABILITY.3.4`.
+  closed, and the current frontier is `TRACE-OBSERVABILITY.3.4.1`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.1 — audit trace coverage gaps**
   (READ-ONLY AUDIT CLOSED; TRACE-OBSERVABILITY.2 HAS SINCE CLOSED).
@@ -101,7 +116,7 @@ Current execution status for interruption-safe batch workflow recovery.
   doctrine/memory gates.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.2`; `.2` has since closed, `.3` has since split, `.3.1`
-  through `.3.3` have since closed, and the current frontier is `TRACE-OBSERVABILITY.3.4`.
+  through `.3.3` have since closed, and the current frontier is `TRACE-OBSERVABILITY.3.4.1`.
 
 - 2026-07-04: **TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values**
   (TOP-RULE-AS-NORMAL TREE CLOSED; FRONTIER AT COMPLETION TRACE-OBSERVABILITY.1, NOW CLOSED).

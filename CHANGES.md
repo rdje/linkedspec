@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.4 — split compile action trace coverage
+
+**Scope:** Task-tree split, roadmap/frontier sync, live recovery docs, and Knowledge Map. No runtime/code behavior
+changed in this slice.
+
+**What changed:** Split the compile/ActionIR trace coverage leaf before implementation. The read-only audit showed
+the parent leaf spans `RuleIR.pm`, `RuleIR/EmitContext.pm`, scanner/canonical/diagnostic/rewrite owners,
+value/flow/control/declaration/array lowering owners, and the large `ActionIR::MethodLowering` owner. The new
+children are `.3.4.1` RuleIR planning, `.3.4.2` EmitContext bridge, `.3.4.3` scanner/canonical/diagnostics/
+rewrite, `.3.4.4` compact lowering owners, `.3.4.5` MethodLowering, and `.3.4.6` closeout.
+
+**Evidence:** Read-only `rg` trace call-site inventory, `wc -l` owner sizing, targeted RuleIR/EmitContext reads,
+and ActionIR owner inventory. The next frontier is `TRACE-OBSERVABILITY.3.4.1`.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.3 — trace repetition generated paths
 
 **Scope:** Perl REP generated handler templates, focused runtime/source trace regressions, mdBook trace docs,
