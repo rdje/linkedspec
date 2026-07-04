@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.4.2 — EmitContext owner-bridge trace):
+  EmitContext bridge decisions use debug-level `emit_context:<phase>:<label>:<decision>` names. Current phases are
+  `owner_package`, `owner_callback`, `owner_deps`, `owner_call`, `owner_call_with_deps`,
+  `rewrite_action_code_for_compat`, `rewrite_action_code_with_diagnostics`, and `build_rule_ir_emit_context`.
+  Keep this namespace for bridge/orchestration visibility only; scanner/canonical/diagnostic/rewrite-pipeline
+  internals remain owned by `.3.4.3`. The trace helpers deliberately no-op unless `LinkedSpec::Trace` is already
+  loaded, so require-only EmitContext consumers stay Trace-lazy. Owner-call wrappers must continue to preserve
+  list/scalar/void context because `_rewrite_action_code_with_diagnostics(...)` and other bridge calls return
+  meaningful list payloads.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.4.1 — RuleIR planning trace):
   RuleIR planning decisions use debug-level `rule_ir:<phase>:<rule>:<decision>` names. Keep this namespace for
   future RuleIR planning additions instead of adding ad hoc trace strings. Current phases are `collect`, `select`,

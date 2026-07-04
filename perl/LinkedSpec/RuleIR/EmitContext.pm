@@ -19,10 +19,106 @@ use LinkedSpec::OwnerDispatch ();
 
 use constant {
  DUMP_LOW => 100,
+ DUMP_DEBUG => 500,
 };
 
 our $__ls_current_function_registry;
 our $__ls_current_bare_type_memory;
+
+sub _trace_should_dump {
+ my @args = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+  return 0 unless defined &LinkedSpec::Trace::should_dump;
+  return LinkedSpec::Trace::should_dump(@args)
+ })
+}
+
+sub _trace_enter {
+ my @args = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  return undef unless exists $INC{'LinkedSpec/Trace.pm'};
+  return undef unless defined &LinkedSpec::Trace::trace_enter;
+  return LinkedSpec::Trace::trace_enter(@args)
+ })
+}
+
+sub _trace_exit {
+ my @args = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  return undef unless exists $INC{'LinkedSpec/Trace.pm'};
+  return undef unless defined &LinkedSpec::Trace::trace_exit;
+  return LinkedSpec::Trace::trace_exit(@args)
+ })
+}
+
+sub _trace_decision {
+ my @args = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+  return 0 unless defined &LinkedSpec::Trace::trace_decision;
+  return LinkedSpec::Trace::trace_decision(@args)
+ })
+}
+
+sub _trace_emit_context_token {
+ my ($value, $fallback) = @_;
+ $value = $fallback unless defined($value) && length($value);
+ $value = '<unknown>' unless defined($value) && length($value);
+ $value =~ s/[^A-Za-z0-9_.:-]+/_/go;
+ return $value
+}
+
+sub _trace_emit_context_value {
+ my ($value) = @_;
+ return '<undef>' unless defined $value;
+ return ref($value) if ref($value);
+ $value =~ s/\s+/ /go;
+ return $value
+}
+
+sub _trace_emit_context_decision {
+ my (%args) = @_;
+ my $taken = $args{taken} ? 1 : 0;
+ my $level = exists($args{level}) ? $args{level} : DUMP_DEBUG;
+ return $taken unless _trace_should_dump($level);
+
+ my $phase = _trace_emit_context_token($args{phase}, 'bridge');
+ my $label = _trace_emit_context_token($args{label}, '<unknown>');
+ my $decision = _trace_emit_context_token($args{decision}, 'decision');
+ my @reason = (
+  'phase=' . $phase,
+  'label=' . $label,
+  'decision=' . $decision,
+ );
+ if (ref($args{context}) eq 'HASH') {
+  push @reason, map { $_ . '=' . _trace_emit_context_value($args{context}{$_}) } sort keys %{$args{context}};
+ }
+
+ return _trace_decision(
+  "emit_context:$phase:$label:$decision",
+  $taken,
+  join("\n", @reason),
+  $level,
+ )
+}
+
+sub _trace_emit_context_enter {
+ my ($phase, $label, $details) = @_;
+ return undef unless _trace_should_dump(DUMP_DEBUG);
+ my $phase_token = _trace_emit_context_token($phase, 'bridge');
+ my $label_token = _trace_emit_context_token($label, '<unknown>');
+ return _trace_enter(
+  "LinkedSpec::RuleIR::EmitContext::$phase_token:$label_token",
+  $details,
+  DUMP_DEBUG,
+ )
+}
+
+sub _trace_emit_context_exit {
+ my ($scope, $details) = @_;
+ return _trace_exit($scope, $details, DUMP_DEBUG)
+}
 
 #------------------------------------------------------------------------------
 # Function: _actionir_owner_package
@@ -51,9 +147,27 @@ sub _actionir_owner_package {
  };
 
  my $pkg = $owner_pkgs->{$owner_key};
- die "(LinkedSpec::RuleIR::EmitContext::_actionir_owner_package) -E- unknown owner key '$owner_key'"
-  unless defined($pkg) && length($pkg);
+ unless (defined($pkg) && length($pkg)) {
+  _trace_emit_context_decision(
+   phase => 'owner_package',
+   label => defined($owner_key) ? $owner_key : '<undef>',
+   decision => 'unknown_owner_key',
+   taken => 0,
+   context => { owner_key => defined($owner_key) ? $owner_key : '<undef>' },
+  );
+  die "(LinkedSpec::RuleIR::EmitContext::_actionir_owner_package) -E- unknown owner key '$owner_key'";
+ }
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
+ _trace_emit_context_decision(
+  phase => 'owner_package',
+  label => $owner_key,
+  decision => 'resolve',
+  taken => 1,
+  context => {
+   owner_key => $owner_key,
+   package => $pkg,
+  },
+ );
  return $pkg
 }
 
@@ -67,7 +181,19 @@ sub _actionir_owner_package {
 sub _actionir_owner_callback {
  my ($owner_key, $method) = @_;
  my $pkg = _actionir_owner_package($owner_key);
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $method)
+ my $code = LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $method);
+ _trace_emit_context_decision(
+  phase => 'owner_callback',
+  label => $owner_key,
+  decision => $method,
+  taken => ref($code) eq 'CODE',
+  context => {
+   owner_key => $owner_key,
+   package => $pkg,
+   method => $method,
+  },
+ );
+ return $code
 }
 
 #------------------------------------------------------------------------------
@@ -80,24 +206,80 @@ sub _actionir_owner_callback {
 sub _actionir_owner_default_deps {
  my ($owner_key) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my $scope = _trace_emit_context_enter(
+   'owner_deps',
+   $owner_key,
+   { owner_key => $owner_key },
+  );
   my $code = _actionir_owner_callback($owner_key, 'default_deps_for_package');
   my $owner_deps = $code->(__PACKAGE__);
-  if (
+  my $dep_keys = ref($owner_deps) eq 'HASH' ? join(',', sort keys %$owner_deps) : '';
+  _trace_emit_context_decision(
+   phase => 'owner_deps',
+   label => $owner_key,
+   decision => 'default_bundle',
+   taken => ref($owner_deps) eq 'HASH',
+   context => {
+    owner_key => $owner_key,
+    dep_count => ref($owner_deps) eq 'HASH' ? scalar(keys %$owner_deps) : 0,
+    dep_keys => $dep_keys,
+    dep_ref => ref($owner_deps) || '',
+   },
+  );
+  my $inject_function_registry = (
    ($owner_key eq 'method_lowering' || $owner_key eq 'canonical_events')
    && ref($__ls_current_function_registry) eq 'HASH'
    && ref($owner_deps) eq 'HASH'
-  ) {
+  ) ? 1 : 0;
+  _trace_emit_context_decision(
+   phase => 'owner_deps',
+   label => $owner_key,
+   decision => 'inject_function_registry',
+   taken => $inject_function_registry,
+   context => {
+    owner_key => $owner_key,
+    registry_ref => ref($__ls_current_function_registry) || '',
+    registry_count => ref($__ls_current_function_registry) eq 'HASH'
+     ? scalar(keys %$__ls_current_function_registry)
+     : 0,
+   },
+  );
+  if ($inject_function_registry) {
    $owner_deps = {
     %$owner_deps,
     user_function_registry => $__ls_current_function_registry,
    };
   }
-  if (ref($owner_deps) eq 'HASH' && ref($__ls_current_bare_type_memory) eq 'HASH') {
+  my $inject_bare_symbol_kind = (
+   ref($owner_deps) eq 'HASH' && ref($__ls_current_bare_type_memory) eq 'HASH'
+  ) ? 1 : 0;
+  _trace_emit_context_decision(
+   phase => 'owner_deps',
+   label => $owner_key,
+   decision => 'inject_bare_symbol_kind',
+   taken => $inject_bare_symbol_kind,
+   context => {
+    owner_key => $owner_key,
+    bare_type_memory_ref => ref($__ls_current_bare_type_memory) || '',
+    bare_type_memory_count => ref($__ls_current_bare_type_memory) eq 'HASH'
+     ? scalar(keys %$__ls_current_bare_type_memory)
+     : 0,
+   },
+  );
+  if ($inject_bare_symbol_kind) {
    $owner_deps = {
     %$owner_deps,
     bare_symbol_kind => \&_bare_symbol_kind,
    };
   }
+  _trace_emit_context_exit(
+   $scope,
+   {
+    status => 'ok',
+    owner_key => $owner_key,
+    dep_count => ref($owner_deps) eq 'HASH' ? scalar(keys %$owner_deps) : 0,
+   },
+  );
   return $owner_deps
  })
 }
@@ -112,8 +294,39 @@ sub _actionir_owner_default_deps {
 sub _call_actionir_owner {
  my ($owner_key, $method, @args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my $wantarray = wantarray;
+  my $scope = _trace_emit_context_enter(
+   'owner_call',
+   $owner_key,
+   {
+    owner_key => $owner_key,
+    method => $method,
+    arg_count => scalar(@args),
+   },
+  );
   my $code = _actionir_owner_callback($owner_key, $method);
-  return $code->(@args)
+  if ($wantarray) {
+   my @ret = $code->(@args);
+   _trace_emit_context_exit(
+    $scope,
+    { status => 'ok', owner_key => $owner_key, method => $method, return_count => scalar(@ret) },
+   );
+   return @ret
+  }
+  if (defined $wantarray) {
+   my $ret = $code->(@args);
+   _trace_emit_context_exit(
+    $scope,
+    { status => 'ok', owner_key => $owner_key, method => $method, return_ref => ref($ret) || '' },
+   );
+   return $ret
+  }
+  $code->(@args);
+  _trace_emit_context_exit(
+   $scope,
+   { status => 'ok', owner_key => $owner_key, method => $method, context => 'void' },
+  );
+  return
  })
 }
 
@@ -127,9 +340,40 @@ sub _call_actionir_owner {
 sub _call_actionir_owner_with_deps {
  my ($owner_key, $method, @args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my $wantarray = wantarray;
+  my $scope = _trace_emit_context_enter(
+   'owner_call_with_deps',
+   $owner_key,
+   {
+    owner_key => $owner_key,
+    method => $method,
+    arg_count => scalar(@args),
+   },
+  );
   my $code = _actionir_owner_callback($owner_key, $method);
   my $deps = _actionir_owner_default_deps($owner_key);
-  return $code->(@args, $deps)
+  if ($wantarray) {
+   my @ret = $code->(@args, $deps);
+   _trace_emit_context_exit(
+    $scope,
+    { status => 'ok', owner_key => $owner_key, method => $method, return_count => scalar(@ret) },
+   );
+   return @ret
+  }
+  if (defined $wantarray) {
+   my $ret = $code->(@args, $deps);
+   _trace_emit_context_exit(
+    $scope,
+    { status => 'ok', owner_key => $owner_key, method => $method, return_ref => ref($ret) || '' },
+   );
+   return $ret
+  }
+  $code->(@args, $deps);
+  _trace_emit_context_exit(
+   $scope,
+   { status => 'ok', owner_key => $owner_key, method => $method, context => 'void' },
+  );
+  return
  })
 }
 
@@ -697,7 +941,77 @@ sub _canonicalize_helper_action_ir_event {
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
- return _call_actionir_owner_with_deps('rewrite_pipeline', '_rewrite_action_code_with_diagnostics', $label, $code, $rewrite_rules)
+ my $scope = _trace_emit_context_enter(
+  'rewrite_action_code_with_diagnostics',
+  $label,
+  {
+   label => $label,
+   code_len => defined($code) ? length($code) : 0,
+   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+   rewrite_rules_supplied => ref($rewrite_rules) eq 'ARRAY' ? 1 : 0,
+  },
+ );
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = _call_actionir_owner_with_deps('rewrite_pipeline', '_rewrite_action_code_with_diagnostics', $label, $code, $rewrite_rules);
+  my $diag = $ret[1];
+  _trace_emit_context_decision(
+   phase => 'rewrite_action_code_with_diagnostics',
+   label => $label,
+   decision => 'canonical_raw_perl_fallback',
+   taken => ref($diag) eq 'HASH' && ($diag->{canonical_action_ir_fallback_count} || 0) > 0,
+   context => {
+    fallback_count => ref($diag) eq 'HASH' ? ($diag->{canonical_action_ir_fallback_count} || 0) : 0,
+    unresolved_helper_count => ref($diag) eq 'HASH' ? ($diag->{unresolved_helper_count} || 0) : 0,
+    helper_action_ir_count => ref($diag) eq 'HASH' ? ($diag->{helper_action_ir_count} || 0) : 0,
+    canonical_action_ir_count => ref($diag) eq 'HASH' ? ($diag->{canonical_action_ir_count} || 0) : 0,
+   },
+  );
+  _trace_emit_context_exit(
+   $scope,
+   {
+    status => 'ok',
+    label => $label,
+    return_count => scalar(@ret),
+    rewritten_len => defined($ret[0]) ? length($ret[0]) : 0,
+   },
+  );
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = _call_actionir_owner_with_deps('rewrite_pipeline', '_rewrite_action_code_with_diagnostics', $label, $code, $rewrite_rules);
+  _trace_emit_context_decision(
+   phase => 'rewrite_action_code_with_diagnostics',
+   label => $label,
+   decision => 'canonical_raw_perl_fallback',
+   taken => ref($ret) eq 'HASH' && ($ret->{canonical_action_ir_fallback_count} || 0) > 0,
+   context => {
+    fallback_count => ref($ret) eq 'HASH' ? ($ret->{canonical_action_ir_fallback_count} || 0) : 0,
+    unresolved_helper_count => ref($ret) eq 'HASH' ? ($ret->{unresolved_helper_count} || 0) : 0,
+    helper_action_ir_count => ref($ret) eq 'HASH' ? ($ret->{helper_action_ir_count} || 0) : 0,
+    canonical_action_ir_count => ref($ret) eq 'HASH' ? ($ret->{canonical_action_ir_count} || 0) : 0,
+   },
+  );
+  _trace_emit_context_exit(
+   $scope,
+   {
+    status => 'ok',
+    label => $label,
+    return_ref => ref($ret) || '',
+   },
+  );
+  return $ret
+ }
+ _call_actionir_owner_with_deps('rewrite_pipeline', '_rewrite_action_code_with_diagnostics', $label, $code, $rewrite_rules);
+ _trace_emit_context_exit(
+  $scope,
+  {
+   status => 'ok',
+   label => $label,
+   context => 'void',
+  },
+ );
+ return
 }
 
 sub _accumulate_action_rewrite_diagnostics {
@@ -722,6 +1036,14 @@ sub _build_action_rewrite_rules {
 sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my $scope = _trace_emit_context_enter(
+   'rewrite_action_code_for_compat',
+   $label,
+   {
+    label => $label,
+    code_len => defined($code) ? length($code) : 0,
+   },
+  );
   my $compat_rule_ir = {
    label => $label,
    code_blocks => {},
@@ -730,12 +1052,48 @@ sub rewrite_action_code_for_compat {
    and_icode_entries => [],
   };
   my $compat_bare_type_memory = _collect_bare_identifier_type_memory($compat_rule_ir);
+  _trace_emit_context_decision(
+   phase => 'rewrite_action_code_for_compat',
+   label => $label,
+   decision => 'compat_bare_type_memory',
+   taken => ref($compat_bare_type_memory) eq 'HASH',
+   context => {
+    bare_type_memory_count => ref($compat_bare_type_memory) eq 'HASH'
+     ? scalar(keys %$compat_bare_type_memory)
+     : 0,
+   },
+  );
   local $__ls_current_bare_type_memory = $compat_bare_type_memory;
   my $trimmed = _trim_action_ir_value($code);
   if (defined($trimmed) && $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o) {
    my $lowered = _lower_method_value_expr($trimmed);
-   return $lowered if defined($lowered) && length($lowered);
+   if (defined($lowered) && length($lowered)) {
+    _trace_emit_context_decision(
+     phase => 'rewrite_action_code_for_compat',
+     label => $label,
+     decision => 'scalar_slot_fallback',
+     taken => 1,
+     context => {
+      raw => $trimmed,
+      lowered => $lowered,
+     },
+    );
+    _trace_emit_context_exit(
+     $scope,
+     { status => 'ok', label => $label, path => 'scalar_slot_fallback', rewritten_len => length($lowered) },
+    );
+    return $lowered
+   }
   }
+  _trace_emit_context_decision(
+   phase => 'rewrite_action_code_for_compat',
+   label => $label,
+   decision => 'scalar_slot_fallback',
+   taken => 0,
+   context => {
+    raw => defined($trimmed) ? $trimmed : '<undef>',
+   },
+  );
   if (
    defined($trimmed) &&
    length($trimmed) &&
@@ -744,10 +1102,50 @@ sub rewrite_action_code_for_compat {
    my $call = _parse_method_function_expr($trimmed);
    if ($call && ($call->{method} // '') =~ /^(?:array|hash)$/o) {
     my $lowered = _lower_method_value_expr($trimmed);
-    return $lowered if defined($lowered) && length($lowered);
+    if (defined($lowered) && length($lowered)) {
+     _trace_emit_context_decision(
+      phase => 'rewrite_action_code_for_compat',
+      label => $label,
+      decision => 'aggregate_wrapper_fallback',
+      taken => 1,
+      context => {
+       raw => $trimmed,
+       lowered => $lowered,
+       method => $call->{method},
+      },
+     );
+     _trace_emit_context_exit(
+      $scope,
+      { status => 'ok', label => $label, path => 'aggregate_wrapper_fallback', rewritten_len => length($lowered) },
+     );
+     return $lowered
+    }
    }
   }
+  _trace_emit_context_decision(
+   phase => 'rewrite_action_code_for_compat',
+   label => $label,
+   decision => 'aggregate_wrapper_fallback',
+   taken => 0,
+   context => {
+    raw => defined($trimmed) ? $trimmed : '<undef>',
+   },
+  );
   my ($rewritten) = _rewrite_action_code_with_diagnostics($label, $code, undef);
+  _trace_emit_context_decision(
+   phase => 'rewrite_action_code_for_compat',
+   label => $label,
+   decision => 'canonical_rewrite_pipeline',
+   taken => 1,
+   context => {
+    raw_len => defined($code) ? length($code) : 0,
+    rewritten_len => defined($rewritten) ? length($rewritten) : 0,
+   },
+  );
+  _trace_emit_context_exit(
+   $scope,
+   { status => 'ok', label => $label, path => 'canonical_rewrite_pipeline', rewritten_len => defined($rewritten) ? length($rewritten) : 0 },
+  );
   return $rewritten
  })
 }
@@ -1679,12 +2077,58 @@ sub _collect_auto_working_var_decls {
 #------------------------------------------------------------------------------
 sub build_rule_ir_emit_context {
  my ($rule_ir) = @_;
+ my $label = $rule_ir->{label};
+ my $scope = _trace_emit_context_enter(
+  'build_rule_ir_emit_context',
+  $label,
+  {
+   label => $label,
+   node_type => $rule_ir->{node_type},
+   regex_count => ref($rule_ir->{REs}) eq 'ARRAY' ? scalar(@{$rule_ir->{REs}}) : 0,
+   acode_count => ref($rule_ir->{acode_entries}) eq 'ARRAY' ? scalar(@{$rule_ir->{acode_entries}}) : 0,
+   bcode_count => ref($rule_ir->{bcode_entries}) eq 'ARRAY' ? scalar(@{$rule_ir->{bcode_entries}}) : 0,
+   and_icode_count => ref($rule_ir->{and_icode_entries}) eq 'ARRAY' ? scalar(@{$rule_ir->{and_icode_entries}}) : 0,
+   function_registry_count => ref($rule_ir->{function_registry}) eq 'HASH'
+    ? scalar(keys %{$rule_ir->{function_registry}})
+    : 0,
+  },
+ );
  local $__ls_current_function_registry = ref($rule_ir->{function_registry}) eq 'HASH'
   ? $rule_ir->{function_registry}
   : undef;
  local $__ls_current_bare_type_memory = _collect_bare_identifier_type_memory($rule_ir);
- my $label = $rule_ir->{label};
+ _trace_emit_context_decision(
+  phase => 'build_rule_ir_emit_context',
+  label => $label,
+  decision => 'function_registry_available',
+  taken => ref($__ls_current_function_registry) eq 'HASH',
+  context => {
+   function_registry_count => ref($__ls_current_function_registry) eq 'HASH'
+    ? scalar(keys %$__ls_current_function_registry)
+    : 0,
+  },
+ );
+ _trace_emit_context_decision(
+  phase => 'build_rule_ir_emit_context',
+  label => $label,
+  decision => 'bare_type_memory_collected',
+  taken => ref($__ls_current_bare_type_memory) eq 'HASH',
+  context => {
+   bare_type_memory_count => ref($__ls_current_bare_type_memory) eq 'HASH'
+    ? scalar(keys %$__ls_current_bare_type_memory)
+    : 0,
+  },
+ );
  my $rewrite_rules = _build_action_rewrite_rules($label);
+ _trace_emit_context_decision(
+  phase => 'build_rule_ir_emit_context',
+  label => $label,
+  decision => 'rewrite_rules_built',
+  taken => ref($rewrite_rules) eq 'ARRAY',
+  context => {
+   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+  },
+ );
  my $rewrite_diag_acc = _build_rewrite_diag_acc();
 
  my ($acodes, $dependency_refs) = _rewrite_acode_entries(
@@ -1742,7 +2186,7 @@ sub build_rule_ir_emit_context {
  );
  my $auto_var_decls = _collect_auto_working_var_decls($rule_ir, $lowered_text);
 
- return {
+ my $emit_context = {
   label     => $label,
   node_type => $rule_ir->{node_type},
   REs       => $rule_ir->{REs},
@@ -1761,7 +2205,20 @@ sub build_rule_ir_emit_context {
   lscode    => $lifecycle_code->{lscode},
   lecode    => $lifecycle_code->{lecode},
   action_rewriter_meta => $action_rewriter_meta,
- }
+ };
+ _trace_emit_context_exit(
+  $scope,
+  {
+   status => 'ok',
+   label => $label,
+   acode_count => scalar(@{$acodes || []}),
+   bcode_count => scalar(keys %{$bcodes || {}}),
+   dependency_ref_count => scalar(@{$dependency_refs || []}),
+   auto_var_decl_count => scalar(@{$auto_var_decls || []}),
+   language_agnostic_action_ir_ready => $action_rewriter_meta->{language_agnostic_action_ir_ready},
+  },
+ );
+ return $emit_context
 }
 
 1;

@@ -176,7 +176,7 @@ Treat these variables as compatibility state, not the preferred control API. Use
 
 ## Typical usage
 
-The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, RuleIR planning decisions, and generated-handler branch decisions for the Perl reference non-repetition and repetition templates. It is not yet an exhaustive branch tracer for every ActionIR lowering branch.
+The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, RuleIR planning decisions, EmitContext owner-bridge/rewrite-orchestration decisions, and generated-handler branch decisions for the Perl reference non-repetition and repetition templates. It is not yet an exhaustive branch tracer for every ActionIR lowering branch.
 
 The consistent scope naming makes it possible to follow a single parse through nested trace output:
 
@@ -190,6 +190,6 @@ LinkedSpec::parser_invoke:Top
 <- LinkedSpec::parser_invoke:Top (returned AST)
 ```
 
-Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes. RuleIR planning emits `rule_ir:<phase>:<rule_label>:<decision>` decisions at `debug` level for rule-entry collection, lifecycle routing, handler-variant selection, action-mode/execution-shape planning, split-boundary marker lowering, and mixed-action validation. Generated runtime-handler branches such as match/no-match dispatch, `if`/`elsif`, repetition min/max paths, and bcode/acode dispatch emit `generated_handler_branch:<handler_kind>:<rule_label>:<branch>` decisions at `debug` level in the Perl reference backend.
+Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes. RuleIR planning emits `rule_ir:<phase>:<rule_label>:<decision>` decisions at `debug` level for rule-entry collection, lifecycle routing, handler-variant selection, action-mode/execution-shape planning, split-boundary marker lowering, and mixed-action validation. EmitContext bridge orchestration emits `emit_context:<phase>:<label>:<decision>` decisions at `debug` level for ActionIR owner package/callback resolution, dependency bundle selection, function-registry and bare-symbol-kind injection, compatibility fallback paths, canonical rewrite-pipeline use, and rule emit-context build boundaries. Generated runtime-handler branches such as match/no-match dispatch, `if`/`elsif`, repetition min/max paths, and bcode/acode dispatch emit `generated_handler_branch:<handler_kind>:<rule_label>:<branch>` decisions at `debug` level in the Perl reference backend.
 
 The trace API is intentionally kept separate from the structured `last_error` diagnostics channel. Trace output is for developers and debugging; structured `last_error` payloads are for callers programmatically handling failures.

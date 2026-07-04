@@ -290,10 +290,11 @@ The trace surface is useful for:
 - debugging mark/capture behavior
 
 Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
-handler wrappers, selected decisions, dumps, mark/capture events, and debug-level RuleIR planning decisions. The
-Perl reference backend also emits debug-level generated-handler branch decisions for non-repetition dispatch paths
-and repetition loop paths. Most ActionIR lowering branches beyond RuleIR planning are still planned coverage work
-until those owners are instrumented.
+handler wrappers, selected decisions, dumps, mark/capture events, debug-level RuleIR planning decisions, and
+debug-level EmitContext owner-bridge/rewrite-orchestration decisions. The Perl reference backend also emits
+debug-level generated-handler branch decisions for non-repetition dispatch paths and repetition loop paths.
+Scanner/canonical-event/diagnostic/rewrite-pipeline owner internals and the remaining ActionIR lowering owners are
+still planned coverage work until those owners are instrumented.
 
 Tracing is controlled separately from runtime context.
 
@@ -439,6 +440,18 @@ Current RuleIR phases include `collect`, `select`, `meta`, and `validate`. Typic
 `per_regex_lifecycle_and_icode`, `move_pos_lecode`, `mark_pos_lecode`,
 `handler_variant_<Variant>`, `action_mode_<mode>`, `execution_shape_<shape>`, `action_mode_valid`,
 and `mixed_action_mode`.
+
+EmitContext owner-bridge decisions follow this shape:
+
+```text
+emit_context:<phase>:<label>:<decision>
+```
+
+Current EmitContext phases include `owner_package`, `owner_callback`, `owner_deps`, `rewrite_compat`,
+`rewrite_diagnostics`, and `build`. Typical decisions include `package_resolved`, `callback_resolved`,
+`default_bundle`, `inject_function_registry`, `inject_bare_symbol_kind`, `scalar_slot_fallback`,
+`aggregate_wrapper_fallback`, `canonical_rewrite_pipeline`, `canonical_raw_perl_fallback`,
+`function_registry_available`, `bare_type_memory_collected`, and `rewrite_rules_built`.
 
 When generated handler templates use the branch helper, decision names follow this shape:
 

@@ -192,6 +192,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **RuleIR planning branches:** compile-time RuleIR planning now emits debug-level
   `DECISION rule_ir:<phase>:<rule>:<decision>` lines for collection routing, handler-variant selection,
   action-mode/execution-shape planning, split-boundary marker lowering, and mixed-action validation.
+- **EmitContext bridge branches:** compile-time EmitContext now emits debug-level
+  `DECISION emit_context:<phase>:<label>:<decision>` lines and matching debug scopes for ActionIR owner
+  package/callback resolution, default dependency bundles, function-registry and bare-symbol-kind injection,
+  compatibility scalar/aggregate fallbacks, canonical rewrite-pipeline use, and rule emit-context build boundaries.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

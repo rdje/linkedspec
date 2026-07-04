@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.4.2 — trace EmitContext owner bridge
+
+**Scope:** Perl `RuleIR::EmitContext` owner bridge, focused trace regression, mdBook trace docs, toolbox,
+task-tree/frontier sync, and Knowledge Map.
+
+**What changed:** EmitContext now emits debug-level `emit_context:<phase>:<label>:<decision>` trace decisions and
+matching debug scopes for the ActionIR owner bridge and top-level rewrite orchestration. The trace covers ActionIR
+owner package resolution, callback lookup, default dependency bundle selection, current function-registry injection,
+bare-symbol-kind dependency injection, `build_rule_ir_emit_context(...)` boundaries, `rewrite_action_code_for_compat(...)`
+compatibility fallback paths, and `_rewrite_action_code_with_diagnostics(...)` canonical raw-Perl fallback status.
+Trace helpers remain lazy unless `LinkedSpec::Trace` is already loaded/configured, and delegated owner calls still
+preserve list/scalar/void context.
+
+**Evidence:** Focused coverage in `t/trace_emit_context_bridge.t` locks scalar-slot fallback, aggregate-wrapper
+fallback, canonical-pipeline use, rule emit-context orchestration, dependency injection decisions, and Trace-lazy
+require/rewrite behavior. Full local CI passes with phase0 at 1021 tests.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.4.1 — trace RuleIR planning decisions
 
 **Scope:** Perl RuleIR planning owner, focused trace regression, mdBook trace docs, toolbox, live recovery docs,

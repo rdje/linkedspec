@@ -481,6 +481,10 @@ One more boundary is now tighter too:
 - is the bridge from rule IR into ActionIR scanning and lowering,
 - is the main gateway into backend-neutral action rewriting,
 - now also centralizes its internal ActionIR owner package registry and owner default-dependency lookup instead of hardwiring those contracts separately across dozens of local wrappers,
+- now emits debug-level trace scopes and `emit_context:<phase>:<label>:<decision>` decisions for owner package/callback
+  resolution, default dependency bundles, function-registry and bare-symbol-kind injection, top-level rewrite
+  fallback/orchestration, and rule emit-context build boundaries while staying lazy for require-only consumers that
+  have not loaded `LinkedSpec::Trace`,
 - and now treats that owner-key registry plus shared owner dispatcher as the only package/callback-loading seams on the bridge instead of keeping a second layer of owner-specific `_require_*_pkg(...)` shims.
 
 ## ActionIR Reading
