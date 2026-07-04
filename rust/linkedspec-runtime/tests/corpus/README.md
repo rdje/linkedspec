@@ -75,4 +75,13 @@ after Rust action-edge child aggregation parity landed.
 `spec_spec_user_function_definition`, and `spec_spec_comment_skip`. The same
 triage deliberately did **not** add `BNF`, `DT`, `ifelse`, or `operators_try`
 semantic fixtures for the probed inputs, because the Perl reference returns
-`null` for those diagnostic/debug-print cases. The corpus now has 81 fixtures.
+`null` for those diagnostic/debug-print cases. The corpus then had 81 fixtures.
+
+`RUST-PARITY.7.3.6` added seven RTL/plugin/legacy shipped-spec safety smokes:
+`regdef_nested_register_fields`, `tablegrep_simple_term`,
+`simenv_multiline_value`, `vhdl_library_use`, `ds_vhistory_version_entry`,
+`pplugin_empty`, and `tkgui_empty`. Those are deliberately narrow, JSON-safe,
+Rust-green fixtures. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`,
+single-line `simenv`, VHDL port-clause, `ds_vhistory` branch, and placeholder
+`verilog` candidates remain follow-up parity blockers rather than unsafe corpus
+promotions. The corpus now has 88 fixtures.

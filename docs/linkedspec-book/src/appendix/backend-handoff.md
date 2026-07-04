@@ -212,19 +212,23 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 structurally equivalent output for every entry.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
-81 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
+88 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
 migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
 JSON-safe `{abc}` curly-brace delimiter case; `lib_reader.spec` scalar-attribute and
 comma-list attribute cases; `portmap.spec` bare, bit, slice, constant, and concatenation
 cases; `ebnf.spec` expression-rule and logging-annotation payload cases; four `spec.spec`
-smokes for minimal rules, action edges, user-function definitions, and comments; terse
-receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting,
-and block-valued receivers; numeric word aliases; arithmetic/comparison symbol callees;
-the terse scalar-slot `:name` fixture for scalar reads, scalar mutation targets, and
-scalar-held shape payloads; explicit string comparisons; assignment-expression fixtures;
-and the shared Perl/Rust user-function runtime fixture.
-Broader corpus expansion remains tracked by the `RUST-PARITY.7.3` batch.
+smokes for minimal rules, action edges, user-function definitions, and comments; seven
+RTL/plugin/legacy safety smokes covering `regdef`, `tablegrep`, `simenv`, `vhdl`,
+`ds_vhistory`, empty `pplugin`, and empty `tkgui`; terse receiver-chain fixtures for
+arrays, hashes, strings, numbers, aggregate wrapper quoting, and block-valued receivers;
+numeric word aliases; arithmetic/comparison symbol callees; the terse scalar-slot `:name`
+fixture for scalar reads, scalar mutation targets, and scalar-held shape payloads;
+explicit string comparisons; assignment-expression fixtures; and the shared Perl/Rust
+user-function runtime fixture.
+The next corpus work is the `RUST-PARITY.7.4` regression guard and finalization leaf;
+the richer legacy/plugin mismatches above remain follow-up blockers until a narrower
+parity owner promotes them safely.
 
 ## Architecture Overview
 

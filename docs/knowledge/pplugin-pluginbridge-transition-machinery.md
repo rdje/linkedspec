@@ -33,4 +33,9 @@ The clearer core story: named `.spec` lookup, parser compilation, parser runtime
 lowering, diagnostics. Dynamic plugin loading was historically useful but is not the
 architectural center anymore.
 
+`RUST-PARITY.7.3.6` only added the empty `pplugin_empty` syntax smoke to the Rust oracle
+corpus. Richer `pplugin` subdefinitions still return Perl coderefs and are not
+JSON-representable in the current oracle, so that fixture is not evidence that the
+legacy plugin runtime is a backend-neutral target.
+
 Related: [[ownerdispatch-shared-seam]].

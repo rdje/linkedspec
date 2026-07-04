@@ -1,6 +1,6 @@
 ---
 id: rust-parity-batch2-oracle-split
-title: RUST-PARITY.7.3 batch-2 oracle expansion is split; timeout, hlink, structural, and null-output/spec-smoke lanes are closed before RTL/plugin/legacy smoke
+title: RUST-PARITY.7.3 batch-2 oracle expansion is split and closed; timeout, hlink, structural, null-output/spec-smoke, and RTL/plugin/legacy lanes are complete
 answers:
   - "how is RUST-PARITY.7.3 split"
   - "what is the next RUST-PARITY.7.3 task"
@@ -14,7 +14,7 @@ answers:
 date: 2026-07-04
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.7.3.1 split the remaining/harder shipped-spec oracle batch after reading docs/tasks/RUST-PARITY.md, tools/gen_oracle_corpus.pl, rust/linkedspec-runtime/tests/corpus/README.md, rust/linkedspec-runtime/tests/corpus_oracle.rs, TOOLBOX.md, and the rust-perl-output-oracle Knowledge Map card. The corpus was green over 65 fixtures after .7.2, and .7.2 recorded concrete divergences for portmap, lib_reader, ebnf, BNF, DT, ifelse, operators_try, and spec.spec smokes. After the user directed timeout debugging instead of treating the timeout as a vague guard, the split leaves became .7.3.2 trace-first timeout/hang investigation, .7.3.3 hlink_substitution delimiter/link paths, .7.3.4 portmap/lib_reader/ebnf structural divergence triage, .7.3.5 BNF/DT/ifelse/operators_try/spec.spec null-output or action-parser-warning triage, and .7.3.6 post-timeout RTL/plugin/legacy safety smoke. RUST-PARITY.7.3.2 then verified the historic RTLUtils timeout is retired and hardened gen_oracle_corpus with per-case fork/SIGKILL timeouts. RUST-PARITY.7.3.3.1 split hlink delimiter work after bracket outputs exposed the scalar-ref JSON gap. RUST-PARITY.7.3.3.2 added the JSON-safe {abc} fixture, raising the corpus to 66. RUST-PARITY.7.3.3.3 deferred bracket/mixed hlink fixtures to .7.3.3.4 because Perl scalar refs cannot be JSON-encoded and Rust cannot currently execute the scalar-ref action branch. RUST-PARITY.7.3.4 closed portmap/lib_reader/ebnf through implementation subleaves and raised the corpus to 77. RUST-PARITY.7.3.5 closed null-output/spec smoke triage: BNF/DT/ifelse/operators_try representative inputs are Perl null diagnostic cases, operators_try quoted-brace warnings are fixed, four spec.spec smokes are active, and the corpus is 81 fixtures. The current frontier is .7.3.6."
+evidence: "RUST-PARITY.7.3.1 split the remaining/harder shipped-spec oracle batch after reading docs/tasks/RUST-PARITY.md, tools/gen_oracle_corpus.pl, rust/linkedspec-runtime/tests/corpus/README.md, rust/linkedspec-runtime/tests/corpus_oracle.rs, TOOLBOX.md, and the rust-perl-output-oracle Knowledge Map card. The corpus was green over 65 fixtures after .7.2, and .7.2 recorded concrete divergences for portmap, lib_reader, ebnf, BNF, DT, ifelse, operators_try, and spec.spec smokes. After the user directed timeout debugging instead of treating the timeout as a vague guard, the split leaves became .7.3.2 trace-first timeout/hang investigation, .7.3.3 hlink_substitution delimiter/link paths, .7.3.4 portmap/lib_reader/ebnf structural divergence triage, .7.3.5 BNF/DT/ifelse/operators_try/spec.spec null-output or action-parser-warning triage, and .7.3.6 post-timeout RTL/plugin/legacy safety smoke. RUST-PARITY.7.3.2 then verified the historic RTLUtils timeout is retired and hardened gen_oracle_corpus with per-case fork/SIGKILL timeouts. RUST-PARITY.7.3.3.1 split hlink delimiter work after bracket outputs exposed the scalar-ref JSON gap. RUST-PARITY.7.3.3.2 added the JSON-safe {abc} fixture, raising the corpus to 66. RUST-PARITY.7.3.3.3 deferred bracket/mixed hlink fixtures to .7.3.3.4 because Perl scalar refs cannot be JSON-encoded and Rust cannot currently execute the scalar-ref action branch. RUST-PARITY.7.3.4 closed portmap/lib_reader/ebnf through implementation subleaves and raised the corpus to 77. RUST-PARITY.7.3.5 closed null-output/spec smoke triage: BNF/DT/ifelse/operators_try representative inputs are Perl null diagnostic cases, operators_try quoted-brace warnings are fixed, four spec.spec smokes are active, and the corpus is 81 fixtures. RUST-PARITY.7.3.6 added seven RTL/plugin/legacy safety smokes and routed richer mismatches to follow-up instead of promoting unsafe fixtures; the corpus is 88 fixtures. The current frontier is .7.4."
 reverify: "rg -n 'RUST-PARITY\\.7\\.3\\.[1-6]|timeout/hang|hlink_substitution|portmap|lib_reader|operators_try|RTL/plugin/legacy' docs/tasks/RUST-PARITY.md docs/TASK_TREE.md"
 ---
 
@@ -34,9 +34,10 @@ is also done: hlink delimiter candidates are split by JSON representability.
 `RUST-PARITY.7.3.3.2` added the JSON-safe `{abc}` curly fixture with the
 hardened oracle guard in place. `RUST-PARITY.7.3.3.3` then deferred bracket and
 mixed hlink fixtures because they require a neutral scalar-ref/action-payload
-contract or a hlink spec migration. The current frontier is
-`RUST-PARITY.7.3.6`: audit RTL/plugin/legacy shipped-spec smoke candidates under
-the hardened timeout guard.
+contract or a hlink spec migration. `RUST-PARITY.7.3.6` then added seven
+RTL/plugin/legacy safety smokes and left the richer mismatches as explicit
+follow-up blockers. The current frontier is `RUST-PARITY.7.4`: regression guard
+and oracle corpus finalization.
 
 The later lanes are:
 
@@ -49,6 +50,8 @@ The later lanes are:
   implementation subleaves and active oracle fixtures.
 - `.7.3.5`: done — `BNF`, `DT`, `ifelse`, and `operators_try` probed inputs are diagnostic Perl-null cases;
   quoted-brace `operators_try` warnings are fixed; four `spec.spec` smokes are active.
-- `.7.3.6`: current frontier — `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`,
-  `tkgui`, `ds_vhistory`, and `verilog` safety smoke after `.7.3.2` has
-  resolved or retired the timeout/hang concern.
+- `.7.3.6`: done — seven green `pplugin`, `vhdl`, `simenv`, `tablegrep`, `regdef`,
+  `tkgui`, and `ds_vhistory` safety smokes entered the corpus; richer `pplugin`,
+  `tkgui`, `sdce`, recursive `tablegrep`, `simenv`, VHDL, `ds_vhistory`, and
+  `verilog` candidates remain follow-up blockers.
+- `.7.4`: current frontier — regression guard and oracle corpus finalization.

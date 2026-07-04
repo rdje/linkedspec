@@ -1,0 +1,12 @@
+[
+   [
+      "?library_clause:",
+      "ieee"
+   ],
+   "\n",
+   [
+      "?use_clause:",
+      "ieee.std_logic_1164.all"
+   ],
+   "\n"
+]

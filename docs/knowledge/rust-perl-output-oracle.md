@@ -33,6 +33,8 @@ answers:
   - "when did ebnf_expression_rules enter the Rust oracle corpus"
   - "when did ebnf_logging_annotation enter the Rust oracle corpus"
   - "when did spec.spec smokes enter the Rust oracle corpus"
+  - "when did RTL plugin legacy safety smokes enter the Rust oracle corpus"
+  - "which RTL plugin legacy smokes are in the Rust oracle corpus"
   - "why are BNF DT ifelse operators_try not oracle fixtures"
   - "did Rust temporarily support scalaref(retv, {content}) before retirement"
   - "does child return leak into the parent accumulator in Rust"
@@ -45,6 +47,7 @@ evidence_update_2026_07_03: "RUST-PARITY.7.3.7: user-directed timeout trace cens
 evidence_update_2026_07_03_7344: "RUST-PARITY.7.3.4.4 added `lib_reader_sattribute` and `lib_reader_cattribute` after Rust implemented statement-form scalar regex substitution and array split mutation helpers. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 68 fixtures, and Rust `corpus_oracle` passes over all 68."
 evidence_update_2026_07_04_7343: "RUST-PARITY.7.3.4.3 added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation` after Rust action-edge child/target aggregation parity landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 77 fixtures, and Rust `corpus_oracle` passes over all 77."
 evidence_update_2026_07_04_735: "RUST-PARITY.7.3.5 added `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip` after triage proved representative `BNF`, `DT`, `ifelse`, and `operators_try` inputs return Perl null and are not semantic-output fixture candidates. The same leaf fixed Rust `.spec` code-block scanning so quoted braces in `operators_try` debug strings no longer produce action-parser warnings. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 81 fixtures, and Rust `corpus_oracle` passes over all 81."
+evidence_update_2026_07_04_736: "RUST-PARITY.7.3.6 added seven JSON-safe RTL/plugin/legacy safety smokes: `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`, `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`, single-line `simenv`, VHDL port-clause, `ds_vhistory` branch, and placeholder `verilog` candidates remain follow-up blockers rather than unsafe fixture promotions. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 88 fixtures, and Rust `corpus_oracle` passes over all 88."
 reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
@@ -159,6 +162,12 @@ owned by `.7.2` / `.7.3`.
   the generator and checked-in corpus. The same triage kept `BNF`, `DT`, `ifelse`,
   and `operators_try` out of the semantic oracle for the probed inputs because the
   Perl reference returns `null`. The 81-fixture corpus oracle passes.
+- **RTL/plugin/legacy safety smokes (`RUST-PARITY.7.3.6`, LANDED 2026-07-04).**
+  `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`,
+  `vhdl_library_use`, `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`
+  are active in the generator and checked-in corpus. These are narrow, JSON-safe
+  Rust-green reachability smokes, not proof that the richer legacy/plugin candidates are
+  fully matched. The 88-fixture corpus oracle passes.
 
 The `.7.1` proof grammars deliberately avoid all of the above (parent→child dispatch with
 a literal edge return and an action-less child), so both backends agree exactly.

@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.7.3.6 — land legacy shipped-spec safety smokes
+
+**Scope:** Perl-oracle fixture generation, checked-in Rust oracle corpus, remaining shipped-spec audit evidence,
+task-tree/live docs, mdBook corpus status, and Knowledge Map.
+
+**What changed:** The RTL/plugin/legacy shipped-spec candidates were audited under the hardened oracle timeout
+model. Seven JSON-safe, Rust-green smokes were promoted:
+`regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`,
+`ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`. Richer candidates were kept out of the corpus
+with explicit evidence rather than broadening `.7.3`: `pplugin` subdefs return Perl coderefs, `tkgui` body returns
+depend on raw Perl pair-return action code, `sdce` capture segmentation diverges, recursive `tablegrep` groups
+over-report in Rust, `simenv` single-line values lose verbatim payloads, VHDL port clauses collapse to null,
+`ds_vhistory` branch entries classify as version entries, and the placeholder `verilog` spec returns Perl `0`
+versus Rust's empty accumulator.
+
+**Evidence:** Temporary Rust candidate probes were removed after measuring the matrix. `perl -c -Iperl
+tools/gen_oracle_corpus.pl` passes, oracle regeneration now produces **88 fixtures**, Rust `corpus_oracle` passes
+over all 88, and `parse_all_shipped_specs` still parses all 21 shipped specs successfully with only known
+non-target action-code warnings. The full local CI gate passes, including phase0 **1021** tests.
+
 ## 2026-07-04 — RUST-PARITY.7.3.5 — close null-output and spec smoke triage
 
 **Scope:** Rust `.spec` parser code-block scanning, focused parser regression coverage, Perl-oracle fixture

@@ -1,0 +1,17 @@
+[
+   {
+      "content" : [
+         [
+            {
+               "content" : "BAR",
+               "type" : "anyvariable"
+            },
+            {
+               "content" : "baz",
+               "type" : "multiline_value"
+            }
+         ]
+      ],
+      "name" : "top"
+   }
+]

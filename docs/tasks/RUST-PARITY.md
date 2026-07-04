@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (`.7.3.5` done — null-output candidates triaged,
-  quoted-brace `operators_try` parser warning fixed, and four `spec.spec`
-  oracle smokes landed; frontier advances to `.7.3.6`)
+- Last updated: `2026-07-04` (`.7.3.6` done — RTL/plugin/legacy safety-smoke
+  audit landed seven green fixtures and routed richer mismatches to follow-up;
+  frontier advances to `.7.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -431,14 +431,25 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.5 - close null-output and spec smoke triage`
 
 - ID: `RUST-PARITY.7.3.6`
-  Status: `pending`
+  Status: `done`
   Goal: Audit RTL/plugin/legacy shipped-spec candidates (`pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`,
     `regdef`, `tkgui`, `ds_vhistory`, `verilog`) under the oracle timeout guard.
   Acceptance: Pick minimal representative inputs after `.7.3.2` has resolved or retired the timeout/hang concern,
     keep the generic guard active during generation, keep green fixtures only when Rust matches the Perl reference,
     and route plugin/RTL-only blockers to explicit follow-up leaves instead of broadening `.7.3`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-04. Perl reference probes and a temporary Rust parity probe measured the
+    remaining candidates before fixture promotion. Seven JSON-safe green smokes landed:
+    `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`,
+    `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`. Richer candidates were deliberately not
+    promoted: real `pplugin` subdefs return Perl coderefs that the JSON oracle cannot represent; `tkgui` sub-GUI
+    bodies still hit Rust action-code parsing for the raw Perl pair return; `sdce` slice/capture segmentation
+    diverges; `tablegrep` recursive groups double-report child terms in Rust; `simenv` single-line values lose the
+    verbatim payload in Rust; `vhdl` entity port clauses collapse to null under current Rust execution; `ds_vhistory`
+    branch entries are classified as version entries; and the placeholder `verilog` top returns Perl `0` while Rust
+    returns an empty accumulator. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; generation emits **88**
+    fixtures under the hard timeout guard; Rust `corpus_oracle` passes all 88; `parse_all_shipped_specs` still
+    parses all 21 specs successfully with only known non-target action-code warnings.
+  Commit: `RUST-PARITY.7.3.6 - land legacy shipped-spec safety smokes`
 
 - ID: `RUST-PARITY.7.3.7`
   Status: `done`
@@ -550,10 +561,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.4.2` | `done` | runtime boolean/list-context parity and regex-dispatch isolation now let `portmap` scalar fixtures pass |
 | — | `RUST-PARITY.7.3.4.3` | `done` | action-edge child/target aggregation now lets `ebnf` payloads and `portmap` concatenation pass |
 | — | `RUST-PARITY.7.3.5` | `done` | null-output candidates separated from semantic fixtures; quoted-brace `operators_try` parser warning fixed; four `spec.spec` smokes active |
-| 1 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
-| 2 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 3 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 4 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.6` | `done` | seven RTL/plugin/legacy safety smokes landed; richer mismatches routed to follow-up instead of broadening `.7.3` |
+| 1 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 2 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 3 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
@@ -654,6 +665,15 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   `spec.spec` smokes are active oracle fixtures (`spec_spec_minimal_rule`, `spec_spec_action_edge`,
   `spec_spec_user_function_definition`, `spec_spec_comment_skip`), raising the corpus to **81 fixtures**.
   Frontier → `.7.3.6`.
+- `2026-07-04` (`.7.3.6` implementation): the RTL/plugin/legacy audit is fixture-promotion first, not an
+  implementation leaf. Seven measured Rust-green, JSON-safe shipped-spec smokes are active:
+  `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`,
+  `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`, raising the corpus to **88 fixtures**.
+  Richer candidates stay out of the corpus with explicit evidence: `pplugin` subdefs produce Perl coderefs,
+  `tkgui` body returns depend on a raw Perl pair-return action, `sdce` capture slicing diverges, recursive
+  `tablegrep` groups over-report in Rust, `simenv` single-line values lose their verbatim payload, VHDL port
+  clauses collapse to null, `ds_vhistory` branch entries are classified as version entries, and placeholder
+  `verilog` returns Perl `0` versus Rust `[]`. Frontier → `.7.4`.
 
 ## Open Questions
 
@@ -704,6 +724,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-03` | `RUST-PARITY.7.3.4.2` | `cargo fmt --manifest-path rust/Cargo.toml --all`; focused regex-engine internal-alternation unit test; focused Rust `.7.3.4.2` integration tests; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-core -p linkedspec-runtime --lib`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates | PASS — Rust now recognizes `or`/`and`/`not`, splices explicit flattening helper calls in `array(...)` list context, and wraps each rule regex before dispatch alternation joining so internal `|` branches stay inside their owning action edge. Added `portmap_bare`, `portmap_bit`, `portmap_slice`, and `portmap_constant`; the oracle corpus now has **72 fixtures** and Rust `corpus_oracle` passes. Frontier → `.7.3.4.3` |
 | `2026-07-04` | `RUST-PARITY.7.3.4.3` | `cargo fmt --manifest-path rust/Cargo.toml --all`; focused Rust `.7.3.4.3` integration tests; lower-unbounded quantifier unit test; focused scalar/aggregate assignment regression tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — Rust action-edge blocks and fluent chains now reuse the already matched child return for `call(child)`, `push(child)`, `push(child,target)`, and child-index push forms instead of re-searching after the parent edge match; passive terminal children skip re-execution like the Perl generated handlers. Scalar-vs-aggregate assignment boundaries and helper-context aggregate bare reads are preserved. Added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`; the oracle corpus now has **77 fixtures** and Rust `corpus_oracle` passes; full local CI passes with phase0 **1021** tests. Frontier → `.7.3.5` |
 | `2026-07-04` | `RUST-PARITY.7.3.5` | KM retrieval; Perl reference probes for `BNF`, `DT`, `ifelse`, `operators_try`, and `spec.spec` smokes; temporary Rust probes removed; `cargo fmt --manifest-path rust/Cargo.toml --all`; focused Rust parser quoted-brace tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `parse_all_shipped_specs`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates | PASS — `BNF`, `DT`, `ifelse`, and `operators_try` representative inputs are diagnostic/null-output cases in the Perl reference and were not promoted as semantic fixtures. Rust now ignores quoted braces while scanning `.spec` code blocks, fixing the `operators_try` action-parser warnings. Added `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip`; the oracle corpus now has **81 fixtures** and Rust `corpus_oracle` passes. Frontier → `.7.3.6` |
+| `2026-07-04` | `RUST-PARITY.7.3.6` | KM retrieval; phase0 shipped-spec smoke/source reads; Perl reference JSON probes; temporary Rust candidate probe removed; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; Rust `parse_all_shipped_specs`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/SPLIT — Seven green RTL/plugin/legacy safety smokes landed: `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`, `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`. The oracle corpus now has **88 fixtures** and Rust `corpus_oracle` passes. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`, `simenv` single-line value, VHDL port-clause, `ds_vhistory` branch, and placeholder `verilog` candidates remain explicit follow-up blockers. Full local CI passes with phase0 **1021** tests. Frontier → `.7.4` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -848,3 +869,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   diagnostic/debug-print cases. Rust now ignores quoted braces while scanning `.spec` code blocks, fixing the
   `operators_try` warnings, and four `spec.spec` smoke fixtures are active. Corpus oracle passes over
   **81 fixtures**. Frontier → `.7.3.6`.
+- `2026-07-04`: `.7.3.6` done — RTL/plugin/legacy shipped-spec safety smoke audit landed seven green fixtures
+  (`regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`,
+  `ds_vhistory_version_entry`, `pplugin_empty`, `tkgui_empty`) and kept richer mismatches out of the corpus with
+  explicit evidence. Corpus oracle passes over **88 fixtures**. Frontier → `.7.4`.

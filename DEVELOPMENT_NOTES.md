@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.7.3.6 — legacy shipped-spec safety smokes):
+  Treat the remaining RTL/plugin/legacy shipped specs as a measured fixture boundary. Green minimal smokes are now
+  active for `regdef`, `tablegrep`, `simenv`, `vhdl`, `ds_vhistory`, `pplugin`, and `tkgui`, raising the Rust
+  oracle corpus to 88 fixtures. Do not infer broader parity from those fixtures: `pplugin` real subdefs produce
+  coderefs that the JSON oracle cannot encode, `tkgui` body output still depends on raw Perl pair-return action
+  parsing, `sdce` has capture-slice segmentation divergence, recursive `tablegrep` groups double-report in Rust,
+  `simenv` single-line values lose verbatim payloads, VHDL entity port clauses collapse to null, `ds_vhistory`
+  branch entries classify as version entries, and `verilog` remains a placeholder with Perl `0` versus Rust `[]`.
+
 - 2026-07-04 (RUST-PARITY.7.3.5 — null-output/spec smoke triage):
   Do not promote every shipped-spec parse smoke into the output oracle. `BNF`, `DT`, `ifelse`, and
   `operators_try` currently behave as diagnostic/debug-print grammars for the probed inputs and the Perl reference
@@ -29,7 +38,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.7.3.6` unless a new terse leaf is split.
+  `RUST-PARITY.7.4` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and

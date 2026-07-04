@@ -1,0 +1,4 @@
+reg_def CTRL {
+  reg_fld ENABLE : RW : anything;
+  reg_fld MODE : RO : other;
+}

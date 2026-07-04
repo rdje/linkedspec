@@ -1,0 +1,5 @@
+
+object: /proj/foo
+version: 1
+date: today
+--------------------

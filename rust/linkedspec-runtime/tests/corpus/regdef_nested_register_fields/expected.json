@@ -1,0 +1,21 @@
+[
+   "?regdef_top:",
+   [
+      [
+         "?reg_def:",
+         "CTRL",
+         [
+            [
+               "?reg_fld:",
+               "ENABLE",
+               "RW"
+            ],
+            [
+               "?reg_fld:",
+               "MODE",
+               "RO"
+            ]
+         ]
+      ]
+   ]
+]

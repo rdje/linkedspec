@@ -1,0 +1,8 @@
+[
+   {
+      "field" : "field1",
+      "re" : "foo",
+      "sens" : "=",
+      "type" : "TERM"
+   }
+]

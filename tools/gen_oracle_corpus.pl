@@ -1024,6 +1024,23 @@ SPEC
     },
     { case => 'spec_spec_comment_skip', spec => 'spec', input => "# hello\nTop::\n /x/\n" },
 
+    # RUST-PARITY.7.3.6 - RTL/plugin/legacy shipped-spec safety smokes.
+    {
+        case  => 'regdef_nested_register_fields',
+        spec  => 'regdef',
+        input => "reg_def CTRL {\n  reg_fld ENABLE : RW : anything;\n  reg_fld MODE : RO : other;\n}\n",
+    },
+    { case => 'tablegrep_simple_term', spec => 'tablegrep', input => 'field1 =~ /foo/' },
+    { case => 'simenv_multiline_value', spec => 'simenv', input => "BEGIN top\nBAR={baz}\nEND top\n" },
+    { case => 'vhdl_library_use', spec => 'vhdl', input => "library ieee;\nuse ieee.std_logic_1164.all;\n" },
+    {
+        case  => 'ds_vhistory_version_entry',
+        spec  => 'ds_vhistory',
+        input => "\nobject: /proj/foo\nversion: 1\ndate: today\n--------------------\n",
+    },
+    { case => 'pplugin_empty', spec => 'pplugin', input => '' },
+    { case => 'tkgui_empty', spec => 'tkgui', input => '' },
+
     {
         case  => 'lib_reader_sattribute',
         spec  => 'lib_reader',
