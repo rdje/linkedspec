@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.4.4 — add Rust runtime trace events
+
+**Scope:** Rust interpreted runtime and generated-plan trace event emission, focused trace tests, mdBook/toolbox
+status, task-tree/roadmap/live docs, and Knowledge Map.
+
+**What changed:** Wired Rust runtime execution through the shared `linkedspec-core::trace` model without changing
+the default quiet entrypoints. `Engine::execute_with_trace(...)` now emits a `rust_runtime:engine:execute` scope plus
+rule entry/exit, recursion-cutoff, regex match/no-match, acode/bcode child-dispatch, lifecycle-block, statement
+branch, helper `call(child)`, and mark/capture helper events. Generated-plan traced execution now emits
+`rust_runtime:generated_plan:*` events for top-rule selection, generated family dispatch, direct acode/bcode rule
+execution, child dispatch, regex branches, acode/bcode dispatch, and recursion cutoffs while preserving the same
+result contract as untraced generated execution.
+
+**Tests:** Extended `rust/linkedspec-runtime/tests/trace_controls.rs` with routed-debug assertions for interpreted
+runtime branch/lifecycle/mark-capture events and generated-plan branch events while preserving traced/untraced output
+equality.
+
+**Status:** Rust still does not claim trace parity. `.4.5` remains the cross-variant parity proof and reusable
+future-variant checklist.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.3 — add Rust compile/spec-parser trace events
 
 **Scope:** Rust trace event emission for core parse/validate/compile, full-spec user-function parsing, staged
@@ -18,8 +38,8 @@ report normalize, stable queue sort, resolve, load, compile, and execute decisio
 full-spec user-function/staged-dispatch events, and direct staged queue phase events while preserving untraced output
 equality.
 
-**Status:** Rust still does not claim trace parity. Runtime interpreter/generated-plan branch events, mark/capture
-events, and parity proof remain owned by `.4.4`/`.4.5`.
+**Status:** Rust still does not claim trace parity. Runtime interpreter/generated-plan branch events and mark/capture
+events have since landed in `.4.4`; parity proof remains owned by `.4.5`.
 
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.2 — add Rust trace controls
 
@@ -34,8 +54,8 @@ the same module as `linkedspec_runtime::trace`.
 Explicit traced entrypoints now sit beside existing default-quiet APIs for core `parse_spec`, `validate`, and
 `compile`; runtime full-spec user-function parsing; staged parse jobs; `Engine::execute`; generated-plan execution;
 generated parser execution; and emitted generated modules through `parse_with_trace(...)`. Existing untraced APIs
-remain output-compatible. Compile/spec-parser event emission remains owned by `.4.3`; runtime branch emission
-remains owned by `.4.4`; parity proof remains owned by `.4.5`.
+remain output-compatible. Compile/spec-parser event emission has since landed in `.4.3`; runtime branch emission
+has since landed in `.4.4`; parity proof remains owned by `.4.5`.
 
 **Evidence:** `cargo test -p linkedspec-core trace` passes the new level/config/sink primitive tests. `cargo test
 -p linkedspec-runtime --test trace_controls` passes traced-entrypoint equivalence, generated-source trace entrypoint

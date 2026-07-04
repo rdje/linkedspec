@@ -221,8 +221,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   full-spec user-function parsing, staged parse jobs, `Engine::execute`, generated-plan execution, generated parser
   execution, and emitted generated module `parse_with_trace(...)`. `TRACE-OBSERVABILITY.4.3` adds Rust routed debug
   events for core parse/validation/compile/dependency-regex phases, full-spec user-function parsing, and staged
-  parse-job normalize/resolve/load/compile/execute phases. Rust still does not claim trace parity until `.4.4`
-  runtime branch/mark/capture events and `.4.5` parity proof land.
+  parse-job normalize/resolve/load/compile/execute phases. `TRACE-OBSERVABILITY.4.4` adds runtime debug events under
+  `rust_runtime:engine:*` for interpreted rule entry/exit, recursion cutoffs, regex match/no-match, acode/bcode
+  dispatch, lifecycle blocks, statement controls, helper `call(child)`, and mark/capture helper operations, plus
+  `rust_runtime:generated_plan:*` for generated family-plan dispatch and generated direct acode/bcode execution.
+  Rust still does not claim trace parity until `.4.5` parity proof lands.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

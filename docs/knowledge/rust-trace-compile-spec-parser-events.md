@@ -4,7 +4,7 @@ title: TRACE-OBSERVABILITY.4.3 adds Rust compile/spec-parser/staged-dispatch tra
 answers:
   - "does Rust currently emit compile trace events"
   - "what did TRACE-OBSERVABILITY.4.3 add"
-  - "which Rust trace events exist before runtime branch parity"
+  - "which Rust trace events existed before runtime branch parity"
   - "does Rust staged parser dispatch trace phases"
   - "can Rust claim trace parity after TRACE-OBSERVABILITY.4.3"
 date: 2026-07-04
@@ -23,5 +23,6 @@ user-function-definition parser execution, function projection, stripped-rule pa
 `body_parse_job` dispatch path. The staged parser registry traced entrypoints now report normalize, stable queue
 sort, resolve, load, compile, and execute decisions for each job.
 
-This does not complete Rust trace parity. Runtime interpreter/generated-plan branch events, rule entry/exit,
-mark/capture operations, and parity proof remain owned by `.4.4` and `.4.5`.
+This did not complete Rust trace parity by itself. `.4.4` has since added runtime interpreter/generated-plan branch
+events, rule entry/exit, and mark/capture operations. `.4.5` remains the cross-variant parity proof before Rust can
+claim trace parity.

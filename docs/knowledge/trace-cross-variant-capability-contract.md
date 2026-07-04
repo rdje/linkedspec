@@ -12,7 +12,7 @@ date: 2026-07-04
 status: current
 tags: [trace, parity, variants, mdbook, external-contract, rust, perl]
 evidence: "User directive 2026-07-04; docs/linkedspec-book/src/public-api/trace-api.md; docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md; docs/tasks/TRACE-OBSERVABILITY.md"
-reverify: "rg -n 'variant-neutral trace contract|trace parity|variant-agnostic|claim trace parity|external contract|backend-specific internals|Perl reference vocabulary|TRACE-OBSERVABILITY\\.4\\.1' docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md docs/tasks/TRACE-OBSERVABILITY.md TOOLBOX.md docs/knowledge/trace-cross-variant-capability-contract.md"
+reverify: "rg -n 'variant-neutral trace contract|trace parity|variant-agnostic|claim trace parity|external contract|backend-specific internals|Perl reference vocabulary|TRACE-OBSERVABILITY\\.4\\.5|rust_runtime:engine|rust_runtime:generated_plan' docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md docs/tasks/TRACE-OBSERVABILITY.md TOOLBOX.md docs/knowledge/trace-cross-variant-capability-contract.md rust/linkedspec-runtime/src"
 ---
 
 The documented trace capabilities are an external contract for every LinkedSpec variant.
@@ -36,5 +36,7 @@ The Perl backend is the reference implementation currently covered under `TRACE-
 event names such as `rule_ir:...`, `emit_context:...`, `actionir:...`, and `generated_handler_branch:...` are
 reference vocabulary, not mandatory package names for every backend.
 
-Rust currently has no analogous trace API/sink surface outside corpus fixture text. `TRACE-OBSERVABILITY.4.1` is
-the active frontier to map this contract onto Rust entrypoints and owner boundaries before Rust trace code.
+Rust now has the `.4.2` trace control/sink surface, `.4.3` compile/spec-parser/staged-dispatch events, and `.4.4`
+interpreted/generated-plan runtime branch/mark/capture events. Rust still cannot claim trace parity until
+`TRACE-OBSERVABILITY.4.5` proves this external contract across variants and records the reusable future-variant
+checklist.

@@ -3,6 +3,7 @@
 //! Provides the execution environment for a single rule invocation.
 //! Declared variables are scoped to the rule. Accumulators hold child results.
 
+use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
 use linkedspec_core::types::RuntimeValue;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
@@ -86,6 +87,10 @@ pub struct RuntimeContext {
     /// local store, so their declarations must not be recorded in an enclosing
     /// rule frame.
     declaration_scope_suppression_depth: usize,
+    /// Runtime trace events captured during execution and replayed through the
+    /// caller-owned trace sink after the parse result is known.
+    trace_events_enabled: bool,
+    trace_events: Vec<RuntimeTraceEvent>,
 }
 
 type RuntimeDeclarationScope = std::collections::HashMap<String, RuntimeVariableSnapshot>;
@@ -96,6 +101,14 @@ struct RuntimeVariableSnapshot {
     array: Option<Vec<RuntimeValue>>,
     hash: Option<Vec<(String, RuntimeValue)>>,
     bare_kind: Option<RuntimeVarKind>,
+}
+
+#[derive(Debug, Clone)]
+struct RuntimeTraceEvent {
+    kind: TraceEventKind,
+    topic: String,
+    details: String,
+    level: TraceLevel,
 }
 
 /// Saved scalar/array/hash variable stores.
@@ -141,7 +154,115 @@ impl RuntimeContext {
             action_edge_call_results: Vec::new(),
             declaration_scopes: Vec::new(),
             declaration_scope_suppression_depth: 0,
+            trace_events_enabled: false,
+            trace_events: Vec::new(),
         }
+    }
+
+    // ── Runtime trace recording ──
+
+    pub(crate) fn enable_trace_events(&mut self) {
+        self.trace_events_enabled = true;
+    }
+
+    pub(crate) fn trace_enter(
+        &mut self,
+        topic: impl Into<String>,
+        details: impl Into<String>,
+        level: TraceLevel,
+    ) {
+        if !self.trace_events_enabled {
+            return;
+        }
+        self.record_trace_event(TraceEventKind::Enter, topic, details, level);
+    }
+
+    pub(crate) fn trace_exit(
+        &mut self,
+        topic: impl Into<String>,
+        details: impl Into<String>,
+        level: TraceLevel,
+    ) {
+        if !self.trace_events_enabled {
+            return;
+        }
+        self.record_trace_event(TraceEventKind::Exit, topic, details, level);
+    }
+
+    pub(crate) fn trace_decision(
+        &mut self,
+        decision_name: impl Into<String>,
+        taken: bool,
+        reason: impl Into<String>,
+        level: TraceLevel,
+    ) -> bool {
+        if !self.trace_events_enabled {
+            return taken;
+        }
+        let details = format!(
+            "taken={} reason={}",
+            if taken { 1 } else { 0 },
+            reason.into()
+        );
+        self.record_trace_event(TraceEventKind::Decision, decision_name, details, level);
+        taken
+    }
+
+    pub(crate) fn trace_mark(
+        &mut self,
+        topic: impl Into<String>,
+        details: impl Into<String>,
+        level: TraceLevel,
+    ) {
+        if !self.trace_events_enabled {
+            return;
+        }
+        self.record_trace_event(TraceEventKind::Mark, topic, details, level);
+    }
+
+    pub(crate) fn replay_trace_events(&mut self, trace: &mut TraceEmitter) -> TraceResult<()> {
+        let mut scopes: Vec<TraceScope> = Vec::new();
+        for event in self.trace_events.drain(..) {
+            match event.kind {
+                TraceEventKind::Enter => {
+                    scopes.push(trace.enter_scope(event.topic, event.details, event.level)?);
+                }
+                TraceEventKind::Exit => {
+                    if let Some(scope) = scopes.pop() {
+                        trace.exit_scope(scope, event.details)?;
+                    } else {
+                        trace.emit_event(
+                            TraceEventKind::Exit,
+                            event.topic,
+                            event.details,
+                            event.level,
+                        )?;
+                    }
+                }
+                kind => {
+                    trace.emit_event(kind, event.topic, event.details, event.level)?;
+                }
+            }
+        }
+        Ok(())
+    }
+
+    fn record_trace_event(
+        &mut self,
+        kind: TraceEventKind,
+        topic: impl Into<String>,
+        details: impl Into<String>,
+        level: TraceLevel,
+    ) {
+        if !self.trace_events_enabled {
+            return;
+        }
+        self.trace_events.push(RuntimeTraceEvent {
+            kind,
+            topic: topic.into(),
+            details: details.into(),
+            level,
+        });
     }
 
     // ── Position ──

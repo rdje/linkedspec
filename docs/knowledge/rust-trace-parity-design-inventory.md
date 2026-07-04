@@ -15,9 +15,9 @@ evidence: "rust/README.md; rust/linkedspec-core/src/{parser.rs,validation.rs,com
 reverify: "rg -n 'TRACE-OBSERVABILITY\\.4\\.1|Rust variant trace status|Rust parity design inventory|Engine::execute|parse_spec_with_user_functions|execute_generated_parser' docs/tasks/TRACE-OBSERVABILITY.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md TOOLBOX.md rust/linkedspec-core/src rust/linkedspec-runtime/src"
 ---
 
-`TRACE-OBSERVABILITY.4.1` closed the Rust trace parity design inventory before code. Rust does not yet claim trace
-parity: the `.3.5` inventory found no Rust trace API/control hits outside corpus fixture text, and `.4.1` is a
-design/ownership slice only.
+`TRACE-OBSERVABILITY.4.1` closed the Rust trace parity design inventory before code. At that point, Rust could not
+claim trace parity: the `.3.5` inventory found no Rust trace API/control hits outside corpus fixture text, and `.4.1`
+was a design/ownership slice only.
 
 The key design point is crate ownership. `linkedspec-core` owns `parse_spec`, `validate`, `compile`,
 dependency-regex resolution, and the shared `CompiledSpec`/`CompiledRule` contract, so shared Rust trace levels,
@@ -32,6 +32,6 @@ execution, statement-form `if`/`switch`, acode/bcode child dispatch, repetition/
 family plan dispatch.
 
 `.4.2` has since added Rust controls, levels, sinks, event primitives, and traced entrypoint plumbing while
-preserving default quiet behavior. `.4.3` has since added compile/spec-parser/staged-dispatch trace events. The
-remaining leaves are `.4.4` runtime/generated-plan branch events and `.4.5` cross-variant trace parity proof plus
-the reusable future-variant checklist.
+preserving default quiet behavior. `.4.3` has since added compile/spec-parser/staged-dispatch trace events, and
+`.4.4` has since added runtime/generated-plan branch, lifecycle, and mark/capture events. The remaining leaf is
+`.4.5` cross-variant trace parity proof plus the reusable future-variant checklist.

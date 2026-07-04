@@ -310,8 +310,9 @@ In the Perl reference backend, the planned compile/ActionIR owner coverage is cl
 remaining trace work is cross-variant parity: Rust and future variants must implement the same external trace
 capabilities before claiming trace parity.
 
-As of `TRACE-OBSERVABILITY.4.3`, the Rust variant has the shared trace control surface and emits compile-side,
-full-spec parser, and staged parse-job dispatcher events. `linkedspec-core::trace` owns `TraceLevel`, `TraceConfig`,
+As of `TRACE-OBSERVABILITY.4.4`, the Rust variant has the shared trace control surface and emits compile-side,
+full-spec parser, staged parse-job dispatcher, interpreted runtime, and generated-plan runtime events.
+`linkedspec-core::trace` owns `TraceLevel`, `TraceConfig`,
 `TraceSinkMode`, `TraceEmitter`, the `DUMP_*` constants, environment-derived configuration, stdout/routed-file/
 mirror sinks, routed-file reset, and structured event primitives. `linkedspec-runtime::trace` re-exports the same
 module, and Rust exposes opt-in traced entrypoints beside the existing quiet APIs for core parse/validate/compile,
@@ -319,8 +320,9 @@ full-spec user-function parsing, staged parse jobs, interpreter execution, gener
 parser execution, and newly emitted generated parser modules (`parse_with_trace(...)` beside `parse(...)`). Existing
 Rust APIs remain default-quiet and output-compatible. Rust traced compile/spec-parser paths now report parse,
 validation-pass, compile-rule, dependency-regex, user-function-definition parser, and staged-dispatch normalize/
-resolve/load/compile/execute events. Runtime branch/mark/capture event coverage remains pending under `.4.4`, and
-`.4.5` is the parity proof.
+resolve/load/compile/execute events. Rust traced runtime paths now report rule entry/exit, recursion cutoffs,
+regex match/no-match decisions, acode/bcode child dispatch, lifecycle block execution, statement-form branch
+decisions, mark/capture helper operations, and generated-rule family-plan dispatch. `.4.5` is the parity proof.
 
 Tracing is controlled separately from runtime context.
 

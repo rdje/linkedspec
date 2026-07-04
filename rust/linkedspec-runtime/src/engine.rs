@@ -37,7 +37,7 @@ use crate::runtime::RuntimeContext;
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
-use linkedspec_core::trace::{TraceConfig, TraceEmitter};
+use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::{
     BcodeEntry, CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue,
 };
@@ -375,6 +375,21 @@ fn named_map_to_hash(named: &std::collections::HashMap<String, String>) -> Runti
     RuntimeValue::Hash(entries)
 }
 
+fn trace_write_failed(err: impl std::fmt::Display) -> String {
+    format!("trace write failed: {err}")
+}
+
+fn runtime_value_trace_kind(value: &RuntimeValue) -> &'static str {
+    match value {
+        RuntimeValue::Undef => "undef",
+        RuntimeValue::Bool(_) => "bool",
+        RuntimeValue::Number(_) => "number",
+        RuntimeValue::Scalar(_) => "scalar",
+        RuntimeValue::Array(_) => "array",
+        RuntimeValue::Hash(_) => "hash",
+    }
+}
+
 struct GeneratedPlanExecutor<'a> {
     engine: &'a Engine,
     generated_rules: &'a [GeneratedRuleSpec],
@@ -387,34 +402,58 @@ impl GeneratedPlanExecutor<'_> {
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
-        let family = self.generated_rule_family(label)?;
-        match family {
-            GeneratedRuleFamily::Default
-            | GeneratedRuleFamily::OrAcode
-            | GeneratedRuleFamily::AndSingleAcode
-            | GeneratedRuleFamily::AndAcodeSeq => {
-                self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
+        let entry_pos = ctx.pos;
+        ctx.trace_enter(
+            "rust_runtime:generated_plan:rule",
+            format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
+            TraceLevel::LOW,
+        );
+        let result = (|| {
+            let family = self.generated_rule_family(label)?;
+            ctx.trace_decision(
+                "rust_runtime:generated_plan:family_dispatch",
+                true,
+                format!("label={label} family={family:?} entry_regex_idx={entry_regex_idx}"),
+                TraceLevel::MEDIUM,
+            );
+            match family {
+                GeneratedRuleFamily::Default
+                | GeneratedRuleFamily::OrAcode
+                | GeneratedRuleFamily::AndSingleAcode
+                | GeneratedRuleFamily::AndAcodeSeq => {
+                    self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
+                }
+                GeneratedRuleFamily::AndBcode | GeneratedRuleFamily::OrBcode => {
+                    self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
+                }
+                GeneratedRuleFamily::RepAcode | GeneratedRuleFamily::RepAndAcode => {
+                    self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
+                }
+                GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
+                    self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
+                }
+                GeneratedRuleFamily::Repetition => {
+                    let rule = self.engine.spec.find(label).ok_or_else(|| {
+                        format!(
+                            "rule '{}' (entry idx {}) not found in compiled spec",
+                            label, entry_regex_idx
+                        )
+                    })?;
+                    let family = crate::source_emitter::classify_generated_rule_family(rule);
+                    self.execute_rule_by_family(label, entry_regex_idx, family, ctx)
+                }
             }
-            GeneratedRuleFamily::AndBcode | GeneratedRuleFamily::OrBcode => {
-                self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
-            }
-            GeneratedRuleFamily::RepAcode | GeneratedRuleFamily::RepAndAcode => {
-                self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
-            }
-            GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
-                self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
-            }
-            GeneratedRuleFamily::Repetition => {
-                let rule = self.engine.spec.find(label).ok_or_else(|| {
-                    format!(
-                        "rule '{}' (entry idx {}) not found in compiled spec",
-                        label, entry_regex_idx
-                    )
-                })?;
-                let family = crate::source_emitter::classify_generated_rule_family(rule);
-                self.execute_rule_by_family(label, entry_regex_idx, family, ctx)
-            }
-        }
+        })();
+        let status = match &result {
+            Ok(value) => format!("status=ok value_kind={}", runtime_value_trace_kind(value)),
+            Err(err) => format!("status=error error={err}"),
+        };
+        ctx.trace_exit(
+            "rust_runtime:generated_plan:rule",
+            format!("{status} label={label} pos={}", ctx.pos),
+            TraceLevel::LOW,
+        );
+        result
     }
 
     fn execute_rule_by_family(
@@ -460,8 +499,38 @@ impl GeneratedPlanExecutor<'_> {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let accumulator_len = ctx.accumulator.len();
+        ctx.trace_decision(
+            "rust_runtime:generated_plan:child_dispatch",
+            true,
+            format!(
+                "label={label} entry_regex_idx={entry_regex_idx} pos={} accumulator_len={accumulator_len}",
+                ctx.pos
+            ),
+            TraceLevel::MEDIUM,
+        );
         let child_result = self.execute_rule(label, entry_regex_idx, ctx);
         ctx.accumulator.truncate(accumulator_len);
+        match &child_result {
+            Ok(value) => {
+                ctx.trace_decision(
+                    "rust_runtime:generated_plan:child_dispatch_result",
+                    value.as_bool(),
+                    format!(
+                        "label={label} value_kind={}",
+                        runtime_value_trace_kind(value)
+                    ),
+                    TraceLevel::MEDIUM,
+                );
+            }
+            Err(err) => {
+                ctx.trace_decision(
+                    "rust_runtime:generated_plan:child_dispatch_result",
+                    false,
+                    format!("label={label} error={err}"),
+                    TraceLevel::MEDIUM,
+                );
+            }
+        }
         child_result
     }
 
@@ -472,6 +541,15 @@ impl GeneratedPlanExecutor<'_> {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         if self.engine.is_passive_terminal_rule(label) {
+            ctx.trace_decision(
+                "rust_runtime:generated_plan:passive_terminal_dispatch",
+                false,
+                format!(
+                    "label={label} entry_regex_idx={entry_regex_idx} pos={}",
+                    ctx.pos
+                ),
+                TraceLevel::MEDIUM,
+            );
             return Ok(RuntimeValue::Undef);
         }
         self.execute_child_rule(label, entry_regex_idx, ctx)
@@ -486,11 +564,33 @@ impl GeneratedPlanExecutor<'_> {
     ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
         if !ctx.enter_recursion(label, entry_pos) {
+            ctx.trace_decision(
+                "rust_runtime:generated_plan:recursion_guard",
+                false,
+                format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
+                TraceLevel::MEDIUM,
+            );
             return Ok(RuntimeValue::Undef);
         }
 
         ctx.enter_rule_variable_scope();
+        ctx.trace_enter(
+            "rust_runtime:generated_plan:direct_acode_rule",
+            format!(
+                "label={label} entry_regex_idx={entry_regex_idx} family={family:?} pos={entry_pos}"
+            ),
+            TraceLevel::MEDIUM,
+        );
         let result = self.execute_direct_acode_rule_inner(label, entry_regex_idx, family, ctx);
+        let status = match &result {
+            Ok(value) => format!("status=ok value_kind={}", runtime_value_trace_kind(value)),
+            Err(err) => format!("status=error error={err}"),
+        };
+        ctx.trace_exit(
+            "rust_runtime:generated_plan:direct_acode_rule",
+            format!("{status} label={label} pos={}", ctx.pos),
+            TraceLevel::MEDIUM,
+        );
         ctx.exit_rule_variable_scope();
         ctx.exit_recursion(label, entry_pos);
         result
@@ -547,7 +647,8 @@ impl GeneratedPlanExecutor<'_> {
         };
 
         if let Some(ref preamble) = rule.preamble {
-            self.engine.execute_block(preamble, ctx, label)?;
+            self.engine
+                .execute_lifecycle_block("I", preamble, ctx, label)?;
             return_if_rule_returned!();
         }
 
@@ -596,7 +697,8 @@ impl GeneratedPlanExecutor<'_> {
             let pos_before = ctx.pos;
 
             if let Some(ref lscode) = rule.lscode {
-                self.engine.execute_block(lscode, ctx, label)?;
+                self.engine
+                    .execute_lifecycle_block("LS", lscode, ctx, label)?;
                 return_if_rule_returned!();
             }
 
@@ -618,6 +720,31 @@ impl GeneratedPlanExecutor<'_> {
                 }
             };
 
+            match &match_result {
+                Some(m) => {
+                    ctx.trace_decision(
+                        "rust_runtime:generated_plan:regex_match",
+                        true,
+                        format!(
+                            "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                            m.index, m.start, m.end, rule.parse_mode
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
+                }
+                None => {
+                    ctx.trace_decision(
+                        "rust_runtime:generated_plan:regex_match",
+                        false,
+                        format!(
+                            "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                            rule.parse_mode
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
+                }
+            }
+
             if let Some(m) = match_result {
                 let expected_and_idx = if is_rep_and_acode_seq {
                     and_acode_idx
@@ -625,8 +752,18 @@ impl GeneratedPlanExecutor<'_> {
                     matches
                 };
                 if is_and_acode_seq && m.index != expected_and_idx {
+                    ctx.trace_decision(
+                        "rust_runtime:generated_plan:and_sequence_slot",
+                        false,
+                        format!(
+                            "rule={label} regex_idx={} expected_idx={expected_and_idx} matches={matches}",
+                            m.index
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
                     if let Some(ref lxcode) = rule.lxcode {
-                        self.engine.execute_block(lxcode, ctx, label)?;
+                        self.engine
+                            .execute_lifecycle_block("LX", lxcode, ctx, label)?;
                         return_if_rule_returned!();
                     }
                     break;
@@ -647,8 +784,23 @@ impl GeneratedPlanExecutor<'_> {
                     ctx.entry_end_byte = m.end;
                 }
 
+                let mut dispatched_acode = false;
                 for entry in &rule.acode_dispatch {
                     if entry.regex_idx == m.index {
+                        dispatched_acode = true;
+                        ctx.trace_decision(
+                            "rust_runtime:generated_plan:acode_dispatch",
+                            true,
+                            format!(
+                                "rule={label} regex_idx={} child={} child_regex_idx={} fluent_chain_len={} has_code={}",
+                                entry.regex_idx,
+                                entry.child_label,
+                                entry.child_regex_idx,
+                                entry.fluent_chain.len(),
+                                entry.code.is_some()
+                            ),
+                            TraceLevel::MEDIUM,
+                        );
                         if entry.fluent_chain.is_empty() {
                             if let Some(ref block) = entry.code {
                                 if Engine::block_calls_rule(block, &entry.child_label) {
@@ -705,9 +857,18 @@ impl GeneratedPlanExecutor<'_> {
                         }
                     }
                 }
+                if !dispatched_acode {
+                    ctx.trace_decision(
+                        "rust_runtime:generated_plan:acode_dispatch",
+                        false,
+                        format!("rule={label} regex_idx={} child=none", m.index),
+                        TraceLevel::MEDIUM,
+                    );
+                }
 
                 if let Some(ref lecode) = rule.lecode {
-                    self.engine.execute_block(lecode, ctx, label)?;
+                    self.engine
+                        .execute_lifecycle_block("LE", lecode, ctx, label)?;
                     return_if_rule_returned!();
                 }
 
@@ -721,12 +882,14 @@ impl GeneratedPlanExecutor<'_> {
                 matches += 1;
 
                 if let Some(ref itcode) = rule.itcode {
-                    self.engine.execute_block(itcode, ctx, label)?;
+                    self.engine
+                        .execute_lifecycle_block("IT", itcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             } else {
                 if let Some(ref lxcode) = rule.lxcode {
-                    self.engine.execute_block(lxcode, ctx, label)?;
+                    self.engine
+                        .execute_lifecycle_block("LX", lxcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
                 break;
@@ -762,12 +925,14 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         if let Some(ref excode) = rule.excode {
-            self.engine.execute_block(excode, ctx, label)?;
+            self.engine
+                .execute_lifecycle_block("EX", excode, ctx, label)?;
             return_if_rule_returned!();
         }
 
         if let Some(ref ecode) = rule.ecode {
-            self.engine.execute_block(ecode, ctx, label)?;
+            self.engine
+                .execute_lifecycle_block("E", ecode, ctx, label)?;
             return_if_rule_returned!();
         }
 
@@ -786,11 +951,33 @@ impl GeneratedPlanExecutor<'_> {
     ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
         if !ctx.enter_recursion(label, entry_pos) {
+            ctx.trace_decision(
+                "rust_runtime:generated_plan:recursion_guard",
+                false,
+                format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
+                TraceLevel::MEDIUM,
+            );
             return Ok(RuntimeValue::Undef);
         }
 
         ctx.enter_rule_variable_scope();
+        ctx.trace_enter(
+            "rust_runtime:generated_plan:direct_bcode_rule",
+            format!(
+                "label={label} entry_regex_idx={entry_regex_idx} family={family:?} pos={entry_pos}"
+            ),
+            TraceLevel::MEDIUM,
+        );
         let result = self.execute_direct_bcode_rule_inner(label, entry_regex_idx, family, ctx);
+        let status = match &result {
+            Ok(value) => format!("status=ok value_kind={}", runtime_value_trace_kind(value)),
+            Err(err) => format!("status=error error={err}"),
+        };
+        ctx.trace_exit(
+            "rust_runtime:generated_plan:direct_bcode_rule",
+            format!("{status} label={label} pos={}", ctx.pos),
+            TraceLevel::MEDIUM,
+        );
         ctx.exit_rule_variable_scope();
         ctx.exit_recursion(label, entry_pos);
         result
@@ -841,7 +1028,8 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         if let Some(ref preamble) = rule.preamble {
-            self.engine.execute_block(preamble, ctx, label)?;
+            self.engine
+                .execute_lifecycle_block("I", preamble, ctx, label)?;
             return_if_rule_returned!();
         }
 
@@ -876,7 +1064,8 @@ impl GeneratedPlanExecutor<'_> {
                     let pos_before = ctx.pos;
 
                     if let Some(ref lscode) = rule.lscode {
-                        self.engine.execute_block(lscode, ctx, label)?;
+                        self.engine
+                            .execute_lifecycle_block("LS", lscode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
@@ -885,6 +1074,16 @@ impl GeneratedPlanExecutor<'_> {
                         for entry in &rule.bcode_dispatch {
                             let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
                             let child_matched = child_retv.as_bool();
+                            ctx.trace_decision(
+                                "rust_runtime:generated_plan:bcode_dispatch",
+                                child_matched,
+                                format!(
+                                    "rule={label} child={} family={family:?} mode=rep_and value_kind={}",
+                                    entry.child_label,
+                                    runtime_value_trace_kind(&child_retv)
+                                ),
+                                TraceLevel::MEDIUM,
+                            );
                             ctx.set_retv(child_retv);
                             self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -899,6 +1098,16 @@ impl GeneratedPlanExecutor<'_> {
                         for entry in &rule.bcode_dispatch {
                             let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
                             let child_matched = child_retv.as_bool();
+                            ctx.trace_decision(
+                                "rust_runtime:generated_plan:bcode_dispatch",
+                                child_matched,
+                                format!(
+                                    "rule={label} child={} family={family:?} mode=rep_or value_kind={}",
+                                    entry.child_label,
+                                    runtime_value_trace_kind(&child_retv)
+                                ),
+                                TraceLevel::MEDIUM,
+                            );
                             ctx.set_retv(child_retv);
                             self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -912,21 +1121,24 @@ impl GeneratedPlanExecutor<'_> {
 
                     if !matched {
                         if let Some(ref lxcode) = rule.lxcode {
-                            self.engine.execute_block(lxcode, ctx, label)?;
+                            self.engine
+                                .execute_lifecycle_block("LX", lxcode, ctx, label)?;
                             return_if_rule_returned!();
                         }
                         break;
                     }
 
                     if let Some(ref lecode) = rule.lecode {
-                        self.engine.execute_block(lecode, ctx, label)?;
+                        self.engine
+                            .execute_lifecycle_block("LE", lecode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
                     matches += 1;
 
                     if let Some(ref itcode) = rule.itcode {
-                        self.engine.execute_block(itcode, ctx, label)?;
+                        self.engine
+                            .execute_lifecycle_block("IT", itcode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
@@ -943,13 +1155,24 @@ impl GeneratedPlanExecutor<'_> {
                 }
 
                 if let Some(ref excode) = rule.excode {
-                    self.engine.execute_block(excode, ctx, label)?;
+                    self.engine
+                        .execute_lifecycle_block("EX", excode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             }
             GeneratedRuleFamily::AndBcode => {
                 for entry in &rule.bcode_dispatch {
                     let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                    ctx.trace_decision(
+                        "rust_runtime:generated_plan:bcode_dispatch",
+                        child_retv.as_bool(),
+                        format!(
+                            "rule={label} child={} family={family:?} mode=and value_kind={}",
+                            entry.child_label,
+                            runtime_value_trace_kind(&child_retv)
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
                     ctx.set_retv(child_retv);
                     self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -960,6 +1183,16 @@ impl GeneratedPlanExecutor<'_> {
                 for entry in &rule.bcode_dispatch {
                     let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
                     let child_matched = child_retv.as_bool();
+                    ctx.trace_decision(
+                        "rust_runtime:generated_plan:bcode_dispatch",
+                        child_matched,
+                        format!(
+                            "rule={label} child={} family={family:?} mode=or value_kind={}",
+                            entry.child_label,
+                            runtime_value_trace_kind(&child_retv)
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
                     ctx.set_retv(child_retv);
                     self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -969,7 +1202,8 @@ impl GeneratedPlanExecutor<'_> {
                     }
                 }
                 if !matched && let Some(ref lxcode) = rule.lxcode {
-                    self.engine.execute_block(lxcode, ctx, label)?;
+                    self.engine
+                        .execute_lifecycle_block("LX", lxcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             }
@@ -984,7 +1218,8 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         if let Some(ref ecode) = rule.ecode {
-            self.engine.execute_block(ecode, ctx, label)?;
+            self.engine
+                .execute_lifecycle_block("E", ecode, ctx, label)?;
             return_if_rule_returned!();
         }
 
@@ -1004,18 +1239,11 @@ impl Engine {
     /// Execute the top rule against the given input.
     /// Returns the accumulator as a JSON array.
     pub fn execute(&self, input: &str) -> Result<Value, String> {
-        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
-        let label = top.label.clone();
         let mut ctx = RuntimeContext::new(input);
-        self.execute_rule(&label, 0, &mut ctx)?;
-        Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+        self.execute_with_context(&mut ctx)
     }
 
     /// Execute the top rule with explicit trace configuration.
-    ///
-    /// `TRACE-OBSERVABILITY.4.2` wires the Rust trace controls and sinks. Runtime
-    /// branch events are added by `.4.4`, so this entrypoint currently preserves
-    /// `execute` output while validating trace setup for later event wiring.
     pub fn execute_with_trace(
         &self,
         input: &str,
@@ -1030,9 +1258,33 @@ impl Engine {
     pub fn execute_with_trace_emitter(
         &self,
         input: &str,
-        _trace: &mut TraceEmitter,
+        trace: &mut TraceEmitter,
     ) -> Result<Value, String> {
-        self.execute(input)
+        let scope = trace
+            .enter_scope(
+                "rust_runtime:engine:execute",
+                format!(
+                    "input_bytes={} input_chars={}",
+                    input.len(),
+                    input.chars().count()
+                ),
+                TraceLevel::LOW,
+            )
+            .map_err(trace_write_failed)?;
+        let mut ctx = RuntimeContext::new(input);
+        if trace.should_emit(TraceLevel::LOW) {
+            ctx.enable_trace_events();
+        }
+        let result = self.execute_with_context(&mut ctx);
+        ctx.replay_trace_events(trace).map_err(trace_write_failed)?;
+        let exit_details = match &result {
+            Ok(value) => format!("status=ok output={}", value),
+            Err(err) => format!("status=error error={err}"),
+        };
+        trace
+            .exit_scope(scope, exit_details)
+            .map_err(trace_write_failed)?;
+        result
     }
 
     /// Execute generated source through a validated rule-family plan.
@@ -1047,15 +1299,8 @@ impl Engine {
         generated_rules: &[GeneratedRuleSpec],
         input: &str,
     ) -> Result<Value, String> {
-        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
-        let label = top.label.clone();
         let mut ctx = RuntimeContext::new(input);
-        let generated = GeneratedPlanExecutor {
-            engine: self,
-            generated_rules,
-        };
-        generated.execute_rule(&label, 0, &mut ctx)?;
-        Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+        self.execute_generated_with_plan_context(generated_rules, &mut ctx)
     }
 
     /// Execute generated source through a validated rule-family plan with
@@ -1076,9 +1321,72 @@ impl Engine {
         &self,
         generated_rules: &[GeneratedRuleSpec],
         input: &str,
-        _trace: &mut TraceEmitter,
+        trace: &mut TraceEmitter,
     ) -> Result<Value, String> {
-        self.execute_generated_with_plan(generated_rules, input)
+        let scope = trace
+            .enter_scope(
+                "rust_runtime:generated_plan:execute",
+                format!(
+                    "input_bytes={} input_chars={} plan_rules={}",
+                    input.len(),
+                    input.chars().count(),
+                    generated_rules.len()
+                ),
+                TraceLevel::LOW,
+            )
+            .map_err(trace_write_failed)?;
+        let mut ctx = RuntimeContext::new(input);
+        if trace.should_emit(TraceLevel::LOW) {
+            ctx.enable_trace_events();
+        }
+        let result = self.execute_generated_with_plan_context(generated_rules, &mut ctx);
+        ctx.replay_trace_events(trace).map_err(trace_write_failed)?;
+        let exit_details = match &result {
+            Ok(value) => format!("status=ok output={}", value),
+            Err(err) => format!("status=error error={err}"),
+        };
+        trace
+            .exit_scope(scope, exit_details)
+            .map_err(trace_write_failed)?;
+        result
+    }
+
+    fn execute_with_context(&self, ctx: &mut RuntimeContext) -> Result<Value, String> {
+        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
+        let label = top.label.clone();
+        ctx.trace_decision(
+            "rust_runtime:engine:top_rule",
+            true,
+            format!("label={label} input_bytes={}", ctx.input.len()),
+            TraceLevel::LOW,
+        );
+        self.execute_rule(&label, 0, ctx)?;
+        Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+    }
+
+    fn execute_generated_with_plan_context(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        ctx: &mut RuntimeContext,
+    ) -> Result<Value, String> {
+        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
+        let label = top.label.clone();
+        ctx.trace_decision(
+            "rust_runtime:generated_plan:top_rule",
+            true,
+            format!(
+                "label={label} input_bytes={} plan_rules={}",
+                ctx.input.len(),
+                generated_rules.len()
+            ),
+            TraceLevel::LOW,
+        );
+        let generated = GeneratedPlanExecutor {
+            engine: self,
+            generated_rules,
+        };
+        generated.execute_rule(&label, 0, ctx)?;
+        Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
     }
 
     /// Execute a specific rule by label, entering at the given regex index
@@ -1102,9 +1410,25 @@ impl Engine {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
+        ctx.trace_enter(
+            "rust_runtime:engine:rule",
+            format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
+            TraceLevel::LOW,
+        );
         if !ctx.enter_recursion(label, entry_pos) {
             // Non-progressing recursive re-entry at this exact position: cut the
             // cycle so it terminates instead of recursing forever.
+            ctx.trace_decision(
+                "rust_runtime:engine:recursion_guard",
+                false,
+                format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
+                TraceLevel::MEDIUM,
+            );
+            ctx.trace_exit(
+                "rust_runtime:engine:rule",
+                format!("status=cut label={label} pos={}", ctx.pos),
+                TraceLevel::LOW,
+            );
             return Ok(RuntimeValue::Undef);
         }
         // Run the body, then leave the frame on BOTH the Ok and Err paths so the
@@ -1113,6 +1437,15 @@ impl Engine {
         let result = self.execute_rule_inner(label, entry_regex_idx, ctx);
         ctx.exit_rule_variable_scope();
         ctx.exit_recursion(label, entry_pos);
+        let status = match &result {
+            Ok(value) => format!("status=ok value_kind={}", runtime_value_trace_kind(value)),
+            Err(err) => format!("status=error error={err}"),
+        };
+        ctx.trace_exit(
+            "rust_runtime:engine:rule",
+            format!("{status} label={label} pos={}", ctx.pos),
+            TraceLevel::LOW,
+        );
         result
     }
 
@@ -1123,8 +1456,38 @@ impl Engine {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let accumulator_len = ctx.accumulator.len();
+        ctx.trace_decision(
+            "rust_runtime:engine:child_dispatch",
+            true,
+            format!(
+                "label={label} entry_regex_idx={entry_regex_idx} pos={} accumulator_len={accumulator_len}",
+                ctx.pos
+            ),
+            TraceLevel::MEDIUM,
+        );
         let child_result = self.execute_rule(label, entry_regex_idx, ctx);
         ctx.accumulator.truncate(accumulator_len);
+        match &child_result {
+            Ok(value) => {
+                ctx.trace_decision(
+                    "rust_runtime:engine:child_dispatch_result",
+                    value.as_bool(),
+                    format!(
+                        "label={label} value_kind={}",
+                        runtime_value_trace_kind(value)
+                    ),
+                    TraceLevel::MEDIUM,
+                );
+            }
+            Err(err) => {
+                ctx.trace_decision(
+                    "rust_runtime:engine:child_dispatch_result",
+                    false,
+                    format!("label={label} error={err}"),
+                    TraceLevel::MEDIUM,
+                );
+            }
+        }
         child_result
     }
 
@@ -1135,6 +1498,15 @@ impl Engine {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         if self.is_passive_terminal_rule(label) {
+            ctx.trace_decision(
+                "rust_runtime:engine:passive_terminal_dispatch",
+                false,
+                format!(
+                    "label={label} entry_regex_idx={entry_regex_idx} pos={}",
+                    ctx.pos
+                ),
+                TraceLevel::MEDIUM,
+            );
             return Ok(RuntimeValue::Undef);
         }
         self.execute_child_rule(label, entry_regex_idx, ctx)
@@ -1257,7 +1629,7 @@ impl Engine {
 
         // ── I-block (preamble, once per rule entry) ──
         if let Some(ref preamble) = rule.preamble {
-            self.execute_block(preamble, ctx, label)?;
+            self.execute_lifecycle_block("I", preamble, ctx, label)?;
             return_if_rule_returned!();
         }
 
@@ -1279,7 +1651,7 @@ impl Engine {
                     let pos_before = ctx.pos;
 
                     if let Some(ref lscode) = rule.lscode {
-                        self.execute_block(lscode, ctx, label)?;
+                        self.execute_lifecycle_block("LS", lscode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
@@ -1288,6 +1660,16 @@ impl Engine {
                         for entry in &rule.bcode_dispatch {
                             let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
                             let child_matched = child_retv.as_bool();
+                            ctx.trace_decision(
+                                "rust_runtime:engine:bcode_dispatch",
+                                child_matched,
+                                format!(
+                                    "rule={label} child={} mode=rep_and value_kind={}",
+                                    entry.child_label,
+                                    runtime_value_trace_kind(&child_retv)
+                                ),
+                                TraceLevel::MEDIUM,
+                            );
                             ctx.set_retv(child_retv);
                             self.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -1302,6 +1684,16 @@ impl Engine {
                         for entry in &rule.bcode_dispatch {
                             let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
                             let child_matched = child_retv.as_bool();
+                            ctx.trace_decision(
+                                "rust_runtime:engine:bcode_dispatch",
+                                child_matched,
+                                format!(
+                                    "rule={label} child={} mode=rep_or value_kind={}",
+                                    entry.child_label,
+                                    runtime_value_trace_kind(&child_retv)
+                                ),
+                                TraceLevel::MEDIUM,
+                            );
                             ctx.set_retv(child_retv);
                             self.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -1315,21 +1707,21 @@ impl Engine {
 
                     if !matched {
                         if let Some(ref lxcode) = rule.lxcode {
-                            self.execute_block(lxcode, ctx, label)?;
+                            self.execute_lifecycle_block("LX", lxcode, ctx, label)?;
                             return_if_rule_returned!();
                         }
                         break;
                     }
 
                     if let Some(ref lecode) = rule.lecode {
-                        self.execute_block(lecode, ctx, label)?;
+                        self.execute_lifecycle_block("LE", lecode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
                     matches += 1;
 
                     if let Some(ref itcode) = rule.itcode {
-                        self.execute_block(itcode, ctx, label)?;
+                        self.execute_lifecycle_block("IT", itcode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
@@ -1346,7 +1738,7 @@ impl Engine {
                 }
 
                 if let Some(ref excode) = rule.excode {
-                    self.execute_block(excode, ctx, label)?;
+                    self.execute_lifecycle_block("EX", excode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             } else if !matches!(rule.mode, RuleMode::Or) {
@@ -1355,6 +1747,16 @@ impl Engine {
                     // `retv` (Runtime Semantics §6.2), readable by the attached
                     // code, fluent chain, and the E-block below.
                     let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                    ctx.trace_decision(
+                        "rust_runtime:engine:bcode_dispatch",
+                        child_retv.as_bool(),
+                        format!(
+                            "rule={label} child={} mode=and value_kind={}",
+                            entry.child_label,
+                            runtime_value_trace_kind(&child_retv)
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
                     ctx.set_retv(child_retv);
                     self.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -1364,6 +1766,16 @@ impl Engine {
                 for entry in &rule.bcode_dispatch {
                     let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
                     let child_matched = child_retv.as_bool();
+                    ctx.trace_decision(
+                        "rust_runtime:engine:bcode_dispatch",
+                        child_matched,
+                        format!(
+                            "rule={label} child={} mode=or value_kind={}",
+                            entry.child_label,
+                            runtime_value_trace_kind(&child_retv)
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
                     ctx.set_retv(child_retv);
                     self.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -1373,13 +1785,13 @@ impl Engine {
                     }
                 }
                 if !matched && let Some(ref lxcode) = rule.lxcode {
-                    self.execute_block(lxcode, ctx, label)?;
+                    self.execute_lifecycle_block("LX", lxcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             }
             // After blind-call dispatch, fire E-block and exit
             if let Some(ref ecode) = rule.ecode {
-                self.execute_block(ecode, ctx, label)?;
+                self.execute_lifecycle_block("E", ecode, ctx, label)?;
                 return_if_rule_returned!();
             }
             let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
@@ -1427,7 +1839,7 @@ impl Engine {
 
             // ── LS-block (loop start, fires before each match attempt) ──
             if let Some(ref lscode) = rule.lscode {
-                self.execute_block(lscode, ctx, label)?;
+                self.execute_lifecycle_block("LS", lscode, ctx, label)?;
                 return_if_rule_returned!();
             }
 
@@ -1453,6 +1865,31 @@ impl Engine {
                 }
             };
 
+            match &match_result {
+                Some(m) => {
+                    ctx.trace_decision(
+                        "rust_runtime:engine:regex_match",
+                        true,
+                        format!(
+                            "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                            m.index, m.start, m.end, rule.parse_mode
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
+                }
+                None => {
+                    ctx.trace_decision(
+                        "rust_runtime:engine:regex_match",
+                        false,
+                        format!(
+                            "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                            rule.parse_mode
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
+                }
+            }
+
             if let Some(m) = match_result {
                 let expected_and_idx = if is_rep_and_acode_seq {
                     and_acode_idx
@@ -1460,8 +1897,17 @@ impl Engine {
                     matches
                 };
                 if is_and_acode_seq && m.index != expected_and_idx {
+                    ctx.trace_decision(
+                        "rust_runtime:engine:and_sequence_slot",
+                        false,
+                        format!(
+                            "rule={label} regex_idx={} expected_idx={expected_and_idx} matches={matches}",
+                            m.index
+                        ),
+                        TraceLevel::MEDIUM,
+                    );
                     if let Some(ref lxcode) = rule.lxcode {
-                        self.execute_block(lxcode, ctx, label)?;
+                        self.execute_lifecycle_block("LX", lxcode, ctx, label)?;
                         return_if_rule_returned!();
                     }
                     break;
@@ -1494,8 +1940,23 @@ impl Engine {
                 }
 
                 // ── Action-edge dispatch ──
+                let mut dispatched_acode = false;
                 for entry in &rule.acode_dispatch {
                     if entry.regex_idx == m.index {
+                        dispatched_acode = true;
+                        ctx.trace_decision(
+                            "rust_runtime:engine:acode_dispatch",
+                            true,
+                            format!(
+                                "rule={label} regex_idx={} child={} child_regex_idx={} fluent_chain_len={} has_code={}",
+                                entry.regex_idx,
+                                entry.child_label,
+                                entry.child_regex_idx,
+                                entry.fluent_chain.len(),
+                                entry.code.is_some()
+                            ),
+                            TraceLevel::MEDIUM,
+                        );
                         if entry.fluent_chain.is_empty() {
                             if let Some(ref block) = entry.code {
                                 if Self::block_calls_rule(block, &entry.child_label) {
@@ -1567,10 +2028,18 @@ impl Engine {
                         }
                     }
                 }
+                if !dispatched_acode {
+                    ctx.trace_decision(
+                        "rust_runtime:engine:acode_dispatch",
+                        false,
+                        format!("rule={label} regex_idx={} child=none", m.index),
+                        TraceLevel::MEDIUM,
+                    );
+                }
 
                 // ── LE-block (loop end, after successful match) ──
                 if let Some(ref lecode) = rule.lecode {
-                    self.execute_block(lecode, ctx, label)?;
+                    self.execute_lifecycle_block("LE", lecode, ctx, label)?;
                     return_if_rule_returned!();
                 }
 
@@ -1585,14 +2054,14 @@ impl Engine {
 
                 // ── IT-block (per-iteration, REP only) ──
                 if let Some(ref itcode) = rule.itcode {
-                    self.execute_block(itcode, ctx, label)?;
+                    self.execute_lifecycle_block("IT", itcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             } else {
                 // No match — exit the matching loop
                 // ── LX-block (no-match exit, fires when loop ends without match) ──
                 if let Some(ref lxcode) = rule.lxcode {
-                    self.execute_block(lxcode, ctx, label)?;
+                    self.execute_lifecycle_block("LX", lxcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
                 break;
@@ -1636,13 +2105,13 @@ impl Engine {
 
         // ── EX-block (REP exhaustion, fires after loop completes normally) ──
         if let Some(ref excode) = rule.excode {
-            self.execute_block(excode, ctx, label)?;
+            self.execute_lifecycle_block("EX", excode, ctx, label)?;
             return_if_rule_returned!();
         }
 
         // ── E-block (exit, fires once after all matching/repetition is done) ──
         if let Some(ref ecode) = rule.ecode {
-            self.execute_block(ecode, ctx, label)?;
+            self.execute_lifecycle_block("E", ecode, ctx, label)?;
             return_if_rule_returned!();
         }
 
@@ -1873,6 +2342,42 @@ impl Engine {
     }
 
     /// Execute a lifecycle code block (parsed expression tree).
+    fn execute_lifecycle_block(
+        &self,
+        phase: &str,
+        block: &linkedspec_core::expr::CodeBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<(), String> {
+        ctx.trace_decision(
+            "rust_runtime:engine:lifecycle_block",
+            true,
+            format!("rule={rule_label} phase={phase} pos={}", ctx.pos),
+            TraceLevel::MEDIUM,
+        );
+        let result = self.execute_block(block, ctx, rule_label);
+        match &result {
+            Ok(()) => {
+                ctx.trace_decision(
+                    "rust_runtime:engine:lifecycle_block_result",
+                    true,
+                    format!("rule={rule_label} phase={phase} pos={}", ctx.pos),
+                    TraceLevel::MEDIUM,
+                );
+            }
+            Err(err) => {
+                ctx.trace_decision(
+                    "rust_runtime:engine:lifecycle_block_result",
+                    false,
+                    format!("rule={rule_label} phase={phase} error={err}"),
+                    TraceLevel::MEDIUM,
+                );
+            }
+        }
+        result
+    }
+
+    /// Execute a lifecycle code block (parsed expression tree).
     fn execute_block(
         &self,
         block: &linkedspec_core::expr::CodeBlock,
@@ -2034,6 +2539,12 @@ impl Engine {
                 } else {
                     false
                 };
+                ctx.trace_decision(
+                    "rust_runtime:engine:statement_if",
+                    parent_active && cond,
+                    format!("rule={rule_label} branch=if parent_active={parent_active}"),
+                    TraceLevel::FULL,
+                );
                 if_stack.push(StatementIfFrame {
                     parent_active,
                     current_active: parent_active && cond,
@@ -2049,8 +2560,23 @@ impl Engine {
                     let cond = self.eval_expr(args[0].value(), ctx, rule_label)?.as_bool();
                     frame.current_active = cond;
                     frame.branch_taken = cond;
+                    ctx.trace_decision(
+                        "rust_runtime:engine:statement_if",
+                        cond,
+                        format!("rule={rule_label} branch=elseif parent_active=true"),
+                        TraceLevel::FULL,
+                    );
                 } else {
                     frame.current_active = false;
+                    ctx.trace_decision(
+                        "rust_runtime:engine:statement_if",
+                        false,
+                        format!(
+                            "rule={rule_label} branch=elseif parent_active={} prior_branch_taken={}",
+                            frame.parent_active, frame.branch_taken
+                        ),
+                        TraceLevel::FULL,
+                    );
                 }
                 Ok(true)
             }
@@ -2059,6 +2585,15 @@ impl Engine {
                     return Ok(true);
                 };
                 frame.current_active = frame.parent_active && !frame.branch_taken;
+                ctx.trace_decision(
+                    "rust_runtime:engine:statement_if",
+                    frame.current_active,
+                    format!(
+                        "rule={rule_label} branch=else parent_active={} prior_branch_taken={}",
+                        frame.parent_active, frame.branch_taken
+                    ),
+                    TraceLevel::FULL,
+                );
                 frame.branch_taken = true;
                 Ok(true)
             }
@@ -2096,6 +2631,12 @@ impl Engine {
                 } else {
                     String::new()
                 };
+                ctx.trace_decision(
+                    "rust_runtime:engine:statement_switch",
+                    parent_active,
+                    format!("rule={rule_label} branch=switch parent_active={parent_active}"),
+                    TraceLevel::FULL,
+                );
                 switch_stack.push(StatementSwitchFrame {
                     parent_active,
                     current_active: false,
@@ -2113,8 +2654,23 @@ impl Engine {
                     let matches = case_value == frame.switch_value;
                     frame.current_active = matches;
                     frame.branch_taken = matches;
+                    ctx.trace_decision(
+                        "rust_runtime:engine:statement_switch",
+                        matches,
+                        format!("rule={rule_label} branch=case parent_active=true"),
+                        TraceLevel::FULL,
+                    );
                 } else {
                     frame.current_active = false;
+                    ctx.trace_decision(
+                        "rust_runtime:engine:statement_switch",
+                        false,
+                        format!(
+                            "rule={rule_label} branch=case parent_active={} prior_branch_taken={}",
+                            frame.parent_active, frame.branch_taken
+                        ),
+                        TraceLevel::FULL,
+                    );
                 }
                 Ok(true)
             }
@@ -2123,6 +2679,15 @@ impl Engine {
                     return Ok(true);
                 };
                 frame.current_active = frame.parent_active && !frame.branch_taken;
+                ctx.trace_decision(
+                    "rust_runtime:engine:statement_switch",
+                    frame.current_active,
+                    format!(
+                        "rule={rule_label} branch=default parent_active={} prior_branch_taken={}",
+                        frame.parent_active, frame.branch_taken
+                    ),
+                    TraceLevel::FULL,
+                );
                 frame.branch_taken = true;
                 Ok(true)
             }
@@ -2866,6 +3431,46 @@ impl Engine {
             "le" => Some("num_le"),
             _ => None,
         }
+    }
+
+    fn is_mark_capture_helper(name: &str) -> bool {
+        matches!(
+            name,
+            "start_capture_slice"
+                | "capture_slice"
+                | "capture_slice_len"
+                | "capture_slice_line"
+                | "capture_slice_pos"
+                | "capture_slice_until_cursor"
+                | "capture_slice_until_cursor_len"
+                | "capture_take_until_cursor"
+                | "capture_take_until_cursor_len"
+                | "capture_take"
+                | "capture_take_len"
+                | "capture_rest"
+                | "capture_rest_len"
+                | "capture_take_rest"
+                | "capture_take_rest_len"
+                | "mark_here"
+                | "mark_pos"
+                | "mark_exists"
+                | "mark_input_start"
+                | "mark_input_end"
+                | "mark_copy"
+                | "capture_from"
+                | "capture_len_from"
+                | "capture_until_cursor_from"
+                | "capture_until_cursor_len_from"
+                | "capture_take_until_cursor_from"
+                | "capture_take_until_cursor_len_from"
+                | "capture_take_len_from"
+                | "capture_rest_from"
+                | "capture_rest_len_from"
+                | "capture_take_rest_from"
+                | "capture_take_rest_len_from"
+                | "capture_between"
+                | "capture_len_between"
+        )
     }
 
     fn is_number_receiver_value_chain_method(method: &str) -> bool {
@@ -3674,6 +4279,12 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
+        ctx.trace_decision(
+            "rust_runtime:engine:lazy_helper",
+            true,
+            format!("rule={rule_label} helper={name} arity={}", args.len()),
+            TraceLevel::FULL,
+        );
         let empty_kw = std::collections::HashMap::new();
         let empty_vals: Vec<RuntimeValue> = Vec::new();
         self.call_helper(name, args, &empty_vals, &empty_kw, ctx, rule_label)
@@ -3714,6 +4325,20 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let name = Self::numeric_word_helper_name(name).unwrap_or(name);
+        if Self::is_mark_capture_helper(name) {
+            ctx.trace_mark(
+                "rust_runtime:engine:mark_capture",
+                format!(
+                    "rule={rule_label} helper={name} arity={} pos={} match_start={} match_end={} capture_start={:?}",
+                    args.len(),
+                    ctx.pos,
+                    ctx.match_start_byte,
+                    ctx.match_end_byte,
+                    ctx.capture_start
+                ),
+                TraceLevel::FULL,
+            );
+        }
         match name {
             // ── Declarations ──
             "declare" => {
@@ -3894,6 +4519,12 @@ impl Engine {
                 // name comes from the raw arg (a bare label is not a scalar).
                 let child = self.resolve_rule_name(raw_args, args.first());
                 if !child.is_empty() {
+                    ctx.trace_decision(
+                        "rust_runtime:engine:helper_call_dispatch",
+                        true,
+                        format!("rule={rule_label} child={child} pos={}", ctx.pos),
+                        TraceLevel::MEDIUM,
+                    );
                     if let Some(value) = ctx.action_edge_call_result(&child) {
                         return Ok(value);
                     }

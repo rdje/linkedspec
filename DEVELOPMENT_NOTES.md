@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.4.4 — Rust runtime trace events):
+  Rust runtime trace events are now emitted through the same shared `linkedspec-core::trace` sink as `.4.2`/`.4.3`.
+  The runtime context records structured execution events only when a traced entrypoint enables recording, then
+  replays them through the caller-owned `TraceEmitter`; existing `Engine::execute(...)`,
+  `Engine::execute_generated_with_plan(...)`, and generated `parse(...)` defaults remain quiet and output-compatible.
+  Interpreted runtime traces now cover rule entry/exit, recursion cutoffs, regex match/no-match choices, acode/bcode
+  child dispatch, lifecycle block execution, statement-form `if`/`switch` decisions, helper `call(child)` dispatch,
+  and mark/capture helper operations. Generated-plan traces additionally report top-rule selection, generated family
+  dispatch, direct acode/bcode rule scopes, and generated child/regex/acode/bcode decisions. Rust still does not
+  claim trace parity until `.4.5` proves the variant-agnostic contract and future-variant checklist.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.4.3 — Rust compile/spec-parser trace events):
   Rust trace emission now spends the shared `linkedspec-core::trace` emitter across the compile/spec-parser owner
   boundaries instead of adding a second runtime-only observability path. Core traced APIs emit stable owner
@@ -9,8 +20,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   user-function-definition parsing and neutral `body_parse_job` dispatch, so staged parse-job traces follow the
   implementation-language-neutral sidecar rather than a Rust-only shortcut. Staged registry traced entrypoints
   report normalize, queue-sort, resolve, load, compile, and execute phase decisions while preserving exact untraced
-  result records. Runtime branch, generated-plan, mark/capture, and parity-proof work remains separate under
-  `.4.4`/`.4.5`; do not claim Rust trace parity from `.4.3` alone.
+  result records. Runtime branch, generated-plan, and mark/capture work has since landed under `.4.4`; parity-proof
+  work remains separate under `.4.5`; do not claim Rust trace parity from `.4.3` alone.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.4.2 — Rust trace controls):
   Rust now has the shared trace control layer, but not trace event parity. Use `linkedspec_core::trace` for
@@ -21,8 +32,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   Existing quiet entrypoints remain the compatibility default. New traced variants validate trace setup and sink
   routing beside core parse/validate/compile, full-spec user-function parsing, staged parse jobs, `Engine::execute`,
   generated-plan execution, generated parser execution, and emitted generated module `parse_with_trace(...)`.
-  `.4.3` has since wired compile/spec-parser/staged-dispatch events. Do not claim Rust trace parity until `.4.4`
-  runtime branch events and `.4.5` parity proof are complete.
+  `.4.3` has since wired compile/spec-parser/staged-dispatch events, and `.4.4` has since wired runtime branch events.
+  Do not claim Rust trace parity until `.4.5` parity proof is complete.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.4.1 — Rust trace parity design):
   The Rust trace surface must be designed from the mdBook external contract, not from Perl package names. Because
@@ -34,7 +45,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   execution, generated-plan execution, lifecycle block execution, statement-form `if`/`switch`, acode/bcode child
   dispatch, repetition/AND/OR branch choices, and mark/capture helper operations. Rust cannot claim trace parity
   until `.4.2` controls/sinks, `.4.3` compile/spec-parser events, `.4.4` runtime branch events, and `.4.5` parity
-  proof are complete.
+  proof are complete; `.4.2` through `.4.4` have since landed, leaving `.4.5` as the active proof leaf.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.3.5 — trace contract/parity split):
   The external trace contract is the mdBook-documented behavior, not Perl package names. A variant claiming trace

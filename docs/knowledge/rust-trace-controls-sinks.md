@@ -30,5 +30,5 @@ generated-plan execution; generated parser execution; and newly emitted generate
 beside `parse(...)`).
 
 This slice intentionally landed controls and sink plumbing only. `.4.3` has since added compile/spec-parser/
-staged-dispatch event emission. Runtime/generated-plan branch event emission remains owned by `.4.4`, and
-cross-variant parity proof by `.4.5`.
+staged-dispatch event emission, and `.4.4` has since added runtime/generated-plan branch, lifecycle, and mark/capture
+event emission. Cross-variant parity proof remains owned by `.4.5`.

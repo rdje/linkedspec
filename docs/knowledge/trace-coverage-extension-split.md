@@ -10,8 +10,8 @@ answers:
 date: 2026-07-04
 status: current
 tags: [trace, observability, task-tree, generated-handlers, actionir, rust]
-evidence: "docs/tasks/TRACE-OBSERVABILITY.md .3 split; docs/TASK_TREE.md TRACE-OBSERVABILITY row; MEMORY.md next_action"
-reverify: "rg -n 'TRACE-OBSERVABILITY\\.3\\.5|TRACE-OBSERVABILITY\\.4\\.1|trace_generated_handler_branch|non-repetition generated|repetition|min/max|ActionIR owner|backend parity' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md MEMORY.md LIVE_ACHIEVEMENT_STATUS.md perl/LinkedSpec/Trace.pm"
+evidence: "docs/tasks/TRACE-OBSERVABILITY.md .3 split; docs/TASK_TREE.md TRACE-OBSERVABILITY row; MEMORY.md next_action; TRACE-OBSERVABILITY.4.2-.4.4 Rust trace work"
+reverify: "rg -n 'TRACE-OBSERVABILITY\\.3\\.5|TRACE-OBSERVABILITY\\.4\\.5|trace_generated_handler_branch|non-repetition generated|repetition|min/max|ActionIR owner|backend parity|rust_runtime:engine' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md MEMORY.md LIVE_ACHIEVEMENT_STATUS.md perl/LinkedSpec/Trace.pm rust/linkedspec-runtime/src"
 ---
 
 `TRACE-OBSERVABILITY.3` is a split parent, not an implementation leaf. `TRACE-OBSERVABILITY.3.1` has since closed
@@ -25,5 +25,7 @@ The sequence is:
 - `.3.4`: compile/ActionIR owner ENTER/EXIT and branch decisions (split and done through `.3.4.6`);
 - `.3.5`: coverage closeout docs/probes and the backend-parity split decision (done).
 
-Rust trace parity is now split into `.4.*`. The active frontier is `TRACE-OBSERVABILITY.4.1`, which maps the
-neutral mdBook trace contract onto Rust entrypoints and owner boundaries before Rust trace code.
+Rust trace parity is split into `.4.*`. `.4.1` mapped the neutral mdBook trace contract onto Rust entrypoints and
+owner boundaries before code; `.4.2` through `.4.4` have since added Rust controls, compile/spec-parser/
+staged-dispatch events, and runtime branch/mark/capture events. The active frontier is `TRACE-OBSERVABILITY.4.5`
+for cross-variant trace parity proof and the future-variant checklist.

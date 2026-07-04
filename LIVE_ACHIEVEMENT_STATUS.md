@@ -7,8 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.4.4 — add Rust runtime trace events**
+  (RUST INTERPRETED/GENERATED-PLAN RUNTIME TRACE EVENTS DONE; NEXT FRONTIER TRACE-OBSERVABILITY.4.5).
+
+  **Fix:** Wired Rust traced runtime execution through the shared `linkedspec-core::trace` model without changing
+  default quiet entrypoints. Interpreted traces now report `rust_runtime:engine:*` top-rule, rule entry/exit,
+  recursion-cutoff, child/passive-terminal dispatch, regex match/no-match, acode/bcode dispatch, lifecycle block,
+  statement-form `if`/`switch`, helper `call(child)`, and mark/capture helper events. Generated-plan traces now
+  report `rust_runtime:generated_plan:*` top-rule, family/direct-rule, recursion, child, regex, acode/bcode, and
+  AND-sequence decisions.
+
+  **Verification:** Focused Rust trace controls/runtime tests, source-emitter tests, core trace tests, formatting,
+  mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI gates are part of the `.4.4` commit workflow.
+  A diagnostic full Rust runtime `integration_test` still has the known residual 9 failures and is not the `.4.4`
+  acceptance gate.
+
+  **Frontier:** `TRACE-OBSERVABILITY.4.5` — cross-variant trace parity proof and future-variant checklist.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.4.3 — add Rust compile/spec-parser trace events**
-  (RUST COMPILE/SPEC-PARSER/STAGED-DISPATCH EVENTS DONE; NEXT FRONTIER TRACE-OBSERVABILITY.4.4).
+  (RUST COMPILE/SPEC-PARSER/STAGED-DISPATCH EVENTS DONE; `.4.4` HAS SINCE CLOSED; CURRENT FRONTIER TRACE-OBSERVABILITY.4.5).
 
   **Fix:** Wired the shared Rust trace emitter through core parse, validation, compile, dependency-regex mapping,
   full-spec user-function parsing, and staged parse-job dispatch. Routed debug traces now include
@@ -18,13 +35,14 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Verification:** Focused Rust trace controls, core trace unit tests, and source-emitter tests pass. mdBook,
   Knowledge Map, memory/doctrine, whitespace, and full local CI gates are part of the `.4.3` commit workflow.
-  Rust still does not claim trace parity until `.4.4` runtime branch/mark/capture events and `.4.5` parity proof
-  land.
+  `.4.4` has since added runtime branch/mark/capture events; Rust still does not claim trace parity until `.4.5`
+  parity proof lands.
 
-  **Frontier:** `TRACE-OBSERVABILITY.4.4` — Rust runtime dispatch and branch trace events.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.4.4`; `.4.4` has since closed and current frontier is
+  `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.4.2 — add Rust trace controls**
-  (RUST TRACE CONTROLS/SINKS DONE; `.4.3` HAS SINCE CLOSED; CURRENT FRONTIER TRACE-OBSERVABILITY.4.4).
+  (RUST TRACE CONTROLS/SINKS DONE; `.4.3`/`.4.4` HAVE SINCE CLOSED; CURRENT FRONTIER TRACE-OBSERVABILITY.4.5).
 
   **Fix:** Added the shared Rust trace control layer in `linkedspec-core::trace`: ordered levels and `DUMP_*`
   constants, `TraceConfig`, `TraceSinkMode`, `TraceEmitter`, environment-derived configuration, stdout/routed-file/
@@ -36,14 +54,14 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** `cargo test -p linkedspec-core trace`; `cargo test -p linkedspec-runtime --test trace_controls`;
   `cargo test -p linkedspec-runtime --test source_emitter`; `cargo fmt`; mdBook; Knowledge Map; memory/doctrine;
   whitespace; full local CI. Full local CI includes phase0 at 1021 green. `.4.3` has since added compile/
-  spec-parser/staged-dispatch events; Rust still does not claim trace parity until `.4.4` runtime branch events and
-  `.4.5` parity proof land.
+  spec-parser/staged-dispatch events, and `.4.4` has since added runtime branch/mark/capture events. Rust still does
+  not claim trace parity until `.4.5` parity proof lands.
 
-  **Frontier at completion:** `TRACE-OBSERVABILITY.4.3`; `.4.3` has since closed and current frontier is
-  `TRACE-OBSERVABILITY.4.4`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.4.3`; `.4.3`/`.4.4` have since closed and current frontier is
+  `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.4.1 — map Rust trace parity design**
-  (RUST TRACE PARITY DESIGN INVENTORY DONE; `.4.2`/`.4.3` HAVE SINCE CLOSED; CURRENT FRONTIER TRACE-OBSERVABILITY.4.4).
+  (RUST TRACE PARITY DESIGN INVENTORY DONE; `.4.2`/`.4.3`/`.4.4` HAVE SINCE CLOSED; CURRENT FRONTIER TRACE-OBSERVABILITY.4.5).
 
   **Fix:** Mapped the mdBook trace contract onto Rust's real entrypoints and owner boundaries before code.
   `linkedspec-core` must own or expose the shared Rust trace levels/configuration/sink/event primitives because it
@@ -57,11 +75,11 @@ Current execution status for interruption-safe batch workflow recovery.
   whitespace, and local CI pass. An over-broad `cargo test` attempt failed in existing runtime integration tests
   with no Rust source diff, so `.4.1` uses the repo local CI gate for this docs/design slice.
 
-  **Frontier at completion:** `TRACE-OBSERVABILITY.4.2`; `.4.2`/`.4.3` have since closed and current frontier is
-  `TRACE-OBSERVABILITY.4.4`.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.4.2`; `.4.2`/`.4.3`/`.4.4` have since closed and current frontier is
+  `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.5 — close trace contract and split parity**
-  (TRACE CONTRACT CLOSEOUT DONE; `.4.1`/`.4.2`/`.4.3` HAVE SINCE CLOSED; CURRENT FRONTIER TRACE-OBSERVABILITY.4.4).
+  (TRACE CONTRACT CLOSEOUT DONE; `.4.1`/`.4.2`/`.4.3`/`.4.4` HAVE SINCE CLOSED; CURRENT FRONTIER TRACE-OBSERVABILITY.4.5).
 
   **Fix:** Closed the overall trace no-drift/contract leaf. The mdBook now presents trace as a variant-neutral
   external contract: ordered levels, normal-entrypoint controls, stdout/routed-file/mirror sink behavior, file reset,
@@ -212,7 +230,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `REP_AND_ACODE` and source-locks all four REP template families.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3.4`; `.3.4` has since split, `.3.4.1` through `.3.4.6` have
-  since closed, and current frontier is `TRACE-OBSERVABILITY.4.4`.
+  since closed, and current frontier is `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.2 — trace non-repetition generated dispatch**
   (NON-REP GENERATED HANDLER BRANCH TRACE CLOSED; TRACE-OBSERVABILITY.3.3 HAS SINCE CLOSED).
@@ -228,7 +246,7 @@ Current execution status for interruption-safe batch workflow recovery.
   updated under `.3.3` to expect REP instrumentation. `tools/run_ci_local.sh` passes with phase0 at 1021 green.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3.3`; `.3.3` has since closed, `.3.4` has since split, `.3.4.1`
-  through `.4.1` have since closed, and current frontier is `TRACE-OBSERVABILITY.4.4`.
+  through `.4.1` have since closed, and current frontier is `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3.1 — add generated-handler trace helper seam**
   (HELPER CONTRACT CLOSED; TRACE-OBSERVABILITY.3.2 HAS SINCE CLOSED).
@@ -244,7 +262,7 @@ Current execution status for interruption-safe batch workflow recovery.
   closed non-repetition template wiring.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3.2`; `.3.2` and `.3.3` have since closed, `.3.4` has since
-  split, `.3.4.1` through `.4.1` have since closed, and current frontier is `TRACE-OBSERVABILITY.4.4`.
+  split, `.3.4.1` through `.4.1` have since closed, and current frontier is `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.3 — split trace coverage extension**
   (DOCS-ONLY SPLIT CLOSED; TRACE-OBSERVABILITY.3.1 HAS SINCE CLOSED).
@@ -274,7 +292,7 @@ Current execution status for interruption-safe batch workflow recovery.
   remains `["alpha","beta"]`; full local CI includes phase0 at 1021 green.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.3`; `.3` has since split, `.3.1` through `.3.5` have since
-  closed, and the current frontier is `TRACE-OBSERVABILITY.4.4`.
+  closed, and the current frontier is `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TRACE-OBSERVABILITY.1 — audit trace coverage gaps**
   (READ-ONLY AUDIT CLOSED; TRACE-OBSERVABILITY.2 HAS SINCE CLOSED).
@@ -292,7 +310,7 @@ Current execution status for interruption-safe batch workflow recovery.
   doctrine/memory gates.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.2`; `.2` has since closed, `.3` has since split, `.3.1`
-  through `.4.1` have since closed, and the current frontier is `TRACE-OBSERVABILITY.4.4`.
+  through `.4.1` have since closed, and the current frontier is `TRACE-OBSERVABILITY.4.5`.
 
 - 2026-07-04: **TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values**
   (TOP-RULE-AS-NORMAL TREE CLOSED; FRONTIER AT COMPLETION TRACE-OBSERVABILITY.1, NOW CLOSED).

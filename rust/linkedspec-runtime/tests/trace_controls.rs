@@ -28,6 +28,19 @@ Top::
  /x/ { return(label()) }
 "#;
 
+const RUNTIME_TRACE_SPEC: &str = r#"
+Top::
+ I { mark_input_start("input") }
+ LS { start_capture_slice() }
+ /x/ -> Child
+ LE { push_value(array(results), :retv) }
+ E { return(array(capture_rest_from("input"), array_copy(array(results)))) }
+
+Child::
+ /y/
+ E { return(match_text()) }
+"#;
+
 #[test]
 fn core_traced_entrypoints_match_untraced_outputs_when_quiet() {
     let untraced_spec = parse_spec(SIMPLE_SPEC).expect("parse untraced spec");
@@ -115,11 +128,101 @@ fn traced_entrypoint_validates_route_sink_setup_without_changing_output() {
         path.exists(),
         "routed trace setup should create the log file"
     );
-    assert_eq!(
-        std::fs::read_to_string(&path).expect("read routed trace file"),
-        "",
-        ".4.2 wires controls and sinks; runtime events are owned by .4.4"
-    );
+    let trace = std::fs::read_to_string(&path).expect("read routed trace file");
+    assert!(trace.contains("rust_runtime:engine:execute"), "{trace}");
+    assert!(trace.contains("rust_runtime:engine:top_rule"), "{trace}");
+    assert!(trace.contains("rust_runtime:engine:regex_match"), "{trace}");
+    let _ = std::fs::remove_file(path);
+}
+
+#[test]
+fn engine_runtime_trace_emits_branch_lifecycle_and_mark_capture_events() {
+    let path = temp_trace_path("engine-runtime-events");
+    let compiled = compile_spec(RUNTIME_TRACE_SPEC);
+    let engine = Engine::new(compiled);
+
+    let untraced = engine.execute("xy").expect("execute untraced");
+    let traced = engine
+        .execute_with_trace("xy", trace_config(&path, true))
+        .expect("execute traced");
+
+    assert_eq!(traced, untraced);
+
+    let trace = std::fs::read_to_string(&path).expect("read trace file");
+    for marker in [
+        "rust_runtime:engine:execute",
+        "rust_runtime:engine:rule",
+        "rust_runtime:engine:regex_match",
+        "rust_runtime:engine:acode_dispatch",
+        "rust_runtime:engine:child_dispatch",
+        "rust_runtime:engine:lifecycle_block",
+        "rust_runtime:engine:mark_capture",
+    ] {
+        assert!(
+            trace.contains(marker),
+            "missing {marker} in trace:\n{trace}"
+        );
+    }
+    let _ = std::fs::remove_file(path);
+}
+
+#[test]
+fn generated_runtime_trace_emits_plan_and_branch_events() {
+    let path = temp_trace_path("generated-runtime-events");
+    let compiled = compile_spec(RUNTIME_TRACE_SPEC);
+    let compiled_spec_json =
+        serde_json::to_string(&compiled).expect("serialize compiled spec for generated parser");
+    let generated_rules = [
+        GeneratedRuleSpec {
+            label: "Top",
+            family: classify_generated_rule_family(
+                compiled
+                    .rules
+                    .iter()
+                    .find(|rule| rule.label == "Top")
+                    .expect("Top rule"),
+            ),
+        },
+        GeneratedRuleSpec {
+            label: "Child",
+            family: classify_generated_rule_family(
+                compiled
+                    .rules
+                    .iter()
+                    .find(|rule| rule.label == "Child")
+                    .expect("Child rule"),
+            ),
+        },
+    ];
+
+    let untraced =
+        execute_generated_parser(&compiled_spec_json, &generated_rules, "xy").expect("untraced");
+    let traced = execute_generated_parser_with_trace(
+        &compiled_spec_json,
+        &generated_rules,
+        "xy",
+        trace_config(&path, true),
+    )
+    .expect("traced");
+
+    assert_eq!(traced, untraced);
+
+    let trace = std::fs::read_to_string(&path).expect("read trace file");
+    for marker in [
+        "rust_runtime:generated_plan:execute",
+        "rust_runtime:generated_plan:top_rule",
+        "rust_runtime:generated_plan:family_dispatch",
+        "rust_runtime:generated_plan:regex_match",
+        "rust_runtime:generated_plan:acode_dispatch",
+        "rust_runtime:generated_plan:child_dispatch",
+        "rust_runtime:engine:lifecycle_block",
+        "rust_runtime:engine:mark_capture",
+    ] {
+        assert!(
+            trace.contains(marker),
+            "missing {marker} in trace:\n{trace}"
+        );
+    }
     let _ = std::fs::remove_file(path);
 }
 
@@ -238,9 +341,13 @@ fn staged_dispatch_trace_preserves_queue_results_and_phase_events() {
 }
 
 fn compile_valid_spec() -> linkedspec_core::types::CompiledSpec {
-    let spec = parse_spec(SIMPLE_SPEC).expect("parse simple spec");
-    validate(&spec).expect("validate simple spec");
-    compile(&spec).expect("compile simple spec")
+    compile_spec(SIMPLE_SPEC)
+}
+
+fn compile_spec(source: &str) -> linkedspec_core::types::CompiledSpec {
+    let spec = parse_spec(source).expect("parse spec");
+    validate(&spec).expect("validate spec");
+    compile(&spec).expect("compile spec")
 }
 
 fn trace_config(path: &Path, reset_file: bool) -> TraceConfig {
