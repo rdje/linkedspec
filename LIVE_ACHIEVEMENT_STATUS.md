@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.6.2.3.2 — retire `scalar(...)` and `assign(...)` from authored specs**
+  (TERSE SPEC SURFACE HARD RETIREMENT; PERL/RUST TYPE MEMORY).
+  Authored/current `.spec` files now use `:name` for scalar slots and `LHS = RHS` or `set(...)` for
+  assignment. `scalar(...)` is no longer a supported scalar-slot wrapper in the DSL, and `assign(...)` is no
+  longer an assignment alias; backend Perl built-ins such as `scalar(@...)` remain implementation details.
+
+  **Fix:** Perl lowers `:name` directly and records initialized bare identifier kind from direct assignment,
+  parser-normalized `set(...)`, and aggregate mutation positions, so later bare reads/copies reuse scalar/array/hash
+  kind without wrappers. Rust records the same bare kind in `RuntimeContext`, evaluates bare variables through that
+  remembered kind, and keeps explicit `Expr::ScalarSlot` for `:name`.
+
+  **Verification:** active authored spec/corpus scan for `scalar(` / `assign(` is clean; mdBook scan is clean;
+  phase0 passes with **1020** tests; focused ActionIR parser tests pass; focused Rust core/runtime tests for
+  scalar-slot shorthand and remembered bare kind pass.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.6.2.4` — final shipped-spec terse-surface verification and no-drift inventory.
+
 - 2026-07-03: **SPEC-FORMAT-TERSE.6.2.3.1 — scalar-slot shorthand `:name`**
   (TERSE SCALAR READ/TARGET SYNTAX; PERL/RUST LOCKSTEP).
   LinkedSpec now accepts `:name` as the terse spelling for the scalar slot named `name`. In value positions,

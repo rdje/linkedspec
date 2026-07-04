@@ -448,7 +448,7 @@ sub _lower_block_side_effect_statement {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
- my $ast_assign_lowered = _lower_ast_call_statement($trimmed, 'assign', $deps);
+ my $ast_assign_lowered = _lower_ast_call_statement($trimmed, 'set', $deps);
  return $ast_assign_lowered if defined($ast_assign_lowered) && length($ast_assign_lowered);
 
  my $call = $parse_method_function_expr->($trimmed);
@@ -467,7 +467,7 @@ sub _lower_block_side_effect_statement {
   return $lowered if defined($lowered) && length($lowered);
  }
 
- if ($call && (($call->{method} // '') eq 'assign' || ($call->{method} // '') eq 'set')) {
+ if ($call && (($call->{method} // '') eq 'assign') && $trimmed =~ /^\s*set\s*\(/o) {
   my $args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
   return undef unless $args;
   my $lowered = _lower_assign_statement($args->[0], $args->[1], $deps);
@@ -497,12 +497,12 @@ sub _lower_ast_block_side_effect_statement {
  }
 
  if ($kind eq 'call') {
-  my $method = _actionir_ast_statement_method($node->{name});
+  my $method = _actionir_ast_statement_method($node->{name}, $node->{source});
   return undef if defined($method) && $method eq 'return';
-  if (defined($method) && $method =~ /^(?:assign|set_key|push|push_value|push_nonempty)$/o) {
+  if (defined($method) && $method =~ /^(?:set|set_key|push|push_value|push_nonempty)$/o) {
    my $lowered = _lower_ast_call_statement(
     $node,
-    ['assign', 'set_key', 'push', 'push_value', 'push_nonempty'],
+    ['set', 'set_key', 'push', 'push_value', 'push_nonempty'],
     $deps,
    );
    return $lowered if defined($lowered) && length($lowered);
@@ -682,6 +682,8 @@ sub _actionir_ast_value_source_expr {
   if $kind eq 'boolean';
  return $node->{name}
   if $kind eq 'variable' && defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return ':'.$node->{name}
+  if $kind eq 'scalar_slot' && defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  if ($kind eq 'indexed_var') {
   return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $index = _actionir_ast_value_source_expr($node->{index});
@@ -728,14 +730,15 @@ sub _actionir_ast_value_source_expr {
   return '{'.join(', ', @pairs).'}'
  }
  if ($kind eq 'call') {
-  return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $name = _actionir_ast_parser_normalized_set_call($node) ? 'set' : $node->{name};
+  return undef unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my @args;
   foreach my $arg (@{$node->{args} || []}) {
    my $arg_expr = _actionir_ast_value_source_expr($arg);
    return undef unless defined($arg_expr) && length($arg_expr);
    push @args, $arg_expr;
   }
-  return $node->{name}.'('.join(', ', @args).')'
+  return $name.'('.join(', ', @args).')'
  }
  if ($kind eq 'fluent_chain') {
   my $receiver = _actionir_ast_value_source_expr($node->{receiver});
@@ -767,15 +770,26 @@ sub _actionir_ast_unsupported_helper_expr {
 sub _actionir_ast_retired_wrapper_alias_method {
  my ($method) = @_;
  return undef unless defined($method) && length($method);
- return $method if $method =~ /^(?:s|a|h)$/o;
+ return $method if $method =~ /^(?:a|h)$/o;
  return undef
 }
 
 sub _actionir_ast_statement_method {
- my ($method) = @_;
+ my ($method, $source) = @_;
  return undef unless defined($method) && length($method);
- return 'assign' if $method eq 'set';
+ if ($method eq 'assign') {
+  return undef if defined($source) && $source =~ /^\s*assign\s*\(/o;
+  return 'set';
+ }
  return $method
+}
+
+sub _actionir_ast_parser_normalized_set_call {
+ my ($node) = @_;
+ return 0 unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+ return 0 unless ($node->{name} // '') eq 'assign';
+ my $source = $node->{source} // '';
+ return $source !~ /^\s*assign\s*\(/o ? 1 : 0
 }
 
 sub _actionir_ast_call_arg_sources {
@@ -815,13 +829,13 @@ sub _actionir_ast_known_value_call_method {
   if i when elseif elif else otherwise endif switch case default endcase endswitch while
   or and not eq ne gt ge lt le is_defined is_undefined is_empty is_nonempty
   return return_undef return_array return_a return_m return_ma return_imatch return_im
-  assign set declare declare_s declare_scalar declare_a declare_array declare_h declare_hash
+  set declare declare_s declare_scalar declare_a declare_array declare_h declare_hash
   call push push_value push_nonempty push_back push_front pop_back pop_front set_key print say exit_now exit next
   trim lowercase uppercase length substr replace_substr rm_prefix rm_suffix concat
   str_eq str_ne str_gt str_ge str_lt str_le starts_with ends_with contains_substr matches coalesce coalesce_nonempty
   num_abs num_floor num_ceil num_round num_add num_sub num_mul num_div num_mod num_clamp
   num_min num_max num_eq num_ne num_gt num_ge num_lt num_le num_sum num_avg num_median num_range
-  scalar array hash array_copy hash_copy copy flat flat_array flat_hash
+  array hash array_copy hash_copy copy flat flat_array flat_hash
   count first last drop_front take slice take_last drop_back concat_arrays split split_tagged_records
   sorted reversed contains index_of split_each trim_each filter_nonempty lowercase_each uppercase_each
   uniq filter_match count_keys sorted_keys sorted_values has_key merge_hash rename_key drop_keys pick_keys
@@ -924,6 +938,10 @@ sub _user_function_collect_local_decls_from_node {
   _user_function_record_local_decl($decls, $params, '$', $node->{name});
   return;
  }
+ if ($kind eq 'scalar_slot') {
+  _user_function_record_local_decl($decls, $params, '$', $node->{name});
+  return;
+ }
 
  if ($kind eq 'indexed_var') {
   _user_function_record_local_decl($decls, $params, '%', $node->{name});
@@ -963,7 +981,7 @@ sub _user_function_collect_local_decls_from_node {
  if ($kind eq 'call') {
   my $name = $node->{name} // '';
   my $args = $node->{args} || [];
-  if (($name eq 'assign' || $name eq 'set') && ref($args) eq 'ARRAY' && @$args >= 2) {
+  if ($name eq 'set' && ref($args) eq 'ARRAY' && @$args >= 2) {
    my $target = $args->[0];
    if (ref($target) eq 'HASH') {
     if (($target->{kind} // '') eq 'variable') {
@@ -979,8 +997,6 @@ sub _user_function_collect_local_decls_from_node {
         if $target_name eq 'array';
        _user_function_record_local_decl($decls, $params, '%', $target_arg->{name})
         if $target_name eq 'hash';
-       _user_function_record_local_decl($decls, $params, '$', $target_arg->{name})
-        if $target_name eq 'scalar';
       }
      }
     }
@@ -1097,7 +1113,9 @@ sub _actionir_ast_first_unknown_value_call_name {
  my $kind = $node->{kind} // '';
 
  if ($kind eq 'call') {
-  my $method = _actionir_ast_known_value_call_method($node->{name});
+  my $method = _actionir_ast_parser_normalized_set_call($node)
+   ? 'set'
+   : _actionir_ast_known_value_call_method($node->{name});
   my $definition = _user_function_definition_for_name($deps, $node->{name});
   return $node->{name}
    unless (defined($method) && length($method)) || ref($definition) eq 'HASH';
@@ -1207,7 +1225,7 @@ sub _lower_ast_call_statement {
   : _parse_method_value_ast_expr($expr_or_node, $deps);
  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
 
- my $method = _actionir_ast_statement_method($node->{name});
+ my $method = _actionir_ast_statement_method($node->{name}, $node->{source});
  return undef unless defined($method) && length($method);
  return undef unless _actionir_ast_expected_statement_method($method, $expected_method);
 
@@ -1252,7 +1270,7 @@ sub _lower_ast_call_statement {
   return 'return undef'
  }
 
- if ($method eq 'assign') {
+ if ($method eq 'set') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
   return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
   my $lower_assign_statement = (ref($deps) eq 'HASH' && ref($deps->{lower_assign_statement}) eq 'CODE')
@@ -1425,6 +1443,9 @@ sub _lower_ast_assignment_operator_statement {
   return undef unless defined($source) && length($source);
   my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
   my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
+  my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+   ? $deps->{bare_symbol_kind}
+   : sub { return undef };
 
   my $source_shape_kind = _infer_direct_shape_literal_kind($source, $deps);
   if (defined($source_shape_kind) && $source_shape_kind eq 'array') {
@@ -1436,6 +1457,15 @@ sub _lower_ast_assignment_operator_statement {
    my $source_expr = $lower_declare_initializer_expr->('hash', $source);
    return undef unless defined($source_expr) && length($source_expr);
    return '%'.$target.' = '.$source_expr;
+  }
+  my $remembered_kind = $bare_symbol_kind->($target);
+  if (defined($remembered_kind) && $remembered_kind eq 'array') {
+   my $source_expr = $lower_declare_initializer_expr->('array', $source);
+   return '@'.$target.' = '.$source_expr if defined($source_expr) && length($source_expr);
+  }
+  if (defined($remembered_kind) && $remembered_kind eq 'hash') {
+   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
+   return '%'.$target.' = '.$source_expr if defined($source_expr) && length($source_expr);
   }
 
   my $source_expr = $lower_assignment_source_expr->($source);
@@ -1479,7 +1509,7 @@ sub _is_reserved_actionir_value_symbol {
 
 #------------------------------------------------------------------------------
 # Function: _lower_method_value_expr
-# Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
+# Purpose : Lower method DSL value expressions (`call(...)`, `:name`,
 #           `array(...)`, `input_slice(...)`, `hash_copy(...)`, `merge_hash(...)`, `set_key(...)`,
 #           `rename_key(...)`, `drop_keys(...)`, `pick_keys(...)`, `sorted(...)`, `reversed(...)`, `sorted_keys(...)`, `sorted_values(...)`,
 #           `length(...)`, `substr(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `split(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `drop_front(...)`, `take(...)`, `slice(...)`, `take_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
@@ -1511,6 +1541,15 @@ sub _lower_method_value_expr {
  my $split_top_level_csv = $require_dep->('split_top_level_csv');
  my $lower_array_pipeline_expr = $require_dep->('lower_array_pipeline_expr');
  my $strip_literal_delimiters = $require_dep->('strip_literal_delimiters');
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
+ my $remembered_bare_symbol_kind = sub {
+  my ($candidate_expr) = @_;
+  my $candidate = $trim_action_ir_value->($candidate_expr);
+  return undef unless defined($candidate) && $candidate =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
+  return $bare_symbol_kind->($1)
+ };
  my $array_container_prefix_re = qr/^array\s*\(/;
  my $hash_container_prefix_re = qr/^hash\s*\(/;
  my $array_symbol_expr_re = qr/^(?:array\s*\(\s*\w+\s*\)|\w+)$/;
@@ -1754,7 +1793,12 @@ sub _lower_method_value_expr {
   my $exit_call = $parse_method_function_expr->($exit_trimmed);
   return 0 unless $exit_call;
   my $exit_method = $exit_call->{method} // '';
-  return 1 if $exit_method =~ /^(?:array|array_copy|copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
+  return 1 if $exit_method =~ /^(?:array|array_copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
+  if ($exit_method eq 'copy') {
+   my $copy_args = $normalize_method_args_with_optional_scope->($exit_call->{args} || [], 1, 1);
+   return 0 unless $copy_args;
+   return $looks_like_array_value_expr->($copy_args->[0]) ? 1 : 0;
+  }
 
   if ($exit_method eq 'coalesce') {
    my $exit_args = $normalize_method_args_with_optional_scope->($exit_call->{args} || [], 2, undef);
@@ -1790,6 +1834,10 @@ sub _lower_method_value_expr {
 
   return 1 if $candidate_trimmed =~ $array_container_prefix_re;
 
+  my $remembered_kind = $remembered_bare_symbol_kind->($candidate_trimmed);
+  return 0 if defined($remembered_kind) && $remembered_kind eq 'hash';
+  return 1 if defined($remembered_kind) && $remembered_kind eq 'array';
+
   my $array_symbol = $extract_array_symbol_name->($candidate_trimmed);
   if (defined($array_symbol) && length($array_symbol) && $candidate_trimmed =~ /^\w+$/o) {
    return 1;
@@ -1822,6 +1870,9 @@ sub _lower_method_value_expr {
    return 0 unless $copy_args;
    my $inner = $trim_action_ir_value->($copy_args->[0]);
    return 0 unless defined($inner) && length($inner);
+   my $inner_kind = $remembered_bare_symbol_kind->($inner);
+   return 0 if defined($inner_kind) && $inner_kind eq 'hash';
+   return 1 if defined($inner_kind) && $inner_kind eq 'array';
    my $sym = $extract_array_symbol_name->($inner);
    return 1 if defined($sym) && length($sym) && $inner =~ $array_symbol_expr_re;
    return 0;
@@ -1841,6 +1892,10 @@ sub _lower_method_value_expr {
   }
 
   return 1 if $candidate_trimmed =~ $hash_container_prefix_re;
+
+  my $remembered_kind = $remembered_bare_symbol_kind->($candidate_trimmed);
+  return 0 if defined($remembered_kind) && $remembered_kind eq 'array';
+  return 1 if defined($remembered_kind) && $remembered_kind eq 'hash';
 
   my $hash_symbol = $extract_hash_symbol_name->($candidate_trimmed);
   if (defined($hash_symbol) && length($hash_symbol) && $candidate_trimmed =~ /^\w+$/o) {
@@ -1874,6 +1929,9 @@ sub _lower_method_value_expr {
    return 0 unless $copy_args;
    my $inner = $trim_action_ir_value->($copy_args->[0]);
    return 0 unless defined($inner) && length($inner);
+   my $inner_kind = $remembered_bare_symbol_kind->($inner);
+   return 0 if defined($inner_kind) && $inner_kind eq 'array';
+   return 1 if defined($inner_kind) && $inner_kind eq 'hash';
    my $array_sym = $extract_array_symbol_name->($inner);
    return 0 if defined($array_sym) && length($array_sym) && $inner =~ $array_symbol_expr_re;
    my $hash_sym = $extract_hash_symbol_name->($inner);
@@ -2015,7 +2073,6 @@ sub _lower_method_value_expr {
   num_le           => [2, 2],
  );
  my %ast_aggregate_call_arity = (
-  scalar               => [1, 2],
   array                => [0, undef],
   hash                 => [0, undef],
   array_copy           => [1, 1],
@@ -2327,6 +2384,8 @@ sub _lower_method_value_expr {
    return $scalar_read if defined($scalar_read) && length($scalar_read);
    return $node->{name}
   }
+  return ':'.$node->{name}
+   if $kind eq 'scalar_slot' && defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   if ($kind eq 'assign_scalar') {
    return undef unless defined($node->{name}) && $node->{name} =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    my $value_expr = $ast_expr_source_node->($node->{value});
@@ -2414,10 +2473,11 @@ sub _lower_method_value_expr {
    my $legacy_call = $legacy_method_value_expr->($node->{source});
    return $legacy_call
     if defined($legacy_call) && length($legacy_call) && $legacy_call ne ($node->{source} // '');
-   unless (defined(_actionir_ast_known_value_call_method($node->{name}))) {
-    my $unknown_call = _actionir_ast_unsupported_helper_expr($node->{name});
-    return $unknown_call if defined($unknown_call) && length($unknown_call);
-   }
+	   unless (_actionir_ast_parser_normalized_set_call($node)
+	       || defined(_actionir_ast_known_value_call_method($node->{name}))) {
+	    my $unknown_call = _actionir_ast_unsupported_helper_expr($node->{name});
+	    return $unknown_call if defined($unknown_call) && length($unknown_call);
+	   }
    my $source = $node->{source};
    return $source if defined($source) && length($source);
   }
@@ -2441,7 +2501,8 @@ sub _lower_method_value_expr {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
 
-  my ($target_name, $target_sigil, $value_node);
+	 my ($target_name, $target_sigil, $value_node);
+	 my $explicit_scalar_target = 0;
   my $kind = $node->{kind} // '';
   if ($kind eq 'assign_array_append') {
    my $target = $node->{name};
@@ -2480,27 +2541,24 @@ sub _lower_method_value_expr {
    $value_node = $node->{value};
   } elsif ($kind eq 'call') {
    my $method = $node->{name} // '';
-   return undef unless $method eq '=' || $method eq 'assign';
+   if ($method eq 'assign') {
+    return undef if ($node->{source} // '') =~ /^\s*assign\s*\(/o;
+    $method = 'set';
+   }
+   return undef unless $method eq '=' || $method eq 'set';
    my $args = $node->{args} || [];
    return undef unless ref($args) eq 'ARRAY' && @$args == 2;
    my $target_node = $args->[0];
    $value_node = $args->[1];
 
-   if (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'variable') {
-    $target_name = $target_node->{name};
-    $target_sigil = '$';
-   } elsif (ref($target_node) eq 'HASH'
-       && ($target_node->{kind} // '') eq 'call'
-       && ($target_node->{name} // '') eq 'scalar') {
-    my $target_args = $target_node->{args} || [];
-    if (ref($target_args) eq 'ARRAY'
-     && @$target_args == 1
-     && ref($target_args->[0]) eq 'HASH'
-     && ($target_args->[0]{kind} // '') eq 'variable') {
-     $target_name = $target_args->[0]{name};
-     $target_sigil = '$';
-    }
-   } elsif (ref($target_node) eq 'HASH'
+	  if (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'variable') {
+	   $target_name = $target_node->{name};
+	   $target_sigil = '$';
+	  } elsif (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'scalar_slot') {
+	   $target_name = $target_node->{name};
+	   $target_sigil = '$';
+	   $explicit_scalar_target = 1;
+	  } elsif (ref($target_node) eq 'HASH'
        && ($target_node->{kind} // '') eq 'call'
        && (($target_node->{name} // '') eq 'array' || ($target_node->{name} // '') eq 'hash')) {
     my $target_args = $target_node->{args} || [];
@@ -2542,19 +2600,20 @@ sub _lower_method_value_expr {
     unless defined($source_expr) && length($source_expr);
    return undef unless defined($source_expr) && length($source_expr);
 
-   if ($target_sigil eq '$') {
-    my $value_expr = $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
-    $value_expr = $legacy_method_value_expr->($value_node->{source})
-     unless defined($value_expr) && length($value_expr);
-    $value_expr = $source_expr unless defined($value_expr) && length($value_expr);
-    return undef unless defined($value_expr) && length($value_expr);
-    return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
-     if (($node->{kind} // '') eq 'call')
-     && ref(($node->{args} || [])->[0]) eq 'HASH'
-     && ((($node->{args} || [])->[0]{kind} // '') eq 'call')
-     && (((($node->{args} || [])->[0]{name} // '') eq 'scalar'));
-    $target_sigil = $direct_shape_sigil;
-   }
+	   if ($target_sigil eq '$') {
+	    my $value_expr = $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
+	    $value_expr = $legacy_method_value_expr->($value_node->{source})
+	     unless defined($value_expr) && length($value_expr);
+	    $value_expr = $source_expr unless defined($value_expr) && length($value_expr);
+	    return undef unless defined($value_expr) && length($value_expr);
+	    return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
+	     if $explicit_scalar_target
+	     || ((($node->{kind} // '') eq 'call')
+	      && ref(($node->{args} || [])->[0]) eq 'HASH'
+	      && ((($node->{args} || [])->[0]{kind} // '') eq 'call')
+	      && (((($node->{args} || [])->[0]{name} // '') eq 'scalar')));
+	    $target_sigil = $direct_shape_sigil;
+	   }
 
    my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
    if ($target_sigil eq '@') {
@@ -2758,6 +2817,8 @@ sub _lower_method_value_expr {
    if $kind eq 'variable' && $opts->{variable_source};
   return $opts->{bare_scalar_read} ? _lower_source_slot_bare_scalar_read_expr($node->{name}, $deps) : undef
    if $kind eq 'variable';
+  return _lower_source_slot_bare_scalar_read_expr(':'.$node->{name}, $deps)
+   if $kind eq 'scalar_slot' && defined($node->{name}) && length($node->{name});
   return $lower_ast_scalar_assignment_value_node->($node)
    if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index';
   return $lower_ast_direct_access_node->($node)
@@ -2806,8 +2867,9 @@ sub _lower_method_value_expr {
    my $legacy_call = $legacy_method_value_expr->($node->{source});
    return $legacy_call
     if defined($legacy_call) && length($legacy_call) && $legacy_call ne ($node->{source} // '');
-   return _actionir_ast_unsupported_helper_expr($node->{name})
-    unless defined(_actionir_ast_known_value_call_method($node->{name}));
+	  return _actionir_ast_unsupported_helper_expr($node->{name})
+	   unless _actionir_ast_parser_normalized_set_call($node)
+	       || defined(_actionir_ast_known_value_call_method($node->{name}));
    return undef;
   }
   return undef
@@ -2999,7 +3061,7 @@ sub _lower_method_value_expr {
 
   if (_is_string_receiver_value_chain_method($first_method)) {
    my $current_expr = $receiver_expr;
-   $current_expr = 'scalar('.$current_expr.')'
+   $current_expr = ':'.$current_expr
     if ($receiver->{kind} // '') eq 'variable'
     && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    my $current_family = 'string';
@@ -3044,7 +3106,7 @@ sub _lower_method_value_expr {
 
   if (_is_number_receiver_value_chain_method($first_method)) {
    my $current_expr = $receiver_expr;
-   $current_expr = 'scalar('.$current_expr.')'
+   $current_expr = ':'.$current_expr
     if ($receiver->{kind} // '') eq 'variable'
     && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    my $current_family = 'number';
@@ -3130,6 +3192,8 @@ sub _lower_method_value_expr {
   my $lowered_chain = _lower_method_value_expr($number_receiver_chain, $deps);
   return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
  }
+ my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
+ return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
  return $direct_access if defined($direct_access) && length($direct_access);
  my $shape_literal = $lower_shape_literal_value_expr->($trimmed);
@@ -3214,71 +3278,6 @@ sub _lower_method_value_expr {
   return undef unless $match_map_args;
   return 'do { +{%LMATCH_HASH} }';
  }
- if ($method_call && $method_call->{method} eq 'scalar') {
-  my $scalar_args = $method_call->{args} || [];
-  return undef unless ref($scalar_args) eq 'ARRAY';
-  return undef unless @$scalar_args >= 1 && @$scalar_args <= 2;
-
-  if (@$scalar_args == 1) {
-   my $value = $trim_action_ir_value->($scalar_args->[0]);
-   return undef unless defined($value) && length($value);
-   if ($value =~ /^(\w+)$/o) {
-    return '$'.$1;
-   }
-   my $nested = _lower_method_value_expr($value, $deps);
-   return $nested if defined($nested) && length($nested) && $nested ne $trimmed;
-   return $value;
-  }
-
-  my ($container_expr, $key_expr) = @$scalar_args;
-  my $container_trimmed = $trim_action_ir_value->($container_expr);
-  my $key_trimmed = $trim_action_ir_value->($key_expr);
-  return undef unless defined($container_trimmed) && length($container_trimmed);
-  return undef unless defined($key_trimmed) && length($key_trimmed);
-
-  if ($container_trimmed eq 'IMATCH_LIST' && $key_trimmed =~ /^\d+$/o) {
-   return '$IMATCH_LIST['.$key_trimmed.']';
-  }
-
-  my ($explicit_array_symbol) = $container_trimmed =~ /^array\s*\(\s*(\w+)\s*\)$/o;
-  my ($explicit_hash_symbol) = $container_trimmed =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
-  my $array_symbol = $explicit_array_symbol || $extract_array_symbol_name->($container_trimmed);
-  my $hash_symbol = $explicit_hash_symbol || $extract_hash_symbol_name->($container_trimmed);
-  my $key_lowered = $lower_scalar_access_key_expr->($key_trimmed);
-  return undef unless defined($key_lowered) && length($key_lowered);
-
-  if (defined $explicit_array_symbol) {
-   return '$'.$explicit_array_symbol.'['.$key_lowered.']';
-  }
-  if (defined $explicit_hash_symbol) {
-   return '$'.$explicit_hash_symbol.'{'.$key_lowered.'}';
-  }
-
-  if (defined $array_symbol && defined $hash_symbol) {
-   my $container_kind = $infer_scalar_container_kind->($container_trimmed, $key_trimmed);
-   return '$'.$array_symbol.'['.$key_lowered.']' if $container_kind eq 'array';
-   return '$'.$hash_symbol.'{'.$key_lowered.'}';
-  }
-  if (defined $array_symbol) {
-   return '$'.$array_symbol.'['.$key_lowered.']';
-  }
-  if (defined $hash_symbol) {
-   return '$'.$hash_symbol.'{'.$key_lowered.'}';
-  }
-  if ($looks_like_array_value_expr->($container_trimmed)) {
-   my $lowered_container = _lower_method_value_expr($container_trimmed, $deps);
-   $lowered_container = $container_trimmed unless defined($lowered_container) && length($lowered_container);
-   return undef unless defined($lowered_container) && length($lowered_container);
-   return 'do { my $__ls_scalar_source = '.$lowered_container.'; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq \'ARRAY\') ? $__ls_scalar_source->['.$key_lowered.'] : undef }';
-  }
-  if ($looks_like_hash_value_expr->($container_trimmed)) {
-   my $lowered_container = _lower_method_value_expr($container_trimmed, $deps);
-   $lowered_container = $container_trimmed unless defined($lowered_container) && length($lowered_container);
-   return undef unless defined($lowered_container) && length($lowered_container);
-   return 'do { my $__ls_scalar_source = '.$lowered_container.'; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq \'HASH\') ? $__ls_scalar_source->{'.$key_lowered.'} : undef }';
-  }
- return undef;
-}
  if ($method_call && $method_call->{method} eq 'trim') {
   my $trim_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $trim_args;
@@ -4480,18 +4479,25 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
  return '[@'.$array_symbol.']';
  }
- # SPEC-FORMAT-TERSE.1.4.1 — unified terse `copy(NAME)` that subsumes both `array_copy`
- # and `hash_copy` (ADR 0007). `copy` is NOT a pure rename: it resolves the wrapped symbol
- # kind at lowering time, array first (mirroring `array_copy` -> `[@sym]`) then hash
- # (mirroring `hash_copy` -> `{%sym}`), so `copy(array(x))` == `array_copy(array(x))`
- # (`[@x]`) and `copy(hash(x))` == `hash_copy(hash(x))` (`{%x}`). A bare `copy(x)` resolves to the array form
- # (the array branch claims the `\w+` symbol first), matching bare `array_copy(x)`.
+ # SPEC-FORMAT-TERSE.1.4.1 / .6.2.3.2 — unified terse `copy(NAME)` keeps explicit
+ # `array(NAME)` / `hash(NAME)` meanings and lets initialized bare names use their
+ # remembered kind before the legacy array-first fallback for untyped bare names.
  if ($method_call && $method_call->{method} eq 'copy') {
   my $copy_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $copy_args;
 
   my $container_expr = $trim_action_ir_value->($copy_args->[0]);
   return undef unless defined($container_expr) && length($container_expr);
+
+  my $remembered_kind = $remembered_bare_symbol_kind->($container_expr);
+  if (defined($remembered_kind) && $remembered_kind eq 'hash') {
+   my $hash_symbol = $extract_hash_symbol_name->($container_expr);
+   return '{%'.$hash_symbol.'}' if defined($hash_symbol) && length($hash_symbol);
+  }
+  if (defined($remembered_kind) && $remembered_kind eq 'array') {
+   my $array_symbol = $extract_array_symbol_name->($container_expr);
+   return '[@'.$array_symbol.']' if defined($array_symbol) && length($array_symbol);
+  }
 
   my $array_symbol = $extract_array_symbol_name->($container_expr);
   if (defined($array_symbol) && length($array_symbol) && $container_expr =~ $array_symbol_expr_re) {
@@ -4557,9 +4563,11 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
 #------------------------------------------------------------------------------
 # Function: _lower_source_slot_bare_scalar_read_expr
-# Purpose : Lower one accepted scalar source-slot identifier to `$NAME`.
+# Purpose : Lower one accepted source-slot identifier using initialized bare-name
+#           type memory. `:NAME` always reads the scalar slot; bare `NAME` reads
+#           the remembered array/hash/scalar kind, defaulting to scalar.
 # Args    : ($expr, $deps)
-# Returns : Perl scalar read expression, or undef for non-source-slot bare reads
+# Returns : Perl value expression, or undef for non-source-slot bare reads
 #------------------------------------------------------------------------------
 sub _lower_source_slot_bare_scalar_read_expr {
  my ($expr, $deps) = @_;
@@ -4571,6 +4579,9 @@ sub _lower_source_slot_bare_scalar_read_expr {
   return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -4578,12 +4589,17 @@ sub _lower_source_slot_bare_scalar_read_expr {
  my $name;
  if ($trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
   $name = $1;
+  return undef if $name =~ /^(?:undef|true|false|IMATCH_LIST|IMATCH_HASH|LMATCH_LIST|LMATCH_HASH)$/o;
+  return '$'.$name;
  } elsif ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
   $name = $1;
  } else {
   return undef;
  }
  return undef if $name =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
+ my $kind = $bare_symbol_kind->($name);
+ return '[@'.$name.']' if defined($kind) && $kind eq 'array';
+ return '{%'.$name.'}' if defined($kind) && $kind eq 'hash';
  return '$'.$name
 }
 
@@ -4654,7 +4670,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalar|array|hash|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:array|hash|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
  return $direct;
  }
@@ -4667,7 +4683,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalar|array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;
@@ -4724,7 +4740,7 @@ sub _lower_return_general_statement {
 
 #------------------------------------------------------------------------------
 # Function: _lower_assign_statement
-# Purpose : Lower `assign(target, source)` method helper calls.
+# Purpose : Lower assignment-helper target/source pairs for `set(target, source)`.
 # Args    : ($target, $source, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
@@ -4740,9 +4756,12 @@ sub _lower_assign_statement {
  my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
  my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
- my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
- my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
- my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+	 my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
+	 my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
+	 my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
 
  my $target_trimmed = $trim_action_ir_value->($target);
  if (defined($target_trimmed) && $target_trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
@@ -4752,12 +4771,21 @@ sub _lower_assign_statement {
    return undef unless defined($source_expr) && length($source_expr);
    return "\@$target_trimmed = $source_expr";
   }
-  if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
-   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
-   return undef unless defined($source_expr) && length($source_expr);
-   return "\%$target_trimmed = $source_expr";
+	  if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
+	   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
+	   return undef unless defined($source_expr) && length($source_expr);
+	   return "\%$target_trimmed = $source_expr";
+	  }
+  my $remembered_kind = $bare_symbol_kind->($target_trimmed);
+  if (defined($remembered_kind) && $remembered_kind eq 'array') {
+   my $source_expr = $lower_declare_initializer_expr->('array', $source);
+   return "\@$target_trimmed = $source_expr" if defined($source_expr) && length($source_expr);
   }
- }
+  if (defined($remembered_kind) && $remembered_kind eq 'hash') {
+   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
+   return "\%$target_trimmed = $source_expr" if defined($source_expr) && length($source_expr);
+  }
+	 }
 
  my $symbol = $extract_scalar_symbol_name->($target);
  if (defined $symbol) {
@@ -4786,7 +4814,7 @@ sub _lower_assign_statement {
 #------------------------------------------------------------------------------
 # Function: _lower_scalar_assignment_operator_statement
 # Purpose : Lower the statement form `name = value` to the same scalar mutation
-#           emitted for `assign(name, value)` / `set(name, value)`.
+#           emitted for `set(name, value)`.
 # Args    : ($expr, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
@@ -4800,8 +4828,11 @@ sub _lower_scalar_assignment_operator_statement {
   return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
- my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
- my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
+	 my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
+	 my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -4823,13 +4854,22 @@ sub _lower_scalar_assignment_operator_statement {
   return undef unless defined($source_expr) && length($source_expr);
   return '@'.$target_symbol.' = '.$source_expr;
  }
- if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
+	 if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
+	  my $source_expr = $lower_declare_initializer_expr->('hash', $source);
+	  return undef unless defined($source_expr) && length($source_expr);
+	  return '%'.$target_symbol.' = '.$source_expr;
+	 }
+ my $remembered_kind = $bare_symbol_kind->($target_symbol);
+ if (defined($remembered_kind) && $remembered_kind eq 'array') {
+  my $source_expr = $lower_declare_initializer_expr->('array', $source);
+  return '@'.$target_symbol.' = '.$source_expr if defined($source_expr) && length($source_expr);
+ }
+ if (defined($remembered_kind) && $remembered_kind eq 'hash') {
   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
-  return undef unless defined($source_expr) && length($source_expr);
-  return '%'.$target_symbol.' = '.$source_expr;
+  return '%'.$target_symbol.' = '.$source_expr if defined($source_expr) && length($source_expr);
  }
 
- my $source_expr = $lower_assignment_source_expr->($source);
+	 my $source_expr = $lower_assignment_source_expr->($source);
  return undef unless defined($source_expr) && length($source_expr);
  return '$'.$target_symbol.' = '.$source_expr
 }
@@ -5083,7 +5123,7 @@ sub _normalize_number_receiver_value_chain_expr {
 
  my $current_expr = $receiver_expr;
  if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
-  $current_expr = 'scalar('.$current_expr.')';
+  $current_expr = ':'.$current_expr;
  }
  my $current_family = 'number';
  for (my $idx = 0; $idx < @calls; ++$idx) {
@@ -5155,7 +5195,7 @@ sub _normalize_string_receiver_value_chain_expr {
 
  my $current_expr = $receiver_expr;
  if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
-  $current_expr = 'scalar('.$current_expr.')';
+  $current_expr = ':'.$current_expr;
  }
  my $current_family = 'string';
  for (my $idx = 0; $idx < @calls; ++$idx) {
@@ -5591,7 +5631,7 @@ sub _lower_push_value_statement {
   # SPEC-FORMAT-TERSE.1.3.2 — preserve child-call precedence. `push(Child, target)`
   # and `push(Child, index)` are both all-bare-token forms and continue through the
   # child-call contracts. Explicit value append uses `push(target, "literal")`,
-  # `push(target, scalar(value))`, `push(array(target), value)`, or the old
+  # `push(target, :value)`, `push(array(target), value)`, or the old
   # unambiguous `push_value(target, value)`.
   return undef unless @$raw_args == 2;
   my $first_expr = $trim_action_ir_value->($raw_args->[0]);

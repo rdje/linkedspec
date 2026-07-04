@@ -7,7 +7,7 @@ portmap::
 
 LX {
 	if(num_eq(count(array(portmap)), 1))
-		return(scalar(array(portmap), 0));
+		return(array(portmap).first());
 	else()
 		return(array("?multi:", copy(array(portmap))));
 	endif()

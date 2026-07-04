@@ -1,5 +1,5 @@
 Top::
- /x/ -> Done { name = cat("o", "k"); return(scalar(name)) }
+ /x/ -> Done { name = cat("o", "k"); return(:name) }
 
 Done::
  /[a-z]+/

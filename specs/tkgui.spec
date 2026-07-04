@@ -6,8 +6,8 @@ sub_gui_list::
 
 sub_gui: /(\S+)\s+\{/   /\}/ 	
 I {
- set(scalar(subgui_name), entry_group(0));
- print("Found a SUB GUI entry point <", scalar($subgui_name), ">\n")
+ subgui_name = entry_group(0);
+ print("Found a SUB GUI entry point <", :subgui_name, ">\n")
 }
 
  -> curlyb

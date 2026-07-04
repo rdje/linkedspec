@@ -11,8 +11,8 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Package : LinkedSpec::ActionIR::DeclareMethod
-# Purpose : ActionIR owner for declare/assign helper parsing and lowering plus
+	# Package : LinkedSpec::ActionIR::DeclareMethod
+	# Purpose : ActionIR owner for declare/set helper parsing and lowering plus
 #           the default callback map that exposes those helpers to active
 #           callers.
 #------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ use LinkedSpec::OwnerDispatch ();
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default callback map exported by this owner for active
-#           ActionIR declare/assign lowering callers.
+#           ActionIR declare/set lowering callers.
 # Args    : ($pkg)
 # Returns : hashref dependency map
 #------------------------------------------------------------------------------
@@ -269,8 +269,8 @@ sub _lower_assign_method_statement {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodLowering');
  my $ast_node = LinkedSpec::ActionIR::MethodLowering::_parse_method_value_ast_expr($expr, $deps);
  if (ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') eq 'call') {
-  my $method = LinkedSpec::ActionIR::MethodLowering::_actionir_ast_statement_method($ast_node->{name});
-  if (defined($method) && $method eq 'assign') {
+	  my $method = LinkedSpec::ActionIR::MethodLowering::_actionir_ast_statement_method($ast_node->{name}, $ast_node->{source});
+	  if (defined($method) && $method eq 'set') {
    my @args;
    my $all_args_supported = 1;
    foreach my $arg (@{$ast_node->{args} || []}) {
@@ -291,8 +291,8 @@ sub _lower_assign_method_statement {
   }
  }
 
- my $call = $parse_method_function_expr->($expr);
- return undef unless $call && $call->{method} eq 'assign';
+	 my $call = $parse_method_function_expr->($expr);
+	 return undef unless $call && $call->{method} eq 'assign' && $expr =~ /^\s*set\s*\(/o;
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
  return undef unless $effective_args;

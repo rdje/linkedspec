@@ -89,7 +89,7 @@ sub _unmatched_event_is_statement_level {
  return 1 if $contract_id =~ /^(?:call|return_call|return_general|return|return_array|return_bare|return_undef)$/o;
  return 1 if $contract_id =~ /^(?:declare_typed|declare_alias)$/o;
  return 1 if $contract_id =~ /^(?:push_single_arg|push_indexed_arg|push_target_arg|push_target_indexed_arg|push_scope_target_arg|push_value|push_nonempty)$/o;
- return 1 if $contract_id =~ /^(?:assign_value|assign_call|assign_call_my|assign_match_my|scalar_assignment_operator|array_append_operator|array_end_mutation_method|hash_index_assignment_operator|set_key_statement)$/o;
+ return 1 if $contract_id =~ /^(?:set_value|assign_call|assign_call_my|assign_match_my|scalar_assignment_operator|array_append_operator|array_end_mutation_method|hash_index_assignment_operator|set_key_statement)$/o;
  return 1 if $contract_id eq 'value_drop_statement';
  return 1 if $contract_id =~ /^(?:if_flow|elseif_flow|else_flow|endif_flow|while_flow|switch_flow|case_flow|default_flow|endcase_flow|endswitch_flow)$/o;
  return 1 if $contract_id =~ /^(?:say_stmt|print_stmt|print_each|exit_now|exit_bare|next_stmt|next_bare|regex_subst|regex_subst_assignment)$/o;
@@ -160,19 +160,61 @@ sub _flexible_source_stmt_regex {
  return qr/$pattern/s
 }
 
+sub _source_stmt_span_has_invalid_boundary {
+ my ($text, $source_stmt, $pos, $len) = @_;
+ return 0 unless defined($text) && defined($source_stmt);
+ return 0 unless defined($pos) && $pos >= 0;
+ return 0 unless defined($len) && $len >= 0;
+
+ my $trimmed = $source_stmt;
+ $trimmed =~ s/^\s+//o;
+ $trimmed =~ s/\s+\z//o;
+ return 0 unless length($trimmed);
+
+ if ($trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*/o) {
+  my $leading_ws_len = 0;
+  $leading_ws_len = length($1) if $source_stmt =~ /^(\s+)/o;
+  my $identifier_pos = $pos + $leading_ws_len;
+  if ($identifier_pos > 0) {
+   my $before = substr($text, $identifier_pos - 1, 1);
+   return 1 if defined($before) && $before =~ /[\$\@\%A-Za-z0-9_]/o;
+  }
+ }
+
+ if ($trimmed =~ /[A-Za-z0-9_]\z/o) {
+  my $after_pos = $pos + $len;
+  if ($after_pos < length($text)) {
+   my $after = substr($text, $after_pos, 1);
+   return 1 if defined($after) && $after =~ /[A-Za-z0-9_]/o;
+  }
+ }
+
+ return 0
+}
+
 sub _find_source_stmt_span {
  my ($text, $source_stmt, $start_pos) = @_;
  return (-1, 0) unless defined($text) && defined($source_stmt);
  $start_pos = 0 unless defined($start_pos) && $start_pos >= 0;
 
- my $pos = index($text, $source_stmt, $start_pos);
- return ($pos, length($source_stmt)) if $pos >= 0;
+ my $scan_pos = $start_pos;
+ while (1) {
+  my $pos = index($text, $source_stmt, $scan_pos);
+  last if $pos < 0;
+  my $len = length($source_stmt);
+  return ($pos, $len) unless _source_stmt_span_has_invalid_boundary($text, $source_stmt, $pos, $len);
+  $scan_pos = $pos + 1;
+ }
 
  my $regex = _flexible_source_stmt_regex($source_stmt);
  return (-1, 0) unless $regex;
  my $tail = substr($text, $start_pos);
- return (-1, 0) unless $tail =~ /$regex/;
- return ($start_pos + $-[0], $+[0] - $-[0])
+ while ($tail =~ /$regex/g) {
+  my $pos = $start_pos + $-[0];
+  my $len = $+[0] - $-[0];
+  return ($pos, $len) unless _source_stmt_span_has_invalid_boundary($text, $source_stmt, $pos, $len);
+ }
+ return (-1, 0)
 }
 
 sub default_deps_for_package {

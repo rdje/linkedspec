@@ -66,14 +66,13 @@ items = [value, cat("a", "b")];      # @items = ($value, cat(...))
 meta = { key => value };             # %meta = ($key => $value)
 set(items, []);                      # @items = ()
 set(meta, {});                       # %meta = ()
-set(scalar(payload), [value]);       # $payload = [$value]
 set(:payload, [value]);              # same scalar payload boundary, terser
 ```
 
-The explicit scalar wrapper and scalar-slot shorthand are scalar payload boundaries on both variants:
-`set(scalar(payload), [value])` and `set(:payload, [value])` store the whole array payload in scalar
-`payload`, while `array(payload)` remains a separate working array. In value positions, `:name` reads the
-scalar slot named `name`; `scalar(name)` remains the long compatible spelling.
+The scalar-slot shorthand is the scalar payload boundary on both variants:
+`set(:payload, [value])` stores the whole array payload in scalar `payload`, while
+`array(payload)` remains a separate working array. In value positions, `:name` reads the scalar
+slot named `name`.
 Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`),
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
@@ -101,10 +100,10 @@ dispatch rule.
 ## 1. Declaration Helpers
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a
-> typed wrapper (`scalar(name)` / `array(name)` / `hash(name)`) or the scalar-slot shorthand `:name`
+> typed aggregate wrapper (`array(name)` / `hash(name)`) or the scalar-slot shorthand `:name`
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
-> target of `set(name, …)`, legacy `assign(name, …)`, and the scalar assignment operator `name = value`
+> target of `set(name, …)` and the scalar assignment operator `name = value`
 > for non-shape RHS values; the array/hash target when a bare assignment receives a direct RHS
 > shape (`name = []`, `set(name, [value])`, `name = {}`, `set(name, { key => value })`);
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
@@ -143,12 +142,12 @@ dispatch rule.
 - **Returns**: void
 - **Behavior**: Declares an empty hash/object working variable.
 
-### `assign(name, value)` legacy alias
-- **Signature**: `assign(name: string, value: expr)`
+### `name = value` assignment operator
+- **Signature**: `name = value`
 - **Returns**: In statement position, the stored value is ignored. In value position, it yields the value stored in the target: a scalar for non-shape scalar assignment, an array for direct RHS array-shape assignment, or a hash for direct RHS hash-shape assignment.
-- **Behavior**: Legacy alias for `set(name, value)`. It sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
-- **Edge cases**: Assigning through a typed wrapper fixes the variable's kind from the wrapper. `assign(scalar(name), [value])` and `assign(:name, [value])` store the whole array payload in `$name`; `assign(array(name), [value])` replaces `@name`; `assign(hash(name), { key => value })` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`assign(name, value)` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `assign(name, [value])` assigns `@name`, and `assign(name, { key => value })` assigns `%name`. In scalar assignment source slots, a bare source name or scalar-slot shorthand reads a scalar too: `assign(out, value)` and `assign(out, :value)` are equivalent to `assign(out, scalar(value))`.
-- **Terse spelling**: `set(name, value)` is the canonical helper name, and `name = value` is the operator spelling. In statement position, all three forms lower and run identically for assignment targets; a bare `set` target or operator target auto-exists exactly like legacy `assign`, and a bare scalar source reads the working scalar. In value positions, scalar assignments store and yield the stored scalar, while direct RHS shape assignments store and yield the assigned array/hash value after target-kind inference. `assign` is kept as a deprecated alias during migration. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
+- **Edge cases**: `set(:name, [value])` stores the whole array payload in `$name`; `name = [value]` replaces `@name`; `name = { key => value }` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`name = value` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `name = [value]` assigns `@name`, and `name = { key => value }` assigns `%name`. In scalar assignment source slots, a bare source name or scalar-slot shorthand reads a scalar too: `out = value` and `out = :value` are equivalent.
+- **Terse spelling**: `name = value` is the preferred operator spelling, and `set(name, value)` remains the helper spelling. In value positions, scalar assignments store and yield the stored scalar, while direct RHS shape assignments store and yield the assigned array/hash value after target-kind inference. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
 
@@ -183,20 +182,20 @@ dispatch rule.
 > definedness predicates (`is_defined`, `is_undefined`) are **condition-only** — use them
 > inside an `if (...)` test in an `I { ... }` block (shown below), not inside `return(...)`.
 
-### `scalar(container, key)`
-- **Signature**: `scalar(container: array|hash, key: int|string)`
+### `container[key]`
+- **Signature**: `container: array|hash[key: int|string]`
 - **Returns**: scalar or undef
 - **Behavior**: Reads a single value from an array (by 0-based index) or hash (by string key).
 - **Edge cases**: Returns `undef` if the key does not exist or container is not array/hash.
-- **Example**: over `/(\w+),(\w+),(\w+)/`, `scalar(array(entry_group(0), entry_group(1), entry_group(2)), 1)` on `a,b,c` → `["b"]`.
+- **Example**: over `/(\w+),(\w+),(\w+)/`, `array(entry_group(0), entry_group(1), entry_group(2))[1]` on `a,b,c` → `["b"]`.
 
 ### Direct nested access: `base["key"][index]`
 - **Signature**: `base[path_segment...]`, where `base` is a working scalar containing an array/hash payload.
 - **Returns**: scalar or undef
 - **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload. Quoted string
   segments such as `["children"]` or `['children']` are hash keys. Numeric segments and explicit helper/value
-  expressions such as `[0]` or `[scalar(i)]` are array indexes. A non-reserved bare path atom such as `[i]`
-  is also a scalar array-index read, equivalent to `[scalar(i)]`.
+  expressions such as `[0]` or `[i]` are array indexes. A non-reserved bare path atom such as `[i]`
+  is also a scalar array-index read, equivalent to `[i]`.
 - **Edge cases**: Returns `undef` when a segment does not exist or the current value has the wrong container
   kind. Primitive literals and engine locals such as `[true]` or `[CAPTURE]` are not claimed as scalar path
   variables.
@@ -234,7 +233,7 @@ dispatch rule.
 - **Returns**: scalar
 - **Behavior**: Returns the first argument that is defined (not undef). Evaluates left-to-right, short-circuiting.
 - **Edge cases**: Returns `undef` if all arguments are undef.
-- **Example**: over `/(\w+)/`, `coalesce(scalar(array(entry_group(0)), 5), "fallback")` on `hi` → `["fallback"]` (the index-5 read is out of range, so the literal default is used).
+- **Example**: over `/(\w+)/`, `coalesce(array(entry_group(0))[5], "fallback")` on `hi` → `["fallback"]` (the index-5 read is out of range, so the literal default is used).
 
 ### `coalesce_nonempty(a, b, ...)`
 - **Signature**: `coalesce_nonempty(values: scalar...)`
@@ -264,7 +263,7 @@ dispatch rule.
 - **Returns**: boolean
 - **Behavior**: Returns true if the value is undef. Logical inverse of `is_defined`.
 - **Usage**: condition-only, like `is_defined` (use inside `if (...)`).
-- **Example**: over `/(\w+)/`, `if (is_undefined(scalar(array(entry_group(0)), 9))) { return("missing") } else { return("present") }` on `hi` → `["missing"]` (index 9 is out of range, so the read is undef).
+- **Example**: over `/(\w+)/`, `if (is_undefined(array(entry_group(0))[9])) { return("missing") } else { return("present") }` on `hi` → `["missing"]` (index 9 is out of range, so the read is undef).
 
 ### `trim(s)`
 - **Signature**: `trim(value: scalar)`
@@ -351,23 +350,23 @@ dispatch rule.
   to `0`; negative or non-integer `length` is normalized to `0`.
 - **Example**: over `/(\S+)/`, `substr(entry_group(0), 1, 3)` on `abcdef` → `["bcd"]`.
 
-### `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)`
-- **Signature**: `substr(scalar(target), pattern: regex-or-scalar, replacement: scalar, flags: scalar)` or
-  `regex_subst(scalar(target), pattern, replacement, flags)`
+### `substr(:target, pattern, replacement, flags)` / `regex_subst(...)`
+- **Signature**: `substr(:target, pattern: regex-or-scalar, replacement: scalar, flags: scalar)` or
+  `regex_subst(:target, pattern, replacement, flags)`
 - **Returns**: no value; mutates the named scalar target.
 - **Behavior**: Applies regex substitution to the current scalar target value. `g` performs global replacement;
   `i`, `m`, `s`, and `x` are regex flags; `o` is accepted as a compatibility no-op. Replacement strings can use
   capture references such as `$1`.
 - **Boundary**: This is the legacy statement-style mutation form used by shipped specs. It is intentionally
   separate from pure `substr(value, start, length?)` character slicing and from literal `replace_substr(...)`.
-- **Example**: `substr(scalar(value), "\"|\\s", "", go)` removes quotes and whitespace from `value` in place.
+- **Example**: `substr(:value, "\"|\\s", "", go)` removes quotes and whitespace from `value` in place.
 
 ### String receiver-dot value chains
 - **Signature**: `string_expr.method(args...).next(args...)`
 - **Returns**: the documented return value of the final helper in the chain.
 - **Behavior**: A compatible string receiver feeds into the first pure string helper, and each helper's return
   value feeds the next compatible helper. A bare receiver such as `raw.trim()` reads the scalar working
-  variable `raw`; an explicit receiver such as `scalar(raw).trim()` has the same value. String literals may
+  variable `raw`; an explicit receiver such as `:raw.trim()` has the same value. String literals may
   be receivers too: `"abcdef".substr(1, 3).uppercase()` is equivalent to
   `uppercase(substr("abcdef", 1, 3))`.
 - **Allowed string-returning links**: `trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`,
@@ -423,14 +422,14 @@ dispatch rule.
 - **Signature**: `push(target: array, value: expr)`
 - **Returns**: void
 - **Behavior**: Terse explicit-value append. Lowers identically to `push_value(target, value)` for unambiguous value expressions.
-- **Examples**: `push(items, "a")`, `push(items, scalar(value))`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
-- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable by bare name, use the operator form `items += value`; `push_value(items, scalar(value))` remains explicit and unambiguous.
+- **Examples**: `push(items, "a")`, `push(items, :value)`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
+- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable by bare name, use the operator form `items += value`; `push_value(items, :value)` remains explicit and unambiguous.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
 - **Returns**: updated array snapshot in value positions; side-effect-only behavior when used as a statement.
 - **Behavior**: Array append operator. Lowers/runs identically to explicit append forms, mutates the named working array, and reads a bare RHS identifier as a scalar working variable. In value positions it evaluates to the updated array snapshot after the push.
-- **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += scalar(value)`, `items += value`.
+- **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += :value`, `items += value`.
 - **Edge cases**: The target is still an array working variable and auto-exists as `@target`. A bare RHS such as `items += value` reads `$value`; reserved literals such as `true`, `false`, and `undef` keep their literal meaning.
 
 ### `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()`
@@ -581,7 +580,7 @@ dispatch rule.
   override earlier keys.
 - **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
   compatible array receiver helpers. `count_keys` and `has_key` return number and boolean terminal values.
-  Field reads from a named working hash use `scalar(hash(name), key)` after storing expression receivers in a
+  Field reads from a named working hash use `hash(name).pick_keys(key).sorted_values().first()` after storing expression receivers in a
   named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref payloads, not working-hash
   value reads.
 - **Boundary**: `set_key(name, key, value)` and `name[key] = value` mutate the named working hash; hash-index
@@ -623,8 +622,8 @@ dispatch rule.
 - **Returns**: array
 - **Behavior**: Splits a string on the delimiter, returning an array of substrings.
 
-### `split(array(target), scalar(source), delimiter)`
-- **Signature**: `split(array(target), scalar(source), delimiter: regex-or-scalar)`
+### `split(array(target), :source, delimiter)`
+- **Signature**: `split(array(target), :source, delimiter: regex-or-scalar)`
 - **Returns**: no value; mutates the named array target.
 - **Behavior**: Splits `source` on `delimiter` and replaces `target` with the resulting list. Regex delimiters
   split by regex match; scalar delimiters split literally.
@@ -716,7 +715,7 @@ dispatch rule.
 - **Signature**: `target[key_expr] = value_expr`
 - **Returns**: updated hash snapshot in value positions; side-effect-only behavior when used as a statement.
 - **Behavior**: Hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions, and evaluates to the updated hash snapshot when used as a value.
-- **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = scalar(kind)`, `meta[scalar(field_name)] = scalar(field_value)`, `meta[field_name] = field_value`.
+- **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = :kind`, `meta[field_name] = :field_value`, `meta[field_name] = field_value`.
 - **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key/RHS identifiers read scalar working variables in this mutation slot. Receiver-dot `meta.set_key(key, value)` remains pure copy-valued composition; use `meta[key] = value` when you want mutation.
 
 ### `rename_key(h, old, new)`
@@ -971,7 +970,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: `return(value: expr)`
 - **Returns**: the supplied value through the active return channel.
 - **Behavior**: As a top-level action or lifecycle statement, writes the surrounding rule/action return channel. Inside an expression-valued block, it is block-local: it yields that block's value and skips later statements in the block.
-- **Edge cases**: `return(array(...))` returns an array value. `return(:count)` and `return(scalar(count))` return the scalar slot `count`. A bare scalar source such as `return(count)` also reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`. A final non-`return(...)` statement in a lifecycle block is evaluated as a statement and is not an implicit rule return.
+- **Edge cases**: `return(array(...))` returns an array value. `return(:count)` and `return(:count)` return the scalar slot `count`. A bare scalar source such as `return(count)` also reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`. A final non-`return(...)` statement in a lifecycle block is evaluated as a statement and is not an implicit rule return.
 
 ### `return_undef()`
 - **Signature**: `return_undef()`
@@ -1285,8 +1284,8 @@ unlike the Retired table below):
 
 | Canonical (terse) | Deprecated alias | Notes |
 |---|---|---|
-| `set(target, value)` | `assign(target, value)` | scalar / array / hash assignment. Scalar non-shape assignments and direct RHS shape assignments yield the stored value in value positions; a bare direct shape target infers array/hash kind. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
-| `name = value` / `=(name, value)` | `set(name, value)` / `assign(name, value)` | assignment expression/operator spelling. It stores the target and yields the stored scalar or direct-shape aggregate value in value positions. |
+| `set(target, value)` | `target = value` | scalar / array / hash assignment. Scalar non-shape assignments and direct RHS shape assignments yield the stored value in value positions; a bare direct shape target infers array/hash kind. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
+| `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored scalar or direct-shape aggregate value in value positions. |
 | `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
@@ -1299,7 +1298,7 @@ path helper spelling. Quoted segments are hash keys, and bare path atoms such as
 variables as array indexes.
 
 The helper aliases above lower identically within their supported statement/helper families. Assignment forms
-(`set(...)`, `assign(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the
+(`set(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the
 target is scalar or when a direct RHS shape literal infers an array/hash target. Mutation assignment operators also
 compose as value expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the
 updated hash snapshot. Array end mutations remain statement-only.
@@ -1311,7 +1310,7 @@ The following are retired and must not be used in new `.spec` authoring. Backend
 
 | Retired | Use Instead |
 |---|---|
-| `s(...)` | `scalar(...)` |
+| `s(...)` | `...` |
 | `a(...)` | `array(...)` |
 | `h(...)` | `hash(...)` |
 | `array_values(...)` | `array_copy(...)` |

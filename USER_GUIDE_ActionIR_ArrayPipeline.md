@@ -31,8 +31,8 @@ Use `split(...)` to populate an array from a scalar source string.
 Examples:
 
 ```text
-split(array(parts), scalar(text), /\s*,\s*/)
-split(array(tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/)
+split(array(parts), :text, /\s*,\s*/)
+split(array(tokens), :subprogram_statement_part, /((?:\s*--.*\s*)+|\s*;\s*)/)
 ```
 
 If you omit the delimiter, the default is a comma-ish splitter.
@@ -78,7 +78,7 @@ filter_nonempty(array(parts))
 Common companion pattern:
 
 ```text
-split(array(parts), scalar(text), /,/);
+split(array(parts), :text, /,/);
 trim_each(array(parts));
 filter_nonempty(array(parts))
 ```
@@ -132,11 +132,11 @@ Example:
 
 ```text
 return(split_tagged_records(
-  scalar(identifier_list),
+  :identifier_list,
   /\s*,\s*/o,
   "?constant_declaration:",
-  scalar(subtype_indication),
-  scalar(expression)
+  :subtype_indication,
+  :expression
 ))
 ```
 
@@ -148,14 +148,14 @@ You can apply these helpers in chained form.
 Example:
 
 ```text
-I.split(array(parts), scalar(text), /,/).trim_each(array(parts)).filter_nonempty(array(parts))
+I.split(array(parts), :text, /,/).trim_each(array(parts)).filter_nonempty(array(parts))
 ```
 
 ## Method-like DSL equivalence note
 The representative normalization pipeline below is now part of the explicit method-like DSL support contract on both action-edge and lifecycle surfaces:
 
 ```text
-split(array(parts), scalar(args), /,\s*/)
+split(array(parts), :args, /,\s*/)
 split_each(array(parts), /:/)
 trim_each(array(parts))
 filter_nonempty(array(parts))
@@ -169,8 +169,8 @@ Worked fluent action-edge example:
 ```text
 /a/ -> Top .declare(array, parts)
            .declare(scalar, args)
-           .assign(scalar(args), "left:1, right:2")
-           .split(array(parts), scalar(args), /,\s*/)
+           .set(:args, "left:1, right:2")
+           .split(array(parts), :args, /,\s*/)
            .split_each(array(parts), /:/)
            .trim_each(array(parts))
            .filter_nonempty(array(parts))
@@ -183,8 +183,8 @@ Equivalent structured action-edge example:
 /a/ -> Top {
   declare(array, parts)
   declare(scalar, args)
-  assign(scalar(args), "left:1, right:2")
-  split(array(parts), scalar(args), /,\s*/)
+  args = "left:1, right:2"
+  split(array(parts), :args, /,\s*/)
   split_each(array(parts), /:/)
   trim_each(array(parts))
   filter_nonempty(array(parts))
@@ -198,8 +198,8 @@ Equivalent lifecycle example:
 LX {
   declare(array, parts)
   declare(scalar, args)
-  assign(scalar(args), "left:1, right:2")
-  split(array(parts), scalar(args), /,\s*/)
+  args = "left:1, right:2"
+  split(array(parts), :args, /,\s*/)
   split_each(array(parts), /:/)
   trim_each(array(parts))
   filter_nonempty(array(parts))
@@ -218,7 +218,7 @@ Read that pipeline in order:
 The representative case-normalization/filter pipeline below is also part of the explicit method-like DSL support contract on both action-edge and lifecycle surfaces:
 
 ```text
-assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+parts = filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)
 lowercase_each(array(parts))
 return(array_copy(array(parts)))
 ```
@@ -229,7 +229,7 @@ Worked fluent action-edge example:
 
 ```text
 /a/ -> Top .declare(array, parts)
-           .assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+           .set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
            .lowercase_each(array(parts))
            .return(array_copy(array(parts)))
 ```
@@ -239,7 +239,7 @@ Equivalent structured action-edge example:
 ```text
 /a/ -> Top {
   declare(array, parts)
-  assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+  parts = filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)
   lowercase_each(array(parts))
   return(array_copy(array(parts)))
 }
@@ -250,7 +250,7 @@ Equivalent lifecycle example:
 ```text
 LX {
   declare(array, parts)
-  assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+  parts = filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)
   lowercase_each(array(parts))
   return(array_copy(array(parts)))
 }
@@ -278,7 +278,7 @@ This is useful when the logical pipeline reads better as a nested value.
 ### Example: canonical token cleanup pipeline
 
 ```text
-split(array(parts), scalar(text), /,/);
+split(array(parts), :text, /,/);
 trim_each(array(parts));
 filter_nonempty(array(parts));
 uniq(array(parts))
@@ -293,8 +293,8 @@ Meaning:
 ### Example: `vhdl::subprogram_body` style tokenization
 
 ```text
-assign(scalar(subprogram_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
-split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/);
+subprogram_statement_part = substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH);
+split(array(subprogram_statement_tokens), :subprogram_statement_part, /((?:\s*--.*\s*)+|\s*;\s*)/);
 split_each(array(subprogram_statement_tokens), /^(\s+)/);
 filter_nonempty(array(subprogram_statement_tokens));
 return(array("?subprogram_body:", flat_array(IMATCH_LIST), array_copy(array(subprogram_statement_tokens))))

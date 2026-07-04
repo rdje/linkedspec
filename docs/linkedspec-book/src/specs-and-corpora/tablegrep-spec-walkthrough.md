@@ -63,7 +63,7 @@ Invalid inputs produce error messages and non-zero exit codes: two consecutive o
 
 All five rules share the `I`/`LS`/`LE`/`LX` lifecycle pattern. Each rule:
 
-- `I { ... }` — declares `array(internal)` for accumulating child results and `scalar(prev_node_type)` for operator adjacency checking.
+- `I { ... }` — declares `array(internal)` for accumulating child results and `:prev_node_type` for operator adjacency checking.
 - `LS { declare(scalar, retv) }` — declares a per-match return-value scalar.
 - `LE { ... }` — checks for undefined child results (skip), validates that two operators are never adjacent (exit code 1 on error), pushes the child result onto the internal array, and records the node type.
 - `LX { ... }` — on rule exit: returns `undef` if the internal array is empty, otherwise returns a copy of the accumulated array.
@@ -72,9 +72,9 @@ All five rules share the `I`/`LS`/`LE`/`LX` lifecycle pattern. Each rule:
 
 **Operator precedence through rule ordering.** The entry rule lists alternatives in order: `re_term`, `or_op`, `and_op`, `group`. But the parser always tries all alternatives at each position. The ordering expresses intent rather than enforcing precedence at the grammar level.
 
-**Error detection in lifecycle hooks.** The `LE` hook checks `scalar(prev_node_type)` — set on the previous match — to detect consecutive operators. This is validation logic embedded in the parser, not in post-processing.
+**Error detection in lifecycle hooks.** The `LE` hook checks `:prev_node_type` — set on the previous match — to detect consecutive operators. This is validation logic embedded in the parser, not in post-processing.
 
-**`re_term` conditional logic.** The `re_term` rule uses `if/else` to distinguish field-subscript terms (`[0] !=~ /foo/`) from named-field terms. The subscript form extracts the index via `substr(scalar(subscript), /^\[(\d+)\]$/, "$1", o)` and labels the node `STERM`.
+**`re_term` conditional logic.** The `re_term` rule uses `if/else` to distinguish field-subscript terms (`[0] !=~ /foo/`) from named-field terms. The subscript form extracts the index via `substr(:subscript, /^\[(\d+)\]$/, "$1", o)` and labels the node `STERM`.
 
 **`I.return(...)` shorthand.** The `or_op` and `and_op` rules use the compact `I.return(...)` form — declare nothing in `I`, return immediately. This is a LinkedSpec idiom for leaf rules that produce constant-shaped output.
 

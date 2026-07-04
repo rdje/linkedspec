@@ -15,18 +15,18 @@ current_object_name = undef
 }
 LX  {
  if(is_nonempty(array(capt)));
-  set(scalar(first_capt), scalar(array(capt), 0));
+  first_capt = array(capt).first();
   if(str_eq(first_capt[0], "?branch:"));
-   set(scalar(entry_tag), "?branch_entry:");
+   entry_tag = "?branch_entry:";
   else();
-   set(scalar(entry_tag), "?version_entry:");
+   entry_tag = "?version_entry:";
   endif();
-  push(array(object_hier), array(scalar(entry_tag), copy(array(capt))));
+  push(array(object_hier), array(:entry_tag, copy(array(capt))));
  endif();
 
  if(is_nonempty(array(object_hier)));
-  set(scalar(current_object_name), cur_object[1]);
-  push(array(vhistory), array("?object:", scalar(current_object_name), copy(array(object_hier))));
+  current_object_name = cur_object[1];
+  push(array(vhistory), array("?object:", :current_object_name, copy(array(object_hier))));
  endif();
 
  return(array("?ds_vhistory:", copy(array(vhistory))))
@@ -34,37 +34,37 @@ LX  {
 
 -> object             {
   if(is_nonempty(array(capt)));
-   set(scalar(first_capt), scalar(array(capt), 0));
+   first_capt = array(capt).first();
    if(str_eq(first_capt[0], "?branch:"));
-    set(scalar(entry_tag), "?branch_entry:");
+    entry_tag = "?branch_entry:";
    else();
-    set(scalar(entry_tag), "?version_entry:");
+    entry_tag = "?version_entry:";
    endif();
-   push(array(object_hier), array(scalar(entry_tag), copy(array(capt))));
+   push(array(object_hier), array(:entry_tag, copy(array(capt))));
    set(array(capt), array());
 
   endif();
 
   if(is_nonempty(array(object_hier)));
-   set(scalar(current_object_name), cur_object[1]);
-   push(array(vhistory), array("?object:", scalar(current_object_name), copy(array(object_hier))));
+   current_object_name = cur_object[1];
+   push(array(vhistory), array("?object:", :current_object_name, copy(array(object_hier))));
    set(array(object_hier), array());
   endif();
 
-  set(scalar(cur_object), call(object));
+  cur_object = call(object);
   print("\tObject   ", cur_object[1], "\n")
 }
 
 
 -> separator          {
   if(is_nonempty(array(capt)));
-   set(scalar(first_capt), scalar(array(capt), 0));
+   first_capt = array(capt).first();
    if(str_eq(first_capt[0], "?branch:"));
-    set(scalar(entry_tag), "?branch_entry:");
+    entry_tag = "?branch_entry:";
    else();
-    set(scalar(entry_tag), "?version_entry:");
+    entry_tag = "?version_entry:";
    endif();
-   push(array(object_hier), array(scalar(entry_tag), copy(array(capt))));
+   push(array(object_hier), array(:entry_tag, copy(array(capt))));
    set(array(capt), array());
   endif();
 }

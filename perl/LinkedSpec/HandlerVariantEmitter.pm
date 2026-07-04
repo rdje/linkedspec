@@ -636,7 +636,7 @@ sub _emit_and_acode_seq_handler {
     my $lecode      = $ir->{lecode} || '';
     my $acode_count = $ir->{acode_count};
     # Edge acodes are emitted verbatim: they are already lowered (e.g.
-    # return(array(...)) -> `return [...]`, assign(...) -> an in-place mutation). A
+    # return(array(...)) -> `return [...]`, assignment helpers -> in-place mutation). A
     # `return` edge then surfaces the author payload directly — from the whole
     # handler in a direct AND, or from the per-iteration coderef in a REP-AND
     # (`:AND+`, where _emit_rep_and_acode_handler wraps this body in `sub { ... }`),

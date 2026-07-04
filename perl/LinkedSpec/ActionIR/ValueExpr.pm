@@ -110,7 +110,6 @@ sub _extract_scalar_symbol_name {
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
- return $1 if $token =~ /^scalar\s*\(\s*(\w+)\s*\)$/o;
  return $1 if $token =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
  return $1 if $token =~ /^(\w+)$/o;
  return undef
@@ -361,7 +360,7 @@ sub _lower_nested_access_segment_expr {
 
 #------------------------------------------------------------------------------
 # Function: _lower_direct_nested_access_value_expr
-# Purpose : Lower direct bracket access such as `foo["a"][0][scalar(i)]`.
+# Purpose : Lower direct bracket access such as `foo["a"][0][i]`.
 # Args    : ($expr, $deps)
 # Returns : Perl dereference expression string or undef
 #------------------------------------------------------------------------------
@@ -413,7 +412,7 @@ sub _lower_direct_nested_access_value_expr {
 
 #------------------------------------------------------------------------------
 # Function: _infer_scalar_container_kind
-# Purpose : Infer whether `scalar(container, key)` should resolve through array
+# Purpose : Infer whether a nested scalar access should resolve through array
 #           index or hash key syntax when container kind is not explicit.
 # Args    : ($container_symbol, $key_expr, $deps)
 # Returns : 'array' or 'hash'

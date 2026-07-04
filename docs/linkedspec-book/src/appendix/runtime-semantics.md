@@ -215,30 +215,30 @@ unambiguous:
 ```text
 Foo::
  I {declare(array, results)}
- -> Bar {push_value(array(results), scalar(retv))}
+ -> Bar {push_value(array(results), :retv)}
 E {return(array_copy(array(results)))}
 ```
 
 ```text
 Foo::
- -> Bar {push(results, scalar(retv))}
+ -> Bar {push(results, :retv)}
 E {return(array_copy(array(results)))}
 ```
 
 All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
 is the target accumulator. To append a working-variable value, write
-`items += value`, `push(results, scalar(value))`, or `push_value(results, scalar(value))`.
+`items += value`, `push(results, :value)`, or `push_value(results, :value)`.
 Bare scalar reads are currently supported in return and assignment-like source slots such as
 `return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
 `items += value`, and in direct-access path atoms such as `payload["children"][index]`.
-Use `:value` when the source should be visibly scalar without the long `scalar(value)` wrapper.
+Use `:value` when the source should be visibly scalar without the long `:value` wrapper.
 
 Assignment also has a value form. `name = "ok"` and `=(name, "ok")` store the scalar and evaluate to the stored
 value, so they can appear inside `return(...)`, helper arguments, expression-valued blocks, user-function bodies,
 and compatible scalar receiver chains such as `=(raw, " text ").trim()`. Direct shape RHS assignments participate
 in the same value contract after target-kind inference: `items = [value]`, `set(items, [value])`, and
 `=(items, [value])` store `items` as an array and evaluate to the assigned array value; `meta = { key => value }`
-stores `meta` as a hash and evaluates to the assigned hash value. Explicit `scalar(payload)` and `:payload`
+stores `meta` as a hash and evaluates to the assigned hash value. Explicit `:payload` and `:payload`
 targets keep scalar-held shape payloads. Mutation assignments also have expression values: `items += value` appends to the
 named array and evaluates to the updated array snapshot, while `meta[key] = value` updates the named hash and
 evaluates to the updated hash snapshot.

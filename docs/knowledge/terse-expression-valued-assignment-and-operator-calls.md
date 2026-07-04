@@ -11,10 +11,10 @@ answers:
   - "what is the next assignment expression leaf after SPEC-FORMAT-TERSE.3.3"
   - "which assignment expression leaves are implemented after SPEC-FORMAT-TERSE.3.3.3"
   - "is SPEC-FORMAT-TERSE.3.3.4 done"
-date: 2026-07-02
+date: 2026-07-04
 status: current
 tags: [spec-format-terse, operators, assignment, expressions, comparisons, task-tree]
-evidence: "User clarification on 2026-07-01 accepted the uniform operator-call doctrine: comparison operators should be captured as ordinary call/method spellings such as gt(a,b), >=(a,b), ne(a,b), and !=(a,b). The same clarification states that assign(a,b) is replaced by a = b, that =(a,b) is equivalent to a = b, and that assignment is an expression with a value. SPEC-FORMAT-TERSE.3.2.3.4 landed comparison symbol calls on 2026-07-02. SPEC-FORMAT-TERSE.3.3 audited assignment before code and split implementation into .3.3.1 scalar expression values, .3.3.2 aggregate target-kind expression values, .3.3.3 append/hash-index mutation expression values, and .3.3.4 compatibility/docs/oracle closure. SPEC-FORMAT-TERSE.3.3.1 ships the scalar subset; SPEC-FORMAT-TERSE.3.3.2 ships direct RHS shape assignment expression values; SPEC-FORMAT-TERSE.3.3.3 ships append and hash-index mutation expression values; SPEC-FORMAT-TERSE.3.3.4 closes the parent contract and keeps assign(...) as a legacy alias only. See [[terse-assignment-expression-closure]]."
+evidence: "User clarification on 2026-07-01 accepted the uniform operator-call doctrine: comparison operators should be captured as ordinary call/method spellings such as gt(a,b), >=(a,b), ne(a,b), and !=(a,b). The same clarification states that assign(a,b) is replaced by a = b, that =(a,b) is equivalent to a = b, and that assignment is an expression with a value. SPEC-FORMAT-TERSE.3.2.3.4 landed comparison symbol calls on 2026-07-02. SPEC-FORMAT-TERSE.3.3 audited assignment before code and split implementation into .3.3.1 scalar expression values, .3.3.2 aggregate target-kind expression values, .3.3.3 append/hash-index mutation expression values, and .3.3.4 compatibility/docs/oracle closure. SPEC-FORMAT-TERSE.3.3.4 temporarily kept assign(...) as a legacy alias only; SPEC-FORMAT-TERSE.6.2.3.2 later retired authored spec-file assign(...). Current syntax is target = value, =(target,value), or set(target,value). See [[terse-assignment-expression-closure]] and [[terse-retired-scalar-assign-spec-surface]]."
 reverify: "rg -n \"SPEC-FORMAT-TERSE\\.3\\.3|SPEC-FORMAT-TERSE\\.3\\.3\\.1|=\\(target, value\\)|statement-only|expression-valued assignment\" docs/tasks/SPEC-FORMAT-TERSE.md docs/TASK_TREE.md docs/knowledge/terse-expression-valued-assignment-and-operator-calls.md docs/linkedspec-book/src/appendix/helper-contract-catalog.md"
 ---
 
@@ -27,7 +27,7 @@ The accepted terse contract is uniform:
   `ne(a,b)` / `!=(a,b)`, plus the matching `eq`/`==`, `lt`/`<`, and `le`/`<=` pairs.
 - `target = value` is the canonical assignment spelling.
 - `=(target, value)` is the operator-call equivalent of `target = value`.
-- `assign(target, value)` is legacy migration debt, not the destination syntax.
+- `assign(target, value)` was legacy migration debt and is now retired from authored specs.
 - Assignment has a value: the value stored in the target after assignment and target-kind inference.
 
 The `.3.3` audit split implementation so the scalar, aggregate, append/hash-index, and compatibility/documentation
@@ -35,8 +35,8 @@ contracts could land separately. `SPEC-FORMAT-TERSE.3.3.1` landed the scalar sub
 
 - `return(name = "ok")` stores `ok` in scalar `name` and yields `ok`.
 - `return(=(name,"ok"))` is the scalar operator-call equivalent.
-- Scalar `set(name,value)` / `assign(name,value)` compatibility forms now yield the stored value in scalar
-  value positions.
+- Scalar `set(name,value)` yields the stored value in scalar value positions; historical `assign(name,value)`
+  compatibility was retired from authored specs by `.6.2.3.2`.
 - Nested scalar assignment expressions and receiver chains on the assigned scalar value are supported.
 
 `SPEC-FORMAT-TERSE.3.3.2` then landed the aggregate direct-shape subset:
@@ -53,6 +53,6 @@ contracts could land separately. `SPEC-FORMAT-TERSE.3.3.1` landed the scalar sub
 - Parenthesized mutation assignment expressions can feed compatible receiver chains.
 
 `SPEC-FORMAT-TERSE.3.3.4` then closed the parent assignment-expression contract and mdBook compatibility policy:
-public examples prefer `set(...)` or operator assignment, and `assign(...)` remains supported only as a legacy
-alias. See [[terse-assignment-expression-closure]], [[terse-scalar-assignment-expression-values]],
+public examples prefer `set(...)` or operator assignment; `.6.2.3.2` later removed authored-spec `assign(...)`.
+See [[terse-assignment-expression-closure]], [[terse-scalar-assignment-expression-values]],
 [[terse-aggregate-assignment-expression-values]], and [[terse-mutation-assignment-expression-values]].

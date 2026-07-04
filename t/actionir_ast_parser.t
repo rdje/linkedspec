@@ -51,13 +51,13 @@ subtest 'direct access and indexed variables' => sub {
     is($indexed->{name}, 'items', 'indexed_var base name is captured');
     is($indexed->{index}{kind}, 'number', 'indexed_var index is an expression');
 
-    my $nested = parse_expr('foo["a"][0][scalar(z)]');
+    my $nested = parse_expr('foo["a"][0][z]');
     is($nested->{kind}, 'nested_access', 'mixed direct access parses as nested_access');
     is($nested->{base}, 'foo', 'nested_access base is captured');
     is_deeply([map { $_->{kind} } @{$nested->{segments}}], ['key', 'index', 'index'], 'segment kinds preserve key/index roles');
     is($nested->{segments}[0]{value}, 'a', 'quoted segment becomes a key');
-    is($nested->{segments}[2]{expr}{kind}, 'call', 'helper segment payload parses as a call expression');
-    is($nested->{segments}[2]{expr}{name}, 'scalar', 'helper segment call name is captured');
+    is($nested->{segments}[2]{expr}{kind}, 'variable', 'bare segment payload parses as a variable expression');
+    is($nested->{segments}[2]{expr}{name}, 'z', 'bare segment variable name is captured');
 };
 
 subtest 'shape literals and expression-valued blocks' => sub {
@@ -573,7 +573,7 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
         'single-equals operator call returns the stored hash value'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(set(scalar(payload), [value]))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(set(:payload, [value]))}),
         q{return do { $payload = [$value]; $payload }},
         'explicit scalar target keeps a scalar-held direct shape payload'
     );
@@ -651,20 +651,20 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         };
 
         my $assign = LinkedSpec::call_spec_handler_subst('Top', q{set(name, [poison])});
-        is($assign, '@name = ($value)', 'set/assign statement lowers from AST call args');
+        is($assign, '@name = ($value)', 'set statement lowers from AST call args');
 
         my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(hash(meta), poison_key, poison_value)});
         is($set_key, '$meta{$key} = $value', 'set_key statement lowers target/key/value from AST call args');
 
         my $push_value = LinkedSpec::call_spec_handler_subst('Top', q{push_value(items, poison)});
-        is($push_value, 'push @items, value', 'push_value statement lowers from AST call args');
+        is($push_value, 'push @items, $value', 'push_value statement lowers from AST call args');
 
         my $push = LinkedSpec::call_spec_handler_subst('Top', q{push(array(items), poison)});
-        is($push, 'push @items, value', 'push statement lowers explicit append from AST call args');
+        is($push, 'push @items, $value', 'push statement lowers explicit append from AST call args');
 
         my $push_nonempty = LinkedSpec::call_spec_handler_subst('Top', q{push_nonempty(array(items), poison)});
         like($push_nonempty, qr/push \@items, \$__ls_push_nonempty/, 'push_nonempty statement keeps append guard');
-        like($push_nonempty, qr/my \$__ls_push_nonempty = value\b/, 'push_nonempty value slot lowers from AST call args');
+        like($push_nonempty, qr/my \$__ls_push_nonempty = \$value\b/, 'push_nonempty value slot lowers from AST call args');
 
         my $return = LinkedSpec::call_spec_handler_subst('Top', q{return([poison])});
         is($return, 'return [$value]', 'return statement lowers payload from AST call args');
@@ -713,7 +713,7 @@ subtest 'non-call value lowering consumes AST nodes' => sub {
 
         my $shape = LinkedSpec::call_spec_handler_subst(
             'Top',
-            q{return([value, true, foo["a"][scalar(i)], { key => value }])},
+            q{return([value, true, foo["a"][:i], { key => value }])},
         );
         is(
             $shape,
@@ -757,20 +757,13 @@ subtest 'value-only helper-call lowering consumes AST call nodes' => sub {
                     ],
                 };
             }
-            if ($expr eq 'num_add(scalar(n),num_mul(2,3))') {
+            if ($expr eq 'num_add(:n,num_mul(2,3))') {
                 return {
                     kind => 'call',
                     name => 'num_add',
                     source => '__bad_num_outer_host_call__()',
                     args => [
-                        {
-                            kind => 'call',
-                            name => 'scalar',
-                            source => 'scalar(n)',
-                            args => [
-                                { kind => 'variable', name => 'n', source => 'n' },
-                            ],
-                        },
+                        { kind => 'scalar_slot', name => 'n', source => ':n' },
                         {
                             kind => 'call',
                             name => 'num_mul',
@@ -791,7 +784,7 @@ subtest 'value-only helper-call lowering consumes AST call nodes' => sub {
         like($string_call, qr/\$__ls_lower/, 'AST helper-call lowering recursively lowers nested value-only calls');
         unlike($string_call, qr/__bad_(?:outer|inner)_host_call__/, 'AST helper-call lowering does not reuse fake source text for supported calls');
 
-        my $numeric_call = LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(scalar(n),num_mul(2,3)))});
+        my $numeric_call = LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(:n,num_mul(2,3)))});
         like($numeric_call, qr/\$__ls_num_add_sum/, 'AST helper-call lowering preserves the outer numeric helper output');
         like($numeric_call, qr/\$__ls_num_mul_product/, 'AST helper-call lowering recursively lowers nested numeric helper calls');
         unlike($numeric_call, qr/__bad_num_(?:outer|inner)_host_call__/, 'AST helper-call lowering preserves compatibility only for unsupported argument calls');
@@ -1163,7 +1156,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
         local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
             my ($expr, @rest) = @_;
             ++$parse_calls;
-            if ($expr eq '[value, true, concat("a","b"), foo["a"][scalar(i)], { key => value }]') {
+            if ($expr eq '[value, true, concat("a","b"), foo["a"][i], { key => value }]') {
                 return {
                     kind => 'array_literal',
                     source => '__bad_return_payload_array__()',
@@ -1177,7 +1170,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
                             source => '__bad_nested_access__()',
                             segments => [
                                 { kind => 'key', value => 'a', source => '["a"]' },
-                                { kind => 'index', expr => $call->('scalar', $var->('i')) },
+                                { kind => 'index', expr => $var->('i') },
                             ],
                         },
                         {
@@ -1208,7 +1201,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
 
         my $payload = LinkedSpec::call_spec_handler_subst(
             'Top',
-            q{return([value, true, concat("a","b"), foo["a"][scalar(i)], { key => value }])},
+            q{return([value, true, concat("a","b"), foo["a"][i], { key => value }])},
         );
         like($payload, qr/\$value/, 'AST return payload lowers bare scalar reads from typed nodes');
         like($payload, qr/JSON::PP::true/, 'AST return payload lowers booleans from typed nodes');

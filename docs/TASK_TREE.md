@@ -50,6 +50,12 @@ spellings `assign(...)`, `push_value(...)`, `array_copy(...)`, `hash_copy(...)`,
 also omits redundant standalone separators after flow markers. Focused compile, phase0 (**1018 green**), and the
 Rust corpus oracle (**66 fixtures**) pass. Frontier advances to `.6.2.3` for typed-wrapper/direct-shape cleanup.
 
+Index note 2026-07-04: `SPEC-FORMAT-TERSE.6.2.3.2` is now done. Authored/current `.spec` files no longer use or
+support `scalar(...)` scalar-slot reads or `assign(...)` assignment aliases; scalar slots use `:name`, assignment
+uses `LHS = RHS` or `set(...)`, initialized bare identifiers remember scalar/array/hash kind, active spec/corpus
+and mdBook scans are clean, and phase0 passes with **1020** tests. Frontier advances to `.6.2.4` for final
+shipped-spec terse-surface verification and no-drift inventory.
+
 Index note 2026-07-03: `SPEC-FORMAT-TERSE.6.2.3.1` is now done. `:name` is the terse scalar-slot spelling on
 Perl/Rust; it reads scalar slot `name`, and `set(:payload, [value])` keeps scalar-held direct-shape payload
 assignment while bare direct-shape targets still infer aggregates. Phase0 passes with **1019** tests and the Rust

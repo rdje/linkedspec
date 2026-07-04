@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (SPEC-FORMAT-TERSE.6.2.3.2 — retired spec-file `scalar(...)` / `assign(...)`):
+  The retirement boundary is the authored `.spec` DSL, not generated Perl internals. `scalar(@...)` in generated
+  backend Perl remains a normal Perl built-in, while `scalar(name)` is no longer the DSL scalar-slot spelling.
+  Perl keeps parser-normalized internal `set(...)` handling distinct from raw authored `assign(...)`, so migration
+  can reject the old helper without breaking assignment operators. Bare-kind memory is the key follow-on: direct
+  assignment and aggregate mutations record scalar/array/hash intent, `:name` forces scalar-slot reads/targets,
+  and later bare reads/copies reuse the remembered kind. Rust mirrors that with `RuntimeVarKind` in
+  `RuntimeContext`, so `items = [value]` followed by `return(items)` reads the array and `meta = { key => value }`
+  followed by `copy(meta)` reads the hash. Phase0 is 1020 green after the migration.
+
 - 2026-07-03 (SPEC-FORMAT-TERSE.6.2.3.1 — scalar-slot shorthand):
   `:name` is intentionally a scalar-slot expression, not a new aggregate or sigil system. Perl wires it through
   the existing scalar source-slot helper and scalar target extractor, then teaches the autodeclare collector to

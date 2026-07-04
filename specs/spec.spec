@@ -71,11 +71,11 @@ spec_file::
   started = 0
  }
  -> rule_header {
-  if(scalar(started)) {
+  if(:started) {
    push(array(paragraphs), copy(array(current)));
    set(array(current), array())
   }
-  set(scalar(started), 1);
+  started = 1;
   push(rule_header, current)
  }
  -> regex_anchor     { push(regex_anchor, current) }
@@ -91,7 +91,7 @@ spec_file::
  -> split_marker     { push(split_marker, current) }
  -> comment          { next() }
  LX {
-  if(scalar(started)) {
+  if(:started) {
    push(array(paragraphs), copy(array(current)))
   }
   return(copy(array(paragraphs)))
@@ -101,8 +101,8 @@ spec_file::
 rule_header: /(\w++)[ \t]*(::|:)[ \t]*((?:&|\||\+|\*|\?|OR\+|OR\{[^}]++\}|OR|AND\+|AND\{[^}]++\}|AND)?)/
  I {
   top = 0;
-  if(str_eq(entry_group(1), "::")) { set(scalar(top), 1) }
-  return(hash("type", "rule", "label", entry_group(0), "top", scalar(top), "mode", entry_group(2)))
+  if(str_eq(entry_group(1), "::")) { top = 1 }
+  return(hash("type", "rule", "label", entry_group(0), "top", :top, "mode", entry_group(2)))
  }
 
 # ---- regex literal: `/pattern/` (outer slashes stripped, inner pattern kept) --

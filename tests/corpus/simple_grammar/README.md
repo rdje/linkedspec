@@ -7,15 +7,14 @@ Covers: rule labels, action edges, lifecycle blocks (I/LE/E), regex anchors, acc
 ```text
 DemoParser::
  /pattern1/ -> Child {
- I { declare(array, results) }
- LE { push_value(array(results), scalar(retv)) }
- E { return(array("?results:", array_copy(array(results)))) }
+ LE { results += :retv }
+ E { return(array("?results:", copy(results))) }
  }
 
 Child::
  /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(1)) }
- E { return(scalar(name)) }
+ I { name = entry_group(1) }
+ E { return(:name) }
 ```
 
 ## input.txt

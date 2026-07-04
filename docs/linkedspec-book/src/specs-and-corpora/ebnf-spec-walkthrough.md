@@ -303,8 +303,8 @@ The lifecycle exit block finalizes the last open rule and returns the public pay
 
 ```text
 LX {
-  if(scalar(rule));
-    push_value(array(rules), array(scalar(rule), flat_array(rule)));
+  if(:rule);
+    push_value(array(rules), array(:rule, flat_array(rule)));
   endif();
 
   return(array(flat_array(includes), flat_array(rules)))
@@ -318,7 +318,7 @@ Read this as:
 
 The helper names matter:
 
-- `scalar(rule)` reads the scalar variable `rule`.
+- `:rule` reads the scalar variable `rule`.
 - `array(rules)` reads the array variable `rules`.
 - `push_value(...)` appends one constructed value into an array variable.
 - `flat_array(rule)` expands the current rule array into a returned entry.
@@ -332,15 +332,15 @@ The `grammar_file` rule starts a new rule entry through this action edge:
 
 ```text
 -> grammar_rule   {
-  if(scalar(rule));
-    push_value(array(rules), array(scalar(rule), flat_array(rule)));
+  if(:rule);
+    push_value(array(rules), array(:rule, flat_array(rule)));
   endif();
 
   set(array(rule), array(flat_array(semantic_annotations)));
   set(array(semantic_annotations), array());
 
   $rule = call(grammar_rule);
-  set(scalar(on), 1)
+  on = 1
 }
 ```
 
@@ -381,7 +381,7 @@ For example:
 
 ```text
 -> rule_name
-  .if(scalar(on))
+  .if(:on)
     .push(rule_name, rule)
   .else()
     .say("Error: Rule name '$LMATCH' reference with no container rule context")
@@ -435,7 +435,7 @@ returns:
 The quoted-string reader:
 
 ```text
-quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(scalar(value), "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", scalar(value)))
+quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(:value, "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", :value))
 ```
 
 normalizes:
@@ -453,7 +453,7 @@ into:
 The regex reader:
 
 ```text
-regex: /(?<!\\)\/.+?(?<!\\)\// I.declare(scalar, value=entry_text()).substr(scalar(value), "^/|/$", "", go).return(array("regex", scalar(value)))
+regex: /(?<!\\)\/.+?(?<!\\)\// I.declare(scalar, value=entry_text()).substr(:value, "^/|/$", "", go).return(array("regex", :value))
 ```
 
 normalizes:
@@ -471,7 +471,7 @@ into:
 The probability reader:
 
 ```text
-probability: /@\d+%?/ I.declare(scalar, value=entry_text()).substr(scalar(value), "@|%", "", go).return(array("probability", scalar(value)))
+probability: /@\d+%?/ I.declare(scalar, value=entry_text()).substr(:value, "@|%", "", go).return(array("probability", :value))
 ```
 
 normalizes:
@@ -585,7 +585,7 @@ The rule is:
 
 ```text
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(scalar(c), "\s*$", "", o); substr(scalar(c), "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), scalar(c))))}
+-> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(:c, "\s*$", "", o); substr(:c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), :c)))}
 ```
 
 The key ideas are:
@@ -631,7 +631,7 @@ and then:
 }
 -> logging_annotation[1] {
   push_nonempty(array(logging_annotation), trim(capture_slice()));
-  return(array("logging_annotation", array(scalar(logging_name), array_copy(array(logging_annotation)))))
+  return(array("logging_annotation", array(:logging_name, array_copy(array(logging_annotation)))))
 }
 ```
 
@@ -743,7 +743,7 @@ This is why `ebnf.spec` is useful in the book. It shows a shipped parser that st
 - descriptor build succeeds through `LinkedSpec::get_parser('ebnf', return_descriptor => 1)`,
 - `grammar_file` no longer reports raw-Perl fallback dependency,
 - terminal token readers such as `grammar_rule`, `rule_name`, `quoted_string`, `quantifier`, `probability`, and `regex` are ActionIR-ready,
-- the source spec uses canonical wrappers such as `scalar(...)` and `array(...)` in the core method-DSL band,
+- the source spec uses canonical wrappers such as `...` and `array(...)` in the core method-DSL band,
 - `logging_annotation` uses explicit `start_capture_slice()` boundary movement,
 - `logging_annotation` uses `push_nonempty(...)` instead of the older `capture_if(...)` / `CAPTURE_IF()` helper surface,
 - the full `ebnf` descriptor reports zero compatibility-surface rules,

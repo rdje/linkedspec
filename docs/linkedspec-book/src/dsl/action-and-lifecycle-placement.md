@@ -38,8 +38,8 @@ Token::AND
  }
  /[A-Za-z_]+/
  -> Token[0] {
-   set(scalar(text), lowercase(trim(entry_text())));
-   set(hash(meta), set_key(hash(meta), "text", scalar(text)));
+   text = lowercase(trim(entry_text()));
+   set(hash(meta), set_key(hash(meta), "text", :text));
    return(hash_copy(hash(meta)));
  }
 ```
@@ -74,12 +74,12 @@ List::AND
  Item
  Item
  -> List[0] {
-   set(scalar(retv), call(Item));
-   push_value(array(items), scalar(retv));
+   retv = call(Item);
+   push_value(array(items), :retv);
  }
  -> List[1] {
-   set(scalar(retv), call(Item));
-   push_value(array(items), scalar(retv));
+   retv = call(Item);
+   push_value(array(items), :retv);
    return(set_key(hash(meta), "items", array_copy(array(items))));
  }
 ```
@@ -114,9 +114,9 @@ Use an action edge when:
 Action bodies should use helper statements:
 
 ```text
-set(scalar(name), entry_text());
-push_value(array(items), scalar(retv));
-return(hash("kind", "name", "value", scalar(name)));
+name = entry_text();
+push_value(array(items), :retv);
+return(hash("kind", "name", "value", :name));
 ```
 
 Prefer those forms over raw Perl assignment, push, and return statements in new examples.
@@ -132,8 +132,8 @@ Example:
 ```text
 /[A-Za-z_]+/ -> Name[0]
   .declare(scalar, text)
-  .set(scalar(text), lowercase(trim(entry_text())))
-  .return(hash("kind", "name", "text", scalar(text)));
+  .set(:text, lowercase(trim(entry_text())))
+  .return(hash("kind", "name", "text", :text));
 ```
 
 This lowers through the same helper surface as the block form:
@@ -142,8 +142,8 @@ This lowers through the same helper surface as the block form:
 /[A-Za-z_]+/
 -> Name[0] {
   declare(scalar, text);
-  set(scalar(text), lowercase(trim(entry_text())));
-  return(hash("kind", "name", "text", scalar(text)));
+  text = lowercase(trim(entry_text()));
+  return(hash("kind", "name", "text", :text));
 }
 ```
 
@@ -154,7 +154,7 @@ Action-edge continuations are also portable when they stay edge-scoped:
 ```text
 -> Item .push
 -> Item .push(items)
--> Item .if(scalar(on)).push(Item, items).else().return_undef().endif()
+-> Item .if(:on).push(Item, items).else().return_undef().endif()
 -> Item[1] .return(array("?items:", array_copy(array(Item))))
 ```
 
@@ -168,8 +168,8 @@ Action edges can also use receiver-fluent attached `when/otherwise` blocks when 
 clearer than a full structured block:
 
 ```text
--> Item.when(is_defined(scalar(retv))) {
-  return(scalar(retv))
+-> Item.when(is_defined(:retv)) {
+  return(:retv)
 }.otherwise {
   return("missing")
 }
@@ -178,8 +178,8 @@ clearer than a full structured block:
 The no-dot fallback tail is equivalent:
 
 ```text
--> Item.when(is_defined(scalar(retv))) {
-  return(scalar(retv))
+-> Item.when(is_defined(:retv)) {
+  return(:retv)
 } otherwise {
   return("missing")
 }
@@ -192,7 +192,7 @@ They also accept compact receiver chains for short ordered lifecycle statement l
 token : /[A-Za-z_]\w*/
  I.declare(scalar, text)
   .set(text, lowercase(entry_text()))
-  .return(hash("kind", "token", "text", scalar(text)))
+  .return(hash("kind", "token", "text", :text))
 ```
 
 That form is equivalent to `I { declare(...); set(...); return(...) }`: each method in the
@@ -213,8 +213,8 @@ When the parent needs to inspect or reshape the child result, use the explicit h
 ```text
 -> Parent[0] {
   declare(scalar, retv);
-  set(scalar(retv), call(Child));
-  return(hash("kind", "parent", "child", scalar(retv)));
+  retv = call(Child);
+  return(hash("kind", "parent", "child", :retv));
 }
 ```
 
@@ -239,9 +239,9 @@ semantic_annotation: /@(\w+)\s*:\s*/
 -> semantic_annotation | grammar_rule {
   BACKTRACK();
   declare(scalar, c=capture_slice());
-  substr(scalar(c), "\s*$", "", o);
-  substr(scalar(c), "^\"|\"$", "", go);
-  return(array("semantic_annotation", array(entry_group(0), scalar(c))));
+  substr(:c, "\s*$", "", o);
+  substr(:c, "^\"|\"$", "", go);
+  return(array("semantic_annotation", array(entry_group(0), :c)));
 }
 ```
 
@@ -273,7 +273,7 @@ Wrapper::AND
  => Header
  => Body
  => Trailer
- LX { return(scalar(retv)); }
+ LX { return(:retv); }
 ```
 
 Use this family when the rule needs a child-rule call as part of the body rather than one local regex-slot action.
@@ -283,8 +283,8 @@ The full parser-orchestration model for `=>`, including rule-label semantics and
 In new public examples, prefer the more explicit child-result pattern unless the rule is specifically teaching blind-call behavior:
 
 ```text
-set(scalar(retv), call(Child));
-push_value(array(children), scalar(retv));
+retv = call(Child);
+push_value(array(children), :retv);
 ```
 
 That pattern makes the dataflow visible.
@@ -341,8 +341,8 @@ Delimited::AND
  /[^}]*/
  /\}/
  -> Delimited[2] {
-   set(scalar(body), capture_from(body_start));
-   return(hash("kind", "delimited", "body", scalar(body)));
+   body = capture_from(body_start);
+   return(hash("kind", "delimited", "body", :body));
  }
 ```
 
@@ -361,7 +361,7 @@ Top::
  }
  /x/
  E {
-   return(hash("out", scalar(out), "ignored", scalar(ignored)));
+   return(hash("out", :out, "ignored", :ignored));
  }
 ```
 
@@ -415,10 +415,10 @@ Items:*
  }
  /[A-Za-z_]+/
  -> Items[0] {
-   set(scalar(item), entry_text());
+   item = entry_text();
  }
  IT {
-   push_value(array(items), scalar(item));
+   push_value(array(items), :item);
  }
  E {
    return(hash("kind", "items", "items", array_copy(array(items))));
@@ -471,8 +471,8 @@ Use this as the default decision guide:
 | Declare state shared by the rule | `I { declare(...) }` |
 | Initialize metadata shared by return paths | `I { declare(hash, meta=hash(...)) }` |
 | Transform one matched token | `-> Rule[index] { ... }` |
-| Capture and reshape one child result | `set(scalar(retv), call(Child))` inside an action body |
-| Append repeated child results | `push_value(array(items), scalar(retv))` inside action/iteration logic |
+| Capture and reshape one child result | `retv = call(Child)` inside an action body |
+| Append repeated child results | `push_value(array(items), :retv)` inside action/iteration logic |
 | Mark a grammar boundary | `@mark(name)` or `@capture_slice` at the grammar slot |
 | Move a boundary from code | `mark_here(name)` or `start_capture_slice()` inside a block |
 | Return a shaped optional fallback | `LX { return(...) }`, used sparingly |
@@ -491,8 +491,8 @@ Block::AND
  /[^}]*/
  /\}/
  -> Block[2] {
-   set(scalar(body), capture_from(body_start));
-   set(hash(meta), set_key(hash(meta), "body", scalar(body)));
+   body = capture_from(body_start);
+   set(hash(meta), set_key(hash(meta), "body", :body));
    set(hash(meta), set_key(hash(meta), "body_start_line", mark_line(body_start)));
    return(hash_copy(hash(meta)));
  }
@@ -518,13 +518,13 @@ Pair::AND
  /\s*=\s*/
  Value
  -> Pair[0] {
-   set(scalar(retv), call(Name));
-   set(scalar(lhs), scalar(retv));
+   retv = call(Name);
+   lhs = :retv;
  }
  -> Pair[2] {
-   set(scalar(retv), call(Value));
-   set(scalar(rhs), scalar(retv));
-   return(hash("kind", "pair", "lhs", scalar(lhs), "rhs", scalar(rhs)));
+   retv = call(Value);
+   rhs = :retv;
+   return(hash("kind", "pair", "lhs", :lhs, "rhs", :rhs));
  }
 ```
 

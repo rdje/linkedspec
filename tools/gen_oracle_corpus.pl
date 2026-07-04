@@ -119,7 +119,7 @@ SPEC
     # ── SPEC-FORMAT-TERSE.1.1.2 — auto-existing working variables (cross-variant) ──
     #
     # The Perl reference (.1.1.1, ADR 0007) lets a working variable referenced
-    # through a typed wrapper -- scalar(NAME)/array(NAME) -- be used WITHOUT a
+    # through a typed wrapper -- :NAME/array(NAME) -- be used WITHOUT a
     # prior declare(...). These cases prove the Rust backend reproduces that
     # behavior under the universal-contract obligation (ADR 0006): each grammar
     # uses a working variable with NO declare in the divergence-free edge-action
@@ -135,7 +135,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { assign(scalar(v), "ok"); return(scalar(v)) }
+ /x/ -> Done { v = "ok"; return(:v) }
 
 Done::
  /[a-z]+/
@@ -145,7 +145,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { declare(scalar, v); assign(scalar(v), "ok"); return(scalar(v)) }
+ /x/ -> Done { declare(scalar, v); v = "ok"; return(:v) }
 
 Done::
  /[a-z]+/
@@ -183,16 +183,16 @@ SPEC
     },
     # SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity = .1.2.2): a BARE (un-wrapped)
     # working var in a type-implying arg position auto-exists with the position-implied
-    # kind -- the assign(...) target is a scalar, the push_value(...) target is an array.
+    # kind -- the assignment target is a scalar, the push_value(...) target is an array.
     # Same divergence-free proof class as the wrapped autoexist_* cases above (the bare
     # target is the only difference), so the Rust backend must produce the identical
-    # reference value. The value is read back through a wrapper (scalar(v)/array(items)) --
+    # reference value. The value is read back through a wrapper (:v/array(items)) --
     # bare value-position reads are Channel 2, not this leaf.
     {   case   => 'autoexist_scalar_bare_arg',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { assign(v, "ok"); return(scalar(v)) }
+ /x/ -> Done { v = "ok"; return(:v) }
 
 Done::
  /[a-z]+/
@@ -276,7 +276,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(out, value); name = value; return(array(scalar(out), scalar(name))) }
+ /x/ -> Done { set(value, "ok"); set(out, value); name = value; return(array(:out, :name)) }
 
 Done::
  /[a-z]+/
@@ -328,7 +328,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; items += "tail"; meta = { key => value }; meta["fixed"] = "yes"; return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(items), scalar(meta))) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; items += "tail"; meta = { key => value }; meta["fixed"] = "yes"; return(array(array_copy(array(items)), hash_copy(hash(meta)), :items, :meta)) }
 
 Done::
  /[a-z]+/
@@ -338,7 +338,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); set(items, [value]); assign(meta, { key => value }); set(scalar(payload), [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(payload), array_copy(array(payload)))) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); set(items, [value]); meta = { key => value }; set(:payload, [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), :payload, array_copy(array(payload)))) }
 
 Done::
  /[a-z]+/
@@ -365,7 +365,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(scalar(label), cat("a", "b")); push_value(array(items), scalar(label)); return(copy(array(items))) }
+ /x/ -> Done { label = cat("a", "b"); push_value(array(items), :label); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -391,7 +391,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(label, "b"); push(items, "a"); push(items, scalar(label)); return(array_copy(array(items))) }
+ /x/ -> Done { set(label, "b"); push(items, "a"); push(items, :label); return(array_copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -417,13 +417,13 @@ SPEC
     # ── SPEC-FORMAT-TERSE.1.3.4.1 — scalar assignment operator spelling ──
     #
     # `name = value` is the statement-level scalar assignment operator. It is
-    # equivalent to `set(name, value)` / `assign(name, value)` and does not imply
+    # equivalent to `set(name, value)` / `name = value` and does not imply
     # array append, hash-index assignment, or bare value-position reads.
     {   case   => 'terse_1_3_4_1_scalar_assignment_operator',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { name = cat("o", "k"); return(scalar(name)) }
+ /x/ -> Done { name = cat("o", "k"); return(:name) }
 
 Done::
  /[a-z]+/
@@ -439,7 +439,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { label = "b"; items += "a"; items += scalar(label); return(array_copy(array(items))) }
+ /x/ -> Done { label = "b"; items += "a"; items += :label; return(array_copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -481,7 +481,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(scalar(flag), array_copy(array(items)), hash_copy(hash(meta)))); endif() }
+ /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(:flag, array_copy(array(items)), hash_copy(hash(meta)))); endif() }
 
 Done::
  /[a-z]+/
@@ -496,7 +496,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set (name, cat ("a", "b")); items += cat ("c", "d"); meta[cat ("s", "tage")] = scalar (name); return (array(scalar (name), array_copy (array (items)), hash_copy (hash (meta)))) }
+ /x/ -> Done { set (name, cat ("a", "b")); items += cat ("c", "d"); meta[cat ("s", "tage")] = :name; return (array(:name, array_copy (array (items)), hash_copy (hash (meta)))) }
 
 Done::
  /[a-z]+/
@@ -513,7 +513,7 @@ SPEC
         source => <<'SPEC',
 Top::
  /x/ -> Done { set(name,"a")
- return(scalar(name)) }
+ return(:name) }
 
 Done::
  /[a-z]+/
@@ -523,14 +523,14 @@ SPEC
     #
     # Direct mixed hash/array access is canonical when every segment is explicit.
     # Bare path atoms such as `[z]` remain Channel 2 work; this fixture uses
-    # `scalar(z)` for the final index.
+    # `:z` for the final index.
     {   case   => 'terse_1_5_5_1_direct_nested_access',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
  /x/ -> Done { set(foo, hash("a", array(hash("b", array("zero","one")))))
  set(z,1)
- return(foo["a"][0]["b"][scalar(z)]) }
+ return(foo["a"][0]["b"][z]) }
 
 Done::
  /[a-z]+/
@@ -624,7 +624,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(kind, "b"); switch(scalar(kind)) { case("a") { return("bad") } case("b") { return("later") } default { return("default") } } }
+ /x/ -> Done { set(kind, "b"); switch(:kind) { case("a") { return("bad") } case("b") { return("later") } default { return("default") } } }
 
 Done::
  /[a-z]+/
@@ -641,7 +641,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(count, 0); while(num_lt(scalar(count), 3)) { set(count, num_add(scalar(count), 1)) }; return(count) }
+ /x/ -> Done { set(count, 0); while(num_lt(:count, 3)) { set(count, num_add(:count, 1)) }; return(count) }
 
 Done::
  /[a-z]+/
@@ -747,7 +747,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), scalar(hash(layered), "a"), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
 
 Done::
  /[a-z]+/
@@ -825,7 +825,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(out, ""); if(str_eq("node", "node")) { set(out, cat(scalar(out), "E")) }; if(str_ne("node", "edge")) { set(out, cat(scalar(out), "N")) }; if(str_gt("2", "10")) { set(out, cat(scalar(out), "G")) }; if(str_ge("2", "2")) { set(out, cat(scalar(out), "H")) }; if(str_lt("10", "2")) { set(out, cat(scalar(out), "L")) }; if(str_le("10", "10")) { set(out, cat(scalar(out), "M")) }; if(str_gt("10", "2")) { set(out, cat(scalar(out), "X")) }; return(out) }
+ /x/ -> Done { set(out, ""); if(str_eq("node", "node")) { set(out, cat(:out, "E")) }; if(str_ne("node", "edge")) { set(out, cat(:out, "N")) }; if(str_gt("2", "10")) { set(out, cat(:out, "G")) }; if(str_ge("2", "2")) { set(out, cat(:out, "H")) }; if(str_lt("10", "2")) { set(out, cat(:out, "L")) }; if(str_le("10", "10")) { set(out, cat(:out, "M")) }; if(str_gt("10", "2")) { set(out, cat(:out, "X")) }; return(out) }
 
 Done::
  /[a-z]+/
@@ -839,7 +839,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(out, ""); if(eq("2", "2")) { set(out, cat(scalar(out), "E")) }; if(ne("2", "3")) { set(out, cat(scalar(out), "N")) }; if(gt("10", "2")) { set(out, cat(scalar(out), "G")) }; if(ge("2", "2")) { set(out, cat(scalar(out), "H")) }; if(lt("2", "10")) { set(out, cat(scalar(out), "L")) }; if(le("2", "2")) { set(out, cat(scalar(out), "M")) }; if(gt("2", "10")) { set(out, cat(scalar(out), "X")) }; if(str_gt("2", "10")) { set(out, cat(scalar(out), "S")) }; return(out) }
+ /x/ -> Done { set(out, ""); if(eq("2", "2")) { set(out, cat(:out, "E")) }; if(ne("2", "3")) { set(out, cat(:out, "N")) }; if(gt("10", "2")) { set(out, cat(:out, "G")) }; if(ge("2", "2")) { set(out, cat(:out, "H")) }; if(lt("2", "10")) { set(out, cat(:out, "L")) }; if(le("2", "2")) { set(out, cat(:out, "M")) }; if(gt("2", "10")) { set(out, cat(:out, "X")) }; if(str_gt("2", "10")) { set(out, cat(:out, "S")) }; return(out) }
 
 Done::
  /[a-z]+/
@@ -853,7 +853,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(out, ""); if(==("2", "2")) { set(out, cat(scalar(out), "E")) }; if(!=("2", "3")) { set(out, cat(scalar(out), "N")) }; if(>("10", "2")) { set(out, cat(scalar(out), "G")) }; if(>=("2", "2")) { set(out, cat(scalar(out), "H")) }; if(<("2", "10")) { set(out, cat(scalar(out), "L")) }; if(<=("2", "2")) { set(out, cat(scalar(out), "M")) }; if(>("2", "10")) { set(out, cat(scalar(out), "X")) }; if(str_gt("2", "10")) { set(out, cat(scalar(out), "S")) }; return(out) }
+ /x/ -> Done { set(out, ""); if(==("2", "2")) { set(out, cat(:out, "E")) }; if(!=("2", "3")) { set(out, cat(:out, "N")) }; if(>("10", "2")) { set(out, cat(:out, "G")) }; if(>=("2", "2")) { set(out, cat(:out, "H")) }; if(<("2", "10")) { set(out, cat(:out, "L")) }; if(<=("2", "2")) { set(out, cat(:out, "M")) }; if(>("2", "10")) { set(out, cat(:out, "X")) }; if(str_gt("2", "10")) { set(out, cat(:out, "S")) }; return(out) }
 
 Done::
  /[a-z]+/
@@ -872,7 +872,7 @@ SPEC
         source => <<'SPEC',
 fn store(value) { return(local = value) }
 Top::
- /x/ -> Done { return(array(name = "ok", name, =(other, cat(scalar(name), "!")), other, set(third, store("fn")), third, { block = cat(scalar(third), "!"); block }, =(raw, " hi ").trim())) }
+ /x/ -> Done { return(array(name = "ok", name, =(other, cat(:name, "!")), other, set(third, store("fn")), third, { block = cat(:third, "!"); block }, =(raw, " hi ").trim())) }
 
 Done::
  /[a-z]+/
@@ -888,7 +888,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(scalar(payload), [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(:payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -914,14 +914,13 @@ SPEC
     #
     # The parent `.3.3` contract is closed once scalar, direct-shape
     # aggregate, append, and hash-index assignment expressions all compose in
-    # one portable program. Legacy assign(...) remains a compatibility spelling
-    # but public docs should prefer `set(...)` or operator forms.
+    # one portable program. Public docs prefer `set(...)` or operator forms.
     {   case   => 'terse_3_3_4_assignment_expression_closure',
         input  => 'xhello',
         source => <<'SPEC',
 fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(scalar(name), "!")), other, set(third, keep("fn")), third, assign(legacy, "compat"), legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, legacy = "compat", legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -935,10 +934,10 @@ SPEC
     {   case   => 'terse_4_3_2_user_function_runtime',
         input  => 'xhello',
         source => <<'SPEC',
-fn normalize(value) { return(trim(scalar(value))) }
-fn words(value) { set(scratch, trim(scalar(value))); return([scalar(scratch), uppercase(scalar(scratch))]) }
+fn normalize(value) { return(trim(:value)) }
+fn words(value) { set(scratch, trim(:value)); return([:scratch, uppercase(:scratch)]) }
 Top::
- /x/ -> Done { normalize(" drop "); return(array(normalize(" x "), words(" go ").join_values("|"), words(" a ").count(), scalar(scratch))) }
+ /x/ -> Done { normalize(" drop "); return(array(normalize(" x "), words(" go ").join_values("|"), words(" a ").count(), :scratch)) }
 
 Done::
  /[a-z]+/

@@ -12,11 +12,11 @@ answers:
   - "why is SPEC-FORMAT-TERSE.1.4 split into a Perl reference change plus a Rust parity follow-on"
   - "where is set recognized vs concat / array_copy (statement-level vs value-expr)"
   - "what does set / cat / copy lower to in linkedspec today"
-date: 2026-06-29
+date: 2026-07-04
 status: confirmed
 tags: [engine, dsl, helpers, aliases, rename, actionir, spec-format-terse, SPEC-FORMAT-TERSE, MethodLowering, rust, parity]
-evidence: "TOOLBOX `call_spec_handler_subst` probes 2026-06-24 (`perl -Iperl -MLinkedSpec`, dump-don't-guess; `perl -Iperl` confirmed `perl/LinkedSpec.pm` loads over the stale `PERL5LIB` — TOOLBOX §6.5). BEFORE (the gap): `assign(scalar(x),1)`→`$x = 1` but `set(scalar(x),1)`→`set(scalar(x), 1)` (passthrough); `concat(\"a\",\"b\")`→`do { my @__ls_concat_parts = (\"a\", \"b\"); ... join('', @__ls_concat_parts) : undef }` but `cat(\"a\",\"b\")`→`cat(\"a\",\"b\")` (passthrough); `array_copy(a(items))`→`[@items]` but `copy(a(items))`→`copy([items])` (partial — inner `a(items)` lowers but `copy` is unknown); `hash_copy(h(m))`→`{%m}` but `copy(h(m))`→`copy(h(m))` (passthrough). Perl recognition+lowering sites (code-read): assign STATEMENT-level = `ActionIR/Contracts.pm:1749/1753` (`\\bassign\\s*\\(`) + `ActionIR/DeclareMethod._lower_assign_method_statement` (244-263) -> `ActionIR/MethodLowering._lower_assign_statement` (1677-1714) => `$sym = src`; concat VALUE-expr = `ActionIR/MethodLowering._lower_method_value_expr` :538; array_copy = MethodLowering :1553 => `[@sym]`; hash_copy = MethodLowering :1533 => `{%sym}`. Alias seam = `ActionIR/MethodExpr._normalize_method_name` (:19-26, `s`->`scalar`/`a`->`array`/`h`->`hash`), applied at MethodExpr.pm:162 pre-lowering; the retired `tail`/`flatten`/`array_values` aliases were the inline-conditional pattern, removed in COMPAT-ALIAS-RETIREMENT.1 (commit 802dbe3). Rust: one `Engine::call_helper()` match in `rust/linkedspec-runtime/src/engine.rs`; aliases are pipe arms; NO recognition in the parser/compiler crates. .1.4.1 landed Perl recognition at every canonical-name site; .1.4.2 landed Rust parity (`\"assign\" | \"set\"`, `\"concat\" | \"cat\"`, dedicated unified `\"copy\"`, `resolve_hash_target`, and one-bare-variable `hash`/`h` references). Verification 2026-06-29: 2 Perl-oracle fixtures + 3 Rust integration tests; full runtime cargo suite green; clippy zero-new against existing baseline; phase0 975; full local gate EXIT 0."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $p ([q{set(scalar(x), 1)},q{assign(scalar(x), 1)}],[q{return(cat(\"a\",\"b\"))},q{return(concat(\"a\",\"b\"))}],[q{return(copy(a(items)))},q{return(array_copy(a(items)))}],[q{return(copy(h(m)))},q{return(hash_copy(h(m)))}]) { my $t=LinkedSpec::call_spec_handler_subst(\"Top\",$p->[0]); my $c=LinkedSpec::call_spec_handler_subst(\"Top\",$p->[1]); print $p->[0],($t eq $c?\"  ==  \":\"  !=  \"),$p->[1],\"\\n\" }' && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_4_2 && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle"
+evidence: "TOOLBOX `call_spec_handler_subst` probes 2026-06-24 (`perl -Iperl -MLinkedSpec`, dump-don't-guess; `perl -Iperl` confirmed `perl/LinkedSpec.pm` loads over the stale `PERL5LIB` — TOOLBOX §6.5). BEFORE (the historical gap): `assign(scalar(x),1)`→`$x = 1` but `set(scalar(x),1)`→`set(scalar(x), 1)` (passthrough); `concat(\"a\",\"b\")`→`do { my @__ls_concat_parts = (\"a\", \"b\"); ... join('', @__ls_concat_parts) : undef }` but `cat(\"a\",\"b\")`→`cat(\"a\",\"b\")` (passthrough); `array_copy(a(items))`→`[@items]` but `copy(a(items))`→`copy([items])` (partial — inner `a(items)` lowers but `copy` is unknown); `hash_copy(h(m))`→`{%m}` but `copy(h(m))`→`copy(h(m))` (passthrough). Perl recognition+lowering sites at that leaf: assign was STATEMENT-level (`ActionIR/Contracts.pm` + DeclareMethod + MethodLowering); concat was value-expr; array_copy/hash_copy had separate sigil lowerers. .1.4.1 landed Perl recognition at every canonical-name site; .1.4.2 landed Rust parity. SPEC-FORMAT-TERSE.6.2.3.2 later retired authored spec-file assign(...) and scalar(...) wrapper spelling; current reverify checks the surviving terse names `set`, `cat`, and remembered-kind `copy`."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{set(x, 1)},q{return(cat(\"a\",\"b\"))},q{items = [\"a\"]; return(copy(items))},q{meta = { key => \"v\" }; return(copy(meta))}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_4_2 && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle"
 ---
 
 # `.1.4` ground truth: where the helper renames land, on both variants
@@ -26,13 +26,13 @@ ground-truth pass; direction ratified in ADR [0007](../decisions/0007-spec-forma
 This is the engine grounding for the terse-format leaf "helper renames `assign`→`set`, `concat`→`cat`,
 `array_copy`/`hash_copy`→`copy`", and the reason that leaf was split by variant (Perl-first `.1.4.1` +
 Rust parity `.1.4.2`). Direction per ADR 0007: the **new terse names become canonical**, the **old names
-stay deprecated aliases that lower identically** (retirement is a later explicit leaf); both spellings must
-lower byte-identically and the 20 shipped specs (old names) must stay byte-identical.
+stayed deprecated aliases that lower identically** at that point. `SPEC-FORMAT-TERSE.6.2.3.2` later retired
+authored spec-file `assign(...)` and the current surface uses `set(...)`, `cat(...)`, and `copy(...)`.
 
 ## Status — `.1.4` CLOSED on both variants (2026-06-29)
 
-Both halves are now **done**. `.1.4.1` landed the Perl reference: `set`/`cat`/`copy` lower
-**byte-identically** to `assign`/`concat`/`array_copy`+`hash_copy` in every position (proven by
+Both halves are now **done**. `.1.4.1` landed the Perl reference: `set`/`cat`/`copy` lowered
+**byte-identically** to the then-supported old names in every position (proven by
 `call_spec_handler_subst` parity across 15+ composed forms + a real-spec end-to-end run + the all-20-spec
 byte-identical proof; +4 phase0 locks → 975 green; full gate EXIT 0). `.1.4.2` landed Rust
 `Engine::call_helper()` parity: `set` and `cat` are pipe-arm aliases, and `copy` is a unified array/hash

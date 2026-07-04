@@ -1,5 +1,5 @@
 Top::
- /x/ -> Done { declare(scalar, v); assign(scalar(v), "ok"); return(scalar(v)) }
+ /x/ -> Done { declare(scalar, v); v = "ok"; return(:v) }
 
 Done::
  /[a-z]+/

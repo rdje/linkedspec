@@ -21,8 +21,8 @@ they execute as the same ordered lifecycle statements as the equivalent `{ ... }
 /[A-Za-z_, ]+/ -> FieldList
   .declare(array, parts)
   .declare(scalar, raw)
-  .set(scalar(raw), entry_text())
-  .split(array(parts), scalar(raw), /,/)
+  .set(:raw, entry_text())
+  .split(array(parts), :raw, /,/)
   .filter_nonempty(array(parts))
   .return(hash("kind", "field_list", "fields", array_copy(array(parts))));
 ```
@@ -53,7 +53,7 @@ For multiple lifecycle statements, the chain runs left to right:
 item : /[A-Za-z_]\w*/
  I.declare(scalar, text)
   .set(text, lowercase(entry_text()))
-  .return(hash("kind", "item", "text", scalar(text)))
+  .return(hash("kind", "item", "text", :text))
 ```
 
 This is equivalent to:
@@ -63,7 +63,7 @@ item : /[A-Za-z_]\w*/
  I {
    declare(scalar, text);
    set(text, lowercase(entry_text()));
-   return(hash("kind", "item", "text", scalar(text)));
+   return(hash("kind", "item", "text", :text));
  }
 ```
 
@@ -95,8 +95,8 @@ the helper family, for example `{ [3, 1, 2] }.sorted().join_values(",")` or
 ```text
 rule:AND+
  I   { declare(array, acc); declare(scalar, n, 0); }
- E   { push_value(array(acc), call(child)); set(scalar(n), num_add(scalar(n), 1)); }
- LX  { return(hash("items", array_copy(array(acc)), "count", scalar(n))); }
+ E   { push_value(array(acc), call(child)); n = num_add(:n, 1); }
+ LX  { return(hash("items", array_copy(array(acc)), "count", :n)); }
 ```
 
 ## Statement separators
@@ -107,7 +107,7 @@ top-level helper statements:
 ```text
 -> child {
   set(name, "field")
-  return(scalar(name))
+  return(:name)
 }
 ```
 
@@ -115,7 +115,7 @@ Semicolons remain valid, and they are required when multiple statements share on
 physical line:
 
 ```text
--> child { set(name, "field"); return(scalar(name)) }
+-> child { set(name, "field"); return(:name) }
 ```
 
 Plain spaces between same-line helper calls are not statement separators. Semicolons
@@ -150,7 +150,7 @@ rule:AND+
    declare(scalar, on, 0);
  }
  -> child {
-   if(scalar(on));
+   if(:on);
    push_value(array(acc), call(child));
    elseif(is_nonempty(array(tmp)));
    push_value(array(acc), first(array(tmp)));
@@ -199,8 +199,8 @@ same control markers as marker style, with an implicit `endif()` at the end of t
 -> child {
   if(is_nonempty(array(src))) {
     push_value(array(acc), first(array(src)))
-  } elseif(is_defined(scalar(fallback))) {
-    push_value(array(acc), scalar(fallback))
+  } elseif(is_defined(:fallback)) {
+    push_value(array(acc), :fallback)
   } else {
     push_value(array(acc), "default")
   }
@@ -249,7 +249,7 @@ The fallback can also be written as a no-dot continuation after the first block:
 Lifecycle markers accept the same receiver-fluent branch shape:
 
 ```text
-I.when(is_defined(scalar(input_kind))) {
+I.when(is_defined(:input_kind)) {
   set(kind, input_kind)
 }.otherwise {
   set(kind, "default")
@@ -268,7 +268,7 @@ payload:
 
 ```text
 set(result,
-  if(scalar(on),
+  if(:on,
     first(array(acc)),
     elseif(is_nonempty(array(tmp)), first(array(tmp))),
     else("default")
@@ -280,7 +280,7 @@ The portable attached-block spelling writes the selected value from branch state
 
 ```text
 I {
-  if(scalar(on)) {
+  if(:on) {
     set(result, first(array(acc)))
   } elseif(is_nonempty(array(tmp))) {
     set(result, first(array(tmp)))
@@ -294,7 +294,7 @@ The fluent `.return(if(...))` spelling follows the same portability boundary:
 
 ```text
 -> child
-  .return(if(scalar(on),
+  .return(if(:on,
     first(array(acc)),
     elseif(is_nonempty(array(tmp)), first(array(tmp))),
     else("default")
@@ -308,11 +308,11 @@ same-line `} elseif/else {` continuations and lowers to the same branch-control 
 
 ```text
 -> child {
-  if(scalar(on)) {
+  if(:on) {
     push_value(array(acc), call(child));
   } elseif(is_nonempty(array(tmp))) {
-    set(scalar(found), first(array(tmp)));
-    push_value(array(acc), scalar(found));
+    found = first(array(tmp));
+    push_value(array(acc), :found);
   } else {
     push_value(array(acc), "default");
   }
@@ -330,7 +330,7 @@ once, branches are tested in order, and the selected branch payload becomes the 
 
 ```text
 LX {
-  return(switch(scalar(kind),
+  return(switch(:kind,
     case("token", "found a token"),
     case("list", "found a list"),
     default("unknown")
@@ -344,7 +344,7 @@ contract:
 
 ```text
 LX
-  .return(switch(scalar(kind),
+  .return(switch(:kind,
     case("token", "found a token"),
     case("list", "found a list"),
     default("unknown")
@@ -355,7 +355,7 @@ Expression-valued branch blocks are accepted too:
 
 ```text
 LX {
-  return(switch(scalar(kind),
+  return(switch(:kind,
     case("token", { "found a token" }),
     case("list", { "found a list" }),
     default({ "unknown" })
@@ -371,9 +371,9 @@ branch runs, and `default` runs only when no prior case matched:
 
 ```text
 LX {
-  switch(scalar(kind)) {
+  switch(:kind) {
     case("token") {
-      return(concat("token: ", scalar(name)));
+      return(concat("token: ", :name));
     }
     case("list") {
       return(concat("list: ", count(array(items))));
@@ -389,9 +389,9 @@ The outer block form requires branch bodies on each `case(...)` or `default` bra
 
 ```text
 LX {
-  switch(scalar(kind)) {
+  switch(:kind) {
     case("token") {
-      return(concat("token: ", scalar(name)));
+      return(concat("token: ", :name));
     }
     case("list") {
       return(concat("list: ", count(array(items))));
@@ -411,8 +411,8 @@ is evaluated before every iteration, so body mutations can make the loop termina
 ```text
 LX {
   set(count, 0);
-  while(num_lt(scalar(count), 3)) {
-    set(count, num_add(scalar(count), 1));
+  while(num_lt(:count, 3)) {
+    set(count, num_add(:count, 1));
   }
   return(count);
 }
@@ -477,7 +477,7 @@ Items::AND+
  }
 LX {
    if(is_empty(array(acc)));
-   return(hash("kind", scalar(kind), "items", array()));
+   return(hash("kind", :kind, "items", array()));
    else();
    switch(count(array(acc))) {
      case(1) {
@@ -486,13 +486,13 @@ LX {
      case(2) {
        return(hash(
          "kind", "pair",
-         "first", scalar(array(acc), 0),
-         "second", scalar(array(acc), 1)
+         "first", array(acc).first(),
+         "second", array(acc).drop_front(1).first()
        ))
      }
      default {
        return(hash(
-         "kind", scalar(kind),
+         "kind", :kind,
          "items", array_copy(array(acc)),
          "count", count(array(acc))
        ))

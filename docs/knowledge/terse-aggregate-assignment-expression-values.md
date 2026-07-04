@@ -7,12 +7,12 @@ answers:
   - "does set(meta, { key => value }) yield a hash value"
   - "do bare aggregate assignment targets infer array or hash kind in value positions"
   - "how do array(target) and hash(target) assignment expressions behave"
-  - "does scalar(payload) keep direct shape assignment payloads scalar"
+  - "does :payload keep direct shape assignment payloads scalar"
   - "what is next after SPEC-FORMAT-TERSE.3.3.2"
-date: 2026-07-02
+date: 2026-07-04
 status: current
 tags: [spec-format-terse, assignment, expressions, aggregate, target-kind-inference, rust-parity, oracle]
-evidence: "SPEC-FORMAT-TERSE.3.3.2 implementation in perl/LinkedSpec/ActionIR/MethodLowering.pm, perl/LinkedSpec/RuleIR/EmitContext.pm, rust/linkedspec-core/src/expr.rs, and rust/linkedspec-runtime/src/engine.rs; locks in t/actionir_ast_parser.t, t/phase0_regression.t spec_format_terse_3_3_2_aggregate_assignment_expression_values, rust/linkedspec-runtime/tests/integration_test.rs terse_3_3_2_aggregate_assignment_expressions_run, and rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions. SPEC-FORMAT-TERSE.3.3.4 later closed the parent docs/oracle compatibility contract; see [[terse-assignment-expression-closure]]."
+evidence: "SPEC-FORMAT-TERSE.3.3.2 implementation in perl/LinkedSpec/ActionIR/MethodLowering.pm, perl/LinkedSpec/RuleIR/EmitContext.pm, rust/linkedspec-core/src/expr.rs, and rust/linkedspec-runtime/src/engine.rs; locks in t/actionir_ast_parser.t, t/phase0_regression.t spec_format_terse_3_3_2_aggregate_assignment_expression_values, rust/linkedspec-runtime/tests/integration_test.rs terse_3_3_2_aggregate_assignment_expressions_run, and rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions. SPEC-FORMAT-TERSE.3.3.4 later closed the parent docs/oracle compatibility contract; SPEC-FORMAT-TERSE.6.2.3.1 added `:name` scalar slots, and SPEC-FORMAT-TERSE.6.2.3.2 retired authored spec-file scalar(...)/assign(...)."
 reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_2_aggregate_assignment_expressions_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
 ---
 
@@ -25,8 +25,8 @@ reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && carg
 - `meta = { key => value }`, `set(meta, { key => value })`, and `=(meta, { key => value })` infer a hash working
   variable for a bare target, store the assigned hash, and yield the assigned hash value.
 - Explicit `array(items)` and `hash(meta)` targets match the direct RHS shape and yield aggregate snapshots.
-- Explicit `scalar(payload)` targets keep the scalar payload boundary, so `set(scalar(payload), [value])` stores
-  and yields a scalar-held array payload.
+- Explicit `:payload` targets keep the scalar payload boundary, so `set(:payload, [value])` stores and yields a
+  scalar-held array payload.
 
 This leaf extends the target-kind inference contract from statement assignments into value positions. It did not
 close array append values or hash-index mutation values; those later landed in `SPEC-FORMAT-TERSE.3.3.3`.

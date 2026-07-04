@@ -35,15 +35,15 @@ positions. Avoid both raw declaration code and `declare(...)` in new examples.
 
 ## Declarations are optional: working variables auto-exist
 
-You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed wrapper — `scalar(NAME)` / `array(NAME)` / `hash(NAME)` — or through the scalar-slot shorthand `:NAME` **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper or shorthand (`scalar` / `:NAME` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
+You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed aggregate wrapper — `array(NAME)` / `hash(NAME)` — or through the scalar-slot shorthand `:NAME` **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper or shorthand (`:NAME` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
 
 ```text
 # explicit declaration (still fully supported)
 I { declare(scalar, count) }
--> Item[0] { set(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
+-> Item[0] { count = num_add(coalesce(:count, 0), 1) }
 
 # auto-existing — no declare needed
--> Item[0] { set(scalar(count), num_add(coalesce(scalar(count), 0), 1)) }
+-> Item[0] { count = num_add(coalesce(:count, 0), 1) }
 ```
 
 An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
@@ -67,11 +67,10 @@ such as `["items"]`, `{ "key" => value }`, `[]`, and `{}` as the terse construct
 
 ### The wrapper is optional in a type-implying position
 
-A working variable also auto-exists when it appears **bare** (without a `scalar()` / `array()` / `hash()` wrapper) in a helper position that already implies its kind. In those positions the wrapper is optional — each pair below is equivalent:
+A working variable also auto-exists when it appears **bare** in a helper position that already implies its kind. In those positions an explicit wrapper is optional — each pair below is equivalent:
 
 ```text
-# scalar target of set(...), legacy assign(...), and scalar operator assignment — the bare name is a scalar
-set(scalar(count), match_group(0))
+# scalar target of set(...) and operator assignment — the bare name is a scalar
 set(count, match_group(0))
 count = match_group(0)
 
@@ -83,7 +82,7 @@ items += match_group(0)
 # hash target of set_key(...) and hash-index assignment — the bare name is a hash
 set_key(meta, "text", match_group(0))
 meta["text"] = match_group(0)
-meta[cat("source", "_kind")] = scalar(kind)
+meta[cat("source", "_kind")] = :kind
 
 # aggregate snapshot reads — the bare name is the aggregate being copied
 return(array_copy(array(items)))
@@ -93,7 +92,7 @@ return(hash_copy(meta))
 return(copy(items))
 
 # scalar source-slot reads — the bare name is a scalar value
-return(scalar(count))
+return(:count)
 return(count)
 set(out, count)
 name = value
@@ -107,7 +106,7 @@ meta[key] = value
 return(payload["children"][index]["name"])
 ```
 
-The kind comes from the **position**: the target of `set(...)`, legacy `assign(...)`, and `name = value` is a scalar for non-shape RHS values; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`, `return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]` are the terse forms of their explicit `scalar(...)` counterparts. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
+The kind comes from the **position**: the target of `set(...)` and `name = value` is a scalar for non-shape RHS values; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`, `return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]`. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
 
 `declare(...)` is retirement-bound for spec files. Use terse replacements instead:
 
@@ -119,7 +118,7 @@ The kind comes from the **position**: the target of `set(...)`, legacy `assign(.
 
 Where a name is wrapped, the wrapper still decides its kind. Where a name is bare in a type-implying position, that
 position decides it. Direct RHS shape assignment infers the target kind for array/hash assignment; explicit
-`:name` or `scalar(name)` keeps array/hash payloads in a scalar.
+`:name` keeps array/hash payloads in a scalar.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `array(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 
@@ -248,7 +247,7 @@ declare(scalar, kind="node");
 declare(scalar, active=1);
 declare(scalar, normalized=lowercase(trim(entry_text())));
 declare(array, items=array());
-declare(array, parts=array(scalar(first), scalar(second)));
+declare(array, parts=array(:first, :second));
 declare(hash, meta=hash("kind", "node", "source", "Node"));
 ```
 
@@ -275,7 +274,7 @@ Preferred for dense startup:
 ```text
 I {
   declare(scalar, name);
-  set(scalar(name), coalesce_nonempty(trim(retv["name"]), entry_text(), "anonymous"));
+  name = coalesce_nonempty(trim(retv["name"]), entry_text(), "anonymous");
 }
 ```
 
@@ -310,7 +309,7 @@ Example:
 ```text
 I {
   declare(scalar, raw=entry_text());
-  declare(scalar, normalized=lowercase(trim(scalar(raw))));
+  declare(scalar, normalized=lowercase(trim(:raw)));
 }
 ```
 
@@ -324,7 +323,7 @@ Examples:
 
 ```text
 declare(array, items=array());
-declare(array, pair=array(scalar(lhs), scalar(rhs)));
+declare(array, pair=array(:lhs, :rhs));
 declare(array, groups=entry_groups());
 declare(array, keys=sorted_keys(hash(meta)));
 declare(array, public_keys=take(sorted_keys(pick_keys(hash(meta), "kind", "source")), 2));
@@ -394,7 +393,7 @@ Do not redeclare to reset. Redeclaration is a lifetime decision, not a mutation 
 
 Declaration initializers reuse the same expression language as `set(...)`, `push_value(...)`, `return(...)`, and flow helpers.
 
-> **Terse spellings.** The same terse helper renames apply here: `set(...)` for legacy `assign(...)`,
+> **Terse spellings.** The same terse helper names apply here: `set(...)`,
 > scalar `name = value` and `=(name, value)` for scalar assignment, array append `items += expr` for explicit append values, hash-index assignment `meta["key"] = expr` for `set_key(meta, "key", expr)`, `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
 > (it resolves array-vs-hash by the wrapped symbol kind). They lower identically to the original
 > names in initializer and assignment sources, so `declare(array, saved=copy(array(items)))` is
@@ -406,7 +405,7 @@ Common initializer sources include:
 | Source | Examples |
 | --- | --- |
 | Literals | `"node"`, `1`, `0` |
-| Working values | `scalar(name)`, `array(items)`, `hash(meta)` |
+| Working values | `:name`, `array(items)`, `hash(meta)` |
 | Source readers | `entry_text()`, `entry_group(0)`, `capture_slice()`, `cursor_pos()` |
 | Child payload access | `retv["content"]`, `retv["children"][0]["name"]` |
 | Constructors | `array(...)`, `hash(...)` |
@@ -427,7 +426,7 @@ I {
   filter_match(array(clean_parts), /^[a-z_]+$/);
   declare(hash, meta=hash(
     "kind", "field_list",
-    "name", scalar(clean_name),
+    "name", :clean_name,
     "part_count", count(array(clean_parts))
   ));
 }
@@ -452,8 +451,8 @@ They also work in method-chain style:
 /[A-Za-z_, ]+/ -> FieldList
   .declare(array, parts)
   .declare(scalar, raw)
-  .set(scalar(raw), entry_text())
-  .split(array(parts), scalar(raw), /,/)
+  .set(:raw, entry_text())
+  .split(array(parts), :raw, /,/)
   .trim_each(array(parts))
   .filter_nonempty(array(parts))
   .return(hash("kind", "field_list", "fields", array_copy(array(parts))));
@@ -487,12 +486,12 @@ List::AND
  Item
  Item
  -> List[0] {
-   set(scalar(retv), call(Item));
-   push_value(array(items), scalar(retv));
+   retv = call(Item);
+   push_value(array(items), :retv);
  }
  -> List[1] {
-   set(scalar(retv), call(Item));
-   push_value(array(items), scalar(retv));
+   retv = call(Item);
+   push_value(array(items), :retv);
    return(hash(
      "kind", "list",
      "items", array_copy(array(items)),
@@ -519,9 +518,9 @@ Token::AND
  }
  /[A-Za-z_]+/
  -> Token[0] {
-   set(scalar(text), lowercase(trim(entry_text())));
-   meta["text"] = scalar(text);
-   meta["text_length"] = length(scalar(text));
+   text = lowercase(trim(entry_text()));
+   meta["text"] = :text;
+   meta["text_length"] = length(:text);
    return(hash_copy(hash(meta)));
  }
 ```
@@ -543,11 +542,11 @@ For public examples, prefer:
 ```text
 I {
   declare(scalar, name);
-  set(scalar(name), coalesce_nonempty(
+  name = coalesce_nonempty(
     trim(retv["name"]),
     trim(entry_group(0)),
     "anonymous"
-  ));
+  );
 }
 ```
 
@@ -575,14 +574,14 @@ Do not use a scalar declaration for a value you later treat as an array:
 
 ```text
 declare(scalar, items);
-push_value(array(items), scalar(retv));
+push_value(array(items), :retv);
 ```
 
 Prefer:
 
 ```text
 declare(array, items);
-push_value(array(items), scalar(retv));
+push_value(array(items), :retv);
 ```
 
 Do not use legacy declaration syntax to reset:

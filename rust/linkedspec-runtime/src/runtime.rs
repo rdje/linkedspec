@@ -5,6 +5,13 @@
 
 use linkedspec_core::types::RuntimeValue;
 
+#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+pub enum RuntimeVarKind {
+    Scalar,
+    Array,
+    Hash,
+}
+
 /// Runtime context for a single rule invocation.
 #[derive(Debug, Clone)]
 pub struct RuntimeContext {
@@ -18,6 +25,8 @@ pub struct RuntimeContext {
     arrays: std::collections::HashMap<String, Vec<RuntimeValue>>,
     /// Declared hash variables.
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
+    /// Remembered bare identifier kind after declaration or assignment.
+    bare_kinds: std::collections::HashMap<String, RuntimeVarKind>,
     /// The rule's main accumulator (return value).
     pub accumulator: Vec<RuntimeValue>,
     /// Entry capture groups (group 0 = first participating capture).
@@ -77,6 +86,7 @@ pub(crate) struct RuntimeVariableStores {
     scalars: std::collections::HashMap<String, RuntimeValue>,
     arrays: std::collections::HashMap<String, Vec<RuntimeValue>>,
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
+    bare_kinds: std::collections::HashMap<String, RuntimeVarKind>,
 }
 
 impl RuntimeContext {
@@ -88,6 +98,7 @@ impl RuntimeContext {
             scalars: std::collections::HashMap::new(),
             arrays: std::collections::HashMap::new(),
             hashes: std::collections::HashMap::new(),
+            bare_kinds: std::collections::HashMap::new(),
             accumulator: Vec::new(),
             entry_groups: Vec::new(),
             entry_named: std::collections::HashMap::new(),
@@ -122,10 +133,14 @@ impl RuntimeContext {
     // ── Scalars ──
 
     pub fn declare_scalar(&mut self, name: &str) {
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), RuntimeValue::Undef);
     }
 
     pub fn declare_scalar_with(&mut self, name: &str, value: RuntimeValue) {
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), value);
     }
 
@@ -137,20 +152,40 @@ impl RuntimeContext {
     }
 
     pub fn set_scalar(&mut self, name: &str, value: RuntimeValue) {
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), value);
+    }
+
+    pub fn get_bare_value(&self, name: &str) -> RuntimeValue {
+        match self.bare_kinds.get(name).copied() {
+            Some(RuntimeVarKind::Array) => RuntimeValue::Array(self.get_array(name)),
+            Some(RuntimeVarKind::Hash) => RuntimeValue::Hash(self.get_hash(name)),
+            Some(RuntimeVarKind::Scalar) | None => self.get_scalar(name),
+        }
+    }
+
+    pub fn bare_kind(&self, name: &str) -> Option<RuntimeVarKind> {
+        self.bare_kinds.get(name).copied()
     }
 
     // ── Arrays ──
 
     pub fn declare_array(&mut self, name: &str) {
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Array);
         self.arrays.insert(name.to_string(), Vec::new());
     }
 
     pub fn set_array(&mut self, name: &str, values: Vec<RuntimeValue>) {
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Array);
         self.arrays.insert(name.to_string(), values);
     }
 
     pub fn push_value(&mut self, arr_name: &str, value: RuntimeValue) {
+        self.bare_kinds
+            .insert(arr_name.to_string(), RuntimeVarKind::Array);
         self.arrays
             .entry(arr_name.to_string())
             .or_default()
@@ -158,6 +193,8 @@ impl RuntimeContext {
     }
 
     pub fn push_front_value(&mut self, arr_name: &str, value: RuntimeValue) {
+        self.bare_kinds
+            .insert(arr_name.to_string(), RuntimeVarKind::Array);
         self.arrays
             .entry(arr_name.to_string())
             .or_default()
@@ -165,6 +202,8 @@ impl RuntimeContext {
     }
 
     pub fn pop_back_value(&mut self, arr_name: &str) -> RuntimeValue {
+        self.bare_kinds
+            .insert(arr_name.to_string(), RuntimeVarKind::Array);
         self.arrays
             .entry(arr_name.to_string())
             .or_default()
@@ -173,6 +212,8 @@ impl RuntimeContext {
     }
 
     pub fn pop_front_value(&mut self, arr_name: &str) -> RuntimeValue {
+        self.bare_kinds
+            .insert(arr_name.to_string(), RuntimeVarKind::Array);
         let values = self.arrays.entry(arr_name.to_string()).or_default();
         if values.is_empty() {
             RuntimeValue::Undef
@@ -192,10 +233,14 @@ impl RuntimeContext {
     // ── Hashes ──
 
     pub fn declare_hash(&mut self, name: &str) {
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Hash);
         self.hashes.insert(name.to_string(), Vec::new());
     }
 
     pub fn set_hash(&mut self, name: &str, values: Vec<(String, RuntimeValue)>) {
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Hash);
         self.hashes.insert(name.to_string(), values);
     }
 
@@ -204,6 +249,8 @@ impl RuntimeContext {
     }
 
     pub fn set_hash_entry(&mut self, hash_name: &str, key: &str, value: RuntimeValue) {
+        self.bare_kinds
+            .insert(hash_name.to_string(), RuntimeVarKind::Hash);
         let entries = self.hashes.entry(hash_name.to_string()).or_default();
         if let Some(existing) = entries.iter_mut().find(|(k, _)| k == key) {
             existing.1 = value;
@@ -223,6 +270,7 @@ impl RuntimeContext {
             scalars: std::mem::take(&mut self.scalars),
             arrays: std::mem::take(&mut self.arrays),
             hashes: std::mem::take(&mut self.hashes),
+            bare_kinds: std::mem::take(&mut self.bare_kinds),
         }
     }
 
@@ -230,6 +278,7 @@ impl RuntimeContext {
         self.scalars = stores.scalars;
         self.arrays = stores.arrays;
         self.hashes = stores.hashes;
+        self.bare_kinds = stores.bare_kinds;
     }
 
     pub(crate) fn enter_user_function(&mut self, name: &str) -> bool {
@@ -260,10 +309,12 @@ impl RuntimeContext {
     ///
     /// After a parent dispatches a child via an action edge (`-> Child`) or a
     /// blind-call edge (`=> Child`), the engine stores the child's return value
-    /// here so the parent's attached code and its `LE`/`E` blocks can read it as
-    /// `scalar(retv)` (Runtime Semantics §3.3 / §6.1). Before this was wired in,
-    /// `scalar(retv)` resolved to undef for virtually every grammar.
+    /// here so the parent's attached code and its `LE`/`E` blocks can read it through
+    /// the scalar-slot shorthand (Runtime Semantics §3.3 / §6.1). Before this was wired
+    /// in, `retv` resolved to undef for virtually every grammar.
     pub fn set_retv(&mut self, value: RuntimeValue) {
+        self.bare_kinds
+            .insert("retv".to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert("retv".to_string(), value);
     }
 

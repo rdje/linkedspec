@@ -36,8 +36,8 @@ A helper-oriented rule should make the intent visible:
 Top::
  /name=(\w+)/ -> Value {
    declare(scalar, name);
-   set(scalar(name), entry_group(0));
-   return(hash("kind", "assignment", "name", scalar(name)));
+   name = entry_group(0);
+   return(hash("kind", "assignment", "name", :name));
  }
 ```
 
@@ -57,7 +57,7 @@ The current helper surface is broad, but it is easier to learn in families. Each
 
 Construct and transform values during parsing:
 
-- `:name` — read the named scalar slot; `scalar(name)` remains the long compatible form
+- `:name` — read the named scalar slot; `:name` remains the long compatible form
 - `array(name)` — read a named array value
 - `hash(name)` — read a named hash value
 - `flat_array(...)` — flatten arguments into an array
@@ -86,7 +86,7 @@ Detailed reference: [Declaration Helper Reference](declaration-helper-reference.
 
 Write values into declared variables or containers:
 
-- `set(target, value)` — write a value; `assign(target, value)` is the legacy alias. Scalar and direct-shape aggregate assignments also yield the stored value in value positions.
+- `set(target, value)` — write a value; `target = value` is the preferred operator form. Scalar and direct-shape aggregate assignments also yield the stored value in value positions.
 - `name = value` — terse assignment operator; scalar RHS values yield the stored scalar, and direct array/hash RHS shapes yield the assigned aggregate value after target-kind inference
 - `=(name, value)` — operator-call spelling for the same assignment value expression
 - `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot
@@ -162,7 +162,7 @@ Emit debug or informational output during parsing:
 Invoke child rules and handle results:
 
 - `call(RuleName)` — call a child rule and capture its return value
-- Combined with `set(scalar(retv), call(Child))` to store child results
+- Combined with `retv = call(Child)` to store child results
 
 ## How helpers reach emitted code
 
@@ -174,7 +174,7 @@ Every helper call passes through the ActionIR lowering pipeline (see [ActionIR L
 4. The appropriate lowering owner (`MethodExpr`, `FlowExpr`, `ValueExpr`, `ControlFlow`, `MethodLowering`, `DeclareMethod`, `ArrayPipeline`, `Diagnostics`) lowers the event to emitted code
 5. The final emitted Perl is generated — but the lowering pipeline is designed so that other backends can substitute their own final stage
 
-This is why writing `set(scalar(name), entry_group(0))` is fundamentally different from writing raw Perl: the helper form is inspectable, validatable, and retargetable. Raw Perl is opaque to the lowering pipeline.
+This is why writing `name = entry_group(0)` is fundamentally different from writing raw Perl: the helper form is inspectable, validatable, and retargetable. Raw Perl is opaque to the lowering pipeline.
 
 The linked chapters below introduce these families in public-facing terms. The repo-root ActionIR guides remain the exhaustive working references while the book continues growing.
 

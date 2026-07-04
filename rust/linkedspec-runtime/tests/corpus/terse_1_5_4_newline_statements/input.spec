@@ -1,6 +1,6 @@
 Top::
  /x/ -> Done { set(name,"a")
- return(scalar(name)) }
+ return(:name) }
 
 Done::
  /[a-z]+/

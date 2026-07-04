@@ -180,7 +180,7 @@ fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
 
 Top::
  /x/ -> Done {
-  set(scalar(stage_meta), mk_meta("k", "v"))
+  stage_meta = mk_meta("k", "v")
   return([normalize(" x "), join_pair("a", "b"), count(mk_items("a", "b")), stage_meta["k"]])
  }
 Done::
@@ -210,7 +210,7 @@ Value-only helper-call composition now also consumes AST `call` nodes recursivel
 reusing the existing Perl helper catalog, covering scalar normalization, string
 predicate/composition, coalesce/concat, and scalar-argument numeric helpers. Aggregate
 helper-call families now consume AST `call` nodes too: canonical wrappers
-(`scalar(...)`/`array(...)`/`hash(...)`), `copy`/`array_copy`/`hash_copy`, collection
+(`...`/`array(...)`/`hash(...)`), `copy`/`array_copy`/`hash_copy`, collection
 helpers, numeric reducers over aggregate operands, and hash helpers rebuild their helper
 surface from typed AST fields while preserving symbol slots and quoted-wrapper literal
 boundaries before reusing the existing Perl helper catalog. Unsupported covered helper

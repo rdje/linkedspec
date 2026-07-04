@@ -24,8 +24,8 @@ Helper DSL makes common parser actions explicit.
 Instead of asking readers to understand a substring expression, a mutable array push, and a return shape all at once, a rule can say:
 
 ```text
-set(scalar(name), entry_group(0));
-push_value(array(items), scalar(name));
+name = entry_group(0);
+push_value(array(items), :name);
 return(hash("kind", "names", "items", array_copy(array(items))));
 ```
 
@@ -36,8 +36,8 @@ That is still compact, but it is more self-describing.
 Source-level helper DSL:
 
 ```text
-set(scalar(name), entry_group(0));
-return(hash("kind", "token", "name", scalar(name)));
+name = entry_group(0);
+return(hash("kind", "token", "name", :name));
 ```
 
 Semantic reading:
@@ -54,8 +54,8 @@ LinkedSpec still recognizes older compatibility forms because real specs exist a
 However, new public examples should prefer canonical helper forms:
 
 ```text
-set(scalar(retv), call(Child));
-push_value(array(items), scalar(retv));
+retv = call(Child);
+push_value(array(items), :retv);
 ```
 
 over raw or compatibility-heavy shapes such as direct Perl assignment and manual array mutation.
@@ -87,7 +87,7 @@ Start with the core families:
 
 - `set(...)` for writing values
 - `return(...)` for returning payloads
-- `scalar(...)`, `array(...)`, `hash(...)` for value construction
+- `...`, `array(...)`, `hash(...)` for value construction
 - `entry_*` and `match_*` readers for match data
 - `capture_*` and `mark_*` helpers for parser boundary work
 - `if(...)` and `switch` helpers for structured control flow
@@ -136,7 +136,7 @@ create a boundary. Nested semicolons inside expression payloads stay inside the 
 Each contract family has a dedicated lowering owner:
 
 - `FlowExpr` — flow-expression helpers (method chains, fluent continuations)
-- `ValueExpr` — value construction (`scalar(...)`, `array(...)`, `hash(...)`)
+- `ValueExpr` — value construction (`...`, `array(...)`, `hash(...)`)
 - `ControlFlow` — structured control flow (`if/elseif/else/endif`, `switch/case/default/endswitch`)
 - `MethodLowering` — method-like helper lowering to Perl code
 - `DeclareMethod` — declaration helpers (`declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`)

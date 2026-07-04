@@ -13,14 +13,14 @@ use serde_json::Value;
 const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child {
   I { declare(array, results) }
-  LE { push_value(array(results), scalar(retv)) }
+  LE { push_value(array(results), :retv) }
   E { return(array("?results:", array_copy(array(results)))) }
  }
 
 Child::
  /hello[ \t]+(\w+)/
  I { declare(scalar, name=entry_group(0)) }
- E { return(scalar(name)) }
+ E { return(:name) }
 "#;
 
 #[test]
@@ -475,7 +475,7 @@ fn mk_items(first, second) { items += first; items += second; return(array_copy(
 fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
 
 Top::
- /x/ -> Done { set(scalar(stage_meta), mk_meta("k","v")); return([normalize(" x "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["k"]]) }
+ /x/ -> Done { stage_meta = mk_meta("k","v"); return([normalize(" x "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["k"]]) }
 Done:
  /[a-z]+/
 "#;
@@ -681,10 +681,10 @@ fn corpus_recursive_grammar() {
 fn corpus_lifecycle_ordered_output() {
     let grammar = r#"OrderedParser::OR{1,1}
  /(\w+)/
- I { declare(array, log); push_value(array(log), scalar("I")) }
- LS { push_value(array(log), scalar("LS")) }
+ I { declare(array, log); push_value(array(log), "I") }
+ LS { push_value(array(log), "LS") }
  LE { push_value(array(log), entry_group(0)) }
- E { push_value(array(log), scalar("E")); return(array_copy(array(log))) }
+ E { push_value(array(log), "E"); return(array_copy(array(log))) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -710,11 +710,11 @@ fn corpus_blind_call_and_rule() {
 
 ChildA:
  /a/
- I { push_value(array(log), scalar("A")) }
+ I { push_value(array(log), "A") }
 
 ChildB:
  /b/
- I { push_value(array(log), scalar("B")) }
+ I { push_value(array(log), "B") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -758,16 +758,16 @@ fn corpus_rep_with_bounds() {
 #[test]
 fn regression_edge_only_rule_dispatches_to_children() {
     let grammar = r#"DispatchParser::
- -> Word { return(scalar(entry_text())) }
- -> Number { return(scalar(entry_text())) }
+ -> Word { return(entry_text()) }
+ -> Number { return(entry_text()) }
 
 Word:
  /[A-Za-z]+/
- E { return(scalar(entry_text())) }
+ E { return(entry_text()) }
 
 Number:
  /\d+/
- E { return(scalar(entry_text())) }
+ E { return(entry_text()) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -855,15 +855,15 @@ fn regression_mixed_regex_and_edge_rule() {
 
 ChildA:
  /[Hh]i/
- E { return(scalar("child_a")) }
+ E { return("child_a") }
 
 ChildB:
  /[Bb]ye/
- E { return(scalar("child_b")) }
+ E { return("child_b") }
 
 ChildC:
  /extra/
- E { return(scalar("child_c")) }
+ E { return("child_c") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -931,15 +931,15 @@ fn regression_self_recursive_multi_entrypoint_compiler_output() {
 #[test]
 fn regression_grouped_edge_targets() {
     let grammar = r#"GroupedParser::
- /token/ -> ChildA | ChildB { return(scalar("both")) }
+ /token/ -> ChildA | ChildB { return("both") }
 
 ChildA:
  /token/
- E { return(scalar("A")) }
+ E { return("A") }
 
 ChildB:
  /token/
- E { return(scalar("B")) }
+ E { return("B") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -969,7 +969,7 @@ fn regression_edge_only_with_child_regex_index() {
 Child:
  /first_pattern/
  /second_pattern/
- E { return(scalar(entry_text())) }
+ E { return(entry_text()) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -995,16 +995,16 @@ Child:
 #[test]
 fn regression_edge_only_with_lifecycle_blocks() {
     let grammar = r#"LifecycleParser::OR{1,1}
- I { declare(array, log); push_value(array(log), scalar("I")) }
- LS { push_value(array(log), scalar("LS")) }
- LE { push_value(array(log), scalar("LE")) }
+ I { declare(array, log); push_value(array(log), "I") }
+ LS { push_value(array(log), "LS") }
+ LE { push_value(array(log), "LE") }
  -> Child
- E { push_value(array(log), scalar("E")); return(array_copy(array(log))) }
+ E { push_value(array(log), "E"); return(array_copy(array(log))) }
 
 Child:
  /hello/
  I { declare(scalar, retv=entry_text()) }
- E { return(scalar(retv)) }
+ E { return(:retv) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1054,7 +1054,7 @@ fn regression_self_recursive_edge_only_compiler_output() {
 // ── RUST-PARITY.5.1 regression tests — child-return (retv) propagation ──
 //
 // Before the fix, a child rule's `return(expr)` only pushed onto the shared
-// accumulator and `execute_rule` never set a `retv` scalar, so `scalar(retv)`
+// accumulator and `execute_rule` never set a `retv` scalar, so `:retv`
 // in a parent block resolved to undef. These tests pin retv propagation across
 // action edges (`->`, OR/default), blind-call edges (`=>`, AND), repetition
 // (REP), and the `call(child)` helper. `execute()` returns the accumulator, so
@@ -1067,12 +1067,12 @@ fn retv_5_1_action_edge_propagates_child_return_into_le() {
     let grammar = r#"Parent::
  /open/ -> Child
  I { declare(array, results) }
- LE { push_value(array(results), scalar(retv)) }
+ LE { push_value(array(results), :retv) }
  E { return(array_copy(array(results))) }
 
 Child:
  /close/
- E { return(scalar("child_value")) }
+ E { return("child_value") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1095,11 +1095,11 @@ fn retv_5_1_blind_call_edge_propagates_child_return() {
     let grammar = r#"Top::AND
  I { declare(array, collected) }
  => Child
- E { push_value(array(collected), scalar(retv)); return(array_copy(array(collected))) }
+ E { push_value(array(collected), :retv); return(array_copy(array(collected))) }
 
 Child:
  /go/
- E { return(scalar("blind_ret")) }
+ E { return("blind_ret") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1122,12 +1122,12 @@ fn retv_5_1_rep_dispatch_collects_each_child_return_via_retv() {
     let grammar = r#"List::OR+
  /(\w+)/ -> Item
  I { declare(array, out) }
- LE { push_value(array(out), scalar(retv)) }
+ LE { push_value(array(out), :retv) }
  E { return(array_copy(array(out))) }
 
 Item:
  /unused/
- E { return(scalar("ITEM")) }
+ E { return("ITEM") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1147,18 +1147,18 @@ Item:
     );
 }
 
-// (d) `call(child)` evaluates to the child's return value, so
-// `assign(s(retv), call(child))` captures it (the Perl reference pattern).
+// (d) `call(child)` evaluates to the child's return value, so a normal
+// assignment captures it in the caller.
 #[test]
 fn retv_5_1_call_helper_returns_child_return_value() {
     let grammar = r#"Driver::
  /seed/
  I { declare(scalar, captured) }
- E { assign(scalar(captured), call(Sub)); return(scalar(captured)) }
+ E { captured = call(Sub); return(:captured) }
 
 Sub:
  /x/
- E { return(scalar("sub_ret")) }
+ E { return("sub_ret") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1193,12 +1193,12 @@ fn match_5_2_child_entry_is_dispatcher_match_local_is_own() {
     let grammar = r#"Parent::
  /(open)/ -> Child
  I { declare(array, results) }
- LE { push_value(array(results), scalar(retv)) }
+ LE { push_value(array(results), :retv) }
  E { return(array_copy(array(results))) }
 
 Child:
  /(close)/
- E { return(concat(scalar(entry_text()), scalar("|"), scalar(match_text()))) }
+ E { return(concat(entry_text(), "|", match_text())) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1223,12 +1223,12 @@ fn match_5_2_parent_local_match_survives_child_dispatch() {
     let grammar = r#"Parent::
  /(open)/ -> Child
  I { declare(array, results) }
- LE { push_value(array(results), scalar(match_text())) }
+ LE { push_value(array(results), match_text()) }
  E { return(array_copy(array(results))) }
 
 Child:
  /(close)/
- E { return(scalar("child")) }
+ E { return("child") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1251,7 +1251,7 @@ Child:
 fn match_5_2_top_rule_entry_equals_local_match() {
     let grammar = r#"Top::
  /(\w+)/
- E { return(concat(scalar(entry_text()), scalar("|"), scalar(match_text()))) }
+ E { return(concat(entry_text(), "|", match_text())) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1334,9 +1334,9 @@ fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
 // ── SPEC-FORMAT-TERSE.1.1.2 (ADR 0007 + ADR 0006) — auto-existing working ──
 // ── variables: Rust lockstep parity with the Perl reference (.1.1.1).        ──
 //
-// The Perl reference now lets a working variable referenced through a typed
-// wrapper -- scalar(NAME)/array(NAME) (or the s()/a()/h() aliases) -- be used
-// WITHOUT a prior declare(...). In Perl that needed an engine change: generated
+// The Perl reference now lets a working variable referenced through the current
+// typed spelling -- `:NAME` for scalar slots and `array(NAME)` for arrays -- be
+// used WITHOUT a prior declare(...). In Perl that needed an engine change: generated
 // handlers run non-strict, so an undeclared bare var would silently become a
 // leaky package global (KM working-vars-no-strict-need-my-lexical), and the fix
 // auto-injects a per-invocation `my` in the handler preamble.
@@ -1378,9 +1378,9 @@ fn build_and_run_result(grammar: &str, input: &str) -> Result<Value, String> {
 
 #[test]
 fn terse_1_1_2_auto_existing_scalar_var_works_without_declare() {
-    // scalar(v) is assigned and read back with NO declare(scalar, v) -- it
+    // :v is assigned and read back with NO declare(scalar, v) -- it
     // auto-exists. Perl returns "ok"; Rust wraps the accumulator one level.
-    let grammar = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["ok"]),
@@ -1405,8 +1405,9 @@ fn terse_1_1_2_declare_form_unchanged_vs_no_declare() {
     // The declare(...) form and the no-declare form lower to identical output --
     // the Rust analogue of the Perl "declare path stays single `my`, no double"
     // lock: adding/removing the declare must not change behavior.
-    let scalar_no = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
-    let scalar_decl = "Top::\n /x/ -> Done { declare(scalar, v); assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let scalar_no = "Top::\n /x/ -> Done { v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
+    let scalar_decl =
+        "Top::\n /x/ -> Done { declare(scalar, v); v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(scalar_no, "xhello"),
         build_and_run(scalar_decl, "xhello"),
@@ -1429,7 +1430,7 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
     // an accumulation. A shared/leaky variable store would grow across parses; a
     // fresh-per-execute context does not. We assert BOTH runs equal AND the exact
     // value, so a regression to a leaky store fails loudly.
-    let scalar = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let scalar = "Top::\n /x/ -> Done { v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(scalar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1455,23 +1456,22 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
 }
 
 // ── SPEC-FORMAT-TERSE.1.2.2 — Rust lockstep parity for .1.2.1 (Channel 1):
-// a BARE (un-wrapped) working var in a type-implying ARG position auto-exists with
-// the position-implied kind (assign target -> scalar, push_value/push_nonempty
+// a BARE working var in a type-implying position auto-exists with
+// the position-implied kind (operator assignment target -> scalar, push_value/push_nonempty
 // target -> array). On the Perl reference (.1.2.1) the engine auto-supplies the
 // per-invocation `my`; on Rust resolve_scalar_target/resolve_array_target now map
 // the bare name to the working variable and the per-parse RuntimeContext HashMap
 // auto-vivifies it (no declare, no leak). The mutation target is bare (Channel 1);
-// the value is read back through a wrapper -- bare value-position reads are Channel 2.
+// the value is read back through `:name`.
 
 #[test]
 fn terse_1_2_2_bare_scalar_arg_auto_exists() {
-    // assign(v, ...) with a BARE target -- no scalar() wrapper, no declare.
-    let grammar =
-        "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    // v = ... with a BARE target -- no scalar-slot marker, no declare.
+    let grammar = "Top::\n /x/ -> Done { v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["ok"]),
-        "bare assign target auto-exists as a scalar (= Perl reference \"ok\" wrapped one level)"
+        "bare assignment target auto-exists as scalar state; Perl reference is \"ok\" wrapped one level"
     );
 }
 
@@ -1496,18 +1496,19 @@ fn terse_1_2_2_bare_array_arg_auto_exists() {
 
 #[test]
 fn terse_1_2_2_bare_matches_wrapped_and_declare() {
-    // The bare arg-position form produces the same value as the wrapped form and the
+    // The bare assignment form produces the same value as the explicit scalar-slot form and the
     // declare form (the Rust analogue of the Perl "byte-identical / single `my`"
-    // locks): the wrapper/declare are optional in these positions.
-    let bare =
-        "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { assign(scalar(v), \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
-    let declared = "Top::\n /x/ -> Done { declare(scalar, v); assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    // locks): the explicit slot marker/declare are optional in these positions.
+    let bare = "Top::\n /x/ -> Done { v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
+    let explicit_slot =
+        "Top::\n /x/ -> Done { set(:v, \"ok\"); return(:v) }\n\nDone::\n /[a-z]+/\n";
+    let declared =
+        "Top::\n /x/ -> Done { declare(scalar, v); v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
     let b = build_and_run(bare, "xhello");
     assert_eq!(
         b,
-        build_and_run(wrapped, "xhello"),
-        "scalar: bare arg == wrapped"
+        build_and_run(explicit_slot, "xhello"),
+        "scalar: bare assignment == explicit slot"
     );
     assert_eq!(
         b,
@@ -1528,8 +1529,7 @@ fn terse_1_2_2_bare_matches_wrapped_and_declare() {
 fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
     // Re-running the SAME engine yields the identical value -- a bare arg-position
     // working var is per-parse (fresh RuntimeContext per execute), never leaked.
-    let scalar =
-        "Top::\n /x/ -> Done { assign(v, \"ok\"); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let scalar = "Top::\n /x/ -> Done { v = \"ok\"; return(:v) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(scalar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1665,8 +1665,8 @@ fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
 
 #[test]
 fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
-    let terse = "Top::\n /x/ -> Done { set(scalar(label), cat(\"a\", \"b\")); push_value(array(items), scalar(label)); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { assign(scalar(label), concat(\"a\", \"b\")); push_value(array(items), scalar(label)); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { set(:label, cat(\"a\", \"b\")); push_value(array(items), :label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { label = concat(\"a\", \"b\"); push_value(array(items), :label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
@@ -1676,7 +1676,7 @@ fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
     assert_eq!(
         actual,
         build_and_run(canonical, "xhello"),
-        "set/cat/copy(array) == assign/concat/array_copy on Rust"
+        "set/cat/copy(array) == operator/concat/array_copy on Rust"
     );
 }
 
@@ -1713,8 +1713,8 @@ fn terse_1_4_2_copy_hash_matches_hash_copy() {
 
 #[test]
 fn terse_1_3_2_push_alias_matches_push_value() {
-    let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, scalar(label)); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, scalar(label)); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, :label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, :label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
@@ -1749,7 +1749,7 @@ fn terse_1_3_3_set_key_statement_mutates_hash() {
 
 #[test]
 fn terse_1_3_3_set_key_value_helper_stays_pure_copy() {
-    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"existing\", \"old\"); set(snapshot, set_key(hash(meta), \"stage\", \"v\")); return(array(hash_copy(hash(meta)), scalar(snapshot))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"existing\", \"old\"); set(snapshot, set_key(hash(meta), \"stage\", \"v\")); return(array(hash_copy(hash(meta)), :snapshot)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[{"existing": "old"}, {"existing": "old", "stage": "v"}]]),
@@ -1759,8 +1759,9 @@ fn terse_1_3_3_set_key_value_helper_stays_pure_copy() {
 
 #[test]
 fn terse_1_3_4_1_scalar_assignment_operator_matches_set() {
-    let operator = "Top::\n /x/ -> Done { name = cat(\"o\", \"k\"); return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { set(name, cat(\"o\", \"k\")); return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
+    let operator =
+        "Top::\n /x/ -> Done { name = cat(\"o\", \"k\"); return(:name) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { set(name, cat(\"o\", \"k\")); return(:name) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(operator, "xhello");
     assert_eq!(
         actual,
@@ -1776,7 +1777,8 @@ fn terse_1_3_4_1_scalar_assignment_operator_matches_set() {
 
 #[test]
 fn terse_1_3_4_1_scalar_assignment_target_is_per_parse() {
-    let grammar = "Top::\n /x/ -> Done { name = cat(\"o\", \"k\"); return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar =
+        "Top::\n /x/ -> Done { name = cat(\"o\", \"k\"); return(:name) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1788,8 +1790,8 @@ fn terse_1_3_4_1_scalar_assignment_target_is_per_parse() {
 
 #[test]
 fn terse_1_3_4_2_array_append_operator_matches_push_value() {
-    let operator = "Top::\n /x/ -> Done { label = \"b\"; items += \"a\"; items += scalar(label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, scalar(label)); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let operator = "Top::\n /x/ -> Done { label = \"b\"; items += \"a\"; items += :label; return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, :label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(operator, "xhello");
     assert_eq!(
         actual,
@@ -1850,7 +1852,8 @@ fn terse_1_3_4_3_hash_index_assignment_target_is_per_parse() {
 
 #[test]
 fn terse_1_4_2_set_target_is_per_parse_not_leaky() {
-    let grammar = "Top::\n /x/ -> Done { set(v, cat(\"o\", \"k\")); return(scalar(v)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar =
+        "Top::\n /x/ -> Done { set(v, cat(\"o\", \"k\")); return(:v) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1877,7 +1880,7 @@ fn terse_1_5_2_primitive_literals_return_typed_values() {
 
 #[test]
 fn terse_1_5_2_boolean_literals_work_in_mutations_and_flow() {
-    let grammar = "Top::\n /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; if(false); return(\"bad\"); else(); return(array(scalar(flag), array_copy(array(items)), hash_copy(hash(meta)))); endif() }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; if(false); return(\"bad\"); else(); return(array(:flag, array_copy(array(items)), hash_copy(hash(meta)))); endif() }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[true, [false, true], {"enabled": true}]]),
@@ -1891,7 +1894,7 @@ fn terse_1_5_2_boolean_literals_work_in_mutations_and_flow() {
 
 #[test]
 fn terse_1_5_3_call_spacing_runs_like_tight_calls() {
-    let grammar = "Top::\n /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = scalar (name); return (array(scalar (name), array_copy (array (items)), hash_copy (hash (meta)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = :name; return (array(:name, array_copy (array (items)), hash_copy (hash (meta)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["ab", ["cd"], {"stage": "ab"}]]),
@@ -1906,7 +1909,7 @@ fn terse_1_5_3_call_spacing_runs_like_tight_calls() {
 #[test]
 fn terse_1_5_4_newline_and_semicolon_statement_separators_run() {
     let newline_grammar =
-        "Top::\n /x/ -> Done { set(name,\"a\")\n return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
+        "Top::\n /x/ -> Done { set(name,\"a\")\n return(:name) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(newline_grammar, "xhello"),
         serde_json::json!(["a"]),
@@ -1914,7 +1917,7 @@ fn terse_1_5_4_newline_and_semicolon_statement_separators_run() {
     );
 
     let semicolon_grammar =
-        "Top::\n /x/ -> Done { set(name,\"b\"); return(scalar(name)) }\n\nDone::\n /[a-z]+/\n";
+        "Top::\n /x/ -> Done { set(name,\"b\"); return(:name) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(semicolon_grammar, "xhello"),
         serde_json::json!(["b"]),
@@ -1926,7 +1929,7 @@ fn terse_1_5_4_newline_and_semicolon_statement_separators_run() {
 
 #[test]
 fn terse_1_5_5_1_direct_nested_access_explicit_segments_run() {
-    let grammar = "Top::\n /x/ -> Done { set(foo, hash(\"a\", array(hash(\"b\", array(\"zero\",\"one\")))))\n set(z,1)\n return(foo[\"a\"][0][\"b\"][scalar(z)]) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(foo, hash(\"a\", array(hash(\"b\", array(\"zero\",\"one\")))))\n set(z,1)\n return(foo[\"a\"][0][\"b\"][z]) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["one"]),
@@ -1941,7 +1944,7 @@ fn terse_1_5_5_1_direct_nested_access_explicit_segments_run() {
 
 #[test]
 fn terse_1_2_3_4_scalar_source_slot_bare_reads_run() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(out, value); name = value; return(value); return(array(scalar(out), scalar(name))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(out, value); name = value; return(value); return(array(:out, :name)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["ok", ["ok", "ok"]]),
@@ -2015,7 +2018,7 @@ fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
 
 #[test]
 fn terse_1_2_3_5_4_shape_rhs_no_longer_uses_scalar_assignment_after_target_inference_leaf() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(scalar(name), array_copy(array(name)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(:name, array_copy(array(name)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[null, ["ok"]]]),
@@ -2025,7 +2028,7 @@ fn terse_1_2_3_5_4_shape_rhs_no_longer_uses_scalar_assignment_after_target_infer
 
 #[test]
 fn terse_1_2_3_5_4_bare_shape_rhs_infers_array_and_hash_targets() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); items = [value]; items += \"tail\"; meta = { key => value }; meta[\"fixed\"] = \"yes\"; return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(items), scalar(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); items = [value]; items += \"tail\"; meta = { key => value }; meta[\"fixed\"] = \"yes\"; return(array(array_copy(array(items)), hash_copy(hash(meta)), :items, :meta)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok", "tail"], {"fixed": "yes", "stage": "ok"}, null, null]]),
@@ -2034,22 +2037,22 @@ fn terse_1_2_3_5_4_bare_shape_rhs_infers_array_and_hash_targets() {
 }
 
 #[test]
-fn terse_1_2_3_5_4_set_and_assign_shape_rhs_infer_bare_targets() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); assign(meta, { key => value }); return(array(array_copy(array(items)), hash_copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+fn terse_1_2_3_5_4_set_shape_rhs_infers_bare_targets() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); meta = { key => value }; return(array(array_copy(array(items)), hash_copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}]]),
-        "set/assign use direct shape RHS to infer aggregate target kind for bare targets"
+        "set(...) and operator assignment use direct shape RHS to infer aggregate target kind for bare targets"
     );
 }
 
 #[test]
 fn terse_1_2_3_5_4_explicit_typed_targets_and_scalar_boundary() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(array(items), [value]); set(hash(meta), { key => value }); set(scalar(payload), [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), scalar(payload), array_copy(array(payload)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(array(items), [value]); set(hash(meta), { key => value }); set(:payload, [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), :payload, array_copy(array(payload)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], []]]),
-        "explicit array/hash targets accept direct shapes, while scalar(...) stores the shape payload in the scalar"
+        "explicit array/hash targets accept direct shapes, while :payload stores the shape payload in the scalar"
     );
 }
 
@@ -2060,6 +2063,16 @@ fn terse_6_2_3_1_scalar_slot_shorthand_runs() {
         build_and_run(grammar, "xhello"),
         serde_json::json!([["ok", ["ok"], [], ["ok"]]]),
         ":name reads scalar slots and set(:name, shape) keeps the shape payload in the scalar"
+    );
+}
+
+#[test]
+fn terse_6_2_3_2_bare_identifier_remembers_type_after_initialization() {
+    let grammar = "Top::\n /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key => value }; return(array(copy(items), copy(meta), items.count(), meta.count_keys(), items.first(), meta.pick_keys(key).sorted_values().first())) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[["ok"], {"stage": "ok"}, 1, 1, "ok", "ok"]]),
+        "bare identifiers remember scalar/array/hash kind after initialization"
     );
 }
 
@@ -2188,7 +2201,7 @@ fn terse_2_2_4_when_otherwise_alias_runs_selected_branch() {
 
 #[test]
 fn terse_2_2_5_2_attached_switch_selects_first_matching_case() {
-    let grammar = "Top::\n /x/ -> Done { set(kind, \"a\"); switch(scalar(kind)) { case(\"a\") { return(\"first\") } case(\"a\") { return(\"second\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(kind, \"a\"); switch(:kind) { case(\"a\") { return(\"first\") } case(\"a\") { return(\"second\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["first"]),
@@ -2198,14 +2211,14 @@ fn terse_2_2_5_2_attached_switch_selects_first_matching_case() {
 
 #[test]
 fn terse_2_2_5_2_attached_switch_selects_later_case_and_default() {
-    let later_case = "Top::\n /x/ -> Done { set(kind, \"b\"); switch(scalar(kind)) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"later\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
+    let later_case = "Top::\n /x/ -> Done { set(kind, \"b\"); switch(:kind) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"later\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(later_case, "xhello"),
         serde_json::json!(["later"]),
         "attached switch can select a later case"
     );
 
-    let fallback = "Top::\n /x/ -> Done { set(kind, \"z\"); switch(scalar(kind)) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"bad\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
+    let fallback = "Top::\n /x/ -> Done { set(kind, \"z\"); switch(:kind) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"bad\") } default { return(\"default\") } } }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(fallback, "xhello"),
         serde_json::json!(["default"]),
@@ -2215,7 +2228,7 @@ fn terse_2_2_5_2_attached_switch_selects_later_case_and_default() {
 
 #[test]
 fn terse_2_2_5_2_attached_switch_branches_gate_side_effects() {
-    let grammar = "Top::\n /x/ -> Done { set(kind, \"b\"); set(out, \"start\"); switch(scalar(kind)) { case(\"a\") { set(out, \"bad\") } case(\"b\") { if(true) { set(out, \"matched\") } else { set(out, \"bad\") } } default { set(out, \"default\") } }; return(out) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(kind, \"b\"); set(out, \"start\"); switch(:kind) { case(\"a\") { set(out, \"bad\") } case(\"b\") { if(true) { set(out, \"matched\") } else { set(out, \"bad\") } } default { set(out, \"default\") } }; return(out) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["matched"]),
@@ -2225,7 +2238,7 @@ fn terse_2_2_5_2_attached_switch_branches_gate_side_effects() {
 
 #[test]
 fn terse_2_2_5_2_attached_switch_preserves_inline_value_form() {
-    let grammar = "Top::\n /x/ -> Done { set(kind, \"b\"); set(inline, switch(scalar(kind), case(\"a\", \"bad\"), case(\"b\", \"inline\"), default(\"default\"))); switch(scalar(kind)) { case(\"b\") { set(attached, \"attached\") } default { set(attached, \"bad\") } }; return(array(inline, attached)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(kind, \"b\"); set(inline, switch(:kind, case(\"a\", \"bad\"), case(\"b\", \"inline\"), default(\"default\"))); switch(:kind) { case(\"b\") { set(attached, \"attached\") } default { set(attached, \"bad\") } }; return(array(inline, attached)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["inline", "attached"]]),
@@ -2237,7 +2250,7 @@ fn terse_2_2_5_2_attached_switch_preserves_inline_value_form() {
 
 #[test]
 fn terse_2_2_6_2_attached_while_counts_and_reevaluates_condition() {
-    let grammar = "Top::\n /x/ -> Done { set(count, 0); while(num_lt(scalar(count), 3)) { set(count, num_add(scalar(count), 1)) }; return(count) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(count, 0); while(num_lt(:count, 3)) { set(count, num_add(:count, 1)) }; return(count) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([3]),
@@ -2247,7 +2260,7 @@ fn terse_2_2_6_2_attached_while_counts_and_reevaluates_condition() {
 
 #[test]
 fn terse_2_2_6_2_attached_while_composes_with_if_and_switch_blocks() {
-    let grammar = "Top::\n /x/ -> Done { set(count, 0); set(kind, \"a\"); set(out, \"\"); while(num_lt(scalar(count), 2)) { if(true) { switch(scalar(kind)) { case(\"a\") { set(out, cat(scalar(out), \"A\")); set(kind, \"b\") } default { set(out, cat(scalar(out), \"B\")) } } } else { set(out, \"bad\") }; set(count, num_add(scalar(count), 1)) }; return(out) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(count, 0); set(kind, \"a\"); set(out, \"\"); while(num_lt(:count, 2)) { if(true) { switch(:kind) { case(\"a\") { set(out, cat(:out, \"A\")); set(kind, \"b\") } default { set(out, cat(:out, \"B\")) } } } else { set(out, \"bad\") }; set(count, num_add(:count, 1)) }; return(out) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!(["AB"]),
@@ -2267,7 +2280,7 @@ fn terse_2_2_6_2_attached_while_return_exits_rule_block() {
 
 #[test]
 fn terse_2_2_6_2_attached_while_composes_inside_expression_blocks() {
-    let grammar = "Top::\n /x/ -> Done { set(counted, { set(count, 0); while(num_lt(scalar(count), 2)) { set(count, num_add(scalar(count), 1)) }; count }); set(local, { while(true) { return(\"local\") }; \"bad\" }); return(array(counted, local)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(counted, { set(count, 0); while(num_lt(:count, 2)) { set(count, num_add(:count, 1)) }; count }); set(local, { while(true) { return(\"local\") }; \"bad\" }); return(array(counted, local)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[2, "local"]]),
@@ -2277,7 +2290,7 @@ fn terse_2_2_6_2_attached_while_composes_inside_expression_blocks() {
 
 #[test]
 fn terse_2_2_6_2_attached_while_has_iteration_safety_limit() {
-    let grammar = "Top::\n /x/ -> Done { while(true) { set(count, num_add(scalar(count), 1)) } }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { while(true) { set(count, num_add(:count, 1)) } }\n\nDone::\n /[a-z]+/\n";
     let err = build_and_run_result(grammar, "xhello").unwrap_err();
     assert!(
         err.contains("LinkedSpec while iteration safety limit exceeded after 10000 iterations"),
@@ -2292,7 +2305,7 @@ fn terse_2_2_6_2_attached_while_has_iteration_safety_limit() {
 
 #[test]
 fn terse_2_3_2_lifecycle_statement_values_are_discarded() {
-    let grammar = "Top::\n I { set(out, \"from_i\"); set(ignored, \"i-final\") }\n /x/\n E { return(hash(\"out\", scalar(out), \"ignored\", scalar(ignored))) }\n";
+    let grammar = "Top::\n I { set(out, \"from_i\"); set(ignored, \"i-final\") }\n /x/\n E { return(hash(\"out\", :out, \"ignored\", :ignored)) }\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([{"ignored": "i-final", "out": "from_i"}]),
@@ -2344,7 +2357,7 @@ fn terse_2_3_2_child_rule_capture_slice_starts_after_entry_match() {
 
 #[test]
 fn terse_2_3_2_expression_block_return_inside_lifecycle_stays_local() {
-    let grammar = "Top::\n I { set(out, { return(\"block\"); \"after\" }); set(after, \"continued\") }\n /x/\n E { return(hash(\"out\", scalar(out), \"after\", scalar(after))) }\n";
+    let grammar = "Top::\n I { set(out, { return(\"block\"); \"after\" }); set(after, \"continued\") }\n /x/\n E { return(hash(\"out\", :out, \"after\", :after)) }\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([{"after": "continued", "out": "block"}]),
@@ -2396,7 +2409,7 @@ fn rust_parity_7_3_4_4_regex_subst_mutates_scalar_targets() {
 
 Item:
  /("[^"]+")/
- I { raw = entry_group(0); substr(scalar(raw), "\"", "", go); bracket = "[42]"; substr(scalar(bracket), /^\[(\d+)\]$/, "$1", o); csv = "a,b"; parts = []; split(array(parts), scalar(csv), /,/); return(array(scalar(raw), scalar(bracket), copy(array(parts)))) }
+ I { raw = entry_group(0); substr(:raw, "\"", "", go); bracket = "[42]"; substr(:bracket, /^\[(\d+)\]$/, "$1", o); csv = "a,b"; parts = []; split(array(parts), :csv, /,/); return(array(:raw, :bracket, copy(array(parts)))) }
 "#;
     assert_eq!(
         build_and_run(grammar, "\"abc\""),
@@ -2612,7 +2625,7 @@ fn terse_2_3_3_3_2_action_edge_fluent_push_target_appends_child_return() {
 
 #[test]
 fn terse_2_3_3_3_2_action_edge_fluent_flow_push_child_target_true_branch() {
-    let grammar = "top::\n I { declare(array, out); declare(scalar, on); set(on, true) }\n -> item\n  .if(s(on))\n    .push(item, out)\n  .else()\n    .return_undef()\n  .endif()\n E { return(array_copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    let grammar = "top::\n I { declare(array, out); declare(scalar, on); set(on, true) }\n -> item\n  .if(:on)\n    .push(item, out)\n  .else()\n    .return_undef()\n  .endif()\n E { return(array_copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([["x"]]),
@@ -2622,7 +2635,7 @@ fn terse_2_3_3_3_2_action_edge_fluent_flow_push_child_target_true_branch() {
 
 #[test]
 fn terse_2_3_3_3_2_action_edge_fluent_flow_return_undef_false_branch() {
-    let grammar = "top::\n I { declare(array, out); declare(scalar, on); set(on, false) }\n -> item\n  .if(s(on))\n    .push(item, out)\n  .else()\n    .say(\"missing item\")\n    .return_undef()\n  .endif()\n E { return(array_copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    let grammar = "top::\n I { declare(array, out); declare(scalar, on); set(on, false) }\n -> item\n  .if(:on)\n    .push(item, out)\n  .else()\n    .say(\"missing item\")\n    .return_undef()\n  .endif()\n E { return(array_copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([]),
@@ -2652,7 +2665,7 @@ fn terse_2_3_4_1_bare_hash_merge_arg_matches_wrapped() {
 #[test]
 fn terse_2_3_4_1_hash_consumers_accept_bare_hash_arg() {
     let grammar = r#"Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "c", 3); return(array(sorted_keys(set_key(meta, "c", 3)), sorted_keys(rename_key(meta, "a", "aa")), sorted_keys(drop_keys(meta, "b")), sorted_keys(pick_keys(meta, "a")), has_key(meta, "a"), scalar(hash(meta), "b"), count_keys(flat_hash(meta, extra)))) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "c", 3); return(array(sorted_keys(set_key(meta, "c", 3)), sorted_keys(rename_key(meta, "a", "aa")), sorted_keys(drop_keys(meta, "b")), sorted_keys(pick_keys(meta, "a")), has_key(meta, "a"), hash(meta).pick_keys("b").sorted_values().first(), count_keys(flat_hash(meta, extra)))) }
 
 Done::
  /[a-z]+/
@@ -2682,7 +2695,7 @@ Done::
 #[test]
 fn scalaref_retirement_3_direct_access_walks_nested_arrays_and_hashes() {
     let grammar = r#"Top::
- /x/ -> Done { set(i, 1); return(retv["children"][scalar(i)]["name"]) }
+ /x/ -> Done { set(i, 1); return(retv["children"][i]["name"]) }
 
 Done::
  /[a-z]+/ I.return(hash("children", array(hash("name", "zero"), hash("name", entry_text()))))
@@ -2726,11 +2739,11 @@ Done::
 
 #[test]
 fn rust_parity_7_5_2_assign_array_wrapper_replaces_array_value() {
-    let grammar = "Top::\n /x/ -> Done { push_value(array(word), \"x\"); assign(array(word), array()); push_value(array(word), \"y\"); return(array_copy(array(word))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { push_value(array(word), \"x\"); word = []; push_value(array(word), \"y\"); return(array_copy(array(word))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["y"]]),
-        "assign(array(name), array()) replaces the working array instead of assigning a scalar"
+        "name = [] replaces the working array instead of assigning a scalar"
     );
 }
 
@@ -2795,7 +2808,7 @@ fn terse_2_3_5_1_array_end_mutations_remain_statement_only_in_value_slots() {
 #[test]
 fn terse_2_3_5_2_hash_receiver_value_chains_run() {
     let grammar = r#"Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), scalar(hash(layered), "a"), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
 
 Done::
  /[a-z]+/
@@ -2809,7 +2822,7 @@ Done::
 
 #[test]
 fn terse_2_3_5_2_hash_statement_mutations_remain_statement_level() {
-    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"a\", 1); set(snapshot, meta.set_key(\"b\", 2)); meta[\"c\"] = 3; return(array(join_values(\",\", sorted_keys(hash(meta))), count_keys(scalar(snapshot)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"a\", 1); set(snapshot, meta.set_key(\"b\", 2)); meta[\"c\"] = 3; return(array(join_values(\",\", sorted_keys(hash(meta))), count_keys(:snapshot))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a,c", 2]]),
@@ -2938,7 +2951,7 @@ fn terse_3_2_3_4_numeric_comparison_symbol_callees_run() {
 fn terse_3_3_1_scalar_assignment_expressions_run() {
     let grammar = r#"fn store(value) { return(local = value) }
 Top::
- /x/ -> Done { return(array(name = "ok", name, =(other, cat(scalar(name), "!")), other, set(third, store("fn")), third, { block = cat(scalar(third), "!"); block }, =(raw, " hi ").trim())) }
+ /x/ -> Done { return(array(name = "ok", name, =(other, cat(:name, "!")), other, set(third, store("fn")), third, { block = cat(:third, "!"); block }, =(raw, " hi ").trim())) }
 
 Done::
  /[a-z]+/
@@ -2955,7 +2968,7 @@ Done::
 #[test]
 fn terse_3_3_2_aggregate_assignment_expressions_run() {
     let grammar = r#"Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(scalar(payload), [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(:payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -2963,7 +2976,7 @@ Done::
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], ["ok"], {"stage": "ok"}, {"stage": "ok"}, ["ok"], ["ok"], 2]]),
-        "aggregate assignment expressions store and return arrays/hashes while scalar(...) keeps payloads"
+        "aggregate assignment expressions store and return arrays/hashes while ... keeps payloads"
     );
 }
 
@@ -2990,7 +3003,7 @@ Done::
 fn terse_3_3_4_assignment_expression_closure_run() {
     let grammar = r#"fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(scalar(name), "!")), other, set(third, keep("fn")), third, assign(legacy, "compat"), legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, legacy = "compat", legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/

@@ -217,10 +217,6 @@ fn regex_literal_arg(args: &[Arg], index: usize) -> Option<&str> {
 
 fn scalar_mutation_target_arg(arg: &Arg) -> Option<String> {
     match arg.value() {
-        Expr::Call { name, args } if name == "scalar" && args.len() == 1 => match args[0].value() {
-            Expr::Variable { name } => Some(name.clone()),
-            _ => None,
-        },
         Expr::ScalarSlot { name } => Some(name.clone()),
         Expr::Variable { name } => Some(name.clone()),
         _ => None,
@@ -1245,6 +1241,9 @@ impl Engine {
         if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
             return Ok(true);
         }
+        if Self::assign_remembered_aggregate_to_target(name, evaluated.clone(), ctx)?.is_some() {
+            return Ok(true);
+        }
         ctx.set_scalar(name, evaluated);
         Ok(true)
     }
@@ -1442,6 +1441,33 @@ impl Engine {
         }
     }
 
+    fn assign_remembered_aggregate_to_target(
+        target_name: &str,
+        value: RuntimeValue,
+        ctx: &mut RuntimeContext,
+    ) -> Result<Option<RuntimeValue>, String> {
+        match (ctx.bare_kind(target_name), value) {
+            (Some(crate::runtime::RuntimeVarKind::Array), RuntimeValue::Array(values)) => {
+                let stored = RuntimeValue::Array(values.clone());
+                ctx.set_array(target_name, values);
+                Ok(Some(stored))
+            }
+            (Some(crate::runtime::RuntimeVarKind::Hash), RuntimeValue::Hash(values)) => {
+                let stored = RuntimeValue::Hash(values.clone());
+                ctx.set_hash(target_name, values);
+                Ok(Some(stored))
+            }
+            (Some(crate::runtime::RuntimeVarKind::Array), other @ RuntimeValue::Hash(_))
+            | (Some(crate::runtime::RuntimeVarKind::Hash), other @ RuntimeValue::Array(_)) => {
+                Err(format!(
+                    "remembered aggregate assignment kind mismatch for '{}': {:?}",
+                    target_name, other
+                ))
+            }
+            _ => Ok(None),
+        }
+    }
+
     fn direct_shape_assignment_target(
         raw_target: &linkedspec_core::expr::Arg,
         shape_kind: ShapeLiteralKind,
@@ -1559,6 +1585,11 @@ impl Engine {
                 {
                     return Ok(evaluated);
                 }
+                if let Some(stored) =
+                    Self::assign_remembered_aggregate_to_target(name, evaluated.clone(), ctx)?
+                {
+                    return Ok(stored);
+                }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
             }
@@ -1568,7 +1599,7 @@ impl Engine {
             Expr::AssignHashIndex { name, key, value } => {
                 self.eval_hash_index_assignment_expression(name, key, value, ctx, rule_label)
             }
-            Expr::Variable { name } => Ok(ctx.get_scalar(name)),
+            Expr::Variable { name } => Ok(ctx.get_bare_value(name)),
             Expr::ScalarSlot { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {
                 let idx_val = self.eval_expr(index, ctx, rule_label)?;
@@ -1577,7 +1608,7 @@ impl Engine {
                 Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
             }
             Expr::NestedAccess { base, segments } => {
-                let mut current = ctx.get_scalar(base);
+                let mut current = ctx.get_bare_value(base);
                 for segment in segments {
                     current = match segment {
                         AccessSegment::Key { value } => match current {
@@ -2390,6 +2421,11 @@ impl Engine {
                     ctx.set_scalar(name, evaluated);
                     return Ok(ctx.get_scalar(name));
                 }
+                if let Some(stored) =
+                    Self::assign_remembered_aggregate_to_target(name, evaluated.clone(), ctx)?
+                {
+                    return Ok(stored);
+                }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
             }
@@ -2444,26 +2480,19 @@ impl Engine {
 
     /// Resolve a scalar target name from an evaluated value.
     ///
-    /// `scalar(varname)` with a bare variable returns the variable's runtime
-    /// value, but `assign(scalar(varname), ...)` needs the variable NAME.
+    /// `:varname` explicitly names the scalar slot. A bare target name in
+    /// scalar-target position names the working variable itself.
     fn resolve_scalar_target(
         &self,
         raw_args: &[linkedspec_core::expr::Arg],
         val: &RuntimeValue,
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
-        if let Some(Arg::Positional(Expr::Call { name, args })) = raw_args.first() {
-            if name == "scalar" && args.len() == 1 {
-                if let Arg::Positional(Expr::Variable { name: var_name }) = &args[0] {
-                    return var_name.clone();
-                }
-            }
-        }
         if let Some(Arg::Positional(Expr::ScalarSlot { name: var_name })) = raw_args.first() {
             return var_name.clone();
         }
         // SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity, .1.2.2): a BARE
-        // (un-wrapped) name in the scalar-target position (e.g. assign(v, ...)) IS
+        // (un-wrapped) name in the scalar-target position (e.g. v = ...) IS
         // the working variable itself — mirrors the Perl reference's `^(\w+)$`
         // fallback in ValueExpr::_extract_scalar_symbol_name. The per-parse
         // RuntimeContext HashMap auto-vivifies on set_scalar, so it auto-exists
@@ -2613,7 +2642,7 @@ impl Engine {
     /// A bare `call(RuleName)` names the target rule directly — its evaluated
     /// value would be undef (a rule label is not a scalar variable), so the name
     /// must come from the raw AST. Falls back to the evaluated value's
-    /// `to_str()` for the quoted form `call(scalar("RuleName"))`.
+    /// `to_str()` for the quoted form `call("RuleName")`.
     fn resolve_rule_name(
         &self,
         raw_args: &[linkedspec_core::expr::Arg],
@@ -2726,7 +2755,7 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            "assign" | "set" | "=" => {
+            "set" | "=" => {
                 if args.len() >= 2 {
                     if let Some((kind, target)) =
                         Self::aggregate_wrapper_assignment_target(&raw_args[0], &args[1])
@@ -2750,10 +2779,22 @@ impl Engine {
                             );
                         }
                         let target = self.resolve_scalar_target(raw_args, &args[0]);
+                        if let Some(stored) = Self::assign_remembered_aggregate_to_target(
+                            &target,
+                            args[1].clone(),
+                            ctx,
+                        )? {
+                            return Ok(stored);
+                        }
                         ctx.set_scalar(&target, args[1].clone());
                         return Ok(args[1].clone());
                     }
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
+                    if let Some(stored) =
+                        Self::assign_remembered_aggregate_to_target(&target, args[1].clone(), ctx)?
+                    {
+                        return Ok(stored);
+                    }
                     ctx.set_scalar(&target, args[1].clone());
                     return Ok(args[1].clone());
                 }
@@ -2854,38 +2895,9 @@ impl Engine {
                 ctx.set_return_value(RuntimeValue::Undef);
                 Ok(RuntimeValue::Undef)
             }
-            // ── Scalar access ──
-            "scalar" => {
-                if raw_args.len() == 1 {
-                    // `scalar(varname)` with bare variable → return its value
-                    Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
-                } else if args.len() >= 2 {
-                    // `scalar(container, key_or_index)` → index into container
-                    match &args[0] {
-                        RuntimeValue::Array(arr) => {
-                            let idx = args[1].as_number().unwrap_or(0.0) as usize;
-                            Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
-                        }
-                        RuntimeValue::Hash(entries) => {
-                            let key = args[1].to_str();
-                            Ok(entries
-                                .iter()
-                                .find(|(entry_key, _)| entry_key == &key)
-                                .map(|(_, value)| value.clone())
-                                .unwrap_or(RuntimeValue::Undef))
-                        }
-                        _ => {
-                            let key = args[1].to_str();
-                            Ok(ctx.get_scalar(&key))
-                        }
-                    }
-                } else {
-                    Ok(RuntimeValue::Undef)
-                }
-            }
             "call" => {
                 // `call(child)` evaluates to the child's return value, so
-                // `assign(scalar(retv), call(child))` captures it — the Perl
+                // `retv = call(child)` captures it — the Perl
                 // reference pattern (see specs/tablegrep.spec). The child rule
                 // name comes from the raw arg (a bare label is not a scalar).
                 let child = self.resolve_rule_name(raw_args, args.first());
@@ -4472,14 +4484,14 @@ mod tests {
     const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child {
   I { declare(array, results) }
-  LE { push_value(array(results), scalar(retv)) }
+  LE { push_value(array(results), :retv) }
   E { return(array("?results:", array_copy(array(results)))) }
  }
 
 Child::
  /hello[ \t]+(\w+)/
  I { declare(scalar, name=entry_group(0)) }
- E { return(scalar(name)) }
+ E { return(:name) }
 "#;
 
     #[test]
@@ -4518,13 +4530,13 @@ Child::
         // Grammar that exercises all 7 lifecycle markers with REP (* mode).
         let grammar = r#"Top::*
  /hello/
- I { declare(array, log); push_value(array(log), scalar("I")) }
- LS { push_value(array(log), scalar("LS")) }
- LE { push_value(array(log), scalar("LE")) }
- IT { push_value(array(log), scalar("IT")) }
- LX { push_value(array(log), scalar("LX")) }
- EX { push_value(array(log), scalar("EX")) }
- E { push_value(array(log), scalar("E")); return(array_copy(array(log))) }
+ I { declare(array, log); push_value(array(log), "I") }
+ LS { push_value(array(log), "LS") }
+ LE { push_value(array(log), "LE") }
+ IT { push_value(array(log), "IT") }
+ LX { push_value(array(log), "LX") }
+ EX { push_value(array(log), "EX") }
+ E { push_value(array(log), "E"); return(array_copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4551,10 +4563,10 @@ Child::
         // Use * (0 or more) so that zero matches is valid; LX fires on first no-match.
         let grammar = r#"Top::*
  /hello/
- I { declare(array, log); push_value(array(log), scalar("I")) }
- LS { push_value(array(log), scalar("LS")) }
- LX { push_value(array(log), scalar("LX")) }
- E { push_value(array(log), scalar("E")); return(array_copy(array(log))) }
+ I { declare(array, log); push_value(array(log), "I") }
+ LS { push_value(array(log), "LS") }
+ LX { push_value(array(log), "LX") }
+ E { push_value(array(log), "E"); return(array_copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4615,7 +4627,7 @@ Item: /x/ I.return("x")
         let grammar = r#"Top::OR{,1}
  /hello/
  I { declare(array, log) }
- LE { push_value(array(log), scalar("match")) }
+ LE { push_value(array(log), "match") }
  E { return(array_copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -4659,11 +4671,11 @@ Item: /x/ I.return("x")
 
 ChildA:
  /a/
- I { push_value(array(log), scalar("A")) }
+ I { push_value(array(log), "A") }
 
 ChildB:
  /b/
- I { push_value(array(log), scalar("B")) }
+ I { push_value(array(log), "B") }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4715,18 +4727,18 @@ ChildB:
  /pattern1/ -> ChildA
  /pattern2/ -> ChildB
  I { declare(array, results) }
- LE { push_value(array(results), scalar(retv)) }
+ LE { push_value(array(results), :retv) }
  E { return(array("?results:", array_copy(array(results)))) }
 
 ChildA:
  /hello/
  I { declare(scalar, retv=entry_text()) }
- E { return(scalar(retv)) }
+ E { return(:retv) }
 
 ChildB:
  /world/
  I { declare(scalar, retv=entry_text()) }
- E { return(scalar(retv)) }
+ E { return(:retv) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4745,7 +4757,7 @@ ChildB:
         let grammar = r#"Top::
  /hello/
  I { declare(scalar, name) }
- E { assign(scalar(name), entry_text()); return(scalar(name)) }
+ E { name = entry_text(); return(:name) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4763,7 +4775,7 @@ ChildB:
         let grammar = r#"Top::
  /hello/
  I { declare(scalar, name) }
- E { return(scalar(name)) }
+ E { return(:name) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4781,8 +4793,8 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
- LE { assign(scalar(word), entry_group(0)) }
- E { return(scalar(word)) }
+ LE { word = entry_group(0) }
+ E { return(:word) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4798,7 +4810,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
- E { assign(scalar(word), entry_group(0)); return(scalar(word)) }
+ E { word = entry_group(0); return(:word) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4833,7 +4845,7 @@ ChildB:
  /(\w+)/
  I { declare(array, items); declare(scalar, item_count) }
  LE { push_value(array(items), entry_group(0)) }
- E { assign(scalar(item_count), count(array(items))); return(scalar(item_count)) }
+ E { item_count = count(array(items)); return(:item_count) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4888,7 +4900,7 @@ ChildB:
     fn helpers_5_2_entry_text_and_entry_group() {
         let grammar = r#"Top::
  /hello[ \t]+(\w+)/
- E { return(concat(scalar(entry_text()), scalar(" "), scalar(entry_group(0)))) }
+ E { return(concat(entry_text(), " ", entry_group(0))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4920,12 +4932,12 @@ ChildB:
 
     #[test]
     fn helpers_5_2_scalar_accessor() {
-        // scalar(varname) returns the declared variable's value
+        // :varname returns the declared variable's value
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
- LE { assign(scalar(word), entry_group(0)) }
- E { return(scalar(word)) }
+ LE { word = entry_group(0) }
+ E { return(:word) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4941,7 +4953,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, first); declare(scalar, second) }
- E { return(coalesce(scalar(first), scalar(second), scalar("default"))) }
+ E { return(coalesce(:first, :second, "default")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4958,8 +4970,8 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(coalesce(scalar(val), scalar("fallback"))) }
+ LE { val = entry_group(0) }
+ E { return(coalesce(:val, "fallback")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -4974,7 +4986,7 @@ ChildB:
     fn helpers_5_2_concat_strings() {
         let grammar = r#"Top::
  /(\w+) (\w+)/
- E { return(concat(entry_group(0), scalar("+"), entry_group(1))) }
+ E { return(concat(entry_group(0), "+", entry_group(1))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5032,8 +5044,8 @@ ChildB:
         // (Before .5.5.3 this wrongly read to match-end and returned "hello".)
         let grammar = r#"Top::
  /(\w+)/
- I { mark_here(scalar("start")) }
- LE { return(capture_from(scalar("start"))) }
+ I { mark_here("start") }
+ LE { return(capture_from("start")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5048,8 +5060,8 @@ ChildB:
     fn helpers_5_2_mark_pos() {
         let grammar = r#"Top::
  /(\w+)/
- I { mark_here(scalar("pos")) }
- LE { return(mark_pos(scalar("pos"))) }
+ I { mark_here("pos") }
+ LE { return(mark_pos("pos")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5085,7 +5097,7 @@ ChildB:
         let grammar = r#"Top::
  /bye/
  I { exit_now(1) }
- E { return(scalar("never_reached")) }
+ E { return("never_reached") }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5102,7 +5114,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, retv=next()) }
- E { return(scalar(retv)) }
+ E { return(:retv) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5124,8 +5136,8 @@ ChildB:
         let grammar = r#"Top::
  /(\d+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(coalesce_nonempty(scalar(""), scalar(val), scalar("final"))) }
+ LE { val = entry_group(0) }
+ E { return(coalesce_nonempty("", :val, "final")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5133,7 +5145,7 @@ ChildB:
         let engine = Engine::new(compiled);
         let result = engine.execute("42").unwrap();
         let arr = result.as_array().unwrap();
-        // "" is nonempty? Actually scalar("") returns Scalar("") which IS empty
+        // "" is nonempty? Actually "" returns Scalar("") which IS empty
         // coalesce_nonempty skips empty strings, picks "42"
         assert_eq!(arr[0].as_str().unwrap(), "42");
     }
@@ -5147,8 +5159,8 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(if(is_nonempty(val), scalar("found"), scalar("empty"))) }
+ LE { val = entry_group(0) }
+ E { return(if(is_nonempty(val), "found", "empty")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5165,7 +5177,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- E { return(if(is_defined(val), scalar("defined"), scalar("undefined"))) }
+ E { return(if(is_defined(val), "defined", "undefined")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5183,8 +5195,8 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(if(is_defined(val), entry_text(), scalar("fallback"))) }
+ LE { val = entry_group(0) }
+ E { return(if(is_defined(val), entry_text(), "fallback")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5201,9 +5213,9 @@ ChildB:
         // 0 is falsy, 1 is truthy — tests if/elseif chain with literal conditions
         let grammar = r#"Top::
  /(\w+)/
- E { return(if(0, scalar("then"),
-               elseif(1, scalar("elseif_ok")),
-               scalar("none"))) }
+ E { return(if(0, "then",
+               elseif(1, "elseif_ok"),
+               "none")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5220,9 +5232,9 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, a); declare(scalar, b); declare(scalar, c) }
- E { return(if(is_nonempty(a), scalar("a"),
-               elseif(is_nonempty(b), scalar("b")),
-               else(scalar("none")))) }
+ E { return(if(is_nonempty(a), "a",
+               elseif(is_nonempty(b), "b"),
+               else("none"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5239,11 +5251,11 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(switch(scalar(val),
-               case(scalar("hello"), scalar("greeting")),
-               case(scalar("world"), scalar("planet")),
-               default(scalar("unknown")))) }
+ LE { val = entry_group(0) }
+ E { return(switch(:val,
+               case("hello", "greeting"),
+               case("world", "planet"),
+               default("unknown"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5259,10 +5271,10 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(switch(scalar(val),
-               case(scalar("red"), scalar("color")),
-               default(scalar("not_a_color")))) }
+ LE { val = entry_group(0) }
+ E { return(switch(:val,
+               case("red", "color"),
+               default("not_a_color"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5278,12 +5290,12 @@ ChildB:
         let grammar = r#"Top::
  /(\d+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(switch(scalar(val),
-               case(scalar("1"), scalar("one")),
-               case(scalar("2"), scalar("two")),
-               case(scalar("3"), scalar("three")),
-               default(scalar("many")))) }
+ LE { val = entry_group(0) }
+ E { return(switch(:val,
+               case("1", "one"),
+               case("2", "two"),
+               case("3", "three"),
+               default("many"))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5298,7 +5310,7 @@ ChildB:
     fn cond_endif_and_endswitch_are_noops() {
         let grammar = r#"Top::
  /(\w+)/
- E { endif(); endswitch(); endcase(); return(scalar("ok")) }
+ E { endif(); endswitch(); endcase(); return("ok") }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5316,7 +5328,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
+ LE { val = entry_group(0) }
  E { return(if(is_defined(val), entry_text(), exit_now(1))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -5336,10 +5348,10 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, val) }
- LE { assign(scalar(val), entry_group(0)) }
- E { return(if(is_defined(val), scalar("ok"),
+ LE { val = entry_group(0) }
+ E { return(if(is_defined(val), "ok",
                elseif(is_empty(val), exit_now(1)),
-               scalar("fallback"))) }
+               "fallback")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -5479,7 +5491,7 @@ ChildB:
         // panic — byte 3 is the first of the two bytes of 'é'.
         let grammar = r#"Top::
  /café/
- E { return(substr(scalar(entry_text()), scalar(3), scalar(1))) }
+ E { return(substr(entry_text(), 3, 1)) }
 "#;
         let acc = run_5_3(grammar, "café");
         assert_eq!(acc.last().unwrap().as_str().unwrap(), "é");
@@ -5490,7 +5502,7 @@ ChildB:
         // input_slice(start=3, width=1) over "café" = "é" (char offsets).
         let grammar = r#"Top::
  /café/
- E { return(input_slice(scalar(3), scalar(1))) }
+ E { return(input_slice(3, 1)) }
 "#;
         let acc = run_5_3(grammar, "café");
         assert_eq!(acc.last().unwrap().as_str().unwrap(), "é");
@@ -5501,7 +5513,7 @@ ChildB:
         // After matching "café" the cursor is at byte 5 but char offset 4.
         let grammar = r#"Top::
  /café/
- E { return(scalar(cursor_pos())) }
+ E { return(cursor_pos()) }
 "#;
         let acc = run_5_3(grammar, "café x");
         assert_eq!(acc.last().unwrap().as_f64().unwrap(), 4.0);
@@ -5512,7 +5524,7 @@ ChildB:
         // "héllo" is 6 bytes / 5 chars; column after it = 5 + 1 = 6 (char-based).
         let grammar = r#"Top::
  /héllo/
- E { return(scalar(cursor_col())) }
+ E { return(cursor_col()) }
 "#;
         let acc = run_5_3(grammar, "héllo");
         assert_eq!(acc.last().unwrap().as_f64().unwrap(), 6.0);
@@ -5524,7 +5536,7 @@ ChildB:
         // Previously match_start_pos was hardcoded to 0.0.
         let grammar = r#"Top::
  /world/
- E { return(scalar(match_start_pos())) }
+ E { return(match_start_pos()) }
 "#;
         let acc = run_5_3(grammar, "héllo world");
         assert_eq!(acc.last().unwrap().as_f64().unwrap(), 6.0);
@@ -5536,7 +5548,7 @@ ChildB:
         // "hi " — entry_start_pos must be 3, not the old hardcoded 0.0.
         let grammar = r#"Top::
  /world/
- E { return(scalar(entry_start_pos())) }
+ E { return(entry_start_pos()) }
 "#;
         let acc = run_5_3(grammar, "hi world");
         assert_eq!(acc.last().unwrap().as_f64().unwrap(), 3.0);
@@ -5547,7 +5559,7 @@ ChildB:
         // length("café") = 4 chars (not 5 bytes).
         let grammar = r#"Top::
  /café/
- E { return(scalar(length(scalar(entry_text())))) }
+ E { return(length(entry_text())) }
 "#;
         let acc = run_5_3(grammar, "café");
         assert_eq!(acc.last().unwrap().as_f64().unwrap(), 4.0);
@@ -5564,7 +5576,7 @@ ChildB:
         let grammar = r#"Top::OR+
  /x*/
  I { declare(array, iters) }
- LE { push_value(array(iters), scalar("i")) }
+ LE { push_value(array(iters), "i") }
  E { return(array_copy(array(iters))) }
 "#;
         let acc = run_5_3(grammar, "abc");
@@ -5582,7 +5594,7 @@ ChildB:
         // Hash-valued args, which the removed shadowing duplicate dropped.
         // hash("b","2", hash("a","1")) must yield BOTH keys.
         let grammar = r#"Top:: /(\w+)/
- E { return(hash(scalar("b"), scalar("2"), hash(scalar("a"), scalar("1")))) }
+ E { return(hash("b", "2", hash("a", "1"))) }
 "#;
         let acc = run_5_3(grammar, "x");
         let obj = acc.last().unwrap().as_object().cloned().unwrap_or_default();
@@ -5615,7 +5627,7 @@ ChildB:
         // entry_named(name) returns the named capture's value as a string.
         let present = r#"Top::
  /(?P<year>\d+)-(?P<month>\d+)/
- E { return(entry_named(scalar("year"))) }
+ E { return(entry_named("year")) }
 "#;
         let acc = run_5_5_1(present, "2024-03");
         assert_eq!(acc.last().unwrap().as_str().unwrap(), "2024");
@@ -5630,7 +5642,7 @@ ChildB:
         // An absent name returns undef (JSON null), per the catalog.
         let absent = r#"Top::
  /(?P<year>\d+)/
- E { return(entry_named(scalar("nope"))) }
+ E { return(entry_named("nope")) }
 "#;
         let acc = run_5_5_1(absent, "2024");
         assert!(
@@ -5645,7 +5657,7 @@ ChildB:
         // entry_has(name) is true for a present named group, false otherwise.
         let g_present = r#"Top::
  /(?P<word>\w+)/
- E { return(entry_has(scalar("word"))) }
+ E { return(entry_has("word")) }
 "#;
         assert!(
             run_5_5_1(g_present, "hi")
@@ -5669,7 +5681,7 @@ ChildB:
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
- E { return(entry_has(scalar("missing"))) }
+ E { return(entry_has("missing")) }
 "#;
         assert!(!run_5_5_1(g_absent, "hi").last().unwrap().as_bool().unwrap());
     }
@@ -5704,7 +5716,7 @@ ChildB:
         // entry and local match coincide, so the value is readable here.
         let present = r#"Top::
  /(?P<year>\d+)-(?P<month>\d+)/
- E { return(match_named(scalar("month"))) }
+ E { return(match_named("month")) }
 "#;
         let acc = run_5_5_1(present, "2024-03");
         assert_eq!(acc.last().unwrap().as_str().unwrap(), "03");
@@ -5718,7 +5730,7 @@ ChildB:
 
         let absent = r#"Top::
  /(?P<year>\d+)/
- E { return(match_named(scalar("nope"))) }
+ E { return(match_named("nope")) }
 "#;
         assert!(run_5_5_1(absent, "2024").last().unwrap().is_null());
     }
@@ -5727,7 +5739,7 @@ ChildB:
     fn helpers_5_5_1_match_has_presence() {
         let g_present = r#"Top::
  /(?P<word>\w+)/
- E { return(match_has(scalar("word"))) }
+ E { return(match_has("word")) }
 "#;
         assert!(
             run_5_5_1(g_present, "hi")
@@ -5751,7 +5763,7 @@ ChildB:
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
- E { return(match_has(scalar("missing"))) }
+ E { return(match_has("missing")) }
 "#;
         assert!(!run_5_5_1(g_absent, "hi").last().unwrap().as_bool().unwrap());
     }
@@ -5799,7 +5811,7 @@ ChildB:
         // input_end_line() = 1 + newline count over the WHOLE input (not the cursor).
         let g = r#"Top::
  /\w/
- E { return(scalar(input_end_line())) }
+ E { return(input_end_line()) }
 "#;
         assert_eq!(run_5_5_2(g, "abc").last().unwrap().as_f64().unwrap(), 1.0); // no newline
         assert_eq!(
@@ -5817,7 +5829,7 @@ ChildB:
         // input_end_col(): char distance past the last newline, +1 when none.
         let g = r#"Top::
  /\w/
- E { return(scalar(input_end_col())) }
+ E { return(input_end_col()) }
 "#;
         assert_eq!(run_5_5_2(g, "abc").last().unwrap().as_f64().unwrap(), 4.0); // len 3, no nl → 4
         assert_eq!(
@@ -5834,7 +5846,7 @@ ChildB:
         // flat(array) yields the array's elements as a list value.
         let g_arr = r#"Top::
  /\w/
- E { return(flat(array(scalar("a"), scalar("b")))) }
+ E { return(flat(array("a", "b"))) }
 "#;
         let acc = run_5_5_2(g_arr, "x");
         let arr = acc.last().unwrap().as_array().unwrap();
@@ -5845,7 +5857,7 @@ ChildB:
         // flat(hash) splices key/value entries into a parent hash(...).
         let g_hash = r#"Top::
  /\w/
- E { return(hash(scalar("a"), scalar("1"), flat(hash(scalar("b"), scalar("2"))))) }
+ E { return(hash("a", "1", flat(hash("b", "2")))) }
 "#;
         let acc = run_5_5_2(g_hash, "x");
         let obj = acc.last().unwrap().as_object().unwrap();
@@ -5877,7 +5889,7 @@ ChildB:
         // mark at 0, match "hi" starts at byte 2 → the pre-match text "  ".
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_from(scalar("a"))) }
+ E { mark_input_start("a"); return(capture_from("a")) }
 "#;
         let acc = run_5_5_3(g, "  hi");
         assert_eq!(acc[0].as_str().unwrap(), "  ");
@@ -5887,7 +5899,7 @@ ChildB:
     fn helpers_5_5_3_capture_from_undef_on_missing_mark() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { return(capture_from(scalar("nope"))) }
+ E { return(capture_from("nope")) }
 "#;
         let acc = run_5_5_3(g, "hi");
         assert!(acc[0].is_null(), "missing mark → undef, got {:?}", acc[0]);
@@ -5897,7 +5909,7 @@ ChildB:
     fn helpers_5_5_3_capture_len_from_is_char_count() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_len_from(scalar("a"))) }
+ E { mark_input_start("a"); return(capture_len_from("a")) }
 "#;
         let acc = run_5_5_3(g, "  hi");
         assert_eq!(acc[0].as_f64().unwrap(), 2.0); // "  " before the match
@@ -5908,7 +5920,7 @@ ChildB:
         // mark 0 → cursor (match-end of "ab" = byte 2).
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_until_cursor_from(scalar("a"))) }
+ E { mark_input_start("a"); return(capture_until_cursor_from("a")) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         assert_eq!(acc[0].as_str().unwrap(), "ab");
@@ -5918,7 +5930,7 @@ ChildB:
     fn helpers_5_5_3_capture_until_cursor_len_from() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_until_cursor_len_from(scalar("a"))) }
+ E { mark_input_start("a"); return(capture_until_cursor_len_from("a")) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         assert_eq!(acc[0].as_f64().unwrap(), 2.0);
@@ -5929,7 +5941,7 @@ ChildB:
         // mark 0 → end-of-input (past the cursor at byte 2).
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_rest_from(scalar("a"))) }
+ E { mark_input_start("a"); return(capture_rest_from("a")) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         assert_eq!(acc[0].as_str().unwrap(), "ab cd");
@@ -5939,7 +5951,7 @@ ChildB:
     fn helpers_5_5_3_capture_rest_len_from() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(capture_rest_len_from(scalar("a"))) }
+ E { mark_input_start("a"); return(capture_rest_len_from("a")) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         assert_eq!(acc[0].as_f64().unwrap(), 5.0);
@@ -5952,7 +5964,7 @@ ChildB:
         // returns the CHAR count (5), not the byte count (6) — char-based parity.
         let g = r#"Top::OR{1,1}
  /\w/
- E { mark_input_start(scalar("a")); mark_input_end(scalar("b")); return(array(capture_between(scalar("a"), scalar("b")), capture_len_between(scalar("a"), scalar("b")))) }
+ E { mark_input_start("a"); mark_input_end("b"); return(array(capture_between("a", "b"), capture_len_between("a", "b"))) }
 "#;
         let acc = run_5_5_3(g, "héllo");
         let acc = acc[0].as_array().unwrap();
@@ -5965,7 +5977,7 @@ ChildB:
         // a = end-of-input, b = start-of-input → reversed span → undef.
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_end(scalar("a")); mark_input_start(scalar("b")); return(capture_between(scalar("a"), scalar("b"))) }
+ E { mark_input_end("a"); mark_input_start("b"); return(capture_between("a", "b")) }
 "#;
         let acc = run_5_5_3(g, "hi");
         assert!(acc[0].is_null(), "reversed span → undef, got {:?}", acc[0]);
@@ -5976,7 +5988,7 @@ ChildB:
         // copy a (=0) into b, then read until cursor from b → "ab".
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); mark_copy(scalar("b"), scalar("a")); return(capture_until_cursor_from(scalar("b"))) }
+ E { mark_input_start("a"); mark_copy("b", "a"); return(capture_until_cursor_from("b")) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         assert_eq!(acc[0].as_str().unwrap(), "ab");
@@ -5987,7 +5999,7 @@ ChildB:
         // b is set, then mark_copy(b, <missing>) deletes b → capture_from(b) undef.
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("b")); mark_copy(scalar("b"), scalar("nope")); return(capture_from(scalar("b"))) }
+ E { mark_input_start("b"); mark_copy("b", "nope"); return(capture_from("b")) }
 "#;
         let acc = run_5_5_3(g, "hi");
         assert!(acc[0].is_null(), "deleted target → undef, got {:?}", acc[0]);
@@ -5999,7 +6011,7 @@ ChildB:
         // the second read (mark now == cursor) is therefore empty.
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(array(capture_take_until_cursor_from(scalar("a")), capture_until_cursor_from(scalar("a")))) }
+ E { mark_input_start("a"); return(array(capture_take_until_cursor_from("a"), capture_until_cursor_from("a"))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         let acc = acc[0].as_array().unwrap();
@@ -6011,7 +6023,7 @@ ChildB:
     fn helpers_5_5_3_capture_take_until_cursor_len_from_advances_mark() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(array(capture_take_until_cursor_len_from(scalar("a")), capture_until_cursor_len_from(scalar("a")))) }
+ E { mark_input_start("a"); return(array(capture_take_until_cursor_len_from("a"), capture_until_cursor_len_from("a"))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         let acc = acc[0].as_array().unwrap();
@@ -6025,7 +6037,7 @@ ChildB:
         // (match-end, byte 4), so capture_rest_from is empty afterwards.
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(array(capture_take_len_from(scalar("a")), capture_rest_from(scalar("a")))) }
+ E { mark_input_start("a"); return(array(capture_take_len_from("a"), capture_rest_from("a"))) }
 "#;
         let acc = run_5_5_3(g, "  hi");
         let acc = acc[0].as_array().unwrap();
@@ -6037,7 +6049,7 @@ ChildB:
     fn helpers_5_5_3_capture_take_rest_from_advances_mark_to_end() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(array(capture_take_rest_from(scalar("a")), capture_rest_from(scalar("a")))) }
+ E { mark_input_start("a"); return(array(capture_take_rest_from("a"), capture_rest_from("a"))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         let acc = acc[0].as_array().unwrap();
@@ -6049,7 +6061,7 @@ ChildB:
     fn helpers_5_5_3_capture_take_rest_len_from_advances_mark_to_end() {
         let g = r#"Top::OR{1,1}
  /(\w+)/
- E { mark_input_start(scalar("a")); return(array(capture_take_rest_len_from(scalar("a")), capture_rest_len_from(scalar("a")))) }
+ E { mark_input_start("a"); return(array(capture_take_rest_len_from("a"), capture_rest_len_from("a"))) }
 "#;
         let acc = run_5_5_3(g, "ab cd");
         let acc = acc[0].as_array().unwrap();

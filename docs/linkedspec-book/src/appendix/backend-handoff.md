@@ -33,7 +33,7 @@ values. It also lowers value-only helper-call composition from AST `call` nodes 
 scalar normalization, string predicate/composition, coalesce/concat, and scalar-argument
 numeric helpers. It also lowers aggregate-wrapper, collection/reducer, and hash helper
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
-Canonical wrappers `scalar(...)`/`array(...)`/`hash(...)` remain the destination
+Canonical wrappers `...`/`array(...)`/`hash(...)` remain the destination
 surface; short wrapper aliases `s(...)`/`a(...)`/`h(...)` are retired and should be reported
 as unresolved helpers rather than normalized. Unsupported covered helper
 forms now report unresolved-helper metadata instead of leaking as generated host-language

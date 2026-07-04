@@ -219,11 +219,11 @@ Pair::AND
  /\w+/
  /\]/
  -> Pair[0] { mark_here(body_start) }
- -> Pair[2] { mark_match_start(colon_start); set(scalar(left), capture_between(body_start, colon_start)); mark_here(right_start) }
+ -> Pair[2] { mark_match_start(colon_start); left = capture_between(body_start, colon_start); mark_here(right_start) }
  -> Pair[4] {
    mark_match_start(close_start);
    return(hash(
-     "left", scalar(left),
+     "left", :left,
      "right", capture_between(right_start, close_start)
    ))
  }
@@ -243,12 +243,12 @@ Body::AND
  /[^)]*/
  /\)/
  -> Body[0] { start_capture_slice(); mark_capture_slice(body_start) }
- -> Body[2] { set(scalar(first), capture_take()) }
- -> Body[4] { set(scalar(second), capture_take()); start_capture_slice_from(body_start) }
+ -> Body[2] { first = capture_take() }
+ -> Body[4] { second = capture_take(); start_capture_slice_from(body_start) }
  -> Body[6] {
    return(hash(
-     "first", scalar(first),
-     "second", scalar(second),
+     "first", :first,
+     "second", :second,
      "whole_body", capture_slice()
    ))
  }
@@ -381,7 +381,7 @@ The following older helpers remain useful when reading or migrating legacy specs
 
 | Helper | Preferred modern direction |
 | --- | --- |
-| `$CAPTURE` | `capture_slice()` or `set(scalar(name), capture_slice())` |
+| `$CAPTURE` | `capture_slice()` or `name = capture_slice()` |
 | `capture(label)` | `push_value(array(target), capture_slice())` when the target is explicit |
 | `capture_if(label)` | `push_nonempty(array(target), trim(capture_slice()))` for the common trimmed-and-nonempty append case; explicit `if(...)` around `capture_slice()` when custom filtering is needed |
 | `CAPTURE_IF()` | `push_nonempty(array(current_rule), trim(capture_slice()))` when replacing the legacy current-rule append shape |

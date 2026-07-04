@@ -1,7 +1,7 @@
-fn normalize(value) { return(trim(scalar(value))) }
-fn words(value) { set(scratch, trim(scalar(value))); return([scalar(scratch), uppercase(scalar(scratch))]) }
+fn normalize(value) { return(trim(:value)) }
+fn words(value) { set(scratch, trim(:value)); return([:scratch, uppercase(:scratch)]) }
 Top::
- /x/ -> Done { normalize(" drop "); return(array(normalize(" x "), words(" go ").join_values("|"), words(" a ").count(), scalar(scratch))) }
+ /x/ -> Done { normalize(" drop "); return(array(normalize(" x "), words(" go ").join_values("|"), words(" a ").count(), :scratch)) }
 
 Done::
  /[a-z]+/

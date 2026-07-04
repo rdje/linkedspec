@@ -42,7 +42,7 @@ sub default_deps_for_package {
 
 #------------------------------------------------------------------------------
 # Function: _lower_control_flow_value_expr
-# Purpose : Lower control-flow method argument values (`scalar(...)` etc.) into
+# Purpose : Lower control-flow method argument values (`:name`, helpers, etc.) into
 #           Perl expression form while allowing raw expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef

@@ -22,6 +22,7 @@ use constant {
 };
 
 our $__ls_current_function_registry;
+our $__ls_current_bare_type_memory;
 
 #------------------------------------------------------------------------------
 # Function: _actionir_owner_package
@@ -89,6 +90,12 @@ sub _actionir_owner_default_deps {
    $owner_deps = {
     %$owner_deps,
     user_function_registry => $__ls_current_function_registry,
+   };
+  }
+  if (ref($owner_deps) eq 'HASH' && ref($__ls_current_bare_type_memory) eq 'HASH') {
+   $owner_deps = {
+    %$owner_deps,
+    bare_symbol_kind => \&_bare_symbol_kind,
    };
   }
   return $owner_deps
@@ -384,6 +391,158 @@ sub _infer_direct_shape_literal_sigil {
  return undef
 }
 
+sub _bare_symbol_kind {
+ my ($name) = @_;
+ return undef unless defined($name) && length($name);
+ return undef unless ref($__ls_current_bare_type_memory) eq 'HASH';
+ return $__ls_current_bare_type_memory->{$name}
+}
+
+sub _bare_symbol_kind_from_sigil {
+ my ($sigil) = @_;
+ return 'array' if defined($sigil) && $sigil eq '@';
+ return 'hash' if defined($sigil) && $sigil eq '%';
+ return 'scalar' if defined($sigil) && $sigil eq '$';
+ return undef
+}
+
+sub _bare_symbol_kind_from_decl_type {
+ my ($type) = @_;
+ return undef unless defined($type) && length($type);
+ return 'array' if $type =~ /^(?:array|a)$/o;
+ return 'hash' if $type =~ /^(?:hash|h)$/o;
+ return 'scalar' if $type =~ /^(?:scalar|s)$/o;
+ return undef
+}
+
+sub _bare_symbol_kind_from_target_expr {
+ my ($target_expr, $source_expr) = @_;
+ my $target = _trim_action_ir_value($target_expr);
+ return unless defined($target) && length($target);
+ return ($1, 'scalar') if $target =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
+ return ($1, 'array') if $target =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o;
+ return ($1, 'hash') if $target =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o;
+ return unless $target =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
+ my $name = $1;
+ my $source_sigil = _infer_direct_shape_literal_sigil($source_expr);
+ return ($name, _bare_symbol_kind_from_sigil($source_sigil) // 'scalar')
+}
+
+sub _bare_type_memory_reserved_name {
+ my ($name) = @_;
+ return 0 unless defined($name) && length($name);
+ state $reserved = { map { $_ => 1 } qw(
+  undef true false
+  descr STRING info minfo
+  IMATCH IMATCH_LIST IMATCH_HASH IINDEX IPOS
+  LMATCH LMATCH_LIST LMATCH_HASH LINDEX LSPOS
+  CAPTURE
+ ) };
+ return $reserved->{$name} ? 1 : 0
+}
+
+sub _collect_bare_identifier_type_memory {
+ my ($rule_ir) = @_;
+ return {} unless ref($rule_ir) eq 'HASH';
+
+ my @raw_blocks;
+ my $code_blocks = (ref($rule_ir->{code_blocks}) eq 'HASH') ? $rule_ir->{code_blocks} : {};
+ for my $key (qw(ICODE ECODE EXCODE ITCODE LXCODE LSCODE LECODE)) {
+  push @raw_blocks, @{$code_blocks->{$key} || []};
+ }
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{acode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{bcode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{and_icode_entries} || []};
+
+ my %kind_by_name;
+ my $record = sub {
+  my ($name, $kind) = @_;
+  return unless defined($name) && $name =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  return unless defined($kind) && $kind =~ /^(?:scalar|array|hash)$/o;
+  return if _bare_type_memory_reserved_name($name);
+  $kind_by_name{$name} = $kind;
+ };
+
+ for my $block (@raw_blocks) {
+  next unless defined($block) && length($block);
+  for my $statement (@{_split_action_ir_statements($block)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+
+   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*/s) {
+    $record->($1, 'array');
+    next;
+   }
+   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
+    $record->($1, 'hash');
+    next;
+   }
+   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
+    my ($name, $kind) = _bare_symbol_kind_from_target_expr($1, $2);
+    $record->($name, $kind);
+    next;
+   }
+   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\.\s*(?:push_back|push_front|pop_back|pop_front)\s*\(/s) {
+    $record->($1, 'array');
+    next;
+   }
+
+   my $call = _parse_method_function_expr($trimmed);
+   next unless $call;
+   my $method = $call->{method} // '';
+   my $args = $call->{args} || [];
+   next unless ref($args) eq 'ARRAY';
+
+   if ($method eq 'declare') {
+    my $type = _trim_action_ir_value($args->[0]);
+    my $kind = _bare_symbol_kind_from_decl_type($type);
+    next unless defined($kind);
+    for my $arg (@{$args}[1 .. $#$args]) {
+     my $name = _trim_action_ir_value($arg);
+     $record->($name, $kind);
+    }
+   next;
+  }
+  if ($method =~ /^declare_(?:s|scalar|a|array|h|hash)$/o) {
+    my $decl_type = $method;
+    $decl_type =~ s/^declare_//o;
+    my $kind = _bare_symbol_kind_from_decl_type($decl_type);
+    next unless defined($kind);
+    for my $arg (@$args) {
+     my $name = _trim_action_ir_value($arg);
+     $record->($name, $kind);
+    }
+    next;
+   }
+   if ($method eq 'assign' && $trimmed =~ /^\s*set\s*\(/o && @$args >= 2) {
+    my ($name, $kind) = _bare_symbol_kind_from_target_expr($args->[0], $args->[1]);
+    $record->($name, $kind);
+    next;
+   }
+   if (($method eq 'push' || $method eq 'push_value' || $method eq 'push_nonempty' || $method eq 'split') && @$args) {
+    my $target = _trim_action_ir_value($args->[0]);
+    if (defined($target) && $target =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
+     $record->($1, 'array');
+    } elsif (defined($target) && $target =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+     $record->($1, 'array');
+    }
+    next;
+   }
+   if ($method eq 'set_key' && @$args) {
+    my $target = _trim_action_ir_value($args->[0]);
+    if (defined($target) && $target =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
+     $record->($1, 'hash');
+    } elsif (defined($target) && $target =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+     $record->($1, 'hash');
+    }
+    next;
+   }
+  }
+ }
+
+ return \%kind_by_name
+}
+
 sub _lower_return_general_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_return_general_statement', @args)
@@ -559,18 +718,31 @@ sub _build_action_rewrite_rules {
 # Compatibility rewriter entry point. Runs the canonical rewrite pipeline and falls
 # back to direct value-expr lowering for bare canonical wrapper calls that no contract
 # recognizes (these are malformed as standalone statements — value accessors belong
-# inside contracts like return(scalar(...)) — but historically tolerated).
+# inside value-returning contracts — but historically tolerated).
 sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my $compat_rule_ir = {
+   label => $label,
+   code_blocks => {},
+   acode_entries => [{ code => $code }],
+   bcode_entries => [],
+   and_icode_entries => [],
+  };
+  my $compat_bare_type_memory = _collect_bare_identifier_type_memory($compat_rule_ir);
+  local $__ls_current_bare_type_memory = $compat_bare_type_memory;
   my $trimmed = _trim_action_ir_value($code);
+  if (defined($trimmed) && $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o) {
+   my $lowered = _lower_method_value_expr($trimmed);
+   return $lowered if defined($lowered) && length($lowered);
+  }
   if (
    defined($trimmed) &&
    length($trimmed) &&
-   $trimmed =~ /^(?:scalar|array|hash)\s*\(/o
+   $trimmed =~ /^(?:array|hash)\s*\(/o
   ) {
    my $call = _parse_method_function_expr($trimmed);
-   if ($call && ($call->{method} // '') =~ /^(?:scalar|array|hash)$/o) {
+   if ($call && ($call->{method} // '') =~ /^(?:array|hash)$/o) {
     my $lowered = _lower_method_value_expr($trimmed);
     return $lowered if defined($lowered) && length($lowered);
    }
@@ -861,19 +1033,18 @@ sub _mask_action_code_literals {
 #           supply so each variable is a per-invocation lexical rather than a leaky
 #           package global (generated handlers are non-strict — see KM card
 #           working-vars-no-strict-need-my-lexical). Three reference forms are collected:
-#             (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED typed-wrapper refs
-#                 scalar(NAME)/array(NAME)/hash(NAME) with
-#                 a single bare-identifier argument (NOT the 2-arg scalar(container,key)
-#                 read, which has a comma). Sigil taken from the wrapper.
+#             (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED aggregate-wrapper refs
+#                 array(NAME)/hash(NAME) with a single bare-identifier argument.
+#                 Sigil taken from the wrapper. Scalar slots now use `:NAME`.
 #             (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE (un-wrapped) names in a
 #                 type-implying helper arg position: the scalar/array/hash target
-#                 of assign/set(NAME, VALUE) depending on direct RHS shape
+#                 of set(NAME, VALUE) depending on direct RHS shape
 #                 inference, the hash target of statement-level
 #                 set_key(NAME, KEY, VALUE), and the array target of push_value(NAME, ...) /
 #                 push(NAME, nonbare-value) / push_nonempty(NAME, ...). Such a bare name already LOWERS to the
 #                 correctly-sigil'd variable but otherwise gets no `my` (leaky global).
-#                 Sigil implied by the position ($ for non-shape assign/set, @/% for
-#                 direct []/{} assign/set RHS shapes, @ for the push family).
+#                 Sigil implied by the position ($ for non-shape set, @/% for
+#                 direct []/{} set RHS shapes, @ for the push family).
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
 #                 (all-bare child-call shape) and bare hash value-position reads
 #                 are deliberately NOT collected here.
@@ -882,7 +1053,7 @@ sub _mask_action_code_literals {
 #                 array_copy(NAME) / copy(NAME) -> @NAME and hash_copy(NAME) -> %NAME.
 #             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
 #                 BARE scalar reads in return/assignment-like source slots:
-#                 return(NAME), assign/set(out, NAME), and `out = NAME` -> $NAME.
+#                 return(NAME), set(out, NAME), and `out = NAME` -> $NAME.
 #             (e) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
 #                 BARE scalar reads in mutation slots:
 #                 items += VALUE, set_key(meta, KEY, VALUE), and meta[KEY] = VALUE.
@@ -1215,11 +1386,7 @@ sub _collect_auto_working_var_decls {
              && ref($target_args->[0]) eq 'HASH'
              && ($target_args->[0]{kind} // '') eq 'variable';
   my $name = $target_args->[0]{name};
-  if ($target_name eq 'scalar') {
-   $record->('$', $name);
-   return;
-  }
-  if ($target_name eq 'array') {
+	  if ($target_name eq 'array') {
    return if defined($shape_sigil) && $shape_sigil ne '@';
    $record->('@', $name);
    return;
@@ -1303,19 +1470,19 @@ sub _collect_auto_working_var_decls {
   if ($kind eq 'call') {
    my $name = $node->{name} // '';
    my $args = $node->{args} || [];
-   if (($name eq '=' || $name eq 'assign' || $name eq 'set')
-    && ref($args) eq 'ARRAY'
-    && @$args == 2) {
+	   my $is_assignment_call = ($name eq '=' || $name eq 'set')
+	    || ($name eq 'assign' && (($node->{source} // '') !~ /^\s*assign\s*\(/o));
+	   if ($is_assignment_call && ref($args) eq 'ARRAY' && @$args == 2) {
     $record_ast_assignment_target->($args->[0], $args->[1]);
     $collect_ast_node_refs->($args->[1], 1);
     return;
    }
-   if (($name eq 'scalar' || $name eq 'array' || $name eq 'hash')
+	   if (($name eq 'array' || $name eq 'hash')
     && ref($args) eq 'ARRAY'
     && @$args == 1
     && ref($args->[0]) eq 'HASH'
     && ($args->[0]{kind} // '') eq 'variable') {
-    my $sigil = $name eq 'array' ? '@' : $name eq 'hash' ? '%' : '$';
+	    my $sigil = $name eq 'array' ? '@' : '%';
     $record->($sigil, $args->[0]{name});
     return;
    }
@@ -1356,19 +1523,19 @@ sub _collect_auto_working_var_decls {
   next unless defined($block) && length($block);
   my $masked = _mask_action_code_literals($block);
 
-  # (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED typed-wrapper refs (sigil from the wrapper).
-  while ($masked =~ /\b(scalar|array|hash)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
-   $record->($AUTO_WORKING_VAR_WRAPPER_SIGIL{$1}, $2);
-  }
+	  # (a) SPEC-FORMAT-TERSE.1.1.1 — WRAPPED aggregate-wrapper refs (sigil from the wrapper).
+	  while ($masked =~ /\b(array|hash)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
+	   $record->($AUTO_WORKING_VAR_WRAPPER_SIGIL{$1}, $2);
+	  }
 
   # (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
   #     arg position. The bare name already lowers to the correctly-sigil'd variable
-  #     (assign/set -> $NAME, or @NAME/%NAME for direct shape RHS inference;
+	  #     (set -> $NAME, or @NAME/%NAME for direct shape RHS inference;
   #     push_value/push/push_nonempty -> @NAME) but otherwise gets no preamble `my`. The
-  #     `\s*,` after the name means a WRAPPED target (scalar(x)/array(x), whose name is
+	  #     `\s*,` after the name means a WRAPPED target (array(x), whose name is
   #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
-  # `set` (SPEC-FORMAT-TERSE.1.4.1) is the terse rename of `assign`; a bare `set(NAME, ...)`
-  # target follows the same source-driven inference as `assign`. The scalar assignment
+	  # A bare `set(NAME, ...)` target follows the same source-driven inference as operator
+	  # assignment. The scalar assignment
   # operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1) is likewise statement-level
   # and now infers @/% for direct shape RHS literals. The array append operator
   # (`NAME += VALUE`) and hash-index assignment operator (`NAME[KEY] = VALUE`)
@@ -1377,12 +1544,16 @@ sub _collect_auto_working_var_decls {
   while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
    $record->('@', $1);   # push_value / push_nonempty target lowers to an array
   }
-  # (c) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE aggregate
-  #     value reads. These forms already lower to sigiled variables; this supplies
-  #     the missing per-invocation lexical. `copy(NAME)` is array-first by the
-  #     existing SPEC-FORMAT-TERSE.1.4.1 contract, matching bare `array_copy(NAME)`.
-  while ($masked =~ /\b(?:array_copy|copy)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
+  # (c) SPEC-FORMAT-TERSE.1.2.3.1 / .6.2.3.2, Channel 2 aggregate subset — BARE
+  #     aggregate value reads. `array_copy(NAME)` is explicit array storage, while
+  #     terse `copy(NAME)` follows remembered bare-name kind before the legacy
+  #     untyped array fallback.
+  while ($masked =~ /\barray_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    $record->('@', $1);
+  }
+  while ($masked =~ /\bcopy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
+   my $kind = _bare_symbol_kind($1);
+   $record->(defined($kind) && $kind eq 'hash' ? '%' : '@', $1);
   }
   while ($masked =~ /\bhash_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    $record->('%', $1);
@@ -1397,9 +1568,9 @@ sub _collect_auto_working_var_decls {
    my $payload = _trim_action_ir_value($args->[0]);
    $collect_value_position_scalar_reads->($payload);
   }
-  while ($masked =~ /\b(?<expr>(?:assign|set)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
-   my $call = _parse_method_function_expr($+{expr});
-   next unless $call && (($call->{method} // '') eq 'assign' || ($call->{method} // '') eq 'set');
+	  while ($masked =~ /\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+	   my $call = _parse_method_function_expr($+{expr});
+	   next unless $call && (($call->{method} // '') eq 'assign');
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
    next unless $args;
    $record_assignment_target_for_source->($args->[0], $args->[1]);
@@ -1511,6 +1682,7 @@ sub build_rule_ir_emit_context {
  local $__ls_current_function_registry = ref($rule_ir->{function_registry}) eq 'HASH'
   ? $rule_ir->{function_registry}
   : undef;
+ local $__ls_current_bare_type_memory = _collect_bare_identifier_type_memory($rule_ir);
  my $label = $rule_ir->{label};
  my $rewrite_rules = _build_action_rewrite_rules($label);
  my $rewrite_diag_acc = _build_rewrite_diag_acc();

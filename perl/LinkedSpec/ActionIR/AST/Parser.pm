@@ -239,6 +239,10 @@ sub _parse_expr_without_chain {
  my $shape = _parse_shape_or_block_expr($trimmed, $start, $end);
  return $shape if $shape;
 
+ if ($trimmed =~ /\A:([A-Za-z_][A-Za-z0-9_]*)\z/o) {
+  return _node('scalar_slot', $trimmed, $start, $end, name => $1)
+ }
+
  my $control = _parse_control_flow_expr($trimmed, $start, $end);
  return $control if $control;
 

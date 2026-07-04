@@ -501,20 +501,20 @@ direct_segment : '[' quoted_string ']'
 
 The base `name` is a working scalar that holds a structured array/hash payload.
 Quoted string segments (`["field"]` or `['field']`) are hash-key reads. Numeric
-segments and helper/value expressions (`[0]`, `[scalar(i)]`, `[add(1, 2)]`) are
+segments and helper/value expressions (`[0]`, `[i]`, `[add(1, 2)]`) are
 array-index reads. Non-reserved bare path atoms such as `[i]` are also scalar
-array-index reads, equivalent to `[scalar(i)]`. Primitive literals and engine
+array-index reads, equivalent to `[i]`. Primitive literals and engine
 locals are not claimed as bare path atoms.
 
 Scalar-slot shorthand:
 
 ```text
-:name                         — read scalar slot name, equivalent to scalar(name)
+:name                         — read scalar slot name, equivalent to :name
 set(:name, [value])            — assign the array payload to scalar slot name
 ```
 
 Use the shorthand when the value must visibly be a scalar slot but the full
-`scalar(name)` wrapper is too noisy. Bare direct-shape targets still infer
+`:name` wrapper is too noisy. Bare direct-shape targets still infer
 aggregate kind: `set(name, [value])` assigns the working array `name`, while
 `set(:name, [value])` assigns the scalar `name`.
 
@@ -524,7 +524,7 @@ declare(scalar, name)      — declare a scalar working variable
 declare(array, name)       — declare an array working variable
 declare(hash, name)        — declare a hash working variable
 declare(scalar, name=value) — declare with initializer
-set(name, value)            — assign a working variable; legacy assign(name, value) is still accepted
+set(name, value)            — assign a working variable; legacy name = value is still accepted
 return(name)                — read and return a scalar working variable
 :name                       — explicit scalar-slot read shorthand
 ```
@@ -532,7 +532,7 @@ return(name)                — read and return a scalar working variable
 ### 7.2 Scalar Helpers
 ```
 base["key"][0]                 — direct nested access into scalar-held payloads
-scalar(container, key)          — read a scalar entry from an array or hash
+container[key]          — read a scalar entry from an array or hash
 concat(args...)                 — concatenate strings
 coalesce(a, b, ...)             — first defined non-null value
 coalesce_nonempty(a, b, ...)    — first defined non-empty value
@@ -550,8 +550,8 @@ replace_substr(s, old, new)     — literal string replacement
 rm_prefix(s, prefix)            — remove prefix
 rm_suffix(s, suffix)            — remove suffix
 substr(s, start, len?)          — substring from zero-based start
-substr(scalar(target), /re/, repl, flags)
-regex_subst(scalar(target), /re/, repl, flags)
+substr(:target, /re/, repl, flags)
+regex_subst(:target, /re/, repl, flags)
                         — regex substitution mutating a scalar target
 string_expr.trim().lowercase()
                         — receiver-dot string value chain over compatible pure scalar helpers
@@ -598,7 +598,7 @@ is_empty(arr)           — true if array/hash is empty
 is_nonempty(arr)        — true if array/hash has elements
 join_values(delim, arr) — join array elements with delimiter
 split(s, delim)         — split string into array
-split(array(target), scalar(source), delim)
+split(array(target), :source, delim)
                         — replace target array with split source pieces
 split_each(arr, delim)  — split each element
 trim_each(arr)          — trim each element
@@ -776,12 +776,12 @@ composite expressions. Marker-style `if` is implemented on the Perl reference an
 
 ```
 I {
- if(matches(scalar(value), /^yes$/));
- set(scalar(result), "confirmed");
- elseif(matches(scalar(value), /^no$/));
- set(scalar(result), "rejected");
+ if(matches(:value, /^yes$/));
+ result = "confirmed";
+ elseif(matches(:value, /^no$/));
+ result = "rejected";
  else();
- set(scalar(result), "unknown");
+ result = "unknown";
  endif()
 }
 ```
@@ -790,7 +790,7 @@ Inline-composite `if(...)` and `switch(...)` are portable value expressions in s
 
 ```
 E {
- return(if(is_nonempty(scalar(type)),
+ return(if(is_nonempty(:type),
    "typed",
    else("missing")
  ))
@@ -799,7 +799,7 @@ E {
 
 ```
 E {
- return(switch(scalar(type),
+ return(switch(:type,
    case("regex", "regular expression"),
    case("edge", "edge"),
    default("other")
@@ -844,7 +844,7 @@ tracking but not recommended for new `.spec` authoring:
 
 - Raw Perl expressions and ad hoc operators outside the documented helper/operator slots
 - `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` (retired)
-- `s(...)`, `a(...)`, `h(...)` — use `scalar(...)`, `array(...)`, `hash(...)`
+- `s(...)`, `a(...)`, `h(...)` — use `...`, `array(...)`, `hash(...)`
 - `array_values(...)` — use `array_copy(...)`
 - `flatten(...)` — use `flat(...)`
 - `tail(...)` — use `drop_front(...)`
@@ -864,14 +864,14 @@ New `.spec` files must maintain this invariant.
 DemoParser::
  I  { declare(array, results) }
  LS { declare(scalar, retv) }
- /pattern1/ -> Child { set(scalar(retv), call(Child)) }
- LE { if(is_defined(scalar(retv))); push_value(array(results), scalar(retv)); endif() }
+ /pattern1/ -> Child { retv = call(Child) }
+ LE { if(is_defined(:retv)); push_value(array(results), :retv); endif() }
  E  { return(array("?result:", array_copy(array(results)))) }
 
 Child::
  /hello[ \t]+(\w+)/
  I { declare(scalar, name=entry_group(0)) }
- E { return(scalar(name)) }
+ E { return(:name) }
 
 SecondChild:OR+
  /(?:\w+)/

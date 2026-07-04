@@ -313,8 +313,8 @@ Parent::AND
    declare(array, children);
  }
  /child-anchor/ -> Parent[0] {
-   set(scalar(retv), call(Child));
-   push_value(array(children), scalar(retv));
+   retv = call(Child);
+   push_value(array(children), :retv);
    return(hash("kind", "parent", "children", array_copy(array(children))));
  }
 ```
@@ -370,13 +370,13 @@ Record::AND
  => Header
  => Body
  => Trailer
- LX { return(scalar(retv)); }
+ LX { return(:retv); }
 ```
 
 Same-line packing is also supported:
 
 ```text
-Record::AND I { declare(scalar, retv); } => Header => Body => Trailer LX { return(scalar(retv)); }
+Record::AND I { declare(scalar, retv); } => Header => Body => Trailer LX { return(:retv); }
 ```
 
 Prefer the multiline form in public documentation and new specs. It makes the parser-step order visible and leaves room to explain why each child rule exists.
@@ -398,8 +398,8 @@ Use `call(Child)` inside an action edge when the parent has its own local regex 
 Field::AND
  I { declare(scalar, retv); }
  /field\s+/ -> Field[0] {
-   set(scalar(retv), call(Name));
-   return(hash("kind", "field", "name", scalar(retv)));
+   retv = call(Name);
+   return(hash("kind", "field", "name", :retv));
  }
 
 Name:
@@ -426,7 +426,7 @@ Avoid blind calls when:
 - the parent needs slot-specific local match helpers,
 - the parent and child matching responsibilities are mixed,
 - one rule would need both `->` and `=>`,
-- the return payload needs complex reshaping that is clearer as explicit `set(scalar(retv), call(Child))` dataflow.
+- the return payload needs complex reshaping that is clearer as explicit `retv = call(Child)` dataflow.
 
 When you do use blind calls:
 

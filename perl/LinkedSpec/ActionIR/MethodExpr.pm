@@ -21,10 +21,9 @@ sub _normalize_method_name {
  return undef unless defined $method;
  # SPEC-FORMAT-TERSE.1.4.1 — terse helper-rename aliases (canonical-new + deprecated-old,
  # gradual migration per ADR 0007). `cat` is a pure value-expression rename of `concat`;
- # `set` is the rename of the statement-level `assign` (the raw-text statement recognizers
- # in Contracts.pm / PrimitivePipelineRules.pm / EmitContext.pm also accept `set`, but
- # normalizing here lets the parse-based `$call->{method} eq 'assign'` dispatch in
- # DeclareMethod / the contract scanners treat `set(...)` as `assign(...)`). `copy` is NOT
+ # `set` is the current statement-level assignment helper. The raw-text statement recognizers
+ # in Contracts.pm / PrimitivePipelineRules.pm / EmitContext.pm accept `set`, and normalizing
+ # here keeps the parser-backed assignment path aligned with that current spelling. `copy` is NOT
  # normalized here — it unifies array_copy/hash_copy and is resolved by a dedicated dispatch
  # in MethodLowering::_lower_method_value_expr.
  return 'concat' if $method eq 'cat';

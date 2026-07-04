@@ -31,7 +31,7 @@ if ($flag && $name ne "")
 with explicit DSL expressions such as:
 
 ```text
-if(and(scalar(flag), is_nonempty(scalar(name))))
+if(and(:flag, is_nonempty(:name)))
 ```
 
 That is easier to analyze, easier to lower, and easier to port.
@@ -40,8 +40,8 @@ That is easier to analyze, easier to lower, and easier to port.
 ### `or(...)`
 
 ```text
-or(scalar(on), scalar(off))
-or(eq(scalar(kind), "A"), eq(scalar(kind), "B"))
+or(:on, :off)
+or(eq(:kind, "A"), eq(:kind, "B"))
 ```
 
 Use it when any one of the conditions should pass.
@@ -49,9 +49,9 @@ Use it when any one of the conditions should pass.
 ### `and(...)`
 
 ```text
-and(scalar(enabled), is_nonempty(scalar(name)))
-and(not(is_empty(array(items))), matches(scalar(token), /^[A-Z_]+$/))
-and(contains_substr(lowercase(trim(scalar(name))), "node"), ends_with(lowercase(trim(scalar(name))), "_end"))
+and(:enabled, is_nonempty(:name))
+and(not(is_empty(array(items))), matches(:token, /^[A-Z_]+$/))
+and(contains_substr(lowercase(trim(:name)), "node"), ends_with(lowercase(trim(:name)), "_end"))
 ```
 
 Use it when all conditions must pass.
@@ -59,8 +59,8 @@ Use it when all conditions must pass.
 ### `not(...)`
 
 ```text
-not(is_empty(scalar(name)))
-not(eq(scalar(kind), "ignore"))
+not(is_empty(:name))
+not(eq(:kind, "ignore"))
 ```
 
 Use it to invert one condition.
@@ -72,9 +72,9 @@ Use this when the rule needs to distinguish "missing/undefined" from "defined bu
 Examples:
 
 ```text
-is_defined(scalar(name))
+is_defined(:name)
 is_defined(retv["content"])
-is_defined(coalesce(retv["type"], scalar(IMATCH)))
+is_defined(coalesce(retv["type"], :IMATCH))
 ```
 
 Typical meanings:
@@ -99,7 +99,7 @@ Examples:
 
 ```text
 is_undefined(retv["type"])
-is_undefined(coalesce(retv["content"], scalar(IMATCH)))
+is_undefined(coalesce(retv["content"], :IMATCH))
 ```
 
 Use it when the rule should take a missing-value branch only if no defined value is available yet.
@@ -111,7 +111,7 @@ Use it for scalars, arrays, hashes/objects, or composed aggregate expressions.
 Examples:
 
 ```text
-is_empty(scalar(name))
+is_empty(:name)
 is_empty(array(items))
 is_empty(join_values("", array(word)))
 is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))
@@ -126,11 +126,11 @@ Typical meanings:
 - and only the remaining non-aggregate fallback expressions use plain truthiness.
 
 This is intentionally different from `is_defined(...)`:
-- `is_empty(scalar(name))` treats both `undef` and `""` as empty,
-- `is_defined(scalar(name))` treats `""` as already present,
+- `is_empty(:name)` treats both `undef` and `""` as empty,
+- `is_defined(:name)` treats `""` as already present,
 - and `is_empty(pick_keys(hash(meta), "kind"))` can still be true even though that projected hash ref is defined.
 
-This same helper family now also has value-layer support, so the identical `is_empty(...)` spelling can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
+This same helper family now also has value-layer support, so the identical `is_empty(...)` spelling can be used in assignment values and `return(payload)`, not only directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
 
 ### `is_nonempty(...)`
 This is the inverse convenience helper.
@@ -140,13 +140,13 @@ Examples:
 ```text
 is_nonempty(array(word))
 is_nonempty(array(tail))
-is_nonempty(scalar(content))
+is_nonempty(:content)
 is_nonempty(join_values("", array(word)))
 is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source")))
 is_nonempty(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "stage"))
 ```
 
-This same helper family now also has value-layer support, so the identical `is_nonempty(...)` spelling can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in branch conditions.
+This same helper family now also has value-layer support, so the identical `is_nonempty(...)` spelling can be used in assignment values and `return(payload)`, not only directly in branch conditions.
 
 ## String comparisons
 Supported helpers:
@@ -160,9 +160,9 @@ Supported helpers:
 Examples:
 
 ```text
-eq(scalar(kind), "SPACE")
-ne(scalar(block_namee), scalar(block_namei))
-gt(scalar(name), "M")
+eq(:kind, "SPACE")
+ne(:block_namee, :block_namei)
+gt(:name, "M")
 ```
 
 Use these when you mean Perl-style string comparison semantics.
@@ -177,25 +177,25 @@ Supported helpers:
 Examples:
 
 ```text
-starts_with(lowercase(trim(scalar(name))), "node_")
-ends_with(lowercase(trim(scalar(name))), "_end")
-contains_substr(lowercase(trim(scalar(name))), "node")
-contains_substr(uppercase(trim(coalesce(retv["kind"], scalar(IMATCH)))), "NODE")
-matches(scalar(token), /^[A-Z_]+$/)
+starts_with(lowercase(trim(:name)), "node_")
+ends_with(lowercase(trim(:name)), "_end")
+contains_substr(lowercase(trim(:name)), "node")
+contains_substr(uppercase(trim(coalesce(retv["kind"], :IMATCH))), "NODE")
+matches(:token, /^[A-Z_]+$/)
 ```
 
 Use these when a branch depends on string shape or string membership rather than exact equality.
 
-This same scalar-predicate family now also exists in value lowering, so the identical helper spellings can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
+This same scalar-predicate family now also exists in value lowering, so the identical helper spellings can be used in assignment values and `return(payload)`, not only directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
 
 Closely related value helpers such as `replace_substr(...)`, `rm_prefix(...)`, and `rm_suffix(...)` are not themselves predicates, but they are meant to feed comparisons and predicates directly:
 
 ```text
-eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item")
-starts_with(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_")
-contains_substr(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "item")
-eq(rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"), "item_end")
-eq(rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"), "node_item")
+eq(replace_substr(lowercase(trim(:name)), "-", "_"), "node_item")
+starts_with(replace_substr(lowercase(trim(:name)), " ", "_"), "node_")
+contains_substr(replace_substr(lowercase(trim(:name)), "-", "_"), "item")
+eq(rm_prefix(replace_substr(lowercase(trim(:name)), " ", "_"), "node_"), "item_end")
+eq(rm_suffix(replace_substr(lowercase(trim(:name)), " ", "_"), "_end"), "node_item")
 ```
 
 That keeps literal string rewrites and boundary cleanup in the same expression layer as the later branch decision.
@@ -212,37 +212,37 @@ Supported helpers:
 Examples:
 
 ```text
-num_eq(scalar(count), 0)
-num_gt(scalar(index), 3)
-num_le(scalar(depth), 8)
+num_eq(:count, 0)
+num_gt(:index, 3)
+num_le(:depth, 8)
 num_ge(num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5)
 num_gt(num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)), 10)
 num_eq(num_range(take(concat_arrays(array(scores), array(extra_scores)), 4)), 6)
 num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)
-num_gt(num_add(count(array(parts)), scalar(offset)), 3)
-num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)
-num_gt(num_mul(count(array(parts)), scalar(factor)), 3)
+num_gt(num_add(count(array(parts)), :offset), 3)
+num_eq(num_sub(num_add(count(array(parts)), :offset), 1), 4)
+num_gt(num_mul(count(array(parts)), :factor), 3)
 
 That same numeric comparison family also accepts the newer arithmetic reducer/value helpers directly. In practice that means array-to-scalar reducers such as `num_sum(...)`, `num_avg(...)`, and `num_median(...)`, plus scalar-normalization helpers such as `num_round(...)`, can feed `num_gt(...)`, `num_eq(...)`, and the other `num_*` comparisons without staging one temporary scalar first.
-num_eq(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 3)
-num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), 3), 1)
-num_eq(num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit)), 5)
-num_gt(num_abs(num_sub(coalesce(length(trim(scalar(name))), 0), scalar(offset))), 3)
-num_ge(num_floor(num_sub(scalar(depth), scalar(offset))), 1)
-num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2)), 2)
-num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6)
+num_eq(num_div(num_mul(count(array(parts)), :factor), 2), 3)
+num_eq(num_mod(num_add(count(array(parts)), :offset), 3), 1)
+num_eq(num_clamp(num_add(count(array(parts)), :offset), :lower_limit, :upper_limit), 5)
+num_gt(num_abs(num_sub(coalesce(length(trim(:name)), 0), :offset)), 3)
+num_ge(num_floor(num_sub(:depth, :offset)), 1)
+num_ge(num_ceil(num_div(num_mul(count(array(parts)), :factor), 2)), 2)
+num_eq(num_round(num_add(coalesce(length(trim(:name)), 0), 0.5)), 6)
 num_ge(num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5)
 num_eq(num_range(take(concat_arrays(array(scores), array(extra_scores)), 4)), 6)
 num_ge(num_min(take(concat_arrays(array(scores), array(extra_scores)), 4)), 2)
-num_eq(num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10), 4)
+num_eq(num_min(num_add(count(array(parts)), :offset), :limit, 10), 4)
 num_ge(num_max(take(concat_arrays(array(scores), array(extra_scores)), 4)), 8)
-num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)
-eq(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "node_init")
-eq(rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"), "item_end")
-eq(rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"), "node_item")
-starts_with(lowercase(trim(scalar(name))), "node_")
-ends_with(lowercase(trim(scalar(name))), "_end")
-contains_substr(lowercase(trim(scalar(name))), "node")
+num_ge(num_max(num_add(count(array(parts)), :offset), 2, :limit), 6)
+eq(concat(lowercase(trim(:name)), "_", :stage), "node_init")
+eq(rm_prefix(replace_substr(lowercase(trim(:name)), " ", "_"), "node_"), "item_end")
+eq(rm_suffix(replace_substr(lowercase(trim(:name)), " ", "_"), "_end"), "node_item")
+starts_with(lowercase(trim(:name)), "node_")
+ends_with(lowercase(trim(:name)), "_end")
+contains_substr(lowercase(trim(:name)), "node")
 num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(drop_back(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
@@ -274,37 +274,37 @@ is_defined(retv["content"])
 ### Example: child type is still missing after fallback
 
 ```text
-is_undefined(coalesce(retv["type"], scalar(IMATCH)))
+is_undefined(coalesce(retv["type"], :IMATCH))
 ```
 
 ### Example: nonempty and not disabled
 
 ```text
-and(is_nonempty(array(items)), not(scalar(disabled)))
+and(is_nonempty(array(items)), not(:disabled))
 ```
 
 ### Example: either explicit enable or a nonempty fallback name
 
 ```text
-or(scalar(enabled), is_nonempty(scalar(name)))
+or(:enabled, is_nonempty(:name))
 ```
 
 ### Example: normalized name starts with a known parser prefix
 
 ```text
-starts_with(lowercase(trim(scalar(name))), "node_")
+starts_with(lowercase(trim(:name)), "node_")
 ```
 
 ### Example: normalized name ends with a known parser suffix
 
 ```text
-ends_with(lowercase(trim(scalar(name))), "_end")
+ends_with(lowercase(trim(:name)), "_end")
 ```
 
 ### Example: normalized name contains one known parser substring
 
 ```text
-contains_substr(lowercase(trim(scalar(name))), "node")
+contains_substr(lowercase(trim(:name)), "node")
 ```
 
 ### Example: projected object still has keys after skipping the first stable key
@@ -349,19 +349,19 @@ num_gt(count(drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stag
 - reducers like `count(...)` can wrap composed array helpers such as `take(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `slice(sorted_keys(...), 1, 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `drop_front(sorted_keys(...))` directly,
-- scalar predicate helpers like `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)` can wrap normalized values such as `lowercase(trim(scalar(name)))` directly,
-- the same pattern works when you want one trimmed leading array via `count(drop_back(sorted_keys(...), scalar(drop_count)))`,
-- the same pattern works when you want one bounded suffix via `count(take_last(sorted_keys(...), scalar(take_last_count)))`,
-- the same pattern works when you want one bounded prefix via `count(take(sorted_keys(...), scalar(take_count)))`,
-- the same pattern works when you want one bounded middle window via `count(slice(sorted_keys(...), scalar(slice_start), scalar(slice_count)))`,
-- the same pattern works with explicit counts like `count(drop_front(sorted_keys(...), scalar(skip_count)))`,
+- scalar predicate helpers like `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)` can wrap normalized values such as `lowercase(trim(:name))` directly,
+- the same pattern works when you want one trimmed leading array via `count(drop_back(sorted_keys(...), :drop_count))`,
+- the same pattern works when you want one bounded suffix via `count(take_last(sorted_keys(...), :take_last_count))`,
+- the same pattern works when you want one bounded prefix via `count(take(sorted_keys(...), :take_count))`,
+- the same pattern works when you want one bounded middle window via `count(slice(sorted_keys(...), :slice_start, :slice_count))`,
+- the same pattern works with explicit counts like `count(drop_front(sorted_keys(...), :skip_count))`,
 - so flow conditions can stay inside one parser-oriented expression instead of splitting into temporary variables first,
-- and the same no-fixed-depth composition rule applies here just as it does in `return(...)`, `assign(...)`, `if(...)`, and `switch(...)` arguments.
+- and the same no-fixed-depth composition rule applies here just as it does in `return(...)`, assignment RHS, `if(...)`, and `switch(...)` arguments.
 
 ### Example: check an entry inside a working array
 
 ```text
-eq(scalar(array(capt), 0), "?branch:")
+eq(array(capt).first(), "?branch:")
 ```
 
 ### Example: compound rule guard
@@ -369,8 +369,8 @@ eq(scalar(array(capt), 0), "?branch:")
 ```text
 and(
   is_nonempty(array(capt)),
-  matches(scalar(token), /^[A-Z_]+$/),
-  not(eq(scalar(mode), "skip"))
+  matches(:token, /^[A-Z_]+$/),
+  not(eq(:mode, "skip"))
 )
 ```
 
@@ -385,14 +385,14 @@ These helpers are most often used in:
 Examples:
 
 ```text
-declare(scalar, flag=or(scalar(on), scalar(off)))
-assign(scalar(flag), and(is_nonempty(array(items)), scalar(enabled)))
-assign(scalar(has_type), is_defined(retv["type"]))
-if(not(is_empty(scalar(name)))); ... endif()
+declare(scalar, flag=or(:on, :off))
+flag = and(is_nonempty(array(items)), :enabled)
+has_type = is_defined(retv["type"])
+if(not(is_empty(:name))); ... endif()
 ```
 
 ## Scalar and Nested-Access Expressions Inside Conditions
-You can combine `scalar(...)` and direct nested access with the flow-expression helpers.
+You can combine `...` and direct nested access with the flow-expression helpers.
 
 Examples:
 
@@ -415,8 +415,8 @@ num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)
 num_gt(count(sorted_keys(pick_keys(hash(meta), "kind", "source"))), 1)
 num_gt(coalesce(length(trim(retv["content"])), 0), 3)
 eq(first(sorted_keys(pick_keys(hash(meta), "kind", "source"))), "kind")
-eq(scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0), "kind")
-eq(scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind"), "NODE")
+eq(sorted_keys(pick_keys(hash(meta), "kind", "source"))[0], "kind")
+eq(merge_hash(hash(meta), hash("kind", "NODE"))["kind"], "NODE")
 eq(last(sorted_values(pick_keys(hash(meta), "kind", "source"))), "rule")
 eq(join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source"))), "kind, source")
 is_empty(sorted_values(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source")))
@@ -425,7 +425,7 @@ num_gt(count(array(parts)), 0)
 num_gt(count_keys(hash(meta)), 1)
 eq(lowercase(trim(retv["type"])), "word")
 eq(coalesce(retv["type"], "UNKNOWN"), "WORD")
-eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD")
+eq(coalesce_nonempty(trim(retv["type"]), :kind, "WORD"), "WORD")
 ```
 
 This is very useful when a child rule returns a structured hash payload and the current rule wants to branch on one field.
@@ -443,7 +443,7 @@ endif()
 ### Example: detect mismatched begin/end names
 
 ```text
-if(ne(scalar(block_namee), scalar(block_namei)));
+if(ne(:block_namee, :block_namei));
   print("error\n");
   exit;
 endif()
@@ -476,8 +476,8 @@ endif()
 ### Example: fallback branch only when no defined value survives
 
 ```text
-if(is_defined(coalesce(retv["type"], scalar(IMATCH))));
-  return(hash("kind", "CLASSIFIED", "type", coalesce(retv["type"], scalar(IMATCH))));
+if(is_defined(coalesce(retv["type"], :IMATCH)));
+  return(hash("kind", "CLASSIFIED", "type", coalesce(retv["type"], :IMATCH)));
 else;
   return(hash("kind", "UNCLASSIFIED"));
 endif()
@@ -486,7 +486,7 @@ endif()
 ### Example: fallback branch only when no nonempty scalar survives
 
 ```text
-if(eq(coalesce_nonempty(trim(retv["type"]), scalar(kind), "WORD"), "WORD"));
+if(eq(coalesce_nonempty(trim(retv["type"]), :kind, "WORD"), "WORD"));
   return(hash("kind", "WORDISH"));
 else;
   return(hash("kind", "OTHER"));
@@ -605,7 +605,7 @@ endif()
 - Prefer `sorted_values(...)` when you need one deterministic value-list view derived from one projected object shape before using array reducers or returning value summaries.
 - Prefer `length(...)` when the real question is “how long is this scalar after normalization/defaulting?” rather than “is it empty?” or “is it defined?”.
 - Prefer `coalesce_nonempty(...)` when the real question is “what is the first defined nonblank scalar value after normalization?” rather than “what is the first merely defined value?”.
-- Prefer `scalar(array_expr, index)` or `scalar(hash_expr, key)` on top of composed aggregate helpers when the real question is “read one canonical item from this normalized aggregate” rather than “materialize a temporary aggregate variable first”.
+- Prefer `array_expr[index]` or `hash_expr[key]` on top of composed aggregate helpers when the real question is “read one canonical item from this normalized aggregate” rather than “materialize a temporary aggregate variable first”.
 - Prefer `first(...)` / `last(...)` when the real question is “what is the boundary item of this array or projected array?” rather than “how many?” or “does it contain?”.
 - Prefer `index_of(...)` when the real question is “where is the first matching item in this array or projected array?” rather than only “does it contain?” or “what is the boundary item?”.
 - Prefer `take(...)` when the real question is “what is the first bounded prefix array I want to keep and keep composing?” rather than “what is the first single item?” or “what is the remainder?”.

@@ -9,7 +9,7 @@ For the method-by-method public reference, read [Value, Container, and Flow Help
 The core container helpers are:
 
 ```text
-scalar(name)
+:name
 array(items)
 hash(meta)
 ```
@@ -49,7 +49,7 @@ Use this convention when the rule name is the best name for the collection. If a
 
 ```text
 push(Child, children)
-push_value(array(children), scalar(child))
+push_value(array(children), :child)
 push_nonempty(array(children), trim(capture_slice()))
 ```
 
@@ -57,13 +57,13 @@ Most helpers do not guess the current rule array. They can still read or mutate 
 
 ## Assignment
 
-Use `set(target, source)` or `target = source` to replace a target value. `assign(target, source)` remains a
-supported legacy alias, but new examples should prefer the terse spelling.
+Use `set(target, source)` or `target = source` to replace a target value. New examples
+should prefer the operator form when it is clear at a glance.
 
 Examples:
 
 ```text
-set(scalar(name), entry_group(0));
+name = entry_group(0);
 items = [];
 meta = { "kind" => "token", "line" => entry_line() };
 ```
@@ -83,14 +83,14 @@ Use `push_value(array(target), value)` when you want to append.
 Example:
 
 ```text
-set(scalar(child), call(Child));
-push_value(array(items), scalar(child));
+child = call(Child);
+push_value(array(items), :child);
 ```
 
 Do not use whole-array assignment when you mean append.
 
 ```text
-set(array(items), array(scalar(child)));
+set(array(items), array(:child));
 ```
 
 That replaces the whole array. It does not append to it.
@@ -103,7 +103,7 @@ Examples:
 
 ```text
 return(hash("kind", "token", "text", entry_text()));
-return(array("?node:", scalar(name), array_copy(array(children))));
+return(array("?node:", :name, array_copy(array(children))));
 return({ "kind" => "token", "text" => entry_text(), "tags" => [tag, true] });
 ```
 
@@ -139,9 +139,8 @@ set(:payload, [value]);
 return(:payload);
 ```
 
-This target-kind inference is intentionally tied to direct RHS shape literals. Use an explicit scalar wrapper
-or the preferred `:name` shorthand when the goal is a scalar-held shape payload; use `array(name)` / `hash(name)`
-when the goal is an explicit aggregate target.
+This target-kind inference is intentionally tied to direct RHS shape literals. Use the `:name` shorthand when the
+goal is a scalar-held shape payload; use `array(name)` / `hash(name)` when the goal is an explicit aggregate target.
 
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
 returned or assigned:
@@ -176,7 +175,7 @@ raw.trim().split("-").trim_each().filter_nonempty()
 raw.trim().split("-").lowercase_each().join_values("_")
 score.abs().ceil().add(2).clamp(0, 10)
 count(array(parts)).gt(0)
-split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?node:", scalar(type_name))
+split_tagged_records(:identifier_list, /\s*,\s*/o, "?node:", :type_name)
 ```
 
 This keeps the action code declarative. A reader can tell whether you are copying, flattening, joining, or shaping repeated tagged rows without unpacking raw Perl syntax.
@@ -196,10 +195,10 @@ selected helper family consumes the yielded value.
 Hash helpers make metadata shaping explicit:
 
 ```text
-set(hash(meta), hash("kind", "rule", "name", scalar(name)));
+set(hash(meta), hash("kind", "rule", "name", :name));
 set_key(meta, "line", entry_line());
 set(hash(meta), merge_hash(hash(meta), hash("source", "spec")));
-set(scalar(public_fields), meta.drop_keys("debug").sorted_keys().join_values(","));
+public_fields = meta.drop_keys("debug").sorted_keys().join_values(",");
 ```
 
 These are especially useful when building AST nodes or diagnostics payloads.
@@ -211,8 +210,8 @@ LinkedSpec supports structured control-flow helpers so rules do not have to fall
 Typical shape:
 
 ```text
-if(is_nonempty(scalar(name)));
-  return(hash("kind", "named", "name", scalar(name)));
+if(is_nonempty(:name));
+  return(hash("kind", "named", "name", :name));
 else();
   return(hash("kind", "anonymous"));
 endif();
@@ -221,7 +220,7 @@ endif();
 Attached switch flow is useful when one value drives multiple cases:
 
 ```text
-switch(scalar(kind)) {
+switch(:kind) {
   case("word") { return(hash("kind", "word", "text", entry_text())) }
   case("space") { return(hash("kind", "space", "text", entry_text())) }
   default { return(hash("kind", "other", "text", entry_text())) }
@@ -236,10 +235,10 @@ Here is a compact token-node pattern:
 Token::
  /(\w+)/ {
    declare(scalar, text);
-   set(scalar(text), entry_group(0));
+   text = entry_group(0);
    return(hash(
      "kind", "token",
-     "text", scalar(text),
+     "text", :text,
      "line", entry_line(),
      "col", entry_col()
    ));

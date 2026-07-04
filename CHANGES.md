@@ -1,19 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.6.2.3.2 — retire scalar and assign spec helpers
+
+**Scope:** Perl ActionIR lowering/autodeclare/type-memory seams, Rust runtime expression/target evaluation,
+shipped specs, checked-in spec corpora, phase0/source expectations, focused Rust tests, mdBook/live docs, task
+tree, roadmap, and Knowledge Map.
+
+**What changed:** Removed `scalar(...)` and `assign(...)` from the current authored `.spec` surface. Scalar working
+variable reads now use `:name`; assignment uses `LHS = RHS` or `set(...)`. Bare identifiers remember their inferred
+kind after initialization, so `items = [value]` makes later `items` / `copy(items)` array-valued, `meta = { key =>
+value }` makes later `meta` / `copy(meta)` hash-valued, and non-shape assignment remains scalar-valued. Backend
+Perl built-ins such as `scalar(@...)` are intentionally outside this retirement boundary.
+
+**Evidence:** Active authored specs and checked-in corpus specs scan clean for `scalar(` and `assign(`. The mdBook
+source scan is clean. `prove -q -Iperl t/phase0_regression.t` passes with **1020** tests, and
+`prove -q -Iperl t/actionir_ast_parser.t` passes. Focused Rust checks pass for scalar-slot shorthand parsing,
+scalar-slot runtime behavior, and remembered bare identifier kind after initialization.
+
 ## 2026-07-03 — SPEC-FORMAT-TERSE.6.2.3.1 — add scalar slot shorthand
 
 **Scope:** Perl ActionIR lowering/autodeclare, Rust expression parsing/runtime evaluation, focused Perl/Rust
 regression coverage, oracle corpus fixture, mdBook reference pages, task-tree/live docs, and Knowledge Map.
 
 **What changed:** Added `:name` as the terse scalar-slot spelling. In value positions it reads scalar working
-variable `name`, equivalent to one-argument `scalar(name)`. In assignment-like target positions,
-`set(:payload, [value])` and `assign(:payload, [value])` preserve the explicit scalar payload boundary, storing the
-whole direct-shape payload in scalar `payload`; bare `set(payload, [value])` still infers aggregate array
-assignment. The long `scalar(name)` form remains accepted compatibility syntax.
+variable `name`, replacing the former long helper spelling. In assignment-like target positions,
+`set(:payload, [value])` preserves the explicit scalar payload boundary, storing the whole direct-shape payload in
+scalar `payload`; bare `set(payload, [value])` still infers aggregate array assignment. The former long scalar
+helper has since been retired by `SPEC-FORMAT-TERSE.6.2.3.2`.
 
 **Evidence:** Perl lowering probes cover `return(:name)`, `set(:payload, [value])`, direct `[:value]`, and
-legacy `array(:value)` constructor payloads. Phase0 now passes with **1019** tests. Rust core/runtime focused tests
+constructor payloads with `:value`. Phase0 now passes with **1019** tests. Rust core/runtime focused tests
 cover parsing/evaluation of `:name`, and the Perl-derived oracle corpus includes
 `terse_6_2_3_1_scalar_slot_shorthand`; regeneration now produces **73 fixtures**, and Rust `corpus_oracle` passes
 over all 73. mdBook pages now document `:name` as the preferred scalar-slot spelling.
