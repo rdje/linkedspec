@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.6.3 — sweep docs and corpus declare examples**
+  (PUBLIC DOCS/CORPUS TERSE-SURFACE SWEEP; COMPATIBILITY HOLDOUTS CLASSIFIED).
+  Current-facing mdBook examples and root checked-in corpus specs now teach terse working-variable
+  initialization/mutation and canonical helpers instead of active `declare(...)` or older helper names.
+
+  **Fix:** root `tests/corpus/simple_grammar`, `tests/corpus/tablegrep`, and `tests/corpus/lispish` moved to
+  auto-existing variables, assignments, direct shapes, `push(...)`, `copy(...)`, and `cat(...)`. Generated Rust
+  oracle inputs now use canonical helper spellings where old spellings were incidental, while compatibility
+  fixtures keep their old spellings deliberately. A new Knowledge Map card records that
+  `merge_hash(base, overlay)` is not equivalent to `merge_hash(copy(hash(base)), overlay)` today.
+
+  **Verification:** focused current-facing doc/corpus scans pass; root corpus probes preserve existing outputs;
+  oracle regeneration remains **73 fixtures** with no `expected.json` drift; Rust `corpus_oracle` passes all 73;
+  `mdbook build docs/linkedspec-book` passes; phase0 passes with **1020** tests; and full local CI passes.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.6.4` — decide post-migration compatibility support for declaration helpers.
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.6.2.4 — verify shipped-spec terse surface**
   (FINAL SHIPPED-SPEC NO-DRIFT CHECK; DOCS/CORPUS SWEEP HANDOFF).
   Final shipped-spec verification is complete before the broader `.6.3` public docs/corpus sweep.

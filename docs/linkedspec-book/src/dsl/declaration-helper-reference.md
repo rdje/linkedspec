@@ -7,7 +7,7 @@ This chapter records the legacy declaration helper family and the terse-format r
 > shape values. Use `name = value`, `items = []`, `meta = { ... }`, `items += value`, `meta[key] = value`,
 > `set(...)`, and existing terse read positions instead.
 
-Read [Action Model and Helper Surface](action-model-and-helper-surface.md) first if the helper-DSL direction is still new. Read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter when you want the value expressions that can feed declaration initializers.
+Read [Action Model and Helper Surface](action-model-and-helper-surface.md) first if the helper-DSL direction is still new. Read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter when you want the value expressions that can feed assignments, direct initializers, and legacy declaration initializers.
 
 ## Why declarations matter
 
@@ -74,9 +74,9 @@ A working variable also auto-exists when it appears **bare** in a helper positio
 set(count, match_group(0))
 count = match_group(0)
 
-# array target of push_value(...) / push_nonempty(...) — the bare name is an array
-push_value(array(items), match_group(0))
-push_value(items, match_group(0))
+# array target of push(...) / push_nonempty(...) — the bare name is an array
+push(array(items), match_group(0))
+push(items, match_group(0))
 items += match_group(0)
 
 # hash target of set_key(...) and hash-index assignment — the bare name is a hash
@@ -85,10 +85,9 @@ meta["text"] = match_group(0)
 meta[cat("source", "_kind")] = :kind
 
 # aggregate snapshot reads — the bare name is the aggregate being copied
-return(array_copy(array(items)))
-return(array_copy(items))
-return(hash_copy(hash(meta)))
-return(hash_copy(meta))
+return(copy(array(items)))
+return(copy(items))
+return(copy(hash(meta)))
 return(copy(items))
 
 # scalar source-slot reads — the bare name is a scalar value
@@ -106,7 +105,7 @@ meta[key] = value
 return(payload["children"][index]["name"])
 ```
 
-The kind comes from the **position**: the target of `set(...)` and `name = value` is a scalar for non-shape RHS values; the target of `push_value(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `array_copy(name)` reads the working array, `hash_copy(name)` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`, `return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]`. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
+The kind comes from the **position**: the target of `set(...)` and `name = value` is a scalar for non-shape RHS values; the target of `push(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `copy(array(name))` reads the working array, `copy(hash(name))` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`, `return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]`. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
 
 `declare(...)` is retirement-bound for spec files. Use terse replacements instead:
 
@@ -313,7 +312,7 @@ I {
 }
 ```
 
-That is readable because both initializers are short. If the second expression grew into a longer fallback chain, split it into `declare(...)` plus `set(...)`.
+That is readable because both initializers are short. If the second expression grew into a longer fallback chain, prefer direct assignments split across statements.
 
 ## Array initializer examples
 

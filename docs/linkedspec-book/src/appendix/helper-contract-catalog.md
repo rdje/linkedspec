@@ -107,16 +107,17 @@ dispatch rule.
 > for non-shape RHS values; the array/hash target when a bare assignment receives a direct RHS
 > shape (`name = []`, `set(name, [value])`, `name = {}`, `set(name, { key => value })`);
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
-> the array target of `push_value(name, …)`, `push_nonempty(name, …)`, and the array append operator
+> the array target of `push(name, …)`, `push_nonempty(name, …)`, and the array append operator
 > `name += value`; and the hash target of
 > `set_key(name, key, value)` and hash-index assignment `name[key] = value`
 > auto-exist from a **bare** name too, with the kind fixed by that position. Aggregate snapshot reads
-> `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)` are also type-implying read
+> `copy(array(name))`, `copy(hash(name))`, and array-first `copy(name)` are also type-implying read
 > positions. A backend MUST supply
 > the same auto-existence: a wrapper- or position-referenced variable
 > with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
-> carried across parses or recursive re-entries. `declare(...)` is the explicit form: use it for an
-> initializer, an explicit kind, or a grouped rule-state preamble. The DSL literals
+> carried across parses or recursive re-entries. `declare(...)` is retained as a legacy explicit form;
+> new specs should use direct assignment initializers such as `name = value`, `items = []`, and `meta = {}`.
+> The DSL literals
 > `undef`/`true`/`false` and the engine's own handler locals are never treated as working-variable
 > names (so `array(undef)` builds an array holding the `undef` literal, not a variable `undef`).
 
@@ -161,7 +162,7 @@ dispatch rule.
 >
 > ```text
 > demo::  -> value  .push
-> LX { return(array_copy(array(demo))) }
+> LX { return(copy(array(demo))) }
 >
 > value : /<regex>/  I.return( <helper-expression> )
 > ```
@@ -222,9 +223,9 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(array(demo))) }
+  LX { return(copy(array(demo))) }
 
-  value : /(\w+) (\w+)/  I.return( concat(entry_group(0), "-", entry_group(1)) )
+  value : /(\w+) (\w+)/  I.return( cat(entry_group(0), "-", entry_group(1)) )
   ```
   Input `hello world` → `["hello-world"]`.
 
@@ -252,7 +253,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(array(demo))) }
+  LX { return(copy(array(demo))) }
 
   value : /(\w+)/  I { if (is_defined(entry_group(0))) { return("present") } else { return("absent") } }
   ```
@@ -273,7 +274,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(array(demo))) }
+  LX { return(copy(array(demo))) }
 
   value : /\[([^\]]*)\]/  I.return( trim(entry_group(0)) )
   ```
@@ -448,7 +449,7 @@ dispatch rule.
     items.push_front("z")
     items.pop_back()
     items.pop_front()
-    return(array_copy(items))
+    return(copy(items))
    }
 
   Done:
@@ -785,7 +786,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(array(demo))) }
+  LX { return(copy(array(demo))) }
 
   value : /(\d+)\+(\d+)/  I.return( num_add(entry_group(0), entry_group(1)) )
   ```
@@ -864,7 +865,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(array_copy(array(demo))) }
+  LX { return(copy(array(demo))) }
 
   value : /(\d+),(\d+),(\d+),(\d+)/  I.return( num_sum(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )
   ```
@@ -1240,12 +1241,12 @@ These helpers read from the **current match** — the regex capture that trigger
 ### Composition Guarantee
 Pure value helpers support **unlimited nested composition**. Example:
 ```
-count(drop_front(sorted_keys(merge_hash(hash_copy(base), overlay))))
+count(drop_front(sorted_keys(merge_hash(copy(hash(base)), overlay))))
 ```
 Any portable pure helper that accepts an array can receive the output of an array-returning helper. Any
 portable pure helper that accepts a scalar can receive the output of a scalar-returning helper. Hash-consuming
-helper argument slots accept bare hash working variables as snapshots, so `merge_hash(hash_copy(base), overlay)`
-is equivalent to the explicit `hash(overlay)` form. Array-consuming helper argument slots likewise accept bare
+later helper argument slots accept bare hash working variables as snapshots, so `merge_hash(copy(hash(base)), overlay)`
+is equivalent to the explicit `hash(overlay)` form for the overlay argument. Array-consuming helper argument slots likewise accept bare
 array working variables as snapshots, so `count(drop_front(sorted(items)))` is portable. Array receiver-dot
 value chains are the same composition written from the receiver side, so
 `items.sorted().drop_front(2).first()` and `items.filter_match(/^a$/).count()` are portable. Hash receiver-dot
@@ -1264,8 +1265,8 @@ assignment RHS, and fluent `.return(...)`), and its contract is the selected pay
 specific compatibility tag string.
 
 ### Fluent / Block Equivalence
-For the locked ordinary helper families, structured-block form (`I { declare(...) }`) and compact
-lifecycle-marker fluent-chain form (`I.declare(...)`) produce the same behavior. Receiver-fluent
+For the locked ordinary helper families, structured-block form (`I { name = value }`) and compact
+lifecycle-marker fluent-chain form (`I.set(name, value)`) produce the same behavior. Receiver-fluent
 `when/otherwise` block chains are portable on action-edge and lifecycle-marker surfaces, and no-arg
 action-edge `.push` / `.return(expr)` continuations are portable too. Explicit/flow action-edge chains beyond
 that subset remain a separately locked surface.

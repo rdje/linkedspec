@@ -286,12 +286,15 @@ The top-level rule begins:
 
 ```text
 grammar_file:: I {
-  declare(array, rules, rule, includes, semantic_annotations);
-  declare(scalar, rule, on)
+  rules = [];
+  rule = [];
+  includes = [];
+  semantic_annotations = [];
+  on = undef
 }
 ```
 
-The declarations tell you how the parser thinks:
+The initializers tell you how the parser thinks:
 
 - `rules` stores completed grammar-rule entries.
 - `rule` stores the rule currently being built.
@@ -304,7 +307,7 @@ The lifecycle exit block finalizes the last open rule and returns the public pay
 ```text
 LX {
   if(:rule);
-    push_value(array(rules), array(:rule, flat_array(rule)));
+    push(array(rules), array(:rule, flat_array(rule)));
   endif();
 
   return(array(flat_array(includes), flat_array(rules)))
@@ -320,7 +323,7 @@ The helper names matter:
 
 - `:rule` reads the scalar variable `rule`.
 - `array(rules)` reads the array variable `rules`.
-- `push_value(...)` appends one constructed value into an array variable.
+- `push(...)` appends one constructed value into an array variable.
 - `flat_array(rule)` expands the current rule array into a returned entry.
 - `return(array(...))` returns an array payload.
 
@@ -333,7 +336,7 @@ The `grammar_file` rule starts a new rule entry through this action edge:
 ```text
 -> grammar_rule   {
   if(:rule);
-    push_value(array(rules), array(:rule, flat_array(rule)));
+    push(array(rules), array(:rule, flat_array(rule)));
   endif();
 
   set(array(rule), array(flat_array(semantic_annotations)));
@@ -435,7 +438,7 @@ returns:
 The quoted-string reader:
 
 ```text
-quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(:value, "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", :value))
+quoted_string: /"[^"]*"|'[^']*'/  I.set(value, entry_text()).substr(:value, "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", :value))
 ```
 
 normalizes:
@@ -453,7 +456,7 @@ into:
 The regex reader:
 
 ```text
-regex: /(?<!\\)\/.+?(?<!\\)\// I.declare(scalar, value=entry_text()).substr(:value, "^/|/$", "", go).return(array("regex", :value))
+regex: /(?<!\\)\/.+?(?<!\\)\// I.set(value, entry_text()).substr(:value, "^/|/$", "", go).return(array("regex", :value))
 ```
 
 normalizes:
@@ -471,7 +474,7 @@ into:
 The probability reader:
 
 ```text
-probability: /@\d+%?/ I.declare(scalar, value=entry_text()).substr(:value, "@|%", "", go).return(array("probability", :value))
+probability: /@\d+%?/ I.set(value, entry_text()).substr(:value, "@|%", "", go).return(array("probability", :value))
 ```
 
 normalizes:
@@ -585,7 +588,7 @@ The rule is:
 
 ```text
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(:c, "\s*$", "", o); substr(:c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), :c)))}
+-> semantic_annotation | grammar_rule {BACKTRACK(); c = capture_slice(); substr(:c, "\s*$", "", o); substr(:c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), :c)))}
 ```
 
 The key ideas are:
@@ -615,7 +618,7 @@ The parser returns:
 The shipped rule is:
 
 ```text
-logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {declare(scalar, logging_name=entry_group(0)); start_capture_slice()}
+logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I { logging_name = entry_group(0); start_capture_slice() }
 ```
 
 and then:
@@ -631,7 +634,7 @@ and then:
 }
 -> logging_annotation[1] {
   push_nonempty(array(logging_annotation), trim(capture_slice()));
-  return(array("logging_annotation", array(:logging_name, array_copy(array(logging_annotation)))))
+  return(array("logging_annotation", array(:logging_name, copy(array(logging_annotation)))))
 }
 ```
 

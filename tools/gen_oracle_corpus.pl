@@ -63,7 +63,8 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 #     spec   => '<name>' }         # shipped spec, slurped from specs/<name>.spec
 #
 # .7.1 GREEN PROOF SET — controlled authored grammars in the Rust-supported
-# subset (`::` rules, entry_text, declare/push_value/array_copy/return). They
+# subset (`::` rules, entry_text, assignment, push/copy/return, with a few
+# named compatibility twins that still exercise declare/old-helper aliases). They
 # prove the full oracle loop end-to-end: Perl runs the grammar → canonical-JSON
 # fixture → the Rust engine reproduces it under the one-level wrap rule.
 #
@@ -155,7 +156,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { push_value(array(items), "a"); push_value(array(items), "b"); return(array_copy(array(items))) }
+ /x/ -> Done { push(array(items), "a"); push(array(items), "b"); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -165,7 +166,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { declare(array, items); push_value(array(items), "a"); push_value(array(items), "b"); return(array_copy(array(items))) }
+ /x/ -> Done { declare(array, items); push(array(items), "a"); push(array(items), "b"); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -239,7 +240,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { push_value(items, "a"); return(copy(items)) }
+ /x/ -> Done { push(items, "a"); return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -286,7 +287,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "payload"); set(key, "stage"); set(idx, 1); set(foo, hash("a", array("zero", "one"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(array_copy(array(items)), hash_copy(hash(meta)), foo["a"][idx])) }
+ /x/ -> Done { set(value, "payload"); set(key, "stage"); set(idx, 1); set(foo, hash("a", array("zero", "one"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(copy(array(items)), copy(hash(meta)), foo["a"][idx])) }
 
 Done::
  /[a-z]+/
@@ -312,7 +313,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "payload"); set(key, "stage"); items += [value]; meta[key] = { key => value }; return(array(array_copy(array(items)), hash_copy(hash(meta)))) }
+ /x/ -> Done { set(value, "payload"); set(key, "stage"); items += [value]; meta[key] = { key => value }; return(array(copy(array(items)), copy(hash(meta)))) }
 
 Done::
  /[a-z]+/
@@ -328,7 +329,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; items += "tail"; meta = { key => value }; meta["fixed"] = "yes"; return(array(array_copy(array(items)), hash_copy(hash(meta)), :items, :meta)) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; items += "tail"; meta = { key => value }; meta["fixed"] = "yes"; return(array(copy(array(items)), copy(hash(meta)), :items, :meta)) }
 
 Done::
  /[a-z]+/
@@ -338,7 +339,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); set(items, [value]); meta = { key => value }; set(:payload, [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), :payload, array_copy(array(payload)))) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); set(items, [value]); meta = { key => value }; set(:payload, [value]); return(array(copy(array(items)), copy(hash(meta)), :payload, copy(array(payload)))) }
 
 Done::
  /[a-z]+/
@@ -365,7 +366,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { label = cat("a", "b"); push_value(array(items), :label); return(copy(array(items))) }
+ /x/ -> Done { label = cat("a", "b"); push(array(items), :label); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -391,7 +392,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(label, "b"); push(items, "a"); push(items, :label); return(array_copy(array(items))) }
+ /x/ -> Done { set(label, "b"); push(items, "a"); push(items, :label); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -407,7 +408,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "stage", cat("a", "b")); return(hash_copy(hash(meta))) }
+ /x/ -> Done { set_key(meta, "stage", cat("a", "b")); return(copy(hash(meta))) }
 
 Done::
  /[a-z]+/
@@ -439,7 +440,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { label = "b"; items += "a"; items += :label; return(array_copy(array(items))) }
+ /x/ -> Done { label = "b"; items += "a"; items += :label; return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -455,7 +456,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { meta[cat("s", "tage")] = cat("a", "b"); return(hash_copy(hash(meta))) }
+ /x/ -> Done { meta[cat("s", "tage")] = cat("a", "b"); return(copy(hash(meta))) }
 
 Done::
  /[a-z]+/
@@ -481,7 +482,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(:flag, array_copy(array(items)), hash_copy(hash(meta)))); endif() }
+ /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(:flag, copy(array(items)), copy(hash(meta)))); endif() }
 
 Done::
  /[a-z]+/
@@ -496,7 +497,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set (name, cat ("a", "b")); items += cat ("c", "d"); meta[cat ("s", "tage")] = :name; return (array(:name, array_copy (array (items)), hash_copy (hash (meta)))) }
+ /x/ -> Done { set (name, cat ("a", "b")); items += cat ("c", "d"); meta[cat ("s", "tage")] = :name; return (array(:name, copy (array (items)), copy (hash (meta)))) }
 
 Done::
  /[a-z]+/
@@ -546,7 +547,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "b"); items.push_back("a"); items.push_back(value); items.push_front("z"); items.pop_back(); items.pop_front(); return(array_copy(items)) }
+ /x/ -> Done { set(value, "b"); items.push_back("a"); items.push_back(value); items.push_front("z"); items.pop_back(); items.pop_front(); return(copy(items)) }
 
 Done::
 /[a-z]+/
@@ -659,7 +660,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(hash_copy(base), hash(overlay)))))) }
+ /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(hash(base), hash(overlay)))))) }
 
 Done::
  /[a-z]+/
@@ -676,7 +677,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(hash_copy(base), overlay))))) }
+ /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(copy(hash(base)), overlay))))) }
 
 Done::
  /[a-z]+/
@@ -888,7 +889,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(:payload, [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key => value }), copy(hash(meta)), set(:payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -904,7 +905,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, array_copy(items), meta[key] = value, hash_copy(meta), (items += "x").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, copy(items), meta[key] = value, copy(hash(meta)), (items += "x").count(), (meta["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -920,7 +921,7 @@ SPEC
         source => <<'SPEC',
 fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, legacy = "compat", legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, legacy = "compat", legacy, items = [value], copy(items), set(meta, { key => value }), copy(hash(meta)), items += "tail", copy(items), meta["extra"] = other, copy(hash(meta)), (items += "last").count(), (meta["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/

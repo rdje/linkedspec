@@ -12,9 +12,9 @@ Most value helpers return one expression. They become useful when they are place
 
 | Site | Shape | Use it when |
 | --- | --- | --- |
-| Declaration initializer | `declare(scalar, name=expr)` | a working variable should start with one explicit value. |
+| Working-variable initializer | `name = expr` / `items = []` / `meta = {}` | a working variable should start with one explicit scalar, array, or hash value. |
 | Assignment | `set(target, source)` / `target = source` | an existing scalar, array, or hash slot should be replaced. |
-| Array append | `items += expr` / `push(target, expr)` / `push_value(array(target), expr)` | one explicit value expression should be appended without replacing the whole array. |
+| Array append | `items += expr` / `push(target, expr)` / `push(array(target), expr)` | one explicit value expression should be appended without replacing the whole array. |
 | Hash field assignment | `meta[key_expr] = expr` / `set_key(name, key_expr, expr)` | one field of a named working hash should be updated in place. |
 | Return payload | `return(payload)` | the rule should return one structured value. |
 | Predicate | `if(condition)` / `elseif(condition)` | helper logic should drive control flow. |
@@ -40,7 +40,7 @@ Example:
 Token::AND
  /(\w+)/
  -> Token[0] {
-   declare(scalar, text=lowercase(trim(entry_group(0))));
+   text = lowercase(trim(entry_group(0)));
    return(hash(
      "kind", "token",
      "text", :text,
@@ -54,7 +54,7 @@ That rule keeps each concern explicit:
 - `entry_group(0)` reads the match group.
 - `trim(...)` removes boundary whitespace.
 - `lowercase(...)` normalizes case.
-- `declare(...)` names the intermediate value.
+- `text = ...` names the intermediate scalar value.
 - `return(hash(...))` returns one structured payload.
 
 ## Per-rule default accumulator convention
@@ -88,39 +88,39 @@ Parent::
    push(Child)
  }
  LX {
-   return(hash("kind", "parent", "children", array_copy(array(Parent))));
+   return(hash("kind", "parent", "children", copy(array(Parent))));
  }
 ```
 
 If the accumulator has a domain name that is clearer than the rule name, use an explicit target instead:
 
 ```text
-Parent:: I { declare(array, children); }
+Parent:: I { children = []; }
  -> Child {
    push(Child, children)
  }
  LX {
-   return(hash("kind", "parent", "children", array_copy(array(children))));
+   return(hash("kind", "parent", "children", copy(array(children))));
  }
 ```
 
 Other modern helpers do not silently guess the current rule accumulator. They can still use it when you name it explicitly:
 
 ```text
-push_value(array(Parent), capture_slice());
+push(array(Parent), capture_slice());
 push_nonempty(array(Parent), trim(capture_slice()));
 set(array(Parent), array());
-return(hash("children", array_copy(array(Parent))));
+return(hash("children", copy(array(Parent))));
 ```
 
 Older capture and return helpers also use this convention:
 
 | Helper | Current-rule accumulator behavior | Modern direction |
 | --- | --- | --- |
-| `capture(label)` | appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_value(array(CurrentRule), capture_slice())` or an explicit domain array |
+| `capture(label)` | appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push(array(CurrentRule), capture_slice())` or an explicit domain array |
 | `capture_if(label)` | trims and conditionally appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` or an explicit domain array |
 | `CAPTURE_IF()` | trims and conditionally appends the anonymous capture slice into `@CurrentRule` | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` |
-| *(removed 2026-06-14)* | `return_a`, `return_m`, `return_ma` were legacy tagged return shortcuts | Retired. Use `return(array(...))` with `array_copy(array(CurrentRule))` and/or `flat_array(entry_groups())` so payload shape is visible. |
+| *(removed 2026-06-14)* | `return_a`, `return_m`, `return_ma` were legacy tagged return shortcuts | Retired. Use `return(array(...))` with `copy(array(CurrentRule))` and/or `flat_array(entry_groups())` so payload shape is visible. |
 
 Historically, a VHDL-style rule might have used the now-removed `return_ma(generate_statement)` shorthand. The modern spelling makes each part explicit:
 
@@ -128,7 +128,7 @@ Historically, a VHDL-style rule might have used the now-removed `return_ma(gener
 return(array(
   "?generate_statement:",
   flat_array(entry_groups()),
-  array_copy(array(generate_statement))
+  copy(array(generate_statement))
 ));
 ```
 
@@ -140,20 +140,20 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 | Form | Count | Share |
 | --- | --- | --- |
-| `push_value(array(…), …)` | 63 | 71.6% |
+| `push(array(…), …)` | 63 | 71.6% |
 | Fluent `.push(…)` with explicit target | 19 | 21.6% |
 | `push_nonempty(array(…), …)` | 2 | 2.3% |
 | Convention-based `push(Child)` | 4 | 4.5% |
 
 **95.5% of accumulator operations already use explicit targets.** The four remaining convention-based uses (across `regdef`, `tkgui`, and `ebnf`) are idiomatic — the rule name is the clearest name for the collection.
 
-**Bottom line:** the per-rule default accumulator is a deliberate framework design choice, not migration debt. `push_value` is the preferred explicit spelling for new `.spec` code, and the convention-based `push(Child)` remains fully supported when the rule IS the natural accumulator.
+**Bottom line:** the per-rule default accumulator is a deliberate framework design choice, not migration debt. `push(...)` is the preferred explicit spelling for new `.spec` code, and the convention-based `push(Child)` remains fully supported when the rule IS the natural accumulator.
 
 ## Containers and accessors
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `:name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `:name` reads scalar `name`; `array(items)` reads working array `items`; `hash(meta)` reads working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the scalar target of `set(name, ...)` and `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push_value(name, ...)`, `push_nonempty(name, ...)`, and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and the aggregate snapshot reads `array_copy(name)`, `hash_copy(name)`, and array-first `copy(name)`. Use `set(:name, [value])` when you intentionally want a scalar to hold an array or hash payload. `declare(...)` stays available for initializers and explicit intent. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `:name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `:name` reads scalar `name`; `array(items)` reads working array `items`; `hash(meta)` reads working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the scalar target of `set(name, ...)` and `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)`, `push_nonempty(name, ...)`, and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and the aggregate snapshot reads `copy(array(name))`, `copy(hash(name))`, and array-first `copy(name)`. Use `set(:name, [value])` when you intentionally want a scalar to hold an array or hash payload. `declare(...)` stays available only as legacy compatibility; new examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -207,8 +207,8 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `hash(...)` | hash value | construct an empty or multi-argument hash/object payload from key/value pairs or flattened hashes; use `{ "key" => undef }` for a one-field literal hash with no value. |
 | `[]` / `[expr, ...]` | array value | construct one new array payload with direct literal syntax. |
 | `{ key_expr => value_expr, ... }` | hash value | construct one new hash/object payload with direct literal syntax; bare keys are scalar reads, so quote fixed field names. |
-| `array_copy(array_expr)` / `array_copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
-| `hash_copy(hash_expr)` / `hash_copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
+| `copy(array_expr)` / `copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
+| `copy(hash_expr)` / `copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 
 Retired short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are not canonical wrapper
 spellings. Use `:name`, `array(...)`, and `hash(...)` so descriptors and backend
@@ -223,12 +223,12 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 
 > **Terse spellings (canonical going forward).** The `.spec` format is migrating to terser helper
 > names: use `set(target, source)` or `target = source` for assignment, `cat(...)` for concatenation,
-> and a single unified `copy(container)` subsumes both `array_copy(...)` and `hash_copy(...)`
+> and a single unified `copy(container)` subsumes the former array-copy and hash-copy helpers
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
 > array snapshot read). The assignment operator `name = value` is equivalent to `set(name, value)`; in value
 > positions it yields the stored scalar or direct-shape aggregate value. The
 > array append operator `items += expr` is equivalent to the explicit
-> append forms `push(items, expr)` / `push_value(items, expr)`; when the value is a working scalar,
+> append forms `push(items, expr)` / `push(array(items), expr)`; when the value is a working scalar,
 > `items += value` reads `$value`, and in value positions the expression yields the updated array snapshot.
 > The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
 > the key and value are scalar-valued expressions; `meta[key] = value` reads `$key` and `$value`, and in value
@@ -255,8 +255,8 @@ kind = hash(meta).pick_keys("kind").sorted_values().first();
 content = retv["content"];
 child_name = retv["children"][0]["name"];
 dynamic_child_name = retv["children"][i]["name"];
-set(array(snapshot), array_copy(array(items)));
-set(hash(meta_snapshot), hash_copy(hash(meta)));
+set(array(snapshot), copy(array(items)));
+set(hash(meta_snapshot), copy(hash(meta)));
 set(field, "kind");
 set(value, "token");
 return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
@@ -282,8 +282,8 @@ The most important collection distinction is snapshot versus flatten.
 
 | Helper | Meaning |
 | --- | --- |
-| `array_copy(array(items))` | produce one nested array payload containing the items. |
-| `hash_copy(hash(meta))` | produce one nested hash payload containing the fields. |
+| `copy(array(items))` | produce one nested array payload containing the items. |
+| `copy(hash(meta))` | produce one nested hash payload containing the fields. |
 | `flat_array(array(items))` | splice array items into the surrounding constructor. |
 | `flat_hash(hash(meta))` | splice hash key/value pairs into the surrounding constructor. |
 | `flat(expr)` | generic flatten/splice helper for array or hash expressions. |
@@ -293,7 +293,7 @@ Snapshot example:
 ```text
 return(hash(
   "kind", "list",
-  "items", array_copy(array(items))
+  "items", copy(array(items))
 ));
 ```
 
@@ -305,7 +305,7 @@ Flatten example:
 return(array("?node:", flat_array(array(items))));
 ```
 
-That injects the array items directly into the returned array. The returned array does not contain a nested `items` array unless you explicitly ask for one with `array_copy(...)`.
+That injects the array items directly into the returned array. The returned array does not contain a nested `items` array unless you explicitly ask for one with `copy(...)`.
 
 Hash flattening is the same idea for key/value pairs:
 
@@ -328,7 +328,7 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `set(:name, expr)` | replace a scalar slot explicitly | a named scalar should hold the expression result, including direct shape payloads such as `[value]`. |
 | `set(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
 | `set(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
-| `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push_value(items, expr)` for accepted RHS shapes. |
+| `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push(array(items), expr)` for accepted RHS shapes. |
 | `meta[key_expr] = expr` | set one hash field and yield the updated hash snapshot when used as an expression | a named working hash should update one explicit key; equivalent to `set_key(meta, key_expr, expr)` for accepted key/value shapes. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `retv = call(rule)` | capture a child result | later helper logic needs the child payload. |
@@ -336,25 +336,25 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `push(rule, index)` | call one rule and append one indexed result | one element from a shaped child return should go straight into the current rule's conventional array accumulator. |
 | `push(rule, target)` | call one rule and append into a named array | a child rule result should go straight into an explicit array accumulator. |
 | `push(rule, target, index)` | call one rule and append one indexed result into a named array | one element from a shaped child return should go straight into an explicit array accumulator. |
-| `push_value(array(name), expr)` | append one value | an array should grow by one item. |
+| `push(array(name), expr)` | append one value | an array should grow by one item. |
 | `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `set_key(name, key, value)` | set one hash field | a named working hash should be updated in place. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
 | `next()` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
 | `exit_now(status)` | exit immediately with an optional status | a fatal parse-time diagnostic should stop execution after emitting its message. |
-| *(removed 2026-06-14)* | `return_a(label)`, `return_m(label)`, `return_ma(label)`, `return_imatch(...)`, `return_im(...)`, `return_array(tag, payload)` were legacy tagged return shortcuts | Retired. Use `return(...)` with `array_copy(...)` and/or `flat_array(entry_groups())` for structured payloads. |
+| *(removed 2026-06-14)* | `return_a(label)`, `return_m(label)`, `return_ma(label)`, `return_imatch(...)`, `return_im(...)`, `return_array(tag, payload)` were legacy tagged return shortcuts | Retired. Use `return(...)` with `copy(...)` and/or `flat_array(entry_groups())` for structured payloads. |
 
 Canonical child-result pattern:
 
 ```text
 Parent::AND
- I { declare(array, children); declare(scalar, retv); }
+ I { children = []; retv = undef; }
  Child
  -> Parent[0] {
    retv = call(Child);
-   push_value(array(children), :retv);
-   return(hash("kind", "parent", "children", array_copy(array(children))));
+   push(array(children), :retv);
+   return(hash("kind", "parent", "children", copy(array(children))));
  }
 ```
 
@@ -366,7 +366,7 @@ Parent::
    push(Child)
  }
  LX {
-   return(hash("kind", "parent", "children", array_copy(array(Parent))));
+   return(hash("kind", "parent", "children", copy(array(Parent))));
  }
 ```
 
@@ -391,16 +391,16 @@ push(Node, children);
 This is intentionally shorter than spelling the lower-level pieces:
 
 ```text
-push_value(array(children), call(Child));
+push(array(children), call(Child));
 ```
 
 That longer shape is still valid. It is just not the clearest spelling when the whole intent is "call and push."
 
-Use `push_value(...)` instead when the pushed value is not simply the child result:
+Use `push(...)` instead when the pushed value is not simply the child result:
 
 ```text
-push_value(array(items), trim(match_text()));
-push_value(array(children), hash("kind", "wrapped", "node", call(Node)));
+push(array(items), trim(match_text()));
+push(array(children), hash("kind", "wrapped", "node", call(Node)));
 ```
 
 The terse operator form is equivalent for explicit value expressions and bare scalar RHS reads:
@@ -445,7 +445,7 @@ Conditional append pattern:
 
 ```text
 logging_annotation: /@(\w+)\s*\(\s*/ /\s*\)/ @capture_slice
-I { declare(array, logging_annotation); }
+I { logging_annotation = []; }
 
 -> quoted_string {
   push(quoted_string, 1)
@@ -458,7 +458,7 @@ I { declare(array, logging_annotation); }
   return(hash(
     "kind", "logging_annotation",
     "name", match_group(0),
-    "args", array_copy(array(logging_annotation))
+    "args", copy(array(logging_annotation))
   ))
 }
 ```
@@ -476,15 +476,15 @@ push_nonempty(array(tags), lowercase(trim(match_text())));
 Do not use it when an empty string is a meaningful token:
 
 ```text
-push_value(array(fields), :field_text);
+push(array(fields), :field_text);
 ```
 
-That distinction is deliberate. `push_value(...)` says "append exactly what I computed." `push_nonempty(...)` says "append the computed value only if it survived the emptiness filter."
+That distinction is deliberate. `push(...)` says "append exactly what I computed." `push_nonempty(...)` says "append the computed value only if it survived the emptiness filter."
 
 Append versus replace:
 
 ```text
-push_value(array(children), :retv);
+push(array(children), :retv);
 ```
 
 That appends one value.
@@ -508,7 +508,7 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 | `rm_prefix(value, prefix)` | scalar | remove one literal prefix when present. |
 | `rm_suffix(value, suffix)` | scalar | remove one literal suffix when present. |
 | `substr(value, start, length?)` | scalar | take a substring by zero-based character offset. |
-| `concat(value, value, ...)` | scalar | build one string from scalar fragments. |
+| `cat(value, value, ...)` | scalar | build one string from scalar fragments. |
 | `length(value)` | scalar number or `undef` | measure scalar string length. |
 
 Examples:
@@ -518,7 +518,7 @@ name = lowercase(trim(entry_group(0)));
 key = replace_substr(lowercase(trim(:name)), "-", "_");
 core = rm_prefix(:key, "node_");
 base = rm_suffix(:core, "_end");
-full_key = concat(:base, "::", :stage);
+full_key = cat(:base, "::", :stage);
 name_len = length(:name);
 short_key = raw.trim().lowercase().replace_substr("-", "_").substr(0, 12);
 set(array(parts), raw.trim().split("-").trim_each().filter_nonempty());
@@ -540,7 +540,7 @@ Rationale:
 - Use `replace_substr(...)` for literal replacement, not regex replacement.
 - Use `rm_prefix(...)` and `rm_suffix(...)` when the boundary itself is meaningful parser metadata.
 - Use `substr(...)` when the parser contract is a fixed offset/width slice of a value.
-- Use `concat(...)` when the rule already knows the fragments and does not need array staging.
+- Use `cat(...)` when the rule already knows the fragments and does not need array staging.
 - Use `coalesce(length(...), 0)` when missing text should count as zero. Plain `length(undef)` stays undefined.
 
 Statement-style regex substitution is a separate mutation form used by some shipped specs:
@@ -932,7 +932,7 @@ Worked example:
 
 ```text
 FieldList::AND
- I { declare(array, fields); declare(scalar, raw); }
+ I { fields = []; raw = undef; }
  /([A-Za-z_, ]+)/
  -> FieldList[0] {
    raw = entry_group(0);
@@ -943,7 +943,7 @@ FieldList::AND
    uniq(array(fields));
    return(hash(
      "kind", "field_list",
-     "fields", array_copy(array(fields)),
+     "fields", copy(array(fields)),
      "field_count", count(array(fields)),
      "first_field", first(array(fields))
    ));
@@ -1010,7 +1010,7 @@ if(or(
 endif()
 
 if(not(is_empty(array(items))))
-  return(hash("kind", "items", "items", array_copy(array(items))));
+  return(hash("kind", "items", "items", copy(array(items))));
 endif()
 ```
 
@@ -1040,7 +1040,7 @@ else()
   set(hash(meta), set_key(hash(meta), "normalized_kind", "other"));
 endif()
 
-return(hash_copy(hash(meta)));
+return(copy(hash(meta)));
 ```
 
 Inline composite `if(...)` and `switch(...)` are portable value-producing helpers for compact cases in
@@ -1051,7 +1051,7 @@ statement control.
 ```text
 set(result,
   if(is_nonempty(array(items)),
-    hash("kind", "items", "items", array_copy(array(items))),
+    hash("kind", "items", "items", copy(array(items))),
     else(undef)
   )
 )
@@ -1065,7 +1065,7 @@ Attached-block form is also portable. It lowers to the same marker flow and supp
 
 ```text
 if(is_nonempty(array(items))) {
-  return(hash("kind", "items", "items", array_copy(array(items))))
+  return(hash("kind", "items", "items", copy(array(items))))
 } else {
   return_undef()
 }
@@ -1206,7 +1206,7 @@ This example shows child capture, fallback, normalization, hash shaping, and a s
 
 ```text
 Node::AND
- I { declare(scalar, retv); declare(hash, meta); }
+ I { retv = undef; meta = {}; }
  Child
  -> Node[0] {
    retv = call(Child);
@@ -1215,7 +1215,7 @@ Node::AND
      "name", coalesce_nonempty(trim(retv["name"]), :IMATCH, "anonymous")
    ));
    set(hash(meta), set_key(hash(meta), "normalized_name", replace_substr(lowercase(trim(hash(meta).pick_keys("name").sorted_values().first())), " ", "_")));
-   return(hash_copy(hash(meta)));
+   return(copy(hash(meta)));
  }
 ```
 
@@ -1224,7 +1224,7 @@ Why this reads well:
 - `call(Child)` is the only child dispatch.
 - `coalesce_nonempty(...)` states the fallback policy.
 - `set_key(...)` states that one field is added to a copy of the object.
-- `hash_copy(...)` states that the final object is returned as a payload.
+- `copy(...)` states that the final object is returned as a payload.
 
 ## Worked example: head/tail array result
 
@@ -1232,7 +1232,7 @@ This example shows array appends, boundary reads, array helpers, and branch pred
 
 ```text
 Sequence::AND
- I { declare(array, items); declare(scalar, retv); }
+ I { items = []; retv = undef; }
  Item
  Item
  -> Sequence[0] {
@@ -1264,7 +1264,7 @@ This example shows value normalization and switch classification.
 
 ```text
 Kind::AND
- I { declare(scalar, raw); declare(scalar, kind); }
+ I { raw = undef; kind = undef; }
  /[A-Za-z_]+/
  -> Kind[0] {
    raw = entry_text();
@@ -1284,9 +1284,9 @@ The switch is better than a long `elseif` ladder because every branch is driven 
 ## Practical guidance
 
 - Prefer `return(payload)` for new structured returns.
-- Prefer `array_copy(...)` and `hash_copy(...)` when returning a nested snapshot.
+- Prefer `copy(array(...))` and `copy(hash(...))` when returning a nested snapshot.
 - Prefer `flat_array(...)` and `flat_hash(...)` when splicing into a surrounding constructor.
-- Prefer `items += expr` / `push_value(...)` when appending; do not use whole-array assignment as a disguised append.
+- Prefer `items += expr` / `push(...)` when appending; do not use whole-array assignment as a disguised append.
 - Prefer `meta["field"] = expr` / `set_key(meta, "field", expr)` when updating one hash field; use `set_key(hash_expr, key, value)` when you need a copied hash value.
 - Prefer `has_key(...)` for field existence and `is_defined(...)` for value definedness.
 - Prefer `coalesce_nonempty(trim(...), fallback)` for human text fallback.

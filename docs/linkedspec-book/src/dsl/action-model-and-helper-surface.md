@@ -35,7 +35,6 @@ A helper-oriented rule should make the intent visible:
 ```text
 Top::
  /name=(\w+)/ -> Value {
-   declare(scalar, name);
    name = entry_group(0);
    return(hash("kind", "assignment", "name", :name));
  }
@@ -43,8 +42,7 @@ Top::
 
 That reads as:
 
-- declare a working scalar
-- assign it from the entry match capture group
+- assign a fresh working scalar from the entry match capture group
 - return a structured hash payload
 
 The important part is not the exact emitted Perl. The important part is that the parser action expresses a portable semantic operation.
@@ -57,30 +55,29 @@ The current helper surface is broad, but it is easier to learn in families. Each
 
 Construct and transform values during parsing:
 
-- `:name` — read the named scalar slot; `:name` remains the long compatible form
+- `:name` — read the named scalar slot
 - `array(name)` — read a named array value
 - `hash(name)` — read a named hash value
 - `flat_array(...)` — flatten arguments into an array
 - `flat_hash(...)` — flatten key/value arguments into a hash
-- `array_copy(...)` / `hash_copy(...)` — shallow-copy a container
+- `copy(...)` — shallow-copy a container
 - `join_values(...)` — join array elements into a string
 - `split_tagged_records(...)` — split a string into tagged records
 
 Detailed reference: [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md).
 
-### Declaration helpers
+### Working variables
 
-Declare typed working variables at the start of a rule or action body:
+Working variables auto-exist when they are first used through a typed position:
 
-- `declare(type, name)` — declare with optional initializer
-- `declare_s(name)` — declare a scalar
-- `declare_a(name)` — declare an array
-- `declare_h(name)` — declare a hash
+- `name = value` — scalar assignment for non-shape values
+- `items = []` — array initialization through a direct shape
+- `meta = { "kind" => value }` — hash initialization through a direct shape
+- `items += value` or `push(array(items), value)` — append to an array
+- `meta[key] = value` — mutate a hash
 
-Prefer initialized declarations when the initializer is short; use `declare(...)` plus `set(...)` when
-initialization has a fallback chain.
-
-Detailed reference: [Declaration Helper Reference](declaration-helper-reference.md).
+`declare(...)` is retained as a legacy compatibility helper and is documented in
+[Declaration Helper Reference](declaration-helper-reference.md). New examples should prefer the terse forms above.
 
 ### Assignment and mutation helpers
 
@@ -91,7 +88,7 @@ Write values into declared variables or containers:
 - `=(name, value)` — operator-call spelling for the same assignment value expression
 - `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot
 - `push(container, value)` — append to an array
-- `push_value(array(name), value)` — named-array push
+- `push(array(name), value)` — named-array push
 - `push_nonempty(array(name), value)` — push only if value is defined and non-empty
 - `set_key(name, key, value)` — set one key in a named working hash
 - `name[key] = value` — terse hash-index assignment operator, equivalent to `set_key(name, key, value)` when the key and value are explicit expressions; in value positions it yields the updated hash snapshot

@@ -46,7 +46,7 @@ edge action** and the `match_*` family:
 
 ```text
 Pair::AND
- I { declare(hash, pair) }
+ I { pair = {} }
  /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
    set(hash(pair), set_key(hash(pair), "name", match_group(0)));
  }
@@ -75,11 +75,11 @@ like any accumulating top rule — it needs an `LX` block to surface its accumul
 the input is exhausted:
 
 ```text
-sexpr:: /\(/ /\)/  I { declare(array, items) }
- -> sexpr     { push_value(array(items), call(sexpr)) }
- -> atom      { push_value(array(items), call(atom)) }
- -> sexpr[1]  { return(array_copy(array(items))) }
-LX { return(array_copy(array(items))) }
+sexpr:: /\(/ /\)/  I { items = [] }
+ -> sexpr     { push(array(items), call(sexpr)) }
+ -> atom      { push(array(items), call(atom)) }
+ -> sexpr[1]  { return(copy(array(items))) }
+LX { return(copy(array(items))) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 ```

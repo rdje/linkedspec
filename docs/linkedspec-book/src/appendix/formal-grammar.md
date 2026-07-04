@@ -25,11 +25,11 @@ Function definitions are also recognized only at top level.
 ```text
 Top::
  /a/ -> Next {
- return(array("?Top:", array_copy(array(Top))))
+ return(array("?Top:", copy(array(Top))))
  }
 
 Next::
- /b/ { return(array("?Next:", array_copy(array(Next)))) }
+ /b/ { return(array("?Next:", copy(array(Next)))) }
 ```
 
 Here `return(...)` is block content inside `Top`, and `Next::` starts a new paragraph.
@@ -356,7 +356,7 @@ portability is guaranteed for structured marker/attached-block forms, receiver-f
 `.push` / `.return(expr)` / `.return_undef()` continuations, explicit action-edge
 `.push(target)` / `.push(child,target)` child-return appends, statement-control fluent chains that
 gate those calls, and compact lifecycle-marker chains such as `I.return(expr)` or
-`I.declare(...).return(...)`.
+`I.set(...).return(...)`.
 
 Zero-arg fluent control-flow markers accept bare-keyword form:
 ```
@@ -518,13 +518,12 @@ Use the shorthand when the value must visibly be a scalar slot but the full
 aggregate kind: `set(name, [value])` assigns the working array `name`, while
 `set(:name, [value])` assigns the scalar `name`.
 
-### 7.1 Declaration Helpers
+### 7.1 Working-Variable Helpers
 ```
-declare(scalar, name)      — declare a scalar working variable
-declare(array, name)       — declare an array working variable
-declare(hash, name)        — declare a hash working variable
-declare(scalar, name=value) — declare with initializer
-set(name, value)            — assign a working variable; legacy name = value is still accepted
+name = value                — assign a scalar working variable
+items = []                  — initialize an array working variable
+meta = {}                   — initialize a hash working variable
+set(name, value)            — helper form of scalar assignment
 return(name)                — read and return a scalar working variable
 :name                       — explicit scalar-slot read shorthand
 ```
@@ -533,7 +532,7 @@ return(name)                — read and return a scalar working variable
 ```
 base["key"][0]                 — direct nested access into scalar-held payloads
 container[key]          — read a scalar entry from an array or hash
-concat(args...)                 — concatenate strings
+cat(args...)                 — concatenate strings
 coalesce(a, b, ...)             — first defined non-null value
 coalesce_nonempty(a, b, ...)    — first defined non-empty value
 is_defined(expr)                — true if expr is not undef
@@ -563,13 +562,13 @@ string_expr.split(delim).trim_each().join_values(delim)
 ```
 array(name)            — read array working variable name when name is bare
 array(e1, e2, ...)     — construct an array; prefer [...] for terse literals
-array_copy(arr)        — shallow copy
-array_values(arr)      — retired alias of array_copy (do not use; see Helper Contract Catalog §Compatibility-Aliases)
+copy(arr)        — shallow copy
+array_values(arr)      — retired alias of copy(do not use; see Helper Contract Catalog §Compatibility-Aliases)
 flat_array(arr)        — flatten into list context for insertion
 concat_arrays(a1, a2)  — concatenate arrays
 push(arr, child)        — append child to accumulator
 push(arr, child, index) — append child at index
-push_value(arr, value)  — append value to accumulator
+push(arr, value)  — append value to accumulator
 push_nonempty(arr, val) — append if non-empty
 target.push_back(value) — append value to named working array (statement)
 target.push_front(value) — prepend value to named working array (statement)
@@ -615,7 +614,7 @@ print_each(arr)         — debug output each element
 hash(name)              — read hash working variable name when name is bare
 hash(k1, v1, k2, v2)    — construct a hash from flat key/value pairs
 flat_hash(h)             — flatten hash into list context
-hash_copy(h)             — shallow copy
+copy(h)             — shallow copy
 merge_hash(h1, h2)       — merge h2 into h1 (returns new hash)
 set_key(h, key, val)     — set key to value (returns new hash)
 rename_key(h, old, new)  — rename key (returns new hash)
@@ -748,19 +747,19 @@ two styles below differ only in how the **edge's own action code** is written.
 ### 8.1 Structured Block Form
 ```
 Top::
- I { declare(array, results) }
+ I { results = [] }
  -> Child {
-   push_value(array(results), call(Child))
+   push(array(results), call(Child))
  }
- LX { return(array_copy(array(results))) }
+ LX { return(copy(array(results))) }
 ```
 
 ### 8.2 Fluent Chain Form
 ```
 Top::
- I { declare(array, results) }
- -> Child .push_value(array(results), call(Child))
- LX { return(array_copy(array(results))) }
+ I { results = [] }
+ -> Child .push(array(results), call(Child))
+ LX { return(copy(array(results))) }
 ```
 
 Both forms lower to identical ActionIR and produce identical parser behavior.
@@ -845,7 +844,7 @@ tracking but not recommended for new `.spec` authoring:
 - Raw Perl expressions and ad hoc operators outside the documented helper/operator slots
 - `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` (retired)
 - `s(...)`, `a(...)`, `h(...)` — use `...`, `array(...)`, `hash(...)`
-- `array_values(...)` — use `array_copy(...)`
+- `array_values(...)` — use `copy(...)`
 - `flatten(...)` — use `flat(...)`
 - `tail(...)` — use `drop_front(...)`
 - `drop_last(...)` — use `drop_back(...)`
@@ -862,20 +861,20 @@ New `.spec` files must maintain this invariant.
 ```text
 # A complete .spec file showing all major constructs
 DemoParser::
- I  { declare(array, results) }
- LS { declare(scalar, retv) }
+ I  { results = [] }
+ LS { retv = undef }
  /pattern1/ -> Child { retv = call(Child) }
- LE { if(is_defined(:retv)); push_value(array(results), :retv); endif() }
- E  { return(array("?result:", array_copy(array(results)))) }
+ LE { if(is_defined(:retv)); push(array(results), :retv); endif() }
+ E  { return(array("?result:", copy(array(results)))) }
 
 Child::
  /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(0)) }
+ I { name = entry_group(0) }
  E { return(:name) }
 
 SecondChild:OR+
  /(?:\w+)/
- E { return(array("?words:", array_copy(array(SecondChild)))) }
+ E { return(array("?words:", copy(array(SecondChild)))) }
 
 ThirdChild:AND
  /first/ -> A

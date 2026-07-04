@@ -65,7 +65,7 @@ A backend is compliant when, for every entry in this corpus:
 3. Add a `README.md` explaining the test.
 4. Generate `expected.json` from the Perl reference backend:
    ```bash
-   perl -MLinkedSpec -e '
+   perl -Iperl -MLinkedSpec -e '
      my $parser = LinkedSpec::Get(\"spec content here");
      # ... parse input, serialize result as JSON
    '

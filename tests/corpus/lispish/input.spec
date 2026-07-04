@@ -4,7 +4,7 @@ Lispish::
  -> comments
 
 parenthesis: /\(/ /\)/
-I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
+I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
 
  -> parenthesis       {
    if(is_nonempty(array(word)));
@@ -12,7 +12,7 @@ I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
      head = join_values("", array(word));
      has_head = 1;
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push(tail, join_values("", array(word)));
     endif();
     word = [];
    endif();
@@ -21,7 +21,7 @@ I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
     head = :retv;
     has_head = 1;
    else();
-    push_value(array(tail), :retv);
+    push(tail, :retv);
    endif()
 }
 
@@ -32,15 +32,15 @@ I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
      head = join_values("", array(word));
      has_head = 1;
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push(tail, join_values("", array(word)));
     endif();
     word = [];
    endif()
 }
- -> dquotes           {retv = call(dquotes); push_value(array(word), retv["content"])}
- -> sbrackets         {retv = call(sbrackets); push_value(array(word), retv["content"])}
- -> curlyb            {retv = call(curlyb); push_value(array(word), retv["content"])}
- -> others            {retv = call(others); push_value(array(word), retv["content"])}
+ -> dquotes           {retv = call(dquotes); push(word, retv["content"])}
+ -> sbrackets         {retv = call(sbrackets); push(word, retv["content"])}
+ -> curlyb            {retv = call(curlyb); push(word, retv["content"])}
+ -> others            {retv = call(others); push(word, retv["content"])}
  -> comments          {call(comments)}
 
  -> parenthesis[1]    {
@@ -49,13 +49,13 @@ I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
      head = join_values("", array(word));
      has_head = 1;
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push(tail, join_values("", array(word)));
     endif();
    endif();
 
    if(:has_head);
     if(is_nonempty(array(tail)));
-     return(array(:head, array_copy(array(tail))));
+     return(array(:head, copy(tail)));
     else();
      return(array(:head, undef));
     endif();
@@ -70,7 +70,7 @@ dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_
 
 squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
 
-curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {declare(scalar, content)}
+curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {content = undef}
  -> curlyb
  -> dquotes
  -> squotes

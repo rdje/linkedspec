@@ -7,24 +7,23 @@ Round 2.
 
 ## The two expression styles
 
-Most ordinary LinkedSpec helper statements — declaration, assignment, push, return, and pure
+Most ordinary LinkedSpec helper statements — assignment, push, return, and pure
 value helpers — can be written in either fluent or structured style. No-arg action-edge
 continuations such as `-> child .push` and `-> child[1] .return(expr)` are portable on the
 Perl reference and Rust. Receiver-fluent attached `when/otherwise` block chains are portable on
 action-edge and lifecycle-marker surfaces. Compact lifecycle receiver chains such as
-`I.return(...)` and `I.declare(...).return(...)` are also portable on lifecycle-marker surfaces:
+`I.return(...)` and `I.set(...).return(...)` are also portable on lifecycle-marker surfaces:
 they execute as the same ordered lifecycle statements as the equivalent `{ ... }` block.
 
 **Fluent style** chains calls on action edges with `.method()`:
 
 ```text
 /[A-Za-z_, ]+/ -> FieldList
-  .declare(array, parts)
-  .declare(scalar, raw)
-  .set(:raw, entry_text())
+  .set(parts, [])
+  .set(raw, entry_text())
   .split(array(parts), :raw, /,/)
   .filter_nonempty(array(parts))
-  .return(hash("kind", "field_list", "fields", array_copy(array(parts))));
+  .return(hash("kind", "field_list", "fields", copy(array(parts))));
 ```
 
 **Structured style** places calls inside a lifecycle block:
@@ -32,8 +31,8 @@ they execute as the same ordered lifecycle statements as the equivalent `{ ... }
 ```text
 Toplevel:AND+
  I {
-   declare(array, items);
-   declare(scalar, retv);
+   items = [];
+   retv = undef;
  }
 ```
 
@@ -51,8 +50,7 @@ For multiple lifecycle statements, the chain runs left to right:
 
 ```text
 item : /[A-Za-z_]\w*/
- I.declare(scalar, text)
-  .set(text, lowercase(entry_text()))
+ I.set(text, lowercase(entry_text()))
   .return(hash("kind", "item", "text", :text))
 ```
 
@@ -61,8 +59,7 @@ This is equivalent to:
 ```text
 item : /[A-Za-z_]\w*/
  I {
-   declare(scalar, text);
-   set(text, lowercase(entry_text()));
+   text = lowercase(entry_text());
    return(hash("kind", "item", "text", :text));
  }
 ```
@@ -94,9 +91,9 @@ the helper family, for example `{ [3, 1, 2] }.sorted().join_values(",")` or
 
 ```text
 rule:AND+
- I   { declare(array, acc); declare(scalar, n, 0); }
- E   { push_value(array(acc), call(child)); n = num_add(:n, 1); }
- LX  { return(hash("items", array_copy(array(acc)), "count", :n)); }
+ I   { acc = []; n = 0; }
+ E   { push(array(acc), call(child)); n = num_add(:n, 1); }
+ LX  { return(hash("items", copy(array(acc)), "count", :n)); }
 ```
 
 ## Statement separators
@@ -147,15 +144,15 @@ Every `elseif` and `else` switches the active branch.
 ```text
 rule:AND+
  I {
-   declare(scalar, on, 0);
+   on = 0;
  }
  -> child {
    if(:on);
-   push_value(array(acc), call(child));
+   push(array(acc), call(child));
    elseif(is_nonempty(array(tmp)));
-   push_value(array(acc), first(array(tmp)));
+   push(array(acc), first(array(tmp)));
    else();
-   push_value(array(acc), "default");
+   push(array(acc), "default");
    endif();
  }
 ```
@@ -165,9 +162,9 @@ Zero-argument markers can drop parentheses for a lighter look:
 ```text
 -> child {
   if(is_nonempty(array(src)));
-  push_value(array(acc), first(array(src)));
+  push(array(acc), first(array(src)));
   else;
-  push_value(array(acc), "default");
+  push(array(acc), "default");
   endif;
 }
 ```
@@ -177,9 +174,9 @@ The fluent equivalent chains the markers with dots:
 ```text
 -> child
   .if(is_nonempty(array(src)))
-  .push_value(array(acc), first(array(src)))
+  .push(array(acc), first(array(src)))
   .else
-  .push_value(array(acc), "default")
+  .push(array(acc), "default")
   .endif;
 ```
 
@@ -198,11 +195,11 @@ same control markers as marker style, with an implicit `endif()` at the end of t
 ```text
 -> child {
   if(is_nonempty(array(src))) {
-    push_value(array(acc), first(array(src)))
+    push(array(acc), first(array(src)))
   } elseif(is_defined(:fallback)) {
-    push_value(array(acc), :fallback)
+    push(array(acc), :fallback)
   } else {
-    push_value(array(acc), "default")
+    push(array(acc), "default")
   }
 }
 ```
@@ -309,12 +306,12 @@ same-line `} elseif/else {` continuations and lowers to the same branch-control 
 ```text
 -> child {
   if(:on) {
-    push_value(array(acc), call(child));
+    push(array(acc), call(child));
   } elseif(is_nonempty(array(tmp))) {
     found = first(array(tmp));
-    push_value(array(acc), :found);
+    push(array(acc), :found);
   } else {
-    push_value(array(acc), "default");
+    push(array(acc), "default");
   }
 }
 ```
@@ -373,10 +370,10 @@ branch runs, and `default` runs only when no prior case matched:
 LX {
   switch(:kind) {
     case("token") {
-      return(concat("token: ", :name));
+      return(cat("token: ", :name));
     }
     case("list") {
-      return(concat("list: ", count(array(items))));
+      return(cat("list: ", count(array(items))));
     }
     default {
       return("unknown");
@@ -391,10 +388,10 @@ The outer block form requires branch bodies on each `case(...)` or `default` bra
 LX {
   switch(:kind) {
     case("token") {
-      return(concat("token: ", :name));
+      return(cat("token: ", :name));
     }
     case("list") {
-      return(concat("list: ", count(array(items))));
+      return(cat("list: ", count(array(items))));
     }
     default {
       return("unknown");
@@ -469,11 +466,11 @@ multiple forms in combination:
 ```text
 Items::AND+
  I {
-   declare(array, acc);
-   declare(scalar, kind, "list");
+   acc = [];
+   kind = "list";
  }
  E {
-   push_value(array(acc), call(Item));
+   push(array(acc), call(Item));
  }
 LX {
    if(is_empty(array(acc)));
@@ -493,7 +490,7 @@ LX {
      default {
        return(hash(
          "kind", :kind,
-         "items", array_copy(array(acc)),
+         "items", copy(array(acc)),
          "count", count(array(acc))
        ))
      }

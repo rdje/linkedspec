@@ -1,11 +1,9 @@
 DemoParser::
- /pattern1/ -> Child {
- I { declare(array, results) }
- LE { push_value(array(results), :retv) }
- E { return(array("?results:", array_copy(array(results)))) }
- }
+I { results = [] }
+ -> Child { push(array(results), call(Child)) }
+LX { return(hash("?results:", copy(array(results)))) }
 
-Child::
- /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(1)) }
+Child:
+ /pattern1[ \t]+hello[ \t]+(\w+)/
+ I { name = entry_group(0) }
  E { return(:name) }

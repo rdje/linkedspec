@@ -173,10 +173,10 @@ The core rule starts like this:
 
 ```text
 parenthesis: /\(/ /\)/
-I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
+I { word = []; tail = []; retv = undef; head = undef; has_head = undef }
 ```
 
-The opening and closing regexes are the parenthesis anchors. The `I { ... }` lifecycle block declares the working state for one invocation:
+The opening and closing regexes are the parenthesis anchors. The `I { ... }` lifecycle block initializes the working state for one invocation:
 
 - `word` collects adjacent atom fragments until the rule sees a separator or nested structure.
 - `tail` collects all elements after the head.
@@ -225,7 +225,7 @@ The closing parenthesis edge finalizes the current form:
   ...
   if(:has_head);
    if(is_nonempty(array(tail)));
-    return(array(:head, array_copy(array(tail))));
+    return(array(:head, copy(array(tail))));
    else();
     return(array(:head, undef));
    endif();
@@ -239,7 +239,7 @@ The canonical wrappers matter:
 
 - `:head` means scalar variable `head`.
 - `array(tail)` means array variable `tail`.
-- `array_copy(array(tail))` snapshots the tail elements into the returned array shape.
+- `copy(array(tail))` snapshots the tail elements into the returned array shape.
 - `return(array(...))` returns an array payload.
 
 This is a good real example of why helper DSL matters. The rule contains recursion, accumulation, conditional flow, child calls, array pushes, and structured returns without falling back to ad hoc raw Perl for the core dataflow.

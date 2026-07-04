@@ -64,7 +64,7 @@ A backend's compiler parses the `.spec`, builds compiled rule state, derives dep
 top::
  -> pair .push
 
-LX { return(array_copy(array(top))) }
+LX { return(copy(array(top))) }
 
 pair:
  /(\w+)=(\w+)/ I {

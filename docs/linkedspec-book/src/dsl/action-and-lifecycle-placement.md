@@ -33,21 +33,21 @@ Example:
 ```text
 Token::AND
  I {
-   declare(hash, meta=hash("kind", "token"));
-   declare(scalar, text);
+   meta = { "kind" => "token" };
+   text = undef;
  }
  /[A-Za-z_]+/
  -> Token[0] {
    text = lowercase(trim(entry_text()));
    set(hash(meta), set_key(hash(meta), "text", :text));
-   return(hash_copy(hash(meta)));
+   return(copy(hash(meta)));
  }
 ```
 
 The structure is:
 
 - the rule starts at `Token::AND`
-- `I { ... }` declares rule-owned working state
+- `I { ... }` initializes rule-owned working state
 - `/[A-Za-z_]+/` is local regex slot `0`
 - `-> Token[0] { ... }` runs when slot `0` is the current local match
 
@@ -57,8 +57,8 @@ Use `I { ... }` for state that belongs to one invocation of the rule.
 
 Typical uses:
 
-- declare accumulators
-- declare a child-result scalar such as `retv`
+- initialize accumulators
+- initialize a child-result scalar such as `retv`
 - initialize metadata that all return paths should share
 - start a capture slice when the rule should begin with a known boundary
 
@@ -67,24 +67,24 @@ Example:
 ```text
 List::AND
  I {
-   declare(array, items);
-   declare(scalar, retv);
-   declare(hash, meta=hash("kind", "list"));
+   items = [];
+   retv = undef;
+   meta = { "kind" => "list" };
  }
  Item
  Item
  -> List[0] {
    retv = call(Item);
-   push_value(array(items), :retv);
+   push(array(items), :retv);
  }
  -> List[1] {
    retv = call(Item);
-   push_value(array(items), :retv);
-   return(set_key(hash(meta), "items", array_copy(array(items))));
+   push(array(items), :retv);
+   return(set_key(hash(meta), "items", copy(array(items))));
  }
 ```
 
-`I { ... }` is usually the right place for declarations because it runs before later action-edge logic needs those variables.
+`I { ... }` is usually the right place for initialization because it runs before later action-edge logic needs those variables.
 
 ## Action edges: `-> Rule[index] { ... }`
 
@@ -115,7 +115,7 @@ Action bodies should use helper statements:
 
 ```text
 name = entry_text();
-push_value(array(items), :retv);
+push(array(items), :retv);
 return(hash("kind", "name", "value", :name));
 ```
 
@@ -131,8 +131,7 @@ Example:
 
 ```text
 /[A-Za-z_]+/ -> Name[0]
-  .declare(scalar, text)
-  .set(:text, lowercase(trim(entry_text())))
+  .set(text, lowercase(trim(entry_text())))
   .return(hash("kind", "name", "text", :text));
 ```
 
@@ -141,7 +140,6 @@ This lowers through the same helper surface as the block form:
 ```text
 /[A-Za-z_]+/
 -> Name[0] {
-  declare(scalar, text);
   text = lowercase(trim(entry_text()));
   return(hash("kind", "name", "text", :text));
 }
@@ -155,7 +153,7 @@ Action-edge continuations are also portable when they stay edge-scoped:
 -> Item .push
 -> Item .push(items)
 -> Item .if(:on).push(Item, items).else().return_undef().endif()
--> Item[1] .return(array("?items:", array_copy(array(Item))))
+-> Item[1] .return(array("?items:", copy(array(Item))))
 ```
 
 `-> Item .push` dispatches the matched child and appends the child rule return to the
@@ -190,12 +188,11 @@ They also accept compact receiver chains for short ordered lifecycle statement l
 
 ```text
 token : /[A-Za-z_]\w*/
- I.declare(scalar, text)
-  .set(text, lowercase(entry_text()))
+ I.set(text, lowercase(entry_text()))
   .return(hash("kind", "token", "text", :text))
 ```
 
-That form is equivalent to `I { declare(...); set(...); return(...) }`: each method in the
+That form is equivalent to `I { text = lowercase(entry_text()); return(...) }`: each method in the
 chain executes as a lifecycle statement for the receiver marker.
 
 ## Empty action edges
@@ -212,7 +209,6 @@ When the parent needs to inspect or reshape the child result, use the explicit h
 
 ```text
 -> Parent[0] {
-  declare(scalar, retv);
   retv = call(Child);
   return(hash("kind", "parent", "child", :retv));
 }
@@ -238,7 +234,7 @@ A shipped example is `ebnf.spec`, whose `semantic_annotation` rule shares one ac
 semantic_annotation: /@(\w+)\s*:\s*/
 -> semantic_annotation | grammar_rule {
   BACKTRACK();
-  declare(scalar, c=capture_slice());
+  c = capture_slice();
   substr(:c, "\s*$", "", o);
   substr(:c, "^\"|\"$", "", go);
   return(array("semantic_annotation", array(entry_group(0), :c)));
@@ -269,7 +265,7 @@ They are often used in ordered wrapper rules:
 
 ```text
 Wrapper::AND
- I { declare(scalar, retv); }
+ I { retv = undef; }
  => Header
  => Body
  => Trailer
@@ -284,7 +280,7 @@ In new public examples, prefer the more explicit child-result pattern unless the
 
 ```text
 retv = call(Child);
-push_value(array(children), :retv);
+push(array(children), :retv);
 ```
 
 That pattern makes the dataflow visible.
@@ -335,7 +331,7 @@ Example:
 
 ```text
 Delimited::AND
- I { declare(scalar, body); }
+ I { body = undef; }
  /\{/
  @mark(body_start)
  /[^}]*/
@@ -379,7 +375,7 @@ Example:
 
 ```text
 MaybeName::OR
- I { declare(hash, meta=hash("kind", "maybe_name")); }
+ I { meta = { "kind" => "maybe_name" }; }
  LX {
    return(hash("kind", "missing_name"));
  }
@@ -410,18 +406,18 @@ Example:
 ```text
 Items:*
  I {
-   declare(array, items);
-   declare(scalar, item);
+   items = [];
+   item = undef;
  }
  /[A-Za-z_]+/
  -> Items[0] {
    item = entry_text();
  }
  IT {
-   push_value(array(items), :item);
+   push(array(items), :item);
  }
  E {
-   return(hash("kind", "items", "items", array_copy(array(items))));
+   return(hash("kind", "items", "items", copy(array(items))));
  }
 ```
 
@@ -444,7 +440,7 @@ Example:
 
 ```text
 Tuple::AND
- I { declare(array, parts); }
+ I { parts = []; }
  /\(/
  @capture_slice
  /[^,]*/
@@ -452,11 +448,11 @@ Tuple::AND
  /[^)]*/
  /\)/
  -> Tuple[2] {
-   push_value(array(parts), capture_take());
+   push(array(parts), capture_take());
  }
  -> Tuple[4] {
-   push_value(array(parts), capture_slice());
-   return(hash("kind", "tuple", "parts", array_copy(array(parts))));
+   push(array(parts), capture_slice());
+   return(hash("kind", "tuple", "parts", copy(array(parts))));
  }
 ```
 
@@ -468,11 +464,11 @@ Use this as the default decision guide:
 
 | Goal | Prefer |
 | --- | --- |
-| Declare state shared by the rule | `I { declare(...) }` |
-| Initialize metadata shared by return paths | `I { declare(hash, meta=hash(...)) }` |
+| Initialize state shared by the rule | `I { items = []; retv = undef }` |
+| Initialize metadata shared by return paths | `I { meta = { "kind" => "node" } }` |
 | Transform one matched token | `-> Rule[index] { ... }` |
 | Capture and reshape one child result | `retv = call(Child)` inside an action body |
-| Append repeated child results | `push_value(array(items), :retv)` inside action/iteration logic |
+| Append repeated child results | `push(array(items), :retv)` inside action/iteration logic |
 | Mark a grammar boundary | `@mark(name)` or `@capture_slice` at the grammar slot |
 | Move a boundary from code | `mark_here(name)` or `start_capture_slice()` inside a block |
 | Return a shaped optional fallback | `LX { return(...) }`, used sparingly |
@@ -483,8 +479,8 @@ Use this as the default decision guide:
 ```text
 Block::AND
  I {
-   declare(hash, meta=hash("kind", "block"));
-   declare(scalar, body);
+   meta = { "kind" => "block" };
+   body = undef;
  }
  /\{/
  @mark(body_start)
@@ -494,7 +490,7 @@ Block::AND
    body = capture_from(body_start);
    set(hash(meta), set_key(hash(meta), "body", :body));
    set(hash(meta), set_key(hash(meta), "body_start_line", mark_line(body_start)));
-   return(hash_copy(hash(meta)));
+   return(copy(hash(meta)));
  }
 ```
 
@@ -510,9 +506,9 @@ The placement logic is:
 ```text
 Pair::AND
  I {
-   declare(scalar, lhs);
-   declare(scalar, rhs);
-   declare(scalar, retv);
+   lhs = undef;
+   rhs = undef;
+   retv = undef;
  }
  Name
  /\s*=\s*/

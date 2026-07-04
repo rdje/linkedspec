@@ -271,10 +271,10 @@ A blind call can include post-call code:
 
 ```text
 Wrapper::AND
- => Child { return(array("?Wrapper:", array_copy(array(Wrapper)))) }
+ => Child { return(array("?Wrapper:", copy(array(Wrapper)))) }
 
 Child:
- /child/ -> Child { return(array("?Child:", array_copy(array(Child)))) }
+ /child/ -> Child { return(array("?Child:", copy(array(Child)))) }
 ```
 
 The lowering model is:
@@ -289,17 +289,17 @@ Fluent post-call chains are compact sugar over the same idea:
 
 ```text
 Wrapper::AND
- => Child .return(array("?Wrapper:", array_copy(array(Wrapper))))
+ => Child .return(array("?Wrapper:", copy(array(Wrapper))))
 
 Child:
- /child/ -> Child { return(array("?Child:", array_copy(array(Child)))) }
+ /child/ -> Child { return(array("?Child:", copy(array(Child)))) }
 ```
 
 The fluent example above is equivalent in lowered meaning to the explicit block form:
 
 ```text
 Wrapper::AND
- => Child { return(array("?Wrapper:", array_copy(array(Wrapper)))) }
+ => Child { return(array("?Wrapper:", copy(array(Wrapper)))) }
 ```
 
 Use fluent post-call chains only when they remain short and obvious. Use an explicit block when the post-call logic needs more than one or two steps.
@@ -309,13 +309,13 @@ The examples above use explicit `return(array(...))` payloads because the return
 ```text
 Parent::AND
  I {
-   declare(scalar, retv);
-   declare(array, children);
+   retv = undef;
+   children = [];
  }
  /child-anchor/ -> Parent[0] {
    retv = call(Child);
-   push_value(array(children), :retv);
-   return(hash("kind", "parent", "children", array_copy(array(children))));
+   push(array(children), :retv);
+   return(hash("kind", "parent", "children", copy(array(children))));
  }
 ```
 
@@ -366,7 +366,7 @@ Blind-call members can appear with normal lifecycle members such as `I { ... }` 
 
 ```text
 Record::AND
- I { declare(scalar, retv); }
+ I { retv = undef; }
  => Header
  => Body
  => Trailer
@@ -376,7 +376,7 @@ Record::AND
 Same-line packing is also supported:
 
 ```text
-Record::AND I { declare(scalar, retv); } => Header => Body => Trailer LX { return(:retv); }
+Record::AND I { retv = undef; } => Header => Body => Trailer LX { return(:retv); }
 ```
 
 Prefer the multiline form in public documentation and new specs. It makes the parser-step order visible and leaves room to explain why each child rule exists.
@@ -396,7 +396,7 @@ Use `call(Child)` inside an action edge when the parent has its own local regex 
 
 ```text
 Field::AND
- I { declare(scalar, retv); }
+ I { retv = undef; }
  /field\s+/ -> Field[0] {
    retv = call(Name);
    return(hash("kind", "field", "name", :retv));

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.6.3 — sweep docs and corpus declare examples
+
+**Scope:** Public mdBook examples/reference pages, root checked-in corpus, generated Rust oracle corpus,
+oracle generator, Knowledge Map, task-tree status, roadmap tracker, and live continuity docs.
+
+**What changed:** Current-facing docs and corpus examples now teach terse working-variable
+initialization/mutation (`name = value`, `items = []`, `meta = { ... }`, `items += value`, `meta[key] = value`,
+`push(...)`, `copy(...)`, and `cat(...)`) instead of active `declare(...)` or older helper names. Root
+`tests/corpus` specs scan clean. Rust oracle generator/fixtures use canonical helpers where old spellings were
+incidental; residual old spellings are isolated compatibility locks (`autoexist_*_declare`,
+`autoexist_array_bare_arg`, `terse_1_2_3_2_array_copy_bare_read`, `terse_1_2_3_2_hash_copy_bare_read`, and the
+hash receiver-method fixture) or explicit legacy/reference documentation. Added a Knowledge Map card for the
+`merge_hash(copy(hash(base)), overlay)` boundary.
+
+**Evidence:** Focused doc/corpus scans pass. Root corpus probes preserve existing outputs for `simple_grammar`,
+`tablegrep`, and `lispish`. `perl -Iperl tools/gen_oracle_corpus.pl` regenerates **73 fixtures** with no
+`expected.json` drift. Rust `corpus_oracle` passes all 73 fixtures. `mdbook build docs/linkedspec-book` passes.
+Phase0 passes with **1020** tests, and full local CI passes.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.6.2.4 — verify shipped-spec terse surface
 
 **Scope:** Shipped-spec compile/inventory verification, phase0, oracle regeneration, Rust corpus oracle, mdBook

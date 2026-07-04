@@ -49,11 +49,11 @@ Use this convention when the rule name is the best name for the collection. If a
 
 ```text
 push(Child, children)
-push_value(array(children), :child)
+push(array(children), :child)
 push_nonempty(array(children), trim(capture_slice()))
 ```
 
-Most helpers do not guess the current rule array. They can still read or mutate it when you name it explicitly, for example `array(Parent)`, `push_value(array(Parent), value)`, or `return(hash("children", array_copy(array(Parent))))`.
+Most helpers do not guess the current rule array. They can still read or mutate it when you name it explicitly, for example `array(Parent)`, `push(array(Parent), value)`, or `return(hash("children", copy(array(Parent))))`.
 
 ## Assignment
 
@@ -78,13 +78,13 @@ while `meta[key] = value` mutates the named hash and yields the updated hash sna
 
 ## Pushing values
 
-Use `push_value(array(target), value)` when you want to append.
+Use `push(array(target), value)` when you want to append.
 
 Example:
 
 ```text
 child = call(Child);
-push_value(array(items), :child);
+push(array(items), :child);
 ```
 
 Do not use whole-array assignment when you mean append.
@@ -103,7 +103,7 @@ Examples:
 
 ```text
 return(hash("kind", "token", "text", entry_text()));
-return(array("?node:", :name, array_copy(array(children))));
+return(array("?node:", :name, copy(array(children))));
 return({ "kind" => "token", "text" => entry_text(), "tags" => [tag, true] });
 ```
 
@@ -162,8 +162,8 @@ array, string, hash, and number contracts.
 Use explicit helpers when you need a snapshot or derived collection:
 
 ```text
-array_copy(array(items))
-hash_copy(hash(meta))
+copy(array(items))
+copy(hash(meta))
 flat_array(array(parts))
 join_values("", array(tokens))
 tokens.uniq().join_values("")
@@ -234,7 +234,6 @@ Here is a compact token-node pattern:
 ```text
 Token::
  /(\w+)/ {
-   declare(scalar, text);
    text = entry_group(0);
    return(hash(
      "kind", "token",
@@ -247,8 +246,7 @@ Token::
 
 The rule:
 
-- declares one working scalar
-- reads the capture group through `entry_group(0)`
+- assigns one working scalar from `entry_group(0)`
 - returns a structured hash
 - includes human-readable source location data
 

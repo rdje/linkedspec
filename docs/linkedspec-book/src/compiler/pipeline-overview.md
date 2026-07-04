@@ -174,9 +174,9 @@ with several function bodies such as:
 
 ```text
 fn normalize(value) { return(trim(value)) }
-fn join_pair(left, right) { return(concat(left, right)) }
-fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
-fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+fn join_pair(left, right) { return(cat(left, right)) }
+fn mk_items(first, second) { items += first; items += second; return(copy(items)) }
+fn mk_meta(key, value) { meta[key] = value; return(copy(meta)) }
 
 Top::
  /x/ -> Done {
@@ -241,7 +241,7 @@ wrapper forms remain compatibility syntax, not the canonical destination surface
 Standalone supported value statements now lower through the same typed AST value
 traversal and produce canonical `VALUE_DROP` events: their value is computed with the
 covered helper/receiver semantics and then intentionally discarded. For example,
-`trim(" x ")`, `concat("a","b")`, and `" x ".trim()` do not remain raw host calls.
+`trim(" x ")`, `cat("a","b")`, and `" x ".trim()` do not remain raw host calls.
 Unknown typed calls and function-call receiver chains in return/value positions now
 diagnose through unresolved-helper metadata instead of becoming generated host-language
 calls. Top-level user-function definitions now have their own registry extraction seam:

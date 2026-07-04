@@ -135,7 +135,7 @@ here):
 
 ```text
 Pair::AND
- I { declare(hash, pair) }
+ I { pair = {} }
  /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
    set(hash(pair), set_key(hash(pair), "name", match_group(0)));
  }

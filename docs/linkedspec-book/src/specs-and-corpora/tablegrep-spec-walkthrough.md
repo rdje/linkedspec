@@ -63,8 +63,8 @@ Invalid inputs produce error messages and non-zero exit codes: two consecutive o
 
 All five rules share the `I`/`LS`/`LE`/`LX` lifecycle pattern. Each rule:
 
-- `I { ... }` — declares `array(internal)` for accumulating child results and `:prev_node_type` for operator adjacency checking.
-- `LS { declare(scalar, retv) }` — declares a per-match return-value scalar.
+- `I { ... }` — initializes `internal = []` for accumulating child results and `prev_node_type = undef` for operator adjacency checking.
+- `LS { retv = undef }` — resets the per-match return-value scalar.
 - `LE { ... }` — checks for undefined child results (skip), validates that two operators are never adjacent (exit code 1 on error), pushes the child result onto the internal array, and records the node type.
 - `LX { ... }` — on rule exit: returns `undef` if the internal array is empty, otherwise returns a copy of the accumulated array.
 

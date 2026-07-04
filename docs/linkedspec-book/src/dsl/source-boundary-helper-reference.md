@@ -104,7 +104,7 @@ Prefer the explicit names in new public examples.
 
 ```text
 Tuple::AND
- I { declare(array, parts); }
+ I { parts = []; }
  /\(/
  /[^,]*/
  /,/
@@ -113,9 +113,9 @@ Tuple::AND
  /[^)]*/
  /\)/
  -> Tuple[0] { start_capture_slice() }
- -> Tuple[2] { push_value(array(parts), capture_take()) }
- -> Tuple[4] { push_value(array(parts), capture_take()) }
- -> Tuple[6] { push_value(array(parts), capture_slice()); return(array("?Tuple:", array_copy(array(parts)))) }
+ -> Tuple[2] { push(array(parts), capture_take()) }
+ -> Tuple[4] { push(array(parts), capture_take()) }
+ -> Tuple[6] { push(array(parts), capture_slice()); return(array("?Tuple:", copy(array(parts)))) }
 ```
 
 Reading this example:
@@ -382,7 +382,7 @@ The following older helpers remain useful when reading or migrating legacy specs
 | Helper | Preferred modern direction |
 | --- | --- |
 | `$CAPTURE` | `capture_slice()` or `name = capture_slice()` |
-| `capture(label)` | `push_value(array(target), capture_slice())` when the target is explicit |
+| `capture(label)` | `push(array(target), capture_slice())` when the target is explicit |
 | `capture_if(label)` | `push_nonempty(array(target), trim(capture_slice()))` for the common trimmed-and-nonempty append case; explicit `if(...)` around `capture_slice()` when custom filtering is needed |
 | `CAPTURE_IF()` | `push_nonempty(array(current_rule), trim(capture_slice()))` when replacing the legacy current-rule append shape |
 | `ibacktrack(label)` / `IBACKTRACK()` | keep as compatibility unless a clearer parser structure removes the need to backtrack |

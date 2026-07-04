@@ -6,14 +6,13 @@ Covers: rule labels, action edges, lifecycle blocks (I/LE/E), regex anchors, acc
 
 ```text
 DemoParser::
- /pattern1/ -> Child {
- LE { results += :retv }
- E { return(array("?results:", copy(results))) }
- }
+I { results = [] }
+ -> Child { push(array(results), call(Child)) }
+LX { return(hash("?results:", copy(array(results)))) }
 
-Child::
- /hello[ \t]+(\w+)/
- I { name = entry_group(1) }
+Child:
+ /pattern1[ \t]+hello[ \t]+(\w+)/
+ I { name = entry_group(0) }
  E { return(:name) }
 ```
 

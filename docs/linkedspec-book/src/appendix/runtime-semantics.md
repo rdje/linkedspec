@@ -193,7 +193,7 @@ the rule's own accumulator array.
 ```text
 Foo::
  -> Bar {push(Bar)}    # push(Child) appends Bar's result to the implicit accumulator @Foo
-LX {return(array_copy(array(Foo)))}
+LX {return(copy(array(Foo)))}
 ```
 
 The `I`/`LS`/`LE`/`E`/`EX`/`IT`/`LX` lifecycle blocks are **top-level rule-paragraph
@@ -208,26 +208,26 @@ surrounding rule return channel. This is separate from expression-valued blocks 
 
 ### 5.3 Explicit Accumulation
 
-`push_value(target, value)` targets a named accumulator explicitly. The terse
+`push(target, value)` targets a named accumulator explicitly. The terse
 spelling `push(target, value)` is equivalent when the value position is
 unambiguous:
 
 ```text
 Foo::
- I {declare(array, results)}
- -> Bar {push_value(array(results), :retv)}
-E {return(array_copy(array(results)))}
+ I { results = [] }
+ -> Bar {push(array(results), :retv)}
+E {return(copy(array(results)))}
 ```
 
 ```text
 Foo::
  -> Bar {push(results, :retv)}
-E {return(array_copy(array(results)))}
+E {return(copy(array(results)))}
 ```
 
 All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
 is the target accumulator. To append a working-variable value, write
-`items += value`, `push(results, :value)`, or `push_value(results, :value)`.
+`items += value`, `push(results, :value)`, or `push(results, :value)`.
 Bare scalar reads are currently supported in return and assignment-like source slots such as
 `return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
 `items += value`, and in direct-access path atoms such as `payload["children"][index]`.
@@ -281,7 +281,7 @@ expression, it yields the updated hash snapshot after the field write.
 
 The rule's return value is whatever the **E-block** returns (or the last lifecycle
 block to execute). A rule must return a value identifiable by the parent. The
-canonical form is `return(array_copy(array(accumulator)))`.
+canonical form is `return(copy(array(accumulator)))`.
 
 ### 5.5 What a Parser Returns (Top-Level Output)
 
@@ -360,20 +360,20 @@ an array-valued expression such as `entry_groups()` into the array.)
 Two distinct mechanisms produce a rule's data; do not conflate them:
 
 - The **implicit accumulator** (§5.1–§5.3) is the rule's working array; `push(Child)` /
-  `push_value(target, value)` append to it across repetitions.
+  `push(target, value)` append to it across repetitions.
 - **`return(expr)`** sets the rule's **return value** — the value the parent sees for
   that rule. It is the rule's value channel, separate from the accumulator.
 
 A child rule's `return(...)` becomes that child's value for the parent to consume
-**explicitly** (for example `push_value(array(results), call(Child))`); it is **not**
+**explicitly** (for example `push(array(results), call(Child))`); it is **not**
 auto-appended to the parent's accumulator. A common top-level pattern uses both — collect
 children into the accumulator, then return a snapshot of it:
 
 ```text
-... return(array("?ds_vhistory:", array_copy(array(vhistory)))) ...
+... return(array("?ds_vhistory:", copy(array(vhistory)))) ...
 ```
 
-(from `ds_vhistory.spec`), where `array_copy(array(vhistory))` snapshots the rule's
+(from `ds_vhistory.spec`), where `copy(array(vhistory))` snapshots the rule's
 `vhistory` accumulator; the `"?ds_vhistory:"` tag here is just the optional convention
 from §5.6 — the author could return the snapshot in any shape.
 

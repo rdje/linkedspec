@@ -28,7 +28,7 @@ Example:
 
 ```text
 Top::AND
- I { start_capture_slice(); declare(scalar, first); }
+ I { start_capture_slice(); first = undef; }
  /BEGIN/
  /END/
  -> Top[0] { first = capture_slice(); }

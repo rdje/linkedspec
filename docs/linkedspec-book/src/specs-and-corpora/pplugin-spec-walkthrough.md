@@ -65,7 +65,7 @@ The parser returns a flat hash (name => coderef pairs) where each value is the `
 
 **`next()` for comments.** The `pplugin_top` rule lists `-> comment { next() }` as its first alternative. `next()` is the LinkedSpec equivalent of Perl's `next` statement — it skips the current match and tries the next one. This means comments are silently consumed without affecting the accumulated `defs` array.
 
-**`LX` accumulator pattern.** The `pplugin_top` rule accumulates `[name, coderef]` pairs in `I { declare(array, defs) }`. Each `LE` hook pushes `[subname, coderef]` via `flat_array`. On exit (`LX`), the accumulated pairs are converted to a flat hash. This is the same accumulator pattern used by `tablegrep.spec`.
+**`LX` accumulator pattern.** The `pplugin_top` rule accumulates `[name, coderef]` pairs in `I { defs = [] }`. Each `LE` hook pushes `[subname, coderef]` via `flat_array`. On exit (`LX`), the accumulated pairs are converted to a flat hash. This is the same accumulator pattern used by `tablegrep.spec`.
 
 **Legacy `eval` in handler code.** The `subdef[1]` action edge uses `eval substr($$STRING, $IPOS, $LSPOS - $IPOS - 1)` — a raw Perl eval of the text between the opening `{` and closing `}`. This is one of the few remaining `eval` sites in shipped specs and exists because plugin subroutine bodies are Perl code, not LinkedSpec DSL. The long-term direction is to reduce this kind of host-language dependency.
 

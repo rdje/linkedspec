@@ -25,8 +25,8 @@ Instead of asking readers to understand a substring expression, a mutable array 
 
 ```text
 name = entry_group(0);
-push_value(array(items), :name);
-return(hash("kind", "names", "items", array_copy(array(items))));
+push(array(items), :name);
+return(hash("kind", "names", "items", copy(array(items))));
 ```
 
 That is still compact, but it is more self-describing.
@@ -55,7 +55,7 @@ However, new public examples should prefer canonical helper forms:
 
 ```text
 retv = call(Child);
-push_value(array(items), :retv);
+push(array(items), :retv);
 ```
 
 over raw or compatibility-heavy shapes such as direct Perl assignment and manual array mutation.
@@ -116,7 +116,7 @@ source rule paragraph text
 
 ### StatementSplit
 
-`ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`set(...)`, `push_value(...)`, `return(...)`) that must be lowered separately.
+`ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`set(...)`, `push(...)`, `return(...)`) that must be lowered separately.
 
 The separator contract is deliberately narrow: top-level semicolons split statements,
 and top-level newlines split helper statements when no semicolon is present. Multiple
@@ -139,7 +139,7 @@ Each contract family has a dedicated lowering owner:
 - `ValueExpr` — value construction (`...`, `array(...)`, `hash(...)`)
 - `ControlFlow` — structured control flow (`if/elseif/else/endif`, `switch/case/default/endswitch`)
 - `MethodLowering` — method-like helper lowering to Perl code
-- `DeclareMethod` — declaration helpers (`declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`)
+- `DeclareMethod` — legacy declaration helpers (`declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`)
 - `ArrayPipeline` — array pipeline operations (filter, map, sort, etc.)
 
 ### Contracts catalog
