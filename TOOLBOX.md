@@ -167,8 +167,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ## 3. The Trace framework (LinkedSpec's own observability)
 
 - **WHAT:** `LinkedSpec::Trace` emits ENTER/EXIT scopes, DECISION (branch TAKEN/SKIPPED) events, MARK
-  position events (with input-pointer excerpts), and value dumps, at five additive levels
-  (`none < low < medium < high < debug`). Routable to stdout or a file. **The framework already exists**
+  position events (with input-pointer excerpts), and value dumps, at six ordered levels
+  (`none < low < medium < high < full < debug`). Routable to stdout or a file. **The framework already exists**
   — exposing it via a CLI/docs is tracked by `TRACE-OBSERVABILITY`.
 - **CONTRACT:** the trace capability contract is variant-agnostic. The Perl names below are concrete reference
   mechanics; Rust and future variants must provide equivalent documented capabilities to claim trace parity.
@@ -214,6 +214,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **Compile/ActionIR coverage boundary:** the planned Perl reference compile/ActionIR owner namespaces are covered
   through MethodLowering. The remaining trace work is cross-variant parity: Rust and future variants must expose
   the same documented controls, levels, event classes, and sink behavior before claiming trace parity.
+- **Rust parity design inventory:** `TRACE-OBSERVABILITY.4.1` maps Rust trace work before code. Shared trace
+  levels/config/sinks/events must be visible from `linkedspec-core` for parser/validation/compiler owners, then
+  reused by `linkedspec-runtime` for `parse_spec_with_user_functions`, staged parser dispatch, `Engine::execute`,
+  generated-plan execution, generated parser modules, rule dispatch, lifecycle blocks, statement control flow,
+  repetition/AND/OR choices, and mark/capture helper events. Rust does not claim trace parity until `.4.2-.4.5`
+  implement and prove that contract.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

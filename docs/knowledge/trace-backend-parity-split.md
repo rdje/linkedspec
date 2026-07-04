@@ -16,16 +16,17 @@ reverify: "rg -n 'TRACE-OBSERVABILITY\\.4|TRACE-OBSERVABILITY\\.4\\.1|variant-ne
 ---
 
 `TRACE-OBSERVABILITY.3.5` closed the Perl reference trace no-drift/contract leaf and split the required backend
-parity work into `TRACE-OBSERVABILITY.4.*` before any Rust trace code changes.
+parity work into `TRACE-OBSERVABILITY.4.*` before any Rust trace code changes. `TRACE-OBSERVABILITY.4.1` has since
+closed the Rust design inventory; `.4.2` is the first Rust implementation leaf.
 
 The split is:
 
-- `.4.1`: Rust trace contract/design inventory before code;
-- `.4.2`: Rust trace controls, levels, and sinks;
+- `.4.1`: done — Rust trace contract/design inventory before code;
+- `.4.2`: active — Rust trace controls, levels, and sinks;
 - `.4.3`: Rust compile/spec-parser trace events;
 - `.4.4`: Rust runtime dispatch and branch trace events;
 - `.4.5`: cross-variant trace parity closeout, docs, and future-variant checklist.
 
-The active frontier is `TRACE-OBSERVABILITY.4.1`. The `.3.5` Rust inventory command excluded corpus fixtures and
-found no Rust trace API/control hits, so Rust cannot claim trace parity until the `.4.*` lane implements the
-mdBook-documented external trace contract.
+The active frontier is `TRACE-OBSERVABILITY.4.2`. The `.3.5` Rust inventory command excluded corpus fixtures and
+found no Rust trace API/control hits, and `.4.1` changed only documentation/design. Rust cannot claim trace parity
+until the `.4.*` lane implements and proves the mdBook-documented external trace contract.

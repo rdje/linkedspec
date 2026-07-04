@@ -26,6 +26,31 @@ Perl reference event names such as `rule_ir:...`, `emit_context:...`, `actionir:
 user reading this book must be able to ask the same trace questions and observe equivalent externally documented
 behavior.
 
+## Rust variant trace status
+
+As of `TRACE-OBSERVABILITY.4.1`, the Rust variant has a trace design inventory but does **not** yet claim trace
+parity. Rust's current public library APIs still run quietly by default and do not expose trace controls, levels,
+sinks, or structured trace events.
+
+The required Rust mapping is:
+
+- shared trace levels, configuration, sink routing, and event primitives must be reachable from `linkedspec-core`,
+  because Rust parser, validation, compiler, dependency-regex, and compiled-type owners live there;
+- `linkedspec-runtime` must reuse the same model for `parse_spec_with_user_functions`, staged parser dispatch,
+  `Engine::execute`, `Engine::execute_generated_with_plan`, `source_emitter::execute_generated_parser`, and
+  generated parser modules;
+- compile-side trace events must cover `parse_spec`, `validate`, `compile`, dependency-regex resolution, full
+  user-function source parsing, and staged parse-job resolution/load/compile/execute phases;
+- runtime trace events must cover rule entry/exit, recursion cutoffs, acode/bcode child dispatch, regex
+  match/no-match choices, AND/OR and repetition control flow, lifecycle block execution, statement-form
+  `if`/`switch` branch selection, mark/capture helper operations, and generated-rule family plan dispatch;
+- existing untraced APIs must remain default-quiet and output-compatible, with explicit traced entrypoints or
+  configuration plumbing added beside them.
+
+`TRACE-OBSERVABILITY.4.2` owns Rust controls, levels, and sinks; `.4.3` owns Rust compile/spec-parser events;
+`.4.4` owns Rust runtime dispatch and branch events; `.4.5` owns cross-variant parity proof and the reusable
+future-variant checklist.
+
 ## Command-line trace control
 
 The Perl reference backend ships a small command-line runner at `bin/linkedspec`. It exists to make the same trace controls discoverable without writing a custom driver script.

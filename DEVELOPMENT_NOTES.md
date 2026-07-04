@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.4.1 — Rust trace parity design):
+  The Rust trace surface must be designed from the mdBook external contract, not from Perl package names. Because
+  `linkedspec-core` owns `parse_spec`, `validate`, `compile`, dependency-regex resolution, and the shared
+  `CompiledSpec`/`CompiledRule` contract, shared Rust trace primitives should be core-visible. Keep the existing
+  `parse_spec(...)`, `compile(...)`, `Engine::execute(...)`, and generated parser `parse(...)` defaults quiet and
+  output-compatible; add explicit traced configuration/plumbing beside them. Runtime instrumentation then belongs
+  in `linkedspec-runtime` around `parse_spec_with_user_functions`, staged parser dispatch, interpreter rule
+  execution, generated-plan execution, lifecycle block execution, statement-form `if`/`switch`, acode/bcode child
+  dispatch, repetition/AND/OR branch choices, and mark/capture helper operations. Rust cannot claim trace parity
+  until `.4.2` controls/sinks, `.4.3` compile/spec-parser events, `.4.4` runtime branch events, and `.4.5` parity
+  proof are complete.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.5 — trace contract/parity split):
   The external trace contract is the mdBook-documented behavior, not Perl package names. A variant claiming trace
   parity must expose equivalent ordered levels, normal-entrypoint controls, stdout/routed-file/mirror sinks, routed

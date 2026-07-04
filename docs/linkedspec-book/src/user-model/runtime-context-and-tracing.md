@@ -310,6 +310,15 @@ In the Perl reference backend, the planned compile/ActionIR owner coverage is cl
 remaining trace work is cross-variant parity: Rust and future variants must implement the same external trace
 capabilities before claiming trace parity.
 
+As of `TRACE-OBSERVABILITY.4.1`, the Rust variant has been mapped against that contract but has not implemented the
+trace surface yet. The Rust design inventory assigns shared trace levels/configuration/sink behavior to a
+core-visible Rust trace model because `linkedspec-core` owns `parse_spec`, `validate`, `compile`, dependency-regex
+resolution, and the compiled contract types. `linkedspec-runtime` must reuse that same model for
+`parse_spec_with_user_functions`, staged parse-job dispatch, `Engine::execute`, generated-plan execution,
+generated parser modules, lifecycle block execution, rule dispatch, repetition/AND/OR branch choices, and
+mark/capture helper operations. Existing Rust APIs remain default-quiet until `.4.2` adds explicit trace controls,
+`.4.3` adds compile/spec-parser events, `.4.4` adds runtime branch events, and `.4.5` proves cross-variant parity.
+
 Tracing is controlled separately from runtime context.
 
 You can configure tracing directly:

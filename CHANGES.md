@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.4.1 — map Rust trace parity design
+
+**Scope:** Rust trace parity design inventory, mdBook contract status, toolbox, task-tree/frontier sync, live
+recovery docs, and Knowledge Map. No Rust code changed in this slice.
+
+**What changed:** Mapped the variant-neutral trace contract onto Rust's actual crate boundaries and entrypoints
+before implementation. `linkedspec-core` owns parser, validation, compiler, dependency-regex resolution, and shared
+compiled-spec types, so shared Rust trace levels/configuration/sink/event primitives must be visible there rather
+than only in `linkedspec-runtime`. The runtime crate then reuses that model for full-spec user-function parsing,
+staged parser dispatch, interpreter execution, generated-plan execution, generated parser modules, lifecycle block
+execution, rule dispatch, statement controls, repetition/AND/OR choices, and mark/capture helper operations.
+
+The mdBook now explicitly says Rust is design-inventoried but not trace-parity complete. `.4.2` owns controls,
+levels, and sinks; `.4.3` owns compile/spec-parser/staged-dispatch events; `.4.4` owns runtime/generated-plan branch
+events; `.4.5` owns cross-variant parity proof.
+
+**Evidence:** Targeted Rust source inventory covered `rust/README.md`, `linkedspec-core::{parser,validation,
+compiler,types}`, `linkedspec-runtime::{spec_parser,engine,runtime,source_emitter}`, and public Rust harnesses. The
+earlier `.3.5` trace inventory still shows no Rust trace API/control hits outside corpus fixtures. mdBook, Knowledge
+Map, memory/doctrine, whitespace, and the local CI gate pass. An over-broad `cargo test` attempt failed in existing
+`linkedspec-runtime` integration tests with no Rust source diff; the accepted `.4.1` gate is the repo local CI gate
+for this docs/design slice.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.5 — close trace contract and split parity
 
 **Scope:** mdBook trace contract wording, backend parity split, task-tree/frontier sync, live recovery docs,

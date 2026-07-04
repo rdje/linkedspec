@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.3.5` trace contract closeout and backend parity split)
+- Last updated: `2026-07-04` (`.4.1` Rust trace parity design inventory)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -98,7 +98,8 @@ Coverage plan:
    pipeline, compact-lowerer, and MethodLowering trace suites; the mdBook now presents the external trace contract
    as a variant-neutral checklist rather than Perl mechanics.
 4. `.4`: required backend-parity lane — define and implement the Rust and future-variant equivalent trace model
-   instead of pretending the current Perl-only trace surface already covers Rust.
+   instead of pretending the current Perl-only trace surface already covers Rust. `.4.1` has now mapped the
+   neutral mdBook contract onto Rust owner boundaries; `.4.2` is the first Rust implementation leaf.
 
 ## Non-Goals
 
@@ -293,7 +294,7 @@ Coverage plan:
     t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t
     t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t
     t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t`.
-  Commit: `pending`
+  Commit: `c623d6ec` (`TRACE-OBSERVABILITY.3.5 - close trace contract and split parity`)
 - ID: `TRACE-OBSERVABILITY.4` · Status: `split` (created 2026-07-04)
   Goal: Cross-variant trace parity — make Rust and future variants honor the mdBook-documented trace capability
     contract before claiming trace parity.
@@ -301,15 +302,29 @@ Coverage plan:
     controls/levels/sinks, `.4.3` Rust compile/spec-parser trace events, `.4.4` Rust runtime dispatch/branch trace
     events, and `.4.5` cross-variant closeout/docs/gates.
   Verification: inherited from `.3.5` no-drift probes and Rust trace inventory.
-  Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.4.1` · Status: `active`
+  Commit: `c623d6ec` (`TRACE-OBSERVABILITY.3.5 - close trace contract and split parity`)
+- ID: `TRACE-OBSERVABILITY.4.1` · Status: `done` (closed 2026-07-04)
   Goal: Rust trace contract/design inventory — map the neutral mdBook trace contract onto Rust entrypoints,
     runtime/compiler ownership boundaries, and tests before writing Rust trace code.
-  Verification: `pending`
+  Acceptance: done — inventory mapped the contract onto Rust's current public surfaces:
+    `linkedspec-core` owns `parse_spec`, `validate`, `compile`, dependency-regex resolution, and shared
+    `CompiledSpec`/`CompiledRule` types; `linkedspec-runtime` owns `parse_spec_with_user_functions`, staged
+    parser registry dispatch, `Engine::execute`, `Engine::execute_generated_with_plan`,
+    `source_emitter::execute_generated_parser`, runtime context/match/mark state, interpreter branch execution,
+    and generated-rule family plan execution. Rust currently has no trace API/control implementation, so `.4.2`
+    must add shared Rust trace levels/config/sink routing first, `.4.3` must add parser/compiler/staged-dispatch
+    scope and decision events, `.4.4` must add interpreter/generated-plan runtime branch events, and `.4.5` must
+    prove cross-variant contract parity before Rust claims trace parity.
+  Verification: Rust source inventory; `cargo test` attempted and failed only in the existing
+    `linkedspec-runtime` integration test target (157 passed, 9 failed) with no Rust source diff; accepted `.4.1`
+    gates were `mdbook build docs/linkedspec-book`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+    `bash scripts/check_memory_architecture.sh`, `bash scripts/check_doctrines.sh`, `git diff --check`, and
+    `bash tools/run_ci_local.sh`.
   Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.4.2` · Status: `pending`
+- ID: `TRACE-OBSERVABILITY.4.2` · Status: `active`
   Goal: Rust trace controls, levels, and sinks — implement the Rust-facing configuration model and output routing
-    equivalent to the documented contract.
+    equivalent to the documented contract. Preserve default-quiet behavior for existing `parse_spec`, `compile`,
+    `Engine::execute`, and generated parser entrypoints while adding explicit traced entrypoints/config plumbing.
   Verification: `pending`
   Commit: `pending`
 - ID: `TRACE-OBSERVABILITY.4.3` · Status: `pending`
@@ -332,11 +347,10 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.4.1` | `active` | Map the neutral mdBook trace contract onto Rust surfaces before Rust trace code. |
-| 2 | `.4.2` | `pending` | Add Rust controls, levels, and sinks after the design inventory. |
-| 3 | `.4.3` | `pending` | Add Rust compile/spec-parser trace events. |
-| 4 | `.4.4` | `pending` | Add Rust runtime dispatch/branch trace events. |
-| 5 | `.4.5` | `pending` | Close cross-variant trace parity docs/gates. |
+| 1 | `.4.2` | `active` | Add Rust controls, levels, and sinks after the design inventory. |
+| 2 | `.4.3` | `pending` | Add Rust compile/spec-parser trace events. |
+| 3 | `.4.4` | `pending` | Add Rust runtime dispatch/branch trace events. |
+| 4 | `.4.5` | `pending` | Close cross-variant trace parity docs/gates. |
 
 ## Decisions
 
@@ -389,11 +403,17 @@ Coverage plan:
   into `.4.*` leaves. The common mdBook trace contract is neutral: Perl namespaces are reference vocabulary, while
   Rust/future variants must provide equivalent controls, levels, event classes, sink behavior, and default quiet
   behavior in their own idiom.
+- `2026-07-04`: `.4.1` maps the Rust trace parity design before code. Because `linkedspec-core` owns parser,
+  validation, compiler, dependency-map, and compiled-type surfaces, shared Rust trace level/config/event primitives
+  must be visible from `linkedspec-core` rather than living only in `linkedspec-runtime`. Runtime execution,
+  generated-plan execution, staged parser dispatch, and generated-source parser entrypoints reuse that same model.
+  Existing quiet APIs stay the compatibility default; `.4.2` adds explicit traced configuration and sink routing
+  before `.4.3`/`.4.4` emit compile/runtime events.
 
 ## Open Questions
 
-- Rust trace parity design: map the neutral mdBook trace contract onto Rust entrypoints and owner boundaries before
-  writing Rust trace code.
+- Rust trace controls/levels/sinks: implement the shared Rust configuration and output routing model without
+  changing default quiet parse/compile/execute behavior.
 - Required backend parity: Rust and future variants must implement equivalent trace capabilities before claiming trace
   parity; the current Perl-only surface is reference progress, not parity closeout.
 - Auto-instrumentation (`Devel::*`/aspect style) is not the preferred first path: generated template instrumentation
@@ -422,6 +442,7 @@ Coverage plan:
 | `2026-07-04` | `.3.4.5` | `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -c -Iperl t/trace_actionir_method_lowering.t`; `prove -v -Iperl t/trace_actionir_method_lowering.t`; `prove -v -Iperl t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t`; `prove -v -Iperl t/actionir_ast_parser.t t/trace_actionir_method_lowering.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — MethodLowering decisions traced through production owner dispatch and Trace-lazy subprocess coverage; full local CI passed with phase0 1021 green |
 | `2026-07-04` | `.3.4.6` | representative debug routed descriptor-compile probe across return/set/receiver/control paths; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — normal compile path emits `rule_ir`, `emit_context`, `actionir:scanner`, `actionir:rewrite_pipeline`, `actionir:control_flow`, and `actionir:method_lowering` decisions together; full local CI passed with phase0 1021 green |
 | `2026-07-04` | `.3.5` | `perl bin/linkedspec --help`; `rg -n 'LINKEDSPEC_TRACE|trace_level|trace_log|--trace|\bTrace\b|\btrace\b' rust --glob '!**/tests/corpus/**'`; `prove -v -Iperl t/trace_cli.t t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t` | PASS — CLI contract remains discoverable, Perl reference trace suite passes, and Rust still has no trace API/control hits outside corpus fixtures; backend parity is split into `.4.*` before code |
+| `2026-07-04` | `.4.1` | Rust source inventory: `rust/README.md`; `linkedspec-core::{parser,validation,compiler,types}`; `linkedspec-runtime::{spec_parser,engine,runtime,source_emitter}`; public Rust test harnesses; `mdbook build docs/linkedspec-book`; Knowledge Map; memory/doctrine; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — Rust trace parity has an owner map before code; shared trace primitives must be core-visible; runtime/generated/staged entrypoints must preserve default quiet behavior and route through explicit traced configuration in later leaves. Note: an over-broad `cargo test` attempt failed in existing `linkedspec-runtime` integration tests (157 passed, 9 failed) with no Rust source diff, so it is recorded but not used as this docs/design leaf's acceptance gate. |
 
 ## Commit Log
 
@@ -441,7 +462,8 @@ Coverage plan:
 | `.3.4.4` | `276c333e` (`TRACE-OBSERVABILITY.3.4.4 - trace compact ActionIR lowerers`) | Compact lowerer ActionIR trace call-site wiring outside `MethodLowering`. |
 | `.3.4.5` | `cfe2d9d1` (`TRACE-OBSERVABILITY.3.4.5 - trace MethodLowering decisions`) | MethodLowering ActionIR trace call-site wiring. |
 | `.3.4.6` | `8fa7243a` (`TRACE-OBSERVABILITY.3.4.6 - close compile ActionIR trace coverage`) | Compile/ActionIR coverage closeout probe/docs. |
-| `.3.5` | `pending` (`TRACE-OBSERVABILITY.3.5 - close trace contract and split parity`) | Variant-neutral trace contract closeout and `.4.*` backend parity split. |
+| `.3.5` | `c623d6ec` (`TRACE-OBSERVABILITY.3.5 - close trace contract and split parity`) | Variant-neutral trace contract closeout and `.4.*` backend parity split. |
+| `.4.1` | `pending` (`TRACE-OBSERVABILITY.4.1 - map Rust trace parity design`) | Rust owner-boundary and entrypoint inventory before trace code. |
 
 ## Changelog
 
@@ -494,3 +516,7 @@ Coverage plan:
 - `2026-07-04`: Closed `.3.5` trace contract/no-drift closeout. The mdBook now presents the external trace
   contract as variant-neutral behavior, the Perl reference trace suite remains green, Rust trace inventory still
   has no API/control hits outside corpus fixtures, and `.4.1` is now the PNT frontier for Rust trace parity design.
+- `2026-07-04`: Closed `.4.1` Rust trace parity design inventory. The Rust trace contract now maps onto
+  core-visible shared trace primitives, compile/spec-parser/staged-dispatch owner events, runtime/generated-plan
+  branch events, and default-quiet compatibility. `.4.2` is now the PNT frontier for Rust trace controls, levels,
+  and sinks.
