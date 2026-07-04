@@ -7,21 +7,38 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.2 — add trace CLI control**
+  (DISCOVERABLE TRACE CONTROL CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3).
+
+  **Fix:** Added `bin/linkedspec`, a Perl reference compile/run CLI that exposes existing trace controls through
+  `--trace`, `--trace-file`, `--trace-mode`, `--trace-reset`, and `--trace-emoji`. The runner supports named specs,
+  spec files, or inline spec source plus inline/file input, and prints parser results as canonical JSON. Routed
+  trace mode keeps human trace output out of machine-readable stdout.
+
+  **Verification:** `perl -c bin/linkedspec`, `perl -c -Iperl t/trace_cli.t`, `prove -v -Iperl t/trace_cli.t`,
+  mdBook, Knowledge Map, memory/doctrine, whitespace, and `tools/run_ci_local.sh` pass. The focused regression
+  proves CLI help exposes the trace flags and a routed high-level trace writes a non-empty trace log while stdout
+  remains `["alpha","beta"]`; full local CI includes phase0 at 1021 green.
+
+  **Frontier:** `TRACE-OBSERVABILITY.3` — extend Perl reference trace coverage for function/branch decisions before
+  backend parity.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.1 — audit trace coverage gaps**
-  (READ-ONLY AUDIT CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.2).
+  (READ-ONLY AUDIT CLOSED; TRACE-OBSERVABILITY.2 HAS SINCE CLOSED).
 
   **Audit:** The Perl reference trace framework exists and works through env vars, per-call options, and
   `configure_trace(...)`, but coverage is not exhaustive. Current trace spans broad `Get`/parser invocation
   scopes, per-rule handler wrappers, selected compiler/resolver/validation decisions, dumps, and mark/capture
   events. Generated handler bodies still contain untraced `while`/`foreach`/`if`/`unless` dispatch and repetition
-  branches, most ActionIR owner branches lack enter/exit or decision trace, there is no discoverable CLI flag, and
-  the Rust runtime has no equivalent trace API yet.
+  branches, most ActionIR owner branches lack enter/exit or decision trace, and the Rust runtime has no equivalent
+  trace API yet. The discoverable CLI flag gap has since closed under `TRACE-OBSERVABILITY.2`.
 
   **Verification:** `rg` call-site inventory, `dump_parser_source` probe, routed debug trace probe to
   `/tmp/linkedspec_trace_audit.log`, direct facade/owner trace-state probes, Rust trace search, mdBook build, and
   doctrine/memory gates.
 
-  **Frontier:** `TRACE-OBSERVABILITY.2` — add a discoverable CLI/docs control for the existing trace API.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.2`; `.2` has since closed and the current frontier is
+  `TRACE-OBSERVABILITY.3`.
 
 - 2026-07-04: **TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values**
   (TOP-RULE-AS-NORMAL TREE CLOSED; FRONTIER AT COMPLETION TRACE-OBSERVABILITY.1, NOW CLOSED).
@@ -38,7 +55,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `LX` recursion, and top-rule sequence recursion.
 
   **Frontier at completion:** `TRACE-OBSERVABILITY.1` — coverage audit before CLI/docs/coverage implementation;
-  `.1` has since closed and the current frontier is `TRACE-OBSERVABILITY.2`.
+  `.1` and `.2` have since closed and the current frontier is `TRACE-OBSERVABILITY.3`.
 
 - 2026-07-04: **RUST-PARITY.9 — finalize Rust parity documentation**
   (RUST-PARITY TREE CLOSED; TOP-RULE-AS-NORMAL.3.2 UNBLOCKED).

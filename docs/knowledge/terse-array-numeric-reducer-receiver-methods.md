@@ -45,5 +45,5 @@ helper family (`score.abs().ceil().add(2)`, `score.min(3)`, etc.). Hash receiver
 inventory did not need additional backfill in this slice; mutating or ambiguous helpers stay explicit.
 
 The follow-up `SPEC-FORMAT-TERSE.7.4` no-drift sweep is now done. No `SPEC-FORMAT-TERSE` leaf is currently
-pending. `TRACE-OBSERVABILITY.1` has since closed its read-only audit, and PNT returns to
-`TRACE-OBSERVABILITY.2` unless a new terse leaf is split or another active tree is reprioritized.
+pending. `TRACE-OBSERVABILITY.1` and `.2` have since closed, and PNT returns to
+`TRACE-OBSERVABILITY.3` unless a new terse leaf is split or another active tree is reprioritized.

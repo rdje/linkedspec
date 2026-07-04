@@ -73,6 +73,7 @@ Top-level directories and files:
   - Examples: `tools/inspect_spec_codegen.pl`, `tools/run_ci_local.sh`.
 - `bin/`
   - Utility/command scripts.
+  - `bin/linkedspec`: Perl reference compile/run CLI with discoverable trace flags.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

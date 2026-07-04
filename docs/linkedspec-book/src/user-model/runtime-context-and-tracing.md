@@ -392,6 +392,20 @@ Prefer environment variables, per-call trace options, or `configure_trace(...)` 
 mutation is compatibility state; assigning `$LinkedSpec::DUMP_VERBOSITY` before the lazy trace owner is loaded is
 not a reliable substitute for configuring trace.
 
+## Command-line trace runner
+
+For quick investigations, the Perl reference backend also exposes the same controls through `bin/linkedspec`:
+
+```sh
+perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
+  --trace debug \
+  --trace-file trace.log \
+  --trace-mode route \
+  --trace-reset
+```
+
+Use `--spec NAME` for shipped specs resolved by `get_parser(...)`, `--spec-file PATH` for a `.spec` file on disk, or `--inline-spec TEXT` for a literal source string. Use either `--input TEXT` or `--input-file PATH` for parser input. The runner writes the parser result as canonical JSON on stdout, so routed trace files are the cleanest mode for repeatable command-line debugging.
+
 ## Trace scopes and decisions
 
 Internally, LinkedSpec traces named scopes such as:

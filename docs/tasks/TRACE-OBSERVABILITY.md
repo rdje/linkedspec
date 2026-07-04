@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.1` coverage audit complete; `.2` CLI/docs is next)
+- Last updated: `2026-07-04` (`.2` CLI/docs complete; `.3` coverage extension is next)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -36,8 +36,9 @@ NOT reliably work through the lazy-loaded `LinkedSpec` facade before first Trace
 per-call trace options, or `configure_trace`.)
 
 **The two gaps (= this tree's work):**
-1. **Discoverability/CLI:** no `--trace` flag, no `bin/` entrypoint, not documented in the mdBook —
-   so the control is effectively invisible (the user + I both missed it).
+1. **Discoverability/CLI:** `TRACE-OBSERVABILITY.2` now closes the first discoverability gap with
+   `bin/linkedspec`, a command-line compile/run runner that exposes `--trace LEVEL`, `--trace-file`,
+   `--trace-mode`, `--trace-reset`, and `--trace-emoji`, and with mdBook/TOOLBOX documentation.
 2. **Coverage:** instrumentation is at *pipeline stages + key decisions*, NOT exhaustive. "See
    everything" wants function enter/exit + every if/switch/case branch across the compile pipeline
    AND the **generated runtime parser** (the emitted handler source in `SpecEntry`/`HandlerVariantEmitter`
@@ -64,7 +65,8 @@ The existing trace call-site map is concentrated in the Perl reference backend:
 
 The important gaps are now pinned:
 
-- There is still no discoverable `bin/` entrypoint or `--trace`/`--trace-file` CLI surface.
+- At the time of this `.1` audit there was no discoverable `bin/` entrypoint or
+  `--trace`/`--trace-file` CLI surface. `TRACE-OBSERVABILITY.2` has since closed that discoverability gap.
 - Most ActionIR/lowering owner functions have no ENTER/EXIT scopes and their `if`/`switch`/case decisions are not
   traced; the current pipeline trace sees stage boundaries and a few validation decisions, not every branch.
 - `perl/LinkedSpec/HandlerVariantEmitter.pm` emits untraced runtime branches (`while`, `foreach`, `if`/`elsif`,
@@ -80,9 +82,9 @@ The important gaps are now pinned:
 
 Coverage plan:
 
-1. `.2`: add a discoverable CLI/control surface and document the exact env/per-call/API controls. Correct docs must
-   say `configure_trace`, per-call options, and env vars are the reliable controls; lazy facade package-variable
-   mutation is compatibility state, not the preferred control path.
+1. `.2`: done — add a discoverable CLI/control surface and document the exact env/per-call/API controls. Correct
+   docs say `configure_trace`, per-call options, env vars, and `bin/linkedspec` flags are the reliable controls;
+   lazy facade package-variable mutation is compatibility state, not the preferred control path.
 2. `.3`: extend Perl reference coverage in small sub-leaves: first add low-overhead runtime decision helpers for
    generated handlers, then instrument handler variant templates for match/no-match, dispatch, lifecycle path, and
    repetition decisions, then add missing compile/ActionIR owner ENTER/EXIT and branch decisions.
@@ -111,13 +113,19 @@ Coverage plan:
   Acceptance: done — gap inventory + coverage plan recorded above. Read-only.
   Verification: `rg` call-site inventory, emitted handler source probe, routed debug trace probe, Rust trace search,
     mdBook/API drift probes.
-  Commit: `pending this commit`
-- ID: `TRACE-OBSERVABILITY.2` · Status: `pending`
+  Commit: `9085a026` (`TRACE-OBSERVABILITY.1 - audit trace coverage gaps`)
+- ID: `TRACE-OBSERVABILITY.2` · Status: `done` (closed 2026-07-04)
   Goal: Discoverable CLI control — expose the existing env/`configure_trace` control via a `bin/`
     entrypoint and/or a `--trace LEVEL` / `--trace-file` flag; document the env vars + the CLI in the
     mdBook. (Smallest, highest-DX win — do first if a quick gate is wanted.)
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: done — `bin/linkedspec` compiles/runs inline, file, or named specs; prints canonical JSON; exposes
+    `--trace`, `--trace-file`, `--trace-mode`, `--trace-reset`, and `--trace-emoji`; and the mdBook plus
+    `TOOLBOX.md` document the control path.
+  Verification: `perl -c bin/linkedspec`; `perl -c -Iperl t/trace_cli.t`; `prove -v -Iperl t/trace_cli.t`;
+    `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/check_knowledge_map.sh`;
+    `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`;
+    `bash tools/run_ci_local.sh`.
+  Commit: `pending this commit`
 - ID: `TRACE-OBSERVABILITY.3` · Status: `pending`
   Goal: Extend instrumentation toward "see everything" (function enter/exit + if/switch/case branch
     decisions), compile pipeline first, then the generated runtime parser (emit trace into handlers).
@@ -129,9 +137,8 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.2` | `pending` | Discoverable CLI control + docs now that the exact existing controls and docs drift are known. |
-| 2 | `.3` | `pending` | Extend Perl reference coverage to function enter/exit + branch decisions, pipeline then runtime parser. |
-| 3 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
+| 1 | `.3` | `pending` | Extend Perl reference coverage to function enter/exit + branch decisions, pipeline then runtime parser. |
+| 2 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
 
 ## Decisions
 
@@ -139,10 +146,11 @@ Coverage plan:
   The framework already exists (Trace.pm: enter/exit/decision/levels/sinks; env-var control works) —
   the work is (a) make it discoverable (CLI + docs) and (b) extend coverage. Sequence `.2` (CLI/docs)
   early for a quick win; `.1`/`.3` for the coverage push.
+- `2026-07-04`: CLI form is `bin/linkedspec`, a small Perl reference runner that maps CLI trace flags directly
+  to the existing trace option keys and keeps routed trace output separate from canonical JSON stdout.
 
 ## Open Questions
 
-- CLI form: a new `bin/linkedspec` runner with `--trace`, vs documenting the env vars, vs both?
 - Runtime-parser branch tracing: emit explicit decision calls into generated handler source
   (`HandlerVariantEmitter` templates via `SpecEntry` runtime helpers), gated by verbosity.
 - Auto-instrumentation (`Devel::*`/aspect style) is not the preferred first path: generated template instrumentation
@@ -158,13 +166,15 @@ Coverage plan:
 | --- | --- | --- | --- |
 | `2026-06-19` | (scaffold) | assessed existing Trace.pm + ran `LINKEDSPEC_TRACE_LEVEL=debug` | framework exists + works; gaps = discoverability + coverage |
 | `2026-07-04` | `.1` | `rg` trace call-site inventory; `dump_parser_source` probe; routed debug trace probe to `/tmp/linkedspec_trace_audit.log`; direct facade/owner state probes; Rust trace search | PASS — audit recorded; generated handler control flow is not exhaustively traced; CLI/docs and coverage gaps are explicit |
+| `2026-07-04` | `.2` | `perl -c bin/linkedspec`; `perl -c -Iperl t/trace_cli.t`; `prove -v -Iperl t/trace_cli.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `tools/run_ci_local.sh` | PASS — CLI help exposes trace flags; routed trace file is non-empty; stdout remains canonical parser JSON; full local CI passes with phase0 1021 green |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | (creation) | (with the triage WIP commit) | Scaffold owning the trace directives. |
-| `.1` | `pending this commit` | Coverage audit and plan; no runtime/code behavior change. |
+| `.1` | `9085a026` (`TRACE-OBSERVABILITY.1 - audit trace coverage gaps`) | Coverage audit and plan; no runtime/code behavior change. |
+| `.2` | `pending this commit` | CLI/docs control; no trace coverage expansion yet. |
 
 ## Changelog
 
@@ -174,3 +184,6 @@ Coverage plan:
 - `2026-07-04`: Closed `.1` read-only coverage audit. Current trace is useful but not exhaustive: pipeline
   boundaries, parser/rule handler wrappers, selected decisions, dumps, and mark/capture events are traced; generated
   handler branch/control-flow decisions and most ActionIR owner branches are not. `.2` is now the PNT frontier.
+- `2026-07-04`: Closed `.2` CLI/docs control. `bin/linkedspec` now exposes the existing trace API from the command
+  line while routed trace output keeps parser JSON stdout stable. `.3` is now the PNT frontier for Perl reference
+  coverage extension.

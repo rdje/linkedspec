@@ -1,0 +1,190 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use 5.010;
+
+use FindBin;
+use Getopt::Long qw(GetOptions);
+use JSON::PP;
+use lib "$FindBin::Bin/../perl";
+
+use LinkedSpec;
+
+sub _usage {
+ return <<'USAGE';
+Usage:
+  perl bin/linkedspec --spec NAME --input TEXT [options]
+  perl bin/linkedspec --spec-file PATH --input-file PATH [options]
+  perl bin/linkedspec --inline-spec TEXT --input TEXT [options]
+
+Source selection (choose exactly one):
+  --spec NAME          Resolve and compile specs/NAME.spec through get_parser(...)
+  --spec-file PATH     Compile .spec source read from PATH through Get(...)
+  --inline-spec TEXT   Compile the literal .spec source TEXT through Get(...)
+
+Input selection (choose exactly one):
+  --input TEXT         Parse TEXT
+  --input-file PATH    Parse file contents read from PATH
+
+Parser options:
+  --top-rule NAME      Select the entry rule
+  --parse-mode MODE    MODE is seek or consume
+
+Trace options:
+  --trace LEVEL        Enable trace level: none, low, medium, high, full, debug
+  --trace-file PATH    Write trace output to PATH
+  --trace-mode MODE    MODE is stdout, route, or mirror
+  --trace-reset        Truncate --trace-file before writing
+  --trace-emoji        Enable emoji trace prefixes
+
+Output:
+  Prints the parser result as canonical JSON on stdout. When trace output is sent
+  to stdout it is intentionally interleaved with that JSON; use --trace-file with
+  --trace-mode route for machine-readable stdout plus routed trace.
+
+Examples:
+  perl bin/linkedspec --spec Lispish --input '(hello world)'
+  perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
+    --trace high --trace-file linkedspec.trace.log --trace-mode route --trace-reset
+USAGE
+}
+
+sub _slurp {
+ my ($path, $label) = @_;
+ open(my $fh, '<', $path) or die "cannot read $label '$path': $!\n";
+ local $/;
+ my $content = <$fh>;
+ close($fh);
+ return defined($content) ? $content : '';
+}
+
+sub _defined_count {
+ my $count = 0;
+ foreach my $value (@_) {
+  ++$count if defined $value;
+ }
+ return $count;
+}
+
+sub _valid_trace_level {
+ my ($level) = @_;
+ return 1 if !defined $level;
+ return 1 if $level =~ /\A-?\d+\z/;
+ return $level =~ /\A(?:none|quiet|low|medium|med|high|full|debug|verbose)\z/i ? 1 : 0;
+}
+
+sub _last_error_text {
+ my ($ctx) = @_;
+ return '' unless ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH';
+ my $err = $ctx->{last_error};
+ my @lines;
+ push @lines, "owner_stage: $err->{owner_stage}" if defined($err->{owner_stage});
+ push @lines, "summary: $err->{summary}" if defined($err->{summary});
+ push @lines, "detail: $err->{detail}" if defined($err->{detail});
+ push @lines, "spec_name: $err->{spec_name}" if defined($err->{spec_name});
+ push @lines, "spec_path: $err->{spec_path}" if defined($err->{spec_path});
+ push @lines, "top_rule: $err->{top_rule}" if defined($err->{top_rule});
+ push @lines, "rule_label: $err->{rule_label}" if defined($err->{rule_label});
+ return '' unless @lines;
+ return join('', map { "  $_\n" } @lines);
+}
+
+sub _usage_error {
+ my ($message) = @_;
+ print STDERR "linkedspec: $message\n\n";
+ print STDERR _usage();
+ exit 2;
+}
+
+sub _runtime_error {
+ my ($message, $ctx, $raw_error) = @_;
+ print STDERR "linkedspec: $message\n";
+ my $ctx_text = _last_error_text($ctx);
+ print STDERR $ctx_text if length $ctx_text;
+ print STDERR "  error: $raw_error\n" if defined($raw_error) && length($raw_error);
+ exit 1;
+}
+
+my %opt;
+my $help = 0;
+
+GetOptions(
+ 'spec=s'        => \$opt{spec},
+ 'spec-file=s'   => \$opt{spec_file},
+ 'inline-spec=s' => \$opt{inline_spec},
+ 'input=s'       => \$opt{input},
+ 'input-file=s'  => \$opt{input_file},
+ 'top-rule=s'    => \$opt{top_rule},
+ 'parse-mode=s'  => \$opt{parse_mode},
+ 'trace=s'       => \$opt{trace_level},
+ 'trace-file=s'  => \$opt{trace_file},
+ 'trace-mode=s'  => \$opt{trace_mode},
+ 'trace-reset!'  => \$opt{trace_reset},
+ 'trace-emoji!'  => \$opt{trace_emoji},
+ 'help|h'        => \$help,
+) or _usage_error('invalid option');
+
+if ($help) {
+ print _usage();
+ exit 0;
+}
+
+_usage_error('choose exactly one source option: --spec, --spec-file, or --inline-spec')
+ unless _defined_count(@opt{qw/spec spec_file inline_spec/}) == 1;
+_usage_error('choose exactly one input option: --input or --input-file')
+ unless _defined_count(@opt{qw/input input_file/}) == 1;
+
+if (defined($opt{parse_mode}) && $opt{parse_mode} !~ /\A(?:seek|consume)\z/) {
+ _usage_error("--parse-mode must be 'seek' or 'consume'");
+}
+
+if (!_valid_trace_level($opt{trace_level})) {
+ _usage_error("--trace has an unsupported level '$opt{trace_level}'");
+}
+
+if (defined($opt{trace_mode}) && $opt{trace_mode} !~ /\A(?:stdout|route|mirror)\z/) {
+ _usage_error("--trace-mode must be 'stdout', 'route', or 'mirror'");
+}
+
+my %compile_opts;
+my %runtime_ctx;
+$compile_opts{runtime_ctx_ref} = \%runtime_ctx;
+$compile_opts{top_rule} = $opt{top_rule} if defined $opt{top_rule};
+$compile_opts{parse_mode} = $opt{parse_mode} if defined $opt{parse_mode};
+$compile_opts{trace_level} = $opt{trace_level} if defined $opt{trace_level};
+$compile_opts{trace_log_file} = $opt{trace_file} if defined $opt{trace_file};
+$compile_opts{trace_log_mode} = $opt{trace_mode} if defined $opt{trace_mode};
+$compile_opts{trace_reset_log} = 1 if $opt{trace_reset};
+$compile_opts{trace_emoji} = 1 if $opt{trace_emoji};
+
+my $parser;
+my $compile_error;
+if (defined $opt{spec}) {
+ $parser = eval { LinkedSpec::get_parser($opt{spec}, %compile_opts) };
+ $compile_error = $@;
+} else {
+ my $spec_source = defined($opt{spec_file})
+  ? eval { _slurp($opt{spec_file}, 'spec file') }
+  : $opt{inline_spec};
+ $compile_error = $@ if $@;
+ if (!defined $compile_error || !length $compile_error) {
+  $parser = eval { LinkedSpec::Get(\$spec_source, %compile_opts) };
+  $compile_error = $@;
+ }
+}
+
+_runtime_error('parser compilation failed', \%runtime_ctx, $compile_error)
+ if $compile_error || ref($parser) ne 'CODE';
+
+my $input = defined($opt{input_file})
+ ? eval { _slurp($opt{input_file}, 'input file') }
+ : $opt{input};
+_runtime_error('input load failed', \%runtime_ctx, $@) if $@;
+
+my $result = eval { $parser->(\$input) };
+my $parse_error = $@;
+_runtime_error('parser invocation failed', \%runtime_ctx, $parse_error) if $parse_error;
+
+my $json = JSON::PP->new->canonical(1)->allow_nonref(1);
+print $json->encode($result), "\n";
+exit 0;

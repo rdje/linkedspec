@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.2 — add trace CLI control
+
+**Scope:** Perl reference CLI runner, focused CLI regression, mdBook trace docs, toolbox/README discovery,
+task-tree/frontier sync, live recovery docs, and Knowledge Map.
+
+**What changed:** Added `bin/linkedspec`, a compile/run command that exposes the existing trace API through
+discoverable flags: `--trace`, `--trace-file`, `--trace-mode`, `--trace-reset`, and `--trace-emoji`. The runner
+supports named specs, `.spec` files, and inline source; accepts inline or file input; and prints canonical parser
+JSON to stdout. Routed trace mode keeps trace output in the requested file so parser stdout stays machine-readable.
+
+**Evidence:** `perl -c bin/linkedspec`, `perl -c -Iperl t/trace_cli.t`, `prove -v -Iperl t/trace_cli.t`, mdBook,
+Knowledge Map, memory/doctrine, whitespace, and `tools/run_ci_local.sh` pass. The focused regression proves help
+exposes the trace flags and `--trace high --trace-file ... --trace-mode route` writes a non-empty trace file
+without polluting JSON stdout. Full local CI includes the 1021-test phase0 suite. The next frontier is
+`TRACE-OBSERVABILITY.3` for Perl reference trace coverage extension.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.1 — audit trace coverage gaps
 
 **Scope:** Trace call-site audit, task-tree coverage plan, mdBook trace API/runtime-context corrections, live

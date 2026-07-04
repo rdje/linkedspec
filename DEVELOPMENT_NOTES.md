@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.2 — CLI control over existing trace):
+  `bin/linkedspec` is deliberately a thin command-line bridge over the existing Perl reference public surfaces. It
+  does not add a second trace state path: `--trace`, `--trace-file`, `--trace-mode`, `--trace-reset`, and
+  `--trace-emoji` map to the existing trace option keys consumed by `Get(...)` / `get_parser(...)`. The runner
+  prints parser results as canonical JSON; routed trace (`--trace-file ... --trace-mode route`) is the preferred
+  machine-readable mode because stdout remains clean. This slice closes discoverability only. It does not claim
+  generated handler branches, ActionIR owner branches, or Rust trace parity are covered; those remain owned by
+  `TRACE-OBSERVABILITY.3` and future backend parity.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.1 — coverage audit before trace work):
   The trace framework was not missing; coverage and discoverability are the gaps. Current Perl trace sees broad
   `Get`/parser invocation stages, per-rule runtime handler wrappers, selected decisions, dumps, and mark/capture

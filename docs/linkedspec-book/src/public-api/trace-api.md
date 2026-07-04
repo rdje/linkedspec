@@ -6,6 +6,28 @@ The trace *model* is backend-neutral: verbosity levels, structured enter/exit sc
 
 In the Perl reference backend, the trace API is a first-class public surface on the `LinkedSpec` facade. It delegates to `LinkedSpec::Trace`, the trace state and formatting owner.
 
+## Command-line trace control
+
+The Perl reference backend ships a small command-line runner at `bin/linkedspec`. It exists to make the same trace controls discoverable without writing a custom driver script.
+
+```sh
+perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
+  --trace high \
+  --trace-file linkedspec.trace.log \
+  --trace-mode route \
+  --trace-reset
+```
+
+The trace flags map directly to the public API options:
+
+- `--trace LEVEL` -> `trace_level => LEVEL`
+- `--trace-file PATH` -> `trace_log_file => PATH`
+- `--trace-mode stdout|route|mirror` -> `trace_log_mode => ...`
+- `--trace-reset` -> `trace_reset_log => 1`
+- `--trace-emoji` -> `trace_emoji => 1`
+
+The runner prints the parser result as canonical JSON on stdout. If trace output is routed to stdout, trace text is intentionally interleaved with that JSON. Use `--trace-file ... --trace-mode route` when stdout must remain machine-readable.
+
 ## Trace entry points
 
 ### `configure_trace(%opts)`

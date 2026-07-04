@@ -176,6 +176,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   ```bash
   LINKEDSPEC_TRACE_LEVEL=debug perl -Iperl <driver.pl>     # most verbose
   ```
+- **HOW (CLI):**
+  ```bash
+  perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
+    --trace high --trace-file trace.log --trace-mode route --trace-reset
+  ```
 - **HOW (per-call):** `LinkedSpec::Get(\$s, trace_level => 'high', trace_log_mode => 'stdout')`, or
   `LinkedSpec::configure_trace(...)`. Programmatic API: `trace_enter/trace_exit/trace_decision`,
   `log_output`, `log_dump`, `should_dump`.
