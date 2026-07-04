@@ -206,6 +206,12 @@ HandlerIR is the structured AST between the compiler and code generation. Your b
 writes an **emitter** that consumes HandlerIR nodes and produces runnable code in
 your language. The JSON diagnostic backend (`_emit_handler_json`) proves the pattern.
 
+The Rust backend currently executes an interpreted structural model
+(`CompiledSpec`/`CompiledRule`) rather than generated Rust source. Its
+generated-source path is tracked separately under `RUST-PARITY.8`: `.8.1`
+split the work into a minimal emitter scaffold/compile-run harness, non-REP
+families, REP families, and all-variant/oracle integration.
+
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`
 with `case_count` and the ordered `cases` list; every manifest entry has an

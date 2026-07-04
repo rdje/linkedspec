@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.1 — split Rust source emitter lane
+
+**Scope:** Task-tree ownership, roadmap/frontier tracker, mdBook backend handoff, live recovery docs, and
+Knowledge Map. No parser/runtime source behavior changed.
+
+**What changed:** The broad code-generation emitter leaf is now split before implementation. `RUST-PARITY.8`
+records that Perl HandlerIR has 10 structural variant kinds and Perl/JSON emitters, while Rust currently
+interprets a native `CompiledSpec`/`CompiledRule` contract with parsed lifecycle `CodeBlock`s and action/blind
+dispatch tables. The next implementation leaf is `.8.2`: add a minimal generated Rust-source emitter scaffold and
+compile/run harness.
+
+**Evidence:** Read the canonical HandlerIR fact card, `perl/LinkedSpec/HandlerVariantEmitter.pm`, Rust
+`CompiledSpec`/runtime structures, `rust/README.md`, and mdBook backend handoff. The split creates child leaves
+for scaffold/harness, non-repetition families, repetition families, and all-variant/oracle integration.
+
 ## 2026-07-04 — RUST-PARITY.7.4 — finalize oracle corpus manifest guard
 
 **Scope:** Perl-oracle fixture generator, checked-in corpus manifest, Rust oracle runner drift guard, corpus

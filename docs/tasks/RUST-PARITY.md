@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (`.7.4` done — manifest-backed oracle corpus guard
-  finalized; `.7` is closed and the frontier advances to `.8`)
+- Last updated: `2026-07-04` (`.8.1` done — code-generation emitter lane split
+  and the first implementation frontier is `.8.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -524,9 +524,46 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.5.3 - reconcile action-edge fluent closure` (see Commit Log)
 
 - ID: `RUST-PARITY.8`
+  Status: `active`
+  Goal: Implement code-gen emitter — HandlerIR/CompiledSpec to Rust source generation
+  Children: `.8.1` (done), `.8.2` (pending), `.8.3` (pending), `.8.4` (pending), `.8.5` (pending)
+  Acceptance: Rust source emitter produces compilable Rust from HandlerIR/CompiledSpec nodes; tests prove generated code compiles and runs; final all-variant matrix covers the 10 HandlerIR variant families or explicitly documented Rust-native equivalents
+  Note: Split 2026-07-04 (PNT rule 5). The original `.8` leaf was too broad for one signoff slice: it spans the Perl `HandlerVariantEmitter.pm` 10-kind HandlerIR contract, the current Rust-native interpreted `CompiledSpec`/`CompiledRule` structures, source-generation API design, a compile/run harness, variant-family emission, lifecycle/action execution, and oracle/corpus integration. Current Rust remains an interpreter; this lane adds a generated Rust-source path without weakening the interpreter or oracle gates.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.8.1`
+  Status: `done`
+  Goal: Split and inventory the Rust source-emitter lane before implementation
+  Acceptance: `.8` is decomposed into child leaves; the first implementation leaf is narrow enough to review; live docs and Knowledge Map record that Rust currently interprets `CompiledSpec`, while `.8` will add an emitted-source path from the HandlerIR/CompiledSpec structural contract
+  Verification: Done — 2026-07-04. Read the canonical HandlerIR fact card, the Perl `HandlerVariantEmitter.pm` builders/emitters, Rust `CompiledSpec`/`CompiledRule`/`AcodeEntry`/`BcodeEntry` structures, Rust runtime execution loop, Rust README, and mdBook backend handoff. The durable conclusion: Perl HandlerIR has 10 structural variant kinds and emits Perl/JSON today; Rust has a native interpreted structural contract (`CompiledSpec`) with parsed lifecycle `CodeBlock`s and dispatch tables, not Rust source generation. The code-generation work is therefore split into a scaffold/harness leaf, non-repetition variant emission, repetition variant emission, and all-variant/oracle integration. No parser/runtime source behavior changed in this leaf.
+  Commit: `pending`
+
+- ID: `RUST-PARITY.8.2`
   Status: `pending`
-  Goal: Implement code-gen emitter — HandlerIR to Rust source generation
-  Acceptance: Rust source emitter produces compilable Rust from HandlerIR nodes; test proving generated code compiles and runs
+  Goal: Add the minimal Rust source-emitter scaffold and compile/run harness
+  Acceptance: A focused emitter API can render a minimal generated Rust parser module from the Rust structural contract; a test builds that generated source in an isolated temporary crate or build harness and executes one simple non-recursive parser case; the interpreter path remains unchanged
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.8.3`
+  Status: `pending`
+  Goal: Emit non-repetition handler families
+  Acceptance: Generated Rust covers default, OR, AND single/sequential acode, AND bcode, and OR bcode structural families with representative compile/run tests and parity against the interpreter/oracle for focused fixtures
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.8.4`
+  Status: `pending`
+  Goal: Emit repetition handler families and termination guards
+  Acceptance: Generated Rust covers REP acode, REP bcode, REP-AND acode, and REP-AND bcode structural families, including min/max bounds and zero-progress/recursion termination behavior; representative compile/run tests pass
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `RUST-PARITY.8.5`
+  Status: `pending`
+  Goal: Integrate generated-source validation with the oracle/corpus contract
+  Acceptance: Generated-source execution is validated across an all-variant smoke matrix and at least one manifest-backed corpus subset; documented limitations are explicit; `.8` closes only when generated Rust source has compile/run proof for every supported structural family
   Verification: `pending`
   Commit: `pending`
 
@@ -543,6 +580,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | --- | --- | --- | --- |
 | — | `RUST-PARITY.4` | `superseded` | Rust-self-hosting on spec.spec dropped; parity = reproducing BootstrapSpec::Core output (see Decisions audit) |
 | — | `RUST-PARITY.5.1` | `done` | retv-propagation BLOCKER fixed (2026-06-16); child return now readable as `scalar(retv)` after `->`/`=>`/REP dispatch |
+| 1 | `RUST-PARITY.8.2` | `pending` | `.8.1` split the code-generation emitter lane; next owned implementation slice is the minimal emitted-source API plus compile/run harness |
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
 | — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
@@ -574,10 +612,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.5` | `done` | null-output candidates separated from semantic fixtures; quoted-brace `operators_try` parser warning fixed; four `spec.spec` smokes active |
 | — | `RUST-PARITY.7.3.6` | `done` | seven RTL/plugin/legacy safety smokes landed; richer mismatches routed to follow-up instead of broadening `.7.3` |
 | — | `RUST-PARITY.7.4` | `done` | manifest-backed regression guard finalized the oracle corpus; runner rejects missing/stale fixture drift |
-| 1 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| — | `RUST-PARITY.8` | `active` | code-gen emitter lane split; `.8.1` closed the contract/inventory slice and `.8.2` is the first implementation leaf |
 | 2 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.5`; all `.7.5` shipped recursive-spec blockers are closed, `.7.2` and `.7.3` expanded the shipped-spec corpus to 88 fixtures, `.7.4` finalized the manifest guard, and `.7` is closed. Current frontier is `.8`.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.5`; all `.7.5` shipped recursive-spec blockers are closed, `.7.2` and `.7.3` expanded the shipped-spec corpus to 88 fixtures, `.7.4` finalized the manifest guard, and `.7` is closed. `.8` is now split the same way; current frontier is `.8.2`.)
 
 ## Decisions
 
@@ -616,6 +654,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-06-17` (`.7.5` split): split into `.7.5.1` (parser header-line-regex fix) + `.7.5.2` (`scalaref` `{…}` hash-literal). A read-only investigation (+ a direct read of `parser.rs:86`) located two **independent, separately-reviewable** root causes (PNT rule 5). (1) **`.7.5.1` — `rust/linkedspec-core/src/parser.rs:86`:** the header regex `^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)` uses `(\S*)` for the mode suffix, which greedily eats a `/…/` regex placed on the header line — `parse_mode_suffix("/;/")` → `RuleMode::Default` and the regex is discarded. So every rule with a header-line regex registers 0 (or, for an open/close pair, drops the first), and `-> child[0]` edges "never fire". It is NOT really "single-colon" — it bites `:` and `::` alike; the passing tests/`::` top-rules dodge it only because they put the regex on a separate **body line** (`Child::` then `/…/`). Fix sketch `(\S*)`→`([^\s/]*)`. **Foundational blast radius** (this regex parses every header), with real subtlety: today an open/close pair (`command_subst`, `parenthesis`, `curlyb`) registers "1 regex" because group 3 eats the first; the fix moves both into `rest`, so the rest/body regex-parser must reproduce the bracket-pair semantics, not two independent regexes — must be verified against the full suite + the oracle (re-enable tclite). This is why it is its own carefully-verified leaf, not bundled. (2) **`.7.5.2` — `rust/linkedspec-core/src/expr.rs:299`:** `parse_expr` has no `{` case, so `scalaref(retv, {content})` (Lispish) raises `unexpected character '{'`; needs a new `Expr` variant + parser + engine semantics (field access). Larger, and depends on `.7.5.1` (Lispish's child rules must first register their regexes). The two are independent (each repros in isolation — `semi_colon : /;/` fails only via the parser bug; an edge with `scalaref(…,{content})` fails only via the expr bug). Frontier → `.7.5.1`. No code change (tree structuring only).
 
 - `2026-06-17` (`.7.5.1` implementation): header-line-regex fix landed + a second tclite blocker discovered → split off `.7.5.3`. **The fix:** `parser.rs:86` `(\S*)`→`([^\s/]*)` (one char class). Group 3 is the mode suffix; `\S*` greedily ate a `/…/` regex on the header line, `parse_mode_suffix` returned `Default`, and the regex was dropped. Narrowing the class to stop at `/` lets the regex fall through to group 4 (`rest`), where `parse_inline_body` registers it. Every real mode suffix (`AND`/`OR+`/`&`/`*`/`?`/`AND{2,4}`) is slash-free, so the change is behaviorally identical for all non-regex header content; the second header regex (`parser.rs:270`, in `collect_body`) is detection-only with a trailing `*` group and was correctly left unchanged. **Bracket pairs repaired, not just preserved:** `command_subst : /open/ /close/` went `[close]` (1 regex; `-> command_subst[1]` out-of-bounds, entry matched the *close*) → `[open, close]` (entry idx 0 = open; `[1]`→idx 1 = close via the self-recursive branch of `build_dependency_regex_map`) — the recursive bracket matcher the spec intends. 4 unit tests pin it (3 parser + 1 compiler). **The discovery (PNT split):** the fix is **necessary but not sufficient** for tclite — with regexes now registering, the oracle still showed tclite → `[]`. Root cause #2 (independent, separately-reviewable): tclite accumulates via fluent continuations on ACTION edges (`-> command_subst .push`, `-> command_subst[1] .return(...)`), but the parser attaches a fluent chain only to a BLIND edge (`=>`, `parser.rs:443`); after a `->` edge the `.push`/`.return(...)` becomes a standalone `FluentChain` the compiler discards (`compiler.rs:171`). Per the splitting rules (independent gap, don't bundle), the action-edge fluent lowering is the new leaf `.7.5.3` (greens tclite), the tclite oracle cases were re-deferred there (corpus back to 2 green proofs), and `.7.5.1` landed as the self-contained parser fix. **Lispish is unaffected by `.7.5.3`** (it uses `{ code }` blocks, not the fluent form) — its remaining blocker is `.7.5.2` (scalaref) only. `cargo test` 242/242 (238 + 4); clippy multiset = baseline (core 10 / runtime 13 / validation.rs 4, zero-new). Pre-existing clippy `--tests` exit-101 (`approx_constant` in untouched `expr.rs:687`/`types_test.rs:143`) recorded in Open Questions, not fixed (out of scope). Frontier → `.7.5.3`.
+- `2026-07-04` (`.8.1` split/inventory): code-generation emitter work is split before implementation. The source audit read `docs/knowledge/handler-ir-design.md`, `perl/LinkedSpec/HandlerVariantEmitter.pm`, Rust `CompiledSpec`/`CompiledRule`/`AcodeEntry`/`BcodeEntry`, the Rust runtime execution loop, and backend handoff docs. Durable boundary: Perl HandlerIR has 10 structural variants and emits Perl/JSON; Rust currently interprets a native structural contract with parsed lifecycle `CodeBlock`s and dispatch tables. `.8` now has implementation children for a minimal source-emitter scaffold/compile-run harness (`.8.2`), non-REP structural families (`.8.3`), REP families/termination guards (`.8.4`), and all-variant/oracle integration (`.8.5`). No parser/runtime source behavior changed. Frontier → `.8.2`.
 - `2026-07-02` (`.7.5.3` reconciliation): `.7.5.3` is closed without new runtime code in this slice because the
   implementation landed later under owned `SPEC-FORMAT-TERSE` leaves. `SPEC-FORMAT-TERSE.2.3.3.1` added the
   parser/compiler/runtime metadata path for action-edge fluent chains and no-arg `.push` / `.return(expr)` /

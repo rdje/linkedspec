@@ -1,13 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.1 — Rust source-emitter lane split):
+  Do not start the Rust code-generation emitter as one broad patch. The durable boundary is now explicit:
+  Perl's `HandlerVariantEmitter.pm` owns a 10-kind HandlerIR structural contract and currently emits Perl/JSON,
+  while Rust's live execution contract is the interpreted `CompiledSpec`/`CompiledRule` model with parsed
+  lifecycle `CodeBlock`s plus action/blind dispatch tables. `.8` adds a generated Rust-source path without
+  weakening the interpreter or the 88-fixture oracle. The next implementation leaf, `.8.2`, should land only a
+  minimal emitter API plus compile/run harness for a simple non-recursive case; non-REP families, REP families,
+  and corpus/all-variant integration are separate leaves.
+
 - 2026-07-04 (RUST-PARITY.7.4 — oracle corpus manifest guard):
   Treat `rust/linkedspec-runtime/tests/corpus/manifest.json` as part of the checked-in oracle contract, not a
   convenience file. The generator writes it with the ordered intended case list and case count; the Rust runner
   validates it before running fixtures. Adding, removing, or renaming an oracle case requires regenerating and
   staging both the relevant fixture directory changes and `manifest.json`. A missing directory and a stale extra
-  directory are both test failures now. `RUST-PARITY.7` is closed; the next Rust parity frontier is `.8`
-  (HandlerIR-to-Rust source emitter).
+  directory are both test failures now. `RUST-PARITY.7` is closed; `.8.1` has since split the source-emitter lane
+  and `.8.2` is the next implementation frontier.
 
 - 2026-07-04 (RUST-PARITY.7.3.6 — legacy shipped-spec safety smokes):
   Treat the remaining RTL/plugin/legacy shipped specs as a measured fixture boundary. Green minimal smokes are now
@@ -46,7 +55,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.8` unless a new terse leaf is split.
+  `RUST-PARITY.8.2` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and

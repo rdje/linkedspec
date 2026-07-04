@@ -37,7 +37,9 @@ mixed hlink fixtures because they require a neutral scalar-ref/action-payload
 contract or a hlink spec migration. `RUST-PARITY.7.3.6` then added seven
 RTL/plugin/legacy safety smokes and left the richer mismatches as explicit
 follow-up blockers. `RUST-PARITY.7.4` finalized the manifest-backed regression
-guard, so the current frontier is `RUST-PARITY.8`: code-generation emitter.
+guard. `RUST-PARITY.8.1` then split the broad code-generation emitter lane, so
+the current frontier is `RUST-PARITY.8.2`: minimal Rust source-emitter scaffold
+plus compile/run harness.
 
 The later lanes are:
 
@@ -55,4 +57,5 @@ The later lanes are:
   `tkgui`, `sdce`, recursive `tablegrep`, `simenv`, VHDL, `ds_vhistory`, and
   `verilog` candidates remain follow-up blockers.
 - `.7.4`: done — regression guard and oracle corpus finalization.
-- `.8`: current frontier — code-generation emitter.
+- `.8.1`: done — code-generation emitter lane split/inventory.
+- `.8.2`: current frontier — minimal generated Rust-source scaffold plus compile/run harness.
