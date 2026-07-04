@@ -6,11 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (**`.6.2.3.2` DONE; authored/current `.spec` files no longer use or support
-  `scalar(...)` scalar-slot reads or `assign(...)` assignment aliases. Scalar slots use `:name`, assignments use
-  `LHS = RHS`/`set(...)`, initialized bare identifiers remember scalar/array/hash kind, active spec/corpus scans
-  are clean, mdBook is clean, and phase0 is **1020 green**. Frontier moves to `.6.2.4` for final no-drift
-  verification before broader sweeps. Prior **`.6.2.3.1` DONE; the scalar-slot shorthand `:name` is accepted in
+- Last updated: `2026-07-04` (**`.6.2.4` DONE; final shipped-spec terse-surface verification and no-drift
+  inventory pass. All 21 shipped `specs/*.spec` descriptor-compile with `perl -Iperl`; shipped-spec scans are clean
+  for `scalar(...)`, `assign(...)`, `declare(...)`, and the old helper spellings; mdBook has no `scalar(...)` /
+  `assign(...)` hits and builds; phase0 is **1020 green**; regenerated Rust oracle corpus remains stable at
+  **73 fixtures** and passes. Broader checked-in corpus/book `declare(...)` and old-helper reference hits are now
+  explicitly carried by `.6.3`. Frontier moves to `.6.3` for the public docs/corpus/example sweep. Prior
+  **`.6.2.3.2` DONE; authored/current `.spec` files no longer use or support `scalar(...)` scalar-slot reads or
+  `assign(...)` assignment aliases. Scalar slots use `:name`, assignments use `LHS = RHS`/`set(...)`, initialized
+  bare identifiers remember scalar/array/hash kind, active spec/corpus scans are clean, mdBook is clean, and
+  phase0 is **1020 green**. Prior **`.6.2.3.1` DONE; the scalar-slot shorthand `:name` is accepted in
   scalar value positions and scalar mutation targets on Perl/Rust, with direct shape literals still inferring
   aggregate targets unless the scalar boundary is explicit through `:name`. Focused shorthand tests, phase0
   (**1019 green**), and the Rust corpus oracle (**73 fixtures**) pass. Prior **`.6.2.2` DONE; shipped
@@ -2629,7 +2634,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     identical `.spec` input files, mdBook-neutral behavior, and language-neutral corpus parity before any
     feature is called complete.
   Verification: `deferred — no Julia backend implementation exists in the tracked source tree today`
-  Commit: `pending`
+  Commit: `SPEC-FORMAT-TERSE.6.2.4 - verify shipped-spec terse surface`
 
 - ID: `SPEC-FORMAT-TERSE.5.2`
   Status: `deferred`
@@ -2780,12 +2785,24 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.6.2.3.2 - retire scalar and assign spec helpers`
 
 - ID: `SPEC-FORMAT-TERSE.6.2.4`
-  Status: `pending`
+  Status: `done` (2026-07-04)
   Goal: Final shipped-spec terse-surface verification and no-drift inventory.
   Acceptance: Shipped specs compile, phase0 and oracle gates pass or exact blockers are task-owned, and the
     shipped-spec old-surface inventory is either clean or fully annotated in this task tree before moving to docs
     and corpus sweeps.
-  Verification: `pending`
+  Verification: **DONE 2026-07-04.** `perl -Iperl -MLinkedSpec ...` descriptor-compiled all 21 shipped
+    `specs/*.spec` files and confirmed `$INC{'LinkedSpec.pm'} = perl/LinkedSpec.pm`. Shipped-spec scans returned
+    no hits for `scalar(...)` / `assign(...)`, no hits for `declare(...)` / `.declare(...)`, and no hits for
+    `push_value(...)` / `array_copy(...)` / `hash_copy(...)` / `concat(...)`. `prove -q -Iperl
+    t/phase0_regression.t` passed (**1020 tests**). `perl -Iperl tools/gen_oracle_corpus.pl` regenerated
+    **73 fixtures** with no tracked corpus diff, and `cargo test --manifest-path rust/Cargo.toml -p
+    linkedspec-runtime --test corpus_oracle -- --nocapture` passed all 73 fixtures. `mdbook build
+    docs/linkedspec-book` passed, and the mdBook source scan has no `scalar(...)` / `assign(...)` hits. Broader
+    checked-in corpus scans still find legacy `declare(...)` in `tests/corpus/{simple_grammar,tablegrep,lispish}`
+    plus `rust/linkedspec-runtime/tests/corpus/autoexist_{array,scalar}_declare`, and old helper spellings in
+    pre-terse corpus/compatibility fixtures; mdBook scans still find `declare(...)` and older helper references in
+    the DSL/reference and walkthrough chapters. Those are not shipped-spec blockers and are the explicit input to
+    `.6.3`. Full local CI (`bash tools/run_ci_local.sh`) passed after the documentation updates.
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.6.3`
@@ -2860,10 +2877,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.6.2.3` | `done` | scalar-slot shorthand and hard retirement of active `scalar(...)` / `assign(...)` spec helper forms are complete |
 | — | `SPEC-FORMAT-TERSE.6.2.3.1` | `done` | `:name` scalar-slot shorthand lands on Perl/Rust; phase0 1019; oracle 73 fixtures |
 | — | `SPEC-FORMAT-TERSE.6.2.3.2` | `done` | authored specs/corpora use `:name`, `LHS = RHS`, direct shapes, and remembered bare kinds; phase0 1020 |
-| 1 | `SPEC-FORMAT-TERSE.6.2.4` | `pending` | final shipped-spec terse-surface verification before doc/corpus sweeps |
-| 2 | `SPEC-FORMAT-TERSE.6.3` | `pending` | sweep public docs, checked-in corpus/test specs, and examples after shipped specs are clean |
-| 3 | `SPEC-FORMAT-TERSE.6.4` | `pending` | decide post-migration compatibility support only after live spec-file use is gone |
-| 4 | `SPEC-FORMAT-TERSE.7.1` | `pending` | backlog from user directive: audit supported types and helper families before adding/backfilling methods such as string `substr()` |
+| — | `SPEC-FORMAT-TERSE.6.2.4` | `done` | shipped specs compile and scan clean; phase0 1020; oracle 73 fixtures; broader docs/corpus sweep owned by `.6.3` |
+| 1 | `SPEC-FORMAT-TERSE.6.3` | `pending` | sweep public docs, checked-in corpus/test specs, and examples after shipped specs are clean |
+| 2 | `SPEC-FORMAT-TERSE.6.4` | `pending` | decide post-migration compatibility support only after live spec-file use is gone |
+| 3 | `SPEC-FORMAT-TERSE.7.1` | `pending` | backlog from user directive: audit supported types and helper families before adding/backfilling methods such as string `substr()` |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
@@ -3808,6 +3825,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-04` | `SPEC-FORMAT-TERSE.6.2.4` | Shipped-spec scans for `scalar(...)` / `assign(...)`, `declare(...)`, and old helper spellings; checked-in corpus and mdBook inventory scans; `perl -Iperl -MLinkedSpec` descriptor compile for all 21 shipped specs; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`); `mdbook build docs/linkedspec-book`; generated-corpus diff check; full local CI (`bash tools/run_ci_local.sh`) | Shipped specs compile and scan clean for the retired/currently-forbidden surfaces. Phase0 passes with **1020** tests. Oracle regeneration remains stable at **73 fixtures** with no tracked corpus diff, and Rust `corpus_oracle` passes all fixtures. The public book has no `scalar(...)` / `assign(...)` hits and builds. Broader checked-in corpus/book `declare(...)` and older helper references are not shipped-spec blockers and are now the explicit `.6.3` sweep input. Full local CI passes. Frontier becomes `.6.3`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.6.2.3.2` | Active authored spec/corpus scan for `scalar(` / `assign(`; mdBook scan; Perl syntax checks for edited ActionIR modules; `prove -q -Iperl t/actionir_ast_parser.t`; `prove -q -Iperl t/phase0_regression.t`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; focused Rust core/runtime tests for scalar-slot shorthand and remembered bare kind | Authored/current `.spec` no longer supports or uses `scalar(...)` scalar-slot reads or `assign(...)` assignment aliases. `:name` is the scalar-slot spelling; `LHS = RHS` / `set(...)` are assignment forms; initialized bare identifiers remember scalar/array/hash kind. Phase0 passes with **1020** tests. Frontier becomes `.6.2.4`. |
 | `2026-07-03` | `SPEC-FORMAT-TERSE.6.2.3.1` | Perl syntax checks for `ActionIR::ValueExpr`, `ActionIR::MethodLowering`, `RuleIR::EmitContext`, and `tools/gen_oracle_corpus.pl`; focused lowering probes for `:name` in return, shape, constructor, and scalar-target positions; `prove -q -Iperl t/phase0_regression.t`; focused Rust core/runtime tests; oracle generator; Rust corpus oracle; mdBook/KM/live-doc updates | `:name` now reads scalar slot `name` on Perl/Rust. `set(:payload, [value])` keeps scalar-held direct-shape payload assignment while bare direct-shape targets still infer aggregates. Phase0 passes with **1019** tests, the generated oracle corpus reaches **73 fixtures**, and Rust `corpus_oracle` passes over all 73 including `terse_6_2_3_1_scalar_slot_shorthand`. Frontier becomes `.6.2.3.2` for shipped-spec wrapper migration. |
 | `2026-07-03` | `SPEC-FORMAT-TERSE.6.2.2` | `rg -n '\b(assign|push_value|array_copy|hash_copy|concat)\s*\(' specs`; `rg -n '^\s*(?:if|elseif)\(.*\);\s*$|^\s*else\(\);\s*$' specs/portmap.spec`; registered descriptor compile for all 21 shipped specs; `perl -c -Iperl t/phase0_regression.t`; `prove -q -Iperl t/phase0_regression.t`; `cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle` | Shipped specs no longer use active old helper spellings. `portmap.spec` no longer keeps redundant standalone flow-marker separators. Stale phase0 source expectations now assert the canonical terse spellings. Phase0 passes with **1018** tests and the Rust oracle corpus passes over **66 fixtures**. Frontier becomes `.6.2.3` for typed-wrapper/direct-shape cleanup. |
@@ -3916,6 +3934,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.6.2.4` | `SPEC-FORMAT-TERSE.6.2.4 - verify shipped-spec terse surface` | Final shipped-spec no-drift verification passes: all 21 shipped specs compile, retired-surface/old-helper shipped scans are clean, phase0 1020 and Rust oracle 73 fixtures pass, mdBook builds, and broader docs/corpus legacy references are owned by `.6.3`. |
+| `SPEC-FORMAT-TERSE.6.2.3.2` | `SPEC-FORMAT-TERSE.6.2.3.2 - retire scalar and assign spec helpers` | Authored/current specs moved to `:name`, `LHS = RHS` / `set(...)`, direct shapes, and remembered bare kind; raw authored `scalar(...)` and `assign(...)` are retired from the DSL surface; phase0 1020 and focused Rust checks pass. |
 | `SPEC-FORMAT-TERSE.6.2.3.1` | `SPEC-FORMAT-TERSE.6.2.3.1 - add scalar slot shorthand` | Added `:name` as the scalar-slot shorthand on Perl/Rust; `set(:payload, [value])` keeps scalar payload assignment while bare direct-shape targets still infer aggregates; phase0 1019 and oracle 73 fixtures pass; frontier becomes `.6.2.3.2`. |
 | `SPEC-FORMAT-TERSE.6.2.2` | `SPEC-FORMAT-TERSE.6.2.2 - migrate shipped-spec helper spellings` | Migrated active shipped-spec old helper spellings to `set`, `push`, `copy`, and `cat`; cleaned redundant standalone `portmap.spec` flow-marker separators; phase0 and Rust corpus oracle pass; frontier becomes `.6.2.3`. |
 | `SPEC-FORMAT-TERSE.6.2.1` | `SPEC-FORMAT-TERSE.6.2.1 - remove declare from shipped specs` | Removed the 70 active shipped-spec `declare(...)` / `.declare(...)` uses with terse assignments/resets and structured lifecycle blocks; phase0 and Rust corpus oracle pass; frontier becomes `.6.2.2`. |
@@ -4020,6 +4040,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-04`: **`.6.2.4` DONE — final shipped-spec terse-surface verification and no-drift inventory.**
+  All 21 shipped `specs/*.spec` files descriptor-compile from this checkout with `perl -Iperl`, and shipped-spec
+  scans are clean for retired `scalar(...)` / `assign(...)`, active `declare(...)` / `.declare(...)`, and older
+  helper spellings (`push_value`, `array_copy`, `hash_copy`, `concat`). Phase0 is **1020 green**; oracle
+  regeneration remains stable at **73 fixtures** with no tracked corpus diff; Rust `corpus_oracle` passes; and
+  the mdBook builds with no `scalar(...)` / `assign(...)` hits. Broader checked-in corpus and public-book
+  `declare(...)` / older-helper references are intentionally carried into `.6.3`, which now owns the docs,
+  corpus/test-spec, and example sweep.
 
 - `2026-07-03`: **`.6.2.1` DONE — shipped specs no longer use active `declare(...)`.**
   The 70 active declaration hits inventoried by `.6.1` were migrated across 13 shipped specs to terse

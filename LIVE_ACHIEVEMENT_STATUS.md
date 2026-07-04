@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.6.2.4 — verify shipped-spec terse surface**
+  (FINAL SHIPPED-SPEC NO-DRIFT CHECK; DOCS/CORPUS SWEEP HANDOFF).
+  Final shipped-spec verification is complete before the broader `.6.3` public docs/corpus sweep.
+
+  **Verification:** all 21 shipped `specs/*.spec` files descriptor-compile from this checkout with `perl -Iperl`;
+  shipped-spec scans are clean for `scalar(...)`, `assign(...)`, `declare(...)`, `.declare(...)`, and old helper
+  spellings; phase0 passes with **1020** tests; oracle regeneration stays stable at **73 fixtures** with no
+  tracked corpus diff; Rust `corpus_oracle` passes all 73 fixtures; and `mdbook build docs/linkedspec-book`
+  passes with no `scalar(...)` / `assign(...)` book hits. Full local CI (`bash tools/run_ci_local.sh`) passes.
+
+  **Inventory:** checked-in corpus/test specs and public-book reference/walkthrough chapters still contain
+  `declare(...)` and older helper references outside shipped `specs/*.spec`. Those are explicitly owned by
+  `SPEC-FORMAT-TERSE.6.3`, not left as hidden drift.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.6.3` — sweep public docs, checked-in corpus/test specs, and current-facing
+  examples after shipped specs are clean.
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.6.2.3.2 — retire `scalar(...)` and `assign(...)` from authored specs**
   (TERSE SPEC SURFACE HARD RETIREMENT; PERL/RUST TYPE MEMORY).
   Authored/current `.spec` files now use `:name` for scalar slots and `LHS = RHS` or `set(...)` for

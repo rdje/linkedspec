@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (SPEC-FORMAT-TERSE.6.2.4 — shipped-spec no-drift verification):
+  Treat the current terse-surface cleanliness boundary precisely. The shipped `specs/*.spec` files now compile and
+  scan clean for the retired/currently-forbidden authored surfaces (`scalar(...)`, `assign(...)`, `declare(...)`,
+  `.declare(...)`, and old helper spellings), and oracle regeneration is byte-stable over 73 fixtures. The broader
+  repository is intentionally not clean yet: root `tests/corpus` fixtures, selected Rust oracle compatibility
+  fixtures, and mdBook reference/walkthrough chapters still contain `declare(...)` and older helper references.
+  Those are not `.6.2.4` blockers; they are the explicit worklist for `.6.3`, which should separate public
+  teaching examples from historical/compatibility references instead of deleting evidence blindly.
+
 - 2026-07-04 (SPEC-FORMAT-TERSE.6.2.3.2 — retired spec-file `scalar(...)` / `assign(...)`):
   The retirement boundary is the authored `.spec` DSL, not generated Perl internals. `scalar(@...)` in generated
   backend Perl remains a normal Perl built-in, while `scalar(name)` is no longer the DSL scalar-slot spelling.

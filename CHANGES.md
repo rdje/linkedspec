@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.6.2.4 — verify shipped-spec terse surface
+
+**Scope:** Shipped-spec compile/inventory verification, phase0, oracle regeneration, Rust corpus oracle, mdBook
+build/scan, task-tree status, roadmap tracker, and live continuity docs. No source code or shipped `.spec` file
+changed.
+
+**What changed:** Closed the final shipped-spec terse-surface verification leaf. The shipped `specs/*.spec` set is
+clean for retired `scalar(...)` / `assign(...)`, active `declare(...)` / `.declare(...)`, and old helper spellings
+before the broader docs/corpus sweep. The checked-in corpus and public book still contain `declare(...)` and older
+helper references in legacy/reference material; that inventory is now explicitly carried into `SPEC-FORMAT-TERSE.6.3`.
+
+**Evidence:** All 21 shipped specs descriptor-compile from this checkout with `perl -Iperl`. Phase0 passes with
+**1020** tests. `tools/gen_oracle_corpus.pl` regenerates **73** fixtures with no tracked corpus diff, and Rust
+`corpus_oracle` passes all 73. `mdbook build docs/linkedspec-book` passes, and the book has no `scalar(...)` /
+`assign(...)` hits. Full local CI (`bash tools/run_ci_local.sh`) passes.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.6.2.3.2 — retire scalar and assign spec helpers
 
 **Scope:** Perl ActionIR lowering/autodeclare/type-memory seams, Rust runtime expression/target evaluation,
