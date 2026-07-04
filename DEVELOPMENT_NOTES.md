@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (SPEC-FORMAT-TERSE.7.1 — type-method surface inventory):
+  Do not start method backfill by assuming `substr()` is missing: string/scalar receiver-dot support already
+  includes `substr` on Perl and Rust. The current receiver families are string/scalar, array/list, hash, and
+  number; expression-valued blocks and pure user-function returns dispatch by yielded runtime type into those
+  families. Booleans/flow-result values are terminal for now. Keep mutation, lifecycle/control, child-dispatch,
+  capture/entry/match/input/mark, declaration, and compatibility-helper surfaces explicit unless a later leaf
+  designs safe receiver semantics and updates Perl/Rust/tests/docs/KM together. Numeric array reducers remain
+  array-consuming function helpers unless `.7.3` deliberately adds receiver aliases.
+
 - 2026-07-04 (SPEC-FORMAT-TERSE.6.4 — declaration helpers are legacy compatibility):
   Keep the post-migration boundary strict. `declare(...)` and declaration aliases stay accepted for existing specs,
   but they are not current authoring syntax and should not appear in new shipped specs, public examples, or current

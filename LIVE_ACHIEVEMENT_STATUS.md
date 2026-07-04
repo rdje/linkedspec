@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.7.1 — inventory type method surface**
+  (PRE-CODE TYPE/METHOD AUDIT; STRING `substr()` VERIFIED AS EXISTING RECEIVER METHOD).
+  The supported receiver/value families are now recorded before any implementation backfill.
+
+  **Fix:** the task tree, roadmap, mdBook helper catalog, Knowledge Map, and live docs now agree that
+  string/scalar, array/list, hash, and number are the existing receiver families; booleans/flow results are
+  terminal; block-yielded values and user-function returns dispatch by yielded runtime type; and mutation,
+  lifecycle/control, child-dispatch, parser-state reader, declaration, and compatibility helpers stay
+  function/statement/lifecycle-only unless a future leaf designs safe receiver semantics. The audit records that
+  `substr()` is already accepted as a string/scalar receiver method.
+
+  **Verification:** focused Perl/Rust classifier scans pass; mdBook builds; Knowledge Map regenerates/checks;
+  memory/doctrine/diff gates pass; Rust `corpus_oracle` passes all **73** fixtures; and full local CI passes.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.7.2` — verify/backfill string/scalar receiver methods and lock method/helper
+  equivalence docs/tests, starting from the existing `substr()` method evidence.
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.6.4 — lock declare compatibility policy**
   (DECLARATION RETIREMENT CLOSED; LEGACY COMPATIBILITY POLICY RECORDED).
   Declaration helpers remain accepted compatibility syntax for existing specs, but they are no longer current

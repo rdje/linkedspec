@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.7.1 — inventory type method surface
+
+**Scope:** Task-tree inventory, roadmap/live docs, mdBook helper catalog, and Knowledge Map. No parser, runtime,
+or shipped `.spec` behavior changed.
+
+**What changed:** Recorded the supported receiver/value families before any method backfill: string/scalar,
+array/list, hash, and number have existing receiver method tables; booleans and flow-result values are terminal
+today; expression-valued blocks and user-function returns dispatch by yielded runtime type. The audit records that
+string `substr()` is already a receiver method on the current Perl/Rust surface. It also marks mutation,
+lifecycle/control, child-dispatch, capture/entry/match/input/mark, declaration, and compatibility helpers as
+function/statement/lifecycle-only unless a future leaf defines safe receiver semantics.
+
+**Evidence:** Focused classifier scans confirm the Perl and Rust receiver tables. The mdBook helper catalog states
+the audited boundary, Knowledge Map regenerates/checks, Rust `corpus_oracle` passes all **73** fixtures, mdBook
+builds, memory architecture and doctrine gates pass, and full local CI passes.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.6.4 — lock declare compatibility policy
 
 **Scope:** Declaration-helper compatibility policy, ADR, mdBook reference/status pages, Knowledge Map, task-tree

@@ -1266,6 +1266,28 @@ value-consuming slots (`return(...)`,
 assignment RHS, and fluent `.return(...)`), and its contract is the selected payload value rather than any
 specific compatibility tag string.
 
+### Receiver-Dot Method Families
+Receiver-dot methods are available for the value families that have a typed receiver table:
+
+- **String/scalar** receivers support pure string links such as `trim`, `lowercase`, `uppercase`,
+  `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `concat`/`cat`, and `coalesce_nonempty`; `split(delim)`
+  bridges to array chains; `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` are terminal.
+- **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
+  `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, `filter_match`, `count`,
+  `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`, and `join_values`.
+- **Hash** receivers support pure hash links such as `hash_copy`, `merge_hash`, `set_key`, `rename_key`,
+  `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
+  and `has_key` are terminal.
+- **Number** receivers support terse numeric links such as `abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
+  `div`, `mod`, `clamp`, `min`, and `max`; `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal numeric
+  comparisons.
+
+Booleans and flow-result values are terminal today. Expression-valued blocks and pure user-function returns do not
+have separate method tables: the yielded runtime value selects the compatible family above. Mutation forms,
+lifecycle/control helpers, parser-state readers (`entry_*`, `match_*`, capture/input/mark helpers), declaration
+helpers, and child-dispatch calls remain function, statement, or lifecycle surfaces unless a future task explicitly
+adds type-correct receiver semantics.
+
 ### Fluent / Block Equivalence
 For the locked ordinary helper families, structured-block form (`I { name = value }`) and compact
 lifecycle-marker fluent-chain form (`I.set(name, value)`) produce the same behavior. Receiver-fluent
