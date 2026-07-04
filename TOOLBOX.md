@@ -206,7 +206,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `DECISION actionir:<owner>:<phase>:<label>:<decision>` lines for `flow_expr`, `value_expr`,
   `array_pipeline`, `declare_method`, and `control_flow` decisions. These cover expression family selection,
   direct-access/value-source choices, array-pipeline plan/op lowering, declaration/set routing, and compact
-  attached/inline/marker control-flow paths. `ActionIR::MethodLowering` remains a separate trace leaf.
+  attached/inline/marker control-flow paths.
+- **MethodLowering branches:** compile-time `ActionIR::MethodLowering` now emits debug-level
+  `DECISION actionir:method_lowering:<phase>:<label>:<decision>` lines and assignment scopes for helper-family
+  selection, AST-vs-string fallback/bypass choices, unsupported helper exits, receiver-chain transitions,
+  assignment/mutation operator routing, mutation-slot values, and return-payload fallback choices.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

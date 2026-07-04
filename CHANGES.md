@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.4.5 — trace MethodLowering decisions
+
+**Scope:** Perl `ActionIR::MethodLowering`, focused trace regression, mdBook trace docs, toolbox, task-tree/frontier
+sync, live recovery docs, and Knowledge Map.
+
+**What changed:** `MethodLowering` now emits debug-level
+`actionir:method_lowering:<phase>:<label>:<decision>` trace decisions for its largest branch families. The trace
+reports helper-family classification, AST value lowering and raw/bypass decisions, unsupported helper exits,
+receiver-chain family transitions, assignment and mutation operator routing, mutation-slot value sources, return
+payload fallback choices, and the scoped `_lower_assign_statement` enter/exit boundary. The trace helper path stays
+lazy through `LinkedSpec::ActionIR::Trace`, so require-only MethodLowering consumers still do not load
+`LinkedSpec::Trace`.
+
+**Evidence:** Focused coverage in `t/trace_actionir_method_lowering.t` locks production owner-dispatch traces for
+helper families, unsupported helpers, string/number/hash/array receiver chains, AST fluent chains, assignments,
+mutations, and Trace-lazy require/lower behavior. Adjacent RuleIR/EmitContext/ActionIR trace suites and the
+ActionIR AST focused suite continue to pass; full local CI passes with phase0 at 1021 tests.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.4.4 — trace compact ActionIR lowerers
 
 **Scope:** Perl compact ActionIR lowerer owners outside `MethodLowering` (`FlowExpr`, `ValueExpr`,

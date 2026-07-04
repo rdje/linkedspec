@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.4.5 — MethodLowering trace):
+  `ActionIR::MethodLowering` now uses the same lazy `LinkedSpec::ActionIR::Trace` seam and
+  `actionir:method_lowering:<phase>:<label>:<decision>` namespace as the other ActionIR owners. Current covered
+  decisions include helper-family classification (`helper_family_string`, `helper_family_array`, etc.),
+  AST-vs-compat fallback/bypass choices, unsupported-helper sentinel exits, receiver-chain family transitions for
+  string/number/hash/array chains, AST fluent-chain family lowering, scalar/array/hash assignment and mutation
+  operator paths, mutation-slot source classification, return-payload fallback choices, and the scoped
+  `_lower_assign_statement` enter/exit boundary. Keep MethodLowering trace additions on this owner namespace rather
+  than ad hoc strings, and preserve the lazy invariant: requiring `MethodLowering.pm` or calling it through
+  `EmitContext` without explicit trace configuration must not load `LinkedSpec::Trace`.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.4.4 — compact ActionIR lowerer trace):
   Compact lowerer decisions use the same debug-level `actionir:<owner>:<phase>:<label>:<decision>` namespace as
   `.3.4.3`. Owners covered here are `flow_expr`, `value_expr`, `array_pipeline`, `declare_method`, and

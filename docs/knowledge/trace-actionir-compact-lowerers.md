@@ -42,8 +42,8 @@ Covered decisions include:
 - compact control-flow attached/inline/marker `if` and `switch` decisions, branch-statement direct control,
   rewrite-rule, and passthrough handling, plus attached `while` support.
 
-`ActionIR::MethodLowering` is intentionally not included here. It is the next leaf (`TRACE-OBSERVABILITY.3.4.5`)
-because it is the largest ActionIR branch owner.
+`ActionIR::MethodLowering` is intentionally not included here. It has since been covered by the separate
+`TRACE-OBSERVABILITY.3.4.5` MethodLowering trace leaf and card.
 
 The trace hooks stay lazy through `LinkedSpec::ActionIR::Trace`: requiring compact lowerer modules or calling them
 through `EmitContext` without explicit trace configuration does not load `LinkedSpec::Trace`.

@@ -296,10 +296,10 @@ The trace surface is useful for:
 Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
 handler wrappers, selected decisions, dumps, mark/capture events, debug-level RuleIR planning decisions,
 debug-level EmitContext owner-bridge/rewrite-orchestration decisions, debug-level ActionIR
-scanner/canonical-event/diagnostic/rewrite-pipeline decisions, and debug-level compact ActionIR lowerer decisions.
-The Perl reference backend also emits debug-level generated-handler branch decisions for non-repetition dispatch
-paths and repetition loop paths. `ActionIR::MethodLowering` remains planned coverage work until that large owner is
-instrumented.
+scanner/canonical-event/diagnostic/rewrite-pipeline decisions, debug-level compact ActionIR lowerer decisions, and
+debug-level `ActionIR::MethodLowering` helper-family/assignment/mutation/receiver-chain/fallback decisions. The
+Perl reference backend also emits debug-level generated-handler branch decisions for non-repetition dispatch paths
+and repetition loop paths.
 
 Tracing is controlled separately from runtime context.
 
@@ -457,6 +457,20 @@ Current EmitContext phases include `owner_package`, `owner_callback`, `owner_dep
 `default_bundle`, `inject_function_registry`, `inject_bare_symbol_kind`, `scalar_slot_fallback`,
 `aggregate_wrapper_fallback`, `canonical_rewrite_pipeline`, `canonical_raw_perl_fallback`,
 `function_registry_available`, `bare_type_memory_collected`, and `rewrite_rules_built`.
+
+ActionIR owner decisions follow this shape:
+
+```text
+actionir:<owner>:<phase>:<label>:<decision>
+```
+
+Current Perl reference ActionIR trace owners include scanner/canonical/diagnostic/rewrite owners, compact lowerers
+such as `flow_expr`, `value_expr`, `array_pipeline`, `declare_method`, and `control_flow`, and
+`method_lowering`. Typical MethodLowering decisions include `helper_family_string`, `ast_value_lowered`,
+`unsupported_helper`, `string_receiver_chain`, `number_receiver_chain`, `hash_receiver_chain`,
+`array_receiver_chain`, `ast_scalar_assignment_operator`, `ast_array_append_operator`,
+`ast_hash_index_assignment`, `ast_array_end_mutation`, `bare_scalar_read`, `method_payload`, and
+`legacy_raw_payload`.
 
 When generated handler templates use the branch helper, decision names follow this shape:
 

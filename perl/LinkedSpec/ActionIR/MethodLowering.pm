@@ -9,6 +9,66 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
+
+use constant ACTIONIR_TRACE_OWNER => 'method_lowering';
+
+sub _trace_method_decision {
+ my (%args) = @_;
+ return LinkedSpec::ActionIR::Trace::decision(
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $args{phase},
+  label => $args{label},
+  decision => $args{decision},
+  taken => $args{taken},
+  context => $args{context},
+ );
+}
+
+sub _trace_method_enter {
+ my ($phase, $label, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $phase,
+  label => $label,
+  details => $details,
+ );
+}
+
+sub _trace_method_exit {
+ my ($scope, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
+}
+
+sub _trace_method_finish {
+ my ($scope, $phase, $label, $result, $decision, $context) = @_;
+ _trace_method_decision(
+  phase => $phase,
+  label => $label,
+  decision => $decision,
+  taken => defined($result) ? 1 : 0,
+  context => $context,
+ );
+ _trace_method_exit($scope, { status => defined($result) ? 'ok' : 'undef', decision => $decision });
+ return $result
+}
+
+sub _method_value_helper_family {
+ my ($method) = @_;
+ return 'unknown' unless defined($method) && length($method);
+ return 'control' if $method eq 'if' || $method eq 'switch';
+ return 'rule_call' if $method eq 'call';
+ return 'input' if $method =~ /^input_/o || $method =~ /^cursor_/o;
+ return 'entry_match' if $method =~ /^(?:entry_|match_)/o;
+ return 'string' if $method =~ /^(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|str_|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty)$/o;
+ return 'numeric' if defined(_numeric_word_alias_helper_name($method)) || $method =~ /^num_/o;
+ return 'array' if $method =~ /^(?:array|array_copy|copy|flat|flat_array|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|join_values|entry_groups|match_groups)$/o;
+ return 'hash' if $method =~ /^(?:hash|hash_copy|flat_hash|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
+ return 'capture' if $method =~ /^(?:capture|start_capture|mark_|clear_mark)/o;
+ return 'flow' if $method =~ /^(?:is_empty|is_nonempty|is_defined|is_undefined|and|or|not|eq|ne|gt|ge|lt|le)$/o;
+ return 'unknown'
+}
 
 #------------------------------------------------------------------------------
 # Package : LinkedSpec::ActionIR::MethodLowering
@@ -764,6 +824,13 @@ sub _actionir_ast_value_source_expr {
 sub _actionir_ast_unsupported_helper_expr {
  my ($method) = @_;
  return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ _trace_method_decision(
+  phase => 'unsupported_helper_expr',
+  label => 'helper',
+  decision => 'unsupported_helper',
+  taken => 1,
+  context => { method => $method },
+ );
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
 }
 
@@ -1233,6 +1300,13 @@ sub _lower_ast_call_statement {
 
  my $args = _actionir_ast_call_arg_sources($node);
  return undef unless $args;
+ _trace_method_decision(
+  phase => 'lower_ast_call_statement',
+  label => 'call',
+  decision => 'ast_statement_'.$method,
+  taken => 1,
+  context => { method => $method, argc => scalar(@$args) },
+ );
 
  my $require_dep = sub {
   my ($name) = @_;
@@ -1245,6 +1319,13 @@ sub _lower_ast_call_statement {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  if ($method eq 'return') {
+  _trace_method_decision(
+   phase => 'lower_ast_call_statement',
+   label => 'call',
+   decision => 'ast_return_statement',
+   taken => 1,
+   context => { argc => scalar(@$args) },
+  );
   if (@$args >= 2) {
    my $label = $trim_action_ir_value->($args->[0]);
    return _actionir_ast_unsupported_helper_expr($method)
@@ -1267,12 +1348,26 @@ sub _lower_ast_call_statement {
  }
 
  if ($method eq 'return_undef') {
+  _trace_method_decision(
+   phase => 'lower_ast_call_statement',
+   label => 'call',
+   decision => 'ast_return_undef_statement',
+   taken => 1,
+   context => {},
+  );
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 0, 0);
   return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
   return 'return undef'
  }
 
  if ($method eq 'set') {
+  _trace_method_decision(
+   phase => 'lower_ast_call_statement',
+   label => 'call',
+   decision => 'ast_set_statement',
+   taken => 1,
+   context => {},
+  );
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
   return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
   my $lower_assign_statement = (ref($deps) eq 'HASH' && ref($deps->{lower_assign_statement}) eq 'CODE')
@@ -1283,6 +1378,13 @@ sub _lower_ast_call_statement {
  }
 
  if ($method eq 'set_key') {
+  _trace_method_decision(
+   phase => 'lower_ast_call_statement',
+   label => 'call',
+   decision => 'ast_set_key_statement',
+   taken => 1,
+   context => {},
+  );
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 3, 3);
   return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
   my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
@@ -1307,6 +1409,13 @@ sub _lower_ast_call_statement {
  }
 
  if ($method eq 'push' || $method eq 'push_value') {
+  _trace_method_decision(
+   phase => 'lower_ast_call_statement',
+   label => 'call',
+   decision => 'ast_push_statement',
+   taken => 1,
+   context => { method => $method },
+  );
   my $effective_args;
   if ($method eq 'push_value') {
    $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
@@ -1342,6 +1451,13 @@ sub _lower_ast_call_statement {
  }
 
  if ($method eq 'push_nonempty') {
+  _trace_method_decision(
+   phase => 'lower_ast_call_statement',
+   label => 'call',
+   decision => 'ast_push_nonempty_statement',
+   taken => 1,
+   context => {},
+  );
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
   return _actionir_ast_unsupported_helper_expr($method) unless $effective_args;
   my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
@@ -1374,6 +1490,13 @@ sub _lower_ast_array_end_mutation_method_statement {
  return undef unless ref($call) eq 'HASH';
  my $method = $call->{method};
  return undef unless defined($method) && $method =~ /^(?:push_front|push_back|pop_front|pop_back)$/o;
+ _trace_method_decision(
+  phase => 'lower_ast_array_end_mutation_method_statement',
+  label => 'fluent_chain',
+  decision => 'ast_array_end_'.$method,
+  taken => 1,
+  context => { method => $method },
+ );
 
  my $args = $call->{args} || [];
  return _actionir_ast_unsupported_helper_expr($method)
@@ -1420,6 +1543,13 @@ sub _lower_ast_assignment_operator_statement {
  return undef unless ref($node) eq 'HASH';
  my $kind = $node->{kind} // '';
  return undef unless defined($expected_kind) && $kind eq $expected_kind;
+ _trace_method_decision(
+  phase => 'lower_ast_assignment_operator_statement',
+  label => 'assignment',
+  decision => 'ast_'.$kind,
+  taken => 1,
+  context => { kind => $kind },
+ );
 
  my $require_dep = sub {
   my ($name) = @_;
@@ -1439,6 +1569,13 @@ sub _lower_ast_assignment_operator_statement {
  };
 
  if ($kind eq 'assign_scalar') {
+  _trace_method_decision(
+   phase => 'lower_ast_assignment_operator_statement',
+   label => 'assignment',
+   decision => 'ast_scalar_assignment',
+   taken => 1,
+   context => { target => $node->{name} },
+  );
   my $target = $node->{name};
   return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $source = $ast_value_source->($node->{value});
@@ -1476,6 +1613,13 @@ sub _lower_ast_assignment_operator_statement {
  }
 
  if ($kind eq 'assign_array_append') {
+  _trace_method_decision(
+   phase => 'lower_ast_assignment_operator_statement',
+   label => 'assignment',
+   decision => 'ast_array_append_assignment',
+   taken => 1,
+   context => { target => $node->{name} },
+  );
   my $target = $node->{name};
   return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $value = $ast_value_source->($node->{value});
@@ -1486,6 +1630,13 @@ sub _lower_ast_assignment_operator_statement {
  }
 
  if ($kind eq 'assign_hash_index') {
+  _trace_method_decision(
+   phase => 'lower_ast_assignment_operator_statement',
+   label => 'assignment',
+   decision => 'ast_hash_index_assignment',
+   taken => 1,
+   context => { target => $node->{name} },
+  );
   my $target = $node->{name};
   return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $key = $ast_value_source->($node->{key});
@@ -3075,6 +3226,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   my $first_method = $calls->[0]{method} // '';
   if (_is_hash_receiver_value_chain_method($first_method)) {
+   _trace_method_decision(
+    phase => 'lower_ast_fluent_chain_node',
+    label => 'fluent_chain',
+    decision => 'ast_hash_receiver_chain',
+    taken => 1,
+    context => { first_method => $first_method, steps => scalar(@$calls) },
+   );
    my $current_expr = $receiver_expr;
    $current_expr = 'hash('.$current_expr.')'
     if ($receiver->{kind} // '') eq 'variable'
@@ -3119,6 +3277,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   if (_is_string_receiver_value_chain_method($first_method)) {
+   _trace_method_decision(
+    phase => 'lower_ast_fluent_chain_node',
+    label => 'fluent_chain',
+    decision => 'ast_string_receiver_chain',
+    taken => 1,
+    context => { first_method => $first_method, steps => scalar(@$calls) },
+   );
    my $current_expr = $receiver_expr;
    $current_expr = ':'.$current_expr
     if ($receiver->{kind} // '') eq 'variable'
@@ -3164,6 +3329,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   if (_is_number_receiver_value_chain_method($first_method)) {
+   _trace_method_decision(
+    phase => 'lower_ast_fluent_chain_node',
+    label => 'fluent_chain',
+    decision => 'ast_number_receiver_chain',
+    taken => 1,
+    context => { first_method => $first_method, steps => scalar(@$calls) },
+   );
    my $current_expr = $receiver_expr;
    $current_expr = ':'.$current_expr
     if ($receiver->{kind} // '') eq 'variable'
@@ -3204,6 +3376,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   if (_is_array_receiver_value_chain_method($first_method)) {
+   _trace_method_decision(
+    phase => 'lower_ast_fluent_chain_node',
+    label => 'fluent_chain',
+    decision => 'ast_array_receiver_chain',
+    taken => 1,
+    context => { first_method => $first_method, steps => scalar(@$calls) },
+   );
    return undef if defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
    my $current_expr = $receiver_expr;
    my $current_family = 'array';
@@ -3230,51 +3409,197 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $ast_kind = $ast_node->{kind} // '';
    if ($ast_kind ne 'raw_perl') {
     my $ast_lowered = $lower_ast_value_node->($ast_node);
-    return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+    if (defined($ast_lowered) && length($ast_lowered)) {
+     _trace_method_decision(
+      phase => 'lower_method_value_expr',
+      label => 'expr',
+      decision => 'ast_value_lowered',
+      taken => 1,
+      context => { ast_kind => $ast_kind },
+     );
+     return $ast_lowered;
+    }
     my $unknown = _actionir_ast_first_unknown_value_call_name($ast_node, $deps);
     my $unknown_expr = _actionir_ast_unsupported_helper_expr($unknown);
-    return $unknown_expr if defined($unknown_expr) && length($unknown_expr);
+    if (defined($unknown_expr) && length($unknown_expr)) {
+     _trace_method_decision(
+      phase => 'lower_method_value_expr',
+      label => 'expr',
+      decision => 'ast_unknown_helper',
+      taken => 1,
+      context => { ast_kind => $ast_kind, method => $unknown },
+     );
+     return $unknown_expr;
+    }
+   } else {
+    _trace_method_decision(
+     phase => 'lower_method_value_expr',
+     label => 'expr',
+     decision => 'ast_raw_perl_fallback',
+     taken => 1,
+     context => { ast_kind => $ast_kind },
+    );
    }
   }
+ } else {
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'ast_compat_bridge_bypass',
+   taken => 1,
+   context => {},
+  );
  }
  my $literal = $lower_primitive_literal_expr->($trimmed);
- return $literal if defined($literal);
+ if (defined($literal)) {
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'primitive_literal',
+   taken => 1,
+   context => {},
+  );
+  return $literal;
+ }
  my $hash_receiver_chain = _normalize_hash_receiver_value_chain_expr($trimmed, $deps);
  if (defined($hash_receiver_chain) && length($hash_receiver_chain) && $hash_receiver_chain ne $trimmed) {
   my $lowered_chain = _lower_method_value_expr($hash_receiver_chain, $deps);
-  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+  if (defined($lowered_chain) && length($lowered_chain)) {
+   _trace_method_decision(
+    phase => 'lower_method_value_expr',
+    label => 'expr',
+    decision => 'hash_receiver_chain_lowered',
+    taken => 1,
+    context => {},
+   );
+   return $lowered_chain;
+  }
  }
  my $string_receiver_chain = _normalize_string_receiver_value_chain_expr($trimmed, $deps);
  if (defined($string_receiver_chain) && length($string_receiver_chain) && $string_receiver_chain ne $trimmed) {
   my $lowered_chain = _lower_method_value_expr($string_receiver_chain, $deps);
-  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+  if (defined($lowered_chain) && length($lowered_chain)) {
+   _trace_method_decision(
+    phase => 'lower_method_value_expr',
+    label => 'expr',
+    decision => 'string_receiver_chain_lowered',
+    taken => 1,
+    context => {},
+   );
+   return $lowered_chain;
+  }
  }
  my $number_receiver_chain = _normalize_number_receiver_value_chain_expr($trimmed, $deps);
  if (defined($number_receiver_chain) && length($number_receiver_chain) && $number_receiver_chain ne $trimmed) {
   my $lowered_chain = _lower_method_value_expr($number_receiver_chain, $deps);
-  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+  if (defined($lowered_chain) && length($lowered_chain)) {
+   _trace_method_decision(
+    phase => 'lower_method_value_expr',
+    label => 'expr',
+    decision => 'number_receiver_chain_lowered',
+    taken => 1,
+    context => {},
+   );
+   return $lowered_chain;
+  }
  }
  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
- return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
+ if (defined($bare_scalar_read) && length($bare_scalar_read)) {
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'bare_scalar_read',
+   taken => 1,
+   context => {},
+  );
+  return $bare_scalar_read;
+ }
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
- return $direct_access if defined($direct_access) && length($direct_access);
+ if (defined($direct_access) && length($direct_access)) {
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'direct_access_lowered',
+   taken => 1,
+   context => {},
+  );
+  return $direct_access;
+ }
  my $shape_literal = $lower_shape_literal_value_expr->($trimmed);
- return $shape_literal if defined($shape_literal) && length($shape_literal);
+ if (defined($shape_literal) && length($shape_literal)) {
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'shape_literal_lowered',
+   taken => 1,
+   context => {},
+  );
+  return $shape_literal;
+ }
  my $block_value = _lower_block_value_expr($trimmed, $deps);
- return $block_value if defined($block_value) && length($block_value);
+ if (defined($block_value) && length($block_value)) {
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'block_value_lowered',
+   taken => 1,
+   context => {},
+  );
+  return $block_value;
+ }
  my $array_receiver_chain = _normalize_array_receiver_value_chain_expr($trimmed, $deps);
  if (defined($array_receiver_chain) && length($array_receiver_chain) && $array_receiver_chain ne $trimmed) {
   my $lowered_chain = _lower_method_value_expr($array_receiver_chain, $deps);
-  return $lowered_chain if defined($lowered_chain) && length($lowered_chain);
+  if (defined($lowered_chain) && length($lowered_chain)) {
+   _trace_method_decision(
+    phase => 'lower_method_value_expr',
+    label => 'expr',
+    decision => 'array_receiver_chain_lowered',
+    taken => 1,
+    context => {},
+   );
+   return $lowered_chain;
+  }
  }
  my $method_call = $parse_method_function_expr->($trimmed);
+ if ($method_call) {
+  my $method_for_family = $method_call->{method};
+  my $numeric_alias_for_family = _numeric_word_alias_helper_name($method_for_family);
+  $method_for_family = $numeric_alias_for_family if defined($numeric_alias_for_family) && length($numeric_alias_for_family);
+  my $family = _method_value_helper_family($method_for_family);
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'helper_family_'.$family,
+   taken => 1,
+   context => { method => $method_for_family },
+  );
+ }
  if ($method_call && $method_call->{method} eq 'if') {
   my $if_value = _lower_inline_if_value_expr($method_call, $deps);
-  return $if_value if defined($if_value) && length($if_value);
+  if (defined($if_value) && length($if_value)) {
+   _trace_method_decision(
+    phase => 'lower_method_value_expr',
+    label => 'expr',
+    decision => 'inline_if_value',
+    taken => 1,
+    context => {},
+   );
+   return $if_value;
+  }
  }
  if ($method_call && $method_call->{method} eq 'switch') {
   my $switch_value = _lower_inline_switch_value_expr($method_call, $deps);
-  return $switch_value if defined($switch_value) && length($switch_value);
+  if (defined($switch_value) && length($switch_value)) {
+   _trace_method_decision(
+    phase => 'lower_method_value_expr',
+    label => 'expr',
+    decision => 'inline_switch_value',
+    taken => 1,
+    context => {},
+   );
+   return $switch_value;
+  }
  }
  if ($method_call) {
   my $numeric_alias = _numeric_word_alias_helper_name($method_call->{method});
@@ -3283,13 +3608,29 @@ my $lower_numeric_array_reducer_source_expr = sub {
  }
  if ($method_call) {
   my $array_pipeline_value = $lower_array_pipeline_value_expr->($method_call);
-  return $array_pipeline_value if defined($array_pipeline_value) && length($array_pipeline_value);
+  if (defined($array_pipeline_value) && length($array_pipeline_value)) {
+   _trace_method_decision(
+    phase => 'lower_method_value_expr',
+    label => 'expr',
+    decision => 'array_pipeline_value',
+    taken => 1,
+    context => { method => $method_call->{method} },
+   );
+   return $array_pipeline_value;
+  }
  }
  if ($method_call && $method_call->{method} eq 'call') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $effective_args;
   my $callee = $trim_action_ir_value->($effective_args->[0]);
   return undef unless defined($callee) && $callee =~ /^\w+$/o;
+  _trace_method_decision(
+   phase => 'lower_method_value_expr',
+   label => 'expr',
+   decision => 'rule_call_helper',
+   taken => 1,
+   context => { callee => $callee },
+  );
   return '&{$$descr{spec}{'.$callee.'}{handler}}($descr, $STRING, $minfo)';
  }
  if ($method_call && $method_call->{method} eq 'input_slice') {
@@ -4719,14 +5060,39 @@ sub _lower_mutation_slot_value_expr {
  return undef unless defined($trimmed) && length($trimmed);
 
  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
- return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
+ if (defined($bare_scalar_read) && length($bare_scalar_read)) {
+  _trace_method_decision(
+   phase => 'lower_mutation_slot_value_expr',
+   label => 'value',
+   decision => 'bare_scalar_read',
+   taken => 1,
+   context => {},
+  );
+  return $bare_scalar_read;
+ }
 
  my $literal = $lower_primitive_literal_expr->($trimmed);
- return $literal if defined($literal);
+ if (defined($literal)) {
+  _trace_method_decision(
+   phase => 'lower_mutation_slot_value_expr',
+   label => 'value',
+   decision => 'primitive_literal',
+   taken => 1,
+   context => {},
+  );
+  return $literal;
+ }
  return undef if $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
 
  my $lowered = _lower_method_value_expr($trimmed, $deps);
  $lowered = $trimmed unless defined($lowered) && length($lowered);
+ _trace_method_decision(
+  phase => 'lower_mutation_slot_value_expr',
+  label => 'value',
+  decision => 'method_value_source',
+  taken => 1,
+  context => {},
+ );
  return $lowered
 }
 
@@ -4755,18 +5121,42 @@ sub _lower_return_payload_expr {
  my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
  my $ast_kind = ref($ast_node) eq 'HASH' ? ($ast_node->{kind} // '') : '';
  my $direct = _lower_method_value_expr($trimmed, $deps);
- return $direct
-  if defined($direct) && length($direct) && $ast_kind ne '' && $ast_kind ne 'raw_perl' && $ast_kind ne 'variable';
+ if (defined($direct) && length($direct) && $ast_kind ne '' && $ast_kind ne 'raw_perl' && $ast_kind ne 'variable') {
+  _trace_method_decision(
+   phase => 'lower_return_payload_expr',
+   label => 'payload',
+   decision => 'ast_direct_payload',
+   taken => 1,
+   context => { ast_kind => $ast_kind },
+  );
+  return $direct;
+ }
  if (
   defined($direct) &&
   length($direct) &&
   ($trimmed =~ /^(?:array|hash|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
+ _trace_method_decision(
+  phase => 'lower_return_payload_expr',
+  label => 'payload',
+  decision => 'method_payload',
+  taken => 1,
+  context => { ast_kind => $ast_kind },
+ );
  return $direct;
  }
 
  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
- return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
+ if (defined($bare_scalar_read) && length($bare_scalar_read)) {
+  _trace_method_decision(
+   phase => 'lower_return_payload_expr',
+   label => 'payload',
+   decision => 'bare_scalar_payload',
+   taken => 1,
+   context => {},
+  );
+  return $bare_scalar_read;
+ }
 
  # Legacy raw fallback: shipped compatibility payloads such as
  # `\(my $capt = capture_slice())` are not typed ActionIR values yet.
@@ -4777,8 +5167,15 @@ sub _lower_return_payload_expr {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;
-  last if $rewritten eq $before;
+ last if $rewritten eq $before;
  }
+ _trace_method_decision(
+  phase => 'lower_return_payload_expr',
+  label => 'payload',
+  decision => $rewritten eq $trimmed ? 'legacy_raw_payload' : 'legacy_rewritten_payload',
+  taken => 1,
+  context => {},
+ );
  return $rewritten
 }
 
@@ -4836,6 +5233,15 @@ sub _lower_return_general_statement {
 #------------------------------------------------------------------------------
 sub _lower_assign_statement {
  my ($target, $source, $deps) = @_;
+ my $scope = _trace_method_enter(
+  'lower_assign_statement',
+  'assignment',
+  { target => defined($target) ? $target : '<undef>', source => defined($source) ? $source : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  return _trace_method_finish($scope, 'lower_assign_statement', 'assignment', $result, $decision, $context);
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -4858,47 +5264,47 @@ sub _lower_assign_statement {
   my $source_shape_kind = _infer_direct_shape_literal_kind($source, $deps);
   if (defined($source_shape_kind) && $source_shape_kind eq 'array') {
    my $source_expr = $lower_declare_initializer_expr->('array', $source);
-   return undef unless defined($source_expr) && length($source_expr);
-   return "\@$target_trimmed = $source_expr";
+   return $finish->(undef, 'bare_target_array_shape_failed', { target => $target_trimmed }) unless defined($source_expr) && length($source_expr);
+   return $finish->("\@$target_trimmed = $source_expr", 'bare_target_array_shape', { target => $target_trimmed });
   }
 	  if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
 	   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
-	   return undef unless defined($source_expr) && length($source_expr);
-	   return "\%$target_trimmed = $source_expr";
+	   return $finish->(undef, 'bare_target_hash_shape_failed', { target => $target_trimmed }) unless defined($source_expr) && length($source_expr);
+	   return $finish->("\%$target_trimmed = $source_expr", 'bare_target_hash_shape', { target => $target_trimmed });
 	  }
   my $remembered_kind = $bare_symbol_kind->($target_trimmed);
   if (defined($remembered_kind) && $remembered_kind eq 'array') {
    my $source_expr = $lower_declare_initializer_expr->('array', $source);
-   return "\@$target_trimmed = $source_expr" if defined($source_expr) && length($source_expr);
+   return $finish->("\@$target_trimmed = $source_expr", 'remembered_array_target', { target => $target_trimmed }) if defined($source_expr) && length($source_expr);
   }
   if (defined($remembered_kind) && $remembered_kind eq 'hash') {
    my $source_expr = $lower_declare_initializer_expr->('hash', $source);
-   return "\%$target_trimmed = $source_expr" if defined($source_expr) && length($source_expr);
+   return $finish->("\%$target_trimmed = $source_expr", 'remembered_hash_target', { target => $target_trimmed }) if defined($source_expr) && length($source_expr);
   }
 	 }
 
  my $symbol = $extract_scalar_symbol_name->($target);
  if (defined $symbol) {
   my $source_expr = $lower_assignment_source_expr->($source);
-  return undef unless defined $source_expr;
-  return "\$$symbol = $source_expr";
+  return $finish->(undef, 'scalar_target_failed', { target => $symbol }) unless defined $source_expr;
+  return $finish->("\$$symbol = $source_expr", 'scalar_target', { target => $symbol });
  }
 
  my $array_symbol = $extract_array_symbol_name->($target);
  if (defined $array_symbol) {
   my $source_expr = $lower_declare_initializer_expr->('array', $source);
-  return undef unless defined $source_expr;
-  return "\@$array_symbol = $source_expr";
+  return $finish->(undef, 'array_target_failed', { target => $array_symbol }) unless defined $source_expr;
+  return $finish->("\@$array_symbol = $source_expr", 'array_target', { target => $array_symbol });
  }
 
  my $hash_symbol = $extract_hash_symbol_name->($target);
  if (defined $hash_symbol) {
   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
-  return undef unless defined $source_expr;
-  return "\%$hash_symbol = $source_expr";
+  return $finish->(undef, 'hash_target_failed', { target => $hash_symbol }) unless defined $source_expr;
+  return $finish->("\%$hash_symbol = $source_expr", 'hash_target', { target => $hash_symbol });
  }
 
- return undef
+ return $finish->(undef, 'unsupported_assignment_target', {})
 }
 
 #------------------------------------------------------------------------------
@@ -4931,7 +5337,16 @@ sub _lower_scalar_assignment_operator_statement {
   $deps,
   'assign_scalar',
  );
- return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+ if (defined($ast_lowered) && length($ast_lowered)) {
+  _trace_method_decision(
+   phase => 'lower_scalar_assignment_operator_statement',
+   label => 'assignment',
+   decision => 'ast_scalar_assignment_operator',
+   taken => 1,
+   context => {},
+  );
+  return $ast_lowered;
+ }
  return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s;
 
  my ($target_symbol, $source) = ($1, $2);
@@ -4942,25 +5357,64 @@ sub _lower_scalar_assignment_operator_statement {
  if (defined($source_shape_kind) && $source_shape_kind eq 'array') {
   my $source_expr = $lower_declare_initializer_expr->('array', $source);
   return undef unless defined($source_expr) && length($source_expr);
+  _trace_method_decision(
+   phase => 'lower_scalar_assignment_operator_statement',
+   label => 'assignment',
+   decision => 'operator_array_shape_target',
+   taken => 1,
+   context => { target => $target_symbol },
+  );
   return '@'.$target_symbol.' = '.$source_expr;
  }
 	 if (defined($source_shape_kind) && $source_shape_kind eq 'hash') {
 	  my $source_expr = $lower_declare_initializer_expr->('hash', $source);
 	  return undef unless defined($source_expr) && length($source_expr);
+	  _trace_method_decision(
+	   phase => 'lower_scalar_assignment_operator_statement',
+	   label => 'assignment',
+	   decision => 'operator_hash_shape_target',
+	   taken => 1,
+	   context => { target => $target_symbol },
+	  );
 	  return '%'.$target_symbol.' = '.$source_expr;
 	 }
  my $remembered_kind = $bare_symbol_kind->($target_symbol);
  if (defined($remembered_kind) && $remembered_kind eq 'array') {
   my $source_expr = $lower_declare_initializer_expr->('array', $source);
-  return '@'.$target_symbol.' = '.$source_expr if defined($source_expr) && length($source_expr);
+  if (defined($source_expr) && length($source_expr)) {
+   _trace_method_decision(
+    phase => 'lower_scalar_assignment_operator_statement',
+    label => 'assignment',
+    decision => 'operator_remembered_array_target',
+    taken => 1,
+    context => { target => $target_symbol },
+   );
+   return '@'.$target_symbol.' = '.$source_expr;
+  }
  }
  if (defined($remembered_kind) && $remembered_kind eq 'hash') {
   my $source_expr = $lower_declare_initializer_expr->('hash', $source);
-  return '%'.$target_symbol.' = '.$source_expr if defined($source_expr) && length($source_expr);
+  if (defined($source_expr) && length($source_expr)) {
+   _trace_method_decision(
+    phase => 'lower_scalar_assignment_operator_statement',
+    label => 'assignment',
+    decision => 'operator_remembered_hash_target',
+    taken => 1,
+    context => { target => $target_symbol },
+   );
+   return '%'.$target_symbol.' = '.$source_expr;
+  }
  }
 
 	 my $source_expr = $lower_assignment_source_expr->($source);
  return undef unless defined($source_expr) && length($source_expr);
+ _trace_method_decision(
+  phase => 'lower_scalar_assignment_operator_statement',
+  label => 'assignment',
+  decision => 'scalar_assignment_operator',
+  taken => 1,
+  context => { target => $target_symbol },
+ );
  return '$'.$target_symbol.' = '.$source_expr
 }
 
@@ -4991,7 +5445,16 @@ sub _lower_array_append_operator_statement {
   $deps,
   'assign_array_append',
  );
- return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+ if (defined($ast_lowered) && length($ast_lowered)) {
+  _trace_method_decision(
+   phase => 'lower_array_append_operator_statement',
+   label => 'assignment',
+   decision => 'ast_array_append_operator',
+   taken => 1,
+   context => {},
+  );
+  return $ast_lowered;
+ }
  return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*(.+)$/s;
 
  my ($target_symbol, $value) = ($1, $2);
@@ -4999,6 +5462,13 @@ sub _lower_array_append_operator_statement {
  return undef unless defined($value) && length($value);
  my $lowered_value = _lower_mutation_slot_value_expr($value, $deps);
  return undef unless defined($lowered_value) && length($lowered_value);
+ _trace_method_decision(
+  phase => 'lower_array_append_operator_statement',
+  label => 'assignment',
+  decision => 'array_append_operator',
+  taken => 1,
+  context => { target => $target_symbol },
+ );
  return "push \@$target_symbol, $lowered_value"
 }
 
@@ -5158,6 +5628,13 @@ sub _normalize_array_receiver_value_chain_expr {
   $tail_expr = $tail_split->[1];
  }
  return undef unless @calls;
+ _trace_method_decision(
+  phase => 'normalize_array_receiver_value_chain_expr',
+  label => 'receiver_chain',
+  decision => 'array_receiver_chain',
+  taken => 1,
+  context => { first_method => $calls[0]{method}, steps => scalar(@calls) },
+ );
 
  my $current_expr = $receiver_expr;
  my $current_family = 'array';
@@ -5166,6 +5643,13 @@ sub _normalize_array_receiver_value_chain_expr {
   my $call = $calls[$idx];
   my $method = $call->{method} // '';
   my @args = @{$call->{args} || []};
+  _trace_method_decision(
+   phase => 'normalize_array_receiver_value_chain_expr',
+   label => 'receiver_chain',
+   decision => 'array_chain_step',
+   taken => 1,
+   context => { method => $method, from_family => $current_family },
+  );
   if ($method eq 'join_values') {
    return undef unless @args == 1;
    $current_expr = 'join_values('.$args[0].', '.$current_expr.')';
@@ -5224,6 +5708,13 @@ sub _normalize_number_receiver_value_chain_expr {
  }
  return undef unless @calls;
  return undef unless _is_number_receiver_value_chain_method($calls[0]->{method} // '');
+ _trace_method_decision(
+  phase => 'normalize_number_receiver_value_chain_expr',
+  label => 'receiver_chain',
+  decision => 'number_receiver_chain',
+  taken => 1,
+  context => { first_method => $calls[0]{method}, steps => scalar(@calls) },
+ );
 
  my $current_expr = $receiver_expr;
  if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
@@ -5235,6 +5726,13 @@ sub _normalize_number_receiver_value_chain_expr {
   my $method = $call->{method} // '';
   my @args = @{$call->{args} || []};
   my $is_last = ($idx == $#calls) ? 1 : 0;
+  _trace_method_decision(
+   phase => 'normalize_number_receiver_value_chain_expr',
+   label => 'receiver_chain',
+   decision => 'number_chain_step',
+   taken => 1,
+   context => { method => $method, from_family => $current_family },
+  );
 
   return 'undef' if $current_family eq 'terminal';
   return undef unless $current_family eq 'number';
@@ -5296,6 +5794,13 @@ sub _normalize_string_receiver_value_chain_expr {
  }
  return undef unless @calls;
  return undef unless _is_string_receiver_value_chain_method($calls[0]->{method} // '');
+ _trace_method_decision(
+  phase => 'normalize_string_receiver_value_chain_expr',
+  label => 'receiver_chain',
+  decision => 'string_receiver_chain',
+  taken => 1,
+  context => { first_method => $calls[0]{method}, steps => scalar(@calls) },
+ );
 
  my $current_expr = $receiver_expr;
  if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
@@ -5307,6 +5812,13 @@ sub _normalize_string_receiver_value_chain_expr {
   my $method = $call->{method} // '';
   my @args = @{$call->{args} || []};
   my $is_last = ($idx == $#calls) ? 1 : 0;
+  _trace_method_decision(
+   phase => 'normalize_string_receiver_value_chain_expr',
+   label => 'receiver_chain',
+   decision => 'string_chain_step',
+   taken => 1,
+   context => { method => $method, from_family => $current_family },
+  );
 
   if ($current_family eq 'string') {
    my $return_family = _string_receiver_value_chain_return_family($method);
@@ -5392,6 +5904,13 @@ sub _normalize_hash_receiver_value_chain_expr {
  }
  return undef unless @calls;
  return undef unless _is_hash_receiver_value_chain_method($calls[0]->{method} // '');
+ _trace_method_decision(
+  phase => 'normalize_hash_receiver_value_chain_expr',
+  label => 'receiver_chain',
+  decision => 'hash_receiver_chain',
+  taken => 1,
+  context => { first_method => $calls[0]{method}, steps => scalar(@calls) },
+ );
 
  my $current_expr = $receiver_expr;
  if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
@@ -5403,6 +5922,13 @@ sub _normalize_hash_receiver_value_chain_expr {
   my $method = $call->{method} // '';
   my @args = @{$call->{args} || []};
   my $is_last = ($idx == $#calls) ? 1 : 0;
+  _trace_method_decision(
+   phase => 'normalize_hash_receiver_value_chain_expr',
+   label => 'receiver_chain',
+   decision => 'hash_chain_step',
+   taken => 1,
+   context => { method => $method, from_family => $current_family },
+  );
 
   if ($current_family eq 'hash') {
    my $return_family = _hash_receiver_value_chain_return_family($method);
@@ -5515,7 +6041,16 @@ sub _lower_array_end_mutation_method_statement {
   _parse_method_value_ast_expr($expr, $deps),
   $deps,
  );
- return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+ if (defined($ast_lowered) && length($ast_lowered)) {
+  _trace_method_decision(
+   phase => 'lower_array_end_mutation_method_statement',
+   label => 'fluent_chain',
+   decision => 'ast_array_end_mutation',
+   taken => 1,
+   context => {},
+  );
+  return $ast_lowered;
+ }
 
  my $parsed = _parse_array_end_mutation_method_statement($expr, $deps);
  return undef unless $parsed;
@@ -5523,15 +6058,47 @@ sub _lower_array_end_mutation_method_statement {
  if ($parsed->{method} eq 'push_back') {
   my $lowered_value = _lower_mutation_slot_value_expr($parsed->{value}, $deps);
   return undef unless defined($lowered_value) && length($lowered_value);
+  _trace_method_decision(
+   phase => 'lower_array_end_mutation_method_statement',
+   label => 'fluent_chain',
+   decision => 'push_back_mutation',
+   taken => 1,
+   context => { target => $parsed->{target} },
+  );
   return 'push @'.$parsed->{target}.', '.$lowered_value;
  }
  if ($parsed->{method} eq 'push_front') {
   my $lowered_value = _lower_mutation_slot_value_expr($parsed->{value}, $deps);
   return undef unless defined($lowered_value) && length($lowered_value);
+  _trace_method_decision(
+   phase => 'lower_array_end_mutation_method_statement',
+   label => 'fluent_chain',
+   decision => 'push_front_mutation',
+   taken => 1,
+   context => { target => $parsed->{target} },
+  );
   return 'unshift @'.$parsed->{target}.', '.$lowered_value;
  }
- return 'pop @'.$parsed->{target} if $parsed->{method} eq 'pop_back';
- return 'shift @'.$parsed->{target} if $parsed->{method} eq 'pop_front';
+ if ($parsed->{method} eq 'pop_back') {
+  _trace_method_decision(
+   phase => 'lower_array_end_mutation_method_statement',
+   label => 'fluent_chain',
+   decision => 'pop_back_mutation',
+   taken => 1,
+   context => { target => $parsed->{target} },
+  );
+  return 'pop @'.$parsed->{target};
+ }
+ if ($parsed->{method} eq 'pop_front') {
+  _trace_method_decision(
+   phase => 'lower_array_end_mutation_method_statement',
+   label => 'fluent_chain',
+   decision => 'pop_front_mutation',
+   taken => 1,
+   context => { target => $parsed->{target} },
+  );
+  return 'shift @'.$parsed->{target};
+ }
  return undef
 }
 
@@ -5644,7 +6211,16 @@ sub _lower_hash_index_assignment_operator_statement {
   $deps,
   'assign_hash_index',
  );
- return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+ if (defined($ast_lowered) && length($ast_lowered)) {
+  _trace_method_decision(
+   phase => 'lower_hash_index_assignment_operator_statement',
+   label => 'assignment',
+   decision => 'ast_hash_index_assignment',
+   taken => 1,
+   context => {},
+  );
+  return $ast_lowered;
+ }
 
  my $parsed = _parse_hash_index_assignment_operator_statement($expr, $deps);
  return undef unless $parsed;
@@ -5655,6 +6231,13 @@ sub _lower_hash_index_assignment_operator_statement {
  my $value_lowered = _lower_mutation_slot_value_expr($parsed->{value}, $deps);
  return undef unless defined($value_lowered) && length($value_lowered);
 
+ _trace_method_decision(
+  phase => 'lower_hash_index_assignment_operator_statement',
+  label => 'assignment',
+  decision => 'hash_index_assignment_operator',
+  taken => 1,
+  context => { target => $parsed->{target} },
+ );
  return '$'.$parsed->{target}.'{'.$key_lowered.'} = '.$value_lowered
 }
 
@@ -5683,7 +6266,16 @@ sub _lower_set_key_statement {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $ast_lowered = _lower_ast_call_statement($expr, 'set_key', $deps);
- return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+ if (defined($ast_lowered) && length($ast_lowered)) {
+  _trace_method_decision(
+   phase => 'lower_set_key_statement',
+   label => 'statement',
+   decision => 'ast_set_key_statement',
+   taken => 1,
+   context => {},
+  );
+  return $ast_lowered;
+ }
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'set_key';
@@ -5707,6 +6299,13 @@ sub _lower_set_key_statement {
  my $value_lowered = _lower_mutation_slot_value_expr($value_expr, $deps);
  return undef unless defined($value_lowered) && length($value_lowered);
 
+ _trace_method_decision(
+  phase => 'lower_set_key_statement',
+  label => 'statement',
+  decision => 'set_key_statement',
+  taken => 1,
+  context => { target => $hash_symbol },
+ );
  return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
 }
 
@@ -5734,7 +6333,16 @@ sub _lower_push_value_statement {
  my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
 
  my $ast_lowered = _lower_ast_call_statement($expr, ['push', 'push_value'], $deps);
- return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+ if (defined($ast_lowered) && length($ast_lowered)) {
+  _trace_method_decision(
+   phase => 'lower_push_value_statement',
+   label => 'statement',
+   decision => 'ast_push_value_statement',
+   taken => 1,
+   context => {},
+  );
+  return $ast_lowered;
+ }
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
@@ -5772,6 +6380,13 @@ sub _lower_push_value_statement {
  return undef unless defined($value_expr) && length($value_expr);
  my $lowered_value = _lower_method_value_expr($value_expr, $deps);
  $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
+ _trace_method_decision(
+  phase => 'lower_push_value_statement',
+  label => 'statement',
+  decision => 'push_value_statement',
+  taken => 1,
+  context => { target => $target_symbol, method => $call->{method} },
+ );
  return "push \@$target_symbol, $lowered_value"
 }
 
@@ -5796,7 +6411,16 @@ sub _lower_push_nonempty_statement {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $ast_lowered = _lower_ast_call_statement($expr, 'push_nonempty', $deps);
- return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+ if (defined($ast_lowered) && length($ast_lowered)) {
+  _trace_method_decision(
+   phase => 'lower_push_nonempty_statement',
+   label => 'statement',
+   decision => 'ast_push_nonempty_statement',
+   taken => 1,
+   context => {},
+  );
+  return $ast_lowered;
+ }
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'push_nonempty';
@@ -5817,6 +6441,13 @@ sub _lower_push_nonempty_statement {
  my $lowered_value = _lower_method_value_expr($value_expr, $deps);
  $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
 
+ _trace_method_decision(
+  phase => 'lower_push_nonempty_statement',
+  label => 'statement',
+  decision => 'push_nonempty_statement',
+  taken => 1,
+  context => { target => $target_symbol },
+ );
  return 'do { my $__ls_push_nonempty = '.$lowered_value.'; if (defined($__ls_push_nonempty)) { my $__ls_push_nonempty_ok = (ref($__ls_push_nonempty) eq \'ARRAY\') ? scalar(@{$__ls_push_nonempty}) : (ref($__ls_push_nonempty) eq \'HASH\') ? scalar(keys %{$__ls_push_nonempty}) : (ref($__ls_push_nonempty) ? 1 : ($__ls_push_nonempty ne \'\')); push @'.$target_symbol.', $__ls_push_nonempty if $__ls_push_nonempty_ok } }'
 }
 
