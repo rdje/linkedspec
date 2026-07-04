@@ -387,7 +387,7 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| - | _none_ | - | The first function-body staged prototype is complete. PNT returns to `RUST-PARITY.9` unless a new staged linked parsing leaf is explicitly split. |
+| - | _none_ | - | The first function-body staged prototype is complete. PNT returns to `TOP-RULE-AS-NORMAL.3.2` unless a new staged linked parsing leaf is explicitly split. |
 
 ## Decisions
 
@@ -534,4 +534,4 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 - `2026-07-02`: `.5.3.2` done — Rust consumes the same spec-returned user-function definition AST contract and no longer owns a raw definition parser bridge; frontier moves to `.5.4`.
 - `2026-07-03`: `.5.4` done — function-body payloads now carry neutral `body_parse_job` sidecars with deterministic ids, parser identity, top rule, result/failure policies, exact text, and source spans; frontier moves to `.5.5`.
 - `2026-07-03`: `.5.5` done — minimal staged registry dispatch now executes function-body parse jobs through `actionir-body.spec` / `action_block`, records neutral cache/phase metadata in tests, stitches `body_ast`, and moves the frontier to `.5.6`.
-- `2026-07-03`: `.5.6` done — function-body staged prototype proved end to end on Perl and Rust with descriptor/parsed/compiled AST-shape assertions, runtime stability checks, source-provenance diagnostics, mdBook sync, and phase0 1018 green; no staged frontier remains, so PNT returns to `RUST-PARITY.9`.
+- `2026-07-03`: `.5.6` done — function-body staged prototype proved end to end on Perl and Rust with descriptor/parsed/compiled AST-shape assertions, runtime stability checks, source-provenance diagnostics, mdBook sync, and phase0 1018 green; no staged frontier remains, so PNT returns to `TOP-RULE-AS-NORMAL.3.2`.

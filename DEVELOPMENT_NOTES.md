@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.9 — closeout and next-frontier routing):
+  `RUST-PARITY` is closed as a follow-on tree, not because generated source now covers every corpus fixture, but
+  because the Rust parity obligations owned by this tree have a stable documented boundary: interpreter parity is
+  guarded by the 88-fixture manifest corpus, generated source directly executes every supported structural family,
+  and generated-source corpus proof is an 8-case subset. That distinction must stay visible in roadmap/book/live
+  docs. Closing the tree also unblocks `TOP-RULE-AS-NORMAL.3.2`; its remaining recursive top-rule value checks
+  should be implemented under the top-rule tree, not by reopening `RUST-PARITY`.
+
 - 2026-07-04 (RUST-PARITY.8.5 — generated-source oracle/corpus integration):
   Keep two generated-source proof layers distinct. The synthetic `source_emitter` matrix is the structural-family
   proof: it must cover every current generated family and compile/run the emitted modules in an isolated crate. The

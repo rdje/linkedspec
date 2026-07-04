@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **RUST-PARITY.9 — finalize Rust parity documentation**
+  (RUST-PARITY TREE CLOSED; TOP-RULE-AS-NORMAL.3.2 UNBLOCKED).
+
+  **Fix:** Synchronized the roadmap, task-tree index, `ARCHITECTURE_STATE.md`, mdBook backend handoff, Rust README,
+  and live recovery docs after the generated-source closeout. The project state now records the Rust interpreter
+  oracle as green over 88 manifest fixtures plus drift guards, generated source as direct for every current
+  structural family, and generated-source corpus proof as curated rather than exhaustive.
+
+  **Verification:** mdBook, memory architecture, doctrine, whitespace, and full local CI gates pass. Full CI
+  includes the 1021-test phase0 regression suite.
+
+  **Frontier:** `TOP-RULE-AS-NORMAL.3.2` — recursive top-rule value parity now that the Rust recursive-grammar
+  blocker has cleared.
+
 - 2026-07-04: **RUST-PARITY.8.5 — integrate generated source with oracle corpus**
   (GENERATED SOURCE NOW HAS MANIFEST-BACKED CORPUS-SUBSET PROOF).
 
@@ -21,7 +35,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `portmap`. Limitation is explicit: this is generated-source proof on a curated subset, while the full 88-fixture
   corpus remains the interpreter oracle gate.
 
-  **Frontier:** `RUST-PARITY.9` — documentation sync/finalization.
+  **Frontier at completion:** `RUST-PARITY.9` — documentation sync/finalization; `.9` has since closed the tree.
 
 - 2026-07-04: **RUST-PARITY.8.4 — emit REP generated families**
   (GENERATED SOURCE NOW DIRECTLY RUNS EXPLICIT REP SUBFAMILIES).
@@ -37,7 +51,8 @@ Current execution status for interruption-safe batch workflow recovery.
   proves legacy `Repetition` plan rows still run through direct REP specialization. mdBook, Knowledge Map, memory,
   doctrine, whitespace, and full local CI pass; full CI includes 1021 phase0 regression tests.
 
-  **Frontier:** `RUST-PARITY.8.5` — integrate generated-source validation with the oracle/corpus contract.
+  **Frontier at completion:** `RUST-PARITY.8.5` — integrate generated-source validation with the oracle/corpus
+  contract; `.9` has since closed the tree.
 
 - 2026-07-04: **RUST-PARITY.8.3.5 — close non-REP generated matrix**
   (GENERATED SOURCE NOW ROUTES EVERY NON-REP FAMILY DIRECTLY).
@@ -50,8 +65,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Focused Rust formatting, generated-source matrix, runtime library tests, and focused clippy
   pass. The source-emitter matrix asserts complete coverage of the non-REP family set before REP work starts.
 
-  **Frontier at completion:** `.8.4` emitted repetition handler families and termination guards; current frontier
-  is `RUST-PARITY.8.5`.
+  **Frontier at completion:** `.8.4` emitted repetition handler families and termination guards; `.8.5` and `.9`
+  have since closed the tree.
 
 - 2026-07-04: **RUST-PARITY.8.3.4 — emit direct bcode execution**
   (GENERATED SOURCE NOW DIRECTLY RUNS AND/OR BCODE FAMILIES).
@@ -173,8 +188,8 @@ Current execution status for interruption-safe batch workflow recovery.
   plus manifest**; `cargo fmt --manifest-path rust/Cargo.toml --all` passes; Rust `corpus_oracle` passes **3
   tests**, including missing/stale drift guards and all **88** manifest-listed fixtures. `.7` is closed.
 
-  **Frontier:** `RUST-PARITY.8.4` later closed direct REP generated-family execution; current frontier is
-  `RUST-PARITY.8.5`.
+  **Frontier at completion:** `RUST-PARITY.8.4` later closed direct REP generated-family execution; `.8.5` and
+  `.9` have since closed the tree.
 
 - 2026-07-04: **RUST-PARITY.7.3.6 — land legacy shipped-spec safety smokes**
   (SEVEN RTL/PLUGIN/LEGACY SMOKES ARE ORACLE-GREEN; RICHER MISMATCHES ROUTED FOR FOLLOW-UP).
@@ -191,9 +206,9 @@ Current execution status for interruption-safe batch workflow recovery.
   shipped specs successfully with only known non-target action-code warnings; full local CI passes, including
   phase0 **1021** tests.
 
-  **Frontier:** `RUST-PARITY.7.4` has since completed, `.8.1` split the code-generation lane, `.8.2` landed the
+  **Frontier at completion:** `RUST-PARITY.7.4` has since completed, `.8.1` split the code-generation lane, `.8.2` landed the
   generated-source scaffold, and `.8.3.1`–`.8.3.5` closed the non-REP family-plan, acode, bcode
-  direct-execution slices, matrix closeout, and REP direct execution; current frontier is `RUST-PARITY.8.5`.
+  direct-execution slices, matrix closeout, and REP direct execution; `.8.5` and `.9` have since closed the tree.
 
 - 2026-07-04: **RUST-PARITY.7.3.5 — close null-output and spec smoke triage**
   (`spec.spec` SMOKES ARE ORACLE-GREEN; DEBUG-ONLY NULL CANDIDATES NOT PROMOTED).
@@ -243,7 +258,7 @@ Current execution status for interruption-safe batch workflow recovery.
   summaries, numeric reducer statements, tests, corpus, mdBook, and Knowledge Map facts. `mdbook build
   docs/linkedspec-book`, Knowledge Map regeneration/check, memory/doctrine checks, and `git diff --check` pass.
 
-  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.8.5` unless a
+  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `TOP-RULE-AS-NORMAL.3.2` unless a
   new terse leaf is split.
 
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods**
@@ -612,7 +627,7 @@ Current execution status for interruption-safe batch workflow recovery.
   staged-registry, and spec-defined user-function tests PASS; direct Perl phase0 TAP run PASS with **1018**
   top-level tests; mdBook, Knowledge Map, memory, doctrine, whitespace, and full local CI gates PASS.
 
-  **Frontier:** staged prototype tree frontier is empty; PNT returns to `RUST-PARITY.8.5` unless a new staged linked
+  **Frontier:** staged prototype tree frontier is empty; PNT returns to `TOP-RULE-AS-NORMAL.3.2` unless a new staged linked
   parsing leaf is explicitly split.
 
 - 2026-07-03: **STAGED-LINKED-PARSING.5.5 — function-body parse jobs dispatched**

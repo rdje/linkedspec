@@ -4,7 +4,14 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-06-14`
+- Last refreshed: `2026-07-04`
+- `2026-07-04` refresh: RUST-PARITY follow-on closed. The Rust variant now has a green 88-fixture
+  manifest-backed interpreter oracle with missing/stale fixture drift guards, and the generated Rust-source path
+  emits a module with embedded `CompiledSpec`, validated generated-family plan, and `parse(input)` entry point.
+  Generated source directly executes every currently supported structural family (`Default`, OR/AND acode,
+  AND/OR bcode, and the four explicit REP subfamilies) and is proven by an all-family compile/run matrix plus a
+  curated 8-case manifest-backed corpus subset. The full 88-fixture corpus remains the interpreter oracle gate;
+  generated-source corpus coverage is intentionally a subset until a future leaf broadens it.
 - `2026-06-14` refresh: COMPAT-ALIAS-RETIREMENT-V2.2 removed 5 legacy return helpers (return_a, return_m, return_ma, return_imatch, return_im) from all 7 implementation files. LIFECYCLE-FAMILY-AUDIT tree completed — all 7 lifecycle markers verified. ROADMAP-V2-TRACKER-SYNC tree completed — trackers synchronized. DOC-BOOK-SYNC tree active for documentation/book sync.
 - `2026-06-13` refresh: MEDIUM-IMPACT task tree substantially advanced. HandlerVariantEmitter now has structured HandlerIR (10 variant builders → IR hashrefs → dispatched emitter templates), a backend dispatch table (`%BACKEND_EMITTERS` with `perl` default), and a JSON/AST diagnostic backend (`_emit_handler_json` via `JSON::PP`). Validation.pm fuzzing harness (`t/phase0_validation_fuzz.t`) covers 5 surfaces with 168+ combinatorial cases across rule labels, edge scanning, and DSL syntax. BootstrapSpec.pm now has dual-path parse: `_build_spec_spec_parser()` lazily builds spec.spec parser via bootstrap seed and caches it; `run_bootstrap_parse()` runs spec.spec alongside bootstrap as a diagnostic side channel (bootstrap always primary; recursion guard active). Cross-check at 2/20 exact match (tablegrep, verilog); remaining 18 specs tracked in .3.4 parity gap. AND handler MIXED_ACTIONS conflict resolved (.3.4.4): RuleIR routes AND I-blocks to `and_icode_entries`, EmitContext processes them, HandlerVariantEmitter prepends assignment for result capture. Comment/blank-line skip in Runtime.pm wrapper. RuntimeContext reusable via populated scalar-slot contract.
 - `2026-06-04` refresh: removed two stale references that still presented the deleted `perl/LinkedSpec/ActionRewriter.pm` module as a live owner-dispatch participant. That module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`, commit `4f8e0b6`); the focused helper-rewrite compatibility entrypoint now lives solely in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`, reachable through the façade helper `LinkedSpec::call_spec_handler_subst(...)`.
@@ -13,6 +20,7 @@ This document is the current high-level technical reading of the project shape. 
   - the main owner modules it dispatches into
   - the ActionIR lowering subtree
   - the current legacy plugin/runtime branch
+  - current Rust variant architecture (`rust/` workspace, interpreter oracle, generated-source emitter)
   - new: `LinkedSpec::HandlerVariantEmitter` (HandlerIR + backend dispatch + JSON/AST backend)
   - new: `t/phase0_validation_fuzz.t` (Validation.pm systematic fuzzing harness, 5 surfaces)
   - new: `tools/cross_check_spec_parsers.pl` (oracle vs candidate cross-check harness)
@@ -172,6 +180,12 @@ This document is the current high-level technical reading of the project shape. 
 - `RuntimeContext` is one of the cleanest and most important boundaries in the tree.
 - `Compiler.pm` now also has one explicit internal compiled-spec state model, so descriptor assembly no longer treats loose parallel compiled-rule-table / `build_dependency_regex_map` hashes as its own source of truth.
 - Dynamic plugin loading is still present in the public facade, but current project direction treats it as legacy-removal territory rather than a feature family to preserve.
+- The Rust variant's production path is still an interpreter over `CompiledSpec`/`CompiledRule`, but it is now
+  parity-tested through a checked-in 88-fixture oracle corpus generated from the Perl reference and guarded against
+  manifest drift.
+- The Rust generated-source path is no longer just a scaffold: `linkedspec_runtime::source_emitter` emits
+  compilable Rust modules with a generated family plan, and the plan-aware executor directly handles every current
+  non-REP and REP structural family. Its corpus proof is deliberately curated rather than exhaustive.
 
 ## LinkedSpec Facade Reading
 `perl/LinkedSpec.pm` does almost no real work itself. Its main roles are:

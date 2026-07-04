@@ -46,8 +46,9 @@ execution, `.8.3.3` landed direct AND acode generated execution, `.8.3.4`
 landed direct AND/OR bcode generated execution, `.8.3.5` closed the
 non-repetition generated-family matrix, and `.8.4` closed direct REP
 generated-family execution. `RUST-PARITY.8.5` then added generated-source
-validation against a manifest-backed corpus subset. The current frontier is
-`RUST-PARITY.9`: documentation sync/finalization.
+validation against a manifest-backed corpus subset, and `RUST-PARITY.9` closed
+the Rust parity follow-on documentation state. The next PNT frontier is
+`TOP-RULE-AS-NORMAL.3.2`.
 
 The later lanes are:
 

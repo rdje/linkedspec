@@ -50,9 +50,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 
 ## Task Tree
 
-- ID: `TOP-RULE-AS-NORMAL` · Status: `active` (acceptance MET; tree stays open only because `.3.2` is
-    `blocked` on `RUST-PARITY` — frontier is otherwise empty) · Children: `.1` (done), `.2` (done),
-    `.3` (active: `.3.1` done, `.3.2` blocked), `.4` (done)
+- ID: `TOP-RULE-AS-NORMAL` · Status: `active` (frontier `.3.2`, unblocked after
+    `RUST-PARITY` closure) · Children: `.1` (done), `.2` (done),
+    `.3` (active: `.3.1` done, `.3.2` pending), `.4` (done)
 - ID: `TOP-RULE-AS-NORMAL.1` · Status: `done` (2026-06-23)
   Goal: Read-only investigation — what does the engine actually special-case about `::` w.r.t. regex and
     recursion? Establish the real model + the precise gap, before any engine edit.
@@ -188,7 +188,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     existing Rust tests stay green; new Rust regression lock; Perl phase0 + full local gate unaffected. **MET.**
   Verification: see Verification Log (`.3.1`).
   Commit: (this commit)
-- ID: `TOP-RULE-AS-NORMAL.3.2` · Status: `blocked`
+- ID: `TOP-RULE-AS-NORMAL.3.2` · Status: `pending`
   Goal: **Value parity** — the Rust variant produces the same parse OUTPUT as Perl for recursive top-rule
     grammars: body-recursion `(a(b)c)`→`["a",["b"],"c"]`, top-recursion-with-`LX` `(a(b)c)`→`[["a",["b"],"c"]]`
     and `(a) (b)`→`[["a"],["b"]]` (subject to the documented Perl↔Rust accumulator output-shape rule).
@@ -199,13 +199,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     gap** (atoms/`entry_text()` in nested dispatch + multi-slot `-> rule[1]` self-entry + accumulator return),
     which the Rust corpus harness already documents as deferred and landing incrementally under `RUST-PARITY`
     (`tests/corpus_oracle.rs`: Lispish needs `RUST-PARITY.7.5.2`; recursive specs deferred from the corpus).
-  Blocker: the Rust engine cannot yet correctly parse recursive S-expression-class grammars (returns nulls);
-    that capability is owned by `RUST-PARITY` (recursive-spec parity, e.g. Lispish `.7.5.2`+).
-  Unblock condition: `RUST-PARITY` lands recursive-grammar parse parity (a recursive body grammar like
-    `specs/Lispish.spec` produces the Perl-matching nested AST in Rust). Then `.3.2` adds the top-rule
-    recursion oracle corpus entries / Rust locks on top of that capability.
-  Next task instead: `.4` (book reconciliation) is PNT-eligible now; `.3.2` re-enters the frontier when the
-    blocker clears.
+  Blocker cleared: `RUST-PARITY` landed recursive-grammar parity evidence (`Lispish` direct-access fixture,
+    restored `tclite` recursive fixtures, 88-fixture manifest oracle) and closed on 2026-07-04.
+  Next task: add the top-rule recursion oracle corpus entries / Rust locks on top of that now-landed capability.
   Verification: `pending`  ·  Commit: `pending`
 - ID: `TOP-RULE-AS-NORMAL.4` · Status: `done` (2026-06-23) (absorbs the superseded `PHASE0-BACKHALF-TRIAGE.6` book work)
   Goal: Book reconciliation to the new model — demote "Body rule only" / "no regex on top" from law to
@@ -256,9 +252,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | — | `.2.1` | `done` 2026-06-23 | Forward-progress / consume-before-recurse termination guard (one-site (rule,pos) cutoff in `SpecEntry.pm`) + 3 phase0 locks; 960→963 green, full gate EXIT 0. |
 | — | `.2.2` | `done` 2026-06-23 | Top re-entry recursion VALUE correctness — CONFIRMED no engine defect: the top-recursive grammar parses with the `LX` accumulator idiom (`null` was the missing-`LX` authoring case); TOP vs BODY are different grammars (different arity). Doc+lock, engine frozen. +1 phase0 lock; 963→964. |
 | — | `.3.1` | `done` 2026-06-23 | Termination parity — Rust forward-progress / consume-before-recurse guard (mirror of `.2.1`): a no-consume recursive cycle now terminates cleanly (no native stack overflow / SIGABRT) instead of crashing; +1 Rust lock; Rust 242→243 green, zero regression. |
-| — | `.3.2` | `blocked` | Value parity on recursive top-rule grammars — blocked on the GENERAL recursive-grammar parse gap (Rust returns nulls even for the standard body-recursion idiom), owned by `RUST-PARITY` (Lispish `.7.5.2`+). Out of frontier until that capability lands. |
+| 1 | `.3.2` | `pending` | Value parity on recursive top-rule grammars — unblocked now that `RUST-PARITY` closed recursive-grammar parity evidence. |
 | — | `.4` | `done` 2026-06-23 | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`): demoted law→idiom across 6 book files; documented `::`=entry-marker, the consume-before-recurse termination rule (formal-grammar §5.4), and recursive-top-rule-needs-`LX`; de-footgunned the `Pair::AND` example (`entry_text()`→`match_group(0)`) + fixed the multi-pair consume/seek output bug; +1 phase0 lock (964→965); KM card [[top-rule-reads-own-match-with-match-family]]; `mdbook build` EXIT 0. |
-| — | _(empty)_ | — | **No PNT-eligible leaf remains.** Tree acceptance is MET; only `.3.2` (value parity) remains, `blocked` on `RUST-PARITY` recursive-grammar parse parity — out of frontier until that capability lands. PNT should select the next active tree (`SPEC-FORMAT-TERSE.1.x`). |
+| — | _(empty after `.3.2`)_ | — | After `.3.2`, re-evaluate whether the tree can close. |
 
 ## Decisions
 
@@ -361,8 +357,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
   consume-before-recurse recursion (which advances `ctx.pos` first) is untouched. +2 integration locks; Rust
   suite **242→244 green**; **phase0 964/964** + `bash tools/run_ci_local.sh` **EXIT 0** (Perl unchanged).
   KM card [[top-rule-recursion-forward-progress-guard]] updated with the Rust parity. **`.3.2`** records the
-  diagnosed value gap and is `blocked` on `RUST-PARITY` recursive-grammar parity. Book reconciliation stays
-  owned by `.4`. Marked `.3` `active` (container), `.3.1` `done`, `.3.2` `blocked`.
+  diagnosed value gap and was blocked on `RUST-PARITY` recursive-grammar parity until the 2026-07-04 Rust parity
+  closeout. Book reconciliation stays owned by `.4`. Marked `.3` `active` (container), `.3.1` `done`, `.3.2`
+  `pending`.
 - `2026-06-23` (`.2.2`): **CONFIRMED no engine defect — `.2` complete; engine stays frozen.** `probe9.pl`
   (dump-don't-transcribe) showed a recursive rule used AS the top rule parses correctly with an `LX`
   accumulator-return: `(a)`→`[["a"]]`, `(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]`. The `(a) (b)`

@@ -228,6 +228,10 @@ authored proof fixtures, terse helper/control/user-function fixtures, and
 shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
 full 88-fixture corpus remains the Rust interpreter oracle gate unless a later
 leaf explicitly broadens generated-source corpus coverage.
+`RUST-PARITY.9` closed the Rust follow-on documentation state around that
+boundary: interpreter parity is the 88-fixture corpus contract, while generated
+source currently proves direct structural-family execution plus the curated
+manifest subset.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`

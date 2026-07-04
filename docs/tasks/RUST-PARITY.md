@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `RUST-PARITY`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (`.8.5` done — generated source has
-  all-family plus manifest-backed corpus-subset proof; frontier is `.9`)
+- Last updated: `2026-07-04` (`.9` done — Rust parity follow-on
+  finalized; next PNT leaf is `TOP-RULE-AS-NORMAL.3.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -34,7 +34,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 ## Task Tree
 
 - ID: `RUST-PARITY`
-  Status: `active`
+  Status: `done`
   Goal: Bring Rust variant to full parity with Perl reference
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`
 
@@ -552,7 +552,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Children: `.8.3.1` (done), `.8.3.2` (done), `.8.3.3` (done), `.8.3.4` (done), `.8.3.5` (done)
   Acceptance: Generated Rust covers default, OR, AND single/sequential acode, AND bcode, and OR bcode structural families with representative compile/run tests and parity against the interpreter/oracle for focused fixtures
   Note: Split 2026-07-04 (PNT rule 5). A source audit for the first implementation pass found `.8.3` still bundles multiple independently-reviewable mechanisms: Rust `CompiledRule` lacks enough rule-mode metadata to distinguish OR-bcode from AND-bcode robustly; generated source needs an explicit family plan before per-family runtime execution can be proven; acode, bcode, and final matrix coverage have separate risks and test shapes. No Rust code changed in this split.
-  Verification: Done — `.8.3.1` added generated family-plan metadata, `.8.3.2` added direct default/OR acode execution, `.8.3.3` added direct AND acode execution, `.8.3.4` added direct AND/OR bcode execution, `.8.3.5` closed the non-repetition generated-family matrix, and `.8.4` added direct REP generated-family execution. `.8.5` later added the manifest-backed generated-source corpus-subset proof, and current executable frontier is `.9`.
+  Verification: Done — `.8.3.1` added generated family-plan metadata, `.8.3.2` added direct default/OR acode execution, `.8.3.3` added direct AND acode execution, `.8.3.4` added direct AND/OR bcode execution, `.8.3.5` closed the non-repetition generated-family matrix, and `.8.4` added direct REP generated-family execution. `.8.5` later added the manifest-backed generated-source corpus-subset proof, and `.9` closed the tree.
   Commit: `RUST-PARITY.8.3 - split non-repetition emitter lane` (see Commit Log)
 
 - ID: `RUST-PARITY.8.3.1`
@@ -605,11 +605,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.8.5 - integrate generated source with oracle corpus` (see Commit Log)
 
 - ID: `RUST-PARITY.9`
-  Status: `pending`
+  Status: `done`
   Goal: Documentation sync and finalization — update book, roadmap, live docs
   Acceptance: ROADMAP_V2.md tracker updated; CHANGES.md + DEVELOPMENT_NOTES.md + MEMORY.md updated; book backend-handoff.md refreshed; ARCHITECTURE_STATE.md updated
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-04. `ROADMAP_V2.md` marks the Rust follow-on row done and records the generated-source coverage boundary; `ARCHITECTURE_STATE.md` now reflects the 88-fixture interpreter oracle plus direct generated-source executor; the mdBook backend handoff and `rust/README.md` describe the current generated-source direct-execution/subset-proof status; live docs and task-tree index close `RUST-PARITY`; `TOP-RULE-AS-NORMAL.3.2` is unblocked as the next PNT leaf because its Rust recursive-grammar prerequisite landed under `RUST-PARITY`. Verification passed: `mdbook build docs/linkedspec-book`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh`.
+  Commit: `RUST-PARITY.9 - finalize Rust parity documentation` (see Commit Log)
 
 ## Current Frontier
 
@@ -626,6 +626,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.8.3.5` | `done` | non-repetition generated-family matrix closed; direct generated execution covers all six non-REP families |
 | — | `RUST-PARITY.8.4` | `done` | REP generated families and termination guards landed |
 | — | `RUST-PARITY.8.5` | `done` | generated-source validation now combines the all-family matrix with a manifest-backed oracle corpus subset |
+| — | `RUST-PARITY.9` | `done` | documentation/finalization closed the tree and routed PNT to `TOP-RULE-AS-NORMAL.3.2` |
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
 | — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
@@ -658,9 +659,9 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.6` | `done` | seven RTL/plugin/legacy safety smokes landed; richer mismatches routed to follow-up instead of broadening `.7.3` |
 | — | `RUST-PARITY.7.4` | `done` | manifest-backed regression guard finalized the oracle corpus; runner rejects missing/stale fixture drift |
 | — | `RUST-PARITY.8` | `done` | code-gen emitter lane split and closed; `.8.1` contract/inventory, `.8.2` scaffold/harness, `.8.3.*` non-REP direct execution, `.8.4` REP direct execution, and `.8.5` oracle/corpus subset integration are complete |
-| 1 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.9` | `done` | documentation sync + finalization closed the tree |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.5`; all `.7.5` shipped recursive-spec blockers are closed, `.7.2` and `.7.3` expanded the shipped-spec corpus to 88 fixtures, `.7.4` finalized the manifest guard, and `.7` is closed. `.8` split the same way and is now closed: `.8.2` landed the generated-source scaffold/harness, `.8.3.1`–`.8.3.5` landed the non-REP family-plan, acode, bcode direct-execution slices, and matrix closeout, `.8.4` landed REP direct execution, and `.8.5` integrated generated-source validation with a manifest-backed corpus subset. Current frontier is `.9`.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.5`; all `.7.5` shipped recursive-spec blockers are closed, `.7.2` and `.7.3` expanded the shipped-spec corpus to 88 fixtures, `.7.4` finalized the manifest guard, and `.7` is closed. `.8` split the same way and is now closed: `.8.2` landed the generated-source scaffold/harness, `.8.3.1`–`.8.3.5` landed the non-REP family-plan, acode, bcode direct-execution slices, and matrix closeout, `.8.4` landed REP direct execution, and `.8.5` integrated generated-source validation with a manifest-backed corpus subset. `.9` closed roadmap/live-doc/book/architecture alignment and the `RUST-PARITY` tree is done.)
 
 ## Decisions
 
@@ -709,6 +710,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-07-04` (`.8.3.5` implementation): non-repetition generated-family matrix closed. `GeneratedPlanExecutor::execute_rule` now matches exhaustively over `GeneratedRuleFamily`, so every non-REP generated family enters direct execution and `Repetition` is the only fallback-owned family. The source-emitter matrix now asserts that its generated-module cases cover `Default`, `OrAcode`, `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, and `OrBcode` before REP work starts. Frontier → `.8.4`.
 - `2026-07-04` (`.8.4` implementation): repetition generated-family direct execution landed. `GeneratedRuleFamily::Repetition` is retained only as a compatibility enum value; current classification emits explicit `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode` families. Generated execution routes all four directly. The shared Rust runtime now loops repeated blind-call OR choices and AND sequences with min/max bounds plus zero-progress termination, and REP-AND acode counts a complete ordered regex group as one repetition. The source-emitter matrix now covers every non-REP and REP generated family, plus zero-progress and recursion-guard cases. Frontier → `.8.5`.
 - `2026-07-04` (`.8.5` implementation): generated-source validation is now connected to the oracle/corpus contract. The existing generated-source matrix remains the all-family proof for every supported structural family, while a new manifest-backed subset test loads the real oracle manifest, verifies selected case names are present, checks interpreter output against `[expected.json]`, emits generated Rust modules for the same compiled specs, and compiles/runs those generated modules in an isolated temp crate. The subset deliberately covers authored oracle proofs, terse helper/control/user-function surfaces, shipped recursive `tclite`, and shipped `portmap`. Limitation is explicit: generated-source corpus validation is a curated subset, not all 88 fixtures; the full 88-fixture gate remains `corpus_oracle` on the interpreter path. `.8` is closed; frontier → `.9`.
+- `2026-07-04` (`.9` finalization): `RUST-PARITY` is closed. Roadmap, task-tree, live recovery docs, mdBook backend handoff, Rust README, and `ARCHITECTURE_STATE.md` now agree: the Rust interpreter oracle is green over 88 manifest fixtures plus drift guards; generated source directly runs every supported structural family and has all-family plus 8-case manifest-backed subset proof; full corpus generated-source coverage remains future work. Closing `RUST-PARITY` also clears the dependency blocker for `TOP-RULE-AS-NORMAL.3.2`, which is the next PNT leaf.
 - `2026-07-02` (`.7.5.3` reconciliation): `.7.5.3` is closed without new runtime code in this slice because the
   implementation landed later under owned `SPEC-FORMAT-TERSE` leaves. `SPEC-FORMAT-TERSE.2.3.3.1` added the
   parser/compiler/runtime metadata path for action-edge fluent chains and no-arg `.push` / `.return(expr)` /
@@ -845,6 +847,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-04` | `RUST-PARITY.8.3.5` | focused Rust fmt/source-emitter/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated-plan routing is exhaustive for all six non-REP families, `Repetition` is the only generated fallback, and the source-emitter matrix asserts complete non-REP family coverage before REP work. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.4` |
 | `2026-07-04` | `RUST-PARITY.8.4` | focused Rust fmt/source-emitter/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated source now classifies and directly runs `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode`; repeated bcode paths honor min/max and zero-progress termination; REP-AND acode counts complete ordered groups; the generated-source matrix covers all REP families plus zero-progress, recursion termination, and legacy `Repetition` plan compatibility. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.5` |
 | `2026-07-04` | `RUST-PARITY.8.5` | focused Rust fmt/source-emitter/corpus/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — `source_emitter` now has 3 tests: all-family generated-source matrix, legacy `Repetition` compatibility, and generated-source validation over an 8-case manifest-backed corpus subset (`proof_edge_array_literal`, `proof_edge_scalar_literal`, `autoexist_array_bare_arg`, `terse_1_5_2_primitive_literals`, `terse_2_2_3_attached_if_blocks`, `terse_4_3_2_user_function_runtime`, `tclite_command_subst`, `portmap_bare`). Focused `source_emitter` passed 3/3, `corpus_oracle` passed 3/3, runtime lib passed 126/126, and `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.9` |
+| `2026-07-04` | `RUST-PARITY.9` | mdBook build; memory/doctrine/whitespace gates; full local CI | PASS — roadmap/live docs/book/architecture state now agree on the closed Rust follow-on, generated-source coverage boundary, and next PNT leaf (`TOP-RULE-AS-NORMAL.3.2`). `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -928,6 +931,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.8.3.5` | `RUST-PARITY.8.3.5 - close non-REP generated matrix` | generated-plan routing is exhaustive for all non-REP generated families; source-emitter matrix asserts complete non-REP family coverage; REP remains the only fallback |
 | `RUST-PARITY.8.4` | `RUST-PARITY.8.4 - emit REP generated families` | generated source classifies and directly runs explicit REP families; source-emitter matrix covers REP subfamilies, termination guards, and legacy `Repetition` compatibility |
 | `RUST-PARITY.8.5` | `RUST-PARITY.8.5 - integrate generated source with oracle corpus` | source-emitter test now validates generated source against all supported structural families plus a manifest-backed 8-case oracle corpus subset |
+| `RUST-PARITY.9` | `RUST-PARITY.9 - finalize Rust parity documentation` | Rust parity follow-on tree closed; roadmap/live docs/book/architecture state synchronized; next PNT leaf routed to `TOP-RULE-AS-NORMAL.3.2` |
 
 ## Changelog
 

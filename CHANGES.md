@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.9 — finalize Rust parity documentation
+
+**Scope:** Rust parity closeout documentation, roadmap/task-tree status, architecture snapshot, mdBook backend
+handoff, live recovery docs, and next-frontier routing.
+
+**What changed:** Closed the `RUST-PARITY` follow-on tree after the generated-source/oracle integration work.
+`ROADMAP_V2.md`, `docs/TASK_TREE.md`, `docs/tasks/RUST-PARITY.md`, `ARCHITECTURE_STATE.md`, the mdBook backend
+handoff, `rust/README.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` now agree on the
+current Rust state: the interpreter oracle is green over 88 manifest fixtures plus drift guards; generated source
+directly executes every current structural family; and generated-source corpus proof remains a curated subset until
+a future leaf broadens it.
+
+**Evidence:** The closeout also clears stale PNT routing that pointed back to `RUST-PARITY.9`. With `RUST-PARITY`
+closed, `TOP-RULE-AS-NORMAL.3.2` is the next owned frontier leaf because its recursive-grammar Rust blocker has
+cleared.
+
 ## 2026-07-04 — RUST-PARITY.8.5 — integrate generated source with oracle corpus
 
 **Scope:** Rust generated-source test harness, oracle/corpus integration proof, task-tree frontier docs, mdBook
