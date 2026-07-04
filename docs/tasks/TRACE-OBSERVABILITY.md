@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.3.4.2` EmitContext owner-bridge trace closed)
+- Last updated: `2026-07-04` (`.3.4.3` ActionIR pipeline trace closed)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -73,8 +73,9 @@ The important gaps are now pinned:
   bcode call dispatch, and no-match/LX/EX paths). `.3.2` and `.3.3` have since wired the Perl reference
   non-repetition and repetition generated templates through `trace_generated_handler_branch(...)`.
 - Generated in-body trace now covers match/dispatch/repetition control flow for the current Perl reference
-  templates; RuleIR planning decisions and the EmitContext owner bridge/rewrite orchestration layer are now traced,
-  while scanner/canonical/diagnostic/rewrite-pipeline owner internals stay the next opaque coverage area.
+  templates; RuleIR planning decisions, the EmitContext owner bridge/rewrite orchestration layer, and the
+  scanner/canonical/diagnostic/rewrite-pipeline ActionIR internals are now traced. Compact lowering owners and
+  `ActionIR::MethodLowering` remain the next opaque coverage areas.
 - Rust currently has no analogous trace API/sink surface in `rust/linkedspec-runtime`; `rg` finds no runtime trace
   implementation beyond ordinary test variables named `log`.
 
@@ -202,14 +203,27 @@ Coverage plan:
     `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`;
     `bash scripts/check_doctrines.sh`; `git diff --check`; `git diff --cached --check`;
     `bash tools/run_ci_local.sh`.
-  Commit: `pending this commit`
-- ID: `TRACE-OBSERVABILITY.3.4.3` · Status: `active`
+  Commit: `c8cbd663` (`TRACE-OBSERVABILITY.3.4.2 - trace EmitContext owner bridge`)
+- ID: `TRACE-OBSERVABILITY.3.4.3` · Status: `done` (closed 2026-07-04)
   Goal: Instrument scanner/canonical/diagnostic/rewrite-pipeline owners for helper-event discovery, canonical
     event queue/fallback decisions, unresolved-helper diagnostics, RAW_PERL/unmatched-event fallbacks, and implicit
     flow closure handling.
-  Verification: `pending`
+  Acceptance: done — debug trace now reports `actionir:<owner>:<phase>:<label>:<decision>` decisions and matching
+    debug scopes for scanner/scanner-core helper-event discovery, canonical helper queue/fallback decisions,
+    registered value-drop recognition, unmatched helper scan events, diagnostic unresolved/unsupported helper
+    handoffs, rewrite-rule construction, canonical lowering decisions, source-span/contract skips, RAW_PERL
+    fallback preservation, and implicit attached-if closure insertion/appending.
+  Verification: `perl -c -Iperl perl/LinkedSpec/ActionIR/Trace.pm`;
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner.pm`;
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/ScannerCore.pm`;
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/CanonicalEvents.pm`;
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/Diagnostics.pm`;
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/RewritePipeline.pm`;
+    `perl -c -Iperl t/trace_actionir_pipeline.t`; `prove -v -Iperl t/trace_actionir_pipeline.t`;
+    adjacent RuleIR/EmitContext/generated-handler trace suites; mdBook; Knowledge Map; memory/doctrine;
+    whitespace; `bash tools/run_ci_local.sh`.
   Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.3.4.4` · Status: `pending`
+- ID: `TRACE-OBSERVABILITY.3.4.4` · Status: `active`
   Goal: Instrument the compact ActionIR lowering owners outside MethodLowering: value/flow/control/declaration/
     array-pipeline branch decisions and owner ENTER/EXIT scopes.
   Verification: `pending`
@@ -236,12 +250,11 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.3.4.3` | `active` | Cover scanner/canonical/diagnostic/rewrite pipeline decisions after the bridge semantics are visible. |
-| 2 | `.3.4.4` | `pending` | Cover compact lowering owners before the largest MethodLowering owner. |
-| 3 | `.3.4.5` | `pending` | Instrument MethodLowering separately because it is large and high-risk. |
-| 4 | `.3.4.6` | `pending` | Close compile/ActionIR coverage docs/probes. |
-| 5 | `.3.5` | `pending` | Close overall trace coverage docs/probes and decide the backend-parity split. |
-| 6 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
+| 1 | `.3.4.4` | `active` | Cover compact lowering owners before the largest MethodLowering owner. |
+| 2 | `.3.4.5` | `pending` | Instrument MethodLowering separately because it is large and high-risk. |
+| 3 | `.3.4.6` | `pending` | Close compile/ActionIR coverage docs/probes. |
+| 4 | `.3.5` | `pending` | Close overall trace coverage docs/probes and decide the backend-parity split. |
+| 5 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
 
 ## Decisions
 
@@ -269,7 +282,11 @@ Coverage plan:
   events. `.3.4.2` has since closed the EmitContext owner-bridge visibility layer.
 - `2026-07-04`: `.3.4.2` instruments EmitContext owner-bridge and rewrite orchestration decisions with
   `emit_context:<phase>:<label>:<decision>` debug events. Scanner/canonical/diagnostic/rewrite-pipeline internals
-  remain owned by `.3.4.3`.
+  have since closed under `.3.4.3`.
+- `2026-07-04`: `.3.4.3` instruments scanner, scanner-core, canonical-events, diagnostics, and rewrite-pipeline
+  owner internals with `actionir:<owner>:<phase>:<label>:<decision>` debug events. Scanner trace records
+  event-producing matches rather than every no-match probe because diagnostics replay every rewrite contract.
+  Compact lowering owners remain owned by `.3.4.4`; `ActionIR::MethodLowering` remains owned by `.3.4.5`.
 
 ## Open Questions
 
@@ -296,6 +313,7 @@ Coverage plan:
 | `2026-07-04` | `.3.4` | `rg` trace call-site inventory; `wc -l` owner sizing; targeted RuleIR/EmitContext/ActionIR owner reads; memory/doctrine/Knowledge Map/whitespace gates | PASS — compile/ActionIR coverage split before code |
 | `2026-07-04` | `.3.4.1` | `perl -c -Iperl perl/LinkedSpec/RuleIR.pm`; `perl -c -Iperl t/trace_ruleir_planning.t`; `prove -v -Iperl t/trace_ruleir_planning.t`; mdBook; Knowledge Map; memory/doctrine/whitespace; `bash tools/run_ci_local.sh` | PASS — RuleIR planning decisions traced through direct probes and normal descriptor compilation |
 | `2026-07-04` | `.3.4.2` | `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`; `perl -c -Iperl t/trace_emit_context_bridge.t`; `prove -v -Iperl t/trace_emit_context_bridge.t`; `prove -v -Iperl t/trace_ruleir_planning.t t/trace_emit_context_bridge.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — EmitContext bridge and rewrite orchestration decisions traced through direct probes and Trace-lazy subprocess coverage; full local CI passed with phase0 1021 green |
+| `2026-07-04` | `.3.4.3` | `perl -c -Iperl perl/LinkedSpec/ActionIR/Trace.pm`; `perl -c -Iperl perl/LinkedSpec/ActionIR/{Scanner.pm,ScannerCore.pm,CanonicalEvents.pm,Diagnostics.pm,RewritePipeline.pm}`; `perl -c -Iperl t/trace_actionir_pipeline.t`; `prove -v -Iperl t/trace_actionir_pipeline.t`; `prove -v -Iperl t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t`; `prove -v -Iperl t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — ActionIR pipeline decisions traced through scanner/canonical/diagnostic/rewrite probes, attached-if closure handling, and Trace-lazy subprocess coverage; full local CI passed with phase0 1021 green |
 
 ## Commit Log
 
@@ -310,7 +328,8 @@ Coverage plan:
 | `.3.3` | `a225db82` (`TRACE-OBSERVABILITY.3.3 - trace repetition generated paths`) | Repetition generated handler template loop/min/max/zero-progress branch call-site wiring. |
 | `.3.4` | `f488d0ed` (`TRACE-OBSERVABILITY.3.4 - split compile action trace coverage`) | Split compile/ActionIR trace coverage into signoff-sized sub-leaves; no runtime/code behavior change. |
 | `.3.4.1` | `b36a9386` (`TRACE-OBSERVABILITY.3.4.1 - trace RuleIR planning decisions`) | RuleIR planning decision trace call-site wiring. |
-| `.3.4.2` | `pending this commit` (`TRACE-OBSERVABILITY.3.4.2 - trace EmitContext owner bridge`) | EmitContext owner-bridge and rewrite orchestration trace call-site wiring. |
+| `.3.4.2` | `c8cbd663` (`TRACE-OBSERVABILITY.3.4.2 - trace EmitContext owner bridge`) | EmitContext owner-bridge and rewrite orchestration trace call-site wiring. |
+| `.3.4.3` | `pending` (`TRACE-OBSERVABILITY.3.4.3 - trace ActionIR pipeline decisions`) | Scanner/canonical/diagnostic/rewrite-pipeline ActionIR trace call-site wiring. |
 
 ## Changelog
 
@@ -345,3 +364,7 @@ Coverage plan:
   callback/dependency bridge decisions, function-registry and bare-symbol-kind injection, rewrite compatibility
   fallback paths, canonical rewrite-pipeline use, and rule emit-context build scopes. `.3.4.3` is now the PNT
   frontier for scanner/canonical/diagnostic/rewrite-pipeline trace decisions.
+- `2026-07-04`: Closed `.3.4.3` ActionIR pipeline trace. Debug trace now reports scanner helper-event discovery,
+  canonical helper queue/fallback decisions, diagnostic unresolved/unsupported helper handoffs, rewrite-rule and
+  canonical-lowering decisions, RAW_PERL/unmatched-event fallbacks, and implicit attached-if closure handling.
+  `.3.4.4` is now the PNT frontier for compact lowering owner trace coverage outside `MethodLowering`.

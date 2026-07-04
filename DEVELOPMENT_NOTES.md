@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.4.3 — ActionIR pipeline trace):
+  ActionIR pipeline decisions use debug-level `actionir:<owner>:<phase>:<label>:<decision>` names through
+  `LinkedSpec::ActionIR::Trace`. Owners covered in this slice are `scanner`, `scanner_core`, `canonical_events`,
+  `diagnostics`, and `rewrite_pipeline`. The coverage includes helper-event discovery, canonical queue matching,
+  registered value-drop recognition, RAW_PERL fallback creation/preservation, unmatched helper scan events,
+  unsupported/unresolved helper diagnostics, rewrite-rule construction, canonical lowering decisions, source-span
+  skips, and implicit attached-if closure insertion/appending. Keep scanner trace intentionally focused on
+  event-producing matches rather than per-contract no-match lines because diagnostics replays every contract and
+  no-match noise would drown the useful signal. `ActionIR::Trace` must remain lazy: requiring ActionIR owners or
+  running compatibility rewrite paths without trace configured must not load `LinkedSpec::Trace`.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.4.2 — EmitContext owner-bridge trace):
   EmitContext bridge decisions use debug-level `emit_context:<phase>:<label>:<decision>` names. Current phases are
   `owner_package`, `owner_callback`, `owner_deps`, `owner_call`, `owner_call_with_deps`,

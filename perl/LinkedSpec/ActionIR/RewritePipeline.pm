@@ -15,6 +15,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
 
 sub _event_continues_implicit_if_flow {
  my ($event) = @_;
@@ -36,10 +37,35 @@ sub _flush_implicit_if_closures {
 sub _insert_pending_implicit_if_closures_before_stmt {
  my ($rewritten_ref, $ctx, $source_stmt, $event) = @_;
  return unless @{$ctx->{if_stack} || []};
- return if _event_continues_implicit_if_flow($event);
+ if (_event_continues_implicit_if_flow($event)) {
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'implicit_if',
+   label => $ctx->{trace_label},
+   decision => 'continues_implicit_if_flow',
+   taken => 1,
+   context => {
+    contract_id => ref($event) eq 'HASH' ? ($event->{contract_id} // '') : '',
+    source_stmt => $source_stmt,
+   },
+  );
+  return;
+ }
 
  my $closures = _flush_implicit_if_closures($ctx);
  return unless defined($closures) && length($closures);
+ my $closure_count = () = ($closures =~ /\}/g);
+ LinkedSpec::ActionIR::Trace::decision(
+  owner => 'rewrite_pipeline',
+  phase => 'implicit_if',
+  label => $ctx->{trace_label},
+  decision => 'closure_inserted_before_statement',
+  taken => 1,
+  context => {
+   closure_count => $closure_count,
+   source_stmt => $source_stmt,
+  },
+ );
 
  my $pos = index($$rewritten_ref, $source_stmt);
  if ($pos >= 0) {
@@ -233,6 +259,19 @@ sub default_deps_for_package {
 
 sub _lower_action_code_from_canonical_ir {
  my ($label, $code, $rewrite_rules, $canonical_ir_diag) = @_;
+ my $scope = LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => 'rewrite_pipeline',
+  phase => 'lower_action_code_from_canonical_ir',
+  label => $label,
+  details => {
+   label => defined($label) ? $label : '<undef>',
+   code_len => defined($code) ? length($code) : 0,
+   canonical_action_ir_count => ref($canonical_ir_diag) eq 'HASH'
+    ? scalar(@{$canonical_ir_diag->{canonical_action_ir_events} || []})
+    : 0,
+  },
+ );
 
  my %rewrite_by_id = map { $_->{id} => $_ } @$rewrite_rules;
  my $rewritten = $code;
@@ -242,6 +281,7 @@ sub _lower_action_code_from_canonical_ir {
   switch_counter => 0,
   while_counter  => 0,
   rewrite_rules => $rewrite_rules,
+  trace_label => $label,
  };
  my $source_search_pos = 0;
  my $previous_lowered;
@@ -266,12 +306,34 @@ sub _lower_action_code_from_canonical_ir {
 
   my $is_unmatched_helper_scan_event = (($event->{source} // '') eq 'unmatched_helper_scan_event') ? 1 : 0;
   if ($is_unmatched_helper_scan_event && _unmatched_event_is_inside_ambiguous_raw_statement($event, $canonical_events)) {
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'rewrite_pipeline',
+    phase => 'lower_action_code_from_canonical_ir',
+    label => $label,
+    decision => 'skip_ambiguous_unmatched_event',
+    taken => 1,
+    context => {
+     contract_id => $event->{contract_id},
+     raw => $source_stmt,
+    },
+   );
    $source_search_pos = $source_pos + length($source_stmt) if $source_pos >= 0;
    next;
   }
 
   my $kind = $event->{kind} // '';
   if ($kind eq 'RAW_PERL') {
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'rewrite_pipeline',
+    phase => 'lower_action_code_from_canonical_ir',
+    label => $label,
+    decision => 'raw_perl_fallback',
+    taken => 1,
+    context => {
+     raw => $source_stmt,
+     source => $event->{source} // '',
+    },
+   );
    $previous_lowered = undef;
    $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
@@ -279,6 +341,17 @@ sub _lower_action_code_from_canonical_ir {
 
   my $contract_id = $event->{contract_id};
   if (!(defined $contract_id && exists $rewrite_by_id{$contract_id})) {
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'rewrite_pipeline',
+    phase => 'lower_action_code_from_canonical_ir',
+    label => $label,
+    decision => 'missing_rewrite_contract',
+    taken => 1,
+    context => {
+     contract_id => defined($contract_id) ? $contract_id : '<undef>',
+     raw => $source_stmt,
+    },
+   );
    $previous_lowered = undef;
    $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
@@ -286,6 +359,17 @@ sub _lower_action_code_from_canonical_ir {
 
   my ($pos, $replace_len) = _find_source_stmt_span($rewritten, $source_stmt, 0);
   if ($pos < 0) {
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'rewrite_pipeline',
+    phase => 'lower_action_code_from_canonical_ir',
+    label => $label,
+    decision => 'source_span_missing',
+    taken => 1,
+    context => {
+     contract_id => $contract_id,
+     raw => $source_stmt,
+    },
+   );
    $previous_lowered = undef;
    $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
@@ -293,11 +377,35 @@ sub _lower_action_code_from_canonical_ir {
 
   my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt, $lower_ctx);
   if (!(defined($lowered_stmt) && length($lowered_stmt)) || $lowered_stmt eq $source_stmt) {
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'rewrite_pipeline',
+    phase => 'lower_action_code_from_canonical_ir',
+    label => $label,
+    decision => 'lowering_noop',
+    taken => 1,
+    context => {
+     contract_id => $contract_id,
+     raw => $source_stmt,
+     lowered_defined => defined($lowered_stmt) ? 1 : 0,
+    },
+   );
    $previous_lowered = undef;
    $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
    next;
   }
   substr($rewritten, $pos, $replace_len, $lowered_stmt);
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'lower_action_code_from_canonical_ir',
+   label => $label,
+   decision => $is_unmatched_helper_scan_event ? 'unmatched_helper_event_rewritten' : 'statement_rewritten',
+   taken => 1,
+   context => {
+    contract_id => $contract_id,
+    raw => $source_stmt,
+    lowered => $lowered_stmt,
+   },
+  );
   if (!$is_unmatched_helper_scan_event) {
    $previous_lowered = {
     lowered_stmt => $lowered_stmt,
@@ -309,16 +417,65 @@ sub _lower_action_code_from_canonical_ir {
   $source_search_pos = $source_pos + $source_len if $source_pos >= 0;
  }
  my $implicit_closures = _flush_implicit_if_closures($lower_ctx);
- $rewritten .= ' '.$implicit_closures if defined($implicit_closures) && length($implicit_closures);
+ if (defined($implicit_closures) && length($implicit_closures)) {
+  my $closure_count = () = ($implicit_closures =~ /\}/g);
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'implicit_if',
+   label => $label,
+   decision => 'closure_appended_at_end',
+   taken => 1,
+   context => {
+    closure_count => $closure_count,
+   },
+  );
+  $rewritten .= ' '.$implicit_closures;
+ }
  if (@{$lower_ctx->{if_stack}} || @{$lower_ctx->{switch_stack}}) {
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'lower_action_code_from_canonical_ir',
+   label => $label,
+   decision => 'unbalanced_flow_stack',
+   taken => 1,
+   context => {
+    if_stack => scalar(@{$lower_ctx->{if_stack}}),
+    switch_stack => scalar(@{$lower_ctx->{switch_stack}}),
+   },
+  );
+  LinkedSpec::ActionIR::Trace::exit_scope(
+   $scope,
+   {
+    status => 'fallback_original',
+    label => defined($label) ? $label : '<undef>',
+    rewritten_len => defined($code) ? length($code) : 0,
+   },
+  );
   return $code;
  }
 
+ LinkedSpec::ActionIR::Trace::exit_scope(
+  $scope,
+  {
+   status => 'ok',
+   label => defined($label) ? $label : '<undef>',
+   rewritten_len => defined($rewritten) ? length($rewritten) : 0,
+  },
+ );
  return $rewritten
 }
 
 sub _build_action_rewrite_rules {
  my ($label, $deps) = @_;
+ my $scope = LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => 'rewrite_pipeline',
+  phase => 'build_action_rewrite_rules',
+  label => $label,
+  details => {
+   label => defined($label) ? $label : '<undef>',
+  },
+ );
  $deps = {} unless ref($deps) eq 'HASH';
  my $build_action_lowering_contracts = (ref($deps->{build_action_lowering_contracts}) eq 'CODE')
   ? $deps->{build_action_lowering_contracts}
@@ -326,18 +483,49 @@ sub _build_action_rewrite_rules {
  die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'build_action_lowering_contracts'"
   unless ref($build_action_lowering_contracts) eq 'CODE';
  my $contracts = $build_action_lowering_contracts->($label);
- return [map {{
+ my $rules = [map {{
   id                 => $_->{id},
   ir_node            => $_->{ir_node},
   diag_name          => $_->{diag_name},
   compatibility_surface => $_->{compatibility_surface} ? 1 : 0,
   unresolved_pattern => $_->{unresolved_pattern},
   apply              => $_->{lower},
- }} @$contracts]
+ }} @$contracts];
+ LinkedSpec::ActionIR::Trace::decision(
+  owner => 'rewrite_pipeline',
+  phase => 'build_action_rewrite_rules',
+  label => $label,
+  decision => 'contracts_built',
+  taken => ref($rules) eq 'ARRAY',
+  context => {
+   rewrite_rule_count => ref($rules) eq 'ARRAY' ? scalar(@$rules) : 0,
+  },
+ );
+ LinkedSpec::ActionIR::Trace::exit_scope(
+  $scope,
+  {
+   status => 'ok',
+   label => defined($label) ? $label : '<undef>',
+   rewrite_rule_count => ref($rules) eq 'ARRAY' ? scalar(@$rules) : 0,
+  },
+ );
+ return $rules
 }
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules, $deps) = @_;
+ my $scope = LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => 'rewrite_pipeline',
+  phase => 'rewrite_action_code_with_diagnostics',
+  label => $label,
+  details => {
+   label => defined($label) ? $label : '<undef>',
+   code_len => defined($code) ? length($code) : 0,
+   rewrite_rules_supplied => ref($rewrite_rules) eq 'ARRAY' ? 1 : 0,
+   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+  },
+ );
  $deps = {} unless ref($deps) eq 'HASH';
  my $collect_action_helper_ir_nodes = (ref($deps->{collect_action_helper_ir_nodes}) eq 'CODE')
   ? $deps->{collect_action_helper_ir_nodes}
@@ -355,12 +543,55 @@ sub _rewrite_action_code_with_diagnostics {
  die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'find_unresolved_action_helpers'"
   unless ref($find_unresolved_action_helpers) eq 'CODE';
 
+ my $rewrite_rules_supplied = ref($rewrite_rules) eq 'ARRAY' ? 1 : 0;
  $rewrite_rules //= _build_action_rewrite_rules($label, $deps);
+ LinkedSpec::ActionIR::Trace::decision(
+  owner => 'rewrite_pipeline',
+  phase => 'rewrite_action_code_with_diagnostics',
+  label => $label,
+  decision => 'rewrite_rules_built',
+  taken => $rewrite_rules_supplied ? 0 : 1,
+  context => {
+   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+   rewrite_rules_supplied => $rewrite_rules_supplied,
+  },
+ );
  my $ir_diag = $collect_action_helper_ir_nodes->($code, $rewrite_rules);
+ LinkedSpec::ActionIR::Trace::decision(
+  owner => 'rewrite_pipeline',
+  phase => 'rewrite_action_code_with_diagnostics',
+  label => $label,
+  decision => 'helper_events_collected',
+  taken => ref($ir_diag) eq 'HASH' && ($ir_diag->{helper_action_ir_count} || 0) > 0,
+  context => {
+   helper_action_ir_count => ref($ir_diag) eq 'HASH' ? ($ir_diag->{helper_action_ir_count} || 0) : 0,
+  },
+ );
  my $canonical_ir_diag = $build_canonical_action_ir_events->($label, $code, $ir_diag->{helper_action_ir_events});
+ LinkedSpec::ActionIR::Trace::decision(
+  owner => 'rewrite_pipeline',
+  phase => 'rewrite_action_code_with_diagnostics',
+  label => $label,
+  decision => 'canonical_raw_perl_fallback',
+  taken => ref($canonical_ir_diag) eq 'HASH' && ($canonical_ir_diag->{canonical_action_ir_fallback_count} || 0) > 0,
+  context => {
+   canonical_action_ir_count => ref($canonical_ir_diag) eq 'HASH' ? ($canonical_ir_diag->{canonical_action_ir_count} || 0) : 0,
+   fallback_count => ref($canonical_ir_diag) eq 'HASH' ? ($canonical_ir_diag->{canonical_action_ir_fallback_count} || 0) : 0,
+  },
+ );
  my $rewritten = _lower_action_code_from_canonical_ir($label, $code, $rewrite_rules, $canonical_ir_diag);
  my $diag = $find_unresolved_action_helpers->($rewritten, $rewrite_rules);
- return ($rewritten, {
+ LinkedSpec::ActionIR::Trace::decision(
+  owner => 'rewrite_pipeline',
+  phase => 'rewrite_action_code_with_diagnostics',
+  label => $label,
+  decision => 'unresolved_helpers_found',
+  taken => ref($diag) eq 'HASH' && ($diag->{unresolved_helper_count} || 0) > 0,
+  context => {
+   unresolved_helper_count => ref($diag) eq 'HASH' ? ($diag->{unresolved_helper_count} || 0) : 0,
+  },
+ );
+ my $result_diag = {
   %$diag,
   helper_action_ir_count => $ir_diag->{helper_action_ir_count},
   helper_action_ir_hits  => $ir_diag->{helper_action_ir_hits},
@@ -371,7 +602,19 @@ sub _rewrite_action_code_with_diagnostics {
   canonical_action_ir_nodes => $canonical_ir_diag->{canonical_action_ir_nodes},
   canonical_action_ir_events => $canonical_ir_diag->{canonical_action_ir_events},
   canonical_action_ir_fallback_count => $canonical_ir_diag->{canonical_action_ir_fallback_count},
- })
+ };
+ LinkedSpec::ActionIR::Trace::exit_scope(
+  $scope,
+  {
+   status => 'ok',
+   label => defined($label) ? $label : '<undef>',
+   rewritten_len => defined($rewritten) ? length($rewritten) : 0,
+   helper_action_ir_count => $result_diag->{helper_action_ir_count} || 0,
+   canonical_action_ir_fallback_count => $result_diag->{canonical_action_ir_fallback_count} || 0,
+   unresolved_helper_count => $result_diag->{unresolved_helper_count} || 0,
+  },
+ );
+ return ($rewritten, $result_diag)
 }
 
 1;

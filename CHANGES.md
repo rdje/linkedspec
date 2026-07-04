@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.4.3 — trace ActionIR pipeline decisions
+
+**Scope:** Perl ActionIR scanner, scanner-core, canonical-events, diagnostics, rewrite-pipeline owners, focused
+trace regression, mdBook trace docs, toolbox, task-tree/frontier sync, live recovery docs, and Knowledge Map.
+
+**What changed:** ActionIR pipeline owners now emit debug-level
+`actionir:<owner>:<phase>:<label>:<decision>` trace decisions and matching debug scopes. The new coverage reports
+scanner helper-event discovery, canonical helper queue matching, registered value-drop handling, RAW_PERL fallback
+creation/preservation, unmatched helper scan events, unresolved helper diagnostics, rewrite-rule construction,
+canonical lowering decisions, missing source spans/contracts, and implicit attached-if closure insertion/appending.
+`LinkedSpec::ActionIR::Trace` centralizes this formatting while staying lazy: requiring ActionIR owners and running
+compatibility rewrites does not load `LinkedSpec::Trace` unless tracing was explicitly loaded/configured.
+
+**Evidence:** Focused coverage in `t/trace_actionir_pipeline.t` locks canonical return lowering, raw Perl
+fallbacks, unsupported helper diagnostics, attached-if implicit closure handling, and Trace-lazy require/rewrite
+behavior. Adjacent RuleIR, EmitContext, and generated-handler trace suites continue to pass; full local CI passes
+with phase0 at 1021 tests.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.4.2 — trace EmitContext owner bridge
 
 **Scope:** Perl `RuleIR::EmitContext` owner bridge, focused trace regression, mdBook trace docs, toolbox,

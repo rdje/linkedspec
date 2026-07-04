@@ -131,6 +131,11 @@ create a boundary. Nested semicolons inside expression payloads stay inside the 
 
 `ActionIR::RewritePipeline` glues the scan, classify, and lower phases together. It orchestrates the flow: scan for contracts, split statements, produce canonical events, and dispatch to the appropriate lowering owner for each event.
 
+At `debug` trace level, the Perl reference pipeline reports these stages with
+`actionir:<owner>:<phase>:<label>:<decision>` decisions. That trace can show scanner helper-event discovery,
+canonical queue matches or RAW_PERL fallbacks, unresolved helper diagnostics, rewrite-rule construction, source-span
+or contract skips, normal statement rewrites, unmatched helper events, and implicit attached-if closure insertion.
+
 ### Lowering owners
 
 Each contract family has a dedicated lowering owner:

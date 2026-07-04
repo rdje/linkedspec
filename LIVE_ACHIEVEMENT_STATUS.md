@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.3 — trace ActionIR pipeline decisions**
+  (ACTIONIR PIPELINE TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.4).
+
+  **Fix:** `perl/LinkedSpec/ActionIR/Trace.pm` now provides the shared lazy formatting seam for ActionIR owner
+  internals, and the scanner, scanner-core, canonical-events, diagnostics, and rewrite-pipeline owners emit
+  debug-level `DECISION actionir:<owner>:<phase>:<label>:<decision>` events plus matching owner scopes. The trace
+  reports helper-event discovery, canonical queue/fallback decisions, unresolved helper diagnostics, RAW_PERL and
+  unmatched-event fallback handling, source-span/contract skips, and implicit attached-if closure insertion or
+  append decisions without loading `LinkedSpec::Trace` for require-only consumers.
+
+  **Verification:** `perl -c` coverage for the touched ActionIR owners and `t/trace_actionir_pipeline.t`, focused
+  `prove` for the new ActionIR pipeline trace regression, adjacent RuleIR/EmitContext/generated-handler trace
+  suites, mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full local CI includes phase0
+  at 1021 green.
+
+  **Frontier:** `TRACE-OBSERVABILITY.3.4.4` — instrument compact ActionIR lowering owners outside
+  `MethodLowering`.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4.2 — trace EmitContext owner bridge**
   (EMITCONTEXT OWNER-BRIDGE TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.3).
 

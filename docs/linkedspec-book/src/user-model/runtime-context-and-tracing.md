@@ -290,11 +290,11 @@ The trace surface is useful for:
 - debugging mark/capture behavior
 
 Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
-handler wrappers, selected decisions, dumps, mark/capture events, debug-level RuleIR planning decisions, and
-debug-level EmitContext owner-bridge/rewrite-orchestration decisions. The Perl reference backend also emits
-debug-level generated-handler branch decisions for non-repetition dispatch paths and repetition loop paths.
-Scanner/canonical-event/diagnostic/rewrite-pipeline owner internals and the remaining ActionIR lowering owners are
-still planned coverage work until those owners are instrumented.
+handler wrappers, selected decisions, dumps, mark/capture events, debug-level RuleIR planning decisions,
+debug-level EmitContext owner-bridge/rewrite-orchestration decisions, and debug-level ActionIR
+scanner/canonical-event/diagnostic/rewrite-pipeline decisions. The Perl reference backend also emits debug-level
+generated-handler branch decisions for non-repetition dispatch paths and repetition loop paths. Compact ActionIR
+lowering owners and `ActionIR::MethodLowering` remain planned coverage work until those owners are instrumented.
 
 Tracing is controlled separately from runtime context.
 

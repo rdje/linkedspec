@@ -15,6 +15,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
 
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
@@ -45,6 +46,16 @@ sub default_deps_for_package {
 sub _find_unresolved_action_helpers {
  my ($code, $rewrite_rules, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
+ my $scope = LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => 'diagnostics',
+  phase => 'find_unresolved_action_helpers',
+  label => 'action_code',
+  details => {
+   code_len => defined($code) ? length($code) : 0,
+   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+  },
+ );
  my $split_action_ir_statements = (ref($deps->{split_action_ir_statements}) eq 'CODE')
   ? $deps->{split_action_ir_statements}
   : undef;
@@ -65,6 +76,18 @@ sub _find_unresolved_action_helpers {
    $hits{$helper_name} += $count;
    $total += $count;
    push @events, map { +{helper => $helper_name, raw => $statement} } (1 .. $count);
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'diagnostics',
+    phase => 'find_unresolved_action_helpers',
+    label => 'action_code',
+    decision => 'unresolved_pattern',
+    taken => 1,
+    context => {
+     helper => $helper_name,
+     raw => $statement,
+     count => $count,
+    },
+   );
   }
  }
  foreach my $statement (@statements) {
@@ -77,15 +100,35 @@ sub _find_unresolved_action_helpers {
     raw => $statement,
     reason => 'unsupported_ast_helper_call',
    };
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'diagnostics',
+    phase => 'find_unresolved_action_helpers',
+    label => 'action_code',
+    decision => 'unsupported_ast_helper_call',
+    taken => 1,
+    context => {
+     helper => $helper_name,
+     raw => $statement,
+    },
+   );
   }
  }
 
- return {
+ my $diag = {
   unresolved_helper_count => $total,
   unresolved_helper_hits  => \%hits,
   unresolved_helpers      => [sort keys %hits],
   unresolved_helper_events => \@events,
- }
+ };
+ LinkedSpec::ActionIR::Trace::exit_scope(
+  $scope,
+  {
+   status => 'ok',
+   unresolved_helper_count => $total,
+   unresolved_helper_count_distinct => scalar(keys %hits),
+  },
+ );
+ return $diag
 }
 
 #------------------------------------------------------------------------------
@@ -98,6 +141,16 @@ sub _find_unresolved_action_helpers {
 sub _collect_action_helper_ir_nodes {
  my ($code, $rewrite_rules, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
+ my $scope = LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => 'diagnostics',
+  phase => 'collect_action_helper_ir_nodes',
+  label => 'action_code',
+  details => {
+   code_len => defined($code) ? length($code) : 0,
+   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+  },
+ );
  my $scan_contract_ir_events = (ref($deps->{scan_contract_ir_events}) eq 'CODE')
   ? $deps->{scan_contract_ir_events}
   : undef;
@@ -111,6 +164,18 @@ sub _collect_action_helper_ir_nodes {
   my $ir_node = $rule->{ir_node} // $rule->{id};
   my $rule_events = $scan_contract_ir_events->($rule, $code);
   next unless ref($rule_events) eq 'ARRAY' && @$rule_events;
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'diagnostics',
+   phase => 'collect_action_helper_ir_nodes',
+   label => 'action_code',
+   decision => 'helper_ir_events_found',
+   taken => 1,
+   context => {
+    contract_id => $rule->{id},
+    ir_node => $ir_node,
+    event_count => scalar(@$rule_events),
+   },
+  );
   foreach my $event (@$rule_events) {
    push @events, {
     ir_node     => $ir_node,
@@ -123,12 +188,21 @@ sub _collect_action_helper_ir_nodes {
   }
  }
 
- return {
+ my $diag = {
   helper_action_ir_count => $total,
   helper_action_ir_hits  => \%hits,
   helper_action_ir_nodes => [sort keys %hits],
   helper_action_ir_events => \@events,
- }
+ };
+ LinkedSpec::ActionIR::Trace::exit_scope(
+  $scope,
+  {
+   status => 'ok',
+   helper_action_ir_count => $total,
+   helper_action_ir_node_count => scalar(keys %hits),
+  },
+ );
+ return $diag
 }
 
 #------------------------------------------------------------------------------

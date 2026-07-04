@@ -15,6 +15,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
 
 sub default_deps_for_package {
  my ($pkg) = @_;
@@ -94,6 +95,17 @@ sub _registered_user_function_value_drop_event {
 sub _build_canonical_action_ir_events {
  my ($label, $code, $helper_events, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
+ my $scope = LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => 'canonical_events',
+  phase => 'build_canonical_action_ir_events',
+  label => $label,
+  details => {
+   label => defined($label) ? $label : '<undef>',
+   code_len => defined($code) ? length($code) : 0,
+   helper_event_count => ref($helper_events) eq 'ARRAY' ? scalar(@$helper_events) : 0,
+  },
+ );
  my $trim_action_ir_value = (ref($deps->{trim_action_ir_value}) eq 'CODE')
   ? $deps->{trim_action_ir_value}
   : undef;
@@ -111,15 +123,50 @@ sub _build_canonical_action_ir_events {
   next unless defined($raw_key) && length($raw_key);
   my $canonical_event = _canonicalize_helper_action_ir_event($label, $helper_event, $deps);
   push @{$helper_event_queue{$raw_key}}, $canonical_event;
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'canonical_events',
+   phase => 'build_canonical_action_ir_events',
+   label => $label,
+   decision => 'queue_helper_event',
+   taken => 1,
+   context => {
+    raw => $raw_key,
+    kind => ref($canonical_event) eq 'HASH' ? ($canonical_event->{kind} // '') : '',
+    contract_id => ref($canonical_event) eq 'HASH' ? ($canonical_event->{contract_id} // '') : '',
+   },
+  );
  }
 
  my @canonical_events;
  my $fallback_count = 0;
  foreach my $statement (@{$split_action_ir_statements->($code)}) {
   if (exists $helper_event_queue{$statement} && @{$helper_event_queue{$statement}}) {
-   push @canonical_events, shift @{$helper_event_queue{$statement}};
+   my $event = shift @{$helper_event_queue{$statement}};
+   push @canonical_events, $event;
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'canonical_events',
+    phase => 'build_canonical_action_ir_events',
+    label => $label,
+    decision => 'statement_queue_match',
+    taken => 1,
+    context => {
+     raw => $statement,
+     kind => ref($event) eq 'HASH' ? ($event->{kind} // '') : '',
+     contract_id => ref($event) eq 'HASH' ? ($event->{contract_id} // '') : '',
+    },
+   );
   } elsif (_statement_is_registered_user_function_value_drop($statement, $deps)) {
    push @canonical_events, _registered_user_function_value_drop_event($statement);
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'canonical_events',
+    phase => 'build_canonical_action_ir_events',
+    label => $label,
+    decision => 'registered_value_drop',
+    taken => 1,
+    context => {
+     raw => $statement,
+    },
+   );
   } else {
    push @canonical_events, {
     kind        => 'RAW_PERL',
@@ -129,6 +176,17 @@ sub _build_canonical_action_ir_events {
     args        => {code => $statement},
    };
    ++$fallback_count;
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'canonical_events',
+    phase => 'build_canonical_action_ir_events',
+    label => $label,
+    decision => 'raw_perl_fallback',
+    taken => 1,
+    context => {
+     raw => $statement,
+     fallback_count => $fallback_count,
+    },
+   );
   }
  }
 
@@ -137,6 +195,18 @@ sub _build_canonical_action_ir_events {
    my $event = shift @{$helper_event_queue{$raw_key}};
    $event->{source} = 'unmatched_helper_scan_event';
    push @canonical_events, $event;
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'canonical_events',
+    phase => 'build_canonical_action_ir_events',
+    label => $label,
+    decision => 'unmatched_helper_event',
+    taken => 1,
+    context => {
+     raw => $raw_key,
+     kind => ref($event) eq 'HASH' ? ($event->{kind} // '') : '',
+     contract_id => ref($event) eq 'HASH' ? ($event->{contract_id} // '') : '',
+    },
+   );
   }
  }
 
@@ -148,13 +218,23 @@ sub _build_canonical_action_ir_events {
   ++$count;
  }
 
- return {
+ my $diag = {
   canonical_action_ir_count => $count,
   canonical_action_ir_hits  => \%hits,
   canonical_action_ir_nodes => [sort keys %hits],
   canonical_action_ir_events => \@canonical_events,
   canonical_action_ir_fallback_count => $fallback_count,
- }
+ };
+ LinkedSpec::ActionIR::Trace::exit_scope(
+  $scope,
+  {
+   status => 'ok',
+   label => defined($label) ? $label : '<undef>',
+   canonical_action_ir_count => $count,
+   fallback_count => $fallback_count,
+  },
+ );
+ return $diag
 }
 
 1;

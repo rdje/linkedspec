@@ -15,6 +15,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
 
 sub _require_scanner_core_pkg {
  LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::ActionIR::ScannerCore', 'scan_contract_ir_events');
@@ -46,8 +47,43 @@ sub default_deps_for_package {
 sub scan_contract_ir_events {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my ($contract, $code) = @args;
+  my $id = (ref($contract) eq 'HASH') ? ($contract->{id} // '') : '';
+  my $scope = LinkedSpec::ActionIR::Trace::enter(
+   package => __PACKAGE__,
+   owner => 'scanner',
+   phase => 'scan_contract_ir_events',
+   label => $id,
+   details => {
+    contract_id => $id,
+    code_len => defined($code) ? length($code) : 0,
+   },
+  );
   _require_scanner_core_pkg();
-  return LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@args)
+  my $events = LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@args);
+  my $event_count = ref($events) eq 'ARRAY' ? scalar(@$events) : 0;
+  if ($event_count) {
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'scanner',
+    phase => 'scan_contract_ir_events',
+    label => $id,
+    decision => 'events_found',
+    taken => 1,
+    context => {
+     contract_id => $id,
+     event_count => $event_count,
+    },
+   );
+  }
+  LinkedSpec::ActionIR::Trace::exit_scope(
+   $scope,
+   {
+    status => 'ok',
+    contract_id => $id,
+    event_count => $event_count,
+   },
+  );
+  return $events
  })
 }
 
