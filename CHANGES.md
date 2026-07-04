@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.5 — close trace contract and split parity
+
+**Scope:** mdBook trace contract wording, backend parity split, task-tree/frontier sync, live recovery docs,
+toolbox, and Knowledge Map. No runtime/code behavior changed in this slice.
+
+**What changed:** Closed the overall trace no-drift/contract leaf after the Perl reference trace suite stayed green
+across CLI, generated-handler, RuleIR, EmitContext, ActionIR pipeline, compact lowerer, and MethodLowering trace
+coverage. The mdBook now presents trace parity as a variant-neutral external behavior contract rather than Perl
+mechanics: levels, controls, sinks, reset behavior, enter/exit events, decision/branch events, mark/capture events,
+dump/log events, and default quiet behavior.
+
+The required backend parity work is now split into `.4.*` leaves. `.4.1` owns Rust trace contract/design inventory
+before Rust trace code; later leaves own Rust controls/sinks, compile-side events, runtime branch events, and parity
+closeout.
+
+**Evidence:** `perl bin/linkedspec --help` exposes trace controls; the nine-file Perl trace regression suite passes;
+and `rg` over `rust/` excluding corpus fixtures finds no trace API/control surface yet, confirming the `.4.*`
+parity lane is required.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.4.6 — close compile ActionIR trace coverage
 
 **Scope:** Compile/ActionIR trace closeout probes, mdBook trace coverage boundaries, toolbox, task-tree/frontier
@@ -186,7 +205,8 @@ and `.3.5` for coverage closeout plus the backend-parity split decision.
 
 **Evidence:** The split preserves the sequence established by the `.1` audit: generated handler semantics first,
 compile/ActionIR owner instrumentation after runtime branch trace semantics are concrete, and Rust trace parity
-only after the Perl reference trace model is explicit. The next frontier is `TRACE-OBSERVABILITY.3.1`.
+only after the Perl reference trace model is explicit. The frontier at completion was `TRACE-OBSERVABILITY.3.1`;
+`.3.1` through `.3.5` have since closed and `.4.1` now owns Rust trace parity design.
 
 ## 2026-07-04 — TRACE-OBSERVABILITY.2 — add trace CLI control
 

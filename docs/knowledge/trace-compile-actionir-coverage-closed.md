@@ -6,6 +6,7 @@ answers:
   - "what remains after MethodLowering trace coverage"
   - "does a normal compile emit all ActionIR trace namespaces"
   - "does TRACE-OBSERVABILITY.3.5 need more compile ActionIR instrumentation"
+  - "what remains after TRACE-OBSERVABILITY.3.5"
   - "how do I reverify compile ActionIR trace closeout"
 date: 2026-07-04
 status: current
@@ -28,5 +29,5 @@ A representative normal descriptor compile now emits these trace namespaces toge
 The same probe preserved ActionIR readiness (`ready=1 raw=0 unresolved=0`), so the closeout did not introduce raw
 Perl fallback or unresolved-helper drift.
 
-`TRACE-OBSERVABILITY.3.5` should focus on overall trace no-drift/examples and the Rust/future-variant trace parity
-split, not another known opaque compile/ActionIR owner.
+`TRACE-OBSERVABILITY.3.5` has since closed overall trace no-drift and split the Rust/future-variant trace parity
+lane. The active follow-up is `TRACE-OBSERVABILITY.4.1`, not another known opaque compile/ActionIR owner.

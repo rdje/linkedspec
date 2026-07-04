@@ -286,6 +286,11 @@ The trace capabilities documented here are an external contract for every Linked
 names and implementation mechanics may differ, but trace parity means equivalent user-visible controls, verbosity
 levels, event classes, and sink behavior.
 
+A variant that claims trace parity must let users enable the same observable behavior from that variant's normal
+entrypoints: ordered levels equivalent to `none` through `debug`, stdout/routed-file/mirror sink routing, reset
+behavior for routed files, structured enter/exit events, decision or branch events, mark/capture events where source
+boundaries exist, dump/log events, and unchanged default output when tracing is disabled.
+
 The trace surface is useful for:
 
 - understanding parser entry and dispatch
@@ -293,7 +298,7 @@ The trace surface is useful for:
 - inspecting decision points
 - debugging mark/capture behavior
 
-Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
+Current Perl reference coverage is useful and broad. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
 handler wrappers, selected decisions, dumps, mark/capture events, debug-level RuleIR planning decisions,
 debug-level EmitContext owner-bridge/rewrite-orchestration decisions, debug-level ActionIR
 scanner/canonical-event/diagnostic/rewrite-pipeline decisions, debug-level compact ActionIR lowerer decisions, and
@@ -302,7 +307,8 @@ Perl reference backend also emits debug-level generated-handler branch decisions
 and repetition loop paths.
 
 In the Perl reference backend, the planned compile/ActionIR owner coverage is closed through MethodLowering. The
-remaining trace work is overall coverage/no-drift closeout and the required Rust/future-variant parity split.
+remaining trace work is cross-variant parity: Rust and future variants must implement the same external trace
+capabilities before claiming trace parity.
 
 Tracing is controlled separately from runtime context.
 

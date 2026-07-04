@@ -8,6 +8,24 @@ This chapter documents the concrete trace API of the **Perl reference backend** 
 
 In the Perl reference backend, the trace API is a first-class public surface on the `LinkedSpec` facade. It delegates to `LinkedSpec::Trace`, the trace state and formatting owner.
 
+## Variant-neutral trace contract
+
+The portable contract is behavioral, not package-name based. A variant that claims trace parity must provide:
+
+- ordered trace levels equivalent to `none`, `low`, `medium`, `high`, `full`, and `debug`;
+- controls that can be used from that variant's normal entrypoints without changing parse results;
+- sink routing equivalent to stdout, routed trace file, and mirrored stdout+file output, including reset/truncate behavior for routed files;
+- structured scope events for meaningful compile, parser, and runtime-handler entry/exit boundaries;
+- structured decision or branch events for control-flow choices, including generated or interpreted runtime dispatch branches;
+- mark/capture/source-position events where the variant implements those source-boundary features;
+- dump/log events for deeper diagnostic payloads at higher verbosity;
+- a default quiet mode where tracing is disabled and normal output remains unchanged.
+
+Perl reference event names such as `rule_ir:...`, `emit_context:...`, `actionir:...`, and
+`generated_handler_branch:...` are the current reference vocabulary. Other variants may use native names, but a
+user reading this book must be able to ask the same trace questions and observe equivalent externally documented
+behavior.
+
 ## Command-line trace control
 
 The Perl reference backend ships a small command-line runner at `bin/linkedspec`. It exists to make the same trace controls discoverable without writing a custom driver script.
@@ -178,10 +196,11 @@ Treat these variables as compatibility state, not the preferred control API. Use
 
 ## Typical usage
 
-The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, RuleIR planning decisions, EmitContext owner-bridge/rewrite-orchestration decisions, ActionIR scanner/canonical/diagnostic/rewrite-pipeline decisions, compact ActionIR lowerer decisions, `ActionIR::MethodLowering` helper-family/assignment/mutation/receiver-chain/fallback decisions, and generated-handler branch decisions for the Perl reference non-repetition and repetition templates.
+The current Perl reference trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, RuleIR planning decisions, EmitContext owner-bridge/rewrite-orchestration decisions, ActionIR scanner/canonical/diagnostic/rewrite-pipeline decisions, compact ActionIR lowerer decisions, `ActionIR::MethodLowering` helper-family/assignment/mutation/receiver-chain/fallback decisions, and generated-handler branch decisions for the Perl reference non-repetition and repetition templates.
 
 In the Perl reference backend, the planned compile/ActionIR owner coverage is closed through MethodLowering. The
-remaining trace work is overall coverage/no-drift closeout and the required Rust/future-variant parity split.
+remaining trace work is cross-variant parity: Rust and future variants must implement the same external trace
+capabilities before claiming trace parity.
 
 The consistent scope naming makes it possible to follow a single parse through nested trace output:
 

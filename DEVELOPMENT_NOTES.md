@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.5 — trace contract/parity split):
+  The external trace contract is the mdBook-documented behavior, not Perl package names. A variant claiming trace
+  parity must expose equivalent ordered levels, normal-entrypoint controls, stdout/routed-file/mirror sinks, routed
+  file reset, structured enter/exit events, decision/branch events, mark/capture events where applicable, dump/log
+  events, and default quiet behavior. The Perl reference trace suite is green across CLI, generated handler branch
+  helper, non-REP/REP generated dispatch, RuleIR, EmitContext, ActionIR pipeline, compact lowerers, and
+  MethodLowering. Rust currently has no trace API/control hits outside corpus fixture text, so `.4.1` owns the Rust
+  design inventory before any Rust trace code.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.4.6 — compile/ActionIR trace closeout):
   The planned Perl reference compile/ActionIR trace namespaces are covered through MethodLowering. A normal
   descriptor compile with routed debug trace now emits `rule_ir`, `emit_context`, `actionir:scanner`,
@@ -75,8 +84,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `miss_min_satisfied`, and `max_continue`; `REP_ACODE` also reports `match` and `acode_index_<n>`, while bcode
   REP variants also report `zero_progress` and `zero_progress_min_satisfied`. Keep inner non-REP bcode helper
   traces disabled inside REP coderefs unless a later leaf deliberately changes trace granularity; `.3.3` keeps the
-  REP loop as the ownership boundary for emitted decisions. Remaining "see everything" coverage is compile/ActionIR
-  owner scopes and branch decisions under `.3.4`, plus later Rust trace parity.
+  REP loop as the ownership boundary for emitted decisions. Compile/ActionIR owner coverage has since closed under
+  `.3.4.*`, and Rust trace parity is now split under `.4.*`.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.3.2 — non-repetition generated dispatch tracing):
   Non-repetition Perl generated handler templates now emit branch decisions through
@@ -97,9 +106,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - 2026-07-04 (TRACE-OBSERVABILITY.3 — coverage extension split before code):
   Do not instrument "see everything" as one patch. Generated handler branch tracing needs a small reusable emitted
   helper seam first, then separate non-repetition and repetition template leaves because dispatch/no-match/LX/EX and
-  min/max/zero-progress loop behavior carry different risks. Compile/ActionIR owner scopes should follow after the
-  runtime branch trace semantics are concrete. Rust trace parity remains a later split; do not claim parity from a
-  Perl-only trace model.
+  min/max/zero-progress loop behavior carry different risks. Compile/ActionIR owner scopes followed after the
+  runtime branch trace semantics became concrete. Rust trace parity has since split under `.4.*`; do not claim
+  parity from a Perl-only trace model.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.2 — CLI control over existing trace):
   `bin/linkedspec` is deliberately a thin command-line bridge over the existing Perl reference public surfaces. It
@@ -107,8 +116,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `--trace-emoji` map to the existing trace option keys consumed by `Get(...)` / `get_parser(...)`. The runner
   prints parser results as canonical JSON; routed trace (`--trace-file ... --trace-mode route`) is the preferred
   machine-readable mode because stdout remains clean. This slice closes discoverability only. It does not claim
-  generated handler branches, ActionIR owner branches, or Rust trace parity are covered; those remain owned by
-  `TRACE-OBSERVABILITY.3` and future backend parity.
+  generated handler branches, ActionIR owner branches, or Rust trace parity are covered. The Perl reference coverage
+  has since closed through `.3.5`; Rust trace parity is now owned by `.4.*`.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.1 — coverage audit before trace work):
   The trace framework was not missing; coverage and discoverability are the gaps. Current Perl trace sees broad
