@@ -10,6 +10,7 @@ reproduces the reference value for every entry.
 One directory per case:
 
 ```
+manifest.json
 <case>/
   input.spec    — the .spec source (copied verbatim from specs/<spec>.spec)
   input.txt     — the exact input bytes fed to the parser
@@ -18,6 +19,10 @@ One directory per case:
 
 `expected.json` is canonicalized with `JSON::PP->canonical(1)` (object keys
 sorted), so regenerating an unchanged case is byte-stable — no spurious diffs.
+The root `manifest.json` records the intended fixture set (`case_count` plus
+ordered `cases`). The Rust oracle runner reads the manifest first, rejects
+duplicate or invalid case names, fails if any manifest entry is missing, and
+fails if a stale extra fixture directory remains after a case is removed.
 
 ## Output-shape rule (Perl ↔ Rust)
 
@@ -44,8 +49,9 @@ either phase exceeds `ORACLE_TIMEOUT`, the parent kills that child with
 cannot wedge corpus generation. The historical `RTLUtils` hang is retired with
 the legacy VHDL/RTL/FSM subsystem; the process-level guard remains as generic
 protection for future pathological specs. The case list lives at the top of
-`tools/gen_oracle_corpus.pl`; `.7.2`/`.7.3` extend it, `.7.4` adds the
-enumerate-all-fixtures drift guard.
+`tools/gen_oracle_corpus.pl`; regeneration writes both the fixture directories
+and `manifest.json`. `RUST-PARITY.7.4` finalized the enumerate-all-fixtures
+drift guard.
 
 `SPEC-FORMAT-TERSE.2.3.3.3.3.1` restored the minimal shipped `tclite` fixtures after the
 Rust default-mode recursive repetition and child-preamble-return gap was fixed. The

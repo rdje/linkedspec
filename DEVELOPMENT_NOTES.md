@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.7.4 — oracle corpus manifest guard):
+  Treat `rust/linkedspec-runtime/tests/corpus/manifest.json` as part of the checked-in oracle contract, not a
+  convenience file. The generator writes it with the ordered intended case list and case count; the Rust runner
+  validates it before running fixtures. Adding, removing, or renaming an oracle case requires regenerating and
+  staging both the relevant fixture directory changes and `manifest.json`. A missing directory and a stale extra
+  directory are both test failures now. `RUST-PARITY.7` is closed; the next Rust parity frontier is `.8`
+  (HandlerIR-to-Rust source emitter).
+
 - 2026-07-04 (RUST-PARITY.7.3.6 — legacy shipped-spec safety smokes):
   Treat the remaining RTL/plugin/legacy shipped specs as a measured fixture boundary. Green minimal smokes are now
   active for `regdef`, `tablegrep`, `simenv`, `vhdl`, `ds_vhistory`, `pplugin`, and `tkgui`, raising the Rust
@@ -38,7 +46,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.7.4` unless a new terse leaf is split.
+  `RUST-PARITY.8` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and

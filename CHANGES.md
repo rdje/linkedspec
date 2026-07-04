@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.7.4 — finalize oracle corpus manifest guard
+
+**Scope:** Perl-oracle fixture generator, checked-in corpus manifest, Rust oracle runner drift guard, corpus
+README, mdBook backend handoff, task-tree/live docs, and Knowledge Map.
+
+**What changed:** The output oracle now has an explicit intended fixture set. `tools/gen_oracle_corpus.pl` rejects
+duplicate case names and writes `rust/linkedspec-runtime/tests/corpus/manifest.json` with `format`,
+`generated_by`, `case_count`, and ordered `cases`. The Rust oracle runner loads that manifest, validates its shape,
+rejects missing manifest fixture directories, rejects stale extra fixture directories, and executes fixtures in
+manifest order.
+
+**Evidence:** `perl -c -Iperl tools/gen_oracle_corpus.pl`, oracle regeneration, `cargo fmt --manifest-path
+rust/Cargo.toml --all`, and Rust `corpus_oracle` pass. The corpus oracle now runs **3 tests**: two focused
+manifest-drift guards plus the 88-fixture Perl-reference comparison.
+
 ## 2026-07-04 — RUST-PARITY.7.3.6 — land legacy shipped-spec safety smokes
 
 **Scope:** Perl-oracle fixture generation, checked-in Rust oracle corpus, remaining shipped-spec audit evidence,

@@ -207,9 +207,11 @@ writes an **emitter** that consumes HandlerIR nodes and produces runnable code i
 your language. The JSON diagnostic backend (`_emit_handler_json`) proves the pattern.
 
 ### Step 6: Validate Against the Test Corpus
-Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
-`input.txt`, and `expected.json`. Your backend is compliant when it produces
-structurally equivalent output for every entry.
+Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`
+with `case_count` and the ordered `cases` list; every manifest entry has an
+`input.spec`, `input.txt`, and `expected.json`. Your backend is compliant when
+it produces structurally equivalent output for every manifest entry, and its
+runner rejects missing fixture directories or stale extra fixture directories.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
 88 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
@@ -226,9 +228,11 @@ numeric word aliases; arithmetic/comparison symbol callees; the terse scalar-slo
 fixture for scalar reads, scalar mutation targets, and scalar-held shape payloads;
 explicit string comparisons; assignment-expression fixtures; and the shared Perl/Rust
 user-function runtime fixture.
-The next corpus work is the `RUST-PARITY.7.4` regression guard and finalization leaf;
-the richer legacy/plugin mismatches above remain follow-up blockers until a narrower
-parity owner promotes them safely.
+`RUST-PARITY.7.4` finalized the corpus guard: the generator writes
+`manifest.json`, and the Rust runner fails malformed manifests, duplicate case
+names, missing manifest entries, or stale extra fixture directories. The richer
+legacy/plugin mismatches above remain follow-up blockers until a narrower parity
+owner promotes them safely.
 
 ## Architecture Overview
 

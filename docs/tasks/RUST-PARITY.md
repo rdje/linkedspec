@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (`.7.3.6` done — RTL/plugin/legacy safety-smoke
-  audit landed seven green fixtures and routed richer mismatches to follow-up;
-  frontier advances to `.7.4`)
+- Last updated: `2026-07-04` (`.7.4` done — manifest-backed oracle corpus guard
+  finalized; `.7` is closed and the frontier advances to `.8`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -143,10 +142,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.6` (see Commit Log)
 
 - ID: `RUST-PARITY.7`
-  Status: `active`
+  Status: `done`
   Goal: Expand the Rust test corpus to match Perl's regression coverage breadth — via a Perl↔Rust output oracle
   Children: `.7.1`, `.7.2`, `.7.3`, `.7.4`, `.7.5`
-  Note: Split 2026-06-16 (PNT rule 5 — too broad for one signoff slice). **`.7.5` added 2026-06-17** — `.7.1` built the oracle and it immediately proved the split's premise wrong: the Rust engine does NOT reproduce the shipped recursive specs (tclite/Lispish), so `.7.2`/`.7.3` (add shipped specs) are **blocked on `.7.5`** (the engine output-parity fix). `.7.5` is the discovered lower-level dependency (PNT splitting rule) and is now first in the frontier. A two-agent read-only investigation (Rust test/corpus infra + Perl reference output path) established: (1) **no oracle mechanism / canonical cross-variant output form exists yet**; (2) the Perl reference returns its top rule's value **directly** (e.g. `tclite` `[]` → `["?tcl_script:",[["?command_subst:",[]]]]`; `Lispish` `(x y)` → `["x",["y"]]`) while the Rust engine returns the **accumulator wrapped one level** (`[<value>]`, per the inline lifecycle corpus test) — a shape-reconciliation step is needed; (3) only ~3 specs (`tclite`, `Lispish`, `pplugin`) have any input fixtures even on the Perl side, so ~16 specs need authored inputs; (4) the `RTLUtils` catastrophic-backtrack hang (per `MEMORY.md`) must be guarded with a hard timeout in any Perl-over-corpus run. **Design:** a timeout-guarded Perl oracle generator (`tools/`) emits canonical-JSON fixtures into `rust/linkedspec-runtime/tests/corpus/`; a Rust fixture-runner integration test asserts `engine.execute(input)` matches — decoupled (no Perl at `cargo test` time; aligns with ADR 0006 §Phase 8.6 language-neutral corpus).
+  Note: Split 2026-06-16 (PNT rule 5 — too broad for one signoff slice). **`.7.5` added 2026-06-17** — `.7.1` built the oracle and it immediately proved the split's premise wrong: the Rust engine does NOT reproduce the shipped recursive specs (tclite/Lispish), so `.7.2`/`.7.3` (add shipped specs) were **blocked on `.7.5`** (the engine output-parity fix). `.7.5` was the discovered lower-level dependency (PNT splitting rule). A two-agent read-only investigation (Rust test/corpus infra + Perl reference output path) established: (1) **no oracle mechanism / canonical cross-variant output form existed yet**; (2) the Perl reference returns its top rule's value **directly** (e.g. `tclite` `[]` → `["?tcl_script:",[["?command_subst:",[]]]]`; `Lispish` `(x y)` → `["x",["y"]]`) while the Rust engine returns the **accumulator wrapped one level** (`[<value>]`, per the inline lifecycle corpus test) — a shape-reconciliation step is needed; (3) only ~3 specs (`tclite`, `Lispish`, `pplugin`) had any input fixtures even on the Perl side, so ~16 specs needed authored inputs; (4) the `RTLUtils` catastrophic-backtrack hang (per `MEMORY.md`) had to be guarded with a hard timeout in any Perl-over-corpus run. **Design:** a timeout-guarded Perl oracle generator (`tools/`) emits canonical-JSON fixtures plus `manifest.json` into `rust/linkedspec-runtime/tests/corpus/`; a Rust fixture-runner integration test asserts `engine.execute(input)` matches and rejects manifest/directory drift — decoupled (no Perl at `cargo test` time; aligns with ADR 0006 §Phase 8.6 language-neutral corpus). `.7.1`, `.7.2`, `.7.3`, `.7.4`, and `.7.5` are now done/deferred as applicable, so `.7` is closed.
 
 - ID: `RUST-PARITY.7.1`
   Status: `done`
@@ -177,12 +176,16 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `pending`
 
 - ID: `RUST-PARITY.7.3`
-  Status: `active`
+  Status: `done`
   Goal: Expand the oracle corpus to the remaining/harder specs (batch 2), with timeout/hang risk debugged before
     more broad shipped-spec work.
   Children: `.7.3.1`, `.7.3.2`, `.7.3.3`, `.7.3.4`, `.7.3.5`, `.7.3.6`, `.7.3.7`
   Acceptance: inputs authored + fixtures generated (timeout-guarded) for the remaining specs incl. legacy/plugin/RTL-touching ones (candidate set: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`, `tkgui`, remaining non-raw `hlink_substitution` delimiter paths, `ds_vhistory`, `verilog`, `spec.spec` — exact set decided in-slice); any current timeout/hang risk is reproduced with LinkedSpec's toolbox first, pinpointed to exact source/rule/regex evidence, and either fixed or proven stale/retired before the broad legacy/plugin/RTL smoke lane continues; parity gaps fixed or recorded; the Rust fixture-runner is green; `cargo test` + clippy zero-new; baseline green.
-  Verification: `active`
+  Verification: Done — 2026-07-04. Batch 2 is closed through its children: `.7.3.1` split the work; `.7.3.2`
+    and `.7.3.7` hardened timeout coverage; `.7.3.3` added/deferred hlink delimiters by representability;
+    `.7.3.4` closed structural `portmap`/`lib_reader`/`ebnf` through implementation subleaves; `.7.3.5`
+    separated null-output/debug cases from valid semantic smokes; `.7.3.6` added seven RTL/plugin/legacy safety
+    smokes. The corpus is **88 fixtures** before `.7.4` finalization.
   Commit: `pending`
 
 - ID: `RUST-PARITY.7.3.1`
@@ -478,11 +481,19 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.7 - hard-timeout parser construction too`
 
 - ID: `RUST-PARITY.7.4`
-  Status: `pending`
+  Status: `done`
   Goal: Regression guard + finalize the oracle corpus
   Acceptance: the fixture-runner provably enumerates ALL corpus fixtures (fails on drift / a missing fixture); a documented way to regenerate fixtures; a book/`DEVELOPMENT_NOTES.md` note on the oracle (incl. the Perl↔Rust wrap rule) as warranted; `.7` closed when every child is `done`/`deferred`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-04. `tools/gen_oracle_corpus.pl` now rejects duplicate case names and writes root
+    `rust/linkedspec-runtime/tests/corpus/manifest.json` with `format`, `generated_by`, `case_count`, and ordered
+    `cases`. `rust/linkedspec-runtime/tests/corpus_oracle.rs` loads the manifest, rejects unsupported manifest
+    format, mismatched case count, duplicate/invalid case names, missing fixture directories, and stale extra
+    fixture directories, then executes fixtures in manifest order. Focused drift tests cover missing and extra
+    fixture sets. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; `perl -Iperl tools/gen_oracle_corpus.pl`
+    emits **88 fixtures plus manifest**; `cargo fmt --manifest-path rust/Cargo.toml --all` passes; Rust
+    `corpus_oracle` passes **3 tests** and all **88** manifest-listed fixtures. Corpus README, mdBook backend
+    handoff, Knowledge Map facts, roadmap, and live recovery docs document the manifest and regeneration contract.
+  Commit: `RUST-PARITY.7.4 - finalize oracle corpus manifest guard`
 
 - ID: `RUST-PARITY.7.5`
   Status: `done`
@@ -535,13 +546,13 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
 | — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
-| — | `RUST-PARITY.5.5` | `active` | split into `.5.5.1`–`.5.5.4` (2026-06-16, PNT rule 5 — ~28 helpers across families) |
+| — | `RUST-PARITY.5.5` | `done` | split into `.5.5.1`–`.5.5.4` (2026-06-16, PNT rule 5 — ~28 helpers across families), all children closed |
 | — | `RUST-PARITY.5.5.1` | `done` | named-group helpers landed (2026-06-16); entry/match `_named`/`_has`/`_map`(+`_named_map` alias) read the existing maps, deterministic hash projection |
 | — | `RUST-PARITY.5.5.2` | `done` | input-boundary helpers + `flat` landed (2026-06-16); Open Question resolved — retired aliases `tail`/`drop_last`/`flatten` NOT added (Perl reference doesn't recognize them; parity = match the reference) |
 | — | `RUST-PARITY.5.5.3` | `done` | mark-based capture family landed (2026-06-16); `capture_*_from`/`_between` + `mark_input_*`/`mark_copy`, `capture_from` fixed to match-start parity (option (a)); catalog §7 corrected |
 | — | `RUST-PARITY.5.5.4` | `done` | full anonymous capture-slice family landed (2026-06-16); `capture_slice`/`_len` endpoint fixed to match-start + 10 anonymous arms (`until_cursor`/`take`/`rest` families); catalog §7 anonymous entries added; `.5.5` + `.5` containers closed |
 | — | `RUST-PARITY.6` | `done` | strict_syntax validation mode landed (2026-06-16); `validate_with_options(spec, strict)` promotes the unused-rule warning to a hard error (undefined already fatal); Perl semantics verified empirically (top rule not exempt) |
-| — | `RUST-PARITY.7` | `active` | split into `.7.1`–`.7.5` (2026-06-16 / `.7.5` added 2026-06-17 — oracle proved shipped specs don't reach Rust parity) |
+| — | `RUST-PARITY.7` | `done` | split into `.7.1`–`.7.5` (2026-06-16 / `.7.5` added 2026-06-17 — oracle proved shipped specs needed lower-level parity fixes); manifest-backed corpus guard finalized in `.7.4` |
 | — | `RUST-PARITY.7.1` | `done` | oracle mechanism + canonical wrap rule + green first proof landed (2026-06-17); the oracle proved tclite/Lispish do NOT match (engine gap → `.7.5`), so the proof is on 2 controlled authored grammars |
 | — | `RUST-PARITY.7.5` | `done` | all shipped recursive-spec blockers from `.7.1` are closed: header-line regexes, action-edge fluent/default-mode `tclite`, and Lispish after direct-access migration |
 | — | `RUST-PARITY.7.5.1` | `done` | header-line-regex → 0-regex parser bug fixed (2026-06-17); `(\S*)`→`([^\s/]*)`; regexes on header lines register, bracket-pairs repaired (open[0]/close[1]); 4 unit tests; 242 green; clippy zero-new. Oracle then revealed a 2nd tclite blocker → `.7.5.3` |
@@ -562,11 +573,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.4.3` | `done` | action-edge child/target aggregation now lets `ebnf` payloads and `portmap` concatenation pass |
 | — | `RUST-PARITY.7.3.5` | `done` | null-output candidates separated from semantic fixtures; quoted-brace `operators_try` parser warning fixed; four `spec.spec` smokes active |
 | — | `RUST-PARITY.7.3.6` | `done` | seven RTL/plugin/legacy safety smokes landed; richer mismatches routed to follow-up instead of broadening `.7.3` |
-| 1 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 2 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 3 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.4` | `done` | manifest-backed regression guard finalized the oracle corpus; runner rejects missing/stale fixture drift |
+| 1 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 2 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.5`; all `.7.5` shipped recursive-spec blockers are closed, `.7.2` and `.7.3` expanded the shipped-spec corpus to 88 fixtures, `.7.4` finalized the manifest guard, and `.7` is closed. Current frontier is `.8`.)
 
 ## Decisions
 
@@ -674,6 +685,12 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   `tablegrep` groups over-report in Rust, `simenv` single-line values lose their verbatim payload, VHDL port
   clauses collapse to null, `ds_vhistory` branch entries are classified as version entries, and placeholder
   `verilog` returns Perl `0` versus Rust `[]`. Frontier → `.7.4`.
+- `2026-07-04` (`.7.4` implementation): the oracle corpus now has an explicit intended fixture set. The generator
+  writes root `manifest.json` with `format`, `generated_by`, `case_count`, and ordered `cases`; it rejects
+  duplicate case names before writing. The Rust runner loads the manifest, rejects malformed format/count data,
+  duplicate or invalid case names, missing fixture directories, and stale extra fixture directories, then executes
+  fixtures in manifest order. This closes the "enumerates all fixtures" risk without depending on directory
+  listing order or silent stale directories. `.7` is closed; frontier → `.8`.
 
 ## Open Questions
 
@@ -725,6 +742,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-04` | `RUST-PARITY.7.3.4.3` | `cargo fmt --manifest-path rust/Cargo.toml --all`; focused Rust `.7.3.4.3` integration tests; lower-unbounded quantifier unit test; focused scalar/aggregate assignment regression tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — Rust action-edge blocks and fluent chains now reuse the already matched child return for `call(child)`, `push(child)`, `push(child,target)`, and child-index push forms instead of re-searching after the parent edge match; passive terminal children skip re-execution like the Perl generated handlers. Scalar-vs-aggregate assignment boundaries and helper-context aggregate bare reads are preserved. Added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`; the oracle corpus now has **77 fixtures** and Rust `corpus_oracle` passes; full local CI passes with phase0 **1021** tests. Frontier → `.7.3.5` |
 | `2026-07-04` | `RUST-PARITY.7.3.5` | KM retrieval; Perl reference probes for `BNF`, `DT`, `ifelse`, `operators_try`, and `spec.spec` smokes; temporary Rust probes removed; `cargo fmt --manifest-path rust/Cargo.toml --all`; focused Rust parser quoted-brace tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `parse_all_shipped_specs`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates | PASS — `BNF`, `DT`, `ifelse`, and `operators_try` representative inputs are diagnostic/null-output cases in the Perl reference and were not promoted as semantic fixtures. Rust now ignores quoted braces while scanning `.spec` code blocks, fixing the `operators_try` action-parser warnings. Added `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip`; the oracle corpus now has **81 fixtures** and Rust `corpus_oracle` passes. Frontier → `.7.3.6` |
 | `2026-07-04` | `RUST-PARITY.7.3.6` | KM retrieval; phase0 shipped-spec smoke/source reads; Perl reference JSON probes; temporary Rust candidate probe removed; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; Rust `parse_all_shipped_specs`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS/SPLIT — Seven green RTL/plugin/legacy safety smokes landed: `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`, `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`. The oracle corpus now has **88 fixtures** and Rust `corpus_oracle` passes. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`, `simenv` single-line value, VHDL port-clause, `ds_vhistory` branch, and placeholder `verilog` candidates remain explicit follow-up blockers. Full local CI passes with phase0 **1021** tests. Frontier → `.7.4` |
+| `2026-07-04` | `RUST-PARITY.7.4` | `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; `cargo fmt --manifest-path rust/Cargo.toml --all`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generator emits **88 fixtures plus manifest**; the Rust runner validates `manifest.json`, rejects missing/stale fixture drift, executes fixtures in manifest order, and passes **3 tests** including two focused drift tests plus all **88** oracle fixtures. `.7` is closed. Frontier → `.8` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -793,6 +811,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.7.3.7` | `RUST-PARITY.7.3.7 - hard-timeout parser construction too` | oracle generator now hard-timeout guards parser construction plus parse execution; normal regeneration remains 66-fixture byte-identical; corpus oracle green |
 | `RUST-PARITY.7.3.4` | `RUST-PARITY.7.3.4 - triage structural oracle mismatches` | no runtime/corpus code change; reproduces `portmap`/`lib_reader`/`ebnf` Rust structural divergences and splits parser/runtime implementation owners into `.7.3.4.1`-`.7.3.4.3` |
 | `RUST-PARITY.7.3.4.4` | `RUST-PARITY.7.3.4.4 - land lib_reader action-helper parity` | engine.rs statement-form scalar regex substitution + array split mutation helpers; `.7.3.4.4` integration locks; two `lib_reader` oracle fixtures; 68-fixture corpus oracle green |
+| `RUST-PARITY.7.3.4.2` | `RUST-PARITY.7.3.4.2 - land portmap scalar helper parity` | boolean helper/list-context/regex-dispatch parity; four `portmap` scalar oracle fixtures; 72-fixture corpus oracle green |
+| `RUST-PARITY.7.3.4.3` | `RUST-PARITY.7.3.4.3 - land action-edge child aggregation parity` | edge-scoped child returns, passive terminal child skip, lower-unbounded quantifier normalization; `portmap_concatenation` plus two `ebnf` fixtures; 77-fixture corpus oracle green |
+| `RUST-PARITY.7.3.5` | `RUST-PARITY.7.3.5 - close null-output and spec smoke triage` | quoted-brace code-block scanner fix; four `spec.spec` smokes; BNF/DT/ifelse/operators_try null-output candidates documented; 81-fixture corpus oracle green |
+| `RUST-PARITY.7.3.6` | `RUST-PARITY.7.3.6 - land legacy shipped-spec safety smokes` | seven RTL/plugin/legacy green smokes; richer mismatches routed to follow-up; 88-fixture corpus oracle green |
+| `RUST-PARITY.7.4` | `RUST-PARITY.7.4 - finalize oracle corpus manifest guard` | generator writes manifest and rejects duplicate cases; Rust runner rejects missing/stale fixture drift and executes 88 fixtures in manifest order; `.7` closed |
 
 ## Changelog
 
@@ -873,3 +896,6 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   (`regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`,
   `ds_vhistory_version_entry`, `pplugin_empty`, `tkgui_empty`) and kept richer mismatches out of the corpus with
   explicit evidence. Corpus oracle passes over **88 fixtures**. Frontier → `.7.4`.
+- `2026-07-04`: `.7.4` done — oracle corpus finalization guard landed. The generator writes
+  `manifest.json`, the Rust runner validates manifest shape and detects missing/stale fixture directory drift, and
+  the manifest-ordered 88-fixture corpus plus two focused drift tests pass. `.7` is closed. Frontier → `.8`.

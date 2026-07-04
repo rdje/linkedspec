@@ -1,11 +1,15 @@
 ---
 id: rust-perl-output-oracle
-title: The Perl↔Rust output oracle — a process-hard-timeout Perl generator (tools/gen_oracle_corpus.pl) emits canonical-JSON fixtures into rust/linkedspec-runtime/tests/corpus/, and a Rust fixture-runner (tests/corpus_oracle.rs) asserts engine.execute(input) == [reference]; the Rust engine wraps the Perl top-rule value one level
+title: The Perl↔Rust output oracle — a process-hard-timeout Perl generator (tools/gen_oracle_corpus.pl) emits canonical-JSON fixtures plus a manifest into rust/linkedspec-runtime/tests/corpus/, and a Rust fixture-runner (tests/corpus_oracle.rs) asserts engine.execute(input) == [reference]; the Rust engine wraps the Perl top-rule value one level
 answers:
   - "what is the Perl↔Rust output oracle"
   - "how does the Rust variant test output parity against the Perl reference"
   - "where is the cross-variant test corpus"
   - "how do I regenerate the oracle corpus fixtures"
+  - "what is rust oracle corpus manifest.json"
+  - "how does the Rust oracle runner detect missing fixtures"
+  - "how does the Rust oracle runner detect stale extra fixtures"
+  - "which leaf finalized the Rust oracle corpus guard"
   - "how does gen_oracle_corpus enforce hard timeouts"
   - "does the oracle timeout cover parser construction"
   - "does the oracle timeout cover parser build"
@@ -48,13 +52,14 @@ evidence_update_2026_07_03_7344: "RUST-PARITY.7.3.4.4 added `lib_reader_sattribu
 evidence_update_2026_07_04_7343: "RUST-PARITY.7.3.4.3 added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation` after Rust action-edge child/target aggregation parity landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 77 fixtures, and Rust `corpus_oracle` passes over all 77."
 evidence_update_2026_07_04_735: "RUST-PARITY.7.3.5 added `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip` after triage proved representative `BNF`, `DT`, `ifelse`, and `operators_try` inputs return Perl null and are not semantic-output fixture candidates. The same leaf fixed Rust `.spec` code-block scanning so quoted braces in `operators_try` debug strings no longer produce action-parser warnings. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 81 fixtures, and Rust `corpus_oracle` passes over all 81."
 evidence_update_2026_07_04_736: "RUST-PARITY.7.3.6 added seven JSON-safe RTL/plugin/legacy safety smokes: `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`, `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`, single-line `simenv`, VHDL port-clause, `ds_vhistory` branch, and placeholder `verilog` candidates remain follow-up blockers rather than unsafe fixture promotions. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 88 fixtures, and Rust `corpus_oracle` passes over all 88."
-reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
+evidence_update_2026_07_04_74: "RUST-PARITY.7.4 finalized the oracle corpus guard. `tools/gen_oracle_corpus.pl` writes `manifest.json` with `format`, `case_count`, `generated_by`, and ordered `cases`. `corpus_oracle.rs` loads the manifest, rejects unsupported format, mismatched counts, duplicate or invalid case names, missing fixture dirs, and stale extra fixture dirs, then executes fixtures in manifest order. Focused drift tests cover missing and extra fixture names; the manifest-backed corpus oracle passes 3 tests and all 88 fixtures."
+reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; cd rust && cargo test --manifest-path Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture 2>&1 | grep -E 'test result|PASS|FAIL|manifest'; ls linkedspec-runtime/tests/corpus/manifest.json"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
 
-**Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-03
-(RUST-PARITY.7.3.7).** A language-neutral cross-variant parity gate
+**Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-04
+(RUST-PARITY.7.4).** A language-neutral cross-variant parity gate
 (ADR 0006 §Phase 8.6). The Perl reference is the behavioral oracle; the corpus is its
 frozen output; `cargo test` validates the Rust backend against it with no Perl in the loop.
 
@@ -65,14 +70,16 @@ frozen output; `cargo test` validates the Rust backend against it with no Perl i
   timeout (default 15s). The parent kills the child with `SIGKILL` on timeout,
   deliberately avoiding `alarm()` because catastrophic regex backtracking can defer Perl
   safe signals. It writes one corpus directory per case:
-  `tests/corpus/<case>/{input.spec, input.txt, expected.json}`. `expected.json` is
-  `JSON::PP->canonical(1)` (sorted keys → byte-stable regeneration). A case is either a
-  shipped spec (`spec => 'tclite'`, slurped from `specs/`) or an authored inline grammar
-  (`source => "..."`).
-- **Runner** `rust/linkedspec-runtime/tests/corpus_oracle.rs` — enumerates the corpus,
-  runs `parse_spec → validate → compile → Engine::new → execute(input.txt)`, and compares.
-  It reports every entry (PASS/FAIL) and fails once at the end, so one run surfaces all
-  divergences.
+  `tests/corpus/<case>/{input.spec, input.txt, expected.json}` plus root
+  `tests/corpus/manifest.json`. `expected.json` is `JSON::PP->canonical(1)` (sorted keys →
+  byte-stable regeneration); the manifest records `format`, `case_count`, `generated_by`,
+  and ordered `cases`. A case is either a shipped spec (`spec => 'tclite'`, slurped from
+  `specs/`) or an authored inline grammar (`source => "..."`).
+- **Runner** `rust/linkedspec-runtime/tests/corpus_oracle.rs` — loads `manifest.json`,
+  rejects malformed format/count data, duplicate or invalid case names, missing manifest
+  entries, and stale extra fixture directories, then runs `parse_spec → validate → compile
+  → Engine::new → execute(input.txt)` in manifest order and compares. It reports every
+  entry (PASS/FAIL) and fails once at the end, so one run surfaces all divergences.
 
 ## Output-shape rule (the canonical reconciliation)
 
@@ -87,8 +94,8 @@ the Rust runner compares `engine.execute(input) == json!([expected])`. Proven on
 
 The `.7`-split note assumed the Perl↔Rust gap was *only* the wrap. The oracle disproved
 that: the Rust engine initially did **not** reproduce the shipped recursive specs. Minimal
-shipped `tclite` and `Lispish` fixtures are now active, with broader corpus expansion still
-owned by `.7.2` / `.7.3`.
+shipped `tclite` and `Lispish` fixtures are now active; `.7.2` and `.7.3` expanded the
+green corpus to 88 fixtures, and `.7.4` finalized the manifest-backed drift guard.
 
 - **Header-line-regex → 0-regex parser bug (`.7.5.1`, FIXED 2026-06-17; necessary, NOT
   sufficient for tclite).** `rust/linkedspec-core/src/parser.rs:86` — the rule-header regex
@@ -182,7 +189,9 @@ ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
 The historic `RTLUtils` catastrophic-backtrack timeout is retired with the deleted
 legacy VHDL/RTL/FSM subsystem. The process-level guard now covers both parser construction
 and parser execution, so future pathological shipped specs cannot wedge corpus generation
-while being compiled before their input is parsed.
+while being compiled before their input is parsed. Regeneration rewrites the fixture
+directories and the root manifest together; after removing or adding a case, stage both the
+changed directories and `rust/linkedspec-runtime/tests/corpus/manifest.json`.
 
 ## Links
 

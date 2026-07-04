@@ -15,6 +15,9 @@
 #     input.spec    — the .spec source (copied verbatim from specs/<spec>.spec)
 #     input.txt     — the exact input bytes fed to the parser
 #     expected.json — canonical JSON of the reference (Perl) top-rule value
+#   rust/linkedspec-runtime/tests/corpus/manifest.json
+#     format/case_count/cases — the intended fixture set consumed by the Rust
+#     runner's drift guard
 #
 # Output-shape rule (Perl↔Rust reconciliation)
 #   The Perl reference returns the top rule's value DIRECTLY, e.g. tclite on "[]"
@@ -1056,9 +1059,13 @@ SPEC
 my $json = JSON::PP->new->canonical(1)->pretty(1);
 
 my $written = 0;
+my @case_names;
+my %seen_case;
 for my $case (@CASES) {
     my $name  = $case->{case};
     my $input = $case->{input};
+    die "duplicate oracle corpus case '$name'\n" if $seen_case{$name}++;
+    push @case_names, $name;
 
     my $spec_src;
     if ( defined $case->{source} ) {
@@ -1080,7 +1087,20 @@ for my $case (@CASES) {
     printf "  wrote corpus/%s/ (input=%s)\n", $name, _show($input);
     $written++;
 }
-printf "Generated %d oracle fixture(s) into %s\n", $written, $CORPUS;
+
+spew(
+    File::Spec->catfile( $CORPUS, 'manifest.json' ),
+    $json->encode(
+        {
+            format       => 1,
+            generated_by => 'tools/gen_oracle_corpus.pl',
+            case_count   => scalar @case_names,
+            cases        => \@case_names,
+        }
+    )
+);
+
+printf "Generated %d oracle fixture(s) plus manifest into %s\n", $written, $CORPUS;
 
 # Build the reference parser and run one input under a hard wall-clock timeout;
 # return the decoded result structure (arrayref/hashref/scalar).

@@ -11,6 +11,7 @@
 //!   tests/corpus/<case>/input.spec    — the .spec source (verbatim)
 //!   tests/corpus/<case>/input.txt     — exact input bytes
 //!   tests/corpus/<case>/expected.json — canonical reference (Perl) top-rule value
+//!   tests/corpus/manifest.json        — intended fixture set and case count
 //!
 //! Output-shape rule (Perl↔Rust reconciliation): the Perl reference returns the
 //! top rule's value directly, while the Rust engine wraps the accumulator one
@@ -22,12 +23,105 @@ use linkedspec_core::compiler::compile;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
+use serde::Deserialize;
 use serde_json::{Value, json};
+use std::collections::BTreeSet;
 use std::fs;
 use std::path::{Path, PathBuf};
 
+#[derive(Debug, Deserialize)]
+struct CorpusManifest {
+    format: u64,
+    case_count: usize,
+    cases: Vec<String>,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+struct CorpusDrift {
+    missing: Vec<String>,
+    extra: Vec<String>,
+}
+
 fn corpus_dir() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/corpus")
+}
+
+fn load_manifest(dir: &Path) -> CorpusManifest {
+    let path = dir.join("manifest.json");
+    let text = fs::read_to_string(&path)
+        .unwrap_or_else(|e| panic!("cannot read corpus manifest {}: {e}", path.display()));
+    let manifest: CorpusManifest = serde_json::from_str(&text)
+        .unwrap_or_else(|e| panic!("malformed corpus manifest {}: {e}", path.display()));
+
+    assert_eq!(
+        manifest.format,
+        1,
+        "unsupported corpus manifest format {} in {}",
+        manifest.format,
+        path.display()
+    );
+    assert_eq!(
+        manifest.case_count,
+        manifest.cases.len(),
+        "corpus manifest case_count={} does not match cases.len()={}",
+        manifest.case_count,
+        manifest.cases.len()
+    );
+    assert!(
+        manifest.case_count > 0,
+        "corpus manifest must name at least one fixture"
+    );
+
+    let case_set: BTreeSet<&str> = manifest.cases.iter().map(String::as_str).collect();
+    assert_eq!(
+        case_set.len(),
+        manifest.cases.len(),
+        "corpus manifest contains duplicate case names"
+    );
+    for name in &manifest.cases {
+        assert!(
+            !name.is_empty()
+                && !name.contains('/')
+                && !name.contains('\\')
+                && name != "."
+                && name != "..",
+            "invalid corpus manifest case name: {name:?}"
+        );
+    }
+
+    manifest
+}
+
+fn directory_case_names(dir: &Path) -> BTreeSet<String> {
+    fs::read_dir(dir)
+        .unwrap_or_else(|e| panic!("cannot read corpus dir {}: {e}", dir.display()))
+        .filter_map(|e| e.ok())
+        .map(|e| e.path())
+        .filter(|p| p.is_dir())
+        .map(|p| p.file_name().unwrap().to_string_lossy().to_string())
+        .collect()
+}
+
+fn assert_manifest_matches_directories(dir: &Path, manifest: &CorpusManifest) {
+    let expected: BTreeSet<String> = manifest.cases.iter().cloned().collect();
+    let actual = directory_case_names(dir);
+
+    if let Some(drift) = manifest_drift(&expected, &actual) {
+        panic!(
+            "oracle corpus manifest drift\n  missing fixture dirs: {:?}\n  extra fixture dirs: {:?}\nregenerate with `perl tools/gen_oracle_corpus.pl` and stage the manifest plus fixture dirs",
+            drift.missing, drift.extra
+        );
+    }
+}
+
+fn manifest_drift(expected: &BTreeSet<String>, actual: &BTreeSet<String>) -> Option<CorpusDrift> {
+    let missing: Vec<String> = expected.difference(&actual).cloned().collect();
+    let extra: Vec<String> = actual.difference(&expected).cloned().collect();
+    if missing.is_empty() && extra.is_empty() {
+        None
+    } else {
+        Some(CorpusDrift { missing, extra })
+    }
 }
 
 /// Run one corpus entry through parse → validate → compile → execute and return
@@ -65,6 +159,34 @@ fn run_entry(dir: &Path) -> Result<(), String> {
 }
 
 #[test]
+fn manifest_drift_guard_detects_missing_fixture_dir() {
+    let expected = BTreeSet::from(["alpha".to_string(), "beta".to_string()]);
+    let actual = BTreeSet::from(["alpha".to_string()]);
+
+    assert_eq!(
+        manifest_drift(&expected, &actual),
+        Some(CorpusDrift {
+            missing: vec!["beta".to_string()],
+            extra: Vec::new(),
+        })
+    );
+}
+
+#[test]
+fn manifest_drift_guard_detects_extra_fixture_dir() {
+    let expected = BTreeSet::from(["alpha".to_string()]);
+    let actual = BTreeSet::from(["alpha".to_string(), "stale".to_string()]);
+
+    assert_eq!(
+        manifest_drift(&expected, &actual),
+        Some(CorpusDrift {
+            missing: Vec::new(),
+            extra: vec!["stale".to_string()],
+        })
+    );
+}
+
+#[test]
 fn oracle_corpus_matches_perl_reference() {
     let dir = corpus_dir();
     assert!(
@@ -73,13 +195,9 @@ fn oracle_corpus_matches_perl_reference() {
         dir.display()
     );
 
-    let mut entries: Vec<PathBuf> = fs::read_dir(&dir)
-        .unwrap_or_else(|e| panic!("cannot read corpus dir {}: {e}", dir.display()))
-        .filter_map(|e| e.ok())
-        .map(|e| e.path())
-        .filter(|p| p.is_dir())
-        .collect();
-    entries.sort();
+    let manifest = load_manifest(&dir);
+    assert_manifest_matches_directories(&dir, &manifest);
+    let entries: Vec<PathBuf> = manifest.cases.iter().map(|name| dir.join(name)).collect();
 
     // Report every entry, then fail once at the end if any diverged — so a single
     // run surfaces all parity gaps, not just the first.
@@ -99,19 +217,13 @@ fn oracle_corpus_matches_perl_reference() {
         }
     }
 
-    // .7.1 established the mechanism and a green first proof. The shipped recursive
-    // specs are landing incrementally as the engine reaches parity: .7.5.1 (DONE)
-    // fixed the header-line-regex → 0-regex compiler gap, and the later fluent
-    // slices landed tclite's action-edge/lifecycle fluent surfaces. A retry under
-    // SPEC-FORMAT-TERSE.2.3.3.3.3 still produced Rust `[]` for the tclite `[]` and
-    // `""` cases, so tclite stays out of the committed green corpus until
-    // SPEC-FORMAT-TERSE.2.3.3.3.3.1 lands default-mode recursive repetition parity.
-    // Lispish remains active after SCALAREF-RETIREMENT.3 (`retv["content"]` parsing).
-    // .7.2/.7.3 add structurally simple shipped specs; .7.4 adds the full drift
-    // guard. See docs/knowledge/rust-perl-output-oracle.md.
+    // The manifest is the drift guard: every intended fixture must be present
+    // and no stale fixture directory may survive after a case is removed.
+    // See docs/knowledge/rust-perl-output-oracle.md.
     assert!(
-        passed >= 1,
-        "expected at least one green proof fixture, found {passed}"
+        passed == manifest.case_count,
+        "runner executed {passed} fixtures, but manifest expects {}",
+        manifest.case_count
     );
     assert!(
         failures.is_empty(),
