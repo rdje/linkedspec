@@ -133,8 +133,10 @@ create a boundary. Nested semicolons inside expression payloads stay inside the 
 
 At `debug` trace level, the Perl reference pipeline reports these stages with
 `actionir:<owner>:<phase>:<label>:<decision>` decisions. That trace can show scanner helper-event discovery,
-canonical queue matches or RAW_PERL fallbacks, unresolved helper diagnostics, rewrite-rule construction, source-span
-or contract skips, normal statement rewrites, unmatched helper events, and implicit attached-if closure insertion.
+canonical queue matches or RAW_PERL fallbacks, unresolved helper diagnostics, rewrite-rule construction, compact
+flow/value/array/declaration/control-flow lowering choices, source-span or contract skips, normal statement
+rewrites, unmatched helper events, and implicit attached-if closure insertion. `ActionIR::MethodLowering` is the
+remaining large lowerer owner whose internal branch trace is still being filled in.
 
 ### Lowering owners
 

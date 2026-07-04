@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.4.4 — trace compact ActionIR lowerers
+
+**Scope:** Perl compact ActionIR lowerer owners outside `MethodLowering` (`FlowExpr`, `ValueExpr`,
+`ArrayPipeline`, `DeclareMethod`, and `ControlFlow`), focused trace regression, variant-agnostic trace parity
+contract docs, mdBook trace docs, toolbox, task-tree/frontier sync, live recovery docs, and Knowledge Map.
+
+**What changed:** Compact lowerer owners now emit debug-level
+`actionir:<owner>:<phase>:<label>:<decision>` trace decisions and matching owner scopes. The coverage reports
+flow-expression branch families, value literal/direct-access/assignment-source decisions, array-pipeline plan
+construction and op lowering, declaration extraction/initializer/set routing, and compact control-flow choices for
+attached/inline/marker if/switch paths plus branch statement passthrough or rewrite handling. `MethodLowering.pm`
+remains deliberately untouched and owned by `.3.4.5`.
+
+The trace docs now state that documented trace capabilities are a variant-agnostic external contract. Perl-specific
+APIs and internals are reference mechanics; Rust and future variants must provide equivalent user-visible trace
+controls, levels, event classes, and sink behavior before claiming trace parity.
+
+**Evidence:** Focused coverage in `t/trace_actionir_compact_lowerers.t` locks production owner-dispatch traces for
+flow/value expressions, array pipelines, declarations, assignments, attached if, inline switch, and Trace-lazy
+require/lower behavior. Adjacent ActionIR trace suites and the ActionIR AST focused suite continue to pass; full
+local CI passes with phase0 at 1021 tests.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.4.3 — trace ActionIR pipeline decisions
 
 **Scope:** Perl ActionIR scanner, scanner-core, canonical-events, diagnostics, rewrite-pipeline owners, focused

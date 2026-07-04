@@ -282,6 +282,10 @@ This is primarily an inspection and debugging tool. Most user code should not de
 
 Tracing exists to make runtime and compile behavior inspectable without turning the system into an opaque dynamic-eval black box.
 
+The trace capabilities documented here are an external contract for every LinkedSpec variant. Backend-specific
+names and implementation mechanics may differ, but trace parity means equivalent user-visible controls, verbosity
+levels, event classes, and sink behavior.
+
 The trace surface is useful for:
 
 - understanding parser entry and dispatch
@@ -291,10 +295,11 @@ The trace surface is useful for:
 
 Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
 handler wrappers, selected decisions, dumps, mark/capture events, debug-level RuleIR planning decisions,
-debug-level EmitContext owner-bridge/rewrite-orchestration decisions, and debug-level ActionIR
-scanner/canonical-event/diagnostic/rewrite-pipeline decisions. The Perl reference backend also emits debug-level
-generated-handler branch decisions for non-repetition dispatch paths and repetition loop paths. Compact ActionIR
-lowering owners and `ActionIR::MethodLowering` remain planned coverage work until those owners are instrumented.
+debug-level EmitContext owner-bridge/rewrite-orchestration decisions, debug-level ActionIR
+scanner/canonical-event/diagnostic/rewrite-pipeline decisions, and debug-level compact ActionIR lowerer decisions.
+The Perl reference backend also emits debug-level generated-handler branch decisions for non-repetition dispatch
+paths and repetition loop paths. `ActionIR::MethodLowering` remains planned coverage work until that large owner is
+instrumented.
 
 Tracing is controlled separately from runtime context.
 

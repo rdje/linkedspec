@@ -15,6 +15,37 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
+
+use constant ACTIONIR_TRACE_OWNER => 'flow_expr';
+
+sub _trace_flow_decision {
+ my (%args) = @_;
+ return LinkedSpec::ActionIR::Trace::decision(
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $args{phase},
+  label => $args{label},
+  decision => $args{decision},
+  taken => $args{taken},
+  context => $args{context},
+ );
+}
+
+sub _trace_flow_enter {
+ my ($phase, $label, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $phase,
+  label => $label,
+  details => $details,
+ );
+}
+
+sub _trace_flow_exit {
+ my ($scope, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
+}
 
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
@@ -287,6 +318,30 @@ sub _lower_defined_target_expr {
 #------------------------------------------------------------------------------
 sub _lower_flow_composite_expr {
  my ($expr, $deps) = @_;
+ my $scope = _trace_flow_enter(
+  'lower_flow_composite_expr',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_flow_decision(
+   phase => 'lower_flow_composite_expr',
+   label => 'expr',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_flow_exit(
+   $scope,
+   {
+    status => defined($result) && length($result) ? 'ok' : 'undef',
+    decision => $decision,
+    result => defined($result) ? $result : '<undef>',
+   },
+  );
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -301,33 +356,36 @@ sub _lower_flow_composite_expr {
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
- return undef unless defined $expr;
+ return $finish->(undef, 'missing_expr', {}) unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
- return undef unless defined($trimmed) && length($trimmed);
- return '1' if $trimmed eq 'true';
- return '0' if $trimmed eq 'false';
- return '$'.$1 if $trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
+ return $finish->(undef, 'empty_expr', {}) unless defined($trimmed) && length($trimmed);
+ return $finish->('1', 'boolean_true', { expr => $trimmed }) if $trimmed eq 'true';
+ return $finish->('0', 'boolean_false', { expr => $trimmed }) if $trimmed eq 'false';
+ return $finish->('$'.$1, 'scalar_slot', { symbol => $1 }) if $trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
  my $literal = $lower_primitive_literal_expr->($trimmed);
- return $literal if defined($literal);
+ return $finish->($literal, 'primitive_literal', { expr => $trimmed }) if defined($literal);
 
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
- return $direct_access if defined($direct_access) && length($direct_access);
+ return $finish->($direct_access, 'direct_nested_access', { expr => $trimmed })
+  if defined($direct_access) && length($direct_access);
 
  # SPEC-FORMAT-TERSE.1.4.1 — the terse renames `cat` (== concat) and `copy` (== array_copy/
  # hash_copy) are recognized here too so a composite/assignment-source value lowers identically.
  if ($trimmed =~ /^(?:array|hash|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
-  return $lowered_value if defined($lowered_value) && length($lowered_value);
+  return $finish->($lowered_value, 'method_value_family', { expr => $trimmed })
+   if defined($lowered_value) && length($lowered_value);
  }
 
  my $call = $parse_method_function_expr->($trimmed);
- return $trimmed unless $call;
+ return $finish->($trimmed, 'passthrough_no_call', { expr => $trimmed }) unless $call;
 
  my $method = $call->{method} // '';
  my $args = $call->{args} || [];
  if ($method =~ /^(?:[+\-*\/%]|==|!=|>=|<=|>|<)$/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
-  return $lowered_value if defined($lowered_value) && length($lowered_value);
+  return $finish->($lowered_value, 'symbol_operator_method_value', { method => $method })
+   if defined($lowered_value) && length($lowered_value);
  }
  my %string_compare_ops = (
   str_eq => 'eq',
@@ -360,82 +418,82 @@ sub _lower_flow_composite_expr {
 
  if ($method eq 'or' || $method eq 'and') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, undef);
-  return undef unless $effective_args && @$effective_args;
+  return $finish->(undef, 'logical_missing_args', { method => $method }) unless $effective_args && @$effective_args;
   my @parts = map { _lower_flow_composite_expr($_, $deps) } @$effective_args;
-  return undef if grep { !defined($_) || !length($_) } @parts;
+  return $finish->(undef, 'logical_arg_lowering_failed', { method => $method }) if grep { !defined($_) || !length($_) } @parts;
   my $joiner = $method eq 'or' ? ' || ' : ' && ';
-  return '('.join($joiner, map { "($_)" } @parts).')';
+  return $finish->('('.join($joiner, map { "($_)" } @parts).')', 'logical_'.$method, { arg_count => scalar(@parts) });
  }
 
  if ($method eq 'not') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
-  return undef unless $effective_args;
+  return $finish->(undef, 'not_missing_arg', {}) unless $effective_args;
   my $value = _lower_flow_composite_expr($effective_args->[0], $deps);
-  return undef unless defined($value) && length($value);
-  return "(!($value))";
+  return $finish->(undef, 'not_arg_lowering_failed', {}) unless defined($value) && length($value);
+  return $finish->("(!($value))", 'not', {});
  }
 
  if ($method eq 'is_empty') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
-  return undef unless $effective_args;
-  return _lower_is_empty_expr($effective_args->[0], $deps);
+  return $finish->(undef, 'is_empty_missing_arg', {}) unless $effective_args;
+  return $finish->(_lower_is_empty_expr($effective_args->[0], $deps), 'is_empty', {});
  }
 
  if ($method eq 'is_defined') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
-  return undef unless $effective_args;
+  return $finish->(undef, 'is_defined_missing_arg', {}) unless $effective_args;
   my $target_expr = _lower_defined_target_expr($effective_args->[0], $deps);
-  return undef unless defined($target_expr) && length($target_expr);
-  return "defined($target_expr)";
+  return $finish->(undef, 'is_defined_target_lowering_failed', {}) unless defined($target_expr) && length($target_expr);
+  return $finish->("defined($target_expr)", 'is_defined', {});
  }
 
  if ($method eq 'is_undefined') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
-  return undef unless $effective_args;
+  return $finish->(undef, 'is_undefined_missing_arg', {}) unless $effective_args;
   my $target_expr = _lower_defined_target_expr($effective_args->[0], $deps);
-  return undef unless defined($target_expr) && length($target_expr);
-  return "(!defined($target_expr))";
+  return $finish->(undef, 'is_undefined_target_lowering_failed', {}) unless defined($target_expr) && length($target_expr);
+  return $finish->("(!defined($target_expr))", 'is_undefined', {});
  }
 
  if ($method eq 'is_nonempty') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
-  return undef unless $effective_args;
+  return $finish->(undef, 'is_nonempty_missing_arg', {}) unless $effective_args;
   my $empty_expr = _lower_is_empty_expr($effective_args->[0], $deps);
-  return undef unless defined($empty_expr) && length($empty_expr);
-  return "(!($empty_expr))";
+  return $finish->(undef, 'is_nonempty_arg_lowering_failed', {}) unless defined($empty_expr) && length($empty_expr);
+  return $finish->("(!($empty_expr))", 'is_nonempty', {});
  }
 
  if (exists $string_compare_ops{$method}) {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
-  return undef unless $effective_args;
+  return $finish->(undef, 'string_compare_missing_args', { method => $method }) unless $effective_args;
   my $lhs = _lower_flow_composite_expr($effective_args->[0], $deps);
   my $rhs = _lower_flow_composite_expr($effective_args->[1], $deps);
-  return undef unless defined($lhs) && length($lhs);
-  return undef unless defined($rhs) && length($rhs);
-  return "($lhs $string_compare_ops{$method} $rhs)";
+  return $finish->(undef, 'string_compare_lhs_failed', { method => $method }) unless defined($lhs) && length($lhs);
+  return $finish->(undef, 'string_compare_rhs_failed', { method => $method }) unless defined($rhs) && length($rhs);
+  return $finish->("($lhs $string_compare_ops{$method} $rhs)", 'string_compare', { method => $method });
  }
 
  if (exists $numeric_compare_ops{$method}) {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
-  return undef unless $effective_args;
+  return $finish->(undef, 'numeric_compare_missing_args', { method => $method }) unless $effective_args;
   my $lhs = _lower_flow_composite_expr($effective_args->[0], $deps);
   my $rhs = _lower_flow_composite_expr($effective_args->[1], $deps);
-  return undef unless defined($lhs) && length($lhs);
-  return undef unless defined($rhs) && length($rhs);
-  return "($lhs $numeric_compare_ops{$method} $rhs)";
+  return $finish->(undef, 'numeric_compare_lhs_failed', { method => $method }) unless defined($lhs) && length($lhs);
+  return $finish->(undef, 'numeric_compare_rhs_failed', { method => $method }) unless defined($rhs) && length($rhs);
+  return $finish->("($lhs $numeric_compare_ops{$method} $rhs)", 'numeric_compare', { method => $method });
  }
 
  if ($method eq 'matches') {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
-  return undef unless $effective_args;
+  return $finish->(undef, 'matches_missing_args', {}) unless $effective_args;
   my $lhs = _lower_flow_composite_expr($effective_args->[0], $deps);
   my $rhs = _lower_flow_composite_expr($effective_args->[1], $deps);
-  return undef unless defined($lhs) && length($lhs);
-  return undef unless defined($rhs) && length($rhs);
-  return "($lhs =~ $rhs)";
+  return $finish->(undef, 'matches_lhs_failed', {}) unless defined($lhs) && length($lhs);
+  return $finish->(undef, 'matches_rhs_failed', {}) unless defined($rhs) && length($rhs);
+  return $finish->("($lhs =~ $rhs)", 'matches', {});
  }
 
- return $trimmed
+ return $finish->($trimmed, 'passthrough_unknown_method', { method => $method })
 }
 
 1;

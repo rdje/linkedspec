@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.4 — trace compact ActionIR lowerers**
+  (COMPACT ACTIONIR LOWERER TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.5).
+
+  **Fix:** `FlowExpr`, `ValueExpr`, `ArrayPipeline`, `DeclareMethod`, and `ControlFlow` now emit debug-level
+  `DECISION actionir:<owner>:<phase>:<label>:<decision>` events and matching owner scopes for the compact lowering
+  decisions outside `MethodLowering`. The trace reports flow-expression families, value direct access and
+  assignment-source choices, array-pipeline plan/op construction, declaration initializer and set routing, and
+  attached/inline/marker if/switch control paths. The book/task-tree now also state the trace capability contract
+  as variant-agnostic: Perl reference mechanics are not enough for Rust/future trace parity unless the user-visible
+  controls, levels, event classes, and sink behavior are equivalent. `MethodLowering.pm` remains owned by `.3.4.5`.
+
+  **Verification:** `perl -c` coverage for the touched compact ActionIR owners and
+  `t/trace_actionir_compact_lowerers.t`, focused compact-lowerer trace `prove`, adjacent RuleIR/EmitContext/
+  ActionIR pipeline trace suites, ActionIR AST focused suite, mdBook, Knowledge Map, memory/doctrine, whitespace,
+  and full local CI pass. Full local CI includes phase0 at 1021 green.
+
+  **Frontier:** `TRACE-OBSERVABILITY.3.4.5` — instrument `ActionIR::MethodLowering`.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.3.4.3 — trace ActionIR pipeline decisions**
   (ACTIONIR PIPELINE TRACE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.3.4.4).
 

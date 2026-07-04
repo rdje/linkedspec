@@ -15,6 +15,37 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
+
+use constant ACTIONIR_TRACE_OWNER => 'array_pipeline';
+
+sub _trace_array_pipeline_decision {
+ my (%args) = @_;
+ return LinkedSpec::ActionIR::Trace::decision(
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $args{phase},
+  label => $args{label},
+  decision => $args{decision},
+  taken => $args{taken},
+  context => $args{context},
+ );
+}
+
+sub _trace_array_pipeline_enter {
+ my ($phase, $label, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $phase,
+  label => $label,
+  details => $details,
+ );
+}
+
+sub _trace_array_pipeline_exit {
+ my ($scope, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
+}
 
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
@@ -77,6 +108,30 @@ sub _normalize_split_delimiter_expr {
 #------------------------------------------------------------------------------
 sub _build_array_pipeline_plan_from_expr {
  my ($expr, $deps) = @_;
+ my $scope = _trace_array_pipeline_enter(
+  'build_array_pipeline_plan_from_expr',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_array_pipeline_decision(
+   phase => 'build_array_pipeline_plan_from_expr',
+   label => 'expr',
+   decision => $decision,
+   taken => ref($result) eq 'HASH' ? 1 : 0,
+   context => $context,
+  );
+  _trace_array_pipeline_exit(
+   $scope,
+   {
+    status => ref($result) eq 'HASH' ? 'ok' : 'undef',
+    decision => $decision,
+    op_count => ref($result) eq 'HASH' && ref($result->{ops}) eq 'ARRAY' ? scalar(@{$result->{ops}}) : 0,
+   },
+  );
+  return $result
+ };
  my $trim_action_ir_value = (ref($deps->{trim_action_ir_value}) eq 'CODE')
   ? $deps->{trim_action_ir_value}
   : undef;
@@ -103,15 +158,16 @@ sub _build_array_pipeline_plan_from_expr {
  die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'extract_scalar_symbol_name'"
   unless ref($extract_scalar_symbol_name) eq 'CODE';
 
- return undef unless defined $expr;
+ return $finish->(undef, 'missing_expr', {}) unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
- return undef unless defined($trimmed) && length($trimmed);
+ return $finish->(undef, 'empty_expr', {}) unless defined($trimmed) && length($trimmed);
 
  my $target_symbol = $extract_array_symbol_name->($trimmed);
- return {target_symbol => $target_symbol, ops => []} if defined $target_symbol;
+ return $finish->({target_symbol => $target_symbol, ops => []}, 'target_symbol', { target_symbol => $target_symbol })
+  if defined $target_symbol;
 
  my $call = $parse_method_function_expr->($trimmed);
- return undef unless $call;
+ return $finish->(undef, 'not_method_call', { expr => $trimmed }) unless $call;
  my $method = $call->{method};
  my $args = $call->{args} || [];
 
@@ -121,22 +177,23 @@ sub _build_array_pipeline_plan_from_expr {
    my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1], $deps);
    shift @effective_args if $scope_target_probe;
   }
-  return undef unless @effective_args == 2 || @effective_args == 3;
+  return $finish->(undef, 'split_bad_arity', { arg_count => scalar(@effective_args) })
+   unless @effective_args == 2 || @effective_args == 3;
 
   my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0], $deps);
-  return undef unless $pipeline;
+  return $finish->(undef, 'split_target_failed', {}) unless $pipeline;
 
   my $source_symbol = $extract_scalar_symbol_name->($effective_args[1]);
-  return undef unless defined $source_symbol;
+  return $finish->(undef, 'split_source_failed', {}) unless defined $source_symbol;
   my $delimiter_expr = _normalize_split_delimiter_expr($effective_args[2], $deps);
-  return undef unless defined $delimiter_expr;
+  return $finish->(undef, 'split_delimiter_failed', {}) unless defined $delimiter_expr;
 
   push @{$pipeline->{ops}}, {
    op             => 'split',
    source_symbol  => $source_symbol,
    delimiter_expr => $delimiter_expr,
   };
-  return $pipeline
+  return $finish->($pipeline, 'append_split_op', { source_symbol => $source_symbol, delimiter_expr => $delimiter_expr })
  }
  if ($method eq 'split_each') {
   my @effective_args = @$args;
@@ -144,18 +201,18 @@ sub _build_array_pipeline_plan_from_expr {
    my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1], $deps);
    shift @effective_args if $scope_target_probe;
   }
-  return undef unless @effective_args == 2;
+  return $finish->(undef, 'split_each_bad_arity', { arg_count => scalar(@effective_args) }) unless @effective_args == 2;
 
   my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0], $deps);
-  return undef unless $pipeline;
+  return $finish->(undef, 'split_each_target_failed', {}) unless $pipeline;
 
   my $delimiter_expr = _normalize_split_delimiter_expr($effective_args[1], $deps);
-  return undef unless defined $delimiter_expr;
+  return $finish->(undef, 'split_each_delimiter_failed', {}) unless defined $delimiter_expr;
   push @{$pipeline->{ops}}, {
    op             => 'split_each',
    delimiter_expr => $delimiter_expr,
   };
-  return $pipeline
+  return $finish->($pipeline, 'append_split_each_op', { delimiter_expr => $delimiter_expr })
  }
 
  if ($method eq 'filter_match') {
@@ -164,18 +221,18 @@ sub _build_array_pipeline_plan_from_expr {
    my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1], $deps);
    shift @effective_args if $scope_target_probe;
   }
-  return undef unless @effective_args == 2;
+  return $finish->(undef, 'filter_match_bad_arity', { arg_count => scalar(@effective_args) }) unless @effective_args == 2;
 
   my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0], $deps);
-  return undef unless $pipeline;
+  return $finish->(undef, 'filter_match_target_failed', {}) unless $pipeline;
 
   my $pattern_expr = _normalize_split_delimiter_expr($effective_args[1], $deps);
-  return undef unless defined $pattern_expr;
+  return $finish->(undef, 'filter_match_pattern_failed', {}) unless defined $pattern_expr;
   push @{$pipeline->{ops}}, {
    op           => 'filter_match',
    pattern_expr => $pattern_expr,
   };
-  return $pipeline
+  return $finish->($pipeline, 'append_filter_match_op', { pattern_expr => $pattern_expr })
  }
 
  if ($method =~ /^(trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq)$/o) {
@@ -184,15 +241,16 @@ sub _build_array_pipeline_plan_from_expr {
    my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1], $deps);
    shift @effective_args if $scope_target_probe;
   }
-  return undef unless @effective_args == 1;
+  return $finish->(undef, 'unary_bad_arity', { method => $method, arg_count => scalar(@effective_args) })
+   unless @effective_args == 1;
 
   my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0], $deps);
-  return undef unless $pipeline;
+  return $finish->(undef, 'unary_target_failed', { method => $method }) unless $pipeline;
   push @{$pipeline->{ops}}, {op => $method};
-  return $pipeline
+  return $finish->($pipeline, 'append_unary_op', { method => $method })
  }
 
- return undef
+ return $finish->(undef, 'unsupported_method', { method => defined($method) ? $method : '<undef>' })
 }
 
 #------------------------------------------------------------------------------
@@ -204,14 +262,38 @@ sub _build_array_pipeline_plan_from_expr {
 #------------------------------------------------------------------------------
 sub _lower_array_pipeline_expr {
  my ($expr, $deps) = @_;
+ my $scope = _trace_array_pipeline_enter(
+  'lower_array_pipeline_expr',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_array_pipeline_decision(
+   phase => 'lower_array_pipeline_expr',
+   label => 'expr',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_array_pipeline_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $pipeline = _build_array_pipeline_plan_from_expr($expr, $deps);
- return undef unless $pipeline && $pipeline->{target_symbol};
- return undef unless @{$pipeline->{ops} || []};
+ return $finish->(undef, 'plan_missing_target', {}) unless $pipeline && $pipeline->{target_symbol};
+ return $finish->(undef, 'plan_has_no_ops', { target_symbol => $pipeline->{target_symbol} }) unless @{$pipeline->{ops} || []};
 
  my $target_symbol = $pipeline->{target_symbol};
  my $list_expr = '@'.$target_symbol;
  foreach my $op (@{$pipeline->{ops}}) {
   my $name = $op->{op} // '';
+  _trace_array_pipeline_decision(
+   phase => 'lower_array_pipeline_expr',
+   label => 'expr',
+   decision => 'lower_op_'.$name,
+   taken => 1,
+   context => { target_symbol => $target_symbol, op => $name },
+  );
   if ($name eq 'split') {
    $list_expr = 'split '.$op->{delimiter_expr}.', $'.$op->{source_symbol};
   } elsif ($name eq 'split_each') {
@@ -229,10 +311,10 @@ sub _lower_array_pipeline_expr {
   } elsif ($name eq 'filter_match') {
    $list_expr = 'grep { $_ =~ '.$op->{pattern_expr}.' } '.$list_expr;
   } else {
-   return undef;
+   return $finish->(undef, 'unsupported_plan_op', { target_symbol => $target_symbol, op => $name });
   }
  }
- return '@'.$target_symbol.' = '.$list_expr
+ return $finish->('@'.$target_symbol.' = '.$list_expr, 'pipeline_lowered', { target_symbol => $target_symbol, op_count => scalar(@{$pipeline->{ops}}) })
 }
 
 #------------------------------------------------------------------------------

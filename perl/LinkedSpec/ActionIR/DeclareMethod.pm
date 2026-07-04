@@ -9,6 +9,37 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
+
+use constant ACTIONIR_TRACE_OWNER => 'declare_method';
+
+sub _trace_declare_decision {
+ my (%args) = @_;
+ return LinkedSpec::ActionIR::Trace::decision(
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $args{phase},
+  label => $args{label},
+  decision => $args{decision},
+  taken => $args{taken},
+  context => $args{context},
+ );
+}
+
+sub _trace_declare_enter {
+ my ($phase, $label, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $phase,
+  label => $label,
+  details => $details,
+ );
+}
+
+sub _trace_declare_exit {
+ my ($scope, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
+}
 
 #------------------------------------------------------------------------------
 	# Package : LinkedSpec::ActionIR::DeclareMethod
@@ -107,6 +138,26 @@ sub _lower_declare_value_expr {
 
 sub _lower_declare_initializer_expr {
  my ($type, $expr, $deps) = @_;
+ my $scope = _trace_declare_enter(
+  'lower_declare_initializer_expr',
+  defined($type) ? $type : '<undef>',
+  {
+   type => defined($type) ? $type : '<undef>',
+   expr => defined($expr) ? $expr : '<undef>',
+  },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_declare_decision(
+   phase => 'lower_declare_initializer_expr',
+   label => defined($type) ? $type : '<undef>',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_declare_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -116,34 +167,34 @@ sub _lower_declare_initializer_expr {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
- return undef unless defined $type;
- return undef unless defined $expr;
+ return $finish->(undef, 'missing_type', {}) unless defined $type;
+ return $finish->(undef, 'missing_expr', { type => $type }) unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
- return undef unless defined($trimmed) && length($trimmed);
+ return $finish->(undef, 'empty_expr', { type => $type }) unless defined($trimmed) && length($trimmed);
 
  if ($type eq 'array') {
   my $array_ctor = $parse_method_function_expr->($trimmed);
   if ($array_ctor && $array_ctor->{method} eq 'array') {
    my $items = $array_ctor->{args} || [];
-   return undef unless ref($items) eq 'ARRAY';
+   return $finish->(undef, 'array_ctor_args_invalid', { type => $type }) unless ref($items) eq 'ARRAY';
    my @lowered_items = map { _lower_declare_value_expr($_, $deps) } @$items;
-   return undef if grep { !defined($_) || !length($_) } @lowered_items;
-   return '('.join(', ', @lowered_items).')';
+   return $finish->(undef, 'array_ctor_item_failed', { type => $type }) if grep { !defined($_) || !length($_) } @lowered_items;
+   return $finish->('('.join(', ', @lowered_items).')', 'array_constructor', { item_count => scalar(@lowered_items) });
   }
   if ($trimmed =~ /^\[.*\]$/s) {
    my $shape_expr = _lower_declare_value_expr($trimmed, $deps);
-   return undef unless defined($shape_expr) && length($shape_expr);
-   return '('.$+{payload}.')' if $shape_expr =~ /^\[(?<payload>.*)\]$/s;
-   return undef;
+   return $finish->(undef, 'array_shape_lowering_failed', { type => $type }) unless defined($shape_expr) && length($shape_expr);
+   return $finish->('('.$+{payload}.')', 'array_shape', { type => $type }) if $shape_expr =~ /^\[(?<payload>.*)\]$/s;
+   return $finish->(undef, 'array_shape_unwrap_failed', { type => $type });
   }
   # SPEC-FORMAT-TERSE.1.4.1 — `copy` (the unified terse rename of array_copy/hash_copy) is
   # accepted as an array-initializer source here too; the target type ('array') disambiguates,
   # and _lower_declare_value_expr resolves copy(...) to the same [@sym] the array_copy arm emits.
   if ($array_ctor && ($array_ctor->{method} eq 'array_copy' || $array_ctor->{method} eq 'copy' || $array_ctor->{method} eq 'sorted' || $array_ctor->{method} eq 'reversed' || $array_ctor->{method} eq 'sorted_keys' || $array_ctor->{method} eq 'sorted_values' || $array_ctor->{method} eq 'concat_arrays' || $array_ctor->{method} eq 'split_tagged_records' || $array_ctor->{method} eq 'entry_groups' || $array_ctor->{method} eq 'match_groups')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
-   return undef unless defined($derived_expr) && length($derived_expr);
-   return '('.$+{payload}.')' if $derived_expr =~ /^\[(?<payload>.*)\]$/s;
-   return '(do { my $__ls_array_init = '.$derived_expr.'; defined($__ls_array_init) ? @{$__ls_array_init} : () })';
+   return $finish->(undef, 'array_derived_lowering_failed', { method => $array_ctor->{method} }) unless defined($derived_expr) && length($derived_expr);
+   return $finish->('('.$+{payload}.')', 'array_derived_unwrapped', { method => $array_ctor->{method} }) if $derived_expr =~ /^\[(?<payload>.*)\]$/s;
+   return $finish->('(do { my $__ls_array_init = '.$derived_expr.'; defined($__ls_array_init) ? @{$__ls_array_init} : () })', 'array_derived_guarded', { method => $array_ctor->{method} });
   }
  }
 
@@ -151,40 +202,57 @@ sub _lower_declare_initializer_expr {
   my $hash_ctor = $parse_method_function_expr->($trimmed);
   if ($hash_ctor && $hash_ctor->{method} eq 'hash') {
    my $items = $hash_ctor->{args} || [];
-   return undef unless ref($items) eq 'ARRAY';
-   return undef unless @$items % 2 == 0;
+   return $finish->(undef, 'hash_ctor_args_invalid', { type => $type }) unless ref($items) eq 'ARRAY';
+   return $finish->(undef, 'hash_ctor_odd_arity', { item_count => scalar(@$items) }) unless @$items % 2 == 0;
    my @pairs;
    for (my $i = 0; $i < @$items; $i += 2) {
     my $key_expr = _lower_declare_value_expr($items->[$i], $deps);
     my $val_expr = _lower_declare_value_expr($items->[$i + 1], $deps);
-    return undef unless defined($key_expr) && length($key_expr);
-    return undef unless defined($val_expr) && length($val_expr);
+    return $finish->(undef, 'hash_ctor_key_failed', { pair_index => $i / 2 }) unless defined($key_expr) && length($key_expr);
+    return $finish->(undef, 'hash_ctor_value_failed', { pair_index => $i / 2 }) unless defined($val_expr) && length($val_expr);
     push @pairs, $key_expr.' => '.$val_expr;
    }
-   return '('.join(', ', @pairs).')';
+   return $finish->('('.join(', ', @pairs).')', 'hash_constructor', { pair_count => scalar(@pairs) });
   }
   if ($trimmed =~ /^\{.*\}$/s) {
    my $shape_expr = _lower_declare_value_expr($trimmed, $deps);
-   return undef unless defined($shape_expr) && length($shape_expr);
-   return '('.$+{payload}.')' if $shape_expr =~ /^\{(?<payload>.*)\}$/s;
-   return undef;
+   return $finish->(undef, 'hash_shape_lowering_failed', { type => $type }) unless defined($shape_expr) && length($shape_expr);
+   return $finish->('('.$+{payload}.')', 'hash_shape', { type => $type }) if $shape_expr =~ /^\{(?<payload>.*)\}$/s;
+   return $finish->(undef, 'hash_shape_unwrap_failed', { type => $type });
   }
   # SPEC-FORMAT-TERSE.1.4.1 — `copy` is accepted as a hash-initializer source too; the target
   # type ('hash') disambiguates, and _lower_declare_value_expr resolves copy(...) to the same
   # {%sym} the hash_copy arm emits (then unwrapped to the (%sym) list initializer form).
   if ($hash_ctor && ($hash_ctor->{method} eq 'hash_copy' || $hash_ctor->{method} eq 'copy' || $hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys' || $hash_ctor->{method} eq 'entry_map' || $hash_ctor->{method} eq 'entry_named_map' || $hash_ctor->{method} eq 'match_map' || $hash_ctor->{method} eq 'match_named_map')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
-   return undef unless defined($derived_expr) && length($derived_expr);
-   return '('.$+{payload}.')' if $derived_expr =~ /^\{(?<payload>.*)\}$/s;
-   return '(do { my $__ls_hash_init = '.$derived_expr.'; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })';
+   return $finish->(undef, 'hash_derived_lowering_failed', { method => $hash_ctor->{method} }) unless defined($derived_expr) && length($derived_expr);
+   return $finish->('('.$+{payload}.')', 'hash_derived_unwrapped', { method => $hash_ctor->{method} }) if $derived_expr =~ /^\{(?<payload>.*)\}$/s;
+   return $finish->('(do { my $__ls_hash_init = '.$derived_expr.'; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })', 'hash_derived_guarded', { method => $hash_ctor->{method} });
   }
  }
 
- return _lower_declare_value_expr($trimmed, $deps)
+ return $finish->(_lower_declare_value_expr($trimmed, $deps), 'scalar_or_passthrough', { type => $type })
 }
 
 sub _extract_declare_statement_from_method_expr {
  my ($expr, $deps) = @_;
+ my $scope = _trace_declare_enter(
+  'extract_declare_statement_from_method_expr',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_declare_decision(
+   phase => 'extract_declare_statement_from_method_expr',
+   label => 'expr',
+   decision => $decision,
+   taken => ref($result) eq 'HASH' ? 1 : 0,
+   context => $context,
+  );
+  _trace_declare_exit($scope, { status => ref($result) eq 'HASH' ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -199,7 +267,7 @@ sub _extract_declare_statement_from_method_expr {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  my $call = $parse_method_function_expr->($expr);
- return undef unless $call;
+ return $finish->(undef, 'not_method_call', {}) unless $call;
  my $method = $call->{method} // '';
 
  if ($method eq 'declare') {
@@ -211,35 +279,60 @@ sub _extract_declare_statement_from_method_expr {
    $trim_action_ir_value->($effective_args[1]) =~ /^(array|scalar|hash)$/o
   ) {
    shift @effective_args;
+   _trace_declare_decision(
+    phase => 'extract_declare_statement_from_method_expr',
+    label => 'expr',
+    decision => 'drop_scope_token',
+    taken => 1,
+    context => { method => $method },
+   );
   }
 
-  return undef unless @effective_args >= 2;
+  return $finish->(undef, 'declare_bad_arity', { arg_count => scalar(@effective_args) }) unless @effective_args >= 2;
   my $type = $trim_action_ir_value->($effective_args[0]);
-  return undef unless defined($type) && $type =~ /^(array|scalar|hash)$/o;
+  return $finish->(undef, 'declare_bad_type', { type => defined($type) ? $type : '<undef>' })
+   unless defined($type) && $type =~ /^(array|scalar|hash)$/o;
   my @entries = @effective_args[1 .. $#effective_args];
-  return undef unless @entries;
-  return {
+  return $finish->(undef, 'declare_no_entries', { type => $type }) unless @entries;
+  return $finish->({
    declaration_type => $type,
    entries          => \@entries,
-  };
+  }, 'declare_statement', { type => $type, entry_count => scalar(@entries) });
  }
 
  if ($method =~ /^declare_(?<alias>a|array|s|scalar|h|hash)$/o) {
   my $type = $declare_alias_to_type->($+{alias});
-  return undef unless defined $type;
+  return $finish->(undef, 'declare_alias_bad_type', { alias => $+{alias} }) unless defined $type;
   my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
-  return undef unless $effective_args && @$effective_args >= 1;
-  return {
+  return $finish->(undef, 'declare_alias_bad_arity', { type => $type }) unless $effective_args && @$effective_args >= 1;
+  return $finish->({
    declaration_type => $type,
    entries          => [@$effective_args],
-  };
+  }, 'declare_alias_statement', { type => $type, entry_count => scalar(@$effective_args) });
  }
 
- return undef
+ return $finish->(undef, 'unsupported_method', { method => $method })
 }
 
 sub _lower_declare_method_statement {
  my ($expr, $deps) = @_;
+ my $scope = _trace_declare_enter(
+  'lower_declare_method_statement',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_declare_decision(
+   phase => 'lower_declare_method_statement',
+   label => 'expr',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_declare_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -249,12 +342,33 @@ sub _lower_declare_method_statement {
  };
  my $lower_typed_declare_statement = $require_dep->('lower_typed_declare_statement');
  my $decl = _extract_declare_statement_from_method_expr($expr, $deps);
- return undef unless $decl;
- return $lower_typed_declare_statement->($decl->{declaration_type}, $decl->{entries})
+ return $finish->(undef, 'no_declaration', {}) unless $decl;
+ return $finish->(
+  $lower_typed_declare_statement->($decl->{declaration_type}, $decl->{entries}),
+  'typed_declare_lowered',
+  { type => $decl->{declaration_type}, entry_count => scalar(@{$decl->{entries} || []}) },
+ )
 }
 
 sub _lower_assign_method_statement {
  my ($expr, $deps) = @_;
+ my $scope = _trace_declare_enter(
+  'lower_assign_method_statement',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_declare_decision(
+   phase => 'lower_assign_method_statement',
+   label => 'expr',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_declare_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -278,25 +392,45 @@ sub _lower_assign_method_statement {
     if (!defined($arg_expr) || !length($arg_expr)) {
      $all_args_supported = 0;
      last;
-    }
-    push @args, $arg_expr;
    }
-   if ($all_args_supported) {
+   push @args, $arg_expr;
+  }
+  if ($all_args_supported) {
     my $effective_args = $normalize_method_args_with_optional_scope->(\@args, 2, 2);
     if ($effective_args) {
      my $ast_lowered = $lower_assign_statement->($effective_args->[0], $effective_args->[1]);
-     return $ast_lowered if defined($ast_lowered) && length($ast_lowered);
+     return $finish->($ast_lowered, 'ast_set_lowered', { arg_count => scalar(@$effective_args) })
+      if defined($ast_lowered) && length($ast_lowered);
     }
+    _trace_declare_decision(
+     phase => 'lower_assign_method_statement',
+     label => 'expr',
+     decision => 'ast_set_bad_arity',
+     taken => 0,
+     context => { arg_count => scalar(@args) },
+    );
+   } else {
+    _trace_declare_decision(
+     phase => 'lower_assign_method_statement',
+     label => 'expr',
+     decision => 'ast_set_unsupported_arg',
+     taken => 0,
+     context => { arg_count => scalar(@args) },
+    );
    }
   }
  }
 
 	 my $call = $parse_method_function_expr->($expr);
-	 return undef unless $call && $call->{method} eq 'assign' && $expr =~ /^\s*set\s*\(/o;
+	 return $finish->(undef, 'not_legacy_set_assign', {}) unless $call && $call->{method} eq 'assign' && $expr =~ /^\s*set\s*\(/o;
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
- return undef unless $effective_args;
- return $lower_assign_statement->($effective_args->[0], $effective_args->[1])
+ return $finish->(undef, 'legacy_set_bad_arity', {}) unless $effective_args;
+ return $finish->(
+  $lower_assign_statement->($effective_args->[0], $effective_args->[1]),
+  'legacy_set_lowered',
+  { arg_count => scalar(@$effective_args) },
+ )
 }
 
 1;

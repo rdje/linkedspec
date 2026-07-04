@@ -15,6 +15,37 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
+
+use constant ACTIONIR_TRACE_OWNER => 'control_flow';
+
+sub _trace_control_decision {
+ my (%args) = @_;
+ return LinkedSpec::ActionIR::Trace::decision(
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $args{phase},
+  label => $args{label},
+  decision => $args{decision},
+  taken => $args{taken},
+  context => $args{context},
+ );
+}
+
+sub _trace_control_enter {
+ my ($phase, $label, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $phase,
+  label => $label,
+  details => $details,
+ );
+}
+
+sub _trace_control_exit {
+ my ($scope, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
+}
 
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
@@ -392,6 +423,23 @@ sub _control_ast_flow_source_expr {
 #------------------------------------------------------------------------------
 sub _lower_if_flow_statement {
  my ($expr, $ctx, $deps) = @_;
+ my $scope = _trace_control_enter(
+  'lower_if_flow_statement',
+  'if',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_control_decision(
+   phase => 'lower_if_flow_statement',
+   label => 'if',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_control_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -403,24 +451,26 @@ sub _lower_if_flow_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
- return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return $finish->(undef, 'parse_failed', {}) unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
  my $call = $parsed_expr->{call};
  my $attached_block = $parsed_expr->{attached_block};
- return undef unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i' || $call->{method} eq 'when');
+ return $finish->(undef, 'wrong_method', { method => $call ? ($call->{method} // '') : '<undef>' })
+  unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i' || $call->{method} eq 'when');
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
- return undef unless $effective_args;
+ return $finish->(undef, 'bad_arity', { method => $call->{method} }) unless $effective_args;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
- return undef unless defined($cond_expr) && length($cond_expr);
- return undef if defined($attached_block) && @$effective_args > 1;
+ return $finish->(undef, 'condition_lowering_failed', { method => $call->{method} }) unless defined($cond_expr) && length($cond_expr);
+ return $finish->(undef, 'attached_block_with_inline_args', { arg_count => scalar(@$effective_args) })
+  if defined($attached_block) && @$effective_args > 1;
 
  if (defined $attached_block) {
   my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
-  return undef unless ref($actions) eq 'ARRAY';
+  return $finish->(undef, 'attached_actions_failed', {}) unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? ' '.join('; ', @$actions) : '';
   $ctx->{if_stack} ||= [];
   push @{$ctx->{if_stack}}, {else_seen => 0, implicit_close => 1, body_carrier => 'attached'};
-  return "if ($cond_expr) {$body";
+  return $finish->("if ($cond_expr) {$body", 'attached_if', { action_count => scalar(@$actions) });
  }
 
  if (@$effective_args > 1) {
@@ -434,30 +484,34 @@ sub _lower_if_flow_statement {
    my $arg_method = $arg_call ? ($arg_call->{method} // '') : '';
 
    if ($arg_method eq 'elseif' || $arg_method eq 'elif' || $arg_method eq 'else') {
-    return undef if $else_seen;
+    return $finish->(undef, 'inline_branch_after_else', { method => $arg_method }) if $else_seen;
     my $clause = _lower_inline_if_branch_expr($arg, $ctx, $deps);
-    return undef unless defined($clause) && length($clause);
+    return $finish->(undef, 'inline_branch_lowering_failed', { method => $arg_method })
+     unless defined($clause) && length($clause);
     push @clauses, $clause;
     $seen_branch_header = 1;
     $else_seen = 1 if $arg_method eq 'else';
     next;
    }
 
-   return undef if $seen_branch_header;
+   return $finish->(undef, 'action_after_inline_branch_header', {}) if $seen_branch_header;
    push @if_action_exprs, $arg;
   }
 
   my $actions = _lower_flow_branch_action_list(\@if_action_exprs, $ctx, $deps);
-  return undef unless ref($actions) eq 'ARRAY';
+  return $finish->(undef, 'inline_actions_failed', {}) unless ref($actions) eq 'ARRAY';
 
   my $body = @$actions ? ' '.join('; ', @$actions) : '';
   my $suffix = @clauses ? ' '.join(' ', @clauses) : '';
-  return "do { if ($cond_expr) {$body$suffix } }";
+  return $finish->("do { if ($cond_expr) {$body$suffix } }", 'inline_if', {
+   action_count => scalar(@$actions),
+   clause_count => scalar(@clauses),
+  });
  }
 
  $ctx->{if_stack} ||= [];
  push @{$ctx->{if_stack}}, {else_seen => 0, implicit_close => 0, body_carrier => 'marker'};
- return "if ($cond_expr) {"
+ return $finish->("if ($cond_expr) {", 'marker_if', {})
 }
 
 #------------------------------------------------------------------------------
@@ -798,6 +852,23 @@ sub _lower_flow_branch_direct_control_flow_statement {
 
 sub _lower_flow_branch_single_statement {
  my ($expr, $branch_ctx, $deps) = @_;
+ my $scope = _trace_control_enter(
+  'lower_flow_branch_single_statement',
+  'branch',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_control_decision(
+   phase => 'lower_flow_branch_single_statement',
+   label => 'branch',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_control_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -807,23 +878,30 @@ sub _lower_flow_branch_single_statement {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
- return undef unless defined $expr;
+ return $finish->(undef, 'missing_expr', {}) unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
- return undef unless defined($trimmed) && length($trimmed);
+ return $finish->(undef, 'empty_expr', {}) unless defined($trimmed) && length($trimmed);
 
  my $prefix = '';
  if (@{$branch_ctx->{if_stack} || []} && !_statement_continues_attached_if_flow($trimmed, $deps)) {
   $prefix = _flush_implicit_if_closures($branch_ctx);
+  _trace_control_decision(
+   phase => 'lower_flow_branch_single_statement',
+   label => 'branch',
+   decision => 'implicit_if_closures_flushed',
+   taken => length($prefix) ? 1 : 0,
+   context => { closure_text => $prefix },
+  );
  }
 
  my $direct_flow_lowered = _lower_flow_branch_direct_control_flow_statement($trimmed, $branch_ctx, $deps);
  if (defined($direct_flow_lowered) && length($direct_flow_lowered) && $direct_flow_lowered ne $trimmed) {
-  return length($prefix) ? "$prefix $direct_flow_lowered" : $direct_flow_lowered;
+  return $finish->(length($prefix) ? "$prefix $direct_flow_lowered" : $direct_flow_lowered, 'direct_control_flow', {});
  }
 
  my $rules = $branch_ctx->{rewrite_rules};
  unless ($rules && ref($rules) eq 'ARRAY') {
-  return length($prefix) ? "$prefix $trimmed" : $trimmed;
+  return $finish->(length($prefix) ? "$prefix $trimmed" : $trimmed, 'passthrough_without_rules', {});
  }
 
  foreach my $rule (@$rules) {
@@ -832,10 +910,12 @@ sub _lower_flow_branch_single_statement {
   next unless defined($lowered) && length($lowered);
   next if $lowered eq $trimmed;
   %$branch_ctx = %$candidate_ctx;
-  return length($prefix) ? "$prefix $lowered" : $lowered;
+  return $finish->(length($prefix) ? "$prefix $lowered" : $lowered, 'rewrite_rule_lowered', {
+   contract_id => $rule->{id} // '',
+  });
  }
 
- return length($prefix) ? "$prefix $trimmed" : $trimmed
+ return $finish->(length($prefix) ? "$prefix $trimmed" : $trimmed, 'passthrough_no_rule_match', {})
 }
 
 #------------------------------------------------------------------------------
@@ -1038,6 +1118,23 @@ sub _lower_attached_switch_body {
 #------------------------------------------------------------------------------
 sub _lower_while_flow_statement {
  my ($expr, $ctx, $deps) = @_;
+ my $scope = _trace_control_enter(
+  'lower_while_flow_statement',
+  'while',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_control_decision(
+   phase => 'lower_while_flow_statement',
+   label => 'while',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_control_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1048,24 +1145,30 @@ sub _lower_while_flow_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
- return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return $finish->(undef, 'parse_failed', {}) unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
  my $call = $parsed_expr->{call};
  my $attached_block = $parsed_expr->{attached_block};
- return undef unless $call && $call->{method} eq 'while';
- return undef unless defined $attached_block;
+ return $finish->(undef, 'wrong_method', { method => $call ? ($call->{method} // '') : '<undef>' })
+  unless $call && $call->{method} eq 'while';
+ return $finish->(undef, 'missing_attached_block', {}) unless defined $attached_block;
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
- return undef unless $effective_args && @$effective_args == 1;
+ return $finish->(undef, 'bad_arity', { arg_count => ref($effective_args) eq 'ARRAY' ? scalar(@$effective_args) : 0 })
+  unless $effective_args && @$effective_args == 1;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
- return undef unless defined($cond_expr) && length($cond_expr);
+ return $finish->(undef, 'condition_lowering_failed', {}) unless defined($cond_expr) && length($cond_expr);
 
  my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
- return undef unless ref($actions) eq 'ARRAY';
+ return $finish->(undef, 'actions_failed', {}) unless ref($actions) eq 'ARRAY';
 
  $ctx->{while_counter} = ($ctx->{while_counter} || 0) + 1;
  my $guard_var = '__ls_while_guard_'.$ctx->{while_counter};
  my $body = @$actions ? '; '.join('; ', @$actions) : '';
- return 'do { my $'.$guard_var.' = 0; for (; '.$cond_expr.'; ) { die "LinkedSpec while iteration safety limit exceeded after 10000 iterations" if ++$'.$guard_var.' > 10000'.$body.' } }'
+ return $finish->(
+  'do { my $'.$guard_var.' = 0; for (; '.$cond_expr.'; ) { die "LinkedSpec while iteration safety limit exceeded after 10000 iterations" if ++$'.$guard_var.' > 10000'.$body.' } }',
+  'attached_while',
+  { guard_var => $guard_var, action_count => scalar(@$actions) },
+ )
 }
 
 #------------------------------------------------------------------------------
@@ -1076,6 +1179,23 @@ sub _lower_while_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_switch_flow_statement {
  my ($expr, $ctx, $deps) = @_;
+ my $scope = _trace_control_enter(
+  'lower_switch_flow_statement',
+  'switch',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_control_decision(
+   phase => 'lower_switch_flow_statement',
+   label => 'switch',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_control_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1086,15 +1206,18 @@ sub _lower_switch_flow_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
- return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return $finish->(undef, 'parse_failed', {}) unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
  my $call = $parsed_expr->{call};
  my $attached_block = $parsed_expr->{attached_block};
- return undef unless $call && $call->{method} eq 'switch';
+ return $finish->(undef, 'wrong_method', { method => $call ? ($call->{method} // '') : '<undef>' })
+  unless $call && $call->{method} eq 'switch';
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
- return undef unless $effective_args && @$effective_args >= 1;
- return undef if defined($attached_block) && @$effective_args > 1;
+ return $finish->(undef, 'bad_arity', { arg_count => ref($effective_args) eq 'ARRAY' ? scalar(@$effective_args) : 0 })
+  unless $effective_args && @$effective_args >= 1;
+ return $finish->(undef, 'attached_block_with_inline_args', { arg_count => scalar(@$effective_args) })
+  if defined($attached_block) && @$effective_args > 1;
  my $switch_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
- return undef unless defined($switch_expr) && length($switch_expr);
+ return $finish->(undef, 'switch_expr_lowering_failed', {}) unless defined($switch_expr) && length($switch_expr);
 
  $ctx->{switch_stack} ||= [];
  $ctx->{switch_counter} = ($ctx->{switch_counter} || 0) + 1;
@@ -1112,24 +1235,36 @@ sub _lower_switch_flow_statement {
   my @clauses;
   foreach my $branch_expr (@$effective_args[1 .. $#$effective_args]) {
    my $clause = _lower_inline_switch_branch_expr($branch_expr, $switch_var, $hit_var, $ctx, $switch_state, $deps);
-   return undef unless defined($clause) && length($clause);
+   return $finish->(undef, 'inline_branch_lowering_failed', { branch_count => scalar(@clauses) })
+    unless defined($clause) && length($clause);
    push @clauses, $clause;
   }
   my $body = @clauses ? '; '.join('; ', @clauses) : '';
-  return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }";
+  return $finish->("do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }", 'inline_switch', {
+   switch_var => $switch_var,
+   hit_var => $hit_var,
+   clause_count => scalar(@clauses),
+  });
  }
 
  if (defined $attached_block) {
   my $actions = _lower_attached_switch_body($attached_block, $ctx, $switch_state, $deps);
-  return undef unless ref($actions) eq 'ARRAY';
+  return $finish->(undef, 'attached_actions_failed', {}) unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? '; '.join('; ', @$actions) : '';
-  return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }";
+  return $finish->("do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }", 'attached_switch', {
+   switch_var => $switch_var,
+   hit_var => $hit_var,
+   action_count => scalar(@$actions),
+  });
  }
 
  $ctx->{switch_stack} ||= [];
  push @{$ctx->{switch_stack}}, $switch_state;
 
- return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0"
+ return $finish->("do { my \$$switch_var = $switch_expr; my \$$hit_var = 0", 'marker_switch', {
+  switch_var => $switch_var,
+  hit_var => $hit_var,
+ })
 }
 
 #------------------------------------------------------------------------------
@@ -1140,6 +1275,23 @@ sub _lower_switch_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_case_flow_statement {
  my ($expr, $ctx, $deps) = @_;
+ my $scope = _trace_control_enter(
+  'lower_case_flow_statement',
+  'case',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_control_decision(
+   phase => 'lower_case_flow_statement',
+   label => 'case',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_control_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1150,21 +1302,22 @@ sub _lower_case_flow_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
- return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return $finish->(undef, 'parse_failed', {}) unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
  my $call = $parsed_expr->{call};
  my $attached_block = $parsed_expr->{attached_block};
- return undef unless $call && $call->{method} eq 'case';
+ return $finish->(undef, 'wrong_method', { method => $call ? ($call->{method} // '') : '<undef>' })
+  unless $call && $call->{method} eq 'case';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
- return undef unless $effective_args;
+ return $finish->(undef, 'bad_arity', {}) unless $effective_args;
 
  my $switch_stack = $ctx->{switch_stack} || [];
- return undef unless @$switch_stack;
+ return $finish->(undef, 'missing_switch_stack', {}) unless @$switch_stack;
  my $switch_state = $switch_stack->[-1];
- return undef if $switch_state->{default_seen};
+ return $finish->(undef, 'case_after_default', {}) if $switch_state->{default_seen};
 
  my $case_value = _lower_switch_case_value_expr($effective_args->[0], $deps);
- return undef unless $case_value && defined($case_value->{expr});
+ return $finish->(undef, 'case_value_lowering_failed', {}) unless $case_value && defined($case_value->{expr});
  my $switch_var = $switch_state->{switch_var};
  my $hit_var = $switch_state->{hit_var};
  my $match_expr = $case_value->{mode} eq 'regex'
@@ -1178,14 +1331,19 @@ sub _lower_case_flow_statement {
 
  if (defined $attached_block) {
   my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
-  return undef unless ref($actions) eq 'ARRAY';
+  return $finish->(undef, 'attached_actions_failed', {}) unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? '; '.join('; ', @$actions) : '';
   $switch_state->{open_case} = 0;
-  return $prefix."if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }";
+  return $finish->($prefix."if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }", 'attached_case', {
+   mode => $case_value->{mode},
+   action_count => scalar(@$actions),
+  });
  }
 
  $switch_state->{open_case} = 1;
- return $prefix."if (!\$$hit_var && $match_expr) { \$$hit_var = 1"
+ return $finish->($prefix."if (!\$$hit_var && $match_expr) { \$$hit_var = 1", 'marker_case', {
+  mode => $case_value->{mode},
+ })
 }
 
 #------------------------------------------------------------------------------
@@ -1196,6 +1354,23 @@ sub _lower_case_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_default_flow_statement {
  my ($expr, $ctx, $deps) = @_;
+ my $scope = _trace_control_enter(
+  'lower_default_flow_statement',
+  'default',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_control_decision(
+   phase => 'lower_default_flow_statement',
+   label => 'default',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_control_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1206,18 +1381,19 @@ sub _lower_default_flow_statement {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
- return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return $finish->(undef, 'parse_failed', {}) unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
  my $call = $parsed_expr->{call};
  my $attached_block = $parsed_expr->{attached_block};
- return undef unless $call && $call->{method} eq 'default';
+ return $finish->(undef, 'wrong_method', { method => $call ? ($call->{method} // '') : '<undef>' })
+  unless $call && $call->{method} eq 'default';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 0, 0);
- return undef unless $effective_args;
+ return $finish->(undef, 'bad_arity', {}) unless $effective_args;
 
  my $switch_stack = $ctx->{switch_stack} || [];
- return undef unless @$switch_stack;
+ return $finish->(undef, 'missing_switch_stack', {}) unless @$switch_stack;
  my $switch_state = $switch_stack->[-1];
- return undef if $switch_state->{default_seen};
+ return $finish->(undef, 'duplicate_default', {}) if $switch_state->{default_seen};
 
  my $prefix = '';
  if ($switch_state->{open_case}) {
@@ -1228,14 +1404,16 @@ sub _lower_default_flow_statement {
  my $hit_var = $switch_state->{hit_var};
  if (defined $attached_block) {
   my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
-  return undef unless ref($actions) eq 'ARRAY';
+  return $finish->(undef, 'attached_actions_failed', {}) unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? '; '.join('; ', @$actions) : '';
   $switch_state->{open_case} = 0;
-  return $prefix."if (!\$$hit_var) { \$$hit_var = 1$body }";
+  return $finish->($prefix."if (!\$$hit_var) { \$$hit_var = 1$body }", 'attached_default', {
+   action_count => scalar(@$actions),
+  });
  }
 
  $switch_state->{open_case} = 1;
- return $prefix."if (!\$$hit_var) { \$$hit_var = 1"
+ return $finish->($prefix."if (!\$$hit_var) { \$$hit_var = 1", 'marker_default', {})
 }
 
 #------------------------------------------------------------------------------

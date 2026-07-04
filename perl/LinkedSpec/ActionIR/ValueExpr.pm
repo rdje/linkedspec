@@ -15,6 +15,37 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::Trace ();
+
+use constant ACTIONIR_TRACE_OWNER => 'value_expr';
+
+sub _trace_value_decision {
+ my (%args) = @_;
+ return LinkedSpec::ActionIR::Trace::decision(
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $args{phase},
+  label => $args{label},
+  decision => $args{decision},
+  taken => $args{taken},
+  context => $args{context},
+ );
+}
+
+sub _trace_value_enter {
+ my ($phase, $label, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::enter(
+  package => __PACKAGE__,
+  owner => ACTIONIR_TRACE_OWNER,
+  phase => $phase,
+  label => $label,
+  details => $details,
+ );
+}
+
+sub _trace_value_exit {
+ my ($scope, $details) = @_;
+ return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
+}
 
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
@@ -70,6 +101,23 @@ sub _is_reserved_hash_symbol_name {
 #------------------------------------------------------------------------------
 sub _lower_primitive_literal_expr {
  my ($expr, $deps) = @_;
+ my $scope = _trace_value_enter(
+  'lower_primitive_literal_expr',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_value_decision(
+   phase => 'lower_primitive_literal_expr',
+   label => 'expr',
+   decision => $decision,
+   taken => defined($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_value_exit($scope, { status => defined($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -79,16 +127,16 @@ sub _lower_primitive_literal_expr {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
- return undef unless defined $expr;
+ return $finish->(undef, 'missing_expr', {}) unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
- return undef unless defined($trimmed) && length($trimmed);
+ return $finish->(undef, 'empty_expr', {}) unless defined($trimmed) && length($trimmed);
 
- return $trimmed if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
- return $trimmed if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
- return 'undef' if $trimmed eq 'undef';
- return 'do { require JSON::PP; JSON::PP::true }' if $trimmed eq 'true';
- return 'do { require JSON::PP; JSON::PP::false }' if $trimmed eq 'false';
- return undef
+ return $finish->($trimmed, 'number_literal', { expr => $trimmed }) if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return $finish->($trimmed, 'string_literal', { expr => $trimmed }) if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
+ return $finish->('undef', 'undef_literal', { expr => $trimmed }) if $trimmed eq 'undef';
+ return $finish->('do { require JSON::PP; JSON::PP::true }', 'true_literal', { expr => $trimmed }) if $trimmed eq 'true';
+ return $finish->('do { require JSON::PP; JSON::PP::false }', 'false_literal', { expr => $trimmed }) if $trimmed eq 'false';
+ return $finish->(undef, 'not_literal', { expr => $trimmed })
 }
 
 #------------------------------------------------------------------------------
@@ -366,6 +414,23 @@ sub _lower_nested_access_segment_expr {
 #------------------------------------------------------------------------------
 sub _lower_direct_nested_access_value_expr {
  my ($expr, $deps) = @_;
+ my $scope = _trace_value_enter(
+  'lower_direct_nested_access_value_expr',
+  'expr',
+  { expr => defined($expr) ? $expr : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_value_decision(
+   phase => 'lower_direct_nested_access_value_expr',
+   label => 'expr',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_value_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -375,39 +440,63 @@ sub _lower_direct_nested_access_value_expr {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
- return undef unless defined $expr;
+ return $finish->(undef, 'missing_expr', {}) unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
- return undef unless defined($trimmed) && length($trimmed);
- return undef unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*(\[.*)$/s;
+ return $finish->(undef, 'empty_expr', {}) unless defined($trimmed) && length($trimmed);
+ return $finish->(undef, 'not_direct_access', { expr => $trimmed })
+  unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*(\[.*)$/s;
 
  my ($base_symbol, $path_expr) = ($1, $2);
- return undef if $base_symbol =~ /^(?:undef|true|false)$/o;
+ return $finish->(undef, 'reserved_base', { base => $base_symbol }) if $base_symbol =~ /^(?:undef|true|false)$/o;
 
  my $segments = _split_nested_access_path_segments($path_expr, $deps);
- return undef unless $segments && @$segments;
- return undef if grep { ($_->{kind} // '') ne 'index' } @$segments;
+ return $finish->(undef, 'segment_parse_failed', { base => $base_symbol }) unless $segments && @$segments;
+ return $finish->(undef, 'unsupported_segment_kind', { base => $base_symbol }) if grep { ($_->{kind} // '') ne 'index' } @$segments;
 
  my $lowered = '$'.$base_symbol;
  foreach my $segment (@$segments) {
   my $segment_source = $trim_action_ir_value->($segment->{expr});
-  return undef unless defined($segment_source) && length($segment_source);
+  return $finish->(undef, 'empty_segment', { base => $base_symbol }) unless defined($segment_source) && length($segment_source);
   if ($segment_source =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
-   return undef if $segment_source =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
+   return $finish->(undef, 'reserved_segment_symbol', { base => $base_symbol, segment => $segment_source })
+    if $segment_source =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
+   _trace_value_decision(
+    phase => 'lower_direct_nested_access_value_expr',
+    label => 'expr',
+    decision => 'bare_index_segment',
+    taken => 1,
+    context => { base => $base_symbol, segment => $segment_source },
+   );
    $lowered .= '->[$'.$segment_source.']';
    next;
   }
 
   my $segment_expr = _lower_nested_access_segment_expr($segment_source, $deps);
-  return undef unless defined($segment_expr) && length($segment_expr);
+  return $finish->(undef, 'segment_lowering_failed', { base => $base_symbol, segment => $segment_source })
+   unless defined($segment_expr) && length($segment_expr);
 
   if ($segment_source =~ /^\"(?:\\.|[^\"])*\"$/s || $segment_source =~ /^'(?:\\.|[^'])*'$/s) {
+   _trace_value_decision(
+    phase => 'lower_direct_nested_access_value_expr',
+    label => 'expr',
+    decision => 'literal_key_segment',
+    taken => 1,
+    context => { base => $base_symbol, segment => $segment_source },
+   );
    $lowered .= '->{'.$segment_expr.'}';
   } else {
+   _trace_value_decision(
+    phase => 'lower_direct_nested_access_value_expr',
+    label => 'expr',
+    decision => 'expression_index_segment',
+    taken => 1,
+    context => { base => $base_symbol, segment => $segment_source },
+   );
    $lowered .= '->['.$segment_expr.']';
   }
  }
 
- return $lowered
+ return $finish->($lowered, 'direct_access_lowered', { base => $base_symbol, segment_count => scalar(@$segments) })
 }
 
 #------------------------------------------------------------------------------
@@ -477,6 +566,23 @@ sub _lower_source_slot_bare_scalar_read_expr {
 #------------------------------------------------------------------------------
 sub _lower_assignment_source_expr {
  my ($source, $deps) = @_;
+ my $scope = _trace_value_enter(
+  'lower_assignment_source_expr',
+  'source',
+  { source => defined($source) ? $source : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_value_decision(
+   phase => 'lower_assignment_source_expr',
+   label => 'source',
+   decision => $decision,
+   taken => defined($result) && length($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_value_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -488,27 +594,31 @@ sub _lower_assignment_source_expr {
  my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
 
- return undef unless defined $source;
+ return $finish->(undef, 'missing_source', {}) unless defined $source;
  $source = $trim_action_ir_value->($source);
- return 'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)' if $source eq 'CAPTURE';
- return '$IMATCH' if $source eq 'IMATCH';
- return '$LMATCH' if $source eq 'LMATCH';
+ return $finish->('substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)', 'capture_source', {}) if $source eq 'CAPTURE';
+ return $finish->('$IMATCH', 'imatch_source', {}) if $source eq 'IMATCH';
+ return $finish->('$LMATCH', 'lmatch_source', {}) if $source eq 'LMATCH';
 
  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($source, $deps);
- return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
+ return $finish->($bare_scalar_read, 'bare_scalar_read', { source => $source })
+  if defined($bare_scalar_read) && length($bare_scalar_read);
 
  my $method_value = $lower_method_value_expr->($source);
- return $method_value if defined($method_value) && length($method_value) && $source =~ /^call\s*\(/o;
- return $method_value if defined($method_value) && length($method_value) && $method_value ne $source && $source =~ /^input_slice\s*\(/o;
- return $method_value if defined($method_value) && length($method_value) && $method_value ne $source;
+ return $finish->($method_value, 'call_method_value', { source => $source })
+  if defined($method_value) && length($method_value) && $source =~ /^call\s*\(/o;
+ return $finish->($method_value, 'input_slice_method_value', { source => $source })
+  if defined($method_value) && length($method_value) && $method_value ne $source && $source =~ /^input_slice\s*\(/o;
+ return $finish->($method_value, 'method_value', { source => $source })
+  if defined($method_value) && length($method_value) && $method_value ne $source;
 
  my $lowered = $lower_flow_composite_expr->($source);
- return $lowered if defined($lowered) && length($lowered);
+ return $finish->($lowered, 'flow_composite_value', { source => $source }) if defined($lowered) && length($lowered);
  $lowered = $method_value;
  $lowered = $lower_method_value_expr->($source);
- return $lowered if defined($lowered) && length($lowered);
+ return $finish->($lowered, 'method_value_retry', { source => $source }) if defined($lowered) && length($lowered);
 
- return $source
+ return $finish->($source, 'source_passthrough', { source => $source })
 }
 
 #------------------------------------------------------------------------------
@@ -519,6 +629,23 @@ sub _lower_assignment_source_expr {
 #------------------------------------------------------------------------------
 sub _strip_literal_delimiters {
  my ($value, $deps) = @_;
+ my $scope = _trace_value_enter(
+  'strip_literal_delimiters',
+  'value',
+  { value => defined($value) ? $value : '<undef>' },
+ );
+ my $finish = sub {
+  my ($result, $decision, $context) = @_;
+  _trace_value_decision(
+   phase => 'strip_literal_delimiters',
+   label => 'value',
+   decision => $decision,
+   taken => defined($result) ? 1 : 0,
+   context => $context,
+  );
+  _trace_value_exit($scope, { status => defined($result) ? 'ok' : 'undef', decision => $decision });
+  return $result
+ };
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -528,14 +655,14 @@ sub _strip_literal_delimiters {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
- return undef unless defined $value;
+ return $finish->(undef, 'missing_value', {}) unless defined $value;
  $value = $trim_action_ir_value->($value);
- return undef unless defined($value) && length($value);
- return '' if $value eq '//';
- return $1 if $value =~ m{^/(.*)/$}s;
- return $1 if $value =~ /^\"(.*)\"$/s;
- return $1 if $value =~ /^'(.*)'$/s;
- return $value
+ return $finish->(undef, 'empty_value', {}) unless defined($value) && length($value);
+ return $finish->('', 'empty_regex_literal', { value => $value }) if $value eq '//';
+ return $finish->($1, 'regex_literal', { value => $value }) if $value =~ m{^/(.*)/$}s;
+ return $finish->($1, 'double_quoted_literal', { value => $value }) if $value =~ /^\"(.*)\"$/s;
+ return $finish->($1, 'single_quoted_literal', { value => $value }) if $value =~ /^'(.*)'$/s;
+ return $finish->($value, 'passthrough', { value => $value })
 }
 
 1;

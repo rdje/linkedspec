@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.4.4 — compact ActionIR lowerer trace):
+  Compact lowerer decisions use the same debug-level `actionir:<owner>:<phase>:<label>:<decision>` namespace as
+  `.3.4.3`. Owners covered here are `flow_expr`, `value_expr`, `array_pipeline`, `declare_method`, and
+  `control_flow`; `method_lowering` remains deferred to `.3.4.5`. The current trace reports flow-expression
+  boolean/slot/literal/logical/comparison/definedness choices, value direct-access and assignment-source choices,
+  array-pipeline plan/op lowering, declaration extraction/initializer/set routing, and compact control-flow
+  attached/inline/marker if/switch paths plus branch-statement passthrough/rewrite handling. Keep these owner
+  hooks lazy through `LinkedSpec::ActionIR::Trace`; requiring compact lowerer modules or calling them through
+  `EmitContext` without trace configured must not load `LinkedSpec::Trace`. User clarification on 2026-07-04:
+  documented trace capabilities are the variant-agnostic external contract. Rust and future variants cannot claim
+  trace parity until they expose equivalent controls, levels, event classes, and sink behavior; keep Perl internals
+  marked as implementation-specific in the mdBook.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.4.3 — ActionIR pipeline trace):
   ActionIR pipeline decisions use debug-level `actionir:<owner>:<phase>:<label>:<decision>` names through
   `LinkedSpec::ActionIR::Trace`. Owners covered in this slice are `scanner`, `scanner_core`, `canonical_events`,

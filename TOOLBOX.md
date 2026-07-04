@@ -170,6 +170,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   position events (with input-pointer excerpts), and value dumps, at five additive levels
   (`none < low < medium < high < debug`). Routable to stdout or a file. **The framework already exists**
   — exposing it via a CLI/docs is tracked by `TRACE-OBSERVABILITY`.
+- **CONTRACT:** the trace capability contract is variant-agnostic. The Perl names below are concrete reference
+  mechanics; Rust and future variants must provide equivalent documented capabilities to claim trace parity.
 - **WHEN:** root-causing *what the parser/compiler did* — branch taken, decision, mark position, where a
   handler failed. Prefer trace + a minimal repro over inferring from a diff.
 - **HOW (env):**
@@ -200,6 +202,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   debug-level `DECISION actionir:<owner>:<phase>:<label>:<decision>` lines and matching debug scopes for helper
   event discovery, canonical queue/fallback decisions, unresolved helper diagnostics, RAW_PERL and unmatched-event
   fallbacks, source-span/contract skips, and implicit attached-if closure handling.
+- **Compact ActionIR lowerer branches:** compile-time compact lowerers now emit debug-level
+  `DECISION actionir:<owner>:<phase>:<label>:<decision>` lines for `flow_expr`, `value_expr`,
+  `array_pipeline`, `declare_method`, and `control_flow` decisions. These cover expression family selection,
+  direct-access/value-source choices, array-pipeline plan/op lowering, declaration/set routing, and compact
+  attached/inline/marker control-flow paths. `ActionIR::MethodLowering` remains a separate trace leaf.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
