@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.3.4` compile/ActionIR coverage split active)
+- Last updated: `2026-07-04` (`.3.4.1` RuleIR planning trace closed)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -73,7 +73,8 @@ The important gaps are now pinned:
   bcode call dispatch, and no-match/LX/EX paths). `.3.2` and `.3.3` have since wired the Perl reference
   non-repetition and repetition generated templates through `trace_generated_handler_branch(...)`.
 - Generated in-body trace now covers match/dispatch/repetition control flow for the current Perl reference
-  templates; compile/ActionIR owner branches remain the next opaque coverage area.
+  templates; RuleIR planning decisions are now traced, while remaining EmitContext and ActionIR owner branches stay
+  the next opaque coverage area.
 - Rust currently has no analogous trace API/sink surface in `rust/linkedspec-runtime`; `rg` finds no runtime trace
   implementation beyond ordinary test variables named `log`.
 
@@ -176,13 +177,18 @@ Coverage plan:
     large `MethodLowering.pm` owner. Split before code into executable children below.
   Verification: `rg` trace call-site inventory; `wc -l` owner sizing; targeted reads of `RuleIR.pm` and
     `RuleIR/EmitContext.pm`; ActionIR owner inventory.
-  Commit: `pending this commit`
-- ID: `TRACE-OBSERVABILITY.3.4.1` · Status: `pending`
+  Commit: `f488d0ed` (`TRACE-OBSERVABILITY.3.4 - split compile action trace coverage`)
+- ID: `TRACE-OBSERVABILITY.3.4.1` · Status: `done` (closed 2026-07-04)
   Goal: Instrument RuleIR planning decisions: handler-variant selection, execution-shape/action-mode metadata,
     lifecycle-entry routing in `_collect_rule_ir`, mark/move handling, and mixed-action validation decisions.
-  Verification: `pending`
-  Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.3.4.2` · Status: `pending`
+  Acceptance: done — debug trace now reports `rule_ir:<phase>:<rule>:<decision>` decisions for RuleIR collection
+    routing, explicit ACODE/BCODE collection, per-regex lifecycle routing, `MOVE_POS`/`MARK_POS` LECODE lowering,
+    handler-variant selection, action-mode/execution-shape planning, and mixed-action validation.
+  Verification: `perl -c -Iperl perl/LinkedSpec/RuleIR.pm`; `perl -c -Iperl t/trace_ruleir_planning.t`;
+    `prove -v -Iperl t/trace_ruleir_planning.t`; mdBook; Knowledge Map; memory/doctrine; whitespace;
+    `tools/run_ci_local.sh`.
+  Commit: `pending this commit`
+- ID: `TRACE-OBSERVABILITY.3.4.2` · Status: `active`
   Goal: Instrument the EmitContext owner bridge and rewrite orchestration boundaries: ActionIR owner package/callback
     resolution, default dependency bundle selection, current registry/bare-kind injection, and top-level
     rewrite-action-code entry/exit/fallback decisions.
@@ -221,14 +227,13 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.3.4.1` | `pending` | Start with RuleIR planning because it is small, central, and selects the handler families the rest of the trace names. |
-| 2 | `.3.4.2` | `pending` | Add EmitContext owner-bridge visibility before instrumenting individual ActionIR owners. |
-| 3 | `.3.4.3` | `pending` | Cover scanner/canonical/diagnostic/rewrite pipeline decisions after the bridge semantics are visible. |
-| 4 | `.3.4.4` | `pending` | Cover compact lowering owners before the largest MethodLowering owner. |
-| 5 | `.3.4.5` | `pending` | Instrument MethodLowering separately because it is large and high-risk. |
-| 6 | `.3.4.6` | `pending` | Close compile/ActionIR coverage docs/probes. |
-| 7 | `.3.5` | `pending` | Close overall trace coverage docs/probes and decide the backend-parity split. |
-| 8 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
+| 1 | `.3.4.2` | `active` | Add EmitContext owner-bridge visibility before instrumenting individual ActionIR owners. |
+| 2 | `.3.4.3` | `pending` | Cover scanner/canonical/diagnostic/rewrite pipeline decisions after the bridge semantics are visible. |
+| 3 | `.3.4.4` | `pending` | Cover compact lowering owners before the largest MethodLowering owner. |
+| 4 | `.3.4.5` | `pending` | Instrument MethodLowering separately because it is large and high-risk. |
+| 5 | `.3.4.6` | `pending` | Close compile/ActionIR coverage docs/probes. |
+| 6 | `.3.5` | `pending` | Close overall trace coverage docs/probes and decide the backend-parity split. |
+| 7 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
 
 ## Decisions
 
@@ -252,6 +257,8 @@ Coverage plan:
 - `2026-07-04`: `.3.4` is split before code. RuleIR planning, EmitContext owner bridge, scanner/canonical/
   diagnostics/rewrite pipeline, compact lowering owners, MethodLowering, and closeout are separate leaves because
   the ActionIR owner surface is too large for one signoff slice.
+- `2026-07-04`: `.3.4.1` instruments RuleIR planning decisions with `rule_ir:<phase>:<rule>:<decision>` debug
+  events. EmitContext owner-bridge visibility is now the next frontier under `.3.4.2`.
 
 ## Open Questions
 
@@ -276,6 +283,7 @@ Coverage plan:
 | `2026-07-04` | `.3.2` | `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`; `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`; `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — non-repetition generated handler branch decisions traced; repetition source was deferred until `.3.3` |
 | `2026-07-04` | `.3.3` | `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`; `perl -c -Iperl t/trace_generated_rep_dispatch.t`; `prove -v -Iperl t/trace_generated_rep_dispatch.t`; `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — repetition generated handler loop decisions traced; full local CI passed with phase0 1021 green |
 | `2026-07-04` | `.3.4` | `rg` trace call-site inventory; `wc -l` owner sizing; targeted RuleIR/EmitContext/ActionIR owner reads; memory/doctrine/Knowledge Map/whitespace gates | PASS — compile/ActionIR coverage split before code |
+| `2026-07-04` | `.3.4.1` | `perl -c -Iperl perl/LinkedSpec/RuleIR.pm`; `perl -c -Iperl t/trace_ruleir_planning.t`; `prove -v -Iperl t/trace_ruleir_planning.t`; mdBook; Knowledge Map; memory/doctrine/whitespace; `bash tools/run_ci_local.sh` | PASS — RuleIR planning decisions traced through direct probes and normal descriptor compilation |
 
 ## Commit Log
 
@@ -288,7 +296,8 @@ Coverage plan:
 | `.3.1` | `95b84fab` (`TRACE-OBSERVABILITY.3.1 - add generated-handler trace helper seam`) | Helper contract for emitted generated handler branch decisions; no template call-site wiring yet. |
 | `.3.2` | `08e7a885` (`TRACE-OBSERVABILITY.3.2 - trace non-repetition generated dispatch`) | Non-repetition generated handler template call-site wiring. |
 | `.3.3` | `a225db82` (`TRACE-OBSERVABILITY.3.3 - trace repetition generated paths`) | Repetition generated handler template loop/min/max/zero-progress branch call-site wiring. |
-| `.3.4` | `pending this commit` (`TRACE-OBSERVABILITY.3.4 - split compile action trace coverage`) | Split compile/ActionIR trace coverage into signoff-sized sub-leaves; no runtime/code behavior change. |
+| `.3.4` | `f488d0ed` (`TRACE-OBSERVABILITY.3.4 - split compile action trace coverage`) | Split compile/ActionIR trace coverage into signoff-sized sub-leaves; no runtime/code behavior change. |
+| `.3.4.1` | `pending this commit` (`TRACE-OBSERVABILITY.3.4.1 - trace RuleIR planning decisions`) | RuleIR planning decision trace call-site wiring. |
 
 ## Changelog
 
@@ -314,4 +323,8 @@ Coverage plan:
   match/acode-index dispatch, and bcode REP zero-progress cutoffs. `.3.4` is now the PNT frontier for
   compile/ActionIR owner scopes and branch decisions.
 - `2026-07-04`: Split `.3.4` before code after read-only owner sizing showed the compile/ActionIR surface is too
-  broad for one signoff slice. `.3.4.1` is now the PNT frontier for RuleIR planning trace decisions.
+  broad for one signoff slice. `.3.4.1` became the PNT frontier for RuleIR planning trace decisions and has since
+  closed.
+- `2026-07-04`: Closed `.3.4.1` RuleIR planning trace. Debug trace now reports RuleIR collection routing,
+  handler-variant selection, action-mode/execution-shape planning, split-boundary marker lowering, and mixed-action
+  validation decisions. `.3.4.2` is now the PNT frontier for EmitContext owner-bridge trace decisions.

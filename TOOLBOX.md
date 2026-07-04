@@ -189,6 +189,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   index dispatch, AND sequence checks, bcode child-call dispatch, child-result checks, and REP loop decisions.
   REP branch names include `loop_enter`, `iteration_result`, `miss_min_satisfied`, `max_continue`,
   `zero_progress`, and `zero_progress_min_satisfied` where the generated template has that branch.
+- **RuleIR planning branches:** compile-time RuleIR planning now emits debug-level
+  `DECISION rule_ir:<phase>:<rule>:<decision>` lines for collection routing, handler-variant selection,
+  action-mode/execution-shape planning, split-boundary marker lowering, and mixed-action validation.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

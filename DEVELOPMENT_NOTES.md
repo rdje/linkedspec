@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.4.1 — RuleIR planning trace):
+  RuleIR planning decisions use debug-level `rule_ir:<phase>:<rule>:<decision>` names. Keep this namespace for
+  future RuleIR planning additions instead of adding ad hoc trace strings. Current phases are `collect`, `select`,
+  `meta`, and `validate`; covered decisions include lifecycle routing, explicit ACODE/BCODE collection,
+  `MOVE_POS`/`MARK_POS` LECODE lowering, handler variant selection, action mode, execution shape, and mixed-action
+  validation. The trace helper deliberately delegates through the existing lazy `_trace_decision` wrapper, so
+  require-only `RuleIR.pm` users still do not load `LinkedSpec::Trace`.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.4 — compile/ActionIR coverage split):
   Do not instrument compile/ActionIR trace coverage as one patch. The owner surface is too large:
   `RuleIR.pm`, `RuleIR/EmitContext.pm`, scanner/canonical/diagnostic/rewrite owners, compact lowering owners, and

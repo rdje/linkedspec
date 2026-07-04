@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.4.1 — trace RuleIR planning decisions
+
+**Scope:** Perl RuleIR planning owner, focused trace regression, mdBook trace docs, toolbox, live recovery docs,
+task-tree/frontier sync, and Knowledge Map.
+
+**What changed:** RuleIR now emits debug-level `rule_ir:<phase>:<rule>:<decision>` trace decisions for rule-entry
+collection, lifecycle routing, explicit action/blind-call edges, split-boundary `MOVE_POS`/`MARK_POS` lowering,
+handler-variant selection, action-mode/execution-shape planning, and mixed-action validation. These compile-time
+decisions are visible through normal `LinkedSpec::Get(..., trace_level => 'debug', ...)` descriptor compilation and
+do not change generated parser behavior.
+
+**Evidence:** Focused coverage in `t/trace_ruleir_planning.t` locks the new decision namespace, RuleIR metadata
+behavior, collection routing, validation behavior, and normal descriptor compilation trace visibility.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.4 — split compile action trace coverage
 
 **Scope:** Task-tree split, roadmap/frontier sync, live recovery docs, and Knowledge Map. No runtime/code behavior

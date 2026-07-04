@@ -85,6 +85,39 @@ sub _dump_value {
  })
 }
 
+sub _trace_rule_label {
+ my ($label) = @_;
+ return (defined($label) && length($label)) ? $label : '<unknown_rule>'
+}
+
+sub _trace_rule_value {
+ my ($value) = @_;
+ return '<undef>' unless defined $value;
+ return ref($value) ? ref($value) : $value
+}
+
+sub _trace_rule_ir_decision {
+ my (%args) = @_;
+
+ my $phase = defined($args{phase}) && length($args{phase}) ? $args{phase} : 'plan';
+ my $label = _trace_rule_label($args{label});
+ my $decision = defined($args{decision}) && length($args{decision}) ? $args{decision} : '<decision>';
+ my $level = defined($args{level}) ? $args{level} : DUMP_DEBUG;
+
+ my @reason;
+ push @reason, $args{reason} if defined($args{reason}) && length($args{reason});
+ if (ref($args{context}) eq 'HASH') {
+  push @reason, map { $_.'='._trace_rule_value($args{context}{$_}) } sort keys %{$args{context}};
+ }
+
+ return _trace_decision(
+  'rule_ir:'.$phase.':'.$label.':'.$decision,
+  $args{taken} ? 1 : 0,
+  join("\n", @reason),
+  $level,
+ )
+}
+
 sub _build_rule_execution_meta {
  my (%args) = @_;
 
@@ -96,6 +129,23 @@ sub _build_rule_execution_meta {
  my $rep_min = $args{rep_min};
  my $rep_max = $args{rep_max};
  my $handler_variant = _select_rule_handler_variant($node_type, $acode_count, $bcode_count, $regex_count);
+
+ _trace_rule_ir_decision(
+  phase => 'select',
+  label => $label,
+  decision => 'handler_variant_'.$handler_variant,
+  taken => 1,
+  reason => "selected handler variant '$handler_variant'",
+  context => {
+   node_type => $node_type,
+   regex_count => $regex_count,
+   acode_count => $acode_count,
+   bcode_count => $bcode_count,
+   rep_min => $rep_min,
+   rep_max => $rep_max,
+   handler_variant => $handler_variant,
+  },
+ );
 
  my $action_mode =
     $acode_count && $bcode_count ? 'mixed'
@@ -137,6 +187,32 @@ sub _build_rule_execution_meta {
   execution_shape => $execution_shape,
   uses_loop       => $uses_loop ? 1 : 0,
  };
+
+ _trace_rule_ir_decision(
+  phase => 'meta',
+  label => $label,
+  decision => 'action_mode_'.$action_mode,
+  taken => 1,
+  reason => "planned action mode '$action_mode'",
+  context => {
+   action_mode => $action_mode,
+   handler_variant => $handler_variant,
+   acode_count => $acode_count,
+   bcode_count => $bcode_count,
+  },
+ );
+ _trace_rule_ir_decision(
+  phase => 'meta',
+  label => $label,
+  decision => 'execution_shape_'.$execution_shape,
+  taken => 1,
+  reason => "planned execution shape '$execution_shape'",
+  context => {
+   execution_shape => $execution_shape,
+   handler_variant => $handler_variant,
+   uses_loop => $uses_loop ? 1 : 0,
+  },
+ );
 
  if (_trace_should_dump(DUMP_DEBUG)) {
   _trace_log_output(DUMP_DEBUG, "(LinkedSpec.pm::_build_rule_execution_meta) Rule meta", _dump_value($meta));
@@ -187,11 +263,34 @@ sub _collect_rule_ir {
  foreach my $centry (@$einfo) {
   if ($$centry[0] =~ /ELABEL/o) {
    ($rule_ir->{label}, $rule_ir->{node_type}, $rule_ir->{rep_min}, $rule_ir->{rep_max}) = @$centry[1 .. 4];
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'entry_label',
+    taken => 1,
+    reason => 'collected rule label metadata',
+    context => {
+     entry_type => $$centry[0],
+     node_type => $rule_ir->{node_type},
+     rep_min => $rule_ir->{rep_min},
+     rep_max => $rule_ir->{rep_max},
+    },
+   );
   }
 
   my $entry_type = $$centry[0];
   if ($entry_type =~ /ELABEL_INITIAL/o) {
    $rule_ir->{top_rule} = $$centry[1];
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'entry_top_rule',
+    taken => 1,
+    reason => 'collected initial entry rule',
+    context => {
+     top_rule => $rule_ir->{top_rule},
+    },
+   );
   }
   elsif ($entry_type eq 'RE') {
    # RE entries checked before code_blocks so per-regex lifecycle code
@@ -199,6 +298,17 @@ sub _collect_rule_ir {
    push @{$rule_ir->{REs}}, qr/$$centry[1]/;
    $last_was_re = 1;
    $pending_reidx = scalar(@{$rule_ir->{REs}}) - 1;
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'regex_entry',
+    taken => 1,
+    reason => 'collected regex entry',
+    context => {
+     reidx => $pending_reidx,
+     regex_count => scalar(@{$rule_ir->{REs}}),
+    },
+   );
    next;
   }
   elsif ($last_was_re && exists $rule_ir->{code_blocks}{$entry_type}) {
@@ -211,6 +321,19 @@ sub _collect_rule_ir {
      reidx   => $pending_reidx,
      code    => $$centry[1],
     };
+    _trace_rule_ir_decision(
+     phase => 'collect',
+     label => $rule_ir->{label},
+     decision => 'per_regex_lifecycle_acode',
+     taken => 1,
+     reason => 'routed per-regex lifecycle block to ACODE dispatch',
+     context => {
+      entry_type => $entry_type,
+      reidx => $pending_reidx,
+      node_type => $rule_ir->{node_type},
+      acode_count => scalar(@{$rule_ir->{acode_entries}}),
+     },
+    );
    } elsif ($rule_ir->{node_type} =~ /AND/) {
     # AND rules: route per-regex I-blocks to and_icode_entries (not acode_entries)
     # to avoid MIXED_ACTIONS conflict with bcode edges.  The and_icode is emitted
@@ -218,8 +341,34 @@ sub _collect_rule_ir {
     push @{$rule_ir->{and_icode_entries}}, {
      code    => $$centry[1],
     };
+    _trace_rule_ir_decision(
+     phase => 'collect',
+     label => $rule_ir->{label},
+     decision => 'per_regex_lifecycle_and_icode',
+     taken => 1,
+     reason => 'routed AND per-regex lifecycle block to and_icode_entries',
+     context => {
+      entry_type => $entry_type,
+      reidx => $pending_reidx,
+      node_type => $rule_ir->{node_type},
+      and_icode_count => scalar(@{$rule_ir->{and_icode_entries}}),
+     },
+    );
    } else {
     push @{$rule_ir->{code_blocks}{$entry_type}}, $$centry[1];
+    _trace_rule_ir_decision(
+     phase => 'collect',
+     label => $rule_ir->{label},
+     decision => 'per_regex_lifecycle_standalone',
+     taken => 1,
+     reason => 'kept per-regex lifecycle block as rule lifecycle code',
+     context => {
+      entry_type => $entry_type,
+      reidx => $pending_reidx,
+      node_type => $rule_ir->{node_type},
+      block_count => scalar(@{$rule_ir->{code_blocks}{$entry_type}}),
+     },
+    );
    }
    $last_was_re = 0;
    next;
@@ -227,6 +376,17 @@ sub _collect_rule_ir {
   elsif (exists $rule_ir->{code_blocks}{$entry_type}) {
    # Standalone lifecycle code (no immediately preceding RE)
    push @{$rule_ir->{code_blocks}{$entry_type}}, $$centry[1];
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'standalone_lifecycle',
+    taken => 1,
+    reason => 'collected standalone lifecycle block',
+    context => {
+     entry_type => $entry_type,
+     block_count => scalar(@{$rule_ir->{code_blocks}{$entry_type}}),
+    },
+   );
   }
   elsif ($entry_type eq 'ACODE') {
    push @{$rule_ir->{acode_entries}}, {
@@ -234,15 +394,48 @@ sub _collect_rule_ir {
     reidx   => $$centry[1]{reidx},
     code    => $$centry[1]{code},
    };
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'explicit_acode',
+    taken => 1,
+    reason => 'collected explicit action edge',
+    context => {
+     relabel => $$centry[1]{relabel},
+     reidx => $$centry[1]{reidx},
+     acode_count => scalar(@{$rule_ir->{acode_entries}}),
+    },
+   );
   }
   elsif ($entry_type eq 'BCODE') {
    push @{$rule_ir->{bcode_entries}}, {
     call => $$centry[1]{call},
     code => $$centry[1]{code},
    };
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'blind_call',
+    taken => 1,
+    reason => 'collected blind-call edge',
+    context => {
+     call => $$centry[1]{call},
+     bcode_count => scalar(@{$rule_ir->{bcode_entries}}),
+    },
+   );
   }
   elsif ($entry_type eq 'MOVE_POS') {
    push @{$rule_ir->{code_blocks}{LECODE}}, '$IPOS = pos $$STRING';
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'move_pos_lecode',
+    taken => 1,
+    reason => 'lowered move-position marker into LECODE',
+    context => {
+     lecode_count => scalar(@{$rule_ir->{code_blocks}{LECODE}}),
+    },
+   );
   }
   elsif ($entry_type eq 'MARK_POS') {
    my $mark_name = $$centry[1]{name};
@@ -259,6 +452,18 @@ sub _collect_rule_ir {
      mark_name => $mark_name,
      mark_pos_expr => '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'}',
     ).'; }';
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'mark_pos_lecode',
+    taken => 1,
+    reason => 'lowered named mark marker into LECODE',
+    context => {
+     mark_name => $mark_name,
+     mark_reidx => $mark_reidx,
+     lecode_count => scalar(@{$rule_ir->{code_blocks}{LECODE}}),
+    },
+   );
   }
   $last_was_re = 0;
  }
@@ -284,6 +489,18 @@ sub _validate_rule_ir_or_exit {
  my ($rule_ir, $rule_meta) = @_;
 
  if ($rule_meta->{action_mode} eq 'mixed') {
+  _trace_rule_ir_decision(
+   phase => 'validate',
+   label => $rule_ir->{label},
+   decision => 'mixed_action_mode',
+   taken => 0,
+   reason => 'mixed action mode detected',
+   context => {
+    acode_count => $rule_meta->{acode_count},
+    bcode_count => $rule_meta->{bcode_count},
+   },
+   level => DUMP_HIGH,
+  );
   _trace_decision(
    "_validate_rule_ir_or_exit:$rule_ir->{label}",
    0,
@@ -298,6 +515,16 @@ sub _validate_rule_ir_or_exit {
   print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
   return 0
  }
+ _trace_rule_ir_decision(
+  phase => 'validate',
+  label => $rule_ir->{label},
+  decision => 'action_mode_valid',
+  taken => 1,
+  reason => "rule action mode '$rule_meta->{action_mode}' is valid",
+  context => {
+   action_mode => $rule_meta->{action_mode},
+  },
+ );
  _trace_decision(
   "_validate_rule_ir_or_exit:$rule_ir->{label}",
   1,

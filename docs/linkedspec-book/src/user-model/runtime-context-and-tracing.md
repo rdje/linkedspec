@@ -290,9 +290,10 @@ The trace surface is useful for:
 - debugging mark/capture behavior
 
 Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
-handler wrappers, selected decisions, dumps, and mark/capture events. The Perl reference backend also emits
-debug-level generated-handler branch decisions for non-repetition dispatch paths and repetition loop paths. Most
-ActionIR lowering branches are still planned coverage work until those owners are instrumented.
+handler wrappers, selected decisions, dumps, mark/capture events, and debug-level RuleIR planning decisions. The
+Perl reference backend also emits debug-level generated-handler branch decisions for non-repetition dispatch paths
+and repetition loop paths. Most ActionIR lowering branches beyond RuleIR planning are still planned coverage work
+until those owners are instrumented.
 
 Tracing is controlled separately from runtime context.
 
@@ -426,6 +427,18 @@ resolve_top_rule_handler
 validate_input_ref
 invoke_top_rule:<top_rule>
 ```
+
+RuleIR planning decisions follow this shape:
+
+```text
+rule_ir:<phase>:<rule_label>:<decision>
+```
+
+Current RuleIR phases include `collect`, `select`, `meta`, and `validate`. Typical decisions include
+`entry_label`, `regex_entry`, `explicit_acode`, `blind_call`, `per_regex_lifecycle_acode`,
+`per_regex_lifecycle_and_icode`, `move_pos_lecode`, `mark_pos_lecode`,
+`handler_variant_<Variant>`, `action_mode_<mode>`, `execution_shape_<shape>`, `action_mode_valid`,
+and `mixed_action_mode`.
 
 When generated handler templates use the branch helper, decision names follow this shape:
 
