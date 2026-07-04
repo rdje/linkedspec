@@ -44,4 +44,5 @@ This does not add scalar number receiver reducer links. Number receivers still u
 helper family (`score.abs().ceil().add(2)`, `score.min(3)`, etc.). Hash receiver methods from the `.7.1`
 inventory did not need additional backfill in this slice; mutating or ambiguous helpers stay explicit.
 
-The next leaf is `SPEC-FORMAT-TERSE.7.4` for the final no-drift sweep.
+The follow-up `SPEC-FORMAT-TERSE.7.4` no-drift sweep is now done. No `SPEC-FORMAT-TERSE` leaf is currently
+pending, and PNT returns to `RUST-PARITY.7.3.4.3` unless a new terse leaf is split.

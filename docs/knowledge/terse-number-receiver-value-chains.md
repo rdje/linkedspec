@@ -14,7 +14,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, method-chaining, receiver-dot, number, actionir, rust-parity, oracle, mdbook]
-evidence: "SPEC-FORMAT-TERSE.2.3.5.4 landed number receiver-dot value chains on Perl and Rust. Perl normalizes compatible receiver-dot numeric chains into pure `num_*` helper composition; bare numeric receivers are scalar working-variable reads, and decimal dots are skipped by the receiver splitter. Rust parses fluent chains after numeric literals without swallowing method dots as decimals, evaluates the same receiver family, and now consumes all supplied operands for `num_add` and `num_mul`. Locked examples include `score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12)`, `5.mod(2)`, `3.5.floor().add(1)`, and `3.5.round()`. Comparison links `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal; invalid continuations return `undef`/`null`. Numeric array reducers stay explicit array-consuming helpers, and statement/lifecycle calls such as `declare(...)` are not receiver methods. Phase0 passed with 999 tests and the oracle corpus passed with 50 fixtures."
+evidence: "SPEC-FORMAT-TERSE.2.3.5.4 landed number receiver-dot value chains on Perl and Rust. Perl normalizes compatible receiver-dot numeric chains into pure `num_*` helper composition; bare numeric receivers are scalar working-variable reads, and decimal dots are skipped by the receiver splitter. Rust parses fluent chains after numeric literals without swallowing method dots as decimals, evaluates the same receiver family, and now consumes all supplied operands for `num_add` and `num_mul`. Locked examples include `score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12)`, `5.mod(2)`, `3.5.floor().add(1)`, and `3.5.round()`. Comparison links `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal; invalid continuations return `undef`/`null`. Numeric array reducers stayed explicit array-consuming helpers at the `.2.3.5.4` point; later `SPEC-FORMAT-TERSE.7.3` added terminal array/list receiver reducer methods (`scores.sum()`, `scores.avg()`, etc.) without making reducers scalar number receiver links. Statement/lifecycle calls such as `declare(...)` are not receiver methods. Phase0 passed with 999 tests for this leaf; the current corpus also contains the later `.7.3` reducer fixture."
 reverify: "prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_5_4 --quiet && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture"
 ---
 
@@ -32,6 +32,7 @@ Comparison methods are terminal values. `score.abs().gt(3)` is valid, but `score
 `undef` / JSON `null`.
 
 `declare(...)` and other statement/lifecycle calls are not terse receiver methods. Numeric array reducers such
-as `num_sum(array(scores))` also remain explicit array-consuming helpers, not scalar receiver links.
+as `num_sum(array(scores))` are array-consuming, not scalar receiver links. Later `SPEC-FORMAT-TERSE.7.3` added
+terminal array/list receiver spellings such as `scores.sum()` and `scores.min()` for that reducer family.
 
 The next task-tree leaf is `.2.3.5.5` for block-valued receiver chaining by yielded runtime type.

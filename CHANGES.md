@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.7.4 — close type-method no-drift sweep
+
+**Scope:** Roadmap/task-tree index, `SPEC-FORMAT-TERSE` task ledger, mdBook helper catalog, Knowledge Map facts,
+and live recovery docs. No Perl/Rust behavior change.
+
+**What changed:** Closed the type-method audit/backfill lane after `.7.3`. Current-facing summaries now agree that
+string/scalar, array/list, hash, and number are the supported receiver families; array numeric reducers are
+terminal array/list receiver methods, not scalar number receiver links; and mutation/lifecycle/control/
+child-dispatch/parser-state/declaration/compatibility helpers remain explicit unless a future leaf defines
+type-correct receiver semantics.
+
+**Evidence:** Focused drift scans covered stale `.7` frontier text, 73/74 fixture wording, receiver-family
+summaries, numeric reducer statements, tests, corpus, mdBook, and Knowledge Map facts. `mdbook build
+docs/linkedspec-book`, Knowledge Map regeneration/check, memory/doctrine checks, and `git diff --check` pass.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods
 
 **Scope:** Perl ActionIR receiver lowering, Rust runtime receiver dispatch, Rust integration tests, oracle corpus,

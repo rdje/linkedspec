@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (SPEC-FORMAT-TERSE.7.4 — type-method no-drift closure):
+  The supported type-method surface is closed for the current lane. Receiver families are string/scalar,
+  array/list, hash, and number. Array numeric reducers (`sum`, `avg`, `median`, `range`, `min`, `max`) are terminal
+  array/list receiver methods, not scalar number receiver links. Mutation, lifecycle/control, child-dispatch,
+  parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
+  statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
+  Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
+  `RUST-PARITY.7.3.4.3` unless a new terse leaf is split.
+
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and
   `max`. Keep these in the array receiver family, not the scalar number receiver family. `score.min(3)` remains
@@ -27,8 +36,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   number; expression-valued blocks and pure user-function returns dispatch by yielded runtime type into those
   families. Booleans/flow-result values are terminal for now. Keep mutation, lifecycle/control, child-dispatch,
   capture/entry/match/input/mark, declaration, and compatibility-helper surfaces explicit unless a later leaf
-  designs safe receiver semantics and updates Perl/Rust/tests/docs/KM together. Numeric array reducers remain
-  array-consuming function helpers unless `.7.3` deliberately adds receiver aliases.
+  designs safe receiver semantics and updates Perl/Rust/tests/docs/KM together. `.7.3` deliberately added
+  terminal array/list receiver aliases for numeric reducers; they remain array-consuming and are not scalar number
+  receiver links.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.6.4 — declaration helpers are legacy compatibility):
   Keep the post-migration boundary strict. `declare(...)` and declaration aliases stay accepted for existing specs,

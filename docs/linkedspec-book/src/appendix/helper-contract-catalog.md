@@ -1277,8 +1277,9 @@ Receiver-dot methods are available for the value families that have a typed rece
   `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `concat`/`cat`, and `coalesce_nonempty`; `split(delim)`
   bridges to array chains; `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` are terminal.
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
-  `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, `filter_match`, `count`,
-  `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`, and `join_values`.
+  `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Terminal
+  links include `count`, `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
+  `sum`, `avg`, `median`, `range`, `min`, and `max`.
 - **Hash** receivers support pure hash links such as `hash_copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
   and `has_key` are terminal.

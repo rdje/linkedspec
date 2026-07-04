@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.7.4 — close type-method no-drift sweep**
+  (TYPE-METHOD LANE CLOSED; SPEC-FORMAT-TERSE FRONTIER EMPTY).
+
+  **Fix:** Reconciled current roadmap, task-tree index, mdBook helper/reference summaries, and Knowledge Map facts
+  after the `.7.3` array reducer receiver backfill. Current-facing docs now agree that supported receiver families
+  are string/scalar, array/list, hash, and number; array numeric reducers are terminal array/list receiver methods,
+  not scalar number receiver links; and mutation/lifecycle/control/child-dispatch/parser-state/declaration/
+  compatibility helpers remain explicit unless a future leaf defines safe receiver semantics.
+
+  **Verification:** Focused drift scans covered stale `.7` frontier text, 73/74 fixture wording, receiver-family
+  summaries, numeric reducer statements, tests, corpus, mdBook, and Knowledge Map facts. `mdbook build
+  docs/linkedspec-book`, Knowledge Map regeneration/check, memory/doctrine checks, and `git diff --check` pass.
+
+  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.7.3.4.3` unless a
+  new terse leaf is split.
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods**
   (ARRAY/LIST NUMERIC REDUCERS ARE TERMINAL RECEIVER METHODS).
   Array/list receivers now support `sum`, `avg`, `median`, `range`, `min`, and `max` as pure terminal methods.
