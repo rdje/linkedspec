@@ -19,10 +19,11 @@
 //! If no match on first iteration:
 //!   I → LS → no match → LX → E
 //!
-//! ## Blind-call dispatch (AND rules)
+//! ## Blind-call dispatch
 //!
-//! Blind-call rules (`=> child`) dispatch children sequentially from
-//! `bcode_dispatch`. Each child is invoked in order, without regex matching.
+//! Blind-call rules (`=> child`) dispatch children from `bcode_dispatch`.
+//! Explicit OR mode stops after the first truthy child return; all other
+//! currently supported blind-call modes invoke each child sequentially.
 //! Blind-call dispatch takes priority over regex + acode dispatch.
 //!
 //! ## Multi-entrypoint child dispatch
@@ -33,8 +34,11 @@
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::RuntimeContext;
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
+use linkedspec_core::ast::RuleMode;
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
-use linkedspec_core::types::{CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue};
+use linkedspec_core::types::{
+    BcodeEntry, CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue,
+};
 use serde_json::Value;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
@@ -383,6 +387,9 @@ impl GeneratedPlanExecutor<'_> {
     ) -> Result<RuntimeValue, String> {
         let family = self.generated_rule_family(label)?;
         if !Self::is_direct_acode_family(family) {
+            if Self::is_direct_bcode_family(family) {
+                return self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx);
+            }
             return self.engine.execute_rule(label, entry_regex_idx, ctx);
         }
         self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
@@ -403,6 +410,13 @@ impl GeneratedPlanExecutor<'_> {
                 | GeneratedRuleFamily::OrAcode
                 | GeneratedRuleFamily::AndSingleAcode
                 | GeneratedRuleFamily::AndAcodeSeq
+        )
+    }
+
+    fn is_direct_bcode_family(family: GeneratedRuleFamily) -> bool {
+        matches!(
+            family,
+            GeneratedRuleFamily::AndBcode | GeneratedRuleFamily::OrBcode
         )
     }
 
@@ -695,6 +709,135 @@ impl GeneratedPlanExecutor<'_> {
         saved_match.restore(ctx);
         Ok(my_return)
     }
+
+    fn execute_direct_bcode_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        family: GeneratedRuleFamily,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let entry_pos = ctx.pos;
+        if !ctx.enter_recursion(label, entry_pos) {
+            return Ok(RuntimeValue::Undef);
+        }
+
+        let result = self.execute_direct_bcode_rule_inner(label, entry_regex_idx, family, ctx);
+        ctx.exit_recursion(label, entry_pos);
+        result
+    }
+
+    fn execute_direct_bcode_rule_inner(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        family: GeneratedRuleFamily,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let rule = self.engine.spec.find(label).ok_or_else(|| {
+            format!(
+                "rule '{}' (entry idx {}) not found in compiled spec",
+                label, entry_regex_idx
+            )
+        })?;
+
+        let caller_return = ctx.take_return_value();
+        let saved_match = SavedMatchState {
+            entry_groups: std::mem::take(&mut ctx.entry_groups),
+            entry_named: std::mem::take(&mut ctx.entry_named),
+            match_groups: std::mem::take(&mut ctx.match_groups),
+            match_named: std::mem::take(&mut ctx.match_named),
+            entry_start_byte: ctx.entry_start_byte,
+            entry_end_byte: ctx.entry_end_byte,
+            match_start_byte: ctx.match_start_byte,
+            match_end_byte: ctx.match_end_byte,
+            capture_start: ctx.capture_start,
+        };
+        ctx.entry_groups = saved_match.match_groups.clone();
+        ctx.entry_named = saved_match.match_named.clone();
+        ctx.entry_start_byte = saved_match.match_start_byte;
+        ctx.entry_end_byte = saved_match.match_end_byte;
+        ctx.match_start_byte = 0;
+        ctx.match_end_byte = 0;
+        ctx.capture_start = Some(ctx.entry_end_byte);
+
+        macro_rules! return_if_rule_returned {
+            () => {
+                if let Some(my_return) = ctx.take_return_value() {
+                    ctx.restore_return_value(caller_return);
+                    saved_match.restore(ctx);
+                    return Ok(my_return);
+                }
+            };
+        }
+
+        if let Some(ref preamble) = rule.preamble {
+            self.engine.execute_block(preamble, ctx, label)?;
+            return_if_rule_returned!();
+        }
+
+        if !rule.acode_dispatch.is_empty() {
+            ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
+            return Err(format!(
+                "generated direct bcode executor received acode rule '{label}'"
+            ));
+        }
+        if rule.bcode_dispatch.is_empty() {
+            ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
+            return Err(format!(
+                "generated direct bcode executor received rule '{label}' without bcode dispatch"
+            ));
+        }
+
+        match family {
+            GeneratedRuleFamily::AndBcode => {
+                for entry in &rule.bcode_dispatch {
+                    let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                    ctx.set_retv(child_retv);
+                    self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+            }
+            GeneratedRuleFamily::OrBcode => {
+                let mut matched = false;
+                for entry in &rule.bcode_dispatch {
+                    let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                    let child_matched = child_retv.as_bool();
+                    ctx.set_retv(child_retv);
+                    self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
+                    return_if_rule_returned!();
+                    if child_matched {
+                        matched = true;
+                        break;
+                    }
+                }
+                if !matched && let Some(ref lxcode) = rule.lxcode {
+                    self.engine.execute_block(lxcode, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+            }
+            _ => {
+                ctx.restore_return_value(caller_return);
+                saved_match.restore(ctx);
+                return Err(format!(
+                    "generated direct bcode executor received non-bcode family {:?} for '{label}'",
+                    family
+                ));
+            }
+        }
+
+        if let Some(ref ecode) = rule.ecode {
+            self.engine.execute_block(ecode, ctx, label)?;
+            return_if_rule_returned!();
+        }
+
+        let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+        ctx.restore_return_value(caller_return);
+        saved_match.restore(ctx);
+        Ok(my_return)
+    }
 }
 
 impl Engine {
@@ -717,9 +860,9 @@ impl Engine {
     ///
     /// This path is separate from [`execute`](Self::execute): generated modules
     /// call it after `source_emitter` validates the static family table emitted
-    /// beside the serialized `CompiledSpec`. `RUST-PARITY.8.3.2` directly
-    /// handles default and OR acode families here; later leaves replace the
-    /// remaining family fallbacks.
+    /// beside the serialized `CompiledSpec`. `RUST-PARITY.8.3.2`-`.8.3.4`
+    /// directly handle non-repetition acode and bcode families here; REP
+    /// families keep their fallback until the repetition leaf replaces it.
     pub fn execute_generated_with_plan(
         &self,
         generated_rules: &[GeneratedRuleSpec],
@@ -811,6 +954,30 @@ impl Engine {
             && rule.bcode_dispatch.is_empty()
     }
 
+    fn execute_bcode_entry_tail(
+        &self,
+        entry: &BcodeEntry,
+        ctx: &mut RuntimeContext,
+        label: &str,
+    ) -> Result<(), String> {
+        if let Some(ref block) = entry.code {
+            self.execute_block(block, ctx, label)?;
+        }
+
+        for (method, args_str) in &entry.fluent_chain {
+            let args_val: Vec<RuntimeValue> = if args_str.is_empty() {
+                vec![]
+            } else {
+                vec![RuntimeValue::Scalar(args_str.clone())]
+            };
+            let empty_kw = std::collections::HashMap::new();
+            let empty_raw: &[linkedspec_core::expr::Arg] = &[];
+            self.call_helper(method, empty_raw, &args_val, &empty_kw, ctx, label)?;
+        }
+
+        Ok(())
+    }
+
     /// The rule body, wrapped by [`execute_rule`] (which adds the recursion
     /// termination guard). All recursive dispatch goes through `execute_rule`,
     /// never directly through this method.
@@ -890,29 +1057,33 @@ impl Engine {
             return_if_rule_returned!();
         }
 
-        // ── Blind-call dispatch (AND rules) ──
+        // ── Blind-call dispatch ──
         if !rule.bcode_dispatch.is_empty() {
-            for entry in &rule.bcode_dispatch {
-                // Execute child rule; its return value becomes the parent's
-                // `retv` (Runtime Semantics §6.2), readable by the attached
-                // code, fluent chain, and the E-block below.
-                let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
-                ctx.set_retv(child_retv);
-                // Execute attached code if present
-                if let Some(ref block) = entry.code {
-                    self.execute_block(block, ctx, label)?;
+            if !matches!(rule.mode, RuleMode::Or) {
+                for entry in &rule.bcode_dispatch {
+                    // Execute child rule; its return value becomes the parent's
+                    // `retv` (Runtime Semantics §6.2), readable by the attached
+                    // code, fluent chain, and the E-block below.
+                    let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                    ctx.set_retv(child_retv);
+                    self.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
                 }
-                // Fluent chain calls on the blind edge
-                for (method, _args_str) in &entry.fluent_chain {
-                    let args_val: Vec<RuntimeValue> = if _args_str.is_empty() {
-                        vec![]
-                    } else {
-                        vec![RuntimeValue::Scalar(_args_str.clone())]
-                    };
-                    let empty_kw = std::collections::HashMap::new();
-                    let empty_raw: &[linkedspec_core::expr::Arg] = &[];
-                    self.call_helper(method, empty_raw, &args_val, &empty_kw, ctx, label)?;
+            } else {
+                let mut matched = false;
+                for entry in &rule.bcode_dispatch {
+                    let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                    let child_matched = child_retv.as_bool();
+                    ctx.set_retv(child_retv);
+                    self.execute_bcode_entry_tail(entry, ctx, label)?;
+                    return_if_rule_returned!();
+                    if child_matched {
+                        matched = true;
+                        break;
+                    }
+                }
+                if !matched && let Some(ref lxcode) = rule.lxcode {
+                    self.execute_block(lxcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             }

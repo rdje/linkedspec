@@ -1,4 +1,4 @@
-//! RUST-PARITY.8.2/.8.3.1/.8.3.2/.8.3.3 — generated Rust-source compile/run proof.
+//! RUST-PARITY.8.2/.8.3.1/.8.3.2/.8.3.3/.8.3.4 — generated Rust-source compile/run proof.
 
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::compile;
@@ -47,26 +47,44 @@ Second:
 
 const AND_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND
  I { declare(array, log) }
- => ChildA
- => ChildB
+ => ChildA { push_value(array(log), :retv) }
+ => ChildB { push_value(array(log), :retv) }
  E { return(array_copy(array(log))) }
 
 ChildA:
  /a/
- I { push_value(array(log), "A") }
+ E { return("A") }
 
 ChildB:
- /b/
- I { push_value(array(log), "B") }
+ /[ \t]+b/
+ E { return("B") }
 "#;
 
 const OR_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
- => Child
- E { return(:retv) }
+ => ChildA
+ => ChildB
+ E { return(concat("or-bcode:", :retv)) }
 
-Child:
- /go/
- E { return("or-bcode") }
+ChildA:
+ /a/
+ E { return("A") }
+
+ChildB:
+ /[ \t]+b/
+ E { return("B") }
+"#;
+
+const OR_BCODE_LX_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
+ => ChildA
+ => ChildB
+ LX { return("or-miss") }
+ E { return("unexpected") }
+
+ChildA::
+ I { return_undef() }
+
+ChildB::
+ I { return_undef() }
 "#;
 
 struct TempProject {
@@ -153,8 +171,16 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         Case {
             module: "or_bcode_case",
             spec: OR_BCODE_SOURCE_EMITTER_SPEC,
-            input: "go",
-            expected: json!(["or-bcode"]),
+            input: "a b",
+            expected: json!(["or-bcode:A"]),
+            expected_family: "GeneratedRuleFamily::OrBcode",
+            expected_mode: RuleMode::Or,
+        },
+        Case {
+            module: "or_bcode_miss_case",
+            spec: OR_BCODE_LX_SOURCE_EMITTER_SPEC,
+            input: "c",
+            expected: json!(["or-miss"]),
             expected_family: "GeneratedRuleFamily::OrBcode",
             expected_mode: RuleMode::Or,
         },

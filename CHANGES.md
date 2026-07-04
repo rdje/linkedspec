@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.3.4 — emit direct bcode execution
+
+**Scope:** Rust generated-source execution path, Rust blind-call bcode dispatch,
+source-emitter compile/run matrix, task-tree frontier docs, mdBook backend handoff, live recovery docs, and
+Knowledge Map.
+
+**What changed:** The generated-plan executor now treats `AndBcode` and `OrBcode` as direct generated families
+instead of fallback families. Blind-call tail execution is shared between the interpreted and generated paths:
+each child return becomes parent `retv`, attached blind-edge code and fluent calls run in order, and the parent
+exit block sees the resulting `retv`. Explicit OR bcode dispatch stops after the first truthy child
+return instead of continuing through later blind-call entries, and OR bcode no-match dispatch fires `LX` before the
+parent `E` block.
+
+**Evidence:** The focused generated-source matrix now proves AND bcode sequential dispatch by collecting the
+ordered child returns `A` then `B`, proves OR bcode first-match behavior with an input (`a b`) that would return the
+later child if dispatch did not stop after the first truthy child, and proves OR bcode no-match `LX` handling.
+Focused formatting, source-emitter, runtime-lib, and clippy checks pass. The mdBook, Knowledge Map, memory,
+doctrine, whitespace, and full local CI gates also pass; the full gate includes 1021 phase0 regression tests. The
+next executable frontier is `RUST-PARITY.8.3.5`: close the non-repetition generated-family matrix.
+
 ## 2026-07-04 — RUST-PARITY.8.3.3 — emit direct AND acode execution
 
 **Scope:** Rust generated-source execution path, shared Rust AND acode sequence semantics,
@@ -16,7 +36,8 @@ matching the Perl HandlerIR `and_acode_seq` contract for ordered consume cases.
 **Evidence:** The focused generated-source matrix now proves an AND single-acode action return and an AND
 sequential-acode case that only returns from the second ordered slot (`a b` → `and-seq`), which would fail if the
 executor stopped after the first regex. Focused formatting, source-emitter, runtime-lib, and clippy checks pass.
-The next executable frontier is `RUST-PARITY.8.3.4`: direct AND/OR bcode generated execution.
+At `.8.3.3` completion, the next executable frontier was `.8.3.4`; `.8.3.4` is now complete and the current
+frontier is `RUST-PARITY.8.3.5`.
 
 ## 2026-07-04 — RUST-PARITY.8.3.2 — emit direct default-or acode execution
 
@@ -27,7 +48,8 @@ mdBook backend handoff, live recovery docs, and Knowledge Map.
 `Engine::execute_generated_with_plan(...)` instead of delegating through `Engine::execute(...)`. The generated-plan
 executor directly handles `Default` and `OrAcode` families with the interpreter's recursion guard, match lexical
 save/restore, lifecycle block execution, action-edge child-return scoping, default repetition loop, and
-zero-progress guard. AND acode, bcode, and REP families remain fallback-owned by later leaves.
+zero-progress guard. At `.8.3.2` completion, the later-family paths remained owned by later leaves; `.8.3.3` and
+`.8.3.4` have since closed the AND acode and AND/OR bcode parts, leaving REP for `.8.4`.
 
 **Evidence:** The focused generated-source matrix now proves a repeated default case and an OR acode action-edge
 case that reads the dispatched child return, builds all generated modules in an isolated temp crate, and verifies

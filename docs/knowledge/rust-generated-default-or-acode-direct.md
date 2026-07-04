@@ -10,7 +10,7 @@ answers:
 date: 2026-07-04
 status: accepted
 tags: [rust, codegen, source-emitter, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.8.3.2 added Engine::execute_generated_with_plan and the runtime-internal GeneratedPlanExecutor. execute_generated_parser validates GENERATED_RULES and calls the plan-aware executor instead of Engine::execute. The executor directly handles GeneratedRuleFamily::Default and GeneratedRuleFamily::OrAcode with the interpreter's recursion guard, entry/local match save/restore, lifecycle block execution, action-edge child retv/call(child) scoping, default repetition loop, and zero-progress guard. RUST-PARITY.8.3.3 later added direct AND acode. Bcode and REP families still fall back inside the executor. The focused source_emitter test proves repeated default matching, OR acode child-return dispatch, and AND acode ordered sequence in generated modules built in an isolated temp crate."
+evidence: "RUST-PARITY.8.3.2 added Engine::execute_generated_with_plan and the runtime-internal GeneratedPlanExecutor. execute_generated_parser validates GENERATED_RULES and calls the plan-aware executor instead of Engine::execute. The executor directly handles GeneratedRuleFamily::Default and GeneratedRuleFamily::OrAcode with the interpreter's recursion guard, entry/local match save/restore, lifecycle block execution, action-edge child retv/call(child) scoping, default repetition loop, and zero-progress guard. RUST-PARITY.8.3.3 later added direct AND acode, and RUST-PARITY.8.3.4 later added direct AND/OR bcode. REP families still fall back inside the executor. The focused source_emitter test proves repeated default matching, OR acode child-return dispatch, AND acode ordered sequence, AND bcode sequential dispatch, and OR bcode first-match dispatch in generated modules built in an isolated temp crate."
 reverify: "rg -n 'execute_generated_with_plan|GeneratedPlanExecutor|execute_generated_parser|GeneratedRuleFamily::Default|GeneratedRuleFamily::OrAcode|GeneratedRuleFamily::AndSingleAcode|GeneratedRuleFamily::AndAcodeSeq|RUST-PARITY\\.8\\.3\\.2|RUST-PARITY\\.8\\.3\\.3' rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs docs/tasks/RUST-PARITY.md && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture"
 ---
 
@@ -33,5 +33,5 @@ entry/local match scoping, lifecycle block order, action-edge child return
 scoping, default-mode repetition, and zero-progress termination.
 
 `RUST-PARITY.8.3.3` later added direct `AndSingleAcode` and `AndAcodeSeq`.
-Remaining generated families still fall back inside the executor until their
-owned leaves land: `.8.3.4` for bcode and `.8.4` for REP families.
+`RUST-PARITY.8.3.4` later added direct `AndBcode` and `OrBcode`. The remaining
+generated fallback family is REP, owned by `.8.4`.

@@ -11,7 +11,7 @@ answers:
 date: 2026-07-04
 status: accepted
 tags: [rust, codegen, source-emitter, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.8.3.3 extends GeneratedPlanExecutor direct execution from Default/OrAcode to AndSingleAcode and AndAcodeSeq. The shared Rust regex/acode loop now treats non-repetition AND multi-regex rules as ordered sequences: regex slot 0, then slot 1, etc.; an out-of-order or incomplete sequence fires LX when present and returns undef before E. The focused source_emitter matrix proves AND single-acode and a two-slot AND sequential-acode case whose second edge returns and-seq, so stopping after the first regex would fail. Bcode families still fall back until RUST-PARITY.8.3.4; REP families remain RUST-PARITY.8.4."
+evidence: "RUST-PARITY.8.3.3 extends GeneratedPlanExecutor direct execution from Default/OrAcode to AndSingleAcode and AndAcodeSeq. The shared Rust regex/acode loop now treats non-repetition AND multi-regex rules as ordered sequences: regex slot 0, then slot 1, etc.; an out-of-order or incomplete sequence fires LX when present and returns undef before E. The focused source_emitter matrix proves AND single-acode and a two-slot AND sequential-acode case whose second edge returns and-seq, so stopping after the first regex would fail. RUST-PARITY.8.3.4 later added direct AND/OR bcode execution; REP families remain RUST-PARITY.8.4."
 reverify: "rg -n 'AndSingleAcode|AndAcodeSeq|is_and_acode_seq|RUST-PARITY\\.8\\.3\\.3|RUST-PARITY\\.8\\.3\\.4' rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/source_emitter.rs docs/tasks/RUST-PARITY.md && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture"
 ---
 
@@ -33,7 +33,8 @@ The direct generated-source matrix proves this with a two-slot rule whose second
 edge returns `and-seq`. A one-match fallback would stop after the first regex
 and return the wrong result.
 
-Remaining generated families:
+Follow-on generated families:
 
-- `.8.3.4`: direct AND/OR bcode execution.
+- `.8.3.4`: done — direct AND/OR bcode execution.
+- `.8.3.5`: current — non-repetition generated-family matrix closeout.
 - `.8.4`: REP family direct execution and termination guards.
