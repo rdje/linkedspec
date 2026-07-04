@@ -9,9 +9,13 @@ The `rust/` directory contains a Cargo workspace with two crates:
 | Crate | Purpose |
 |-------|---------|
 | `linkedspec-core` | `.spec` parser, compiler, validation, HandlerIR types, expression AST |
-| `linkedspec-runtime` | Handler execution engine, regex dispatch, helper functions, lifecycle interpreter |
+| `linkedspec-runtime` | Handler execution engine, regex dispatch, helper functions, lifecycle interpreter, generated-source scaffold |
 
-The Rust variant interprets HandlerIR at runtime (no code generation) — the engine walks compiled rule specifications and executes regex matching, child rule dispatch, and lifecycle code as direct Rust function calls.
+The Rust variant primarily interprets its compiled structural contract at runtime: the engine walks compiled rule
+specifications and executes regex matching, child rule dispatch, and lifecycle code as direct Rust function calls.
+It also exposes a minimal generated-source scaffold (`linkedspec_runtime::source_emitter`) that emits a Rust
+module embedding a `CompiledSpec` and delegating execution to the same engine. Direct generated handler bodies are
+tracked in the follow-on `RUST-PARITY.8.3+` leaves.
 
 ## Quick Start
 
@@ -42,6 +46,7 @@ cargo test
 │  ├─ engine.rs            │  → lifecycle loop, helper dispatch
 │  ├─ helpers/regex_engine │  → regex alternation (seek/consume)
 │  ├─ runtime.rs           │  → RuntimeContext (variable store)
+│  ├─ source_emitter.rs    │  → generated Rust module scaffold
 │  └─ helpers/             │  → 80+ helper functions
 └──────────┬───────────────┘
            │
@@ -82,7 +87,9 @@ The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust varian
 - Uses the **same** lifecycle model (I/LS/LE/E/EX/IT/LX blocks)
 - Uses the **same** regex dispatch semantics (seek/consume modes)
 - Uses the **same** rule modes (AND, OR, OR+, AND+, bounded, *, +, ?, &, |)
-- **Does not** generate Perl code or use `eval` — HandlerIR is interpreted directly
+- **Does not** generate Perl code or use `eval` — the default runtime path interprets `CompiledSpec` directly
+- Provides a minimal generated Rust-source scaffold that embeds `CompiledSpec` and delegates to the interpreter;
+  direct generated handler-family emission is still in progress
 - **Does not** implement the legacy plugin system (`.plg` files, `PPlugin`)
 
 ## Test Corpus

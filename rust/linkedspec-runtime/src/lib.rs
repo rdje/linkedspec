@@ -12,6 +12,7 @@
 pub mod engine;
 pub mod helpers;
 pub mod runtime;
+pub mod source_emitter;
 pub mod spec_parser;
 pub mod staged_parser_registry;
 

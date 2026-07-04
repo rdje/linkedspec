@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.2 — add Rust source emitter scaffold
+
+**Scope:** Rust runtime crate API, generated-source compile/run proof, Rust README, mdBook backend handoff, task
+tree/frontier docs, live recovery docs, and Knowledge Map.
+
+**What changed:** `linkedspec-runtime` now exports `source_emitter::emit_rust_source(&CompiledSpec)`. The emitted
+module embeds a serialized `CompiledSpec`, exposes a `LINKEDSPEC_GENERATED_SOURCE_FORMAT` marker, and provides a
+`parse(input)` function that constructs the existing `Engine` and delegates execution through the interpreter.
+This proves the generated-source API and build harness without changing the interpreter path.
+
+**Evidence:** Added a focused `source_emitter` integration test that parses/validates/compiles a simple
+non-recursive `.spec`, confirms the interpreter output, emits Rust source, builds it in an isolated temporary
+crate, and executes the generated `parse("hello world")` path. Direct non-REP handler-family source emission is
+now the `.8.3` frontier.
+
 ## 2026-07-04 — RUST-PARITY.8.1 — split Rust source emitter lane
 
 **Scope:** Task-tree ownership, roadmap/frontier tracker, mdBook backend handoff, live recovery docs, and

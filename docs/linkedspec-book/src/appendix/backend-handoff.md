@@ -209,8 +209,11 @@ your language. The JSON diagnostic backend (`_emit_handler_json`) proves the pat
 The Rust backend currently executes an interpreted structural model
 (`CompiledSpec`/`CompiledRule`) rather than generated Rust source. Its
 generated-source path is tracked separately under `RUST-PARITY.8`: `.8.1`
-split the work into a minimal emitter scaffold/compile-run harness, non-REP
-families, REP families, and all-variant/oracle integration.
+split the work, and `.8.2` added the minimal scaffold/compile-run proof. That
+scaffold emits a Rust module embedding a serialized `CompiledSpec` and delegates
+`parse(input)` through the existing runtime engine; direct emitted handler
+families remain the `.8.3`/`.8.4` work, followed by all-variant/oracle
+integration in `.8.5`.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`

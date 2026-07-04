@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.2 — Rust generated-source scaffold):
+  The first Rust source-emitter slice deliberately emits a small generated module that delegates through the
+  existing interpreter. `emit_rust_source(&CompiledSpec)` serializes the compiled structural contract into a Rust
+  string literal, exposes a generated-source format marker, and builds `parse(input)` around
+  `linkedspec_runtime::engine::Engine`. This is not yet direct HandlerIR-family source generation; it proves the
+  public emitter API, generated-source dependency boundary, offline temp-crate build path, and runtime equivalence
+  for one simple non-recursive case. `.8.3` should replace the delegation for non-REP structural families first,
+  keeping this compile/run harness as the fast proof that generated source still builds and executes.
+
 - 2026-07-04 (RUST-PARITY.8.1 — Rust source-emitter lane split):
   Do not start the Rust code-generation emitter as one broad patch. The durable boundary is now explicit:
   Perl's `HandlerVariantEmitter.pm` owns a 10-kind HandlerIR structural contract and currently emits Perl/JSON,
@@ -55,7 +64,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.8.2` unless a new terse leaf is split.
+  `RUST-PARITY.8.3` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and
