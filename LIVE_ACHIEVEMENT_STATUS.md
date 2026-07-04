@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **RUST-PARITY.8.3.2 — emit direct default-or acode execution**
+  (GENERATED SOURCE NOW DIRECTLY RUNS THE FIRST ACODE FAMILIES).
+
+  **Fix:** Generated `parse(input)` still validates `GENERATED_RULES`, but now calls the plan-aware generated
+  executor instead of `Engine::execute(...)`. `Default` and `OrAcode` rules run directly with interpreter-equivalent
+  lifecycle semantics: recursion guard, entry/local match scoping, lifecycle blocks, action-edge child-return
+  scoping, default repetition, and zero-progress termination. AND acode, bcode, and REP families remain fallback
+  paths for later owned leaves.
+
+  **Verification:** Focused Rust formatting and `source_emitter` integration test pass. The generated-source matrix
+  now proves a repeated default case and an OR acode action-edge block that reads the dispatched child return, then
+  builds/runs the generated modules in an isolated temp crate.
+
+  **Frontier:** `RUST-PARITY.8.3.3` — emit direct AND acode generated execution.
+
 - 2026-07-04: **RUST-PARITY.8.3.1 — emit generated family plan**
   (GENERATED SOURCE NOW CARRIES VALIDATED RULE-FAMILY METADATA).
 
@@ -19,7 +34,8 @@ Current execution status for interruption-safe batch workflow recovery.
   source test builds one isolated temp crate containing generated modules for the non-REP family-plan matrix and
   verifies each generated `parse(...)` path still matches interpreter output.
 
-  **Frontier:** `RUST-PARITY.8.3.2` — emit direct default/OR acode generated execution.
+  **Frontier at completion:** `RUST-PARITY.8.3.2` emitted direct default/OR acode generated execution; `.8.3.2`
+  is now done and current frontier is `.8.3.3`.
 
 - 2026-07-04: **RUST-PARITY.8.3 — split non-repetition emitter lane**
   (NON-REP GENERATED-SOURCE WORK IS NOW DECOMPOSED BEFORE CODE).

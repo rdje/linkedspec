@@ -41,8 +41,9 @@ guard. `RUST-PARITY.8.1` then split the broad code-generation emitter lane,
 `RUST-PARITY.8.2` landed the minimal generated-source scaffold plus compile/run
 harness, `RUST-PARITY.8.3` split non-repetition handler-family emission into
 narrower generated-source children, and `RUST-PARITY.8.3.1` landed the
-generated rule-family plan. The current frontier is `RUST-PARITY.8.3.2`:
-direct default/OR acode generated execution.
+generated rule-family plan and `.8.3.2` landed direct default/OR acode
+generated execution. The current frontier is `RUST-PARITY.8.3.3`: direct AND
+acode generated execution.
 
 The later lanes are:
 

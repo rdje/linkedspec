@@ -1,9 +1,9 @@
 //! Rust source emitter scaffold.
 //!
-//! `RUST-PARITY.8.2` introduces the generated-source path without replacing the
-//! interpreted runtime. The emitted module embeds a serialized `CompiledSpec`
-//! and exposes a small `parse(input)` entry point that delegates to `Engine`.
-//! Direct per-handler source emission is split into later leaves.
+//! `RUST-PARITY.8.2` introduced the generated-source path. The emitted module
+//! embeds a serialized `CompiledSpec` plus generated-family metadata; direct
+//! generated execution starts with default/OR acode families in
+//! `RUST-PARITY.8.3.2`.
 
 use crate::engine::Engine;
 use linkedspec_core::ast::RuleMode;
@@ -48,9 +48,8 @@ pub struct GeneratedRuleSpec {
 /// Emit a standalone Rust module for `compiled`.
 ///
 /// The returned source expects dependencies on `linkedspec-runtime` and
-/// `serde_json`. `RUST-PARITY.8.3.1` adds an explicit generated rule-family
-/// plan, but execution intentionally still goes through the existing runtime
-/// engine until the later direct acode/bcode leaves replace those families.
+/// `serde_json`. The generated entry point validates its family plan before
+/// routing through generated-family execution.
 pub fn emit_rust_source(compiled: &CompiledSpec) -> Result<String, String> {
     let spec_json = serde_json::to_string(compiled)
         .map_err(|e| format!("failed to serialize compiled spec for generated source: {e}"))?;
@@ -90,10 +89,9 @@ pub fn emit_rust_source(compiled: &CompiledSpec) -> Result<String, String> {
 
 /// Execute a generated parser module from its embedded compiled spec and family plan.
 ///
-/// Direct per-family execution is intentionally deferred to later `.8.3`
-/// children. This entry point verifies that generated source and embedded
-/// `CompiledSpec` agree on every family row before delegating to the current
-/// interpreter, so `.8.3.1` can lock the generated planning contract first.
+/// The plan is validated first. `RUST-PARITY.8.3.2` routes default/OR acode
+/// families through the generated-plan executor; families owned by later leaves
+/// fall back inside that executor until their direct paths land.
 pub fn execute_generated_parser(
     compiled_spec_json: &str,
     generated_rules: &[GeneratedRuleSpec],
@@ -102,7 +100,7 @@ pub fn execute_generated_parser(
     let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json)
         .map_err(|e| format!("generated CompiledSpec JSON is invalid: {e}"))?;
     validate_generated_rule_plan(&compiled, generated_rules)?;
-    Engine::new(compiled).execute(input)
+    Engine::new(compiled).execute_generated_with_plan(generated_rules, input)
 }
 
 /// Classify one compiled rule into the generated-source family plan.

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.3.2 — emit direct default-or acode execution
+
+**Scope:** Rust generated-source execution path, source-emitter compile/run matrix, task-tree frontier docs,
+mdBook backend handoff, live recovery docs, and Knowledge Map.
+
+**What changed:** Generated `parse(input)` still validates the embedded `GENERATED_RULES` plan, but now enters
+`Engine::execute_generated_with_plan(...)` instead of delegating through `Engine::execute(...)`. The generated-plan
+executor directly handles `Default` and `OrAcode` families with the interpreter's recursion guard, match lexical
+save/restore, lifecycle block execution, action-edge child-return scoping, default repetition loop, and
+zero-progress guard. AND acode, bcode, and REP families remain fallback-owned by later leaves.
+
+**Evidence:** The focused generated-source matrix now proves a repeated default case and an OR acode action-edge
+case that reads the dispatched child return, builds all generated modules in an isolated temp crate, and verifies
+generated `parse(...)` output against the interpreter. The next executable frontier is `RUST-PARITY.8.3.3`: direct
+AND acode generated execution.
+
 ## 2026-07-04 — RUST-PARITY.8.3.1 — emit generated family plan
 
 **Scope:** Rust compiled-rule metadata, generated Rust-source emitter, generated-source compile/run tests, task-tree

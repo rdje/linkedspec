@@ -13,9 +13,10 @@ The `rust/` directory contains a Cargo workspace with two crates:
 
 The Rust variant primarily interprets its compiled structural contract at runtime: the engine walks compiled rule
 specifications and executes regex matching, child rule dispatch, and lifecycle code as direct Rust function calls.
-It also exposes a generated-source scaffold (`linkedspec_runtime::source_emitter`) that emits a Rust module embedding
-a `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point that still delegates execution to
-the same engine. Direct generated handler bodies are tracked in the follow-on `RUST-PARITY.8.3.2+` leaves.
+It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) that emits a Rust module embedding a
+`CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
+plan-aware executor: default and OR acode families run directly, while AND acode, bcode, and REP families remain
+fallback-owned by the follow-on `RUST-PARITY.8.3.3+` leaves.
 
 ## Quick Start
 
@@ -46,7 +47,7 @@ cargo test
 │  ├─ engine.rs            │  → lifecycle loop, helper dispatch
 │  ├─ helpers/regex_engine │  → regex alternation (seek/consume)
 │  ├─ runtime.rs           │  → RuntimeContext (variable store)
-│  ├─ source_emitter.rs    │  → generated Rust module scaffold
+│  ├─ source_emitter.rs    │  → generated Rust module emitter + family plan
 │  └─ helpers/             │  → 80+ helper functions
 └──────────┬───────────────┘
            │
@@ -88,8 +89,9 @@ The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust varian
 - Uses the **same** regex dispatch semantics (seek/consume modes)
 - Uses the **same** rule modes (AND, OR, OR+, AND+, bounded, *, +, ?, &, |)
 - **Does not** generate Perl code or use `eval` — the default runtime path interprets `CompiledSpec` directly
-- Provides a generated Rust-source scaffold that embeds `CompiledSpec` plus a validated family plan and delegates to
-  the interpreter; direct generated handler-family execution is still in progress
+- Provides generated Rust source that embeds `CompiledSpec` plus a validated family plan; default/OR acode families
+  now execute directly through the plan-aware generated executor, while remaining families still fall back until
+  their owned leaves land
 - **Does not** implement the legacy plugin system (`.plg` files, `PPlugin`)
 
 ## Test Corpus

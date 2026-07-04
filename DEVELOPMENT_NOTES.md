@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.3.2 — direct default/OR acode generated execution):
+  Generated Rust modules no longer use whole-parser `Engine::execute` for the first direct family slice. After
+  `source_emitter` validates `GENERATED_RULES`, it calls `Engine::execute_generated_with_plan(...)`. That path uses
+  a runtime-internal `GeneratedPlanExecutor` to run `Default` and `OrAcode` rules directly while preserving the
+  interpreter's important invariants: `(rule,pos)` recursion guard, per-invocation entry/local match save/restore,
+  lifecycle block order, action-edge `retv` plus scoped `call(child)` results, default-mode repetition, and the
+  zero-progress guard. Unsupported generated families intentionally fall back inside the executor until `.8.3.3`
+  (AND acode), `.8.3.4` (AND/OR bcode), and `.8.4` (REP) replace those paths.
+
 - 2026-07-04 (RUST-PARITY.8.3.1 — generated family-plan metadata):
   The generated Rust-source path now has a durable rule-family plan before direct handler execution starts.
   `CompiledRule` carries parsed `RuleMode`, and `source_emitter` classifies rules into `Default`, `OrAcode`,

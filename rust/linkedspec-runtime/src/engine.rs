@@ -32,6 +32,7 @@
 
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::RuntimeContext;
+use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::types::{CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue};
 use serde_json::Value;
@@ -368,6 +369,308 @@ fn named_map_to_hash(named: &std::collections::HashMap<String, String>) -> Runti
     RuntimeValue::Hash(entries)
 }
 
+struct GeneratedPlanExecutor<'a> {
+    engine: &'a Engine,
+    generated_rules: &'a [GeneratedRuleSpec],
+}
+
+impl GeneratedPlanExecutor<'_> {
+    fn execute_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let family = self.generated_rule_family(label)?;
+        if !Self::is_direct_acode_family(family) {
+            return self.engine.execute_rule(label, entry_regex_idx, ctx);
+        }
+        self.execute_direct_acode_rule(label, entry_regex_idx, ctx)
+    }
+
+    fn generated_rule_family(&self, label: &str) -> Result<GeneratedRuleFamily, String> {
+        self.generated_rules
+            .iter()
+            .find(|rule| rule.label == label)
+            .map(|rule| rule.family)
+            .ok_or_else(|| format!("generated rule plan missing label '{label}'"))
+    }
+
+    fn is_direct_acode_family(family: GeneratedRuleFamily) -> bool {
+        matches!(
+            family,
+            GeneratedRuleFamily::Default | GeneratedRuleFamily::OrAcode
+        )
+    }
+
+    fn execute_child_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let accumulator_len = ctx.accumulator.len();
+        let child_retv = self.execute_rule(label, entry_regex_idx, ctx)?;
+        ctx.accumulator.truncate(accumulator_len);
+        Ok(child_retv)
+    }
+
+    fn execute_action_edge_child_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        if self.engine.is_passive_terminal_rule(label) {
+            return Ok(RuntimeValue::Undef);
+        }
+        self.execute_child_rule(label, entry_regex_idx, ctx)
+    }
+
+    fn execute_direct_acode_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let entry_pos = ctx.pos;
+        if !ctx.enter_recursion(label, entry_pos) {
+            return Ok(RuntimeValue::Undef);
+        }
+
+        let result = self.execute_direct_acode_rule_inner(label, entry_regex_idx, ctx);
+        ctx.exit_recursion(label, entry_pos);
+        result
+    }
+
+    fn execute_direct_acode_rule_inner(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        let rule = self.engine.spec.find(label).ok_or_else(|| {
+            format!(
+                "rule '{}' (entry idx {}) not found in compiled spec",
+                label, entry_regex_idx
+            )
+        })?;
+
+        let caller_return = ctx.take_return_value();
+        let saved_match = SavedMatchState {
+            entry_groups: std::mem::take(&mut ctx.entry_groups),
+            entry_named: std::mem::take(&mut ctx.entry_named),
+            match_groups: std::mem::take(&mut ctx.match_groups),
+            match_named: std::mem::take(&mut ctx.match_named),
+            entry_start_byte: ctx.entry_start_byte,
+            entry_end_byte: ctx.entry_end_byte,
+            match_start_byte: ctx.match_start_byte,
+            match_end_byte: ctx.match_end_byte,
+            capture_start: ctx.capture_start,
+        };
+        ctx.entry_groups = saved_match.match_groups.clone();
+        ctx.entry_named = saved_match.match_named.clone();
+        ctx.entry_start_byte = saved_match.match_start_byte;
+        ctx.entry_end_byte = saved_match.match_end_byte;
+        ctx.match_start_byte = 0;
+        ctx.match_end_byte = 0;
+        ctx.capture_start = Some(ctx.entry_end_byte);
+
+        macro_rules! return_if_rule_returned {
+            () => {
+                if let Some(my_return) = ctx.take_return_value() {
+                    ctx.restore_return_value(caller_return);
+                    saved_match.restore(ctx);
+                    return Ok(my_return);
+                }
+            };
+        }
+
+        let alt = if rule.regex_patterns.is_empty() {
+            CompiledAlternation::compile(&[])?
+        } else {
+            CompiledAlternation::compile(&rule.regex_patterns)?
+        };
+
+        if let Some(ref preamble) = rule.preamble {
+            self.engine.execute_block(preamble, ctx, label)?;
+            return_if_rule_returned!();
+        }
+
+        if !rule.bcode_dispatch.is_empty() {
+            ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
+            return Err(format!(
+                "generated direct acode executor received bcode rule '{label}'"
+            ));
+        }
+
+        let is_rep = rule.rep_min.is_some();
+        let rep_min = rule.rep_min.unwrap_or(0);
+        let rep_max = rule.rep_max;
+        let mut matches: usize = 0;
+        let max_iter = 10_000;
+        let has_entry_idx = entry_regex_idx > 0 && entry_regex_idx < rule.regex_patterns.len();
+
+        for _iter in 0..max_iter {
+            if !is_rep && matches > 0 {
+                break;
+            }
+
+            let pos_before = ctx.pos;
+
+            if let Some(ref lscode) = rule.lscode {
+                self.engine.execute_block(lscode, ctx, label)?;
+                return_if_rule_returned!();
+            }
+
+            let match_result = if has_entry_idx && matches == 0 {
+                let entry_pat = &rule.regex_patterns[entry_regex_idx];
+                let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
+                match rule.parse_mode {
+                    ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
+                    ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
+                }
+                .map(|mut m| {
+                    m.index = entry_regex_idx;
+                    m
+                })
+            } else {
+                match rule.parse_mode {
+                    ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
+                    ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
+                }
+            };
+
+            if let Some(m) = match_result {
+                let entry_was_empty = ctx.entry_groups.is_empty()
+                    && ctx.entry_named.is_empty()
+                    && ctx.entry_start_byte == ctx.entry_end_byte;
+                ctx.set_pos(m.end);
+                ctx.match_groups = m.captures.clone();
+                ctx.match_named = m.named.clone();
+                ctx.match_start_byte = m.start;
+                ctx.match_end_byte = m.end;
+                if entry_was_empty {
+                    ctx.entry_groups = m.captures.clone();
+                    ctx.entry_named = m.named.clone();
+                    ctx.entry_start_byte = m.start;
+                    ctx.entry_end_byte = m.end;
+                }
+
+                for entry in &rule.acode_dispatch {
+                    if entry.regex_idx == m.index {
+                        if entry.fluent_chain.is_empty() {
+                            if let Some(ref block) = entry.code {
+                                if Engine::block_calls_rule(block, &entry.child_label) {
+                                    let child_retv = self.execute_action_edge_child_rule(
+                                        &entry.child_label,
+                                        entry.child_regex_idx,
+                                        ctx,
+                                    )?;
+                                    ctx.set_retv(child_retv.clone());
+                                    ctx.push_action_edge_call_result(
+                                        &entry.child_label,
+                                        child_retv,
+                                    );
+                                    let block_result = self.engine.execute_block(block, ctx, label);
+                                    ctx.pop_action_edge_call_result();
+                                    block_result?;
+                                    return_if_rule_returned!();
+                                } else if entry.child_label == label {
+                                    self.engine.execute_block(block, ctx, label)?;
+                                    return_if_rule_returned!();
+                                } else {
+                                    let child_retv = self.execute_action_edge_child_rule(
+                                        &entry.child_label,
+                                        entry.child_regex_idx,
+                                        ctx,
+                                    )?;
+                                    ctx.set_retv(child_retv.clone());
+                                    ctx.push_action_edge_call_result(
+                                        &entry.child_label,
+                                        child_retv,
+                                    );
+                                    let block_result = self.engine.execute_block(block, ctx, label);
+                                    ctx.pop_action_edge_call_result();
+                                    block_result?;
+                                    return_if_rule_returned!();
+                                }
+                            } else {
+                                let child_retv = self.execute_action_edge_child_rule(
+                                    &entry.child_label,
+                                    entry.child_regex_idx,
+                                    ctx,
+                                )?;
+                                ctx.set_retv(child_retv);
+                            }
+                        } else if self
+                            .engine
+                            .execute_action_edge_fluent_chain(entry, ctx, label)?
+                            == ActionEdgeFlow::Returned
+                        {
+                            let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+                            ctx.restore_return_value(caller_return);
+                            saved_match.restore(ctx);
+                            return Ok(my_return);
+                        }
+                    }
+                }
+
+                if let Some(ref lecode) = rule.lecode {
+                    self.engine.execute_block(lecode, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+
+                matches += 1;
+
+                if let Some(ref itcode) = rule.itcode {
+                    self.engine.execute_block(itcode, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+            } else {
+                if let Some(ref lxcode) = rule.lxcode {
+                    self.engine.execute_block(lxcode, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+                break;
+            }
+
+            if let Some(max) = rep_max
+                && matches >= max
+            {
+                break;
+            }
+
+            if is_rep && ctx.pos == pos_before {
+                break;
+            }
+        }
+
+        if is_rep && matches < rep_min {
+            return Err(format!(
+                "rule '{}': expected at least {} matches, got {}",
+                label, rep_min, matches
+            ));
+        }
+
+        if let Some(ref excode) = rule.excode {
+            self.engine.execute_block(excode, ctx, label)?;
+            return_if_rule_returned!();
+        }
+
+        if let Some(ref ecode) = rule.ecode {
+            self.engine.execute_block(ecode, ctx, label)?;
+            return_if_rule_returned!();
+        }
+
+        let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+        ctx.restore_return_value(caller_return);
+        saved_match.restore(ctx);
+        Ok(my_return)
+    }
+}
+
 impl Engine {
     /// Create a new engine from a compiled spec.
     pub fn new(spec: CompiledSpec) -> Self {
@@ -381,6 +684,29 @@ impl Engine {
         let label = top.label.clone();
         let mut ctx = RuntimeContext::new(input);
         self.execute_rule(&label, 0, &mut ctx)?;
+        Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+    }
+
+    /// Execute generated source through a validated rule-family plan.
+    ///
+    /// This path is separate from [`execute`](Self::execute): generated modules
+    /// call it after `source_emitter` validates the static family table emitted
+    /// beside the serialized `CompiledSpec`. `RUST-PARITY.8.3.2` directly
+    /// handles default and OR acode families here; later leaves replace the
+    /// remaining family fallbacks.
+    pub fn execute_generated_with_plan(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+    ) -> Result<Value, String> {
+        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
+        let label = top.label.clone();
+        let mut ctx = RuntimeContext::new(input);
+        let generated = GeneratedPlanExecutor {
+            engine: self,
+            generated_rules,
+        };
+        generated.execute_rule(&label, 0, &mut ctx)?;
         Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
     }
 

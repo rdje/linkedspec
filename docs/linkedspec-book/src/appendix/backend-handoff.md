@@ -210,11 +210,12 @@ The Rust backend currently executes an interpreted structural model
 (`CompiledSpec`/`CompiledRule`) rather than direct generated Rust handlers. Its
 generated-source path is tracked separately under `RUST-PARITY.8`: `.8.1`
 split the work, `.8.2` added the minimal scaffold/compile-run proof, and
-`.8.3.1` added a generated rule-family plan. The scaffold now emits a Rust
-module embedding a serialized `CompiledSpec`, a `GENERATED_RULES` table, and a
-`parse(input)` entry point that validates the plan before delegating through the
-existing runtime engine; direct emitted handler families remain the
-`.8.3.2`–`.8.4` work, followed by all-variant/oracle integration in `.8.5`.
+`.8.3.1` added a generated rule-family plan. `.8.3.2` then made generated
+`parse(input)` enter a plan-aware executor instead of whole-parser
+`Engine::execute(...)`; default and OR acode families now run directly with the
+interpreter's lifecycle/action-edge semantics. Direct AND acode, bcode, and REP
+families remain the `.8.3.3`–`.8.4` work, followed by all-variant/oracle
+integration in `.8.5`.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`

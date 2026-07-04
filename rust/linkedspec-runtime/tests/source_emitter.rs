@@ -1,4 +1,4 @@
-//! RUST-PARITY.8.2/.8.3.1 — generated Rust-source compile/run proof.
+//! RUST-PARITY.8.2/.8.3.1/.8.3.2 — generated Rust-source compile/run proof.
 
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::compile;
@@ -13,15 +13,18 @@ use std::process::Command;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 const SIMPLE_SOURCE_EMITTER_SPEC: &str = r#"Top::
+ I { declare(array, words) }
  /hello[ \t]+(\w+)/
- E { return(array("?hello:", match_group(0))) }
+ LE { push_value(array(words), match_group(0)) }
+ E { return(array_copy(array(words))) }
 "#;
 
 const OR_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
- /go/ -> Done { return("or-acode") }
+ /go/ -> Done { return(concat("or-acode:", call(Done))) }
 
 Done:
  /go/
+ E { return(entry_text()) }
 "#;
 
 const AND_SINGLE_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND
@@ -105,8 +108,8 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         Case {
             module: "default_case",
             spec: SIMPLE_SOURCE_EMITTER_SPEC,
-            input: "hello world",
-            expected: json!([["?hello:", "world"]]),
+            input: "hello one hello two",
+            expected: json!([["one", "two"]]),
             expected_family: "GeneratedRuleFamily::Default",
             expected_mode: RuleMode::Default,
         },
@@ -114,7 +117,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             module: "or_acode_case",
             spec: OR_ACODE_SOURCE_EMITTER_SPEC,
             input: "go",
-            expected: json!(["or-acode"]),
+            expected: json!(["or-acode:go"]),
             expected_family: "GeneratedRuleFamily::OrAcode",
             expected_mode: RuleMode::Or,
         },
@@ -174,6 +177,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_FORMAT"));
         assert!(generated.contains("COMPILED_SPEC_JSON"));
         assert!(generated.contains("GENERATED_RULES"));
+        assert!(!generated.contains("Engine::new"));
         assert!(generated.contains(case.expected_family));
         assert_eq!(
             format!("{:?}", classify_generated_rule_family(top)),

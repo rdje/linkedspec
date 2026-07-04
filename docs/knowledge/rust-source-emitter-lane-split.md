@@ -1,6 +1,6 @@
 ---
 id: rust-source-emitter-lane-split
-title: RUST-PARITY.8 is split into narrow source-emitter leaves; Rust generated source now embeds a validated family plan before direct execution
+title: RUST-PARITY.8 is split into narrow source-emitter leaves; Rust generated source now directly runs default/OR acode
 answers:
   - "what is the Rust code generation emitter plan"
   - "does the Rust backend currently generate source code"
@@ -17,14 +17,14 @@ answers:
 date: 2026-07-04
 status: accepted
 tags: [rust, codegen, HandlerIR, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.8.1 read docs/knowledge/handler-ir-design.md, perl/LinkedSpec/HandlerVariantEmitter.pm, rust/linkedspec-core/src/types.rs, rust/linkedspec-core/src/compiler.rs, rust/linkedspec-runtime/src/engine.rs, rust/README.md, and docs/linkedspec-book/src/appendix/backend-handoff.md. Perl HandlerIR has 10 structural variant kinds and Perl/JSON emitters. Rust executes an interpreted native structural contract: CompiledSpec contains CompiledRule rows with regex_patterns, parsed lifecycle CodeBlock slots, AcodeEntry dispatch, BcodeEntry dispatch, parse mode, and repetition bounds. RUST-PARITY.8.2 added linkedspec_runtime::source_emitter::emit_rust_source, which emits a standalone Rust module embedding serialized CompiledSpec and delegating parse(input) through Engine; tests build that generated source in an isolated temp crate. RUST-PARITY.8.3 then split non-REP direct emission because rule-mode/family metadata, generated family-plan emission, acode execution, bcode execution, and matrix closeout are separate mechanisms. RUST-PARITY.8.3.1 preserved parsed RuleMode on CompiledRule and made generated source embed/validate a GENERATED_RULES family plan across default/OR/AND acode-bcode markers while still delegating execution through Engine. The current frontier is .8.3.2 direct default/OR acode execution; .8.4 remains REP direct emission and .8.5 all-variant/oracle integration."
+evidence: "RUST-PARITY.8.1 read docs/knowledge/handler-ir-design.md, perl/LinkedSpec/HandlerVariantEmitter.pm, rust/linkedspec-core/src/types.rs, rust/linkedspec-core/src/compiler.rs, rust/linkedspec-runtime/src/engine.rs, rust/README.md, and docs/linkedspec-book/src/appendix/backend-handoff.md. Perl HandlerIR has 10 structural variant kinds and Perl/JSON emitters. Rust executes an interpreted native structural contract: CompiledSpec contains CompiledRule rows with regex_patterns, parsed lifecycle CodeBlock slots, AcodeEntry dispatch, BcodeEntry dispatch, parse mode, and repetition bounds. RUST-PARITY.8.2 added linkedspec_runtime::source_emitter::emit_rust_source, which emits a standalone Rust module embedding serialized CompiledSpec; tests build that generated source in an isolated temp crate. RUST-PARITY.8.3 split non-REP direct emission because rule-mode/family metadata, generated family-plan emission, acode execution, bcode execution, and matrix closeout are separate mechanisms. RUST-PARITY.8.3.1 preserved parsed RuleMode on CompiledRule and made generated source embed/validate a GENERATED_RULES family plan across default/OR/AND acode-bcode markers. RUST-PARITY.8.3.2 made generated parse enter Engine::execute_generated_with_plan, directly running Default and OrAcode families while AND acode, bcode, and REP families still fall back. The current frontier is .8.3.3 direct AND acode execution; .8.4 remains REP direct emission and .8.5 all-variant/oracle integration."
 reverify: "rg -n 'RUST-PARITY\\.8\\.|emit_rust_source|source_emitter|CompiledSpec|CompiledRule|AcodeEntry|BcodeEntry|HandlerIR|_emit_handler' docs/tasks/RUST-PARITY.md rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs rust/linkedspec-core/src/types.rs perl/LinkedSpec/HandlerVariantEmitter.pm rust/README.md"
 ---
 
 # Rust Source-Emitter Lane Split
 
 **Accepted 2026-07-04 (`RUST-PARITY.8.1`) and updated by
-`RUST-PARITY.8.2` / `.8.3` / `.8.3.1`.** The Rust source-emitter work is not one implementation
+`RUST-PARITY.8.2` / `.8.3` / `.8.3.1` / `.8.3.2`.** The Rust source-emitter work is not one implementation
 patch. It is a parent lane because it crosses three separate contracts:
 
 - Perl `HandlerVariantEmitter.pm` builds 10 HandlerIR structural variants and
@@ -37,20 +37,21 @@ patch. It is a parent lane because it crosses three separate contracts:
 Current child frontier:
 
 - `.8.2`: done — minimal emitter API plus generated-source compile/run
-  harness. The generated module embeds serialized `CompiledSpec` and delegates
-  `parse(input)` through `Engine`.
+  harness. The generated module embeds serialized `CompiledSpec`.
 - `.8.3`: split/active — non-repetition handler-family emission is now
   decomposed into `.8.3.1` family metadata/plan, `.8.3.2` default/OR acode,
   `.8.3.3` AND acode, `.8.3.4` AND/OR bcode, and `.8.3.5` matrix closeout.
 - `.8.3.1`: done — `CompiledRule` preserves parsed `RuleMode`, generated
   source embeds a `GENERATED_RULES` family plan, and the generated entry point
-  validates that plan before delegating through `Engine`.
-- `.8.3.2`: current executable frontier — direct default/OR acode generated
-  execution.
+  validates that plan before execution.
+- `.8.3.2`: done — generated parse enters the plan-aware executor; `Default`
+  and `OrAcode` families run directly while later-family lanes still fall back.
+- `.8.3.3`: current executable frontier — direct AND acode generated execution.
 - `.8.4`: repetition handler-family emission and termination guards.
 - `.8.5`: all-variant smoke matrix and oracle/corpus integration.
 
 No parser, compiler, or interpreter behavior changed in `.8.1` or the `.8.3`
 split. `.8.2` added a source-emitter module and compile/run harness only.
-`.8.3.1` added the generated family-plan metadata and validation contract;
-replacing the delegation with direct generated handlers starts in `.8.3.2`.
+`.8.3.1` added the generated family-plan metadata and validation contract.
+`.8.3.2` started replacing fallback execution with direct generated-family
+handling for default/OR acode.
