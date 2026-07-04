@@ -10,7 +10,7 @@ use crate::staged_parser_registry;
 use linkedspec_core::ast::{FunctionDefinition, SourceSpan, SpecFile};
 use linkedspec_core::compiler::{compile, compile_with_trace_emitter};
 use linkedspec_core::parser::{parse_spec, parse_spec_with_trace_emitter};
-use linkedspec_core::trace::{TraceConfig, TraceEmitter};
+use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::validation::{validate, validate_with_trace_emitter};
 use serde_json::{Map, Value};
 
@@ -29,7 +29,7 @@ struct AstSpan {
 /// definitions, without hand-parsing that DSL in Rust.
 pub fn parse_spec_with_user_functions(source: &str) -> Result<SpecFile, String> {
     let nodes = parse_user_function_definition_asts(source)?;
-    let (functions, spans) = function_definitions_from_nodes(&nodes, source)?;
+    let (functions, spans) = function_definitions_from_nodes(&nodes, source, None)?;
 
     let stripped = strip_function_definition_spans(source, &spans)?;
     let mut spec = parse_spec(&stripped)
@@ -53,19 +53,63 @@ pub fn parse_spec_with_user_functions_with_trace_emitter(
     source: &str,
     trace: &mut TraceEmitter,
 ) -> Result<SpecFile, String> {
-    let nodes = parse_user_function_definition_asts_with_trace_emitter(source, trace)?;
-    let (functions, spans) = function_definitions_from_nodes(&nodes, source)?;
+    let scope = trace
+        .enter_scope(
+            "rust_runtime:parse_spec_with_user_functions",
+            format!("bytes={} lines={}", source.len(), source.lines().count()),
+            TraceLevel::LOW,
+        )
+        .map_err(trace_write_failed)?;
+    let result = (|| {
+        let nodes = parse_user_function_definition_asts_with_trace_emitter(source, trace)?;
+        trace.trace_decision(
+            "rust_runtime:parse_spec_with_user_functions:user_definition_nodes",
+            true,
+            format!("nodes={}", nodes.len()),
+            TraceLevel::MEDIUM,
+        );
+        let (functions, spans) = function_definitions_from_nodes(&nodes, source, Some(trace))?;
+        trace.trace_decision(
+            "rust_runtime:parse_spec_with_user_functions:functions_projected",
+            true,
+            format!("functions={} spans={}", functions.len(), spans.len()),
+            TraceLevel::MEDIUM,
+        );
 
-    let stripped = strip_function_definition_spans(source, &spans)?;
-    let mut spec = parse_spec_with_trace_emitter(&stripped, trace)
-        .map_err(|err| format!("rule parse after function extraction failed: {err}"))?;
-    spec.functions = functions;
-    Ok(spec)
+        let stripped = strip_function_definition_spans(source, &spans)?;
+        trace.trace_decision(
+            "rust_runtime:parse_spec_with_user_functions:strip_function_definitions",
+            true,
+            format!(
+                "source_bytes={} stripped_bytes={}",
+                source.len(),
+                stripped.len()
+            ),
+            TraceLevel::MEDIUM,
+        );
+        let mut spec = parse_spec_with_trace_emitter(&stripped, trace)
+            .map_err(|err| format!("rule parse after function extraction failed: {err}"))?;
+        spec.functions = functions;
+        Ok(spec)
+    })();
+    let exit_details = match &result {
+        Ok(spec) => format!(
+            "status=ok rules={} functions={}",
+            spec.rules.len(),
+            spec.functions.len()
+        ),
+        Err(err) => format!("status=error error={err}"),
+    };
+    trace
+        .exit_scope(scope, exit_details)
+        .map_err(trace_write_failed)?;
+    result
 }
 
 fn function_definitions_from_nodes(
     nodes: &[Value],
     source: &str,
+    mut trace: Option<&mut TraceEmitter>,
 ) -> Result<(Vec<FunctionDefinition>, Vec<AstSpan>), String> {
     let mut functions = Vec::new();
     let mut spans = Vec::new();
@@ -74,7 +118,8 @@ fn function_definitions_from_nodes(
         let object = as_object(node, &format!("definition node {idx}"))?;
         match string_field(object, "type", "definition node")? {
             "function_definition" => {
-                let (function, source_span) = function_from_ast(object, source, idx)?;
+                let (function, source_span) =
+                    function_from_ast(object, source, idx, trace.as_deref_mut())?;
                 spans.push(source_span);
                 functions.push(function);
             }
@@ -123,22 +168,123 @@ pub fn parse_user_function_definition_asts_with_trace_emitter(
     source: &str,
     trace: &mut TraceEmitter,
 ) -> Result<Vec<Value>, String> {
-    let parser_spec = parse_spec_with_trace_emitter(USER_FUNCTION_DEFINITION_SPEC, trace)
-        .map_err(|err| format!("failed to parse user_function_definition.spec: {err}"))?;
-    validate_with_trace_emitter(&parser_spec, trace)
-        .map_err(|err| format!("failed to validate user_function_definition.spec: {err}"))?;
-    let compiled = compile_with_trace_emitter(&parser_spec, trace)
-        .map_err(|err| format!("failed to compile user_function_definition.spec: {err}"))?;
-    let output = Engine::new(compiled)
-        .execute_with_trace_emitter(source, trace)
-        .map_err(|err| format!("user_function_definition.spec execution failed: {err}"))?;
-    definition_nodes_from_output(&output)
+    let scope = trace
+        .enter_scope(
+            "rust_runtime:parse_user_function_definition_asts",
+            format!("bytes={} lines={}", source.len(), source.lines().count()),
+            TraceLevel::LOW,
+        )
+        .map_err(trace_write_failed)?;
+    let result = (|| {
+        let parser_spec = match parse_spec_with_trace_emitter(USER_FUNCTION_DEFINITION_SPEC, trace)
+        {
+            Ok(parser_spec) => {
+                trace.trace_decision(
+                    "rust_runtime:parse_user_function_definition_asts:parse_parser_spec",
+                    true,
+                    format!("rules={}", parser_spec.rules.len()),
+                    TraceLevel::MEDIUM,
+                );
+                parser_spec
+            }
+            Err(err) => {
+                trace.trace_decision(
+                    "rust_runtime:parse_user_function_definition_asts:parse_parser_spec",
+                    false,
+                    format!("error={err}"),
+                    TraceLevel::MEDIUM,
+                );
+                return Err(format!(
+                    "failed to parse user_function_definition.spec: {err}"
+                ));
+            }
+        };
+        if let Err(err) = validate_with_trace_emitter(&parser_spec, trace) {
+            trace.trace_decision(
+                "rust_runtime:parse_user_function_definition_asts:validate_parser_spec",
+                false,
+                format!("error={err}"),
+                TraceLevel::MEDIUM,
+            );
+            return Err(format!(
+                "failed to validate user_function_definition.spec: {err}"
+            ));
+        }
+        trace.trace_decision(
+            "rust_runtime:parse_user_function_definition_asts:validate_parser_spec",
+            true,
+            "pass",
+            TraceLevel::MEDIUM,
+        );
+
+        let compiled = match compile_with_trace_emitter(&parser_spec, trace) {
+            Ok(compiled) => {
+                trace.trace_decision(
+                    "rust_runtime:parse_user_function_definition_asts:compile_parser_spec",
+                    true,
+                    format!("rules={}", compiled.rules.len()),
+                    TraceLevel::MEDIUM,
+                );
+                compiled
+            }
+            Err(err) => {
+                trace.trace_decision(
+                    "rust_runtime:parse_user_function_definition_asts:compile_parser_spec",
+                    false,
+                    format!("error={err}"),
+                    TraceLevel::MEDIUM,
+                );
+                return Err(format!(
+                    "failed to compile user_function_definition.spec: {err}"
+                ));
+            }
+        };
+        let output = match Engine::new(compiled).execute_with_trace_emitter(source, trace) {
+            Ok(output) => {
+                trace.trace_decision(
+                    "rust_runtime:parse_user_function_definition_asts:execute_parser_spec",
+                    true,
+                    "output=ok",
+                    TraceLevel::MEDIUM,
+                );
+                output
+            }
+            Err(err) => {
+                trace.trace_decision(
+                    "rust_runtime:parse_user_function_definition_asts:execute_parser_spec",
+                    false,
+                    format!("error={err}"),
+                    TraceLevel::MEDIUM,
+                );
+                return Err(format!(
+                    "user_function_definition.spec execution failed: {err}"
+                ));
+            }
+        };
+        let nodes = definition_nodes_from_output(&output)?;
+        trace.trace_decision(
+            "rust_runtime:parse_user_function_definition_asts:definition_nodes",
+            true,
+            format!("nodes={}", nodes.len()),
+            TraceLevel::MEDIUM,
+        );
+        Ok(nodes)
+    })();
+    let exit_details = match &result {
+        Ok(nodes) => format!("status=ok nodes={}", nodes.len()),
+        Err(err) => format!("status=error error={err}"),
+    };
+    trace
+        .exit_scope(scope, exit_details)
+        .map_err(trace_write_failed)?;
+    result
 }
 
 fn function_from_ast(
     object: &Map<String, Value>,
     full_source: &str,
     idx: usize,
+    trace: Option<&mut TraceEmitter>,
 ) -> Result<(FunctionDefinition, AstSpan), String> {
     assert_string_field(object, "kind", "user_function_definition", idx)?;
     usize_field(object, "version", idx)?;
@@ -212,7 +358,12 @@ fn function_from_ast(
         idx,
     )?;
     normalize_body_parse_job(&mut body_parse_job, idx, body_span)?;
-    let body_ast = staged_parser_registry::execute_parse_job(&body_parse_job).map_err(|err| {
+    let body_ast = if let Some(trace) = trace {
+        staged_parser_registry::execute_parse_job_with_trace_emitter(&body_parse_job, trace)
+    } else {
+        staged_parser_registry::execute_parse_job(&body_parse_job)
+    }
+    .map_err(|err| {
         format!("function_definition node {idx} body_parse_job dispatch failed: {err}")
     })?;
 
@@ -237,6 +388,10 @@ fn function_from_ast(
         },
         source_span,
     ))
+}
+
+fn trace_write_failed(err: impl std::fmt::Display) -> String {
+    format!("trace write failed: {err}")
 }
 
 fn definition_nodes_from_output(output: &Value) -> Result<Vec<Value>, String> {

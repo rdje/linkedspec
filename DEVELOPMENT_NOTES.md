@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.4.3 — Rust compile/spec-parser trace events):
+  Rust trace emission now spends the shared `linkedspec-core::trace` emitter across the compile/spec-parser owner
+  boundaries instead of adding a second runtime-only observability path. Core traced APIs emit stable owner
+  namespaces: `rust_core:parse_spec`, `rust_core:validate:*`, `rust_core:compile:*`, and
+  `rust_core:compile:dependency_regex_map`. Runtime full-spec parsing threads the same caller-owned emitter into
+  user-function-definition parsing and neutral `body_parse_job` dispatch, so staged parse-job traces follow the
+  implementation-language-neutral sidecar rather than a Rust-only shortcut. Staged registry traced entrypoints
+  report normalize, queue-sort, resolve, load, compile, and execute phase decisions while preserving exact untraced
+  result records. Runtime branch, generated-plan, mark/capture, and parity-proof work remains separate under
+  `.4.4`/`.4.5`; do not claim Rust trace parity from `.4.3` alone.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.4.2 — Rust trace controls):
   Rust now has the shared trace control layer, but not trace event parity. Use `linkedspec_core::trace` for
   `TraceLevel`, `TraceConfig`, `TraceSinkMode`, `TraceEmitter`, the `DUMP_*` constants, environment-derived config,
@@ -10,9 +21,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   Existing quiet entrypoints remain the compatibility default. New traced variants validate trace setup and sink
   routing beside core parse/validate/compile, full-spec user-function parsing, staged parse jobs, `Engine::execute`,
   generated-plan execution, generated parser execution, and emitted generated module `parse_with_trace(...)`.
-  Until `.4.3` and `.4.4` wire real events, routed trace files can be created/truncated but remain empty during
-  normal parse/compile/execute calls. Do not claim Rust trace parity until `.4.3` compile/spec-parser events,
-  `.4.4` runtime branch events, and `.4.5` parity proof are complete.
+  `.4.3` has since wired compile/spec-parser/staged-dispatch events. Do not claim Rust trace parity until `.4.4`
+  runtime branch events and `.4.5` parity proof are complete.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.4.1 — Rust trace parity design):
   The Rust trace surface must be designed from the mdBook external contract, not from Perl package names. Because

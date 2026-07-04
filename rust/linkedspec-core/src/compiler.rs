@@ -30,7 +30,7 @@
 use crate::ast::{BodyElementKind, Rule, SpecFile};
 use crate::error::{LinkedSpecError, Result};
 use crate::expr::CodeBlock;
-use crate::trace::{TraceConfig, TraceEmitter};
+use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::types::{
     AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode,
 };
@@ -52,10 +52,6 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
 }
 
 /// Compile a parsed `SpecFile` with explicit trace configuration.
-///
-/// `TRACE-OBSERVABILITY.4.2` wires the control/sink layer. Compile-side events
-/// are added by `.4.3`, so this entrypoint currently preserves `compile`
-/// output while validating trace setup for later event wiring.
 pub fn compile_with_trace(spec: &SpecFile, trace_config: TraceConfig) -> Result<CompiledSpec> {
     let mut trace = TraceEmitter::new(trace_config)?;
     compile_with_trace_emitter(spec, &mut trace)
@@ -64,9 +60,157 @@ pub fn compile_with_trace(spec: &SpecFile, trace_config: TraceConfig) -> Result<
 /// Compile with a caller-owned trace emitter.
 pub fn compile_with_trace_emitter(
     spec: &SpecFile,
-    _trace: &mut TraceEmitter,
+    trace: &mut TraceEmitter,
 ) -> Result<CompiledSpec> {
-    compile(spec)
+    let scope = trace.enter_scope(
+        "rust_core:compile",
+        format!(
+            "rules={} functions={}",
+            spec.rules.len(),
+            spec.functions.len()
+        ),
+        TraceLevel::LOW,
+    )?;
+    let result = compile_with_events(spec, trace);
+    let exit_details = match &result {
+        Ok(compiled) => format!(
+            "status=ok rules={} functions={}",
+            compiled.rules.len(),
+            compiled.functions.len()
+        ),
+        Err(err) => format!("status=error error={err}"),
+    };
+    trace.exit_scope(scope, exit_details)?;
+    result
+}
+
+fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<CompiledSpec> {
+    let mut functions = Vec::new();
+    for (index, function) in spec.functions.iter().enumerate() {
+        match compile_function(function) {
+            Ok(compiled) => {
+                trace.trace_decision(
+                    "rust_core:compile:function",
+                    true,
+                    format!(
+                        "index={index} name={} arity={}",
+                        function.name, function.arity
+                    ),
+                    TraceLevel::MEDIUM,
+                );
+                functions.push(compiled);
+            }
+            Err(err) => {
+                trace.trace_decision(
+                    "rust_core:compile:function",
+                    false,
+                    format!(
+                        "index={index} name={} arity={} error={err}",
+                        function.name, function.arity
+                    ),
+                    TraceLevel::MEDIUM,
+                );
+                return Err(err);
+            }
+        }
+    }
+
+    let mut rules = Vec::new();
+    for (index, rule) in spec.rules.iter().enumerate() {
+        match compile_rule(rule) {
+            Ok(compiled) => {
+                trace.trace_decision(
+                    "rust_core:compile:rule",
+                    true,
+                    format!(
+                        "index={index} label={} mode={:?} parse_mode={:?} regexes={} acode={} bcode={}",
+                        compiled.label,
+                        compiled.mode,
+                        compiled.parse_mode,
+                        compiled.regex_patterns.len(),
+                        compiled.acode_dispatch.len(),
+                        compiled.bcode_dispatch.len()
+                    ),
+                    TraceLevel::MEDIUM,
+                );
+                rules.push(compiled);
+            }
+            Err(err) => {
+                trace.trace_decision(
+                    "rust_core:compile:rule",
+                    false,
+                    format!(
+                        "index={index} label={} mode={:?} error={err}",
+                        rule.header.label, rule.header.mode
+                    ),
+                    TraceLevel::MEDIUM,
+                );
+                return Err(err);
+            }
+        }
+    }
+
+    let mut compiled = CompiledSpec { functions, rules };
+    let edge_only_entries = compiled
+        .rules
+        .iter()
+        .map(|rule| {
+            rule.acode_dispatch
+                .iter()
+                .filter(|entry| !entry.has_parent_regex)
+                .count()
+        })
+        .sum::<usize>();
+    let regexes_before = compiled
+        .rules
+        .iter()
+        .map(|rule| rule.regex_patterns.len())
+        .sum::<usize>();
+    let dependency_scope = trace.enter_scope(
+        "rust_core:compile:dependency_regex_map",
+        format!("edge_only_entries={edge_only_entries}"),
+        TraceLevel::MEDIUM,
+    )?;
+    let dependency_result = build_dependency_regex_map(&mut compiled);
+    let regexes_after = compiled
+        .rules
+        .iter()
+        .map(|rule| rule.regex_patterns.len())
+        .sum::<usize>();
+    match &dependency_result {
+        Ok(()) => {
+            trace.trace_decision(
+                "rust_core:compile:dependency_regex_map:result",
+                true,
+                format!(
+                    "edge_only_entries={edge_only_entries} appended_regexes={}",
+                    regexes_after.saturating_sub(regexes_before)
+                ),
+                TraceLevel::MEDIUM,
+            );
+        }
+        Err(err) => {
+            trace.trace_decision(
+                "rust_core:compile:dependency_regex_map:result",
+                false,
+                format!("edge_only_entries={edge_only_entries} error={err}"),
+                TraceLevel::MEDIUM,
+            );
+        }
+    }
+    trace.exit_scope(
+        dependency_scope,
+        match &dependency_result {
+            Ok(()) => format!(
+                "status=ok appended_regexes={}",
+                regexes_after.saturating_sub(regexes_before)
+            ),
+            Err(err) => format!("status=error error={err}"),
+        },
+    )?;
+    dependency_result?;
+
+    Ok(compiled)
 }
 
 fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<CompiledUserFunction> {

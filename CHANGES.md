@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.4.3 — add Rust compile/spec-parser trace events
+
+**Scope:** Rust trace event emission for core parse/validate/compile, full-spec user-function parsing, staged
+parse-job dispatch, mdBook/toolbox status, task-tree/roadmap/live docs, and Knowledge Map.
+
+**What changed:** Wired the Rust `.4.2` trace emitter through compile-side and spec-parser owner boundaries.
+`parse_spec_with_trace(...)` now emits a `rust_core:parse_spec` scope and result decision. Validation traced
+entrypoints report each existing validation pass without changing pass order. `compile_with_trace(...)` reports
+function/rule compilation decisions plus dependency-regex mapping scope/result details. Full-spec Rust parsing now
+traces user-function-definition parser phases, function projection, stripped-rule parsing, and carries the same
+caller-owned emitter into neutral `body_parse_job` dispatch. The staged parser registry traced entrypoints now
+report normalize, stable queue sort, resolve, load, compile, and execute decisions per job.
+
+**Tests:** Added routed-debug assertions to `rust/linkedspec-runtime/tests/trace_controls.rs` for core events,
+full-spec user-function/staged-dispatch events, and direct staged queue phase events while preserving untraced output
+equality.
+
+**Status:** Rust still does not claim trace parity. Runtime interpreter/generated-plan branch events, mark/capture
+events, and parity proof remain owned by `.4.4`/`.4.5`.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.2 — add Rust trace controls
 
 **Scope:** Rust trace controls, levels, sinks, traced entrypoints, mdBook contract updates, toolbox, task-tree/

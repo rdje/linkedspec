@@ -7,7 +7,7 @@
 //! records follow the language-neutral staged parsing contract.
 
 use linkedspec_core::expr::CodeBlock;
-use linkedspec_core::trace::{TraceConfig, TraceEmitter};
+use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use serde_json::{Map, Value, json};
 
 const ACTIONIR_BODY_SPEC_ID: &str = "actionir-body.spec";
@@ -135,9 +135,224 @@ pub fn execute_parse_jobs_with_trace(
 /// Execute parse jobs through the registry queue with a caller-owned trace emitter.
 pub fn execute_parse_jobs_with_trace_emitter(
     jobs: &[Value],
-    _trace: &mut TraceEmitter,
+    trace: &mut TraceEmitter,
 ) -> Result<Vec<Value>, String> {
-    execute_parse_jobs(jobs)
+    let scope = trace
+        .enter_scope(
+            "rust_runtime:staged_parser_registry:execute_parse_jobs",
+            format!("jobs={}", jobs.len()),
+            TraceLevel::LOW,
+        )
+        .map_err(trace_write_failed)?;
+    let result = execute_parse_jobs_with_events(jobs, trace);
+    let exit_details = match &result {
+        Ok(results) => format!("status=ok results={}", results.len()),
+        Err(err) => format!("status=error error={err}"),
+    };
+    trace
+        .exit_scope(scope, exit_details)
+        .map_err(trace_write_failed)?;
+    result
+}
+
+fn execute_parse_jobs_with_events(
+    jobs: &[Value],
+    trace: &mut TraceEmitter,
+) -> Result<Vec<Value>, String> {
+    let mut queue = Vec::new();
+    for (input_index, job) in jobs.iter().enumerate() {
+        match normalize_job(job) {
+            Ok(normalized) => {
+                trace.trace_decision(
+                    "rust_runtime:staged_parser_registry:normalize_job",
+                    true,
+                    format!(
+                        "input_index={input_index} job_id={} parser_spec_id={} top_rule={} payload_kind={}",
+                        normalized.job_id,
+                        normalized.parser_spec_id,
+                        normalized.top_rule,
+                        normalized.payload_kind
+                    ),
+                    TraceLevel::MEDIUM,
+                );
+                queue.push(normalized);
+            }
+            Err(err) => {
+                trace.trace_decision(
+                    "rust_runtime:staged_parser_registry:normalize_job",
+                    false,
+                    format!("input_index={input_index} error={err}"),
+                    TraceLevel::MEDIUM,
+                );
+                return Err(err);
+            }
+        }
+    }
+    queue.sort_by(compare_jobs);
+    trace.trace_decision(
+        "rust_runtime:staged_parser_registry:queue_sorted",
+        true,
+        format!("jobs={}", queue.len()),
+        TraceLevel::MEDIUM,
+    );
+
+    let mut results = Vec::new();
+    for (queue_index, job) in queue.iter().enumerate() {
+        let job_scope = trace
+            .enter_scope(
+                "rust_runtime:staged_parser_registry:job",
+                format!(
+                    "queue_index={queue_index} job_id={} parent_ast_path={} parser_spec_id={} top_rule={}",
+                    job.job_id,
+                    parent_ast_path_text(job),
+                    job.parser_spec_id,
+                    job.top_rule
+                ),
+                TraceLevel::MEDIUM,
+            )
+            .map_err(trace_write_failed)?;
+        let job_result = execute_one_parse_job_with_events(queue_index, job, trace);
+        let exit_details = match &job_result {
+            Ok(record) => format!(
+                "status=ok job_id={} result_kind={}",
+                job.job_id,
+                record
+                    .get("result")
+                    .and_then(|result| result.get("kind"))
+                    .and_then(Value::as_str)
+                    .unwrap_or("<unknown>")
+            ),
+            Err(err) => format!("status=error job_id={} error={err}", job.job_id),
+        };
+        trace
+            .exit_scope(job_scope, exit_details)
+            .map_err(trace_write_failed)?;
+        results.push(job_result?);
+    }
+    Ok(results)
+}
+
+fn execute_one_parse_job_with_events(
+    queue_index: usize,
+    job: &StagedParseJob,
+    trace: &mut TraceEmitter,
+) -> Result<Value, String> {
+    let resolved = match resolve(job) {
+        Ok(resolved) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:resolve",
+                true,
+                format!(
+                    "job_id={} resolved_spec_id={} provider={}",
+                    job.job_id, resolved.resolved_spec_id, resolved.provider
+                ),
+                TraceLevel::MEDIUM,
+            );
+            resolved
+        }
+        Err(err) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:resolve",
+                false,
+                format!("job_id={} error={err}", job.job_id),
+                TraceLevel::MEDIUM,
+            );
+            return Err(err);
+        }
+    };
+    let loaded = match load(&resolved) {
+        Ok(loaded) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:load",
+                true,
+                format!(
+                    "job_id={} source_kind={} digest={}",
+                    job.job_id, loaded.source_kind, loaded.content_digest
+                ),
+                TraceLevel::MEDIUM,
+            );
+            loaded
+        }
+        Err(err) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:load",
+                false,
+                format!("job_id={} error={err}", job.job_id),
+                TraceLevel::MEDIUM,
+            );
+            return Err(err);
+        }
+    };
+    let compiled = match compile(&loaded, &job.top_rule, None) {
+        Ok(compiled) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:compile",
+                true,
+                format!(
+                    "job_id={} resolved_spec_id={} top_rule={} capabilities={}",
+                    job.job_id,
+                    compiled.resolved_spec_id,
+                    compiled.top_rule,
+                    compiled.capabilities.join(",")
+                ),
+                TraceLevel::MEDIUM,
+            );
+            compiled
+        }
+        Err(err) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:compile",
+                false,
+                format!("job_id={} error={err}", job.job_id),
+                TraceLevel::MEDIUM,
+            );
+            return Err(err);
+        }
+    };
+    let result = match execute(&compiled, job) {
+        Ok(result) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:execute",
+                true,
+                format!(
+                    "job_id={} resolved_spec_id={} payload_bytes={}",
+                    job.job_id,
+                    compiled.resolved_spec_id,
+                    job.text.len()
+                ),
+                TraceLevel::MEDIUM,
+            );
+            result
+        }
+        Err(err) => {
+            trace.trace_decision(
+                "rust_runtime:staged_parser_registry:execute",
+                false,
+                format!("job_id={} error={err}", job.job_id),
+                TraceLevel::MEDIUM,
+            );
+            return Err(err);
+        }
+    };
+    Ok(parse_result_record(
+        queue_index,
+        job,
+        &resolved,
+        &compiled,
+        result,
+    ))
+}
+
+fn parent_ast_path_text(job: &StagedParseJob) -> String {
+    if job.parent_ast_path.is_empty() {
+        "<unknown>".to_string()
+    } else {
+        job.parent_ast_path.join(".")
+    }
+}
+
+fn trace_write_failed(err: impl std::fmt::Display) -> String {
+    format!("trace write failed: {err}")
 }
 
 fn resolve(job: &StagedParseJob) -> Result<ResolvedParser, String> {

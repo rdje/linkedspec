@@ -11,7 +11,7 @@ use crate::ast::{
     BodyElement, BodyElementKind, EdgeTarget, FluentCall, Rule, RuleHeader, RuleMode, SpecFile,
 };
 use crate::error::{LinkedSpecError, Result};
-use crate::trace::{TraceConfig, TraceEmitter};
+use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use rgx_core::Regex;
 
 /// Parse a `.spec` source string into a `SpecFile` AST.
@@ -75,18 +75,45 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
 }
 
 /// Parse a `.spec` source string with explicit trace configuration.
-///
-/// `TRACE-OBSERVABILITY.4.2` wires the control/sink layer. Compile-side events
-/// are added by `.4.3`, so this entrypoint currently preserves `parse_spec`
-/// output while validating trace setup for later event wiring.
 pub fn parse_spec_with_trace(source: &str, trace_config: TraceConfig) -> Result<SpecFile> {
     let mut trace = TraceEmitter::new(trace_config)?;
     parse_spec_with_trace_emitter(source, &mut trace)
 }
 
 /// Parse with a caller-owned trace emitter.
-pub fn parse_spec_with_trace_emitter(source: &str, _trace: &mut TraceEmitter) -> Result<SpecFile> {
-    parse_spec(source)
+pub fn parse_spec_with_trace_emitter(source: &str, trace: &mut TraceEmitter) -> Result<SpecFile> {
+    let scope = trace.enter_scope(
+        "rust_core:parse_spec",
+        format!("bytes={} lines={}", source.len(), source.lines().count()),
+        TraceLevel::LOW,
+    )?;
+    let result = parse_spec(source);
+    let exit_details = match &result {
+        Ok(spec) => {
+            trace.trace_decision(
+                "rust_core:parse_spec:result",
+                true,
+                format!(
+                    "rules={} functions={}",
+                    spec.rules.len(),
+                    spec.functions.len()
+                ),
+                TraceLevel::MEDIUM,
+            );
+            format!("status=ok rules={}", spec.rules.len())
+        }
+        Err(err) => {
+            trace.trace_decision(
+                "rust_core:parse_spec:result",
+                false,
+                format!("error={err}"),
+                TraceLevel::MEDIUM,
+            );
+            format!("status=error error={err}")
+        }
+    };
+    trace.exit_scope(scope, exit_details)?;
+    result
 }
 
 /// Skip blank lines and comment lines, return first non-skipped index.

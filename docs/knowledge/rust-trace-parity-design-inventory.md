@@ -32,6 +32,6 @@ execution, statement-form `if`/`switch`, acode/bcode child dispatch, repetition/
 family plan dispatch.
 
 `.4.2` has since added Rust controls, levels, sinks, event primitives, and traced entrypoint plumbing while
-preserving default quiet behavior. The remaining leaves are `.4.3` compile/spec-parser/staged-dispatch trace
-events, `.4.4` runtime/generated-plan branch events, and `.4.5` cross-variant trace parity proof plus the reusable
-future-variant checklist.
+preserving default quiet behavior. `.4.3` has since added compile/spec-parser/staged-dispatch trace events. The
+remaining leaves are `.4.4` runtime/generated-plan branch events and `.4.5` cross-variant trace parity proof plus
+the reusable future-variant checklist.

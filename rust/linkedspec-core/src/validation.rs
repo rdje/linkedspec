@@ -25,7 +25,7 @@
 
 use crate::ast::{BodyElementKind, SpecFile};
 use crate::error::{LinkedSpecError, Result};
-use crate::trace::{TraceConfig, TraceEmitter};
+use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use rgx_core::Regex;
 use std::collections::HashSet;
 
@@ -35,18 +35,14 @@ pub fn validate(spec: &SpecFile) -> Result<()> {
 }
 
 /// Run validation with explicit trace configuration.
-///
-/// `TRACE-OBSERVABILITY.4.2` wires the control/sink layer. Validation events
-/// are added by `.4.3`, so this entrypoint currently preserves `validate`
-/// behavior while validating trace setup for later event wiring.
 pub fn validate_with_trace(spec: &SpecFile, trace_config: TraceConfig) -> Result<()> {
     let mut trace = TraceEmitter::new(trace_config)?;
     validate_with_trace_emitter(spec, &mut trace)
 }
 
 /// Run validation with a caller-owned trace emitter.
-pub fn validate_with_trace_emitter(spec: &SpecFile, _trace: &mut TraceEmitter) -> Result<()> {
-    validate(spec)
+pub fn validate_with_trace_emitter(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<()> {
+    validate_with_options_with_trace_emitter(spec, false, trace)
 }
 
 /// Run validation passes, optionally in strict mode.
@@ -70,6 +66,89 @@ pub fn validate_with_options(spec: &SpecFile, strict_syntax: bool) -> Result<()>
         check_unused_rules(spec)?;
     }
     Ok(())
+}
+
+/// Run validation passes with trace events, optionally in strict mode.
+pub fn validate_with_options_with_trace(
+    spec: &SpecFile,
+    strict_syntax: bool,
+    trace_config: TraceConfig,
+) -> Result<()> {
+    let mut trace = TraceEmitter::new(trace_config)?;
+    validate_with_options_with_trace_emitter(spec, strict_syntax, &mut trace)
+}
+
+/// Run validation passes with a caller-owned trace emitter.
+pub fn validate_with_options_with_trace_emitter(
+    spec: &SpecFile,
+    strict_syntax: bool,
+    trace: &mut TraceEmitter,
+) -> Result<()> {
+    let scope = trace.enter_scope(
+        "rust_core:validate",
+        format!(
+            "rules={} functions={} strict_syntax={}",
+            spec.rules.len(),
+            spec.functions.len(),
+            if strict_syntax { 1 } else { 0 }
+        ),
+        TraceLevel::LOW,
+    )?;
+    let result = (|| {
+        trace_validation_pass(trace, "top_rule_exists", || check_top_rule_exists(spec))?;
+        trace_validation_pass(trace, "duplicate_labels", || check_duplicate_labels(spec))?;
+        trace_validation_pass(trace, "duplicate_function_names", || {
+            check_duplicate_function_names(spec)
+        })?;
+        trace_validation_pass(trace, "function_registry", || check_function_registry(spec))?;
+        trace_validation_pass(trace, "mixed_edges", || check_mixed_edges(spec))?;
+        trace_validation_pass(trace, "balanced_braces", || check_balanced_braces(spec))?;
+        trace_validation_pass(trace, "edge_targets", || check_edge_targets(spec))?;
+        trace_validation_pass(trace, "regex_syntax", || check_regex_syntax(spec))?;
+        if strict_syntax {
+            trace_validation_pass(trace, "unused_rules", || check_unused_rules(spec))?;
+        } else {
+            trace.trace_decision(
+                "rust_core:validate:unused_rules",
+                false,
+                "strict_syntax=0 skipped",
+                TraceLevel::MEDIUM,
+            );
+        }
+        Ok(())
+    })();
+    let exit_details = match &result {
+        Ok(()) => "status=ok".to_string(),
+        Err(err) => format!("status=error error={err}"),
+    };
+    trace.exit_scope(scope, exit_details)?;
+    result
+}
+
+fn trace_validation_pass<F>(trace: &mut TraceEmitter, name: &str, check: F) -> Result<()>
+where
+    F: FnOnce() -> Result<()>,
+{
+    let result = check();
+    match &result {
+        Ok(()) => {
+            trace.trace_decision(
+                format!("rust_core:validate:{name}"),
+                true,
+                "pass",
+                TraceLevel::MEDIUM,
+            );
+        }
+        Err(err) => {
+            trace.trace_decision(
+                format!("rust_core:validate:{name}"),
+                false,
+                format!("error={err}"),
+                TraceLevel::MEDIUM,
+            );
+        }
+    }
+    result
 }
 
 /// At least one rule must use `::` (top rule marker).
