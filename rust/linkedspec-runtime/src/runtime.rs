@@ -77,6 +77,25 @@ pub struct RuntimeContext {
     /// `call(child)` inside `-> child { ... }` to the already-dispatched edge
     /// match; this stack lets Rust expose that same value without re-searching.
     action_edge_call_results: Vec<(String, RuntimeValue)>,
+    /// Rule-local declaration frames. A `declare(...)` shadows any existing
+    /// binding for the duration of the current rule invocation, while ordinary
+    /// assignment/mutation without `declare(...)` keeps the existing shared
+    /// Rust working-variable behavior.
+    declaration_scopes: Vec<RuntimeDeclarationScope>,
+    /// User functions already replace the whole variable store with their own
+    /// local store, so their declarations must not be recorded in an enclosing
+    /// rule frame.
+    declaration_scope_suppression_depth: usize,
+}
+
+type RuntimeDeclarationScope = std::collections::HashMap<String, RuntimeVariableSnapshot>;
+
+#[derive(Debug, Clone)]
+struct RuntimeVariableSnapshot {
+    scalar: Option<RuntimeValue>,
+    array: Option<Vec<RuntimeValue>>,
+    hash: Option<Vec<(String, RuntimeValue)>>,
+    bare_kind: Option<RuntimeVarKind>,
 }
 
 /// Saved scalar/array/hash variable stores.
@@ -120,6 +139,8 @@ impl RuntimeContext {
             recursion_active: std::collections::HashSet::new(),
             user_functions_active: Vec::new(),
             action_edge_call_results: Vec::new(),
+            declaration_scopes: Vec::new(),
+            declaration_scope_suppression_depth: 0,
         }
     }
 
@@ -138,12 +159,14 @@ impl RuntimeContext {
     // ── Scalars ──
 
     pub fn declare_scalar(&mut self, name: &str) {
+        self.record_declaration(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), RuntimeValue::Undef);
     }
 
     pub fn declare_scalar_with(&mut self, name: &str, value: RuntimeValue) {
+        self.record_declaration(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), value);
@@ -177,6 +200,7 @@ impl RuntimeContext {
     // ── Arrays ──
 
     pub fn declare_array(&mut self, name: &str) {
+        self.record_declaration(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Array);
         self.arrays.insert(name.to_string(), Vec::new());
@@ -238,6 +262,7 @@ impl RuntimeContext {
     // ── Hashes ──
 
     pub fn declare_hash(&mut self, name: &str) {
+        self.record_declaration(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Hash);
         self.hashes.insert(name.to_string(), Vec::new());
@@ -284,6 +309,77 @@ impl RuntimeContext {
         self.arrays = stores.arrays;
         self.hashes = stores.hashes;
         self.bare_kinds = stores.bare_kinds;
+    }
+
+    pub(crate) fn enter_rule_variable_scope(&mut self) {
+        self.declaration_scopes
+            .push(std::collections::HashMap::new());
+    }
+
+    pub(crate) fn exit_rule_variable_scope(&mut self) {
+        let Some(scope) = self.declaration_scopes.pop() else {
+            return;
+        };
+        for (name, snapshot) in scope {
+            match snapshot.scalar {
+                Some(value) => {
+                    self.scalars.insert(name.clone(), value);
+                }
+                None => {
+                    self.scalars.remove(&name);
+                }
+            }
+            match snapshot.array {
+                Some(value) => {
+                    self.arrays.insert(name.clone(), value);
+                }
+                None => {
+                    self.arrays.remove(&name);
+                }
+            }
+            match snapshot.hash {
+                Some(value) => {
+                    self.hashes.insert(name.clone(), value);
+                }
+                None => {
+                    self.hashes.remove(&name);
+                }
+            }
+            match snapshot.bare_kind {
+                Some(value) => {
+                    self.bare_kinds.insert(name, value);
+                }
+                None => {
+                    self.bare_kinds.remove(&name);
+                }
+            }
+        }
+    }
+
+    pub(crate) fn suspend_rule_declaration_tracking(&mut self) {
+        self.declaration_scope_suppression_depth += 1;
+    }
+
+    pub(crate) fn resume_rule_declaration_tracking(&mut self) {
+        self.declaration_scope_suppression_depth =
+            self.declaration_scope_suppression_depth.saturating_sub(1);
+    }
+
+    fn record_declaration(&mut self, name: &str) {
+        if self.declaration_scope_suppression_depth > 0 {
+            return;
+        }
+        let Some(scope) = self.declaration_scopes.last_mut() else {
+            return;
+        };
+        scope
+            .entry(name.to_string())
+            .or_insert_with(|| RuntimeVariableSnapshot {
+                scalar: self.scalars.get(name).cloned(),
+                array: self.arrays.get(name).cloned(),
+                hash: self.hashes.get(name).cloned(),
+                bare_kind: self.bare_kinds.get(name).copied(),
+            });
     }
 
     pub(crate) fn enter_user_function(&mut self, name: &str) -> bool {

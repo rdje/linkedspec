@@ -1306,10 +1306,8 @@ fn top_rule_as_normal_3_1_no_consume_recursion_terminates() {
 // Companion: legitimate consume-before-recurse recursion must NOT be cut by the
 // guard. Each re-entry advances `ctx.pos` (the rule consumes `(` before
 // recursing), so the `(rule,pos)` key differs at every depth and the cutoff
-// never fires — the recursive grammar parses and terminates. (Output VALUE
-// parity for recursive grammars is the separate general gap owned by
-// TOP-RULE-AS-NORMAL.3.2 / RUST-PARITY; here we only assert termination + that
-// the guard left legitimate recursion intact, i.e. it did not collapse to `[]`.)
+// never fires. TOP-RULE-AS-NORMAL.3.2 below locks the exact value parity; this
+// test remains the narrow termination/shape guard from .3.1.
 #[test]
 fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
     let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
@@ -1328,6 +1326,51 @@ fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
     assert!(
         result.is_array(),
         "legitimate recursion returns a well-formed array (guard left it intact)"
+    );
+}
+
+// ── TOP-RULE-AS-NORMAL.3.2 (ADR 0010) — cross-variant value parity ──
+//
+// Perl proved in TOP-RULE-AS-NORMAL.2.2 that a recursive top rule is an
+// ordinary recursive rule when authored with the standard LX accumulator-return
+// idiom. The remaining Rust gap was value shape: recursive child invocations
+// shared the same working-variable stores, and `declare(array, items)` did not
+// resolve the first bare argument as a declaration type token, so a nested
+// `sexpr` frame could leak its local `items` array into its parent. The runtime
+// now scopes declared working variables per rule invocation while preserving
+// the existing shared-state behavior for undeclared mutations.
+#[test]
+fn top_rule_as_normal_3_2_body_recursion_value_parity() {
+    let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
+                   sexpr: /\\(/ /\\)/  I { declare(array, items) }\n\
+                    -> sexpr     { push_value(array(items), call(sexpr)) }\n\
+                    -> atom      { push_value(array(items), call(atom)) }\n\
+                    -> sexpr[1]  { return(array_copy(array(items))) }\n\n\
+                   atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
+    assert_eq!(
+        build_and_run(grammar, "(a(b)c)"),
+        serde_json::json!([["a", ["b"], "c"]]),
+        "Rust wraps the Perl body-recursive reference value one level"
+    );
+}
+
+#[test]
+fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
+    let grammar = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n\
+                    -> sexpr     { push_value(array(items), call(sexpr)) }\n\
+                    -> atom      { push_value(array(items), call(atom)) }\n\
+                    -> sexpr[1]  { return(array_copy(array(items))) }\n\
+                    LX { return(array_copy(array(items))) }\n\n\
+                   atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
+    assert_eq!(
+        build_and_run(grammar, "(a(b)c)"),
+        serde_json::json!([[["a", ["b"], "c"]]]),
+        "Rust wraps the Perl top-recursive LX reference value one level"
+    );
+    assert_eq!(
+        build_and_run(grammar, "(a) (b)"),
+        serde_json::json!([[["a"], ["b"]]]),
+        "Rust preserves the Perl top-rule sequence arity under the wrapper rule"
     );
 }
 

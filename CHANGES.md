@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values
+
+**Scope:** Rust runtime declaration semantics, recursive top-rule/body value parity locks, oracle corpus fixtures,
+task-tree closeout, mdBook/status sync, and Knowledge Map.
+
+**What changed:** Rust now treats the first bare argument of `declare(...)` as the declaration type token
+(`scalar`/`array`/`hash`) instead of evaluating it as a runtime variable. Declared working variables are scoped per
+rule invocation around interpreted and generated-plan direct rule execution, while undeclared mutations remain
+caller-visible. This fixes recursive `sexpr` value leakage where nested child frames mutated the parent `items`
+array because `declare(array, items)` had been a no-op.
+
+**Evidence:** Focused Rust top-rule integration passes (4 tests), the Rust oracle corpus passes 3 tests over 91
+fixtures, source-emitter tests pass, runtime lib tests pass, Rust formatting check passes, and the oracle generator
+syntax check passes. The corpus adds `top_rule_body_recursion_sexpr`, `top_rule_lx_recursion_nested`, and
+`top_rule_lx_recursion_sequence`, closing `TOP-RULE-AS-NORMAL`.
+
 ## 2026-07-04 — RUST-PARITY.9 — finalize Rust parity documentation
 
 **Scope:** Rust parity closeout documentation, roadmap/task-tree status, architecture snapshot, mdBook backend

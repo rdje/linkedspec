@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TOP-RULE-AS-NORMAL.3.2 — Rust recursive top-rule values):
+  The recursive value leak was not caused by child dispatch needing full variable-store isolation. The real Rust
+  bug was narrower: `declare(array, items)` is parsed with raw first arg `Variable("array")`, and the runtime had
+  been evaluating that as a normal variable, yielding `""` and making the declaration a no-op. Without a real
+  declaration, recursive rule invocations shared the same auto-existing `items` array. The durable fix is to
+  resolve a raw first positional variable as the literal declaration type token, then snapshot/restore only
+  declared variables per rule invocation. Keep undeclared rule mutations shared unless a future leaf changes that
+  contract deliberately; existing Rust tests rely on undeclared child mutations being caller-visible. User
+  functions must suppress rule declaration tracking because they already swap in a function-local variable store.
+  The oracle corpus is now 91 fixtures, adding three recursive top-rule/body value fixtures under this leaf.
+
 - 2026-07-04 (RUST-PARITY.9 — closeout and next-frontier routing):
   `RUST-PARITY` is closed as a follow-on tree, not because generated source now covers every corpus fixture, but
   because the Rust parity obligations owned by this tree have a stable documented boundary: interpreter parity is

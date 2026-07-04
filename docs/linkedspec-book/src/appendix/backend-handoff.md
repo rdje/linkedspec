@@ -226,10 +226,10 @@ it now also compiles/runs a curated subset selected from the checked-in
 `tests/corpus/manifest.json`. That generated-source corpus subset includes
 authored proof fixtures, terse helper/control/user-function fixtures, and
 shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
-full 88-fixture corpus remains the Rust interpreter oracle gate unless a later
+full 91-fixture corpus remains the Rust interpreter oracle gate unless a later
 leaf explicitly broadens generated-source corpus coverage.
 `RUST-PARITY.9` closed the Rust follow-on documentation state around that
-boundary: interpreter parity is the 88-fixture corpus contract, while generated
+boundary: interpreter parity is the 91-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
@@ -241,7 +241,7 @@ it produces structurally equivalent output for every manifest entry, and its
 runner rejects missing fixture directories or stale extra fixture directories.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
-88 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
+91 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
 migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
 JSON-safe `{abc}` curly-brace delimiter case; `lib_reader.spec` scalar-attribute and
@@ -254,7 +254,8 @@ arrays, hashes, strings, numbers, aggregate wrapper quoting, and block-valued re
 numeric word aliases; arithmetic/comparison symbol callees; the terse scalar-slot `:name`
 fixture for scalar reads, scalar mutation targets, and scalar-held shape payloads;
 explicit string comparisons; assignment-expression fixtures; and the shared Perl/Rust
-user-function runtime fixture.
+user-function runtime fixture; plus recursive top-rule/body value fixtures for wrapper-body
+recursion, nested top-rule `LX` recursion, and top-rule sequence recursion.
 `RUST-PARITY.7.4` finalized the corpus guard: the generator writes
 `manifest.json`, and the Rust runner fails malformed manifests, duplicate case
 names, missing manifest entries, or stale extra fixture directories. The richer

@@ -459,9 +459,9 @@ impl GeneratedPlanExecutor<'_> {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let accumulator_len = ctx.accumulator.len();
-        let child_retv = self.execute_rule(label, entry_regex_idx, ctx)?;
+        let child_result = self.execute_rule(label, entry_regex_idx, ctx);
         ctx.accumulator.truncate(accumulator_len);
-        Ok(child_retv)
+        child_result
     }
 
     fn execute_action_edge_child_rule(
@@ -488,7 +488,9 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
+        ctx.enter_rule_variable_scope();
         let result = self.execute_direct_acode_rule_inner(label, entry_regex_idx, family, ctx);
+        ctx.exit_rule_variable_scope();
         ctx.exit_recursion(label, entry_pos);
         result
     }
@@ -786,7 +788,9 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
+        ctx.enter_rule_variable_scope();
         let result = self.execute_direct_bcode_rule_inner(label, entry_regex_idx, family, ctx);
+        ctx.exit_rule_variable_scope();
         ctx.exit_recursion(label, entry_pos);
         result
     }
@@ -1057,7 +1061,9 @@ impl Engine {
         }
         // Run the body, then leave the frame on BOTH the Ok and Err paths so the
         // active set stays balanced (empty between top-level parses).
+        ctx.enter_rule_variable_scope();
         let result = self.execute_rule_inner(label, entry_regex_idx, ctx);
+        ctx.exit_rule_variable_scope();
         ctx.exit_recursion(label, entry_pos);
         result
     }
@@ -1069,9 +1075,9 @@ impl Engine {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let accumulator_len = ctx.accumulator.len();
-        let child_retv = self.execute_rule(label, entry_regex_idx, ctx)?;
+        let child_result = self.execute_rule(label, entry_regex_idx, ctx);
         ctx.accumulator.truncate(accumulator_len);
-        Ok(child_retv)
+        child_result
     }
 
     fn execute_action_edge_child_rule(
@@ -2639,7 +2645,9 @@ impl Engine {
         }
 
         let function_label = format!("function '{}'", function.name);
+        ctx.suspend_rule_declaration_tracking();
         let result = self.eval_block_value(&function.body, ctx, &function_label);
+        ctx.resume_rule_declaration_tracking();
         ctx.restore_variable_stores(caller_stores);
         ctx.exit_user_function(&function.name);
         result.map_err(|err| format!("user function '{}': {}", function.name, err))
@@ -3662,7 +3670,14 @@ impl Engine {
             // ── Declarations ──
             "declare" => {
                 if args.len() >= 2 {
-                    let type_name = args[0].to_str();
+                    let type_name = if let Some(linkedspec_core::expr::Arg::Positional(
+                        linkedspec_core::expr::Expr::Variable { name },
+                    )) = raw_args.first()
+                    {
+                        name.clone()
+                    } else {
+                        args[0].to_str()
+                    };
                     // Variable name: positional arg[1] or keyword "name".
                     // Bare variable references like `declare(scalar, name)` should
                     // use the variable NAME, not its runtime value.
@@ -5612,6 +5627,9 @@ Item: /x/ I.return("x")
 
     #[test]
     fn blind_call_and_rule_dispatches_children() {
+        // Child dispatch is still allowed to mutate caller-visible working
+        // variables when the child does not declare a local variable with the
+        // same name.
         let grammar = r#"Top::AND
  I { declare(array, log) }
  => ChildA

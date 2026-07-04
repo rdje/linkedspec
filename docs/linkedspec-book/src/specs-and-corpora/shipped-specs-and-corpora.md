@@ -81,17 +81,20 @@ The important point is that these files collectively exercise the system:
 - runtime parser invocation,
 - real nested return payloads.
 
-The 88-fixture Rust oracle corpus tracks this maturity incrementally. It now includes
+The 91-fixture Rust oracle corpus tracks this maturity incrementally. It now includes
 `lib_reader_sattribute` and `lib_reader_cattribute`; `portmap_bare`, `portmap_bit`,
 `portmap_slice`, `portmap_constant`, and `portmap_concatenation`; `ebnf_expression_rules`
 and `ebnf_logging_annotation`; and four `spec.spec` smokes:
 `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`,
 and `spec_spec_comment_skip`; plus the narrow legacy safety smokes
 `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`,
-`vhdl_library_use`, `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`.
+`vhdl_library_use`, `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`;
+plus the recursive top-rule/body value fixtures `top_rule_body_recursion_sexpr`,
+`top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence`.
 Those fixtures verify grouped attributes, port-map scalar classification and
 concatenation, EBNF payload extraction, self-hosted `.spec` grammar AST shape, and
-minimal RTL/plugin/legacy parser reachability against the Perl reference output. `BNF.spec`,
+minimal RTL/plugin/legacy parser reachability, and recursive top-rule value parity
+against the Perl reference output. `BNF.spec`,
 `DT.spec`, `ifelse.spec`, and `operators_try.spec` remain useful diagnostic/debug-print
 examples, but their probed inputs currently return Perl `null`, so they are not promoted
 as semantic output fixtures. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`,

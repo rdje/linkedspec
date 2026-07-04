@@ -998,6 +998,48 @@ SPEC
     { case => 'tclite_double_quote',  spec => 'tclite', input => '""' },
     # ── SCALAREF-RETIREMENT.3 — shipped Lispish direct-access migration ──
     { case => 'lispish_x_y', spec => 'Lispish', input => '(x y)' },
+    # ── TOP-RULE-AS-NORMAL.3.2 — recursive top-rule value parity ──
+    {
+        case   => 'top_rule_body_recursion_sexpr',
+        input  => '(a(b)c)',
+        source => <<'SPEC',
+top::
+ -> sexpr { return(call(sexpr)) }
+
+sexpr: /\(/ /\)/  I { declare(array, items) }
+ -> sexpr     { push_value(array(items), call(sexpr)) }
+ -> atom      { push_value(array(items), call(atom)) }
+ -> sexpr[1]  { return(array_copy(array(items))) }
+
+atom: /[A-Za-z0-9]+/   I.return(entry_text())
+SPEC
+    },
+    {
+        case   => 'top_rule_lx_recursion_nested',
+        input  => '(a(b)c)',
+        source => <<'SPEC',
+sexpr:: /\(/ /\)/  I { declare(array, items) }
+ -> sexpr     { push_value(array(items), call(sexpr)) }
+ -> atom      { push_value(array(items), call(atom)) }
+ -> sexpr[1]  { return(array_copy(array(items))) }
+LX { return(array_copy(array(items))) }
+
+atom: /[A-Za-z0-9]+/   I.return(entry_text())
+SPEC
+    },
+    {
+        case   => 'top_rule_lx_recursion_sequence',
+        input  => '(a) (b)',
+        source => <<'SPEC',
+sexpr:: /\(/ /\)/  I { declare(array, items) }
+ -> sexpr     { push_value(array(items), call(sexpr)) }
+ -> atom      { push_value(array(items), call(atom)) }
+ -> sexpr[1]  { return(array_copy(array(items))) }
+LX { return(array_copy(array(items))) }
+
+atom: /[A-Za-z0-9]+/   I.return(entry_text())
+SPEC
+    },
     # ── RUST-PARITY.7.2 — structurally simple shipped-spec corpus batch ──
     { case => 'hlink_raw_string',              spec => 'hlink_substitution', input => 'plain text' },
     { case => 'hlink_raw_escaped_brackets',    spec => 'hlink_substitution', input => 'plain \[text\]' },

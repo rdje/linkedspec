@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values**
+  (TOP-RULE-AS-NORMAL TREE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.1).
+
+  **Fix:** Rust `declare(...)` now resolves a raw first bare argument as the declaration type token, so
+  `declare(array, items)` actually declares an array instead of evaluating `array` as an undefined variable.
+  Declared working variables are scoped per rule invocation around interpreted and generated-plan direct rule
+  execution; undeclared child mutations remain caller-visible. This fixes recursive `sexpr` parent/child
+  accumulator leakage while preserving existing shared-state behavior for rules that do not declare locals.
+
+  **Verification:** Focused top-rule integration passes (4 tests), Rust `corpus_oracle` passes 3 tests over 91
+  fixtures, source-emitter tests pass, runtime lib tests pass, Rust formatting check passes, and
+  `tools/gen_oracle_corpus.pl` syntax-checks. The three new corpus fixtures cover body recursion, nested top-rule
+  `LX` recursion, and top-rule sequence recursion.
+
+  **Frontier:** `TRACE-OBSERVABILITY.1` — coverage audit before CLI/docs/coverage implementation.
+
 - 2026-07-04: **RUST-PARITY.9 — finalize Rust parity documentation**
   (RUST-PARITY TREE CLOSED; TOP-RULE-AS-NORMAL.3.2 UNBLOCKED).
 

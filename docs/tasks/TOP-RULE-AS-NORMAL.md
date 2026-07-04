@@ -3,21 +3,16 @@
 ## Metadata
 
 - Tree ID: `TOP-RULE-AS-NORMAL`
-- Status: `active` (created 2026-06-23)
+- Status: `done` (created 2026-06-23; closed 2026-07-04)
 - Roadmap lane: `Overall roadmap — .spec language model / engine evolution`
 - Created: `2026-06-23`
-- Last updated: `2026-06-23` (**`.4` DONE** — book reconciliation to the new model. Demoted "Body rule
-  only" / "no regex on top" / "needs at least two rules" from law to **idiom** across 6 book files
-  (`appendix/formal-grammar.md`, `user-model/{rule-modes-and-parse-modes,spec-files-and-rule-paragraphs,worked-spec-walkthrough}.md`,
-  `overview/what-is-linkedspec.md`, `appendix/helper-contract-catalog.md`); documented `::` = entry marker /
-  ordinary-rule-entered-first, the consume-before-recurse forward-progress **termination** rule (formal-grammar
-  §5.4), and the recursive-top-rule-needs-`LX` model; **de-footgunned** the `Pair::AND` regex-on-top example
-  (`entry_text()`→`match_group(0)` from a post-match edge; folded the bare separator slot) and **fixed** the
-  worked-walkthrough multi-pair output bug (two pairs is a `seek` result, not `consume`). All examples verified
-  via `LinkedSpec::Get` (dump-don't-transcribe); `mdbook build` EXIT 0; book variant-agnostic. +1 phase0 lock
-  (`top_rule_as_normal_regex_on_top_reads_own_match_with_match_family`, 3 assertions): **phase0 964→965 green**;
-  new KM card [[top-rule-reads-own-match-with-match-family]]. **All `.4` children done; tree acceptance met.**
-  Earlier this day: `.3` SPLIT → `.3.1` (DONE) + `.3.2` (BLOCKED on `RUST-PARITY`).)
+- Last updated: `2026-07-04` (**`.3.2` DONE; tree closed** — Rust recursive top-rule value parity landed after
+  the `RUST-PARITY` blocker cleared. Root cause was the Rust `declare(...)` helper evaluating the first bare
+  argument (`array`/`scalar`/`hash`) as a variable instead of treating it as a declaration type token, plus the
+  missing per-rule invocation scope for declared working variables. Rust now resolves the raw declaration type
+  token, scopes declared working variables around interpreted and generated rule execution, preserves shared
+  behavior for undeclared mutations, and locks body/top recursive S-expression values in both focused integration
+  tests and the manifest oracle corpus. Corpus size is now 91 fixtures.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +35,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 
 - The top rule works as an ordinary rule across the {mode}×{regex}×{recursion} matrix, including
   **recursion back into the top rule**, with a forward-progress guard so a no-consume cycle cannot hang.
-- `t/phase0_regression.t` stays **960/960 green**; new behavior is locked by explicit regression subtests;
+- `t/phase0_regression.t` stays green; new behavior is locked by explicit regression subtests;
   `bash tools/run_ci_local.sh` EXIT 0.
 - Cross-variant parity: the Rust variant produces identical match/no-match + output for the new locks
   (Perl is the reference).
@@ -50,9 +45,8 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 
 ## Task Tree
 
-- ID: `TOP-RULE-AS-NORMAL` · Status: `active` (frontier `.3.2`, unblocked after
-    `RUST-PARITY` closure) · Children: `.1` (done), `.2` (done),
-    `.3` (active: `.3.1` done, `.3.2` pending), `.4` (done)
+- ID: `TOP-RULE-AS-NORMAL` · Status: `done` (closed 2026-07-04) · Children: `.1` (done), `.2` (done),
+    `.3` (done: `.3.1` + `.3.2`), `.4` (done)
 - ID: `TOP-RULE-AS-NORMAL.1` · Status: `done` (2026-06-23)
   Goal: Read-only investigation — what does the engine actually special-case about `::` w.r.t. regex and
     recursion? Establish the real model + the precise gap, before any engine edit.
@@ -79,7 +73,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     consume-before-recurse** guard so a no-consume recursive cycle cannot hang. Lock every confirmed/new
     behavior with `t/phase0_regression.t` subtests.
   Children: `.2.1` (forward-progress termination guard + matrix confirmation + locks — done),
-    `.2.2` (top re-entry recursion VALUE correctness — discovered during `.2.1`, pending).
+    `.2.2` (top re-entry recursion VALUE correctness — confirmed no engine defect — done).
 - ID: `TOP-RULE-AS-NORMAL.2.1` · Status: `done` (2026-06-23)
   Goal: Forward-progress / consume-before-recurse termination guard so a no-consume recursive cycle
     cannot hang; confirm the recursion matrix; lock the termination properties with phase0 subtests.
@@ -158,13 +152,12 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     (`(a(b)c)`->`[["a",["b"],"c"]]`, `(a) (b)`->`[["a"],["b"]]`); `perl -c` clean; **phase0 963->964 green**;
     `bash tools/run_ci_local.sh` **EXIT 0** ("Result: PASS", 964 tests); zero regression.
   Commit: (this commit)
-- ID: `TOP-RULE-AS-NORMAL.3` · Status: `active` (split 2026-06-23 into `.3.1` + `.3.2` after a Rust-side
+- ID: `TOP-RULE-AS-NORMAL.3` · Status: `done` (split 2026-06-23 into `.3.1` + `.3.2` after a Rust-side
     diagnosis showed the cross-variant gap has two independent layers — see Decisions/Changelog)
   Goal: Cross-variant parity — mirror the behavior in the Rust variant (and track for Julia/Dart); the new
     phase0 locks (or their cross-variant equivalents) produce identical output. Perl is the reference.
   Children: `.3.1` (termination parity — forward-progress guard, the genuinely top-rule-as-ordinary-specific
-    obligation), `.3.2` (value parity on recursive top-rule grammars — the GENERAL recursive-grammar parse
-    gap, owned/blocked by `RUST-PARITY`).
+    obligation), `.3.2` (value parity on recursive top-rule grammars — completed after `RUST-PARITY` closed).
 - ID: `TOP-RULE-AS-NORMAL.3.1` · Status: `done` (2026-06-23)
   Goal: **Termination parity** — mirror the Perl `.2.1` forward-progress / consume-before-recurse guard in
     the Rust variant so a no-consume recursive cycle TERMINATES cleanly (no native stack overflow / process
@@ -188,21 +181,36 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
     existing Rust tests stay green; new Rust regression lock; Perl phase0 + full local gate unaffected. **MET.**
   Verification: see Verification Log (`.3.1`).
   Commit: (this commit)
-- ID: `TOP-RULE-AS-NORMAL.3.2` · Status: `pending`
+- ID: `TOP-RULE-AS-NORMAL.3.2` · Status: `done` (2026-07-04)
   Goal: **Value parity** — the Rust variant produces the same parse OUTPUT as Perl for recursive top-rule
     grammars: body-recursion `(a(b)c)`→`["a",["b"],"c"]`, top-recursion-with-`LX` `(a(b)c)`→`[["a",["b"],"c"]]`
     and `(a) (b)`→`[["a"],["b"]]` (subject to the documented Perl↔Rust accumulator output-shape rule).
-  Diagnosis (same probe): the Rust engine returns **nulls** for ALL of these — body-recursion (the standard
-    `top:: -> sexpr` wrapper idiom) `(a(b)c)`→`[[null],[null]]`, top-`LX` `(a(b)c)`→`[[null],[null]]` and
-    `(a) (b)`→`[[null],[null]]`, top-no-`LX` `(a(b)c)`→`[[null]]`. Because **the standard body-recursion idiom
-    is ALSO wrong**, this is NOT a top-rule-as-ordinary issue — it is the **general recursive-grammar parse
-    gap** (atoms/`entry_text()` in nested dispatch + multi-slot `-> rule[1]` self-entry + accumulator return),
-    which the Rust corpus harness already documents as deferred and landing incrementally under `RUST-PARITY`
-    (`tests/corpus_oracle.rs`: Lispish needs `RUST-PARITY.7.5.2`; recursive specs deferred from the corpus).
-  Blocker cleared: `RUST-PARITY` landed recursive-grammar parity evidence (`Lispish` direct-access fixture,
-    restored `tclite` recursive fixtures, 88-fixture manifest oracle) and closed on 2026-07-04.
-  Next task: add the top-rule recursion oracle corpus entries / Rust locks on top of that now-landed capability.
-  Verification: `pending`  ·  Commit: `pending`
+  Baseline diagnosis: before the fix, Rust leaked child-frame working state into the parent recursive frame. A
+    wrapper-body `sexpr` parse of `(a(b)c)` produced parent/child accumulator pollution instead of Perl's
+    `["a",["b"],"c"]`; the top-rule-with-`LX` forms had the same value-shape leak. This became executable only
+    after `RUST-PARITY` closed the broader recursive-grammar parity blocker with the 88-fixture oracle corpus and
+    generated-source family coverage.
+  Root cause: Rust parsed `declare(array, items)` as a call with raw positional arg `Variable("array")`. The
+    helper evaluated that first arg as a runtime variable, got `""`, and therefore made the declaration a no-op.
+    Recursive invocations then auto-created/mutated the same `items` array in shared `RuntimeContext` stores.
+  Fix: `declare(...)` now resolves a raw first positional `Expr::Variable { name }` as the literal declaration
+    type token (`scalar`/`array`/`hash`), falling back to the evaluated value only for non-bare forms. Declared
+    working variables are snapshotted/restored per rule invocation around both interpreted `Engine::execute_rule`
+    and generated-plan direct acode/bcode rule execution. User functions suspend that rule-declaration tracking
+    because they already execute with their own variable stores. Undeclared mutations remain caller-visible, so
+    existing shared-state behavior for rules that intentionally do **not** declare a local variable is preserved.
+  Locks: focused Rust integration tests now cover body recursion and top-rule `LX` recursion, and the oracle corpus
+    now includes `top_rule_body_recursion_sexpr`, `top_rule_lx_recursion_nested`, and
+    `top_rule_lx_recursion_sequence` (manifest 88→91). The corpus expected values remain Perl-direct; Rust compares
+    against the standard one-level wrapper.
+  Verification: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test top_rule_as_normal -- --nocapture`
+    PASS (4 tests); `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`
+    PASS (3 tests, all 91 fixtures); `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`
+    PASS (3 tests); `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib` PASS (126 tests);
+    `cargo fmt --manifest-path rust/Cargo.toml --all --check` PASS; `perl -c -Iperl tools/gen_oracle_corpus.pl`
+    PASS. Full `integration_test` still has pre-existing/residual non-top-rule failures in older accumulator/alias
+    cases; the `.3.2` top-rule cases pass inside that binary and the manifest oracle is green.
+  Commit: this commit
 - ID: `TOP-RULE-AS-NORMAL.4` · Status: `done` (2026-06-23) (absorbs the superseded `PHASE0-BACKHALF-TRIAGE.6` book work)
   Goal: Book reconciliation to the new model — demote "Body rule only" / "no regex on top" from law to
     **idiom**; document `::` as "the rule entered first, otherwise ordinary"; document the
@@ -252,9 +260,9 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | — | `.2.1` | `done` 2026-06-23 | Forward-progress / consume-before-recurse termination guard (one-site (rule,pos) cutoff in `SpecEntry.pm`) + 3 phase0 locks; 960→963 green, full gate EXIT 0. |
 | — | `.2.2` | `done` 2026-06-23 | Top re-entry recursion VALUE correctness — CONFIRMED no engine defect: the top-recursive grammar parses with the `LX` accumulator idiom (`null` was the missing-`LX` authoring case); TOP vs BODY are different grammars (different arity). Doc+lock, engine frozen. +1 phase0 lock; 963→964. |
 | — | `.3.1` | `done` 2026-06-23 | Termination parity — Rust forward-progress / consume-before-recurse guard (mirror of `.2.1`): a no-consume recursive cycle now terminates cleanly (no native stack overflow / SIGABRT) instead of crashing; +1 Rust lock; Rust 242→243 green, zero regression. |
-| 1 | `.3.2` | `pending` | Value parity on recursive top-rule grammars — unblocked now that `RUST-PARITY` closed recursive-grammar parity evidence. |
+| — | `.3.2` | `done` 2026-07-04 | Value parity on recursive top-rule grammars — Rust `declare(...)` type-token resolution + per-rule declared-variable scopes landed; focused locks pass; oracle corpus 91 fixtures. |
 | — | `.4` | `done` 2026-06-23 | Book reconciliation to the new model (absorbs `PHASE0-BACKHALF-TRIAGE.6`): demoted law→idiom across 6 book files; documented `::`=entry-marker, the consume-before-recurse termination rule (formal-grammar §5.4), and recursive-top-rule-needs-`LX`; de-footgunned the `Pair::AND` example (`entry_text()`→`match_group(0)`) + fixed the multi-pair consume/seek output bug; +1 phase0 lock (964→965); KM card [[top-rule-reads-own-match-with-match-family]]; `mdbook build` EXIT 0. |
-| — | _(empty after `.3.2`)_ | — | After `.3.2`, re-evaluate whether the tree can close. |
+| — | _(empty)_ | — | Tree acceptance met and closed. PNT returns to the active task-tree index. |
 
 ## Decisions
 
@@ -288,8 +296,8 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 
 ## Blockers
 
-- None. ADR `0010` clears the engine-frozen blocker for this specific change. `.2` is the next executable
-  leaf; recommended in a fresh session for signoff-quality codegen work.
+- None. ADR `0010` cleared the engine-frozen blocker for this specific change, and `RUST-PARITY` cleared the
+  Rust recursive-grammar blocker before `.3.2` executed. The tree is closed.
 
 ## Verification Log
 
@@ -300,6 +308,7 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | `2026-06-23` | `.2.2` | `probe9.pl` (TOP+`LX` vs BODY on `(a)`/`(a(b)c)`/`(a) (b)`, dump-don't-transcribe); `perl -c`; full `perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh` | `done` — CONFIRMED no engine defect: `sexpr::`+`LX` parses (`(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]` = sequence vs BODY's single `["a"]`); the `null` was the missing-`LX` authoring case. +1 phase0 lock; **phase0 963→964**; full local gate **EXIT 0** ("Result: PASS", 964). No engine/spec change. |
 | `2026-06-23` | `.3.1` | Rust reproduce-first diagnostic (scratchpad test via `parse_spec`→`validate`→`compile`→`Engine::execute`, dump-don't-transcribe): baseline `cargo build` clean + 242 tests green; no-consume `top:: /a/ I{return(call(top))}` on `"aaa"` → **stack overflow → SIGABRT** (GAP). After guard: `cargo build` clean; the 2 new locks pass (`top_rule_as_normal_3_1_no_consume_recursion_terminates` ⇒ `[null]`; `..._consume_before_recurse_is_not_cut` ⇒ array); **full Rust suite 242→244 green** (integration 23→25; corpus/core/unit unchanged); clippy on the changed lib clean (no findings in `runtime.rs`/the added `engine.rs` wrapper; pre-existing `clippy --tests` debt untouched); **phase0 964/964** + `bash tools/run_ci_local.sh` **EXIT 0** (Perl untouched). | `done` — Rust mirror of the `.2.1` `(rule,pos)` forward-progress cutoff; a no-consume recursive cycle terminates cleanly instead of crashing; legitimate consume-before-recurse recursion left intact; zero regression. |
 | `2026-06-23` | `.4` | `LinkedSpec::Get` example verification (scratchpad `verify4*.pl`, dump-don't-transcribe): de-footgunned `Pair::AND`→`{"name":"name","value":"value"}`; `entry_text()` footgun→`{"name":null,"value":null}`; `sexpr::`+`LX` `(a(b)c)`→`[["a",["b"],"c"]]`, `(a) (b)`→`[["a"],["b"]]`, no-`LX`→`null`; worked-spec consume `answer = 42`→1 pair, seek `a = 1, b = 2`→2 pairs, consume `a = 1, b = 2`→1 pair; what-is kv→`[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; no-consume cycle→`null`. `mdbook build` EXIT 0 (anchor verified from generated HTML). `perl -c` clean; **phase0 964→965** (new lock + its 3 assertions pass); doctrine driver 2/2 PASS (KM regenerated); `bash tools/run_ci_local.sh` EXIT 0. | `done` — 6 book files reconciled law→idiom; `::`=entry-marker + §5.4 termination + recursive-top-rule-needs-`LX` documented; `Pair::AND` de-footgunned; multi-pair consume/seek bug fixed; +1 phase0 lock; KM card added; book variant-agnostic; zero regression. |
+| `2026-07-04` | `.3.2` | `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test top_rule_as_normal -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `perl -c -Iperl tools/gen_oracle_corpus.pl` | `done` — Rust recursive top-rule/body value parity locked. Focused top-rule integration PASS (4 tests); corpus oracle PASS (3 tests, 91 fixtures incl. three top-rule recursion cases); source-emitter PASS (3 tests); runtime lib PASS (126 tests); fmt/perl syntax PASS. Full `integration_test` still has residual non-top-rule failures in older accumulator/alias cases; `.3.2` cases pass. |
 
 ## Commit Log
 
@@ -310,9 +319,28 @@ decision + engine-touch authorization in ADR [0010](../decisions/0010-top-rule-i
 | `.2.2` | `TOP-RULE-AS-NORMAL.2.2 — confirm top re-entry recursion works with the LX accumulator idiom (NO engine defect; engine frozen); +1 phase0 lock; close .2` | this commit (TEST+DOC only; +1 phase0 lock; no engine/spec change) |
 | `.3.1` | `TOP-RULE-AS-NORMAL.3.1 — Rust forward-progress/consume-before-recurse termination guard (mirror of .2.1); split .3; +2 Rust locks` | `808ce0d` (Rust: `rust/linkedspec-runtime/src/{runtime,engine}.rs` + 2 integration locks; Perl untouched) |
 | `.4` | `TOP-RULE-AS-NORMAL.4 — book reconciliation (law→idiom across 6 book files; ::=entry-marker + §5.4 termination + recursive-top-rule-needs-LX; de-footgun Pair::AND; fix multi-pair consume/seek bug); +1 phase0 lock; KM card` | this commit (BOOK+TEST+DOC; 6 book files + `t/phase0_regression.t` + KM card; no engine/spec change) |
+| `.3.2` | `TOP-RULE-AS-NORMAL.3.2 - lock Rust recursive top-rule values` | this commit (Rust declare token/scoped declarations + focused locks + 3 oracle fixtures; corpus 91) |
 
 ## Changelog
 
+- `2026-07-04` (`.3.2`): **Rust recursive top-rule VALUE parity DONE; tree closed.** After `RUST-PARITY`
+  closed the recursive-grammar blocker, `.3.2` added the missing top-rule recursion locks and oracle fixtures.
+  Reproduce-first probes showed Rust leaking nested `sexpr` child-frame values into the parent accumulator.
+  Root cause was two-part and Rust-local: `declare(array, items)` arrived as a raw `Variable("array")`, but the
+  helper evaluated it as a runtime variable and got `""`, making the declaration a no-op; without an actual
+  declaration, recursive invocations auto-created and mutated the same `items` array in shared runtime stores.
+  Fix: `declare(...)` resolves a raw first positional variable as the literal type token (`scalar`/`array`/`hash`)
+  and `RuntimeContext` records/restores declared working variables per rule invocation. The rule-scope envelope is
+  used by both the interpreted engine and generated-plan direct acode/bcode execution; user functions suspend rule
+  declaration tracking because they already run with their own variable stores; undeclared child mutations remain
+  caller-visible to preserve existing Rust behavior. Added focused Rust locks for wrapper-body recursion and
+  top-rule `LX` recursion, plus three Perl-reference oracle fixtures:
+  `top_rule_body_recursion_sexpr`, `top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence`
+  (manifest 88→91). Verification: focused top-rule integration PASS (4 tests), corpus oracle PASS (3 tests / 91
+  fixtures), source-emitter PASS (3 tests), runtime lib PASS (126 tests), `cargo fmt --check` PASS,
+  `perl -c -Iperl tools/gen_oracle_corpus.pl` PASS. Full `integration_test` still has residual non-top-rule
+  accumulator/alias failures, but the `.3.2` cases pass and the manifest oracle is green. Marked `.3.2`, `.3`,
+  and `TOP-RULE-AS-NORMAL` done.
 - `2026-06-23` (`.4`): **Book reconciliation DONE; tree acceptance MET.** Reconciled the mdBook to the
   ADR-`0010` model across **6 files**. Demoted the law claims to **idiom**: `formal-grammar.md` §2.2 table
   column "Body rule only" → "Typical placement" / "Body rule (idiom)" + a "modes are legal on a top rule"

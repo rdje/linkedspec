@@ -90,4 +90,11 @@ semantic fixtures for the probed inputs, because the Perl reference returns
 Rust-green fixtures. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`,
 single-line `simenv`, VHDL port-clause, `ds_vhistory` branch, and placeholder
 `verilog` candidates remain follow-up parity blockers rather than unsafe corpus
-promotions. The corpus now has 88 fixtures.
+promotions. The corpus then had 88 fixtures.
+
+`TOP-RULE-AS-NORMAL.3.2` added three recursive top-rule/body value parity
+fixtures after the broader recursive-grammar blocker closed:
+`top_rule_body_recursion_sexpr`, `top_rule_lx_recursion_nested`, and
+`top_rule_lx_recursion_sequence`. These lock the Perl reference values for the
+wrapper-body recursive `sexpr` idiom, a recursive top rule with `LX`, and a
+top-rule `LX` sequence parse. The corpus now has 91 fixtures.
