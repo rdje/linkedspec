@@ -1,11 +1,14 @@
-//! RUST-PARITY.8.2/.8.3.1-.8.3.5 — generated Rust-source compile/run proof.
+//! RUST-PARITY.8.2/.8.3.1-.8.4 — generated Rust-source compile/run proof.
 
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
-use linkedspec_runtime::source_emitter::{classify_generated_rule_family, emit_rust_source};
+use linkedspec_runtime::source_emitter::{
+    GeneratedRuleFamily, GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source,
+    execute_generated_parser,
+};
 use serde_json::json;
 use std::collections::BTreeSet;
 use std::fs;
@@ -86,6 +89,76 @@ ChildA::
 
 ChildB::
  I { return_undef() }
+"#;
+
+const REP_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR{2,3}
+ I { declare(array, out) }
+ /a/ -> A { push_value(array(out), match_text()) }
+ /b/ -> B { push_value(array(out), match_text()) }
+ E { return(array_copy(array(out))) }
+
+A:
+ /a/
+
+B:
+ /b/
+"#;
+
+const REP_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR{2,3}
+ I { declare(array, out) }
+ => A
+ => B
+ LE { push_value(array(out), :retv) }
+ E { return(array_copy(array(out))) }
+
+A:&
+ /a/
+ LE { return("A") }
+
+B:&
+ /b/
+ LE { return("B") }
+"#;
+
+const REP_AND_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND{2}
+ I { declare(array, pairs); declare(array, pair) }
+ /a/ -> A { push_value(array(pair), match_text()) }
+ /b/ -> B { push_value(array(pair), match_text()) }
+ IT { push_value(array(pairs), array_copy(array(pair))); set(pair, []) }
+ E { return(array_copy(array(pairs))) }
+
+A:
+ /a/
+
+B:
+ /b/
+"#;
+
+const REP_AND_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND{2}
+ I { declare(array, groups); declare(array, group) }
+ => A { push_value(array(group), :retv) }
+ => B { push_value(array(group), :retv) }
+ IT { push_value(array(groups), array_copy(array(group))); set(group, []) }
+ E { return(array_copy(array(groups))) }
+
+A:&
+ /a/
+ LE { return("A") }
+
+B:&
+ /b/
+ LE { return("B") }
+"#;
+
+const REP_ZERO_PROGRESS_SOURCE_EMITTER_SPEC: &str = r#"Top::OR+
+ I { declare(array, iters) }
+ /x*/
+ LE { push_value(array(iters), "i") }
+ E { return(array_copy(array(iters))) }
+"#;
+
+const REP_RECURSION_GUARD_SOURCE_EMITTER_SPEC: &str = r#"Top::OR+
+ /x*/ -> Top { return(concat("guard:", call(Top))) }
 "#;
 
 struct TempProject {
@@ -185,6 +258,66 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             expected_family: "GeneratedRuleFamily::OrBcode",
             expected_mode: RuleMode::Or,
         },
+        Case {
+            module: "rep_acode_case",
+            spec: REP_ACODE_SOURCE_EMITTER_SPEC,
+            input: "abab",
+            expected: json!([["a", "b", "a"]]),
+            expected_family: "GeneratedRuleFamily::RepAcode",
+            expected_mode: RuleMode::OrBounded {
+                min: 2,
+                max: Some(3),
+            },
+        },
+        Case {
+            module: "rep_bcode_case",
+            spec: REP_BCODE_SOURCE_EMITTER_SPEC,
+            input: "abab",
+            expected: json!([["A", "B", "A"]]),
+            expected_family: "GeneratedRuleFamily::RepBcode",
+            expected_mode: RuleMode::OrBounded {
+                min: 2,
+                max: Some(3),
+            },
+        },
+        Case {
+            module: "rep_and_acode_case",
+            spec: REP_AND_ACODE_SOURCE_EMITTER_SPEC,
+            input: "abab",
+            expected: json!([[["a", "b"], ["a", "b"]]]),
+            expected_family: "GeneratedRuleFamily::RepAndAcode",
+            expected_mode: RuleMode::AndBounded {
+                min: 2,
+                max: Some(2),
+            },
+        },
+        Case {
+            module: "rep_and_bcode_case",
+            spec: REP_AND_BCODE_SOURCE_EMITTER_SPEC,
+            input: "abab",
+            expected: json!([[["A", "B"], ["A", "B"]]]),
+            expected_family: "GeneratedRuleFamily::RepAndBcode",
+            expected_mode: RuleMode::AndBounded {
+                min: 2,
+                max: Some(2),
+            },
+        },
+        Case {
+            module: "rep_zero_progress_case",
+            spec: REP_ZERO_PROGRESS_SOURCE_EMITTER_SPEC,
+            input: "abc",
+            expected: json!([["i"]]),
+            expected_family: "GeneratedRuleFamily::RepAcode",
+            expected_mode: RuleMode::OrPlus,
+        },
+        Case {
+            module: "rep_recursion_guard_case",
+            spec: REP_RECURSION_GUARD_SOURCE_EMITTER_SPEC,
+            input: "abc",
+            expected: json!(["guard:"]),
+            expected_family: "GeneratedRuleFamily::RepAcode",
+            expected_mode: RuleMode::OrPlus,
+        },
     ];
 
     let expected_non_rep_families = BTreeSet::from([
@@ -196,6 +329,13 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         "GeneratedRuleFamily::OrBcode",
     ]);
     let mut covered_non_rep_families = BTreeSet::new();
+    let expected_rep_families = BTreeSet::from([
+        "GeneratedRuleFamily::RepAcode",
+        "GeneratedRuleFamily::RepBcode",
+        "GeneratedRuleFamily::RepAndAcode",
+        "GeneratedRuleFamily::RepAndBcode",
+    ]);
+    let mut covered_rep_families = BTreeSet::new();
     let mut generated_modules = String::new();
     let mut generated_tests = String::from("#[cfg(test)]\nmod generated_source_tests {\n");
 
@@ -215,7 +355,12 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         assert_eq!(top.mode, case.expected_mode);
 
         let generated = emit_rust_source(&compiled).expect("emit generated Rust source");
-        covered_non_rep_families.insert(case.expected_family);
+        if expected_non_rep_families.contains(case.expected_family) {
+            covered_non_rep_families.insert(case.expected_family);
+        }
+        if expected_rep_families.contains(case.expected_family) {
+            covered_rep_families.insert(case.expected_family);
+        }
         assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_FORMAT"));
         assert!(generated.contains("COMPILED_SPEC_JSON"));
         assert!(generated.contains("GENERATED_RULES"));
@@ -251,7 +396,11 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
     }
     assert_eq!(
         covered_non_rep_families, expected_non_rep_families,
-        "source-emitter matrix must cover every non-REP generated family before REP work starts"
+        "source-emitter matrix must retain every non-REP generated family while adding REP coverage"
+    );
+    assert_eq!(
+        covered_rep_families, expected_rep_families,
+        "source-emitter matrix must cover every REP generated family before corpus integration"
     );
     generated_tests.push_str("}\n");
 
@@ -296,4 +445,44 @@ serde_json = "1"
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr)
     );
+}
+
+#[test]
+fn legacy_repetition_family_plan_marker_still_executes_directly() {
+    let parsed =
+        parse_spec(REP_AND_BCODE_SOURCE_EMITTER_SPEC).expect("parse legacy repetition smoke spec");
+    validate(&parsed).expect("validate legacy repetition smoke spec");
+    let compiled = compile(&parsed).expect("compile legacy repetition smoke spec");
+
+    let labels: Vec<&str> = compiled
+        .rules
+        .iter()
+        .map(|rule| rule.label.as_str())
+        .collect();
+    assert_eq!(labels.as_slice(), ["Top", "A", "B"]);
+    assert_eq!(
+        classify_generated_rule_family(compiled.top_rule().expect("top rule")),
+        GeneratedRuleFamily::RepAndBcode
+    );
+
+    let compiled_spec_json =
+        serde_json::to_string(&compiled).expect("serialize legacy repetition compiled spec");
+    let legacy_generated_rules = [
+        GeneratedRuleSpec {
+            label: "Top",
+            family: GeneratedRuleFamily::Repetition,
+        },
+        GeneratedRuleSpec {
+            label: "A",
+            family: GeneratedRuleFamily::AndSingleAcode,
+        },
+        GeneratedRuleSpec {
+            label: "B",
+            family: GeneratedRuleFamily::AndSingleAcode,
+        },
+    ];
+
+    let actual = execute_generated_parser(&compiled_spec_json, &legacy_generated_rules, "abab")
+        .expect("legacy repetition marker should execute through direct specialization");
+    assert_eq!(actual, json!([[["A", "B"], ["A", "B"]]]));
 }

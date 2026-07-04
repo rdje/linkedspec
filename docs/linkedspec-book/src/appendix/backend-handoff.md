@@ -216,8 +216,11 @@ directly while enforcing ordered non-repetition AND regex/acode sequence
 semantics, and `.8.3.4` made AND/OR bcode families run directly with shared
 blind-edge tail execution. `.8.3.5` closed the non-repetition matrix by making
 generated-plan routing exhaustive for all six non-REP generated families and by
-asserting that family coverage in the source-emitter matrix. REP work is owned
-by `.8.4`, followed by all-variant/oracle integration in `.8.5`.
+asserting that family coverage in the source-emitter matrix. `.8.4` added direct
+generated execution for the four explicit REP subfamilies (`RepAcode`,
+`RepBcode`, `RepAndAcode`, and `RepAndBcode`), including bounded repetition,
+zero-progress termination, and same-position recursive-call guard coverage.
+All-variant/oracle integration remains owned by `.8.5`.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`

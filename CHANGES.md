@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.4 — emit REP generated families
+
+**Scope:** Rust generated-source execution routing, repeated acode/bcode runtime loops, source-emitter compile/run
+matrix completeness, task-tree frontier docs, mdBook backend handoff, live recovery docs, and Knowledge Map.
+
+**What changed:** Generated-source planning now classifies repetition rules into explicit REP subfamilies:
+`RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode`. The generated-plan executor routes those families through
+direct acode/bcode execution instead of falling back through whole-rule interpreter execution. The shared Rust
+runtime now repeats blind-call OR choice and AND sequence steps with min/max bounds and a zero-progress guard, and
+REP-AND acode rules count complete ordered groups instead of treating every regex slot as an independent
+repetition.
+
+**Evidence:** The source-emitter matrix now covers all non-REP and REP generated families. New generated modules
+prove bounded REP acode, bounded REP bcode, bounded REP-AND acode, bounded REP-AND bcode, zero-progress
+termination, and same-position recursive-call termination, all checked against interpreter output and then built/run
+inside the isolated generated-source temp crate. A focused compatibility lock proves an older v1 generated plan row
+with the coarse `Repetition` marker still validates and executes through direct REP specialization. Focused
+formatting, source-emitter, runtime-lib, and clippy checks pass; mdBook, Knowledge Map, memory, doctrine,
+whitespace, and full local CI also pass. The full gate includes 1021 phase0 regression tests. The next executable
+frontier is `RUST-PARITY.8.5`: generated-source validation against the oracle/corpus contract.
+
 ## 2026-07-04 — RUST-PARITY.8.3.5 — close non-REP generated matrix
 
 **Scope:** Rust generated-source execution routing, source-emitter compile/run matrix completeness, task-tree
@@ -13,8 +34,8 @@ its cases cover every non-repetition generated family before REP work starts.
 
 **Evidence:** Focused formatting, source-emitter, runtime-lib, and clippy checks pass. The source-emitter matrix
 still proves the covered default, OR acode, AND acode, AND bcode, and OR bcode behaviors, and now also performs a
-set-completeness check over all six non-REP `GeneratedRuleFamily` values. The next executable frontier is
-`RUST-PARITY.8.4`: emit repetition handler families and termination guards.
+set-completeness check over all six non-REP `GeneratedRuleFamily` values. The next executable frontier at
+completion was `RUST-PARITY.8.4`; `.8.4` is now complete and the current frontier is `RUST-PARITY.8.5`.
 
 ## 2026-07-04 — RUST-PARITY.8.3.4 — emit direct bcode execution
 
@@ -34,8 +55,8 @@ ordered child returns `A` then `B`, proves OR bcode first-match behavior with an
 later child if dispatch did not stop after the first truthy child, and proves OR bcode no-match `LX` handling.
 Focused formatting, source-emitter, runtime-lib, and clippy checks pass. The mdBook, Knowledge Map, memory,
 doctrine, whitespace, and full local CI gates also pass; the full gate includes 1021 phase0 regression tests. The
-frontier at completion was `RUST-PARITY.8.3.5`; `.8.3.5` is now complete and the current executable frontier is
-`RUST-PARITY.8.4`.
+frontier at completion was `RUST-PARITY.8.3.5`; `.8.3.5` and `.8.4` are now complete and the current executable
+frontier is `RUST-PARITY.8.5`.
 
 ## 2026-07-04 — RUST-PARITY.8.3.3 — emit direct AND acode execution
 
@@ -52,8 +73,8 @@ matching the Perl HandlerIR `and_acode_seq` contract for ordered consume cases.
 **Evidence:** The focused generated-source matrix now proves an AND single-acode action return and an AND
 sequential-acode case that only returns from the second ordered slot (`a b` → `and-seq`), which would fail if the
 executor stopped after the first regex. Focused formatting, source-emitter, runtime-lib, and clippy checks pass.
-At `.8.3.3` completion, the next executable frontier was `.8.3.4`; `.8.3.4` and `.8.3.5` are now complete and the
-current frontier is `RUST-PARITY.8.4`.
+At `.8.3.3` completion, the next executable frontier was `.8.3.4`; `.8.3.4`, `.8.3.5`, and `.8.4` are now
+complete and the current frontier is `RUST-PARITY.8.5`.
 
 ## 2026-07-04 — RUST-PARITY.8.3.2 — emit direct default-or acode execution
 

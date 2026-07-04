@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (`.8.3.5` done — non-REP generated matrix
-  closed; frontier is `.8.4`)
+- Last updated: `2026-07-04` (`.8.4` done — REP generated families run
+  directly; frontier is `.8.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -552,7 +552,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Children: `.8.3.1` (done), `.8.3.2` (done), `.8.3.3` (done), `.8.3.4` (done), `.8.3.5` (done)
   Acceptance: Generated Rust covers default, OR, AND single/sequential acode, AND bcode, and OR bcode structural families with representative compile/run tests and parity against the interpreter/oracle for focused fixtures
   Note: Split 2026-07-04 (PNT rule 5). A source audit for the first implementation pass found `.8.3` still bundles multiple independently-reviewable mechanisms: Rust `CompiledRule` lacks enough rule-mode metadata to distinguish OR-bcode from AND-bcode robustly; generated source needs an explicit family plan before per-family runtime execution can be proven; acode, bcode, and final matrix coverage have separate risks and test shapes. No Rust code changed in this split.
-  Verification: Done — `.8.3.1` added generated family-plan metadata, `.8.3.2` added direct default/OR acode execution, `.8.3.3` added direct AND acode execution, `.8.3.4` added direct AND/OR bcode execution, and `.8.3.5` closed the non-repetition generated-family matrix. Current executable frontier is `.8.4`.
+  Verification: Done — `.8.3.1` added generated family-plan metadata, `.8.3.2` added direct default/OR acode execution, `.8.3.3` added direct AND acode execution, `.8.3.4` added direct AND/OR bcode execution, `.8.3.5` closed the non-repetition generated-family matrix, and `.8.4` added direct REP generated-family execution. Current executable frontier is `.8.5`.
   Commit: `RUST-PARITY.8.3 - split non-repetition emitter lane` (see Commit Log)
 
 - ID: `RUST-PARITY.8.3.1`
@@ -591,11 +591,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.8.3.5 - close non-REP generated matrix` (see Commit Log)
 
 - ID: `RUST-PARITY.8.4`
-  Status: `pending`
+  Status: `done`
   Goal: Emit repetition handler families and termination guards
   Acceptance: Generated Rust covers REP acode, REP bcode, REP-AND acode, and REP-AND bcode structural families, including min/max bounds and zero-progress/recursion termination behavior; representative compile/run tests pass
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-04. `source_emitter` now classifies repetition rules into explicit `GeneratedRuleFamily` variants: `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode`. `GeneratedPlanExecutor` routes all four directly. The shared Rust runtime now repeats blind-call OR choice and AND sequence steps with min/max bounds and a zero-progress guard; REP-AND acode counts complete ordered regex groups so `IT` fires per group. The source-emitter matrix proves bounded REP acode, bounded REP bcode, bounded REP-AND acode, bounded REP-AND bcode, zero-progress termination, and same-position recursive-call termination in generated modules built/run in the isolated temp crate; a compatibility lock proves legacy `Repetition` plan rows still execute through direct REP specialization. Verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`; `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` (1021 phase0 tests).
+  Commit: `RUST-PARITY.8.4 - emit REP generated families` (see Commit Log)
 
 - ID: `RUST-PARITY.8.5`
   Status: `pending`
@@ -624,7 +624,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.8.3.3` | `done` | generated-plan executor now directly handles AND single-acode and AND sequential-acode, including ordered consume semantics |
 | — | `RUST-PARITY.8.3.4` | `done` | generated-plan executor now directly handles AND bcode sequential dispatch and OR bcode first-match dispatch |
 | — | `RUST-PARITY.8.3.5` | `done` | non-repetition generated-family matrix closed; direct generated execution covers all six non-REP families |
-| 1 | `RUST-PARITY.8.4` | `pending` | next generated-source leaf covers repetition handler families and termination guards |
+| — | `RUST-PARITY.8.4` | `done` | REP generated families and termination guards landed |
+| 1 | `RUST-PARITY.8.5` | `pending` | next generated-source leaf integrates the all-variant matrix with the oracle/corpus contract |
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
 | — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
@@ -656,10 +657,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.5` | `done` | null-output candidates separated from semantic fixtures; quoted-brace `operators_try` parser warning fixed; four `spec.spec` smokes active |
 | — | `RUST-PARITY.7.3.6` | `done` | seven RTL/plugin/legacy safety smokes landed; richer mismatches routed to follow-up instead of broadening `.7.3` |
 | — | `RUST-PARITY.7.4` | `done` | manifest-backed regression guard finalized the oracle corpus; runner rejects missing/stale fixture drift |
-| — | `RUST-PARITY.8` | `active` | code-gen emitter lane split; `.8.1` closed the contract/inventory slice, `.8.2` landed the scaffold/harness proof, and `.8.3.1`–`.8.3.5` closed non-REP family-plan, acode, bcode direct execution, and matrix completeness; `.8.4` is the current REP family frontier |
+| — | `RUST-PARITY.8` | `active` | code-gen emitter lane split; `.8.1` closed the contract/inventory slice, `.8.2` landed the scaffold/harness proof, `.8.3.1`–`.8.3.5` closed non-REP family-plan/acode/bcode direct execution/matrix completeness, and `.8.4` closed REP direct execution; `.8.5` is the current oracle/corpus integration frontier |
 | 2 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
-(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.5`; all `.7.5` shipped recursive-spec blockers are closed, `.7.2` and `.7.3` expanded the shipped-spec corpus to 88 fixtures, `.7.4` finalized the manifest guard, and `.7` is closed. `.8` is now split the same way; `.8.2` landed the generated-source scaffold/harness, `.8.3.1`–`.8.3.5` landed the non-REP family-plan, acode, bcode direct-execution slices, and matrix closeout, and current frontier is `.8.4`.)
+(`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.5`; all `.7.5` shipped recursive-spec blockers are closed, `.7.2` and `.7.3` expanded the shipped-spec corpus to 88 fixtures, `.7.4` finalized the manifest guard, and `.7` is closed. `.8` is now split the same way; `.8.2` landed the generated-source scaffold/harness, `.8.3.1`–`.8.3.5` landed the non-REP family-plan, acode, bcode direct-execution slices, and matrix closeout, `.8.4` landed REP direct execution, and current frontier is `.8.5`.)
 
 ## Decisions
 
@@ -706,6 +707,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-07-04` (`.8.3.3` implementation): direct generated execution now covers AND acode families. `GeneratedPlanExecutor` treats `AndSingleAcode` and `AndAcodeSeq` as direct acode families, and the Rust regex/acode loop now enforces ordered non-repetition AND sequence before completion: regex slot 0, then slot 1, etc. An out-of-order or incomplete sequence fires `LX` when present and returns `undef` before `E`, matching the Perl HandlerIR `and_acode_seq` ordered-index contract for focused cases while keeping generated and interpreted Rust execution aligned. The source-emitter matrix now proves an AND single-acode return and a two-slot AND sequential-acode case whose payload is produced only by the second ordered edge. Frontier → `.8.3.4`.
 - `2026-07-04` (`.8.3.4` implementation): direct generated execution now covers non-repetition bcode families. `GeneratedPlanExecutor` treats `AndBcode` and `OrBcode` as direct families, sharing the interpreter's blind-edge tail execution so child returns become parent `retv`, attached blind-edge code/fluent calls execute in order, and parent `E` reads the resulting value. Explicit OR bcode dispatch stops after the first truthy child return and fires `LX` on no child match. The source-emitter matrix proves ordered AND bcode child-return collection (`A`, `B`), OR bcode first-match behavior on `a b` (`or-bcode:A`, which would become the later child if dispatch kept looping), and OR no-match `LX` on `c` (`or-miss`). Frontier → `.8.3.5`.
 - `2026-07-04` (`.8.3.5` implementation): non-repetition generated-family matrix closed. `GeneratedPlanExecutor::execute_rule` now matches exhaustively over `GeneratedRuleFamily`, so every non-REP generated family enters direct execution and `Repetition` is the only fallback-owned family. The source-emitter matrix now asserts that its generated-module cases cover `Default`, `OrAcode`, `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, and `OrBcode` before REP work starts. Frontier → `.8.4`.
+- `2026-07-04` (`.8.4` implementation): repetition generated-family direct execution landed. `GeneratedRuleFamily::Repetition` is retained only as a compatibility enum value; current classification emits explicit `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode` families. Generated execution routes all four directly. The shared Rust runtime now loops repeated blind-call OR choices and AND sequences with min/max bounds plus zero-progress termination, and REP-AND acode counts a complete ordered regex group as one repetition. The source-emitter matrix now covers every non-REP and REP generated family, plus zero-progress and recursion-guard cases. Frontier → `.8.5`.
 - `2026-07-02` (`.7.5.3` reconciliation): `.7.5.3` is closed without new runtime code in this slice because the
   implementation landed later under owned `SPEC-FORMAT-TERSE` leaves. `SPEC-FORMAT-TERSE.2.3.3.1` added the
   parser/compiler/runtime metadata path for action-edge fluent chains and no-arg `.push` / `.return(expr)` /
@@ -840,6 +842,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-04` | `RUST-PARITY.8.3.3` | focused Rust fmt/source-emitter/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated source now directly handles AND single-acode and AND sequential-acode families. The Rust regex/acode loop enforces ordered non-repetition AND sequence, and the generated-source matrix proves a second-slot return payload that would fail if execution stopped after the first regex. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.3.4` |
 | `2026-07-04` | `RUST-PARITY.8.3.4` | focused Rust fmt/source-emitter/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated source now directly handles AND bcode and OR bcode families. The shared blind-edge tail helper preserves child-return-to-`retv`, attached code/fluent execution, parent `E` behavior, and OR no-match `LX`; OR bcode stops after the first truthy child return. The generated-source matrix proves ordered AND child-return collection, OR first-match behavior, and OR no-match `LX`. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.3.5` |
 | `2026-07-04` | `RUST-PARITY.8.3.5` | focused Rust fmt/source-emitter/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated-plan routing is exhaustive for all six non-REP families, `Repetition` is the only generated fallback, and the source-emitter matrix asserts complete non-REP family coverage before REP work. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.4` |
+| `2026-07-04` | `RUST-PARITY.8.4` | focused Rust fmt/source-emitter/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated source now classifies and directly runs `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode`; repeated bcode paths honor min/max and zero-progress termination; REP-AND acode counts complete ordered groups; the generated-source matrix covers all REP families plus zero-progress, recursion termination, and legacy `Repetition` plan compatibility. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.5` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 

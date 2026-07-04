@@ -22,8 +22,9 @@
 //! ## Blind-call dispatch
 //!
 //! Blind-call rules (`=> child`) dispatch children from `bcode_dispatch`.
-//! Explicit OR mode stops after the first truthy child return; all other
-//! currently supported blind-call modes invoke each child sequentially.
+//! Explicit OR mode stops after the first truthy child return; AND mode invokes
+//! each child sequentially, and repeated blind-call modes loop those choice or
+//! sequence steps with the normal repetition bounds and progress guard.
 //! Blind-call dispatch takes priority over regex + acode dispatch.
 //!
 //! ## Multi-entrypoint child dispatch
@@ -396,9 +397,50 @@ impl GeneratedPlanExecutor<'_> {
             GeneratedRuleFamily::AndBcode | GeneratedRuleFamily::OrBcode => {
                 self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
             }
-            GeneratedRuleFamily::Repetition => {
-                self.engine.execute_rule(label, entry_regex_idx, ctx)
+            GeneratedRuleFamily::RepAcode | GeneratedRuleFamily::RepAndAcode => {
+                self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
             }
+            GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
+                self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
+            }
+            GeneratedRuleFamily::Repetition => {
+                let rule = self.engine.spec.find(label).ok_or_else(|| {
+                    format!(
+                        "rule '{}' (entry idx {}) not found in compiled spec",
+                        label, entry_regex_idx
+                    )
+                })?;
+                let family = crate::source_emitter::classify_generated_rule_family(rule);
+                self.execute_rule_by_family(label, entry_regex_idx, family, ctx)
+            }
+        }
+    }
+
+    fn execute_rule_by_family(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        family: GeneratedRuleFamily,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        match family {
+            GeneratedRuleFamily::Default
+            | GeneratedRuleFamily::OrAcode
+            | GeneratedRuleFamily::AndSingleAcode
+            | GeneratedRuleFamily::AndAcodeSeq
+            | GeneratedRuleFamily::RepAcode
+            | GeneratedRuleFamily::RepAndAcode => {
+                self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
+            }
+            GeneratedRuleFamily::AndBcode
+            | GeneratedRuleFamily::OrBcode
+            | GeneratedRuleFamily::RepBcode
+            | GeneratedRuleFamily::RepAndBcode => {
+                self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
+            }
+            GeneratedRuleFamily::Repetition => Err(format!(
+                "generated rule '{label}' retained unspecialized repetition family"
+            )),
         }
     }
 
@@ -517,19 +559,34 @@ impl GeneratedPlanExecutor<'_> {
         let is_rep = rule.rep_min.is_some();
         let rep_min = rule.rep_min.unwrap_or(0);
         let rep_max = rule.rep_max;
-        let is_and_acode_seq = !is_rep
-            && matches!(family, GeneratedRuleFamily::AndAcodeSeq)
+        let is_rep_and_acode_seq = is_rep
+            && matches!(family, GeneratedRuleFamily::RepAndAcode)
             && rule.regex_patterns.len() > 1;
+        let is_and_acode_seq = (!is_rep
+            && matches!(family, GeneratedRuleFamily::AndAcodeSeq)
+            && rule.regex_patterns.len() > 1)
+            || is_rep_and_acode_seq;
         let and_acode_seq_len = rule.regex_patterns.len();
         let mut matches: usize = 0;
+        let mut and_acode_idx: usize = 0;
+        let mut rep_and_start_pos = ctx.pos;
         let max_iter = 10_000;
         let has_entry_idx = entry_regex_idx > 0 && entry_regex_idx < rule.regex_patterns.len();
 
         for _iter in 0..max_iter {
+            if is_rep_and_acode_seq && and_acode_idx == 0 {
+                rep_and_start_pos = ctx.pos;
+            }
             if !is_rep && !is_and_acode_seq && matches > 0 {
                 break;
             }
-            if is_and_acode_seq && matches >= and_acode_seq_len {
+            if !is_rep && is_and_acode_seq && matches >= and_acode_seq_len {
+                break;
+            }
+            if is_rep_and_acode_seq
+                && let Some(max) = rep_max
+                && matches >= max
+            {
                 break;
             }
 
@@ -559,7 +616,12 @@ impl GeneratedPlanExecutor<'_> {
             };
 
             if let Some(m) = match_result {
-                if is_and_acode_seq && m.index != matches {
+                let expected_and_idx = if is_rep_and_acode_seq {
+                    and_acode_idx
+                } else {
+                    matches
+                };
+                if is_and_acode_seq && m.index != expected_and_idx {
                     if let Some(ref lxcode) = rule.lxcode {
                         self.engine.execute_block(lxcode, ctx, label)?;
                         return_if_rule_returned!();
@@ -646,6 +708,13 @@ impl GeneratedPlanExecutor<'_> {
                     return_if_rule_returned!();
                 }
 
+                if is_rep_and_acode_seq {
+                    and_acode_idx += 1;
+                    if and_acode_idx < and_acode_seq_len {
+                        continue;
+                    }
+                    and_acode_idx = 0;
+                }
                 matches += 1;
 
                 if let Some(ref itcode) = rule.itcode {
@@ -666,7 +735,12 @@ impl GeneratedPlanExecutor<'_> {
                 break;
             }
 
-            if is_rep && ctx.pos == pos_before {
+            let progress_start = if is_rep_and_acode_seq {
+                rep_and_start_pos
+            } else {
+                pos_before
+            };
+            if is_rep && ctx.pos == progress_start {
                 break;
             }
         }
@@ -678,7 +752,7 @@ impl GeneratedPlanExecutor<'_> {
             ));
         }
 
-        if is_and_acode_seq && matches < and_acode_seq_len {
+        if !is_rep && is_and_acode_seq && matches < and_acode_seq_len {
             ctx.restore_return_value(caller_return);
             saved_match.restore(ctx);
             return Ok(RuntimeValue::Undef);
@@ -782,6 +856,92 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         match family {
+            GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
+                let rep_min = rule.rep_min.unwrap_or(0);
+                let rep_max = rule.rep_max;
+                let mut matches = 0usize;
+
+                for _iter in 0..LINKEDSPEC_WHILE_ITERATION_LIMIT {
+                    if let Some(max) = rep_max
+                        && matches >= max
+                    {
+                        break;
+                    }
+
+                    let pos_before = ctx.pos;
+
+                    if let Some(ref lscode) = rule.lscode {
+                        self.engine.execute_block(lscode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+
+                    let matched = if matches!(family, GeneratedRuleFamily::RepAndBcode) {
+                        let mut completed_sequence = true;
+                        for entry in &rule.bcode_dispatch {
+                            let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                            let child_matched = child_retv.as_bool();
+                            ctx.set_retv(child_retv);
+                            self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
+                            return_if_rule_returned!();
+                            if !child_matched {
+                                completed_sequence = false;
+                                break;
+                            }
+                        }
+                        completed_sequence
+                    } else {
+                        let mut matched_choice = false;
+                        for entry in &rule.bcode_dispatch {
+                            let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                            let child_matched = child_retv.as_bool();
+                            ctx.set_retv(child_retv);
+                            self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
+                            return_if_rule_returned!();
+                            if child_matched {
+                                matched_choice = true;
+                                break;
+                            }
+                        }
+                        matched_choice
+                    };
+
+                    if !matched {
+                        if let Some(ref lxcode) = rule.lxcode {
+                            self.engine.execute_block(lxcode, ctx, label)?;
+                            return_if_rule_returned!();
+                        }
+                        break;
+                    }
+
+                    if let Some(ref lecode) = rule.lecode {
+                        self.engine.execute_block(lecode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+
+                    matches += 1;
+
+                    if let Some(ref itcode) = rule.itcode {
+                        self.engine.execute_block(itcode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+
+                    if ctx.pos == pos_before {
+                        break;
+                    }
+                }
+
+                if matches < rep_min {
+                    return Err(format!(
+                        "rule '{}': expected at least {} matches, got {}",
+                        label, rep_min, matches
+                    ));
+                }
+
+                if let Some(ref excode) = rule.excode {
+                    self.engine.execute_block(excode, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+            }
             GeneratedRuleFamily::AndBcode => {
                 for entry in &rule.bcode_dispatch {
                     let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
@@ -850,10 +1010,9 @@ impl Engine {
     ///
     /// This path is separate from [`execute`](Self::execute): generated modules
     /// call it after `source_emitter` validates the static family table emitted
-    /// beside the serialized `CompiledSpec`. `RUST-PARITY.8.3.5` closes the
-    /// non-repetition matrix: all non-REP generated families route directly
-    /// here, and only REP families keep their fallback until the repetition
-    /// leaf replaces it.
+    /// beside the serialized `CompiledSpec`. `RUST-PARITY.8.4` routes both
+    /// non-REP families and explicit REP subfamilies directly through the
+    /// generated-plan executor.
     pub fn execute_generated_with_plan(
         &self,
         generated_rules: &[GeneratedRuleSpec],
@@ -1048,9 +1207,95 @@ impl Engine {
             return_if_rule_returned!();
         }
 
+        let is_rep = rule.rep_min.is_some();
+        let rep_min = rule.rep_min.unwrap_or(0);
+        let rep_max = rule.rep_max;
+
         // ── Blind-call dispatch ──
         if !rule.bcode_dispatch.is_empty() {
-            if !matches!(rule.mode, RuleMode::Or) {
+            if is_rep {
+                let mut matches = 0usize;
+                for _iter in 0..LINKEDSPEC_WHILE_ITERATION_LIMIT {
+                    if let Some(max) = rep_max
+                        && matches >= max
+                    {
+                        break;
+                    }
+
+                    let pos_before = ctx.pos;
+
+                    if let Some(ref lscode) = rule.lscode {
+                        self.execute_block(lscode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+
+                    let matched = if rule.mode.is_and() {
+                        let mut completed_sequence = true;
+                        for entry in &rule.bcode_dispatch {
+                            let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                            let child_matched = child_retv.as_bool();
+                            ctx.set_retv(child_retv);
+                            self.execute_bcode_entry_tail(entry, ctx, label)?;
+                            return_if_rule_returned!();
+                            if !child_matched {
+                                completed_sequence = false;
+                                break;
+                            }
+                        }
+                        completed_sequence
+                    } else {
+                        let mut matched_choice = false;
+                        for entry in &rule.bcode_dispatch {
+                            let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
+                            let child_matched = child_retv.as_bool();
+                            ctx.set_retv(child_retv);
+                            self.execute_bcode_entry_tail(entry, ctx, label)?;
+                            return_if_rule_returned!();
+                            if child_matched {
+                                matched_choice = true;
+                                break;
+                            }
+                        }
+                        matched_choice
+                    };
+
+                    if !matched {
+                        if let Some(ref lxcode) = rule.lxcode {
+                            self.execute_block(lxcode, ctx, label)?;
+                            return_if_rule_returned!();
+                        }
+                        break;
+                    }
+
+                    if let Some(ref lecode) = rule.lecode {
+                        self.execute_block(lecode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+
+                    matches += 1;
+
+                    if let Some(ref itcode) = rule.itcode {
+                        self.execute_block(itcode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+
+                    if ctx.pos == pos_before {
+                        break;
+                    }
+                }
+
+                if matches < rep_min {
+                    return Err(format!(
+                        "rule '{}': expected at least {} matches, got {}",
+                        label, rep_min, matches
+                    ));
+                }
+
+                if let Some(ref excode) = rule.excode {
+                    self.execute_block(excode, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+            } else if !matches!(rule.mode, RuleMode::Or) {
                 for entry in &rule.bcode_dispatch {
                     // Execute child rule; its return value becomes the parent's
                     // `retv` (Runtime Semantics §6.2), readable by the attached
@@ -1090,12 +1335,13 @@ impl Engine {
         }
 
         // ── Regex-based matching loop ──
-        let is_rep = rule.rep_min.is_some();
-        let rep_min = rule.rep_min.unwrap_or(0);
-        let rep_max = rule.rep_max;
-        let is_and_acode_seq = !is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1;
+        let is_rep_and_acode_seq = is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1;
+        let is_and_acode_seq = (!is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1)
+            || is_rep_and_acode_seq;
         let and_acode_seq_len = rule.regex_patterns.len();
         let mut matches: usize = 0;
+        let mut and_acode_idx: usize = 0;
+        let mut rep_and_start_pos = ctx.pos;
         let max_iter = 10_000;
 
         // For non-REP entry-specific dispatch: if entry_regex_idx > 0,
@@ -1103,11 +1349,20 @@ impl Engine {
         let has_entry_idx = entry_regex_idx > 0 && entry_regex_idx < rule.regex_patterns.len();
 
         for _iter in 0..max_iter {
+            if is_rep_and_acode_seq && and_acode_idx == 0 {
+                rep_and_start_pos = ctx.pos;
+            }
             // Non-REP rules execute once
             if !is_rep && !is_and_acode_seq && matches > 0 {
                 break;
             }
-            if is_and_acode_seq && matches >= and_acode_seq_len {
+            if !is_rep && is_and_acode_seq && matches >= and_acode_seq_len {
+                break;
+            }
+            if is_rep_and_acode_seq
+                && let Some(max) = rep_max
+                && matches >= max
+            {
                 break;
             }
 
@@ -1145,7 +1400,12 @@ impl Engine {
             };
 
             if let Some(m) = match_result {
-                if is_and_acode_seq && m.index != matches {
+                let expected_and_idx = if is_rep_and_acode_seq {
+                    and_acode_idx
+                } else {
+                    matches
+                };
+                if is_and_acode_seq && m.index != expected_and_idx {
                     if let Some(ref lxcode) = rule.lxcode {
                         self.execute_block(lxcode, ctx, label)?;
                         return_if_rule_returned!();
@@ -1260,6 +1520,13 @@ impl Engine {
                     return_if_rule_returned!();
                 }
 
+                if is_rep_and_acode_seq {
+                    and_acode_idx += 1;
+                    if and_acode_idx < and_acode_seq_len {
+                        continue;
+                    }
+                    and_acode_idx = 0;
+                }
                 matches += 1;
 
                 // ── IT-block (per-iteration, REP only) ──
@@ -1289,7 +1556,12 @@ impl Engine {
             // dispatch) would loop forever. Break when the iteration made no
             // progress (Perl: `loop_end_pos == loop_start_pos`); the min-bound
             // check below then fails the rule if we are still under `rep_min`.
-            if is_rep && ctx.pos == pos_before {
+            let progress_start = if is_rep_and_acode_seq {
+                rep_and_start_pos
+            } else {
+                pos_before
+            };
+            if is_rep && ctx.pos == progress_start {
                 break;
             }
         }
@@ -1302,7 +1574,7 @@ impl Engine {
             ));
         }
 
-        if is_and_acode_seq && matches < and_acode_seq_len {
+        if !is_rep && is_and_acode_seq && matches < and_acode_seq_len {
             ctx.restore_return_value(caller_return);
             saved_match.restore(ctx);
             return Ok(RuntimeValue::Undef);

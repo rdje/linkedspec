@@ -2,7 +2,8 @@
 //!
 //! `RUST-PARITY.8.2` introduced the generated-source path. The emitted module
 //! embeds a serialized `CompiledSpec` plus generated-family metadata; direct
-//! generated execution now covers all non-repetition families.
+//! generated execution now covers all non-repetition families and explicit
+//! repetition subfamilies.
 
 use crate::engine::Engine;
 use linkedspec_core::ast::RuleMode;
@@ -21,6 +22,10 @@ pub enum GeneratedRuleFamily {
     AndBcode,
     OrBcode,
     Repetition,
+    RepAcode,
+    RepBcode,
+    RepAndAcode,
+    RepAndBcode,
 }
 
 impl GeneratedRuleFamily {
@@ -33,6 +38,10 @@ impl GeneratedRuleFamily {
             Self::AndBcode => "AndBcode",
             Self::OrBcode => "OrBcode",
             Self::Repetition => "Repetition",
+            Self::RepAcode => "RepAcode",
+            Self::RepBcode => "RepBcode",
+            Self::RepAndAcode => "RepAndAcode",
+            Self::RepAndBcode => "RepAndBcode",
         }
     }
 }
@@ -88,9 +97,11 @@ pub fn emit_rust_source(compiled: &CompiledSpec) -> Result<String, String> {
 
 /// Execute a generated parser module from its embedded compiled spec and family plan.
 ///
-/// The plan is validated first. `RUST-PARITY.8.3.5` closes the non-repetition
-/// matrix: all non-REP families route through the generated-plan executor
-/// directly, while REP families remain the only fallback-owned family.
+/// The plan is validated first. `RUST-PARITY.8.4` closes the generated-source
+/// structural family matrix by routing non-REP and explicit REP subfamilies
+/// through the generated-plan executor directly. Older v1 generated modules
+/// that still carry the coarse `Repetition` marker remain accepted for REP
+/// rules and are specialized at execution time.
 pub fn execute_generated_parser(
     compiled_spec_json: &str,
     generated_rules: &[GeneratedRuleSpec],
@@ -114,7 +125,18 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
             | RuleMode::AndPlus
             | RuleMode::AndBounded { .. }
     ) {
-        return GeneratedRuleFamily::Repetition;
+        if !rule.bcode_dispatch.is_empty() {
+            return if rule.mode.is_and() {
+                GeneratedRuleFamily::RepAndBcode
+            } else {
+                GeneratedRuleFamily::RepBcode
+            };
+        }
+        return if rule.mode.is_and() {
+            GeneratedRuleFamily::RepAndAcode
+        } else {
+            GeneratedRuleFamily::RepAcode
+        };
     }
 
     if !rule.bcode_dispatch.is_empty() {
@@ -141,7 +163,7 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
         | RuleMode::OrPlus
         | RuleMode::OrBounded { .. }
         | RuleMode::AndPlus
-        | RuleMode::AndBounded { .. } => GeneratedRuleFamily::Repetition,
+        | RuleMode::AndBounded { .. } => unreachable!("repetition modes return above"),
     }
 }
 
@@ -165,7 +187,7 @@ fn validate_generated_rule_plan(
             ));
         }
         let expected = classify_generated_rule_family(compiled_rule);
-        if expected != generated_rule.family {
+        if !generated_rule_family_matches(expected, generated_rule.family) {
             return Err(format!(
                 "generated rule plan family mismatch for '{}': compiled {:?} vs generated {:?}",
                 compiled_rule.label, expected, generated_rule.family
@@ -174,6 +196,21 @@ fn validate_generated_rule_plan(
     }
 
     Ok(())
+}
+
+fn generated_rule_family_matches(
+    expected: GeneratedRuleFamily,
+    generated: GeneratedRuleFamily,
+) -> bool {
+    expected == generated
+        || (generated == GeneratedRuleFamily::Repetition
+            && matches!(
+                expected,
+                GeneratedRuleFamily::RepAcode
+                    | GeneratedRuleFamily::RepBcode
+                    | GeneratedRuleFamily::RepAndAcode
+                    | GeneratedRuleFamily::RepAndBcode
+            ))
 }
 
 fn rust_string_literal(value: &str) -> Result<String, String> {

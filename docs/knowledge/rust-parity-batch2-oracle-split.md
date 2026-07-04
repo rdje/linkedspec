@@ -43,9 +43,10 @@ harness, `RUST-PARITY.8.3` split non-repetition handler-family emission into
 narrower generated-source children, and `RUST-PARITY.8.3.1` landed the
 generated rule-family plan, `.8.3.2` landed direct default/OR acode generated
 execution, `.8.3.3` landed direct AND acode generated execution, `.8.3.4`
-landed direct AND/OR bcode generated execution, and `.8.3.5` closed the
-non-repetition generated-family matrix. The current frontier is
-`RUST-PARITY.8.4`: emit repetition handler families and termination guards.
+landed direct AND/OR bcode generated execution, `.8.3.5` closed the
+non-repetition generated-family matrix, and `.8.4` closed direct REP
+generated-family execution. The current frontier is `RUST-PARITY.8.5`:
+generated-source validation against the oracle/corpus contract.
 
 The later lanes are:
 
@@ -71,4 +72,5 @@ The later lanes are:
 - `.8.3.3`: done — direct AND acode generated execution.
 - `.8.3.4`: done — direct AND/OR bcode generated execution.
 - `.8.3.5`: done — non-repetition generated-family matrix closeout.
-- `.8.4`: current frontier — REP family direct execution and termination guards.
+- `.8.4`: done — REP family direct execution and termination guards.
+- `.8.5`: current frontier — generated-source validation against the oracle/corpus contract.

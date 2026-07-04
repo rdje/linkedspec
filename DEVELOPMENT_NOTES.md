@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.4 — REP generated-family direct execution):
+  Generated source now has explicit repetition family markers instead of one opaque `Repetition` bucket:
+  `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode`. `GeneratedPlanExecutor` routes all four directly.
+  The important semantic fixes are shared with the interpreter so generated-source tests can keep using the
+  interpreter as their first oracle: repeated blind-call rules now loop OR choice or AND sequence steps with
+  min/max bounds and a zero-progress guard, and REP-AND acode counts a complete ordered regex group as one
+  repetition before firing `IT`. The source-emitter matrix covers bounded REP acode/bcode, bounded REP-AND
+  acode/bcode, zero-progress termination, and a same-position recursive `call(Top)` cutoff; the generated temp
+  crate builds and runs all cases. A legacy-plan test keeps the v1 `GeneratedRuleFamily::Repetition` marker
+  accepted for existing generated REP modules while current source emits explicit REP variants. `.8.5` is the next
+  leaf for all-variant/corpus-backed generated-source validation.
+
 - 2026-07-04 (RUST-PARITY.8.3.5 — non-REP generated-family matrix closeout):
   `GeneratedPlanExecutor::execute_rule` now routes exhaustively by `GeneratedRuleFamily`. `Default`, `OrAcode`,
   `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, and `OrBcode` use direct generated execution; `Repetition` is the
@@ -116,7 +128,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.8.4` unless a new terse leaf is split.
+  `RUST-PARITY.8.5` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and
