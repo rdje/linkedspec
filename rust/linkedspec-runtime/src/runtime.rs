@@ -73,6 +73,10 @@ pub struct RuntimeContext {
     /// Active user-function call stack. User functions are pure MVP value
     /// helpers; recursion is unsupported and must diagnose instead of recursing.
     user_functions_active: Vec<String>,
+    /// Scoped child return overrides for action-edge blocks. Perl lowers
+    /// `call(child)` inside `-> child { ... }` to the already-dispatched edge
+    /// match; this stack lets Rust expose that same value without re-searching.
+    action_edge_call_results: Vec<(String, RuntimeValue)>,
 }
 
 /// Saved scalar/array/hash variable stores.
@@ -115,6 +119,7 @@ impl RuntimeContext {
             return_value: None,
             recursion_active: std::collections::HashSet::new(),
             user_functions_active: Vec::new(),
+            action_edge_call_results: Vec::new(),
         }
     }
 
@@ -316,6 +321,23 @@ impl RuntimeContext {
         self.bare_kinds
             .insert("retv".to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert("retv".to_string(), value);
+    }
+
+    pub fn push_action_edge_call_result(&mut self, label: &str, value: RuntimeValue) {
+        self.action_edge_call_results
+            .push((label.to_string(), value));
+    }
+
+    pub fn pop_action_edge_call_result(&mut self) {
+        self.action_edge_call_results.pop();
+    }
+
+    pub fn action_edge_call_result(&self, label: &str) -> Option<RuntimeValue> {
+        self.action_edge_call_results
+            .iter()
+            .rev()
+            .find(|(active_label, _)| active_label == label)
+            .map(|(_, value)| value.clone())
     }
 
     // ── Per-invocation return value ──

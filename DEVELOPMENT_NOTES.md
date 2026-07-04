@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.7.3.4.3 — action-edge child aggregation parity):
+  Action-edge child calls are edge-scoped in the Rust runtime now. When a parent edge has already matched a child
+  regex, block/fluent uses such as `call(child)`, `push(child)`, `push(child,target)`, and
+  `push(child,target,index)` must consume the dispatched edge result, not run a fresh child search from the
+  advanced parent cursor. Passive terminal children are a special case: Perl generated handlers expose the parent
+  edge match and return `undef` without scanning again, so Rust skips executing body-less/no-dispatch terminal
+  children after parent edge consumption. Keep scalar and aggregate stores distinct when scalar assignments carry
+  aggregate-valued child returns; only direct shape RHS values infer aggregate targets. The shipped proofs are
+  `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`; the oracle corpus is 77
+  fixtures after this slice.
+
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.4 — type-method no-drift closure):
   The supported type-method surface is closed for the current lane. Receiver families are string/scalar,
   array/list, hash, and number. Array numeric reducers (`sum`, `avg`, `median`, `range`, `min`, `max`) are terminal
@@ -8,7 +19,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.7.3.4.3` unless a new terse leaf is split.
+  `RUST-PARITY.7.3.5` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and

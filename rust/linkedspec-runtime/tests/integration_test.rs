@@ -2510,6 +2510,174 @@ fn rust_parity_7_3_4_2_portmap_scalar_classifications_run() {
 }
 
 #[test]
+fn rust_parity_7_3_4_3_portmap_concatenation_aggregates_child_returns() {
+    use std::fs;
+    use std::path::Path;
+
+    let spec_path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../specs/portmap.spec");
+    let grammar = fs::read_to_string(&spec_path).expect("read specs/portmap.spec");
+
+    assert_eq!(
+        build_and_run(&grammar, "{foo bar[2]}"),
+        serde_json::json!([["?concat:", [["?bare:", ["foo"]], ["?bit:", ["bar", "2"]]]]]),
+        "portmap recursive concatenation keeps child classification payloads in the concatenation target"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_3_action_edge_block_call_uses_edge_match() {
+    let grammar = r#"Top::
+-> Header { item = call(Header); return(:item) }
+
+Header: /A/ I.return(array("h", entry_text()))
+"#;
+
+    assert_eq!(
+        build_and_run(grammar, "A"),
+        serde_json::json!([["h", "A"]]),
+        "call(child) inside an action-edge block reads the already matched edge child"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_3_scoped_fluent_push_keeps_current_token_match() {
+    let grammar = r#"Top:: I {
+  rules = [];
+  rule = [];
+  rule = undef;
+  on = undef
+}
+
+LX {
+  if(:rule);
+    push(array(rules), array(:rule, flat_array(rule)));
+  endif();
+
+  return(array_copy(array(rules)))
+}
+
+-> Header { rule = call(Header); on = 1 }
+
+-> Word
+  .if(:on)
+    .push(Word, rule)
+  .else()
+    .return_undef()
+  .endif()
+
+Header: /(?m)^([A-Z]\w*)\s*:=/ I.return(array("header", entry_group(0)))
+Word: /\b[A-Z][a-z]*\b/ I.return(array("word", entry_text()))
+"#;
+
+    assert_eq!(
+        build_and_run(grammar, "Expr := Term\n"),
+        serde_json::json!([[[["header", "Expr"], ["word", "Term"]]]]),
+        "scoped fluent push(child, target) appends the current token edge return"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_3_action_block_push_child_index_uses_edge_match() {
+    let grammar = r#"Top::
+-> Pair { push(Pair, 1) }
+LX { return(array_copy(array(Top))) }
+
+Pair: /(\w+):(\w+)/ I.return(array(entry_group(0), entry_group(1)))
+"#;
+
+    assert_eq!(
+        build_and_run(grammar, "left:right"),
+        serde_json::json!([["right"]]),
+        "statement push(child, index) reads the already matched action-edge child return"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_3_ebnf_grammar_rule_header_regex_matches() {
+    let grammar = r#"Top::
+-> grammar_rule .push
+LX { return(array_copy(array(Top))) }
+
+grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/ I.return(array("rule", entry_group(0)))
+"#;
+
+    let spec = parse_spec_with_user_functions(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let compiled = compile(&spec).expect("compile");
+    let grammar_rule = compiled.find("grammar_rule").expect("grammar_rule");
+    assert_eq!(
+        grammar_rule.regex_patterns,
+        vec![r"(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=".to_string()]
+    );
+    let top = compiled.find("Top").expect("Top");
+    assert_eq!(
+        top.regex_patterns,
+        vec![r"(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=".to_string()],
+        "edge-only Top dispatch must be resolved from the child grammar_rule regex"
+    );
+    assert_eq!(top.acode_dispatch.len(), 1);
+    assert_eq!(top.acode_dispatch[0].regex_idx, 0);
+    assert_eq!(top.acode_dispatch[0].child_label, "grammar_rule");
+    assert_eq!(
+        top.acode_dispatch[0].fluent_chain,
+        vec![("push".to_string(), String::new())]
+    );
+
+    assert_eq!(
+        Engine::new(compiled)
+            .execute("Expr := Term\n")
+            .expect("execute"),
+        serde_json::json!([[["rule", "Expr"]]]),
+        "Rust matches the shipped ebnf grammar_rule header regex before aggregating payload tokens"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_3_ebnf_rule_payloads_do_not_duplicate_headers() {
+    use std::fs;
+    use std::path::Path;
+
+    let spec_path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../specs/ebnf.spec");
+    let grammar = fs::read_to_string(&spec_path).expect("read specs/ebnf.spec");
+
+    assert_eq!(
+        build_and_run(&grammar, "Expr := Term (\"+\" Term)*\nTerm := Factor\n"),
+        serde_json::json!([[
+            [
+                ["rule", "Expr"],
+                ["rule_reference", "Term"],
+                ["group_open", "("],
+                ["quoted_string", "+"],
+                ["rule_reference", "Term"],
+                ["group_close", ")"],
+                ["operator", "*"]
+            ],
+            [["rule", "Term"], ["rule_reference", "Factor"]]
+        ]]),
+        "ebnf rule payloads preserve token returns without recursively appending rule headers"
+    );
+}
+
+#[test]
+fn rust_parity_7_3_4_3_ebnf_logging_annotation_payloads_are_preserved() {
+    use std::fs;
+    use std::path::Path;
+
+    let spec_path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../specs/ebnf.spec");
+    let grammar = fs::read_to_string(&spec_path).expect("read specs/ebnf.spec");
+
+    assert_eq!(
+        build_and_run(&grammar, "Expr := Term @log_rule(\"expr\", \"term\")\n"),
+        serde_json::json!([[[
+            ["rule", "Expr"],
+            ["rule_reference", "Term"],
+            ["logging_annotation", ["log_rule", ["expr", "term"]]]
+        ]]]),
+        "ebnf logging_annotation child returns survive push(child, rule) aggregation"
+    );
+}
+
+#[test]
 fn terse_2_3_3_1_action_edge_fluent_return_closes_recursive_rule() {
     let grammar = "top::\n -> box .push\n E { return(array_copy(array(top))) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", array_copy(array(box))))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
     assert_eq!(

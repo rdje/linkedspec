@@ -9,16 +9,21 @@ answers:
   - "why does lib_reader still return null groups after RUST-PARITY.7.3.4.1"
   - "when did lib_reader sattribute and cattribute enter the Rust oracle corpus"
   - "when did portmap scalar fixtures enter the Rust oracle corpus"
+  - "when did portmap_concatenation enter the Rust oracle corpus"
+  - "when did ebnf_expression_rules enter the Rust oracle corpus"
+  - "when did ebnf_logging_annotation enter the Rust oracle corpus"
   - "why does portmap warn unknown helper or in Rust"
   - "why did portmap constant 0x1f return null in Rust"
   - "why does ebnf duplicate rule headers in Rust"
+  - "why did ebnf stop duplicating rule headers in Rust"
 date: 2026-07-03
 status: confirmed
 tags: [rust, oracle, parity, portmap, lib_reader, ebnf, RUST-PARITY]
 evidence: "RUST-PARITY.7.3.4 reproduced the mismatches with `perl -Iperl` Perl reference probes and a temporary Rust probe using the same parse/validate/compile/execute path as `corpus_oracle`. Perl reference values are JSON-safe for representative cases: portmap `foo` -> `[\"?bare:\",[\"foo\"]]`, portmap `{foo bar[2]}` -> `[\"?concat:\",[[\"?bare:\",[\"foo\"]],[\"?bit:\",[\"bar\",\"2\"]]]]`, lib_reader `cell(\"foo\"){ attr(\"bar,baz\"); }` -> `[[\"GROUP\",\"cell\",\"foo\",[[\"CATTRIBUTE\",\"attr\",[\"bar\",\"baz\"]]]]]`, ebnf expression rules -> two rule arrays with token payloads. Rust diverged: portmap `foo` -> `[[\"?bare:\",[[\"foo\"]]]]`, `bar[3]` warns `unknown helper 'or'` and is tagged `?bare:`, concat -> `[[\"?multi:\",[]]]`; lib_reader sattribute/cattribute inputs initially -> `[[]]`; ebnf expression/logging inputs duplicate rule headers and drop token payloads. RUST-PARITY.7.3.4.1 fixed lib_reader parser/compiler ownership: `lib_file` now compiles the `group` `.push` action dispatch and representative Rust outputs produce `GROUP` nodes instead of `[[]]`. The remaining lib_reader null capture fields are runtime capture propagation for dependency-resolved edge-only child regex matches, owned by RUST-PARITY.7.3.4.4. Portmap and ebnf remain runtime semantic owners."
 evidence_update_2026_07_03_7344: "RUST-PARITY.7.3.4.4 closed the lib_reader branch. A focused edge-only child-regex test showed child entry captures were already seeded correctly; the remaining lib_reader divergence was missing Rust statement-form helper mutation. Rust now mutates scalar targets for `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)` and array targets for `split(array(target), scalar(source), delimiter)`. `lib_reader_sattribute` and `lib_reader_cattribute` are checked-in oracle fixtures; corpus_oracle passes over 68 fixtures. Portmap and ebnf remain runtime semantic owners."
 evidence_update_2026_07_03_7342: "RUST-PARITY.7.3.4.2 closed the portmap scalar branch. Rust now implements `or`/`and`/`not`, splices explicit `flat`/`flat_array`/`flat_hash` helper calls in `array(...)` list context, and wraps each rule regex as a non-capturing branch before building dispatch alternations. The wrapper fix prevents the internal `|(?i)(0x...)` branch in `bare_bit_slice` from being reported as the sibling `concatenation` action edge, which was why `0x1f` returned null. `portmap_bare`, `portmap_bit`, `portmap_slice`, and `portmap_constant` are checked-in oracle fixtures; corpus_oracle passes over 72 fixtures. Portmap concatenation and ebnf payloads remain owned by RUST-PARITY.7.3.4.3."
-reverify: "rg -n 'RUST-PARITY\\.7\\.3\\.4|RUST-PARITY\\.7\\.3\\.4\\.1|RUST-PARITY\\.7\\.3\\.4\\.2|RUST-PARITY\\.7\\.3\\.4\\.4|lib_reader_sattribute|lib_reader_cattribute|portmap_bare|portmap_bit|portmap_slice|portmap_constant|array\\(flat_array|internal top-level alternation|duplicate.*rule headers|lib_file:: -> group' docs/tasks/RUST-PARITY.md DEVELOPMENT_NOTES.md CHANGES.md docs/knowledge/rust-simple-spec-structural-owners.md tools/gen_oracle_corpus.pl rust/linkedspec-runtime/src/helpers.rs"
+evidence_update_2026_07_04_7343: "RUST-PARITY.7.3.4.3 closed the portmap concatenation and ebnf payload branch. Rust now exposes scoped action-edge child returns to call(child), push(child), push(child,target), and child-index push forms, skips passive terminal child re-search after the parent edge regex has consumed the token, preserves scalar-vs-aggregate assignment boundaries, and reads bare aggregate variables from aggregate stores in helper-consuming slots. `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation` are checked-in oracle fixtures; corpus_oracle passes over 77 fixtures. The remaining simple-spec frontier moves to RUST-PARITY.7.3.5 null/action-parser candidate triage."
+reverify: "rg -n 'RUST-PARITY\\.7\\.3\\.4|RUST-PARITY\\.7\\.3\\.4\\.1|RUST-PARITY\\.7\\.3\\.4\\.2|RUST-PARITY\\.7\\.3\\.4\\.3|RUST-PARITY\\.7\\.3\\.4\\.4|lib_reader_sattribute|lib_reader_cattribute|portmap_bare|portmap_bit|portmap_slice|portmap_constant|portmap_concatenation|ebnf_expression_rules|ebnf_logging_annotation|passive terminal|action-edge child' docs/tasks/RUST-PARITY.md DEVELOPMENT_NOTES.md CHANGES.md docs/knowledge tools/gen_oracle_corpus.pl rust/linkedspec-runtime/src"
 ---
 
 # Rust Simple-Spec Structural Owners
@@ -43,7 +48,10 @@ First owners:
   each rule regex in its own non-capturing dispatch branch so internal alternations
   such as `|(?i)(0x...)` stay inside the owning action edge. The `portmap_bare`,
   `portmap_bit`, `portmap_slice`, and `portmap_constant` oracle fixtures are active.
-- `RUST-PARITY.7.3.4.3`: runtime action-edge fluent child/target aggregation. `ebnf`
-  compiles `.push(child, rule)` chains but executes them with duplicated rule headers
-  and missing token payloads; `portmap` concatenation also depends on the no-arg
-  recursive `.push` path.
+- `RUST-PARITY.7.3.4.3`: done. Runtime action-edge child/target aggregation now
+  reuses the already matched edge child return for block/fluent child calls and skips
+  passive terminal child re-search. The `portmap_concatenation`,
+  `ebnf_expression_rules`, and `ebnf_logging_annotation` oracle fixtures are active.
+
+The remaining simple-spec structural frontier is `.7.3.5`, which triages the `.7.2`
+null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, and `spec.spec`).

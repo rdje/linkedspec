@@ -1007,6 +1007,11 @@ SPEC
     { case => 'portmap_slice',    spec => 'portmap', input => 'baz[7:0]' },
     { case => 'portmap_constant', spec => 'portmap', input => '0x1f' },
 
+    # ── RUST-PARITY.7.3.4.3 — action-edge child/target aggregation parity ──
+    { case => 'portmap_concatenation', spec => 'portmap', input => '{foo bar[2]}' },
+    { case => 'ebnf_expression_rules', spec => 'ebnf',    input => "Expr := Term (\"+\" Term)*\nTerm := Factor\n" },
+    { case => 'ebnf_logging_annotation', spec => 'ebnf', input => "Expr := Term \@log_rule(\"expr\", \"term\")\n" },
+
     {
         case  => 'lib_reader_sattribute',
         spec  => 'lib_reader',

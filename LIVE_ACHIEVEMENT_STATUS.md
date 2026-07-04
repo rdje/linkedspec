@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **RUST-PARITY.7.3.4.3 — land action-edge child aggregation parity**
+  (EBNF PAYLOADS AND PORTMAP CONCATENATION NOW ORACLE-GREEN).
+
+  **Fix:** Rust action-edge block/fluent execution now reuses the already matched edge child return for
+  `call(child)`, `push(child)`, `push(child,target)`, and child-index push forms. Passive terminal children are not
+  re-searched after the parent edge consumes their regex. Runtime assignment/helper boundaries were tightened so
+  scalar non-shape assignment does not overwrite aggregate slots and helper-context bare aggregate arguments read
+  the aggregate store when needed.
+
+  **Verification:** Focused `.7.3.4.3` Rust integration tests pass, the Perl-style `{,N}` regex normalization unit
+  test passes, `perl -c -Iperl tools/gen_oracle_corpus.pl` passes, oracle regeneration emits **77 fixtures**, and
+  Rust `corpus_oracle` passes all 77. Full local CI passes, including phase0 **1021** tests. The mdBook surface
+  was already aligned for these user-facing helper forms; this slice verifies the Rust backend now conforms.
+
+  **Frontier:** `RUST-PARITY.7.3.5` — triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`,
+  `operators_try`, and `spec.spec` smokes).
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.4 — close type-method no-drift sweep**
   (TYPE-METHOD LANE CLOSED; SPEC-FORMAT-TERSE FRONTIER EMPTY).
 
@@ -20,7 +37,7 @@ Current execution status for interruption-safe batch workflow recovery.
   summaries, numeric reducer statements, tests, corpus, mdBook, and Knowledge Map facts. `mdbook build
   docs/linkedspec-book`, Knowledge Map regeneration/check, memory/doctrine checks, and `git diff --check` pass.
 
-  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.7.3.4.3` unless a
+  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.7.3.5` unless a
   new terse leaf is split.
 
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods**
@@ -180,7 +197,7 @@ Current execution status for interruption-safe batch workflow recovery.
   including `portmap_bare`, `portmap_bit`, `portmap_slice`, and `portmap_constant`; Rust `corpus_oracle` passes
   over all 72 fixtures; clippy, mdBook, Knowledge Map, memory architecture, doctrine, and whitespace gates pass.
 
-  **Frontier:** `RUST-PARITY.7.3.4.3` — fix action-edge fluent child/target aggregation for `ebnf` payloads and
+  **Then-frontier:** `RUST-PARITY.7.3.4.3` — fix action-edge fluent child/target aggregation for `ebnf` payloads and
   `portmap` concatenation.
 
 - 2026-07-03: **RUST-PARITY.7.3.4.4 — lib_reader action-helper parity**

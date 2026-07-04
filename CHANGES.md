@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.7.3.4.3 — land action-edge child aggregation parity
+
+**Scope:** Rust runtime action-edge dispatch, regex syntax normalization, focused regression coverage, oracle
+generator/corpus fixtures, task-tree/live docs, and Knowledge Map. No public `.spec` syntax changed; the mdBook
+helper/action-edge surface was already documented and is verified by build.
+
+**What changed:** Rust action-edge blocks and fluent chains now reuse the already matched edge child return for
+`call(child)`, `push(child)`, `push(child,target)`, and child-index push forms instead of re-searching input after
+the parent edge match. Passive terminal children such as skip/comment/comma token rules do not re-execute because
+the parent edge regex already consumed them, matching the generated Perl handler shape. The runtime also keeps
+scalar assignment separate from remembered aggregate slots for non-shape RHS values, and helper-context
+array/hash-consuming arguments prefer the aggregate store when a bare working-variable name collides with a scalar
+slot. The Rust regex adapter now normalizes Perl's `{,N}` counted quantifier spelling to `{0,N}`.
+
+**Evidence:** Added seven focused `.7.3.4.3` integration locks covering action-edge block `call(child)`, scoped
+fluent `push(child,target)`, child-index statement push, shipped `portmap` concatenation, shipped `ebnf` rule
+payloads, shipped `ebnf` logging annotations, and the `ebnf` `grammar_rule` header regex. Added
+`portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation` to `tools/gen_oracle_corpus.pl`;
+oracle regeneration now produces **77 fixtures**, Rust `corpus_oracle` passes over all 77, and full local CI
+passes with phase0 **1021** tests.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.7.4 — close type-method no-drift sweep
 
 **Scope:** Roadmap/task-tree index, `SPEC-FORMAT-TERSE` task ledger, mdBook helper catalog, Knowledge Map facts,

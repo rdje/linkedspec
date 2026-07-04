@@ -197,7 +197,9 @@ pub mod regex_engine {
     }
 
     fn normalize_pattern_syntax(pattern: &str) -> String {
-        normalize_leading_inline_flag_toggle(&normalize_named_capture_syntax(pattern))
+        normalize_leading_inline_flag_toggle(&normalize_lower_unbounded_quantifiers(
+            &normalize_named_capture_syntax(pattern),
+        ))
     }
 
     fn normalize_leading_inline_flag_toggle(pattern: &str) -> String {
@@ -282,6 +284,68 @@ pub mod regex_engine {
                     }
                     out.push('>');
                     i = name_end + 1;
+                    continue;
+                }
+            }
+
+            out.push(ch);
+            i += 1;
+        }
+
+        out
+    }
+
+    fn normalize_lower_unbounded_quantifiers(pattern: &str) -> String {
+        let chars: Vec<char> = pattern.chars().collect();
+        let mut out = String::with_capacity(pattern.len());
+        let mut i = 0;
+        let mut escaped = false;
+        let mut in_class = false;
+
+        while i < chars.len() {
+            let ch = chars[i];
+            if escaped {
+                out.push(ch);
+                escaped = false;
+                i += 1;
+                continue;
+            }
+            if ch == '\\' {
+                out.push(ch);
+                escaped = true;
+                i += 1;
+                continue;
+            }
+            if in_class {
+                out.push(ch);
+                if ch == ']' {
+                    in_class = false;
+                }
+                i += 1;
+                continue;
+            }
+            if ch == '[' {
+                out.push(ch);
+                in_class = true;
+                i += 1;
+                continue;
+            }
+
+            if ch == '{' && chars.get(i + 1) == Some(&',') {
+                let mut end = i + 2;
+                while chars
+                    .get(end)
+                    .is_some_and(|candidate| candidate.is_ascii_digit())
+                {
+                    end += 1;
+                }
+                if end > i + 2 && chars.get(end) == Some(&'}') {
+                    out.push_str("{0,");
+                    for digit in &chars[i + 2..end] {
+                        out.push(*digit);
+                    }
+                    out.push('}');
+                    i = end + 1;
                     continue;
                 }
             }
@@ -586,6 +650,15 @@ pub mod regex_engine {
                 .expect("malformed function header match");
             assert_eq!(result.index, 1);
             assert_eq!(result.matched_text(), "fn bad(value");
+        }
+
+        #[test]
+        fn perl_style_lower_unbounded_quantifier_matches_zero_minimum() {
+            let alt = CompiledAlternation::compile(&[r"(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=".into()])
+                .unwrap();
+            let result = alt.seek_match("Expr := Term\n", 0).unwrap();
+            assert_eq!(result.matched_text(), "Expr :=");
+            assert_eq!(result.captures, vec!["Expr"]);
         }
 
         #[test]

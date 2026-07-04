@@ -429,6 +429,36 @@ impl Engine {
         Ok(child_retv)
     }
 
+    fn execute_action_edge_child_rule(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        if self.is_passive_terminal_rule(label) {
+            return Ok(RuntimeValue::Undef);
+        }
+        self.execute_child_rule(label, entry_regex_idx, ctx)
+    }
+
+    /// A passive terminal handler has no executable body in the Perl reference:
+    /// the parent edge regex has already consumed its match, and calling the
+    /// child only exposes that entry match before returning undef.
+    fn is_passive_terminal_rule(&self, label: &str) -> bool {
+        let Some(rule) = self.spec.find(label) else {
+            return false;
+        };
+        rule.preamble.is_none()
+            && rule.lxcode.is_none()
+            && rule.lscode.is_none()
+            && rule.lecode.is_none()
+            && rule.ecode.is_none()
+            && rule.excode.is_none()
+            && rule.itcode.is_none()
+            && rule.acode_dispatch.is_empty()
+            && rule.bcode_dispatch.is_empty()
+    }
+
     /// The rule body, wrapped by [`execute_rule`] (which adds the recursion
     /// termination guard). All recursive dispatch goes through `execute_rule`,
     /// never directly through this method.
@@ -628,13 +658,23 @@ impl Engine {
                         if entry.fluent_chain.is_empty() {
                             if let Some(ref block) = entry.code {
                                 if Self::block_calls_rule(block, &entry.child_label) {
-                                    // Perl block-bearing action edges own their
-                                    // explicit child call inside the lowered
-                                    // block (`call(child)` becomes the child
-                                    // handler call). Do not pre-dispatch the
-                                    // same child or legacy recursive specs such
-                                    // as Lispish consume it twice.
-                                    self.execute_block(block, ctx, label)?;
+                                    // Perl lowers `call(child)` inside the edge
+                                    // block to the already matched edge child.
+                                    // Pre-dispatch once, then let helper
+                                    // evaluation read that scoped result.
+                                    let child_retv = self.execute_action_edge_child_rule(
+                                        &entry.child_label,
+                                        entry.child_regex_idx,
+                                        ctx,
+                                    )?;
+                                    ctx.set_retv(child_retv.clone());
+                                    ctx.push_action_edge_call_result(
+                                        &entry.child_label,
+                                        child_retv,
+                                    );
+                                    let block_result = self.execute_block(block, ctx, label);
+                                    ctx.pop_action_edge_call_result();
+                                    block_result?;
                                     return_if_rule_returned!();
                                 } else if entry.child_label == label {
                                     // A self-recursive code edge such as
@@ -653,17 +693,23 @@ impl Engine {
                                     // the parent's `retv` (Runtime Semantics
                                     // §3.3 / §6.1), readable by the attached
                                     // code below and the LE-block after the loop.
-                                    let child_retv = self.execute_child_rule(
+                                    let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
                                         ctx,
                                     )?;
-                                    ctx.set_retv(child_retv);
-                                    self.execute_block(block, ctx, label)?;
+                                    ctx.set_retv(child_retv.clone());
+                                    ctx.push_action_edge_call_result(
+                                        &entry.child_label,
+                                        child_retv,
+                                    );
+                                    let block_result = self.execute_block(block, ctx, label);
+                                    ctx.pop_action_edge_call_result();
+                                    block_result?;
                                     return_if_rule_returned!();
                                 }
                             } else {
-                                let child_retv = self.execute_child_rule(
+                                let child_retv = self.execute_action_edge_child_rule(
                                     &entry.child_label,
                                     entry.child_regex_idx,
                                     ctx,
@@ -939,7 +985,7 @@ impl Engine {
             }
         };
 
-        let child_retv = self.execute_child_rule(&child_label, child_regex_idx, ctx)?;
+        let child_retv = self.execute_action_edge_child_rule(&child_label, child_regex_idx, ctx)?;
         ctx.set_retv(child_retv.clone());
         ctx.push_value(&target_label, child_retv);
         Ok(())
@@ -1060,6 +1106,9 @@ impl Engine {
             return Ok(());
         }
         if self.execute_set_key_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
+        if self.execute_push_child_call_statement(expr, ctx, rule_label)? {
             return Ok(());
         }
         self.eval_expr(expr, ctx, rule_label)?;
@@ -1241,9 +1290,6 @@ impl Engine {
         if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
             return Ok(true);
         }
-        if Self::assign_remembered_aggregate_to_target(name, evaluated.clone(), ctx)?.is_some() {
-            return Ok(true);
-        }
         ctx.set_scalar(name, evaluated);
         Ok(true)
     }
@@ -1408,6 +1454,95 @@ impl Engine {
         Ok(true)
     }
 
+    fn execute_push_child_call_statement(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        let Expr::Call { name, args } = expr else {
+            return Ok(false);
+        };
+        if name != "push" || args.is_empty() || args.len() > 3 {
+            return Ok(false);
+        }
+
+        let Some(child_label) = args.first().and_then(|arg| match arg {
+            Arg::Positional(Expr::Variable { name }) if self.spec.find(name).is_some() => {
+                Some(name.as_str())
+            }
+            _ => None,
+        }) else {
+            return Ok(false);
+        };
+
+        if matches!(args.as_slice(), [_child, _target, index_arg] if Self::literal_usize_arg(index_arg).is_none())
+        {
+            return Ok(false);
+        }
+
+        let child_value = if let Some(value) = ctx.action_edge_call_result(child_label) {
+            value
+        } else {
+            self.execute_child_rule(child_label, 0, ctx)?
+        };
+
+        match args.as_slice() {
+            [_child] => {
+                ctx.push_value(rule_label, child_value);
+            }
+            [_child, second] => {
+                if let Some(index) = Self::literal_usize_arg(second) {
+                    ctx.push_value(rule_label, Self::array_index_value(&child_value, index));
+                } else {
+                    let target_value = self.eval_expr(second.value(), ctx, rule_label)?;
+                    let target = self.resolve_array_target(
+                        std::slice::from_ref(second),
+                        &target_value,
+                        true,
+                    );
+                    ctx.push_value(&target, child_value);
+                }
+            }
+            [_child, target_arg, index_arg] => {
+                let index = Self::literal_usize_arg(index_arg)
+                    .expect("push(child, target, index) shape validated before child dispatch");
+                let target_value = self.eval_expr(target_arg.value(), ctx, rule_label)?;
+                let target = self.resolve_array_target(
+                    std::slice::from_ref(target_arg),
+                    &target_value,
+                    true,
+                );
+                ctx.push_value(&target, Self::array_index_value(&child_value, index));
+            }
+            _ => return Ok(false),
+        }
+
+        Ok(true)
+    }
+
+    fn literal_usize_arg(arg: &linkedspec_core::expr::Arg) -> Option<usize> {
+        match arg.value() {
+            linkedspec_core::expr::Expr::NumberLiteral { value }
+                if value.is_finite() && *value >= 0.0 && value.fract() == 0.0 =>
+            {
+                Some(*value as usize)
+            }
+            _ => None,
+        }
+    }
+
+    fn array_index_value(value: &RuntimeValue, index: usize) -> RuntimeValue {
+        match value {
+            RuntimeValue::Array(values) => {
+                values.get(index).cloned().unwrap_or(RuntimeValue::Undef)
+            }
+            _ => RuntimeValue::Undef,
+        }
+    }
+
     fn direct_shape_literal_kind(expr: &linkedspec_core::expr::Expr) -> Option<ShapeLiteralKind> {
         use linkedspec_core::expr::Expr;
         match expr {
@@ -1438,33 +1573,6 @@ impl Engine {
                 other
             )),
             (None, _) => Ok(false),
-        }
-    }
-
-    fn assign_remembered_aggregate_to_target(
-        target_name: &str,
-        value: RuntimeValue,
-        ctx: &mut RuntimeContext,
-    ) -> Result<Option<RuntimeValue>, String> {
-        match (ctx.bare_kind(target_name), value) {
-            (Some(crate::runtime::RuntimeVarKind::Array), RuntimeValue::Array(values)) => {
-                let stored = RuntimeValue::Array(values.clone());
-                ctx.set_array(target_name, values);
-                Ok(Some(stored))
-            }
-            (Some(crate::runtime::RuntimeVarKind::Hash), RuntimeValue::Hash(values)) => {
-                let stored = RuntimeValue::Hash(values.clone());
-                ctx.set_hash(target_name, values);
-                Ok(Some(stored))
-            }
-            (Some(crate::runtime::RuntimeVarKind::Array), other @ RuntimeValue::Hash(_))
-            | (Some(crate::runtime::RuntimeVarKind::Hash), other @ RuntimeValue::Array(_)) => {
-                Err(format!(
-                    "remembered aggregate assignment kind mismatch for '{}': {:?}",
-                    target_name, other
-                ))
-            }
-            _ => Ok(None),
         }
     }
 
@@ -1584,11 +1692,6 @@ impl Engine {
                     && self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)?
                 {
                     return Ok(evaluated);
-                }
-                if let Some(stored) =
-                    Self::assign_remembered_aggregate_to_target(name, evaluated.clone(), ctx)?
-                {
-                    return Ok(stored);
                 }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
@@ -2459,11 +2562,6 @@ impl Engine {
                     ctx.set_scalar(name, evaluated);
                     return Ok(ctx.get_scalar(name));
                 }
-                if let Some(stored) =
-                    Self::assign_remembered_aggregate_to_target(name, evaluated.clone(), ctx)?
-                {
-                    return Ok(stored);
-                }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
             }
@@ -2620,12 +2718,12 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
 
         let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
-        if matches!(evaluated, RuntimeValue::Hash(_)) {
-            return evaluated;
-        }
-
         if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
             return RuntimeValue::Hash(ctx.hash_copy(name));
+        }
+
+        if matches!(evaluated, RuntimeValue::Hash(_)) {
+            return evaluated;
         }
 
         evaluated
@@ -2641,12 +2739,12 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
 
         let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
-        if matches!(evaluated, RuntimeValue::Array(_)) {
-            return evaluated;
-        }
-
         if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
             return RuntimeValue::Array(ctx.array_copy(name));
+        }
+
+        if matches!(evaluated, RuntimeValue::Array(_)) {
+            return evaluated;
         }
 
         evaluated
@@ -2817,22 +2915,10 @@ impl Engine {
                             );
                         }
                         let target = self.resolve_scalar_target(raw_args, &args[0]);
-                        if let Some(stored) = Self::assign_remembered_aggregate_to_target(
-                            &target,
-                            args[1].clone(),
-                            ctx,
-                        )? {
-                            return Ok(stored);
-                        }
                         ctx.set_scalar(&target, args[1].clone());
                         return Ok(args[1].clone());
                     }
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
-                    if let Some(stored) =
-                        Self::assign_remembered_aggregate_to_target(&target, args[1].clone(), ctx)?
-                    {
-                        return Ok(stored);
-                    }
                     ctx.set_scalar(&target, args[1].clone());
                     return Ok(args[1].clone());
                 }
@@ -2940,6 +3026,9 @@ impl Engine {
                 // name comes from the raw arg (a bare label is not a scalar).
                 let child = self.resolve_rule_name(raw_args, args.first());
                 if !child.is_empty() {
+                    if let Some(value) = ctx.action_edge_call_result(&child) {
+                        return Ok(value);
+                    }
                     let child_retv = self.execute_child_rule(&child, 0, ctx)?;
                     return Ok(child_retv);
                 }

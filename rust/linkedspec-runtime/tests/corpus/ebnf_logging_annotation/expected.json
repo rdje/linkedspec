@@ -1,0 +1,22 @@
+[
+   [
+      [
+         "rule",
+         "Expr"
+      ],
+      [
+         "rule_reference",
+         "Term"
+      ],
+      [
+         "logging_annotation",
+         [
+            "log_rule",
+            [
+               "expr",
+               "term"
+            ]
+         ]
+      ]
+   ]
+]
