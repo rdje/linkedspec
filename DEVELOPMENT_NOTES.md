@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3 — coverage extension split before code):
+  Do not instrument "see everything" as one patch. Generated handler branch tracing needs a small reusable emitted
+  helper seam first, then separate non-repetition and repetition template leaves because dispatch/no-match/LX/EX and
+  min/max/zero-progress loop behavior carry different risks. Compile/ActionIR owner scopes should follow after the
+  runtime branch trace semantics are concrete. Rust trace parity remains a later split; do not claim parity from a
+  Perl-only trace model.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.2 — CLI control over existing trace):
   `bin/linkedspec` is deliberately a thin command-line bridge over the existing Perl reference public surfaces. It
   does not add a second trace state path: `--trace`, `--trace-file`, `--trace-mode`, `--trace-reset`, and

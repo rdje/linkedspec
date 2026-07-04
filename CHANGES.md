@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3 — split trace coverage extension
+
+**Scope:** Task-tree split, roadmap/frontier sync, live recovery docs, and Knowledge Map. No runtime/code behavior
+changed in this slice.
+
+**What changed:** Split the broad Perl reference trace coverage extension into signoff-sized children:
+`TRACE-OBSERVABILITY.3.1` for the generated-handler trace helper seam, `.3.2` for non-repetition generated
+dispatch decisions, `.3.3` for repetition/min/max/zero-progress paths, `.3.4` for compile/ActionIR owner scopes,
+and `.3.5` for coverage closeout plus the backend-parity split decision.
+
+**Evidence:** The split preserves the sequence established by the `.1` audit: generated handler semantics first,
+compile/ActionIR owner instrumentation after runtime branch trace semantics are concrete, and Rust trace parity
+only after the Perl reference trace model is explicit. The next frontier is `TRACE-OBSERVABILITY.3.1`.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.2 — add trace CLI control
 
 **Scope:** Perl reference CLI runner, focused CLI regression, mdBook trace docs, toolbox/README discovery,

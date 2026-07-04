@@ -12,7 +12,7 @@ date: 2026-07-04
 status: current
 tags: [trace, observability, task-tree, runtime, generated-handlers, rust]
 evidence: "docs/tasks/TRACE-OBSERVABILITY.md Coverage Audit; rg trace call-site inventory; dump_parser_source probe showed generated while/unless branches without emitted trace_decision/trace_enter/trace_exit; rust/linkedspec-runtime trace search found no runtime trace API; TRACE-OBSERVABILITY.2 added bin/linkedspec CLI control"
-reverify: "rg -n 'Coverage Audit|TRACE-OBSERVABILITY.1|TRACE-OBSERVABILITY.2|TRACE-OBSERVABILITY.3|generated handler|Rust currently has no analogous trace|bin/linkedspec' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md MEMORY.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md bin/linkedspec t/trace_cli.t"
+reverify: "rg -n 'Coverage Audit|TRACE-OBSERVABILITY.1|TRACE-OBSERVABILITY.2|TRACE-OBSERVABILITY.3.1|generated handler|Rust currently has no analogous trace|bin/linkedspec' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md MEMORY.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md bin/linkedspec t/trace_cli.t"
 ---
 
 `TRACE-OBSERVABILITY.1` is closed as a read-only coverage audit. The existing Perl reference trace framework is
@@ -26,5 +26,5 @@ It is not exhaustive. Generated handler bodies from `HandlerVariantEmitter` stil
 equivalent trace API/sink surface.
 
 `TRACE-OBSERVABILITY.2` has since closed the CLI discoverability gap with `bin/linkedspec` and mdBook/TOOLBOX
-docs. PNT frontier after `.2` is `TRACE-OBSERVABILITY.3`: extend Perl reference trace coverage before backend
-parity.
+docs. `TRACE-OBSERVABILITY.3` has since split the coverage-extension work; PNT frontier after the split is
+`TRACE-OBSERVABILITY.3.1`: add the emitted-handler trace helper seam before branch instrumentation.
