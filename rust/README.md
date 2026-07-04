@@ -15,8 +15,9 @@ The Rust variant primarily interprets its compiled structural contract at runtim
 specifications and executes regex matching, child rule dispatch, and lifecycle code as direct Rust function calls.
 It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) that emits a Rust module embedding a
 `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
-plan-aware executor: default, OR acode, AND acode, AND bcode, and OR bcode families run directly. REP families remain
-fallback-owned by the follow-on `RUST-PARITY.8.4` leaf, after the `.8.3.5` non-repetition matrix closeout.
+plan-aware executor: default, OR acode, AND acode, AND bcode, and OR bcode families run directly, and the
+non-repetition family matrix is closed. REP is the only fallback-owned generated family and belongs to the follow-on
+`RUST-PARITY.8.4` leaf.
 
 ## Quick Start
 

@@ -42,10 +42,10 @@ guard. `RUST-PARITY.8.1` then split the broad code-generation emitter lane,
 harness, `RUST-PARITY.8.3` split non-repetition handler-family emission into
 narrower generated-source children, and `RUST-PARITY.8.3.1` landed the
 generated rule-family plan, `.8.3.2` landed direct default/OR acode generated
-execution, `.8.3.3` landed direct AND acode generated execution, and `.8.3.4`
-landed direct AND/OR bcode generated execution. The current frontier is
-`RUST-PARITY.8.3.5`: close the non-repetition generated-family matrix before
-REP work.
+execution, `.8.3.3` landed direct AND acode generated execution, `.8.3.4`
+landed direct AND/OR bcode generated execution, and `.8.3.5` closed the
+non-repetition generated-family matrix. The current frontier is
+`RUST-PARITY.8.4`: emit repetition handler families and termination guards.
 
 The later lanes are:
 
@@ -70,4 +70,5 @@ The later lanes are:
 - `.8.3.2`: done — direct default/OR acode generated execution.
 - `.8.3.3`: done — direct AND acode generated execution.
 - `.8.3.4`: done — direct AND/OR bcode generated execution.
-- `.8.3.5`: current frontier — non-repetition generated-family matrix closeout.
+- `.8.3.5`: done — non-repetition generated-family matrix closeout.
+- `.8.4`: current frontier — REP family direct execution and termination guards.

@@ -386,13 +386,20 @@ impl GeneratedPlanExecutor<'_> {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let family = self.generated_rule_family(label)?;
-        if !Self::is_direct_acode_family(family) {
-            if Self::is_direct_bcode_family(family) {
-                return self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx);
+        match family {
+            GeneratedRuleFamily::Default
+            | GeneratedRuleFamily::OrAcode
+            | GeneratedRuleFamily::AndSingleAcode
+            | GeneratedRuleFamily::AndAcodeSeq => {
+                self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
             }
-            return self.engine.execute_rule(label, entry_regex_idx, ctx);
+            GeneratedRuleFamily::AndBcode | GeneratedRuleFamily::OrBcode => {
+                self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
+            }
+            GeneratedRuleFamily::Repetition => {
+                self.engine.execute_rule(label, entry_regex_idx, ctx)
+            }
         }
-        self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
     }
 
     fn generated_rule_family(&self, label: &str) -> Result<GeneratedRuleFamily, String> {
@@ -401,23 +408,6 @@ impl GeneratedPlanExecutor<'_> {
             .find(|rule| rule.label == label)
             .map(|rule| rule.family)
             .ok_or_else(|| format!("generated rule plan missing label '{label}'"))
-    }
-
-    fn is_direct_acode_family(family: GeneratedRuleFamily) -> bool {
-        matches!(
-            family,
-            GeneratedRuleFamily::Default
-                | GeneratedRuleFamily::OrAcode
-                | GeneratedRuleFamily::AndSingleAcode
-                | GeneratedRuleFamily::AndAcodeSeq
-        )
-    }
-
-    fn is_direct_bcode_family(family: GeneratedRuleFamily) -> bool {
-        matches!(
-            family,
-            GeneratedRuleFamily::AndBcode | GeneratedRuleFamily::OrBcode
-        )
     }
 
     fn execute_child_rule(
@@ -860,9 +850,10 @@ impl Engine {
     ///
     /// This path is separate from [`execute`](Self::execute): generated modules
     /// call it after `source_emitter` validates the static family table emitted
-    /// beside the serialized `CompiledSpec`. `RUST-PARITY.8.3.2`-`.8.3.4`
-    /// directly handle non-repetition acode and bcode families here; REP
-    /// families keep their fallback until the repetition leaf replaces it.
+    /// beside the serialized `CompiledSpec`. `RUST-PARITY.8.3.5` closes the
+    /// non-repetition matrix: all non-REP generated families route directly
+    /// here, and only REP families keep their fallback until the repetition
+    /// leaf replaces it.
     pub fn execute_generated_with_plan(
         &self,
         generated_rules: &[GeneratedRuleSpec],

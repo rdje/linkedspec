@@ -1,4 +1,4 @@
-//! RUST-PARITY.8.2/.8.3.1/.8.3.2/.8.3.3/.8.3.4 — generated Rust-source compile/run proof.
+//! RUST-PARITY.8.2/.8.3.1-.8.3.5 — generated Rust-source compile/run proof.
 
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::compile;
@@ -7,6 +7,7 @@ use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
 use linkedspec_runtime::source_emitter::{classify_generated_rule_family, emit_rust_source};
 use serde_json::json;
+use std::collections::BTreeSet;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -186,6 +187,15 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         },
     ];
 
+    let expected_non_rep_families = BTreeSet::from([
+        "GeneratedRuleFamily::Default",
+        "GeneratedRuleFamily::OrAcode",
+        "GeneratedRuleFamily::AndSingleAcode",
+        "GeneratedRuleFamily::AndAcodeSeq",
+        "GeneratedRuleFamily::AndBcode",
+        "GeneratedRuleFamily::OrBcode",
+    ]);
+    let mut covered_non_rep_families = BTreeSet::new();
     let mut generated_modules = String::new();
     let mut generated_tests = String::from("#[cfg(test)]\nmod generated_source_tests {\n");
 
@@ -205,6 +215,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         assert_eq!(top.mode, case.expected_mode);
 
         let generated = emit_rust_source(&compiled).expect("emit generated Rust source");
+        covered_non_rep_families.insert(case.expected_family);
         assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_FORMAT"));
         assert!(generated.contains("COMPILED_SPEC_JSON"));
         assert!(generated.contains("GENERATED_RULES"));
@@ -238,6 +249,10 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         );
         generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n    }\n");
     }
+    assert_eq!(
+        covered_non_rep_families, expected_non_rep_families,
+        "source-emitter matrix must cover every non-REP generated family before REP work starts"
+    );
     generated_tests.push_str("}\n");
 
     let project = TempProject::new("linkedspec-source-emitter");

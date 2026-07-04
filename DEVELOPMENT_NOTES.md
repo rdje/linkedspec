@@ -1,15 +1,23 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.3.5 — non-REP generated-family matrix closeout):
+  `GeneratedPlanExecutor::execute_rule` now routes exhaustively by `GeneratedRuleFamily`. `Default`, `OrAcode`,
+  `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, and `OrBcode` use direct generated execution; `Repetition` is the
+  only generated family that falls back through the interpreter-owned rule path. The source-emitter test now
+  collects the family markers covered by its generated-module cases and asserts that they equal the complete
+  non-REP family set before REP work begins. `.8.4` is the next implementation leaf for repetition generated
+  execution and termination guards.
+
 - 2026-07-04 (RUST-PARITY.8.3.4 — direct AND/OR bcode generated execution):
   `GeneratedPlanExecutor` now handles `AndBcode` and `OrBcode` directly. The direct path keeps the same runtime
   invocation envelope as the interpreter: recursion guard, entry/local match save/restore, clean return channel,
   rule `I` block, child-return-to-`retv` propagation, blind-edge attached code/fluent execution, and rule `E` block.
   The interpreted bcode branch now shares the blind-edge tail helper and uses rule mode for OR bcode first-match:
-  OR-like blind-call rules stop after the first truthy child return instead of walking later entries, and no-match
+  explicit OR bcode rules stop after the first truthy child return instead of walking later entries, and no-match
   OR bcode executes `LX` before any parent `E` block. The source-emitter matrix proves both sides: AND bcode
   collects ordered child returns `A`, `B`; OR bcode on `a b` returns `or-bcode:A`; and OR bcode on `c` returns the
-  `LX` payload `or-miss`. `.8.3.5` remains the non-repetition matrix closeout leaf before REP direct execution.
+  `LX` payload `or-miss`. `.8.3.5` later closed the non-repetition matrix; `.8.4` owns REP direct execution.
 
 - 2026-07-04 (RUST-PARITY.8.3.3 — direct AND acode generated execution):
   `GeneratedPlanExecutor` now handles `AndSingleAcode` and `AndAcodeSeq` directly. The important semantic detail is
@@ -108,7 +116,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.8.3.5` unless a new terse leaf is split.
+  `RUST-PARITY.8.4` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and

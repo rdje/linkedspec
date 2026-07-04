@@ -2,7 +2,7 @@
 //!
 //! `RUST-PARITY.8.2` introduced the generated-source path. The emitted module
 //! embeds a serialized `CompiledSpec` plus generated-family metadata; direct
-//! generated execution now covers non-repetition acode and bcode families.
+//! generated execution now covers all non-repetition families.
 
 use crate::engine::Engine;
 use linkedspec_core::ast::RuleMode;
@@ -11,7 +11,7 @@ use linkedspec_core::types::{CompiledRule, CompiledSpec};
 /// Version of the generated-source scaffold format.
 pub const GENERATED_SOURCE_FORMAT: u32 = 1;
 
-/// Non-repetition generated handler families carried by emitted source.
+/// Generated handler families carried by emitted source.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum GeneratedRuleFamily {
     Default,
@@ -88,9 +88,9 @@ pub fn emit_rust_source(compiled: &CompiledSpec) -> Result<String, String> {
 
 /// Execute a generated parser module from its embedded compiled spec and family plan.
 ///
-/// The plan is validated first. `RUST-PARITY.8.3.2`-`.8.3.4` route the
-/// non-repetition acode and bcode families through the generated-plan executor;
-/// REP families fall back inside that executor until their direct paths land.
+/// The plan is validated first. `RUST-PARITY.8.3.5` closes the non-repetition
+/// matrix: all non-REP families route through the generated-plan executor
+/// directly, while REP families remain the only fallback-owned family.
 pub fn execute_generated_parser(
     compiled_spec_json: &str,
     generated_rules: &[GeneratedRuleSpec],

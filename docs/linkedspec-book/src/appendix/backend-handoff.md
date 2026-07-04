@@ -214,8 +214,10 @@ split the work, `.8.2` added the minimal scaffold/compile-run proof, and
 families run directly, `.8.3.3` made AND single/sequential acode families run
 directly while enforcing ordered non-repetition AND regex/acode sequence
 semantics, and `.8.3.4` made AND/OR bcode families run directly with shared
-blind-edge tail execution. `.8.3.5` closes the non-repetition matrix before
-REP work in `.8.4` and all-variant/oracle integration in `.8.5`.
+blind-edge tail execution. `.8.3.5` closed the non-repetition matrix by making
+generated-plan routing exhaustive for all six non-REP generated families and by
+asserting that family coverage in the source-emitter matrix. REP work is owned
+by `.8.4`, followed by all-variant/oracle integration in `.8.5`.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`

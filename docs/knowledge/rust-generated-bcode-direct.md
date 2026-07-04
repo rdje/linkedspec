@@ -10,7 +10,7 @@ answers:
 date: 2026-07-04
 status: accepted
 tags: [rust, codegen, source-emitter, bcode, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.8.3.4 extends GeneratedPlanExecutor direct execution to GeneratedRuleFamily::AndBcode and GeneratedRuleFamily::OrBcode. Direct bcode execution preserves the interpreter's recursion guard, caller return save/restore, entry/local match save/restore, lifecycle preamble, child-return-to-retv contract, attached blind-edge code/fluent tail execution, parent E behavior, and OR no-match LX behavior. The interpreted bcode path now uses the same blind-edge tail helper: non-OR bcode visits every blind child in order, while explicit OR bcode stops after the first truthy child return and fires LX when no child matches. The focused source_emitter matrix proves ordered AND child-return collection, OR first-match behavior on input that would otherwise continue to a later child, and OR no-match LX. REP families remain RUST-PARITY.8.4; RUST-PARITY.8.3.5 owns the non-repetition matrix closeout."
+evidence: "RUST-PARITY.8.3.4 extends GeneratedPlanExecutor direct execution to GeneratedRuleFamily::AndBcode and GeneratedRuleFamily::OrBcode. Direct bcode execution preserves the interpreter's recursion guard, caller return save/restore, entry/local match save/restore, lifecycle preamble, child-return-to-retv contract, attached blind-edge code/fluent tail execution, parent E behavior, and OR no-match LX behavior. The interpreted bcode path now uses the same blind-edge tail helper: non-OR bcode visits every blind child in order, while explicit OR bcode stops after the first truthy child return and fires LX when no child matches. The focused source_emitter matrix proves ordered AND child-return collection, OR first-match behavior on input that would otherwise continue to a later child, and OR no-match LX. RUST-PARITY.8.3.5 closed the non-repetition matrix; REP families remain RUST-PARITY.8.4."
 reverify: "rg -n 'AndBcode|OrBcode|execute_direct_bcode_rule|execute_bcode_entry_tail|RUST-PARITY\\.8\\.3\\.4' rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/source_emitter.rs docs/tasks/RUST-PARITY.md && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture"
 ---
 
@@ -32,6 +32,5 @@ dispatch stops after the first truthy child return, so later blind children do
 not overwrite the selected result. If no OR child returns a truthy value, the
 rule runs `LX` before the parent `E` block.
 
-The remaining generated fallback family is REP, owned by `RUST-PARITY.8.4`.
-`RUST-PARITY.8.3.5` is the current closeout leaf for the non-repetition
-generated-family matrix.
+`RUST-PARITY.8.3.5` closed the non-repetition generated-family matrix. The
+remaining generated fallback family is REP, owned by `RUST-PARITY.8.4`.
