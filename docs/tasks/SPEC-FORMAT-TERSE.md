@@ -6,7 +6,14 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (**`.7.1` DONE; supported type-method surface inventory recorded before
+- Last updated: `2026-07-04` (**`.7.2` DONE; string/scalar method backfill closed with no implementation
+  change. Focused Perl probes confirm `"abcdef".substr(1, 3).uppercase()` and
+  `uppercase(substr("abcdef", 1, 3))` both return `BCD` with `ready=1`, `fallback=0`, `raw=0`, and
+  `unresolved=0`; focused Rust `terse_2_3_5_3` tests pass. mdBook already documents method/helper equivalence
+  and the string receiver family (`trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`,
+  `substr`, `concat`/`cat`, `coalesce_nonempty`, `split` bridge, and terminals), so no parser/runtime/book
+  behavior change is required. Frontier moves to `.7.3` for array/list, hash, and number receiver backfill audit.
+  Prior **`.7.1` DONE; supported type-method surface inventory recorded before
   implementation. The existing receiver families are string/scalar, array/list, hash, and number; boolean/flow
   results are terminal today; expression-valued blocks and user-function returns dispatch by yielded runtime type
   into those same families. Existing Perl/Rust method classifiers already include string `substr()`, so `.7.2`
@@ -2932,13 +2939,26 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.7.1 - inventory type method surface`
 
 - ID: `SPEC-FORMAT-TERSE.7.2`
-  Status: `pending`
+  Status: `done` (2026-07-04)
   Goal: Backfill string/scalar receiver methods, explicitly including the user's `substr()` method directive.
   Acceptance: `substr(...)` is verified or implemented as a string/scalar receiver method on Perl and Rust, all
     other useful string helper candidates from `.7.1` are either implemented or explicitly deferred with reasons,
     and docs/tests demonstrate helper-form and method-form equivalence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-04.** No parser/runtime code change was needed. Perl and Rust already accept the
+    full useful string/scalar receiver set identified in `.7.1`: `trim`, `lowercase`, `uppercase`,
+    `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `concat`/`cat`, `coalesce_nonempty`, the array bridge
+    `split`, and terminals `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches`. The focused
+    Perl probe:
+    `return(array("abcdef".substr(1, 3).uppercase(), uppercase(substr("abcdef", 1, 3)), " a-b ".trim().split("-").count()))`
+    returns `["BCD", "BCD", 2]`, and the descriptor metadata is `ready=1`, `fallback=0`, `raw=0`,
+    `unresolved=0`. Focused Rust `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime
+    terse_2_3_5_3 --quiet` passes. Existing public docs demonstrate method/helper equivalence in
+    `docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md` and
+    `docs/linkedspec-book/src/appendix/helper-contract-catalog.md`; existing corpus fixture
+    `terse_2_3_5_3_string_receiver_value_chains` locks Perl/Rust behavior. No additional string/scalar helper is
+    deferred from `.7.2`; regex-substitution `substr(:target, pattern, replacement, flags)` remains an explicit
+    statement mutation boundary, not a pure receiver method.
+  Commit: `SPEC-FORMAT-TERSE.7.2 - verify string method surface`
 
 - ID: `SPEC-FORMAT-TERSE.7.3`
   Status: `pending`
@@ -2971,7 +2991,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.6.3` | `done` | public docs, checked-in corpus/test specs, and current-facing examples use terse replacements; legacy spellings are compatibility/reference-only |
 | — | `SPEC-FORMAT-TERSE.6.4` | `done` | declaration helpers remain accepted legacy compatibility; new authoring uses terse replacements; declaration-retirement lane closed |
 | — | `SPEC-FORMAT-TERSE.7.1` | `done` | supported type-method inventory recorded; string `substr()` already exists as a receiver method; function/statement-only boundaries identified |
-| 1 | `SPEC-FORMAT-TERSE.7.2` | `pending` | verify/backfill string/scalar receiver methods and lock method/helper equivalence docs/tests, starting with `substr()` evidence |
+| — | `SPEC-FORMAT-TERSE.7.2` | `done` | string/scalar receiver methods already cover the useful pure helper set; `substr()` method/helper equivalence verified on Perl/Rust; no code change |
+| 1 | `SPEC-FORMAT-TERSE.7.3` | `pending` | audit/backfill useful array/list, hash, and number receiver methods from `.7.1`, keeping mutation/ambiguous helpers explicit |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
@@ -3916,6 +3937,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-04` | `SPEC-FORMAT-TERSE.7.2` | KM retrieval for string receiver chains; mdBook helper/reference audit; Perl runtime + descriptor probes for method/helper `substr()` equivalence and split bridge; focused Rust `terse_2_3_5_3` test filter | String/scalar method backfill is already satisfied by the current Perl/Rust surface. `substr()` is an accepted receiver method, helper-form and method-form `substr` both return `BCD` in the focused Perl probe, descriptor metadata stays language-agnostic-ready with zero fallback/raw/unresolved counts, and focused Rust tests pass. The useful pure string receiver set from `.7.1` is already implemented and documented; statement regex substitution remains an explicit mutation boundary. Frontier becomes `.7.3`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.7.1` | KM retrieval for existing receiver-chain facts; Perl/Rust receiver classifier inventory; mdBook helper-catalog receiver-boundary update; Knowledge Map fact card/regeneration/check; focused classifier scans; Rust corpus oracle; mdBook build; memory/doctrine/diff gates; full local CI | Supported runtime receiver families are inventoried before implementation: string/scalar, array/list, hash, and number have existing receiver-method tables; booleans/flow results are terminal; expression-valued blocks and user-function returns dispatch by yielded runtime type. String `substr()` is already in the receiver family, so `.7.2` starts with verification/backfill evidence rather than an implementation assumption. Mutation, lifecycle/control, child-dispatch, parser-state reader, declaration, and compatibility surfaces remain function/statement/lifecycle-only unless a future leaf defines safe receiver semantics. Frontier becomes `.7.2`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.6.4` | KM retrieval for declare retirement; implementation/doc inventory for declaration helper support; ADR `0018`; mdBook declaration/helper policy updates; Knowledge Map fact card/regeneration/check; declaration-support scans; Rust corpus oracle; mdBook build; memory/doctrine/diff gates; full local CI | Post-migration policy is compatibility retention. `declare(...)` and declaration aliases remain accepted legacy compatibility for existing specs, but new authoring/current examples use terse replacements. No implementation removal is done in this slice. Future removal/diagnostics require a new focused leaf. Declaration-retirement `.6` closes and frontier becomes `.7.1`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.6.3` | Current-facing mdBook `declare(...)` / old-helper scans excluding explicit legacy/reference pages; root `tests/corpus` scans; root corpus probes for `simple_grammar`, `tablegrep`, and `lispish`; `perl -Iperl tools/gen_oracle_corpus.pl`; generated-corpus expected-output diff check; Rust corpus oracle (`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`); `mdbook build docs/linkedspec-book`; `prove -q -Iperl t/phase0_regression.t`; Knowledge Map regeneration/check; full local CI (`bash tools/run_ci_local.sh`) | Public docs and corpus examples now teach terse replacements instead of active `declare(...)` or old helper spellings. Root corpus specs scan clean and probes keep existing outputs. Generated oracle inputs use canonical helpers where old spellings were incidental; expected JSON remains unchanged, and residual old spellings are compatibility/reference-only. Added KM coverage for the bare `merge_hash(base, overlay)` boundary. Phase0 passes with **1020** tests, Rust `corpus_oracle` passes all **73 fixtures**, and full local CI passes. Frontier becomes `.6.4`. |
@@ -4028,6 +4050,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.7.2` | `SPEC-FORMAT-TERSE.7.2 - verify string method surface` | String/scalar receiver methods, including `substr()`, are already implemented and documented on Perl/Rust; focused probes/tests verify helper-method equivalence; no parser/runtime/book behavior change was needed, and frontier becomes `.7.3`. |
 | `SPEC-FORMAT-TERSE.7.1` | `SPEC-FORMAT-TERSE.7.1 - inventory type method surface` | Receiver/value families, existing method tables, function/statement-only boundaries, and backend/test/doc impact are recorded before code; string `substr()` is already a receiver method, and frontier becomes `.7.2` verification/backfill. |
 | `SPEC-FORMAT-TERSE.6.4` | `SPEC-FORMAT-TERSE.6.4 - lock declare compatibility policy` | ADR `0018` keeps declaration helpers as accepted legacy compatibility, excludes them from new authoring, and requires a future focused leaf for any removal/diagnostics; declaration-retirement `.6` closes and frontier becomes `.7.1`. |
 | `SPEC-FORMAT-TERSE.6.3` | `SPEC-FORMAT-TERSE.6.3 - sweep docs and corpus declare examples` | Current-facing mdBook and checked-in corpus examples now use terse initialization/mutation and canonical helper spellings; root corpus scans/probes pass; generated oracle expected outputs are unchanged; residual old spellings are compatibility/reference-only; frontier becomes `.6.4`. |

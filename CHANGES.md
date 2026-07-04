@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.7.2 — verify string method surface
+
+**Scope:** String/scalar receiver-method verification, task-tree/live docs, roadmap, and Knowledge Map. No parser,
+runtime, mdBook behavior, or shipped `.spec` implementation changed.
+
+**What changed:** Closed the string/scalar method backfill leaf as already satisfied. The useful pure string
+receiver set from `.7.1` is already supported on Perl and Rust: `trim`, `lowercase`, `uppercase`,
+`replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `concat`/`cat`, `coalesce_nonempty`, `split` as the array
+bridge, and terminal `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches`. Statement regex
+substitution through `substr(:target, pattern, replacement, flags)` remains an explicit mutation boundary, not a
+pure receiver method.
+
+**Evidence:** A focused Perl probe returns `["BCD", "BCD", 2]` for receiver `substr`, helper `substr`, and the
+string-to-array split bridge, with descriptor metadata `ready=1`, `fallback=0`, `raw=0`, and `unresolved=0`.
+Focused Rust `terse_2_3_5_3` tests pass. Existing mdBook pages already document method/helper equivalence.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.7.1 — inventory type method surface
 
 **Scope:** Task-tree inventory, roadmap/live docs, mdBook helper catalog, and Knowledge Map. No parser, runtime,

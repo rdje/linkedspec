@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.7.2 — verify string method surface**
+  (STRING/SCALAR RECEIVER BACKFILL CLOSED; NO CODE CHANGE).
+  `substr()` and the other useful pure string/scalar receiver methods are already implemented and documented on
+  Perl/Rust.
+
+  **Fix:** task-tree, roadmap, live docs, and Knowledge Map now record that `.7.2` was a verification slice. The
+  string/scalar receiver family already covers `trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`,
+  `rm_suffix`, `substr`, `concat`/`cat`, `coalesce_nonempty`, `split` as the array bridge, and terminal
+  `length`/predicate helpers. Statement regex substitution through `substr(:target, pattern, replacement, flags)`
+  remains an explicit mutation boundary.
+
+  **Verification:** focused Perl runtime probe returns `["BCD", "BCD", 2]` for receiver `substr`, helper
+  `substr`, and split bridge evidence; descriptor metadata is `ready=1`, `fallback=0`, `raw=0`, `unresolved=0`;
+  focused Rust `terse_2_3_5_3` tests pass. Existing mdBook pages already demonstrate method/helper equivalence.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.7.3` — audit/backfill useful array/list, hash, and number receiver methods
+  while keeping mutation or ambiguous helpers explicit.
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.1 — inventory type method surface**
   (PRE-CODE TYPE/METHOD AUDIT; STRING `substr()` VERIFIED AS EXISTING RECEIVER METHOD).
   The supported receiver/value families are now recorded before any implementation backfill.

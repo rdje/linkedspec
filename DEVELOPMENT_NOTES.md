@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (SPEC-FORMAT-TERSE.7.2 — string/scalar receiver methods verified):
+  The string/scalar method backfill leaf required no code. `substr()` is already a receiver method, and focused
+  probes show `"abcdef".substr(1, 3).uppercase()` equals `uppercase(substr("abcdef", 1, 3))` (`BCD`) with
+  language-agnostic descriptor metadata (`ready=1`, zero fallback/raw/unresolved). The supported pure string
+  receiver set is `trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`,
+  `concat`/`cat`, `coalesce_nonempty`, `split` as the array bridge, and the terminal predicates/length helpers.
+  Keep regex-substitution `substr(:target, pattern, replacement, flags)` as a statement mutation, not a pure
+  receiver method.
+
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.1 — type-method surface inventory):
   Do not start method backfill by assuming `substr()` is missing: string/scalar receiver-dot support already
   includes `substr` on Perl and Rust. The current receiver families are string/scalar, array/list, hash, and
