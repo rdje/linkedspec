@@ -211,19 +211,19 @@ Run your backend against `tests/corpus/`. Every entry has an `input.spec`,
 `input.txt`, and `expected.json`. Your backend is compliant when it produces
 structurally equivalent output for every entry.
 
-The checked-in Rust corpus is kept green while parity work lands incrementally. As of
-`SPEC-FORMAT-TERSE.6.2.3.1`, the corpus has 73 fixtures, including the two minimal shipped
-`tclite.spec` cases restored by the default-mode repetition parity work; the shipped
-`Lispish.spec` `lispish_x_y` case now migrated to direct nested access; the first
-`hlink_substitution` raw-string cases plus the JSON-safe `{abc}` curly-brace delimiter
-case; `lib_reader.spec` scalar-attribute and comma-list attribute cases; `portmap.spec`
-bare, bit, slice, and constant scalar classification cases; terse receiver-chain
-fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting, and
-block-valued receivers; numeric word aliases; arithmetic/comparison symbol callees;
-and the terse scalar-slot `:name` fixture for scalar reads, scalar mutation targets,
-and scalar-held shape payloads;
-explicit string comparisons; assignment-expression fixtures; and the shared Perl/Rust
-user-function runtime fixture.
+The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
+81 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
+default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
+migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
+JSON-safe `{abc}` curly-brace delimiter case; `lib_reader.spec` scalar-attribute and
+comma-list attribute cases; `portmap.spec` bare, bit, slice, constant, and concatenation
+cases; `ebnf.spec` expression-rule and logging-annotation payload cases; four `spec.spec`
+smokes for minimal rules, action edges, user-function definitions, and comments; terse
+receiver-chain fixtures for arrays, hashes, strings, numbers, aggregate wrapper quoting,
+and block-valued receivers; numeric word aliases; arithmetic/comparison symbol callees;
+the terse scalar-slot `:name` fixture for scalar reads, scalar mutation targets, and
+scalar-held shape payloads; explicit string comparisons; assignment-expression fixtures;
+and the shared Perl/Rust user-function runtime fixture.
 Broader corpus expansion remains tracked by the `RUST-PARITY.7.3` batch.
 
 ## Architecture Overview

@@ -1,0 +1,14 @@
+[
+   [
+      {
+         "label" : "Top",
+         "mode" : "",
+         "top" : 1,
+         "type" : "rule"
+      },
+      {
+         "pattern" : "x",
+         "type" : "regex"
+      }
+   ]
+]

@@ -908,8 +908,27 @@ fn skip_regex_literal_bytes(bytes: &[u8], start: usize) -> Option<usize> {
 
 /// Like scan_line_for_braces but works on &str slices (not just full lines).
 fn scan_line_for_braces_chars<'a>(text: &'a str, depth: &mut i32) -> &'a str {
+    let mut quote: Option<char> = None;
+    let mut escaped = false;
+
     for (idx, ch) in text.char_indices() {
+        if let Some(quote_ch) = quote {
+            if escaped {
+                escaped = false;
+                continue;
+            }
+            if ch == '\\' {
+                escaped = true;
+                continue;
+            }
+            if ch == quote_ch {
+                quote = None;
+            }
+            continue;
+        }
+
         match ch {
+            '"' | '\'' => quote = Some(ch),
             '{' => *depth += 1,
             '}' => {
                 *depth -= 1;
@@ -1487,6 +1506,59 @@ Done:
                 assert!(code.contains("push_value(arr, val)"));
             }
             _ => panic!("expected CodeBlock"),
+        }
+    }
+
+    #[test]
+    fn parse_code_blocks_ignore_braces_inside_strings() {
+        let src = r#"Top::
+ /a/ I { print("literal { brace"); print('literal } brace') }
+ /b/ E { return("ok") }
+"#;
+        let spec = parse_spec(src).unwrap();
+        match &spec.rules[0].body[1].kind {
+            BodyElementKind::CodeBlock { code, .. } => {
+                assert!(code.contains(r#"print("literal { brace")"#));
+                assert!(code.contains(r#"print('literal } brace')"#));
+                crate::expr::CodeBlock::parse(code).expect("code block with quoted braces parses");
+            }
+            _ => panic!("expected CodeBlock"),
+        }
+        assert!(matches!(
+            &spec.rules[0].body[2].kind,
+            BodyElementKind::Regex { pattern } if pattern == "b"
+        ));
+    }
+
+    #[test]
+    fn parse_operators_try_debug_strings_with_braces() {
+        let spec = parse_spec(include_str!("../../../specs/operators_try.spec")).unwrap();
+        for (label, expected) in [
+            ("group", r#"print("-> {start-group\n")"#),
+            (
+                "function_call",
+                r#"print("-> (", entry_text(), ") {start-function_call\n")"#,
+            ),
+            ("string", r#"print("-> {start-string\n")"#),
+        ] {
+            let rule = spec
+                .rules
+                .iter()
+                .find(|rule| rule.header.label == label)
+                .unwrap_or_else(|| panic!("missing {label} rule"));
+            let code = rule
+                .body
+                .iter()
+                .find_map(|element| match &element.kind {
+                    BodyElementKind::CodeBlock { lifecycle, code } if lifecycle == "I" => {
+                        Some(code)
+                    }
+                    _ => None,
+                })
+                .unwrap_or_else(|| panic!("missing {label} I block"));
+            assert_eq!(code, expected);
+            crate::expr::CodeBlock::parse(code)
+                .unwrap_or_else(|err| panic!("{label} I block failed to parse: {err}"));
         }
     }
 

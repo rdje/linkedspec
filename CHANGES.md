@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.7.3.5 — close null-output and spec smoke triage
+
+**Scope:** Rust `.spec` parser code-block scanning, focused parser regression coverage, Perl-oracle fixture
+generation, checked-in Rust oracle corpus, mdBook corpus status, task-tree/live docs, and Knowledge Map.
+
+**What changed:** The `.7.2` null-output candidates were separated from real parity gaps. Perl reference probes
+show `BNF`, `DT`, `ifelse`, and `operators_try` representative inputs return `null` because those specs are
+diagnostic/debug-print experiments rather than semantic-AST producers; Rust returning an empty accumulator for
+those inputs is not a useful oracle fixture boundary. One real Rust parser issue did surface: `operators_try`
+debug `I` blocks contained `{` / `}` inside quoted strings, and Rust's code-block brace scanner counted those
+string literals as block delimiters, truncating the block and emitting action-parser warnings. The scanner now
+ignores braces inside single- and double-quoted strings, including backslash escapes.
+
+**Evidence:** Added focused parser locks for quoted braces in lifecycle blocks and for the real
+`operators_try` debug strings. Added four `spec.spec` oracle fixtures:
+`spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and
+`spec_spec_comment_skip`. Oracle regeneration now produces **81 fixtures**, Rust `corpus_oracle` passes over all
+81, and `parse_all_shipped_specs` passes with the `operators_try` quoted-brace warnings gone. Remaining
+`parse_all_shipped_specs` warnings are pre-existing action-code warnings in other shipped specs.
+
 ## 2026-07-04 — RUST-PARITY.7.3.4.3 — land action-edge child aggregation parity
 
 **Scope:** Rust runtime action-edge dispatch, regex syntax normalization, focused regression coverage, oracle

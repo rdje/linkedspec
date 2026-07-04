@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **RUST-PARITY.7.3.5 — close null-output and spec smoke triage**
+  (`spec.spec` SMOKES ARE ORACLE-GREEN; DEBUG-ONLY NULL CANDIDATES NOT PROMOTED).
+
+  **Fix:** Rust's `.spec` code-block brace scanner now ignores braces inside single- and double-quoted strings,
+  including escaped characters. This removes the `operators_try` action-parser warnings caused by debug strings
+  such as `"{start-group"` being misread as block delimiters. The triage also records that `BNF`, `DT`, `ifelse`,
+  and `operators_try` produce Perl `null` for the representative inputs, so they are not useful semantic-output
+  oracle fixtures today.
+
+  **Verification:** Perl reference probes separated null-output candidates from real parser warnings; focused Rust
+  parser tests pass; `parse_all_shipped_specs` passes with the `operators_try` quoted-brace warnings gone; `perl -c
+  -Iperl tools/gen_oracle_corpus.pl` passes; oracle regeneration emits **81 fixtures** including
+  `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and
+  `spec_spec_comment_skip`; Rust `corpus_oracle` passes all 81.
+
+  **Frontier:** `RUST-PARITY.7.3.6` — audit RTL/plugin/legacy shipped-spec candidates under the hardened timeout
+  guard.
+
 - 2026-07-04: **RUST-PARITY.7.3.4.3 — land action-edge child aggregation parity**
   (EBNF PAYLOADS AND PORTMAP CONCATENATION NOW ORACLE-GREEN).
 
@@ -37,7 +55,7 @@ Current execution status for interruption-safe batch workflow recovery.
   summaries, numeric reducer statements, tests, corpus, mdBook, and Knowledge Map facts. `mdbook build
   docs/linkedspec-book`, Knowledge Map regeneration/check, memory/doctrine checks, and `git diff --check` pass.
 
-  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.7.3.5` unless a
+  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.7.3.6` unless a
   new terse leaf is split.
 
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods**

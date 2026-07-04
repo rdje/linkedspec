@@ -1,0 +1,31 @@
+[
+   [
+      {
+         "label" : "Top",
+         "mode" : "",
+         "top" : 1,
+         "type" : "rule"
+      },
+      {
+         "pattern" : "x",
+         "type" : "regex"
+      },
+      {
+         "code" : "{ return(\"x\") }",
+         "targets" : "Done",
+         "type" : "action_edge"
+      }
+   ],
+   [
+      {
+         "label" : "Done",
+         "mode" : "",
+         "top" : 1,
+         "type" : "rule"
+      },
+      {
+         "pattern" : "x",
+         "type" : "regex"
+      }
+   ]
+]

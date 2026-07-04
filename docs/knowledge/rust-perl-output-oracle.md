@@ -32,16 +32,19 @@ answers:
   - "when did portmap_concatenation enter the Rust oracle corpus"
   - "when did ebnf_expression_rules enter the Rust oracle corpus"
   - "when did ebnf_logging_annotation enter the Rust oracle corpus"
+  - "when did spec.spec smokes enter the Rust oracle corpus"
+  - "why are BNF DT ifelse operators_try not oracle fixtures"
   - "did Rust temporarily support scalaref(retv, {content}) before retirement"
   - "does child return leak into the parent accumulator in Rust"
   - "does a regex on a rule header line register in the Rust parser"
-date: 2026-07-03
+date: 2026-07-04
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
 evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, JSON::PP->canonical(1)) emits tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active. RUST-PARITY.7.5.2 (2026-07-02) temporarily restored legacy Lispish scalaref parity; SCALAREF-RETIREMENT.3 migrated Lispish to direct access, and SCALAREF-RETIREMENT.4 removed scalaref implementation support. RUST-PARITY.7.2 fixed Rust captures-only numbered helper indexing and added two hlink_substitution raw-string fixtures. RUST-PARITY.7.3.2 (2026-07-03): verified the historic RTLUtils timeout is retired from the current core tree, changed gen_oracle_corpus run_oracle from alarm() to per-case fork+SIGKILL process timeout, regenerated 65 fixtures byte-identically, and proved ORACLE_TIMEOUT=0 hard-kills the first parse. RUST-PARITY.7.3.3.2 added hlink_curly_brace for {abc}; corpus_oracle passes over 66 fixtures."
 evidence_update_2026_07_03: "RUST-PARITY.7.3.7: user-directed timeout trace census found BNF timing out under a 5s build+parse child wrapper because get_parser('BNF') spends about 6.4s in parser construction while parsing empty input takes about 0.03s. LINKEDSPEC_TRACE_LEVEL=debug reached Parser generation completed successfully, so the live issue was the oracle guard boundary, not a parser execution hang. tools/gen_oracle_corpus.pl now builds the parser and executes the parse inside the forked child so ORACLE_TIMEOUT hard-kills parser construction and parse execution."
 evidence_update_2026_07_03_7344: "RUST-PARITY.7.3.4.4 added `lib_reader_sattribute` and `lib_reader_cattribute` after Rust implemented statement-form scalar regex substitution and array split mutation helpers. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 68 fixtures, and Rust `corpus_oracle` passes over all 68."
 evidence_update_2026_07_04_7343: "RUST-PARITY.7.3.4.3 added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation` after Rust action-edge child/target aggregation parity landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 77 fixtures, and Rust `corpus_oracle` passes over all 77."
+evidence_update_2026_07_04_735: "RUST-PARITY.7.3.5 added `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip` after triage proved representative `BNF`, `DT`, `ifelse`, and `operators_try` inputs return Perl null and are not semantic-output fixture candidates. The same leaf fixed Rust `.spec` code-block scanning so quoted braces in `operators_try` debug strings no longer produce action-parser warnings. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 81 fixtures, and Rust `corpus_oracle` passes over all 81."
 reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle 2>&1 | grep -E 'test result|PASS|FAIL'; ls linkedspec-runtime/tests/corpus"
 ---
 
@@ -150,6 +153,12 @@ owned by `.7.2` / `.7.3`.
   `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`
   are active in the generator and checked-in corpus after Rust action-edge
   child/target aggregation parity landed. The 77-fixture corpus oracle passes.
+- **spec.spec smoke fixtures (`RUST-PARITY.7.3.5`, LANDED 2026-07-04).**
+  `spec_spec_minimal_rule`, `spec_spec_action_edge`,
+  `spec_spec_user_function_definition`, and `spec_spec_comment_skip` are active in
+  the generator and checked-in corpus. The same triage kept `BNF`, `DT`, `ifelse`,
+  and `operators_try` out of the semantic oracle for the probed inputs because the
+  Perl reference returns `null`. The 81-fixture corpus oracle passes.
 
 The `.7.1` proof grammars deliberately avoid all of the above (parent→child dispatch with
 a literal edge return and an action-less child), so both backends agree exactly.
@@ -175,7 +184,8 @@ while being compiled before their input is parsed.
   `SPEC-FORMAT-TERSE.2.3.3.3.2`; tclite retry under `.2.3.3.3.3` split default-mode recursive repetition
   parity, `.2.3.3.3.3.1` landed the two minimal shipped `tclite` fixtures, `.7.5.2`
   temporarily landed the minimal shipped Lispish fixture, and `SCALAREF-RETIREMENT.3/.4`
-  migrated it to direct access before removing the legacy helper; `.7.3.2` hardens the oracle timeout path)
+  migrated it to direct access before removing the legacy helper; `.7.3.2` hardens the oracle timeout path;
+  `.7.3.5` adds the `spec.spec` smoke fixtures and records the diagnostic-null boundary)
 - ADR: `docs/decisions/0006-multi-backend-vision.md` (§Phase 8.6 language-neutral corpus)
 - Related: [[rust-tclite-default-mode-repetition-gap]], [[rust-retv-propagation]],
   [[rust-lifecycle-i-return-dispatch-parity]], [[rust-edge-semantics-bug]], [[rust-entry-match-separation]]

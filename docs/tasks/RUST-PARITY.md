@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (`.7.3.4.3` done — action-edge child/target
-  aggregation parity landed for `ebnf` payloads and `portmap` concatenation;
-  frontier advances to `.7.3.5`)
+- Last updated: `2026-07-04` (`.7.3.5` done — null-output candidates triaged,
+  quoted-brace `operators_try` parser warning fixed, and four `spec.spec`
+  oracle smokes landed; frontier advances to `.7.3.6`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -411,13 +411,24 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.7.3.4.3 - land action-edge child aggregation parity`
 
 - ID: `RUST-PARITY.7.3.5`
-  Status: `pending`
+  Status: `done`
   Goal: Triage `.7.2` action-parser/null-output candidates (`BNF`, `DT`, `ifelse`, `operators_try`, and
     `spec.spec` smokes).
   Acceptance: Reproduce the `[]`/`[null]`/action-parser-warning behavior under timeout, separate invalid fixture
     choice from real Rust parity gaps, and land or defer each case with precise evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-04. Perl reference probes show representative `BNF`, `DT`, `ifelse`, and
+    `operators_try` inputs return `null`, so those diagnostic/debug-print specs are invalid or weak semantic-output
+    oracle fixture choices today. Rust returned an empty accumulator for those inputs; no fixture was promoted for
+    that boundary. A real Rust parser gap was found in `operators_try`: lifecycle debug strings contain literal
+    braces, and the Rust code-block scanner counted `{` / `}` inside quoted strings as block delimiters, truncating
+    `group`, `function_call`, and `string` `I` blocks and emitting action-parser warnings. `parser.rs` now ignores
+    quoted braces with backslash escapes, and focused parser tests lock generic quoted-brace blocks plus the actual
+    `operators_try` strings. `spec.spec` smokes are current and JSON-safe: added `spec_spec_minimal_rule`,
+    `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip`. `perl -c -Iperl
+    tools/gen_oracle_corpus.pl` passes; regeneration emits **81 fixtures**; Rust `corpus_oracle` passes all 81;
+    `parse_all_shipped_specs` passes with the `operators_try` warnings gone. Remaining shipped-spec parse warnings
+    are existing non-target action-code warnings.
+  Commit: `RUST-PARITY.7.3.5 - close null-output and spec smoke triage`
 
 - ID: `RUST-PARITY.7.3.6`
   Status: `pending`
@@ -538,11 +549,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.7.3.4.4` | `done` | statement-form `substr`/`regex_subst` scalar mutation and `split(array, scalar, delim)` array mutation now let `lib_reader` fixtures pass |
 | — | `RUST-PARITY.7.3.4.2` | `done` | runtime boolean/list-context parity and regex-dispatch isolation now let `portmap` scalar fixtures pass |
 | — | `RUST-PARITY.7.3.4.3` | `done` | action-edge child/target aggregation now lets `ebnf` payloads and `portmap` concatenation pass |
-| 1 | `RUST-PARITY.7.3.5` | `pending` | triage `.7.2` null/action-parser candidates (`BNF`, `DT`, `ifelse`, `operators_try`, `spec.spec`) |
-| 2 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
-| 3 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
-| 4 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
-| 5 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
+| — | `RUST-PARITY.7.3.5` | `done` | null-output candidates separated from semantic fixtures; quoted-brace `operators_try` parser warning fixed; four `spec.spec` smokes active |
+| 1 | `RUST-PARITY.7.3.6` | `pending` | audit RTL/plugin/legacy shipped specs with the hardened timeout guard in place |
+| 2 | `RUST-PARITY.7.4` | `pending` | regression guard + finalize the oracle corpus |
+| 3 | `RUST-PARITY.8` | `pending` | code-gen emitter — HandlerIR → Rust source |
+| 4 | `RUST-PARITY.9` | `pending` | documentation sync + finalization |
 
 (`.5` split per PNT rule 5 — too broad for one signoff slice; `.5.5` further split the same way; all of `.5` now done. `.6` done. `.7` split the same way into `.7.1`–`.7.4`; all `.7.5` shipped recursive-spec blockers are now closed, `.7.2` has landed the first shipped-spec batch, and `.7.3.1` split the remaining batch into narrower executable lanes.)
 
@@ -635,6 +646,14 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   the oracle generator must guard parser construction too. `tools/gen_oracle_corpus.pl` now builds the parser and
   parses inside the forked child, so `ORACLE_TIMEOUT` covers both phases before broad shipped-spec work resumes.
   Frontier → `.7.3.4`.
+- `2026-07-04` (`.7.3.5` implementation): null-output candidates were triaged before fixture promotion. Perl
+  reference probes return `null` for representative `BNF`, `DT`, `ifelse`, and `operators_try` inputs, so Rust's
+  empty accumulator for those diagnostic/debug-print specs is not an actionable semantic oracle target. The real
+  Rust gap was the `operators_try` action-parser warning: braces inside quoted debug strings were counted as block
+  delimiters by the `.spec` code-block scanner. The scanner now ignores quoted braces with escapes. Four stable
+  `spec.spec` smokes are active oracle fixtures (`spec_spec_minimal_rule`, `spec_spec_action_edge`,
+  `spec_spec_user_function_definition`, `spec_spec_comment_skip`), raising the corpus to **81 fixtures**.
+  Frontier → `.7.3.6`.
 
 ## Open Questions
 
@@ -684,6 +703,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-03` | `RUST-PARITY.7.3.4.4` | `cargo fmt --manifest-path rust/Cargo.toml --all`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; focused Rust `.7.3.4.4` integration tests; Rust `corpus_oracle`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; broad `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime` residual check | PASS/RESIDUAL — dependency-resolved edge-only child captures are locked, and the actual `lib_reader` blocker is closed by Rust statement-form helper mutation parity: `substr`/`regex_subst` mutates scalar targets with regex replacement flags and `split(array(target), scalar(source), delimiter)` mutates array targets. Added `lib_reader_sattribute` and `lib_reader_cattribute`; the oracle corpus now has **68 fixtures** and Rust `corpus_oracle` passes. Runtime lib clippy exits 0 with the existing warning baseline; `clippy --tests` still exits 101 on the existing `approx_constant` test literal. The broad runtime package run passes 124 unit tests and the 68-fixture corpus oracle, then reproduces the known 9 broader integration failures outside this leaf (141 passed / 9 failed). Frontier → `.7.3.4.2` |
 | `2026-07-03` | `RUST-PARITY.7.3.4.2` | `cargo fmt --manifest-path rust/Cargo.toml --all`; focused regex-engine internal-alternation unit test; focused Rust `.7.3.4.2` integration tests; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-core -p linkedspec-runtime --lib`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates | PASS — Rust now recognizes `or`/`and`/`not`, splices explicit flattening helper calls in `array(...)` list context, and wraps each rule regex before dispatch alternation joining so internal `|` branches stay inside their owning action edge. Added `portmap_bare`, `portmap_bit`, `portmap_slice`, and `portmap_constant`; the oracle corpus now has **72 fixtures** and Rust `corpus_oracle` passes. Frontier → `.7.3.4.3` |
 | `2026-07-04` | `RUST-PARITY.7.3.4.3` | `cargo fmt --manifest-path rust/Cargo.toml --all`; focused Rust `.7.3.4.3` integration tests; lower-unbounded quantifier unit test; focused scalar/aggregate assignment regression tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — Rust action-edge blocks and fluent chains now reuse the already matched child return for `call(child)`, `push(child)`, `push(child,target)`, and child-index push forms instead of re-searching after the parent edge match; passive terminal children skip re-execution like the Perl generated handlers. Scalar-vs-aggregate assignment boundaries and helper-context aggregate bare reads are preserved. Added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`; the oracle corpus now has **77 fixtures** and Rust `corpus_oracle` passes; full local CI passes with phase0 **1021** tests. Frontier → `.7.3.5` |
+| `2026-07-04` | `RUST-PARITY.7.3.5` | KM retrieval; Perl reference probes for `BNF`, `DT`, `ifelse`, `operators_try`, and `spec.spec` smokes; temporary Rust probes removed; `cargo fmt --manifest-path rust/Cargo.toml --all`; focused Rust parser quoted-brace tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `parse_all_shipped_specs`; Rust `corpus_oracle`; mdBook build; Knowledge Map/memory/doctrine/whitespace gates | PASS — `BNF`, `DT`, `ifelse`, and `operators_try` representative inputs are diagnostic/null-output cases in the Perl reference and were not promoted as semantic fixtures. Rust now ignores quoted braces while scanning `.spec` code blocks, fixing the `operators_try` action-parser warnings. Added `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip`; the oracle corpus now has **81 fixtures** and Rust `corpus_oracle` passes. Frontier → `.7.3.6` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -820,3 +840,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   dispatch alternation so the internal `0x...` branch no longer routes through the sibling `concatenation` edge.
   Added `portmap_bare`, `portmap_bit`, `portmap_slice`, and `portmap_constant`; corpus oracle passes over
   **72 fixtures**. Frontier → `.7.3.4.3`.
+- `2026-07-04`: `.7.3.4.3` done — action-edge child/target aggregation parity landed for `ebnf` payloads and
+  `portmap` concatenation. Added `portmap_concatenation`, `ebnf_expression_rules`, and
+  `ebnf_logging_annotation`; corpus oracle passes over **77 fixtures**. Frontier → `.7.3.5`.
+- `2026-07-04`: `.7.3.5` done — null-output candidates were separated from valid semantic fixtures. `BNF`, `DT`,
+  `ifelse`, and `operators_try` representative inputs return Perl `null`, so no fixture was promoted for those
+  diagnostic/debug-print cases. Rust now ignores quoted braces while scanning `.spec` code blocks, fixing the
+  `operators_try` warnings, and four `spec.spec` smoke fixtures are active. Corpus oracle passes over
+  **81 fixtures**. Frontier → `.7.3.6`.

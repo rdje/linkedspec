@@ -1011,6 +1011,18 @@ SPEC
     { case => 'portmap_concatenation', spec => 'portmap', input => '{foo bar[2]}' },
     { case => 'ebnf_expression_rules', spec => 'ebnf',    input => "Expr := Term (\"+\" Term)*\nTerm := Factor\n" },
     { case => 'ebnf_logging_annotation', spec => 'ebnf', input => "Expr := Term \@log_rule(\"expr\", \"term\")\n" },
+    { case => 'spec_spec_minimal_rule', spec => 'spec', input => "Top::\n /x/\n" },
+    {
+        case  => 'spec_spec_action_edge',
+        spec  => 'spec',
+        input => "Top::\n /x/ -> Done { return(\"x\") }\n\nDone::\n /x/\n",
+    },
+    {
+        case  => 'spec_spec_user_function_definition',
+        spec  => 'spec',
+        input => "fn norm(value) { return(trim(value)) }\nTop::\n /x/ -> Done { return(norm(\" x \")) }\n\nDone::\n /x/\n",
+    },
+    { case => 'spec_spec_comment_skip', spec => 'spec', input => "# hello\nTop::\n /x/\n" },
 
     {
         case  => 'lib_reader_sattribute',

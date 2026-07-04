@@ -66,4 +66,13 @@ then had 66 fixtures.
 `RUST-PARITY.7.3.4.4` added `lib_reader_sattribute` and `lib_reader_cattribute`.
 `RUST-PARITY.7.3.4.2` then added `portmap_bare`, `portmap_bit`,
 `portmap_slice`, and `portmap_constant`, proving the shipped `portmap.spec`
-scalar classifications against the Perl reference. The corpus now has 72 fixtures.
+scalar classifications against the Perl reference. `RUST-PARITY.7.3.4.3` added
+`portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`
+after Rust action-edge child aggregation parity landed.
+
+`RUST-PARITY.7.3.5` added four `spec.spec` smoke fixtures:
+`spec_spec_minimal_rule`, `spec_spec_action_edge`,
+`spec_spec_user_function_definition`, and `spec_spec_comment_skip`. The same
+triage deliberately did **not** add `BNF`, `DT`, `ifelse`, or `operators_try`
+semantic fixtures for the probed inputs, because the Perl reference returns
+`null` for those diagnostic/debug-print cases. The corpus now has 81 fixtures.

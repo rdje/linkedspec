@@ -1,0 +1,6 @@
+fn norm(value) { return(trim(value)) }
+Top::
+ /x/ -> Done { return(norm(" x ")) }
+
+Done::
+ /x/

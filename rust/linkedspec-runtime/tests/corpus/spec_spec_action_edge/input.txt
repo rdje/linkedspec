@@ -1,0 +1,5 @@
+Top::
+ /x/ -> Done { return("x") }
+
+Done::
+ /x/

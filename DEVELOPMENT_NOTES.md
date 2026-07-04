@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.7.3.5 — null-output/spec smoke triage):
+  Do not promote every shipped-spec parse smoke into the output oracle. `BNF`, `DT`, `ifelse`, and
+  `operators_try` currently behave as diagnostic/debug-print grammars for the probed inputs and the Perl reference
+  returns `null`; Rust's empty accumulator is therefore not a meaningful semantic-AST fixture for them. The real
+  implementation issue in this leaf was narrower: `operators_try` has debug print strings containing literal
+  braces, so Rust's code-block scanner must ignore `{` / `}` inside quoted strings with backslash escapes.
+  `spec.spec` is different: minimal rule, action-edge, top-level user-function definition, and comment-skip smokes
+  produce stable JSON-safe ASTs and are now active oracle fixtures. The oracle corpus is 81 fixtures after this
+  slice.
+
 - 2026-07-04 (RUST-PARITY.7.3.4.3 — action-edge child aggregation parity):
   Action-edge child calls are edge-scoped in the Rust runtime now. When a parent edge has already matched a child
   regex, block/fluent uses such as `call(child)`, `push(child)`, `push(child,target)`, and
@@ -19,7 +29,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.7.3.5` unless a new terse leaf is split.
+  `RUST-PARITY.7.3.6` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and
